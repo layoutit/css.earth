@@ -1,7 +1,7 @@
 import { defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement, type DensityVolumeFrame } from '@cssearth/bake/volume';
 import type { OverlayVariant } from './overlay-variants';
 export interface DensityOverlay {
-  id: string; label: string; sha256: string; texturePath: string; widthPx: number; heightPx: number;
+  id: string; label: string; texturePath: string; widthPx: number; heightPx: number;
   variants?: OverlayVariant[]; removalResultId?: string;
   pivotCssPx: [number, number, number];
   initialPlacement?: OverlayPlacement; initialOpacity?: number;
@@ -32,6 +32,7 @@ export function parseOverlayCatalogue(value: unknown): DensityOverlayCatalogue {
     if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Invalid density overlay.');
     const item = input as Record<string, unknown>, style = item.style as Record<string, unknown>;
     const styleKeys = ['width', 'height', 'transform', 'backgroundSize', 'backgroundPosition'];
+    if ('sha256' in item) throw new TypeError(`Density overlay ${String(item.id)} records a sha256; overlays name their texture by path only.`);
     if (typeof item.id !== 'string' || !item.id || ids.has(item.id) || typeof item.label !== 'string' || !item.label ||
         !relativePath(item.texturePath) || !Number.isInteger(item.widthPx) || (item.widthPx as number) < 1 ||
         !Number.isInteger(item.heightPx) || (item.heightPx as number) < 1 || !style || Array.isArray(style) ||
@@ -45,7 +46,7 @@ export function parseOverlayCatalogue(value: unknown): DensityOverlayCatalogue {
     const initialPlacement = item.initialPlacement === undefined ? undefined : updateOverlayPlacement(defaultOverlayPlacement(), item.initialPlacement as Partial<OverlayPlacement>);
     if (item.legacyPlacementBasis !== undefined && typeof item.legacyPlacementBasis !== 'string') throw new TypeError('Invalid legacy image placement basis.');
     if (item.initialOpacity !== undefined && (typeof item.initialOpacity !== 'number' || !Number.isFinite(item.initialOpacity) || item.initialOpacity < 0 || item.initialOpacity > 1)) throw new TypeError('Invalid initial image opacity.');
-    return { id: item.id, label: item.label, sha256: item.sha256, texturePath: item.texturePath, widthPx: item.widthPx, heightPx: item.heightPx,
+    return { id: item.id, label: item.label, texturePath: item.texturePath, widthPx: item.widthPx, heightPx: item.heightPx,
       pivotCssPx: item.pivotCssPx, initialPlacement, initialOpacity: item.initialOpacity, legacyPlacementBasis: item.legacyPlacementBasis,
       style: Object.fromEntries(styleKeys.map(key => [key, style[key]])) as DensityOverlay['style'],
       sourcePageUrl: item.sourcePageUrl, credit: item.credit, registrationNote: item.registrationNote };

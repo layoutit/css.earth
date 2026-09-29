@@ -105,12 +105,12 @@ class StarSeparationTests(unittest.TestCase):
         np.testing.assert_array_equal(a[1], b[1])
 
     def test_source_catalogue_identity_is_mandatory(self):
-        image = dict(path='source.png', sha256='abc', nativeDimensions=[129, 97])
+        image = dict(path='source.png', nativeDimensions=[129, 97])
         document = dict(image=image, count=1, nativePixelCentres=[[43, 33]])
-        self.assertEqual(separation.validate_centroids(document, 'source.png', 'abc', [129, 97], 10), [[43, 33]])
-        for changed in ({'sha256': 'wrong'}, {'nativeDimensions': [97, 129]}, {'path': 'other.png'}):
+        self.assertEqual(separation.validate_centroids(document, 'source.png', [129, 97], 10), [[43, 33]])
+        for changed in ({'nativeDimensions': [97, 129]}, {'path': 'other.png'}):
             with self.assertRaises(ValueError):
-                separation.validate_centroids({**document, 'image': {**image, **changed}}, 'source.png', 'abc', [129, 97], 10)
+                separation.validate_centroids({**document, 'image': {**image, **changed}}, 'source.png', [129, 97], 10)
 
     def test_harmonic_background_preserves_affine_field(self):
         yy, xx = np.mgrid[:21, :21]
@@ -127,7 +127,7 @@ class StarSeparationTests(unittest.TestCase):
             source = directory / 'source.png'
             cv2.imwrite(str(source), field(np.uint16))
             output = directory / '.local' / 'trial'
-            recipe = dict(schema='cssearth-star-separation@1', source=dict(path=str(source), sha256=separation.sha256(source), nativeDimensions=[129, 97]), outputDirectory=str(output))
+            recipe = dict(schema='cssearth-star-separation@1', source=dict(path=str(source), nativeDimensions=[129, 97]), outputDirectory=str(output))
             path = directory / 'recipe.json'
             path.write_text(json.dumps(recipe))
             receipt = separation.run(path)
@@ -136,10 +136,10 @@ class StarSeparationTests(unittest.TestCase):
             self.assertEqual(receipt['verification']['maximumReconstructionErrorCodeValues'], 0)
             self.assertLessEqual((output / 'star-detection-map.png').stat().st_mtime_ns, (output / 'diffuse.png').stat().st_mtime_ns)
             for name, record in receipt['outputs'].items():
-                self.assertEqual(separation.sha256(output / name), record['sha256'])
-            recipe['source']['sha256'] = 'wrong'
+                self.assertEqual((output / name).stat().st_size, record['bytes'])
+            recipe['source']['path'] = str(directory / 'missing.png')
             path.write_text(json.dumps(recipe))
-            with self.assertRaisesRegex(ValueError, 'SHA256 mismatch'):
+            with self.assertRaisesRegex(ValueError, 'field source needs an existing path'):
                 separation.run(path)
 
 

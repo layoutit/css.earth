@@ -122,7 +122,7 @@ export const subjects = subjectRecords.map(prepareSubjectRecord);
 /** Saved banks enter the same prepared-object loader as the checked-in benchmark. */
 export function registerReconstructionSubject(record: LabSubjectRecord) {
   const base = subjects.find(item => item.id === record.sourceSubjectId);
-  if (!/^reconstruction-[a-f0-9]{64}$/.test(record.id) || !base || !base.density ||
+  if (!/^reconstruction-[a-z0-9][a-z0-9-]*$/.test(record.id) || !base || !base.density ||
       !relativePath(record.directory) || !record.directory.startsWith('.local/nebula-lab/') ||
       !record.imagePath || !relativePath(record.imagePath) || !record.cloudParts ||
       !relativePath(record.cloudParts.descriptor) || !relativePath(record.cloudParts.catalogue) ||

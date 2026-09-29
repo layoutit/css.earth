@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Pinned NOX inference on native RGB grids; positive residual, no source writes."""
-import hashlib,json,math,os,sys,time
+"""NOX inference on native RGB grids; positive residual, no source writes."""
+import json,math,os,sys,time
 from pathlib import Path
 os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 os.environ['OPENBLAS_NUM_THREADS']='1'
@@ -9,18 +9,13 @@ import cv2,numpy as np
 cv2.setNumThreads(6)
 TILE,STRIDE,PAD,BATCH=512,384,64,2
 
-def sha(path):
- value=hashlib.sha256()
- with Path(path).open('rb') as stream:
-  for block in iter(lambda:stream.read(1024*1024),b''):value.update(block)
- return value.hexdigest()
-
 def emit(stage,current,total,message):
  print(json.dumps(dict(type='progress',stage=stage,current=current,total=total,message=message)),flush=True)
 
-def read_pin(pin,dimensions=False):
- if not isinstance(pin,dict) or set(pin)!=({'path','sha256','nativeDimensions'} if dimensions else {'path'}) or not Path(pin['path']).is_absolute() or ('sha256' in pin and sha(pin['path'])!=pin['sha256']):
-  raise ValueError('Pinned source/model/baseline identity differs.')
+def read_pin(pin,label,dimensions=False):
+ if not isinstance(pin,dict) or set(pin)!=({'path','nativeDimensions'} if dimensions else {'path'}) or not isinstance(pin['path'],str) or not Path(pin['path']).is_absolute():
+  raise ValueError(f'Star removal request field {label} needs an absolute path{" and nativeDimensions" if dimensions else ""}: {pin!r}')
+ if not Path(pin['path']).is_file():raise ValueError(f'Star removal request field {label} names a missing file: {pin["path"]}')
  return Path(pin['path'])
 
 def decode(path):
@@ -108,16 +103,16 @@ def seam_diagnostics(stars):
 def run(request):
  started=time.perf_counter();required={'schema','operation','source','model','outputDirectory'}
  if not isinstance(request,dict) or not required<=set(request) or set(request)-required-{'baseline'} or request['schema']!='cssearth-star-removal@1' or request['operation'] not in ['preview','apply']:raise ValueError('Invalid NOX work request.')
- emit('validating',0,1,'Verifying pinned native image, model and baseline')
- source_path=read_pin(request['source'],True);model_path=read_pin(request['model']);baseline_path=read_pin(request['baseline']) if request.get('baseline') else None
+ emit('validating',0,1,'Checking native image, model and baseline')
+ source_path=read_pin(request['source'],'source',True);model_path=read_pin(request['model'],'model');baseline_path=read_pin(request['baseline'],'baseline') if request.get('baseline') else None
  output=Path(request['outputDirectory'])
  if not output.is_absolute() or '.local' not in output.parts or output.resolve() in [source_path.parent.resolve(),model_path.parent.resolve()] or output.resolve()==source_path.resolve():raise ValueError('Outputs require a distinct absolute ignored directory.')
  image=decode(source_path);h,w=image.shape[:2]
  if [w,h]!=request['source']['nativeDimensions']:raise ValueError('Native source dimensions differ.')
  baseline=decode(baseline_path) if baseline_path else None
  if baseline is not None and (baseline.shape!=image.shape or np.any(baseline>image)):raise ValueError('Baseline changed the native grid or adds pixels.')
- output.mkdir(parents=True,exist_ok=True);emit('validating',1,1,'Source pins and native pixel grid verified');emit('loading-model',0,1,'Loading NOX once for this job');predict=Nox(model_path);emit('loading-model',1,1,'NOX ready')
- result=dict(schema='cssearth-nox-output@1',operation=request['operation'],sourceSha256=request['source']['sha256'],modelSha256=sha(request['model']['path']),scriptSha256=sha(__file__),baselineSha256=request.get('baseline',{}).get('sha256'),nativeDimensions=[w,h])
+ output.mkdir(parents=True,exist_ok=True);emit('validating',1,1,'Source and native pixel grid verified');emit('loading-model',0,1,'Loading NOX once for this job');predict=Nox(model_path);emit('loading-model',1,1,'NOX ready')
+ result=dict(schema='cssearth-nox-output@1',operation=request['operation'],nativeDimensions=[w,h])
  try:
   overview=reduced(image,1600);write_image(output/'overview.webp',overview);result['overview']=dict(path='overview.webp',dimensions=[overview.shape[1],overview.shape[0]])
   if request['operation']=='preview':
@@ -142,7 +137,7 @@ def run(request):
    result['applied']=dict(images=names,previews=dict(diffuse='diffuse.webp',stars='stars.webp',comparison='comparison.webp'),previewDimensions=[small_diffuse.shape[1],small_diffuse.shape[0]],counts=counts,verification=verification,tiling=tiling,seamDiagnostics=seam_diagnostics(stars))
   result['timing']=dict(modelLoadSeconds=predict.load_seconds,inferenceSeconds=predict.seconds,inferredTiles=predict.tiles,batchSize=BATCH,threads=6)
  finally:predict.close()
- result['elapsedSeconds']=round(time.perf_counter()-started,3);result['artifactSha256']={p.name:sha(p) for p in sorted(output.iterdir()) if p.suffix in ['.png','.webp']}
+ result['elapsedSeconds']=round(time.perf_counter()-started,3);result['artifactBytes']={p.name:p.stat().st_size for p in sorted(output.iterdir()) if p.suffix in ['.png','.webp']}
  temporary=output/'result.json.pending';temporary.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n');temporary.replace(output/'result.json')
  print(json.dumps(dict(type='complete',result=str(output/'result.json'))),flush=True);return result
 if __name__=='__main__':run(json.load(sys.stdin))

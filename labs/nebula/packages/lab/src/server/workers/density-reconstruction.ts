@@ -29,7 +29,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   const started=performance.now(),root=resolve(options.root??process.cwd()),settings=options.settings??RECONSTRUCTION_SETTINGS;
   const appearance=parseCloudAppearance(work.appearance);
   const progress=(stage:string,current:number,total:number,message:string)=>options.onProgress?.({type:'progress',stage,current,total,message});
-  if(work.schema!=='cssearth-nebula-reconstruction-work@1'||!/^reconstruction-[a-f0-9]{64}$/.test(work.id)||
+  if(work.schema!=='cssearth-nebula-reconstruction-work@1'||!/^reconstruction-[a-z0-9][a-z0-9-]*$/.test(work.id)||
     !work.imageId||!work.name||!isAbsolute(work.outputDirectory)||!work.cloud)throw new TypeError('A reconstruction requires its pinned canonical cloud.');
   const output=resolve(work.outputDirectory),offset=relative(resolve(root,'.local/nebula-lab'),output);
   if(!offset||offset==='..'||offset.startsWith('../')||isAbsolute(offset))throw new TypeError('Reconstruction outputs require their own ignored local directory.');

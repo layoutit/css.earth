@@ -228,13 +228,13 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     applyOverlayPlacement(item);
     publish();
   }
-  async function installRemovalLayers(id: string, originalPreviewSha256: string, applied: AppliedStarLayers, isCurrent = () => true) {
+  async function installRemovalLayers(id: string, applied: AppliedStarLayers, isCurrent = () => true) {
     const item = overlayCatalogue?.overlays.find(value => value.id === id), version = loadVersion;
-    if (!item || item.sha256 !== originalPreviewSha256 || !applied.resultId || applied.layers.length !== 2 ||
+    if (!item || !applied.resultId || applied.layers.length !== 2 ||
       new Set(applied.layers.map(layer => layer.id)).size !== 2) throw new TypeError('Removal layers do not match the original aligned image.');
     const variants: OverlayVariant[] = [];
     for (const layer of applied.layers) {
-      if (!['diffuse', 'stars'].includes(layer.id) || !/^[a-f0-9]{64}$/.test(layer.sha256) ||
+      if (!['diffuse', 'stars'].includes(layer.id) ||
         !layer.texturePath.startsWith('.local/nebula-lab/') || layer.texturePath.split('/').includes('..') || /[\\\u0000-\u0020?#]/.test(layer.texturePath) ||
         !Number.isInteger(layer.widthPx) || layer.widthPx < 1 || !Number.isInteger(layer.heightPx) || layer.heightPx < 1 ||
         Math.abs(layer.widthPx / layer.heightPx / (item.widthPx / item.heightPx) - 1) > .001)

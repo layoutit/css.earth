@@ -27,12 +27,12 @@ const removalStrengths = createRemovalStrengthStore();
 const starRemoval = createStarRemovalControls(element('automatic-star-removal'), { controls: options.controls,
   async onApply(result, isCurrent) {
     if (!viewer || selectedOverlayId !== result.imageId || !isCurrent()) return false;
-    if (!result.applied || !result.sourcePreviewSha256) throw new TypeError('Removal source proof is missing.');
+    if (!result.applied) throw new TypeError(`Removal of ${result.imageId} published no applied layers.`);
     restoringImages.get(result.imageId)?.abort(); restoringImages.delete(result.imageId);
     const request = ++layerActivation;
     const current = () => isCurrent() && request === layerActivation && selectedOverlayId === result.imageId && currentTab === 0 && currentMode === 'density';
     imageTone.setContext(null);
-    await viewer.installRemovalLayers(result.imageId, result.sourcePreviewSha256, result.applied, current);
+    await viewer.installRemovalLayers(result.imageId, result.applied, current);
     if (!current()) return false;
     removalStrengths.set(result.imageId, 100);
     await activateOverlay(result.imageId, false);
@@ -227,8 +227,8 @@ function refreshStarRemoval() {
 }
 async function restoreAppliedOverlay(overlay: Overlay) {
   if (!viewer || overlay.removalResultId || restoringImages.has(overlay.id)) return;
-  const saved = readAppliedImage(overlay.id, overlay.sha256);
-  const attempt = `${overlay.id}:${saved?.resultId ?? overlay.sha256}`, expectedViewer = viewer, expectedOverlay = overlay;
+  const saved = readAppliedImage(overlay.id);
+  const attempt = `${overlay.id}:${saved?.resultId ?? 'discover'}`, expectedViewer = viewer, expectedOverlay = overlay;
   if (restorationAttempts.has(attempt)) return;
   restorationAttempts.add(attempt);
   const controller = new AbortController(); restoringImages.set(overlay.id, controller); imageTone.setContext(null);
@@ -237,12 +237,12 @@ async function restoreAppliedOverlay(overlay: Overlay) {
     currentOverlays.includes(expectedOverlay) && currentTab === 0 && currentMode === 'density';
   try {
     const response = await fetch('/__nebula/star-removal/restore', { method: 'POST', signal: controller.signal,
-      headers: { 'content-type': 'application/json' }, body: JSON.stringify({ imageId: overlay.id, ...(saved ? { resultId: saved.resultId } : {}), sourcePreviewSha256: overlay.sha256 }) });
+      headers: { 'content-type': 'application/json' }, body: JSON.stringify({ imageId: overlay.id, ...(saved ? { resultId: saved.resultId } : {}) }) });
     const result = await response.json() as (RestoredAppliedImage & { error?: string }) | null;
     if (!response.ok) throw new Error(result?.error ?? `Saved removal unavailable (HTTP ${response.status}).`);
     if (!result) { restorationMessages.delete(overlay.id); return; }
     if (saved) verifyRestoredImage(saved, result); if (!current()) return;
-    await viewer!.installRemovalLayers(overlay.id, result.sourcePreviewSha256, result.applied, current); if (!current()) return;
+    await viewer!.installRemovalLayers(overlay.id, result.applied, current); if (!current()) return;
     await activateOverlay(overlay.id, false); if (!current()) return;
     await viewer!.setOverlayLayer(overlay.id, saved?.layer ?? 'original', current); if (!current()) return;
     writeAppliedImage(result, saved?.layer ?? 'original');
@@ -354,7 +354,7 @@ function changeOverlayLayer(layer: ImageLayer) {
       if (!current()) return;
       imageTone.setContext(null);
       await viewer!.setOverlayLayer(id, layer, current);
-      if (current()) { const overlay = currentOverlays.find(value => value.id === id); if (overlay?.removalResultId) rememberAppliedLayer(id, overlay.sha256, layer); }
+      if (current()) { const overlay = currentOverlays.find(value => value.id === id); if (overlay?.removalResultId) rememberAppliedLayer(id, layer); }
     } finally { if (current()) { pendingLayerActivation = null; renderSelectedOverlay(); } }
   });
 }
@@ -468,7 +468,7 @@ void selectTab(initialTab, false);
 try {
   if (!subjects.length) throw new Error('No prepared subjects are available.');
   const requestedSubject = new URL(location.href).searchParams.get('subject');
-  if (initialTab === 1 && requestedSubject && /^reconstruction-[a-f0-9]{64}$/.test(requestedSubject)) {
+  if (initialTab === 1 && requestedSubject && /^reconstruction-[a-z0-9][a-z0-9-]*$/.test(requestedSubject)) {
     try {
       const response = await fetch(`/__nebula/reconstruction/result/${requestedSubject.slice('reconstruction-'.length)}`);
       const prepared = await response.json() as PreparedReconstruction;

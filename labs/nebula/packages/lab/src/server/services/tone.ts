@@ -2,7 +2,7 @@ import { createConcurrencyLimit } from './concurrency.ts';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Local Node-only texture preparation. Browser receives finished URLs and retains its geometry. */
-import { createHash, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, readdir, realpath, rename, rm, stat, utimes, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
@@ -15,13 +15,14 @@ import { defaultOverlayTone, isNeutralOverlayTone, overlayToneSample, updateOver
 
 export interface TonePreparationRequest { subjectId: string; target: 'image' | 'density'; imageId?: string; imageLayer?: ImageLayer; removalResultId?: string; removalStrength?: number; tone: OverlayTone }
 export interface ToneResource { sourcePath: string; url: string; width: number; height: number }
-interface SourceResource { path: string; sha256: string; width: number; height: number; layer?: Exclude<ImageLayer, 'original'>; original?: SourceResource }
+interface SourceResource { path: string; width: number; height: number; layer?: Exclude<ImageLayer, 'original'>; original?: SourceResource }
 interface Subject { id: string; density?: { directory: string; overlays?: string } }
-const digest = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
+/** In-memory cache key part that changes whenever a file is replaced; never written anywhere. */
+async function fileStamp(path: string) { const value = await stat(path); return [value.dev, value.ino, value.size, value.mtimeMs, value.ctimeMs].join(':'); }
 const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 export function parseTonePreparationRequest(input: unknown): TonePreparationRequest {
   if (!record(input) ||
-      (input.removalResultId !== undefined && (input.target !== 'image' || typeof input.removalResultId !== 'string' || !/^[a-f0-9]{64}\.[a-f0-9]{64}$/.test(input.removalResultId))) ||
+      (input.removalResultId !== undefined && (input.target !== 'image' || typeof input.removalResultId !== 'string' || !/^[a-z0-9][a-z0-9-]*$/.test(input.removalResultId))) ||
       (input.imageLayer !== undefined && (input.target !== 'image' || !['original', 'diffuse', 'stars'].includes(input.imageLayer as string))) ||
       (input.removalStrength !== undefined && (input.target !== 'image' || typeof input.removalStrength !== 'number' ||
         !Number.isFinite(input.removalStrength) || input.removalStrength < 0 || input.removalStrength > 100)) ||
@@ -65,6 +66,11 @@ export function removalRgba(endpoint: Uint8Array, layer: Exclude<ImageLayer, 'or
 }
 export function createTonePreparer(repositoryRoot: string, options: { maximumCacheBytes?: number; maximumCacheFiles?: number; maximumDecodedCacheBytes?: number } = {}) {
   const root = resolve(repositoryRoot), cache = resolve(root, '.local/nebula-lab/tone-cache');
+  // The cache lives for one server session: its files are numbered in memory, so the directory starts empty.
+  const cleared = rm(cache, { recursive: true, force: true });
+  const names = new Map<string, string>(), keys = new Map<string, string>();
+  let sequence = 0;
+  const nameFor = (key: string) => { let name = names.get(key); if (!name) { name = `tone-${++sequence}.png`; names.set(key, name); keys.set(name, key); } return name; };
   const textureLimit = createConcurrencyLimit(4), requestLimit = createConcurrencyLimit(2), cacheLimit = createConcurrencyLimit(1);
   const inflight = new Map<string, Promise<ToneResource>>(), protectedFiles = new Map<string, number>();
   const decodedCache = new Map<string, Buffer>(), decoding = new Map<string, Promise<Buffer>>();
@@ -90,14 +96,16 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
       const image = catalogue.overlays?.find((item: { id: string }) => item.id === request.imageId);
       if (!image) throw new TypeError('Unknown prepared image overlay.');
       const originalPath = relative(root, resolve(root, dirname(subject.density.overlays), image.texturePath));
-      const original = { path: originalPath, sha256: digest(await readFile(await safePath(originalPath))), width: image.widthPx, height: image.heightPx };
+      await safePath(originalPath);
+      const original = { path: originalPath, width: image.widthPx, height: image.heightPx };
       if (request.imageLayer && request.imageLayer !== 'original') {
         const layers = request.removalResultId
-          ? (await resolveAppliedRemovalLayers(root, request.removalResultId, request.imageId!, original.sha256)).layers
+          ? (await resolveAppliedRemovalLayers(root, request.removalResultId, request.imageId!)).layers
           : variantsForImage(parseOverlayVariants(await json(overlayVariantsPath)), image);
         const layer = layers.find(item => item.id === request.imageLayer);
         if (!layer) throw new TypeError('Unknown prepared image layer.');
-        return [{ path: layer.texturePath, sha256: digest(await readFile(await safePath(layer.texturePath))), width: layer.widthPx, height: layer.heightPx,
+        await safePath(layer.texturePath);
+        return [{ path: layer.texturePath, width: layer.widthPx, height: layer.heightPx,
           layer: layer.id, ...(layer.id === 'diffuse' && (request.removalStrength ?? 100) !== 100 ? { original } : {}) }];
       }
       return [original];
@@ -108,25 +116,26 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
     const bytes = await readFile(await safePath(manifestPath));
     const manifest = parseLabModelJson(bytes.toString('utf8'));
     if (!Array.isArray(manifest.data?.resources) || !manifest.data.resources.length) throw new TypeError('Density resource bank is empty.');
-    return manifest.data.resources.map((item: { path: string; sha256: string; width: number; height: number }) => ({
-      ...item, path: relative(root, resolve(root, dirname(manifestPath), item.path)),
+    return manifest.data.resources.map((item: { path: string; width: number; height: number }) => ({
+      path: relative(root, resolve(root, dirname(manifestPath), item.path)), width: item.width, height: item.height,
     }));
   }
   async function prune() {
     await cacheLimit(async () => {
-      const entries = await Promise.all((await readdir(cache)).filter(name => /^[a-f0-9]{64}\.png$/.test(name)).map(async name => {
-        const path = resolve(cache, name), info = await stat(path); return { path, bytes: info.size, accessed: info.mtimeMs };
+      const entries = await Promise.all((await readdir(cache)).filter(name => /^tone-\d+\.png$/.test(name)).map(async name => {
+        const path = resolve(cache, name), info = await stat(path); return { name, path, bytes: info.size, accessed: info.mtimeMs };
       }));
       let bytes = entries.reduce((sum, entry) => sum + entry.bytes, 0), files = entries.length;
       for (const entry of entries.sort((a, b) => a.accessed - b.accessed)) {
         if (bytes <= (options.maximumCacheBytes ?? 512 * 1024 * 1024) && files <= (options.maximumCacheFiles ?? 2048)) break;
         if (protectedFiles.has(entry.path)) continue;
         await rm(entry.path, { force: true }); bytes -= entry.bytes; files--;
+        const key = keys.get(entry.name); if (key !== undefined) { names.delete(key); keys.delete(entry.name); }
       }
     });
   }
   async function decode(source: SourceResource, bytes: Buffer, width = source.width, height = source.height) {
-    const key = digest(JSON.stringify(['rgba8-lanczos3-full-extent-v1', source.sha256, source.width, source.height, width, height]));
+    const key = JSON.stringify(['rgba8-lanczos3-full-extent-v1', source.path, await fileStamp(await safePath(source.path)), source.width, source.height, width, height]);
     const cached = decodedCache.get(key);
     if (cached) { decodedCache.delete(key); decodedCache.set(key, cached); return cached; }
     let pending = decoding.get(key);
@@ -158,14 +167,13 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
     const sourcePath = relative(root, path).split(sep).join('/');
     const strength = source.layer ? request.removalStrength ?? 100 : 100, removal = Boolean(source.layer && strength !== 100);
     let originalBytes: Buffer | undefined;
-    if (source.original) {
-      originalBytes = await readFile(await safePath(source.original.path));
-      if (digest(originalBytes) !== source.original.sha256) throw new TypeError('Original prepared texture hash differs.');
-    }
+    if (source.original) originalBytes = await readFile(await safePath(source.original.path));
     if (isNeutralOverlayTone(request.tone) && !removal) return { sourcePath, url: `/@fs${path}`, width: source.width, height: source.height };
-    const key = digest(JSON.stringify(['nebula-tone-v2-removal-png', request.target, request.tone, source.layer, strength,
-      source.sha256, source.width, source.height, source.original?.sha256, source.original?.width, source.original?.height]));
-    const outputPath = resolve(cache, `${key}.png`); protect(outputPath); held.push(outputPath);
+    const key = JSON.stringify(['nebula-tone-v2-removal-png', request.target, request.tone, source.layer, strength,
+      source.path, await fileStamp(path), source.width, source.height, source.original?.path,
+      source.original ? await fileStamp(await safePath(source.original.path)) : undefined, source.original?.width, source.original?.height]);
+    await cleared;
+    const outputPath = resolve(cache, nameFor(key)); protect(outputPath); held.push(outputPath);
     let pending = inflight.get(key);
     if (!pending) {
       pending = textureLimit(async () => {

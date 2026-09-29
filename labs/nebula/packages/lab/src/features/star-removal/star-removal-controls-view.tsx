@@ -94,11 +94,10 @@ export const StarRemovalControls = forwardRef<Controls, Options & { host: HTMLEl
         headers: { 'content-type': 'application/json', accept: 'application/x-ndjson' }, body: JSON.stringify({ imageId, action }) });
       const value = await readResponse(response, current, updateProgress); if (!current()) return false;
       if (value.schema !== 'cssearth-star-removal-result@1' || value.method !== 'nox' || value.imageId !== imageId || value.operation !== action ||
-        !/^[a-f0-9]{64}$/.test(value.sourceSha256) || !/^[a-f0-9]{64}$/.test(value.sourcePreviewSha256) ||
         !Array.isArray(value.nativeDimensions) || value.nativeDimensions.length !== 2 || value.nativeDimensions.some(n => !Number.isInteger(n) || n < 1))
         throw new TypeError('NOX returned an invalid source identity.');
       const previous = latest.current.result;
-      if (previous && (previous.sourceSha256 !== value.sourceSha256 || previous.sourcePreviewSha256 !== value.sourcePreviewSha256 || previous.nativeDimensions.join() !== value.nativeDimensions.join()))
+      if (previous && (previous.imageId !== value.imageId || previous.nativeDimensions.join() !== value.nativeDimensions.join()))
         throw new TypeError('The source changed. Reselect the image before processing.');
       if (action === 'preview' && (!value.previews?.length || value.previews.some(crop => !crop.source || !crop.removed || !crop.mask || !Number.isInteger(crop.width) || !Number.isInteger(crop.height))))
         throw new TypeError('NOX returned no valid crop previews.');

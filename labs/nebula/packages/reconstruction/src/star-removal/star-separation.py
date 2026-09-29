@@ -2,13 +2,12 @@
 """Offline, conservative compact-source trial. No image resampling or sky cutoff.
 
 Run: python star-separation.py recipe.json
-Recipe schema: cssearth-star-separation@1; source {path, sha256,
+Recipe schema: cssearth-star-separation@1; source {path,
 nativeDimensions: [width,height]}; outputDirectory; optional detections
-{path,sha256} pointing at a registration source-star-centroids.json; parameters
+{path} pointing at a registration source-star-centroids.json; parameters
 and preview override DEFAULTS below. Paths are relative to the working directory.
 """
 import argparse
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -29,14 +28,6 @@ DEFAULTS = dict(detectionSigma=2.0, detectionThreshold=0.025, minimumSeparation=
                 minimumGaussianCorrelation=0.75, annulusWidth=5)
 PREVIEW = dict(maxDimension=1000, exposure=2.0, gamma=0.7)
 CONVENTION = 'Zero-based native raster pixel centres, top left; no orientation, crop, resize or registration transform applied.'
-
-
-def sha256(path):
-    result = hashlib.sha256()
-    with Path(path).open('rb') as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b''):
-            result.update(block)
-    return result.hexdigest()
 
 
 def write_json(path, value):
@@ -109,12 +100,11 @@ def detect(image, p):
     return [[x, y] for x, y, _ in sorted(found, key=lambda point: (-point[2], point[1], point[0]))]
 
 
-def validate_centroids(document, source, source_hash, dimensions, limit):
+def validate_centroids(document, source, dimensions, limit):
     record = document.get('image', {})
     points = document.get('nativePixelCentres')
-    if (record.get('sha256') != source_hash or record.get('nativeDimensions') != dimensions or
-            Path(record.get('path', '')).resolve() != Path(source).resolve()):
-        raise ValueError('Detection catalogue does not match source hash, path and native dimensions.')
+    if record.get('nativeDimensions') != dimensions or Path(record.get('path', '')).resolve() != Path(source).resolve():
+        raise ValueError(f'Detection catalogue image {record!r} does not match source {source} and native dimensions {dimensions}.')
     if not isinstance(points, list) or document.get('count') != len(points) or len(points) > limit:
         raise ValueError('Invalid or oversized centroid catalogue.')
     for point in points:
@@ -309,9 +299,8 @@ def run(recipe_path):
     if set(preview) != set(PREVIEW) or any(not isinstance(v, (float, int)) or not math.isfinite(v) or v <= 0 for v in preview.values()) or preview['maxDimension'] > 2000:
         raise ValueError('Invalid bounded comparison preview settings.')
     source = recipe['source']
-    source_hash = sha256(source['path'])
-    if source_hash != source['sha256']:
-        raise ValueError('Source SHA256 mismatch.')
+    if not isinstance(source, dict) or set(source) != {'path', 'nativeDimensions'} or not Path(source['path']).is_file():
+        raise ValueError(f'Star-separation recipe {recipe_path} field source needs an existing path and nativeDimensions: {source!r}')
     image = read_image(source['path'])
     dimensions = [image.shape[1], image.shape[0]]
     if dimensions != source['nativeDimensions']:
@@ -322,9 +311,9 @@ def run(recipe_path):
     output.mkdir(parents=True, exist_ok=True)
     detection_input = recipe.get('detections')
     if detection_input:
-        if sha256(detection_input['path']) != detection_input['sha256']:
-            raise ValueError('Detection catalogue SHA256 mismatch.')
-        points = validate_centroids(json.loads(Path(detection_input['path']).read_text()), source['path'], source_hash, dimensions, p['maximumDetections'])
+        if not isinstance(detection_input, dict) or set(detection_input) != {'path'} or not Path(detection_input['path']).is_file():
+            raise ValueError(f'Star-separation recipe {recipe_path} field detections needs an existing path: {detection_input!r}')
+        points = validate_centroids(json.loads(Path(detection_input['path']).read_text()), source['path'], dimensions, p['maximumDetections'])
         detection_method = 'Pinned native-pixel catalogue; conservative local profile checks follow.'
     else:
         points = detect(image, p)
@@ -354,7 +343,7 @@ def run(recipe_path):
     write_image(output / 'comparison.png', comparison_preview(image, diffuse, stars, mask, preview))
     files = ['star-detections.json', 'star-detection-map.png', 'diffuse.png', 'stars.png', 'star-mask.png', 'accepted-stars.json', 'comparison.png']
     receipt = dict(schema='cssearth-star-separation-receipt@1', status='inspectable-trial', source={**source, 'dtype': str(image.dtype)},
-        sourceSha256=source_hash, recipeSha256=sha256(recipe_path), scriptSha256=sha256(__file__), parameters=p,
+        recipe=str(recipe_path), parameters=p,
         dependencies=dict(opencv=cv2.__version__, numpy=np.__version__), coordinateConvention=CONVENTION,
         detectionsWrittenBeforeSeparation=True, detectionsInput=detection_input, detectedCount=len(points), acceptedCount=len(accepted),
         rejected=rejected, verification=checks, preview={**preview, 'meaning': 'One identical global exposure and gamma on source/diffuse/stars; reduced preview only.'},
@@ -365,7 +354,7 @@ def run(recipe_path):
                      'Diffuse structure inside accepted masks is an interpolation hypothesis; outside-mask pixels remain exact.',
                      'Saturated stars, broad wings, diffraction spikes, crowded blends and edge sources are deliberately incomplete.',
                      'No calibrated PSF or noise model exists for these display composites; brightness is not photometric SNR.'],
-        outputs={file: dict(sha256=sha256(output / file), bytes=(output / file).stat().st_size) for file in files},
+        outputs={file: dict(bytes=(output / file).stat().st_size) for file in files},
         elapsedSeconds=round(time.monotonic() - started, 3))
     write_json(output / 'receipt.json', receipt)
     print(json.dumps(dict(stage='complete', accepted=len(accepted), detected=len(points), output=str(output), checks=checks)), flush=True)

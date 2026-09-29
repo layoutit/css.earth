@@ -1,9 +1,8 @@
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
 /** Local native-pixel analysis. This endpoint never replaces a source or prepares a cloud. */
-import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, readdir, realpath, rename, rm, stat, writeFile } from 'node:fs/promises';
-import { basename, dirname, isAbsolute, relative, resolve, sep } from 'node:path';
+import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import type { Plugin } from 'vite';
 import sharp from 'sharp';
 import { createStarRemovalJobs, starRemovalJobsHandler } from '../jobs/operation-jobs.ts';
@@ -14,38 +13,35 @@ export type { RemovalRequest, RemovalProgress } from '../../features/star-remova
 const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 const numeric = (value: unknown, low: number, high: number) => typeof value === 'number' && Number.isFinite(value) && value >= low && value <= high;
 const keys = (value: Record<string, unknown>, allowed: string[]) => Object.keys(value).every(key => allowed.includes(key));
-const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const scriptPath = 'labs/nebula/packages/reconstruction/src/star-removal/star-removal.py';
 /** Maps whose compact emission is the science keep every pixel: the identity treatment of the observation lane. */
-const preserveImplementationPath = 'labs/nebula/packages/reconstruction/src/star-removal/native.ts';
 const PRESERVED_SCHEMA = 'cssearth-native-preservation-output@1';
 export type StellarTreatment = 'nox' | 'preserve';
 const defaultModelPath = '.local/open-star-removal/noxGeneratorColor.pb';
-const defaultModelSha256 = 'd54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546';
 const cachePath = '.local/nebula-lab/star-removal-nox';
-const resultToken = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}\.[a-f0-9]{64}$/.test(value);
-interface AppliedLayers { sourceSha256: string; nativeDimensions: number[]; layers: { id: 'diffuse' | 'stars'; texturePath: string; sha256: string; widthPx: number; heightPx: number }[] }
+/** A removal result is named by the image it belongs to: `star-removal-nox-applied/<imageId>`. */
+const resultToken = (value: unknown): value is string => typeof value === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(value);
+interface AppliedLayers { nativeDimensions: number[]; layers: { id: 'diffuse' | 'stars'; texturePath: string; widthPx: number; heightPx: number }[] }
 const resolvedApplications = new Map<string, { stamps: [string, string][]; value: AppliedLayers }>();
 async function fileStamp(path: string) { const value = await stat(path); return [value.dev, value.ino, value.size, value.mtimeMs, value.ctimeMs].join(':'); }
-export async function resolveAppliedRemovalLayers(root: string, resultId: string, imageId: string, originalPreviewSha256: string): Promise<AppliedLayers> {
-  const key = JSON.stringify([await realpath(root), resultId, imageId, originalPreviewSha256]), cached = resolvedApplications.get(key);
+export async function resolveAppliedRemovalLayers(root: string, resultId: string, imageId: string): Promise<AppliedLayers> {
+  const key = JSON.stringify([await realpath(root), resultId, imageId]), cached = resolvedApplications.get(key);
   if (cached && (await Promise.all(cached.stamps.map(async ([path, stamp]) => (await fileStamp(path).catch(() => '')) === stamp))).every(Boolean)) return cached.value;
-  const resolved = await createStarRemover(root).resolveApplied(resultId, imageId, originalPreviewSha256);
+  const resolved = await createStarRemover(root).resolveApplied(resultId, imageId);
   const stamps = await Promise.all(resolved.files.map(async path => [path, await fileStamp(path).catch(() => '')] as [string, string]));
   resolvedApplications.set(key, { stamps, value: resolved.value });
   if (resolvedApplications.size > 16) resolvedApplications.delete(resolvedApplications.keys().next().value!);
   return resolved.value;
 }
 export async function restoreAppliedRemovalResult(root: string, input: unknown) {
-  if (!record(input) || !keys(input, ['imageId', 'resultId', 'sourcePreviewSha256']) || typeof input.imageId !== 'string' ||
-      !/^[a-z0-9-]+$/.test(input.imageId) || (input.resultId !== undefined && !resultToken(input.resultId)) || typeof input.sourcePreviewSha256 !== 'string' ||
-      !/^[a-f0-9]{64}$/.test(input.sourcePreviewSha256)) throw new TypeError('Invalid saved applied image identity.');
-  const resultId = input.resultId ?? await createStarRemover(root).discoverApplied(input.imageId, input.sourcePreviewSha256);
+  if (!record(input) || !keys(input, ['imageId', 'resultId']) || typeof input.imageId !== 'string' ||
+      !/^[a-z0-9-]+$/.test(input.imageId) || (input.resultId !== undefined && !resultToken(input.resultId)))
+    throw new TypeError(`Invalid saved applied image request: ${JSON.stringify(input)}`);
+  const resultId = input.resultId ?? await createStarRemover(root).discoverApplied(input.imageId);
   if (!resultId) return null;
-  const resolved = await resolveAppliedRemovalLayers(root, resultId, input.imageId, input.sourcePreviewSha256);
+  const resolved = await resolveAppliedRemovalLayers(root, resultId, input.imageId);
   const layers = await Promise.all(resolved.layers.map(async layer => ({ ...layer, url: `/@fs${await realpath(resolve(root, layer.texturePath))}` })));
-  return { imageId: input.imageId, sourceSha256: resolved.sourceSha256, sourcePreviewSha256: input.sourcePreviewSha256,
-    nativeDimensions: resolved.nativeDimensions, applied: { resultId, layers } };
+  return { imageId: input.imageId, nativeDimensions: resolved.nativeDimensions, applied: { resultId, layers } };
 }
 
 export function parseRemovalRequest(input: unknown): RemovalRequest {
@@ -60,8 +56,8 @@ export type RemovalRunner = (request: Record<string, unknown>, directory: string
 interface RemovalWork { controller: AbortController; callers: Map<symbol, ProgressListener | undefined>; promise: Promise<unknown>; settled: boolean; progress?: RemovalProgress }
 const cancelled = () => new DOMException('Star removal cancelled.', 'AbortError');
 const notify = (listener: ProgressListener | undefined, progress: RemovalProgress) => { try { listener?.(progress); } catch { /* A disconnected progress consumer cannot fail another caller. */ } };
-export function createStarRemover(repositoryRoot: string, options: { runner?: RemovalRunner; modelPin?: { path: string; sha256: string }; pythonPath?: string; timeoutMs?: number; applyTimeoutMs?: number; maximumCacheBytes?: number; maximumApplyCacheBytes?: number } = {}) {
-  const modelPath = options.modelPin?.path ?? defaultModelPath, modelSha256 = options.modelPin?.sha256 ?? defaultModelSha256;
+export function createStarRemover(repositoryRoot: string, options: { runner?: RemovalRunner; modelPath?: string; pythonPath?: string; timeoutMs?: number; applyTimeoutMs?: number; maximumCacheBytes?: number; maximumApplyCacheBytes?: number } = {}) {
+  const modelPath = options.modelPath ?? defaultModelPath;
   const root = resolve(repositoryRoot), cache = resolve(root, cachePath), appliedCache = resolve(root, `${cachePath}-applied`);
   const verifiedInputs = new Set<string>();
   const inflight = new Map<string, RemovalWork>();
@@ -72,42 +68,39 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
     if (fromRoot.startsWith(`..${sep}`) || fromRoot === '..' || isAbsolute(fromRoot)) throw new TypeError('Removal path escapes the repository.');
     return full;
   }
-  async function pinned(path: string, expected?: string) {
+  async function pinned(path: string) {
     const full = await safePath(path), bytes = await readFile(full);
-    if (expected !== undefined && hash(bytes) !== expected) throw new TypeError(`Removal input hash differs: ${path}`);
     verifiedInputs.add(full); verifiedInputs.add(resolve(root, path)); return bytes;
   }
-  const json = async (path: string, expected?: string) => JSON.parse((await pinned(path, expected)).toString());
+  const json = async (path: string) => JSON.parse((await pinned(path)).toString());
   async function catalogueSource(request: RemovalRequest, cataloguePath: string) {
     const catalogue = await json(cataloguePath);
-    const matches = (catalogue.targets ?? []).flatMap((target: { directory: string; images: { id: string; path: string; sha256: string }[] }) =>
+    const matches = (catalogue.targets ?? []).flatMap((target: { directory: string; images: { id: string; path: string }[] }) =>
       target.images.filter(image => image.id === request.imageId).map(image => ({ image, directory: target.directory })));
     if (matches.length !== 1) throw new TypeError('This image needs a unique imported original in the image catalogue.');
     const { image, directory } = matches[0];
-    if (!/^[a-f0-9]{64}$/.test(image.sha256)) throw new TypeError('Imported original is missing its source hash.');
+    if (typeof image.path !== 'string' || !image.path) throw new TypeError(`Image catalogue ${cataloguePath} image ${image.id} field path is missing.`);
     let bytes: Buffer;
-    try { bytes = await pinned(image.path, image.sha256); }
+    try { bytes = await pinned(image.path); }
     catch (error) { if ((error as NodeJS.ErrnoException).code === 'ENOENT') throw new Error('Download this image’s original before removing stars.'); throw error; }
     const metadata = await sharp(bytes, { unlimited: true }).metadata();
     const nativeDimensions = [metadata.width, metadata.height];
     if (!nativeDimensions.every(value => Number.isInteger(value) && value > 0 && value <= 40000) || (metadata.pages ?? 1) !== 1)
       throw new TypeError('Star removal needs a single image with dimensions up to 40,000 pixels per side.');
-    let source = { path: image.path as string, sha256: image.sha256 as string, nativeDimensions };
+    let source = { path: image.path as string, nativeDimensions };
     // NOX consumes RGB8. Convert other imported rasters at full size, never the preview or original in place.
     if (metadata.depth !== 'uchar' || metadata.channels !== 3 || metadata.space !== 'srgb' ||
         !['png', 'jpeg', 'tiff', 'webp'].includes(metadata.format ?? '')) {
-      const path = `${cachePath}-inputs/${image.sha256}-rgb8-v1.png`;
+      const path = `${cachePath}-inputs/${image.id}-rgb8-v1.png`;
       const converted = await sharp(bytes, { unlimited: true }).toColourspace('srgb').removeAlpha().png().toBuffer();
-      const expected = hash(converted), existing = await readFile(resolve(root, path)).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
-      if (existing && hash(existing) !== expected) throw new TypeError('Prepared RGB input differs from its imported original.');
-      if (!existing) {
+      const existing = await readFile(resolve(root, path)).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
+      if (!existing || !existing.equals(converted)) {
         await mkdir(dirname(resolve(root, path)), { recursive: true });
-        await writeFile(resolve(root, path), converted, { flag: 'wx' }).catch(error => { if (error.code !== 'EEXIST') throw error; });
+        await writeFile(`${resolve(root, path)}.pending`, converted); await rename(`${resolve(root, path)}.pending`, resolve(root, path));
       }
-      await pinned(path, expected); source = { path, sha256: expected, nativeDimensions };
+      await pinned(path); source = { path, nativeDimensions };
     }
-    return { source, directory, baseline: undefined, preserve: undefined,
-      planSha256: hash(JSON.stringify(['catalogue-rgb8-v1', image.id, image.path, image.sha256, directory])) };
+    return { source, directory, baseline: undefined, preserve: undefined, plan: cataloguePath };
   }
   async function sourceFor(request: RemovalRequest) {
     const subjects = await json('labs/nebula/packages/lab/src/state/subjects.json').catch(error => { if (error.code === 'ENOENT') return []; throw error; });
@@ -132,7 +125,7 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
         if (row.id === request.imageId) treatments.push({ stellarTreatment: 'preserve' as const, reason: row.reason, plan: path });
       }
       if (plan.schema !== 'cssearth-image-processing-plan@1') throw new TypeError('Invalid saved star-removal plan.');
-      if (plan.selections?.some((value: { id: string }) => value.id === request.imageId)) matchingPlans.push({ bytes, plan });
+      if (plan.selections?.some((value: { id: string }) => value.id === request.imageId)) matchingPlans.push({ path, plan });
     }
     if (matchingPlans.length > 1) throw new TypeError('This image has ambiguous configured processing plans.');
     if (!matchingPlans.length) {
@@ -146,47 +139,46 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
       if (matches.length !== 1) throw new TypeError('This image needs a unique imported original in the image catalogue.');
       return { ...await catalogueSource(request, matches[0]!), preserve: treatments[0] };
     }
-    const { bytes: planBytes, plan } = matchingPlans[0]!;
+    const { path: planPath, plan } = matchingPlans[0]!;
     const selection = plan.selections?.find((value: { id: string }) => value.id === request.imageId);
     if (plan.schema !== 'cssearth-image-processing-plan@1') throw new TypeError('Invalid saved star-removal plan.');
     if (!selection) return catalogueSource(request, plan.catalogue);
-    const recipe = await json(selection.recipe, selection.recipeSha256);
-    const report = await json(plan.alignmentReport.path, plan.alignmentReport.sha256);
+    const recipe = await json(selection.recipe);
+    const report = await json(plan.alignmentReport.path);
     const proof = report.sources?.find((value: { id: string }) => value.id === request.imageId);
     const catalogue = await json(plan.catalogue);
     const target = catalogue.targets?.find((value: { images: { id: string }[] }) => value.images.some(image => image.id === request.imageId));
     const input = target?.images.find((value: { id: string }) => value.id === request.imageId);
     const geometry = input?.registration ? { kind: 'matched-star-homography', registration: input.registration } : { kind: 'fixed-publisher-wcs', wcs: input?.wcs };
     if (recipe.schema !== 'cssearth-star-separation@1' || !proof || report.pass !== true || proof.pass !== true || report.status !== 'passed' || proof.status !== 'passed' ||
-        recipe.source.sha256 !== proof.sourceSha256 || recipe.source.path !== proof.sourcePath || input?.sha256 !== recipe.source.sha256 || input?.path !== recipe.source.path ||
+        recipe.source.path !== proof.sourcePath || input?.path !== recipe.source.path ||
         JSON.stringify(recipe.source.nativeDimensions) !== JSON.stringify(proof.sourceDimensions) || JSON.stringify(geometry) !== JSON.stringify(proof.geometry))
       throw new TypeError('Removal source differs from its verified native image registration.');
-    await pinned(proof.gate.path, proof.gate.sha256);
+    await pinned(proof.gate.path);
     const dimensions = recipe.source.nativeDimensions;
     if (!Array.isArray(dimensions) || dimensions.length !== 2 || !dimensions.every(value => Number.isInteger(value) && value > 0 && value <= 40000)) throw new TypeError('Invalid native image dimensions.');
-    await pinned(recipe.source.path, recipe.source.sha256);
+    await pinned(recipe.source.path);
     const receiptPath = `${recipe.outputDirectory}/receipt.json`;
     verifiedInputs.add(resolve(root, receiptPath));
-    let baseline: { path: string; sha256: string } | undefined;
+    let baseline: { path: string } | undefined;
     const receiptPresent = await stat(resolve(root, receiptPath)).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
     if (receiptPresent) {
       const receipt = await json(receiptPath);
-      if (receipt.schema !== 'cssearth-star-separation-receipt@1' || receipt.sourceSha256 !== recipe.source.sha256 ||
-          receipt.recipeSha256 !== selection.recipeSha256 || receipt.verification?.maximumReconstructionErrorCodeValues !== 0 ||
-          receipt.verification?.encodedRoundTripExact !== true)
-        throw new TypeError('Approved baseline is not bound to this source and exact accounting.');
-      const baselinePath = `${recipe.outputDirectory}/diffuse.png`, baselineSha = receipt.outputs?.['diffuse.png']?.sha256;
-      if (typeof baselineSha !== 'string' || !/^[a-f0-9]{64}$/.test(baselineSha)) throw new TypeError('Approved baseline pin is missing.');
+      if (receipt.schema !== 'cssearth-star-separation-receipt@1' || receipt.source?.path !== recipe.source.path ||
+          receipt.verification?.maximumReconstructionErrorCodeValues !== 0 || receipt.verification?.encodedRoundTripExact !== true)
+        throw new TypeError(`Approved baseline receipt ${receiptPath} is not bound to source ${recipe.source.path} with exact accounting.`);
+      const baselinePath = `${recipe.outputDirectory}/diffuse.png`;
+      if (!record(receipt.outputs?.['diffuse.png'])) throw new TypeError(`Approved baseline receipt ${receiptPath} field outputs lists no diffuse.png.`);
       const present = await stat(resolve(root, baselinePath)).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
       verifiedInputs.add(resolve(root, baselinePath));
       if (present) {
-        const bytes = await pinned(baselinePath, baselineSha), metadata = await sharp(bytes, { unlimited: true }).metadata();
+        const bytes = await pinned(baselinePath), metadata = await sharp(bytes, { unlimited: true }).metadata();
         if (metadata.width !== dimensions[0] || metadata.height !== dimensions[1]) throw new TypeError('Approved baseline changed the native pixel grid.');
-        baseline = { path: baselinePath, sha256: baselineSha };
+        baseline = { path: baselinePath };
       }
     }
     if (treatments.length) throw new TypeError('A configured star-separation recipe and a preserve treatment cannot both own this image.');
-    return { source: { path: recipe.source.path, sha256: recipe.source.sha256, nativeDimensions: dimensions }, planSha256: hash(planBytes), directory: target.directory, baseline, preserve: undefined };
+    return { source: { path: recipe.source.path, nativeDimensions: dimensions }, plan: planPath, directory: target.directory, baseline, preserve: undefined };
   }
   async function overview(request: RemovalRequest, proof: Awaited<ReturnType<typeof sourceFor>>) {
     const manifestPath = `${proof.directory}/overlays.json`, manifest = await json(manifestPath);
@@ -194,10 +186,10 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
     if (!image || Math.abs(image.widthPx / image.heightPx / (proof.source.nativeDimensions[0] / proof.source.nativeDimensions[1]) - 1) > .002)
       throw new TypeError('Original preview is not bound to this native removal source.');
     const path = relative(root, resolve(root, dirname(manifestPath), image.texturePath));
-    const bytes = await pinned(path, image.sha256), metadata = await sharp(bytes).metadata();
+    const bytes = await pinned(path), metadata = await sharp(bytes).metadata();
     if (metadata.width !== image.widthPx || metadata.height !== image.heightPx) throw new TypeError('Original preview pixel grid differs.');
-    return { schema: 'cssearth-star-removal-result@1', method: 'nox', imageId: request.imageId, operation: 'overview', sourceSha256: proof.source.sha256,
-      nativeDimensions: proof.source.nativeDimensions, sourcePreviewSha256: image.sha256,
+    return { schema: 'cssearth-star-removal-result@1', method: 'nox', imageId: request.imageId, operation: 'overview',
+      nativeDimensions: proof.source.nativeDimensions,
       overview: { url: `/@fs${await safePath(path)}`, dimensions: [image.widthPx, image.heightPx] }, previews: [] };
   }
   async function cacheBytes(directory = cache): Promise<number> {
@@ -251,9 +243,9 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
   });
   /** The identity treatment: the native source becomes the diffuse layer and the star layer is empty.
    * Same cache, artifacts and accounting as a NOX application, so every consumer reads it unchanged. */
-  async function writePreserved(directory: string, source: { path: string; sha256: string; nativeDimensions: number[] }, reason: string, implementationSha: string) {
+  async function writePreserved(directory: string, source: { path: string; nativeDimensions: number[] }, reason: string) {
     const dimensions = source.nativeDimensions as [number, number];
-    const { expectedDiffuse, expectedStars } = await prepareNativePreservation(await pinned(source.path, source.sha256), dimensions);
+    const { expectedDiffuse, expectedStars } = await prepareNativePreservation(await pinned(source.path), dimensions);
     const preview = (bytes: Buffer) => sharp(bytes, { unlimited: true }).resize({ width: 2048, height: 2048, fit: 'inside', withoutEnlargement: true }).webp({ quality: 92 }).toBuffer({ resolveWithObject: true });
     const files: Record<string, Buffer> = { 'diffuse.png': expectedDiffuse, 'stars.png': expectedStars, 'mask.png': expectedStars };
     const diffusePreview = await preview(expectedDiffuse), starsPreview = await preview(expectedStars);
@@ -261,9 +253,8 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
     files['comparison.webp'] = diffusePreview.data; files['overview.webp'] = diffusePreview.data;
     for (const [name, bytes] of Object.entries(files)) await writeFile(resolve(directory, name), bytes);
     const previewDimensions = [diffusePreview.info.width, diffusePreview.info.height];
-    const result = { schema: PRESERVED_SCHEMA, operation: 'apply', treatment: 'preserve', reason, sourceSha256: source.sha256,
-      implementationSha256: implementationSha, nativeDimensions: source.nativeDimensions,
-      artifactSha256: Object.fromEntries(Object.entries(files).map(([name, bytes]) => [name, hash(bytes)])),
+    const result = { schema: PRESERVED_SCHEMA, operation: 'apply', treatment: 'preserve', reason, nativeDimensions: source.nativeDimensions,
+      artifactBytes: Object.fromEntries(Object.entries(files).map(([name, bytes]) => [name, bytes.length])),
       overview: { path: 'overview.webp', dimensions: previewDimensions },
       applied: { images: { diffuse: 'diffuse.png', stars: 'stars.png', mask: 'mask.png' },
         previews: { diffuse: 'diffuse.webp', stars: 'stars.webp', comparison: 'comparison.webp' }, previewDimensions,
@@ -272,42 +263,37 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
           interpretation: 'Star removal is not applicable: compact emission is preserved. Any foreground stars remain in this map.' } } };
     await writeFile(resolve(directory, 'result.json'), JSON.stringify(result, null, 2) + '\n');
   }
-  async function resultAt(directory: string, request: RemovalRequest, source: { path: string; sha256: string; nativeDimensions: number[] },
-    previewSha: string, scriptSha: string, modelSha: string, baselineSha: string | null, preserve?: { reason: string; implementationSha: string }) {
+  async function resultAt(directory: string, request: RemovalRequest, source: { path: string; nativeDimensions: number[] }, preserve?: { reason: string }) {
     const canonicalDirectory = await realpath(directory);
-    const resultBytes = await readFile(resolve(directory, 'result.json')), result = JSON.parse(resultBytes.toString());
-    const token = `${basename(directory).replace(/\.pending$/, '')}.${hash(resultBytes)}`;
+    const result = JSON.parse((await readFile(resolve(directory, 'result.json'))).toString());
+    const token = request.imageId;
     if (preserve) {
       if (result.schema !== PRESERVED_SCHEMA || result.operation !== 'apply' || request.action !== 'apply' || result.treatment !== 'preserve' ||
-          result.reason !== preserve.reason || result.implementationSha256 !== preserve.implementationSha || result.sourceSha256 !== source.sha256 ||
-          JSON.stringify(result.nativeDimensions) !== JSON.stringify(source.nativeDimensions))
-        throw new TypeError('Preserved result does not match its pinned request.');
-      // The identity claim is re-proved from the pinned source, never taken from the saved receipt.
-      const identity = await prepareNativePreservation(await pinned(source.path, source.sha256), source.nativeDimensions as [number, number]);
-      if (result.artifactSha256?.['diffuse.png'] !== hash(identity.expectedDiffuse) || result.artifactSha256?.['stars.png'] !== hash(identity.expectedStars) ||
-          result.artifactSha256?.['mask.png'] !== hash(identity.expectedStars))
-        throw new TypeError('Preserved layers are not the identity treatment of this source.');
-    } else if (result.schema !== 'cssearth-nox-output@1' || result.operation !== request.action || result.sourceSha256 !== source.sha256 ||
-        result.scriptSha256 !== scriptSha || result.modelSha256 !== modelSha || result.baselineSha256 !== baselineSha ||
+          result.reason !== preserve.reason || JSON.stringify(result.nativeDimensions) !== JSON.stringify(source.nativeDimensions))
+        throw new TypeError(`Preserved result in ${relative(root, directory)} does not match its request for ${request.imageId}.`);
+      // The identity claim is re-proved from the source, never taken from the saved receipt.
+      const identity = await prepareNativePreservation(await pinned(source.path), source.nativeDimensions as [number, number]);
+      for (const [name, expected] of [['diffuse.png', identity.expectedDiffuse], ['stars.png', identity.expectedStars], ['mask.png', identity.expectedStars]] as const)
+        if (!(await readFile(resolve(directory, name))).equals(expected))
+          throw new TypeError(`Preserved layer ${name} in ${relative(root, directory)} is not the identity treatment of ${source.path}.`);
+    } else if (result.schema !== 'cssearth-nox-output@1' || result.operation !== request.action ||
         JSON.stringify(result.nativeDimensions) !== JSON.stringify(source.nativeDimensions) ||
         (result.previews !== undefined && (!Array.isArray(result.previews) || result.previews.length > 4)) || (request.action === 'preview' && !result.previews?.length))
-      throw new TypeError('NOX result does not match its pinned request.');
+      throw new TypeError(`NOX result in ${relative(root, directory)} does not match its request for ${request.imageId}.`);
     async function artifact(path: unknown, dimensions?: number[], native = false) {
       if (typeof path !== 'string' || isAbsolute(path) || path.split(/[\\/]/).includes('..') ||
           !(native ? /\.png$/ : /\.(png|webp)$/).test(path)) throw new TypeError('Invalid NOX artifact path.');
       const full = await realpath(resolve(directory, path));
       if (!full.startsWith(`${canonicalDirectory}${sep}`) || (await stat(full)).size === 0) throw new TypeError('NOX artifact is outside its output directory.');
-      const bytes = await readFile(full), expected = result.artifactSha256?.[path];
-      if (typeof expected !== 'string' || !/^[a-f0-9]{64}$/.test(expected) || hash(bytes) !== expected)
-        throw new TypeError('NOX artifact hash differs from its result.');
+      const bytes = await readFile(full);
       const metadata = await sharp(bytes, { unlimited: true }).metadata();
       if (!(native ? metadata.format === 'png' : ['png', 'webp'].includes(metadata.format ?? '')) || !metadata.width || !metadata.height ||
           (dimensions && (metadata.width !== dimensions[0] || metadata.height !== dimensions[1])))
-        throw new TypeError('NOX artifact changed its declared pixel grid.');
+        throw new TypeError(`NOX artifact ${path} changed its declared pixel grid.`);
       if (!native) await sharp(bytes).raw().toBuffer();
       verifiedInputs.add(full); verifiedInputs.add(resolve(directory, path));
       return { url: `/@fs${full}`, texturePath: relative(await realpath(root), full).split(sep).join('/'),
-        sha256: expected, widthPx: metadata.width, heightPx: metadata.height };
+        widthPx: metadata.width, heightPx: metadata.height };
     }
     const dimensions = (value: unknown): value is [number, number] => Array.isArray(value) && value.length === 2 &&
       value.every(item => Number.isInteger(item) && item > 0 && item <= 4096);
@@ -340,8 +326,12 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
       applied = { resultId: token, layers, native, comparisonUrl, counts: output.counts, verification };
     }
     return { schema: 'cssearth-star-removal-result@1' as const, method: (preserve ? 'preserve' : 'nox') as 'nox' | 'preserve', imageId: request.imageId,
-      operation: request.action, sourceSha256: source.sha256, sourcePreviewSha256: previewSha,
-      nativeDimensions: source.nativeDimensions, overview, previews, ...(applied ? { applied } : {}) };
+      operation: request.action, nativeDimensions: source.nativeDimensions, overview, previews, ...(applied ? { applied } : {}) };
+  }
+  /** The saved request of a result directory, or null when it names another request. */
+  async function savedRequest(directory: string, expected: unknown) {
+    const bytes = await readFile(resolve(directory, 'request.json')).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
+    return bytes !== null && JSON.stringify(JSON.parse(bytes.toString())) === JSON.stringify(expected);
   }
   function joinJob(key: string, job: RemovalWork, signal?: AbortSignal, onProgress?: ProgressListener) {
     signal?.throwIfAborted();
@@ -363,37 +353,39 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
       if (signal?.aborted) abort();
     });
   }
+  /** What a result directory was made from: repository-relative paths and settings, compared structurally. */
+  function workFor(request: RemovalRequest, proof: Awaited<ReturnType<typeof sourceFor>>) {
+    return proof.preserve
+      ? { schema: 'cssearth-star-removal@1', operation: request.action, treatment: 'preserve', reason: proof.preserve.reason, source: proof.source }
+      : { schema: 'cssearth-star-removal@1', operation: request.action, source: proof.source,
+        model: { path: modelPath }, ...(proof.baseline ? { baseline: proof.baseline } : {}) };
+  }
   const sample = async (input: unknown, signal?: AbortSignal, onProgress?: ProgressListener) => {
     const request = parseRemovalRequest(input);
     signal?.throwIfAborted();
     if (waiting >= 4) throw new Error('Star removal is busy; try again shortly.');
     waiting++;
     try {
-      notify(onProgress, { stage: 'validating', current: 0, total: 1, message: 'Verifying imported source image.' });
+      notify(onProgress, { stage: 'validating', current: 0, total: 1, message: 'Checking imported source image.' });
       const proof = await sourceFor(request);
       signal?.throwIfAborted();
-      notify(onProgress, { stage: 'validating', current: 1, total: 1, message: 'Source image verified.' });
+      notify(onProgress, { stage: 'validating', current: 1, total: 1, message: 'Source image found.' });
       if (request.action === 'overview') {
         const result = await overview(request, proof); signal?.throwIfAborted();
         notify(onProgress, { stage: 'preparing', current: 1, total: 1, message: 'Original preview ready.' });
         return result;
       }
-      const preserve = proof.preserve ? { reason: proof.preserve.reason, implementationSha: hash(await pinned(preserveImplementationPath)) } : undefined;
+      const preserve = proof.preserve ? { reason: proof.preserve.reason } : undefined;
       if (preserve && request.action !== 'apply') throw new TypeError('A preserved map has no star separation to preview; apply its identity treatment.');
-      const scriptSha = preserve ? preserve.implementationSha : hash(await pinned(scriptPath));
-      if (!preserve) await pinned(modelPath, modelSha256);
-      const work = preserve
-        ? { schema: 'cssearth-star-removal@1', operation: request.action, treatment: 'preserve', reason: preserve.reason, source: proof.source,
-          implementation: { path: preserveImplementationPath, sha256: preserve.implementationSha } }
-        : { schema: 'cssearth-star-removal@1', operation: request.action, source: proof.source,
-          model: { path: modelPath, sha256: modelSha256 }, ...(proof.baseline ? { baseline: proof.baseline } : {}) };
-      const previewSha = (await overview(request, proof)).sourcePreviewSha256;
-      const key = hash(JSON.stringify([scriptSha, proof.planSha256, work])), directory = resolve(request.action === 'apply' ? appliedCache : cache, key);
-      const complete = await stat(resolve(directory, 'result.json')).catch(() => null);
+      if (!preserve) await pinned(modelPath);
+      const work = workFor(request, proof), saved = { ...work, imageId: request.imageId, plan: proof.plan };
+      await overview(request, proof);
+      const key = `${request.action}:${request.imageId}`, directory = resolve(request.action === 'apply' ? appliedCache : cache, request.imageId);
+      const complete = await stat(resolve(directory, 'result.json')).catch(() => null) && await savedRequest(directory, saved);
       signal?.throwIfAborted();
       if (complete) {
-        const result = await resultAt(directory, request, proof.source, previewSha, scriptSha, modelSha256, proof.baseline?.sha256 ?? null, preserve); signal?.throwIfAborted();
-        notify(onProgress, { stage: 'cached', current: 1, total: 1, message: 'Verified saved NOX result loaded.' });
+        const result = await resultAt(directory, request, proof.source, preserve); signal?.throwIfAborted();
+        notify(onProgress, { stage: 'cached', current: 1, total: 1, message: 'Saved NOX result loaded.' });
         return result;
       }
       let job = inflight.get(key);
@@ -408,18 +400,18 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
           try {
             controller.signal.throwIfAborted();
             progress({ stage: 'preparing', current: 0, total: 1, message: preserve ? 'Preserving compact emission on the native grid.' : 'Preparing automatic NOX removal.' });
-            if (preserve) await writePreserved(temporary, proof.source, preserve.reason, preserve.implementationSha);
-            else await run({ ...work, source: { ...work.source, path: await safePath(work.source.path) },
-              model: { path: await safePath(modelPath), sha256: modelSha256 },
-              ...(proof.baseline ? { baseline: { ...proof.baseline, path: await safePath(proof.baseline.path) } } : {}) }, temporary, controller.signal, progress); controller.signal.throwIfAborted();
-            progress({ stage: 'previews', current: 0, total: 1, message: preserve ? 'Verifying preserved images.' : 'Verifying NOX output images.' });
-            await resultAt(temporary, request, proof.source, previewSha, scriptSha, modelSha256, proof.baseline?.sha256 ?? null, preserve);
+            if (preserve) await writePreserved(temporary, proof.source, preserve.reason);
+            else await run({ schema: 'cssearth-star-removal@1', operation: request.action, source: { ...proof.source, path: await safePath(proof.source.path) },
+              model: { path: await safePath(modelPath) },
+              ...(proof.baseline ? { baseline: { path: await safePath(proof.baseline.path) } } : {}) }, temporary, controller.signal, progress); controller.signal.throwIfAborted();
+            progress({ stage: 'previews', current: 0, total: 1, message: preserve ? 'Checking preserved images.' : 'Checking NOX output images.' });
+            await resultAt(temporary, request, proof.source, preserve);
             controller.signal.throwIfAborted();
-            await writeFile(resolve(temporary, 'request.json'), JSON.stringify({ ...work, scriptSha256: scriptSha, planSha256: proof.planSha256 }, null, 2) + '\n');
+            await writeFile(resolve(temporary, 'request.json'), JSON.stringify(saved, null, 2) + '\n');
             await checkCacheSpace(request.action === 'apply'); controller.signal.throwIfAborted();
-            await rename(temporary, directory);
-            const result = await resultAt(directory, request, proof.source, previewSha, scriptSha, modelSha256, proof.baseline?.sha256 ?? null, preserve);
-            progress({ stage: 'previews', current: 1, total: 1, message: preserve ? 'Verified preserved images ready.' : 'Verified NOX images ready.' });
+            await rm(directory, { recursive: true, force: true }); await rename(temporary, directory);
+            const result = await resultAt(directory, request, proof.source, preserve);
+            progress({ stage: 'previews', current: 1, total: 1, message: preserve ? 'Preserved images ready.' : 'NOX images ready.' });
             return result;
           } catch (error) { await rm(temporary, { recursive: true, force: true }); throw error; }
         });
@@ -431,49 +423,27 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
       return await joinJob(key, job, signal, onProgress);
     } finally { waiting--; }
   };
-  async function resolveApplied(resultId: string, imageId: string, originalPreviewSha256: string) {
-    if (!resultToken(resultId)) throw new TypeError('Invalid applied removal result identity.');
-    const [key, resultSha] = resultId.split('.'), directory = `${cachePath}-applied/${key}`;
+  async function resolveApplied(resultId: string, imageId: string) {
+    if (!resultToken(resultId)) throw new TypeError(`Invalid applied removal result name: ${resultId}`);
+    const directory = `${cachePath}-applied/${resultId}`;
     const request: RemovalRequest = { imageId, action: 'apply' }, proof = await sourceFor(request);
-    const preview = await overview(request, proof);
-    if (preview.sourcePreviewSha256 !== originalPreviewSha256) throw new TypeError('Applied removal original preview differs.');
-    const saved = await json(`${directory}/request.json`), { scriptSha256, planSha256, ...work } = saved;
-    const preserve = work.treatment === 'preserve' ? { reason: work.reason, implementationSha: hash(await pinned(preserveImplementationPath)) } : undefined;
+    const saved = await json(`${directory}/request.json`);
+    const preserve = saved.treatment === 'preserve' ? { reason: saved.reason } : undefined;
     if (Boolean(preserve) !== Boolean(proof.preserve) || (preserve && preserve.reason !== proof.preserve?.reason))
       throw new TypeError('Saved stellar treatment differs from this image\'s configured treatment.');
-    const scriptSha = preserve ? preserve.implementationSha : hash(await pinned(scriptPath));
-    if (!preserve) await pinned(modelPath, modelSha256);
-    // Catalogue/proof relocation cannot change already verified native NOX pixels. Validate the saved key
-    // with its original plan hash while checking current source/model/script/baseline content below.
-    if (scriptSha !== scriptSha256 || work.operation !== 'apply' ||
-        JSON.stringify(work.source) !== JSON.stringify(proof.source) || JSON.stringify(work.baseline) !== JSON.stringify(proof.baseline) ||
-        (preserve ? work.implementation?.sha256 !== preserve.implementationSha || work.implementation?.path !== preserveImplementationPath
-          : work.model?.sha256 !== modelSha256 || work.model?.path !== modelPath) ||
-        hash(JSON.stringify([scriptSha, planSha256, work])) !== key)
-      throw new TypeError('Applied native source or implementation is stale.');
-    await pinned(`${directory}/result.json`, resultSha);
-    const result = await resultAt(resolve(root, directory), request, proof.source, originalPreviewSha256, scriptSha, modelSha256, proof.baseline?.sha256 ?? null, preserve);
-    return { value: { sourceSha256: proof.source.sha256, nativeDimensions: proof.source.nativeDimensions, layers: result.applied!.layers } as AppliedLayers, files: [...verifiedInputs] };
+    if (!preserve) await pinned(modelPath);
+    // Catalogue/proof relocation cannot change already produced native NOX pixels; the saved request must name the
+    // same image, source, baseline and model as the current configuration.
+    if (JSON.stringify(saved) !== JSON.stringify({ ...workFor(request, proof), imageId, plan: saved.plan }))
+      throw new TypeError(`Applied removal ${directory} was made from another source, baseline or model than ${imageId} now names.`);
+    const result = await resultAt(resolve(root, directory), request, proof.source, preserve);
+    return { value: { nativeDimensions: proof.source.nativeDimensions, layers: result.applied!.layers } as AppliedLayers, files: [...verifiedInputs] };
   }
-  async function discoverApplied(imageId: string, previewSha256: string): Promise<string | null> {
-    const request = parseRemovalRequest({ imageId, action: 'overview' });
-    const proof = await sourceFor(request), preview = await overview(request, proof);
-    if (preview.sourcePreviewSha256 !== previewSha256) throw new TypeError('Applied removal original preview differs.');
-    const candidates: { id: string; modified: number }[] = [];
-    for (const key of await readdir(appliedCache).catch(error => { if (error.code === 'ENOENT') return []; throw error; })) {
-      if (!/^[a-f0-9]{64}$/.test(key)) continue;
-      try {
-        const directory = `${cachePath}-applied/${key}`, saved = await json(`${directory}/request.json`);
-        if (saved.operation !== 'apply' || saved.source?.sha256 !== proof.source.sha256) continue;
-        const bytes = await pinned(`${directory}/result.json`);
-        candidates.push({ id: `${key}.${hash(bytes)}`, modified: (await stat(resolve(appliedCache, key, 'result.json'))).mtimeMs });
-      } catch { /* Incomplete native runs are not available image layers. */ }
-    }
-    candidates.sort((a, b) => b.modified - a.modified);
-    for (const candidate of candidates) {
-      try { await resolveApplied(candidate.id, imageId, previewSha256); return candidate.id; }
-      catch { /* Stale source/model/code pins or damaged artifacts must never be restored. */ }
-    }
+  async function discoverApplied(imageId: string): Promise<string | null> {
+    parseRemovalRequest({ imageId, action: 'overview' });
+    if (!await stat(resolve(appliedCache, imageId, 'result.json')).catch(() => null)) return null;
+    try { await resolveApplied(imageId, imageId); return imageId; }
+    catch { /* A stale source/model configuration or damaged artifacts must never be restored. */ }
     return null;
   }
   return Object.assign(sample, { resolveApplied, discoverApplied });
@@ -484,7 +454,7 @@ export function starRemovalPlugin(repositoryRoot: string): Plugin {
   const sample = createStarRemover(repositoryRoot);
   const jobs = createStarRemovalJobs(repositoryRoot, { sample, parseRequest: parseRemovalRequest, validateResult: async result => {
     if (!record(result) || !record(result.applied)) throw new TypeError('Apply did not publish verified image layers.');
-    await restoreAppliedRemovalResult(repositoryRoot, { imageId: result.imageId, resultId: result.applied.resultId, sourcePreviewSha256: result.sourcePreviewSha256 });
+    await restoreAppliedRemovalResult(repositoryRoot, { imageId: result.imageId, resultId: result.applied.resultId });
   } });
 
     server.middlewares.use('/__nebula/star-removal-jobs', starRemovalJobsHandler(jobs));
