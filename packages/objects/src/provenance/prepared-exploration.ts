@@ -21,7 +21,8 @@ export function parseExplorationImage(raw: unknown): ExplorationImage {
   })();
   return Object.freeze({ id: explorationId(image.id), src, width: number(image.width), height: number(image.height), bytes: number(image.bytes), kind: explorationText(image.kind), sourceUrl: explorationUrl(image.sourceUrl), credit: explorationText(image.credit), ...(subject ? { subject } : {}) });
 }
-export function parsePreparedExploration(input: unknown, sources: SourceResolver, routes: DatasetRoutes) {
+/** `sources` checks every citation names a catalogued source; a reader of a file the catalogue writer already checked omits it. */
+export function parsePreparedExploration(input: unknown, sources: SourceResolver | undefined, routes: DatasetRoutes) {
   const value = explorationRecord(input, ['schema', 'catalog', 'agencies', 'images', 'emblems', 'graph']);
   if (value.schema !== 'cssearth-prepared-exploration@3') throw new TypeError('Unsupported prepared exploration catalogue.');
   const agencies: Readonly<Record<string, Agency>> = parseAgencies(value.agencies);

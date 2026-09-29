@@ -106,13 +106,9 @@ function bindRow(documentTarget: Document, view: RowView, entry: CatalogueRow, i
   anchor.dataset.sourceSubject = entry.source.subject;
   anchor.dataset.sourceDocument = entry.source.document;
   anchor.dataset.sourceLabel = entry.source.label;
-  if (entry.kind === 'scene') {
-    anchor.dataset.objectId = entry.id;
-    delete anchor.dataset.preparedFocusId;
-  } else {
-    anchor.dataset.preparedFocusId = entry.id;
-    delete anchor.dataset.objectId;
-  }
+  // A system row is a plain link to the system's overview, as the object list's overview rows are.
+  if (entry.kind === 'scene') anchor.dataset.objectId = entry.id; else delete anchor.dataset.objectId;
+  if (entry.kind === 'prepared-focus') anchor.dataset.preparedFocusId = entry.id; else delete anchor.dataset.preparedFocusId;
   const selected = selection?.kind === entry.kind && selection.id === entry.id;
   anchor.classList.toggle('is-active', selected);
   if (selected) anchor.setAttribute('aria-current', 'page');

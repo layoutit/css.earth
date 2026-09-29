@@ -28,6 +28,7 @@ import type { FactsheetSourceTransport } from '@cssearth/bake/objects/acquisitio
 import { prepareVolumeProvenance, readPreparedVolumeProvenance, volumeProvenanceCompilerClosure } from './prepare-volume-provenance.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { CONTEXT_ROUTE, DATASET_ROUTES } from '../../../src/platform/dataset-destination.mts';
+import { sourceCredits } from './source-credits.mts';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
@@ -184,7 +185,9 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   const prepared = parsePreparedExploration(payload,sources,DATASET_ROUTES);
   const output = { path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
-  const catalogueOutputs = [sourcesOutput,output];
+  // What the pages read of it: each object's provider index (source-credits.mts).
+  const creditsOutput = {path:resolve(root,'site/prepared-source-credits.json'),text:JSON.stringify(sourceCredits(preparedSources.usage,preparedSources.sources))+'\n'};
+  const catalogueOutputs = [sourcesOutput,creditsOutput,output];
   const outputs = [...volumes.flatMap(volume => volume.outputs),...catalogueOutputs];
   if (publish) await writePreparedSet(publish === 'catalogues' ? catalogueOutputs : outputs);
   return { prepared, preparedSources, output, outputs, catalogueOutputs, factsheets };
