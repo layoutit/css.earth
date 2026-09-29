@@ -282,7 +282,7 @@ For a photographic resolution refresh on the existing raster lane, use the
 Keep geometry and lighting fixed, prepare one body at a time, and compare actual
 close-ups and image delivery size before accepting the larger texture.
 
-For authored objects, `node tools/prepare/cli/prepare-object.mts <id>...` runs the whole preparation chain in order for those objects only and
+For authored objects, `node packages/bake/cli/prepare-object.mts <id>...` runs the whole preparation chain in order for those objects only and
 names the step that failed; resume with `--from <step>`, stop early with `--to <step>`. It refuses to start while other objects' prepared files are missing (`pnpm setup:assets`, then `pnpm prepare:object-json`), and its billboard step photographs each baked body's arrival billboard from the running site (`pnpm dev`, or `CSSEARTH_BILLBOARD_ORIGIN`). Before the bake it refuses an install older
 than `pnpm-lock.yaml` and reader text over its budgets, and restores the Sun's files that differ from its inventory. With several ids each tool runs once (the authored
 preparation three objects at a time), which is minutes for a batch where one call per object and tool was an hour. On the paged-ellipsoid lane (Earth) and the raster
@@ -305,7 +305,7 @@ otherwise the neutral gray is lit by the host's measured colour; `telescope new-
 same for planets already in the tree, then `prepare-object.mts` bakes them. A paper's published phase-curve fit becomes a heat-map lens beside the
 colour lens (`tools/objects/new-object/phase-curve-lens.mts`): `phaseCurves` on a planet in a spec, or `--phase-curve entries.json` for planets in
 the tree, each entry the paper's table as `cssearth-published-phase-curve@1` plus who fitted what; the range, hottest longitude and reader text
-come from the drawn map. GJ and Gliese are one catalogue, so an article titled either way quotes. Before imagery work on
+come from the drawn map. GJ and Gliese are one catalogue, so an article titled either way quotes. Every generated planet gets a Charts tab (`tools/objects/new-object/planet-charts.mts`): its system's orbits from above (`system-orbits`), its transit folded from the newest three TESS 2-minute SPOC sectors of its star (`folded-transit`, `tools/objects/new-object/transit-chart.mts`), and the archive's transmission and dayside emission spectra where a paper lists three measured bins, one paper per chart; `--charts HOST...` adds them to planets in the tree. The drafted card and introduction say what the factsheet cannot (how and when the planet was found, how many its star has); `--retext HOST...` rewrites them after a template change. A planet's period and transit time come from one archive row, the one whose ephemeris predicts 2026-01-01 best (transit-time error plus period error times the orbits since): the default row mixed with another paper's old transit time put HAT-P-11 b's 2024 TESS transits 5.3 hours late. `--retime HOST...` applies the rule to planets in the tree, and a transit chart is drawn only when the folded dip is at least 5 sigma, so a drawn dip landing on 0 hours is the ephemeris's own check. Before imagery work on
 a moon or small body, `node packages/bake/cli/imagery-candidates.mts [<id> ...]` says whether OPUS holds finer frames than the body ships, and
 `--archives <id> ...` searches ALMA, ESO, MAST and DataCite deposits for bodies seen from the ground or Earth orbit; see the
 [implementation map](references/implementation-map.md) for these commands and the checks that keep copied facts out.

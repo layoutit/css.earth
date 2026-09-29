@@ -12,7 +12,7 @@ import {
   rejectionReason, inSubset, sampleFor, clippedMean, median, type StackGrid,
 } from './line-stack-reduction.mts';
 import { frameEphemeris, horizonsRequestKey, horizonsRowJulianDate, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses } from './line-stack-ephemeris.mts';
-import { addStackEvidence, lineStackSoftware, readLineStack, stackPath, stackRun } from './line-stack.mts';
+import { addStackEvidence, lineStackSoftware, readLineStack, stackPath, stackProduct, stackRun } from './line-stack.mts';
 
 const STACK = 'europa-oxygen-aurora';
 /** A Horizons response whose rows are in time order while the epochs were asked for in another. */
@@ -258,4 +258,16 @@ test('a stack definition refuses what it cannot check', async () => {
   const frames = definition.frames as Record<string, unknown>[];
   assert.throws(() => parseLineStack({ ...definition, frames: [frames[0]!, frames[0]!] }), /twice/u);
   assert.throws(() => parseLineStack({ ...definition, subsets: [{ id: 'all', rule: 'somehow' }] }), /subset rule/u);
+});
+
+test('a stacked product still carries the FITS ORIGIN string it serialized before the archive code moved into telescope-cli', async () => {
+  const definition = await readLineStack(STACK), line = definition.lines[0]!;
+  const set = { line, subset: 'all', accumulator: newAccumulator(definition.grid.pixels) };
+  const bytes = stackProduct(definition, set, definition.handedness);
+  assert.match(bytes.toString('latin1'), /ORIGIN\s*= 'cssEarth tools\/objects\/hst\/line-stack\.mts'/u);
+});
+
+test('lineStackSoftware still reports the software name it recorded before the archive code moved into telescope-cli', async () => {
+  const software = await lineStackSoftware();
+  assert.equal(software[0]!.name, 'cssearth tools/objects/hst/line-stack.mts');
 });

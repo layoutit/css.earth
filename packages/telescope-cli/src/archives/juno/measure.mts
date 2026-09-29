@@ -32,6 +32,10 @@ export const RECEIPT_SCHEMA = 'cssearth-junocam-registration@1';
 /** The budget every measured program is held to; a lens may state a tighter one. */
 export const POLICY: StripRefinementPolicy = { method: 'mesh-limb-epochs', maximumPointingSeconds: 0.05, maximumEphemerisSeconds: 2, maximumResidualPixels: 1.5, minimumControls: 64, maximumControls: 1500, searchPixels: 64 };
 const BANDS = ['RED', 'GREEN', 'BLUE'] as const, STEP_DEGREES = 2, JUNO = -61;
+// The software name this stage has always serialized into a registration record, from when this module lived at
+// tools/objects/juno/measure.mts. Changing it changes every receipt, so it is pinned rather than derived from the module's
+// current path.
+const HISTORICAL_SOFTWARE_NAME = 'cssearth tools/objects/juno/measure.mts';
 
 /** The target's IAU ellipsoid as a radius table, sampled every two degrees: the surface the limb is fitted to. */
 export function ellipsoidMesh(radiiKm: readonly number[]) {
@@ -72,7 +76,7 @@ export async function horizonsCheck(set: KernelSet, program: JunocamProgram) {
 export async function registrationSoftware(): Promise<ProductSoftware[]> {
   const sources = await Promise.all(['packages/telescope-cli/src/archives/juno/measure.mts', 'packages/bake/src/objects/layers/terrestrial/missions/junocam.ts',
     'packages/bake/src/objects/layers/terrestrial/registration/strip-refinement.ts'].map(name => readFile(resolve(WORKSPACE, name))));
-  return [{ name: 'cssearth packages/telescope-cli/src/archives/juno/measure.mts', version: sha256(Buffer.concat(sources)) }];
+  return [{ name: HISTORICAL_SOFTWARE_NAME, version: sha256(Buffer.concat(sources)) }];
 }
 
 /** What identifies one registration: every image and label it measured and every kernel it read, each at its pinned size and

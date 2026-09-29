@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.019 Jupiter masses",
+        "value": "6.1 Earth masses",
         "source": {
           "catalogueId": "publication-2023a-a-673a-4b",
           "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-207496b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-207496b/hd-207496b-system-orbits.svg",
+      "alt": "The orbits of HD 207496's planets in this map from above, to scale, with HD 207496 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-207496b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B"
+      }
+    },
+    {
+      "id": "hd-207496b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-207496b/hd-207496b-transit.svg",
+      "alt": "HD 207496 b crossing its star, as TESS recorded it: 3 sectors (101, 102, 103) of the SPOC pipeline's 2-minute light curves of TIC 290348383, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 6 minutes at these dates, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-207496b-tess-sector-101",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026060005000-s0101-0000000290348383-0303-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

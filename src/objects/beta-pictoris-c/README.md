@@ -16,7 +16,7 @@ Beta Pictoris c is a giant planet 2.7 au from [Beta Pictoris](../beta-pictoris/R
 
 ## Evidence
 
-Run of 2026-09-22 (this version): `node tools/prepare/prepare-object.mts beta-pictoris-c` prepared the package through its world step; the orbit test above passes.
+Run of 2026-09-22 (this version): [`node tools/prepare/prepare-object.mts beta-pictoris-c`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) prepared the package through its world step; the orbit test above passes.
 
 ## Known problems
 

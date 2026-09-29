@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-1542d/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-1542d-orbits",
+      "title": "Kepler-1542 d: orbits around Kepler-1542",
+      "output": "kepler-1542d-system-orbits.svg",
+      "system": "kepler-1542",
+      "highlight": "kepler-1542d",
+      "description": "The orbits of Kepler-1542's planets in this map from above, to scale, with Kepler-1542 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 5.9921809271 d"
+      }
+    }
+  ]
+}

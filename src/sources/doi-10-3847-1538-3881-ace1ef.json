@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ace1ef",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lin et al. (2023): The Unusual M-dwarf Warm Jupiter TOI-1899 b: Refinement of Orbital and Planetary Parameters",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2301.10837"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ace1ef"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023AJ....166...90L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ace1ef",
+      "label": "The Astronomical Journal 166 90"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lin et al. (2023), The Astronomical Journal 166 90",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L"
+    }
+  ],
+  "publisher": "The Astronomical Journal 166 90",
+  "creators": [
+    "Andrea S. J. Lin",
+    "Jessica E. Libby-Roberts",
+    "Jaime A. Alvarado-Montes",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

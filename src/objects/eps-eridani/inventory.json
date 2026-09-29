@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "eps-eridani-arrival.webp",
+      "bytes": 28354,
+      "sha256": "a1e82cdf7b25e56ba2515672aa378470b6638daa1de6f01f28d4de358f1f62e6"
+    },
+    {
+      "location": "public",
       "filename": "eps-eridani-lens-color.webp",
       "bytes": 44,
       "sha256": "e744d09c42d21df7ce6d676da8166d06679b63df370aaf7045e7c1643aa99eea"
@@ -24,6 +30,12 @@
       "filename": "eps-eridani-surface-color@2x.webp",
       "bytes": 178,
       "sha256": "735749b035240f9d651f21707f4606c018aa30613e8f318e8ed5638ee2b1a17c"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 384,
+      "sha256": "057944403b064bf070026a93540d0a41fdaf26089a7f4fe061377ad126588bdb"
     },
     {
       "location": "prepared",
@@ -94,8 +106,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2147,
-      "sha256": "230364677983a99c5fa98849ed57f05a61423815b33f23d85224e55fbae82502"
+      "bytes": 2152,
+      "sha256": "527b9de0ab8ecf139aa618cdedc2632b65931efb92c4c18142717df2982f86cd"
     },
     {
       "location": "prepared",

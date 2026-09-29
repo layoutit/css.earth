@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../../../../tests/objects/source-test.mts';
@@ -325,4 +325,16 @@ test('a receipt counts only when the archive files it says it read are the ones 
   assert.equal((await repositoryState(scratch)).checked.get('IRAC Map'), 1);
 
   assert.ok((real.checked.get('IRAC Map') ?? 0) > 0, "this repository's own IRAC Map receipts name the bytes their program pinned");
+});
+
+test('mosaic.py keeps the FITS ORIGIN string it serialized before the archive code moved into telescope-cli', async () => {
+  // No pinned Python/astropy toolchain runs in this suite, so the identity is checked the way the rest of this stage's
+  // Python is checked from here: by reading the source mosaic.py writes from, not by executing it.
+  const source = await readFile(resolve(import.meta.dirname, 'mosaic.py'), 'utf8');
+  const constant = source.match(/^HISTORICAL_ORIGIN\s*=\s*"([^"]*)"/mu);
+  assert.ok(constant, 'mosaic.py names a HISTORICAL_ORIGIN constant');
+  assert.equal(constant![1], 'cssEarth tools/objects/spitzer');
+  // The header write has to use that named constant, not a literal that could drift from it unnoticed.
+  assert.match(source, /out_header\["ORIGIN"\]\s*=\s*HISTORICAL_ORIGIN\b/u,
+    'the ORIGIN header write must reference the HISTORICAL_ORIGIN constant');
 });

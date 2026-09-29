@@ -14,9 +14,9 @@
         "reference": "AN_ET_AL__2025"
       },
       "text": {
-        "card": "HAT-P-11 b crosses its star every 4.89 days and is 0.45 Jupiter radii across, found in 2010.",
-        "introduction": "HAT-P-11 b transits HAT-P-11 every 4.89 days and is 0.45 Jupiter radii across. Orbit and size follow An et al. 2025's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AN_ET_AL__2025): pl_orbper 4.888, pl_radj 0.4466, pl_bmassj 0.0787",
+        "card": "HAT-P-11 b was found in 2010 by HATNet as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HAT-P-11. Its orbit and size follow An et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AN_ET_AL__2025): disc_year 2010, disc_facility HATNet, sy_pnum 2; pl_orbper 4.888, pl_radj 0.4466, pl_bmassj 0.0787",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/HAT-P-11b",
           "title": "HAT-P-11b",

@@ -100,7 +100,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 4447627.6,
-      "description": "HD 97658 b crosses its star every 9.49 days and is 2.1 Earth radii across, found in 2010.",
+      "description": "HD 97658 b was found in 2010 by W. M. Keck Observatory as it crossed its star.",
       "systemName": "HD 97658 system",
       "order": 1794,
       "context": {
@@ -111,20 +111,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -587732425853526800,
-        118109648097266860,
-        288649959581137600
+        -587732425336886300,
+        118109647996998900,
+        288649960190065600
       ],
       "presentationToReference": [
-        -0.8864819189385511,
+        -0.88648191844182,
         0.18234057785064964,
-        0.4253254295996366,
-        0.16122879945971583,
+        0.4253254306349452,
+        0.16122879935989687,
         0.983209122036801,
-        -0.08546985765988997,
-        0.433768465451101,
+        -0.08546985784818663,
+        0.43376846650336,
         0.007192775035706803,
-        0.9009956616807225
+        0.9009956611741309
       ],
       "orbitUpReference": [
         -0.18234057785064964,

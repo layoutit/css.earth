@@ -100,7 +100,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 4676236,
-      "description": "TOI-2134 c crosses its star every 95.9 days and is 0.66 Jupiter radii across, found in 2023.",
+      "description": "TOI-2134 c was found in 2023 by TESS as it crossed its star.",
       "systemName": "TOI-2134 system",
       "order": 1801,
       "context": {
@@ -111,20 +111,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        18345045456276240,
-        -542792359008488000,
-        440927479209952200
+        18345045456022124,
+        -542792359001130600,
+        440927479217422460
       ],
       "presentationToReference": [
-        0.03166296541661738,
+        0.031662965416299683,
         -0.999271874480405,
-        -0.02128796593016424,
-        -0.7757156445581903,
+        -0.02128796593063676,
+        -0.7757156445487894,
         -0.03799921461588847,
-        0.6299375353765222,
-        0.6302877877673797,
+        0.6299375353880983,
+        0.6302877877789654,
         0.003432282184405855,
-        0.77635399401968
+        0.7763539940102738
       ],
       "orbitUpReference": [
         0.999271874480405,

@@ -108,7 +108,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 7804819.4,
-      "description": "HAT-P-11 b crosses its star every 4.89 days and is 0.45 Jupiter radii across, found in 2010.",
+      "description": "HAT-P-11 b was found in 2010 by HATNet as it crossed its star.",
       "systemName": "HAT-P-11 system",
       "order": 1838,
       "context": {
@@ -119,20 +119,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        362713459829910400,
-        -690552146695319700,
-        868809480878248300
+        362713459510442240,
+        -690552146181046800,
+        868809477963103200
       ],
       "presentationToReference": [
-        0.3256359980412144,
+        0.3256359984852547,
         -0.8799079404574499,
-        -0.34601042339737553,
-        -0.5834581001258579,
+        -0.34601042297948187,
+        -0.5834581009712637,
         -0.47497616173505225,
-        0.6587672511448655,
-        0.7440012380213,
+        0.6587672503961048,
+        0.7440012371639699,
         0.01263574704424919,
-        0.6680587516973392
+        0.6680587526521271
       ],
       "orbitUpReference": [
         0.8799079404574499,

@@ -7,7 +7,7 @@ import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance, readPreparedFocusObjects } from '@cssearth/bake/navigation';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
-import { BODIES } from '@cssearth/astronomy';
+import { BODIES, M_PER_PC } from '@cssearth/astronomy';
 import { assetOrigin } from '../../asset-origin.mts';
 import { readInventory } from '@cssearth/objects/node';
 
@@ -103,6 +103,26 @@ async function writeGenerated(output: string, text: string) {
   await writeFile(output, text);
 }
 
+/** Each object's published stellar extent (`source/stellar-extent.json`), radius in metres by object id; the source it
+ * names must be a catalogued record. The universe rings those objects at that radius. */
+async function readStellarExtents(entries: readonly { id: string }[], projectRoot: string) {
+  const extents: Record<string, number> = {};
+  for (const { id } of entries) {
+    const path = `src/objects/${id}/source/stellar-extent.json`;
+    let record: unknown;
+    try { record = JSON.parse(await readFile(resolve(projectRoot, path), 'utf8')); }
+    catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
+    if (!isRecord(record) || record.schema !== 'cssearth-stellar-extent@1' || record.objectId !== id) throw new TypeError(`${path}: expected a cssearth-stellar-extent@1 record for ${id}.`);
+    const radiusPc = record.radiusPc, source = record.source;
+    if (typeof radiusPc !== 'number' || !(radiusPc > 0) || !Number.isFinite(radiusPc)) throw new TypeError(`${path}: radiusPc must be a positive number, got ${String(radiusPc)}.`);
+    if (typeof source !== 'string' || !/^[a-z0-9][a-z0-9-]*$/u.test(source)) throw new TypeError(`${path}: source must name a src/sources record, got ${String(source)}.`);
+    try { await readFile(resolve(projectRoot, 'src/sources', `${source}.json`)); }
+    catch (error) { if (hasErrorCode(error, 'ENOENT')) throw new TypeError(`${path}: source ${source} has no record in src/sources.`); throw error; }
+    extents[id] = radiusPc * M_PER_PC;
+  }
+  return extents;
+}
+
 export async function prepareCatalog({ projectRoot = root } = {}) {
   const entries = await readCatalog(resolve(projectRoot, 'src/objects'), prepareSceneDistance);
   const host = entries.find(entry => entry.classification === 'star' && entry.distance.meters === 0);
@@ -132,6 +152,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, 'site/prepared-lens-volumes.json'), JSON.stringify(await readLensVolumes(entries, projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), JSON.stringify(await readLocalGroupGalaxies(projectRoot)) + '\n');
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'));
+  await writeGenerated(resolve(projectRoot, 'site/prepared-stellar-extents.json'), JSON.stringify(await readStellarExtents([...entries, ...contexts], projectRoot)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared-context-objects.mts'), contextObjectModule(contexts,
     await contextObjectAssetUrls(contexts, projectRoot, assetOrigin())));
   return entries;

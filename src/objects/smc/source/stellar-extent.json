@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-stellar-extent@1",
+  "objectId": "smc",
+  "radiusPc": 11000,
+  "definition": "Projected radius from the SMC centre reached by its metal-poor red giant branch stars in the MAgellanic Periphery Survey.",
+  "quote": "Red giant branch stars that extend to large radii (~11 kpc)",
+  "source": "nidever-2011-smc-periphery",
+  "presentation": "Drawn as a ring around the object: where its stars are still measured, not a boundary."
+}

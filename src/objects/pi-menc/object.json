@@ -100,7 +100,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 3772067.7,
-      "description": "pi Men c crosses its star every 6.27 days and is 2 Earth radii across, found in 2018.",
+      "description": "pi Men c was found in 2018 by TESS as it crossed its star.",
       "systemName": "HD 39091 system",
       "order": 1788,
       "context": {
@@ -111,20 +111,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        9279172547087684,
-        93049158812993230,
-        -556491401039867140
+        9279172536921990,
+        93049158738501650,
+        -556491401105847200
       ],
       "presentationToReference": [
-        -0.03485866819198803,
+        -0.034858668206767904,
         0.9945799400513218,
-        0.09795721565760232,
-        0.16979482235296112,
+        0.0979572156523428,
+        0.16979482220490205,
         -0.09069787898003485,
-        0.9812969036181912,
-        -0.9848627272640627,
+        0.9812969036438098,
+        -0.9848627272890654,
         -0.050839331191825064,
-        0.16571291696775076
+        0.16571291681915368
       ],
       "orbitUpReference": [
         -0.9945799400513218,

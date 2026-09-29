@@ -75,6 +75,11 @@ test('repreparation starts from canonical topology and reproduces the final dept
   const second = await preparePresentationBindings(first, root, { pageStyles: objectPageStyles });
   assert.deepEqual(second, first);
   assert.ok(first.depthPartitions.groups.length > 1);
+  // The shared shell gives every mesh an identity translate for WebKit layer
+  // residency. It must not disable static partitioning; real offsets still do.
+  const translated: PresentationSource = { ...source, tree: { ...source.tree, nodes: source.tree.nodes.map((node, id) =>
+    id === source.surfaceHit?.target ? { ...node, style: `${node.style};translate:1px 0px 0px` } : node) } };
+  assert.equal((await preparePresentationBindings(translated, root, { pageStyles: objectPageStyles })).depthPartitions, undefined);
   assert.ok(first.tree.activationGroups.length < 40);
   // A new local frame owner invalidates the old partition instead of retaining
   // a cached layout that can no longer follow that source's material state.

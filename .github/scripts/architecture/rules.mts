@@ -28,7 +28,7 @@ export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
 export const SITE_BUILD = 'site/build/';
 
 /** Entry glue that may reach into an application tree: Netlify functions and root build configuration
- * (`astro.config.mts` wires `site/build` and `tools/prepare` into the Astro build). Astro pages
+ * (`astro.config.mts` wires `site/build` into the Astro build). Astro pages
  * live inside `site/` and need no entry here. */
 export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
 
@@ -60,11 +60,6 @@ export const LAYER_RULES: readonly LayerRule[] = [
     forbids: (from, to) => from.startsWith('site/') && !from.startsWith(SITE_BUILD) && to.startsWith(SITE_BUILD),
   },
   {
-    id: 'nothing-imports-prepare-scripts',
-    description: 'tools/prepare/cli/ holds the prepare entry scripts: nothing imports them, including other entries (type-only imports count); the libraries beside them in tools/prepare/ may be imported',
-    forbids: (_from, to) => to.startsWith('tools/prepare/cli/'),
-  },
-  {
     id: 'nothing-imports-cli-entries',
     description: 'packages/*/cli/ holds command entries: nothing imports them, including other entries and the package itself (tests and type-only imports count)',
     forbids: (_from, to) => /^packages\/[^/]+\/cli\//u.test(to),
@@ -80,6 +75,12 @@ export const LAYER_RULES: readonly LayerRule[] = [
     id: 'bake-nebula-and-objects-independent',
     description: 'in @cssearth/bake, nebula/ and objects/ never import each other, in either direction (tests and type-only imports count)',
     forbids: (from, to) => (from.startsWith(BAKE_NEBULA) && to.startsWith(BAKE_OBJECTS)) || (from.startsWith(BAKE_OBJECTS) && to.startsWith(BAKE_NEBULA)),
+    includeTests: true,
+  },
+  {
+    id: 'authoring-is-leaf',
+    description: 'packages/bake/authoring/ holds per-body and per-mission authoring scripts: nothing imports them except their own tests (tests and type-only imports count)',
+    forbids: (from, to) => to.startsWith('packages/bake/authoring/') && !from.startsWith('packages/bake/authoring/'),
     includeTests: true,
   },
 ];

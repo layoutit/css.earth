@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-88986b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-88986b-orbits",
+      "title": "HD 88986 b: orbits around HD 88986",
+      "output": "hd-88986b-system-orbits.svg",
+      "system": "hd-88986",
+      "highlight": "hd-88986b",
+      "description": "The orbits of HD 88986's planets in this map from above, to scale, with HD 88986 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Heidari et al. 2024 (2024A&A...681A..55H), via the NASA Exoplanet Archive ps table (pl_refname HEIDARI_ET_AL_2024): P 146.05 d"
+      }
+    }
+  ]
+}

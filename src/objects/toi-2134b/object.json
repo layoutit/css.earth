@@ -100,7 +100,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 4676235.8,
-      "description": "TOI-2134 b crosses its star every 9.23 days and is 2.7 Earth radii across, found in 2023.",
+      "description": "TOI-2134 b was found in 2023 by TESS as it crossed its star.",
       "systemName": "TOI-2134 system",
       "order": 1800,
       "context": {
@@ -111,20 +111,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        18345044595236796,
-        -542792337981855500,
-        440927461407810050
+        18345044595290670,
+        -542792337982226300,
+        440927461419466500
       ],
       "presentationToReference": [
-        0.03162808424556389,
+        0.031628084245295646,
         -0.9992729791067186,
-        -0.021287966416245703,
-        -0.7757169710082197,
+        -0.021287966416644245,
+        -0.775716971000282,
         -0.03797213733087607,
-        0.6299375347416265,
-        0.6302879065766599,
+        0.6299375347514014,
+        0.6302879065864426,
         0.003410280590916171,
-        0.7763539945215088
+        0.7763539945135667
       ],
       "orbitUpReference": [
         0.9992729791067186,

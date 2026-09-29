@@ -1,0 +1,138 @@
+// `@cssearth/bake/prepare-objects` (Node only): the preparation cache (verified receipts skip an unchanged object) and the
+// concurrency-scheduled catalogue-wide preparation run. It imports `preparation` and `run-implemented-objects`.
+// `packages/bake/cli/prepare-objects.mts` is its command.
+import { sha256 } from '@cssearth/core/node';
+import { isArray, hasErrorCode, requireString } from '@cssearth/core';
+import assert from "node:assert/strict";
+import { randomUUID } from 'node:crypto';
+import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { createRequire } from "node:module";
+import { basename, dirname, resolve } from "node:path";
+import sharp from "sharp";
+import type { PreparationOptions, PreparationEvent } from '../run-implemented-objects/index.ts';
+type CacheEvent = PreparationEvent | {phase: 'verified-cache-hit'; id: string; inputs: number; outputs: number}
+  | {phase: 'receipt-refused'; id: string; reason: string};
+export interface CachedPreparationOptions extends Omit<PreparationOptions, 'onEvent' | 'argumentsList'> {
+  force?: boolean; schedule?: typeof runPreparationObjects;
+  environment?: () => Promise<Record<string, unknown>>;
+  sharedFiles?: (root: string) => Promise<readonly string[]>;
+  onEvent?: (event: CacheEvent) => void;
+}
+
+import cwebpPath from "cwebp-bin";
+import { availableMemoryBytes, defaultPreparationConcurrency, preparationPeakBytes, runObjectCommand, runPreparationObjects } from "../run-implemented-objects/index.ts";
+import { PREPARATION_TRACE_VARIABLE, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from '../preparation/index.ts';
+import { inventoryPreparedAssets } from '@cssearth/objects/node';
+import { readPreparedObjects } from "@cssearth/objects/node";
+
+const require = createRequire(import.meta.url);
+/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
+const ROOT = resolve(dirname(require.resolve("@cssearth/bake/package.json")), "../..");
+/** The scene objects, read through the prepared registry of this checkout rather than the application's bound registry. */
+const SCENE_OBJECTS = () => readPreparedObjects(ROOT).sceneObjects;
+
+const sharedSteps = ["site/build/prepare/prepare-shell-titles.mts", "packages/bake/cli/prepare-scientific-charts.mts"];
+const cacheRoot = ".local/preparation";
+// This module always runs from the built, flat `dist/prepare-objects.js` (never from its nested `src/` location), so
+// the trace sits one level up, beside the other bake commands.
+const traceModule = new URL("../cli/preparation-trace.mts", import.meta.url).href;
+
+// Installed packages are read from node_modules, which receipts do not fingerprint; the manifest and lockfile stand for them.
+export async function sharedPreparationFiles(_root?: string) {
+  return ["package.json", "pnpm-lock.yaml"];
+}
+
+export async function preparationEnvironment() {
+  const dependencies: Record<string, string> = {};
+  for (const name of ["@layoutit/polycss", "sharp"]) dependencies[name] = sha256(await readFile(require.resolve(name)));
+  for (const file of Object.keys(require.cache).filter(file => file.endsWith(".node") && file.includes("sharp")).sort()) {
+    dependencies[basename(file)] = sha256(await readFile(file));
+  }
+  assert.equal(typeof cwebpPath, "string", "Pinned WebP encoder path is unavailable");
+  return { node: process.version, platform: process.platform, arch: process.arch,
+    sharp: sharp.versions, sharpConcurrency: sharp.concurrency(),
+    cwebpSha256: sha256(await readFile(requireString(cwebpPath))), dependencies };
+}
+
+/** The environment of a traced preparation: the trace directory, and the trace loaded into every Node process. */
+export function tracedPreparationEnvironment(traceDirectory: string, environment: Readonly<Record<string, string | undefined>> = process.env): Record<string, string | undefined> {
+  const flag = `--import=${traceModule}`, options = environment.NODE_OPTIONS ?? "";
+  return { ...environment, [PREPARATION_TRACE_VARIABLE]: traceDirectory,
+    NODE_OPTIONS: options.split(/\s+/u).includes(flag) ? options : `${options} ${flag}`.trim() };
+}
+
+/**
+ * Reuse a body's prepared files while everything its last preparation read is unchanged. Each preparation runs
+ * with packages/bake/cli/preparation-trace.mts, and its receipt lists exactly the files that run read and wrote.
+ */
+export async function runCachedPreparationObjects({ projectRoot = process.cwd(), force = false,
+  objectIds = SCENE_OBJECTS().map(({ id }) => id), concurrency = defaultPreparationConcurrency(),
+  runCommand = runObjectCommand, schedule = runPreparationObjects,
+  environment = preparationEnvironment, sharedFiles = sharedPreparationFiles,
+  onEvent = event => console.log(JSON.stringify(event)) }: CachedPreparationOptions = {}) {
+  assert.ok(isArray(objectIds) && new Set(objectIds).size === objectIds.length &&
+    objectIds.every(id => SCENE_OBJECTS().some(object => object.id === id)), "Preparation requires unique IDs from SCENE_OBJECTS");
+  assert.equal(typeof force, "boolean");
+  const root = resolve(projectRoot), shared = await sharedFiles(root), toolchain = await environment();
+  const pending: string[] = [], cached: string[] = [];
+  for (const id of objectIds) {
+    const receipt = !force && await readPreparationReceipt({ root, path: `${cacheRoot}/${id}.json` });
+    if (receipt && JSON.stringify(receipt.metadata?.toolchain) === JSON.stringify(toolchain)) {
+      cached.push(id);
+      onEvent({ phase: "verified-cache-hit", id, inputs: Object.keys(receipt.inputs).length, outputs: Object.keys(receipt.outputs).length });
+    } else pending.push(id);
+  }
+  const report = await schedule({ projectRoot: root, objectIds: pending, concurrency, onEvent,
+    memoryAvailableBytes: availableMemoryBytes, peakMemoryBytes: id => preparationPeakBytes(id, root),
+    runCommand: async request => {
+      const receiptPath = `${cacheRoot}/${request.id}.json`;
+      const traces = resolve(root, cacheRoot, "traces", `${request.id}-${randomUUID()}`);
+      await rm(resolve(root, receiptPath), { force: true });
+      await mkdir(traces, { recursive: true });
+      try {
+        const result = await runCommand({ ...request, env: tracedPreparationEnvironment(traces, request.env) });
+        if (result.exitCode === 0 && result.signal === null) {
+          const { refusal, changed } = await writePreparationReceipt({ root, path: receiptPath, objectId: request.id,
+            traces: await readPreparationTraces(traces), sharedFiles: shared, metadata: { toolchain } });
+          // Outputs made from inputs that changed mid-run are stale; fail so the run is repeated, as before receipts were traced.
+          assert.equal(changed.length, 0, `${request.id} preparation inputs changed during generation: ${changed.join(", ")}`);
+          if (refusal) onEvent({ phase: "receipt-refused", id: request.id, reason: refusal });
+        }
+        return result;
+      } finally {
+        await rm(traces, { recursive: true, force: true });
+      }
+    } });
+  return { ...report, cached, rebuilt: pending, force };
+}
+
+export async function prepareObjects({ projectRoot = process.cwd(), force = false,
+  objectIds = SCENE_OBJECTS().map(({ id }) => id), concurrency = defaultPreparationConcurrency() }: Pick<CachedPreparationOptions, "projectRoot" | "force" | "objectIds" | "concurrency"> = {}) {
+  const root = resolve(projectRoot), lock = resolve(root, cacheRoot, "running.lock");
+  await mkdir(resolve(root, cacheRoot), { recursive: true });
+  try { await writeFile(lock, JSON.stringify({ pid: process.pid, started: new Date().toISOString() }) + "\n", { flag: "wx" }); }
+  catch (error) {
+    if (hasErrorCode(error, "EEXIST")) throw new Error(`Another preparation owns ${lock}; do not run two writers in the same checkout.`, { cause: error });
+    throw error;
+  }
+  const start = performance.now();
+  try {
+    for (const script of sharedSteps) {
+      const result = await runObjectCommand({ command: process.execPath, argumentsList: [resolve(root, script)], cwd: root });
+      assert.equal(result.exitCode, 0, `${script} failed`); assert.equal(result.signal, null);
+    }
+    const report = await runCachedPreparationObjects({ projectRoot: root, force, objectIds, concurrency });
+    const navigation = await runObjectCommand({ command: process.execPath,
+      argumentsList: [resolve(root, "packages/bake/cli/prepare-navigation.mts"), ...objectIds], cwd: root });
+    assert.equal(navigation.exitCode, 0, "Navigation preparation failed"); assert.equal(navigation.signal, null);
+    // Inventory every prepared body's baked prepared/ files, even when `prepare:object-json` does not run afterward.
+    for (const id of objectIds) {
+      const objectDirectory = resolve(root, "src/objects", id);
+      if (await access(resolve(objectDirectory, "prepared")).then(() => true, () => false)) await inventoryPreparedAssets({ objectId: id, objectDirectory });
+    }
+    const totalReport = { ...report, totalElapsedMilliseconds: performance.now() - start };
+    await writeFile(resolve(root, cacheRoot, "latest-run.json"), JSON.stringify(totalReport, null, 2) + "\n");
+    console.log(`Prepared ${report.rebuilt.length} objects; verified ${report.cached.length} unchanged objects in ${(totalReport.totalElapsedMilliseconds / 1000).toFixed(1)}s.`);
+    return totalReport;
+  } finally { await rm(lock, { force: true }); }
+}

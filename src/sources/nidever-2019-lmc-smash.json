@@ -1,0 +1,74 @@
+{
+  "id": "nidever-2019-lmc-smash",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Exploring the Very Extended Low-surface-brightness Stellar Populations of the Large Magellanic Cloud with SMASH",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/aafaf7"
+    },
+    {
+      "type": "arxiv",
+      "value": "1805.02671"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1805.02671",
+      "label": "arXiv:1805.02671"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.3847/1538-4357/aafaf7",
+      "label": "ApJ 874, 118"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1805.02671",
+      "checkedOn": "2026-09-28",
+      "locator": "Abstract: very extended stellar populations around the LMC out to R ~ 21 degrees, or ~18.5 kpc at the LMC distance of 50 kpc"
+    }
+  ],
+  "creators": [
+    "David L. Nidever",
+    "Knut Olsen",
+    "Yumi Choi",
+    "Thomas J. L. de Boer",
+    "Robert D. Blum",
+    "Eric F. Bell",
+    "Dennis Zaritsky",
+    "Nicolas F. Martin",
+    "Abhijit Saha",
+    "Blair C. Conn",
+    "Gurtina Besla",
+    "Roeland P. van der Marel",
+    "Noelia E. D. Noel",
+    "Antonela Monachesi",
+    "Guy S. Stringfellow",
+    "Pol Massana",
+    "Maria-Rosa L. Cioni",
+    "Carme Gallart",
+    "Matteo Monelli",
+    "David Martinez-Delgado",
+    "Ricardo R. Munoz",
+    "Steven R. Majewski",
+    "A. Katherina Vivas",
+    "Alistair R. Walker",
+    "Catherine Kaleida",
+    "You-Hua Chu"
+  ],
+  "publisher": "ApJ 874, 118",
+  "publicationDate": "2019",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Nidever et al. (2019), ApJ 874, 118.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/1805.02671"
+    }
+  ]
+}

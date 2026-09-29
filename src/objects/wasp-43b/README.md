@@ -46,7 +46,7 @@ Dayside and nightside are brightness temperatures of the flux each hemisphere sh
 
 ## Evidence
 
-Run of 2026-09-16 (this version): `node tools/prepare/prepare-object.mts wasp-43b` prepared the package.
+Run of 2026-09-16 (this version): [`node tools/prepare/prepare-object.mts wasp-43b`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) prepared the package.
 
 - `eclipse-map.test.mts` turns the deposited map with this package's orbit and rotation ([phase-curve.ts](../../../packages/bake/src/objects/raster/eclipse-map/phase-curve.ts)) and fits the deposited white-light light curve, with a free scale and offset, over the 4,202 samples outside transit:
 

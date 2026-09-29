@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-1538-3873-128-970-124403",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Močnik et al. (2016): WASP-157b, a Transiting Hot Jupiter Observed with<i>K2</i>",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1603.05638"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/1538-3873/128/970/124403"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016PASP..128l4403M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128l4403M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/1538-3873/128/970/124403",
+      "label": "Publications of the Astronomical Society of the Pacific 128 124403"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016PASP..128l4403M",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Močnik et al. (2016), Publications of the Astronomical Society of the Pacific 128 124403",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016PASP..128l4403M"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of the Pacific 128 124403",
+  "creators": [
+    "T. Močnik",
+    "D. R. Anderson",
+    "D. J. A. Brown",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

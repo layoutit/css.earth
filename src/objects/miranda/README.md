@@ -24,7 +24,7 @@ These download sizes refer only to the polar sprites. Decoded dimensions are unc
 
 Lane change (this PR): the terrestrial solid-observation lane was retired for Miranda; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 3200 × 1600 (DPR 1) and 6400 × 3200 (DPR 2) — retired 6400 × 3200 atlas; native cube 6294 × 3147. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
 
-Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js miranda --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/miranda/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+Run of 2026-09-12 (this version): [`node tools/objects/dist/prepare-authored.js miranda --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/miranda/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
 A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, elevation, geology) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 2704).
 
@@ -44,7 +44,7 @@ set of Miranda that the archive holds, 12 frames in 4 sets, listed in
 the `vgr2.ura111` trajectory and the Ring-Moon Systems Node SEDR pointing C-kernel. Observer and Sun
 positions for the photometric correction are JPL Horizons vectors at each frame's exposure time.
 
-Placement. `node tools/objects/voyager-iss/author-color-frames.mts miranda --write` wrote
+Placement. `node tools/objects/voyager-iss/author-color-frames.mts miranda --write` ([then](https://github.com/layoutit/css.earth/blob/40d2789252/tools/objects/voyager-iss/author-color-frames.mts), now `packages/bake/authoring/voyager-iss/author-color-frames.mts`) wrote
 [the placement report](source/reference/voyager-color-placement.json). The SEDR pointing predicts the
 disc; the limb is fitted as one circle (robust levels from the frame's own histogram, a centroid seed
 when the whole disc sits in the frame far from the prediction) and the optical centre moves by the
@@ -58,7 +58,7 @@ Only pixels above the frame's ground floor (a tenth of the way from its sky leve
 `limb.groundFloor`) are projected: a disc cut by the frame edge sits on a band of negative values in
 the GEOMED border rows, which would otherwise become terrain.
 
-Oracle. `node tools/objects/voyager-iss/oracle.mts miranda --write` re-places every frame and correlates
+Oracle. `node tools/objects/voyager-iss/oracle.mts miranda --write` ([then](https://github.com/layoutit/css.earth/blob/40d2789252/tools/objects/voyager-iss/oracle.mts), now `packages/bake/authoring/voyager-iss/oracle.mts`) re-places every frame and correlates
 its high-passed detail against the mosaic in the frame plane
 ([report](source/reference/voyager-color-oracle.json)): 3 frames compared, mean
 correlation 0.36, mean residual 9.4 km. The mosaic is the same control the
@@ -84,7 +84,7 @@ V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole lens then take
 against the monochrome base (the median over every footprint boundary); the brightest 0.1 % of texels
 may clip. The prepared map is in [evidence](evidence/voyager-color/map.png).
 
-Tests. `node --test tools/objects/voyager-iss/*.test.mts tests/objects/terrestrial/photometric-observations.test.mts`
+Tests. `node --test tools/objects/voyager-iss/*.test.mts tests/objects/terrestrial/photometric-observations.test.mts` (the voyager-iss tests, [then](https://github.com/layoutit/css.earth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
 covers the limb fit, the tile writer's ground floor, and the composer's withheld, band-level,
 band-ratio and non-positive-sample rules on synthetic frames;
 `node --test tests/objects/unit/uranian-moons/voyager-color.test.mts` reads this moon's reports and
@@ -127,7 +127,7 @@ The archive stores page-sized XY coordinates under an incompatible Earth WGS84 o
 
 The lens includes 18 nonempty styled polygon categories with their original unit names and colors. Source Z coordinates are not heights. Structural linework and annotation are not turned into terrain or extra polygon units. Publisher-preview overlap evidence establishes only a partial layer order; combinations with no unique supported winner remain missing. Original polygon holes are preserved. The nearest-neighbor categorical conversion uses a 1440 × 720 display grid, with no interpolation between classes, relief or artificial boundary detail. Valid black material is distinct from no-data code 65535.
 
-Reproduce the categorical input with `python tools/objects/prepare-geologic-categories.py src/objects/miranda/source/preparation/geology-conversion.json`, using the dependency versions in the converter's header. The recipe pins the archive and registration, checks feature populations and archived CRS identity, and records ambiguous overlaps and the exact output hash in `categories.receipt.json`. Original release MD5 and acquisition SHA-256 receipts remain alongside the sources. Shared preparation then consumes the checked-in categorical input through the existing scientific GeoTIFF path. The runtime receives prepared images only.
+Reproduce the categorical input with `python packages/bake/src/objects/acquisition/prepare-geologic-categories.py src/objects/miranda/source/preparation/geology-conversion.json`, using the dependency versions in the converter's header. The recipe pins the archive and registration, checks feature populations and archived CRS identity, and records ambiguous overlaps and the exact output hash in `categories.receipt.json`. Original release MD5 and acquisition SHA-256 receipts remain alongside the sources. Shared preparation then consumes the checked-in categorical input through the existing scientific GeoTIFF path. The runtime receives prepared images only.
 
 The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 

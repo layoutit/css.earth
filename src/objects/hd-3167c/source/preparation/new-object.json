@@ -1,0 +1,31 @@
+{
+  "host": "hd-3167",
+  "planets": [
+    {
+      "id": "hd-3167c",
+      "name": "HD 3167 c",
+      "description": "Transiting planet of HD 3167 with a 29.8-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+        "credit": "Coy et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "COY_ET_AL_2026"
+      },
+      "text": {
+        "card": "HD 3167 c was found in 2016 by K2 as it crossed its star.",
+        "introduction": "It is one of 4 planets known around HD 3167. Its orbit and size follow Coy et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COY_ET_AL_2026): disc_year 2016, disc_facility K2, sy_pnum 4; pl_orbper 29.846511, pl_radj 0.26612589, pl_bmassj 0.03589987",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HD_3167",
+          "title": "HD 3167",
+          "revision": "1375293503",
+          "card": "The distance to HD 3167 can be determined from its annual parallax shift of 21.1363 mas as measured by the Gaia space observatory, yielding a range of 154 light years.",
+          "introduction": "It has a relatively high proper motion, traversing the celestial sphere at the rate of 0.204″ per year."
+        }
+      },
+      "order": 2973
+    }
+  ]
+}

@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.0029 Jupiter masses",
+        "value": "0.94 Earth masses",
         "source": {
           "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
           "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-101581c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-101581c/hd-101581c-system-orbits.svg",
+      "alt": "The orbits of HIP 56998's planets in this map from above, to scale, with HD 101581 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-101581c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...47K"
+      }
+    },
+    {
+      "id": "hd-101581c-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-101581c/hd-101581c-transit.svg",
+      "alt": "HD 101581 c crossing its star, as TESS recorded it: 3 sectors (90, 99, 100) of the SPOC pipeline's 2-minute light curves of TIC 397362481, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 168 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 285 minutes at these dates, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-101581c-tess-sector-90",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025071122000-s0090-0000000397362481-0287-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

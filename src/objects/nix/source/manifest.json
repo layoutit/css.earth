@@ -238,7 +238,7 @@
       "credit": "NASA / JHUAPL / SwRI; Simon Porter; cssEarth pointing refinement",
       "license": "MIT for authored preparation; original source notices retained.",
       "redistribution": "Retain original source attribution and the registration limitations.",
-      "acquisition": "node tools/objects/new-horizons/prepare-photographic-cameras.mts src/objects/nix/source/preparation/photography.json",
+      "acquisition": "node packages/bake/authoring/new-horizons/prepare-photographic-cameras.mts src/objects/nix/source/preparation/photography.json",
       "consumers": [
         "lorri-observation"
       ],
@@ -260,7 +260,7 @@
       "origin": "Project-authored source-bound camera registration recipe.",
       "credit": "cssEarth",
       "license": "MIT",
-      "acquisition": "Checked-in recipe; reproduced by tools/objects/new-horizons/prepare-photographic-cameras.mts",
+      "acquisition": "Checked-in recipe; reproduced by packages/bake/authoring/new-horizons/prepare-photographic-cameras.mts",
       "redistribution": "MIT recipe; preserve the original source credits and recorded limitations."
     },
     {

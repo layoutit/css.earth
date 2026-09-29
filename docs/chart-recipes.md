@@ -18,6 +18,8 @@ Axes, typography, grid, colors and spacing belong to the
 | `light-curve` | Time-varying brightness | CSV time, flux and optional mask columns. Unmasked samples are averaged in the declared time bins and expressed in ppm relative to their median. Named events have source-backed times. | [TRAPPIST-1](../src/objects/trappist-1/source/content/charts.json) |
 | `measured-spectrum` | Published points, passbands and optional model comparisons | Records or numerical columns with wavelength bins and symmetric/asymmetric errors. `points` preserves overlapping observations and negative estimates. `band` shades the whole passband between published bounds, without implying a sampled spectrum. An optional deposited model retains gaps. | [HD 189733b: Hubble, CHEOPS and Webb](../src/objects/hd-189733b/source/content/charts.json) |
 | `retrieved-profile` | Atmospheric retrieval comparisons | One to three native pressure/median/lower/upper tables. Published absolute credible bounds form the bands; the observed pressure range is marked separately. These are model inferences. | [WASP-18b](../src/objects/wasp-18b/source/content/charts.json), [field guide](retrieved-profile-charts.md) |
+| `system-orbits` | A star's planets from above | The hosted-orbit records of every planet of `system` (@cssearth/astronomy): a/R* times the star's radius, eccentricity and argument of periastron, sampled in the orbital plane and turned so the direction to Earth points down, where a transiting planet crosses. `highlight` names the planet drawn brighter. The star is a marker, not to scale; inclination is not shown. | Every generated exoplanet (`new-object --charts`), e.g. [HD 3167 c](../src/objects/hd-3167c/source/content/charts.json) |
+| `folded-transit` | A planet's transit as a telescope recorded it | The host's TESS SPOC 2-minute light-curve files (`sources`, pinned in the manifest): good-quality PDCSAP flux, each transit divided by a straight line fitted to the light 0.6 to 1.5 transit durations either side (`durationHours`, the archive's) and folded onto the planet's hosted orbit (`foldTransits`, objects/raster), then averaged in `binMinutes` bins with each bin's standard error, in ppm. The generator draws it only when the dip, the middle 60% of the transit below the baseline, is at least 5 times its standard error; otherwise its report says TESS does not resolve the transit. | Generated exoplanets with 2-minute TESS data (`new-object --charts`), checked on HD 189733 b's three sectors |
 
 ## Shared presentation
 
@@ -49,6 +51,10 @@ The SVG width is 306 units. Height grows for the legend and notes; full content
 preparation derives image dimensions from the generated SVG. The content
 recipe also records dimensions for consumers of the authored document.
 Keep its alt text, source reference and chart title meaningful.
+
+Generated exoplanets get their charts from `new-object` (`tools/objects/new-object/planet-charts.mts`): HD 3167 c's orbits, HAT-P-11 b's transit folded from three TESS sectors (landing on 0 hours once its orbit took the ephemeris that predicts today) and its transmission spectrum from Fraine et al. (2014), as the NASA Exoplanet Archive lists it.
+
+![Generated charts: HD 3167 system orbits, HAT-P-11 b transit from TESS, HAT-P-11 b transmission spectrum](images/generated-exoplanet-charts.webp)
 
 ## Add or reuse one
 

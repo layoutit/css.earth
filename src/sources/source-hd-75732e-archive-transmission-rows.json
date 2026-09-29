@@ -1,0 +1,35 @@
+{
+  "id": "source-hd-75732e-archive-transmission-rows",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "55 Cnc e · hd 75732e archive transmission rows",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cplntransdep%2Cplntransdeperr1%2Cplntransdeperr2%2Cplntransdeplim%2Cfacility%2Cinstrument%2Cplntranreflink+from+transitspec+where+plntname%3D%2755+Cnc+e%27+order+by+centralwavelng&format=csv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hd-75732e/source/manifest.json",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA Exoplanet Archive, transitspec table",
+      "scope": "The hd 75732e archive transmission rows input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

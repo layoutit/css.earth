@@ -4,7 +4,7 @@ import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { parseVolumeRecipe } from '../volume/index.ts';
 import { sourceBytes, containedPath, prepareVolumeSlices } from '../volume/node/index.ts';
-import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
+import { compileCssVolume } from '../volume-leaves/index.ts';
 import { acquireVolumeSource } from './acquisition.ts';
 import { prepareFixedDiscVolume } from './fixed-disc.ts';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.ts';
@@ -27,15 +27,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   await mkdir(outputDirectory, { recursive: true });
   const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory, recipe });
   let data = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, slices, recipe });
-  // One flat image of the whole cloud per viewing direction. Without them a distant volume has nothing to hand off
-  // to, so all of its slices stay mounted and composited: the galaxy alone keeps 1,368 elements in every page.
-  data = await prepareVolumeImpostors({ volume: data, brightness: { overall: 1, x: 1, y: 1, z: 1 }, prefix: 'impostors',
-    readResource: path => readFile(resolve(outputDirectory, path)),
-    writeResource: async (path, bytes) => {
-      const target = resolve(outputDirectory, path);
-      await mkdir(dirname(target), { recursive: true });
-      await writeFile(target, bytes);
-    } });
+  // A density volume has no whole-cloud impostor views: the same slices draw it at every distance.
   data = await prepareFixedDiscVolume({ volume: data, slices, recipe, outputDirectory });
   if (recipe.sky) {
     const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(sourceDirectory, recipe.sky)).toString('utf8')));
@@ -57,7 +49,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
       url: relative(objectDirectory, outputPath).split('\\').join('/') } }, null, 2) + '\n');
   }
   await retireVolumeTextures(outputDirectory, [...previousTextures, ...slices.quads.map(quad => quad.texturePath)],
-    [...data.stacks.flatMap(stack => stack.leaves), ...data.detailPlanes ?? []].map(leaf => leaf.texturePath));
+    data.stacks.flatMap(stack => stack.leaves).map(leaf => leaf.texturePath));
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
     await options.inventory!({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stx3246",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Fouqué et al. (2018): SPIRou Input Catalogue: global properties of 440 M dwarfs observed with ESPaDOnS at CFHT",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1712.04490"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stx3246"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018MNRAS.475.1960F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.475.1960F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stx3246",
+      "label": "Monthly Notices of the Royal Astronomical Society 475 1960-1986"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.475.1960F",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fouqué et al. (2018), Monthly Notices of the Royal Astronomical Society 475 1960-1986",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.475.1960F"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 475 1960-1986",
+  "creators": [
+    "Pascal Fouqué",
+    "Claire Moutou",
+    "Lison Malo",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-0004-637x-822-2-86",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Morton et al. (2016): FALSE POSITIVE PROBABILITIES FOR ALL KEPLER OBJECTS OF INTEREST: 1284 NEWLY VALIDATED PLANETS AND 428 LIKELY FALSE POSITIVES",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1605.02825"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/0004-637X/822/2/86"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016ApJ...822...86M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/0004-637X/822/2/86",
+      "label": "The Astrophysical Journal 822 86"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Morton et al. (2016), The Astrophysical Journal 822 86",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 822 86",
+  "creators": [
+    "Timothy D. Morton",
+    "Stephen T. Bryson",
+    "Jeffrey L. Coughlin",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

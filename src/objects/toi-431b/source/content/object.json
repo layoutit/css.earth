@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.0097 Jupiter masses",
+        "value": "3.1 Earth masses",
         "source": {
           "catalogueId": "publication-2021mnras-507-2782o",
           "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "toi-431b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-431b/toi-431b-system-orbits.svg",
+      "alt": "The orbits of TOI-431's planets in this map from above, to scale, with TOI-431 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-431b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O"
+      }
+    },
+    {
+      "id": "toi-431b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-431b/toi-431b-transit.svg",
+      "alt": "TOI-431 b crossing its star, as TESS recorded it: 3 sectors (6, 32, 98) of the SPOC pipeline's 2-minute light curves of TIC 31374837, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 16 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 23 minutes at these dates, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-431b-tess-sector-6",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2018349182500-s0006-0000000031374837-0126-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

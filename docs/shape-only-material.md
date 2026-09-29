@@ -97,8 +97,8 @@ its encoded default and Shadows-on lighting are checked against the general text
 To update only the default lighting in an already-neutral checkout:
 
 ```sh
-node tools/objects/refresh-shape-lighting.mts stage --all
-node tools/objects/refresh-shape-lighting.mts publish --all
+node packages/bake/cli/refresh-shape-lighting.mts stage --all
+node packages/bake/cli/refresh-shape-lighting.mts publish --all
 node site/build/prepare/prepare-facilities.mts
 ```
 
@@ -113,7 +113,7 @@ the original asset hashes and the replacements. Individual body ids may replace
 For a complete material refresh, run:
 
 ```sh
-node tools/objects/refresh-shape-materials.mts --all --resume
+node packages/bake/cli/refresh-shape-materials.mts --all --resume
 node site/build/prepare/prepare-facilities.mts
 ```
 

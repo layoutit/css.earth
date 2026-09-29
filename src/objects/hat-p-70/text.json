@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-70",
+  "card": {
+    "text": "HAT-P-70 b crosses HAT-P-70 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab36b5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract",
+        "label": "Zhou et al. (2019), The Astronomical Journal 158 141",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZHOU_ET_AL__2019): st_teff 8450, st_rad 1.858, st_mass 1.89"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Zhou et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab36b5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract",
+        "label": "Zhou et al. (2019), The Astronomical Journal 158 141",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZHOU_ET_AL__2019): st_teff 8450, st_rad 1.858, st_mass 1.89"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

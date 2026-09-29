@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hr-858b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hr-858b-orbits",
+      "title": "HR 858 b: orbits around HR 858",
+      "output": "hr-858b-system-orbits.svg",
+      "system": "hr-858",
+      "highlight": "hr-858b",
+      "description": "The orbits of HR 858's planets in this map from above, to scale, with HR 858 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.58529 d"
+      }
+    }
+  ]
+}

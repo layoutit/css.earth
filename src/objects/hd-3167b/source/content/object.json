@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-3167b",
+  "displayName": "HD 3167 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.6 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C",
+          "label": "Coy et al. 2026",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "23 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C",
+          "label": "Coy et al. 2026",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.8 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C",
+          "label": "Coy et al. 2026",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 3167; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-3167b-lens-shape.webp",
+        "surface": "hd-3167b-surface-shape@2x.webp",
+        "poles": "hd-3167b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-3167b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 3167 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-3167's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hd-3167b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-3167b/hd-3167b-system-orbits.svg",
+      "alt": "The orbits of HD 3167's planets in this map from above, to scale, with HD 3167 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-3167b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C"
+      }
+    },
+    {
+      "id": "hd-3167b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-3167b/hd-3167b-transit.svg",
+      "alt": "HD 3167 b crossing its star, as TESS recorded it: 1 sector (70) of the SPOC pipeline's 2-minute light curves of TIC 318707987, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-3167b-tess-sector-70",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023263165758-s0070-0000000318707987-0265-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Coy et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+      "credit": "Coy et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-3167b.json",
+      "credit": "Radius from Coy et al. 2026 (2026ApJ..1005L..77C), via the NASA Exoplanet Archive; mass from Coy et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026ApJ..1005L..77C), via the NASA Exoplanet Archive; orbit from Coy et al. 2026 (2026ApJ..1005L..77C), via the NASA Exoplanet Archive"
+    }
+  }
+}

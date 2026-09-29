@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-1795",
+  "displayName": "Kepler-1795",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.69 solar radii",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-kepler-koi-docs",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "label": "exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "439 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-kepler-1795",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "kepler-1795-lens-color.webp",
+        "surface": "kepler-1795-surface-color@2x.webp",
+        "poles": "kepler-1795-poles-color@2x.webp",
+        "source": {
+          "id": "kepler-1795-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,500 K and log g 4.65 (u1 0.774, u2 0.021): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Q1-Q17 DR25 KOI Table",
+      "href": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+      "credit": "Q1-Q17 DR25 KOI Table"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-1795.json",
+      "credit": "Q1-Q17 DR25 KOI Table, the stellar radius of the default parameter set of Kepler-1795 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.025 Jupiter masses",
+        "value": "8.0 Earth masses",
         "source": {
           "catalogueId": "doi-10-1051-0004-6361-201833154",
           "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B",
@@ -94,7 +94,41 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-75732e-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-75732e/hd-75732e-system-orbits.svg",
+      "alt": "The orbits of 55 Cnc's planets in this map from above, to scale, with 55 Cnc e highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-75732e-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B"
+      }
+    },
+    {
+      "id": "hd-75732e-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/hd-75732e/hd-75732e-transmission.svg",
+      "alt": "55 Cnc e's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 25 measured bins from Tsiaras et al. 2016 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "hd-75732e-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...820...99T/abstract"
+      }
+    },
+    {
+      "id": "hd-75732e-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-75732e/hd-75732e-transit.svg",
+      "alt": "55 Cnc e crossing its star, as TESS recorded it: 3 sectors (44, 46, 72) of the SPOC pipeline's 2-minute light curves of TIC 332064670, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 6-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-75732e-tess-sector-44",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021284114741-s0044-0000000332064670-0215-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

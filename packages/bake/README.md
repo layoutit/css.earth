@@ -1,7 +1,7 @@
 # @cssearth/bake
 
 The repository's build-time preparation code. The preparation tools (`tools/objects`,
-`tools/prepare`) and the nebula lab import it to turn source
+`site/build/`) and the nebula lab import it to turn source
 records into prepared delivery. The application never imports it: the runtime reads only what the bake wrote.
 
 Each topic is one subpath entry. A topic imports another only when it sits on a lower layer (the raster lane uses the
@@ -29,7 +29,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/raster` | raster recipes and their validation, surface maps, pages and poles, lighting banks and limb overlays, atmospheres and halos, the prepared atmosphere frame and composite, interiors, missing-coverage painting, the lossy WebP lane | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/scene` | geometry profiles, projected surface leaves and their raster presentation, seam outsets, polar caps, ring wedges, cutaways, atmospheric materials, solid-body surfaces, the solid scene's perspective camera | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/presentation` | the retained node tree, projective layouts and leaf boxes, offline CSSOM reads, activation groups, the row-bank cutaway, composite and emissive presentations, the prepared-presentation contract and schemas, the cubic-sky and directional-Sun contracts and preparers, material-track source planning | Node only (`node:*`, Playwright) |
-| `@cssearth/bake/volume-leaves` | the CSS volume compilers: slice stacks and detail planes as retained PolyCSS leaves, leaf bounds, depth order, volume impostors | Node only (`node:*`, PolyCSS) |
+| `@cssearth/bake/volume-leaves` | the CSS volume compilers: slice stacks as retained PolyCSS leaves, leaf bounds, depth order, volume impostors | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/stars` | point-field recipes, catalogue sources, palette, magnitude hierarchy and precision, point atlas and photometry, diffuse sky, the encoded point bank | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/shell` | surface-shell recipes, meshes and atlas, and the CSS shell compiler | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/sky` | cubic sky recipes, the EXR source and its acquisition, baked faces with near-star sprites, the CSS sky compiler | Node only (`node:*`, `sharp`) |

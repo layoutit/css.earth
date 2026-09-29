@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { answerParent } from '@cssearth/core/node';
-import { prepareObjects } from '../../prepare/prepare-object.mts';
+import { prepareObjects } from '@cssearth/bake/prepare-object';
 import { liveArchive } from './archives.mts';
 import { writeDrafts } from './drafts.mts';
 import { formatNewObject, runNewObject } from './generate.mts';

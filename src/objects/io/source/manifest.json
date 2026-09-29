@@ -1005,7 +1005,7 @@
       "origin": "Repository-authored reduction recipe selecting 90 Juno JIRAM RDR frames on six visits by volume and product id, with matching raw EDR detector checks on the 31 close-pass frames.",
       "credit": "Juno JIRAM team (A. Adriani, R. Noschese, INAF-IAPS) via the NASA PDS Atmospheres Node; recipe by cssEarth contributors",
       "license": "Public NASA mission data; repository-authored recipe",
-      "acquisition": "Native products and geometry kernels are named by the recipe. Run node tools/objects/juno/jiram-mosaic.mts src/objects/io/source/science/jiram/recipe.json --frames output/jiram/frames --fetch. Labels validate product identity, layout and matched EDR exposures; the measured receipt records byte identities.",
+      "acquisition": "Native products and geometry kernels are named by the recipe. Run node packages/bake/authoring/juno/jiram-mosaic.mts src/objects/io/source/science/jiram/recipe.json --frames output/jiram/frames --fetch. Labels validate product identity, layout and matched EDR exposures; the measured receipt records byte identities.",
       "redistribution": "Recipe, labels and measured receipt are tracked; original frames and generated map bytes are restored from the archive or source cache.",
       "consumers": [
         "volcanic-heat"
@@ -1030,7 +1030,7 @@
       "licenseEvidence": [
         "https://doi.org/10.3847/PSJ/adbae3"
       ],
-      "acquisition": "Run node tools/objects/juno/jiram-registered-mosaic.mts src/objects/io/source/science/jiram/perry-recipe.json --inputs output/io-perry/inputs --fetch. curl reads the release ZIP directory and verifies each selected member CRC; 7z extracts M-band FITS. PDS indexes supply exact exposure times. The recipe screens all published M-band frames in its orbit archives.",
+      "acquisition": "Run node packages/bake/authoring/juno/jiram-registered-mosaic.mts src/objects/io/source/science/jiram/perry-recipe.json --inputs output/io-perry/inputs --fetch. curl reads the release ZIP directory and verifies each selected member CRC; 7z extracts M-band FITS. PDS indexes supply exact exposure times. The recipe screens all published M-band frames in its orbit archives.",
       "redistribution": "The generated float map is restored from source-cache; source FITS remain in the ignored input directory. Recipe, detached label and measured receipt are tracked.",
       "consumers": [
         "volcanic-heat"
@@ -1122,12 +1122,12 @@
         "volcanic-heat"
       ],
       "recipe": {
-        "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+        "generator": "packages/bake/authoring/juno/jiram-registered-mosaic.mts",
         "inputs": [
           "io-jiram-perry-recipe"
         ]
       },
-      "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+      "generator": "packages/bake/authoring/juno/jiram-registered-mosaic.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1149,12 +1149,12 @@
         "volcanic-heat"
       ],
       "recipe": {
-        "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+        "generator": "packages/bake/authoring/juno/jiram-registered-mosaic.mts",
         "inputs": [
           "io-jiram-perry-recipe"
         ]
       },
-      "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+      "generator": "packages/bake/authoring/juno/jiram-registered-mosaic.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1176,12 +1176,12 @@
         "volcanic-heat"
       ],
       "recipe": {
-        "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+        "generator": "packages/bake/authoring/juno/jiram-registered-mosaic.mts",
         "inputs": [
           "io-jiram-perry-recipe"
         ]
       },
-      "generator": "tools/objects/juno/jiram-registered-mosaic.mts",
+      "generator": "packages/bake/authoring/juno/jiram-registered-mosaic.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1203,19 +1203,19 @@
         "historical-evidence"
       ],
       "recipe": {
-        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "generator": "packages/bake/authoring/juno/jiram-mosaic.mts",
         "inputs": [
           "io-jiram-m-night-recipe"
         ]
       },
-      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "generator": "packages/bake/authoring/juno/jiram-mosaic.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "pds-juno-jiram-rdr-v1",
             "role": "material",
-            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
+            "evidence": "Reduced by packages/bake/authoring/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
           }
         ]
       }
@@ -1230,19 +1230,19 @@
         "historical-evidence"
       ],
       "recipe": {
-        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "generator": "packages/bake/authoring/juno/jiram-mosaic.mts",
         "inputs": [
           "io-jiram-m-night-recipe"
         ]
       },
-      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "generator": "packages/bake/authoring/juno/jiram-mosaic.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "pds-juno-jiram-rdr-v1",
             "role": "material",
-            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
+            "evidence": "Reduced by packages/bake/authoring/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
           }
         ]
       }
@@ -1257,19 +1257,19 @@
         "historical-evidence"
       ],
       "recipe": {
-        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "generator": "packages/bake/authoring/juno/jiram-mosaic.mts",
         "inputs": [
           "io-jiram-m-night-recipe"
         ]
       },
-      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "generator": "packages/bake/authoring/juno/jiram-mosaic.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "pds-juno-jiram-rdr-v1",
             "role": "material",
-            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
+            "evidence": "Reduced by packages/bake/authoring/juno/jiram-mosaic.mts from the JIRAM frames selected in science/jiram/recipe.json."
           }
         ]
       }

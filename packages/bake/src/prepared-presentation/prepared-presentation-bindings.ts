@@ -83,6 +83,9 @@ export async function preparePresentationBindings<T extends PresentationSource>(
         ...definition.variants.flatMap(variant => variant.writes.filter(write => write.kind === 'style' &&
           ['visibility', 'display', 'transform', 'transformOrigin', 'transform-origin'].includes(write.name)).map(write => write.target)),
       ]);
+      // The shell establishes empty WebKit 3D parents with an identity translate.
+      // It changes layer residency, but contributes no offset to these matrices.
+      const identityTranslate = (value: string): boolean => value === 'none' || value.split(/\s+/u).every(part => /^0(?:px|%)?$/u.test(part));
       function determinant(matrix: DOMMatrix) {
         const values = [0, 1, 2, 3].map(row => [0, 1, 2, 3].map(col => matrix.toFloat64Array()[col * 4 + row]));
         let result = 1;
@@ -109,7 +112,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
           // Nonzero layout offsets, individual transforms and nested perspective
           // need their own prepared projection contract. Never guess a plane.
           if (![style.left, style.top].every(v => v === 'auto' || parseFloat(v) === 0) ||
-              style.translate !== 'none' || style.rotate !== 'none' || style.scale !== 'none' || style.perspective !== 'none') return null;
+              !identityTranslate(style.translate) || style.rotate !== 'none' || style.scale !== 'none' || style.perspective !== 'none') return null;
           const origin = style.transformOrigin.split(' ').map(parseFloat);
           const transform = new DOMMatrix(style.transform === 'none' ? undefined : style.transform);
           matrix = new DOMMatrix().translate(origin[0], origin[1], origin[2] ?? 0)
@@ -144,7 +147,8 @@ export async function preparePresentationBindings<T extends PresentationSource>(
           if (cursor < 0 || dynamic.has(cursor)) return rejectDepth('dynamic ancestry');
           chain.add(cursor);
           const style = getComputedStyle(nodes[cursor]);
-          if (style.opacity !== '1' || style.perspective !== 'none' || style.translate !== 'none' || style.rotate !== 'none' || style.scale !== 'none') return rejectDepth('unsupported ancestor projection');
+          if (style.opacity !== '1' || style.perspective !== 'none' || !identityTranslate(style.translate) ||
+              style.rotate !== 'none' || style.scale !== 'none') return rejectDepth('unsupported ancestor projection');
           const origin = style.transformOrigin.split(' ').map(parseFloat);
           matrix = new DOMMatrix().translate(origin[0], origin[1], origin[2] ?? 0)
             .multiply(new DOMMatrix(style.transform === 'none' ? undefined : style.transform))
@@ -200,7 +204,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
           if (cursor < 0) return null;
           const style = getComputedStyle(nodes[cursor]);
           if (![style.left, style.top].every(value => value === 'auto' || parseFloat(value) === 0) ||
-              style.translate !== 'none' || style.rotate !== 'none' || style.scale !== 'none' || style.perspective !== 'none') return null;
+              !identityTranslate(style.translate) || style.rotate !== 'none' || style.scale !== 'none' || style.perspective !== 'none') return null;
           const origin = style.transformOrigin.split(' ').map(parseFloat);
           result = new DOMMatrix().translate(origin[0], origin[1], origin[2] ?? 0)
             .multiply(new DOMMatrix(style.transform === 'none' ? undefined : style.transform))

@@ -2,7 +2,7 @@
   "id": "hr-858",
   "name": "HR 858",
   "system": "HR 858 system",
-  "description": "HR 858 is a 6,354 K star 32 parsecs away with 3 known transiting planets.",
+  "description": "HR 858 is a star of 6,354 K, 32 parsecs away, with 3 known transiting planets.",
   "target": "HR 858",
   "paper": {
     "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract",
@@ -29,9 +29,9 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "HR 858 is a 6,354 K star 32 parsecs away with 3 known transiting planets.",
-    "introduction": "HR 858 is a star of 6,354 K 32 parsecs away. Its planets b, d cross it, which is how they were found and sized.",
-    "locator": "NASA Exoplanet Archive ps table, default parameter set of HR 858 c (st_refname BONFANTI_ET_AL__2025): st_teff 6354, st_rad 1.258, st_mass 1.204"
+    "card": "3 planets cross HR 858 as seen from Earth: b, c, d.",
+    "introduction": "Its radius and temperature follow Bonfanti et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BONFANTI_ET_AL__2025): st_teff 6354, st_rad 1.258, st_mass 1.204"
   },
   "notes": [
     "HR 858 c: no archive row measures its mass (only an upper limit), and the archive computes none"

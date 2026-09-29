@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hat-p-11b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hat-p-11b-orbits",
+      "title": "HAT-P-11 b: orbits around HAT-P-11",
+      "output": "hat-p-11b-system-orbits.svg",
+      "system": "hat-p-11",
+      "highlight": "hat-p-11b",
+      "description": "The orbits of HAT-P-11's planets in this map from above, to scale, with HAT-P-11 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Basilicata et al. 2024 (2024A&A...686A.127B), via the NASA Exoplanet Archive ps table (pl_refname BASILICATA_ET_AL__2024): P 4.887802443 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "hat-p-11b-transmission",
+      "title": "HAT-P-11 b: transmission spectrum",
+      "description": "HAT-P-11 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 36 measured bins from Fraine et al. 2014 (The Kepler Mission, Kepler CCD camera; Hubble Space Telescope satellite, Wide Field Camera 3; Spitzer Space Telescope satellite, Infrared Array Camera (IRAC)), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "hat-p-11b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2014Natur.513..526F/abstract",
+        "table": "transitspec",
+        "bins": 36
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 36
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0,
+        "maximum": 6,
+        "ticks": [
+          0,
+          2,
+          4,
+          6
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 0.32,
+        "maximum": 0.38,
+        "ticks": [
+          0.32,
+          0.34,
+          0.36,
+          0.38
+        ]
+      },
+      "notes": [
+        "Fraine et al. 2014",
+        "The Kepler Mission, Kepler CCD camera; Hubble Space…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hat-p-11b-transit",
+      "title": "HAT-P-11 b: its transit",
+      "description": "HAT-P-11 b crossing its star, as TESS recorded it: 3 sectors (76, 82, 83) of the SPOC pipeline's 2-minute light curves of TIC 28230919, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "output": "hat-p-11b-transit.svg",
+      "metadata": {
+        "tic": "TIC 28230919",
+        "sectors": [
+          76,
+          82,
+          83
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hat-p-11b",
+      "sources": [
+        "photometry/tess/tess2024058030222-s0076-0000000028230919-0271-s_lc.fits",
+        "photometry/tess/tess2024223182411-s0082-0000000028230919-0278-s_lc.fits",
+        "photometry/tess/tess2024249191853-s0083-0000000028230919-0280-s_lc.fits"
+      ],
+      "durationHours": 2.35562,
+      "binMinutes": 9,
+      "notes": [
+        "TESS 2-min SPOC · sectors 76, 82, 83",
+        "Folded on the app's orbit; 9-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

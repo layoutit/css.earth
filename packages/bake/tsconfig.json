@@ -49,6 +49,13 @@
     "src/facility-renders",
     "src/asset-publication",
     "src/surface-previews",
-    "src/preparation"
+    "src/preparation",
+    "src/run-implemented-objects",
+    "src/prepare-objects",
+    "src/prepare-object",
+    "src/refresh-shape-lighting",
+    "src/refresh-shape-materials",
+    "src/refresh-surface-observations",
+    "src/refresh-terrain-photographs"
   ]
 }

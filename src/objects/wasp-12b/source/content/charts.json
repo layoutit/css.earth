@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-12b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-12b-orbits",
+      "title": "WASP-12 b: orbits around WASP-12",
+      "output": "wasp-12b-system-orbits.svg",
+      "system": "wasp-12",
+      "highlight": "wasp-12b",
+      "description": "The orbits of WASP-12's planets in this map from above, to scale, with WASP-12 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 1.09141866569 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "wasp-12b-transmission",
+      "title": "WASP-12 b: transmission spectrum",
+      "description": "WASP-12 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 29 measured bins from Stevenson et al. 2014 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors. The archive holds 2 other papers for this planet; this chart draws the one with the most bins.",
+      "output": "wasp-12b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2014AJ....147..161S/abstract",
+        "table": "transitspec",
+        "bins": 29
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 29
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0.5,
+        "maximum": 2,
+        "ticks": [
+          0.5,
+          1,
+          1.5,
+          2
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 1.3,
+        "maximum": 1.6,
+        "ticks": [
+          1.3,
+          1.4,
+          1.5,
+          1.6
+        ]
+      },
+      "notes": [
+        "Stevenson et al. 2014",
+        "Hubble Space Telescope satellite, Wide Field Camera…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "wasp-12b-emission",
+      "title": "WASP-12 b: dayside emission",
+      "description": "WASP-12 b's dayside emission: the light lost as the planet passes behind its star: its day side's own glow and reflected light. 20 measured bins from Crossfield et al. 2012 (Infrared Telescope Facility, SpeX), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors. The archive holds 1 other paper for this planet; this chart draws the one with the most bins.",
+      "output": "wasp-12b-emission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2012ApJ...746...46C/abstract",
+        "table": "emissionspec",
+        "bins": 20
+      },
+      "source": {
+        "path": "science/archive-spectra/emission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 20
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1,
+        "maximum": 2.5,
+        "ticks": [
+          1,
+          1.5,
+          2,
+          2.5
+        ]
+      },
+      "y": {
+        "label": "Eclipse depth (%)",
+        "minimum": -0.25,
+        "maximum": 0.75,
+        "ticks": [
+          -0.25,
+          0,
+          0.25,
+          0.5,
+          0.75
+        ]
+      },
+      "notes": [
+        "Crossfield et al. 2012",
+        "Infrared Telescope Facility, SpeX",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-12b-transit",
+      "title": "WASP-12 b: its transit",
+      "description": "WASP-12 b crossing its star, as TESS recorded it: 3 sectors (45, 71, 72) of the SPOC pipeline's 2-minute light curves of TIC 86396382, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-12b-transit.svg",
+      "metadata": {
+        "tic": "TIC 86396382",
+        "sectors": [
+          45,
+          71,
+          72
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-12b",
+      "sources": [
+        "photometry/tess/tess2021310001228-s0045-0000000086396382-0216-s_lc.fits",
+        "photometry/tess/tess2023289093419-s0071-0000000086396382-0266-s_lc.fits",
+        "photometry/tess/tess2023315124025-s0072-0000000086396382-0267-s_lc.fits"
+      ],
+      "durationHours": 3.001,
+      "binMinutes": 12,
+      "notes": [
+        "TESS 2-min SPOC · sectors 45, 71, 72",
+        "Folded on the app's orbit; 12-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

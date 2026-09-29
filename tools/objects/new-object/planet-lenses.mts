@@ -205,7 +205,7 @@ const RELENS_FILES = ['object.json', 'text.json', 'source/preparation/raster.jso
 
 /** Give planets already in the tree their colour from what is measured: `thermal` reads the archive's emission table and
  * installs the "Thermal glow" lens where a dayside temperature is measured; `host-light` lights a neutral gray with the
- * host's colour. Returns one line per planet; nothing is baked here (tools/prepare/prepare-object.mts does that). */
+ * host's colour. Returns one line per planet; nothing is baked here (packages/bake/cli/prepare-object.mts does that). */
 export async function relensExisting(root: string, ids: readonly string[], mode: 'thermal' | 'host-light' | 'photometry' | 'phase-curve', archive: Archive, progress = (_line: string) => {}, photometry: ReadonlyMap<string, PhotometrySpec> = new Map(), phaseCurves: ReadonlyMap<string, readonly PhaseCurveEntry[]> = new Map()) {
   const { mkdir, writeFile } = await import('node:fs/promises');
   const lines: string[] = [];
