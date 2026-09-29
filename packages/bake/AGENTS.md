@@ -282,7 +282,7 @@ its validators accept); the renderer never imports the bake.
   `objects/raster/observed/observed-geotiff.test.ts`); Vitest skips `src/objects/**/*.test.ts`. `pnpm test:bake-objects`
   (`.github/scripts/checks/test-bake-objects.mts`) runs every test that imports an object entry, in the contract lint job.
 - `src/nebula/` is published as `@cssearth/bake/nebula` (Node only): the nebula delivery bake (delivery recipes and
-  identities, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,
+  kinds, compact density, finite-emission and compiler deliveries, catalogue fields, star sprites, frames,
   render-element budgets). It imports `volume`, `volume-leaves`, `density` and `stars`. `packages/bake/cli/prepare-nebulae.mts` is its
   entry and records the prepared closure with the platform's inventory.
 - The star, shell and density-volume bakes write into an object's own `prepared/` directory only with the host's
@@ -304,10 +304,6 @@ Preserve arithmetic order, finite support, frames, units, spectral semantics, mi
 compatibility. A relocation must not change accepted pixels or relax a validator. Material colour does not define
 density: keep component-bound 3D material distinct from historical image-ray samplers, and never add an XY fallback to
 the finite-emission compiler. Change an output only on purpose, together with every test and accepted bake that pins it.
-
-The `nebulaImplementation` inventory in `package.json` lists the sources that nebula delivery identities hash. Keep it
-covering every topic directory whose code a delivery runs (`tests/nebula/application/package-identity.test.ts` checks it
-against the delivery's import closure); `src/nebula/objects.ts` names only owners outside the package.
 
 ## Shared package contract
 

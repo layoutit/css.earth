@@ -50,7 +50,7 @@ The local `labs/nebula/nebula_lab_refactor.md` plan records remaining migration 
 
 The inbound guard traces imports through local wrappers, resolves static imports, re-exports, module loaders and TypeScript aliases, and rejects direct lab and `packages/bake` source paths. It also rejects statically resolvable filesystem reads into the lab. Computed module loading is rejected in compact application preparation and nebula-bearing loaders. It is not a general proof about arbitrary opaque plugin loaders.
 
-Application bake fingerprints resolve package-owned implementation inventories through public package manifests (`nebulaImplementation` in `packages/bake/package.json`). Moving a package within the checkout does not change identity; changing its implementation or its package name does. Deliveries baked after the volume code became `@cssearth/bake` record new implementation identities for unchanged prepared bytes. The host does not assume the package's location.
+Application bakes record no fingerprint of the code that ran them; git identifies it. The host resolves packages through their public manifests and does not assume their location.
 
 Current manifests and presentation recipes use object-owned source evidence. Historical receipts retain their original paths, revisions and hashes; source catalogue statements link to those pinned revisions. Historical metadata does not require the current lab files to exist.
 

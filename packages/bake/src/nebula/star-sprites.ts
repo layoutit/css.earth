@@ -3,7 +3,6 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { preparePointAtlas, parseStarsRecipe } from '../stars/index.ts';
 import { containedPath } from '../volume/node/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import type { CompilerStarSprites, PreparedCompilerStar } from '../volume/index.ts';
 
 /** The real site's prepared compact core/halo profile; never rebuilt in the viewer. */
