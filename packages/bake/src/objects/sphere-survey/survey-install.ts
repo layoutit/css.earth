@@ -214,7 +214,7 @@ export async function installSetup(objectId: string, options: { root: string; le
   }
 
   const { restored, missing } = await restorePinnedInputs(objectId, root), moved = await moveUnownedSceneFiles(objectId, root);
-  if (restored.length) console.log(`Copied ${restored.length} pinned input(s) from sibling checkouts by hash: ${restored.join(', ')}.`);
+  if (restored.length) console.log(`Copied ${restored.length} declared input(s) from sibling checkouts by path: ${restored.join(', ')}.`);
   if (missing.length) console.log(`Still missing, restore them before preparing (node packages/bake/cli/object-operations.mts acquire ${objectId}): ${missing.join(', ')}.`);
   if (moved.length) console.log(`Moved ${moved.length} scene file(s) no inventory owns to output/stale-public/${objectId}/; preparation refuses unowned assets.`);
   console.log([`Installed ${objectId}'s ${LENS_ID} lens and bound ${bound.bindings.length} new inputs to ${bound.records.length} new source records. Next:`,
@@ -234,7 +234,7 @@ export function withAnchoredLens(text: string, objectId: string, lensId: string)
   return `${text.slice(0, lastQuote + 1)},\n${indent}"${lensId}"${text.slice(lastQuote + 1)}`;
 }
 
-/** Every pinned input and document preparation will read, copied from a sibling checkout when it is missing here and a byte-identical copy exists. */
+/** Every declared input and document preparation will read, copied from the same path in a sibling checkout when it is missing here. */
 export async function restorePinnedInputs(objectId: string, root: string) {
   const source = resolve(root, 'src/objects', objectId, 'source'), manifest = await readJson(resolve(source, 'manifest.json'));
   const restored: string[] = [], missing: string[] = [];

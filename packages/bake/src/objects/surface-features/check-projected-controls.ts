@@ -1,6 +1,5 @@
 /** Preparation-only inspection of published planetocentric controls in native
  * image pixels. This measures discrepancies; it never fits or qualifies a camera. */
-import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import sharp from 'sharp';
@@ -64,10 +63,11 @@ export async function checkProjectedControlRecipe(recipePath: string, inputDirec
   const image = record(recipe.image, 'image'), width = number(image.width, 'width'), height = number(image.height, 'height');
   const controls = parseProjectedControls(recipe.controls, width, height);
   const input = async (v: unknown) => {
-    const p = record(v, 'pinned input'), file = text(p.file, 'input filename');
+    const p = record(v, 'input'), file = text(p.file, 'input filename');
     if (basename(file) !== file || file === '.' || file === '..' || file.includes('\\')) throw new Error('Input must be a filename in the input directory.');
+    if ('sha256' in p) throw new Error(`${recipePath}: input ${file} sha256 is refused; git and the source mirror identify input bytes.`);
     const bytes = await readFile(resolve(inputDirectory, file));
-    return { file, bytes, sha256: sha256(bytes), path: resolve(inputDirectory, file) };
+    return { file, bytes, path: resolve(inputDirectory, file) };
   };
   if (image.format !== 'fits-primary' || image.pixelConvention !== 'zero-based-x-right-y-down-reversed-fits-rows') throw new Error('Unsupported native image convention.');
   const native = await input(image), fits = readFitsPrimary(native.bytes);
@@ -83,10 +83,10 @@ export async function checkProjectedControlRecipe(recipePath: string, inputDirec
   for (const v of requireArray(recipe.models, 'models')) {
     const model = record(v, 'model'), id = text(model.id, 'model id');
     if (modelIds.has(id)) throw new Error('Duplicate model id.'); modelIds.add(id);
-    const pinned = await input(model.input), cameraSource = text(model.cameraSource, 'camera source'), cameraValue = record(model.camera, 'camera');
-    const shape = await loadObjShape(pinned.path, model.profile), camera = matrixCamera('archived-closure', cameraValue);
+    const shapeInput = await input(model.input), cameraSource = text(model.cameraSource, 'camera source'), cameraValue = record(model.camera, 'camera');
+    const shape = await loadObjShape(shapeInput.path, model.profile), camera = matrixCamera('archived-closure', cameraValue);
     const residuals = inspectProjectedControls(controls, shape, camera, width, height);
-    results.push({ id, shape: { file: pinned.file, bytes: pinned.bytes.length, sha256: pinned.sha256 }, cameraSource, camera: cameraValue, controls: residuals });
+    results.push({ id, shape: { file: shapeInput.file, bytes: shapeInput.bytes.length }, cameraSource, camera: cameraValue, controls: residuals });
     const overlay = residuals.map(c => {
       const ox = (c.observedPixel[0] - left + .5) * scale, oy = (c.observedPixel[1] - top + .5) * scale;
       const px = (c.projectedPixel[0] - left + .5) * scale, py = (c.projectedPixel[1] - top + .5) * scale;
@@ -97,8 +97,8 @@ export async function checkProjectedControlRecipe(recipePath: string, inputDirec
     panels.push(await sharp(nativePng).composite([{ input: svg }]).png().toBuffer());
   }
   if (!results.length || results.length > 4) throw new Error('Need one to four source models.');
-  const report = { status: 'diagnostic-unqualified', recipeSha256: sha256(recipeBytes), source, limitations,
-    image: { file: native.file, bytes: native.bytes.length, sha256: native.sha256, width, height, pixelConvention: image.pixelConvention },
+  const report = { status: 'diagnostic-unqualified', recipe: basename(recipePath), source, limitations,
+    image: { file: native.file, bytes: native.bytes.length, width, height, pixelConvention: image.pixelConvention },
     method: 'Project published coordinates without fitting. Residuals are against tentative native-image identifications; regions are not confidence intervals or acceptance limits. No aggregate camera-accuracy claim.',
     display: 'Linear zero-to-maximum stretch; nearest-neighbour enlargement. Yellow regions and dots are tentative native picks. Cyan crosses are projected catalogue positions.', models: results };
   const fullWidth = (panelWidth + 24) * panels.length + 24, fullHeight = panelHeight + 156;

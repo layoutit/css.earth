@@ -15,7 +15,6 @@ import { constants } from 'node:fs';
 import { access, cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { createRequire } from 'node:module';
-import { sha256 } from '@cssearth/core/node';
 import { readFitsHdu } from '@cssearth/fits';
 import { readPdfImage } from '../../sources/index.ts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -252,7 +251,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts & { root: 
   await put(OBSERVER_CAMERAS_FILE, JSON.stringify(record, null, 2) + '\n');
   const manifest = requireRecord(await readJson(resolve(source, 'manifest.json')));
   const spec = { schema: COMPARISON_SPEC_SCHEMA, lensId: LENS_ID, source: paperPin.source, figure: `Figure ${figure.figure}`,
-    document: { url: SURVEY_PAPER_URL, object: figure.object, width: image.width, height: image.height, sha256: sha256(image.data) },
+    document: { url: SURVEY_PAPER_URL, object: figure.object, width: image.width, height: image.height },
     rows: { image: 0, model: rows - 1, count: rows, labelLines: SURVEY_LABEL_LINES }, columns };
   await put(COMPARISON_SPEC_FILE, JSON.stringify(spec, null, 2) + '\n');
   const cameras = await deriveObserverCameras(source, parseObserverCameras(record), frames, mesh, root);

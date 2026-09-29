@@ -40,6 +40,7 @@ export function parseComparisonSpec(value: unknown): ComparisonSpec {
   const source = requireString(record.source, 'source');
   if (!/^https:\/\/doi\.org\/10\.\S+$/u.test(source)) throw new TypeError('A published comparison names its paper by DOI URL.');
   const document = requireRecord(record.document, 'document'), rows = requireRecord(record.rows, 'rows');
+  if ('sha256' in document) throw new TypeError(`Published comparison ${String(record.lensId)} document.sha256 is refused: the figure is named by its paper address, object number and size.`);
   const integer = (value: unknown, at: string) => { const n = requireFiniteNumber(value, at); if (!Number.isSafeInteger(n) || n < 0) throw new TypeError(`${at} is a whole number.`); return n; };
   const spec: ComparisonSpec = {
     schema: COMPARISON_SPEC_SCHEMA, lensId: requireString(record.lensId, 'lensId'), source, figure: requireString(record.figure, 'figure'),

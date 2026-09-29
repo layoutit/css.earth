@@ -9,7 +9,7 @@ import { dirname, posix, resolve, relative, win32 } from 'node:path';
 const object=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected an object.');return value as Record<string,unknown>;};
 const nonempty=(value:unknown):value is string=>typeof value==='string'&&value.length>0;
 
-/** A pin identifies bytes git does not hold. A file authored in this repository carries none; git is its record. */
+/** A manifest entry names its file by path: git holds authored bytes and the source mirror holds downloads. */
 export interface SourceEntry { path:string;id?:string;origin?:string;consumers?:string[];range?:SourceRange;sourceBinding?:SourceBinding; }
 
 /** A file a named tool makes; parseSourceManifest refuses one without its generator. */
@@ -28,6 +28,7 @@ export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
  for(const collection of ['inputs','generatedIntermediates','documents'] as const){
   const entries=manifest[collection];if(!Array.isArray(entries)||(collection==='inputs'&&!entries.length))throw new TypeError(`Source manifest ${collection} is missing or empty.`);
   for(const value of entries){const entry=object(value);if(typeof entry.path!=='string')throw new TypeError('Source path is missing.');containedPath('.',entry.path);
+   if('sha256' in entry)throw new TypeError(`Source manifest ${id??'(unnamed)'} ${collection} ${entry.path}: sha256 ${JSON.stringify(entry.sha256)} is refused; git and the source mirror identify source bytes.`);
    if(paths.has(entry.path))throw new TypeError(`Duplicate source path ${entry.path}.`);paths.add(entry.path);
    if(entry.range!==undefined)assertSourceRange(entry as unknown as SourceEntry,`Source ${entry.path}`);
    if(collection==='inputs'||entry.sourceBinding!==undefined)parseSourceBinding(entry.sourceBinding);
