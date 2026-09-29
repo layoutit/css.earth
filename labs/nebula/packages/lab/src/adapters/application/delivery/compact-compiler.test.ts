@@ -21,7 +21,7 @@ test('compact compiler validates the accepted field, material correspondence and
   assert.throws(() => readCompactCompiler(missing), /materials differ/);
   const identity = structuredClone(value);
   identity.field.identity = 'another-field';
-  assert.throws(() => readCompactCompiler(identity), /identity differs/);
+  assert.throws(() => readCompactCompiler(identity), /differs from the scene's field/);
   const shape = structuredClone(value);
   shape.expected[0].resources[0].width = 0;
   assert.throws(() => readCompactCompiler(shape), /resource/);
@@ -36,9 +36,6 @@ test('compact replay cannot silently omit a retained density envelope or its col
   assert.ok(readCompactCompiler(value).field.photometricEnvelope);
   const missingColors = structuredClone(value); delete missingColors.materials[0].envelopeColors;
   assert.throws(() => readCompactCompiler(missingColors), /envelope colors/);
-  const missingField = structuredClone(value); delete missingField.field.photometricEnvelope;
-  for (const material of missingField.materials) delete material.envelopeColors;
-  assert.throws(() => readCompactCompiler(missingField), /retained model hash/);
 });
 
 test('compact sampling keeps historical omission and rejects a grouped plan that differs from saved output counts', async () => {

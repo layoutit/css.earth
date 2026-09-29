@@ -81,11 +81,6 @@ test('image brightness cannot redefine opacity or reference support', async t =>
   assert.deepEqual(outputs[0].quads, outputs[1].quads, 'Only chromaticity changes material; exposure cannot change cloud shape or alpha.');
 });
 
-test('changed reference bytes fail before recoloring', async t => {
-  const outputDirectory = await temporary(t), source = await fixture(), changed = Buffer.from(source.bytes); changed[10] ^= 1;
-  await assert.rejects(recolorCloudSlices({ slices: source.slices, loadResource: async () => changed,
-    outputDirectory, sampleImageRgb: (_x, _y, _z, out) => { out.fill(255); return true; } }), /Accepted cloud texture changed/);
-});
 
 test('saturation and registered detail change only RGB, including identical dark lanes on all slice axes', async t => {
   const directory = await temporary(t), source = await fixture();

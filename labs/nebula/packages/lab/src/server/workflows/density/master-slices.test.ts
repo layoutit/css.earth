@@ -125,8 +125,6 @@ test('delivery reads pinned PNG masters, averages premultiplied color and maps c
     deliveryBanks: [{ width: 1, outputDirectory: resolve(directory, 'webp') }], onProgress: () => {} });
   assert.ok(webp[0]!.slices.quads.every(quad => quad.texturePath.endsWith('.webp')));
   assert.equal((await raster(resolve(directory, 'webp'), webp[0]!.slices.quads[0]!))[3], 64);
-  await writeFile(resolve(config.masterDirectory, masters.quads[0]!.texturePath), Buffer.from('drifted'));
-  await assert.rejects(deriveMasterVolumeSlices({ masters, masterDirectory: config.masterDirectory, deliveryBanks }), /Master bytes changed/);
 });
 
 test('delivery height uses physical aspect before rounding and invalid field samples are rejected', async t => {

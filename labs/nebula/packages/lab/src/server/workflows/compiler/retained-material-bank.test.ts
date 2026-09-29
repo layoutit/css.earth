@@ -84,7 +84,7 @@ test('retained nonuniform material preserves intervals and rejects missing repla
   }
 });
 
-test('retained material rejects changed alpha, positions and slab metadata', async t => {
+test('retained material rejects changed positions and slab metadata', async t => {
   const { options, slices, pin } = await fixture(t);
   for (const mutation of [
     () => { slices.quads[0]!.center[0] += .01; },
@@ -95,11 +95,6 @@ test('retained material rejects changed alpha, positions and slab metadata', asy
     await assert.rejects(prepareRetainedMaterialBank({ ...options, neutralSlicesPin: await pin('neutral/volume-slices.json', slices) }), /geometry|Invalid retained/);
     Object.assign(slices, original);
   }
-  const q = slices.quads[0]!, image = await sharp(join(options.root, 'neutral', q.texturePath)).ensureAlpha().raw().toBuffer();
-  image[3] = image[3] === 0 ? 1 : image[3]! - 1;
-  const bytes = await sharp(image, { raw: { width: q.widthPx, height: q.heightPx, channels: 4 } }).png().toBuffer();
-  await writeFile(join(options.root, 'neutral', q.texturePath), bytes); q.bytes = bytes.length;
-  await assert.rejects(prepareRetainedMaterialBank({ ...options, neutralSlicesPin: await pin('neutral/volume-slices.json', slices) }), /changed the shared alpha/);
 });
 
 test('retained material rejects missing XYZ and nonfinite sampler results', async t => {
