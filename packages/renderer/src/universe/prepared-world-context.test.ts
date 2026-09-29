@@ -2609,7 +2609,8 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   expect(() => decodeWorldOrbitBank(summary, 'earth', earth.slice(0, earth.byteLength - 8))).toThrow(/its summary says/);
   expect(() => decodeWorldOrbitBank(summary, 'nowhere', earth)).toThrow(/summary says undefined/);
   expect(() => decodeWorldOrbitBank({ ...summary, orbitBanks: { ...summary.orbitBanks, mars: earth.byteLength } }, 'mars', earth)).toThrow(/lacks its path/);
-});
+  // It parses the whole prepared world file (50 MB with exoplanet batch 1), which the default 5 s does not cover on CI.
+}, 30_000);
 
 test('circle dots grow with radius from 1,000 km to the system star, and stop there', () => {
   const dot = (radiusM: number) => indicatorDotDiameter(radiusM, 1e9, 2.4);
