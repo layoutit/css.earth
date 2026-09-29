@@ -74,7 +74,7 @@ On the same date, `telescope explore 'HD 189733' --kind spectrum --instrument UV
 
 On 2026-09-20 the public query/get/outputs/export flow delivered a 169,920-byte ESO Betelgeuse FITS cutout (112×112 usable samples). A second 95,040-byte cutout and the 8,458,560-byte direct FITS product passed the same saved-session acquisition/qualification/delivery owners and public output commands. Those additional runs reused the retained live ObsCore discovery response and fetched fresh access descriptions and science bytes. All three have distinct acquisition keys and science hashes; this alone does not prove every cross-subset cache rejection case.
 
-[Machine-readable evidence](../tests/fixtures/telescope-vo/live-evidence.json) records the received bytes and delivery/figure digests. The example is a requested sky crop, not a centered stellar portrait; the bright emission is clipped at its edge. Wavelength coverage and achieved resolution remain unresolved.
+The example is a requested sky crop, not a centered stellar portrait; the bright emission is clipped at its edge. Wavelength coverage and achieved resolution remain unresolved.
 
 ![ESO Betelgeuse cutout exported by the existing native-image owner](images/telescopes/vo-betelgeuse-cutout.png)
 

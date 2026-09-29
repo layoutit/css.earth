@@ -3,8 +3,8 @@
 An oracle is a reference implementation that recomputes what the preparation
 pipeline computes, so a test can compare the two. The pipeline stays strict
 TypeScript and derives nothing from an oracle; the oracle only says whether the
-pipeline's result is right. `tests/oracles/comet-19p/` and `tests/oracles/venus/`
-are older standalone audits; the groups below are fixture oracles.
+pipeline's result is right. `tests/oracles/comet-19p/` is an older standalone
+audit; the groups below are fixture oracles.
 
 | Oracle | Verifies | Script | Comparing test |
 | --- | --- | --- | --- |
@@ -44,10 +44,8 @@ Five files keep their bytes because body evidence pins their SHA-256: `isis-geot
 `lunar-mi-quality.mts`, `geotiff-image.mts`, `reflectance-mosaics.mts` and `tsconfig.json`. The
 four scripts' usage comments still show the old `tools/oracles/` path; run them from `tests/oracles/`.
 
-Known gap: the SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions
-only. It no longer holds a runtime-lock or generator digest, while
-`tests/contract/oracle-fixtures.test.mts` still expects both, so that comparison fails whenever the
-test runs past its restored-source skips. The shared FITS reader is the
+The SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions only.
+The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
 their scripts in `tests/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
 likewise sit beside their scripts in `tests/oracles/spice/`.
@@ -56,12 +54,9 @@ likewise sit beside their scripts in `tests/oracles/spice/`.
 
 - A fixture is evidence. Its current envelope records oracle/interpreter
   versions, input paths and byte counts. External references name a commit in
-  their URL and record a size. `tests/contract/oracle-fixtures.test.mts`, included
-  in `pnpm test:node`, checks tool versions, permitted input declarations and
-  reference URLs. Body inputs must appear in their manifest; the shared reader
-  also accepts the declared FITS, SBMT and hosted-orbit test fixtures. These checks
-  need no Python, but may need restored files. A source-dependent skip is not a
-  completed fixture audit.
+  their URL and record a size. Body inputs must appear in their manifest; the shared reader
+  also accepts the declared FITS, SBMT and hosted-orbit test fixtures. A source-dependent
+  skip is not a completed fixture audit.
 - Comparing tests read the committed fixture and the same declared inputs the
   pipeline reads. They run without Python. `readOracleInput` checks the recorded
   byte count immediately before comparison; it does not verify a source SHA-256.

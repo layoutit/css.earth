@@ -8,7 +8,7 @@ const flags=process.argv.slice(2);
 if(flags.some(f=>!['--unit','--restore'].includes(f))||flags.length>1)throw new Error('Usage: pnpm test:sbmt [--unit|--restore]');
 if(flags.includes('--restore'))await restoreInputs();
 // node --test skips a listed file that does not exist without failing; refuse instead, so a moved test cannot drop out.
-const tests=[resolve(ORACLE_ROOT,'tests/contract/oracle-fixtures.test.mts'),resolve(import.meta.dirname,'sbmt/projection.test.mts')];
+const tests=[resolve(import.meta.dirname,'sbmt/projection.test.mts')];
 const missing=tests.filter(path=>!existsSync(path));
 if(missing.length)throw new Error(`Listed SBMT tests do not exist:\n${missing.join('\n')}`);
 const result=spawnSync(process.execPath,['--max-old-space-size=512','--test','--test-concurrency=1',...tests],

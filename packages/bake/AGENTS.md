@@ -306,8 +306,7 @@ density: keep component-bound 3D material distinct from historical image-ray sam
 the finite-emission compiler. Change an output only on purpose, together with every test and accepted bake that pins it.
 
 The `nebulaImplementation` inventory in `package.json` lists the sources that nebula delivery identities hash. Keep it
-covering every topic directory whose code a delivery runs (`tests/nebula/application/package-identity.test.ts` checks it
-against the delivery's import closure); `src/nebula/objects.ts` names only owners outside the package.
+covering every topic directory whose code a delivery runs; `src/nebula/objects.ts` names only owners outside the package.
 
 ## Shared package contract
 

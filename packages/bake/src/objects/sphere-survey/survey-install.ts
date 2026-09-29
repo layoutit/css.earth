@@ -187,11 +187,6 @@ export async function installSetup(objectId: string, options: { root: string; le
   ledger.entries = entries;
   await writeJson(resolve(objectDirectory, 'investigations.json'), ledger);
 
-  // The asteroid package anchors list each package's lenses; a body with a row gains this one, edited in place so the
-  // file's own number formatting survives.
-  const anchorsPath = resolve(root, 'tests/objects/unit/anchors/asteroid-packages.json');
-  await writeFile(anchorsPath, withAnchoredLens(await readFile(anchorsPath, 'utf8'), objectId, LENS_ID));
-
   // Evidence, README and credits.
   await mkdir(resolve(objectDirectory, 'evidence'), { recursive: true });
   for (const file of ['published-comparison.json', 'published-comparison.webp']) await copyFile(resolve(work, 'evidence', file), resolve(objectDirectory, 'evidence', file));
@@ -220,18 +215,6 @@ export async function installSetup(objectId: string, options: { root: string; le
   console.log([`Installed ${objectId}'s ${LENS_ID} lens and bound ${bound.bindings.length} new inputs to ${bound.records.length} new source records. Next:`,
     `  node packages/bake/cli/prepare-object.mts ${objectId}`, `  node packages/bake/cli/report-registration.mts ${objectId} --write`,
     `  commit, then pnpm publish:runtime-assets --object=${objectId}`].join('\n'));
-}
-
-/** An anchor table with a lens appended to one body's `lenses`, as text; a body without a row, or already listing it, is unchanged. */
-export function withAnchoredLens(text: string, objectId: string, lensId: string) {
-  const row = text.indexOf(`"${objectId}": {`);
-  if (row < 0) return text;
-  const open = text.indexOf('"lenses": [', row), close = text.indexOf(']', open);
-  if (open < 0 || close < 0 || text.slice(row, open).includes('}')) throw new Error(`The anchor row for ${objectId} states no lenses.`);
-  const list = JSON.parse(text.slice(open + '"lenses": '.length, close + 1)) as unknown[];
-  if (list.includes(lensId)) return text;
-  const lastQuote = text.lastIndexOf('"', close), lineStart = text.lastIndexOf('\n', lastQuote) + 1, indent = text.slice(lineStart, text.indexOf('"', lineStart));
-  return `${text.slice(0, lastQuote + 1)},\n${indent}"${lensId}"${text.slice(lastQuote + 1)}`;
 }
 
 /** Every pinned input and document preparation will read, copied from a sibling checkout when it is missing here and a byte-identical copy exists. */

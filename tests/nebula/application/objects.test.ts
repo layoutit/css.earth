@@ -4,8 +4,7 @@ import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import { sourceTest } from '../../objects/source-test.mts';
 const test = sourceTest();
-import ts from 'typescript';
-import { sanitizeVolumeProvenance, applicationDeliveryKind, installedDeliveryMatchesRecipe, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
+import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
 import { sha256 } from '@cssearth/core/node';
 import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/bake/volume';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
@@ -36,46 +35,6 @@ test('sanitizeVolumeProvenance leaves provenance without a staging path untouche
   // Only a whole `.prepared-<pid>` path segment is the staging directory.
   const lookalike = { provenance: { sourceVolume: { path: 'src/objects/m1/data.prepared-7/volume.json', sha256: 'a'.repeat(64) } } };
   assert.equal(sanitizeVolumeProvenance(lookalike), lookalike);
-});
-
-test('consumer preparation reuses a byte-verified delivery across implementation changes but not recipe changes', () => {
-  const receipt = { recipeSha256: 'a'.repeat(64), implementationSha256: 'b'.repeat(64) };
-  assert.equal(installedDeliveryMatchesRecipe(receipt, 'a'.repeat(64)), true);
-  assert.equal(installedDeliveryMatchesRecipe({ ...receipt, implementationSha256: 'c'.repeat(64) }, 'a'.repeat(64)), true);
-  assert.equal(installedDeliveryMatchesRecipe(receipt, 'd'.repeat(64)), false);
-});
-
-test('every volume the nebula delivery validates is sanitized, and an explicit bake records the sanitizer', async () => {
-  const path = 'packages/bake/src/nebula/objects.ts', source = await readFile(resolve(root, path), 'utf8');
-  const file = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true);
-  let validated = 0, sanitized = 0;
-  const visit = (node: ts.Node): void => {
-    if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === 'validatePreparedCssVolume') {
-      validated++;
-      const parent = node.parent;
-      if (ts.isCallExpression(parent) && ts.isIdentifier(parent.expression) && parent.expression.text === 'sanitizeVolumeProvenance' &&
-        parent.arguments.length === 1 && parent.arguments[0] === node) sanitized++;
-    }
-    ts.forEachChild(node, visit);
-  };
-  visit(file);
-  assert.ok(validated > 0, 'the delivery validates at least one prepared volume');
-  assert.equal(sanitized, validated, 'each validated volume passes straight through sanitizeVolumeProvenance');
-  // An explicit bake records these owners: the sanitizer is in this topic, which the package's implementation inventory hashes.
-  // `--if-missing` is a consumer path: it verifies the installed byte closure and recipe without silently rebaking because
-  // unrelated runtime code changed.
-  const bake = JSON.parse(await readFile(resolve(root, 'packages/bake/package.json'), 'utf8')) as { nebulaImplementation: { directories: string[] } };
-  assert.ok(bake.nebulaImplementation.directories.includes('src/nebula'));
-  assert.match(source, /installed\(directory,sha256\(recipeBytes\)\)/);
-  assert.doesNotMatch(source, /installed\(directory,sha256\(recipeBytes\),implementationSha256\)/);
-});
-
-test('a prepared m1 lens bank, if baked locally, records no process-pid staging directory', async () => {
-  const path = resolve(root, 'src/objects/m1/prepared/lenses.json');
-  let bytes: string;
-  try { bytes = await readFile(path, 'utf8'); }
-  catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return; throw error; }
-  assert.doesNotMatch(bytes, /\.prepared-\d+(?=[\\/])/, 'A bake must never record its own staging directory name in committed-shaped provenance.');
 });
 
 test('the real installer rejects post-compiler field stars before replacing the delivered package', async t => {

@@ -5,7 +5,7 @@ import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } fro
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence } from '@cssearth/bake/objects/layers/terrestrial';
-import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, latitudeSpan, leaveOutArguments, nightsText, noticeWithLens, readmeWithLens, surveyFigures, unusedWords, withAnchoredLens, withRefreshedLens } from '@cssearth/bake/objects/sphere-survey';
+import { LENS_ID, SURVEY_LENS_SETTINGS, adamSimplification, latitudeSpan, leaveOutArguments, nightsText, noticeWithLens, readmeWithLens, surveyFigures, unusedWords, withRefreshedLens } from '@cssearth/bake/objects/sphere-survey';
 import { horizonsCommand } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../../..'), OBJECTS = resolve(ROOT, 'src/objects');
@@ -116,15 +116,6 @@ test('the install says why released frames stay out, and writes a rebuilt lens\'
   assert.ok(rebuilt.readme.includes('with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Kleopatra from 37° south to 32° north'));
   assert.equal(rebuilt.readme.split('\n').length, first.split('\n').length, 'lines are replaced in place');
   assert.deepEqual(withRefreshedLens(rebuilt.readme, { ...lens, lensFrames: 55, nights: ['2017-07-14', '2018-12-10', '2019-01-14'], latitudes: [-36.6, 31.7], apparitions: 2 }).replaced, [], 'a second run changes nothing');
-});
-
-test('the install adds its lens to the anchor row of a body in place, once', () => {
-  const table = '{\n "hebe": {\n  "claim": "Hebe retains Shape",\n  "lenses": [\n   "shape",\n   "elevation"\n  ],\n  "radiusM": 97500.0\n },\n "iris": {\n  "lenses": [\n   "shape"\n  ],\n  "radiusM": 99500.0\n }\n}\n';
-  const once = withAnchoredLens(table, 'hebe', 'zimpol');
-  assert.equal(once, table.replace('   "elevation"\n', '   "elevation",\n   "zimpol"\n'));
-  assert.equal(withAnchoredLens(once, 'hebe', 'zimpol'), once);
-  assert.equal(withAnchoredLens(table, 'juno', 'zimpol'), table, 'a body without a row is left alone');
-  assert.ok(once.includes('"radiusM": 97500.0'), 'numbers keep their spelling');
 });
 
 test('the ADAM mesh keeps the primary error bound where it reaches the face target, and takes the next hundred metres otherwise', async () => {

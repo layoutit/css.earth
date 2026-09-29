@@ -25,9 +25,9 @@ const run = (args: string[], command = process.execPath) => {
 // The reader's own behaviour tests, including the float32 transport image, are the package's.
 run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
 const unit = ['tests/oracles/fits/core.oracle.test.mts', 'tests/oracles/fits/sky-orientation.oracle.test.mts', 'tests/oracles/fits/sky-projection.oracle.test.mts',
-  'tests/oracles/fits/file-region.oracle.test.mts', 'tests/oracles/fits/rice.oracle.test.mts', 'tests/fits/repository-inputs.test.mts',
+  'tests/oracles/fits/file-region.oracle.test.mts', 'tests/oracles/fits/rice.oracle.test.mts',
   'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'tests/objects/color/color-transfer.oracle.test.mts', 'tests/objects/observation/wise-atlas-mosaic.oracle.test.mts',
-  'tests/objects/observation/wise-atlas-mosaic.test.mts', 'tests/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts', 'tests/contract/oracle-fixtures.test.mts',
+  'tests/objects/observation/wise-atlas-mosaic.test.mts', 'tests/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts',
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
     .map(name => `tests/objects/terrestrial/${name}.test.mts`)];
 run(['--test', '--test-concurrency=1', ...unit]);

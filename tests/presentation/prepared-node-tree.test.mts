@@ -2,12 +2,20 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { createPreparedNodeTree, preparedDeclarations, LEAF_BOX_UNSCALE, leafBoxLengths } from "@cssearth/bake/presentation";
-import PREPARED_MOON_SCENE from "../../src/objects/moon/prepared/scene.json" with { type: "json" };
-test("preparation expands every actual Moon leaf into a stable ordered tree", () => {
+import { readFile } from "node:fs/promises";
+import { requireArray, requireRecord, requireString } from "@cssearth/core";
+test("preparation expands every actual Moon leaf into a stable ordered tree", async () => {
+  // Read inside the test so an unrestored Moon scene skips it. The Moon's leaves are plain styled faces.
+  const moon: unknown = JSON.parse(await readFile(new URL("../../src/objects/moon/prepared/scene.json", import.meta.url), "utf8"));
+  const leaves = requireArray(requireRecord(requireRecord(moon, "Moon scene").body, "Moon body").leaves, "Moon leaves").map((value, index) => {
+    const leaf = requireRecord(value, `Moon leaf ${index}`);
+    assert.equal(leaf.projectiveTextureLayer, undefined, `Moon leaf ${index} is a plain face`);
+    return { style: requireString(leaf.style, `Moon leaf ${index} style`), ...(typeof leaf.tag === "string" ? { tag: leaf.tag } : {}),
+      ...(typeof leaf.className === "string" ? { className: leaf.className } : {}) };
+  });
   const tree = createPreparedNodeTree(), camera = tree.element("div", "polycss-camera"), scene = tree.element("div", "polycss-scene");
   tree.append(null, camera); tree.append(camera, scene);
   const body = tree.mesh("body"), material = tree.element("s"); tree.append(scene, body, material);
-  const leaves = PREPARED_MOON_SCENE.body.leaves;
   for (const leaf of leaves) tree.append(body, tree.leaf(leaf));
   const result = tree.finish({ camera, scene });
   assert.equal(result.tree.nodes.length, 4 + leaves.length);

@@ -60,8 +60,6 @@ An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equ
 
 The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
-[Source anchors](../../../tests/objects/unit/anchors/asteroid-calibration.json) checked by the shared [calibration runner](../../../tests/objects/unit/asteroid-calibration.test.mts).
-
 ## Known problems
 
 There is no hydration map. Hayabusa2's NIRS3 spectrometer found the 2.72 µm OH band everywhere on Ryugu, at 7–10% depth ([Kitazato et al. 2019](https://doi.org/10.1126/science.aav7432)). No one has released a map of that depth. We tested whether we could make one from the [released spectra](https://doi.org/10.17597/isas.darts/hyb2-01600). The spectra cover almost the whole surface. The problem is the pattern: its small differences do not repeat from one global scan to the next unless the surface temperatures in the two scans also match. A colour map would mostly show leftovers from removing the surface's heat glow, not differences in water-bearing minerals. The measurements are in the [investigation ledger](investigations.json) (`nirs3-hydration-band-depth`).

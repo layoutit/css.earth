@@ -1,9 +1,9 @@
-// Draft checks for facet-fits-layout.ts: the production fixture cases must behave as before, and the
+// Checks for facet-fits-layout.ts: the production fixture cases must behave as before, and the
 // Bennu products must decode with exactly the declared label/FITS disagreements.
-// node --test output/bennu-even-more/drafts/facet-fits-layout.test.mts
-import test from 'node:test';
+import { sourceTest } from '../source-test.mts';
+const test = sourceTest('bennu');
 import assert from 'node:assert/strict';
-import {readFileSync, existsSync} from 'node:fs';
+import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {parseObjShape, loadObjShape} from '@cssearth/bake/objects/geometry';
 import {parseFacetFits} from '@cssearth/bake/objects/raster';
@@ -62,7 +62,7 @@ const root = resolve(import.meta.dirname, '../../../src/objects/bennu/source');
 const recipe = JSON.parse(readFileSync(resolve(root, 'preparation/terrestrial.json'), 'utf8'));
 const alternatives: {lensId: string; additionalLensIds?: string[]; path: string; grid: {metersPerUnit: number; expectedVertices: number; expectedFaces: number}}[] = recipe.geometry.radialTerrainAlternatives ?? [];
 for (const lens of (recipe.raster.scientific as {id: string; format: string; path: string; meshPath: string; table: {labelPath: string}}[]).filter(l => l.format === 'facet-scalars')) {
-  test('Bennu ' + lens.id + ' decodes on its own archived mesh', {skip: !existsSync(resolve(root, lens.path))}, async () => {
+  test('Bennu ' + lens.id + ' decodes on its own archived mesh', async () => {
     const terrain = alternatives.find(a => [a.lensId, ...(a.additionalLensIds ?? [])].includes(lens.id));
     assert.ok(terrain && terrain.path === lens.meshPath, 'lens mesh is its alternative terrain');
     const mesh = await loadObjShape(resolve(root, terrain.path), terrain.grid);

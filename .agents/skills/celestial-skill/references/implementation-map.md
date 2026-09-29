@@ -29,7 +29,6 @@ src/objects/<id>/
 public/scenes/<id>/                    prepared assets
 site/pages/[id].astro                  one shared route for all body ids
 tests/objects/unit/<id>/               focused hand-written body tests
-tests/objects/unit/anchors/*.json      per-body anchors for the shared contract runners (asteroid calibration, asteroid packages)
 tests/objects/browser/<id>/browser-profile.mts
 ```
 
@@ -392,9 +391,7 @@ SpiceyPy for `@cssearth/spice` (a microsecond in time, a millimetre in position,
 nanoradian in rotation); pds4_tools for the PDS4 geometry cube; pvl and numpy for
 the OSIRIS geometry, OSIRIS reflectance, AMICA and ISIS2 readers; astropy for
 the L'LORRI reader and its TAN-SIP distortion and for the three encounter FITS
-layouts. Comparing tests sit beside each reader, and `tests/contract/oracle-fixtures.test.mts`
-checks tool versions, declared input paths and recorded byte counts; it does not
-compare source digests. Missing inputs can skip source-dependent cases. A new scientific
+layouts. Comparing tests sit beside each reader. Missing inputs can skip source-dependent cases. A new scientific
 source-format parser, decoder or interpretation algorithm needs independent reference evidence.
 Use the existing pinned oracle framework for new decoding behavior; do not use
 the implementation's own output as its expected result.
