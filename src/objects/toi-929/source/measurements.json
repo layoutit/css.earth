@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-929",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 499,105 km at 113.55 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 113.55186025136061,
+  "distanceSource": "Gaia DR3 parallax 8.8065 +/- 0.0105 mas (same row, RUWE 1.08): 113.55 pc, no zero-point correction",
+  "radiusKm": 499104.9,
+  "radiusSource": "Radius 0.717414 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-929 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 499,105 km at 695,700 km per solar radius. Mass 0.7 +/- 0.088 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 175532955 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME (https://doi.org/10.3847/1538-3881/ab3467); GM is that mass times the JPL solar GM. Temperature 4457.16 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-929 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4457.16,
+  "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-929 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract)",
+  "surfaceGravityLogg": 4.57,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-929.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.572, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

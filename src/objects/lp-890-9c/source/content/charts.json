@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/lp-890-9c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "lp-890-9c-orbits",
+      "title": "LP 890-9 c: orbits around LP 890-9",
+      "output": "lp-890-9c-system-orbits.svg",
+      "system": "lp-890-9",
+      "highlight": "lp-890-9c",
+      "description": "The orbits of LP 890-9's planets in this map from above, to scale, with LP 890-9 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Delrez et al. 2022 (2022A&A...667A..59D), via the NASA Exoplanet Archive ps table (pl_refname DELREZ_ET_AL_2022): P 8.457463 d"
+      }
+    }
+  ]
+}

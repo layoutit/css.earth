@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stad1369",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Tuson et al. (2023): <i>TESS</i> and <i>CHEOPS</i> discover two warm sub-Neptunes transiting the bright K-dwarf HD 15906",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2306.04511"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stad1369"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.523.3090T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stad1369",
+      "label": "Monthly Notices of the Royal Astronomical Society 523 3090-3118"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Tuson et al. (2023), Monthly Notices of the Royal Astronomical Society 523 3090-3118",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 523 3090-3118",
+  "creators": [
+    "A Tuson",
+    "D Queloz",
+    "H P Osborn",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

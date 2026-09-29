@@ -1,0 +1,39 @@
+{
+  "id": "kepler-1049",
+  "name": "Kepler-1049",
+  "system": "Kepler-1049 system",
+  "description": "Star of 3,864 K, 162 parsecs away, with 1 transiting planet.",
+  "target": "Kepler-1049",
+  "gaia": "2131059628640021120",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "credit": "Morton et al. 2016"
+  },
+  "radius": {
+    "value": 0.49,
+    "source": "Morton et al. 2016, the stellar radius of the default parameter set of Kepler-1049 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "uncertainty": 0.026
+  },
+  "mass": {
+    "value": 0.51,
+    "source": "Morton et al. 2016, the stellar mass of the default parameter set of Kepler-1049 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "uncertainty": 0.026
+  },
+  "temperature": {
+    "value": 3864,
+    "source": "Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1049 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "uncertainty": 42.03
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-1049 b crosses Kepler-1049 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Morton et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MORTON_ET_AL__2016): st_teff 3864, st_rad 0.49, st_mass 0.51"
+  },
+  "notes": [],
+  "order": 3655
+}

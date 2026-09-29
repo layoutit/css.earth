@@ -1,0 +1,24 @@
+{
+  "host": "k2-17",
+  "planets": [
+    {
+      "id": "k2-17b",
+      "name": "K2-17 b",
+      "description": "Transiting planet of K2-17 with a 18-day year, found in 2015.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809...25M/abstract",
+        "credit": "Montet et al. 2015"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MONTET_ET_AL__2015"
+      },
+      "text": {
+        "card": "K2-17 b was found in 2015 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-17. Its orbit and size follow Montet et al. 2015's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MONTET_ET_AL__2015): disc_year 2015, disc_facility K2, sy_pnum 1; pl_orbper 17.96832, pl_radj 0.19894727, pl_bmassj 0.0176"
+      },
+      "order": 3360
+    }
+  ]
+}

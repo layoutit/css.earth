@@ -1,0 +1,31 @@
+{
+ "id": "toi-6383-a-b",
+ "classification": "exoplanet",
+ "order": 4637,
+ "physical": {
+  "name": "TOI-6383 A b",
+  "horizonsCode": null,
+  "meanRadiusKm": 72063.9,
+  "gravitationalParameterKm3PerS2": 131753993.18,
+  "parent": "toi-6383-a"
+ },
+ "physicalNotes": "Radius 1.008 Jupiter radii from Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract): 72,063.9 km at 71,492 km per Jupiter radius. GM from the mass 1.04 Jupiter masses (Bernab&ograve; et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..273B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.79058695,
+  "semiMajorAxisStellarRadii": 10.68,
+  "inclinationDegrees": 88.8,
+  "eccentricity": 0.05,
+  "argumentOfPeriapsisDegrees": 23.80000000000001,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59933.09545,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): P 1.79058695 d",
+   "shape": "Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): a/R* 10.68; Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): inclination 88.8 degrees",
+   "eccentricity": "Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): e 0.05",
+   "argumentOfPeriapsis": "Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): omega 23.8 degrees",
+   "phase": "Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): transit mid-time 2459933.59545 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

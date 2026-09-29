@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-1252b",
+  "card": {
+    "text": "GJ 1252 b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1126-science-abl7164",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract",
+        "label": "Luque 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE__AMP__PALL_EACUTE__2022): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.5182418, pl_radj 0.10643251, pl_bmassj 0.00415318"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around GJ 1252. Its orbit and size follow Shporer et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1126-science-abl7164",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract",
+        "label": "Luque 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE__AMP__PALL_EACUTE__2022): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.5182418, pl_radj 0.10643251, pl_bmassj 0.00415318"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "bd-50-1471-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "BD+50 1471B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 669959.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bd-50-1471-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "BD+50 1471B",
+      "classification": "star",
+      "color": "#ffe8d8",
+      "distanceAu": 30914823.5,
+      "description": "BD+50 1471B is a star of 5,547 K, bound to XO-2 N 4,677 AU away.",
+      "systemName": "XO-2 N system",
+      "order": 4865,
+      "context": {
+        "order": 4862
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1344937904226602800,
+        2636081366217596400,
+        3553999987926125600
+      ],
+      "presentationToReference": [
+        -0.2908076915784233,
+        -0.349249092656961,
+        0.8907614483110046,
+        0.5699837401834961,
+        0.68452501322078,
+        0.4544711676240027,
+        0.768472135113084,
+        -0.6398832530652608,
+        -0.0000011651658823115715
+      ],
+      "orbitUpReference": [
+        0.349249092656961,
+        -0.68452501322078,
+        0.6398832530652608
+      ],
+      "metersPerUnit": 2161158.3870967743,
+      "bodyRadiusM": 669959100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

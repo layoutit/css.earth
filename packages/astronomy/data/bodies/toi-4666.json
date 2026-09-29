@@ -1,0 +1,30 @@
+{
+ "id": "toi-4666",
+ "classification": "star",
+ "order": 4459,
+ "physical": {
+  "name": "TOI-4666",
+  "horizonsCode": null,
+  "meanRadiusKm": 406984.5,
+  "gravitationalParameterKm3PerS2": 76442365464.15707,
+  "parent": null,
+  "effectiveTemperatureK": 3793
+ },
+ "physicalNotes": "Radius 0.585 +/- 0.018 solar radii from Dransfield et al. 2026, the stellar radius of the default parameter set of TOI-4666 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract): 406,985 km at 695,700 km per solar radius. Mass 0.576 +/- 0.012 solar masses from Dransfield et al. 2026, the stellar mass of the default parameter set of TOI-4666 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract); GM is that mass times the JPL solar GM. Temperature 3793 +/- 80 K from Dransfield et al. 2026, the stellar temperature of the default parameter set of TOI-4666 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 56.28988694775661,
+  "declinationDegrees": -39.063182963152514,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 154.13357689137857,
+  "properMotionRaMasPerYear": 4.122075568395469,
+  "properMotionDecMasPerYear": -22.134619130591368,
+  "radialVelocityKmPerS": 0.1244789,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4855422771071903232 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-4666/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.4879 +/- 0.0158 mas (same row, RUWE 1.00): 154.13 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 4.122, -22.135 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 0.12 +/- 3.07 km/s"
+  }
+ }
+}

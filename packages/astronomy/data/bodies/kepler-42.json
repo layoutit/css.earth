@@ -1,0 +1,30 @@
+{
+ "id": "kepler-42",
+ "classification": "star",
+ "order": 3748,
+ "physical": {
+  "name": "Kepler-42",
+  "horizonsCode": null,
+  "meanRadiusKm": 118269,
+  "gravitationalParameterKm3PerS2": 17252617205.45212,
+  "parent": null,
+  "effectiveTemperatureK": 3068
+ },
+ "physicalNotes": "Radius 0.17 +/- 0.04 solar radii from Muirhead et al. 2012, the stellar radius of the default parameter set of Kepler-42 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract): 118,269 km at 695,700 km per solar radius. Mass 0.13 +/- 0.05 solar masses from Muirhead et al. 2012, the stellar mass of the default parameter set of Kepler-42 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract); GM is that mass times the JPL solar GM. Temperature 3068 +/- 174 K from Muirhead et al. 2012, the stellar temperature of the default parameter set of Kepler-42 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 292.21961813206974,
+  "declinationDegrees": 44.61730876026837,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 40.1061996271688,
+  "properMotionRaMasPerYear": 93.07352086012739,
+  "properMotionDecMasPerYear": -417.39294187052565,
+  "radialVelocityKmPerS": -86.76471,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2126556132093765888 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-42/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 24.9338 +/- 0.0204 mas (same row, RUWE 1.13): 40.11 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 93.074, -417.393 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -86.76 +/- 4.63 km/s"
+  }
+ }
+}

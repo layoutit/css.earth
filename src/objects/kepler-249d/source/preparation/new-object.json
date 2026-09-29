@@ -1,0 +1,24 @@
+{
+  "host": "kepler-249",
+  "planets": [
+    {
+      "id": "kepler-249d",
+      "name": "Kepler-249 d",
+      "description": "Transiting planet of Kepler-249 with a 15.4-day year, found in 2014.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...784...45R/abstract",
+        "credit": "Rowe et al. 2014"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ROWE_ET_AL__2014"
+      },
+      "text": {
+        "card": "Kepler-249 d was found in 2014 by Kepler as it crossed its star.",
+        "introduction": "It is one of 3 planets known around Kepler-249. Its orbit and size follow Rowe et al. 2014's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ROWE_ET_AL__2014): disc_year 2014, disc_facility Kepler, sy_pnum 3; pl_orbper 15.36844007, pl_radj 0.14, pl_bmassj 0.00972"
+      },
+      "order": 3718
+    }
+  ]
+}

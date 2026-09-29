@@ -1,0 +1,28 @@
+{
+ "id": "k2-198c",
+ "classification": "exoplanet",
+ "order": 3373,
+ "physical": {
+  "name": "K2-198 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 9076,
+  "gravitationalParameterKm3PerS2": 1041363.29,
+  "parent": "k2-198"
+ },
+ "physicalNotes": "Radius 0.12695156 Jupiter radii from Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract): 9,076 km at 71,492 km per Jupiter radius. GM from the mass 0.00822 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.3596055,
+  "semiMajorAxisStellarRadii": 8.76,
+  "inclinationDegrees": 86.494,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57214.532,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): P 3.3596055 d",
+   "shape": "Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): a/R* 8.76; Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): inclination 86.494 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): transit mid-time 2457215.032 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 7 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "epic-211822797b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "EPIC 211822797 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 12246
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/epic-211822797b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "EPIC 211822797 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 38461937.4,
+      "description": "EPIC 211822797 b was found in 2016 by K2 as it crossed its star.",
+      "systemName": "EPIC 211822797 system",
+      "order": 3065,
+      "context": {
+        "order": 3065
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3554556511821461500,
+        4175099636509084000,
+        1743605749040434200
+      ],
+      "presentationToReference": [
+        -0.6243953831376853,
+        0.7560028496570362,
+        0.19644362251491862,
+        0.7199358577246002,
+        0.6545629826272287,
+        -0.2307372153262026,
+        0.30302271578000084,
+        0.0026444440979213175,
+        0.9529796643353549
+      ],
+      "orbitUpReference": [
+        -0.7560028496570362,
+        -0.6545629826272287,
+        -0.0026444440979213175
+      ],
+      "metersPerUnit": 39503.22580645161,
+      "bodyRadiusM": 12246000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

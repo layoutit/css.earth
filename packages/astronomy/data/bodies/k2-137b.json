@@ -1,0 +1,28 @@
+{
+ "id": "k2-137b",
+ "classification": "exoplanet",
+ "order": 3313,
+ "physical": {
+  "name": "K2-137 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 4082,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "k2-137"
+ },
+ "physicalNotes": "Radius 0.05709707 Jupiter radii from Adams et al. 2021 (2021PSJ.....2..152A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract): 4,082 km at 71,492 km per Jupiter radius. No mass is measured: Smith et al. 2018 (2018MNRAS.474.5523S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018MNRAS.474.5523S/abstract) gives only an upper limit of 0.5 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.179715,
+  "semiMajorAxisStellarRadii": 2.1,
+  "inclinationDegrees": 93.1,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57582.5242,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Smith et al. 2018 (2018MNRAS.474.5523S), via the NASA Exoplanet Archive ps table (pl_refname SMITH_ET_AL__2018): P 0.179715 d",
+   "shape": "Adams et al. 2021 (2021PSJ.....2..152A), via the NASA Exoplanet Archive ps table (pl_refname ADAMS_ET_AL__2021): a/R* 2.1; Adams et al. 2021 (2021PSJ.....2..152A), via the NASA Exoplanet Archive ps table (pl_refname ADAMS_ET_AL__2021): inclination 93.1 degrees",
+   "eccentricity": "Smith et al. 2018 (2018MNRAS.474.5523S), via the NASA Exoplanet Archive ps table (pl_refname SMITH_ET_AL__2018): e 0",
+   "phase": "Smith et al. 2018 (2018MNRAS.474.5523S), via the NASA Exoplanet Archive ps table (pl_refname SMITH_ET_AL__2018): transit mid-time 2457583.0242 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 28 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

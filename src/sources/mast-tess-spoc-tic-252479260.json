@@ -1,0 +1,41 @@
+{
+  "id": "mast-tess-spoc-tic-252479260",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TESS SPOC 2-minute light curves of TIC 252479260, sectors 21, 48, 75",
+  "identifiers": [
+    {
+      "type": "TIC",
+      "value": "252479260"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "label": "MAST"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1117/12.2233418",
+      "label": "Jenkins et al. (2016), the TESS Science Processing Operations Center"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020020091053-s0021-0000000252479260-0167-s_lc.fits",
+      "checkedOn": "2026-09-29",
+      "locator": "SPOC light-curve files for sectors 21, 48, 75: LIGHTCURVE table, PDCSAP_FLUX, QUALITY, TIME in BJD_TDB - 2457000"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from MAST; SPOC pipeline, Jenkins et al. (2016)",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+    }
+  ],
+  "publisher": "Mikulski Archive for Space Telescopes (STScI)"
+}

@@ -1,0 +1,24 @@
+{
+  "host": "toi-2768",
+  "planets": [
+    {
+      "id": "toi-2768b",
+      "name": "TOI-2768 b",
+      "description": "Transiting planet of TOI-2768 with a 1.51-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+        "credit": "Peláez-Torres et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-2768 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2768. Its orbit and size follow Peláez-Torres et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.5080197, pl_radj 0.23463329, pl_bmassj 0.0233"
+      },
+      "order": 4341
+    }
+  ]
+}

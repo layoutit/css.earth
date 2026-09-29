@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1347c",
+  "radiusKm": 10205,
+  "radiusSource": "Radius 0.14274268 Jupiter radii from Rubenzahl et al. 2024 (2024AJ....167..153R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..153R/abstract): 10,205 km at 71,492 km per Jupiter radius. No mass is measured: Rubenzahl et al. 2024 (2024AJ....167..153R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..153R/abstract) gives only an upper limit of 0.02013665 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.841962,
+  "orbitalPeriodSource": "Rubenzahl et al. 2024 (2024AJ....167..153R), via the NASA Exoplanet Archive ps table (pl_refname RUBENZAHL_ET_AL_2024): P 4.841962 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1347 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.02013665 Jupiter masses: Rubenzahl et al. 2024 (2024AJ....167..153R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..153R/abstract)."
+}

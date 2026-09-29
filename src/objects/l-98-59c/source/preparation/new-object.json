@@ -1,0 +1,24 @@
+{
+  "host": "l-98-59",
+  "planets": [
+    {
+      "id": "l-98-59c",
+      "name": "L 98-59 c",
+      "description": "Transiting planet of L 98-59 with a 3.69-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+        "credit": "Cadieux et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CADIEUX_ET_AL_2025"
+      },
+      "text": {
+        "card": "L 98-59 c was found in 2019 by TESS as it crossed its star.",
+        "introduction": "It is one of 5 planets known around L 98-59. Its orbit and size follow Cadieux et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL_2025): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 3.69057404, pl_radj 0.11856564, pl_bmassj 0.0062927"
+      },
+      "order": 3801
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "ltt-1445-a-b",
+  "radiusKm": 8546.7,
+  "radiusSource": "Radius 0.119547 Jupiter radii from Pass et al. 2023 (2023AJ....166..171P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..171P/abstract): 8,546.7 km at 71,492 km per Jupiter radius. GM from the mass 0.00858954 Jupiter masses (Pass et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166..171P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....166..171P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 5.358765,
+  "orbitalPeriodSource": "Lavie et al. 2023 (2023A&A...673A..69L), via the NASA Exoplanet Archive ps table (pl_refname LAVIE_ET_AL__2023): P 5.358765 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of LTT 1445 A b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00858954 Jupiter masses: Pass et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166..171P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..171P/abstract)."
+}

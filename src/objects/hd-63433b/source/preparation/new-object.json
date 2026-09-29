@@ -1,0 +1,24 @@
+{
+  "host": "hd-63433",
+  "planets": [
+    {
+      "id": "hd-63433b",
+      "name": "HD 63433 b",
+      "description": "Transiting planet of HD 63433 with a 7.11-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract",
+        "credit": "Mallorquín et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MALLORQU_AMP_IACUTE_N_ET_AL__2023"
+      },
+      "text": {
+        "card": "HD 63433 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 3 planets known around HD 63433. Its orbit and size follow Mallorquín et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 7.1079379, pl_radj 0.191, pl_bmassj 0.06844888"
+      },
+      "order": 4868
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "host": "gj-9827",
+  "planets": [
+    {
+      "id": "gj-9827c",
+      "name": "GJ 9827 c",
+      "description": "Transiting planet of GJ 9827 with a 3.65-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..22P/abstract",
+        "credit": "Passegger et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PASSEGGER_ET_AL_2024"
+      },
+      "text": {
+        "card": "GJ 9827 c was found in 2017 by K2 as it crossed its star.",
+        "introduction": "It is one of 3 planets known around GJ 9827. Its orbit and size follow Passegger et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASSEGGER_ET_AL_2024): disc_year 2017, disc_facility K2, sy_pnum 3; pl_orbper 3.6481145, pl_radj 0.10081202, pl_bmassj 0.00585221"
+      },
+      "order": 3105
+    }
+  ]
+}

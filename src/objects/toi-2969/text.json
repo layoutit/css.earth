@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2969",
+  "card": {
+    "text": "TOI-2969 b crosses TOI-2969 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202553879",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract",
+        "label": "Frensch et al. (2025), Astronomy & Astrophysics 700 A118",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname FRENSCH_ET_AL_2025): st_teff 4738, st_rad 0.7, st_mass 0.71"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Frensch et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202553879",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract",
+        "label": "Frensch et al. (2025), Astronomy & Astrophysics 700 A118",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname FRENSCH_ET_AL_2025): st_teff 4738, st_rad 0.7, st_mass 0.71"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

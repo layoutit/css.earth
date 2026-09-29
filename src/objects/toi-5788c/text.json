@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5788c",
+  "card": {
+    "text": "TOI-5788 c was found in 2026 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag158",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag158L/abstract",
+        "label": "Lakeland et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAKELAND_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 16.213362, pl_radj 0.20269461, pl_bmassj 0.02013665"
+      },
+      {
+        "catalogueId": "wikipedia-toi-5788",
+        "url": "https://en.wikipedia.org/wiki/TOI-5788",
+        "label": "Wikipedia, \"TOI-5788\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374430362",
+        "quote": "Two exoplanets orbit it, designated as TOI-5788 b and TOI-5788 c, where the former is classified as a rocky planet and the latter is a mini-Neptune."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-5788. Its orbit and size follow Lakeland et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag158",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag158L/abstract",
+        "label": "Lakeland et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAKELAND_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 16.213362, pl_radj 0.20269461, pl_bmassj 0.02013665"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

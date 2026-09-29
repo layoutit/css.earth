@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-2685",
+  "card": {
+    "text": "HD 2685 b crosses HD 2685 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201834640",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract",
+        "label": "Jones et al. (2019), Astronomy & Astrophysics 625 A16",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JONES_ET_AL__2019): st_teff 6801, st_rad 1.56, st_mass 1.43"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Jones et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201834640",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract",
+        "label": "Jones et al. (2019), Astronomy & Astrophysics 625 A16",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JONES_ET_AL__2019): st_teff 6801, st_rad 1.56, st_mass 1.43"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

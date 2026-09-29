@@ -1,0 +1,24 @@
+{
+  "host": "k2-343",
+  "planets": [
+    {
+      "id": "k2-343b",
+      "name": "K2-343 b",
+      "description": "Transiting planet of K2-343 with a 2.79-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+        "credit": "de Leon et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DE_LEON_ET_AL_2021"
+      },
+      "text": {
+        "card": "K2-343 b was found in 2021 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around K2-343. Its orbit and size follow de Leon et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DE_LEON_ET_AL_2021): disc_year 2021, disc_facility K2, sy_pnum 2; pl_orbper 2.787174, pl_radj 0.14720339, pl_bmassj 0.0106"
+      },
+      "order": 3517
+    }
+  ]
+}

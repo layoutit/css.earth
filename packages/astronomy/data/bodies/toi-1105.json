@@ -1,0 +1,30 @@
+{
+ "id": "toi-1105",
+ "classification": "star",
+ "order": 3919,
+ "physical": {
+  "name": "TOI-1105",
+  "horizonsCode": null,
+  "meanRadiusKm": 525833,
+  "gravitationalParameterKm3PerS2": 97818225469.27222,
+  "parent": null,
+  "effectiveTemperatureK": 4678.46
+ },
+ "physicalNotes": "Radius 0.755833 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-1105 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 525,833 km at 695,700 km per solar radius. Mass 0.737 (0.697 to 0.777) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 4678.46 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-1105 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 146.0536922073209,
+  "declinationDegrees": -89.47151202237747,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 79.39990932648324,
+  "properMotionRaMasPerYear": -18.357669785299596,
+  "properMotionDecMasPerYear": 9.143072085343439,
+  "radialVelocityKmPerS": 28.66804,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5188175980806170624 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1105/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 12.5945 +/- 0.0127 mas (same row, RUWE 0.99): 79.40 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -18.358, 9.143 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 28.67 +/- 0.33 km/s"
+  }
+ }
+}

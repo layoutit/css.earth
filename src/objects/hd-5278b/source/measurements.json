@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-5278b",
+  "radiusKm": 15626.3,
+  "radiusSource": "Radius 0.21857474 Jupiter radii from Sozzetti et al. 2021 (2021A&A...648A..75S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...648A..75S/abstract): 15,626.3 km at 71,492 km per Jupiter radius. GM from the mass 0.02454154 Jupiter masses (Sozzetti et al. 2021, the mass the NASA Exoplanet Archive's composite table adopts (2021A&A...648A..75S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2021A&A...648A..75S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 14.33913866687,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 14.33913866687 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 5278 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02454154 Jupiter masses: Sozzetti et al. 2021, the mass the NASA Exoplanet Archive's composite table adopts (2021A&A...648A..75S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...648A..75S/abstract)."
+}

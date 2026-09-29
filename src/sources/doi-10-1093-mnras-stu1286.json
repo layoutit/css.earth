@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stu1286",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mancini et al. (2014): Physical properties, star-spot activity, orbital obliquity and transmission spectrum of the Qatar-2 planetary system from multicolour photometry★",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1406.6714"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stu1286"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014MNRAS.443.2391M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stu1286",
+      "label": "Monthly Notices of the Royal Astronomical Society 443 2391-2409"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mancini et al. (2014), Monthly Notices of the Royal Astronomical Society 443 2391-2409",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 443 2391-2409",
+  "creators": [
+    "L. Mancini",
+    "J. Southworth",
+    "S. Ciceri",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

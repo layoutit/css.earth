@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1453c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.19841233 Jupiter radii from Stalport et al. 2025 (2025A&A...696A..86S), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.00928174 Jupiter masses: Stalport et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...696A..86S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.5886877 d; Stalport et al. 2025 (2025A&A...696A..86S), via the NASA Exoplanet Archive ps table (pl_refname STALPORT_ET_AL_2025): a/R* 18.41; Stalport et al. 2025 (2025A&A...696A..86S), via the NASA Exoplanet Archive ps table (pl_refname STALPORT_ET_AL_2025): inclination 87.61 degrees; Stalport et al. 2025 (2025A&A...696A..86S), via the NASA Exoplanet Archive ps table (pl_refname STALPORT_ET_AL_2025): e 0; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460660.40937 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract"
+      ]
+    }
+  ]
+}

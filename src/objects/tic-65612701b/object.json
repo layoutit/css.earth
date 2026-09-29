@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "tic-65612701b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TIC 65612701 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 32388.2
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tic-65612701b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TIC 65612701 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 31144711.7,
+      "description": "TIC 65612701 b was found in 2026 by TESS as it crossed its star.",
+      "systemName": "TIC 65612701 system",
+      "order": 3901,
+      "context": {
+        "order": 3901
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2436129480308949000,
+        -2855002897450119700,
+        2760835689644131000
+      ],
+      "presentationToReference": [
+        0.5456420714296689,
+        -0.7445366497931339,
+        -0.3846295711470403,
+        -0.5928500227035787,
+        -0.6673408627027784,
+        0.45076049466149704,
+        0.5922867383846324,
+        0.017926240038770868,
+        0.8055278204083123
+      ],
+      "orbitUpReference": [
+        0.7445366497931339,
+        0.6673408627027784,
+        -0.017926240038770868
+      ],
+      "metersPerUnit": 104478.06451612903,
+      "bodyRadiusM": 32388200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

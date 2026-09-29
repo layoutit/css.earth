@@ -1,0 +1,28 @@
+{
+ "id": "k2-370b",
+ "classification": "exoplanet",
+ "order": 3547,
+ "physical": {
+  "name": "K2-370 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 17029.5,
+  "gravitationalParameterKm3PerS2": 4424465.05,
+  "parent": "k2-370"
+ },
+ "physicalNotes": "Radius 0.23820186 Jupiter radii from Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S/abstract): 17,029.5 km at 71,492 km per Jupiter radius. GM from the mass 0.03492451 Jupiter masses (Sozzetti et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.535..531S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.1408093,
+  "semiMajorAxisStellarRadii": 7.3043,
+  "inclinationDegrees": 84.44,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57860.21859,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): P 2.1408093 d",
+   "shape": "Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): a/R* derived from its semi-major axis 0.0321 au and stellar radius 0.945 solar radii; Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): inclination 84.44 degrees",
+   "eccentricity": "Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): e 0",
+   "phase": "Sozzetti et al. 2024 (2024MNRAS.535..531S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL_2024): transit mid-time 2457860.71859 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

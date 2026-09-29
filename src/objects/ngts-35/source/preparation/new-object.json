@@ -1,0 +1,39 @@
+{
+  "id": "ngts-35",
+  "name": "NGTS-35",
+  "system": "NGTS-35 system",
+  "description": "Star of 4,717 K, 183 parsecs away, with 1 transiting planet.",
+  "target": "NGTS-35",
+  "gaia": "3531943236058701824",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract",
+    "credit": "Kendall et al. 2026"
+  },
+  "radius": {
+    "value": 0.753,
+    "source": "Kendall et al. 2026, the stellar radius of the default parameter set of NGTS-35 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract",
+    "uncertainty": 0.051
+  },
+  "mass": {
+    "value": 0.789,
+    "source": "Kendall et al. 2026, the stellar mass of the default parameter set of NGTS-35 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract",
+    "uncertainty": 0.035
+  },
+  "temperature": {
+    "value": 4717,
+    "source": "Kendall et al. 2026, the stellar temperature of the default parameter set of NGTS-35 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract",
+    "uncertainty": 18
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "NGTS-35 b crosses NGTS-35 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Kendall et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KENDALL_ET_AL_2026): st_teff 4717, st_rad 0.753, st_mass 0.789"
+  },
+  "notes": [],
+  "order": 3000
+}

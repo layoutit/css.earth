@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-1446",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 521,775 km at 151.57 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 151.56662033212586,
+  "distanceSource": "Gaia DR3 parallax 6.5978 +/- 0.0099 mas (same row, RUWE 0.97): 151.57 pc, no zero-point correction",
+  "radiusKm": 521775,
+  "radiusSource": "Radius 0.75 +/- 0.013 solar radii from Morton et al. 2016, the stellar radius of the default parameter set of Kepler-1446 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract): 521,775 km at 695,700 km per solar radius. Mass 0.81 +/- 0.019 solar masses from Morton et al. 2016, the stellar mass of the default parameter set of Kepler-1446 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract); GM is that mass times the JPL solar GM. Temperature 4865 +/- 43.69 K from Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1446 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4865,
+  "effectiveTemperatureSource": "Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1446 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "surfaceGravityLogg": 4.6,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-1446.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.596, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

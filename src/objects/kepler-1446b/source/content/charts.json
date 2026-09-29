@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-1446b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-1446b-orbits",
+      "title": "Kepler-1446 b: orbits around Kepler-1446",
+      "output": "kepler-1446b-system-orbits.svg",
+      "system": "kepler-1446",
+      "highlight": "kepler-1446b",
+      "description": "The orbits of Kepler-1446's planets in this map from above, to scale, with Kepler-1446 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 0.6899675843 d"
+      }
+    }
+  ]
+}

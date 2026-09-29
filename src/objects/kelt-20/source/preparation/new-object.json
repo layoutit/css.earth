@@ -1,0 +1,45 @@
+{
+  "id": "kelt-20",
+  "name": "KELT-20",
+  "system": "KELT-20 system",
+  "description": "Star of 8,720 K, 136 parsecs away, with 1 transiting planet.",
+  "target": "KELT-20",
+  "gaia": "2033123654092592384",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract",
+    "credit": "Lund et al. 2017"
+  },
+  "radius": {
+    "value": 1.565,
+    "source": "Lund et al. 2017, the stellar radius of the default parameter set of KELT-20 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract",
+    "uncertainty": 0.057
+  },
+  "mass": {
+    "value": 1.76,
+    "source": "Lund et al. 2017, the stellar mass of the default parameter set of KELT-20 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract",
+    "uncertainty": 0.14
+  },
+  "temperature": {
+    "value": 8720,
+    "source": "Lund et al. 2017, the stellar temperature of the default parameter set of KELT-20 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract",
+    "uncertainty": 250
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "KELT-20 b crosses KELT-20 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lund et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LUND_ET_AL__2017): st_teff 8720, st_rad 1.565, st_mass 1.76",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/KELT-20",
+      "title": "KELT-20",
+      "revision": "1374447847",
+      "card": "KELT-20, also known as MASCARA-2, is an A2 main sequence star in the constellation of Cygnus, about 447 light years away."
+    }
+  },
+  "notes": [],
+  "order": 3633
+}

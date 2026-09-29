@@ -1,0 +1,32 @@
+{
+  "id": "toi-697",
+  "name": "TOI-697",
+  "system": "TOI-697 system",
+  "description": "Star of 5,682 K, 93.8 parsecs away, with 1 transiting planet.",
+  "target": "TOI-697",
+  "gaia": "4866555051425383424",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.968149,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-697 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5681.95,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-697 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-697 b crosses TOI-697 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 5681.95, st_rad 0.968149"
+  },
+  "notes": [],
+  "order": 4665
+}

@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "k2-43b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.40235525 Jupiter radii from Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.0583 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html).",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.4712802624 d; Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): a/R* 8; Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): inclination 89.6 degrees; Dressing et al. 2017 (2017AJ....154..207D), via the NASA Exoplanet Archive ps table (pl_refname DRESSING_ET_AL__2017): e 0.07; Dressing et al. 2017 (2017AJ....154..207D), via the NASA Exoplanet Archive ps table (pl_refname DRESSING_ET_AL__2017): omega -25.11 degrees, stored as 334.89; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459281.403586 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 15 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract"
+      ]
+    }
+  ]
+}

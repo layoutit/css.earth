@@ -1,0 +1,28 @@
+{
+ "id": "toi-4342b",
+ "classification": "exoplanet",
+ "order": 4403,
+ "physical": {
+  "name": "TOI-4342 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 14854.6,
+  "gravitationalParameterKm3PerS2": 2909783.14,
+  "parent": "toi-4342"
+ },
+ "physicalNotes": "Radius 0.20777982 Jupiter radii from Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract): 14,854.6 km at 71,492 km per Jupiter radius. GM from the mass 0.02296837 Jupiter masses (Parc et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...708A..81P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 5.5382592,
+  "semiMajorAxisStellarRadii": 18.6625,
+  "inclinationDegrees": 88.83,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58654.03479,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL_2026): P 5.5382592 d",
+   "shape": "Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL_2026): a/R* derived from its semi-major axis 0.0519 au and stellar radius 0.598 solar radii; Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL_2026): inclination 88.83 degrees",
+   "eccentricity": "Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL_2026): e 0",
+   "phase": "Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL_2026): transit mid-time 2458654.53479 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

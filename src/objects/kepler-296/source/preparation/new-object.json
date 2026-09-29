@@ -1,0 +1,51 @@
+{
+  "id": "kepler-296",
+  "name": "Kepler-296",
+  "system": "Kepler-296 system",
+  "description": "Star of 3,740 K with 5 transiting planets.",
+  "target": "Kepler-296",
+  "gaia": "2132069633148965888",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809....7B/abstract",
+    "credit": "Barclay et al. 2015"
+  },
+  "radius": {
+    "value": 0.48,
+    "source": "Barclay et al. 2015, the stellar radius of the default parameter set of Kepler-296 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809....7B/abstract",
+    "uncertainty": 0.066
+  },
+  "mass": {
+    "value": 0.498,
+    "source": "Barclay et al. 2015, the stellar mass of the default parameter set of Kepler-296 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809....7B/abstract",
+    "uncertainty": 0.067
+  },
+  "temperature": {
+    "value": 3740,
+    "source": "Barclay et al. 2015, the stellar temperature of the default parameter set of Kepler-296 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809....7B/abstract",
+    "uncertainty": 130
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "5 planets cross Kepler-296 as seen from Earth: b, c, d, e, f.",
+    "introduction": "Its radius and temperature follow Barclay et al. 2015.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BARCLAY_ET_AL__2015): st_teff 3740, st_rad 0.48, st_mass 0.498",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-296",
+      "title": "Kepler-296",
+      "revision": "1335869754",
+      "card": "Kepler-296 is a binary star system in the constellation Draco.",
+      "introduction": "The primary star appears to be a late K-type main-sequence star, while the secondary is a red dwarf."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 2132069633148965888 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 70,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202132069633148965888"
+  },
+  "order": 3719
+}

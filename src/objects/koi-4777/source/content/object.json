@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "koi-4777",
+  "displayName": "KOI-4777",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.4 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac3088",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163....3C",
+          "label": "Cañas et al. (2022), The Astronomical Journal 163 3",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "171 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-koi-4777",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "koi-4777-lens-color.webp",
+        "surface": "koi-4777-surface-color@2x.webp",
+        "poles": "koi-4777-poles-color@2x.webp",
+        "source": {
+          "id": "koi-4777-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163....3C/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,515 K and log g 4.85 (u1 0.391, u2 0.379): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Cañas et al. 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022AJ....163....3C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163....3C/abstract",
+      "credit": "Cañas et al. 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/koi-4777.json",
+      "credit": "Cañas et al. 2022, the stellar radius of the default parameter set of KOI-4777.01 in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

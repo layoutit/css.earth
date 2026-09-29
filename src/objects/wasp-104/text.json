@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-104",
+  "card": {
+    "text": "WASP-104 b crosses WASP-104 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201424752",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract",
+        "label": "Smith et al. (2014), Astronomy & Astrophysics 570 A64",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SMITH_ET_AL__2014): st_teff 5475, st_rad 0.963, st_mass 1.076"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-104b",
+        "url": "https://en.wikipedia.org/wiki/WASP-104b",
+        "label": "Wikipedia, \"WASP-104b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374244728",
+        "quote": "WASP-104b is a hot Jupiter exoplanet that orbits the star WASP-104."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Smith et al. 2014.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201424752",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract",
+        "label": "Smith et al. (2014), Astronomy & Astrophysics 570 A64",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SMITH_ET_AL__2014): st_teff 5475, st_rad 0.963, st_mass 1.076"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-104b",
+        "url": "https://en.wikipedia.org/wiki/WASP-104b",
+        "label": "Wikipedia, \"WASP-104b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374244728",
+        "quote": "It is considered to be one of the darkest exoplanets discovered."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-669",
+  "name": "TOI-669",
+  "system": "TOI-669 system",
+  "description": "Star of 5,597 K, 143 parsecs away, with 1 transiting planet.",
+  "target": "TOI-669",
+  "gaia": "3777506754255516800",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "credit": "MacDougall et al. 2023"
+  },
+  "radius": {
+    "value": 0.9882,
+    "source": "MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-669 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0176
+  },
+  "mass": {
+    "value": 0.9245,
+    "source": "MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-669 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0327
+  },
+  "temperature": {
+    "value": 5597,
+    "source": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-669 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 72
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-669 b crosses TOI-669 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 5597, st_rad 0.9882, st_mass 0.9245"
+  },
+  "notes": [],
+  "order": 4649
+}

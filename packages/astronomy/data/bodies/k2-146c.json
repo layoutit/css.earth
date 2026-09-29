@@ -1,0 +1,31 @@
+{
+ "id": "k2-146c",
+ "classification": "exoplanet",
+ "order": 3321,
+ "physical": {
+  "name": "K2-146 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 13968,
+  "gravitationalParameterKm3PerS2": 2987268.42,
+  "parent": "k2-146"
+ },
+ "physicalNotes": "Radius 0.19537871 Jupiter radii from Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..133H/abstract): 13,968 km at 71,492 km per Jupiter radius. GM from the mass 0.02358 Jupiter masses (Hamann et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158..133H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....158..133H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.00498,
+  "semiMajorAxisStellarRadii": 22.247,
+  "inclinationDegrees": 87.54,
+  "eccentricity": 0.075,
+  "argumentOfPeriapsisDegrees": 130,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58203.6316,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): P 4.00498 d",
+   "shape": "Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): a/R* derived by Kepler's third law from its period 4.00498 d, stellar mass 0.331 and radius 0.33 solar units; Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): inclination 87.54 degrees",
+   "eccentricity": "Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): e 0.075",
+   "argumentOfPeriapsis": "Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): omega 130 degrees",
+   "phase": "Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): transit mid-time 2458204.1316 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 112 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

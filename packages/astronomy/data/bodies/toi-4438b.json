@@ -1,0 +1,31 @@
+{
+ "id": "toi-4438b",
+ "classification": "exoplanet",
+ "order": 4416,
+ "physical": {
+  "name": "TOI-4438 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 15307.4,
+  "gravitationalParameterKm3PerS2": 1638248.15,
+  "parent": "toi-4438"
+ },
+ "physicalNotes": "Radius 0.21411403 Jupiter radii from Serrano Bell et al. 2026 (2026arXiv260713333S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract): 15,307.4 km at 71,492 km per Jupiter radius. GM from the mass 0.01293151 Jupiter masses (Serrano Bell et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260713333S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.446295,
+  "semiMajorAxisStellarRadii": 30.8115,
+  "inclinationDegrees": 89.7,
+  "eccentricity": 0.07,
+  "argumentOfPeriapsisDegrees": 274,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59395.91069,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Serrano Bell et al. 2026 (2026arXiv260713333S), via the NASA Exoplanet Archive ps table (pl_refname SERRANO_BELL_ET_AL_2026): P 7.446295 d",
+   "shape": "Serrano Bell et al. 2026 (2026arXiv260713333S), via the NASA Exoplanet Archive ps table (pl_refname SERRANO_BELL_ET_AL_2026): a/R* derived from its semi-major axis 0.0523 au and stellar radius 0.365 solar radii; Serrano Bell et al. 2026 (2026arXiv260713333S), via the NASA Exoplanet Archive ps table (pl_refname SERRANO_BELL_ET_AL_2026): inclination 89.7 degrees",
+   "eccentricity": "Serrano Bell et al. 2026 (2026arXiv260713333S), via the NASA Exoplanet Archive ps table (pl_refname SERRANO_BELL_ET_AL_2026): e 0.07",
+   "argumentOfPeriapsis": "Serrano Bell et al. 2026 (2026arXiv260713333S), via the NASA Exoplanet Archive ps table (pl_refname SERRANO_BELL_ET_AL_2026): omega -86 degrees, stored as 274",
+   "phase": "Serrano Bell et al. 2026 (2026arXiv260713333S), via the NASA Exoplanet Archive ps table (pl_refname SERRANO_BELL_ET_AL_2026): transit mid-time 2459396.41069 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

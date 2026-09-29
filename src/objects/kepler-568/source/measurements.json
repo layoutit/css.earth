@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-568",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 368,721 km at 131.08 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 131.08002396715048,
+  "distanceSource": "Gaia DR3 parallax 7.6289 +/- 0.0154 mas (same row, RUWE 1.02): 131.08 pc, no zero-point correction",
+  "radiusKm": 368721,
+  "radiusSource": "Radius 0.53 +/- 0.017 solar radii from Morton et al. 2016, the stellar radius of the default parameter set of Kepler-568 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract): 368,721 km at 695,700 km per solar radius. Mass 0.55 +/- 0.019 solar masses from Morton et al. 2016, the stellar mass of the default parameter set of Kepler-568 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract); GM is that mass times the JPL solar GM. Temperature 3768 +/- 40.66 K from Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-568 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3768,
+  "effectiveTemperatureSource": "Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-568 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "surfaceGravityLogg": 4.73,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-568.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.730, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

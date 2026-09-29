@@ -1,0 +1,24 @@
+{
+  "host": "hd-73344",
+  "planets": [
+    {
+      "id": "hd-73344d",
+      "name": "HD 73344 d",
+      "description": "Planet of HD 73344 found by radial velocity, with a 5820-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..200Z/abstract",
+        "credit": "Zhang et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "measured": true
+      },
+      "text": {
+        "card": "HD 73344 d was found in 2025 by radial velocity; it does not cross its star.",
+        "introduction": "It is one of 3 planets known around HD 73344. Its orbit, tilt included, follows Zhang et al. 2025's fit, and its size is the archive's model from its mass.",
+        "locator": "NASA Exoplanet Archive ps table (pl_refname ZHANG_ET_AL_2025): disc_year 2025, disc_facility Multiple Observatories, sy_pnum 3; pl_orbper 5823, pl_orbincl 59, pl_orbtper 2458061; pscomppars calculated pl_radj 1.18, pl_bmassj 2.55"
+      },
+      "order": 4870
+    }
+  ]
+}

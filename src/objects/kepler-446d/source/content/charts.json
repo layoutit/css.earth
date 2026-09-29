@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-446d/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-446d-orbits",
+      "title": "Kepler-446 d: orbits around Kepler-446",
+      "output": "kepler-446d-system-orbits.svg",
+      "system": "kepler-446",
+      "highlight": "kepler-446d",
+      "description": "The orbits of Kepler-446's planets in this map from above, to scale, with Kepler-446 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 5.14892826 d"
+      }
+    }
+  ]
+}

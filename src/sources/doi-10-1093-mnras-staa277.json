@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-staa277",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Díaz et al. (2020): TOI-132 b: A short-period planet in the Neptune desert transiting a <i>V</i> = 11.3 G-type star★",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1911.02012"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staa277"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020MNRAS.493..973D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staa277",
+      "label": "Monthly Notices of the Royal Astronomical Society 493 973-985"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Díaz et al. (2020), Monthly Notices of the Royal Astronomical Society 493 973-985",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 493 973-985",
+  "creators": [
+    "Matías R Díaz",
+    "James S Jenkins",
+    "Davide Gandolfi",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

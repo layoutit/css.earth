@@ -1,0 +1,39 @@
+{
+  "id": "toi-1693",
+  "name": "TOI-1693",
+  "system": "TOI-1693 system",
+  "description": "Star of 3,499 K, 30.8 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1693",
+  "gaia": "3451908921382409472",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "credit": "Giacalone et al. 2022"
+  },
+  "radius": {
+    "value": 0.46,
+    "source": "Giacalone et al. 2022, the stellar radius of the default parameter set of TOI-1693 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.49,
+    "source": "Giacalone et al. 2022, the stellar mass of the default parameter set of TOI-1693 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 3499,
+    "source": "Giacalone et al. 2022, the stellar temperature of the default parameter set of TOI-1693 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1693 b crosses TOI-1693 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Giacalone et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GIACALONE_ET_AL__2022): st_teff 3499, st_rad 0.46, st_mass 0.49"
+  },
+  "notes": [],
+  "order": 4091
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-286b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-286b-orbits",
+      "title": "K2-286 b: orbits around K2-286",
+      "output": "k2-286b-system-orbits.svg",
+      "system": "k2-286",
+      "highlight": "k2-286b",
+      "description": "The orbits of K2-286's planets in this map from above, to scale, with K2-286 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Díez Alonso et al. 2019 (2019MNRAS.489.5928D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2019): P 27.359 d"
+      }
+    }
+  ]
+}

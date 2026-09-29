@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "k2-124",
+  "displayName": "K2-124",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.39 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aaff69",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L",
+          "label": "Livingston et al. (2019), The Astronomical Journal 157 102",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "137 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-k2-124",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "k2-124-lens-color.webp",
+        "surface": "k2-124-surface-color@2x.webp",
+        "poles": "k2-124-poles-color@2x.webp",
+        "source": {
+          "id": "k2-124-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,570 K and log g 4.85 (u1 0.385, u2 0.378): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Livingston et al. 2019",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract",
+      "credit": "Livingston et al. 2019"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/k2-124.json",
+      "credit": "Livingston et al. 2019, the stellar radius of the default parameter set of K2-124 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

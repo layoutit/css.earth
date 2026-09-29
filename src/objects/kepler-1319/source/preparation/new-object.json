@@ -1,0 +1,39 @@
+{
+  "id": "kepler-1319",
+  "name": "Kepler-1319",
+  "system": "Kepler-1319 system",
+  "description": "Star of 3,655 K, 104 parsecs away, with 1 transiting planet.",
+  "target": "Kepler-1319",
+  "gaia": "2129942765344872320",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "credit": "Morton et al. 2016"
+  },
+  "radius": {
+    "value": 0.54,
+    "source": "Morton et al. 2016, the stellar radius of the default parameter set of Kepler-1319 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "uncertainty": 0.018
+  },
+  "mass": {
+    "value": 0.56,
+    "source": "Morton et al. 2016, the stellar mass of the default parameter set of Kepler-1319 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "uncertainty": 0.015
+  },
+  "temperature": {
+    "value": 3655,
+    "source": "Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1319 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "uncertainty": 45.46
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-1319 b crosses Kepler-1319 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Morton et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MORTON_ET_AL__2016): st_teff 3655, st_rad 0.54, st_mass 0.56"
+  },
+  "notes": [],
+  "order": 3670
+}

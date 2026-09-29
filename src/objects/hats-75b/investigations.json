@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hats-75b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.884 Jupiter radii from Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.491 Jupiter masses: Jordán et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163..125J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive ps table (pl_refname JORD_AACUTE_N_ET_AL__2022): P 2.7886556 d; Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive ps table (pl_refname JORD_AACUTE_N_ET_AL__2022): a/R* 12.037; Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive ps table (pl_refname JORD_AACUTE_N_ET_AL__2022): inclination 88.07 degrees; No archive row states an eccentricity; the orbit is taken as circular; Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive ps table (pl_refname JORD_AACUTE_N_ET_AL__2022): transit mid-time 2458611.05487 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract"
+      ]
+    }
+  ]
+}

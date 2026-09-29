@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hip-41378d",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.32563175 Jupiter radii from Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02054568 Jupiter masses: Grouffal et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260623103G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2026): P 278.3618 d; Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2026): a/R* derived by Kepler's third law from its period 278.3618 d, stellar mass 1.22 and radius 1.3 solar units; Grouffal et al. 2022 (2022A&A...668A.172G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2022): inclination 89.81 degrees; Grouffal et al. 2022 (2022A&A...668A.172G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2022): e 0; Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2026): transit mid-time 2457166.261 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...668A.172G/abstract"
+      ]
+    }
+  ]
+}

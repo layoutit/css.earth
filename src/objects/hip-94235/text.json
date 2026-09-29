@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hip-94235",
+  "card": {
+    "text": "HIP 94235 b crosses HIP 94235 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac69e3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract",
+        "label": "Zhou et al. (2022), The Astronomical Journal 163 289",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZHOU_ET_AL_2022): st_teff 5991, st_rad 1.08, st_mass 1.094"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Zhou et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac69e3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract",
+        "label": "Zhou et al. (2022), The Astronomical Journal 163 289",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZHOU_ET_AL_2022): st_teff 5991, st_rad 1.08, st_mass 1.094"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

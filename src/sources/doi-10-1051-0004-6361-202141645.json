@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202141645",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hooton et al. (2022): Spi-OPS: <i>Spitzer</i> and CHEOPS confirm the near-polar orbit of MASCARA-1 b and reveal a hint of dayside reflection",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2109.05031"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202141645"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022A&A...658A..75H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202141645",
+      "label": "Astronomy & Astrophysics 658 A75"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 658 A75",
+  "creators": [
+    "M. J. Hooton",
+    "S. Hoyer",
+    "D. Kitzmann",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6034",
+  "card": {
+    "text": "TOI-6034 b crosses TOI-6034 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad7796",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract",
+        "label": "Kanodia et al. (2024), The Astronomical Journal 168 235",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KANODIA_ET_AL_2024): st_teff 3635, st_rad 0.489, st_mass 0.514"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Kanodia et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad7796",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract",
+        "label": "Kanodia et al. (2024), The Astronomical Journal 168 235",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KANODIA_ET_AL_2024): st_teff 3635, st_rad 0.489, st_mass 0.514"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

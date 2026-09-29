@@ -1,0 +1,41 @@
+{
+  "id": "toi-756",
+  "name": "TOI-756",
+  "system": "TOI-756 system",
+  "description": "Star of 3,657 K, 86.2 parsecs away, with 1 transiting planet.",
+  "target": "TOI-756",
+  "gaia": "6129327525817451648",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract",
+    "credit": "Parc et al. 2025"
+  },
+  "radius": {
+    "value": 0.505,
+    "source": "Parc et al. 2025, the stellar radius of the default parameter set of TOI-756 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.505,
+    "source": "Parc et al. 2025, the stellar mass of the default parameter set of TOI-756 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract",
+    "uncertainty": 0.019
+  },
+  "temperature": {
+    "value": 3657,
+    "source": "Parc et al. 2025, the stellar temperature of the default parameter set of TOI-756 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract",
+    "uncertainty": 72
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-756 b crosses TOI-756 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Parc et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname PARC_ET_AL__2025): st_teff 3657, st_rad 0.505, st_mass 0.505"
+  },
+  "notes": [
+    "TOI-756 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 4704
+}

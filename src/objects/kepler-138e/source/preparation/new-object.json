@@ -1,0 +1,24 @@
+{
+  "host": "kepler-138",
+  "planets": [
+    {
+      "id": "kepler-138e",
+      "name": "Kepler-138 e",
+      "description": "Planet of Kepler-138 found by transit timing variations, with a 38.2-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+        "credit": "Piaulet et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "measured": true
+      },
+      "text": {
+        "card": "Kepler-138 e was found in 2022 by transit timing variations; it does not cross its star.",
+        "introduction": "It is one of 4 planets known around Kepler-138. Its orbit, tilt included, follows Piaulet et al. 2023's fit, and its size is the archive's model from its mass.",
+        "locator": "NASA Exoplanet Archive ps table (pl_refname PIAULET_ET_AL_2023): disc_year 2022, disc_facility Multiple Observatories, sy_pnum 4; pl_orbper 38.23, pl_orbincl 88.53, pl_orbtper 2454924.1; pscomppars calculated pl_radj 0.0711, pl_bmassj 0.00135293"
+      },
+      "order": 3676
+    }
+  ]
+}

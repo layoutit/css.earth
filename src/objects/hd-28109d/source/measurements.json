@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-28109d",
+  "radiusKm": 19835.9,
+  "radiusSource": "Radius 0.27745609 Jupiter radii from Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...704A..41B/abstract): 19,835.9 km at 71,492 km per Jupiter radius. No mass is measured: Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...704A..41B/abstract) gives only an upper limit of 0.01824884 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 84.26076445013,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 84.26076445013 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 28109 d is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.01824884 Jupiter masses: Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...704A..41B/abstract)."
+}

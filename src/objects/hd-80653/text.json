@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-80653",
+  "card": {
+    "text": "HD 80653 b crosses HD 80653 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2607-19325",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract",
+        "label": "Naponiello et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NAPONIELLO_ET_AL_2026): st_teff 5959, st_rad 1.199, st_mass 1.15"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Naponiello et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2607-19325",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract",
+        "label": "Naponiello et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NAPONIELLO_ET_AL_2026): st_teff 5959, st_rad 1.199, st_mass 1.15"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

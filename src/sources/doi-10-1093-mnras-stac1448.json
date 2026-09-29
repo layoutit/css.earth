@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stac1448",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gan et al. (2022): <i>TESS</i> discovery of a sub-Neptune orbiting a mid-M dwarf TOI-2136",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2202.10024"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stac1448"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022MNRAS.514.4120G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stac1448",
+      "label": "Monthly Notices of the Royal Astronomical Society 514 4120-4139"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gan et al. (2022), Monthly Notices of the Royal Astronomical Society 514 4120-4139",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 514 4120-4139",
+  "creators": [
+    "Tianjun Gan",
+    "Abderahmane Soubkiou",
+    "Sharon X Wang",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

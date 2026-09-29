@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-28109c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-28109c-orbits",
+      "title": "HD 28109 c: orbits around HD 28109",
+      "output": "hd-28109c-system-orbits.svg",
+      "system": "hd-28109",
+      "highlight": "hd-28109c",
+      "description": "The orbits of HD 28109's planets in this map from above, to scale, with HD 28109 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 56.00450564844 d"
+      }
+    }
+  ]
+}

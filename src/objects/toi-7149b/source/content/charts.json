@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-7149b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-7149b-orbits",
+      "title": "TOI-7149 b: orbits around TOI-7149",
+      "output": "toi-7149b-system-orbits.svg",
+      "system": "toi-7149",
+      "highlight": "toi-7149b",
+      "description": "The orbits of TOI-7149's planets in this map from above, to scale, with TOI-7149 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL_2025): P 2.65206166 d"
+      }
+    }
+  ]
+}

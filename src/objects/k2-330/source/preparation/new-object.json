@@ -1,0 +1,39 @@
+{
+  "id": "k2-330",
+  "name": "K2-330",
+  "system": "K2-330 system",
+  "description": "Star of 6,232 K, 160 parsecs away, with 1 transiting planet.",
+  "target": "K2-330",
+  "gaia": "601159910928534144",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "credit": "de Leon et al. 2021"
+  },
+  "radius": {
+    "value": 1.5,
+    "source": "de Leon et al. 2021, the stellar radius of the default parameter set of K2-330 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 1.23,
+    "source": "de Leon et al. 2021, the stellar mass of the default parameter set of K2-330 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 6232,
+    "source": "de Leon et al. 2021, the stellar temperature of the default parameter set of K2-330 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 33
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-330 b crosses K2-330 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow de Leon et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DE_LEON_ET_AL_2021): st_teff 6232, st_rad 1.5, st_mass 1.23"
+  },
+  "notes": [],
+  "order": 3510
+}

@@ -1,0 +1,32 @@
+{
+  "id": "toi-4405",
+  "name": "TOI-4405",
+  "system": "TOI-4405 system",
+  "description": "Star of 4,467 K, 156 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4405",
+  "gaia": "5261102085950186240",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.687025,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-4405 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 4467.38,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-4405 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4405 b crosses TOI-4405 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 4467.38, st_rad 0.687025"
+  },
+  "notes": [],
+  "order": 4409
+}

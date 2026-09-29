@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1051-0004-6361-202346899",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cointepas et al. (2024): TOI-663: A newly discovered multi-planet system with three transiting mini-Neptunes orbiting an early M star",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202346899"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...685A..19C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cointepas et al. (2024), Astronomy & Astrophysics 685 A19",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 685 A19",
+  "creators": [
+    "M. Cointepas",
+    "F. Bouchy",
+    "J. M. Almenara",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

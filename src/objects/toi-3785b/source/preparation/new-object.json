@@ -1,0 +1,24 @@
+{
+  "host": "toi-3785",
+  "planets": [
+    {
+      "id": "toi-3785b",
+      "name": "TOI-3785 b",
+      "description": "Transiting planet of TOI-3785 with a 4.67-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...44P/abstract",
+        "credit": "Powers et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POWERS_ET_AL__2023"
+      },
+      "text": {
+        "card": "TOI-3785 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-3785. Its orbit and size follow Powers et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POWERS_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.6747373, pl_radj 0.45856088, pl_bmassj 0.04703796"
+      },
+      "order": 4371
+    }
+  ]
+}

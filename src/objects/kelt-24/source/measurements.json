@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kelt-24",
+  "angularDiameterMas": 0.13,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 930,847 km at 96.88 pc = 0.13 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 96.88270074525911,
+  "distanceSource": "Gaia DR3 parallax 10.3218 +/- 0.0180 mas (same row, RUWE 1.01): 96.88 pc, no zero-point correction",
+  "radiusKm": 930846.6,
+  "radiusSource": "Radius 1.338 +/- 0.032 solar radii from Giovinazzi et al. 2024, the stellar radius of the default parameter set of KELT-24 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract): 930,847 km at 695,700 km per solar radius. Mass 1.268 +/- 0.063 solar masses from Giovinazzi et al. 2024, the stellar mass of the default parameter set of KELT-24 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract); GM is that mass times the JPL solar GM. Temperature 6426 +/- 93 K from Giovinazzi et al. 2024, the stellar temperature of the default parameter set of KELT-24 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6426,
+  "effectiveTemperatureSource": "Giovinazzi et al. 2024, the stellar temperature of the default parameter set of KELT-24 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract)",
+  "surfaceGravityLogg": 4.29,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kelt-24.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.288, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

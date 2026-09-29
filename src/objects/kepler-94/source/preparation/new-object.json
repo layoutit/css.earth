@@ -1,0 +1,41 @@
+{
+  "id": "kepler-94",
+  "name": "Kepler-94",
+  "system": "Kepler-94 system",
+  "description": "Star of 4,781 K, 192 parsecs away, with 1 transiting planet.",
+  "target": "Kepler-94",
+  "gaia": "2119602202081351168",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+    "credit": "Marcy et al. 2014"
+  },
+  "radius": {
+    "value": 0.76,
+    "source": "Marcy et al. 2014, the stellar radius of the default parameter set of Kepler-94 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.81,
+    "source": "Marcy et al. 2014, the stellar mass of the default parameter set of Kepler-94 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 4781,
+    "source": "Marcy et al. 2014, the stellar temperature of the default parameter set of Kepler-94 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+    "uncertainty": 98
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-94 b crosses Kepler-94 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Marcy et al. 2014.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MARCY_ET_AL__2014): st_teff 4781, st_rad 0.76, st_mass 0.81"
+  },
+  "notes": [
+    "Kepler-94 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3788
+}

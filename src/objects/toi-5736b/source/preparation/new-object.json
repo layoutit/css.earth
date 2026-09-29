@@ -1,0 +1,24 @@
+{
+  "host": "toi-5736",
+  "planets": [
+    {
+      "id": "toi-5736b",
+      "name": "TOI-5736 b",
+      "description": "Transiting planet of TOI-5736 with a 0.649-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G/abstract",
+        "credit": "Gomez Barrientos et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GOMEZ_BARRIENTOS_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5736 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5736. Its orbit and size follow Gomez Barrientos et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GOMEZ_BARRIENTOS_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.64899157916, pl_radj 0.13917412, pl_bmassj 0.00961"
+      },
+      "order": 4572
+    }
+  ]
+}

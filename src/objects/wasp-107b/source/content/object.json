@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-107b",
+  "displayName": "WASP-107 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.94 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae517e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y",
+          "label": "Yee 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "5.72 days",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae517e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y",
+          "label": "Yee 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.10 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ae517e",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y",
+          "label": "Yee 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by WASP-107; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "wasp-107b-lens-shape.webp",
+        "surface": "wasp-107b-surface-shape@2x.webp",
+        "poles": "wasp-107b-poles-shape@2x.webp",
+        "source": {
+          "id": "wasp-107b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of WASP-107 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of wasp-107's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-107b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-107b/wasp-107b-system-orbits.svg",
+      "alt": "The orbits of WASP-107's planets in this map from above, to scale, with WASP-107 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-107b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y"
+      }
+    },
+    {
+      "id": "wasp-107b-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/wasp-107b/wasp-107b-transmission.svg",
+      "alt": "WASP-107 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 49 measured bins from Spake et al. 2018 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors. The archive holds 1 other paper for this planet; this chart draws the one with the most bins.",
+      "source": {
+        "id": "wasp-107b-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018Natur.557...68S/abstract"
+      }
+    },
+    {
+      "id": "wasp-107b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-107b/wasp-107b-transit.svg",
+      "alt": "WASP-107 b crossing its star, as TESS recorded it: 1 sector (91) of the SPOC pipeline's 2-minute light curves of TIC 429302040, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-107b-tess-sector-91",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025099153000-s0091-0000000429302040-0288-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Yee & Vissapragada 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y/abstract",
+      "credit": "Yee & Vissapragada 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-107b.json",
+      "credit": "Radius from Yee & Vissapragada 2026 (2026ApJ..1000L..54Y), via the NASA Exoplanet Archive; mass from Yee & Vissapragada 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026ApJ..1000L..54Y), via the NASA Exoplanet Archive; orbit from Yee & Vissapragada 2026 (2026ApJ..1000L..54Y), via the NASA Exoplanet Archive"
+    }
+  }
+}

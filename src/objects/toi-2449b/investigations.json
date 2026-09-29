@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-2449b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.002 Jupiter radii from Ulmer-Moll et al. 2025 (2025A&A...703A.258U), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.258U/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.7 Jupiter masses: Ulmer-Moll et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...703A.258U), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...703A.258U/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.258U/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 16.6542431 d; Ulmer-Moll et al. 2025 (2025A&A...703A.258U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2025): a/R* derived from its semi-major axis 0.45 au and stellar radius 1.065 solar radii; Ulmer-Moll et al. 2025 (2025A&A...703A.258U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2025): inclination 89.55 degrees; Ulmer-Moll et al. 2025 (2025A&A...703A.258U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2025): e 0.098; Ulmer-Moll et al. 2025 (2025A&A...703A.258U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2025): omega 266 degrees; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459186.901539 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.258U/abstract"
+      ]
+    }
+  ]
+}

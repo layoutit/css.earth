@@ -1,0 +1,32 @@
+{
+  "id": "toi-7333",
+  "name": "TOI-7333",
+  "system": "TOI-7333 system",
+  "description": "Star of 4,587 K, 157 parsecs away, with 1 transiting planet.",
+  "target": "TOI-7333",
+  "gaia": "1704081330420181632",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.666066,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-7333 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 4586.87,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-7333 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-7333 b crosses TOI-7333 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 4586.87, st_rad 0.666066"
+  },
+  "notes": [],
+  "order": 4695
+}

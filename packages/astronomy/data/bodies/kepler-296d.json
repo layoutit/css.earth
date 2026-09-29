@@ -1,0 +1,28 @@
+{
+ "id": "kepler-296d",
+ "classification": "exoplanet",
+ "order": 3722,
+ "physical": {
+  "name": "Kepler-296 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 13330.2,
+  "gravitationalParameterKm3PerS2": 2001647.2,
+  "parent": "kepler-296"
+ },
+ "physicalNotes": "Radius 0.18645731 Jupiter radii from Barclay et al. 2015 (2015ApJ...809....7B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...809....7B/abstract): 13,330.2 km at 71,492 km per Jupiter radius. GM from the mass 0.0158 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 19.85028256,
+  "semiMajorAxisStellarRadii": 53.1,
+  "inclinationDegrees": 88.81,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54966.15009,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 19.85028256 d",
+   "shape": "Barclay et al. 2015 (2015ApJ...809....7B), via the NASA Exoplanet Archive ps table (pl_refname BARCLAY_ET_AL__2015): a/R* 53.1; Q1-Q12 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q12_KOI_TABLE): inclination 88.81 degrees",
+   "eccentricity": "Q1-Q12 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q12_KOI_TABLE): e 0",
+   "phase": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2454966.65009 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

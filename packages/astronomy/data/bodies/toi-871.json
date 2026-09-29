@@ -1,0 +1,30 @@
+{
+ "id": "toi-871",
+ "classification": "star",
+ "order": 4735,
+ "physical": {
+  "name": "TOI-871",
+  "horizonsCode": null,
+  "meanRadiusKm": 500208.3,
+  "gravitationalParameterKm3PerS2": 100596029551.79005,
+  "parent": null,
+  "effectiveTemperatureK": 4929
+ },
+ "physicalNotes": "Radius 0.719 +/- 0.025 solar radii from Mistry et al. 2024, the stellar radius of the default parameter set of TOI-871 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract): 500,208 km at 695,700 km per solar radius. Mass 0.758 +/- 0.046 solar masses from Mistry et al. 2024, the stellar mass of the default parameter set of TOI-871 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract); GM is that mass times the JPL solar GM. Temperature 4929 +/- 80 K from Mistry et al. 2024, the stellar temperature of the default parameter set of TOI-871 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 74.73760911992723,
+  "declinationDegrees": -50.62743214428896,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 67.86966291371782,
+  "properMotionRaMasPerYear": -79.21409507682782,
+  "properMotionDecMasPerYear": -121.69019888005491,
+  "radialVelocityKmPerS": -3.773131,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4783664690873269888 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-871/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 14.7341 +/- 0.0112 mas (same row, RUWE 0.97): 67.87 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -79.214, -121.690 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -3.77 +/- 0.26 km/s"
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "wasp-29b",
+ "classification": "exoplanet",
+ "order": 4807,
+ "physical": {
+  "name": "WASP-29 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 55048.8,
+  "gravitationalParameterKm3PerS2": 29137902.34,
+  "parent": "wasp-29"
+ },
+ "physicalNotes": "Radius 0.77 Jupiter radii from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 55,048.8 km at 71,492 km per Jupiter radius. GM from the mass 0.23 Jupiter masses (Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.92271133124,
+  "semiMajorAxisStellarRadii": 12.18,
+  "inclinationDegrees": 88.8,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60929.213786,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.92271133124 d",
+   "shape": "Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): a/R* 12.18; Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): inclination 88.8 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460929.713786 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

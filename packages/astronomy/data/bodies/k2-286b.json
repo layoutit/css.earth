@@ -1,0 +1,28 @@
+{
+ "id": "k2-286b",
+ "classification": "exoplanet",
+ "order": 3465,
+ "physical": {
+  "name": "K2-286 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 13394,
+  "gravitationalParameterKm3PerS2": 2014315.86,
+  "parent": "k2-286"
+ },
+ "physicalNotes": "Radius 0.18734945 Jupiter radii from Díez Alonso et al. 2019 (2019MNRAS.489.5928D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.489.5928D/abstract): 13,394 km at 71,492 km per Jupiter radius. GM from the mass 0.0159 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 27.359,
+  "semiMajorAxisStellarRadii": 63,
+  "inclinationDegrees": 89.67,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58009.917,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Díez Alonso et al. 2019 (2019MNRAS.489.5928D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2019): P 27.359 d",
+   "shape": "Díez Alonso et al. 2019 (2019MNRAS.489.5928D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2019): a/R* 63; Díez Alonso et al. 2019 (2019MNRAS.489.5928D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2019): inclination 89.67 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Díez Alonso et al. 2019 (2019MNRAS.489.5928D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2019): transit mid-time 2458010.417 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 799 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

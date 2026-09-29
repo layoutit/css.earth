@@ -1,0 +1,31 @@
+{
+ "id": "lhs-1678b",
+ "classification": "exoplanet",
+ "order": 3809,
+ "physical": {
+  "name": "LHS 1678 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 4369,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "lhs-1678"
+ },
+ "physicalNotes": "Radius 0.06111171 Jupiter radii from Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S/abstract): 4,369 km at 71,492 km per Jupiter radius. No mass is measured: Silverstein et al. 2022 (2022AJ....163..151S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract) gives only an upper limit of 0.00110122 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.8602325,
+  "semiMajorAxisStellarRadii": 8.08,
+  "inclinationDegrees": 88.53,
+  "eccentricity": 0.033,
+  "argumentOfPeriapsisDegrees": 337,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58997.65553,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive ps table (pl_refname SILVERSTEIN_ET_AL_2024): P 0.8602325 d",
+   "shape": "Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive ps table (pl_refname SILVERSTEIN_ET_AL_2024): a/R* 8.08; Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive ps table (pl_refname SILVERSTEIN_ET_AL_2024): inclination 88.53 degrees",
+   "eccentricity": "Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive ps table (pl_refname SILVERSTEIN_ET_AL_2024): e 0.033",
+   "argumentOfPeriapsis": "Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive ps table (pl_refname SILVERSTEIN_ET_AL_2024): omega -23 degrees, stored as 337",
+   "phase": "Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive ps table (pl_refname SILVERSTEIN_ET_AL_2024): transit mid-time 2458998.15553 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

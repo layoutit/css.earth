@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-238c",
+  "radiusKm": 13904.3,
+  "radiusSource": "Radius 0.19448691 Jupiter radii from Suárez Mascareño et al. 2024 (2024A&A...685A..56S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract): 13,904.3 km at 71,492 km per Jupiter radius. GM from the mass 0.02108056 Jupiter masses (Suárez Mascareño et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...685A..56S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 8.465651,
+  "orbitalPeriodSource": "Suárez Mascareño et al. 2024 (2024A&A...685A..56S), via the NASA Exoplanet Archive ps table (pl_refname SUAREZ_MASCARENO_ET_AL_2024): P 8.465651 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-238 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02108056 Jupiter masses: Suárez Mascareño et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...685A..56S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)."
+}

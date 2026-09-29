@@ -1,0 +1,24 @@
+{
+  "host": "k2-146",
+  "planets": [
+    {
+      "id": "k2-146b",
+      "name": "K2-146 b",
+      "description": "Transiting planet of K2-146 with a 2.64-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158..133H/abstract",
+        "credit": "Hamann et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HAMANN_ET_AL__2019"
+      },
+      "text": {
+        "card": "K2-146 b was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around K2-146. Its orbit and size follow Hamann et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HAMANN_ET_AL__2019): disc_year 2018, disc_facility K2, sy_pnum 2; pl_orbper 2.644646, pl_radj 0.18288875, pl_bmassj 0.01816"
+      },
+      "order": 3320
+    }
+  ]
+}

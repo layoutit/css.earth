@@ -1,0 +1,39 @@
+{
+  "id": "toi-2158",
+  "name": "TOI-2158",
+  "system": "TOI-2158 system",
+  "description": "Star of 5,673 K, 198 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2158",
+  "gaia": "4525545299652540672",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract",
+    "credit": "Knudstrup et al. 2022"
+  },
+  "radius": {
+    "value": 1.41,
+    "source": "Knudstrup et al. 2022, the stellar radius of the default parameter set of TOI-2158 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 1.12,
+    "source": "Knudstrup et al. 2022, the stellar mass of the default parameter set of TOI-2158 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract",
+    "uncertainty": 0.12
+  },
+  "temperature": {
+    "value": 5673,
+    "source": "Knudstrup et al. 2022, the stellar temperature of the default parameter set of TOI-2158 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2158 b crosses TOI-2158 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Knudstrup et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KNUDSTRUP_ET_AL_2022): st_teff 5673, st_rad 1.41, st_mass 1.12"
+  },
+  "notes": [],
+  "order": 4262
+}

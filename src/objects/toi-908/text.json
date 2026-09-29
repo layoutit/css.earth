@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-908",
+  "card": {
+    "text": "TOI-908 b crosses TOI-908 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1840",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract",
+        "label": "Hawthorn et al. (2023), Monthly Notices of the Royal Astronomical Society 524 3877-3893",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HAWTHORN_ET_AL_2023): st_teff 5626, st_rad 1.028, st_mass 0.95"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hawthorn et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1840",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract",
+        "label": "Hawthorn et al. (2023), Monthly Notices of the Royal Astronomical Society 524 3877-3893",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HAWTHORN_ET_AL_2023): st_teff 5626, st_rad 1.028, st_mass 0.95"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

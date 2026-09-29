@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gj-806",
+  "angularDiameterMas": 0.32,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 288,298 km at 12.06 pc = 0.32 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 12.06414181838936,
+  "distanceSource": "Gaia DR3 parallax 82.8903 +/- 0.0167 mas (same row, RUWE 1.13): 12.06 pc, no zero-point correction",
+  "radiusKm": 288298.1,
+  "radiusSource": "Radius 0.4144 +/- 0.0038 solar radii from Palle et al. 2023, the stellar radius of the default parameter set of GJ 806 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract): 288,298 km at 695,700 km per solar radius. Mass 0.413 +/- 0.011 solar masses from Palle et al. 2023, the stellar mass of the default parameter set of GJ 806 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract); GM is that mass times the JPL solar GM. Temperature 3600 +/- 16 K from Palle et al. 2023, the stellar temperature of the default parameter set of GJ 806 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3600,
+  "effectiveTemperatureSource": "Palle et al. 2023, the stellar temperature of the default parameter set of GJ 806 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
+  "surfaceGravityLogg": 4.82,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-806.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.819, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

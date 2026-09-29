@@ -1,0 +1,28 @@
+{
+ "id": "wasp-85-a-b",
+ "classification": "exoplanet",
+ "order": 4848,
+ "physical": {
+  "name": "WASP-85 A b",
+  "horizonsCode": null,
+  "meanRadiusKm": 88650.1,
+  "gravitationalParameterKm3PerS2": 160258462.85,
+  "parent": "wasp-85-a"
+ },
+ "physicalNotes": "Radius 1.24 Jupiter radii from Mo&#x10D;nik et al. 2016 (2016AJ....151..150M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract): 88,650.1 km at 71,492 km per Jupiter radius. GM from the mass 1.265 Jupiter masses (Mo&#x10D;nik et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016AJ....151..150M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.655674403,
+  "semiMajorAxisStellarRadii": 8.9693,
+  "inclinationDegrees": 89.69,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 56929.298775,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.655674403 d",
+   "shape": "Mo&#x10D;nik et al. 2016 (2016AJ....151..150M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2016): a/R* derived from its semi-major axis 0.039 au and stellar radius 0.935 solar radii; Mo&#x10D;nik et al. 2016 (2016AJ....151..150M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2016): inclination 89.69 degrees",
+   "eccentricity": "Mo&#x10D;nik et al. 2016 (2016AJ....151..150M), via the NASA Exoplanet Archive ps table (pl_refname MO__X10D_NIK_ET_AL__2016): e 0",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2456929.798775 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

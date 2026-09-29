@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2136",
+  "card": {
+    "text": "TOI-2136 b crosses TOI-2136 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stac1448",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract",
+        "label": "Gan et al. (2022), Monthly Notices of the Royal Astronomical Society 514 4120-4139",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GAN_ET_AL_2022): st_teff 3342, st_rad 0.34, st_mass 0.34"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Gan et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stac1448",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract",
+        "label": "Gan et al. (2022), Monthly Notices of the Royal Astronomical Society 514 4120-4139",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GAN_ET_AL_2022): st_teff 3342, st_rad 0.34, st_mass 0.34"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-202772-a-b",
+  "card": {
+    "text": "HD 202772 A b was found in 2019 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1906",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract",
+        "label": "Jofré et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JOFRE_ET_AL_2025): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.3088775, pl_radj 1.627, pl_bmassj 1.018"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HD 202772 A. Its orbit and size follow Jofré et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1906",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract",
+        "label": "Jofré et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JOFRE_ET_AL_2025): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.3088775, pl_radj 1.627, pl_bmassj 1.018"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

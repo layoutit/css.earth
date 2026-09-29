@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-6038-a-b",
+  "displayName": "TOI-6038 A b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.57 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ada959",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B",
+          "label": "Baliwal et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "5.83 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ada959",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B",
+          "label": "Baliwal et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.25 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ada959",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B",
+          "label": "Baliwal et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-6038; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-6038-a-b-lens-shape.webp",
+        "surface": "toi-6038-a-b-surface-shape@2x.webp",
+        "poles": "toi-6038-a-b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-6038-a-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-6038 A b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-6038-a's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-6038-a-b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-6038-a-b/toi-6038-a-b-system-orbits.svg",
+      "alt": "The orbits of TOI-6038 A's planets in this map from above, to scale, with TOI-6038 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-6038-a-b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B"
+      }
+    },
+    {
+      "id": "toi-6038-a-b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-6038-a-b/toi-6038-a-b-transit.svg",
+      "alt": "TOI-6038 A b crossing its star, as TESS recorded it: 2 sectors (18, 86) of the SPOC pipeline's 2-minute light curves of TIC 194736418, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 20-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-6038-a-b-tess-sector-18",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019306063752-s0018-0000000194736418-0162-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Baliwal et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract",
+      "credit": "Baliwal et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-6038-a-b.json",
+      "credit": "Radius from Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive; mass from Baliwal et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....169..147B), via the NASA Exoplanet Archive; orbit from Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive"
+    }
+  }
+}

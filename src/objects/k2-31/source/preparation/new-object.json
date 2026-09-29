@@ -1,0 +1,39 @@
+{
+  "id": "k2-31",
+  "name": "K2-31",
+  "system": "K2-31 system",
+  "description": "Star of 5,280 K, 111 parsecs away, with 1 transiting planet.",
+  "target": "K2-31",
+  "gaia": "6050191241556876672",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract",
+    "credit": "Grziwa et al. 2016"
+  },
+  "radius": {
+    "value": 0.78,
+    "source": "Grziwa et al. 2016, the stellar radius of the default parameter set of K2-31 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract",
+    "uncertainty": 0.07
+  },
+  "mass": {
+    "value": 0.91,
+    "source": "Grziwa et al. 2016, the stellar mass of the default parameter set of K2-31 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 5280,
+    "source": "Grziwa et al. 2016, the stellar temperature of the default parameter set of K2-31 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-31 b crosses K2-31 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Grziwa et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GRZIWA_ET_AL__2016): st_teff 5280, st_rad 0.78, st_mass 0.91"
+  },
+  "notes": [],
+  "order": 3479
+}

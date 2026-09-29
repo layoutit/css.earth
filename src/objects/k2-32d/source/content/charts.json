@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-32d/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-32d-orbits",
+      "title": "K2-32 d: orbits around K2-32",
+      "output": "k2-32d-system-orbits.svg",
+      "system": "k2-32",
+      "highlight": "k2-32d",
+      "description": "The orbits of K2-32's planets in this map from above, to scale, with K2-32 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): P 31.71701 d"
+      }
+    }
+  ]
+}

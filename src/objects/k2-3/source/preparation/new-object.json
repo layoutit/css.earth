@@ -1,0 +1,46 @@
+{
+  "id": "k2-3",
+  "name": "K2-3",
+  "system": "K2-3 system",
+  "description": "Star of 3,844 K, 44.1 parsecs away, with 3 transiting planets.",
+  "target": "K2-3",
+  "gaia": "3796690380302214272",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+    "credit": "Diamond-Lowe et al. 2022"
+  },
+  "radius": {
+    "value": 0.546,
+    "source": "Diamond-Lowe et al. 2022, the stellar radius of the default parameter set of K2-3 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+    "uncertainty": 0.018
+  },
+  "mass": {
+    "value": 0.549,
+    "source": "Diamond-Lowe et al. 2022, the stellar mass of the default parameter set of K2-3 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+    "uncertainty": 0.029
+  },
+  "temperature": {
+    "value": 3844,
+    "source": "Diamond-Lowe et al. 2022, the stellar temperature of the default parameter set of K2-3 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract",
+    "uncertainty": 61
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "3 planets cross K2-3 as seen from Earth: b, c, d.",
+    "introduction": "Its radius and temperature follow Diamond-Lowe et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DIAMOND_LOWE_ET_AL__2022): st_teff 3844, st_rad 0.546, st_mass 0.549",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/K2-3",
+      "title": "K2-3",
+      "revision": "1352666720",
+      "card": "K2-3, also known as EPIC 201367065, is a red dwarf star with three known planets.",
+      "introduction": "It is on the borderline of being a late orange dwarf/K-type star, but because of its temperature, it is classified as a red dwarf."
+    }
+  },
+  "notes": [],
+  "order": 3475
+}

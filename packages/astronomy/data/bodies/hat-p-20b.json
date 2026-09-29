@@ -1,0 +1,31 @@
+{
+ "id": "hat-p-20b",
+ "classification": "exoplanet",
+ "order": 3123,
+ "physical": {
+  "name": "HAT-P-20 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 61983.6,
+  "gravitationalParameterKm3PerS2": 917970610.15,
+  "parent": "hat-p-20"
+ },
+ "physicalNotes": "Radius 0.867 Jupiter radii from Bakos et al. 2010 (2010arXiv1008.3388B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract): 61,983.6 km at 71,492 km per Jupiter radius. GM from the mass 7.246 Jupiter masses (Bakos et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010arXiv1008.3388B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.87531773,
+  "semiMajorAxisStellarRadii": 11.17,
+  "inclinationDegrees": 86.8,
+  "eccentricity": 0.015,
+  "argumentOfPeriapsisDegrees": 317,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 57958.62043,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.87531773 d",
+   "shape": "Bakos et al. 2010 (2010arXiv1008.3388B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2010): a/R* 11.17; Bakos et al. 2010 (2010arXiv1008.3388B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2010): inclination 86.8 degrees",
+   "eccentricity": "Bakos et al. 2010 (2010arXiv1008.3388B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2010): e 0.015",
+   "argumentOfPeriapsis": "Bakos et al. 2010 (2010arXiv1008.3388B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2010): omega 317 degrees",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2457959.12043 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

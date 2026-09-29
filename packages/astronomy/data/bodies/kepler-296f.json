@@ -1,0 +1,28 @@
+{
+ "id": "kepler-296f",
+ "classification": "exoplanet",
+ "order": 3724,
+ "physical": {
+  "name": "Kepler-296 f",
+  "horizonsCode": null,
+  "meanRadiusKm": 11480.6,
+  "gravitationalParameterKm3PerS2": 1558244.34,
+  "parent": "kepler-296"
+ },
+ "physicalNotes": "Radius 0.16058524 Jupiter radii from Barclay et al. 2015 (2015ApJ...809....7B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...809....7B/abstract): 11,480.6 km at 71,492 km per Jupiter radius. GM from the mass 0.0123 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 63.33771411,
+  "semiMajorAxisStellarRadii": 115.1,
+  "inclinationDegrees": 89.95,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54995.090229,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 63.33771411 d",
+   "shape": "Barclay et al. 2015 (2015ApJ...809....7B), via the NASA Exoplanet Archive ps table (pl_refname BARCLAY_ET_AL__2015): a/R* 115.1; Torres et al. 2015 (2015ApJ...800...99T), via the NASA Exoplanet Archive ps table (pl_refname TORRES_ET_AL__2015): inclination 89.95 degrees",
+   "eccentricity": "Q1-Q17 DR24 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR24_KOI_TABLE): e 0",
+   "phase": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2454995.590229 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 14 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

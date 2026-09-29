@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ae246f",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Barrientos et al. (2026): From Earths to Super-Earths: Five New Small Planets Transiting M Dwarf Stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2512.11971"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae246f"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026AJ....171...99G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae246f",
+      "label": "The Astronomical Journal 171 99"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Barrientos et al. (2026), The Astronomical Journal 171 99",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G"
+    }
+  ],
+  "publisher": "The Astronomical Journal 171 99",
+  "creators": [
+    "Jonathan Gomez Barrientos",
+    "Heather A. Knutson",
+    "Morgan Saidel",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

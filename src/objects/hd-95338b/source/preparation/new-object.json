@@ -1,0 +1,24 @@
+{
+  "host": "hd-95338",
+  "planets": [
+    {
+      "id": "hd-95338b",
+      "name": "HD 95338 b",
+      "description": "Transiting planet of HD 95338 with a 55.1-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract",
+        "credit": "Kálmán et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025"
+      },
+      "text": {
+        "card": "HD 95338 b was found in 2020 by Las Campanas Observatory as it crossed its star.",
+        "introduction": "It is the only planet known around HD 95338. Its orbit and size follow Kálmán et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): disc_year 2020, disc_facility Las Campanas Observatory, sy_pnum 1; pl_orbper 55.082694, pl_radj 0.3811, pl_bmassj 0.135"
+      },
+      "order": 3034
+    }
+  ]
+}

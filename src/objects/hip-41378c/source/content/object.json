@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hip-41378c",
+  "displayName": "HIP 41378 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.7 Earth radii",
+        "source": {
+          "catalogueId": "arxiv-2606-23103",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G",
+          "label": "Grouffal et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "31.7 days",
+        "source": {
+          "catalogueId": "arxiv-2606-23103",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G",
+          "label": "Grouffal et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "6.0 Earth masses",
+        "source": {
+          "catalogueId": "arxiv-2606-23103",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G",
+          "label": "Grouffal et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HIP 41378; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hip-41378c-lens-shape.webp",
+        "surface": "hip-41378c-surface-shape@2x.webp",
+        "poles": "hip-41378c-poles-shape@2x.webp",
+        "source": {
+          "id": "hip-41378c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HIP 41378 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hip-41378's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hip-41378c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hip-41378c/hip-41378c-system-orbits.svg",
+      "alt": "The orbits of HIP 41378's planets in this map from above, to scale, with HIP 41378 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hip-41378c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Grouffal et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract",
+      "credit": "Grouffal et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hip-41378c.json",
+      "credit": "Radius from Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive; mass from Grouffal et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260623103G), via the NASA Exoplanet Archive; orbit from Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive"
+    }
+  }
+}

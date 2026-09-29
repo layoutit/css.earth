@@ -1,0 +1,28 @@
+{
+ "id": "hip-41378d",
+ "classification": "exoplanet",
+ "order": 3255,
+ "physical": {
+  "name": "HIP 41378 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 23280.1,
+  "gravitationalParameterKm3PerS2": 2602860.94,
+  "parent": "hip-41378"
+ },
+ "physicalNotes": "Radius 0.32563175 Jupiter radii from Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract): 23,280.1 km at 71,492 km per Jupiter radius. GM from the mass 0.02054568 Jupiter masses (Grouffal et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260623103G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 278.3618,
+  "semiMajorAxisStellarRadii": 147.4664,
+  "inclinationDegrees": 89.81,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57165.761,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2026): P 278.3618 d",
+   "shape": "Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2026): a/R* derived by Kepler's third law from its period 278.3618 d, stellar mass 1.22 and radius 1.3 solar units; Grouffal et al. 2022 (2022A&A...668A.172G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2022): inclination 89.81 degrees",
+   "eccentricity": "Grouffal et al. 2022 (2022A&A...668A.172G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2022): e 0",
+   "phase": "Grouffal et al. 2026 (2026arXiv260623103G), via the NASA Exoplanet Archive ps table (pl_refname GROUFFAL_ET_AL_2026): transit mid-time 2457166.261 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

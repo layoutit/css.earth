@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-332b",
+  "card": {
+    "text": "K2-332 b was found in 2021 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab2305",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+        "label": "Leon et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DE_LEON_ET_AL_2021): disc_year 2021, disc_facility K2, sy_pnum 1; pl_orbper 17.70632, pl_radj 0.19627119, pl_bmassj 0.0172"
+      },
+      {
+        "catalogueId": "wikipedia-k2-332-b",
+        "url": "https://en.wikipedia.org/wiki/K2-332_b",
+        "label": "Wikipedia, \"K2-332 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374087899",
+        "quote": "K2-332 b is a potentially habitable Super-Earth or Mini-Neptune exoplanet with a radius of 2.2 Earths."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around K2-332. Its orbit and size follow de Leon et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab2305",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+        "label": "Leon et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DE_LEON_ET_AL_2021): disc_year 2021, disc_facility K2, sy_pnum 1; pl_orbper 17.70632, pl_radj 0.19627119, pl_bmassj 0.0172"
+      },
+      {
+        "catalogueId": "wikipedia-k2-332-b",
+        "url": "https://en.wikipedia.org/wiki/K2-332_b",
+        "label": "Wikipedia, \"K2-332 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374087899",
+        "quote": "It is in the empirical habitable zone, receiving 1.17 times the light that Earth gets from the sun."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

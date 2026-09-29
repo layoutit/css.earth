@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "qatar-2b",
+  "radiusKm": 89651,
+  "radiusSource": "Radius 1.254 Jupiter radii from Mancini et al. 2014 (2014MNRAS.443.2391M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract): 89,651 km at 71,492 km per Jupiter radius. GM from the mass 2.494 Jupiter masses (Mancini et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014MNRAS.443.2391M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.33711644,
+  "orbitalPeriodSource": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): P 1.33711644 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Qatar-2 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "2.494 Jupiter masses: Mancini et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014MNRAS.443.2391M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract)."
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "g-9-40",
+  "angularDiameterMas": 0.1,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 210,519 km at 27.83 pc = 0.1 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 27.83204208824027,
+  "distanceSource": "Gaia DR3 parallax 35.9298 +/- 0.0253 mas (same row, RUWE 1.30): 27.83 pc, no zero-point correction",
+  "radiusKm": 210518.8,
+  "radiusSource": "Radius 0.3026 +/- 0.0095 solar radii from Luque et al. 2022, the stellar radius of the default parameter set of G 9-40 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract): 210,519 km at 695,700 km per solar radius. Mass 0.2952 +/- 0.0136 solar masses from Luque et al. 2022, the stellar mass of the default parameter set of G 9-40 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract); GM is that mass times the JPL solar GM. Temperature 3395 +/- 51 K from Luque et al. 2022, the stellar temperature of the default parameter set of G 9-40 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3395,
+  "effectiveTemperatureSource": "Luque et al. 2022, the stellar temperature of the default parameter set of G 9-40 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract)",
+  "surfaceGravityLogg": 4.95,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/g-9-40.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.946, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

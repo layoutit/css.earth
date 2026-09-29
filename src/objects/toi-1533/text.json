@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1533",
+  "card": {
+    "text": "2 planets cross TOI-1533 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2606-30799",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+        "label": "Mantovan et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANTOVAN_ET_AL_2026): st_teff 5146, st_rad 0.849, st_mass 0.88"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mantovan et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2606-30799",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+        "label": "Mantovan et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANTOVAN_ET_AL_2026): st_teff 5146, st_rad 0.849, st_mass 0.88"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

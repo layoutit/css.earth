@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-32c",
+  "card": {
+    "text": "K2-32 c was found in 2016 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202037896",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+        "label": "Lillo-Box et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LILLO_BOX_ET_AL__2020): disc_year 2016, disc_facility K2, sy_pnum 4; pl_orbper 20.66178, pl_radj 0.27959723, pl_bmassj 0.02548545"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around K2-32. Its orbit and size follow Lillo-Box et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202037896",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+        "label": "Lillo-Box et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LILLO_BOX_ET_AL__2020): disc_year 2016, disc_facility K2, sy_pnum 4; pl_orbper 20.66178, pl_radj 0.27959723, pl_bmassj 0.02548545"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

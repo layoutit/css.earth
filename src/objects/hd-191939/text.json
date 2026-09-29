@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-191939",
+  "card": {
+    "text": "3 planets cross HD 191939 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac3d38",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..101L/abstract",
+        "label": "Lubin et al. (2022), The Astronomical Journal 163 101",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LUBIN_ET_AL__2022): st_teff 5348, st_rad 0.94, st_mass 0.81"
+      },
+      {
+        "catalogueId": "wikipedia-hd-191939",
+        "url": "https://en.wikipedia.org/wiki/HD_191939",
+        "label": "Wikipedia, \"HD 191939\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406441",
+        "quote": "HD 191939 is a single yellow (G-type) main-sequence star, located approximately 174 light-years away in the northern constellation of Draco, taking its primary name from its Henry Draper Catalogue designation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lubin et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac3d38",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..101L/abstract",
+        "label": "Lubin et al. (2022), The Astronomical Journal 163 101",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LUBIN_ET_AL__2022): st_teff 5348, st_rad 0.94, st_mass 0.81"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

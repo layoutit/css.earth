@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stab3371",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Maxted et al. (2022): Analysis of Early Science observations with the CHaracterising ExOPlanets Satellite ( <i>CHEOPS</i> ) using <scp>pycheops</scp>",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2111.08828"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab3371"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022MNRAS.514...77M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514...77M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab3371",
+      "label": "Monthly Notices of the Royal Astronomical Society 514 77-104"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514...77M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Maxted et al. (2022), Monthly Notices of the Royal Astronomical Society 514 77-104",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514...77M"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 514 77-104",
+  "creators": [
+    "P F L Maxted",
+    "D Ehrenreich",
+    "T G Wilson",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

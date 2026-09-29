@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-3884",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 210,101 km at 43.45 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 43.448278663113996,
+  "distanceSource": "Gaia DR3 parallax 23.0159 +/- 0.0260 mas (same row, RUWE 1.25): 43.45 pc, no zero-point correction",
+  "radiusKm": 210101.4,
+  "radiusSource": "Radius 0.302 +/- 0.012 solar radii from Libby-Roberts et al. 2023, the stellar radius of the default parameter set of TOI-3884 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract): 210,101 km at 695,700 km per solar radius. Mass 0.298 +/- 0.018 solar masses from Libby-Roberts et al. 2023, the stellar mass of the default parameter set of TOI-3884 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract); GM is that mass times the JPL solar GM. Temperature 3180 +/- 88 K from Libby-Roberts et al. 2023, the stellar temperature of the default parameter set of TOI-3884 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3180,
+  "effectiveTemperatureSource": "Libby-Roberts et al. 2023, the stellar temperature of the default parameter set of TOI-3884 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract)",
+  "surfaceGravityLogg": 4.95,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3884.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.952, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

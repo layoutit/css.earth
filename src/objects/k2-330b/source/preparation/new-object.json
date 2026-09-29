@@ -1,0 +1,24 @@
+{
+  "host": "k2-330",
+  "planets": [
+    {
+      "id": "k2-330b",
+      "name": "K2-330 b",
+      "description": "Transiting planet of K2-330 with a 13.8-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+        "credit": "de Leon et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DE_LEON_ET_AL_2021"
+      },
+      "text": {
+        "card": "K2-330 b was found in 2021 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-330. Its orbit and size follow de Leon et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DE_LEON_ET_AL_2021): disc_year 2021, disc_facility K2, sy_pnum 1; pl_orbper 13.7748361, pl_radj 0.24712327, pl_bmassj 0.0255"
+      },
+      "order": 3511
+    }
+  ]
+}

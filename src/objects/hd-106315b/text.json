@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-106315b",
+  "card": {
+    "text": "HD 106315 b was found in 2017 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201731276",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract",
+        "label": "Barros et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARROS_ET_AL__2017): disc_year 2017, disc_facility K2, sy_pnum 2; pl_orbper 9.58028883839, pl_radj 0.21768222, pl_bmassj 0.03964383"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around HD 106315. Its orbit and size follow Barros et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201731276",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract",
+        "label": "Barros et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARROS_ET_AL__2017): disc_year 2017, disc_facility K2, sy_pnum 2; pl_orbper 9.58028883839, pl_radj 0.21768222, pl_bmassj 0.03964383"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

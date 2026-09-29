@@ -1,0 +1,31 @@
+{
+ "id": "gj-3090b",
+ "classification": "exoplanet",
+ "order": 3083,
+ "physical": {
+  "name": "GJ 3090 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 13904.3,
+  "gravitationalParameterKm3PerS2": 1801673.78,
+  "parent": "gj-3090"
+ },
+ "physicalNotes": "Radius 0.19448691 Jupiter radii from Lamontagne et al. 2026 (2026A&A...706A.278L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract): 13,904.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01422151 Jupiter masses (Lamontagne et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...706A.278L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.85310198,
+  "semiMajorAxisStellarRadii": 13.1686,
+  "inclinationDegrees": 86.9,
+  "eccentricity": 0.25,
+  "argumentOfPeriapsisDegrees": 90,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58355.65322,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Lamontagne et al. 2026 (2026A&A...706A.278L), via the NASA Exoplanet Archive ps table (pl_refname LAMONTAGNE_ET_AL_2026): P 2.85310198 d",
+   "shape": "Lamontagne et al. 2026 (2026A&A...706A.278L), via the NASA Exoplanet Archive ps table (pl_refname LAMONTAGNE_ET_AL_2026): a/R* derived from its semi-major axis 0.0316 au and stellar radius 0.516 solar radii; Lamontagne et al. 2026 (2026A&A...706A.278L), via the NASA Exoplanet Archive ps table (pl_refname LAMONTAGNE_ET_AL_2026): inclination 86.9 degrees",
+   "eccentricity": "Lamontagne et al. 2026 (2026A&A...706A.278L), via the NASA Exoplanet Archive ps table (pl_refname LAMONTAGNE_ET_AL_2026): e 0.25",
+   "argumentOfPeriapsis": "Lamontagne et al. 2026 (2026A&A...706A.278L), via the NASA Exoplanet Archive ps table (pl_refname LAMONTAGNE_ET_AL_2026): omega 90 degrees",
+   "phase": "Lamontagne et al. 2026 (2026A&A...706A.278L), via the NASA Exoplanet Archive ps table (pl_refname LAMONTAGNE_ET_AL_2026): transit mid-time 2458356.15322 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

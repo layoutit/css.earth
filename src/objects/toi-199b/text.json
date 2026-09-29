@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-199b",
+  "card": {
+    "text": "TOI-199 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acfc1d",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract",
+        "label": "Hobson et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOBSON_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 104.87242523178, pl_radj 0.81, pl_bmassj 0.17"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-199. Its orbit and size follow Hobson et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acfc1d",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract",
+        "label": "Hobson et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOBSON_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 104.87242523178, pl_radj 0.81, pl_bmassj 0.17"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

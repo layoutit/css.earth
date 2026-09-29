@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-700d",
+  "card": {
+    "text": "TOI-700 d was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae9283",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..175P/abstract",
+        "label": "Pass et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASS_ET_AL_2026): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 37.423457, pl_radj 0.10215023, pl_bmassj 0.00497"
+      },
+      {
+        "catalogueId": "wikipedia-toi-700-d",
+        "url": "https://en.wikipedia.org/wiki/TOI-700_d",
+        "label": "Wikipedia, \"TOI-700 d\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086720",
+        "quote": "TOI-700 d is a dense, rocky, near-Earth-sized exoplanet orbiting within the habitable zone of the red dwarf TOI-700."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around TOI-700. Its orbit and size follow Pass et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae9283",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..175P/abstract",
+        "label": "Pass et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASS_ET_AL_2026): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 37.423457, pl_radj 0.10215023, pl_bmassj 0.00497"
+      },
+      {
+        "catalogueId": "wikipedia-toi-700-d",
+        "url": "https://en.wikipedia.org/wiki/TOI-700_d",
+        "label": "Wikipedia, \"TOI-700 d\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086720",
+        "quote": "It is located roughly 101.4 light-years (31.1 pc) away from Earth in the constellation of Dorado and is the outermost of four confirmed exoplanets around its star."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1670c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1670c-orbits",
+      "title": "TOI-1670 c: orbits around TOI-1670",
+      "output": "toi-1670c-system-orbits.svg",
+      "system": "toi-1670",
+      "highlight": "toi-1670c",
+      "description": "The orbits of TOI-1670's planets in this map from above, to scale, with TOI-1670 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 40.7501028 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-1670c-transit",
+      "title": "TOI-1670 c: its transit",
+      "description": "TOI-1670 c crossing its star, as TESS recorded it: 3 sectors (84, 85, 86) of the SPOC pipeline's 2-minute light curves of TIC 441739020, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 22-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-1670c-transit.svg",
+      "metadata": {
+        "tic": "TIC 441739020",
+        "sectors": [
+          84,
+          85,
+          86
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-1670c",
+      "sources": [
+        "photometry/tess/tess2024274222008-s0084-0000000441739020-0281-s_lc.fits",
+        "photometry/tess/tess2024300212641-s0085-0000000441739020-0282-s_lc.fits",
+        "photometry/tess/tess2024326142117-s0086-0000000441739020-0283-s_lc.fits"
+      ],
+      "durationHours": 5.4,
+      "binMinutes": 22,
+      "notes": [
+        "TESS 2-min SPOC · sectors 84, 85, 86",
+        "Folded on the app's orbit; 22-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

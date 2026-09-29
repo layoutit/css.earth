@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnrasl-slad078",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Maciejewski et al. (2023): A hot super-Earth planet in the WASP-84 planetary system",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2305.09177"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnrasl/slad078"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.525L..43M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnrasl/slad078",
+      "label": "Monthly Notices of the Royal Astronomical Society: Letters 525 L43-L49"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Maciejewski et al. (2023), Monthly Notices of the Royal Astronomical Society: Letters 525 L43-L49",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society: Letters 525 L43-L49",
+  "creators": [
+    "G Maciejewski",
+    "J Golonka",
+    "W Łoboda",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

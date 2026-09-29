@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-239",
+  "card": {
+    "text": "3 planets cross K2-239 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnrasl-sly102",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.480L...1D/abstract",
+        "label": "Alonso et al. (2018), Monthly Notices of the Royal Astronomical Society: Letters 480 L1-L5",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname D_IACUTE_EZ_ALONSO_ET_AL__2018): st_teff 3420, st_rad 0.36, st_mass 0.4"
+      },
+      {
+        "catalogueId": "wikipedia-k2-239",
+        "url": "https://en.wikipedia.org/wiki/K2-239",
+        "label": "Wikipedia, \"K2-239\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442002",
+        "quote": "K2-239 is a small red dwarf star in the constellation Sextans, about 32 parsecs away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Díez Alonso et al. 2018.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnrasl-sly102",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.480L...1D/abstract",
+        "label": "Alonso et al. (2018), Monthly Notices of the Royal Astronomical Society: Letters 480 L1-L5",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname D_IACUTE_EZ_ALONSO_ET_AL__2018): st_teff 3420, st_rad 0.36, st_mass 0.4"
+      },
+      {
+        "catalogueId": "wikipedia-k2-239",
+        "url": "https://en.wikipedia.org/wiki/K2-239",
+        "label": "Wikipedia, \"K2-239\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442002",
+        "quote": "Observed by the Kepler Space Telescope during Campaign 14 of its K2 \"Second Light\" mission, it was found to have three hot, likely rocky Earth-sized planets in orbit around it."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

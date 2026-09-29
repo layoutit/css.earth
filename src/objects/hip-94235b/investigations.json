@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hip-94235b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.26764253 Jupiter radii from Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 1.19246736 Jupiter masses: Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): P 7.713057 d; Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): a/R* 15.7; Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): inclination 87.14 degrees; Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): e 0.32; Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): omega 17 degrees; Zhou et al. 2022 (2022AJ....163..289Z), via the NASA Exoplanet Archive ps table (pl_refname ZHOU_ET_AL_2022): transit mid-time 2459037.8704 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract"
+      ]
+    }
+  ]
+}

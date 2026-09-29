@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-72e/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-72e-orbits",
+      "title": "K2-72 e: orbits around K2-72",
+      "output": "k2-72e-system-orbits.svg",
+      "system": "k2-72",
+      "highlight": "k2-72e",
+      "description": "The orbits of K2-72's planets in this map from above, to scale, with K2-72 e highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Dressing et al. 2017 (2017AJ....154..207D), via the NASA Exoplanet Archive ps table (pl_refname DRESSING_ET_AL__2017): P 24.158868 d"
+      }
+    }
+  ]
+}

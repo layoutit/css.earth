@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aafa79",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Jordán et al. (2019): K2-287 b: An Eccentric Warm Saturn Transiting a G-dwarf",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1809.08879"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aafa79"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019AJ....157..100J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..100J",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aafa79",
+      "label": "The Astronomical Journal 157 100"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..100J",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Jordán et al. (2019), The Astronomical Journal 157 100",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..100J"
+    }
+  ],
+  "publisher": "The Astronomical Journal 157 100",
+  "creators": [
+    "Andrés Jordán",
+    "Rafael Brahm",
+    "Néstor Espinoza",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

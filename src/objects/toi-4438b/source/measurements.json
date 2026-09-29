@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-4438b",
+  "radiusKm": 15307.4,
+  "radiusSource": "Radius 0.21411403 Jupiter radii from Serrano Bell et al. 2026 (2026arXiv260713333S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract): 15,307.4 km at 71,492 km per Jupiter radius. GM from the mass 0.01293151 Jupiter masses (Serrano Bell et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260713333S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 7.446295,
+  "orbitalPeriodSource": "Serrano Bell et al. 2026 (2026arXiv260713333S), via the NASA Exoplanet Archive ps table (pl_refname SERRANO_BELL_ET_AL_2026): P 7.446295 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-4438 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01293151 Jupiter masses: Serrano Bell et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260713333S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)."
+}

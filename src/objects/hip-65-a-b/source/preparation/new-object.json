@@ -1,0 +1,24 @@
+{
+  "host": "hip-65-a",
+  "planets": [
+    {
+      "id": "hip-65-a-b",
+      "name": "HIP 65 A b",
+      "description": "Transiting planet of HIP 65 A with a 0.981-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract",
+        "credit": "Nielsen et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "NIELSEN_ET_AL__2020"
+      },
+      "text": {
+        "card": "HIP 65 A b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around HIP 65 A. Its orbit and size follow Nielsen et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NIELSEN_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.98097217, pl_radj 2.03, pl_bmassj 3.213"
+      },
+      "order": 3046
+    }
+  ]
+}

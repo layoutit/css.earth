@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-140",
+  "angularDiameterMas": 0.07,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 605,259 km at 116.78 pc = 0.07 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 116.77881191324317,
+  "distanceSource": "Gaia DR3 parallax 8.5632 +/- 0.0189 mas (same row, RUWE 1.19): 116.78 pc, no zero-point correction",
+  "radiusKm": 605259,
+  "radiusSource": "Radius 0.87 +/- 0.04 solar radii from Hellier et al. 2017, the stellar radius of WASP-140 b's parameter set from Hellier et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract): 605,259 km at 695,700 km per solar radius. Mass 0.9 +/- 0.04 solar masses from Hellier et al. 2017, the stellar mass of WASP-140 b's parameter set from Hellier et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract); GM is that mass times the JPL solar GM. Temperature 5300 +/- 100 K from Alexoudi 2022, the stellar temperature of the default parameter set of WASP-140 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5300,
+  "effectiveTemperatureSource": "Alexoudi 2022, the stellar temperature of the default parameter set of WASP-140 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract)",
+  "surfaceGravityLogg": 4.51,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-140.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.513, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "kepler-445c",
+ "classification": "exoplanet",
+ "order": 3756,
+ "physical": {
+  "name": "Kepler-445 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 15728.2,
+  "gravitationalParameterKm3PerS2": 2723760.44,
+  "parent": "kepler-445"
+ },
+ "physicalNotes": "Radius 0.22 Jupiter radii from Muirhead et al. 2015 (2015ApJ...801...18M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...801...18M/abstract): 15,728.2 km at 71,492 km per Jupiter radius. GM from the mass 0.0215 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.87122933,
+  "semiMajorAxisStellarRadii": 30.21,
+  "inclinationDegrees": 89.91,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 55375.324591,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 4.87122933 d",
+   "shape": "Muirhead et al. 2015 (2015ApJ...801...18M), via the NASA Exoplanet Archive ps table (pl_refname MUIRHEAD_ET_AL__2015): a/R* 30.21; Muirhead et al. 2015 (2015ApJ...801...18M), via the NASA Exoplanet Archive ps table (pl_refname MUIRHEAD_ET_AL__2015): inclination 89.91 degrees",
+   "eccentricity": "Muirhead et al. 2015 (2015ApJ...801...18M), via the NASA Exoplanet Archive ps table (pl_refname MUIRHEAD_ET_AL__2015): e 0",
+   "phase": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2455375.824591 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

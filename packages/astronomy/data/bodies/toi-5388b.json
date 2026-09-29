@@ -1,0 +1,28 @@
+{
+ "id": "toi-5388b",
+ "classification": "exoplanet",
+ "order": 4516,
+ "physical": {
+  "name": "TOI-5388 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 6314.3,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-5388"
+ },
+ "physicalNotes": "Radius 0.08832204 Jupiter radii from Poultourtzidis et al. 2026 (2026A&A...707A.106P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract): 6,314.3 km at 71,492 km per Jupiter radius. No mass is measured: Poultourtzidis et al. 2026 (2026A&A...707A.106P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract) gives only an upper limit of 0.00692197 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.5946748,
+  "semiMajorAxisStellarRadii": 20.5,
+  "inclinationDegrees": 88.8,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59347.57817,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Poultourtzidis et al. 2026 (2026A&A...707A.106P), via the NASA Exoplanet Archive ps table (pl_refname POULTOURTZIDIS_ET_AL_2026): P 2.5946748 d",
+   "shape": "Poultourtzidis et al. 2026 (2026A&A...707A.106P), via the NASA Exoplanet Archive ps table (pl_refname POULTOURTZIDIS_ET_AL_2026): a/R* 20.5; Poultourtzidis et al. 2026 (2026A&A...707A.106P), via the NASA Exoplanet Archive ps table (pl_refname POULTOURTZIDIS_ET_AL_2026): inclination 88.8 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Poultourtzidis et al. 2026 (2026A&A...707A.106P), via the NASA Exoplanet Archive ps table (pl_refname POULTOURTZIDIS_ET_AL_2026): transit mid-time 2459348.07817 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

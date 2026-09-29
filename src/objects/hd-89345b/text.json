@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-89345b",
+  "card": {
+    "text": "HD 89345 b was found in 2018 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aad6e7",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y/abstract",
+        "label": "Yu et al. 2018",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YU_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 1; pl_orbper 11.8144024, pl_radj 0.66, pl_bmassj 0.11"
+      },
+      {
+        "catalogueId": "wikipedia-hd-89345-b",
+        "url": "https://en.wikipedia.org/wiki/HD_89345_b",
+        "label": "Wikipedia, \"HD 89345 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1266399281",
+        "quote": "HD 89345 b is a Neptune-like exoplanet that orbits a G-type star."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HD 89345. Its orbit and size follow Yu et al. 2018's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aad6e7",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y/abstract",
+        "label": "Yu et al. 2018",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YU_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 1; pl_orbper 11.8144024, pl_radj 0.66, pl_bmassj 0.11"
+      },
+      {
+        "catalogueId": "wikipedia-hd-89345-b",
+        "url": "https://en.wikipedia.org/wiki/HD_89345_b",
+        "label": "Wikipedia, \"HD 89345 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1266399281",
+        "quote": "It is also called K2-234b."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

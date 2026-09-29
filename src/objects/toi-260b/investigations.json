@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-260b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.15255624 Jupiter radii from Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.01330907 Jupiter masses: Hobson et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...688A.216H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): P 13.475853 d; Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): a/R* derived from its semi-major axis 0.0943 au and stellar radius 0.607 solar radii; Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): inclination 88.84 degrees; Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): e 0; Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): transit mid-time 2458392.2942 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract"
+      ]
+    }
+  ]
+}

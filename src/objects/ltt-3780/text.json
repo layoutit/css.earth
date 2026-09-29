@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ltt-3780",
+  "card": {
+    "text": "2 planets cross LTT 3780 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348180",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract",
+        "label": "Bonfanti et al. (2024), Astronomy & Astrophysics 682 A66",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONFANTI_ET_AL__2024): st_teff 3358, st_rad 0.38, st_mass 0.381"
+      },
+      {
+        "catalogueId": "wikipedia-ltt-3780",
+        "url": "https://en.wikipedia.org/wiki/LTT_3780",
+        "label": "Wikipedia, \"LTT 3780\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370781541",
+        "quote": "LTT 3780, also known as TOI-732 or LP 729-54, is the brighter component of a wide visual binary star system in the constellation Hydra."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bonfanti et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348180",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract",
+        "label": "Bonfanti et al. (2024), Astronomy & Astrophysics 682 A66",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONFANTI_ET_AL__2024): st_teff 3358, st_rad 0.38, st_mass 0.381"
+      },
+      {
+        "catalogueId": "wikipedia-ltt-3780",
+        "url": "https://en.wikipedia.org/wiki/LTT_3780",
+        "label": "Wikipedia, \"LTT 3780\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370781541",
+        "quote": "This star is host to a pair of orbiting exoplanets."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

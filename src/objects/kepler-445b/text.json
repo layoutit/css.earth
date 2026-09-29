@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-445b",
+  "card": {
+    "text": "Kepler-445 b was found in 2015 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-801-1-18",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...801...18M/abstract",
+        "label": "Muirhead et al. 2015",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MUIRHEAD_ET_AL__2015): disc_year 2015, disc_facility Kepler, sy_pnum 3; pl_orbper 2.9841664, pl_radj 0.14, pl_bmassj 0.00982"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 3 planets known around Kepler-445. Its orbit and size follow Muirhead et al. 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-801-1-18",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...801...18M/abstract",
+        "label": "Muirhead et al. 2015",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MUIRHEAD_ET_AL__2015): disc_year 2015, disc_facility Kepler, sy_pnum 3; pl_orbper 2.9841664, pl_radj 0.14, pl_bmassj 0.00982"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

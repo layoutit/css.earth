@@ -1,0 +1,24 @@
+{
+  "host": "toi-201",
+  "planets": [
+    {
+      "id": "toi-201c",
+      "name": "TOI-201 c",
+      "description": "Transiting planet of TOI-201 with a 2800-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+        "credit": "Mireles et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MIRELES_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-201 c was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is one of 3 planets known around TOI-201. Its orbit and size follow Mireles et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MIRELES_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 2800, pl_radj 0.92782745, pl_bmassj 15.70029579"
+      },
+      "order": 4209
+    }
+  ]
+}

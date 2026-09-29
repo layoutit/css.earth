@@ -1,0 +1,24 @@
+{
+  "host": "toi-2989",
+  "planets": [
+    {
+      "id": "toi-2989b",
+      "name": "TOI-2989 b",
+      "description": "Transiting planet of TOI-2989 with a 3.12-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract",
+        "credit": "Frensch et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "FRENSCH_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-2989 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2989. Its orbit and size follow Frensch et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FRENSCH_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.122832, pl_radj 1.12, pl_bmassj 3"
+      },
+      "order": 4351
+    }
+  ]
+}

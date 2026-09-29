@@ -1,0 +1,25 @@
+{
+  "host": "toi-4602",
+  "planets": [
+    {
+      "id": "toi-4602b",
+      "name": "TOI-4602 b",
+      "description": "Transiting planet of TOI-4602 with a 3.98-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract",
+        "credit": "Di Maio et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DI_MAIO_ET_AL_2026",
+        "planetName": "TOI-4602.01"
+      },
+      "text": {
+        "card": "TOI-4602 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-4602. Its orbit and size follow Di Maio et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DI_MAIO_ET_AL_2026): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.9812999, pl_radj 0.219, pl_bmassj 0.0174"
+      },
+      "order": 4452
+    }
+  ]
+}

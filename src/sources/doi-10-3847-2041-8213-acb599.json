@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-acb599",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gilbert et al. (2023): A Second Earth-sized Planet in the Habitable Zone of the M Dwarf, TOI-700",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2301.03617"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/acb599"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023ApJ...944L..35G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..35G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/acb599",
+      "label": "The Astrophysical Journal Letters 944 L35"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..35G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gilbert et al. (2023), The Astrophysical Journal Letters 944 L35",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..35G"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 944 L35",
+  "creators": [
+    "Emily A. Gilbert",
+    "Andrew Vanderburg",
+    "Joseph E. Rodriguez",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

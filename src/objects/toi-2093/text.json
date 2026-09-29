@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2093",
+  "card": {
+    "text": "TOI-2093 c crosses TOI-2093 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202556361",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A..93S/abstract",
+        "label": "Sanz-Forcada et al. (2025), Astronomy & Astrophysics 703 A93",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SANZ_FORCADA_ET_AL_2025): st_teff 4426, st_rad 0.729, st_mass 0.745"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Sanz-Forcada et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202556361",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A..93S/abstract",
+        "label": "Sanz-Forcada et al. (2025), Astronomy & Astrophysics 703 A93",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SANZ_FORCADA_ET_AL_2025): st_teff 4426, st_rad 0.729, st_mass 0.745"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

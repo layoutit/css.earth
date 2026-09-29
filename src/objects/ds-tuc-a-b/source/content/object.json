@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ds-tuc-a-b",
+  "displayName": "DS Tuc A b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.51 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ab2988",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N",
+          "label": "Newton et al. 2019",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "8.14 days",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ab2988",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N",
+          "label": "Newton et al. 2019",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "Under 1.3 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-201935598",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...630A..81B",
+          "label": "Benatti et al. 2019",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by DS Tuc; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "ds-tuc-a-b-lens-shape.webp",
+        "surface": "ds-tuc-a-b-surface-shape@2x.webp",
+        "poles": "ds-tuc-a-b-poles-shape@2x.webp",
+        "source": {
+          "id": "ds-tuc-a-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of DS Tuc A b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of ds-tuc-a's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "ds-tuc-a-b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/ds-tuc-a-b/ds-tuc-a-b-system-orbits.svg",
+      "alt": "The orbits of DS Tuc A's planets in this map from above, to scale, with DS Tuc A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "ds-tuc-a-b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N"
+      }
+    },
+    {
+      "id": "ds-tuc-a-b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/ds-tuc-a-b/ds-tuc-a-b-transit.svg",
+      "alt": "DS Tuc A b crossing its star, as TESS recorded it: 3 sectors (102, 103, 104) of the SPOC pipeline's 2-minute light curves of TIC 410214986, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "ds-tuc-a-b-tess-sector-102",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026086090000-s0102-0000000410214986-0304-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Newton et al. 2019",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract",
+      "credit": "Newton et al. 2019"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ds-tuc-a-b.json",
+      "credit": "Radius from Newton et al. 2019 (2019ApJ...880L..17N), via the NASA Exoplanet Archive; mass from Benatti et al. 2019 (2019A&A...630A..81B), via the NASA Exoplanet Archive; orbit from Newton et al. 2019 (2019ApJ...880L..17N), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "toi-2093c",
+ "classification": "exoplanet",
+ "order": 4241,
+ "physical": {
+  "name": "TOI-2093 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 14669.6,
+  "gravitationalParameterKm3PerS2": 6297886.48,
+  "parent": "toi-2093"
+ },
+ "physicalNotes": "Radius 0.20519261 Jupiter radii from Sanz-Forcada et al. 2025 (2025A&A...703A..93S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...703A..93S/abstract): 14,669.6 km at 71,492 km per Jupiter radius. GM from the mass 0.04971236 Jupiter masses (Sanz-Forcada et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...703A..93S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...703A..93S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 53.81149,
+  "semiMajorAxisStellarRadii": 75.8069,
+  "inclinationDegrees": 89.577,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58751.1122,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Sanz-Forcada et al. 2025 (2025A&A...703A..93S), via the NASA Exoplanet Archive ps table (pl_refname SANZ_FORCADA_ET_AL_2025): P 53.81149 d",
+   "shape": "Sanz-Forcada et al. 2025 (2025A&A...703A..93S), via the NASA Exoplanet Archive ps table (pl_refname SANZ_FORCADA_ET_AL_2025): a/R* derived from its semi-major axis 0.257 au and stellar radius 0.729 solar radii; Sanz-Forcada et al. 2025 (2025A&A...703A..93S), via the NASA Exoplanet Archive ps table (pl_refname SANZ_FORCADA_ET_AL_2025): inclination 89.577 degrees",
+   "eccentricity": "Sanz-Forcada et al. 2025 (2025A&A...703A..93S), via the NASA Exoplanet Archive ps table (pl_refname SANZ_FORCADA_ET_AL_2025): e 0",
+   "phase": "Sanz-Forcada et al. 2025 (2025A&A...703A..93S), via the NASA Exoplanet Archive ps table (pl_refname SANZ_FORCADA_ET_AL_2025): transit mid-time 2458751.6122 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 12 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

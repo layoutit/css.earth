@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-410-a",
+  "card": {
+    "text": "Kepler-410 A b crosses Kepler-410 A as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-782-1-14",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...782...14V/abstract",
+        "label": "Eylen et al. (2014), The Astrophysical Journal 782 14",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname VAN_EYLEN_ET_AL__2014): st_teff 6273, st_rad 1.352, st_mass 1.214"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Van Eylen et al. 2014.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-782-1-14",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...782...14V/abstract",
+        "label": "Eylen et al. (2014), The Astrophysical Journal 782 14",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname VAN_EYLEN_ET_AL__2014): st_teff 6273, st_rad 1.352, st_mass 1.214"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

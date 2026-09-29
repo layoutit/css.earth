@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-191939d",
+  "card": {
+    "text": "HD 191939 d was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244120",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O/abstract",
+        "label": "Orell-Miquel et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ORELL_MIQUEL_ET_AL_2023): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 6; pl_orbper 38.3511223, pl_radj 0.26719646, pl_bmassj 0.00880979"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 6 planets known around HD 191939. Its orbit and size follow Lubin et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244120",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O/abstract",
+        "label": "Orell-Miquel et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ORELL_MIQUEL_ET_AL_2023): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 6; pl_orbper 38.3511223, pl_radj 0.26719646, pl_bmassj 0.00880979"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

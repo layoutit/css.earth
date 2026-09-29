@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "k2-292b",
+  "radiusKm": 16774.4,
+  "radiusSource": "Radius 0.23463288 Jupiter radii from Luque et al. 2019 (2019A&A...623A.114L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.114L/abstract): 16,774.4 km at 71,492 km per Jupiter radius. GM from the mass 0.07708523 Jupiter masses (Luque et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...623A.114L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019A&A...623A.114L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 16.9841,
+  "orbitalPeriodSource": "Luque et al. 2019 (2019A&A...623A.114L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2019): P 16.9841 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-292 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.07708523 Jupiter masses: Luque et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...623A.114L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.114L/abstract)."
+}

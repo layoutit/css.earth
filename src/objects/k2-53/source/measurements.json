@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "k2-53",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 561,430 km at 137.68 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 137.68425668199987,
+  "distanceSource": "Gaia DR3 parallax 7.2630 +/- 0.0156 mas (same row, RUWE 1.17): 137.68 pc, no zero-point correction",
+  "radiusKm": 561429.9,
+  "radiusSource": "Radius 0.807 +/- 0.016 solar radii from Livingston et al. 2019, the stellar radius of the default parameter set of K2-53 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract): 561,430 km at 695,700 km per solar radius. Mass 0.851 +/- 0.032 solar masses from Livingston et al. 2019, the stellar mass of the default parameter set of K2-53 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract); GM is that mass times the JPL solar GM. Temperature 5263 +/- 88 K from Livingston et al. 2019, the stellar temperature of the default parameter set of K2-53 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5263,
+  "effectiveTemperatureSource": "Livingston et al. 2019, the stellar temperature of the default parameter set of K2-53 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract)",
+  "surfaceGravityLogg": 4.55,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-53.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.554, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

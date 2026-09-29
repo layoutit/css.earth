@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-224018c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-224018c-orbits",
+      "title": "HD 224018 c: orbits around HD 224018",
+      "output": "hd-224018c-system-orbits.svg",
+      "system": "hd-224018",
+      "highlight": "hd-224018c",
+      "description": "The orbits of HD 224018's planets in this map from above, to scale, with HD 224018 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Damasso et al. 2025 (2025A&A...702A.118D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL_2025): P 36.57669 d"
+      }
+    }
+  ]
+}

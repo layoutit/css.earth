@@ -1,0 +1,39 @@
+{
+  "id": "k2-55",
+  "name": "K2-55",
+  "system": "K2-55 system",
+  "description": "Star of 4,300 K, 160 parsecs away, with 1 transiting planet.",
+  "target": "K2-55",
+  "gaia": "6825931948041984256",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "credit": "Howard et al. 2025"
+  },
+  "radius": {
+    "value": 0.715,
+    "source": "Howard et al. 2025, the stellar radius of the default parameter set of K2-55 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "uncertainty": 0.043
+  },
+  "mass": {
+    "value": 0.688,
+    "source": "Howard et al. 2025, the stellar mass of the default parameter set of K2-55 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "uncertainty": 0.069
+  },
+  "temperature": {
+    "value": 4300,
+    "source": "Howard et al. 2025, the stellar temperature of the default parameter set of K2-55 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "uncertainty": 107
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-55 b crosses K2-55 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Howard et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HOWARD_ET_AL__2025): st_teff 4300, st_rad 0.715, st_mass 0.688"
+  },
+  "notes": [],
+  "order": 3589
+}

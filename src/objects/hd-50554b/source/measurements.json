@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-50554b",
+  "radiusKm": 81500.9,
+  "radiusSource": "Radius 1.14 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since HD 50554 b does not transit, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html): 81,500.9 km at 71,492 km per Jupiter radius. GM from the mass 5.85 Jupiter masses (Xiao et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023RAA....23e5022X), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023RAA....23e5022X/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1240,
+  "orbitalPeriodSource": "Xiao et al. 2023 (2023RAA....23e5022X), via the NASA Exoplanet Archive ps table (pl_refname XIAO_ET_AL__2023): P 1240 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 50554 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "5.85 Jupiter masses: Xiao et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023RAA....23e5022X), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023RAA....23e5022X/abstract)."
+}

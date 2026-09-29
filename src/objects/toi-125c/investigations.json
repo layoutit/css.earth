@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-125c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.24614149 Jupiter radii from Nielsen et al. 2020 (2020MNRAS.492.5399N), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02086021 Jupiter masses: Nielsen et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020MNRAS.492.5399N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 9.1549418 d; Nielsen et al. 2020 (2020MNRAS.492.5399N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): a/R* 20.66; Nielsen et al. 2020 (2020MNRAS.492.5399N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): inclination 88.54 degrees; Nielsen et al. 2020 (2020MNRAS.492.5399N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): e 0.066; Nielsen et al. 2020 (2020MNRAS.492.5399N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2020): omega 70 degrees; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460202.049893 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract"
+      ]
+    }
+  ]
+}

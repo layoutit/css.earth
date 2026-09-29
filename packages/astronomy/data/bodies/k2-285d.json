@@ -1,0 +1,28 @@
+{
+ "id": "k2-285d",
+ "classification": "exoplanet",
+ "order": 3462,
+ "physical": {
+  "name": "K2-285 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 15817.7,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "k2-285"
+ },
+ "physicalNotes": "Radius 0.22125078 Jupiter radii from Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract): 15,817.7 km at 71,492 km per Jupiter radius. No mass is measured: Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract) gives only an upper limit of 0.02045118 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.45582,
+  "semiMajorAxisStellarRadii": 32.2,
+  "inclinationDegrees": 89.6431,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57744.701,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): P 10.45582 d",
+   "shape": "Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): a/R* 32.2; Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): inclination 89.6431 degrees",
+   "eccentricity": "Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): e 0",
+   "phase": "Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): transit mid-time 2457745.201 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 113 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

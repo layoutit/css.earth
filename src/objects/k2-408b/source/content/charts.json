@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-408b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-408b-orbits",
+      "title": "K2-408 b: orbits around K2-408",
+      "output": "k2-408b-system-orbits.svg",
+      "system": "k2-408",
+      "highlight": "k2-408b",
+      "description": "The orbits of K2-408's planets in this map from above, to scale, with K2-408 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Zink et al. 2021 (2021AJ....162..259Z), via the NASA Exoplanet Archive ps table (pl_refname ZINK_ET_AL__2021): P 20.978959 d"
+      }
+    }
+  ]
+}

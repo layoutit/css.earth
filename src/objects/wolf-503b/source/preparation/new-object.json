@@ -1,0 +1,24 @@
+{
+  "host": "wolf-503",
+  "planets": [
+    {
+      "id": "wolf-503b",
+      "name": "Wolf 503 b",
+      "description": "Transiting planet of Wolf 503 with a 6-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract",
+        "credit": "Polanski et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2021"
+      },
+      "text": {
+        "card": "Wolf 503 b was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around Wolf 503. Its orbit and size follow Polanski et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2021): disc_year 2018, disc_facility K2, sy_pnum 1; pl_orbper 6.00127, pl_radj 0.18226457, pl_bmassj 0.01969616"
+      },
+      "order": 4860
+    }
+  ]
+}

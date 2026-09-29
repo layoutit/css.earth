@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-77-a-b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.23 Jupiter radii from Cortés-Zuleta et al. 2020 (2020A&A...636A..98C), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "1.6654 Jupiter masses: Noguer et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024PASP..136f4401N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024PASP..136f4401N/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024PASP..136f4401N/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Noguer et al. 2024 (2024PASP..136f4401N), via the NASA Exoplanet Archive ps table (pl_refname NOGUER_ET_AL__2024): P 1.360029395 d; Noguer et al. 2024 (2024PASP..136f4401N), via the NASA Exoplanet Archive ps table (pl_refname NOGUER_ET_AL__2024): a/R* 5.490086; Noguer et al. 2024 (2024PASP..136f4401N), via the NASA Exoplanet Archive ps table (pl_refname NOGUER_ET_AL__2024): inclination 89.99 degrees; Noguer et al. 2024 (2024PASP..136f4401N), via the NASA Exoplanet Archive ps table (pl_refname NOGUER_ET_AL__2024): e 0.01353; Noguer et al. 2024 (2024PASP..136f4401N), via the NASA Exoplanet Archive ps table (pl_refname NOGUER_ET_AL__2024): omega -88.29 degrees, stored as 271.71; Noguer et al. 2024 (2024PASP..136f4401N), via the NASA Exoplanet Archive ps table (pl_refname NOGUER_ET_AL__2024): transit mid-time 2459957.33786 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024PASP..136f4401N/abstract"
+      ]
+    }
+  ]
+}

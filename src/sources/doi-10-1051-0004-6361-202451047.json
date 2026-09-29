@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1051-0004-6361-202451047",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reller et al. (2026): Confirmation of the long-period exoplanet TOI-4409 b",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202451047"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026A&A...712A.142R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Reller et al. (2026), Astronomy & Astrophysics 712 A142",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 712 A142",
+  "creators": [
+    "Patricio Reller",
+    "Rafael Brahm",
+    "Bruno Merín",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

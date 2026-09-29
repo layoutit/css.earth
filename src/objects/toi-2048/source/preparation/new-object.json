@@ -1,0 +1,39 @@
+{
+  "id": "toi-2048",
+  "name": "TOI-2048",
+  "system": "TOI-2048 system",
+  "description": "Star of 5,185 K, 117 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2048",
+  "gaia": "1404488390652463872",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..115N/abstract",
+    "credit": "Newton et al. 2022"
+  },
+  "radius": {
+    "value": 0.79,
+    "source": "Newton et al. 2022, the stellar radius of the default parameter set of TOI-2048 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..115N/abstract",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 0.83,
+    "source": "Newton et al. 2022, the stellar mass of the default parameter set of TOI-2048 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..115N/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 5185,
+    "source": "Newton et al. 2022, the stellar temperature of the default parameter set of TOI-2048 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..115N/abstract",
+    "uncertainty": 60
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2048 b crosses TOI-2048 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Newton et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname NEWTON_ET_AL__2022): st_teff 5185, st_rad 0.79, st_mass 0.83"
+  },
+  "notes": [],
+  "order": 4220
+}

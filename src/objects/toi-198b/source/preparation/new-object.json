@@ -1,0 +1,24 @@
+{
+  "host": "toi-198",
+  "planets": [
+    {
+      "id": "toi-198b",
+      "name": "TOI-198 b",
+      "description": "Transiting planet of TOI-198 with a 10.2-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract",
+        "credit": "Zapatero Osorio et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ZAPATERO_OSORIO_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-198 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-198. Its orbit and size follow Zapatero Osorio et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZAPATERO_OSORIO_ET_AL_2026): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 10.21520251255, pl_radj 0.12133128, pl_bmassj 0.00997394"
+      },
+      "order": 4201
+    }
+  ]
+}

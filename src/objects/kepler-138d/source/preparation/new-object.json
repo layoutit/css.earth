@@ -1,0 +1,24 @@
+{
+  "host": "kepler-138",
+  "planets": [
+    {
+      "id": "kepler-138d",
+      "name": "Kepler-138 d",
+      "description": "Transiting planet of Kepler-138 with a 23.1-day year, found in 2014.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+        "credit": "Piaulet et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PIAULET_ET_AL_2023"
+      },
+      "text": {
+        "card": "Kepler-138 d was found in 2014 by Kepler as it crossed its star.",
+        "introduction": "It is one of 4 planets known around Kepler-138. Its orbit and size follow Piaulet et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PIAULET_ET_AL_2023): disc_year 2014, disc_facility Kepler, sy_pnum 4; pl_orbper 23.08898875, pl_radj 0.13471341, pl_bmassj 0.00660734"
+      },
+      "order": 3675
+    }
+  ]
+}

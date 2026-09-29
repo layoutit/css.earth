@@ -1,0 +1,39 @@
+{
+  "id": "wolf-327",
+  "name": "Wolf 327",
+  "system": "Wolf 327 system",
+  "description": "Star of 3,542 K, 28.5 parsecs away, with 1 transiting planet.",
+  "target": "Wolf 327",
+  "gaia": "796185407950360192",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract",
+    "credit": "Murgas et al. 2024"
+  },
+  "radius": {
+    "value": 0.406,
+    "source": "Murgas et al. 2024, the stellar radius of the default parameter set of Wolf 327 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.405,
+    "source": "Murgas et al. 2024, the stellar mass of the default parameter set of Wolf 327 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract",
+    "uncertainty": 0.019
+  },
+  "temperature": {
+    "value": 3542,
+    "source": "Murgas et al. 2024, the stellar temperature of the default parameter set of Wolf 327 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Wolf 327 b crosses Wolf 327 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Murgas et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MURGAS_ET_AL_2024): st_teff 3542, st_rad 0.406, st_mass 0.405"
+  },
+  "notes": [],
+  "order": 4857
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-269",
+  "name": "TOI-269",
+  "system": "TOI-269 system",
+  "description": "Star of 3,514 K, 57 parsecs away, with 1 transiting planet.",
+  "target": "TOI-269",
+  "gaia": "4770828304936109056",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...650A.145C/abstract",
+    "credit": "Cointepas et al. 2021"
+  },
+  "radius": {
+    "value": 0.398,
+    "source": "Cointepas et al. 2021, the stellar radius of the default parameter set of TOI-269 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...650A.145C/abstract",
+    "uncertainty": 0.012
+  },
+  "mass": {
+    "value": 0.3917,
+    "source": "Cointepas et al. 2021, the stellar mass of the default parameter set of TOI-269 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...650A.145C/abstract",
+    "uncertainty": 0.0095
+  },
+  "temperature": {
+    "value": 3514,
+    "source": "Cointepas et al. 2021, the stellar temperature of the default parameter set of TOI-269 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...650A.145C/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-269 b crosses TOI-269 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Cointepas et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname COINTEPAS_ET_AL__2021): st_teff 3514, st_rad 0.398, st_mass 0.3917"
+  },
+  "notes": [],
+  "order": 4334
+}

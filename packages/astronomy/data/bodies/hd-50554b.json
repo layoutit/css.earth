@@ -1,0 +1,31 @@
+{
+ "id": "hd-50554b",
+ "classification": "exoplanet",
+ "order": 3223,
+ "physical": {
+  "name": "HD 50554 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 81500.9,
+  "gravitationalParameterKm3PerS2": 741116211.62,
+  "parent": "hd-50554"
+ },
+ "physicalNotes": "Radius 1.14 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since HD 50554 b does not transit, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html): 81,500.9 km at 71,492 km per Jupiter radius. GM from the mass 5.85 Jupiter masses (Xiao et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023RAA....23e5022X), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023RAA....23e5022X/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1240,
+  "semiMajorAxisStellarRadii": 438.8833,
+  "inclinationDegrees": 61,
+  "eccentricity": 0.482,
+  "argumentOfPeriapsisDegrees": 4,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 55566.5,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Xiao et al. 2023 (2023RAA....23e5022X), via the NASA Exoplanet Archive ps table (pl_refname XIAO_ET_AL__2023): P 1240 d",
+   "shape": "Xiao et al. 2023 (2023RAA....23e5022X), via the NASA Exoplanet Archive ps table (pl_refname XIAO_ET_AL__2023): a/R* from its semi-major axis 2.339 au over the host's recorded radius 1.146 solar radii, so the orbit keeps the paper's size; inclination 61 +12 degrees, measured in the same fit",
+   "eccentricity": "Xiao et al. 2023 (2023RAA....23e5022X), via the NASA Exoplanet Archive ps table (pl_refname XIAO_ET_AL__2023): e 0.482",
+   "argumentOfPeriapsis": "Xiao et al. 2023 (2023RAA....23e5022X), via the NASA Exoplanet Archive ps table (pl_refname XIAO_ET_AL__2023): omega 4 degrees",
+   "phase": "Xiao et al. 2023 (2023RAA....23e5022X), via the NASA Exoplanet Archive ps table (pl_refname XIAO_ET_AL__2023): periastron passage 2455567 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: the NASA Exoplanet Archive carries no position angle for the orbit's node on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

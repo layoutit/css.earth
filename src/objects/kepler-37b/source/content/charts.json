@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-37b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-37b-orbits",
+      "title": "Kepler-37 b: orbits around Kepler-37",
+      "output": "kepler-37b-system-orbits.svg",
+      "system": "kepler-37",
+      "highlight": "kepler-37b",
+      "description": "The orbits of Kepler-37's planets in this map from above, to scale, with Kepler-37 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Barclay et al. 2013 (2013Natur.494..452B), via the NASA Exoplanet Archive ps table (pl_refname BARCLAY_ET_AL__2013): P 13.367308 d"
+      }
+    }
+  ]
+}

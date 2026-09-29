@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-394b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-394b-orbits",
+      "title": "K2-394 b: orbits around K2-394",
+      "output": "k2-394b-system-orbits.svg",
+      "system": "k2-394",
+      "highlight": "k2-394b",
+      "description": "The orbits of K2-394's planets in this map from above, to scale, with K2-394 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 5.0957983 d"
+      }
+    }
+  ]
+}

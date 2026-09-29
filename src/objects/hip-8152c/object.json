@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hip-8152c",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HIP 8152 c",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 16101
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hip-8152c-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HIP 8152 c",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 20975028,
+      "description": "HIP 8152 c was found in 2023 by TESS as it crossed its star.",
+      "systemName": "HIP 8152 system",
+      "order": 3263,
+      "context": {
+        "order": 3263
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2671265988466599400,
+        1314945213539669000,
+        -990539503800870800
+      ],
+      "presentationToReference": [
+        0.8442368919140804,
+        0.4550268439925824,
+        0.2832218945939802,
+        0.4331702832718062,
+        -0.8904637931277313,
+        0.13941929141548565,
+        -0.3156383627214487,
+        -0.004980399052579019,
+        0.9488664919807214
+      ],
+      "orbitUpReference": [
+        -0.4550268439925824,
+        0.8904637931277313,
+        0.004980399052579019
+      ],
+      "metersPerUnit": 51938.709677419356,
+      "bodyRadiusM": 16101000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

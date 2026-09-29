@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "iras-04125-2902",
+  "card": {
+    "text": "IRAS 04125+2902 b crosses IRAS 04125+2902 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-024-08123-3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+        "label": "Barber et al. (2024), Nature 635 574-577",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARBER_ET_AL__2024): st_teff 4080, st_rad 1.45, st_mass 0.7"
+      },
+      {
+        "catalogueId": "wikipedia-iras-04125-2902",
+        "url": "https://en.wikipedia.org/wiki/IRAS_04125%2B2902",
+        "label": "Wikipedia, \"IRAS 04125+2902\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366588727",
+        "quote": "IRAS 04125+2902 is an M-type star and a T Tauri variable located in the Taurus Molecular Cloud, 160 parsecs from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Barber et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-024-08123-3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+        "label": "Barber et al. (2024), Nature 635 574-577",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARBER_ET_AL__2024): st_teff 4080, st_rad 1.45, st_mass 0.7"
+      },
+      {
+        "catalogueId": "wikipedia-iras-04125-2902",
+        "url": "https://en.wikipedia.org/wiki/IRAS_04125%2B2902",
+        "label": "Wikipedia, \"IRAS 04125+2902\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366588727",
+        "quote": "This young protostar has 70% of the Sun's mass, 1.45 times the Sun's radius and an effective temperature of 4,080 K. It has a very young age of three million years."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-42d",
+  "displayName": "Kepler-42 d",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.4 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1088-2041-8205-750-2-l37",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...750L..37M",
+          "label": "Muirhead et al. 2012",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "45 hours",
+        "source": {
+          "catalogueId": "doi-10-1088-2041-8205-750-2-l37",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...750L..37M",
+          "label": "Muirhead et al. 2012",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "Under 0.36 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad91a7",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...90O",
+          "label": "Ofir et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-42; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-42d-lens-shape.webp",
+        "surface": "kepler-42d-surface-shape@2x.webp",
+        "poles": "kepler-42d-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-42d-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-42 d is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-42's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kepler-42d-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-42d/kepler-42d-system-orbits.svg",
+      "alt": "The orbits of Kepler-42's planets in this map from above, to scale, with Kepler-42 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-42d-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...750L..37M"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Muirhead et al. 2012",
+      "href": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract",
+      "credit": "Muirhead et al. 2012"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-42d.json",
+      "credit": "Radius from Muirhead et al. 2012 (2012ApJ...750L..37M), via the NASA Exoplanet Archive; mass from Ofir et al. 2025 (2025AJ....169...90O), via the NASA Exoplanet Archive; orbit from Muirhead et al. 2012 (2012ApJ...750L..37M), via the NASA Exoplanet Archive"
+    }
+  }
+}

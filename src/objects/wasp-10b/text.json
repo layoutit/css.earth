@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-10b",
+  "card": {
+    "text": "WASP-10 b was found in 2008 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-692-2-l100",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...692L.100J/abstract",
+        "label": "Johnson et al. 2009",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JOHNSON_ET_AL__2009): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.09272826, pl_radj 1.08, pl_bmassj 3.15"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-10b",
+        "url": "https://en.wikipedia.org/wiki/WASP-10b",
+        "label": "Wikipedia, \"WASP-10b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374241985",
+        "quote": "WASP-10b is an extrasolar planet discovered in 2008 by SuperWASP using the transit method."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-10. Its orbit and size follow Johnson et al. 2009's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-692-2-l100",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...692L.100J/abstract",
+        "label": "Johnson et al. 2009",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JOHNSON_ET_AL__2009): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.09272826, pl_radj 1.08, pl_bmassj 3.15"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-10b",
+        "url": "https://en.wikipedia.org/wiki/WASP-10b",
+        "label": "Wikipedia, \"WASP-10b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374241985",
+        "quote": "It takes about three days to orbit around WASP-10."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The colour of a black body at the 1,152 K day side measured in eclipse."
+    }
+  }
+}

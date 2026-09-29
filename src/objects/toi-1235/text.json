@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1235",
+  "card": {
+    "text": "TOI-1235 b crosses TOI-1235 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202038160",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract",
+        "label": "Bluhm et al. (2020), Astronomy & Astrophysics 639 A132",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BLUHM_ET_AL__2020): st_teff 3997, st_rad 0.619, st_mass 0.63"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bluhm et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202038160",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract",
+        "label": "Bluhm et al. (2020), Astronomy & Astrophysics 639 A132",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BLUHM_ET_AL__2020): st_teff 3997, st_rad 0.619, st_mass 0.63"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

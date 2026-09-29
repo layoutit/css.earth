@@ -1,0 +1,24 @@
+{
+  "host": "toi-1246",
+  "planets": [
+    {
+      "id": "toi-1246c",
+      "name": "TOI-1246 c",
+      "description": "Transiting planet of TOI-1246 with a 5.9-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-1246 c was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around TOI-1246. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 5.90412784205, pl_radj 0.21867273, pl_bmassj 0.0286318"
+      },
+      "order": 3971
+    }
+  ]
+}

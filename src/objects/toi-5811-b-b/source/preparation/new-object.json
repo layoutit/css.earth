@@ -1,0 +1,24 @@
+{
+  "host": "toi-5811-b",
+  "planets": [
+    {
+      "id": "toi-5811-b-b",
+      "name": "TOI-5811 B b",
+      "description": "Transiting planet of TOI-5811 B with a 6.26-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract",
+        "credit": "Lillo-Box et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LILLO_BOX_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5811 B b was found in 2026 as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5811 B. Its orbit and size follow Lillo-Box et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LILLO_BOX_ET_AL_2026): disc_year 2026, disc_facility Multiple Observatories, sy_pnum 1; pl_orbper 6.25663, pl_radj 1.96, pl_bmassj 0.81"
+      },
+      "order": 4589
+    }
+  ]
+}

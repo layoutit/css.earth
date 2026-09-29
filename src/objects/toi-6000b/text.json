@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6000b",
+  "card": {
+    "text": "TOI-6000 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ade68b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G/abstract",
+        "label": "Barrientos et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GOMEZ_BARRIENTOS_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.448959, pl_radj 0.08386133, pl_bmassj 0.00245"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-6000. Its orbit and size follow Gomez Barrientos et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ade68b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G/abstract",
+        "label": "Barrientos et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GOMEZ_BARRIENTOS_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.448959, pl_radj 0.08386133, pl_bmassj 0.00245"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

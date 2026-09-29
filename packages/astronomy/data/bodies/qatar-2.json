@@ -1,0 +1,30 @@
+{
+ "id": "qatar-2",
+ "classification": "star",
+ "order": 3850,
+ "physical": {
+  "name": "Qatar-2",
+  "horizonsCode": null,
+  "meanRadiusKm": 539863.2,
+  "gravitationalParameterKm3PerS2": 98605342951.16095,
+  "parent": null,
+  "effectiveTemperatureK": 4645
+ },
+ "physicalNotes": "Radius 0.776 +/- 0.008 solar radii from Mancini et al. 2014, the stellar radius of the default parameter set of Qatar-2 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract): 539,863 km at 695,700 km per solar radius. Mass 0.743 +/- 0.021 solar masses from Mancini et al. 2014, the stellar mass of the default parameter set of Qatar-2 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract); GM is that mass times the JPL solar GM. Temperature 4645 +/- 50 K from Mancini et al. 2014, the stellar temperature of the default parameter set of Qatar-2 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 207.65548048679761,
+  "declinationDegrees": -6.8040734885768,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 182.40415876852168,
+  "properMotionRaMasPerYear": -88.17090893549087,
+  "properMotionDecMasPerYear": -15.186547075131184,
+  "radialVelocityKmPerS": -23.997885,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3620030644476623616 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/qatar-2/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.4823 +/- 0.0195 mas (same row, RUWE 1.02): 182.40 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -88.171, -15.187 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -24.00 +/- 1.03 km/s"
+  }
+ }
+}

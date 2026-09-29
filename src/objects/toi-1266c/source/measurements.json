@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1266c",
+  "radiusKm": 12628.6,
+  "radiusSource": "Radius 0.17664407 Jupiter radii from Greklek-McKeon et al. 2025 (2025AJ....169..292G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract): 12,628.6 km at 71,492 km per Jupiter radius. GM from the mass 0.00997394 Jupiter masses (Greklek-McKeon et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....169..292G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 18.801611,
+  "orbitalPeriodSource": "Cloutier et al. 2024 (2024MNRAS.527.5464C), via the NASA Exoplanet Archive ps table (pl_refname CLOUTIER_ET_AL__2024): P 18.801611 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1266 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00997394 Jupiter masses: Greklek-McKeon et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....169..292G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract)."
+}

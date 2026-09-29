@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-5388b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-5388b-orbits",
+      "title": "TOI-5388 b: orbits around TOI-5388",
+      "output": "toi-5388b-system-orbits.svg",
+      "system": "toi-5388",
+      "highlight": "toi-5388b",
+      "description": "The orbits of TOI-5388's planets in this map from above, to scale, with TOI-5388 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Poultourtzidis et al. 2026 (2026A&A...707A.106P), via the NASA Exoplanet Archive ps table (pl_refname POULTOURTZIDIS_ET_AL_2026): P 2.5946748 d"
+      }
+    }
+  ]
+}

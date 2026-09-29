@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-806",
+  "card": {
+    "text": "GJ 806 b crosses GJ 806 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244261",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract",
+        "label": "Palle et al. (2023), Astronomy & Astrophysics 678 A80",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PALLE_ET_AL__2023): st_teff 3600, st_rad 0.4144, st_mass 0.413"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Palle et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244261",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract",
+        "label": "Palle et al. (2023), Astronomy & Astrophysics 678 A80",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PALLE_ET_AL__2023): st_teff 3600, st_rad 0.4144, st_mass 0.413"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-3b",
+  "card": {
+    "text": "HAT-P-3 b was found in 2007 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility HATNet, sy_pnum 1; pl_orbper 2.89973815, pl_radj 0.94, pl_bmassj 0.65"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-3b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-3b",
+        "label": "Wikipedia, \"HAT-P-3b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370776750",
+        "quote": "HAT-P-3b, also named Teberda, is an extrasolar planet that orbits the star HAT-P-3 approximately 450 light-years away in the constellation of Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HAT-P-3. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility HATNet, sy_pnum 1; pl_orbper 2.89973815, pl_radj 0.94, pl_bmassj 0.65"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-3b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-3b",
+        "label": "Wikipedia, \"HAT-P-3b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370776750",
+        "quote": "It was discovered by the HATNet Project via the transit method and confirmed with Doppler spectroscopy, so both its mass and radius are known quite precisely."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The colour of a black body at the 1,268 K day side measured in eclipse."
+    }
+  }
+}

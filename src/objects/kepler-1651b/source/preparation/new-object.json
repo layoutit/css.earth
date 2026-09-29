@@ -1,0 +1,24 @@
+{
+  "host": "kepler-1651",
+  "planets": [
+    {
+      "id": "kepler-1651b",
+      "name": "Kepler-1651 b",
+      "description": "Transiting planet of Kepler-1651 with a 9.88-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+        "credit": "Mann et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MANN_ET_AL__2017"
+      },
+      "text": {
+        "card": "Kepler-1651 b was found in 2017 by Kepler as it crossed its star.",
+        "introduction": "It is the only planet known around Kepler-1651. Its orbit and size follow Mann et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2017): disc_year 2017, disc_facility Kepler, sy_pnum 1; pl_orbper 9.87863917, pl_radj 0.1641538, pl_bmassj 0.0127"
+      },
+      "order": 3691
+    }
+  ]
+}

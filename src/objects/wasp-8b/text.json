@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-8b",
+  "card": {
+    "text": "WASP-8 b was found in 2010 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility SuperWASP, sy_pnum 2; pl_orbper 8.1587261, pl_radj 1.13, pl_bmassj 2.54"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-8b",
+        "url": "https://en.wikipedia.org/wiki/WASP-8b",
+        "label": "Wikipedia, \"WASP-8b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374239709",
+        "quote": "WASP-8b is an exoplanet orbiting the star WASP-8A in the constellation of Sculptor."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around WASP-8. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility SuperWASP, sy_pnum 2; pl_orbper 8.1587261, pl_radj 1.13, pl_bmassj 2.54"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-8b",
+        "url": "https://en.wikipedia.org/wiki/WASP-8b",
+        "label": "Wikipedia, \"WASP-8b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374239709",
+        "quote": "The star is similar to the Sun and forms a binary star with a red dwarf star (WASP-8B) of half the Sun's mass that orbits WASP-8A 4.5 arcseconds away."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

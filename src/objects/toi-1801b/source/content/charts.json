@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1801b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1801b-orbits",
+      "title": "TOI-1801 b: orbits around TOI-1801",
+      "output": "toi-1801b-system-orbits.svg",
+      "system": "toi-1801",
+      "highlight": "toi-1801b",
+      "description": "The orbits of TOI-1801's planets in this map from above, to scale, with TOI-1801 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): P 10.643985 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-1801b-transit",
+      "title": "TOI-1801 b: its transit",
+      "description": "TOI-1801 b crossing its star, as TESS recorded it: 2 sectors (22, 49) of the SPOC pipeline's 2-minute light curves of TIC 119584412, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-1801b-transit.svg",
+      "metadata": {
+        "tic": "TIC 119584412",
+        "sectors": [
+          22,
+          49
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-1801b",
+      "sources": [
+        "photometry/tess/tess2020049080258-s0022-0000000119584412-0174-s_lc.fits",
+        "photometry/tess/tess2022057073128-s0049-0000000119584412-0221-s_lc.fits"
+      ],
+      "durationHours": 2.6991119,
+      "binMinutes": 11,
+      "notes": [
+        "TESS 2-min SPOC · sectors 22, 49",
+        "Folded on the app's orbit; 11-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

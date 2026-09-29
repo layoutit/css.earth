@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-1712b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-1712b-orbits",
+      "title": "Kepler-1712 b: orbits around Kepler-1712",
+      "output": "kepler-1712b-system-orbits.svg",
+      "system": "kepler-1712",
+      "highlight": "kepler-1712b",
+      "description": "The orbits of Kepler-1712's planets in this map from above, to scale, with Kepler-1712 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 13.81505985 d"
+      }
+    }
+  ]
+}

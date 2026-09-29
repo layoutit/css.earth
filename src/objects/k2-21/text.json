@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-21",
+  "card": {
+    "text": "2 planets cross K2-21 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa89f2",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+        "label": "Dressing et al. (2017), The Astronomical Journal 154 207",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DRESSING_ET_AL__2017): st_teff 4222.06, st_rad 0.646783, st_mass 0.676023"
+      },
+      {
+        "catalogueId": "wikipedia-k2-21",
+        "url": "https://en.wikipedia.org/wiki/K2-21",
+        "label": "Wikipedia, \"K2-21\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1329895457",
+        "quote": "K2-21, also known as EPIC 206011691, is a red dwarf star located 273 light-years away in the constellation Aquarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Dressing et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa89f2",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+        "label": "Dressing et al. (2017), The Astronomical Journal 154 207",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DRESSING_ET_AL__2017): st_teff 4222.06, st_rad 0.646783, st_mass 0.676023"
+      },
+      {
+        "catalogueId": "wikipedia-k2-21",
+        "url": "https://en.wikipedia.org/wiki/K2-21",
+        "label": "Wikipedia, \"K2-21\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1329895457",
+        "quote": "It hosts two known exoplanets, discovered in 2015 by the transit method as part of Kepler's K2 mission."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

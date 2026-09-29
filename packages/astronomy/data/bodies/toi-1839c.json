@@ -1,0 +1,28 @@
+{
+ "id": "toi-1839c",
+ "classification": "exoplanet",
+ "order": 4187,
+ "physical": {
+  "name": "TOI-1839 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 15945.3,
+  "gravitationalParameterKm3PerS2": 2391602.28,
+  "parent": "toi-1839"
+ },
+ "physicalNotes": "Radius 0.22303545 Jupiter radii from Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract): 15,945.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01887811 Jupiter masses (Castro-González et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260905413C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.0239478,
+  "semiMajorAxisStellarRadii": 11.37,
+  "inclinationDegrees": 88.39,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58933.2337,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): P 4.0239478 d",
+   "shape": "Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): a/R* 11.37; Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): inclination 88.39 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2026): transit mid-time 2458933.7337 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

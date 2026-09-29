@@ -1,0 +1,28 @@
+{
+ "id": "toi-7333b",
+ "classification": "exoplanet",
+ "order": 4696,
+ "physical": {
+  "name": "TOI-7333 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 13360.2,
+  "gravitationalParameterKm3PerS2": 2014315.86,
+  "parent": "toi-7333"
+ },
+ "physicalNotes": "Radius 0.18687642 Jupiter radii from Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 13,360.2 km at 71,492 km per Jupiter radius. GM from the mass 0.0159 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.2644714,
+  "semiMajorAxisStellarRadii": 15.582072,
+  "inclinationDegrees": 87.78022,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60653.23841,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.2644714 d",
+   "shape": "Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): a/R* 15.582072; Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): inclination 87.78022 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460653.73841 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

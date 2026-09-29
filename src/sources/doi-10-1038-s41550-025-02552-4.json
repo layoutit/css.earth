@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1038-s41550-025-02552-4",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bryant et al. (2025): A transiting giant planet in orbit around a 0.2-solar-mass host star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2506.07931"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1038/s41550-025-02552-4"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025NatAs...9.1031B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/s41550-025-02552-4",
+      "label": "Nature Astronomy 9 1031-1044"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bryant et al. (2025), Nature Astronomy 9 1031-1044",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B"
+    }
+  ],
+  "publisher": "Nature Astronomy 9 1031-1044",
+  "creators": [
+    "Edward M. Bryant",
+    "Andrés Jordán",
+    "Joel D. Hartman",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "tic-88692598",
+  "angularDiameterMas": 0.07,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 370,441 km at 74.22 pc = 0.07 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 74.21500793944499,
+  "distanceSource": "Gaia DR3 parallax 13.4744 +/- 0.0121 mas (same row, RUWE 1.09): 74.22 pc, no zero-point correction",
+  "radiusKm": 370441.5,
+  "radiusSource": "Radius 0.532473 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TIC 88692598 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 370,441 km at 695,700 km per solar radius. Mass 0.529 +/- 0.02 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 88692598 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME (https://doi.org/10.3847/1538-3881/ab3467); GM is that mass times the JPL solar GM. Temperature 3483.17 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 88692598 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3483.17,
+  "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 88692598 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract)",
+  "surfaceGravityLogg": 4.71,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-88692598.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.709, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "qatar-2",
+  "card": {
+    "text": "Qatar-2 b crosses Qatar-2 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stu1286",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+        "label": "Mancini et al. (2014), Monthly Notices of the Royal Astronomical Society 443 2391-2409",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANCINI_ET_AL__2014): st_teff 4645, st_rad 0.776, st_mass 0.743"
+      },
+      {
+        "catalogueId": "wikipedia-qatar-2",
+        "url": "https://en.wikipedia.org/wiki/Qatar-2",
+        "label": "Wikipedia, \"Qatar-2\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374438659",
+        "quote": "Qatar-2 is a K-type main-sequence star about 595 light-years away in the constellation of Virgo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mancini et al. 2014.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stu1286",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+        "label": "Mancini et al. (2014), Monthly Notices of the Royal Astronomical Society 443 2391-2409",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANCINI_ET_AL__2014): st_teff 4645, st_rad 0.776, st_mass 0.743"
+      },
+      {
+        "catalogueId": "wikipedia-qatar-2",
+        "url": "https://en.wikipedia.org/wiki/Qatar-2",
+        "label": "Wikipedia, \"Qatar-2\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374438659",
+        "quote": "The star is much older than Sun, and has a concentration of heavy elements similar to solar abundance."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-760-2-139",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Brown et al. (2012): ANALYSIS OF SPIN-ORBIT ALIGNMENT IN THE WASP-32, WASP-38, AND HAT-P-27/WASP-40 SYSTEMS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1303.5649"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/760/2/139"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012ApJ...760..139B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...760..139B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/760/2/139",
+      "label": "The Astrophysical Journal 760 139"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...760..139B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Brown et al. (2012), The Astrophysical Journal 760 139",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012ApJ...760..139B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 760 139",
+  "creators": [
+    "D. J. A. Brown",
+    "A. Collier Cameron",
+    "R. F. Díaz",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

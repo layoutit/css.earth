@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "k2-32b",
+  "radiusKm": 33797.6,
+  "radiusSource": "Radius 0.47274593 Jupiter radii from Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract): 33,797.6 km at 71,492 km per Jupiter radius. GM from the mass 0.04719528 Jupiter masses (Lillo-Box et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...640A..48L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 8.99196,
+  "orbitalPeriodSource": "Howard et al. 2025 (2025ApJS..278...52H), via the NASA Exoplanet Archive ps table (pl_refname HOWARD_ET_AL__2025): P 8.99196 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-32 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.04719528 Jupiter masses: Lillo-Box et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...640A..48L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract)."
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-4860b",
+  "displayName": "TOI-4860 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.77 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346999",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A",
+          "label": "Almenara et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "37 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346999",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A",
+          "label": "Almenara et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.27 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346999",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A",
+          "label": "Almenara et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-4860; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-4860b-lens-shape.webp",
+        "surface": "toi-4860b-surface-shape@2x.webp",
+        "poles": "toi-4860b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-4860b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-4860 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-4860's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-4860b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-4860b/toi-4860b-system-orbits.svg",
+      "alt": "The orbits of TOI-4860's planets in this map from above, to scale, with TOI-4860 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-4860b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A"
+      }
+    },
+    {
+      "id": "toi-4860b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-4860b/toi-4860b-transit.svg",
+      "alt": "TOI-4860 b crossing its star, as TESS recorded it: 3 sectors (63, 90, 91) of the SPOC pipeline's 2-minute light curves of TIC 335590096, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-4860b-tess-sector-63",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023069172124-s0063-0000000335590096-0255-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Almenara et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract",
+      "credit": "Almenara et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-4860b.json",
+      "credit": "Radius from Almenara et al. 2024 (2024A&A...683A.166A), via the NASA Exoplanet Archive; mass from Almenara et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...683A.166A), via the NASA Exoplanet Archive; orbit from Almenara et al. 2024 (2024A&A...683A.166A), via the NASA Exoplanet Archive"
+    }
+  }
+}

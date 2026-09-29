@@ -1,0 +1,28 @@
+{
+ "id": "k2-266b",
+ "classification": "exoplanet",
+ "order": 3444,
+ "physical": {
+  "name": "K2-266 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 21047.7,
+  "gravitationalParameterKm3PerS2": 4491336.54,
+  "parent": "k2-266"
+ },
+ "physicalNotes": "Radius 0.29440628 Jupiter radii from Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract): 21,047.7 km at 71,492 km per Jupiter radius. GM from the mass 0.03545236 Jupiter masses (Rodriguez et al. 2018, the mass the NASA Exoplanet Archive's composite table adopts (2018AJ....156..245R), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.658524,
+  "semiMajorAxisStellarRadii": 4,
+  "inclinationDegrees": 75.32,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57949.1747,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): P 0.658524 d",
+   "shape": "Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): a/R* 4; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): inclination 75.32 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): transit mid-time 2457949.6747 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 115 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

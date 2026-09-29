@@ -1,0 +1,44 @@
+{
+  "id": "toi-5916",
+  "name": "TOI-5916",
+  "system": "TOI-5916 system",
+  "description": "Star of 3,541 K, 200 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5916",
+  "gaia": "1741429438313012608",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract",
+    "credit": "O'Brien et al. 2026"
+  },
+  "radius": {
+    "value": 0.487,
+    "source": "O'Brien et al. 2026, the stellar radius of the default parameter set of TOI-5916 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 0.518,
+    "source": "O'Brien et al. 2026, the stellar mass of the default parameter set of TOI-5916 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract",
+    "uncertainty": 0.023
+  },
+  "temperature": {
+    "value": 3541,
+    "source": "O'Brien et al. 2026, the stellar temperature of the default parameter set of TOI-5916 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract",
+    "uncertainty": 59
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5916 b crosses TOI-5916 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow O'Brien et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname O_BRIEN_ET_AL_2026): st_teff 3541, st_rad 0.487, st_mass 0.518"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 1741429438313012608 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 60,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%201741429438313012608"
+  },
+  "order": 4592
+}

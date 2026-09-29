@@ -1,0 +1,31 @@
+{
+ "id": "k2-32d",
+ "classification": "exoplanet",
+ "order": 3494,
+ "physical": {
+  "name": "K2-32 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 22221.3,
+  "gravitationalParameterKm3PerS2": 2670623.04,
+  "parent": "k2-32"
+ },
+ "physicalNotes": "Radius 0.3108222 Jupiter radii from Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract): 22,221.3 km at 71,492 km per Jupiter radius. GM from the mass 0.02108056 Jupiter masses (Lillo-Box et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...640A..48L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 31.71701,
+  "semiMajorAxisStellarRadii": 46.02,
+  "inclinationDegrees": 89.4,
+  "eccentricity": 0.05,
+  "argumentOfPeriapsisDegrees": 185,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 56903.28707,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): P 31.71701 d",
+   "shape": "Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): a/R* 46.02; Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): inclination 89.4 degrees",
+   "eccentricity": "Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): e 0.05",
+   "argumentOfPeriapsis": "Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): omega 185 degrees",
+   "phase": "Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): transit mid-time 2456903.78707 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 189 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

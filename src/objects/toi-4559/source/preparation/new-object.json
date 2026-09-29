@@ -1,0 +1,39 @@
+{
+  "id": "toi-4559",
+  "name": "TOI-4559",
+  "system": "TOI-4559 system",
+  "description": "Star of 3,558 K, 31.6 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4559",
+  "gaia": "6173120554255287808",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+    "credit": "Mistry et al. 2024"
+  },
+  "radius": {
+    "value": 0.374,
+    "source": "Mistry et al. 2024, the stellar radius of the default parameter set of TOI-4559 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 0.392,
+    "source": "Mistry et al. 2024, the stellar mass of the default parameter set of TOI-4559 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+    "uncertainty": 0.027
+  },
+  "temperature": {
+    "value": 3558,
+    "source": "Mistry et al. 2024, the stellar temperature of the default parameter set of TOI-4559 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract",
+    "uncertainty": 73
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4559 b crosses TOI-4559 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mistry et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MISTRY_ET_AL_2024): st_teff 3558, st_rad 0.374, st_mass 0.392"
+  },
+  "notes": [],
+  "order": 4445
+}

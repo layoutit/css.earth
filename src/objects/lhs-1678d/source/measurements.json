@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "lhs-1678d",
+  "radiusKm": 6256.9,
+  "radiusSource": "Radius 0.08751911 Jupiter radii from Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S/abstract): 6,256.9 km at 71,492 km per Jupiter radius. GM from the mass 0.00285 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.9652229,
+  "orbitalPeriodSource": "Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive ps table (pl_refname SILVERSTEIN_ET_AL_2024): P 4.9652229 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of LHS 1678 d is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00285 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html)."
+}

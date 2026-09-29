@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-ad037d",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Harris et al. (2023): Separated Twins or Just Siblings? A Multiplanet System around an M Dwarf Including a Cool Sub-Neptune",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2310.15118"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ad037d"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023ApJ...959L...1H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ad037d",
+      "label": "The Astrophysical Journal Letters 959 L1"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Harris et al. (2023), The Astrophysical Journal Letters 959 L1",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 959 L1",
+  "creators": [
+    "Mallory Harris",
+    "Diana Dragomir",
+    "Ismael Mireles",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

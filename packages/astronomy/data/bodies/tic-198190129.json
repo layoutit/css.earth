@@ -1,0 +1,30 @@
+{
+ "id": "tic-198190129",
+ "classification": "star",
+ "order": 4880,
+ "physical": {
+  "name": "TIC 198190129",
+  "horizonsCode": null,
+  "meanRadiusKm": 445717.6,
+  "gravitationalParameterKm3PerS2": 84670536746.75732,
+  "parent": null,
+  "effectiveTemperatureK": 4377.53
+ },
+ "physicalNotes": "Radius 0.640675 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TIC 198190129 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 445,718 km at 695,700 km per solar radius. Mass 0.638 +/- 0.081 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 198190129 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME (https://doi.org/10.3847/1538-3881/ab3467); GM is that mass times the JPL solar GM. Temperature 4377.53 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 198190129 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 246.3322889257668,
+  "declinationDegrees": 60.3771407725445,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 130.4343834984641,
+  "properMotionRaMasPerYear": 17.86660580553664,
+  "properMotionDecMasPerYear": -4.373652923968031,
+  "radialVelocityKmPerS": -11.799812,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1624849045053798656 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/tic-198190129/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 7.6667 +/- 0.0103 mas (same row, RUWE 1.08): 130.43 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 17.867, -4.374 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -11.80 +/- 1.24 km/s"
+  }
+ }
+}

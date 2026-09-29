@@ -1,0 +1,46 @@
+{
+  "id": "wasp-59",
+  "name": "WASP-59",
+  "system": "WASP-59 system",
+  "description": "Star of 4,650 K, 116 parsecs away, with 1 transiting planet.",
+  "target": "WASP-59",
+  "gaia": "2841043011433969152",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract",
+    "credit": "Hebrard et al. 2013"
+  },
+  "radius": {
+    "value": 0.613,
+    "source": "Hebrard et al. 2013, the stellar radius of the default parameter set of WASP-59 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract",
+    "uncertainty": 0.044
+  },
+  "mass": {
+    "value": 0.719,
+    "source": "Hebrard et al. 2013, the stellar mass of the default parameter set of WASP-59 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract",
+    "uncertainty": 0.035
+  },
+  "temperature": {
+    "value": 4650,
+    "source": "Hebrard et al. 2013, the stellar temperature of the default parameter set of WASP-59 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract",
+    "uncertainty": 150
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-59 b crosses WASP-59 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hebrard et al. 2013.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HEBRARD_ET_AL__2013): st_teff 4650, st_rad 0.613, st_mass 0.719",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-59",
+      "title": "WASP-59",
+      "revision": "1374438669",
+      "card": "WASP-59 is a K-type main-sequence star about 379 light-years away in the constellation Pegasus.",
+      "introduction": "The star's age is essentially unconstrained by observations."
+    }
+  },
+  "notes": [],
+  "order": 4824
+}

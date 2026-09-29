@@ -1,0 +1,30 @@
+{
+ "id": "epic-201238110",
+ "classification": "star",
+ "order": 3060,
+ "physical": {
+  "name": "EPIC 201238110",
+  "horizonsCode": null,
+  "meanRadiusKm": 260191.8,
+  "gravitationalParameterKm3PerS2": 54412100417.19514,
+  "parent": null,
+  "effectiveTemperatureK": 3587
+ },
+ "physicalNotes": "Radius 0.374 +/- 0.089 solar radii from Kruse et al. 2019, the stellar radius of EPIC 201238110 b's parameter set from Kruse et al. 2019 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJS..244...11K/abstract): 260,192 km at 695,700 km per solar radius. Mass 0.41 +/- 0.112 solar masses from Heller et al. 2019, the stellar mass of the default parameter set of EPIC 201238110 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...627A..66H/abstract); GM is that mass times the JPL solar GM. Temperature 3587 +/- 157 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 35019000 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one (https://doi.org/10.3847/1538-3881/ab3467). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 179.70584970168807,
+  "declinationDegrees": -3.3894630597407422,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 159.16384376913,
+  "properMotionRaMasPerYear": -25.092178082454073,
+  "properMotionDecMasPerYear": -12.358246147574167,
+  "radialVelocityKmPerS": 11.110556,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3600975145895223040 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/epic-201238110/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.2828 +/- 0.0298 mas (same row, RUWE 0.98): 159.16 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -25.092, -12.358 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 11.11 +/- 4.74 km/s"
+  }
+ }
+}

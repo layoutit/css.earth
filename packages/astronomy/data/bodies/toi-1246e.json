@@ -1,0 +1,28 @@
+{
+ "id": "toi-1246e",
+ "classification": "exoplanet",
+ "order": 3973,
+ "physical": {
+  "name": "TOI-1246 e",
+  "horizonsCode": null,
+  "meanRadiusKm": 22413.8,
+  "gravitationalParameterKm3PerS2": 5779705.63,
+  "parent": "toi-1246"
+ },
+ "physicalNotes": "Radius 0.31351535 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 22,413.8 km at 71,492 km per Jupiter radius. GM from the mass 0.0456221 Jupiter masses (Polanski et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 37.92519833654,
+  "semiMajorAxisStellarRadii": 52.7076,
+  "inclinationDegrees": 89.3,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58700.197302,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 37.92519833654 d",
+   "shape": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): a/R* derived from its semi-major axis 0.212 au and stellar radius 0.8649 solar radii; Turtelboom et al. 2022 (2022AJ....163..293T), via the NASA Exoplanet Archive ps table (pl_refname TURTELBOOM_ET_AL_2022): inclination 89.3 degrees",
+   "eccentricity": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458700.697302 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 12 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

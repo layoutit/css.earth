@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-2685b",
+  "card": {
+    "text": "HD 2685 b was found in 2019 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201834640",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract",
+        "label": "Jones et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JONES_ET_AL__2019): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.1269046, pl_radj 1.44, pl_bmassj 1.17"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HD 2685. Its orbit and size follow Jones et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201834640",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract",
+        "label": "Jones et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JONES_ET_AL__2019): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.1269046, pl_radj 1.44, pl_bmassj 1.17"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

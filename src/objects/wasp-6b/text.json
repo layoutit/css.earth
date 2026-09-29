@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-6b",
+  "card": {
+    "text": "WASP-6 b was found in 2009 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-acb154",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+        "label": "McGruder et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MCGRUDER_ET_AL__2023): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.36100237, pl_radj 1.119, pl_bmassj 0.467"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-6b",
+        "url": "https://en.wikipedia.org/wiki/WASP-6b",
+        "label": "Wikipedia, \"WASP-6b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374239422",
+        "quote": "WASP-6b, also named Boinayel, is an exoplanet approximately 650 light years away in the constellation Aquarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-6. Its orbit and size follow McGruder et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-acb154",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+        "label": "McGruder et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MCGRUDER_ET_AL__2023): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.36100237, pl_radj 1.119, pl_bmassj 0.467"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-6b",
+        "url": "https://en.wikipedia.org/wiki/WASP-6b",
+        "label": "Wikipedia, \"WASP-6b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374239422",
+        "quote": "It was discovered in 2008, by the WASP survey, by astronomical transit across its parent star WASP-6."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The colour of a black body at the 1,235 K day side measured in eclipse."
+    }
+  }
+}

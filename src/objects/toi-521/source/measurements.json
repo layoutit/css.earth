@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-521",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 292,890 km at 61.02 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 61.021321935889574,
+  "distanceSource": "Gaia DR3 parallax 16.3877 +/- 0.0197 mas (same row, RUWE 1.12): 61.02 pc, no zero-point correction",
+  "radiusKm": 292889.7,
+  "radiusSource": "Radius 0.421 +/- 0.028 solar radii from Lacedelli et al. 2026, the stellar radius of the default parameter set of TOI-521 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract): 292,890 km at 695,700 km per solar radius. Mass 0.42 +/- 0.03 solar masses from Lacedelli et al. 2026, the stellar mass of the default parameter set of TOI-521 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract); GM is that mass times the JPL solar GM. Temperature 3544 +/- 100 K from Lacedelli et al. 2026, the stellar temperature of the default parameter set of TOI-521 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3544,
+  "effectiveTemperatureSource": "Lacedelli et al. 2026, the stellar temperature of the default parameter set of TOI-521 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
+  "surfaceGravityLogg": 4.81,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-521.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.813, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

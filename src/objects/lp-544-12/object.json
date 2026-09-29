@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "lp-544-12",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "LP 544-12",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 94615.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lp-544-12-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "LP 544-12",
+      "classification": "star",
+      "color": "#ffb262",
+      "distanceAu": 5659110.7,
+      "description": "LP 544-12 is a star of 2,832 K, bound to GJ 3473 1,346 AU away.",
+      "systemName": "GJ 3473 system",
+      "order": 3090,
+      "context": {
+        "order": 3087
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -430008777097403460,
+        727596224709324700,
+        49115837376827990
+      ],
+      "presentationToReference": [
+        -0.5079292446338176,
+        -0.02952882498339111,
+        0.8608925199703036,
+        0.8594415289139758,
+        0.04996187867029512,
+        0.5087868601465079,
+        0.05803568577803625,
+        -0.9983145091477109,
+        -0.0000011991972694190366
+      ],
+      "orbitUpReference": [
+        0.02952882498339111,
+        -0.04996187867029512,
+        0.9983145091477109
+      ],
+      "metersPerUnit": 305210.32258064515,
+      "bodyRadiusM": 94615200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "k2-285c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.31492551 Jupiter radii from Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.04933455 Jupiter masses: Palle et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...623A..41P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.1385672 d; Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): a/R* 22.51; Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): inclination 89.861 degrees; Palle et al. 2019 (2019A&A...623A..41P), via the NASA Exoplanet Archive ps table (pl_refname PALLE_ET_AL__2019): e 0; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460228.758602 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract"
+      ]
+    }
+  ]
+}

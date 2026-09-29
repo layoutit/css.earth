@@ -1,0 +1,30 @@
+{
+ "id": "k2-377",
+ "classification": "star",
+ "order": 3550,
+ "physical": {
+  "name": "K2-377",
+  "horizonsCode": null,
+  "meanRadiusKm": 480728.7,
+  "gravitationalParameterKm3PerS2": 108956913274.43222,
+  "parent": null,
+  "effectiveTemperatureK": 4200
+ },
+ "physicalNotes": "Radius 0.691 +/- 0.053 solar radii from Christiansen et al. 2022, the stellar radius of the default parameter set of K2-377 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract): 480,729 km at 695,700 km per solar radius. Mass 0.821 +/- 0.371 solar masses from Christiansen et al. 2022, the stellar mass of the default parameter set of K2-377 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract); GM is that mass times the JPL solar GM. Temperature 4200 +/- 138 K from Christiansen et al. 2022, the stellar temperature of the default parameter set of K2-377 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 202.89787319261657,
+  "declinationDegrees": -12.095114645687042,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 196.63529089609568,
+  "properMotionRaMasPerYear": -97.22987351864549,
+  "properMotionDecMasPerYear": -2.8967957934420605,
+  "radialVelocityKmPerS": -13.739759,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3610557458450018944 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-377/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.0856 +/- 0.0186 mas (same row, RUWE 0.98): 196.64 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -97.230, -2.897 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -13.74 +/- 1.77 km/s"
+  }
+ }
+}

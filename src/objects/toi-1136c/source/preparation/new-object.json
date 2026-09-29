@@ -1,0 +1,24 @@
+{
+  "host": "toi-1136",
+  "planets": [
+    {
+      "id": "toi-1136c",
+      "name": "TOI-1136 c",
+      "description": "Transiting planet of TOI-1136 with a 6.26-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...70B/abstract",
+        "credit": "Beard et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BEARD_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-1136 c was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is one of 6 planets known around TOI-1136. Its orbit and size follow Dai et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BEARD_ET_AL__2024): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 6; pl_orbper 6.2586065, pl_radj 0.24707713, pl_bmassj 0.01988494"
+      },
+      "order": 3930
+    }
+  ]
+}

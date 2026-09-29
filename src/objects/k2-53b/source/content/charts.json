@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-53b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-53b-orbits",
+      "title": "K2-53 b: orbits around K2-53",
+      "output": "k2-53b-system-orbits.svg",
+      "system": "k2-53",
+      "highlight": "k2-53b",
+      "description": "The orbits of K2-53's planets in this map from above, to scale, with K2-53 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Livingston et al. 2019 (2019AJ....157..102L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL__2019): P 12.20772 d"
+      }
+    }
+  ]
+}

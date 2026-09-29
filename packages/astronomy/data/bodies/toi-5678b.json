@@ -1,0 +1,31 @@
+{
+ "id": "toi-5678b",
+ "classification": "exoplanet",
+ "order": 4556,
+ "physical": {
+  "name": "TOI-5678 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 31316.5,
+  "gravitationalParameterKm3PerS2": 7972008.46,
+  "parent": "toi-5678"
+ },
+ "physicalNotes": "Radius 0.43804161 Jupiter radii from Ulmer-Moll et al. 2023 (2023A&A...674A..43U), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract): 31,316.5 km at 71,492 km per Jupiter radius. GM from the mass 0.06292704 Jupiter masses (Ulmer-Moll et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...674A..43U), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 47.73022,
+  "semiMajorAxisStellarRadii": 57.0821,
+  "inclinationDegrees": 89.83,
+  "eccentricity": 0.14,
+  "argumentOfPeriapsisDegrees": 208,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58424.2059,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Ulmer-Moll et al. 2023 (2023A&A...674A..43U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2023): P 47.73022 d",
+   "shape": "Ulmer-Moll et al. 2023 (2023A&A...674A..43U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2023): a/R* derived from its semi-major axis 0.249 au and stellar radius 0.938 solar radii; Ulmer-Moll et al. 2023 (2023A&A...674A..43U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2023): inclination 89.83 degrees",
+   "eccentricity": "Ulmer-Moll et al. 2023 (2023A&A...674A..43U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2023): e 0.14",
+   "argumentOfPeriapsis": "Ulmer-Moll et al. 2023 (2023A&A...674A..43U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2023): omega 208 degrees",
+   "phase": "Ulmer-Moll et al. 2023 (2023A&A...674A..43U), via the NASA Exoplanet Archive ps table (pl_refname ULMER_MOLL_ET_AL_2023): transit mid-time 2458424.7059 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 12 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

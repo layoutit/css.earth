@@ -1,0 +1,24 @@
+{
+  "host": "toi-2010",
+  "planets": [
+    {
+      "id": "toi-2010b",
+      "name": "TOI-2010 b",
+      "description": "Transiting planet of TOI-2010 with a 142-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract",
+        "credit": "Mann et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MANN_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-2010 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2010. Its orbit and size follow Mann et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 141.834025, pl_radj 1.054, pl_bmassj 1.286"
+      },
+      "order": 4211
+    }
+  ]
+}

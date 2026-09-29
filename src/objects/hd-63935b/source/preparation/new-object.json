@@ -1,0 +1,24 @@
+{
+  "host": "hd-63935",
+  "planets": [
+    {
+      "id": "hd-63935b",
+      "name": "HD 63935 b",
+      "description": "Transiting planet of HD 63935 with a 9.06-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "HD 63935 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HD 63935. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 9.0588209, pl_radj 0.26012646, pl_bmassj 0.03303669"
+      },
+      "order": 3229
+    }
+  ]
+}

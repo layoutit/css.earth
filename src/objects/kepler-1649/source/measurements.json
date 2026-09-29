@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-1649",
+  "angularDiameterMas": 0.02,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 161,194 km at 92.76 pc = 0.02 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 92.75720787503631,
+  "distanceSource": "Gaia DR3 parallax 10.7808 +/- 0.0372 mas (same row, RUWE 1.08): 92.76 pc, no zero-point correction",
+  "radiusKm": 161193.7,
+  "radiusSource": "Radius 0.2317 +/- 0.0049 solar radii from Vanderburg et al. 2020, the stellar radius of the default parameter set of Kepler-1649 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...893L..27V/abstract): 161,194 km at 695,700 km per solar radius. Mass 0.1977 +/- 0.0051 solar masses from Vanderburg et al. 2020, the stellar mass of the default parameter set of Kepler-1649 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...893L..27V/abstract); GM is that mass times the JPL solar GM. Temperature 3240 +/- 61 K from Vanderburg et al. 2020, the stellar temperature of the default parameter set of Kepler-1649 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...893L..27V/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3240,
+  "effectiveTemperatureSource": "Vanderburg et al. 2020, the stellar temperature of the default parameter set of Kepler-1649 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...893L..27V/abstract)",
+  "surfaceGravityLogg": 5,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-1649.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.004, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

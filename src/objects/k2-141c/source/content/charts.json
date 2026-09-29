@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-141c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-141c-orbits",
+      "title": "K2-141 c: orbits around K2-141",
+      "output": "k2-141c-system-orbits.svg",
+      "system": "k2-141",
+      "highlight": "k2-141c",
+      "description": "The orbits of K2-141's planets in this map from above, to scale, with K2-141 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Malavolta et al. 2018 (2018AJ....155..107M), via the NASA Exoplanet Archive ps table (pl_refname MALAVOLTA_ET_AL__2018): P 7.7485 d"
+      }
+    }
+  ]
+}

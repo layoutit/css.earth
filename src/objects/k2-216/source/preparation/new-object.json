@@ -1,0 +1,39 @@
+{
+  "id": "k2-216",
+  "name": "K2-216",
+  "system": "K2-216 system",
+  "description": "Star of 4,503 K, 115 parsecs away, with 1 transiting planet.",
+  "target": "K2-216",
+  "gaia": "2556231154370582400",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...618A..33P/abstract",
+    "credit": "Persson et al. 2018"
+  },
+  "radius": {
+    "value": 0.72,
+    "source": "Persson et al. 2018, the stellar radius of the default parameter set of K2-216 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...618A..33P/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.7,
+    "source": "Persson et al. 2018, the stellar mass of the default parameter set of K2-216 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...618A..33P/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 4503,
+    "source": "Persson et al. 2018, the stellar temperature of the default parameter set of K2-216 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...618A..33P/abstract",
+    "uncertainty": 69
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-216 b crosses K2-216 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Persson et al. 2018.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname PERSSON_ET_AL__2018): st_teff 4503, st_rad 0.72, st_mass 0.7"
+  },
+  "notes": [],
+  "order": 3395
+}

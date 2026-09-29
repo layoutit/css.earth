@@ -1,0 +1,38 @@
+{
+  "id": "k2-65",
+  "name": "K2-65",
+  "system": "K2-65 system",
+  "description": "Star of 5,213 K with 1 transiting planet.",
+  "target": "K2-65",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+    "credit": "Crossfield et al. 2016"
+  },
+  "radius": {
+    "value": 0.84,
+    "source": "Crossfield et al. 2016, the stellar radius of the default parameter set of K2-65 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+    "uncertainty": 0.12
+  },
+  "mass": {
+    "value": 0.87,
+    "source": "Crossfield et al. 2016, the stellar mass of the default parameter set of K2-65 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+    "uncertainty": 0.1
+  },
+  "temperature": {
+    "value": 5213,
+    "source": "Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-65 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+    "uncertainty": 336
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-65 b crosses K2-65 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Crossfield et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL__2016): st_teff 5213, st_rad 0.84, st_mass 0.87"
+  },
+  "notes": [],
+  "order": 3598
+}

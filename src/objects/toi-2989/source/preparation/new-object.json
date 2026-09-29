@@ -1,0 +1,39 @@
+{
+  "id": "toi-2989",
+  "name": "TOI-2989",
+  "system": "TOI-2989 system",
+  "description": "Star of 4,672 K, 196 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2989",
+  "gaia": "3531594209836279168",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract",
+    "credit": "Frensch et al. 2025"
+  },
+  "radius": {
+    "value": 0.76,
+    "source": "Frensch et al. 2025, the stellar radius of the default parameter set of TOI-2989 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.77,
+    "source": "Frensch et al. 2025, the stellar mass of the default parameter set of TOI-2989 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 4672,
+    "source": "Frensch et al. 2025, the stellar temperature of the default parameter set of TOI-2989 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract",
+    "uncertainty": 170
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2989 b crosses TOI-2989 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Frensch et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname FRENSCH_ET_AL_2025): st_teff 4672, st_rad 0.76, st_mass 0.77"
+  },
+  "notes": [],
+  "order": 4350
+}

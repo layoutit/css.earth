@@ -1,0 +1,31 @@
+{
+ "id": "k2-3d",
+ "classification": "exoplanet",
+ "order": 3478,
+ "physical": {
+  "name": "K2-3 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 9299.3,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "k2-3"
+ },
+ "physicalNotes": "Radius 0.13007427 Jupiter radii from Diamond-Lowe et al. 2022 (2022AJ....164..172D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract): 9,299.3 km at 71,492 km per Jupiter radius. No mass is measured: Diamond-Lowe et al. 2022 (2022AJ....164..172D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract) gives only an upper limit of 0.00692197 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 44.556456,
+  "semiMajorAxisStellarRadii": 79.4,
+  "inclinationDegrees": 89.82,
+  "eccentricity": 0.091,
+  "argumentOfPeriapsisDegrees": 0,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 56825.72347,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Howard et al. 2025 (2025ApJS..278...52H), via the NASA Exoplanet Archive ps table (pl_refname HOWARD_ET_AL__2025): P 44.556456 d",
+   "shape": "Diamond-Lowe et al. 2022 (2022AJ....164..172D), via the NASA Exoplanet Archive ps table (pl_refname DIAMOND_LOWE_ET_AL__2022): a/R* 79.4; Diamond-Lowe et al. 2022 (2022AJ....164..172D), via the NASA Exoplanet Archive ps table (pl_refname DIAMOND_LOWE_ET_AL__2022): inclination 89.82 degrees",
+   "eccentricity": "Diamond-Lowe et al. 2022 (2022AJ....164..172D), via the NASA Exoplanet Archive ps table (pl_refname DIAMOND_LOWE_ET_AL__2022): e 0.091",
+   "argumentOfPeriapsis": "Diamond-Lowe et al. 2022 (2022AJ....164..172D), via the NASA Exoplanet Archive ps table (pl_refname DIAMOND_LOWE_ET_AL__2022): omega 0 degrees",
+   "phase": "Howard et al. 2025 (2025ApJS..278...52H), via the NASA Exoplanet Archive ps table (pl_refname HOWARD_ET_AL__2025): transit mid-time 2456826.22347 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 13 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

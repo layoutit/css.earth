@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-85-a-b",
+  "radiusKm": 88650.1,
+  "radiusSource": "Radius 1.24 Jupiter radii from Mo&#x10D;nik et al. 2016 (2016AJ....151..150M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract): 88,650.1 km at 71,492 km per Jupiter radius. GM from the mass 1.265 Jupiter masses (Mo&#x10D;nik et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016AJ....151..150M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.655674403,
+  "orbitalPeriodSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.655674403 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of WASP-85 A b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "1.265 Jupiter masses: Mo&#x10D;nik et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016AJ....151..150M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract)."
+}

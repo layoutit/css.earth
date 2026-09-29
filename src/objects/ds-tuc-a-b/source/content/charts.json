@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/ds-tuc-a-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "ds-tuc-a-b-orbits",
+      "title": "DS Tuc A b: orbits around DS Tuc A",
+      "output": "ds-tuc-a-b-system-orbits.svg",
+      "system": "ds-tuc-a",
+      "highlight": "ds-tuc-a-b",
+      "description": "The orbits of DS Tuc A's planets in this map from above, to scale, with DS Tuc A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.13822304107 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "ds-tuc-a-b-transit",
+      "title": "DS Tuc A b: its transit",
+      "description": "DS Tuc A b crossing its star, as TESS recorded it: 3 sectors (102, 103, 104) of the SPOC pipeline's 2-minute light curves of TIC 410214986, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "output": "ds-tuc-a-b-transit.svg",
+      "metadata": {
+        "tic": "TIC 410214986",
+        "sectors": [
+          102,
+          103,
+          104
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "ds-tuc-a-b",
+      "sources": [
+        "photometry/tess/tess2026086090000-s0102-0000000410214986-0304-s_lc.fits",
+        "photometry/tess/tess2026111101500-s0103-0000000410214986-0305-s_lc.fits",
+        "photometry/tess/tess2026137223500-s0104-0000000410214986-0306-s_lc.fits"
+      ],
+      "durationHours": 3.1764,
+      "binMinutes": 13,
+      "notes": [
+        "TESS 2-min SPOC · sectors 102, 103, 104",
+        "Folded on the app's orbit; 13-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

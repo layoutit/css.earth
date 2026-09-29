@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-6303b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-6303b-orbits",
+      "title": "TOI-6303 b: orbits around TOI-6303",
+      "output": "toi-6303b-system-orbits.svg",
+      "system": "toi-6303",
+      "highlight": "toi-6303b",
+      "description": "The orbits of TOI-6303's planets in this map from above, to scale, with TOI-6303 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Hotnisky et al. 2025 (2025AJ....170....1H), via the NASA Exoplanet Archive ps table (pl_refname HOTNISKY_ET_AL__2025): P 9.485236 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-6303b-transit",
+      "title": "TOI-6303 b: its transit",
+      "description": "TOI-6303 b crossing its star, as TESS recorded it: 1 sector (85) of the SPOC pipeline's 2-minute light curves of TIC 186810676, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-6303b-transit.svg",
+      "metadata": {
+        "tic": "TIC 186810676",
+        "sectors": [
+          85
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-6303b",
+      "sources": [
+        "photometry/tess/tess2024300212641-s0085-0000000186810676-0282-s_lc.fits"
+      ],
+      "durationHours": 2.918,
+      "binMinutes": 12,
+      "notes": [
+        "TESS 2-min SPOC · sector 85",
+        "Folded on the app's orbit; 12-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

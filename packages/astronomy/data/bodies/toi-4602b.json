@@ -1,0 +1,28 @@
+{
+ "id": "toi-4602b",
+ "classification": "exoplanet",
+ "order": 4452,
+ "physical": {
+  "name": "TOI-4602 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 15656.7,
+  "gravitationalParameterKm3PerS2": 2204345.66,
+  "parent": "toi-4602"
+ },
+ "physicalNotes": "Radius 0.219 Jupiter radii from Di Maio et al. 2026 (2026A&A...709A.270D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract): 15,656.7 km at 71,492 km per Jupiter radius. GM from the mass 0.0174 Jupiter masses (Di Maio et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...709A.270D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.9812999,
+  "semiMajorAxisStellarRadii": 8.9,
+  "inclinationDegrees": 88.93,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60591.00097,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Di Maio et al. 2026 (2026A&A...709A.270D), via the NASA Exoplanet Archive ps table (pl_refname DI_MAIO_ET_AL_2026): P 3.9812999 d",
+   "shape": "Di Maio et al. 2026 (2026A&A...709A.270D), via the NASA Exoplanet Archive ps table (pl_refname DI_MAIO_ET_AL_2026): a/R* 8.9; Di Maio et al. 2026 (2026A&A...709A.270D), via the NASA Exoplanet Archive ps table (pl_refname DI_MAIO_ET_AL_2026): inclination 88.93 degrees",
+   "eccentricity": "Di Maio et al. 2026 (2026A&A...709A.270D), via the NASA Exoplanet Archive ps table (pl_refname DI_MAIO_ET_AL_2026): e 0",
+   "phase": "Di Maio et al. 2026 (2026A&A...709A.270D), via the NASA Exoplanet Archive ps table (pl_refname DI_MAIO_ET_AL_2026): transit mid-time 2460591.50097 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

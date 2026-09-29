@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-32-b",
+  "card": {
+    "text": "K2-32B is a star of 3,190 K, bound to K2-32 2,316 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 4130539180358512768 and 4130538428745313920, sep_AU 2316.316488829519585, R_chance_align 4.487816271713823853e-05"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "K2-32B shares its motion through space with K2-32, 2,316 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 4130539180358512768 and 4130538428745313920, sep_AU 2316.316488829519585, R_chance_align 4.487816271713823853e-05"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

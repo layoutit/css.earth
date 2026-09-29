@@ -1,0 +1,24 @@
+{
+  "host": "lp-890-9",
+  "planets": [
+    {
+      "id": "lp-890-9c",
+      "name": "LP 890-9 c",
+      "description": "Transiting planet of LP 890-9 with a 8.46-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract",
+        "credit": "Delrez et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DELREZ_ET_AL_2022"
+      },
+      "text": {
+        "card": "LP 890-9 c was found in 2022 by SPECULOOS Southern Observatory as it crossed its star.",
+        "introduction": "It is one of 2 planets known around LP 890-9. Its orbit and size follow Delrez et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DELREZ_ET_AL_2022): disc_year 2022, disc_facility SPECULOOS Southern Observatory, sy_pnum 2; pl_orbper 8.457463, pl_radj 0.12195578, pl_bmassj 0.0796027"
+      },
+      "order": 3831
+    }
+  ]
+}

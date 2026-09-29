@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-1650b",
+  "radiusKm": 6123,
+  "radiusSource": "Radius 0.08564546 Jupiter radii from Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract): 6,123 km at 71,492 km per Jupiter radius. GM from the mass 0.00264 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.53817991,
+  "orbitalPeriodSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 1.53817991 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-1650 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00264 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html)."
+}

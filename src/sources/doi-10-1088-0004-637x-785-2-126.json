@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-785-2-126",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Knutson et al. (2014): FRIENDS OF HOT JUPITERS. I. A RADIAL VELOCITY SEARCH FOR MASSIVE, LONG-PERIOD COMPANIONS TO CLOSE-IN GAS GIANT PLANETS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1312.2954"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/785/2/126"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014ApJ...785..126K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...785..126K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/785/2/126",
+      "label": "The Astrophysical Journal 785 126"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...785..126K",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Knutson et al. (2014), The Astrophysical Journal 785 126",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014ApJ...785..126K"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 785 126",
+  "creators": [
+    "Heather A. Knutson",
+    "Benjamin J. Fulton",
+    "Benjamin T. Montet",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

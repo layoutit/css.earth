@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "au-mic-c",
+  "radiusKm": 17794.9,
+  "radiusSource": "Radius 0.24890756 Jupiter radii from Mallorquín et al. 2024 (2024A&A...689A.132M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract): 17,794.9 km at 71,492 km per Jupiter radius. GM from the mass 0.04549625 Jupiter masses (Mallorquín et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...689A.132M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 18.859019,
+  "orbitalPeriodSource": "Zicher et al. 2022 (2022MNRAS.512.3060Z), via the NASA Exoplanet Archive ps table (pl_refname ZICHER_ET_AL__2022): P 18.859019 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of AU Mic c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.04549625 Jupiter masses: Mallorquín et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...689A.132M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract)."
+}

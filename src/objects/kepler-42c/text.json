@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-42c",
+  "card": {
+    "text": "Kepler-42 c was found in 2011 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1201-2189",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract",
+        "label": "Muirhead et al. 2012",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MUIRHEAD_ET_AL__2012): disc_year 2011, disc_facility Kepler, sy_pnum 3; pl_orbper 0.45328731, pl_radj 0.065, pl_bmassj 0.18984143"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-42c",
+        "url": "https://en.wikipedia.org/wiki/Kepler-42c",
+        "label": "Wikipedia, \"Kepler-42c\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374087645",
+        "quote": "Kepler-42 c, previously KOI-961.02 then KOI-961 c, is an exoplanet orbiting Kepler-42, a star located about 131 light-years (40 pc) from the Solar System, in the constellation of Cygnus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 3 planets known around Kepler-42. Its orbit and size follow Muirhead et al. 2012's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1201-2189",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract",
+        "label": "Muirhead et al. 2012",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MUIRHEAD_ET_AL__2012): disc_year 2011, disc_facility Kepler, sy_pnum 3; pl_orbper 0.45328731, pl_radj 0.065, pl_bmassj 0.18984143"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-42c",
+        "url": "https://en.wikipedia.org/wiki/Kepler-42c",
+        "label": "Wikipedia, \"Kepler-42c\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374087645",
+        "quote": "A planetary system of at least three exoplanets with sizes between Mars and Venus has been detected around this red dwarf on January 11, 2012, by the method of transits with the help of the space telescope Kepler."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

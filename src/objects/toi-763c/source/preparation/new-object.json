@@ -1,0 +1,24 @@
+{
+  "host": "toi-763",
+  "planets": [
+    {
+      "id": "toi-763c",
+      "name": "TOI-763 c",
+      "description": "Transiting planet of TOI-763 with a 12.3-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.4503F/abstract",
+        "credit": "Fridlund et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "FRIDLUND_ET_AL__2020"
+      },
+      "text": {
+        "card": "TOI-763 c was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-763. Its orbit and size follow Fridlund et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FRIDLUND_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 12.27724442374, pl_radj 0.23463288, pl_bmassj 0.02932385"
+      },
+      "order": 4712
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-3847-1538-3881-accc2f",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Libby-Roberts et al. (2023): An In-depth Look at TOI-3884b: A Super-Neptune Transiting an M4Dwarf with Persistent Starspot Crossings",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/accc2f"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023AJ....165..249L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Libby-Roberts et al. (2023), The Astronomical Journal 165 249",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L"
+    }
+  ],
+  "publisher": "The Astronomical Journal 165 249",
+  "creators": [
+    "Jessica E. Libby-Roberts",
+    "Maria Schutte",
+    "Leslie Hebb",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

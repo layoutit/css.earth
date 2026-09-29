@@ -1,0 +1,32 @@
+{
+  "id": "toi-2453",
+  "name": "TOI-2453",
+  "system": "TOI-2453 system",
+  "description": "Star of 3,720 K, 81.9 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2453",
+  "gaia": "3295485490907597696",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.502498,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-2453 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 3720.23,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-2453 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2453 b crosses TOI-2453 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 3720.23, st_rad 0.502498"
+  },
+  "notes": [],
+  "order": 4316
+}

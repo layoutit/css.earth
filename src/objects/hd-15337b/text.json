@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-15337b",
+  "card": {
+    "text": "HD 15337 b was found in 2019 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202347759",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract",
+        "label": "Rosário et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.75599951974, pl_radj 0.1579091, pl_bmassj 0.02051107"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around HD 15337. Its orbit and size follow Rosário et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202347759",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract",
+        "label": "Rosário et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.75599951974, pl_radj 0.1579091, pl_bmassj 0.02051107"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

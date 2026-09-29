@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-2443b",
+  "displayName": "TOI-2443 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.4 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N",
+          "label": "Naponiello et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "15.7 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N",
+          "label": "Naponiello et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.8 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202451859",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N",
+          "label": "Naponiello et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-2443; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-2443b-lens-shape.webp",
+        "surface": "toi-2443b-surface-shape@2x.webp",
+        "poles": "toi-2443b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-2443b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-2443 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-2443's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-2443b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-2443b/toi-2443b-system-orbits.svg",
+      "alt": "The orbits of TOI-2443's planets in this map from above, to scale, with TOI-2443 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-2443b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N"
+      }
+    },
+    {
+      "id": "toi-2443b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-2443b/toi-2443b-transit.svg",
+      "alt": "TOI-2443 b crossing its star, as TESS recorded it: 1 sector (31) of the SPOC pipeline's 2-minute light curves of TIC 318753380, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 18-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-2443b-tess-sector-31",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020294194027-s0031-0000000318753380-0198-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Naponiello et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract",
+      "credit": "Naponiello et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-2443b.json",
+      "credit": "Radius from Naponiello et al. 2025 (2025A&A...693A...7N), via the NASA Exoplanet Archive; mass from Naponiello et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...693A...7N), via the NASA Exoplanet Archive; orbit from Naponiello et al. 2025 (2025A&A...693A...7N), via the NASA Exoplanet Archive"
+    }
+  }
+}

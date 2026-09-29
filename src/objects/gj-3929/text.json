@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-3929",
+  "card": {
+    "text": "GJ 3929 b crosses GJ 3929 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ac8480",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+        "label": "Beard et al. (2022), The Astrophysical Journal 936 55",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BEARD_ET_AL_2022): st_teff 3384, st_rad 0.32, st_mass 0.313"
+      },
+      {
+        "catalogueId": "wikipedia-gj-3929",
+        "url": "https://en.wikipedia.org/wiki/GJ_3929",
+        "label": "Wikipedia, \"GJ 3929\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1368614101",
+        "quote": "GJ 3929, also known as Gliese 3929 and TOI-2013, is a red dwarf star located 51.6 light-years from Earth, in the constellation Corona Borealis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Beard et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ac8480",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+        "label": "Beard et al. (2022), The Astrophysical Journal 936 55",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BEARD_ET_AL_2022): st_teff 3384, st_rad 0.32, st_mass 0.313"
+      },
+      {
+        "catalogueId": "wikipedia-gj-3929",
+        "url": "https://en.wikipedia.org/wiki/GJ_3929",
+        "label": "Wikipedia, \"GJ 3929\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1368614101",
+        "quote": "With an apparent magnitude of 12, it is not visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

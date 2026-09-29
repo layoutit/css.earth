@@ -1,0 +1,24 @@
+{
+  "host": "hd-235088",
+  "planets": [
+    {
+      "id": "hd-235088b",
+      "name": "HD 235088 b",
+      "description": "Transiting planet of HD 235088 with a 7.43-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N/abstract",
+        "credit": "Nardiello et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "NARDIELLO_ET_AL__2025"
+      },
+      "text": {
+        "card": "HD 235088 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around HD 235088. Its orbit and size follow Nardiello et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NARDIELLO_ET_AL__2025): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 7.4341456, pl_radj 0.1768225, pl_bmassj 0.01305736"
+      },
+      "order": 3207
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "host": "k2-154",
+  "planets": [
+    {
+      "id": "k2-154b",
+      "name": "K2-154 b",
+      "description": "Transiting planet of K2-154 with a 3.68-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+        "credit": "Livingston et al. 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LIVINGSTON_ET_AL__2018"
+      },
+      "text": {
+        "card": "K2-154 b was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around K2-154. Its orbit and size follow Livingston et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 2; pl_orbper 3.67635, pl_radj 0.17753591, pl_bmassj 0.0145"
+      },
+      "order": 3338
+    }
+  ]
+}

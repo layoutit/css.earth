@@ -1,0 +1,24 @@
+{
+  "host": "toi-237",
+  "planets": [
+    {
+      "id": "toi-237c",
+      "name": "TOI-237 c",
+      "description": "Transiting planet of TOI-237 with a 1.74-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag710T/abstract",
+        "credit": "Timmermans et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "TIMMERMANS_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-237 c was found in 2026 by La Silla Observatory as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-237. Its orbit and size follow Timmermans et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TIMMERMANS_ET_AL_2026): disc_year 2026, disc_facility La Silla Observatory, sy_pnum 2; pl_orbper 1.74486147, pl_radj 0.1075923, pl_bmassj 0.00598"
+      },
+      "order": 4288
+    }
+  ]
+}

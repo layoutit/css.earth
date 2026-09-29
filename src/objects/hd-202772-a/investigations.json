@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-202772-a",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 6790773586275235200: position at J2016.0. Distance: Gaia DR3 parallax 6.1367 +/- 0.0449 mas (same row, RUWE 1.26): 162.95 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): 23.247, -57.668 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 6790773586275235200 (quality A), from 2018yCat.1345....0G; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://ui.adsabs.harvard.edu/abs/2018yCat.1345....0G/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 2.554 +/- 0.056 solar radii from Jofré et al. 2025, the stellar radius of the default parameter set of HD 202772 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract). Mass 1.721 +/- 0.054 solar masses from Jofré et al. 2025, the stellar mass of the default parameter set of HD 202772 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract). Temperature 6442 +/- 10 K from Jofré et al. 2025, the stellar temperature of the default parameter set of HD 202772 A b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 6790773586275235200, through the CIE 1931 2-degree observer: #f6f1ff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6790773586275235200&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,442 K and log g 3.86 (u1 0.356, u2 0.312): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

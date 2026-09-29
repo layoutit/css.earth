@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-102e/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-102e-orbits",
+      "title": "Kepler-102 e: orbits around Kepler-102",
+      "output": "kepler-102e-system-orbits.svg",
+      "system": "kepler-102",
+      "highlight": "kepler-102e",
+      "description": "The orbits of Kepler-102's planets in this map from above, to scale, with Kepler-102 e highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 16.14568692 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "kepler-102e-transit",
+      "title": "Kepler-102 e: its transit",
+      "description": "Kepler-102 e crossing its star, as TESS recorded it: 3 sectors (80, 81, 82) of the SPOC pipeline's 2-minute light curves of TIC 123357864, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "output": "kepler-102e-transit.svg",
+      "metadata": {
+        "tic": "TIC 123357864",
+        "sectors": [
+          80,
+          81,
+          82
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "kepler-102e",
+      "sources": [
+        "photometry/tess/tess2024170053053-s0080-0000000123357864-0275-s_lc.fits",
+        "photometry/tess/tess2024196212429-s0081-0000000123357864-0276-s_lc.fits",
+        "photometry/tess/tess2024223182411-s0082-0000000123357864-0278-s_lc.fits"
+      ],
+      "durationHours": 3.7236,
+      "binMinutes": 15,
+      "notes": [
+        "TESS 2-min SPOC · sectors 80, 81, 82",
+        "Folded on the app's orbit; 15-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

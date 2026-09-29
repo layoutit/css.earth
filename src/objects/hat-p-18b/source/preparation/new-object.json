@@ -1,0 +1,24 @@
+{
+  "host": "hat-p-18",
+  "planets": [
+    {
+      "id": "hat-p-18b",
+      "name": "HAT-P-18 b",
+      "description": "Transiting planet of HAT-P-18 with a 5.51-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y/abstract",
+        "credit": "Yee & Vissapragada 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "YEE__VISSAPRAGADA_2026"
+      },
+      "text": {
+        "card": "HAT-P-18 b was found in 2010 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around HAT-P-18. Its orbit and size follow Yee & Vissapragada 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YEE__VISSAPRAGADA_2026): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 5.50802957, pl_radj 0.955, pl_bmassj 0.1747"
+      },
+      "order": 3119
+    }
+  ]
+}

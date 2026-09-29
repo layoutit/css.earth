@@ -1,0 +1,24 @@
+{
+  "host": "toi-5938",
+  "planets": [
+    {
+      "id": "toi-5938b",
+      "name": "TOI-5938 b",
+      "description": "Transiting planet of TOI-5938 with a 2.26-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M/abstract",
+        "credit": "Morello et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MORELLO_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5938 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5938. Its orbit and size follow Morello et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORELLO_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.260424, pl_radj 0.34079816, pl_bmassj 0.044"
+      },
+      "order": 4595
+    }
+  ]
+}

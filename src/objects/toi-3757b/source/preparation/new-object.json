@@ -1,0 +1,31 @@
+{
+  "host": "toi-3757",
+  "planets": [
+    {
+      "id": "toi-3757b",
+      "name": "TOI-3757 b",
+      "description": "Transiting planet of TOI-3757 with a 3.44-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract",
+        "credit": "Kanodia et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KANODIA_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-3757 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-3757. Its orbit and size follow Kanodia et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KANODIA_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.438753, pl_radj 1.07057014, pl_bmassj 0.26838381",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-3757_b",
+          "title": "TOI-3757 b",
+          "revision": "1374086850",
+          "card": "TOI-3757 b is a gas giant exoplanet located in the constellation of Auriga 578 light years, or 177 parsecs, away from Earth.",
+          "introduction": "TOI-3757 is a M0 red dwarf star, which are very rare hosts for gas giant planets."
+        }
+      },
+      "order": 4369
+    }
+  ]
+}

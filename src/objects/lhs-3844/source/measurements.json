@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "lhs-3844",
+  "angularDiameterMas": 0.12,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 131,487 km at 14.88 pc = 0.12 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 14.878218693839884,
+  "distanceSource": "Gaia DR3 parallax 67.2123 +/- 0.0187 mas (same row, RUWE 1.16): 14.88 pc, no zero-point correction",
+  "radiusKm": 131487.3,
+  "radiusSource": "Radius 0.189 +/- 0.006 solar radii from Nagel et al. 2026, the stellar radius of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract): 131,487 km at 695,700 km per solar radius. Mass 0.151 +/- 0.014 solar masses from Nagel et al. 2026, the stellar mass of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract); GM is that mass times the JPL solar GM. Temperature 3080 +/- 50 K from Nagel et al. 2026, the stellar temperature of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3080,
+  "effectiveTemperatureSource": "Nagel et al. 2026, the stellar temperature of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract)",
+  "surfaceGravityLogg": 5.06,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lhs-3844.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.064, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

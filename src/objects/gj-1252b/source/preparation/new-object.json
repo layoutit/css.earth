@@ -1,0 +1,24 @@
+{
+  "host": "gj-1252",
+  "planets": [
+    {
+      "id": "gj-1252b",
+      "name": "GJ 1252 b",
+      "description": "Transiting planet of GJ 1252 with a 0.518-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract",
+        "credit": "Luque & Pallé 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LUQUE__AMP__PALL_EACUTE__2022"
+      },
+      "text": {
+        "card": "GJ 1252 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around GJ 1252. Its orbit and size follow Shporer et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE__AMP__PALL_EACUTE__2022): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.5182418, pl_radj 0.10643251, pl_bmassj 0.00415318"
+      },
+      "order": 3079
+    }
+  ]
+}

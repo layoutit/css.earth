@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-264b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-264b-orbits",
+      "title": "K2-264 b: orbits around K2-264",
+      "output": "k2-264b-system-orbits.svg",
+      "system": "k2-264",
+      "highlight": "k2-264b",
+      "description": "The orbits of K2-264's planets in this map from above, to scale, with K2-264 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Rizzuto et al. 2018 (2018AJ....156..195R), via the NASA Exoplanet Archive ps table (pl_refname RIZZUTO_ET_AL__2018): P 5.83977 d"
+      }
+    }
+  ]
+}

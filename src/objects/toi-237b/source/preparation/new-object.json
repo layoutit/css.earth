@@ -1,0 +1,24 @@
+{
+  "host": "toi-237",
+  "planets": [
+    {
+      "id": "toi-237b",
+      "name": "TOI-237 b",
+      "description": "Transiting planet of TOI-237 with a 5.44-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract",
+        "credit": "Waalkes et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "WAALKES_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-237 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-237. Its orbit and size follow Waalkes et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WAALKES_ET_AL__2021): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 5.43613914, pl_radj 0.1284682, pl_bmassj 0.00839"
+      },
+      "order": 4289
+    }
+  ]
+}

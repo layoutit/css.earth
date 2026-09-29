@@ -1,0 +1,45 @@
+{
+  "id": "toi-1221",
+  "name": "TOI-1221",
+  "system": "TOI-1221 system",
+  "description": "Star of 5,592 K, 138 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1221",
+  "gaia": "5282270085669557504",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract",
+    "credit": "Mann et al. 2023"
+  },
+  "radius": {
+    "value": 1.031,
+    "source": "Mann et al. 2023, the stellar radius of the default parameter set of TOI-1221 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract",
+    "uncertainty": 0.022
+  },
+  "mass": {
+    "value": 0.93,
+    "source": "Mann et al. 2023, the stellar mass of the default parameter set of TOI-1221 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract",
+    "uncertainty": 0.22
+  },
+  "temperature": {
+    "value": 5592,
+    "source": "Mann et al. 2023, the stellar temperature of the default parameter set of TOI-1221 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1221 b crosses TOI-1221 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mann et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MANN_ET_AL__2023): st_teff 5592, st_rad 1.031, st_mass 0.93"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 17.9451,
+    "uncertainty": 0.0214,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5282270085669557504 (quality A), from 2022ApJS..259...35A; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..259...35A/abstract"
+  },
+  "order": 3952
+}

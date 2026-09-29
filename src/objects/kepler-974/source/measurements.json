@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-974",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 313,065 km at 133.50 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 133.5010832893953,
+  "distanceSource": "Gaia DR3 parallax 7.4906 +/- 0.0148 mas (same row, RUWE 1.10): 133.50 pc, no zero-point correction",
+  "radiusKm": 313065,
+  "radiusSource": "Radius 0.45 +/- 0.08 solar radii from Rappaport et al. 2013, the stellar radius of the default parameter set of KOI-1843.03 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R/abstract): 313,065 km at 695,700 km per solar radius. Mass 0.46 +/- 0.08 solar masses from Rappaport et al. 2013, the stellar mass of the default parameter set of KOI-1843.03 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R/abstract); GM is that mass times the JPL solar GM. Temperature 3584 +/- 65 K from Rappaport et al. 2013, the stellar temperature of the default parameter set of KOI-1843.03 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3584,
+  "effectiveTemperatureSource": "Rappaport et al. 2013, the stellar temperature of the default parameter set of KOI-1843.03 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R/abstract)",
+  "surfaceGravityLogg": 4.79,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-974.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.794, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

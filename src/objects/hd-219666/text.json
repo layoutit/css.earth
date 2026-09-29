@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-219666",
+  "card": {
+    "text": "HD 219666 b crosses HD 219666 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adc684",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..286M/abstract",
+        "label": "Murphy et al. (2025), The Astronomical Journal 169 286",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MURPHY_ET_AL__2025): st_teff 5540, st_rad 1.059, st_mass 1.02"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Murphy et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adc684",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..286M/abstract",
+        "label": "Murphy et al. (2025), The Astronomical Journal 169 286",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MURPHY_ET_AL__2025): st_teff 5540, st_rad 1.059, st_mass 1.02"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

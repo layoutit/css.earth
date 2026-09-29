@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gj-1214",
+  "displayName": "GJ 1214",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.22 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad29f3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M",
+          "label": "Mahajan et al. (2024), The Astrophysical Journal Letters 963 L37",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "14.6 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-gj-1214",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "gj-1214-lens-color.webp",
+        "surface": "gj-1214-surface-color@2x.webp",
+        "poles": "gj-1214-poles-color@2x.webp",
+        "source": {
+          "id": "gj-1214-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4393265392168829056&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,101 K and log g 5.03 (u1 0.161, u2 0.498): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Mahajan et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract",
+      "credit": "Mahajan et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-1214.json",
+      "credit": "Mahajan et al. 2024, the stellar radius of the default parameter set of GJ 1214 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

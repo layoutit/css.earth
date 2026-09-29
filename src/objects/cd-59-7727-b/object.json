@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "cd-59-7727-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CD-59 7727B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 384722.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cd-59-7727-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CD-59 7727B",
+      "classification": "star",
+      "color": "#ffc189",
+      "distanceAu": 18875755.5,
+      "description": "CD-59 7727B is a star of 3,689 K, bound to WASP-145 A 471 AU away.",
+      "systemName": "WASP-145 system",
+      "order": 4793,
+      "context": {
+        "order": 4790
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1155521469638398200,
+        -894566517554423300,
+        -2416239608781449700
+      ],
+      "presentationToReference": [
+        0.4092116184888583,
+        -0.676608019391687,
+        -0.6121661860872322,
+        -0.3167981055369145,
+        0.5238190524779839,
+        -0.7907291322502855,
+        -0.8556779836024481,
+        -0.517508636020623,
+        -0.000004703525445676025
+      ],
+      "orbitUpReference": [
+        0.676608019391687,
+        -0.5238190524779839,
+        0.517508636020623
+      ],
+      "metersPerUnit": 1241039.0322580645,
+      "bodyRadiusM": 384722100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

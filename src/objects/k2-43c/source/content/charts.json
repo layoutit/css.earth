@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-43c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-43c-orbits",
+      "title": "K2-43 c: orbits around K2-43",
+      "output": "k2-43c-system-orbits.svg",
+      "system": "k2-43",
+      "highlight": "k2-43c",
+      "description": "The orbits of K2-43's planets in this map from above, to scale, with K2-43 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Hedges et al. 2019 (2019ApJ...880L...5H), via the NASA Exoplanet Archive ps table (pl_refname HEDGES_ET_AL__2019): P 2.198884 d"
+      }
+    }
+  ]
+}

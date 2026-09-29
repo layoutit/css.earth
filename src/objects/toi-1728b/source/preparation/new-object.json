@@ -1,0 +1,24 @@
+{
+  "host": "toi-1728",
+  "planets": [
+    {
+      "id": "toi-1728b",
+      "name": "TOI-1728 b",
+      "description": "Transiting planet of TOI-1728 with a 3.49-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract",
+        "credit": "Kanodia et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KANODIA_ET_AL__2020"
+      },
+      "text": {
+        "card": "TOI-1728 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1728. Its orbit and size follow Kanodia et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KANODIA_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.491402, pl_radj 0.45053082, pl_bmassj 0.08425888"
+      },
+      "order": 4109
+    }
+  ]
+}

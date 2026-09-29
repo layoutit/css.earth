@@ -1,0 +1,39 @@
+{
+  "id": "k2-154",
+  "name": "K2-154",
+  "system": "K2-154 system",
+  "description": "Star of 4,097 K, 129 parsecs away, with 2 transiting planets.",
+  "target": "K2-154",
+  "gaia": "3683121446312149504",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "credit": "Livingston et al. 2018"
+  },
+  "radius": {
+    "value": 0.63,
+    "source": "Livingston et al. 2018, the stellar radius of the default parameter set of K2-154 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.65,
+    "source": "Livingston et al. 2018, the stellar mass of the default parameter set of K2-154 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 4097,
+    "source": "Livingston et al. 2018, the stellar temperature of the default parameter set of K2-154 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 40
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross K2-154 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Livingston et al. 2018.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL__2018): st_teff 4097, st_rad 0.63, st_mass 0.65"
+  },
+  "notes": [],
+  "order": 3337
+}

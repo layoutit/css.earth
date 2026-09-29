@@ -1,0 +1,31 @@
+{
+  "host": "epic-211945201",
+  "planets": [
+    {
+      "id": "epic-211945201b",
+      "name": "EPIC 211945201 b",
+      "description": "Transiting planet of EPIC 211945201 with a 19.5-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+        "credit": "Livingston et al. 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LIVINGSTON_ET_AL__2018"
+      },
+      "text": {
+        "card": "EPIC 211945201 b was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around EPIC 211945201. Its orbit and size follow Livingston et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 1; pl_orbper 19.4921473, pl_radj 0.51387278, pl_bmassj 0.03460987",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/K2-236b",
+          "title": "K2-236b",
+          "revision": "1374392057",
+          "card": "It is also called EPIC 211945201 b.",
+          "introduction": "Its mass is 27 Earths, it takes 19.5 days to complete one orbit of its star, and is 0.148 AU from its star."
+        }
+      },
+      "order": 3067
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "host": "k2-89",
+  "planets": [
+    {
+      "id": "k2-89b",
+      "name": "K2-89 b",
+      "description": "Transiting planet of K2-89 with a 1.1-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+        "credit": "Crossfield et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CROSSFIELD_ET_AL__2016"
+      },
+      "text": {
+        "card": "K2-89 b was found in 2016 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-89. Its orbit and size follow Crossfield et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CROSSFIELD_ET_AL__2016): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 1.095962, pl_radj 0.05486663, pl_bmassj 0.000535"
+      },
+      "order": 3621
+    }
+  ]
+}

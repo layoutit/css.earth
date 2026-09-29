@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-2768b",
+  "radiusKm": 16774.4,
+  "radiusSource": "Radius 0.23463329 Jupiter radii from Peláez-Torres et al. 2024 (2024A&A...690A..62P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract): 16,774.4 km at 71,492 km per Jupiter radius. GM from the mass 0.0233 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.5080197,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.5080197 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-2768 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.0233 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html)."
+}

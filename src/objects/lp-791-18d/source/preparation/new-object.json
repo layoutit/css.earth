@@ -1,0 +1,24 @@
+{
+  "host": "lp-791-18",
+  "planets": [
+    {
+      "id": "lp-791-18d",
+      "name": "LP 791-18 d",
+      "description": "Transiting planet of LP 791-18 with a 2.75-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170...65G/abstract",
+        "credit": "Greklek-McKeon et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GREKLEK_MCKEON_ET_AL_2025"
+      },
+      "text": {
+        "card": "LP 791-18 d was found in 2023 by Spitzer Space Telescope as it crossed its star.",
+        "introduction": "It is one of 3 planets known around LP 791-18. Its orbit and size follow Peterson et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GREKLEK_MCKEON_ET_AL_2025): disc_year 2023, disc_facility Spitzer Space Telescope, sy_pnum 3; pl_orbper 2.753436, pl_radj 0.09206903, pl_bmassj 0.00286318"
+      },
+      "order": 3827
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1846",
+  "card": {
+    "text": "TOI-1846 b crosses TOI-1846 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1030",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract",
+        "label": "Soubkiou et al. (2025), Monthly Notices of the Royal Astronomical Society 541 3249-3268",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SOUBKIOU_ET_AL_2025): st_teff 3568, st_rad 0.397, st_mass 0.418"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Soubkiou et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1030",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract",
+        "label": "Soubkiou et al. (2025), Monthly Notices of the Royal Astronomical Society 541 3249-3268",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SOUBKIOU_ET_AL_2025): st_teff 3568, st_rad 0.397, st_mass 0.418"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

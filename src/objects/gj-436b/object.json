@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "gj-436b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "GJ 436 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 26595
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-436b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "GJ 436 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 2016266.4,
+      "description": "GJ 436 b was found in 2004 by W. M. Keck Observatory as it crossed its star.",
+      "systemName": "GJ 436 system",
+      "order": 3098,
+      "context": {
+        "order": 3098
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -268654589197893920,
+        20890497629645732,
+        135530262542696530
+      ],
+      "presentationToReference": [
+        -0.8937732562913315,
+        0.022123469067104645,
+        0.44797312246922416,
+        0.007264693036453452,
+        0.999365792896892,
+        -0.034860238419330135,
+        0.4484602441392947,
+        0.0279027615838164,
+        0.8933671391552978
+      ],
+      "orbitUpReference": [
+        -0.022123469067104645,
+        -0.999365792896892,
+        -0.0279027615838164
+      ],
+      "metersPerUnit": 85790.32258064517,
+      "bodyRadiusM": 26595000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

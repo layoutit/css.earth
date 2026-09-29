@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-974",
+  "card": {
+    "text": "2 planets cross Kepler-974 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-2041-8205-773-1-l15",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R/abstract",
+        "label": "Rappaport et al. (2013), The Astrophysical Journal 773 L15",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RAPPAPORT_ET_AL__2013): st_teff 3584, st_rad 0.45, st_mass 0.46"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Rappaport et al. 2013.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-2041-8205-773-1-l15",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R/abstract",
+        "label": "Rappaport et al. (2013), The Astrophysical Journal 773 L15",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RAPPAPORT_ET_AL__2013): st_teff 3584, st_rad 0.45, st_mass 0.46"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+ "id": "toi-7149b",
+ "classification": "exoplanet",
+ "order": 4681,
+ "physical": {
+  "name": "TOI-7149 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 84360.6,
+  "gravitationalParameterKm3PerS2": 89314004.99,
+  "parent": "toi-7149"
+ },
+ "physicalNotes": "Radius 1.18 Jupiter radii from Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract): 84,360.6 km at 71,492 km per Jupiter radius. GM from the mass 0.705 Jupiter masses (Kanodia et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..203K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.65206166,
+  "semiMajorAxisStellarRadii": 15.52,
+  "inclinationDegrees": 89.25,
+  "eccentricity": 0.078,
+  "argumentOfPeriapsisDegrees": 343.6,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59703.09605,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL_2025): P 2.65206166 d",
+   "shape": "Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL_2025): a/R* 15.52; Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL_2025): inclination 89.25 degrees",
+   "eccentricity": "Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL_2025): e 0.078",
+   "argumentOfPeriapsis": "Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL_2025): omega -16.4 degrees, stored as 343.6",
+   "phase": "Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL_2025): transit mid-time 2459703.59605 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

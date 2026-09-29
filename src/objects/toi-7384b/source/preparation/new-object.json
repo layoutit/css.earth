@@ -1,0 +1,24 @@
+{
+  "host": "toi-7384",
+  "planets": [
+    {
+      "id": "toi-7384b",
+      "name": "TOI-7384 b",
+      "description": "Transiting planet of TOI-7384 with a 6.23-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag070S/abstract",
+        "credit": "Scott et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SCOTT_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-7384 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-7384. Its orbit and size follow Scott et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SCOTT_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.2340258, pl_radj 0.318, pl_bmassj 0.039"
+      },
+      "order": 4698
+    }
+  ]
+}

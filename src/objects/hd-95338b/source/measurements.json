@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-95338b",
+  "radiusKm": 27245.6,
+  "radiusSource": "Radius 0.3811 Jupiter radii from Kálmán et al. 2025 (2025A&A...701A.240K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract): 27,245.6 km at 71,492 km per Jupiter radius. GM from the mass 0.135 Jupiter masses (Saha 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025MNRAS.539..928S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025MNRAS.539..928S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 55.082694,
+  "orbitalPeriodSource": "Kálmán et al. 2025 (2025A&A...701A.240K), via the NASA Exoplanet Archive ps table (pl_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): P 55.082694 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 95338 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.135 Jupiter masses: Saha 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025MNRAS.539..928S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.539..928S/abstract)."
+}

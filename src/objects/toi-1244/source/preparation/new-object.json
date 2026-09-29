@@ -1,0 +1,39 @@
+{
+  "id": "toi-1244",
+  "name": "TOI-1244",
+  "system": "TOI-1244 system",
+  "description": "Star of 4,599 K, 103 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1244",
+  "gaia": "1649087121757063040",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "credit": "Crossfield et al. 2025"
+  },
+  "radius": {
+    "value": 0.721,
+    "source": "Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-1244 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.053
+  },
+  "mass": {
+    "value": 0.73,
+    "source": "Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1244 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.09
+  },
+  "temperature": {
+    "value": 4599,
+    "source": "Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1244 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 123
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1244 b crosses TOI-1244 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Crossfield et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL_2025): st_teff 4599, st_rad 0.721, st_mass 0.73"
+  },
+  "notes": [],
+  "order": 3967
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-394b",
+  "card": {
+    "text": "K2-394 b was found in 2022 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac5c4c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+        "label": "Christiansen et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHRISTIANSEN_ET_AL_2022): disc_year 2022, disc_facility K2, sy_pnum 1; pl_orbper 5.0957983, pl_radj 0.15095039, pl_bmassj 0.011"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around K2-394. Its orbit and size follow Christiansen et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac5c4c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+        "label": "Christiansen et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHRISTIANSEN_ET_AL_2022): disc_year 2022, disc_facility K2, sy_pnum 1; pl_orbper 5.0957983, pl_radj 0.15095039, pl_bmassj 0.011"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

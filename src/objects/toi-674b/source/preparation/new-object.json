@@ -1,0 +1,24 @@
+{
+  "host": "toi-674",
+  "planets": [
+    {
+      "id": "toi-674b",
+      "name": "TOI-674 b",
+      "description": "Transiting planet of TOI-674 with a 1.98-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract",
+        "credit": "Murgas et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MURGAS_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-674 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-674. Its orbit and size follow Murgas et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MURGAS_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.9771642, pl_radj 0.46837443, pl_bmassj 0.0742539"
+      },
+      "order": 4658
+    }
+  ]
+}

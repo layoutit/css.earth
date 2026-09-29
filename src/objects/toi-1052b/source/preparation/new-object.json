@@ -1,0 +1,24 @@
+{
+  "host": "toi-1052",
+  "planets": [
+    {
+      "id": "toi-1052b",
+      "name": "TOI-1052 b",
+      "description": "Transiting planet of TOI-1052 with a 9.14-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract",
+        "credit": "Armstrong et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ARMSTRONG_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-1052 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1052. Its orbit and size follow Armstrong et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ARMSTRONG_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 9.13980396599, pl_radj 0.25604469, pl_bmassj 0.05317335"
+      },
+      "order": 3911
+    }
+  ]
+}

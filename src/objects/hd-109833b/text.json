@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-109833b",
+  "card": {
+    "text": "HD 109833 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aca8fc",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract",
+        "label": "Wood et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WOOD_ET_AL_2023): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 9.188506, pl_radj 0.25765055, pl_bmassj 0.0273"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around HD 109833. Its orbit and size follow Wood et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aca8fc",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract",
+        "label": "Wood et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WOOD_ET_AL_2023): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 9.188506, pl_radj 0.25765055, pl_bmassj 0.0273"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

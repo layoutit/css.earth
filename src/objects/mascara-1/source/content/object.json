@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "mascara-1",
+  "displayName": "MASCARA-1",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.1 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202141645",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H",
+          "label": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "182 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-mascara-1",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "mascara-1-lens-color.webp",
+        "surface": "mascara-1-surface-color@2x.webp",
+        "poles": "mascara-1-poles-color@2x.webp",
+        "source": {
+          "id": "mascara-1-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1744911763437512064&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 7,490 K and log g 4.08 (u1 0.277, u2 0.347): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hooton et al. 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+      "credit": "Hooton et al. 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/mascara-1.json",
+      "credit": "Hooton et al. 2022, the stellar radius of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

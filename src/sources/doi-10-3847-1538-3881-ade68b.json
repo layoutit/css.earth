@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ade68b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Barrientos et al. (2025): Validation of TESS Planet Candidates with Multicolor Transit Photometry and <tt>TRICERATOPS+</tt>",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2508.02782"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ade68b"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....170..148G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ade68b",
+      "label": "The Astronomical Journal 170 148"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Barrientos et al. (2025), The Astronomical Journal 170 148",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G"
+    }
+  ],
+  "publisher": "The Astronomical Journal 170 148",
+  "creators": [
+    "Jonathan Gomez Barrientos",
+    "Michael Greklek-McKeon",
+    "Heather A. Knutson",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

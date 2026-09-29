@@ -1,0 +1,30 @@
+{
+ "id": "toi-4641",
+ "classification": "star",
+ "order": 4455,
+ "physical": {
+  "name": "TOI-4641",
+  "horizonsCode": null,
+  "meanRadiusKm": 1196604,
+  "gravitationalParameterKm3PerS2": 187124540459.13452,
+  "parent": null,
+  "effectiveTemperatureK": 6560
+ },
+ "physicalNotes": "Radius 1.72 +/- 0.041 solar radii from Bieryla et al. 2024, the stellar radius of the default parameter set of TOI-4641 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract): 1,196,604 km at 695,700 km per solar radius. Mass 1.41 +/- 0.068 solar masses from Bieryla et al. 2024, the stellar mass of the default parameter set of TOI-4641 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract); GM is that mass times the JPL solar GM. Temperature 6560 +/- 300 K from Bieryla et al. 2024, the stellar temperature of the default parameter set of TOI-4641 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 42.55821165766747,
+  "declinationDegrees": 25.333530591766092,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 87.65011722664049,
+  "properMotionRaMasPerYear": 61.44754023629052,
+  "properMotionDecMasPerYear": -20.01993903317844,
+  "radialVelocityKmPerS": 25.04,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 114340658009875072 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-4641/source/photometry/gaia-dr3-source.csv; cross-identification HD 17607, HIP 13224: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+114340658009875072",
+   "distance": "Gaia DR3 parallax 11.4090 +/- 0.0259 mas (same row, RUWE 1.04): 87.65 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 61.448, -20.020 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 114340658009875072 (quality B), from 2018yCat.1345....0G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2018yCat.1345....0G/abstract)"
+  }
+ }
+}

@@ -1,0 +1,24 @@
+{
+  "host": "toi-5300",
+  "planets": [
+    {
+      "id": "toi-5300b",
+      "name": "TOI-5300 b",
+      "description": "Transiting planet of TOI-5300 with a 2.26-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract",
+        "credit": "Frensch et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "FRENSCH_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-5300 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5300. Its orbit and size follow Frensch et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FRENSCH_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.262196, pl_radj 0.88, pl_bmassj 0.6"
+      },
+      "order": 4506
+    }
+  ]
+}

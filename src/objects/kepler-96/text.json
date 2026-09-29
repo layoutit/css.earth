@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-96",
+  "card": {
+    "text": "Kepler-96 b crosses Kepler-96 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0067-0049-210-2-20",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+        "label": "Marcy et al. (2014), The Astrophysical Journal Supplement Series 210 20",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MARCY_ET_AL__2014): st_teff 5690, st_rad 1.02, st_mass 1"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Marcy et al. 2014.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0067-0049-210-2-20",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+        "label": "Marcy et al. (2014), The Astrophysical Journal Supplement Series 210 20",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MARCY_ET_AL__2014): st_teff 5690, st_rad 1.02, st_mass 1"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

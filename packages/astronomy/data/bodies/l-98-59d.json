@@ -1,0 +1,31 @@
+{
+ "id": "l-98-59d",
+ "classification": "exoplanet",
+ "order": 3802,
+ "physical": {
+  "name": "L 98-59 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 10377.2,
+  "gravitationalParameterKm3PerS2": 653705.04,
+  "parent": "l-98-59"
+ },
+ "physicalNotes": "Radius 0.14515147 Jupiter radii from Cadieux et al. 2025 (2025AJ....170..154C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract): 10,377.2 km at 71,492 km per Jupiter radius. GM from the mass 0.00516002 Jupiter masses (Cadieux et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..154C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.4507313,
+  "semiMajorAxisStellarRadii": 33.6691,
+  "inclinationDegrees": 88.44,
+  "eccentricity": 0.013,
+  "argumentOfPeriapsisDegrees": 286,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58354.78903,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Schwarz et al. 2026 (2026AN....34770059S), via the NASA Exoplanet Archive ps table (pl_refname SCHWARZ_ET_AL_2026): P 7.4507313 d",
+   "shape": "Cadieux et al. 2025 (2025AJ....170..154C), via the NASA Exoplanet Archive ps table (pl_refname CADIEUX_ET_AL_2025): a/R* derived from its semi-major axis 0.0494 au and stellar radius 0.3155 solar radii; Cadieux et al. 2025 (2025AJ....170..154C), via the NASA Exoplanet Archive ps table (pl_refname CADIEUX_ET_AL_2025): inclination 88.44 degrees",
+   "eccentricity": "Schwarz et al. 2026 (2026AN....34770059S), via the NASA Exoplanet Archive ps table (pl_refname SCHWARZ_ET_AL_2026): e 0.013",
+   "argumentOfPeriapsis": "Schwarz et al. 2026 (2026AN....34770059S), via the NASA Exoplanet Archive ps table (pl_refname SCHWARZ_ET_AL_2026): omega -74 degrees, stored as 286",
+   "phase": "Schwarz et al. 2026 (2026AN....34770059S), via the NASA Exoplanet Archive ps table (pl_refname SCHWARZ_ET_AL_2026): transit mid-time 2458355.28903 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

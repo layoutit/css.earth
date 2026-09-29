@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2158",
+  "card": {
+    "text": "TOI-2158 b crosses TOI-2158 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243656",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract",
+        "label": "Knudstrup et al. (2022), Astronomy & Astrophysics 667 A22",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KNUDSTRUP_ET_AL_2022): st_teff 5673, st_rad 1.41, st_mass 1.12"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Knudstrup et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243656",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract",
+        "label": "Knudstrup et al. (2022), Astronomy & Astrophysics 667 A22",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KNUDSTRUP_ET_AL_2022): st_teff 5673, st_rad 1.41, st_mass 1.12"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

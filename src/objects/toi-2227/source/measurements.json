@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-2227",
+  "angularDiameterMas": 0.07,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 840,733 km at 168.24 pc = 0.07 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 168.23526942820197,
+  "distanceSource": "Gaia DR3 parallax 5.9441 +/- 0.0130 mas (same row, RUWE 1.03): 168.24 pc, no zero-point correction",
+  "radiusKm": 840732.6,
+  "radiusSource": "Radius 1.20847 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-2227 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 840,733 km at 695,700 km per solar radius. Mass 1.025 (0.985 to 1.065) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5889.54 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-2227 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5889.54,
+  "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-2227 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract)",
+  "surfaceGravityLogg": 4.28,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2227.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.284, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

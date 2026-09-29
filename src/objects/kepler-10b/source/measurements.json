@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-10b",
+  "radiusKm": 9375.8,
+  "radiusSource": "Radius 0.13114484 Jupiter radii from Bonomo et al. 2025 (2025A&A...696A.233B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B/abstract): 9,375.8 km at 71,492 km per Jupiter radius. GM from the mass 0.01019418 Jupiter masses (Bonomo et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...696A.233B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 0.8374914887,
+  "orbitalPeriodSource": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 0.8374914887 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-10 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01019418 Jupiter masses: Bonomo et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...696A.233B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B/abstract)."
+}

@@ -1,0 +1,41 @@
+{
+  "id": "tic-139270665",
+  "name": "TIC 139270665",
+  "system": "TIC 139270665 system",
+  "description": "Star of 5,844 K, 190 parsecs away, with 1 transiting planet.",
+  "target": "TIC 139270665",
+  "gaia": "902448598271728256",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract",
+    "credit": "Peluso et al. 2024"
+  },
+  "radius": {
+    "value": 1.016,
+    "source": "Peluso et al. 2024, the stellar radius of the default parameter set of TIC 139270665 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract",
+    "uncertainty": 0.035
+  },
+  "mass": {
+    "value": 1.035,
+    "source": "Peluso et al. 2024, the stellar mass of the default parameter set of TIC 139270665 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract",
+    "uncertainty": 0.052
+  },
+  "temperature": {
+    "value": 5844,
+    "source": "Peluso et al. 2024, the stellar temperature of the default parameter set of TIC 139270665 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract",
+    "uncertainty": 84
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TIC 139270665 b crosses TIC 139270665 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Peluso et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname PELUSO_ET_AL__2024): st_teff 5844, st_rad 1.016, st_mass 1.035"
+  },
+  "notes": [
+    "TIC 139270665 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3858
+}

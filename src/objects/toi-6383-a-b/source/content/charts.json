@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-6383-a-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-6383-a-b-orbits",
+      "title": "TOI-6383 A b: orbits around TOI-6383 A",
+      "output": "toi-6383-a-b-system-orbits.svg",
+      "system": "toi-6383-a",
+      "highlight": "toi-6383-a-b",
+      "description": "The orbits of TOI-6383 A's planets in this map from above, to scale, with TOI-6383 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): P 1.79058695 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-6383-a-b-transit",
+      "title": "TOI-6383 A b: its transit",
+      "description": "TOI-6383 A b crossing its star, as TESS recorded it: 1 sector (73) of the SPOC pipeline's 2-minute light curves of TIC 328513434, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 6-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-6383-a-b-transit.svg",
+      "metadata": {
+        "tic": "TIC 328513434",
+        "sectors": [
+          73
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-6383-a-b",
+      "sources": [
+        "photometry/tess/tess2023341045131-s0073-0000000328513434-0268-s_lc.fits"
+      ],
+      "durationHours": 1.54,
+      "binMinutes": 6,
+      "notes": [
+        "TESS 2-min SPOC · sector 73",
+        "Folded on the app's orbit; 6-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

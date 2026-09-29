@@ -1,0 +1,39 @@
+{
+  "id": "toi-5344",
+  "name": "TOI-5344",
+  "system": "TOI-5344 system",
+  "description": "Star of 3,747 K, 138 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5344",
+  "gaia": "52359538285081728",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract",
+    "credit": "Hartman et al. 2023"
+  },
+  "radius": {
+    "value": 0.588,
+    "source": "Hartman et al. 2023, the stellar radius of the default parameter set of TOI-5344 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract",
+    "uncertainty": 0.011
+  },
+  "mass": {
+    "value": 0.612,
+    "source": "Hartman et al. 2023, the stellar mass of the default parameter set of TOI-5344 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract",
+    "uncertainty": 0.034
+  },
+  "temperature": {
+    "value": 3747,
+    "source": "Hartman et al. 2023, the stellar temperature of the default parameter set of TOI-5344 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract",
+    "uncertainty": 64
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5344 b crosses TOI-5344 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hartman et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HARTMAN_ET_AL__2023): st_teff 3747, st_rad 0.588, st_mass 0.612"
+  },
+  "notes": [],
+  "order": 4511
+}

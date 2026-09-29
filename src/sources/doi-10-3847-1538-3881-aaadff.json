@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aaadff",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mayo et al. (2018): 275 Candidates and 149 Validated Planets Orbiting Bright Stars in K2 Campaigns 0–10",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1802.05277"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aaadff"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018AJ....155..136M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aaadff",
+      "label": "The Astronomical Journal 155 136"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mayo et al. (2018), The Astronomical Journal 155 136",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M"
+    }
+  ],
+  "publisher": "The Astronomical Journal 155 136",
+  "creators": [
+    "Andrew W. Mayo",
+    "Andrew Vanderburg",
+    "David W. Latham",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

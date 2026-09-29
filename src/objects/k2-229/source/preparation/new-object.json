@@ -1,0 +1,48 @@
+{
+  "id": "k2-229",
+  "name": "K2-229",
+  "system": "K2-229 system",
+  "description": "Star of 5,315 K, 103 parsecs away, with 1 transiting planet.",
+  "target": "K2-229",
+  "gaia": "3583630934082556416",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "credit": "Livingston et al. 2018"
+  },
+  "radius": {
+    "value": 0.79,
+    "source": "Livingston et al. 2018, the stellar radius of the default parameter set of K2-229 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.87,
+    "source": "Livingston et al. 2018, the stellar mass of the default parameter set of K2-229 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 5315,
+    "source": "Livingston et al. 2018, the stellar temperature of the default parameter set of K2-229 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 35
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-229 c crosses K2-229 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Livingston et al. 2018.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL__2018): st_teff 5315, st_rad 0.79, st_mass 0.87",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/K2-229",
+      "title": "K2-229",
+      "revision": "1374437788",
+      "card": "K2-229 is a K-type main sequence star approximately 103 parsecs away in the constellation Virgo.",
+      "introduction": "It was observed by the Kepler Space Telescope during its K2 \"Second Light\" mission in Campaign 10."
+    }
+  },
+  "notes": [
+    "K2-229 b: Howard et al. 2025's mass 0.0080232 Jupiter masses in 0.08921418 Jupiter radii is 14.0 g/cm^3, outside what the records accept"
+  ],
+  "order": 3404
+}

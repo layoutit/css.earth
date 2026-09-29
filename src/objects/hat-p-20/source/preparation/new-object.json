@@ -1,0 +1,46 @@
+{
+  "id": "hat-p-20",
+  "name": "HAT-P-20",
+  "system": "HAT-P-20 system",
+  "description": "Star of 4,595 K, 71 parsecs away, with 1 transiting planet.",
+  "target": "HAT-P-20",
+  "gaia": "869913435026514688",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+    "credit": "Bakos et al. 2010"
+  },
+  "radius": {
+    "value": 0.694,
+    "source": "Bakos et al. 2010, the stellar radius of the default parameter set of HAT-P-20 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+    "uncertainty": 0.021
+  },
+  "mass": {
+    "value": 0.756,
+    "source": "Bakos et al. 2010, the stellar mass of the default parameter set of HAT-P-20 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+    "uncertainty": 0.028
+  },
+  "temperature": {
+    "value": 4595,
+    "source": "Bakos et al. 2010, the stellar temperature of the default parameter set of HAT-P-20 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+    "uncertainty": 80
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-20 b crosses HAT-P-20 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Bakos et al. 2010.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BAKOS_ET_AL__2010): st_teff 4595, st_rad 0.694, st_mass 0.756",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-20",
+      "title": "HAT-P-20",
+      "revision": "1374438013",
+      "card": "HAT-P-20 is a K-type main-sequence star about 233 light-years away.",
+      "introduction": "The star has a strong starspot activity, and its equatorial plane is misaligned by 36+10−12° with the planetary orbit."
+    }
+  },
+  "notes": [],
+  "order": 3122
+}

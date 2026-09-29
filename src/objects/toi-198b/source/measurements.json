@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-198b",
+  "radiusKm": 8674.2,
+  "radiusSource": "Radius 0.12133128 Jupiter radii from Zapatero Osorio et al. 2026 (2026A&A...706A.166Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract): 8,674.2 km at 71,492 km per Jupiter radius. GM from the mass 0.00997394 Jupiter masses (Zapatero Osorio et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...706A.166Z), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 10.21520251255,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 10.21520251255 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-198 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00997394 Jupiter masses: Zapatero Osorio et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...706A.166Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract)."
+}

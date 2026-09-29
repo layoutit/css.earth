@@ -1,0 +1,24 @@
+{
+  "host": "wasp-85-a",
+  "planets": [
+    {
+      "id": "wasp-85-a-b",
+      "name": "WASP-85 A b",
+      "description": "Transiting planet of WASP-85 A with a 2.66-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract",
+        "credit": "Mo&#x10D;nik et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MO__X10D_NIK_ET_AL__2016"
+      },
+      "text": {
+        "card": "WASP-85 A b was found in 2016 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-85 A. Its orbit and size follow Mo&#x10D;nik et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MO__X10D_NIK_ET_AL__2016): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 2.655674403, pl_radj 1.24, pl_bmassj 1.265"
+      },
+      "order": 4848
+    }
+  ]
+}

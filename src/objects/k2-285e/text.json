@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-285e",
+  "card": {
+    "text": "K2-285 e was found in 2018 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201834001",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract",
+        "label": "Palle et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PALLE_ET_AL__2019): disc_year 2018, disc_facility K2, sy_pnum 4; pl_orbper 14.76289, pl_radj 0.17396735, pl_bmassj 0.0336658"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around K2-285. Its orbit and size follow Palle et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201834001",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract",
+        "label": "Palle et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PALLE_ET_AL__2019): disc_year 2018, disc_facility K2, sy_pnum 4; pl_orbper 14.76289, pl_radj 0.17396735, pl_bmassj 0.0336658"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

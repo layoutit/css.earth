@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-18b",
+  "card": {
+    "text": "HAT-P-18 b was found in 2010 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae517e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y/abstract",
+        "label": "Yee 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YEE__VISSAPRAGADA_2026): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 5.50802957, pl_radj 0.955, pl_bmassj 0.1747"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HAT-P-18. Its orbit and size follow Yee & Vissapragada 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae517e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y/abstract",
+        "label": "Yee 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YEE__VISSAPRAGADA_2026): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 5.50802957, pl_radj 0.955, pl_bmassj 0.1747"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

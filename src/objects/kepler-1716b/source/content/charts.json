@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-1716b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-1716b-orbits",
+      "title": "Kepler-1716 b: orbits around Kepler-1716",
+      "output": "kepler-1716b-system-orbits.svg",
+      "system": "kepler-1716",
+      "highlight": "kepler-1716b",
+      "description": "The orbits of Kepler-1716's planets in this map from above, to scale, with Kepler-1716 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): P 35.58355458 d"
+      }
+    }
+  ]
+}

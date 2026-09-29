@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-366b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-366b-orbits",
+      "title": "K2-366 b: orbits around K2-366",
+      "output": "k2-366b-system-orbits.svg",
+      "system": "k2-366",
+      "highlight": "k2-366b",
+      "description": "The orbits of K2-366's planets in this map from above, to scale, with K2-366 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Christiansen et al. 2022 (2022AJ....163..244C), via the NASA Exoplanet Archive ps table (pl_refname CHRISTIANSEN_ET_AL_2022): P 15.937039 d"
+      }
+    }
+  ]
+}

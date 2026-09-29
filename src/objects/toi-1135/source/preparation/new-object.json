@@ -1,0 +1,39 @@
+{
+  "id": "toi-1135",
+  "name": "TOI-1135",
+  "system": "TOI-1135 system",
+  "description": "Star of 6,320 K, 114 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1135",
+  "gaia": "1726858366624544640",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract",
+    "credit": "Dugan et al. 2025"
+  },
+  "radius": {
+    "value": 1.202,
+    "source": "Dugan et al. 2025, the stellar radius of the default parameter set of TOI-1135 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract",
+    "uncertainty": 0.037
+  },
+  "mass": {
+    "value": 1.119,
+    "source": "Dugan et al. 2025, the stellar mass of the default parameter set of TOI-1135 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract",
+    "uncertainty": 0.069
+  },
+  "temperature": {
+    "value": 6320,
+    "source": "Dugan et al. 2025, the stellar temperature of the default parameter set of TOI-1135 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract",
+    "uncertainty": 120
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1135 b crosses TOI-1135 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Dugan et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DUGAN_ET_AL_2025): st_teff 6320, st_rad 1.202, st_mass 1.119"
+  },
+  "notes": [],
+  "order": 3926
+}

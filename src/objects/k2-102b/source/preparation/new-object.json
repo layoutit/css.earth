@@ -1,0 +1,24 @@
+{
+  "host": "k2-102",
+  "planets": [
+    {
+      "id": "k2-102b",
+      "name": "K2-102 b",
+      "description": "Transiting planet of K2-102 with a 9.92-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...64M/abstract",
+        "credit": "Mann et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MANN_ET_AL__2017"
+      },
+      "text": {
+        "card": "K2-102 b was found in 2016 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-102. Its orbit and size follow Mann et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2017): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 9.915615, pl_radj 0.11597823, pl_bmassj 0.00705"
+      },
+      "order": 3275
+    }
+  ]
+}

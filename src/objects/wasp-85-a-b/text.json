@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-85-a-b",
+  "card": {
+    "text": "WASP-85 A b was found in 2016 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-6256-151-6-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract",
+        "label": "Močnik et al. 2016",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MO__X10D_NIK_ET_AL__2016): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 2.655674403, pl_radj 1.24, pl_bmassj 1.265"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-85 A. Its orbit and size follow Mo&#x10D;nik et al. 2016's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-6256-151-6-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract",
+        "label": "Močnik et al. 2016",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MO__X10D_NIK_ET_AL__2016): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 2.655674403, pl_radj 1.24, pl_bmassj 1.265"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

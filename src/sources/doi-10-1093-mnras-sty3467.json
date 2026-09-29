@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-sty3467",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Alonso et al. (2019): A transiting super-Earth close to the inner edge of the habitable zone of an M0 dwarf star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1901.04739"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/sty3467"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019MNRAS.489.5928D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.489.5928D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/sty3467",
+      "label": "Monthly Notices of the Royal Astronomical Society"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.489.5928D",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Alonso et al. (2019), Monthly Notices of the Royal Astronomical Society",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.489.5928D"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society",
+  "creators": [
+    "E Díez Alonso",
+    "J I González Hernández",
+    "B Toledo–Padrón",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

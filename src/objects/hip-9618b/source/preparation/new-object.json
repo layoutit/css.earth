@@ -1,0 +1,24 @@
+{
+  "host": "hip-9618",
+  "planets": [
+    {
+      "id": "hip-9618b",
+      "name": "HIP 9618 b",
+      "description": "Transiting planet of HIP 9618 with a 20.8-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "HIP 9618 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HIP 9618. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 20.772907, pl_radj 0.34154589, pl_bmassj 0.02611472"
+      },
+      "order": 3017
+    }
+  ]
+}

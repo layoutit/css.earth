@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-11b",
+  "card": {
+    "text": "WASP-11 b was found in 2008 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.72247975, pl_radj 1.11, pl_bmassj 0.79"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-11b",
+        "url": "https://en.wikipedia.org/wiki/WASP-11b",
+        "label": "Wikipedia, \"WASP-11b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1333258781",
+        "quote": "WASP-11b/HAT-P-10b or WASP-11Ab/HAT-P-10Ab is an extrasolar planet discovered in 2008."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-11. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2008, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.72247975, pl_radj 1.11, pl_bmassj 0.79"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-11b",
+        "url": "https://en.wikipedia.org/wiki/WASP-11b",
+        "label": "Wikipedia, \"WASP-11b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1333258781",
+        "quote": "The discovery was announced by press release by the SuperWASP project in April 2008 along with planets WASP-6b through to WASP-15b, however at this stage more data was needed to confirm the parameters of the planets and the coordinates were not given."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

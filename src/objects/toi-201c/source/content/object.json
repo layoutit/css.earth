@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-201c",
+  "displayName": "TOI-201 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.93 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1126-sciadv-aef2618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M",
+          "label": "Mireles et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "8 years",
+        "source": {
+          "catalogueId": "doi-10-1126-sciadv-aef2618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M",
+          "label": "Mireles et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "16 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1126-sciadv-aef2618",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M",
+          "label": "Mireles et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-201; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-201c-lens-shape.webp",
+        "surface": "toi-201c-surface-shape@2x.webp",
+        "poles": "toi-201c-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-201c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-201 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-201's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-201c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-201c/toi-201c-system-orbits.svg",
+      "alt": "The orbits of TOI-201's planets in this map from above, to scale, with TOI-201 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-201c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Mireles et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+      "credit": "Mireles et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-201c.json",
+      "credit": "Radius from Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive; mass from Mireles et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026SciA...12f2618M), via the NASA Exoplanet Archive; orbit from Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive"
+    }
+  }
+}

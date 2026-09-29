@@ -1,0 +1,24 @@
+{
+  "host": "kepler-732",
+  "planets": [
+    {
+      "id": "kepler-732c",
+      "name": "Kepler-732 c",
+      "description": "Transiting planet of Kepler-732 with a 0.893-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+        "credit": "Morton et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MORTON_ET_AL__2016"
+      },
+      "text": {
+        "card": "Kepler-732 c was found in 2016 by Kepler as it crossed its star.",
+        "introduction": "It is one of 2 planets known around Kepler-732. Its orbit and size follow Morton et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORTON_ET_AL__2016): disc_year 2016, disc_facility Kepler, sy_pnum 2; pl_orbper 0.8930402613, pl_radj 0.11330181, pl_bmassj 0.00678"
+      },
+      "order": 3781
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "hd-715",
+  "name": "HD 715",
+  "system": "HD 715 system",
+  "description": "Star of 6,070 K, 167 parsecs away, with 1 transiting planet.",
+  "target": "HD 715",
+  "gaia": "2741377642494388864",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract",
+    "credit": "Venner et al. 2026"
+  },
+  "radius": {
+    "value": 2.5,
+    "source": "Venner et al. 2026, the stellar radius of the default parameter set of HD 715 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract",
+    "uncertainty": 0.07
+  },
+  "mass": {
+    "value": 1.6,
+    "source": "Venner et al. 2026, the stellar mass of the default parameter set of HD 715 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 6070,
+    "source": "Venner et al. 2026, the stellar temperature of the default parameter set of HD 715 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HD 715 b crosses HD 715 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Venner et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname VENNER_ET_AL_2026): st_teff 6070, st_rad 2.5, st_mass 1.6"
+  },
+  "notes": [],
+  "order": 3231
+}

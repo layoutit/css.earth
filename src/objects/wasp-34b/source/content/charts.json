@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-34b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-34b-orbits",
+      "title": "WASP-34 b: orbits around WASP-34",
+      "output": "wasp-34b-system-orbits.svg",
+      "system": "wasp-34",
+      "highlight": "wasp-34b",
+      "description": "The orbits of WASP-34's planets in this map from above, to scale, with WASP-34 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.31768411 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-34b-transit",
+      "title": "WASP-34 b: its transit",
+      "description": "WASP-34 b crossing its star, as TESS recorded it: 3 sectors (63, 90, 100) of the SPOC pipeline's 2-minute light curves of TIC 437242640, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-34b-transit.svg",
+      "metadata": {
+        "tic": "TIC 437242640",
+        "sectors": [
+          63,
+          90,
+          100
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-34b",
+      "sources": [
+        "photometry/tess/tess2023069172124-s0063-0000000437242640-0255-s_lc.fits",
+        "photometry/tess/tess2025071122000-s0090-0000000437242640-0287-s_lc.fits",
+        "photometry/tess/tess2026033082000-s0100-0000000437242640-0302-s_lc.fits"
+      ],
+      "durationHours": 2.1024,
+      "binMinutes": 8,
+      "notes": [
+        "TESS 2-min SPOC · sectors 63, 90, 100",
+        "Folded on the app's orbit; 8-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

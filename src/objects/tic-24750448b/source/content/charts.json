@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/tic-24750448b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "tic-24750448b-orbits",
+      "title": "TIC 24750448 b: orbits around TIC 24750448",
+      "output": "tic-24750448b-system-orbits.svg",
+      "system": "tic-24750448",
+      "highlight": "tic-24750448b",
+      "description": "The orbits of TIC 24750448's planets in this map from above, to scale, with TIC 24750448 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): P 3.59159193029 d"
+      }
+    }
+  ]
+}

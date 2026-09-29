@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-2088b",
+  "displayName": "TOI-2088 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.33 Jupiter radii",
+        "source": {
+          "catalogueId": "publication-2024apjs-272-32p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P",
+          "label": "Polanski et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "125 days",
+        "source": {
+          "catalogueId": "publication-2024apjs-272-32p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P",
+          "label": "Polanski et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "Under 0.12 Jupiter masses",
+        "source": {
+          "catalogueId": "publication-2024apjs-272-32p",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P",
+          "label": "Polanski et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-2088; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-2088b-lens-shape.webp",
+        "surface": "toi-2088b-surface-shape@2x.webp",
+        "poles": "toi-2088b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-2088b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-2088 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-2088's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-2088b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-2088b/toi-2088b-system-orbits.svg",
+      "alt": "The orbits of TOI-2088's planets in this map from above, to scale, with TOI-2088 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-2088b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P"
+      }
+    },
+    {
+      "id": "toi-2088b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-2088b/toi-2088b-transit.svg",
+      "alt": "TOI-2088 b crossing its star, as TESS recorded it: 3 sectors (84, 85, 86) of the SPOC pipeline's 2-minute light curves of TIC 441765914, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 24 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 31 minutes at these dates, then averaged in 29-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-2088b-tess-sector-84",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024274222008-s0084-0000000441765914-0281-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Polanski et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+      "credit": "Polanski et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-2088b.json",
+      "credit": "Radius from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive; mass from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive; orbit from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive"
+    }
+  }
+}

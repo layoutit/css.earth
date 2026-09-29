@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-139b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-139b-orbits",
+      "title": "TOI-139 b: orbits around TOI-139",
+      "output": "toi-139b-system-orbits.svg",
+      "system": "toi-139",
+      "highlight": "toi-139b",
+      "description": "The orbits of TOI-139's planets in this map from above, to scale, with TOI-139 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): P 11.07085 d"
+      }
+    }
+  ]
+}

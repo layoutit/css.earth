@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1203d/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1203d-orbits",
+      "title": "TOI-1203 d: orbits around TOI-1203",
+      "output": "toi-1203d-system-orbits.svg",
+      "system": "toi-1203",
+      "highlight": "toi-1203d",
+      "description": "The orbits of TOI-1203's planets in this map from above, to scale, with TOI-1203 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Gandolfi et al. 2025 (2025arXiv250910136G), via the NASA Exoplanet Archive ps table (pl_refname GANDOLFI_ET_AL__2025): P 25.502672 d"
+      }
+    }
+  ]
+}

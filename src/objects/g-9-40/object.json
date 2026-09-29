@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "g-9-40",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "G 9-40",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 210518.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/g-9-40-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "G 9-40",
+      "classification": "star",
+      "color": "#ffc67f",
+      "distanceAu": 5740802.5,
+      "description": "G 9-40 b crosses G 9-40 as seen from Earth, which is how it was found.",
+      "systemName": "G 9-40 system",
+      "order": 3072,
+      "context": {
+        "order": 3069
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -563874558765789100,
+        569424104346752640,
+        308803216898724860
+      ],
+      "presentationToReference": [
+        -0.6565710464386951,
+        -0.2530148435025608,
+        0.7105617143822004,
+        0.6630328930435337,
+        0.2555099463793557,
+        0.7036348840439485,
+        0.3595856556103412,
+        -0.9331120813003084,
+        0.000003269199328634566
+      ],
+      "orbitUpReference": [
+        0.2530148435025608,
+        -0.2555099463793557,
+        0.9331120813003084
+      ],
+      "metersPerUnit": 679092.9032258064,
+      "bodyRadiusM": 210518800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

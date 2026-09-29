@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-406",
+  "card": {
+    "text": "2 planets cross TOI-406 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452244",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract",
+        "label": "Lacedelli et al. (2024), Astronomy & Astrophysics 692 A238",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LACEDELLI_ET_AL_2024): st_teff 3392, st_rad 0.41, st_mass 0.408"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lacedelli et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452244",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract",
+        "label": "Lacedelli et al. (2024), Astronomy & Astrophysics 692 A238",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LACEDELLI_ET_AL_2024): st_teff 3392, st_rad 0.41, st_mass 0.408"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

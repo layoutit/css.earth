@@ -1,0 +1,24 @@
+{
+  "host": "k2-158",
+  "planets": [
+    {
+      "id": "k2-158b",
+      "name": "K2-158 b",
+      "description": "Transiting planet of K2-158 with a 10.1-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+        "credit": "Livingston et al. 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LIVINGSTON_ET_AL__2018"
+      },
+      "text": {
+        "card": "K2-158 b was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around K2-158. Its orbit and size follow Livingston et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 2; pl_orbper 10.06049, pl_radj 0.23552502, pl_bmassj 0.0235"
+      },
+      "order": 3348
+    }
+  ]
+}

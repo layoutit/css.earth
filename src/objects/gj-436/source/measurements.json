@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gj-436",
+  "angularDiameterMas": 0.43,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 316,544 km at 9.78 pc = 0.43 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 9.77503868041466,
+  "distanceSource": "Gaia DR3 parallax 102.3014 +/- 0.0302 mas (same row, RUWE 1.13): 9.78 pc, no zero-point correction",
+  "radiusKm": 316543.5,
+  "radiusSource": "Radius 0.455 +/- 0.018 solar radii from Maciejewski et al. 2014, the stellar radius of the default parameter set of GJ 436 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract): 316,544 km at 695,700 km per solar radius. Mass 0.47 +/- 0.07 solar masses from Maciejewski et al. 2014, the stellar mass of the default parameter set of GJ 436 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract); GM is that mass times the JPL solar GM. Temperature 3505 +/- 51 K from Maxted et al. 2022, the stellar temperature of GJ 436 b's parameter set from Maxted et al. 2022 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514...77M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3505,
+  "effectiveTemperatureSource": "Maxted et al. 2022, the stellar temperature of GJ 436 b's parameter set from Maxted et al. 2022 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514...77M/abstract)",
+  "surfaceGravityLogg": 4.79,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-436.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.794, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-52",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2666015878575546496: position at J2016.0. Distance: Gaia DR3 parallax 5.7262 +/- 0.0134 mas (same row, RUWE 0.93): 174.64 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -6.942, -44.330 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.79 +/- 0.02 solar radii from Hebrard et al. 2013, the stellar radius of the default parameter set of WASP-52 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract). Mass 0.87 +/- 0.03 solar masses from Hebrard et al. 2013, the stellar mass of the default parameter set of WASP-52 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract). Temperature 5000 +/- 100 K from Hebrard et al. 2013, the stellar temperature of the default parameter set of WASP-52 b in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 5,000 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #ffe6d0. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,000 K and log g 4.58 (u1 0.657, u2 0.119): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

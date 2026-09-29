@@ -1,0 +1,31 @@
+{
+  "host": "hip-67522",
+  "planets": [
+    {
+      "id": "hip-67522b",
+      "name": "HIP 67522 b",
+      "description": "Transiting planet of HIP 67522 with a 6.96-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+        "credit": "Barber et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BARBER_ET_AL__2024"
+      },
+      "text": {
+        "card": "HIP 67522 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HIP 67522. Its orbit and size follow Barber et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARBER_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 6.9594731, pl_radj 0.891, pl_bmassj 0.225",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HIP_67522_b",
+          "title": "HIP 67522 b",
+          "revision": "1375570410",
+          "card": "HIP 67522 b is a hot Neptune or sub-Saturn exoplanet orbiting the G-type star HIP 67522, approximately 415 light-years from Earth in the constellation Centaurus.",
+          "introduction": "It was discovered using the Transiting Exoplanet Survey Satellite (TESS)."
+        }
+      },
+      "order": 3259
+    }
+  ]
+}

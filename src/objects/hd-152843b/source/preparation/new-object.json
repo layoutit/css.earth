@@ -1,0 +1,24 @@
+{
+  "host": "hd-152843",
+  "planets": [
+    {
+      "id": "hd-152843b",
+      "name": "HD 152843 b",
+      "description": "Transiting planet of HD 152843 with a 11.6-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract",
+        "credit": "Nicholson et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "NICHOLSON_ET_AL__2024"
+      },
+      "text": {
+        "card": "HD 152843 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HD 152843. Its orbit and size follow Nicholson et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NICHOLSON_ET_AL__2024): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 11.62075439967, pl_radj 0.27210324, pl_bmassj 0.03089718"
+      },
+      "order": 3167
+    }
+  ]
+}

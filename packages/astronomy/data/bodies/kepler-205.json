@@ -1,0 +1,30 @@
+{
+ "id": "kepler-205",
+ "classification": "star",
+ "order": 3707,
+ "physical": {
+  "name": "Kepler-205",
+  "horizonsCode": null,
+  "meanRadiusKm": 379852.2,
+  "gravitationalParameterKm3PerS2": 88784622388.05745,
+  "parent": null,
+  "effectiveTemperatureK": 4321
+ },
+ "physicalNotes": "Radius 0.546 +/- 0.022 solar radii from Rowe et al. 2014, the stellar radius of the default parameter set of Kepler-205 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...784...45R/abstract): 379,852 km at 695,700 km per solar radius. Mass 0.669 +/- 0.072599 solar masses from TICv8, the stellar mass of Kepler-205 c's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract); GM is that mass times the JPL solar GM. Temperature 4321 +/- 100 K from Rowe et al. 2014, the stellar temperature of the default parameter set of Kepler-205 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...784...45R/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 285.2866776447694,
+  "declinationDegrees": 41.86092849186617,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 159.57767966079174,
+  "properMotionRaMasPerYear": -72.57392945308438,
+  "properMotionDecMasPerYear": -51.6131584342903,
+  "radialVelocityKmPerS": 44.50623,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2104076204545773440 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-205/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.2665 +/- 0.0104 mas (same row, RUWE 1.04): 159.58 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -72.574, -51.613 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 44.51 +/- 1.59 km/s"
+  }
+ }
+}

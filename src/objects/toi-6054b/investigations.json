@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-6054b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.23552543 Jupiter radii from Kroft et al. 2025 (2025AJ....170..150K), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....170..150K/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.0393294 Jupiter masses: Kroft et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..150K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..150K/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....170..150K/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Kroft et al. 2025 (2025AJ....170..150K), via the NASA Exoplanet Archive ps table (pl_refname KROFT_ET_AL__2025): P 7.501428 d; Kroft et al. 2025 (2025AJ....170..150K), via the NASA Exoplanet Archive ps table (pl_refname KROFT_ET_AL__2025): a/R* 9.89; Kroft et al. 2025 (2025AJ....170..150K), via the NASA Exoplanet Archive ps table (pl_refname KROFT_ET_AL__2025): inclination 88.59 degrees; Kroft et al. 2025 (2025AJ....170..150K), via the NASA Exoplanet Archive ps table (pl_refname KROFT_ET_AL__2025): e 0.164; Kroft et al. 2025 (2025AJ....170..150K), via the NASA Exoplanet Archive ps table (pl_refname KROFT_ET_AL__2025): omega -13 degrees, stored as 347; Kroft et al. 2025 (2025AJ....170..150K), via the NASA Exoplanet Archive ps table (pl_refname KROFT_ET_AL__2025): transit mid-time 2458817.909 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 89 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....170..150K/abstract"
+      ]
+    }
+  ]
+}

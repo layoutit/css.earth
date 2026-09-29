@@ -1,0 +1,24 @@
+{
+  "host": "toi-904",
+  "planets": [
+    {
+      "id": "toi-904c",
+      "name": "TOI-904 c",
+      "description": "Transiting planet of TOI-904 with a 84-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract",
+        "credit": "Harris et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HARRIS_ET_AL__2023"
+      },
+      "text": {
+        "card": "TOI-904 c was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-904. Its orbit and size follow Harris et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARRIS_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 83.99939906877, pl_radj 0.19332712, pl_bmassj 0.0168"
+      },
+      "order": 4744
+    }
+  ]
+}

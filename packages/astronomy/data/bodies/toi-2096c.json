@@ -1,0 +1,31 @@
+{
+ "id": "toi-2096c",
+ "classification": "exoplanet",
+ "order": 4249,
+ "physical": {
+  "name": "TOI-2096 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 12207.7,
+  "gravitationalParameterKm3PerS2": 1722936.83,
+  "parent": "toi-2096"
+ },
+ "physicalNotes": "Radius 0.17075594 Jupiter radii from Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract): 12,207.7 km at 71,492 km per Jupiter radius. GM from the mass 0.0136 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.38784,
+  "semiMajorAxisStellarRadii": 36.6012,
+  "inclinationDegrees": 89.56,
+  "eccentricity": 0.1,
+  "argumentOfPeriapsisDegrees": 200,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59146.95983,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): P 6.38784 d",
+   "shape": "Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): a/R* derived from its semi-major axis 0.04 au and stellar radius 0.235 solar radii; Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): inclination 89.56 degrees",
+   "eccentricity": "Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): e 0.1",
+   "argumentOfPeriapsis": "Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): omega 200 degrees",
+   "phase": "Pozuelos et al. 2023 (2023A&A...672A..70P), via the NASA Exoplanet Archive ps table (pl_refname POZUELOS_ET_AL_2023): transit mid-time 2459147.45983 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

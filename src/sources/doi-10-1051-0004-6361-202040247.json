@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202040247",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Otegi et al. (2021): TESS and HARPS reveal two sub-Neptunes around TOI 1062",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2105.01945"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202040247"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021A&A...653A.105O"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202040247",
+      "label": "Astronomy & Astrophysics 653 A105"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Otegi et al. (2021), Astronomy & Astrophysics 653 A105",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 653 A105",
+  "creators": [
+    "J. F. Otegi",
+    "F. Bouchy",
+    "R. Helled",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

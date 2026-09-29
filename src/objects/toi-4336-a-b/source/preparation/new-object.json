@@ -1,0 +1,24 @@
+{
+  "host": "toi-4336-a",
+  "planets": [
+    {
+      "id": "toi-4336-a-b",
+      "name": "TOI-4336 A b",
+      "description": "Transiting planet of TOI-4336 A with a 16.3-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract",
+        "credit": "Parc et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PARC_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-4336 A b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-4336 A. Its orbit and size follow Parc et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PARC_ET_AL_2026): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 16.336351, pl_radj 0.1906507, pl_bmassj 0.01047735"
+      },
+      "order": 4401
+    }
+  ]
+}

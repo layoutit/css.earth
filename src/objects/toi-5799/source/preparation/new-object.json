@@ -1,0 +1,39 @@
+{
+  "id": "toi-5799",
+  "name": "TOI-5799",
+  "system": "TOI-5799 system",
+  "description": "Star of 3,452 K, 27.8 parsecs away, with 2 transiting planets.",
+  "target": "TOI-5799",
+  "gaia": "1807887150930343424",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+    "credit": "Yalçinkaya et al. 2025"
+  },
+  "radius": {
+    "value": 0.321,
+    "source": "Yalçinkaya et al. 2025, the stellar radius of the default parameter set of TOI-5799 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+    "uncertainty": 0.014
+  },
+  "mass": {
+    "value": 0.325,
+    "source": "Yalçinkaya et al. 2025, the stellar mass of the default parameter set of TOI-5799 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 3452,
+    "source": "Yalçinkaya et al. 2025, the stellar temperature of the default parameter set of TOI-5799 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+    "uncertainty": 96
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-5799 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Yalçinkaya et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname YALCINKAYA_ET_AL_2025): st_teff 3452, st_rad 0.321, st_mass 0.325"
+  },
+  "notes": [],
+  "order": 3007
+}

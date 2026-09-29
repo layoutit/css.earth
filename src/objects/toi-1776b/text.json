@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1776b",
+  "card": {
+    "text": "TOI-1776 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "publication-2024apjs-272-32p",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "label": "Polanski et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.799868, pl_radj 0.10849581, pl_bmassj 0.00440489"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-1776. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2024apjs-272-32p",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "label": "Polanski et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.799868, pl_radj 0.10849581, pl_bmassj 0.00440489"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

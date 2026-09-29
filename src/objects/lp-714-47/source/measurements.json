@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "lp-714-47",
+  "angularDiameterMas": 0.1,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 372,895 km at 52.34 pc = 0.1 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 52.340218983243716,
+  "distanceSource": "Gaia DR3 parallax 19.1058 +/- 0.0201 mas (same row, RUWE 1.13): 52.34 pc, no zero-point correction",
+  "radiusKm": 372895.2,
+  "radiusSource": "Radius 0.536 +/- 0.001 solar radii from Serrano Bell et al. 2026, the stellar radius of the default parameter set of LP 714-47 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract): 372,895 km at 695,700 km per solar radius. Mass 0.542 +/- 0.001 solar masses from Serrano Bell et al. 2026, the stellar mass of the default parameter set of LP 714-47 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract); GM is that mass times the JPL solar GM. Temperature 4123 +/- 44 K from Serrano Bell et al. 2026, the stellar temperature of the default parameter set of LP 714-47 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4123,
+  "effectiveTemperatureSource": "Serrano Bell et al. 2026, the stellar temperature of the default parameter set of LP 714-47 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "surfaceGravityLogg": 4.71,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lp-714-47.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.714, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

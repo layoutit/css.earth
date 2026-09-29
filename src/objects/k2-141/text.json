@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-141",
+  "card": {
+    "text": "2 planets cross K2-141 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2023): st_teff 4570, st_rad 0.681, st_mass 0.708"
+      },
+      {
+        "catalogueId": "wikipedia-k2-141b",
+        "url": "https://en.wikipedia.org/wiki/K2-141b",
+        "label": "Wikipedia, \"K2-141b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249200",
+        "quote": "K2-141b is a massive rocky exoplanet orbiting extremely close to a K Type orange main-sequence star K2-141."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bonomo et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2023): st_teff 4570, st_rad 0.681, st_mass 0.708"
+      },
+      {
+        "catalogueId": "wikipedia-k2-141b",
+        "url": "https://en.wikipedia.org/wiki/K2-141b",
+        "label": "Wikipedia, \"K2-141b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249200",
+        "quote": "The planet was first discovered by the Kepler space telescope during its K2 “Second Light” mission and later observed by the HARPS-N spectrograph."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "toi-2068b",
+ "classification": "exoplanet",
+ "order": 4227,
+ "physical": {
+  "name": "TOI-2068 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 11614.5,
+  "gravitationalParameterKm3PerS2": 1583581.65,
+  "parent": "toi-2068"
+ },
+ "physicalNotes": "Radius 0.16245902 Jupiter radii from Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract): 11,614.5 km at 71,492 km per Jupiter radius. GM from the mass 0.0125 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.768915,
+  "semiMajorAxisStellarRadii": 26.11,
+  "inclinationDegrees": 89.01,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58682.9258,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): P 7.768915 d",
+   "shape": "Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): a/R* 26.11; Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): inclination 89.01 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): transit mid-time 2458683.4258 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 12 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

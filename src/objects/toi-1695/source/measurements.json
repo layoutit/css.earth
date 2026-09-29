@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-1695",
+  "angularDiameterMas": 0.11,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 358,286 km at 44.99 pc = 0.11 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 44.99297204413092,
+  "distanceSource": "Gaia DR3 parallax 22.2257 +/- 0.0138 mas (same row, RUWE 1.08): 44.99 pc, no zero-point correction",
+  "radiusKm": 358285.5,
+  "radiusSource": "Radius 0.515 +/- 0.015 solar radii from Cherubim et al. 2023, the stellar radius of the default parameter set of TOI-1695 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract): 358,286 km at 695,700 km per solar radius. Mass 0.513 +/- 0.012 solar masses from Cherubim et al. 2023, the stellar mass of the default parameter set of TOI-1695 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract); GM is that mass times the JPL solar GM. Temperature 3690 +/- 50 K from Cherubim et al. 2023, the stellar temperature of the default parameter set of TOI-1695 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3690,
+  "effectiveTemperatureSource": "Cherubim et al. 2023, the stellar temperature of the default parameter set of TOI-1695 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract)",
+  "surfaceGravityLogg": 4.72,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1695.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.725, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

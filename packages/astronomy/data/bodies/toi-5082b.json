@@ -1,0 +1,28 @@
+{
+ "id": "toi-5082b",
+ "classification": "exoplanet",
+ "order": 4481,
+ "physical": {
+  "name": "TOI-5082 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 16234.5,
+  "gravitationalParameterKm3PerS2": 2799772.35,
+  "parent": "toi-5082"
+ },
+ "physicalNotes": "Radius 0.22708083 Jupiter radii from Hord et al. 2024 (2024AJ....167..233H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract): 16,234.5 km at 71,492 km per Jupiter radius. GM from the mass 0.0221 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.2403543,
+  "semiMajorAxisStellarRadii": 11.845356,
+  "inclinationDegrees": 87.389,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60284.302643,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.2403543 d",
+   "shape": "Hord et al. 2024 (2024AJ....167..233H), via the NASA Exoplanet Archive ps table (pl_refname HORD_ET_AL__2024): a/R* 11.845356; Hord et al. 2024 (2024AJ....167..233H), via the NASA Exoplanet Archive ps table (pl_refname HORD_ET_AL__2024): inclination derived from its transit duration 2.388 h and Rp/R* 0.02509838 with its a/R* 11.845356 (Winn 2010, eqs. 14 and 16)",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460284.802643 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

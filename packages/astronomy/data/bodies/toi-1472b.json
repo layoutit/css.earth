@@ -1,0 +1,31 @@
+{
+ "id": "toi-1472b",
+ "classification": "exoplanet",
+ "order": 3038,
+ "physical": {
+  "name": "TOI-1472 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 25880.1,
+  "gravitationalParameterKm3PerS2": 7221132.32,
+  "parent": "toi-1472"
+ },
+ "physicalNotes": "Radius 0.362 Jupiter radii from Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract): 25,880.1 km at 71,492 km per Jupiter radius. GM from the mass 0.057 Jupiter masses (Carleo et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.549f1958C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.36338574,
+  "semiMajorAxisStellarRadii": 18.565,
+  "inclinationDegrees": 89.954,
+  "eccentricity": 0.041,
+  "argumentOfPeriapsisDegrees": 50.5,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59694.16385,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): P 6.36338574 d",
+   "shape": "Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): a/R* 18.565; Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): inclination 89.954 degrees",
+   "eccentricity": "Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): e 0.041",
+   "argumentOfPeriapsis": "Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): omega 50.5 degrees",
+   "phase": "Carleo et al. 2026 (2026MNRAS.549f1958C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL_2026): transit mid-time 2459694.66385 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

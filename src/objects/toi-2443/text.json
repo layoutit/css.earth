@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2443",
+  "card": {
+    "text": "TOI-2443 b crosses TOI-2443 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202451859",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract",
+        "label": "Naponiello et al. (2025), Astronomy & Astrophysics 693 A7",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NAPONIELLO_ET_AL__2025): st_teff 4375, st_rad 0.631, st_mass 0.642"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Naponiello et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202451859",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A...7N/abstract",
+        "label": "Naponiello et al. (2025), Astronomy & Astrophysics 693 A7",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NAPONIELLO_ET_AL__2025): st_teff 4375, st_rad 0.631, st_mass 0.642"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

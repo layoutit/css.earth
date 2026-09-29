@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-63b",
+  "radiusKm": 38963.1,
+  "radiusSource": "Radius 0.545 Jupiter radii from Sanchis-Ojeda et al. 2013 (2013ApJ...775...54S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...775...54S/abstract): 38,963.1 km at 71,492 km per Jupiter radius. No mass is measured: Sanchis-Ojeda et al. 2013 (2013ApJ...775...54S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...775...54S/abstract) gives only an upper limit of 0.378 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 9.43415263,
+  "orbitalPeriodSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 9.43415263 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-63 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.378 Jupiter masses: Sanchis-Ojeda et al. 2013 (2013ApJ...775...54S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013ApJ...775...54S/abstract)."
+}

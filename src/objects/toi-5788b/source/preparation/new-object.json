@@ -1,0 +1,30 @@
+{
+  "host": "toi-5788",
+  "planets": [
+    {
+      "id": "toi-5788b",
+      "name": "TOI-5788 b",
+      "description": "Transiting planet of TOI-5788 with a 6.34-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag158L/abstract",
+        "credit": "Lakeland et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LAKELAND_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5788 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-5788. Its orbit and size follow Lakeland et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAKELAND_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 6.340758, pl_radj 0.13631926, pl_bmassj 0.01170443",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-5788",
+          "title": "TOI-5788",
+          "revision": "1374430362",
+          "card": "Two exoplanets orbit it, designated as TOI-5788 b and TOI-5788 c, where the former is classified as a rocky planet and the latter is a mini-Neptune."
+        }
+      },
+      "order": 4578
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-322b",
+  "card": {
+    "text": "K2-322 b was found in 2020 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staa2353",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.499.5416C/abstract",
+        "label": "González et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2020): disc_year 2020, disc_facility K2, sy_pnum 1; pl_orbper 8.205, pl_radj 0.17129093, pl_bmassj 0.0137"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around K2-322. Its orbit and size follow Castro González et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staa2353",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.499.5416C/abstract",
+        "label": "González et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2020): disc_year 2020, disc_facility K2, sy_pnum 1; pl_orbper 8.205, pl_radj 0.17129093, pl_bmassj 0.0137"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

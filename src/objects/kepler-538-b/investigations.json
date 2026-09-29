@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-538-b",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2087171453783512704: position at J2016.0. Distance: Gaia DR3 parallax 6.6506 +/- 0.2187 mas (same row, RUWE 1.09): 150.36 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -49.153, -8.033 mas/yr. Radial velocity from No catalogued radial velocity: Gaia DR3 measures none for source 2087171453783512704 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 50,000 of its distance per century.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202087171453783512704"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.147 +/- 0.01 solar radii from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 28227107 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Mass 0.119 +/- 0.022 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 28227107 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Temperature 3386 +/- 170 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 28227107 (VizieR IV/39/tic82).",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/ab3467"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 3,386 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #ffc485. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/ab3467"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,386 K and log g 5.18 (u1 0.151, u2 0.452): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/600/A30"
+      ]
+    }
+  ]
+}

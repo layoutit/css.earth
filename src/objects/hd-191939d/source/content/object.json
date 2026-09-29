@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-191939d",
+  "displayName": "HD 191939 d",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "3.0 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244120",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O",
+          "label": "Orell-Miquel et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "38.4 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244120",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O",
+          "label": "Orell-Miquel et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.8 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244120",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O",
+          "label": "Orell-Miquel et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 191939; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-191939d-lens-shape.webp",
+        "surface": "hd-191939d-surface-shape@2x.webp",
+        "poles": "hd-191939d-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-191939d-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 191939 d is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-191939's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hd-191939d-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-191939d/hd-191939d-system-orbits.svg",
+      "alt": "The orbits of HD 191939's planets in this map from above, to scale, with HD 191939 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-191939d-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O"
+      }
+    },
+    {
+      "id": "hd-191939d-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-191939d/hd-191939d-transit.svg",
+      "alt": "HD 191939 d crossing its star, as TESS recorded it: 3 sectors (83, 85, 86) of the SPOC pipeline's 2-minute light curves of TIC 269701147, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 21-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-191939d-tess-sector-83",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024249191853-s0083-0000000269701147-0280-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Orell-Miquel et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O/abstract",
+      "credit": "Orell-Miquel et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-191939d.json",
+      "credit": "Radius from Orell-Miquel et al. 2023 (2023A&A...669A..40O), via the NASA Exoplanet Archive; mass from Orell-Miquel et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...669A..40O), via the NASA Exoplanet Archive; orbit from Orell-Miquel et al. 2023 (2023A&A...669A..40O), via the NASA Exoplanet Archive"
+    }
+  }
+}

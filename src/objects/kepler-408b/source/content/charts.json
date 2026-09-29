@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-408b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-408b-orbits",
+      "title": "Kepler-408 b: orbits around Kepler-408",
+      "output": "kepler-408b-system-orbits.svg",
+      "system": "kepler-408",
+      "highlight": "kepler-408b",
+      "description": "The orbits of Kepler-408's planets in this map from above, to scale, with Kepler-408 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 2.4650455167 d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+ "id": "gj-9827d",
+ "classification": "exoplanet",
+ "order": 3106,
+ "physical": {
+  "name": "GJ 9827 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 12628.6,
+  "gravitationalParameterKm3PerS2": 1203772.89,
+  "parent": "gj-9827"
+ },
+ "physicalNotes": "Radius 0.17664407 Jupiter radii from Piaulet-Ghorayeb et al. 2024 (2024ApJ...974L..10P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...974L..10P/abstract): 12,628.6 km at 71,492 km per Jupiter radius. GM from the mass 0.00950198 Jupiter masses (Piaulet-Ghorayeb et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...974L..10P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJ...974L..10P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.20183,
+  "semiMajorAxisStellarRadii": 19.739,
+  "inclinationDegrees": 87.41,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60264.60196,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Piaulet-Ghorayeb et al. 2024 (2024ApJ...974L..10P), via the NASA Exoplanet Archive ps table (pl_refname PIAULET_GHORAYEB_ET_AL__2024): P 6.20183 d",
+   "shape": "Piaulet-Ghorayeb et al. 2024 (2024ApJ...974L..10P), via the NASA Exoplanet Archive ps table (pl_refname PIAULET_GHORAYEB_ET_AL__2024): a/R* 19.739; Piaulet-Ghorayeb et al. 2024 (2024ApJ...974L..10P), via the NASA Exoplanet Archive ps table (pl_refname PIAULET_GHORAYEB_ET_AL__2024): inclination 87.41 degrees",
+   "eccentricity": "Fridén et al. 2026 (2026A&A...710A.242F), via the NASA Exoplanet Archive ps table (pl_refname FRIDEN_ET_AL_2026): e 0",
+   "phase": "Piaulet-Ghorayeb et al. 2024 (2024ApJ...974L..10P), via the NASA Exoplanet Archive ps table (pl_refname PIAULET_GHORAYEB_ET_AL__2024): transit mid-time 2460265.10196 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

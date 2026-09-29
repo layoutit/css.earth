@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-114082",
+  "card": {
+    "text": "HD 114082 b crosses HD 114082 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae63bd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1003L..15D/abstract",
+        "label": "Burgo et al. (2026), The Astrophysical Journal Letters 1003 L15",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DEL_BURGO_ET_AL_2026): st_teff 6610, st_rad 1.482, st_mass 1.28"
+      },
+      {
+        "catalogueId": "wikipedia-hd-114082",
+        "url": "https://en.wikipedia.org/wiki/HD_114082",
+        "label": "Wikipedia, \"HD 114082\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374433544",
+        "quote": "HD 114082 is a young star with a pair of orbiting exoplanetary companions, located in the southern constellation of Centaurus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow del Burgo et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae63bd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1003L..15D/abstract",
+        "label": "Burgo et al. (2026), The Astrophysical Journal Letters 1003 L15",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DEL_BURGO_ET_AL_2026): st_teff 6610, st_rad 1.482, st_mass 1.28"
+      },
+      {
+        "catalogueId": "wikipedia-hd-114082",
+        "url": "https://en.wikipedia.org/wiki/HD_114082",
+        "label": "Wikipedia, \"HD 114082\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374433544",
+        "quote": "With an apparent visual magnitude of 8.20, the star is too faint to be visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

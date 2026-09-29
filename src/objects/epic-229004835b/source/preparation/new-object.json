@@ -1,0 +1,24 @@
+{
+  "host": "epic-229004835",
+  "planets": [
+    {
+      "id": "epic-229004835b",
+      "name": "EPIC 229004835 b",
+      "description": "Transiting planet of EPIC 229004835 with a 16.1-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "credit": "Bonomo et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONOMO_ET_AL_2023"
+      },
+      "text": {
+        "card": "EPIC 229004835 b was found in 2023 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around EPIC 229004835. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2023, disc_facility K2, sy_pnum 1; pl_orbper 16.141132, pl_radj 0.20804746, pl_bmassj 0.03272206"
+      },
+      "order": 3071
+    }
+  ]
+}

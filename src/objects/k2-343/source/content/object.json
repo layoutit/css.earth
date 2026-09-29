@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "k2-343",
+  "displayName": "K2-343",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.46 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stab2305",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D",
+          "label": "Leon et al. (2021), Monthly Notices of the Royal Astronomical Society 508 195-218",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "167 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-k2-343",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "k2-343-lens-color.webp",
+        "surface": "k2-343-surface-color@2x.webp",
+        "poles": "k2-343-poles-color@2x.webp",
+        "source": {
+          "id": "k2-343-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,804 K and log g 4.8 (u1 0.403, u2 0.344): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "de Leon et al. 2021",
+      "href": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+      "credit": "de Leon et al. 2021"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/k2-343.json",
+      "credit": "de Leon et al. 2021, the stellar radius of the default parameter set of K2-343 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "epic-206215704",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3297,
+      "lowerKelvin": 3224,
+      "upperKelvin": 3370,
+      "citation": "Adams et al. 2021, the stellar temperature of the default parameter set of EPIC 206215704 b in the NASA Exoplanet Archive: 3297 +/- 73 K, https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

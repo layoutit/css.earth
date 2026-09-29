@@ -1,0 +1,31 @@
+{
+ "id": "hd-28109d",
+ "classification": "exoplanet",
+ "order": 3215,
+ "physical": {
+  "name": "HD 28109 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 19835.9,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "hd-28109"
+ },
+ "physicalNotes": "Radius 0.27745609 Jupiter radii from Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...704A..41B/abstract): 19,835.9 km at 71,492 km per Jupiter radius. No mass is measured: Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...704A..41B/abstract) gives only an upper limit of 0.01824884 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 84.26076445013,
+  "semiMajorAxisStellarRadii": 61.3,
+  "inclinationDegrees": 89.77,
+  "eccentricity": 0.0054,
+  "argumentOfPeriapsisDegrees": 288,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58355.148726,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 84.26076445013 d",
+   "shape": "Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive ps table (pl_refname BARONE_ET_AL_2025): a/R* 61.3; Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive ps table (pl_refname BARONE_ET_AL_2025): inclination 89.77 degrees",
+   "eccentricity": "Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive ps table (pl_refname BARONE_ET_AL_2025): e 0.0054",
+   "argumentOfPeriapsis": "Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive ps table (pl_refname BARONE_ET_AL_2025): omega -72 degrees, stored as 288",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458355.648726 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 41 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

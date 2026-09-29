@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1064",
+  "card": {
+    "text": "2 planets cross TOI-1064 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab3799",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract",
+        "label": "Wilson et al. (2022), Monthly Notices of the Royal Astronomical Society 511 1043-1071",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WILSON_ET_AL_2022): st_teff 4734, st_rad 0.726, st_mass 0.748"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Wilson et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab3799",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract",
+        "label": "Wilson et al. (2022), Monthly Notices of the Royal Astronomical Society 511 1043-1071",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WILSON_ET_AL_2022): st_teff 4734, st_rad 0.726, st_mass 0.748"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-20",
+  "card": {
+    "text": "HAT-P-20 b crosses HAT-P-20 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1008-3388",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+        "label": "Bakos et al. (2010)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BAKOS_ET_AL__2010): st_teff 4595, st_rad 0.694, st_mass 0.756"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-20",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-20",
+        "label": "Wikipedia, \"HAT-P-20\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374438013",
+        "quote": "HAT-P-20 is a K-type main-sequence star about 233 light-years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bakos et al. 2010.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1008-3388",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+        "label": "Bakos et al. (2010)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BAKOS_ET_AL__2010): st_teff 4595, st_rad 0.694, st_mass 0.756"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-20",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-20",
+        "label": "Wikipedia, \"HAT-P-20\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374438013",
+        "quote": "The star has a strong starspot activity, and its equatorial plane is misaligned by 36+10−12° with the planetary orbit."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

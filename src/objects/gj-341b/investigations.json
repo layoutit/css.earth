@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gj-341b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.07850848 Jupiter radii from DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.01258541 Jupiter masses: DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.5768334 d; DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL__2025): a/R* 24.5; DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL__2025): inclination 89.24 degrees; DiTomasso et al. 2025 (2025ApJ...979..214D), via the NASA Exoplanet Archive ps table (pl_refname DITOMASSO_ET_AL__2025): e 0; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460006.41417 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 10 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "tic-88785435",
+  "name": "TIC 88785435",
+  "system": "TIC 88785435 system",
+  "description": "Star of 3,998 K, 122 parsecs away, with 1 transiting planet.",
+  "target": "TIC 88785435",
+  "gaia": "6205812887538362624",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..131V/abstract",
+    "credit": "Vach et al. 2025"
+  },
+  "radius": {
+    "value": 0.911,
+    "source": "Vach et al. 2025, the stellar radius of the default parameter set of TIC 88785435 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..131V/abstract",
+    "uncertainty": 0.038
+  },
+  "mass": {
+    "value": 0.724,
+    "source": "Vach et al. 2025, the stellar mass of the default parameter set of TIC 88785435 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..131V/abstract",
+    "uncertainty": 0.017
+  },
+  "temperature": {
+    "value": 3998,
+    "source": "Vach et al. 2025, the stellar temperature of the default parameter set of TIC 88785435 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..131V/abstract",
+    "uncertainty": 95
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TIC 88785435 b crosses TIC 88785435 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Vach et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname VACH_ET_AL_2025): st_teff 3998, st_rad 0.911, st_mass 0.724"
+  },
+  "notes": [],
+  "order": 3904
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-17b",
+  "card": {
+    "text": "K2-17 b was found in 2015 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-809-1-25",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809...25M/abstract",
+        "label": "Montet et al. 2015",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MONTET_ET_AL__2015): disc_year 2015, disc_facility K2, sy_pnum 1; pl_orbper 17.96832, pl_radj 0.19894727, pl_bmassj 0.0176"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around K2-17. Its orbit and size follow Montet et al. 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-809-1-25",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809...25M/abstract",
+        "label": "Montet et al. 2015",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MONTET_ET_AL__2015): disc_year 2015, disc_facility K2, sy_pnum 1; pl_orbper 17.96832, pl_radj 0.19894727, pl_bmassj 0.0176"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

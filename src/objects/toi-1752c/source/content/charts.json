@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1752c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1752c-orbits",
+      "title": "TOI-1752 c: orbits around TOI-1752",
+      "output": "toi-1752c-system-orbits.svg",
+      "system": "toi-1752",
+      "highlight": "toi-1752c",
+      "description": "The orbits of TOI-1752's planets in this map from above, to scale, with TOI-1752 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Peláez-Torres et al. 2026 (2026MNRAS.548ag713P), via the NASA Exoplanet Archive ps table (pl_refname PELAEZ_TORRES_ET_AL_2026): P 32.71443 d"
+      }
+    }
+  ]
+}

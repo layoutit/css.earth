@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hats-75b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hats-75b-orbits",
+      "title": "HATS-75 b: orbits around HATS-75",
+      "output": "hats-75b-system-orbits.svg",
+      "system": "hats-75",
+      "highlight": "hats-75b",
+      "description": "The orbits of HATS-75's planets in this map from above, to scale, with HATS-75 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Jordán et al. 2022 (2022AJ....163..125J), via the NASA Exoplanet Archive ps table (pl_refname JORD_AACUTE_N_ET_AL__2022): P 2.7886556 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hats-75b-transit",
+      "title": "HATS-75 b: its transit",
+      "description": "HATS-75 b crossing its star, as TESS recorded it: 3 sectors (5, 31, 106) of the SPOC pipeline's 2-minute light curves of TIC 44737596, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "hats-75b-transit.svg",
+      "metadata": {
+        "tic": "TIC 44737596",
+        "sectors": [
+          5,
+          31,
+          106
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hats-75b",
+      "sources": [
+        "photometry/tess/tess2018319095959-s0005-0000000044737596-0125-s_lc.fits",
+        "photometry/tess/tess2020294194027-s0031-0000000044737596-0198-s_lc.fits",
+        "photometry/tess/tess2026192185000-s0106-0000000044737596-0308-s_lc.fits"
+      ],
+      "durationHours": 1.91256,
+      "binMinutes": 8,
+      "notes": [
+        "TESS 2-min SPOC · sectors 5, 31, 106",
+        "Folded on the app's orbit; 8-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

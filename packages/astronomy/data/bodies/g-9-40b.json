@@ -1,0 +1,28 @@
+{
+ "id": "g-9-40b",
+ "classification": "exoplanet",
+ "order": 3073,
+ "physical": {
+  "name": "G 9-40 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 12118.4,
+  "gravitationalParameterKm3PerS2": 1594401.95,
+  "parent": "g-9-40"
+ },
+ "physicalNotes": "Radius 0.16950694 Jupiter radii from Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract): 12,118.4 km at 71,492 km per Jupiter radius. GM from the mass 0.01258541 Jupiter masses (Luque et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...666A.154L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 5.7459982,
+  "semiMajorAxisStellarRadii": 30.46,
+  "inclinationDegrees": 89.03,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59502.82682,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): P 5.7459982 d",
+   "shape": "Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): a/R* 30.46; Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): inclination 89.03 degrees",
+   "eccentricity": "Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): e 0",
+   "phase": "Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): transit mid-time 2459503.32682 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

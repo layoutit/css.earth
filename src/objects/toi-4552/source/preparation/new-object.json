@@ -1,0 +1,39 @@
+{
+  "id": "toi-4552",
+  "name": "TOI-4552",
+  "system": "TOI-4552 system",
+  "description": "Star of 3,258 K, 27.3 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4552",
+  "gaia": "5948579462188230144",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract",
+    "credit": "Srivastava et al. 2026"
+  },
+  "radius": {
+    "value": 0.2869,
+    "source": "Srivastava et al. 2026, the stellar radius of the default parameter set of TOI-4552 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract",
+    "uncertainty": 0.0088
+  },
+  "mass": {
+    "value": 0.2619,
+    "source": "Srivastava et al. 2026, the stellar mass of the default parameter set of TOI-4552 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract",
+    "uncertainty": 0.0063
+  },
+  "temperature": {
+    "value": 3258,
+    "source": "Srivastava et al. 2026, the stellar temperature of the default parameter set of TOI-4552 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract",
+    "uncertainty": 115
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4552 b crosses TOI-4552 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Srivastava et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SRIVASTAVA_ET_AL_2026): st_teff 3258, st_rad 0.2869, st_mass 0.2619"
+  },
+  "notes": [],
+  "order": 4443
+}

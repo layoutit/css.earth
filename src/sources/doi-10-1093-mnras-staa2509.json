@@ -1,0 +1,54 @@
+{
+  "id": "doi-10-1093-mnras-staa2509",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ser & Fors (2020): tfaw survey – I. Wavelet-based denoising of K2 light curves. Discovery and validation of two new Earth-sized planets in K2 campaign 1",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2009.09285"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staa2509"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020MNRAS.498.2778D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.2778D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staa2509",
+      "label": "Monthly Notices of the Royal Astronomical Society 498 2778-2797"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.2778D",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ser & Fors (2020), Monthly Notices of the Royal Astronomical Society 498 2778-2797",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.2778D"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 498 2778-2797",
+  "creators": [
+    "D del Ser",
+    "O Fors"
+  ],
+  "publicationDate": "2020"
+}

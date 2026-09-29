@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "l-98-59d",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "L 98-59 d",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10377.2
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/l-98-59d-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "L 98-59 d",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 2188092.5,
+      "description": "L 98-59 d was found in 2019 by TESS as it crossed its star.",
+      "systemName": "L 98-59 system",
+      "order": 3802,
+      "context": {
+        "order": 3802
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -68564405539183570,
+        99636393860572380,
+        -304169438594336900
+      ],
+      "presentationToReference": [
+        -0.23180843209822485,
+        0.8177930043098508,
+        -0.5267631848468826,
+        0.2888449240322411,
+        0.5749562259319833,
+        0.765502415491198,
+        -0.9288882928904698,
+        -0.025297042592339274,
+        0.36949505946238287
+      ],
+      "orbitUpReference": [
+        -0.8177930043098508,
+        -0.5749562259319833,
+        0.025297042592339274
+      ],
+      "metersPerUnit": 33474.83870967742,
+      "bodyRadiusM": 10377200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

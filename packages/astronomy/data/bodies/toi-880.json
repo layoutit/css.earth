@@ -1,0 +1,30 @@
+{
+ "id": "toi-880",
+ "classification": "star",
+ "order": 4737,
+ "physical": {
+  "name": "TOI-880",
+  "horizonsCode": null,
+  "meanRadiusKm": 577431,
+  "gravitationalParameterKm3PerS2": 115459822836.48726,
+  "parent": null,
+  "effectiveTemperatureK": 5050
+ },
+ "physicalNotes": "Radius 0.83 +/- 0.03 solar radii from Zhang et al. 2025, the stellar radius of the default parameter set of TOI-880.02 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..175Z/abstract): 577,431 km at 695,700 km per solar radius. Mass 0.87 +/- 0.03 solar masses from Zhang et al. 2025, the stellar mass of the default parameter set of TOI-880.02 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..175Z/abstract); GM is that mass times the JPL solar GM. Temperature 5050 +/- 100 K from Zhang et al. 2025, the stellar temperature of the default parameter set of TOI-880.02 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..175Z/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 94.16447352428148,
+  "declinationDegrees": -13.98733368760718,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 60.564767858194955,
+  "properMotionRaMasPerYear": 0.9318242224814591,
+  "properMotionDecMasPerYear": 23.224604903009848,
+  "radialVelocityKmPerS": 33.67621,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2993658970584498048 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-880/source/photometry/gaia-dr3-source.csv; cross-identification HD 43629: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2993658970584498048",
+   "distance": "Gaia DR3 parallax 16.5112 +/- 0.0143 mas (same row, RUWE 1.00): 60.56 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 0.932, 23.225 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 33.68 +/- 0.30 km/s"
+  }
+ }
+}

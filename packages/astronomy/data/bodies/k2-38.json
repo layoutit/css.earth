@@ -1,0 +1,30 @@
+{
+ "id": "k2-38",
+ "classification": "star",
+ "order": 3554,
+ "physical": {
+  "name": "K2-38",
+  "horizonsCode": null,
+  "meanRadiusKm": 737442,
+  "gravitationalParameterKm3PerS2": 136693813243.19756,
+  "parent": null,
+  "effectiveTemperatureK": 5731
+ },
+ "physicalNotes": "Radius 1.06 +/- 0.09 solar radii from Toledo-Padrón et al. 2020, the stellar radius of the default parameter set of K2-38 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...641A..92T/abstract): 737,442 km at 695,700 km per solar radius. Mass 1.03 +/- 0.04 solar masses from Toledo-Padrón et al. 2020, the stellar mass of the default parameter set of K2-38 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...641A..92T/abstract); GM is that mass times the JPL solar GM. Temperature 5731 +/- 66 K from Toledo-Padrón et al. 2020, the stellar temperature of the default parameter set of K2-38 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...641A..92T/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 240.03330077926094,
+  "declinationDegrees": -23.189424807773793,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 190.572262077802,
+  "properMotionRaMasPerYear": -56.75970525500111,
+  "properMotionDecMasPerYear": -37.51095078452188,
+  "radialVelocityKmPerS": -36.141983,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 6237129658760381056 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-38/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.2474 +/- 0.0233 mas (same row, RUWE 1.27): 190.57 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -56.760, -37.511 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -36.14 +/- 0.36 km/s"
+  }
+ }
+}

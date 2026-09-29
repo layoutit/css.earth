@@ -1,0 +1,31 @@
+{
+ "id": "hd-118203c",
+ "classification": "exoplanet",
+ "order": 3159,
+ "physical": {
+  "name": "HD 118203 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 78641.2,
+  "gravitationalParameterKm3PerS2": 1493634211.1,
+  "parent": "hd-118203"
+ },
+ "physicalNotes": "Radius 1.1 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since HD 118203 c does not transit, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html): 78,641.2 km at 71,492 km per Jupiter radius. GM from the mass 11.79 Jupiter masses (Zhang et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..295Z), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 5103,
+  "semiMajorAxisStellarRadii": 661.9617,
+  "inclinationDegrees": 93.7,
+  "eccentricity": 0.26,
+  "argumentOfPeriapsisDegrees": 175,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 52526.5,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Zhang et al. 2024 (2024AJ....168..295Z), via the NASA Exoplanet Archive ps table (pl_refname ZHANG_ET_AL__2024): P 5103 d",
+   "shape": "Zhang et al. 2024 (2024AJ....168..295Z), via the NASA Exoplanet Archive ps table (pl_refname ZHANG_ET_AL__2024): a/R* derived from its semi-major axis 6.28 au and stellar radius 2.04 solar radii; inclination 93.7 +11.9 degrees, measured in the same fit",
+   "eccentricity": "Zhang et al. 2024 (2024AJ....168..295Z), via the NASA Exoplanet Archive ps table (pl_refname ZHANG_ET_AL__2024): e 0.26",
+   "argumentOfPeriapsis": "Zhang et al. 2024 (2024AJ....168..295Z), via the NASA Exoplanet Archive ps table (pl_refname ZHANG_ET_AL__2024): omega 175 degrees",
+   "phase": "Zhang et al. 2024 (2024AJ....168..295Z), via the NASA Exoplanet Archive ps table (pl_refname ZHANG_ET_AL__2024): periastron passage 2452527 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: the NASA Exoplanet Archive carries no position angle for the orbit's node on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-352b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-352b-orbits",
+      "title": "K2-352 b: orbits around K2-352",
+      "output": "k2-352b-system-orbits.svg",
+      "system": "k2-352",
+      "highlight": "k2-352b",
+      "description": "The orbits of K2-352's planets in this map from above, to scale, with K2-352 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): P 3.665912 d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-5811-b-b",
+  "displayName": "TOI-5811 B b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.0 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-2607-19756",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L",
+          "label": "Lillo-Box et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "6.26 days",
+        "source": {
+          "catalogueId": "arxiv-2607-19756",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L",
+          "label": "Lillo-Box et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.81 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2607-19756",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L",
+          "label": "Lillo-Box et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-5811 B; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-5811-b-b-lens-shape.webp",
+        "surface": "toi-5811-b-b-surface-shape@2x.webp",
+        "poles": "toi-5811-b-b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-5811-b-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-5811 B b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-5811-b's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-5811-b-b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-5811-b-b/toi-5811-b-b-system-orbits.svg",
+      "alt": "The orbits of TOI-5811 B's planets in this map from above, to scale, with TOI-5811 B b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-5811-b-b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lillo-Box et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract",
+      "credit": "Lillo-Box et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-5811-b-b.json",
+      "credit": "Radius from Lillo-Box et al. 2026 (2026arXiv260719756L), via the NASA Exoplanet Archive; mass from Lillo-Box et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260719756L), via the NASA Exoplanet Archive; orbit from Lillo-Box et al. 2026 (2026arXiv260719756L), via the NASA Exoplanet Archive"
+    }
+  }
+}

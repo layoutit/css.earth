@@ -1,0 +1,24 @@
+{
+  "host": "hd-715",
+  "planets": [
+    {
+      "id": "hd-715b",
+      "name": "HD 715 b",
+      "description": "Transiting planet of HD 715 with a 56.4-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract",
+        "credit": "Venner et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "VENNER_ET_AL_2026"
+      },
+      "text": {
+        "card": "HD 715 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around HD 715. Its orbit and size follow Venner et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname VENNER_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 56.4, pl_radj 1.07, pl_bmassj 0.635"
+      },
+      "order": 3232
+    }
+  ]
+}

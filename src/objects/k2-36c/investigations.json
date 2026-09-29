@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "k2-36c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.28548537 Jupiter radii from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02485618 Jupiter masses: Bonomo et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Duck et al. 2021 (2021AJ....162..136D), via the NASA Exoplanet Archive ps table (pl_refname DUCK_ET_AL__2021): P 5.3410507 d; Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): a/R* derived from its semi-major axis 0.05528 au and stellar radius 0.718 solar radii; Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): inclination 86.917 degrees; Damasso et al. 2019 (2019A&A...624A..38D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL__2019): e 0; Duck et al. 2021 (2021AJ....162..136D), via the NASA Exoplanet Archive ps table (pl_refname DUCK_ET_AL__2021): transit mid-time 2456812.83943 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 29 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2021AJ....162..136D/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..38D/abstract"
+      ]
+    }
+  ]
+}

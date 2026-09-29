@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202243834",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Luque et al. (2022): The HD 260655 system: Two rocky worlds transiting a bright M dwarf at 10 pc",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2204.10261"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202243834"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022A&A...664A.199L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243834",
+      "label": "Astronomy & Astrophysics 664 A199"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Luque et al. (2022), Astronomy & Astrophysics 664 A199",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 664 A199",
+  "creators": [
+    "R. Luque",
+    "B. J. Fulton",
+    "M. Kunimoto",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

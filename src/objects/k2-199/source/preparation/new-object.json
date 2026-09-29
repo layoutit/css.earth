@@ -1,0 +1,39 @@
+{
+  "id": "k2-199",
+  "name": "K2-199",
+  "system": "K2-199 system",
+  "description": "Star of 4,491 K, 108 parsecs away, with 2 transiting planets.",
+  "target": "K2-199",
+  "gaia": "3620501712193719296",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract",
+    "credit": "Akana Murphy et al. 2021"
+  },
+  "radius": {
+    "value": 0.682,
+    "source": "Akana Murphy et al. 2021, the stellar radius of the default parameter set of K2-199 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract",
+    "uncertainty": 0.014
+  },
+  "mass": {
+    "value": 0.711,
+    "source": "Akana Murphy et al. 2021, the stellar mass of the default parameter set of K2-199 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract",
+    "uncertainty": 0.022
+  },
+  "temperature": {
+    "value": 4491,
+    "source": "Akana Murphy et al. 2021, the stellar temperature of the default parameter set of K2-199 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross K2-199 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Akana Murphy et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname AKANA_MURPHY_ET_AL__2021): st_teff 4491, st_rad 0.682, st_mass 0.711"
+  },
+  "notes": [],
+  "order": 3376
+}

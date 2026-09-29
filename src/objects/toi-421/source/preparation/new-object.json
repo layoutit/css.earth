@@ -1,0 +1,46 @@
+{
+  "id": "toi-421",
+  "name": "TOI-421",
+  "system": "TOI-421 system",
+  "description": "Star of 5,291 K, 74.8 parsecs away, with 2 transiting planets.",
+  "target": "TOI-421",
+  "gaia": "2984582227215748864",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.301K/abstract",
+    "credit": "Krenn et al. 2024"
+  },
+  "radius": {
+    "value": 0.866,
+    "source": "Krenn et al. 2024, the stellar radius of the default parameter set of TOI-421 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.301K/abstract",
+    "uncertainty": 0.006
+  },
+  "mass": {
+    "value": 0.833,
+    "source": "Krenn et al. 2024, the stellar mass of the default parameter set of TOI-421 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.301K/abstract",
+    "uncertainty": 0.048
+  },
+  "temperature": {
+    "value": 5291,
+    "source": "Krenn et al. 2024, the stellar temperature of the default parameter set of TOI-421 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.301K/abstract",
+    "uncertainty": 64
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-421 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Krenn et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KRENN_ET_AL__2024): st_teff 5291, st_rad 0.866, st_mass 0.833",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-421",
+      "title": "TOI-421",
+      "revision": "1374406475",
+      "card": "TOI-421 is a G-type main-sequence star located in the constellation Lepus.",
+      "introduction": "The star hosts two transiting exoplanets discovered in 2020 and forms a visual binary system with a nearby red dwarf star BD−14 1137 B. Both planets are hot Neptunes well-suited for atmospheric characterization."
+    }
+  },
+  "notes": [],
+  "order": 4389
+}

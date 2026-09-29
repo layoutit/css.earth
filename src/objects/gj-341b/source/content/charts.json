@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/gj-341b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "gj-341b-orbits",
+      "title": "GJ 341 b: orbits around GJ 341",
+      "output": "gj-341b-system-orbits.svg",
+      "system": "gj-341",
+      "highlight": "gj-341b",
+      "description": "The orbits of GJ 341's planets in this map from above, to scale, with GJ 341 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.5768334 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "gj-341b-transit",
+      "title": "GJ 341 b: its transit",
+      "description": "GJ 341 b crossing its star, as TESS recorded it: 3 sectors (62, 64, 89) of the SPOC pipeline's 2-minute light curves of TIC 359271092, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 22 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 22 minutes at these dates, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "output": "gj-341b-transit.svg",
+      "metadata": {
+        "tic": "TIC 359271092",
+        "sectors": [
+          62,
+          64,
+          89
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "gj-341b",
+      "sources": [
+        "photometry/tess/tess2023043185947-s0062-0000000359271092-0254-s_lc.fits",
+        "photometry/tess/tess2023096110322-s0064-0000000359271092-0257-s_lc.fits",
+        "photometry/tess/tess2025042113628-s0089-0000000359271092-0286-s_lc.fits"
+      ],
+      "durationHours": 2.23,
+      "binMinutes": 9,
+      "alignMinutes": 22,
+      "notes": [
+        "TESS 2-min SPOC · sectors 62, 64, 89",
+        "Aligned on TESS's dip, 22 min late; 9-min bins.",
+        "The ephemeris's own 1σ there is 7 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

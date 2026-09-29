@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "epic-201238110b",
+  "card": {
+    "text": "EPIC 201238110 b was found in 2019 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201935600",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...627A..66H/abstract",
+        "label": "Heller et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HELLER_ET_AL__2019): disc_year 2019, disc_facility K2, sy_pnum 1; pl_orbper 28.1656, pl_radj 0.16683023, pl_bmassj 0.0131"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around EPIC 201238110. Its orbit and size follow Heller et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201935600",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...627A..66H/abstract",
+        "label": "Heller et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HELLER_ET_AL__2019): disc_year 2019, disc_facility K2, sy_pnum 1; pl_orbper 28.1656, pl_radj 0.16683023, pl_bmassj 0.0131"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

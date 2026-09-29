@@ -1,0 +1,24 @@
+{
+  "host": "toi-6158",
+  "planets": [
+    {
+      "id": "toi-6158b",
+      "name": "TOI-6158 b",
+      "description": "Transiting planet of TOI-6158 with a 3.04-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract",
+        "credit": "O'Brien et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "O_BRIEN_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-6158 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-6158. Its orbit and size follow O'Brien et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname O_BRIEN_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.0446899, pl_radj 0.93, pl_bmassj 0.425"
+      },
+      "order": 4617
+    }
+  ]
+}

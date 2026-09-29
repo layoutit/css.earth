@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hip-29442d",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HIP 29442 d",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 9809.5
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hip-29442d-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HIP 29442 d",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 14025593.8,
+      "description": "HIP 29442 d was found in 2023 by Paranal Observatory as it crossed its star.",
+      "systemName": "HIP 29442 system",
+      "order": 4463,
+      "context": {
+        "order": 4463
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -108279331660992670,
+        2027105223261797600,
+        -530621274898485900
+      ],
+      "presentationToReference": [
+        -0.07077053111141994,
+        0.997401397102766,
+        -0.01349018100908354,
+        0.9649144452515633,
+        0.07188102231838485,
+        0.2525336254349739,
+        -0.2528470788264627,
+        -0.0048550682708024765,
+        0.9674940739048538
+      ],
+      "orbitUpReference": [
+        -0.997401397102766,
+        -0.07188102231838485,
+        0.0048550682708024765
+      ],
+      "metersPerUnit": 31643.548387096773,
+      "bodyRadiusM": 9809500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

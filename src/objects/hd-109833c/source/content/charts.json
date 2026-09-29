@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-109833c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-109833c-orbits",
+      "title": "HD 109833 c: orbits around HD 109833",
+      "output": "hd-109833c-system-orbits.svg",
+      "system": "hd-109833",
+      "highlight": "hd-109833c",
+      "description": "The orbits of HD 109833's planets in this map from above, to scale, with HD 109833 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Wood et al. 2023 (2023AJ....165...85W), via the NASA Exoplanet Archive ps table (pl_refname WOOD_ET_AL_2023): P 13.900148 d"
+      }
+    }
+  ]
+}

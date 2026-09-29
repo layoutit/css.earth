@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "mascara-1b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "MASCARA-1 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 114172.7
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/mascara-1b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "MASCARA-1 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 37578677.9,
+      "description": "MASCARA-1 b was found in 2017 as it crossed its star.",
+      "systemName": "MASCARA-1 system",
+      "order": 3841,
+      "context": {
+        "order": 3841
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4075508576512194600,
+        -3727780866884622300,
+        1047511531851512200
+      ],
+      "presentationToReference": [
+        0.7429526698403879,
+        -0.655070244503651,
+        -0.13749292761071985,
+        -0.6429046639481889,
+        -0.7555511704666807,
+        0.12576176636838074,
+        0.18626573343131617,
+        0.0050401956664090425,
+        0.982486474704328
+      ],
+      "orbitUpReference": [
+        0.655070244503651,
+        0.7555511704666807,
+        -0.0050401956664090425
+      ],
+      "metersPerUnit": 368299.03225806454,
+      "bodyRadiusM": 114172700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

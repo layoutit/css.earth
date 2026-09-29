@@ -1,0 +1,24 @@
+{
+  "host": "toi-5678",
+  "planets": [
+    {
+      "id": "toi-5678b",
+      "name": "TOI-5678 b",
+      "description": "Transiting planet of TOI-5678 with a 47.7-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract",
+        "credit": "Ulmer-Moll et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ULMER_MOLL_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-5678 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5678. Its orbit and size follow Ulmer-Moll et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ULMER_MOLL_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 47.73022, pl_radj 0.43804161, pl_bmassj 0.06292704"
+      },
+      "order": 4556
+    }
+  ]
+}

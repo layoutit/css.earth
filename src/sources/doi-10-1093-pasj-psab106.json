@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-pasj-psab106",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Fukui et al. (2022): TOI-2285b: A 1.7 Earth-radius planet near the habitable zone around a nearby M dwarf",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2110.10215"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/pasj/psab106"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022PASJ...74L...1F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/pasj/psab106",
+      "label": "Publications of the Astronomical Society of Japan 74 L1-L8"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fukui et al. (2022), Publications of the Astronomical Society of Japan 74 L1-L8",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of Japan 74 L1-L8",
+  "creators": [
+    "Akihiko Fukui",
+    "Tadahiro Kimura",
+    "Teruyuki Hirano",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

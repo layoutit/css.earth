@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2285b",
+  "card": {
+    "text": "TOI-2285 b was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2515-5172-adc7fb",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025RNAAS...9...73F/abstract",
+        "label": "Fukui 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FUKUI_2025): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 13.635109, pl_radj 0.1579091, pl_bmassj 0.06135386"
+      },
+      {
+        "catalogueId": "wikipedia-toi-2285-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-2285_b",
+        "label": "Wikipedia, \"TOI-2285 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1373096621",
+        "quote": "TOI-2285 b is a sub-Neptune exoplanet in orbit around the M-type star TOI-2285."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-2285. Its orbit and size follow Fukui et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2515-5172-adc7fb",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025RNAAS...9...73F/abstract",
+        "label": "Fukui 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FUKUI_2025): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 13.635109, pl_radj 0.1579091, pl_bmassj 0.06135386"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

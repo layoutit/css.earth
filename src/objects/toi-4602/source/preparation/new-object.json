@@ -1,0 +1,39 @@
+{
+  "id": "toi-4602",
+  "name": "TOI-4602",
+  "system": "TOI-4602 system",
+  "description": "Star of 5,966 K, 63.1 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4602",
+  "gaia": "169256041140206848",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract",
+    "credit": "Di Maio et al. 2026"
+  },
+  "radius": {
+    "value": 1.08,
+    "source": "Di Maio et al. 2026, the stellar radius of the default parameter set of TOI-4602.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract",
+    "uncertainty": 0.1
+  },
+  "mass": {
+    "value": 0.9,
+    "source": "Di Maio et al. 2026, the stellar mass of the default parameter set of TOI-4602.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5966,
+    "source": "Di Maio et al. 2026, the stellar temperature of the default parameter set of TOI-4602.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4602 b crosses TOI-4602 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Di Maio et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DI_MAIO_ET_AL_2026): st_teff 5966, st_rad 1.08, st_mass 0.9"
+  },
+  "notes": [],
+  "order": 4451
+}

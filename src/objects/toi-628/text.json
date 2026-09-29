@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-628",
+  "card": {
+    "text": "TOI-628 b crosses TOI-628 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abe38a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+        "label": "Rodriguez et al. (2021), The Astronomical Journal 161 194",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RODRIGUEZ_ET_AL__2021): st_teff 6250, st_rad 1.345, st_mass 1.311"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Rodriguez et al. 2021.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abe38a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+        "label": "Rodriguez et al. (2021), The Astronomical Journal 161 194",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RODRIGUEZ_ET_AL__2021): st_teff 6250, st_rad 1.345, st_mass 1.311"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "k2-125",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3654.47,
+      "lowerKelvin": 3554.91,
+      "upperKelvin": 3754.0299999999997,
+      "citation": "Dressing et al. 2017, the stellar temperature of the default parameter set of K2-125 b in the NASA Exoplanet Archive: 3654.47 +/- 99.56 K, https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

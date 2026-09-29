@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "k2-285",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4975,
+      "lowerKelvin": 4880,
+      "upperKelvin": 5070,
+      "citation": "Palle et al. 2019, the stellar temperature of the default parameter set of K2-285 b in the NASA Exoplanet Archive: 4975 +/- 95 K, https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

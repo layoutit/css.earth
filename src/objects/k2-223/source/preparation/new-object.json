@@ -1,0 +1,39 @@
+{
+  "id": "k2-223",
+  "name": "K2-223",
+  "system": "K2-223 system",
+  "description": "Star of 5,858 K, 199 parsecs away, with 2 transiting planets.",
+  "target": "K2-223",
+  "gaia": "3578046995560843520",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260901721J/abstract",
+    "credit": "Jankowski et al. 2026"
+  },
+  "radius": {
+    "value": 1.05,
+    "source": "Jankowski et al. 2026, the stellar radius of the default parameter set of K2-223 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260901721J/abstract",
+    "uncertainty": 0.1
+  },
+  "mass": {
+    "value": 1.07,
+    "source": "Jankowski et al. 2026, the stellar mass of the default parameter set of K2-223 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260901721J/abstract",
+    "uncertainty": 0.07
+  },
+  "temperature": {
+    "value": 5858,
+    "source": "Jankowski et al. 2026, the stellar temperature of the default parameter set of K2-223 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260901721J/abstract",
+    "uncertainty": 26
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross K2-223 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Jankowski et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname JANKOWSKI_ET_AL_2026): st_teff 5858, st_rad 1.05, st_mass 1.07"
+  },
+  "notes": [],
+  "order": 3399
+}

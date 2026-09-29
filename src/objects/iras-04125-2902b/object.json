@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "iras-04125-2902b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "IRAS 04125+2902 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 68489.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/iras-04125-2902b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "IRAS 04125+2902 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 33016004.3,
+      "description": "IRAS 04125+2902 b was found in 2024 by TESS as it crossed its star.",
+      "systemName": "IRAS 04125+2902 system",
+      "order": 3269,
+      "context": {
+        "order": 3269
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1895485604681785600,
+        3874023756322499600,
+        2407076979816269300
+      ],
+      "presentationToReference": [
+        0.35695368904675495,
+        0.9092347410589086,
+        -0.2141874168280019,
+        0.7970470950792681,
+        -0.41603263883329017,
+        -0.43775880533817907,
+        0.48713447024575585,
+        0.014457837907127907,
+        0.8732072943015526
+      ],
+      "orbitUpReference": [
+        -0.9092347410589086,
+        0.41603263883329017,
+        -0.014457837907127907
+      ],
+      "metersPerUnit": 220933.2258064516,
+      "bodyRadiusM": 68489300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

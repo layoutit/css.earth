@@ -1,0 +1,41 @@
+{
+  "id": "toi-2458",
+  "name": "TOI-2458",
+  "system": "TOI-2458 system",
+  "description": "Star of 6,005 K, 113 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2458",
+  "gaia": "3233785128901216128",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.235S/abstract",
+    "credit": "&Scaron;ubjak et al. 2025"
+  },
+  "radius": {
+    "value": 1.31,
+    "source": "&Scaron;ubjak et al. 2025, the stellar radius of the default parameter set of TOI-2458 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.235S/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 1.05,
+    "source": "&Scaron;ubjak et al. 2025, the stellar mass of the default parameter set of TOI-2458 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.235S/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 6005,
+    "source": "&Scaron;ubjak et al. 2025, the stellar temperature of the default parameter set of TOI-2458 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.235S/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2458 b crosses TOI-2458 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow &Scaron;ubjak et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SUBJAK_ET_AL_2025): st_teff 6005, st_rad 1.31, st_mass 1.05"
+  },
+  "notes": [
+    "TOI-2458 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 4318
+}

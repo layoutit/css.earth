@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/ltt-1445-a-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "ltt-1445-a-b-orbits",
+      "title": "LTT 1445 A b: orbits around LTT 1445 A",
+      "output": "ltt-1445-a-b-system-orbits.svg",
+      "system": "ltt-1445-a",
+      "highlight": "ltt-1445-a-b",
+      "description": "The orbits of LTT 1445 A's planets in this map from above, to scale, with LTT 1445 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Lavie et al. 2023 (2023A&A...673A..69L), via the NASA Exoplanet Archive ps table (pl_refname LAVIE_ET_AL__2023): P 5.358765 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "ltt-1445-a-b-transit",
+      "title": "LTT 1445 A b: its transit",
+      "description": "LTT 1445 A b crossing its star, as TESS recorded it: 2 sectors (4, 31) of the SPOC pipeline's 2-minute light curves of TIC 98796344, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "output": "ltt-1445-a-b-transit.svg",
+      "metadata": {
+        "tic": "TIC 98796344",
+        "sectors": [
+          4,
+          31
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "ltt-1445-a-b",
+      "sources": [
+        "photometry/tess/tess2018292075959-s0004-0000000098796344-0124-s_lc.fits",
+        "photometry/tess/tess2020294194027-s0031-0000000098796344-0198-s_lc.fits"
+      ],
+      "durationHours": 1.366,
+      "binMinutes": 5,
+      "notes": [
+        "TESS 2-min SPOC · sectors 4, 31",
+        "Folded on the app's orbit; 5-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

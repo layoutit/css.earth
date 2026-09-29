@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2158b",
+  "card": {
+    "text": "TOI-2158 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243656",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract",
+        "label": "Knudstrup et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KNUDSTRUP_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 8.6007557, pl_radj 0.96, pl_bmassj 0.82"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-2158. Its orbit and size follow Knudstrup et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243656",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..22K/abstract",
+        "label": "Knudstrup et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KNUDSTRUP_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 8.6007557, pl_radj 0.96, pl_bmassj 0.82"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

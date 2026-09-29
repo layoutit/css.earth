@@ -1,0 +1,28 @@
+{
+ "id": "toi-1801b",
+ "classification": "exoplanet",
+ "order": 4166,
+ "physical": {
+  "name": "TOI-1801 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 13297.5,
+  "gravitationalParameterKm3PerS2": 2287169.51,
+  "parent": "toi-1801"
+ },
+ "physicalNotes": "Radius 0.186 Jupiter radii from Mallorquín et al. 2023 (2023A&A...680A..76M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract): 13,297.5 km at 71,492 km per Jupiter radius. GM from the mass 0.01805377 Jupiter masses (Mallorquín et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...680A..76M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.643985,
+  "semiMajorAxisStellarRadii": 30.632,
+  "inclinationDegrees": 89.507,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58903.048,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): P 10.643985 d",
+   "shape": "Mallorquín et al. 2023 (2023A&A...680A..76M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQUIN_ET_AL_2023): a/R* 30.632; Mallorquín et al. 2023 (2023A&A...680A..76M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQUIN_ET_AL_2023): inclination 89.507 degrees",
+   "eccentricity": "Mallorquín et al. 2023 (2023A&A...680A..76M), via the NASA Exoplanet Archive ps table (pl_refname MALLORQUIN_ET_AL_2023): e 0",
+   "phase": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): transit mid-time 2458903.548 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

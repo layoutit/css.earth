@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-824",
+  "card": {
+    "text": "TOI-824 b crosses TOI-824 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abac0c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract",
+        "label": "Burt et al. (2020), The Astronomical Journal 160 153",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BURT_ET_AL__2020): st_teff 4600, st_rad 0.695, st_mass 0.71"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Burt et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abac0c",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract",
+        "label": "Burt et al. (2020), The Astronomical Journal 160 153",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BURT_ET_AL__2020): st_teff 4600, st_rad 0.695, st_mass 0.71"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

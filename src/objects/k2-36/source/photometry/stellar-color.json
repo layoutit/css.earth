@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "k2-36",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4916,
+      "lowerKelvin": 4879,
+      "upperKelvin": 4953,
+      "citation": "Bonomo et al. 2023, the stellar temperature of the default parameter set of K2-36 b in the NASA Exoplanet Archive: 4916 +/- 37 K, https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

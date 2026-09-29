@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-ab7020",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Shporer et al. (2020): GJ 1252 b: A 1.2 R<sub>⊕</sub> Planet Transiting an M3 Dwarf at 20.4 pc",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1912.05556"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ab7020"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020ApJ...890L...7S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...890L...7S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ab7020",
+      "label": "The Astrophysical Journal Letters 890 L7"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...890L...7S",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Shporer et al. (2020), The Astrophysical Journal Letters 890 L7",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020ApJ...890L...7S"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 890 L7",
+  "creators": [
+    "Avi Shporer",
+    "Karen A. Collins",
+    "Nicola Astudillo-Defru",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

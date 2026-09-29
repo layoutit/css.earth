@@ -1,0 +1,39 @@
+{
+  "id": "toi-1269",
+  "name": "TOI-1269",
+  "system": "TOI-1269 system",
+  "description": "Star of 5,499 K, 172 parsecs away, with 2 transiting planets.",
+  "target": "TOI-1269",
+  "gaia": "1635108588053258752",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "credit": "MacDougall et al. 2023"
+  },
+  "radius": {
+    "value": 0.8521,
+    "source": "MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-1269 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0144
+  },
+  "mass": {
+    "value": 0.9027,
+    "source": "MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1269 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0249
+  },
+  "temperature": {
+    "value": 5499,
+    "source": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1269 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 63
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-1269 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 5499, st_rad 0.8521, st_mass 0.9027"
+  },
+  "notes": [],
+  "order": 3993
+}

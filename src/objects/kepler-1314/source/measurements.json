@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-1314",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 410,463 km at 142.69 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 142.68733943401173,
+  "distanceSource": "Gaia DR3 parallax 7.0083 +/- 0.1077 mas (same row, RUWE 1.78): 142.69 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 410463,
+  "radiusSource": "Radius 0.59 +/- 0.019 solar radii from Morton et al. 2016, the stellar radius of the default parameter set of Kepler-1314 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract): 410,463 km at 695,700 km per solar radius. Mass 0.6 +/- 0.02 solar masses from Morton et al. 2016, the stellar mass of the default parameter set of Kepler-1314 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract); GM is that mass times the JPL solar GM. Temperature 4188 +/- 92.28 K from Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1314 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4188,
+  "effectiveTemperatureSource": "Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1314 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "surfaceGravityLogg": 4.67,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-1314.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.675, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

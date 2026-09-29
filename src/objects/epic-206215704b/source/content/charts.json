@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/epic-206215704b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "epic-206215704b-orbits",
+      "title": "EPIC 206215704 b: orbits around EPIC 206215704",
+      "output": "epic-206215704b-system-orbits.svg",
+      "system": "epic-206215704",
+      "highlight": "epic-206215704b",
+      "description": "The orbits of EPIC 206215704's planets in this map from above, to scale, with EPIC 206215704 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Adams et al. 2021 (2021PSJ.....2..152A), via the NASA Exoplanet Archive ps table (pl_refname ADAMS_ET_AL__2021): P 2.255436 d"
+      }
+    }
+  ]
+}

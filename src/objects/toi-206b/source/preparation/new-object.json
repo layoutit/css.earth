@@ -1,0 +1,24 @@
+{
+  "host": "toi-206",
+  "planets": [
+    {
+      "id": "toi-206b",
+      "name": "TOI-206 b",
+      "description": "Transiting planet of TOI-206 with a 0.736-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+        "credit": "Giacalone et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GIACALONE_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-206 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-206. Its orbit and size follow Giacalone et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GIACALONE_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.7363104, pl_radj 0.11597843, pl_bmassj 0.00705"
+      },
+      "order": 4225
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+ "id": "hd-224018d",
+ "classification": "exoplanet",
+ "order": 3195,
+ "physical": {
+  "name": "HD 224018 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 15307.4,
+  "gravitationalParameterKm3PerS2": 1674121.98,
+  "parent": "hd-224018"
+ },
+ "physicalNotes": "Radius 0.21411403 Jupiter radii from Damasso et al. 2025 (2025A&A...702A.118D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.118D/abstract): 15,307.4 km at 71,492 km per Jupiter radius. GM from the mass 0.01321468 Jupiter masses (Damasso et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...702A.118D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...702A.118D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 138.0731,
+  "semiMajorAxisStellarRadii": 99.361,
+  "inclinationDegrees": 89.9,
+  "eccentricity": 0.04,
+  "argumentOfPeriapsisDegrees": 206,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 57741.245,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Damasso et al. 2025 (2025A&A...702A.118D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL_2025): P 138.0731 d",
+   "shape": "Damasso et al. 2025 (2025A&A...702A.118D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL_2025): a/R* derived from its semi-major axis 0.53 au and stellar radius 1.147 solar radii; Damasso et al. 2025 (2025A&A...702A.118D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL_2025): inclination 89.9 degrees",
+   "eccentricity": "Damasso et al. 2025 (2025A&A...702A.118D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL_2025): e 0.04",
+   "argumentOfPeriapsis": "Damasso et al. 2025 (2025A&A...702A.118D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL_2025): omega 206 degrees",
+   "phase": "Damasso et al. 2025 (2025A&A...702A.118D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL_2025): transit mid-time 2457741.745 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 954295 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

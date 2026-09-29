@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-2041-8205-773-1-l15",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rappaport et al. (2013): THE ROCHE LIMIT FOR CLOSE-ORBITING PLANETS: MINIMUM DENSITY, COMPOSITION CONSTRAINTS, AND APPLICATION TO THE 4.2 hr PLANET KOI 1843.03",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1307.4080"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/773/1/L15"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013ApJ...773L..15R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/2041-8205/773/1/L15",
+      "label": "The Astrophysical Journal 773 L15"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Rappaport et al. (2013), The Astrophysical Journal 773 L15",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 773 L15",
+  "creators": [
+    "Saul Rappaport",
+    "Roberto Sanchis-Ojeda",
+    "Leslie A. Rogers",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

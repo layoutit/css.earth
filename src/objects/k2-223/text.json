@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-223",
+  "card": {
+    "text": "2 planets cross K2-223 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-01721",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260901721J/abstract",
+        "label": "Jankowski et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JANKOWSKI_ET_AL_2026): st_teff 5858, st_rad 1.05, st_mass 1.07"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Jankowski et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-01721",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260901721J/abstract",
+        "label": "Jankowski et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JANKOWSKI_ET_AL_2026): st_teff 5858, st_rad 1.05, st_mass 1.07"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

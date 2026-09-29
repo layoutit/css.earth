@@ -1,0 +1,24 @@
+{
+  "host": "wasp-140",
+  "planets": [
+    {
+      "id": "wasp-140b",
+      "name": "WASP-140 b",
+      "description": "Transiting planet of WASP-140 with a 2.24-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+        "credit": "Alexoudi 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ALEXOUDI_2022"
+      },
+      "text": {
+        "card": "WASP-140 b was found in 2016 by SuperWASP-South as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-140. Its orbit and size follow Alexoudi 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ALEXOUDI_2022): disc_year 2016, disc_facility SuperWASP-South, sy_pnum 1; pl_orbper 2.23598448, pl_radj 1.27, pl_bmassj 2.44"
+      },
+      "order": 4789
+    }
+  ]
+}

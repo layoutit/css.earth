@@ -1,0 +1,28 @@
+{
+ "id": "toi-663d",
+ "classification": "exoplanet",
+ "order": 4648,
+ "physical": {
+  "name": "TOI-663 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 12246,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-663"
+ },
+ "physicalNotes": "Radius 0.17129122 Jupiter radii from Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract): 12,246 km at 71,492 km per Jupiter radius. No mass is measured: Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract) gives only an upper limit of 0.01636103 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.1027268,
+  "semiMajorAxisStellarRadii": 24.1911,
+  "inclinationDegrees": 89.6,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58546.61249,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive ps table (pl_refname COINTEPAS_ET_AL__2024): P 7.1027268 d",
+   "shape": "Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive ps table (pl_refname COINTEPAS_ET_AL__2024): a/R* derived from its semi-major axis 0.0576 au and stellar radius 0.512 solar radii; Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive ps table (pl_refname COINTEPAS_ET_AL__2024): inclination 89.6 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive ps table (pl_refname COINTEPAS_ET_AL__2024): transit mid-time 2458547.11249 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 15 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

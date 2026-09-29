@@ -1,0 +1,31 @@
+{
+ "id": "k2-292b",
+ "classification": "exoplanet",
+ "order": 3474,
+ "physical": {
+  "name": "K2-292 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 16774.4,
+  "gravitationalParameterKm3PerS2": 9765660.45,
+  "parent": "k2-292"
+ },
+ "physicalNotes": "Radius 0.23463288 Jupiter radii from Luque et al. 2019 (2019A&A...623A.114L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.114L/abstract): 16,774.4 km at 71,492 km per Jupiter radius. GM from the mass 0.07708523 Jupiter masses (Luque et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...623A.114L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019A&A...623A.114L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 16.9841,
+  "semiMajorAxisStellarRadii": 25.9,
+  "inclinationDegrees": 88.4,
+  "eccentricity": 0.04,
+  "argumentOfPeriapsisDegrees": 104,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58179.7842,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Luque et al. 2019 (2019A&A...623A.114L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2019): P 16.9841 d",
+   "shape": "Luque et al. 2019 (2019A&A...623A.114L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2019): a/R* 25.9; Luque et al. 2019 (2019A&A...623A.114L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2019): inclination 88.4 degrees",
+   "eccentricity": "Luque et al. 2019 (2019A&A...623A.114L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2019): e 0.04",
+   "argumentOfPeriapsis": "Luque et al. 2019 (2019A&A...623A.114L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2019): omega 104 degrees",
+   "phase": "Luque et al. 2019 (2019A&A...623A.114L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2019): transit mid-time 2458180.2842 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 194 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

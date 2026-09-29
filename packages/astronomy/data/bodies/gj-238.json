@@ -1,0 +1,30 @@
+{
+ "id": "gj-238",
+ "classification": "star",
+ "order": 3080,
+ "physical": {
+  "name": "GJ 238",
+  "horizonsCode": null,
+  "meanRadiusKm": 300125,
+  "gravitationalParameterKm3PerS2": 55646326109.58518,
+  "parent": null,
+  "effectiveTemperatureK": 3485
+ },
+ "physicalNotes": "Radius 0.4314 +/- 0.0075 solar radii from Tey et al. 2024, the stellar radius of the default parameter set of GJ 238 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract): 300,125 km at 695,700 km per solar radius. Mass 0.4193 +/- 0.0095 solar masses from Tey et al. 2024, the stellar mass of the default parameter set of GJ 238 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract); GM is that mass times the JPL solar GM. Temperature 3485 +/- 140 K from Tey et al. 2024, the stellar temperature of the default parameter set of GJ 238 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 98.45477358738191,
+  "declinationDegrees": -58.52492101506923,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 15.215602808581622,
+  "properMotionRaMasPerYear": -404.0495587600376,
+  "properMotionDecMasPerYear": 795.9495508571433,
+  "radialVelocityKmPerS": 26.240705,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5482827676662168832 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gj-238/source/photometry/gaia-dr3-source.csv; cross-identification HIP 31300: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5482827676662168832",
+   "distance": "Gaia DR3 parallax 65.7220 +/- 0.0129 mas (same row, RUWE 1.12): 15.22 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -404.050, 795.950 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 26.24 +/- 0.17 km/s"
+  }
+ }
+}

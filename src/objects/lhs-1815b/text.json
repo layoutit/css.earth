@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lhs-1815b",
+  "card": {
+    "text": "LHS 1815 b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1126-science-abl7164",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract",
+        "label": "Luque 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE__AMP__PALL_EACUTE__2022): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.81431355625, pl_radj 0.09706503, pl_bmassj 0.00497124"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-1815-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_1815_b",
+        "label": "Wikipedia, \"LHS 1815 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1296450263",
+        "quote": "LHS 1815 b is a thick disk exoplanet discovered in 2020 by TESS."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around LHS 1815. Its orbit and size follow Gan et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1126-science-abl7164",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract",
+        "label": "Luque 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE__AMP__PALL_EACUTE__2022): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.81431355625, pl_radj 0.09706503, pl_bmassj 0.00497124"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-1815-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_1815_b",
+        "label": "Wikipedia, \"LHS 1815 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1296450263",
+        "quote": "The planet is located outside the galactic plane."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

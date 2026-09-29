@@ -1,0 +1,28 @@
+{
+ "id": "hd-50554d",
+ "classification": "exoplanet",
+ "order": 3222,
+ "physical": {
+  "name": "HD 50554 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 8993.1,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "hd-50554"
+ },
+ "physicalNotes": "Radius 0.12579199 Jupiter radii from Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract): 8,993.1 km at 71,492 km per Jupiter radius. No mass is measured: Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract) gives only an upper limit of 0.03272206 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 28.06939485536,
+  "semiMajorAxisStellarRadii": 34.4,
+  "inclinationDegrees": 89.167,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59507.508646,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 28.06939485536 d",
+   "shape": "Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive ps table (pl_refname LIU_ET_AL_2026): a/R* 34.4; Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive ps table (pl_refname LIU_ET_AL_2026): inclination derived from its impact parameter 0.5 with its a/R* 34.4 (Winn 2010, eq. 7)",
+   "eccentricity": "Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive ps table (pl_refname LIU_ET_AL_2026): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459508.008646 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 25 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-11b",
+  "card": {
+    "text": "KELT-11 b was found in 2017 by KELT-South as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243998",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+        "label": "Mounzer et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MOUNZER_ET_AL__2022): disc_year 2017, disc_facility KELT-South, sy_pnum 1; pl_orbper 4.73620495, pl_radj 1.35, pl_bmassj 0.205"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around KELT-11. Its orbit and size follow Mounzer et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243998",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+        "label": "Mounzer et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MOUNZER_ET_AL__2022): disc_year 2017, disc_facility KELT-South, sy_pnum 1; pl_orbper 4.73620495, pl_radj 1.35, pl_bmassj 0.205"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

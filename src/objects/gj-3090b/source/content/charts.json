@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/gj-3090b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "gj-3090b-orbits",
+      "title": "GJ 3090 b: orbits around GJ 3090",
+      "output": "gj-3090b-system-orbits.svg",
+      "system": "gj-3090",
+      "highlight": "gj-3090b",
+      "description": "The orbits of GJ 3090's planets in this map from above, to scale, with GJ 3090 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Lamontagne et al. 2026 (2026A&A...706A.278L), via the NASA Exoplanet Archive ps table (pl_refname LAMONTAGNE_ET_AL_2026): P 2.85310198 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "gj-3090b-transit",
+      "title": "GJ 3090 b: its transit",
+      "description": "GJ 3090 b crossing its star, as TESS recorded it: 3 sectors (103, 104, 106) of the SPOC pipeline's 2-minute light curves of TIC 262530407, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "output": "gj-3090b-transit.svg",
+      "metadata": {
+        "tic": "TIC 262530407",
+        "sectors": [
+          103,
+          104,
+          106
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "gj-3090b",
+      "sources": [
+        "photometry/tess/tess2026111101500-s0103-0000000262530407-0305-s_lc.fits",
+        "photometry/tess/tess2026137223500-s0104-0000000262530407-0306-s_lc.fits",
+        "photometry/tess/tess2026192185000-s0106-0000000262530407-0308-s_lc.fits"
+      ],
+      "durationHours": 1.281,
+      "binMinutes": 5,
+      "notes": [
+        "TESS 2-min SPOC · sectors 103, 104, 106",
+        "Folded on the app's orbit; 5-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

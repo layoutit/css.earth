@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-50",
+  "card": {
+    "text": "WASP-50 b crosses WASP-50 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty & Sengupta (2019), The Astronomical Journal 158 39",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CHAKRABARTY__AMP__SENGUPTA_2019): st_teff 5400, st_rad 0.843, st_mass 0.892"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-50",
+        "url": "https://en.wikipedia.org/wiki/WASP-50",
+        "label": "Wikipedia, \"WASP-50\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406429",
+        "quote": "WASP-50, also named Chaophraya, is a G-type main-sequence star about 594 light-years away in the constellation Eridanus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Chakrabarty & Sengupta 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty & Sengupta (2019), The Astronomical Journal 158 39",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CHAKRABARTY__AMP__SENGUPTA_2019): st_teff 5400, st_rad 0.843, st_mass 0.892"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-50",
+        "url": "https://en.wikipedia.org/wiki/WASP-50",
+        "label": "Wikipedia, \"WASP-50\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406429",
+        "quote": "The star is older than the Sun and slightly depleted in heavy elements compared to the Sun, and has a close to average starspot activity."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

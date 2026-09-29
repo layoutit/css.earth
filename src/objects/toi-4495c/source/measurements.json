@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-4495c",
+  "radiusKm": 25703.7,
+  "radiusSource": "Radius 0.35953314 Jupiter radii from Wang et al. 2026 (2026AJ....171..135W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....171..135W/abstract): 25,703.7 km at 71,492 km per Jupiter radius. GM from the mass 0.07299536 Jupiter masses (Wang et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026AJ....171..135W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026AJ....171..135W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 5.1830043,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 5.1830043 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-4495 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.07299536 Jupiter masses: Wang et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026AJ....171..135W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....171..135W/abstract)."
+}

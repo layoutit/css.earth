@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "k2-32c",
+  "displayName": "K2-32 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "3.1 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202037896",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L",
+          "label": "Lillo-Box et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "20.7 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202037896",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L",
+          "label": "Lillo-Box et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "8.1 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202037896",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L",
+          "label": "Lillo-Box et al. 2020",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by K2-32; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "k2-32c-lens-shape.webp",
+        "surface": "k2-32c-surface-shape@2x.webp",
+        "poles": "k2-32c-poles-shape@2x.webp",
+        "source": {
+          "id": "k2-32c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of K2-32 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of k2-32's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "k2-32c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/k2-32c/k2-32c-system-orbits.svg",
+      "alt": "The orbits of K2-32's planets in this map from above, to scale, with K2-32 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "k2-32c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lillo-Box et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+      "credit": "Lillo-Box et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/k2-32c.json",
+      "credit": "Radius from Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive; mass from Lillo-Box et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...640A..48L), via the NASA Exoplanet Archive; orbit from Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive"
+    }
+  }
+}

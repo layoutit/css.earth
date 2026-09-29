@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-95338b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.3811 Jupiter radii from Kálmán et al. 2025 (2025A&A...701A.240K), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.135 Jupiter masses: Saha 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025MNRAS.539..928S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.539..928S/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025MNRAS.539..928S/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Kálmán et al. 2025 (2025A&A...701A.240K), via the NASA Exoplanet Archive ps table (pl_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): P 55.082694 d; Kálmán et al. 2025 (2025A&A...701A.240K), via the NASA Exoplanet Archive ps table (pl_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): a/R* 67.34; Kálmán et al. 2025 (2025A&A...701A.240K), via the NASA Exoplanet Archive ps table (pl_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): inclination 89.654 degrees; Díaz et al. 2020 (2020MNRAS.496.4330D), via the NASA Exoplanet Archive ps table (pl_refname DIAZ_ET_AL_2020): e 0.197; Díaz et al. 2020 (2020MNRAS.496.4330D), via the NASA Exoplanet Archive ps table (pl_refname DIAZ_ET_AL_2020): omega 23.42 degrees; Kálmán et al. 2025 (2025A&A...701A.240K), via the NASA Exoplanet Archive ps table (pl_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): transit mid-time 2458585.28087 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2020MNRAS.496.4330D/abstract"
+      ]
+    }
+  ]
+}

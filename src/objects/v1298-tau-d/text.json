@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "v1298-tau-d",
+  "card": {
+    "text": "V1298 Tau d was found in 2019 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-025-09840-z",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+        "label": "Livingston et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL_2026): disc_year 2019, disc_facility K2, sy_pnum 4; pl_orbper 12.401394, pl_radj 0.58256858, pl_bmassj 0.01887811"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around V1298 Tau. Its orbit and size follow Livingston et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-025-09840-z",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+        "label": "Livingston et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL_2026): disc_year 2019, disc_facility K2, sy_pnum 4; pl_orbper 12.401394, pl_radj 0.58256858, pl_bmassj 0.01887811"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ngts-34",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGTS-34",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 951021.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ngts-34-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGTS-34",
+      "classification": "star",
+      "color": "#fef7ff",
+      "distanceAu": 24821413,
+      "description": "NGTS-34 b crosses NGTS-34 as seen from Earth, which is how it was found.",
+      "systemName": "NGTS-34 system",
+      "order": 3846,
+      "context": {
+        "order": 3843
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2523797254622937000,
+        795764092073046700,
+        -2604858517220138000
+      ],
+      "presentationToReference": [
+        -0.679679274215616,
+        0.6690360660644159,
+        0.30071053607544895,
+        0.21430578845265558,
+        -0.21094988869983006,
+        0.9537154573001398,
+        -0.7015048918128933,
+        -0.7126646383556432,
+        3.439383216951338e-8
+      ],
+      "orbitUpReference": [
+        -0.6690360660644159,
+        0.21094988869983006,
+        0.7126646383556432
+      ],
+      "metersPerUnit": 3067812.580645161,
+      "bodyRadiusM": 951021900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

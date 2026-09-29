@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-500b",
+  "card": {
+    "text": "TOI-500 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-022-01641-y",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract",
+        "label": "Serrano et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SERRANO_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 0.5481579, pl_radj 0.10402373, pl_bmassj 0.00446782"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around TOI-500. Its orbit and size follow Serrano et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-022-01641-y",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract",
+        "label": "Serrano et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SERRANO_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 0.5481579, pl_radj 0.10402373, pl_bmassj 0.00446782"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

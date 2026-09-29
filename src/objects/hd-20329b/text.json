@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-20329b",
+  "card": {
+    "text": "HD 20329 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244459",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A.158M/abstract",
+        "label": "Murgas et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MURGAS_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.9260632, pl_radj 0.15344839, pl_bmassj 0.02334593"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HD 20329. Its orbit and size follow Murgas et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244459",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A.158M/abstract",
+        "label": "Murgas et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MURGAS_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.9260632, pl_radj 0.15344839, pl_bmassj 0.02334593"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

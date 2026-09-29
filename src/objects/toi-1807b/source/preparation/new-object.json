@@ -1,0 +1,24 @@
+{
+  "host": "toi-1807",
+  "planets": [
+    {
+      "id": "toi-1807b",
+      "name": "TOI-1807 b",
+      "description": "Transiting planet of TOI-1807 with a 0.549-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-1807 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1807. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.54937097, pl_radj 0.13353719, pl_bmassj 0.0076771"
+      },
+      "order": 4173
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-239b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-239b-orbits",
+      "title": "K2-239 b: orbits around K2-239",
+      "output": "k2-239b-system-orbits.svg",
+      "system": "k2-239",
+      "highlight": "k2-239b",
+      "description": "The orbits of K2-239's planets in this map from above, to scale, with K2-239 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Díez Alonso et al. 2018 (2018MNRAS.480L...1D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2018): P 5.24 d"
+      }
+    }
+  ]
+}

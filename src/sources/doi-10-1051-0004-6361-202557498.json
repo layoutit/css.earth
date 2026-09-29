@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202557498",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rea et al. (2026): High five from ASTEP",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2510.01725"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202557498"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026A&A...711A..86R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202557498",
+      "label": "Astronomy & Astrophysics 711 A86"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Rea et al. (2026), Astronomy & Astrophysics 711 A86",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 711 A86",
+  "creators": [
+    "Erika Rea",
+    "Maximilian N. Günther",
+    "George Dransfield",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

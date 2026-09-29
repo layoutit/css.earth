@@ -1,0 +1,24 @@
+{
+  "host": "k2-316",
+  "planets": [
+    {
+      "id": "k2-316b",
+      "name": "K2-316 b",
+      "description": "Transiting planet of K2-316 with a 1.13-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.499.5416C/abstract",
+        "credit": "Castro González et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CASTRO_GONZ_AACUTE_LEZ_ET_AL__2020"
+      },
+      "text": {
+        "card": "K2-316 b was found in 2020 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around K2-316. Its orbit and size follow Castro González et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2020): disc_year 2020, disc_facility K2, sy_pnum 2; pl_orbper 1.133, pl_radj 0.11865465, pl_bmassj 0.00733"
+      },
+      "order": 3484
+    }
+  ]
+}

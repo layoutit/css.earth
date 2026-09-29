@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5628-a",
+  "card": {
+    "text": "TOI-5628 A b crosses TOI-5628 A as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae8af1",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract",
+        "label": "Gan et al. (2026), The Astrophysical Journal Letters 1006 L63",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GAN_ET_AL_2026): st_teff 3310, st_rad 0.35, st_mass 0.36"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Gan et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae8af1",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract",
+        "label": "Gan et al. (2026), The Astrophysical Journal Letters 1006 L63",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GAN_ET_AL_2026): st_teff 3310, st_rad 0.35, st_mass 0.36"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

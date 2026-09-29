@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-409",
+  "card": {
+    "text": "Kepler-409 b crosses Kepler-409 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2023): st_teff 5421, st_rad 0.897, st_mass 0.913"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-409b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-409b",
+        "label": "Wikipedia, \"Kepler-409b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249904",
+        "quote": "Kepler-409b is a super-Earth orbiting Kepler-409, a G-type main-sequence star."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bonomo et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. (2023), Astronomy & Astrophysics 677 A33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2023): st_teff 5421, st_rad 0.897, st_mass 0.913"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-409b",
+        "url": "https://en.wikipedia.org/wiki/Kepler-409b",
+        "label": "Wikipedia, \"Kepler-409b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249904",
+        "quote": "Its orbital period around the star is 69 days."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

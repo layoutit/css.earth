@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hip-94235b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HIP 94235 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 19134.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hip-94235b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HIP 94235 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 12075929.1,
+      "description": "HIP 94235 b was found in 2022 by TESS as it crossed its star.",
+      "systemName": "HIP 94235 system",
+      "order": 3265,
+      "context": {
+        "order": 3265
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        272967677670857660,
+        -853201215359373300,
+        -1568788974212555500
+      ],
+      "presentationToReference": [
+        0.19843428972659827,
+        -0.9437172692466863,
+        0.26461585059530685,
+        -0.45649429928352403,
+        -0.32790288095274805,
+        -0.8270989392959782,
+        -0.8673158521451945,
+        -0.04332916325600198,
+        0.4958687288276907
+      ],
+      "orbitUpReference": [
+        0.9437172692466863,
+        0.32790288095274805,
+        0.04332916325600198
+      ],
+      "metersPerUnit": 61723.54838709677,
+      "bodyRadiusM": 19134300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

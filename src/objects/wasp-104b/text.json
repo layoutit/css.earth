@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-104b",
+  "card": {
+    "text": "WASP-104 b was found in 2014 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201424752",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract",
+        "label": "Smith et al. 2014",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SMITH_ET_AL__2014): disc_year 2014, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.75540563, pl_radj 1.137, pl_bmassj 1.272"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-104b",
+        "url": "https://en.wikipedia.org/wiki/WASP-104b",
+        "label": "Wikipedia, \"WASP-104b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374244728",
+        "quote": "WASP-104b is a hot Jupiter exoplanet that orbits the star WASP-104."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-104. Its orbit and size follow Smith et al. 2014's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201424752",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract",
+        "label": "Smith et al. 2014",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SMITH_ET_AL__2014): disc_year 2014, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.75540563, pl_radj 1.137, pl_bmassj 1.272"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-104b",
+        "url": "https://en.wikipedia.org/wiki/WASP-104b",
+        "label": "Wikipedia, \"WASP-104b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374244728",
+        "quote": "It is considered to be one of the darkest exoplanets discovered."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

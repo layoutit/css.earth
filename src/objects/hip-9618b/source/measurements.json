@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hip-9618b",
+  "radiusKm": 24417.8,
+  "radiusSource": "Radius 0.34154589 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 24,417.8 km at 71,492 km per Jupiter radius. No mass is measured: Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) gives only an upper limit of 0.02611472 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 20.772907,
+  "orbitalPeriodSource": "Osborn et al. 2023 (2023MNRAS.523.3069O), via the NASA Exoplanet Archive ps table (pl_refname OSBORN_ET_AL__2023): P 20.772907 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HIP 9618 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.02611472 Jupiter masses: Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)."
+}

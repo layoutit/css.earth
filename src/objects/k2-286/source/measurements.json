@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "k2-286",
+  "angularDiameterMas": 0.08,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 431,334 km at 76.46 pc = 0.08 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 76.46447255220762,
+  "distanceSource": "Gaia DR3 parallax 13.0780 +/- 0.0145 mas (same row, RUWE 1.07): 76.46 pc, no zero-point correction",
+  "radiusKm": 431334,
+  "radiusSource": "Radius 0.62 +/- 0.02 solar radii from Díez Alonso et al. 2019, the stellar radius of the default parameter set of K2-286 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.489.5928D/abstract): 431,334 km at 695,700 km per solar radius. Mass 0.64 +/- 0.02 solar masses from Díez Alonso et al. 2019, the stellar mass of the default parameter set of K2-286 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.489.5928D/abstract); GM is that mass times the JPL solar GM. Temperature 3926 +/- 100 K from Díez Alonso et al. 2019, the stellar temperature of the default parameter set of K2-286 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.489.5928D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3926,
+  "effectiveTemperatureSource": "Díez Alonso et al. 2019, the stellar temperature of the default parameter set of K2-286 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.489.5928D/abstract)",
+  "surfaceGravityLogg": 4.66,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-286.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.659, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

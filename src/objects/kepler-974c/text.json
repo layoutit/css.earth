@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-974c",
+  "card": {
+    "text": "Kepler-974 c was found in 2013 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-2041-8205-773-1-l15",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R/abstract",
+        "label": "Rappaport et al. 2013",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RAPPAPORT_ET_AL__2013): disc_year 2013, disc_facility Kepler, sy_pnum 2; pl_orbper 0.1768913, pl_radj 0.05442065, pl_bmassj 0.02517081"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around Kepler-974. Its orbit and size follow Rappaport et al. 2013's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-2041-8205-773-1-l15",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R/abstract",
+        "label": "Rappaport et al. 2013",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RAPPAPORT_ET_AL__2013): disc_year 2013, disc_facility Kepler, sy_pnum 2; pl_orbper 0.1768913, pl_radj 0.05442065, pl_bmassj 0.02517081"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

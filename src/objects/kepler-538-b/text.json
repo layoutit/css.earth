@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-538-b",
+  "card": {
+    "text": "Kepler-538B is a star of 3,386 K, bound to Kepler-538 2,679 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 2087171453788422528 and 2087171453783512704, sep_AU 2678.681566798873519, R_chance_align 3.228106765372227085e-04"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Kepler-538B shares its motion through space with Kepler-538, 2,679 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 2087171453788422528 and 2087171453783512704, sep_AU 2678.681566798873519, R_chance_align 3.228106765372227085e-04"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

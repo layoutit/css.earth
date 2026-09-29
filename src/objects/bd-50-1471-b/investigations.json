@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "bd-50-1471-b",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 934346740559239296: position at J2016.0. Distance: Gaia DR3 parallax 6.6721 +/- 0.0151 mas (same row, RUWE 0.89): 149.88 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -29.308, -154.233 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.963 +/- 0.048 solar radii from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 356473029 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Mass 0.977 +/- 0.118 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 356473029 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Temperature 5547 +/- 116.4 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 356473029 (VizieR IV/39/tic82).",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/ab3467"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 934346740559239296, through the CIE 1931 2-degree observer: #ffe8d8. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=934346740559239296&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,547 K and log g 4.46 (u1 0.510, u2 0.227): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

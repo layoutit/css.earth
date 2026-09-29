@@ -1,0 +1,39 @@
+{
+  "id": "k2-91",
+  "name": "K2-91",
+  "system": "K2-91 system",
+  "description": "Star of 3,622 K, 62.6 parsecs away, with 1 transiting planet.",
+  "target": "K2-91",
+  "gaia": "149858216482858112",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+    "credit": "Crossfield et al. 2016"
+  },
+  "radius": {
+    "value": 0.284,
+    "source": "Crossfield et al. 2016, the stellar radius of the default parameter set of K2-91 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+    "uncertainty": 0.041
+  },
+  "mass": {
+    "value": 0.292,
+    "source": "Crossfield et al. 2016, the stellar mass of the default parameter set of K2-91 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+    "uncertainty": 0.058
+  },
+  "temperature": {
+    "value": 3622,
+    "source": "Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-91 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract",
+    "uncertainty": 104
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-91 b crosses K2-91 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Crossfield et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL__2016): st_teff 3622, st_rad 0.284, st_mass 0.292"
+  },
+  "notes": [],
+  "order": 3625
+}

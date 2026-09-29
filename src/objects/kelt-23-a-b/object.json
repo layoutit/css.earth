@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "kelt-23-a-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "KELT-23 A b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 94583.9
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kelt-23-a-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "KELT-23 A b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 26204627.2,
+      "description": "KELT-23 A b was found in 2019 by KELT-North as it crossed its star.",
+      "systemName": "KELT-23 system",
+      "order": 3636,
+      "context": {
+        "order": 3636
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -964659391785384800,
+        -1241242971523680800,
+        3591152266251813400
+      ],
+      "presentationToReference": [
+        -0.18153791556630353,
+        -0.8068707575462136,
+        0.562141944555502,
+        -0.3651314578030459,
+        0.5860815072919235,
+        0.7233170019659773,
+        0.9130843354994455,
+        0.07394624687721804,
+        0.40100991114723
+      ],
+      "orbitUpReference": [
+        0.8068707575462136,
+        -0.5860815072919235,
+        -0.07394624687721804
+      ],
+      "metersPerUnit": 305109.3548387097,
+      "bodyRadiusM": 94583900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

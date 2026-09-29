@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-871b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.14845239 Jupiter radii from Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.0107 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html).",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 14.36273803273 d; Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): a/R* 26.3; Mistry et al. 2024 (2024PASA...41...30M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2024): inclination 89.26 degrees; No archive row states an eccentricity; the orbit is taken as circular; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458417.051084 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 18 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract"
+      ]
+    }
+  ]
+}

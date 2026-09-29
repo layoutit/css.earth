@@ -1,0 +1,28 @@
+{
+ "id": "kepler-378c",
+ "classification": "exoplanet",
+ "order": 3734,
+ "physical": {
+  "name": "Kepler-378 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 4432.5,
+  "gravitationalParameterKm3PerS2": 107936.93,
+  "parent": "kepler-378"
+ },
+ "physicalNotes": "Radius 0.062 Jupiter radii from Rowe et al. 2014 (2014ApJ...784...45R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...784...45R/abstract): 4,432.5 km at 71,492 km per Jupiter radius. GM from the mass 0.000852 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 28.9062562864,
+  "semiMajorAxisStellarRadii": 53.1972,
+  "inclinationDegrees": 89.95,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54991.3225,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 28.9062562864 d",
+   "shape": "Rowe et al. 2014 (2014ApJ...784...45R), via the NASA Exoplanet Archive ps table (pl_refname ROWE_ET_AL__2014): a/R* derived from its semi-major axis 0.166 au and stellar radius 0.671 solar radii; Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): inclination 89.95 degrees",
+   "eccentricity": "Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): e 0",
+   "phase": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): transit mid-time 2454991.8225 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 48 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

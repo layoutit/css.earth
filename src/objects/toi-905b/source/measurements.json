@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-905b",
+  "radiusKm": 83717.1,
+  "radiusSource": "Radius 1.171 Jupiter radii from Davis et al. 2020 (2020AJ....160..229D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract): 83,717.1 km at 71,492 km per Jupiter radius. GM from the mass 0.667 Jupiter masses (Davis et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....160..229D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.73957156087,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.73957156087 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-905 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.667 Jupiter masses: Davis et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....160..229D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract)."
+}

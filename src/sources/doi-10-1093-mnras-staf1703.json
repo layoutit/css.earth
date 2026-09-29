@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-staf1703",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Turner et al. (2026): The mass of the exo-Venus Gliese 12 b, as revealed by HARPS-N, ESPRESSO, and CARMENES",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2506.20564"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staf1703"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026MNRAS.545f1703T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staf1703",
+      "label": "Monthly Notices of the Royal Astronomical Society 545 staf1703"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Turner et al. (2026), Monthly Notices of the Royal Astronomical Society 545 staf1703",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 545 staf1703",
+  "creators": [
+    "Daisy A Turner",
+    "Yoshi Nike Emilia Eschen",
+    "Felipe Murgas",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

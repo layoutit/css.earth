@@ -1,0 +1,39 @@
+{
+  "id": "k2-167",
+  "name": "K2-167",
+  "system": "K2-167 system",
+  "description": "Star of 6,310 K, 80.9 parsecs away, with 1 transiting planet.",
+  "target": "K2-167",
+  "gaia": "2594479109451475456",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "credit": "Thygesen et al. 2023"
+  },
+  "radius": {
+    "value": 1.499,
+    "source": "Thygesen et al. 2023, the stellar radius of the default parameter set of K2-167 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "uncertainty": 0.077
+  },
+  "mass": {
+    "value": 1.084,
+    "source": "Thygesen et al. 2023, the stellar mass of the default parameter set of K2-167 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "uncertainty": 0.1
+  },
+  "temperature": {
+    "value": 6310,
+    "source": "Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-167 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "uncertainty": 170
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-167 b crosses K2-167 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Thygesen et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname THYGESEN_ET_AL__2023): st_teff 6310, st_rad 1.499, st_mass 1.084"
+  },
+  "notes": [],
+  "order": 3357
+}

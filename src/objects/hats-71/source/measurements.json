@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hats-71",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 332,753 km at 140.61 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 140.60626982400885,
+  "distanceSource": "Gaia DR3 parallax 7.1121 +/- 0.0236 mas (same row, RUWE 1.07): 140.61 pc, no zero-point correction",
+  "radiusKm": 332753.3,
+  "radiusSource": "Radius 0.4783 +/- 0.006 solar radii from Bakos et al. 2020, the stellar radius of the default parameter set of HATS-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract): 332,753 km at 695,700 km per solar radius. Mass 0.4861 +/- 0.006 solar masses from Bakos et al. 2020, the stellar mass of the default parameter set of HATS-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract); GM is that mass times the JPL solar GM. Temperature 3405 +/- 10 K from Bakos et al. 2020, the stellar temperature of the default parameter set of HATS-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3405,
+  "effectiveTemperatureSource": "Bakos et al. 2020, the stellar temperature of the default parameter set of HATS-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract)",
+  "surfaceGravityLogg": 4.77,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hats-71.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.765, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

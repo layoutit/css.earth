@@ -1,0 +1,46 @@
+{
+  "id": "kepler-560",
+  "name": "Kepler-560",
+  "system": "Kepler-560 system",
+  "description": "Star of 3,556 K, 109 parsecs away, with 1 transiting planet.",
+  "target": "Kepler-560",
+  "gaia": "2082162147537254400",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "credit": "Morton et al. 2016"
+  },
+  "radius": {
+    "value": 0.33,
+    "source": "Morton et al. 2016, the stellar radius of the default parameter set of Kepler-560 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "uncertainty": 0.016
+  },
+  "mass": {
+    "value": 0.34,
+    "source": "Morton et al. 2016, the stellar mass of the default parameter set of Kepler-560 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "uncertainty": 0.021
+  },
+  "temperature": {
+    "value": 3556,
+    "source": "Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-560 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract",
+    "uncertainty": 30.41
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-560 b crosses Kepler-560 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Morton et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MORTON_ET_AL__2016): st_teff 3556, st_rad 0.33, st_mass 0.34",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-560b",
+      "title": "Kepler-560b",
+      "revision": "1328051697",
+      "card": "Kepler-560b, also called Kepler-560 Bb, is a confirmed exoplanet orbiting the secondary star of the binary star system Kepler-560.",
+      "introduction": "It is 287 light-years away."
+    }
+  },
+  "notes": [],
+  "order": 3768
+}

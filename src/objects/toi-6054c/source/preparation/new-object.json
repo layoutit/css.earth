@@ -1,0 +1,25 @@
+{
+  "host": "toi-6054",
+  "planets": [
+    {
+      "id": "toi-6054c",
+      "name": "TOI-6054 c",
+      "description": "Transiting planet of TOI-6054 with a 12.6-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..150K/abstract",
+        "credit": "Kroft et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KROFT_ET_AL__2025",
+        "planetName": "TOI-6054.02"
+      },
+      "text": {
+        "card": "TOI-6054 c was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-6054. Its orbit and size follow Kroft et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KROFT_ET_AL__2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 12.563636, pl_radj 0.25158398, pl_bmassj 0.02926107"
+      },
+      "order": 4608
+    }
+  ]
+}

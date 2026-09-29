@@ -1,0 +1,24 @@
+{
+  "host": "k2-285",
+  "planets": [
+    {
+      "id": "k2-285e",
+      "name": "K2-285 e",
+      "description": "Transiting planet of K2-285 with a 14.8-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P/abstract",
+        "credit": "Palle et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PALLE_ET_AL__2019"
+      },
+      "text": {
+        "card": "K2-285 e was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is one of 4 planets known around K2-285. Its orbit and size follow Palle et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PALLE_ET_AL__2019): disc_year 2018, disc_facility K2, sy_pnum 4; pl_orbper 14.76289, pl_radj 0.17396735, pl_bmassj 0.0336658"
+      },
+      "order": 3463
+    }
+  ]
+}

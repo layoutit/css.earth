@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-37b",
+  "radiusKm": 1975.9,
+  "radiusSource": "Radius 0.02763855 Jupiter radii from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 1,975.9 km at 71,492 km per Jupiter radius. No mass is measured: Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract) gives only an upper limit of 0.00248562 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 13.367308,
+  "orbitalPeriodSource": "Barclay et al. 2013 (2013Natur.494..452B), via the NASA Exoplanet Archive ps table (pl_refname BARCLAY_ET_AL__2013): P 13.367308 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-37 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.00248562 Jupiter masses: Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)."
+}

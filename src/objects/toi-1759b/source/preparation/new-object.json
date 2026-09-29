@@ -1,0 +1,24 @@
+{
+  "host": "toi-1759",
+  "planets": [
+    {
+      "id": "toi-1759b",
+      "name": "TOI-1759 b",
+      "description": "Transiting planet of TOI-1759 with a 18.8-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..133E/abstract",
+        "credit": "Espinoza et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ESPINOZA_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-1759 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1759. Its orbit and size follow Espinoza et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESPINOZA_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 18.849975, pl_radj 0.28013252, pl_bmassj 0.0339806"
+      },
+      "order": 4138
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-measured-spectrum@1",
+  "source": "NASA Exoplanet Archive emissionspec, Cubillos et al. 2014",
+  "units": {
+    "x": "um",
+    "y": "%"
+  },
+  "uncertainty": "published 1-sigma, asymmetric (err1, err2)",
+  "observation": "Spitzer Space Telescope satellite, Infrared Array Camera (IRAC)",
+  "measurements": [
+    {
+      "x": 3.6,
+      "xLow": 3.225,
+      "xHigh": 3.975,
+      "y": 0.083,
+      "minus": 0.024,
+      "plus": 0.024
+    },
+    {
+      "x": 4.5,
+      "xLow": 3.9925,
+      "xHigh": 5.0075,
+      "y": 0.094,
+      "minus": 0.024,
+      "plus": 0.024
+    },
+    {
+      "x": 5.8,
+      "xLow": 5.0875,
+      "xHigh": 6.5125,
+      "y": 0.162,
+      "minus": 0.042,
+      "plus": 0.042
+    },
+    {
+      "x": 8,
+      "xLow": 6.5475,
+      "xHigh": 9.4525,
+      "y": 0.213,
+      "minus": 0.042,
+      "plus": 0.042
+    }
+  ]
+}

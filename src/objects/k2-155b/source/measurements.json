@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "k2-155b",
+  "radiusKm": 11480.6,
+  "radiusSource": "Radius 0.16058524 Jupiter radii from Díez Alonso et al. 2018 (2018MNRAS.476L..50D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract): 11,480.6 km at 71,492 km per Jupiter radius. GM from the mass 0.0123 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 6.34365,
+  "orbitalPeriodSource": "Hirano et al. 2018 (2018AJ....155..124H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): P 6.34365 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-155 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.0123 Jupiter masses: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html)."
+}

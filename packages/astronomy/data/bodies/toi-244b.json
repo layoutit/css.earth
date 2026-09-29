@@ -1,0 +1,28 @@
+{
+ "id": "toi-244b",
+ "classification": "exoplanet",
+ "order": 4307,
+ "physical": {
+  "name": "TOI-244 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 9694.7,
+  "gravitationalParameterKm3PerS2": 1068248.71,
+  "parent": "toi-244"
+ },
+ "physicalNotes": "Radius 0.13560555 Jupiter radii from Castro-González et al. 2023 (2023A&A...675A..52C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract): 9,694.7 km at 71,492 km per Jupiter radius. GM from the mass 0.00843222 Jupiter masses (Castro-González et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...675A..52C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.39726,
+  "semiMajorAxisStellarRadii": 28.1,
+  "inclinationDegrees": 88.32,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59488.6482,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): P 7.39726 d",
+   "shape": "Castro-González et al. 2023 (2023A&A...675A..52C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2023): a/R* 28.1; Castro-González et al. 2023 (2023A&A...675A..52C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2023): inclination 88.32 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): transit mid-time 2459489.1482 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 7 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

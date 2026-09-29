@@ -1,0 +1,30 @@
+{
+ "id": "toi-6894",
+ "classification": "star",
+ "order": 4661,
+ "physical": {
+  "name": "TOI-6894",
+  "horizonsCode": null,
+  "meanRadiusKm": 158341.3,
+  "gravitationalParameterKm3PerS2": 27471475088.68145,
+  "parent": null,
+  "effectiveTemperatureK": 3007
+ },
+ "physicalNotes": "Radius 0.2276 +/- 0.0057 solar radii from Bryant et al. 2025, the stellar radius of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract): 158,341 km at 695,700 km per solar radius. Mass 0.207 +/- 0.011 solar masses from Bryant et al. 2025, the stellar mass of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract); GM is that mass times the JPL solar GM. Temperature 3007 +/- 58 K from Bryant et al. 2025, the stellar temperature of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 173.46912090290644,
+  "declinationDegrees": 12.451093707454623,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 73.07693075727921,
+  "properMotionRaMasPerYear": -146.89664676878962,
+  "properMotionDecMasPerYear": 22.227129812920445,
+  "radialVelocityKmPerS": 0,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3917278287286247808 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-6894/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 13.6842 +/- 0.0532 mas (same row, RUWE 1.01): 73.08 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -146.897, 22.227 mas/yr",
+   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 3917278287286247808 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 20,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%203917278287286247808)"
+  }
+ }
+}

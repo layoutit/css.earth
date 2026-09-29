@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-969",
+  "card": {
+    "text": "TOI-969 b crosses TOI-969 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243879",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A.109L/abstract",
+        "label": "Lillo-Box et al. (2023), Astronomy & Astrophysics 669 A109",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LILLO_BOX_ET_AL_2023): st_teff 4435, st_rad 0.671, st_mass 0.734"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lillo-Box et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243879",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A.109L/abstract",
+        "label": "Lillo-Box et al. (2023), Astronomy & Astrophysics 669 A109",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LILLO_BOX_ET_AL_2023): st_teff 4435, st_rad 0.671, st_mass 0.734"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

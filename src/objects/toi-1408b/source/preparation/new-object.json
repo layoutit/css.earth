@@ -1,0 +1,24 @@
+{
+  "host": "toi-1408",
+  "planets": [
+    {
+      "id": "toi-1408b",
+      "name": "TOI-1408 b",
+      "description": "Transiting planet of TOI-1408 with a 4.42-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract",
+        "credit": "Korth et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KORTH_ET_AL_2024"
+      },
+      "text": {
+        "card": "TOI-1408 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1408. Its orbit and size follow Korth et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KORTH_ET_AL_2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.4247042, pl_radj 2.23035445, pl_bmassj 1.86578665"
+      },
+      "order": 4020
+    }
+  ]
+}

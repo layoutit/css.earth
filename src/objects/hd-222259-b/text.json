@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-222259-b",
+  "card": {
+    "text": "HD 222259B is a star of 4,658 K, bound to DS Tuc A 237 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 6387058411482257536 and 6387058411482257280, sep_AU 237.030239552817818, R_chance_align 7.216782516189899422e-08"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "HD 222259B shares its motion through space with DS Tuc A, 237 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 6387058411482257536 and 6387058411482257280, sep_AU 237.030239552817818, R_chance_align 7.216782516189899422e-08"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

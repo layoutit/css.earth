@@ -1,0 +1,39 @@
+{
+  "id": "k2-210",
+  "name": "K2-210",
+  "system": "K2-210 system",
+  "description": "Star of 5,500 K, 177 parsecs away, with 1 transiting planet.",
+  "target": "K2-210",
+  "gaia": "2538051863476537984",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract",
+    "credit": "Adams et al. 2021"
+  },
+  "radius": {
+    "value": 0.89,
+    "source": "Adams et al. 2021, the stellar radius of the default parameter set of K2-210 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract",
+    "uncertainty": 0.15
+  },
+  "mass": {
+    "value": 0.911717,
+    "source": "Mayo et al. 2018, the stellar mass of K2-210 b's parameter set from Mayo et al. 2018 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract",
+    "uncertainty": 0.02297
+  },
+  "temperature": {
+    "value": 5500,
+    "source": "Adams et al. 2021, the stellar temperature of the default parameter set of K2-210 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract",
+    "uncertainty": 45
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-210 b crosses K2-210 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Adams et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ADAMS_ET_AL__2021, MAYO_ET_AL__2018): st_teff 5500, st_rad 0.89, st_mass 0.911717"
+  },
+  "notes": [],
+  "order": 3391
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-7149b",
+  "card": {
+    "text": "TOI-7149 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adf6db",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract",
+        "label": "Kanodia et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KANODIA_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.65206166, pl_radj 1.18, pl_bmassj 0.705"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-7149. Its orbit and size follow Kanodia et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adf6db",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract",
+        "label": "Kanodia et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KANODIA_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.65206166, pl_radj 1.18, pl_bmassj 0.705"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

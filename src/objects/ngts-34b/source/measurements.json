@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "ngts-34b",
+  "radiusKm": 23280.1,
+  "radiusSource": "Radius 0.32563175 Jupiter radii from Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract): 23,280.1 km at 71,492 km per Jupiter radius. GM from the mass 0.06009532 Jupiter masses (Kendall et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.547f2189K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 43.12655,
+  "orbitalPeriodSource": "Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive ps table (pl_refname KENDALL_ET_AL_2026): P 43.12655 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of NGTS-34 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.06009532 Jupiter masses: Kendall et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.547f2189K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract)."
+}

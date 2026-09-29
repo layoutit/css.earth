@@ -1,0 +1,31 @@
+{
+ "id": "toi-5398b",
+ "classification": "exoplanet",
+ "order": 4519,
+ "physical": {
+  "name": "TOI-5398 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 65694.4,
+  "gravitationalParameterKm3PerS2": 23397843.26,
+  "parent": "toi-5398"
+ },
+ "physicalNotes": "Radius 0.91890603 Jupiter radii from Mantovan et al. 2024 (2024A&A...682A.129M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.129M/abstract): 65,694.4 km at 71,492 km per Jupiter radius. GM from the mass 0.18469085 Jupiter masses (Mantovan et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...682A.129M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...682A.129M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.590547,
+  "semiMajorAxisStellarRadii": 20,
+  "inclinationDegrees": 89.21,
+  "eccentricity": 0.13,
+  "argumentOfPeriapsisDegrees": 92,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59615.99232,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Mantovan et al. 2024 (2024A&A...682A.129M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2024): P 10.590547 d",
+   "shape": "Mantovan et al. 2024 (2024A&A...682A.129M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2024): a/R* 20; Mantovan et al. 2024 (2024A&A...682A.129M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2024): inclination 89.21 degrees",
+   "eccentricity": "Mantovan et al. 2024 (2024A&A...682A.129M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2024): e 0.13",
+   "argumentOfPeriapsis": "Mantovan et al. 2024 (2024A&A...682A.129M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2024): omega 92 degrees",
+   "phase": "Mantovan et al. 2024 (2024A&A...682A.129M), via the NASA Exoplanet Archive ps table (pl_refname MANTOVAN_ET_AL_2024): transit mid-time 2459616.49232 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

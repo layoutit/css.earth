@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-93b",
+  "displayName": "Kepler-93 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B",
+          "label": "Bonomo et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.73 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B",
+          "label": "Bonomo et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.7 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202346211",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B",
+          "label": "Bonomo et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-93; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-93b-lens-shape.webp",
+        "surface": "kepler-93b-surface-shape@2x.webp",
+        "poles": "kepler-93b-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-93b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-93 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-93's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kepler-93b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-93b/kepler-93b-system-orbits.svg",
+      "alt": "The orbits of Kepler-93's planets in this map from above, to scale, with Kepler-93 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-93b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B"
+      }
+    },
+    {
+      "id": "kepler-93b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kepler-93b/kepler-93b-transit.svg",
+      "alt": "Kepler-93 b crossing its star, as TESS recorded it: 3 sectors (55, 74, 75) of the SPOC pipeline's 2-minute light curves of TIC 137151335, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kepler-93b-tess-sector-55",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022217014003-s0055-0000000137151335-0242-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bonomo et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+      "credit": "Bonomo et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-93b.json",
+      "credit": "Radius from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive; mass from Bonomo et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...677A..33B), via the NASA Exoplanet Archive; orbit from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive"
+    }
+  }
+}

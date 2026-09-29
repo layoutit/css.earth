@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5082",
+  "card": {
+    "text": "TOI-5082 b crosses TOI-5082 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad3068",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract",
+        "label": "Hord et al. (2024), The Astronomical Journal 167 233",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HORD_ET_AL__2024): st_teff 5670, st_rad 0.93, st_mass 0.99665"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hord et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad3068",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract",
+        "label": "Hord et al. (2024), The Astronomical Journal 167 233",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HORD_ET_AL__2024): st_teff 5670, st_rad 0.93, st_mass 0.99665"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

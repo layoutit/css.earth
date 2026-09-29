@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-1238",
+  "angularDiameterMas": 0.08,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 403,506 km at 70.64 pc = 0.08 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 70.64220754258344,
+  "distanceSource": "Gaia DR3 parallax 14.1558 +/- 0.0123 mas (same row, RUWE 1.30): 70.64 pc, no zero-point correction",
+  "radiusKm": 403506,
+  "radiusSource": "Radius 0.58 +/- 0.02 solar radii from González-Álvarez et al. 2022, the stellar radius of the default parameter set of TOI-1238 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A.138G/abstract): 403,506 km at 695,700 km per solar radius. Mass 0.59 +/- 0.02 solar masses from González-Álvarez et al. 2022, the stellar mass of the default parameter set of TOI-1238 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A.138G/abstract); GM is that mass times the JPL solar GM. Temperature 4089 +/- 54 K from González-Álvarez et al. 2022, the stellar temperature of the default parameter set of TOI-1238 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A.138G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4089,
+  "effectiveTemperatureSource": "González-Álvarez et al. 2022, the stellar temperature of the default parameter set of TOI-1238 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A.138G/abstract)",
+  "surfaceGravityLogg": 4.68,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1238.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.682, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

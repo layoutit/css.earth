@@ -1,0 +1,31 @@
+{
+ "id": "toi-5713b",
+ "classification": "exoplanet",
+ "order": 4560,
+ "physical": {
+  "name": "TOI-5713 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 11289.2,
+  "gravitationalParameterKm3PerS2": 1507569.73,
+  "parent": "toi-5713"
+ },
+ "physicalNotes": "Radius 0.1579091 Jupiter radii from Ghachoui et al. 2024 (2024A&A...690A.263G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract): 11,289.2 km at 71,492 km per Jupiter radius. GM from the mass 0.0119 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.441989,
+  "semiMajorAxisStellarRadii": 43.2,
+  "inclinationDegrees": 89.37,
+  "eccentricity": 0.24,
+  "argumentOfPeriapsisDegrees": 221,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58745.1776,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Ghachoui et al. 2024 (2024A&A...690A.263G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL__2024): P 10.441989 d",
+   "shape": "Ghachoui et al. 2024 (2024A&A...690A.263G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL__2024): a/R* 43.2; Ghachoui et al. 2024 (2024A&A...690A.263G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL__2024): inclination 89.37 degrees",
+   "eccentricity": "Ghachoui et al. 2024 (2024A&A...690A.263G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL__2024): e 0.24",
+   "argumentOfPeriapsis": "Ghachoui et al. 2024 (2024A&A...690A.263G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL__2024): omega -139 degrees, stored as 221",
+   "phase": "Ghachoui et al. 2024 (2024A&A...690A.263G), via the NASA Exoplanet Archive ps table (pl_refname GHACHOUI_ET_AL__2024): transit mid-time 2458745.6776 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

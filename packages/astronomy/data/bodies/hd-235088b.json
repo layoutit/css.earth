@@ -1,0 +1,28 @@
+{
+ "id": "hd-235088b",
+ "classification": "exoplanet",
+ "order": 3207,
+ "physical": {
+  "name": "HD 235088 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 12641.4,
+  "gravitationalParameterKm3PerS2": 1654191.65,
+  "parent": "hd-235088"
+ },
+ "physicalNotes": "Radius 0.1768225 Jupiter radii from Nardiello et al. 2025 (2025A&A...693A..32N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N/abstract): 12,641.4 km at 71,492 km per Jupiter radius. GM from the mass 0.01305736 Jupiter masses (Nardiello et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...693A..32N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.4341456,
+  "semiMajorAxisStellarRadii": 19.71,
+  "inclinationDegrees": 88.74,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60548.811109,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.4341456 d",
+   "shape": "Nardiello et al. 2025 (2025A&A...693A..32N), via the NASA Exoplanet Archive ps table (pl_refname NARDIELLO_ET_AL__2025): a/R* 19.71; Nardiello et al. 2025 (2025A&A...693A..32N), via the NASA Exoplanet Archive ps table (pl_refname NARDIELLO_ET_AL__2025): inclination 88.74 degrees",
+   "eccentricity": "Nardiello et al. 2025 (2025A&A...693A..32N), via the NASA Exoplanet Archive ps table (pl_refname NARDIELLO_ET_AL__2025): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460549.311109 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

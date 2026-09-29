@@ -1,0 +1,30 @@
+{
+ "id": "toi-2274",
+ "classification": "star",
+ "order": 4278,
+ "physical": {
+  "name": "TOI-2274",
+  "horizonsCode": null,
+  "meanRadiusKm": 438986.7,
+  "gravitationalParameterKm3PerS2": 81220013305.6669,
+  "parent": null,
+  "effectiveTemperatureK": 3943
+ },
+ "physicalNotes": "Radius 0.631 +/- 0.019 solar radii from Peláez-Torres et al. 2024, the stellar radius of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract): 438,987 km at 695,700 km per solar radius. Mass 0.612 +/- 0.0202 solar masses from Peláez-Torres et al. 2024, the stellar mass of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract); GM is that mass times the JPL solar GM. Temperature 3943 +/- 157 K from Peláez-Torres et al. 2024, the stellar temperature of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 277.45930836008824,
+  "declinationDegrees": 40.5414238409092,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 48.88152939946607,
+  "properMotionRaMasPerYear": -14.871734949930865,
+  "properMotionDecMasPerYear": 88.03227705367803,
+  "radialVelocityKmPerS": -20.02825,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2110345512468201344 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-2274/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 20.4576 +/- 0.0123 mas (same row, RUWE 1.06): 48.88 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -14.872, 88.032 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -20.03 +/- 0.38 km/s"
+  }
+ }
+}

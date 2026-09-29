@@ -1,0 +1,25 @@
+{
+  "host": "kepler-974",
+  "planets": [
+    {
+      "id": "kepler-974c",
+      "name": "Kepler-974 c",
+      "description": "Transiting planet of Kepler-974 with a 0.177-day year, found in 2013.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...773L..15R/abstract",
+        "credit": "Rappaport et al. 2013"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "RAPPAPORT_ET_AL__2013",
+        "planetName": "KOI-1843.03"
+      },
+      "text": {
+        "card": "Kepler-974 c was found in 2013 by Kepler as it crossed its star.",
+        "introduction": "It is one of 2 planets known around Kepler-974. Its orbit and size follow Rappaport et al. 2013's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RAPPAPORT_ET_AL__2013): disc_year 2013, disc_facility Kepler, sy_pnum 2; pl_orbper 0.1768913, pl_radj 0.05442065, pl_bmassj 0.02517081"
+      },
+      "order": 3793
+    }
+  ]
+}

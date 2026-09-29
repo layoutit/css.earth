@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "k2-167b",
+  "radiusKm": 15084.8,
+  "radiusSource": "Radius 0.211 Jupiter radii from Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract): 15,084.8 km at 71,492 km per Jupiter radius. GM from the mass 0.02045129 Jupiter masses (Bonomo et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...677A..33B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 9.97857,
+  "orbitalPeriodSource": "Ikwut-Ukwa et al. 2020 (2020AJ....160..209I), via the NASA Exoplanet Archive ps table (pl_refname IKWUT_UKWA_ET_AL__2020): P 9.97857 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-167 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02045129 Jupiter masses: Bonomo et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)."
+}

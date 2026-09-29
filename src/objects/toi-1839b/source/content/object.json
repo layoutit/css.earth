@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-1839b",
+  "displayName": "TOI-1839 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.3 Earth radii",
+        "source": {
+          "catalogueId": "arxiv-2609-05413",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C",
+          "label": "Castro-González et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "34 hours",
+        "source": {
+          "catalogueId": "arxiv-2609-05413",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C",
+          "label": "Castro-González et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "7.1 Earth masses",
+        "source": {
+          "catalogueId": "arxiv-2609-05413",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C",
+          "label": "Castro-González et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-1839; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-1839b-lens-shape.webp",
+        "surface": "toi-1839b-surface-shape@2x.webp",
+        "poles": "toi-1839b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-1839b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-1839 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-1839's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-1839b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-1839b/toi-1839b-system-orbits.svg",
+      "alt": "The orbits of TOI-1839's planets in this map from above, to scale, with TOI-1839 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-1839b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C"
+      }
+    },
+    {
+      "id": "toi-1839b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-1839b/toi-1839b-transit.svg",
+      "alt": "TOI-1839 b crossing its star, as TESS recorded it: 3 sectors (23, 46, 50) of the SPOC pipeline's 2-minute light curves of TIC 381714186, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-1839b-tess-sector-23",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020078014623-s0023-0000000381714186-0177-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Castro-González et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract",
+      "credit": "Castro-González et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-1839b.json",
+      "credit": "Radius from Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive; mass from Castro-González et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260905413C), via the NASA Exoplanet Archive; orbit from Castro-González et al. 2026 (2026arXiv260905413C), via the NASA Exoplanet Archive"
+    }
+  }
+}

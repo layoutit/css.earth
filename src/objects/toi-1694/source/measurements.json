@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-1694",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 564,908 km at 124.37 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 124.37170276862135,
+  "distanceSource": "Gaia DR3 parallax 8.0404 +/- 0.0272 mas (same row, RUWE 1.38): 124.37 pc, no zero-point correction",
+  "radiusKm": 564908.4,
+  "radiusSource": "Radius 0.812 +/- 0.023 solar radii from Mancini et al. 2026, the stellar radius of the default parameter set of TOI-1694 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract): 564,908 km at 695,700 km per solar radius. Mass 0.828 +/- 0.039 solar masses from Mancini et al. 2026, the stellar mass of the default parameter set of TOI-1694 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract); GM is that mass times the JPL solar GM. Temperature 5005 +/- 65 K from Mancini et al. 2026, the stellar temperature of the default parameter set of TOI-1694 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5005,
+  "effectiveTemperatureSource": "Mancini et al. 2026, the stellar temperature of the default parameter set of TOI-1694 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract)",
+  "surfaceGravityLogg": 4.54,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1694.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.537, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

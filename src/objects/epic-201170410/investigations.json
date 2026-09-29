@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "epic-201170410",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3786541956697681664: position at J2016.0. Distance: Gaia DR3 parallax 4.7219 +/- 0.4783 mas (same row, RUWE 8.59): 211.78 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published. Proper motion: Gaia DR3 (same row): 13.151, -15.791 mas/yr. Radial velocity from No catalogued radial velocity: Gaia DR3 measures none for source 3786541956697681664 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 70,000 of its distance per century.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%203786541956697681664"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.282 +/- 0.074 solar radii from del Ser & Fors 2020, the stellar radius of the default parameter set of EPIC 201170410.02 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.2778D/abstract). Mass 0.287 +/- 0.101 solar masses from del Ser & Fors 2020, the stellar mass of the default parameter set of EPIC 201170410.02 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.2778D/abstract). Temperature 3648 +/- 172 K from del Ser & Fors 2020, the stellar temperature of the default parameter set of EPIC 201170410.02 in the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.2778D/abstract"
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Colour",
+      "status": "included",
+      "finding": "A Planck spectrum at 3,648 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #ffcb93. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.2778D/abstract"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,648 K and log g 5 (u1 0.349, u2 0.399): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+ "id": "toi-6109",
+ "classification": "star",
+ "order": 4613,
+ "physical": {
+  "name": "TOI-6109",
+  "horizonsCode": null,
+  "meanRadiusKm": 710309.7,
+  "gravitationalParameterKm3PerS2": 136693813243.19756,
+  "parent": null,
+  "effectiveTemperatureK": 5660
+ },
+ "physicalNotes": "Radius 1.021 +/- 0.038 solar radii from Dattilo et al. 2025, the stellar radius of the default parameter set of TOI-6109 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract): 710,310 km at 695,700 km per solar radius. Mass 1.03 +/- 0.05 solar masses from Dattilo et al. 2025, the stellar mass of the default parameter set of TOI-6109 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract); GM is that mass times the JPL solar GM. Temperature 5660 +/- 50 K from Dattilo et al. 2025, the stellar temperature of the default parameter set of TOI-6109 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 50.13192561723456,
+  "declinationDegrees": 42.6069524398731,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 148.5110175401713,
+  "properMotionRaMasPerYear": 27.015054416403373,
+  "properMotionDecMasPerYear": -28.61168875131775,
+  "radialVelocityKmPerS": 1.6719972,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 241035596174886016 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-6109/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.7335 +/- 0.0182 mas (same row, RUWE 1.07): 148.51 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 27.015, -28.612 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 1.67 +/- 0.64 km/s"
+  }
+ }
+}

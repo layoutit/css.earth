@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/bd-20-594b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "bd-20-594b-orbits",
+      "title": "BD+20 594 b: orbits around BD+20 594",
+      "output": "bd-20-594b-system-orbits.svg",
+      "system": "bd-20-594",
+      "highlight": "bd-20-594b",
+      "description": "The orbits of BD+20 594's planets in this map from above, to scale, with BD+20 594 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Espinoza et al. 2016 (2016ApJ...830...43E), via the NASA Exoplanet Archive ps table (pl_refname ESPINOZA_ET_AL__2016): P 41.6855 d"
+      }
+    }
+  ]
+}

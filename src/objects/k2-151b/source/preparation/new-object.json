@@ -1,0 +1,24 @@
+{
+  "host": "k2-151",
+  "planets": [
+    {
+      "id": "k2-151b",
+      "name": "K2-151 b",
+      "description": "Transiting planet of K2-151 with a 3.84-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+        "credit": "Livingston et al. 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LIVINGSTON_ET_AL__2018"
+      },
+      "text": {
+        "card": "K2-151 b was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-151. Its orbit and size follow Livingston et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 1; pl_orbper 3.835592, pl_radj 0.1329289, pl_bmassj 0.00889"
+      },
+      "order": 3332
+    }
+  ]
+}

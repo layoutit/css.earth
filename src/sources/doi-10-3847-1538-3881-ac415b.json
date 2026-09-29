@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac415b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dalba et al. (2022): The TESS-Keck Survey. VIII. Confirmation of a Transiting Giant Planet on an Eccentric 261 Day Orbit with the Automated Planet Finder Telescope*",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2201.04146"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac415b"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....163...61D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac415b",
+      "label": "The Astronomical Journal 163 61"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Dalba et al. (2022), The Astronomical Journal 163 61",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D"
+    }
+  ],
+  "publisher": "The Astronomical Journal 163 61",
+  "creators": [
+    "Paul A. Dalba",
+    "Stephen R. Kane",
+    "Diana Dragomir",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

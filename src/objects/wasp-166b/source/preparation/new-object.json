@@ -1,0 +1,24 @@
+{
+  "host": "wasp-166",
+  "planets": [
+    {
+      "id": "wasp-166b",
+      "name": "WASP-166 b",
+      "description": "Transiting planet of WASP-166 with a 5.44-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+        "credit": "Hellier et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HELLIER_ET_AL__2019"
+      },
+      "text": {
+        "card": "WASP-166 b was found in 2019 by WASP-South as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-166. Its orbit and size follow Hellier et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HELLIER_ET_AL__2019): disc_year 2019, disc_facility WASP-South, sy_pnum 1; pl_orbper 5.4435354, pl_radj 0.63, pl_bmassj 0.101"
+      },
+      "order": 4799
+    }
+  ]
+}

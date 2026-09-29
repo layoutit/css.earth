@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-756b",
+  "radiusKm": 17922.5,
+  "radiusSource": "Radius 0.25069184 Jupiter radii from Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract): 17,922.5 km at 71,492 km per Jupiter radius. GM from the mass 0.03092864 Jupiter masses (Parc et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...702A.138P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.2392495,
+  "orbitalPeriodSource": "Parc et al. 2025 (2025A&A...702A.138P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL__2025): P 1.2392495 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-756 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.03092864 Jupiter masses: Parc et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...702A.138P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract)."
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1260",
+  "card": {
+    "text": "3 planets cross TOI-1260 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stac3639",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract",
+        "label": "Lam et al. (2023), Monthly Notices of the Royal Astronomical Society 519 1437-1451",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LAM_ET_AL_2023): st_teff 4227, st_rad 0.672, st_mass 0.679"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1260",
+        "url": "https://en.wikipedia.org/wiki/TOI-1260",
+        "label": "Wikipedia, \"TOI-1260\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374438825",
+        "quote": "TOI-1260 is a single high-proper-motion K-type main-sequence star in the constellation of Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lam et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stac3639",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract",
+        "label": "Lam et al. (2023), Monthly Notices of the Royal Astronomical Society 519 1437-1451",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LAM_ET_AL_2023): st_teff 4227, st_rad 0.672, st_mass 0.679"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1260",
+        "url": "https://en.wikipedia.org/wiki/TOI-1260",
+        "label": "Wikipedia, \"TOI-1260\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374438825",
+        "quote": "Its surface temperature is 4227±85 K. TOI-1260 has an orange hue and is too faint to be seen with the naked eye, or a small telescope."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

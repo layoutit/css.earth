@@ -1,0 +1,24 @@
+{
+  "host": "k2-125",
+  "planets": [
+    {
+      "id": "k2-125b",
+      "name": "K2-125 b",
+      "description": "Transiting planet of K2-125 with a 21.8-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+        "credit": "Dressing et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DRESSING_ET_AL__2017"
+      },
+      "text": {
+        "card": "K2-125 b was found in 2017 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-125. Its orbit and size follow Dressing et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRESSING_ET_AL__2017): disc_year 2017, disc_facility K2, sy_pnum 1; pl_orbper 21.750264, pl_radj 0.19448657, pl_bmassj 0.017"
+      },
+      "order": 3294
+    }
+  ]
+}

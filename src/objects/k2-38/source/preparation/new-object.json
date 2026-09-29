@@ -1,0 +1,48 @@
+{
+  "id": "k2-38",
+  "name": "K2-38",
+  "system": "K2-38 system",
+  "description": "Star of 5,731 K, 193 parsecs away, with 1 transiting planet.",
+  "target": "K2-38",
+  "gaia": "6237129658760381056",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...641A..92T/abstract",
+    "credit": "Toledo-Padrón et al. 2020"
+  },
+  "radius": {
+    "value": 1.06,
+    "source": "Toledo-Padrón et al. 2020, the stellar radius of the default parameter set of K2-38 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...641A..92T/abstract",
+    "uncertainty": 0.09
+  },
+  "mass": {
+    "value": 1.03,
+    "source": "Toledo-Padrón et al. 2020, the stellar mass of the default parameter set of K2-38 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...641A..92T/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 5731,
+    "source": "Toledo-Padrón et al. 2020, the stellar temperature of the default parameter set of K2-38 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...641A..92T/abstract",
+    "uncertainty": 66
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-38 c crosses K2-38 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Toledo-Padrón et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname TOLEDO_PADR_OACUTE_N_ET_AL__2020): st_teff 5731, st_rad 1.06, st_mass 1.03",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/K2-38b",
+      "title": "K2-38b",
+      "revision": "1374391802",
+      "card": "K2-38b, also designated EPIC 204221263 b, is a massive rocky exoplanet closely orbiting a Sun-like star and is one of the densest planets ever found.",
+      "introduction": "Discovered in 2016 by Crossfield et al. and later characterized by Sinukoff et al., K2-38b is a rocky super-Earth about 55% larger than Earth but about 12 times more massive indicating a composition rich in iron and an extremely high surface gravity."
+    }
+  },
+  "notes": [
+    "K2-38 b: Toledo-Padrón et al. 2020's mass 0.02296837 Jupiter masses in 0.13738983 Jupiter radii is 11.0 g/cm^3, outside what the records accept"
+  ],
+  "order": 3554
+}

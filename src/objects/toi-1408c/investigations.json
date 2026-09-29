@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1408c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.19805548 Jupiter radii from Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02391227 Jupiter masses: Korth et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...971L..28K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.2222094 d; Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive ps table (pl_refname KORTH_ET_AL_2024): a/R* 5.04; Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive ps table (pl_refname KORTH_ET_AL_2024): inclination 82.6 degrees; Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive ps table (pl_refname KORTH_ET_AL_2024): e 0.1353; Korth et al. 2024 (2024ApJ...971L..28K), via the NASA Exoplanet Archive ps table (pl_refname KORTH_ET_AL_2024): omega 286.3 degrees; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460479.047419 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract"
+      ]
+    }
+  ]
+}

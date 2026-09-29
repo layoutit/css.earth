@@ -1,0 +1,25 @@
+{
+  "host": "koi-4777",
+  "planets": [
+    {
+      "id": "koi-4777b",
+      "name": "KOI-4777 b",
+      "description": "Transiting planet of KOI-4777 with a 0.412-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163....3C/abstract",
+        "credit": "Cañas et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CA_NTILDE_AS_ET_AL__2022",
+        "planetName": "KOI-4777.01"
+      },
+      "text": {
+        "card": "KOI-4777 b was found in 2022 by Kepler as it crossed its star.",
+        "introduction": "It is the only planet known around KOI-4777. Its orbit and size follow Cañas et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CA_NTILDE_AS_ET_AL__2022): disc_year 2022, disc_facility Kepler, sy_pnum 1; pl_orbper 0.412, pl_radj 0.04549923, pl_bmassj 0.3121181"
+      },
+      "order": 3644
+    }
+  ]
+}

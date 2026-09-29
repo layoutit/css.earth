@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-106315b",
+  "radiusKm": 15562.5,
+  "radiusSource": "Radius 0.21768222 Jupiter radii from Barros et al. 2017 (2017A&A...608A..25B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract): 15,562.5 km at 71,492 km per Jupiter radius. GM from the mass 0.03964383 Jupiter masses (Barros et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017A&A...608A..25B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 9.58028883839,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 9.58028883839 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 106315 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.03964383 Jupiter masses: Barros et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017A&A...608A..25B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract)."
+}

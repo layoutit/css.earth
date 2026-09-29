@@ -1,0 +1,24 @@
+{
+  "host": "k2-32",
+  "planets": [
+    {
+      "id": "k2-32e",
+      "name": "K2-32 e",
+      "description": "Transiting planet of K2-32 with a 4.35-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+        "credit": "Lillo-Box et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LILLO_BOX_ET_AL__2020"
+      },
+      "text": {
+        "card": "K2-32 e was found in 2019 by K2 as it crossed its star.",
+        "introduction": "It is one of 4 planets known around K2-32. Its orbit and size follow Lillo-Box et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LILLO_BOX_ET_AL__2020): disc_year 2019, disc_facility K2, sy_pnum 4; pl_orbper 4.34934, pl_radj 0.10812758, pl_bmassj 0.00660734"
+      },
+      "order": 3491
+    }
+  ]
+}

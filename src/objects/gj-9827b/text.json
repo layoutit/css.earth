@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-9827b",
+  "card": {
+    "text": "GJ 9827 b was found in 2017 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348592",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..22P/abstract",
+        "label": "Passegger et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASSEGGER_ET_AL_2024): disc_year 2017, disc_facility K2, sy_pnum 3; pl_orbper 1.2089755, pl_radj 0.12846842, pl_bmassj 0.01346639"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 3 planets known around GJ 9827. Its orbit and size follow Passegger et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348592",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..22P/abstract",
+        "label": "Passegger et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASSEGGER_ET_AL_2024): disc_year 2017, disc_facility K2, sy_pnum 3; pl_orbper 1.2089755, pl_radj 0.12846842, pl_bmassj 0.01346639"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-757b",
+  "card": {
+    "text": "TOI-757 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae1767",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A/abstract",
+        "label": "Alqasim et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ALQASIM_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 17.46819, pl_radj 0.22303545, pl_bmassj 0.03303669"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-757. Its orbit and size follow Alqasim et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae1767",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A/abstract",
+        "label": "Alqasim et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ALQASIM_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 17.46819, pl_radj 0.22303545, pl_bmassj 0.03303669"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

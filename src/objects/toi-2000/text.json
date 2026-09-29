@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2000",
+  "card": {
+    "text": "2 planets cross TOI-2000 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1666",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract",
+        "label": "Sha et al. (2023), Monthly Notices of the Royal Astronomical Society 524 1113-1138",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SHA_ET_AL_2023): st_teff 5611, st_rad 1.134, st_mass 1.082"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Sha et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1666",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract",
+        "label": "Sha et al. (2023), Monthly Notices of the Royal Astronomical Society 524 1113-1138",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SHA_ET_AL_2023): st_teff 5611, st_rad 1.134, st_mass 1.082"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-486",
+  "card": {
+    "text": "GJ 486 b crosses GJ 486 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad8161",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract",
+        "label": "Mansfield et al. (2024), The Astrophysical Journal Letters 975 L22",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WEINER_MANSFIELD_ET_AL__2024): st_teff 3317, st_rad 0.3243, st_mass 0.312"
+      },
+      {
+        "catalogueId": "wikipedia-gliese-486",
+        "url": "https://en.wikipedia.org/wiki/Gliese_486",
+        "label": "Wikipedia, \"Gliese 486\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1356636395",
+        "quote": "Gliese 486, also known as Wolf 437 and formally named Gar, is a red dwarf star 26.4 light-years away in the constellation Virgo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Weiner Mansfield et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad8161",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract",
+        "label": "Mansfield et al. (2024), The Astrophysical Journal Letters 975 L22",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WEINER_MANSFIELD_ET_AL__2024): st_teff 3317, st_rad 0.3243, st_mass 0.312"
+      },
+      {
+        "catalogueId": "wikipedia-gliese-486",
+        "url": "https://en.wikipedia.org/wiki/Gliese_486",
+        "label": "Wikipedia, \"Gliese 486\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1356636395",
+        "quote": "It hosts one known exoplanet, Gliese 486 b."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

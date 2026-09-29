@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ae7deb",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "刘 et al. (2026): TESS Planets in Known Radial-velocity Cold Jupiter Systems: Hot Super-Earth Occurrence is Enhanced by Cold Jupiters",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2602.11017"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ae7deb"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026AJ....172...72L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ae7deb",
+      "label": "The Astronomical Journal 172 72"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "刘 et al. (2026), The Astronomical Journal 172 72",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L"
+    }
+  ],
+  "publisher": "The Astronomical Journal 172 72",
+  "creators": [
+    "Quanyi 权毅 Liu 刘",
+    "Wei 伟 Zhu 祝",
+    "Tianjun 天君 Gan 干",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

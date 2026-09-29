@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-18599b",
+  "radiusKm": 16583.1,
+  "radiusSource": "Radius 0.23195686 Jupiter radii from Desidera et al. 2023 (2023A&A...675A.158D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract): 16,583.1 km at 71,492 km per Jupiter radius. GM from the mass 0.07582708 Jupiter masses (Desidera et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...675A.158D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.13744033335,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.13744033335 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 18599 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.07582708 Jupiter masses: Desidera et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...675A.158D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract)."
+}

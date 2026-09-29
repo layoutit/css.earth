@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "k2-232c",
+  "displayName": "K2-232 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since K2-232 c does not transit, via the NASA Exoplanet Archive",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "5 years",
+        "source": {
+          "catalogueId": "arxiv-2609-09077",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R",
+          "label": "Ranshaw et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "5.3 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2609-09077",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R",
+          "label": "Ranshaw et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by K2-232; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "k2-232c-lens-shape.webp",
+        "surface": "k2-232c-surface-shape@2x.webp",
+        "poles": "k2-232c-poles-shape@2x.webp",
+        "source": {
+          "id": "k2-232c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of K2-232 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of k2-232's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "k2-232c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/k2-232c/k2-232c-system-orbits.svg",
+      "alt": "The orbits of K2-232's planets in this map from above, to scale, with K2-232 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "k2-232c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ranshaw et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract",
+      "credit": "Ranshaw et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/k2-232c.json",
+      "credit": "Radius from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since K2-232 c does not transit, via the NASA Exoplanet Archive; mass from Ranshaw et al. 2026, the minimum mass (M sin i) the NASA Exoplanet Archive's composite table adopts (2026arXiv260909077R), via the NASA Exoplanet Archive; orbit from Ranshaw et al. 2026 (2026arXiv260909077R), via the NASA Exoplanet Archive"
+    }
+  }
+}

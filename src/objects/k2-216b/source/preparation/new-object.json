@@ -1,0 +1,24 @@
+{
+  "host": "k2-216",
+  "planets": [
+    {
+      "id": "k2-216b",
+      "name": "K2-216 b",
+      "description": "Transiting planet of K2-216 with a 2.17-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...618A..33P/abstract",
+        "credit": "Persson et al. 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PERSSON_ET_AL__2018"
+      },
+      "text": {
+        "card": "K2-216 b was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-216. Its orbit and size follow Persson et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PERSSON_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 1; pl_orbper 2.1747824, pl_radj 0.15612454, pl_bmassj 0.02517069"
+      },
+      "order": 3396
+    }
+  ]
+}

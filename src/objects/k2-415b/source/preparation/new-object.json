@@ -1,0 +1,24 @@
+{
+  "host": "k2-415",
+  "planets": [
+    {
+      "id": "k2-415b",
+      "name": "K2-415 b",
+      "description": "Transiting planet of K2-415 with a 4.02-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract",
+        "credit": "Hirano et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HIRANO_ET_AL_2023"
+      },
+      "text": {
+        "card": "K2-415 b was found in 2023 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-415. Its orbit and size follow Hirano et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HIRANO_ET_AL_2023): disc_year 2023, disc_facility K2, sy_pnum 1; pl_orbper 4.0179694, pl_radj 0.09055239, pl_bmassj 0.02359764"
+      },
+      "order": 3577
+    }
+  ]
+}

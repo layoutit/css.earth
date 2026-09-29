@@ -1,0 +1,24 @@
+{
+  "host": "toi-908",
+  "planets": [
+    {
+      "id": "toi-908b",
+      "name": "TOI-908 b",
+      "description": "Transiting planet of TOI-908 with a 3.18-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H/abstract",
+        "credit": "Hawthorn et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HAWTHORN_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-908 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-908. Its orbit and size follow Hawthorn et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HAWTHORN_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.183792, pl_radj 0.28423637, pl_bmassj 0.05077268"
+      },
+      "order": 4748
+    }
+  ]
+}

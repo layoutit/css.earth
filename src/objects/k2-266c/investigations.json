@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "k2-266c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.06289589 Jupiter radii from Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.00091285 Jupiter masses: Rodriguez et al. 2018, the mass the NASA Exoplanet Archive's composite table adopts (2018AJ....156..245R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): P 7.814 d; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): a/R* 20.8; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): inclination 88.28 degrees; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): e 0.042; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): omega 87 degrees; Rodriguez et al. 2018 (2018AJ....156..245R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUEZ_ET_AL__2018): transit mid-time 2457946.651 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1083 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract"
+      ]
+    }
+  ]
+}

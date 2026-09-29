@@ -1,0 +1,39 @@
+{
+  "id": "toi-1807",
+  "name": "TOI-1807",
+  "system": "TOI-1807 system",
+  "description": "Star of 4,914 K, 42.6 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1807",
+  "gaia": "1476485996883837184",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "credit": "MacDougall et al. 2023"
+  },
+  "radius": {
+    "value": 0.746,
+    "source": "MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-1807 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0206
+  },
+  "mass": {
+    "value": 0.8048,
+    "source": "MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1807 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0231
+  },
+  "temperature": {
+    "value": 4914,
+    "source": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1807 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 60
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1807 b crosses TOI-1807 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 4914, st_rad 0.746, st_mass 0.8048"
+  },
+  "notes": [],
+  "order": 4172
+}

@@ -1,0 +1,24 @@
+{
+  "host": "toi-700",
+  "planets": [
+    {
+      "id": "toi-700b",
+      "name": "TOI-700 b",
+      "description": "Transiting planet of TOI-700 with a 9.98-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..175P/abstract",
+        "credit": "Pass et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PASS_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-700 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around TOI-700. Its orbit and size follow Pass et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASS_ET_AL_2026): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 9.97722, pl_radj 0.08591325, pl_bmassj 0.00267"
+      },
+      "order": 4668
+    }
+  ]
+}

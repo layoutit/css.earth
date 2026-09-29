@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5734",
+  "card": {
+    "text": "TOI-5734 b crosses TOI-5734 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555931",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract",
+        "label": "Filomeno et al. (2026), Astronomy & Astrophysics 708 A90",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname FILOMENO_ET_AL_2026): st_teff 4750, st_rad 0.639, st_mass 0.724"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Filomeno et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555931",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract",
+        "label": "Filomeno et al. (2026), Astronomy & Astrophysics 708 A90",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname FILOMENO_ET_AL_2026): st_teff 4750, st_rad 0.639, st_mass 0.724"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

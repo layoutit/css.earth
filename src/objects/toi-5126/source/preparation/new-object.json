@@ -1,0 +1,39 @@
+{
+  "id": "toi-5126",
+  "name": "TOI-5126",
+  "system": "TOI-5126 system",
+  "description": "Star of 6,150 K, 160 parsecs away, with 2 transiting planets.",
+  "target": "TOI-5126",
+  "gaia": "623633615066248576",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+    "credit": "Fairnington et al. 2024"
+  },
+  "radius": {
+    "value": 1.241,
+    "source": "Fairnington et al. 2024, the stellar radius of the default parameter set of TOI-5126 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+    "uncertainty": 0.032
+  },
+  "mass": {
+    "value": 1.24,
+    "source": "Fairnington et al. 2024, the stellar mass of the default parameter set of TOI-5126 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+    "uncertainty": 0.05
+  },
+  "temperature": {
+    "value": 6150,
+    "source": "Fairnington et al. 2024, the stellar temperature of the default parameter set of TOI-5126 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract",
+    "uncertainty": 110
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-5126 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Fairnington et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname FAIRNINGTON_ET_AL_2024): st_teff 6150, st_rad 1.241, st_mass 1.24"
+  },
+  "notes": [],
+  "order": 4486
+}

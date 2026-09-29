@@ -1,0 +1,30 @@
+{
+ "id": "k2-210",
+ "classification": "star",
+ "order": 3391,
+ "physical": {
+  "name": "K2-210",
+  "horizonsCode": null,
+  "meanRadiusKm": 619173,
+  "gravitationalParameterKm3PerS2": 120996187697.71684,
+  "parent": null,
+  "effectiveTemperatureK": 5500
+ },
+ "physicalNotes": "Radius 0.89 +/- 0.15 solar radii from Adams et al. 2021, the stellar radius of the default parameter set of K2-210 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract): 619,173 km at 695,700 km per solar radius. Mass 0.911717 +/- 0.02297 solar masses from Mayo et al. 2018, the stellar mass of K2-210 b's parameter set from Mayo et al. 2018 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract); GM is that mass times the JPL solar GM. Temperature 5500 +/- 45 K from Adams et al. 2021, the stellar temperature of the default parameter set of K2-210 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 17.64127922536178,
+  "declinationDegrees": 1.5784180708884141,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 178.1894185608297,
+  "properMotionRaMasPerYear": 70.87561628188449,
+  "properMotionDecMasPerYear": 31.800732819623132,
+  "radialVelocityKmPerS": -0.89384264,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2538051863476537984 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-210/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.6120 +/- 0.0188 mas (same row, RUWE 0.83): 178.19 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 70.876, 31.801 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -0.89 +/- 0.51 km/s"
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-283",
+  "card": {
+    "text": "TOI-283 b crosses TOI-283 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202553968",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract",
+        "label": "Murgas et al. (2025), Astronomy & Astrophysics 703 A201",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MURGAS_ET_AL_2025): st_teff 5213, st_rad 0.85, st_mass 0.8"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Murgas et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202553968",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract",
+        "label": "Murgas et al. (2025), Astronomy & Astrophysics 703 A201",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MURGAS_ET_AL_2025): st_teff 5213, st_rad 0.85, st_mass 0.8"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

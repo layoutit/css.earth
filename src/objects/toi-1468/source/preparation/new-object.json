@@ -1,0 +1,39 @@
+{
+  "id": "toi-1468",
+  "name": "TOI-1468",
+  "system": "TOI-1468 system",
+  "description": "Star of 3,376 K, 24.7 parsecs away, with 2 transiting planets.",
+  "target": "TOI-1468",
+  "gaia": "2785466581298775680",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A..68M/abstract",
+    "credit": "Meier Valdés et al. 2025"
+  },
+  "radius": {
+    "value": 0.3714,
+    "source": "Meier Valdés et al. 2025, the stellar radius of the default parameter set of TOI-1468 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A..68M/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.3527,
+    "source": "Meier Valdés et al. 2025, the stellar mass of the default parameter set of TOI-1468 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A..68M/abstract",
+    "uncertainty": 0.0081
+  },
+  "temperature": {
+    "value": 3376,
+    "source": "Meier Valdés et al. 2025, the stellar temperature of the default parameter set of TOI-1468 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A..68M/abstract",
+    "uncertainty": 45
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-1468 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Meier Valdés et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MEIER_VALDES_ET_AL_2025): st_teff 3376, st_rad 0.3714, st_mass 0.3527"
+  },
+  "notes": [],
+  "order": 4059
+}

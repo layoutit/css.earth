@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ngts-34b",
+  "displayName": "NGTS-34 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.33 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf2189",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K",
+          "label": "Kendall et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "43.1 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf2189",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K",
+          "label": "Kendall et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.060 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf2189",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K",
+          "label": "Kendall et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by NGTS-34; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "ngts-34b-lens-shape.webp",
+        "surface": "ngts-34b-surface-shape@2x.webp",
+        "poles": "ngts-34b-poles-shape@2x.webp",
+        "source": {
+          "id": "ngts-34b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of NGTS-34 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of ngts-34's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "ngts-34b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/ngts-34b/ngts-34b-system-orbits.svg",
+      "alt": "The orbits of NGTS-34's planets in this map from above, to scale, with NGTS-34 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "ngts-34b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kendall et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract",
+      "credit": "Kendall et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ngts-34b.json",
+      "credit": "Radius from Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive; mass from Kendall et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.547f2189K), via the NASA Exoplanet Archive; orbit from Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive"
+    }
+  }
+}

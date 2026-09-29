@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-9827",
+  "card": {
+    "text": "3 planets cross GJ 9827 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348592",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..22P/abstract",
+        "label": "Passegger et al. (2024), Astronomy & Astrophysics 684 A22",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PASSEGGER_ET_AL_2024): st_teff 4236, st_rad 0.58, st_mass 0.62"
+      },
+      {
+        "catalogueId": "wikipedia-gj-9827",
+        "url": "https://en.wikipedia.org/wiki/GJ_9827",
+        "label": "Wikipedia, \"GJ 9827\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374787553",
+        "quote": "GJ 9827 is a star in the constellation of Pisces."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Passegger et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348592",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..22P/abstract",
+        "label": "Passegger et al. (2024), Astronomy & Astrophysics 684 A22",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PASSEGGER_ET_AL_2024): st_teff 4236, st_rad 0.58, st_mass 0.62"
+      },
+      {
+        "catalogueId": "wikipedia-gj-9827",
+        "url": "https://en.wikipedia.org/wiki/GJ_9827",
+        "label": "Wikipedia, \"GJ 9827\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374787553",
+        "quote": "It is a K-type main-sequence star with an apparent magnitude of 10.25."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

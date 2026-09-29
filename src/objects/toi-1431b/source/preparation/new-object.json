@@ -1,0 +1,31 @@
+{
+  "host": "toi-1431",
+  "planets": [
+    {
+      "id": "toi-1431b",
+      "name": "TOI-1431 b",
+      "description": "Transiting planet of TOI-1431 with a 2.65-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract",
+        "credit": "Addison et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ADDISON_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-1431 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1431. Its orbit and size follow Addison et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ADDISON_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.650232, pl_radj 1.49, pl_bmassj 3.12",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-1431_b",
+          "title": "TOI-1431 b",
+          "revision": "1366872522",
+          "card": "TOI-1431 b, also known as MASCARA-5b, is an ultra-hot Jupiter exoplanet orbiting TOI-1431 in the constellation of Cepheus.",
+          "introduction": "It has an orbital period of 2.7 days."
+        }
+      },
+      "order": 4031
+    }
+  ]
+}

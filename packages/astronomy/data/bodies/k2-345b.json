@@ -1,0 +1,28 @@
+{
+ "id": "k2-345b",
+ "classification": "exoplanet",
+ "order": 3522,
+ "physical": {
+  "name": "K2-345 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 13457.8,
+  "gravitationalParameterKm3PerS2": 2026984.51,
+  "parent": "k2-345"
+ },
+ "physicalNotes": "Radius 0.18824192 Jupiter radii from de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract): 13,457.8 km at 71,492 km per Jupiter radius. GM from the mass 0.016 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.367437,
+  "semiMajorAxisStellarRadii": 36.12,
+  "inclinationDegrees": 89.318,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57141.210348,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): P 10.367437 d",
+   "shape": "de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): a/R* 36.12; de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): inclination derived from its impact parameter 0.43 with its a/R* 36.12 (Winn 2010, eq. 7)",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "de Leon et al. 2021 (2021MNRAS.508..195D), via the NASA Exoplanet Archive ps table (pl_refname DE_LEON_ET_AL_2021): transit mid-time 2457141.710348 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 11 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "id": "k2-101b",
+ "classification": "exoplanet",
+ "order": 3273,
+ "physical": {
+  "name": "K2-101 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 12756.2,
+  "gravitationalParameterKm3PerS2": 1862292.02,
+  "parent": "k2-101"
+ },
+ "physicalNotes": "Radius 0.17842836 Jupiter radii from Castro-González et al. 2022 (2022MNRAS.509.1075C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract): 12,756.2 km at 71,492 km per Jupiter radius. GM from the mass 0.0147 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 14.6762429,
+  "semiMajorAxisStellarRadii": 31.82,
+  "inclinationDegrees": 88.85718,
+  "eccentricity": 0.1,
+  "argumentOfPeriapsisDegrees": 0,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 57152.184988,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Castro-González et al. 2022 (2022MNRAS.509.1075C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2022): P 14.6762429 d",
+   "shape": "Castro-González et al. 2022 (2022MNRAS.509.1075C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2022): a/R* 31.82; Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): inclination 88.85718 degrees",
+   "eccentricity": "Mann et al. 2017 (2017AJ....153...64M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): e 0.1",
+   "argumentOfPeriapsis": "Mann et al. 2017 (2017AJ....153...64M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): omega 0 degrees",
+   "phase": "Castro-González et al. 2022 (2022MNRAS.509.1075C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2022): transit mid-time 2457152.6849877 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

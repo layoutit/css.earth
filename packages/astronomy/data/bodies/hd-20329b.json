@@ -1,0 +1,28 @@
+{
+ "id": "hd-20329b",
+ "classification": "exoplanet",
+ "order": 3186,
+ "physical": {
+  "name": "HD 20329 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 10970.3,
+  "gravitationalParameterKm3PerS2": 2957614.91,
+  "parent": "hd-20329"
+ },
+ "physicalNotes": "Radius 0.15344839 Jupiter radii from Murgas et al. 2022 (2022A&A...668A.158M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...668A.158M/abstract): 10,970.3 km at 71,492 km per Jupiter radius. GM from the mass 0.02334593 Jupiter masses (Murgas et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...668A.158M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022A&A...668A.158M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.9260632,
+  "semiMajorAxisStellarRadii": 3.42,
+  "inclinationDegrees": 76.01,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60232.86735,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 0.9260632 d",
+   "shape": "Murgas et al. 2022 (2022A&A...668A.158M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2022): a/R* 3.42; Murgas et al. 2022 (2022A&A...668A.158M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2022): inclination 76.01 degrees",
+   "eccentricity": "Murgas et al. 2022 (2022A&A...668A.158M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2022): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460233.36735 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

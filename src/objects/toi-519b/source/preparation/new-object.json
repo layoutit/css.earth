@@ -1,0 +1,24 @@
+{
+  "host": "toi-519",
+  "planets": [
+    {
+      "id": "toi-519b",
+      "name": "TOI-519 b",
+      "description": "Transiting planet of TOI-519 with a 1.27-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75..713K/abstract",
+        "credit": "Kagetani et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KAGETANI_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-519 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-519. Its orbit and size follow Kagetani et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KAGETANI_ET_AL_2023): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.26523248, pl_radj 1.03, pl_bmassj 0.463"
+      },
+      "order": 4496
+    }
+  ]
+}

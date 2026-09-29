@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202555168",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ulmer-Moll et al. (2025): Detection and characterisation of a 106-day transiting Jupiter: TOI-2449 b/NGTS-36 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2509.15424"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202555168"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...703A.258U"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.258U",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202555168",
+      "label": "Astronomy & Astrophysics 703 A258"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.258U",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ulmer-Moll et al. (2025), Astronomy & Astrophysics 703 A258",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.258U"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 703 A258",
+  "creators": [
+    "S. Ulmer-Moll",
+    "S. Gill",
+    "R. Brahm",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

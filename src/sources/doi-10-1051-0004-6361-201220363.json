@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201220363",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hébrard et al. (2013): WASP-52b, WASP-58b, WASP-59b, and WASP-60b: Four new transiting close-in giant planets",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1211.0810"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201220363"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013A&A...549A.134H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201220363",
+      "label": "Astronomy & Astrophysics 549 A134"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hébrard et al. (2013), Astronomy & Astrophysics 549 A134",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 549 A134",
+  "creators": [
+    "G. Hébrard",
+    "A. Collier Cameron",
+    "D. J. A. Brown",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

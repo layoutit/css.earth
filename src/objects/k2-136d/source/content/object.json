@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "k2-136d",
+  "displayName": "K2-136 d",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.6 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acca1c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M",
+          "label": "Mayo et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "25.6 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acca1c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M",
+          "label": "Mayo et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "Under 3.0 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acca1c",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M",
+          "label": "Mayo et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by K2-136; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "k2-136d-lens-shape.webp",
+        "surface": "k2-136d-surface-shape@2x.webp",
+        "poles": "k2-136d-poles-shape@2x.webp",
+        "source": {
+          "id": "k2-136d-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of K2-136 d is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of k2-136's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "k2-136d-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/k2-136d/k2-136d-system-orbits.svg",
+      "alt": "The orbits of K2-136's planets in this map from above, to scale, with K2-136 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "k2-136d-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M"
+      }
+    },
+    {
+      "id": "k2-136d-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/k2-136d/k2-136d-transit.svg",
+      "alt": "K2-136 d crossing its star, as TESS recorded it: 3 sectors (44, 70, 71) of the SPOC pipeline's 2-minute light curves of TIC 18310799, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 440 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 544 minutes at these dates, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "k2-136d-tess-sector-44",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021284114741-s0044-0000000018310799-0215-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Mayo et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M/abstract",
+      "credit": "Mayo et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/k2-136d.json",
+      "credit": "Radius from Mayo et al. 2023 (2023AJ....165..235M), via the NASA Exoplanet Archive; mass from Mayo et al. 2023 (2023AJ....165..235M), via the NASA Exoplanet Archive; orbit from Mayo et al. 2023 (2023AJ....165..235M), via the NASA Exoplanet Archive"
+    }
+  }
+}

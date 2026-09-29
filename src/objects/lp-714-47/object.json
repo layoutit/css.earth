@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "lp-714-47",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "LP 714-47",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 372895.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lp-714-47-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "LP 714-47",
+      "classification": "star",
+      "color": "#ffbf8a",
+      "distanceAu": 10795927.2,
+      "description": "LP 714-47 b crosses LP 714-47 as seen from Earth, which is how it was found.",
+      "systemName": "LP 714-47 system",
+      "order": 3823,
+      "context": {
+        "order": 3820
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        687578470396417700,
+        1421715107113493500,
+        -338143671260990140
+      ],
+      "presentationToReference": [
+        0.42573353305765843,
+        -0.09115244346507187,
+        0.9002456280819089,
+        0.8802948632103287,
+        -0.1884758464270438,
+        -0.43538237116254275,
+        -0.20936072371806605,
+        -0.9778384771341104,
+        -5.397559546501452e-7
+      ],
+      "orbitUpReference": [
+        0.09115244346507187,
+        0.1884758464270438,
+        0.9778384771341104
+      ],
+      "metersPerUnit": 1202887.7419354839,
+      "bodyRadiusM": 372895200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

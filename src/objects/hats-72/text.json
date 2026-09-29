@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hats-72",
+  "card": {
+    "text": "HATS-72 b crosses HATS-72 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab7821",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+        "label": "Hartman et al. (2020), The Astronomical Journal 159 173",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HARTMAN_ET_AL__2020): st_teff 4656.1, st_rad 0.7214, st_mass 0.7311"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hartman et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab7821",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
+        "label": "Hartman et al. (2020), The Astronomical Journal 159 173",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HARTMAN_ET_AL__2020): st_teff 4656.1, st_rad 0.7214, st_mass 0.7311"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

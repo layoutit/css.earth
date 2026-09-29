@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mascara-1",
+  "card": {
+    "text": "MASCARA-1 b crosses MASCARA-1 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202141645",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+        "label": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HOOTON_ET_AL__2022): st_teff 7490, st_rad 2.082, st_mass 1.9"
+      },
+      {
+        "catalogueId": "wikipedia-hd-201585",
+        "url": "https://en.wikipedia.org/wiki/HD_201585",
+        "label": "Wikipedia, \"HD 201585\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1324636195",
+        "quote": "It is also designated as MASCARA-1 meaning that it is the first star observed by the MASCARA exoplanet search program."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hooton et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202141645",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+        "label": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HOOTON_ET_AL__2022): st_teff 7490, st_rad 2.082, st_mass 1.9"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

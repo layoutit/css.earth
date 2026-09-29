@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wolf-327b",
+  "card": {
+    "text": "Wolf 327 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348813",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract",
+        "label": "Murgas et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MURGAS_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.5734745, pl_radj 0.11062558, pl_bmassj 0.00796027"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Wolf 327. Its orbit and size follow Murgas et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348813",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract",
+        "label": "Murgas et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MURGAS_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.5734745, pl_radj 0.11062558, pl_bmassj 0.00796027"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

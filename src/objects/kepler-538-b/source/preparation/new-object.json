@@ -1,0 +1,45 @@
+{
+  "id": "kepler-538-b",
+  "name": "Kepler-538B",
+  "system": "Kepler-538 system",
+  "description": "Star bound to Kepler-538, 2,679 AU away.",
+  "gaia": "2087171453783512704",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.147,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 28227107 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.119,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 28227107 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.022
+  },
+  "temperature": {
+    "value": 3386,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 28227107 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 170
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-538B is a star of 3,386 K, bound to Kepler-538 2,679 AU away.",
+    "introduction": "Kepler-538B shares its motion through space with Kepler-538, 2,679 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 2087171453788422528 and 2087171453783512704, sep_AU 2678.681566798873519, R_chance_align 3.228106765372227085e-04"
+  },
+  "notes": [
+    "Kepler-538B's orbit around Kepler-538 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 2087171453783512704 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 50,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202087171453783512704"
+  },
+  "order": 3767
+}

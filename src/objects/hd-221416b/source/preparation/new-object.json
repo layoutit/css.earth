@@ -1,0 +1,31 @@
+{
+  "host": "hd-221416",
+  "planets": [
+    {
+      "id": "hd-221416b",
+      "name": "HD 221416 b",
+      "description": "Transiting planet of HD 221416 with a 14.3-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..245H/abstract",
+        "credit": "Huber et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HUBER_ET_AL__2019"
+      },
+      "text": {
+        "card": "HD 221416 b was found in 2019 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around HD 221416. Its orbit and size follow Huber et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HUBER_ET_AL__2019): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 14.28117312608, pl_radj 0.836, pl_bmassj 0.19",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HD_221416_b",
+          "title": "HD 221416 b",
+          "revision": "1374392430",
+          "card": "HD 221416 b is a confirmed hot-Saturn-type exoplanet 312 light years away from earth and orbiting the late subgiant K-type star, HD 221416.",
+          "introduction": "It is part of a small but growing number of discovered exoplanets orbiting evolved stars."
+        }
+      },
+      "order": 3192
+    }
+  ]
+}

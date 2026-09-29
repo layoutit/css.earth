@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-73344d/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-73344d-orbits",
+      "title": "HD 73344 d: orbits around HD 73344",
+      "output": "hd-73344d-system-orbits.svg",
+      "system": "hd-73344",
+      "highlight": "hd-73344d",
+      "description": "The orbits of HD 73344's planets in this map from above, to scale, with HD 73344 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Zhang et al. 2025 (2025AJ....169..200Z), via the NASA Exoplanet Archive ps table (pl_refname ZHANG_ET_AL_2025): P 5823 d"
+      }
+    }
+  ]
+}

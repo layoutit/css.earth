@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-42b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.07 Jupiter radii from Muirhead et al. 2012 (2012arXiv1201.2189M), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.00222115 Jupiter masses: Ofir et al. 2025 (2025AJ....169...90O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...90O/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....169...90O/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): P 1.2137706 d; Muirhead et al. 2012 (2012arXiv1201.2189M), via the NASA Exoplanet Archive ps table (pl_refname MUIRHEAD_ET_AL__2012): a/R* derived from its semi-major axis 0.0116 au and stellar radius 0.17 solar radii; Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): inclination 86.52 degrees; Q1-Q16 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q16_KOI_TABLE): e 0; Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): transit mid-time 2454964.64297 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract"
+      ]
+    }
+  ]
+}

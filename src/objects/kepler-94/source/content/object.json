@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-94",
+  "displayName": "Kepler-94",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.76 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0067-0049-210-2-20",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M",
+          "label": "Marcy et al. (2014), The Astrophysical Journal Supplement Series 210 20",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "191 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-kepler-94",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "kepler-94-lens-color.webp",
+        "surface": "kepler-94-surface-color@2x.webp",
+        "poles": "kepler-94-poles-color@2x.webp",
+        "source": {
+          "id": "kepler-94-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2119602202081351168&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,781 K and log g 4.58 (u1 0.718, u2 0.069): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Marcy et al. 2014",
+      "href": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+      "credit": "Marcy et al. 2014"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-94.json",
+      "credit": "Marcy et al. 2014, the stellar radius of the default parameter set of Kepler-94 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

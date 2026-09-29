@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-5624d/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-5624d-orbits",
+      "title": "TOI-5624 d: orbits around TOI-5624",
+      "output": "toi-5624d-system-orbits.svg",
+      "system": "toi-5624",
+      "highlight": "toi-5624d",
+      "description": "The orbits of TOI-5624's planets in this map from above, to scale, with TOI-5624 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): P 13.731468 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-5624d-transit",
+      "title": "TOI-5624 d: its transit",
+      "description": "TOI-5624 d crossing its star, as TESS recorded it: 3 sectors (22, 75, 76) of the SPOC pipeline's 2-minute light curves of TIC 53498154, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-5624d-transit.svg",
+      "metadata": {
+        "tic": "TIC 53498154",
+        "sectors": [
+          22,
+          75,
+          76
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-5624d",
+      "sources": [
+        "photometry/tess/tess2020049080258-s0022-0000000053498154-0174-s_lc.fits",
+        "photometry/tess/tess2024030031500-s0075-0000000053498154-0270-s_lc.fits",
+        "photometry/tess/tess2024058030222-s0076-0000000053498154-0271-s_lc.fits"
+      ],
+      "durationHours": 3.85,
+      "binMinutes": 15,
+      "notes": [
+        "TESS 2-min SPOC · sectors 22, 75, 76",
+        "Folded on the app's orbit; 15-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

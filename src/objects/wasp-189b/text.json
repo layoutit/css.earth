@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-189b",
+  "card": {
+    "text": "WASP-189 b was found in 2020 by CHEOPS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202038677",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...643A..94L/abstract",
+        "label": "Lendl et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LENDL_ET_AL__2020): disc_year 2020, disc_facility CHaracterising ExOPlanets Satellite (CHEOPS), sy_pnum 1; pl_orbper 2.7240308, pl_radj 1.619, pl_bmassj 1.99"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-189-b",
+        "url": "https://en.wikipedia.org/wiki/WASP-189_b",
+        "label": "Wikipedia, \"WASP-189 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374244884",
+        "quote": "WASP-189 b is an ultra-hot jupiter that orbits around the A-type star WASP-189 which is located about 322 light years from Earth in the Libra constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-189. Its orbit and size follow Lendl et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202038677",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...643A..94L/abstract",
+        "label": "Lendl et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LENDL_ET_AL__2020): disc_year 2020, disc_facility CHaracterising ExOPlanets Satellite (CHEOPS), sy_pnum 1; pl_orbper 2.7240308, pl_radj 1.619, pl_bmassj 1.99"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-189-b",
+        "url": "https://en.wikipedia.org/wiki/WASP-189_b",
+        "label": "Wikipedia, \"WASP-189 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374244884",
+        "quote": "It was first discovered in 2018, and was observed in 2020 by CHEOPS."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

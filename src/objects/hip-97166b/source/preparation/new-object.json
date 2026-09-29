@@ -1,0 +1,24 @@
+{
+  "host": "hip-97166",
+  "planets": [
+    {
+      "id": "hip-97166b",
+      "name": "HIP 97166 b",
+      "description": "Transiting planet of HIP 97166 with a 10.3-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "HIP 97166 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HIP 97166. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 10.288886, pl_radj 0.2212631, pl_bmassj 0.06009532"
+      },
+      "order": 3267
+    }
+  ]
+}

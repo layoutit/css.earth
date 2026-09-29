@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stae1821",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nicholson et al. (2024): HD152843 b & c: the masses and orbital periods of a sub-Neptune and a superpuff Neptune",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2310.15068"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stae1821"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024MNRAS.532.4632N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stae1821",
+      "label": "Monthly Notices of the Royal Astronomical Society 532 4632-4644"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Nicholson et al. (2024), Monthly Notices of the Royal Astronomical Society 532 4632-4644",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 532 4632-4644",
+  "creators": [
+    "B A Nicholson",
+    "S Aigrain",
+    "N L Eisner",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-107b",
+  "card": {
+    "text": "WASP-107 b was found in 2017 by SuperWASP-South as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae517e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y/abstract",
+        "label": "Yee 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YEE__VISSAPRAGADA_2026): disc_year 2017, disc_facility SuperWASP-South, sy_pnum 2; pl_orbper 5.7214876, pl_radj 0.935, pl_bmassj 0.1039"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around WASP-107. Its orbit and size follow Yee & Vissapragada 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae517e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1000L..54Y/abstract",
+        "label": "Yee 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname YEE__VISSAPRAGADA_2026): disc_year 2017, disc_facility SuperWASP-South, sy_pnum 2; pl_orbper 5.7214876, pl_radj 0.935, pl_bmassj 0.1039"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

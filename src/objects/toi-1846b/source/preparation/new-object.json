@@ -1,0 +1,24 @@
+{
+  "host": "toi-1846",
+  "planets": [
+    {
+      "id": "toi-1846b",
+      "name": "TOI-1846 b",
+      "description": "Transiting planet of TOI-1846 with a 3.93-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541.3249S/abstract",
+        "credit": "Soubkiou et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SOUBKIOU_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-1846 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1846. Its orbit and size follow Soubkiou et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SOUBKIOU_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.9306737, pl_radj 0.15987181, pl_bmassj 0.0122"
+      },
+      "order": 4189
+    }
+  ]
+}

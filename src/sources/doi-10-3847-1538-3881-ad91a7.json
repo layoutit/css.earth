@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-3847-1538-3881-ad91a7",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ofir et al. (2025): Planetary Mass Determinations from a Simplified Photodynamical Model—Application to the Complete Kepler Dataset",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2410.11401"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad91a7"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....169...90O"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...90O",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad91a7",
+      "label": "The Astronomical Journal 169 90"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...90O",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ofir et al. (2025), The Astronomical Journal 169 90",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...90O"
+    }
+  ],
+  "publisher": "The Astronomical Journal 169 90",
+  "creators": [
+    "Aviv Ofir",
+    "Gideon Yoffe",
+    "Oded Aharonson"
+  ],
+  "publicationDate": "2025"
+}

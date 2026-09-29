@@ -1,0 +1,30 @@
+{
+ "id": "toi-4529",
+ "classification": "star",
+ "order": 4441,
+ "physical": {
+  "name": "TOI-4529",
+  "horizonsCode": null,
+  "meanRadiusKm": 333936,
+  "gravitationalParameterKm3PerS2": 63967396100.21478,
+  "parent": null,
+  "effectiveTemperatureK": 3697
+ },
+ "physicalNotes": "Radius 0.48 +/- 0.019 solar radii from Poultourtzidis et al. 2026, the stellar radius of the default parameter set of TOI-4529 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract): 333,936 km at 695,700 km per solar radius. Mass 0.482 +/- 0.023 solar masses from Poultourtzidis et al. 2026, the stellar mass of the default parameter set of TOI-4529 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract); GM is that mass times the JPL solar GM. Temperature 3697 +/- 71 K from Poultourtzidis et al. 2026, the stellar temperature of the default parameter set of TOI-4529 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 16.968885445912846,
+  "declinationDegrees": 12.88095166744939,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 28.38448328579864,
+  "properMotionRaMasPerYear": 275.8608746707786,
+  "properMotionDecMasPerYear": -22.973337810935064,
+  "radialVelocityKmPerS": 13.940455,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2584622022068408576 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-4529/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 35.2305 +/- 0.0282 mas (same row, RUWE 1.23): 28.38 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 275.861, -22.973 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 13.94 +/- 0.26 km/s"
+  }
+ }
+}

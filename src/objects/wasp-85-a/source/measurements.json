@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-85-a",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 650,480 km at 141.01 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 141.00870594061936,
+  "distanceSource": "Gaia DR3 parallax 7.0918 +/- 0.0179 mas (same row, RUWE 1.10): 141.01 pc, no zero-point correction",
+  "radiusKm": 650479.5,
+  "radiusSource": "Radius 0.935 +/- 0.023 solar radii from Mo&#x10D;nik et al. 2016, the stellar radius of the default parameter set of WASP-85 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract): 650,480 km at 695,700 km per solar radius. Mass 1.09 +/- 0.08 solar masses from Mo&#x10D;nik et al. 2016, the stellar mass of the default parameter set of WASP-85 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract); GM is that mass times the JPL solar GM. Temperature 6112 +/- 27 K from Mo&#x10D;nik et al. 2016, the stellar temperature of the default parameter set of WASP-85 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6112,
+  "effectiveTemperatureSource": "Mo&#x10D;nik et al. 2016, the stellar temperature of the default parameter set of WASP-85 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract)",
+  "surfaceGravityLogg": 4.53,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-85-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.534, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

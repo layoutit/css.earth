@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-622",
+  "card": {
+    "text": "TOI-622 b crosses TOI-622 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346406",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract",
+        "label": "Psaridi et al. (2023), Astronomy & Astrophysics 675 A39",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PSARIDI_ET_AL__2023): st_teff 6400, st_rad 1.415, st_mass 1.313"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Psaridi et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346406",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract",
+        "label": "Psaridi et al. (2023), Astronomy & Astrophysics 675 A39",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PSARIDI_ET_AL__2023): st_teff 6400, st_rad 1.415, st_mass 1.313"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

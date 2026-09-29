@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1794",
+  "card": {
+    "text": "TOI-1794 b crosses TOI-1794 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023aj-166-33m",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+        "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 5631, st_rad 1.3162, st_mass 0.9698"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow MacDougall et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "publication-2023aj-166-33m",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+        "label": "MacDougall et al. (2023), The Astronomical Journal 166 33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 5631, st_rad 1.3162, st_mass 0.9698"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

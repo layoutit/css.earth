@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1221b",
+  "radiusKm": 18560.3,
+  "radiusSource": "Radius 0.25961326 Jupiter radii from Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract): 18,560.3 km at 71,492 km per Jupiter radius. No mass is measured: Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract) gives only an upper limit of 3.5 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 91.68278,
+  "orbitalPeriodSource": "Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2023): P 91.68278 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1221 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 3.5 Jupiter masses: Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract)."
+}

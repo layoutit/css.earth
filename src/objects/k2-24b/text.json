@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-24b",
+  "card": {
+    "text": "K2-24 b was found in 2016 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450852",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A.349N/abstract",
+        "label": "Nascimbeni et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NASCIMBENI_ET_AL_2024): disc_year 2016, disc_facility K2, sy_pnum 2; pl_orbper 20.88506, pl_radj 0.50298954, pl_bmassj 0.06481485"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around K2-24. Its orbit and size follow Nascimbeni et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450852",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A.349N/abstract",
+        "label": "Nascimbeni et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NASCIMBENI_ET_AL_2024): disc_year 2016, disc_facility K2, sy_pnum 2; pl_orbper 20.88506, pl_radj 0.50298954, pl_bmassj 0.06481485"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

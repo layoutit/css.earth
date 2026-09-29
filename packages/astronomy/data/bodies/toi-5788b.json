@@ -1,0 +1,31 @@
+{
+ "id": "toi-5788b",
+ "classification": "exoplanet",
+ "order": 4578,
+ "physical": {
+  "name": "TOI-5788 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 9745.7,
+  "gravitationalParameterKm3PerS2": 1482793.64,
+  "parent": "toi-5788"
+ },
+ "physicalNotes": "Radius 0.13631926 Jupiter radii from Lakeland et al. 2026 (2026MNRAS.546ag158L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag158L/abstract): 9,745.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01170443 Jupiter masses (Lakeland et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.546ag158L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag158L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.340758,
+  "semiMajorAxisStellarRadii": 15.8185,
+  "inclinationDegrees": 87.94,
+  "eccentricity": 0.061,
+  "argumentOfPeriapsisDegrees": 96,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59611.2425,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Lakeland et al. 2026 (2026MNRAS.546ag158L), via the NASA Exoplanet Archive ps table (pl_refname LAKELAND_ET_AL_2026): P 6.340758 d",
+   "shape": "Lakeland et al. 2026 (2026MNRAS.546ag158L), via the NASA Exoplanet Archive ps table (pl_refname LAKELAND_ET_AL_2026): a/R* derived from its semi-major axis 0.064 au and stellar radius 0.87 solar radii; Lakeland et al. 2026 (2026MNRAS.546ag158L), via the NASA Exoplanet Archive ps table (pl_refname LAKELAND_ET_AL_2026): inclination 87.94 degrees",
+   "eccentricity": "Lakeland et al. 2026 (2026MNRAS.546ag158L), via the NASA Exoplanet Archive ps table (pl_refname LAKELAND_ET_AL_2026): e 0.061",
+   "argumentOfPeriapsis": "Lakeland et al. 2026 (2026MNRAS.546ag158L), via the NASA Exoplanet Archive ps table (pl_refname LAKELAND_ET_AL_2026): omega 96 degrees",
+   "phase": "Lakeland et al. 2026 (2026MNRAS.546ag158L), via the NASA Exoplanet Archive ps table (pl_refname LAKELAND_ET_AL_2026): transit mid-time 2459611.7425 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 10 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

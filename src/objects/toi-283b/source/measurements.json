@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-283b",
+  "radiusKm": 14924.8,
+  "radiusSource": "Radius 0.20876118 Jupiter radii from Murgas et al. 2025 (2025A&A...703A.201M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract): 14,924.8 km at 71,492 km per Jupiter radius. GM from the mass 0.02057714 Jupiter masses (Murgas et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...703A.201M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 17.61745,
+  "orbitalPeriodSource": "Murgas et al. 2025 (2025A&A...703A.201M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2025): P 17.61745 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-283 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02057714 Jupiter masses: Murgas et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...703A.201M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract)."
+}

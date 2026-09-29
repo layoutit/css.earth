@@ -1,0 +1,24 @@
+{
+  "host": "toi-257",
+  "planets": [
+    {
+      "id": "toi-257b",
+      "name": "TOI-257 b",
+      "description": "Transiting planet of TOI-257 with a 18.4-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract",
+        "credit": "Addison et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ADDISON_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-257 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-257. Its orbit and size follow Addison et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ADDISON_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 18.38770808538, pl_radj 0.639, pl_bmassj 0.138"
+      },
+      "order": 4327
+    }
+  ]
+}

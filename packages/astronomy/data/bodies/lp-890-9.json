@@ -1,0 +1,30 @@
+{
+ "id": "lp-890-9",
+ "classification": "star",
+ "order": 3829,
+ "physical": {
+  "name": "LP 890-9",
+  "horizonsCode": null,
+  "meanRadiusKm": 108250.9,
+  "gravitationalParameterKm3PerS2": 15660067924.94884,
+  "parent": null,
+  "effectiveTemperatureK": 2850
+ },
+ "physicalNotes": "Radius 0.1556 +/- 0.0086 solar radii from Delrez et al. 2022, the stellar radius of the default parameter set of LP 890-9 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract): 108,251 km at 695,700 km per solar radius. Mass 0.118 +/- 0.002 solar masses from Delrez et al. 2022, the stellar mass of the default parameter set of LP 890-9 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract); GM is that mass times the JPL solar GM. Temperature 2850 +/- 75 K from Delrez et al. 2022, the stellar temperature of the default parameter set of LP 890-9 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 64.13094408963441,
+  "declinationDegrees": -28.315825742358506,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 32.32838058390921,
+  "properMotionRaMasPerYear": 218.5694994678358,
+  "properMotionDecMasPerYear": -251.14515508112532,
+  "radialVelocityKmPerS": 28.838327,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4886243456388510720 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/lp-890-9/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 30.9326 +/- 0.0418 mas (same row, RUWE 1.09): 32.33 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 218.569, -251.145 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 28.84 +/- 2.84 km/s"
+  }
+ }
+}

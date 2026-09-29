@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lp-412-34",
+  "card": {
+    "text": "LP 412-34 is a star of 3,100 K, bound to TOI-5076 2,152 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 55752218851048320 and 55752974765291264, sep_AU 2151.765750870362353, R_chance_align 7.093218686370076072e-10"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "LP 412-34 shares its motion through space with TOI-5076, 2,152 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 55752218851048320 and 55752974765291264, sep_AU 2151.765750870362353, R_chance_align 7.093218686370076072e-10"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

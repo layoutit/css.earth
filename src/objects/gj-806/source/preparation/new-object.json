@@ -1,0 +1,41 @@
+{
+  "id": "gj-806",
+  "name": "GJ 806",
+  "system": "GJ 806 system",
+  "description": "Star of 3,600 K, 12 parsecs away, with 1 transiting planet.",
+  "target": "GJ 806",
+  "gaia": "2070115588901082368",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract",
+    "credit": "Palle et al. 2023"
+  },
+  "radius": {
+    "value": 0.4144,
+    "source": "Palle et al. 2023, the stellar radius of the default parameter set of GJ 806 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract",
+    "uncertainty": 0.0038
+  },
+  "mass": {
+    "value": 0.413,
+    "source": "Palle et al. 2023, the stellar mass of the default parameter set of GJ 806 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract",
+    "uncertainty": 0.011
+  },
+  "temperature": {
+    "value": 3600,
+    "source": "Palle et al. 2023, the stellar temperature of the default parameter set of GJ 806 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract",
+    "uncertainty": 16
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "GJ 806 b crosses GJ 806 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Palle et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname PALLE_ET_AL__2023): st_teff 3600, st_rad 0.4144, st_mass 0.413"
+  },
+  "notes": [
+    "GJ 806 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3101
+}

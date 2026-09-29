@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-6383-a-b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.008 Jupiter radii from Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "1.04 Jupiter masses: Bernab&ograve; et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..273B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): P 1.79058695 d; Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): a/R* 10.68; Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): inclination 88.8 degrees; Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): e 0.05; Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): omega 23.8 degrees; Bernab&ograve; et al. 2024 (2024AJ....168..273B), via the NASA Exoplanet Archive ps table (pl_refname BERNAB_AMP_OGRAVE__ET_AL__2024): transit mid-time 2459933.59545 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract"
+      ]
+    }
+  ]
+}

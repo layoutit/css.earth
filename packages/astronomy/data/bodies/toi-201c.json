@@ -1,0 +1,31 @@
+{
+ "id": "toi-201c",
+ "classification": "exoplanet",
+ "order": 4209,
+ "physical": {
+  "name": "TOI-201 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 66332.2,
+  "gravitationalParameterKm3PerS2": 1989016023.44,
+  "parent": "toi-201"
+ },
+ "physicalNotes": "Radius 0.92782745 Jupiter radii from Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract): 66,332.2 km at 71,492 km per Jupiter radius. GM from the mass 15.70029579 Jupiter masses (Mireles et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026SciA...12f2618M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2800,
+  "semiMajorAxisStellarRadii": 717.321,
+  "inclinationDegrees": 89.92,
+  "eccentricity": 0.651,
+  "argumentOfPeriapsisDegrees": 96,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 60062.093,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Maciejewski & Łoboda 2025 (2025ApJ...988L..63M), via the NASA Exoplanet Archive ps table (pl_refname MACIEJEWSKI_AMP__321_OBODA_2025): P 2800 d",
+   "shape": "Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive ps table (pl_refname MIRELES_ET_AL_2026): a/R* derived from its semi-major axis 4.37 au and stellar radius 1.31 solar radii; Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive ps table (pl_refname MIRELES_ET_AL_2026): inclination 89.92 degrees",
+   "eccentricity": "Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive ps table (pl_refname MIRELES_ET_AL_2026): e 0.651",
+   "argumentOfPeriapsis": "Mireles et al. 2026 (2026SciA...12f2618M), via the NASA Exoplanet Archive ps table (pl_refname MIRELES_ET_AL_2026): omega 96 degrees",
+   "phase": "Maciejewski & Łoboda 2025 (2025ApJ...988L..63M), via the NASA Exoplanet Archive ps table (pl_refname MACIEJEWSKI_AMP__321_OBODA_2025): transit mid-time 2460062.593 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 20 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

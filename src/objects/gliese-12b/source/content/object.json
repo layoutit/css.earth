@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gliese-12b",
+  "displayName": "Gliese 12 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.93 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1703",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T",
+          "label": "Turner et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "12.8 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1703",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T",
+          "label": "Turner et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.95 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-staf1703",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T",
+          "label": "Turner et al. 2026",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Gliese 12; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "gliese-12b-lens-shape.webp",
+        "surface": "gliese-12b-surface-shape@2x.webp",
+        "poles": "gliese-12b-poles-shape@2x.webp",
+        "source": {
+          "id": "gliese-12b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Gliese 12 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of gliese-12's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "gliese-12b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/gliese-12b/gliese-12b-system-orbits.svg",
+      "alt": "The orbits of Gliese 12's planets in this map from above, to scale, with Gliese 12 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "gliese-12b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T"
+      }
+    },
+    {
+      "id": "gliese-12b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/gliese-12b/gliese-12b-transit.svg",
+      "alt": "Gliese 12 b crossing its star, as TESS recorded it: 3 sectors (57, 70, 84) of the SPOC pipeline's 2-minute light curves of TIC 52005579, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "gliese-12b-tess-sector-57",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022273165103-s0057-0000000052005579-0245-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Turner et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract",
+      "credit": "Turner et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gliese-12b.json",
+      "credit": "Radius from Turner et al. 2026 (2026MNRAS.545f1703T), via the NASA Exoplanet Archive; mass from Turner et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.545f1703T), via the NASA Exoplanet Archive; orbit from Turner et al. 2026 (2026MNRAS.545f1703T), via the NASA Exoplanet Archive"
+    }
+  }
+}

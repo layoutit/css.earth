@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202450334",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Martioli et al. (2024): TOI-3568 b: A super-Neptune in the sub-Jovian desert",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2409.03704"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202450334"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...690A.312M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A.312M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202450334",
+      "label": "Astronomy & Astrophysics 690 A312"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A.312M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Martioli et al. (2024), Astronomy & Astrophysics 690 A312",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A.312M"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 690 A312",
+  "creators": [
+    "E. Martioli",
+    "R. P. Petrucci",
+    "E. Jofré",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

@@ -1,0 +1,31 @@
+{
+ "id": "toi-4427b",
+ "classification": "exoplanet",
+ "order": 4414,
+ "physical": {
+  "name": "TOI-4427 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 83502.7,
+  "gravitationalParameterKm3PerS2": 34965482.8,
+  "parent": "toi-4427"
+ },
+ "physicalNotes": "Radius 1.168 Jupiter radii from Guenther et al. 2026 (2026AJ....172...54G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract): 83,502.7 km at 71,492 km per Jupiter radius. GM from the mass 0.276 Jupiter masses (Guenther et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026AJ....172...54G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.6182621,
+  "semiMajorAxisStellarRadii": 13.0203,
+  "inclinationDegrees": 87.4,
+  "eccentricity": 0.074,
+  "argumentOfPeriapsisDegrees": 285,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59598.212954,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Guenther et al. 2026 (2026AJ....172...54G), via the NASA Exoplanet Archive ps table (pl_refname GUENTHER_ET_AL_2026): P 4.6182621 d",
+   "shape": "Guenther et al. 2026 (2026AJ....172...54G), via the NASA Exoplanet Archive ps table (pl_refname GUENTHER_ET_AL_2026): a/R* derived from its semi-major axis 0.05389 au and stellar radius 0.89 solar radii; Guenther et al. 2026 (2026AJ....172...54G), via the NASA Exoplanet Archive ps table (pl_refname GUENTHER_ET_AL_2026): inclination 87.4 degrees",
+   "eccentricity": "Guenther et al. 2026 (2026AJ....172...54G), via the NASA Exoplanet Archive ps table (pl_refname GUENTHER_ET_AL_2026): e 0.074",
+   "argumentOfPeriapsis": "Guenther et al. 2026 (2026AJ....172...54G), via the NASA Exoplanet Archive ps table (pl_refname GUENTHER_ET_AL_2026): omega -75 degrees, stored as 285",
+   "phase": "Guenther et al. 2026 (2026AJ....172...54G), via the NASA Exoplanet Archive ps table (pl_refname GUENTHER_ET_AL_2026): transit mid-time 2459598.712954 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,24 @@
+# TOI-260
+
+## Sources
+
+Its radius and temperature follow Hobson et al. 2024. It is also HIP 1532. This account was drafted from Hobson et al. 2024's values; the sections below are the data's own.
+
+**Star.** Placement: Gaia DR3 source 2428162410789155328, parallax 49.476 ± 0.018 mas (20.21 pc). Radius 0.607 +/- 0.014 solar radii from Hobson et al. 2024, the stellar radius of the default parameter set of TOI-260 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract). Mass 0.616 +/- 0.032 solar masses from Hobson et al. 2024, the stellar mass of the default parameter set of TOI-260 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract). Temperature 4,026 K from Hobson et al. 2024, the stellar temperature of the default parameter set of TOI-260 b in the NASA Exoplanet Archive. log g 4.66 from the mass and radius.
+
+**Colour.** A Planck spectrum at 4,026 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2° observer: #ffd4a6. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,026 K and log g 4.66 (u1 0.567, u2 0.198): a model, because no fit of this star's limb is used.
+
+## Evidence
+
+Generated 2026-09-29 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
+
+
+## Known problems
+
+- **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
+- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
+
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

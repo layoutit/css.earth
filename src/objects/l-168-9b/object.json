@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "l-168-9b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "L 168-9 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10396.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/l-168-9b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "L 168-9 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 5194176.3,
+      "description": "L 168-9 b was found in 2020 by TESS as it crossed its star.",
+      "systemName": "L 168-9 system",
+      "order": 3798,
+      "context": {
+        "order": 3798
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        381882511072399740,
+        -67153384338976860,
+        -673382350349203100
+      ],
+      "presentationToReference": [
+        0.5062948568160911,
+        -0.12322452475896448,
+        0.8535111214621055,
+        0.012358300506118906,
+        -0.9885998614802503,
+        -0.15005860951585037,
+        -0.8622718772928721,
+        -0.08652184914319247,
+        0.4990001796098558
+      ],
+      "orbitUpReference": [
+        0.12322452475896448,
+        0.9885998614802503,
+        0.08652184914319247
+      ],
+      "metersPerUnit": 33536.45161290323,
+      "bodyRadiusM": 10396300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

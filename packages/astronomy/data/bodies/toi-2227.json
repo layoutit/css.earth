@@ -1,0 +1,30 @@
+{
+ "id": "toi-2227",
+ "classification": "star",
+ "order": 4270,
+ "physical": {
+  "name": "TOI-2227",
+  "horizonsCode": null,
+  "meanRadiusKm": 840732.6,
+  "gravitationalParameterKm3PerS2": 136061889688.69388,
+  "parent": null,
+  "effectiveTemperatureK": 5889.54
+ },
+ "physicalNotes": "Radius 1.20847 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-2227 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 840,733 km at 695,700 km per solar radius. Mass 1.025 (0.985 to 1.065) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5889.54 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-2227 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 337.51775530142675,
+  "declinationDegrees": -67.8501425008035,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 168.23526942820197,
+  "properMotionRaMasPerYear": -2.8792246776156,
+  "properMotionDecMasPerYear": 24.739988309434903,
+  "radialVelocityKmPerS": 6.608831,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 6385929006882225024 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-2227/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.9441 +/- 0.0130 mas (same row, RUWE 1.03): 168.24 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -2.879, 24.740 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 6.61 +/- 0.20 km/s"
+  }
+ }
+}

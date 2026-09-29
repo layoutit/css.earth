@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-137",
+  "card": {
+    "text": "K2-137 b crosses K2-137 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-psj-ac0ea0",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract",
+        "label": "Adams et al. (2021), The Planetary Science Journal 2 152",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ADAMS_ET_AL__2021, SMITH_ET_AL__2018): st_teff 3697, st_rad 0.29, st_mass 0.463"
+      },
+      {
+        "catalogueId": "wikipedia-k2-137b",
+        "url": "https://en.wikipedia.org/wiki/K2-137b",
+        "label": "Wikipedia, \"K2-137b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374088039",
+        "quote": "K2-137b is a hot, iron-rich, rocky exoplanet around the red dwarf K2-137 in the constellation Virgo about 99 parsecs from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Adams et al. 2021.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-psj-ac0ea0",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract",
+        "label": "Adams et al. (2021), The Planetary Science Journal 2 152",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ADAMS_ET_AL__2021, SMITH_ET_AL__2018): st_teff 3697, st_rad 0.29, st_mass 0.463"
+      },
+      {
+        "catalogueId": "wikipedia-k2-137b",
+        "url": "https://en.wikipedia.org/wiki/K2-137b",
+        "label": "Wikipedia, \"K2-137b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374088039",
+        "quote": "It orbits the star very rapidly, with an orbital period of 0.1797 days (4.31 h), at a distance of just 0.0058 AU (870,000 km)."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

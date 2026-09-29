@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ucac3-93-101439",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "UCAC3 93-101439",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 374286.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ucac3-93-101439-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "UCAC3 93-101439",
+      "classification": "star",
+      "color": "#ffbf88",
+      "distanceAu": 12236521.4,
+      "description": "UCAC3 93-101439 is a star of 3,766 K, bound to TOI-815 359 AU away.",
+      "systemName": "TOI-815 system",
+      "order": 4728,
+      "context": {
+        "order": 4725
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1205112488274201000,
+        539802633758264700,
+        -1267776775835419000
+      ],
+      "presentationToReference": [
+        -0.6583306010622417,
+        0.6320526482803162,
+        0.40879122973330356,
+        0.29488416707532517,
+        -0.28311410688146377,
+        0.9126279255496201,
+        -0.6925634611451281,
+        -0.7213569520608712,
+        -3.6141657927962823e-7
+      ],
+      "orbitUpReference": [
+        -0.6320526482803162,
+        0.28311410688146377,
+        0.7213569520608712
+      ],
+      "metersPerUnit": 1207376.1290322582,
+      "bodyRadiusM": 374286600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

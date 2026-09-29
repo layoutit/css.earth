@@ -1,0 +1,39 @@
+{
+  "id": "kepler-1869",
+  "name": "Kepler-1869",
+  "system": "Kepler-1869 system",
+  "description": "Star of 5,808 K, 113 parsecs away, with 2 transiting planets.",
+  "target": "Kepler-1869",
+  "gaia": "2125751461382627840",
+  "paper": {
+    "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+    "credit": "Q1-Q17 DR25 KOI Table"
+  },
+  "radius": {
+    "value": 0.902,
+    "source": "Q1-Q17 DR25 KOI Table, the stellar radius of the default parameter set of Kepler-1869 c in the NASA Exoplanet Archive",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+    "uncertainty": 0.138
+  },
+  "mass": {
+    "value": 0.987,
+    "source": "Q1-Q17 DR25 KOI Table, the stellar mass of the default parameter set of Kepler-1869 c in the NASA Exoplanet Archive",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+    "uncertainty": 0.049
+  },
+  "temperature": {
+    "value": 5808,
+    "source": "Q1-Q17 DR25 KOI Table, the stellar temperature of the default parameter set of Kepler-1869 c in the NASA Exoplanet Archive",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+    "uncertainty": 105
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross Kepler-1869 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Q1-Q17 DR25 KOI Table.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname Q1_Q17_DR25_KOI_TABLE): st_teff 5808, st_rad 0.902, st_mass 0.987"
+  },
+  "notes": [],
+  "order": 3700
+}

@@ -1,0 +1,25 @@
+{
+  "host": "toi-5388",
+  "planets": [
+    {
+      "id": "toi-5388b",
+      "name": "TOI-5388 b",
+      "description": "Transiting planet of TOI-5388 with a 2.59-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract",
+        "credit": "Poultourtzidis et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POULTOURTZIDIS_ET_AL_2026",
+        "planetName": "TOI-5388.01"
+      },
+      "text": {
+        "card": "TOI-5388 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5388. Its orbit and size follow Poultourtzidis et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POULTOURTZIDIS_ET_AL_2026): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.5946748, pl_radj 0.08832204, pl_bmassj 0.00692197"
+      },
+      "order": 4516
+    }
+  ]
+}

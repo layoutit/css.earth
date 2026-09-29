@@ -1,0 +1,28 @@
+{
+ "id": "toi-237b",
+ "classification": "exoplanet",
+ "order": 4289,
+ "physical": {
+  "name": "TOI-237 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 9184.4,
+  "gravitationalParameterKm3PerS2": 1062900,
+  "parent": "toi-237"
+ },
+ "physicalNotes": "Radius 0.1284682 Jupiter radii from Waalkes et al. 2021 (2021AJ....161...13W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract): 9,184.4 km at 71,492 km per Jupiter radius. GM from the mass 0.00839 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 5.43613914,
+  "semiMajorAxisStellarRadii": 34.7,
+  "inclinationDegrees": 89.5,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58697.2208,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Timmermans et al. 2026 (2026MNRAS.549ag710T), via the NASA Exoplanet Archive ps table (pl_refname TIMMERMANS_ET_AL_2026): P 5.43613914 d",
+   "shape": "Waalkes et al. 2021 (2021AJ....161...13W), via the NASA Exoplanet Archive ps table (pl_refname WAALKES_ET_AL__2021): a/R* 34.7; Waalkes et al. 2021 (2021AJ....161...13W), via the NASA Exoplanet Archive ps table (pl_refname WAALKES_ET_AL__2021): inclination 89.5 degrees",
+   "eccentricity": "Waalkes et al. 2021 (2021AJ....161...13W), via the NASA Exoplanet Archive ps table (pl_refname WAALKES_ET_AL__2021): e 0",
+   "phase": "Timmermans et al. 2026 (2026MNRAS.549ag710T), via the NASA Exoplanet Archive ps table (pl_refname TIMMERMANS_ET_AL_2026): transit mid-time 2458697.7208 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

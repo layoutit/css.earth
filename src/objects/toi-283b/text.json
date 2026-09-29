@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-283b",
+  "card": {
+    "text": "TOI-283 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202553968",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract",
+        "label": "Murgas et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MURGAS_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 17.61745, pl_radj 0.20876118, pl_bmassj 0.02057714"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-283. Its orbit and size follow Murgas et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202553968",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract",
+        "label": "Murgas et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MURGAS_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 17.61745, pl_radj 0.20876118, pl_bmassj 0.02057714"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

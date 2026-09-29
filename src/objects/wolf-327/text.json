@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wolf-327",
+  "card": {
+    "text": "Wolf 327 b crosses Wolf 327 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348813",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract",
+        "label": "Murgas et al. (2024), Astronomy & Astrophysics 684 A83",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MURGAS_ET_AL_2024): st_teff 3542, st_rad 0.406, st_mass 0.405"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Murgas et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348813",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract",
+        "label": "Murgas et al. (2024), Astronomy & Astrophysics 684 A83",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MURGAS_ET_AL_2024): st_teff 3542, st_rad 0.406, st_mass 0.405"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

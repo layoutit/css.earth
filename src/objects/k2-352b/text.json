@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-352b",
+  "card": {
+    "text": "K2-352 b was found in 2021 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab2305",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+        "label": "Leon et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DE_LEON_ET_AL_2021): disc_year 2021, disc_facility K2, sy_pnum 3; pl_orbper 3.665912, pl_radj 0.12222342, pl_bmassj 0.00771"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 3 planets known around K2-352. Its orbit and size follow de Leon et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab2305",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+        "label": "Leon et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DE_LEON_ET_AL_2021): disc_year 2021, disc_facility K2, sy_pnum 3; pl_orbper 3.665912, pl_radj 0.12222342, pl_bmassj 0.00771"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

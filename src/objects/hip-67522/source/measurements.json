@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hip-67522",
+  "angularDiameterMas": 0.1,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 960,066 km at 124.73 pc = 0.1 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 124.73429123702658,
+  "distanceSource": "Gaia DR3 parallax 8.0170 +/- 0.0182 mas (same row, RUWE 0.87): 124.73 pc, no zero-point correction",
+  "radiusKm": 960066,
+  "radiusSource": "Radius 1.38 +/- 0.06 solar radii from Barber et al. 2024, the stellar radius of the default parameter set of HIP 67522 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract): 960,066 km at 695,700 km per solar radius. Mass 1.22 +/- 0.05 solar masses from Barber et al. 2024, the stellar mass of the default parameter set of HIP 67522 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract); GM is that mass times the JPL solar GM. Temperature 5675 +/- 75 K from Barber et al. 2024, the stellar temperature of the default parameter set of HIP 67522 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5675,
+  "effectiveTemperatureSource": "Barber et al. 2024, the stellar temperature of the default parameter set of HIP 67522 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract)",
+  "surfaceGravityLogg": 4.24,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hip-67522.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.245, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "host": "kepler-411",
+  "planets": [
+    {
+      "id": "kepler-411d",
+      "name": "Kepler-411 d",
+      "description": "Transiting planet of Kepler-411 with a 58-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract",
+        "credit": "Sun et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SUN_ET_AL__2019"
+      },
+      "text": {
+        "card": "Kepler-411 d was found in 2018 by Kepler as it crossed its star.",
+        "introduction": "It is one of 4 planets known around Kepler-411. Its orbit and size follow Sun et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SUN_ET_AL__2019): disc_year 2018, disc_facility Kepler, sy_pnum 4; pl_orbper 58.0198583, pl_radj 0.29610135, pl_bmassj 0.04782431"
+      },
+      "order": 3747
+    }
+  ]
+}

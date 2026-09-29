@@ -1,0 +1,25 @@
+{
+  "host": "toi-2211",
+  "planets": [
+    {
+      "id": "toi-2211b",
+      "name": "TOI-2211 b",
+      "description": "Transiting planet of TOI-2211 with a 3.09-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+        "credit": "Crossfield et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CROSSFIELD_ET_AL_2025",
+        "planetName": "TOI-2211.01"
+      },
+      "text": {
+        "card": "TOI-2211 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2211. Its orbit and size follow Crossfield et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CROSSFIELD_ET_AL_2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.09268584419, pl_radj 0.13926333, pl_bmassj 0.00962"
+      },
+      "order": 4269
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "host": "hd-39091",
+  "planets": [
+    {
+      "id": "hd-39091b",
+      "name": "HD 39091 b",
+      "description": "Planet of HD 39091 found by radial velocity, with a 2090-day year, found in 2001.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A..31D/abstract",
+        "credit": "Damasso et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "measured": true
+      },
+      "text": {
+        "card": "HD 39091 b was found in 2001 by Anglo-Australian Telescope by radial velocity; it does not cross its star.",
+        "introduction": "It is one of 3 planets known around HD 39091. Its orbit, tilt included, follows Damasso et al. 2020's fit, and its size is the archive's model from its mass.",
+        "locator": "NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL__2020): disc_year 2001, disc_facility Anglo-Australian Telescope, sy_pnum 3; pl_orbper 2088.8, pl_orbincl 45.8, pl_orbtper 2458388.6; pscomppars calculated pl_radj 1.1, pl_bmassj 14.1",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Pi_Mensae_b",
+          "title": "Pi Mensae b",
+          "revision": "1374383257",
+          "card": "Pi Mensae b, also known as HD 39091 b, is an extrasolar planet approximately 60 light-years away in the constellation of Mensa.",
+          "introduction": "The planet was announced orbiting the yellow main-sequence star Pi Mensae in October 2001."
+        }
+      },
+      "order": 4867
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201016183",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Southworth et al. (2011): A much lower density for the transiting extrasolar planet WASP-7",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1012.5181"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201016183"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011A&A...527A...8S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201016183",
+      "label": "Astronomy & Astrophysics 527 A8"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Southworth et al. (2011), Astronomy & Astrophysics 527 A8",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 527 A8",
+  "creators": [
+    "J. Southworth",
+    "M. Dominik",
+    "U. G. Jørgensen",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

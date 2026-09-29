@@ -1,0 +1,31 @@
+{
+  "host": "hd-80606",
+  "planets": [
+    {
+      "id": "hd-80606b",
+      "name": "HD 80606 b",
+      "description": "Transiting planet of HD 80606 with a 111-day year, found in 2001.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract",
+        "credit": "Pearson et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PEARSON_ET_AL__2022"
+      },
+      "text": {
+        "card": "HD 80606 b was found in 2001 as it crossed its star.",
+        "introduction": "It is the only planet known around HD 80606. Its orbit and size follow Pearson et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PEARSON_ET_AL__2022): disc_year 2001, disc_facility Multiple Observatories, sy_pnum 1; pl_orbper 111.436765, pl_radj 1.032, pl_bmassj 4.1641",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HD_80606_b",
+          "title": "HD 80606 b",
+          "revision": "1371177387",
+          "card": "HD 80606 b is an eccentric hot Jupiter 217 light-years from the Sun in the constellation of Ursa Major.",
+          "introduction": "HD 80606 b was discovered orbiting the star HD 80606 in April 2001 by a team led by Michel Mayor and Didier Queloz."
+        }
+      },
+      "order": 3236
+    }
+  ]
+}

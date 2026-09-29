@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-1173",
+  "angularDiameterMas": 0.07,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 649,784 km at 132.16 pc = 0.07 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 132.16347188634884,
+  "distanceSource": "Gaia DR3 parallax 7.5664 +/- 0.0121 mas (same row, RUWE 0.84): 132.16 pc, no zero-point correction",
+  "radiusKm": 649783.8,
+  "radiusSource": "Radius 0.934 +/- 0.011 solar radii from Galarza et al. 2024, the stellar radius of TOI-1173 b's parameter set from Galarza et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G/abstract): 649,784 km at 695,700 km per solar radius. Mass 0.911 +/- 0.028 solar masses from Galarza et al. 2024, the stellar mass of TOI-1173 b's parameter set from Galarza et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G/abstract); GM is that mass times the JPL solar GM. Temperature 5350 +/- 34 K from Galarza et al. 2024, the stellar temperature of TOI-1173 b's parameter set from Galarza et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5350,
+  "effectiveTemperatureSource": "Galarza et al. 2024, the stellar temperature of TOI-1173 b's parameter set from Galarza et al. 2024 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G/abstract)",
+  "surfaceGravityLogg": 4.46,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1173.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.457, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

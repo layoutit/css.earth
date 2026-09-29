@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1051-0004-6361-202449545",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Osorio et al. (2026): A super-Earth orbiting the early-M dwarf GJ7",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202449545"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026A&A...706A.166Z"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Osorio et al. (2026), Astronomy & Astrophysics 706 A166",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 706 A166",
+  "creators": [
+    "M. R. Zapatero Osorio",
+    "H. Tabernero",
+    "A. Suárez Mascareño",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-519b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-519b-orbits",
+      "title": "TOI-519 b: orbits around TOI-519",
+      "output": "toi-519b-system-orbits.svg",
+      "system": "toi-519",
+      "highlight": "toi-519b",
+      "description": "The orbits of TOI-519's planets in this map from above, to scale, with TOI-519 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Hartman et al. 2023 (2023AJ....166..163H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2023): P 1.26523248 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-519b-transit",
+      "title": "TOI-519 b: its transit",
+      "description": "TOI-519 b crossing its star, as TESS recorded it: 3 sectors (34, 61, 88) of the SPOC pipeline's 2-minute light curves of TIC 218795833, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-519b-transit.svg",
+      "metadata": {
+        "tic": "TIC 218795833",
+        "sectors": [
+          34,
+          61,
+          88
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-519b",
+      "sources": [
+        "photometry/tess/tess2021014023720-s0034-0000000218795833-0204-s_lc.fits",
+        "photometry/tess/tess2023018032328-s0061-0000000218795833-0250-s_lc.fits",
+        "photometry/tess/tess2025014115807-s0088-0000000218795833-0285-s_lc.fits"
+      ],
+      "durationHours": 1.236,
+      "binMinutes": 5,
+      "notes": [
+        "TESS 2-min SPOC · sectors 34, 61, 88",
+        "Folded on the app's orbit; 5-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

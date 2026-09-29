@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201834001",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Palle et al. (2019): Detection and Doppler monitoring of K2-285 (EPIC 246471491), a system of four transiting planets smaller than Neptune",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1808.00575"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201834001"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019A&A...623A..41P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201834001",
+      "label": "Astronomy & Astrophysics 623 A41"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Palle et al. (2019), Astronomy & Astrophysics 623 A41",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A..41P"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 623 A41",
+  "creators": [
+    "E. Palle",
+    "G. Nowak",
+    "R. Luque",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

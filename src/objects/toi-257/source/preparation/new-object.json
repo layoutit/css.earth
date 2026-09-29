@@ -1,0 +1,39 @@
+{
+  "id": "toi-257",
+  "name": "TOI-257",
+  "system": "TOI-257 system",
+  "description": "Star of 6,095 K, 76.9 parsecs away, with 1 transiting planet.",
+  "target": "TOI-257",
+  "gaia": "4747624104168195072",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract",
+    "credit": "Addison et al. 2021"
+  },
+  "radius": {
+    "value": 1.867,
+    "source": "Addison et al. 2021, the stellar radius of the default parameter set of TOI-257 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract",
+    "uncertainty": 0.033
+  },
+  "mass": {
+    "value": 1.407,
+    "source": "Addison et al. 2021, the stellar mass of the default parameter set of TOI-257 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract",
+    "uncertainty": 0.045
+  },
+  "temperature": {
+    "value": 6095,
+    "source": "Addison et al. 2021, the stellar temperature of the default parameter set of TOI-257 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract",
+    "uncertainty": 89
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-257 b crosses TOI-257 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Addison et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ADDISON_ET_AL__2021): st_teff 6095, st_rad 1.867, st_mass 1.407"
+  },
+  "notes": [],
+  "order": 4326
+}

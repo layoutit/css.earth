@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-95338b",
+  "card": {
+    "text": "HD 95338 b was found in 2020 by Las Campanas Observatory as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202554040",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract",
+        "label": "Kálmán et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): disc_year 2020, disc_facility Las Campanas Observatory, sy_pnum 1; pl_orbper 55.082694, pl_radj 0.3811, pl_bmassj 0.135"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HD 95338. Its orbit and size follow Kálmán et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202554040",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract",
+        "label": "Kálmán et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): disc_year 2020, disc_facility Las Campanas Observatory, sy_pnum 1; pl_orbper 55.082694, pl_radj 0.3811, pl_bmassj 0.135"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

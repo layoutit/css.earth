@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lhs-1478",
+  "card": {
+    "text": "LHS 1478 b crosses LHS 1478 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452611",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+        "label": "August et al. (2025), Astronomy & Astrophysics 695 A171",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname AUGUST_ET_AL_2025): st_teff 3415, st_rad 0.2462, st_mass 0.2301"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-1478",
+        "url": "https://en.wikipedia.org/wiki/LHS_1478",
+        "label": "Wikipedia, \"LHS 1478\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442044",
+        "quote": "LHS 1478 is a M3V-type main sequence star located 59.4 light-years from Earth in the constellation of Cassiopeia."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow August et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452611",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+        "label": "August et al. (2025), Astronomy & Astrophysics 695 A171",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname AUGUST_ET_AL_2025): st_teff 3415, st_rad 0.2462, st_mass 0.2301"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-1478",
+        "url": "https://en.wikipedia.org/wiki/LHS_1478",
+        "label": "Wikipedia, \"LHS 1478\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442044",
+        "quote": "It has a mass of 0.24 solar masses and a radius of 0.25 solar radii."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

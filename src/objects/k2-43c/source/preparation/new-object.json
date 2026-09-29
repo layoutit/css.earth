@@ -1,0 +1,24 @@
+{
+  "host": "k2-43",
+  "planets": [
+    {
+      "id": "k2-43c",
+      "name": "K2-43 c",
+      "description": "Transiting planet of K2-43 with a 2.2-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+        "credit": "Hedges et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HEDGES_ET_AL__2019"
+      },
+      "text": {
+        "card": "K2-43 c was found in 2019 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around K2-43. Its orbit and size follow Hedges et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HEDGES_ET_AL__2019): disc_year 2019, disc_facility K2, sy_pnum 2; pl_orbper 2.198884, pl_radj 0.21589794, pl_bmassj 0.0203"
+      },
+      "order": 3583
+    }
+  ]
+}

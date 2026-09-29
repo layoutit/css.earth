@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hip-67522",
+  "card": {
+    "text": "2 planets cross HIP 67522 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad77d9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+        "label": "Barber et al. (2024), The Astrophysical Journal Letters 973 L30",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARBER_ET_AL__2024): st_teff 5675, st_rad 1.38, st_mass 1.22"
+      },
+      {
+        "catalogueId": "wikipedia-hip-67522",
+        "url": "https://en.wikipedia.org/wiki/HIP_67522",
+        "label": "Wikipedia, \"HIP 67522\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374404438",
+        "quote": "HIP 67522 is a G-type main sequence star located at a distance of 407 light-years away in the constellation of Centaurus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Barber et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad77d9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+        "label": "Barber et al. (2024), The Astrophysical Journal Letters 973 L30",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARBER_ET_AL__2024): st_teff 5675, st_rad 1.38, st_mass 1.22"
+      },
+      {
+        "catalogueId": "wikipedia-hip-67522",
+        "url": "https://en.wikipedia.org/wiki/HIP_67522",
+        "label": "Wikipedia, \"HIP 67522\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374404438",
+        "quote": "Its visual magnitude of 9.8 makes it much too faint to be seen by the unaided eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

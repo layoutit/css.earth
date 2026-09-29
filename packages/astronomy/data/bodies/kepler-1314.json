@@ -1,0 +1,30 @@
+{
+ "id": "kepler-1314",
+ "classification": "star",
+ "order": 3668,
+ "physical": {
+  "name": "Kepler-1314",
+  "horizonsCode": null,
+  "meanRadiusKm": 410463,
+  "gravitationalParameterKm3PerS2": 79627464025.16362,
+  "parent": null,
+  "effectiveTemperatureK": 4188
+ },
+ "physicalNotes": "Radius 0.59 +/- 0.019 solar radii from Morton et al. 2016, the stellar radius of the default parameter set of Kepler-1314 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract): 410,463 km at 695,700 km per solar radius. Mass 0.6 +/- 0.02 solar masses from Morton et al. 2016, the stellar mass of the default parameter set of Kepler-1314 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract); GM is that mass times the JPL solar GM. Temperature 4188 +/- 92.28 K from Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1314 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 294.2373431819365,
+  "declinationDegrees": 45.19681212689284,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 142.68733943401173,
+  "properMotionRaMasPerYear": -87.54027411546437,
+  "properMotionDecMasPerYear": -109.03682242966724,
+  "radialVelocityKmPerS": 0,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2079920724360946560 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-1314/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 7.0083 +/- 0.1077 mas (same row, RUWE 1.78): 142.69 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): -87.540, -109.037 mas/yr",
+   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 2079920724360946560 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 50,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202079920724360946560)"
+  }
+ }
+}

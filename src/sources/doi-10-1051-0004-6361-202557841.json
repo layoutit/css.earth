@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202557841",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nagel et al. (2026): Mass determination of the ultra-short-period planet LHS 3844 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2603.28238"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202557841"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026A&A...710A.311N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202557841",
+      "label": "Astronomy & Astrophysics 710 A311"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Nagel et al. (2026), Astronomy & Astrophysics 710 A311",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 710 A311",
+  "creators": [
+    "E. Nagel",
+    "J. Köhler",
+    "M. Zechmeister",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

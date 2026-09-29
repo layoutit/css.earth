@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "k2-128",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 540,955 km at 114.33 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 114.33322815693668,
+  "distanceSource": "Gaia DR3 parallax 8.7464 +/- 0.0174 mas (same row, RUWE 1.17): 114.33 pc, no zero-point correction",
+  "radiusKm": 540954.8,
+  "radiusSource": "Radius 0.777569 +/- 0.076202 solar radii from Dressing et al. 2017, the stellar radius of the default parameter set of K2-128 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract): 540,955 km at 695,700 km per solar radius. Mass 0.711248 +/- 0.071125 solar masses from Dressing et al. 2017, the stellar mass of the default parameter set of K2-128 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract); GM is that mass times the JPL solar GM. Temperature 4469.51 +/- 171.97 K from Dressing et al. 2017, the stellar temperature of the default parameter set of K2-128 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4469.51,
+  "effectiveTemperatureSource": "Dressing et al. 2017, the stellar temperature of the default parameter set of K2-128 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract)",
+  "surfaceGravityLogg": 4.51,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-128.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.509, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

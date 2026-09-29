@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-287",
+  "card": {
+    "text": "K2-287 b crosses K2-287 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aafa79",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..100J/abstract",
+        "label": "Jordán et al. (2019), The Astronomical Journal 157 100",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JORD_AACUTE_N_ET_AL__2019): st_teff 5695, st_rad 1.07, st_mass 1.056"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Jordán et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aafa79",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..100J/abstract",
+        "label": "Jordán et al. (2019), The Astronomical Journal 157 100",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JORD_AACUTE_N_ET_AL__2019): st_teff 5695, st_rad 1.07, st_mass 1.056"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-1782c",
+  "displayName": "TOI-1782 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.4 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad9aa6",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C",
+          "label": "Crossfield et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.99 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad9aa6",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C",
+          "label": "Crossfield et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "6.2 Earth masses (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-1782; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-1782c-lens-shape.webp",
+        "surface": "toi-1782c-surface-shape@2x.webp",
+        "poles": "toi-1782c-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-1782c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-1782 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-1782's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-1782c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-1782c/toi-1782c-system-orbits.svg",
+      "alt": "The orbits of TOI-1782's planets in this map from above, to scale, with TOI-1782 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-1782c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Crossfield et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+      "credit": "Crossfield et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-1782c.json",
+      "credit": "Radius from Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive; mass from the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive; orbit from Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive"
+    }
+  }
+}

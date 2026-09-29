@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1772b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1772b-orbits",
+      "title": "TOI-1772 b: orbits around TOI-1772",
+      "output": "toi-1772b-system-orbits.svg",
+      "system": "toi-1772",
+      "highlight": "toi-1772b",
+      "description": "The orbits of TOI-1772's planets in this map from above, to scale, with TOI-1772 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive ps table (pl_refname CROSSFIELD_ET_AL_2025): P 8.054246874 d"
+      }
+    }
+  ]
+}

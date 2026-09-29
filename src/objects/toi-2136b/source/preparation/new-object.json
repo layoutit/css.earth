@@ -1,0 +1,31 @@
+{
+  "host": "toi-2136",
+  "planets": [
+    {
+      "id": "toi-2136b",
+      "name": "TOI-2136 b",
+      "description": "Transiting planet of TOI-2136 with a 7.85-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract",
+        "credit": "Gan et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GAN_ET_AL_2022"
+      },
+      "text": {
+        "card": "TOI-2136 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2136. Its orbit and size follow Gan et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GAN_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 7.851925, pl_radj 0.19537905, pl_bmassj 0.02004226",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-2136_b",
+          "title": "TOI-2136 b",
+          "revision": "1374086954",
+          "card": "TOI-2136 b is a sub-Neptune exoplanet orbiting the nearby red dwarf star TOI-2136.",
+          "introduction": "It was discovered in 2022 through transit observations by NASA's TESS and independently validated using ground-based photometry and radial velocity measurements."
+        }
+      },
+      "order": 4259
+    }
+  ]
+}

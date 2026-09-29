@@ -1,0 +1,28 @@
+{
+ "id": "kepler-1646b",
+ "classification": "exoplanet",
+ "order": 3684,
+ "physical": {
+  "name": "Kepler-1646 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 7845,
+  "gravitationalParameterKm3PerS2": 813327.53,
+  "parent": "kepler-1646"
+ },
+ "physicalNotes": "Radius 0.10973325 Jupiter radii from Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract): 7,845 km at 71,492 km per Jupiter radius. GM from the mass 0.00642 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.4855629633,
+  "semiMajorAxisStellarRadii": 27.358,
+  "inclinationDegrees": 89.36,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54967.93834,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): P 4.4855629633 d",
+   "shape": "Morton et al. 2016 (2016ApJ...822...86M), via the NASA Exoplanet Archive ps table (pl_refname MORTON_ET_AL__2016): a/R* derived by Kepler's third law from its period 4.4855629633 d, stellar mass 0.24 and radius 0.26 solar units; Q1-Q17 DR25 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR25_KOI_TABLE): inclination 89.36 degrees",
+   "eccentricity": "Q1-Q17 DR25 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR25_KOI_TABLE): e 0",
+   "phase": "Gajdoš et al. 2019 (2019RAA....19...41G), via the NASA Exoplanet Archive ps table (pl_refname GAJDO_SCARON__ET_AL__2019): transit mid-time 2454968.43834 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-staf939",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lockley et al. (2025): The TOI-1117 multiplanetary system: 3 sub-Neptunes, 1 in both the Neptunian Desert and Radius Valley",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2506.05521"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staf939"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025MNRAS.541..919L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staf939",
+      "label": "Monthly Notices of the Royal Astronomical Society 541 919-938"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lockley et al. (2025), Monthly Notices of the Royal Astronomical Society 541 919-938",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 541 919-938",
+  "creators": [
+    "Isobel S Lockley",
+    "David J Armstrong",
+    "Jorge Fernández Fernández",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

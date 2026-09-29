@@ -1,0 +1,41 @@
+{
+  "id": "toi-1062",
+  "name": "TOI-1062",
+  "system": "TOI-1062 system",
+  "description": "Star of 5,328 K, 82.2 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1062",
+  "gaia": "4632865331094140928",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract",
+    "credit": "Otegi et al. 2021"
+  },
+  "radius": {
+    "value": 0.84,
+    "source": "Otegi et al. 2021, the stellar radius of the default parameter set of TOI-1062 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract",
+    "uncertainty": 0.09
+  },
+  "mass": {
+    "value": 0.94,
+    "source": "Otegi et al. 2021, the stellar mass of the default parameter set of TOI-1062 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5328,
+    "source": "Otegi et al. 2021, the stellar temperature of the default parameter set of TOI-1062 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract",
+    "uncertainty": 56
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1062 b crosses TOI-1062 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Otegi et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname OTEGI_ET_AL__2021): st_teff 5328, st_rad 0.84, st_mass 0.94"
+  },
+  "notes": [
+    "TOI-1062 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3912
+}

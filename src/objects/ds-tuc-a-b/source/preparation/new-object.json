@@ -1,0 +1,24 @@
+{
+  "host": "ds-tuc-a",
+  "planets": [
+    {
+      "id": "ds-tuc-a-b",
+      "name": "DS Tuc A b",
+      "description": "Transiting planet of DS Tuc A with a 8.14-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract",
+        "credit": "Newton et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "NEWTON_ET_AL__2019"
+      },
+      "text": {
+        "card": "DS Tuc A b was found in 2019 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around DS Tuc A. Its orbit and size follow Newton et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NEWTON_ET_AL__2019): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 8.13822304107, pl_radj 0.50851994, pl_bmassj 1.3"
+      },
+      "order": 3056
+    }
+  ]
+}

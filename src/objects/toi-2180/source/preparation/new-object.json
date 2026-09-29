@@ -1,0 +1,39 @@
+{
+  "id": "toi-2180",
+  "name": "TOI-2180",
+  "system": "TOI-2180 system",
+  "description": "Star of 5,695 K, 117 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2180",
+  "gaia": "2151078741786155008",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D/abstract",
+    "credit": "Dalba et al. 2022"
+  },
+  "radius": {
+    "value": 1.636,
+    "source": "Dalba et al. 2022, the stellar radius of the default parameter set of TOI-2180 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D/abstract",
+    "uncertainty": 0.033
+  },
+  "mass": {
+    "value": 1.111,
+    "source": "Dalba et al. 2022, the stellar mass of the default parameter set of TOI-2180 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D/abstract",
+    "uncertainty": 0.047
+  },
+  "temperature": {
+    "value": 5695,
+    "source": "Dalba et al. 2022, the stellar temperature of the default parameter set of TOI-2180 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D/abstract",
+    "uncertainty": 58
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2180 b crosses TOI-2180 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Dalba et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DALBA_ET_AL__2022): st_teff 5695, st_rad 1.636, st_mass 1.111"
+  },
+  "notes": [],
+  "order": 4264
+}

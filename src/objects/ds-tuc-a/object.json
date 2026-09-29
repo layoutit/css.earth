@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ds-tuc-a",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "DS Tuc A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 670654.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ds-tuc-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "DS Tuc A",
+      "classification": "star",
+      "color": "#ffefeb",
+      "distanceAu": 9111961.7,
+      "description": "DS Tuc A b crosses DS Tuc A as seen from Earth, which is how it was found.",
+      "systemName": "DS Tuc system",
+      "order": 3055,
+      "context": {
+        "order": 3052
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        482235764594191940,
+        -42901283991917590,
+        -1274257332636250400
+      ],
+      "presentationToReference": [
+        0.35377416199891976,
+        -0.9311228349673316,
+        -0.08862340833189188,
+        -0.031472916207306925,
+        0.08284662977189382,
+        -0.9960652044323437,
+        -0.9348012076625543,
+        -0.35517137009877064,
+        -0.0000038460583495899634
+      ],
+      "orbitUpReference": [
+        0.9311228349673316,
+        -0.08284662977189382,
+        0.35517137009877064
+      ],
+      "metersPerUnit": 2163402.580645161,
+      "bodyRadiusM": 670654800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

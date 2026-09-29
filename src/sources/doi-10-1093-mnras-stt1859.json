@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stt1859",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nikolov et al. (2014): Hubble Space Telescope hot Jupiter transmission spectral survey: a detection of Na and strong optical absorption in HAT-P-1b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1310.0083"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stt1859"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2014MNRAS.437...46N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stt1859",
+      "label": "Monthly Notices of the Royal Astronomical Society 437 46-66"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Nikolov et al. (2014), Monthly Notices of the Royal Astronomical Society 437 46-66",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 437 46-66",
+  "creators": [
+    "N. Nikolov",
+    "D. K. Sing",
+    "F. Pont",
+    "et al."
+  ],
+  "publicationDate": "2014"
+}

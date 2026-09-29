@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2345c",
+  "card": {
+    "text": "TOI-2345 c was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1806",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract",
+        "label": "Eschen et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESCHEN_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 21.064302, pl_radj 0.21866395, pl_bmassj 0.02287398"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-2345. Its orbit and size follow Eschen et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1806",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract",
+        "label": "Eschen et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESCHEN_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 21.064302, pl_radj 0.21866395, pl_bmassj 0.02287398"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

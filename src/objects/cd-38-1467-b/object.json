@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "cd-38-1467-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CD-38 1467B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 386113.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cd-38-1467-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CD-38 1467B",
+      "classification": "star",
+      "color": "#ffc785",
+      "distanceAu": 25402421.8,
+      "description": "CD-38 1467B is a star of 3,418 K, bound to TOI-451 4,669 AU away.",
+      "systemName": "TOI-451 system",
+      "order": 4434,
+      "context": {
+        "order": 4431
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1362625237109904000,
+        2669097743039484400,
+        -2336727663187878000
+      ],
+      "presentationToReference": [
+        0.3585714259411276,
+        -0.27959246247525044,
+        0.8906484084225224,
+        0.7023664009973439,
+        -0.5476641545470579,
+        -0.45469265726894537,
+        -0.6149048473126429,
+        -0.7886013116596255,
+        3.652180540575075e-7
+      ],
+      "orbitUpReference": [
+        0.27959246247525044,
+        0.5476641545470579,
+        0.7886013116596255
+      ],
+      "metersPerUnit": 1245527.4193548388,
+      "bodyRadiusM": 386113500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

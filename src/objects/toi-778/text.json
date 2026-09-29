@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-778",
+  "card": {
+    "text": "TOI-778 b crosses TOI-778 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acc3a0",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract",
+        "label": "Clark et al. (2023), The Astronomical Journal 165 207",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CLARK_ET_AL__2023): st_teff 6643, st_rad 1.71, st_mass 1.4"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Clark et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acc3a0",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract",
+        "label": "Clark et al. (2023), The Astronomical Journal 165 207",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CLARK_ET_AL__2023): st_teff 6643, st_rad 1.71, st_mass 1.4"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

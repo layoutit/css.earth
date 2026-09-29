@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1266",
+  "card": {
+    "text": "2 planets cross TOI-1266 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adc0fe",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract",
+        "label": "Greklek-McKeon et al. (2025), The Astronomical Journal 169 292",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GREKLEK_MCKEON_ET_AL_2025): st_teff 3563, st_rad 0.4232, st_mass 0.437"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Greklek-McKeon et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adc0fe",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract",
+        "label": "Greklek-McKeon et al. (2025), The Astronomical Journal 169 292",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GREKLEK_MCKEON_ET_AL_2025): st_teff 3563, st_rad 0.4232, st_mass 0.437"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

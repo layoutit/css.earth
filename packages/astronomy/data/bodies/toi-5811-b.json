@@ -1,0 +1,30 @@
+{
+ "id": "toi-5811-b",
+ "classification": "star",
+ "order": 4588,
+ "physical": {
+  "name": "TOI-5811 B",
+  "horizonsCode": null,
+  "meanRadiusKm": 2594961,
+  "gravitationalParameterKm3PerS2": 143329435245.29453,
+  "parent": null,
+  "effectiveTemperatureK": 4840
+ },
+ "physicalNotes": "Radius 3.73 +/- 0.17 solar radii from Lillo-Box et al. 2026, the stellar radius of the default parameter set of TOI-5811 B b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract): 2,594,961 km at 695,700 km per solar radius. Mass 1.08 +/- 0.32 solar masses from Lillo-Box et al. 2026, the stellar mass of the default parameter set of TOI-5811 B b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract); GM is that mass times the JPL solar GM. Temperature 4840 +/- 110 K from Lillo-Box et al. 2026, the stellar temperature of the default parameter set of TOI-5811 B b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 310.91013883718,
+  "declinationDegrees": 19.72916655530224,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 172.34613873279596,
+  "properMotionRaMasPerYear": 30.367096980142954,
+  "properMotionDecMasPerYear": -9.744970515387799,
+  "radialVelocityKmPerS": 2.856251,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1814257339029589248 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-5811-b/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.8023 +/- 0.0174 mas (same row, RUWE 0.94): 172.35 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 30.367, -9.745 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 2.86 +/- 0.12 km/s"
+  }
+ }
+}

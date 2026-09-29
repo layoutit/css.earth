@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-2266",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 166,968 km at 51.85 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 51.846977413033265,
+  "distanceSource": "Gaia DR3 parallax 19.2875 +/- 0.0194 mas (same row, RUWE 1.03): 51.85 pc, no zero-point correction",
+  "radiusKm": 166968,
+  "radiusSource": "Radius 0.24 +/- 0.01 solar radii from Parviainen et al. 2024, the stellar radius of the default parameter set of TOI-2266 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract): 166,968 km at 695,700 km per solar radius. Mass 0.23 +/- 0.02 solar masses from Parviainen et al. 2024, the stellar mass of the default parameter set of TOI-2266 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract); GM is that mass times the JPL solar GM. Temperature 3200 +/- 170 K from Parviainen et al. 2024, the stellar temperature of the default parameter set of TOI-2266 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3200,
+  "effectiveTemperatureSource": "Parviainen et al. 2024, the stellar temperature of the default parameter set of TOI-2266 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract)",
+  "surfaceGravityLogg": 5.04,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2266.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.039, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

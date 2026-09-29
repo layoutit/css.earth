@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-15337b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.1579091 Jupiter radii from Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02051107 Jupiter masses: Rosário et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...686A.282R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.75599951974 d; Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive ps table (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): a/R* derived by Kepler's third law from its period 4.75599951974 d, stellar mass 0.829 and radius 0.855 solar units; Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive ps table (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): inclination 89.3 degrees; Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive ps table (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): e 0.058; Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive ps table (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): omega 71.62 degrees; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460984.453442 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract"
+      ]
+    }
+  ]
+}

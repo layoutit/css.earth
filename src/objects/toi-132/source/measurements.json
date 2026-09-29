@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-132",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 626,130 km at 164.45 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 164.44575967618997,
+  "distanceSource": "Gaia DR3 parallax 6.0810 +/- 0.0213 mas (same row, RUWE 1.02): 164.45 pc, no zero-point correction",
+  "radiusKm": 626130,
+  "radiusSource": "Radius 0.9 +/- 0.02 solar radii from Díaz et al. 2020, the stellar radius of the default parameter set of TOI-132 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract): 626,130 km at 695,700 km per solar radius. Mass 0.97 +/- 0.06 solar masses from Díaz et al. 2020, the stellar mass of the default parameter set of TOI-132 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract); GM is that mass times the JPL solar GM. Temperature 5397 +/- 46 K from Díaz et al. 2020, the stellar temperature of the default parameter set of TOI-132 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5397,
+  "effectiveTemperatureSource": "Díaz et al. 2020, the stellar temperature of the default parameter set of TOI-132 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract)",
+  "surfaceGravityLogg": 4.52,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-132.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.516, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

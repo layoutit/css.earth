@@ -1,0 +1,24 @@
+{
+  "host": "toi-540",
+  "planets": [
+    {
+      "id": "toi-540b",
+      "name": "TOI-540 b",
+      "description": "Transiting planet of TOI-540 with a 1.24-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract",
+        "credit": "Ment et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MENT_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-540 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-540. Its orbit and size follow Ment et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MENT_ET_AL__2021): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.2391481, pl_radj 0.08056026, pl_bmassj 0.00212"
+      },
+      "order": 4521
+    }
+  ]
+}

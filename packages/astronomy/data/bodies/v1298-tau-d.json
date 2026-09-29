@@ -1,0 +1,31 @@
+{
+ "id": "v1298-tau-d",
+ "classification": "exoplanet",
+ "order": 4764,
+ "physical": {
+  "name": "V1298 Tau d",
+  "horizonsCode": null,
+  "meanRadiusKm": 41649,
+  "gravitationalParameterKm3PerS2": 2391602.28,
+  "parent": "v1298-tau"
+ },
+ "physicalNotes": "Radius 0.58256858 Jupiter radii from Livingston et al. 2026 (2026Natur.649..310L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract): 41,649 km at 71,492 km per Jupiter radius. GM from the mass 0.01887811 Jupiter masses (Livingston et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026Natur.649..310L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 12.401394,
+  "semiMajorAxisStellarRadii": 17.6098,
+  "inclinationDegrees": 88.3,
+  "eccentricity": 0.21,
+  "argumentOfPeriapsisDegrees": 88,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58287.302142,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Livingston et al. 2026 (2026Natur.649..310L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL_2026): P 12.401394 d",
+   "shape": "Livingston et al. 2026 (2026Natur.649..310L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL_2026): a/R* derived from its semi-major axis 0.1081 au and stellar radius 1.32 solar radii; Suárez Mascareño et al. 2022 (2022NatAs...6..232S), via the NASA Exoplanet Archive ps table (pl_refname SU_AACUTE_REZ_MASCARE_NTILDE_O_ET_AL__2022): inclination 88.3 degrees",
+   "eccentricity": "David et al. 2019 (2019ApJ...885L..12D), via the NASA Exoplanet Archive ps table (pl_refname DAVID_ET_AL__2019): e 0.21",
+   "argumentOfPeriapsis": "David et al. 2019 (2019ApJ...885L..12D), via the NASA Exoplanet Archive ps table (pl_refname DAVID_ET_AL__2019): omega 88 degrees",
+   "phase": "Livingston et al. 2026 (2026Natur.649..310L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL_2026): transit mid-time 2458287.802142 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ltt-9779b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.4210902 Jupiter radii from Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.09225057 Jupiter masses: Jenkins et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020NatAs...4.1148J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 0.7920645022 d; Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive ps table (pl_refname JENKINS_ET_AL_2020): a/R* 3.877; Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive ps table (pl_refname JENKINS_ET_AL_2020): inclination 76.39 degrees; Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive ps table (pl_refname JENKINS_ET_AL_2020): e 0; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460933.175839 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract"
+      ]
+    }
+  ]
+}

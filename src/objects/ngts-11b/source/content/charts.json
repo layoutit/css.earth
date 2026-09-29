@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/ngts-11b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "ngts-11b-orbits",
+      "title": "NGTS-11 b: orbits around NGTS-11",
+      "output": "ngts-11b-system-orbits.svg",
+      "system": "ngts-11",
+      "highlight": "ngts-11b",
+      "description": "The orbits of NGTS-11's planets in this map from above, to scale, with NGTS-11 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 35.455984 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "ngts-11b-transit",
+      "title": "NGTS-11 b: its transit",
+      "description": "NGTS-11 b crossing its star, as TESS recorded it: 2 sectors (30, 97) of the SPOC pipeline's 2-minute light curves of TIC 54002556, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 14-minute bins. Error bars are each bin's standard error.",
+      "output": "ngts-11b-transit.svg",
+      "metadata": {
+        "tic": "TIC 54002556",
+        "sectors": [
+          30,
+          97
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "ngts-11b",
+      "sources": [
+        "photometry/tess/tess2020266004630-s0030-0000000054002556-0195-s_lc.fits",
+        "photometry/tess/tess2025258001959-s0097-0000000054002556-0294-s_lc.fits"
+      ],
+      "durationHours": 3.59,
+      "binMinutes": 14,
+      "notes": [
+        "TESS 2-min SPOC · sectors 30, 97",
+        "Folded on the app's orbit; 14-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

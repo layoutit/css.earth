@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-6256-149-5-166",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hartman et al. (2015): HATS-6b: A WARM SATURN TRANSITING AN EARLY M DWARF STAR, AND A SET OF EMPIRICAL RELATIONS FOR CHARACTERIZING K AND M DWARF PLANET HOSTS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1408.1758"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-6256/149/5/166"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015AJ....149..166H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-6256/149/5/166",
+      "label": "The Astronomical Journal 149 166"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hartman et al. (2015), The Astronomical Journal 149 166",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H"
+    }
+  ],
+  "publisher": "The Astronomical Journal 149 166",
+  "creators": [
+    "J. D. Hartman",
+    "D. Bayliss",
+    "R. Brahm",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

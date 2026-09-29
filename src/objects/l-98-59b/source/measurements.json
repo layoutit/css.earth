@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "l-98-59b",
+  "radiusKm": 5338.5,
+  "radiusSource": "Radius 0.07467227 Jupiter radii from Cadieux et al. 2025 (2025AJ....170..154C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract): 5,338.5 km at 71,492 km per Jupiter radius. GM from the mass 0.00144732 Jupiter masses (Cadieux et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..154C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.25311419,
+  "orbitalPeriodSource": "Schwarz et al. 2026 (2026AN....34770059S), via the NASA Exoplanet Archive ps table (pl_refname SCHWARZ_ET_AL_2026): P 2.25311419 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of L 98-59 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00144732 Jupiter masses: Cadieux et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..154C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract)."
+}

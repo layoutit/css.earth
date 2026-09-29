@@ -1,0 +1,24 @@
+{
+  "host": "toi-620",
+  "planets": [
+    {
+      "id": "toi-620b",
+      "name": "TOI-620 b",
+      "description": "Transiting planet of TOI-620 with a 5.1-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..269R/abstract",
+        "credit": "Reefe et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "REEFE_ET_AL_2022"
+      },
+      "text": {
+        "card": "TOI-620 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-620. Its orbit and size follow Reefe et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname REEFE_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 5.0988179, pl_radj 0.33544531, pl_bmassj 0.0428"
+      },
+      "order": 4619
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "k2-251",
+  "name": "K2-251",
+  "system": "K2-251 system",
+  "description": "Star of 3,717 K, 147 parsecs away, with 1 transiting planet.",
+  "target": "K2-251",
+  "gaia": "3675248118423392256",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "credit": "Livingston et al. 2018"
+  },
+  "radius": {
+    "value": 0.49,
+    "source": "Livingston et al. 2018, the stellar radius of the default parameter set of K2-251 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.52,
+    "source": "Livingston et al. 2018, the stellar mass of the default parameter set of K2-251 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 3717,
+    "source": "Livingston et al. 2018, the stellar temperature of the default parameter set of K2-251 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract",
+    "uncertainty": 85
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-251 b crosses K2-251 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Livingston et al. 2018.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL__2018): st_teff 3717, st_rad 0.49, st_mass 0.52"
+  },
+  "notes": [],
+  "order": 3428
+}

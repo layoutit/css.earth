@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-5344",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 409,072 km at 136.89 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 136.8871999567668,
+  "distanceSource": "Gaia DR3 parallax 7.3053 +/- 0.0233 mas (same row, RUWE 1.04): 136.89 pc, no zero-point correction",
+  "radiusKm": 409071.6,
+  "radiusSource": "Radius 0.588 +/- 0.011 solar radii from Hartman et al. 2023, the stellar radius of the default parameter set of TOI-5344 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract): 409,072 km at 695,700 km per solar radius. Mass 0.612 +/- 0.034 solar masses from Hartman et al. 2023, the stellar mass of the default parameter set of TOI-5344 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract); GM is that mass times the JPL solar GM. Temperature 3747 +/- 64 K from Hartman et al. 2023, the stellar temperature of the default parameter set of TOI-5344 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3747,
+  "effectiveTemperatureSource": "Hartman et al. 2023, the stellar temperature of the default parameter set of TOI-5344 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract)",
+  "surfaceGravityLogg": 4.69,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5344.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.686, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

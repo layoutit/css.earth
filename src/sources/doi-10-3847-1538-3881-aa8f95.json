@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aa8f95",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lund et al. (2017): KELT-20b: A Giant Planet with a Period of P ∼ 3.5 days Transiting the V ∼ 7.6 Early A Star HD 185603",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1707.01518"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aa8f95"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017AJ....154..194L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aa8f95",
+      "label": "The Astronomical Journal 154 194"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lund et al. (2017), The Astronomical Journal 154 194",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L"
+    }
+  ],
+  "publisher": "The Astronomical Journal 154 194",
+  "creators": [
+    "Michael B. Lund",
+    "Joseph E. Rodriguez",
+    "George Zhou",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/gj-9827d/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "gj-9827d-orbits",
+      "title": "GJ 9827 d: orbits around GJ 9827",
+      "output": "gj-9827d-system-orbits.svg",
+      "system": "gj-9827",
+      "highlight": "gj-9827d",
+      "description": "The orbits of GJ 9827's planets in this map from above, to scale, with GJ 9827 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Piaulet-Ghorayeb et al. 2024 (2024ApJ...974L..10P), via the NASA Exoplanet Archive ps table (pl_refname PIAULET_GHORAYEB_ET_AL__2024): P 6.20183 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "gj-9827d-transit",
+      "title": "GJ 9827 d: its transit",
+      "description": "GJ 9827 d crossing its star, as TESS recorded it: 3 sectors (42, 70, 92) of the SPOC pipeline's 2-minute light curves of TIC 301289516, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "output": "gj-9827d-transit.svg",
+      "metadata": {
+        "tic": "TIC 301289516",
+        "sectors": [
+          42,
+          70,
+          92
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "gj-9827d",
+      "sources": [
+        "photometry/tess/tess2021232031932-s0042-0000000301289516-0213-s_lc.fits",
+        "photometry/tess/tess2023263165758-s0070-0000000301289516-0265-s_lc.fits",
+        "photometry/tess/tess2025127075000-s0092-0000000301289516-0289-s_lc.fits"
+      ],
+      "durationHours": 1.2264,
+      "binMinutes": 5,
+      "notes": [
+        "TESS 2-min SPOC · sectors 42, 70, 92",
+        "Folded on the app's orbit; 5-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/xo-1b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "xo-1b-orbits",
+      "title": "XO-1 b: orbits around XO-1",
+      "output": "xo-1b-system-orbits.svg",
+      "system": "xo-1",
+      "highlight": "xo-1b",
+      "description": "The orbits of XO-1's planets in this map from above, to scale, with XO-1 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2022 (2022ApJS..258...40K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2022): P 3.941505 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "xo-1b-transit",
+      "title": "XO-1 b: its transit",
+      "description": "XO-1 b crossing its star, as TESS recorded it: 2 sectors (24, 51) of the SPOC pipeline's 2-minute light curves of TIC 236312126, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "output": "xo-1b-transit.svg",
+      "metadata": {
+        "tic": "TIC 236312126",
+        "sectors": [
+          24,
+          51
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "xo-1b",
+      "sources": [
+        "photometry/tess/tess2020106103520-s0024-0000000236312126-0180-s_lc.fits",
+        "photometry/tess/tess2022112184951-s0051-0000000236312126-0223-s_lc.fits"
+      ],
+      "durationHours": 2.9712,
+      "binMinutes": 12,
+      "notes": [
+        "TESS 2-min SPOC · sectors 24, 51",
+        "Folded on the app's orbit; 12-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

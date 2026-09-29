@@ -1,0 +1,39 @@
+{
+  "id": "toi-220",
+  "name": "TOI-220",
+  "system": "TOI-220 system",
+  "description": "Star of 5,298 K, 90.7 parsecs away, with 1 transiting planet.",
+  "target": "TOI-220",
+  "gaia": "5481210874877547904",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.3361H/abstract",
+    "credit": "Hoyer et al. 2021"
+  },
+  "radius": {
+    "value": 0.858,
+    "source": "Hoyer et al. 2021, the stellar radius of the default parameter set of TOI-220 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.3361H/abstract",
+    "uncertainty": 0.032
+  },
+  "mass": {
+    "value": 0.825,
+    "source": "Hoyer et al. 2021, the stellar mass of the default parameter set of TOI-220 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.3361H/abstract",
+    "uncertainty": 0.028
+  },
+  "temperature": {
+    "value": 5298,
+    "source": "Hoyer et al. 2021, the stellar temperature of the default parameter set of TOI-220 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.3361H/abstract",
+    "uncertainty": 65
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-220 b crosses TOI-220 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hoyer et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HOYER_ET_AL__2021): st_teff 5298, st_rad 0.858, st_mass 0.825"
+  },
+  "notes": [],
+  "order": 4266
+}

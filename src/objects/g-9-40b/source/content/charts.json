@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/g-9-40b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "g-9-40b-orbits",
+      "title": "G 9-40 b: orbits around G 9-40",
+      "output": "g-9-40b-system-orbits.svg",
+      "system": "g-9-40",
+      "highlight": "g-9-40b",
+      "description": "The orbits of G 9-40's planets in this map from above, to scale, with G 9-40 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): P 5.7459982 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "g-9-40b-transit",
+      "title": "G 9-40 b: its transit",
+      "description": "G 9-40 b crossing its star, as TESS recorded it: 3 sectors (45, 46, 72) of the SPOC pipeline's 2-minute light curves of TIC 203214081, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "g-9-40b-transit.svg",
+      "metadata": {
+        "tic": "TIC 203214081",
+        "sectors": [
+          45,
+          46,
+          72
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "g-9-40b",
+      "sources": [
+        "photometry/tess/tess2021310001228-s0045-0000000203214081-0216-s_lc.fits",
+        "photometry/tess/tess2021336043614-s0046-0000000203214081-0217-s_lc.fits",
+        "photometry/tess/tess2023315124025-s0072-0000000203214081-0267-s_lc.fits"
+      ],
+      "durationHours": 1.693,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sectors 45, 46, 72",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/epic-211822797b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "epic-211822797b-orbits",
+      "title": "EPIC 211822797 b: orbits around EPIC 211822797",
+      "output": "epic-211822797b-system-orbits.svg",
+      "system": "epic-211822797",
+      "highlight": "epic-211822797b",
+      "description": "The orbits of EPIC 211822797's planets in this map from above, to scale, with EPIC 211822797 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Castro-González et al. 2022 (2022MNRAS.509.1075C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2022): P 21.1701963 d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-512b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.13738983 Jupiter radii from Rodrigues et al. 2025 (2025A&A...695A.237R), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.01123248 Jupiter masses: Rodrigues et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...695A.237R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.18873321304 d; Rodrigues et al. 2025 (2025A&A...695A.237R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUES_ET_AL_2025): a/R* derived by Kepler's third law from its period 7.18873321304 d, stellar mass 0.74 and radius 0.89 solar units; Rodrigues et al. 2025 (2025A&A...695A.237R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUES_ET_AL_2025): inclination 88.92 degrees; Rodrigues et al. 2025 (2025A&A...695A.237R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUES_ET_AL_2025): e 0.02; Rodrigues et al. 2025 (2025A&A...695A.237R), via the NASA Exoplanet Archive ps table (pl_refname RODRIGUES_ET_AL_2025): omega -54 degrees, stored as 306; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458471.218204 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 23 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract"
+      ]
+    }
+  ]
+}

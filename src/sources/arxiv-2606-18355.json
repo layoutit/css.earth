@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2606-18355",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lee et al. (2026): Revisiting the Exo-Mercury Candidate GJ 367 b with ESPRESSO and a Self-Consistent Tidal Distortion Model",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2606.18355"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026arXiv260618355L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lee et al. (2026)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L"
+    }
+  ],
+  "creators": [
+    "Rena A. Lee",
+    "Fei Dai",
+    "Ellen M. Price",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

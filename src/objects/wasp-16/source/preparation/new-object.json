@@ -1,0 +1,45 @@
+{
+  "id": "wasp-16",
+  "name": "WASP-16",
+  "system": "WASP-16 system",
+  "description": "Star of 5,700 K, 194 parsecs away, with 1 transiting planet.",
+  "target": "WASP-16",
+  "gaia": "6283723285046532864",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 1.14,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of WASP-16 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.09
+  },
+  "mass": {
+    "value": 1.78,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of WASP-16 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.54
+  },
+  "temperature": {
+    "value": 5700,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-16 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 150
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-16 b crosses WASP-16 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5700, st_rad 1.14, st_mass 1.78",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-16",
+      "title": "WASP-16",
+      "revision": "1374405361",
+      "card": "WASP-16 is a magnitude 11 yellow dwarf main sequence star, with characteristics similar to the Sun, located 628 light-years away in the Virgo constellation."
+    }
+  },
+  "notes": [],
+  "order": 4796
+}

@@ -1,0 +1,24 @@
+{
+  "host": "k2-199",
+  "planets": [
+    {
+      "id": "k2-199c",
+      "name": "K2-199 c",
+      "description": "Transiting planet of K2-199 with a 7.37-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract",
+        "credit": "Akana Murphy et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "AKANA_MURPHY_ET_AL__2021"
+      },
+      "text": {
+        "card": "K2-199 c was found in 2018 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around K2-199. Its orbit and size follow Akana Murphy et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AKANA_MURPHY_ET_AL__2021): disc_year 2018, disc_facility K2, sy_pnum 2; pl_orbper 7.3744897, pl_radj 0.25426041, pl_bmassj 0.03901476"
+      },
+      "order": 3378
+    }
+  ]
+}

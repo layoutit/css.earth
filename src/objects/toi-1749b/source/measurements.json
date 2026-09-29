@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1749b",
+  "radiusKm": 8865.6,
+  "radiusSource": "Radius 0.12400771 Jupiter radii from Fukui et al. 2021 (2021AJ....162..167F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract): 8,865.6 km at 71,492 km per Jupiter radius. No mass is measured: Fukui et al. 2021 (2021AJ....162..167F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract) gives only an upper limit of 0.17934206 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.38890510104,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.38890510104 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1749 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.17934206 Jupiter masses: Fukui et al. 2021 (2021AJ....162..167F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract)."
+}

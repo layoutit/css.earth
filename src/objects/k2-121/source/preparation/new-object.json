@@ -1,0 +1,39 @@
+{
+  "id": "k2-121",
+  "name": "K2-121",
+  "system": "K2-121 system",
+  "description": "Star of 4,526 K, 169 parsecs away, with 1 transiting planet.",
+  "target": "K2-121",
+  "gaia": "662078902422542336",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "credit": "Howard et al. 2025"
+  },
+  "radius": {
+    "value": 0.675,
+    "source": "Howard et al. 2025, the stellar radius of the default parameter set of K2-121 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "uncertainty": 0.033
+  },
+  "mass": {
+    "value": 0.71,
+    "source": "Howard et al. 2025, the stellar mass of the default parameter set of K2-121 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 4526,
+    "source": "Howard et al. 2025, the stellar temperature of the default parameter set of K2-121 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+    "uncertainty": 110
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-121 b crosses K2-121 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Howard et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HOWARD_ET_AL__2025): st_teff 4526, st_rad 0.675, st_mass 0.71"
+  },
+  "notes": [],
+  "order": 3287
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202345961",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Georgieva et al. (2023): TOI-733 b: A planet in the small-planet radius valley orbiting a Sun-like star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2304.06655"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202345961"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023A&A...674A.117G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202345961",
+      "label": "Astronomy & Astrophysics 674 A117"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Georgieva et al. (2023), Astronomy & Astrophysics 674 A117",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 674 A117",
+  "creators": [
+    "Iskra Y. Georgieva",
+    "Carina M. Persson",
+    "Elisa Goffo",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

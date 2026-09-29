@@ -1,0 +1,24 @@
+{
+  "host": "toi-2084",
+  "planets": [
+    {
+      "id": "toi-2084b",
+      "name": "TOI-2084 b",
+      "description": "Transiting planet of TOI-2084 with a 6.08-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract",
+        "credit": "Barkaoui et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BARKAOUI_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-2084 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2084. Its orbit and size follow Barkaoui et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARKAOUI_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.07847480828, pl_radj 0.22035902, pl_bmassj 0.021"
+      },
+      "order": 4235
+    }
+  ]
+}

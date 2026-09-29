@@ -1,0 +1,30 @@
+{
+  "host": "bd-20-594",
+  "planets": [
+    {
+      "id": "bd-20-594b",
+      "name": "BD+20 594 b",
+      "description": "Transiting planet of BD+20 594 with a 41.7-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "BD+20 594 b was found in 2016 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around BD+20 594. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 41.6855, pl_radj 0.23, pl_bmassj 0.07",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/BD%2B20_594b",
+          "title": "BD+20 594b",
+          "revision": "1363042258",
+          "card": "BD+20°594b is a sub-Neptune exoplanet discovered by the Kepler space telescope in collaboration with the HARPS spectrometer at La Silla in Chile."
+        }
+      },
+      "order": 3052
+    }
+  ]
+}

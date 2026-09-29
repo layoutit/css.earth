@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-28109d",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.27745609 Jupiter radii from Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...704A..41B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.01824884 Jupiter masses: Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...704A..41B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...704A..41B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 84.26076445013 d; Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive ps table (pl_refname BARONE_ET_AL_2025): a/R* 61.3; Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive ps table (pl_refname BARONE_ET_AL_2025): inclination 89.77 degrees; Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive ps table (pl_refname BARONE_ET_AL_2025): e 0.0054; Barone et al. 2025 (2025A&A...704A..41B), via the NASA Exoplanet Archive ps table (pl_refname BARONE_ET_AL_2025): omega -72 degrees, stored as 288; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458355.648726 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 41 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...704A..41B/abstract"
+      ]
+    }
+  ]
+}

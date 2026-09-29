@@ -1,0 +1,39 @@
+{
+  "id": "toi-5143",
+  "name": "TOI-5143",
+  "system": "TOI-5143 system",
+  "description": "Star of 5,183 K, 181 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5143",
+  "gaia": "3815937670648091392",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract",
+    "credit": "Radzom et al. 2025"
+  },
+  "radius": {
+    "value": 0.852,
+    "source": "Radzom et al. 2025, the stellar radius of the default parameter set of TOI-5143 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.864,
+    "source": "Radzom et al. 2025, the stellar mass of the default parameter set of TOI-5143 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 5183,
+    "source": "Radzom et al. 2025, the stellar temperature of the default parameter set of TOI-5143 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract",
+    "uncertainty": 125
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5143 c crosses TOI-5143 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Radzom et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname RADZOM_ET_AL__2025): st_teff 5183, st_rad 0.852, st_mass 0.864"
+  },
+  "notes": [],
+  "order": 4489
+}

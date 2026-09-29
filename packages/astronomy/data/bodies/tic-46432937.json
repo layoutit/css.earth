@@ -1,0 +1,30 @@
+{
+ "id": "tic-46432937",
+ "classification": "star",
+ "order": 3897,
+ "physical": {
+  "name": "TIC 46432937",
+  "horizonsCode": null,
+  "meanRadiusKm": 368651.4,
+  "gravitationalParameterKm3PerS2": 74717103743.61186,
+  "parent": null,
+  "effectiveTemperatureK": 3572
+ },
+ "physicalNotes": "Radius 0.5299 +/- 0.0091 solar radii from Hartman et al. 2024, the stellar radius of the default parameter set of TIC 46432937 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract): 368,651 km at 695,700 km per solar radius. Mass 0.563 +/- 0.029 solar masses from Hartman et al. 2024, the stellar mass of the default parameter set of TIC 46432937 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract); GM is that mass times the JPL solar GM. Temperature 3572 +/- 57 K from Hartman et al. 2024, the stellar temperature of the default parameter set of TIC 46432937 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 83.86897752952866,
+  "declinationDegrees": -14.59718572099905,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 90.65642500686926,
+  "properMotionRaMasPerYear": -13.365363835156913,
+  "properMotionDecMasPerYear": 36.961602758382796,
+  "radialVelocityKmPerS": 102.447495,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2984391358868786816 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/tic-46432937/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 11.0307 +/- 0.0130 mas (same row, RUWE 1.06): 90.66 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -13.365, 36.962 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 102.45 +/- 1.26 km/s"
+  }
+ }
+}

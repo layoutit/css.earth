@@ -1,0 +1,31 @@
+{
+  "host": "hd-219666",
+  "planets": [
+    {
+      "id": "hd-219666b",
+      "name": "HD 219666 b",
+      "description": "Transiting planet of HD 219666 with a 6.03-day year, found in 2018.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..286M/abstract",
+        "credit": "Murphy et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MURPHY_ET_AL__2025"
+      },
+      "text": {
+        "card": "HD 219666 b was found in 2018 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around HD 219666. Its orbit and size follow Murphy et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MURPHY_ET_AL__2025): disc_year 2018, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.03446338952, pl_radj 0.437, pl_bmassj 0.055",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HD_219666_b",
+          "title": "HD 219666 b",
+          "revision": "1374246974",
+          "card": "HD 219666b is a hot Neptune type exoplanet that orbits around the G-type main sequence star named HD 219666.",
+          "introduction": "It orbits the star at a distance of 0.06 AU with an orbital period of 6.03 days."
+        }
+      },
+      "order": 3190
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "host": "kepler-68",
+  "planets": [
+    {
+      "id": "kepler-68c",
+      "name": "Kepler-68 c",
+      "description": "Transiting planet of Kepler-68 with a 9.61-day year, found in 2013.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "credit": "Bonomo et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONOMO_ET_AL_2023"
+      },
+      "text": {
+        "card": "Kepler-68 c was found in 2013 by Kepler as it crossed its star.",
+        "introduction": "It is one of 4 planets known around Kepler-68. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2013, disc_facility Kepler, sy_pnum 4; pl_orbper 9.60506201, pl_radj 0.08734068, pl_bmassj 0.00409026"
+      },
+      "order": 3779
+    }
+  ]
+}

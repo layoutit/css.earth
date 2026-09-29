@@ -1,0 +1,48 @@
+{
+  "id": "toi-201",
+  "name": "TOI-201",
+  "system": "TOI-201 system",
+  "description": "Star of 6,423 K, 114 parsecs away, with 2 transiting planets.",
+  "target": "TOI-201",
+  "gaia": "4767547667180525696",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+    "credit": "Mireles et al. 2026"
+  },
+  "radius": {
+    "value": 1.31,
+    "source": "Mireles et al. 2026, the stellar radius of the default parameter set of TOI-201 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 1.32,
+    "source": "Mireles et al. 2026, the stellar mass of the default parameter set of TOI-201 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 6423,
+    "source": "Mireles et al. 2026, the stellar temperature of the default parameter set of TOI-201 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+    "uncertainty": 86
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-201 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Mireles et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MIRELES_ET_AL_2026): st_teff 6423, st_rad 1.31, st_mass 1.32",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-201",
+      "title": "TOI-201",
+      "revision": "1374435267",
+      "card": "TOI-201 is a star with two planets and a brown dwarf companion in the constellation Pictor.",
+      "introduction": "At an apparent magnitude of +9.715, it is not visible to the naked eye."
+    }
+  },
+  "notes": [
+    "TOI-201 d: Mireles et al. 2026's mass 0.01824884 Jupiter masses in 0.12400771 Jupiter radii is 11.9 g/cm^3, outside what the records accept"
+  ],
+  "order": 4207
+}

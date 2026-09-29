@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tic-88785435",
+  "card": {
+    "text": "TIC 88785435 b crosses TIC 88785435 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ade67f",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..131V/abstract",
+        "label": "Vach et al. (2025), The Astronomical Journal 170 131",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname VACH_ET_AL_2025): st_teff 3998, st_rad 0.911, st_mass 0.724"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Vach et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ade67f",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..131V/abstract",
+        "label": "Vach et al. (2025), The Astronomical Journal 170 131",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname VACH_ET_AL_2025): st_teff 3998, st_rad 0.911, st_mass 0.724"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

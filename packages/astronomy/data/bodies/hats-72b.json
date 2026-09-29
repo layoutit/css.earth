@@ -1,0 +1,28 @@
+{
+ "id": "hats-72b",
+ "classification": "exoplanet",
+ "order": 3138,
+ "physical": {
+  "name": "HATS-72 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 51645.8,
+  "gravitationalParameterKm3PerS2": 15886491.1,
+  "parent": "hats-72"
+ },
+ "physicalNotes": "Radius 0.7224 Jupiter radii from Hartman et al. 2020 (2020AJ....159..173H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract): 51,645.8 km at 71,492 km per Jupiter radius. GM from the mass 0.1254 Jupiter masses (Hartman et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....159..173H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.3279496,
+  "semiMajorAxisStellarRadii": 19.821,
+  "inclinationDegrees": 89.56,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58123.78757,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 7.3279496 d",
+   "shape": "Hartman et al. 2020 (2020AJ....159..173H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2020): a/R* 19.821; Hartman et al. 2020 (2020AJ....159..173H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2020): inclination 89.56 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458124.28757 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

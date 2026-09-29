@@ -1,0 +1,25 @@
+{
+  "host": "toi-1798",
+  "planets": [
+    {
+      "id": "toi-1798b",
+      "name": "TOI-1798 b",
+      "description": "Transiting planet of TOI-1798 with a 8.02-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+        "credit": "Crossfield et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CROSSFIELD_ET_AL_2025",
+        "planetName": "TOI-1798.01"
+      },
+      "text": {
+        "card": "TOI-1798 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1798. Its orbit and size follow Crossfield et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CROSSFIELD_ET_AL_2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 8.021522331, pl_radj 0.21839631, pl_bmassj 0.02045129"
+      },
+      "order": 4162
+    }
+  ]
+}

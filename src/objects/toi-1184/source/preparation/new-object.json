@@ -1,0 +1,39 @@
+{
+  "id": "toi-1184",
+  "name": "TOI-1184",
+  "system": "TOI-1184 system",
+  "description": "Star of 4,534 K, 58.6 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1184",
+  "gaia": "2158781336134901760",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "credit": "Crossfield et al. 2025"
+  },
+  "radius": {
+    "value": 0.69,
+    "source": "Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-1184 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.06
+  },
+  "mass": {
+    "value": 0.71,
+    "source": "Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1184 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.08
+  },
+  "temperature": {
+    "value": 4534,
+    "source": "Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1184 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 128
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1184 b crosses TOI-1184 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Crossfield et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL_2025): st_teff 4534, st_rad 0.69, st_mass 0.71"
+  },
+  "notes": [],
+  "order": 3019
+}

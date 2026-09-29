@@ -1,0 +1,39 @@
+{
+  "id": "k2-104",
+  "name": "K2-104",
+  "system": "K2-104 system",
+  "description": "Star of 3,712 K, 189 parsecs away, with 1 transiting planet.",
+  "target": "K2-104",
+  "gaia": "664292459846946560",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+    "credit": "Castro-González et al. 2022"
+  },
+  "radius": {
+    "value": 0.48,
+    "source": "Castro-González et al. 2022, the stellar radius of the default parameter set of K2-104 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.51,
+    "source": "Castro-González et al. 2022, the stellar mass of the default parameter set of K2-104 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3712,
+    "source": "Castro-González et al. 2022, the stellar temperature of the default parameter set of K2-104 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+    "uncertainty": 54
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-104 b crosses K2-104 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Castro-González et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2022): st_teff 3712, st_rad 0.48, st_mass 0.51"
+  },
+  "notes": [],
+  "order": 3276
+}

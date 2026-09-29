@@ -1,0 +1,31 @@
+{
+ "id": "toi-481b",
+ "classification": "exoplanet",
+ "order": 4470,
+ "physical": {
+  "name": "TOI-481 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 70777.1,
+  "gravitationalParameterKm3PerS2": 193830393.81,
+  "parent": "toi-481"
+ },
+ "physicalNotes": "Radius 0.99 Jupiter radii from Brahm et al. 2020 (2020AJ....160..235B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract): 70,777.1 km at 71,492 km per Jupiter radius. GM from the mass 1.53 Jupiter masses (Brahm et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....160..235B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.33116210622,
+  "semiMajorAxisStellarRadii": 12.5651,
+  "inclinationDegrees": 89.2,
+  "eccentricity": 0.153,
+  "argumentOfPeriapsisDegrees": 64.80000000000001,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 60969.95735,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 10.33116210622 d",
+   "shape": "Brahm et al. 2020 (2020AJ....160..235B), via the NASA Exoplanet Archive ps table (pl_refname BRAHM_ET_AL__2020): a/R* derived from its semi-major axis 0.097 au and stellar radius 1.66 solar radii; Brahm et al. 2020 (2020AJ....160..235B), via the NASA Exoplanet Archive ps table (pl_refname BRAHM_ET_AL__2020): inclination 89.2 degrees",
+   "eccentricity": "Brahm et al. 2020 (2020AJ....160..235B), via the NASA Exoplanet Archive ps table (pl_refname BRAHM_ET_AL__2020): e 0.153",
+   "argumentOfPeriapsis": "Brahm et al. 2020 (2020AJ....160..235B), via the NASA Exoplanet Archive ps table (pl_refname BRAHM_ET_AL__2020): omega 64.8 degrees",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460970.45735 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

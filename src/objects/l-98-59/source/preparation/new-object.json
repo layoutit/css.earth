@@ -1,0 +1,48 @@
+{
+  "id": "l-98-59",
+  "name": "L 98-59",
+  "system": "L 98-59 system",
+  "description": "Star of 3,415 K, 10.6 parsecs away, with 3 transiting planets.",
+  "target": "L 98-59",
+  "gaia": "5271055243163629056",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+    "credit": "Cadieux et al. 2025"
+  },
+  "radius": {
+    "value": 0.3155,
+    "source": "Cadieux et al. 2025, the stellar radius of the default parameter set of L 98-59 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+    "uncertainty": 0.0062
+  },
+  "mass": {
+    "value": 0.2923,
+    "source": "Cadieux et al. 2025, the stellar mass of the default parameter set of L 98-59 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+    "uncertainty": 0.0067
+  },
+  "temperature": {
+    "value": 3415,
+    "source": "Cadieux et al. 2025, the stellar temperature of the default parameter set of L 98-59 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+    "uncertainty": 60
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "3 planets cross L 98-59 as seen from Earth: b, c, d.",
+    "introduction": "Its radius and temperature follow Cadieux et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CADIEUX_ET_AL_2025): st_teff 3415, st_rad 0.3155, st_mass 0.2923",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/L_98-59",
+      "title": "L 98-59",
+      "revision": "1374442061",
+      "card": "L 98-59 is a red dwarf star located in the constellation of Volans, at a distance of 10.608 parsecs, as measured by the Gaia spacecraft."
+    }
+  },
+  "notes": [
+    "L 98-59 e: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)",
+    "L 98-59 f: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3799
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-4463-a-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-4463-a-b-orbits",
+      "title": "TOI-4463 A b: orbits around TOI-4463 A",
+      "output": "toi-4463-a-b-system-orbits.svg",
+      "system": "toi-4463-a",
+      "highlight": "toi-4463-a-b",
+      "description": "The orbits of TOI-4463 A's planets in this map from above, to scale, with TOI-4463 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Yee et al. 2023 (2023ApJS..265....1Y), via the NASA Exoplanet Archive ps table (pl_refname YEE_ET_AL__2023): P 2.8807198 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-4463-a-b-transit",
+      "title": "TOI-4463 A b: its transit",
+      "description": "TOI-4463 A b crossing its star, as TESS recorded it: 1 sector (80) of the SPOC pipeline's 2-minute light curves of TIC 8599009, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 5 minutes at these dates, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-4463-a-b-transit.svg",
+      "metadata": {
+        "tic": "TIC 8599009",
+        "sectors": [
+          80
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-4463-a-b",
+      "sources": [
+        "photometry/tess/tess2024170053053-s0080-0000000008599009-0275-s_lc.fits"
+      ],
+      "durationHours": 1.85,
+      "binMinutes": 7,
+      "alignMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sector 80",
+        "Aligned on TESS's dip, 4 min late; 7-min bins.",
+        "The ephemeris's own 1σ there is 2 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

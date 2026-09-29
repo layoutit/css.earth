@@ -1,0 +1,53 @@
+{
+  "id": "doi-10-1002-asna-20224012",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Alexoudi (2022): On the parameter refinement of inflated exoplanets with large radius uncertainty based on TESS observations",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2201.02133"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1002/asna.20224012"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AN....34324012A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1002/asna.20224012",
+      "label": "Astronomische Nachrichten 343 e224012"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Alexoudi (2022), Astronomische Nachrichten 343 e224012",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A"
+    }
+  ],
+  "publisher": "Astronomische Nachrichten 343 e224012",
+  "creators": [
+    "Xanthippi Alexoudi"
+  ],
+  "publicationDate": "2022"
+}

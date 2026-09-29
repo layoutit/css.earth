@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-5278",
+  "card": {
+    "text": "HD 5278 b crosses HD 5278 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202040034",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...648A..75S/abstract",
+        "label": "Sozzetti et al. (2021), Astronomy & Astrophysics 648 A75",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SOZZETTI_ET_AL__2021): st_teff 6203, st_rad 1.194, st_mass 1.126"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Sozzetti et al. 2021.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202040034",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...648A..75S/abstract",
+        "label": "Sozzetti et al. (2021), Astronomy & Astrophysics 648 A75",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SOZZETTI_ET_AL__2021): st_teff 6203, st_rad 1.194, st_mass 1.126"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

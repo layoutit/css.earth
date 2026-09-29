@@ -1,0 +1,31 @@
+{
+ "id": "toi-942b",
+ "classification": "exoplanet",
+ "order": 4756,
+ "physical": {
+  "name": "TOI-942 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 24810.8,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-942"
+ },
+ "physicalNotes": "Radius 0.34704315 Jupiter radii from Wirth et al. 2021 (2021ApJ...917L..34W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W/abstract): 24,810.8 km at 71,492 km per Jupiter radius. No mass is measured: Zhou et al. 2021 (2021AJ....161....2Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....161....2Z/abstract) gives only an upper limit of 2.6 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.32421,
+  "semiMajorAxisStellarRadii": 11.7041,
+  "inclinationDegrees": 89.966,
+  "eccentricity": 0.34,
+  "argumentOfPeriapsisDegrees": 344,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58441.079,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Wirth et al. 2021 (2021ApJ...917L..34W), via the NASA Exoplanet Archive ps table (pl_refname WIRTH_ET_AL__2021): P 4.32421 d",
+   "shape": "Wirth et al. 2021 (2021ApJ...917L..34W), via the NASA Exoplanet Archive ps table (pl_refname WIRTH_ET_AL__2021): a/R* derived from its semi-major axis 0.04866 au and stellar radius 0.894 solar radii; Wirth et al. 2021 (2021ApJ...917L..34W), via the NASA Exoplanet Archive ps table (pl_refname WIRTH_ET_AL__2021): inclination 89.966 degrees",
+   "eccentricity": "Wirth et al. 2021 (2021ApJ...917L..34W), via the NASA Exoplanet Archive ps table (pl_refname WIRTH_ET_AL__2021): e 0.34",
+   "argumentOfPeriapsis": "Wirth et al. 2021 (2021ApJ...917L..34W), via the NASA Exoplanet Archive ps table (pl_refname WIRTH_ET_AL__2021): omega -16 degrees, stored as 344",
+   "phase": "Wirth et al. 2021 (2021ApJ...917L..34W), via the NASA Exoplanet Archive ps table (pl_refname WIRTH_ET_AL__2021): transit mid-time 2458441.579 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 17 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

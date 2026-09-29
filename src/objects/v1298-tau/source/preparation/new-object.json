@@ -1,0 +1,49 @@
+{
+  "id": "v1298-tau",
+  "name": "V1298 Tau",
+  "system": "V1298 Tau system",
+  "description": "Star of 4,970 K, 108 parsecs away, with 2 transiting planets.",
+  "target": "V1298 Tau",
+  "gaia": "51886335968692480",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+    "credit": "Livingston et al. 2026"
+  },
+  "radius": {
+    "value": 1.32,
+    "source": "Livingston et al. 2026, the stellar radius of the default parameter set of V1298 Tau c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+    "uncertainty": 0.05
+  },
+  "mass": {
+    "value": 1.1,
+    "source": "Livingston et al. 2026, the stellar mass of the default parameter set of V1298 Tau c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+    "uncertainty": 0.05
+  },
+  "temperature": {
+    "value": 4970,
+    "source": "Livingston et al. 2026, the stellar temperature of the default parameter set of V1298 Tau c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+    "uncertainty": 120
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross V1298 Tau as seen from Earth: c, d.",
+    "introduction": "Its radius and temperature follow Livingston et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL_2026): st_teff 4970, st_rad 1.32, st_mass 1.1",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/V1298_Tauri",
+      "title": "V1298 Tauri",
+      "revision": "1370790833",
+      "card": "V1298 Tauri is a young weakly-lined T Tauri star that is part of the Taurus-Auriga association in the Taurus Molecular Cloud.",
+      "introduction": "Alternatively it is part of a proposed moving group, called Group 29 that is slightly older."
+    }
+  },
+  "notes": [
+    "V1298 Tau b: Livingston et al. 2026's mass 0.04121721 Jupiter masses in 0.83950542 Jupiter radii is 0.1 g/cm^3, outside what the records accept",
+    "V1298 Tau e: Livingston et al. 2026's mass 0.04813918 Jupiter masses in 0.90730819 Jupiter radii is 0.1 g/cm^3, outside what the records accept"
+  ],
+  "order": 4762
+}

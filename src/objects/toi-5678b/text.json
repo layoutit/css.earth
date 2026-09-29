@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5678b",
+  "card": {
+    "text": "TOI-5678 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202245478",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract",
+        "label": "Ulmer-Moll et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ULMER_MOLL_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 47.73022, pl_radj 0.43804161, pl_bmassj 0.06292704"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-5678. Its orbit and size follow Ulmer-Moll et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202245478",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract",
+        "label": "Ulmer-Moll et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ULMER_MOLL_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 47.73022, pl_radj 0.43804161, pl_bmassj 0.06292704"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

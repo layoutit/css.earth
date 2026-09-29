@@ -1,0 +1,39 @@
+{
+  "id": "k2-367",
+  "name": "K2-367",
+  "system": "K2-367 system",
+  "description": "Star of 4,348 K, 177 parsecs away, with 1 transiting planet.",
+  "target": "K2-367",
+  "gaia": "2601048588348190976",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+    "credit": "Christiansen et al. 2022"
+  },
+  "radius": {
+    "value": 0.625,
+    "source": "Christiansen et al. 2022, the stellar radius of the default parameter set of K2-367 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+    "uncertainty": 0.041
+  },
+  "mass": {
+    "value": 0.756,
+    "source": "Christiansen et al. 2022, the stellar mass of the default parameter set of K2-367 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+    "uncertainty": 0.231
+  },
+  "temperature": {
+    "value": 4348,
+    "source": "Christiansen et al. 2022, the stellar temperature of the default parameter set of K2-367 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+    "uncertainty": 128
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-367 b crosses K2-367 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Christiansen et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CHRISTIANSEN_ET_AL_2022): st_teff 4348, st_rad 0.625, st_mass 0.756"
+  },
+  "notes": [],
+  "order": 3538
+}

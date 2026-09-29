@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-837b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-837b-orbits",
+      "title": "TOI-837 b: orbits around TOI-837",
+      "output": "toi-837b-system-orbits.svg",
+      "system": "toi-837",
+      "highlight": "toi-837b",
+      "description": "The orbits of TOI-837's planets in this map from above, to scale, with TOI-837 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Barragán et al. 2024 (2024MNRAS.531.4275B), via the NASA Exoplanet Archive ps table (pl_refname BARRAG_AACUTE_N_ET_AL__2024): P 8.3249113 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-837b-transit",
+      "title": "TOI-837 b: its transit",
+      "description": "TOI-837 b crossing its star, as TESS recorded it: 3 sectors (63, 64, 90) of the SPOC pipeline's 2-minute light curves of TIC 460205581, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-837b-transit.svg",
+      "metadata": {
+        "tic": "TIC 460205581",
+        "sectors": [
+          63,
+          64,
+          90
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-837b",
+      "sources": [
+        "photometry/tess/tess2023069172124-s0063-0000000460205581-0255-s_lc.fits",
+        "photometry/tess/tess2023096110322-s0064-0000000460205581-0257-s_lc.fits",
+        "photometry/tess/tess2025071122000-s0090-0000000460205581-0287-s_lc.fits"
+      ],
+      "durationHours": 1.983,
+      "binMinutes": 8,
+      "notes": [
+        "TESS 2-min SPOC · sectors 63, 64, 90",
+        "Folded on the app's orbit; 8-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

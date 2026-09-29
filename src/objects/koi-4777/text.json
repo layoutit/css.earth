@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "koi-4777",
+  "card": {
+    "text": "KOI-4777 b crosses KOI-4777 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac3088",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163....3C/abstract",
+        "label": "Cañas et al. (2022), The Astronomical Journal 163 3",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CA_NTILDE_AS_ET_AL__2022): st_teff 3515, st_rad 0.4, st_mass 0.41"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Cañas et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac3088",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163....3C/abstract",
+        "label": "Cañas et al. (2022), The Astronomical Journal 163 3",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CA_NTILDE_AS_ET_AL__2022): st_teff 3515, st_rad 0.4, st_mass 0.41"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

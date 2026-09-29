@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-2180b",
+  "displayName": "TOI-2180 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.0 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac415b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D",
+          "label": "Dalba et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "260 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac415b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D",
+          "label": "Dalba et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.8 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac415b",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D",
+          "label": "Dalba et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-2180; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-2180b-lens-shape.webp",
+        "surface": "toi-2180b-surface-shape@2x.webp",
+        "poles": "toi-2180b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-2180b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-2180 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-2180's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-2180b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-2180b/toi-2180b-system-orbits.svg",
+      "alt": "The orbits of TOI-2180's planets in this map from above, to scale, with TOI-2180 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-2180b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Dalba et al. 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D/abstract",
+      "credit": "Dalba et al. 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-2180b.json",
+      "credit": "Radius from Dalba et al. 2022 (2022AJ....163...61D), via the NASA Exoplanet Archive; mass from Dalba et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163...61D), via the NASA Exoplanet Archive; orbit from Dalba et al. 2022 (2022AJ....163...61D), via the NASA Exoplanet Archive"
+    }
+  }
+}

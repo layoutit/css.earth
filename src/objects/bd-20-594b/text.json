@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "bd-20-594b",
+  "card": {
+    "text": "BD+20 594 b was found in 2016 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 41.6855, pl_radj 0.23, pl_bmassj 0.07"
+      },
+      {
+        "catalogueId": "wikipedia-bd-20-594b",
+        "url": "https://en.wikipedia.org/wiki/BD%2B20_594b",
+        "label": "Wikipedia, \"BD+20 594b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1363042258",
+        "quote": "BD+20°594b is a sub-Neptune exoplanet discovered by the Kepler space telescope in collaboration with the HARPS spectrometer at La Silla in Chile."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around BD+20 594. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 41.6855, pl_radj 0.23, pl_bmassj 0.07"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

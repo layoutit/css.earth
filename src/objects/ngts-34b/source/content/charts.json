@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/ngts-34b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "ngts-34b-orbits",
+      "title": "NGTS-34 b: orbits around NGTS-34",
+      "output": "ngts-34b-system-orbits.svg",
+      "system": "ngts-34",
+      "highlight": "ngts-34b",
+      "description": "The orbits of NGTS-34's planets in this map from above, to scale, with NGTS-34 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kendall et al. 2026 (2026MNRAS.547f2189K), via the NASA Exoplanet Archive ps table (pl_refname KENDALL_ET_AL_2026): P 43.12655 d"
+      }
+    }
+  ]
+}

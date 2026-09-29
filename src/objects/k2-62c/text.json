@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-62c",
+  "card": {
+    "text": "K2-62 c was found in 2016 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4365-adc5e4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+        "label": "Howard et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOWARD_ET_AL__2025): disc_year 2016, disc_facility K2, sy_pnum 2; pl_orbper 16.19697, pl_radj 0.17753621, pl_bmassj 0.0145"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around K2-62. Its orbit and size follow Howard et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4365-adc5e4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract",
+        "label": "Howard et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOWARD_ET_AL__2025): disc_year 2016, disc_facility K2, sy_pnum 2; pl_orbper 16.19697, pl_radj 0.17753621, pl_bmassj 0.0145"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

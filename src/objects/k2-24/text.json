@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-24",
+  "card": {
+    "text": "2 planets cross K2-24 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450852",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A.349N/abstract",
+        "label": "Nascimbeni et al. (2024), Astronomy & Astrophysics 690 A349",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NASCIMBENI_ET_AL_2024): st_teff 5726, st_rad 1.185, st_mass 1.091"
+      },
+      {
+        "catalogueId": "wikipedia-k2-24",
+        "url": "https://en.wikipedia.org/wiki/K2-24",
+        "label": "Wikipedia, \"K2-24\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1348642434",
+        "quote": "K2-24 is a metal-rich G3-type star larger and more massive than the Sun, located 560 light-years away in the constellation Scorpius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Nascimbeni et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202450852",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A.349N/abstract",
+        "label": "Nascimbeni et al. (2024), Astronomy & Astrophysics 690 A349",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NASCIMBENI_ET_AL_2024): st_teff 5726, st_rad 1.185, st_mass 1.091"
+      },
+      {
+        "catalogueId": "wikipedia-k2-24",
+        "url": "https://en.wikipedia.org/wiki/K2-24",
+        "label": "Wikipedia, \"K2-24\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1348642434",
+        "quote": "Two confirmed transiting exoplanets are known to orbit this star."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

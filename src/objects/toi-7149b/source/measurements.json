@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-7149b",
+  "radiusKm": 84360.6,
+  "radiusSource": "Radius 1.18 Jupiter radii from Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract): 84,360.6 km at 71,492 km per Jupiter radius. GM from the mass 0.705 Jupiter masses (Kanodia et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..203K), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.65206166,
+  "orbitalPeriodSource": "Kanodia et al. 2025 (2025AJ....170..203K), via the NASA Exoplanet Archive ps table (pl_refname KANODIA_ET_AL_2025): P 2.65206166 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-7149 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.705 Jupiter masses: Kanodia et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..203K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract)."
+}

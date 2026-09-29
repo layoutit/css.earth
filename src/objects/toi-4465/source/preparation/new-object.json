@@ -1,0 +1,39 @@
+{
+  "id": "toi-4465",
+  "name": "TOI-4465",
+  "system": "TOI-4465 system",
+  "description": "Star of 5,545 K, 121 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4465",
+  "gaia": "4521842556801236352",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170...41E/abstract",
+    "credit": "Essack et al. 2025"
+  },
+  "radius": {
+    "value": 1.014,
+    "source": "Essack et al. 2025, the stellar radius of the default parameter set of TOI-4465 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170...41E/abstract",
+    "uncertainty": 0.041
+  },
+  "mass": {
+    "value": 0.93,
+    "source": "Essack et al. 2025, the stellar mass of the default parameter set of TOI-4465 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170...41E/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 5545,
+    "source": "Essack et al. 2025, the stellar temperature of the default parameter set of TOI-4465 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170...41E/abstract",
+    "uncertainty": 19
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4465 b crosses TOI-4465 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Essack et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ESSACK_ET_AL__2025): st_teff 5545, st_rad 1.014, st_mass 0.93"
+  },
+  "notes": [],
+  "order": 4422
+}

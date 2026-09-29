@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gj-3929b",
+  "displayName": "GJ 3929 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ac8480",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B",
+          "label": "Beard et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.62 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ac8480",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B",
+          "label": "Beard et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.8 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ac8480",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B",
+          "label": "Beard et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by GJ 3929; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "gj-3929b-lens-shape.webp",
+        "surface": "gj-3929b-surface-shape@2x.webp",
+        "poles": "gj-3929b-poles-shape@2x.webp",
+        "source": {
+          "id": "gj-3929b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of GJ 3929 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of gj-3929's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "gj-3929b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/gj-3929b/gj-3929b-system-orbits.svg",
+      "alt": "The orbits of GJ 3929's planets in this map from above, to scale, with GJ 3929 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "gj-3929b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B"
+      }
+    },
+    {
+      "id": "gj-3929b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/gj-3929b/gj-3929b-transit.svg",
+      "alt": "GJ 3929 b crossing its star, as TESS recorded it: 3 sectors (24, 25, 78) of the SPOC pipeline's 2-minute light curves of TIC 188589164, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 6 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 7 minutes at these dates, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "gj-3929b-tess-sector-24",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020106103520-s0024-0000000188589164-0180-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Beard et al. 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+      "credit": "Beard et al. 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-3929b.json",
+      "credit": "Radius from Beard et al. 2022 (2022ApJ...936...55B), via the NASA Exoplanet Archive; mass from Beard et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022ApJ...936...55B), via the NASA Exoplanet Archive; orbit from Beard et al. 2022 (2022ApJ...936...55B), via the NASA Exoplanet Archive"
+    }
+  }
+}

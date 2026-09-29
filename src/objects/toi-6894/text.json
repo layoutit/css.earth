@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6894",
+  "card": {
+    "text": "TOI-6894 b crosses TOI-6894 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-025-02552-4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+        "label": "Bryant et al. (2025), Nature Astronomy 9 1031-1044",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BRYANT_ET_AL_2025): st_teff 3007, st_rad 0.2276, st_mass 0.207"
+      },
+      {
+        "catalogueId": "wikipedia-toi-6894",
+        "url": "https://en.wikipedia.org/wiki/TOI-6894",
+        "label": "Wikipedia, \"TOI-6894\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1357019233",
+        "quote": "TOI-6894 is a star in the constellation Leo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bryant et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-025-02552-4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+        "label": "Bryant et al. (2025), Nature Astronomy 9 1031-1044",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BRYANT_ET_AL_2025): st_teff 3007, st_rad 0.2276, st_mass 0.207"
+      },
+      {
+        "catalogueId": "wikipedia-toi-6894",
+        "url": "https://en.wikipedia.org/wiki/TOI-6894",
+        "label": "Wikipedia, \"TOI-6894\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1357019233",
+        "quote": "Its apparent magnitude of 18.22 is far below naked eye visibility."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

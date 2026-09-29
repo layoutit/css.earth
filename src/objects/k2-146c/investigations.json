@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "k2-146c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.19537871 Jupiter radii from Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019AJ....158..133H/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02358 Jupiter masses: Hamann et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158..133H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..133H/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019AJ....158..133H/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): P 4.00498 d; Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): a/R* derived by Kepler's third law from its period 4.00498 d, stellar mass 0.331 and radius 0.33 solar units; Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): inclination 87.54 degrees; Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): e 0.075; Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): omega 130 degrees; Hamann et al. 2019 (2019AJ....158..133H), via the NASA Exoplanet Archive ps table (pl_refname HAMANN_ET_AL__2019): transit mid-time 2458204.1316 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 112 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019AJ....158..133H/abstract"
+      ]
+    }
+  ]
+}

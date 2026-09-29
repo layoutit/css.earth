@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kelt-11b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kelt-11b-orbits",
+      "title": "KELT-11 b: orbits around KELT-11",
+      "output": "kelt-11b-system-orbits.svg",
+      "system": "kelt-11",
+      "highlight": "kelt-11b",
+      "description": "The orbits of KELT-11's planets in this map from above, to scale, with KELT-11 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Changeat et al. 2020 (2020AJ....160..260C), via the NASA Exoplanet Archive ps table (pl_refname CHANGEAT_ET_AL__2020): P 4.73620495 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "kelt-11b-transmission",
+      "title": "KELT-11 b: transmission spectrum",
+      "description": "KELT-11 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 25 measured bins from Changeat et al. 2020 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors. The archive holds 1 other paper for this planet; this chart draws the one with the most bins.",
+      "output": "kelt-11b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..260C/abstract",
+        "table": "transitspec",
+        "bins": 25
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 25
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1,
+        "maximum": 1.75,
+        "ticks": [
+          1,
+          1.25,
+          1.5,
+          1.75
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 0.21,
+        "maximum": 0.25,
+        "ticks": [
+          0.21,
+          0.22,
+          0.23,
+          0.24,
+          0.25
+        ]
+      },
+      "notes": [
+        "Changeat et al. 2020",
+        "Hubble Space Telescope satellite, Wide Field Camera…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "kelt-11b-transit",
+      "title": "KELT-11 b: its transit",
+      "description": "KELT-11 b crossing its star, as TESS recorded it: 3 sectors (62, 89, 100) of the SPOC pipeline's 2-minute light curves of TIC 55092869, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 28-minute bins. Error bars are each bin's standard error.",
+      "output": "kelt-11b-transit.svg",
+      "metadata": {
+        "tic": "TIC 55092869",
+        "sectors": [
+          62,
+          89,
+          100
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "kelt-11b",
+      "sources": [
+        "photometry/tess/tess2023043185947-s0062-0000000055092869-0254-s_lc.fits",
+        "photometry/tess/tess2025042113628-s0089-0000000055092869-0286-s_lc.fits",
+        "photometry/tess/tess2026033082000-s0100-0000000055092869-0302-s_lc.fits"
+      ],
+      "durationHours": 7.1,
+      "binMinutes": 28,
+      "notes": [
+        "TESS 2-min SPOC · sectors 62, 89, 100",
+        "Folded on the app's orbit; 28-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

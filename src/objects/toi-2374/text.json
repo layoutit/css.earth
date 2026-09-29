@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2374",
+  "card": {
+    "text": "TOI-2374 b crosses TOI-2374 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae070b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract",
+        "label": "Yee et al. (2025), The Astronomical Journal 170 275",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname YEE_ET_AL_2025): st_teff 5002, st_rad 0.711, st_mass 0.802"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Yee et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae070b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract",
+        "label": "Yee et al. (2025), The Astronomical Journal 170 275",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname YEE_ET_AL_2025): st_teff 5002, st_rad 0.711, st_mass 0.802"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

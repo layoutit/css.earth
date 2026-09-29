@@ -1,0 +1,48 @@
+{
+  "id": "kepler-37",
+  "name": "Kepler-37",
+  "system": "Kepler-37 system",
+  "description": "Star of 5,357 K, 63.9 parsecs away, with 3 transiting planets.",
+  "target": "Kepler-37",
+  "gaia": "2106674071344722688",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "credit": "Bonomo et al. 2023"
+  },
+  "radius": {
+    "value": 0.789,
+    "source": "Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-37 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "uncertainty": 0.0064
+  },
+  "mass": {
+    "value": 0.79,
+    "source": "Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-37 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "uncertainty": 0.033
+  },
+  "temperature": {
+    "value": 5357,
+    "source": "Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-37 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "uncertainty": 68
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "3 planets cross Kepler-37 as seen from Earth: b, c, d.",
+    "introduction": "Its radius and temperature follow Bonomo et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2023): st_teff 5357, st_rad 0.789, st_mass 0.79",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-37",
+      "title": "Kepler-37",
+      "revision": "1374406300",
+      "card": "Kepler-37, also known as UGA-1785, is a G-type main-sequence star located in the constellation Lyra 209 light-years from Earth.",
+      "introduction": "It is host to exoplanets Kepler-37b, Kepler-37c, Kepler-37d and possibly Kepler-37e, all of which orbit very close to it."
+    }
+  },
+  "notes": [
+    "Kepler-37 e: Weiss et al. 2024's mass 0.02548545 Jupiter masses in 0.03300925 Jupiter radii is 878.7 g/cm^3, outside what the records accept"
+  ],
+  "order": 3728
+}

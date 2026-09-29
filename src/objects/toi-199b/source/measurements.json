@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-199b",
+  "radiusKm": 57908.5,
+  "radiusSource": "Radius 0.81 Jupiter radii from Hobson et al. 2023 (2023AJ....166..201H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract): 57,908.5 km at 71,492 km per Jupiter radius. GM from the mass 0.17 Jupiter masses (Hobson et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166..201H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 104.87242523178,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 104.87242523178 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-199 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.17 Jupiter masses: Hobson et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....166..201H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract)."
+}

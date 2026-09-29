@@ -1,0 +1,24 @@
+{
+  "host": "toi-1696",
+  "planets": [
+    {
+      "id": "toi-1696b",
+      "name": "TOI-1696 b",
+      "description": "Transiting planet of TOI-1696 with a 2.5-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract",
+        "credit": "Mori et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MORI_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-1696 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1696. Its orbit and size follow Mori et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORI_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.500311, pl_radj 0.27567181, pl_bmassj 0.15354197"
+      },
+      "order": 3036
+    }
+  ]
+}

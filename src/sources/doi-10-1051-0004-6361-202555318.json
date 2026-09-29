@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202555318",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Persson et al. (2025): TOI-1438: A rare system with two short-period sub-Neptunes and a tentative long-period Jupiter-like planet orbiting a K0V star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2508.21533"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202555318"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...702A..69P"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202555318",
+      "label": "Astronomy & Astrophysics 702 A69"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Persson et al. (2025), Astronomy & Astrophysics 702 A69",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 702 A69",
+  "creators": [
+    "Carina M. Persson",
+    "Emil Knudstrup",
+    "Ilaria Carleo",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

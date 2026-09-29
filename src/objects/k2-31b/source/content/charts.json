@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-31b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-31b-orbits",
+      "title": "K2-31 b: orbits around K2-31",
+      "output": "k2-31b-system-orbits.svg",
+      "system": "k2-31",
+      "highlight": "k2-31b",
+      "description": "The orbits of K2-31's planets in this map from above, to scale, with K2-31 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 1.25784887 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "k2-31b-transit",
+      "title": "K2-31 b: its transit",
+      "description": "K2-31 b crossing its star, as TESS recorded it: 1 sector (91) of the SPOC pipeline's 2-minute light curves of TIC 50171060, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 8 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 10 minutes at these dates, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "k2-31b-transit.svg",
+      "metadata": {
+        "tic": "TIC 50171060",
+        "sectors": [
+          91
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "k2-31b",
+      "sources": [
+        "photometry/tess/tess2025099153000-s0091-0000000050171060-0288-s_lc.fits"
+      ],
+      "durationHours": 0.9816,
+      "binMinutes": 4,
+      "alignMinutes": 8,
+      "notes": [
+        "TESS 2-min SPOC · sector 91",
+        "Aligned on TESS's dip, 8 min late; 4-min bins.",
+        "The ephemeris's own 1σ there is 3 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

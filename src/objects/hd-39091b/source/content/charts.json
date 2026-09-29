@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-39091b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-39091b-orbits",
+      "title": "HD 39091 b: orbits around HD 39091",
+      "output": "hd-39091b-system-orbits.svg",
+      "system": "hd-39091",
+      "highlight": "hd-39091b",
+      "description": "The orbits of HD 39091's planets in this map from above, to scale, with HD 39091 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Damasso et al. 2020 (2020A&A...642A..31D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL__2020): P 2088.8 d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ngts-11",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 578,822 km at 188.88 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 188.8838084736839,
+  "distanceSource": "Gaia DR3 parallax 5.2943 +/- 0.0180 mas (same row, RUWE 0.95): 188.88 pc, no zero-point correction",
+  "radiusKm": 578822.4,
+  "radiusSource": "Radius 0.832 +/- 0.013 solar radii from Gill et al. 2020, the stellar radius of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract): 578,822 km at 695,700 km per solar radius. Mass 0.862 +/- 0.028 solar masses from Gill et al. 2020, the stellar mass of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract); GM is that mass times the JPL solar GM. Temperature 5050 +/- 80 K from Gill et al. 2020, the stellar temperature of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5050,
+  "effectiveTemperatureSource": "Gill et al. 2020, the stellar temperature of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract)",
+  "surfaceGravityLogg": 4.53,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ngts-11.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.533, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

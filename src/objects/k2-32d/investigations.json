@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "k2-32d",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.3108222 Jupiter radii from Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02108056 Jupiter masses: Lillo-Box et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...640A..48L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): P 31.71701 d; Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): a/R* 46.02; Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): inclination 89.4 degrees; Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): e 0.05; Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): omega 185 degrees; Lillo-Box et al. 2020 (2020A&A...640A..48L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL__2020): transit mid-time 2456903.78707 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 189 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract"
+      ]
+    }
+  ]
+}

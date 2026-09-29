@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-149026",
+  "card": {
+    "text": "HD 149026 b crosses HD 149026 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6179, st_rad 1.41, st_mass 1.42"
+      },
+      {
+        "catalogueId": "wikipedia-hd-149026",
+        "url": "https://en.wikipedia.org/wiki/HD_149026",
+        "label": "Wikipedia, \"HD 149026\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374601832",
+        "quote": "HD 149026, also named Ogma, is a yellow subgiant star approximately 249 light-years from the Sun in the constellation of Hercules."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6179, st_rad 1.41, st_mass 1.42"
+      },
+      {
+        "catalogueId": "wikipedia-hd-149026",
+        "url": "https://en.wikipedia.org/wiki/HD_149026",
+        "label": "Wikipedia, \"HD 149026\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374601832",
+        "quote": "An exoplanet orbits the star."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

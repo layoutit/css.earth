@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hat-p-12",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 487,686 km at 141.95 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 141.94823368371658,
+  "distanceSource": "Gaia DR3 parallax 7.0448 +/- 0.0105 mas (same row, RUWE 1.07): 141.95 pc, no zero-point correction",
+  "radiusKm": 487685.7,
+  "radiusSource": "Radius 0.701 +/- 0.017 solar radii from Hartman et al. 2009, the stellar radius of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract): 487,686 km at 695,700 km per solar radius. Mass 0.733 +/- 0.018 solar masses from Hartman et al. 2009, the stellar mass of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract); GM is that mass times the JPL solar GM. Temperature 4650 +/- 60 K from Hartman et al. 2009, the stellar temperature of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4650,
+  "effectiveTemperatureSource": "Hartman et al. 2009, the stellar temperature of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract)",
+  "surfaceGravityLogg": 4.61,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-12.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.612, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

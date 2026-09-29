@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "g-9-40b",
+  "radiusKm": 12118.4,
+  "radiusSource": "Radius 0.16950694 Jupiter radii from Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract): 12,118.4 km at 71,492 km per Jupiter radius. GM from the mass 0.01258541 Jupiter masses (Luque et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...666A.154L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 5.7459982,
+  "orbitalPeriodSource": "Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive ps table (pl_refname LUQUE_ET_AL__2022): P 5.7459982 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of G 9-40 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01258541 Jupiter masses: Luque et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...666A.154L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract)."
+}

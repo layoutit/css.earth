@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-10b",
+  "displayName": "Kepler-10 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453026",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B",
+          "label": "Bonomo et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "20 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453026",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B",
+          "label": "Bonomo et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "3.2 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202453026",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B",
+          "label": "Bonomo et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-10; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-10b-lens-shape.webp",
+        "surface": "kepler-10b-surface-shape@2x.webp",
+        "poles": "kepler-10b-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-10b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-10 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-10's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kepler-10b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-10b/kepler-10b-system-orbits.svg",
+      "alt": "The orbits of Kepler-10's planets in this map from above, to scale, with Kepler-10 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-10b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B"
+      }
+    },
+    {
+      "id": "kepler-10b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kepler-10b/kepler-10b-transit.svg",
+      "alt": "Kepler-10 b crossing its star, as TESS recorded it: 3 sectors (80, 81, 82) of the SPOC pipeline's 2-minute light curves of TIC 377780790, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 5 minutes at these dates, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kepler-10b-tess-sector-80",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024170053053-s0080-0000000377780790-0275-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bonomo et al. 2025",
+      "href": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A.233B/abstract",
+      "credit": "Bonomo et al. 2025"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-10b.json",
+      "credit": "Radius from Bonomo et al. 2025 (2025A&A...696A.233B), via the NASA Exoplanet Archive; mass from Bonomo et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...696A.233B), via the NASA Exoplanet Archive; orbit from Bonomo et al. 2025 (2025A&A...696A.233B), via the NASA Exoplanet Archive"
+    }
+  }
+}

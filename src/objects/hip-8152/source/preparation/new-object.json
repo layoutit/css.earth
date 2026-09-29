@@ -1,0 +1,39 @@
+{
+  "id": "hip-8152",
+  "name": "HIP 8152",
+  "system": "HIP 8152 system",
+  "description": "Star of 5,618 K, 102 parsecs away, with 2 transiting planets.",
+  "target": "HIP 8152",
+  "gaia": "5140454049422547200",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "credit": "MacDougall et al. 2023"
+  },
+  "radius": {
+    "value": 0.9603,
+    "source": "MacDougall et al. 2023, the stellar radius of the default parameter set of HIP 8152 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0175
+  },
+  "mass": {
+    "value": 0.9373,
+    "source": "MacDougall et al. 2023, the stellar mass of the default parameter set of HIP 8152 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.035
+  },
+  "temperature": {
+    "value": 5618,
+    "source": "MacDougall et al. 2023, the stellar temperature of the default parameter set of HIP 8152 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 74
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross HIP 8152 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 5618, st_rad 0.9603, st_mass 0.9373"
+  },
+  "notes": [],
+  "order": 3261
+}

@@ -1,0 +1,31 @@
+{
+  "host": "toi-2180",
+  "planets": [
+    {
+      "id": "toi-2180b",
+      "name": "TOI-2180 b",
+      "description": "Transiting planet of TOI-2180 with a 260-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...61D/abstract",
+        "credit": "Dalba et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DALBA_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-2180 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2180. Its orbit and size follow Dalba et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DALBA_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 260.15764, pl_radj 1.01, pl_bmassj 2.755",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-2180_b",
+          "title": "TOI-2180 b",
+          "revision": "1374090731",
+          "card": "TOI-2180 b is a giant exoplanet orbiting the G-type star TOI-2180, also known as HD 238894.",
+          "introduction": "It was discovered with the help of the Transiting Exoplanet Survey Satellite and is currently the exoplanet with the longest orbital period TESS was able to uncover."
+        }
+      },
+      "order": 4265
+    }
+  ]
+}

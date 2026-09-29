@@ -1,0 +1,31 @@
+{
+ "id": "kepler-1656b",
+ "classification": "exoplanet",
+ "order": 3693,
+ "physical": {
+  "name": "Kepler-1656 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 29173.4,
+  "gravitationalParameterKm3PerS2": 19002979.79,
+  "parent": "kepler-1656"
+ },
+ "physicalNotes": "Radius 0.40806565 Jupiter radii from Fulton & Petigura 2018 (2018AJ....156..264F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..264F/abstract): 29,173.4 km at 71,492 km per Jupiter radius. GM from the mass 0.15 Jupiter masses (Angelo et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163..227A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 31.57865226,
+  "semiMajorAxisStellarRadii": 38.5885,
+  "inclinationDegrees": 89.31,
+  "eccentricity": 0.838,
+  "argumentOfPeriapsisDegrees": 52.80000000000001,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 54978.12703,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 31.57865226 d",
+   "shape": "Angelo et al. 2022 (2022AJ....163..227A), via the NASA Exoplanet Archive ps table (pl_refname ANGELO_ET_AL__2022): a/R* derived from its semi-major axis 0.1974 au and stellar radius 1.1 solar radii; Brady et al. 2018 (2018AJ....156..147B), via the NASA Exoplanet Archive ps table (pl_refname BRADY_ET_AL__2018): inclination 89.31 degrees",
+   "eccentricity": "Angelo et al. 2022 (2022AJ....163..227A), via the NASA Exoplanet Archive ps table (pl_refname ANGELO_ET_AL__2022): e 0.838",
+   "argumentOfPeriapsis": "Angelo et al. 2022 (2022AJ....163..227A), via the NASA Exoplanet Archive ps table (pl_refname ANGELO_ET_AL__2022): omega 52.8 degrees",
+   "phase": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2454978.62703 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lp-714-47",
+  "card": {
+    "text": "LP 714-47 b crosses LP 714-47 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2607-13333",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract",
+        "label": "Bell et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SERRANO_BELL_ET_AL_2026): st_teff 4123, st_rad 0.536, st_mass 0.542"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Serrano Bell et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2607-13333",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract",
+        "label": "Bell et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SERRANO_BELL_ET_AL_2026): st_teff 4123, st_rad 0.536, st_mass 0.542"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

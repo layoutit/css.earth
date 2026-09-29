@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hat-p-18",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 514,897 km at 161.65 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 161.64875339210988,
+  "distanceSource": "Gaia DR3 parallax 6.1863 +/- 0.0093 mas (same row, RUWE 0.99): 161.65 pc, no zero-point correction",
+  "radiusKm": 514896.6,
+  "radiusSource": "Radius 0.740113 +/- 0.06033 solar radii from TICv8, the stellar radius of HAT-P-18 b's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract): 514,897 km at 695,700 km per solar radius. Mass 0.773 +/- 0.075989 solar masses from TICv8, the stellar mass of HAT-P-18 b's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract); GM is that mass times the JPL solar GM. Temperature 4790 +/- 107.64 K from TICv8, the stellar temperature of HAT-P-18 b's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4790,
+  "effectiveTemperatureSource": "TICv8, the stellar temperature of HAT-P-18 b's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "surfaceGravityLogg": 4.59,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-18.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.588, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

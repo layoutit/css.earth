@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-50554d",
+  "radiusKm": 8993.1,
+  "radiusSource": "Radius 0.12579199 Jupiter radii from Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract): 8,993.1 km at 71,492 km per Jupiter radius. No mass is measured: Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract) gives only an upper limit of 0.03272206 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 28.06939485536,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 28.06939485536 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 50554 d is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.03272206 Jupiter masses: Liu et al. 2026 (2026AJ....172...72L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract)."
+}

@@ -1,0 +1,48 @@
+{
+  "id": "gj-3929",
+  "name": "GJ 3929",
+  "system": "GJ 3929 system",
+  "description": "Star of 3,384 K, 15.8 parsecs away, with 1 transiting planet.",
+  "target": "GJ 3929",
+  "gaia": "1372215976327300480",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+    "credit": "Beard et al. 2022"
+  },
+  "radius": {
+    "value": 0.32,
+    "source": "Beard et al. 2022, the stellar radius of the default parameter set of GJ 3929 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.313,
+    "source": "Beard et al. 2022, the stellar mass of the default parameter set of GJ 3929 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+    "uncertainty": 0.027
+  },
+  "temperature": {
+    "value": 3384,
+    "source": "Beard et al. 2022, the stellar temperature of the default parameter set of GJ 3929 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+    "uncertainty": 88
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "GJ 3929 b crosses GJ 3929 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Beard et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BEARD_ET_AL_2022): st_teff 3384, st_rad 0.32, st_mass 0.313",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/GJ_3929",
+      "title": "GJ 3929",
+      "revision": "1368614101",
+      "card": "GJ 3929, also known as Gliese 3929 and TOI-2013, is a red dwarf star located 51.6 light-years from Earth, in the constellation Corona Borealis.",
+      "introduction": "With an apparent magnitude of 12, it is not visible to the naked eye."
+    }
+  },
+  "notes": [
+    "GJ 3929 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3095
+}

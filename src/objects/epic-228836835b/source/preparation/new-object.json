@@ -1,0 +1,24 @@
+{
+  "host": "epic-228836835",
+  "planets": [
+    {
+      "id": "epic-228836835b",
+      "name": "EPIC 228836835 b",
+      "description": "Transiting planet of EPIC 228836835 with a 0.728-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021PSJ.....2..152A/abstract",
+        "credit": "Adams et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ADAMS_ET_AL__2021"
+      },
+      "text": {
+        "card": "EPIC 228836835 b was found in 2021 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around EPIC 228836835. Its orbit and size follow Adams et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ADAMS_ET_AL__2021): disc_year 2021, disc_facility K2, sy_pnum 1; pl_orbper 0.728113, pl_radj 0.0981356, pl_bmassj 0.0043"
+      },
+      "order": 3069
+    }
+  ]
+}

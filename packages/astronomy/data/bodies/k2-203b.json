@@ -1,0 +1,31 @@
+{
+ "id": "k2-203b",
+ "classification": "exoplanet",
+ "order": 3385,
+ "physical": {
+  "name": "K2-203 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 8071.4,
+  "gravitationalParameterKm3PerS2": 853867.23,
+  "parent": "k2-203"
+ },
+ "physicalNotes": "Radius 0.1129 Jupiter radii from Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract): 8,071.4 km at 71,492 km per Jupiter radius. GM from the mass 0.00674 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 9.695101,
+  "semiMajorAxisStellarRadii": 23.16,
+  "inclinationDegrees": 89.12,
+  "eccentricity": 0.23,
+  "argumentOfPeriapsisDegrees": 236,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 57396.13878,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): P 9.695101 d",
+   "shape": "Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): a/R* 23.16; Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): inclination 89.12 degrees",
+   "eccentricity": "Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): e 0.23",
+   "argumentOfPeriapsis": "Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): omega -124 degrees, stored as 236",
+   "phase": "Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): transit mid-time 2457396.63878 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 696 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

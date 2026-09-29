@@ -1,0 +1,24 @@
+{
+  "host": "k2-124",
+  "planets": [
+    {
+      "id": "k2-124b",
+      "name": "K2-124 b",
+      "description": "Transiting planet of K2-124 with a 6.41-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract",
+        "credit": "Livingston et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LIVINGSTON_ET_AL__2019"
+      },
+      "text": {
+        "card": "K2-124 b was found in 2017 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-124. Its orbit and size follow Livingston et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2019): disc_year 2017, disc_facility K2, sy_pnum 1; pl_orbper 6.413651, pl_radj 0.25872067, pl_bmassj 0.0275"
+      },
+      "order": 3292
+    }
+  ]
+}

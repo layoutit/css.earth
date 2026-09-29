@@ -1,0 +1,30 @@
+{
+ "id": "toi-512",
+ "classification": "star",
+ "order": 4484,
+ "physical": {
+  "name": "TOI-512",
+  "horizonsCode": null,
+  "meanRadiusKm": 619173,
+  "gravitationalParameterKm3PerS2": 98207205631.03514,
+  "parent": null,
+  "effectiveTemperatureK": 5277
+ },
+ "physicalNotes": "Radius 0.89 +/- 0.03 solar radii from Rodrigues et al. 2025, the stellar radius of the default parameter set of TOI-512 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract): 619,173 km at 695,700 km per solar radius. Mass 0.74 +/- 0.03 solar masses from Rodrigues et al. 2025, the stellar mass of the default parameter set of TOI-512 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract); GM is that mass times the JPL solar GM. Temperature 5277 +/- 67 K from Rodrigues et al. 2025, the stellar temperature of the default parameter set of TOI-512 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 96.64670287271449,
+  "declinationDegrees": -38.607224595376266,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 67.19599391317637,
+  "properMotionRaMasPerYear": 3.1046300222371155,
+  "properMotionDecMasPerYear": -108.87276817488626,
+  "radialVelocityKmPerS": 68.33113,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5574111674620962688 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-512/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 14.8818 +/- 0.0098 mas (same row, RUWE 0.88): 67.20 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 3.105, -108.873 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 68.33 +/- 0.14 km/s"
+  }
+ }
+}

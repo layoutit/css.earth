@@ -1,0 +1,28 @@
+{
+ "id": "toi-2969b",
+ "classification": "exoplanet",
+ "order": 4349,
+ "physical": {
+  "name": "TOI-2969 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 78641.2,
+  "gravitationalParameterKm3PerS2": 146956377,
+  "parent": "toi-2969"
+ },
+ "physicalNotes": "Radius 1.1 Jupiter radii from Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract): 78,641.2 km at 71,492 km per Jupiter radius. GM from the mass 1.16 Jupiter masses (Frensch et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...700A.118F), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.8237146,
+  "semiMajorAxisStellarRadii": 8.0176,
+  "inclinationDegrees": 84.9,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59302.80015,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): P 1.8237146 d",
+   "shape": "Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): a/R* derived from its semi-major axis 0.0261 au and stellar radius 0.7 solar radii; Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): inclination 84.9 degrees",
+   "eccentricity": "Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): e 0",
+   "phase": "Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): transit mid-time 2459303.30015 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1266b",
+  "card": {
+    "text": "TOI-1266 b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adc0fe",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract",
+        "label": "Greklek-McKeon et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GREKLEK_MCKEON_ET_AL_2025): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 10.894841, pl_radj 0.22481973, pl_bmassj 0.01403273"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 3 planets known around TOI-1266. Its orbit and size follow Greklek-McKeon et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adc0fe",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract",
+        "label": "Greklek-McKeon et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GREKLEK_MCKEON_ET_AL_2025): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 10.894841, pl_radj 0.22481973, pl_bmassj 0.01403273"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

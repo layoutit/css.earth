@@ -1,0 +1,46 @@
+{
+  "id": "kelt-10",
+  "name": "KELT-10",
+  "system": "KELT-10 system",
+  "description": "Star of 5,948 K, 188 parsecs away, with 1 transiting planet.",
+  "target": "KELT-10",
+  "gaia": "6710517793025165696",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+    "credit": "Kuhn et al. 2016"
+  },
+  "radius": {
+    "value": 1.209,
+    "source": "Kuhn et al. 2016, the stellar radius of the default parameter set of KELT-10 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+    "uncertainty": 0.047
+  },
+  "mass": {
+    "value": 1.112,
+    "source": "Kuhn et al. 2016, the stellar mass of the default parameter set of KELT-10 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+    "uncertainty": 0.055
+  },
+  "temperature": {
+    "value": 5948,
+    "source": "Kuhn et al. 2016, the stellar temperature of the default parameter set of KELT-10 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+    "uncertainty": 74
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "KELT-10 b crosses KELT-10 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Kuhn et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KUHN_ET_AL__2016): st_teff 5948, st_rad 1.209, st_mass 1.112",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/KELT-10",
+      "title": "KELT-10",
+      "revision": "1374407148",
+      "card": "KELT-10, also known as CD−47°12635, is a sun-like star in the southern constellation Telescopium.",
+      "introduction": "It has an apparent magnitude of 10.62, making it readily visible in telescopes, but not to the naked eye."
+    }
+  },
+  "notes": [],
+  "order": 3627
+}

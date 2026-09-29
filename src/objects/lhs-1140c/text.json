@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lhs-1140c",
+  "card": {
+    "text": "LHS 1140 c was found in 2018 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad1691",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract",
+        "label": "Cadieux et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL__2024): disc_year 2018, disc_facility Multiple Observatories, sy_pnum 2; pl_orbper 3.77794, pl_radj 0.11348043, pl_bmassj 0.00600953"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around LHS 1140. Its orbit and size follow Cadieux et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad1691",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract",
+        "label": "Cadieux et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL__2024): disc_year 2018, disc_facility Multiple Observatories, sy_pnum 2; pl_orbper 3.77794, pl_radj 0.11348043, pl_bmassj 0.00600953"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

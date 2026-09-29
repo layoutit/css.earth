@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wolf-503b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wolf-503b-orbits",
+      "title": "Wolf 503 b: orbits around Wolf 503",
+      "output": "wolf-503b-system-orbits.svg",
+      "system": "wolf-503",
+      "highlight": "wolf-503b",
+      "description": "The orbits of Wolf 503's planets in this map from above, to scale, with Wolf 503 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Polanski et al. 2021 (2021AJ....162..238P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2021): P 6.00127 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wolf-503b-transit",
+      "title": "Wolf 503 b: its transit",
+      "description": "Wolf 503 b crossing its star, as TESS recorded it: 1 sector (91) of the SPOC pipeline's 2-minute light curves of TIC 187278212, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 28 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 39 minutes at these dates, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "output": "wolf-503b-transit.svg",
+      "metadata": {
+        "tic": "TIC 187278212",
+        "sectors": [
+          91
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wolf-503b",
+      "sources": [
+        "photometry/tess/tess2025099153000-s0091-0000000187278212-0288-s_lc.fits"
+      ],
+      "durationHours": 1.33,
+      "binMinutes": 5,
+      "alignMinutes": 28,
+      "notes": [
+        "TESS 2-min SPOC · sector 91",
+        "Aligned on TESS's dip, 28 min late; 5-min bins.",
+        "The ephemeris's own 1σ there is 13 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

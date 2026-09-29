@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-757",
+  "card": {
+    "text": "TOI-757 b crosses TOI-757 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae1767",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A/abstract",
+        "label": "Alqasim et al. (2024), Monthly Notices of the Royal Astronomical Society 533 1-26",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ALQASIM_ET_AL_2024): st_teff 5278, st_rad 0.78, st_mass 0.8"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Alqasim et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae1767",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533....1A/abstract",
+        "label": "Alqasim et al. (2024), Monthly Notices of the Royal Astronomical Society 533 1-26",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ALQASIM_ET_AL_2024): st_teff 5278, st_rad 0.78, st_mass 0.8"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1696b",
+  "radiusKm": 19708.3,
+  "radiusSource": "Radius 0.27567181 Jupiter radii from Mori et al. 2022 (2022AJ....163..298M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract): 19,708.3 km at 71,492 km per Jupiter radius. No mass is measured: Mori et al. 2022 (2022AJ....163..298M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract) gives only an upper limit of 0.15354197 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.500311,
+  "orbitalPeriodSource": "Mori et al. 2022 (2022AJ....163..298M), via the NASA Exoplanet Archive ps table (pl_refname MORI_ET_AL__2022): P 2.500311 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1696 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.15354197 Jupiter masses: Mori et al. 2022 (2022AJ....163..298M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract)."
+}

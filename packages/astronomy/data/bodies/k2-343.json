@@ -1,0 +1,30 @@
+{
+ "id": "k2-343",
+ "classification": "star",
+ "order": 3516,
+ "physical": {
+  "name": "K2-343",
+  "horizonsCode": null,
+  "meanRadiusKm": 320022,
+  "gravitationalParameterKm3PerS2": 65029095620.55029,
+  "parent": null,
+  "effectiveTemperatureK": 3804
+ },
+ "physicalNotes": "Radius 0.46 +/- 0.01 solar radii from de Leon et al. 2021, the stellar radius of the default parameter set of K2-343 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract): 320,022 km at 695,700 km per solar radius. Mass 0.49 +/- 0.01 solar masses from de Leon et al. 2021, the stellar mass of the default parameter set of K2-343 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract); GM is that mass times the JPL solar GM. Temperature 3804 +/- 93 K from de Leon et al. 2021, the stellar temperature of the default parameter set of K2-343 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 134.20217291537884,
+  "declinationDegrees": 21.50268865602846,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 167.3297029757277,
+  "properMotionRaMasPerYear": -11.01159541719176,
+  "properMotionDecMasPerYear": 3.574919963763181,
+  "radialVelocityKmPerS": 54.128983,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 685818492336147072 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-343/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.9762 +/- 0.0314 mas (same row, RUWE 1.07): 167.33 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -11.012, 3.575 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 54.13 +/- 3.01 km/s"
+  }
+ }
+}

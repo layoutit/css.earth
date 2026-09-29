@@ -1,0 +1,24 @@
+{
+  "host": "hd-18599",
+  "planets": [
+    {
+      "id": "hd-18599b",
+      "name": "HD 18599 b",
+      "description": "Transiting planet of HD 18599 with a 4.14-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract",
+        "credit": "Desidera et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DESIDERA_ET_AL_2023"
+      },
+      "text": {
+        "card": "HD 18599 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around HD 18599. Its orbit and size follow Desidera et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DESIDERA_ET_AL_2023): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.13744033335, pl_radj 0.23195686, pl_bmassj 0.07582708"
+      },
+      "order": 3025
+    }
+  ]
+}

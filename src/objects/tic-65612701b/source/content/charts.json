@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/tic-65612701b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "tic-65612701b-orbits",
+      "title": "TIC 65612701 b: orbits around TIC 65612701",
+      "output": "tic-65612701b-system-orbits.svg",
+      "system": "tic-65612701",
+      "highlight": "tic-65612701b",
+      "description": "The orbits of TIC 65612701's planets in this map from above, to scale, with TIC 65612701 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): P 10.22467974953 d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "lhs-1478b",
+  "radiusKm": 7487.9,
+  "radiusSource": "Radius 0.10473745 Jupiter radii from August et al. 2025 (2025A&A...695A.171A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract): 7,487.9 km at 71,492 km per Jupiter radius. GM from the mass 0.00714222 Jupiter masses (August et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...695A.171A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.94953941,
+  "orbitalPeriodSource": "August et al. 2025 (2025A&A...695A.171A), via the NASA Exoplanet Archive ps table (pl_refname AUGUST_ET_AL_2025): P 1.94953941 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of LHS 1478 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00714222 Jupiter masses: August et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...695A.171A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract)."
+}

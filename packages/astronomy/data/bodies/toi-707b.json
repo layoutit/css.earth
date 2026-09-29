@@ -1,0 +1,28 @@
+{
+ "id": "toi-707b",
+ "classification": "exoplanet",
+ "order": 4675,
+ "physical": {
+  "name": "TOI-707 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 15406.5,
+  "gravitationalParameterKm3PerS2": 2559067.94,
+  "parent": "toi-707"
+ },
+ "physicalNotes": "Radius 0.2155 Jupiter radii from Rea et al. 2026 (2026A&A...711A..86R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract): 15,406.5 km at 71,492 km per Jupiter radius. GM from the mass 0.0202 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 52.79920330011,
+  "semiMajorAxisStellarRadii": 60.5,
+  "inclinationDegrees": 89.602,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60879.386381,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 52.79920330011 d",
+   "shape": "Rea et al. 2026 (2026A&A...711A..86R), via the NASA Exoplanet Archive ps table (pl_refname REA_ET_AL_2026): a/R* 60.5; Rea et al. 2026 (2026A&A...711A..86R), via the NASA Exoplanet Archive ps table (pl_refname REA_ET_AL_2026): inclination 89.602 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460879.886381 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

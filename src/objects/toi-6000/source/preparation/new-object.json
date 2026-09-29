@@ -1,0 +1,38 @@
+{
+  "id": "toi-6000",
+  "name": "TOI-6000",
+  "system": "TOI-6000 system",
+  "description": "Star of 3,419 K, 75.8 parsecs away, with 1 transiting planet.",
+  "target": "TOI-6000",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G/abstract",
+    "credit": "Gomez Barrientos et al. 2025"
+  },
+  "radius": {
+    "value": 0.38,
+    "source": "Gomez Barrientos et al. 2025, the stellar radius of the default parameter set of TOI-6000 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.37,
+    "source": "Gomez Barrientos et al. 2025, the stellar mass of the default parameter set of TOI-6000 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3419,
+    "source": "Gomez Barrientos et al. 2025, the stellar temperature of the default parameter set of TOI-6000 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G/abstract",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-6000 b crosses TOI-6000 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Gomez Barrientos et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GOMEZ_BARRIENTOS_ET_AL_2025): st_teff 3419, st_rad 0.38, st_mass 0.37"
+  },
+  "notes": [],
+  "order": 4596
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-1656b",
+  "radiusKm": 29173.4,
+  "radiusSource": "Radius 0.40806565 Jupiter radii from Fulton & Petigura 2018 (2018AJ....156..264F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..264F/abstract): 29,173.4 km at 71,492 km per Jupiter radius. GM from the mass 0.15 Jupiter masses (Angelo et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163..227A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 31.57865226,
+  "orbitalPeriodSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 31.57865226 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-1656 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.15 Jupiter masses: Angelo et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163..227A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract)."
+}

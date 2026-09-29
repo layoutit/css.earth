@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-263b",
+  "card": {
+    "text": "K2-263 b was found in 2018 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag520",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag520P/abstract",
+        "label": "Palethorpe et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PALETHORPE_ET_AL_2026): disc_year 2018, disc_facility K2, sy_pnum 1; pl_orbper 50.819172, pl_radj 0.22419523, pl_bmassj 0.04845382"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around K2-263. Its orbit and size follow Mortier et al. 2018's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag520",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag520P/abstract",
+        "label": "Palethorpe et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PALETHORPE_ET_AL_2026): disc_year 2018, disc_facility K2, sy_pnum 1; pl_orbper 50.819172, pl_radj 0.22419523, pl_bmassj 0.04845382"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

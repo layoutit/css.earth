@@ -1,0 +1,31 @@
+{
+  "host": "toi-561",
+  "planets": [
+    {
+      "id": "toi-561b",
+      "name": "TOI-561 b",
+      "description": "Transiting planet of TOI-561 with a 0.447-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract",
+        "credit": "Piotto et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PIOTTO_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-561 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around TOI-561. Its orbit and size follow Piotto et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PIOTTO_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 0.4465697, pl_radj 0.12463221, pl_bmassj 0.00635563",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-561_b",
+          "title": "TOI-561 b",
+          "revision": "1374392593",
+          "card": "TOI-561 b is an ultra-short period super-Earth exoplanet orbiting TOI-561, a Sun-like star.",
+          "introduction": "The innermost planet in its planetary system, it orbits extremely close to its star, completing an orbit within 11 hours."
+        }
+      },
+      "order": 4540
+    }
+  ]
+}

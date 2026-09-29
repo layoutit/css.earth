@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-139b",
+  "card": {
+    "text": "K2-139 b was found in 2017 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aae778",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+        "label": "Livingston et al. 2018",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): disc_year 2017, disc_facility K2, sy_pnum 1; pl_orbper 28.38246, pl_radj 0.81273976, pl_bmassj 0.387"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around K2-139. Its orbit and size follow Livingston et al. 2018's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aae778",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract",
+        "label": "Livingston et al. 2018",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL__2018): disc_year 2017, disc_facility K2, sy_pnum 1; pl_orbper 28.38246, pl_radj 0.81273976, pl_bmassj 0.387"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

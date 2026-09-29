@@ -1,0 +1,31 @@
+{
+  "host": "k2-315",
+  "planets": [
+    {
+      "id": "k2-315b",
+      "name": "K2-315 b",
+      "description": "Transiting planet of K2-315 with a 3.14-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..172N/abstract",
+        "credit": "Niraula et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "NIRAULA_ET_AL__2020"
+      },
+      "text": {
+        "card": "K2-315 b was found in 2020 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-315. Its orbit and size follow Niraula et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NIRAULA_ET_AL__2020): disc_year 2020, disc_facility K2, sy_pnum 1; pl_orbper 3.1443189, pl_radj 0.08475332, pl_bmassj 0.00254",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/K2-315b",
+          "title": "K2-315b",
+          "revision": "1374087918",
+          "card": "K2-315b is an exoplanet located 185.3 light-years away from Earth in the southern zodiac constellation Libra.",
+          "introduction": "It orbits the red dwarf K2-315."
+        }
+      },
+      "order": 3482
+    }
+  ]
+}

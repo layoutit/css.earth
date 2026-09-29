@@ -1,0 +1,28 @@
+{
+ "id": "toi-561b",
+ "classification": "exoplanet",
+ "order": 4540,
+ "physical": {
+  "name": "TOI-561 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 8910.2,
+  "gravitationalParameterKm3PerS2": 805172.72,
+  "parent": "toi-561"
+ },
+ "physicalNotes": "Radius 0.12463221 Jupiter radii from Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract): 8,910.2 km at 71,492 km per Jupiter radius. GM from the mass 0.00635563 Jupiter masses (Piotto et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.535.2763P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.4465697,
+  "semiMajorAxisStellarRadii": 2.683,
+  "inclinationDegrees": 87,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59317.25002,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): P 0.4465697 d",
+   "shape": "Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): a/R* 2.683; Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): inclination 87 degrees",
+   "eccentricity": "Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): e 0",
+   "phase": "Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): transit mid-time 2459317.75002 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

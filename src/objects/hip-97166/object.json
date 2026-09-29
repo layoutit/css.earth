@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "hip-97166",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HIP 97166",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 585640.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hip-97166-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HIP 97166",
+      "classification": "star",
+      "color": "#ffe5d3",
+      "distanceAu": 13621623.1,
+      "description": "HIP 97166 b crosses HIP 97166 as seen from Earth, which is how it was found.",
+      "systemName": "HIP 97166 system",
+      "order": 3266,
+      "context": {
+        "order": 3263
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        247429455695037800,
+        -501851419108337700,
+        1959442095621689300
+      ],
+      "presentationToReference": [
+        0.12142254201292582,
+        0.42520784287135727,
+        -0.896914074285718,
+        -0.24627655932269185,
+        -0.8624399764510267,
+        -0.44220486581145757,
+        0.9615635302044769,
+        -0.2745825511204958,
+        9.297348698727153e-7
+      ],
+      "orbitUpReference": [
+        -0.42520784287135727,
+        0.8624399764510267,
+        0.2745825511204958
+      ],
+      "metersPerUnit": 1889162.2580645161,
+      "bodyRadiusM": 585640300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

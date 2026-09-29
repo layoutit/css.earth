@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-11",
+  "card": {
+    "text": "KELT-11 b crosses KELT-11 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243998",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+        "label": "Mounzer et al. (2022), Astronomy & Astrophysics 668 A1",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MOUNZER_ET_AL__2022): st_teff 5375, st_rad 2.69, st_mass 1.44"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mounzer et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243998",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract",
+        "label": "Mounzer et al. (2022), Astronomy & Astrophysics 668 A1",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MOUNZER_ET_AL__2022): st_teff 5375, st_rad 2.69, st_mass 1.44"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

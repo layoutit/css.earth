@@ -1,0 +1,31 @@
+{
+  "host": "kepler-37",
+  "planets": [
+    {
+      "id": "kepler-37c",
+      "name": "Kepler-37 c",
+      "description": "Transiting planet of Kepler-37 with a 21.3-day year, found in 2013.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "credit": "Bonomo et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONOMO_ET_AL_2023"
+      },
+      "text": {
+        "card": "Kepler-37 c was found in 2013 by Kepler as it crossed its star.",
+        "introduction": "It is one of 4 planets known around Kepler-37. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2013, disc_facility Kepler, sy_pnum 4; pl_orbper 21.30191004, pl_radj 0.0673567, pl_bmassj 0.00409026",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Kepler-37c",
+          "title": "Kepler-37c",
+          "revision": "1374390208",
+          "card": "Kepler-37c is an exoplanet discovered by the Kepler space telescope in February 2013.",
+          "introduction": "With an orbital period of 21 days, it is located 209 light-years away, in the constellation Lyra."
+        }
+      },
+      "order": 3730
+    }
+  ]
+}

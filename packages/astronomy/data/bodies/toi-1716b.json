@@ -1,0 +1,28 @@
+{
+ "id": "toi-1716b",
+ "classification": "exoplanet",
+ "order": 4101,
+ "physical": {
+  "name": "TOI-1716 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 20046.4,
+  "gravitationalParameterKm3PerS2": 4003294.41,
+  "parent": "toi-1716"
+ },
+ "physicalNotes": "Radius 0.28040016 Jupiter radii from Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract): 20,046.4 km at 71,492 km per Jupiter radius. GM from the mass 0.0316 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 8.082354,
+  "semiMajorAxisStellarRadii": 13.9591,
+  "inclinationDegrees": 87.403,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60298.178071,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.082354 d",
+   "shape": "Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive ps table (pl_refname CROSSFIELD_ET_AL_2025): a/R* derived from its semi-major axis 0.080496 au and stellar radius 1.24 solar radii; Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive ps table (pl_refname CROSSFIELD_ET_AL_2025): inclination derived from its transit duration 3.5635 h and Rp/R* 0.0232 with the orbit's a/R* 13.9591 (Winn 2010, eqs. 14 and 16)",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460298.678071 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

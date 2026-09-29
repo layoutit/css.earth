@@ -1,0 +1,39 @@
+{
+  "id": "toi-5817",
+  "name": "TOI-5817",
+  "system": "TOI-5817 system",
+  "description": "Star of 5,770 K, 80.8 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5817",
+  "gaia": "1790807028049001600",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract",
+    "credit": "Naponiello et al. 2025"
+  },
+  "radius": {
+    "value": 1.427,
+    "source": "Naponiello et al. 2025, the stellar radius of the default parameter set of TOI-5817 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract",
+    "uncertainty": 0.043
+  },
+  "mass": {
+    "value": 0.97,
+    "source": "Naponiello et al. 2025, the stellar mass of the default parameter set of TOI-5817 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract",
+    "uncertainty": 0.072
+  },
+  "temperature": {
+    "value": 5770,
+    "source": "Naponiello et al. 2025, the stellar temperature of the default parameter set of TOI-5817 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5817 b crosses TOI-5817 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Naponiello et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname NAPONIELLO_ET_AL_2025): st_teff 5770, st_rad 1.427, st_mass 0.97"
+  },
+  "notes": [],
+  "order": 4590
+}

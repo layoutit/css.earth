@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-7189b",
+  "radiusKm": 70062.2,
+  "radiusSource": "Radius 0.98 Jupiter radii from Premnath et al. 2026 (2026AJ....172...92P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract): 70,062.2 km at 71,492 km per Jupiter radius. GM from the mass 0.5 Jupiter masses (Premnath et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026AJ....172...92P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.89055,
+  "orbitalPeriodSource": "Premnath et al. 2026 (2026AJ....172...92P), via the NASA Exoplanet Archive ps table (pl_refname PREMNATH_ET_AL_2026): P 2.89055 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-7189 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.5 Jupiter masses: Premnath et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026AJ....172...92P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract)."
+}

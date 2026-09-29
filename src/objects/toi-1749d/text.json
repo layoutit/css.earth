@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1749d",
+  "card": {
+    "text": "TOI-1749 d was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac13a5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract",
+        "label": "Fukui et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FUKUI_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 9.04470385496, pl_radj 0.22481973, pl_bmassj 0.04719528"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 3 planets known around TOI-1749. Its orbit and size follow Fukui et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac13a5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract",
+        "label": "Fukui et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FUKUI_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 9.04470385496, pl_radj 0.22481973, pl_bmassj 0.04719528"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

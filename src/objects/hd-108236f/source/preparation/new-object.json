@@ -1,0 +1,24 @@
+{
+  "host": "hd-108236",
+  "planets": [
+    {
+      "id": "hd-108236f",
+      "name": "HD 108236 f",
+      "description": "Transiting planet of HD 108236 with a 29.5-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract",
+        "credit": "Bonfanti et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONFANTI_ET_AL__2021"
+      },
+      "text": {
+        "card": "HD 108236 f was found in 2021 by CHEOPS as it crossed its star.",
+        "introduction": "It is one of 5 planets known around HD 108236. Its orbit and size follow Bonfanti et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL__2021): disc_year 2021, disc_facility CHaracterising ExOPlanets Satellite (CHEOPS), sy_pnum 5; pl_orbper 29.54115, pl_radj 0.17994469, pl_bmassj 0.0149"
+      },
+      "order": 3148
+    }
+  ]
+}

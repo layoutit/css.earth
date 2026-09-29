@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-36c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-36c-orbits",
+      "title": "K2-36 c: orbits around K2-36",
+      "output": "k2-36c-system-orbits.svg",
+      "system": "k2-36",
+      "highlight": "k2-36c",
+      "description": "The orbits of K2-36's planets in this map from above, to scale, with K2-36 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Duck et al. 2021 (2021AJ....162..136D), via the NASA Exoplanet Archive ps table (pl_refname DUCK_ET_AL__2021): P 5.3410507 d"
+      }
+    }
+  ]
+}

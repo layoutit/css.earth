@@ -1,0 +1,24 @@
+{
+  "host": "epic-201238110",
+  "planets": [
+    {
+      "id": "epic-201238110b",
+      "name": "EPIC 201238110 b",
+      "description": "Transiting planet of EPIC 201238110 with a 28.2-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...627A..66H/abstract",
+        "credit": "Heller et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HELLER_ET_AL__2019"
+      },
+      "text": {
+        "card": "EPIC 201238110 b was found in 2019 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around EPIC 201238110. Its orbit and size follow Heller et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HELLER_ET_AL__2019): disc_year 2019, disc_facility K2, sy_pnum 1; pl_orbper 28.1656, pl_radj 0.16683023, pl_bmassj 0.0131"
+      },
+      "order": 3061
+    }
+  ]
+}

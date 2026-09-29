@@ -1,0 +1,44 @@
+{
+  "id": "k2-332",
+  "name": "K2-332",
+  "system": "K2-332 system",
+  "description": "Star of 3,315 K, 123 parsecs away, with 1 transiting planet.",
+  "target": "K2-332",
+  "gaia": "607158571490718208",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "credit": "de Leon et al. 2021"
+  },
+  "radius": {
+    "value": 0.28,
+    "source": "de Leon et al. 2021, the stellar radius of the default parameter set of K2-332 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.27,
+    "source": "de Leon et al. 2021, the stellar mass of the default parameter set of K2-332 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 3315,
+    "source": "de Leon et al. 2021, the stellar temperature of the default parameter set of K2-332 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 137
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-332 b crosses K2-332 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow de Leon et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DE_LEON_ET_AL_2021): st_teff 3315, st_rad 0.28, st_mass 0.27"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 607158571490718208 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 40,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%20607158571490718208"
+  },
+  "order": 3512
+}

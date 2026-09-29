@@ -1,0 +1,28 @@
+{
+ "id": "toi-178b",
+ "classification": "exoplanet",
+ "order": 4150,
+ "physical": {
+  "name": "TOI-178 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 7653.7,
+  "gravitationalParameterKm3PerS2": 382656.67,
+  "parent": "toi-178"
+ },
+ "physicalNotes": "Radius 0.10705701 Jupiter radii from Leleu et al. 2024 (2024A&A...688A.211L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract): 7,653.7 km at 71,492 km per Jupiter radius. GM from the mass 0.0030205 Jupiter masses (Leleu et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...688A.211L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.9145601,
+  "semiMajorAxisStellarRadii": 8.4775,
+  "inclinationDegrees": 88.8,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58930.6793,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Leleu et al. 2024 (2024A&A...688A.211L), via the NASA Exoplanet Archive ps table (pl_refname LELEU_ET_AL__2024): P 1.9145601 d",
+   "shape": "Leleu et al. 2024 (2024A&A...688A.211L), via the NASA Exoplanet Archive ps table (pl_refname LELEU_ET_AL__2024): a/R* derived by Kepler's third law from its period 1.9145601 d, stellar mass 0.647 and radius 0.662 solar units; Leleu et al. 2021 (2021A&A...649A..26L), via the NASA Exoplanet Archive ps table (pl_refname LELEU_ET_AL__2021): inclination 88.8 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Leleu et al. 2024 (2024A&A...688A.211L), via the NASA Exoplanet Archive ps table (pl_refname LELEU_ET_AL__2024): transit mid-time 2458931.1793 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 7 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

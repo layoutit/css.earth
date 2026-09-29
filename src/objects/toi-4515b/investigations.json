@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-4515b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.086 Jupiter radii from Carleo et al. 2024 (2024A&A...682A.135C), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "2.005 Jupiter masses: Carleo et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...682A.135C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Carleo et al. 2024 (2024A&A...682A.135C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL__2024): P 15.266446 d; Carleo et al. 2024 (2024A&A...682A.135C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL__2024): a/R* 29.67; Carleo et al. 2024 (2024A&A...682A.135C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL__2024): inclination 87.954 degrees; Carleo et al. 2024 (2024A&A...682A.135C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL__2024): e 0.461; Carleo et al. 2024 (2024A&A...682A.135C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL__2024): omega 169.9 degrees; Carleo et al. 2024 (2024A&A...682A.135C), via the NASA Exoplanet Archive ps table (pl_refname CARLEO_ET_AL__2024): transit mid-time 2459451.62191 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract"
+      ]
+    }
+  ]
+}

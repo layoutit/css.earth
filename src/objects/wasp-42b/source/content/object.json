@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-42b",
+  "displayName": "WASP-42 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw279",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S",
+          "label": "Southworth et al. 2016",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.98 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw279",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S",
+          "label": "Southworth et al. 2016",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.53 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw279",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S",
+          "label": "Southworth et al. 2016",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by WASP-42; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "wasp-42b-lens-shape.webp",
+        "surface": "wasp-42b-surface-shape@2x.webp",
+        "poles": "wasp-42b-poles-shape@2x.webp",
+        "source": {
+          "id": "wasp-42b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of WASP-42 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of wasp-42's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-42b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-42b/wasp-42b-system-orbits.svg",
+      "alt": "The orbits of WASP-42's planets in this map from above, to scale, with WASP-42 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-42b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S"
+      }
+    },
+    {
+      "id": "wasp-42b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-42b/wasp-42b-transit.svg",
+      "alt": "WASP-42 b crossing its star, as TESS recorded it: 3 sectors (37, 64, 101) of the SPOC pipeline's 2-minute light curves of TIC 248075138, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-42b-tess-sector-37",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021091135823-s0037-0000000248075138-0208-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Southworth et al. 2016",
+      "href": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract",
+      "credit": "Southworth et al. 2016"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-42b.json",
+      "credit": "Radius from Southworth et al. 2016 (2016MNRAS.457.4205S), via the NASA Exoplanet Archive; mass from Southworth et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016MNRAS.457.4205S), via the NASA Exoplanet Archive; orbit from Southworth et al. 2016 (2016MNRAS.457.4205S), via the NASA Exoplanet Archive"
+    }
+  }
+}

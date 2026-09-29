@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "xo-2-n-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "XO-2 N b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 72850.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/xo-2-n-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "XO-2 N b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 30976284.4,
+      "description": "XO-2 N b was found in 2007 by XO as it crossed its star.",
+      "systemName": "XO-2 N system",
+      "order": 4864,
+      "context": {
+        "order": 4864
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1347185031015321300,
+        2640964789141599700,
+        3561492031510956000
+      ],
+      "presentationToReference": [
+        -0.3216309375465902,
+        0.8801058459338083,
+        0.3492380849306633,
+        0.5537056717785778,
+        0.4740192541737576,
+        -0.684628202539735,
+        0.7680908598942806,
+        0.02682250222649495,
+        0.6397788557940738
+      ],
+      "orbitUpReference": [
+        -0.8801058459338083,
+        -0.4740192541737576,
+        -0.02682250222649495
+      ],
+      "metersPerUnit": 235000.96774193548,
+      "bodyRadiusM": 72850300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

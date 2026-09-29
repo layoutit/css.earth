@@ -1,0 +1,28 @@
+{
+ "id": "toi-1794b",
+ "classification": "exoplanet",
+ "order": 4160,
+ "physical": {
+  "name": "TOI-1794 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 21028.7,
+  "gravitationalParameterKm3PerS2": 3467823.38,
+  "parent": "toi-1794"
+ },
+ "physicalNotes": "Radius 0.29414028 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 21,028.7 km at 71,492 km per Jupiter radius. GM from the mass 0.02737326 Jupiter masses (Polanski et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 8.76554684874,
+  "semiMajorAxisStellarRadii": 13.3966,
+  "inclinationDegrees": 88.60828,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58714.810896,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.76554684874 d",
+   "shape": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): a/R* derived from its semi-major axis 0.082 au and stellar radius 1.3162 solar radii; Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): inclination 88.60828 degrees",
+   "eccentricity": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2458715.310896 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 13 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

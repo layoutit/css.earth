@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "qatar-1b",
+  "displayName": "Qatar-1 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-153-2-78",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C",
+          "label": "Collins et al. 2017",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "34 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-153-2-78",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C",
+          "label": "Collins et al. 2017",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.3 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-153-2-78",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C",
+          "label": "Collins et al. 2017",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Qatar-1; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "qatar-1b-lens-shape.webp",
+        "surface": "qatar-1b-surface-shape@2x.webp",
+        "poles": "qatar-1b-poles-shape@2x.webp",
+        "source": {
+          "id": "qatar-1b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Qatar-1 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of qatar-1's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "qatar-1b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/qatar-1b/qatar-1b-system-orbits.svg",
+      "alt": "The orbits of Qatar-1's planets in this map from above, to scale, with Qatar-1 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "qatar-1b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C"
+      }
+    },
+    {
+      "id": "qatar-1b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/qatar-1b/qatar-1b-transit.svg",
+      "alt": "Qatar-1 b crossing its star, as TESS recorded it: 3 sectors (84, 85, 86) of the SPOC pipeline's 2-minute light curves of TIC 236887394, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "qatar-1b-tess-sector-84",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024274222008-s0084-0000000236887394-0281-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Collins et al. 2017",
+      "href": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract",
+      "credit": "Collins et al. 2017"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/qatar-1b.json",
+      "credit": "Radius from Collins et al. 2017 (2017AJ....153...78C), via the NASA Exoplanet Archive; mass from Collins et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153...78C), via the NASA Exoplanet Archive; orbit from Collins et al. 2017 (2017AJ....153...78C), via the NASA Exoplanet Archive"
+    }
+  }
+}

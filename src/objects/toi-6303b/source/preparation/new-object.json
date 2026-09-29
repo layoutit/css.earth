@@ -1,0 +1,24 @@
+{
+  "host": "toi-6303",
+  "planets": [
+    {
+      "id": "toi-6303b",
+      "name": "TOI-6303 b",
+      "description": "Transiting planet of TOI-6303 with a 9.49-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract",
+        "credit": "Hotnisky et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HOTNISKY_ET_AL__2025"
+      },
+      "text": {
+        "card": "TOI-6303 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-6303. Its orbit and size follow Hotnisky et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOTNISKY_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 9.485236, pl_radj 1.034, pl_bmassj 7.84"
+      },
+      "order": 4631
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-129b",
+  "card": {
+    "text": "K2-129 b was found in 2017 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa89f2",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+        "label": "Dressing et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRESSING_ET_AL__2017): disc_year 2017, disc_facility K2, sy_pnum 1; pl_orbper 8.239493, pl_radj 0.09278259, pl_bmassj 0.00352"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around K2-129. Its orbit and size follow Dressing et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa89f2",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+        "label": "Dressing et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRESSING_ET_AL__2017): disc_year 2017, disc_facility K2, sy_pnum 1; pl_orbper 8.239493, pl_radj 0.09278259, pl_bmassj 0.00352"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

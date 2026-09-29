@@ -1,0 +1,46 @@
+{
+  "id": "ltt-3780",
+  "name": "LTT 3780",
+  "system": "LTT 3780 system",
+  "description": "Star of 3,358 K, 22 parsecs away, with 2 transiting planets.",
+  "target": "LTT 3780",
+  "gaia": "3767281845873242112",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract",
+    "credit": "Bonfanti et al. 2024"
+  },
+  "radius": {
+    "value": 0.38,
+    "source": "Bonfanti et al. 2024, the stellar radius of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract",
+    "uncertainty": 0.012
+  },
+  "mass": {
+    "value": 0.381,
+    "source": "Bonfanti et al. 2024, the stellar mass of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract",
+    "uncertainty": 0.024
+  },
+  "temperature": {
+    "value": 3358,
+    "source": "Bonfanti et al. 2024, the stellar temperature of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract",
+    "uncertainty": 92
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross LTT 3780 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Bonfanti et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BONFANTI_ET_AL__2024): st_teff 3358, st_rad 0.38, st_mass 0.381",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/LTT_3780",
+      "title": "LTT 3780",
+      "revision": "1370781541",
+      "card": "LTT 3780, also known as TOI-732 or LP 729-54, is the brighter component of a wide visual binary star system in the constellation Hydra.",
+      "introduction": "This star is host to a pair of orbiting exoplanets."
+    }
+  },
+  "notes": [],
+  "order": 3835
+}

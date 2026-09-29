@@ -1,0 +1,30 @@
+{
+ "id": "toi-776",
+ "classification": "star",
+ "order": 4715,
+ "physical": {
+  "name": "TOI-776",
+  "horizonsCode": null,
+  "meanRadiusKm": 380547.9,
+  "gravitationalParameterKm3PerS2": 71930142502.73114,
+  "parent": null,
+  "effectiveTemperatureK": 3725
+ },
+ "physicalNotes": "Radius 0.547 +/- 0.017 solar radii from Fridlund et al. 2024, the stellar radius of the default parameter set of TOI-776 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..12F/abstract): 380,548 km at 695,700 km per solar radius. Mass 0.542 +/- 0.04 solar masses from Fridlund et al. 2024, the stellar mass of the default parameter set of TOI-776 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..12F/abstract); GM is that mass times the JPL solar GM. Temperature 3725 +/- 60 K from Fridlund et al. 2024, the stellar temperature of the default parameter set of TOI-776 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..12F/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 178.5780409728862,
+  "declinationDegrees": -37.553376934847535,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 27.152437488004527,
+  "properMotionRaMasPerYear": 250.99627648997398,
+  "properMotionDecMasPerYear": -144.946698425948,
+  "radialVelocityKmPerS": 49.488037,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3460438662009633408 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-776/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 36.8291 +/- 0.0176 mas (same row, RUWE 1.14): 27.15 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 250.996, -144.947 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 49.49 +/- 0.21 km/s"
+  }
+ }
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-1130b",
+  "displayName": "TOI-1130 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.33 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202450974",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A..52B",
+          "label": "Borsato et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.08 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202450974",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A..52B",
+          "label": "Borsato et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.062 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202450974",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A..52B",
+          "label": "Borsato et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-1130; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-1130b-lens-shape.webp",
+        "surface": "toi-1130b-surface-shape@2x.webp",
+        "poles": "toi-1130b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-1130b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A..52B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-1130 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-1130's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-1130b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-1130b/toi-1130b-system-orbits.svg",
+      "alt": "The orbits of TOI-1130's planets in this map from above, to scale, with TOI-1130 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-1130b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A..52B"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Borsato et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A..52B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...689A..52B/abstract",
+      "credit": "Borsato et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-1130b.json",
+      "credit": "Radius from Borsato et al. 2024 (2024A&A...689A..52B), via the NASA Exoplanet Archive; mass from Borsato et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...689A..52B), via the NASA Exoplanet Archive; orbit from Borsato et al. 2024 (2024A&A...689A..52B), via the NASA Exoplanet Archive"
+    }
+  }
+}

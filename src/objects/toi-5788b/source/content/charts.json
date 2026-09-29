@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-5788b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-5788b-orbits",
+      "title": "TOI-5788 b: orbits around TOI-5788",
+      "output": "toi-5788b-system-orbits.svg",
+      "system": "toi-5788",
+      "highlight": "toi-5788b",
+      "description": "The orbits of TOI-5788's planets in this map from above, to scale, with TOI-5788 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Lakeland et al. 2026 (2026MNRAS.546ag158L), via the NASA Exoplanet Archive ps table (pl_refname LAKELAND_ET_AL_2026): P 6.340758 d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+ "id": "kelt-11b",
+ "classification": "exoplanet",
+ "order": 3630,
+ "physical": {
+  "name": "KELT-11 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 96514.2,
+  "gravitationalParameterKm3PerS2": 25970739.04,
+  "parent": "kelt-11"
+ },
+ "physicalNotes": "Radius 1.35 Jupiter radii from Mounzer et al. 2022 (2022A&A...668A...1M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract): 96,514.2 km at 71,492 km per Jupiter radius. GM from the mass 0.205 Jupiter masses (Mounzer et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...668A...1M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.73620495,
+  "semiMajorAxisStellarRadii": 4.9801,
+  "inclinationDegrees": 85.3,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58259.668608,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Changeat et al. 2020 (2020AJ....160..260C), via the NASA Exoplanet Archive ps table (pl_refname CHANGEAT_ET_AL__2020): P 4.73620495 d",
+   "shape": "Mounzer et al. 2022 (2022A&A...668A...1M), via the NASA Exoplanet Archive ps table (pl_refname MOUNZER_ET_AL__2022): a/R* derived from its semi-major axis 0.0623 au and stellar radius 2.69 solar radii; Mounzer et al. 2022 (2022A&A...668A...1M), via the NASA Exoplanet Archive ps table (pl_refname MOUNZER_ET_AL__2022): inclination 85.3 degrees",
+   "eccentricity": "Mounzer et al. 2022 (2022A&A...668A...1M), via the NASA Exoplanet Archive ps table (pl_refname MOUNZER_ET_AL__2022): e 0",
+   "phase": "Changeat et al. 2020 (2020AJ....160..260C), via the NASA Exoplanet Archive ps table (pl_refname CHANGEAT_ET_AL__2020): transit mid-time 2458260.168608 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

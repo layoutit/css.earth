@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-4364",
+  "card": {
+    "text": "TOI-4364 b crosses TOI-4364 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ada26a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..166D/abstract",
+        "label": "Distler et al. (2025), The Astronomical Journal 169 166",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DISTLER_ET_AL__2025): st_teff 3528, st_rad 0.4684, st_mass 0.487"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Distler et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ada26a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..166D/abstract",
+        "label": "Distler et al. (2025), The Astronomical Journal 169 166",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DISTLER_ET_AL__2025): st_teff 3528, st_rad 0.4684, st_mass 0.487"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+ "id": "kepler-1712",
+ "classification": "star",
+ "order": 3694,
+ "physical": {
+  "name": "Kepler-1712",
+  "horizonsCode": null,
+  "meanRadiusKm": 354111.3,
+  "gravitationalParameterKm3PerS2": 68346906621.59878,
+  "parent": null,
+  "effectiveTemperatureK": 3732
+ },
+ "physicalNotes": "Radius 0.509 +/- 0.034 solar radii from Q1-Q17 DR25 KOI Table, the stellar radius of the default parameter set of Kepler-1712 b in the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html): 354,111 km at 695,700 km per solar radius. Mass 0.515 +/- 0.039 solar masses from Q1-Q17 DR25 KOI Table, the stellar mass of the default parameter set of Kepler-1712 b in the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html); GM is that mass times the JPL solar GM. Temperature 3732 +/- 75 K from Q1-Q17 DR25 KOI Table, the stellar temperature of the default parameter set of Kepler-1712 b in the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 284.9987000457803,
+  "declinationDegrees": 50.14668967893452,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 156.31761315190502,
+  "properMotionRaMasPerYear": 9.362538187829118,
+  "properMotionDecMasPerYear": -17.818056131623766,
+  "radialVelocityKmPerS": -4.8251605,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2132326747070439296 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-1712/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.3972 +/- 0.0131 mas (same row, RUWE 1.01): 156.32 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 9.363, -17.818 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -4.83 +/- 2.49 km/s"
+  }
+ }
+}

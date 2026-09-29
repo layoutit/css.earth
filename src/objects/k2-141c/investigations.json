@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "k2-141c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.62449925 Jupiter radii from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.02517081 Jupiter masses: Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Malavolta et al. 2018 (2018AJ....155..107M), via the NASA Exoplanet Archive ps table (pl_refname MALAVOLTA_ET_AL__2018): P 7.7485 d; Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): a/R* derived from its semi-major axis 0.0683 au and stellar radius 0.681 solar radii; Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): inclination 87.2 degrees; Malavolta et al. 2018 (2018AJ....155..107M), via the NASA Exoplanet Archive ps table (pl_refname MALAVOLTA_ET_AL__2018): e 0; Malavolta et al. 2018 (2018AJ....155..107M), via the NASA Exoplanet Archive ps table (pl_refname MALAVOLTA_ET_AL__2018): transit mid-time 2457751.1546 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 135 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2018AJ....155..107M/abstract"
+      ]
+    }
+  ]
+}

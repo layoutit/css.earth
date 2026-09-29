@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gj-1132b",
+  "displayName": "GJ 1132 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.2 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad72e9",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X",
+          "label": "Xue et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "39 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad72e9",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X",
+          "label": "Xue et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.8 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-ad72e9",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X",
+          "label": "Xue et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by GJ 1132; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "gj-1132b-lens-shape.webp",
+        "surface": "gj-1132b-surface-shape@2x.webp",
+        "poles": "gj-1132b-poles-shape@2x.webp",
+        "source": {
+          "id": "gj-1132b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of GJ 1132 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of gj-1132's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "gj-1132b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/gj-1132b/gj-1132b-system-orbits.svg",
+      "alt": "The orbits of GJ 1132's planets in this map from above, to scale, with GJ 1132 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "gj-1132b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X"
+      }
+    },
+    {
+      "id": "gj-1132b-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/gj-1132b/gj-1132b-transmission.svg",
+      "alt": "GJ 1132 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 17 measured bins from Diamond-Lowe et al. 2018 (Magellan II Landon Clay Telescope, LDSS-3C), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "gj-1132b-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...42D/abstract"
+      }
+    },
+    {
+      "id": "gj-1132b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/gj-1132b/gj-1132b-transit.svg",
+      "alt": "GJ 1132 b crossing its star, as TESS recorded it: 3 sectors (63, 90, 99) of the SPOC pipeline's 2-minute light curves of TIC 101955023, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "gj-1132b-tess-sector-63",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023069172124-s0063-0000000101955023-0255-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Xue et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract",
+      "credit": "Xue et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-1132b.json",
+      "credit": "Radius from Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive; mass from Xue et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...973L...8X), via the NASA Exoplanet Archive; orbit from Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive"
+    }
+  }
+}

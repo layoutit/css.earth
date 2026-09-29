@@ -1,0 +1,24 @@
+{
+  "host": "hip-41378",
+  "planets": [
+    {
+      "id": "hip-41378c",
+      "name": "HIP 41378 c",
+      "description": "Transiting planet of HIP 41378 with a 31.7-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260623103G/abstract",
+        "credit": "Grouffal et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GROUFFAL_ET_AL_2026"
+      },
+      "text": {
+        "card": "HIP 41378 c was found in 2016 by K2 as it crossed its star.",
+        "introduction": "It is one of 6 planets known around HIP 41378. Its orbit and size follow Lund et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GROUFFAL_ET_AL_2026): disc_year 2016, disc_facility K2, sy_pnum 6; pl_orbper 31.70591, pl_radj 0.24444685, pl_bmassj 0.01878372"
+      },
+      "order": 3254
+    }
+  ]
+}

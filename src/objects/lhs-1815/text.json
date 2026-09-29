@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lhs-1815",
+  "card": {
+    "text": "LHS 1815 b crosses LHS 1815 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab775a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G/abstract",
+        "label": "Gan et al. (2020), The Astronomical Journal 159 160",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GAN_ET_AL__2020): st_teff 3643, st_rad 0.501, st_mass 0.502"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Gan et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab775a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G/abstract",
+        "label": "Gan et al. (2020), The Astronomical Journal 159 160",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GAN_ET_AL__2020): st_teff 3643, st_rad 0.501, st_mass 0.502"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "host": "toi-2141",
+  "planets": [
+    {
+      "id": "toi-2141b",
+      "name": "TOI-2141 b",
+      "description": "Transiting planet of TOI-2141 with a 18.3-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...704A.174L/abstract",
+        "credit": "Luque et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LUQUE_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-2141 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 3 planets known around TOI-2141. Its orbit and size follow Luque et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE_ET_AL_2025): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 18.261608, pl_radj 0.28075702, pl_bmassj 0.06324167"
+      },
+      "order": 4261
+    }
+  ]
+}

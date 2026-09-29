@@ -1,0 +1,24 @@
+{
+  "host": "hats-6",
+  "planets": [
+    {
+      "id": "hats-6b",
+      "name": "HATS-6 b",
+      "description": "Transiting planet of HATS-6 with a 3.33-day year, found in 2015.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H/abstract",
+        "credit": "Hartman et al. 2015"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HARTMAN_ET_AL__2015"
+      },
+      "text": {
+        "card": "HATS-6 b was found in 2015 by HATSouth as it crossed its star.",
+        "introduction": "It is the only planet known around HATS-6. Its orbit and size follow Hartman et al. 2015's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL__2015): disc_year 2015, disc_facility HATSouth, sy_pnum 1; pl_orbper 3.32526424, pl_radj 0.998, pl_bmassj 0.319"
+      },
+      "order": 3134
+    }
+  ]
+}

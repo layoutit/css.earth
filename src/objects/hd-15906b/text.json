@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-15906b",
+  "card": {
+    "text": "HD 15906 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1369",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract",
+        "label": "Tuson et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TUSON_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 10.924709, pl_radj 0.19983976, pl_bmassj 0.0178"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around HD 15906. Its orbit and size follow Tuson et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1369",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract",
+        "label": "Tuson et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TUSON_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 10.924709, pl_radj 0.19983976, pl_bmassj 0.0178"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

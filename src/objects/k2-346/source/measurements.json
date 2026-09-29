@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "k2-346",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 486,990 km at 105.64 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 105.64234685131645,
+  "distanceSource": "Gaia DR3 parallax 9.4659 +/- 0.0177 mas (same row, RUWE 0.94): 105.64 pc, no zero-point correction",
+  "radiusKm": 486990,
+  "radiusSource": "Radius 0.7 +/- 0.01 solar radii from de Leon et al. 2021, the stellar radius of the default parameter set of K2-346 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract): 486,990 km at 695,700 km per solar radius. Mass 0.71 +/- 0.02 solar masses from de Leon et al. 2021, the stellar mass of the default parameter set of K2-346 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract); GM is that mass times the JPL solar GM. Temperature 4801 +/- 49 K from de Leon et al. 2021, the stellar temperature of the default parameter set of K2-346 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4801,
+  "effectiveTemperatureSource": "de Leon et al. 2021, the stellar temperature of the default parameter set of K2-346 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)",
+  "surfaceGravityLogg": 4.6,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-346.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.599, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

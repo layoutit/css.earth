@@ -1,0 +1,39 @@
+{
+  "id": "k2-150",
+  "name": "K2-150",
+  "system": "K2-150 system",
+  "description": "Star of 3,499 K, 102 parsecs away, with 1 transiting planet.",
+  "target": "K2-150",
+  "gaia": "2579495171146737280",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract",
+    "credit": "Hirano et al. 2018"
+  },
+  "radius": {
+    "value": 0.436,
+    "source": "Hirano et al. 2018, the stellar radius of the default parameter set of K2-150 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract",
+    "uncertainty": 0.044
+  },
+  "mass": {
+    "value": 0.457,
+    "source": "Hirano et al. 2018, the stellar mass of the default parameter set of K2-150 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract",
+    "uncertainty": 0.051
+  },
+  "temperature": {
+    "value": 3499,
+    "source": "Hirano et al. 2018, the stellar temperature of the default parameter set of K2-150 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-150 b crosses K2-150 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hirano et al. 2018.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HIRANO_ET_AL__2018): st_teff 3499, st_rad 0.436, st_mass 0.457"
+  },
+  "notes": [],
+  "order": 3329
+}

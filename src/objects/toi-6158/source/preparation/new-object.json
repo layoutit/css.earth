@@ -1,0 +1,43 @@
+{
+  "id": "toi-6158",
+  "name": "TOI-6158",
+  "system": "TOI-6158 system",
+  "description": "Star of 3,467 K, 181 parsecs away, with 1 transiting planet.",
+  "target": "TOI-6158",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract",
+    "credit": "O'Brien et al. 2026"
+  },
+  "radius": {
+    "value": 0.476,
+    "source": "O'Brien et al. 2026, the stellar radius of the default parameter set of TOI-6158 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 0.503,
+    "source": "O'Brien et al. 2026, the stellar mass of the default parameter set of TOI-6158 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract",
+    "uncertainty": 0.022
+  },
+  "temperature": {
+    "value": 3467,
+    "source": "O'Brien et al. 2026, the stellar temperature of the default parameter set of TOI-6158 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract",
+    "uncertainty": 59
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-6158 b crosses TOI-6158 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow O'Brien et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname O_BRIEN_ET_AL_2026): st_teff 3467, st_rad 0.476, st_mass 0.503"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 1775027485705816960 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 60,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%201775027485705816960"
+  },
+  "order": 4616
+}

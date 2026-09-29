@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-95",
+  "card": {
+    "text": "WASP-95 b crosses WASP-95 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5830, st_rad 1.23, st_mass 1.46"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-95",
+        "url": "https://en.wikipedia.org/wiki/WASP-95",
+        "label": "Wikipedia, \"WASP-95\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1336048328",
+        "quote": "WASP-95 is a star 451 light-years away in the constellation Grus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5830, st_rad 1.23, st_mass 1.46"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-95",
+        "url": "https://en.wikipedia.org/wiki/WASP-95",
+        "label": "Wikipedia, \"WASP-95\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1336048328",
+        "quote": "With an apparent magnitude of 10.1, it is not visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

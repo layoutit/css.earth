@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-190c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-190c-orbits",
+      "title": "K2-190 c: orbits around K2-190",
+      "output": "k2-190c-system-orbits.svg",
+      "system": "k2-190",
+      "highlight": "k2-190c",
+      "description": "The orbits of K2-190's planets in this map from above, to scale, with K2-190 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): P 21.574023 d"
+      }
+    }
+  ]
+}

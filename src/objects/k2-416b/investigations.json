@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "k2-416b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.23730971 Jupiter radii from Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 5.2 Jupiter masses: Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive ps table (pl_refname INCHA_ET_AL__2023): P 13.102 d; Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive ps table (pl_refname INCHA_ET_AL__2023): a/R* 34.2; Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive ps table (pl_refname INCHA_ET_AL__2023): inclination 89.25 degrees; No archive row states an eccentricity; the orbit is taken as circular; Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive ps table (pl_refname INCHA_ET_AL__2023): transit mid-time 2458371.8384 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 764 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract"
+      ]
+    }
+  ]
+}

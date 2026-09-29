@@ -1,0 +1,39 @@
+{
+  "id": "toi-2285",
+  "name": "TOI-2285",
+  "system": "TOI-2285 system",
+  "description": "Star of 3,491 K, 42.4 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2285",
+  "gaia": "2199658670194983040",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract",
+    "credit": "Fukui et al. 2022"
+  },
+  "radius": {
+    "value": 0.464,
+    "source": "Fukui et al. 2022, the stellar radius of the default parameter set of TOI-2285 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 0.454,
+    "source": "Fukui et al. 2022, the stellar mass of the default parameter set of TOI-2285 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 3491,
+    "source": "Fukui et al. 2022, the stellar temperature of the default parameter set of TOI-2285 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract",
+    "uncertainty": 58
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2285 b crosses TOI-2285 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Fukui et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname FUKUI_ET_AL__2022): st_teff 3491, st_rad 0.464, st_mass 0.454"
+  },
+  "notes": [],
+  "order": 4280
+}

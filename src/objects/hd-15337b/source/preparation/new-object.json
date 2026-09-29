@@ -1,0 +1,24 @@
+{
+  "host": "hd-15337",
+  "planets": [
+    {
+      "id": "hd-15337b",
+      "name": "HD 15337 b",
+      "description": "Transiting planet of HD 15337 with a 4.76-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract",
+        "credit": "Rosário et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ROS_AMP_AACUTE_RIO_ET_AL__2024"
+      },
+      "text": {
+        "card": "HD 15337 b was found in 2019 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HD 15337. Its orbit and size follow Rosário et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ROS_AMP_AACUTE_RIO_ET_AL__2024): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.75599951974, pl_radj 0.1579091, pl_bmassj 0.02051107"
+      },
+      "order": 3170
+    }
+  ]
+}

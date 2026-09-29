@@ -1,0 +1,24 @@
+{
+  "host": "toi-283",
+  "planets": [
+    {
+      "id": "toi-283b",
+      "name": "TOI-283 b",
+      "description": "Transiting planet of TOI-283 with a 17.6-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract",
+        "credit": "Murgas et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MURGAS_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-283 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-283. Its orbit and size follow Murgas et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MURGAS_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 17.61745, pl_radj 0.20876118, pl_bmassj 0.02057714"
+      },
+      "order": 4345
+    }
+  ]
+}

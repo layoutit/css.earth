@@ -1,0 +1,39 @@
+{
+  "id": "k2-77",
+  "name": "K2-77",
+  "system": "K2-77 system",
+  "description": "Star of 5,160 K, 142 parsecs away, with 1 transiting planet.",
+  "target": "K2-77",
+  "gaia": "37619725922094336",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "credit": "Thygesen et al. 2023"
+  },
+  "radius": {
+    "value": 0.792,
+    "source": "Thygesen et al. 2023, the stellar radius of the default parameter set of K2-77 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "uncertainty": 0.027
+  },
+  "mass": {
+    "value": 0.847,
+    "source": "Thygesen et al. 2023, the stellar mass of the default parameter set of K2-77 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "uncertainty": 0.039
+  },
+  "temperature": {
+    "value": 5160,
+    "source": "Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-77 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+    "uncertainty": 130
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-77 b crosses K2-77 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Thygesen et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname THYGESEN_ET_AL__2023): st_teff 5160, st_rad 0.792, st_mass 0.847"
+  },
+  "notes": [],
+  "order": 3611
+}

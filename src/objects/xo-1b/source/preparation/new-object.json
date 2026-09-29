@@ -1,0 +1,30 @@
+{
+  "host": "xo-1",
+  "planets": [
+    {
+      "id": "xo-1b",
+      "name": "XO-1 b",
+      "description": "Transiting planet of XO-1 with a 3.94-day year, found in 2006.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "XO-1 b was found in 2006 by XO as it crossed its star.",
+        "introduction": "It is the only planet known around XO-1. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2006, disc_facility XO, sy_pnum 1; pl_orbper 3.941505, pl_radj 1.14, pl_bmassj 0.83",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/XO-1b",
+          "title": "XO-1b",
+          "revision": "1362350505",
+          "card": "XO-1b is an extrasolar planet approximately 536 light-years away from Earth."
+        }
+      },
+      "order": 4862
+    }
+  ]
+}

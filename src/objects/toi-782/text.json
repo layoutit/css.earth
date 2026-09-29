@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-782",
+  "card": {
+    "text": "TOI-782 b crosses TOI-782 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad4115",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract",
+        "label": "Hori et al. (2024), The Astronomical Journal 167 289",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HORI_ET_AL_2024): st_teff 3370, st_rad 0.413, st_mass 0.397"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hori et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad4115",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract",
+        "label": "Hori et al. (2024), The Astronomical Journal 167 289",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HORI_ET_AL_2024): st_teff 3370, st_rad 0.413, st_mass 0.397"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

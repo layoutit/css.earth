@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4357-836-2-167",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dressing et al. (2017): Characterizing K2 Candidate Planetary Systems Orbiting Low-mass Stars. I. Classifying Low-mass Host Stars Observed during Campaigns 1–7",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1701.00586"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/836/2/167"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017ApJ...836..167D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...836..167D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/836/2/167",
+      "label": "The Astrophysical Journal 836 167"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017ApJ...836..167D",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Dressing et al. (2017), The Astrophysical Journal 836 167",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017ApJ...836..167D"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 836 167",
+  "creators": [
+    "Courtney D. Dressing",
+    "Elisabeth R. Newton",
+    "Joshua E. Schlieder",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

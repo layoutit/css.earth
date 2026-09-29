@@ -1,0 +1,28 @@
+{
+ "id": "k2-320b",
+ "classification": "exoplanet",
+ "order": 3497,
+ "physical": {
+  "name": "K2-320 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 16710.6,
+  "gravitationalParameterKm3PerS2": 2939127.54,
+  "parent": "k2-320"
+ },
+ "physicalNotes": "Radius 0.23374074 Jupiter radii from Castro González et al. 2020 (2020MNRAS.499.5416C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.499.5416C/abstract): 16,710.6 km at 71,492 km per Jupiter radius. GM from the mass 0.0232 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.995,
+  "semiMajorAxisStellarRadii": 10.1782,
+  "inclinationDegrees": 87.84,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57908.102,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Castro González et al. 2020 (2020MNRAS.499.5416C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2020): P 1.995 d",
+   "shape": "Castro González et al. 2020 (2020MNRAS.499.5416C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2020): a/R* derived from its semi-major axis 0.0142 au and stellar radius 0.3 solar radii; Castro González et al. 2020 (2020MNRAS.499.5416C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2020): inclination 87.84 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Castro González et al. 2020 (2020MNRAS.499.5416C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2020): transit mid-time 2457908.602 BJD, taken as BJD_TDB",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201834275",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sun et al. (2019): Kepler-411: a four-planet system with an active host star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1902.09719"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201834275"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019A&A...624A..15S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201834275",
+      "label": "Astronomy & Astrophysics 624 A15"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sun et al. (2019), Astronomy & Astrophysics 624 A15",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 624 A15",
+  "creators": [
+    "L. Sun",
+    "P. Ioannidis",
+    "S. Gu",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

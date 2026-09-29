@@ -1,0 +1,44 @@
+{
+  "id": "kepler-1650",
+  "name": "Kepler-1650",
+  "system": "Kepler-1650 system",
+  "description": "Star of 3,410 K, 134 parsecs away, with 1 transiting planet.",
+  "target": "Kepler-1650",
+  "gaia": "2078524482038704000",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+    "credit": "Mann et al. 2017"
+  },
+  "radius": {
+    "value": 0.334,
+    "source": "Mann et al. 2017, the stellar radius of the default parameter set of Kepler-1650 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+    "uncertainty": 0.039
+  },
+  "mass": {
+    "value": 0.326,
+    "source": "Mann et al. 2017, the stellar mass of the default parameter set of Kepler-1650 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+    "uncertainty": 0.047
+  },
+  "temperature": {
+    "value": 3410,
+    "source": "Mann et al. 2017, the stellar temperature of the default parameter set of Kepler-1650 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract",
+    "uncertainty": 56
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-1650 b crosses Kepler-1650 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mann et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MANN_ET_AL__2017): st_teff 3410, st_rad 0.334, st_mass 0.326"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 2078524482038704000 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 40,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202078524482038704000"
+  },
+  "order": 3688
+}

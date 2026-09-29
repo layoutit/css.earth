@@ -1,0 +1,39 @@
+{
+  "id": "toi-1268",
+  "name": "TOI-1268",
+  "system": "TOI-1268 system",
+  "description": "Star of 5,300 K, 110 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1268",
+  "gaia": "1675923009431370880",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract",
+    "credit": "&Scaron;ubjak et al. 2022"
+  },
+  "radius": {
+    "value": 0.92,
+    "source": "&Scaron;ubjak et al. 2022, the stellar radius of the default parameter set of TOI-1268 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract",
+    "uncertainty": 0.06
+  },
+  "mass": {
+    "value": 0.96,
+    "source": "&Scaron;ubjak et al. 2022, the stellar mass of the default parameter set of TOI-1268 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 5300,
+    "source": "&Scaron;ubjak et al. 2022, the stellar temperature of the default parameter set of TOI-1268 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1268 b crosses TOI-1268 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow &Scaron;ubjak et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SUBJAK_ET_AL_2022): st_teff 5300, st_rad 0.92, st_mass 0.96"
+  },
+  "notes": [],
+  "order": 3991
+}

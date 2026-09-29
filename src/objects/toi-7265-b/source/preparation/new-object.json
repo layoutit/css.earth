@@ -1,0 +1,39 @@
+{
+  "id": "toi-7265-b",
+  "name": "TOI-7265 B",
+  "system": "TOI-7265 B system",
+  "description": "Star of 3,503 K, 144 parsecs away, with 1 transiting planet.",
+  "target": "TOI-7265 B",
+  "gaia": "2164125035679377664",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract",
+    "credit": "Premnath et al. 2026"
+  },
+  "radius": {
+    "value": 0.497,
+    "source": "Premnath et al. 2026, the stellar radius of the default parameter set of TOI-7265 B b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 0.521,
+    "source": "Premnath et al. 2026, the stellar mass of the default parameter set of TOI-7265 B b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract",
+    "uncertainty": 0.023
+  },
+  "temperature": {
+    "value": 3503,
+    "source": "Premnath et al. 2026, the stellar temperature of the default parameter set of TOI-7265 B b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract",
+    "uncertainty": 59
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-7265 B b crosses TOI-7265 B as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Premnath et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname PREMNATH_ET_AL_2026): st_teff 3503, st_rad 0.497, st_mass 0.521"
+  },
+  "notes": [],
+  "order": 4690
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-114082b",
+  "radiusKm": 74780.6,
+  "radiusSource": "Radius 1.046 Jupiter radii from del Burgo et al. 2026 (2026ApJ..1003L..15D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1003L..15D/abstract): 74,780.6 km at 71,492 km per Jupiter radius. No mass is measured: del Burgo et al. 2026 (2026ApJ..1003L..15D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1003L..15D/abstract) gives only an upper limit of 1.6 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 225.5504,
+  "orbitalPeriodSource": "del Burgo et al. 2026 (2026ApJ..1003L..15D), via the NASA Exoplanet Archive ps table (pl_refname DEL_BURGO_ET_AL_2026): P 225.5504 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 114082 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 1.6 Jupiter masses: del Burgo et al. 2026 (2026ApJ..1003L..15D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1003L..15D/abstract)."
+}

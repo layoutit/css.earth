@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-4860b",
+  "radiusKm": 55048.8,
+  "radiusSource": "Radius 0.77 Jupiter radii from Almenara et al. 2024 (2024A&A...683A.166A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract): 55,048.8 km at 71,492 km per Jupiter radius. GM from the mass 0.273 Jupiter masses (Almenara et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...683A.166A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.5227591,
+  "orbitalPeriodSource": "Almenara et al. 2024 (2024A&A...683A.166A), via the NASA Exoplanet Archive ps table (pl_refname ALMENARA_ET_AL_2024): P 1.5227591 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-4860 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.273 Jupiter masses: Almenara et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...683A.166A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract)."
+}

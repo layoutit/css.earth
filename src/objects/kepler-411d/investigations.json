@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-411d",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.29610135 Jupiter radii from Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.04782431 Jupiter masses: Sun et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...624A..15S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Q1-Q17 DR25 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR25_KOI_TABLE): P 58.0198583 d; Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive ps table (pl_refname SUN_ET_AL__2019): a/R* derived from its semi-major axis 0.279 au and stellar radius 0.82 solar radii; Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive ps table (pl_refname SUN_ET_AL__2019): inclination 89.43 degrees; Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive ps table (pl_refname SUN_ET_AL__2019): e 0.128; Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive ps table (pl_refname SUN_ET_AL__2019): omega 30.5 degrees; Q1-Q17 DR25 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR25_KOI_TABLE): transit mid-time 2454984.85007 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 22 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract"
+      ]
+    }
+  ]
+}

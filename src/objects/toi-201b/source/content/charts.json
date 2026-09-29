@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-201b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-201b-orbits",
+      "title": "TOI-201 b: orbits around TOI-201",
+      "output": "toi-201b-system-orbits.svg",
+      "system": "toi-201",
+      "highlight": "toi-201b",
+      "description": "The orbits of TOI-201's planets in this map from above, to scale, with TOI-201 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 52.978197 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-201b-transit",
+      "title": "TOI-201 b: its transit",
+      "description": "TOI-201 b crossing its star, as TESS recorded it: 3 sectors (96, 97, 98) of the SPOC pipeline's 2-minute light curves of TIC 350618622, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 19-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-201b-transit.svg",
+      "metadata": {
+        "tic": "TIC 350618622",
+        "sectors": [
+          96,
+          97,
+          98
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-201b",
+      "sources": [
+        "photometry/tess/tess2025232030459-s0096-0000000350618622-0293-s_lc.fits",
+        "photometry/tess/tess2025258001959-s0097-0000000350618622-0294-s_lc.fits",
+        "photometry/tess/tess2025312202959-s0098-0000000350618622-0298-s_lc.fits"
+      ],
+      "durationHours": 4.79,
+      "binMinutes": 19,
+      "notes": [
+        "TESS 2-min SPOC · sectors 96, 97, 98",
+        "Folded on the app's orbit; 19-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "tic-88692598",
+  "name": "TIC 88692598",
+  "system": "TIC 88692598 system",
+  "description": "Star of 3,483 K, 73.5 parsecs away, with 1 transiting planet.",
+  "target": "TIC 88692598",
+  "gaia": "823159726712491136",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.532473,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TIC 88692598 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": {
+    "value": 0.529,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 88692598 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3483.17,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 88692598 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TIC 88692598 b crosses TIC 88692598 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 3483.17, st_rad 0.532473"
+  },
+  "notes": [],
+  "order": 4882
+}

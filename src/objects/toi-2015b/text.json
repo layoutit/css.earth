@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2015b",
+  "card": {
+    "text": "TOI-2015 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452916",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B/abstract",
+        "label": "Barkaoui et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARKAOUI_ET_AL_2025): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 3.348968, pl_radj 0.29520972, pl_bmassj 0.02894644"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-2015. Its orbit and size follow Barkaoui et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452916",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B/abstract",
+        "label": "Barkaoui et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARKAOUI_ET_AL_2025): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 3.348968, pl_radj 0.29520972, pl_bmassj 0.02894644"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

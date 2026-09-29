@@ -1,0 +1,28 @@
+{
+ "id": "toi-3082b",
+ "classification": "exoplanet",
+ "order": 4353,
+ "physical": {
+  "name": "TOI-3082 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 23357.2,
+  "gravitationalParameterKm3PerS2": 5181479.15,
+  "parent": "toi-3082"
+ },
+ "physicalNotes": "Radius 0.32671124 Jupiter radii from Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract): 23,357.2 km at 71,492 km per Jupiter radius. GM from the mass 0.0409 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.92678244116,
+  "semiMajorAxisStellarRadii": 8.519,
+  "inclinationDegrees": 87.63,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59324.034188,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): P 1.92678244116 d",
+   "shape": "Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): a/R* 8.519; Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): inclination 87.63 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Lafarga et al. 2026 (2026MNRAS.548ag512L), via the NASA Exoplanet Archive ps table (pl_refname LAFARGA_ET_AL_2026): transit mid-time 2459324.53418781 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

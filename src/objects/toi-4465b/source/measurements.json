@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-4465b",
+  "radiusKm": 89365,
+  "radiusSource": "Radius 1.25 Jupiter radii from Essack et al. 2025 (2025AJ....170...41E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170...41E/abstract): 89,365 km at 71,492 km per Jupiter radius. GM from the mass 5.89 Jupiter masses (Essack et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170...41E), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170...41E/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 101.94054,
+  "orbitalPeriodSource": "Essack et al. 2025 (2025AJ....170...41E), via the NASA Exoplanet Archive ps table (pl_refname ESSACK_ET_AL__2025): P 101.94054 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-4465 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "5.89 Jupiter masses: Essack et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170...41E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170...41E/abstract)."
+}

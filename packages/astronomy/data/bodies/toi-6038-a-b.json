@@ -1,0 +1,28 @@
+{
+ "id": "toi-6038-a-b",
+ "classification": "exoplanet",
+ "order": 4604,
+ "physical": {
+  "name": "TOI-6038 A b",
+  "horizonsCode": null,
+  "meanRadiusKm": 40883.6,
+  "gravitationalParameterKm3PerS2": 31290131.69,
+  "parent": "toi-6038-a"
+ },
+ "physicalNotes": "Radius 0.57186288 Jupiter radii from Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract): 40,883.6 km at 71,492 km per Jupiter radius. GM from the mass 0.24698862 Jupiter masses (Baliwal et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....169..147B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 5.8267311,
+  "semiMajorAxisStellarRadii": 9.04,
+  "inclinationDegrees": 88.96,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59882.558,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive ps table (pl_refname BALIWAL_ET_AL_2025): P 5.8267311 d",
+   "shape": "Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive ps table (pl_refname BALIWAL_ET_AL_2025): a/R* 9.04; Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive ps table (pl_refname BALIWAL_ET_AL_2025): inclination 88.96 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive ps table (pl_refname BALIWAL_ET_AL_2025): transit mid-time 2459883.058 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

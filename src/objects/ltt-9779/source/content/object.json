@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "ltt-9779",
+  "displayName": "LTT 9779",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.95 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-020-1142-z",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J",
+          "label": "Jenkins et al. (2020), Nature Astronomy 4 1148-1157",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "81.0 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-ltt-9779",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "ltt-9779-lens-color.webp",
+        "surface": "ltt-9779-surface-color@2x.webp",
+        "poles": "ltt-9779-poles-color@2x.webp",
+        "source": {
+          "id": "ltt-9779-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2307504062045842688&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,443 K and log g 4.49 (u1 0.536, u2 0.210): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Jenkins et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract",
+      "credit": "Jenkins et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ltt-9779.json",
+      "credit": "Jenkins et al. 2020, the stellar radius of the default parameter set of LTT 9779 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

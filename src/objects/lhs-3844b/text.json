@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lhs-3844b",
+  "card": {
+    "text": "LHS 3844 b was found in 2019 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202557841",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+        "label": "Nagel et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAGEL_ET_AL_2026): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.462929709, pl_radj 0.11472943, pl_bmassj 0.00745685"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-3844-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_3844_b",
+        "label": "Wikipedia, \"LHS 3844 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374087489",
+        "quote": "LHS 3844 b, formally named Kuaꞌkua, is an exoplanet orbiting the red dwarf star LHS 3844, about 48.5 light-years away in the constellation Indus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around LHS 3844. Its orbit and size follow Nagel et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202557841",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
+        "label": "Nagel et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAGEL_ET_AL_2026): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.462929709, pl_radj 0.11472943, pl_bmassj 0.00745685"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-3844-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_3844_b",
+        "label": "Wikipedia, \"LHS 3844 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374087489",
+        "quote": "It was discovered in 2018 using the Transiting Exoplanet Survey Satellite."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

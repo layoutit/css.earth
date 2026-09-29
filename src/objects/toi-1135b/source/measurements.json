@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1135b",
+  "radiusKm": 63270.4,
+  "radiusSource": "Radius 0.885 Jupiter radii from Dugan et al. 2025 (2025ApJ...994L..23D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract): 63,270.4 km at 71,492 km per Jupiter radius. No mass is measured: Dugan et al. 2025 (2025ApJ...994L..23D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract) gives only an upper limit of 0.185 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 8.0277326,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.0277326 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1135 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.185 Jupiter masses: Dugan et al. 2025 (2025ApJ...994L..23D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract)."
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "kepler-249",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3568,
+      "lowerKelvin": 3418,
+      "upperKelvin": 3718,
+      "citation": "Rowe et al. 2014, the stellar temperature of the default parameter set of Kepler-249 b in the NASA Exoplanet Archive: 3568 +/- 150 K, https://ui.adsabs.harvard.edu/abs/2014ApJ...784...45R/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

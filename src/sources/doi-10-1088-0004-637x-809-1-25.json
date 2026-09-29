@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-809-1-25",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Montet et al. (2015): STELLAR AND PLANETARY PROPERTIES OF<i>K2</i>CAMPAIGN 1 CANDIDATES AND VALIDATION OF 17 PLANETS, INCLUDING A PLANET RECEIVING EARTH-LIKE INSOLATION",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1503.07866"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/809/1/25"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015ApJ...809...25M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809...25M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/809/1/25",
+      "label": "The Astrophysical Journal 809 25"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809...25M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Montet et al. (2015), The Astrophysical Journal 809 25",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015ApJ...809...25M"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 809 25",
+  "creators": [
+    "Benjamin T. Montet",
+    "Timothy D. Morton",
+    "Daniel Foreman-Mackey",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

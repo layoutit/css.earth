@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-138e/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-138e-orbits",
+      "title": "Kepler-138 e: orbits around Kepler-138",
+      "output": "kepler-138e-system-orbits.svg",
+      "system": "kepler-138",
+      "highlight": "kepler-138e",
+      "description": "The orbits of Kepler-138's planets in this map from above, to scale, with Kepler-138 e highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Piaulet et al. 2023 (2023NatAs...7..206P), via the NASA Exoplanet Archive ps table (pl_refname PIAULET_ET_AL_2023): P 38.23 d"
+      }
+    }
+  ]
+}

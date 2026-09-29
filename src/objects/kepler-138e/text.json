@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-138e",
+  "card": {
+    "text": "Kepler-138 e was found in 2022 by transit timing variations; it does not cross its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-022-01835-4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+        "label": "Piaulet et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (pl_refname PIAULET_ET_AL_2023): disc_year 2022, disc_facility Multiple Observatories, sy_pnum 4; pl_orbper 38.23, pl_orbincl 88.53, pl_orbtper 2454924.1; pscomppars calculated pl_radj 0.0711, pl_bmassj 0.00135293"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around Kepler-138. Its orbit, tilt included, follows Piaulet et al. 2023's fit, and its size is the archive's model from its mass.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-022-01835-4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+        "label": "Piaulet et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (pl_refname PIAULET_ET_AL_2023): disc_year 2022, disc_facility Multiple Observatories, sy_pnum 4; pl_orbper 38.23, pl_orbincl 88.53, pl_orbtper 2454924.1; pscomppars calculated pl_radj 0.0711, pl_bmassj 0.00135293"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

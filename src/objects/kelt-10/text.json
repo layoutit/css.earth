@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-10",
+  "card": {
+    "text": "KELT-10 b crosses KELT-10 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stw880",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+        "label": "Kuhn et al. (2016), Monthly Notices of the Royal Astronomical Society 459 4281-4298",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KUHN_ET_AL__2016): st_teff 5948, st_rad 1.209, st_mass 1.112"
+      },
+      {
+        "catalogueId": "wikipedia-kelt-10",
+        "url": "https://en.wikipedia.org/wiki/KELT-10",
+        "label": "Wikipedia, \"KELT-10\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374407148",
+        "quote": "KELT-10, also known as CD−47°12635, is a sun-like star in the southern constellation Telescopium."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Kuhn et al. 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stw880",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.459.4281K/abstract",
+        "label": "Kuhn et al. (2016), Monthly Notices of the Royal Astronomical Society 459 4281-4298",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KUHN_ET_AL__2016): st_teff 5948, st_rad 1.209, st_mass 1.112"
+      },
+      {
+        "catalogueId": "wikipedia-kelt-10",
+        "url": "https://en.wikipedia.org/wiki/KELT-10",
+        "label": "Wikipedia, \"KELT-10\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374407148",
+        "quote": "It has an apparent magnitude of 10.62, making it readily visible in telescopes, but not to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

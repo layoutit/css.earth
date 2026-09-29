@@ -1,0 +1,31 @@
+{
+ "id": "toi-1670c",
+ "classification": "exoplanet",
+ "order": 4082,
+ "physical": {
+  "name": "TOI-1670 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 70562.6,
+  "gravitationalParameterKm3PerS2": 79812515.1,
+  "parent": "toi-1670"
+ },
+ "physicalNotes": "Radius 0.987 Jupiter radii from Tran et al. 2022 (2022AJ....163..225T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract): 70,562.6 km at 71,492 km per Jupiter radius. GM from the mass 0.63 Jupiter masses (Tran et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163..225T), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 40.7501028,
+  "semiMajorAxisStellarRadii": 40.68,
+  "inclinationDegrees": 88.84,
+  "eccentricity": 0.09,
+  "argumentOfPeriapsisDegrees": 105.5,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 60502.636603,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 40.7501028 d",
+   "shape": "Tran et al. 2022 (2022AJ....163..225T), via the NASA Exoplanet Archive ps table (pl_refname TRAN_ET_AL_2022): a/R* 40.68; Tran et al. 2022 (2022AJ....163..225T), via the NASA Exoplanet Archive ps table (pl_refname TRAN_ET_AL_2022): inclination 88.84 degrees",
+   "eccentricity": "Tran et al. 2022 (2022AJ....163..225T), via the NASA Exoplanet Archive ps table (pl_refname TRAN_ET_AL_2022): e 0.09",
+   "argumentOfPeriapsis": "Tran et al. 2022 (2022AJ....163..225T), via the NASA Exoplanet Archive ps table (pl_refname TRAN_ET_AL_2022): omega 105.5 degrees",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460503.136603 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-201",
+  "card": {
+    "text": "2 planets cross TOI-201 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1126-sciadv-aef2618",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+        "label": "Mireles et al. (2026), Science Advances 12 eaef2618",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MIRELES_ET_AL_2026): st_teff 6423, st_rad 1.31, st_mass 1.32"
+      },
+      {
+        "catalogueId": "wikipedia-toi-201",
+        "url": "https://en.wikipedia.org/wiki/TOI-201",
+        "label": "Wikipedia, \"TOI-201\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374435267",
+        "quote": "TOI-201 is a star with two planets and a brown dwarf companion in the constellation Pictor."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mireles et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1126-sciadv-aef2618",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026SciA...12f2618M/abstract",
+        "label": "Mireles et al. (2026), Science Advances 12 eaef2618",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MIRELES_ET_AL_2026): st_teff 6423, st_rad 1.31, st_mass 1.32"
+      },
+      {
+        "catalogueId": "wikipedia-toi-201",
+        "url": "https://en.wikipedia.org/wiki/TOI-201",
+        "label": "Wikipedia, \"TOI-201\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374435267",
+        "quote": "At an apparent magnitude of +9.715, it is not visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

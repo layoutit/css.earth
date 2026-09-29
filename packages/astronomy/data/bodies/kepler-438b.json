@@ -1,0 +1,28 @@
+{
+ "id": "kepler-438b",
+ "classification": "exoplanet",
+ "order": 3753,
+ "physical": {
+  "name": "Kepler-438 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 7149.2,
+  "gravitationalParameterKm3PerS2": 581491.18,
+  "parent": "kepler-438"
+ },
+ "physicalNotes": "Radius 0.1 Jupiter radii from Torres et al. 2015 (2015ApJ...800...99T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract): 7,149.2 km at 71,492 km per Jupiter radius. GM from the mass 0.00459 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 35.23269936,
+  "semiMajorAxisStellarRadii": 73,
+  "inclinationDegrees": 89.86,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54967.875397,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 35.23269936 d",
+   "shape": "Torres et al. 2015 (2015ApJ...800...99T), via the NASA Exoplanet Archive ps table (pl_refname TORRES_ET_AL__2015): a/R* 73; Torres et al. 2015 (2015ApJ...800...99T), via the NASA Exoplanet Archive ps table (pl_refname TORRES_ET_AL__2015): inclination 89.86 degrees",
+   "eccentricity": "Q1-Q17 DR24 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR24_KOI_TABLE): e 0",
+   "phase": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2454968.375397 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 18 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

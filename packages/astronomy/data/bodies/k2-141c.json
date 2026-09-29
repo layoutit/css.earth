@@ -1,0 +1,28 @@
+{
+ "id": "k2-141c",
+ "classification": "exoplanet",
+ "order": 3318,
+ "physical": {
+  "name": "K2-141 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 44646.7,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "k2-141"
+ },
+ "physicalNotes": "Radius 0.62449925 Jupiter radii from Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 44,646.7 km at 71,492 km per Jupiter radius. No mass is measured: Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract) gives only an upper limit of 0.02517081 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.7485,
+  "semiMajorAxisStellarRadii": 21.5664,
+  "inclinationDegrees": 87.2,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57750.6546,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Malavolta et al. 2018 (2018AJ....155..107M), via the NASA Exoplanet Archive ps table (pl_refname MALAVOLTA_ET_AL__2018): P 7.7485 d",
+   "shape": "Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): a/R* derived from its semi-major axis 0.0683 au and stellar radius 0.681 solar radii; Bonomo et al. 2023 (2023A&A...677A..33B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL_2023): inclination 87.2 degrees",
+   "eccentricity": "Malavolta et al. 2018 (2018AJ....155..107M), via the NASA Exoplanet Archive ps table (pl_refname MALAVOLTA_ET_AL__2018): e 0",
+   "phase": "Malavolta et al. 2018 (2018AJ....155..107M), via the NASA Exoplanet Archive ps table (pl_refname MALAVOLTA_ET_AL__2018): transit mid-time 2457751.1546 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 135 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

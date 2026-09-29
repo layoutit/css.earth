@@ -1,0 +1,39 @@
+{
+  "id": "toi-2211",
+  "name": "TOI-2211",
+  "system": "TOI-2211 system",
+  "description": "Star of 5,253 K, 70.3 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2211",
+  "gaia": "6796762076358897408",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "credit": "Crossfield et al. 2025"
+  },
+  "radius": {
+    "value": 0.834,
+    "source": "Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-2211.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.047
+  },
+  "mass": {
+    "value": 0.9,
+    "source": "Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-2211.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.11
+  },
+  "temperature": {
+    "value": 5253,
+    "source": "Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-2211.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 123
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2211 b crosses TOI-2211 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Crossfield et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL_2025): st_teff 5253, st_rad 0.834, st_mass 0.9"
+  },
+  "notes": [],
+  "order": 4268
+}

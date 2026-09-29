@@ -1,0 +1,45 @@
+{
+  "id": "qatar-1",
+  "name": "Qatar-1",
+  "system": "Qatar-1 system",
+  "description": "Star of 5,013 K, 186 parsecs away, with 1 transiting planet.",
+  "target": "Qatar-1",
+  "gaia": "2244830490514284928",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract",
+    "credit": "Collins et al. 2017"
+  },
+  "radius": {
+    "value": 0.803,
+    "source": "Collins et al. 2017, the stellar radius of the default parameter set of Qatar-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract",
+    "uncertainty": 0.016
+  },
+  "mass": {
+    "value": 0.838,
+    "source": "Collins et al. 2017, the stellar mass of the default parameter set of Qatar-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract",
+    "uncertainty": 0.043
+  },
+  "temperature": {
+    "value": 5013,
+    "source": "Collins et al. 2017, the stellar temperature of the default parameter set of Qatar-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract",
+    "uncertainty": 93
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Qatar-1 b crosses Qatar-1 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Collins et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname COLLINS_ET_AL__2017): st_teff 5013, st_rad 0.803, st_mass 0.838",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Qatar-1",
+      "title": "Qatar-1",
+      "revision": "1374438030",
+      "card": "Qatar-1 is an orange main sequence star in the constellation of Draco."
+    }
+  },
+  "notes": [],
+  "order": 3848
+}

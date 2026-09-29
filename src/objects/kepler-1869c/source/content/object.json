@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-1869c",
+  "displayName": "Kepler-1869 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.74 Earth radii",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-kepler-koi-docs",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "label": "Q1-Q17 DR25 KOI Table, via the NASA Exoplanet Archive",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "41 hours",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-kepler-koi-docs",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+          "label": "Q1-Q17 DR25 KOI Table",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.33 Earth masses (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-1869; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-1869c-lens-shape.webp",
+        "surface": "kepler-1869c-surface-shape@2x.webp",
+        "poles": "kepler-1869c-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-1869c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-1869 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-1869's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kepler-1869c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-1869c/kepler-1869c-system-orbits.svg",
+      "alt": "The orbits of Kepler-1869's planets in this map from above, to scale, with Kepler-1869 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-1869c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Q1-Q17 DR25 KOI Table",
+      "href": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html",
+      "credit": "Q1-Q17 DR25 KOI Table"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-1869c.json",
+      "credit": "Radius from Q1-Q17 DR25 KOI Table, via the NASA Exoplanet Archive; mass from the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive; orbit from Q1-Q17 DR25 KOI Table, via the NASA Exoplanet Archive"
+    }
+  }
+}

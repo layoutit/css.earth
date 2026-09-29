@@ -1,0 +1,24 @@
+{
+  "host": "toi-5728",
+  "planets": [
+    {
+      "id": "toi-5728b",
+      "name": "TOI-5728 b",
+      "description": "Transiting planet of TOI-5728 with a 11.5-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G/abstract",
+        "credit": "Gomez Barrientos et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GOMEZ_BARRIENTOS_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5728 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5728. Its orbit and size follow Gomez Barrientos et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GOMEZ_BARRIENTOS_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 11.49761, pl_radj 0.11687057, pl_bmassj 0.00714"
+      },
+      "order": 4568
+    }
+  ]
+}

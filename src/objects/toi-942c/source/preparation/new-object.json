@@ -1,0 +1,24 @@
+{
+  "host": "toi-942",
+  "planets": [
+    {
+      "id": "toi-942c",
+      "name": "TOI-942 c",
+      "description": "Transiting planet of TOI-942 with a 10.2-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W/abstract",
+        "credit": "Wirth et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "WIRTH_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-942 c was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-942. Its orbit and size follow Wirth et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WIRTH_ET_AL__2021): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 10.156272, pl_radj 0.41663021, pl_bmassj 0.11641444"
+      },
+      "order": 4757
+    }
+  ]
+}

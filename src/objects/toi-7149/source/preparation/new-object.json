@@ -1,0 +1,44 @@
+{
+  "id": "toi-7149",
+  "name": "TOI-7149",
+  "system": "TOI-7149 system",
+  "description": "Star of 3,363 K, 126 parsecs away, with 1 transiting planet.",
+  "target": "TOI-7149",
+  "gaia": "1200751810900182400",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract",
+    "credit": "Kanodia et al. 2025"
+  },
+  "radius": {
+    "value": 0.351,
+    "source": "Kanodia et al. 2025, the stellar radius of the default parameter set of TOI-7149 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.344,
+    "source": "Kanodia et al. 2025, the stellar mass of the default parameter set of TOI-7149 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 3363,
+    "source": "Kanodia et al. 2025, the stellar temperature of the default parameter set of TOI-7149 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..203K/abstract",
+    "uncertainty": 59
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-7149 b crosses TOI-7149 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Kanodia et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KANODIA_ET_AL_2025): st_teff 3363, st_rad 0.351, st_mass 0.344"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 1200751810900182400 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 40,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%201200751810900182400"
+  },
+  "order": 4680
+}

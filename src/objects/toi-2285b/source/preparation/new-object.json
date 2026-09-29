@@ -1,0 +1,30 @@
+{
+  "host": "toi-2285",
+  "planets": [
+    {
+      "id": "toi-2285b",
+      "name": "TOI-2285 b",
+      "description": "Transiting planet of TOI-2285 with a 13.6-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025RNAAS...9...73F/abstract",
+        "credit": "Fukui 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "FUKUI_2025"
+      },
+      "text": {
+        "card": "TOI-2285 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2285. Its orbit and size follow Fukui et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FUKUI_2025): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 13.635109, pl_radj 0.1579091, pl_bmassj 0.06135386",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-2285_b",
+          "title": "TOI-2285 b",
+          "revision": "1373096621",
+          "card": "TOI-2285 b is a sub-Neptune exoplanet in orbit around the M-type star TOI-2285."
+        }
+      },
+      "order": 4281
+    }
+  ]
+}

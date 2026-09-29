@@ -1,0 +1,24 @@
+{
+  "host": "k2-365",
+  "planets": [
+    {
+      "id": "k2-365b",
+      "name": "K2-365 b",
+      "description": "Transiting planet of K2-365 with a 23.4-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+        "credit": "Christiansen et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CHRISTIANSEN_ET_AL_2022"
+      },
+      "text": {
+        "card": "K2-365 b was found in 2022 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-365. Its orbit and size follow Christiansen et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHRISTIANSEN_ET_AL_2022): disc_year 2022, disc_facility K2, sy_pnum 1; pl_orbper 23.448172, pl_radj 0.2592564, pl_bmassj 0.0276"
+      },
+      "order": 3535
+    }
+  ]
+}

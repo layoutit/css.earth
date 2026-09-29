@@ -1,0 +1,28 @@
+{
+ "id": "toi-6255b",
+ "classification": "exoplanet",
+ "order": 4625,
+ "physical": {
+  "name": "TOI-6255 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 6882,
+  "gravitationalParameterKm3PerS2": 573985,
+  "parent": "toi-6255"
+ },
+ "physicalNotes": "Radius 0.0962621 Jupiter radii from Dai et al. 2024 (2024AJ....168..101D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..101D/abstract): 6,882 km at 71,492 km per Jupiter radius. GM from the mass 0.00453075 Jupiter masses (Dai et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..101D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024AJ....168..101D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.23818244,
+  "semiMajorAxisStellarRadii": 3.1,
+  "inclinationDegrees": 74.4,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58738.21248,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Dai et al. 2024 (2024AJ....168..101D), via the NASA Exoplanet Archive ps table (pl_refname DAI_ET_AL__2024): P 0.23818244 d",
+   "shape": "Dai et al. 2024 (2024AJ....168..101D), via the NASA Exoplanet Archive ps table (pl_refname DAI_ET_AL__2024): a/R* 3.1; Dai et al. 2024 (2024AJ....168..101D), via the NASA Exoplanet Archive ps table (pl_refname DAI_ET_AL__2024): inclination 74.4 degrees",
+   "eccentricity": "Dai et al. 2024 (2024AJ....168..101D), via the NASA Exoplanet Archive ps table (pl_refname DAI_ET_AL__2024): e 0",
+   "phase": "Dai et al. 2024 (2024AJ....168..101D), via the NASA Exoplanet Archive ps table (pl_refname DAI_ET_AL__2024): transit mid-time 2458738.71248 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

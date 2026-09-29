@@ -1,0 +1,30 @@
+{
+ "id": "toi-4561",
+ "classification": "star",
+ "order": 4447,
+ "physical": {
+  "name": "TOI-4561",
+  "horizonsCode": null,
+  "meanRadiusKm": 592706.5,
+  "gravitationalParameterKm3PerS2": 128442191672.44191,
+  "parent": null,
+  "effectiveTemperatureK": 5537.93
+ },
+ "physicalNotes": "Radius 0.851957 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-4561 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 592,706 km at 695,700 km per solar radius. Mass 0.968 (0.926 to 1.009) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5537.93 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-4561 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 60.9619118817005,
+  "declinationDegrees": -76.02144445344135,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 179.95893664329688,
+  "properMotionRaMasPerYear": 28.80755880735093,
+  "properMotionDecMasPerYear": 93.02118543976849,
+  "radialVelocityKmPerS": 53.491215,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4628625300724120448 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-4561/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.5568 +/- 0.0111 mas (same row, RUWE 0.85): 179.96 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 28.808, 93.021 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 53.49 +/- 0.48 km/s"
+  }
+ }
+}

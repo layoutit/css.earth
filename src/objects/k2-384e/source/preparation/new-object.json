@@ -1,0 +1,24 @@
+{
+  "host": "k2-384",
+  "planets": [
+    {
+      "id": "k2-384e",
+      "name": "K2-384 e",
+      "description": "Transiting planet of K2-384 with a 9.72-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..244C/abstract",
+        "credit": "Christiansen et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CHRISTIANSEN_ET_AL_2022"
+      },
+      "text": {
+        "card": "K2-384 e was found in 2022 by K2 as it crossed its star.",
+        "introduction": "It is one of 5 planets known around K2-384. Its orbit and size follow Christiansen et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHRISTIANSEN_ET_AL_2022): disc_year 2022, disc_facility K2, sy_pnum 5; pl_orbper 9.71601, pl_radj 0.11999307, pl_bmassj 0.00747"
+      },
+      "order": 3564
+    }
+  ]
+}

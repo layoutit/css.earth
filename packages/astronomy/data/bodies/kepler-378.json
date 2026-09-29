@@ -1,0 +1,30 @@
+{
+ "id": "kepler-378",
+ "classification": "star",
+ "order": 3732,
+ "physical": {
+  "name": "Kepler-378",
+  "horizonsCode": null,
+  "meanRadiusKm": 466814.7,
+  "gravitationalParameterKm3PerS2": 99932467351.58035,
+  "parent": null,
+  "effectiveTemperatureK": 4661
+ },
+ "physicalNotes": "Radius 0.671 +/- 0.035 solar radii from Rowe et al. 2014, the stellar radius of the default parameter set of Kepler-378 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...784...45R/abstract): 466,815 km at 695,700 km per solar radius. Mass 0.753 +/- 0.106428 solar masses from TICv8, the stellar mass of Kepler-378 b's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract); GM is that mass times the JPL solar GM. Temperature 4661 +/- 100 K from Rowe et al. 2014, the stellar temperature of the default parameter set of Kepler-378 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...784...45R/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 294.94898112820044,
+  "declinationDegrees": 46.43887415853678,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 152.0767053287751,
+  "properMotionRaMasPerYear": 56.68875658957517,
+  "properMotionDecMasPerYear": 50.10996167394602,
+  "radialVelocityKmPerS": -62.13294,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2080095512350543744 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-378/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.5756 +/- 0.0087 mas (same row, RUWE 1.03): 152.08 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 56.689, 50.110 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -62.13 +/- 0.44 km/s"
+  }
+ }
+}

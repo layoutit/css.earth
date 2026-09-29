@@ -1,0 +1,28 @@
+{
+ "id": "koi-4777b",
+ "classification": "exoplanet",
+ "order": 3644,
+ "physical": {
+  "name": "KOI-4777 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 3252.8,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "koi-4777"
+ },
+ "physicalNotes": "Radius 0.04549923 Jupiter radii from Cañas et al. 2022 (2022AJ....163....3C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163....3C/abstract): 3,252.8 km at 71,492 km per Jupiter radius. No mass is measured: Cañas et al. 2022 (2022AJ....163....3C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163....3C/abstract) gives only an upper limit of 0.3121181 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.412,
+  "semiMajorAxisStellarRadii": 4.28,
+  "inclinationDegrees": 87,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54964.719,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Cañas et al. 2022 (2022AJ....163....3C), via the NASA Exoplanet Archive ps table (pl_refname CA_NTILDE_AS_ET_AL__2022): P 0.412 d",
+   "shape": "Cañas et al. 2022 (2022AJ....163....3C), via the NASA Exoplanet Archive ps table (pl_refname CA_NTILDE_AS_ET_AL__2022): a/R* 4.28; Cañas et al. 2022 (2022AJ....163....3C), via the NASA Exoplanet Archive ps table (pl_refname CA_NTILDE_AS_ET_AL__2022): inclination 87 degrees",
+   "eccentricity": "Cañas et al. 2022 (2022AJ....163....3C), via the NASA Exoplanet Archive ps table (pl_refname CA_NTILDE_AS_ET_AL__2022): e 0",
+   "phase": "Cañas et al. 2022 (2022AJ....163....3C), via the NASA Exoplanet Archive ps table (pl_refname CA_NTILDE_AS_ET_AL__2022): transit mid-time 2454965.219 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 21 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

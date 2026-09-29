@@ -1,0 +1,39 @@
+{
+  "id": "toi-406",
+  "name": "TOI-406",
+  "system": "TOI-406 system",
+  "description": "Star of 3,392 K, 31.1 parsecs away, with 2 transiting planets.",
+  "target": "TOI-406",
+  "gaia": "4851053999056603904",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract",
+    "credit": "Lacedelli et al. 2024"
+  },
+  "radius": {
+    "value": 0.41,
+    "source": "Lacedelli et al. 2024, the stellar radius of the default parameter set of TOI-406 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract",
+    "uncertainty": 0.029
+  },
+  "mass": {
+    "value": 0.408,
+    "source": "Lacedelli et al. 2024, the stellar mass of the default parameter set of TOI-406 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract",
+    "uncertainty": 0.046
+  },
+  "temperature": {
+    "value": 3392,
+    "source": "Lacedelli et al. 2024, the stellar temperature of the default parameter set of TOI-406 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...692A.238L/abstract",
+    "uncertainty": 44
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-406 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Lacedelli et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LACEDELLI_ET_AL_2024): st_teff 3392, st_rad 0.41, st_mass 0.408"
+  },
+  "notes": [],
+  "order": 4382
+}

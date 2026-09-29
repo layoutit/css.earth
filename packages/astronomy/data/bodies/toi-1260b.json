@@ -1,0 +1,28 @@
+{
+ "id": "toi-1260b",
+ "classification": "exoplanet",
+ "order": 3985,
+ "physical": {
+  "name": "TOI-1260 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 15371.2,
+  "gravitationalParameterKm3PerS2": 3412019.23,
+  "parent": "toi-1260"
+ },
+ "physicalNotes": "Radius 0.21500617 Jupiter radii from Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract): 15,371.2 km at 71,492 km per Jupiter radius. GM from the mass 0.02693277 Jupiter masses (Lam et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023MNRAS.519.1437L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.127463,
+  "semiMajorAxisStellarRadii": 11.73,
+  "inclinationDegrees": 89.03,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59065.064269,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): P 3.127463 d",
+   "shape": "Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): a/R* 11.73; Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): inclination 89.03 degrees",
+   "eccentricity": "Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): e 0",
+   "phase": "Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): transit mid-time 2459065.564269 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

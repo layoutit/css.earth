@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/koi-4777b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "koi-4777b-orbits",
+      "title": "KOI-4777 b: orbits around KOI-4777",
+      "output": "koi-4777b-system-orbits.svg",
+      "system": "koi-4777",
+      "highlight": "koi-4777b",
+      "description": "The orbits of KOI-4777's planets in this map from above, to scale, with KOI-4777 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Cañas et al. 2022 (2022AJ....163....3C), via the NASA Exoplanet Archive ps table (pl_refname CA_NTILDE_AS_ET_AL__2022): P 0.412 d"
+      }
+    }
+  ]
+}

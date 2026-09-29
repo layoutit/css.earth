@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-5573b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.87 Jupiter radii from Fernandes et al. 2025 (2025AJ....170...55F), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.35 Jupiter masses: Fernandes et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170...55F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Fernandes et al. 2025 (2025AJ....170...55F), via the NASA Exoplanet Archive ps table (pl_refname FERNANDES_ET_AL_2025): P 8.79758977 d; Fernandes et al. 2025 (2025AJ....170...55F), via the NASA Exoplanet Archive ps table (pl_refname FERNANDES_ET_AL_2025): a/R* 25.74; Fernandes et al. 2025 (2025AJ....170...55F), via the NASA Exoplanet Archive ps table (pl_refname FERNANDES_ET_AL_2025): inclination 89.01 degrees; Fernandes et al. 2025 (2025AJ....170...55F), via the NASA Exoplanet Archive ps table (pl_refname FERNANDES_ET_AL_2025): e 0.072; Fernandes et al. 2025 (2025AJ....170...55F), via the NASA Exoplanet Archive ps table (pl_refname FERNANDES_ET_AL_2025): omega 32.8 degrees; Fernandes et al. 2025 (2025AJ....170...55F), via the NASA Exoplanet Archive ps table (pl_refname FERNANDES_ET_AL_2025): transit mid-time 2459600.45078 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract"
+      ]
+    }
+  ]
+}

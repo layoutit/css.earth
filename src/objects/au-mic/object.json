@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "au-mic",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "AU Mic",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 599693.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/au-mic-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "AU Mic",
+      "classification": "star",
+      "color": "#ffc08b",
+      "distanceAu": 2003660.5,
+      "description": "2 planets cross AU Mic as seen from Earth: b, c.",
+      "systemName": "AU Mic system",
+      "order": 3048,
+      "context": {
+        "order": 3045
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        168934016292838460,
+        -192346637053374270,
+        -155917104264292500
+      ],
+      "presentationToReference": [
+        0.5636019446459606,
+        -0.34324156016749985,
+        -0.7513574910554044,
+        -0.6417117233734152,
+        0.39082495251391086,
+        -0.6598953860860225,
+        -0.5201527776302006,
+        -0.8540732333156683,
+        -0.000007570144539240594
+      ],
+      "orbitUpReference": [
+        0.34324156016749985,
+        -0.39082495251391086,
+        0.8540732333156683
+      ],
+      "metersPerUnit": 1934494.8387096773,
+      "bodyRadiusM": 599693400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

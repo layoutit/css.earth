@@ -1,0 +1,28 @@
+{
+ "id": "kepler-398b",
+ "classification": "exoplanet",
+ "order": 3736,
+ "physical": {
+  "name": "Kepler-398 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 5933.8,
+  "gravitationalParameterKm3PerS2": 298980.22,
+  "parent": "kepler-398"
+ },
+ "physicalNotes": "Radius 0.083 Jupiter radii from Rowe et al. 2014 (2014ApJ...784...45R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...784...45R/abstract): 5,933.8 km at 71,492 km per Jupiter radius. GM from the mass 0.00236 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.08141797,
+  "semiMajorAxisStellarRadii": 15.4346,
+  "inclinationDegrees": 82.74,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54954.114094,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 4.08141797 d",
+   "shape": "Rowe et al. 2014 (2014ApJ...784...45R), via the NASA Exoplanet Archive ps table (pl_refname ROWE_ET_AL__2014): a/R* derived from its semi-major axis 0.044 au and stellar radius 0.613 solar radii; Q1-Q17 DR25 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR25_KOI_TABLE): inclination 82.74 degrees",
+   "eccentricity": "Q1-Q17 DR25 KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR25_KOI_TABLE): e 0",
+   "phase": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2454954.614094 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 7 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

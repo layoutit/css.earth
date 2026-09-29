@@ -1,0 +1,51 @@
+{
+  "id": "toi-6894",
+  "name": "TOI-6894",
+  "system": "TOI-6894 system",
+  "description": "Star of 3,007 K, 73.8 parsecs away, with 1 transiting planet.",
+  "target": "TOI-6894",
+  "gaia": "3917278287286247808",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+    "credit": "Bryant et al. 2025"
+  },
+  "radius": {
+    "value": 0.2276,
+    "source": "Bryant et al. 2025, the stellar radius of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+    "uncertainty": 0.0057
+  },
+  "mass": {
+    "value": 0.207,
+    "source": "Bryant et al. 2025, the stellar mass of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+    "uncertainty": 0.011
+  },
+  "temperature": {
+    "value": 3007,
+    "source": "Bryant et al. 2025, the stellar temperature of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+    "uncertainty": 58
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-6894 b crosses TOI-6894 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Bryant et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BRYANT_ET_AL_2025): st_teff 3007, st_rad 0.2276, st_mass 0.207",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-6894",
+      "title": "TOI-6894",
+      "revision": "1357019233",
+      "card": "TOI-6894 is a star in the constellation Leo.",
+      "introduction": "Its apparent magnitude of 18.22 is far below naked eye visibility."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 3917278287286247808 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 20,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%203917278287286247808"
+  },
+  "order": 4661
+}

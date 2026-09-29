@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-140",
+  "card": {
+    "text": "WASP-140 b crosses WASP-140 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1002-asna-20224012",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+        "label": "Alexoudi (2022), Astronomische Nachrichten 343 e224012",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ALEXOUDI_2022, HELLIER_ET_AL__2017): st_teff 5300, st_rad 0.87, st_mass 0.9"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius follows Hellier et al. 2017, and its temperature Alexoudi 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1002-asna-20224012",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+        "label": "Alexoudi (2022), Astronomische Nachrichten 343 e224012",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ALEXOUDI_2022, HELLIER_ET_AL__2017): st_teff 5300, st_rad 0.87, st_mass 0.9"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

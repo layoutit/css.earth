@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-216b",
+  "card": {
+    "text": "TOI-216 b was found in 2019 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abd8d0",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..161D/abstract",
+        "label": "Dawson et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DAWSON_ET_AL__2021): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 17.38904538708, pl_radj 0.71371342, pl_bmassj 0.059"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-216. Its orbit and size follow Dawson et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abd8d0",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..161D/abstract",
+        "label": "Dawson et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DAWSON_ET_AL__2021): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 17.38904538708, pl_radj 0.71371342, pl_bmassj 0.059"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

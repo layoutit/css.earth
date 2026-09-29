@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngts-11",
+  "card": {
+    "text": "NGTS-11 b crosses NGTS-11 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ab9eb9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract",
+        "label": "Gill et al. (2020), The Astrophysical Journal Letters 898 L11",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GILL_ET_AL__2020): st_teff 5050, st_rad 0.832, st_mass 0.862"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Gill et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ab9eb9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract",
+        "label": "Gill et al. (2020), The Astrophysical Journal Letters 898 L11",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GILL_ET_AL__2020): st_teff 5050, st_rad 0.832, st_mass 0.862"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

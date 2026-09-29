@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kepler-438",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 361,764 km at 179.88 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 179.88122529607716,
+  "distanceSource": "Gaia DR3 parallax 5.5592 +/- 0.0984 mas (same row, RUWE 6.02): 179.88 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 361764,
+  "radiusSource": "Radius 0.52 +/- 0.038 solar radii from Torres et al. 2015, the stellar radius of the default parameter set of Kepler-438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract): 361,764 km at 695,700 km per solar radius. Mass 0.544 +/- 0.041 solar masses from Torres et al. 2015, the stellar mass of the default parameter set of Kepler-438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract); GM is that mass times the JPL solar GM. Temperature 3748 +/- 112 K from Torres et al. 2015, the stellar temperature of the default parameter set of Kepler-438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3748,
+  "effectiveTemperatureSource": "Torres et al. 2015, the stellar temperature of the default parameter set of Kepler-438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract)",
+  "surfaceGravityLogg": 4.74,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-438.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.742, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

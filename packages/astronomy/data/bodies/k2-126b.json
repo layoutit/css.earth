@@ -1,0 +1,31 @@
+{
+ "id": "k2-126b",
+ "classification": "exoplanet",
+ "order": 3296,
+ "physical": {
+  "name": "K2-126 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 12564.8,
+  "gravitationalParameterKm3PerS2": 1811617.41,
+  "parent": "k2-126"
+ },
+ "physicalNotes": "Radius 0.17575163 Jupiter radii from Livingston et al. 2018 (2018AJ....156..277L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract): 12,564.8 km at 71,492 km per Jupiter radius. GM from the mass 0.0143 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.38711,
+  "semiMajorAxisStellarRadii": 20.29,
+  "inclinationDegrees": 88.67479,
+  "eccentricity": 0.06,
+  "argumentOfPeriapsisDegrees": 326.28,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 57223.2942,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): P 7.38711 d",
+   "shape": "Livingston et al. 2018 (2018AJ....156..277L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL__2018): a/R* 20.29; Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): inclination 88.67479 degrees",
+   "eccentricity": "Dressing et al. 2017 (2017AJ....154..207D), via the NASA Exoplanet Archive ps table (pl_refname DRESSING_ET_AL__2017): e 0.06",
+   "argumentOfPeriapsis": "Dressing et al. 2017 (2017AJ....154..207D), via the NASA Exoplanet Archive ps table (pl_refname DRESSING_ET_AL__2017): omega -33.72 degrees, stored as 326.28",
+   "phase": "Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): transit mid-time 2457223.7942 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 149 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

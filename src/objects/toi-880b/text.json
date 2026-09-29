@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-880b",
+  "card": {
+    "text": "TOI-880 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adf339",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..175Z/abstract",
+        "label": "Zhang et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZHANG_ET_AL__2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.57359428214, pl_radj 0.19537905, pl_bmassj 0.0171"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-880. Its orbit and size follow Zhang et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adf339",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..175Z/abstract",
+        "label": "Zhang et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZHANG_ET_AL__2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.57359428214, pl_radj 0.19537905, pl_bmassj 0.0171"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

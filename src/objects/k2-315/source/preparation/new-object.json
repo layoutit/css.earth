@@ -1,0 +1,51 @@
+{
+  "id": "k2-315",
+  "name": "K2-315",
+  "system": "K2-315 system",
+  "description": "Star of 3,300 K, 57 parsecs away, with 1 transiting planet.",
+  "target": "K2-315",
+  "gaia": "6255978483510095488",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..172N/abstract",
+    "credit": "Niraula et al. 2020"
+  },
+  "radius": {
+    "value": 0.196,
+    "source": "Niraula et al. 2020, the stellar radius of the default parameter set of K2-315 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..172N/abstract",
+    "uncertainty": 0.006
+  },
+  "mass": {
+    "value": 0.174,
+    "source": "Niraula et al. 2020, the stellar mass of the default parameter set of K2-315 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..172N/abstract",
+    "uncertainty": 0.004
+  },
+  "temperature": {
+    "value": 3300,
+    "source": "Niraula et al. 2020, the stellar temperature of the default parameter set of K2-315 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..172N/abstract",
+    "uncertainty": 30
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-315 b crosses K2-315 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Niraula et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname NIRAULA_ET_AL__2020): st_teff 3300, st_rad 0.196, st_mass 0.174",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/K2-315b",
+      "title": "K2-315b",
+      "revision": "1374087918",
+      "card": "K2-315b is an exoplanet located 185.3 light-years away from Earth in the southern zodiac constellation Libra.",
+      "introduction": "It orbits the red dwarf K2-315."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 6255978483510095488 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 20,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%206255978483510095488"
+  },
+  "order": 3481
+}

@@ -1,0 +1,46 @@
+{
+  "id": "toi-561",
+  "name": "TOI-561",
+  "system": "TOI-561 system",
+  "description": "Star of 5,342 K, 85.8 parsecs away, with 4 transiting planets.",
+  "target": "TOI-561",
+  "gaia": "3850421005290172416",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract",
+    "credit": "Piotto et al. 2024"
+  },
+  "radius": {
+    "value": 0.843,
+    "source": "Piotto et al. 2024, the stellar radius of the default parameter set of TOI-561 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract",
+    "uncertainty": 0.005
+  },
+  "mass": {
+    "value": 0.806,
+    "source": "Piotto et al. 2024, the stellar mass of the default parameter set of TOI-561 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract",
+    "uncertainty": 0.036
+  },
+  "temperature": {
+    "value": 5342,
+    "source": "MacDougall et al. 2023, the stellar temperature of TOI-561 b's parameter set from MacDougall et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 57
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "4 planets cross TOI-561 as seen from Earth: b, c, d, e.",
+    "introduction": "Its radius follows Piotto et al. 2024, and its temperature MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023, PIOTTO_ET_AL__2024): st_teff 5342, st_rad 0.843, st_mass 0.806",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-561",
+      "title": "TOI-561",
+      "revision": "1374406462",
+      "card": "TOI-561 is an old, metal-poor, Sun-like star, known to have multiple small exoplanets orbiting it.",
+      "introduction": "It is an orange dwarf, estimated to be 10.5 billion years old, and about 79% the mass and 85% the radius of the Sun."
+    }
+  },
+  "notes": [],
+  "order": 4539
+}
