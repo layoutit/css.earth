@@ -18,7 +18,7 @@ export default {
   },
   format: ['esm'],
   external: ['@cssearth/bake'],
-  dts: process.env.CSSEARTH_SKIP_DECLARATIONS !== '1',
+  dts: false, // exports resolve to source; declarations would need bake's dist, which builds after this package (bake -> renderer -> volume-viewer)
   clean: true,
   target: 'es2022',
 };
