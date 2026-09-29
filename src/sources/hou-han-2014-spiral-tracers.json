@@ -1,0 +1,55 @@
+{
+  "id": "hou-han-2014-spiral-tracers",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The observed spiral structure of the Milky Way",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/201424039"
+    },
+    {
+      "type": "arxiv",
+      "value": "1407.7331"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1407.7331",
+      "label": "arXiv:1407.7331"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1051/0004-6361/201424039",
+      "label": "A&A 569, A125"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/569/A125",
+      "label": "CDS J/A+A/569/A125"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/569/A125/ReadMe",
+      "checkedOn": "2026-09-28",
+      "locator": "tablea1 (HII regions), tablea2 (GMCs), tablea3 (6.7 GHz masers): GLON, GLAT, Dist (photometric or trigonometric) and D8.3 (kinematic, R0 = 8.3 kpc)"
+    }
+  ],
+  "creators": [
+    "L. G. Hou",
+    "J. L. Han"
+  ],
+  "publisher": "A&A 569, A125",
+  "publicationDate": "2014",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Hou & Han (2014), A&A 569, A125.",
+      "scope": "Spiral tracer positions",
+      "evidence": "https://arxiv.org/abs/1407.7331"
+    }
+  ]
+}

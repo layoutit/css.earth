@@ -10,6 +10,12 @@ export const UNIVERSE_LABEL_POLICY = Object.freeze({
  * physical boundary). Past it the galaxies are the named objects, and a star's name fades over the same band. */
 export const LOCAL_GROUP_SCALE = Object.freeze({ returnDistanceM: 240e3 * 3.085677581491367e16, enterDistanceM: 300e3 * 3.085677581491367e16 });
 
+/** One handoff between the planet hosts and the galaxy's published tracers, by the camera's distance from the selected
+ * body (the distance that gates the galaxy volume, so a visited far system keeps its own markers): the hosts show below 5 kpc, where the galaxy volume reaches full strength, the tracers from 7 kpc,
+ * and only this band crossfades them, so the two are never drawn together (a UI threshold, not a physical one). The
+ * planet hosts follow where surveys looked, not the galaxy's shape. */
+export const GALAXY_SCALE = Object.freeze({ handoffStartM: 5e3 * 3.085677581491367e16, handoffEndM: 7e3 * 3.085677581491367e16 });
+
 export function labelEligible(facts: { named?: boolean; notable?: boolean }): boolean {
   return facts.named === true || facts.notable === true;
 }

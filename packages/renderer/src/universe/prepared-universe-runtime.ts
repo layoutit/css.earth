@@ -33,7 +33,7 @@ const GALAXY_PREFETCH_RATIO = 1 / 32;
 /** Hidden, unsubscribed lens banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_LENS_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, environmentLinks, stellarExtents = {}, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards, sky = true }: PreparedUniverseOptions) {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyTracerVolume, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, plainDots, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards, sky = true }: PreparedUniverseOptions) {
   const plan = parsePreparedWorldContextPlan(context), payload = validatePreparedCssVolume(volume);
   if (volumeLensBanks.length && !lensBillboards) throw new TypeError('Volume lens banks require their prepared billboards.');
   const lensFacts = volumeLensBanks.map(bank => {
@@ -142,7 +142,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
         // The galaxy backdrop is opaque black: it mounts first, so the lens banks' billboards, which mount at once, paint over it.
         const background = createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
-          prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM });
+          prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM, cataloguePointUrls: galaxyCataloguePoints,
+          ...(galaxyTracerVolume ? { tracerVolumeUrl: galaxyTracerVolume } : {}) });
         const lenses = createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifetime,
           declarations: volumeLensBanks, facts: lensFacts, frame: plan.frame, visibility: lensVisibility,
           billboards: lensBillboards, load: loadVolumeLens, warmDomNodeBudget: warmVolumeLensDomNodeBudget, requestPublication });
@@ -179,7 +180,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const bodyAnnotations = spatial.inspect();
         const focusPoint = own(mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage }));
         const environmentLabels = own(mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock,
-          ...(stellarExtents[payload.id] === undefined ? {} : { ringRadiusM: stellarExtents[payload.id] }) }));
+          ...(stellarExtents[payload.id] === undefined ? {} : { extentRadiusM: stellarExtents[payload.id] }) }));
         catalogBanks.mountInitialCatalog();
         catalogBanks.publishResidency();
         lenses.publishResidency();

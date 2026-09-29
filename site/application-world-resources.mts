@@ -100,6 +100,11 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       clusters: { fadeStartDistanceM: fades.clusters.fadeStartDistanceM, fullDistanceM: fades.clusters.fullDistanceM } };
     const universe = createPreparedUniverse({
       environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, stellarExtents: STELLAR_EXTENTS,
+      // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
+      // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
+      // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).
+      galaxyCataloguePoints: [volumeSet.resolve('prepared/globular-clusters.json')],
+      galaxyTracerVolume: volumeSet.resolve('prepared/tracers.json'),
       context: applicationContext, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens,
       backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'),

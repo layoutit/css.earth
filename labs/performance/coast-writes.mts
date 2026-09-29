@@ -17,7 +17,6 @@ const ALLOWED = [
   / \[points\]$/u, / \{ stroke-opacity \}$/u, / <\+polyline>$/u, // orbit strokes
   / \{ box-shadow \}$/u, // batched star points
   /object-minimap-viewport .*\{ (left|top|width|height|background-size|background-position) \}$/u, // live minimap boxes
-  /^span\.prepared-context-marker.*\[data-volume-ring\].* \{ (width|height) \}$/u, // rings around volumes
   /^div\.object-input-surface \{ cursor \}$/u, // the release itself sets the grab cursor, once
 ];
 

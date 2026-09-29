@@ -114,7 +114,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         for (const node of leaf.nodes) node.style.visibility = shown ? '' : 'hidden';
       }
     }
-    const strengths = axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame), payload.stacks);
+    const strengths = axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
     for (const [axis, pending] of pendingTextures.entries()) {
       if (strengths[axis]!.weight <= 0) continue;
       for (const [leaf, url] of pending) {
@@ -243,7 +243,7 @@ function cameraView(camera: VolumeLocalCamera): readonly number[] {
 
 /** Texture demand uses the same axis weights and prepared frustum bounds as publication. */
 export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publication: VolumeCameraPublication): readonly string[] {
-  const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks);
+  const strengths = axisWeights(presentPhysicalPoseInVolume(publication.world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
   const transform = preparedVolumeCameraTransform(publication, payload.frame, 50);
   const planes = createPreparedLeafFrustum(transform.rotation, transform.translationCssPixels, publication.viewport);
   const paths = new Set<string>();
@@ -256,22 +256,28 @@ export function preparedVolumeTexturePaths(payload: PreparedCssVolume, publicati
   return [...paths];
 }
 
-function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stacks']): readonly { weight: number; opticalGain: number }[] {
+function axisWeights(camera: VolumeLocalCamera, stacks: PreparedCssVolume['stacks'],
+  bounds: PreparedCssVolume['frame']['boundsUnits']): readonly { weight: number; opticalGain: number }[] {
   const matrix = worldRotationFromQuaternion(camera.orientationXyzw);
   const back: VolumeVector = [matrix[2]!, matrix[5]!, matrix[8]!];
   const length = Math.hypot(...back);
-  const strengths = AXES.map((axis, index) => {
+  const cosines = AXES.map((axis, index) => {
     const normal = stacks.find(stack => stack.axis === axis)?.normalUnits;
     return Math.abs(normal ? normal.reduce((sum, value, i) => sum + value * back[i]!, 0) : back[index]!) / length;
   });
+  // A slab is a cut across the volume's other two axes. Through a flat volume (the Milky Way is 20 × 20 × 2.5 units)
+  // a slab standing across the thin axis holds only a strip, and at an oblique view successive strips part into stripes.
+  // Each axis is scaled by √(thinnest extent / its extent), so a thin axis keeps its slabs until √(2.5/20) ≈ 0.35 of the
+  // view lies along it (20° from edge-on), where three optical copies still carry its gain. Equal extents are unscaled.
+  const extents = AXES.map((_, index) => bounds.max[index]! - bounds.min[index]!), thinnest = Math.min(...extents);
+  const strengths = cosines.map((cosine, index) => cosine * Math.sqrt(thinnest / extents[index]!));
   const maximum = Math.max(...strengths);
-  return strengths.map(value => {
+  return strengths.map((value, index) => {
     const t = Math.max(0, Math.min(1, (value - maximum + 0.16) / 0.16));
     const weight = t * t * (3 - 2 * t);
     // Crossing count is |d_i|*L/pitch_i, but each texture integrates pitch_i.
-    // Restore the missing central-ray length before the normalized image mix.
-    // The active .16 band implies |d_i| > .465, hence gain <2.15: 3 copies suffice.
-    return { weight, opticalGain: weight > 0 ? Math.max(1, 1 / value) : 1 };
+    // Restore the missing central-ray length before the normalized image mix; copies cap the gain at 3.
+    return { weight, opticalGain: weight > 0 ? Math.max(1, 1 / cosines[index]!) : 1 };
   });
 }
 

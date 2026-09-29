@@ -8,7 +8,7 @@ A publisher optical image supplies the color of an authored 1.2 kpc depth envelo
 | --- | --- |
 | [VST snaps a very detailed view of the Triangulum Galaxy](https://www.eso.org/public/images/eso1424a/) | `eso1424a`; 4000 × 3355 pixels; publisher publication JPEG. |
 | Geometry reference | Corbelli et al. 2014, arXiv:1409.2665. Adopted parameters remain in the [recipe](source/recipe.json); exact source-field qualification is unresolved. |
-| [McConnachie et al. (2010)](https://arxiv.org/abs/1009.2804) | [Stellar extent](source/stellar-extent.json): M33's red-giant substructure reaches projected radii of about 40 kpc. The universe rings M33 at 40 kpc; it marks where stars are still measured, not a boundary. |
+| [McConnachie et al. (2010)](https://arxiv.org/abs/1009.2804) | [Stellar extent](source/stellar-extent.json): M33's red-giant substructure reaches projected radii of about 40 kpc. Inside 40 kpc M33's caption hides; outside it the caption hangs under M33's image. It marks where stars are still measured, not a boundary. |
 
 The image is publisher-prepared display RGB, not common calibrated flux or a qualified natural-color measurement. Observation dates are not retained in the selected records.
 

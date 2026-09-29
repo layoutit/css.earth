@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "cepheids",
+  "table": {
+    "path": "Data_Table_1.dat",
+    "origin": "https://raw.githubusercontent.com/jskowron/galactic_cepheids/e72dc56adf9eea38aa4038bc35142e144a68cf25/data/Data_Table_1.dat",
+    "bytes": 575072,
+    "format": "whitespace",
+    "columns": {
+      "name": 2,
+      "lDeg": 3,
+      "bDeg": 4,
+      "distance": 5,
+      "ageMyr": 7
+    },
+    "distanceUnit": "pc",
+    "missingDistance": -1
+  },
+  "frame": {
+    "input": "galactic",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord Galactic to ICRS, heliocentric Cartesian"
+  },
+  "source": "skowron-2019-cepheid-map",
+  "meaning": "Classical Cepheids of the OGLE collection and other surveys, at the distances Skowron et al. (2019) derived from mid-infrared period-luminosity relations; the young (roughly 20 to 400 Myr) thin disc of the Milky Way, including its warp.",
+  "appearance": {
+    "colorCss": "#ffe2a8",
+    "radiusPx": 0.5,
+    "opacity": 0.35,
+    "colorBy": {
+      "column": 7,
+      "stops": [
+        [
+          30,
+          "#8ec9ff"
+        ],
+        [
+          150,
+          "#f4f1ea"
+        ],
+        [
+          300,
+          "#ffc070"
+        ]
+      ],
+      "steps": 16
+    },
+    "note": "Presentation only: colour follows each Cepheid's published age (AGE, Myr), blue for the youngest to gold for the oldest.",
+    "emphasis": "Background layer: spread through the disc rather than along the arms, dimmed so the arm tracers read first."
+  }
+}

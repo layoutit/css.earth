@@ -14,7 +14,7 @@ The shape is a hypothesis with two parts. A broad envelope carries 80.75% of the
 | [NASA/IPAC AllWISE through CDS](https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html) | W4/W2/W1 false-colour HiPS mosaic; 6000² pixels across 24°, not native detector sampling. |
 | [Bonanos et al. (2009)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003) | Observed sky positions and Johnson V for 1,042 selected massive stars; their depths are model-contained realizations. |
 | [SMASH, noirlab2030a](https://noirlab.edu/public/images/noirlab2030a/) | Shared sky-registration reference every image is matched to. |
-| [Nidever et al. (2019)](https://arxiv.org/abs/1805.02671) | [Stellar extent](source/stellar-extent.json): LMC stars detected out to R ≈ 21°, about 18.5 kpc. The universe rings the LMC at that radius; it marks where stars are still measured, not a boundary. |
+| [Nidever et al. (2019)](https://arxiv.org/abs/1805.02671) | [Stellar extent](source/stellar-extent.json): LMC stars detected out to R ≈ 21°, about 18.5 kpc. Inside that radius the LMC's caption hides; outside it the caption hangs under the LMC's framing sphere. It marks where stars are still measured, not a boundary. |
 
 Native photographs supply colour after registered star removal. Every lens recolours the same neutral alpha, so switching lenses changes colour and never geometry. The fit covers only the registered Horálek footprint (10.06 × 6.74°), which is narrower in declination than the simulation's light.
 
