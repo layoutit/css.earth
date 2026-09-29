@@ -37,7 +37,7 @@ export const BAKE_OBJECT_TEST_PATHS = ['tests/**/*.test.mts', 'tests/**/*.test.t
 const OBJECT_ENTRY = /(?:from|import)\s*\(?\s*['"]@cssearth\/bake\/objects\/(?:layers\/)?[a-z-]+['"]/u;
 /** Tests of an object entry that read the restored prepared packages of real bodies, so they run where those are restored:
  * the source-catalogue step of audit.yml's prepared-universe job. */
-export const RESTORED_PACKAGE_TESTS: readonly string[] = ['tests/contract/object-provenance.test.mts'];
+export const RESTORED_PACKAGE_TESTS: readonly string[] = ['packages/bake/src/objects/provenance/object-provenance.test.mts'];
 
 /** Object-entry tests and relocated bake Node suites, sorted, except tests requiring restored packages. */
 export function bakeObjectTests(files: readonly string[], read: (path: string) => string): string[] {

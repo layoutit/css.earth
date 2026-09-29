@@ -11,7 +11,7 @@ folder). The whole-disc colour policy is in `@cssearth/bake/objects/raster`
 ([`whole-disc-colour.ts`](../objects/raster/whole-disc-colour.ts)), the commands that
 make records are in [`packages/bake/cli/`](../../cli/) (`fit-epic-limb.mts`,
 `acquire-psg-limb-table.mts`), and the tests, which import the entry, are in
-[`tests/photometry/`](../../../../tests/photometry/).
+[`tests/photometry/`](./).
 
 ## Modules
 

@@ -127,7 +127,7 @@ termination or power loss.
 The publication and prepared-set tests exercise staging, replacement and rollback.
 Use the current tests of `packages/bake/src/delivery/publication.ts` and
 `packages/bake/src/delivery/write-prepared-set.ts` (`packages/bake/src/delivery/publication.test.mts`,
-`tests/delivery/write-prepared-set.test.mts`), with their required inputs installed.
+`packages/bake/src/delivery/write-prepared-set.test.mts`), with their required inputs installed.
 These checks do not replace a visual or scientific oracle.
 
 ## Source and mission presentation
