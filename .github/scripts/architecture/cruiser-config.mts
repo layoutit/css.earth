@@ -6,7 +6,7 @@ import type { ICruiseOptions } from 'dependency-cruiser';
  * `*.config.*`) are added from the tracked file list, and `.astro` files are scanned separately
  * (`astro-imports.mts`), because dependency-cruiser has no `.astro` transpiler. `.github/scripts` holds the CI and
  * repository checks. */
-export const CRUISE_ROOTS = ['packages', 'src', 'site', 'tools', 'labs', 'tests', 'netlify', '.github/scripts'] as const;
+export const CRUISE_ROOTS = ['packages', 'src', 'site', 'labs', 'tests', 'netlify', '.github/scripts'] as const;
 export const ROOT_CONFIG_FILE = /^[^/]+\.config\.[cm]?[jt]s$/u;
 
 /** Resolution follows the repository's own TypeScript, tsconfig, `package.json#imports` and pnpm
