@@ -1,11 +1,10 @@
 """Prepare the archive guide's RGB display from registered NIMS I/F cubes.
 
-The pinned GeoTIFF CRS/affine are the registered grid, not the old COC backplane
+The declared GeoTIFF CRS/affine are the registered grid, not the old COC backplane
 coordinates or rounded PDS label tie points. Explicit inverse-coordinate lookup retains
 source samples and missing values. Earlier observations have explicit priority;
 there is no blending, gap fill, per-frame equalization or mineral inference.
 """
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -59,12 +58,14 @@ def project_native_cells(values, source_crs, source_transform, width, height):
 
 def prepare(path):
     plan = json.loads(path.read_text()); root = path.parent
+    if 'pins' in plan:
+        raise ValueError(f'{path}: the "pins" field is retired; recipes declare inputs by path')
     if plan['schema'] != 'cssearth-nims-composite@1':
         raise ValueError('Unsupported NIMS plan')
-    for name, expected in plan['pins'].items():
-        with (root/name).open('rb') as stream:
-            if hashlib.file_digest(stream, 'sha256').hexdigest() != expected:
-                raise ValueError('NIMS source changed: '+name)
+    missing = [f"observations[{i}].{k} = {o[k]}" for i, o in enumerate(plan['observations'])
+               for k in ('path', 'wavelengths') if not (root/o[k]).is_file()]
+    if missing:
+        raise ValueError(f'{path}: missing NIMS sources: ' + ', '.join(missing))
     width, height = plan['width'], plan['height']
     if width != height*2 or width > 2048:
         raise ValueError('Expected bounded 2:1 grid')
@@ -102,7 +103,7 @@ def prepare(path):
     receipt={'width':width,'height':height,'referenceRadiusMeters':radius,'origin':[transform.c,transform.f],
              'resolution':[transform.a,transform.e],'noData':0,'missingPixels':int((owners==0).sum()),
              'displayRanges':plan['displayRanges'],'observations':reports,'output':plan['output'],
-             'sha256':hashlib.sha256(target.read_bytes()).hexdigest()}
+             'bytes':target.stat().st_size}
     (root/plan['receipt']).write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(receipt))
 

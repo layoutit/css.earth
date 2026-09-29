@@ -6,7 +6,6 @@ Native navigation centers bound interior spherical cells; no spectrum is
 spatially interpolated, and unsupported detector cells remain missing. Local
 withheld navigation centers qualify approximate transfer, not absolute pointing.
 """
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -25,11 +24,6 @@ SELECTED_IDS = ('1487299582_1', '1489049741_1', '1702362997_1',
                 '1702361128_1', '1500061929_1', '1500061170_1')
 NAV_NAMES = ['Phase Angle', 'Emission Angle', 'Incidence Angle',
              'Latitude', 'Longitude', 'Pixel Resolution']
-
-
-def digest(path):
-    with Path(path).open('rb') as stream:
-        return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
 def field(label, name):
@@ -290,6 +284,8 @@ def write_tiff(path, array, radius, missing, dtype):
 def prepare(plan_path):
     path = Path(plan_path).resolve()
     plan, root = json.loads(path.read_text()), path.parent
+    if 'pins' in plan:
+        raise ValueError(f'{path}: the "pins" field is retired; recipes declare inputs by path')
     if plan.get('schema') != SCHEMA:
         raise ValueError('Unsupported partial Enceladus recipe')
     if tuple(entry['id'] for entry in plan['observations']) != SELECTED_IDS:
@@ -298,12 +294,10 @@ def prepare(plan_path):
             or plan.get('photometricCorrection') != 'none'
             or plan.get('sourceLicense') != 'CC-BY-4.0'):
         raise ValueError('Explicit observation, pointing and source reuse boundaries required')
-    required = [entry[k] for entry in plan['observations'] for k in ('calibrated', 'navigation')]
-    if not all(name in plan['pins'] for name in required):
-        raise ValueError('Every original cube must be pinned')
-    for name, pin in plan['pins'].items():
-        if digest(root/name) != pin:
-            raise ValueError('Source changed: ' + name)
+    missing = [f"observations[{entry['id']}].{k} = {entry[k]}" for entry in plan['observations']
+               for k in ('calibrated', 'navigation') if not (root/entry[k]).is_file()]
+    if missing:
+        raise ValueError(f'enceladus {path.name}: missing original cubes: ' + ', '.join(missing))
     width, height = plan['width'], plan['height']
     if type(width) is not int or type(height) is not int or width != height*2 or not 0 < width <= 2048:
         raise ValueError('Expected bounded canonical grid')
@@ -335,16 +329,16 @@ def prepare(plan_path):
                 if take.any() and not np.array_equal(pixels[take], obs['indices'][kind][0].reshape(-1)[source_pixels[take]-1]):
                     raise AssertionError('Source-value ownership mismatch')
             output_reports.append({'kind': kind, 'output': plan['outputs'][kind],
-                                   'sha256': digest(output), 'bytes': output.stat().st_size,
+                                   'bytes': output.stat().st_size,
                                    'dimensions': [width, height], 'noData': MISSING,
                                    'acceptedDisplayPixels': int(accepted.sum()),
                                    'missingDisplayPixels': int((~accepted).sum()),
                                    'acceptedSphereAreaEstimateFraction': float((accepted*weights).sum()),
                                    'acceptedNativeCenterCells': cells, 'statistics': stats(pixels[accepted]),
                                    'sourceOwnerCounts': {obs['id']: int((owners == n).sum()) for n, obs in enumerate(observations, 1)},
-                                   'audit': [{'file': p.name, 'sha256': digest(p), 'bytes': p.stat().st_size}
+                                   'audit': [{'file': p.name, 'bytes': p.stat().st_size}
                                              for p in (audit_owner, audit_source)]})
-    report = {'schema': SCHEMA, 'recipeSha256': digest(path), 'preparerSha256': digest(__file__),
+    report = {'schema': SCHEMA, 'recipe': path.name,
               'sourceLicense': plan['sourceLicense'], 'policy': policy,
               'sourceLicenseUrl': 'https://creativecommons.org/licenses/by/4.0',
               'sourceLicenseEvidenceUrl': 'https://vims.univ-nantes.fr/about',

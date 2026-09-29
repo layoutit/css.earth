@@ -1,4 +1,4 @@
-"""Extract pinned Cassini VIMS mosaic planes into prepared scientific maps.
+"""Extract declared Cassini VIMS mosaic planes into prepared scientific maps.
 
 This is source preparation, not a new calibration or a compositional inversion.
 The guide's one-degree angular bins are an explicit interpretation: the archive's
@@ -6,7 +6,6 @@ projected registration has a documented source-pixel ambiguity. No interpolation
 neighbor search, gap fill, spectral normalization or photometric correction is
 applied here. Only six native BSQ planes are read, individually.
 """
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -21,11 +20,6 @@ from rasterio.transform import from_origin
 
 NS = {'p': 'http://pds.nasa.gov/pds4/pds/v1', 'c': 'http://pds.nasa.gov/pds4/cart/v1'}
 SCHEMA = 'cssearth-cassini-vims@1'
-
-
-def sha256(path):
-    with path.open('rb') as stream:
-        return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
 def label_metadata(path):
@@ -154,6 +148,8 @@ def statistics(values, valid):
 
 def prepare(path):
     plan = json.loads(path.read_text()); root = path.parent
+    if 'pins' in plan:
+        raise ValueError(f'{path}: the "pins" field is retired; recipes declare inputs by path')
     if plan.get('schema') != SCHEMA:
         raise ValueError('Unsupported Cassini VIMS recipe')
     registration = plan.get('registration', {})
@@ -161,12 +157,10 @@ def prepare(path):
             or registration.get('absoluteSubpixelRegistration') != 'unresolved'
             or not registration.get('evidence')):
         raise ValueError('Explicit guide-grid interpretation and unresolved subpixel registration required')
-    required = [plan[k] for k in ('input', 'label', 'header', 'wavelengths', 'guide')]
-    if not all(name in plan['pins'] for name in required):
-        raise ValueError('Every original source and interpretation document must be pinned')
-    for name, expected in plan['pins'].items():
-        if sha256(root/name) != expected:
-            raise ValueError('VIMS source changed: ' + name)
+    missing = [f'{k} = {plan[k]}' for k in ('input', 'label', 'header', 'wavelengths', 'guide')
+               if not (root/plan[k]).is_file()]
+    if missing:
+        raise ValueError(f"{plan.get('target')} {path.name}: missing VIMS sources: " + ', '.join(missing))
     metadata = label_metadata(root/plan['label'])
     if metadata['target'] != plan['target'] or Path(plan['input']).name != metadata['fileName']:
         raise ValueError('VIMS target or file identity mismatch')
@@ -200,10 +194,10 @@ def prepare(path):
                                crs=f'+proj=eqc +R={radius} +lat_ts=0 +lon_0=0 +units=m +no_defs',
                                transform=transform, compress='deflate', predictor=predictor, **options) as target:
                 target.write(pixels)
-            outputs.append({'kind': kind, 'output': plan[kind]['output'], 'sha256': sha256(output),
+            outputs.append({'kind': kind, 'output': plan[kind]['output'],
                             'bytes': output.stat().st_size, 'noData': missing,
                             'missingPixels': int((pixels[0] == missing).sum())})
-    receipt = {'schema': SCHEMA, 'recipeSha256': sha256(path), 'preparerSha256': sha256(Path(__file__)),
+    receipt = {'schema': SCHEMA, 'recipe': path.name,
                'source': metadata, 'registration': registration, 'width': width, 'height': height,
                'origin': [transform.c, transform.f], 'resolution': [transform.a, transform.e],
                'referenceRadiusMeters': radius, 'rgb': plan['rgb'], 'depth': plan['depth'],

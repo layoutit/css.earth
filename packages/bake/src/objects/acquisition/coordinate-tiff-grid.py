@@ -4,7 +4,6 @@ Verify all coordinate cells against the supplied row/column coordinates. Select
 the nearest observed scalar cell; never infer coordinates from image dimensions
 or fill gaps by interpolation. Read input strips, not full coordinate arrays.
 """
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -24,11 +23,12 @@ def nearest(axis, values):
 
 def prepare(path):
     plan = json.loads(path.read_text())
+    if 'pins' in plan:
+        raise ValueError(f'{path}: the "pins" field is retired; recipes declare inputs by path')
     root = path.parent
-    for name, pin in plan['pins'].items():
-        with (root / name).open('rb') as source:
-            if hashlib.file_digest(source, 'sha256').hexdigest() != pin:
-                raise ValueError('Source TIFF changed: ' + name)
+    missing = [f'{k} = {plan[k]}' for k in ('input', 'latitude', 'longitude') if not (root / plan[k]).is_file()]
+    if missing:
+        raise ValueError(f'{path}: missing source TIFFs: ' + ', '.join(missing))
     with ExitStack() as stack:
         stack.enter_context(rasterio.Env(GDAL_CACHEMAX=32 * 1024 * 1024, GDAL_NUM_THREADS='1'))
         data, lat, lon = [stack.enter_context(rasterio.open(root / plan[k])) for k in ['input', 'latitude', 'longitude']]
@@ -79,7 +79,7 @@ def prepare(path):
                'missingPixels': int((out == -9999).sum()),
                'coordinatesVerified': 'Every latitude and longitude cell matches the published axes exactly.',
                'sampling': 'Nearest published coordinate; finite positive wavelengths only; no gap fill.',
-               'output': plan['output'], 'sha256': hashlib.sha256((root / plan['output']).read_bytes()).hexdigest()}
+               'output': plan['output'], 'bytes': (root / plan['output']).stat().st_size}
     (root / plan['receipt']).write_text(json.dumps(receipt, indent=2)+'\n')
     print(json.dumps(receipt))
 

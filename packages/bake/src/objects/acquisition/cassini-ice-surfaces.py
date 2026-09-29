@@ -1,6 +1,6 @@
 """Offline RC19 spectral surfaces on qualified existing body coordinates.
 
-Reuse the pinned B8 numeric/GeoTIFF helpers without its between-center mapper.
+Reuse the shared B8 numeric/GeoTIFF helpers without its between-center mapper.
 RGB channels always share one native observation and source-pixel owner. This
 tool does not create geometry, photometrically correct data or fit pointing.
 """
@@ -349,6 +349,9 @@ def write_projected_products(root, plan, observations, projector=project_detecto
 def prepare(path):
     path = Path(path).resolve()
     plan, root = json.loads(path.read_text()), path.parent
+    retired = [field for field in ('pins', 'detectorQualityPreparerSha256') if field in plan]
+    if retired:
+        raise ValueError(f'{path}: retired hash fields {retired}; recipes declare inputs by path')
     if plan.get('schema') != SCHEMA or plan.get('target') not in ('IAPETUS', 'TETHYS'):
         # Phoebe requires an independently qualified frame transfer; it cannot
         # enter this native-coordinate path just by changing a body name.

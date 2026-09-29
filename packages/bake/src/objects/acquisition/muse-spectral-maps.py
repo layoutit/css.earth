@@ -1,4 +1,4 @@
-"""Convert the pinned, already measured MUSE spectral maps without smoothing.
+"""Convert the declared, already measured MUSE spectral maps without smoothing.
 
 The release FITS headers contain no WCS, target, date or unit cards. Registration
 is an explicit interpretation of the author's arange-based mapping code, checked
@@ -18,11 +18,9 @@ night 1 -> 2 -> 3 first-valid fallback, as supported by scientific additionalGri
 and the differences between overlapping nights. No averaging, recalibration,
 error estimate, mineral abundance, oxygen abundance or continuum fit is derived.
 """
-import hashlib
 import json
 import math
 from pathlib import Path
-import re
 import sys
 
 import numpy as np
@@ -41,11 +39,6 @@ OBSERVABLES = {
     '577.3nm_band': {'target': 'ganymede', 'quantity': '565/577.3 nm reflectance ratio',
                     'unit': 'ratio', 'unobservedWavelengthRangeNm': [578, 605]},
 }
-
-
-def sha256(path):
-    with path.open('rb') as stream:
-        return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
 def read_map(path):
@@ -156,12 +149,14 @@ def prepare(path):
     edge = plan.get('edgeWithholdNodes')
     if type(edge) is not int or edge not in (0, 1):
         raise ValueError('Explicit zero/one-node edge policy required')
-    entries = plan['entries']; pins = plan.get('pins', {})
-    if not entries or any(entry['input'] not in pins for entry in entries):
-        raise ValueError('Every original source must have a SHA256 pin')
-    for name, expected in pins.items():
-        if not isinstance(expected, str) or not re.fullmatch('[0-9a-f]{64}', expected) or sha256(root/name) != expected:
-            raise ValueError('MUSE source changed: ' + name)
+    entries = plan['entries']
+    if 'pins' in plan:
+        raise ValueError(f'{path}: the "pins" field is retired; recipes declare inputs by path')
+    if not entries:
+        raise ValueError(f'{path}: entries is empty')
+    missing = [f'entries[{i}].input = {entry["input"]}' for i, entry in enumerate(entries) if not (root/entry['input']).is_file()]
+    if missing:
+        raise ValueError(f'{path}: missing MUSE sources: ' + ', '.join(missing))
     radius = plan['referenceRadiusMeters']; transform = native_transform(radius)
     output_records = []; groups = {}; seen = set()
     with rasterio.Env(GDAL_CACHEMAX=16*1024*1024, GDAL_NUM_THREADS='1'):
@@ -171,7 +166,7 @@ def prepare(path):
                     or type(night) is not int or night not in (1, 2, 3)
                     or Path(entry['input']).name != f'{kind}_{plan["target"]}_night_{night}.fits'
                     or (kind, night) in seen):
-                raise ValueError('Source identity must match the pinned release filename')
+                raise ValueError('Source identity must match the published release filename')
             seen.add((kind, night))
             values, cards = read_map(root/entry['input']); encoded, checks = encode_native(values, edge)
             groups.setdefault(kind, []).append((night, entry['input'], np.where(encoded != MISSING, values, np.nan)))
@@ -182,10 +177,10 @@ def prepare(path):
                                transform=transform, compress='deflate', predictor=3) as target:
                 target.write(reorder_nodes(encoded), 1)
             finite = np.isfinite(values)
-            output_records.append({'input': entry['input'], 'sourceSha256': pins[entry['input']],
+            output_records.append({'input': entry['input'],
                                    'sourceBytes': (root/entry['input']).stat().st_size, 'fitsCards': cards,
                                    'kind': kind, 'night': night, 'quantity': OBSERVABLES[kind],
-                                   'path': entry['output'], 'sha256': sha256(output), 'bytes': output.stat().st_size,
+                                   'path': entry['output'], 'bytes': output.stat().st_size,
                                    'noData': MISSING, 'checked': checks,
                                    'finiteNativeRange': [float(values[finite].min()), float(values[finite].max())] if finite.any() else None})
     composites = {}
@@ -199,7 +194,7 @@ def prepare(path):
     unit = radius * math.pi / 180
     error = max(float(np.abs((transform.c + (np.arange(180)+.5)*transform.a)/unit + CENTER_LONGITUDE - np.arange(-180,180,2)).max()),
                 float(np.abs((transform.f + (np.arange(90)+.5)*transform.e)/unit - np.arange(88,-91,-2)).max()))
-    receipt = {'schema': SCHEMA, 'recipeSha256': sha256(path), 'preparerSha256': sha256(Path(__file__)),
+    receipt = {'schema': SCHEMA, 'recipe': path.name,
                'target': plan['target'], 'registration': {**registration, 'width': 180, 'height': 90,
                   'centerLongitude': CENTER_LONGITUDE, 'referenceRadiusMeters': radius,
                   'origin': [transform.c, transform.f], 'resolution': [transform.a, transform.e],

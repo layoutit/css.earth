@@ -12,7 +12,6 @@
  * value is written. Rows are streamed; a strip is never held in memory.
  */
 import { createReadStream } from 'node:fs';
-import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createInterface } from 'node:readline';
@@ -90,13 +89,6 @@ export function checkGcpLabel(label: string, strip: GcpRecipe['tables'][number],
   if (problems.length) throw new Error(`${strip.label}: Diviner GCP label differs from its recipe: ${problems.join('; ')}.`);
 }
 
-/** SHA-256 of a file, streamed: a strip is 156 MB. */
-async function digest(path: string) {
-  const hash = createHash('sha256');
-  for await (const chunk of createReadStream(path)) hash.update(chunk as Buffer);
-  return hash.digest('hex');
-}
-
 /** Stream every strip once and write each reduction's grid and a receipt of what was read and kept. */
 export async function convertDivinerGcp(root: string, recipe: GcpRecipe) {
   const cells = WIDTH * HEIGHT;
@@ -105,7 +97,6 @@ export async function convertDivinerGcp(root: string, recipe: GcpRecipe) {
     reduction: r, first: r.fromHour / HOURS, count: (r.toHour - r.fromHour) / HOURS,
     sum: new Float64Array(cells), seen: new Uint8Array(cells) }));
   const observedBins = new Uint8Array(cells);
-  const inputs: Record<string, string> = {};
   const header = COLUMNS.join(',');
   for (const strip of [...recipe.tables].sort((a, b) => a.south - b.south)) {
     const labelPath = resolve(root, strip.label), tablePath = resolve(root, strip.table);
@@ -137,10 +128,8 @@ export async function convertDivinerGcp(root: string, recipe: GcpRecipe) {
       for (const w of windows) if (bin >= w.first && bin < w.first + w.count) { w.sum[cell] += tbol; w.seen[cell] += 1; }
     }
     if (line !== WIDTH * 20 * BINS + 1) throw new Error(`${strip.table}: ${line - 1} rows, expected ${WIDTH * 20 * BINS}.`);
-    inputs[strip.label] = await digest(labelPath);
-    inputs[strip.table] = await digest(tablePath);
   }
-  const outputs: Record<string, { path: string; sha256: string; cells: number; range: [number, number] | null }> = {};
+  const outputs: Record<string, { path: string; cells: number; range: [number, number] | null }> = {};
   const write = async (reduction: GcpReduction, values: Float32Array) => {
     const bytes = new Uint8Array(writeArrayBuffer(values, {
       width: WIDTH, height: HEIGHT, SamplesPerPixel: 1, PhotometricInterpretation: 1, GTModelTypeGeoKey: 2, GeographicTypeGeoKey: 32767,
@@ -150,7 +139,7 @@ export async function convertDivinerGcp(root: string, recipe: GcpRecipe) {
     await writeFile(resolve(root, reduction.output), bytes);
     let n = 0, lo = Infinity, hi = -Infinity;
     for (const v of values) if (Number.isFinite(v)) { n += 1; lo = Math.min(lo, v); hi = Math.max(hi, v); }
-    outputs[reduction.id] = { path: reduction.output, sha256: createHash('sha256').update(bytes).digest('hex'), cells: n, range: n ? [lo, hi] : null };
+    outputs[reduction.id] = { path: reduction.output, cells: n, range: n ? [lo, hi] : null };
   };
   for (const reduction of recipe.reductions) {
     if (reduction.kind === 'maximum') { await write(reduction, maximum); continue; }
@@ -162,7 +151,7 @@ export async function convertDivinerGcp(root: string, recipe: GcpRecipe) {
   const hours = new Map<number, number>();
   for (const h of maximumHour) if (Number.isFinite(h)) hours.set(h, (hours.get(h) ?? 0) + 1);
   const receipt = { schema: 'cssearth-diviner-gcp-receipt@1', datasetId: recipe.datasetId, productVersion: recipe.productVersion,
-    column: recipe.column, inputs, outputs, cellsWithoutAnyObservation: [...observedBins].filter(n => n === 0).length,
+    column: recipe.column, outputs, cellsWithoutAnyObservation: [...observedBins].filter(n => n === 0).length,
     maximumLocalTimeHistogram: Object.fromEntries([...hours].sort((a, b) => a[0] - b[0])) };
   await writeFile(resolve(root, recipe.receipt), `${JSON.stringify(receipt, null, 1)}\n`);
   return receipt;

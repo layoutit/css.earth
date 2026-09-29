@@ -10,7 +10,6 @@ The archive's noise/lowpass filters have a conservative dependency radius:
 This withholds possible dependencies, not a claim every withheld pixel changed.
 The helper does not certify absolute calibration, pointing, or photometry.
 """
-import hashlib
 import json
 from pathlib import Path
 import re
@@ -202,14 +201,12 @@ def quality_for_pair(raw_path, calibrated_path, bands):
             'backgroundRowsSkippedByIsisFit':[y for y,v in enumerate(backgrounds) if v == ISIS_MISSING_BACKGROUND],
             'backgroundRange':[min(backgrounds),max(backgrounds)],
             'reconstructedAdcRange':[min(adc_values),max(adc_values)],
-            'maskSha256':hashlib.sha256(bytes(mask)).hexdigest(),
             'directInvalidIndices':[i for i,b in enumerate(bad) if b]}
     report = {'policy':POLICY, 'target':field(c,'TargetName'), 'productId':field(c,'ProductId'),
         'nativeStartTime':field(c,'NativeStartTime'), 'dimensions':[width,height],
         'originalLayout':{'recordBytes':record_bytes, 'declaredBytes':declared_bytes,
                           'actualBytes':len(raw),'coreStartByteZeroBased':offset,'coreEndByteExclusive':core_end,
                           'declaredMinusActualBytes':declared_bytes-len(raw)},
-        'rawSha256':hashlib.sha256(raw).hexdigest(), 'calibratedSha256':hashlib.sha256(cal).hexdigest(),
         'pixelOrder':'original sample-fastest, line-next; calibrated IR band k = original band k+96',
         'reconstructedAdc':'signed original core DN + original per-band/per-line BACKGROUND suffix',
         'adcPolicy':'Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold',

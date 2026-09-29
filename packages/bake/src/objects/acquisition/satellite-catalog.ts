@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import {requireRecord,requireString,requireFiniteNumber,shape,text,number,optional,array,dictionary} from '@cssearth/core';
 const parseOrbit=shape({identity:text,document:optional(text),radiusPattern:optional(text),semiMajorAxisKm:optional(number),sourceRecord:text,parameterQualification:text});
 const parseRecipe=shape({schema:text,outputSchema:text,retrievedAt:text,expectedDiscoveryCount:number,expectedElementCount:number,gravitationalParameterKm3PerS2:number,sources:dictionary(text),discoverySection:shape({start:text,end:text}),elementPrimary:text,ringFrame:text,discoveryOnly:array(parseOrbit),authority:(value:unknown)=>value});
@@ -59,7 +58,7 @@ if (ids.size !== EXPECTED_DISCOVERY_COUNT) {
 const snapshot = Object.freeze({
   schema: config.outputSchema,
   retrievedAt: PINNED_RETRIEVED_AT,
-  sources: Object.freeze(Object.fromEntries(Object.entries(sources).map(([id,url])=>[id,sourceRecord(url,documents[id])]))),
+  sources: Object.freeze(Object.fromEntries(Object.entries(sources).map(([id,url])=>[id,sourceRecord(url)]))),
   authority: config.authority,
   counts: Object.freeze({
     confirmed: discoveryMoons.length,
@@ -225,11 +224,8 @@ function moonId(value:string) {
     .replace(/^-|-$/gu, "");
 }
 
-function sourceRecord(url:string, body:string) {
-  return Object.freeze({
-    url,
-    sha256: sha256(body),
-  });
+function sourceRecord(url:string) {
+  return Object.freeze({ url });
 }
 
 function round(value:number, precision:number) {

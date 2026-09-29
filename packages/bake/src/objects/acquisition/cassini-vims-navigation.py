@@ -21,7 +21,6 @@ The caller owns full C/N file pins and independent alignment qualification.
 Labels/table byte hashes are returned to bind this module's exact inputs.
 """
 import bisect
-import hashlib
 import math
 from pathlib import Path
 import re
@@ -191,7 +190,7 @@ def _label(path, expected_bands, target, channel):
         raise ValueError('Unsupported native VIMS camera/layout')
     if Path(path).stat().st_size < LABEL_BYTES+width*height*expected_bands*4:
         raise ValueError('Truncated native VIMS core')
-    return text, width, height, hashlib.sha256(raw).hexdigest()
+    return text, width, height
 
 
 def _tables(path, label, core_end):
@@ -228,8 +227,7 @@ def _tables(path, label, core_end):
                 raise ValueError('Invalid navigation values/time ordering')
             if name != 'InstrumentPosition' and any(abs(math.hypot(*row[:4])-1) > 1e-6 for row in rows):
                 raise ValueError('Nonunit cached quaternion')
-            result[name] = {'rows': rows, 'times': times, 'label': text,
-                            'sha256': hashlib.sha256(raw).hexdigest(), 'bytes': size}
+            result[name] = {'rows': rows, 'times': times, 'label': text, 'bytes': size}
             extents.append((start, start+size))
     if set(result) != set(required):
         raise ValueError('Missing required cached navigation table')
@@ -268,8 +266,8 @@ class Camera:
         body_id, frame_id, radii = QUALIFIED_NATIVE_FRAMES[expected_target]
         if tuple(expected_radii_km) != radii or expected_frame_id != frame_id:
             raise ValueError('Unqualified source ellipsoid/frame expectation')
-        c, width, height, c_hash = _label(calibrated_path, 256 if expected_channel == 'IR' else 96, expected_target, expected_channel)
-        n, n_width, n_height, n_hash = _label(navigation_path, 6, expected_target, expected_channel)
+        c, width, height = _label(calibrated_path, 256 if expected_channel == 'IR' else 96, expected_target, expected_channel)
+        n, n_width, n_height = _label(navigation_path, 6, expected_target, expected_channel)
         if (width, height) != (n_width, n_height) or _array(n, 'Name') != NAV_NAMES:
             raise ValueError('C/N dimensions or navigation planes differ')
         keys = ('ProductId', 'NativeStartTime', 'NativeStopTime', 'StartTime', 'StopTime',
@@ -331,9 +329,9 @@ class Camera:
             raise ValueError('Truncated native navigation planes')
         values = struct.unpack('<'+'f'*(width*height*6), raw)
         camera.navigation = {band+1: values[band*width*height:(band+1)*width*height] for band in range(6)}
-        camera.input_evidence = {'calibratedLabelSha256': c_hash, 'navigationLabelSha256': n_hash,
-                                 'navigationPlanesSha256': hashlib.sha256(raw).hexdigest(),
-                                 'tables': {name: {'sha256': table['sha256'], 'bytes': table['bytes']}
+        camera.input_evidence = {'calibrated': Path(calibrated_path).name, 'navigation': Path(navigation_path).name,
+                                 'navigationPlanesBytes': len(raw),
+                                 'tables': {name: {'bytes': table['bytes']}
                                             for name, table in camera.tables.items()}}
         return camera
 
