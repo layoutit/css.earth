@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { hasErrorCode, requireString } from '@cssearth/core';
@@ -43,7 +42,7 @@ export function alignRecorder(events: readonly TraceEvent[], recording: unknown,
     reason: valid ? 'Trace and recorder IDs and both clock anchors match' : 'Recorder order or clock drift is invalid' };
 }
 
-export interface CaptureReceipt { file: string; bytes: number; sha256: string }
+export interface CaptureReceipt { file: string; bytes: number }
 export interface CaptureVideo { file: string; traceOriginUs: number; alignment: string }
 export interface CaptureProtocol {
   browser: unknown; viewport: unknown; dpr: unknown; scenario: unknown; route: unknown; settings: unknown;
@@ -52,7 +51,7 @@ export interface CaptureProtocol {
 export interface MatchedCaptureSummary {
   available: true; directory: string; status: 'invalid' | 'matched capture'; errors: unknown[];
   alignment: RecorderAlignment; traceCompleteness: string; protocol: CaptureProtocol;
-  diagnosticOverrides: { cssSha256: string } | null; retained: unknown; artifacts: CaptureReceipt[]; video: CaptureVideo | null;
+  diagnosticOverrides: { css: string } | null; retained: unknown; artifacts: CaptureReceipt[]; video: CaptureVideo | null;
 }
 export interface TraceOnlySummary {
   available: false; status: 'trace-only'; traceCompleteness: string;
@@ -67,8 +66,6 @@ export interface RecorderState {
 }
 export interface CaptureEvidence {
   summary: CaptureSummary; snapshots: DomSnapshot[];
-  /** The capture's loadedFiles manifest, checked per file by the source inspection. */
-  expectedSources: unknown;
   stateAt(traceUs: number): RecorderState | null;
   servedDirectory?: string | null;
 }
@@ -79,13 +76,13 @@ export async function readCapture(input: string, events: readonly TraceEvent[], 
     try {
       const file = resolve(directory, name), bytes = await readFile(file);
       const value: unknown = JSON.parse(bytes.toString());
-      receipts.push({ file, bytes: bytes.length, sha256: sha256(bytes) }); return value;
+      receipts.push({ file, bytes: bytes.length }); return value;
     } catch (e) { if (hasErrorCode(e, 'ENOENT')) return null; throw Error(`Cannot read capture ${name}: ${errorMessage(e)}`); }
   }
   const report = recordOf(await read('report.json'));
   if (!report?.loadedFiles || !Array.isArray(report.milestones)) {
     if (explicitDirectory) throw Error('Capture directory has no cssEarth capture report.json.');
-    return { summary: { available: false, status: 'trace-only', traceCompleteness: 'unknown; complete JSON is not proof of a complete recording' }, snapshots: [], expectedSources: {}, stateAt: () => null };
+    return { summary: { available: false, status: 'trace-only', traceCompleteness: 'unknown; complete JSON is not proof of a complete recording' }, snapshots: [], stateAt: () => null };
   }
   const ids = new Set(events.filter(e => e.pid === selection.rendererPid && e.name === 'cssEarth:recording:started').map(e => recordOf(detail(e))?.recordingId).filter(Boolean));
   const files = (await readdir(directory)).filter(f => /^cssearth-diagnostics-.*\.json$/.test(f));
@@ -119,7 +116,7 @@ export async function readCapture(input: string, events: readonly TraceEvent[], 
         const { type, phase, deltaY, packets, intervalMs, id, pass, wheelPackets, from, to, steps } = recordOf(value) ?? {};
         return { type, phase, deltaY, packets, intervalMs, id, pass, wheelPackets, from, to, steps };
       }) },
-    diagnosticOverrides: report.probeCss ? { cssSha256: sha256(Buffer.from(requireString(report.probeCss, 'Capture probeCss'))) } : null,
+    diagnosticOverrides: report.probeCss ? { css: requireString(report.probeCss, 'Capture probeCss') } : null,
     retained: report.retained ?? null, artifacts: receipts, video: null };
   const snapshots: DomSnapshot[] = [];
   if (matched && report.domSnapshot) for (const name of ['dom-before.json', 'dom-after.json']) {
@@ -155,12 +152,12 @@ export async function readCapture(input: string, events: readonly TraceEvent[], 
       resources: state.resources ?? null, geometry: state.geometry ?? null, worldPoints: state.worldPoints ?? null };
   };
   const served = resolve(directory, 'served');
-  return { summary, snapshots, stateAt, expectedSources: matched ? report.loadedFiles : {},
+  return { summary, snapshots, stateAt,
     servedDirectory: matched && await stat(served).then(s => s.isDirectory()).catch(() => false) ? served : null };
 }
 
 export interface ComparisonMetric { name: string; before: number | null; after: number | null; change: number | null }
-export interface CaptureComparison { trace: unknown; sha256: unknown; comparability: string; reasons: string[]; metrics: ComparisonMetric[] }
+export interface CaptureComparison { trace: unknown; comparability: string; reasons: string[]; metrics: ComparisonMetric[] }
 
 /** Either brief may come from an earlier agent-brief.json, so both are read as external JSON. */
 export function compareCaptures(before: unknown, after: unknown): CaptureComparison {
@@ -183,6 +180,6 @@ export function compareCaptures(before: unknown, after: unknown): CaptureCompari
   for (const kind of ['script', 'style', 'layout', 'paint', 'layers', 'gc']) add(`${kind} ms/s`, rate(older, kind), rate(newer, kind));
   const olderSeries = recordOf(older.averageSeries), newerSeries = recordOf(newer.averageSeries), olderInput = recordOf(older.input);
   if (olderSeries?.source !== newerSeries?.source) reasons.push('Presentation signal source differs (for example actual presentation versus DrawFrame fallback).');
-  return { trace: olderSeries?.label ?? olderInput?.name ?? 'baseline', sha256: olderInput?.sha256 ?? null,
+  return { trace: olderSeries?.label ?? olderInput?.name ?? 'baseline',
     comparability: reasons.length ? 'descriptive only' : 'same recorded protocol; not statistical proof', reasons, metrics: rows };
 }

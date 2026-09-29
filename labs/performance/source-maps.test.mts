@@ -49,8 +49,6 @@ test('performance maps resolve generated callsites without changing served JS or
     assert.equal(original.line, 1);
     assert.ok(typeof original.excerpt === 'string');
     assert.match(original.excerpt, /value \+ 17/);
-    assert.ok(typeof original.sourceContentSha256 === 'string');
-    assert.equal(original.sourceContentSha256.length, 64);
     assert.match(inspected[0]?.sourceMap?.status ?? '', /traced bytes not independently verified/);
     // The old trace must remain useful when its original source maps are absent.
     await rm(join(root, 'bundle.js.map'));

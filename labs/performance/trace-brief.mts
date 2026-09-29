@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, stat, realpath } from 'node:fs/promises';
 import { resolve, basename, dirname, relative, isAbsolute } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -61,8 +60,8 @@ const byCategory = (value: (name: WorkCategory) => WorkStat): WorkSummary => ({ 
   Layout: value('Layout'), PrePaint: value('PrePaint'), Paint: value('Paint'), Layerize: value('Layerize'), Commit: value('Commit'),
   MajorGC: value('MajorGC'), MinorGC: value('MinorGC') });
 
-/** FrameSleuth's input record. The brief adds the SHA-256 of the original trace bytes. */
-export type AnalysisInput = Record<string, unknown> & { sha256?: string };
+/** FrameSleuth's input record. */
+export type AnalysisInput = Record<string, unknown>;
 /** The FrameSleuth analysis fields the brief reads. */
 export interface BriefAnalysis {
   input: AnalysisInput; selection: TraceSelection; window: TraceWindow;
@@ -102,16 +101,14 @@ export interface BriefBase extends EvidenceInput {
   busiestTasks: BusyTask[]; lowMainWorkGaps: TimelineFrame[]; clues: { id: string; fact: string }[]; evidenceGaps: unknown[];
 }
 export type CorrelatedBrief = BriefBase & CorrelatedEvidence;
-export interface SourceMapStatus { file?: string; sha256?: string; status: string; reason?: unknown }
+export interface SourceMapStatus { file?: string; status: string; reason?: unknown }
 export interface BuildCall { functionName: unknown; line: unknown; column: unknown; original: unknown; excerpt: string | undefined }
 export interface BuildSource {
-  url: unknown; file: string; bytes?: number; sha256?: string; expected?: unknown; verification?: string;
+  url: unknown; file: string; bytes?: number;
   sourceMap?: SourceMapStatus; calls?: BuildCall[]; unavailable?: unknown;
 }
-export interface Processor {
-  module: string; sha256: string; wrapperSha256: string; loaderSha256: string; evidenceModuleSha256: string; modules: Record<string, string>;
-}
-export type BriefComparison = CaptureComparison & { reportFile: string; reportSha256: string };
+export interface Processor { module: string }
+export type BriefComparison = CaptureComparison & { reportFile: string };
 /** The complete brief written to agent-brief.json. */
 export interface TraceBrief extends CorrelatedBrief {
   capture: CaptureSummary; costs: CostDiagnosis; invalidations: InvalidationReport; processor: Processor;
@@ -226,7 +223,7 @@ export function readSourceMap(text: string): SourceMapConsumer {
   return new SourceMapConsumer(value);
 }
 
-export async function inspectBuild(brief: LocationSources & { readonly sourceUrls: readonly unknown[] }, build?: string | null, expectedSources: unknown = {}): Promise<BuildSource[]> {
+export async function inspectBuild(brief: LocationSources & { readonly sourceUrls: readonly unknown[] }, build?: string | null): Promise<BuildSource[]> {
   if (!build) return [];
   const root = await realpath(resolve(build)), output: BuildSource[] = [];
   const withinRoot = (file: string) => { const rel = relative(root, file); return !rel.startsWith('..') && !isAbsolute(rel); };
@@ -240,15 +237,12 @@ export async function inspectBuild(brief: LocationSources & { readonly sourceUrl
     try {
       if (!withinRoot(await realpath(file))) throw Error('Source symlink leaves supplied build');
       const bytes = await readFile(file), text = bytes.toString(), lines = text.split('\n');
-      const expected = recordOf(expectedSources)?.[pathname], manifest = recordOf(expected) ?? {};
-      const verification = expected ? (manifest.sha256 === sha256(bytes) && manifest.bytes === bytes.length ? 'matches capture manifest' : 'MISMATCH with capture manifest') : 'provided build; capture bytes unverified';
-      if (verification.startsWith('MISMATCH')) { output.push({ url, file, bytes: bytes.length, sha256: sha256(bytes), expected, verification }); continue; }
       let consumer: SourceMapConsumer | undefined, sourceMap: SourceMapStatus;
       try {
         if (!withinRoot(await realpath(file + '.map'))) throw Error('Source map symlink leaves supplied build');
         const mapBytes = await readFile(file + '.map');
         consumer = readSourceMap(mapBytes.toString());
-        sourceMap = { file: file + '.map', sha256: sha256(mapBytes), status: expected ? 'provided-build-map; JS matches capture manifest, map supplied separately' : 'provided-build-map; traced bytes not independently verified' };
+        sourceMap = { file: file + '.map', status: 'provided-build-map; traced bytes not independently verified' };
       } catch (error) { sourceMap = { status: 'unavailable', reason: errorCode(error) ?? errorMessage(error) }; }
       for (const c of callSites.filter(c => c.url === url)) {
         const line = c.lineNumber, column = c.columnNumber;
@@ -256,11 +250,11 @@ export async function inspectBuild(brief: LocationSources & { readonly sourceUrl
         const original = consumer.originalPositionFor({ line, column: column - 1 });
         if (!original.source) continue;
         const content = consumer.sourceContentFor(original.source, true);
-        const located: OriginalLocation = { ...original, column: original.column + 1, sourceContentSha256: content == null ? null : sha256(content),
+        const located: OriginalLocation = { ...original, column: original.column + 1,
           excerpt: content?.split('\n').slice(Math.max(0, original.line - 3), original.line + 2).join('\n') ?? null };
         c.original = located;
       }
-      output.push({ url, file, bytes: bytes.length, sha256: sha256(bytes), verification, sourceMap,
+      output.push({ url, file, bytes: bytes.length, sourceMap,
         calls: [...new Map(callSites.filter(c => c.url === url).map(c => [JSON.stringify([c.lineNumber, c.columnNumber]), c])).values()].map(c => ({
           functionName: c.functionName, line: c.lineNumber, column: c.columnNumber,
           original: c.original ?? null,
@@ -298,11 +292,11 @@ export async function main(argv: readonly string[]): Promise<{ output: string; b
   }
   if (!input) throw Error('Provide a Chrome trace .json or .json.gz. Use --help for options.');
   // Validate old series before loading a potentially multi-gigabyte new trace.
-  const baselines: { file: string; sha256: string; brief: unknown; series: ComparableSeries }[] = [];
+  const baselines: { file: string; brief: unknown; series: ComparableSeries }[] = [];
   for (const file of options.compare) {
     const bytes = await readFile(file), baseline: unknown = JSON.parse(bytes.toString());
     const series = validateSeries(recordOf(baseline)?.averageSeries);
-    baselines.push({ file, sha256: sha256(bytes), brief: baseline, series });
+    baselines.push({ file, brief: baseline, series });
   }
   const root = fileURLToPath(new URL('../../', import.meta.url));
   const sleuthPath = resolve(options.framesleuth ?? process.env.CSSEARTH_FRAMESLEUTH ?? resolve(root, '../cssGraphics/scripts/frame-sleuth.mjs'));
@@ -313,14 +307,13 @@ export async function main(argv: readonly string[]): Promise<{ output: string; b
   if (typeof analyzeTrace !== 'function' || typeof renderFrameChartSvg !== 'function')
     throw Error(`FrameSleuth at ${sleuthPath} must export analyzeTrace and renderFrameChartSvg.`);
   console.log('Reading trace and matching renderer…');
-  const loaded = await loadTrace(input), sourceHash = loaded.sha256;
+  const loaded = await loadTrace(input);
   const analysisValue: unknown = analyzeTrace(loaded, { top: 5, ...(options.url ? { url: options.url } : {}) });
   if (!isFrameAnalysis(analysisValue)) throw Error('FrameSleuth analysis lacks the selection, window or timeline the brief needs.');
   const analysis = analysisValue;
   // Trace events are external. Joins read only events whose compared fields have Chrome's JSON types.
   const events = loaded.events.filter(isTraceEvent);
   const correlated = buildBrief({ events }, analysis);
-  correlated.input.sha256 = sourceHash;
   const capture = await readCapture(input, events, analysis.selection, options.capture);
   const withCapture = Object.assign(correlated, { capture: capture.summary });
   const withCosts = Object.assign(withCapture, { costs: diagnoseCosts(events, withCapture, analysis) });
@@ -329,26 +322,19 @@ export async function main(argv: readonly string[]): Promise<{ output: string; b
   for (const frame of [...withInvalidations.costs.worstBusyFrames, ...withInvalidations.costs.longestPresentationGaps])
     frame.recorder = capture.stateAt(withInvalidations.window.startTs + frame.startMs * 1000);
   withInvalidations.sourceUrls = [...new Set(allLocations(withInvalidations).map(l => l.url).filter(Boolean))];
-  const modules: Record<string, string> = {};
-  const withProcessor = Object.assign(withInvalidations, { processor: { module: sleuthPath, sha256: sha256(await readFile(sleuthPath)), wrapperSha256: sha256(await readFile(import.meta.filename)),
-    loaderSha256: sha256(await readFile(new URL('./load-trace.mts', import.meta.url))),
-    evidenceModuleSha256: sha256(await readFile(new URL('./trace-evidence.mts', import.meta.url))), modules } });
-  for (const name of ['trace-costs', 'trace-capture', 'trace-invalidations', 'trace-chart', 'trace-report'])
-    modules[name] = sha256(await readFile(new URL(`./${name}.mts`, import.meta.url)));
-  const withSources = Object.assign(withProcessor, { buildSources: await inspectBuild(withProcessor, options.build ?? capture.servedDirectory, capture.expectedSources) });
-  for (const source of withSources.buildSources.filter(s => s.verification?.startsWith('MISMATCH')))
-    withSources.evidenceGaps.push(`Source bytes mismatch capture: ${source.url}. Source-map attribution withheld.`);
+  const withProcessor = Object.assign(withInvalidations, { processor: { module: sleuthPath } });
+  const withSources = Object.assign(withProcessor, { buildSources: await inspectBuild(withProcessor, options.build ?? capture.servedDirectory) });
   if (!withSources.buildSources.some(s => s.sourceMap?.status?.startsWith('provided-build-map'))) withSources.evidenceGaps.push('No original-source maps supplied. Generated bundle locations/excerpts are available with --build; original filenames cannot be reconstructed reliably.');
-  const output = resolve(options.out ?? resolve(root, 'output/performance/trace-briefs', basename(input).replace(/\.json(?:\.gz)?$/, '') + '-' + sourceHash.slice(0, 8)));
+  const output = resolve(options.out ?? resolve(root, 'output/performance/trace-briefs', basename(input).replace(/\.json(?:\.gz)?$/, '')));
   if (relative(output, input) === '' || (!relative(output, input).startsWith('..') && !isAbsolute(relative(output, input))))
     throw Error('Use an output directory that does not contain the input trace.');
   if (baselines.some(b => resolve(dirname(b.file)) === output)) throw Error('Output would overwrite a comparison report. Choose another --out directory.');
   const withSeries = Object.assign(withSources, { averageSeries: averageFrames(analysis.timeline.frames, { durationMs: analysis.window.durationMs,
     label: options.label ?? (capture.summary.available ? basename(capture.summary.directory) : basename(input)),
-    sha256: sourceHash, source: analysis.timeline.source,
+    source: analysis.timeline.source,
     excludedGaps: chartIdleGaps(events, analysis.timeline.frames, withSources) }) });
-  const brief: TraceBrief = Object.assign(withSeries, { comparisons: baselines.map(b => ({ ...compareCaptures(b.brief, withSeries), reportFile: b.file, reportSha256: b.sha256 })) });
-  const series = [...new Map([...baselines.map(b => b.series), brief.averageSeries].map(s => [s.sha256 ?? s.label, s])).values()];
+  const brief: TraceBrief = Object.assign(withSeries, { comparisons: baselines.map(b => ({ ...compareCaptures(b.brief, withSeries), reportFile: b.file })) });
+  const series = [...new Map([...baselines.map(b => b.series), brief.averageSeries].map(s => [s.label, s])).values()];
   const chart = renderAverageChart(series);
   const diagnosis = buildDiagnosis(brief);
   await mkdir(output, { recursive: true });

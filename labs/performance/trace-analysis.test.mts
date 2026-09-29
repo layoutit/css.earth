@@ -4,7 +4,6 @@ import assert from 'node:assert/strict';
 import { mkdtemp, writeFile, readFile, rm, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createHash } from 'node:crypto';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { createCostIndex, diagnoseCosts } from './trace-costs.mts';
 import { chartIdleGaps, averageFrames, renderAverageChart, validateSeries } from './trace-chart.mts';
@@ -50,7 +49,7 @@ test('busy frame ranking does not mistake a large low-work interval for the CPU 
   assert.match(costs.longestPresentationGaps[0]?.classification ?? '', /alone does not explain/);
 });
 
-const seriesOptions = { durationMs: 1000, label: 'test', sha256: 'abc', source: 'presentation' };
+const seriesOptions = { durationMs: 1000, label: 'test', source: 'presentation' };
 test('500ms mean uses interval end times, not averages of averages or invented zeroes', () => {
   const series = averageFrames([{ endMs: 100, intervalMs: 10 }, { endMs: 200, intervalMs: 30 }, { endMs: 1000, intervalMs: 800 }], seriesOptions);
   assert.equal(series.points.find(p => p.atMs === 200)?.meanMs, 20);
@@ -68,7 +67,7 @@ test('empty observations produce a broken line; short partial windows and final 
 });
 test('comparison draws one line per trace, escapes labels and rejects inconsistent smoothing', () => {
   const a = averageFrames([{ endMs: 100, intervalMs: 25 }], { ...seriesOptions, label: '<script>alert(1)</script>' });
-  const b = { ...a, label: 'second', sha256: 'def' };
+  const b = { ...a, label: 'second' };
   const svg = renderAverageChart([a, b]);
   assert.equal((svg.match(/data-trace=/g) ?? []).length, 2);
   assert.ok(svg.includes('&lt;script&gt;'));
@@ -181,16 +180,15 @@ test('CLI produces a useful raw-trace report without sidecars or presentation ev
     assert.equal(((await readFile(join(output, 'performance.svg'), 'utf8')).match(/data-trace=/g) ?? []).length, 1);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
-test('source attribution verifies bytes and refuses symlink escapes or wrong bundles', async () => {
+test('source attribution reads the supplied bundle and refuses symlink escapes', async () => {
   const root = await mkdtemp(join(tmpdir(), 'trace-source-'));
   try {
-    const bytes = 'const version = 1;', sha256 = createHash('sha256').update(bytes).digest('hex');
+    const bytes = 'const version = 1;';
     await writeFile(join(root, 'bundle.js'), bytes);
     const brief = { sourceUrls: ['http://localhost/bundle.js'], sampledJsSelf: [], busiestTasks: [] };
-    assert.equal((await inspectBuild(brief, root, { '/bundle.js': { bytes: bytes.length, sha256 } }))[0]?.verification, 'matches capture manifest');
-    const bad = await inspectBuild(brief, root, { '/bundle.js': { bytes: 1, sha256: 'wrong' } });
-    assert.match(bad[0]?.verification ?? '', /MISMATCH/);
-    assert.equal(bad[0]?.sourceMap, undefined);
+    const read = await inspectBuild(brief, root);
+    assert.equal(read[0]?.bytes, bytes.length);
+    assert.equal(read[0]?.sourceMap?.status, 'unavailable');
     await symlink('/etc/hosts', join(root, 'outside.js'));
     const unavailable = (await inspectBuild({ ...brief, sourceUrls: ['http://localhost/outside.js'] }, root))[0]?.unavailable;
     assert.ok(typeof unavailable === 'string');
