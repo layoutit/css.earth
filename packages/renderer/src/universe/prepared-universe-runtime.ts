@@ -27,6 +27,7 @@ import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 import { createUniverseLensBanks } from './universe-lens-banks.js';
 import { createUniverseCatalogBanks } from './universe-catalog-banks.js';
 import { createUniverseBackground } from './universe-background.js';
+import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:
@@ -149,15 +150,19 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const background = createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
           prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM, cataloguePointUrls: galaxyCataloguePoints,
           ...(galaxyBacking ? { backingUrl: galaxyBacking } : {}) });
+        // Both billboard layers sample one atlas. Keep one demand-driven decode lease
+        // for the universe lifetime, and publish again when its pixels are ready.
+        const billboardTextures = own(createVolumeTextureReadiness(() => { requestPublication?.(); }));
+        const prepareBillboardAtlas = () => lensBillboards !== undefined && billboardTextures.ready([lensBillboards.atlasUrl]);
         const lenses = createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifetime,
           declarations: volumeLensBanks, facts: lensFacts, frame: plan.frame, visibility: lensVisibility,
-          billboards: lensBillboards, load: loadVolumeLens, warmDomNodeBudget: warmVolumeLensDomNodeBudget, requestPublication });
+          billboards: lensBillboards, load: loadVolumeLens, warmDomNodeBudget: warmVolumeLensDomNodeBudget, requestPublication, prepareBillboardAtlas });
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, fetchPreparedJson));
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
         const meshes = imageMeshes.map(mesh => own(mountImageMesh({ host: root, before: end, labelHost: frontRoot, url: mesh.url, fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource })));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeLensBanks,
-          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: lensBillboards, stellarExtents });
+          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: lensBillboards, stellarExtents, prepareBillboardAtlas });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
         let overview = false;

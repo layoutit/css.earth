@@ -123,6 +123,22 @@ banks and oracle fixtures through the repository's test helpers; they import the
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `packages/bake/cli/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.
 
+## Fixed surface paint order
+
+The prepared-presentation pass resolves whole-surface visibility priorities before packing depth groups. It uses the measured CSS facing of every source face. Groups with a fixed order keep that order as the camera rotates; an inseparable visibility cycle stays together in native 3D, even when it exceeds the 64-leaf packing target. Source-edge plane splitting is reserved for inputs without a proven facing contract. This avoids introducing runtime `z-index` changes merely because a surface admits a geometric split.
+
+## Prepared texture consumers
+
+Every textured presentation resolves its image consumers from the actual scene CSS during preparation. Its tree carries `textureBindings`, including an explicit empty array when a texture cannot be published directly to leaves. Restoring an older runtime only reconstructs its transport; it does not run this compiler. Before reusing an installed runtime as compiler input, restore and verify it against its inventory with `node packages/bake/cli/setup-assets.mts --object=<id>`. A populated local cache may contain an older dataset. After changing presentation compilation, regenerate the affected runtime assets and publish their inventories.
+
+The runtime uses those bindings to keep the mesh connected, publish images directly to their leaves, and introduce each atlas on one face before activating subsequent batches. A missing binding bank falls back to inherited texture publication and connected-node batching, combining the first atlas upload with the first 64 faces. The registry activation check rejects that omission for textured deliveries.
+
+## Prepared ring backings
+
+Ring wedges and full ring planes carry the same projective leaf metadata as body surfaces. Their compiler scales each leaf box and texture address together with the inverse transform, preserving the prepared world geometry. The shared silhouette groups choose backing sizes before connection and retain them during coasting. A ring must not bypass this contract by emitting only a fixed CSS box.
+
+The Neptune and Uranus deliveries retain all 16 wedges and the same image bytes. [iPad evidence](evidence/ring-leaf-backings.json) records the resulting layer-memory reduction and the remaining timing limits.
+
 ## Evidence
 
 The volume entries replaced the lab's `volume-core` and `volume-bake` packages, moving their sources

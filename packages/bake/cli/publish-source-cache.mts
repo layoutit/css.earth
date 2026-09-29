@@ -16,7 +16,7 @@ import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { RUNTIME_ASSET_ORIGIN, sourceCacheKey } from '@cssearth/bake/objects/sources';
+import { RUNTIME_ASSET_ORIGIN, sourceCacheKey, sourceFormatProblem } from '@cssearth/bake/objects/sources';
 import { verifyPublished, reportVerification, type PublishAsset } from '@cssearth/bake/delivery';
 
 const BUCKET = 'cssearth-assets';
@@ -80,6 +80,9 @@ async function toAsset(candidate: Candidate): Promise<PublishAsset | null> {
   const file = resolve(projectRoot, candidate.path);
   const bytes = await readFile(file).catch(() => null);
   if (!bytes || !bytes.length) return null;
+  // The mirror is what a restore trusts first: a page saved under an image name must never reach it.
+  const problem = sourceFormatProblem(candidate.path, bytes);
+  if (problem) throw new Error(`${candidate.path} holds ${problem}; not publishing it to ${candidate.key}.`);
   return { key: candidate.key, file, bytes: bytes.length, sha256: sha256(bytes) };
 }
 

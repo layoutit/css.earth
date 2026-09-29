@@ -1,7 +1,7 @@
 import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from '../../delivery/index.ts';
 import { containedPath, parseSourceManifest, verifySources } from '../sources/index.ts';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.ts';
-import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../sources/index.ts';
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl, sourceFormatProblem } from '../sources/index.ts';
 import { publishSourceBytes } from '../../delivery/index.ts';
 import { readFile, lstat } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -30,7 +30,11 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
      // keeps, and otherwise say which command makes it, since the body cannot be prepared without it.
      const generated=new Map(manifest.generatedIntermediates.map(entry=>[entry.path,entry.generator] as const)),unmade:string[]=[];
      for(const path of missing.filter(path=>generated.has(path))){
-      try{await publishSourceBytes({destination:containedPath(sourceRoot,path),bytes:await fetchWithRetry(fetch,sourceCacheUrl(RUNTIME_ASSET_ORIGIN,id,path))});}
+      try{
+       const bytes=await fetchWithRetry(fetch,sourceCacheUrl(RUNTIME_ASSET_ORIGIN,id,path)),problem=sourceFormatProblem(path,bytes);
+       if(problem)throw new Error(problem);
+       await publishSourceBytes({destination:containedPath(sourceRoot,path),bytes});
+      }
       catch{unmade.push(`${path}: run node ${generated.get(path)}`);}
      }
      await restoreMissingSources({sourceRoot,manifest,plan,missing:missing.filter(path=>!generated.has(path)),mirrorOrigin:RUNTIME_ASSET_ORIGIN});

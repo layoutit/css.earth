@@ -21,7 +21,7 @@ const plan = parseLensBillboards({ schema: 'cssearth-lens-billboards@1', atlas: 
 test('a galaxy drawn from image layers shows its billboard from afar and hands it to its slices once they load', async () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ root, end: root.firstElementChild!, stage: root, lifetime, declarations: [{ id: 'galaxy', frame }],
+  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [{ id: 'galaxy', frame }],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
     loadImageLayer: async () => ({ payload: { id: 'galaxy', frame } }) as never, billboards: { plan, atlasUrl: '/atlas.webp' } });
   const billboard = root.querySelector<HTMLElement>('[data-lens-billboard="galaxy"]')!;

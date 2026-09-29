@@ -147,6 +147,14 @@ export function createLeafBoxBlocks(binding: LeafBoxBinding, read: (name: string
     return apply(nextLeafBoxWrites(needs, written, name => binding.groups[name]?.length ?? 1, budget, moving, shrinkable));
   }, { frame, clock, later });
   return {
+    /** Select the first backing sizes while the scene is detached. The authored
+     * step is a close-up default, not resident detail that must survive motion. */
+    prepare(view: LeafBoxBlocksView) {
+      needs = leafBoxBlockNeeds(binding, view, needs);
+      apply([...needs].filter(([name, need]) => written.get(name) !== need.level).map(([name]) => name));
+      const prepared = clock();
+      for (const name of needs.keys()) lastNeeded.set(name, prepared);
+    },
     publish(view: LeafBoxBlocksView) {
       needs = leafBoxBlockNeeds(binding, view, needs);
       pacer.published();

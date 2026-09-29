@@ -1,0 +1,128 @@
+{
+  "testedBase": "580096bd0e67cad6deef7847182af762535cffe2",
+  "change": "Detached first publication selects existing prepared leaf-box levels before roots connect; mounted motion freeze remains.",
+  "device": {
+    "model": "iPad15,7",
+    "system": "iPadOS 26.6",
+    "viewportCssPixels": [
+      820,
+      1048
+    ],
+    "dpr": 2
+  },
+  "route": [
+    "earth",
+    "jupiter",
+    "neptune",
+    "uranus",
+    "venus"
+  ],
+  "input": "Visible Safari, page-dispatched input; native device screenshots. Default dataset and default system/body arrivals.",
+  "normalComparisons": [
+    {
+      "variant": "before",
+      "capture": "tablet-default-view-sweep-015-planet-2026-09-29T06-36-12-134Z",
+      "flights": [
+        {
+          "label": "01 earth \u2192 jupiter",
+          "worstTaskMs": 17.419,
+          "overBudgetTasks": 2
+        },
+        {
+          "label": "02 jupiter \u2192 neptune",
+          "worstTaskMs": 78.394,
+          "overBudgetTasks": 7
+        },
+        {
+          "label": "03 neptune \u2192 uranus",
+          "worstTaskMs": 68.249,
+          "overBudgetTasks": 12
+        },
+        {
+          "label": "04 uranus \u2192 venus",
+          "worstTaskMs": 32.574,
+          "overBudgetTasks": 11
+        }
+      ]
+    },
+    {
+      "variant": "after",
+      "capture": "tablet-detached-leaf-initialization-normal-2026-09-29T06-58-19-995Z",
+      "flights": [
+        {
+          "label": "01 earth \u2192 jupiter",
+          "worstTaskMs": 14.671,
+          "overBudgetTasks": 0
+        },
+        {
+          "label": "02 jupiter \u2192 neptune",
+          "worstTaskMs": 88.712,
+          "overBudgetTasks": 8
+        },
+        {
+          "label": "03 neptune \u2192 uranus",
+          "worstTaskMs": 32.958,
+          "overBudgetTasks": 9
+        },
+        {
+          "label": "04 uranus \u2192 venus",
+          "worstTaskMs": 31.425,
+          "overBudgetTasks": 9
+        }
+      ]
+    },
+    {
+      "variant": "repeat",
+      "capture": "tablet-detached-leaf-initialization-repeat-2026-09-29T07-04-25-470Z",
+      "flights": [
+        {
+          "label": "01 earth \u2192 jupiter",
+          "worstTaskMs": 36.948,
+          "overBudgetTasks": 1
+        },
+        {
+          "label": "02 jupiter \u2192 neptune",
+          "worstTaskMs": 33.283,
+          "overBudgetTasks": 6
+        },
+        {
+          "label": "03 neptune \u2192 uranus",
+          "worstTaskMs": 43.807,
+          "overBudgetTasks": 10
+        },
+        {
+          "label": "04 uranus \u2192 venus",
+          "worstTaskMs": 41.461,
+          "overBudgetTasks": 9
+        }
+      ]
+    }
+  ],
+  "layerComparison": {
+    "before": "tablet-planet-system-compositor-causal-2026-09-29T06-41-20-375Z",
+    "after": "tablet-detached-leaf-initialization-causal-2026-09-29T07-00-59-580Z",
+    "selection": "First LayerTree sample with destination URL; sums of native S-element layer memory, not total process memory.",
+    "neptune": {
+      "leafCount": 739,
+      "beforeBytes": 66892928,
+      "afterBytes": 10151168,
+      "ringBytesUnchanged": 9523200
+    },
+    "uranus": {
+      "leafCount": 1075,
+      "beforeBytes": 57038848,
+      "afterBytes": 24433792,
+      "ringBytesUnchanged": 23803904
+    }
+  },
+  "visualEvidence": "Inspected both normal native arrival sheets and sampled native filmstrip from the 168-frame diagnostic recording. No obvious missing geometry or stuck billboard on this route.",
+  "limits": [
+    "One baseline and two after timing runs; do not treat these as a population estimate.",
+    "Normal trace uses no JS samples, native profiling, device monitors, or continuous screenshots.",
+    "Diagnostic native sampling and screens perturb timings; use only for attribution, layer metadata and visual inspection.",
+    "Both debug causes.json exports failed with Inspector socket failed; layer/style-write records and native samples were available.",
+    "After first-paint tasks remain. Neptune had an 88.712ms task in the first normal run and a 33.283ms worst flight task in the repeat.",
+    "Ring and polar-cap backings are unchanged. Native stacks use host-clock approximate alignment and are not exact per-event duration accounting.",
+    "Four unrelated local navigation retirement edits were excluded by the performance build overlay. No prepared image bytes changed."
+  ]
+}

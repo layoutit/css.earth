@@ -10,6 +10,18 @@ Its oscillations, recorded in K2 campaign 1, give 0.80 solar masses and 7.7 sola
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,973 K and log g 2.57 (u1 0.633, u2 0.144): a model, because no fit of this star's limb is used.
 
+## Surface storage
+
+The uniform color surface is stored as one lossless texel with the same RGB value
+as the full 2080×1536 atlas. Its decoded pixel storage falls from 12,779,520 bytes
+to 4 bytes. Preparation retains the original atlas coordinate domain: the scene
+geometry and complete runtime definition are unchanged. The pole coverage, limb
+plate and arrival billboard remain byte-identical.
+
+[Matched native iPad evidence](../../../packages/bake/evidence/constant-surface-raster.json)
+records identical scene crops at Pixelmatch threshold 0.1. This saves decoded image
+storage; the paired timing runs do not establish a reduction in remaining stalls.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
