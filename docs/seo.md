@@ -5,19 +5,26 @@ Open Graph/Twitter metadata in static HTML. Object descriptions come from the
 `OBJECTS` registry. `site/seo.mts` owns the production origin and the
 shared metadata format.
 
-Object routes such as `/earth/` and `/saturn/` are canonical. The homepage is
-an Earth alias and declares `/earth/` as canonical. Query parameters and shared
-camera fragments do not change metadata. The sitemap contains one canonical
-URL per registered object, and `/robots.txt` advertises it.
+Object routes such as `/earth/` and `/saturn/` are canonical. The homepage opens
+on Earth but is its own page: it has the site's title and description and
+declares `/` as canonical. Query parameters and shared camera fragments do not
+change metadata. The sitemap contains one canonical URL per registered object,
+and `/robots.txt` advertises it.
 
-Bodies without a committed capture advertise the default Earth capture, so a
-share preview never points at a missing file. `node site/build/prepare/prepare-social-images.mts --object=<id>`
-adds a body's own capture and the page then advertises it.
+Each page carries one schema.org record in JSON-LD. The homepage has a
+`WebSite` record, which lets search results show the site's name. A body page
+has a `BreadcrumbList` down its orbit chain (cssEarth › Sun › Mars › Phobos),
+built by `site/seo-trail.mts` from the prepared world context. A centre without
+a page, such as a binary's barycentre, is skipped.
 
-Social previews are plain screenshots of each actual CSS scene, with the
-application controls hidden and the scene centered. They have no added text,
-branding, or artwork. The checked-in JPEGs are served directly from
-`public/social/`; they add no requests to ordinary page loads.
+Every page has a share image of its own. The 16 committed captures in
+`public/social/` are plain screenshots of the actual CSS scene, with the
+application controls hidden. Every other scene page uses its arrival billboard:
+`site/build/share-images.mts` runs in `pnpm build:deploy` after `astro build`. It
+centres each billboard on black at 1200×630 and writes `dist/social/<id>.jpg`
+(about 3,570 cards, 48 MB). A billboard it cannot read fails the deploy. Pages
+with neither, such as catalogue focus pages, fall back to the Earth capture.
+None of these images adds requests to ordinary page loads.
 
 ## Refresh previews
 
@@ -38,7 +45,8 @@ The social-image preparer starts and closes a preview on port 4266; pass
 
 ## Check metadata and deployment
 
-`site/test/seo-discovery.test.mts` checks the reachability algorithm with synthetic
+`site/test/seo.test.mts` checks the homepage metadata, the breadcrumb trails and
+that every scene page has a share image of its own. `site/test/seo-discovery.test.mts` checks the reachability algorithm with synthetic
 page graphs. It does not crawl a running site. Inspect the built HTML and an
 already-running preview for titles, descriptions, canonical URLs, headings,
 sitemap coverage and image dimensions. The retired `seo-browser.mts` runner and

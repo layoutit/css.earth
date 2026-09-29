@@ -4,8 +4,9 @@ import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
-import { requireObject, requireSceneObject } from "../objects.mts";
-import { focusSeo, objectSeo } from "../seo.mts";
+import { OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
+import { breadcrumbJsonLd, focusSeo, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
+import { pageTrail } from "../seo-trail.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
 import "../../src/platform/cubic-sky.css";
 import "@cssearth/renderer/styles/volume.css";
@@ -31,17 +32,21 @@ interface Props {
   navigation?: boolean;
   scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor'>;
   descriptor?: ObjectDescriptor;
+  /** The site's root page: it shows `objectId` but is named and addressed as the site. */
+  home?: boolean;
 }
 
-const { objectId, pageId = objectId, navigation = false, scene, descriptor } = Astro.props;
+const { objectId, pageId = objectId, navigation = false, scene, descriptor, home = false } = Astro.props;
 const objectUi = await Astro.slots.render('object-ui');
 const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireSceneObject(objectId);
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
-const seoOptions = { socialImages: availableSocialImages(), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
+const seoOptions = { socialImages: availableSocialImages(OBJECTS), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
 const pageRecord = requireObject(pageId);
-const seo = pageRecord.kind === 'prepared-focus' ? focusSeo(pageRecord, seoOptions) : objectSeo(pageRecord, seoOptions);
+const pageSeo = pageRecord.kind === 'prepared-focus' ? focusSeo(pageRecord, seoOptions) : objectSeo(pageRecord, seoOptions);
+const seo = home ? homeSeo(pageSeo) : pageSeo;
+const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(pageTrail(pageRecord))).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -68,6 +73,7 @@ const seo = pageRecord.kind === 'prepared-focus' ? focusSeo(pageRecord, seoOptio
     <meta name="twitter:image" content={seo.image} />
     <meta name="twitter:image:alt" content={seo.imageAlt} />
     <meta name="theme-color" content="#000000" />
+    <script is:inline type="application/ld+json" set:html={structuredData}></script>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     {!navigation && <script is:inline type="application/json" data-world-camera set:html={JSON.stringify(worldCamera).replace(/</g, '\\u003c')}></script>}
     {/* Until the first body is ready, the phone sheet's lazy images wait (object-shell.css), so the globe's textures have
