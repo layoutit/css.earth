@@ -143,7 +143,7 @@ export async function verifyCompilerAlphaIdentity(expected: string,
 export async function bakeCompiler(options: BakeCompilerOptions, backend: CompilerBakeBackend): Promise<CompilerBakeResult> {
   const { root, outputDirectory, boundsArcsec, skyBoundsArcsec, signal } = options;
   if (!isAbsolute(root) || isAbsolute(outputDirectory) || !outputDirectory || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(options.id) ||
-      !/^[a-f0-9]{64}$/.test(options.fieldIdentity) || !validCompilerBounds(boundsArcsec) || !validSkyBounds(skyBoundsArcsec) ||
+      !/^[a-z0-9][a-z0-9-]{0,159}$/.test(options.fieldIdentity) || !validCompilerBounds(boundsArcsec) || !validSkyBounds(skyBoundsArcsec) ||
       typeof options.sampleEmission !== 'function' || !Array.isArray(options.lenses) || options.lenses.length < 1 || options.lenses.length > 8)
     throw new TypeError('Invalid compiler bake input.');
   const lensIds = new Set<string>();

@@ -11,7 +11,7 @@ export interface RetainedPhotometricEnvelope {
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const pair = (v: unknown): v is [number, number] => Array.isArray(v) && v.length === 2 && v.every(Number.isFinite);
 export function readPhotometricEnvelope(v: unknown): RetainedPhotometricEnvelope {
-  if (!record(v) || v.schema !== 'cssearth-photometric-envelope@1' || typeof v.priorIdentity !== 'string' || !/^[a-f0-9]{64}$/.test(v.priorIdentity) ||
+  if (!record(v) || v.schema !== 'cssearth-photometric-envelope@1' || typeof v.priorIdentity !== 'string' || !/^[a-z0-9][a-z0-9-]{0,159}$/.test(v.priorIdentity) ||
       typeof v.width !== 'number' || !Number.isInteger(v.width) || v.width < 2 || v.width > 2048 ||
       typeof v.height !== 'number' || !Number.isInteger(v.height) || v.height < 2 || v.height > 2048 || v.width * v.height > 2_000_000 ||
       !record(v.bounds) || !pair(v.bounds.min) || !pair(v.bounds.max) ||

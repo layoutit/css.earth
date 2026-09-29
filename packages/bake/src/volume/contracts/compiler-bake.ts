@@ -128,10 +128,10 @@ export function validCompilerStarSprites(value: unknown, stars: readonly Prepare
 
 /** Strict worker/browser validation; no Node, DOM, or renderer imports. */
 export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
-  if (record(value) && value.volumeId !== undefined && (typeof value.volumeId !== 'string' || !/^[a-f0-9]{64}$/.test(value.volumeId)))
+  if (record(value) && value.volumeId !== undefined && (typeof value.volumeId !== 'string' || !/^[a-z0-9][a-z0-9-]{0,159}$/.test(value.volumeId)))
     throw new TypeError('Invalid retained compiler cloud identity.');
   if (!record(value) || value.schema !== 'cssearth-compiler-bake@1' || !safeId(value.id) ||
-      typeof value.fieldIdentity !== 'string' || !/^[a-f0-9]{64}$/.test(value.fieldIdentity) ||
+      typeof value.fieldIdentity !== 'string' || !/^[a-z0-9][a-z0-9-]{0,159}$/.test(value.fieldIdentity) ||
       !bounds3(value.boundsArcsec) || !bounds2(value.skyBoundsArcsec) || !pin(value.neutral) ||
       typeof value.alphaSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.alphaSha256) ||
       !finite(value.spanArcsec) || value.spanArcsec <= 0 || !record(value.sourceImage) ||
