@@ -208,9 +208,11 @@ export function createRetainedCubicSkyOrbit({
     () => viewport.read(cameraPlan.projection.cssPerspective).bounds,
     (x, y) => stage.dataset.lod === 'geometry' && surfaceHitTest(x, y)));
   // Every prepared body draws its system node first under the scene, with the body's north pole on its +Z axis. Drags
-  // turn about that pole. A focused neighbour is not this body, so its drag keeps the screen axes.
+  // turn about that pole when the plan's drag model is "pole-held-tumble" (Earth's recipe) and the mesh is drawn; other
+  // bodies, the same body as a billboard or dot, and a focused neighbour keep the screen axes.
+  const poleHeld = cameraPlan.drag?.model === 'pole-held-tumble';
   const bodyPole = (): { pole?: Vector3 } => {
-    if (camera.focus()) return {};
+    if (!poleHeld || stage.dataset.lod !== 'geometry' || camera.focus()) return {};
     const system = sceneElement.querySelector<HTMLElement>(':scope > .polycss-mesh');
     if (!system) return {};
     const m = multiplyPreparedMatrix4(readPreparedMatrix4(camera.scene()), readPreparedTransform(system.style.transform || 'none'));
