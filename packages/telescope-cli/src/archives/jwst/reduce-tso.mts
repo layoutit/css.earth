@@ -16,7 +16,7 @@ import { findOne } from './find-product.mts';
  * 3. Runs Stage 3 (spectral extraction) on every calibrated segment, then Stage 4 twice: the white light curve and the channels.
  * 4. Exports both light curves to CSV (time, flux, err, mask, centroid_y, psf_width_y; flux and err divided by the median flux),
  *    and the author's deposited curves the same way, so compare-light-curves.mts reads plain text. A deposit is either a zip holding
- *    Eureka! light-curve files (checked by sha256) or individual files (checked by the md5 the archive lists): time, flux and error
+ *    Eureka! light-curve files or individual files, each checked by the byte count the program records: time, flux and error
  *    columns with optional decorrelation vectors, and optionally a fitted map, exported as author-map.json. The star's median extracted counts
  *    per detector column (ours-stellar-counts.csv) are the band response an eclipse map's temperature conversion needs.
  *
@@ -24,8 +24,7 @@ import { findOne } from './find-product.mts';
 import { spawnSync } from 'node:child_process';
 import { access, lstat, mkdir, readdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
-import { createHash } from 'node:crypto';
-import { createReadStream, rmSync } from 'node:fs';
+import { rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -52,7 +51,7 @@ export interface TsoProgram {
   readonly oracle?: EurekaZipOracle | DepositFilesOracle;
 }
 export interface EurekaZipOracle { readonly kind: 'eureka-light-curve-zip'; readonly url: string; readonly path: string; readonly bytes: number; readonly lightCurve: string }
-export interface DepositFile { readonly path: string; readonly url: string; readonly bytes: number; readonly md5: string }
+export interface DepositFile { readonly path: string; readonly url: string; readonly bytes: number }
 export interface DepositFilesOracle {
   readonly kind: 'deposit-files'; readonly files: readonly DepositFile[];
   /** Deposit paths of the light curve's columns, one value per line (decorrelation vectors: whitespace-separated columns). */
@@ -92,9 +91,9 @@ function parseOracle(oracle: Record<string, unknown>): TsoProgram['oracle'] {
   if (oracle.kind === 'eureka-light-curve-zip') return { kind: 'eureka-light-curve-zip', url: requireString(oracle.url), path: requireString(oracle.path), bytes: requireFiniteNumber(oracle.bytes), lightCurve: requireString(oracle.lightCurve) };
   if (oracle.kind !== 'deposit-files') throw new TypeError(`Unknown oracle kind ${String(oracle.kind)}.`);
   const files = requireArray(oracle.files).map(value => {
-    const file = requireRecord(value, 'deposit file'), md5 = requireString(file.md5);
-    if (!/^[0-9a-f]{32}$/u.test(md5)) throw new TypeError(`${String(file.path)}: md5 is not 32 hex digits.`);
-    return { path: requireString(file.path), url: requireString(file.url), bytes: requireFiniteNumber(file.bytes), md5 };
+    const file = requireRecord(value, 'deposit file'), path = requireString(file.path, 'deposit file path');
+    if (file.md5 !== undefined) throw new TypeError(`Deposit file ${path} has an md5 field (${String(file.md5)}); deposit files are pinned by URL and size only.`);
+    return { path, url: requireString(file.url, `${path} url`), bytes: requireFiniteNumber(file.bytes, `${path} bytes`) };
   });
   const listed = (key: 'time' | 'flux' | 'err' | 'dvectors' | 'map') => {
     if (oracle[key] === undefined) return undefined;
@@ -136,10 +135,6 @@ async function waitForMemory() {
 
 const segmentFile = (segment: Segment, raw: string, rawSources: readonly string[]) => mastFile(segment, raw, rawSources);
 
-const md5File = (path: string) => new Promise<string>((done, fail) => {
-  const hash = createHash('md5');
-  createReadStream(path).on('data', chunk => hash.update(chunk)).on('error', fail).on('end', () => done(hash.digest('hex')));
-});
 
 const TEXT_EXPORTER = `
 import json, sys, numpy as np
@@ -350,9 +345,9 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   } else {
     for (const file of oracle.files) {
       const path = resolve(oracleDirectory, file.path);
-      if (await exists(path) && await md5File(path) === file.md5) continue;
+      if (await exists(path) && (await stat(path)).size === file.bytes) continue;
       const fetched = spawnSync('curl', ['-s', '-L', '-o', path, file.url], { stdio: 'inherit' });
-      if (fetched.status !== 0 || await md5File(path) !== file.md5) throw new Error(`${file.path} does not match its listed md5.`);
+      if (fetched.status !== 0 || (await stat(path)).size !== file.bytes) throw new Error(`${file.path} (${file.url}) is not its recorded ${file.bytes} bytes.`);
     }
     const at = (name?: string) => (name ? resolve(oracleDirectory, name) : '');
     await python(toolchain, curves, TEXT_EXPORTER, [at(oracle.time), at(oracle.flux), at(oracle.err), at(oracle.dvectors), at(oracle.map)], resolve(work, 'export-author.log'));

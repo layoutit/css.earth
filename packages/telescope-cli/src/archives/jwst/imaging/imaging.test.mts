@@ -153,10 +153,9 @@ test('the diffraction spikes of a bright star are masked, and a nearby filament 
 });
 
 const LOCK = 'astropy==6.1.0\njwst==2.0.1\nstcal==1.20.0\nstpipe==1.1.0\nunpinned-thing\n';
-const digested = (name: string, hash: string) => ({ ...member(name), sha256: hash });
 const pinnedProgram = (overrides: Record<string, unknown> = {}) => parseImagingProgram(program({
-  bands: [{ ...program().bands[0], members: [digested('jw02733001001_02103_00001_nrcblong_cal.fits', 'a'.repeat(64))] }], ...overrides }));
-const toolchain = { toolchainDigest: 'b'.repeat(64), software: pipelineSoftware(LOCK) };
+  bands: [{ ...program().bands[0], members: [member('jw02733001001_02103_00001_nrcblong_cal.fits')] }], ...overrides }));
+const toolchain = { software: pipelineSoftware(LOCK) };
 const imageRun = (pinned: ImagingProgram, parameters: Record<string, unknown> = {}, band: ImagingBand = pinned.bands[0]!) =>
   imagingProductRun(pinned, band, 'image3', { image3: pinned.image3 ?? {}, grid: null, ...parameters }, toolchain);
 
@@ -170,15 +169,14 @@ test('an image3 run is identified by the exposures it was given, its settings an
   assert.deepEqual(run.parameters.image3, { tweakreg: { abs_refcat: 'GAIADR3' } });
   // The lock pins the environment eurekaToolchain refuses to run without, so these are the versions a run had.
   assert.deepEqual(run.software, [{ name: 'jwst', version: '2.0.1' }, { name: 'stcal', version: '1.20.0' }, { name: 'stpipe', version: '1.1.0' }]);
-  assert.equal(run.toolchainDigest, 'b'.repeat(64));
   // Another CRDS context, another grid, another exposure or another pipeline pin is another run, so the mosaic is made again.
   const base = runKey(run);
   assert.notEqual(runKey(imageRun(pinnedProgram({ crdsContext: 'jwst_1400.pmap', image3: { tweakreg: { abs_refcat: 'GAIADR3' } } }))), base);
   assert.notEqual(runKey(imageRun(pinned, { grid: gridResample({ width: 1024, height: 1024, fovDeg: 0.025, centerIcrsDegrees: [151.75735, -40.4364056] as [number, number] }) })), base);
   assert.notEqual(runKey(imagingProductRun(pinned, pinned.bands[0]!, 'image3', { image3: pinned.image3 ?? {}, grid: null },
-    { ...toolchain, toolchainDigest: 'c'.repeat(64) })), base);
-  // A member with no digest is not a pin, and a lock that pins no pipeline is not a version.
-  assert.throws(() => imageRun(parseImagingProgram(program())), /no digest/u);
+    { software: pipelineSoftware('jwst==2.0.2\n') })), base);
+  // A member carrying a digest is refused, and a lock that pins no pipeline is not a version.
+  assert.throws(() => parseImagingProgram(program({ bands: [{ ...program().bands[0], members: [{ ...member('jw02733001001_02103_00001_nrcblong_cal.fits'), sha256: 'a'.repeat(64) }] }] })), /has a sha256 field/u);
   assert.throws(() => pipelineSoftware('astropy==6.1.0\n'), /no jwst pipeline version/u);
 });
 
@@ -222,13 +220,13 @@ test('an integral-field observation is a cube band, built by spec3 from _cal exp
 test('a coronagraph run pins the PSF references it subtracted with, and is not the same run as an image3 mosaic', () => {
   const pinned = pinnedProgram({ bands: [{ ...program().bands[0], band: 'NIRCAM-F444W-MASK335R', observation: 'jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r', stage: 'coron3',
     level3: member('jw01386-c1020_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits'), association: member('jw01386-c1020_20260721t201156_coron3_00001_asn.json'),
-    members: [digested('jw01386001001_0310a_00001_nrcalong_calints.fits', 'a'.repeat(64))],
-    references: [digested('jw01386002001_0310a_00001_nrcalong_calints.fits', 'e'.repeat(64))] }] });
+    members: [member('jw01386001001_0310a_00001_nrcalong_calints.fits')],
+    references: [member('jw01386002001_0310a_00001_nrcalong_calints.fits')] }] });
   const band = pinned.bands[0]!, run = imagingProductRun(pinned, band, 'coron3', { psfReferences: 1 }, toolchain);
   assert.equal(run.stage, 'coron3');
   assert.deepEqual(run.inputs.map(input => input.role), ['level-2 exposure', 'level-2 PSF reference']);
   // Another reference star is another subtraction, so the mosaic beside an older record is not reused.
-  const other = pinnedProgram({ bands: [{ ...band, references: [digested('jw01386002001_0310a_00002_nrcalong_calints.fits', 'f'.repeat(64))] }] });
+  const other = pinnedProgram({ bands: [{ ...band, references: [member('jw01386002001_0310a_00002_nrcalong_calints.fits')] }] });
   assert.notEqual(runKey(imagingProductRun(other, other.bands[0]!, 'coron3', { psfReferences: 1 }, toolchain)), runKey(run));
   assert.notEqual(runKey(imagingProductRun(pinned, band, 'image3', { psfReferences: 1 }, toolchain)), runKey(run));
 });

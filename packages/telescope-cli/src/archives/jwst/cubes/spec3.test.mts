@@ -11,15 +11,15 @@ import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { compareSamples, cubeComparisonScope, archivePlaneOffset, requestedSpectralGrid } from './spec3.mts';
 import type { SpectralCube } from '@cssearth/bake/objects/layers/observation';
 
-const file = (name: string, sha256: string) => ({ name, uri: `mast:JWST/product/${name}`, bytes: 4096, sha256 });
+const file = (name: string) => ({ name, uri: `mast:JWST/product/${name}`, bytes: 4096 });
 const program = parseImagingProgram({
   schema: 'cssearth-jwst-imaging-program@1', id: 'europa-1250', programme: '1250', target: 'EUROPA', crdsContext: 'jwst_1535.pmap',
   bands: [{ band: 'NIRSPEC-G395H-F290LP', observation: 'jw01250-o002_t001_nirspec_g395h-f290lp', stage: 'spec3',
-    level3: file('jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits', 'c'.repeat(64)),
-    association: file('jw01250-o002_20260720t083746_spec3_00001_asn.json', 'd'.repeat(64)),
-    members: [file('jw01250002001_03105_00001_nrs1_cal.fits', 'a'.repeat(64)), file('jw01250002001_03105_00001_nrs2_cal.fits', 'b'.repeat(64))] }],
+    level3: file('jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits'),
+    association: file('jw01250-o002_20260720t083746_spec3_00001_asn.json'),
+    members: [file('jw01250002001_03105_00001_nrs1_cal.fits'), file('jw01250002001_03105_00001_nrs2_cal.fits')] }],
 });
-const toolchain = { toolchainDigest: 'e'.repeat(64), software: pipelineSoftware('jwst==2.0.1\nstcal==1.20.0\n') };
+const toolchain = { software: pipelineSoftware('jwst==2.0.1\nstcal==1.20.0\n') };
 const cubeRun = (parameters: Record<string, unknown> = {}) =>
   imagingProductRun(program, program.bands[0]!, 'spec3', { extract1d: 'skipped', ...parameters }, toolchain);
 
@@ -45,7 +45,6 @@ test('a spec3 run pins both detectors of every dither, and a finer sky grid is a
   assert.equal(run.parameters.crdsContext, 'jwst_1535.pmap');
   assert.equal(run.parameters.observation, 'jw01250-o002_t001_nirspec_g395h-f290lp');
   assert.deepEqual(run.software, [{ name: 'jwst', version: '2.0.1' }, { name: 'stcal', version: '1.20.0' }]);
-  assert.equal(run.toolchainDigest, 'e'.repeat(64));
   // A cube drizzled onto a finer grid than the pipeline's 0.1 arcsecond is a different product, so it is built rather than reused.
   assert.notEqual(runKey(cubeRun({ arcsecPerPixel: 0.05 })), runKey(run));
 });
@@ -75,7 +74,7 @@ test('archive agreement requires an explicit numerical acceptance policy and exa
   for (const changed of [{ maximumNormalizedDifference: 1 }, { onlyMast: 1 }, { both: 0 }, { maximumNormalizedDifference: NaN }])
     assert.equal(sampleAgreement({ ...samples, ...changed }).accepted, false);
   const { parseReproductionReceipt } = await import('../archive-ledger.mts');
-  const receipt = { schema: 'cssearth-jwst-spec3-reproduction@3', program: 'test', band: 'NIRSPEC-G395H-F290LP', observation: 'obs', mast: { name: 'archive.fits', bytes: 100, sha256: 'a'.repeat(64) }, local: { name: 'local.fits', bytes: 100, sha256: 'b'.repeat(64) }, samples, acceptance: sampleAgreement(samples) };
+  const receipt = { schema: 'cssearth-jwst-spec3-reproduction@3', program: 'test', band: 'NIRSPEC-G395H-F290LP', observation: 'obs', mast: { name: 'archive.fits', bytes: 100 }, local: { name: 'local.fits', bytes: 100 }, samples, acceptance: sampleAgreement(samples) };
   assert.equal(parseReproductionReceipt(receipt, 'test').accepted, true);
   assert.equal(parseReproductionReceipt({ ...receipt, acceptance: { ...receipt.acceptance, policy: 'jwst-cube-samples@1' } }, 'old-zero-policy').accepted, false);
   assert.equal(parseReproductionReceipt({ ...receipt, samples: { ...samples, maximumNormalizedDifference: 1000, correlation: -1, identicalShare: 0 } }, 'test').accepted, false);
