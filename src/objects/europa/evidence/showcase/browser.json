@@ -18,7 +18,7 @@
       "skipped": 0,
       "files": 354,
       "bytes": 72243602,
-      "checks": "Every downloaded byte count and SHA-256 matches its body inventory. Empty destination, no source files or bake tools used.",
+      "checks": "Every downloaded byte count matches its body inventory. Empty destination, no source files or bake tools used.",
       "bodies": [
         "mars",
         "jupiter",

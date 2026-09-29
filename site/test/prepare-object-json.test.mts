@@ -1,6 +1,5 @@
 import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();

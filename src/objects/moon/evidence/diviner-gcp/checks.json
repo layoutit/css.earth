@@ -22,7 +22,7 @@
   },
   "methods": {
     "oracle": "Three strips (40S-30S with its exchanged label bounds, 0-10N, 80-90N) re-read with a plain comma split; the maximum and the noon rule (mean of the bins centred 11.62, 11.88, 12.12 and 12.38 h, that is 11:30-12:30, that hold data) rebuilt per cell and compared with the samplers at every cell centre, to float32 precision.",
-    "reproducibility": "Two runs of the converter wrote byte-identical grids (the SHA-256 in grids).",
+    "reproducibility": "Two runs of the converter wrote byte-identical grids.",
     "statistics": "Area-weighted coverage, share outside 220-400 K and the |latitude| < 5 degree percentiles, from gcp-stats.mts."
   },
   "results": {

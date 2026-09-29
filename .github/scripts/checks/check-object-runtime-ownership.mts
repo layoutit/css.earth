@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { isArray, isRecord, requireRecord, requireArray, requireString } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
 import { createRequire, isBuiltin } from "node:module";
@@ -698,12 +697,12 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   const verify = verifyDefinition ?? (async (object: AuditObject, input: unknown) => {
     requireObjectRuntimeDefinition(input, { objectId: object.id });
   });
-  const sources = new Map<string, string>(), sourceHashes = new Map<string, string>();
+  const sources = new Map<string, string>(), sourcePaths = new Set<string>();
   async function source(path: string): Promise<string> {
     if (!sources.has(path)) {
       const text = await readText(path);
       sources.set(path, text);
-      sourceHashes.set(path, sha256(text));
+      sourcePaths.add(path);
     }
     return sources.get(path)!;
   }
@@ -861,7 +860,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
 
   const report = { schema: "cssearth-runtime-ownership@1", complete: entries.every(e => e.migrated) && !sharedViolations.length,
     entries, sharedClosure: [...sharedClosure].map(path => relative(root, path)).sort(), sharedViolations, cameraFactorySites,
-    sourceHashes: Object.fromEntries([...sourceHashes].sort(([a], [b]) => a.localeCompare(b)).map(([path, sha256]) => [relative(root, path), sha256])),
+    sources: [...sourcePaths].map(path => relative(root, path)).sort(),
     nativeOwnership: { status: "UNPROVEN", reason: "Static closure does not observe native cameras, writes, scheduling, or resource lifetime." } };
   if (strict && !report.complete) {
     const failures = [...entries.flatMap(entry => entry.violations), ...sharedViolations];

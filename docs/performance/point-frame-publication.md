@@ -129,7 +129,7 @@ check, not proof of complete animation parity.
 
 Long captures exceeded V8's single-string limit. The offline loader now streams
 gzip and JSON through [stream-json's Assembler](https://github.com/uhop/stream-json/wiki/Assembler),
-preserves every event, checks the compressed SHA-256 and decoded byte count, and
+preserves every event, checks the decoded byte count, and
 rejects malformed or truncated input. Final navigation has 6,468,479 events and
 1,235,888,339 decoded bytes; complete processing took 38.928 seconds. This tool
 does not enter the application bundle. The largest final main task, 232.55 ms,

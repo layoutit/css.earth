@@ -114,8 +114,7 @@ No atmosphere shell is supplied: New Horizons found no detectable atmosphere.
 
 The additional Enhanced color lens uses the PDS product
 [nh_charon_color_mosaic::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx),
-retained as the original 116,006,912-byte four-band float32 array. SHA-256:
-`dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a`.
+retained as the original 116,006,912-byte four-band float32 array.
 The bands are CH4 895 nm, NIR 870 nm, red 625 nm and blue 475 nm;
 Display RGB assigns the derived NIR/red/blue values to linear channels over one
 common 0–0.6 range, then applies the [shared IEC sRGB output

@@ -17,7 +17,7 @@ Adopted diameter: **1.68 ± 0.09 km**, meaning thermophysical effective diameter
 
 ## Evidence
 
-Checked 2026-09-21 by [`tools/objects/source-authoring/damit-asteroids/author.mts`](https://github.com/layoutit/css.earth/blob/f4d47f1661/tools/objects/source-authoring/damit-asteroids/author.mts) from the pinned [inputs](https://github.com/layoutit/css.earth/blob/f4d47f1661/tools/objects/source-authoring/damit-asteroids/inputs.json) (pinned at commit `f4d47f1661`; now `packages/bake/authoring/damit-asteroids/`). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic 2. The shape, spin, JPL records and every derived record are pinned by bytes and SHA-256 in the [input manifest](source/manifest.json).
+Checked 2026-09-21 by [`tools/objects/source-authoring/damit-asteroids/author.mts`](https://github.com/layoutit/css.earth/blob/f4d47f1661/tools/objects/source-authoring/damit-asteroids/author.mts) from the pinned [inputs](https://github.com/layoutit/css.earth/blob/f4d47f1661/tools/objects/source-authoring/damit-asteroids/inputs.json) (pinned at commit `f4d47f1661`; now `packages/bake/authoring/damit-asteroids/`). The tool measures the unchanged mesh: positive signed volume, every edge used once in each direction, and Euler characteristic 2. The shape, spin, JPL records and every derived record are recorded by path and byte count in the [input manifest](source/manifest.json).
 
 ## Known problems
 

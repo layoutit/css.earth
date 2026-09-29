@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import sharp from 'sharp';
@@ -18,7 +17,6 @@ const receiptSchema = object({ lenses: array(object({ id: string, textures: arra
 const root = new URL('../../src/objects/lmc/', import.meta.url);
 const bytes = (file: string) => readFile(new URL(file, root));
 const json = async (file: string): Promise<unknown> => JSON.parse((await bytes(file)).toString('utf8'));
-const hash = (value: string | Uint8Array) => createHash('sha256').update(value).digest('hex');
 
 test('the LMC bank regenerates from its compact finite-emission inputs exactly as the promotion baked it', async () => {
   const descriptor = parseObjectDescriptor(await json('object.json'));
@@ -57,8 +55,8 @@ test('the LMC bank regenerates from its compact finite-emission inputs exactly a
   assert.ok(densityBounds);
   assert.deepEqual(frame, densityFrame);
   assert.deepEqual(boundsUnits, inputs.geometry.physicalBoundsKpc);
-  let geometry: unknown, stars: unknown, alphas: string[] | undefined;
-  const materials: string[] = [];
+  let geometry: unknown, stars: unknown, alphas: Buffer[] | undefined;
+  const materials: Buffer[][] = [];
   for (const lens of bank.lenses) {
     const selected = recipe.lenses.find(row => row.imageId === lens.id);
     assert.ok(selected);
@@ -75,19 +73,21 @@ test('the LMC bank regenerates from its compact finite-emission inputs exactly a
     const nextGeometry = lens.volume.stacks.map(stack => ({ ...stack, leaves: stack.leaves.map(({ texturePath, style, ...leaf }) => leaf) }));
     assert.equal(nextGeometry.reduce((n, stack) => n + stack.leaves.length, 0), 242);
     assert.equal(lens.volume.resources.length, 3, 'A lens loads three axis atlases.');
-    const nextAlphas: string[] = [], colors: string[] = [];
+    const nextAlphas: Buffer[] = [], colors: Buffer[] = [];
     for (const resource of lens.volume.resources) {
       const image = await sharp(await bytes(`prepared/${resource.path}`)).ensureAlpha().raw().toBuffer();
       const alpha = Buffer.alloc(image.length / 4);
       for (let index = 0; index < alpha.length; index++) alpha[index] = image[index * 4 + 3];
-      nextAlphas.push(hash(alpha)); colors.push(hash(image));
+      nextAlphas.push(alpha); colors.push(image);
     }
     if (geometry) {
       assert.deepEqual(nextGeometry, geometry, 'Image choice must not change the emission geometry');
-      assert.deepEqual(nextAlphas, alphas, 'Image choice must not change the shared opacity');
+      assert.ok(nextAlphas.length === alphas?.length && nextAlphas.every((alpha, index) => alpha.equals(alphas![index]!)), 'Image choice must not change the shared opacity');
       assert.deepEqual(lens.stars, stars, 'Image choice must not move or recolor catalogue stars');
     } else { geometry = nextGeometry; alphas = nextAlphas; stars = lens.stars; }
-    materials.push(hash(JSON.stringify(colors)));
+    materials.push(colors);
   }
-  assert.equal(new Set(materials).size, 3, 'Each lens must use its own image material');
+  const same = (left: Buffer[], right: Buffer[]) => left.length === right.length && left.every((image, index) => image.equals(right[index]!));
+  assert.ok(materials.length === 3 && materials.every((colors, index) => materials.every((other, at) => at === index || !same(colors, other))),
+    'Each lens must use its own image material');
 });

@@ -110,7 +110,7 @@ own specific galaxy identifiers; shared preparation contains no object-id dispat
 
 Source data is checked in; papers and archive documents are cited by URL. The retained pypdf 5.9.0 extraction receipt fetches the original PDF and checks the text transcription against it. The catalogue tests regenerate the declared outputs and compare them byte-for-byte. Common installation and preparation are documented in the [shared contributor guide](../README.md).
 
-`provenance.json` records original download URLs, SHA-256 digests and sizes.
+`provenance.json` records original download URLs and sizes.
 Redownloading is optional; replacing any checked source requires deliberate pin
 updates and a new preparation receipt. The tests reject corrupted source bytes,
 duplicate consumed YAML fields, coordinate-frame changes, radius-based membership,

@@ -1,10 +1,9 @@
-import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { appendFileSync, existsSync, lstatSync, readFileSync, readlinkSync, realpathSync } from 'node:fs';
 import { basename, dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const CACHE_FORMAT = 'cssearth-ci-inputs@1';
+const CACHE_FORMAT = 'cssearth-ci-inputs@2';
 const BUILD_ENVIRONMENT = ['ASSET_ORIGIN', 'CSSEARTH_PERFORMANCE_SOURCEMAPS', 'NODE_ENV'] as const;
 
 export interface CacheRuntime {
@@ -60,18 +59,35 @@ function relativeInside(root: string, file: string): string {
   return path.split(sep).join('/');
 }
 
-/** Hash all tracked current bytes, including unstaged edits and explicit deletion markers. This deliberately
- * over-invalidates on documentation/data changes instead of guessing a transitive build-input allowlist. The
- * lockfile and source recipes pin ignored downloads; ignored node_modules/dist/prepared outputs never enter
- * the digest. Cache consumers must use an exact key and install the frozen lockfile before using its outputs. */
+const GIT_BUFFER = 256 * 1024 * 1024;
+
+/** Git's object id for the current bytes at each path. Git reads the working tree, so unstaged edits count. */
+export function gitBlobIds(root: string, paths: readonly string[]): string[] {
+  if (!paths.length) return [];
+  for (const path of paths) if (path.includes('\n')) throw new TypeError(`Cache input paths cannot contain a newline: ${JSON.stringify(path)}`);
+  const output = execFileSync('git', ['hash-object', '--no-filters', '--stdin-paths'], { cwd: root, input: `${paths.join('\n')}\n`, encoding: 'utf8', maxBuffer: GIT_BUFFER });
+  const ids = output.split('\n').filter(Boolean);
+  if (ids.length !== paths.length) throw new TypeError(`git hash-object returned ${ids.length} ids for ${paths.length} cache inputs.`);
+  return ids;
+}
+
+/** A cache key is Git's object id for the listing of its inputs. */
+function gitKey(root: string, listing: string): string {
+  return execFileSync('git', ['hash-object', '--stdin'], { cwd: root, input: listing, encoding: 'utf8', maxBuffer: GIT_BUFFER }).trim();
+}
+
+/** Key every tracked path by Git's object id for its current bytes, including unstaged edits and explicit deletion
+ * markers. This deliberately over-invalidates on documentation/data changes instead of guessing a transitive
+ * build-input allowlist. The lockfile and source records name ignored downloads; ignored node_modules/dist/prepared
+ * outputs never enter the key. Cache consumers must use an exact key and install the frozen lockfile before using its outputs. */
 export function ciCacheKeys({ root = resolve(import.meta.dirname, '../../..'), runtime = {
   node: process.versions.node, platform: process.platform, arch: process.arch, environment: process.env,
 } }: { root?: string; runtime?: CacheRuntime } = {}) {
   root = realpathSync(root);
   const entries = trackedCacheEntries(root), paths = new Set(entries.map(entry => entry.path));
   const identity = JSON.stringify([CACHE_FORMAT, toolchain(root, runtime)]);
-  const build = createHash('sha256').update(identity), typecheck = createHash('sha256').update(identity);
   let bytes = 0, missing = 0, configFiles = 0;
+  const states: (readonly unknown[])[] = [], files: { index: number; path: string; executable: boolean }[] = [];
   for (const entry of entries) {
     const file = resolve(root, entry.path);
     let state: readonly unknown[];
@@ -91,27 +107,34 @@ export function ciCacheKeys({ root = resolve(import.meta.dirname, '../../..'), r
         state = ['symlink', target, destination === undefined ? 'missing-target' : destination];
         bytes += Buffer.byteLength(target);
       } else if (info.isFile()) {
-        const content = readFileSync(file);
-        bytes += content.length;
-        state = ['file', info.mode & 0o111 ? 'executable' : 'regular', content.length, createHash('sha256').update(content).digest('hex')];
+        bytes += info.size;
+        files.push({ index: states.length, path: entry.path, executable: Boolean(info.mode & 0o111) });
+        state = [];
       } else throw new TypeError(`Tracked cache input is not a file: ${entry.path}`);
     } catch (error) {
       if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error;
       state = ['deleted'];
       missing++;
     }
-    const encoded = JSON.stringify([entry.path, entry.mode, state]) + '\n';
-    build.update(encoded);
-    if (isTypecheckCacheInput(entry.path)) { typecheck.update(encoded); configFiles++; }
+    states.push(state);
   }
+  gitBlobIds(root, files.map(file => file.path)).forEach((id, position) => {
+    const file = files[position]!;
+    states[file.index] = ['file', file.executable ? 'executable' : 'regular', id];
+  });
+  let build = `${identity}\n`, typecheck = `${identity}\n`;
+  entries.forEach((entry, index) => {
+    const encoded = JSON.stringify([entry.path, entry.mode, states[index]]) + '\n';
+    build += encoded;
+    if (isTypecheckCacheInput(entry.path)) { typecheck += encoded; configFiles++; }
+  });
   if (!configFiles) throw new TypeError('Cannot create a compiler cache key without tracked configuration inputs.');
-  return { buildDigest: build.digest('hex'), tsconfigDigest: typecheck.digest('hex'), files: entries.length, bytes, missing, configFiles };
+  return { buildDigest: gitKey(root, build), tsconfigDigest: gitKey(root, typecheck), files: entries.length, bytes, missing, configFiles };
 }
 
-// The package digest hashes every tracked file under packages/. The two non-tsup builds read only
+// The package key covers every tracked file under packages/. The two non-tsup builds read only
 // package-local files (astronomy's body-records reads packages/astronomy/data; telescope-cli bundles its command),
-// so a change to their scripts or data changes the digest without a separate hash list to keep current.
-const fileHash = (path: string) => createHash('sha256').update(readFileSync(path)).digest('hex');
+// so a change to their scripts or data changes the key without a separate input list to keep current.
 const BUILD_CONFIG_FIELDS = new Set(['entry', 'outDir', 'tsconfig', 'format', 'external', 'dts', 'sourcemap', 'clean', 'target', 'splitting']);
 
 /** Requires the frozen install, but never scans installed directories. Compiler APIs resolve actual imports;
@@ -166,7 +189,7 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
       // Current configs are plain tsup options plus node:path/node:url. Custom loaders/plugins or imported
       // configuration modules need their own read contract; do not guess their hidden filesystem inputs.
       if (imports.some(name => !['tsup', 'node:path', 'node:url'].includes(name))) throw new TypeError(`Unsupported build configuration imports: ${configPath}`);
-      const loaded: unknown = await import(`${pathToFileURL(configPath).href}?ci-input=${fileHash(configPath)}`);
+      const loaded: unknown = await import(`${pathToFileURL(configPath).href}?ci-input=${gitBlobIds(root, [relative(root, configPath)])[0]}`);
       if (!isRecord(loaded) || !isRecord(loaded.default)) throw new TypeError(`Expected plain tsup options: ${configPath}`);
       config = loaded.default;
       if (Object.keys(config).some(key => !BUILD_CONFIG_FIELDS.has(key))) throw new TypeError(`Unsupported build configuration options: ${configPath}`);
@@ -215,15 +238,18 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
       } }] });
     for (const path of Object.keys(result.metafile!.inputs)) input(resolve(root, path), selected);
   };
-  const narrowHash = (selected: ReadonlySet<string>, options: readonly string[], upstream = '') => {
-    const digest = createHash('sha256').update(identity).update(upstream).update(JSON.stringify(options));
-    for (const path of [...selected].sort()) {
+  const narrowKey = (selected: ReadonlySet<string>, options: readonly string[], upstream = '') => {
+    const sorted = [...selected].sort(), files: string[] = [];
+    const states = sorted.map((path): readonly unknown[] => {
       const absolute = resolve(root, path), info = lstatSync(absolute);
       // Package documentation symlinks point to tracked owners already covered by broad package/config inputs.
-      const bytes = info.isSymbolicLink() ? Buffer.from(readlinkSync(absolute)) : readFileSync(absolute);
-      digest.update(JSON.stringify([path, info.mode & 0o111, bytes.length, createHash('sha256').update(bytes).digest('hex')]) + '\n');
-    }
-    return digest.digest('hex');
+      if (info.isSymbolicLink()) return ['symlink', readlinkSync(absolute)];
+      files.push(path);
+      return ['file', info.mode & 0o111];
+    });
+    const ids = new Map(gitBlobIds(root, files).map((id, index) => [files[index]!, id]));
+    const lines = sorted.map((path, index) => JSON.stringify([path, ...states[index]!, ids.get(path) ?? null]) + '\n');
+    return gitKey(root, `${identity}\n${upstream}\n${JSON.stringify(options)}\n${lines.join('')}`);
   };
   const packageOptions: string[] = [];
   let packageDigest = full.buildDigest;
@@ -234,7 +260,7 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
       const config = pkg.directory === 'packages/telescope-cli' ? null : resolve(root, pkg.directory, 'tsup.config.ts');
       await closure(pkg.directory, config, packageInputs, packageOptions);
     }
-    packageDigest = narrowHash(packageInputs, packageOptions);
+    packageDigest = narrowKey(packageInputs, packageOptions);
   } catch (error) { fallbackReasons.push(`packages: ${error instanceof Error ? error.message : String(error)}`); }
   return { ...full, packageDigest, packageInputFiles: packageInputs.size, fallbackReasons };
 }

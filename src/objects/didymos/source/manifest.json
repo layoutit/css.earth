@@ -95,7 +95,7 @@
       "licenseEvidence": [
         "features/manifest.json"
       ],
-      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (2 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different SHA-256, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
+      "acquisition": "Downloaded the Gazetteer center-point shapefile archive for Didymos on 2026-09-12 from the USGS Astrogeology download bucket; the archive holds .shp/.shx/.dbf/.cpg members; it ships no projection file and no FGDC record. Re-downloaded on 2026-09-18: the Gazetteer had regenerated the archive (2 named-feature records in the refreshed .dbf, same byte count as the 2026-09-12 pin, different bytes, consistent with USGS's weekly rebuild) and the 2026-09-12 snapshot's exact bytes were not recoverable from git history, this repository's other checkouts, or the R2 mirror; re-pinned to the current upstream bytes.",
       "redistribution": "Committed public-domain snapshot with credit; the Gazetteer regenerates this file weekly, so the pinned bytes identify the exact snapshot and are expected to need a refresh again.",
       "consumers": [
         "features"
@@ -115,7 +115,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401929957_21942_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -143,7 +143,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401929957_21942_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -169,7 +169,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401929893_44487_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -197,7 +197,7 @@
       "productId": "urn:nasa:pds:dart:data_dracoddp:dart_0401929893_44487_01_geo::1.0",
       "credit": "NASA/Johns Hopkins APL/DART; Ernst, Daly, Barnouin, Espiritu and Waller (2023)",
       "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
-      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte and SHA-256 verification is mandatory.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json; byte-count verification is mandatory.",
       "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
       "consumers": [
         "draco-observation"
@@ -755,7 +755,7 @@
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"

@@ -173,7 +173,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
       const path = sourcePath(output.path.slice(resolve(root).length + 1));
       if (resolve(root, path) !== output.path) throw new TypeError('Volume output escapes its package.');
       if (path.startsWith(`${volume.base}/prepared/`) || path === `${volume.base}/inventory.json`) closure.add(path);
-      else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-f0-9]{64}\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
+      else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-z0-9][a-z0-9-]*\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
     }
   }
   metadata.push(...await spatialSourceCitations(root, sources, input));

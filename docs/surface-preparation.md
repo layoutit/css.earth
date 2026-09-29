@@ -255,9 +255,9 @@ finite floats: `BLANK` applies only to integer arrays; floating gaps are `NaN`.
 This is a tested product subset, not arbitrary FITS support. Compressed images,
 random groups, int64 image decoding, variable-length/general tables, complex
 values, non-ESO/generalized `HIERARCH` names, `CONTINUE` and general WCS interpretation are unsupported.
-FITS `CHECKSUM`/`DATASUM` are retained metadata, not verified checksums. The current
-source manifest does not supply a SHA-256 integrity check. Oracle fixtures can
-check recorded byte counts; exact-byte evidence needs its own retained identity.
+FITS `CHECKSUM`/`DATASUM` are retained metadata, not verified checksums. Git holds
+the tracked bytes and the R2 source mirror holds the downloads; oracle fixtures can
+check recorded byte counts against those copies.
 
 ### FITS checks
 
@@ -581,7 +581,7 @@ These still set their own encoding:
 - Decorative images take quality 40
   ([`DECORATIVE_WEBP`](../packages/bake/src/raster/lossy-lane.ts)): the sidebar
   dataset maps (`prepared/minimaps/`) and the volume dataset previews
-  (`datasets/<sha>.webp`, 600 px). Measured on 2026-09-25 over all 1,327 maps
+  (`datasets/<lens id>.webp`, 600 px). Measured on 2026-09-25 over all 1,327 maps
   against the quality 90 maps they replaced: 15.8 MB became 4.8 MB with 0.074 %
   of pixels flagged; quality 30 flagged 0.119 %. A nearest-sampled category map
   keeps lossless when that is smaller, as it is for 11 noisy geology and region

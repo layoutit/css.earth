@@ -1,4 +1,3 @@
-import { createHash } from "node:crypto";
 import assert from "node:assert/strict";
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, symlink, unlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -147,8 +146,7 @@ test("reproduces the checked-in body images and utility markers", async (context
       bytes = await readFile(path);
       context.diagnostic(`${filename}: checked terminal Q75 publication bytes`);
     }
-    const sha=(buffer: Uint8Array)=>createHash('sha256').update(buffer).digest('hex');
-    assert.ok(bytes.equals(accepted), `${filename}: generated ${bytes.length} bytes ${sha(bytes)}; accepted ${accepted.length} bytes ${sha(accepted)}`);
+    assert.ok(bytes.equals(accepted), `${filename}: generated ${bytes.length} bytes; accepted ${accepted.length} bytes`);
   }
   for (const filename of transparentMarkerFiles) {
     const { data, info } = await sharp(resolve(root, filename))

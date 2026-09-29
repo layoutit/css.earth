@@ -255,7 +255,7 @@
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"
@@ -900,9 +900,9 @@
     },
     {
       "path": "observations/nh-charon-color-download.json",
-      "purpose": "Actual full binary download HTTP headers and SHA256 receipt.",
+      "purpose": "Actual full binary download HTTP headers and byte-count receipt.",
       "credit": "cssEarth",
-      "acquisition": "Recorded by the project when the colour mosaic was downloaded: the HTTP response headers and the SHA-256 of the received bytes."
+      "acquisition": "Recorded by the project when the colour mosaic was downloaded: the HTTP response headers and the byte count of the received bytes."
     },
     {
       "path": "validation/color-source-inspection.json",

@@ -10,7 +10,7 @@
 
 ## Evidence
 
-- The archived label, native-frame identity and OPUS metadata are retained under [source/survey/](source/survey/). The inspected FITS source is excluded from the runtime and is reproducible by its URL and SHA-256 in `native-inspection.json`.
+- The archived label, native-frame identity and OPUS metadata are retained under [source/survey/](source/survey/). The inspected FITS source is excluded from the runtime and is reproducible by its URL in `native-inspection.json`.
 
 ## Known problems
 

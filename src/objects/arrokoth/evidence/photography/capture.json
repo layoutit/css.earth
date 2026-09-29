@@ -109,7 +109,7 @@
     "installed": 41,
     "reused": 0,
     "bytes": 10452758,
-    "method": "Public content-addressed URLs installed through the standard setup implementation into an empty directory; every downloaded file checked against its expected bytes and SHA-256."
+    "method": "Public content-addressed URLs installed through the standard setup implementation into an empty directory; every downloaded file checked against its expected bytes."
   },
   "limits": "Visual and dataset qualification only. The README records broader conformance and source-suite failures; these captures do not claim full-site readiness."
 }

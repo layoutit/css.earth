@@ -1,5 +1,4 @@
 import { LEAF_BOX_FACTOR, LEAF_BOX_UNSCALE, applyPreparedProjectiveLayout } from "@cssearth/bake/presentation";
-import { sha256 } from '@cssearth/core/node';
 import {requireRecord,requireString,shape,array,text,number,boolean,dictionary,optional} from '@cssearth/core';
 const parseProperty=shape({name:text,value:text,custom:boolean});
 const parseNode=shape({parent:number,tag:text,style:(value:unknown)=>value,attributes:optional(dictionary(text)),properties:array(number)});
@@ -7,7 +6,7 @@ const parseTree=shape({nodes:array(parseNode),properties:array(parseProperty)});
 type TreeNode=ReturnType<typeof parseNode>;
 interface StyleRecord {width:string;height:string;backgroundSize:string;backgroundPosition:string;transformStyle:string;transform:string;getPropertyValue(name:string):string;}
 interface LayoutFailure {file?:string;path?:string;error?:string;line?:number;reason?:string;}
-interface LayoutReport {id:string;count:number;completedByDescriptor:number;failures:LayoutFailure[];modules:string[];sourceSha256:string|null;}
+interface LayoutReport {id:string;count:number;completedByDescriptor:number;failures:LayoutFailure[];modules:string[];}
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -100,13 +99,12 @@ export async function censusPreparedLeafLayouts({
   const reports:LayoutReport[] = [];
   for (const object of closure.entries) {
     const file = object.presentation?.file ?? object.closure.find(file => file.endsWith("/runtime/preparedPresentation.mjs"));
-    const report:LayoutReport = { id: object.id, count: 0, completedByDescriptor: 0, failures: [...object.violations], modules: file ? [file] : [], sourceSha256: null };
+    const report:LayoutReport = { id: object.id, count: 0, completedByDescriptor: 0, failures: [...object.violations], modules: file ? [file] : [] };
     if (!file) {
       report.failures.push({ error: "Reachable normalized presentation data is missing." });
       reports.push(report); continue;
     }
     const source = await readText(resolve(root, file));
-    report.sourceSha256 = sha256(source);
     let tree:ReturnType<typeof parseTree>;
     try { const plan=object.presentation?.format === 'json' ? requireRecord(JSON.parse(source)).data : readPreparedPresentationModule(source);tree=parseTree(requireRecord(plan).tree); }
     catch (error) { report.failures.push({ file, error: error instanceof Error ? error.message : String(error) }); reports.push(report); continue; }

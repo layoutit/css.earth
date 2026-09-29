@@ -27,7 +27,7 @@ It does not encompass shape/thermal-model/H systematic uncertainty.
 
 The piazzia validation record contains source, scale, atlas, installation and browser results for its recorded files and revision.
 
-Checked 2026-09-08. Original shape, IAUspin, model metadata, citations, sizing inputs and format documentation are pinned by exact bytes and SHA-256 in the [input manifest](source/manifest.json). Derived source notes retain the physical sizing assumption and pole alternatives.
+Checked 2026-09-08. Original shape, IAUspin, model metadata, citations, sizing inputs and format documentation are recorded by path and byte count in the [input manifest](source/manifest.json). Derived source notes retain the physical sizing assumption and pole alternatives.
 
 ## Known problems
 

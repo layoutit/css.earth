@@ -2,7 +2,6 @@ import { requireRecord } from "@cssearth/core";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { preparedObjectCapabilities } from '@cssearth/renderer';
 const createPreparedDestinations = preparedObjectCapabilities.createDestinations!;
 type PreparedDestinationOptions = Parameters<typeof createPreparedDestinations>[0];
@@ -13,8 +12,7 @@ function fixture(options: Partial<PreparedDestinationOptions> = {}, catalog: unk
   const bytes = JSON.stringify(catalog);
   const lifetime = createSceneLifetime();
   const calls: (string | DestinationCamera)[] = [];
-  const plan = { catalog: { url: "/scenes/example/places.json", bytes: Buffer.byteLength(bytes), count: 1,
-    sha256: createHash("sha256").update(bytes).digest("hex") }, defaultLens: "normal",
+  const plan = { catalog: { url: "/scenes/example/places.json", bytes: Buffer.byteLength(bytes), count: 1 }, defaultLens: "normal",
     statuses: { detail: "Detail", overview: "Overview" } };
   const destinations = createPreparedDestinations({ plan, lifetime, ready: Promise.resolve(),
     navigate: camera => { calls.push(camera); return Promise.resolve({ completed: true }); }, reset: () => Promise.resolve({ completed: true }), ...options });

@@ -64,7 +64,7 @@ The SBIB regional RGB candidate uses a different reference ellipsoid/shape conve
 
 ## Reproduction and qualification
 
-`source/manifest.json` and `source/preparation/acquisition.json` retain original URLs, lengths and SHA256s. Source-owned numeric recipes produce surfaces, atlases, minimaps and a regenerated radial navigation context ahead of runtime. Native data fixtures check all four cube arrays, the literal missing sentinel and low/zero-count geographic samples. Separate NumPy ray intersections test the six cardinal directions of the exact official OBJ.
+`source/manifest.json` and `source/preparation/acquisition.json` retain original URLs, lengthss. Source-owned numeric recipes produce surfaces, atlases, minimaps and a regenerated radial navigation context ahead of runtime. Native data fixtures check all four cube arrays, the literal missing sentinel and low/zero-count geographic samples. Separate NumPy ray intersections test the six cardinal directions of the exact official OBJ.
 
 </details>
 

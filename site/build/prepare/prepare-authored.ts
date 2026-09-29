@@ -1,6 +1,5 @@
 import '@cssearth/bake/thread-pool';
 import { execFileSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { access, cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -232,7 +231,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         // so their declared SVG outputs may change; all other published images must remain byte-identical.
         // Public JSON catalogues (places, features) are derived from the scene and may be regenerated here.
         // The staged inventory holds the run's public entries; the object's also holds its prepared entries.
-        const published = async (path: string) => (JSON.parse(await readFile(path, 'utf8')) as { assets: { location: string; filename: string; bytes?: number; sha256?: string }[] }).assets
+        const published = async (path: string) => (JSON.parse(await readFile(path, 'utf8')) as { assets: { location: string; filename: string }[] }).assets
           .filter(asset => asset.location === 'public' && !asset.filename.endsWith('.json'));
         const stagedImages = await published(resolve(stagedData, 'inventory.json'));
         const existingImages = await published(resolve(objectDirectory, 'inventory.json'));
@@ -446,40 +445,58 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     await writePreparedObject(descriptor.id, runtime as unknown as Record<string, unknown>);
   }
   const result = Object.freeze({ descriptor, sources, raster, celestial, scene, definition: runtime });
-  await writeFile(resolve(outputDirectory, 'authored-preparation.json'), `${JSON.stringify({ schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, ...(features ? { features: true } : {}) } })}\n`);
+  await writeFile(resolve(outputDirectory, 'authored-preparation.json'), `${JSON.stringify({ schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => ({ id: entry.reference.id, path: entry.reference.path })), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, ...(features ? { features: true } : {}) } })}\n`);
   return result;
 }
 
 /** The recipe keys a redraw run recomputes: the lighting and atmosphere banks, per lane recipe. */
 const REDRAWN_KEYS: Readonly<Record<string, readonly string[]>> = { raster: ['lighting', 'atmosphere'], 'paged-ellipsoid': ['material', 'limb', 'atmosphere'] };
 
+/** A recipe's bytes as the object's last published preparation read them: git's copy at the last commit of its
+ * `inventory.json`, which a publication commits. Null when git holds no such version. */
+export type PublishedRecipeReader = (file: string) => Promise<Buffer | null>;
+export function recipesAtPublication(objectDirectory: string, root = process.cwd()): PublishedRecipeReader {
+  const git = (...args: string[]) => execFileSync('git', args, { cwd: root, encoding: 'buffer', maxBuffer: 64 * 1024 * 1024 });
+  const inventory = relative(root, resolve(objectDirectory, 'inventory.json'));
+  let publication: string | undefined;
+  return async file => {
+    publication ??= git('log', '-n', '1', '--format=%H', '--', inventory).toString().trim();
+    if (!publication) return null;
+    try { return git('show', `${publication}:${relative(root, file)}`); } catch { return null; }
+  };
+}
+
 /**
  * Whether a --write run can redraw only the lighting and atmosphere banks and carry every other published image: the lane
  * has that path, the object is published, and since its published preparation no recipe changed except in the keys those
- * banks read. The published record keeps each recipe's SHA-256; the recipe it names is looked up in git history.
+ * banks read. The published record names each recipe by id and path; its published bytes come from git (`recipesAtPublication`).
  */
-export async function redrawOnlyDecision(objectDirectory: string): Promise<{ redraw: true; acceptChanged: string[]; reason: string } | { redraw: false; reason: string }> {
+export async function redrawOnlyDecision(objectDirectory: string, publishedRecipe: PublishedRecipeReader = recipesAtPublication(objectDirectory)):
+  Promise<{ redraw: true; acceptChanged: string[]; reason: string } | { redraw: false; reason: string }> {
   const { entries, sources } = await readAuthoredSources(objectDirectory);
   const geometrySchema = String((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema);
   const rasterLane = (source(sources, 'raster')?.value as Record<string, unknown> | undefined)?.schema === 'cssearth-raster-recipe@1' &&
     !['terrestrial', 'shape-model', 'observations', 'rings'].some(sourceId => source(sources, sourceId)) &&
     !['cssearth-layered-oblate-preparation@1', 'cssearth-banded-ellipsoid@1'].includes(geometrySchema);
   if (!source(sources, 'paged-ellipsoid') && !rasterLane) return { redraw: false, reason: 'its lane has no redraw-only path' };
-  const published = await readFile(resolve(objectDirectory, 'prepared/authored-preparation.json'), 'utf8').then(text => JSON.parse(text) as { sources?: { id: string; path: string; sha256: string }[] }, () => null);
-  if (!published?.sources || !await access(resolve(objectDirectory, 'inventory.json')).then(() => true, () => false)) return { redraw: false, reason: 'nothing is published to carry' };
-  const before = new Map(published.sources.map(entry => [entry.id, entry])), acceptChanged: string[] = [];
-  const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
+  const recordPath = resolve(objectDirectory, 'prepared/authored-preparation.json');
+  const published: unknown = await readFile(recordPath, 'utf8').then(text => JSON.parse(text) as unknown, () => null);
+  const listed = published !== null && typeof published === 'object' && 'sources' in published ? published.sources : undefined;
+  if (!Array.isArray(listed) || !await access(resolve(objectDirectory, 'inventory.json')).then(() => true, () => false)) return { redraw: false, reason: 'nothing is published to carry' };
+  const before = new Map(listed.map((entry: unknown, index) => {
+    const value = record(entry, `${recordPath} sources[${index}]`);
+    if (typeof value.id !== 'string' || typeof value.path !== 'string') throw new TypeError(`${recordPath}: sources[${index}] needs a string id and path; got ${JSON.stringify(entry)}.`);
+    return [value.id, { id: value.id, path: value.path }] as const;
+  })), acceptChanged: string[] = [];
   const without = (value: unknown, keys: readonly string[]) => JSON.stringify(Object.fromEntries(Object.entries(record(value, 'recipe')).filter(([key]) => !keys.includes(key))));
   for (const id of new Set([...before.keys(), ...entries.map(entry => entry.reference.id)])) {
     const was = before.get(id), now = entries.find(entry => entry.reference.id === id);
-    if (was && now && was.path === now.reference.path && was.sha256 === now.reference.sha256) continue;
+    if (!was || !now || was.path !== now.reference.path) return { redraw: false, reason: `recipe source ${id} changed` };
+    const path = relative(process.cwd(), now.path), bytes = await publishedRecipe(now.path);
+    if (!bytes) return { redraw: false, reason: `git holds no published version of ${path}` };
+    if (bytes.equals(await readFile(now.path))) continue;
     const keys = REDRAWN_KEYS[id];
-    if (!was || !now || !keys || was.path !== now.reference.path) return { redraw: false, reason: `recipe source ${id} changed` };
-    // The published bytes are the version of this file whose SHA-256 the record kept.
-    const path = relative(process.cwd(), now.path), git = (...args: string[]) => execFileSync('git', args, { encoding: 'buffer', maxBuffer: 64 * 1024 * 1024 });
-    const commits = git('log', '--format=%H', '-n', '200', '--', path).toString().split('\n').filter(Boolean);
-    const bytes = commits.map(commit => { try { return git('show', `${commit}:${path}`); } catch { return null; } }).find(candidate => candidate !== null && hash(candidate) === was.sha256);
-    if (!bytes) return { redraw: false, reason: `the published version of ${path} is not in the last 200 commits` };
+    if (!keys) return { redraw: false, reason: `recipe source ${id} changed` };
     if (without(JSON.parse(bytes.toString('utf8')), keys) !== without(now.value, keys)) return { redraw: false, reason: `${path} changed outside ${keys.join(', ')}` };
     acceptChanged.push(id);
   }

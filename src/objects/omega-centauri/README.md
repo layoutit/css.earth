@@ -28,7 +28,7 @@ experiment remain in the [physical evidence](source/bake-inputs/references/04-ph
 
 ## Current 500-element bake
 
-The selected result is `59ae6e1a336d5a7b0d946197decfbbc093beb39f0181fac2ef88300314c08b8e`.
+The selected result is `omega-centauri-compiler`.
 Its [delivery recipe](source/delivery.json) records the failed visual qualification;
 `acceptedLabResult` identifies this candidate, not an acceptance certificate.
 
@@ -42,8 +42,7 @@ Its [delivery recipe](source/delivery.json) records the failed visual qualificat
   envelope, registration and optical materials are unchanged. Zero separate
   stellar points were present before or after; no stellar light was silently
   dropped or counted twice. The source-owned [compact input](source/bake-inputs.json.gz)
-  is 2,229,420 bytes, SHA-256
-  `c9f2535b13f4b4745179ec53b63240df1207ef7f38a4ea34dff76cba50a74d68`.
+  is 2,229,420 bytes.
 - **Replay:** the ordinary application command ran without the Lab, caches or
   network in 232.93 seconds. It reproduced all 447 expected raw PNGs and 59
   delivery texture/bank files exactly. The current final receipt admits 493
@@ -83,14 +82,12 @@ cover total accounting and rejection before package replacement.
 
 ## Earlier integration evidence
 
-- The earlier selected result was `7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549`.
+- The earlier selected result was the first adaptive quota bake.
   Its [delivery recipe](source/delivery.json) explicitly records
   `app-integration-candidate` and failed visual handoff. The legacy field
   `acceptedLabResult` identifies this selected source; it is not an acceptance
   certificate.
-- The earlier 2,277,027-byte compact input, SHA-256
-  `869e9ab24b644c4ea7d04cf2d4e2c719445c205b879eaebf13a420c7d7d75eac`,
-  retains the emission field, component materials and adaptive sampling.
+- The earlier 2,277,027-byte compact input retains the emission field, component materials and adaptive sampling.
   [Cold application replay](evidence/2026-09-20/cold-replay.json) reproduced all
   1,377 expected raw resource identities across neutral and two optical banks,
   then matched all 60 prepared delivery files in 218.60 seconds. It started

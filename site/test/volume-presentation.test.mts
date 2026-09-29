@@ -6,11 +6,10 @@ import type { ProvenanceDocument } from '@cssearth/objects/provenance';
 
 const ids = ['optical', 'infrared'];
 const bank = { id: 'nebula', defaultLens: 'optical', lenses: ids.map(id => ({ id })) };
-const digest = 'a'.repeat(64);
 const provenance: Pick<ProvenanceDocument, 'objectId' | 'sources' | 'products'> = {
   objectId: 'nebula',
   sources: ids.map(id => ({ id, lensId: id, path: `source/${id}.jpg`, origin: 'https://example.test/image',
-    sourceUrl: 'https://example.test/source', credit: 'Observatory', acquisition: 'Download', sha256: digest,
+    sourceUrl: 'https://example.test/source', credit: 'Observatory', acquisition: 'Download',
     bytes: 1, dependencies: [], verification: 'manifest-pin' })),
   products: ids.map(id => ({ id, lensIds: [id], label: id, process: 'Mapped observation', recipe: 'mapping',
     selector: '', recipeDependencies: ['mapping'], inputs: [id], parents: [], outputs: [] })),

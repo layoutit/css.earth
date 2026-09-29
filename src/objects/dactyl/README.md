@@ -34,7 +34,7 @@ The [native Galileo frame review](evidence/galileo/review.json), prepared on
 2026-09-14, preserves three
 800 × 800, 8-bit SSI images, their original PDS labels, the bad-pixel records,
 and two mission kernels. [Input identities](evidence/galileo/inputs.json) bind
-every original to its download URL, byte count and SHA-256. This is source
+every original to its download URL and byte count. This is source
 inspection, not a rendered surface or a successful registration test.
 
 ![Galileo i2278 detector crop, uncalibrated monochrome DN multiplied by two and enlarged five times](evidence/galileo/i2278-crop.png)
@@ -92,7 +92,7 @@ The [production navigation check](../dinkinesh/evidence/galileo-lucy/production-
 
 The [retained report](evidence/registration/report.json) records a diagnostic
 run on 2026-09-14, with the
-new diagnostic and its dependencies identified by SHA-256. It does not prepare
+new diagnostic and its dependencies identified by path. It does not prepare
 a photographic lens. [Pinned inputs](evidence/registration/inputs.json) include
 the original mission VICAR image, its label, the mission clock and leap-second
 kernels, and the SSI instrument definition already retained beside Ida.
@@ -204,7 +204,7 @@ displayed scene is unchanged.
 ## Published pole and range
 
 [Source measurements and PDF identity](evidence/registration/published-controls.json)
-bind the complete 12-page publisher PDF to its SHA-256. All pages were read;
+bind the complete 12-page publisher PDF by URL and byte count. All pages were read;
 Tables I–III and the shape, gridded photograph and cylindrical map in Figures
 3, 9 and 10 were examined. The earlier access-blocked ledger entry is reopened.
 The PDF and its figures remain local references; the retained diagnostic uses

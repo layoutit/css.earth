@@ -35,6 +35,7 @@
   "description": "Integrated cluster starlight on finite 3D emission components conditioned by a published oblate Gaussian profile. Inclination, near/far tilt and individual feature depths are model assumptions. Both optical lenses share geometry; no duplicate resolved-star layer is added. Colors are relative display emission, not calibrated luminosity or a measured stellar mass map.",
   "defaultLens": "eso1119b",
   "framingRadiusUnits": 1650,
+  "acceptedLabResult": "omega-centauri-compiler",
   "compactMethod": "compiler",
   "compactInputs": {
     "path": "src/objects/omega-centauri/source/bake-inputs.json.gz"

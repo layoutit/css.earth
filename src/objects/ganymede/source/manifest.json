@@ -161,7 +161,7 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 653643152 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 653643152 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-surfaces"
@@ -187,7 +187,7 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-surfaces"
@@ -213,7 +213,7 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2202359649 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2202359649 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-surfaces"
@@ -558,7 +558,7 @@
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
-      "acquisition": "Recorded the download origin, byte count and SHA-256 of the pinned archive beside its qualification.",
+      "acquisition": "Recorded the download origin and byte count of the pinned archive beside its qualification.",
       "redistribution": "Repository-authored metadata; no imagery",
       "consumers": [
         "features"
@@ -954,13 +954,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3914016364 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3914016364 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.dbf",
-      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3914016364 and SHA-256 verified."
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3914016364 verified."
     },
     {
       "id": "usgs-sim3237-geologyunitpoints-prj",
@@ -971,13 +971,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.prj",
-      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 and SHA-256 verified."
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 verified."
     },
     {
       "id": "usgs-sim3237-geologyunitpoints-shp",
@@ -988,13 +988,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1444943279 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1444943279 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp",
-      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1444943279 and SHA-256 verified."
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1444943279 verified."
     },
     {
       "id": "usgs-sim3237-geologyunitpoints-shp-xml",
@@ -1005,13 +1005,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1883658601 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1883658601 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp.xml",
-      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1883658601 and SHA-256 verified."
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1883658601 verified."
     },
     {
       "id": "usgs-sim3237-geologyunitpoints-shx",
@@ -1022,13 +1022,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 903487539 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 903487539 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shx",
-      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 903487539 and SHA-256 verified."
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 903487539 verified."
     },
     {
       "id": "usgs-sim3237-geologyunits-shp-xml",
@@ -1039,13 +1039,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2559734367 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2559734367 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp.xml",
-      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2559734367 and SHA-256 verified."
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2559734367 verified."
     },
     {
       "id": "usgs-sim3237-geologyunits-shx",
@@ -1056,13 +1056,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2179727759 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2179727759 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shx",
-      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2179727759 and SHA-256 verified."
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2179727759 verified."
     },
     {
       "id": "usgs-sim3237-sim3237-ganymede-metadata-txt",
@@ -1073,13 +1073,13 @@
       "licenseEvidence": [
         "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
       ],
-      "acquisition": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3086016464 and SHA-256 verified.",
+      "acquisition": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3086016464 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "consumers": [
         "geology-validation"
       ],
       "archiveMember": "Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt",
-      "purpose": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3086016464 and SHA-256 verified."
+      "purpose": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3086016464 verified."
     },
     {
       "id": "sim3237-archive-index-json",

@@ -40,7 +40,7 @@ body and shared world resources still need their prepared assets. See the
 [nebula guide](docs/nebulae/README.md#reproduce-from-a-clean-checkout) for restoration.
 Restart the server after installing a package: its available banks stay fixed for
 the session. Production builds require every configured volume package and
-reject missing files, invalid metadata and mismatched asset hashes.
+reject missing files, invalid metadata and assets their inventories do not publish.
 
 Re-preparing a body from its sources needs more: run
 `node packages/bake/cli/restore-source-inputs.mts --object=<id>` to restore missing
@@ -87,7 +87,7 @@ A maintainer then runs the **Publish prepared assets** workflow against your
 pull request (Actions → Publish prepared assets → Run workflow, with the pull
 request number, the object id and its kind, using the main branch). It rebakes
 your branch and checks the inventory. Before uploading, trusted tooling compares
-the inventories with the frozen pull request commit and verifies every file hash.
+the inventories with the frozen pull request commit and verifies every file against its inventory entry.
 Nothing needs to be pushed to your branch, and no maintainer has to reproduce
 your setup locally.
 
@@ -116,9 +116,8 @@ origin URL when a file is missing. `node packages/bake/cli/publish-source-cache.
 --object=<id>` publishes that object's available downloads; restore them first
 with `node packages/bake/cli/restore-source-inputs.mts --object=<id>`. To publish one
 file, use `--file=<path> --key=<object id>/<manifest path>`. The publisher verifies
-the upload; this is not a manifest digest check during acquisition. Earlier
-hash-addressed source-cache keys may remain in R2, but current restorers use the
-path keys and fall back to the source archive.
+the upload by reading it back; acquisition itself checks no recorded digest.
+Current restorers use the path keys and fall back to the source archive.
 
 A restorer writes a file only when its bytes match its extension (JPEG, PNG, WebP,
 TIFF, FITS or gzip), and never writes an HTML page, even one served with HTTP 200:
@@ -280,7 +279,7 @@ environment limitation, not a passing integration result.
 ## Commits
 
 Write every commit as one [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) line, for example
-`refactor(core): move sha256 into core`. Leave out a body, trailers and any attribution such as `Co-Authored-By`.
+`refactor(core): move isRecord into core`. Leave out a body, trailers and any attribution such as `Co-Authored-By`.
 Split a change into small steps so each line explains one step. Git's own merge, revert and `--fixup` messages are
 accepted as Git writes them.
 

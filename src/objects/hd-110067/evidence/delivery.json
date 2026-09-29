@@ -44,7 +44,7 @@
     "reused": 0,
     "skipped": 0
   },
-  "method": "Fresh empty destination; shared installRuntimeAssets with concurrency 4 verifies every byte count and SHA-256 before publication to disk. No reused or skipped files.",
+  "method": "Fresh empty destination; shared installRuntimeAssets with concurrency 4 verifies every byte count before publication to disk. No reused or skipped files.",
   "browser": {
     "routes": [
       {

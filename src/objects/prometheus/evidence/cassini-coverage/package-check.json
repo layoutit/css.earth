@@ -286,7 +286,7 @@
     {
       "file": "src/objects/prometheus/object.json",
       "line": 1,
-      "reason": "Prepared JSON transport SHA-256 does not match its descriptor."
+      "reason": "Prepared JSON transport does not match its descriptor."
     }
   ],
   "sourceTests": {

@@ -54,4 +54,4 @@ Until this promotion the SMC was an `image-layer-bank`: one SMASH image spread t
 
 </details>
 
-Application provenance reads the object-owned evidence and recipe copies recorded in [provenance references](source/provenance-references.json). Their original revisions and SHA-256 pins are preserved; nested research paths describe historical inputs and are not application file reads.
+Application provenance reads the object-owned evidence and recipe copies recorded in [provenance references](source/provenance-references.json). Their original revisions are preserved; nested research paths describe historical inputs and are not application file reads.

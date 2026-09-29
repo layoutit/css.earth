@@ -75,7 +75,7 @@ The [Ernst et al. (2023) SPC shape](https://doi.org/10.1186/s40623-023-01814-7) 
 
 Physical size, orbit and IAU rotation use the vendored astronomy package at the shared scene epoch. Shape and cartographic products have different source histories; their registration must be inspected at Stickney and the opposite hemisphere. A display mesh cannot remove the source mosaic's residual control errors.
 
-Inputs, original URLs, byte lengths and SHA-256 pins are recorded in `source/manifest.json`. The [Stooke map guide](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html) (Stooke Small Bodies Maps V3.0, MULTI-SA-MULTI-6-STOOKEMAPS-V3.0) states that the maps are in the public domain but should not be used without proper credit; the SBMT label accompanies the mesh. Prepared surface, lighting, minimap and navigation imagery must be generated from this same interpretation. Shared controls, camera and shell remain generic.
+Inputs, original URLs and byte lengths are recorded in `source/manifest.json`. The [Stooke map guide](https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html) (Stooke Small Bodies Maps V3.0, MULTI-SA-MULTI-6-STOOKEMAPS-V3.0) states that the maps are in the public domain but should not be used without proper credit; the SBMT label accompanies the mesh. Prepared surface, lighting, minimap and navigation imagery must be generated from this same interpretation. Shared controls, camera and shell remain generic.
 
 ## B2 facet science and terrain
 

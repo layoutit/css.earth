@@ -7,7 +7,7 @@
   },
   "bytes": 32151471,
   "checks": [
-    "Every file fetched from R2 into an empty destination and verified by the standard installer against inventory bytes and SHA-256",
+    "Every file fetched from R2 into an empty destination and verified by the standard installer against inventory bytes",
     "Verified downloaded files copied into this worktree for the final browser capture"
   ]
 }

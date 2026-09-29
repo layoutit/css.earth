@@ -4,7 +4,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 ## Sources
 
-Bacchus is a small near-Earth asteroid with a prominent central indentation in its radar-derived shape. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj) is attributed to Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts and SHA-256 hashes.
+Bacchus is a small near-Earth asteroid with a prominent central indentation in its radar-derived shape. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj) is attributed to Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts.
 
 Shape uses the shared missing-imagery grid. It shows modeled geometry under prepared lighting, without optical reflectance, generic regolith, invented craters or composition.
 

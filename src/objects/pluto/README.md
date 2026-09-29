@@ -172,7 +172,7 @@ epoch-specific ephemeris or a pixel-identical OpenSpace recreation.
 
 **Pinned inputs**
 
-Exact byte counts, SHA-256 hashes, download URLs, credits, and consumers are in
+Exact byte counts, download URLs, credits, and consumers are in
 `source/manifest.json`. Preparation fails on changed or undeclared input bytes.
 The provider pages and labels are checked in alongside the data.
 

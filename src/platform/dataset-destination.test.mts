@@ -15,20 +15,19 @@ const sources = sourceResolver(parseSourceCatalog({ schema: 'cssearth-source-cat
   evidence: [{ url: 'https://example.org/image', checkedOn: '2026-09-13', locator: 'Image credit' }],
 }] }));
 const catalog = parseExplorationCatalog({ schema: 'cssearth-facility-catalog@4', missions: [], facilities: [] }, parseAgencies({}), sources);
-const pin = 'a'.repeat(64);
 const provenance = (objectId: string): ProvenanceDocument => ({
   schema: 'cssearth-object-provenance@3', objectId, basis: 'recovered',
   manifest: { path: 'source/manifest.json' },
   generator: { path: 'tools/prepare/prepare-volume-provenance.mts' },
   sources: [{ id: 'image', kind: 'source-input', path: 'observed.fits', origin: 'https://example.org/image',
-    credit: 'Observatory', acquisition: 'Pinned source image', sha256: pin, bytes: 1, dependencies: [], verification: 'retained-pin',
+    credit: 'Observatory', acquisition: 'Source image', bytes: 1, dependencies: [], verification: 'retained-pin',
     sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'observation', role: 'material', evidence: 'Native image identity' }] },
     capture: { attributions: [{ kind: 'unresolved', label: 'Observatory', reason: 'Individual telescope not identified.', evidence: 'Native image credit.' }] },
   }],
-  recipes: [{ id: 'volume', path: 'source/recipe.json', sha256: pin, parameters: { method: 'measured-image-model' } }],
+  recipes: [{ id: 'volume', path: 'source/recipe.json', parameters: { method: 'measured-image-model' } }],
   products: [{ observationAttribution: 'source-lineage', id: 'volume', label: 'Optical volume', process: 'Reconstruct observed image', recipe: 'volume', selector: '',
     recipeDependencies: ['volume'], inputs: ['image'], parents: [], lensIds: ['optical'],
-    outputs: [{ url: 'prepared/lenses.json', sha256: pin, bytes: 1, verification: 'retained-pin' }],
+    outputs: [{ url: 'prepared/lenses.json', bytes: 1, verification: 'retained-pin' }],
   }],
   coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved: [] },
 });

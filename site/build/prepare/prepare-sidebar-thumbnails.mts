@@ -1,10 +1,9 @@
-import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { OverlayOptions } from 'sharp';
 import { parseDatasetLens } from '../../prepared-panel-content.mts';
-import { sourceArray, sourceDigest, sourceId, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
+import { sourceArray, sourceId, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
 
 const root = process.cwd();
@@ -20,7 +19,7 @@ const json = async (path: string): Promise<unknown> => JSON.parse((await read(pa
 const output = async (path: string, bytes: Uint8Array | string) => {
   const data = typeof bytes === 'string' ? Buffer.from(bytes) : bytes;
   if (check) {
-    if (sha256(await readFile(resolve(root, path))) !== sha256(data)) throw new Error(`Stale sidebar thumbnail: ${path}`);
+    if (!Buffer.from(data).equals(await readFile(resolve(root, path)))) throw new Error(`Stale sidebar thumbnail: ${path}`);
   } else await writeFile(resolve(root, path), data);
 };
 
@@ -49,8 +48,9 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   const id = sourceId(presentation.objectId), defaultLens = sourceId(presentation.defaultLens);
   if (id !== folder.name) throw new Error(`Mismatched sidebar image owner: ${id}`);
   for (const lens of sourceArray(presentation.controls, parseDatasetLens)) {
-    const match = lens.texture?.url.match(/^\/scenes\/([a-z0-9-]+)\/datasets\/([a-f0-9]{64})\.webp$/u);
-    if (!match || match[1] !== id || !lens.texture) throw new Error(`Unpinned sidebar image: ${id}/${lens.id}`);
+    const expected = `/scenes/${id}/datasets/${lens.id}.webp`;
+    if (!lens.texture || lens.texture.url !== expected)
+      throw new Error(`${path}: lens ${lens.id} texture.url is ${JSON.stringify(lens.texture?.url ?? null)}; expected ${expected}.`);
     const previewPath = `public${lens.texture.url}`;
     await makeThumbnail(id, lens.id, await read(previewPath), { inputs: [path, previewPath],
       credit: lens.texture.attribution?.label ?? '', sourceUrl: lens.texture.attribution?.url ?? '' });

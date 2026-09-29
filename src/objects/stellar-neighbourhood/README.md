@@ -63,8 +63,8 @@ computed from the float32 source magnitudes, before transport quantization.
 
 ## Prepared transport
 
-`object.json` pins the manifest. The manifest pins `stars.bin` by byte length
-and SHA-256; the loader checks both before it decodes a byte, then checks the
+`object.json` pins the manifest. The manifest pins `stars.bin` by byte length;
+the loader checks it before it decodes a byte, then checks the
 bank header, column directory, counts, indices and value ranges.
 
 | Field | Storage | Error against the prepared value |

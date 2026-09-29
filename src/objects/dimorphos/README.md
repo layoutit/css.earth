@@ -92,7 +92,7 @@ Named features run of 2026-09-18 (this version, re-pinned from the 2026-09-12 ru
 
 The 0.972 m OBJ release preserves 98,306 Cartesian vertices and 196,608 triangular plates in kilometers, with original origin, winding and connectivity. The archive reports a closed surface with volume 0.001759765951701106 km³ and dimensions approximately 178.44 × 169.25 × 114.60 m. The 75 m reference sphere rounds this model's volume-equivalent radius; it is not a gravitational datum.
 
-Exact URL, byte size and SHA-256 are in `source/manifest.json`; original label and Software Interface Specification are retained in `source/reference/`.
+Exact URL and byte size are in `source/manifest.json`; original label and Software Interface Specification are retained in `source/reference/`.
 
 ## Survey and disposition
 

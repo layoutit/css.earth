@@ -15,7 +15,7 @@ No image resolves Eris's surface. At about 96 AU its disc spans about 0.034 arcs
 | Solar B−V, V−R, V−I | 0.653, 0.356, 0.701, each ± 0.003 mag | [Ramírez et al. (2012)](https://doi.org/10.1088/0004-637X/752/1/5), ApJ 752, 5, abstract (line-depth-ratio solution) |
 | B, V, R, I effective wavelengths | 438.1, 544.5, 641.1, 798.2 nm | [SVO Filter Profile Service](http://svo2.cab.inta-csic.es/theory/fps/index.php?mode=browse&gname=Generic&gname2=Bessell), Generic/Bessell, checked 2026-09-16 |
 
-The values are transcribed in [the colour record](source/photometry/disc-color.json). Carraro et al. measured over five nights in 2005 and found V−R stable from night to night. The [CIE 1931 2° colour-matching functions](https://doi.org/10.25039/CIE.DS.xvudnb9b) and [CIE standard illuminant D65](https://doi.org/10.25039/CIE.DS.hjfjmt59) are kept unchanged in [source/reference](source/reference); their sha256 values equal the checksums in CIE's dataset metadata.
+The values are transcribed in [the colour record](source/photometry/disc-color.json). Carraro et al. measured over five nights in 2005 and found V−R stable from night to night. The [CIE 1931 2° colour-matching functions](https://doi.org/10.25039/CIE.DS.xvudnb9b) and [CIE standard illuminant D65](https://doi.org/10.25039/CIE.DS.hjfjmt59) are kept unchanged in [source/reference](source/reference); their bytes match the checksums in CIE's dataset metadata.
 
 The radius is 1,163 ± 6 km from the November 6, 2010 stellar occultation reported by Sicardy et al. (2011). That event is consistent with a spherical body. The render sphere uses the nominal radius; it does not claim a resolved shape mesh.
 

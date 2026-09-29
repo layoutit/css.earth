@@ -298,7 +298,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
       for (const evidence of lens.inputEvidence) if (!bySource.has(evidence.sourceId) || evidence.sourceId === lens.input)
         throw new TypeError(`Unknown or repeated lens input: ${record.objectId}/${lens.id}/${evidence.sourceId}`);
       const image = await preparePreview(root, lens.preview, input, { mirrorOrigin });
-      const previewUrl = `/scenes/${record.objectId}/datasets/${sha256(image.bytes)}.webp`;
+      const previewUrl = `/scenes/${record.objectId}/datasets/${lens.id}.webp`;
       outputs.push({ path: resolve(root, `public${previewUrl}`), text: image.bytes });
       controls.push({ id: lens.id, label: lens.label, title: lens.title, thumbnailUrl: previewUrl,
         texture: { url: previewUrl, width: image.width, height: image.height, attribution: { label: own.displayCredit ?? own.credit, url: own.sourceUrl } },

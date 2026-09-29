@@ -10,7 +10,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/dataset.shtml"
       ],
-      "acquisition": "Download the original PDS table; verify exact bytes and SHA-256.",
+      "acquisition": "Download the original PDS table; verify exact bytes.",
       "redistribution": "Public scientific data; retain dataset identification and author attribution.",
       "consumers": [
         "shape"
@@ -129,7 +129,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -154,7 +154,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -198,7 +198,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -223,7 +223,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -267,7 +267,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -292,7 +292,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -336,7 +336,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -361,7 +361,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -405,7 +405,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -430,7 +430,7 @@
       "licenseEvidence": [
         "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
       ],
-      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
@@ -563,7 +563,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -588,7 +588,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -613,7 +613,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -638,7 +638,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -663,7 +663,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -688,7 +688,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -713,7 +713,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -738,7 +738,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -763,7 +763,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -788,7 +788,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -813,7 +813,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -838,7 +838,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -863,7 +863,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -888,7 +888,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -913,7 +913,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -938,7 +938,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -963,7 +963,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -988,7 +988,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1013,7 +1013,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1038,7 +1038,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1063,7 +1063,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1088,7 +1088,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1113,7 +1113,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1138,7 +1138,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1163,7 +1163,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1188,7 +1188,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1213,7 +1213,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1238,7 +1238,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1263,7 +1263,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1288,7 +1288,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1313,7 +1313,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1338,7 +1338,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1363,7 +1363,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1388,7 +1388,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1413,7 +1413,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1438,7 +1438,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1463,7 +1463,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1488,7 +1488,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1513,7 +1513,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1538,7 +1538,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1563,7 +1563,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1588,7 +1588,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1613,7 +1613,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1638,7 +1638,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1663,7 +1663,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1688,7 +1688,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1713,7 +1713,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1738,7 +1738,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1763,7 +1763,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1788,7 +1788,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1813,7 +1813,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1838,7 +1838,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1863,7 +1863,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1888,7 +1888,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1913,7 +1913,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1938,7 +1938,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1963,7 +1963,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -1988,7 +1988,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2013,7 +2013,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2038,7 +2038,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2063,7 +2063,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2088,7 +2088,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2113,7 +2113,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2138,7 +2138,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2163,7 +2163,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2188,7 +2188,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2213,7 +2213,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2238,7 +2238,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2263,7 +2263,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2288,7 +2288,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2313,7 +2313,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2338,7 +2338,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2363,7 +2363,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2388,7 +2388,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2413,7 +2413,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2438,7 +2438,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2463,7 +2463,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2488,7 +2488,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2513,7 +2513,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2538,7 +2538,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2563,7 +2563,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2588,7 +2588,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2613,7 +2613,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2638,7 +2638,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2663,7 +2663,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2688,7 +2688,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2713,7 +2713,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2738,7 +2738,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2763,7 +2763,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2788,7 +2788,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2813,7 +2813,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2838,7 +2838,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2863,7 +2863,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2888,7 +2888,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2913,7 +2913,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2938,7 +2938,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2963,7 +2963,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -2988,7 +2988,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3013,7 +3013,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3038,7 +3038,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3063,7 +3063,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3088,7 +3088,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3113,7 +3113,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3138,7 +3138,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3163,7 +3163,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3188,7 +3188,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3213,7 +3213,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3238,7 +3238,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3263,7 +3263,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3288,7 +3288,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3313,7 +3313,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3338,7 +3338,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3363,7 +3363,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3388,7 +3388,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3413,7 +3413,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3438,7 +3438,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3463,7 +3463,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"
@@ -3488,7 +3488,7 @@
       "licenseEvidence": [
         "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-epoxi-hartley2-v3.0/dataset.shtml"
       ],
-      "acquisition": "Download original PDS product; verify bytes and SHA-256.",
+      "acquisition": "Download original PDS product; verify bytes.",
       "redistribution": "Retain mission, archive and method attribution.",
       "consumers": [
         "hrii-spectra"

@@ -4,8 +4,7 @@
   "sourceRestoration": {
     "method": "Declared acquisition operations into an empty source directory",
     "files": 2,
-    "bytesPerFile": 22841280,
-    "verifiedSha256": true
+    "bytesPerFile": 22841280
   },
   "runtimeRestoration": {
     "method": "installRuntimeAssets into an empty destination",
@@ -14,7 +13,7 @@
   },
   "reproduction": {
     "expectedInventory": "Selected after the first successful preparation, before the second run",
-    "comparison": "Exact byte count and SHA-256 for every runtime file",
+    "comparison": "Exact byte count for every runtime file",
     "changed": 0
   },
   "assetDelta": {

@@ -205,7 +205,7 @@ retained candidate cameras; it does not yet reproduce their derivation as a full
 photographic preparation recipe.
 
 Place the three files named in the recipe in `output/pallas-photographic-projection/`.
-Their original download URLs, byte counts and SHA-256 hashes are in the recipe;
+Their original download URLs and byte counts are in the recipe;
 the LAM downloads require the public-site header
 `Cookie: CesAM_LAM_opens_the_door=1`. The existing investigation cache already
 contains all three, so no new downloads are needed there.

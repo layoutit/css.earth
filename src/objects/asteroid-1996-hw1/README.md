@@ -4,7 +4,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 ## Sources
 
-1996 HW1 is a contact-binary near-Earth asteroid reconstructed from Arecibo radar and optical lightcurves. The [original NASA/JPL mesh](https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj) and [study](https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf) are pinned by byte count and SHA-256.
+1996 HW1 is a contact-binary near-Earth asteroid reconstructed from Arecibo radar and optical lightcurves. The [original NASA/JPL mesh](https://echo.jpl.nasa.gov/asteroids/shapes/1996hw1.obj) and [study](https://echo.jpl.nasa.gov/asteroids/magri.etal.2011.1996hw1.pdf) are pinned by byte count.
 
 Shape uses the normal missing-imagery grid on the original source geometry. No regolith texture, optical reflectance or artificial crater imagery is supplied. Shadows default off; prepared directional lighting is available through the common setting.
 

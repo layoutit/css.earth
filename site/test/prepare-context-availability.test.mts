@@ -33,16 +33,14 @@ for (const path of ['prepared/slice.webp', 'prepared/presentation.json', 'prepar
   });
 }
 
-for (const path of ['prepared/lenses.json', 'prepared/slice.webp', '../../../public/scenes/helix/preview.webp']) {
-  test(`changed ${path} fails its existing identity check without disabling another package`, async t => {
-    const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
-    const f = await writeContextPackage(root, 'helix'); await writeContextPackage(root, 'lmc');
-    await writeFile(resolve(f.directory, path), 'tampered');
-    const state = await inspectContextAvailability(root);
-    assert.equal(state.helix.available, false); assert.equal(state.lmc.available, true);
-    await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /identity mismatch|not valid JSON/i);
-  });
-}
+test('a corrupt prepared bank fails to decode without disabling another package', async t => {
+  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
+  const f = await writeContextPackage(root, 'helix'); await writeContextPackage(root, 'lmc');
+  await writeFile(resolve(f.directory, 'prepared/lenses.json'), 'tampered');
+  const state = await inspectContextAvailability(root);
+  assert.equal(state.helix.available, false); assert.equal(state.lmc.available, true);
+  await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /not valid JSON/i);
+});
 
 test('invalid presentation and provenance cannot become available merely because their files exist', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
@@ -56,7 +54,7 @@ test('invalid presentation and provenance cannot become available merely because
   assert.throws(() => parseContextAvailability({ helix: { available: false } }));
 });
 
-test('an asset-origin build verifies a missing local preview against its published manifest', async t => {
+test('an asset-origin build accepts a missing local preview that its inventory publishes', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
   const f = await writeContextPackage(root, 'helix');
   await rm(resolve(root, 'public/scenes/helix/preview.webp'));
@@ -64,10 +62,10 @@ test('an asset-origin build verifies a missing local preview against its publish
   assert.deepEqual(await inspectContextAvailability(root, { publicAssets: 'manifest' }), { helix: { available: true } });
   const manifestPath = resolve(f.directory, 'inventory.json');
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
-  manifest.assets[0].sha256 = '0'.repeat(64);
+  manifest.assets = manifest.assets.filter((asset: { location: string }) => asset.location !== 'public');
   await writeFile(manifestPath, JSON.stringify(manifest));
   const unavailable = (await inspectContextAvailability(root, { publicAssets: 'manifest' })).helix;
-  if (unavailable.available) assert.fail('Changed preview identity must make the package unavailable.');
+  if (unavailable.available) assert.fail('A preview the inventory does not publish must make the package unavailable.');
   assert.match(unavailable.reason, /Unpublished dataset preview/);
 });
 

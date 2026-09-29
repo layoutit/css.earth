@@ -33,7 +33,7 @@ and combines usage across bodies. Neither infers dependencies from labels or URL
    documented. Dataset cards use contribution edges to identify their missions
    and observing equipment.
 
-Each source has its declared path. The generator measures byte count and SHA-256
+Each source has its declared path. The generator measures its byte count
 when the file is present; absent downloads are marked `download-not-present`.
 These measurements in generated lineage are not manifest pins or proof that a
 download matches earlier bytes. Each product records its
@@ -176,7 +176,7 @@ Their root `inventory.json` lists every baked file with its location. A
 resolves below the object's `prepared/` directory; a `public` entry resolves
 below `public/scenes/<id>/`, for shared dataset previews. Absolute paths,
 parent traversal and symlink installation paths are rejected. Inventories list
-byte counts and SHA-256 values for both locations; restored bytes must
+byte counts and R2 content addresses for both locations; restored bytes must
 match the root inventory. Prepared-directory verification preserves the root metadata receipts and
 requires an explicit public root when public assets are listed, checking both
 locations. The public-scene assembler rejects prepared resources before writes;
