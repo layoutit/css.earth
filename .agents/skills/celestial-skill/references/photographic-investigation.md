@@ -147,7 +147,7 @@ ledger updates do not complete a requested photographic surface.
 
 When handing off a decisive experiment for reuse, retain a small runnable driver
 or recipe with its pinned inputs, configuration, partitions and execution command.
-Reuse the shared tools; keep implementation in `tools/`, body records beside the
+Reuse the shared tools; keep implementation in `packages/bake` (`authoring/<body>/`) or `packages/telescope-cli`, body records beside the
 body and exploratory runs in ignored `output/`. A hash of an unavailable script
 or a replay of saved residuals does not reproduce the fit that produced them.
 State that limitation when only the measurements can be replayed. Preserve the

@@ -232,7 +232,7 @@ astronomers have catalogued, each a sharp dot at its published position, over a
 faint backing that shows the galaxy's overall shape. Each catalogue keeps its
 table in `source/<id>/` beside a `points.json` recipe naming the columns, the
 authors' own selection and the citation.
-[`prepare.mts`](../../../tools/objects/catalogue-points/prepare.mts) has Astropy
+[`prepare-catalogue-points.mts`](../../../packages/bake/cli/prepare-catalogue-points.mts) has Astropy
 convert each row to Sun-centred ICRS coordinates; rows without a distance are
 left out.
 
@@ -268,7 +268,7 @@ sit in the backing and the whitest keep their sparkle. Both are presentation
 choices, recorded in the merge recipe.
 
 **An even density at every zoom.** Every catalogue is complete only out to some
-distance from the Sun, so together they pile up around it. [`merge.mts`](../../../tools/objects/catalogue-points/merge.mts)
+distance from the Sun, so together they pile up around it. [`merge-catalogue-points.mts`](../../../packages/bake/cli/merge-catalogue-points.mts)
 keeps a dot, in a fixed shuffle, while the dots within a small face-on kernel
 stay under the thin disc's own density law: exponential in Galactocentric radius
 with a 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016). The galaxy level
@@ -277,7 +277,7 @@ along the solar circle (6,586 dots). Nested levels around the Sun add dots up
 to 150 per kpc² out to 3 kpc, 1,500 out to 800 pc, 50,000 out to 100 pc and
 1,000,000 out to 20 pc; each adds only dots the levels around it do not draw,
 and its density falls to nothing over its outer half.
-[`stack.mts`](../../../tools/objects/catalogue-points/stack.mts) joins them into
+[`stack-catalogue-points.mts`](../../../packages/bake/cli/stack-catalogue-points.mts) joins them into
 [one bank](source/dots/stack.json) of 13,420 dots. The app draws a growing
 share of it as you zoom in: the galaxy level whole within 10 kpc, then each
 level's dots one at a time as the view narrows past the level's radius. A

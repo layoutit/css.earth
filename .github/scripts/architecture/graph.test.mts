@@ -11,10 +11,10 @@ import { evaluateRules } from './rules.mts';
 
 const FILES: Readonly<Record<string, string>> = {
   'package.json': JSON.stringify({ name: 'fixture', private: true, type: 'module', scripts: {},
-    imports: { '#prep/*': { types: './tools/objects/*.ts', default: './tools/objects/dist/*.js' } } }),
+    imports: { '#prep/*': { types: './labs/objects/*.ts', default: './labs/objects/dist/*.js' } } }),
   // `paths` without `baseUrl`: aliases resolve from the tsconfig's directory.
   'tsconfig.json': JSON.stringify({ compilerOptions: { module: 'ESNext', moduleResolution: 'Bundler', allowImportingTsExtensions: true, noEmit: true,
-    paths: { '~prepare/*': ['./tools/prepare/cli/*'] } } }),
+    paths: { '~prepare/*': ['./labs/prepare/cli/*'] } } }),
   '.gitignore': 'dist/\nnode_modules/\n',
   // A package with subpath entries only and no src/index.ts, like @cssearth/bake.
   'packages/bake/package.json': JSON.stringify({ name: '@x/bake', type: 'module', exports: {
@@ -39,8 +39,8 @@ const FILES: Readonly<Record<string, string>> = {
   'packages/renderer/src/index.ts': 'export const renderer = 1;\n',
   'packages/renderer/src/navigation/orbit.ts': 'export const orbit = 1;\n',
   'packages/renderer/src/navigation/camera.ts': 'export const camera = 1;\n',
-  'tools/prepare/cli/prepare-x.mts': 'export default function run(): void {}\n',
-  'tools/objects/lens.ts': 'export const lens = 1;\n',
+  'labs/prepare/cli/prepare-x.mts': 'export default function run(): void {}\n',
+  'labs/objects/lens.ts': 'export const lens = 1;\n',
   'site/Card.astro': '---\nconst title = 1;\n---\n<p>{title}</p>\n',
   'site/Page.astro': [
     '---',
@@ -87,13 +87,13 @@ test('workspace imports resolve through exports and tsup entries, built or not, 
     const graph = await buildImportGraph(root, { details: true });
     assert.deepEqual(targets(graph, 'site/uses.mts'), ['packages/bake/src/volume/index.ts'], 'a built dist entry counts as its tsup source');
     assert.deepEqual(targets(graph, 'site/Page.astro'), [
+      'labs/objects/lens.ts', // package.json#imports
+      'labs/prepare/cli/prepare-x.mts', // tsconfig path alias
       'packages/bake/src/volume/node/index.ts', // import('…').T, through a subpath entry with no src/index.ts
       'packages/renderer/src/index.ts', // unbuilt main entry
       'packages/renderer/src/navigation/camera.ts', // unbuilt source wildcard export
       'packages/renderer/src/navigation/orbit.ts', // typeof import('…'), unbuilt dist wildcard export
       'site/Card.astro',
-      'tools/objects/lens.ts', // package.json#imports
-      'tools/prepare/cli/prepare-x.mts', // tsconfig path alias
     ]);
     const typeOnly = graph.edges.filter(edge => edge.from === 'site/Page.astro' && edge.typeOnly).map(edge => edge.to).sort();
     assert.deepEqual(typeOnly, ['packages/bake/src/volume/node/index.ts', 'packages/renderer/src/navigation/orbit.ts']);
@@ -120,15 +120,15 @@ test('a computed import typed with a literal typeof import() still reaches the g
   const load = "import { pathToFileURL } from 'node:url';\nexport const load = async () => (await import(pathToFileURL('site/build/prepare/t.mts').href)";
   await withFixture({
     'site/build/prepare/t.mts': 'export const target = (id: string): boolean => id.length > 0;\n',
-    'tools/objects/typed.ts': `${load} as typeof import('../../site/build/prepare/t.mts')).target;\n`,
-    'tools/objects/untyped.ts': `${load} as { target(id: string): boolean }).target;\n`,
+    'labs/objects/typed.ts': `${load} as typeof import('../../site/build/prepare/t.mts')).target;\n`,
+    'labs/objects/untyped.ts': `${load} as { target(id: string): boolean }).target;\n`,
   }, async root => {
     const graph = await buildImportGraph(root, { details: false });
-    assert.deepEqual(targets(graph, 'tools/objects/typed.ts'), ['site/build/prepare/t.mts'], 'the typeof import() names the file the computed import loads');
-    assert.deepEqual(targets(graph, 'tools/objects/untyped.ts'), [], 'a hand-written interface hides the edge');
-    assert.deepEqual(evaluateRules(graph).get('nothing-imports-applications')?.filter(item => item.from.startsWith('tools/')),
-      [{ from: 'tools/objects/typed.ts', to: 'site/build/prepare/t.mts' }],
-      'so the tools -> site/build edge is held to the application rule and its baseline');
+    assert.deepEqual(targets(graph, 'labs/objects/typed.ts'), ['site/build/prepare/t.mts'], 'the typeof import() names the file the computed import loads');
+    assert.deepEqual(targets(graph, 'labs/objects/untyped.ts'), [], 'a hand-written interface hides the edge');
+    assert.deepEqual(evaluateRules(graph).get('nothing-imports-applications')?.filter(item => item.from.startsWith('labs/')),
+      [{ from: 'labs/objects/typed.ts', to: 'site/build/prepare/t.mts' }],
+      'so the labs -> site/build edge is held to the application rule and its baseline');
   });
 });
 

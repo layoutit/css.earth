@@ -165,13 +165,13 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/1406.1518",
-      "credit": "The colour of Faherty et al. (2014)'s MagE spectrum of Luhman 16 A as a uniform disc (no limb law is measured); rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The colour of Faherty et al. (2014)'s MagE spectrum of Luhman 16 A as a uniform disc (no limb law is measured); rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "luhman-16-stellar-color",
           "luhman-16-faherty-2014-mage",
@@ -180,7 +180,7 @@
           "luhman-16-deregt-2025-limb-darkening"
         ]
       },
-      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The colour lens rendered as a disc; `context-markers.mts --check` recomputes it."

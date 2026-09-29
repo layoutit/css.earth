@@ -22,7 +22,7 @@ records what was used, replaced and left out.
 
 ## Processing
 
-1. `tools/objects/catalogue-points/prepare.mts` places each galaxy at
+1. `packages/bake/cli/prepare-catalogue-points.mts` places each galaxy at
    10^(DM/5 + 1) pc in its J2000 direction, in the Sun-centred frame, in Mpc.
 2. It colours each galaxy by its type class: the template spectrum of that class
    through the CIE 1931 observer into sRGB, the route the app uses for star
@@ -30,13 +30,13 @@ records what was used, replaced and left out.
    for (E −5, S0 −2, Sa 1, Sb 3, Sc 5). The colours are E #ffdec0, S0 #ffdfc1,
    Sa #ffdcc7, Sb #ffe1cb and Sc #d9d7ff. The 1,400 galaxies HyperLEDA gives no
    type are white.
-3. `merge.mts` thins the galaxies into four nested levels. The field holds 0.18
+3. `packages/bake/cli/merge-catalogue-points.mts` thins the galaxies into four nested levels. The field holds 0.18
    galaxies per 1,000 Mpc³ out to 200 Mpc, half what CF4 still holds at its
    edge. Around the Milky Way, levels out to 60, 20 and 10 Mpc bring that up to
    5, 25 and 90, each under what CF4 holds there. Each level only adds galaxies
    the levels around it do not draw, and its density falls to nothing over its
    outer half.
-4. `stack.mts` joins the levels into [one bank](source/dots/stack.json) of
+4. `packages/bake/cli/stack-catalogue-points.mts` joins the levels into [one bank](source/dots/stack.json) of
    7,077 dots. The app draws a growing share of it as you zoom in: the whole
    field within 100 Mpc, then each level's galaxies one at a time as the view
    narrows past the level's radius, so a level's edge is never on screen and a

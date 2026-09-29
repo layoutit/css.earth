@@ -1,7 +1,7 @@
 # @cssearth/bake
 
-The repository's build-time preparation code. The preparation tools (`tools/objects`,
-`site/build/`) and the nebula lab import it to turn source
+The repository's build-time preparation code. The preparation code (`packages/bake/authoring/`,
+`packages/telescope-cli/`, `site/build/`) and the nebula lab import it to turn source
 records into prepared delivery. The application never imports it: the runtime reads only what the bake wrote.
 
 Each topic is one subpath entry. A topic imports another only when it sits on a lower layer (the raster lane uses the
@@ -118,7 +118,7 @@ sources, navigation and preparation tests (with the solar-geometry generator's) 
 from their published prepared data, so `vitest.config.ts` leaves them out of the package run. `pnpm test:preparation` runs them once that data is
 restored, after its node:test stage passes. The same holds for the node:test suites of the volume compilers and the star,
 shell, sky, density-volume, image-layer, catalogue and world-context bakes, which read restored sources.
-The object libraries' tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` (`node --test`), since they read body sources, kernel
+The object libraries' tests stay outside the package, beside the pipelines in `packages/bake/authoring/<body>/` or under `tests/objects/<topic>/` (`node --test`), since they read body sources, kernel
 banks and oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects` runs every test that imports an object entry.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `packages/bake/cli/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.

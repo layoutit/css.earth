@@ -12,7 +12,7 @@ Its radius and temperature follow Dragomir et al. 2019. It is also HD 21749, HIP
 
 ## Evidence
 
-Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
+Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
 
 ## Known problems

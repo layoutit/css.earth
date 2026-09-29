@@ -251,7 +251,7 @@
       "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
       "credit": "π¹ Gruis, VLTI/PIONIER, nights of 25/26 and 29/30 September 2014 (ESO programme 093.D-0598, Paladini et al. 2018), the calibrated visibilities in observations/PI_GRU_forImage.fits",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Fitted by fitPowerLawDisc (packages/telescope-cli/src/archives/interferometry/disc-fit.mts), run by node tools/objects/new-object.mts --star-limb to observations/PI_GRU_forImage.fits",
+      "acquisition": "Fitted by fitPowerLawDisc (packages/telescope-cli/src/archives/interferometry/disc-fit.mts), run by node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb to observations/PI_GRU_forImage.fits",
       "redistribution": "A fitted parameter with its method; no paper figures",
       "consumers": [
         "assets",

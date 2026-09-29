@@ -179,9 +179,9 @@ jobs:
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
             # Authoring replays volume provenance from pinned FITS.
             node packages/bake/cli/restore-source-inputs.mts --repository-volumes
-            CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "tests/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "tests/contract/object-provenance.test.mts" tests/contract/prepare-factsheets-cli.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
           else
-            CSSEARTH_SOURCE_CHECK_MODE=published node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "tests/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=published node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "tests/contract/object-provenance.test.mts" tests/contract/prepare-factsheets-cli.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
           fi
       - name: Reproduce the prepared bank from its pinned inputs
         if: ${{ !cancelled() }}

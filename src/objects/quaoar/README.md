@@ -59,7 +59,7 @@ Its actual width varies with azimuth; the dense arc is not reconstructed. Q2R us
 the published typical 10 km width. Uniform gray and display opacity are
 illustrative. Both bands use the shared terrestrial ring preparation capability.
 
-The [table tool](../../../tools/objects/source-authoring/README.md) reproduces the
+The [table tool](../../../packages/telescope-cli/src/source-authoring/README.md) reproduces the
 pinned radii from [measurements](source/measurements.json).
 
 ## Source survey

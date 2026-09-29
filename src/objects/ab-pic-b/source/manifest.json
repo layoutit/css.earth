@@ -122,20 +122,20 @@
       "id": "lens-colour-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1051/0004-6361/202244294",
-      "credit": "The default lens's colour as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The default lens's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "ab-pic-b-observational-measurements",
           "ab-pic-b-preparation-raster",
           "ab-pic-b-band-color"
         ]
       },
-      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."
@@ -170,7 +170,7 @@
       "path": "orbits/pick.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The whereistheplanet posterior and the measured positions that choose one sample from it (tools/objects/hosted-orbits/posterior-pick.py)."
+        "reason": "The whereistheplanet posterior and the measured positions that choose one sample from it (packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py)."
       }
     },
     {

@@ -15,7 +15,7 @@ test('the prepared catalogues the app draws are valid banks of every selected ro
     const parsed = parseCataloguePoints(prepared);
     expect(parsed.id).toBe(id);
     expect(parsed.points).toHaveLength(prepared.counts.points);
-    // A merged or stacked bank (tools/objects/catalogue-points/merge.mts, stack.mts) counts only its points; a prepared one also its rows.
+    // A merged or stacked bank (packages/bake/cli/merge-catalogue-points.mts, stack.mts) counts only its points; a prepared one also its rows.
     if (prepared.source !== 'merge' && prepared.source !== 'stack') expect(prepared.counts.points + prepared.counts.missingDistance).toBe(prepared.counts.selected);
   }
 });

@@ -9,7 +9,7 @@ export interface PreparedGalaxyBacking {
   readonly leaf: { readonly texturePath: string; readonly style: Readonly<Record<(typeof LEAF_STYLE)[number], string>> };
 }
 
-/** A `cssearth-galaxy-backing@1` bank (tools/objects/galaxy-backing/prepare.mts): one face-on image plane in a galaxy's frame. */
+/** A `cssearth-galaxy-backing@1` bank (packages/bake/cli/prepare-galaxy-backing.mts): one face-on image plane in a galaxy's frame. */
 export function parseGalaxyBacking(value: unknown, at = 'galaxy backing'): PreparedGalaxyBacking {
   const data = value as { schema?: unknown; id?: unknown; frame?: unknown; leaf?: { texturePath?: unknown; style?: Record<string, unknown> } } | null;
   if (!data || data.schema !== 'cssearth-galaxy-backing@1' || typeof data.id !== 'string' || !data.id) throw new TypeError(`${at}: expected a cssearth-galaxy-backing@1 bank with an id.`);

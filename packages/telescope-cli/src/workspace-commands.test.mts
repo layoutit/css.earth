@@ -4,6 +4,7 @@ import { spawn } from 'node:child_process';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { WORKSPACE } from '@cssearth/telescope/node';
+import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 
@@ -117,6 +118,35 @@ setInterval(() => {}, 1000);
     const stopped = await gone(pid);
     if (!stopped) process.kill(pid, 'SIGKILL');
     assert.ok(stopped, 'the grandchild stopped with the telescope');
+  } finally { await fixture.cleanup(); }
+});
+
+test('terminating `telescope new-object` stops the moved entry and the processes it started', async () => {
+  const fixture = await workspace('');
+  const CLI = resolve(import.meta.dirname, 'cli.mts');
+  // A stand-in root: the command resolves its entry under the root it is given, so this one hangs with a child of its own.
+  const entry = resolve(fixture.directory, 'root', NEW_OBJECT_COMMAND.script);
+  await mkdir(resolve(entry, '..'), { recursive: true });
+  await writeFile(entry, `import { spawn } from 'node:child_process';
+import { writeFileSync } from 'node:fs';
+writeFileSync(process.env.ENTRY_PIDS + '.entry', String(process.pid));
+spawn(process.execPath, ['-e', 'require("node:fs").writeFileSync(process.argv[1], String(process.pid)); setInterval(() => {}, 1000);', process.env.ENTRY_PIDS + '.child'], { stdio: 'ignore' });
+setInterval(() => {}, 1000);
+`);
+  await writeFile(resolve(fixture.directory, 'main.mts'), `import { main } from ${JSON.stringify(CLI)};
+await main(['new-object', 'spec.json'], ${JSON.stringify(resolve(fixture.directory, 'root'))}, () => {});
+`);
+  const pids = resolve(fixture.directory, 'pids');
+  try {
+    const telescope = spawn(process.execPath, [resolve(fixture.directory, 'main.mts')], { cwd: ROOT, stdio: 'ignore', env: { ...process.env, ENTRY_PIDS: pids } });
+    const closed = new Promise<{ code: number | null; signal: NodeJS.Signals | null }>(accept => telescope.once('close', (code, signal) => accept({ code, signal })));
+    const [entryPid, childPid] = [await readPid(`${pids}.entry`), await readPid(`${pids}.child`)];
+    telescope.kill('SIGTERM');
+    const ended = await closed;
+    const stopped = [await gone(entryPid), await gone(childPid)];
+    for (const pid of [entryPid, childPid]) if (alive(pid)) process.kill(pid, 'SIGKILL');
+    assert.equal(ended.signal, 'SIGTERM');
+    assert.deepEqual(stopped, [true, true], 'the new-object entry and its own process stopped with the telescope');
   } finally { await fixture.cleanup(); }
 });
 

@@ -65,7 +65,7 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
   could not run because the original PDS shape table is unavailable locally
   and its archive is unreachable over HTTPS.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/fits/encounter.py`](../../../tests/oracles/fits/encounter.py) (now [`tests/oracles/fits/encounter.py`](../../../tests/oracles/fits/encounter.py)) reads the pinned ITS product `iv05070405_9000632_001_r.fit` with astropy. [`tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts`](../../../tests/objects/terrestrial/encounter-fits.oracle.test.mts) (now [`tests/objects/terrestrial/encounter-fits.oracle.test.mts`](../../../tests/objects/terrestrial/encounter-fits.oracle.test.mts)) requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, border, flagged and non-finite pixels to agree.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/fits/encounter.py`](https://github.com/layoutit/css.earth/blob/39f3a9aef1/tools/oracles/fits/encounter.py) (now [`tests/oracles/fits/encounter.py`](../../../tests/oracles/fits/encounter.py)) reads the pinned ITS product `iv05070405_9000632_001_r.fit` with astropy. [`tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/50bc152765/tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts) (now [`tests/objects/terrestrial/encounter-fits.oracle.test.mts`](../../../tests/objects/terrestrial/encounter-fits.oracle.test.mts)) requires the HDU names, the header identity, 48 sampled radiances and quality flags, and the counts of accepted, border, flagged and non-finite pixels to agree.
 
 ### Registration
 

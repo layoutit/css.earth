@@ -27,7 +27,7 @@ export function drawnPointCount(total: number, cameraDistanceM: number, fullDeta
 }
 
 /**
- * A stacked bank's levels (tools/objects/catalogue-points/stack.mts), in its order: the outermost is thinned with the
+ * A stacked bank's levels (packages/bake/cli/stack-catalogue-points.mts), in its order: the outermost is thinned with the
  * camera's distance from `fullDetailUnits`, as any bank is; each inner level's dots appear one at a time as the view's
  * half-width at the origin shrinks through `appearUnits` (from, to), evenly in its logarithm. Zooming in only ever adds
  * dots to the prefix, and zooming out takes the newest away first.

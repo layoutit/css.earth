@@ -12,7 +12,7 @@ Radius: Radius 78.9 ± 7.4 solar radii from Moravveji et al. (2012), ApJ 747, 10
 
 Rotation: no rotation axis or period is adopted here; see Known problems for what the cited paper measures The display axis is celestial north at the star, a convention.
 
-Colour lens: The colour of Rigel's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#bdcfff**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. Cross-check: Kharitonov et al. (1988), record 342: Alma-Ata scans gives #b7c9ff, 6 levels from the lens colour in its most different channel (the threshold for agreement is 12).
+Colour lens: The colour of Rigel's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#bdcfff**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. Cross-check: Kharitonov et al. (1988), record 342: Alma-Ata scans gives #b7c9ff, 6 levels from the lens colour in its most different channel (the threshold for agreement is 12).
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Howarth (2011), MNRAS 413, 1515 computes from ATLAS9 model atmospheres for the Bessell V band at 12,100 K and log g 1.91, read between the models t12000g15, t12000g20, t12250g15, t12250g20 (u1 0.233, u2 0.330): a model, because no fit of this star's limb is used. Gravity: log g 1.91 from 2023ApJS..266...11B; the 2 published values span log g 1.75 to 1.907.
 
@@ -20,7 +20,7 @@ Colour lens: The colour of Rigel's spectrum as the Pulkovo spectrophotometric ca
 
 Run of 2026-09-21 (this version):
 
-- [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks that the catalogue colour #bdcfff is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
+- [`object-package-consistency.test.mts`](../../../tests/contract/object-package-consistency.test.mts) checks that the catalogue colour #bdcfff is the colour lens's prepared colour; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
 
 ## Known problems
 

@@ -340,13 +340,13 @@
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/archive/",
-      "credit": "Photosphere colour from the Gaia DR3 XP spectrum, dimmed toward the limb by the law fitted to TESS transits of HD 189733b; rendered by tools/objects/source-authoring/hd-189733/author.mts",
+      "credit": "Photosphere colour from the Gaia DR3 XP spectrum, dimmed toward the limb by the law fitted to TESS transits of HD 189733b; rendered by packages/telescope-cli/authoring/hd-189733/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+        "generator": "packages/telescope-cli/authoring/hd-189733/author.mts",
         "inputs": [
           "hd-189733-stellar-color",
           "hd-189733-gaia-dr3-xp-sampled",
@@ -357,7 +357,7 @@
           "hd-189733-tess-sector-81"
         ]
       },
-      "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+      "generator": "packages/telescope-cli/authoring/hd-189733/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The colour lens rendered as a disc with its fitted limb darkening; `author.mts --check` recomputes it."

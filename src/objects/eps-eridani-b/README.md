@@ -12,7 +12,7 @@
 
 ## Evidence
 
-Generated 2026-09-26 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/eps-eridani-b.json).
+Generated 2026-09-26 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/eps-eridani-b.json).
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks the drawn orbit against what Thompson et al. (2025) state rather than against its own elements: on 2024-12-07 the planet is 1,096 mas from the star (their radial velocities alone: 1,071 ± 58 mas) at position angle 186° (their node, 186 +8/−9°, south of the star), its position angle grows through 2025 (counterclockwise), and in August 2028 it is north of the star.
 - Rendered with the star and the system view in [the star's evidence image](../eps-eridani/evidence/eps-eridani-default-views.png).

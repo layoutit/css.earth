@@ -447,11 +447,17 @@ export async function runMosaic(recipePath: string, framesDirectory: string, fet
   return receipt;
 }
 
+// Historical serialized identity: the producer name every JIRAM map label has carried since this script lived at
+// tools/objects/juno/. It is written into "Written by ..." in each label, so it is pinned, not derived from the current path.
+export const JIRAM_MOSAIC_PRODUCER = 'tools/objects/juno/jiram-mosaic.mts';
+// Historical serialized identity of the registered mosaic's producer, pinned for the same reason.
+export const JIRAM_REGISTERED_MOSAIC_PRODUCER = 'tools/objects/juno/jiram-registered-mosaic.mts';
+
 /** PDS3 simple cylindrical map, east-positive planetocentric, 0 to 360 east, little-endian floats, detached label. */
 export async function writeMap(root: string, recipe: Pick<JiramRecipe, 'output' | 'side' | 'background'> & {
   target: Pick<JiramRecipe['target'], 'name' | 'referenceRadiusKm'>; band: Pick<JiramRecipe['band'], 'name' | 'unit'>;
   visits: readonly { frames: readonly unknown[] }[];
-}, map: Float32Array, producer = 'packages/bake/authoring/juno/jiram-mosaic.mts') {
+}, map: Float32Array, producer = JIRAM_MOSAIC_PRODUCER) {
   const ppd = recipe.output.pixelsPerDegree, width = 360 * ppd, height = 180 * ppd, missing = -1e32, bytes = Buffer.alloc(width * height * 4);
   for (let i = 0; i < map.length; i++) bytes.writeFloatLE(Number.isFinite(map[i]) ? map[i] : missing, i * 4);
   const name = recipe.output.image.split('/').pop()!;

@@ -105,18 +105,18 @@
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2504.11210",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-hosted-planet.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-hosted-planet.mts",
+        "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
         "inputs": [
           "pds-70-b-observational-measurements"
         ]
       },
-      "generator": "tools/objects/new-hosted-planet.mts",
+      "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "A flat neutral gray disc, the marker of an unresolved surface."

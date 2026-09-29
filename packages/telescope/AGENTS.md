@@ -7,15 +7,14 @@ itself is [`@cssearth/telescope-cli`](../telescope-cli/AGENTS.md), a layer above
 The library holds archive-neutral telescope plumbing: product records, PDS3 and PDS4 label reading, target-name
 resolution, SIMBAD sky targets, cited target associations, the inline Python runner, the ESO archive and esorex clients, and the clients of the pinned Python
 astronomy packages with their toolchain pins. Mission or archive policy (which programs, which frames,
-how an archive's ledger is written) stays with the telescope command (`packages/telescope-cli/src/archives/<archive>/`, and
-`tools/objects/<archive>/` for the archives not yet moved), and object-specific use of products stays in
+how an archive's ledger is written) stays with the telescope command (`packages/telescope-cli/src/archives/<archive>/`), and object-specific use of products stays in
 the bake. Nothing here names a body.
 
 Keep the main entry (`src/index.ts`) host-neutral: no Node built-ins, DOM globals or file I/O. `src/node/` is
 `@cssearth/telescope/node`; it may import `node:*`, and nothing outside `src/node/` may import it. Code finds the
 package's own files (`toolchains/`) and the workspace only through `src/node/paths.ts`, which locates the package by its
 name, so the same code works from its sources, its build and a bundle. The library imports only packages and Node
-built-ins; it never reaches `tools/`, `src/`, `site/` or `labs/`.
+built-ins; it never reaches `packages/bake`, `packages/telescope-cli`, `src/`, `site/` or `labs/`.
 
 ## Behaviour is part of the contract
 
