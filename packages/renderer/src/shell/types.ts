@@ -26,6 +26,6 @@ export interface PreparedCssSurfaceShell {
     /** The same physical triangle in each of the six atlas corner orders. */
     readonly materialTransforms?: readonly string[];
   }[];
-  readonly resources: readonly { readonly path: string; readonly sha256: string; readonly bytes: number; readonly width: number; readonly height: number }[];
+  readonly resources: readonly { readonly path: string; readonly bytes: number; readonly width: number; readonly height: number }[];
   readonly provenance: Readonly<Record<string, unknown>>;
 }

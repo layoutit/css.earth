@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { expect, test, vi } from 'vitest';
@@ -38,8 +37,8 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   expect(payload.stacks).toEqual(prepared.data.stacks);
   const used = [...slices, ...sky].map(image => image.texturePath).sort();
   expect(payload.resources.map(resource => resource.path).sort()).toEqual(used);
-  expect(payload.resources.map(({ path, bytes, sha256 }) => ({ filename: path, bytes, sha256 }))
-    .sort((a, b) => a.filename.localeCompare(b.filename))).toEqual(images.map(({ filename, bytes, sha256 }) => ({ filename, bytes, sha256 }))
+  expect(payload.resources.map(({ path, bytes }) => ({ filename: path, bytes }))
+    .sort((a, b) => a.filename.localeCompare(b.filename))).toEqual(images.map(({ filename, bytes }) => ({ filename, bytes }))
     .sort((a, b) => a.filename.localeCompare(b.filename)));
   const ownedImages = (await readdir(directory, { recursive: true })).filter(path => /\.(?:png|webp)$/iu.test(path) && !backing.includes(path)).sort();
   expect(ownedImages).toEqual(used);
@@ -48,7 +47,6 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   for (const resource of payload.resources) {
     const image = await readFile(new URL(resource.path, directory)), metadata = await sharp(image).metadata();
     expect(image.byteLength, resource.path).toBe(resource.bytes);
-    expect(createHash('sha256').update(image).digest('hex'), resource.path).toBe(resource.sha256);
     expect([metadata.width, metadata.height], resource.path).toEqual([resource.width, resource.height]);
     if (skyPaths.has(resource.path) && metadata.hasAlpha) expect((await sharp(image).ensureAlpha().stats()).channels[3]!.min, resource.path).toBe(255);
     const bank = skyPaths.has(resource.path) ? banks.sky : banks.volume;

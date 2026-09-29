@@ -3,7 +3,7 @@ import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-as
 import { textureTileStyles, tiledTextureKeys } from './prepared-texture-levels.js';
 import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
 
-export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; sha256?: string; }
+export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; }
 export interface SerializedPreparedScene extends PreparedSceneMarkup {
   /** Every resource this view writes as a texture, with its prepared address. */
   textures: readonly { key: string; address: string }[]; }

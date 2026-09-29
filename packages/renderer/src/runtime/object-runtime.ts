@@ -400,7 +400,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
           navigation, flightLimits: () => ({ minimumDistanceM: definition.camera.dolly.minimumDistanceRadii * worldFrame.bodyRadiusM }),
           onSelect: onFeatureSelect, onFlight: () => { stopMotion(); },
           ...(featureOrigin ? { transport: (url: string, init: { signal: AbortSignal }) =>
-            fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
+            fetch(resolvePreparedAssetUrl(url, featureOrigin), init) } : {}),
           lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
         context.own(() => surfaceFeatures?.destroy());
         if (featuresInFlight) surfaceFeatures.setNavigationInFlight?.(true);

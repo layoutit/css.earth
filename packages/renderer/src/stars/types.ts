@@ -24,7 +24,6 @@ export interface PreparedPointFieldNode {
 
 export interface PreparedPointFieldResource {
   readonly path: string;
-  readonly sha256: string;
   readonly bytes: number;
   readonly width: number;
   readonly height: number;
@@ -116,7 +115,6 @@ export interface PreparedPointFieldBank {
   readonly encoding: 'cssearth-point-field-bank@1';
   readonly path: string;
   readonly bytes: number;
-  readonly sha256: string;
   readonly starIdPrefix: string;
   readonly starCount: number;
   readonly nodeCount: number;
@@ -128,7 +126,7 @@ export interface PreparedPointFieldBank {
   readonly quantization: readonly PreparedPointFieldQuantization[];
 }
 
-/** Prepared transport: this JSON manifest plus its pinned binary column bank. */
+/** Prepared transport: this JSON manifest plus the binary column bank it names. */
 export interface PreparedCssPointFieldManifest extends Omit<PreparedCssPointField, 'schema' | 'stars' | 'nodes'> {
   readonly schema: 'cssearth-css-point-field-bank@1';
   readonly bank: PreparedPointFieldBank;
