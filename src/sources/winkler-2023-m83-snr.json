@@ -1,0 +1,52 @@
+{
+  "id": "winkler-2023-m83-snr",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "High-resolution spectra of supernova remnants in M83",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2023ApJ...943...15W"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/943/15"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...943...15W",
+      "label": "2023ApJ...943...15W"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/943/15",
+      "label": "CDS J/ApJ/943/15"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/943/15/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table5: properties of 366 supernova remnants and candidates with J2000 positions, gathered from the ground-based and HST catalogues of the whole galaxy."
+    }
+  ],
+  "creators": [
+    "P. F. Winkler",
+    "K. S. Long",
+    "W. P. Blair",
+    "S. D. Points"
+  ],
+  "publisher": "ApJ 943, 15",
+  "publicationDate": "2023",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Winkler et al. (2023), ApJ 943, 15.",
+      "scope": "M83 supernova remnants",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/943/15/ReadMe"
+    }
+  ]
+}

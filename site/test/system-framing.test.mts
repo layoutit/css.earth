@@ -241,7 +241,7 @@ test('the Local Group overview frames the Milky Way and every drawn member galax
   const { GALACTIC_VOLUME, drawnGalaxiesZoomTarget } = await import('../system-framing.mts');
   const members = (await import('../prepared-local-group-galaxies.json', { with: { type: 'json' } })).default as Record<string, { originM: number[] }>;
   const { cssViewFromOrientation, rotateWorldPosition } = await import('@cssearth/renderer/navigation');
-  assert.deepEqual(Object.keys(members).sort(), ['lmc', 'm31', 'm33', 'm81', 'ngc-253', 'smc'], 'the catalogue members with a drawn object');
+  assert.deepEqual(Object.keys(members).sort(), ['lmc', 'm31', 'm33', 'm81', 'm83', 'ngc-253', 'ngc-300', 'smc'], 'the catalogue members with a drawn object');
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5], [0, .7071067811865476, 0, .7071067811865476]] as const) {
     const from: WorldCameraPose = { ...world, pose: { ...world.pose, orientationXyzw } };
     const { world: target } = drawnGalaxiesZoomTarget(from, optics, systemFramingRect(optics));

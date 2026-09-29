@@ -38,7 +38,9 @@ const IMAGE_LAYER_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> 
   m31: ['stars', 'dots'],
   m33: ['stars', 'dots'],
   m81: ['dots'],
+  m83: ['dots'],
   'ngc-253': ['dots'],
+  'ngc-300': ['dots'],
 };
 
 // Inventory of prepared resources, not navigation entries or runtime generators.

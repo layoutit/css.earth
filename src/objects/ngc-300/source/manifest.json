@@ -4,20 +4,20 @@
   "inputs": [
     {
       "id": "optical",
-      "path": "src/objects/m81/source/source.jpg",
-      "origin": "https://noirlab.edu/public/images/noao-m81m82/",
-      "sourceUrl": "https://noirlab.edu/public/images/noao-m81m82/",
-      "title": "Galaxies M81 & M82",
-      "credit": "T.A. Rector (University of Alaska Anchorage) and NOIRLab/NSF/AURA",
-      "displayCredit": "NOIRLab",
-      "acquisition": "The publisher Large JPEG (8315 x 4642 px), restored from its origin; not tracked. Registration re-measured against catalogued positions (recipe observation). The hash identifies the local JPEG bytes, not a calibrated scientific array.",
+      "path": "src/objects/ngc-300/source/source.jpg",
+      "origin": "https://www.eso.org/public/images/eso1037a/",
+      "sourceUrl": "https://www.eso.org/public/images/eso1037a/",
+      "title": "Spiral galaxy NGC 300",
+      "credit": "ESO",
+      "displayCredit": "ESO",
+      "acquisition": "The publisher Large JPEG (7603 x 7603 px), restored from its origin; not tracked. Registration re-measured against Gaia stars (recipe observation). The hash identifies the local JPEG bytes, not a calibrated scientific array.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "noirlab-noao-m81m82",
+            "catalogueId": "eso-eso1037a",
             "role": "material",
-            "evidence": "src/objects/m81/source/provenance.json"
+            "evidence": "src/objects/ngc-300/source/provenance.json"
           }
         ]
       },
@@ -28,8 +28,8 @@
         "attributions": [
           {
             "kind": "unresolved",
-            "label": "Mayall 4-m Mosaic, colour composite",
-            "evidence": "https://noirlab.edu/public/images/noao-m81m82/",
+            "label": "WFI B [O III] V R H-alpha",
+            "evidence": "https://www.eso.org/public/images/eso1037a/",
             "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
           }
         ]
@@ -39,7 +39,7 @@
   "documents": [
     {
       "id": "recipe",
-      "path": "src/objects/m81/source/recipe.json",
+      "path": "src/objects/ngc-300/source/recipe.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
@@ -52,7 +52,7 @@
     },
     {
       "id": "provenance",
-      "path": "src/objects/m81/source/provenance.json",
+      "path": "src/objects/ngc-300/source/provenance.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
@@ -65,7 +65,7 @@
     },
     {
       "id": "presentation",
-      "path": "src/objects/m81/source/presentation.json",
+      "path": "src/objects/ngc-300/source/presentation.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
@@ -78,14 +78,14 @@
     },
     {
       "id": "stellar-extent",
-      "path": "src/objects/m81/source/stellar-extent.json",
+      "path": "src/objects/ngc-300/source/stellar-extent.json",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "smercina-2020-m81-halo",
+            "catalogueId": "bland-hawthorn-2005-ngc300-outer-disc",
             "role": "reference",
-            "evidence": "https://arxiv.org/abs/1910.14672"
+            "evidence": "https://arxiv.org/abs/astro-ph/0503488"
           }
         ]
       }

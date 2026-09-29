@@ -1,0 +1,52 @@
+{
+  "id": "pietrzynski-2001-ngc300-ob-associations",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A catalog of OB associations in the spiral galaxy NGC 300",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2001A&A...371..497P"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/371/497"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2001A&A...371..497P",
+      "label": "2001A&A...371..497P"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/371/497",
+      "label": "CDS J/A+A/371/497"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/371/497/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table1: 117 OB association candidates with J2000 positions, from WFI imaging of the whole galaxy."
+    }
+  ],
+  "creators": [
+    "G. Pietrzynski",
+    "W. Gieren",
+    "P. Fouque",
+    "F. Pont"
+  ],
+  "publisher": "A&A 371, 497",
+  "publicationDate": "2001",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Pietrzynski et al. (2001), A&A 371, 497.",
+      "scope": "NGC 300 OB associations",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/371/497/ReadMe"
+    }
+  ]
+}
