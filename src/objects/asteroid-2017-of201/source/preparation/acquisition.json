@@ -1,14 +1,4 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": [
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/cheng-2025.pdf",
-      "url": "https://arxiv.org/pdf/2505.15806v2"
-    }
-  ]
+  "operations": []
 }
