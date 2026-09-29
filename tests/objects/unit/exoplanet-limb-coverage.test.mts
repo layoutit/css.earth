@@ -59,7 +59,8 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     const astronomy = requireRecord(await readJsonSource(resolve(projectRoot, 'packages/astronomy/data/bodies', `${id}.json`)), `${id} astronomy`);
     hosts.add(requireString(requireRecord(astronomy.physical, `${id} physical`).parent, `${id} host`));
   }
-  assert.equal(hosts.size, 72);
+  // A floor, not a pin: batches add hosts, and every one of them must pass the checks below.
+  assert.ok(hosts.size >= 72, `${hosts.size} planet hosts; the pilot alone had 72`);
   const shapeOnly: string[] = [], uniform: string[] = [];
   for (const id of hosts) {
     const directory = resolve(projectRoot, 'src/objects', id);

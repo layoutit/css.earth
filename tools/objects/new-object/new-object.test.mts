@@ -501,6 +501,18 @@ test('a hosted body\'s package is written after phase one wrote its astronomy re
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 
+test('a DOI Crossref does not hold is read from DataCite, as the CDS VizieR catalogues are', async () => {
+  const { fetchPublication } = await import('./archives.mts');
+  const datacite = JSON.stringify({ data: { attributes: { titles: [{ title: 'Gaia DR2' }], publicationYear: 2018, publisher: 'Centre de Donnees Strasbourg (CDS)', creators: [{ name: 'European Space Agency' }] } } });
+  const archive: Archive = { async text(url) { if (url.includes('api.crossref.org')) throw new Error(`${url} answered 404 Not Found.`); if (url.includes('api.datacite.org')) return datacite; throw new Error(`unexpected ${url}`); },
+    async bytes() { throw new Error('none'); }, async exists() { return false; } };
+  const found = (await fetchPublication(archive, 'https://doi.org/10.26093/cds/vizier.1345'))!;
+  assert.deepEqual([found.id, found.title, found.year, found.publisher, found.creators], ['doi-10-26093-cds-vizier-1345', 'Gaia DR2', '2018', 'Centre de Donnees Strasbourg (CDS)', ['European Space Agency']]);
+  // Any other Crossref failure is not a missing DOI, and is reported as it is.
+  const down: Archive = { ...archive, async text(url) { throw new Error(`${url} answered 503 Service Unavailable.`); } };
+  await assert.rejects(fetchPublication(down, 'https://doi.org/10.26093/cds/vizier.1345'), /503/u);
+});
+
 test('a reference the archive cites only by its ADS bibcode is read as the paper it links to, keeping the bibcode', async () => {
   const { fetchPublication } = await import('./archives.mts');
   const { publicationRecord } = await import('./generate.mts');
