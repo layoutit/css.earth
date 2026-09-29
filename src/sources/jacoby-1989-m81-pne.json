@@ -1,0 +1,52 @@
+{
+  "id": "jacoby-1989-m81-pne",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Planetary nebulae as standard candles. III. The distance to M 81",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "1989ApJ...344..704J"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/344/704"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1989ApJ...344..704J",
+      "label": "1989ApJ...344..704J"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/344/704",
+      "label": "CDS J/ApJ/344/704"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/344/704/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table1: 185 planetary nebulae with B1950 positions and m5007."
+    }
+  ],
+  "creators": [
+    "G. H. Jacoby",
+    "R. Ciardullo",
+    "H. C. Ford",
+    "J. Booth"
+  ],
+  "publisher": "ApJ 344, 704",
+  "publicationDate": "1989",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Jacoby et al. (1989), ApJ 344, 704.",
+      "scope": "M81 planetary nebulae",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/344/704/ReadMe"
+    }
+  ]
+}

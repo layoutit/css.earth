@@ -99,7 +99,9 @@ async function removeCatalogueCompanions(rgb: Buffer, width: number, height: num
   });
   return {keys:companions.keys,...removeCompanionGalaxies(rgb,width,height,ellipses)};
 }
-export async function prepareImageLayers(options: { sourceDirectory: string; outputDirectory: string; recipe: ImageLayerRecipe }): Promise<PreparedImageLayerBank> {
+/** The photograph as the layers show it, before it is split into layers: resized to the face size, cleaned of foreground
+ * stars and companions, levelled and colour-tied, as sRGB bytes. The catalogue dots read their look from it. */
+export async function prepareImageLayerFace(options: { sourceDirectory: string; recipe: ImageLayerRecipe }) {
   const { recipe }=options, source=await readFile(resolve(options.sourceDirectory,recipe.source.path));
   const metadata=await sharp(source).metadata();
   if(metadata.width!==recipe.source.dimensions[0]||metadata.height!==recipe.source.dimensions[1]) throw new TypeError('Image source dimensions mismatch.');
@@ -109,6 +111,10 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   const companions=recipe.source.companions?await removeCatalogueCompanions(rgb,info.width,info.height,recipe,options.sourceDirectory):null;
   if(recipe.bake.levels){const {black,white,gamma}=recipe.bake.levels,table=Array.from({length:256},(_,v)=>Math.round(255*Math.max(0,Math.min(1,(v/255-black)/(white-black)))**(1/gamma)));for(let i=0;i<rgb.length;i++)rgb[i]=table[rgb[i]!]!;}
   const colourTie=recipe.bake.colourTie?tieColour(rgb,info.width,info.height,recipe):null;
+  return {rgb,info,foreground,companions,colourTie};
+}
+export async function prepareImageLayers(options: { sourceDirectory: string; outputDirectory: string; recipe: ImageLayerRecipe }): Promise<PreparedImageLayerBank> {
+  const { recipe }=options,{rgb,info,foreground,companions,colourTie}=await prepareImageLayerFace(options);
   const base=Buffer.alloc(info.width*info.height*4), floor=recipe.bake.backgroundFloor*255;
   for(let p=0;p<info.width*info.height;p++) { const i=p*3,o=p*4,r=Math.max(0,rgb[i]-floor),g=Math.max(0,rgb[i+1]-floor),b=Math.max(0,rgb[i+2]-floor),a=Math.max(r,g,b);
     base[o]=a?Math.round(r*255/a):0;base[o+1]=a?Math.round(g*255/a):0;base[o+2]=a?Math.round(b*255/a):0;base[o+3]=Math.round(a*255/(255-floor)); }
@@ -144,7 +150,10 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       // rounder sky shape and deprojects into a streak; there the disc takes the fit's disc light, blending back to the
       // photograph's split as the bulge's share falls to half.
       const share=bulgeModel.share(east,north),w=Math.min(1,share/.5),l=bulgeModel.light(east,north);
-      const discTau=(1-w)*(1-share)*tau+w*Math.min(tau,lightScale*l.disc);
+      // With `lightFrom: fit` the bulge's light is the fit's own, scaled to the photograph (at most all of it): a nearly
+      // edge-on photograph's centre is thicker on the sky than the fitted bulge, and a share of it would spread that
+      // thickness through the bulge.
+      const discTau=recipe.geometry.bulge!.lightFrom==='fit'?tau-Math.min(tau,lightScale*l.bulge*bulgeModel.fade(east,north)):(1-w)*(1-share)*tau+w*Math.min(tau,lightScale*l.disc);
       bulgeTau[py*info.width+px]=tau-discTau;base[i]=Math.round(255*(1-Math.exp(-discTau)));}}
   let left=info.width,top=info.height,right=-1,bottom=-1;
   for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++)if(base[4*(py*info.width+px)+3]){left=Math.min(left,px);right=Math.max(right,px);top=Math.min(top,py);bottom=Math.max(bottom,py);}

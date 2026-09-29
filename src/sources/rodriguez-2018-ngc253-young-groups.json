@@ -1,0 +1,51 @@
+{
+  "id": "rodriguez-2018-ngc253-young-groups",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Identification and analysis of the young population in the starburst galaxy NGC 253",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2018MNRAS.479..961R"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/MNRAS/479/961"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.479..961R",
+      "label": "2018MNRAS.479..961R"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/479/961",
+      "label": "CDS J/MNRAS/479/961"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/479/961/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "catalog: 875 young star groups with J2000 positions from HST imaging."
+    }
+  ],
+  "creators": [
+    "M. J. Rodriguez",
+    "G. Baume",
+    "C. Feinstein"
+  ],
+  "publisher": "MNRAS 479, 961",
+  "publicationDate": "2018",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Rodriguez et al. (2018), MNRAS 479, 961.",
+      "scope": "NGC 253 young star groups",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/479/961/ReadMe"
+    }
+  ]
+}

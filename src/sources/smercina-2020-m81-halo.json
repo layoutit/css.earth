@@ -1,0 +1,42 @@
+{
+  "id": "smercina-2020-m81-halo",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Saga of M81: Global View of a Massive Stellar Halo in Formation",
+  "identifiers": [
+    {
+      "type": "arxiv",
+      "value": "1910.14672"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1910.14672",
+      "label": "arXiv:1910.14672"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1910.14672",
+      "checkedOn": "2026-09-29",
+      "locator": "Sect. 4.1 (minor-axis profile): Subaru Hyper Suprime-Cam resolved red giants; \"we detect RGB halo sources out to 65 kpc\" along M81's minor axis."
+    }
+  ],
+  "creators": [
+    "A. Smercina",
+    "E. F. Bell",
+    "P. A. Price",
+    "C. T. Slater"
+  ],
+  "publisher": "arXiv:1910.14672",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Smercina et al., arXiv:1910.14672.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/1910.14672"
+    }
+  ]
+}

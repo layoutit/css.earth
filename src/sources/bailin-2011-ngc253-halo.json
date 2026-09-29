@@ -1,0 +1,42 @@
+{
+  "id": "bailin-2011-ngc253-halo",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Resolved Stellar Halo of NGC 253",
+  "identifiers": [
+    {
+      "type": "arxiv",
+      "value": "1105.0005"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1105.0005",
+      "label": "arXiv:1105.0005"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1105.0005",
+      "checkedOn": "2026-09-29",
+      "locator": "Summary: Magellan/IMACS imaging gives a global picture of the halo, \"reaching out to distances of 30 kpc from the center of the galaxy\"."
+    }
+  ],
+  "creators": [
+    "J. Bailin",
+    "E. F. Bell",
+    "S. N. Chappell",
+    "D. J. Radburn-Smith"
+  ],
+  "publisher": "arXiv:1105.0005",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Bailin et al., arXiv:1105.0005.",
+      "scope": "Stellar extent",
+      "evidence": "https://arxiv.org/abs/1105.0005"
+    }
+  ]
+}

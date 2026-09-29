@@ -1,0 +1,51 @@
+{
+  "id": "kregel-2002-disc-flattening",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Flattening and truncation of stellar discs in edge-on spiral galaxies",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2002MNRAS.334..646K"
+    },
+    {
+      "type": "arxiv",
+      "value": "astro-ph/0204154"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2002MNRAS.334..646K",
+      "label": "2002MNRAS.334..646K"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0204154",
+      "label": "arXiv:astro-ph/0204154"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0204154",
+      "checkedOn": "2026-09-29",
+      "locator": "Sect. 4.3: the volume-corrected average disc flattening <h_R/h_z> = 7.3 +/- 2.2 (1 sigma)."
+    }
+  ],
+  "creators": [
+    "M. Kregel",
+    "P. C. van der Kruit",
+    "R. de Grijs"
+  ],
+  "publisher": "MNRAS 334, 646",
+  "publicationDate": "2002",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kregel et al. (2002), MNRAS 334, 646.",
+      "scope": "Disc thickness from scale length",
+      "evidence": "https://arxiv.org/abs/astro-ph/0204154"
+    }
+  ]
+}

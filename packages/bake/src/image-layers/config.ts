@@ -16,10 +16,10 @@ export interface ImageLayerRecipe {
   geometry: { kind: 'inclined-disk' | 'line-of-sight-envelope'; inclinationDeg: number; lineOfNodesPaDeg: number;
     thicknessKpc: number; supportRadiusKpc: number; supportTaperFraction: number; depthWeights: number[]; depthScales: number[];
     /** A published bulge-plus-disc fit of the sky light (./bulge.ts): Sérsic bulge, exponential disc, one position angle. */
-    bulge?: { source: string; positionAngleDeg: number; sersicIndex: number; halfLightRadiusKpc: number; surfaceBrightnessAtHalfLight: number;
-      skyEllipticity: number; disc: { centralSurfaceBrightness: number; scaleLengthKpc: number; skyEllipticity: number };
+    bulge?: { source: string; /** Whose light fills the bulge: a share of the photograph's (default) or the fit's own. */ lightFrom?: 'photograph' | 'fit'; positionAngleDeg: number; sersicIndex: number; halfLightRadiusKpc: number; surfaceBrightnessAtHalfLight: number;
+      skyEllipticity: number; disc: { centralSurfaceBrightness: number; scaleLengthKpc: number; skyEllipticity: number; positionAngleDeg?: number };
       /** How far the bulge's slices reach: radius on the sky and height either side of the disc, kpc. */
-      extentKpc: { radius: number; height: number } } };
+      extentKpc: { radius: number; height: number; /** The share fades to nothing from here out to `radius`. */ fadeFrom?: number } } };
   bake: { maxFacePixels: number; diffuseFacePixels: number;
     /** A levels adjustment of the photograph (0-1 black and white points, then gamma), after star and companion removal. */
     levels?: { black: number; white: number; gamma: number; basis: string };
@@ -55,12 +55,14 @@ const path = (v: unknown): string => {
 const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']> => {
   const b = object(v, 'geometry.bulge'), d = object(b.disc, 'geometry.bulge.disc'), e = object(b.extentKpc, 'geometry.bulge.extentKpc');
   const ellipticity = (x: unknown, at: string) => { const n = finite(x, at); if (n < 0 || n >= 1) throw new TypeError(`${at} must be in [0, 1); got ${n}.`); return n; };
-  return { source: text(b.source, 'geometry.bulge.source'), positionAngleDeg: finite(b.positionAngleDeg, 'geometry.bulge.positionAngleDeg'),
+  if (b.lightFrom !== undefined && b.lightFrom !== 'photograph' && b.lightFrom !== 'fit') throw new TypeError(`geometry.bulge.lightFrom must be photograph or fit; got ${JSON.stringify(b.lightFrom)}.`);
+  return { source: text(b.source, 'geometry.bulge.source'), ...(b.lightFrom===undefined?{}:{lightFrom:b.lightFrom}), positionAngleDeg: finite(b.positionAngleDeg, 'geometry.bulge.positionAngleDeg'),
     sersicIndex: positive(b.sersicIndex, 'geometry.bulge.sersicIndex'), halfLightRadiusKpc: positive(b.halfLightRadiusKpc, 'geometry.bulge.halfLightRadiusKpc'),
     surfaceBrightnessAtHalfLight: finite(b.surfaceBrightnessAtHalfLight, 'geometry.bulge.surfaceBrightnessAtHalfLight'), skyEllipticity: ellipticity(b.skyEllipticity, 'geometry.bulge.skyEllipticity'),
     disc: { centralSurfaceBrightness: finite(d.centralSurfaceBrightness, 'geometry.bulge.disc.centralSurfaceBrightness'), scaleLengthKpc: positive(d.scaleLengthKpc, 'geometry.bulge.disc.scaleLengthKpc'),
-      skyEllipticity: ellipticity(d.skyEllipticity, 'geometry.bulge.disc.skyEllipticity') },
-    extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height') } };
+      skyEllipticity: ellipticity(d.skyEllipticity, 'geometry.bulge.disc.skyEllipticity'), ...(d.positionAngleDeg===undefined?{}:{positionAngleDeg:finite(d.positionAngleDeg,'geometry.bulge.disc.positionAngleDeg')}) },
+    extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height'),
+      ...(e.fadeFrom===undefined?{}:{fadeFrom:(()=>{const f=positive(e.fadeFrom,'geometry.bulge.extentKpc.fadeFrom');if(f>=Number(e.radius))throw new TypeError(`geometry.bulge.extentKpc.fadeFrom (${f}) must be inside radius (${String(e.radius)}).`);return f;})()}) } };
 };
 const alphaQualityOf = (v: unknown): number => {
   const n = finite(v, 'encoding.alphaQuality'); if (!Number.isInteger(n) || n < 0 || n > 100) throw new TypeError(`encoding.alphaQuality must be an integer 0-100; got ${n}.`); return n;

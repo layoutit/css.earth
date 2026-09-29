@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "meaning": "M81's catalogued objects as dots on its photograph's disc: planetary nebulae, globular clusters and supernova remnants, each on the disc or, for old objects near the centre, in the bulge.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "jacoby-pne",
+      "withinPcOfCentre": 16500,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 16.5 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "nantais-gc",
+      "withinPcOfCentre": 16500,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 16.5 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "vucetic-snr",
+      "withinPcOfCentre": 16500,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 16.5 kpc support radius (recipe.json)."
+    }
+  ],
+  "colourTowardWhite": 0.5,
+  "colourTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colourGamma": 1.6,
+  "colourGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

@@ -3,7 +3,7 @@ import type { ImageLayerRecipe, Vec3 } from './config.ts';
 import { imageLayerDisc, norm, rad } from './disc.ts';
 
 /** A galaxy's bulge as a published bulge-plus-disc fit of its sky light: a Sérsic bulge and an exponential disc, each on
- * elliptical isophotes sharing one position angle (Dorman et al. 2013, Sect. 4.1.1, eqs. 1-4). The fit gives, at any
+ * elliptical isophotes (Dorman et al. 2013, Sect. 4.1.1, eqs. 1-4, with one position angle; S4G's fits give each its own). The fit gives, at any
  * sky position, the bulge's share of the light; the photograph's light there is split by that share, and the bulge's part
  * is spread through an oblate spheroid instead of the disc, so it stays round seen from any side. */
 export type ImageLayerBulge = NonNullable<ImageLayerRecipe['geometry']['bulge']>;
@@ -21,19 +21,28 @@ export function imageLayerBulgeModel(recipe: Pick<ImageLayerRecipe, 'target' | '
   // Elliptical radius on the sky (Dorman et al. 2013, eq. 2): R sqrt(cos² ΔPA + sin² ΔPA / (1 - ε)²).
   const elliptical = (major: number, minor: number, ellipticity: number) => Math.hypot(major, minor / (1 - ellipticity));
   const lineNodes: Vec3 = [Math.sin(pa), Math.cos(pa), 0], diskMinor = norm(cross(disc.diskNormal, lineNodes));
-  // The fit's own position angle, which may differ from the disc's line of nodes.
-  const fitPa = rad(bulge.positionAngleDeg);
+  // The fit's own position angles (one for both components unless the disc has its own), which may differ from the
+  // disc's line of nodes.
+  const fitPa = rad(bulge.positionAngleDeg), discPa = rad(bulge.disc.positionAngleDeg ?? bulge.positionAngleDeg);
+  const along = (east: number, north: number, pa: number) => [east * Math.sin(pa) + north * Math.cos(pa), -east * Math.cos(pa) + north * Math.sin(pa)] as const;
+  const radii = (east: number, north: number) => ({ rb: elliptical(...along(east, north, fitPa), bulge.skyEllipticity), rd: elliptical(...along(east, north, discPa), bulge.disc.skyEllipticity) });
   /** The bulge's share of the fitted light at a sky offset from the centre: kpc at the galaxy's distance, east and north. */
+  // A fit whose bulge falls off more slowly than its disc (a high Sérsic index) keeps a share far out, where that light
+  // is the disc's; `extentKpc.fadeFrom` fades the share to nothing between it and `extentKpc.radius` on the sky.
+  const fadeFrom = bulge.extentKpc.fadeFrom, reach = bulge.extentKpc.radius;
+  const fade = (east: number, north: number) => {
+    if (fadeFrom === undefined) return 1;
+    const t = Math.max(0, Math.min(1, (reach - Math.hypot(east, north)) / (reach - fadeFrom)));
+    return t * t * (3 - 2 * t);
+  };
   const share = (east: number, north: number) => {
-    const major = east * Math.sin(fitPa) + north * Math.cos(fitPa), minor = -east * Math.cos(fitPa) + north * Math.sin(fitPa);
-    const rb = elliptical(major, minor, bulge.skyEllipticity), rd = elliptical(major, minor, bulge.disc.skyEllipticity);
+    const { rb, rd } = radii(east, north);
     const sb = bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), sd = discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc);
-    return sb / (sb + sd);
+    return sb / (sb + sd) * fade(east, north);
   };
   /** The fitted surface brightness of the bulge and the disc at a sky offset (east, north, kpc), as linear intensity. */
   const light = (east: number, north: number) => {
-    const major = east * Math.sin(fitPa) + north * Math.cos(fitPa), minor = -east * Math.cos(fitPa) + north * Math.sin(fitPa);
-    const rb = elliptical(major, minor, bulge.skyEllipticity), rd = elliptical(major, minor, bulge.disc.skyEllipticity);
+    const { rb, rd } = radii(east, north);
     return { bulge: bulgeIb * Math.exp(-b * ((rb / re) ** (1 / n) - 1)), disc: discI0 * Math.exp(-rd / bulge.disc.scaleLengthKpc) };
   };
   // The oblate spheroid that projects to the fitted sky ellipticity at the disc's inclination:
@@ -56,5 +65,5 @@ export function imageLayerBulgeModel(recipe: Pick<ImageLayerRecipe, 'target' | '
     const scale = disc.distanceKpc / (disc.distanceKpc + point[2]);
     return [point[0] * scale, point[1] * scale];
   };
-  return { bulge, q0, share, light, density, skyOffset, lineNodes, diskMinor, disc };
+  return { bulge, q0, share, fade, light, density, skyOffset, lineNodes, diskMinor, disc };
 }

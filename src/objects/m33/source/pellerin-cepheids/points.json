@@ -41,6 +41,6 @@
     "colorCss": "#ffe2a8",
     "radiusPx": 0.75,
     "opacity": 0.9,
-    "note": "Presentation only: the Milky Way Cepheid layer's colour, size and opacity, as M31's Cepheids use."
+    "note": "Presentation only: the Milky Way Cepheid layer's colour, size and opacity, as M31's Cepheids use. Each dot takes its tone and half its colour from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
   }
 }

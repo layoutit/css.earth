@@ -93,8 +93,7 @@ places each object on the image layers' disc (`frame.placement: image-layer-disc
 - **Bulge members:** a planetary nebula is a bulge member with the bulge's share of Dorman et al.'s light at its sky
   position, and sits along its sight line at a depth drawn from the bulge's density. Young objects stay in the disc.
 - **Tone:** the dots take the Milky Way's colours for their kinds, mixed halfway to white and raised to the power 1.6.
-  HII regions, Cepheids, remnants and disc planetary nebulae are toned to 60%, since at full tone they outshone the disc;
-  bulge planetary nebulae keep full tone, since a darkened dot reads as a speck on the bright bulge. Stars are coloured by
+  Then each dot takes its tone from the photograph's brightness under it (never below 15%) and moves halfway from its kind's colour to the photograph's colour there, so dots sit in the galaxy's light instead of on it; flat tints read as dark specks on the bright bulge ([`prepare-catalogue-points.mts`](../../../packages/bake/cli/prepare-catalogue-points.mts)). Stars are coloured by
   their measured B-V through the app's star colour, at M33's size and opacity. All presentation choices.
 - **Where they stop:** only inside the 27.2 kpc support, so every dot sits on the photograph.
 - **Stars:** the survey could not resolve the crowded bulge, so its stars thin out toward the centre.
@@ -107,6 +106,7 @@ al. (77° ± 0.5°), Chemin et al. (74.3°, 37.7°) and Dorman et al. (PA 44.4°
 
 - [Before and after](evidence/2026-09-29/before-after.jpg): the app close to Earth's angle and tilted, and a top-down
   composite of the z bank, before (DSS2, 77.5°, dots along sight lines) and after. Captured on this branch on 2026-09-29.
+- [Dots from the photograph](evidence/2026-09-29/dots-from-photograph.jpg): the default view (left) and tilted (right), in the app with each dot's tone and colour taken from the photograph. Captured on this branch on 2026-09-29.
 - [Composite report](evidence/2026-09-29/optical-composite.json): pixels from each input and the histogram-matching curve.
 - The prepared bank's `approximation.limitations` records the foreground, companion, colour-tie and saturation counts
   quoted above.

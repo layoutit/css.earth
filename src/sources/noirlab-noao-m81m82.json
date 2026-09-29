@@ -1,0 +1,41 @@
+{
+  "id": "noirlab-noao-m81m82",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Galaxies M81 & M82",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "noao-m81m82"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/noao-m81m82/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m81m82.jpg",
+      "label": "Large JPEG"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://noirlab.edu/public/images/noao-m81m82/",
+      "checkedOn": "2026-09-29",
+      "locator": "8315 x 4642 px; 58.87 x 32.87 arcmin; north 90.2 deg right of vertical; page centre RA 9h54m50.25s, Dec +69 13 42.5, which the Large JPEG does not match: the registration is re-measured from M81's and M82's cores (the recipe's observation). Found by `telescope explore m81`."
+    }
+  ],
+  "publisher": "NSF NOIRLab",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "T.A. Rector (University of Alaska Anchorage) and NOIRLab/NSF/AURA",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/images/noao-m81m82/"
+    }
+  ]
+}

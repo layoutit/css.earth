@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "m81",
+  "name": "Bode's Galaxy (M81)",
+  "defaultLens": "optical",
+  "bank": {
+    "path": "src/objects/m81/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m81/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m81/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "lenses": [
+    {
+      "id": "optical",
+      "label": "NOIRLab · optical",
+      "title": "Galaxies M81 & M82",
+      "description": "T.A. Rector's Mayall 4-meter view of M81 and M82 with Milky Way foreground stars removed and the whole-galaxy colour tied to RC3's measured B-V of 0.95. M81's bulge is spread through a round volume from S4G's bulge-plus-disc fit, and its disc through a 368 pc layer; depth is modelled, not measured per pixel.",
+      "summary": "Visible-light image on an approximate depth model with a round bulge; individual depths are not measured.",
+      "detail": "8315 × 4642 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "Mayall 4-m Mosaic, colour composite"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "8315 × 4642"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "58.87 × 32.87 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m81/source/source.jpg",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m81m82.jpg",
+        "crop": {
+          "left": 508,
+          "top": 614,
+          "width": 3000,
+          "height": 3000
+        }
+      }
+    }
+  ]
+}

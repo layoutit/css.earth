@@ -26,3 +26,21 @@ test('the density falls outward and is flatter along the disc normal', () => {
   assert.ok(at(m, 0.5) > at(m, 1) && at(m, 1) > at(m, 2));
   assert.ok(at(n, 1) < at(m, 1));
 });
+
+// M81 with S4G's fit (Salo et al. 2015), whose high-index bulge keeps a share of the light far out: the share fades to
+// nothing between extentKpc.fadeFrom and extentKpc.radius on the sky.
+const m81 = (fadeFrom?: number) => imageLayerBulgeModel({ target: { centerRaDeg: 148.8883, centerDecDeg: 69.065278, distancePc: 3_614_099.2 },
+  geometry: { kind: 'inclined-disk', inclinationDeg: 59, lineOfNodesPaDeg: 150.2, thicknessKpc: 2.208, supportRadiusKpc: 16.5, supportTaperFraction: 0.75,
+    depthWeights: [1], depthScales: [1], bulge: { source: 'salo-2015-s4g-decompositions', positionAngleDeg: 145.02, sersicIndex: 3.557,
+      halfLightRadiusKpc: 1.804, surfaceBrightnessAtHalfLight: 20.017, skyEllipticity: 0.346,
+      disc: { centralSurfaceBrightness: 19.833, scaleLengthKpc: 2.684, skyEllipticity: 0.457, positionAngleDeg: 156.3 },
+      extentKpc: { radius: 6, height: 4, ...(fadeFrom === undefined ? {} : { fadeFrom }) } } } });
+
+test('a fading bulge keeps its share inside fadeFrom and gives none at the extent radius', () => {
+  const plain = m81(), faded = m81(3), along = (model: typeof plain, kpc: number) => model.share(kpc * Math.sin(145.02 * Math.PI / 180), kpc * Math.cos(145.02 * Math.PI / 180));
+  assert.ok(along(plain, 9) > 0.2, `S4G's bulge still holds ${along(plain, 9)} of the light at 9 kpc`);
+  assert.equal(along(faded, 2), along(plain, 2));
+  assert.ok(along(faded, 4.5) < along(plain, 4.5) && along(faded, 4.5) > 0);
+  assert.equal(along(faded, 6), 0);
+  assert.equal(along(faded, 9), 0);
+});
