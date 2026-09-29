@@ -38,7 +38,7 @@ interior registration are still unqualified.
 <details>
 <summary>Reproduce the 2010 source inspection</summary>
 
-Run `node tools/objects/source-authoring/cassini-small-moons/review-aegaeon.mts --acquire`
+Run `node packages/bake/authoring/cassini-small-moons/review-aegaeon.mts --acquire`
 from the repository root. The command restores only the four pinned image/label
 files, one at a time, and writes the comparison and JSON report under
 `output/aegaeon-source-review/`. Optional first and second arguments choose the

@@ -9,7 +9,7 @@
       "finding": "29 calibrated files from 8 and 19 February 2020 (stations A0-B2-D0-C1 and K0-G2-D0-J3) are public in the OiDB at calibration level 3. Averaged over beam-commuter repeats in the paper's pseudo-continuum windows they give 780 squared visibilities and 520 closure phases. A uniform-disc fit gives 42.45 mas; the paper reports 43.8 mas for this epoch. The night of 25 February (A0-G1-J2-J3) is also public but was not used by the paper and is not used here.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/source/manifest.json",
-        "https://github.com/layoutit/css.earth/blob/main/tools/objects/source-authoring/betelgeuse/author.mts",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/authoring/betelgeuse/author.mts",
         "https://oidb.jmmc.fr/",
         "https://arxiv.org/abs/2401.12404"
       ]

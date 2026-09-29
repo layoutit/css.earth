@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /** Author a circumstellar volume: the material around a star, drawn from coronagraph mosaics as a density grid attached to
- * that star, the way Betelgeuse's shell is (tools/objects/source-authoring/betelgeuse-shell/author.mts), but from one
+ * that star, the way Betelgeuse's shell is (packages/bake/authoring/betelgeuse-shell/author.mts), but from one
  * checked-in recipe rather than a script per star.
  *
  *   node tools/objects/circumstellar/author.mts <object id> [--check] [--raw <dir>]...

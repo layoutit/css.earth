@@ -36,6 +36,11 @@ export CSSEARTH_AUDIT_OUTPUT=output/outer-worlds
 export CSSEARTH_AUDIT_CAPTURES=output/playwright/outer-worlds
 ```
 
+(`CSSEARTH_AUDIT_INPUTS` recorded the path as it stood when these retired
+helpers ran, [then](https://github.com/layoutit/css.earth/blob/7762d546d2/tools/objects/source-authoring/outer-worlds/inputs.json);
+`outer-worlds/inputs.json` is now
+`packages/bake/authoring/outer-worlds/inputs.json`.)
+
 These variables apply to `qualify`, `fresh-sources`, `fresh-install`,
 `surface-fit`, `browser-check` and `contact-sheet`. `final-interactions`
 retains its original named scenarios. `contact-sheet` writes `worlds.webp`.

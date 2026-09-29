@@ -29,7 +29,7 @@ north at the star, a convention recorded in [rotation.json](source/preparation/r
 18 July 2023 and public since 23 August 2024. The pipeline's own continuum image is pinned in
 [manifest.json](source/manifest.json) and restored from the archive by
 [acquisition.json](source/preparation/acquisition.json); the 77 GB product tarball is never needed, because the archive's
-nested datalink service serves that one file. [author.mts](../../../tools/objects/source-authoring/r-doradus/author.mts) cuts
+nested datalink service serves that one file. [author.mts](../../../packages/bake/authoring/r-doradus/author.mts) cuts
 the 25 × 25 pixel window around the star and resamples it eight times finer to 0.625 mas, which adds no detail — the restoring
 beam is 20.7 × 16.8 mas, four native pixels wide. The lens palette is the heat scale used for Betelgeuse and π¹ Gruis; the
 legend reads relative brightness at 338 GHz, not colour or temperature.
