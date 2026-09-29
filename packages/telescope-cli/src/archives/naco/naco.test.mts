@@ -1,4 +1,5 @@
 import { sampleStatistics as statistics } from '@cssearth/fits';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();

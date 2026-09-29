@@ -423,7 +423,7 @@ export async function writeProducts(definition: SlitScanDefinition, run: SlitSca
     { role: 'Horizons responses', identity: `${HST_PROGRAMS.path}/${definition.horizons.responses}`, bytes: responsesBytes.byteLength },
     { role: 'rotation model', identity: definition.orientation.path, bytes: rotationBytes.byteLength }];
   const software: ProductSoftware[] = [{ name: 'cssEarth slit-scan-map', version: '1' }, { name: 'node', version: process.versions.node }];
-  const record = bodyMapProductRecord(product, fits, metadata, inputs, software, undefined, [{ path: 'registration.json', bytes: registration }]);
+  const record = bodyMapProductRecord(product, fits, metadata, inputs, software, [{ path: 'registration.json', bytes: registration }]);
   await writeFile(resolve(outputDirectory, `${name}.product.json`), formatProductRecord(record));
   return [name, `${name}.body-map.json`, `${name}.product.json`, 'registration.json'];
 }

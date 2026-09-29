@@ -163,7 +163,7 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
     { role: 'leap seconds', identity: LEAP_SECONDS_KERNEL, bytes: leapBytes.byteLength },
   ];
   const software: ProductSoftware[] = [{ name: 'cssEarth resolved-disc-map', version: '1' }, { name: 'node', version: process.versions.node }];
-  const mapRecord = Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, undefined, [resolution.output])));
+  const mapRecord = Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, [resolution.output])));
   const files = new Map<string, Buffer>([[resolve(dirname(output), resolution.output.path), resolution.output.bytes], [output, fits], [metadataPath, metadata], [mapRecordPath, mapRecord], [observerPath, Buffer.from(tables.observer)], [heliocentricPath, Buffer.from(tables.heliocentric)]]);
   const changed: string[] = [];
   for (const [path, bytes] of files) if (!(await readFile(path).then(existing => existing.equals(bytes), () => false))) {

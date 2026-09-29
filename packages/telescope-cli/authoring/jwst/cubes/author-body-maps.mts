@@ -131,7 +131,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     written.set(resolve(source, `${output}.body-map.json`), metadata);
     written.set(resolve(dirname(resolve(source, output)), resolution.output.path), resolution.output.bytes);
     written.set(resolve(source, output), fits);
-    written.set(resolve(source, `${output}.product.json`), Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, undefined, [resolution.output]))));
+    written.set(resolve(source, `${output}.product.json`), Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, [resolution.output]))));
     let peak = { value: -Infinity, cell: 0 }; const seen: number[] = [], errors: number[] = [];
     map.depth.forEach((value, cell) => { if (Number.isFinite(value)) { seen.push(value); errors.push(map.error[cell]!); if (value > peak.value) peak = { value, cell }; } });
     evidence.push({ id: mapId, cubes, overlaps: overlaps.filter(pair => pair.cells >= 500).map(pair => ({ first: cubes[pair.first]!.observation, second: cubes[pair.second]!.observation, cells: pair.cells, rmsDifference: round(pair.rmsDifference), correlation: round(pair.correlation, 3) })),

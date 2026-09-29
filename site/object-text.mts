@@ -1,4 +1,4 @@
-import { sourceArray, sourceDate, sourceDigest, sourceId, sourceObject, sourceText, sourceUrl } from '@cssearth/objects/sources';
+import { sourceArray, sourceDate, sourceId, sourceObject, sourceText, sourceUrl } from '@cssearth/objects/sources';
 import { validateDatasetText } from './dataset-content.mts';
 
 /**

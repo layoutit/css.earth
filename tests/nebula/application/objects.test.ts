@@ -6,7 +6,6 @@ import { sourceTest } from '../../objects/source-test.mts';
 const test = sourceTest();
 import ts from 'typescript';
 import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
-import { hash as volumeResourceDigest } from '@cssearth/bake/volume/node';
 import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/bake/volume';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
@@ -93,7 +92,7 @@ test('the real installer rejects post-compiler field stars before replacing the 
     provenance: {}, approximation: {}, stacks: axes.map(axis => ({ axis, leaves: [{ id: `${axis}-0`,
       centerUnits: [0, 0, 0], texturePath: `${axis}.png`, widthPx: 1, heightPx: 1,
       style: { width: '1px', height: '1px', transform: transforms[axis], backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-    resources: axes.map(axis => ({ path: `${axis}.png`, sha256: volumeResourceDigest(texture), bytes: texture.length, width: 1, height: 1 })) };
+    resources: axes.map(axis => ({ path: `${axis}.png`, bytes: texture.length, width: 1, height: 1 })) };
   const volumePin = await save('volume.json', volume);
   // Explicit synthetic fixture row: the real catalogue-field owner adds it after compiler admission.
   const fieldStars = await save('field.json', { schema: 'cssearth-gaia-nebula-field@1', id: 'budget-fixture', coordinateEpochJulianYear: 2016,
@@ -109,7 +108,7 @@ test('the real installer rejects post-compiler field stars before replacing the 
     boundsArcsec: { min: [-1, -1, -1], max: [1, 1, 1] }, skyBoundsArcsec: { min: [-1, -1], max: [1, 1] }, spanArcsec: 2, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: [0, 0, 0], earthView: 'observer-at-negative-z-looking-away' },
     neutral: volumePin, lenses: [{ id: 'first', label: 'First', volume: volumePin,
-      coverage: { positiveAlphaTexels: 3, recoloredTexels: 3, outsideImageTexels: 0 } }], stars: [], alphaSha256: 'b'.repeat(64),
+      coverage: { positiveAlphaTexels: 3, recoloredTexels: 3, outsideImageTexels: 0 } }], stars: [],
     sampling: { imageWidth: 512, samplesPerSlab: 4, sliceCounts: { x: 1, y: 1, z: 1 },
       renderBudget: createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, 0, 3) } };
   const backend: NebulaResearchBackend = {
