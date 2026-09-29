@@ -18,28 +18,12 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "typeRoots": [
-      "../node_modules/.pnpm/node_modules/@types"
+      "./node_modules/.pnpm/node_modules/@types"
     ],
     "types": [
       "node"
     ],
     "incremental": true,
-    "tsBuildInfoFile": "../output/tsbuildinfo/tools.tsbuildinfo"
-  },
-  "include": [
-    "**/*.mts",
-    "../.github/scripts/**/*.mts",
-    "../labs/experiments/**/*.mts",
-    "../labs/investigations/**/*.mts",
-    "../labs/performance/**/*.mts",
-    "../site/env.d.ts"
-  ],
-  "exclude": [
-    "**/*.test.mts",
-    "../.github/scripts/**/*.test.mts",
-    "../labs/performance/**/*.test.mts",
-    "**/dist/**",
-    "**/node_modules/**",
-    "**/oracles/**"
-  ]
+    "tsBuildInfoFile": "./output/tsbuildinfo/base.tsbuildinfo"
+  }
 }

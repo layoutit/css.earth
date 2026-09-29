@@ -16,9 +16,9 @@ export interface Violation { readonly from: string; readonly to: string }
 const under = (path: string, ...prefixes: readonly string[]) => prefixes.some(prefix => path.startsWith(prefix));
 const topLevel = (path: string) => path.includes('/') ? path.slice(0, path.indexOf('/')) : '';
 
-/** Code that works ahead of runtime: `tools/`, `@cssearth/bake` (items H, I, J moved the rest there) and the telescope command
- * `@cssearth/telescope-cli`, whose archive reductions and programs moved out of `tools/objects/`. */
-export const PREPARATION_CODE = ['tools/', 'packages/bake/', 'packages/telescope-cli/'] as const;
+/** Code that works ahead of runtime: `@cssearth/bake` and the telescope command `@cssearth/telescope-cli`. The `tools/` folder that
+ * held the rest is retired (`retired-folders` in repository-rules.mts). */
+export const PREPARATION_CODE = ['packages/bake/', 'packages/telescope-cli/'] as const;
 
 /** The runtime: the site and the CSS renderer package's sources. */
 export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
@@ -32,7 +32,7 @@ export const SITE_BUILD = 'site/build/';
  * live inside `site/` and need no entry here. */
 export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
 
-export const APPLICATION_TREES = ['tools', 'site', 'labs', '.github'] as const;
+export const APPLICATION_TREES = ['site', 'labs', '.github'] as const;
 
 const BAKE_NEBULA = 'packages/bake/src/nebula/', BAKE_OBJECTS = 'packages/bake/src/objects/';
 
@@ -51,13 +51,13 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'nothing-imports-applications',
-    description: 'tools/, site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue excepted (type-only imports count)',
+    description: 'site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue excepted (type-only imports count)',
     forbids: (from, to) => APPLICATION_TREES.some(tree => topLevel(to) === tree && topLevel(from) !== tree)
       && !ENTRY_GLUE.some(pattern => pattern.test(from)),
   },
   {
     id: 'runtime-imports-no-preparation',
-    description: 'site/ (except its build-time site/build/) and packages/renderer/src/ must not import tools/, @cssearth/bake or @cssearth/telescope-cli (type-only imports count; tests may)',
+    description: 'site/ (except its build-time site/build/) and packages/renderer/src/ must not import @cssearth/bake or @cssearth/telescope-cli (type-only imports count; tests may)',
     forbids: (from, to) => under(from, ...RUNTIME_CODE) && !from.startsWith(SITE_BUILD) && under(to, ...PREPARATION_CODE),
   },
   {

@@ -10,10 +10,10 @@ export default [
     '**/prepared/**', '**/generated/**', 'src/objects/**', 'src/sources/**',
     'src/platform/solar-geometry.mts', 'site/prepared-object-catalog.mts', 'site/prepared-context-objects.mts'] },
   {
-    // `tools`, `src` and `site` — roughly 232,000 authored lines — had no ESLint at all, so the
+    // `src` and `site` (and once `tools`) — roughly 232,000 authored lines — had no ESLint at all, so the
     // size and boundary rules below governed only the two smallest trees. Warnings, not errors:
     // the debt is pre-existing and this is meant to make it visible, not to block work on it.
-    files: ['.github/scripts/**/*.{ts,mts}', 'tools/**/*.{ts,mts}', 'labs/experiments/**/*.{ts,mts}', 'labs/investigations/**/*.{ts,mts}', 'labs/performance/**/*.{ts,mts}', 'tests/oracles/**/*.{ts,mts}', 'tests/contract/**/*.{ts,mts}', 'tests/nebula/**/*.{ts,mts}', 'tests/preparation/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
+    files: ['.github/scripts/**/*.{ts,mts}', 'labs/experiments/**/*.{ts,mts}', 'labs/investigations/**/*.{ts,mts}', 'labs/performance/**/*.{ts,mts}', 'tests/oracles/**/*.{ts,mts}', 'tests/contract/**/*.{ts,mts}', 'tests/nebula/**/*.{ts,mts}', 'tests/preparation/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
     languageOptions: { parser: typescriptParser },
     rules: {
       'max-lines': ['warn', { max: packageLineLimit, skipBlankLines: false, skipComments: false }],

@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tools/tsconfig.json",
+  "extends": "../../../tsconfig.base.json",
   "include": [
     "*.mts",
     "../../../tests/experiments/native-resize/*.mts"

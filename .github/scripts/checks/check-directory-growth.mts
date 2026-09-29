@@ -21,7 +21,7 @@ import { promisify } from 'node:util';
 /** A directory may hold this many authored modules before it is counted at all. */
 export const FREE_ALLOWANCE = 20;
 export const BASELINE_PATH = '.github/scripts/checks/directory-growth-baseline.json';
-const ROOTS = ['src', 'site', 'tools', 'packages', 'labs', '.github/scripts'];
+const ROOTS = ['src', 'site', 'packages', 'labs', '.github/scripts'];
 const CODE = /\.(?:ts|mts|tsx|astro)$/u;
 
 /** Generated output, and data sets whose size is the point. Counting these would forbid a
