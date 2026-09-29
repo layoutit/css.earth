@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "stars",
+  "published": true,
   "meaning": "M33's stars from the Local Group Galaxies Survey as dots on its photograph's disc, after the Gaia foreground cut, thinned evenly so the renderer can draw them: denser where the galaxy has more stars.",
   "centreOnGalaxy": true,
   "banks": [

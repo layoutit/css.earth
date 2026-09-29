@@ -29,6 +29,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
+import { readCatalogueBank, recipePublished, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const KPC_M = 3.0856775814913673e19, MPC_M = 3.0856775814913673e22;
 const [objectArgument, id] = process.argv.slice(2);
@@ -103,7 +104,7 @@ const unplaced: Record<string, number> = {}, kept: Record<string, number> = {};
 const merged: { reference: number[]; colour: string; bank: string }[] = [];
 let bankFrame: ReturnType<typeof parseDensityVolumeFrame> | null = null, rawFrame: unknown = null;
 for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
-  const bank = JSON.parse(await readFile(resolve(prepared, `${bankIdValue}.json`), 'utf8')) as { schema?: unknown; frame?: unknown; source?: unknown;
+  const bank = await readCatalogueBank(objectDirectory, bankIdValue) as { schema?: unknown; frame?: unknown; source?: unknown;
     appearance?: { colorCss?: unknown; opacity?: unknown; palette?: unknown; paletteTone?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown };
   const parsedFrame = parseDensityVolumeFrame(bank?.frame), appearance = bank?.appearance;
   if (bank?.schema !== 'cssearth-catalogue-points@1' || !appearance || !hex(appearance.colorCss) || typeof appearance.opacity !== 'number' ||
@@ -150,7 +151,7 @@ const capped: Record<string, number> = {};
 // toward it.
 const enclosing = new Set<string>(), enclosingPoints: number[][] = [];
 for (const level of (recipe.within ?? []) as string[]) {
-  const outer = JSON.parse(await readFile(resolve(prepared, `${level}.json`), 'utf8')) as { schema?: unknown; frame?: unknown; points?: unknown };
+  const outer = await readCatalogueBank(objectDirectory, level) as { schema?: unknown; frame?: unknown; points?: unknown };
   const outerFrame = parseDensityVolumeFrame(outer.frame);
   if (outer.schema !== 'cssearth-catalogue-points@1' || !Array.isArray(outer.points) || outerFrame.metersPerUnit !== bankFrame!.metersPerUnit ||
       outerFrame.referenceFrame !== bankFrame!.referenceFrame || outerFrame.originM.some(value => value !== 0)) {
@@ -208,7 +209,6 @@ const output = { schema: 'cssearth-catalogue-points@1', id, source: 'merge', mea
   ...(cap ? { densityCap: { ...recipe.densityCap as object, left: capped } } : {}),
   frame: outputFrame, appearance: { colorCss: '#ffffff', radiusPx: 0.75, opacity: 1, palette },
   counts: { points: ordered.length }, points: ordered.map((point, index) => [...written[index]!, paletteIndex.get(point.colour)!]) };
-await writeFile(resolve(prepared, `${id}.json`), JSON.stringify(output) + '\n');
-const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
-await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
+// A merged bank is published only when its recipe says the app fetches it; a level of a later stack is a bake input.
+await writeCatalogueBank({ objectDirectory, id, bank: output, published: recipePublished(recipe, recipePath) });
 console.log(`Merged ${ordered.length} dots: kept ${JSON.stringify(kept)}; left out as unplaced ${JSON.stringify(unplaced)}; over the density cap ${JSON.stringify(capped)}.`);

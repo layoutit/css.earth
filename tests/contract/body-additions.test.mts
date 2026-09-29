@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
-import { contextObjectAssetUrls, contextObjectModule, prepareCatalog } from '../../site/build/prepare/prepare-catalog.mts';
+import { contextObjectAssetUrls, contextObjectJsonModule, contextObjectModule, prepareCatalog } from '../../site/build/prepare/prepare-catalog.mts';
 import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { prepareBodyRecords } from '../../packages/astronomy/cli/body-records.mts';
@@ -26,6 +26,13 @@ test('context prepared resources stay external until their bank is selected', ()
   assert.match(source, /\.\.\/src\/objects\/nebula\/prepared\/\*\*\/\*\.\{json,png,webp,bin\}/u);
   assert.match(source, /!\.\.\/src\/objects\/stars\/prepared\/\*\.bin/u,
     'The source-only point bank stays excluded while its published resources remain external.');
+  assert.doesNotMatch(source, /prepared\/\*\.json|CONTEXT_OBJECT_PREPARED_JSON/u, 'No prepared JSON enters the runtime module graph.');
+});
+
+test('the build reads four named prepared files per context object, never a catalogue bank', () => {
+  const source = contextObjectJsonModule([{ id: 'm33' }]);
+  assert.match(source, /'\.\.\/src\/objects\/m33\/prepared\/\{datasets,lenses,presentation,provenance\}\.json'/u);
+  assert.doesNotMatch(source, /prepared\/\*\.json/u);
 });
 
 test('asset-origin context resources come from inventories without local prepared bytes', async t => {

@@ -9,8 +9,10 @@ const bank = { schema: 'cssearth-catalogue-points@1', id: 'test-stars', frame,
   appearance: { colorCss: '#ffe2a8', radiusPx: .75, opacity: .7 }, points: [[1, 0, -10], [-1, 0, -10]] };
 
 test('the prepared catalogues the app draws are valid banks of every selected row with a distance', () => {
-  for (const [object, id] of [['milky-way', 'cepheids'], ['milky-way', 'globular-clusters'], ['milky-way', 'hou-han-gmc'], ['milky-way', 'hou-han-hii'],
-    ['milky-way', 'hou-han-masers'], ['milky-way', 'masers'], ['milky-way', 'open-clusters'], ['milky-way', 'dots'], ['nearby-universe', 'dots'], ['m31', 'dots']]) {
+  // The published banks: what each recipe marks `published: true` and the app fetches. Their inputs (a survey's stars,
+  // one catalogue's masers) are bake inputs in output/catalogue-points/, so they are not read here.
+  for (const [object, id] of [['milky-way', 'globular-clusters'], ['milky-way', 'dots'], ['nearby-universe', 'dots'], ['nearby-universe', 'bright-galaxy-dots'],
+    ['nearby-universe', 'quasar-dots'], ['m31', 'stars'], ['m31', 'dots'], ['m33', 'stars'], ['m33', 'dots'], ['m81', 'dots'], ['ngc-253', 'dots']]) {
     const prepared = JSON.parse(readFileSync(new URL(`../../../../src/objects/${object}/prepared/${id}.json`, import.meta.url), 'utf8'));
     const parsed = parseCataloguePoints(prepared);
     expect(parsed.id).toBe(id);

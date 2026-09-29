@@ -69,7 +69,7 @@ test('the real count comes from git, so generated output cannot enter the baseli
   // prepared-object-catalog.mts is generated too. Counting the working tree would put both in the
   // baseline and make it depend on whether `pnpm prebuild` had run.
   for (const generated of ['src/platform/solar-geometry.mts', 'site/prepared-object-catalog.mts',
-    'site/prepared-context-objects.mts']) {
+    'site/prepared-context-objects.mts', 'site/prepared-context-json.mts']) {
     assert.equal(files.includes(generated), false, `${generated} must not be counted`);
   }
   const counts = await countModules();

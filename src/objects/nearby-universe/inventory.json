@@ -3,63 +3,15 @@
   "assets": [
     {
       "location": "prepared",
-      "filename": "bright-galaxies.json",
-      "bytes": 992937,
-      "sha256": "8f3a19ba3bc39ee77a27fda1b0b8224efeb5308914a91bd136e839b0c13f42a1"
-    },
-    {
-      "location": "prepared",
       "filename": "bright-galaxy-dots.json",
       "bytes": 993021,
       "sha256": "cc2862ce2d428f3535ca73ae7f1cf5fe897517e794110ed61f985473752c0890"
     },
     {
       "location": "prepared",
-      "filename": "desi-bright-galaxies.json",
-      "bytes": 996733,
-      "sha256": "19f0c0cf5ff19695af9405890e32cfdcf151f3c91e28806a34686eca669cea41"
-    },
-    {
-      "location": "prepared",
-      "filename": "desi-quasars.json",
-      "bytes": 850889,
-      "sha256": "28e7d5af9694241ac59bcace4cf8a7a98104a37743bae0d565e4578878c21027"
-    },
-    {
-      "location": "prepared",
       "filename": "dots.json",
       "bytes": 213633,
       "sha256": "59c6917f5efc53704c22bae1644e9d8fd24071f4dd2efba376967ded7a36305a"
-    },
-    {
-      "location": "prepared",
-      "filename": "galaxies-10mpc.json",
-      "bytes": 2313,
-      "sha256": "0dcc4d7a47cae918ac9993a53e930c57b1e90444c6af2dd1d2374fc488ff7a1c"
-    },
-    {
-      "location": "prepared",
-      "filename": "galaxies-200mpc.json",
-      "bytes": 154317,
-      "sha256": "57475cf1ea3d8fc441ab55c38d12100e925b24c48092a2b06e50fae793f06508"
-    },
-    {
-      "location": "prepared",
-      "filename": "galaxies-20mpc.json",
-      "bytes": 5643,
-      "sha256": "2ea898b7d3b2f68a298bcdee91d6f4b460a4b9c127b8a9eff9eb9a073a9bdf95"
-    },
-    {
-      "location": "prepared",
-      "filename": "galaxies-60mpc.json",
-      "bytes": 54998,
-      "sha256": "448288a6810f5beb349a13282a0eec645017f920fd3969f8edf5260eb8321e2a"
-    },
-    {
-      "location": "prepared",
-      "filename": "galaxies.json",
-      "bytes": 822226,
-      "sha256": "dd566fb23d0164f0466608894bb5086350fc47665e17e05055a29ea351ba827b"
     },
     {
       "location": "prepared",
@@ -78,12 +30,6 @@
       "filename": "quasar-dots.json",
       "bytes": 283906,
       "sha256": "9db5f059042f8cace3a464ba4a9f562a3fada7f2436f23bcd6dcc91859b62439"
-    },
-    {
-      "location": "prepared",
-      "filename": "quasars.json",
-      "bytes": 283949,
-      "sha256": "7c327c21126025d3c86fcd2495824113627babbd40d1291b8c3bd556580c6524"
     }
   ]
 }
