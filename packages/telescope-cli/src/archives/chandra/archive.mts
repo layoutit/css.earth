@@ -291,14 +291,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   for (const value of obsids) {
     const entry = await chandraObservation(Number(value));
     target ??= entry.targetName;
-    // Digests recorded by an earlier download stay with their file.
-    const keep = (list: readonly ChandraFile[], previous: readonly ChandraFile[] = []) => list.map(file => {
-      const before = previous.find(other => other.path === file.path && other.bytes === file.bytes);
-      return file;
-    });
     const index = entries.findIndex(other => other.obsid === entry.obsid);
-    const withDigests = { ...entry, inputs: keep(entry.inputs, entries[index]?.inputs), products: keep(entry.products, entries[index]?.products) };
-    if (index >= 0) entries[index] = withDigests; else entries.push(withDigests);
+    if (index >= 0) entries[index] = entry; else entries.push(entry);
     console.log(`${entry.obsid}: ${entry.instrument}/${entry.detector} ${entry.grating} ${[entry.readMode, entry.dataMode].filter(Boolean).join('/')} ${entry.targetName}, ${(entry.livetimeSeconds / 1000).toFixed(1)} ks, ${entry.inputs.length} inputs, ${entry.products.length} products, ASCDSVER ${entry.ascdsVersion}`);
   }
   const program = parseChandraProgram({ schema: 'cssearth-chandra-program@1', id, target, observations: entries });

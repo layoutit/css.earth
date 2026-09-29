@@ -22,7 +22,7 @@ import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus } from '@cssearth/fits/node';
-import { requireRecord, requireString } from '@cssearth/core';
+import { requireRecord } from '@cssearth/core';
 import { addProductEvidence, readProductRecord, sameRun, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { EUREKA_ROOT, eurekaToolchain } from '../toolchain.mts';

@@ -1,6 +1,5 @@
 /** F02 mixed FITS arrays: Astropy owns FITS/WCS axis inspection and extraction. */
 import { spawn } from 'node:child_process';
-import { readFile } from 'node:fs/promises';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
 import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
 import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';

@@ -8,7 +8,6 @@ import type { ProductInput } from '@cssearth/telescope';
 import { parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from './body-map-publication.mts';
 import { VERSION } from './help.mts';
-import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { projectWithPlanetMapper } from '@cssearth/telescope/node';
 import { canonical } from '@cssearth/telescope/node';
 import { sourceContext } from './delivery-context.mts';

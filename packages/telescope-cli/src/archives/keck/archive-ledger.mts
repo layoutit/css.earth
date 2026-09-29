@@ -117,7 +117,6 @@ export interface Ledger {
 export interface ReceiptCheck { readonly file: string; readonly instrument: string; readonly koaid: string; readonly product: string }
 export interface ReceiptProblem { readonly file: string; readonly problem: string }
 
-const HEX64 = /^[0-9a-f]{64}$/u;
 const finite = (value: unknown) => typeof value === 'number' && Number.isFinite(value);
 
 /** What one receipt has to say before it counts as evidence that an instrument was reduced.

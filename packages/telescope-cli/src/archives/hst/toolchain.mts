@@ -14,7 +14,7 @@ import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
  * root the first time a calibration runs (calibrate.mts). */
 import { spawnSync } from 'node:child_process';
 import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope/node';
-import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

@@ -1,6 +1,6 @@
 /** Snapshot a WWT WTML FITS collection with WWT's own parser for runtime-free lookup. */
 import { spawnSync } from 'node:child_process';
-import { readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { basename } from 'node:path';
 
@@ -34,7 +34,6 @@ const [inputArgument, sourceUrl, outputArgument] = process.argv.slice(2);
 if (!inputArgument || !sourceUrl || !outputArgument || process.argv.length !== 5 || new URL(sourceUrl).protocol !== 'https:')
   throw new TypeError('Usage: wwt-fits-catalog-build.mts INPUT.wtml HTTPS_SOURCE_URL OUTPUT.json');
 const input = resolve(inputArgument), output = resolve(outputArgument);
-const sourceBytes = await readFile(input);
 const result = spawnSync(process.env.CSSEARTH_WWT_PYTHON ?? 'python3', ['-c', parser, input],
   { encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
 if (result.status !== 0) throw new Error(`WWT FITS catalog parse failed: ${result.error?.message ?? result.stderr}`);

@@ -209,9 +209,7 @@ test('the source catalogue, manifest checks and main entry are followed into @cs
     const found = await closure(root, ['entry.mts']);
     assert.deepEqual(found, ['entry.mts', 'packages/objects/src/index.ts', 'packages/objects/src/node/index.ts',
       'packages/objects/src/registry/world-rotation.ts', 'packages/objects/src/sources/catalog.ts', 'packages/objects/src/sources/index.ts']);
-    await writeFile(resolve(root, 'packages/objects/src/sources/catalog.ts'), 'export const parseSourceBinding=()=>3;\n');
-    const changedSources = await closure(root, ['entry.mts']);
-    // A dependency of the main entry is an owner too: the renderer's world-rotation validation lives there now.
+    // A dependency of the main entry is followed too: the renderer's world-rotation validation lives there now.
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

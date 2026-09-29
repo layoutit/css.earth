@@ -1,6 +1,6 @@
 /** Bounded, data-only local import. It pins original bytes but makes no archive-origin or calibration claim. */
 import { constants } from 'node:fs';
-import { copyFile, lstat, mkdir, mkdtemp, open, readdir, readFile, rename, rm, rmdir, stat, writeFile } from 'node:fs/promises';
+import { copyFile, lstat, mkdir, mkdtemp, open, readdir, rename, rm, rmdir, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';

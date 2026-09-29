@@ -34,8 +34,8 @@ import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { esoEnvironment, esoHeader, rawFrames, type EsoHeader, type SetOfFrames } from '@cssearth/telescope/node';
 import { assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
-import { readProgram, writeProgram, type NacoFrame, type NacoMode, type NacoProgram } from './archive.mts';
-import { nacoToolchainDescriptor, nacoToolchainPath } from './toolchain.mts';
+import { readProgram, type NacoFrame, type NacoMode, type NacoProgram } from './archive.mts';
+import { nacoToolchainPath } from './toolchain.mts';
 
 /** Virtual memory a recipe may use, in KiB. A NACO jitter run over one 20-frame Ks template peaked at 0.73 GB, far below
  * this; the ceiling exists so a cube sequence that would not cannot take the machine with it. */
@@ -494,7 +494,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const selection = templateIndex >= 0 ? rest[templateIndex + 1] : halfIndex >= 0 ? rest[halfIndex + 1] : undefined;
   const result = await reduceProgram(program, directory, raw, selection);
   // The frames were checked inside the reduction, before any recipe ran; each product has the record the run wrote beside it.
-  const records = await Promise.all([result.combined, ...(result.standardCombined ? [result.standardCombined] : [])]
+  await Promise.all([result.combined, ...(result.standardCombined ? [result.standardCombined] : [])]
     .map(async product => {
       const record = await readProductRecord(productRecordPath(product));
       if (!record) throw new Error(`${product} has no product record; the run that makes a product writes one beside it.`);

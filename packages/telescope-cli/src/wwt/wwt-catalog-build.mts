@@ -1,7 +1,7 @@
 /** Prepare a pinned WWT core-imageset index with WWT's own WTML reader.
  * Usage: CSSEARTH_WWT_PYTHON=python-with-wwt-data-formats node packages/telescope-cli/src/wwt/wwt-catalog-build.mts IMAGESETS_DIR REVISION OUTPUT.jsonl
  */
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 

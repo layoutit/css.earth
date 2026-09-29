@@ -29,7 +29,7 @@
  * pipeline and CRDS versions the run reported.
  * Its evidence list is empty. What a product was checked against is added by the stage that checked it: compare.mts adds the
  * agreement with the archive's own product. */
-import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, rm } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -40,7 +40,7 @@ import { productRecordPath, type ProductRun, type ProductSoftware } from '@cssea
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { parseHstProgram, PROGRAMS, suffixOf, type HstObservation, type HstProgram } from './archive.mts';
 import { readHstFileHdus } from './product-file.mts';
-import { HST_ROOT, hstToolchain } from './toolchain.mts';
+import { hstToolchain } from './toolchain.mts';
 
 /** Which wrapper runs which detector's pipeline, and where that instrument's calibration files are looked up. */
 export const PIPELINES: Readonly<Record<string, { readonly pipeline: string; readonly referenceVariable: string }>> = {
