@@ -150,14 +150,15 @@ test('native and live selections share card visibility, inertness, labels and sy
     '.object-context, .object-information-panel, [data-prepared-focus-card], [data-galactic-overview], [data-large-scale-overview], [data-system-results], [data-system-header], [data-solar-system-facts]')]
     .map(element => ({ hidden: element.hidden, inert: element.hasAttribute('inert'), label: element.getAttribute('aria-label'), current: element.hasAttribute('data-system-current') }));
   const cases = [
-    ['', 'saturn', { kind: 'object', objectId: 'saturn' }],
-    ['?overview=system', 'trappist-1', { kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } }],
-    ['?overview=milky-way', 'saturn', { kind: 'overview', overview: { scope: 'milky-way', systemId: 'sun' } }],
-    ['?overview=local-group', 'saturn', { kind: 'overview', overview: { scope: 'local-group', systemId: 'sun' } }],
-    ['?overview=nearby-universe', 'saturn', { kind: 'overview', overview: { scope: 'nearby-universe', systemId: 'sun' } }],
+    ['', 'saturn', { kind: 'object', objectId: 'saturn' }, '/saturn/'],
+    ['?overview=system', 'trappist-1', { kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } }, '/trappist-1/'],
+    ['?overview=milky-way', 'saturn', { kind: 'overview', overview: { scope: 'milky-way', systemId: 'sun' } }, '/saturn/'],
+    ['?overview=local-group', 'saturn', { kind: 'overview', overview: { scope: 'local-group', systemId: 'sun' } }, '/saturn/'],
+    ['?overview=nearby-universe', 'saturn', { kind: 'overview', overview: { scope: 'nearby-universe', systemId: 'sun' } }, '/saturn/'],
+    // A catalogue focus's page draws its host scene: the focus wins over an overview it also names.
     ['?overview=system', 'saturn', { kind: 'focus', id: 'm42' }, '/m42/'],
   ] as const;
-  for (const [query, objectId, subject, page] of cases.map(([query, objectId, subject, page]: readonly [string, string, unknown, string?]) => [query, objectId, subject, page ?? `/${objectId}/`] as const)) {
+  for (const [query, objectId, subject, page] of cases) {
     const source = contextHtml.replace('data-search-object="saturn"', `data-search-object="${objectId}"`);
     const native = await render(`${page}${query}`, data(), source);
     const live = parseHTML(source).document;
