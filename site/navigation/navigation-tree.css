@@ -54,6 +54,8 @@
   opacity: 0.62;
 }
 .atlas-row:hover { background: transparent; color: var(--shell-text-secondary); opacity: 0.88; }
+.atlas-tree-more { width: 100%; appearance: none; border: 0; background: none; text-align: start; color: var(--shell-text-muted); }
+button.atlas-tree-more { cursor: pointer; }
 .atlas-row[aria-current='page'] { background: transparent; color: var(--shell-text); font-weight: 600; opacity: 1; }
 .atlas-marker { position: relative; }
 .atlas-row.atlas-marker { padding-inline-start: calc(0.5rem + 1rem + 0.375rem); }

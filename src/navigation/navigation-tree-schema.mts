@@ -1,4 +1,4 @@
-export const NAVIGATION_TREE_SCHEMA = 'cssearth-navigation-tree@2' as const;
+export const NAVIGATION_TREE_SCHEMA = 'cssearth-navigation-tree@3' as const;
 
 export interface NavigationTreeMarker {
   className: string;
@@ -16,6 +16,8 @@ export interface NavigationTreeRecord {
   href: string | null;
   /** The catalogue subject to select in place, when that destination is a focus on the mounted world. */
   focusId: string | null;
+  /** The category pill that lists this branch's members when a window leaves some out (site/navigation/navigation-window.mts). */
+  search: string | null;
 }
 
 export interface NavigationTreePayload {
