@@ -78,7 +78,7 @@ test("a receipt verifies what preparation read, probed, listed and wrote, and no
 }));
 
 const descriptor = (id: string) => ({ schema: "cssearth-object@1", id, type: "moon",
-  properties: { catalog: { name: id, description: "Card" }, recipe: { radius: 1 }, page: { metadata: { sha256: "a" } }, worldFrame: { radius: 1 } },
+  properties: { catalog: { name: id, description: "Card" }, recipe: { radius: 1 }, page: { metadata: { url: "prepared/page.json" } }, worldFrame: { radius: 1 } },
   prepared: { url: "prepared/b.json" } });
 type Descriptor = ReturnType<typeof descriptor>;
 async function editDescriptor(root: string, id: string, change: (value: Descriptor) => void) {

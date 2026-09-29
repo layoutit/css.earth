@@ -12,16 +12,15 @@ import { requireRecord } from '@cssearth/core';
 
 const repository = resolve(import.meta.dirname, '../..'), descriptorPath = 'src/objects/mercury/object.json';
 const payloadPath = 'src/objects/mercury/prepared/object.json';
-// Mirrors an authored preparation: read the descriptor, write the payload from its recipe, then pin the descriptor to
-// the payload. Asked to, it also edits its own recipe while running.
-const producer = `import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+// Mirrors an authored preparation: read the descriptor, write the payload from its recipe, then record the payload's
+// size on the descriptor. Asked to, it also edits its own recipe while running.
+const producer = `import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 const descriptor = JSON.parse(readFileSync('${descriptorPath}', 'utf8'));
 const payload = JSON.stringify({ radiusKm: descriptor.properties.recipe.shape.radiusKm });
 mkdirSync('src/objects/mercury/prepared', { recursive: true });
 writeFileSync('${payloadPath}', payload);
 if (process.argv[2] === 'edit-recipe') descriptor.properties.recipe.shape.radiusKm += 1;
-descriptor.prepared = { ...descriptor.prepared, sha256: createHash('sha256').update(payload).digest('hex') };
+descriptor.prepared = { ...descriptor.prepared, bytes: Buffer.byteLength(payload) };
 writeFileSync('${descriptorPath}', JSON.stringify(descriptor, null, 2) + '\\n');
 `;
 type Descriptor = Record<string, unknown> & { properties: Record<string, unknown> & { catalog: Record<string, unknown>; recipe: { shape: { radiusKm: number } } }; prepared: Record<string, unknown> };

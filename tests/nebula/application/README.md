@@ -18,8 +18,6 @@ In `@cssearth/bake/nebula`:
 - `references.ts`: byte-identical source-owned copies of historical research JSON pins. Original delivery recipes and pin identities remain unchanged.
 - `nebula-frame.ts` / `catalogue-field.ts`: physical sky embedding and measured surrounding stars.
 
-A delivery's `implementationSha256` hashes the package's `nebulaImplementation` inventory (every bake topic a delivery
-runs, `src/nebula` included) and the owners outside the package that `objects.ts` names. The tests of the entry stay here
-(`node --test`) and import it.
+The tests of the entry stay here (`node --test`) and import it.
 
 Default preparation requires compact inputs. Full scientific regeneration remains an explicit lab command and supplies a research backend to the same delivery installer. Generated images stay ignored. A copied research reference preserves its historical attribution; it is not a new observation or a refit.

@@ -14,7 +14,8 @@ type PreparationContext = Parameters<typeof prepareObjectProvenance>[0];
 type FixtureContext = PreparationContext & { source: string; outputDirectory: string; publicDirectory: string };
 type FixturePin = { id: string; path: string; origin: string; sourceBinding: {kind: 'local'; reason: string}; credit: string; license: string; acquisition: string; consumers: string[] };
 
-const hash = (bytes: string | Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
+/** The R2 content address an inventory entry records for its published bytes. */
+const contentAddress = (bytes: string | Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 const read = async (path: string): Promise<Record<string, unknown>> => requireRecord(JSON.parse(await readFile(path, 'utf8')), path);
 const requireEntry = (value: unknown, label: string): Record<string, unknown> => requireRecord(value, label);
 const requireValue = <T,>(value: T | undefined, label: string): T => {
@@ -44,11 +45,11 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
     writeFile(resolve(source, 'observation.dat'), input), writeFile(resolve(source, 'unused.dat'), 'unused'),
     writeFile(resolve(publicDirectory, 'surface@2x.webp'), output),
     writeFile(resolve(source, 'preparation/raster.json'), recipe),
-    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssearth-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [{ path: 'preparation/raster.json', expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe) }], generatedIntermediates: [] })),
+    writeFile(resolve(source, 'manifest.json'), JSON.stringify({ schema:'cssearth-authoritative-sources@2', inputs: [pin('observation', 'observation.dat', input), pin('unused', 'unused.dat', Buffer.from('unused'))], documents: [{ path: 'preparation/raster.json', expectedBytes: Buffer.byteLength(recipe) }], generatedIntermediates: [] })),
     writeFile(resolve(root, 'object.json'), JSON.stringify({ id: 'fixture', properties: { recipe: { sources: [
       { id: 'raster', path: 'source/preparation/raster.json' },
     ] } } })),
-    writeFile(resolve(root, 'inventory.json'), JSON.stringify({ schema: 'cssearth-inventory@1', assets: [{ location: 'public', filename: 'surface@2x.webp', sha256: hash(output), bytes: output.length }] })),
+    writeFile(resolve(root, 'inventory.json'), JSON.stringify({ schema: 'cssearth-inventory@1', assets: [{ location: 'public', filename: 'surface@2x.webp', sha256: contentAddress(output), bytes: output.length }] })),
     writeFile(resolve(outputDirectory, 'lenses.json'), JSON.stringify({ controls: [{ id: 'surface', label: 'Surface', surfaceUrl: '/scenes/fixture/surface@2x.webp' }] })),
   ]);
   return { objectDirectory: root, source, outputDirectory, publicDirectory, basis: 'prepared', write: false };
@@ -126,7 +127,7 @@ test('numeric raster lineage resolves companion grids beside its source and reta
 test('composition lineage follows the pinned conversion recipe to the native archive', async t => {
   const context = await fixture(t), manifestPath = resolve(context.source, 'manifest.json');
   const recipe = JSON.stringify({schema: 'cssearth-mapped-composition@1', target: 'Fixture', referenceRadiusMeters: 100,
-    input: 'unused.dat', sha256: hash('unused'), observationName: 'fixture',
+    input: 'unused.dat', observationName: 'fixture',
     selections: [{id: 'surface', kind: 'posterior', field: 'ice', statistic: 'median'}]});
   await writeFile(resolve(context.source, 'conversion.json'), recipe);
   const manifest = await read(manifestPath);

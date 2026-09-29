@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '../objects/source-test.mts';
@@ -7,7 +6,6 @@ const test = sourceTest();
 import { parseSourceCatalog, sourceObject, sourceArray, sourceText } from '@cssearth/objects/sources';
 
 const root = resolve(import.meta.dirname, '../..');
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const json = async (path: string) => sourceObject(JSON.parse(await readFile(resolve(root, path), 'utf8')));
 
 test('application provenance inputs and recipes read source-owned files without laboratory data', async () => {
