@@ -8,9 +8,7 @@ import { requiredElement } from './browser/browser-types.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { presentOverviewResults, createSearchPresentation } from './search/search-results-presentation.mts';
-import { createNavigationTreeController } from './navigation/navigation-tree-client.mts';
 import { WORLD_OBJECTS } from './world-objects.mts';
-import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 
 export interface ObjectBrowserOptions {
   readSelection(): SceneSubject;
@@ -49,12 +47,10 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   };
   const search = documentTarget.querySelector(".object-sidebar-search");
   const searchCard = documentTarget.querySelector(".object-sidebar-search-card");
-  const trigger = documentTarget.querySelector(".object-sidebar-view-all");
   const information = documentTarget.querySelector(".object-information-panel");
   const browser = documentTarget.querySelector(".object-browser");
   if (!(search instanceof windowTarget.HTMLInputElement) ||
       !(searchCard instanceof windowTarget.HTMLElement) ||
-      !(trigger instanceof windowTarget.HTMLButtonElement) ||
       !(information instanceof windowTarget.HTMLElement) ||
       !(browser instanceof windowTarget.HTMLElement)) {
     throw new Error("Object shell object browser is incomplete.");
@@ -62,24 +58,10 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   let open = searchCard.hasAttribute('data-search-submitted');
   let showingSearchResults = false;
   const searchPresentation = createSearchPresentation(documentTarget);
-  const navigationRoot = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
-  const navigation = navigationRoot ? createNavigationTreeController(navigationRoot, windowTarget) : null;
-  void navigation?.setVisible(open);
-  lifetime.onDispose(() => navigation?.destroy());
-  const presentation = createSelectionPresentation(documentTarget, {
-    windowTarget, selectNavigation: current => { void navigation?.select(current); },
-  });
+  const presentation = createSelectionPresentation(documentTarget, { windowTarget });
   const resultsPanel = requiredElement(browser, '#object-category-results');
   browser.dataset.retained = '';
   information.dataset.retained = '';
-  const collapseSolarSystemBranches = () => {
-    if (!navigationRoot) return;
-    for (const branch of navigationRoot.querySelectorAll<HTMLDetailsElement>('details[data-atlas-depth]:not([data-atlas-depth="0"])')) {
-      branch.open = false;
-    }
-    const solarSystem = navigationRoot.querySelector<HTMLDetailsElement>('details[data-atlas-depth="0"][data-atlas-key="solar-system"]');
-    if (solarSystem) solarSystem.open = true;
-  };
   // Scroll events arrive after layout. Retain that state so publishing an
   // unchanged camera or selection never forces layout to rewrite a zero offset.
   let resultsScrolled = false;
@@ -124,13 +106,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     },
   });
   const categoryButtons = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
-  // A windowed tree branch's "more" row opens the pill that lists the rest of its members.
-  browser.addEventListener('click', event => {
-    const more = event.target instanceof windowTarget.Element ? event.target.closest<HTMLElement>('.atlas-tree-more[data-search-classification]') : null;
-    if (!more) return;
-    event.preventDefault();
-    categoryButtons.find(button => button.dataset.searchClassification === more.dataset.searchClassification)?.click();
-  }, { signal: events.signal });
   // A pill's classification highlights its bodies in the scene; other searches clear it.
   // Coalesce synchronous selection updates before notifying the scene.
   let reportedCategory: string | null = null, pendingCategory: string | null = null, reportQueued = false;
@@ -148,10 +123,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   const presentSelection = () => results.setSelection(presentation.present(currentSubject(), results.sources));
   const presentBrowser = () => {
     searchPresentation.present(open, showingSearchResults);
-    void navigation?.setVisible(open && !showingSearchResults);
-    browser.toggleAttribute('data-navigation-filtered', open && showingSearchResults);
-    trigger.ariaExpanded = String(open);
-    trigger.title = trigger.ariaLabel = open ? 'Collapse celestial objects' : 'Browse celestial objects';
   };
   const filter = (resetScroll = true) => {
     const searching = search.value.trim().length > 0;
@@ -179,7 +150,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     markCategory(classification);
     Object.assign(shown, { query, classification, overviews: visibleOverviews, objects: 'pending', features: 0 } satisfies ShownSearch);
     void results.search(query, readIllustrationModels());
-    // Typed results are a flat list with the tree hidden, so the tree is not filtered per keystroke.
     presentEmpty();
   };
   const setOpen = (next: boolean) => {
@@ -201,9 +171,11 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     }
     if (!lifetime.disposed) onSearchChange(next);
   };
+  // Results open only for a query; an empty one closes them.
   const showResults = () => {
     presentSelection();
-    if (open) filter();
+    if (!search.value.trim()) setOpen(false);
+    else if (open) filter();
     else setOpen(true);
   };
   const refreshSelection = () => {
@@ -213,14 +185,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
 
   // Closing the results keeps the field focused; the mobile sheet returns to where the results found it.
   const closeKeepingFocus = () => { search.focus(); setOpen(false); };
-  trigger.addEventListener("click", event => {
-    event.preventDefault();
-    if (open) { closeKeepingFocus(); return; }
-    showResults();
-    search.focus();
-  }, {
-    signal: events.signal,
-  });
   searchCard.addEventListener('submit', event => {
     event.preventDefault();
     showResults();
@@ -250,7 +214,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     }, { signal: events.signal });
   }
   search.addEventListener("input", () => {
-    if (!open) showResults();
+    if (!open || !search.value.trim()) showResults();
     else filter();
   }, { signal: events.signal });
   // Source result rows have explicit visibility. Reading every row's geometry
@@ -343,9 +307,6 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
       if (subject.kind === 'focus') {
         if (subjectOverride) subjectOverride.hideFocus = false;
       } else subjectOverride = null;
-      if (open && !showingSearchResults && subject.kind === 'overview' && subject.overview.scope === 'system' && subject.overview.systemId === SOLAR_SYSTEM_ID) {
-        collapseSolarSystemBranches();
-      }
       if (subject.kind === 'overview') destinations?.present(null);
       refreshSelection();
     },

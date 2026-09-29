@@ -97,16 +97,6 @@ const searchCategories = [
         <a class="object-sidebar-search-clear" href={pageRoute ?? activeObject?.route} aria-label="Clear search" title="Clear search">
           <MaterialSymbol name="close" />
         </a>
-        <button
-          class="object-sidebar-view-all"
-          type="submit"
-          aria-controls={`${objectId}-object-browser`}
-          aria-expanded="false"
-          aria-label="Browse celestial objects"
-          title="Browse celestial objects"
-        >
-          <span class="object-search-browser-caret" aria-hidden="true"></span>
-        </button>
       </form>
     </div>
   </div>
@@ -229,7 +219,7 @@ const searchCategories = [
       aria-label="Celestial objects"
       hidden
     >
-      <ObjectResults activeObjectId={pageId}>
+      <ObjectResults>
         <Accordion title="Named features" count={0} class="object-feature-results"
           aria-label={features?.searchLabel ?? 'Named features'} hidden>
           <p class="object-feature-hint object-destination-hint" role="status"></p>

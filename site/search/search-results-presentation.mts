@@ -12,12 +12,10 @@ export function presentOverviewResults(browser: HTMLElement, value: string) {
   return count;
 }
 
-/** Native requests and live interactions publish the same retained sidebar.
- * Opening the browser and searching are separate states: an empty live query shows the tree. */
+/** Native requests and live interactions publish the same retained sidebar. */
 export function createSearchPresentation(documentTarget: Document) {
   const browser = requiredElement<HTMLElement>(documentTarget, '.object-browser');
   const selectedContent = requiredElement<HTMLElement>(documentTarget, '.object-selected-content');
-  const navigation = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
   const results = requiredElement<HTMLElement>(browser, '#object-category-results');
   const empty = requiredElement<HTMLElement>(browser, '.object-empty');
   const categories = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
@@ -27,8 +25,6 @@ export function createSearchPresentation(documentTarget: Document) {
       setPanelHidden(selectedContent, open);
       browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial objects');
       browser.toggleAttribute('data-search-results', searching);
-      // Selection publication never changes this visibility; the query owns it.
-      if (navigation) navigation.hidden = searching;
       results.hidden = !searching;
     },
     markCategory(classification: string | null | undefined = null) {

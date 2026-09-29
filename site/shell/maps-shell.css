@@ -52,22 +52,6 @@
 .maps-explorer-sidebar .object-sidebar-search::placeholder { color: var(--shell-text-muted); opacity: 1; }
 .maps-explorer-sidebar .object-sidebar-search::-webkit-search-cancel-button { display: none; }
 
-.maps-explorer-sidebar .object-sidebar-view-all {
-  appearance: none;
-  position: absolute;
-  top: 0;
-  right: 12px;
-  display: block;
-  height: 44px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  color: var(--shell-text-muted);
-  background: transparent;
-  font: var(--shell-font-value);
-  cursor: pointer;
-}
-
 .maps-explorer-sidebar .object-drawer-content {
   position: relative;
   display: flex;
@@ -326,27 +310,6 @@
   box-shadow: none;
 }
 
-.object-sidebar-view-all {
-  appearance: none;
-  position: absolute;
-  top: 2px;
-  right: 0;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  color: var(--shell-text-secondary);
-  background: transparent;
-  font: 400 22px/1 var(--shell-ui-font);
-  cursor: pointer;
-  touch-action: manipulation;
-}
-
-.object-sidebar-view-all:hover { color: var(--shell-text); }
-.object-sidebar-view-all:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: -4px; }
 
 @media (min-width: 821px) and (orientation: landscape) {
   body[data-object-shell] .object-sidebar .object-card {
@@ -688,6 +651,34 @@
     font: var(--shell-font-content);
   }
 }
+/* Information disclosures: a rotating caret before an uppercase label. */
+.atlas-tree-disclosure {
+  --atlas-disclosure-caret: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23858585' stroke-width='1.4'%3E%3Cpath d='M4.5 2.5 8 6l-3.5 3.5'/%3E%3C/svg%3E");
+}
+.atlas-tree-disclosure > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 1.875rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+.atlas-tree-disclosure > summary::marker, .atlas-tree-disclosure > summary::-webkit-details-marker { content: ''; display: none; }
+.atlas-tree-disclosure > summary::before {
+  content: '';
+  flex: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: var(--atlas-disclosure-caret) center / contain no-repeat;
+  transition: transform 0.15s ease-in-out;
+}
+.atlas-tree-disclosure[open] > summary::before { transform: rotate(90deg); }
+.atlas-tree-disclosure > summary:hover { background: transparent; }
+.atlas-tree-disclosure > summary:focus-visible { outline: none; }
+.atlas-tree-disclosure > summary:focus-visible .atlas-tree-root { color: var(--shell-text); text-decoration: underline; text-underline-offset: 3px; }
+.atlas-tree-root { color: var(--shell-text-muted); font: 400 14px/18px var(--shell-ui-font); text-transform: uppercase; }
 /* The information tree uses full-width rows and dividers, with its content on the card's image edge. */
 .object-information-panel > .atlas-tree-disclosure {
   box-sizing: border-box;
