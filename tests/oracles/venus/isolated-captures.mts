@@ -1,7 +1,6 @@
 import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { PNG } from "pngjs";
-import { sha256 } from '@cssearth/core/node';
 import { comparePngBuffers, writeAbsoluteDiff, writeTriptych, opaqueBlackPng, setRgb, insideSunNeighborhood } from "./image-pixels.mts";
 import { shadowShapeMask } from "./scene-illumination.mts";
 import type { Dimensions, Analysis, Silhouette, Sun, VisibleSun, IndependentCapture } from "./analysis-types.mts";
@@ -66,19 +65,19 @@ export async function writeIndependentCaptures({ referenceBytes, browserBytes, r
       changedPixelRatio: comparison.changedPixelRatio,
       reference: Object.freeze({
         path: referencePath,
-        sha256: sha256(referencePng),
+        bytes: referencePng.length,
       }),
       browser: Object.freeze({
         path: browserPath,
-        sha256: sha256(browserPng),
+        bytes: browserPng.length,
       }),
       absoluteDiff: Object.freeze({
         path: absoluteDiffPath,
-        sha256: absoluteDiff.sha256,
+        bytes: absoluteDiff.bytes.length,
       }),
       triptych: Object.freeze({
         path: triptychPath,
-        sha256: triptych.sha256,
+        bytes: triptych.bytes,
       }),
     });
   }

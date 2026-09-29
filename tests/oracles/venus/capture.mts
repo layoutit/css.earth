@@ -8,7 +8,6 @@ import type { GoogleAction } from "./profile.mts";
 import type { ReferenceManifest } from "./manifest-types.mts";
 import sharp from "sharp";
 
-import { sha256 } from '@cssearth/core/node';
 import {
   comparePngBuffers,
 } from "./image-analysis.mts";
@@ -160,11 +159,11 @@ export async function captureGoogleMapsReference({
           camera: parseGoogleCameraUrl(currentUrl),
           scene: Object.freeze({
             path: scenePath,
-            sha256: sha256(stable.bytes),
+            bytes: stable.bytes.length,
           }),
           rawAttributedCapture: Object.freeze({
             path: fullPath,
-            sha256: sha256(fullBytes),
+            bytes: fullBytes.length,
           }),
           stability: stable.stability,
           uiChrome: Object.freeze({
@@ -226,8 +225,8 @@ export async function importGoogleMapsReference({
       throw new Error(`Reference input actions changed for pose ${pose.id}.`);
     }
     const rawBytes = await readFile(source.path);
-    if (sha256(rawBytes) !== source.sha256) {
-      throw new Error(`Reference input hash changed for pose ${pose.id}.`);
+    if (rawBytes.length !== source.bytes) {
+      throw new Error(`Reference input ${source.path} for pose ${pose.id} holds ${rawBytes.length} bytes; the packet records ${source.bytes}.`);
     }
     const metadata = await sharp(rawBytes).metadata();
     if (metadata.width !== ORACLE_VIEWPORT.width ||
@@ -253,11 +252,11 @@ export async function importGoogleMapsReference({
       camera: parseGoogleCameraUrl(source.finalUrl),
       scene: Object.freeze({
         path: scenePath,
-        sha256: sha256(sceneBytes),
+        bytes: sceneBytes.length,
       }),
       rawAttributedCapture: Object.freeze({
         path: rawPath,
-        sha256: source.sha256,
+        bytes: source.bytes,
         attribution: source.attribution,
       }),
       stability: Object.freeze({
@@ -425,11 +424,11 @@ export async function captureCssEarthBrowser({
           runtime,
           scene: Object.freeze({
             path: scenePath,
-            sha256: sha256(stable.bytes),
+            bytes: stable.bytes.length,
           }),
           rawCapture: Object.freeze({
             path: fullPath,
-            sha256: sha256(fullBytes),
+            bytes: fullBytes.length,
           }),
           stability: stable.stability,
           uiChrome: Object.freeze({

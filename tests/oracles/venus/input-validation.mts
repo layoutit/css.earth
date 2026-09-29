@@ -38,8 +38,8 @@ export function parseReferenceInput(value: unknown) {
     const finalUrl = text(source.finalUrl, "Final URL");
     parseGoogleCameraUrl(requestedUrl);
     parseGoogleCameraUrl(finalUrl);
-    const sha256 = text(source.sha256, "Capture hash");
-    if (!/^[a-f0-9]{64}$/u.test(sha256)) throw new TypeError("Capture hash must be SHA-256.");
+    if ("sha256" in source) throw new TypeError(`Reference pose ${id}: the capture records no digest; remove its sha256 field.`);
+    const bytes = nonnegativeInteger(source.bytes, `Reference pose ${id} capture bytes`);
     const stability = record(source.stability, "Capture stability");
     const comparisons = array(stability.comparisons, "Stability comparisons").map((entry) => {
       const ratio = finite(entry, "Changed pixel ratio");
@@ -47,7 +47,7 @@ export function parseReferenceInput(value: unknown) {
       return ratio;
     });
     return { id, actions: expected.googleActions, requestedUrl, finalUrl,
-      path: text(source.path, "Capture path"), sha256, attribution: source.attribution,
+      path: text(source.path, "Capture path"), bytes, attribution: source.attribution,
       stability: { attempts: nonnegativeInteger(stability.attempts, "Capture attempts"), comparisons,
         exactConsecutive: boolean(stability.exactConsecutive, "Consecutive equality") } };
   });

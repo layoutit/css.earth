@@ -424,14 +424,14 @@ async function comparePose(pose: OraclePose, referenceManifest: ReferenceManifes
       qualification: ORACLE_QUALIFICATION,
       reference: Object.freeze({
         path: reference.scene.path,
-        sha256: reference.scene.sha256,
+        bytes: reference.scene.bytes,
         camera: reference.camera,
         lod: referenceLod,
         analysis: relevantAnalysis(referenceAnalysis),
       }),
       browser: Object.freeze({
         path: browser.scene.path,
-        sha256: browser.scene.sha256,
+        bytes: browser.scene.bytes,
         camera: browser.runtime.camera,
         analysis: relevantAnalysis(browserAnalysis),
       }),
