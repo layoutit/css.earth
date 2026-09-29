@@ -1,18 +1,22 @@
+import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
-import { expect, test } from 'vitest';
+import { expect, test as vitestTest } from 'vitest';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedCssObject } from '../loader.js';
 import { serializePreparedScene } from './prepared-scene-serialization.js';
 
 const root = new URL('../../../../', import.meta.url);
+// Saturn's prepared runtime is restored, not tracked; an unrestored checkout skips the file as the site test did through sourceTest().
+const restored = existsSync(new URL('src/objects/saturn/prepared/object.json', root));
+const test = vitestTest.skipIf(!restored);
 async function fixture(id = 'saturn') {
   const descriptor = parseObjectDescriptor(await readFile(new URL(`src/objects/${id}/object.json`, root), 'utf8'));
   if (!descriptor.prepared) throw new Error('Fixture requires its prepared reference.');
   const bytes = new Uint8Array(await readFile(new URL(`src/objects/${id}/${descriptor.prepared.url}`, root))).buffer;
   return { descriptor, bytes };
 }
-const { descriptor, bytes } = await fixture();
-const definition = await loadPreparedCssObject(descriptor, { async read() { return bytes; } });
+const { descriptor, bytes } = restored ? await fixture() : ({} as Awaited<ReturnType<typeof fixture>>);
+const definition = restored ? await loadPreparedCssObject(descriptor, { async read() { return bytes; } }) : (undefined as never);
 
 test('serialization publishes the authenticated topology without changing its prepared records', () => {
   const before = JSON.stringify(definition);
