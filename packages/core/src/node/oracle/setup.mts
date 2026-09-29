@@ -8,7 +8,7 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { projectRoot } from '@cssearth/core/node';
+import { projectRoot } from '../project-root.ts';
 
 if (process.argv[2] === 'sbmt') {
   const result = spawnSync(process.execPath, [resolve(projectRoot(import.meta.url), 'tests/oracles/sbmt/setup.mts')], { stdio: 'inherit', timeout: 900_000 });

@@ -9,7 +9,7 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { projectRoot } from '@cssearth/core/node';
+import { projectRoot } from '../project-root.ts';
 
 const root = projectRoot(import.meta.url), oracles = resolve(root, 'tests/oracles'), python = resolve(root, '.local/oracles/venv/bin/python');
 const known = readdirSync(oracles, { withFileTypes: true }).filter(entry => entry.isDirectory())

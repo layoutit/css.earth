@@ -6,8 +6,8 @@
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { projectRoot } from '@cssearth/core/node';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
+import { projectRoot } from '../project-root.ts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../validate.ts';
 
 export const ORACLE_ROOT = projectRoot(import.meta.url);
 export interface OracleSample { index: number; value: number }
