@@ -130,11 +130,9 @@ its validators accept); the renderer never imports the bake.
   coverage direction of each lens's map, which the world-navigation stage turns a partial lens toward. It imports the topics
   `LOWER_TOPICS` declares for it (`raster`, `scene`, `objects/scene`, `objects/default-view`, `objects/interpretation` and
   three layers).
-- `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
-  of the preparation trace, and the esbuild plugin (`bundle-renderer.ts`) that bundles `@cssearth/renderer`'s TypeScript source
-  subpaths into a Node bundle that keeps other packages external (the preparation test runner and bundle-building tests use it). `packages/bake/cli/preparation-trace.mts` is the trace itself, which
-  `packages/bake/cli/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
-  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. It also
+- `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the esbuild plugin (`bundle-renderer.ts`) that
+  bundles `@cssearth/renderer`'s TypeScript source subpaths into a Node bundle that keeps other packages external (the
+  preparation test runner and bundle-building tests use it). It imports no topic. It also
   holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
   because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
@@ -142,10 +140,9 @@ its validators accept); the renderer never imports the bake.
 - `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
   scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
   scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command; its tests are in `tests/preparation/`.
-- `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the preparation cache (a verified
-  receipt, from `preparation`, skips an unchanged object) over `run-implemented-objects`'s scheduler. It imports
-  `preparation` and `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command; its tests are in
-  `tests/preparation/`.
+- `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the shared steps, every selected
+  object's preparation through `run-implemented-objects`'s scheduler, navigation and the prepared inventories. It imports
+  `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command.
 - `src/prepare-object/` is published as `@cssearth/bake/prepare-object` (Node only): the ordered preparation chain for one
   or more authored objects end to end (builds, catalogue, geometry, the authored preparation, page data, text, markers,
   billboard, world context, provenance), naming the step that failed and how to resume. It imports no topic; its steps

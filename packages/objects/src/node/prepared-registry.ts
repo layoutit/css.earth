@@ -33,8 +33,7 @@ const registries = new Map<string, PreparedObjectRegistry>();
 
 /**
  * The registry of the checkout at `root`, read once per process. Descriptors and catalogue records are loaded as JSON
- * modules, as the application registry loads them: the preparation trace then records another body's descriptor as
- * loaded, not read, and the preparation cache keys a receipt on its registry fields only.
+ * modules, as the application registry loads them.
  */
 export function readPreparedObjects(root: string): PreparedObjectRegistry {
   const checkout = resolve(root);

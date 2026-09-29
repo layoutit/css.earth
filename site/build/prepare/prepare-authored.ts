@@ -218,7 +218,6 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
       // Palette legend labels are derived from the stretch this run just measured: refresh them, repin, and prepare again.
       const legend = await stagedLegendLabelChanges(objectDirectory, stagedData);
       if (legend.changes.length) {
-        if (process.env.CSSEARTH_PREPARATION_TRACE) throw new Error(`${id}: legend labels differ from the prepared stretch: ${legend.summary}.`);
         await writeFile(legend.contentPath, `${JSON.stringify(legend.refreshed, null, 2)}\n`);
         console.log(`refreshed legend labels ${legend.summary}`);
         return await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, reuseImages, acceptChanged });

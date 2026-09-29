@@ -51,7 +51,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/facility-renders` | the facility models' illustrative poses and the three.js renderer the facility thumbnails are drawn with | Node only (`three`) |
 | `@cssearth/bake/site-assets` | the application's prepared assets that are not an object's own: dataset sprites, search thumbnails, the planets' phase charts and the vendored Cesium minimap excerpts | Node only (`node:*`, `sharp`, `vite`) |
 | `@cssearth/bake/surface-previews` | the prepared records a surface minimap or preview raster is drawn from | Node only (`node:*`) |
-| `@cssearth/bake/preparation` | the preparation cache and the preparation trace's record format | Node only (`node:*`) |
+| `@cssearth/bake/preparation` | the stale-build check and the renderer bundling plugin | Node only (`node:*`) |
 | `@cssearth/bake/thread-pool` | sizes libuv's thread pool to the cores; imported for its side effect before other entries | Node only (`node:os`) |
 | `@cssearth/bake/objects/color` | the sRGB transfer, band-colour and asinh displays, palettes and tints, star catalogue colours, whole-disc photometric colour | Node only |
 | `@cssearth/bake/objects/geometry` | shape models (including ASCII VTK POLYDATA) and their records, facet fields, radial meshes and simplification, controlled shape cameras and band alignment, ellipsoids, the Lambert attenuation atlas, the radial-layer contract | Node only (`node:*`, meshoptimizer) |

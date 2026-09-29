@@ -118,8 +118,7 @@ created outputs. Backups stay on disk if rollback itself fails. Shared hash
 banks are append-only dependencies: an unreferenced bank may remain after a
 failure because another object may already use it.
 
-The existing traced preparation receipts and coordinator keep their ownership;
-this adds no receipt schema or locking system. Publication is offline and must
+This adds no receipt schema or locking system. Publication is offline and must
 not overlap another writer for the same object. It does not provide an
 instantaneous multi-file switch for live readers or recovery from process
 termination or power loss.
