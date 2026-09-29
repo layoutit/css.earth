@@ -1,13 +1,15 @@
 // Entry script: node site/build/prerender-focus-pages.mts (in build:deploy, after bundle-netlify-functions.mts)
 /**
- * A catalogue focus's page is its host scene's page with the focus selected (site/pages/[id].astro). The search function
- * renders that selection (card, lenses and camera) into the page for any query URL. This renders it into each focus's
+ * The page of anything the world draws (a catalogue subject, an overview) is the world host's page with it selected
+ * (site/pages/[id].astro). The search function renders that selection (the scene, card and lenses, and a focus's
+ * camera; an overview's camera is framed on arrival) into the page for any query URL. This renders it into each such
  * static page once, through the same bundled function, so the page opens on its subject with or without JavaScript.
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { extname, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import focuses from '../prepared-focus-objects.json' with { type: 'json' };
+import { OVERVIEW_TITLES } from '../overview-titles.mts';
 
 const root = resolve(import.meta.dirname, '../..'), dist = resolve(root, 'dist');
 const origin = 'https://prerender.invalid';
@@ -32,9 +34,10 @@ if (typeof loaded !== 'object' || loaded === null || !('default' in loaded) || t
   throw new Error('netlify/functions-bundled/search.mjs has no default export handler; run site/build/bundle-netlify-functions.mts first.');
 }
 const handler = loaded.default as (request: Request) => Promise<Response>;
-for (const focus of focuses) {
-  const response = await handler(new Request(`${origin}/.netlify/functions/search?object=${encodeURIComponent(focus.id)}`));
-  if (!response.ok) throw new Error(`${focus.id}: the search function answered ${response.status} for ${focus.route}: ${(await response.text()).slice(0, 300)}`);
-  await writeFile(resolve(dist, focus.id, 'index.html'), await response.text());
+const pages = [...focuses.map(focus => focus.id), ...Object.keys(OVERVIEW_TITLES)];
+for (const id of pages) {
+  const response = await handler(new Request(`${origin}/.netlify/functions/search?object=${encodeURIComponent(id)}`));
+  if (!response.ok) throw new Error(`${id}: the search function answered ${response.status} for /${id}/: ${(await response.text()).slice(0, 300)}`);
+  await writeFile(resolve(dist, id, 'index.html'), await response.text());
 }
-console.log(`Rendered ${focuses.length} catalogue focus pages on their subjects.`);
+console.log(`Rendered ${pages.length} pages of drawn subjects on their subjects.`);

@@ -20,6 +20,14 @@ export function indicatorDotDiameter(radiusM: number, starRadiusM: number, minim
 /** An authored system range fades out over one doubling of camera distance beyond it. */
 const AUTHORED_RANGE_FADE = 2;
 
+/** The camera distances from a system's star over which its bodies fade: the plan's, unless its host authors its own orbit
+ * range, when the system is drawn whole to the range and gone one doubling of distance beyond it (a presentation choice,
+ * not a measurement). The application leaves the system's overview over the same distances. */
+export function systemFadeDistances(system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number }, orbitsWithinM?: number) {
+  return orbitsWithinM === undefined ? { fadeOutStartDistanceM: system.fadeOutStartDistanceM, hiddenDistanceM: system.hiddenDistanceM }
+    : { fadeOutStartDistanceM: orbitsWithinM, hiddenDistanceM: orbitsWithinM * AUTHORED_RANGE_FADE };
+}
+
 export function logarithmicFade(distanceM: number, startM: number, endM: number): number {
   const t = Math.max(0, Math.min(1, (Math.log(distanceM) - Math.log(startM)) / (Math.log(endM) - Math.log(startM))));
   return t * t * (3 - 2 * t);
@@ -47,11 +55,11 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
   const positions = roots.map(id => byId.get(id)!.positionM);
   const rootIndex = rootIds.map(id => roots.indexOf(id));
   const values = new Float64Array(roots.length);
-  // Every system fades over the authored distances, unless its host authors its own orbit range: that system is drawn
-  // whole to the range and gone one doubling of distance beyond it (a presentation choice, not a measurement).
+  // Every system fades over the plan's distances, or its host's authored orbit range (systemFadeDistances).
   const ranges = roots.map(id => { const point = byId.get(id); return point && 'orbitsWithinM' in point ? point.orbitsWithinM : undefined; });
-  const fadeStarts = ranges.map(range => range ?? plan.system.fadeOutStartDistanceM);
-  const hiddenDistances = ranges.map(range => range === undefined ? plan.system.hiddenDistanceM : range * AUTHORED_RANGE_FADE);
+  const fades = ranges.map(range => systemFadeDistances(plan.system, range));
+  const fadeStarts = fades.map(fade => fade.fadeOutStartDistanceM);
+  const hiddenDistances = fades.map(fade => fade.hiddenDistanceM);
   return Object.freeze({
     /** The largest system opacity, after measuring every system from this camera position. */
     update(positionM: readonly number[]) {

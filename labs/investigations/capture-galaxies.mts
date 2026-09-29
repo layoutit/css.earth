@@ -47,7 +47,7 @@ try {
   const page = await browser.newPage({ viewport: receipt.viewport, deviceScaleFactor: 1, reducedMotion: 'reduce' });
   page.on('pageerror', error => receipt.errors.push(error.message));
   page.on('response', response => { if (response.status() >= 400) receipt.errors.push(`${response.status()} ${response.url()}`); });
-  await page.goto(`${base}/sun/?focus=lmc&focusLens=vista-infrared&v=${view}`, { waitUntil: 'domcontentloaded' });
+  await page.goto(`${base}/lmc/?dataset=vista-infrared&v=${view}`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(readWorldDiagnostics, undefined, { timeout: 60000 });
   const cloud = page.locator('[data-volume-lens-object="lmc"]');
   await cloud.waitFor({ state: 'attached' });
@@ -67,7 +67,7 @@ try {
     const path = `docs/images/galaxies/lmc-${id}.webp`;
     await writeFile(resolve(root, path), bytes);
     receipt.images.push({ imageId: id, path, bytes: bytes.length, sha256: sha256(bytes),
-      route: `/sun/?focus=lmc&focusLens=${id}&v=${view}`, stars: 943, sameCamera: true });
+      route: `/lmc/?dataset=${id}&v=${view}`, stars: 943, sameCamera: true });
     console.log(`CAPTURED ${id}: ${bytes.length} bytes`);
   }
   assert.deepEqual(receipt.errors, []);
