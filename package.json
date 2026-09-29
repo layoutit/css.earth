@@ -100,7 +100,7 @@
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test",
     "test:universe:renderer": "pnpm test:renderer",
     "test:universe:runtime": "node --test --test-concurrency=2 \"packages/bake/src/presentation/prepared-activation-*.test.mts\" site/test/prepare-context-availability.test.mts packages/bake/src/asset-publication/restore-object-json.test.mts site/test/object-directory.test.mts site/test/prepared-context-navigation.test.mts site/test/prepared-focus-card.test.mts site/test/volume-presentation.test.mts site/test/asset-origin.test.mts src/platform/object-selection-runtime.test.mts src/platform/prepared-residency.test.mts && node .github/scripts/checks/check-object-runtime-ownership.mts ${RUNTIME_OWNERSHIP_ARGS:---all}",
-    "test:universe:shell": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test --test-concurrency=2 \"site/test/navigation-tree-*.test.mts\" \"site/test/*-response.test.mts\" site/test/object-page-data.test.mts site/test/dataset-url.test.mts site/test/browser-node-imports.test.mts && pnpm typecheck:oracles",
+    "test:universe:shell": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test --test-concurrency=2 \"site/test/*-response.test.mts\" site/test/object-page-data.test.mts site/test/dataset-url.test.mts site/test/browser-node-imports.test.mts && pnpm typecheck:oracles",
     "oracles:setup": "node packages/core/src/node/oracle/setup.mts",
     "oracles:run": "node packages/core/src/node/oracle/run.mts"
   },

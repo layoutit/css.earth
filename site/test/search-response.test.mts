@@ -33,7 +33,6 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
   <form class="object-sidebar-search-card" data-search-object="saturn"><input class="object-sidebar-search" name="q">
     <input type="hidden" name="v" data-search-context disabled></form><input class="object-sheet-handle" type="checkbox">
   <div class="object-drawer-content"><nav class="object-browser" hidden>
-    <div data-object-navigation-tree></div>
     <div id="object-category-results" role="region" aria-label="Search results"><ul><li data-search-overview="milky way" hidden><a href="/milky-way/">Milky Way</a></li></ul>
     <ul class="object-list" data-catalogue-list></ul>
     <p class="object-error" data-search-error hidden>Couldn't load search results. <button type="button" data-search-retry>Retry</button></p>
@@ -108,13 +107,12 @@ test('features are pinned, rendered into existing rows and have ordinary destina
   assert.equal(failure.querySelector('.object-destination-result')?.hasAttribute('href'), false);
 });
 
-test('typed search shows a flat result list without the navigation tree, including queries that name an overview', async () => {
+test('typed search shows a flat result list, including queries that name an overview', async () => {
   for (const query of ['t', 'Milky Way']) {
     const document = await render(`/saturn/?q=${encodeURIComponent(query)}`);
     assert.equal(document.querySelector<HTMLElement>('[data-large-scale-overview="milky-way"]')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('.object-selected-content')?.hidden, true);
     assert.equal(document.querySelectorAll('[data-object-tab]').length, 0);
-    assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, true);
     assert.equal(document.querySelector('.object-browser')?.getAttribute('aria-label'), 'Search results');
     assert.equal(document.querySelector('#object-category-results')?.getAttribute('aria-labelledby'), null);
     // A name that begins with the query ranks first, as in the live search.

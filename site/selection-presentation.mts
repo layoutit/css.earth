@@ -10,10 +10,10 @@ import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
 import { knownObject } from './object-directory.mts';
 import { fetchSystemHeaders, spliceSystemHeaders } from './system-headers-fragment.mts';
 
-/** Present the selected subject in the retained cards and navigation rows. */
+/** Present the selected subject in the retained cards and result rows. */
 export function createSelectionPresentation(documentTarget: Document, {
-  windowTarget, selectNavigation = () => {},
-}: { windowTarget?: BrowserWindow; selectNavigation?(id: string): void } = {}) {
+  windowTarget,
+}: { windowTarget?: BrowserWindow } = {}) {
   const browser = requiredElement<HTMLElement>(documentTarget, '.object-browser');
   const information = requiredElement<HTMLElement>(documentTarget, '.object-information-panel');
   // Search/navigation and the selection share one sidebar content owner. The
@@ -71,11 +71,6 @@ export function createSelectionPresentation(documentTarget: Document, {
     const headerSystemId = systemSelected ? overview.systemId : SOLAR_SYSTEM_ID;
     showSystemHeader(headerSystemId);
     if (solarSystemFacts && solarSystemFacts.hidden !== (headerSystemId !== SOLAR_SYSTEM_ID)) solarSystemFacts.hidden = headerSystemId !== SOLAR_SYSTEM_ID;
-    const navigationSelection = subject.kind === 'focus' ? subject.id
-      : subject.kind === 'overview' ? subject.overview.scope === 'system' ? subject.overview.systemId : subject.overview.scope
-      : subject.kind === 'satellite-system' ? subject.hostId
-      : subject.objectId;
-    selectNavigation(navigationSelection);
     const label = subject.kind === 'focus'
       ? (focusCard?.dataset.preparedFocusId === subject.id ? focusCard.querySelector('[data-focus-name]')?.textContent : null) || 'Selected object'
       : subject.kind === 'overview' ? overviewName(subject.overview)

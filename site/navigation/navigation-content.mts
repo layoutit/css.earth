@@ -87,7 +87,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               }
               // The hidden form and its view-context inputs belong to the shell.
               // Native submission refreshes their values from the current URL.
-              for (const selector of [...required, '[data-settings-form]', '.object-sidebar-view-all', '.object-sheet-handle', '.object-settings-action']) {
+              for (const selector of [...required, '[data-settings-form]', '.object-sheet-handle', '.object-settings-action']) {
                 const target = documentTarget.querySelector<HTMLElement>(selector), incoming = incomingSource.querySelector<HTMLElement>(selector);
                 if (!target || !incoming) continue;
                 for (const name of ['id', 'action', 'aria-label', 'aria-controls', 'aria-labelledby', 'popovertarget', 'placeholder', 'data-has-destinations']) {
