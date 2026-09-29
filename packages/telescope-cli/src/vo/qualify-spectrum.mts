@@ -1,12 +1,11 @@
 import { dirname, resolve } from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import { readFitsHdus } from '@cssearth/bake/objects/raster';
-import { fileSize, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductRun, ProductRecord } from '@cssearth/telescope';
 import { describeEsoSpectrum, readEsoSpectrum } from '../families/f03-eso-spectrum.mts';
 import { rememberQualification, type QualifiedObservation } from '../qualified-observations.mts';
-import { implementationFingerprint } from '../implementation-dependencies.mts';
+import { VERSION } from '../help.mts';
 import type { AcquisitionSpec } from './access.mts';
 
 /** A supported SDP byte structure is required even when ObsCore advertised a spectrum. */
@@ -30,12 +29,11 @@ export async function qualifyEsoSpectrum(root: string, spec: AcquisitionSpec,
       wavelengthUnit: source.wavelengthUnit, fluxUnit: source.fluxUnit, spectralFrame: source.spectralFrame, fluxCalibration: source.fluxCalibration,
       usableSampleCentresMicrometres: [source.samples[0]!.wavelength, source.samples.at(-1)!.wavelength].map(value => value * source.wavelengthToMicrometres) },
     acceptance: 'Archive target and FITS identity agree. ESO SDP WAVE/FLUX/ERR and optional QUAL are decoded by F03. Nonzero flags, nonfinite flux and nonpositive/nonfinite error are excluded with native IDs and gap boundaries retained. Archive calibration is declared, not independently reproduced. Continuous spectral coverage, achieved resolution and request fulfillment remain unverified.' }, null, 2)}\n`);
-  const implementation = await implementationFingerprint(WORKSPACE, [fileURLToPath(import.meta.url)]);
   const run: ProductRun = { telescope: spec.observation.service, stage: 'native-product-qualification',
     inputs: [...acquisition.outputs.map(output => ({ role: 'acquired product and metadata', identity: output.path, bytes: output.bytes })),
       { role: 'acquisition record', identity: 'acquisition.json', ...await fileSize(acquired.record) }],
     parameters: { acquisition: spec.key, observation: { decoder: spec.decoder, kind: spec.kind, target: spec.request.target }, operation: spec.operation, family: 'F03', hdu: source.hdu },
-    software: [...acquisition.software, { name: 'cssEarth VO ESO SDP spectrum qualification', version: implementation.sha256 }] };
+    software: [...acquisition.software, { name: 'cssEarth VO ESO SDP spectrum qualification', version: VERSION }] };
   await writeProductRecord(productRecord, run, [...acquisition.outputs.map(output => ({ path: output.path, file: resolve(outputRoot, output.path) })),
     { path: 'acquisition.json', file: acquired.record }, { path: 'qualification.json', file: receipt }, { path: 'descriptor.json', file: descriptorFile }],
     [{ kind: 'archive-retrieval-origin', product: 'science.fits', receipt: 'origin.json', establishes: 'Exact selected archive spectrum; no local recalibration or resolved planetary surface.' }]);

@@ -17,10 +17,8 @@ import { checkReceipt, galileanNote, hasScience, ledgerMarkdown, observationsOf,
 import { matchNumberedTarget, parseNumberedTarget } from '../targets.mts';
 import { PRODUCT_RECORD_SCHEMA } from '@cssearth/telescope';
 import { readFitsFileHdus } from '@cssearth/fits/node';
-import { sha256File } from '@cssearth/core/node';
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 
 const CARD = 80, RECORD = 2880;
@@ -102,12 +100,10 @@ test('a configuration is only complete when every keyword is stated', () => {
   assert.equal(sameConfiguration(full, { ...full, DETRO1YS: '1056' }), false);
 });
 
-/** A pinned frame of the fixture program, digested as a downloaded one would be: `inputPin` refuses a frame with no sha256,
- * because a stage that ran on an unchecked input would be recording a guess. The digest is of the name, so each frame has its
- * own and two fixtures that name different frames describe different runs. */
+/** A pinned frame of the fixture program. A run names its inputs by frame name, so two fixtures that name different frames
+ * describe different runs. */
 const frame = (name: string, extra: Record<string, unknown> = {}) => ({
-  name, uri: `gemini:GEMINI/${name}`, bytes: 14849280, md5: 'a'.repeat(32), observation: 'GS-2025B-DD-102-45-003',
-  sha256: createHash('sha256').update(name).digest('hex'),
+  name, uri: `gemini:GEMINI/${name}`, bytes: 14849280, observation: 'GS-2025B-DD-102-45-003',
   type: 'OBJECT', intent: 'science', filter: 'r', exposureSeconds: 25, startMjd: 60923.9, dataRelease: '2025-09-05', ...extra,
 });
 const calibration = (name: string, type: string) => frame(name, { type, intent: 'calibration', filter: type === 'BIAS' ? '' : 'r', exposureSeconds: 0 });
@@ -274,7 +270,7 @@ test('an acquisition frame is counted apart from an observation', () => {
 
 const RECORD_FOR = (product: string, kind: string) => ({
   schema: PRODUCT_RECORD_SCHEMA, telescope: 'gemini', stage: 'gemini/bias', inputs: [], parameters: {}, software: [],
-  outputs: [{ path: product, bytes: 10, sha256: 'b'.repeat(64) }],
+  outputs: [{ path: product, bytes: 10 }],
   evidence: [{ kind, receipt: 'r', product, establishes: 'something' }],
 });
 const RECEIPT = { schema: RECEIPT_SCHEMA, program: 'fixture', programme: 'GS-2025B-DD-102', evidence: 'archive-agreement',
@@ -403,14 +399,14 @@ async function workWithMaster(directory: string, stage: 'bias', record: Record<s
   await mkdir(stageDir, { recursive: true });
   const product = 'S20250906S0254_bias.fits';
   await writeFile(resolve(stageDir, product), 'a master, as far as this test is concerned');
-  const { bytes, sha256 } = await sha256File(resolve(stageDir, product));
+  const { size: bytes } = await stat(resolve(stageDir, product));
   await writeFile(resolve(stageDir, `${product}.product.json`),
-    `${JSON.stringify({ ...record, outputs: [{ path: product, bytes, sha256 }] }, null, 2)}\n`);
+    `${JSON.stringify({ ...record, outputs: [{ path: product, bytes }] }, null, 2)}\n`);
   return product;
 }
 
 const CONTEXT = (program: GeminiProgram, work: string) =>
-  ({ program, work, software: [{ name: 'dragons', version: '4.2.2' }], toolchainDigest: 'd'.repeat(64) });
+  ({ program, work, software: [{ name: 'dragons', version: '4.2.2' }] });
 
 test('a master is reused only when its record describes this program current plan', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'gemini-reuse-'));
@@ -481,10 +477,8 @@ test('a comparison refuses a master that is not this program current plan, and a
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
-test('an archive master with no digest of its own is refused rather than compared against', () => {
+test('an archive master is pinned by name and size, and a frame carrying a digest is refused', () => {
   const master = PROGRAM.calibrations.find(set => set.id === 'bias')!.product;
-  assert.equal(archiveMasterPin(master).identity, 'gS20250906S0254_bias.fits');
-  const { sha256, ...withoutDigest } = master;
-  assert.ok(sha256);
-  assert.throws(() => archiveMasterPin(withoutDigest as typeof master), /carries no sha256 yet/u);
+  assert.deepEqual(archiveMasterPin(master), { role: 'archive master', identity: 'gS20250906S0254_bias.fits', bytes: master.bytes });
+  assert.throws(() => parseGeminiProgram({ ...PROGRAM, science: [{ ...PROGRAM.science[0]!, md5: 'a'.repeat(32) }] }), /has a md5 field/u);
 });

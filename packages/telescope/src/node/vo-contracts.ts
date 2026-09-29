@@ -1,5 +1,4 @@
 /** Archive metadata is evidence, not a qualified scientific product. */
-import { createHash } from 'node:crypto';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export type Json = null | boolean | number | string | readonly Json[] | { readonly [key: string]: Json };
@@ -16,13 +15,17 @@ export function jsonValue(value: unknown): Json {
 }
 /** Opaque strings are never folded or normalized. Null differs from an omitted key. */
 export const canonical = (value: unknown): string => JSON.stringify(jsonValue(value));
-export const digest = (value: unknown): string => createHash('sha256').update(canonical(value)).digest('hex');
-export interface Pin { readonly path: string; readonly bytes: number; readonly sha256: string }
+/** A saved VO file by where it is and its byte count. */
+export interface Pin { readonly path: string; readonly bytes: number }
 export function parsePin(value: unknown): Pin {
-  const p = requireRecord(value), bytes = requireFiniteNumber(p.bytes), sha256 = requireString(p.sha256), path = requireString(p.path);
-  if (!path || !Number.isSafeInteger(bytes) || bytes < 0 || !/^[a-f0-9]{64}$/u.test(sha256)) throw new TypeError('Invalid VO file pin.');
-  return { path, bytes, sha256 };
+  const p = requireRecord(value, 'VO file'), path = requireString(p.path, 'VO file path'), bytes = requireFiniteNumber(p.bytes, `VO file ${path} bytes`);
+  if (p.sha256 !== undefined) throw new TypeError(`VO file ${path} has a sha256 field (${String(p.sha256)}); VO files carry no content digest.`);
+  if (!path || !Number.isSafeInteger(bytes) || bytes < 0) throw new TypeError(`VO file ${path}: bytes ${bytes} is not a byte count.`);
+  return { path, bytes };
 }
+/** A file-system-safe name made of readable parts. */
+export const plainName = (...parts: readonly string[]): string =>
+  parts.map(part => part.replace(/[^A-Za-z0-9._-]+/gu, '_').replace(/^[_.]+|_+$/gu, '').slice(-80)).filter(Boolean).join('--');
 export const DEFAULT_LIMITS = { scienceBytes: 1_073_741_824, metadataBytes: 33_554_432, nestedEdges: 3, metadataRequests: 32, expandedBytes: 1_073_741_824, packageMembers: 1024 } as const;
 export interface TransferLimits { readonly scienceBytes: number; readonly metadataBytes: number; readonly nestedEdges: number; readonly metadataRequests: number; readonly expandedBytes: number; readonly packageMembers: number }
 export function parseLimits(value: unknown = {}): TransferLimits {
@@ -107,14 +110,14 @@ export interface DiscoverySnapshot {
   /** Query completion is distinct from a complete archive inventory. */
   readonly completeness: 'bounded-sample' | 'overflow' | 'failed';
 }
+/** A record's exact identity: its declared identity columns when they are present and unique, else its row in the saved
+ * response it came from. The key is the canonical text itself, so two records share a key only when their identity is equal. */
 export function recordKey(snapshot: DiscoverySnapshot, row: Readonly<Record<string, Json>>, identityColumns: readonly string[], rowIndex = snapshot.response.rows.indexOf(row)): string {
   const identity = identityColumns.map(column => row[column]);
   const unique = identity.length > 0 && identity.every(v => v !== undefined && v !== null && v !== '') &&
     snapshot.response.rows.filter(r => identityColumns.every(column => canonical(r[column]) === canonical(row[column]))).length === 1;
-  return digest(unique ? { service: snapshot.service, table: snapshot.table, identityColumns, identity }
-    : { service: snapshot.service, table: snapshot.table, snapshot: snapshot.response.raw.sha256, rowIndex, row });
+  return canonical(unique ? { service: snapshot.service, table: snapshot.table, identityColumns, identity }
+    : { service: snapshot.service, table: snapshot.table, response: snapshot.response.raw.path, rowIndex, row });
 }
-export const productKey = (record: string, binding: Json): string => digest({ record, binding });
-/** Fetch times are deliberately outside this identity. Descriptor content and limits are inside it. */
-export const acquisitionKey = (product: string, operation: Json, descriptor: Json, limits: TransferLimits, implementation: string): string =>
-  digest({ product, operation, descriptor, limits, implementation });
+/** One product of a record: the record's key and the binding that selects the product, as canonical text. */
+export const productKey = (record: string, binding: Json): string => canonical({ record, binding });

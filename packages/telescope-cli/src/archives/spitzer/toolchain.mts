@@ -11,12 +11,12 @@
  * carries an open, pinned reprojection stack instead, and every product it makes says which it was.
  *
  * micromamba creates Python from conda-forge; pip then installs requirements.lock, every package at its pinned version, with
- * `--no-deps`, so the resolver never chooses anything. The install records the sha256 of the descriptor and the lock together,
+ * `--no-deps`, so the resolver never chooses anything. The install keeps the descriptor and lock texts it was built from,
  * and `spitzerToolchain` refuses an environment built from other pins. micromamba itself is taken from PATH. */
-import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { runToolchainProcess, WORKSPACE } from '@cssearth/telescope/node';
-import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope/node';
+import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
+import { access, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -28,16 +28,10 @@ export const SPITZER_ROOT = resolve(repository, 'output/toolchains/spitzer');
 /** The packages a run imports; a verify that cannot import one of these is a broken environment, not a warning. */
 export const REQUIRED_MODULES = ['numpy', 'astropy', 'reproject', 'scipy'] as const;
 
-export async function spitzerDescriptor() {
-  const path = resolve(PINS, 'toolchain.json');
-  const text = await readFile(path, 'utf8');
-  const entry = requireRecord(JSON.parse(text) as unknown, 'toolchain.json');
-  const lock = await readFile(resolve(PINS, requireString(entry.requirements)), 'utf8');
-  return { entry, lock, digest: createHash('sha256').update(text).update(lock).digest('hex') };
-}
+export const spitzerDescriptor = () => readToolchainDescriptor(PINS, 'spitzer');
 
 export async function installSpitzer() {
-  const { entry, digest } = await spitzerDescriptor(), prefix = resolve(SPITZER_ROOT, 'env');
+  const pins = await spitzerDescriptor(), { entry } = pins, prefix = resolve(SPITZER_ROOT, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   await rm(SPITZER_ROOT, { recursive: true, force: true });
   await mkdir(SPITZER_ROOT, { recursive: true });
@@ -45,15 +39,12 @@ export async function installSpitzer() {
   runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel), ...requireArray(mamba.packages).map(value => requireString(value))], { env });
   runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(PINS, requireString(entry.requirements))]);
   await rm(resolve(SPITZER_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  await writeFile(resolve(SPITZER_ROOT, 'installed.json'), `${JSON.stringify({ id: 'spitzer', pinsSha256: digest }, null, 2)}\n`);
+  writeInstalledMarker(SPITZER_ROOT, pins);
   return SPITZER_ROOT;
 }
 
 export interface SpitzerToolchain {
   readonly python: string;
-  /** The digest of toolchain.json and requirements.lock together; a product record carries it, so a product made from other
-   * pins is never mistaken for this one. */
-  readonly digest: string;
   readonly env: NodeJS.ProcessEnv;
 }
 
@@ -61,13 +52,11 @@ export interface SpitzerToolchain {
  * numerical library to one thread: a mosaic must not open a window, and a coadd must give the same bytes on every machine.
  * Refuses a missing install or one built from other pins. */
 export async function spitzerToolchain(): Promise<SpitzerToolchain> {
-  const { digest } = await spitzerDescriptor(), bin = resolve(SPITZER_ROOT, 'env/bin'), python = resolve(bin, 'python');
-  const marker = await readFile(resolve(SPITZER_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The Spitzer toolchain is not installed: node packages/telescope-cli/src/archives/spitzer/toolchain.mts install');
-  if (marker.pinsSha256 !== digest) throw new Error('The Spitzer toolchain was installed from other pins; reinstall it.');
+  const bin = resolve(SPITZER_ROOT, 'env/bin'), python = resolve(bin, 'python');
+  assertInstalledMarker(SPITZER_ROOT, await spitzerDescriptor(), 'Spitzer', 'node packages/telescope-cli/src/archives/spitzer/toolchain.mts install');
   if (!await access(python).then(() => true, () => false)) throw new Error(`The Spitzer toolchain has no python at ${python}.`);
   return {
-    python, digest,
+    python,
     env: { PATH: `${bin}:${process.env.PATH ?? ''}`, MPLBACKEND: 'Agg', PYTHONNOUSERSITE: '1',
       OMP_NUM_THREADS: '1', OPENBLAS_NUM_THREADS: '1', MKL_NUM_THREADS: '1', NUMEXPR_NUM_THREADS: '1' },
   };
@@ -92,6 +81,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   else if (mode === 'verify') {
     const toolchain = await spitzerToolchain();
     const software = await spitzerSoftware(toolchain);
-    console.log(`Spitzer ready: ${toolchain.python}; ${software.map(entry => `${entry.name} ${entry.version}`).join(', ')}; pins ${toolchain.digest.slice(0, 12)}`);
+    console.log(`Spitzer ready: ${toolchain.python}; ${software.map(entry => `${entry.name} ${entry.version}`).join(', ')}`);
   } else throw new TypeError('Usage: toolchain <install|verify>');
 }

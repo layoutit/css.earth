@@ -51,7 +51,7 @@ for (const kind of ['zip', 'tar'] as const) test(`${kind} package stages its FIT
     const result = await extractVoPackage(archive(root, kind), staging, { expandedBytes: 100_000, members: 10 });
     assert.equal(result.format, kind); assert.equal(result.science, 'science.fits'); assert.equal(result.members.length, 4);
     assert.equal((await readFile(resolve(staging, 'members', result.science))).subarray(0, 6).toString(), 'SIMPLE');
-    assert.ok(result.members.every(member => /^[a-f0-9]{64}$/u.test(member.sha256)));
+    assert.ok(result.members.every(member => Number.isSafeInteger(member.bytes) && Object.keys(member).sort().join() === 'bytes,path'));
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

@@ -147,7 +147,7 @@ export function parseChandraProgram(value: unknown): ChandraProgram {
   return { schema: row.schema, id: requireString(row.id, 'Program id'), target: requireString(row.target, 'Target'), observations };
 }
 
-/** A pinned file on disk at its pinned size and, once known, its pinned digest: linked from a source directory that already has
+/** A pinned file on disk at its pinned size: linked from a source directory that already has
  * it, or downloaded with curl, which resumes a partial transfer. The archive drops slow transfers, so one under 200 kB/s for a
  * minute is abandoned and resumed on a fresh connection, twenty times at most. The archive's path is kept, because the CIAO
  * tools read an observation as the directory the archive lays out. */
@@ -291,14 +291,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   for (const value of obsids) {
     const entry = await chandraObservation(Number(value));
     target ??= entry.targetName;
-    // Digests recorded by an earlier download stay with their file.
-    const keep = (list: readonly ChandraFile[], previous: readonly ChandraFile[] = []) => list.map(file => {
-      const before = previous.find(other => other.path === file.path && other.bytes === file.bytes);
-      return file;
-    });
     const index = entries.findIndex(other => other.obsid === entry.obsid);
-    const withDigests = { ...entry, inputs: keep(entry.inputs, entries[index]?.inputs), products: keep(entry.products, entries[index]?.products) };
-    if (index >= 0) entries[index] = withDigests; else entries.push(withDigests);
+    if (index >= 0) entries[index] = entry; else entries.push(entry);
     console.log(`${entry.obsid}: ${entry.instrument}/${entry.detector} ${entry.grating} ${[entry.readMode, entry.dataMode].filter(Boolean).join('/')} ${entry.targetName}, ${(entry.livetimeSeconds / 1000).toFixed(1)} ks, ${entry.inputs.length} inputs, ${entry.products.length} products, ASCDSVER ${entry.ascdsVersion}`);
   }
   const program = parseChandraProgram({ schema: 'cssearth-chandra-program@1', id, target, observations: entries });

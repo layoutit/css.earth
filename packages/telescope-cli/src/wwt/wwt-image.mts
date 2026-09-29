@@ -1,5 +1,4 @@
 /** Materialize a pinned WWT TAN imageset as one static, CSS-preparation-ready PNG. */
-import { createHash } from 'node:crypto';
 import { lstat, mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
@@ -9,7 +8,6 @@ const TILE_SIZE = 256;
 export const WWT_IMAGE_MAX_LEVEL = 3; // 64 tiles, 2048 x 2048 pixels at most.
 const MAX_TILE_BYTES = 2 * 1024 * 1024;
 const MAX_TOTAL_BYTES = 32 * 1024 * 1024;
-const digest = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 const object = (value: unknown, label: string): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label} must be an object.`);
   return value as Record<string, unknown>;
@@ -44,8 +42,8 @@ async function boundedBytes(response: Response, url: string): Promise<Buffer> {
 export interface WwtImageReceipt {
   readonly schema: 'cssearth-wwt-image@1'; readonly catalogRevision: string;
   readonly target: string; readonly imageset: WwtImageSet; readonly level: number;
-  readonly output: { readonly path: 'image.png'; readonly width: number; readonly height: number; readonly bytes: number; readonly sha256: string };
-  readonly tiles: readonly { readonly x: number; readonly y: number; readonly url: string; readonly bytes: number; readonly sha256: string }[];
+  readonly output: { readonly path: 'image.png'; readonly width: number; readonly height: number; readonly bytes: number };
+  readonly tiles: readonly { readonly x: number; readonly y: number; readonly url: string; readonly bytes: number }[];
 }
 
 export async function exportWwtImage(root: string, explorationPath: string, pick: number, level: number, outputDirectory: string,
@@ -82,14 +80,14 @@ export async function exportWwtImage(root: string, explorationPath: string, pick
     const metadata = await sharp(bytes, { limitInputPixels: TILE_SIZE * TILE_SIZE }).metadata();
     if (metadata.format !== 'png' || metadata.width !== TILE_SIZE || metadata.height !== TILE_SIZE)
       throw new TypeError(`WWT tile must be a ${TILE_SIZE} × ${TILE_SIZE} PNG: ${url}`);
-    tiles.push({ x, y, url, bytes: bytes.length, sha256: digest(bytes) });
+    tiles.push({ x, y, url, bytes: bytes.length });
     layers.push({ input: bytes, left: x * TILE_SIZE, top: y * TILE_SIZE });
   }
   const png = await sharp({ create: { width, height: width, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
     .composite(layers).png().toBuffer();
   const value: WwtImageReceipt = { schema: 'cssearth-wwt-image@1', catalogRevision: catalog.source.revision,
     target: saved.target, imageset, level,
-    output: { path: 'image.png', width, height: width, bytes: png.length, sha256: digest(png) }, tiles };
+    output: { path: 'image.png', width, height: width, bytes: png.length }, tiles };
   await mkdir(parent, { recursive: true });
   const temporary = await mkdtemp(resolve(parent, '.wwt-image-'));
   try {

@@ -29,7 +29,7 @@ import { readFitsFileHdus, type FitsFileHdu } from '@cssearth/fits/node';
 import { skyImageAxes } from '@cssearth/fits';
 import { positionalArguments } from '@cssearth/core';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
-import { assertInputPins, fileSize, writeProductRecord } from '@cssearth/telescope/node';
+import { assertInputs, fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductEvidence, ProductInput, ProductRun } from '@cssearth/telescope';
 import { HST_PROGRAMS, PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses } from './line-stack-ephemeris.mts';
@@ -163,7 +163,7 @@ export async function targetPlace(definition: TimeTagDefinition, julianDate: num
 export interface TrackedSlice { readonly slice: number; readonly seconds: number; readonly liveSeconds: number; readonly x: number; readonly y: number; readonly significance: number }
 export interface TimeTagRun {
   readonly definition: TimeTagDefinition;
-  /** Every input as it was actually read: recorded byte count, measured digest. */
+  /** Every input as it was actually read, at its recorded byte count. */
   readonly inputs: readonly ProductInput[];
   readonly file: EventsFile;
   readonly place: TargetPlace;
@@ -183,7 +183,7 @@ export interface TimeTagRun {
 export interface TimeTagOptions {
   readonly directory: string;
   readonly mayAsk?: boolean;
-  readonly verifyDigests?: boolean;
+  readonly verifySizes?: boolean;
   readonly log?: (line: string) => void;
 }
 
@@ -198,7 +198,7 @@ export async function runTimeTagFrame(definition: TimeTagDefinition, options: Ti
   // The pins are checked before a byte of science is read: a stage that reduced another file would write a record naming
   // this one.
   const inputs = await productInputs(definition, files);
-  if (options.verifyDigests ?? true) await assertInputPins(inputs, files);
+  if (options.verifySizes ?? true) await assertInputs(inputs, files);
   const eventsUri = definition.files.find(file => file.role === 'events')!.uri;
   const file = await readEventsFile(files.get(eventsUri)!, definition);
   const live = liveSeconds(file.intervals), span = spanSeconds(file.intervals);
@@ -467,7 +467,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const unknown = flags.filter(flag => !['--fetch', '--receipt', '--no-verify'].includes(flag));
   if (unknown.length) { console.error(`unknown option ${unknown.join(' ')}`); process.exit(2); }
   const definition = await readTimeTagDefinition(id);
-  const run = await runTimeTagFrame(definition, { directory, mayAsk: flags.includes('--fetch'), verifyDigests: !flags.includes('--no-verify'), log: line => console.log(line) });
+  const run = await runTimeTagFrame(definition, { directory, mayAsk: flags.includes('--fetch'), verifySizes: !flags.includes('--no-verify'), log: line => console.log(line) });
   const written = await writeProducts(run, output);
   const record = await writeRecord(run, output, written);
   console.log(`wrote ${written.join(', ')} and ${written[0]}.product.json to ${output} (${record.outputs.length} outputs pinned)`);

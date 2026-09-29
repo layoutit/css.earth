@@ -11,7 +11,6 @@
  * reference library. The run happens on the klip toolchain (toolchain.json), whose pins are the paper's pipeline version and CRDS
  * context. The result is spaceKLIP's own KLIP product, one image per KL mode count, north up. The run is stopped if its resident
  * memory passes the ceiling (default 6 GiB). */
-import { createHash } from 'node:crypto';
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { availableParallelism, totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
@@ -88,7 +87,7 @@ products = [row['FITSFILE'] for row in db.red[key]]
 print(json.dumps({'seconds': round(time.time() - start, 1), 'concatenation': key, 'products': products}))
 `;
 
-async function sha256(path: string) { return createHash('sha256').update(await readFile(path)).digest('hex'); }
+const sizeOf = async (path: string) => (await stat(path)).size;
 
 /** Copy each exposure of the band into the work directory from the first raw directory holding it at the pinned size. */
 async function stageExposures(program: KlipProgram, band: KlipBand, raw: readonly string[], directory: string) {
@@ -125,8 +124,8 @@ export async function reduceKlip(id: string, bandName: string, work: string, opt
   const summary = requireRecord(JSON.parse(result.lastLine) as unknown, 'spaceKLIP result');
   const products = requireArray(summary.products, 'spaceKLIP products').map(value => requireString(value, 'spaceKLIP product'));
   const record = { schema: 'cssearth-jwst-klip-run@1', program: id, band: bandName, crdsContext: program.crdsContext, toolchain: 'packages/telescope-cli/src/archives/jwst/klip/toolchain.json',
-    inputs: await Promise.all(files.map(async file => ({ name: basename(file), sha256: await sha256(file) }))),
-    products: await Promise.all(products.map(async file => ({ path: file.startsWith(output) ? file.slice(output.length + 1) : file, sha256: await sha256(file) }))),
+    inputs: await Promise.all(files.map(async file => ({ name: basename(file), bytes: await sizeOf(file) }))),
+    products: await Promise.all(products.map(async file => ({ path: file.startsWith(output) ? file.slice(output.length + 1) : file, bytes: await sizeOf(file) }))),
     workers, seconds: summary.seconds, peakRssGiB: +(result.peakRssBytes / 2 ** 30).toFixed(2) };
   await writeFile(resolve(work, 'run.json'), `${JSON.stringify(record, null, 2)}\n`);
   return record;

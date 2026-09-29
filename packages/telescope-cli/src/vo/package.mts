@@ -2,13 +2,13 @@ import { spawn } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
 
-export type VoPackageMember = { path: string; bytes: number; sha256: string };
+export type VoPackageMember = { path: string; bytes: number };
 /** `science` is retained for legacy one-raster packages. `fitsMembers` is the complete non-arbitrary FITS candidate set. */
 export type VoPackage = { science: string | null; fitsMembers: readonly string[]; members: VoPackageMember[]; format: 'zip' | 'tar' };
 export type VoPackageLimits = { expandedBytes: number; members: number };
 
 const PYTHON = String.raw`
-import hashlib, json, os, posixpath, re, shutil, stat, sys, tarfile, tempfile, zipfile
+import json, os, posixpath, re, shutil, stat, sys, tarfile, tempfile, zipfile
 import xml.etree.ElementTree as ET
 from astropy.io import fits
 from pathlib import Path, PureWindowsPath
@@ -125,7 +125,7 @@ def extract(archive, destination, expanded_limit, member_limit):
             nonlocal total
             target = output / logical
             target.parent.mkdir(parents=True, exist_ok=True)
-            digest, count = hashlib.sha256(), 0
+            count = 0
             with source, open(target, 'xb') as sink:
                 while True:
                     chunk = source.read(1024 * 1024)
@@ -133,8 +133,8 @@ def extract(archive, destination, expanded_limit, member_limit):
                         break
                     if total + len(chunk) > expanded_limit:
                         fail('expanded archive byte limit exceeded')
-                    sink.write(chunk); digest.update(chunk); count += len(chunk); total += len(chunk)
-            pins.append({'path': logical, 'bytes': count, 'sha256': digest.hexdigest()})
+                    sink.write(chunk); count += len(chunk); total += len(chunk)
+            pins.append({'path': logical, 'bytes': count})
         if kind == 'zip':
             with zipfile.ZipFile(archive) as source:
                 for logical, directory, item in items:
@@ -183,9 +183,9 @@ function parsePackage(value: unknown): VoPackage {
   const members = result.members.map((member): VoPackageMember => {
     if (!member || typeof member !== 'object') throw new Error('Package extractor returned an invalid member.');
     const pin = member as Record<string, unknown>;
-    if (typeof pin.path !== 'string' || typeof pin.bytes !== 'number' || !Number.isSafeInteger(pin.bytes) || pin.bytes < 0 || typeof pin.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(pin.sha256))
+    if (typeof pin.path !== 'string' || typeof pin.bytes !== 'number' || !Number.isSafeInteger(pin.bytes) || pin.bytes < 0)
       throw new Error('Package extractor returned an invalid member pin.');
-    return { path: pin.path, bytes: pin.bytes, sha256: pin.sha256 };
+    return { path: pin.path, bytes: pin.bytes };
   });
   const fitsMembers = result.fitsMembers.map(path => { if (typeof path !== 'string' || !members.some(member => member.path === path)) throw new Error('Package FITS member is not pinned.'); return path; });
   if (result.science !== null && !members.some(member => member.path === result.science)) throw new Error('Package science member is not pinned.');

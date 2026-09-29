@@ -3,8 +3,7 @@ import { inside, safeId, parseSourceProducts, sourceReceipt, sourceRecordComplet
 import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
-import { sha256File } from '@cssearth/core/node';
+import { VERSION } from './help.mts';
 import { hasErrorCode, requireRecord } from '@cssearth/core';
 import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import type { ProductRun } from '@cssearth/telescope';
@@ -13,15 +12,11 @@ import { parseProductFacts, type QualifiedObservation } from './qualified-observ
 import { verifyCalibrationDependencies, type CalibrationDependency } from './calibration-dependencies.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 export interface LoadedSourceProduct extends SourceProduct { readonly qualified: boolean; readonly receipt: string; readonly receiptProblem?: string; readonly facts?: ProductFacts }
-/** Authored implementation inputs hashed into every source-qualification receipt. */
-export const SOURCE_RUN_FILES = ['source-intake.mts', 'source-product-contract.mts', 'source-transfer.mts', '../../../packages/bake/src/objects/acquisition/operations-acquisition.ts', '../../../packages/bake/src/objects/sources/source-files.ts', '../../../packages/bake/src/objects/raster/pds/isis3-raster.ts', 'source-products.mts', 'qualify-source.mts', 'observation-families.mts', 'product-descriptor.mts', 'families/common.mts', 'families/f16/f16-spherical-grid.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../../../packages/telescope/src/node/science.ts', '../../../packages/telescope/toolchains/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../../packages/fits/src/fits.ts', '../../../packages/fits/src/node/file.ts', '../../../packages/fits/src/rice.ts', '../../../packages/telescope/src/pds3-labels.ts', './archives/pds/source-observations.mts', '../../../packages/telescope/src/pds-labels.ts', '../../../packages/telescope/src/product-record.ts', '../../../packages/telescope/src/node/product-record.ts', '../../../packages/telescope/src/node/pds-client.ts', '../../../packages/telescope/toolchains/pds-toolchain.json'] as const;
 export async function sourceRun(root: string, product: SourceProduct, dependencies: readonly CalibrationDependency[] = []): Promise<ProductRun> {
   assertPinnedLabel(product);
-  const digest = createHash('sha256');
-  for (const path of SOURCE_RUN_FILES) digest.update(path).update(await readFile(resolve(import.meta.dirname, path)));
-  const inputs = await Promise.all(product.files.map(async file => ({ role: file.role, identity: file.origin, ...await sha256File(inside(root, file.path)) })));
+  const inputs = await Promise.all(product.files.map(async file => ({ role: file.role, identity: file.origin, ...await fileSize(inside(root, file.path)) })));
   return { telescope: product.telescope, stage: 'source-qualification', inputs: [...inputs, ...dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!}))],
-    parameters: { observation: product }, software: [{ name: 'cssEarth source qualification', version: digest.digest('hex') }, { name: 'Node.js', version: process.version }] };
+    parameters: { observation: product }, software: [{ name: 'cssEarth source qualification', version: VERSION }, { name: 'Node.js', version: process.version }] };
 }
 export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = [], options: { readonly fetchRemote?: boolean } = {}): Promise<LoadedSourceProduct[]> {
   safeId(target, 'target');
@@ -57,7 +52,7 @@ export async function loadSourceProducts(root: string, target: string, issues: S
         qualified &&= pin !== null && record.outputs.some(output => output.path === file.path && output.bytes === pin.bytes);
       }
       qualified &&= await verifyCalibrationDependencies(root,savedFacts?.calibrationDependencies??[]);
-      if (!qualified) receiptProblem = 'The qualification receipt is stale: inputs, parameters, implementation, runtime or output bytes changed.';
+      if (!qualified) receiptProblem = 'The qualification receipt is stale: inputs, parameters, software, runtime or output bytes changed.';
     }
     const facts = qualified ? parseProductFacts(requireRecord(JSON.parse(await readFile(resolve(root, `output/telescopes/${target}/${product.id}/decoded.json`), 'utf8')), 'decoded product').facts) : undefined;
     loaded.push({ ...product, qualified, receipt, ...(facts ? { facts } : {}), ...(receiptProblem ? { receiptProblem } : {}) });

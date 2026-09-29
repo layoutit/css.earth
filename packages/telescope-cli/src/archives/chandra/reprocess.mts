@@ -4,7 +4,7 @@
  *   node packages/telescope-cli/src/archives/chandra/reprocess.mts <program id> <obsid> <work directory> [--raw <dir>]... [--max-rss-gib <n>]
  *
  * The pinned files are taken from a --raw directory that already holds them or downloaded from the Chandra Data Archive, each at
- * its pinned size and digest; a digest missing from the program is measured and written back. They keep the archive's own paths
+ * its pinned size; a size missing from the program is measured and written back. They keep the archive's own paths
  * under <work>/archive, because chandra_repro reads an observation as the directory the archive lays out: the level-1
  * event list, the aspect solution, the bad pixels, the mask, the mission timeline, the parameter block and the bias maps, each
  * where standard data processing put it. They are then copied into <work>/run, because chandra_repro expands a gzipped input
@@ -25,7 +25,7 @@ import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promi
 import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductRun } from '@cssearth/telescope';
 import { readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
@@ -74,28 +74,27 @@ export async function readChandraProgram(id: string) {
   return { path, program: parseChandraProgram(JSON.parse(await readFile(path, 'utf8'))) };
 }
 
-/** An observation's pinned files on disk at their pinned sizes and digests, laid out under the archive's own paths; digests
- * missing from the program are measured, written back, and carried by the observation this returns, which is what a run records
- * its inputs from. */
+/** An observation's pinned files on disk at their pinned sizes, laid out under the archive's own paths; sizes missing from the
+ * program are measured, written back, and carried by the observation this returns, which is what a run records its inputs from. */
 export async function chandraFiles(id: string, obsid: number, directory: string, sources: readonly string[] = [], kinds: 'inputs' | 'products' | 'all' = 'all') {
   const { path, program } = await readChandraProgram(id), entry = program.observations.find(other => other.obsid === obsid);
   if (!entry) throw new Error(`${id} has no observation ${obsid}.`);
   const fetchAll = async (pinned: readonly ChandraFile[]) => {
-    const files: string[] = [], digested: ChandraFile[] = [];
+    const files: string[] = [], measured: ChandraFile[] = [];
     for (const member of pinned) {
       files.push(await chandraFile(member, directory, sources));
-      digested.push({ ...member, bytes: (await stat(resolve(directory, member.path))).size });
+      measured.push({ ...member, bytes: (await stat(resolve(directory, member.path))).size });
     }
-    return { files, digested, changed: digested.some((member, index) => member.bytes !== pinned[index]!.bytes) };
+    return { files, measured, changed: measured.some((member, index) => member.bytes !== pinned[index]!.bytes) };
   };
-  const inputs = kinds === 'products' ? { files: [], digested: [...entry.inputs], changed: false } : await fetchAll(entry.inputs);
-  const products = kinds === 'inputs' ? { files: [], digested: [...entry.products], changed: false } : await fetchAll(entry.products);
+  const inputs = kinds === 'products' ? { files: [], measured: [...entry.inputs], changed: false } : await fetchAll(entry.inputs);
+  const products = kinds === 'inputs' ? { files: [], measured: [...entry.products], changed: false } : await fetchAll(entry.products);
   if (inputs.changed || products.changed) {
     const updated: ChandraProgram = { ...program, observations: program.observations.map(other =>
-      other.obsid === obsid ? { ...other, inputs: inputs.digested, products: products.digested } : other) };
+      other.obsid === obsid ? { ...other, inputs: inputs.measured, products: products.measured } : other) };
     await writeFile(path, `${JSON.stringify(updated, null, 2)}\n`);
   }
-  return { program, entry: { ...entry, inputs: inputs.digested, products: products.digested }, inputs: inputs.files, products: products.files };
+  return { program, entry: { ...entry, inputs: inputs.measured, products: products.measured }, inputs: inputs.files, products: products.files };
 }
 
 /** What a pinned level-1 file is, from the kind its archive name states (`acisf02798_002N004_evt1.fits.gz`). A kind this route
@@ -118,13 +117,12 @@ export function reprocessParameters(grating: string, maxRssBytes: number) {
 
 /** What identifies one reprocessing run: the observation's pinned level-1 files, what chandra_repro was told, and the CIAO and
  * CALDB that ran it. The record written from this is the only place a later reader takes that environment from. */
-export function reprocessRun(entry: ChandraObservation, options: { parameters: Readonly<Record<string, unknown>>; versions: { ciao: string; caldb: string }; toolchainDigest: string }): ProductRun {
+export function reprocessRun(entry: ChandraObservation, options: { parameters: Readonly<Record<string, unknown>>; versions: { ciao: string; caldb: string } }): ProductRun {
   const inputs = entry.inputs.map(file => {
     return { role: inputRole(file.path), identity: file.url, bytes: file.bytes };
   });
   return { telescope: 'Chandra', stage: `reprocess/${entry.obsid}-${entry.instrument}`, inputs, parameters: options.parameters,
-    software: [{ name: 'ciao', version: options.versions.ciao }, { name: 'caldb', version: options.versions.caldb }],
-    toolchainDigest: options.toolchainDigest };
+    software: [{ name: 'ciao', version: options.versions.ciao }, { name: 'caldb', version: options.versions.caldb }] };
 }
 
 /** What the level-2 event list is, in the terms its own header states. It carries no one unit: it is a table of events. */
@@ -142,10 +140,6 @@ export async function writeReprocessRecord(directory: string, level2: string, pr
   return path;
 }
 
-/** The digest of the pins the installed environment was built from. `chandraToolchain` has already refused an environment built
- * from any other, so this is the descriptor and lock the run's software came from. */
-export const chandraToolchainDigest = async (): Promise<string> => requireString(requireRecord(JSON.parse(await readFile(resolve(CHANDRA_ROOT, 'installed.json'), 'utf8')) as unknown, 'installed.json').pinsSha256, 'pinsSha256');
-
 export interface ReprocessResult {
   readonly run: string; readonly obsid: number; readonly instrument: string; readonly dataMode: string;
   readonly level2: string; readonly products: readonly string[];
@@ -162,7 +156,7 @@ export async function runReprocess(id: string, obsid: number, work: string, opti
   const ceiling = options.maxRssBytes ?? 2 * 2 ** 30;
   const toolchain = await chandraToolchain(), versions = await chandraVersions();
   const { chandraRepro, parameters } = reprocessParameters(entry.grating, ceiling);
-  const identity = reprocessRun(entry, { parameters, versions, toolchainDigest: await chandraToolchainDigest() });
+  const identity = reprocessRun(entry, { parameters, versions });
   const input = resolve(work, 'run'), run = resolve(work, 'repro');
   // A re-run is skipped only when the record beside the level-2 event list says this same run wrote it and every product it names
   // is still the file it wrote. Other pins, other parameters, another CIAO or CALDB, a changed output: the run happens again.

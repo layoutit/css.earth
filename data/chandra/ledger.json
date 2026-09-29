@@ -1143,6 +1143,13 @@
     }
   },
   "modes": {
+    "ACIS-012367 no grating TIMED/FAINT": {
+      "state": "reproduced",
+      "program": "casa-acisi",
+      "obsid": 210,
+      "target": "Cas A",
+      "livetimeSeconds": 3627.2
+    },
     "HRC-I no grating OBSERVING": {
       "state": "reproduced",
       "program": "jupiter-hrci",

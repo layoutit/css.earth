@@ -8,7 +8,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { EVIDENCE_KINDS, evidenceFor, parseProductRecord } from '@cssearth/telescope';
-import { runDigest } from '@cssearth/telescope/node';
+import { runKey } from '@cssearth/telescope/node';
 import {
   ARCHIVE_FINAL_SCHEMA, ARCHIVE_FINAL_STAGE, archiveCalibration, archiveFinalPath, archiveFinalQualificationRun,
   archiveFinalQualifiedRun, archiveFinalRecordPath, archiveFinalSelection, findDisc, identityDisagreements,
@@ -176,7 +176,7 @@ test('the calibration the archive ran is read from whichever header states it, a
 test('archive-origin is a kind of its own and never answers a question about archive agreement', () => {
   assert.ok((EVIDENCE_KINDS as readonly string[]).includes('archive-origin'));
   const record = parseProductRecord({ schema: 'cssearth-telescope-product@1', telescope: 'Hubble', stage: ARCHIVE_FINAL_STAGE, inputs: [], parameters: {}, software: [],
-    outputs: [{ path: 'a_c1f.fits', bytes: 1, sha256: 'a'.repeat(64) }],
+    outputs: [{ path: 'a_c1f.fits', bytes: 1 }],
     evidence: [{ kind: 'archive-origin', receipt: 'programs/a.archive-final.product.json', product: 'a_c1f.fits', establishes: "The bytes are the archive's own." }] });
   assert.equal(evidenceFor(record, 'a_c1f.fits', 'archive-origin').length, 1);
   assert.deepEqual(evidenceFor(record, 'a_c1f.fits', 'archive-agreement'), [], 'retrieval is not a reproduction');
@@ -191,7 +191,7 @@ test('every qualified program has a record of its own run, over the files it pin
     // The record carries the selection it was qualified with, so a later reader can rebuild it from the program and see that
     // nothing has moved: the sizes alone would not notice a component pointed at another chip of the same file.
     assert.deepEqual(record.parameters.selection, archiveFinalSelection(program), id);
-    assert.equal(runDigest(archiveFinalQualifiedRun(record)), runDigest(archiveFinalQualificationRun(program)), id);
+    assert.equal(runKey(archiveFinalQualifiedRun(record)), runKey(archiveFinalQualificationRun(program)), id);
     const science = program.components.find(component => component.role === 'science')!.file!;
     const origin = evidenceFor(record, science, 'archive-origin');
     assert.equal(origin.length, 1, `${id}: one archive-origin entry, naming the science product`);

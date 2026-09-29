@@ -20,7 +20,7 @@ export async function openFitsSource(path: string) {
   const relativePath = requireString(declared.path, 'FITS source path');
   if (!/\.fits?(?:\.gz)?$/iu.test(relativePath)) throw new TypeError('FITS source must name a FITS file');
   const pins = source.record.outputs.filter(output => output.path === relativePath);
-  if (pins.length !== 1 || !pins[0]!.sha256) throw new Error('FITS source is not uniquely pinned by the product record');
+  if (pins.length !== 1) throw new Error(`FITS source ${relativePath} is listed ${pins.length} times among the outputs of ${source.file}; it must be listed once.`);
   const label = requireString(declared.label, 'FITS source label');
   const limitations = declared.limitations === undefined ? [] : requireArray(declared.limitations, 'FITS source limitations').map(value => requireString(value, 'FITS source limitation'));
   const companions = declared.companions === undefined ? undefined : (() => {
@@ -28,8 +28,8 @@ export async function openFitsSource(path: string) {
     if (Object.keys(named).sort().join(',') !== 'coverage,uncertainty') throw new TypeError('FITS companions require uncertainty and coverage.');
     return Object.fromEntries(['uncertainty', 'coverage'].map(role => {
       const name = requireString(named[role], `${role} source path`);
-      if (!/\.fits?(?:\.gz)?$/iu.test(name) || source.record.outputs.filter(output => output.path === name && output.sha256).length !== 1)
-        throw new Error(`${role} FITS companion is not uniquely pinned.`);
+      if (!/\.fits?(?:\.gz)?$/iu.test(name) || source.record.outputs.filter(output => output.path === name).length !== 1)
+        throw new Error(`${role} FITS companion ${name} is not listed once among the outputs of ${source.file}.`);
       return [role, localOutput(source.root, name)];
     })) as { uncertainty: string; coverage: string };
   })();

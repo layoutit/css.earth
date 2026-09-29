@@ -18,10 +18,10 @@ built-ins; it never reaches `packages/bake`, `packages/telescope-cli`, `src/`, `
 
 ## Behaviour is part of the contract
 
-Product records, receipts and source-qualification digests hash these files and depend on what they accept, refuse and
-write. Change a record field, a digest, a parsed label value or an error message only on purpose, together with every
-test that pins it. A toolchain pin (`toolchains/*.json` and its lock) is the identity of an installed environment: any
-byte change there asks every checkout to reinstall it.
+Product records, receipts and source qualification depend on what these files accept, refuse and write. Change a record
+field, a parsed label value or an error message only on purpose, together with every test that asserts it. A toolchain pin
+(`toolchains/*.json` and its lock) is copied into the environment it installs: any text change there asks every checkout
+to reinstall it.
 
 ## Shared package contract
 

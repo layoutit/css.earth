@@ -28,7 +28,7 @@ test('the WASP-43b MIRI program pins 30 raw segments, its CRDS context, its cont
   assert.match(await readFile(resolve(program, pinned.stages.S1), 'utf8'), /^maximum_cores\s+'none'/mu);
 });
 
-test('the HD 189733b MIRI eclipses pin their segments, Lally et al.\'s extraction choices and their deposit files by md5', async () => {
+test('the HD 189733b MIRI eclipses pin their segments, Lally et al.\'s extraction choices and their deposit files by size', async () => {
   for (const [observation, eclipse, files] of [['002', 1, 5], ['011', 2, 4]] as const) {
     const directory = resolve(WORKSPACE, JWST_PROGRAMS.path, `hd-189733b-miri-2021-${observation}`), pinned = await readProgram(directory);
     assert.equal(pinned.segments.length, 7);

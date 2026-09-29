@@ -5,8 +5,7 @@
  *   node packages/telescope-cli/src/archives/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45
  *
  * The PDS Cartography and Imaging Sciences Node serves JunoCam as numbered volumes, each with a fixed-format index of its
- * products. A program names the images of one target by URL and size; the measuring tool adds each file's digest the first
- * time it holds the bytes. Only calibrated products (RDR) whose filter combination includes red, green and blue are pinned,
+ * products. A program names the images of one target by URL and size. Only calibrated products (RDR) whose filter combination includes red, green and blue are pinned,
  * because those are what the `junocam-camera` format reads. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -51,7 +50,7 @@ export function parseProductId(id: string) {
 /** A number with its PDS unit, such as `1515.1 <km>`. */
 export const indexNumber = (text: string) => { const value = Number(text.replace(/<[^<>]*>/gu, '').trim()); return Number.isFinite(value) ? value : null; };
 
-export interface ProgramImage { productId: string; startTime: string; altitudeKm: number; url: string; bytes: number; sha256?: string; labelUrl: string; labelBytes: number; labelSha256?: string }
+export interface ProgramImage { productId: string; startTime: string; altitudeKm: number; url: string; bytes: number; labelUrl: string; labelBytes: number }
 export interface JunocamProgram {
   schema: typeof PROGRAM_SCHEMA; id: string; volume: string;
   target: { name: string; naifId: number; bodyFrame: string };
@@ -61,11 +60,10 @@ export interface JunocamProgram {
 export function parseProgram(value: unknown): JunocamProgram {
   const record = requireRecord(value, 'JunoCam program'), target = requireRecord(record.target, 'program target');
   if (record.schema !== PROGRAM_SCHEMA) throw new TypeError(`A JunoCam program states the schema ${PROGRAM_SCHEMA}.`);
-  const optionalDigest = (digest: unknown) => digest === undefined ? {} : /^[a-f0-9]{64}$/u.test(String(digest)) ? digest : (() => { throw new TypeError('Invalid digest in JunoCam program.'); })();
-  const images = requireArray(record.images, 'program images').map(entry => { const image = requireRecord(entry, 'program image');
-    const sha256 = optionalDigest(image.sha256), labelSha256 = optionalDigest(image.labelSha256);
-    return { productId: requireString(image.productId), startTime: requireString(image.startTime), altitudeKm: requireFiniteNumber(image.altitudeKm), url: requireString(image.url), bytes: requireFiniteNumber(image.bytes),
-      ...(typeof sha256 === 'string' ? { sha256 } : {}), labelUrl: requireString(image.labelUrl), labelBytes: requireFiniteNumber(image.labelBytes), ...(typeof labelSha256 === 'string' ? { labelSha256 } : {}) }; });
+  const images = requireArray(record.images, 'program images').map(entry => { const image = requireRecord(entry, 'program image'), productId = requireString(image.productId, 'program image productId');
+    for (const field of ['sha256', 'labelSha256']) if (image[field] !== undefined) throw new TypeError(`JunoCam program image ${productId} has a ${field} field (${String(image[field])}); images are pinned by URL and size only.`);
+    return { productId, startTime: requireString(image.startTime), altitudeKm: requireFiniteNumber(image.altitudeKm), url: requireString(image.url), bytes: requireFiniteNumber(image.bytes),
+      labelUrl: requireString(image.labelUrl), labelBytes: requireFiniteNumber(image.labelBytes) }; });
   const id = requireString(record.id);
   if (!/^[a-z][a-z0-9-]*$/u.test(id) || !images.length || images.some(image => parseProductId(image.productId).type !== 'RDR' || !image.url.startsWith(VOLUMES) || !image.labelUrl.startsWith(VOLUMES)))
     throw new TypeError('A JunoCam program names calibrated products of the PDS JunoCam volumes.');

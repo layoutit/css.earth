@@ -162,7 +162,7 @@ const TEMPLATE = /^\d{4}-\d{2}-\d{2}T/u;
 
 /** One receipt read against the program it claims: another schema, another night, a missing pin or fewer than two disjoint
  * reductions is an error, never a silent skip. The receipt has no archive product to name (ESO publishes none for NACO), so
- * what it must pin is the two reductions it compared, each by path, size and digest. */
+ * what it must pin is the two reductions it compared, each by path and size. */
 export function checkReceipt(value: unknown, file: string, program: Record<string, unknown>): void {
   const row = requireRecord(value, file), schema = requireString(row.schema, `${file}: schema`);
   if (!(NACO_RECEIPT_SCHEMAS as readonly string[]).includes(schema)) throw new TypeError(`${file}: ${schema} is not a NACO receipt.`);
@@ -294,7 +294,7 @@ ${objects.join('\n')}
 
 ## Receipts
 
-A receipt counts only when it parses, states one of the schemas this route writes (${NACO_RECEIPT_SCHEMAS.map(schema => `\`${schema}\``).join(', ')}), names the program it sits beside and the night that program pins, and pins both of the disjoint reductions it compared by path, size and digest. A receipt that says anything else is reported here and proves nothing.
+A receipt counts only when it parses, states one of the schemas this route writes (${NACO_RECEIPT_SCHEMAS.map(schema => `\`${schema}\``).join(', ')}), names the program it sits beside and the night that program pins, and pins both of the disjoint reductions it compared by path and size. A receipt that says anything else is reported here and proves nothing.
 
 ${receiptProblemsParagraph(ledger.receiptProblems)}
 `;

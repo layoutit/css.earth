@@ -56,7 +56,7 @@ test('Gemini uses public CADC artifact identities and does not turn an unavailab
   try {
     const row = { observationID: 'GN-1-001', type: 'OBJECT', intent: 'science', instrument_name: 'NIRI',
       target_name: 'HR8799', uri: 'gemini:GEMINI/N20200101S0001.fits', contentLength: '2880',
-      contentChecksum: 'md5:00000000000000000000000000000000', energy_bandpassName: 'K', time_exposure: '30',
+      energy_bandpassName: 'K', time_exposure: '30',
       time_bounds_lower: '58849', dataRelease: '2021-01-01T00:00:00.000' };
     const result = await searchGeminiLeads(root, target, async adql => {
       assert.match(adql, /o\.target_name IN \('HR 8799','HR8799','HR-8799'\)/u);

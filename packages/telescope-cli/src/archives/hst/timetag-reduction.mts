@@ -108,7 +108,6 @@ export interface TimeTagDefinition {
 }
 
 const NAME = /^[a-z0-9][a-z0-9.-]*$/u;
-const HEX64 = /^[0-9a-f]{64}$/u;
 const positive = (value: unknown, label: string) => {
   const number = requireFiniteNumber(value, label);
   if (!(number > 0)) throw new TypeError(`${label} is positive.`);

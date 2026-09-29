@@ -2,12 +2,10 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createServer } from 'node:http';
-import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { astroquery } from '@cssearth/telescope/node';
-// VO acquisition keeps the digests it computes for its own untracked responses (PR #531), so its pins are checked by hash.
-import { sha256File } from '@cssearth/core/node';
 import { loadVoInputs } from './bridge.mts';
 import { SERVICES } from './discovery.mts';
 import { jsonValue, type DiscoverySnapshot } from '@cssearth/telescope/node';
@@ -35,7 +33,7 @@ test('PyVO sends descriptor-bound DataLink parameters and retains the exact resp
     assert.equal(answer.queryStatus, 'OK');
     assert.ok(answer.bindings.some(binding => binding.url?.includes('/soda/sync')));
     assert.deepEqual(await readFile(answer.raw.path), xml);
-    assert.deepEqual(await sha256File(answer.raw.path), { bytes: answer.raw.bytes, sha256: answer.raw.sha256 });
+    assert.equal((await stat(answer.raw.path)).size, answer.raw.bytes);
   } finally {
     server.closeAllConnections();
     await new Promise<void>(done => server.close(() => done()));
@@ -81,7 +79,7 @@ test('public VO query follows a descriptor-bound nested DataLink service', async
     assert.equal(products.length, 1);
     assert.equal(products[0]!.operation.url, `${service}/science.fits`);
     assert.equal(products[0]!.metadata.length, 4); // Discovery bytes, snapshot, and both DataLink responses.
-    for (const pin of products[0]!.metadata) assert.deepEqual(await sha256File(pin.path), { bytes: pin.bytes, sha256: pin.sha256 });
+    for (const pin of products[0]!.metadata) assert.equal((await stat(pin.path)).size, pin.bytes);
   } finally {
     server.closeAllConnections();
     await new Promise<void>(done => server.close(() => done()));

@@ -12,7 +12,6 @@ import type { Session } from './session.mts';
 import { loadWwtImagery } from './wwt/wwt-catalog.mts';
 import { loadWwtFitsLeads } from './wwt/wwt-fits-leads.mts';
 import { describeDegreeLinearPolarization } from './families/f13-polarimetry.mts';
-import { sha256 } from '@cssearth/core/node';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'eris',telescope:'Fixture telescope',mode:'camera',observation:'obs-1',program:'eris-obs-1',
@@ -240,7 +239,7 @@ test('family-assess accepts a verified source receipt and pins the selected desc
     assert.equal(await main(['family-assess',requestPath,receiptPath,'--out',out,'--json'],work,text=>io.io.write(text),io.io,api.services),3);
     assert.equal(api.calls.inspect,1);
     const saved=JSON.parse(await readFile(resolve(out,'family-request.json'),'utf8'));
-    assert.deepEqual(saved.descriptor,{path:descriptorPath,bytes:bytes.length,sha256:sha256(bytes)});
+    assert.deepEqual(saved.descriptor,{path:descriptorPath,bytes:bytes.length});
     assert.equal(saved.status,'unresolved');
     const direct=mockIo(false,false);
     assert.equal(await main(['family-assess',requestPath,descriptorPath,'--out',resolve(work,'direct'),'--json'],work,text=>direct.io.write(text),direct.io,api.services),3);

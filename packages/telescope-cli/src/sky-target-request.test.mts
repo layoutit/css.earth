@@ -10,7 +10,7 @@ import { SERVICES, searchCircle, targetQuery } from './vo/discovery.mts';
 
 const field = (name: string, unit: string | null) => ({ name, id: null, datatype: 'char', arraysize: null, unit, ucd: null, utype: null, xtype: null, ref: null });
 const response = (rows: MetadataResponse['rows'], units: Readonly<Record<string, string | null>> = { ra: 'deg', dec: 'deg', coo_err_maj: 'mas' }): MetadataResponse => ({
-  schema: 'cssearth-vo-metadata@1', pyvo: '1.9.1', raw: { path: 'simbad.xml', bytes: 1, sha256: '0'.repeat(64) }, effectiveUrl: 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync',
+  schema: 'cssearth-vo-metadata@1', pyvo: '1.9.1', raw: { path: 'simbad.xml', bytes: 1 }, effectiveUrl: 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync',
   fetchedAt: '2026-09-22T00:00:00Z', httpStatus: 200, queryStatus: 'OK',
   fields: [...Object.entries(units).map(([name, unit]) => field(name, unit)), field('main_id', null), field('oid', null), field('coo_bibcode', null), field('otype', null), field('id', null)],
   rows, resources: [], coordinateSystems: [], timeSystems: [], issues: [], times: rows.map(() => ({})), bindings: [] });
@@ -25,7 +25,7 @@ test('explore asks SIMBAD only for a name the catalogue does not know, and keeps
   // SIMBAD names each result table after the request time, so two calls pin different bytes for the same answer.
   let call = 0;
   const asked: string[] = [], resolveSky = async (_root: string, name: string) => { asked.push(name); call++;
-    return name === 'Sgr A*' ? { target, evidence: queries.map(query => ({ query, raw: { path: `simbad-${call}.xml`, bytes: 1118, sha256: String(call).repeat(64) } })) } : undefined; };
+    return name === 'Sgr A*' ? { target, evidence: queries.map(query => ({ query, raw: { path: `simbad-${call}.xml`, bytes: 1118 } })) } : undefined; };
   const found = await skyTargetRequest(root, { target: 'Sgr A*', kind: 'cube' }, resolveSky);
   const again = await skyTargetRequest(root, { target: 'Sgr A*', kind: 'cube' }, resolveSky);
   assert.deepEqual(again.request, found.request, 'the request, and so every snapshot and acquisition key, ignores which call SIMBAD answered');

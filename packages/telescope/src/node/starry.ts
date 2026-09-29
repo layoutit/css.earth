@@ -2,51 +2,44 @@
  * cssEarth passes a published fit's own parameters in starry's own names and reads back the intensities and light curves starry
  * evaluates. The environment is separate from the astroquery toolchain because starry 1.2.0 runs on Theano-PyMC and NumPy below 1.22
  * (starry-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install */
-import { createHash } from 'node:crypto';
 import { runToolchainProcess } from './toolchain-process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { TOOLCHAINS, WORKSPACE } from './paths.js';
+import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain-marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const STARRY_ROOT = resolve(WORKSPACE, 'output/toolchains/starry');
 
-function descriptor() {
-  const text = readFileSync(resolve(TOOLCHAINS, 'starry-toolchain.json'), 'utf8');
-  const entry = requireRecord(JSON.parse(text) as unknown, 'starry-toolchain.json');
-  const lock = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements')), 'utf8');
-  return { entry, digest: createHash('sha256').update(text).update(lock).digest('hex') };
-}
+const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install';
+const descriptor = () => readToolchainPins('starry', 'starry-toolchain.json');
 
 export async function installStarry() {
-  const { entry, digest } = descriptor(), prefix = resolve(STARRY_ROOT, 'env');
+  const pins = descriptor(), { entry } = pins, prefix = resolve(STARRY_ROOT, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   await rm(STARRY_ROOT, { recursive: true, force: true });
   await mkdir(STARRY_ROOT, { recursive: true });
   runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
     ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(STARRY_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
-  // The lock is hash-pinned and complete; Theano-PyMC builds against the environment's NumPy.
-  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '--no-build-isolation', '-q', '-r',
+  // The lock is version-pinned and complete; Theano-PyMC builds against the environment's NumPy.
+  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', '-r',
     resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
   await rm(resolve(STARRY_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  await writeFile(resolve(STARRY_ROOT, 'installed.json'), `${JSON.stringify({ id: 'starry', pinsSha256: digest }, null, 2)}\n`);
+  writeInstalledMarker(STARRY_ROOT, pins);
   verifyStarry();
   return STARRY_ROOT;
 }
 
-export interface StarryToolchain { readonly python: string; readonly digest: string; readonly version: string; readonly env: NodeJS.ProcessEnv }
+export interface StarryToolchain { readonly python: string; readonly version: string; readonly env: NodeJS.ProcessEnv }
 
 export function starryToolchainSync(): StarryToolchain {
-  const { entry, digest } = descriptor(), bin = resolve(STARRY_ROOT, 'env/bin'), python = resolve(bin, 'python');
-  let marker: Record<string, unknown>;
-  try { marker = requireRecord(JSON.parse(readFileSync(resolve(STARRY_ROOT, 'installed.json'), 'utf8')) as unknown); }
-  catch { throw new Error('The starry toolchain is not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install'); }
-  if (marker.pinsSha256 !== digest) throw new Error('The starry toolchain was installed from other pins; reinstall it: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install');
+  const pins = descriptor(), { entry } = pins, bin = resolve(STARRY_ROOT, 'env/bin'), python = resolve(bin, 'python');
+  assertInstalledMarker(STARRY_ROOT, pins, 'starry', INSTALL);
   try { accessSync(python); } catch { throw new Error(`The starry toolchain has no python at ${python}.`); }
   // Theano writes its compiled operators under the toolchain, and an empty home keeps a user's ~/.theanorc out of the result.
   const home = resolve(STARRY_ROOT, 'home'); mkdirSync(home, { recursive: true });
-  return { python, digest, version: requireString(entry.starry, 'starry'),
+  return { python, version: requireString(entry.starry, 'starry'),
     env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', HOME: home, MPLBACKEND: 'Agg', THEANO_FLAGS: `base_compiledir=${resolve(STARRY_ROOT, 'theano')}` } };
 }
 

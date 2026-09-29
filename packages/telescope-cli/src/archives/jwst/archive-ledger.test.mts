@@ -86,9 +86,8 @@ async function scratch(receipts: Readonly<Record<string, string>>) {
   return root;
 }
 
-const DIGEST = 'a'.repeat(64);
 const nircamReceipt = (changes: Record<string, unknown> = {}) => `${JSON.stringify({ schema: 'cssearth-jwst-image3-reproduction@1', program: 'mixed-9999', band: 'NIRCAM-F470N',
-  observation: 'jw09999-o001_t001_nircam_f444w-f470n', mast: { name: 'jw09999-o001_t001_nircam_f444w-f470n_i2d.fits', bytes: 1024, sha256: DIGEST }, ...changes }, null, 1)}\n`;
+  observation: 'jw09999-o001_t001_nircam_f444w-f470n', mast: { name: 'jw09999-o001_t001_nircam_f444w-f470n_i2d.fits', bytes: 1024 }, ...changes }, null, 1)}\n`;
 
 test('a program of two modes with one unreadable receipt is checked for neither, and the receipt is reported', async () => {
   const root = await scratch({ 'mixed-9999.NIRCAM-F470N.reproduction.json': '{ "schema": "cssearth-jwst-image3-repro' });
@@ -116,7 +115,7 @@ test('a historical receipt without a numerical acceptance rule remains a compari
 test('a receipt of another schema, another observation or another product proves nothing and is reported', async () => {
   for (const [why, receipt] of [['another schema', nircamReceipt({ schema: 'cssearth-jwst-nothing@1' })],
     ['another observation', nircamReceipt({ observation: 'jw09999-o003_t001_nircam_f444w-f470n' })],
-    ['another product', nircamReceipt({ mast: { name: 'jw09999-o001_t001_nircam_f444w-f470n_i2d.fits', bytes: 4096, sha256: DIGEST } })]] as const) {
+    ['another product', nircamReceipt({ mast: { name: 'jw09999-o001_t001_nircam_f444w-f470n_i2d.fits', bytes: 4096 } })]] as const) {
     const root = await scratch({ 'mixed-9999.NIRCAM-F470N.reproduction.json': receipt });
     try {
       const state = await repositoryState(root);

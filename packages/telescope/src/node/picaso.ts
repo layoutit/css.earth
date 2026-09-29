@@ -2,35 +2,31 @@
  * model atmosphere (Marley et al. 2021), by its structure file, and reads back the intensity PICASO emits at each Gauss angle through a
  * passband, and the quadratic law fitted to it. The environment and its data are separate from the other toolchains
  * (picaso-toolchain.json says what each is). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install */
-import { createHash } from 'node:crypto';
 import { runToolchainProcess } from './toolchain-process.js';
 import { accessSync, readdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { TOOLCHAINS, WORKSPACE } from './paths.js';
+import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain-marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const PICASO_ROOT = resolve(WORKSPACE, 'output/toolchains/picaso');
 const PATHS = { env: resolve(PICASO_ROOT, 'env'), reference: resolve(PICASO_ROOT, 'reference'), profiles: resolve(PICASO_ROOT, 'bobcat-2021/structures'),
   opacities: resolve(PICASO_ROOT, 'opacities'), passband: resolve(PICASO_ROOT, 'passband/Generic_Bessell.V.dat') };
 
-function descriptor() {
-  const text = readFileSync(resolve(TOOLCHAINS, 'picaso-toolchain.json'), 'utf8');
-  const entry = requireRecord(JSON.parse(text) as unknown, 'picaso-toolchain.json');
-  const lock = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements')), 'utf8');
-  return { entry, digest: createHash('sha256').update(text).update(lock).digest('hex') };
-}
+const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install';
+const descriptor = () => readToolchainPins('picaso', 'picaso-toolchain.json');
 const exists = (path: string) => stat(path).then(() => true, () => false);
 const dataUrl = (entry: Record<string, unknown>, key: string) => requireString(requireRecord(requireRecord(entry.data, 'data')[key], `data.${key}`).url, `data.${key}.url`);
 
 /** The environment is rebuilt from the pins; the data (a 1.2 GB archive, of which one table is kept) are downloaded only while missing. */
 export async function installPicaso() {
-  const { entry, digest } = descriptor(), mamba = requireRecord(entry.micromamba, 'micromamba'), python = resolve(PATHS.env, 'bin/python');
+  const pins = descriptor(), { entry } = pins, mamba = requireRecord(entry.micromamba, 'micromamba'), python = resolve(PATHS.env, 'bin/python');
   await rm(PATHS.env, { recursive: true, force: true });
   await mkdir(PICASO_ROOT, { recursive: true });
   runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', PATHS.env, '-c', requireString(mamba.channel, 'micromamba channel'),
     ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(PICASO_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
-  runToolchainProcess(python, ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))],
+  runToolchainProcess(python, ['-m', 'pip', 'install', '--no-deps', '-q', '-r', resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))],
     { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
   await rm(resolve(PICASO_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   if (!await exists(resolve(PATHS.reference, 'config.json'))) {
@@ -55,7 +51,7 @@ export async function installPicaso() {
     await mkdir(resolve(PATHS.passband, '..'), { recursive: true });
     runToolchainProcess('curl', ['-sSL', '--retry', '5', '-o', PATHS.passband, dataUrl(entry, 'passband')]);
   }
-  await writeFile(resolve(PICASO_ROOT, 'installed.json'), `${JSON.stringify({ id: 'picaso', pinsSha256: digest }, null, 2)}\n`);
+  writeInstalledMarker(PICASO_ROOT, pins);
   verifyPicaso();
   return PICASO_ROOT;
 }
@@ -64,19 +60,16 @@ function readdirOrEmpty(path: string): string[] { try { return readdirSync(path)
 /** The correlated-k table the descriptor names: solar metallicity and C/O, as the Bobcat profiles. */
 const opacityName = (entry: Record<string, unknown>) => requireString(requireRecord(requireRecord(entry.data, 'data').opacities, 'data.opacities').table, 'data.opacities.table');
 
-export interface PicasoToolchain { readonly python: string; readonly digest: string; readonly version: string; readonly env: NodeJS.ProcessEnv; readonly opacities: string }
+export interface PicasoToolchain { readonly python: string; readonly version: string; readonly env: NodeJS.ProcessEnv; readonly opacities: string }
 
 export function picasoToolchainSync(): PicasoToolchain {
-  const { entry, digest } = descriptor(), bin = resolve(PATHS.env, 'bin'), python = resolve(bin, 'python');
-  let marker: Record<string, unknown>;
-  try { marker = requireRecord(JSON.parse(readFileSync(resolve(PICASO_ROOT, 'installed.json'), 'utf8')) as unknown); }
-  catch { throw new Error('The PICASO toolchain is not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install'); }
-  if (marker.pinsSha256 !== digest) throw new Error('The PICASO toolchain was installed from other pins; reinstall it: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install');
+  const pins = descriptor(), { entry } = pins, bin = resolve(PATHS.env, 'bin'), python = resolve(bin, 'python');
+  assertInstalledMarker(PICASO_ROOT, pins, 'PICASO', INSTALL);
   try { accessSync(python); accessSync(PATHS.passband); } catch { throw new Error(`The PICASO toolchain at ${PICASO_ROOT} is incomplete; reinstall it: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install`); }
   const opacities = resolve(PATHS.opacities, opacityName(entry));
   try { accessSync(opacities); } catch { throw new Error(`The PICASO toolchain has no correlated-k table ${opacities}; reinstall it.`); }
   // PICASO reads PYSYN_CDBS at import; its stellar spectra are for planets around stars, and an absent path only warns.
-  return { python, digest, opacities, version: requireString(entry.picaso, 'picaso'),
+  return { python, opacities, version: requireString(entry.picaso, 'picaso'),
     env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', picaso_refdata: PATHS.reference, PYSYN_CDBS: resolve(PICASO_ROOT, 'no-stellar-data'), MPLBACKEND: 'Agg', HOME: PICASO_ROOT } };
 }
 

@@ -4,7 +4,6 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { fork } from 'node:child_process';
 import { createInterface } from 'node:readline/promises';
 import { readFile } from 'node:fs/promises';
-import { sha256 } from '@cssearth/core/node';
 import { formatAnswer } from './query.mts';
 import type { RequestSatisfaction } from './request-satisfaction.mts';
 import { getSession, saveExploration, saveSession, saveFamilyRequestSession, type ExplorationSession, type Session } from './session.mts';
@@ -232,7 +231,7 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
           descriptorPath=resolve(inspected.source);bytes=await readFile(descriptorPath);
         }
         const request=JSON.parse(await readFile(options.request,'utf8')),descriptor=JSON.parse(bytes.toString('utf8'));
-        const saved=await saveFamilyRequestSession(options.directory,request,descriptor,{path:descriptorPath,bytes:bytes.length,sha256:sha256(bytes)});
+        const saved=await saveFamilyRequestSession(options.directory,request,descriptor,{path:descriptorPath,bytes:bytes.length});
         text=options.json?`${JSON.stringify(saved)}\n`:`Descriptor compatibility: ${saved.status}\nDescriptor: ${displayPath(descriptorPath)}\nSaved: ${resolve(options.directory,'family-request.json')}\n`;
         code=saved.status==='matched'?0:saved.status==='refused'?4:3;
       }else if(options.command==='ascl'){

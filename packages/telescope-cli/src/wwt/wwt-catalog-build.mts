@@ -1,8 +1,7 @@
 /** Prepare a pinned WWT core-imageset index with WWT's own WTML reader.
  * Usage: CSSEARTH_WWT_PYTHON=python-with-wwt-data-formats node packages/telescope-cli/src/wwt/wwt-catalog-build.mts IMAGESETS_DIR REVISION OUTPUT.jsonl
  */
-import { createHash } from 'node:crypto';
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
@@ -49,7 +48,7 @@ if (!sourceArgument || !revision || !REVISION.test(revision) || !outputArgument)
 const source = resolve(sourceArgument), output = resolve(outputArgument);
 const paths = (await readdir(source)).filter(name => name.endsWith('.xml')).sort();
 if (!paths.length) throw new Error(`No WWT imageset XML files in ${source}.`);
-const inputs = await Promise.all(paths.map(async path => ({ path: `imagesets/${path}`, sha256: createHash('sha256').update(await readFile(resolve(source, path))).digest('hex') })));
+const inputs = paths.map(path => ({ path: `imagesets/${path}` }));
 const result = spawnSync(process.env.CSSEARTH_WWT_PYTHON ?? 'python3', ['-c', parser, source], { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
 if (result.status !== 0) throw new Error(`WWT catalog parse failed: ${result.error?.message ?? result.stderr}`);
 const imagesets: unknown = JSON.parse(result.stdout);

@@ -24,8 +24,8 @@
  *    WCS and AstroDrizzle resamples it, north up, at the scale and kernel of the archive's own drizzled product of that
  *    observation. The star's sky position is its centroid through the same distorted WCS.
  *
- * Beside each drizzled result the stage writes its product record: the calibrated frames at their digests, the fit (shift,
- * scale, the residual over the fit region before and after), the star's position, and the pinned toolchain. */
+ * Beside each drizzled result the stage writes its product record: the calibrated frames at their sizes, the fit (shift,
+ * scale, the residual over the fit region before and after), the star's position, and the software versions the run reported. */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, resolve } from 'node:path';
@@ -35,7 +35,7 @@ import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun } from '@cssearth/telescope';
 import { PROGRAMS } from './archive.mts';
-import { hstSoftware, hstToolchainDigest, MEMORY_GUARD, readHstProgram, REFERENCE_FILES, runCalibration } from './calibrate.mts';
+import { hstSoftware, MEMORY_GUARD, readHstProgram, REFERENCE_FILES, runCalibration } from './calibrate.mts';
 import { readHstFileHdus } from './product-file.mts';
 import { hstToolchain } from './toolchain.mts';
 
@@ -234,7 +234,7 @@ export async function runPsfSubtraction(id: string, work: string, options: { sou
       ];
       const run: ProductRun = { telescope: 'HST', stage: 'psf-subtract', inputs,
         parameters: { instrument: 'ACS/HRC', program: program.programme, subtraction: record.id, band: band.band, roll: roll.roll, fit: record.fit, fluxRatio: { ...band.fluxRatio, source: record.fluxRatioSource }, drizzle, crdsContext: program.crdsContext },
-        software: hstSoftware(reported.software), toolchainDigest: await hstToolchainDigest() };
+        software: hstSoftware(reported.software) };
       await writeProductRecord(productRecordPath(drizzled), run, [{ path: basename(drizzled), file: drizzled, units: 'electrons per second per drizzled pixel',
         conventions: { grid: 'north up, the archive drizzle\'s scale and kernel', star: `RA, Dec ${JSON.stringify(reported.starRaDecDeg)} at the PSF's centre of symmetry`, fit: JSON.stringify(reported.fit) } }]);
       results.push({ band: band.band, roll: roll.roll, drizzled, fit: requireRecord(reported.fit), starRaDecDeg: reported.starRaDecDeg, seconds: reported.seconds });

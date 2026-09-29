@@ -8,15 +8,14 @@
  * (klip/toolchain.json) is spaceKLIP on the pipeline version a coronagraphy paper ran, for starlight subtraction by KLIP.
  * micromamba creates Python from conda-forge; pip installs the descriptor's lock, every package at its pinned version or commit,
  * without resolving further dependencies; the descriptor's patches are applied to the installed sources and each must match
- * exactly once, and its data archives are fetched and checked by sha256. The install records the sha256 of the descriptor and
- * the lock, and the toolchain refuses an environment built from other pins. micromamba itself is taken from PATH (Homebrew's
+ * exactly once, and its data archives are fetched and checked by size. The install keeps the descriptor and lock texts it was
+ * built from, and the toolchain refuses an environment built from other pins. micromamba itself is taken from PATH (Homebrew's
  * `micromamba`). */
-import { createHash } from 'node:crypto';
-import { runToolchainProcess, WORKSPACE } from '@cssearth/telescope/node';
+import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 const repository = WORKSPACE;
 export type ToolchainId = 'eureka' | 'klip';
@@ -33,21 +32,21 @@ function requireToolchainId(value: string | undefined): ToolchainId {
   return value;
 }
 
-async function descriptor(id: ToolchainId) {
-  const path = DESCRIPTORS[id], text = await readFile(path, 'utf8');
-  const entry = requireRecord(JSON.parse(text) as unknown, path);
-  const lockPath = resolve(path, '..', requireString(entry.requirements));
+async function descriptor(id: ToolchainId): Promise<ToolchainPins & { readonly lock: string; readonly lockPath: string }> {
+  const path = DESCRIPTORS[id], text = await readFile(path, 'utf8'), file = relative(WORKSPACE, path);
+  const entry = requireRecord(JSON.parse(text) as unknown, file);
+  const lockPath = resolve(path, '..', requireString(entry.requirements, `${file} requirements`));
   const lock = await readFile(lockPath, 'utf8');
-  return { entry, lockPath, digest: createHash('sha256').update(text).update(lock).digest('hex') };
+  return { id, file, descriptor: text, lock, lockPath, entry };
 }
 
-/** Fetch one pinned data archive into the toolchain and unpack it where the descriptor says; the bytes must match its sha256. */
+/** Fetch one pinned data archive into the toolchain and unpack it where the descriptor says; the bytes must be its pinned size. */
 async function installData(root: string, record: unknown) {
-  const data = requireRecord(record, 'data'), url = requireString(data.url), sha256 = requireString(data.sha256);
+  const data = requireRecord(record, 'data'), url = requireString(data.url, 'data url'), size = requireFiniteNumber(data.bytes, `${url} bytes`);
   const response = await fetch(url);
   if (!response.ok) throw new Error(`${url} answered HTTP ${response.status}.`);
-  const bytes = Buffer.from(await response.arrayBuffer()), digest = createHash('sha256').update(bytes).digest('hex');
-  if (digest !== sha256) throw new Error(`${url} has sha256 ${digest}, not the pinned ${sha256}.`);
+  const bytes = Buffer.from(await response.arrayBuffer());
+  if (bytes.length !== size) throw new Error(`${url} is ${bytes.length} bytes, not the pinned ${size}.`);
   const archive = resolve(root, 'data.tar.gz'), target = resolve(root, requireString(data.directory));
   await mkdir(target, { recursive: true });
   await writeFile(archive, bytes);
@@ -56,7 +55,7 @@ async function installData(root: string, record: unknown) {
 }
 
 export async function installToolchain(id: ToolchainId) {
-  const { entry, lockPath, digest } = await descriptor(id), root = toolchainRoot(id), prefix = resolve(root, 'env');
+  const pins = await descriptor(id), { entry, lockPath } = pins, root = toolchainRoot(id), prefix = resolve(root, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   await rm(root, { recursive: true, force: true });
   await mkdir(root, { recursive: true });
@@ -73,7 +72,7 @@ export async function installToolchain(id: ToolchainId) {
   for (const record of requireArray(entry.data ?? [])) await installData(root, record);
   for (const record of requireArray(entry.caches ?? [])) await mkdir(resolve(root, requireString(requireRecord(record, 'cache').directory)), { recursive: true });
   await rm(resolve(root, 'mamba/pkgs'), { recursive: true, force: true });
-  await writeFile(resolve(root, 'installed.json'), `${JSON.stringify({ id, pinsSha256: digest }, null, 2)}\n`);
+  writeInstalledMarker(root, pins);
   return root;
 }
 
@@ -86,10 +85,8 @@ export type EurekaToolchain = JwstToolchain;
  * so reference files are the ones the recorded run used, plus each data archive's variable. Refuses a missing install or one
  * built from other pins. */
 export async function jwstToolchain(id: ToolchainId, crdsContext: string): Promise<JwstToolchain> {
-  const { entry, digest } = await descriptor(id), root = toolchainRoot(id);
-  const marker = await readFile(resolve(root, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error(`${NAMES[id]} is not installed: node packages/telescope-cli/src/archives/jwst/toolchain.mts install ${id}`);
-  if (marker.pinsSha256 !== digest) throw new Error(`${NAMES[id]} was installed from other pins; reinstall it.`);
+  const pins = await descriptor(id), { entry } = pins, root = toolchainRoot(id);
+  assertInstalledMarker(root, pins, NAMES[id], `node packages/telescope-cli/src/archives/jwst/toolchain.mts install ${id}`);
   const dataEnv = Object.fromEntries([
     ...requireArray(entry.data ?? []).map(record => {
       const data = requireRecord(record, 'data');

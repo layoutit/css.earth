@@ -18,7 +18,7 @@
  * band's own detector and sub-band must be among them.
  *
  * The run writes a `cssearth-telescope-product@1` record beside the cube (`<cube>.product.json`): the exposures at their pinned
- * digests, the settings and CRDS context, the pinned pipeline, and the cube with the units and conventions its own header
+ * sizes, the settings and CRDS context, the pinned pipeline, and the cube with the units and conventions its own header
  * states. A cube whose record says this same run made it is not built again.
  *
  * A requested wavelength interval is built on the corresponding plane centres of MAST's full cube rather than expanding the
@@ -28,11 +28,10 @@
  *
  * --arcsec-per-pixel builds the cube on a finer sky grid than the pipeline's 0.1 arcsecond instead. That cube has no MAST twin, so
  * it is not compared; run the default first, so the receipt shows these exposures and this toolchain reproduce MAST's cube. */
-import { mkdir, readdir, rm, writeFile, open } from 'node:fs/promises';
+import { mkdir, readdir, rm, stat, writeFile, open } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '@cssearth/core/node';
 import { sampleAgreement } from '../sample-agreement.mts';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { requireRecord } from '@cssearth/core';
@@ -146,7 +145,7 @@ export async function runSpec3(id: string, band: string, work: string, options: 
     const archivePath = await mastFile(entry.level3, work, options.sources), archiveCube = await openSpectralCube(archivePath);
     const grid = requestedSpectralGrid(archiveCube, options.wavelengthMicrometres);
     cubeInterval = [grid.wavemin, grid.wavemax];
-    archiveGridInput = { role: 'spectral grid reference', identity: entry.level3.uri, ...(await sha256File(archivePath)) };
+    archiveGridInput = { role: 'spectral grid reference', identity: entry.level3.uri, bytes: (await stat(archivePath)).size };
   }
   const steps = spec3Steps(setting, fine, cubeInterval), cubeSettings = steps.cube_build ?? {};
   const label = options.wavelengthMicrometres ? `-${options.wavelengthMicrometres.join('-')}` : '';
@@ -155,7 +154,7 @@ export async function runSpec3(id: string, band: string, work: string, options: 
   const run: ProductRun = { telescope: 'JWST', stage: 'spec3-cube', inputs: [...crfInputs, ...(archiveGridInput ? [archiveGridInput] : [])],
     parameters: { program: program.id, band: entry.band, observation: entry.observation, crdsContext: program.crdsContext, steps,
       ...(options.wavelengthMicrometres ? { requestedWavelengthMicrometres: options.wavelengthMicrometres } : {}) },
-    software: toolchainPins.software, toolchainDigest: toolchainPins.toolchainDigest };
+    software: toolchainPins.software };
   await mkdir(output, { recursive: true });
   const made = (await readdir(output).catch(() => [])).filter(name => name.endsWith('_s3d.fits'));
   if (made.length === 1) {
@@ -208,7 +207,7 @@ export async function compareCubeWithMast(id: string, band: string, local: strin
   const samples = await compareSamples(ours, theirs, archiveOffset);
   const acceptance = sampleAgreement(samples);
   const receipt = { schema: 'cssearth-jwst-spec3-reproduction@3', program: id, band, observation: entry.observation, toolchain: 'packages/telescope-cli/src/archives/jwst/toolchain.json', crdsContext: program.crdsContext,
-    mast: { ...entry.level3, sha256: (await sha256File(mastPath)).sha256, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX }, local: { name: basename(local), ...(await sha256File(local)), calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance,
+    mast: { ...entry.level3, calVer: theirs.primary.CAL_VER, crdsContext: theirs.primary.CRDS_CTX }, local: { name: basename(local), bytes: (await stat(local)).size, calVer: ours.primary.CAL_VER, crdsContext: ours.primary.CRDS_CTX }, acceptance,
     comparison,
     grid: { width: ours.width, height: ours.height, planes: ours.planes, arcsecPerPixel: ours.arcsecPerPixel, micrometres: [ours.wavelength(0), ours.wavelength(ours.planes - 1)] }, samples };
   const path = resolve(PROGRAMS, `${id}.${band}.reproduction.json`);

@@ -3,7 +3,7 @@
  *
  *   node packages/telescope-cli/src/archives/keck/archive.mts <program id> <instrument> <koaid> [<koaid> ...] [--nights <n>]
  *
- * For each science frame the program records three things, each file by its KOA download URL, byte count and sha256, all of
+ * For each science frame the program records three things, each file by its KOA download URL and byte count, all of
  * them fetched under .local/keck/<program id> so a re-run reads what the pin names:
  *
  *   the raw frame itself (KOA level 0), with what the archive's own catalogue says it is: instrument, image type, target,
@@ -120,12 +120,6 @@ export interface KeckProgram {
   readonly title: string;
   readonly observations: readonly KeckObservation[];
 }
-
-const digest = (value: unknown, label: string) => {
-  const text = requireString(value, label);
-  if (!/^[0-9a-f]{64}$/u.test(text)) throw new TypeError(`${label} is not a sha256.`);
-  return text;
-};
 
 function parseFile(value: unknown, label: string): KeckFile {
   const row = requireRecord(value, label);

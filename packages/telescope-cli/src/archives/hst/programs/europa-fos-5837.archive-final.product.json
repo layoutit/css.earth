@@ -226,7 +226,7 @@
       "kind": "archive-origin",
       "receipt": "tools/objects/hst/programs/europa-fos-5837.archive-final.product.json",
       "product": "y2p60503t_c1f.fits",
-      "establishes": "y2p60503t_c1f.fits is the archive's own final calibrated product for y2p60503t, retrieved from MAST and pinned at 43200 bytes, sha256 aabd9708b5d9fc7b34d504a85b23fcdbc1d7593749a5172c95ee90a2ae33d718. It establishes origin and integrity: the file read here is the file the archive distributes, and MAST's catalogue and the file's own headers agree on which observation it is. It does not establish that anything here reproduces that calibration: no pipeline was re-run and nothing was compared, so it is not agreement with the archive."
+      "establishes": "y2p60503t_c1f.fits is the archive's own final calibrated product for y2p60503t, retrieved from MAST and pinned at 43200 bytes. It establishes origin: the file read here is the file the archive distributes, and MAST's catalogue and the file's own headers agree on which observation it is. It does not establish that anything here reproduces that calibration: no pipeline was re-run and nothing was compared, so it is not agreement with the archive."
     }
   ]
 }

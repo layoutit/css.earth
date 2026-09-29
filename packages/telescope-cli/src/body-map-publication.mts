@@ -10,12 +10,11 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, hasErrorCode, requireRecord, requireArray } from '@cssearth/core';
-import { sha256 } from '@cssearth/core/node';
 import { supportsMeasuredResolution } from '@cssearth/bake/objects/layers/observation';
 import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
-import { definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { parseProductRecord, productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
-import { runDigest, sameRun, WORKSPACE } from '@cssearth/telescope/node';
+import { runKey, sameRun, WORKSPACE } from '@cssearth/telescope/node';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation } from './query.mts';
 import { type ConstraintVerdict, type ObservationSelection } from './query-contract.mts';
 
@@ -29,22 +28,21 @@ const bodyMapTelescope = (product: BodyMapProduct): string => {
 
 /** The run identity of a finished map. The product's meaning and every selected observation are parameters; the files it read
  * are inputs. A changed definition, frame, grid, mask, program or observation therefore invalidates the record. */
-export function bodyMapRun(product: BodyMapProduct, inputs: readonly ProductInput[], software: readonly ProductSoftware[], toolchainDigest?: string): ProductRun {
+export function bodyMapRun(product: BodyMapProduct, inputs: readonly ProductInput[], software: readonly ProductSoftware[]): ProductRun {
   return { telescope: bodyMapTelescope(product), stage: BODY_MAP_PUBLICATION_STAGE, inputs,
-    parameters: { definitionDigest: definitionDigest(product.definition), definition: product.definition, frame: product.frame, grid: product.grid,
-      mask: product.mask, observations: product.observations, combination: product.combination ?? null }, software,
-    ...(toolchainDigest === undefined ? {} : { toolchainDigest }) };
+    parameters: { definition: product.definition, frame: product.frame, grid: product.grid,
+      mask: product.mask, observations: product.observations, combination: product.combination ?? null }, software };
 }
 
 /** Build the deterministic record an author writes beside `<map>.fits`. The author supplies the exact input pins it read. */
 export function bodyMapProductRecord(product: BodyMapProduct, plane: Buffer, metadata: Buffer, inputs: readonly ProductInput[],
-  software: readonly ProductSoftware[], toolchainDigest?: string,
+  software: readonly ProductSoftware[],
   extraOutputs: readonly { readonly path: string; readonly bytes: Buffer; readonly units?: string; readonly conventions?: Readonly<Record<string, string>> }[] = []): ProductRecord {
   const planeName = product.planes.file, metadataName = `${planeName}.body-map.json`;
-  return parseProductRecord({ schema: 'cssearth-telescope-product@1', ...bodyMapRun(product, inputs, software, toolchainDigest),
-    outputs: [{ path: planeName, bytes: plane.byteLength, sha256: sha256(plane), units: product.definition.units },
-      { path: metadataName, bytes: metadata.byteLength, sha256: sha256(metadata), conventions: { schema: product.schema } },
-      ...extraOutputs.map(output => ({ path: output.path, bytes: output.bytes.byteLength, sha256: sha256(output.bytes),
+  return parseProductRecord({ schema: 'cssearth-telescope-product@1', ...bodyMapRun(product, inputs, software),
+    outputs: [{ path: planeName, bytes: plane.byteLength, units: product.definition.units },
+      { path: metadataName, bytes: metadata.byteLength, conventions: { schema: product.schema } },
+      ...extraOutputs.map(output => ({ path: output.path, bytes: output.bytes.byteLength,
         ...(output.units === undefined ? {} : { units: output.units }), ...(output.conventions === undefined ? {} : { conventions: output.conventions }) }))], evidence: [] });
 }
 
@@ -88,7 +86,7 @@ export interface TelescopeLayer {
   readonly request: ObservationSelection['request'];
   readonly selection: Pick<ObservationSelection, 'telescope' | 'mode' | 'programme' | 'toolkitLevel' | 'constraints' | 'bodyMapSupport' | 'unresolved'>;
   readonly map: { readonly metadata: string; readonly productRecord: string; readonly plane: string; readonly bytes: number;
-    readonly quantity: string; readonly units: string; readonly definitionDigest: string };
+    readonly quantity: string; readonly units: string };
   readonly observations: BodyMapProduct['observations'];
 }
 
@@ -150,8 +148,8 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
   assertBodyMapPlanes(plane, product);
   const recordPath = productRecordPath(planePath), record = parseProductRecord(JSON.parse((await publicationFile(recordPath, selection, 'product record')).toString('utf8')) as unknown);
   if (!await sameRun(record, record, output => resolve(dirname(planePath), output))) throw new Error(`${recordPath} does not describe the output bytes on disk now.`);
-  const expectedRun = bodyMapRun(product, record.inputs, record.software, record.toolchainDigest);
-  if (runDigest(record) !== runDigest(expectedRun)) throw new Error(`${recordPath} does not bind the current map definition, frame, observations and combination policy.`);
+  const expectedRun = bodyMapRun(product, record.inputs, record.software);
+  if (runKey(record) !== runKey(expectedRun)) throw new Error(`${recordPath} does not bind the current map definition, frame, observations and combination policy.`);
   for (const [path, bytes] of [[basename(planePath), plane], [basename(metadataPath), await readFile(metadataPath)]] as const) {
     const output = record.outputs.find(entry => entry.path === path);
     if (!output || output.bytes !== bytes.byteLength) throw new Error(`${recordPath} does not pin its ${path} output.`);
@@ -190,7 +188,7 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
       unresolved: [...selection.unresolved.filter(item => !resolvedNames.has(item.constraint)),
         ...Object.entries(resolvedConstraints).flatMap(([constraint, verdict]) => verdict.answer === 'unknown' || verdict.answer === 'partial' ? [{ constraint, answer: verdict.answer, reason: verdict.reason }] : [])] },
     map: { metadata: basename(metadataPath), productRecord: basename(recordPath), plane: basename(planePath), bytes: plane.byteLength,
-      quantity: product.definition.quantity, units: product.definition.units, definitionDigest: definitionDigest(product.definition) }, observations: product.observations };
+      quantity: product.definition.quantity, units: product.definition.units }, observations: product.observations };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

@@ -30,7 +30,7 @@ async function fixture(value = product(), measured = true) {
   const directory = await mkdtemp(resolve(tmpdir(), 'body-map-publication-')), planePath = resolve(directory, value.planes.file), mapPath = `${planePath}.body-map.json`;
   const metadata = Buffer.from(formatBodyMapProduct(value)), record = bodyMapProductRecord(value, plane, metadata,
     [{ role: 'spectral cube', identity: 'mast:JWST/product/jw01250-o002_s3d.fits', bytes: 12 }],
-    [{ name: 'cssEarth author-body-maps', version: '1' }], undefined, bound ? [bound.output] : []);
+    [{ name: 'cssEarth author-body-maps', version: '1' }], bound ? [bound.output] : []);
   if (bound) await writeFile(resolve(directory, bound.output.path), bound.output.bytes);
   await writeFile(planePath, plane); await writeFile(mapPath, metadata); await writeFile(`${planePath}.product.json`, formatProductRecord(record));
   return { directory, planePath, mapPath };

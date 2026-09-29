@@ -36,7 +36,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments } from '@cssearth/core';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { addProductEvidence, assertInputPins, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { addProductEvidence, assertInputs, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { productRecordPath, type EvidenceKind, type ProductInput, type ProductRecord } from '@cssearth/telescope';
 import { PROGRAMS, readGeminiProgram, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
@@ -394,18 +394,18 @@ export async function checkAgainstArchive(program: GeminiProgram, work: string, 
       + `frames, which nothing here has established. Re-run \`reduce ${stage}\` for this program.`);
 
   const archivePath = await geminiFile(set.product, rawDirectory(work), sources);
-  await assertInputPins([archiveMasterPin(set.product)], new Map([[set.product.name, archivePath]]));
+  await assertInputs([archiveMasterPin(set.product)], new Map([[set.product.name, archivePath]]));
 
   const { extensions, total } = await compareOnDetector(resolve(directory, product), archivePath);
   const path = await writeReceipt(receiptPath(program.id, product), {
     programme: program.programme, program: program.id, stage, evidence: 'archive-agreement',
     ours: { product, madeBy: record.software.map(entry => `${entry.name} ${entry.version}`).join(', '), record: repositoryPath(resolve(directory, productRecordPath(product))) },
-    archive: { product: set.product.name, uri: set.product.uri, bytes: set.product.bytes, md5: set.product.md5,
+    archive: { product: set.product.name, uri: set.product.uri, bytes: set.product.bytes,
       madeBy: "Gemini Observatory's IRAF nightly pipeline (gprepare, gireduce, gemcombine), not DRAGONS" },
     association: set.association,
     sameInputs: `Checked, not assumed: the record beside ${product} describes the run ${program.id}'s ${stage} plan makes, `
       + `whose inputs are the ${set.frames.length} raw frames ${set.product.name} names in its own IMCMB cards, and `
-      + `${set.product.name} was checked against its pinned bytes and sha256 before it was read.`,
+      + `${set.product.name} was checked against its pinned size before it was read.`,
     registration: "each extension's own DETSEC card, matched by the detector columns it covers, and each product's own DATASEC origin; nothing was shifted or resampled",
     means: 'Two different official Gemini pipelines reduced the same raw frames. A difference is a difference between the two '
       + 'pipelines, not an error in either. This is not a bit-for-bit reproduction and is not claimed as one.',
@@ -415,18 +415,15 @@ export async function checkAgainstArchive(program: GeminiProgram, work: string, 
   return { product, path, total, extensions };
 }
 
-/** The archive master as an input pin. Its sha256 is added to the program the first time it is downloaded; a master that has
- * never been downloaded carries none and cannot be checked, which is a reason to refuse it rather than to read it anyway. */
+/** The archive master as an input pin, by name and the size the program records. */
 export function archiveMasterPin(master: GeminiProgram['calibrations'][number]['product']): ProductInput {
-  if (master.sha256 === undefined)
-    throw new Error(`${master.name} carries no sha256 yet. Download it once so the pin can be digested before it is compared against.`);
   return { role: 'archive master', identity: master.name, bytes: master.bytes };
 }
 
 /** What a stage's expected run needs to know, asked of the installed toolchain. Separated so a test can supply it instead. */
 export const toolchainContext = async (program: GeminiProgram, work: string): Promise<RunContext> => {
   const toolchain = await geminiToolchain();
-  return { program, work, software: dragonsToolchainVersions(toolchain), toolchainDigest: toolchain.digest };
+  return { program, work, software: dragonsToolchainVersions(toolchain) };
 };
 
 /** The two science halves against each other. */

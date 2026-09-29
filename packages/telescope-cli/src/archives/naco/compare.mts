@@ -30,10 +30,9 @@ import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits'
  * added to the product record each reduction wrote beside its own product, as `internal-consistency` evidence. That is the
  * only kind this route can add: with no archive product and no ESO master calibration to agree with, nothing here is
  * archive agreement. A product whose run wrote no record takes no evidence at all, and the comparison says so. */
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '@cssearth/core/node';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { addProductEvidence, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath } from '@cssearth/telescope';
@@ -95,7 +94,7 @@ export interface Reproduction {
   readonly product: string;
   readonly kind: 'two-templates' | 'two-nod-halves';
   readonly note: string;
-  readonly sequences: readonly { readonly template: string; readonly path: string; readonly sha256: string; readonly bytes: number;
+  readonly sequences: readonly { readonly template: string; readonly path: string; readonly bytes: number;
     readonly objectFrames: number; readonly skyFrames: number; readonly pipeline: string | null }[];
   readonly shapes: readonly (readonly number[])[];
   /** The rectangle at the origin that both products hold; the whole of both when they are the same shape. */
@@ -190,9 +189,9 @@ export async function compareTemplates(programId: string, work: string, template
     .filter(key => RUN_CARDS.some(card => key.startsWith(card)) && String(a.header[key]) !== String(b.header[key]))
     .map(key => `${key}: ${String(a.header[key])} against ${String(b.header[key])}`).sort();
   const sequences = await Promise.all(([a, b] as const).map(async side => {
-    const digest = await sha256File(side.result.combined);
+    const { size: bytes } = await stat(side.result.combined);
     const pipeline = side.header['ESO PRO REC1 PIPE ID'];
-    return { template: side.result.template, path: repositoryPath(side.result.combined), sha256: digest.sha256, bytes: digest.bytes,
+    return { template: side.result.template, path: repositoryPath(side.result.combined), bytes,
       objectFrames: side.result.objectFrames, skyFrames: side.result.skyFrames,
       pipeline: typeof pipeline === 'string' ? pipeline : null };
   }));

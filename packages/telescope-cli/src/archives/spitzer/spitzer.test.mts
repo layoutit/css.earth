@@ -11,9 +11,8 @@ import { addProductEvidence, fileSize, readProductRecord, writeProductRecord } f
 import { evidenceFor } from '@cssearth/telescope';
 import { channelInputs, FATAL_IMASK_BITS, fatalImaskMask, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
 
-const sha = (seed: string) => seed.repeat(64).slice(0, 64);
 const url = (name: string) => `${DATA}/sha/archive/proc/IRAC003600/r4416768/ch1/${name.includes('maic') || name.includes('munc') || name.includes('mcov') ? 'pbcd' : 'bcd'}/${name}`;
-const file = (role: string, name: string, seed: string) => ({ role, name, url: url(name), bytes: 100, sha256: sha(seed) });
+const file = (role: string, name: string, _seed?: string) => ({ role, name, url: url(name), bytes: 100 });
 const frameFiles = (dce: string, seed: string) => [
   file('frame', `SPITZER_I1_4416768_${dce}_0000_7_cbcd.fits`, seed),
   file('frame-uncertainty', `SPITZER_I1_4416768_${dce}_0000_7_cbunc.fits`, `${seed}b`),
@@ -191,10 +190,10 @@ test('a reproduction receipt parses, keeps its limits, and refuses another schem
   const receipt = {
     schema: 'cssearth-spitzer-reproduction@1', program: 'ngc3132-4416768', aorKey: 4416768, target: 'NGC 3132', channel: 1,
     wavelength: 'IRAC 3.6um',
-    archiveProduct: { name: 'maic.fits', bytes: 9797760, sha256: sha('a'), pipeline: 'S18.25.0' },
-    ourProduct: { name: 'remosaic.fits', bytes: 100, sha256: sha('b'), stage: 'open-remosaic', toolchainDigest: sha('c'), software: [{ name: 'reproject', version: '0.21.0' }] },
-    archiveUncertainty: { name: 'munc.fits', bytes: 9797760, sha256: sha('d') },
-    archiveCoverage: { name: 'mcov.fits', bytes: 9797760, sha256: sha('e') },
+    archiveProduct: { name: 'maic.fits', bytes: 9797760, pipeline: 'S18.25.0' },
+    ourProduct: { name: 'remosaic.fits', bytes: 100, stage: 'open-remosaic', software: [{ name: 'reproject', version: '0.21.0' }] },
+    archiveUncertainty: { name: 'munc.fits', bytes: 9797760 },
+    archiveCoverage: { name: 'mcov.fits', bytes: 9797760 },
     framesCombined: ['0001', '0003'], frameTimeSeconds: 30,
     statistics: { comparedPixels: 10, archiveCoveredPixels: 12, bitIdenticalShare: 0, medianRatio: 1, medianLevel: 0.07,
       medianAbsoluteDifferenceOverLevel: 0.003, differenceInArchiveSigma: { median: 0.02, p95: 0.25, p99: 2.3, max: 40 },
@@ -273,7 +272,7 @@ test('a checked mosaic carries its evidence on its own record, and evidence neve
   const mosaic = 'ngc3132-4416768.ch1.remosaic.fits', mosaicPath = resolve(work, mosaic);
   await writeFile(mosaicPath, fitsFile([1, 2, 3, 4], 2, 2));
   const recordPath = resolve(work, `${mosaic}.product.json`);
-  const run = { telescope: 'spitzer', stage: 'open-remosaic', inputs: [{ role: 'frame', identity: 'a_cbcd.fits', bytes: 1, sha256: sha('1') }],
+  const run = { telescope: 'spitzer', stage: 'open-remosaic', inputs: [{ role: 'frame', identity: 'a_cbcd.fits', bytes: 1 }],
     parameters: {}, software: [{ name: 'reproject', version: '0.21.0' }] };
 
   // The producing stage writes the record with nothing proved yet, which is what a consumer should see before any check.
@@ -305,13 +304,13 @@ test('a receipt counts only when the archive files it says it read are the ones 
   const scratch = await mkdtemp(resolve(tmpdir(), 'spitzer-state-'));
   const pinnedProgram = parseSpitzerProgram(program()), channel = pinnedProgram.channels[0]!;
   const plane = (role: string) => channel.products.find(product => product.role === role)!;
-  const receipt = (uncertaintySha256: string) => ({
+  const receipt = () => ({
     schema: 'cssearth-spitzer-reproduction@1', program: pinnedProgram.id, aorKey: pinnedProgram.aorKey, target: pinnedProgram.target,
     channel: channel.channel, wavelength: channel.wavelength,
-    archiveProduct: { name: plane('mosaic').name, bytes: plane('mosaic').bytes, sha256: 'a'.repeat(64), pipeline: 'S18.25.0' },
-    ourProduct: { name: 'remosaic.fits', bytes: 100, sha256: sha('b'), stage: 'open-remosaic', toolchainDigest: sha('c'), software: [{ name: 'reproject', version: '0.21.0' }] },
-    archiveUncertainty: { name: plane('mosaic-uncertainty').name, bytes: plane('mosaic-uncertainty').bytes, sha256: uncertaintySha256 },
-    archiveCoverage: { name: plane('mosaic-coverage').name, bytes: plane('mosaic-coverage').bytes, sha256: 'b'.repeat(64) },
+    archiveProduct: { name: plane('mosaic').name, bytes: plane('mosaic').bytes, pipeline: 'S18.25.0' },
+    ourProduct: { name: 'remosaic.fits', bytes: 100, stage: 'open-remosaic', software: [{ name: 'reproject', version: '0.21.0' }] },
+    archiveUncertainty: { name: plane('mosaic-uncertainty').name, bytes: plane('mosaic-uncertainty').bytes },
+    archiveCoverage: { name: plane('mosaic-coverage').name, bytes: plane('mosaic-coverage').bytes },
     framesCombined: ['0001', '0003'], frameTimeSeconds: 30,
     statistics: { comparedPixels: 10, archiveCoveredPixels: 12, bitIdenticalShare: 0, medianRatio: 1, medianLevel: 0.07,
       medianAbsoluteDifferenceOverLevel: 0.003, differenceInArchiveSigma: { median: 0.02, p95: 0.25, p99: 2.3, max: 40 },
@@ -321,7 +320,7 @@ test('a receipt counts only when the archive files it says it read are the ones 
   await writeFile(resolve(scratch, `${pinnedProgram.id}.json`), JSON.stringify(program()));
   const receiptFile = resolve(scratch, `${pinnedProgram.id}.ch1.remosaic.reproduction.json`);
 
-  await writeFile(receiptFile, JSON.stringify(receipt('c'.repeat(64))));
+  await writeFile(receiptFile, JSON.stringify(receipt()));
   assert.equal((await repositoryState(scratch)).checked.get('IRAC Map'), 1);
 
   assert.ok((real.checked.get('IRAC Map') ?? 0) > 0, "this repository's own IRAC Map receipts name the bytes their program pinned");

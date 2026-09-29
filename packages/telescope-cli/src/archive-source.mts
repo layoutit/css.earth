@@ -1,32 +1,31 @@
 /** Shared byte and receipt boundary for an exact, still scientifically unresolved archive source. */
-import { createHash } from 'node:crypto';
 import { lstat, mkdir, open, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { get } from 'node:https';
 import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
-import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writeProductRecord } from '@cssearth/telescope/node';
+import { VERSION } from './help.mts';
 import type { ProductInput } from '@cssearth/telescope';
 import { EXPLORATION_SCHEMA } from './exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
 import { parseLimits } from '@cssearth/telescope/node';
 
-export interface SourceFile { readonly url: string; readonly name: string; readonly path?: string; readonly bytes?: number; readonly md5?: string; readonly archiveEncoding?: 'gzip' }
+export interface SourceFile { readonly url: string; readonly name: string; readonly path?: string; readonly bytes?: number; readonly archiveEncoding?: 'gzip' }
 export interface SourceSelection {
   readonly archive: string; readonly telescope: string; readonly identity: string; readonly target: string;
   readonly discovery: unknown; readonly current: unknown; readonly limitations: readonly string[];
   readonly files: readonly SourceFile[]; readonly primaryFits?: string;
   readonly fitsCompanions?: { readonly uncertainty: string; readonly coverage: string };
   /** Optional content-qualified descriptor made from the already downloaded original bytes. */
-  readonly describe?: (directory: string, files: readonly { readonly path: string; readonly bytes: number; readonly sha256: string }[]) => Promise<unknown>;
+  readonly describe?: (directory: string, files: readonly { readonly path: string; readonly bytes: number }[]) => Promise<unknown>;
 }
 export interface SavedSource {
   readonly bytes: Buffer; readonly target: string; readonly maximum: number; readonly selected: Record<string, unknown>;
   readonly evidence: Buffer;
 }
 
-interface TransferEntry { readonly path: string; readonly url: string; readonly bytes: number; readonly sha256: string; readonly md5: string }
+interface TransferEntry { readonly path: string; readonly url: string; readonly bytes: number }
 interface TransferProgress { readonly schema: 'cssearth-archive-transfer@1'; readonly selection: string; readonly files: readonly TransferEntry[] }
 const progressFile = 'transfer-progress.json';
 const progressBytes = (progress: TransferProgress) => `${JSON.stringify(progress, null, 2)}\n`;
@@ -56,15 +55,14 @@ async function checkedProgress(staging: string, selection: string, sources: read
   for (const file of files) {
     const path = requireString(file.path, 'completed path'), source = expected.get(path), bytes = file.bytes;
     if (!source || seen.has(path) || file.url !== source.url || typeof bytes !== 'number' || !Number.isSafeInteger(bytes) || bytes < 1 ||
-        typeof file.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(file.sha256) || typeof file.md5 !== 'string' || !/^[a-f0-9]{32}$/u.test(file.md5) ||
-        source.bytes !== undefined && source.bytes !== bytes || source.md5 !== undefined && source.md5 !== file.md5)
-      throw new Error('Partial transfer manifest does not match the selected archive files. Choose a new --out directory.');
+        source.bytes !== undefined && source.bytes !== bytes)
+      throw new Error(`Partial transfer manifest entry ${path} (bytes ${String(bytes)}) does not match the selected archive files. Choose a new --out directory.`);
     seen.add(path);
     await checkedParent(staging, path);
     const local = resolve(staging, path), stat = await lstat(local);
-    if (!stat.isFile() || stat.size !== bytes || (await sha256File(local)).sha256 !== file.sha256)
-      throw new Error(`Completed partial file ${path} changed. Choose a new --out directory.`);
-    checked.push({ path, url: source.url, bytes, sha256: file.sha256, md5: file.md5 });
+    if (!stat.isFile() || stat.size !== bytes)
+      throw new Error(`Completed partial file ${path} is ${stat.size} bytes, the transfer recorded ${bytes}. Choose a new --out directory.`);
+    checked.push({ path, url: source.url, bytes });
   }
   return { schema: 'cssearth-archive-transfer@1', selection, files: checked };
 }
@@ -80,10 +78,10 @@ export async function readSavedSource(explorationPath: string, serviceName: stri
   if (matches.length !== 1) throw new TypeError(`Saved exploration has no unique ${serviceName} service.`);
   const sources = requireArray(matches[0]!.sources, 'saved source choices');
   if (pick > sources.length) throw new TypeError(`--pick must be between 1 and ${sources.length}.`);
-  const selected = requireRecord(sources[pick - 1], 'saved source'), pin = requireString(selected.evidence, 'source evidence');
-  if (!/^[a-f0-9]{64}$/u.test(pin)) throw new TypeError('Saved source has no valid discovery pin.');
-  const evidence = await readFile(resolve(dirname(explorationPath), 'archive-source-evidence', `${pin}.json`));
-  if (sha256(evidence) !== pin) throw new Error('The saved archive source differs from its pinned discovery response. Explore again.');
+  const selected = requireRecord(sources[pick - 1], 'saved source'), name = requireString(selected.evidence, 'source evidence');
+  if (!/^[A-Za-z0-9._-]+$/u.test(name)) throw new TypeError(`Saved ${serviceName} source ${pick} names no valid discovery response (${name}).`);
+  const file = resolve(dirname(explorationPath), 'archive-source-evidence', `${name}.json`);
+  const evidence = await readFile(file).catch((error: unknown) => { throw new Error(`The saved discovery response ${file} is missing. Explore again.`, { cause: error }); });
   return { bytes, target, selected, evidence, maximum: parseLimits(request.transferLimits).scienceBytes };
 }
 
@@ -109,7 +107,7 @@ export async function rawHttpsFetch(input: string | URL | Request, init?: Reques
   return read(source, 0);
 }
 
-/** Stream the exact response while hashing it; a declared size never substitutes for a transfer cap. */
+/** Stream the exact response to disk; a declared size never substitutes for a transfer cap. */
 export async function downloadSource(file: SourceFile, path: string, maximum: number, fetcher: typeof fetch = fetch) {
   if (!/^[A-Za-z0-9._-]+$/u.test(file.name) || basename(path) !== file.name || !Number.isSafeInteger(maximum) || maximum < 1)
     throw new TypeError('Invalid archive file or transfer bound.');
@@ -125,20 +123,19 @@ export async function downloadSource(file: SourceFile, path: string, maximum: nu
   }
   const declared = Number(response.headers.get('content-length'));
   if (declared > maximum) { await response.body.cancel(); throw new RangeError(`${file.name} exceeds the transfer bound.`); }
-  const reader = response.body.getReader(), sha = createHash('sha256'), md5 = createHash('md5');
+  const reader = response.body.getReader();
   const handle = await open(path, 'wx'); let bytes = 0;
   try {
     for (;;) {
       const chunk = await reader.read(); if (chunk.done) break;
       bytes += chunk.value.byteLength;
       if (bytes > maximum) { await reader.cancel(); throw new RangeError(`${file.name} exceeds the transfer bound.`); }
-      await handle.writeFile(chunk.value); sha.update(chunk.value); md5.update(chunk.value);
+      await handle.writeFile(chunk.value);
     }
   } catch (error) { await handle.close(); await rm(path, { force: true }); throw error; }
   await handle.close();
-  const digest = sha.digest('hex'), archiveMd5 = md5.digest('hex');
-  if (file.bytes !== undefined && bytes !== file.bytes || file.md5 !== undefined && archiveMd5 !== file.md5) {
-    await rm(path, { force: true }); throw new Error(`${file.name} differs from the archive's size or MD5.`);
+  if (file.bytes !== undefined && bytes !== file.bytes) {
+    await rm(path, { force: true }); throw new Error(`${file.name} (${file.url}) is ${bytes} bytes; the archive lists ${file.bytes}.`);
   }
   if (/\.fits?$/iu.test(file.name) || /\.fits?\.gz$/iu.test(file.name)) {
     const handle = await open(path, 'r'); const prefix = Buffer.alloc(9);
@@ -146,7 +143,7 @@ export async function downloadSource(file: SourceFile, path: string, maximum: nu
     const valid = /\.gz$/iu.test(file.name) ? prefix[0] === 0x1f && prefix[1] === 0x8b : prefix.toString('ascii') === 'SIMPLE  =';
     if (!valid) { await rm(path, { force: true }); throw new TypeError(`${file.name} has no FITS signature.`); }
   }
-  return { bytes, sha256: digest, md5: archiveMd5 };
+  return { bytes };
 }
 
 export async function deliverSource(explorationPath: string, outputDirectory: string, saved: SavedSource, selection: SourceSelection,
@@ -166,10 +163,11 @@ export async function deliverSource(explorationPath: string, outputDirectory: st
       throw new TypeError(`Invalid or repeated archive source path ${path}.`);
     paths.add(path);
   }
-  const key = sha256(JSON.stringify({ exploration: sha256(saved.bytes), evidence: sha256(saved.evidence), maximum: saved.maximum,
+  // The transfer is resumable only for this exact saved selection, compared as canonical text.
+  const key = JSON.stringify({ exploration: resolve(explorationPath), evidence: saved.selected.evidence, maximum: saved.maximum,
     target: saved.target, archive: selection.archive, telescope: selection.telescope, identity: selection.identity,
     discovery: selection.discovery, current: selection.current, files: selection.files, primaryFits: selection.primaryFits,
-    fitsCompanions: selection.fitsCompanions, limitations: selection.limitations }));
+    fitsCompanions: selection.fitsCompanions, limitations: selection.limitations });
   const staging = `${destination}.partial`;
   let progress: TransferProgress;
   if (resume) {
@@ -228,19 +226,18 @@ export async function deliverSource(explorationPath: string, outputDirectory: st
       !files.some(file => file.path === path && /\.fits?(?:\.gz)?$/iu.test(path)))))
       throw new TypeError('Archive FITS companion was not pinned.');
     const inputs: ProductInput[] = [
-      { role: 'saved exploration', identity: resolve(explorationPath), bytes: saved.bytes.length, sha256: sha256(saved.bytes) },
-      { role: 'archive discovery response', identity: `${selection.archive}#discovery`, bytes: saved.evidence.length, sha256: sha256(saved.evidence) },
-      { role: 'current exact-source metadata', identity: `${selection.archive}#current`, bytes: metadata.length, sha256: sha256(metadata) },
-      ...files.map(file => ({ role: 'original archive source', identity: file.url, bytes: file.bytes, sha256: file.sha256 })),
+      { role: 'saved exploration', identity: resolve(explorationPath), bytes: saved.bytes.length },
+      { role: 'archive discovery response', identity: `${selection.archive}#discovery`, bytes: saved.evidence.length },
+      { role: 'current exact-source metadata', identity: `${selection.archive}#current`, bytes: metadata.length },
+      ...files.map(file => ({ role: 'original archive source', identity: file.url, bytes: file.bytes })),
     ];
-    const implementation = (await sha256File(import.meta.filename)).sha256;
     await writeProductRecord(resolve(staging, 'output.product.json'), {
       telescope: selection.telescope, stage: 'telescope-archive-source', inputs,
       parameters: { target: saved.target, archive: selection.archive, identity: selection.identity, status: 'unresolved',
         limitations: selection.limitations, ...(fits ? { fitsSource: { schema: FITS_SOURCE_SCHEMA, path: fits.path,
           label: fits.path, limitations: selection.limitations,
           ...(selection.fitsCompanions ? { companions: selection.fitsCompanions } : {}) } } : {}) },
-      software: [{ name: 'cssEarth Telescope archive source', version: implementation }],
+      software: [{ name: 'cssEarth Telescope archive source', version: VERSION }],
     }, [...files.map(file => ({ path: file.path, file: resolve(staging, file.path) })),
       ...(descriptor === undefined ? [] : [{ path: 'descriptor.json', file: resolve(staging, 'descriptor.json') }]),
       ...['explore.json', 'discovery.json', 'current-metadata.json', 'source.json'].map(path => ({ path, file: resolve(staging, path) }))]);

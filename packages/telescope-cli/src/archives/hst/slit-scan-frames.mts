@@ -104,7 +104,7 @@ export interface SlitRegionSpectrum {
 /** Extract one background-subtracted STIS row. Either a checked scan registration is supplied by the pinned receipt, or the
  * complete pinned scan is registered here; neither path expands receipt values into detector data. */
 export async function extractSlitRegionSpectrum(definition: SlitScanDefinition, options: {
-  readonly directory: string; readonly frame: string; readonly row: number; readonly mayAsk?: boolean; readonly verifyDigests?: boolean;
+  readonly directory: string; readonly frame: string; readonly row: number; readonly mayAsk?: boolean; readonly verifySizes?: boolean;
   readonly registration?: Pick<VisitRegistration, 'visit' | 'discRow' | 'acrossSlitCentreArcsec'>;
 }): Promise<SlitRegionSpectrum> {
   if (!Number.isSafeInteger(options.row) || options.row < 0) throw new RangeError('A slit-region row is a non-negative detector row.');
@@ -113,11 +113,11 @@ export async function extractSlitRegionSpectrum(definition: SlitScanDefinition, 
   const path = resolve(options.directory, pinned.name), header = await readScanFrameHeader(path, pinned.name);
   if (header.programme !== pinned.programme || header.targetName !== pinned.targetName || header.aperture !== definition.aperture || header.opticalElement !== definition.opticalElement)
     throw new Error(`${pinned.name} does not match its pinned STIS scan identity.`);
-  if (options.verifyDigests ?? true) { if ((await stat(path)).size !== pinned.bytes) throw new Error(`${pinned.name}: the file on disk is not the recorded size.`); }
+  if (options.verifySizes ?? true) { if ((await stat(path)).size !== pinned.bytes) throw new Error(`${pinned.name}: the file on disk is not the recorded size.`); }
   const frame = header;
   if (options.row >= frame.height) throw new RangeError(`${options.frame} has ${frame.height} rows, not row ${options.row}.`);
   const visit = options.registration ?? (await (async () => {
-    const frames = await prepareFrames(definition, options.directory, options.mayAsk ?? false, options.verifyDigests ?? true);
+    const frames = await prepareFrames(definition, options.directory, options.mayAsk ?? false, options.verifySizes ?? true);
     return (await registerVisits(definition, options.directory, frames)).find(candidate => candidate.visit === frame.visit);
   })());
   if (!visit) throw new Error(`${frame.name} has no registered visit.`);
@@ -189,7 +189,7 @@ export interface PreparedFrame extends ScanFrameHeader {
 }
 
 /** Every pinned frame, with its headers checked against the pin and its geometry from Horizons. */
-export async function prepareFrames(definition: SlitScanDefinition, directory: string, mayAsk: boolean, verifyDigests: boolean): Promise<PreparedFrame[]> {
+export async function prepareFrames(definition: SlitScanDefinition, directory: string, mayAsk: boolean, verifySizes: boolean): Promise<PreparedFrame[]> {
   const headers: ScanFrameHeader[] = [];
   for (const pinned of definition.frames) {
     const path = resolve(directory, pinned.name), header = await readScanFrameHeader(path, pinned.name);
@@ -197,7 +197,7 @@ export async function prepareFrames(definition: SlitScanDefinition, directory: s
       throw new Error(`${pinned.name}: the file is programme ${header.programme} target ${header.targetName}, the pin says ${pinned.programme} ${pinned.targetName}.`);
     if (header.aperture !== definition.aperture || header.opticalElement !== definition.opticalElement)
       throw new Error(`${pinned.name}: the file is ${header.aperture} ${header.opticalElement}, the scan is ${definition.aperture} ${definition.opticalElement}.`);
-    if (verifyDigests) {
+    if (verifySizes) {
       if ((await stat(path)).size !== pinned.bytes) throw new Error(`${pinned.name}: the file on disk is not the recorded size.`);
     }
     headers.push(header);

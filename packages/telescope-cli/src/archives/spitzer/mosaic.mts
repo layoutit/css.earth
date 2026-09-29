@@ -9,8 +9,7 @@
  * membership does not match refuses rather than producing a mosaic of the wrong exposures.
  *
  * The work itself is mosaic.py in the pinned environment. Beside each output this stage writes the shared
- * `cssearth-telescope-product@1` record: the exact inputs, the parameters, the package versions and the toolchain digest that
- * made it. A second run with the same record and the same output bytes on disk does no work.
+ * `cssearth-telescope-product@1` record: the exact inputs, the parameters and the package versions that made it. A second run with the same record and the same output bytes on disk does no work.
  *
  * The record's software list names astropy and reproject, not MOPEX, and the stage is called `open-remosaic` rather than
  * anything that reads as the observatory's pipeline. compare.mts writes the evidence, and it is `archive-agreement` of an
@@ -20,7 +19,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { assertInputs, fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductInput, ProductRecord, ProductRun } from '@cssearth/telescope';
 import { defaultDataRoot, readSpitzerProgram, REPOSITORY, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { spitzerSoftware, spitzerToolchain } from './toolchain.mts';
@@ -148,13 +147,13 @@ export async function remosaicChannel(program: SpitzerProgram, channel: SpitzerC
     maskRejects: `imask bits ${FATAL_IMASK_BITS.join(', ')} (contaminated or not a measurement); the artifacts the corrected frame already had removed are kept`,
     backgroundMatchPasses: BACKGROUND_MATCH_PASSES,
     frameTimeSeconds: channel.mosaicFrameTimeSeconds, frames: members.map(frame => frame.dce) };
-  const run: ProductRun = { telescope: TELESCOPE, stage: STAGE, inputs, parameters, software, toolchainDigest: toolchain.digest };
+  const run: ProductRun = { telescope: TELESCOPE, stage: STAGE, inputs, parameters, software };
   const output = mosaicName(program, channel.channel);
   const recordPath = resolve(work, `${output}.product.json`);
   // Before anything else, including the decision to reuse: every pinned level-1 frame, its mask and the archive mosaic this
   // run resamples onto must be the bytes the program pinned. Checking after the reuse shortcut would let a run hand back a
   // record naming inputs that are no longer on disk.
-  await assertInputPins(inputs, new Map(inputs.map(input => [input.identity, resolve(directory, input.identity)])));
+  await assertInputs(inputs, new Map(inputs.map(input => [input.identity, resolve(directory, input.identity)])));
   const existing = await readProductRecord(recordPath);
   if (await sameRun(existing, run, path => resolve(work, path))) return { record: existing!, summary: null, reused: true };
 

@@ -4,7 +4,7 @@
  *   node packages/telescope-cli/src/archives/spitzer/compare.mts <program id> [--channels 1,2] [--data <dir>] [--work <dir>]
  *
  * What this establishes, exactly. The archive's level-2 mosaic is a real external answer: the Spitzer Science Center made it
- * from the same level-1 frames with its own pipeline, and it is pinned here by byte count, sha256 and the archive's own MD5.
+ * from the same level-1 frames with its own pipeline, and it is pinned here by URL and byte count.
  * So the evidence is `archive-agreement`. What it is NOT is a reproduction of that pipeline: MOPEX did not run here (see
  * toolchain.json), the re-mosaic is an open reprojection and coaddition, and the two therefore differ wherever the pipelines
  * differ. Every receipt says so in `pipeline` and `limits`, and a reader who needs the observatory's own numbers should not
@@ -30,7 +30,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { addProductEvidence, assertInputPins, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { addProductEvidence, assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductInput, ProductRun } from '@cssearth/telescope';
 import { defaultDataRoot, PROGRAMS, readSpitzerProgram, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { defaultWorkRoot, mosaicMembers, mosaicName, STAGE, TELESCOPE } from './mosaic.mts';
@@ -87,7 +87,7 @@ export async function compareMosaics(ours: ComparedFile, archive: ComparedFile, 
   const entries = [ours, archive, uncertainty, coverage];
   if (new Set(entries.map(entry => entry.pin.identity)).size !== entries.length)
     throw new Error('The four compared files must be four different pinned files.');
-  await assertInputPins(entries.map(entry => entry.pin), new Map(entries.map(entry => [entry.pin.identity, entry.path])));
+  await assertInputs(entries.map(entry => entry.pin), new Map(entries.map(entry => [entry.pin.identity, entry.path])));
   const compared: ProductInput[] = [];
   for (const entry of entries) compared.push({ role: entry.pin.role, identity: entry.pin.identity, ...await fileSize(entry.path) });
 
@@ -144,7 +144,7 @@ export interface SpitzerReproduction {
   readonly wavelength: string;
   /** What made the product we compare against, and what made ours. The first is the observatory's; the second is not. */
   readonly archiveProduct: { readonly name: string; readonly bytes: number; readonly pipeline: string };
-  readonly ourProduct: { readonly name: string; readonly bytes: number; readonly stage: string; readonly software: readonly { readonly name: string; readonly version: string }[]; readonly toolchainDigest: string };
+  readonly ourProduct: { readonly name: string; readonly bytes: number; readonly stage: string; readonly software: readonly { readonly name: string; readonly version: string }[] };
   /** The two archive planes the headline numbers are measured against, as they were on disk when they were read. The share
    * inside "the archive's own uncertainty" means nothing without saying which uncertainty file that was. */
   readonly archiveUncertainty: { readonly name: string; readonly bytes: number };
@@ -172,7 +172,7 @@ export function parseReproduction(value: unknown): SpitzerReproduction {
   };
   const archiveProduct = { ...product(row.archiveProduct, 'archive product'), pipeline: requireString(requireRecord(row.archiveProduct, 'archive product').pipeline, 'archive pipeline') };
   const ourRecord = requireRecord(row.ourProduct, 'our product');
-  const ourProduct = { ...product(row.ourProduct, 'our product'), stage: requireString(ourRecord.stage, 'stage'), toolchainDigest: requireString(ourRecord.toolchainDigest, 'toolchain digest'),
+  const ourProduct = { ...product(row.ourProduct, 'our product'), stage: requireString(ourRecord.stage, 'stage'),
     software: requireArray(ourRecord.software, 'software').map(raw => { const entry = requireRecord(raw, 'software'); return { name: requireString(entry.name, 'name'), version: requireString(entry.version, 'version') }; }) };
   const archiveUncertainty = product(row.archiveUncertainty, 'archive uncertainty'), archiveCoverage = product(row.archiveCoverage, 'archive coverage');
   const statisticsRecord = requireRecord(row.statistics, 'statistics');
@@ -219,7 +219,7 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
 
   // Our own product is pinned by the record that made it; the archive's three files are pinned by the program that fetched
   // them. compareMosaics refuses every one of them that is not its pinned bytes before it reads a sample, and gives back the
-  // identity of what it did read. Nothing below copies a digest out of the program or the record.
+  // identity of what it did read.
   const comparison = await compareMosaics(
     { path: ourPath, pin: { role: 'our-mosaic', identity: output, bytes: ourFile.bytes } },
     { path: resolve(directory, archive.name), pin: { role: 'archive-mosaic', identity: archive.name, bytes: archive.bytes } },
@@ -235,7 +235,7 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
   const reproduction = parseReproduction({
     schema: SCHEMA, program: program.id, aorKey: program.aorKey, target: program.target, channel: channel.channel, wavelength: channel.wavelength,
     archiveProduct: { name: readArchive.identity, bytes: readArchive.bytes, pipeline: channel.mosaic.creator },
-    ourProduct: { name: readOurs.identity, bytes: readOurs.bytes, stage: record.stage, software: record.software, toolchainDigest: record.toolchainDigest ?? '' },
+    ourProduct: { name: readOurs.identity, bytes: readOurs.bytes, stage: record.stage, software: record.software },
     archiveUncertainty: { name: read('archive-uncertainty').identity, bytes: read('archive-uncertainty').bytes },
     archiveCoverage: { name: read('archive-coverage').identity, bytes: read('archive-coverage').bytes },
     framesCombined: mosaicMembers(channel).map(frame => frame.dce), frameTimeSeconds: channel.mosaicFrameTimeSeconds,
@@ -245,7 +245,7 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
 
   const run: ProductRun = { telescope: TELESCOPE, stage: COMPARE_STAGE, inputs,
     parameters: { comparedOver: 'pixels the archive covers and both products hold', maxSamples: MAX_SAMPLES },
-    software: [{ name: 'cssearth-fits', version: 'repository' }], toolchainDigest: record.toolchainDigest ?? undefined };
+    software: [{ name: 'cssearth-fits', version: 'repository' }] };
   await writeProductRecord(`${receiptPath(program.id, channel.channel)}.product.json`, run,
     [{ path: receiptName(program.id, channel.channel), file: receiptPath(program.id, channel.channel), units: 'dimensionless shares and ratios' }]);
 

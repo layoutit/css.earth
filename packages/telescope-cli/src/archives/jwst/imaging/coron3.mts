@@ -16,7 +16,7 @@
  * MIRI's four-quadrant phase masks do this on every slice (docs/jwst-imaging.md).
  *
  * Beside the mosaic the run writes its product record (image3.mts builds it): the rolls and the PSF references at their pinned
- * digests, the CRDS context and the pinned pipeline. compare.mts adds its agreement with MAST to that record, and a mosaic is
+ * sizes, the CRDS context and the pinned pipeline. compare.mts adds its agreement with MAST to that record, and a mosaic is
  * reused only when the record says this same run made it. */
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';

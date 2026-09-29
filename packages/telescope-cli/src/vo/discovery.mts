@@ -1,11 +1,10 @@
-import { mkdir, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { basename, resolve } from 'node:path';
 import { astroquery } from '@cssearth/telescope/node';
 import { mastService, type MastServiceRequest, type MastServiceResult } from '@cssearth/telescope/node';
 import type { ProductKind } from '../recipe-request.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { canonical, digest, jsonValue, parseMetadata, parsePin, parseRegion, recordKey, type DiscoverySnapshot, type IcrsCircle, type Json, type TransferLimits } from '@cssearth/telescope/node';
-import { sha256File } from '@cssearth/core/node';
+import { canonical, jsonValue, parseMetadata, parsePin, parseRegion, recordKey, type DiscoverySnapshot, type IcrsCircle, type Json, type TransferLimits } from '@cssearth/telescope/node';
 import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';
 import type { FamilyId } from '../product-descriptor.mts';
 import { productTypeFamilyEvidence, type ObservationFamilyEvidence } from '../observation-families.mts';
@@ -116,7 +115,7 @@ export function normalizeSnapshot(snapshot: DiscoverySnapshot, profile: ServiceP
     if (!uniqueIdentity) issues.push('Declared row identity is absent or repeated; this record key is bound to its snapshot and row position.');
     const kind=epn && row.dataproduct_type === 'im' ? 'image' : epn && row.dataproduct_type === 'sc' ? 'cube' : string('dataproduct_type'),productType=mapIvoaProductType(kind);
     const collection = string('obs_collection'), facility = string('facility_name');
-    return { key: recordKey(snapshot, row, profile.identityColumns, index), snapshot: snapshot.response.raw.sha256, service: snapshot.service, table: snapshot.table,
+    return { key: recordKey(snapshot, row, profile.identityColumns, index), snapshot: snapshot.response.raw.path, service: snapshot.service, table: snapshot.table,
       collection, facility, telescopeName: collection && profile.collections?.includes(collection) ? collection : facility,
       instrument: string('instrument_name'),
       identities: Object.fromEntries(keys.map(k => [k, row[k] ?? null])), rawTarget: row.target_name ?? null,
@@ -182,15 +181,16 @@ export async function mastConeSelection(profile: ServiceProfile, region: IcrsCir
     position: `${circle.raDegrees}, ${circle.decDegrees}, ${circle.radiusDegrees}`,
   }, pagesize: sampleLimit + 1, page: 1 };
   const answer = await client(request);
-  if (!answer.responseRecord) throw new Error('MAST positional search has no saved response pin.');
+  if (!answer.responseRecord) throw new Error('MAST positional search has no saved response file.');
   if (answer.rows.length > sampleLimit + 1) throw new Error('MAST positional search exceeded its requested page size.');
   const returnedIds = answer.rows.map(row => {
     if (row.obs_collection !== collection) throw new Error('MAST positional search returned another collection.');
     return requireString(row.obs_id, 'MAST positional observation id');
   });
   const ids = [...new Set(returnedIds.slice(0, sampleLimit))];
-  const pin = { path: answer.responseRecord.path, ...await sha256File(answer.responseRecord.path) };
-  if (pin.sha256 !== answer.responseRecord.sha256) throw new Error('MAST positional response changed after retrieval.');
+  const saved = await stat(answer.responseRecord.path).catch(() => null);
+  if (!saved) throw new Error(`The saved MAST positional response ${answer.responseRecord.path} is missing.`);
+  const pin = { path: answer.responseRecord.path, bytes: saved.size };
   return { method: 'mast-filtered-position@1', region: circle, collection, ids: ids.sort(), complete: answer.rows.length <= sampleLimit, pin };
 }
 export function targetQuery(profile: ServiceProfile, names: readonly string[], sampleLimit = 50, request?: DiscoveryRequest, spatialIds: readonly string[] = []): string {
@@ -280,8 +280,8 @@ export async function discoverInstrumentFacets(root: string, profile: ServicePro
   const instruments = [...new Set(response.rows.map(row => row.instrument_name).filter((value): value is string => typeof value === 'string' && Boolean(value.trim())))];
   if (instruments.length !== response.rows.length) throw new TypeError('Instrument facet response has missing or duplicate names.');
   const complete = response.queryStatus === 'OK' && instruments.length < INSTRUMENT_FACET_LIMIT;
-  const result = { names: instruments, complete, evidence: response.raw.sha256, issues: response.issues };
-  await writeFile(resolve(directory, `${digest({ query, result })}.facets.json`), canonical({ query, result }));
+  const result = { names: instruments, complete, evidence: response.raw.path, issues: response.issues };
+  await writeFile(resolve(directory, `${responseName(response.raw.path)}.facets.json`), canonical({ query, result }));
   return result;
 }
 export async function discover(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits, sampleLimit = 50): Promise<DiscoverySnapshot> {
@@ -299,13 +299,15 @@ export async function discover(root: string, profile: ServiceProfile, request: D
     request, query, sampleLimit, scope: `${circle && profile.model === 'obscore-1.1' ? `Exact target-name/alias search, plus ${spatialScope}` : 'Exact target-name/alias search'}; bounded sample; incidental targets are not covered.${circle && profile.model !== 'obscore-1.1' ? ' This provider has no ICRS footprint; the region was not applied.' : ''}${request.wavelengthMicrometres && profile.model !== 'obscore-1.1' ? ' This provider did not apply the wavelength filter.' : ''}${request.time && !('any' in request.time) && (profile.model !== 'obscore-1.1' || profile.timeScale !== 'utc') ? ' This provider did not apply the time filter.' : ''}`, response,
     ...(spatialSelection ? { spatialSelection } : {}),
     completeness: response.queryStatus === 'ERROR' ? 'failed' : response.queryStatus === 'OVERFLOW' || spatialSelection?.complete === false ? 'overflow' : 'bounded-sample' });
-  await writeFile(resolve(directory, `${digest(snapshot)}.json`), canonical(snapshot));
+  await writeFile(resolve(directory, `${responseName(snapshot.response.raw.path)}.discovery.json`), canonical(snapshot));
   return snapshot;
 }
+/** A saved file of a snapshot is present at its recorded size. */
+const presentAtSize = async (file: { readonly path: string; readonly bytes: number }): Promise<boolean> => (await stat(file.path).catch(() => null))?.size === file.bytes;
+/** A snapshot is usable while the response it was read from, and any positional response that selected its ids, are on disk. */
 export async function verifySnapshot(snapshot: DiscoverySnapshot): Promise<boolean> {
-  const raw = await sha256File(snapshot.response.raw.path);
-  if (raw.bytes !== snapshot.response.raw.bytes || raw.sha256 !== snapshot.response.raw.sha256) return false;
-  if (!snapshot.spatialSelection) return true;
-  const positional = await sha256File(snapshot.spatialSelection.pin.path);
-  return positional.bytes === snapshot.spatialSelection.pin.bytes && positional.sha256 === snapshot.spatialSelection.pin.sha256;
+  if (!await presentAtSize(snapshot.response.raw)) return false;
+  return !snapshot.spatialSelection || presentAtSize(snapshot.spatialSelection.pin);
 }
+/** Files derived from one saved response are named after it. */
+const responseName = (path: string): string => basename(path).replace(/\.xml$/u, '');

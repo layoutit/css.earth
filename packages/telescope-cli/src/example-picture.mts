@@ -15,7 +15,6 @@
  *
  * Related: ../charts/fits-gallery-image.mts, whose rules for sky images this follows (north up, east left, every source
  * pixel a square). */
-import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

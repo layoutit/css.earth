@@ -1,11 +1,11 @@
 /** A source-profile bound measured from a POINT-classified cube, not a nominal
  * diffraction limit or a deconvolved PSF. Astropy owns the model and fitting. */
 import { readFile, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-import { sha256, sha256File } from '@cssearth/core/node';
+import { basename, dirname } from 'node:path';
+import { VERSION } from '../../../help.mts';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { eurekaToolchain } from '../toolchain.mts';
-import { toolchainPython, WORKSPACE } from '@cssearth/telescope/node';
+import { toolchainPython } from '@cssearth/telescope/node';
 import { openSpectralCube } from '@cssearth/bake/objects/layers/observation';
 import type { ProductFacts } from '../../../request-satisfaction.mts';
 
@@ -111,21 +111,19 @@ print(json.dumps(measure(sys.argv[1]), allow_nan=False))
 `;
 
 export async function measureCubeResolution(file: string): Promise<{ receipt: string; bound?: ProductFacts['angularResolutionBound'] }> {
-  const cube = await openSpectralCube(file), before = await sha256File(file);
+  const cube = await openSpectralCube(file), before = await readFile(file);
   const result = await toolchainPython(await eurekaToolchain(requireString(cube.primary.CRDS_CTX, 'CRDS context')), dirname(file),
     RESOLUTION_PYTHON, [file], `${file}.resolution.log`, { maxRssBytes: 2 * 2 ** 30, progressLabel: 'JWST source profile' });
   const measured = requireRecord(JSON.parse(result.lastLine), 'resolution measurement');
   if (measured.status === 'unknown') console.error(`JWST source profile: ${requireString(measured.reason)}`);
-  const after = await sha256File(file);
-  if (before.sha256 !== after.sha256) throw new Error('Cube changed during resolution measurement.');
+  if (!(await readFile(file)).equals(before)) throw new Error(`${file} changed during resolution measurement.`);
   if (measured.method !== RESOLUTION_METHOD || !['bounded', 'unknown'].includes(String(measured.status))) throw new Error('Invalid resolution result.');
   const arcsec = measured.status === 'bounded' ? requireFiniteNumber(measured.boundPixels, 'profile bound') * cube.arcsecPerPixel : undefined;
   if (arcsec !== undefined && !(arcsec > 0)) throw new Error('Invalid resolution bound.');
-  const text = `${JSON.stringify({ schema: 'cssearth-cube-resolution@1', product: before,
-    implementation: sha256(await readFile(new URL('./resolution.mts', import.meta.url))),
-    softwarePins: await sha256File(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/jwst/requirements.lock')),
+  const text = `${JSON.stringify({ schema: 'cssearth-cube-resolution@1', product: { path: basename(file), bytes: before.length },
+    software: { name: 'cssEarth cube resolution', version: VERSION }, softwarePins: 'packages/telescope-cli/src/archives/jwst/requirements.lock',
     arcsecPerPixel: cube.arcsecPerPixel, upperBoundArcsec: arcsec, ...measured }, null, 2)}\n`;
-  const receipt = `${file}.${sha256(text)}.resolution.json`;
+  const receipt = `${file}.resolution.json`;
   await writeFile(receipt, text);
   return { receipt, ...(arcsec === undefined ? {} : { bound: { arcsec, method: RESOLUTION_METHOD, receipt } }) };
 }

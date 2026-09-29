@@ -5,8 +5,8 @@
  *
  * For each observation (e.g. od9l12010) the program records the raw exposures and the files the instrument pipeline reads
  * beside them (`_wav` wavecal, `_asn` association, `_spt` support, `_jit` jitter), and the calibrated products the archive
- * itself produced (`_flt`/`_flc`, `_crj`/`_sfl`, `_x2d`/`_sx2`, `_x1d`/`_sx1`, `_drz`/`_drc`), each by MAST URI, byte count
- * and, once downloaded, sha256. Alongside them it records what the observation is: instrument, detector, optical element,
+ * itself produced (`_flt`/`_flc`, `_crj`/`_sfl`, `_x2d`/`_sx2`, `_x1d`/`_sx1`, `_drz`/`_drc`), each by MAST URI and byte
+ * count. Alongside them it records what the observation is: instrument, detector, optical element,
  * aperture, exposure start and end, target and proposal. Those come from the raw file's own primary header, read over a range
  * request rather than downloaded, and are checked against what CAOM says about the observation.
  *
@@ -82,8 +82,8 @@ const file = (value: unknown): MastFile => {
   const row = requireRecord(value, 'MAST file'), name = requireString(row.name, 'File name'), uri = requireString(row.uri, 'File URI');
   const bytes = requireFiniteNumber(row.bytes, 'File bytes');
   if (!FILE_NAME.test(name) || uri !== `mast:HST/product/${name}` || !Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`Invalid MAST file: ${name}`);
-  if (row.sha256 !== undefined && !/^[0-9a-f]{64}$/u.test(requireString(row.sha256))) throw new TypeError(`Invalid ${name} sha256.`);
-  return { name, uri, bytes, ...(row.sha256 === undefined ? {} : { sha256: row.sha256 as string }) };
+  if (row.sha256 !== undefined) throw new TypeError(`MAST file ${name} has a sha256 field (${String(row.sha256)}); HST programs record files by URI and size only.`);
+  return { name, uri, bytes };
 };
 export const suffixOf = (name: string) => name.slice(name.lastIndexOf('_') + 1, -'.fits'.length).toUpperCase();
 
@@ -246,13 +246,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     programme = found.programme; target ??= found.targetName;
     const { programme: _programme, ...entry } = found;
     const index = entries.findIndex(other => other.observation === entry.observation);
-    // Digests recorded by an earlier download stay with their file.
-    const keep = (list: readonly MastFile[], previous: readonly MastFile[] = []) => list.map(member => {
-      const before = previous.find(other => other.name === member.name && other.bytes === member.bytes);
-      return before?.sha256 ? { ...member, sha256: before.sha256 } : member;
-    });
-    const withDigests = { ...entry, inputs: keep(entry.inputs, entries[index]?.inputs), products: keep(entry.products, entries[index]?.products) };
-    if (index >= 0) entries[index] = withDigests; else entries.push(withDigests);
+    if (index >= 0) entries[index] = entry; else entries.push(entry);
     console.log(`${observation}: ${entry.instrument}/${entry.detector} ${entry.opticalElement} ${entry.aperture}, ${entry.inputs.length} inputs${
       entry.association ? `, ${entry.association.members.length} association members` : ''}, ${[...new Set(entry.products.map(p => suffixOf(p.name)))].join(' ')}`);
   }

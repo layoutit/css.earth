@@ -1,7 +1,6 @@
 /** Select one exact product/operation. Never turn a failed cutout into a whole-product download. */
-import { dirname, resolve } from 'node:path';
-import { mkdir, readFile, writeFile, copyFile, rename, rm } from 'node:fs/promises';
-import { sha256File } from '@cssearth/core/node';
+import { basename, dirname, resolve } from 'node:path';
+import { mkdir, readFile, stat, writeFile, copyFile, rename, rm } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import { fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductRun } from '@cssearth/telescope';
@@ -9,19 +8,19 @@ import { astroquery } from '@cssearth/telescope/node';
 import { requireRecord } from '@cssearth/core';
 import { extractVoPackage } from './package.mts';
 import { inspectVoFits, type VoContentProfile } from './content.mts';
-import { acquisitionKey, canonical, digest, jsonValue, parseLimits, productKey, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource, type TransferLimits } from '@cssearth/telescope/node';
+import { canonical, jsonValue, parseLimits, plainName, productKey, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource, type TransferLimits } from '@cssearth/telescope/node';
 import type { DiscoveredObservation, DiscoveryRequest } from './discovery.mts';
 import { voUrl, type VoNetworkPolicy } from './network-policy.mts';
 
 export interface AcquisitionSpec {
-  readonly schema: 'cssearth-vo-acquisition@1'; readonly key: string; readonly productKey: string;
+  /** `key` names the acquisition directory; `identity` is the exact acquisition as canonical text. */
+  readonly schema: 'cssearth-vo-acquisition@1'; readonly key: string; readonly identity: string; readonly productKey: string;
   readonly observation: DiscoveredObservation; readonly request: DiscoveryRequest;
   readonly operation: { readonly kind: 'direct' | 'soda-sync'; readonly url: string; readonly parameters: Readonly<Record<string, Json>> };
   readonly descriptor: Resource | null; readonly metadata: readonly Pin[];
   readonly serviceRow: number | null; readonly serviceMetadata: string | null;
   readonly format: 'fits' | 'zip' | 'tar'; readonly decoder: 'fits-raster' | 'family-pending';
   readonly kind: 'image' | 'cube' | 'spectrum' | 'table' | 'photometry' | 'events' | 'strips'; readonly limits: TransferLimits;
-  readonly implementation: string;
 }
 export interface AccessPlan { readonly products: readonly AcquisitionSpec[]; readonly issues: readonly string[] }
 /** Table and spectrum routes require a direct FITS product and an archive-confirmed target. */
@@ -35,9 +34,20 @@ export function nativeQualificationRoute(spec: AcquisitionSpec): 'raster' | 'f08
 }
 const PRODUCT_KINDS = ['image', 'cube', 'spectrum', 'table', 'photometry', 'events', 'strips'] as const;
 function supportedKind(value: string | null): value is AcquisitionSpec['kind'] { return value !== null && (PRODUCT_KINDS as readonly string[]).includes(value); }
-async function implementation(): Promise<string> {
-  return digest(await Promise.all(['./access.mts', './content.mts', './package.mts', '../../../../packages/telescope/src/node/vo-contracts.ts', './discovery.mts', './network-policy.mts', '../../../../packages/telescope/src/node/astroquery.ts', '../../../../packages/telescope/toolchains/requirements.lock']
-    .map(path => readFile(new URL(path, import.meta.url), 'utf8'))));
+/** The exact acquisition: the product, the operation that fetches it, its descriptor and the limits it runs under. Fetch times
+ * are deliberately outside it. */
+export const acquisitionIdentity = (product: string, operation: AcquisitionSpec['operation'], request: DiscoveryRequest, descriptor: Resource | null, limits: TransferLimits): string =>
+  canonical({ product, operation: jsonValue({ operation, request }), descriptor: jsonValue(descriptor), limits: jsonValue(limits) });
+/** The acquisition directory name: the archive host, the record's first identity value, the operation, the address it reads
+ * and any subset. It is readable, not an identity; the record inside holds the exact acquisition and refuses another one. */
+export function acquisitionName(observation: DiscoveredObservation, operation: AcquisitionSpec['operation']): string {
+  const url = new URL(operation.url), identity = Object.values(observation.identities).find((value): value is string => typeof value === 'string' && value !== '');
+  const leaf = `${url.pathname.split('/').filter(Boolean).pop() ?? ''}${url.search}`;
+  const subset = Object.entries(operation.parameters).filter(([key]) => key === 'BAND' || key === 'CIRCLE').map(([key, value]) => `${key}-${canonical(value)}`);
+  return plainName(url.hostname, identity ?? observation.table, operation.kind, leaf, ...subset);
+}
+async function sizeOf(path: string, label: string): Promise<number> {
+  return (await stat(path).catch(() => { throw new Error(`${label} ${path} is missing; query again.`); })).size;
 }
 export function mediaType(value: string | null): { type: string; parameters: Readonly<Record<string, string>> } | null {
   if (value === null) return null;
@@ -108,12 +118,12 @@ export type MetadataLoader = (url: string, parameters?: Readonly<Record<string, 
 export async function planAccess(root: string, observation: DiscoveredObservation, snapshot: DiscoverySnapshot, request: DiscoveryRequest,
   load?: MetadataLoader, policy: VoNetworkPolicy = {}): Promise<AccessPlan> {
   const limits = parseLimits(request.transferLimits), products: AcquisitionSpec[] = [], issues: string[] = [], visited = new Set<string>();
-  const implementationDigest = await implementation();
   const evidenceDirectory = resolve(root, 'output/telescopes/vo/metadata');
   await mkdir(evidenceDirectory, { recursive: true });
-  const snapshotFile = resolve(evidenceDirectory, `${digest(snapshot)}.snapshot.json`);
-  await writeFile(snapshotFile, canonical(snapshot));
-  const snapshotPin = { path: snapshotFile, ...await sha256File(snapshotFile) };
+  // The snapshot is saved beside the response it was read from, under that response's name.
+  const snapshotFile = resolve(evidenceDirectory, `${basename(snapshot.response.raw.path).replace(/\.xml$/u, '')}.snapshot.json`), snapshotText = canonical(snapshot);
+  await writeFile(snapshotFile, snapshotText);
+  const snapshotPin = { path: snapshotFile, bytes: Buffer.byteLength(snapshotText) };
   if (observation.target.status !== 'confirmed' && observation.target.status !== 'in-field')
     return { products, issues: ['The archive record has no confirmed target association and is not in the requested field.'] };
   if (!supportedKind(observation.kind))
@@ -126,9 +136,11 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   function add(operation: AcquisitionSpec['operation'], binding: Json, metadata: readonly Pin[], descriptor: Resource | null = null, serviceRow: number | null = null, serviceMetadata: string | null = null, format: AcquisitionSpec['format'] = 'fits') {
     const { snapshot: _snapshot, issues: _issues, ...observationFacts } = observation;
     const product = productKey(observation.key, jsonValue({ binding, observation: observationFacts }));
-    const key = acquisitionKey(product, jsonValue({ operation, request }), jsonValue(descriptor), limits, implementationDigest);
-    if (!products.some(p => p.key === key)) products.push({ schema: 'cssearth-vo-acquisition@1', key, productKey: product, observation, request, operation,
-      descriptor, metadata, serviceRow, serviceMetadata, format, decoder: kind === 'image' || kind === 'cube' ? 'fits-raster' : 'family-pending', kind, limits, implementation: implementationDigest });
+    const identity = acquisitionIdentity(product, operation, request, descriptor, limits), key = acquisitionName(observation, operation);
+    if (products.some(p => p.identity === identity)) return;
+    if (products.some(p => p.key === key)) { issues.push(`Two products of ${observation.key} share the acquisition name ${key}; the second is not planned.`); return; }
+    products.push({ schema: 'cssearth-vo-acquisition@1', key, identity, productKey: product, observation, request, operation,
+      descriptor, metadata, serviceRow, serviceMetadata, format, decoder: kind === 'image' || kind === 'cube' ? 'fits-raster' : 'family-pending', kind, limits });
   }
   function direct(address: string, mime: string | null, size: Json | undefined, binding: Json, pins: readonly Pin[]) {
     if (request.region || request.spectralFrame !== undefined) { issues.push('Subset requested; whole-product access is not an alternative.'); return; }
@@ -139,7 +151,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   }
   async function links(address: string, parameters: Readonly<Record<string, Json>>, depth: number, pins: readonly Pin[]): Promise<void> {
     if (depth > limits.nestedEdges) { issues.push('DataLink nesting bound reached.'); return; }
-    const identity = digest({ url: address, parameters });
+    const identity = canonical({ url: address, parameters });
     if (visited.has(identity)) { issues.push('Repeated DataLink operation skipped.'); return; }
     if (++calls > limits.metadataRequests) { issues.push('DataLink request bound reached.'); return; }
     visited.add(identity);
@@ -196,11 +208,12 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
 /** Acquisition records origin/integrity only. Scientific metadata qualification is a later stage. */
 export async function acquireVoProduct(root: string, spec: AcquisitionSpec, policy: VoNetworkPolicy = {}) {
   voUrl(spec.operation.url, spec.operation.url, policy);
-  if (spec.implementation !== await implementation() || spec.key !== acquisitionKey(spec.productKey, jsonValue({ operation: spec.operation, request: spec.request }), jsonValue(spec.descriptor), spec.limits, spec.implementation))
-    throw new Error('VO acquisition identity or implementation changed; query again.');
+  if (spec.schema !== 'cssearth-vo-acquisition@1') throw new Error(`VO acquisition ${spec.key}: schema is ${String(spec.schema)}, expected cssearth-vo-acquisition@1; query again.`);
+  if (spec.identity !== acquisitionIdentity(spec.productKey, spec.operation, spec.request, spec.descriptor, spec.limits) || spec.key !== acquisitionName(spec.observation, spec.operation))
+    throw new Error(`VO acquisition ${spec.key}: its identity or name no longer follows from its product and operation; query again.`);
   for (const pin of spec.metadata) {
-    const actual = await sha256File(pin.path);
-    if (actual.sha256 !== pin.sha256 || actual.bytes !== pin.bytes) throw new Error('VO metadata evidence changed.');
+    const bytes = await sizeOf(pin.path, `VO acquisition ${spec.key} metadata`);
+    if (bytes !== pin.bytes) throw new Error(`VO acquisition ${spec.key}: metadata ${pin.path} is ${bytes} bytes, the plan recorded ${pin.bytes}; query again.`);
   }
   if (spec.operation.kind === 'soda-sync') {
     if (!spec.descriptor || spec.serviceRow === null || !spec.serviceMetadata) throw new Error('Subset has no pinned descriptor binding.');
@@ -209,12 +222,13 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
   } else if (spec.request.region || spec.request.spectralFrame) throw new Error('Subset requests cannot acquire a direct product.');
   const destination = resolve(root, 'output/telescopes/vo/acquired', spec.key), recordPath = resolve(destination, 'acquisition.json');
   const run: ProductRun = { telescope: spec.observation.service, stage: 'archive-acquisition',
-    inputs: spec.metadata.map(pin => ({ identity: pin.sha256, role: 'archive metadata response', bytes: pin.bytes })),
-    parameters: { acquisition: spec.key, parent: spec.observation.identities, operation: spec.operation, format: spec.format, limits: spec.limits },
-    software: [{ name: 'cssEarth VO acquisition', version: spec.implementation }, { name: 'PyVO', version: '1.9.1' }] };
+    inputs: spec.metadata.map(pin => ({ identity: basename(pin.path), role: 'archive metadata response', bytes: pin.bytes })),
+    parameters: { acquisition: spec.identity, parent: spec.observation.identities, operation: spec.operation, format: spec.format, limits: spec.limits },
+    software: [{ name: 'PyVO', version: '1.9.1' }] };
   const previous = await readProductRecord(recordPath);
   if (previous) {
-    if (canonical(previous.parameters) !== canonical(run.parameters) || canonical(previous.software) !== canonical(run.software) || !await sameRun(previous, previous, name => resolve(destination, name))) throw new Error('Acquired product or evidence is stale.');
+    if (canonical(previous.parameters) !== canonical(run.parameters) || canonical(previous.software) !== canonical(run.software) || !await sameRun(previous, previous, name => resolve(destination, name)))
+      throw new Error(`${recordPath} records another acquisition or its files changed; move ${destination} aside and acquire again.`);
     return { file: previous.outputs.some(output => output.path === 'science.fits') ? resolve(destination, 'science.fits') : null, record: recordPath, reused: true, replay: 'pinned-local-artifact' as const };
   }
   await mkdir(dirname(destination), { recursive: true });
@@ -223,11 +237,11 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec, poli
   try {
     const metadata: { path: string; file: string }[] = [];
     for (const pin of spec.metadata) {
-      const path = `${pin.sha256}${pin.path.endsWith('.json') ? '.json' : '.xml'}`;
+      const path = basename(pin.path);
       if (metadata.some(m => m.path === path)) continue;
       const file = resolve(staging, path); await copyFile(pin.path, file);
-      const actual = await sha256File(file);
-      if (actual.sha256 !== pin.sha256 || actual.bytes !== pin.bytes) throw new Error('Metadata changed while copying.');
+      const bytes = await sizeOf(file, 'Copied VO metadata');
+      if (bytes !== pin.bytes) throw new Error(`VO metadata ${pin.path} changed while copying: ${bytes} bytes, the plan recorded ${pin.bytes}.`);
       metadata.push({ path, file });
     }
     const descriptorPin = spec.metadata.find(p => p.path === spec.serviceMetadata);

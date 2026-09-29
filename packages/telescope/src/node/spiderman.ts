@@ -2,51 +2,44 @@
  * published fit's own parameters in SPIDERMAN's own names and reads back the map it evaluates and the light curve it integrates.
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
  * (spiderman-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install */
-import { createHash } from 'node:crypto';
 import { runToolchainProcess } from './toolchain-process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { TOOLCHAINS, WORKSPACE } from './paths.js';
+import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain-marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const SPIDERMAN_ROOT = resolve(WORKSPACE, 'output/toolchains/spiderman');
 
-function descriptor() {
-  const text = readFileSync(resolve(TOOLCHAINS, 'spiderman-toolchain.json'), 'utf8');
-  const entry = requireRecord(JSON.parse(text) as unknown, 'spiderman-toolchain.json');
-  const lock = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements')), 'utf8');
-  return { entry, digest: createHash('sha256').update(text).update(lock).digest('hex') };
-}
+const INSTALL = 'node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install';
+const descriptor = () => readToolchainPins('spiderman', 'spiderman-toolchain.json');
 
 export async function installSpiderman() {
-  const { entry, digest } = descriptor(), prefix = resolve(SPIDERMAN_ROOT, 'env');
+  const pins = descriptor(), { entry } = pins, prefix = resolve(SPIDERMAN_ROOT, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   await rm(SPIDERMAN_ROOT, { recursive: true, force: true });
   await mkdir(SPIDERMAN_ROOT, { recursive: true });
   runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
     ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(SPIDERMAN_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
-  // The lock is hash-pinned; both packages build or install against the environment's NumPy.
-  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--require-hashes', '--no-deps', '--no-build-isolation', '-q', '-r',
+  // The lock is version-pinned; both packages build or install against the environment's NumPy.
+  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', '-r',
     resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
   await rm(resolve(SPIDERMAN_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  await writeFile(resolve(SPIDERMAN_ROOT, 'installed.json'), `${JSON.stringify({ id: 'spiderman', pinsSha256: digest }, null, 2)}\n`);
+  writeInstalledMarker(SPIDERMAN_ROOT, pins);
   verifySpiderman();
   return SPIDERMAN_ROOT;
 }
 
-export interface SpidermanToolchain { readonly python: string; readonly digest: string; readonly version: string; readonly env: NodeJS.ProcessEnv }
+export interface SpidermanToolchain { readonly python: string; readonly version: string; readonly env: NodeJS.ProcessEnv }
 
 export function spidermanToolchainSync(): SpidermanToolchain {
-  const { entry, digest } = descriptor(), bin = resolve(SPIDERMAN_ROOT, 'env/bin'), python = resolve(bin, 'python');
-  let marker: Record<string, unknown>;
-  try { marker = requireRecord(JSON.parse(readFileSync(resolve(SPIDERMAN_ROOT, 'installed.json'), 'utf8')) as unknown); }
-  catch { throw new Error('The SPIDERMAN toolchain is not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install'); }
-  if (marker.pinsSha256 !== digest) throw new Error('The SPIDERMAN toolchain was installed from other pins; reinstall it: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install');
+  const pins = descriptor(), { entry } = pins, bin = resolve(SPIDERMAN_ROOT, 'env/bin'), python = resolve(bin, 'python');
+  assertInstalledMarker(SPIDERMAN_ROOT, pins, 'SPIDERMAN', INSTALL);
   try { accessSync(python); } catch { throw new Error(`The SPIDERMAN toolchain has no python at ${python}.`); }
   // SPIDERMAN reads ~/.spidermanrc when present; an empty home keeps a user's file out of the result.
   const home = resolve(SPIDERMAN_ROOT, 'home'); mkdirSync(home, { recursive: true });
-  return { python, digest, version: requireString(entry.spiderman, 'spiderman'), env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', HOME: home, MPLBACKEND: 'Agg' } };
+  return { python, version: requireString(entry.spiderman, 'spiderman'), env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1', HOME: home, MPLBACKEND: 'Agg' } };
 }
 
 const PYTHON = String.raw`

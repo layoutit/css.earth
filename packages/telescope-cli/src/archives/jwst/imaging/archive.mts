@@ -55,8 +55,8 @@ const file = (value: unknown): MastFile => {
   const row = requireRecord(value, 'MAST file'), name = requireString(row.name, 'File name'), uri = requireString(row.uri, 'File URI');
   const bytes = requireFiniteNumber(row.bytes, 'File bytes');
   if (!NAME.test(name) || uri !== `mast:JWST/product/${name}` || !Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`Invalid MAST file: ${name}`);
-  if (row.sha256 !== undefined && !/^[0-9a-f]{64}$/u.test(requireString(row.sha256))) throw new TypeError(`Invalid ${name} sha256.`);
-  return { name, uri, bytes, ...(row.sha256 === undefined ? {} : { sha256: row.sha256 as string }) };
+  if (row.sha256 !== undefined) throw new TypeError(`MAST file ${name} has a sha256 field (${String(row.sha256)}); imaging programs record files by URI and size only.`);
+  return { name, uri, bytes };
 };
 export function parseImagingProgram(value: unknown): ImagingProgram {
   const row = requireRecord(value, 'JWST imaging program');
@@ -177,11 +177,7 @@ export async function pinImagingProgram(id: string, crdsContext: string, observa
     programme = found.programme; target ??= found.target;
     const { programme: _programme, target: _target, ...entry } = found;
     const index = bands.findIndex(other => other.band === entry.band);
-    // Digests recorded by an earlier download stay with their file.
-    const withDigests = { ...entry, level3: { ...entry.level3, ...(bands[index]?.level3.name === entry.level3.name && bands[index]?.level3.sha256 ? { sha256: bands[index]!.level3.sha256 } : {}) },
-      members: entry.members.map(member => ({ ...member, ...(bands[index]?.members.find(m => m.name === member.name)?.sha256 ? { sha256: bands[index]!.members.find(m => m.name === member.name)!.sha256 } : {}) })),
-      ...(entry.references ? { references: entry.references.map(member => ({ ...member, ...(bands[index]?.references?.find(m => m.name === member.name)?.sha256 ? { sha256: bands[index]!.references!.find(m => m.name === member.name)!.sha256 } : {}) })) } : {}) };
-    if (index >= 0) bands[index] = withDigests; else bands.push(withDigests);
+    if (index >= 0) bands[index] = entry; else bands.push(entry);
     console.error(`${observation}: ${entry.band}, ${entry.members.length} members${entry.references ? `, ${entry.references.length} PSF references` : ''}`);
   }
   const program = parseImagingProgram({ schema: 'cssearth-jwst-imaging-program@1', id, programme, target, crdsContext, ...(existing?.image3 ? { image3: existing.image3 } : {}), bands });

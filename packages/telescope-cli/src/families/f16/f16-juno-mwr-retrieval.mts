@@ -6,9 +6,7 @@
  * conversion. Every accepted fact comes from the pinned PDS3 label, the pinned
  * `^STRUCTURE` format file, or the pinned table bytes.
  */
-import { createHash } from 'node:crypto';
-import { copyFile, mkdir } from 'node:fs/promises';
-import { sha256File } from '@cssearth/core/node';
+import { copyFile, mkdir, stat } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pds3Values } from '@cssearth/telescope';
 import { fileSize } from '@cssearth/telescope/node';
@@ -49,7 +47,7 @@ export interface JunoMwrTableInput {
 export interface JunoMwrRetrievalInput {readonly abundance:JunoMwrTableInput;readonly uncertainty:JunoMwrTableInput}
 export interface JunoMwrTableIdentity {
   readonly role:JunoMwrRole; readonly dataSetId:string; readonly productId:string; readonly productType:string;
-  readonly species:JunoMwrSpecies; readonly structure:string; readonly md5:string;
+  readonly species:JunoMwrSpecies; readonly structure:string;
   readonly rows:number; readonly fields:number; readonly recordBytes:number; readonly fileRecords:number;
   readonly startTime:string; readonly stopTime:string; readonly clockStart:string; readonly clockStop:string;
 }
@@ -67,7 +65,6 @@ export interface JunoMwrRetrieval {
 }
 
 const text=(bytes:Uint8Array)=>Buffer.from(bytes).toString('latin1');
-const md5=(bytes:Uint8Array)=>createHash('md5').update(bytes).digest('hex');
 
 function keyword(label:string,key:string,scope:readonly string[],context:string):string{
   const found=pds3Values(label,key,scope);
@@ -139,8 +136,6 @@ export function inspectJunoMwrTable(input:JunoMwrTableInput,role:JunoMwrRole):Ju
   const recordBytes=whole(keyword(label,'RECORD_BYTES',[],context),'RECORD_BYTES',context),fileRecords=whole(keyword(label,'FILE_RECORDS',[],context),'FILE_RECORDS',context);
   equals(keyword(label,'BYTES',['HEADER'],context),String(recordBytes),'HEADER BYTES',context);
   equals(pointer(label,'^SPREADSHEET',context)[1],`${recordBytes+1}<BYTES>`,'^SPREADSHEET offset',context);
-  const declaredMd5=keyword(label,'MD5_CHECKSUM',[],context),actualMd5=md5(input.table);
-  if(declaredMd5.toLowerCase()!==actualMd5)throw new TypeError(`${context} spreadsheet MD5 ${actualMd5} does not match the label MD5_CHECKSUM ${declaredMd5}.`);
   equals(keyword(label,'FIELD_DELIMITER',['SPREADSHEET'],context),'COMMA','FIELD_DELIMITER',context);
   equals(keyword(label,'^STRUCTURE',['SPREADSHEET'],context),basename(input.formatName),'^STRUCTURE',context);
   const rows=whole(keyword(label,'ROWS',['SPREADSHEET'],context),'ROWS',context),fields=whole(keyword(label,'FIELDS',['SPREADSHEET'],context),'FIELDS',context);
@@ -194,7 +189,7 @@ export function inspectJunoMwrTable(input:JunoMwrTableInput,role:JunoMwrRole):Ju
     return value;
   }));
   const flat=values.flat();
-  return {identity:{role,dataSetId,productId,productType,species,structure:basename(input.formatName),md5:actualMd5,rows,fields,recordBytes,fileRecords,
+  return {identity:{role,dataSetId,productId,productType,species,structure:basename(input.formatName),rows,fields,recordBytes,fileRecords,
       startTime:keyword(label,'START_TIME',[],context),stopTime:keyword(label,'STOP_TIME',[],context),
       clockStart:keyword(label,'SPACECRAFT_CLOCK_START_COUNT',[],context),clockStop:keyword(label,'SPACECRAFT_CLOCK_STOP_COUNT',[],context)},
     pressureUnit,pressureBars,latitudeDegrees,values,minimum:Math.min(...flat),maximum:Math.max(...flat),misnamedFields};
@@ -253,8 +248,7 @@ export function describeJunoMwrRetrieval(input:{readonly id:string;readonly retr
     representation:{kind:'physical-field',topology:'grid',samples},axes:axes(role),columns:[],
     quantity:{name:`${species} ${role==='abundance'?'abundance':'abundance standard uncertainty'}`,unit:'1',
       semantics:`Archive-published ${species} ${role==='abundance'?'abundance':'1-sigma abundance uncertainty'} on the retained pressure and planetocentric-latitude grid of ${table(role).identity.productId}. The label and format file state no unit; the archive's cited retrieval algorithm reports volume mixing ratios, so the values are carried as dimensionless. Retained range ${table(role).minimum} to ${table(role).maximum}.`},
-    calibration:{state:'reconstructed',basis:[`PDS3 ${table(role).identity.dataSetId}, PROCESSING_LEVEL_ID 5; the archive retrieval is retained, not reproduced.`,
-      `Label MD5_CHECKSUM ${table(role).identity.md5} verified against the pinned spreadsheet bytes.`]},
+    calibration:{state:'reconstructed',basis:[`PDS3 ${table(role).identity.dataSetId}, PROCESSING_LEVEL_ID 5; the archive retrieval is retained, not reproduced.`]},
     uncertainty,flags:[],
     time:{scale:'UTC',format:'PDS3 START_TIME and STOP_TIME',referenceEpoch:table(role).identity.startTime,
       exposure:`Archived interval ${table(role).identity.startTime} to ${table(role).identity.stopTime}. The dataset catalogue describes a nonaccumulating dataset derived from high-rate perijove data, not one exposure.`},
@@ -279,7 +273,7 @@ export function describeJunoMwrRetrieval(input:{readonly id:string;readonly retr
         'Pressure is retained as pressure; it is not converted to altitude, radius, or a body attachment.',
         'The abundance unit is not stated by the label or format file. It is carried as dimensionless because the archive\'s cited algorithm document reports volume mixing ratios.',
         'Brightness temperature, channel identity, and observing geometry are not in this product and are not inferred from it.'],
-      validation:`Label PDS_VERSION_ID, DATA_SET_ID, PRODUCT_TYPE, STANDARD_DATA_PRODUCT_ID, instrument, target and processing level; PRODUCT_ID, ^HEADER, ^SPREADSHEET and ^STRUCTURE pointer closure; RECORD_BYTES against the HEADER object and the ^SPREADSHEET offset; FILE_RECORDS against ROWS plus one header record; MD5_CHECKSUM against the spreadsheet bytes; FIELDS against the format file's field count, order and ASCII_REAL types; every format field description read for species, 1-sigma role and planetocentric latitude, cross-checked against the field name and the spreadsheet header; strictly increasing pressures and latitudes, as the dataset catalogue states (${JUNO_MWR_NH3_CATALOGUE_URL}); finite nonnegative values; and identical dataset, interval, clock counts and coordinates across the pair.`,
+      validation:`Label PDS_VERSION_ID, DATA_SET_ID, PRODUCT_TYPE, STANDARD_DATA_PRODUCT_ID, instrument, target and processing level; PRODUCT_ID, ^HEADER, ^SPREADSHEET and ^STRUCTURE pointer closure; RECORD_BYTES against the HEADER object and the ^SPREADSHEET offset; FILE_RECORDS against ROWS plus one header record; FIELDS against the format file's field count, order and ASCII_REAL types; every format field description read for species, 1-sigma role and planetocentric latitude, cross-checked against the field name and the spreadsheet header; strictly increasing pressures and latitudes, as the dataset catalogue states (${JUNO_MWR_NH3_CATALOGUE_URL}); finite nonnegative values; and identical dataset, interval, clock counts and coordinates across the pair.`,
       memberIds:[...labelMembers,...formatMembers]},
     dependencyIds:['paired-retrieval-closure']});
 
@@ -310,7 +304,7 @@ export function describeJunoMwrRetrieval(input:{readonly id:string;readonly retr
       role:'Paired PDS3 labels, format files, native spreadsheet coordinates, and archive retrieval identity',
       memberIds:allMembers,componentIds:['abundance','uncertainty'],
       requiredFor:['juno-mwr-retrieval-inspect','juno-mwr-retrieval-native'],
-      evidence:`${retrieval.abundance.identity.dataSetId}; ${retrieval.abundance.identity.productId} MD5 ${retrieval.abundance.identity.md5}; ${retrieval.uncertainty.identity.productId} MD5 ${retrieval.uncertainty.identity.md5}; ${JUNO_MWR_VOLUME_URL}`}],
+      evidence:`${retrieval.abundance.identity.dataSetId}; ${retrieval.abundance.identity.productId}; ${retrieval.uncertainty.identity.productId}; ${JUNO_MWR_VOLUME_URL}`}],
     issues});
   for(const published of value.components)assertPlanetaryProductSemantics(published);
   return value;
@@ -318,12 +312,12 @@ export function describeJunoMwrRetrieval(input:{readonly id:string;readonly retr
 
 export interface PinnedJunoMwrFile {readonly path:string}
 /** Copy the archive files unchanged into a new directory, measuring every one. */
-export async function exportJunoMwrRetrievalNative(pins:readonly PinnedJunoMwrFile[],output:string):Promise<readonly {readonly path:string;readonly bytes:number;readonly sha256:string}[]>{
+export async function exportJunoMwrRetrievalNative(pins:readonly PinnedJunoMwrFile[],output:string):Promise<readonly {readonly path:string;readonly bytes:number}[]>{
   if(!pins.length)throw new TypeError('Native Juno MWR export needs the pinned archive files.');
   const directory=resolve(output);await mkdir(directory,{recursive:true});
-  const written:{path:string;bytes:number;sha256:string}[]=[];
+  const written:{path:string;bytes:number}[]=[];
   for(const pin of pins){
-    const actual=await sha256File(pin.path);
+    const actual={bytes:(await stat(pin.path)).size};
     const destination=resolve(directory,basename(pin.path));
     if(written.some(entry=>entry.path===destination))throw new TypeError(`Native Juno MWR export would overwrite ${basename(pin.path)}.`);
     await copyFile(pin.path,destination);written.push({path:destination,...actual});

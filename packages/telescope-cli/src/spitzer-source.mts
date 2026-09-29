@@ -40,10 +40,8 @@ export async function fetchSpitzerSource(explorationPath: string, pick: number, 
   const file = matches[0]!;
   const name = sourceName(file)!, url = archiveUrl(requireString(file.heritagefilename, 'Spitzer archive path'));
   if (!url.endsWith(`/${name}`)) throw new Error('Spitzer file name and archive path disagree.');
-  const md5 = file.checksum?.trim() || undefined;
-  if (md5 !== undefined && !/^[a-f0-9]{32}$/iu.test(md5)) throw new TypeError('Spitzer archive MD5 is invalid.');
   const accompanying = name.endsWith('_maic.fits') ? await companions(url, aorKey, Number(file.channum)) : [];
-  const files = [{ url, name, ...(md5 ? { md5: md5.toLowerCase() } : {}) }, ...accompanying.map(url => ({ url, name: url.slice(url.lastIndexOf('/') + 1) }))];
+  const files = [{ url, name }, ...accompanying.map(url => ({ url, name: url.slice(url.lastIndexOf('/') + 1) }))];
   return deliverSource(explorationPath, outputDirectory, saved, {
     archive: SEARCH, telescope: 'Spitzer Space Telescope', identity: `${aorKey}/${name}`, target: saved.target,
     discovery: selected, current: { aor: aors[0], product: file },

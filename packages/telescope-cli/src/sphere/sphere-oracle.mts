@@ -1,7 +1,6 @@
 /** Independent analytic ray/ellipsoid reference; no PolyCSS geometry is used to draw it. */
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-import { sha256 } from '@cssearth/core/node';
 import { requireRecord, requireArray } from '@cssearth/core';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -92,7 +91,7 @@ export async function sphereOracle(mapRecord:string,sphereRecord:string,measurem
  for(const key of ['camera','depthPartitions','surfaceHit','sky'] as const)assert.deepEqual(definition[key],original[key],`Standard sphere ${key} changed`);
  const rejected=structuredClone(definition.tree);requireRecord(rejected).camera=-1;
  assert.notDeepEqual(rejected,expectedTree,'Parity check must detect a changed camera owner');
- const sceneParity={runtimeSha256:sha256(originalBytes),contextSha256:sha256(contextBytes),physicalCameraMountValidated:true,missingContextRejected:true,inactiveImageProperties:inactive,unchanged:['tree except inactive image bindings','camera','depthPartitions','surfaceHit','sky'],treeSha256:sha256(JSON.stringify(definition.tree)),mutationRejected:true};
+ const sceneParity={runtimeBytes:originalBytes.length,contextBytes:contextBytes.length,physicalCameraMountValidated:true,missingContextRejected:true,inactiveImageProperties:inactive,unchanged:['tree except inactive image bindings','camera','depthPartitions','surfaceHit','sky'],mutationRejected:true};
  const result=execFileSync(tc.python,['-c',ORACLE_PYTHON],{env:{...process.env,...tc.env},input:JSON.stringify({map:map.root,html:resolve(sphere.root,'sphere.html'),measurement:resolve(measurement),out:resolve(out)}),encoding:'utf8',maxBuffer:2**20});
  const report={...JSON.parse(result),sceneParity,controlBinding,selfContained:{inlineCss:true,inlineJavaScript:false,embeddedImages:assets.entries.length,networkForbidden:true},inputs:{map:map.pin,sphere:sphere.pin},source:'packages/telescope-cli/src/sphere/sphere-oracle.mts'};await writeFile(resolve(out,'sphere-oracle.json'),JSON.stringify(report,null,2)+'\n');return report;
 }

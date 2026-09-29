@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
@@ -7,12 +7,11 @@ import { loadVoInputs } from './bridge.mts';
 import { explorationAnswer } from '../exploration.mts';
 import { parseLimits, type DiscoverySnapshot, type MetadataResponse } from '@cssearth/telescope/node';
 import { associateTarget, instrumentFacetQuery, mastConeSelection, normalizeSnapshot, SERVICES, targetQuery, verifySnapshot } from './discovery.mts';
-import { sha256File } from '@cssearth/core/node';
 
 const alma = SERVICES[1]!;
 const mast = SERVICES.find(profile => profile.label === 'MAST JWST')!;
 const target = { id: 'hr-8799', names: ['HR 8799'], classification: 'star', classificationSource: 'fixture' };
-const raw = { path: '/fixture/metadata.xml', bytes: 100, sha256: 'a'.repeat(64) };
+const raw = { path: '/fixture/metadata.xml', bytes: 100 };
 const response: MetadataResponse = {
   schema: 'cssearth-vo-metadata@1', pyvo: '1.9.1', raw, effectiveUrl: alma.service, fetchedAt: '2026-09-23T00:00:00Z',
   httpStatus: 200, queryStatus: 'OK', fields: [], resources: [], coordinateSystems: [], timeSystems: [], issues: [], bindings: [],
@@ -42,18 +41,18 @@ test('MAST position ids feed bounded ObsCore metadata without unsupported TAP ge
   try {
     const region={frame:'icrs' as const,shape:'circle' as const,raDegrees:284.4,decDegrees:53.5,radiusDegrees:0.1};
     const request={target:'wd-1856',region};
-    const file=resolve(root,'response.json');await writeFile(file,'saved position response');const pin=await sha256File(file);
+    const file=resolve(root,'response.json');await writeFile(file,'saved position response');
     const selection=await mastConeSelection(mast,region,1,undefined,async queried=>{
       assert.equal(queried.service,'Mast.Caom.Filtered.Position');
       assert.equal(queried.params.position,'284.4, 53.5, 0.1');
       assert.equal(queried.pagesize,2);
       return {astroquery:'0.4.11',queriedAt:'2026-09-23T00:00:00Z',rows:[
-        {obs_id:'obs-1',obs_collection:'JWST'},{obs_id:'obs-2',obs_collection:'JWST'}],responseRecord:{path:file,sha256:pin.sha256}};
+        {obs_id:'obs-1',obs_collection:'JWST'},{obs_id:'obs-2',obs_collection:'JWST'}],responseRecord:{path:file}};
     });
     assert.deepEqual(selection.ids,['obs-1']);assert.equal(selection.complete,false);
     await mastConeSelection(mast,region,1,'NIRCAM/IMAGE',async queried=>{
       assert.deepEqual(queried.params.filters,[{paramName:'obs_collection',values:['JWST']},{paramName:'instrument_name',values:['NIRCAM/IMAGE']}]);
-      return {astroquery:'0.4.11',queriedAt:'2026-09-23T00:00:00Z',rows:[{obs_id:'obs-1',obs_collection:'JWST'}],responseRecord:{path:file,sha256:pin.sha256}};
+      return {astroquery:'0.4.11',queriedAt:'2026-09-23T00:00:00Z',rows:[{obs_id:'obs-1',obs_collection:'JWST'}],responseRecord:{path:file}};
     });
     const query=targetQuery(mast,['WD 1856+534'],1,request,selection.ids);
     assert.match(query,/obs_id IN \('obs-1'\)/u);
@@ -70,7 +69,7 @@ test('MAST position ids feed bounded ObsCore metadata without unsupported TAP ge
     const old=normalizeSnapshot({...saved,spatialSelection:undefined,query:targetQuery(mast,other.names,1,request)},mast,other,[other])[0]!;
     assert.equal(old.target.status,'unmatched');
     const tap=resolve(root,'tap.xml');await writeFile(tap,'saved ObsCore response');
-    const pinned={...saved,response:{...saved.response,raw:{path:tap,...await sha256File(tap)}}};
+    const pinned={...saved,response:{...saved.response,raw:{path:tap,bytes:(await stat(tap)).size}}};
     assert.equal(await verifySnapshot(pinned),true);
     await writeFile(file,'changed position response');
     assert.equal(await verifySnapshot(pinned),false);
@@ -79,7 +78,7 @@ test('MAST position ids feed bounded ObsCore metadata without unsupported TAP ge
 
 test('shared truncated-MIME DataLink responses are fetched once; irrelevant SODA does not add a failure', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'vo-shared-links-'));
-  const linkResponse: MetadataResponse = { ...response, raw: { ...raw, sha256: 'b'.repeat(64) }, effectiveUrl: 'https://example.org/datalink',
+  const linkResponse: MetadataResponse = { ...response, raw: { ...raw, path: '/fixture/datalink.xml' }, effectiveUrl: 'https://example.org/datalink',
     rows: [{ semantics: '#this', access_url: 'https://example.org/science.fits', content_type: 'application/fits' },
       { semantics: '#cutout', service_def: 'soda' }], times: [{}, {}],
     resources: [{ id: 'soda', type: 'meta', utype: 'adhoc:service', parameters: [{ name: 'standardID', id: null, datatype: 'char', arraysize: '*', unit: null,

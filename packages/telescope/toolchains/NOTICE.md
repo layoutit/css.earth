@@ -5,7 +5,7 @@ cssEarth uses [batman-package 2.5.3](https://github.com/lkreidberg/batman/tree/v
 # Astroquery
 
 cssEarth uses [Astroquery 0.4.11](https://pypi.org/project/astroquery/), installed into an ignored local toolchain from the
-hashed lock beside this file. Astroquery is copyright 2011–2024 Astroquery Developers and distributed under the BSD 3-Clause
+version lock beside this file. Astroquery is copyright 2011–2024 Astroquery Developers and distributed under the BSD 3-Clause
 license reproduced in [LICENSE.rst](LICENSE.rst). cssEarth does not copy or modify Astroquery source code and does not imply
 endorsement by the Astropy Team or Astroquery contributors.
 
@@ -27,13 +27,13 @@ record the archive origin, attribution, access state and reuse terms of its own 
 # PyVO
 
 cssEarth uses [PyVO 1.9.1](https://pypi.org/project/pyvo/) as the sole implementation of IVOA TAP requests and VOTable
-parsing. PyVO is installed from the same hash-locked environment; no PyVO source is copied or modified. PyVO is distributed
+parsing. PyVO is installed from the same version-locked environment; no PyVO source is copied or modified. PyVO is distributed
 under the BSD 3-Clause license reproduced in [PYVO-LICENSE.rst](PYVO-LICENSE.rst). Cite Graham et al., “PyVO: Python access
 to the Virtual Observatory”, *Astronomy and Computing* 25 (2018), doi:10.1016/j.ascom.2018.07.003.
 
 # Astropy
 
-Astroquery and PyVO depend on [Astropy 8.0.1](https://pypi.org/project/astropy/). It is installed from the hash-locked
+Astroquery and PyVO depend on [Astropy 8.0.1](https://pypi.org/project/astropy/). It is installed from the version-locked
 environment and is not copied or modified. Astropy is distributed under the BSD 3-Clause license reproduced in
 [ASTROPY-LICENSE.rst](ASTROPY-LICENSE.rst). Its NDData arithmetic owns selected-output
 error propagation. [Astropy visualization](https://docs.astropy.org/en/stable/visualization/index.html)
@@ -43,7 +43,7 @@ and QTable serialize the scientific outputs, including units and masks.
 # Matplotlib
 
 cssEarth uses [Matplotlib 3.11.2](https://matplotlib.org/) for static telescope output figures.
-It is an installed, hash-pinned dependency in the astronomy environment; no implementation
+It is an installed, version-pinned dependency in the astronomy environment; no implementation
 source is copied or modified. Its complete license is retained in
 [MATPLOTLIB-LICENSE.txt](MATPLOTLIB-LICENSE.txt). See [savefig](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)
 for the PNG/SVG output boundary. Numeric values, scientific interpretation and receipts remain
@@ -73,21 +73,21 @@ scientific assumptions and evidence; SPICE kernels retain NAIF/provider terms.
 
 # cdflib
 
-cssEarth uses [cdflib 1.3.12](https://github.com/MAVENSDC/cdflib) to decode NASA Common Data Format files for the F07 dynamic-spectrum owner. It is installed from the hash-locked astronomy environment and is not copied or modified. cdflib is copyright 2025 Regents of the University of Colorado and distributed under the MIT license reproduced in [CDFLIB-LICENSE.txt](CDFLIB-LICENSE.txt). cssEarth retains archive pins, CDF variable selection, scientific interpretation and output provenance.
+cssEarth uses [cdflib 1.3.12](https://github.com/MAVENSDC/cdflib) to decode NASA Common Data Format files for the F07 dynamic-spectrum owner. It is installed from the version-locked astronomy environment and is not copied or modified. cdflib is copyright 2025 Regents of the University of Colorado and distributed under the MIT license reproduced in [CDFLIB-LICENSE.txt](CDFLIB-LICENSE.txt). cssEarth retains archive pins, CDF variable selection, scientific interpretation and output provenance.
 
 # pyuvdata
 
-cssEarth uses [pyuvdata 3.2.4](https://github.com/RadioAstronomySoftwareGroup/pyuvdata) to open the F11 UVFITS baseline. pyuvdata owns UVFITS random-group conventions, AIPS polarization decoding, UVW values, native flags and sample decoding; cssEarth checks the local file pin before invoking it, bounds selection, and records provenance. pyuvdata is copyright 2018 Radio Astronomy Software Group and distributed under BSD-2-Clause, reproduced in [PYUVDATA-LICENSE.txt](PYUVDATA-LICENSE.txt). The package is installed unmodified from the hash-locked environment.
+cssEarth uses [pyuvdata 3.2.4](https://github.com/RadioAstronomySoftwareGroup/pyuvdata) to open the F11 UVFITS baseline. pyuvdata owns UVFITS random-group conventions, AIPS polarization decoding, UVW values, native flags and sample decoding; cssEarth checks the local file pin before invoking it, bounds selection, and records provenance. pyuvdata is copyright 2018 Radio Astronomy Software Group and distributed under BSD-2-Clause, reproduced in [PYUVDATA-LICENSE.txt](PYUVDATA-LICENSE.txt). The package is installed unmodified from the version-locked environment.
 
 # astropy-healpix
 
-cssEarth uses [astropy-healpix 1.1.3](https://github.com/astropy/astropy-healpix) for the F14 HEALPix baseline. astropy-healpix owns native RING/NESTED indexing and equal-area pixel geometry; cssEarth retains the FITS pin, quantity semantics, component selection and product record. It is copyright 2016–2018 Astropy Developers and distributed under BSD-3-Clause, reproduced in [ASTROPY-HEALPIX-LICENSE.md](ASTROPY-HEALPIX-LICENSE.md). The package is installed unmodified from the hash-locked environment.
+cssEarth uses [astropy-healpix 1.1.3](https://github.com/astropy/astropy-healpix) for the F14 HEALPix baseline. astropy-healpix owns native RING/NESTED indexing and equal-area pixel geometry; cssEarth retains the FITS pin, quantity semantics, component selection and product record. It is copyright 2016–2018 Astropy Developers and distributed under BSD-3-Clause, reproduced in [ASTROPY-HEALPIX-LICENSE.md](ASTROPY-HEALPIX-LICENSE.md). The package is installed unmodified from the version-locked environment.
 
 # SPIDERMAN
 
 cssEarth uses [spiderman-package 1.0.3](https://pypi.org/project/spiderman-package/1.0.3/) (Louden & Kreidberg 2018, MNRAS 477, 2613,
 [doi:10.1093/mnras/sty558](https://doi.org/10.1093/mnras/sty558)) to evaluate spherical-harmonic brightness maps that published
-phase-curve fits made with it, and the light curves those maps give. It is installed from the hash-pinned PyPI source release into
+phase-curve fits made with it, and the light curves those maps give. It is installed from the version-pinned PyPI source release into
 its own ignored environment ([spiderman-toolchain.json](spiderman-toolchain.json) says why), with batman-package 2.5.3, which it
 imports. cssEarth does not copy or modify SPIDERMAN source code; the runner registers an empty `matplotlib._png` module in place of
 one its plotting code imports and Matplotlib 3.3 removed. SPIDERMAN is copyright 2016 Tom Louden and distributed under the MIT
@@ -97,7 +97,7 @@ license of its repository, reproduced in [SPIDERMAN-LICENSE.txt](SPIDERMAN-LICEN
 
 cssEarth uses [starry 1.2.0](https://pypi.org/project/starry/1.2.0/) (Luger et al. 2019, AJ 157, 64,
 [doi:10.3847/1538-3881/aae8e5](https://doi.org/10.3847/1538-3881/aae8e5)) to evaluate spherical-harmonic brightness maps that published
-phase-curve fits made with it, and the star-planet light curves those maps give. It is installed from hash-pinned PyPI releases into
+phase-curve fits made with it, and the star-planet light curves those maps give. It is installed from version-pinned PyPI releases into
 its own ignored environment ([starry-toolchain.json](starry-toolchain.json) says why), with Theano-PyMC 1.1.2, PyMC3 3.11.5 and exoplanet
 0.5.3, which it imports. cssEarth does not copy or modify starry source code; the runner removes the `-fno-exceptions` compiler flag
 that PyMC3 adds, because starry's compiled operators throw C++ exceptions. starry is copyright 2019–2021 Rodrigo Luger and distributed
@@ -107,7 +107,7 @@ under the MIT license, reproduced in [STARRY-LICENSE.txt](STARRY-LICENSE.txt).
 
 cssEarth uses [PICASO 4.1](https://pypi.org/project/picaso/4.1/) (Batalha et al. 2019, ApJ 878, 70,
 [doi:10.3847/1538-4357/ab1b51](https://doi.org/10.3847/1538-4357/ab1b51)) to compute the intensity a brown dwarf's model atmosphere
-emits at each viewing angle, for stars colder than every published limb-darkening table. It is installed from hash-pinned PyPI
+emits at each viewing angle, for stars colder than every published limb-darkening table. It is installed from version-pinned PyPI
 releases into its own ignored environment ([picaso-toolchain.json](picaso-toolchain.json)), with the reference data of the release,
 the Sonora Bobcat structures of Marley et al. (2021, ApJ 920, 85; [doi:10.5281/zenodo.5063476](https://doi.org/10.5281/zenodo.5063476),
 CC BY 4.0) and the PICASO 4.0 correlated-k tables of Batalha and Mang ([doi:10.5281/zenodo.18636725](https://doi.org/10.5281/zenodo.18636725),

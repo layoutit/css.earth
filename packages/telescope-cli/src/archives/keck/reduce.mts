@@ -5,7 +5,7 @@
  *
  * The frames the program pins are staged into the run directory under the names the observatory wrote them with, because the
  * KCWI DRP reads a night by that convention (`kb<yymmdd>_<frame>.fits`) and KOA stores them under its own ids. Every staged
- * file is then checked against the program's pin, through the shared `assertInputPins`, before the pipeline is started: a run
+ * file is then checked against the program's pin, through the shared `assertInputs`, before the pipeline is started: a run
  * that would read other bytes does not start.
  *
  * The pipeline is run in group mode, which is how it is meant to be driven over a night's files: it sorts them by image type
@@ -30,12 +30,11 @@ import { copyFile, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs
 import { createWriteStream } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '@cssearth/core/node';
 import { positionalArguments } from '@cssearth/core';
-import { assertInputPins, readProductRecord, sameRun, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { assertInputs, readProductRecord, sameRun, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { DOWNLOADS, readKeckProgram, type KeckFile, type KeckObservation, type KeckProgram } from './archive.mts';
-import { keckToolchain, keckToolchainDigest, type KeckToolchain } from './toolchain.mts';
+import { keckToolchain, type KeckToolchain } from './toolchain.mts';
 
 const REPOSITORY = WORKSPACE;
 
@@ -72,7 +71,7 @@ export function configureWithoutPlots(shipped: string, settings: Readonly<Record
 export async function runConfiguration(toolchain: KeckToolchain, how: { readonly config: string }) {
   const shipped = resolve(toolchain.sitePackages, how.config);
   const { text, changed } = configureWithoutPlots(await readFile(shipped, 'utf8'));
-  return { source: relative(toolchain.sitePackages, shipped), text, changed, sha256: sha256(text) };
+  return { source: relative(toolchain.sitePackages, shipped), text, changed };
 }
 
 /** The versions of everything that decides what the pipeline writes, read from the installed environment itself. */
@@ -86,7 +85,7 @@ export async function keckSoftware(toolchain: KeckToolchain): Promise<ProductSof
 }
 
 /** Put the pinned frames of one observation in `directory`, each under the name the observatory wrote it with. Returns the
- * staged names in the order the pipeline is given them, and where each pinned input landed, for `assertInputPins`. */
+ * staged names in the order the pipeline is given them, and where each pinned input landed, for `assertInputs`. */
 export async function stageFrames(program: KeckProgram, observation: KeckObservation, directory: string, channel?: (name: string) => string) {
   await mkdir(directory, { recursive: true });
   const staged: string[] = [], files = new Map<string, string>();
@@ -108,14 +107,14 @@ export const pinnedInput = (file: KeckFile): ProductInput => ({ role: file.image
 /** What identifies one reduction: the pinned frames it read, the channel and configuration it ran with, and the installed
  * pipeline. The same frames through the same pipeline at the same settings are the same run. */
 export function reductionRun(program: KeckProgram, observation: KeckObservation, inputs: readonly ProductInput[],
-  settings: { readonly channel: string; readonly command: readonly string[]; readonly configuration: { readonly source: string; readonly sha256: string; readonly changed: Record<string, { readonly shipped: string; readonly used: string }> } },
-  software: readonly ProductSoftware[], toolchainDigest: string): ProductRun {
+  settings: { readonly channel: string; readonly command: readonly string[]; readonly configuration: { readonly source: string; readonly changed: Record<string, { readonly shipped: string; readonly used: string }> } },
+  software: readonly ProductSoftware[]): ProductRun {
   return {
     telescope: 'Keck', stage: `${program.instrument.toLowerCase()}-drp-group`,
     inputs: [...inputs].sort((a, b) => a.identity < b.identity ? -1 : 1),
     parameters: { instrument: program.instrument, koaid: observation.koaid, channel: settings.channel, groupMode: true,
       configuration: settings.configuration, command: settings.command, observatoryNames: true },
-    software, toolchainDigest,
+    software,
   };
 }
 
@@ -173,8 +172,8 @@ export async function reduceObservation(id: string, koaid: string, run: string):
   const redux = resolve(run, 'redux'), log = resolve(run, 'reduce.log');
   const command = [how.binary, ...how.args(channel), '-c', 'kcwi.cfg', '-f'];
   const inputs = [...observation.calibrations.filter(file => how.channel(file.name) === channel), observation.science].map(pinnedInput);
-  const made = reductionRun(program, observation, inputs, { channel, command, configuration: { source: configuration.source, sha256: configuration.sha256, changed: configuration.changed } },
-    software, await keckToolchainDigest());
+  const made = reductionRun(program, observation, inputs, { channel, command, configuration: { source: configuration.source, changed: configuration.changed } },
+    software);
   const previous = await readFile(resolve(run, 'run.json'), 'utf8').then(text => (JSON.parse(text) as { products?: string[] }).products ?? [], () => [] as string[]);
   if (await reusable(redux, previous, made))
     return { directory: run, redux, log, staged: [], products: previous, records: previous.map(name => productRecordPath(name)), reused: true };
@@ -182,7 +181,7 @@ export async function reduceObservation(id: string, koaid: string, run: string):
   await rm(run, { recursive: true, force: true });
   const { staged, files } = await stageFrames(program, observation, run, how.channel);
   // Nothing is read by the pipeline until the bytes it will read are the bytes the program pins.
-  await assertInputPins(inputs, files);
+  await assertInputs(inputs, files);
   await writeFile(resolve(run, 'kcwi.cfg'), configuration.text);
   const args = [...how.args(channel), '-c', 'kcwi.cfg', '-f', ...staged];
   const code = await runPipeline(toolchain.binaries[how.binary]!, args, run, log, toolchain.env);

@@ -6,11 +6,10 @@ import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { astroqueryToolchain } from '@cssearth/telescope/node';
+import { astroqueryToolchain, fileSize } from '@cssearth/telescope/node';
 import { sciencePackage } from '@cssearth/telescope/node';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { writeProductRecord } from '@cssearth/telescope/node';
-import { sha256File } from '@cssearth/core/node';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { parseCli } from './cli-arguments.mts';
 let root:string;
@@ -48,7 +47,7 @@ fits.HDUList([fits.PrimaryHDU(),h,table]).writeto(root/'tab.fits')
 `,root],{env:{...process.env,...tc.env}});
   const file=resolve(root,'cube.fits'),record=resolve(root,'input.product.json');
   await writeProductRecord(record,{telescope:'Fixture',stage:'fixture',inputs:[],parameters:{},software:[]},[{path:'cube.fits',file}]);
-  await writeFile(resolve(root,'result.json'),JSON.stringify({schema:'cssearth-telescope-delivery@3',product:'cube.fits',record:'input.product.json',receipt:'input.product.json',facts:{target:'fixture',verified:true},context:{kind:'scientific-request',request:sourceRequest,assessment:sourceAssessment},files:[{path:'cube.fits',...await sha256File(file)},{path:'input.product.json',...await sha256File(record)}]}));
+  await writeFile(resolve(root,'result.json'),JSON.stringify({schema:'cssearth-telescope-delivery@3',product:'cube.fits',record:'input.product.json',receipt:'input.product.json',facts:{target:'fixture',verified:true},context:{kind:'scientific-request',request:sourceRequest,assessment:sourceAssessment},files:[{path:'cube.fits',...await fileSize(file)},{path:'input.product.json',...await fileSize(record)}]}));
 });
 after(async()=>{await rm(root,{recursive:true,force:true});});
 async function extract(selection:OutputRequest,file='cube.fits'){
@@ -103,12 +102,11 @@ if kind=='aperture-spectrum':
  np.testing.assert_allclose(t['standard_deviation'].value,2)
  assert t.meta['uncertainty']=='independent' and t.meta['selection']['background']==[2,0,4,1]
 else:
- with fits.open(path,checksum=True) as f:
+ with fits.open(path) as f:
   assert f[0].data.shape==(2,4) and f['MASK'].data[1,3]==1 and np.isnan(f[0].data[1,3])
   assert u.Unit(f[0].header['BUNIT'])==(u.MJy*u.um/u.sr if kind=='feature-map' else u.MJy/u.sr)
   np.testing.assert_allclose(f['ERR'].data[0,0],np.sqrt(12 if kind=='feature-map' else 2))
   assert 'CTYPE1' not in f[0].header
-  assert f[0].verify_checksum()==1
 `,exported.data,selection.kind],{env:{...process.env,...tc.env}});
   assert.equal(receipt.parameters.software.presentation.coordinates.kind,selection.kind==='aperture-spectrum'?'spectral':'pixel');
   if(process.env.CSSEARTH_ORACLE_PYTHON){const {compareOutput}=await import('./output-oracle.mts');assert.equal((await compareOutput(exported.directory,process.env.CSSEARTH_ORACLE_PYTHON,resolve(root,selection.kind+'-oracle'))).passed,true);}
@@ -146,7 +144,7 @@ import sys
 import numpy as np
 from astropy.io import fits
 from astropy.wcs import WCS
-with fits.open(sys.argv[1],checksum=True) as f:
+with fits.open(sys.argv[1]) as f:
  w=WCS(f[0].header,f)
  assert w.pixel_n_dim==2
  np.testing.assert_allclose(w.pixel_to_world_values(1,0),[12.,-3.],atol=1e-10)

@@ -50,7 +50,7 @@ test('fetched FITS reports archive name, native content, WCS field and request f
     assert.equal(await main(['outputs',receipt],root,value=>text.push(value),io),0);
     assert.match(text.join(''),/Software citations: telescope ascl --product/u);
     await writeFile(resolve(root,'source','image.fits'),'changed');
-    await assert.rejects(listArtifactOutputs(receipt),/pins changed/u);
+    await assert.rejects(listArtifactOutputs(receipt),/no longer its recorded size/u);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 
