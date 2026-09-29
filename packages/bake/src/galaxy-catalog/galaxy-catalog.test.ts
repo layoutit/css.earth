@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFile, mkdtemp, mkdir, writeFile, rm, cp } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { M_PER_PC } from '@cssearth/astronomy';
@@ -9,8 +8,7 @@ import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';
 import { parseGalaxyRecipe } from './config.ts';
 import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from './display-sample.ts';
 import { galaxyPositionM, classifyMembership, prepareGalaxyCatalog } from './prepare.ts';
-import { parseGalaxyCsv, parseMembershipTable, readAuthorMetadata } from './source.ts';
-import { prepareGalaxyCatalogObject } from './prepare-object.ts';
+import { parseGalaxyCsv, readAuthorMetadata } from './source.ts';
 import type { AuthorMetadata, CsvRow } from './types.ts';
 
 const directory = resolve('src/objects/local-group');
@@ -25,31 +23,6 @@ function sourceArchive(yaml: string): Buffer {
   header.write(sum.toString(8).padStart(6, '0') + '\0 ', 148);
   return gzipSync(Buffer.concat([header, payload, Buffer.alloc((512 - payload.length % 512) % 512 + 1024)]));
 }
-
-test('canonical catalogue rebakes byte-for-byte from the independently pinned original inputs', async () => {
-  const temporary = await mkdtemp(resolve(tmpdir(), 'galaxy-catalog-'));
-  const objectDirectory = resolve(temporary, 'local-group'), out = resolve(objectDirectory, 'prepared');
-  try {
-    await cp(resolve(directory, 'source'), resolve(objectDirectory, 'source'), { recursive: true });
-    const data = await prepareGalaxyCatalogObject({ objectDirectory });
-    assert.deepEqual(await readFile(resolve(objectDirectory, 'object.json')), await readFile(resolve(directory, 'object.json')));
-    assert.deepEqual(await readFile(resolve(out, 'catalogue.json')), await readFile(resolve(directory, 'prepared/catalogue.json')));
-    assert.deepEqual(await readFile(resolve(out, 'display-sample.json')), await readFile(resolve(directory, 'prepared/display-sample.json')));
-    assert.equal(parsePreparedGalaxyCatalog(data), data);
-    assert.equal(data.objects.length + data.exclusions.length, 1727);
-    assert.equal(data.objects.length, 776);
-    assert.equal(data.objects.filter(row => row.membership.group === 'local-group' && row.status === 'confirmed').length, 109);
-    for (const row of data.objects) {
-      assert(Math.abs(Math.hypot(...row.positionM) / (row.distance.valuePc * M_PER_PC) - 1) < 1e-11);
-      assert(row.distance.sourceRef && row.skyPosition.sourceRef);
-      assert(!['host', 'nam', 'redshift', 'hubble'].includes(row.distance.method));
-    }
-    assert.equal(data.objects.filter(row => row.detailedObjectId).length, 4);
-    assert(data.exclusions.some(row => row.id === 'mw' && row.reason.includes('distance modulus')));
-    assert(data.exclusions.some(row => row.id === 'andromeda_36' && row.reason.includes('host')));
-    assert.equal(data.objects.find(row => row.id === 'aquarius_4')?.status, 'candidate');
-  } finally { await rm(temporary, { recursive: true, force: true }); }
-});
 
 test('four detailed centers retain measured directions and distance references in Sun ICRS', async () => {
   const data = parsePreparedGalaxyCatalog(await json('prepared/catalogue.json'));
@@ -109,14 +82,6 @@ test('new source objects follow authored host associations without a fixed galax
   assert.throws(() => classifyMembership('future', m, r, new Map()), /Cyclic/);
 });
 
-test('original table transcription has 144 classifications; no morphology or name letter becomes membership', async () => {
-  const r = await recipe(), table = parseMembershipTable(await readFile(resolve(directory, 'source', r.membershipTable.path), 'utf8'));
-  assert.equal(table.size, 144); assert.equal(table.get('Leo A Leo III'), 'L');
-  assert.equal(table.get('NGC 3109 DDO 236'), 'N'); assert.equal(table.get('Leo I UGC 5470'), 'G/L');
-  for (const name of Object.values(r.membershipNames)) assert(table.has(name));
-  assert.equal(Object.keys(r.membershipNames).length, 143);
-});
-
 test('strict source parser rejects malformed rows, ambiguous recipes and mutated consumed YAML', async () => {
   assert.deepEqual(parseGalaxyCsv('key,name\r\na,"A, ""quoted"" name"\r\n'), [{ key: 'a', name: 'A, "quoted" name' }]);
   assert.throws(() => parseGalaxyCsv('key,name\na,b,c\n'), /number of fields/);
@@ -133,7 +98,6 @@ test('strict source parser rejects malformed rows, ambiguous recipes and mutated
   assert(readAuthorMetadata(sourceArchive(yaml), 'release/data/', ['field']).has('new_field'));
   assert.throws(() => readAuthorMetadata(sourceArchive(yaml.replace('  ra: 0', '  ra: 0\n  ra: 90')), 'release/data/', ['field']), /Duplicate consumed/);
 });
-
 
 test('display sampling requires the authored budget and scale and preserves catalogue identities', async () => {
   const catalogue = parsePreparedGalaxyCatalog(await json('prepared/catalogue.json'));

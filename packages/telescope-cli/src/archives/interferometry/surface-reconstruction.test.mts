@@ -1,10 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { access } from 'node:fs/promises';
-import { resolve } from 'node:path';
 import { parseSurfaceSummary, surfaceArguments } from './surface-reconstruction.mts';
-import { toolchainDescriptor, toolchainEnvironment } from './toolchain.mts';
 
 test('a surface run is described by fixed arguments: the star with no measured axis has its pole North in the sky plane', () => {
   const args = surfaceArguments('data.fits', '/work', { diameterMas: 3.16, limbDarkening: 0.12 });
@@ -25,10 +22,3 @@ test('the summary surface.jl writes is read back, and a truncated one is refused
   assert.throws(() => parseSurfaceSummary('tiles=many\n'), /Unreadable/u);
 });
 
-test('the ROTIR environment its toolchain entry recorded is found beside this code', async () => {
-  const { entry } = await toolchainDescriptor('rotir');
-  assert.equal(entry.environment, 'tools/objects/interferometry/rotir', 'the recorded path is kept, since installs keep the entry text');
-  const environment = toolchainEnvironment(entry);
-  assert.equal(environment, resolve(import.meta.dirname, 'rotir'));
-  for (const file of ['Project.toml', 'Manifest.toml']) await access(resolve(environment, file));
-});

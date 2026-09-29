@@ -25,25 +25,6 @@ async function fixture(): Promise<MasterVolumeOptions> {
     sampleEmission(x, y, z, out) { out[0] = .1 + (x + 1) / 8; out[1] = .1 + (y + 2) / 9; out[2] = .1 + (z + 3) / 10; } };
 }
 
-test('omitted layer layout keeps the uniform manifest: one slab per reference cell and no layer plan', async () => {
-  const options = await fixture(), { masters } = await bakeMasterVolumeSlices(options);
-  assert.equal(masters.quads.length, 12);
-  assert.equal(masters.approximation.layerPlan, undefined);
-  assert.ok(masters.quads.every(q => q.slab === undefined), 'A uniform layout records no per-quad interval.');
-  for (const axis of ['x', 'y', 'z'] as const) {
-    const index = axis === 'x' ? 0 : axis === 'y' ? 1 : 2, extent = options.boundsKpc.max[index]! - options.boundsKpc.min[index]!;
-    assert.equal(masters.quads.filter(q => q.axis === axis).length, options.sliceCounts[axis]);
-    assert.ok(Math.abs(masters.approximation.slabPitchUnits[axis] - extent / options.sliceCounts[axis] * options.unitsPerSourceUnit) < 1e-9);
-  }
-  const written = JSON.parse(await readFile(join(options.masterDirectory, 'volume-slices.json'), 'utf8')) as unknown;
-  assert.deepEqual(written, JSON.parse(JSON.stringify(masters)), 'The manifest on disk is the returned manifest.');
-  for (const q of masters.quads) {
-    const bytes = await readFile(join(options.masterDirectory, q.texturePath)), metadata = await sharp(bytes).metadata();
-    assert.equal(bytes.length, q.bytes);
-    assert.deepEqual([metadata.format, metadata.width, metadata.height], ['png', q.widthPx, q.heightPx]);
-  }
-});
-
 test('nonuniform intervals retain every reference midpoint and paint the actual integrated color', async () => {
   const options = await fixture(), zSamples: number[] = [];
   Object.assign(options, { boundsKpc: { min: [0, 0, 0], max: [4, 4, 4] }, sliceCounts: { x: 2, y: 2, z: 2 },

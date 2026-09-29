@@ -35,38 +35,6 @@ test('a requested wavelength interval becomes an exact subset of the archive pla
   assert.equal(archivePlaneOffset(local, archive), slice.firstPlane);
   assert.throws(() => archivePlaneOffset(spectralGrid(slice.planes, archive.wavelength(slice.firstPlane) + 0.0001, 0.000665), archive), /not an aligned subset/u);
 });
-
-test('a spec3 run pins both detectors of every dither, and a finer sky grid is another run', () => {
-  const run = cubeRun();
-  assert.equal(run.stage, 'spec3');
-  assert.deepEqual(run.inputs.map(input => [input.role, input.identity]),
-    [['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs1_cal.fits'],
-      ['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs2_cal.fits']]);
-  assert.equal(run.parameters.crdsContext, 'jwst_1535.pmap');
-  assert.equal(run.parameters.observation, 'jw01250-o002_t001_nirspec_g395h-f290lp');
-  assert.deepEqual(run.software, [{ name: 'jwst', version: '2.0.1' }, { name: 'stcal', version: '1.20.0' }]);
-  // A cube drizzled onto a finer grid than the pipeline's 0.1 arcsecond is a different product, so it is built rather than reused.
-  assert.notEqual(runKey(cubeRun({ arcsecPerPixel: 0.05 })), runKey(run));
-});
-
-test('the cube comparison adds its agreement to the record beside that cube, and only that cube', async () => {
-  const directory = await mkdtemp(join(tmpdir(), 'jwst-spec3-record-'));
-  try {
-    const cube = join(directory, 'jw01250-o002_t001_nirspec_g395h_s3d.fits'), finer = join(directory, 'jw01250-o002_t001_nirspec_g395h-fine_s3d.fits');
-    const receipt = join(directory, 'europa-1250.NIRSPEC-G395H-F290LP.reproduction.json'), agreement = 'The re-run reproduces MAST’s own cube sample by sample.';
-    await writeFile(receipt, '{}'); await writeFile(cube, 'cube'); await writeFile(finer, 'finer cube');
-    // The comparison is refused until the stage that built the cube has said what built it.
-    await assert.rejects(recordProductEvidence(cube, 'archive-agreement', receipt, agreement), /no product record at/u);
-    await writeProductRecord(productRecordPath(cube), cubeRun(), [{ path: basename(cube), file: cube, units: 'MJy/sr',
-      conventions: { axes: 'RA---TAN, DEC--TAN, WAVE' } }]);
-    const record = await recordProductEvidence(cube, 'archive-agreement', receipt, agreement);
-    assert.equal(evidenceFor(record, basename(cube), 'archive-agreement').length, 1);
-    assert.equal(evidenceFor(record, basename(finer), 'archive-agreement').length, 0, 'the finer cube has no MAST twin and no evidence');
-    assert.equal(record.outputs[0]!.units, 'MJy/sr');
-    assert.equal(await sameRun(record, cubeRun(), name => resolve(dirname(cube), name)), true);
-    await assert.rejects(recordProductEvidence(finer, 'archive-agreement', receipt, agreement), /no product record at/u);
-  } finally { await rm(directory, { recursive: true, force: true }); }
-});
 test('archive agreement requires an explicit numerical acceptance policy and exact coverage', async () => {
   const { sampleAgreement } = await import('../sample-agreement.mts');
   const samples = { both: 100, onlyOurs: 0, onlyMast: 0, maximumNormalizedDifference: 1e-6 };

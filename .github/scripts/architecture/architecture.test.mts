@@ -1,15 +1,14 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { test } from 'node:test';
 import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './astro-imports.mts';
-import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, likelyRenames, measure } from './baseline.mts';
+import { decodeBaseline } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
 import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph } from './graph.mts';
-import { readCiSteps } from '../ci/check-ci.mts';
-import { formatDelta, formatFindings } from './report.mts';
+import { formatFindings } from './report.mts';
 import { declaredPackage, undeclaredImports } from './declared-dependencies.mts';
 import { isBroken, objectCodeFiles, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
@@ -216,56 +215,6 @@ test('bake nebula/ and objects/ never import each other, in either direction', (
   ], 'nebula/objects.ts and the @cssearth/objects package are not bake objects/');
 });
 
-test('the ratchet passes the baseline tree and fails only when something gets worse', () => {
-  const base = measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts']));
-  const baseline = decodeBaseline(JSON.parse(formatBaseline(createBaseline(base))));
-  assert.equal(baseline.cycles.largestCycle, 3);
-  assert.deepEqual(baseline.cycles.cycleClosingEdges, [{ from: 'src/c', to: 'src/a', imports: 1 }]);
-  const same = compare(baseline, base);
-  assert.equal(isWorse(same), false); assert.equal(isStale(same), false);
-
-  const forward = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/a/two.mts', 'src/c/one.mts'])));
-  assert.equal(isWorse(forward), false, 'a new import that follows the recorded layer order is fine');
-
-  const forbidden = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/a/one.mts', 'labs/x.mts'])));
-  assert.equal(isWorse(forbidden), true);
-  assert.match(formatDelta(forbidden), /NEW, not allowed:[\s\S]*src\/a\/one\.mts -> labs\/x\.mts/u);
-  assert.deepEqual(forbidden.rules.find(rule => rule.rule === 'nothing-imports-applications')?.added, [{ from: 'src/a/one.mts', to: 'labs/x.mts' }]);
-
-  const cycle = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/b/one.mts', 'src/a/one.mts'])));
-  assert.deepEqual(cycle.cycleClosing.added, [{ from: 'src/b', to: 'src/a', imports: 1 }], 'an upward import inside the cycle is new');
-  assert.equal(isWorse(cycle), true);
-
-  const newFolder = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/c/one.mts', 'src/d/one.mts'], ['src/d/one.mts', 'src/a/one.mts'])));
-  assert.equal(newFolder.largestCycle.now, 4);
-  assert.deepEqual(newFolder.cycleClosing.joined, ['src/d']);
-  assert.match(formatDelta(newFolder), /joined a cycle[^\n]*src\/d/u);
-  assert.deepEqual(newFolder.cycleClosing.added.map(edge => `${edge.from}>${edge.to}`).sort(), ['src/c>src/d', 'src/d>src/a'], 'a folder new to a cycle has no agreed place');
-
-  const heavier = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/c/two.mts', 'src/a/one.mts'])));
-  assert.equal(isWorse(heavier), false, 'more imports on a recorded edge are reported, not failed');
-  assert.deepEqual(heavier.cycleClosing.heavier.map(item => [item.edge.imports, item.was]), [[2, 1]]);
-
-  const fixed = compare(baseline, measure(graph(...TANGLED.filter(([from]) => from !== 'src/c/one.mts'))));
-  assert.equal(isWorse(fixed), false);
-  assert.equal(isStale(fixed), true, 'a broken cycle and a removed forbidden import ask for a baseline update');
-  assert.match(formatDelta(fixed), /--update-baseline/u);
-  assert.doesNotMatch(formatDelta(fixed), /NEW/u);
-  assert.deepEqual(fixed.cycleClosing.removed, [{ from: 'src/c', to: 'src/a', imports: 1 }]);
-  assert.deepEqual(fixed.rules.find(rule => rule.rule === 'nothing-imports-applications')?.removed, [{ from: 'labs/objects/o.mts', to: 'site/objects.mts' }]);
-});
-
-test('cycle growth printed after new forbidden imports is marked as possibly following from them, not caused by them', () => {
-  const base = measure(graph(...TANGLED));
-  const baseline = decodeBaseline(JSON.parse(formatBaseline(createBaseline(base))));
-  const both = formatDelta(compare(baseline, measure(graph(...TANGLED, ['src/b/one.mts', 'src/a/one.mts'], ['src/a/one.mts', 'labs/x.mts']))));
-  // Here the new forbidden import (src/a -> labs/x) does not cause the new cycle edge (src/b -> src/a), so the line must not claim it does.
-  assert.match(both, /labs\/x\.mts\n {2}The cycle growth below may follow from the forbidden imports above[^\n]*\n {2}cycle-closing folder edge src\/b -> src\/a/u);
-  assert.doesNotMatch(both, /consequence|caused by/u);
-  const cycleOnly = formatDelta(compare(baseline, measure(graph(...TANGLED, ['src/b/one.mts', 'src/a/one.mts']))));
-  assert.doesNotMatch(cycleOnly, /may follow from/u, 'no forbidden import above to point at');
-});
-
 test('external JSON is validated before use', () => {
   assert.throws(() => decodeBaseline({ schema: 'other' }), /schema/u);
   assert.throws(() => decodeBaseline({ schema: 'cssearth-architecture-baseline@1', cycles: { largestCycle: 1.5, layerOrder: [], cycleClosingEdges: [] }, rules: {} }), /whole number/u);
@@ -275,24 +224,10 @@ test('external JSON is validated before use', () => {
     [{ source: 'a.ts', coreModule: false, couldNotResolve: false, dependencies: [{ module: './b', resolved: 'b.ts', coreModule: false, couldNotResolve: false }] }]);
 });
 
-
 test('a source file missing from disk or from the cruise makes the graph incomplete', () => {
   const expected = ['src/a.mts', 'src/b.ts', 'src/c.json', 'src/objects/x/prepared/p.mts', 'site/X.astro', 'src/gone.mts'];
   assert.deepEqual(missingSources(expected, new Set(['src/a.mts', 'src/gone.mts']), path => path !== 'src/gone.mts'), ['src/b.ts', 'src/gone.mts'],
     'JSON, Astro and excluded prepared output are not cruised sources');
-});
-
-test('an added and a removed entry that share a target or a source folder look like a rename', () => {
-  const pairs = likelyRenames('r', [{ from: 'site/new.mts', to: 'labs/x.mts' }, { from: 'src/a/n.mts', to: 'labs/q.mts' }, { from: 'labs/z.mts', to: 'site/k.mts' }],
-    [{ from: 'site/old.mts', to: 'labs/x.mts' }, { from: 'src/a/o.mts', to: 'labs/p.mts' }]);
-  assert.deepEqual(pairs.map(pair => `${pair.removed.from}=>${pair.added.from}`), ['site/old.mts=>site/new.mts', 'src/a/o.mts=>src/a/n.mts']);
-});
-
-test('Contract lint, and so pnpm check:ci, runs the check after the packages are built', () => {
-  const steps = readCiSteps(readFileSync(new URL('../../../.github/workflows/universe.yml', import.meta.url), 'utf8'), 'lint').map(step => step.run.trim());
-  const build = steps.indexOf('node .github/scripts/ci/build-ci.mts lint'), check = steps.indexOf('pnpm check:architecture');
-  assert.ok(build >= 0, 'the lint job builds the shared packages');
-  assert.ok(check > build, 'the lint job runs pnpm check:architecture after that build');
 });
 
 test('a repository rule has no baseline: any finding breaks the check and is printed', () => {

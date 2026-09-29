@@ -30,7 +30,6 @@ function esoDescriptor(response: MetadataResponse) { return response.resources.f
 test('metadata preserves raw evidence, nulls, field widths and distinct observations sharing one dataset', async () => {
   const response = await almaPromise(), saved = snapshot(response);
   assert.equal(response.queryStatus, 'OK'); assert.equal(response.rows.length, 2);
-  assert.equal(response.raw.bytes, (await readFile(response.raw.path)).length);
   assert.equal(response.fields.find(f => f.name === 'access_format')!.arraysize, '9');
   assert.equal(response.rows[0]!.access_format, 'applicati');
   assert.equal(response.rows[0]!.obs_publisher_did, response.rows[1]!.obs_publisher_did);

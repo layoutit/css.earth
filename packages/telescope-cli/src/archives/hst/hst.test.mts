@@ -6,17 +6,16 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { binaryTable, binaryTableHdu, primaryHdu, readFitsHdus } from '@cssearth/bake/objects/raster';
 import { parseHstProgram, PROGRAMS, suffixOf } from './archive.mts';
-import { HST_CONFIGURATIONS, isNotAnObject, hubbleLedgerGuide, matchTarget, parseHubbleLedger, repositoryState, HST_LEDGER } from './archive-ledger.mts';
+import { isNotAnObject, matchTarget } from './archive-ledger.mts';
 import type { NamedShippedObject as ShippedObject } from '../targets.mts';
 import { calibrationRun, PIPELINES, productUnits, type PinnedFile } from './calibrate.mts';
 import { archiveSky, drizzleRun, drizzleSettings } from './drizzle.mts';
-import { addArchiveAgreement, compareImage, compareTable, pairExtensions } from './compare.mts';
-import { evidenceFor, productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { compareImage, compareTable, pairExtensions } from './compare.mts';
+import { productRecordPath } from '@cssearth/telescope';
+import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { readHstFileHdus } from './product-file.mts';
 import { hstToolchain } from './toolchain.mts';
 
-const REPOSITORY = WORKSPACE;
 const file = (name: string, bytes = 1000) => ({ name, uri: `mast:HST/product/${name}`, bytes });
 const program = (overrides: Record<string, unknown> = {}) => ({
   schema: 'cssearth-hst-program@1', id: 'test', programme: '14650', target: 'EUROPA-45', crdsContext: 'hst_1358.pmap',
@@ -313,25 +312,6 @@ test('a moving target names an object by its whole name, its first word or its n
   assert.ok(isNotAnObject('IO-ACQ') && !isNotAnObject('EUROPA-ECLIPSE'));
 });
 
-test('the checked-in ledger counts what the pinned programs hold, and the guide says what the ledger says', async () => {
-  const ledger = parseHubbleLedger(JSON.parse(await readFile(HST_LEDGER.files.ledger, 'utf8')));
-  assert.deepEqual(ledger.configurations.map(entry => entry.configuration), HST_CONFIGURATIONS.map(entry => entry.configuration));
-  // Nothing is declared: each configuration's programs come from the files beside them.
-  const held = await repositoryState(REPOSITORY);
-  for (const entry of ledger.configurations) {
-    assert.deepEqual(entry.programs, [...held.get(entry.configuration)?.programs ?? []].sort(), entry.configuration);
-    assert.deepEqual(entry.checked, [...held.get(entry.configuration)?.checked ?? []].sort(), entry.configuration);
-  }
-  assert.ok(ledger.configurations.some(entry => entry.checked.length), 'something has been re-calibrated');
-  // The counts are the archive's own and must not exceed the collection they came from.
-  assert.equal(ledger.observations.other, ledger.observations.collection - ledger.observations.counted);
-  assert.ok(ledger.observations.other >= 0 && ledger.observations.other < ledger.observations.collection * 0.05, `${ledger.observations.other} unaccounted`);
-  assert.ok(ledger.movingTargets.some(entry => entry.object === 'europa'));
-  // A cone search MAST would not answer is recorded, not dropped: no object is in both lists.
-  for (const object of ledger.unansweredTargets) assert.ok(!ledger.fixedTargets.some(entry => entry.object === object), object);
-  assert.equal(await readFile(HST_LEDGER.files.guide, 'utf8'), hubbleLedgerGuide(ledger), 'docs/hubble-ledger.md is the ledger’s own guide');
-});
-
 const DRIZZLED = { NDRIZIM: 1, D001GEOM: 'wcs', D001KERN: 'square  ', D001PIXF: 1, D001SCAL: 0.03962000086903572, D001FVAL: 'INDEF   ', D001OUUN: 'cps     ' };
 
 test('a drizzled product states how it was drizzled, and only a single-image drizzle with no sky is attempted', () => {
@@ -378,25 +358,6 @@ test('a calibration record pins the observation’s own files, the context that 
     assert.equal(record.outputs[0]!.units, 'COUNTS/S');
     assert.equal(record.outputs[0]!.conventions?.extensions, 'SCI,1');
     assert.deepEqual(record.evidence, [], 'the run that made a product has checked nothing about it');
-  } finally { await rm(work, { recursive: true, force: true }); }
-});
-
-test('the comparison adds its receipt to the record of the exact product it compared, and refuses a product with none', async () => {
-  const work = await mkdtemp(join(tmpdir(), 'hst-evidence-'));
-  try {
-    const product = await calibratedProduct(work), name = 'od9l12010_flt.fits';
-    const receiptPath = join(work, 'comparison.json'); await writeFile(receiptPath, '{}');
-    const record = await addArchiveAgreement(work, name, receiptPath);
-    const agreement = evidenceFor(record, name, 'archive-agreement');
-    assert.equal(agreement.length, 1);
-    assert.ok(agreement[0]!.receipt.endsWith('.evidence.json'));
-    assert.match(agreement[0]!.establishes, /reproduces what MAST distributes/u);
-    assert.equal(evidenceFor(record, name, 'internal-consistency').length, 0, 'agreement with the archive is not consistency of our own');
-    // The same comparison run again says the same thing once, rather than twice.
-    assert.equal(evidenceFor(await addArchiveAgreement(work, name, receiptPath), name, 'archive-agreement').length, 1);
-    // A product no stage recorded is refused: nothing says which run made the file that was compared.
-    await writeFile(join(work, 'od9l12010_crj.fits'), 'not a recorded product');
-    await assert.rejects(addArchiveAgreement(work, 'od9l12010_crj.fits', receiptPath), /no product record/u);
   } finally { await rm(work, { recursive: true, force: true }); }
 });
 

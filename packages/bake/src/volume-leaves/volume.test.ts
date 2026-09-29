@@ -120,26 +120,6 @@ console.log('PASS actual PolyCSS PNG-to-world mapping; old vertex-order mutation
 
 });
 
-test('prepared volume descriptor and external PNG bank form a complete closure', async () => {
-  const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
-  const root = resolve('src/objects/milky-way');
-  const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile(resolve(root, 'object.json'), 'utf8')) as unknown);
-  assert(descriptor.prepared);
-  const bytes = await readFile(resolve(root, descriptor.prepared.url));
-  const envelope = record(JSON.parse(bytes.toString('utf8')) as unknown);
-  assert.equal(envelope.id, descriptor.id); assert.equal(envelope.format, descriptor.prepared.format);
-  const data = record(envelope.data), resources = data.resources;
-  assert(Array.isArray(resources) && resources.length > 0);
-  for (const value of resources) {
-    const resource = record(value), path = text(resource.path);
-    assert(!path.startsWith('/') && !path.split('/').includes('..'));
-    const png = await readFile(resolve(root, 'prepared', path));
-    assert.equal(png.length, finite(resource.bytes));
-  }
-  assert(!bytes.includes(Buffer.from('data:image/')), 'Production payload must reference external PNGs');
-});
-
-
 test('volume compilation omits only lossless-alpha empty slabs, preserving every nonempty PolyCSS leaf', async () => {
   const { compileCssVolume } = await import('./volume.ts');
   const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');

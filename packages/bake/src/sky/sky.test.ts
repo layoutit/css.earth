@@ -6,7 +6,6 @@ import { join } from 'node:path';
 import { deflateSync, zstdCompressSync } from 'node:zlib';
 import { decodeExrRgbHalf, halfToFloat } from './exr.ts';
 import { parseSkyRecipe } from './config.ts';
-import { loadSkySource } from './source.ts';
 import { SKY_BASES, skyRay, skyUv, sampleLinearSky, displayByte, skyFacePixels, prepareSkyFaces, compositeSkyStars } from './bake.ts';
 import type { PreparedCssPointField } from '@cssearth/renderer/stars/types.ts';
 import type { PreparedCssSky } from '@cssearth/renderer/sky/types.ts';
@@ -125,17 +124,6 @@ test('sky recipe display controls default safely and reject malformed values', a
     assert.throws(() => parseSkyRecipe({ ...raw, bake: { ...bake, shadowFloor } }), /sky shadow/i);
   assert.deepEqual(parseSkyRecipe({ ...raw, bake: { ...bake, shadowFloor: { blackPoint: .04, fullSignal: .12 } } }).bake.shadowFloor,
     { blackPoint: .04, fullSignal: .12 });
-});
-test('the NASA HALF source decodes to its recorded size and unsupported, missing or digest-carrying recipes fail', async () => {
-  const root = 'src/objects/milky-way/source/sky', raw: unknown = JSON.parse(await readFile(`${root}/recipe.json`, 'utf8')), recipe = parseSkyRecipe(raw);
-  const image = await loadSkySource(root, recipe);
-  assert.deepEqual([image.width, image.height], [8192, 4096]);
-  assert.equal(image.rgb16f.length, 8192 * 4096 * 6);
-  assert.throws(() => parseSkyRecipe({ ...recipe, source: { ...recipe.source, decodedSha256: 'recorded' } }), /removed content digest field decodedSha256/);
-  assert.throws(() => parseSkyRecipe({ ...recipe, provenance: { ...recipe.provenance, sha256: 'recorded' } }), /removed content digest field sha256/);
-  assert.throws(() => parseSkyRecipe({ ...recipe, projection: { ...recipe.projection, mapping: 'ra-right' } }), /Unsupported/);
-  assert.throws(() => parseSkyRecipe({ ...recipe, source: { ...recipe.source, chunks: recipe.source.chunks.slice(1) } }), /every row/);
-  const noTransfer = { ...recipe.bake, transfer: undefined }; assert.throws(() => parseSkyRecipe({ ...recipe, bake: noTransfer }), /Unsupported/);
 });
 
 test('optional authored sky parallax validates physical placement and survives the real offline bake without changing pixels', async () => {

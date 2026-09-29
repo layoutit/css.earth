@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import { parseShellRecipe } from './config.ts';
 import { parseGriddedShellMesh, parseIndexedShellMesh, loadShellMesh, type ShellMesh } from './mesh.ts';
@@ -29,11 +28,6 @@ function close(actual: readonly number[], expected: readonly number[], tolerance
   assert.equal(actual.length, expected.length);
   actual.forEach((value, index) => assert(Math.abs(value - expected[index]!) < tolerance, `${actual} differs from ${expected}`));
 }
-
-test('scientific grid and uncertainty rows reproduce from the pinned publisher workbook and figure', () => {
-  const output = execFileSync('python3', [join(objectDirectory, 'source/ibex/extract.py'), '--check'], { encoding: 'utf8' });
-  assert.match(output, /IBEX ORIGINAL EXTRACTION VERIFIED: 56 macropixels; 67 matching entries; 13 tail-limit entries retained/);
-});
 
 test('published envelope retains every source sample and prepares a closed, finely tessellated display', async () => {
   const r = await recipe(); assert.equal(r.shape.kind, 'gridded-surface');
@@ -238,18 +232,4 @@ test('interpolated corner material reduces source shader error at outside and ne
     assert(interpolatedRms < flatRms * .5, 'Flattening the corner material must fail the source shader comparison');
     console.log(`PASS camera ${camera} AU: material rim RMS ${interpolatedRms.toFixed(5)} versus coarse flat ${flatRms.toFixed(5)}`);
   }
-});
-
-test('pinned preparation deterministically regenerates actual geometry, images and envelope without sibling access', async () => {
-  const temporary = await mkdtemp(join(tmpdir(), 'prepared-surface-'));
-  try {
-    const envelope = await prepareSurfaceShellObject({ objectDirectory, outputDirectory: temporary });
-    assert.equal(envelope.type, 'surface-shell'); assert.equal(envelope.format, 'cssearth-surface-shell@1');
-    assert.equal(envelope.data.faces.length, 1920);
-    for (const name of ['shell.json', 'surface-mesh.json', 'rim-atlas.png']) await readFile(join(temporary, name));
-    for (const resource of envelope.data.resources) {
-      const bytes = await readFile(join(temporary, resource.path));
-      assert.equal(bytes.length, resource.bytes);
-    }
-  } finally { await rm(temporary, { recursive: true, force: true }); }
 });

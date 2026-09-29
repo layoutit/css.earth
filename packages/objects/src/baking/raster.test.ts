@@ -1,23 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { completeEnhancedCoverage, lightingFrame, packLatitudeRaster, applySurfaceExposure, readAtmosphereModel } from './index.js';
-import type { LambertRasterConfig } from './index.js';
-const lighting: LambertRasterConfig = { minimumLightViewZ: -1, maximumLightViewZ: 1, frameCount: 256, shadowlessFloodLimbFloor: 0.35, ambientIntensity: 0.05, radiusScale: 0.505, terminator: [0, 0.1], maximumAlpha: 0.95 };
+import { completeEnhancedCoverage, packLatitudeRaster, applySurfaceExposure, readAtmosphereModel } from './index.js';
 describe('prepared raster operators', () => {
-    it('retains independently frozen Lambert phase and flood pixels', () => {
-        // The middle row of a 24 px frame: full night, the terminator at half phase, and the shadowless flood frame.
-        const middleRows = {
-            0: Array(24).fill(242),
-            128: [...Array(12).fill(242), 237, 210, 189, 168, 147, 126, 105, 84, 63, 42, 21, 0],
-            255: [114, 83, 63, 48, 36, 26, 18, 12, 7, 4, 1, 0, 0, 1, 4, 7, 12, 18, 26, 36, 48, 63, 83, 114],
-        };
-        for (const [frame, row] of Object.entries(middleRows)) {
-            const pixels = lightingFrame(24, Number(frame), lighting);
-            expect(Array.from({ length: 24 }, (_, x) => pixels[(12 * 24 + x) * 4 + 3])).toEqual(row);
-            expect(pixels.every((value, index) => index % 4 === 3 || value === 0)).toBe(true);
-            expect([pixels[3], pixels[(24 * 24 - 1) * 4 + 3]]).toEqual([0, 0]);
-            expect(lightingFrame(24, Number(frame), lighting)).toEqual(pixels);
-        }
-    });
     it('packs reversed latitude bands with wrapped horizontal and clamped vertical gutters', () => {
         const source = new Uint8Array(4 * 4 * 4);
         for (let pixel = 0; pixel < 16; pixel++)

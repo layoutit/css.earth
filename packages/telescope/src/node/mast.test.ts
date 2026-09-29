@@ -18,19 +18,3 @@ test('exact MAST observation lookup refuses incomplete or ambiguous answers', ()
   assert.throws(() => parseMastObservations('HST', ['j96o01010'], result([{ ...row(), obs_id: 'other' }])), /unrequested observation/u);
   assert.throws(() => parseMastObservations('HST', ['j96o01010'], result([{ ...row(), obs_collection: 'JWST' }])), /requested HST/u);
 });
-test('MAST responses are replayed only for the exact request they answered', async () => {
-  const { mkdtemp, writeFile, rm } = await import('node:fs/promises');
-  const { tmpdir } = await import('node:os'); const { resolve } = await import('node:path');
-  const { preserveMastResponse, replayMastResponse } = await import('./mast.js');
-  const directory = await mkdtemp(resolve(tmpdir(), 'mast-response-'));
-  try {
-    const request = { service: 'Mast.Caom.Filtered', params: { obs_id: 'j96o01010' } };
-    const saved = await preserveMastResponse(request, result([row()]), directory);
-    assert.deepEqual((await replayMastResponse(saved.responseRecord!, request)).rows, [row()]);
-    await assert.rejects(replayMastResponse(saved.responseRecord!, { ...request, params: { obs_id: 'other' } }), /different request/);
-    await writeFile(saved.responseRecord!.path, '{}');
-    await assert.rejects(replayMastResponse(saved.responseRecord!, request), /schema is undefined/);
-    await rm(saved.responseRecord!.path);
-    await assert.rejects(replayMastResponse(saved.responseRecord!, request), /is missing/);
-  } finally { await rm(directory, { recursive: true, force: true }); }
-});

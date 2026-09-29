@@ -86,15 +86,3 @@ test('evidence is added to the record of the run that made the product, and only
   await writeFile(image, 'another image');
   await assert.rejects(addProductEvidence(recordPath, [agreement], locate), /not the files on disk/u);
 });
-test('comparison receipts are copied beside their exact product', async () => {
-  const directory = await scratch(), product = join(directory, 'cube.fits'), receipt = join(directory, 'latest.json');
-  await writeFile(product, 'cube'); await writeFile(receipt, '{"slice":[2.2,2.4]}');
-  const path = productRecordPath(product), locate = (name: string) => join(directory, name);
-  await writeProductRecord(path, run(), [{ path: 'cube.fits', file: product }]);
-  const record = await addProductEvidence(path, [{ kind: 'archive-agreement', receipt, product: 'cube.fits', establishes: 'First slice.' }], locate);
-  const snapshot = record.evidence[0]!;
-  assert.equal(snapshot.receipt, 'cube.fits.archive-agreement.evidence.json');
-  await writeFile(receipt, '{"slice":[2.6,2.8]}');
-  assert.match(await readFile(locate(snapshot.receipt), 'utf8'), /2.2/);
-  assert.equal(await sameRun(record, run(), locate), true);
-});

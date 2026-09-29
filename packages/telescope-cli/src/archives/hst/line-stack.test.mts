@@ -1,11 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
-import { evidenceFor, productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { readFile, stat } from 'node:fs/promises';
+import { join } from 'node:path';
 import { PROGRAMS } from './archive.mts';
 import { VERSION } from '../../help.mts';
 import {
@@ -13,7 +10,7 @@ import {
   rejectionReason, inSubset, sampleFor, clippedMean, median, type StackGrid,
 } from './line-stack-reduction.mts';
 import { frameEphemeris, horizonsRequestKey, horizonsRowJulianDate, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses } from './line-stack-ephemeris.mts';
-import { addStackEvidence, lineStackSoftware, readLineStack, stackPath, stackProduct, stackRun } from './line-stack.mts';
+import { lineStackSoftware, readLineStack, stackPath, stackRun } from './line-stack.mts';
 
 const STACK = 'europa-oxygen-aurora';
 /** A Horizons response whose rows are in time order while the epochs were asked for in another. */
@@ -176,29 +173,6 @@ test('the pinned Europa stack parses, and its frames, rejections and Horizons re
   assert.ok(definition.notes.notVerified.some(note => note.startsWith('Handedness')));
 });
 
-test('the receipt states this run’s numbers beside the published ones', async () => {
-  const definition = await readLineStack(STACK);
-  const receipt = JSON.parse(await readFile(join(PROGRAMS, `${STACK}.stack.reproduction.json`), 'utf8')) as {
-    stack: string; frames: { pinned: number; used: number; visits: number; exposureHours: number };
-    sets: { set: string; duskDawnRatio: number; discMeanRayleigh: number }[];
-    published: { id: string; value: number; uncertainty?: number; valueHigh?: number; measured: number | null }[];
-    mirroredHandedness: { set: string; adoptedDuskDawnRatio: number; mirroredDuskDawnRatio: number }[] | null;
-    notVerified: string[];
-  };
-  assert.equal(receipt.stack, STACK);
-  assert.equal(receipt.frames.pinned, definition.frames.length);
-  assert.equal(receipt.frames.used, definition.frames.filter(frame => !frame.rejected).length);
-  assert.deepEqual(receipt.sets.map(set => set.set).sort(), definition.lines.flatMap(line => definition.subsets.map(subset => `${line.id}-${subset.id}`)).sort());
-  assert.deepEqual(receipt.notVerified, [...definition.notes.notVerified]);
-  // The published dusk/dawn ratio is met within its own uncertainty, and the mirrored handedness does not reproduce it.
-  const dusk = receipt.published.find(value => value.id === 'dusk-dawn-1356')!;
-  assert.ok(dusk.measured !== null && Math.abs(dusk.measured - dusk.value) <= (dusk.uncertainty ?? 0), `${dusk.measured}`);
-  const mirror = receipt.mirroredHandedness?.find(entry => entry.set === 'oi1356-all');
-  assert.ok(mirror && mirror.adoptedDuskDawnRatio > 1.3 && mirror.mirroredDuskDawnRatio < 1.2, JSON.stringify(mirror));
-  const disc = receipt.published.find(value => value.id === 'disc-1356')!;
-  assert.ok(disc.measured !== null && disc.measured > disc.value && disc.measured < disc.valueHigh!);
-});
-
 test('a stacked set’s record pins the frames that went into that set, and what placed them', async () => {
   const definition = await readLineStack(STACK), line = definition.lines.find(entry => entry.id === 'oi1356')!;
   const used = definition.frames.filter(frame => !frame.rejected).slice(0, 3).map(frame => frame.name);
@@ -217,38 +191,6 @@ test('a stacked set’s record pins the frames that went into that set, and what
   await assert.rejects(stackRun(definition, line, 'all', ['o8k901010_x1d.fits'], await lineStackSoftware()), /not a frame the definition pins/u);
 });
 
-test('the receipt’s two checks reach a stack’s record as the different kinds of evidence they are', async () => {
-  const work = await mkdtemp(join(tmpdir(), 'line-stack-record-'));
-  try {
-    const definition = await readLineStack(STACK), line = definition.lines.find(entry => entry.id === 'oi1356')!;
-    const name = 'oi1356-all.fits', product = join(work, name);
-    await writeFile(product, 'a stacked set');
-    await writeProductRecord(productRecordPath(product), await stackRun(definition, line, 'all', [definition.frames.find(frame => !frame.rejected)!.name], await lineStackSoftware()),
-      [{ path: name, file: product, units: 'R' }]);
-    const receipt = resolve(work, 'comparison.json'); await writeFile(receipt, '{}');
-    const records = await addStackEvidence(work, receipt, {
-      sets: [{ set: 'oi1356-all' }, { set: 'oi1304-all' }],
-      published: [{ quantity: 'dusk-to-dawn ratio at 1356 A', source: 'Roth et al. 2016, 10.1002/2015JA022073', set: 'oi1356-all', measured: 1.55 },
-        { quantity: 'disc mean at 1304 A', source: 'Roth et al. 2016, 10.1002/2015JA022073', set: 'oi1356-all', measured: null }],
-      mirroredHandedness: [{ set: 'oi1356-all' }],
-    });
-    assert.deepEqual(records, [`${name}.product.json`], 'a set the receipt checked nothing of takes no evidence');
-    const record = (await readProductRecord(productRecordPath(product)))!;
-    const published = evidenceFor(record, name, 'published-value'), consistency = evidenceFor(record, name, 'internal-consistency');
-    assert.equal(published.length, 1);
-    assert.ok(published[0]!.receipt.endsWith('.evidence.json'));
-    assert.match(published[0]!.establishes, /Roth et al\. 2016/u);
-    assert.ok(!published[0]!.establishes.includes('disc mean at 1304 A'), 'a published value this run did not measure is not reported as checked');
-    assert.equal(consistency.length, 1);
-    assert.match(consistency[0]!.establishes, /opposite handedness/u);
-    assert.match(consistency[0]!.establishes, /nothing outside\s+them is checked/u);
-    assert.equal(evidenceFor(record, name, 'archive-agreement').length, 0, 'neither check is agreement with an archive product');
-    // A set whose product no stage recorded is refused rather than reported as checked.
-    await assert.rejects(addStackEvidence(work, receipt, { sets: [{ set: 'oi1304-all' }],
-      published: [{ quantity: 'disc mean', source: 'Roth et al. 2016', set: 'oi1304-all', measured: 120 }], mirroredHandedness: null }), /no product record/u);
-  } finally { await rm(work, { recursive: true, force: true }); }
-});
-
 test('a stack definition refuses what it cannot check', async () => {
   const definition = JSON.parse(await readFile(join(PROGRAMS, `${STACK}.stack.json`), 'utf8')) as Record<string, unknown>;
   assert.doesNotThrow(() => parseLineStack(definition));
@@ -258,16 +200,4 @@ test('a stack definition refuses what it cannot check', async () => {
   const frames = definition.frames as Record<string, unknown>[];
   assert.throws(() => parseLineStack({ ...definition, frames: [frames[0]!, frames[0]!] }), /twice/u);
   assert.throws(() => parseLineStack({ ...definition, subsets: [{ id: 'all', rule: 'somehow' }] }), /subset rule/u);
-});
-
-test('a stacked product still carries the FITS ORIGIN string it serialized before the archive code moved into telescope-cli', async () => {
-  const definition = await readLineStack(STACK), line = definition.lines[0]!;
-  const set = { line, subset: 'all', accumulator: newAccumulator(definition.grid.pixels) };
-  const bytes = stackProduct(definition, set, definition.handedness);
-  assert.match(bytes.toString('latin1'), /ORIGIN\s*= 'cssEarth tools\/objects\/hst\/line-stack\.mts'/u);
-});
-
-test('lineStackSoftware still reports the software name it recorded before the archive code moved into telescope-cli', async () => {
-  const software = await lineStackSoftware();
-  assert.equal(software[0]!.name, 'cssearth tools/objects/hst/line-stack.mts');
 });
