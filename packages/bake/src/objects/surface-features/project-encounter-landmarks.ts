@@ -1,4 +1,4 @@
-import { sha256 } from '@cssearth/core/node';
+import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
 import { decodeEncounterFits, encounterCamera, validateEncounterControls } from '../layers/terrestrial/index.ts';
@@ -26,7 +26,7 @@ const safePath = (base: string, path: unknown, at: string) => {
 };
 const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 
-interface Input { readonly id: string; readonly path: string; readonly bytes: number; readonly sha256: string; readonly absolute: string; }
+interface Input { readonly id: string; readonly path: string; readonly bytes: number; readonly absolute: string; }
 interface Entry { readonly id: string; readonly name: string; readonly kind: 'point' | 'region'; readonly type: string; readonly pixel: Pixel; readonly minimumZoomShare: number; readonly description: string; readonly qualification: string; readonly reference: RecordValue; readonly maximumDisplayDistanceMeters: number; readonly maximumSensitivityMeters: number; }
 interface Configuration { readonly source: string; readonly frame: string; readonly inputs: readonly Input[]; readonly nativeImageId: string; readonly cameraControlId: string; readonly shapeId: string; readonly shapeProfile: RecordValue; readonly stages: readonly unknown[]; readonly entries: readonly Entry[]; }
 export interface EncounterLandmarkCamera { readonly positionMeters: readonly number[]; ray(x: number, y: number): readonly number[]; }
@@ -39,7 +39,7 @@ export function transformImageControlStages(stages: readonly ImageControlsFit[],
 function parseConfiguration(value: unknown, sourceDirectory: string): Configuration {
   const config = record(value, 'encounter landmark configuration');
   if (config.schema !== 'cssearth-encounter-landmarks@1') throw new TypeError('Unsupported encounter-landmarks schema.');
-  if (!Array.isArray(config.inputs) || !config.inputs.length) throw new TypeError('Encounter landmarks need pinned inputs.');
+  if (!Array.isArray(config.inputs) || !config.inputs.length) throw new TypeError('Encounter landmarks need inputs.');
   const ids = new Set<string>();
   const inputs = config.inputs.map((value, index): Input => {
     const input = record(value, `encounter landmark input ${index}`), id = text(input.id, 'encounter landmark input id');
@@ -47,11 +47,10 @@ function parseConfiguration(value: unknown, sourceDirectory: string): Configurat
     ids.add(id);
     const bytes = finite(input.bytes, `encounter landmark input ${id} bytes`);
     if (!Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError('Encounter landmark input bytes must be a positive integer.');
-    const digest = text(input.sha256, `encounter landmark input ${id} SHA-256`);
-    if (!/^[a-f0-9]{64}$/u.test(digest)) throw new TypeError('Encounter landmark input SHA-256 must be lowercase hexadecimal.');
-    return { id, path: text(input.path, `encounter landmark input ${id} path`), bytes, sha256: digest, absolute: safePath(sourceDirectory, input.path, `encounter landmark input ${id} path`) };
+    if ('sha256' in input) throw new TypeError(`Encounter landmark input ${id} sha256 is refused: git and the source mirror identify input bytes.`);
+    return { id, path: text(input.path, `encounter landmark input ${id} path`), bytes, absolute: safePath(sourceDirectory, input.path, `encounter landmark input ${id} path`) };
   });
-  const inputId = (value: unknown, at: string) => { const id = text(value, at); if (!ids.has(id)) throw new TypeError(`${at} must identify a pinned input.`); return id; };
+  const inputId = (value: unknown, at: string) => { const id = text(value, at); if (!ids.has(id)) throw new TypeError(`${at} must identify a declared input.`); return id; };
   if (!Array.isArray(config.stages) || !config.stages.length) throw new TypeError('Encounter landmarks need one or more image-control stages.');
   const entriesInput = config.entries;
   if (!Array.isArray(entriesInput) || !entriesInput.length) throw new TypeError('Encounter landmarks need entries.');
@@ -76,11 +75,12 @@ function parseConfiguration(value: unknown, sourceDirectory: string): Configurat
     shapeProfile: record(config.shapeProfile, 'encounter landmark shape profile'), stages: config.stages, entries };
 }
 
-async function checkedInputs(configuration: Configuration) {
+async function checkedInputs(objectId: string, configuration: Configuration) {
   const values = new Map<string, Buffer>();
   for (const input of configuration.inputs) {
+    if (!existsSync(input.absolute)) throw new TypeError(`${objectId}: encounter landmark input ${input.id} path ${input.path} is missing from the source directory.`);
     const bytes = await readFile(input.absolute);
-    if (bytes.length !== input.bytes || sha256(bytes) !== input.sha256) throw new TypeError(`Pinned encounter landmark input changed: ${input.id}.`);
+    if (bytes.length !== input.bytes) throw new TypeError(`${objectId}: encounter landmark input ${input.id} path ${input.path} holds ${bytes.length} bytes; image-registration.json bytes records ${input.bytes}.`);
     values.set(input.id, bytes);
   }
   return values;
@@ -141,7 +141,7 @@ export async function projectEncounterLandmarks(objectId: string, write = false)
   if (!/^[a-z0-9-]+$/u.test(objectId)) throw new TypeError('Object id must be lowercase letters, digits and hyphens.');
   const sourceDirectory = resolve(root, 'src/objects', objectId, 'source');
   const configuration = parseConfiguration(JSON.parse(await readFile(resolve(sourceDirectory, 'features/image-registration.json'), 'utf8')), sourceDirectory);
-  const inputs = await checkedInputs(configuration), get = (id: string) => { const value = inputs.get(id); if (!value) throw new TypeError(`Missing checked input ${id}.`); return value; };
+  const inputs = await checkedInputs(objectId, configuration), get = (id: string) => { const value = inputs.get(id); if (!value) throw new TypeError(`Missing checked input ${id}.`); return value; };
   const cameraControl = record(JSON.parse(get(configuration.cameraControlId).toString('utf8')), 'encounter camera control');
   const decoded = decodeEncounterFits(get(configuration.nativeImageId), cameraControl.observation);
   const camera = encounterCamera(decoded.header, cameraControl.camera);
@@ -159,7 +159,7 @@ export async function projectEncounterLandmarks(objectId: string, write = false)
     entries: anchors.map(({ entry, pointMeters }) => ({ id: entry.id, name: entry.name, kind: entry.kind, type: entry.type, position: { pointMeters, maximumDistanceMeters: entry.maximumDisplayDistanceMeters }, minimumZoomShare: entry.minimumZoomShare,
       description: entry.description, qualification: entry.qualification, reference: assertReference(entry.reference) })) };
   const evidence = { schema: 'cssearth-encounter-landmark-evidence@1', objectId, source: configuration.source, frame: configuration.frame,
-    inputs: configuration.inputs.map(({ id, path, bytes, sha256 }) => ({ id, path, bytes, sha256 })), registration,
+    inputs: configuration.inputs.map(({ id, path, bytes }) => ({ id, path, bytes })), registration,
     stages: stageFits.map((stage, index) => ({ index, model: stage.model, coefficients: stage.coefficients, stats: stage.stats, residuals: stage.residuals,
       acceptance: { thresholdPartitions: ['fit', 'holdout'], metrics: 'Both fit and holdout RMS and maximum residuals must satisfy the configured thresholds.' } })),
     anchors: anchors.map(({ entry, nativePixel, pointMeters, sourceFace, emissionDegrees, sensitivity }) => ({ id: entry.id, name: entry.name, sourcePixel: entry.pixel, nativePixel, pointMeters, sourceFace, emissionDegrees, sensitivityMeters: sensitivity,

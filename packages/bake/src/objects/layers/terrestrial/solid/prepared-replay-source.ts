@@ -25,7 +25,9 @@ const parseReplayRings:Decoder<ReplayRings>=shape({leaves:array(leaf),resource:s
 export const parseSolidReplayScene:Decoder<SolidReplayScene>=shape({rings:optional(parseReplayRings),camera:cameraPlan,sky:validatePreparedCubicSky,
   sun:validateDirectionalSunPlan,systemTransform:text,bodyLeaves:array(leaf),
   surfaceTriangles:optional(array(array(array(number)))),surfaceLensRanges:optional(array(shape({lensId:text,start:number,count:number})))});
-const asset=shape({url:text,width:number,height:number,bytes:number,sha256:text});
+/** Git and the runtime inventory identify every prepared byte; a digest recorded beside an asset is refused. */
+const absent=(value:unknown):undefined=>{if(value!==undefined)throw new TypeError(`is a recorded digest (${JSON.stringify(value)}); prepared assets carry none`);return undefined;};
+const asset=shape({url:text,width:number,height:number,bytes:number,sha256:absent});
 const surfaceFields=shape({id:text,textureScale:optional(number),displaySampling:optional(text),map:asset,surface:asset,thumbnail:asset,
   polesUrl:optional(text),shadowSurface:optional(asset),layout:value=>value});
 const surface:Decoder<import('./solid-contract.ts').SolidSurface>=(value:unknown)=>Object.assign({},requireRecord(value),surfaceFields(value));

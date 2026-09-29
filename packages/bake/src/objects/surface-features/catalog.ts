@@ -70,7 +70,7 @@ export interface PreparedSurfaceFeatureCatalog {
   readonly features: readonly PreparedSurfaceFeature[];
 }
 
-export interface SurfaceFeatureCatalogDescriptor { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
+export interface SurfaceFeatureCatalogDescriptor { readonly url: string; readonly bytes: number; readonly count: number; }
 
 export interface SurfaceFeatureSelectionPlan { readonly count: number; readonly banks: readonly SurfaceFeatureCatalogDescriptor[]; }
 

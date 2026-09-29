@@ -249,10 +249,10 @@ export function provenanceProducts({id, recipes, manifest: inputManifest, lenses
       else if (geographic?.noise?.pin.id === lens.id) {
         const { pin, prepared, directory } = geographic.noise;
         add(lens.id, 'paged-ellipsoid', '/geographic/noise', [`${directory}/manifest.json`, `${directory}/${pin.file}`],
-          'Decode the pinned GeoJSON, validate coordinates and period, rasterize source-colored polygons, then prepare geographic texture pages.', {
+          'Decode the declared GeoJSON, validate coordinates and period, rasterize source-colored polygons, then prepare geographic texture pages.', {
             urls: [...urls(prepared.roots), prefix + id + '-lens-noise.webp'],
             observationAttribution: 'none', interpretation: { kind: 'modeled-noise', year: pin.year, period: pin.period, units: pin.units,
-              decodedSourceSha256: pin.decodedSha256, qualification: pin.qualification },
+              qualification: pin.qualification },
           });
       }
       // Geographic pages carry a separate release/receipt; never infer their

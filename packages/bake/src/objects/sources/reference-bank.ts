@@ -1,5 +1,5 @@
 /**
- * Shared reference banks: one pinned copy of a standard table every body reads, under `src/references/<set>/`, instead of
+ * Shared reference banks: one copy of a standard table every body reads, under `src/references/<set>/`, instead of
  * a copy in each body that uses it. A bank's `manifest.json` has the shape of a body's source manifest and is verified the
  * same way, under the identity `reference-<set>`, as the SPICE kernel banks are (`kernel-banks.ts` in objects/cameras).
  */
@@ -31,7 +31,7 @@ export function referenceBankRoot(set: string) {
 export const openReferenceBank = (set: string) =>
   createSourceManifest({ objectId: `reference-${set}`, objectName: `${set} reference bank`, sourceRoot: referenceBankRoot(set) });
 
-/** A pinned file of a bank, checked against its pin. */
+/** A file the bank's manifest declares, read after the manifest validates its path. */
 export async function readReferenceBankFile(set: string, path: string) {
   const bank = await openReferenceBank(set);
   await bank.validatePath(path);

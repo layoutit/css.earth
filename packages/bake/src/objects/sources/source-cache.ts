@@ -1,4 +1,4 @@
-// Shared content-addressed mirror lookup, used wherever a pinned publisher byte stream (a facility volume preview, a
+// Shared source-mirror lookup, used wherever a declared publisher byte stream (a facility volume preview, a
 // source acquisition download, …) should be tried against our own reliable storage before the original host. The
 // publisher URL always stays the recorded provenance; the mirror only saves a slow or unreliable third party from
 // blocking a build.

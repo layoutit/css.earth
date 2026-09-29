@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import type {LayeredPresentationRecipe} from './presentation-recipe.ts';
 
 function declarations(stylesheet: string, selector: string): Record<string,string> {
@@ -23,5 +22,5 @@ export function prepareLayeredLeafLayouts({scene,stylesheet,config}: {scene: {in
     if(!material['background-size']?.split(/\s+/).every(value=>pixelLength.test(value)))throw new Error('Prepared shell background layout must use pixel lengths.');
     classes[shell.className]={width,height,backgroundSize:material['background-size']};
   }
-  return {schema:'cssearth-prepared-leaf-layouts@1',sources:{[config.stylesheet.path]:sha256},classes};
+  return {schema:'cssearth-prepared-leaf-layouts@1',sources:[config.stylesheet.path],classes};
 }

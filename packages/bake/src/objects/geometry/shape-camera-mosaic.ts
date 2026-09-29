@@ -1,5 +1,4 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import { sha256 } from '@cssearth/core/node';
 import { parseControlledCamera, parseCameraFrame, parseCameraShape } from './shape-records.ts';
 type Vector = readonly number[] | Float32Array | Float64Array;
 export interface CameraImage {data:Float32Array | Float64Array; width:number; height:number; offset?:number; encoding?:string; allowZero?:boolean; sampleFormat?:string;
@@ -232,16 +231,16 @@ export async function checkBandAlignment(sourceDirectory: string,channels: reado
     if(known&&JSON.stringify(known.frame)!==JSON.stringify(entry.frame))throw new Error(`Registered camera ids must be unique: ${entry.frame.id}`);
     if(!known)frames.set(entry.frame.id,entry);
   }
-  const sources=new Map<string,Promise<{frame:CameraFrame;image:CameraImage;sha256:string}>>();
+  const sources=new Map<string,Promise<{frame:CameraFrame;image:CameraImage}>>();
   const load=(frame:CameraFrame)=>{
     let pending=sources.get(frame.id);
-    if(!pending){pending=readFile(resolve(sourceDirectory,frame.path)).then(async bytes=>{
-      if(frame.encoding!=='fits-ssi-iof')return {frame,image:decodeCalibratedCamera(bytes),sha256:sha256(bytes)};
+    if(!pending){pending=(async()=>{
+      if(frame.encoding!=='fits-ssi-iof')return {frame,image:decodeCalibratedCamera(await readFile(resolve(sourceDirectory,frame.path)))};
       // Calibrated SSI: the catalog owns the camera, and archive fill and quality-withheld pixels are not measurements.
       const [camera,image]=await Promise.all([resolveCatalogCamera(sourceDirectory,frame),loadShapeCameraImage(sourceDirectory,frame)]);
       const data=Float32Array.from(image.data,(value,i)=>image.missing?.[i]||!(Math.abs(value)<1e30)?NaN:value);
-      return {frame:camera as CameraFrame,image:{...image,data},sha256:sha256(bytes)};
-    });sources.set(frame.id,pending);}
+      return {frame:camera as CameraFrame,image:{...image,data}};
+    })();sources.set(frame.id,pending);}
     return pending;
   };
   const confirmed=new Set(registration.references.slice(0,1).map(frame=>frame.id)),checks=[];

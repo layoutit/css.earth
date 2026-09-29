@@ -15,11 +15,10 @@ import { canonical, requireArray, requireFiniteNumber, requireRecord, requireStr
  *   resolution is a fact about the observation; kilometres on the surface also need the range, and hold only where the body
  *   faced the telescope, so both are stated and neither is derived from the other in silence.
  *
- * Maps combine only when their definitions are the same definition (compared by digest, not by quantity name) on the same
+ * Maps combine only when their definitions are the same definition (compared field by field, not by quantity name) on the same
  * body, frame and grid, and only under a stated policy for the two things that legitimately differ between observations:
  * time and resolution. A heat snapshot is never averaged with a band depth, and two snapshots of a changing quantity are
  * never averaged as if they were one without the caller saying so. */
-import { sha256 } from '@cssearth/core/node';
 import { parseResolutionEvidence, type ResolutionEvidence } from './resolution-evidence.ts';
 import { combineBodyMaps, type BodyMap } from './body-map.ts';
 
@@ -62,7 +61,7 @@ export interface BodyMapObservation {
 }
 
 export interface BodyMapFrame { readonly body: string; readonly radiusKm: number;
-  /** The rotation model that defines longitude and latitude: the file, its sha256 and the body code read from it. */
+  /** The rotation model that defines longitude and latitude: the file and the body code read from it. */
   readonly rotation: { readonly model: string; readonly bodyCode: number } }
 
 export interface BodyMapGrid { readonly width: number; readonly height: number; readonly longitude: 'east-positive-from-0'; readonly rows: 'north-to-south' }
@@ -91,10 +90,13 @@ export interface CombinationPolicy {
 
 
 
-/** The identity of a measurement definition. The citation is left out; everything that fixes the number is in. */
-export const definitionDigest = (definition: MeasurementDefinition): string =>
-  sha256(JSON.stringify(canonical({ quantity: definition.quantity, units: definition.units, timeDependence: definition.timeDependence,
-    wavelengthIntervalsMicrometres: definition.wavelengthIntervalsMicrometres ?? null, method: definition.method })));
+/** What fixes a measurement definition's number, in canonical order. The citation is left out. */
+const definitionFields = (definition: MeasurementDefinition): string =>
+  JSON.stringify(canonical({ quantity: definition.quantity, units: definition.units, timeDependence: definition.timeDependence,
+    wavelengthIntervalsMicrometres: definition.wavelengthIntervalsMicrometres ?? null, method: definition.method }));
+
+/** Whether two definitions measure the same thing: every field that fixes the number agrees; the citation may differ. */
+export const sameDefinition = (a: MeasurementDefinition, b: MeasurementDefinition): boolean => definitionFields(a) === definitionFields(b);
 
 /** Kilometres on the surface that one resolution element spans where the body faces the telescope. It needs the range as
  * well as the angle, and it grows toward the limb as 1 / cos(emission angle); this is its smallest value. */
@@ -181,8 +183,7 @@ export function parseCombinationPolicy(value: unknown): CombinationPolicy {
 export function assertCombinable(definitions: readonly MeasurementDefinition[], frames: readonly BodyMapFrame[], grids: readonly BodyMapGrid[], observations: readonly BodyMapObservation[], policy: CombinationPolicy): void {
   const first = definitions[0];
   if (!first) throw new RangeError('Nothing to combine.');
-  const digest = definitionDigest(first);
-  definitions.forEach((definition, index) => { if (definitionDigest(definition) !== digest) throw new TypeError(
+  definitions.forEach((definition, index) => { if (!sameDefinition(definition, first)) throw new TypeError(
     `Map ${index} measures ${definition.quantity} (${definition.units}) by another definition than map 0's ${first.quantity} (${first.units}): the same quantity name and units are not the same measurement.`); });
   frames.forEach((frame, index) => { const base = frames[0]!; if (frame.body !== base.body || frame.radiusKm !== base.radiusKm || frame.rotation.bodyCode !== base.rotation.bodyCode) throw new TypeError(`Map ${index} is in another body frame than map 0.`); });
   grids.forEach((grid, index) => { if (grid.width !== grids[0]!.width || grid.height !== grids[0]!.height) throw new TypeError(`Map ${index} is on another grid than map 0.`); });

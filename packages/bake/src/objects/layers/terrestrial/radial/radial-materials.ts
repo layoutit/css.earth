@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { matchesPreparationGenerator } from '../../../sources/index.ts';
 import type { RadialState, RadialMaterialConfig, RadialMaterialSurface } from '../solid/solid-contract.ts';
 import type { SciencePalette } from '../../../raster/index.ts';
@@ -335,7 +334,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         source: surface.source, data: gzipSync(scalarSources, { level: 9 }).toString('base64') }) + '\n');
       const file = `${surface.id}-source-index.json`;
       await writeFile(resolve(outputDirectory, file), bytes);
-      requireRecord(surface.scalarMap).sampleSources = { file, bytes: bytes.length, sha256: sha256(bytes), width, height };
+      requireRecord(surface.scalarMap).sampleSources = { file, bytes: bytes.length, width, height };
       const nearest = scientific.format === 'facet-scalars' || scientific.displaySampling === 'nearest';
       const snapshot = await renderRadialSnapshot({ faces: radial.faces, sampleSurface: sampleScience ?? undefined, size: 96,
         longitudeDegrees: 30, latitudeDegrees: 30, ambient: 1, diffuse: 0,
@@ -352,7 +351,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         data: gzipSync(sampleSources, { level: 9 }).toString('base64') }) + '\n');
       const file = `${surface.id}-source-index.json`;
       await writeFile(resolve(outputDirectory, file), bytes);
-      requireRecord(surface.observation).sampleSources = { file, bytes: bytes.length, sha256: sha256(bytes),
+      requireRecord(surface.observation).sampleSources = { file, bytes: bytes.length,
         width, height, includesAtlasBleed: true, codes };
     }
   }

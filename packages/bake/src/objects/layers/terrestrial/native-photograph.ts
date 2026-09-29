@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp, missingCoverageColor } from '../../../raster/index.ts';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -86,7 +85,7 @@ export async function prepareNativePhotographicAtlas({radial,sourceDirectory,sou
     const filename=`${id}-${suffix}@2x.webp`;
     // Each photograph and its shaded copy is written in the lossy lane (lossy-lane.ts).
     const bytes=await writeLossyWebp(sharp(pixels,{raw:{width,height,channels:4}}),resolve(publicDirectory,filename),{alphaQuality:100,effort:4});
-    return {url:publicBase+filename,width,height,bytes:bytes.length,sha256:sha256(bytes)};
+    return {url:publicBase+filename,width,height,bytes:bytes.length};
   };
   const surface=await emit('surface',flood),shadowSurface=await emit('shadow',shadow);
   return {surface,shadowSurface,polesUrl:surface.url,layout:{kind:'triangle-atlas',width,height,faceCount:radial.plans.length},

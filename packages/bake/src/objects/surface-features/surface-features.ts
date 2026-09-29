@@ -2,7 +2,6 @@ import { PREPARED_SURFACE_FEATURES_SCHEMA, featureDiscoveryZoomShare, normalizeS
 import type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, SurfaceFeaturePolicy, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, SurfaceFeatureCatalogDescriptor, SurfaceFeatureSelectionPlan, PreparedSurfaceFeaturePlan, Vector3 } from './catalog.ts';
 import { surfaceDirection, round, scaled, rimVectors, extentPolygon, normalizeExtent, projectRadial, meshRadiusBand } from './geometry.ts';
 import { unzipMember } from './archive.ts';
-import { sha256 } from '@cssearth/core/node';
 import { surfaceFeatureBankIndex } from '@cssearth/renderer/labels/surface-feature-banks.ts';
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
 import { extname, relative, resolve } from 'node:path';
@@ -515,7 +514,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const bytes = Buffer.from(`${JSON.stringify(publicCatalog)}\n`);
   await writeFile(resolve(context.publicDirectory, config.output), bytes);
   const catalogDescriptor: SurfaceFeatureCatalogDescriptor = {
-    url: `${config.publicBase}${config.output}`, bytes: bytes.length, sha256: sha256(bytes), count: labels.length,
+    url: `${config.publicBase}${config.output}`, bytes: bytes.length, count: labels.length,
   };
   const stem = config.output.slice(0, -extname(config.output).length);
   let selection: SurfaceFeatureSelectionPlan | undefined;
@@ -534,7 +533,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
         license: manifest.license, qualification: manifest.qualification, features: bankFeatures };
       const bankBytes = Buffer.from(`${JSON.stringify(bank)}\n`);
       await writeFile(resolve(context.publicDirectory, filename), bankBytes);
-      banks.push({ url: `${config.publicBase}${filename}`, bytes: bankBytes.length, sha256: sha256(bankBytes), count: bankFeatures.length });
+      banks.push({ url: `${config.publicBase}${filename}`, bytes: bankBytes.length, count: bankFeatures.length });
     }
     for (const filename of await readdir(context.publicDirectory)) {
       if (filename.startsWith(`${stem}-selection-`) && filename.endsWith('.json') && !expected.has(filename)) {

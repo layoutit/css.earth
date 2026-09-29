@@ -13,7 +13,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
-import { sha256 } from '@cssearth/core/node';
 import { readFitsHdu } from '@cssearth/fits';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { HORIZONS_API, horizonsCommand, horizonsRefreshOperations } from './horizons-tables.ts';

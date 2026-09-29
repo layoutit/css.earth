@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { isArray } from '@cssearth/core';
 import { parse } from '@cssearth/core/schema';
 import { radialRecipe, type SourcePin, type ObservedRadialLayer } from '../../geometry/index.ts';
@@ -138,7 +137,7 @@ export async function prepareGiantLayers({ sourceDirectory, publicDirectory, con
       const data = rasterAnnularWedges(layer, density, layout);
       const bytes = await sharp(data, { raw: { width: layout.width * density, height: layout.height * layout.count * density, channels: 4 } }).webp(layer.encoding).toBuffer();
       const filename = layer.output.replace('{suffix}', '-wedges@2x');
-      assets.push({ filename, width: layout.width * density, height: layout.height * layout.count * density, bytes: bytes.length, sha256: sha256(bytes), data: bytes, wedges });
+      assets.push({ filename, width: layout.width * density, height: layout.height * layout.count * density, bytes: bytes.length, data: bytes, wedges });
       continue;
     }
     const master = layer.densityMode === 'downsample-highest' ? raster(highestSize, highestDensity) : null;
@@ -148,10 +147,10 @@ export async function prepareGiantLayers({ sourceDirectory, publicDirectory, con
       if (sourceSize !== size) pipeline = pipeline.resize(size, size, { kernel: sharp.kernel.lanczos3 });
       const bytes = await pipeline.webp(layer.encoding).toBuffer();
       const filename = layer.output.replace('{suffix}', density === 2 ? '@2x' : '');
-      assets.push({ filename, width: size, height: size, bytes: bytes.length, sha256: sha256(bytes), data: bytes });
+      assets.push({ filename, width: size, height: size, bytes: bytes.length, data: bytes });
       for(const overlay of layer.overlays??[]){
         const shadow=rasterProjectedStripShadow(data,size,overlay),encoded=await sharp(shadow,{raw:{width:size,height:size,channels:4}}).webp(overlay.encoding).toBuffer(),filename=overlay.output.replace('{suffix}',density===2?'@2x':'');
-        assets.push({filename,width:size,height:size,bytes:encoded.length,sha256:sha256(encoded),data:encoded});
+        assets.push({filename,width:size,height:size,bytes:encoded.length,data:encoded});
       }
       if (layer.variants?.length) {
         const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -159,7 +158,7 @@ export async function prepareGiantLayers({ sourceDirectory, publicDirectory, con
           const data = colorizeRadialField(decoded.data, decoded.info.width, decoded.info.height, variant);
           const encoded = await sharp(data, { raw: decoded.info }).webp(variant.encoding).toBuffer();
           const filename = variant.output.replace('{suffix}', density === 2 ? '@2x' : '');
-          assets.push({ filename, width: size, height: size, bytes: encoded.length, sha256: sha256(encoded), data: encoded });
+          assets.push({ filename, width: size, height: size, bytes: encoded.length, data: encoded });
         }
       }
     }

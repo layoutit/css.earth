@@ -1,4 +1,4 @@
-import { sha256 } from '@cssearth/core/node';
+import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
 import { decodeIsis2Qube } from '../layers/terrestrial/index.ts';
@@ -39,7 +39,6 @@ interface Input {
   id: string;
   path: string;
   bytes: number;
-  sha256: string;
   absolute: string;
 }
 interface Anchor {
@@ -75,27 +74,26 @@ interface Config {
 function config(value: unknown, source: string): Config {
   const c = obj(value, 'orthophoto landmark configuration');
   if (c.schema !== 'cssearth-orthophoto-landmarks@1') throw new TypeError('Unsupported orthophoto-landmarks schema.');
-  if (!Array.isArray(c.inputs) || !c.inputs.length) throw new TypeError('Orthophoto landmarks need pinned inputs.');
+  if (!Array.isArray(c.inputs) || !c.inputs.length) throw new TypeError('Orthophoto landmarks need inputs.');
   const ids = new Set<string>();
   const inputs = c.inputs.map((v, i) => {
     const x = obj(v, `input ${i}`),
       id = string(x.id, 'input id'),
-      bytes = number(x.bytes, `input ${id} bytes`),
-      digest = string(x.sha256, `input ${id} sha256`);
-    if (ids.has(id) || !Number.isSafeInteger(bytes) || bytes < 1 || !/^[a-f0-9]{64}$/u.test(digest))
-      throw new TypeError('Orthophoto inputs need distinct pinned bytes and SHA-256 values.');
+      bytes = number(x.bytes, `input ${id} bytes`);
+    if (ids.has(id) || !Number.isSafeInteger(bytes) || bytes < 1)
+      throw new TypeError(`Orthophoto input ${id} needs a distinct id and a positive integer bytes count (${JSON.stringify(x.bytes)}).`);
+    if ('sha256' in x) throw new TypeError(`Orthophoto input ${id} sha256 is refused: git and the source mirror identify input bytes.`);
     ids.add(id);
     return {
       id,
       path: string(x.path, `input ${id} path`),
       bytes,
-      sha256: digest,
       absolute: safe(source, x.path, `input ${id} path`),
     };
   });
   const inputId = (v: unknown, a: string) => {
     const id = string(v, a);
-    if (!ids.has(id)) throw new TypeError(`${a} must identify a pinned input.`);
+    if (!ids.has(id)) throw new TypeError(`${a} must identify a declared input.`);
     return id;
   };
   if (!Array.isArray(c.stages) || c.stages.length !== 2)
@@ -173,12 +171,14 @@ function config(value: unknown, source: string): Config {
     zOffsetMeters: number(c.zOffsetMeters, 'Z offset'),
   };
 }
-async function bytes(c: Config) {
+async function bytes(objectId: string, c: Config) {
   const map = new Map<string, Buffer>();
   for (const i of c.inputs) {
+    if (!existsSync(i.absolute))
+      throw new TypeError(`${objectId}: orthophoto input ${i.id} path ${i.path} is missing from the source directory.`);
     const b = await readFile(i.absolute);
-    if (b.length !== i.bytes || sha256(b) !== i.sha256)
-      throw new TypeError(`Pinned orthophoto input changed: ${i.id}.`);
+    if (b.length !== i.bytes)
+      throw new TypeError(`${objectId}: orthophoto input ${i.id} path ${i.path} holds ${b.length} bytes; image-registration.json bytes records ${i.bytes}.`);
     map.set(i.id, b);
   }
   return map;
@@ -210,7 +210,7 @@ export async function projectOrthophotoLandmarks(objectId: string, write: boolea
   const source = resolve(root, 'src/objects', objectId, 'source'),
     features = resolve(source, 'features'),
     c = config(JSON.parse(await readFile(resolve(features, 'image-registration.json'), 'utf8')), source),
-    b = await bytes(c);
+    b = await bytes(objectId, c);
   const controlsDocument = obj(JSON.parse(b.get(c.controlId)!.toString('utf8')), 'control measurements');
   if (
     !Array.isArray(controlsDocument.stages) ||
@@ -269,7 +269,7 @@ export async function projectOrthophotoLandmarks(objectId: string, write: boolea
     schema: 'cssearth-orthophoto-landmarks-evidence@1',
     source: c.source,
     frame: c.frame,
-    inputs: c.inputs.map(({ id, path, bytes, sha256 }) => ({ id, path, bytes, sha256 })),
+    inputs: c.inputs.map(({ id, path, bytes }) => ({ id, path, bytes })),
     stages: fits.map((fit, index) => ({
       index,
       model: fit.model,

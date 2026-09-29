@@ -1,17 +1,14 @@
 import { cross3 as cross, requireRecord, requireFiniteNumber, dot3 as dot } from '@cssearth/core';
-import { sha256 } from '@cssearth/core/node';
 import type { RotationElements } from "@cssearth/astronomy";
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 
 // A measured pole is distinct from an IAU prime-meridian solution. For bodies
 // without a phase ephemeris, preserve an explicitly arbitrary display phase.
-export async function readAuthoredRotation(directory: string, reference: { path: string; sha256?: string }, epochJdTt: number): Promise<RotationElements> {
+export async function readAuthoredRotation(directory: string, reference: { path: string }, epochJdTt: number): Promise<RotationElements> {
   const path = resolve(directory, reference.path);
   if (relative(directory, path).startsWith('..')) throw new TypeError('Rotation source escapes the object.');
   const bytes = await readFile(path);
-  // The rotation source is authored here; a caller that already read it may hold its digest.
-  if (reference.sha256 !== undefined && sha256(bytes) !== reference.sha256) throw new TypeError('Rotation source pin differs.');
   const source = requireRecord(JSON.parse(bytes.toString("utf8")), "Rotation source");
   if (source.schema === 'cssearth-measured-rotation@1') {
     const rightAscensionDegrees = requireFiniteNumber(source.rightAscensionDegrees), declinationDegrees = requireFiniteNumber(source.declinationDegrees), primeMeridianDegrees = requireFiniteNumber(source.primeMeridianDegrees), spinDegreesPerDay = requireFiniteNumber(source.spinDegreesPerDay), referenceEpochJdTt = requireFiniteNumber(source.referenceEpochJdTt);
