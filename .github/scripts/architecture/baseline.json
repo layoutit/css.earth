@@ -8,13 +8,12 @@
       "site/navigation",
       "site(root)",
       "site/search",
-      "tools/objects(root)",
-      "tools/objects/new-object",
-      "tools/prepare",
       "labs/nebula(app)",
       "labs/nebula-pkg/lab",
       "site/components",
-      "site/layouts"
+      "site/layouts",
+      "tools/objects(root)",
+      "tools/objects/new-object"
     ],
     "cycleClosingEdges": [
       {"from":"site/search","to":"site(root)","imports":8},
@@ -22,7 +21,6 @@
       {"from":"site(root)","to":"site/navigation","imports":3},
       {"from":"site/shell","to":"site/scene","imports":2},
       {"from":"tools/objects/new-object","to":"tools/objects(root)","imports":2},
-      {"from":"tools/prepare","to":"tools/objects(root)","imports":2},
       {"from":"labs/nebula-pkg/lab","to":"labs/nebula(app)","imports":1},
       {"from":"site/layouts","to":"site/components","imports":1},
       {"from":"site/navigation","to":"site/scene","imports":1}
@@ -39,14 +37,9 @@
       {"from":"labs/performance/ipad-journey.mts","to":"site/objects.mts"},
       {"from":"labs/performance/ipad-run.mts","to":"site/objects.mts"},
       {"from":"labs/performance/navigation-capture.mts","to":"site/server/preview.mts"},
-      {"from":"tools/objects/prepare-authored.ts","to":"site/build/content/prepare.ts"},
-      {"from":"tools/objects/prepare-spatial-context.ts","to":"site/build/prepare/jpl-mission-targets.mts"},
-      {"from":"tools/objects/refresh-photographs.ts","to":"site/build/content/prepare.ts"},
-      {"from":"tools/objects/telescope-sphere/sphere-html.mts","to":"site/prepared/serialize-prepared-scene.mts"},
-      {"from":"tools/prepare/prepare-object-json.mts","to":"site/object-page-contract.mts"}
+      {"from":"tools/objects/telescope-sphere/sphere-html.mts","to":"site/prepared/serialize-prepared-scene.mts"}
     ],
     "nothing-imports-cli-entries": [],
-    "nothing-imports-prepare-scripts": [],
     "packages-import-only-packages": [
       {"from":"packages/bake/authoring/comet-1p/inspect-halley-giotto.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/bake/authoring/comet-1p/prepare-encounters.test.mts","to":"tests/objects/source-test.mts"},

@@ -1,6 +1,6 @@
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
-import { basename, dirname, resolve } from 'node:path';
-import { pathToFileURL, fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
@@ -80,7 +80,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const registry = readPreparedObjects(process.cwd()).sceneObjects;
     const { contextColour } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import('@cssearth/renderer/navigation/marker-presentation.ts');
-    const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/jpl-mission-targets.mts')).href) as typeof import('../../site/build/prepare/jpl-mission-targets.mts');
+    const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/jpl-mission-targets.mts')).href) as typeof import('./jpl-mission-targets.mts');
     const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
     const byId = new Map(registry.map(object => [object.id, object]));
     // The catalogue step's discovery records (site/prepared-object-discovery.json): what the world's visibility reads per body.
@@ -327,8 +327,7 @@ function number(value: unknown, name: string): number { if (typeof value !== 'nu
 function positive(value: unknown, name: string): number { const result = number(value, name); if (!(result > 0)) throw new TypeError(`${name} must be positive.`); return result; }
 function eccentricity(value: unknown, id: string): number { const result = number(value, `${id} eccentricity`); if (result < 0 || result === 1) throw new TypeError(`${id} eccentricity is invalid.`); return result; }
 
-const invoked = process.argv[1] && basename(fileURLToPath(import.meta.url)) === 'prepare-spatial-context.js' &&
-  resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+const invoked = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (invoked) {
   await prepareSpatialContext(parseSpatialContextCommand(process.argv.slice(2)));
 }

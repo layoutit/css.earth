@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
-import { prepareObjectContentAssets } from '../../site/build/content/prepare.ts';
+import { prepareObjectContentAssets } from '../content/prepare.ts';
 import { parseRuntimeManifest } from '@cssearth/bake/delivery';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 
@@ -92,7 +92,7 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
     if (!lensIds.includes(key)) return lens;
     const label = labels.get(key); if (!label) throw new Error(`Missing photographic caption: ${key}`); return label;
   });
-  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.js');
+  const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.ts');
   const navigation = await prepareWorldNavigationDefinition({ objectDirectory, projectRoot: process.cwd(),
     definition: { ...runtime, controls: { ...controls, lenses: { ...lenses, controls: selection } } } });
   const scene = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));

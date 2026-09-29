@@ -1,17 +1,14 @@
-/** Refresh only the default shape atlas; retain every other prepared asset. */
+/** `@cssearth/bake/refresh-shape-lighting` (Node only): refresh only the default shape atlas; retain every other prepared
+ * asset. `packages/bake/cli/refresh-shape-lighting.mts stage|publish <object-id>... | --all` is its command. The generated
+ * solar geometry is written after the packages build, so the host passes it in (`SolarGeometry`). */
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile, rename } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
-import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
-import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, createRasterEmitter, retainedShapeAtlas } from '@cssearth/bake/objects/layers/terrestrial';
-import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
-import { readPreparedObjects } from '@cssearth/objects/node';
-
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
-
+import type { SolarGeometry } from '../objects/scene/index.ts';
+import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, createRasterEmitter, retainedShapeAtlas } from '../objects/layers/terrestrial/index.ts';
+import { prepareObjectProvenance } from '../objects/provenance/index.ts';
 
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
@@ -19,9 +16,9 @@ const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(va
 const files = ['prepared/scene.json', 'prepared/surfaces.json', 'prepared/material.json',
   'inventory.json', 'object.json', 'source/manifest.json',
   'source/preparation/terrestrial.json'];
-const generators = ['packages/bake/src/objects/layers/terrestrial/shape-material.ts', 'tools/objects/refresh-shape-lighting.mts'];
+const generators = ['packages/bake/src/objects/layers/terrestrial/shape-material.ts', 'packages/bake/src/refresh-shape-lighting/index.ts'];
 
-async function stageShapeLighting(id: string) {
+export async function stageShapeLighting(id: string, solarGeometry: SolarGeometry) {
   const directory = resolve('src/objects', id), stage = resolve('output/shape-default-lighting', id);
   await mkdir(stage, { recursive: true });
   const originals = await Promise.all(files.map(async file => ({ file, sha256: sha256(await readFile(resolve(directory, file))) })));
@@ -42,7 +39,7 @@ async function stageShapeLighting(id: string) {
       throw new Error(`${id}/${view.id}: expected an existing unscaled neutral shape.`);
     const atlas = retainedShapeAtlas(scene, view.id), prior = requireRecord(old.surface);
     if (prior.width !== atlas.width || prior.height !== atlas.height) throw new Error(`${id}: atlas dimensions changed.`);
-    const { flood } = neutralShapeAtlas(atlas, requireBodyFixedSunDirection(id));
+    const { flood } = neutralShapeAtlas(atlas, solarGeometry.requireBodyFixedSunDirection(id));
     const filename = basename(requireString(prior.url));
     const surface = await emit(filename, sharp(flood, { raw: { width: atlas.width, height: atlas.height, channels: 4 } }),
       { alphaQuality: 100, effort: 4 });
@@ -67,7 +64,7 @@ async function stageShapeLighting(id: string) {
     lensIds: views.map(view => view.id), changedAssets: [...changed.values()] });
 }
 
-async function validateStage(id: string) {
+export async function validateStage(id: string) {
   const directory = resolve('src/objects', id), stage = resolve('output/shape-default-lighting', id);
   const receipt = await json(resolve(stage, 'receipt.json'));
   for (const pin of records(receipt.originals))
@@ -79,7 +76,7 @@ async function validateStage(id: string) {
     if (sha256(await readFile(resolve(stage, requireString(asset.filename)))) !== asset.sha256) throw new Error('Staged atlas changed.');
 }
 
-async function publishShapeLighting(id: string) {
+export async function publishShapeLighting(id: string) {
   await validateStage(id);
   const directory = resolve('src/objects', id), stage = resolve('output/shape-default-lighting', id);
   const receipt = await json(resolve(stage, 'receipt.json'));
@@ -102,29 +99,4 @@ async function publishShapeLighting(id: string) {
       throw new Error(`${id}: unrelated asset changed during publication.`);
   const scenePin = records(receipt.originals).find(pin => pin.file === 'prepared/scene.json');
   if (sha256(await readFile(resolve(directory, 'prepared/scene.json'))) !== scenePin?.sha256) throw new Error(`${id}: scene changed.`);
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), mode = args[0];
-  if (!['stage', 'publish'].includes(mode)) throw new Error('Choose stage or publish, then body ids or --all.');
-  const requested = args.includes('--all') ? SCENE_OBJECTS.map(object => object.id) : args.slice(1);
-  const ids: string[] = [];
-  for (const id of requested) {
-    if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Invalid object id.');
-    if (args.includes('--all')) {
-      let recipe;
-      try { recipe = await json(resolve('src/objects', id, 'source/preparation/terrestrial.json')); }
-      catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') continue; throw error; }
-      if (!requireArray(requireRecord(recipe.raster).shapeViews ?? []).length) continue;
-    }
-    ids.push(id);
-  }
-  if (!ids.length) throw new Error('Choose existing body ids or --all.');
-  // Fail before any publication when a concurrently edited package is stale.
-  if (mode === 'publish') for (const id of ids) await validateStage(id);
-  for (const [index, id] of ids.entries()) {
-    const start = performance.now();
-    await (mode === 'stage' ? stageShapeLighting(id) : publishShapeLighting(id));
-    console.log(JSON.stringify({ mode, id, index: index + 1, total: ids.length, seconds: (performance.now() - start) / 1000 }));
-  }
 }

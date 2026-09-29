@@ -106,7 +106,7 @@ export async function resolveObjectCommand(
   const authored = await authoredObject(id, projectRoot);
   const script = authored
     ? mode === 'browser' ? resolveScript(id, projectRoot)
-      : mode === 'prepare' ? resolve(projectRoot, 'tools/objects/dist/prepare-authored.js') : resolve(projectRoot, 'packages/bake/cli/object-operations.mts')
+      : mode === 'prepare' ? resolve(projectRoot, 'site/build/prepare/prepare-authored.ts') : resolve(projectRoot, 'packages/bake/cli/object-operations.mts')
     : resolveScript(id, projectRoot);
   try {
     await accessFile(script);

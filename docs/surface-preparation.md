@@ -20,7 +20,7 @@ Original images, meshes and labels
 | Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../packages/bake/src/objects/acquisition/geotiff-image.ts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
-| Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
+| Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../site/build/prepare/prepare-authored.ts) |
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../packages/bake/src/objects/layers/terrestrial/terrestrial-layers.ts) |
 | Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
 | Sample a pressure level from a numeric longitude/latitude table | [CSV slice reader](../packages/bake/src/objects/raster/lonlat-slice-table.ts): `lonlat-slice-table`, one-based `columns`, an exact `slice`, and a coordinate rounding tolerance. It validates periodic longitude and complete cells; latitude coverage ends at the released samples. [WASP-103 b](../src/objects/wasp-103b/README.md) is the climate-model example. |
@@ -323,7 +323,7 @@ other even when it is wrong; only the imagery disagrees. It must equal the edge 
 photograph decoders (GeoTIFF, image and ISIS3 sources) write their maps from 0° E, whatever the source's centre longitude.
 
 The authored preparation measures it for every lens with native photographic sampling
-(`assertMapsStartAtSurfaceMapEdge` in `tools/objects/prepare-authored.ts`). It reads the lens's pinned source through
+(`assertMapsStartAtSurfaceMapEdge` in `site/build/prepare/prepare-authored.ts`). It reads the lens's pinned source through
 its georeferenced sampler at true east longitudes, correlates that with the prepared minimap read from every candidate
 edge in 2° steps (`measureAtlasLeftEdge`), and refuses the preparation when the best edge is more than 4° from the
 declared one and correlates at least 0.2 better. A minimap with framing (`source/presentation/minimap.json`) starts at
@@ -703,7 +703,7 @@ after building the tools and restoring Arrokoth's inputs:
 
 ```sh
 node packages/bake/cli/object-operations.mts acquire arrokoth --verify-only
-node tools/objects/dist/prepare-authored.js arrokoth --write
+node site/build/prepare/prepare-authored.ts arrokoth --write
 node --test tests/objects/terrestrial/obj-uv-fits.test.mts
 ```
 
@@ -781,8 +781,8 @@ Existing single-model spacecraft observation lenses can refresh through the same
 surface-observation and triangle-atlas preparers used by a full preparation:
 
 ```sh
-node --experimental-strip-types tools/objects/refresh-surface-observations.mts itokawa amica
-node --experimental-strip-types tools/objects/refresh-surface-observations.mts lutetia osiris
+node packages/bake/cli/refresh-surface-observations.mts itokawa amica
+node packages/bake/cli/refresh-surface-observations.mts lutetia osiris
 ```
 
 Update the recipe and declare its source inputs first. This command checks the retained atlas's
@@ -806,9 +806,9 @@ After updating the changed recipe and content, use the shared preparer:
 
 ```sh
 pnpm build:tools
-node tools/objects/dist/refresh-photographs.js moon surface
-node tools/objects/dist/refresh-photographs.js europa normal enhanced
-node tools/objects/dist/refresh-photographs.js io normal enhanced
+node site/build/prepare/refresh-photographs.ts moon surface
+node site/build/prepare/refresh-photographs.ts europa normal enhanced
+node site/build/prepare/refresh-photographs.ts io normal enhanced
 ```
 
 Run one body at a time. The command verifies the selected source closure, prepares

@@ -13,10 +13,10 @@ import { parsePresentationProfile, prepareCssPresentation, type PresentationInpu
 import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
 import { checkGaiaCepheidModel, parseGaiaCepheidRow, pulsationTrack } from '@cssearth/bake/photometry';
 import { assertDefaultViewFacesLens } from '@cssearth/bake/objects/default-view';
-import { prepareObjectContentAssets } from '../../site/build/content/prepare.ts';
+import { prepareObjectContentAssets } from '../content/prepare.ts';
 import { loadGeometryAdapters, presentationHostAdapters } from '@cssearth/bake/objects/host-adapters';
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
-import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.js';
+import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.ts';
 import { attachSurfaceFeatures, longitudeDistanceDeg, measureAtlasLeftEdge, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
 import { loadNativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
 
@@ -63,7 +63,7 @@ function validateCapabilityComposition(descriptor: AuthoredObjectDescriptor, ras
   }
 }
 async function writePreparedObject(id: string, definition: Record<string, unknown>): Promise<void> {
-  const module = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-object-json.mts')).href), 'prepared object writer');
+  const module = record(await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/prepare-object-json.mts')).href), 'prepared object writer');
   const write = module.writeObjectJson;
   if (typeof write !== 'function') throw new TypeError('Prepared object writer is missing.');
   await (write as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, definition);
@@ -138,7 +138,7 @@ export async function stagedLegendLabelChanges(objectDirectory: string, prepared
 /** The generated solar geometry, read from the checkout at run time: it is written after the packages build, so the bake takes it as a
  * parameter. The generated module satisfies the preparers' contracts as it is; typing it by the module keeps drift a type error. */
 const solarGeometry = async () =>
-  await import(pathToFileURL(resolve(process.cwd(), 'src/platform/solar-geometry.mts')).href) as typeof import('../../src/platform/solar-geometry.mts');
+  await import(pathToFileURL(resolve(process.cwd(), 'src/platform/solar-geometry.mts')).href) as typeof import('../../../src/platform/solar-geometry.mts');
 
 /** A photograph lens states the body point its frame looks at; the default camera must look there too (@cssearth/bake/objects/default-view). The check
  * reads the final frame, which follows the body as drawn. */
@@ -224,7 +224,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         console.log(`refreshed legend labels ${legend.summary}`);
         return await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, reuseImages, acceptChanged });
       }
-      const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare/prepare-object-json.mts')).href) as typeof import('../prepare/prepare-object-json.mts');
+      const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'site/build/prepare/prepare-object-json.mts')).href) as typeof import('./prepare-object-json.mts');
       const finalized = await finalizeObjectJson(id, result.definition, { projectRoot, objectDirectory, preparedDirectory: stagedData,
         descriptorPath: resolve(stage, 'object.json') }, { publicDirectory: stagedPublic });
       if (reuseImages) {
@@ -393,7 +393,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const contextSource = source(sources, 'world-context');
   let worldContext: unknown;
   if (contextSource) {
-    const { prepareSpatialContext } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/dist/prepare-spatial-context.js')).href) as typeof import('./prepare-spatial-context.js');
+    const { prepareSpatialContext } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/prepare-spatial-context.ts')).href) as typeof import('./prepare-spatial-context.ts');
     const outputPath = resolve(outputDirectory, 'world-context.json');
     await prepareSpatialContext({ sourcePath: contextSource.path, outputPath, solarGeometryPath: resolve(process.cwd(), 'src/platform/solar-geometry.mts'), objectsDirectory: resolve(objectDirectory, '..') });
     worldContext = JSON.parse(await readFile(outputPath, 'utf8')) as unknown;

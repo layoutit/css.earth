@@ -1,28 +1,24 @@
-/** Refresh existing observation lenses using the full preparer's raster and atlas owners. */
+/** `@cssearth/bake/refresh-surface-observations` (Node only): refresh existing observation lenses using the full
+ * preparer's raster and atlas owners. `packages/bake/cli/refresh-surface-observations.mts <object-id> <lensId>...` is its
+ * command. The generated solar geometry is written after the packages build, so the host passes it in (`SolarGeometry`). */
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
-import * as solarGeometry from '../../src/platform/solar-geometry.mts';
-import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
-import { parseSolidPreparationSource, retainedPhotographicAtlas } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
-import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
-import { prepareSolidRasters, prepareSolidSurfacePoles } from '@cssearth/bake/objects/layers/terrestrial';
-import { lensBillboardColors } from '@cssearth/bake/objects/content';
-import { prepareSurfaceMinimaps } from '@cssearth/bake/surface-previews';
-import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
-import { repinObjectJson } from '@cssearth/bake/contract';
-
+import type { SolarGeometry } from '../objects/scene/index.ts';
+import { parseSolidPreparationSource, retainedPhotographicAtlas, loadRadialTerrain, prepareRadialMaterials, prepareSolidRasters, prepareSolidSurfacePoles } from '../objects/layers/terrestrial/index.ts';
+import { lensBillboardColors } from '../objects/content/index.ts';
+import { prepareSurfaceMinimaps } from '../surface-previews/index.ts';
+import { prepareObjectProvenance } from '../objects/provenance/index.ts';
+import { repinObjectJson } from '../contract/index.ts';
 
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
 const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(value) + '\n');
 
-export async function refreshSurfaceObservations(id: string, lensIds: readonly string[]) {
+export async function refreshSurfaceObservations(id: string, lensIds: readonly string[], solarGeometry: SolarGeometry) {
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)
     throw new TypeError('Choose a body and distinct existing observation lenses.');
   const started = performance.now(), objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
@@ -58,7 +54,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   // Like the full preparer's material step, record each surface's billboard colour before the radial materials add its shadow surface.
   await prepareSolidSurfacePoles({ surfaces, publicDirectory: stage, config: rasterConfig });
   await prepareRadialMaterials({ radial, surfaces, config: { ...rasterConfig, geometry: { ...config.geometry, radialTerrain: { thumbnail: terrain.thumbnail } } }, source, sourceDirectory, publicDirectory: stage, outputDirectory: stage,
-    sunDirection: requireBodyFixedSunDirection(id), snapshotEntries: [] });
+    sunDirection: solarGeometry.requireBodyFixedSunDirection(id), snapshotEntries: [] });
   const replacements = new Map(surfaces.map(surface => [surface.id, surface]));
   const inventory = requireRecord(JSON.parse(originals.get('inventory.json')!.toString('utf8'))), assets = records(inventory.assets);
   const changed = new Map<string, { filename: string; bytes: number; sha256: string }>();
@@ -142,9 +138,4 @@ export async function refreshObservationControls(id: string, lensIds: readonly s
     await save(path, document);
   }
   await repinObjectJson(id);
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const [id, ...lenses] = process.argv.slice(2);
-  await refreshSurfaceObservations(id, lenses);
 }

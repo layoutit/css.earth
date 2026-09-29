@@ -28,7 +28,7 @@ export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
 export const SITE_BUILD = 'site/build/';
 
 /** Entry glue that may reach into an application tree: Netlify functions and root build configuration
- * (`astro.config.mts` wires `site/build` and `tools/prepare` into the Astro build). Astro pages
+ * (`astro.config.mts` wires `site/build` into the Astro build). Astro pages
  * live inside `site/` and need no entry here. */
 export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
 
@@ -58,11 +58,6 @@ export const LAYER_RULES: readonly LayerRule[] = [
     id: 'runtime-imports-no-site-build',
     description: 'site/build/ is site-owned preparation: the rest of site/ never imports it (type-only imports count; tests and entry glue may)',
     forbids: (from, to) => from.startsWith('site/') && !from.startsWith(SITE_BUILD) && to.startsWith(SITE_BUILD),
-  },
-  {
-    id: 'nothing-imports-prepare-scripts',
-    description: 'tools/prepare/cli/ holds the prepare entry scripts: nothing imports them, including other entries (type-only imports count); the libraries beside them in tools/prepare/ may be imported',
-    forbids: (_from, to) => to.startsWith('tools/prepare/cli/'),
   },
   {
     id: 'nothing-imports-cli-entries',

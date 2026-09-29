@@ -122,12 +122,6 @@ jobs:
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         if: ${{ !cancelled() }}
-        id: build-tools-cache
-        with:
-          path: tools/objects/dist
-          key: compiled-preparation-v4-${{ steps.ci-cache-key.outputs.build_digest }}
-      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        if: ${{ !cancelled() }}
         with:
           # Only the baked JSON payloads, not texture banks. The installer below revalidates every pin.
           path: |
@@ -142,13 +136,11 @@ jobs:
           # over the preparation lane that used to own this cache, so it owns the save too.
           path: .local/galaxy-field/sources
           key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
-      - name: Generate the registry, renderer and preparation bundle
+      - name: Generate the registry and renderer
         if: ${{ !cancelled() }}
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-          CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
-          CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
           CI_AUDIT_UNIVERSE: ${{ needs.changes.outputs.run_universe }}
           CI_AUDIT_PREPARATION: ${{ needs.changes.outputs.run_universe_preparation }}
         # The contract checks below need only the lint closure. The relocated source and reproduction lanes also

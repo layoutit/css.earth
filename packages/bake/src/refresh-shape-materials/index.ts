@@ -1,28 +1,22 @@
-import { retainedShapeAtlas, alternativeForLens, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot, parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
-/** Repaint existing shape lenses using retained geometry and the shared material preparer. */
+/** `@cssearth/bake/refresh-shape-materials` (Node only): repaint existing shape lenses using retained geometry and the
+ * shared material preparer. `packages/bake/cli/refresh-shape-materials.mts <object-id>... | --all [--resume]
+ * [--descriptions-only] [--source-root=<path>] [--shard=<index>/<count>]` is its command. The generated solar geometry is
+ * written after the packages build, so the host passes it in (`SolarGeometry`). */
+import { retainedShapeAtlas, alternativeForLens, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot, parseSolidPreparationSource, loadRadialTerrain, prepareRadialMaterials } from '../objects/layers/terrestrial/index.ts';
+import type { RadialMaterialSurface } from '../objects/layers/terrestrial/index.ts';
 import { sha256 } from '@cssearth/core/node';
-import { readAuthoredSources } from '@cssearth/bake/objects/sources';
+import { readAuthoredSources } from '../objects/sources/index.ts';
 import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
 import { resolve, basename, dirname } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
-import * as solarGeometry from '../../src/platform/solar-geometry.mts';
-import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
-import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
-import { prepareRadialMaterials } from '@cssearth/bake/objects/layers/terrestrial';
-import { refreshObservationControls } from './refresh-surface-observations.mts';
-import { prepareSurfaceMinimaps } from '@cssearth/bake/surface-previews';
-import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
-import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '@cssearth/bake/navigation';
-import { validateMarkerDescriptor, renderMarker } from '@cssearth/bake/navigation';
-import { prepareSearchThumbnails } from '@cssearth/bake/site-assets';
-import { readPreparedObjects } from '@cssearth/objects/node';
-
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
-
+import type { SolarGeometry } from '../objects/scene/index.ts';
+import { refreshObservationControls } from '../refresh-surface-observations/index.ts';
+import { prepareSurfaceMinimaps } from '../surface-previews/index.ts';
+import { prepareObjectProvenance } from '../objects/provenance/index.ts';
+import { loadObjectMarkerDescriptor, prepareBodyMarkers, validateMarkerDescriptor, renderMarker } from '../navigation/index.ts';
+import { prepareSearchThumbnails } from '../site-assets/index.ts';
 
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
@@ -72,7 +66,7 @@ export async function refreshShapeMaterialDescriptions(id: string) {
   if (final !== readme) await writeFile(readmePath, final);
 }
 
-export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
+export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeometry, sourceRoot?: string) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Invalid object id.');
   const started = performance.now(), objectDirectory = resolve('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared');
   const publicDirectory = resolve('public/scenes', id), stage = resolve('output/shape-material-refresh', id);
@@ -117,7 +111,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     }
     await prepareRadialMaterials({ radial: { ...radial, grid }, surfaces: [surface],
       config: { ...config, geometry: { ...config.geometry, radialTerrain: terrain } }, source,
-      publicDirectory: stage, outputDirectory: stage, sunDirection: requireBodyFixedSunDirection(id), snapshotEntries: [] });
+      publicDirectory: stage, outputDirectory: stage, sunDirection: solarGeometry.requireBodyFixedSunDirection(id), snapshotEntries: [] });
     surfaces.push(surface);
   }
   // No partial changes while an asset is being baked, and no writes into a shared inode.
@@ -189,40 +183,4 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
   await writeFile(resolve(stage, 'refresh.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ id, seconds: report.seconds, changedAssets: changed.size }));
   return report;
-}
-
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const args = process.argv.slice(2), sourceOption = args.find(arg => arg.startsWith('--source-root='));
-  const sourceRoot = sourceOption?.slice('--source-root='.length), requested = args.filter(arg => !arg.startsWith('--'));
-  const allIds = args.includes('--all') ? SCENE_OBJECTS.map(object => object.id) : requested;
-  const shard = args.find(arg => arg.startsWith('--shard='))?.slice('--shard='.length).split('/').map(Number);
-  if (shard && (shard.length !== 2 || !shard.every(Number.isSafeInteger) || shard[0] < 0 || shard[1] < 1 || shard[0] >= shard[1] || shard[1] > 4))
-    throw new Error('Shard must be an index/count with at most four independent object batches.');
-  const ids = shard ? allIds.filter((_id, index) => index % shard[1] === shard[0]) : allIds;
-  if (!ids.length) throw new Error('Choose existing object ids or --all.');
-  for (const id of ids) {
-    if (args.includes('--all')) {
-      let recipe;
-      try { recipe = await json(resolve('src/objects', id, 'source/preparation/terrestrial.json')); }
-      catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') continue; throw error; }
-      if (!requireArray(requireRecord(recipe.raster).shapeViews ?? []).length) continue;
-    }
-    if (args.includes('--descriptions-only')) {
-      await refreshShapeMaterialDescriptions(id);
-      await prepareObjectProvenance({ objectDirectory: resolve('src/objects', id), publicDirectory: resolve('public/scenes', id), basis: 'recovered' });
-      continue;
-    }
-    if (args.includes('--resume')) {
-      let receipt;
-      try { receipt = await json(resolve('output/shape-material-refresh', id, 'refresh.json')); }
-      catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
-      if (receipt && receipt.recipeSha256 === sha256(await readFile(resolve('src/objects', id, 'source/preparation/terrestrial.json'))) &&
-          receipt.retainedSceneSha256 === sha256(await readFile(resolve('src/objects', id, 'prepared/scene.json')))) {
-        for (const asset of records(receipt.changedAssets)) if (sha256(await readFile(resolve('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
-          throw new Error(`Refreshed asset changed before resume: ${id}/${asset.filename}.`);
-        continue;
-      }
-    }
-    await refreshShapeMaterials(id, sourceRoot);
-  }
 }

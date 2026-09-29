@@ -3,8 +3,8 @@ import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
 import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
 import { preparedControlPitch } from '@cssearth/engine';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { resolve, relative, basename } from 'node:path';
-import { pathToFileURL, fileURLToPath } from 'node:url';
+import { resolve, relative } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { readAuthoredSources, verifiedSource } from '@cssearth/bake/objects/sources';
 import { parseWorldContextSource } from '@cssearth/bake/world-context';
 import { authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, MINIMUM_COVERED_SHARE, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
@@ -28,7 +28,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   }
   const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
   // The generated module satisfies the frame preparers' contract as it is; typing it by the module keeps drift a type error.
-  const geometry: SolarGeometry = solar as typeof import('../../src/platform/solar-geometry.mts');
+  const geometry: SolarGeometry = solar as typeof import('../../../src/platform/solar-geometry.mts');
   const ecliptic = prepareEclipticPresentationFrame(geometry, descriptor.id);
   const intended = ecliptic.basis.flat() as unknown as Matrix3, placement = await surfacePlacement(objectDirectory, bound, sources.get('features'));
   assertAtlasOrigins(descriptor.id, sources.get('raster'), placement);
@@ -244,7 +244,7 @@ export async function writeWorldNavigationArtifacts(outputDirectory: string, res
   return nextScene;
 }
 
-const invoked = process.argv[1] && basename(fileURLToPath(import.meta.url)) === 'prepare-world-navigation.js' && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+const invoked = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (invoked) {
   const [directory] = process.argv.slice(2);
   if (!directory || process.argv.length !== 3) throw new TypeError('Usage: prepare-world-navigation <object-directory>');
@@ -255,6 +255,6 @@ if (invoked) {
   await writeWorldNavigationArtifacts(outputDirectory, result, scene);
   const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = JSON.parse(await readFile(descriptorPath, 'utf8'));
   await writeFile(descriptorPath, `${JSON.stringify({ ...descriptor, properties: { ...descriptor.properties, worldFrame: result.frame } }, null, 2)}\n`);
-  const { writeObjectJson } = await import(pathToFileURL(resolve(objectDirectory, '../../../tools/prepare/prepare-object-json.mts')).href);
+  const { writeObjectJson } = await import(pathToFileURL(resolve(objectDirectory, '../../../site/build/prepare/prepare-object-json.mts')).href);
   console.log(JSON.stringify(await writeObjectJson(descriptor.id, result.definition)));
 }

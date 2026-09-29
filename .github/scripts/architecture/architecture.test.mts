@@ -147,8 +147,7 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
     ['packages/renderer/src/stars/bank.ts', 'packages/core/src/index.ts'],
     ['site/c.mts', 'packages/telescope-cli/src/query.mts'], ['packages/renderer/src/sky/d.ts', 'packages/telescope-cli/src/archives/programs.mts', 'type'],
     ['packages/renderer/src/sky/d.test.ts', 'packages/telescope-cli/src/query.mts'],
-    ['tools/objects/o.mts', 'site/objects.mts'], ['tools/objects/o.mts', 'tools/prepare/cli/prepare-x.mts'],
-    ['tools/objects/o.mts', 'tools/prepare/prepare-x.mts'], ['src/platform/p.test.mts', 'tools/prepare/cli/prepare-x.mts'], ['astro.config.mts', 'tools/prepare/p.mts'],
+    ['tools/objects/o.mts', 'site/objects.mts'], ['astro.config.mts', 'tools/prepare/p.mts'],
     ['netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
     ['tools/ci/x.mts', '.github/scripts/ci/y.mts'], ['.github/scripts/ci/y.mts', 'tools/ci/z.mts'], ['.github/scripts/ci/y.mts', 'packages/core/src/validate.ts'],
     ['site/build/prepare/p.mts', 'packages/bake/src/stars/index.ts'], ['site/e.mts', 'site/build/prepare/p.mts', 'type'], ['site/test/e.test.mts', 'site/build/prepare/p.mts'],
@@ -166,8 +165,6 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
   ], 'the renderer package is runtime, type-only imports count, neither runtime owner reaches bake or the telescope command, tests may, and site/build is build-time');
   assert.deepEqual(pairs('runtime-imports-no-site-build'), ['site/e.mts>site/build/prepare/p.mts'],
     'the runtime never imports site-owned preparation, even for a type; tests and astro.config may');
-  assert.deepEqual(pairs('nothing-imports-prepare-scripts'), ['tools/objects/o.mts>tools/prepare/cli/prepare-x.mts'],
-    'a prepare entry is never imported; its library beside it may be');
   assert.deepEqual([...violations.keys()], LAYER_RULES.map(rule => rule.id));
 });
 

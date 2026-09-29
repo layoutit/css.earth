@@ -1,7 +1,7 @@
 // Refresh the named-feature catalogue of an already prepared object without re-preparing its surfaces: verify the
 // authored source pins, re-run the shared feature attachment against the prepared runtime definition, and rewrite the
 // catalogue, the runtime plan, the content document, the runtime asset manifest, the prepared provenance and the
-// object descriptor. Usage: node tools/objects/dist/refresh-features.js <objectId> [...]
+// object descriptor. Usage: node site/build/prepare/refresh-features.ts <objectId> [...]
 import { updateInventory } from '@cssearth/objects/node';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -50,7 +50,7 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   // their delivery pins, not rebaked: record recovered lineage instead of claiming a fresh
   // verification of every photographic source and terrain input in the object package.
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
-  const writer = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-object-json.mts')).href), 'prepared object writer');
+  const writer = record(await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/prepare-object-json.mts')).href), 'prepared object writer');
   if (typeof writer.writeObjectJson !== 'function') throw new TypeError('Prepared object writer is missing.');
   await (writer.writeObjectJson as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, attached.definition as Record<string, unknown>);
   return { count: Number(record(plan.catalog, 'catalog').count) +
