@@ -15,8 +15,8 @@
     ],
     "cycleClosingEdges": [
       {"from":"site/search","to":"site(root)","imports":8},
+      {"from":"site(root)","to":"site/navigation","imports":7},
       {"from":"site(root)","to":"site/scene","imports":5},
-      {"from":"site(root)","to":"site/navigation","imports":3},
       {"from":"site/shell","to":"site/scene","imports":2},
       {"from":"labs/nebula-pkg/lab","to":"labs/nebula(app)","imports":1},
       {"from":"site/layouts","to":"site/components","imports":1},
@@ -47,8 +47,6 @@
       {"from":"packages/renderer/src/navigation/world-camera-picking.test.mts","to":"site/runtime-policy.mts"},
       {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/objects.mts"},
       {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/system-framing.mts"},
-      {"from":"packages/renderer/src/volume/prepared-volume-lenses.test.ts","to":"labs/nebula/packages/volume-viewer/src/scene/cloud-inspection.ts"},
-      {"from":"packages/renderer/src/volume/prepared-volume-runtime.test.ts","to":"labs/nebula/packages/volume-viewer/src/scene/tone-resources.ts"},
       {"from":"packages/telescope-cli/authoring/circumstellar/disc-envelope.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/authoring/hst/slit-scan-map.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/authoring/interferometry/author-thermal-maps.test.mts","to":"tests/objects/source-test.mts"},
