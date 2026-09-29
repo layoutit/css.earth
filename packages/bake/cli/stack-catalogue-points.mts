@@ -1,11 +1,11 @@
 /**
- * Stack nested merged levels (merge.mts, each naming the levels it lies `within`) into one bank the app draws as a
+ * Stack nested merged levels (merge-catalogue-points.mts, each naming the levels it lies `within`) into one bank the app draws as a
  * growing prefix, so zooming in adds dots one at a time and never takes one away. `source/<id>/stack.json` lists the
  * levels from the outermost in: the first with `fullDetailUnits` (the camera distance within which it is drawn whole;
  * farther, a share that falls with distance), each next one with `appearUnits: [from, to]`, the half-width of the view
  * at the bank's origin over which its dots appear, the first at `from` and the last at `to`, evenly in the logarithm of
  * the half-width. A level starts where its region covers the view, so its edge is never on screen while it fills in,
- * and its dots are in merge.mts's fixed shuffle, so they appear across the region at once. Writes `prepared/<id>.json`.
+ * and its dots are in merge-catalogue-points.mts's fixed shuffle, so they appear across the region at once. Writes `prepared/<id>.json`.
  *
  * Usage: node packages/bake/cli/stack-catalogue-points.mts <object-directory> <id>
  */
@@ -14,7 +14,7 @@ import { basename, resolve } from 'node:path';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
 
 const [objectArgument, id] = process.argv.slice(2);
-if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: stack.mts <object-directory> <id>');
+if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: stack-catalogue-points.mts <object-directory> <id>');
 const objectDirectory = resolve(objectArgument), prepared = resolve(objectDirectory, 'prepared');
 const recipePath = resolve(objectDirectory, 'source', id, 'stack.json');
 const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { schema?: unknown; id?: unknown; meaning?: unknown; basis?: unknown;

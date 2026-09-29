@@ -232,7 +232,7 @@ astronomers have catalogued, each a sharp dot at its published position, over a
 faint backing that shows the galaxy's overall shape. Each catalogue keeps its
 table in `source/<id>/` beside a `points.json` recipe naming the columns, the
 authors' own selection and the citation.
-[`prepare.mts`](../../../packages/bake/cli/prepare-catalogue-points.mts) has Astropy
+[`prepare-catalogue-points.mts`](../../../packages/bake/cli/prepare-catalogue-points.mts) has Astropy
 convert each row to Sun-centred ICRS coordinates; rows without a distance are
 left out.
 
@@ -262,13 +262,18 @@ left out: its ±7 km/s velocity uncertainty through a flat rotation curve (R0 =
 the sources toward tangent points, the centre and the anticentre, which pile
 onto a circle through the Sun and the centre; the cut drops 532 of them.
 
-**Colour.** Each layer keeps its catalogue colour, mixed halfway to white so it
-reads as a tint of starlight, then raised to the power 1.6 so the coloured dots
-sit in the backing and the whitest keep their sparkle. Both are presentation
-choices, recorded in the merge recipe.
+**Colour and tone.** Each layer keeps its catalogue colour, mixed halfway to
+white so it reads as a tint of starlight, then raised to the power 1.6 so the
+coloured dots sit in the backing and the whitest keep their sparkle. A dot's
+tone then darkens that colour; no dot is transparent. Where the catalogue
+measures brightness the tone follows it, linear in absolute magnitude: hot
+stars by 2MASS Ks (full at M_Ks −2.5, 45% at 0) and the census stars by Gaia G
+(full at M_G 4, about the Sun's, 25% at 16, so most of these red dwarfs are
+dim). Other layers take their recipe's fixed tone. These are presentation
+choices, recorded in each recipe.
 
 **An even density at every zoom.** Every catalogue is complete only out to some
-distance from the Sun, so together they pile up around it. [`merge.mts`](../../../packages/bake/cli/merge-catalogue-points.mts)
+distance from the Sun, so together they pile up around it. [`merge-catalogue-points.mts`](../../../packages/bake/cli/merge-catalogue-points.mts)
 keeps a dot, in a fixed shuffle, while the dots within a small face-on kernel
 stay under the thin disc's own density law: exponential in Galactocentric radius
 with a 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016). The galaxy level
@@ -277,7 +282,7 @@ along the solar circle (6,586 dots). Nested levels around the Sun add dots up
 to 150 per kpc² out to 3 kpc, 1,500 out to 800 pc, 50,000 out to 100 pc and
 1,000,000 out to 20 pc; each adds only dots the levels around it do not draw,
 and its density falls to nothing over its outer half.
-[`stack.mts`](../../../packages/bake/cli/stack-catalogue-points.mts) joins them into
+[`stack-catalogue-points.mts`](../../../packages/bake/cli/stack-catalogue-points.mts) joins them into
 [one bank](source/dots/stack.json) of 13,420 dots. The app draws a growing
 share of it as you zoom in: the galaxy level whole within 10 kpc, then each
 level's dots one at a time as the view narrows past the level's radius. A
@@ -301,14 +306,15 @@ galaxy's nebulae have faded, about 19 kpc out.
 fuller. Distances carry their catalogues' errors. The disc has no warp and the
 bulge is one in 16 of its RR Lyrae stars.
 
-## Bulge evidence
+## Evidence
 
-Two [browser captures](evidence/2026-09-28/capture.json) of this version show the
-galaxy as its bulge slices only: 603 slice elements, no disc image and no impostor
-view. From the [Milky Way overview](evidence/2026-09-28/bulge-overview.jpg) the
-bulge surrounds the Sagittarius A* circle. From 39,183 light-years above the
-[Sun's neighbourhood](evidence/2026-09-28/near-sun.jpg) the inner disc fades out
-before the Sun. On css.earth before this change the same camera showed a 344 px
-face-on impostor picture of the whole galaxy beside the Sun, although the camera
-is inside the galaxy. These check the displayed composition and element counts;
-they are not frame-rate measurements.
+Four [browser captures](evidence/2026-09-29/capture.json) of this version zoom
+out from the Sun along one line of sight. [Near the Sun](evidence/2026-09-29/near-sun.jpg)
+the census dots are mostly dim red dwarfs; in the
+[Sun's neighbourhood](evidence/2026-09-29/sun-neighbourhood.jpg) and
+[2,100 light-years out](evidence/2026-09-29/disc-2100ly.jpg) the disc's hot
+stars gather toward its far side, as the Milky Way does in our sky; from
+[39,500 light-years](evidence/2026-09-29/galaxy-39500ly.jpg) the tracers and
+the RR Lyrae bulge sit on the backing around Sgr A*. No level's edge is on
+screen in any of them. They check the displayed composition, not frame rate.
+

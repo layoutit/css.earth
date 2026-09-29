@@ -5,13 +5,17 @@
     "path": "cf4-hyperleda.csv.gz",
     "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+PGC,DM,e_DM,DMtf,DMfp,DMsbf,RAJ2000,DEJ2000+FROM+%22J/ApJ/944/94/table2%22+ORDER+BY+PGC",
     "join": {
-      "column": "T",
-      "origin": "http://atlas.obs-hp.fr/hyperleda/fG.cgi?n=meandata&c=o&of=1,leda,simbad&nra=l&nakd=1&d=pgc%2C%20t%2C%20e_t%2C%20v&sql=t%20is%20not%20null%20and%20v%3C33000&ob=&a=csv%5B%2C%5D",
+      "columns": [
+        "T",
+        "BTC"
+      ],
       "on": "PGC",
       "source": "hyperleda-2014",
-      "note": "HyperLEDA's numerical morphological type t for each galaxy, joined by PGC number; empty where HyperLEDA has none. Queried 2026-09-29."
+      "origin": "http://atlas.obs-hp.fr/hyperleda/fG.cgi?n=meandata&c=o&of=1,leda,simbad&nra=l&nakd=1&d=pgc%2C%20t%2C%20e_t%2C%20v&sql=t%20is%20not%20null%20and%20v%3C33000&ob=&a=csv%5B%2C%5D",
+      "magnitudeOrigin": "http://atlas.obs-hp.fr/hyperleda/fG.cgi?n=meandata&c=o&of=1,leda,simbad&nra=l&nakd=1&d=pgc%2C%20btc%2C%20itc%2C%20mabs%2C%20v&sql=v%3C33000%20and%20(btc%20is%20not%20null%20or%20itc%20is%20not%20null)&ob=&a=csv%5B%2C%5D",
+      "note": "HyperLEDA's numerical morphological type t and its total B magnitude corrected for Galactic extinction, inclination and redshift (btc), each joined by PGC number; empty where HyperLEDA has none. Queried 2026-09-29."
     },
-    "bytes": 368550,
+    "bytes": 439324,
     "format": "csv",
     "gzip": true,
     "columns": {
@@ -104,6 +108,15 @@
         "colorCss": "#ffffff",
         "basis": "The D65 white point: a galaxy with no measured type is drawn without a colour."
       }
+    },
+    "toneBy": {
+      "magnitudeColumn": 6,
+      "band": "B (HyperLEDA btc, corrected total)",
+      "brightMagnitude": -21.5,
+      "faintMagnitude": -17.5,
+      "faintTone": 0.3,
+      "steps": 8,
+      "basis": "Presentation of a measured quantity: each galaxy's absolute B magnitude (btc minus its CF4 distance modulus) darkens its colour, from full at M_B -21.5 to 30% at -17.5, linear in magnitude. The bounds are about the 5th and 95th percentiles of the field (-21.4 and -17.7), so the tones span the galaxies drawn."
     }
   },
   "classBasis": "Class bounds are the midpoints between the de Vaucouleurs numerical types the templates stand for (E -5, S0 -2, Sa 1, Sb 3, Sc 5); types later than Sc take the Sc template, the latest in the atlas."

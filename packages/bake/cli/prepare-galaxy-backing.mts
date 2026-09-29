@@ -24,7 +24,7 @@ const ICRS_TO_GALACTIC = [[-0.0548755604162154, -0.8734370902348850, -0.48383501
   [0.4941094278755837, -0.4448296299600112, 0.7469822444972189], [-0.8676661490190047, -0.1980763734312015, 0.4559837761750669]];
 
 const [objectArgument, id] = process.argv.slice(2);
-if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: prepare.mts <object-directory> <id>');
+if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: prepare-galaxy-backing.mts <object-directory> <id>');
 const objectDirectory = resolve(objectArgument), prepared = resolve(objectDirectory, 'prepared'), sourceDirectory = resolve(objectDirectory, 'source', id);
 const recipePath = resolve(sourceDirectory, 'recipe.json');
 const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as {
