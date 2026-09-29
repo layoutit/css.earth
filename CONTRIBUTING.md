@@ -120,6 +120,14 @@ the upload; this is not a manifest digest check during acquisition. Earlier
 hash-addressed source-cache keys may remain in R2, but current restorers use the
 path keys and fall back to the source archive.
 
+A restorer writes a file only when its bytes match its extension (JPEG, PNG, WebP,
+TIFF, FITS or gzip), and never writes an HTML page, even one served with HTTP 200:
+a publisher page is often the recorded origin, not the file. An input this
+repository builds, such as a composite, names its script in a `generator` field.
+Its origin then records the material, not the file, so the restorer reads it only
+from the source cache and otherwise says which script makes it. Publish a built
+input with `--object=<id>` after running its generator.
+
 Both scripts need an authenticated `wrangler`. Neither ever deletes a key.
 
 The public asset bucket's read-only CORS policy is

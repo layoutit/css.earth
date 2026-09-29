@@ -107,7 +107,9 @@ function presentation(raw: unknown): Presentation {
 }
 /** A manifest input, identified from its bytes when the file is present. */
 function source(raw: unknown, identity: { sha256: string; bytes: number } | null): ProvenanceSource {
-  const value = sourceObject(raw, ['id', 'path', 'origin', 'sourceUrl', 'title', 'credit', 'displayCredit', 'acquisition', 'sourceBinding', 'capture', 'lensId', 'license', 'dependencies']);
+  const value = sourceObject(raw, ['id', 'path', 'origin', 'sourceUrl', 'title', 'credit', 'displayCredit', 'acquisition', 'sourceBinding', 'capture', 'lensId', 'license', 'dependencies', 'generator']);
+  // A built input names the script that writes it; the source restore reads it (`restoreSourceInputs`).
+  if (value.generator !== undefined) sourcePath(value.generator);
   return { id: sourceId(value.id), kind: 'source-input', path: sourcePath(value.path), origin: sourceUrl(value.origin), sourceUrl: sourceUrl(value.sourceUrl),
     title: sourceText(value.title), credit: sourceText(value.credit), acquisition: sourceText(value.acquisition),
     ...(identity ? { sha256: identity.sha256, bytes: identity.bytes } : {}), sourceBinding: parseSourceBinding(value.sourceBinding),
