@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.object-stage:where([data-object-id="asteroid-2017-of201"]) > :is(.asteroid-2017-of201-sun-camera, .asteroid-2017-of201-camera, .asteroid-2017-of201-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-sun-camera, :where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--asteroid-2017-of201-surface-image); background-repeat: no-repeat;
+}
+:where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-body > .asteroid-2017-of201-polar { background-image: var(--asteroid-2017-of201-poles-image); }
+:where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-material-root { z-index: 3; --asteroid-2017-of201-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-material, :where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-material { background-repeat: no-repeat; transform: rotate(var(--asteroid-2017-of201-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="asteroid-2017-of201"]) .asteroid-2017-of201-billboard { border-radius: 50%; background-color: var(--asteroid-2017-of201-billboard-color); opacity: var(--asteroid-2017-of201-billboard-opacity); }
+.object-stage:where([data-object-id="asteroid-2017-of201"])[data-lod="billboard"] .asteroid-2017-of201-scene, .object-stage:where([data-object-id="asteroid-2017-of201"])[data-lod="marker"] .asteroid-2017-of201-scene { visibility: hidden; }
+.object-stage:where([data-object-id="asteroid-2017-of201"])[data-lod="marker"] .asteroid-2017-of201-billboard { opacity: 0; }
+

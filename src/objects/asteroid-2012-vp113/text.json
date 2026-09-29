@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "asteroid-2012-vp113",
+  "card": {
+    "text": "A Sedna-like body that never comes closer than about 80 au.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-28",
+        "locator": "Record for 2012 VP113: q = 80.6 au, a = 267 au, e = 0.70 (Horizons elements at 2026-09-03 TDB)"
+      },
+      {
+        "catalogueId": "doi-10-1038-nature13156",
+        "url": "https://doi.org/10.1038/nature13156",
+        "label": "Trujillo & Sheppard (2014), Nature 507, 471",
+        "checked": "2026-09-28",
+        "locator": "Abstract: a second Sedna-like object, 2012 VP113, with perihelion 80 au"
+      },
+      {
+        "catalogueId": "arxiv-1608-08772",
+        "url": "https://arxiv.org/abs/1608.08772",
+        "label": "Sheppard & Trujillo (2016), The Astronomical Journal 152, 221, Table 2: diameter 550 km for an assumed albedo of 0.10",
+        "checked": "2026-09-28"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "2012 VP113 never comes closer to the Sun than about 80 au, and at the far end of its orbit it is about 450 au away. Its discoverers reported it in 2014 as a second Sedna-like body.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-28",
+        "locator": "Record for 2012 VP113: q = 80.6 au, a = 267 au, e = 0.70 (Horizons elements at 2026-09-03 TDB)"
+      },
+      {
+        "catalogueId": "doi-10-1038-nature13156",
+        "url": "https://doi.org/10.1038/nature13156",
+        "label": "Trujillo & Sheppard (2014), Nature 507, 471",
+        "checked": "2026-09-28",
+        "locator": "Abstract: a second Sedna-like object, 2012 VP113, with perihelion 80 au"
+      },
+      {
+        "catalogueId": "arxiv-1608-08772",
+        "url": "https://arxiv.org/abs/1608.08772",
+        "label": "Sheppard & Trujillo (2016), The Astronomical Journal 152, 221, Table 2: diameter 550 km for an assumed albedo of 0.10",
+        "checked": "2026-09-28"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at the estimated diameter",
+      "detail": "Inferred shape",
+      "summary": "A sphere 550 km across, the size its discoverers estimate for an assumed albedo.",
+      "sources": [
+        {
+          "catalogueId": "arxiv-1608-08772",
+          "url": "https://arxiv.org/abs/1608.08772",
+          "label": "Sheppard & Trujillo (2016), The Astronomical Journal 152, 221, Table 2: diameter 550 km for an assumed albedo of 0.10",
+          "checked": "2026-09-28"
+        }
+      ]
+    }
+  }
+}
