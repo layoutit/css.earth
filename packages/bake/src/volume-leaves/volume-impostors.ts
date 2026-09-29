@@ -1,6 +1,5 @@
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 /** Bounded offline views of the accepted PolyCSS leaves; no density reconstruction. */
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import type { PreparedCssVolume, PreparedVolumeImpostors, PreparedVolumeLeaf, VolumeAxis, VolumeVector } from '@cssearth/renderer/volume/types.ts';
@@ -79,7 +78,6 @@ export async function prepareVolumeImpostors(options: {
     decodedBytes += count * 4;
     if (count > MAX_TEXTURE_PIXELS || decodedBytes > MAX_DECODED_BYTES) throw new TypeError('Impostor source textures exceed the bounded decode budget.');
     const bytes = await readResource(leaf.texturePath);
-    if (bytes.byteLength !== resource.bytes || digest(bytes) !== resource.sha256) throw new TypeError(`Impostor texture identity mismatch: ${leaf.texturePath}.`);
     const { data, info } = await sharp(bytes, { limitInputPixels: MAX_TEXTURE_PIXELS }).toColourspace('srgb').ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     if (info.width !== resource.width || info.height !== resource.height || info.channels !== 4 || data.length !== count * 4) {
       throw new TypeError(`Impostor decoded texture dimensions mismatch: ${leaf.texturePath}.`);
@@ -91,7 +89,7 @@ export async function prepareVolumeImpostors(options: {
     const rgba = render(view, stacks, textures, radiusUnits, brightness);
     const bytes = await sharp(rgba, { raw: { width: SIZE, height: SIZE, channels: 4 } }).png().toBuffer();
     await writeResource(view.texturePath, bytes);
-    preparedResources.push({ path: view.texturePath, sha256: digest(bytes), bytes: bytes.byteLength, width: SIZE, height: SIZE });
+    preparedResources.push({ path: view.texturePath, bytes: bytes.byteLength, width: SIZE, height: SIZE });
   }
   return { ...volume, resources: [...resources, ...preparedResources], impostors: {
     schema: 'cssearth-volume-impostors@1', radiusUnits,
@@ -215,7 +213,6 @@ function samplePremultiplied(pixels: Pixels, x: number, y: number, result: numbe
 }
 
 function cssPixels(value: string): number[] { return value.trim().split(/\s+/u).map(part => Number.parseFloat(part)); }
-function digest(bytes: Uint8Array): string { return createHash('sha256').update(bytes).digest('hex'); }
 function normalize(vector: VolumeVector): VolumeVector {
   const length = Math.hypot(...vector);
   return [vector[0] / length, vector[1] / length, vector[2] / length];

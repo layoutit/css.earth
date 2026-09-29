@@ -1,5 +1,4 @@
-import { sha256 } from '@cssearth/core/node';
-import {requireRecord,requireArray,hasErrorCode,shape,text,number,array,optional} from '@cssearth/core';
+import {requireRecord,hasErrorCode,shape,text,number,array,optional} from '@cssearth/core';
 const parseSourceRef=shape({id:text,path:text});
 const parseDescriptor=shape({id:text,properties:shape({recipe:shape({sources:array(parseSourceRef)})})});
 const entry_=shape({path:text});
@@ -46,13 +45,6 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
     const panel = await read('prepared/panel.json');
     await publish('prepared/panel.json', { ...panel, facts, moreFacts });
   } catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }
-  for (const path of ['prepared/authored-preparation.json']) {
-    try {
-      const receipt = await read(path);
-      await publish(path, { ...receipt,
-        sources: requireArray(receipt.sources).map(value => {const source=requireRecord(value);return source.id === 'content' && source.sha256 !== undefined ? { ...source, sha256: sha256(bytes) } : source;}) });
-    } catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }
-  }
   // Nothing under prepared/ is tracked: a changed fact panel is recorded by the inventory and still has to be published.
   if (written) await refreshPreparedInventory(descriptor.id, resolve(objectDirectory, '../../..'));
   return { id: descriptor.id, count: ordered.length, preview: ordered.slice(0, 4).map(fact => fact.id) };

@@ -1,8 +1,6 @@
 // The record format shared by the preparation trace (packages/bake/cli/preparation-trace.mts) and the preparation cache.
 // Keep this entry free of project imports but `@cssearth/core`: the trace loads it before it starts recording, so
 // anything it imported would be missing from every record.
-import { sha256 } from '@cssearth/core/node';
-import { createHash } from 'node:crypto';
 import { isRecord } from '@cssearth/core';
 
 export const PREPARATION_TRACE_VARIABLE = 'CSSEARTH_PREPARATION_TRACE';
@@ -12,7 +10,7 @@ export const PREPARATION_TRACE_SCHEMA = 'cssearth-preparation-trace@1';
 export type PreparationAccess = 'read' | 'load' | 'probe' | 'list' | 'tree' | 'write';
 export type DescriptorView = 'registry' | 'recipe' | 'pins';
 /** What the path held when the process first touched it: size and modification time, whether it was a directory, or absence. */
-export interface TracedState { size?: number; modified?: number; directory?: true; missing?: true; views?: Record<DescriptorView, string> }
+export interface TracedState { size?: number; modified?: number; directory?: true; missing?: true; views?: Record<DescriptorView, unknown> }
 export interface TracedFile { accesses: PreparationAccess[]; first: TracedState }
 export interface TracedCommand { command: string; args: string[]; cwd: string; shell: boolean }
 export interface PreparationTrace {
@@ -43,8 +41,16 @@ export function descriptorView(value: unknown, view: DescriptorView): unknown {
   return { ...without(value, 'prepared') as Record<string, unknown>, properties: recipe };
 }
 
-export function descriptorDigest(text: string, view: DescriptorView): string {
+/** One owner's view of an object.json text, as plain JSON data a receipt can hold and compare. Text that is not JSON is
+ * its own view, so any edit to it counts. */
+export function descriptorTextView(text: string, view: DescriptorView): unknown {
   let value: unknown;
-  try { value = JSON.parse(text); } catch { return sha256(text); }
-  return createHash('sha256').update(JSON.stringify(descriptorView(value, view)) ?? '').digest('hex');
+  try { value = JSON.parse(text); } catch { return text; }
+  const viewed = descriptorView(value, view);
+  return viewed === undefined ? null : JSON.parse(JSON.stringify(viewed));
+}
+
+/** Every owner's view of an object.json text. */
+export function descriptorTextViews(text: string): Record<DescriptorView, unknown> {
+  return { registry: descriptorTextView(text, 'registry'), recipe: descriptorTextView(text, 'recipe'), pins: descriptorTextView(text, 'pins') };
 }

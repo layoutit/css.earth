@@ -31,9 +31,9 @@ test('radial display subdivision preserves samples, stitches shared geometry and
 test('display subdivision parsing is bounded and omission preserves the legacy recipe shape', () => {
   const base = { schema: 'cssearth-surface-shell-recipe@1', frame: { referenceFrame: 'x', epochJdTt: 1, originM: [0, 0, 0],
     localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: { min: [-4, -4, -4], max: [4, 4, 4] } },
-  shape: { kind: 'indexed-mesh', path: 'mesh.json', sha256: '0'.repeat(64) }, material: { colorLinear: [1, 1, 1], opacity: .2, rimFadeFacing: .1 },
+  shape: { kind: 'indexed-mesh', path: 'mesh.json' }, material: { colorLinear: [1, 1, 1], opacity: .2, rimFadeFacing: .1 },
   atlas: { tileSize: 8, columns: 2, frames: 2 }, visibility: { hiddenInsideUnits: 1, fullUntilUnits: 2, hiddenBeyondUnits: 3 },
-  unitScale: 1, provenance: { path: 'p.json', sha256: '0'.repeat(64) } };
+  unitScale: 1, provenance: { path: 'p.json' } };
   assert.equal(parseShellRecipe(base).shape.displaySubdivision, undefined);
   assert.deepEqual(parseShellRecipe({ ...base, shape: { ...base.shape,
     displaySubdivision: { method: 'radial-linear', segmentsPerEdge: 4 } } }).shape.displaySubdivision,

@@ -7,9 +7,8 @@ import { readCompilerBakeResult, type CompilerBakeResult, type CompilerLensVolum
 import { compilerSlabMaterial } from '../../materials/slab-material.ts';
 import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '../../coordinates/compiler-frame.ts';
 import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
-import { sha256 } from '@cssearth/core/node';
 import { recolorCloudSlices } from '../slices/material.ts';
-import { verifyCompilerAlphaIdentity, type BakeCompilerOptions, type CompilerLensInput } from './bake.ts';
+import { compilerAlpha, verifyCompilerSharedAlpha, type BakeCompilerOptions, type CompilerLensInput } from './bake.ts';
 
 export interface RetainedMaterialBankOptions {
   root: string; outputDirectory: string; scene: CompilerBakeResult; neutralSlicesPin: CompilerPin;
@@ -22,14 +21,13 @@ const positive = (v: unknown): v is number => finite(v) && v > 0;
 const integer = (v: unknown): v is number => positive(v) && Number.isSafeInteger(v);
 const vector = (v: unknown): v is Vector3 => Array.isArray(v) && v.length === 3 && v.every(finite);
 const path = (v: unknown): v is string => typeof v === 'string' && !!v && !isAbsolute(v) && !v.split('/').includes('..') && !/[\\\u0000-\u0020]/u.test(v);
-const digest = (v: unknown): v is string => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
 function quad(v: unknown): v is VolumeSliceQuad {
   return record(v) && typeof v.id === 'string' && !!v.id && ['x', 'y', 'z'].includes(String(v.axis)) &&
     finite(v.sliceIndex) && Number.isInteger(v.sliceIndex) && v.sliceIndex >= 0 && path(v.texturePath) &&
     integer(v.widthPx) && v.widthPx <= 8192 && integer(v.heightPx) && v.heightPx <= 8192 &&
     Array.isArray(v.vertices) && v.vertices.length === 4 && v.vertices.every(vector) &&
     Array.isArray(v.uvs) && v.uvs.length === 4 && v.uvs.every(uv => Array.isArray(uv) && uv.length === 2 && uv.every(finite)) &&
-    vector(v.center) && vector(v.normal) && digest(v.sha256) && integer(v.bytes) &&
+    vector(v.center) && vector(v.normal) && !Object.hasOwn(v, 'sha256') && integer(v.bytes) &&
     finite(v.alphaCoverage) && v.alphaCoverage >= 0 && v.alphaCoverage <= 1;
 }
 /** Validate the external slice manifest before exposing it to the material sampler. */
@@ -69,13 +67,13 @@ function readSlices(v: unknown, scene: CompilerBakeResult): VolumeSlices {
   validateVolumeLayerSlices(slices);
   return slices;
 }
-const geometry = (s: VolumeSlices) => s.quads.map(({ texturePath: _p, sha256: _h, bytes: _b, ...q }) => q);
+const geometry = (s: VolumeSlices) => s.quads.map(({ texturePath: _p, bytes: _b, ...q }) => q);
 
 export interface RetainedMaterialBackend<Volume> {
  readVolume(value:unknown):Volume;
  compileVolume(input:Parameters<import('./bake.ts').CompilerBakeBackend['compileVolume']>[0]):Volume;
  assertBankIdentity(volume:Volume,scene:CompilerBakeResult):void;
- assertLensGeometry(neutral:Volume,textured:Volume,scene:CompilerBakeResult,lens:Pick<CompilerLensVolume,'alphaSha256'>):void;
+ assertLensGeometry(neutral:Volume,textured:Volume,scene:CompilerBakeResult):void;
 }
 export async function prepareRetainedMaterialBank<Volume>(options: RetainedMaterialBankOptions, backend:RetainedMaterialBackend<Volume>): Promise<CompilerLensVolume> {
   const { root, outputDirectory, lens, neutralSlicesPin } = options;
@@ -94,8 +92,8 @@ export async function prepareRetainedMaterialBank<Volume>(options: RetainedMater
   const slices = readSlices(JSON.parse((await sourceBytes(root, neutralSlicesPin)).toString('utf8')), scene);
   const compile = (bank: VolumeSlices) => backend.compileVolume({ id: `compiler-${scene.volumeId ?? scene.id}`,
     frame: scene.frame, slices: scene.frame.referenceFrame === COMPILER_PHYSICAL_REFERENCE ? compilerPreparedSlices(bank) : bank });
-  backend.assertLensGeometry(neutral, compile(slices), scene, {});
-  await verifyCompilerAlphaIdentity(scene.alphaSha256, sourceDirectory, slices);
+  backend.assertLensGeometry(neutral, compile(slices), scene);
+  const neutralAlpha = await compilerAlpha(sourceDirectory, slices);
   const origin = scene.coordinates.localOriginArcsec;
   const material = compilerSlabMaterial((x, y, z, out) => {
     out.fill(NaN); options.sampleEmission(x, y, z, out);
@@ -111,11 +109,11 @@ export async function prepareRetainedMaterialBank<Volume>(options: RetainedMater
     sampleImageRgb(x, y, z, out, slab) { return material(x + origin[0], y + origin[1], z + origin[2], out, slab); },
     onProgress: options.onProgress });
   if (JSON.stringify(geometry(slices)) !== JSON.stringify(geometry(painted.slices))) throw new Error('Retained compiler material changed quad geometry.');
-  await verifyCompilerAlphaIdentity(scene.alphaSha256, output, painted.slices);
+  await verifyCompilerSharedAlpha(neutralAlpha, output, painted.slices);
   painted.slices.provenance = { schema: 'cssearth-compiler-retained-material@1', fieldIdentity: scene.fieldIdentity,
-    alphaSha256: scene.alphaSha256, materialLensId: lens.id, neutral: scene.neutral, neutralSlices: neutralSlicesPin,
+    materialLensId: lens.id, neutral: scene.neutral, neutralSlices: neutralSlicesPin,
     reference: slices.provenance, coverage: painted.coverage };
-  const volume = compile(painted.slices); backend.assertLensGeometry(neutral, volume, scene, {});
+  const volume = compile(painted.slices); backend.assertLensGeometry(neutral, volume, scene);
   const bytes = Buffer.from(JSON.stringify(volume) + '\n');
   await writeFile(containedPath(output, 'volume-slices.json'), JSON.stringify(painted.slices) + '\n');
   await writeFile(containedPath(output, 'volume.json'), bytes);

@@ -46,9 +46,6 @@ const positive = (v: unknown, at: string, integer = false): number => {
 const text = (v: unknown, at: string): string => {
   if (typeof v !== 'string' || !v) throw new TypeError(`${at} must be a string.`); return v;
 };
-const digest = (v: unknown, at: string): string => {
-  const s = text(v, at); if (!/^[a-f0-9]{64}$/.test(s)) throw new TypeError(`${at} must be SHA256.`); return s;
-};
 const path = (v: unknown): string => {
   const p = text(v, 'source path'); if (p.startsWith('/') || p.split('/').includes('..') || /[\\\0]/.test(p)) throw new TypeError('Path must be contained.'); return p;
 };
@@ -103,6 +100,8 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
   const r = object(value, 'recipe');
   if (r.schema !== 'cssearth-image-layer-recipe@1') throw new TypeError('Unsupported image-layer recipe schema.');
   const s = object(r.source, 'source'), o = object(r.observation, 'observation'), t = object(r.target, 'target');
+  for (const [at, pin] of [['source', s], ['provenance', r.provenance]] as const) if (pin !== null && typeof pin === 'object') for (const key of Object.keys(pin))
+    if (/sha256/iu.test(key)) throw new TypeError(`Image-layer recipe ${String(r.id)} ${at} carries the removed content digest field ${key}.`);
   const g = object(r.geometry, 'geometry'), b = object(r.bake, 'bake'), e = object(b.encoding, 'encoding');
   const p = object(r.provenance, 'provenance');
   const kind = g.kind;

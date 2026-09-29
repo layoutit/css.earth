@@ -6,10 +6,8 @@ import type { CompilerPin } from '../../contracts/compiler-bake.ts';
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { gunzipSync } from "node:zlib";
-import { createHash } from "node:crypto";
 import { bakeMasterVolumeSlices } from "../slices/emission.ts";
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === "object" && !Array.isArray(v);
-const sha = (b: Uint8Array) => createHash("sha256").update(b).digest("hex");
 async function pinned(root: string, pin: CompilerPin) {
   if (pin.path.startsWith("/") || pin.path.split("/").includes(".."))
     throw new Error("Invalid compact source path");

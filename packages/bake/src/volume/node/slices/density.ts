@@ -6,7 +6,6 @@ import { gradePremultipliedDisplayRgb } from '../../materials/display-color.ts';
 import type { Axis, Bounds3, DisplayColorMatrix, Vector3, RadialEmission, VolumeRecipe } from '../../contracts/volume-recipe.ts';
 import type { VolumeSlices, VolumeSliceQuad } from '../../contracts/volume-slices.ts';
 import { loadVolumeSource, sampleEncoded, type VolumeSource } from '../compact-inputs/density-grid.ts';
-import { sha256 } from '@cssearth/core/node';
 export type { VolumeSlices, VolumeSliceQuad } from '../../contracts/volume-slices.ts';
 const clamp = (value: number): number => Math.max(0, Math.min(1, value));
 const smoothstep = (lo: number, hi: number, value: number): number => {
@@ -180,7 +179,7 @@ export async function prepareVolumeSlices(options: { sourceDirectory: string; ou
       const center = point(axis, depth * scale, (uMin + uMax) * scale / 2, (vMin + vMax) * scale / 2);
       const normal: Vector3 = axis === 'x' ? [-1, 0, 0] : axis === 'y' ? [0, 1, 0] : [0, 0, -1];
       quads.push({ id: `${axis}-${index}`, axis, sliceIndex: index, texturePath, widthPx: croppedWidth, heightPx: croppedHeight,
-        vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center, normal, sha256: sha256(bytes), bytes: bytes.length,
+        vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center, normal, bytes: bytes.length,
         alphaCoverage: baked.alphaCoverage * width * height / (croppedWidth * croppedHeight) });
     }
     console.log(`Prepared ${counts[axis]} ${axis.toUpperCase()} scalar-field slabs.`);

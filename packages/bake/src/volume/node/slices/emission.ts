@@ -6,7 +6,6 @@ import type { Axis, Bounds3, Vector3, VolumeImageEncoding } from '../../contract
 import { readVolumeLayerPlan, type VolumeLayerPlan, type VolumeSlices, type VolumeSliceQuad } from '../../contracts/volume-slices.ts';
 import { encodeVolumeRaster } from './raster.ts';
 import { containedPath } from '../compact-inputs/density-grid.ts';
-import { sha256 } from '@cssearth/core/node';
 
 export interface MasterDeliveryBank {
   width: number;
@@ -206,7 +205,7 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
         vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]],
         center: point(axis, depth * scale, (uMin + uSpan / 2) * scale, (vMax - vSpan / 2) * scale),
         normal: axis === 'x' ? [-1, 0, 0] : axis === 'y' ? [0, 1, 0] : [0, 0, -1],
-        sha256: sha256(bytes), bytes: bytes.length, alphaCoverage: nonzero / (width * height),
+        bytes: bytes.length, alphaCoverage: nonzero / (width * height),
         ...(group ? { slab: { start: start * scale, end: end * scale, samples: sampleCount, startCell: group.startCell, endCell: group.endCell } } : {}) });
       report(options.onProgress, { phase: 'master', axis, sliceIndex: index, completed: masters.quads.length, total, width });
     }
@@ -281,7 +280,6 @@ export async function deriveMasterVolumeSlices(options: {
   }
   for (const [index, quad] of options.masters.quads.entries()) {
     const bytes = await readFile(containedPath(options.masterDirectory, quad.texturePath));
-    if (bytes.length !== quad.bytes || sha256(bytes) !== quad.sha256) throw new TypeError(`Master bytes changed: ${quad.texturePath}.`);
     const metadata = await sharp(bytes).metadata();
     if (metadata.format !== 'png' || metadata.width !== quad.widthPx || metadata.height !== quad.heightPx || !metadata.hasAlpha) {
       throw new TypeError(`Master must be a lossless RGBA PNG with matching dimensions: ${quad.texturePath}.`);
@@ -308,7 +306,7 @@ export async function deriveMasterVolumeSlices(options: {
         physicalPoint(quad, u1, v1), physicalPoint(quad, u0, v1)];
       banks[bankIndex]!.slices.quads.push({ ...quad, texturePath, widthPx: crop.width, heightPx: crop.height,
         vertices, center: physicalPoint(quad, (u0 + u1) / 2, (v0 + v1) / 2),
-        bytes: encoded.length, sha256: sha256(encoded), alphaCoverage: crop.nonzero / (crop.width * crop.height) });
+        bytes: encoded.length, alphaCoverage: crop.nonzero / (crop.width * crop.height) });
       report(options.onProgress, { phase: 'delivery', axis: quad.axis, sliceIndex: quad.sliceIndex,
         completed: index + 1, total: options.masters.quads.length, width });
     }

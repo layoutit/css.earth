@@ -20,7 +20,7 @@ function sourceSlices(): VolumeSlices {
     quads.push({ id: `${axis}-${sliceIndex}`, axis, sliceIndex, texturePath: `${axis}-${sliceIndex}.png`, widthPx: 2, heightPx: 2,
       vertices: [point(u0, v1), point(u1, v1), point(u1, v0), point(u0, v0)], center: point((u0 + u1) / 2, (v0 + v1) / 2),
       normal: axis === 'x' ? [1, 0, 0] : axis === 'y' ? [0, 1, 0] : [0, 0, 1], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]],
-      sha256: 'a'.repeat(64), bytes: 1, alphaCoverage: 1,
+      bytes: 1, alphaCoverage: 1,
       slab: { start, end, startCell: group.startCell, endCell: group.endCell, samples: (group.endCell - group.startCell) * 4 } });
   }
   return { quads, boundsUnits, provenance: {}, approximation: { method: 'fixture', radialEmission: 'none', limitations: [],
@@ -42,6 +42,6 @@ test('prepared reflection keeps planned intervals, sample counts and logical ind
     { id: 'z-1', index: 1, slab: { start: -1, end: 3, samples: 8, startCell: 5, endCell: 7 } },
     { id: 'z-2', index: 0, slab: { start: -11, end: -1, samples: 20, startCell: 0, endCell: 5 } },
   ]);
-  assert.deepEqual(prepared.quads.map(q => [q.id, q.texturePath, q.sha256, q.uvs]), source.quads.map(q => [q.id, q.texturePath, q.sha256, q.uvs]));
+  assert.deepEqual(prepared.quads.map(q => [q.id, q.texturePath, q.bytes, q.uvs]), source.quads.map(q => [q.id, q.texturePath, q.bytes, q.uvs]));
   assert.deepEqual(compilerPreparedSlices(prepared), source, 'Reflecting geometry and interval metadata twice is an exact identity.');
 });

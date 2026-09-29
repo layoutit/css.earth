@@ -10,7 +10,6 @@ import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation }
 import sharp from 'sharp';
 import { parseStarsRecipe } from './config.ts';
 import { sourceBytes } from '../volume/node/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import type { PreparedCssPointField } from '@cssearth/renderer/stars/types.ts';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/renderer/stars/validation.ts';
 import { POINT_FIELD_MAGNITUDE_BOUND } from '@cssearth/renderer/stars/point-field-bank.ts';
@@ -74,7 +73,7 @@ test('enclosing radii are recomputed from the rounded centre and retain exact so
   assert(node.radiusUnits > 0, 'retaining the pre-rounding zero radius would wrongly cull this source row');
 });
 
-test('prepared point-field closes every source and image digest and samples the actual photometry chain', async () => {
+test('prepared point-field closes every source and image and samples the actual photometry chain', async () => {
   const descriptor = JSON.parse(await readFile(`${objectDirectory}/object.json`,'utf8')) as {properties:{preparation:{source:string}};prepared:{url:string}};
   const recipeBytes = await readFile(`${objectDirectory}/${descriptor.properties.preparation.source}`);
   const recipe = parseStarsRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);

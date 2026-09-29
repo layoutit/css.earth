@@ -1,5 +1,5 @@
-/** Say which build a preparation run would read stale, before the run fails with an unrelated-looking error (a digest
- * mismatch from an old objects package, a missing module after main moved). A build is stale when a source it compiles is
+/** Say which build a preparation run would read stale, before the run fails with an unrelated-looking error (a validator
+ * refusal from an old objects package, a missing module after main moved). A build is stale when a source it compiles is
  * newer than its output, or its output is missing. Modification times are enough for a local preflight; CI builds fresh.
  * An install older than pnpm-lock.yaml is refused first: no rebuild fixes a missing dependency.
  *

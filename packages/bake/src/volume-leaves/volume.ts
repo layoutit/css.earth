@@ -70,6 +70,6 @@ export function compileCssVolume(options: { id: string; frame: DensityVolumeFram
       return { axis, ...(rotated ? { normalUnits: normal } : {}), leaves: balanceVolumeSlices(
         leaves.filter(leaf => leaf.axis === axis).map(({ axis: _axis, ...leaf }) => leaf), axis, rotated ? normal : undefined) };
     }),
-    resources: slices.quads.filter(quad => quad.alphaCoverage !== 0).map(quad => ({ path: quad.texturePath, sha256: quad.sha256, bytes: quad.bytes,
+    resources: slices.quads.filter(quad => quad.alphaCoverage !== 0).map(quad => ({ path: quad.texturePath, bytes: quad.bytes,
       width: quad.widthPx, height: quad.heightPx })), provenance: slices.provenance, approximation: slices.approximation };
 }

@@ -7,16 +7,16 @@
 // Rows whose source has no such label (DARTS catalogue entries, Photojournal entries tagged with no target) are listed with
 // the reason, never given a guessed target. Collection writes only scratch output.
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
-import { batch, object, string, databasePath, checkoutRoot } from "@cssearth/bake/sources/astronomy-data";
+import { batch, object, string, databasePath, checkoutRoot, urlCachePath } from "@cssearth/bake/sources/astronomy-data";
 
 const dir = resolve(checkoutRoot, process.env.TARGETS_WORK_DIR ?? "output/ledger-targets");
 await mkdir(dir + "/cache", { recursive: true });
 
 async function text(url: string): Promise<string | null> {
-  const path = `${dir}/cache/${createHash("sha256").update(url).digest("hex")}.txt`;
+  const path = urlCachePath(`${dir}/cache`, url, ".txt");
+  await mkdir(dirname(path), { recursive: true });
   try { return await readFile(path, "utf8"); } catch (e) { if (!(e instanceof Error && "code" in e && e.code === "ENOENT")) throw e; }
   for (let attempt = 0; attempt < 3; attempt++) {
     try {

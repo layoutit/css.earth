@@ -4,8 +4,8 @@
 // published PDF figure; binding an object's manifest inputs to catalogue records (`author-source-records.ts`, whose command
 // `site/build/prepare/author-source-records.mts` also rewrites volume provenance); the factsheet source checks, the object-information source records and their snapshots (`prepare-object-information.ts`) and the pinned-fact
 // citations; the source records a context manifest lists, the factsheet citations and source inventory the source
-// catalogue compiles, the bibliography citations of the prepared galaxy and cluster catalogues, and the digest that
-// says whether a recorded preparation still applies to a provenance record; the context packages' provenance, compiled
+// catalogue compiles, the bibliography citations of the prepared galaxy and cluster catalogues, and the record of which
+// object a byte-verified preparation ran for; the context packages' provenance, compiled
 // from their manifests or read as installed, at the application route passed in; the facility artwork refresh, which
 // swaps model-render bytes under unchanged attribution; and the investigation ledgers beside each object and facility,
 // the shared investigation surveys they quote (`data/investigations/`) and the report over them

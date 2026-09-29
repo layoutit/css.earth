@@ -1,3 +1,4 @@
+import { refuseDigestFields } from './digest-fields.ts';
 import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
 /** Data-only emission/absorption recipe for a bounded scalar-field volume. */
 export type Vector3 = [number, number, number];
@@ -38,9 +39,6 @@ function positive(value: unknown, at: string, integer = false): number {
 export function text(value: unknown, at: string): string {
   if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be a string.`);
   return value;
-}
-function digest(value: unknown, at: string): string {
-  const s = text(value, at); if (!/^[a-f0-9]{64}$/.test(s)) throw new TypeError(`${at} must be SHA256.`); return s;
 }
 function sourcePath(value: unknown): string {
   const path = text(value, 'source path');
@@ -95,6 +93,7 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
   if (typeof b.cropTransparent !== 'boolean') throw new TypeError('cropTransparent must be boolean.');
   const p = record(r.provenance, 'provenance');
   const sky = r.sky === undefined ? undefined : record(r.sky, 'sky recipe');
+  for (const [at, pin] of [['grid', g], ['provenance', p], ['sky', sky]] as const) if (pin) refuseDigestFields(pin, `Volume recipe ${at}`);
   if (!Array.isArray(r.anchors)) throw new TypeError('anchors must be an array.');
   const anchors = r.anchors.map((entry: unknown) => {
     const anchor = record(entry, 'anchor'); return { id: text(anchor.id, 'anchor id'), referencePositionM: triple(anchor.referencePositionM, 'anchor position') };
@@ -120,6 +119,7 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
   const emission = channels(m.emission, 'emission'), absorption = channels(m.absorption, 'absorption');
   if (m.emissionTransfer === 'shared-opacity' && absorption.length > 0) throw new TypeError('Shared-opacity emission does not support absorption.');
   const acquisition = g.acquisition === undefined ? undefined : record(g.acquisition, 'acquisition');
+  if (acquisition) refuseDigestFields(acquisition, 'Volume recipe grid.acquisition');
   let imageEncoding: VolumeImageEncoding | undefined;
   if (b.imageEncoding !== undefined) {
     const encoding = record(b.imageEncoding, 'imageEncoding');

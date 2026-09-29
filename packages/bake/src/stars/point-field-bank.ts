@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { PreparedStar, PreparedStarNode, StarsRecipe } from './types.ts';
 import type { PreparedCssPointField, PreparedPointFieldBank, PreparedPointFieldQuantization } from '@cssearth/renderer/stars/types.ts';
@@ -103,7 +102,7 @@ export function encodePointFieldBank(input: {
     displayAlphaChange: entry.field === 'star.absoluteMagnitude' ? alphaChange : 0 }));
   const bytes = Buffer.from(buffer);
   const bank: PreparedPointFieldBank = Object.freeze({ encoding: POINT_FIELD_BANK_ENCODING, path: input.path, bytes: bytes.length,
-    sha256: createHash('sha256').update(bytes).digest('hex'), starIdPrefix: idPrefix, ...counts,
+    starIdPrefix: idPrefix, ...counts,
     columns: layout.columns, names: Object.freeze(names), quantization: Object.freeze(quantization) });
 
   // Decode what will ship and compare it with the prepared rows.

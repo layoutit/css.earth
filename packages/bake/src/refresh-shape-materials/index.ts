@@ -115,15 +115,16 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
     surfaces.push(surface);
   }
   // No partial changes while an asset is being baked, and no writes into a shared inode.
-  for (const [name, bytes] of originals) if (sha256(await readFile(resolve(outputDirectory, name))) !== sha256(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
-  if (sha256(await readFile(recipePath)) !== sha256(recipeBytes)) throw new Error('Recipe changed during refresh.');
+  for (const [name, bytes] of originals) if (!(await readFile(resolve(outputDirectory, name))).equals(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
+  if (!(await readFile(recipePath)).equals(recipeBytes)) throw new Error('Recipe changed during refresh.');
   const inventory = requireRecord(JSON.parse(originals.get('inventory.json')!.toString('utf8'))), assets = records(inventory.assets);
   const changed = new Map<string, { filename: string; bytes: number; sha256: string }>();
   for (const surface of surfaces) for (const key of ['map', 'surface', 'shadowSurface', 'thumbnail']) {
     const asset = requireRecord(surface[key]), filename = basename(requireString(asset.url));
     const bytes = await readFile(resolve(stage, filename));
-    if (sha256(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`Invalid staged asset: ${filename}.`);
+    if (bytes.length !== asset.bytes) throw new Error(`${id}: staged asset ${filename} is ${bytes.length} bytes; its surface records ${String(asset.bytes)}.`);
     await replaceAsset(resolve(stage, filename), resolve(publicDirectory, filename));
+    // The inventory row names the refreshed file by its R2 content address.
     if (assets.some(asset => asset.location === 'public' && asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
   }
   const replacements = new Map(surfaces.map(surface => [surface.id, surface]));
@@ -177,8 +178,8 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
   await refreshShapeMaterialDescriptions(id);
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
   const report = { id, lensIds, seconds: (performance.now() - started) / 1000,
-    retainedSceneSha256: sha256(originals.get('scene.json')!), recipeSha256: sha256(recipeBytes), material: SHAPE_MATERIAL,
-    changedAssets: [...changed.values()], retainedAssets: assets.length - changed.size,
+    material: SHAPE_MATERIAL,
+    changedAssets: [...changed.values()].map(({ filename, bytes }) => ({ filename, bytes })), retainedAssets: assets.length - changed.size,
     geometryBasis: 'Existing prepared scene; original source mesh additionally verified for source-cast lighting.' };
   await writeFile(resolve(stage, 'refresh.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ id, seconds: report.seconds, changedAssets: changed.size }));

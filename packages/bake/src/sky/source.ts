@@ -3,10 +3,10 @@ import { mkdir, readFile, writeFile, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { resolve } from 'node:path';
+import { dirname } from 'node:path';
 import { zstdCompressSync, zstdDecompressSync, constants } from 'node:zlib';
-import { sourceBytes, containedPath } from '../volume/node/index.ts';
-import { sha256 } from '@cssearth/core/node';
+import { sourceBytes, containedPath, urlCachePath } from '../volume/node/index.ts';
+import { refuseDigestFields } from '../volume/index.ts';
 import { requireRecord as record } from '@cssearth/core';
 import { decodeExrRgbHalf, halfToFloat, type LinearHalfImage } from './exr.ts';
 import type { SkyRecipe } from './config.ts';
@@ -25,18 +25,19 @@ export const HALF_LINEAR = Float64Array.from({ length: 65536 }, (_, bits) => hal
 export async function acquireSkySource(directory: string, recipe: SkyRecipe, cacheDirectory: string): Promise<void> {
   const acquisition = record(JSON.parse((await sourceBytes(directory, recipe.source.acquisition)).toString('utf8')), 'sky acquisition');
   const source = record(acquisition.source, 'sky original source'), compression = record(acquisition.compression, 'sky source compression');
+  refuseDigestFields(source, `Sky acquisition ${String(source.url)}`);
   if (acquisition.schema !== 'cssearth-exr-sky-acquisition@1' || typeof source.url !== 'string' || new URL(source.url).protocol !== 'https:' ||
     !Number.isSafeInteger(source.bytes) || Number(source.bytes) < 1 ||
     compression.format !== 'rgb16f-le-zstd-rows' || !Number.isInteger(compression.level) || Number(compression.level) < 1 || Number(compression.level) > 19) throw new TypeError('Invalid sky acquisition.');
-  await mkdir(cacheDirectory, { recursive: true });
-  const cache = resolve(cacheDirectory, `${sha256(Buffer.from(String(source.url)))}.exr`); let original: Buffer | undefined;
+  const cache = urlCachePath(cacheDirectory, source.url, '.exr'); let original: Buffer | undefined;
+  await mkdir(dirname(cache), { recursive: true });
   try { original = await readFile(cache); } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
   if (!original) {
     const response = await fetch(source.url); if (!response.ok || !response.body) throw new Error(`Sky source HTTP ${response.status}.`);
     let received = 0, announced = 0;
     const progress = new Transform({ transform(chunk: Buffer, _encoding, callback) {
       received += chunk.length;
-      if (received > Number(source.bytes)) return callback(new Error('Sky download exceeds pinned length.'));
+      if (received > Number(source.bytes)) return callback(new Error('Sky download exceeds the recorded length.'));
       if (received - announced >= 16 * 1024 * 1024) { announced = received; console.log(`Sky source: ${received}/${source.bytes} bytes`); }
       callback(null, chunk);
     } });

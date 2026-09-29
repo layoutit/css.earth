@@ -1,11 +1,9 @@
 /** Offline lens/axis WebP delivery. Geometry and non-slice resources remain unchanged. */
 import sharp from 'sharp';
-import { createHash } from 'node:crypto';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
 import type { PreparedCssVolume, PreparedVolumeLeaf, PreparedVolumeLeafStyle } from '@cssearth/renderer/volume/types.ts';
 
 const GUTTER = 2, MAX_SIZE = 8192;
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 interface Rectangle { path: string; width: number; height: number; x: number; y: number }
 function pack(rectangles: Rectangle[]) {
   let best: { width: number; height: number; rectangles: Rectangle[] } | undefined;
@@ -68,7 +66,6 @@ export async function prepareVolumeAtlases(options: {
     const atlas = pack([...rectangles.values()]), raw = Buffer.alloc(atlas.width*atlas.height*4);
     for (const rectangle of atlas.rectangles) {
       const resource = metadata.get(rectangle.path)!, bytes = await options.readResource(rectangle.path);
-      if (bytes.byteLength !== resource.bytes || hash(bytes) !== resource.sha256) throw new TypeError(`Atlas source hash mismatch: ${rectangle.path}`);
       const {data,info} = await sharp(bytes).ensureAlpha().raw().toBuffer({resolveWithObject:true});
       if (info.width !== rectangle.width || info.height !== rectangle.height || info.channels !== 4) throw new TypeError('Atlas source dimensions mismatch.');
       for (let y = -GUTTER; y < rectangle.height+GUTTER; y++) {
@@ -88,7 +85,7 @@ export async function prepareVolumeAtlases(options: {
     const path = `${options.prefix}/${stack.axis}.webp`;
     if (metadata.has(path)) throw new TypeError('Atlas output would overwrite an input resource.');
     await options.writeResource(path,bytes);
-    additions.push({path,sha256:hash(bytes),bytes:bytes.length,width:atlas.width,height:atlas.height});
+    additions.push({path,bytes:bytes.length,width:atlas.width,height:atlas.height});
     const placements = new Map(atlas.rectangles.map(rectangle => [rectangle.path,rectangle]));
     stacks.push({...stack,leaves:stack.leaves.map(leaf => {
       return {...leaf,texturePath:path,style:atlasLeafStyle(leaf,atlas,placements.get(leaf.texturePath)!)};

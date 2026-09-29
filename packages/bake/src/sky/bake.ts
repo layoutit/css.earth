@@ -4,7 +4,6 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { Vector3 } from '../volume/index.ts';
 import { sourceBytes } from '../volume/node/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import type { SkyRecipe } from './config.ts';
 import { loadSkySource, HALF_LINEAR } from './source.ts';
 import type { LinearHalfImage } from './exr.ts';
@@ -21,7 +20,7 @@ export const SKY_BASES: readonly SkyBasis[] = [
   { id: 'nz', forwardIcrf: [0, 0, -1], rightIcrf: [0, -1, 0], upIcrf: [1, 0, 0] },
 ];
 export interface BakedSkyFace extends SkyBasis {
-  texturePath: string; widthPx: number; heightPx: number; sha256: string; bytes: number;
+  texturePath: string; widthPx: number; heightPx: number; bytes: number;
   vertices: Vector3[]; uvs: [number, number][];
 }
 export interface BakedSky {
@@ -87,9 +86,9 @@ export async function loadSkyStarSprites(objectDirectory: string, stars: NonNull
   const read = async (url: string) => { const b = await readFile(resolve(objectDirectory, url)); return b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer; };
   const field = await loadPreparedCssPointField(descriptor, { read });
   if (field.id !== stars.object) throw new TypeError('Sky stars descriptor id differs from the recipe.');
-  const atlasResource = field.resources.find(resource => resource.path === field.atlas.path);
+  if (!field.resources.some(resource => resource.path === field.atlas.path))
+    throw new TypeError(`${field.id}: the point field's resources do not list its atlas ${field.atlas.path}.`);
   const atlasBytes = await readFile(resolve(objectDirectory, 'prepared', field.atlas.path));
-  if (!atlasResource || sha256(atlasBytes) !== atlasResource.sha256) throw new TypeError('Sky stars atlas digest mismatch.');
   const { data, info } = await sharp(atlasBytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   if (info.width !== field.atlas.tileSize * field.atlas.columns || info.height !== field.atlas.tileSize) throw new TypeError('Sky stars atlas shape differs from its manifest.');
   return { field, atlas: { rgba: data, width: info.width, height: info.height }, cssPixelsPerDegree: stars.cssPixelsPerDegree };
@@ -149,7 +148,7 @@ export async function prepareSkyFaces(options: { sourceDirectory: string; output
     await writeFile(resolve(outputDirectory, texturePath), bytes);
     const corners = [[-1, 1], [1, 1], [1, -1], [-1, -1]] as const;
     const vertices = corners.map(([u, v]) => basis.forwardIcrf.map((f, i) => f + u * basis.rightIcrf[i]! + v * basis.upIcrf[i]!) as Vector3);
-    return { ...basis, texturePath, widthPx: size, heightPx: size, sha256: sha256(bytes), bytes: bytes.length, vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]] };
+    return { ...basis, texturePath, widthPx: size, heightPx: size, bytes: bytes.length, vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]] };
   };
   for (const basis of SKY_BASES) {
     const rgba = skyFacePixels(source, basis, recipe.bake);

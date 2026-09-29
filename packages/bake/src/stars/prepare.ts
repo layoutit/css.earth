@@ -9,7 +9,6 @@ import { loadStarSource } from './source.ts';
 import { prepareStarHierarchy } from './hierarchy.ts';
 import { preparePointAtlas, preparePointPhotometry } from './material.ts';
 import { containedPath, sourceBytes } from '../volume/node/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import type { PreparedCssPointFieldManifest } from './types.ts';
 import { prepareDiffuseSky } from './diffuse-sky.ts';
 import { encodePointFieldBank } from './point-field-bank.ts';
@@ -48,7 +47,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
     atlas:{path:atlasPath,columns:colors.length,tileSize:recipe.atlas.tileSize,colors,haloRadii:recipe.atlas.haloRadii},
     photometry,policy:recipe.policy,labels:recipe.labels,directPoints,
     ...(recipe.diffuseSky ? {diffuseSky:diffuse.diffuseSky} : {}),
-    resources:[{path:atlasPath,sha256:sha256(atlas),bytes:atlas.length,width:colors.length*recipe.atlas.tileSize,height:recipe.atlas.tileSize},...diffuse.resources], };
+    resources:[{path:atlasPath,bytes:atlas.length,width:colors.length*recipe.atlas.tileSize,height:recipe.atlas.tileSize},...diffuse.resources], };
   // The baked provenance is published beside the manifest, not inside it: the page never reads it.
   const provenance = {source:source.provenance,catalogueMetadata:source.catalogueMetadata,reconciliation:source.reconciliation,qualification:'All catalogue rows retained; explicitly cross-identified detailed stars use body astrometry at the navigation epoch, with HYG apparent brightness preserved. Remaining rows retain HYG J2000.0 positions. Internal nodes approximate unresolved luminosity and position; no fixed pixel-error guarantee when the point pool is saturated.'};
   const envelope = {schema:'cssearth-prepared-object@1',id,type:'point-field',format:'cssearth-css-point-field-bank@1',data};

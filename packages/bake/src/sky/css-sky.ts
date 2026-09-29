@@ -21,7 +21,7 @@ function compileFaces(faces: BakedSky['faces']): PreparedCssSky['faces'] {
   });
 }
 export function compileCssSky(baked: BakedSky, frame: DensityVolumeFrame) {
-  const resource = (face: BakedSky['faces'][number]) => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: face.bytes, sha256: face.sha256 });
+  const resource = (face: BakedSky['faces'][number]) => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: face.bytes });
   const resources = [...baked.faces.map(resource), ...(baked.nearFaces ?? []).map(resource)];
   const sky: PreparedCssSky = { schema: 'cssearth-css-sky@1', referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, radiusUnits: RADIUS_UNITS,
     ...(baked.parallax ? { parallax: { originM: [...baked.parallax.originM] as [number, number, number],

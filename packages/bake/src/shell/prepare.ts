@@ -5,7 +5,6 @@ import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/object
 import { requireRecord as record } from '@cssearth/core';
 import { text } from '../volume/index.ts';
 import { sourceBytes, containedPath } from '../volume/node/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import { parseShellRecipe } from './config.ts';
 import { loadShellMesh } from './mesh.ts';
 import { prepareShellAtlas } from './atlas.ts';
@@ -40,15 +39,15 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
   await writeFile(resolve(outputDirectory, atlasPath), atlas.png);
   await writeFile(resolve(outputDirectory, meshPath), meshBytes);
   const data = compileCssSurfaceShell({ id: descriptor.id, recipe, mesh,
-    atlasResource: { path: atlasPath, sha256: sha256(atlas.png), bytes: atlas.png.length, width: atlas.width, height: atlas.height },
-    provenance: { ...provenance, preparationSha256: sha256(configBytes), mesh: { path: meshPath, sha256: sha256(meshBytes), bytes: meshBytes.length } } });
+    atlasResource: { path: atlasPath, bytes: atlas.png.length, width: atlas.width, height: atlas.height },
+    provenance: { ...provenance, mesh: { path: meshPath, bytes: meshBytes.length } } });
   const envelope = { schema: 'cssearth-prepared-object@1' as const, id: descriptor.id, type: 'surface-shell' as const,
     format: 'cssearth-surface-shell@1' as const, data };
   const bytes = Buffer.from(JSON.stringify(envelope) + '\n'), outputPath = resolve(outputDirectory, 'shell.json');
   await writeFile(outputPath, bytes);
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
     await writeFile(descriptorPath, JSON.stringify({ ...descriptor, prepared: { format: envelope.format,
-      url: relative(objectDirectory, outputPath).split('\\').join('/'), sha256: sha256(bytes) } }, null, 2) + '\n');
+      url: relative(objectDirectory, outputPath).split('\\').join('/') } }, null, 2) + '\n');
     await options.inventory!({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }
   console.log(`PREPARED ${descriptor.id}: ${data.faces.length} PolyCSS triangle leaves; ${atlas.width * atlas.height * 4} decoded RGBA bytes; ${outputPath}`);

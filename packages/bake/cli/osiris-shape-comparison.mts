@@ -4,7 +4,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '@cssearth/core/node';
 import { requireRecord, requireString } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
@@ -35,7 +34,7 @@ export async function compareOsirisShapes(id: string, lensId: string) {
     const radial = await loadRadialTerrain({ config: { ...config, geometry: { ...config.geometry, radialTerrain: item.profile } }, sourceDirectory, source });
     if (!radial) throw new Error('Missing source surface.');
     const path = requireString(requireRecord(item.profile).path);
-    return { name: item.name, path, sha256: sha256(await readFile(resolve(sourceDirectory, path))), mesh: requireTerrainMesh(radial.grid) };
+    return { name: item.name, path, mesh: requireTerrainMesh(radial.grid) };
   }));
   const frames = [];
   for (const input of recipe.frames) {
@@ -58,12 +57,12 @@ export async function compareOsirisShapes(id: string, lensId: string) {
         if (hit.distanceMeters <= (recipe.transfer.maximumSeparationMeters ?? 0)) measurements[m].withinTransfer++;
       }
     }
-    frames.push({ id: input.id, sourceSha256: sha256(bytes), samples, shapeModel: decoded.shapeModel,
+    frames.push({ id: input.id, samples, shapeModel: decoded.shapeModel,
       cameraHoldoutMaximumPixels: camera.maximumResidualPixels,
       meshes: meshes.map((mesh, i) => ({ name: mesh.name, path: mesh.path, distancesMeters: summary(measurements[i].distances),
         nearestPointDisplacementPixels: summary(measurements[i].pixels), withinTransfer: measurements[i].withinTransfer })) });
   }
-  return { schema: 'cssearth-osiris-shape-comparison@1', objectId: id, lensId, recipeSha256: sha256(recipeBytes),
+  return { schema: 'cssearth-osiris-shape-comparison@1', objectId: id, lensId,
     method: 'Every 1009th detector pixel from offset 503, excluding the camera-fitting grid. Native GEO validity and paired L4 flags apply. Compare each archive XYZ to the closest full-source point and reproject that point into the original camera. No emission, phase or visibility filtering; this deliberately includes points later withheld by the mosaic. Detector-weighted statistics are not surface coverage or measurement uncertainty.',
     meshes: meshes.map(({ mesh: _mesh, ...record }) => record), frames };
 }

@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /** Offline renders of the delivered body, including prepared rings and atmosphere. */
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, mkdir, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import sharp from 'sharp';
 import { requireRecord, requireFiniteNumber, requireString, isRecord } from '@cssearth/core';
 import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '@cssearth/bake/raster';
+import { anyChangedAfter } from '@cssearth/bake/preparation';
 import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation';
 import { parseArrivalBillboard } from '@cssearth/objects';
 import { readInventory, readPreparedObjects, updateInventory } from '@cssearth/objects/node';
@@ -44,10 +45,13 @@ try {
     const lens = requireString(controls.defaultLens);
     let distanceM = object.worldFrame.bodyRadiusM * distanceRadii;
     const filename = `${object.id}-arrival.webp`, receiptPath = resolve(output, `${object.id}.json`);
-    const identity = { runtime: sha256(runtimeBytes), size, distanceRadii, version: 3 };
+    const identity = { size, distanceRadii, version: 4 };
     if (!force) {
       const previous: unknown = await readFile(receiptPath, 'utf8').then(JSON.parse, () => null);
-      if (isRecord(previous) && JSON.stringify(previous.identity) === JSON.stringify(identity)) {
+      // A receipt holds while the runtime it was rendered from has not changed since it was written.
+      const written = await stat(receiptPath).then(info => info.mtimeMs, () => -Infinity);
+      if (isRecord(previous) && JSON.stringify(previous.identity) === JSON.stringify(identity) &&
+          !await anyChangedAfter([resolve(prepared, 'runtime.json')], written)) {
         const inventory = await readInventory(object.id, objectDirectory);
         const assets = inventory?.assets.filter(asset => asset.location === 'public' && asset.filename === filename ||
           asset.location === 'prepared' && asset.filename === 'arrival-billboard.json') ?? [];

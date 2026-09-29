@@ -1,7 +1,6 @@
 // Entry script: node packages/bake/cli/astronomy-data-verify.mts. Checks the astronomy data ledger's integrity, snapshot
-// coverage, retained evidence hashes and document links; the work is in @cssearth/bake/sources/astronomy-data.
+// coverage, retained evidence and document links; the work is in @cssearth/bake/sources/astronomy-data.
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { readFile, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 import {
@@ -25,14 +24,7 @@ function evidence(id: string): unknown {
   assert.ok(row?.content instanceof Uint8Array, "Missing evidence " + id);
   return JSON.parse(Buffer.from(row.content).toString("utf8"));
 }
-for (const r of db.prepare("SELECT id,content,sha256 FROM evidence").all()) {
-  assert.ok(r.content instanceof Uint8Array);
-  assert.equal(
-    createHash("sha256").update(r.content).digest("hex"),
-    r.sha256,
-    String(r.id),
-  );
-}
+for (const r of db.prepare("SELECT id,content FROM evidence").all()) assert.ok(r.content instanceof Uint8Array && r.content.length > 0, `evidence ${String(r.id)} has no content`);
 const rows = loadRows(),
   inventory = loadRows("inventory"),
   plans = loadProposals();
@@ -89,7 +81,6 @@ for (const label of labels) {
     .get("label:" + string(label.file));
   assert.ok(row?.content instanceof Uint8Array);
   assert.equal(row.content.length, number(label.bytes));
-  assert.equal(row.sha256, label.sha256);
   assert.equal(row.url, label.url);
 }
 const markdown = await readFile(root + "/PROPOSALS.md", "utf8");

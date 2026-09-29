@@ -11,14 +11,14 @@ test('model placement transports full support with invertible points and rotated
   assert.deepEqual(transform.bounds({ min: [1, 2, 3], max: [2, 3, 4] }), { min: [3, 7, 9], max: [5, 9, 11] });
   assert.throws(() => parseDensityPlacement({ ...placement, scale: 0 }));
 });
-test('authored placement changes coordinates only, retaining every texture pin, pixel grid, UV and alpha statistic', () => {
+test('authored placement changes coordinates only, retaining every texture path, pixel grid, UV and alpha statistic', () => {
   const quad = { id: 'z0', axis: 'z' as const, sliceIndex: 0, texturePath: 'slice.png', widthPx: 3, heightPx: 4,
     vertices: [[1, 2, 3], [2, 2, 3], [2, 3, 3], [1, 3, 3]], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]],
-    center: [1.5, 2.5, 3], normal: [0, 0, 1], sha256: 'a'.repeat(64), bytes: 25, alphaCoverage: .7 };
+    center: [1.5, 2.5, 3], normal: [0, 0, 1], bytes: 25, alphaCoverage: .7 };
   const input = { quads: [quad], boundsUnits: { min: [1, 2, 3], max: [2, 3, 4] }, provenance: {},
     approximation: { slabPitchUnits: { x: 1, y: 2, z: 3 } } } as VolumeSlices;
   const output = placeDensitySlices(input, placement);
-  for (const key of ['texturePath', 'widthPx', 'heightPx', 'uvs', 'sha256', 'bytes', 'alphaCoverage'] as const)
+  for (const key of ['texturePath', 'widthPx', 'heightPx', 'uvs', 'bytes', 'alphaCoverage'] as const)
     assert.deepEqual(output.quads[0]![key], input.quads[0]![key]);
   assert.deepEqual(input.quads[0]!.vertices, quad.vertices); assert.notDeepEqual(output.quads[0]!.vertices, quad.vertices);
   assert.deepEqual(output.approximation.slabPitchUnits, { x: 2, y: 4, z: 6 });
