@@ -138,7 +138,8 @@ export function sharedCodeChanged(paths:readonly string[]):boolean {return paths
 export const SHARED_TYPECHECK_STEP:CiStep={
  name:'Typecheck (shared code changed)',
  run:'node .github/scripts/ci/build-ci.mts full\npnpm prepare:typecheck\npnpm typecheck',
- env:{NODE_OPTIONS:'--max-old-space-size=4096'},
+ // The site typecheck used 4.2 GB with 4,043 objects (exoplanet batch 1, 2026-09-29).
+ env:{NODE_OPTIONS:'--max-old-space-size=6144'},
 };
 
 /** CI jobs have separate disks; the local plan shares one checkout. Reuse only explicit common prerequisites,
