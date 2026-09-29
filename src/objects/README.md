@@ -46,7 +46,8 @@ site/pages/[id].astro           one shared route for all body ids
 Use the current authored branch of `site/build/object-package-contract.mts` for
 required files; the source manifest's coverage check owns source ownership.
 The latter requires data-only body packages. Acquisition/preparation code lives
-in shared `tools/objects/` families; runtime and presentation behavior live in
+in shared `packages/bake/src/objects/` topics and per-body `packages/bake/authoring/<body>/` (or
+`packages/telescope-cli/authoring/<body>/`) scripts; runtime and presentation behavior live in
 the shared renderer and shell. Do not copy private `runtime/`, `site/` or
 `tools/` directories from old documentation or historical packages.
 
@@ -112,7 +113,7 @@ is not proof of fresh acquisition. Runtime inventories describe prepared deliver
 source restoration and runtime installation are separate checks.
 
 A new star, planet or companion starts from `pnpm telescope new-object SPEC.json`
-(`tools/objects/new-object/spec.mts` documents the spec): it writes the whole package
+(`packages/telescope-cli/src/new-object/spec.mts` documents the spec): it writes the whole package
 from Gaia DR3, SIMBAD, the spectrophotometric archives and the NASA Exoplanet Archive,
 leaves only prose marked `TODO(new-object)`, and `--bake` runs the preparation chain.
 `--from-archive HOST...` drafts the spec for transiting systems. See the
@@ -133,15 +134,13 @@ Read the current `package.json` and runner arguments before using commands:
 | Run the full package, renderer, native, preparation and lab sequence | `pnpm test`; choose its individual suites for focused work |
 | Check source identities and bindings | `node --test "src/platform/source-*.test.mts" "tests/sources/*.test.mts"`, or select the affected files |
 | Create the oracle environment and regenerate oracle fixtures | `node tests/oracles/setup.mts`, `node tests/oracles/run.mts`; see `tests/oracles/README.md` |
-| Run a preparation test | `node --test tools/objects/<recipe>/<name>.test.mts` when the selected test uses Node |
+| Run a preparation test | `node --test packages/bake/authoring/<body>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |
 | Rendered-page assertions over the built HTML | `node --test site/test/rendered-page.test.mts` |
 
-Build the shared preparation tools before invoking their `dist/` entry points.
-Run a `tools/prepare` script by its entry in `tools/prepare/cli/`. The file of the same name in `tools/prepare/` is its
-library: other code imports it, and running it directly exits with the entry's path. A `packages/*/cli/` command entry
-works the same way (nothing imports it); a site-owned preparer (one that reads a site module) runs directly from
-`site/build/prepare/`.
+Run a `packages/*/cli/` command by its entry in `packages/<pkg>/cli/`; the library of the same name under
+`packages/<pkg>/src/` is what other code imports (nothing imports the entry itself). A site-owned preparer (one that
+reads a site module) runs directly from `site/build/prepare/`.
 Select checks using the [PR rules](../../docs/provenance/CONTRACT.md#pull-requests);
 this table lists available commands, not a checklist for every body addition.
 The retired per-body test folders and browser-profile registry are not required

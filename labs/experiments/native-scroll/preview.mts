@@ -1,13 +1,12 @@
 import { createServer } from 'node:http';
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import { loadPreparedCssObject, initialObjectSelection } from '@cssearth/renderer';
+import { serializePreparedScene, loadPreparedCssObject, initialObjectSelection } from '@cssearth/renderer';
 import { parsePreparedWorldCameraFrame, parseSharedView, formatSharedView } from '@cssearth/renderer/navigation';
 import { preparedSceneMatrix } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
 import { addNativeSolarContext, solarMaximumDistanceM } from './context.mts';
-import { serializePreparedScene } from '../../../site/prepared/serialize-prepared-scene.mts';
 import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
 import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
 import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';

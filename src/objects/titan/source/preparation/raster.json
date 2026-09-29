@@ -19,6 +19,7 @@
   "surfaces": [
     {
       "id": "normal",
+      "resolutionScale": 0.25,
       "output": "titan-{id}{suffix}.webp",
       "thumbnail": "titan-lens-{id}.webp",
       "source": "observations/titan-iss-2026.png",

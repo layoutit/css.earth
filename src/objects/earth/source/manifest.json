@@ -1280,8 +1280,8 @@
     {
       "id": "nasa-mur-gibs-mosaic",
       "path": "science/mur-gibs.png",
-      "origin": "tools/objects/paged-ellipsoid/mur-imagery.mjs",
-      "generator": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/objects/earth/source/science",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
       "consumers": [
         "enso"

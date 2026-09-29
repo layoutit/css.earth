@@ -1,7 +1,7 @@
 // `@cssearth/bake/objects/layers/paged-ellipsoid` (Node only): the paged-ellipsoid layer pipeline, from its recipe contracts
 // to the asset preparation and the paged object (`object.ts`), which the host calls with its content preparer, the solar
 // geometry and its asset worker (`packages/bake/cli/paged-ellipsoid-asset-worker.mts`). Earth's MUR and CoralTemp
-// acquisition commands stay in tools/objects/paged-ellipsoid for its per-body authoring.
+// acquisition commands stay in packages/bake/authoring/earth for its per-body authoring.
 export * from './assets.ts';
 export * from './contracts.ts';
 export * from './deep-ocean-fill.ts';

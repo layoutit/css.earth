@@ -52,7 +52,7 @@ runtime file sizes and SHA-256 digests belong to `inventory.json`.
 
 Object-owned JSON supplies observations and polar qualification, oblate geometry,
 radial layers, photometry, celestial state, presentation, content, and charts.
-Shared capability operators under `tools/objects/` regenerate encoded assets
+Shared capability operators under `packages/bake/src/objects/` regenerate encoded assets
 and prepared JSON from those pinned inputs. The package contains no preparation
 or runtime executable code. Commands are in the [contributor guide](../README.md).
 

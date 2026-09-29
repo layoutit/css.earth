@@ -25,7 +25,7 @@ held differently while coasting:
 
 ## Why
 
-A USB iPad capture of production css.earth (v0.3455, 2026-09-26, `tools/performance/ios-capture.mts --style-writes`)
+A USB iPad capture of production css.earth (v0.3455, 2026-09-26, [`tools/performance/ios-capture.mts`](https://github.com/layoutit/css.earth/blob/62db411815/tools/performance/ios-capture.mts) (now `labs/performance/ios-capture.mts`) with `--style-writes`)
 recorded a flick and its coast. While moving, the page wrote 19,203 times off the compositor path across 104 kinds.
 The writes included:
 
@@ -79,7 +79,6 @@ These change paint every frame on purpose, and each has a budget:
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 | Surface minimap viewport boxes (`site/minimap/surface-minimap.mts`) | `left`, `top`, `width`, `height` of up to three small boxes | 3 boxes | They follow the camera live. A transform would scale their border and the map image drawn inside them |
-| Rings around volumes (`universe/volume-ring.ts`) | `width`, `height` of a ring around the Milky Way and each galaxy or nebula drawn as a cloud, in whole pixels | the rings on screen | A ring encloses its cloud at every distance. A transform would scale its line with it |
 
 The footer readout (distance, coordinates, the scale ruler) holds its last reading while the camera moves, and reads
 once it stops. Texture levels and the body-wide seam step also wait for the camera to stop. Nothing about them has to

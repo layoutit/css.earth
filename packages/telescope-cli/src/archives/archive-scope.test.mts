@@ -1,5 +1,5 @@
 /** The archive clients, reducers and ledger builders are generic: which shipped bodies a ledger names or searches by name is data
- * beside that archive's programs or code (`src/archives/<archive>/`, or `tools/objects/<archive>/` until it moves), never a string or key
+ * beside that archive's programs or code (`src/archives/<archive>/`), never a string or key
  * in this package's code.
  *
  * This is a heuristic scan, not a proof. It catches a shipped id written as a whole string or template segment, as any word of
@@ -61,7 +61,7 @@ const PROSE: Readonly<Record<string, Readonly<Record<string, readonly string[]>>
   },
   'juno/measure.mts': {
     '8182e3e46af5bec6923f830ea7dde2dd8de3ada47d1f281bc71fbe7ea53689c4': ['juno'], // own path in the software digest
-    '7b31540d57d42170ba108b986033a90492f773f2166d43faafe71e57e1497296': ['juno'], // software name
+    '3fb4f0d862fc834c40047a55fbec0ea51727e76098a8731c12773cfdc687216f': ['juno'], // software name: the identity serialized before the archive code moved into telescope-cli
     'cf9e8f8db24f2351753dd8d80e4c4539e4050200a1d1a8938722461398795550': ['juno'], // telescope name in the run record
     'eeabb1dfd902a7cf9589c0444975cf6d854087892b7a1ea01d2cba5e2d7940ca': ['iau'], // registration evidence sentence
     'e4509b9c4276b29c88026803aebd246deed1f67bc8cebc81be89d6c42f1fcc0a': ['iau'], // IAU ellipsoid note

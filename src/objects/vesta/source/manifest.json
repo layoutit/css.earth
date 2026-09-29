@@ -1554,7 +1554,7 @@
       "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HYDROGEN_MAP.TAB",
       "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2012), Science 338, 242, doi:10.1126/science.1225354",
       "license": "NASA PDS scientific data; retain source credit",
-      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by packages/bake/authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
       "redistribution": "Scientific data with NASA/PDS and author credit",
       "consumers": [
         "hydrogen"
@@ -1599,7 +1599,7 @@
       "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_IRON_CORRECTED_COUNTS_MAP.TAB",
       "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team; Yamashita et al. (2013), Meteoritics & Planetary Science 48, 2237, doi:10.1111/maps.12139",
       "license": "NASA PDS scientific data; retain source credit",
-      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by packages/bake/authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
       "redistribution": "Scientific data with NASA/PDS and author credit",
       "consumers": [
         "iron"
@@ -1836,7 +1836,7 @@
       "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_FAST_NEUTRON_RESIDUAL_MAP.TAB",
       "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, D. J. Lawrence; Lawrence et al. (2013), Meteoritics & Planetary Science 48, 2271, doi:10.1111/maps.12187",
       "license": "NASA PDS scientific data; retain source credit",
-      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by packages/bake/authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
       "redistribution": "Scientific data with NASA/PDS and author credit",
       "consumers": [
         "fast-neutrons"
@@ -1882,7 +1882,7 @@
       "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_HEGR_COUNTS_MAP.TAB",
       "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, P. N. Peplowski; Peplowski et al. (2013), Meteoritics & Planetary Science 48, 2252, doi:10.1111/maps.12176",
       "license": "NASA PDS scientific data; retain source credit",
-      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by packages/bake/authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
       "redistribution": "Scientific data with NASA/PDS and author credit",
       "consumers": [
         "hegr"
@@ -1928,7 +1928,7 @@
       "origin": "https://sbnarchive.psi.edu/pds4/dawn/grand/dawn-grand-vesta_1.0/data_derived/GRD_NEUTRON_ABSORPTION_MAP.TAB",
       "credit": "NASA/JPL-Caltech/UCLA/PSI; Dawn GRaND team, T. H. Prettyman; Prettyman et al. (2013), Meteoritics & Planetary Science 48, 2211, doi:10.1111/maps.12244",
       "license": "NASA PDS scientific data; retain source credit",
-      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by tools/objects/source-authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
+      "acquisition": "Checked-in lossless re-indexing of the PDS4 table, reproduced by packages/bake/authoring/vesta-grand/prepare-grids.mts from grand/prepare-grids.json: each archived pixel is placed by its own latitude and longitude bounds, moved 210 degrees into Claudia and repeated over the regular cells it covers. The script checks the label checksum, record count and field units and refuses overlaps, gaps or pixels that straddle a cell.",
       "redistribution": "Scientific data with NASA/PDS and author credit",
       "consumers": [
         "neutron-absorption"
@@ -2583,7 +2583,7 @@
     },
     {
       "path": "grand/vesta-hydrogen-longitude.npy",
-      "purpose": "Claudia east longitudes of the hydrogen grid columns (1 to 359 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Claudia east longitudes of the hydrogen grid columns (1 to 359 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2597,7 +2597,7 @@
     },
     {
       "path": "grand/vesta-hydrogen-latitude.npy",
-      "purpose": "Latitudes of the hydrogen grid rows (-89 to 89 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Latitudes of the hydrogen grid rows (-89 to 89 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2611,7 +2611,7 @@
     },
     {
       "path": "grand/vesta-iron-counts-longitude.npy",
-      "purpose": "Claudia east longitudes of the iron grid columns (0.25 to 359.75 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Claudia east longitudes of the iron grid columns (0.25 to 359.75 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2625,7 +2625,7 @@
     },
     {
       "path": "grand/vesta-iron-counts-latitude.npy",
-      "purpose": "Latitudes of the iron grid rows (-89.75 to 89.75 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Latitudes of the iron grid rows (-89.75 to 89.75 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2639,7 +2639,7 @@
     },
     {
       "path": "grand/vesta-fast-neutrons-longitude.npy",
-      "purpose": "Claudia east longitudes of the fast neutron grid columns (0.75 to 359.25 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Claudia east longitudes of the fast neutron grid columns (0.75 to 359.25 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2653,7 +2653,7 @@
     },
     {
       "path": "grand/vesta-fast-neutrons-latitude.npy",
-      "purpose": "Latitudes of the fast neutron grid rows (-85 to 85 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Latitudes of the fast neutron grid rows (-85 to 85 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2667,7 +2667,7 @@
     },
     {
       "path": "grand/vesta-hegr-counts-longitude.npy",
-      "purpose": "Claudia east longitudes of the high-energy gamma-ray grid columns (0.5 to 359.5 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Claudia east longitudes of the high-energy gamma-ray grid columns (0.5 to 359.5 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2681,7 +2681,7 @@
     },
     {
       "path": "grand/vesta-hegr-counts-latitude.npy",
-      "purpose": "Latitudes of the high-energy gamma-ray grid rows (-86.25 to 86.25 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Latitudes of the high-energy gamma-ray grid rows (-86.25 to 86.25 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2695,7 +2695,7 @@
     },
     {
       "path": "grand/vesta-neutron-absorption-longitude.npy",
-      "purpose": "Claudia east longitudes of the neutron absorption grid columns (0.5 to 359.5 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Claudia east longitudes of the neutron absorption grid columns (0.5 to 359.5 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2709,7 +2709,7 @@
     },
     {
       "path": "grand/vesta-neutron-absorption-latitude.npy",
-      "purpose": "Latitudes of the neutron absorption grid rows (-86.25 to 86.25 degrees), written by tools/objects/source-authoring/vesta-grand/prepare-grids.mts.",
+      "purpose": "Latitudes of the neutron absorption grid rows (-86.25 to 86.25 degrees), written by packages/bake/authoring/vesta-grand/prepare-grids.mts.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

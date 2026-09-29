@@ -443,7 +443,7 @@
         "https://www.jpl.nasa.gov/jpl-image-use-policy/",
         "https://science.nasa.gov/photojournal/iapetus-temperature-map/"
       ],
-      "acquisition": "Checked-in compact crop, reproduced from figures/PIA07005.tif by node tools/objects/figure-map/clean-figure-map.mts src/objects/iapetus/source/figures/pia07005-map.json.",
+      "acquisition": "Checked-in compact crop, reproduced from figures/PIA07005.tif by node packages/bake/authoring/figure-map/clean-figure-map.mts src/objects/iapetus/source/figures/pia07005-map.json.",
       "redistribution": "Educational visualization with the published credit; the published figure colours are kept unchanged inside the plotted frame.",
       "consumers": [
         "surfaces"

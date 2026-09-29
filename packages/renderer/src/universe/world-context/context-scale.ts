@@ -82,3 +82,14 @@ export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolum
   const fade = logarithmicFade(distanceM, profile.fadeStartDistanceM, profile.fullDistanceM);
   return profile.nearOpacity + (profile.fullOpacity - profile.nearOpacity) * fade;
 }
+
+/** How many times nearer than a system's fade the stars around it start to fill the view. */
+const STAR_FIELD_BEFORE_SYSTEM_FADE = 20;
+/**
+ * The stars around a system fill the view while the camera is still among its outer bodies: from a twentieth of the
+ * distance where the system starts to retire (for the Solar System, about Neptune's orbit) to that distance. The
+ * catalogue dots fade in over it, and the other systems' stars, dimmed inside the system, come up to full with them.
+ */
+export function starFieldFade(distanceM: number, system: { readonly fadeOutStartDistanceM: number }): number {
+  return logarithmicFade(distanceM, system.fadeOutStartDistanceM / STAR_FIELD_BEFORE_SYSTEM_FADE, system.fadeOutStartDistanceM);
+}

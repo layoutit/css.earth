@@ -4,14 +4,14 @@ import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedWorldC
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
-import { contextOrbitOpacity, focusOwnOrbitOpacity, selectedOrbitDepthFade } from '../context-presentation-policy.js';
+import { createContextSelectionPolicy, contextOrbitOpacity, focusOwnOrbitOpacity, selectedOrbitDepthFade } from '../context-presentation-policy.js';
 import { rayHitsSphereBefore } from '../../solar-system/heliocentric-geometry.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter, orbitProjectionCapacity } from '../../solar-system/prepared-ring-projection.js';
 import type { OrbitSegment } from '../../solar-system/types.js';
 import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
-import { coveredTopRects, createLabelBudget, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
+import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 const ORBIT_LOD_PIXELS = 0.1;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
@@ -95,6 +95,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
   const points = [plan.focus, ...plan.bodies];
   const byId = new Map(points.map(point => [point.id, point]));
   const systemFade = createSystemFade(plan);
+  const selectionPolicy = createContextSelectionPolicy(plan);
   const prepared = points.map(body => {
     const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
@@ -143,6 +144,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         return [r0 * x + r1 * y + r2 * z, r3 * x + r4 * y + r5 * z, r6 * x + r7 * y + r8 * z];
       };
       const toEye = (position: readonly number[]): PositionM => toEyeAt(position[0]!, position[1]!, position[2]!);
+      const orbitEmphasisId = selectionPreview === undefined ? selectedId : selectionPreview;
+      const orbitStrength = selectionPolicy.strengthAt(orbitEmphasisId, world.pose.positionM);
       const emphasizedId = selectionPreview === undefined ? (overview ? null : selectedId) : selectionPreview;
       const [ox, oy] = viewport.principalOffsetPixels;
       const focal = viewport.focalPixels;
@@ -158,6 +161,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const orbitOverview = selectionPreview ? false : overview;
       const frame = createWorldFrameProjection(plan.focus, orbitFocus.body, toEye, project);
       const selectedEye = frame.eye(selected);
+      // Past a system (bodies hidden, then ten times that), a star that is not featured gives way to the catalogue dots.
+      const galaxyHandoff = logarithmicFade(Math.hypot(...selectedEye), plan.system.hiddenDistanceM, plan.system.hiddenDistanceM * 10);
       const selectedDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, selectedDiameter);
@@ -334,10 +339,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
         // so without this every star of the Milky Way stayed a dot from intergalactic distances.
         const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
+        // The focus, a featured star and a body of another kind (a black hole) keep their dots; planets fade with their system.
+        const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
+          (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
+        const atGalaxyScale = galaxyHost ? galaxyHandoff : 0;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
-          (isSelected || flightDestination ? 1 : 1 - beyondLocalGroup);
-        const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity;
+          (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));
+        const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity *
+          selectionPolicy.orbitOpacity(body.id, orbitEmphasisId, entry.hovered, orbitStrength);
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
         const circle = (flightDestination ? systemOpacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :
@@ -519,11 +529,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // Ordinary collision decluttering must not blink an orbit during camera motion.
         // The selected object's path and planets in a selected placed star's
         // system remain available when their captions are intentionally absent.
-        const selectedSystemPlanet = entry.orbit.centerBodyId === orbitFocus.body.id && entry.orbit.centerBodyId !== plan.focus.id &&
+        const selectedSystemHost = entry.orbit.centerBodyId === orbitFocus.body.id && entry.orbit.centerBodyId !== plan.focus.id &&
           systemFade.isSystemStar(entry.orbit.centerBodyId);
         if (anonymousMinor || projected.inFrame && !entry.labelShown && (entry.labelHidden || !projected.nameable) &&
             !systemFade.hasAuthoredRange(entry.index) &&
-            !selectedSystemPlanet && (orbitOverview || entry.body.id !== orbitFocus.body.id)) projected.orbitVisibility = 0;
+            !selectedSystemHost && (orbitOverview || entry.body.id !== orbitFocus.body.id)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;

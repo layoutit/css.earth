@@ -8,7 +8,8 @@ affected body READMEs. Rendering is now proved from built HTML by
 `site/test/rendered-page.test.mts`, which needs no browser.
 
 The batch covered the nine models listed in the
-[source-authoring inputs](../../tools/objects/source-authoring/distant-worlds/inputs.json).
+[source-authoring inputs](https://github.com/layoutit/css.earth/blob/fbfb46823b/tools/objects/source-authoring/distant-worlds/inputs.json)
+(pinned at commit `fbfb46823b`; now `packages/bake/authoring/distant-worlds/inputs.json`).
 
 Two drag captures kept `before.png`/`after.png` and a 6 MB gzipped Chrome trace
 each. Nothing cites them and no tool reads them any more, so they were not
@@ -35,6 +36,11 @@ export CSSEARTH_AUDIT_INPUTS=tools/objects/source-authoring/outer-worlds/inputs.
 export CSSEARTH_AUDIT_OUTPUT=output/outer-worlds
 export CSSEARTH_AUDIT_CAPTURES=output/playwright/outer-worlds
 ```
+
+(`CSSEARTH_AUDIT_INPUTS` recorded the path as it stood when these retired
+helpers ran, [then](https://github.com/layoutit/css.earth/blob/7762d546d2/tools/objects/source-authoring/outer-worlds/inputs.json);
+`outer-worlds/inputs.json` is now
+`packages/bake/authoring/outer-worlds/inputs.json`.)
 
 These variables apply to `qualify`, `fresh-sources`, `fresh-install`,
 `surface-fit`, `browser-check` and `contact-sheet`. `final-interactions`

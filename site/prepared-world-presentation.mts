@@ -22,6 +22,7 @@ function parseWorldPresentation(value: unknown) {
   return Object.freeze({
     moons: Object.freeze({ major: ids(value.moons.major, 'moons.major'), minor: ids(value.moons.minor, 'moons.minor') }),
     defaultFeatureIds: ids(value.defaultFeatureIds, 'defaultFeatureIds'),
+    orbitFeatureIds: ids(value.orbitFeatureIds, 'orbitFeatureIds'),
     hiddenOrbitIds: ids(value.hiddenOrbitIds, 'hiddenOrbitIds'),
     galaxies: distances(value.galaxies, 'galaxies', ['fadeStartDistanceM', 'fullDistanceM', 'maximumDistanceM', 'minimumDistanceRadii', 'defaultFocusRadiusM', 'metersPerParsec']),
     clusters: distances(value.clusters, 'clusters', ['fadeStartDistanceM', 'fullDistanceM']),

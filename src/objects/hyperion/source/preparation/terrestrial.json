@@ -800,7 +800,7 @@
       "latitudeSegments": 24,
       "longitudeSegments": 40,
       "faceBudget": 2000,
-      "texelsPerFace": 16384,
+      "texelsPerFace": 4096,
       "simplification": {
         "method": "source-meshoptimizer",
         "targetFaces": 1200,

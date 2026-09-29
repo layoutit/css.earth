@@ -12,7 +12,7 @@ It has 2.85 solar masses and 23.8 solar radii; its partner has 2.72 and 17.7, me
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ogle-smc-ecl-1421-b.json).
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ogle-smc-ecl-1421-b.json).
 
 
 ## Known problems

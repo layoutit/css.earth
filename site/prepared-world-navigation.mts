@@ -29,8 +29,8 @@ interface WorldFlightRequest {
 }
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
-import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, GALACTIC_VOLUME, LENS_VOLUMES, localGroupZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
-import { bodyCardViewAtCamera } from './overview-context.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, LENS_VOLUMES, localGroupZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { bodyCardViewAtCamera, milkyWayOverviewDistanceM } from './overview-context.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, worldCameraViewport, savedWorldCamera, parseSharedView, presentWorldCamera } from '@cssearth/renderer/navigation';
 
@@ -55,6 +55,15 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
     wheelInput = handler;
     return () => { if (wheelInput === handler) wheelInput = null; };
   };
+  function frameSystem(from: WorldCamera, frame: WorldFrame, optics: Optics, objectId: string, force: boolean) {
+    const view = systemViews.get(objectId), systemRadius = systemRadii.get(objectId);
+    if (!view && systemViewHosts.has(objectId)) throw new Error(`System view candidates for ${objectId} are not loaded; navigation awaits loadSystemView first.`);
+    if (view) return systemViewTarget(from, frame, optics, view, systemFramingRect(optics, documentTarget),
+      systemOverviewDistance(frame.bodyRadiusM, systemRadius ?? frame.bodyRadiusM, optics), stellarSystems.has(objectId), SYSTEM_RANGES.get(objectId));
+    return systemRadius || force ? createWorldSelectionTarget(from, { ...frame,
+      bodyRadiusM: systemRadius ?? frame.bodyRadiusM,
+    }, optics) : selectionTarget(from, frame, optics, objectId);
+  }
   function selectionTarget(from: WorldCamera, frame: WorldFrame, optics: Optics, id: string, lens?: string | null) {
     const framed = createWorldSelectionTarget(from, frame, optics), arrival = arrivals.get(id);
     if (!arrival || !arrival.lensIds.includes(lens ?? arrival.defaultLens)) return framed;
@@ -103,8 +112,13 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation,
           distanceUnits: distanceM / frame.metersPerUnit }, frame, optics), focusPositionM: frame.originM };
       }
-      return volumeZoomTarget(from, GALACTIC_VOLUME, optics, systemFramingRect(optics, documentTarget),
-        (owner?.frame ?? frames.get(fromId))!.originM);
+      // The Milky Way card is the view from inside the galaxy (overview-context.mts): the flight lands in the middle of that
+      // range, looking the way the camera already looks.
+      const frame = frames.get(objectId);
+      if (!frame) return null;
+      const projection = presentWorldCamera(from, frame, optics);
+      return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: milkyWayOverviewDistanceM() / frame.metersPerUnit },
+        frame, optics), focusPositionM: frame.originM };
     },
     /** Fit a volume the body shows through its lens, when the view does not already hold it. Null when the view is
      * already as far out as the fit, or the volume is unknown. */
@@ -136,15 +150,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
       if (!from || !optics || !frame) return null;
       if (!force && objectId === fromId && bodyCardViewAtCamera(from, frame, optics, objectId) === 'detail') return null;
-      // Frame the larger moons on first selection; a repeat uses normal focus.
-      const view = systemViews.get(objectId);
-      if (!view && systemViewHosts.has(objectId)) throw new Error(`System view candidates for ${objectId} are not loaded; navigation awaits loadSystemView first.`);
-      const systemRadius = systemRadii.get(objectId);
-      if (view) return systemViewTarget(from, frame, optics, view, systemFramingRect(optics, documentTarget),
-        systemOverviewDistance(frame.bodyRadiusM, systemRadius ?? frame.bodyRadiusM, optics), stellarSystems.has(objectId), SYSTEM_RANGES.get(objectId));
-      return systemRadius || force ? createWorldSelectionTarget(from, { ...frame,
-        bodyRadiusM: systemRadius ?? frame.bodyRadiusM,
-      }, optics) : selectionTarget(from, frame, optics, objectId);
+      return frameSystem(from, frame, optics, objectId, force);
     },
     /** The world camera a URL's saved view names on the mounted object, or null without one.
      * An invalid view, or one from another prepared date, restores and reports as before, without a flight. */
@@ -216,15 +222,20 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const query = url ? new URL(url).searchParams : null;
       if ((query?.getAll('v').length ?? 0) > 1) throw new TypeError('A destination URL may contain only one saved view.');
       const saved = query?.has('v') ? parseSharedView(`v=${query.get('v')}`) : null;
+      // A system target was provisionally framed before the destination transport
+      // loaded. Resolve its final range with the destination's prepared fit before
+      // starting motion, so its settled card uses the same zoom boundary.
+      const frameSatelliteSystem = centerSelection && query?.get('view') === 'satellites' && !saved;
       let targetOptics = optics;
-      if (!saved && !targetWorldCamera && cameraViewport) {
+      if (!saved && (!targetWorldCamera || frameSatelliteSystem) && cameraViewport) {
         const factory = await toFactory;
         if (!factory.navigation) throw new TypeError('Destination has no prepared navigation.');
         const framingRadiusPixels = await factory.navigation.framingRadius(cameraViewport,
           windowTarget.matchMedia(MOBILE_VIEWPORT_QUERY).matches, signal);
         targetOptics = { ...optics, framingRadiusPixels };
       }
-      const target = targetWorldCamera ?? (saved ? savedWorldCamera(saved, targetFrame, optics)
+      const target = frameSatelliteSystem ? frameSystem(from, targetFrame, targetOptics, toId, true)
+        : targetWorldCamera ?? (saved ? savedWorldCamera(saved, targetFrame, optics)
         : selectionTarget(from, targetFrame, targetOptics, toId, query?.get('dataset')));
       const arrival = arrivals.get(toId);
       const useBillboard = stage && !saved && !targetWorldCamera && !reducedMotion &&

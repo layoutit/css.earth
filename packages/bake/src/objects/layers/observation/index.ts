@@ -1,6 +1,7 @@
 // `@cssearth/bake/objects/layers/observation` (Node only): the shared libraries of the observation layer pipeline (science
 // rasters and elevation, FITS maps, controlled and synoptic mosaics, band colours, plates and point sources); its surface
-// interpreter, sky-band composite and entry scripts stay in tools/objects.
+// interpreter, entry scripts and sky-band composite stay outside it (per-body scripts in `packages/bake/authoring/<body>/`, the
+// composite in `packages/telescope-cli/src/sky/`).
 export * from './body-maps/body-map-product.ts';
 export * from './body-maps/body-map.ts';
 export * from './body-maps/resolution-evidence.ts';

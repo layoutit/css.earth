@@ -1,0 +1,76 @@
+{
+  "id": "skowron-2019-cepheid-map",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A three-dimensional map of the Milky Way using classical Cepheid variable stars",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1126/science.aau3181"
+    },
+    {
+      "type": "arxiv",
+      "value": "1806.10653"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1806.10653",
+      "label": "arXiv:1806.10653"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1126/science.aau3181",
+      "label": "Science 365, 478"
+    },
+    {
+      "role": "archive",
+      "url": "https://github.com/jskowron/galactic_cepheids/blob/e72dc56adf9eea38aa4038bc35142e144a68cf25/data/Data_Table_1.dat",
+      "label": "Data_Table_1.dat, the full Cepheid sample with distances"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://github.com/jskowron/galactic_cepheids/blob/e72dc56adf9eea38aa4038bc35142e144a68cf25/data/README.md",
+      "checkedOn": "2026-09-28",
+      "locator": "Data_Table_1.dat is the full Cepheid sample with distances; cite Skowron et al.; the data are not licensed under MIT or CC"
+    },
+    {
+      "url": "https://arxiv.org/abs/1806.10653",
+      "checkedOn": "2026-09-28",
+      "locator": "Abstract: a three-dimensional map of the Milky Way from the positions and distances of thousands of classical Cepheids; constrains the warped disc"
+    }
+  ],
+  "creators": [
+    "D. M. Skowron",
+    "J. Skowron",
+    "P. Mróz",
+    "A. Udalski",
+    "P. Pietrukowicz",
+    "I. Soszyński",
+    "M. K. Szymański",
+    "R. Poleski",
+    "S. Kozłowski",
+    "K. Ulaczyk",
+    "K. Rybicki",
+    "P. Iwanek"
+  ],
+  "publisher": "Science 365, 478",
+  "publicationDate": "2019",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Skowron et al. (2019), Science 365, 478, when using Data_Table_1.dat.",
+      "scope": "Cepheid distances",
+      "evidence": "https://github.com/jskowron/galactic_cepheids/blob/e72dc56adf9eea38aa4038bc35142e144a68cf25/data/README.md"
+    },
+    {
+      "kind": "rights",
+      "text": "The data table is published scientific data, not licensed under the repository's MIT or CC licences; used with citation in a non-commercial project.",
+      "scope": "Data_Table_1.dat",
+      "evidence": "https://github.com/jskowron/galactic_cepheids/blob/e72dc56adf9eea38aa4038bc35142e144a68cf25/data/LICENSE"
+    }
+  ]
+}

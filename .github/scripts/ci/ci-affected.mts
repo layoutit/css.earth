@@ -59,7 +59,7 @@ export async function loadCiAreasConfig(path = resolve(import.meta.dirname, '../
 }
 
 /** Converts one `ci-areas.json` glob pattern to a matcher. `**` matches zero or more whole path segments
- * (including none, so `tools/**` also matches the bare directory marker `tools/` if one ever appeared); a lone `*`
+ * (including none, so `site/build/**` also matches the bare directory marker `site/build/` if one ever appeared); a lone `*`
  * (not part of `**`) matches any run of characters within one segment, never a `/`. Every other character is
  * matched literally. This is deliberately the same small vocabulary the repository already hand-rolls as regular
  * expressions elsewhere (for example `SHARED_CODE` in .github/scripts/ci/check-ci.mts) rather than a new dependency. */

@@ -100,7 +100,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for HD 189733b",
       "status": "included",
-      "finding": "The deposited temperature map seen from the host star in the lens palette, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
+      "finding": "The deposited temperature map seen from the host star in the lens palette, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/hd-189733b/source/presentation/context.png"
       ]

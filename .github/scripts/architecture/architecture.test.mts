@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
 import { test } from 'node:test';
 import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './astro-imports.mts';
 import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, likelyRenames, measure } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
-import { decodeCruiseResult, missingSources, type ImportGraph } from './graph.mts';
+import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph } from './graph.mts';
 import { readCiSteps } from '../ci/check-ci.mts';
 import { formatDelta, formatFindings } from './report.mts';
 import { declaredPackage, undeclaredImports } from './declared-dependencies.mts';
@@ -43,20 +46,17 @@ test('folders follow the prototype zones', () => {
     'src/renderers/css/navigation/x.ts': 'src/renderers/css/navigation',
     'src/renderers/css/index.ts': 'src/renderers/css(root)',
     'src/preparation/stars/x.ts': 'src/preparation/stars',
-    'tools/objects/hst/x.mts': 'tools/objects/hst',
-    'tools/objects/x.mts': 'tools/objects(root)',
     'site/components/X.astro': 'site/components',
     'site/objects.mts': 'site(root)',
-    'tools/ci/x.mts': 'tools/ci',
     '.github/scripts/ci/x.mts': '.github/scripts/ci',
     '.github/scripts/x.mts': '.github/scripts(root)',
     'netlify/functions/x.mts': 'netlify',
     'astro.config.mts': '(repository root)',
   };
   for (const [file, zone] of Object.entries(expected)) assert.equal(zoneOf(file), zone, file);
-  for (const file of ['site/test/x.mts', 'tools/a.test.mts', 'tests/objects/x.mts', 'src/x/fixtures/a.json', 'tools/ci/foo-harness.mts'])
+  for (const file of ['site/test/x.mts', 'labs/a.test.mts', 'tests/objects/x.mts', 'src/x/fixtures/a.json', 'labs/ci/foo-harness.mts'])
     assert.equal(isTestPath(file), true, file);
-  assert.equal(isTestPath('tools/ci/testing-tools.mts'), false);
+  assert.equal(isTestPath('labs/ci/testing-tools.mts'), false);
 });
 
 test('a cycle between two bake topics is a folder cycle, not hidden inside the package', () => {
@@ -140,34 +140,30 @@ test('strongly connected folders, the greedy layer order and the edges that clos
 
 test('layer rules name each forbidden file import once, and tests are exempt except in packages', () => {
   const violations = evaluateRules(graph(
-    ['packages/p/src/a.ts', 'src/platform/x.mts'], ['packages/p/src/a.test.ts', 'tools/helper.mts'],
-    ['src/renderers/css/x.ts', 'tools/prepared/y.mts'], ['src/renderers/css/x.ts', 'tools/prepared/y.mts'],
-    ['site/a.mts', 'packages/bake/src/stars/index.ts'], ['site/b.mts', 'tools/prepared/y.mts', 'type'],
+    ['packages/p/src/a.ts', 'src/platform/x.mts'], ['packages/p/src/a.test.ts', 'labs/helper.mts'],
+    ['src/renderers/css/x.ts', 'labs/prepared/y.mts'], ['src/renderers/css/x.ts', 'labs/prepared/y.mts'],
+    ['site/a.mts', 'packages/bake/src/stars/index.ts'], ['site/b.mts', 'packages/bake/src/prepared/y.mts', 'type'],
     ['packages/renderer/src/stars/bank.ts', 'packages/bake/src/stars/index.ts', 'type'], ['packages/renderer/src/stars/bank.test.ts', 'packages/bake/src/stars/index.ts'],
     ['packages/renderer/src/stars/bank.ts', 'packages/core/src/index.ts'],
     ['site/c.mts', 'packages/telescope-cli/src/query.mts'], ['packages/renderer/src/sky/d.ts', 'packages/telescope-cli/src/archives/programs.mts', 'type'],
     ['packages/renderer/src/sky/d.test.ts', 'packages/telescope-cli/src/query.mts'],
-    ['tools/objects/o.mts', 'site/objects.mts'], ['tools/objects/o.mts', 'tools/prepare/cli/prepare-x.mts'],
-    ['tools/objects/o.mts', 'tools/prepare/prepare-x.mts'], ['src/platform/p.test.mts', 'tools/prepare/cli/prepare-x.mts'], ['astro.config.mts', 'tools/prepare/p.mts'],
+    ['labs/objects/o.mts', 'site/objects.mts'], ['astro.config.mts', 'labs/prepare/p.mts'],
     ['netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
-    ['tools/ci/x.mts', '.github/scripts/ci/y.mts'], ['.github/scripts/ci/y.mts', 'tools/ci/z.mts'], ['.github/scripts/ci/y.mts', 'packages/core/src/validate.ts'],
+    ['labs/ci/x.mts', '.github/scripts/ci/y.mts'], ['.github/scripts/ci/y.mts', 'labs/ci/z.mts'], ['.github/scripts/ci/y.mts', 'packages/core/src/validate.ts'],
     ['site/build/prepare/p.mts', 'packages/bake/src/stars/index.ts'], ['site/e.mts', 'site/build/prepare/p.mts', 'type'], ['site/test/e.test.mts', 'site/build/prepare/p.mts'],
     ['astro.config.mts', 'site/build/source-maps.mts'], ['packages/renderer/src/f.ts', 'site/build/prepare/p.mts', 'type'], ['packages/bake/src/g.ts', 'site/build/prepare/p.mts'],
   ));
   const pairs = (rule: string) => (violations.get(rule) ?? []).map(item => `${item.from}>${item.to}`);
-  assert.deepEqual(pairs('packages-import-only-packages'), ['packages/bake/src/g.ts>site/build/prepare/p.mts', 'packages/p/src/a.test.ts>tools/helper.mts',
+  assert.deepEqual(pairs('packages-import-only-packages'), ['packages/bake/src/g.ts>site/build/prepare/p.mts', 'packages/p/src/a.test.ts>labs/helper.mts',
     'packages/p/src/a.ts>src/platform/x.mts', 'packages/renderer/src/f.ts>site/build/prepare/p.mts'], 'no package reaches site/build, not even the bake or a renderer type');
-  assert.deepEqual(pairs('nothing-imports-applications'), ['.github/scripts/ci/y.mts>tools/ci/z.mts', 'packages/bake/src/g.ts>site/build/prepare/p.mts',
-    'packages/renderer/src/f.ts>site/build/prepare/p.mts', 'site/b.mts>tools/prepared/y.mts', 'src/renderers/css/x.ts>tools/prepared/y.mts',
-    'tools/ci/x.mts>.github/scripts/ci/y.mts', 'tools/objects/o.mts>site/objects.mts'], 'CI scripts in .github/ are an application tree too');
+  assert.deepEqual(pairs('nothing-imports-applications'), ['.github/scripts/ci/y.mts>labs/ci/z.mts', 'labs/ci/x.mts>.github/scripts/ci/y.mts', 'labs/objects/o.mts>site/objects.mts', 'packages/bake/src/g.ts>site/build/prepare/p.mts',
+    'packages/renderer/src/f.ts>site/build/prepare/p.mts', 'src/renderers/css/x.ts>labs/prepared/y.mts'], 'CI scripts in .github/ are an application tree too');
   assert.deepEqual(pairs('runtime-imports-no-preparation'), [
     'packages/renderer/src/sky/d.ts>packages/telescope-cli/src/archives/programs.mts', 'packages/renderer/src/stars/bank.ts>packages/bake/src/stars/index.ts',
-    'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>tools/prepared/y.mts', 'site/c.mts>packages/telescope-cli/src/query.mts',
+    'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>packages/bake/src/prepared/y.mts', 'site/c.mts>packages/telescope-cli/src/query.mts',
   ], 'the renderer package is runtime, type-only imports count, neither runtime owner reaches bake or the telescope command, tests may, and site/build is build-time');
   assert.deepEqual(pairs('runtime-imports-no-site-build'), ['site/e.mts>site/build/prepare/p.mts'],
     'the runtime never imports site-owned preparation, even for a type; tests and astro.config may');
-  assert.deepEqual(pairs('nothing-imports-prepare-scripts'), ['tools/objects/o.mts>tools/prepare/cli/prepare-x.mts'],
-    'a prepare entry is never imported; its library beside it may be');
   assert.deepEqual([...violations.keys()], LAYER_RULES.map(rule => rule.id));
 });
 
@@ -176,15 +172,15 @@ test('nothing imports a package command entry: another entry, package code and t
     ['packages/bake/cli/fit-epic-limb.mts', 'packages/bake/cli/kernel-bank.mts'],
     ['packages/bake/src/photometry/limb.ts', 'packages/bake/cli/fit-epic-limb.mts', 'type'],
     ['tests/photometry/limb.test.mts', 'packages/telescope-cli/cli/run.mts'],
-    ['tools/prepare/x.mts', 'packages/bake/cli/kernel-bank.mts'],
+    ['site/build/x.mts', 'packages/bake/cli/kernel-bank.mts'],
     ['packages/bake/cli/kernel-bank.mts', 'packages/bake/src/objects/cameras/index.ts'],
     ['packages/bake/src/cli/x.ts', 'packages/bake/src/raster/index.ts'],
   ));
   assert.deepEqual((violations.get('nothing-imports-cli-entries') ?? []).map(item => `${item.from}>${item.to}`), [
     'packages/bake/cli/fit-epic-limb.mts>packages/bake/cli/kernel-bank.mts',
     'packages/bake/src/photometry/limb.ts>packages/bake/cli/fit-epic-limb.mts',
+    'site/build/x.mts>packages/bake/cli/kernel-bank.mts',
     'tests/photometry/limb.test.mts>packages/telescope-cli/cli/run.mts',
-    'tools/prepare/x.mts>packages/bake/cli/kernel-bank.mts',
   ], 'an entry may import libraries; a folder named cli inside src is not an entry folder');
 });
 
@@ -217,32 +213,32 @@ test('bake nebula/ and objects/ never import each other, in either direction', (
 });
 
 test('the ratchet passes the baseline tree and fails only when something gets worse', () => {
-  const base = measure(graph(...TANGLED, ['tools/objects/o.mts', 'site/objects.mts']));
+  const base = measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts']));
   const baseline = decodeBaseline(JSON.parse(formatBaseline(createBaseline(base))));
   assert.equal(baseline.cycles.largestCycle, 3);
   assert.deepEqual(baseline.cycles.cycleClosingEdges, [{ from: 'src/c', to: 'src/a', imports: 1 }]);
   const same = compare(baseline, base);
   assert.equal(isWorse(same), false); assert.equal(isStale(same), false);
 
-  const forward = compare(baseline, measure(graph(...TANGLED, ['tools/objects/o.mts', 'site/objects.mts'], ['src/a/two.mts', 'src/c/one.mts'])));
+  const forward = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/a/two.mts', 'src/c/one.mts'])));
   assert.equal(isWorse(forward), false, 'a new import that follows the recorded layer order is fine');
 
-  const forbidden = compare(baseline, measure(graph(...TANGLED, ['tools/objects/o.mts', 'site/objects.mts'], ['src/a/one.mts', 'tools/x.mts'])));
+  const forbidden = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/a/one.mts', 'labs/x.mts'])));
   assert.equal(isWorse(forbidden), true);
-  assert.match(formatDelta(forbidden), /NEW, not allowed:[\s\S]*src\/a\/one\.mts -> tools\/x\.mts/u);
-  assert.deepEqual(forbidden.rules.find(rule => rule.rule === 'nothing-imports-applications')?.added, [{ from: 'src/a/one.mts', to: 'tools/x.mts' }]);
+  assert.match(formatDelta(forbidden), /NEW, not allowed:[\s\S]*src\/a\/one\.mts -> labs\/x\.mts/u);
+  assert.deepEqual(forbidden.rules.find(rule => rule.rule === 'nothing-imports-applications')?.added, [{ from: 'src/a/one.mts', to: 'labs/x.mts' }]);
 
-  const cycle = compare(baseline, measure(graph(...TANGLED, ['tools/objects/o.mts', 'site/objects.mts'], ['src/b/one.mts', 'src/a/one.mts'])));
+  const cycle = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/b/one.mts', 'src/a/one.mts'])));
   assert.deepEqual(cycle.cycleClosing.added, [{ from: 'src/b', to: 'src/a', imports: 1 }], 'an upward import inside the cycle is new');
   assert.equal(isWorse(cycle), true);
 
-  const newFolder = compare(baseline, measure(graph(...TANGLED, ['tools/objects/o.mts', 'site/objects.mts'], ['src/c/one.mts', 'src/d/one.mts'], ['src/d/one.mts', 'src/a/one.mts'])));
+  const newFolder = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/c/one.mts', 'src/d/one.mts'], ['src/d/one.mts', 'src/a/one.mts'])));
   assert.equal(newFolder.largestCycle.now, 4);
   assert.deepEqual(newFolder.cycleClosing.joined, ['src/d']);
   assert.match(formatDelta(newFolder), /joined a cycle[^\n]*src\/d/u);
   assert.deepEqual(newFolder.cycleClosing.added.map(edge => `${edge.from}>${edge.to}`).sort(), ['src/c>src/d', 'src/d>src/a'], 'a folder new to a cycle has no agreed place');
 
-  const heavier = compare(baseline, measure(graph(...TANGLED, ['tools/objects/o.mts', 'site/objects.mts'], ['src/c/two.mts', 'src/a/one.mts'])));
+  const heavier = compare(baseline, measure(graph(...TANGLED, ['labs/objects/o.mts', 'site/objects.mts'], ['src/c/two.mts', 'src/a/one.mts'])));
   assert.equal(isWorse(heavier), false, 'more imports on a recorded edge are reported, not failed');
   assert.deepEqual(heavier.cycleClosing.heavier.map(item => [item.edge.imports, item.was]), [[2, 1]]);
 
@@ -252,15 +248,15 @@ test('the ratchet passes the baseline tree and fails only when something gets wo
   assert.match(formatDelta(fixed), /--update-baseline/u);
   assert.doesNotMatch(formatDelta(fixed), /NEW/u);
   assert.deepEqual(fixed.cycleClosing.removed, [{ from: 'src/c', to: 'src/a', imports: 1 }]);
-  assert.deepEqual(fixed.rules.find(rule => rule.rule === 'nothing-imports-applications')?.removed, [{ from: 'tools/objects/o.mts', to: 'site/objects.mts' }]);
+  assert.deepEqual(fixed.rules.find(rule => rule.rule === 'nothing-imports-applications')?.removed, [{ from: 'labs/objects/o.mts', to: 'site/objects.mts' }]);
 });
 
 test('cycle growth printed after new forbidden imports is marked as possibly following from them, not caused by them', () => {
   const base = measure(graph(...TANGLED));
   const baseline = decodeBaseline(JSON.parse(formatBaseline(createBaseline(base))));
-  const both = formatDelta(compare(baseline, measure(graph(...TANGLED, ['src/b/one.mts', 'src/a/one.mts'], ['src/a/one.mts', 'tools/x.mts']))));
-  // Here the new forbidden import (src/a -> tools/x) does not cause the new cycle edge (src/b -> src/a), so the line must not claim it does.
-  assert.match(both, /tools\/x\.mts\n {2}The cycle growth below may follow from the forbidden imports above[^\n]*\n {2}cycle-closing folder edge src\/b -> src\/a/u);
+  const both = formatDelta(compare(baseline, measure(graph(...TANGLED, ['src/b/one.mts', 'src/a/one.mts'], ['src/a/one.mts', 'labs/x.mts']))));
+  // Here the new forbidden import (src/a -> labs/x) does not cause the new cycle edge (src/b -> src/a), so the line must not claim it does.
+  assert.match(both, /labs\/x\.mts\n {2}The cycle growth below may follow from the forbidden imports above[^\n]*\n {2}cycle-closing folder edge src\/b -> src\/a/u);
   assert.doesNotMatch(both, /consequence|caused by/u);
   const cycleOnly = formatDelta(compare(baseline, measure(graph(...TANGLED, ['src/b/one.mts', 'src/a/one.mts']))));
   assert.doesNotMatch(cycleOnly, /may follow from/u, 'no forbidden import above to point at');
@@ -283,8 +279,8 @@ test('a source file missing from disk or from the cruise makes the graph incompl
 });
 
 test('an added and a removed entry that share a target or a source folder look like a rename', () => {
-  const pairs = likelyRenames('r', [{ from: 'site/new.mts', to: 'tools/x.mts' }, { from: 'src/a/n.mts', to: 'tools/q.mts' }, { from: 'labs/z.mts', to: 'site/k.mts' }],
-    [{ from: 'site/old.mts', to: 'tools/x.mts' }, { from: 'src/a/o.mts', to: 'tools/p.mts' }]);
+  const pairs = likelyRenames('r', [{ from: 'site/new.mts', to: 'labs/x.mts' }, { from: 'src/a/n.mts', to: 'labs/q.mts' }, { from: 'labs/z.mts', to: 'site/k.mts' }],
+    [{ from: 'site/old.mts', to: 'labs/x.mts' }, { from: 'src/a/o.mts', to: 'labs/p.mts' }]);
   assert.deepEqual(pairs.map(pair => `${pair.removed.from}=>${pair.added.from}`), ['site/old.mts=>site/new.mts', 'src/a/o.mts=>src/a/n.mts']);
 });
 
@@ -305,11 +301,38 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['retired-folders', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'retired folders, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
 });
 
-test('a file under a retired tools/ folder is a finding; a sibling folder with a longer name is not', () => {
-  assert.deepEqual(retiredFiles(['tools/objects/pds/programs/x.json', 'tools/objects/pds-labels/x.mts', 'tools/objects/pds', 'tools/prepare/x.mts'], ['tools/objects/pds']),
-    ['tools/objects/pds/programs/x.json: tools/objects/pds/ is retired; put the file in the folder its code moved to']);
-  assert.ok(RETIRED_FOLDERS.every(folder => folder.startsWith('tools/') && !folder.endsWith('/')), 'retired folders are tools/ folders, named without a trailing slash');
+test('a file under a retired folder is a finding; a sibling folder with a longer name is not', () => {
+  assert.deepEqual(retiredFiles(['old/deep/x.json', 'old-labels/x.mts', 'old', 'other/old/x.mts'], ['old']),
+    ['old/deep/x.json: old/ is retired; put the file in the folder its code moved to']);
+  assert.ok(RETIRED_FOLDERS.every(folder => !folder.includes('/') && !folder.endsWith('/')), 'retired folders are top-level folders, named without a trailing slash');
   assert.deepEqual([...RETIRED_FOLDERS].sort(), RETIRED_FOLDERS, 'kept sorted');
+});
+
+test('the repository check fails when any file is added under tools/, tracked or not, and passes without one', () => {
+  const rule = REPOSITORY_RULES.find(item => item.id === 'retired-folders');
+  assert.ok(rule, 'the retired-folders rule is registered');
+  assert.deepEqual(RETIRED_FOLDERS, ['tools'], 'tools/ is retired as a whole, not folder by folder');
+  const root = mkdtempSync(join(tmpdir(), 'retired-tools-'));
+  try {
+    execFileSync('git', ['init', '-q'], { cwd: root });
+    mkdirSync(join(root, 'labs'));
+    writeFileSync(join(root, 'labs', 'kept.mts'), 'export {};\n');
+    const findings = () => repositoryFindings(root, repositoryFiles(root), [rule]);
+    assert.equal(isBroken(findings()), false, 'a tree without tools/ is clean');
+    for (const path of ['tools/new.mts', 'tools/deep/nested/data.json', 'tools/README.md', 'tools/objects/tsconfig.json']) {
+      mkdirSync(dirname(join(root, path)), { recursive: true });
+      writeFileSync(join(root, path), '{}\n');
+      assert.equal(isBroken(findings()), true, `${path} added (untracked) must fail the check`);
+      assert.match([...findings().values()].flat().join('\n'), new RegExp(`${path.replace(/[.]/gu, '\\.')}: tools/ is retired`, 'u'));
+      rmSync(join(root, 'tools'), { recursive: true });
+      assert.equal(isBroken(findings()), false, `removing ${path} clears it`);
+    }
+    mkdirSync(join(root, 'tools'));
+    writeFileSync(join(root, 'tools', 'tracked.mts'), 'export {};\n');
+    execFileSync('git', ['add', '-A'], { cwd: root });
+    assert.equal(isBroken(findings()), true, 'a tracked file under tools/ fails too');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+  assert.deepEqual(retiredFiles(['packages/bake/tools/x.mts', 'toolsmith/x.mts', 'labs/tools/x.mts']), [], 'only the top-level tools/ folder is retired');
 });
 
 test('a packages/* file may import another workspace package only when its package.json declares it', () => {

@@ -39,7 +39,6 @@ function packageOutputs(root: string): CompiledDirectory[] {
 /** Keep pnpm's native workspace dependency ordering (catalog and engine before renderer). Catalogue
  * discovery imports compiled renderer navigation (@cssearth/renderer/navigation), so it waits for the packages build
  * even when warm files exist.
- * The preparation bundle ships JS only: type checks read its sources through the root `#preparation/*` imports.
  * The lint closure intentionally omits navigation/world/font assets, matching the contract checks' imports. */
 export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTask[] {
   const node = (id: string, file: string, after: readonly string[] = [], args: readonly string[] = []): CiBuildTask =>
@@ -49,14 +48,12 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
     node('titles', 'site/build/prepare/prepare-shell-titles.mts'),
     node('catalog', 'site/build/prepare/prepare-catalog.mts', ['packages']),
     node('solar', 'packages/bake/cli/prepare-solar-geometry.mts', ['catalog']),
-    { id: 'preparation', after: ['packages', 'solar', 'titles'], command: 'pnpm', args: ['--filter', '@cssearth/engine', 'exec', 'tsup', '--config', '../../tools/objects/tsup.config.ts'],
-      outputs: [{ path: 'tools/objects/dist', required: ['prepare-authored.js', 'prepare-spatial-context.js'] }] },
   ];
   if (mode === 'full') tasks.push(
     // Hashes icon sources with @cssearth/core/node, so it waits for the packages build.
     node('icons', 'site/build/prepare/prepare-shell-icons.mts', ['packages']),
     node('navigation', 'packages/bake/cli/prepare-navigation.mts', ['solar'], ['--catalog-only']),
-    node('world', 'tools/objects/dist/prepare-spatial-context.js', ['preparation', 'navigation'], ['src/objects/sun/source/navigation/universe.json', 'src/objects/sun/prepared/world-context.json']),
+    node('world', 'site/build/prepare/prepare-spatial-context.ts', ['navigation'], ['src/objects/sun/source/navigation/universe.json', 'src/objects/sun/prepared/world-context.json']),
     node('moon-labels', 'site/build/prepare/prepare-moon-labels.mts', ['world']),
     node('world-presentation', 'site/build/prepare/prepare-world-presentation.mts', ['world']),
   );

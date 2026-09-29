@@ -940,7 +940,7 @@
       "licenseEvidence": [
         "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
       ],
-      "acquisition": "Reproduce with node tools/objects/comet-9p/prepare-closeups.mts --write.",
+      "acquisition": "Reproduce with node packages/bake/authoring/comet-9p/prepare-closeups.mts --write.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-deep-impact"
@@ -1011,7 +1011,7 @@
       "licenseEvidence": [
         "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
       ],
-      "acquisition": "Reproduce with node tools/objects/comet-9p/prepare-closeups.mts --write.",
+      "acquisition": "Reproduce with node packages/bake/authoring/comet-9p/prepare-closeups.mts --write.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-deep-impact"
@@ -1082,7 +1082,7 @@
       "licenseEvidence": [
         "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
       ],
-      "acquisition": "Reproduce with node tools/objects/comet-9p/prepare-closeups.mts --write.",
+      "acquisition": "Reproduce with node packages/bake/authoring/comet-9p/prepare-closeups.mts --write.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-deep-impact"
@@ -1101,7 +1101,7 @@
       "licenseEvidence": [
         "https://github.com/layoutit/css.earth/blob/main/LICENSE"
       ],
-      "acquisition": "Checked-in preparation recipe for tools/objects/comet-9p/prepare-closeups.mts.",
+      "acquisition": "Checked-in preparation recipe for packages/bake/authoring/comet-9p/prepare-closeups.mts.",
       "redistribution": "Retain source attribution.",
       "consumers": [
         "closeup-registration"

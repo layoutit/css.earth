@@ -13,74 +13,10 @@ export interface RepositoryRule {
   readonly check: (root: string, files: readonly string[]) => readonly string[];
 }
 
-/** Folders whose code has moved to its canonical home (`packages/*`, `.github/scripts`, `evidence/`). A file under one
- * means code went back to a retired location. Each move that empties a folder appends it here. */
-export const RETIRED_FOLDERS: readonly string[] = [
-  'tools/assets',
-  'tools/audits',
-  'tools/ci',
-  'tools/contract',
-  'tools/evidence',
-  'tools/experiments',
-  'tools/facility-renders',
-  'tools/fits',
-  'tools/galaxy-field',
-  'tools/investigations',
-  'tools/kernel-banks',
-  'tools/nebula',
-  'tools/objects/akatsuki',
-  'tools/objects/archives',
-  'tools/objects/arrokoth',
-  'tools/objects/astronomy-packages',
-  'tools/objects/astroquery',
-  'tools/objects/celestia-comets',
-  'tools/objects/celestial',
-  'tools/objects/chandra',
-  'tools/objects/charts',
-  'tools/objects/comet-1p',
-  'tools/objects/comet-67p',
-  'tools/objects/content',
-  'tools/objects/cutaway',
-  'tools/objects/dawn',
-  'tools/objects/default-view',
-  'tools/objects/gemini',
-  'tools/objects/geographic-pages',
-  'tools/objects/giant-layers',
-  'tools/objects/giant-observations',
-  'tools/objects/ihw',
-  'tools/objects/interferometry/fixtures',
-  'tools/objects/interferometry/rotir',
-  'tools/objects/interferometry/seasons',
-  'tools/objects/juno',
-  'tools/objects/jwst/imaging',
-  'tools/objects/jwst/klip',
-  'tools/objects/jwst/programs',
-  'tools/objects/keck',
-  'tools/objects/material-composition',
-  'tools/objects/near-msi',
-  'tools/objects/new-horizons',
-  'tools/objects/observation',
-  'tools/objects/observed-surfaces',
-  'tools/objects/paged-ellipsoid/geographic',
-  'tools/objects/pds',
-  'tools/objects/shape-model',
-  'tools/objects/sphere-survey',
-  'tools/objects/spitzer',
-  'tools/objects/static-surface',
-  'tools/objects/surface-features',
-  'tools/objects/surface-observations',
-  'tools/objects/telescopes',
-  'tools/objects/terrestrial-layers',
-  'tools/objects/voyager-iss',
-  'tools/oracles',
-  'tools/performance',
-  'tools/photometry',
-  'tools/prepare/astronomy',
-  'tools/prepared',
-  'tools/references',
-  'tools/sources',
-  'tools/spice',
-];
+/** Top-level folders that no longer exist: `tools/` held preparation code until it moved to its canonical homes
+ * (`packages/bake`, `packages/telescope-cli`, `site/build`, `.github/scripts`, `labs`, `tests`, `evidence/`). A file under one means
+ * code went back to a retired location. */
+export const RETIRED_FOLDERS: readonly string[] = ['tools'];
 
 /** One finding per file inside a retired folder. */
 export function retiredFiles(files: readonly string[], folders: readonly string[] = RETIRED_FOLDERS): string[] {
@@ -93,7 +29,7 @@ export function retiredFiles(files: readonly string[], folders: readonly string[
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
   {
     id: 'retired-folders',
-    description: 'no file lives under a retired tools/ folder (RETIRED_FOLDERS in repository-rules.mts)',
+    description: 'no file lives under the retired tools/ folder (RETIRED_FOLDERS in repository-rules.mts)',
     check: (_root, files) => retiredFiles(files),
   },
   {

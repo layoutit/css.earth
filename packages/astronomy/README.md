@@ -415,6 +415,15 @@ do not bound intervening dates or establish a long-term perturbation theory.
 The new bodies' physical radii are source-owned volume reference radii; the
 thermal sphere-to-volume approximations are disclosed beside each model.
 
+The three extreme trans-Neptunian objects (2012 VP113, Leleākūhonua, 2017 OF201)
+use the same fixed-epoch JPL conics. Their queried-epoch agreement is the
+loosest in the set: 2017 OF201 (e = 0.945, 91 au away) differs by 2.00 m, a
+relative 1.5e-13 from the printed element digits, so the shared epoch bound is
+3 m. At the ±30-day endpoints they measure 532–535 km, guarded at the maximum
+plus 5%. `isExtremeTransNeptunian` selects trans-Neptunian objects with
+semimajor axis over 150 au and perihelion beyond 30 au, the definition
+de la Fuente Marcos & de la Fuente Marcos (2018, RNAAS 2, 167) state.
+
 ## Hosted exoplanet orbits
 
 `HostedOrbit` supports bound eccentric orbits (`0 ≤ e < 1`) through the shared

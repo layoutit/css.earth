@@ -26,7 +26,7 @@ export interface PreparedContextPoint {
   /** Not a map target: drawn as a plain dot, its path in its own bank (packages/bake/src/world-context/spatial-context.ts). */
   readonly plainDot?: true;
   /** A star's dot colour: its colour dimmed by its luminosity, prepared from its package's cited radius and effective
-   * temperature (tools/objects/prepare-spatial-context.ts). Absent, the dot takes `color`. */
+   * temperature (site/build/prepare/prepare-spatial-context.ts). Absent, the dot takes `color`. */
   readonly dotColor?: string;
   readonly positionM: PositionM;
   readonly radiusM: number;

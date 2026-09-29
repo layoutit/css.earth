@@ -23,7 +23,6 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/cameras': 'src/objects/cameras/index.ts',
     'objects/geometry': 'src/objects/geometry/index.ts',
     'galaxy-catalog': 'src/galaxy-catalog/index.ts',
-    'galaxy-field': 'src/galaxy-field/index.ts',
     'cluster-catalog': 'src/cluster-catalog/index.ts',
     'world-context': 'src/world-context/index.ts',
     'objects/raster': 'src/objects/raster/index.ts',
@@ -66,6 +65,10 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'run-implemented-objects': 'src/run-implemented-objects/index.ts',
     'prepare-objects': 'src/prepare-objects/index.ts',
     'prepare-object': 'src/prepare-object/index.ts',
+    'refresh-shape-lighting': 'src/refresh-shape-lighting/index.ts',
+    'refresh-shape-materials': 'src/refresh-shape-materials/index.ts',
+    'refresh-surface-observations': 'src/refresh-surface-observations/index.ts',
+    'refresh-terrain-photographs': 'src/refresh-terrain-photographs/index.ts',
     'thread-pool': 'src/thread-pool/index.ts' }
 
 /** Declarations come from one `tsc` pass over the sources (`tsconfig.build.json`, emitted per file under `dist/types/`),

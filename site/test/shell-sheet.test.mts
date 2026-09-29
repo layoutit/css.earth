@@ -129,7 +129,7 @@ test('filter and search swipes tuck and reveal the sheet without stealing horizo
   runFrames();
 });
 
-test('a swipe on the search field reveals the sheet while a tap still opens search', () => {
+test('a swipe on the search field reveals the sheet, and a tap leaves it where it is', () => {
   const { document, window, categories, search, pointer, runFrames } = mountSheet();
   pointer('pointerdown', categories, 400);
   pointer('pointermove', document, 510);
@@ -138,8 +138,6 @@ test('a swipe on the search field reveals the sheet while a tap still opens sear
   assert.equal(document.body.dataset.sheet, 'tucked');
 
   pointer('pointerdown', search, 500);
-  search.dispatchEvent(new window.Event('focus'));
-  assert.equal(document.body.dataset.sheet, 'tucked', 'focus waits for a possible swipe');
   pointer('pointermove', document, 380);
   pointer('pointerup', document, 380, 200);
   assert.equal(document.body.dataset.sheet, 'peek');
@@ -148,7 +146,7 @@ test('a swipe on the search field reveals the sheet while a tap still opens sear
   pointer('pointerdown', search, 500);
   search.dispatchEvent(new window.Event('focus'));
   pointer('pointerup', document, 500);
-  assert.equal(document.body.dataset.sheet, 'full', 'a tap still opens the search sheet');
+  assert.equal(document.body.dataset.sheet, 'peek', 'focus alone does not open the sheet');
 });
 
 test('a release holds the sheet where the finger left it, then clears the hold on the next frame', () => {
@@ -184,9 +182,11 @@ test('a release holds the sheet where the finger left it, then clears the hold o
   assert.equal(document.body.style.getPropertyValue('--sheet-snap-duration'), '');
 });
 
-test('search opens the whole sheet over the keyboard and leaves no transform behind', () => {
-  const { window, document, search, visualViewport, runFrames, inline, readers } = mountSheet();
+test('search results open the whole sheet over the keyboard and leave no transform behind', () => {
+  const { window, document, search, controller, visualViewport, runFrames, inline, readers } = mountSheet();
   search.dispatchEvent(new window.Event('focus'));
+  assert.equal(document.body.dataset.sheet, 'peek', 'focus waits for results');
+  controller.followSearch(true);
   assert.equal(document.body.dataset.sheet, 'full');
   runFrames();
   for (const reader of readers) assert.equal(inline(reader).transform, '');
@@ -198,6 +198,8 @@ test('search opens the whole sheet over the keyboard and leaves no transform beh
   visualViewport.height = 874;
   visualViewport.dispatchEvent(new Event('resize'));
   assert.equal(document.body.style.getPropertyValue('--sheet-keyboard'), '');
+  controller.followSearch(false);
+  assert.equal(document.body.dataset.sheet, 'peek', 'closing the results returns the sheet to where they found it');
 });
 
 test('leaving the phone layout clears a drag or a hold from the sheet and its riders', () => {

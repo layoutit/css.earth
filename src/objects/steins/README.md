@@ -23,7 +23,7 @@ The 9 September 2026 mosaic report records 107 focused tests, 60 browser conform
 
 The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/osiris-reflectance.py`](../../../tests/oracles/pds3/osiris-reflectance.py) (now [`tests/oracles/pds3/osiris-reflectance.py`](../../../tests/oracles/pds3/osiris-reflectance.py)) reads the pinned WAC reflectance product `w20080905t183606461id4df17.img` with pvl and numpy. [`tools/objects/terrestrial-layers/archived-camera.oracle.test.mts`](../../../tests/objects/terrestrial/archived-camera.oracle.test.mts) (now [`tests/objects/terrestrial/archived-camera.oracle.test.mts`](../../../tests/objects/terrestrial/archived-camera.oracle.test.mts)) requires the decoder to reproduce 48 sampled I/F values exactly and the accept or reject decision for 48 sampled quality flags.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/osiris-reflectance.py`](https://github.com/layoutit/css.earth/blob/39f3a9aef1/tools/oracles/pds3/osiris-reflectance.py) (now [`tests/oracles/pds3/osiris-reflectance.py`](../../../tests/oracles/pds3/osiris-reflectance.py)) reads the pinned WAC reflectance product `w20080905t183606461id4df17.img` with pvl and numpy. [`tools/objects/terrestrial-layers/archived-camera.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/50bc152765/tools/objects/terrestrial-layers/archived-camera.oracle.test.mts) (now [`tests/objects/terrestrial/archived-camera.oracle.test.mts`](../../../tests/objects/terrestrial/archived-camera.oracle.test.mts)) requires the decoder to reproduce 48 sampled I/F values exactly and the accept or reject decision for 48 sampled quality flags.
 
 ### Registration
 
@@ -93,7 +93,7 @@ The normal quality policy requires VALID bit 0, explicitly permits LOSSY bit 3, 
 
 **Spacecraft mosaic update (2026-09-09)**
 
-Reproduce the added camera with `python packages/bake/cli/prepare-archived-camera.py src/objects/steins/source --profile preparation/w20080905t183630497id4df17-camera.json`, then run `node tools/objects/dist/prepare-authored.js steins --write`.
+Reproduce the added camera with `python packages/bake/cli/prepare-archived-camera.py src/objects/steins/source --profile preparation/w20080905t183630497id4df17-camera.json`, then run `node site/build/prepare/prepare-authored.ts steins --write`.
 
 Both original resampled reflectance files retain their sigma and quality arrays, and each now has its own pinned camera profile and camera JSON. The released camera frame, optical scale and body orientation reproduce the added image’s independent archived RA/Dec to 0.000004 degrees. Neither image supplies a surface-intercept anchor. No image-to-shape fit is claimed. The source/model footprint diagnostic gives a symmetric 95th-percentile limb distance of 2.83 and 3.0 source pixels; this thresholded diagnostic includes optical blur and shape differences and is not a detector quality mask or absolute registration accuracy.
 

@@ -26,7 +26,7 @@ These download sizes refer only to the polar sprites. Decoded dimensions are unc
 
 Lane change (this PR): the terrestrial solid-observation lane was retired for Titan; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-mosaic`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are painted at 4096 × 2048 (DPR 1) and 8192 × 4096 (DPR 2) — retired 8192 × 4096 atlas; native 2026 ISS mosaic 23,048 px wide. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
 
-Run of 2026-09-12 (this version): `node tools/objects/dist/prepare-authored.js titan --write` prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/titan/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
+Run of 2026-09-12 (this version): [`node tools/objects/dist/prepare-authored.js titan --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) prepared the package through the shared raster lane and `tools/objects/observation/interpret.mts`; `node --test tests/objects/unit/titan/*.test.mts` passes except the shared runtime-package and import-closure tests that fail identically on `main` (recorded once in the pull request).
 
 A headless Chrome probe (`output/probe-spheres.mts`, ignored scratch) mounted the page on the dev server, selected every lens (normal, radar, topography, interpolated, coverage-distance, geology) with no console errors or failed requests, and pinned a Gazetteer feature from the sidebar search on the standard mesh (feature id 7025).
 
@@ -109,3 +109,9 @@ No readiness is claimed.
 The recipe declares a sphere of 2574.76 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 15.9464-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
 
 </details>
+
+## iPad atlas footprint
+
+The default photographic normal surface uses quarter dimensions through the existing raster resolutionScale contract. Pole textures and the other lenses retain their existing resolutions.
+
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.

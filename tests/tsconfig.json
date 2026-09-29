@@ -1,5 +1,5 @@
 {
-  "extends": "../tools/tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "include": [
     "./**/*.ts",
     "./**/*.mts",
@@ -14,11 +14,7 @@
     "../src/**/*-test-fixture.mts",
     "../src/**/*-browser.mts",
     "../.github/scripts/**/*.test.mts",
-    "../tools/**/*.test.ts",
-    "../tools/**/*.test.mts",
     "../labs/performance/**/*.test.mts",
-    "../tools/**/*.spec.ts",
-    "../tools/**/*.spec.mts",
     "../.github/scripts/audits/**/*.mts",
     "../packages/**/*.test.ts",
     "../packages/**/*.test.mts",
@@ -26,7 +22,7 @@
     "../packages/**/*.spec.mts",
     "../site/env.d.ts",
     "../site/cesium-module-types.d.ts",
-    "../tools/external-modules.d.mts"
+    "./external-modules.d.mts"
   ],
   "exclude": [
     "**/dist/**",

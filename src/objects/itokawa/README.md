@@ -70,7 +70,9 @@ brightness-bound relaxation was introduced to include them.
 [Pixelmatch diff](evidence/close-up-priority/diff.webp) ·
 [Capture settings](evidence/close-up-priority/browser.json) ·
 [Source-transfer checks](evidence/close-up-priority/source-transfer.json) ·
-[Preparation and restoration measurements](evidence/close-up-priority/preparation.json).
+[Preparation and restoration measurements](evidence/close-up-priority/preparation.json), recorded with
+[`node tools/objects/refresh-surface-observations.mts itokawa amica`](https://github.com/layoutit/css.earth/blob/a3137c9e10/tools/objects/refresh-surface-observations.mts)
+(now [`packages/bake/cli/refresh-surface-observations.mts`](../../../packages/bake/cli/refresh-surface-observations.mts)).
 
 The comparison swaps the previous eight-image bank and the new ten-image bank
 in the same Chrome 153 application, with the same scene, camera,
@@ -177,7 +179,7 @@ The controlled-camera holdouts reached maximum residuals of 0.00000842/0.0000087
 
 Source test definitions.
 
-- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/amica-ddr.py`](../../../tests/oracles/pds3/amica-ddr.py) (now [`tests/oracles/pds3/amica-ddr.py`](../../../tests/oracles/pds3/amica-ddr.py)) reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. [`tools/objects/terrestrial-layers/amica-geo.oracle.test.mts`](../../../tests/objects/terrestrial/amica-geo.oracle.test.mts) (now [`tests/objects/terrestrial/amica-geo.oracle.test.mts`](../../../tests/objects/terrestrial/amica-geo.oracle.test.mts)) requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
+- **Reader oracle, 2026-09-12:** [`tools/oracles/pds3/amica-ddr.py`](https://github.com/layoutit/css.earth/blob/39f3a9aef1/tools/oracles/pds3/amica-ddr.py) (now [`tests/oracles/pds3/amica-ddr.py`](../../../tests/oracles/pds3/amica-ddr.py)) reads the pinned DDR cube `st_2402987304_v_ddr.img.gz`, its detector FITS and the V flat with pvl, numpy and astropy. [`tools/objects/terrestrial-layers/amica-geo.oracle.test.mts`](https://github.com/layoutit/css.earth/blob/50bc152765/tools/objects/terrestrial-layers/amica-geo.oracle.test.mts) (now [`tests/objects/terrestrial/amica-geo.oracle.test.mts`](../../../tests/objects/terrestrial/amica-geo.oracle.test.mts)) requires the geometry planes to match exactly, angles within 10⁻⁴° after conversion; the DDR image band to equal the vertically reversed detector DN; and the image to equal DN over flat over exposure at 64 sampled pixels.
 
 ### Registration
 

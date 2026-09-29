@@ -1,0 +1,43 @@
+{
+  "id": "esa-gaia-2025-milky-way-artist-impression",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "Gaia's star-formation map (slider): artist's impression of the Milky Way",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.esa.int/ESA_Multimedia/Images/2025/09/Gaia_s_star-formation_map_slider",
+      "label": "ESA"
+    },
+    {
+      "role": "mirror",
+      "url": "https://commons.wikimedia.org/wiki/File:Gaia%E2%80%99s_star-formation_map_(slider)_ESA512394_-_slider.jpg",
+      "label": "Wikimedia Commons"
+    },
+    {
+      "role": "rights",
+      "url": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
+      "label": "CC BY-SA 3.0 IGO"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Gaia%E2%80%99s_star-formation_map_(slider)_ESA512394_-_slider.jpg",
+      "checkedOn": "2026-09-28",
+      "locator": "5000 x 5000 px; licence CC BY-SA 3.0 IGO; credit ESA/Gaia/DPAC, S. Payne-Wardenaar, L. McCallum et al. (2025)"
+    }
+  ],
+  "creators": ["ESA/Gaia/DPAC", "S. Payne-Wardenaar"],
+  "publisher": "European Space Agency",
+  "publicationDate": "2025-09-16",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Artist's impression: ESA/Gaia/DPAC, S. Payne-Wardenaar, L. McCallum et al. (2025), CC BY-SA 3.0 IGO.",
+      "scope": "Milky Way backing image",
+      "evidence": "https://www.esa.int/ESA_Multimedia/Images/2025/09/Gaia_s_star-formation_map_slider"
+    }
+  ]
+}

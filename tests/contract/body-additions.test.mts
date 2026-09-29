@@ -33,16 +33,16 @@ test('asset-origin context resources come from inventories without local prepare
   t.after(() => rm(root, { recursive: true, force: true }));
   await write(resolve(root, 'src/objects/nearby-universe/inventory.json'), {
     schema: 'cssearth-inventory@1', assets: [
-      { location: 'prepared', filename: 'points.json', sha256: 'a'.repeat(64), bytes: 10 },
-      { location: 'prepared', filename: 'cloud.webp', sha256: 'b'.repeat(64), bytes: 20 },
+      { location: 'prepared', filename: 'dots.json', sha256: 'a'.repeat(64), bytes: 10 },
+      { location: 'prepared', filename: 'galaxies.json', sha256: 'b'.repeat(64), bytes: 20 },
       { filename: 'datasets/preview.webp', sha256: 'c'.repeat(64), bytes: 30, location: 'public' },
     ],
   });
   const origin = 'https://assets.example.test';
   const assets = await contextObjectAssetUrls([{ id: 'nearby-universe' }], root, origin);
   assert.deepEqual(assets, {
-    '../src/objects/nearby-universe/prepared/cloud.webp': `${origin}/runtime-assets/${'b'.repeat(64)}/cloud.webp`,
-    '../src/objects/nearby-universe/prepared/points.json': `${origin}/runtime-assets/${'a'.repeat(64)}/points.json`,
+    '../src/objects/nearby-universe/prepared/galaxies.json': `${origin}/runtime-assets/${'b'.repeat(64)}/galaxies.json`,
+    '../src/objects/nearby-universe/prepared/dots.json': `${origin}/runtime-assets/${'a'.repeat(64)}/dots.json`,
   });
   const source = contextObjectModule([{ id: 'nearby-universe', type: 'galaxy-point-field' }], assets);
   assert.match(source, /https:\/\/assets\.example\.test\/runtime-assets/u);

@@ -243,7 +243,7 @@ test('selection requires a complete scientific request and exposes the shared NA
   const naco = candidate(complete, 'imaging');
   assert.equal(naco.toolkitSupport.level, 'proven');
   assert.equal(naco.bodyMapSupport.answer, 'yes');
-  assert.equal(naco.bodyMapSupport.author, 'tools/objects/naco/author-body-map.mts');
+  assert.equal(naco.bodyMapSupport.author, 'packages/telescope-cli/authoring/naco/author-body-map.mts');
   assert.equal(selectObservation(complete, 'VLT/NACO', 'imaging', 'ceres-080C0881').programme, 'ceres-080C0881');
 });
 

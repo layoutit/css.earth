@@ -1,6 +1,6 @@
 // Pinning a prepared object to its transport: the `prepared/object.json` payload, the page metadata beside it, the descriptor's
 // `prepared` pin and the body's inventory. It prepares nothing; the world-navigation and spatial-context finalization that runs
-// before it on a fresh bake stays with `tools/prepare/prepare-object-json.mts`.
+// before it on a fresh bake stays with `site/build/prepare/prepare-object-json.mts`.
 import { mkdir, readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';

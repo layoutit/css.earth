@@ -12,7 +12,7 @@ It is one of 2 planets known around GJ 143. Its orbit and size follow Dragomir e
 
 ## Evidence
 
-Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-143b.json).
+Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-143b.json).
 
 
 ## Known problems

@@ -41,6 +41,12 @@ import { accumulatedImage, addSample, discMetrics, gridPoint, inSubset, limbFall
 import { readHorizonsResponses, stackEphemerides, writeHorizonsResponses } from './line-stack-ephemeris.mts';
 import { type Card, DEGREE, type FrameHeader, MJD_TO_JD, type PreparedFrame, type VisitRegistration, locateAcrossSlit, locateDiscRow, readFrameHeader, readFrameRegion, reflectedSunlight, skyByColumn } from './line-stack-frames.mts';
 
+// The FITS ORIGIN card and software name this stage has always serialized, from when this module lived at
+// tools/objects/hst/line-stack.mts. Changing it changes every output's hash, so it is pinned rather than derived from the
+// module's current path.
+const HISTORICAL_ORIGIN = 'cssEarth tools/objects/hst/line-stack.mts';
+const HISTORICAL_SOFTWARE_NAME = 'cssearth tools/objects/hst/line-stack.mts';
+
 export interface StackSet { readonly line: StackLine; readonly subset: string; readonly accumulator: StackAccumulator }
 export interface LineStackRun {
   readonly definition: LineStackDefinition;
@@ -207,7 +213,7 @@ export function stackProduct(definition: LineStackDefinition, set: StackSet, han
     ['BODYRAD', definition.bodyRadiusKm, 'km, the radius one unit stands for'],
     ['ORIENT', 'body north up, celestial east left'], ['HANDEDNS', handedness, 'image +x of the exposure on the sky'],
     ['NFRAMES', new Set(set.accumulator.frames).size], ['EXPTIME', set.accumulator.exposureSeconds, 'seconds, summed over the frames'],
-    ['STACKID', definition.id], ['ORIGIN', 'cssEarth packages/telescope-cli/src/archives/hst/line-stack.mts'],
+    ['STACKID', definition.id], ['ORIGIN', HISTORICAL_ORIGIN],
   ];
   return Buffer.concat([
     headerBlock([['SIMPLE', true, 'conforms to FITS standard'], ['BITPIX', 8], ['NAXIS', 0], ['EXTEND', true], ...cards]),
@@ -234,7 +240,7 @@ export function measureSet(definition: LineStackDefinition, set: StackSet): SetM
 export async function lineStackSoftware(): Promise<ProductSoftware[]> {
   const sources = await Promise.all(['line-stack.mts', 'line-stack-reduction.mts', 'line-stack-ephemeris.mts']
     .map(name => readFile(resolve(import.meta.dirname, name))));
-  return [{ name: 'cssearth packages/telescope-cli/src/archives/hst/line-stack.mts', version: sha256(Buffer.concat(sources)) }];
+  return [{ name: HISTORICAL_SOFTWARE_NAME, version: sha256(Buffer.concat(sources)) }];
 }
 
 /** What identifies one stacked set: the frames that went into this one at their pinned sizes and digests, the definition and

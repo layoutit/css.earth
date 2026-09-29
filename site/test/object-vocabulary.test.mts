@@ -10,8 +10,8 @@ import { resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '../..');
 const SERVES_EVERY_OBJECT = ['site', 'src/platform', 'src/navigation', 'src/renderers', 'packages/renderer', ...['raster', 'scene', 'presentation', 'volume-leaves', 'stars', 'shell', 'sky', 'density', 'image-layers', 'environment',
   'galaxy-catalog', 'cluster-catalog', 'world-context', 'runtime-source'].map(topic => `packages/bake/src/${topic}`), 'packages/bake/cli', 'src/styles',
-  'tools/cli', 'tools/prepare', 'packages/bake/src/asset-publication', 'tools/contract', 'packages/bake/src/sources/astronomy-data', '.github/scripts', 'atlas'];
-const SCIENCE_TERM = /exoplanet|planetar|dwarf.?planet|hosted.?planet|minor.?planet/iu;
+  'packages/bake/src/asset-publication', 'packages/bake/src/contract', 'packages/objects/src/node/contract', 'packages/bake/src/sources/astronomy-data', '.github/scripts', 'atlas'];
+const SCIENCE_TERM = /exoplanet|planetocentric|planetar|dwarf.?planet|hosted.?planet|minor.?planet/iu;
 /** Names in those directories that do mean planets, and why. */
 const PLANET_NAMES = new Map([
   ['PLANET_IDS', 'the eight planets, from @cssearth/astronomy'],
@@ -26,12 +26,13 @@ const PLANET_NAMES = new Map([
   ['planetArgument', 'the planetary-context chart covers the eight planets'],
   ['planetCount', 'counts the planet markers'],
   ['planetRadiusKm', "a planet's structure or atmosphere model (Mercury, Earth, Mars, Venus)"],
+  ['ringPlanets', 'maps a ring designation letter to the ringed planet it belongs to (Jupiter, Saturn, Uranus, Neptune)'],
   ['planetRasterCellSize', "Saturn's layered-oblate lane serves one planet"],
 ]);
 /** Hyphenated names there that are not classes: a removed file, prose and a planet fixture. */
 const PLANET_HYPHENATED = new Set(['planet-markers', 'planet-radius', 'planet-specific', 'planet-specific-filter', 'future-planet']);
 
-const tracked = (...paths: string[]) => execFileSync('git', ['ls-files', '-z', '--', ...paths], { cwd: root, encoding: 'utf8' })
+const tracked = (...paths: string[]) => execFileSync('git', ['ls-files', '-z', '--', ...paths], { cwd: root, encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 })
   .split('\0').filter(path => path && !path.includes('/evidence/'));
 const code = tracked(...SERVES_EVERY_OBJECT).filter(path => /\.(?:ts|mts|mjs|js|astro|css)$/u.test(path) && path !== 'site/test/object-vocabulary.test.mts');
 const occurrences = (pattern: RegExp, keep: (name: string) => boolean) => code.flatMap(path =>

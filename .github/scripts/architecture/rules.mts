@@ -16,9 +16,9 @@ export interface Violation { readonly from: string; readonly to: string }
 const under = (path: string, ...prefixes: readonly string[]) => prefixes.some(prefix => path.startsWith(prefix));
 const topLevel = (path: string) => path.includes('/') ? path.slice(0, path.indexOf('/')) : '';
 
-/** Code that works ahead of runtime: `tools/`, `@cssearth/bake` (items H, I, J moved the rest there) and the telescope command
- * `@cssearth/telescope-cli`, whose archive reductions and programs moved out of `tools/objects/`. */
-export const PREPARATION_CODE = ['tools/', 'packages/bake/', 'packages/telescope-cli/'] as const;
+/** Code that works ahead of runtime: `@cssearth/bake` and the telescope command `@cssearth/telescope-cli`. The `tools/` folder that
+ * held the rest is retired (`retired-folders` in repository-rules.mts). */
+export const PREPARATION_CODE = ['packages/bake/', 'packages/telescope-cli/'] as const;
 
 /** The runtime: the site and the CSS renderer package's sources. */
 export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
@@ -28,13 +28,19 @@ export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
 export const SITE_BUILD = 'site/build/';
 
 /** Entry glue that may reach into an application tree: Netlify functions and root build configuration
- * (`astro.config.mts` wires `site/build` and `tools/prepare` into the Astro build). Astro pages
+ * (`astro.config.mts` wires `site/build` into the Astro build). Astro pages
  * live inside `site/` and need no entry here. */
 export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
 
-export const APPLICATION_TREES = ['tools', 'site', 'labs', '.github'] as const;
+export const APPLICATION_TREES = ['site', 'labs', '.github'] as const;
 
 const BAKE_NEBULA = 'packages/bake/src/nebula/', BAKE_OBJECTS = 'packages/bake/src/objects/';
+
+/** Per-body and per-mission authoring folders: `authoring-is-leaf` forbids importing into them from outside. */
+const AUTHORING_ROOTS = ['packages/bake/authoring/', 'packages/telescope-cli/authoring/'] as const;
+/** The one file the nebula lab reads a circumstellar authoring module from directly (path + dynamic import), named
+ * explicitly rather than opening the leaf rule to all of `labs/`. */
+const AUTHORING_LEAF_EXCEPTIONS = new Set(['labs/nebula/packages/lab/src/adapters/preparation/circumstellar.ts']);
 
 export const LAYER_RULES: readonly LayerRule[] = [
   {
@@ -45,24 +51,19 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'nothing-imports-applications',
-    description: 'tools/, site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue excepted (type-only imports count)',
+    description: 'site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue excepted (type-only imports count)',
     forbids: (from, to) => APPLICATION_TREES.some(tree => topLevel(to) === tree && topLevel(from) !== tree)
       && !ENTRY_GLUE.some(pattern => pattern.test(from)),
   },
   {
     id: 'runtime-imports-no-preparation',
-    description: 'site/ (except its build-time site/build/) and packages/renderer/src/ must not import tools/, @cssearth/bake or @cssearth/telescope-cli (type-only imports count; tests may)',
+    description: 'site/ (except its build-time site/build/) and packages/renderer/src/ must not import @cssearth/bake or @cssearth/telescope-cli (type-only imports count; tests may)',
     forbids: (from, to) => under(from, ...RUNTIME_CODE) && !from.startsWith(SITE_BUILD) && under(to, ...PREPARATION_CODE),
   },
   {
     id: 'runtime-imports-no-site-build',
     description: 'site/build/ is site-owned preparation: the rest of site/ never imports it (type-only imports count; tests and entry glue may)',
     forbids: (from, to) => from.startsWith('site/') && !from.startsWith(SITE_BUILD) && to.startsWith(SITE_BUILD),
-  },
-  {
-    id: 'nothing-imports-prepare-scripts',
-    description: 'tools/prepare/cli/ holds the prepare entry scripts: nothing imports them, including other entries (type-only imports count); the libraries beside them in tools/prepare/ may be imported',
-    forbids: (_from, to) => to.startsWith('tools/prepare/cli/'),
   },
   {
     id: 'nothing-imports-cli-entries',
@@ -84,8 +85,10 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'authoring-is-leaf',
-    description: 'packages/bake/authoring/ holds per-body and per-mission authoring scripts: nothing imports them except their own tests (tests and type-only imports count)',
-    forbids: (from, to) => to.startsWith('packages/bake/authoring/') && !from.startsWith('packages/bake/authoring/'),
+    description: 'packages/bake/authoring/ and packages/telescope-cli/authoring/ hold per-body and per-mission authoring scripts: '
+      + 'nothing imports them except their own tests, and the one lab entry named in AUTHORING_LEAF_EXCEPTIONS (tests and type-only imports count)',
+    forbids: (from, to) => AUTHORING_ROOTS.some(root => to.startsWith(root))
+      && !AUTHORING_ROOTS.some(root => from.startsWith(root)) && !AUTHORING_LEAF_EXCEPTIONS.has(from),
     includeTests: true,
   },
 ];

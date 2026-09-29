@@ -63,7 +63,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for HD 189733 B",
       "status": "included",
-      "finding": "A uniform disc in the spectrum colour, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
+      "finding": "A uniform disc in the spectrum colour, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/hd-189733-companion/source/presentation/context.png"
       ]
@@ -86,7 +86,7 @@
       "finding": "lofti_gaia 2.0.8 (Pearce et al. 2020, ApJ 894, 115) on both stars' Gaia DR3 rows with masses 0.807 and 0.193 solar masses: 300 accepted orbits. Semi-major axis 132 to 771 au (median 238), period 1,500 to 21,000 years (median 3,700), eccentricity 0.10 to 0.99 (median 0.53), inclination to the sky 73.7 to 89.1 degrees, with 293 of 300 within 30 degrees of edge-on. The first 24 are drawn around HD 189733 A. A rerun draws a different sample of the same fit.",
       "evidence": [
         "https://doi.org/10.3847/1538-4357/ab8389",
-        "https://github.com/layoutit/css.earth/blob/main/tools/objects/binary-orbits/lofti-fit.py"
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/authoring/hd-189733-companion/lofti-fit.py"
       ]
     },
     {

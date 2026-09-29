@@ -74,6 +74,6 @@ export function requireCamera(value: unknown): asserts value is CameraPlan {
     const fade = record(camera.orbitLineFade, 'orbit line fade');
     if (!(finite(fade.visibleBelowDiscHeightShare, 'visible orbit threshold') < finite(fade.hiddenAboveDiscHeightShare, 'hidden orbit threshold'))) fail('orbit fade bounds are invalid');
   }
-  if (camera.drag !== undefined) choice(record(camera.drag, 'drag').model, ['screen-axis-tumble'], 'drag model');
+  if (camera.drag !== undefined) choice(record(camera.drag, 'drag').model, ['screen-axis-tumble', 'pole-held-tumble'], 'drag model');
   if (camera.projection !== undefined && (!camera.dolly || !camera.levelOfDetail || !camera.orbitLineFade)) fail('perspective camera requires dolly and appearance thresholds');
 }

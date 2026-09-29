@@ -96,11 +96,6 @@
       "import": "./dist/galaxy-catalog.js",
       "default": "./dist/galaxy-catalog.js"
     },
-    "./galaxy-field": {
-      "types": "./dist/galaxy-field.d.ts",
-      "import": "./dist/galaxy-field.js",
-      "default": "./dist/galaxy-field.js"
-    },
     "./cluster-catalog": {
       "types": "./dist/cluster-catalog.d.ts",
       "import": "./dist/cluster-catalog.js",
@@ -310,6 +305,26 @@
       "types": "./dist/prepare-object.d.ts",
       "import": "./dist/prepare-object.js",
       "default": "./dist/prepare-object.js"
+    },
+    "./refresh-shape-lighting": {
+      "types": "./dist/refresh-shape-lighting.d.ts",
+      "import": "./dist/refresh-shape-lighting.js",
+      "default": "./dist/refresh-shape-lighting.js"
+    },
+    "./refresh-shape-materials": {
+      "types": "./dist/refresh-shape-materials.d.ts",
+      "import": "./dist/refresh-shape-materials.js",
+      "default": "./dist/refresh-shape-materials.js"
+    },
+    "./refresh-surface-observations": {
+      "types": "./dist/refresh-surface-observations.d.ts",
+      "import": "./dist/refresh-surface-observations.js",
+      "default": "./dist/refresh-surface-observations.js"
+    },
+    "./refresh-terrain-photographs": {
+      "types": "./dist/refresh-terrain-photographs.d.ts",
+      "import": "./dist/refresh-terrain-photographs.js",
+      "default": "./dist/refresh-terrain-photographs.js"
     },
     "./thread-pool": {
       "types": "./dist/thread-pool.d.ts",

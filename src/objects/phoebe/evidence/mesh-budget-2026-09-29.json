@@ -1,0 +1,113 @@
+{
+  "source": "shape/2023/phoebe_128_o.obj",
+  "units": "meters",
+  "method": "Four barycentric samples per display face checked against the complete source BVH. One-way sampled approximation, not a Hausdorff bound or source uncertainty.",
+  "trials": [
+    {
+      "targetFaces": 3500,
+      "regularize": true,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute",
+          "RegularizeLight"
+        ],
+        "sourceFaces": 196608,
+        "sourceVertices": 99846,
+        "weldedVertices": 98306,
+        "targetFaces": 3500,
+        "outputFaces": 3500,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 1065,
+        "estimatedErrorMeters": 889.7947387695312,
+        "topology": {
+          "vertices": 1752,
+          "edges": 5250,
+          "faces": 3500,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 5084230854864893
+        }
+      },
+      "independentSamples": {
+        "count": 14000,
+        "maximumMeters": 1178.2819380522692,
+        "p95Meters": 468.86879558113924,
+        "rmsMeters": 240.81111924356912
+      }
+    },
+    {
+      "targetFaces": 2000,
+      "regularize": false,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 196608,
+        "sourceVertices": 99846,
+        "weldedVertices": 98306,
+        "targetFaces": 2000,
+        "outputFaces": 2000,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 1065,
+        "estimatedErrorMeters": 787.4058837890625,
+        "topology": {
+          "vertices": 1002,
+          "edges": 3000,
+          "faces": 2000,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 5082610251527868
+        }
+      },
+      "independentSamples": {
+        "count": 8000,
+        "maximumMeters": 1423.4696255118486,
+        "p95Meters": 603.6332967518548,
+        "rmsMeters": 308.5640023537919
+      }
+    }
+  ],
+  "historicalSampledCriterionMeters": 1195,
+  "currentMeetsHistoricalSampledCriterion": false,
+  "date": "2026-09-29",
+  "audit": {
+    "installedTrianglePackages": 514,
+    "maximumFacesPerActiveLens": 2000,
+    "oversizedBefore": [
+      "phoebe"
+    ],
+    "aggregateCountsWithAlternativeLenses": [
+      {
+        "object": "bennu",
+        "transportFaces": 3996,
+        "maximumLensFaces": 800
+      },
+      {
+        "object": "comet-19p",
+        "transportFaces": 2856,
+        "maximumLensFaces": 1862
+      },
+      {
+        "object": "comet-67p",
+        "transportFaces": 4490,
+        "maximumLensFaces": 1992
+      },
+      {
+        "object": "dinkinesh",
+        "transportFaces": 2466,
+        "maximumLensFaces": 1266
+      }
+    ],
+    "method": "Count surfaceHit.triangles for each installed runtime.json; where lensRanges exists, use the maximum lens range count. This audits prepared triangle surfaces, not all DOM nodes or every object kind.",
+    "recipeSimplificationProfiles": 559,
+    "oversizedRecipeTargetsAfter": [],
+    "recipeChanges": {
+      "phoebe": "3500 to 2000 target and face budget; regularization disabled; solver error allowance unchanged",
+      "comet-67p": "OSIRIS alternative allowance 2500 to 2000; existing 2000 target and prepared geometry unchanged"
+    }
+  }
+}

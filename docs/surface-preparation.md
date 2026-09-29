@@ -19,8 +19,8 @@ Original images, meshes and labels
 | Restore missing inputs; reject changed bytes | [Acquisition](../packages/bake/src/objects/acquisition/operations-acquisition.ts), [source file validation and transport](../packages/bake/src/objects/sources/source-files.ts) and [checkout restoration](../packages/bake/cli/restore-source-inputs.mts) |
 | Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../packages/bake/src/objects/acquisition/geotiff-image.ts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
-| Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
-| Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
+| Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../packages/telescope-cli/src/source-authoring/README.md) |
+| Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../site/build/prepare/prepare-authored.ts) |
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../packages/bake/src/objects/layers/terrestrial/terrestrial-layers.ts) |
 | Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
 | Sample a pressure level from a numeric longitude/latitude table | [CSV slice reader](../packages/bake/src/objects/raster/lonlat-slice-table.ts): `lonlat-slice-table`, one-based `columns`, an exact `slice`, and a coordinate rounding tolerance. It validates periodic longitude and complete cells; latitude coverage ends at the released samples. [WASP-103 b](../src/objects/wasp-103b/README.md) is the climate-model example. |
@@ -201,7 +201,7 @@ identifies the cubes and processing behind this illustration.
 
 FITS decoding happens during preparation, never in the browser. The shared
 [reader](../packages/fits/README.md) (`@cssearth/fits`) preserves native pixel/axis order and physical numeric
-values. Every other FITS reader in `tools/` reads headers and HDU bounds through it.
+values. Every other FITS reader in preparation code reads headers and HDU bounds through it.
 Product adapters still own units, quality masks, camera registration,
 spectral selection, missing-data policies and display transforms. Sky images do not
 own their orientation: the package's [`skyImageAxes`](../packages/fits/src/sky.ts) reads it from the WCS. An axis-aligned image is flipped into
@@ -323,7 +323,7 @@ other even when it is wrong; only the imagery disagrees. It must equal the edge 
 photograph decoders (GeoTIFF, image and ISIS3 sources) write their maps from 0° E, whatever the source's centre longitude.
 
 The authored preparation measures it for every lens with native photographic sampling
-(`assertMapsStartAtSurfaceMapEdge` in `tools/objects/prepare-authored.ts`). It reads the lens's pinned source through
+(`assertMapsStartAtSurfaceMapEdge` in `site/build/prepare/prepare-authored.ts`). It reads the lens's pinned source through
 its georeferenced sampler at true east longitudes, correlates that with the prepared minimap read from every candidate
 edge in 2° steps (`measureAtlasLeftEdge`), and refuses the preparation when the best edge is more than 4° from the
 declared one and correlates at least 0.2 better. A minimap with framing (`source/presentation/minimap.json`) starts at
@@ -356,7 +356,10 @@ supports both a sampled radial surface and reduction of the original mesh.
 A radial surface supplies one radius per direction. `source-meshoptimizer`
 reduces source triangles instead; it can retain surfaces that a single radius
 cannot describe. Face budgets, open boundaries and error limits are checked by
-that path. The simplifier's error estimate and the measured source-transfer
+that path. Every radial display mesh has a ceiling of 2,000 faces, including
+source-preserving meshoptimizer reduction. Alternative lens meshes are checked
+individually; their combined transport count is not the active face count.
+The simplifier's error estimate and the measured source-transfer
 distance are separate quantities.
 
 ![Nine asteroid pairs comparing each original source mesh with its reduced mesh](images/mesh-source-comparison.webp)
@@ -440,6 +443,14 @@ The recipe's `texelsPerFace` sets the body's budget: its face count times that v
 The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
 top-centre shape. A fixed square per triangle would give large and thin triangles
 several times fewer texels per metre than small ones, at the same bytes.
+
+Before packing, preparation checks every source vertex against its triangle's
+prepared raster footprint. Capped seam miters can clip narrow faces; an inward
+footprint is expanded about its centroid just enough to enclose the source face,
+and the atlas is sampled using that repaired footprint. This preserves source
+vertices and topology. Degenerate footprints stop preparation with the face index.
+The later depth-partition compiler still independently checks rendered CSS coverage;
+it does not relax its rejection to accommodate a bad footprint.
 
 The `u` leaf cuts its triangle with `corner-shape: bevel` on its two top corners.
 Safari 26 and Firefox have no `corner-shape`, so they round those corners into an
@@ -703,7 +714,7 @@ after building the tools and restoring Arrokoth's inputs:
 
 ```sh
 node packages/bake/cli/object-operations.mts acquire arrokoth --verify-only
-node tools/objects/dist/prepare-authored.js arrokoth --write
+node site/build/prepare/prepare-authored.ts arrokoth --write
 node --test tests/objects/terrestrial/obj-uv-fits.test.mts
 ```
 
@@ -781,8 +792,8 @@ Existing single-model spacecraft observation lenses can refresh through the same
 surface-observation and triangle-atlas preparers used by a full preparation:
 
 ```sh
-node --experimental-strip-types tools/objects/refresh-surface-observations.mts itokawa amica
-node --experimental-strip-types tools/objects/refresh-surface-observations.mts lutetia osiris
+node packages/bake/cli/refresh-surface-observations.mts itokawa amica
+node packages/bake/cli/refresh-surface-observations.mts lutetia osiris
 ```
 
 Update the recipe and declare its source inputs first. This command checks the retained atlas's
@@ -806,9 +817,9 @@ After updating the changed recipe and content, use the shared preparer:
 
 ```sh
 pnpm build:tools
-node tools/objects/dist/refresh-photographs.js moon surface
-node tools/objects/dist/refresh-photographs.js europa normal enhanced
-node tools/objects/dist/refresh-photographs.js io normal enhanced
+node site/build/prepare/refresh-photographs.ts moon surface
+node site/build/prepare/refresh-photographs.ts europa normal enhanced
+node site/build/prepare/refresh-photographs.ts io normal enhanced
 ```
 
 Run one body at a time. The command verifies the selected source closure, prepares

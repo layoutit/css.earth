@@ -257,23 +257,26 @@ test('a focused catalogue-only row outside the display sample does not fabricate
   runtime.destroy();
 });
 
-test('a galaxy with a published stellar extent is ringed at it, its caption under the ring, even when billboarded', () => {
+test('a galaxy with a published stellar extent hangs its caption under its drawn sphere and hides it inside the extent', () => {
   const payload = read('local-group/prepared/catalogue.json'), lmc = payload.objects.find((row: { id: string }) => row.id === 'lmc');
   const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
   const kpc = 3.0856775814913673e19;
   const frame = { referenceFrame: payload.frame.referenceFrame, epochJdTt: payload.frame.epochJdTt, originM: lmc.positionM,
     localToReferenceXyzw: [0, 0, 0, 1] as const, metersPerUnit: kpc, boundsUnits: { min: [-8, -8, -8] as const, max: [8, 8, 8] as const } };
   const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement, payload,
-    renderedObjectIds: new Set(['lmc']), billboardedObjectIds: new Set(['lmc']), volumeRings: new Map([['lmc', { frame, radiusUnits: 18.5 }]]) });
+    renderedObjectIds: new Set(['lmc']), billboardedObjectIds: new Set(['lmc']),
+    galaxyCaptions: new Map([['lmc', { frame, drawnRadiusUnits: 5, extentRadiusUnits: 18.5 }]]) });
   const viewport = { focalPixels: 600, principalOffsetPixels: [0, 0] as const, widthPixels: 1600, heightPixels: 1200 };
-  const world = { ...payload.frame, pose: { positionM: [lmc.positionM[0], lmc.positionM[1], lmc.positionM[2] + 200 * kpc] as const, orientationXyzw: [0, 0, 0, 1] as const } };
-  runtime.publish(world, viewport, 1);
+  const camera = (kpcAway: number) => ({ ...payload.frame, pose: { positionM: [lmc.positionM[0], lmc.positionM[1], lmc.positionM[2] + kpcAway * kpc] as const, orientationXyzw: [0, 0, 0, 1] as const } });
+  const label = runtime.inspect().labels.lmc!;
+  // 5 kpc seen from 200 kpc at a 600 px focal length drops 15 px; the caption's bottom is 8 px gap and 14 px of text below.
+  runtime.publish(camera(200), viewport, 1);
   document.defaultView.advance(250);
-  const ring = host.children.flatMap(root => root.children).find(node => node.dataset.volumeRing === 'lmc')!;
-  // 18.5 kpc seen from 200 kpc at a 600 px focal length: a 55.5 px radius.
-  expect(ring.style.width).toBe('111px');
-  expect(ring.style.transform).toBe('translate(0px,0px) translate(-50%,-50%)');
-  expect(Number(ring.style.opacity)).toBeCloseTo(.45, 12);
-  expect(runtime.inspect().labels.lmc!.style.transform).toBe('translate(0px,77.5px) translate(-50%,-100%)');
+  expect(label.style.transform).toBe('translate(0px,37px) translate(-50%,-100%)');
+  expect(Number(label.style.opacity)).toBeGreaterThan(0);
+  // Inside the 18.5 kpc extent the caption hides.
+  runtime.publish(camera(10), viewport, 1);
+  document.defaultView.advance(500);
+  expect(Number(label.style.opacity)).toBe(0);
   runtime.destroy();
 });

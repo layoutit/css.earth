@@ -73,7 +73,7 @@ test('each host star selects a source-bound quadratic limb profile', async () =>
     if (science.kind === 'neutral-shape') { shapeOnly.push(id); continue; }
     assert.equal(science.kind, 'stellar-photometric-color');
     // Every host has a law: one a paper fit or fixed for the star (WD 1856+534 takes the model coefficients its discovery paper
-    // fixed), or a model grid's law at its own temperature and gravity (tools/objects/new-object/limb.mts).
+    // fixed), or a model grid's law at its own temperature and gravity (packages/telescope-cli/src/new-object/limb.mts).
     if (science.limbDarkening === undefined) { uniform.push(id); continue; }
     const law = requireRecord(science.limbDarkening, `${id} limb darkening`);
     assert.equal(law.law, 'quadratic');

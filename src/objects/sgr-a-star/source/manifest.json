@@ -121,18 +121,18 @@
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2112.07478",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-object.mts",
+      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-object-cli.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-object.mts",
+        "generator": "packages/telescope-cli/src/new-object/new-object-cli.mts",
         "inputs": [
           "sgr-a-star-observational-measurements"
         ]
       },
-      "generator": "tools/objects/new-object.mts",
+      "generator": "packages/telescope-cli/src/new-object/new-object-cli.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "A flat neutral gray disc, the marker of an unresolved surface."
@@ -145,7 +145,7 @@
       "title": "EHT Sgr A* 2017 April 7, 1.3 mm: mean of 200 eht-imaging Top Set reconstructions, made here",
       "credit": "Event Horizon Telescope Collaboration (2022), Sgr A* Paper III (ApJL 930, L14; arXiv:2311.09479): calibrated data release 2022-D02-01 and the eht-imaging pipeline and Top Set parameters; reconstructed and averaged here",
       "displayCredit": "Event Horizon Telescope Collaboration",
-      "acquisition": "Made here: node tools/objects/eht/topset-mean.mts sgr-a-star fetches the April 7 low- and high-band uvfits of the EHT data release 2022-D02-01 and the eht-imaging pipeline of release 2022-D02-02, checks both by git blob id, runs the pipeline for the 200 Top Set combinations listed in preparation/eht-topset.json (the pipeline's one change and the toolchain are stated there), and averages them.",
+      "acquisition": "Made here: node packages/bake/authoring/eht/topset-mean.mts sgr-a-star fetches the April 7 low- and high-band uvfits of the EHT data release 2022-D02-01 and the eht-imaging pipeline of release 2022-D02-02, checks both by git blob id, runs the pipeline for the 200 Top Set combinations listed in preparation/eht-topset.json (the pipeline's one change and the toolchain are stated there), and averages them.",
       "license": "EHT data releases are public; cite the Event Horizon Telescope Collaboration papers.",
       "redistribution": "The averaged image is cast on the off-limb plate and cited; the release data are not redistributed.",
       "consumers": [
@@ -156,7 +156,7 @@
         "kind": "local",
         "reason": "Reconstructed here from the EHT data release with the EHT pipeline, by the tool and recipe named in acquisition."
       },
-      "generator": "tools/objects/eht/topset-mean.mts sgr-a-star"
+      "generator": "packages/bake/authoring/eht/topset-mean.mts sgr-a-star"
     }
   ],
   "documents": [

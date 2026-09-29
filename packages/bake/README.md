@@ -1,7 +1,7 @@
 # @cssearth/bake
 
-The repository's build-time preparation code. The preparation tools (`tools/objects`,
-`tools/prepare`) and the nebula lab import it to turn source
+The repository's build-time preparation code. The preparation code (`packages/bake/authoring/`,
+`packages/telescope-cli/`, `site/build/`) and the nebula lab import it to turn source
 records into prepared delivery. The application never imports it: the runtime reads only what the bake wrote.
 
 Each topic is one subpath entry. A topic imports another only when it sits on a lower layer (the raster lane uses the
@@ -36,7 +36,6 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/density` | density-volume acquisition and KTX2 encoding, column-depth spreading, fixed discs, slice atlases and their retirement, the density-volume preparation, lens-bank promotion | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/image-layers` | image-layer recipes, the diffuse Lanczos3 resampler, retained image layers as PolyCSS volume leaves | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/galaxy-catalog` | galaxy catalogue recipes, CSV and archive sources, bibliography, galaxy positions and memberships, the display sample, the object preparation | Node only (`node:*`, `yaml`) |
-| `@cssearth/bake/galaxy-field` | the nearby-universe galaxy point field: the pinned catalogue acquisition, the scientific catalogue, the field recipe, the fitted clouds | Node only (`node:*`, network) |
 | `@cssearth/bake/cluster-catalog` | the galaxy-cluster catalogue, placed with the galaxy positions | Node only |
 | `@cssearth/bake/world-context` | the spatial world context: sources, bodies, orbit banks, system and group views, hyperbolic paths | Node only |
 | `@cssearth/bake/nebula` | nebula delivery recipes and identities, compact density, finite-emission and compiler deliveries, catalogue fields and star sprites, sky frames, render-element budgets, replay references | Node only (`node:*`, `sharp`) |
@@ -87,7 +86,7 @@ packages/bake/
 ├── src/scene/     the geometry scene compilers: `@cssearth/bake/scene`
 ├── src/presentation/ the CSS presentation compilers: `@cssearth/bake/presentation`
 ├── src/volume-leaves/, src/stars/, src/shell/, src/sky/, src/density/, src/image-layers/, src/environment/,
-│   src/galaxy-catalog/, src/galaxy-field/, src/cluster-catalog/, src/world-context/, src/nebula/
+│   src/galaxy-catalog/, src/cluster-catalog/, src/world-context/, src/nebula/
 │                  the volume compilers and the object and catalogue bakes: one entry each
 ├── src/runtime-source/, src/prepared-presentation/, src/delivery/, src/sources/, src/contract/, src/astronomy/,
 │   src/asset-publication/, src/facility-renders/, src/navigation/, src/site-assets/, src/surface-previews/, src/preparation/, src/thread-pool/
@@ -114,12 +113,12 @@ lane's surface test also reads the observation lens sampler from `src/objects/la
 in `tests/photometry/` (`node --test`), because they read body records and the ISIS oracle fixture; they import the entry.
 The node-tree, CSSOM, leaf-box, layout and activation tests are `node --test` suites in `tests/presentation/`. The prepared-presentation, delivery,
 sources, navigation and preparation tests (with the solar-geometry generator's) are `node --test` suites in `tests/prepared-presentation/`, `tests/delivery/`,
-`tests/sources/`, `tests/navigation/`, `tests/preparation/` and `tests/galaxy-field/`; the shared lighting-bank check is `tests/raster/`. The scene suite
+`tests/sources/`, `tests/navigation/` and `tests/preparation/`; the shared lighting-bank check is `tests/raster/`. The scene suite
 (`src/scene/scene.test.ts`, node:test) and the presentation suites (`src/presentation/*.test.ts`, Vitest) prepare real bodies
 from their published prepared data, so `vitest.config.ts` leaves them out of the package run. `pnpm test:preparation` runs them once that data is
 restored, after its node:test stage passes. The same holds for the node:test suites of the volume compilers and the star,
 shell, sky, density-volume, image-layer, catalogue and world-context bakes, which read restored sources.
-The object libraries' tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` (`node --test`), since they read body sources, kernel
+The object libraries' tests stay outside the package, beside the pipelines in `packages/bake/authoring/<body>/` or under `tests/objects/<topic>/` (`node --test`), since they read body sources, kernel
 banks and oracle fixtures through the repository's test helpers; they import the entries. `pnpm test:bake-objects` runs every test that imports an object entry.
 The build bundles the renderer modules a topic imports and writes `dist/metafile-esm.json`, which
 `packages/bake/cli/check-stale-builds.mts` reads to know when a renderer change makes the bake stale.

@@ -46,10 +46,6 @@ its validators accept); the renderer never imports the bake.
   CSV and archive sources, bibliography, positions, memberships, the display sample, and the object preparation that
   writes them with the object's inventory and descriptor). It imports `volume` (its node entry).
   `packages/bake/cli/prepare-galaxy-catalog.mts <object-directory>` is its command.
-- `src/galaxy-field/` is published as `@cssearth/bake/galaxy-field` (Node only): the nearby-universe galaxy point field
-  (the pinned catalogue acquisition through the source mirror, the scientific catalogue, the field recipe and the fitted
-  clouds). It imports `objects/sources`. `packages/bake/cli/acquire-galaxy-field.mts` and `prepare-galaxy-field-points.mts`
-  are `pnpm prepare:galaxy-field:data`. Its tests are `node --test` suites in `tests/galaxy-field/`.
 - `src/cluster-catalog/` is published as `@cssearth/bake/cluster-catalog` (Node only): the galaxy-cluster catalogue,
   placed with the galaxy positions. It imports `galaxy-catalog`.
 - `src/world-context/` is published as `@cssearth/bake/world-context` (Node only): the spatial world context (sources,
@@ -94,7 +90,7 @@ its validators accept); the renderer never imports the bake.
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command;
   `.github/scripts/checks/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
   transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
-  and spatial-context finalization before it stays in `tools/prepare/prepare-object-json.mts`, which reads the `tools/objects` bundle.
+  and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
   Its tests are in `tests/contract/`.
 - `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime
   asset host. Staging a pull request's baked bytes against its frozen inventories, publishing the inventoried files, the
@@ -127,7 +123,7 @@ its validators accept); the renderer never imports the bake.
   for them and checks the pinned version when the excerpts are made). It imports `raster`, `runtime-source`,
   `objects/raster` and `objects/charts`. Its commands are `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,
   scientific-charts,cesium-minimap}.mts`; its tests are in `tests/site-assets/` and `site/test/`. The vendored files keep
-  the generator path they were written with (`tools/prepare/prepare-cesium-minimap.mts`), which the ownership inventory
+  the generator path they were written with (`tools/prepare/prepare-cesium-minimap.mts`, now `packages/bake/cli/prepare-cesium-minimap.mts`), which the ownership inventory
   anchors on.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
   minimap or preview raster is drawn from, read and checked; the sidebar minimaps and preview rasters themselves, with the
@@ -158,7 +154,7 @@ its validators accept); the renderer never imports the bake.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
   libuv's thread pool, where sharp encodes, to the cores. A command imports it before any other bake entry. It is the one
   entry `package.json` lists under `sideEffects`.
-- `src/objects/` holds the shared object libraries the per-body preparation pipelines in `tools/objects/` import. Each of
+- `src/objects/` holds the shared object libraries the per-body preparation pipelines in `packages/bake/authoring/<body>/` (and `packages/telescope-cli/authoring/<body>/`) import. Each of
   its folders is a topic of its own, published as `@cssearth/bake/objects/<topic>` (Node only), importing another topic only as `LOWER_TOPICS` declares:
   - `objects/color`: the sRGB transfer, band-colour and asinh displays, palettes and tints, a placed star's catalogue colour,
     and the uniform colour of whole-disc photometry. The host passes the CIE 1931 colour-matching table in.
@@ -231,7 +227,7 @@ its validators accept); the renderer never imports the bake.
     from this source folder, found by the package's name, so the path holds from `dist/`. `operations-acquisition.ts` runs a
     body's acquisition plan and restores its missing pinned sources. It imports `raster` and `objects/sources`, and loads
     `objects/layers/terrestrial` and `objects/layers/observation` for the plan steps that need them. `packages/bake/cli/mapped-composition-evidence.mts` writes a mapped-composition receipt; Ganymede's
-    coverage comparison stays in `tools/objects/acquisition/` for per-body authoring.
+    coverage comparison stays in `packages/bake/authoring/ganymede/` for per-body authoring.
   - `objects/sphere-survey`: the VLT/SPHERE asteroid survey as a source of photograph lenses: the LAM release's listings and
     downloads, apparitions and series of frames, which apparitions a lens can join, and the survey figure's printed labels. It
     sets up a body's lens (`survey-setup.ts`, with the survey figure table `vernazza-2021-figures.json` read through the
@@ -262,10 +258,10 @@ its validators accept); the renderer never imports the bake.
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does: the terrestrial pipeline
     entry (`terrestrial-layers.ts`) and solid scene (`solid-scene.ts`, which also reads each body's retained position source,
     `SolidSceneSolarGeometry`), the shape-model entry (`shape-model.ts`) and the paged-ellipsoid object (`object.ts`) take it
-    from `tools/objects/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
+    from `site/build/prepare/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
     asset worker, `packages/bake/cli/paged-ellipsoid-asset-worker.mts`, which loads the solar geometry itself. They reach the astronomy package through `astronomy`, the object runtime contract through
     `contract`, the depth-source restore through `prepared-presentation` and the content preparer's types through
-    `objects/content`, as lower topics. Earth's MUR and CoralTemp acquisition commands stay in `tools/objects/paged-ellipsoid/`
+    `objects/content`, as lower topics. Earth's MUR and CoralTemp acquisition commands stay in `packages/bake/authoring/earth/`
     for its per-body authoring and read the MUR colour table through `globe/mur-image.ts`; the mantle-tomography extraction script
     (`extract-tomography.py`) sits beside `tomography.ts`. The terrestrial commands that derive
     observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,
@@ -278,7 +274,7 @@ its validators accept); the renderer never imports the bake.
     `surface-observations/`, described in its README (its tests are in `tests/objects/surface-observations/`, its evidence in
     `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
-  Their tests stay outside the package, beside the pipelines in `tools/objects/` or under `tests/objects/<topic>/` once the
+  Their tests stay outside the package, beside the pipelines in `packages/bake/authoring/<body>/` or under `tests/objects/<topic>/` once the
   pipeline's library has moved (`node --test`), because they read body sources, kernel banks and oracle fixtures through the
   repository's test helpers; they import the entries. The terrestrial tests, the source-surface fixture and its independent
   Python verifier are in `tests/objects/terrestrial/`. A node test that needs none of those helpers sits beside its module

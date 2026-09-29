@@ -159,3 +159,9 @@ PDS Table 1 gives north azimuth 328.60° and centre (73.0,388.2). Two disjoint i
 The shared preparer withholds a 16-pixel source border and applies its existing geometric, occlusion, incidence/emission and bounded photometry rules. The new input supplies finer regional observations; it does not create global 100 m coverage or remove photographed crater shadows. The completed twelve-frame preparation retains 6,836,406 valid map pixels (81.5%): the close frame improves detail inside existing coverage rather than expanding the observed footprint. Its accepted contribution is 215,732 corrected pixels, with overlap level 1.2430004332473796, as recorded in `prepared/surfaces.json`.
 
 </details>
+
+## iPad atlas footprint
+
+The prepared atlas budget is 4,096 texels per face instead of 16,384. This reduces texture dimensions while preserving the source mesh triangles exactly. Photographic and scientific display atlases are rebaked together.
+
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.

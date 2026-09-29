@@ -96,7 +96,7 @@
       "colour": { "kind": "ramp", "stops": [[0, "#08203a"], [0.4, "#1f5f74"], [0.75, "#c8b26a"], [1, "#fff4d2"]], "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
-        "command": "node tools/objects/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt",
+        "command": "node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt",
         "definition": "packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json"
       },
       "note": "The four scans leave gaps; grey is where no scan reached or the surface was seen more than 60 degrees from face on."

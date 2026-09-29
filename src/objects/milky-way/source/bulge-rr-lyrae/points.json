@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "bulge-rr-lyrae",
+  "table": {
+    "path": "tablec1.dat.gz",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/695/A211/tablec1.dat.gz",
+    "bytes": 17639666,
+    "format": "fixed-width",
+    "gzip": true,
+    "columns": {
+      "name": [
+        1,
+        20
+      ],
+      "raDeg": [
+        22,
+        39
+      ],
+      "decDeg": [
+        41,
+        59
+      ],
+      "distance": [
+        553,
+        572
+      ]
+    },
+    "distanceUnit": "kpc",
+    "missingDistance": -9.99999
+  },
+  "missingBasis": "1,827 stars carry Dist = -9.99999, the table's placeholder for no distance (its e_Dist states ?=-9.99); they count as without a distance.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "prudil-2025-bulge-rr-lyrae",
+  "meaning": "RR Lyrae stars toward the Galactic bulge from the OGLE-IV survey, each at the distance Prudil et al. (2025) derive from near-infrared period-luminosity relations with Gaia and OGLE photometry: the old stars of the bulge and bar, and the disc and halo stars in front of and behind it along OGLE's sightlines.",
+  "appearance": {
+    "colorCss": "#ffefd2",
+    "radiusPx": 0.5,
+    "opacity": 0.7,
+    "note": "Presentation only: the warm white of these A- and F-type giants."
+  }
+}

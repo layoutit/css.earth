@@ -138,7 +138,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for HD 189733 A",
       "status": "included",
-      "finding": "The spectrum colour dimmed toward the limb by the fitted law, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
+      "finding": "The spectrum colour dimmed toward the limb by the fitted law, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/hd-189733/source/presentation/context.png"
       ]

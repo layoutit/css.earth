@@ -130,7 +130,8 @@
             "sampling": "nearest",
             "maximum": 1500
           }
-        ]
+        ],
+        "textureScale": 0.5
       },
       {
         "id": "elevation",
@@ -236,7 +237,8 @@
             0.7071067811865476
           ],
           "ambient": 0.45
-        }
+        },
+        "textureScale": 0.5
       },
       {
         "id": "maplet-resolution",
@@ -272,7 +274,8 @@
           "#fff0a0",
           "#35b5a5",
           "#284675"
-        ]
+        ],
+        "textureScale": 0.5
       },
       {
         "id": "image-count",
@@ -308,7 +311,8 @@
           "#356da7",
           "#3cbbb0",
           "#e9ec8f"
-        ]
+        ],
+        "textureScale": 0.5
       },
       {
         "id": "ice-absorption",
@@ -487,14 +491,14 @@
         "expectedVertices": 99846,
         "expectedFaces": 196608
       },
-      "faceBudget": 3500,
+      "faceBudget": 2000,
       "texelsPerFace": 16384,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
-        "targetFaces": 3500,
+        "targetFaces": 2000,
         "maximumErrorMeters": 1065,
-        "regularize": true
+        "regularize": false
       }
     }
   },

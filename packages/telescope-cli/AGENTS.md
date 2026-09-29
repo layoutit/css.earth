@@ -19,8 +19,9 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`) and test fixtures beside
   it; `toolchains.json` still names the ROTIR environment at its former path, because an installed toolchain records the
   digest of that text, and `currentArchivePath` in `src/archives/programs.mts` finds it here. Per-body
-  authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps) stays in
-  `tools/objects/<archive>/`; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. A receipt or ledger written before
+  authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps, the circumstellar
+  discs) is `authoring/<archive>/` (exported by no subpath: it imports this package through its own name, never the
+  other way), a leaf the architecture check enforces; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. A receipt or ledger written before
   a move keeps the path it recorded; `src/archives/programs.mts` maps a recorded program path to its current location, for
   qualification, receipt writing and query display alike. No archive module names a body (`archives/archive-scope.test.mts`).
   That per-body JSON sits outside the module fingerprint closure, and a lock's `Regenerate:` header still naming the old tool
@@ -28,17 +29,24 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   stays there until the stale JunoCam ledger is regenerated: its ledger-state check fails until then, and
   `test:telescope-cli` runs every test in this package;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
-  lane in `tools/objects/telescope-sphere/`), because they read the checkout's body packages and application shell.
-  The native CSS camera, resize input and carried viewport values that lane writes into its HTML are this package's
-  `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in `labs/experiments/`
-  also imports); they followed the lane out of `tools/experiments/`;
+  lane in `src/sphere/sphere-lane.mts` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
+  application shell. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
+  this package's `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in
+  `labs/experiments/` also imports); they followed the lane out of `tools/experiments/` (now `labs/experiments/`);
 - the installer of the pinned Python astronomy toolchains (`src/toolchains/astronomy-toolchains.mts`, run as
   `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts <toolchain> install|verify`), which the
   `@cssearth/telescope/node` errors name when a toolchain is missing.
 
+The object generator behind `telescope new-object` is `src/new-object/`: `cli.mts` is the entry the telescope runs as a process of its
+own through `workspace-commands/new-object.mts`, `new-object-cli.mts` is the standalone entry for the modes the telescope does not expose
+(`--star-limb`, `--thermal`, `--host-light`, `--phase-curve`, `--charts`, `--retext`, `--retime`, the shape-only scaffold), and
+`new-hosted-planet.mts` scaffolds one hosted planet. `hosted-orbits/` holds the two Python fitters `hosted.mts` runs beside it.
+The generated solar geometry (`src/platform/solar-geometry.mts`) stays generated: the entries load it with `solar-epoch.mts` and
+pass the epoch down, so no module here imports it.
+
 The sky band composer is `src/sky/` (exported as `./sky/*`): `sky-band-composite.mts` composes pinned hips2fits, AllWISE
 atlas and JWST level-3 bands on one TAN grid, and `author-sky-bands.mts` acquires and pins those bands. It moved from
-`tools/objects/observation/` because it imports this package's JWST imaging modules. `site/build/prepare/prepare-volume-provenance.mts`
+`tools/objects/observation/` (now here) because it imports this package's JWST imaging modules. `site/build/prepare/prepare-volume-provenance.mts`
 and the nebula lab's sky-band adapter use it; its tests are in `tests/objects/observation/`, beside the shared source-test
 helper and FITS fixtures they read.
 
