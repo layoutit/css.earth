@@ -112,7 +112,7 @@ is not proof of fresh acquisition. Runtime inventories describe prepared deliver
 source restoration and runtime installation are separate checks.
 
 A new star, planet or companion starts from `pnpm telescope new-object SPEC.json`
-(`tools/objects/new-object/spec.mts` documents the spec): it writes the whole package
+(`packages/telescope-cli/src/new-object/spec.mts` documents the spec): it writes the whole package
 from Gaia DR3, SIMBAD, the spectrophotometric archives and the NASA Exoplanet Archive,
 leaves only prose marked `TODO(new-object)`, and `--bake` runs the preparation chain.
 `--from-archive HOST...` drafts the spec for transiting systems. See the

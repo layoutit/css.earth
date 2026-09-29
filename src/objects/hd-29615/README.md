@@ -27,7 +27,7 @@ Each map uses its paper figure's colour bar: the field linear from minus to plus
 
 ## Evidence
 
-Generated 2026-09-24 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
+Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
 Run of 2026-09-23 (this version):
 

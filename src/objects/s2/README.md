@@ -14,7 +14,7 @@ S2 is a hot young star on a 16-year orbit around Sagittarius A*, the black hole 
 
 [The rendered page](evidence/rendered-page.png) (dev server, 900 × 900 headless Chromium, 2026-09-27): the disc at its Planck colour, dimmed toward the edge by the ATLAS limb law, with its neighbouring S-stars labelled.
 
-Generated 2026-09-27 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/s2.json).
+Generated 2026-09-27 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/s2.json).
 
 
 ## Known problems
