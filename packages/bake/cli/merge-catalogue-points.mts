@@ -1,14 +1,15 @@
 /**
  * Merge prepared catalogue point banks into one bank of dots, drawn by the app like its other stars: projected every
- * frame, sharp at any zoom. `source/<id>/merge.json` lists the banks; each keeps its catalogue colour and opacity as one
- * palette entry (#rrggbbaa). An entry may be `{ bank, withinPcOfCentre, keepEvery, basis }`: only points within that
+ * frame, sharp at any zoom. `source/<id>/merge.json` lists the banks; each keeps its catalogue colour, and its opacity
+ * darkens that colour, so every dot is opaque and only its colour carries its tone. An entry may be `{ bank, withinPcOfCentre, keepEvery, basis }`: only points within that
  * distance of the galaxy's centre (its volume frame origin), and one in `keepEvery` of those in catalogue order.
  * A kinematic distance whose uncertainty (prepare-catalogue-points.mts `kinematicUncertainty`) exceeds `maxKinematicSigmaKpc` is left
  * out: those are the sources the rotation curve cannot place, and they pile onto a circle through the Sun and the
  * centre. `colourTowardWhite` mixes each colour that fraction of the way to white first (presentation: the catalogue
  * colours read as tints of starlight, not saturated signs). `colourGamma` then raises each colour channel to that power
  * (presentation: it deepens the coloured dots so they sit in the galaxy's backing while the whitest keep their
- * sparkle). The points are written in a fixed shuffled order, so a thinned prefix thins every region alike.
+ * sparkle). A bank's `paletteTone` (prepare-catalogue-points.mts `toneBy`) then scales each colour, so a dimmer object is
+ * a darker dot. The points are written in a fixed shuffled order, so a thinned prefix thins every region alike.
  *
  * `densityCap` evens the dots across space. Every catalogue is complete only out to some distance from the Sun, so
  * together they pile up around it. A point is kept, in the shuffled order, while fewer dots already kept lie within the
@@ -80,6 +81,8 @@ const graded = (colour: string) => '#' + [1, 3, 5].map(i => {
   const channel = parseInt(colour.slice(i, i + 2), 16) / 255;
   return Math.round(255 * (channel + (1 - channel) * towardWhite) ** colourGamma).toString(16).padStart(2, '0');
 }).join('');
+const toned = (colour: string, tone: number) => tone === 1 ? colour
+  : '#' + [1, 3, 5].map(i => Math.round(parseInt(colour.slice(i, i + 2), 16) * tone).toString(16).padStart(2, '0')).join('');
 // The galaxy's centre: its volume frame origin, read only by the rules that need it.
 const needsCentre = cap?.mode === 'disc' || entries.some(value => value.withinPcOfCentre !== undefined);
 const galaxyFrame = needsCentre ? parseDensityVolumeFrame((JSON.parse(await readFile(resolve(prepared, 'volume.json'), 'utf8')) as { data?: { frame?: unknown } }).data?.frame) : null;
@@ -91,7 +94,7 @@ const merged: { reference: number[]; colour: string; bank: string }[] = [];
 let bankFrame: ReturnType<typeof parseDensityVolumeFrame> | null = null, rawFrame: unknown = null;
 for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
   const bank = JSON.parse(await readFile(resolve(prepared, `${bankIdValue}.json`), 'utf8')) as { schema?: unknown; frame?: unknown; source?: unknown;
-    appearance?: { colorCss?: unknown; opacity?: unknown; palette?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown };
+    appearance?: { colorCss?: unknown; opacity?: unknown; palette?: unknown; paletteTone?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown };
   const parsedFrame = parseDensityVolumeFrame(bank?.frame), appearance = bank?.appearance;
   if (bank?.schema !== 'cssearth-catalogue-points@1' || !appearance || !hex(appearance.colorCss) || typeof appearance.opacity !== 'number' ||
       !(appearance.opacity > 0 && appearance.opacity <= 1) || !Array.isArray(bank.points)) throw new TypeError(`${bankIdValue}: not a catalogue point bank.`);
@@ -105,13 +108,16 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
   bankFrame ??= parsedFrame; rawFrame ??= bank.frame;
   const palette = appearance.palette === undefined ? null : appearance.palette;
   if (palette !== null && (!Array.isArray(palette) || !palette.every(hex))) throw new TypeError(`${bankIdValue}: the palette must be hex colours.`);
+  const tones = appearance.paletteTone;
+  if (tones !== undefined && (!Array.isArray(palette) || !Array.isArray(tones) || tones.length !== palette.length || !tones.every(value => typeof value === 'number' && value > 0 && value <= 1))) {
+    throw new TypeError(`${bankIdValue}: paletteTone holds one tone in (0, 1] per palette colour.`);
+  }
   const sigmas = bank.kinematicSigmaKpc;
   if (sigmas !== undefined && (!Array.isArray(sigmas) || sigmas.length !== bank.points.length || !sigmas.every(value => value === null || (typeof value === 'number' && value > 0)))) {
     throw new TypeError(`${bankIdValue}: kinematicSigmaKpc must be one positive number or null per point.`);
   }
   if (sigmas !== undefined && maxSigma === undefined) fail(`${bankIdValue} carries kinematic distance uncertainties; name maxKinematicSigmaKpc.`);
-  // The bank's opacity becomes the palette entry's alpha byte, in sixteenths.
-  const alpha = (Math.max(1, Math.round(appearance.opacity * 15)) * 17).toString(16).padStart(2, '0');
+  const layerTone = appearance.opacity;
   let near = 0;
   kept[bankIdValue] = 0;
   bank.points.forEach((point: unknown, index: number) => {
@@ -123,7 +129,8 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
     if (near++ % keepEvery) return;
     const colour = palette ? palette[point[3] as number] : appearance.colorCss;
     if (!hex(colour)) throw new TypeError(`${bankIdValue}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
-    merged.push({ reference: position, colour: `${graded(colour)}${alpha}`, bank: bankIdValue }); kept[bankIdValue]!++;
+    const tone = (tones ? (tones as number[])[point[3] as number]! : 1) * layerTone;
+    merged.push({ reference: position, colour: toned(graded(colour), tone), bank: bankIdValue }); kept[bankIdValue]!++;
   });
 }
 const hash = (index: number) => ((index + 1) * 2654435761) % 4294967296;

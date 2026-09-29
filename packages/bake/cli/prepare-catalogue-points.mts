@@ -10,6 +10,12 @@
  * into sRGB as the app colours stars (packages/bake/src/objects/stellar/stellar-photometric-color.ts). A row without a
  * value takes `missing`, a named colour.
  *
+ * `appearance.toneBy` darkens each dot's colour with the object's measured brightness: its absolute magnitude (the
+ * column's apparent magnitude at the row's distance) sets a tone from 1 at `brightMagnitude` and brighter, linearly in
+ * magnitude down to `faintTone` at `faintMagnitude`, in `steps`; a row without a magnitude takes the faintest. The bank
+ * carries each palette colour's tone (`paletteTone`); merge-catalogue-points.mts scales the final colour by it. Only the
+ * colour changes, never the opacity.
+ *
  * Usage: node packages/bake/cli/prepare-catalogue-points.mts <object-directory> <id>
  */
 import { spawnSync } from 'node:child_process';
@@ -66,7 +72,8 @@ type Spectrum = { path: string; bytes: number; wavelength: string; flux: string;
   endsNm?: { value: number; basis: string } };
 const appearance = recipe.appearance as { colorCss: string; radiusPx: number; opacity: number;
   colorBy?: { column: Column; stops: [number, string][]; steps: number };
-  colorByClass?: { column: Column; classes: { label: string; below?: number; spectrum: Spectrum }[]; missing: { label: string; colorCss: string; basis: string } } };
+  colorByClass?: { column: Column; classes: { label: string; below?: number; spectrum: Spectrum }[]; missing: { label: string; colorCss: string; basis: string } };
+  toneBy?: { magnitudeColumn: Column; band: string; brightMagnitude: number; faintMagnitude: number; faintTone: number; steps: number; basis: string } };
 if (!['whitespace', 'fixed-width', 'csv'].includes(table.format)) throw new TypeError(`${at('table.format')} must be whitespace, fixed-width or csv (with a header row).`);
 if (!['pc', 'kpc', 'parallax-mas', 'distance-modulus'].includes(table.distanceUnit)) throw new TypeError(`${at('table.distanceUnit')} must be pc, kpc, parallax-mas or distance-modulus.`);
 if (frame.unit !== undefined && frame.unit !== 'kpc' && frame.unit !== 'Mpc') throw new TypeError(`${at('frame.unit')} must be kpc or Mpc.`);
@@ -74,7 +81,11 @@ if (!['galactic', 'icrs'].includes(frame.input) || frame.output !== 'sun-icrf' |
 if (icrsInput && kinematicUncertainty) throw new TypeError(`${at('kinematicUncertainty')} needs Galactic input: its rotation curve reads Galactic longitude.`);
 const hex = /^#[0-9a-f]{6}$/iu;
 if (!hex.test(appearance.colorCss) || !(appearance.radiusPx > 0) || !(appearance.opacity > 0 && appearance.opacity <= 1)) throw new TypeError(`${at('appearance')} needs a hex colour, a positive radius and an opacity in (0, 1].`);
-const colorBy = appearance.colorBy, colorByClass = appearance.colorByClass;
+const colorBy = appearance.colorBy, colorByClass = appearance.colorByClass, toneBy = appearance.toneBy;
+if (toneBy && (typeof toneBy.band !== 'string' || !(toneBy.faintMagnitude > toneBy.brightMagnitude) || !(toneBy.faintTone > 0 && toneBy.faintTone < 1) ||
+    !Number.isInteger(toneBy.steps) || toneBy.steps < 2 || toneBy.steps > 16 || typeof toneBy.basis !== 'string' || !toneBy.basis)) {
+  throw new TypeError(`${at('appearance.toneBy')} needs a magnitude column and its band, faint > bright magnitudes, a faint tone in (0, 1), 2 to 16 steps and a basis.`);
+}
 if (colorBy && colorByClass) throw new TypeError(`${at('appearance')} takes colorBy or colorByClass, not both.`);
 if (colorByClass && (!Array.isArray(colorByClass.classes) || colorByClass.classes.length < 2 ||
     !colorByClass.classes.every((entry, index, all) => typeof entry.label === 'string' && entry.spectrum && typeof entry.spectrum.path === 'string' &&
@@ -150,22 +161,28 @@ with opener(r['table'], 'rt', encoding='utf8') as handle:
     else: l, b = float(field(line, r['columns']['lDeg'])), float(field(line, r['columns']['bDeg']))
     text = field(line, r['colorColumn']) if r['colorColumn'] is not None else ''
     color = float(text) if text else None
-    kept.append((name, l, b, d, color, kinematic_sigma(line, l, b, d) if r['weight'] else None))
+    magnitude = None
+    if r['toneColumn'] is not None:
+      mtext = field(line, r['toneColumn'])
+      parsecs = d if r['unit'] in ('pc', 'distance-modulus') else d * 1000
+      magnitude = float(mtext) - 5 * math.log10(parsecs / 10) if mtext else None
+    kept.append((name, l, b, d, color, kinematic_sigma(line, l, b, d) if r['weight'] else None, magnitude))
 scale = u.pc if r['unit'] in ('pc', 'distance-modulus') else u.kpc
 out = u.Mpc if r['outUnit'] == 'Mpc' else u.kpc
 # In ICRS input, the l and b slots hold right ascension and declination.
 if r['icrs']: xyz = SkyCoord(ra=[k[1] for k in kept] * u.deg, dec=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='icrs').cartesian.xyz.to(out).value.T
 else: xyz = SkyCoord(l=[k[1] for k in kept] * u.deg, b=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='galactic').icrs.cartesian.xyz.to(out).value.T
 json.dump({'rows': rows, 'selected': len(kept) + missing, 'missingDistance': missing, 'astropy': astropy.__version__,
-  'points': [[round(float(v), 4) for v in p] for p in xyz], 'colors': [k[4] for k in kept], 'sigmas': [None if k[5] is None else round(min(k[5], 1e6), 4) for k in kept], 'maxDistanceKpc': max(k[3] for k in kept) * (.001 if r['unit'] in ('pc', 'distance-modulus') else 1)}, sys.stdout)`;
+  'points': [[round(float(v), 4) for v in p] for p in xyz], 'colors': [k[4] for k in kept], 'magnitudes': [k[6] for k in kept], 'sigmas': [None if k[5] is None else round(min(k[5], 1e6), 4) for k in kept], 'maxDistanceKpc': max(k[3] for k in kept) * (.001 if r['unit'] in ('pc', 'distance-modulus') else 1)}, sys.stdout)`;
 const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
 const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024,
   input: JSON.stringify({ table: resolve(sourceDirectory, table.path), gzip: table.gzip === true, columns: table.columns, unit: table.distanceUnit,
     fromName: table.galacticFromName === true, byFlag: table.distanceByFlag ?? null, icrs: icrsInput, csv: table.format === 'csv', weight: kinematicUncertainty ?? null, firstOf: table.distanceFirstOf ?? null, onePerName: table.onePerName === true,
-    filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
+    filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
 if (run.status !== 0) throw new Error(`Catalogue point conversion failed for ${table.path}: ${run.stderr.slice(-2000)}`);
 const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; astropy: string; points: number[][]; colors: (number | null)[];
+  magnitudes: (number | null)[];
   sigmas: (number | null)[]; maxDistanceKpc: number };
 
 // A colour column maps onto the stops' piecewise-linear sRGB ramp, quantised to a small palette the bank carries.
@@ -214,10 +231,34 @@ const classIndex = (value: number | null) => value === null || !Number.isFinite(
 const reachKpc = Math.ceil(converted.maxDistanceKpc);
 const outputMpc = frame.unit === 'Mpc', reach = outputMpc ? Math.ceil(converted.maxDistanceKpc / 1000) : reachKpc;
 const classPalette = classColours ? [...classColours, colorByClass!.missing.colorCss] : null;
+// Each point's colour before its tone, as an index into the base palette (one entry for a single-colour bank).
+const basePalette = classPalette ?? palette ?? [appearance.colorCss];
+const baseIndex = (index: number) => colorByClass ? classIndex(converted.colors[index] ?? null) : palette ? paletteIndex(converted.colors[index] ?? null) : 0;
+const toneStep = (magnitude: number | null) => {
+  const tone = toneBy!;
+  if (magnitude === null || !Number.isFinite(magnitude)) return tone.steps - 1;
+  return Math.round(Math.max(0, Math.min(1, (magnitude - tone.brightMagnitude) / (tone.faintMagnitude - tone.brightMagnitude))) * (tone.steps - 1));
+};
+// With a tone, a palette entry is a (colour, tone) pair; the colour stays the base colour and paletteTone says how dark.
+const combos = new Map<string, number>(), tonedPalette: string[] = [], paletteTone: number[] = [];
+const pointIndex = converted.points.map((_, index) => {
+  if (!toneBy) return baseIndex(index);
+  const base = baseIndex(index), step = toneStep(converted.magnitudes[index] ?? null), key = `${base},${step}`;
+  if (!combos.has(key)) {
+    combos.set(key, tonedPalette.length); tonedPalette.push(basePalette[base]!);
+    paletteTone.push(Number((1 - step / (toneBy.steps - 1) * (1 - toneBy.faintTone)).toFixed(4)));
+  }
+  return combos.get(key)!;
+});
+const magnitudes = converted.magnitudes.filter((value): value is number => value !== null && Number.isFinite(value)).sort((a, b) => a - b);
 const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recipe.meaning,
   frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
     metersPerUnit: outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
-  appearance: { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity, ...(palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
+  appearance: { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity,
+    ...(toneBy ? { palette: tonedPalette, paletteTone } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
+  ...(toneBy ? { tone: { band: toneBy.band, brightMagnitude: toneBy.brightMagnitude, faintMagnitude: toneBy.faintMagnitude, faintTone: toneBy.faintTone, basis: toneBy.basis,
+    absoluteMagnitudePercentiles: Object.fromEntries([5, 25, 50, 75, 95].map(q => [q, Number(magnitudes[Math.floor(magnitudes.length * q / 100)]?.toFixed(2))])),
+    withoutMagnitude: converted.magnitudes.length - magnitudes.length } } : {}),
   ...(colorByClass ? { classes: [...colorByClass.classes.map(({ label, below, spectrum }, index) => ({ label, ...(below === undefined ? {} : { below }),
     spectrum: spectrum.path, ...(spectrum.endsNm ? { endsNm: spectrum.endsNm } : {}), colorCss: classColours![index],
     points: converted.colors.filter(value => classIndex(value) === index).length })),
@@ -226,8 +267,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
   conversion: `Astropy ${converted.astropy} SkyCoord: ${icrsInput ? 'right ascension, declination' : 'Galactic longitude, latitude'} and distance to heliocentric ICRS Cartesian, ${outputMpc ? 'Mpc, rounded to 0.1 kpc' : 'kpc, rounded to 0.1 pc'}.`,
   ...(kinematicUncertainty ? { kinematicUncertainty: { basis: kinematicUncertainty.basis, rotation: kinematicUncertainty.rotation },
     kinematicSigmaKpc: converted.sigmas } : {}),
-  points: colorByClass ? converted.points.map((point, index) => [...point, classIndex(converted.colors[index] ?? null)])
-    : palette ? converted.points.map((point, index) => [...point, paletteIndex(converted.colors[index] ?? null)]) : converted.points };
+  points: toneBy || colorByClass || palette ? converted.points.map((point, index) => [...point, pointIndex[index]!]) : converted.points };
 const outputPath = resolve(objectDirectory, 'prepared', `${id}.json`);
 await writeFile(outputPath, JSON.stringify(bank) + '\n');
 const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
