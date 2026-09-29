@@ -1,0 +1,131 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "asteroid-2012-vp113-arrival.webp",
+      "bytes": 33558,
+      "sha256": "d15e262ecf2c063807ddfceb8805493de30c5cfdce68bb966f9866d989fe670d"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2012-vp113-model-shadow-alpha@2x.webp",
+      "bytes": 127386,
+      "sha256": "eb9a0ace373f57085224915ad488e2c00d7b43bf39f9b71ac9bc5c55d90d4abb"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2012-vp113-model-shadow@2x.webp",
+      "bytes": 21638,
+      "sha256": "6edbf918af8681be00bde565d1828f91a86d6d812f77d751d2e349713d3726ae"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2012-vp113-model-surface-alpha@2x.webp",
+      "bytes": 129850,
+      "sha256": "2cef19901f98d88779f0c9583df857053949656defa990abf863245bb621c49b"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2012-vp113-model-surface@2x.webp",
+      "bytes": 27988,
+      "sha256": "6d7835f17475ec837894baf720035af320d235bf900d813c635cb78709759018"
+    },
+    {
+      "location": "public",
+      "filename": "asteroid-2012-vp113-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 324,
+      "sha256": "b928fbf3980ccb42639814759ac8759e5587bfac5d4e96d14e424d6cb9c0b1d5"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 351,
+      "sha256": "3b807ba4b3093200fa129019bc1bb5db1d5200cdc62274bda595bd9a8866b9b0"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 1767,
+      "sha256": "da80589457fbbfe5ee0ec0ed7e5131b1bd877967fc6dd1f7bd30d64a1bc9262c"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 467,
+      "sha256": "617438ba6d215d761b790e9cf6a0907113e689b17334ecd5cde402a27256d3c1"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 811,
+      "sha256": "821c7c3ebdee4a78a93f8d19229c42a44130f41865f65398c9be4ec72c5f4ad2"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 1608,
+      "sha256": "ece3c801f99e37043f14ed14e65a4e4ee95b537b377b0523d40780e30d047a2a"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 101,
+      "sha256": "33a55f589f67b8e6f4695895930a895111f1d7816b4ff4c953aedad1cf560513"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/model.webp",
+      "bytes": 1110,
+      "sha256": "2a9588eb084c560c51e934f79a7eec84b346bb855605d5b5a2485ceec15ceabb"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 374062,
+      "sha256": "a71d21e113a3cc221b64e61176ca667039b6757c162db2c6bb4811f3087ae20f"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 359968,
+      "sha256": "a02fb48bf2bbd637065f476f4e998bbbae80b83ac6144d62990fdb513fe42869"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1190,
+      "sha256": "87780167ed0b99a3c71e2f58bf1da6c03558983d5e90d2e38c1f9172e72ebdf7"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 682,
+      "sha256": "01ae844c9836c42fb00ed07397758483303683d03ecb73aa1aa8b33b586a0a05"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 1625,
+      "sha256": "b668cb0044c608d993844867ef1c547b574647c1f55b1a9054325d06988b844d"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2276,
+      "sha256": "abaeada0cedd227375d97cd81c691dea6262a7addb28612da00752c1b394c9b1"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1191,
+      "sha256": "4c5d27e8ad7607a665e81a30bddfbd34396999e166edd307d902d45110159842"
+    }
+  ]
+}

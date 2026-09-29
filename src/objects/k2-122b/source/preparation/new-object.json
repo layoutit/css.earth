@@ -1,0 +1,24 @@
+{
+  "host": "k2-122",
+  "planets": [
+    {
+      "id": "k2-122b",
+      "name": "K2-122 b",
+      "description": "Transiting planet of K2-122 with a 2.22-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract",
+        "credit": "Castro-González et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CASTRO_GONZ_AACUTE_LEZ_ET_AL__2022"
+      },
+      "text": {
+        "card": "K2-122 b was found in 2017 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-122. Its orbit and size follow Castro-González et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CASTRO_GONZ_AACUTE_LEZ_ET_AL__2022): disc_year 2017, disc_facility K2, sy_pnum 1; pl_orbper 2.2193023, pl_radj 0.10348845, pl_bmassj 0.00521"
+      },
+      "order": 2975
+    }
+  ]
+}

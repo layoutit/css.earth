@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 39091 is a star of 5,998 K 18.3 parsecs away. Its planet pi Men c crosses it, which is how it was found and sized. It is also HD 39091, HR 2022, HIP 26394. This account was drafted from Kunovac Hod&#x17E;i&#x107; et al. 2021's values; the sections below are the data's own.
+Its radius and temperature follow Kunovac Hod&#x17E;ić et al. 2021. It is also HD 39091, HR 2022, HIP 26394. This account was drafted from Kunovac Hod&#x17E;i&#x107; et al. 2021's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4623036865373793408, parallax 54.683 ± 0.035 mas (18.29 pc). Radius 1.17 +/- 0.02 solar radii from Kunovac Hod&#x17E;i&#x107; et al. 2021, the stellar radius of the default parameter set of pi Men c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract). Mass 1.07 +/- 0.04 solar masses from Kunovac Hod&#x17E;i&#x107; et al. 2021, the stellar mass of the default parameter set of pi Men c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract). Temperature 5,998 K from Kunovac Hod&#x17E;i&#x107; et al. 2021, the stellar temperature of the default parameter set of pi Men c in the NASA Exoplanet Archive. log g 4.33 from the mass and radius.
 

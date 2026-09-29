@@ -1,0 +1,62 @@
+{
+  "testedAt": "2026-09-28",
+  "base": "be56785c42",
+  "changes": "Shared photographic textureScale support; photographs at 0.25; coherent full rebake; identity translation accepted by static depth preparation; closed Enceladus surface culls back faces. Application JavaScript unchanged.",
+  "device": "iPad15,7 A16, iPadOS 26.6",
+  "capture": "tablet-saturn-moons-partitions-complete-normal-2026-09-28T23-11-49-384Z",
+  "mode": "normal, JavaScript sampling off, native device screenshots",
+  "triangles": 2000,
+  "photographs": [
+    {
+      "id": "normal",
+      "width": 1410,
+      "height": 1452,
+      "decodedRgbaBytes": 8189280,
+      "encodedBytes": 344132,
+      "sha256": "41380d37aa33907aa560e5a8a639f3f06f454f27675e68cc38f2e645495c4a5e",
+      "previousInventoryEntry": {
+        "location": "public",
+        "filename": "enceladus-normal-surface@2x.webp",
+        "bytes": 3541196,
+        "sha256": "7c7443e1bebf517c496200f8c0daa1f6b739ddcd5b1eb9d336002839d7b49c3e"
+      }
+    },
+    {
+      "id": "infrared",
+      "width": 1410,
+      "height": 1452,
+      "decodedRgbaBytes": 8189280,
+      "encodedBytes": 272736,
+      "sha256": "824bc7625d75a8eb9f929e03b8d231e13c1704744fd744ca73c09af6025b5857",
+      "previousInventoryEntry": {
+        "location": "public",
+        "filename": "enceladus-infrared-surface@2x.webp",
+        "bytes": 1928874,
+        "sha256": "4643e1bbabb4b8392a5372e641656f44a03fa1c7160edf3b708edb856bf6ba4d"
+      }
+    }
+  ],
+  "arrivals": [
+    {
+      "label": "04 saturn \u2192 enceladus",
+      "durationMs": 4864.542,
+      "worstTaskMs": 46.331,
+      "outcome": "finished"
+    },
+    {
+      "label": "06 mimas \u2192 enceladus",
+      "durationMs": 4088.043,
+      "worstTaskMs": 32.905,
+      "outcome": "finished"
+    }
+  ],
+  "visualCheck": "Native device screenshots inspected after both arrivals and Enceladus rotations. Complete surfaces; existing triangle seams remain visible, particularly at extreme close-up.",
+  "limits": "Photographic display detail is reduced; original sources and scientific data are unchanged. No claim of zero dropped frames: Enceladus departure still contains a 432.757 ms composite task. Moving optical scale from the camera root into the scene did not remove it and is excluded.",
+  "preparedDepthGroups": 32,
+  "triangleInlineStylesEqualToPreviousPublishedRuntime": true,
+  "closedSurface": {
+    "outwardFaces": 2000,
+    "edges": 3000,
+    "edgesNotSharedByExactlyTwoFaces": 0
+  }
+}

@@ -52,7 +52,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 350000.0000678637
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with packages/bake/authoring/distant-worlds/author.py.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sourceBinding": {
         "kind": "local",
@@ -114,7 +114,7 @@
           {
             "catalogueId": "tno-centaur-diameters-albedos-densities-v1",
             "role": "reference",
-            "evidence": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
           }
         ]
       }

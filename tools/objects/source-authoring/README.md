@@ -5,8 +5,8 @@ radius-table calculation, and check the result against `source/manifest.json`.
 They write the table to standard output. Run from the repository root:
 
 ```sh
-node tools/objects/source-authoring/lucy-targets/author.mts src/objects/polymele/source > /tmp/polymele-ellipsoid.tab
-python3 tools/objects/source-authoring/trans-neptunian/author.py src/objects/quaoar/source > /tmp/quaoar-ellipsoid.tab
+node packages/bake/authoring/lucy-targets/author.mts src/objects/polymele/source > /tmp/polymele-ellipsoid.tab
+python3 packages/bake/authoring/trans-neptunian/author.py src/objects/quaoar/source > /tmp/quaoar-ellipsoid.tab
 ```
 
 The JavaScript calculation covers Polymele, Leucus, Orus, Eurybates, Patroclus,
@@ -15,5 +15,5 @@ Annefrank, Braille, Chariklo and Bienor. The Python calculation covers Quaoar an
 citations. Shared acquisition and preparation tools continue to own the rest
 of each package.
 
-The [distant-world source helpers](distant-worlds/README.md) retain the initial
+The [distant-world source helpers](../../../packages/bake/authoring/distant-worlds/README.md) retain the initial
 extraction and preparation commands for ʻOumuamua and eight outer worlds.

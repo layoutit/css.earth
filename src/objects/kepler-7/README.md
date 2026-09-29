@@ -2,7 +2,7 @@
 
 ## Sources
 
-Kepler-7 is a star of 5,933 K 923 parsecs away. Its planet Kepler-7 b crosses it, which is how it was found and sized. This account was drafted from Esteves et al. 2015's values; the sections below are the data's own.
+Its radius and temperature follow Esteves et al. 2015. This account was drafted from Esteves et al. 2015's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2102117871259036672, parallax 1.032 ± 0.012 mas (969.09 pc). Radius 1.966 +/- 0.013 solar radii from Esteves et al. 2015, the stellar radius of the default parameter set of Kepler-7 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract). Mass 1.359 +/- 0.031 solar masses from Esteves et al. 2015, the stellar mass of the default parameter set of Kepler-7 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract). Temperature 5,933 K from Esteves et al. 2015, the stellar temperature of the default parameter set of Kepler-7 b in the NASA Exoplanet Archive. log g 3.98 from the mass and radius.
 

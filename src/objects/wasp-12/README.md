@@ -2,7 +2,7 @@
 
 ## Sources
 
-WASP-12 is a star of 6,265 K 427 parsecs away. Its planet WASP-12 b crosses it, which is how it was found and sized. This account was drafted from Leonardi et al. 2024's values; the sections below are the data's own.
+Its radius and temperature follow Leonardi et al. 2024. This account was drafted from Leonardi et al. 2024's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3435282862461427072, parallax 2.421 ± 0.017 mas (413.00 pc). Radius 1.69 +/- 0.019 solar radii from Leonardi et al. 2024, the stellar radius of the default parameter set of WASP-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract). Mass 1.325 +/- 0.026 solar masses from Leonardi et al. 2024, the stellar mass of the default parameter set of WASP-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract). Temperature 6,265 K from Leonardi et al. 2024, the stellar temperature of the default parameter set of WASP-12 b in the NASA Exoplanet Archive. log g 4.1 from the mass and radius.
 

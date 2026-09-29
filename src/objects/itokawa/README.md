@@ -70,7 +70,9 @@ brightness-bound relaxation was introduced to include them.
 [Pixelmatch diff](evidence/close-up-priority/diff.webp) ·
 [Capture settings](evidence/close-up-priority/browser.json) ·
 [Source-transfer checks](evidence/close-up-priority/source-transfer.json) ·
-[Preparation and restoration measurements](evidence/close-up-priority/preparation.json).
+[Preparation and restoration measurements](evidence/close-up-priority/preparation.json), recorded with
+[`node tools/objects/refresh-surface-observations.mts itokawa amica`](https://github.com/layoutit/css.earth/blob/a3137c9e10/tools/objects/refresh-surface-observations.mts)
+(now [`packages/bake/cli/refresh-surface-observations.mts`](../../../packages/bake/cli/refresh-surface-observations.mts)).
 
 The comparison swaps the previous eight-image bank and the new ten-image bank
 in the same Chrome 153 application, with the same scene, camera,

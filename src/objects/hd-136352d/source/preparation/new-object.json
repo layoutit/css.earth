@@ -4,7 +4,7 @@
     {
       "id": "hd-136352d",
       "name": "HD 136352 d",
-      "description": "HD 136352 d crosses its star every 107 days and is 2.6 Earth radii across, found in 2019.",
+      "description": "HD 136352 d crosses its star every 107 days and is 2.6 times as wide as Earth, found in 2019.",
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract",
         "credit": "Delrez et al. 2021"
@@ -14,9 +14,9 @@
         "reference": "DELREZ_ET_AL_2021"
       },
       "text": {
-        "card": "HD 136352 d crosses its star every 107 days and is 2.6 Earth radii across, found in 2019.",
-        "introduction": "HD 136352 d transits HD 136352 every 107 days and is 2.6 Earth radii across. Orbit and size follow Delrez et al. 2021's fit, the archive's default.",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DELREZ_ET_AL_2021): pl_orbper 107.245, pl_radj 0.22856672, pl_bmassj 0.02775082"
+        "card": "HD 136352 d was found in 2019 by La Silla Observatory as it crossed its star.",
+        "introduction": "It is one of 3 planets known around HD 136352. Its orbit and size follow Delrez et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DELREZ_ET_AL_2021): disc_year 2019, disc_facility La Silla Observatory, sy_pnum 3; pl_orbper 107.245, pl_radj 0.22856672, pl_bmassj 0.02775082"
       },
       "order": 1782
     }

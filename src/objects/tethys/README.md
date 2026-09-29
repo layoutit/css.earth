@@ -150,3 +150,9 @@ A [Pixelmatch comparison](evidence/iss-re-preparation/comparison.webp) renders b
 | [Previous → re-prepared, photograph edge at the limb](evidence/iss-re-preparation/pose-2-change.json) | 215,631 |
 
 [In the images themselves](evidence/iss-re-preparation/assets.json), 8.0% of the surface texture's 32,768,000 pixels differ, as do 0.12% of the shadow texture, 2 of the thumbnail's 4,608 pixels and 3.4% of the [minimap](evidence/iss-re-preparation/minimap.webp).
+
+## iPad atlas footprint
+
+Photographic normal/enhanced and elevation/albedo display atlases use quarter dimensions. Infrared and ice-absorption scales retain their existing values. The closed mesh culls its back faces.
+
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.

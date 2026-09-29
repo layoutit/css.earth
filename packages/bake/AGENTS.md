@@ -94,7 +94,7 @@ its validators accept); the renderer never imports the bake.
   `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command;
   `.github/scripts/checks/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
   transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
-  and spatial-context finalization before it stays in `tools/prepare/prepare-object-json.mts`, which reads the `tools/objects` bundle.
+  and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
   Its tests are in `tests/contract/`.
 - `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime
   asset host. Staging a pull request's baked bytes against its frozen inventories, publishing the inventoried files, the
@@ -137,12 +137,24 @@ its validators accept); the renderer never imports the bake.
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
   of the preparation trace, and the esbuild plugin (`bundle-renderer.ts`) that bundles `@cssearth/renderer`'s TypeScript source
   subpaths into a Node bundle that keeps other packages external (the preparation test runner and bundle-building tests use it). `packages/bake/cli/preparation-trace.mts` is the trace itself, which
-  `tools/prepare/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
+  `packages/bake/cli/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
   before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. It also
-  holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `tools/prepare/prepare-object.mts` run through
+  holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
   because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
   Its tests are `node --test` suites in `tests/preparation/`.
+- `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
+  scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
+  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command; its tests are in `tests/preparation/`.
+- `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the preparation cache (a verified
+  receipt, from `preparation`, skips an unchanged object) over `run-implemented-objects`'s scheduler. It imports
+  `preparation` and `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command; its tests are in
+  `tests/preparation/`.
+- `src/prepare-object/` is published as `@cssearth/bake/prepare-object` (Node only): the ordered preparation chain for one
+  or more authored objects end to end (builds, catalogue, geometry, the authored preparation, page data, text, markers,
+  billboard, world context, provenance), naming the step that failed and how to resume. It imports no topic; its steps
+  shell out to the other bake and site-owned preparation commands by path. `packages/bake/cli/prepare-object.mts` is its
+  command; its tests are in `tests/preparation/`.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
   libuv's thread pool, where sharp encodes, to the cores. A command imports it before any other bake entry. It is the one
   entry `package.json` lists under `sideEffects`.
@@ -219,7 +231,7 @@ its validators accept); the renderer never imports the bake.
     from this source folder, found by the package's name, so the path holds from `dist/`. `operations-acquisition.ts` runs a
     body's acquisition plan and restores its missing pinned sources. It imports `raster` and `objects/sources`, and loads
     `objects/layers/terrestrial` and `objects/layers/observation` for the plan steps that need them. `packages/bake/cli/mapped-composition-evidence.mts` writes a mapped-composition receipt; Ganymede's
-    coverage comparison stays in `tools/objects/acquisition/` for per-body authoring.
+    coverage comparison stays in `packages/bake/authoring/ganymede/` for per-body authoring.
   - `objects/sphere-survey`: the VLT/SPHERE asteroid survey as a source of photograph lenses: the LAM release's listings and
     downloads, apparitions and series of frames, which apparitions a lens can join, and the survey figure's printed labels. It
     sets up a body's lens (`survey-setup.ts`, with the survey figure table `vernazza-2021-figures.json` read through the
@@ -250,10 +262,10 @@ its validators accept); the renderer never imports the bake.
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does: the terrestrial pipeline
     entry (`terrestrial-layers.ts`) and solid scene (`solid-scene.ts`, which also reads each body's retained position source,
     `SolidSceneSolarGeometry`), the shape-model entry (`shape-model.ts`) and the paged-ellipsoid object (`object.ts`) take it
-    from `tools/objects/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
+    from `site/build/prepare/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
     asset worker, `packages/bake/cli/paged-ellipsoid-asset-worker.mts`, which loads the solar geometry itself. They reach the astronomy package through `astronomy`, the object runtime contract through
     `contract`, the depth-source restore through `prepared-presentation` and the content preparer's types through
-    `objects/content`, as lower topics. Earth's MUR and CoralTemp acquisition commands stay in `tools/objects/paged-ellipsoid/`
+    `objects/content`, as lower topics. Earth's MUR and CoralTemp acquisition commands stay in `packages/bake/authoring/earth/`
     for its per-body authoring and read the MUR colour table through `globe/mur-image.ts`; the mantle-tomography extraction script
     (`extract-tomography.py`) sits beside `tomography.ts`. The terrestrial commands that derive
     observer cameras, write Horizons tables, re-measure registration and write its README block are in `packages/bake/cli/`,

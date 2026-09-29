@@ -137,9 +137,9 @@ Read the current `package.json` and runner arguments before using commands:
 | Production build and assembly | `pnpm build` |
 | Rendered-page assertions over the built HTML | `node --test site/test/rendered-page.test.mts` |
 
-Build the shared preparation tools before invoking their `dist/` entry points.
-Run a `tools/prepare` script by its entry in `tools/prepare/cli/`. The file of the same name in `tools/prepare/` is its
-library: other code imports it, and running it directly exits with the entry's path.
+Run a `packages/*/cli/` command by its entry in `packages/<pkg>/cli/`; the library of the same name under
+`packages/<pkg>/src/` is what other code imports (nothing imports the entry itself). A site-owned preparer (one that
+reads a site module) runs directly from `site/build/prepare/`.
 Select checks using the [PR rules](../../docs/provenance/CONTRACT.md#pull-requests);
 this table lists available commands, not a checklist for every body addition.
 The retired per-body test folders and browser-profile registry are not required

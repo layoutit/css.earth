@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-ae7f23",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Coy et al. (2026): Evidence for an Atmosphere on the Ultra-short-period Super-Earth HD 3167 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2604.11911"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ae7f23"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026ApJ..1005L..77C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ae7f23",
+      "label": "The Astrophysical Journal Letters 1005 L77"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Coy et al. (2026), The Astrophysical Journal Letters 1005 L77",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 1005 L77",
+  "creators": [
+    "Brandon Park Coy",
+    "Qiao Xue",
+    "Megan Weiner Mansfield",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

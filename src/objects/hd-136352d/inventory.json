@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "hd-136352d-arrival.webp",
-      "bytes": 29360,
-      "sha256": "3cea712afc5ac3e316aa5cecb22eb0936c2f927b7765b937fa203c7b2ac95606"
+      "bytes": 29388,
+      "sha256": "aa3e5ada9d4ac13cf48af5b32a1ef492fb4dc87603228ef15649bea1ef366793"
     },
     {
       "location": "public",
@@ -24,6 +24,18 @@
       "filename": "hd-136352d-surface-shape@2x.webp",
       "bytes": 178,
       "sha256": "b0926cb240f71f0fe3d28711843ec0aee1b62189fe3288cbdae8c49bd84b2dcf"
+    },
+    {
+      "location": "public",
+      "filename": "hd-136352d-system-orbits.svg",
+      "bytes": 11335,
+      "sha256": "09ae49b83f0f4d8df5580117b82099ead78a6132f67ccb980cdaa412c5f1e8c4"
+    },
+    {
+      "location": "public",
+      "filename": "hd-136352d-transit.svg",
+      "bytes": 12969,
+      "sha256": "6fd0eb87878aee86d7402aedbc960dac6620235c1fe30c674c75564ce4019252"
     },
     {
       "location": "public",
@@ -238,8 +250,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 310,
-      "sha256": "7d0f45f550e2aa0026b7365ce9afbfdcc5dfd21eea19c7d3115b2fa2427d5d87"
+      "bytes": 314,
+      "sha256": "1008901a545e7162ae0a1b66e7ec02d54862cc89da507204b9476e1b80e8a86e"
     },
     {
       "location": "prepared",
@@ -251,13 +263,13 @@
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1409,
-      "sha256": "954e35be6199b1b947a7b5684a163a48577b6bc3da8c1e48ca8ffee019df855c"
+      "sha256": "09d8db23013f5a2579190bfd6ece9e9b533f8cc2626f88a6c9789812ce43f82a"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 1783,
-      "sha256": "9d64638cbcf84a385681679382552edf9133fc850e9bf25b8949b033d2271f5c"
+      "bytes": 3208,
+      "sha256": "d118a73354ef396ba8aa4247f02fe22a6bb20eb30286a2ba240f3fdd47a6d727"
     },
     {
       "location": "prepared",
@@ -274,8 +286,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 82,
-      "sha256": "b209edc4f0c1a0cb82f05765652e7e3caec79da375793d88d7d7b3b56afb1238"
+      "bytes": 101,
+      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
     },
     {
       "location": "prepared",
@@ -286,38 +298,38 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 591213,
-      "sha256": "a173cb308d682b68ab230fe770e225ffd49bfcc3a01cfefb2659198e5b7dd263"
+      "bytes": 576619,
+      "sha256": "11caa376fb181865386fadc73bfb22f83d9549d9c48e8888bd210a42dae2ceb4"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 393673,
-      "sha256": "4fe011cd0e2e8fd61654561834812844e717edd9f0c01990709fee53bc590dc9"
+      "bytes": 393648,
+      "sha256": "64f2e962c0f74029539f20deb38db3088c592bbfc452b64fd0421b92e4c866d7"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1205,
-      "sha256": "fe4eaa02f536f9de84c5f6f0512befb46de8c06ebfb981801f3c65ae752b9f63"
+      "bytes": 1204,
+      "sha256": "4f172f0f3f5a46b12bc019457036e9ddd743f7cc50deb21642b079adff377491"
     },
     {
       "location": "prepared",
       "filename": "sun.json",
-      "bytes": 664,
-      "sha256": "aa5dbdc9fa46ef4ca944ece696a1d716e62f27dc2d5ffc353e4a61092fb02f13"
+      "bytes": 665,
+      "sha256": "e6e4775fe6967028644c546b066fa4865596e3585c485e16eccbe5973e6be8c5"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1176,
-      "sha256": "9b961d4af92cab36b79e032d0392d54990be3ab4fa4f2b706085d3b870b70a68"
+      "bytes": 1264,
+      "sha256": "b262b0cae43e86b9422fab149210d49cd91c307c49e133924505100fd16977e4"
     },
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1159,
-      "sha256": "9a040534bba8e04b9aa2f61d6a93b1dcaefeb3a293235f4ef448d1bd1f807b8b"
+      "bytes": 1158,
+      "sha256": "557c1bbdf48b5268ddd13c6083685e7ebba40a1f4e17b2b10099c8690951d31a"
     }
   ]
 }

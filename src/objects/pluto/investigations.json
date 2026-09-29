@@ -201,7 +201,7 @@
       "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/non_mission/tno-centaur_diam-albedo-density_V1_0/data/tno_centaur_diam_alb_dens.tab",
-        "tools/objects/source-authoring/sbn-catalogue-facts/author.mts"
+        "packages/bake/authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

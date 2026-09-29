@@ -174,8 +174,7 @@ can skip through `tests/objects/source-test.mts`; a pass with skips does not pro
 those inputs or rendering paths. Run focused tests with the needed inputs installed.
 Compiled artifacts use exact-input caches; these never cache a test verdict.
 Package caches, the renderer's included, follow compiler inputs; preparation retains a
-conservative whole-tree key. The preparation bundle ships JS only: type checks
-read its sources through the root `#preparation/*` imports. Cached
+conservative whole-tree key. Cached
 baked JSON remains subject to the installer's byte and SHA-256 checks on every run.
 Cold and cached CI timings must be reported separately.
 
@@ -200,7 +199,8 @@ from. It groups the files into folders and fails when a change adds:
   functions and root `*.config.*` files are allowed);
 - an import of `tools/` or `@cssearth/bake` from `site/` or
   `packages/renderer/src/` (renderer tests may use bake);
-- an import of a `tools/prepare/` script, including from another prepare script;
+- an import of a `packages/*/cli/` command entry, including from another
+  entry or the package itself (tests included);
 - an import of `@cssearth/bake` from `packages/telescope`, tests included;
 - an import between `nebula/` and `objects/` inside `@cssearth/bake`, either way.
 

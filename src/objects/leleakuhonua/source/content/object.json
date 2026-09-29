@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "leleakuhonua",
+  "displayName": "Leleākūhonua",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "220 × 220 × 220 km",
+        "source": {
+          "url": "https://arxiv.org/abs/2011.03889",
+          "label": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile",
+          "checked": "2026-09-28",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2011-03889",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/leleakuhonua/leleakuhonua-model-thumbnail.webp",
+        "surface": "leleakuhonua-model-surface@2x.webp",
+        "poles": "leleakuhonua-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2011.03889"
+        },
+        "notes": "The 2018 occultation gives projected full axes 543.2 ±18 × 459.5 ±11 km. This smooth axisymmetric illustration assumes an unseen equatorial depth of 543.2 km and equator-on presentation; true 3D flattening is unresolved. It represents the primary outline, not the larger thermal system-size estimate. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain.",
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile",
+      "href": "https://arxiv.org/abs/2011.03889"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2011.03889"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/1810.00013"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2011.03889"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2011.03889",
+      "credit": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile"
+    }
+  }
+}

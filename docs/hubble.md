@@ -108,7 +108,7 @@ Only `ORIENTAT−90` gives a coherent asymmetry, it appears in both lines and bo
 
 ## Bands mapped from a slit scanned across a body
 
-A slit narrower than the body and stepped across it samples the surface twice over. Along the slit the detector rows are already a picture; the steps are the other direction. Every row is a whole spectrum, so an absorption band can be measured in each of them and the measurements laid back on the body. [`slit-scan-map.mts`](../tools/objects/hst/slit-scan-map.mts) does that and writes a full-world longitude-latitude map of one band's strength.
+A slit narrower than the body and stepped across it samples the surface twice over. Along the slit the detector rows are already a picture; the steps are the other direction. Every row is a whole spectrum, so an absorption band can be measured in each of them and the measurements laid back on the body. [`slit-scan-map.mts`](../packages/telescope-cli/authoring/hst/slit-scan-map.mts) does that and writes a full-world longitude-latitude map of one band's strength.
 
 It works the way the line stack does. Which frames, which reference spectrum, which continuum windows, which band, which grid and which rotation model come from a pinned scan definition beside the programs, together with the raw JPL Horizons responses that place the body, so a re-run asks the network for nothing. The arithmetic sits in [`slit-scan-reduction.mts`](../packages/telescope-cli/src/archives/hst/slit-scan-reduction.mts), pure and covered by `slit-scan-map.test.mts`. Where the body sits in each frame is measured, not assumed: along the slit from the middle of the chord the disc cuts in the sunlight it reflects, and across the slit from the offset that best explains every step's chord against a disc of the ephemeris radius. From there the body geometry is the one every ground-based photograph here uses (an IAU pole model from a text PCK through `observerCamera`), and the projection and the weighted combination of the visits are `projectBandMap` and `combineBodyMaps`, the same parts that place a JWST cube or an ALMA image on a body.
 
@@ -284,7 +284,7 @@ node packages/telescope-cli/src/archives/hst/drizzle.mts   europa-15419 idr203wt
 node packages/telescope-cli/src/archives/hst/compare.mts   europa-15419 idr203wtq .local/hst/europa-15419-idr203wtq/drizzle
 node packages/telescope-cli/src/archives/hst/archive-ledger.mts --write
 pnpm test:telescope-cli
-node --import ./tests/register-vite-suffix.mts --test tools/objects/hst/slit-scan-map.test.mts
+node --import ./tests/register-vite-suffix.mts --test packages/telescope-cli/authoring/hst/slit-scan-map.test.mts
 ```
 
 The line stack is its own command, and takes a directory that already holds the pinned `_x2d` frames:
@@ -298,7 +298,7 @@ It reads each frame once to place its visit and once to stack it, and holds no f
 The slit-scan map is its own command as well, over a directory that already holds the pinned `_x2d` frames and the pinned reference spectrum:
 
 ```sh
-node tools/objects/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt
+node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt
 ```
 
 It reads each frame three times (once to place its visit, once for the first pass that finds the rows with no band, once to measure every row against them) and holds no frame after it has been used. `--mirror` maps the opposite across-slit direction as well, which is the evidence above; `--receipt` writes the reproduction receipt beside the definition; `--fetch` allows a Horizons request the pinned responses do not already answer. A run over the 60 Europa frames takes under three seconds.

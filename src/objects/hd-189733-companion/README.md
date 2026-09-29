@@ -12,7 +12,7 @@ HD 189733 B is a red dwarf 11.4 arcseconds from [HD 189733 A](../hd-189733/READM
 
 **No orbit is drawn.** No orbit of the pair is published: the 2006 discovery paper says it is "premature to derive specific orbital parameters", and its tentative clockwise, face-on orbit rests on a differential proper motion, −1 ± 5 and −21.2 ± 5 mas/yr, that Gaia has since replaced. Gaia DR3 measures the pair's separation and their relative motion across the sky precisely (−8.98, −3.67 mas/yr, 0.91 km/s at their distance), but not how far apart they lie along the line of sight, and their two published relative radial velocities disagree. Many orbits fit those measurements, so the package draws none. It fits them anyway, once, to record how open the orbit is.
 
-[LOFTI](https://doi.org/10.3847/1538-4357/ab8389) (Pearce et al. 2020, "Orbits for the Impatient"; `lofti_gaia` 2.0.8) fits exactly this case: it draws orbits from its standard priors, scales and rotates each onto the measured separation and position angle, and keeps it with the probability of its fit to the measured relative motion. [`lofti-fit.py`](../../../tools/objects/binary-orbits/lofti-fit.py) runs it on both stars' Gaia DR3 rows with the masses above, and its 300 accepted orbits are kept as evidence in [`reference/lofti-candidate-orbits.txt`](source/reference/lofti-candidate-orbits.txt).
+[LOFTI](https://doi.org/10.3847/1538-4357/ab8389) (Pearce et al. 2020, "Orbits for the Impatient"; `lofti_gaia` 2.0.8) fits exactly this case: it draws orbits from its standard priors, scales and rotates each onto the measured separation and position angle, and keeps it with the probability of its fit to the measured relative motion. [`lofti-fit.py`](../../../packages/bake/authoring/hd-189733-companion/lofti-fit.py) runs it on both stars' Gaia DR3 rows with the masses above, and its 300 accepted orbits are kept as evidence in [`reference/lofti-candidate-orbits.txt`](source/reference/lofti-candidate-orbits.txt).
 
 | Quantity | 5th percentile | Median | 95th percentile |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ An earlier version of this package drew 24 of those orbits, dashed. Each of them
 
 ## Evidence
 
-Run of 2026-09-17 (this version): `node tools/prepare/prepare-object.mts hd-189733-companion` prepared the package.
+Run of 2026-09-17 (this version): [`node tools/prepare/prepare-object.mts hd-189733-companion`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) prepared the package.
 
 - [`stellar-photometric-color.test.mts`](../../../tests/objects/observation/stellar/stellar-photometric-color.test.mts) (now [`tests/objects/observation/stellar/stellar-photometric-color.test.mts`](../../../tests/objects/observation/stellar/stellar-photometric-color.test.mts)) reads the pinned XP spectrum and checks the colour 255, 201, 123.
 - `source.test.mts` verifies the pins and acquisitions, that radius and GM are the catalogue's, that the distance is A's, and that the prepared world positions of A and B are 11.44 arcsec apart as seen from the Sun.

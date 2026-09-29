@@ -54,9 +54,9 @@ The 1991 paper was also inspected in full. Its Table 3 reproduces Reitsema's fea
 Reproduce the diagnostics with:
 
 ```sh
-node tools/objects/comet-1p/inspect-giotto.mts --download --all-clear-mdm --output=output/halley-intake
-node tools/objects/comet-1p/inspect-encounter-resampling.mts output/halley-resampling
-node --test tests/contract/inspect-halley-giotto.test.mts tools/objects/comet-1p/prepare-encounters.test.mts
+node packages/bake/authoring/comet-1p/inspect-giotto.mts --download --all-clear-mdm --output=output/halley-intake
+node packages/bake/authoring/comet-1p/inspect-encounter-resampling.mts output/halley-resampling
+node --test packages/bake/authoring/comet-1p/inspect-halley-giotto.test.mts packages/bake/authoring/comet-1p/prepare-encounters.test.mts
 pnpm -s telescope papers comet-1p --instrument Giotto --json --out output/halley-papers
 ```
 
@@ -142,7 +142,7 @@ This package contains the nucleus model only; no coma, tail or outgassing scene.
 
 ## Giotto projection
 
-The [source-specific preparer](../../../tools/objects/comet-1p/prepare-giotto.mts) reads the MPS display composite identified by the registration, not the separately surveyed calibrated PDS image pixels. Run it with `node tools/objects/comet-1p/prepare-giotto.mts --write`, then run the normal authored Halley preparation. The registration JSON is an authored input; its image-plane scale, centre and footprint are retained with their controls and provenance.
+The [source-specific preparer](../../../packages/bake/authoring/comet-1p/prepare-giotto.mts) reads the MPS display composite identified by the registration, not the separately surveyed calibrated PDS image pixels. Run it with `node packages/bake/authoring/comet-1p/prepare-giotto.mts --write`, then run the normal authored Halley preparation. The registration JSON is an authored input; its image-plane scale, centre and footprint are retained with their controls and provenance.
 
 The 2004 table gives angular momentum RA 7°, Dec −60°, a long-axis direction RA 314°, Dec −7° at JD 2446498.806, precession period 3.69 days and roll period 7.1 days. Stooke's Vega image anchor fixes longitude 270°. Table 1 in the 1991 paper places that image 1.5 seconds before closest approach. The TVS header places closest approach at 07:19:59.5 UTC, giving an anchor of 07:19:58 UTC on 9 March 1986.
 
@@ -160,7 +160,7 @@ The old [calibrated-image intake](source/reference/giotto-hmc-intake.json) remai
 
 ## Vega 2 extension
 
-The [encounter preparer](../../../tools/objects/comet-1p/prepare-encounters.mts) reuses the accepted Giotto sampler and adds two original KFKI-processed archive frames:
+The [encounter preparer](../../../packages/bake/authoring/comet-1p/prepare-encounters.mts) reuses the accepted Giotto sampler and adds two original KFKI-processed archive frames:
 
 | Frame | UTC on 9 March 1986 | Filter / exposure | Native projected pixel size |
 | --- | --- | --- | --- |
@@ -180,10 +180,10 @@ MPS catalogue figures 55, 63 and 66 were also inspected. They provide additional
 Reproduce in order, after restoring the declared source inputs:
 
 ```sh
-node tools/objects/comet-1p/prepare-giotto.mts --write
-node tools/objects/comet-1p/prepare-encounters.mts --write
-node tools/objects/dist/prepare-authored.js comet-1p --write
-node --test tools/objects/comet-1p/prepare-encounters.test.mts
+node packages/bake/authoring/comet-1p/prepare-giotto.mts --write
+node packages/bake/authoring/comet-1p/prepare-encounters.mts --write
+node site/build/prepare/prepare-authored.ts comet-1p --write
+node --test packages/bake/authoring/comet-1p/prepare-encounters.test.mts
 ```
 
 The encounter registration is an authored input containing the selected frame controls and source paths. The native Vega decoder checks dimensions and FITS checksums before sampling; the encounter tests reproduce the PNG, attribution and report, and check corrupt native data, geometric masks, occlusion, dark samples, overlap sufficiency and deterministic resolution selection.

@@ -98,8 +98,6 @@ test('workspace imports resolve through exports and tsup entries, built or not, 
     const typeOnly = graph.edges.filter(edge => edge.from === 'site/Page.astro' && edge.typeOnly).map(edge => edge.to).sort();
     assert.deepEqual(typeOnly, ['packages/bake/src/volume/node/index.ts', 'packages/renderer/src/navigation/orbit.ts']);
     const violations = evaluateRules(graph);
-    assert.deepEqual(violations.get('nothing-imports-prepare-scripts'), [{ from: 'site/Page.astro', to: 'tools/prepare/cli/prepare-x.mts' }],
-      'an alias that names a forbidden entry is still forbidden');
     assert.ok(violations.get('runtime-imports-no-preparation')?.some(item => item.to === 'packages/bake/src/volume/node/index.ts'),
       'a type-only import of @x/bake from the site counts');
   });

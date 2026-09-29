@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 207496 is a star of 4,819 K 23.6 parsecs away. Its planet HD 207496 b crosses it, which is how it was found and sized. It is also HD 207496, HIP 108162. This account was drafted from Barros et al. 2023's values; the sections below are the data's own.
+Its radius and temperature follow Barros et al. 2023. It is also HD 207496, HIP 108162. This account was drafted from Barros et al. 2023's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 6356417496318028800, parallax 42.293 ± 0.018 mas (23.64 pc). Radius 0.769 +/- 0.026 solar radii from Barros et al. 2023, the stellar radius of the default parameter set of HD 207496 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract). Mass 0.8 +/- 0.04 solar masses from Barros et al. 2023, the stellar mass of the default parameter set of HD 207496 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract). Temperature 4,819 K from Barros et al. 2023, the stellar temperature of the default parameter set of HD 207496 b in the NASA Exoplanet Archive. log g 4.57 from the mass and radius.
 

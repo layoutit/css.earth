@@ -28,13 +28,19 @@ export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
 export const SITE_BUILD = 'site/build/';
 
 /** Entry glue that may reach into an application tree: Netlify functions and root build configuration
- * (`astro.config.mts` wires `site/build` and `tools/prepare` into the Astro build). Astro pages
+ * (`astro.config.mts` wires `site/build` into the Astro build). Astro pages
  * live inside `site/` and need no entry here. */
 export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
 
 export const APPLICATION_TREES = ['tools', 'site', 'labs', '.github'] as const;
 
 const BAKE_NEBULA = 'packages/bake/src/nebula/', BAKE_OBJECTS = 'packages/bake/src/objects/';
+
+/** Per-body and per-mission authoring folders: `authoring-is-leaf` forbids importing into them from outside. */
+const AUTHORING_ROOTS = ['packages/bake/authoring/', 'packages/telescope-cli/authoring/'] as const;
+/** The one file the nebula lab reads a circumstellar authoring module from directly (path + dynamic import), named
+ * explicitly rather than opening the leaf rule to all of `labs/`. */
+const AUTHORING_LEAF_EXCEPTIONS = new Set(['labs/nebula/packages/lab/src/adapters/preparation/circumstellar.ts']);
 
 export const LAYER_RULES: readonly LayerRule[] = [
   {
@@ -60,11 +66,6 @@ export const LAYER_RULES: readonly LayerRule[] = [
     forbids: (from, to) => from.startsWith('site/') && !from.startsWith(SITE_BUILD) && to.startsWith(SITE_BUILD),
   },
   {
-    id: 'nothing-imports-prepare-scripts',
-    description: 'tools/prepare/cli/ holds the prepare entry scripts: nothing imports them, including other entries (type-only imports count); the libraries beside them in tools/prepare/ may be imported',
-    forbids: (_from, to) => to.startsWith('tools/prepare/cli/'),
-  },
-  {
     id: 'nothing-imports-cli-entries',
     description: 'packages/*/cli/ holds command entries: nothing imports them, including other entries and the package itself (tests and type-only imports count)',
     forbids: (_from, to) => /^packages\/[^/]+\/cli\//u.test(to),
@@ -80,6 +81,14 @@ export const LAYER_RULES: readonly LayerRule[] = [
     id: 'bake-nebula-and-objects-independent',
     description: 'in @cssearth/bake, nebula/ and objects/ never import each other, in either direction (tests and type-only imports count)',
     forbids: (from, to) => (from.startsWith(BAKE_NEBULA) && to.startsWith(BAKE_OBJECTS)) || (from.startsWith(BAKE_OBJECTS) && to.startsWith(BAKE_NEBULA)),
+    includeTests: true,
+  },
+  {
+    id: 'authoring-is-leaf',
+    description: 'packages/bake/authoring/ and packages/telescope-cli/authoring/ hold per-body and per-mission authoring scripts: '
+      + 'nothing imports them except their own tests, and the one lab entry named in AUTHORING_LEAF_EXCEPTIONS (tests and type-only imports count)',
+    forbids: (from, to) => AUTHORING_ROOTS.some(root => to.startsWith(root))
+      && !AUTHORING_ROOTS.some(root => from.startsWith(root)) && !AUTHORING_LEAF_EXCEPTIONS.has(from),
     includeTests: true,
   },
 ];

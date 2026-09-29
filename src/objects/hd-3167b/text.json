@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-3167b",
+  "card": {
+    "text": "HD 3167 b was found in 2016 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+        "label": "Coy et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COY_ET_AL_2026): disc_year 2016, disc_facility K2, sy_pnum 4; pl_orbper 0.95965451, pl_radj 0.1428319, pl_bmassj 0.01524093"
+      },
+      {
+        "catalogueId": "wikipedia-hd-3167-b",
+        "url": "https://en.wikipedia.org/wiki/HD_3167_b",
+        "label": "Wikipedia, \"HD 3167 b\"",
+        "checked": "2026-09-28",
+        "locator": "Lead section, revision 1375950422",
+        "quote": "HD 3167 b is a super-Earth exoplanet that orbits the K-type star HD 3167."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around HD 3167. Its orbit and size follow Coy et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ae7f23",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+        "label": "Coy et al. 2026",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname COY_ET_AL_2026): disc_year 2016, disc_facility K2, sy_pnum 4; pl_orbper 0.95965451, pl_radj 0.1428319, pl_bmassj 0.01524093"
+      },
+      {
+        "catalogueId": "wikipedia-hd-3167-b",
+        "url": "https://en.wikipedia.org/wiki/HD_3167_b",
+        "label": "Wikipedia, \"HD 3167 b\"",
+        "checked": "2026-09-28",
+        "locator": "Lead section, revision 1375950422",
+        "quote": "With an orbital period of just 0.959 days, it belongs to the group of ultra-short period planets."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

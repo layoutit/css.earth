@@ -100,7 +100,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 4032090.2,
-      "description": "TOI-2194 b crosses its star every 15.3 days and is 2 Earth radii across, found in 2023.",
+      "description": "TOI-2194 b was found in 2023 by TESS as it crossed its star.",
       "systemName": "TOI-2194 system",
       "order": 1790,
       "context": {
@@ -111,20 +111,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        251019472911603070,
-        -449923805681255040,
-        -313685371152501300
+        251019474825284900,
+        -449923809039278600,
+        -313685370115662140
       ],
       "presentationToReference": [
-        0.4272257646315943,
+        0.4272257658479077,
         -0.8679203726434043,
-        0.25336213763205384,
-        -0.7396472943642153,
+        0.25336213558107484,
+        -0.7396472965444457,
         -0.49665916639357066,
-        -0.4541492622221678,
-        -0.52000002497562,
+        -0.4541492586713494,
+        -0.520000020875155,
         -0.006625646215857499,
-        0.8541405474730589
+        0.8541405499694187
       ],
       "orbitUpReference": [
         0.8679203726434043,

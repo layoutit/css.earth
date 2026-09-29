@@ -23,7 +23,7 @@ Beta Pictoris b is a super-Jupiter about 10 au from [Beta Pictoris](../beta-pict
 Run of 2026-09-22 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) reproduces the GRAVITY astrometry of b and c and the discovery astrometry of d (above).
-- `node tools/prepare/prepare-object.mts beta-pictoris-b` prepared the package through its world step.
+- [`node tools/prepare/prepare-object.mts beta-pictoris-b`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) prepared the package through its world step.
 - The JWST disc lens places the star by this orbit: planet b is found 79 and 93 mas from where the mosaics' pointing predicts, and the orbit, not the pointing, is trusted ([disc README](../beta-pictoris-disc/README.md)).
 - Dev server `/beta-pictoris-b/` renders the sphere and its reader text with no console errors.
 

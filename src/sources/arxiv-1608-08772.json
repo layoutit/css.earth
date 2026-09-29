@@ -1,0 +1,33 @@
+{
+  "id": "arxiv-1608-08772",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sheppard & Trujillo (2016): New Extreme Trans-Neptunian Objects: Towards a Super-Earth in the Outer Solar System",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1608.08772"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1608.08772",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/asteroid-2012-vp113/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal 152, 221",
+  "creators": [
+    "S. S. Sheppard",
+    "C. Trujillo"
+  ],
+  "publicationDate": "2016"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "arxiv-2011-03889",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Buie et al. (2020): A Single-chord Stellar Occultation by the Extreme Trans-Neptunian Object (541132) Leleākūhonua",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2011.03889"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2011.03889",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/leleakuhonua/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astronomical Journal 159, 230",
+  "creators": [
+    "M. W. Buie",
+    "R. Leiva",
+    "J. M. Keller",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

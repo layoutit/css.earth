@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "k2-122",
+  "angularDiameterMas": 0.08,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 410,463 km at 72.31 pc = 0.08 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 72.30906721221031,
+  "distanceSource": "Gaia DR3 parallax 13.8295 +/- 0.0151 mas (same row, RUWE 1.21): 72.31 pc, no zero-point correction",
+  "radiusKm": 410463,
+  "radiusSource": "Radius 0.59 +/- 0.01 solar radii from Castro-González et al. 2022, the stellar radius of the default parameter set of K2-122 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract): 410,463 km at 695,700 km per solar radius. Mass 0.63 +/- 0.02 solar masses from Castro-González et al. 2022, the stellar mass of the default parameter set of K2-122 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract); GM is that mass times the JPL solar GM. Temperature 4009 +/- 47 K from Castro-González et al. 2022, the stellar temperature of the default parameter set of K2-122 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4009,
+  "effectiveTemperatureSource": "Castro-González et al. 2022, the stellar temperature of the default parameter set of K2-122 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract)",
+  "surfaceGravityLogg": 4.7,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-122.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.696, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

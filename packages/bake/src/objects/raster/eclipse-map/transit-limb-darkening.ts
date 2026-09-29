@@ -12,6 +12,19 @@ import { measureTransitShift } from './transit-timing.ts';
 const BTJD_TO_BMJD = 2457000 - 2400000.5;
 const HALF_WINDOW_DAYS = 0.2, OUT_OF_TRANSIT_DAYS = 0.06, IN_TRANSIT_DAYS = 0.05, MIN_OUTSIDE = 150, MIN_INSIDE = 60;
 
+/** Which samples a transit keeps: those within `halfWindowDays` of mid-transit, the baseline beyond `outsideDays`, and a transit
+ * counted when `minOutside` baseline and `minInside` samples within `insideDays` exist. The default is HD 189733 b's. */
+export interface TransitWindow { readonly halfWindowDays: number; readonly outsideDays: number; readonly insideDays: number; readonly minOutside: number; readonly minInside: number }
+export const DEFAULT_TRANSIT_WINDOW: TransitWindow = Object.freeze({ halfWindowDays: HALF_WINDOW_DAYS, outsideDays: OUT_OF_TRANSIT_DAYS, insideDays: IN_TRANSIT_DAYS, minOutside: MIN_OUTSIDE, minInside: MIN_INSIDE });
+
+/** A window from a published transit duration (first to fourth contact): the baseline from 0.6 to 1.5 durations either side of
+ * mid-transit, the middle 80% of the transit counted as in it, and at 2-minute cadence at least half its samples on each side. */
+export function transitWindow(durationHours: number, cadenceSeconds = 120): TransitWindow {
+  if (!(durationHours > 0 && Number.isFinite(durationHours))) throw new RangeError(`A transit window needs a positive duration, not ${durationHours} h.`);
+  const d = durationHours / 24, perDay = 86400 / cadenceSeconds;
+  return { halfWindowDays: 1.5 * d, outsideDays: 0.6 * d, insideDays: 0.4 * d, minOutside: Math.max(10, Math.floor(0.9 * d * perDay)), minInside: Math.max(5, Math.floor(0.4 * d * perDay)) };
+}
+
 export interface TessLightCurve {
   readonly sector: number; readonly ticId: number; readonly exposureSeconds: number;
   readonly time: Float64Array; readonly flux: Float64Array; readonly error: Float64Array;
@@ -40,16 +53,16 @@ export function readTessLightCurve(bytes: Buffer): TessLightCurve {
 
 /** Every transit in the light curves with at least `MIN_OUTSIDE` samples beyond 0.06 d and `MIN_INSIDE` within 0.05 d of mid-transit
  * (inside a 0.2 d half-window), normalised by its out-of-transit line and folded onto the orbit's reference transit, in time order. */
-export function foldTransits(curves: readonly TessLightCurve[], orbit: Pick<HostedOrbit, 'periodDays' | 'transitTimeBmjdTdb'>) {
+export function foldTransits(curves: readonly TessLightCurve[], orbit: Pick<HostedOrbit, 'periodDays' | 'transitTimeBmjdTdb'>, window: TransitWindow = DEFAULT_TRANSIT_WINDOW) {
   const samples: [number, number, number][] = [];
   let transits = 0;
   for (const curve of curves) {
     const { time, flux, error } = curve, first = Math.ceil((time[0]! - orbit.transitTimeBmjdTdb) / orbit.periodDays), last = Math.floor((time.at(-1)! - orbit.transitTimeBmjdTdb) / orbit.periodDays);
     for (let epoch = first; epoch <= last; epoch++) {
       const middle = orbit.transitTimeBmjdTdb + epoch * orbit.periodDays, near: number[] = [];
-      for (let i = 0; i < time.length; i++) if (Math.abs(time[i]! - middle) < HALF_WINDOW_DAYS) near.push(i);
-      const outside = near.filter(i => Math.abs(time[i]! - middle) > OUT_OF_TRANSIT_DAYS), inside = near.filter(i => Math.abs(time[i]! - middle) < IN_TRANSIT_DAYS);
-      if (outside.length < MIN_OUTSIDE || inside.length < MIN_INSIDE) continue;
+      for (let i = 0; i < time.length; i++) if (Math.abs(time[i]! - middle) < window.halfWindowDays) near.push(i);
+      const outside = near.filter(i => Math.abs(time[i]! - middle) > window.outsideDays), inside = near.filter(i => Math.abs(time[i]! - middle) < window.insideDays);
+      if (outside.length < window.minOutside || inside.length < window.minInside) continue;
       let sx = 0, sy = 0, sxx = 0, sxy = 0;
       for (const i of outside) { const x = time[i]! - middle; sx += x; sy += flux[i]!; sxx += x * x; sxy += x * flux[i]!; }
       const n = outside.length, slope = (n * sxy - sx * sy) / (n * sxx - sx * sx), intercept = (sy - slope * sx) / n;

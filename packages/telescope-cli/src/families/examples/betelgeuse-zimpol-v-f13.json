@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-family-example@1",
   "family": "F13",
-  "source": "tools/objects/source-authoring/betelgeuse-shell/author.mts",
+  "source": "packages/bake/authoring/betelgeuse-shell/author.mts",
   "restorer": "packages/telescope-cli/src/families/f13-f17-examples.mts",
   "members": [
     {"id":"zimpol-v-intensity","url":"https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.655","bytes":8458560},

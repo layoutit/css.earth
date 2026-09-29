@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stab2669",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Castro-González et al. (2022): The K2-OjOS Project: New and revisited planets and candidates in <i>K2</i> campaigns 5, 16, & 18",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2109.03346"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab2669"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022MNRAS.509.1075C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab2669",
+      "label": "Monthly Notices of the Royal Astronomical Society 509 1075-1095"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Castro-González et al. (2022), Monthly Notices of the Royal Astronomical Society 509 1075-1095",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 509 1075-1095",
+  "creators": [
+    "A Castro-González",
+    "E Díez Alonso",
+    "J Menéndez Blanco",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

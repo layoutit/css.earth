@@ -100,7 +100,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 7539250.8,
-      "description": "Kepler-444 d crosses its star every 6.19 days and is 0.53 Earth radii across, found in 2015.",
+      "description": "Kepler-444 d was found in 2015 by Kepler as it crossed its star.",
       "systemName": "Kepler-444 system",
       "order": 1829,
       "context": {
@@ -111,20 +111,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        284914298996030700,
-        -793411622177269800,
-        749253427599430500
+        284914298937601500,
+        -793411622024228600,
+        749253427630530600
       ],
       "presentationToReference": [
-        0.2827002737460201,
+        0.2827002737197204,
         -0.9325631904265145,
-        -0.2245138104559402,
-        -0.6922564273675671,
+        -0.22451381048905583,
+        -0.6922564272943275,
         -0.3603760305152903,
-        0.625228082701293,
-        0.6639740913561445,
+        0.6252280827823843,
+        0.6639740914437012,
         0.021331021812446522,
-        0.7474512649773357
+        0.7474512648995574
       ],
       "orbitUpReference": [
         0.9325631904265145,

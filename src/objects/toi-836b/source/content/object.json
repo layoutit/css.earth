@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.014 Jupiter masses",
+        "value": "4.5 Earth masses",
         "source": {
           "catalogueId": "publication-2023mnras-520-3649h",
           "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "toi-836b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-836b/toi-836b-system-orbits.svg",
+      "alt": "The orbits of TOI-836's planets in this map from above, to scale, with TOI-836 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-836b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H"
+      }
+    },
+    {
+      "id": "toi-836b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-836b/toi-836b-transit.svg",
+      "alt": "TOI-836 b crossing its star, as TESS recorded it: 3 sectors (11, 38, 91) of the SPOC pipeline's 2-minute light curves of TIC 440887364, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-836b-tess-sector-11",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019112060037-s0011-0000000440887364-0143-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

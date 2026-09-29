@@ -292,7 +292,7 @@ All browser assets are generated under `public/scenes/mars/` and enumerated by
 `inventory.json`. Authoritative inputs and pinned recipes stay under
 `source/`; generated runtime transport stays under `prepared/`. The shared
 raster, celestial, geometry, content and presentation lanes in
-`tools/objects/prepare-authored.ts` prepare the package; it contains no
+`site/build/prepare/prepare-authored.ts` prepare the package; it contains no
 executable code. No source-authority request is permitted at runtime.
 
 ## Reproduction

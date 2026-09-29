@@ -163,8 +163,8 @@ test('repository volume package restores a missing download from the object sour
 test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {
   const root = await fixture(t, 'earth'), source = resolve(root, 'src/objects/earth/source');
   const mosaic = Buffer.from('pinned mosaic'), archive = Buffer.from('pinned archive');
-  const restore = resolve(root, 'tools/objects/paged-ellipsoid/mur-imagery.mts');
-  for (const dir of ['src/objects/earth/source/science', 'tools/objects/paged-ellipsoid']) {
+  const restore = resolve(root, 'packages/bake/authoring/earth/mur-imagery.mts');
+  for (const dir of ['src/objects/earth/source/science', 'packages/bake/authoring/earth']) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await writeFile(restore, `

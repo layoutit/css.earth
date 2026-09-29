@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-836b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-836b-orbits",
+      "title": "TOI-836 b: orbits around TOI-836",
+      "output": "toi-836b-system-orbits.svg",
+      "system": "toi-836",
+      "highlight": "toi-836b",
+      "description": "The orbits of TOI-836's planets in this map from above, to scale, with TOI-836 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.8167262 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-836b-transit",
+      "title": "TOI-836 b: its transit",
+      "description": "TOI-836 b crossing its star, as TESS recorded it: 3 sectors (11, 38, 91) of the SPOC pipeline's 2-minute light curves of TIC 440887364, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-836b-transit.svg",
+      "metadata": {
+        "tic": "TIC 440887364",
+        "sectors": [
+          11,
+          38,
+          91
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-836b",
+      "sources": [
+        "photometry/tess/tess2019112060037-s0011-0000000440887364-0143-s_lc.fits",
+        "photometry/tess/tess2021118034608-s0038-0000000440887364-0209-s_lc.fits",
+        "photometry/tess/tess2025099153000-s0091-0000000440887364-0288-s_lc.fits"
+      ],
+      "durationHours": 1.805,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sectors 11, 38, 91",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

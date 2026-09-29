@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.00025 Jupiter masses",
+        "value": "0.079 Earth masses",
         "source": {
           "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
           "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "kepler-444c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-444c/kepler-444c-system-orbits.svg",
+      "alt": "The orbits of Kepler-444's planets in this map from above, to scale, with Kepler-444 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-444c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

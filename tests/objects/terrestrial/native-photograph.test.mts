@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { writeArrayBuffer } from 'geotiff';
 import sharp from 'sharp';
-import { loadNativePhotograph, samplePhotographicTexel } from '@cssearth/bake/objects/layers/terrestrial';
+import { loadNativePhotograph, samplePhotographicTexel, prepareNativePhotographicAtlas } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 
 const radius = 180 / Math.PI;
@@ -68,4 +68,34 @@ test('texel footprint preserves the retained CSS axes and withholds an unsupport
   for(let i=0;i<4;i++)for(let axis=0;axis<2;axis++)assert.ok(Math.abs(points[i][axis]-expected[i][axis])<1e-12);
   assert.ok(Math.abs(rgb[0]-expected.reduce((sum,p)=>sum+p[0]+p[1],0)/4)<1e-12);
   assert.equal(samplePhotographicTexel({...sampler,sample:(lon,lat,c)=>lon<30 && sampler.sample(lon,lat,c)},matrix,0,0,1,2,rgb),false);
+});
+
+
+test('scaled photographs cover the same body coordinates without changing the canonical atlas', async () => {
+  const dir=await mkdtemp(join(tmpdir(),'cssearth-scaled-photograph-'));
+  try {
+    const pixels=Buffer.alloc(8*4*3);
+    for(let y=0;y<4;y++)for(let x=0;x<8;x++)pixels.fill(x*20+y*15,(y*8+x)*3,(y*8+x+1)*3);
+    const bytes=await sharp(pixels,{raw:{width:8,height:4,channels:3}}).png().toBuffer();
+    await writeFile(join(dir,'map.png'),bytes);
+    const source=pin('map.png',bytes),validity={kind:'image-rgb-no-data',noData:null,centerLongitude:180};
+    const matrix=[.125,0,0,0,0,0,.125,0,0,1,0,0,-1,1,-1,1];
+    const radial={width:16,height:16,plans:[{face:{vertices:[[1,-1,-1],[1,1,-1],[1,0,1]],normal:[1,0,0],vertexNormals:[[1,0,0],[1,0,0],[1,0,0]]},
+      rect:{x:0,y:0,width:16,height:16},matrix,geometry:{leafWidth:16,leafHeight:16}}]};
+    const before=JSON.stringify(radial);
+    const options={radial,sourceDirectory:dir,source,validity,sampling:{samplesPerAxis:2},publicDirectory:dir,publicBase:'/',id:'fixture',sunDirection:[1,0,0],mapWidth:8,textureScale:.25};
+    const result=await prepareNativePhotographicAtlas(options);
+    assert.equal(result.surface.width,4);assert.equal(result.surface.height,4);
+    assert.equal(JSON.stringify(radial),before,'The canonical mesh and atlas addressing must stay unchanged');
+    const sampler=await loadNativePhotograph(dir,source,validity);
+    const actual=await sharp(join(dir,'fixture-surface@2x.webp')).ensureAlpha().raw().toBuffer();
+    for(let y=0;y<4;y++)for(let x=0;x<4;x++) {
+      const expected=[0,0,0];
+      assert.equal(samplePhotographicTexel(sampler,matrix,x*4,y*4,4,2,expected),true);
+      for(let c=0;c<3;c++)assert.ok(Math.abs(actual[(y*4+x)*4+c]-expected[c])<5,`Decoded pixel ${x},${y},${c}: ${actual[(y*4+x)*4+c]} vs ${expected[c]}`);
+      assert.equal(actual[(y*4+x)*4+3],255);
+    }
+    await assert.rejects(prepareNativePhotographicAtlas({...options,textureScale:.3}),/texture scale/);
+    await assert.rejects(prepareNativePhotographicAtlas({...options,radial:{...radial,plans:[{...radial.plans[0],rect:{x:1,y:0,width:12,height:16}}]}}),/whole pixels/);
+  } finally {await rm(dir,{recursive:true,force:true});}
 });

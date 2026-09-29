@@ -2,7 +2,7 @@
 
 ## Sources
 
-55 Cnc is a star of 5,172 K 12.6 parsecs away. Its planet 55 Cnc e crosses it, which is how it was found and sized. It is also HD 75732, HR 3522, HIP 43587. This account was drafted from Bourrier et al. 2018's values; the sections below are the data's own.
+Its radius and temperature follow Bourrier et al. 2018. It is also HD 75732, HR 3522, HIP 43587. This account was drafted from Bourrier et al. 2018's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 704967037090946688, parallax 79.448 ± 0.043 mas (12.59 pc). Radius 0.943 +/- 0.01 solar radii from Bourrier et al. 2018, the stellar radius of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract). Mass 0.905 +/- 0.015 solar masses from Bourrier et al. 2018, the stellar mass of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract). Temperature 5,172 K from Bourrier et al. 2018, the stellar temperature of the default parameter set of 55 Cnc e in the NASA Exoplanet Archive. log g 4.45 from the mass and radius.
 

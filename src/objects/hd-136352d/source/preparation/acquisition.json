@@ -1,4 +1,32 @@
 {
   "schema": "cssearth-acquisition-plan@1",
-  "operations": []
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/tess/tess2023124020739-s0065-0000000136916387-0259-s_lc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023124020739-s0065-0000000136916387-0259-s_lc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/tess/tess2026086090000-s0102-0000000136916387-0304-s_lc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026086090000-s0102-0000000136916387-0304-s_lc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/tess/tess2026111101500-s0103-0000000136916387-0305-s_lc.fits",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026111101500-s0103-0000000136916387-0305-s_lc.fits"
+    }
+  ]
 }

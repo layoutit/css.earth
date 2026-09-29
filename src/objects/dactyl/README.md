@@ -45,7 +45,7 @@ The complete cratered disk in `i2278` is the best of these three candidates.
 These crops retain decoded FITS storage orientation, use nearest-neighbor
 enlargement and a declared ×2 display gain, and clip zero pixels. They have no
 color reconstruction, calibration, bad-pixel masking or surface projection.
-The [review command](../../../tools/objects/source-authoring/galileo-lucy/README.md#dactyl-photographic-source-review)
+The [review command](../../../packages/bake/authoring/galileo-lucy/README.md#dactyl-photographic-source-review)
 also writes full-detector PNGs at unchanged DN values.
 
 The complete Veverka paper is now reviewed. Its published south-pole overlay
@@ -194,7 +194,7 @@ describes an Ida control network and proposed Dactyl ephemeris work, without
 Dactyl surface controls. Retrieved-byte pins and the exact inspection scope are
 in the [additional-source record](evidence/registration/additional-sources.json).
 
-The [reproduction command](../../../tools/objects/source-authoring/galileo-lucy/README.md#dactyl-camera-and-orientation-diagnostic)
+The [reproduction command](../../../packages/bake/authoring/galileo-lucy/README.md#dactyl-camera-and-orientation-diagnostic)
 checks native byte identity, clock/CK agreement and the fit in one serial run.
 The tools TypeScript check passes, including the extent-check option.
 No application build, browser conformance or Pixelmatch was run for these
@@ -254,7 +254,7 @@ This is a sensitivity check, not a full uncertainty distribution or a blind
 holdout. No numerical grid intervals or dense map correspondences are invented
 to close the remaining registration gap.
 
-The [command](../../../tools/objects/source-authoring/galileo-lucy/README.md#dactyl-published-control-diagnostic)
+The [command](../../../packages/bake/authoring/galileo-lucy/README.md#dactyl-published-control-diagnostic)
 reproduces these results serially from the pinned local paper and native inputs.
 The tools TypeScript check passes with this generator. No renderer, mesh,
 preparation recipe or public imagery changes; application/browser suites and
@@ -294,7 +294,7 @@ supply that missing evidence. No photographic surface has been enabled.
 The publisher currently identifies the paper as **CC BY-NC-ND 4.0**; see
 [reuse terms](NOTICE.md). The paper figure has not been cleared as a public texture.
 Its coordinate measurements and the separately archived NASA pixels remain
-distinct inputs. The [reproduction command](../../../tools/objects/source-authoring/galileo-lucy/README.md#dactyl-published-map-review)
+distinct inputs. The [reproduction command](../../../packages/bake/authoring/galileo-lucy/README.md#dactyl-published-map-review)
 checks source bytes and writes a numerical report without redistributing the
 figure. A focused strict TypeScript check covers the new tool and its imported
 dependencies; no application bake, renderer test or Pixelmatch is relevant to
@@ -313,4 +313,4 @@ whole moon fits on screen; their projected size and facing still control display
 
 ## Preparation
 
-[Reproduction instructions](../../../tools/objects/source-authoring/galileo-lucy/README.md). The canonical prepared mesh contains 512 triangles, independent of device DPR. Sources, conversion and reduction happen before runtime.
+[Reproduction instructions](../../../packages/bake/authoring/galileo-lucy/README.md). The canonical prepared mesh contains 512 triangles, independent of device DPR. Sources, conversion and reduction happen before runtime.

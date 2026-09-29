@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.016 Jupiter masses",
+        "value": "5.0 Earth masses",
         "source": {
           "catalogueId": "publication-2026a-a-707a-197b",
           "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "toi-5789c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-5789c/toi-5789c-system-orbits.svg",
+      "alt": "The orbits of TOI-5789's planets in this map from above, to scale, with TOI-5789 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-5789c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B"
+      }
+    },
+    {
+      "id": "toi-5789c-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-5789c/toi-5789c-transit.svg",
+      "alt": "TOI-5789 c crossing its star, as TESS recorded it: 1 sector (81) of the SPOC pipeline's 2-minute light curves of TIC 87216634, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-5789c-tess-sector-81",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024196212429-s0081-0000000087216634-0276-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

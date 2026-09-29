@@ -8,7 +8,7 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "2 Earth radii",
+        "value": "2.0 Earth radii",
         "source": {
           "catalogueId": "publication-2023aj-166-9m",
           "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M",
@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.015 Jupiter masses",
+        "value": "4.6 Earth masses",
         "source": {
           "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
           "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "toi-2194b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-2194b/toi-2194b-system-orbits.svg",
+      "alt": "The orbits of TOI-2194's planets in this map from above, to scale, with TOI-2194 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-2194b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M"
+      }
+    },
+    {
+      "id": "toi-2194b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-2194b/toi-2194b-transit.svg",
+      "alt": "TOI-2194 b crossing its star, as TESS recorded it: 3 sectors (67, 92, 94) of the SPOC pipeline's 2-minute light curves of TIC 271478281, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 9 minutes at these dates, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-2194b-tess-sector-67",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023181235917-s0067-0000000271478281-0261-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

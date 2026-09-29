@@ -2,26 +2,26 @@
   "schema": "cssearth-object-text@1",
   "objectId": "pi-menc",
   "card": {
-    "text": "pi Men c crosses its star every 6.27 days and is 2 Earth radii across, found in 2018.",
+    "text": "pi Men c was found in 2018 by TESS as it crossed its star.",
     "sources": [
       {
         "catalogueId": "publication-2021mnras-502-2893k",
         "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
         "label": "Kunovac Hod&#x17E;i&#x107; et al. 2021",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNOVAC_HODZIC_ET_AL_2021): pl_orbper 6.2678399, pl_radj 0.1801145, pl_bmassj 0.01321468"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNOVAC_HODZIC_ET_AL_2021): disc_year 2018, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 6.2678399, pl_radj 0.1801145, pl_bmassj 0.01142126"
       }
     ]
   },
   "introduction": {
-    "text": "pi Men c transits HD 39091 every 6.27 days and is 2 Earth radii across. Orbit and size follow Kunovac Hod&#x17E;i&#x107; et al. 2021's fit, the archive's default.",
+    "text": "It is one of 3 planets known around HD 39091. Its orbit and size follow Kunovac Hod&#x17E;ić et al. 2021's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "publication-2021mnras-502-2893k",
         "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract",
         "label": "Kunovac Hod&#x17E;i&#x107; et al. 2021",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNOVAC_HODZIC_ET_AL_2021): pl_orbper 6.2678399, pl_radj 0.1801145, pl_bmassj 0.01321468"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KUNOVAC_HODZIC_ET_AL_2021): disc_year 2018, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 6.2678399, pl_radj 0.1801145, pl_bmassj 0.01142126"
       }
     ]
   },

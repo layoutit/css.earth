@@ -99,6 +99,93 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "toi-836b-tess-sector-11",
+      "path": "photometry/tess/tess2019112060037-s0011-0000000440887364-0143-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019112060037-s0011-0000000440887364-0143-s_lc.fits",
+      "productId": "tess2019112060037-s0011-0000000440887364-0143-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of TOI-836 b's star (TIC 440887364), sector 11",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-440887364",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019112060037-s0011-0000000440887364-0143-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "toi-836b-tess-sector-38",
+      "path": "photometry/tess/tess2021118034608-s0038-0000000440887364-0209-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021118034608-s0038-0000000440887364-0209-s_lc.fits",
+      "productId": "tess2021118034608-s0038-0000000440887364-0209-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of TOI-836 b's star (TIC 440887364), sector 38",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-440887364",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021118034608-s0038-0000000440887364-0209-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "toi-836b-tess-sector-91",
+      "path": "photometry/tess/tess2025099153000-s0091-0000000440887364-0288-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025099153000-s0091-0000000440887364-0288-s_lc.fits",
+      "productId": "tess2025099153000-s0091-0000000440887364-0288-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of TOI-836 b's star (TIC 440887364), sector 91",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-440887364",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025099153000-s0091-0000000440887364-0288-s_lc.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -147,6 +234,13 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    },
+    {
+      "path": "content/charts.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared chart recipes: the orbits drawn from the hosted-orbit records, and archive spectra with their units, errors and source paths."
       }
     }
   ]

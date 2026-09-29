@@ -31,7 +31,8 @@
             0,
             16500
           ]
-        }
+        },
+        "textureScale": 0.25
       },
       {
         "id": "infrared",
@@ -47,7 +48,8 @@
           "longitudeDegrees": 270,
           "latitudeDegrees": -25,
           "zoom": 1.1
-        }
+        },
+        "textureScale": 0.25
       }
     ],
     "scientific": [

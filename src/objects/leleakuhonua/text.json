@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "leleakuhonua",
+  "card": {
+    "text": "Found in 2015; its orbit reaches more than 2,500 au from the Sun.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-28",
+        "locator": "Record for 541132 Leleākūhonua (2015 TG387): q = 64.7 au, a = 1322 au, e = 0.951 (Horizons elements at 2026-09-03 TDB); discovery 2015 Oct. 13 at Mauna Kea"
+      },
+      {
+        "catalogueId": "arxiv-1810-00013",
+        "url": "https://arxiv.org/abs/1810.00013",
+        "label": "Sheppard, Trujillo, Tholen & Kaib (2019), The Astronomical Journal 157, 139",
+        "checked": "2026-09-28",
+        "locator": "Abstract: the third known inner Oort cloud object after Sedna and 2012 VP113"
+      },
+      {
+        "catalogueId": "arxiv-2011-03889",
+        "url": "https://arxiv.org/abs/2011.03889",
+        "label": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile",
+        "checked": "2026-09-28"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Leleākūhonua never comes closer to the Sun than about 65 au, and its orbit reaches beyond 2,500 au. Its discoverers reported it as the third known member of the inner Oort cloud.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-28",
+        "locator": "Record for 541132 Leleākūhonua (2015 TG387): q = 64.7 au, a = 1322 au, e = 0.951 (Horizons elements at 2026-09-03 TDB); discovery 2015 Oct. 13 at Mauna Kea"
+      },
+      {
+        "catalogueId": "arxiv-1810-00013",
+        "url": "https://arxiv.org/abs/1810.00013",
+        "label": "Sheppard, Trujillo, Tholen & Kaib (2019), The Astronomical Journal 157, 139",
+        "checked": "2026-09-28",
+        "locator": "Abstract: the third known inner Oort cloud object after Sedna and 2012 VP113"
+      },
+      {
+        "catalogueId": "arxiv-2011-03889",
+        "url": "https://arxiv.org/abs/2011.03889",
+        "label": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile",
+        "checked": "2026-09-28"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at the occultation radius",
+      "detail": "Inferred shape",
+      "summary": "A sphere of radius 110 km, measured in a 2018 stellar occultation assuming a circular outline.",
+      "sources": [
+        {
+          "catalogueId": "arxiv-2011-03889",
+          "url": "https://arxiv.org/abs/2011.03889",
+          "label": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile",
+          "checked": "2026-09-28"
+        }
+      ]
+    }
+  }
+}

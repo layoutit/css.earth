@@ -1,0 +1,39 @@
+{
+  "id": "toi-1899",
+  "name": "TOI-1899",
+  "system": "TOI-1899 system",
+  "description": "Star of 3,926 K, 128 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1899",
+  "gaia": "2073530190996615424",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract",
+    "credit": "Lin et al. 2023"
+  },
+  "radius": {
+    "value": 0.607,
+    "source": "Lin et al. 2023, the stellar radius of the default parameter set of TOI-1899 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 0.632,
+    "source": "Lin et al. 2023, the stellar mass of the default parameter set of TOI-1899 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract",
+    "uncertainty": 0.026
+  },
+  "temperature": {
+    "value": 3926,
+    "source": "Lin et al. 2023, the stellar temperature of the default parameter set of TOI-1899 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract",
+    "uncertainty": 45
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1899 b crosses TOI-1899 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lin et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LIN_ET_AL__2023): st_teff 3926, st_rad 0.607, st_mass 0.632"
+  },
+  "notes": [],
+  "order": 2977
+}

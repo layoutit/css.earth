@@ -13,7 +13,7 @@ export default [
     // `tools`, `src` and `site` — roughly 232,000 authored lines — had no ESLint at all, so the
     // size and boundary rules below governed only the two smallest trees. Warnings, not errors:
     // the debt is pre-existing and this is meant to make it visible, not to block work on it.
-    files: ['.github/scripts/**/*.{ts,mts}', 'tools/**/*.{ts,mts}', 'labs/experiments/**/*.{ts,mts}', 'labs/investigations/**/*.{ts,mts}', 'labs/performance/**/*.{ts,mts}', 'tests/oracles/**/*.{ts,mts}', 'tests/contract/**/*.{ts,mts}', 'tests/nebula/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
+    files: ['.github/scripts/**/*.{ts,mts}', 'tools/**/*.{ts,mts}', 'labs/experiments/**/*.{ts,mts}', 'labs/investigations/**/*.{ts,mts}', 'labs/performance/**/*.{ts,mts}', 'tests/oracles/**/*.{ts,mts}', 'tests/contract/**/*.{ts,mts}', 'tests/nebula/**/*.{ts,mts}', 'tests/preparation/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
     languageOptions: { parser: typescriptParser },
     rules: {
       'max-lines': ['warn', { max: packageLineLimit, skipBlankLines: false, skipComments: false }],
@@ -147,6 +147,16 @@ export default [
   {
     // Moved unchanged from tools/objects/interferometry, where the limit only warned; splitting it is separate work.
     files: ['packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts'],
+    rules: { 'max-lines': 'off' },
+  },
+  {
+    // Moved unchanged from tools/objects/source-authoring, where the limit only warned; splitting it is separate work.
+    files: ['packages/bake/authoring/betelgeuse-shell/author.mts'],
+    rules: { 'max-lines': 'off' },
+  },
+  {
+    // Moved unchanged from tools/objects/circumstellar, where the limit only warned; splitting it is separate work.
+    files: ['packages/telescope-cli/authoring/circumstellar/author.mts'],
     rules: { 'max-lines': 'off' },
   },
   {

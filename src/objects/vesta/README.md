@@ -31,8 +31,10 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 
 Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match the previous main version. WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
-The [LAMO qualification record](evidence/lamo-2026-09-14.json) tests
-: three Vesta source/package checks,
+The [LAMO qualification record](evidence/lamo-2026-09-14.json), prepared with
+[`node tools/objects/dist/prepare-authored.js vesta --write`](https://github.com/layoutit/css.earth/blob/a3137c9e10/tools/objects/prepare-authored.ts)
+(now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)), tests:
+three Vesta source/package checks,
 six image-reader checks and strict preparation types pass. Headless desktop
 checks at DPR 1 and 2 retain one scene and all 800 faces during drag, using
 the same photographic atlas. Shadows default off; the optional lighting bank
@@ -86,7 +88,7 @@ smaller than a few hundred kilometres are blurred together.
 **Frame.** The archive uses Claudia Double Prime; the other Vesta maps use
 Claudia. The [GRaND catalogue](https://sbnarchive.psi.edu/pds3/dawn/grand/DWNVGRD_2/CATALOG/GRAND_VESTA_IRON_CORR_CNTS_MAP_DS.CAT)
 states the two share a pole and differ by 210° of longitude (Marcia at 190° E
-in Claudia). [`tools/objects/source-authoring/vesta-grand/prepare-grids.mts`](../../../tools/objects/source-authoring/vesta-grand/prepare-grids.mts)
+in Claudia). [`packages/bake/authoring/vesta-grand/prepare-grids.mts`](../../../packages/bake/authoring/vesta-grand/prepare-grids.mts)
 places every archived pixel by its own latitude and longitude bounds, adds 210°,
 and writes the `.npy` grids the shared reader takes. It checks each table
 against its label's checksum, record count and units, and refuses overlaps,

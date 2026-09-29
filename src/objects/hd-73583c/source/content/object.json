@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.031 Jupiter masses",
+        "value": "9.7 Earth masses",
         "source": {
           "catalogueId": "publication-2022mnras-514-1606b",
           "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-73583c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-73583c/hd-73583c-system-orbits.svg",
+      "alt": "The orbits of HD 73583's planets in this map from above, to scale, with HD 73583 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-73583c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B"
+      }
+    },
+    {
+      "id": "hd-73583c-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-73583c/hd-73583c-transit.svg",
+      "alt": "HD 73583 c crossing its star, as TESS recorded it: 3 sectors (34, 61, 88) of the SPOC pipeline's 2-minute light curves of TIC 101011575, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 6 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 6 minutes at these dates, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-73583c-tess-sector-34",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021014023720-s0034-0000000101011575-0204-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

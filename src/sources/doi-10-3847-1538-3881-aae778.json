@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aae778",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Livingston et al. (2018): Sixty Validated Planets from K2 Campaigns 5–8",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1810.04074"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aae778"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018AJ....156..277L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aae778",
+      "label": "The Astronomical Journal 156 277"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L",
+      "checkedOn": "2026-09-28",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Livingston et al. (2018), The Astronomical Journal 156 277",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L"
+    }
+  ],
+  "publisher": "The Astronomical Journal 156 277",
+  "creators": [
+    "John H. Livingston",
+    "Ian J. M. Crossfield",
+    "Erik A. Petigura",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

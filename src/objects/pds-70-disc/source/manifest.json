@@ -74,7 +74,7 @@
       "path": "src/objects/pds-70-disc/source/density-dust.ktx2",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -82,7 +82,7 @@
       "path": "src/objects/pds-70-disc/source/volume-dust.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     },
     {
@@ -90,7 +90,7 @@
       "path": "src/objects/pds-70-disc/source/previews/dust.png",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
       }
     }
   ]

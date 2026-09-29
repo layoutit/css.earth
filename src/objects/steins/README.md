@@ -93,7 +93,7 @@ The normal quality policy requires VALID bit 0, explicitly permits LOSSY bit 3, 
 
 **Spacecraft mosaic update (2026-09-09)**
 
-Reproduce the added camera with `python packages/bake/cli/prepare-archived-camera.py src/objects/steins/source --profile preparation/w20080905t183630497id4df17-camera.json`, then run `node tools/objects/dist/prepare-authored.js steins --write`.
+Reproduce the added camera with `python packages/bake/cli/prepare-archived-camera.py src/objects/steins/source --profile preparation/w20080905t183630497id4df17-camera.json`, then run `node site/build/prepare/prepare-authored.ts steins --write`.
 
 Both original resampled reflectance files retain their sigma and quality arrays, and each now has its own pinned camera profile and camera JSON. The released camera frame, optical scale and body orientation reproduce the added image’s independent archived RA/Dec to 0.000004 degrees. Neither image supplies a surface-intercept anchor. No image-to-shape fit is claimed. The source/model footprint diagnostic gives a symmetric 95th-percentile limb distance of 2.83 and 3.0 source pixels; this thresholded diagnostic includes optical blur and shape differences and is not a detector quality mask or absolute registration accuracy.
 
