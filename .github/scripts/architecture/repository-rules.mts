@@ -25,7 +25,6 @@ export const RETIRED_FOLDERS: readonly string[] = [
   'tools/experiments',
   'tools/facility-renders',
   'tools/fits',
-  'tools/galaxy-field',
   'tools/investigations',
   'tools/kernel-banks',
   'tools/nebula',

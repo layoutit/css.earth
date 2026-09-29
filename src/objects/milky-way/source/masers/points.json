@@ -33,17 +33,5 @@
     "opacity": 1,
     "note": "Presentation only: near-white, the brightest of the disc tracers.",
     "emphasis": "Arm tracer: young, massive star formation that outlines the spiral arms, drawn at full strength."
-  },
-  "mapWeight": {
-    "kind": {
-      "constant": 0.1
-    },
-    "kinematic": "never",
-    "rotation": {
-      "r0Kpc": 8.3,
-      "theta0KmS": 239,
-      "sigmaVKmS": 7
-    },
-    "basis": "Hou & Han (2014), Sect. 2.4 and Eq. 2: a weight for the kind of tracer, times 0.5/\u03c3 in each disc axis (1 when \u03c3 < 0.5 kpc) for a kinematic distance, with \u03c3 from a \u00b17 km/s velocity uncertainty through a flat rotation curve (R0 = 8.3 kpc, \u03980 = 239 km/s, their adopted set). The paper's maser weight, 0.1; trigonometric parallaxes, so no kinematic factor."
   }
 }

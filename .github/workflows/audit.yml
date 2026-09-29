@@ -129,13 +129,6 @@ jobs:
             src/objects/*/prepared/scene.json
           key: prepared-json-v1-${{ hashFiles('src/objects/*/inventory.json') }}
           restore-keys: prepared-json-v1-
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        if: ${{ !cancelled() }}
-        with:
-          # The galaxy-field acquisition sha-verifies a cached catalogue and skips its download. This job took
-          # over the preparation lane that used to own this cache, so it owns the save too.
-          path: .local/galaxy-field/sources
-          key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
       - name: Generate the registry and renderer
         if: ${{ !cancelled() }}
         env:
@@ -190,12 +183,11 @@ jobs:
           else
             CSSEARTH_SOURCE_CHECK_MODE=published node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "tests/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
           fi
-      - name: Reproduce the prepared bank and the galaxy field from their pinned inputs
+      - name: Reproduce the prepared bank from its pinned inputs
         if: ${{ !cancelled() }}
         # Moved off the `Preparation / world` gate lane. These re-run a bake and compare it with the recorded
-        # output: finalization idempotence, catalogue-row reconciliation, and the point-field recipe reproducing
-        # identical JSON and image bytes. The site never bakes anything — it serves the published bank, whose
-        # bytes `Contract lint` still verifies by SHA-256 — so a reproduction gap is a stale recipe or a drifted
+        # output: finalization idempotence and catalogue-row reconciliation. The site never bakes anything — it
+        # serves the published bank, whose bytes `Contract lint` still verifies by SHA-256 — so a reproduction gap is a stale recipe or a drifted
         # toolchain, visible here, and not a broken page. Nothing is skipped: the same commands run in full.
         env:
           CI_AUDIT_PREPARATION: ${{ needs.changes.outputs.run_universe_preparation }}

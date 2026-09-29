@@ -1,0 +1,60 @@
+{
+  "id": "zari-2021-hot-stars",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mapping luminous hot stars in the Galaxy",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/202039726"
+    },
+    {
+      "type": "arxiv",
+      "value": "2102.08684"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2102.08684",
+      "label": "arXiv:2102.08684"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1051/0004-6361/202039726",
+      "label": "A&A 650, A112"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/650/A112",
+      "label": "CDS J/A+A/650/A112"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/650/A112/ReadMe",
+      "checkedOn": "2026-09-28",
+      "locator": "filtered: RA_ICRS, DE_ICRS, d50kin (kpc)"
+    }
+  ],
+  "creators": [
+    "E. Zari",
+    "H.-W. Rix",
+    "N. Frankel",
+    "M. Xiang",
+    "E. Poggio",
+    "R. Drimmel",
+    "A. Tkachenko"
+  ],
+  "publisher": "A&A 650, A112",
+  "publicationDate": "2021",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Zari et al. (2021), A&A 650, A112.",
+      "scope": "Star positions",
+      "evidence": "https://arxiv.org/abs/2102.08684"
+    }
+  ]
+}

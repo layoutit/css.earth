@@ -42,8 +42,10 @@ orbit alignment, and PolyCSS pixel-to-world mapping. The normal
 volume after building tools, use `pnpm prepare:volume <object-directory>`.
 Preparation reads the local pinned inputs; no sibling checkout or network
 source is required. The checked volume source is 41.77 MiB. Preparation first integrates the original 256 / 256 / 32 slabs at 1024px,
-then keeps only the central volume. The bank is 15.29 MiB compressed and
-21.00 MiB decoded: 201 bulge slabs and nothing else. Bulge textures keep the original
+then keeps only the bulge: optical depth fades from 1.5 to 2.2 volume units
+(2.9 to 4.3 kpc) from Sagittarius A*, so the simulation's own disc and arms are
+not drawn. The bank is 7.32 MiB compressed and 9.76 MiB decoded: 138 bulge slabs
+and nothing else. Bulge textures keep the original
 slice pitch and decoded RGB; lossless PNG avoids another lossy encoding pass.
 Four samples per original Z slab integrate all 128 source Z layers.
 
@@ -149,8 +151,8 @@ slab transfer, optical correction, and labels retain their separate behavior.
 Each retained slab has three coincident CSS image elements sharing one texture.
 Their optical contribution compensates for oblique viewing before isolated axis
 images are mixed. Integer optical gains are exact; fractional gains approximate
-the continuous transfer without extra image resources. The 201 bulge slabs
-use 603 image elements, compared with the original
+the continuous transfer without extra image resources. The 138 bulge slabs
+use 414 image elements, compared with the original
 1,632-element full volume. This is an element count, not a measured frame-rate
 result. Keeping the axis scenes separate avoids
 browser cracks and expensive sorting at intersections between planes.
@@ -223,41 +225,81 @@ features across independent depth layers. Neither geometry nor imagery is
 generated in the browser. The NASA source epoch stays in provenance; shared
 camera metadata uses the volume's Sun-centered ICRF frame and epoch.
 
-## Star catalogues in the galaxy
+## The galaxy as star dots from published catalogues
 
-Five published catalogues are drawn inside the galaxy as small fixed dots, in
-the galaxy's own image layer, so they fade and hide with it. Each keeps its
-original table unchanged in `source/<id>/` beside a `points.json` recipe naming
-the columns, the authors' selection and the citation.
-[`tools/objects/catalogue-points/prepare.mts`](../../../tools/objects/catalogue-points/prepare.mts)
-has Astropy convert each row's Galactic longitude, latitude and distance to
-Sun-centred ICRS coordinates and writes `prepared/<id>.json`. Rows without a
-distance are left out, not filled.
+Nobody has seen the Milky Way from outside, so it is drawn as the objects
+astronomers have catalogued, each a sharp dot at its published position, over a
+faint backing that shows the galaxy's overall shape. Each catalogue keeps its
+table in `source/<id>/` beside a `points.json` recipe naming the columns, the
+authors' own selection and the citation.
+[`prepare.mts`](../../../tools/objects/catalogue-points/prepare.mts) has Astropy
+convert each row to Sun-centred ICRS coordinates; rows without a distance are
+left out.
 
-| Layer | Source | Points | What it traces |
-| --- | --- | --- | --- |
-| [Classical Cepheids](source/cepheids/points.json) | Skowron et al. (2019, Science 365, 478; [arXiv:1806.10653](https://arxiv.org/abs/1806.10653)), `Data_Table_1.dat` | 2214 of 2,431 (217 have no distance) | The young thin disc and its warp; coloured by published age, blue (30 Myr) to gold (300 Myr) |
-| [HII regions](source/hii-regions/points.json) | Anderson et al. (2014, ApJS 212, 1; [arXiv:1312.6202](https://arxiv.org/abs/1312.6202)), CDS table 6 | 1286 with a distance (maser-parallax rows left to the next layer) | Star-forming regions on both sides of the centre; mostly kinematic distances |
-| [Masers](source/masers/points.json) | Reid et al. (2019, ApJ 885, 131; [arXiv:1910.03357](https://arxiv.org/abs/1910.03357)), Table 1 | 199, at 1/parallax | The most accurate distances across the disc, 12 beyond the centre |
-| [Open clusters](source/open-clusters/points.json) | Hunt & Reffert (2023, A&A 673, A114; [arXiv:2303.13424](https://arxiv.org/abs/2303.13424)), high-quality sample | 4004 of the 4,105 with CMD class > 0.5 and CST > 5σ (open clusters only) | Arm segments and the warp within about 4 kpc of the Sun; coloured by log age |
-| [Globular clusters](source/globular-clusters/points.json) | Baumgardt & Vasiliev (2021, MNRAS 505, 5957; [arXiv:2105.09526](https://arxiv.org/abs/2105.09526)), orbits table | 165 | The old, round halo |
+| Layer | Source | Selection |
+| --- | --- | --- |
+| [Hot stars](source/hot-stars/points.json) | Zari et al. (2021), filtered sample | One row in 4 of 417,535 tracked; each at its astro-kinematic distance |
+| [Maser parallaxes](source/masers/points.json) | Reid et al. (2019), Table 1 | 199, at 1/parallax |
+| [Clouds](source/hou-han-gmc/points.json), [masers](source/hou-han-masers/points.json), [HII regions](source/hou-han-hii/points.json) | Hou & Han (2014), tables A.1 to A.3 | Measured distance first, else the catalogue's kinematic one |
+| [Young open clusters](source/open-clusters/points.json) | Hunt & Reffert (2023) | Their own quality cuts, younger than 100 Myr |
+| [Young Cepheids](source/cepheids/points.json) | Skowron et al. (2019) | Younger than 60 Myr |
+| [Bulge RR Lyrae](source/bulge-rr-lyrae/points.json) | Prudil et al. (2025) | Within 3 kpc of the centre, one in 16 |
+| [Stars within 100 pc](source/nearby-stars/points.json), [within 20 pc](source/nearby-stars-20pc/points.json) | Gaia Catalogue of Nearby Stars (2021) | One row in 64; every row within 20 pc |
+| [Globular clusters](source/globular-clusters/points.json) | Baumgardt & Vasiliev (2021) | All 165, drawn as their own bank |
 
-The Skowron table's authors ask for a citation and do not license it under MIT
-or CC. Twenty Cepheids lie beyond 25 kpc from the centre; the table gives no
-reason to drop them, so they stay.
+**Which layers follow the arms.** An arm-tracer layer is kept when its dots sit
+on the arms the backing draws: its arm score (the backing's luminance minus its
+mean at that radius, over its spread, at the layer's positions outside 3.5 kpc)
+is 0.5 or more. Random points score 0. The scores are in the
+[merge recipe](source/tracers/merge.json): young open clusters 1.02, maser
+parallaxes 1.01, Hou & Han's clouds 0.79, masers 0.55 and HII regions 0.53,
+young Cepheids 0.52. The WISE HII regions (0.38) and the molecular-cloud catalogue
+of Miville-Deschênes et al. (0.45) were left out.
 
-The maps are lopsided because of what can be seen from Earth: 90% of the
-Cepheids and every open cluster lie on the Sun's side of the centre, where dust
-hides less. The HII regions (335 beyond the centre) and masers (12) are what
-reaches the far side; nothing is mirrored or modelled to fill it.
+**Kinematic distances.** A kinematic distance whose uncertainty is over 1 kpc is
+left out: its ±7 km/s velocity uncertainty through a flat rotation curve (R0 =
+8.3 kpc, Θ0 = 239 km/s, as Hou & Han 2014, Sect. 2.4) cannot place it. Those are
+the sources toward tangent points, the centre and the anticentre, which pile
+onto a circle through the Sun and the centre; the cut drops 532 of them.
 
-Zoomed out, each layer draws only the start of its prepared order: every point
-within 10 kpc of the Sun, then a share falling as 1/distance, never below 300.
-The preparer orders points in sparse places first and crowds last (neighbours
-within 1 kpc times a fixed pseudo-random factor), so the far side and outer disc
-stay nearly whole while the crowd around the Sun thins. At galaxy scale the
-app's planet-host stars fade out (from 5 to 15 kpc from the camera): they follow
-where planet surveys looked, not the galaxy's shape.
+**Colour.** Each layer keeps its catalogue colour, mixed halfway to white so it
+reads as a tint of starlight, then raised to the power 1.6 so the coloured dots
+sit in the backing and the whitest keep their sparkle. Both are presentation
+choices, recorded in the merge recipe.
+
+**An even density at every zoom.** Every catalogue is complete only out to some
+distance from the Sun, so together they pile up around it. [`merge.mts`](../../../tools/objects/catalogue-points/merge.mts)
+keeps a dot, in a fixed shuffle, while the dots within a small face-on kernel
+stay under the thin disc's own density law: exponential in Galactocentric radius
+with a 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016). The galaxy level
+holds 15 dots per kpc² at the Sun, the highest that stays even out to 4 kpc
+along the solar circle (6,586 dots). Nested levels around the Sun add dots up
+to 150 per kpc² out to 3 kpc, 1,500 out to 800 pc, 50,000 out to 100 pc and
+1,000,000 out to 20 pc; each adds only dots the levels around it do not draw,
+and its density falls to nothing over its outer half.
+[`stack.mts`](../../../tools/objects/catalogue-points/stack.mts) joins them into
+[one bank](source/dots/stack.json) of 13,420 dots. The app draws a growing
+share of it as you zoom in: the galaxy level whole within 10 kpc, then each
+level's dots one at a time as the view narrows past the level's radius. A
+level's edge is never on screen, and a dot you have seen stays while you zoom
+in.
+
+**The backing.** An ESA artist's impression of the Milky Way seen from above
+([recipe](source/backing/recipe.json)) is drawn under the dots as one image
+plane in the galaxy's frame, anchored so its Sun and centre land on the app's.
+It is artwork, not a measurement, and the levels (black 20, gamma 1, white 150
+of 255) keep it under the dots. It is 184 KB at 2048 px.
+
+**Past the Solar System.** From the edge of the Solar System (the planets fade
+by 1 light-year) the dots take over from the app's stars: only featured stars
+keep their markers, as landmarks. The overview reads Solar System until the
+planets fade, Milky Way while inside the galaxy, and Local Group once the
+galaxy's nebulae have faded, about 19 kpc out.
+
+**What the dots cannot show.** Dust hides the far side of the disc: past 4 to
+6 kpc from the Sun the catalogues thin out, so the Sun's side of the galaxy is
+fuller. Distances carry their catalogues' errors. The disc has no warp and the
+bulge is one in 16 of its RR Lyrae stars.
 
 ## Bulge evidence
 

@@ -50,10 +50,7 @@
     "emphasis": "Arm tracer: young, massive star formation that outlines the spiral arms, drawn at full strength."
   },
   "missingBasis": "Two masers (l = 106.797\u00b0 and 109.920\u00b0) have no measured distance and a kinematic D8.3 of 0.00 kpc, which would put them at the Sun; they count as without a distance.",
-  "mapWeight": {
-    "kind": {
-      "constant": 0.1
-    },
+  "kinematicUncertainty": {
     "kinematic": {
       "column": [
         39,
@@ -66,6 +63,6 @@
       "theta0KmS": 239,
       "sigmaVKmS": 7
     },
-    "basis": "Hou & Han (2014), Sect. 2.4 and Eq. 2: a weight for the kind of tracer, times 0.5/\u03c3 in each disc axis (1 when \u03c3 < 0.5 kpc) for a kinematic distance, with \u03c3 from a \u00b17 km/s velocity uncertainty through a flat rotation curve (R0 = 8.3 kpc, \u03980 = 239 km/s, their adopted set). W_m = 0.1."
+    "basis": "Hou & Han (2014), Sect. 2.4: a kinematic distance's uncertainty from a \u00b17 km/s velocity uncertainty through a flat rotation curve (R0 = 8.3 kpc, \u03980 = 239 km/s, their adopted set)."
   }
 }

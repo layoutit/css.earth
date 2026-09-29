@@ -26,8 +26,8 @@
   "meaning": "Classical Cepheids of the OGLE collection and other surveys, at the distances Skowron et al. (2019) derived from mid-infrared period-luminosity relations; the young (roughly 20 to 400 Myr) thin disc of the Milky Way, including its warp.",
   "appearance": {
     "colorCss": "#ffe2a8",
-    "radiusPx": 0.5,
-    "opacity": 0.35,
+    "radiusPx": 0.75,
+    "opacity": 0.9,
     "colorBy": {
       "column": 7,
       "stops": [
@@ -46,7 +46,14 @@
       ],
       "steps": 16
     },
-    "note": "Presentation only: colour follows each Cepheid's published age (AGE, Myr), blue for the youngest to gold for the oldest.",
-    "emphasis": "Background layer: spread through the disc rather than along the arms, dimmed so the arm tracers read first."
-  }
+    "note": "Presentation only: colour follows each Cepheid's published age (AGE, Myr), blue for the youngest to gold for the oldest."
+  },
+  "filters": [
+    {
+      "column": 7,
+      "op": "<",
+      "value": 60
+    }
+  ],
+  "filterBasis": "Cepheids younger than 60 Myr (AGE < 60): the youngest have not drifted far from the arms they formed in, and only they follow the arms (see source/tracers/merge.json). A presentation choice, not the authors' selection."
 }

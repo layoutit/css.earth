@@ -61,6 +61,8 @@ export function compileCssVolume(options: { id: string; frame: DensityVolumeFram
     anchors: recipe.anchors.map(anchor => ({ id: anchor.id, positionUnits: referencePositionToUnits(anchor.referencePositionM, frame) })),
     stacks: axes.map((axis, index) => {
       const quads = slices.quads.filter(quad => quad.axis === axis), normal = quads[0]?.normal;
+      // A volume that draws no slices (recipe drawSlices: false) keeps its frame, anchors and sky with empty stacks.
+      if (!slices.quads.length) return { axis, leaves: [] };
       if (!normal || Math.abs(Math.hypot(...normal) - 1) > 1e-8 || quads.some(quad =>
         Math.abs(Math.abs(quad.normal.reduce((sum, value, i) => sum + value * normal[i]!, 0)) - 1) > 1e-8))
         throw new TypeError('Volume bank needs parallel unit normals.');

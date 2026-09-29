@@ -3,27 +3,51 @@
   "assets": [
     {
       "location": "prepared",
-      "filename": "cloud.webp",
-      "bytes": 1706,
-      "sha256": "ddfc2751343e42bb8c63c4347218b1ee1934274f3b19dec1e2ac73bcc41f5d4c"
+      "filename": "dots.json",
+      "bytes": 207717,
+      "sha256": "c88ae2d36f928f4ebbbfeb2c901b6a6db0bd35ec899b51667bec22ccc8281fac"
     },
     {
       "location": "prepared",
-      "filename": "points.json",
-      "bytes": 675679,
-      "sha256": "e303667d7835f2494c92be8cf5dd761ebfec764fe2456d64f3e7020ec2bc19a1"
+      "filename": "galaxies-10mpc.json",
+      "bytes": 2301,
+      "sha256": "ae9bd95955313bc3e0382705e5bffedf6677fadb3c2851ebd4224a05c22851c0"
+    },
+    {
+      "location": "prepared",
+      "filename": "galaxies-200mpc.json",
+      "bytes": 150067,
+      "sha256": "62004fc165f0f00654111e9705dbb9416f3efd90d1d08b44679828879a7e4c94"
+    },
+    {
+      "location": "prepared",
+      "filename": "galaxies-20mpc.json",
+      "bytes": 5420,
+      "sha256": "1ef556567242d2b7d0ff37ce616f98f06981388578a610f6f83ac58c8fb54ea9"
+    },
+    {
+      "location": "prepared",
+      "filename": "galaxies-60mpc.json",
+      "bytes": 53715,
+      "sha256": "1382d91a4c55520e53ae7d578e2bbf5085b0061d15f4ce5992b377b4de8f9b9d"
+    },
+    {
+      "location": "prepared",
+      "filename": "galaxies.json",
+      "bytes": 800916,
+      "sha256": "3e98d39f1659753e5f290d062977f84a83d0f6d7b2b6d8b9b9153f694db2f1f8"
     },
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 490,
-      "sha256": "224e620caa689a95820bb15ad87bc37e7c7a6c2489db2136a441096246b10889"
+      "bytes": 1742,
+      "sha256": "05b12f305f603d5d7478a8316ff914ed21b7ccece55ec1c2bce6d0ae9f32c7b6"
     },
     {
       "location": "prepared",
       "filename": "provenance.json",
-      "bytes": 10114,
-      "sha256": "df3a69ecb57ff7c2d77a83fe4e103d77fa0884c1d0a98be25e78b774697e81f9"
+      "bytes": 29672,
+      "sha256": "5cecc7572436b19e91634c1266d5c4a3d5cf6eef4e330edcaded68a3e3a2b0fe"
     }
   ]
 }

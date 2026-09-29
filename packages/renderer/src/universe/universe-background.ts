@@ -7,23 +7,23 @@ import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/proj
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
-import { mountCataloguePoints } from './catalogue-points.js';
-import { mountCataloguePlanes, parseCataloguePlanes } from './catalogue-planes.js';
+import { fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
+import { mountGalaxyBacking, parseGalaxyBacking } from './galaxy-backing.js';
 import { logarithmicFade, preparedVolumeOpacity } from './world-context/context-scale.js';
 import { GALAXY_SCALE } from '../labels/universe-label-policy.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 
 /** Retained sky, stellar sample and galaxy share one exposure-aware handoff. */
 export function createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
-  prefetchUrls, prefetchDistanceM, cataloguePointUrls = [], tracerVolumeUrl }: {
+  prefetchUrls, prefetchDistanceM, cataloguePointUrls = [], backingUrl }: {
   root: HTMLElement; end: Node; lifetime: SceneLifetime; plan: PreparedWorldContext;
   payload: PreparedCssVolume; pointAppearance: PreparedPointAppearance; sky: boolean;
   resolveResource(path: string): string;
   prefetchUrls: readonly string[]; prefetchDistanceM: number;
   /** Published star catalogues inside the galaxy, drawn as dust with it (PreparedUniverseOptions.galaxyCataloguePoints). */
   cataloguePointUrls?: readonly string[];
-  /** Catalogue points baked onto planes in the galaxy's frame (PreparedUniverseOptions.galaxyTracerVolume). */
-  tracerVolumeUrl?: string;
+  /** A face-on image of the galaxy under its catalogue dots, shown with them (PreparedUniverseOptions.galaxyBacking). */
+  backingUrl?: string;
 }) {
   const document = root.ownerDocument;
   const volumeHost = document.createElement('div');
@@ -42,17 +42,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
   let stellarPoints: ReturnType<typeof mountStellarPoints> = null;
   let volumeLayer: ReturnType<typeof mountPreparedVolumeLod> | null = null;
   const cataloguePoints: ReturnType<typeof mountCataloguePoints>[] = [];
-  // The tracer slices sit in one host over the galaxy's: the handoff fades that host, and motion stays on the compositor.
-  const tracerHost = document.createElement('div');
-  tracerHost.style.cssText = 'position:absolute;inset:0;pointer-events:none;display:none';
-  tracerHost.style.transformStyle = 'flat';
-  const tracerEnd = document.createElement('span'); tracerEnd.hidden = true; tracerHost.appendChild(tracerEnd);
-  let tracerLayer: ReturnType<typeof mountCataloguePlanes> | null = null, tracerLoading = false, publishedTracers = NaN;
-  const fetchJson = async (target: string) => {
-    const response = await document.defaultView!.fetch(target);
-    if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
-    return response.json() as Promise<unknown>;
-  };
+  let backing: ReturnType<typeof mountGalaxyBacking> | null = null, backingLoading = false, publishedBacking = NaN;
   let stellarEnabled = true, stellarPublication: VolumeCameraPublication | null = null, stellarOpacity = 0;
   let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
   let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
@@ -74,10 +64,9 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       // The galaxy is its bulge slices and one flat disc plane at every distance; it has no impostor views.
       volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource }, () => 1);
       lifetime.onDispose(() => volumeLayer?.destroy());
-      // Inside the galaxy's own image layer, over its slices: the stars fade, hide and size-gate with the galaxy.
-      volumeImage.insertBefore(tracerHost, volumeEnd);
+      // Their own layer over the galaxy's: the dots show from just past the Solar System, where the galaxy volume is still clear.
       for (const url of cataloguePointUrls) {
-        const points = mountCataloguePoints({ host: volumeImage, url, fetchJson });
+        const points = mountCataloguePoints({ host: root, before: end, url, fetchJson: fetchPreparedJson });
         cataloguePoints.push(points);
         lifetime.onDispose(() => points.destroy());
       }
@@ -128,22 +117,25 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       stellarOpacity = stellarPointsOpacity(starsHandoff, completedContribution) * detailContextOpacity;
       stellarPoints?.publish(stellarPublication, stellarEnabled ? stellarOpacity : 0);
       if (volumeVisible && volumeSize > 0) volumeLayer!.publish({ world, viewport });
-      // The tracers take over from the planet hosts at the shared galaxy handoff, never alongside them.
-      const tracers = logarithmicFade(volumeDistanceM, GALAXY_SCALE.handoffStartM, GALAXY_SCALE.handoffEndM);
-      const shownTracers = volumeVisible && volumeSize > 0 ? tracers : 0;
-      for (const points of cataloguePoints) points.publish({ world, viewport }, shownTracers);
-      if (shownTracers !== publishedTracers) {
-        tracerHost.style.opacity = String(shownTracers); tracerHost.style.display = shownTracers > 0 ? '' : 'none'; publishedTracers = shownTracers;
-      }
-      if (shownTracers > 0 && tracerLayer) tracerLayer.publish({ world, viewport });
-      else if (shownTracers > 0 && tracerVolumeUrl && !tracerLoading) {
-        // Fetched the first time the tracers show; published from the next frame on.
-        tracerLoading = true;
-        void fetchJson(tracerVolumeUrl).then(value => {
+      // The catalogue dots take over from the planet hosts as a system's bodies fade (world-context-planner.ts), measured
+      // like them from the selected body. The backing is the galaxy seen from outside its disc: it fades in later, over
+      // the galaxy scale.
+      const shownDots = detailContextOpacity * logarithmicFade(volumeDistanceM, plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+      for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots);
+      const shownBacking = volumeVisible && volumeSize > 0 ? logarithmicFade(volumeDistanceM, GALAXY_SCALE.handoffStartM, GALAXY_SCALE.handoffEndM) : 0;
+      if (backing) {
+        if (shownBacking !== publishedBacking) {
+          backing.root.style.opacity = String(shownBacking); backing.root.style.display = shownBacking > 0 ? '' : 'none'; publishedBacking = shownBacking;
+        }
+        if (shownBacking > 0) backing.publish({ world, viewport });
+      } else if (shownBacking > 0 && backingUrl && !backingLoading) {
+        // Fetched the first time the dots show; drawn under them from the next frame on.
+        backingLoading = true;
+        void fetchPreparedJson(backingUrl).then(value => {
           if (lifetime.disposed) return;
-          tracerLayer = mountCataloguePlanes({ host: tracerHost, before: tracerEnd, payload: parseCataloguePlanes(value, tracerVolumeUrl), resolveResource });
-          lifetime.onDispose(() => tracerLayer?.destroy());
-        }).catch(error => console.error(`Galaxy tracers ${tracerVolumeUrl} failed`, error));
+          backing = mountGalaxyBacking({ host: volumeImage, before: volumeEnd, payload: parseGalaxyBacking(value, backingUrl), resolveResource });
+          lifetime.onDispose(() => backing?.destroy());
+        }).catch(error => console.error(`Galaxy backing ${backingUrl} failed`, error));
       }
       return volumeOpacity;
     },

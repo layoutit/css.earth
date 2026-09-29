@@ -14,7 +14,8 @@ export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; ne
   clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
 export interface PreparedUniverseOptions {
-  backgroundPointManifest?: string; backgroundPointCloud?: string;
+  /** Prepared catalogue point banks of the galaxies beyond the Local Group (background-points.ts). */
+  backgroundCataloguePoints?: readonly string[];
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
   plannerSource?: WorldPlannerSource;
@@ -38,8 +39,8 @@ export interface PreparedUniverseOptions {
   /** Prepared `cssearth-catalogue-points@1` banks of stars inside the galaxy, by URL: drawn as dust with the galaxy
    * volume, fetched the first time it shows. */
   galaxyCataloguePoints?: readonly string[];
-  /** A prepared slice volume of catalogue points in the galaxy's frame, shown at the galaxy handoff. */
-  galaxyTracerVolume?: string;
+  /** A prepared `cssearth-galaxy-backing@1` face-on image drawn under the galaxy's catalogue dots, by URL. */
+  galaxyBacking?: string;
   imageLayers?: readonly PreparedImageLayerBank[];
   /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus. */
   imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame }[];

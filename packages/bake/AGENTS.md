@@ -46,10 +46,6 @@ its validators accept); the renderer never imports the bake.
   CSV and archive sources, bibliography, positions, memberships, the display sample, and the object preparation that
   writes them with the object's inventory and descriptor). It imports `volume` (its node entry).
   `packages/bake/cli/prepare-galaxy-catalog.mts <object-directory>` is its command.
-- `src/galaxy-field/` is published as `@cssearth/bake/galaxy-field` (Node only): the nearby-universe galaxy point field
-  (the pinned catalogue acquisition through the source mirror, the scientific catalogue, the field recipe and the fitted
-  clouds). It imports `objects/sources`. `packages/bake/cli/acquire-galaxy-field.mts` and `prepare-galaxy-field-points.mts`
-  are `pnpm prepare:galaxy-field:data`. Its tests are `node --test` suites in `tests/galaxy-field/`.
 - `src/cluster-catalog/` is published as `@cssearth/bake/cluster-catalog` (Node only): the galaxy-cluster catalogue,
   placed with the galaxy positions. It imports `galaxy-catalog`.
 - `src/world-context/` is published as `@cssearth/bake/world-context` (Node only): the spatial world context (sources,

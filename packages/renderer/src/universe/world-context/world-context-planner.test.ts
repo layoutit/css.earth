@@ -6,7 +6,7 @@ import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { packWorldBodies, unpackWorldBodies } from './world-context-view-transport.js';
 import { createContextSelectionPolicy } from '../context-presentation-policy.js';
-import { labelImportance } from '../../labels/universe-label-policy.js';
+import { FEATURED_STAR_TIER, labelImportance } from '../../labels/universe-label-policy.js';
 
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(
   new URL('../../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
@@ -563,10 +563,10 @@ test.each(['saturn', 'jupiter', 'uranus'])('%s: close detail retires its own and
   expect(calculate(input).projectedBodies.find(body => body.index === index)!.orbitVisibility).toBe(0);
 });
 
-test('a placed orbitless body keeps its marker beyond the system fade, like the anchor', () => {
-  const calculate = createWorldContextPlanner(plan), input = view();
+test('a featured orbitless star keeps its marker beyond the system fade, like the anchor; another gives way to the galaxy', () => {
   const star = plan.bodies.findIndex(body => !body.orbit) + 1;
   expect(star).toBeGreaterThan(0);
+  const calculate = createWorldContextPlanner(plan, { [plan.bodies[star - 1]!.id]: FEATURED_STAR_TIER }), input = view();
   // 300 pc above the Sun-Betelgeuse midpoint, looking down -z: both locators are in frame and the
   // system fade has run its course (opacity 0), so only locators publish.
   const placedM = plan.bodies[star - 1]!.positionM;
@@ -580,6 +580,8 @@ test('a placed orbitless body keeps its marker beyond the system fade, like the 
   expect(placed.lineWidth).toBe(anchor.lineWidth);
   expect(placed.indicatorShown).toBe(true);
   expect(placed.labelShown).toBe(true);
+  const unfeatured = createWorldContextPlanner(plan)(input).projectedBodies.find(body => body.index === star);
+  expect(unfeatured?.markerOpacity ?? 0, 'a star that is not featured gives its place to the catalogue dots').toBe(0);
 });
 
 test('each planetary system fades with the camera distance from its own star', () => {
@@ -748,17 +750,18 @@ test('past the Local Group scale the stars give their names to the galaxies', as
   expect(named(1e6), 'from 1 Mpc no star or planet is named').toEqual([]);
 });
 
-test('at galaxy scale the planet hosts give way to the galaxy; past the Local Group no body keeps a dot', () => {
-  const calculate = createWorldContextPlanner(plan), input = view();
+test('past the Solar System only the featured stars and the references keep a dot; past the Local Group no body does', () => {
+  const featured = 'betelgeuse';
+  expect(plan.bodies.some(body => body.id === featured && !body.orbit)).toBe(true);
+  const calculate = createWorldContextPlanner(plan, { [featured]: FEATURED_STAR_TIER }), input = view();
   const dotted = (parsecs: number) => {
     input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
     return calculate(input).projectedBodies.filter(body => body.markerOpacity > 0).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
   };
-  expect(dotted(3e3).length, 'within 5 kpc of the camera the planet hosts are dots').toBeGreaterThan(100);
-  const galactic = dotted(30e3);
-  expect(galactic, 'from 30 kpc the Sun and Sgr A* stay as references').toEqual(expect.arrayContaining(['sun', 'sgr-a-star']));
-  expect(galactic.length, 'from 30 kpc the planet hosts have given way to the galaxy').toBeLessThan(10);
-  expect(dotted(200e3).sort(), 'from 200 kpc only the references keep a dot').toEqual(['sgr-a-star', 'sun']);
+  const nearby = dotted(3e3);
+  expect(nearby, 'from 3 kpc above the Sun the Sun and the featured star stay (Sgr A* is out of frame)').toEqual(expect.arrayContaining(['sun', featured]));
+  expect(nearby.length, 'from 3 kpc the other stars have given way to the catalogue dots').toBeLessThan(10);
+  expect(dotted(200e3), 'from 200 kpc the references keep a dot').toEqual(expect.arrayContaining(['sgr-a-star', 'sun']));
   expect(dotted(1e6), 'from 1 Mpc, in the overview, no body keeps a dot').toEqual([]);
 });
 
