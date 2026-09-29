@@ -12,7 +12,7 @@ import { sha256 } from '@cssearth/core/node';
 import { apply, numbers, utcToEt } from '@cssearth/spice';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
-import { combine, projectFrame, writeMap } from './jiram-mosaic.mts';
+import { combine, JIRAM_REGISTERED_MOSAIC_PRODUCER, projectFrame, writeMap } from './jiram-mosaic.mts';
 import { fetchFits } from './perry-archive.mts';
 import { IFOV, readPlane, registerFrame, type RegisteredPlanes } from './jiram-registered.mts';
 
@@ -139,7 +139,7 @@ export async function registeredMosaic(recipeFile: string, directory: string, fe
     for (let x = 0; x < width; x++) { totalArea += weight; if (Number.isFinite(map[y * width + x])) { count++; area += weight; } }
   }
   await writeMap(root, { ...recipe, band: { name: 'M', unit: 'W/(m^2*sr)' }, side: 'night', visits,
-    background: { method: 'night-column-median', minimumSamples: policy.minimumBackgroundSamples } }, map, 'packages/bake/authoring/juno/jiram-registered-mosaic.mts');
+    background: { method: 'night-column-median', minimumSamples: policy.minimumBackgroundSamples } }, map, JIRAM_REGISTERED_MOSAIC_PRODUCER);
   const rejected = new Map<string, { orbit: number; reason: string; productIds: string[] }>();
   for (const frame of frames) if (frame.rejected) {
     const key = `${frame.orbit}:${frame.rejected}`, group = rejected.get(key) ?? { orbit: frame.orbit, reason: frame.rejected, productIds: [] };
