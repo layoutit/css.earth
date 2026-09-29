@@ -215,7 +215,13 @@ export async function fetchPublication(archive: Archive, url: string): Promise<P
     const linkedArxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(eprint ?? '')?.[1], linkedDoi = /doi\.org\/(10\.\S+)$/u.exec(published ?? '')?.[1];
     // The published paper first (Crossref, the better citation, with no request limit), its preprint id kept alongside; the arXiv API
     // (one request every 3 s) only for a paper with no DOI.
-    if (linkedDoi) { const doi = decodeURIComponent(linkedDoi); return { ...await doiPublication(archive, doi, landing), ...(linkedArxiv ? { arxiv: linkedArxiv } : {}), bibcode: code, year }; }
+    if (linkedDoi) {
+      const doi = decodeURIComponent(linkedDoi), paper = await doiPublication(archive, doi, landing);
+      // Crossref may list no authors: the archive cites TOI-2447 b to 2024MNRAS.533..109G, a correction whose DOI record has none.
+      // The preprint the bibcode links names them.
+      const creators = paper.creators.length || !linkedArxiv ? paper.creators : parseArxivEntry(await archive.text(`https://export.arxiv.org/api/query?id_list=${linkedArxiv}`), linkedArxiv, landing).creators;
+      return { ...paper, creators, ...(linkedArxiv ? { arxiv: linkedArxiv } : {}), bibcode: code, year };
+    }
     // The year is the bibcode's, the published one the archive cites, not the preprint's.
     if (linkedArxiv) return { ...parseArxivEntry(await archive.text(`https://export.arxiv.org/api/query?id_list=${linkedArxiv}`), linkedArxiv, landing), bibcode: code, year };
     return { id: `publication-${code.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`, title: `Reference ${code}`, creators: [], year, url: `https://ui.adsabs.harvard.edu/abs/${code}`, bibcode: code };

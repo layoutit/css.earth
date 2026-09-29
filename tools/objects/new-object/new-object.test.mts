@@ -547,6 +547,9 @@ test('a reference the archive cites only by its ADS bibcode is read as the paper
   const preprint = (await fetchPublication({ ...linked, async location(url) { return url.endsWith('/EPRINT_HTML') ? 'https://arxiv.org/abs/1703.01430' : undefined; } }, 'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract'))!;
   assert.equal(preprint.id, 'arxiv-1703-01430', 'no DOI: the arXiv record');
   assert.deepEqual(record.identifiers.map((identifier: { type: string }) => identifier.type), ['arXiv', 'DOI', 'bibliography-key']);
+  // A DOI record without authors (a correction, as 2024MNRAS.533..109G is): the linked preprint's authors.
+  const authorless = (await fetchPublication({ ...linked, async text(url) { return url.includes('api.crossref.org') ? crossref.replace(/"author":\[[^\]]*\],/u, '') : linked.text(url); } }, 'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract'))!;
+  assert.deepEqual([authorless.id, authorless.creators.length], ['doi-10-1038-s41550-017-0056', 3]);
   // No gateway answer: the bibcode record as before.
   const alone = (await fetchPublication({ ...linked, async location() { return undefined; } }, 'https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract'))!;
   assert.equal(alone.id, 'publication-2017natas-1e-56g');
