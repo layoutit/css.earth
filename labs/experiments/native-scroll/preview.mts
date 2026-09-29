@@ -7,7 +7,7 @@ import { preparedSceneMatrix } from '@cssearth/renderer/navigation/prepared-came
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
 import { addNativeSolarContext, solarMaximumDistanceM } from './context.mts';
-import { serializePreparedScene } from '../../../site/prepared/serialize-prepared-scene.mts';
+import { serializePreparedScene } from '@cssearth/renderer/rendering/prepared-scene-serialization.ts';
 import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
 import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
 import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';

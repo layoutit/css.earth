@@ -7,6 +7,7 @@ import { build } from 'esbuild';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import { parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { assertBodyMapPlanes } from '../body-map-publication.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { sha256 } from '@cssearth/core/node';
@@ -15,13 +16,13 @@ import { contextTarget, sourceContext } from '../delivery-context.mts';
 import { followedWorkspaceSources } from '../implementation-dependencies.mts';
 
 const root=WORKSPACE;
-/** The rendering lane this export runs: `tools/objects/telescope-sphere/sphere-lane.mts` in the workspace, compiled from there
+/** The rendering lane this export runs: `src/sphere/sphere-lane.mts` beside this module, compiled from there
  * at run time because it reads the checkout's prepared bodies and assets and renders through the application shell. */
-const SPHERE_LANE='tools/objects/telescope-sphere/sphere-lane.mts';
+const SPHERE_LANE='packages/telescope-cli/src/sphere/sphere-lane.mts';
 interface SpherePrepared{readonly inputs:readonly {readonly role:string;readonly identity:string;readonly sha256:string;readonly bytes:number}[];readonly owner:Record<string,unknown>}
 interface SphereOwner{
   inspectMeasurementSphere(root:string,target:string):Promise<unknown>;
-  measurementSphere(root:string,target:string,texture:string,output:string,focus:{longitudeDegrees:number;latitudeDegrees:number;zoom:number}):Promise<SpherePrepared>;
+  measurementSphere(root:string,target:string,texture:string,output:string,focus:{longitudeDegrees:number;latitudeDegrees:number;zoom:number},solarGeometry:SolarGeometry):Promise<SpherePrepared>;
   sphereHtml(prepared:SpherePrepared,metadata:Record<string,unknown>,title:string,legend:string):string;
 }
 async function loadSphereOwner(){
@@ -60,7 +61,10 @@ export async function exportSphere(recordPath:string,outputDirectory:string){
   try{
   const loaded=await loadSphereOwner();try{const {compiled,owner}=loaded;await owner.inspectMeasurementSphere(root,bundle.map.frame.body);const {map,nav,radii,norm,context}=bundle;
   const longitude=(360-map.observations[0].subObserver.westLongitudeDegrees)%360,latitude=map.observations[0].subObserver.latitudeDegrees;
-  const prepared=await owner.measurementSphere(root,map.frame.body,localOutput(source.root,'texture.png'),staging,{longitudeDegrees:longitude,latitudeDegrees:latitude,zoom:1.1});
+  // The generated solar geometry is written after the packages build (src/platform/solar-geometry.mts), so this entry
+  // loads it from the checkout it runs in and hands it to the lane as data, as the bake CLI entries do.
+  const solarGeometry:SolarGeometry=await import(pathToFileURL(resolve(root,'src/platform/solar-geometry.mts')).href);
+  const prepared=await owner.measurementSphere(root,map.frame.body,localOutput(source.root,'texture.png'),staging,{longitudeDegrees:longitude,latitudeDegrees:latitude,zoom:1.1},solarGeometry);
   const metadata={target:map.frame.body,radiiKm:radii,shape:nav.shape,grid:map.grid,units:map.definition.units,normalization:norm,registration:nav.registration,sourceContext:context,uncertainty:nav.uncertainty,mapSha256:sha256(await readFile(localOutput(source.root,map.planes.file))),renderer:prepared.owner};
   const html=owner.sphereHtml(prepared,metadata,`${map.frame.body} · ${map.definition.quantity}`,`${map.definition.units} · ${Number(norm.minimum).toPrecision(4)}–${Number(norm.maximum).toPrecision(4)} · grey: unobserved`);
     await writeFile(resolve(staging,'sphere.html'),html);

@@ -355,7 +355,7 @@ test('a telescope command subpath is followed to the source its package exports 
 });
 
 test('the sphere lane identity follows the native camera, resize input and carried values it renders with, as when they sat under tools/experiments/native-scroll', async () => {
-  const lane = await implementationFingerprint(WORKSPACE, ['tools/objects/telescope-sphere/sphere-html.mts']);
+  const lane = await implementationFingerprint(WORKSPACE, ['packages/telescope-cli/src/sphere/sphere-html.mts']);
   const paths = lane.files.map(file => file.path);
   for (const name of ['carry-values', 'css-values', 'native-camera', 'resize-input'])
     assert.ok(paths.includes(`packages/telescope-cli/src/sphere/native-scroll/${name}.mts`), `${name} joins the sphere lane identity`);

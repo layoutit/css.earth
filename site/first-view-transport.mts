@@ -2,7 +2,7 @@ import { initialObjectSelection, loadPreparedCssObject } from '@cssearth/rendere
 import { readPreparedObjectBytes } from './object-page-data.mts';
 import { isRecord } from '@cssearth/core';
 
-/** Build-only. A page's first mount adopts its server markup (`serialize-prepared-scene.mts`), which already carries every
+/** Build-only. A page's first mount adopts its server markup (`@cssearth/renderer/rendering/prepared-scene-serialization.ts`), which already carries every
  * node the initial selection shows, styled. Their records here keep what adoption checks (tag, parent, class and
  * attributes) and drop their styles and property references; the property table keeps only what remaining records
  * use. Records the initial selection hides (`hiddenSubtrees`) stay whole: the runtime builds those nodes. In-app

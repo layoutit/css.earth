@@ -11,7 +11,7 @@ import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { parseGeometryProfile } from '@cssearth/bake/scene';
 import { prepareScientificNavigation } from '@cssearth/bake/objects/layers/terrestrial';
-import * as solarGeometry from '../../../src/platform/solar-geometry.mts';
+import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { parsePreparedWorldContext } from '@cssearth/renderer/prepared-data/world-context.ts';
 
 
@@ -52,7 +52,7 @@ export async function inspectMeasurementSphere(root:string,target:string){
 }
 
 export async function measurementSphere(root: string, target: string, texture: string, output: string,
-  focus: { longitudeDegrees: number; latitudeDegrees: number; zoom: number }) {
+  focus: { longitudeDegrees: number; latitudeDegrees: number; zoom: number }, solarGeometry: SolarGeometry) {
   const id=target.toLowerCase();
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Sphere output needs an existing body identity');
   const assetsToInstall = await inventoryAssets(root, [id], { location: 'prepared' });

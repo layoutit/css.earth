@@ -1,15 +1,15 @@
 /** Serialize the standard prepared sphere and its CSS camera at export time. */
 import { parseHTML } from 'linkedom';
-import { serializePreparedScene } from '../../../site/prepared/serialize-prepared-scene.mts';
+import { serializePreparedScene } from '@cssearth/renderer/rendering/prepared-scene-serialization.ts';
 import { initialObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
 import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
 import { preparedSceneMatrix } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { parsePreparedWorldCameraFrame } from '@cssearth/renderer/validation/world-frame.ts';
 import { distanceForSilhouetteRadius } from '@cssearth/renderer/solar-system/heliocentric-geometry.ts';
-import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
-import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
-import { carryViewportValues } from '@cssearth/telescope-cli/sphere/native-scroll/carry-values';
+import { addNativeCamera } from './native-scroll/native-camera.mts';
+import { addNativeResizeInput } from './native-scroll/resize-input.mts';
+import { carryViewportValues } from './native-scroll/carry-values.mts';
 import type { measurementSphere } from './sphere-lane.mts';
 import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
 

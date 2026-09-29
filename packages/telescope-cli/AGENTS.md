@@ -29,10 +29,10 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   stays there until the stale JunoCam ledger is regenerated: its ledger-state check fails until then, and
   `test:telescope-cli` runs every test in this package;
 - the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
-  lane in `tools/objects/telescope-sphere/`), because they read the checkout's body packages and application shell.
-  The native CSS camera, resize input and carried viewport values that lane writes into its HTML are this package's
-  `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in `labs/experiments/`
-  also imports); they followed the lane out of `tools/experiments/`;
+  lane in `src/sphere/sphere-lane.mts` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
+  application shell. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
+  this package's `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in
+  `labs/experiments/` also imports); they followed the lane out of `tools/experiments/`;
 - the installer of the pinned Python astronomy toolchains (`src/toolchains/astronomy-toolchains.mts`, run as
   `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts <toolchain> install|verify`), which the
   `@cssearth/telescope/node` errors name when a toolchain is missing.
