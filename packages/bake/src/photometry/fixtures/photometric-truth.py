@@ -7,7 +7,7 @@ Usage: .local/oracles/venv/bin/python packages/bake/src/photometry/fixtures/phot
 """
 import re, sys, urllib.request
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parents[4] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import write, external_record
 
 COMMIT = '1638a583e95be76d50e16cbe70f2c8e237528132'  # ISIS tag 10.0.0_LTS

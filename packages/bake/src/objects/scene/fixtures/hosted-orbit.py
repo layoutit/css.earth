@@ -8,7 +8,7 @@ import astropy.units as u
 import numpy as np
 from astropy.coordinates import SkyCoord
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[5] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import external_record, write
 
 

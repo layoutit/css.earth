@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 import numpy as np
 import pvl
-sys.path.insert(0, str(Path(__file__).resolve().parents[6] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import ROOT, samples, write, find, label_text
 
 path = ROOT / 'src/objects/steins/source/observations/w20080905t183606461id4df17.img'

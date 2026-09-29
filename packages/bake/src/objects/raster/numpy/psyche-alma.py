@@ -7,7 +7,7 @@ Usage: .local/oracles/venv/bin/python packages/bake/src/objects/raster/numpy/psy
 import sys
 from pathlib import Path
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[5] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import ROOT, samples, write
 
 source = ROOT / 'src/objects/psyche/source/thermal'
