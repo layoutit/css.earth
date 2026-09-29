@@ -523,11 +523,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // Ordinary collision decluttering must not blink an orbit during camera motion.
         // The selected object's path and planets in a selected placed star's
         // system remain available when their captions are intentionally absent.
-        const selectedSystemPlanet = entry.orbit.centerBodyId === orbitFocus.body.id && entry.orbit.centerBodyId !== plan.focus.id &&
+        const selectedSystemHost = entry.orbit.centerBodyId === orbitFocus.body.id && entry.orbit.centerBodyId !== plan.focus.id &&
           systemFade.isSystemStar(entry.orbit.centerBodyId);
         if (anonymousMinor || projected.inFrame && !entry.labelShown && (entry.labelHidden || !projected.nameable) &&
             !systemFade.hasAuthoredRange(entry.index) &&
-            !selectedSystemPlanet && (orbitOverview || entry.body.id !== orbitFocus.body.id)) projected.orbitVisibility = 0;
+            !selectedSystemHost && (orbitOverview || entry.body.id !== orbitFocus.body.id)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;
