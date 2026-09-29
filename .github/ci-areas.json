@@ -38,6 +38,7 @@
     "packages/bake/src/astronomy/**",
     "packages/bake/cli/prepare-solar-geometry.mts",
     "tools/objects/**",
+    "packages/telescope-cli/src/new-object/**",
     "packages/bake/authoring/**",
     "site/build/charts/**",
     "site/build/content/**",
