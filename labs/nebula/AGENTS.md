@@ -31,13 +31,13 @@ packages/
   lab/src/cli/                                 research commands and test discovery
   lab/browser/                                 real browser checks and helpers
   reconstruction/src/                         configured scientific methods
-  volume-viewer/src/                          retained scene and camera APIs
 models/                                      object recipes and source evidence
 sources/                                     acquisition metadata and credits
 run.mts                                      research CLI entrypoint
 ```
 
 - Internal dependency graph: lab imports reconstruction, volume-viewer, `@cssearth/bake/volume` (contracts, frames and pure numerics) and `@cssearth/bake/volume/node` (deterministic compact replay and encoding, in [`packages/bake`](../../packages/bake/README.md)); reconstruction and viewing import `@cssearth/bake/volume`, never one another or the node entry. Use explicit package exports. Repository renderer/source imports belong only in lab host adapters. Every authored source file stays at or below 600 physical lines. See [internal packages](docs/internal-packages.md); remaining verification is tracked in the local `nebula_lab_refactor.md` plan.
+- The viewer package lives at [`packages/volume-viewer`](../../packages/volume-viewer/README.md); its retained scenes and camera APIs remain lab dependencies.
 - Ordinary cssEarth preparation enters through `packages/bake/cli/prepare-nebulae.mts` and the baker; research commands enter through `labs/nebula/run.mts`. Never make compact app replay depend on the lab CLI, native acquisition, NOX or fitting.
 
 - React owns UI markup, control state and interaction. The PolyCSS renderer remains a plain TypeScript library mounted through a stable element/ref. UI rerenders must not recreate the cloud scene.

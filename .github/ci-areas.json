@@ -59,6 +59,6 @@
     { "id": "site", "patterns": ["site/**"], "jobs": ["typecheck", "universe"] },
     { "id": "oracles", "patterns": ["tests/fits/**", "tests/oracles/**"], "jobs": ["typecheck", "universe"] },
     { "id": "architecture", "patterns": [".github/scripts/architecture/**"], "jobs": ["typecheck"] },
-    { "id": "nebula", "patterns": ["tests/nebula/**", "labs/nebula/**"], "jobs": ["typecheck", "nebula"] }
+    { "id": "nebula", "patterns": ["tests/nebula/**", "labs/nebula/**", "packages/volume-viewer/**"], "jobs": ["typecheck", "nebula"] }
   ]
 }

@@ -13,6 +13,7 @@ export const nebulaPackages = {
 } as const;
 type Owner = keyof typeof nebulaPackages;
 const owners = Object.keys(nebulaPackages) as Owner[];
+const ownerDirectory = (root: string, owner: Owner) => resolve(root, owner === 'volume-viewer' ? 'packages/volume-viewer' : `labs/nebula/packages/${owner}`);
 const allowed = (from: Owner, to: Owner) => from === to || from === 'lab';
 /** The volume contracts, fields and materials were the lab's volume-core package, which every nebula package could import.
  * They are `@cssearth/bake/volume` now; its Node-only bake entry, like volume-bake before it, is for the lab alone. */
@@ -150,10 +151,10 @@ function checkBakeVolume(root: string, directory: string, value: ReturnType<type
 }
 
 export function checkNebulaBoundaries(root: string, requireAll = true): string[] {
-  const base = resolve(root, 'labs/nebula/packages'), errors: string[] = [], objectIds = celestialIds(root);
+  const errors: string[] = [], objectIds = celestialIds(root);
   const manifests = new Map<Owner, ReturnType<typeof manifest>>();
   for (const owner of owners) {
-    const directory = resolve(base, owner);
+    const directory = ownerDirectory(root, owner);
     if (!existsSync(resolve(directory, 'package.json'))) {
       if (requireAll) errors.push(`Missing package: ${owner}`);
       continue;
@@ -170,7 +171,7 @@ export function checkNebulaBoundaries(root: string, requireAll = true): string[]
   const bakeDirectory = resolve(root, 'packages/bake'), bake = existsSync(resolve(bakeDirectory, 'package.json')) ? manifest(bakeDirectory) : undefined;
   if (!bake && requireAll) errors.push('Missing package: bake');
   for (const [owner, value] of manifests) {
-    const directory = resolve(base, owner);
+    const directory = ownerDirectory(root, owner);
     const deps = { ...(record(value.dependencies) ? value.dependencies : {}), ...(record(value.devDependencies) ? value.devDependencies : {}) };
     for (const file of sourceFiles(directory)) {
       const source = readFileSync(file, 'utf8'), label = relative(root, file);
