@@ -1,0 +1,55 @@
+{
+  "id": "massey-2006-lggs-m33-stars",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A Survey of Local Group Galaxies Currently Forming Stars. I. UBVRI Photometry of Stars in M31 and M33",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1086/503256"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/AJ/131/2478"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1086/503256",
+      "label": "AJ 131, 2478"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/131/2478",
+      "label": "CDS J/AJ/131/2478"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/131/2478/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table5.dat: RAh-DEs (J2000), Vmag, B-V, U-B, V-R, R-I; 146,622 M33 stars. table9.dat: 361 M33 members confirmed by spectroscopy; table4.dat: the same columns for 371,781 M31 stars over 2.2 deg² along its major axis"
+    }
+  ],
+  "creators": [
+    "P. Massey",
+    "K. A. G. Olsen",
+    "P. W. Hodge",
+    "S. B. Strong",
+    "G. H. Jacoby",
+    "W. Schlingman",
+    "R. C. Smith"
+  ],
+  "publisher": "AJ 131, 2478",
+  "publicationDate": "2006",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Massey et al. (2006), AJ 131, 2478.",
+      "scope": "M33 star positions and UBVRI colours",
+      "evidence": "https://doi.org/10.1086/503256"
+    }
+  ]
+}

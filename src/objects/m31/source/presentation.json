@@ -20,26 +20,26 @@
   "lenses": [
     {
       "id": "optical",
-      "label": "ESA/Hubble · optical",
-      "title": "Wide-field view of the Andromeda Galaxy",
-      "description": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. The wide DSS2 field contains the full visible galaxy and substantial surrounding sky, foreground stars and background objects. Those released sources are retained. Faint halo coverage is limited by the survey composite.",
-      "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
-      "detail": "4783 × 5000 px",
+      "label": "NOIRLab · optical",
+      "title": "Panorama of Spiral Galaxy, M31",
+      "description": "The Local Group Survey's panorama of M31 from the Mayall 4-meter telescope (U, B, V, I and H-alpha), with the DSS2 view filling its gaps and the outer disc. Milky Way foreground stars and the companions M32 and NGC 205 are removed, and the whole-galaxy colour is tied to RC3's measured B-V of 0.92. The bulge is spread through a round volume from a published bulge-plus-disc fit and the disc through a 342 pc layer; depth is modelled, not measured per pixel.",
+      "summary": "Visible-light survey image on an approximate depth model with a round bulge; individual depths are not measured.",
+      "detail": "7560 × 2520 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "DSS2 R / DSS2 B"
+          "value": "U B V I Hα (survey) · DSS2 R / B (fill)"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4783 × 5000"
+          "value": "7560 × 2520 at 2″"
         },
         {
           "id": "coverage",
-          "label": "Parent image field",
-          "value": "361.93 × 234.08 arcmin"
+          "label": "Survey field",
+          "value": "217.62 × 54.87 arcmin"
         },
         {
           "id": "license",
@@ -49,8 +49,8 @@
       ],
       "input": "optical",
       "preview": {
-        "path": "src/objects/m31/source/source.jpg",
-        "url": "https://cdn.esahubble.org/archives/images/large/heic1112f.jpg"
+        "path": "src/objects/m31/source/optical-composite.jpg",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m31lgs_ubvIha.jpg"
       }
     }
   ]

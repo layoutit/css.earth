@@ -10,7 +10,9 @@ import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldPlannerSource } from './world-context/world-context-planner-client.js';
 import type { LensBillboards } from './lens-billboards.js';
 
-export type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource(path: string): string };
+export type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
+  /** Published catalogues placed in the bank's own frame, drawn as dots over its layers and faded with them. */
+  cataloguePointUrls?: readonly string[] };
 export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
   clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 

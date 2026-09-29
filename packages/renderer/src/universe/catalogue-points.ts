@@ -20,6 +20,39 @@ export async function fetchPreparedJson(target: string): Promise<unknown> {
 }
 /** A sparse catalogue (the globular clusters) is never thinned below this many points. */
 const MIN_DRAWN_POINTS = 300;
+/** Seen from outside its reach, a bank draws at most one dot per this many square pixels of its projected shape (about
+ * 8 px apart), so a far galaxy's dots never pile into a few pixels. */
+const PIXELS_PER_DOT = 64;
+
+/** A bank's shape as its points trace it around its origin: the axis they spread least along (a disc's normal) and the
+ * 90th-percentile reach across that axis and along it, in bank units. */
+export interface PointSpread { readonly normal: VolumeVector; readonly across: number; readonly along: number }
+export function pointSpread(points: readonly { readonly positionUnits: VolumeVector }[]): PointSpread {
+  const c = [0, 0, 0, 0, 0, 0]; // xx, yy, zz, xy, xz, yz
+  for (const { positionUnits: [x, y, z] } of points) { c[0] += x * x; c[1] += y * y; c[2] += z * z; c[3] += x * y; c[4] += x * z; c[5] += y * z; }
+  const trace = c[0]! + c[1]! + c[2]!;
+  // The least-spread axis is the largest eigenvector of (trace I - C), found by power iteration.
+  let v = [1 / Math.sqrt(3), 1 / Math.sqrt(3.1), 1 / Math.sqrt(2.9)];
+  for (let i = 0; i < 64; i++) {
+    const w = [(trace - c[0]!) * v[0]! - c[3]! * v[1]! - c[4]! * v[2]!, -c[3]! * v[0]! + (trace - c[1]!) * v[1]! - c[5]! * v[2]!, -c[4]! * v[0]! - c[5]! * v[1]! + (trace - c[2]!) * v[2]!];
+    const length = Math.hypot(...w); if (!(length > 0)) break; v = w.map(value => value / length);
+  }
+  const alongs: number[] = [], acrosses: number[] = [];
+  for (const { positionUnits: p } of points) { const h = p[0] * v[0]! + p[1] * v[1]! + p[2] * v[2]!; alongs.push(Math.abs(h)); acrosses.push(Math.sqrt(Math.max(0, p[0] * p[0] + p[1] * p[1] + p[2] * p[2] - h * h))); }
+  const percentile = (values: number[]) => values.sort((a, b) => a - b)[Math.floor(0.9 * (values.length - 1))]!;
+  return Object.freeze({ normal: Object.freeze(v) as unknown as VolumeVector, across: percentile(acrosses), along: percentile(alongs) });
+}
+
+/** How many dots a bank's projected shape holds, seen from `cameraUnits` (the camera in the bank's frame): its disc as an
+ * ellipse, `across` wide and foreshortened by the view's angle to the normal but never thinner than `along`. Within its
+ * reach there is no such limit. */
+export function screenPointCount(spread: PointSpread, cameraUnits: VolumeVector, focalPixels: number, pixelsPerDot = PIXELS_PER_DOT): number {
+  const distance = Math.hypot(...cameraUnits);
+  if (!(distance > spread.across) || !(focalPixels > 0)) return Infinity;
+  const cos = Math.abs(cameraUnits[0] * spread.normal[0] + cameraUnits[1] * spread.normal[1] + cameraUnits[2] * spread.normal[2]) / distance;
+  const a = focalPixels * spread.across / distance, c = focalPixels * spread.along / distance;
+  return Math.floor(Math.PI * a * Math.sqrt(a * a * cos * cos + c * c * (1 - cos * cos)) / pixelsPerDot);
+}
 
 /** How many of a bank's points to draw from a camera this far from its origin. */
 export function drawnPointCount(total: number, cameraDistanceM: number, fullDetailDistanceM = FULL_DETAIL_DISTANCE_M): number {
@@ -159,11 +192,14 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
           [colour, { colorCss: colour.slice(0, 7), radiusPx: bank.appearance.radiusPx,
             opacity: bank.appearance.opacity * (colour.length === 9 ? parseInt(colour.slice(7), 16) / 255 : 1) }] as const));
         // Zooming out draws a smaller share of the catalogue, always a prefix of its prepared order (sparse places first,
-        // crowds last): points leave and return as the camera moves, and none is swapped for another.
+        // crowds last): points leave and return as the camera moves, and none is swapped for another. From outside the
+        // bank's reach the share is also capped by how many dots its projected shape holds.
+        const spread = pointSpread(bank.points);
         runtime = mountBatchedSpatialPoints({ host: root, frame: bank.frame, points: bank.points,
-          drawnCount: bank.appearance.levels
-            ? distanceUnits => stackedPointCount(bank.appearance.levels!, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
-            : distanceUnits => drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit),
+          drawnCount: (distanceUnits, cameraUnits) => Math.min(bank.appearance.levels
+            ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
+            : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit),
+          screenPointCount(spread, cameraUnits, latest?.viewport.focalPixels ?? 0)),
           className: `catalogue-points-${bank.id}`, stylePoint: point => styles.get(point.colorCss)! });
         root.dataset.cataloguePoints = bank.id;
         if (latest) runtime.publish(latest);

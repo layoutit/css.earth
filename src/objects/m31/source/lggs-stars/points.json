@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "lggs-stars",
+  "table": {
+    "path": "table4.dat.gz",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/131/2478/table4.dat.gz",
+    "bytes": 12552893,
+    "format": "fixed-width",
+    "gzip": true,
+    "columns": {
+      "name": [
+        1,
+        19
+      ],
+      "raH": [
+        21,
+        22
+      ],
+      "raM": [
+        24,
+        25
+      ],
+      "raS": [
+        27,
+        31
+      ],
+      "decSign": [
+        33,
+        33
+      ],
+      "decD": [
+        34,
+        35
+      ],
+      "decM": [
+        37,
+        38
+      ],
+      "decS": [
+        40,
+        43
+      ]
+    },
+    "exclude": {
+      "path": "gaia-dr3-foreground.csv",
+      "raDegColumn": "RA_ICRS",
+      "decDegColumn": "DE_ICRS",
+      "withinArcsec": 1,
+      "source": "ren-2021-m31-m33-red-supergiants",
+      "basis": "Milky Way foreground stars, by the criterion of Ren et al. (2021, Sect. 3.2): a Gaia parallax measured to better than 20% that places the star within 50 kpc (parallax above 0.02 mas), or a proper motion in right ascension or declination above 0.2 mas/yr plus 2 sigma, measured to better than 20%. Applied to Gaia DR3 (they used DR2) within 2.3 deg of M31's centre, which covers the LGGS field (2.2 deg² along the major axis); an LGGS star within 1 arcsec of one is left out, the radius Ren et al. match LGGS to UKIRT with. The same list removes the foreground stars from M31's photograph (recipe.json source.foregroundStars)."
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": {
+        "atCentrePc": 182,
+        "perKpcPc": 16
+      },
+      "source": "braun-1991-m31-neutral-gas",
+      "basis": "Braun (1991, Sect. 5.3, eq. 13) fits M31's H I layer with an exponential whose scale height rises linearly with radius, 182 + 16 R_kpc pc. The LGGS stars bright enough to be catalogued at M31 are young massive stars (1-2% photometry at V = 21, stars above 20 solar masses), which form from that gas, so they take its thickness as an upper value, like the HII regions. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "massey-2006-lggs-m33-stars",
+  "meaning": "Stars of M31 in the Local Group Galaxies Survey (Massey et al. 2006), UBVRI photometry over 2.2 deg² along the major axis, after the Gaia foreground cut: one dot per star at its catalogue sky position, coloured by its measured B-V. The survey is limited by crowding in the bright bulge, so its density there is a floor.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.5,
+    "opacity": 0.85,
+    "colorByBv": {
+      "column": [
+        59,
+        64
+      ],
+      "range": [
+        -0.4,
+        2
+      ],
+      "steps": 32,
+      "basis": "Measured B-V, observed (not dereddened), through the app's catalogue star colour so these dots match its stars. The range covers M31's blue and red supergiants; a colour beyond it takes the end colour."
+    },
+    "note": "Presentation only: the M33 LGGS stars' size and opacity, so the two galaxies' star layers read alike."
+  }
+}

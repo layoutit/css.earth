@@ -1,0 +1,55 @@
+{
+  "id": "ciardullo-2004-m33-pne",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Planetary Nebula System of M33",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1086/423414"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/614/167"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1086/423414",
+      "label": "ApJ 614, 167"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/614/167",
+      "label": "CDS J/ApJ/614/167"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/614/167/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table2.dat: RAh-DEs (J2000); 152 planetary nebula candidates"
+    }
+  ],
+  "creators": [
+    "R. Ciardullo",
+    "P. R. Durrell",
+    "M. B. Laychak",
+    "K. A. Herrmann",
+    "K. Moody",
+    "G. H. Jacoby",
+    "J. J. Feldmeier"
+  ],
+  "publisher": "ApJ 614, 167",
+  "publicationDate": "2004",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Ciardullo et al. (2004), ApJ 614, 167.",
+      "scope": "M33 planetary nebula positions",
+      "evidence": "https://doi.org/10.1086/423414"
+    }
+  ]
+}

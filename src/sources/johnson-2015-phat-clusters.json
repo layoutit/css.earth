@@ -1,0 +1,63 @@
+{
+  "id": "johnson-2015-phat-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "PHAT stellar cluster survey. II. Andromeda Project cluster catalog",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/802/2/127"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/802/127"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/0004-637X/802/2/127",
+      "label": "ApJ 802, 127"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/802/127",
+      "label": "CDS J/ApJ/802/127"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/802/127/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table2.dat: RAdeg, DEdeg (J2000), fclW; 2,753 clusters in the PHAT footprint"
+    }
+  ],
+  "creators": [
+    "L. C. Johnson",
+    "A. C. Seth",
+    "J. J. Dalcanton",
+    "M. L. Wallace",
+    "R. J. Simpson",
+    "C. J. Lintott",
+    "A. Kapadia",
+    "E. D. Skillman",
+    "N. Caldwell",
+    "M. Fouesneau",
+    "D. R. Weisz",
+    "B. F. Williams",
+    "L. C. Beerman",
+    "D. A. Gouliermis",
+    "A. Sarajedini"
+  ],
+  "publisher": "ApJ 802, 127",
+  "publicationDate": "2015",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Johnson et al. (2015), ApJ 802, 127.",
+      "scope": "Star cluster positions",
+      "evidence": "https://doi.org/10.1088/0004-637X/802/2/127"
+    }
+  ]
+}

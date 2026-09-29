@@ -1,0 +1,50 @@
+{
+  "id": "lee-2014-m31-snr-candidates",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A new optical survey of supernova remnant candidates in M31",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/786/2/130"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/786/130"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/0004-637X/786/2/130",
+      "label": "ApJ 786, 130"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/786/130",
+      "label": "CDS J/ApJ/786/130"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/786/130/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table3.dat: RAdeg, DEdeg (J2000), Morph, PType; 156 candidates"
+    }
+  ],
+  "creators": [
+    "J. H. Lee",
+    "M. G. Lee"
+  ],
+  "publisher": "ApJ 786, 130",
+  "publicationDate": "2014",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Lee & Lee (2014), ApJ 786, 130.",
+      "scope": "Supernova remnant candidate positions",
+      "evidence": "https://doi.org/10.1088/0004-637X/786/2/130"
+    }
+  ]
+}

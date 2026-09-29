@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "azimlu-hii",
+  "table": {
+    "path": "table2.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/142/139/table2.dat",
+    "bytes": 380256,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        4
+      ],
+      "raDeg": [
+        10,
+        17
+      ],
+      "decDeg": [
+        19,
+        25
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": {
+        "atCentrePc": 182,
+        "perKpcPc": 16
+      },
+      "source": "braun-1991-m31-neutral-gas",
+      "basis": "Braun (1991, Sect. 5.3, eq. 13) fits M31's H I layer with an exponential whose scale height rises linearly with radius, 182 + 16 R_kpc pc (about 340 pc at the 10 kpc star-forming ring), with considerable scatter. It is the gas these young objects form from; young stars sit in the cold, thinner part of it, so for them it is an upper value, used as a presentation choice. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "azimlu-2011-m31-hii-regions",
+  "meaning": "HII regions of M31 found by Azimlu et al. (2011) in the Local Group Galaxies Survey H-alpha images, which cover the whole disc: one dot per region at its catalogue sky position. The catalogue gives no distance along the line of sight; every region lies in M31's disc.",
+  "appearance": {
+    "colorCss": "#ff7a9c",
+    "radiusPx": 1,
+    "opacity": 0.6,
+    "note": "Presentation only: the Milky Way HII layer's pink (hou-han-hii), so the same kind of object reads alike in both galaxies. Toned to 60% on M31, whose photograph is darker than the Milky Way backing: at full tone these dots outshone the disc. Planetary nebulae keep full tone, since dimmed dots read as dark specks on the bright bulge."
+  }
+}

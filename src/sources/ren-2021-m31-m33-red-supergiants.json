@@ -1,0 +1,54 @@
+{
+  "id": "ren-2021-m31-m33-red-supergiants",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Red Supergiants in M31 and M33. I. The Complete Sample",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/abcda5"
+    },
+    {
+      "type": "arXiv",
+      "value": "2011.12051"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.3847/1538-4357/abcda5",
+      "label": "ApJ 907, 18"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2011.12051",
+      "label": "arXiv:2011.12051"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2011.12051",
+      "checkedOn": "2026-09-29",
+      "locator": "Sect. 3.2, Removing the Foreground Giants, and equations (1)-(2): Gaia foreground criteria; LGGS-UKIRT cross-match radius 1 arcsec"
+    }
+  ],
+  "creators": [
+    "Y. Ren",
+    "B. Jiang",
+    "M. Yang",
+    "T. Wang",
+    "M. Jian",
+    "T. Ren"
+  ],
+  "publisher": "ApJ 907, 18",
+  "publicationDate": "2021",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Ren et al. (2021), ApJ 907, 18.",
+      "scope": "Gaia foreground criterion for M31 and M33",
+      "evidence": "https://doi.org/10.3847/1538-4357/abcda5"
+    }
+  ]
+}

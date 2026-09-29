@@ -1,0 +1,58 @@
+{
+  "id": "koch-2018-m33-hi-kinematics",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kinematics of the atomic ISM in M33 on 80 pc scales",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/sty1674"
+    },
+    {
+      "type": "arXiv",
+      "value": "1806.11218"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1093/mnras/sty1674",
+      "label": "MNRAS 479, 2505"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1806.11218",
+      "label": "arXiv:1806.11218"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1806.11218",
+      "checkedOn": "2026-09-29",
+      "locator": "Table 2: DiskFit disc parameters for the VLA+GBT peak velocity surface: centre, position angle 201.12 ± 0.47°, inclination 55.08 ± 1.56°"
+    }
+  ],
+  "creators": [
+    "E. W. Koch",
+    "E. W. Rosolowsky",
+    "F. J. Lockman",
+    "A. A. Kepley",
+    "A. Leroy",
+    "A. Schruba",
+    "J. Braine",
+    "J. Dalcanton",
+    "M. C. Johnson",
+    "S. Stanimirović"
+  ],
+  "publisher": "MNRAS 479, 2505",
+  "publicationDate": "2018",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Koch et al. (2018), MNRAS 479, 2505.",
+      "scope": "M33 disc orientation",
+      "evidence": "https://doi.org/10.1093/mnras/sty1674"
+    }
+  ]
+}
