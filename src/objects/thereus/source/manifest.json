@@ -29,7 +29,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 43250
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/batch.json.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using packages/bake/authoring/centaurs/batch.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     },
     {
@@ -56,7 +56,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 43250
       },
-      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/batch.json.",
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using packages/bake/authoring/centaurs/batch.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
     }
   ],
@@ -95,7 +95,7 @@
           {
             "catalogueId": "neowise-diameters-albedos-v2",
             "role": "reference",
-            "evidence": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
           }
         ]
       }

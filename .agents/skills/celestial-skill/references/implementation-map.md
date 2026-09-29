@@ -126,7 +126,7 @@ instead of editing a shared list or atlas position.
 - **Published ellipsoids and unresolved outlines:**
   `tools/objects/source-authoring/distant-worlds/README.md` documents the existing
   analytical radius-table extraction. Its helpers accept a selected input file;
-  `tools/objects/source-authoring/outer-worlds/inputs.json` supplies the later
+  `packages/bake/authoring/outer-worlds/inputs.json` supplies the later
   occultation and thermal examples.
   Keep a projected ellipse distinct from a 3D shape, disclose any assumed depth,
   and use the normal unmapped grid. A short title must match the content display

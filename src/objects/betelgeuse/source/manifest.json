@@ -24,7 +24,7 @@
         ]
       },
       "license": "Derived in this repository from public calibrated data; SQUEEZE is GPL-3.0 and is not redistributed here. Retain the data credit and the paper citation.",
-      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in reference/../observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits convolved with a 4 mas Gaussian beam; `--check` recomputes it.",
+      "acquisition": "Written by packages/bake/authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in reference/../observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits convolved with a 4 mas Gaussian beam; `--check` recomputes it.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
         "sphere-photograph"
@@ -51,7 +51,7 @@
       "origin": "https://arxiv.org/abs/2006.09837",
       "credit": "Radius from Joyce et al. (2020); sphere written by this repository",
       "license": "Project-authored reference surface from a published radius.",
-      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts from measurements.json (radius 531514800 km, 5 degree steps); `--check` recomputes it.",
+      "acquisition": "Written by packages/bake/authoring/betelgeuse/author.mts from measurements.json (radius 531514800 km, 5 degree steps); `--check` recomputes it.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
         "terrain"
@@ -65,7 +65,7 @@
       },
       "coverage": "A sphere of the published radius: the reference surface the interferometric image is cast onto, not a measured shape. The photosphere of a red supergiant has no sharp limb.",
       "recipe": {
-        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "generator": "packages/bake/authoring/betelgeuse/author.mts",
         "inputs": [
           "measurements"
         ],
@@ -6471,7 +6471,7 @@
         ]
       },
       "license": "Derived in this repository from public calibrated data; SQUEEZE is GPL-3.0 and is not redistributed here. Retain the data credit and the paper citation.",
-      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in observations/betelgeuse-matisse-2018-12-continuum-squeeze.fits convolved with a 3 mas Gaussian beam; `--check` recomputes it.",
+      "acquisition": "Written by packages/bake/authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in observations/betelgeuse-matisse-2018-12-continuum-squeeze.fits convolved with a 3 mas Gaussian beam; `--check` recomputes it.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
         "sphere-photograph-2018-12"
@@ -6515,7 +6515,7 @@
         ]
       },
       "license": "Derived in this repository from public calibrated data; SQUEEZE is GPL-3.0 and is not redistributed here. Retain the data credit and the paper citation.",
-      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in observations/betelgeuse-matisse-2020-12-continuum-squeeze.fits convolved with a 3.1 mas Gaussian beam; `--check` recomputes it.",
+      "acquisition": "Written by packages/bake/authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in observations/betelgeuse-matisse-2020-12-continuum-squeeze.fits convolved with a 3.1 mas Gaussian beam; `--check` recomputes it.",
       "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
       "consumers": [
         "sphere-photograph-2020-12"
@@ -6575,7 +6575,7 @@
         "reconstruction-check"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "generator": "packages/bake/authoring/betelgeuse/author.mts",
         "inputs": [
           "matisse-2020-02-08t000149-a0b2d0c1-in-in-chop",
           "matisse-2020-02-08t000149-a0b2d0c1-in-in-nochop",
@@ -6622,7 +6622,7 @@
           ]
         ]
       },
-      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "generator": "packages/bake/authoring/betelgeuse/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "Produced in this repository from the pinned inputs by the named generator."
@@ -6638,13 +6638,13 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "generator": "packages/bake/authoring/betelgeuse/author.mts",
         "inputs": [
           "betelgeuse-matisse-2020-02-continuum",
           "betelgeuse-neilson-2013-limb-darkening"
         ]
       },
-      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "generator": "packages/bake/authoring/betelgeuse/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "Rendered by author.mts from the beam-convolved reconstruction as observed (north up, east left) through the lens's palette and percentile stretch."
@@ -6661,7 +6661,7 @@
         "reconstruction-check"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "generator": "packages/bake/authoring/betelgeuse/author.mts",
         "inputs": [
           "matisse-2018-12-03t063648-a0b2j2c1-in-in-chop",
           "matisse-2018-12-03t063648-a0b2j2c1-in-in-nochop",
@@ -6790,7 +6790,7 @@
           ]
         ]
       },
-      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "generator": "packages/bake/authoring/betelgeuse/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "Produced in this repository from the pinned inputs by the named generator."
@@ -6807,7 +6807,7 @@
         "reconstruction-check"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "generator": "packages/bake/authoring/betelgeuse/author.mts",
         "inputs": [
           "matisse-2020-12-14t062642-a0g1j2j3-in-in-chop",
           "matisse-2020-12-14t062642-a0g1j2j3-in-in-nochop",
@@ -6873,7 +6873,7 @@
           ]
         ]
       },
-      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "generator": "packages/bake/authoring/betelgeuse/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "Produced in this repository from the pinned inputs by the named generator."

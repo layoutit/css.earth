@@ -1319,12 +1319,12 @@
           {
             "catalogueId": "asteroid-lightcurve-database-v4",
             "role": "reference",
-            "evidence": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
           },
           {
             "catalogueId": "neowise-diameters-albedos-v2",
             "role": "reference",
-            "evidence": "tools/objects/source-authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
           }
         ]
       }
