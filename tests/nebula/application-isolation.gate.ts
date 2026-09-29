@@ -31,7 +31,7 @@ for (const path of inputs) {
   if (path.startsWith('labs/')) continue;
   const destination = resolve(sandbox, path); await mkdir(dirname(destination), { recursive: true }); await cp(resolve(root, path), destination);
 }
-// Runtime host fingerprints include validation owners even when esbuild removes type-only imports.
+// The sandbox also holds the runtime host's validation owners, which esbuild drops as type-only imports, and each object's sources.
 for (const path of ['packages/renderer/src/volume/types.ts', 'packages/renderer/src/navigation/world-camera-math.ts',
   'packages/renderer/src/stars/prepared-catalogue-points.ts', 'src/objects/m42/object.json',
   'src/objects/m42/source', 'src/objects/m2-9/object.json', 'src/objects/m2-9/source',
