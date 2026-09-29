@@ -2,7 +2,7 @@
 
 ## Sources
 
-GJ 143 is a star of 4,640 K 16.3 parsecs away. Its planets HD 21749 c, b cross it, which is how they were found and sized. It is also HD 21749, HIP 16069. This account was drafted from Dragomir et al. 2019's values; the sections below are the data's own.
+Its radius and temperature follow Dragomir et al. 2019. It is also HD 21749, HIP 16069. This account was drafted from Dragomir et al. 2019's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4673947174316727040, parallax 61.227 ± 0.015 mas (16.33 pc). Radius 0.695 +/- 0.03 solar radii from Dragomir et al. 2019, the stellar radius of the default parameter set of HD 21749 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract). Mass 0.73 +/- 0.07 solar masses from Dragomir et al. 2019, the stellar mass of the default parameter set of HD 21749 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract). Temperature 4,640 K from Dragomir et al. 2019, the stellar temperature of the default parameter set of HD 21749 c in the NASA Exoplanet Archive. log g 4.62 from the mass and radius.
 

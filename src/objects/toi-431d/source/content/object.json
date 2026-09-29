@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.031 Jupiter masses",
+        "value": "9.9 Earth masses",
         "source": {
           "catalogueId": "publication-2021mnras-507-2782o",
           "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "toi-431d-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-431d/toi-431d-system-orbits.svg",
+      "alt": "The orbits of TOI-431's planets in this map from above, to scale, with TOI-431 d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-431d-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O"
+      }
+    },
+    {
+      "id": "toi-431d-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-431d/toi-431d-transit.svg",
+      "alt": "TOI-431 d crossing its star, as TESS recorded it: 3 sectors (6, 32, 98) of the SPOC pipeline's 2-minute light curves of TIC 31374837, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-431d-tess-sector-6",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2018349182500-s0006-0000000031374837-0126-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

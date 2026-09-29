@@ -100,7 +100,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 1349293.4,
-      "description": "HD 219134 c crosses its star every 6.76 days and is 1.5 Earth radii across, found in 2015.",
+      "description": "HD 219134 c was found in 2015 by Roque de los Muchachos Observatory as it crossed its star.",
       "systemName": "HD 219134 system",
       "order": 1775,
       "context": {
@@ -111,20 +111,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        107177086666522850,
-        -22099585955569060,
-        169613312309193400
+        107177085367409580,
+        -22099585647975024,
+        169613314138082240
       ],
       "presentationToReference": [
-        0.539942981459334,
+        0.5399429728356232,
         -0.17671779151545453,
-        -0.822941309532281,
-        -0.06299058687943834,
+        -0.822941315190415,
+        -0.0629905850994836,
         -0.9834534866316543,
-        0.16985707402585942,
-        0.8393412671478679,
+        0.16985707468594616,
+        0.8393412728290288,
         0.039875578916709446,
-        0.5421403650980694
+        0.5421403563025013
       ],
       "orbitUpReference": [
         0.17671779151545453,

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2267",
+  "card": {
+    "text": "2 planets cross TOI-2267 A as seen from Earth: TOI-2267 b, TOI-2267 c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202554419",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract",
+        "label": "Zúñiga-Fernández et al. (2025), Astronomy & Astrophysics 702 A85",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZUNIGA_FERNANDEZ_ET_AL_2025): st_teff 3030, st_rad 0.2075, st_mass 0.171"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Zúñiga-Fernández et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202554419",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract",
+        "label": "Zúñiga-Fernández et al. (2025), Astronomy & Astrophysics 702 A85",
+        "checked": "2026-09-28",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZUNIGA_FERNANDEZ_ET_AL_2025): st_teff 3030, st_rad 0.2075, st_mass 0.171"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light."
+    }
+  }
+}

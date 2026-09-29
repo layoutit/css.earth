@@ -1,0 +1,32 @@
+{
+  "id": "toi-2092",
+  "name": "TOI-2092",
+  "system": "TOI-2092 system",
+  "description": "Star of 5,842 K, 177 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2092",
+  "gaia": "1505964178502982144",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 1.0519,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-2092 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5842.06,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-2092 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2092 b crosses TOI-2092 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 5842.06, st_rad 1.0519"
+  },
+  "notes": [],
+  "order": 2986
+}

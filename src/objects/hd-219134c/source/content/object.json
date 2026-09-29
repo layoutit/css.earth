@@ -21,7 +21,7 @@
       {
         "id": "period",
         "label": "Year",
-        "value": "6.76 days",
+        "value": "6.77 days",
         "source": {
           "catalogueId": "publication-2017natas-1e-56g",
           "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G",
@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.014 Jupiter masses",
+        "value": "4.4 Earth masses",
         "source": {
           "catalogueId": "publication-2017natas-1e-56g",
           "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-219134c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-219134c/hd-219134c-system-orbits.svg",
+      "alt": "The orbits of HD 219134's planets in this map from above, to scale, with HD 219134 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-219134c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G"
+      }
+    },
+    {
+      "id": "hd-219134c-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-219134c/hd-219134c-transit.svg",
+      "alt": "HD 219134 c crossing its star, as TESS recorded it: 3 sectors (57, 77, 84) of the SPOC pipeline's 2-minute light curves of TIC 283722336, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-219134c-tess-sector-57",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022273165103-s0057-0000000283722336-0245-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

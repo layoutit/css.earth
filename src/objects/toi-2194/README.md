@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-2194 is a star of 4,756 K 19.6 parsecs away. Its planet TOI-2194 b crosses it, which is how it was found and sized. It is also HD 188474, HIP 98130. This account was drafted from Mistry et al. 2023's values; the sections below are the data's own.
+Its radius and temperature follow Mistry et al. 2023. It is also HD 188474, HIP 98130. This account was drafted from Mistry et al. 2023's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 6748283784056800384, parallax 51.157 ± 0.025 mas (19.55 pc). Radius 0.6909 +/- 0.0492 solar radii from Mistry et al. 2023, the stellar radius of the default parameter set of TOI-2194 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract). Mass 0.74 +/- 0.0854 solar masses from Mistry et al. 2023, the stellar mass of the default parameter set of TOI-2194 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract). Temperature 4,756 K from Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-2194 b in the NASA Exoplanet Archive. log g 4.63 from the mass and radius.
 

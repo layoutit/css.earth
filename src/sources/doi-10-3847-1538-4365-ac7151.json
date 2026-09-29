@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-3847-1538-4365-ac7151",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Su et al. (2022): Magnetic Activity and Physical Parameters of Exoplanet Host Stars Based on LAMOST DR7, TESS, Kepler, and K2 Surveys",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/ac7151"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022ApJS..261...26S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...26S",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...26S",
+      "checkedOn": "2026-09-28",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Su et al. (2022), The Astrophysical Journal Supplement Series 261 26",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...26S"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 261 26",
+  "creators": [
+    "Tianhao Su",
+    "Li-yun Zhang",
+    "Liu Long",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

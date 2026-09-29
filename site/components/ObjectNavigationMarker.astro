@@ -11,6 +11,7 @@ interface Props {
 
 const { objectId, color, scale = 1, minSize = 0 } = Astro.props;
 const marker = PREPARED_NAVIGATION_MARKERS[objectId];
+if (!marker) throw new TypeError(`${objectId}: no prepared navigation marker; run the bake's markers step (node tools/prepare/cli/prepare-object.mts ${objectId} --from markers).`);
 const effectiveScale = Math.max(scale, minSize / marker.presentation.size);
 const { ringed, style, innerStyle, ringStyle } = markerStyle(marker, { color, scale: effectiveScale });
 ---

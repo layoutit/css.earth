@@ -2,26 +2,26 @@
   "schema": "cssearth-object-text@1",
   "objectId": "kepler-444d",
   "card": {
-    "text": "Kepler-444 d crosses its star every 6.19 days and is 0.53 Earth radii across, found in 2015.",
+    "text": "Kepler-444 d was found in 2015 by Kepler as it crossed its star.",
     "sources": [
       {
         "catalogueId": "publication-2015apj-799-170c",
         "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
         "label": "Campante et al. 2015",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAMPANTE_ET_AL__2015): pl_orbper 6.189392, pl_radj 0.047, pl_bmassj 0.00062927"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAMPANTE_ET_AL__2015): disc_year 2015, disc_facility Kepler, sy_pnum 5; pl_orbper 6.189392, pl_radj 0.047, pl_bmassj 0.00062927"
       }
     ]
   },
   "introduction": {
-    "text": "Kepler-444 d transits Kepler-444 every 6.19 days and is 0.53 Earth radii across. Orbit and size follow Campante et al. 2015's fit, the archive's default.",
+    "text": "It is one of 5 planets known around Kepler-444. Its orbit and size follow Campante et al. 2015's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "publication-2015apj-799-170c",
         "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract",
         "label": "Campante et al. 2015",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAMPANTE_ET_AL__2015): pl_orbper 6.189392, pl_radj 0.047, pl_bmassj 0.00062927"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CAMPANTE_ET_AL__2015): disc_year 2015, disc_facility Kepler, sy_pnum 5; pl_orbper 6.189392, pl_radj 0.047, pl_bmassj 0.00062927"
       }
     ]
   },

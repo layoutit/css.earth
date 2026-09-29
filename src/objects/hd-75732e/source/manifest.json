@@ -164,6 +164,131 @@
           }
         ]
       }
+    },
+    {
+      "id": "hd-75732e-archive-transmission",
+      "path": "science/archive-spectra/transmission.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2016ApJ...820...99T/abstract",
+      "credit": "Tsiaras et al. 2016, via the NASA Exoplanet Archive transitspec table",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "The measured rows of Tsiaras et al. 2016 in the archive's transitspec table (science/archive-spectra/transmission.csv), written as published: no limits, no filled errors",
+      "redistribution": "Factual parameter transcription only",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Transcribed from science/archive-spectra/transmission.csv, the archive's rows as served; the generator rewrites both."
+      }
+    },
+    {
+      "id": "hd-75732e-archive-transmission-rows",
+      "path": "science/archive-spectra/transmission.csv",
+      "origin": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cplntransdep%2Cplntransdeperr1%2Cplntransdeperr2%2Cplntransdeplim%2Cfacility%2Cinstrument%2Cplntranreflink+from+transitspec+where+plntname%3D%2755+Cnc+e%27+order+by+centralwavelng&format=csv",
+      "credit": "NASA Exoplanet Archive, transitspec table",
+      "license": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "acquisition": "TAP query in source/preparation/acquisition.json: every transitspec row of 55 Cnc e.",
+      "redistribution": "Table rows as served, with the archive acknowledged.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-75732e-archive-transmission-rows",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-75732e-tess-sector-44",
+      "path": "photometry/tess/tess2021284114741-s0044-0000000332064670-0215-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021284114741-s0044-0000000332064670-0215-s_lc.fits",
+      "productId": "tess2021284114741-s0044-0000000332064670-0215-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of 55 Cnc e's star (TIC 332064670), sector 44",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-332064670",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021284114741-s0044-0000000332064670-0215-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-75732e-tess-sector-46",
+      "path": "photometry/tess/tess2021336043614-s0046-0000000332064670-0217-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021336043614-s0046-0000000332064670-0217-s_lc.fits",
+      "productId": "tess2021336043614-s0046-0000000332064670-0217-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of 55 Cnc e's star (TIC 332064670), sector 46",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-332064670",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021336043614-s0046-0000000332064670-0217-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-75732e-tess-sector-72",
+      "path": "photometry/tess/tess2023315124025-s0072-0000000332064670-0267-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023315124025-s0072-0000000332064670-0267-s_lc.fits",
+      "productId": "tess2023315124025-s0072-0000000332064670-0267-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of 55 Cnc e's star (TIC 332064670), sector 72",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-332064670",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023315124025-s0072-0000000332064670-0267-s_lc.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -213,6 +338,13 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    },
+    {
+      "path": "content/charts.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared chart recipes: the orbits drawn from the hosted-orbit records, and archive spectra with their units, errors and source paths."
       }
     }
   ]

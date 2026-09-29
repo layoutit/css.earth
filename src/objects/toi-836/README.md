@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-836 is a star of 4,552 K 27.5 parsecs away. Its planets b, TOI-836.01 cross it, which is how they were found and sized. It is also HIP 73427. This account was drafted from Hawthorn et al. 2023's values; the sections below are the data's own.
+Its radius and temperature follow Hawthorn et al. 2023. It is also HIP 73427. This account was drafted from Hawthorn et al. 2023's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 6230733559097425152, parallax 36.353 ± 0.016 mas (27.51 pc). Radius 0.665 +/- 0.01 solar radii from Hawthorn et al. 2023, the stellar radius of the default parameter set of TOI-836 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract). Mass 0.678 +/- 0.049 solar masses from Hawthorn et al. 2023, the stellar mass of the default parameter set of TOI-836 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract). Temperature 4,552 K from Hawthorn et al. 2023, the stellar temperature of the default parameter set of TOI-836 b in the NASA Exoplanet Archive. log g 4.62 from the mass and radius.
 

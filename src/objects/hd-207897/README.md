@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 207897 is a star of 5,106 K 28.3 parsecs away. Its planet HD 207897 b crosses it, which is how it was found and sized. It is also HD 207897, HIP 107038. This account was drafted from MacDougall et al. 2023's values; the sections below are the data's own.
+Its radius and temperature follow MacDougall et al. 2023. It is also HD 207897, HIP 107038. This account was drafted from MacDougall et al. 2023's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2300641567596591488, parallax 35.358 ± 0.016 mas (28.28 pc). Radius 0.7827 +/- 0.0329 solar radii from MacDougall et al. 2023, the stellar radius of the default parameter set of HD 207897 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). Mass 0.8208 +/- 0.0226 solar masses from MacDougall et al. 2023, the stellar mass of the default parameter set of HD 207897 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). Temperature 5,106 K from MacDougall et al. 2023, the stellar temperature of the default parameter set of HD 207897 b in the NASA Exoplanet Archive. log g 4.57 from the mass and radius.
 

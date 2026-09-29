@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.045 Jupiter masses",
+        "value": "14 Earth masses",
         "source": {
           "catalogueId": "publication-2026aj-172-97d",
           "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hd-60779b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-60779b/hd-60779b-system-orbits.svg",
+      "alt": "The orbits of HD 60779's planets in this map from above, to scale, with HD 60779 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-60779b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172...97D"
+      }
+    },
+    {
+      "id": "hd-60779b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-60779b/hd-60779b-transit.svg",
+      "alt": "HD 60779 b crossing its star, as TESS recorded it: 3 sectors (7, 34, 88) of the SPOC pipeline's 2-minute light curves of TIC 65672998, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 6 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 6 minutes at these dates, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-60779b-tess-sector-7",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019006130736-s0007-0000000065672998-0131-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

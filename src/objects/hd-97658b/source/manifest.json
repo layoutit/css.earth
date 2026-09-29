@@ -99,6 +99,102 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "hd-97658b-archive-transmission",
+      "path": "science/archive-spectra/transmission.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2014ApJ...794..155K/abstract",
+      "credit": "Knutson et al. 2014, via the NASA Exoplanet Archive transitspec table",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "The measured rows of Knutson et al. 2014 in the archive's transitspec table (science/archive-spectra/transmission.csv), written as published: no limits, no filled errors",
+      "redistribution": "Factual parameter transcription only",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Transcribed from science/archive-spectra/transmission.csv, the archive's rows as served; the generator rewrites both."
+      }
+    },
+    {
+      "id": "hd-97658b-archive-transmission-rows",
+      "path": "science/archive-spectra/transmission.csv",
+      "origin": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cplntransdep%2Cplntransdeperr1%2Cplntransdeperr2%2Cplntransdeplim%2Cfacility%2Cinstrument%2Cplntranreflink+from+transitspec+where+plntname%3D%27HD+97658+b%27+order+by+centralwavelng&format=csv",
+      "credit": "NASA Exoplanet Archive, transitspec table",
+      "license": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "acquisition": "TAP query in source/preparation/acquisition.json: every transitspec row of HD 97658 b.",
+      "redistribution": "Table rows as served, with the archive acknowledged.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-97658b-archive-transmission-rows",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-97658b-tess-sector-22",
+      "path": "photometry/tess/tess2020049080258-s0022-0000000082308728-0174-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020049080258-s0022-0000000082308728-0174-s_lc.fits",
+      "productId": "tess2020049080258-s0022-0000000082308728-0174-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 97658 b's star (TIC 82308728), sector 22",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-82308728",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020049080258-s0022-0000000082308728-0174-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-97658b-tess-sector-49",
+      "path": "photometry/tess/tess2022057073128-s0049-0000000082308728-0221-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022057073128-s0049-0000000082308728-0221-s_lc.fits",
+      "productId": "tess2022057073128-s0049-0000000082308728-0221-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of HD 97658 b's star (TIC 82308728), sector 49",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-82308728",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022057073128-s0049-0000000082308728-0221-s_lc.fits"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -147,6 +243,13 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    },
+    {
+      "path": "content/charts.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared chart recipes: the orbits drawn from the hosted-orbit records, and archive spectra with their units, errors and source paths."
       }
     }
   ]

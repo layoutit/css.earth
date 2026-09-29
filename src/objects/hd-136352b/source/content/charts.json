@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-136352b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-136352b-orbits",
+      "title": "HD 136352 b: orbits around HD 136352",
+      "output": "hd-136352b-system-orbits.svg",
+      "system": "hd-136352",
+      "highlight": "hd-136352b",
+      "description": "The orbits of HD 136352's planets in this map from above, to scale, with HD 136352 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 11.57783620835 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-136352b-transit",
+      "title": "HD 136352 b: its transit",
+      "description": "HD 136352 b crossing its star, as TESS recorded it: 3 sectors (65, 102, 103) of the SPOC pipeline's 2-minute light curves of TIC 136916387, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 16-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-136352b-transit.svg",
+      "metadata": {
+        "tic": "TIC 136916387",
+        "sectors": [
+          65,
+          102,
+          103
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-136352b",
+      "sources": [
+        "photometry/tess/tess2023124020739-s0065-0000000136916387-0259-s_lc.fits",
+        "photometry/tess/tess2026086090000-s0102-0000000136916387-0304-s_lc.fits",
+        "photometry/tess/tess2026111101500-s0103-0000000136916387-0305-s_lc.fits"
+      ],
+      "durationHours": 3.935,
+      "binMinutes": 16,
+      "notes": [
+        "TESS 2-min SPOC · sectors 65, 102, 103",
+        "Folded on the app's orbit; 16-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

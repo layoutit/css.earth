@@ -8,7 +8,7 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "2 Earth radii",
+        "value": "2.0 Earth radii",
         "source": {
           "catalogueId": "publication-2025a-a-693a-90b",
           "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.011 Jupiter masses",
+        "value": "3.6 Earth masses",
         "source": {
           "catalogueId": "publication-2025a-a-693a-90b",
           "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B",
@@ -79,7 +79,19 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "hr-858b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hr-858b/hr-858b-system-orbits.svg",
+      "alt": "The orbits of HR 858's planets in this map from above, to scale, with HR 858 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hr-858b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

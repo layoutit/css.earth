@@ -1,0 +1,93 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-97658b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-97658b-orbits",
+      "title": "HD 97658 b: orbits around HD 97658",
+      "output": "hd-97658b-system-orbits.svg",
+      "system": "hd-97658",
+      "highlight": "hd-97658b",
+      "description": "The orbits of HD 97658's planets in this map from above, to scale, with HD 97658 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 9.4893037 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "hd-97658b-transmission",
+      "title": "HD 97658 b: transmission spectrum",
+      "description": "HD 97658 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 28 measured bins from Knutson et al. 2014 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "hd-97658b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2014ApJ...794..155K/abstract",
+        "table": "transitspec",
+        "bins": 28
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 28
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1,
+        "maximum": 1.75,
+        "ticks": [
+          1,
+          1.25,
+          1.5,
+          1.75
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 0.085,
+        "maximum": 0.105,
+        "ticks": [
+          0.085,
+          0.09,
+          0.095,
+          0.1,
+          0.105
+        ]
+      },
+      "notes": [
+        "Knutson et al. 2014",
+        "Hubble Space Telescope satellite, Wide Field Camera…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-97658b-transit",
+      "title": "HD 97658 b: its transit",
+      "description": "HD 97658 b crossing its star, as TESS recorded it: 2 sectors (22, 49) of the SPOC pipeline's 2-minute light curves of TIC 82308728, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-97658b-transit.svg",
+      "metadata": {
+        "tic": "TIC 82308728",
+        "sectors": [
+          22,
+          49
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-97658b",
+      "sources": [
+        "photometry/tess/tess2020049080258-s0022-0000000082308728-0174-s_lc.fits",
+        "photometry/tess/tess2022057073128-s0049-0000000082308728-0221-s_lc.fits"
+      ],
+      "durationHours": 2.8488,
+      "binMinutes": 11,
+      "notes": [
+        "TESS 2-min SPOC · sectors 22, 49",
+        "Folded on the app's orbit; 11-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

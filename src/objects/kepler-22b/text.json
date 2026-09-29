@@ -2,14 +2,14 @@
   "schema": "cssearth-object-text@1",
   "objectId": "kepler-22b",
   "card": {
-    "text": "Kepler-22 b crosses its star every 290 days and is 2.1 Earth radii across, found in 2011.",
+    "text": "Kepler-22 b was found in 2011 by Kepler as it crossed its star.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-202346211",
         "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
         "label": "Bonomo et al. 2023",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): pl_orbper 289.863876, pl_radj 0.18734977, pl_bmassj 0.0286318"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2011, disc_facility Kepler, sy_pnum 1; pl_orbper 289.863876, pl_radj 0.18734977, pl_bmassj 0.0286318"
       },
       {
         "catalogueId": "wikipedia-kepler-22b",
@@ -22,14 +22,14 @@
     ]
   },
   "introduction": {
-    "text": "Kepler-22 b transits Kepler-22 every 290 days and is 2.1 Earth radii across. Orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
+    "text": "It is the only planet known around Kepler-22. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-202346211",
         "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
         "label": "Bonomo et al. 2023",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): pl_orbper 289.863876, pl_radj 0.18734977, pl_bmassj 0.0286318"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2011, disc_facility Kepler, sy_pnum 1; pl_orbper 289.863876, pl_radj 0.18734977, pl_bmassj 0.0286318"
       },
       {
         "catalogueId": "wikipedia-kepler-22b",

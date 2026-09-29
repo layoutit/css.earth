@@ -99,6 +99,8 @@ export function parseObjectText(input: unknown, objectId?: string): ObjectText {
 }
 
 export function parsePreparedText(input: unknown, objectId?: string): PreparedObjectText {
+  // A body whose bake stopped before its text step has no file; say which body and which step, not only that a record is missing.
+  if (input === undefined) throw new TypeError(`${objectId ?? 'An object'}: prepared/text.json is missing; run the bake's text step (node tools/prepare/cli/prepare-object.mts ${objectId ?? '<id>'} --from text).`);
   const value = sourceObject(input, ['schema', 'objectId', 'card', 'introduction', 'datasets']);
   if (value.schema !== PREPARED_TEXT_SCHEMA) throw new TypeError('Unsupported prepared text schema.');
   const id = identity(value, objectId, 'Prepared text');

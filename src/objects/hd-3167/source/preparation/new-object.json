@@ -1,0 +1,49 @@
+{
+  "id": "hd-3167",
+  "name": "HD 3167",
+  "system": "HD 3167 system",
+  "description": "Star of 5,338 K, 47.3 parsecs away, with 2 transiting planets.",
+  "target": "HD 3167",
+  "gaia": "2554032474712538880",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+    "credit": "Coy et al. 2026"
+  },
+  "radius": {
+    "value": 0.871,
+    "source": "Coy et al. 2026, the stellar radius of the default parameter set of HD 3167 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.864,
+    "source": "Coy et al. 2026, the stellar mass of the default parameter set of HD 3167 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+    "uncertainty": 0.039
+  },
+  "temperature": {
+    "value": 5338,
+    "source": "Coy et al. 2026, the stellar temperature of the default parameter set of HD 3167 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract",
+    "uncertainty": 58
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross HD 3167 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Coy et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname COY_ET_AL_2026): st_teff 5338, st_rad 0.871, st_mass 0.864",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_3167",
+      "title": "HD 3167",
+      "revision": "1376263409",
+      "card": "HD 3167 is a single, orange-hued star in the zodiac constellation of Pisces that hosts a system with four exoplanets.",
+      "introduction": "The star is too faint to be seen with the naked eye, having an apparent visual magnitude of 8.97."
+    }
+  },
+  "notes": [
+    "HD 3167 d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)",
+    "HD 3167 e: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 2971
+}

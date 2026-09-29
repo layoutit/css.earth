@@ -5,6 +5,7 @@
  *   node tools/objects/new-object.mts --bake <id>...
  *   node tools/objects/new-object.mts --refresh <id>... [--check | --bake]
  *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
+ *   node tools/objects/new-object.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node tools/objects/new-object.mts --star-limb <id>... [--bake]
  *   node tools/objects/new-object.mts --draft-photometry <id>... --out entries.json
  *
@@ -47,6 +48,21 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { entries, notes } = await draftUltracoolPhotometry(liveArchive, planets);
     await writeFile(out, `${JSON.stringify(entries, null, 2)}\n`);
     process.stdout.write(`${entries.map(entry => `${entry.id}: ${entry.photometry.bands.map(band => `${band.band} ${band.value} µJy`).join(', ')}`).join('\n')}\n${notes.join('\n')}\n${entries.length} of ${ids.length} planets drafted to ${out}; apply with --photometry ${out}\n`);
+  } else if (args.includes('--charts') && !specPath) {
+    // Charts for the archive planets of hosts already in the tree: `--charts HOST_ID...` (new-object/planet-charts.mts).
+    const { chartHosts } = await import('./new-object/planet-charts.mts'), { liveArchive } = await import('./new-object/archives.mts');
+    const lines = await chartHosts(process.cwd(), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
+    process.stdout.write(`${lines.length} planet(s) charted. Bake them from the prepare step: node packages/bake/cli/prepare-object.mts <id>... --from prepare\n`);
+  } else if (args.includes('--retime') && !specPath) {
+    // Orbit timing of archive planets after the ephemeris rule changes: `--retime HOST_ID...` (new-object/retime.mts).
+    const { retimeHosts } = await import('./new-object/retime.mts'), { liveArchive } = await import('./new-object/archives.mts');
+    const lines = await retimeHosts(process.cwd(), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
+    process.stdout.write(`${lines.length} planet(s) considered. Rebuild the astronomy package, then bake the changed ones.\n`);
+  } else if (args.includes('--retext') && !specPath) {
+    // Drafted text and size facts of archive hosts and their planets, after a template change: `--retext HOST_ID...` (new-object/retext.mts).
+    const { retextHosts } = await import('./new-object/retext.mts'), { liveArchive } = await import('./new-object/archives.mts');
+    const lines = await retextHosts(process.cwd(), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
+    process.stdout.write(`${lines.length} package(s) considered. Bake the changed ones from the text step: node packages/bake/cli/prepare-object.mts <id>... --from catalogue\n`);
   } else if (option('phase-curve') !== undefined && !specPath) {
     // Heat maps from published phase-curve fits for planets already in the tree: `--phase-curve entries.json` (new-object/phase-curve-lens.mts).
     const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./new-object/phase-curve-lens.mts'), { relensExisting } = await import('./new-object/planet-lenses.mts'), { liveArchive } = await import('./new-object/archives.mts');

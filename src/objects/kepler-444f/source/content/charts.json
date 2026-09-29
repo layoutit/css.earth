@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-444f/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-444f-orbits",
+      "title": "Kepler-444 f: orbits around Kepler-444",
+      "output": "kepler-444f-system-orbits.svg",
+      "system": "kepler-444",
+      "highlight": "kepler-444f",
+      "description": "The orbits of Kepler-444's planets in this map from above, to scale, with Kepler-444 f highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 9.74048028 d"
+      }
+    }
+  ]
+}

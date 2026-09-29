@@ -2,26 +2,26 @@
   "schema": "cssearth-object-text@1",
   "objectId": "hd-63433c",
   "card": {
-    "text": "HD 63433 c crosses its star every 20.5 days and is 2.7 Earth radii across, found in 2020.",
+    "text": "HD 63433 c was found in 2020 by TESS as it crossed its star.",
     "sources": [
       {
         "catalogueId": "publication-2023a-a-671a-163m",
         "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract",
         "label": "Mallorqu&iacute;n et al. 2023",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): pl_orbper 20.5438281, pl_radj 0.24, pl_bmassj 0.04889116"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 20.5438281, pl_radj 0.24, pl_bmassj 0.04889116"
       }
     ]
   },
   "introduction": {
-    "text": "HD 63433 c transits HD 63433 every 20.5 days and is 2.7 Earth radii across. Orbit and size follow Mallorqu&iacute;n et al. 2023's fit, the archive's default.",
+    "text": "It is one of 3 planets known around HD 63433. Its orbit and size follow Mallorquín et al. 2023's fit, the archive's default.",
     "sources": [
       {
         "catalogueId": "publication-2023a-a-671a-163m",
         "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract",
         "label": "Mallorqu&iacute;n et al. 2023",
         "checked": "2026-09-24",
-        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): pl_orbper 20.5438281, pl_radj 0.24, pl_bmassj 0.04889116"
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MALLORQU_AMP_IACUTE_N_ET_AL__2023): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 20.5438281, pl_radj 0.24, pl_bmassj 0.04889116"
       }
     ]
   },

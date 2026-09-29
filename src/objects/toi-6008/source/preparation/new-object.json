@@ -1,0 +1,45 @@
+{
+  "id": "toi-6008",
+  "name": "TOI-6008",
+  "system": "TOI-6008 system",
+  "description": "Star of 3,075 K, 23.1 parsecs away, with 1 transiting planet.",
+  "target": "TOI-6008",
+  "gaia": "2168280502430898944",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract",
+    "credit": "Barkaoui et al. 2024"
+  },
+  "radius": {
+    "value": 0.242,
+    "source": "Barkaoui et al. 2024, the stellar radius of the default parameter set of TOI-6008 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 0.23,
+    "source": "Barkaoui et al. 2024, the stellar mass of the default parameter set of TOI-6008 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract",
+    "uncertainty": 0.011
+  },
+  "temperature": {
+    "value": 3075,
+    "source": "Barkaoui et al. 2024, the stellar temperature of the default parameter set of TOI-6008 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract",
+    "uncertainty": 75
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-6008 b crosses TOI-6008 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Barkaoui et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BARKAOUI_ET_AL_2024): st_teff 3075, st_rad 0.242, st_mass 0.23"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -51.47,
+    "uncertainty": 0.0221,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2168280502430898944 (quality A), from 2018MNRAS.475.1960F; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.475.1960F/abstract"
+  },
+  "order": 2966
+}

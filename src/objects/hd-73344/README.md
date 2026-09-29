@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 73344 is a star of 6,253 K 35.3 parsecs away. Its planet HD 73344 b crosses it, which is how it was found and sized. It is also HD 73344, HIP 42403. This account was drafted from Sulis et al. 2024's values; the sections below are the data's own.
+Its radius and temperature follow Sulis et al. 2024. It is also HD 73344, HIP 42403. This account was drafted from Sulis et al. 2024's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 666427539629086976, parallax 28.376 ± 0.021 mas (35.24 pc). Radius 1.22 +/- 0.04 solar radii from Sulis et al. 2024, the stellar radius of the default parameter set of HD 73344 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract). Mass 1.2 +/- 0.02 solar masses from Sulis et al. 2024, the stellar mass of the default parameter set of HD 73344 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract). Temperature 6,252.6 K from Sulis et al. 2024, the stellar temperature of the default parameter set of HD 73344 b in the NASA Exoplanet Archive. log g 4.34 from the mass and radius.
 

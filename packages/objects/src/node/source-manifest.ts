@@ -90,7 +90,9 @@ export function validateSourceManifest(objectId: string, input: unknown): Readon
   const ids = new Set<string>();
   const paths = new Set<string>();
   for (const input of value.inputs) {
-    parseSourceBinding(input.sourceBinding);
+    // A missing or malformed binding names the manifest entry, not only that a record was expected.
+    try { parseSourceBinding(input.sourceBinding); }
+    catch (error) { throw new TypeError(`${objectId}: source/manifest.json input ${String(input.id)} (${String(input.path)}) sourceBinding: ${(error as Error).message}`); }
     validateEntryBase(objectId, input, "input", paths);
     for (const field of [
       "id",

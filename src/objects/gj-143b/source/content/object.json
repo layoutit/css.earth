@@ -34,7 +34,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "0.071 Jupiter masses",
+        "value": "23 Earth masses",
         "source": {
           "catalogueId": "publication-2019apj-875l-7d",
           "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D",
@@ -79,7 +79,30 @@
       }
     ]
   },
-  "charts": [],
+  "charts": [
+    {
+      "id": "gj-143b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/gj-143b/gj-143b-system-orbits.svg",
+      "alt": "The orbits of GJ 143's planets in this map from above, to scale, with GJ 143 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "gj-143b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D"
+      }
+    },
+    {
+      "id": "gj-143b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/gj-143b/gj-143b-transit.svg",
+      "alt": "GJ 143 b crossing its star, as TESS recorded it: 3 sectors (95, 96, 97) of the SPOC pipeline's 2-minute light curves of TIC 279741379, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "gj-143b-tess-sector-95",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025206162959-s0095-0000000279741379-0292-s_lc.fits"
+      }
+    }
+  ],
   "resources": [
     {
       "label": "Research",

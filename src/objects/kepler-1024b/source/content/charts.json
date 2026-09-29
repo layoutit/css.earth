@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-1024b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-1024b-orbits",
+      "title": "Kepler-1024 b: orbits around Kepler-1024",
+      "output": "kepler-1024b-system-orbits.svg",
+      "system": "kepler-1024",
+      "highlight": "kepler-1024b",
+      "description": "The orbits of Kepler-1024's planets in this map from above, to scale, with Kepler-1024 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 66.41604004 d"
+      }
+    }
+  ]
+}

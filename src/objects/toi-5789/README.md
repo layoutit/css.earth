@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-5789 is a star of 5,185 K 20.5 parsecs away. Its planet TOI-5789 c crosses it, which is how it was found and sized. It is also HD 191785, HIP 99452. This account was drafted from Bonomo et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow Bonomo et al. 2026. It is also HD 191785, HIP 99452. This account was drafted from Bonomo et al. 2026's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 1809360187275432832, parallax 48.926 ± 0.023 mas (20.44 pc). Radius 0.833 +/- 0.023 solar radii from Bonomo et al. 2026, the stellar radius of the default parameter set of TOI-5789 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract). Mass 0.821 +/- 0.032 solar masses from Bonomo et al. 2026, the stellar mass of the default parameter set of TOI-5789 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.197B/abstract). Temperature 5,185 K from Bonomo et al. 2026, the stellar temperature of the default parameter set of TOI-5789 c in the NASA Exoplanet Archive. log g 4.51 from the mass and radius.
 

@@ -2,7 +2,7 @@
 
 ## Sources
 
-TOI-2134 is a star of 4,580 K 22.6 parsecs away. Its planets b, c cross it, which is how they were found and sized. This account was drafted from Rescigno et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow Rescigno et al. 2026. This account was drafted from Rescigno et al. 2026's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4610267648427698816, parallax 44.109 ± 0.014 mas (22.67 pc). Radius 0.709 +/- 0.017 solar radii from Rescigno et al. 2026, the stellar radius of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract). Mass 0.744 +/- 0.027 solar masses from Rescigno et al. 2026, the stellar mass of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract). Temperature 4,580 K from Rescigno et al. 2026, the stellar temperature of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive. log g 4.61 from the mass and radius.
 

@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 97658 is a star of 5,212 K 21.6 parsecs away. Its planet HD 97658 b crosses it, which is how it was found and sized. It is also HD 97658, HIP 54906. This account was drafted from Ellis et al. 2021's values; the sections below are the data's own.
+Its radius and temperature follow Ellis et al. 2021. It is also HD 97658, HIP 54906. This account was drafted from Ellis et al. 2021's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3997075206232885888, parallax 46.376 ± 0.022 mas (21.56 pc). Radius 0.728 +/- 0.008 solar radii from Ellis et al. 2021, the stellar radius of the default parameter set of HD 97658 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract). Mass 0.85 +/- 0.08 solar masses from Ellis et al. 2021, the stellar mass of the default parameter set of HD 97658 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract). Temperature 5,212 K from Ellis et al. 2021, the stellar temperature of the default parameter set of HD 97658 b in the NASA Exoplanet Archive. log g 4.64 from the mass and radius.
 

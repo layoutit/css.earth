@@ -2,7 +2,7 @@
 
 ## Sources
 
-Kepler-22 is a star of 5,596 K 195 parsecs away. Its planet Kepler-22 b crosses it, which is how it was found and sized. This account was drafted from Bonomo et al. 2023's values; the sections below are the data's own.
+Its radius and temperature follow Bonomo et al. 2023. This account was drafted from Bonomo et al. 2023's values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2127941757262806656, parallax 5.063 ± 0.011 mas (197.52 pc). Radius 0.869 +/- 0.011 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Mass 0.857 +/- 0.051 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). Temperature 5,596 K from Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive. log g 4.49 from the mass and radius.
 
