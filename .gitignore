@@ -26,6 +26,8 @@ output/playwright/
 # Reacquirable binary source inputs. Source manifests, hashes, provenance,
 # licenses, configuration, and authored source modules remain tracked.
 src/objects/*/source/**/*.csv
+# LGGS M31 star table (12.5 MB); restored from its CDS origin (src/objects/m31/source/lggs-stars/points.json).
+src/objects/m31/source/lggs-stars/table4.dat.gz
 src/objects/*/source/**/*.fits
 src/objects/*/source/**/*.fit
 src/objects/*/source/**/*.gif

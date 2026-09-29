@@ -331,9 +331,14 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
       const bytes = Buffer.from(output.text);
       return { filename: output.path.slice(resolve(root, prefix).length + 1), bytes: bytes.length, sha256: sha256(bytes) };
     });
-    const preparedAssets = descriptor.type === 'image-layer-bank'
+    // An image-layer bank's own entries are its bank, layers, record and presentation; a retired layer leaves with the old
+    // bank, and prepared files other tools write beside it (catalogue dot banks) stay.
+    const imageLayerAssets = descriptor.type === 'image-layer-bank'
       ? [{ filename: bankPath.slice(prefix.length), bytes: installedBank!.length, sha256: sha256(installedBank!) },
-        ...layerOutputs.map(output => ({ filename: output.url.slice(prefix.length), bytes: output.bytes, sha256: output.sha256 })), ...preparedOutputs]
+        ...layerOutputs.map(output => ({ filename: output.url.slice(prefix.length), bytes: output.bytes, sha256: output.sha256 })), ...preparedOutputs] : null;
+    const preparedAssets = imageLayerAssets
+      ? [...(current?.assets.filter(asset => asset.location === 'prepared' && !asset.filename.startsWith('layers/')
+          && !imageLayerAssets.some(own => own.filename === asset.filename)) ?? []), ...imageLayerAssets]
       : [...(current?.assets.filter(asset => asset.location === 'prepared' && !preparedOutputs.some(output => output.filename === asset.filename)) ?? []), ...preparedOutputs];
     const next = mergeInventory(mergeInventory(current, 'public', publicAssets), 'prepared', preparedAssets);
     outputs.push({ path: resolve(root, `${base}/inventory.json`), text: inventoryText(next) });

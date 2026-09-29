@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "pandromeda-cepheids",
+  "table": {
+    "path": "table.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/145/106/table.dat",
+    "bytes": 1271697,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        5,
+        21
+      ],
+      "raDeg": [
+        23,
+        30
+      ],
+      "decDeg": [
+        32,
+        39
+      ],
+      "periodDaysR": [
+        61,
+        66
+      ],
+      "periodDaysI": [
+        68,
+        73
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": {
+        "atCentrePc": 182,
+        "perKpcPc": 16
+      },
+      "source": "braun-1991-m31-neutral-gas",
+      "basis": "Braun (1991, Sect. 5.3, eq. 13) fits M31's H I layer with an exponential whose scale height rises linearly with radius, 182 + 16 R_kpc pc (about 340 pc at the 10 kpc star-forming ring), with considerable scatter. It is the gas these young objects form from; young stars sit in the cold, thinner part of it, so for them it is an upper value, used as a presentation choice. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "kodric-2013-m31-cepheids",
+  "meaning": "Cepheids found by Kodric et al. (2013) in the first year of Pan-STARRS1 PAndromeda monitoring, which covers the whole disc: one dot per Cepheid at its catalogue sky position. The periods are kept for a later age cut; none is applied here.",
+  "appearance": {
+    "colorCss": "#ffe2a8",
+    "radiusPx": 0.75,
+    "opacity": 0.54,
+    "note": "Presentation only: the Milky Way Cepheid layer's colour, size and opacity. Toned to 60% on M31, whose photograph is darker than the Milky Way backing: at full tone these dots outshone the disc. Planetary nebulae keep full tone, since dimmed dots read as dark specks on the bright bulge."
+  }
+}

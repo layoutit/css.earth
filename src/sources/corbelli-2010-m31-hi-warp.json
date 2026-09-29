@@ -1,0 +1,53 @@
+{
+  "id": "corbelli-2010-m31-hi-warp",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A wide-field H I mosaic of Messier 31. II. The disk warp, rotation and the dark matter halo",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/200913297"
+    },
+    {
+      "type": "arxiv",
+      "value": "0912.4133"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0912.4133",
+      "label": "arXiv:0912.4133"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1051/0004-6361/200913297",
+      "label": "A&A 511, A89"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0912.4133",
+      "checkedOn": "2026-09-29",
+      "locator": "Sect. 2: average inclination 77.7° and position angle 38° for the disk between 10 and 25 kpc; Table 1: tilted-ring i and θ from 8.5 to 36.5 kpc"
+    }
+  ],
+  "creators": [
+    "E. Corbelli",
+    "S. Lorenzoni",
+    "R. Walterbos",
+    "R. Braun",
+    "D. Thilker"
+  ],
+  "publisher": "A&A 511, A89",
+  "publicationDate": "2010",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Corbelli et al. (2010), A&A 511, A89.",
+      "scope": "Disc inclination and position angle",
+      "evidence": "https://arxiv.org/abs/0912.4133"
+    }
+  ]
+}

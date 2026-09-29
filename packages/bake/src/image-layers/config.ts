@@ -5,14 +5,30 @@ export interface ImageLayerRecipe {
   schema: 'cssearth-image-layer-recipe@1';
   id: string;
   source: { path: string; dimensions: [number, number]; originalDimensions: [number, number];
-    parentPixelWindow?: [number, number, number, number]; publisherUrl: string; downloadUrl: string; credit: string; license: 'CC-BY-4.0' };
+    parentPixelWindow?: [number, number, number, number]; publisherUrl: string; downloadUrl: string; credit: string; license: 'CC-BY-4.0';
+    /** Milky Way stars in front of the galaxy, removed from the photograph before its layers are cut (./foreground.ts). */
+    foregroundStars?: { path: string; raDegColumn: string; decDegColumn: string; gMagColumn: string; source: string; basis: string };
+    /** Companion galaxies removed the same way, by their rows (key column) in a repository catalogue with the Local Volume
+     * Database's columns: ra, dec (deg), rhalf (arcmin), position_angle (deg), ellipticity. */
+    companions?: { catalogue: string; keys: string[]; source: string; basis: string } };
   observation: { centerRaDeg: number; centerDecDeg: number; fieldOfViewDeg: [number, number]; northClockwiseDeg: number };
   target: { centerRaDeg: number; centerDecDeg: number; distancePc: number };
   geometry: { kind: 'inclined-disk' | 'line-of-sight-envelope'; inclinationDeg: number; lineOfNodesPaDeg: number;
-    thicknessKpc: number; supportRadiusKpc: number; supportTaperFraction: number; depthWeights: number[]; depthScales: number[] };
-  bake: { maxFacePixels: number; diffuseFacePixels: number; crossAxisSlices: number; crossAxisAlongPixels: number; crossAxisDepthPixels: number;
+    thicknessKpc: number; supportRadiusKpc: number; supportTaperFraction: number; depthWeights: number[]; depthScales: number[];
+    /** A published bulge-plus-disc fit of the sky light (./bulge.ts): Sérsic bulge, exponential disc, one position angle. */
+    bulge?: { source: string; positionAngleDeg: number; sersicIndex: number; halfLightRadiusKpc: number; surfaceBrightnessAtHalfLight: number;
+      skyEllipticity: number; disc: { centralSurfaceBrightness: number; scaleLengthKpc: number; skyEllipticity: number };
+      /** How far the bulge's slices reach: radius on the sky and height either side of the disc, kpc. */
+      extentKpc: { radius: number; height: number } } };
+  bake: { maxFacePixels: number; diffuseFacePixels: number;
+    /** A levels adjustment of the photograph (0-1 black and white points, then gamma), after star and companion removal. */
+    levels?: { black: number; white: number; gamma: number; basis: string };
+    /** Ties the photograph's whole-galaxy colour to a published integrated B-V: red and blue are scaled in linear light so
+     * the light-weighted mean over the disc matches the catalogue colour of that index; green and all structure stay. */
+    colourTie?: { bv: number; source: string; basis: string }; bulgeSlices?: number; bulgeFacePixels?: number; bulgeCrossSlices?: number; crossAxisSlices: number; crossAxisAlongPixels: number; crossAxisDepthPixels: number;
     backgroundFloor: number; edgeTaperFraction: number; diffuseFraction: number; diffuseSigmaPixels: number;
-    encoding: { format: 'webp'; quality: number } };
+    /** `alphaQuality` (0-100, default 100: lossless) is WebP's alpha quality; a lower one trades faint alpha noise for bytes. */
+    encoding: { format: 'webp'; quality: number; alphaQuality?: number } };
   provenance: { path: string };
 }
 
@@ -35,6 +51,40 @@ const digest = (v: unknown, at: string): string => {
 };
 const path = (v: unknown): string => {
   const p = text(v, 'source path'); if (p.startsWith('/') || p.split('/').includes('..') || /[\\\0]/.test(p)) throw new TypeError('Path must be contained.'); return p;
+};
+const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']> => {
+  const b = object(v, 'geometry.bulge'), d = object(b.disc, 'geometry.bulge.disc'), e = object(b.extentKpc, 'geometry.bulge.extentKpc');
+  const ellipticity = (x: unknown, at: string) => { const n = finite(x, at); if (n < 0 || n >= 1) throw new TypeError(`${at} must be in [0, 1); got ${n}.`); return n; };
+  return { source: text(b.source, 'geometry.bulge.source'), positionAngleDeg: finite(b.positionAngleDeg, 'geometry.bulge.positionAngleDeg'),
+    sersicIndex: positive(b.sersicIndex, 'geometry.bulge.sersicIndex'), halfLightRadiusKpc: positive(b.halfLightRadiusKpc, 'geometry.bulge.halfLightRadiusKpc'),
+    surfaceBrightnessAtHalfLight: finite(b.surfaceBrightnessAtHalfLight, 'geometry.bulge.surfaceBrightnessAtHalfLight'), skyEllipticity: ellipticity(b.skyEllipticity, 'geometry.bulge.skyEllipticity'),
+    disc: { centralSurfaceBrightness: finite(d.centralSurfaceBrightness, 'geometry.bulge.disc.centralSurfaceBrightness'), scaleLengthKpc: positive(d.scaleLengthKpc, 'geometry.bulge.disc.scaleLengthKpc'),
+      skyEllipticity: ellipticity(d.skyEllipticity, 'geometry.bulge.disc.skyEllipticity') },
+    extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height') } };
+};
+const alphaQualityOf = (v: unknown): number => {
+  const n = finite(v, 'encoding.alphaQuality'); if (!Number.isInteger(n) || n < 0 || n > 100) throw new TypeError(`encoding.alphaQuality must be an integer 0-100; got ${n}.`); return n;
+};
+const colourTieOf = (v: unknown): NonNullable<ImageLayerRecipe['bake']['colourTie']> => {
+  const t = object(v, 'bake.colourTie'), bv = finite(t.bv, 'bake.colourTie.bv');
+  if (bv < -0.4 || bv > 4) throw new TypeError(`bake.colourTie.bv must be a B-V index in [-0.4, 4]; got ${bv}.`);
+  return { bv, source: text(t.source, 'bake.colourTie.source'), basis: text(t.basis, 'bake.colourTie.basis') };
+};
+const levelsOf = (v: unknown): NonNullable<ImageLayerRecipe['bake']['levels']> => {
+  const l = object(v, 'bake.levels'), black = finite(l.black, 'bake.levels.black'), white = finite(l.white, 'bake.levels.white'), gamma = positive(l.gamma, 'bake.levels.gamma');
+  if (!(black >= 0 && white <= 1 && black < white)) throw new TypeError(`bake.levels needs 0 <= black < white <= 1; got black ${black}, white ${white}.`);
+  return { black, white, gamma, basis: text(l.basis, 'bake.levels.basis') };
+};
+const companionsOf = (v: unknown): NonNullable<ImageLayerRecipe['source']['companions']> => {
+  const c = object(v, 'source.companions'), catalogue = text(c.catalogue, 'source.companions.catalogue');
+  if (!catalogue.startsWith('src/') || catalogue.split('/').includes('..')) throw new TypeError(`source.companions.catalogue must be a repository path under src/; got ${JSON.stringify(catalogue)}.`);
+  if (!Array.isArray(c.keys) || !c.keys.length) throw new TypeError(`source.companions.keys must list catalogue keys; got ${JSON.stringify(c.keys)}.`);
+  return { catalogue, keys: c.keys.map((key, i) => text(key, `source.companions.keys[${i}]`)), source: text(c.source, 'source.companions.source'), basis: text(c.basis, 'source.companions.basis') };
+};
+const foreground = (v: unknown): NonNullable<ImageLayerRecipe['source']['foregroundStars']> => {
+  const f = object(v, 'source.foregroundStars');
+  return { path: path(f.path), raDegColumn: text(f.raDegColumn, 'foregroundStars.raDegColumn'), decDegColumn: text(f.decDegColumn, 'foregroundStars.decDegColumn'),
+    gMagColumn: text(f.gMagColumn, 'foregroundStars.gMagColumn'), source: text(f.source, 'foregroundStars.source'), basis: text(f.basis, 'foregroundStars.basis') };
 };
 const pair = (v: unknown, at: string, integers = false): [number, number] => {
   if (!Array.isArray(v) || v.length !== 2) throw new TypeError(`${at} must contain two values.`);
@@ -75,14 +125,19 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
   return { schema: r.schema, id: text(r.id, 'id'), source: { path: path(s.path),
     dimensions: pair(s.dimensions, 'source.dimensions', true), originalDimensions: pair(s.originalDimensions, 'source.originalDimensions', true),
     ...(s.parentPixelWindow===undefined?{}:{parentPixelWindow:window(s.parentPixelWindow)}),
-    publisherUrl: text(s.publisherUrl, 'publisherUrl'), downloadUrl: text(s.downloadUrl, 'downloadUrl'), credit: text(s.credit, 'credit'), license: s.license },
+    publisherUrl: text(s.publisherUrl, 'publisherUrl'), downloadUrl: text(s.downloadUrl, 'downloadUrl'), credit: text(s.credit, 'credit'), license: s.license,
+    ...(s.foregroundStars===undefined?{}:{foregroundStars:foreground(s.foregroundStars)}),
+    ...(s.companions===undefined?{}:{companions:companionsOf(s.companions)}) },
     observation: { centerRaDeg: finite(o.centerRaDeg, 'centerRaDeg'), centerDecDeg: finite(o.centerDecDeg, 'centerDecDeg'),
       fieldOfViewDeg: pair(o.fieldOfViewDeg, 'fieldOfViewDeg'), northClockwiseDeg: finite(o.northClockwiseDeg, 'northClockwiseDeg') },
     target: { centerRaDeg: finite(t.centerRaDeg, 'target RA'), centerDecDeg: finite(t.centerDecDeg, 'target Dec'), distancePc: positive(t.distancePc, 'distancePc') },
     geometry: { kind, inclinationDeg, lineOfNodesPaDeg: finite(g.lineOfNodesPaDeg, 'lineOfNodesPaDeg'),
       thicknessKpc: positive(g.thicknessKpc, 'thicknessKpc'), supportRadiusKpc: positive(g.supportRadiusKpc, 'supportRadiusKpc'),
-      supportTaperFraction, depthWeights: weights, depthScales: scales },
-    bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
+      supportTaperFraction, depthWeights: weights, depthScales: scales, ...(g.bulge===undefined?{}:{bulge:bulgeOf(g.bulge)}) },
+    bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
+      ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
+      ...(b.colourTie===undefined?{}:{colourTie:colourTieOf(b.colourTie)}),
+      ...(g.bulge===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
-      encoding: { format: 'webp', quality } }, provenance: { path: path(p.path) } };
+      encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };
 }

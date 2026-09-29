@@ -1,0 +1,65 @@
+{
+  "id": "kodric-2013-m31-cepheids",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Properties of M31. II. A Cepheid disk sample derived from the first year of PS1 PAndromeda data",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0004-6256/145/4/106"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/AJ/145/106"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/0004-6256/145/4/106",
+      "label": "AJ 145, 106"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/145/106",
+      "label": "CDS J/AJ/145/106"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/145/106/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table.dat: RAdeg, DEdeg (J2000), Perr/Peri periods; 2,009 Cepheids"
+    }
+  ],
+  "creators": [
+    "M. Kodric",
+    "A. Riffeser",
+    "U. Hopp",
+    "S. Seitz",
+    "J. Koppenhoefer",
+    "R. Bender",
+    "C. Goessl",
+    "J. Snigula",
+    "C. -. Lee",
+    "C. -. Ngeow",
+    "K. C. Chambers",
+    "E. A. Magnier",
+    "P. A. Price",
+    "W. S. Burgett",
+    "K. W. Hodapp",
+    "N. Kaiser",
+    "R. -. Kudritzki"
+  ],
+  "publisher": "AJ 145, 106",
+  "publicationDate": "2013",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kodric et al. (2013), AJ 145, 106.",
+      "scope": "Cepheid positions",
+      "evidence": "https://doi.org/10.1088/0004-6256/145/4/106"
+    }
+  ]
+}

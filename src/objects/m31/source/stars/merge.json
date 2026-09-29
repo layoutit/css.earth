@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "stars",
+  "meaning": "M31's stars from the Local Group Galaxies Survey as dots on its photograph's disc, after the Gaia foreground cut, thinned evenly so the renderer can draw them: denser where the galaxy has more stars.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "lggs-stars",
+      "withinPcOfCentre": 27200,
+      "keepEvery": 71,
+      "basis": "Presentation choice: only where the photograph is (the image layers' 27.2 kpc support radius, recipe.json), and one star in 71 in catalogue order, which keeps 4,969 of 352,752 within the renderer's 5,000-dot bank and thins every region alike, so the density contrast stays the survey's."
+    }
+  ],
+  "colourTowardWhite": 0.5,
+  "colourTowardWhiteBasis": "Presentation choice: the Milky Way and M31 dots' value (milky-way/source/local-3kpc/merge.json), so every galaxy's dots read as the same tints of starlight.",
+  "colourGamma": 1.6,
+  "colourGammaBasis": "Presentation choice: the Milky Way and M31 dots' value (milky-way/source/local-3kpc/merge.json)."
+}
