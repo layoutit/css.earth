@@ -26,6 +26,8 @@ centres each billboard on black at 1200×630 and writes `dist/social/<id>.jpg`
 with neither, such as catalogue focus pages, fall back to the Earth capture.
 None of these images adds requests to ordinary page loads.
 
+![Share images drawn from the arrival billboards of Betelgeuse, WASP-43 b, Phobos and Comet 67P](images/share-cards.webp)
+
 ## Refresh previews
 
 Use prepared assets matching the inventories and real Chrome:
