@@ -173,20 +173,20 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1051/0004-6361/202346196",
-      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "epic-229045701-stellar-color",
           "epic-229045701-claret-2011-limb-darkening",
           "epic-229045701-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."

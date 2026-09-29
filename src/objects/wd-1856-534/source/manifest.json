@@ -196,13 +196,13 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/archive/",
-      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by packages/telescope-cli/authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
+        "generator": "packages/telescope-cli/authoring/stellar-spectra/author.mts",
         "inputs": [
           "wd-1856-534-stellar-color",
           "wd-1856-534-gaia-dr3-xp-sampled",
@@ -211,7 +211,7 @@
           "wd-1856-534-vanderburg-2020-limb-darkening"
         ]
       },
-      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
+      "generator": "packages/telescope-cli/authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."

@@ -177,7 +177,7 @@
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/wasp-43/author.mts#starMarker",
+        "generator": "packages/telescope-cli/authoring/wasp-43/author.mts#starMarker",
         "inputs": [
           "hd-110067-stellar-color",
           "hd-110067-espresso-spectrum",
@@ -185,7 +185,7 @@
           "hd-110067-published-limb-darkening"
         ]
       },
-      "generator": "tools/objects/source-authoring/wasp-43/author.mts#starMarker",
+      "generator": "packages/telescope-cli/authoring/wasp-43/author.mts#starMarker",
       "sourceBinding": {
         "kind": "local",
         "reason": "starMarker for hd-110067 applies the same measured colour and published ATLAS9 limb-darkening law as the sphere."

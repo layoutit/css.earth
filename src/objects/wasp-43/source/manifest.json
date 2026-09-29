@@ -185,13 +185,13 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.3847/1538-3881/ac5f55",
-      "credit": "Photosphere colour from the Gaia DR3 photometric temperature, dimmed toward the limb by the Patel & Espinoza (2022) TESS limb-darkening law; rendered by tools/objects/source-authoring/wasp-43/author.mts",
+      "credit": "Photosphere colour from the Gaia DR3 photometric temperature, dimmed toward the limb by the Patel & Espinoza (2022) TESS limb-darkening law; rendered by packages/telescope-cli/authoring/wasp-43/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/wasp-43/author.mts",
+        "generator": "packages/telescope-cli/authoring/wasp-43/author.mts",
         "inputs": [
           "wasp-43-stellar-color",
           "wasp-43-gaia-dr3-source",
@@ -200,7 +200,7 @@
           "wasp-43-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/wasp-43/author.mts",
+      "generator": "packages/telescope-cli/authoring/wasp-43/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The colour lens rendered as a disc with its measured limb darkening; `author.mts --check` recomputes it."

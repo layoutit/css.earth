@@ -27,7 +27,7 @@ An earlier version of this package drew 24 of those orbits, dashed. Each of them
 
 **Axis.** No rotation axis or period is measured. The display axis is celestial north at the star, placed in the plane of the sky ([rotation.json](source/preparation/rotation.json)), a convention.
 
-**Navigation marker.** A uniform disc in the spectrum's colour, rendered by [author.mts](../../../tools/objects/source-authoring/hd-189733/author.mts) (`--check` recomputes it).
+**Navigation marker.** A uniform disc in the spectrum's colour, rendered by [author.mts](../../../packages/telescope-cli/authoring/hd-189733/author.mts) (`--check` recomputes it).
 
 **On the map.** B has no surface image and hosts no planet, but its colour comes from its own spectrum. Preparation marks its discovery `sourceColor` ([prepare-object-discovery.mts](../../../site/build/prepare/prepare-object-discovery.mts)), and `discoveryVisibility` keeps such a star visible.
 

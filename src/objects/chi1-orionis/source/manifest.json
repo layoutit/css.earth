@@ -271,13 +271,13 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd039587/h_stis_ngsl_hd039587_v2.fits",
-      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "chi1-orionis-stellar-color",
           "chi1-orionis-stis-ngsl",
@@ -285,7 +285,7 @@
           "chi1-orionis-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."

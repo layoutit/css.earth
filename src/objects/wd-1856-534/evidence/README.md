@@ -8,7 +8,7 @@ These results apply to the WD 1856+534 and WD 1856+534 b packages, records and t
 - Packages: the runtime-package suite passed 75 tests over both packages. System membership, package consistency (every placed star, including this one), exoplanet radius, source records, factsheet sources, body additions, reader text, both scaffolds, title sources and the VO discovery tests passed 92 tests; one test skipped while other stars' files were not yet restored, then passed with them restored.
 - Ledgers: both `investigations.json` files parse with the shared ledger reader (5 entries each).
 - `pnpm typecheck:pr` passed.
-- Colour: `tools/objects/source-authoring/stellar-spectra/author.mts --check wd-1856-534` recomputes `#ffe2bf` (sRGB 255, 226, 191) from the committed Gaia sampled spectrum.
+- Colour: `packages/telescope-cli/authoring/stellar-spectra/author.mts --check wd-1856-534` recomputes `#ffe2bf` (sRGB 255, 226, 191) from the committed Gaia sampled spectrum.
 - Delivery: `publish-runtime-assets.mts` uploaded both packages and verified 67 keys live on `earth-assets.lowpoly.cc`.
 
 ## Inspected browser views

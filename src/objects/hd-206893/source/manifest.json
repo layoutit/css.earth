@@ -169,13 +169,13 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/archive/",
-      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "hd-206893-stellar-color",
           "hd-206893-gaia-dr3-xp-sampled",
@@ -183,7 +183,7 @@
           "hd-206893-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
