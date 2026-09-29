@@ -37,6 +37,13 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts <toolchain> install|verify`), which the
   `@cssearth/telescope/node` errors name when a toolchain is missing.
 
+The object generator behind `telescope new-object` is `src/new-object/`: `cli.mts` is the telescope's own in-process call (it
+runs from the checkout's directory), `new-object-cli.mts` is the standalone entry for the modes the telescope does not expose
+(`--star-limb`, `--thermal`, `--host-light`, `--phase-curve`, `--charts`, `--retext`, `--retime`, the shape-only scaffold), and
+`new-hosted-planet.mts` scaffolds one hosted planet. `hosted-orbits/` holds the two Python fitters `hosted.mts` runs beside it.
+The generated solar geometry (`src/platform/solar-geometry.mts`) stays generated: the entries load it with `solar-epoch.mts` and
+pass the epoch down, so no module here imports it.
+
 The sky band composer is `src/sky/` (exported as `./sky/*`): `sky-band-composite.mts` composes pinned hips2fits, AllWISE
 atlas and JWST level-3 bands on one TAN grid, and `author-sky-bands.mts` acquires and pins those bands. It moved from
 `tools/objects/observation/` because it imports this package's JWST imaging modules. `site/build/prepare/prepare-volume-provenance.mts`
