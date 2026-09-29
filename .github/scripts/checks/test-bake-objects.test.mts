@@ -32,6 +32,21 @@ test('the checkout selects the moved libraries\' own tests', () => {
     'packages/bake/src/objects/raster/observed/observed-geotiff.test.ts']) assert.ok(selected.includes(path), path);
 });
 
+test('preparation suites stay out while relocated Node suites join without object-entry imports', () => {
+  const sources: Record<string, string> = {
+    'packages/bake/src/scene/scene.test.ts': "import test from 'node:test';",
+    'packages/bake/src/density/atlas.test.ts': "import test from 'node:test';",
+    'packages/bake/src/density/volume.test.ts': "import { sourceTest } from '@cssearth/objects/node/source-test';",
+    'packages/bake/src/objects/surface-features/atlas-edge.test.ts': "import test from 'node:test';",
+    'packages/bake/src/scene/leaf-raster-scale.test.ts': "import test from 'node:test';",
+    'packages/bake/src/objects/acquisition/acquisition-request.test.ts': "import test from 'node:test';",
+  };
+  assert.deepEqual(bakeObjectTests(Object.keys(sources), path => sources[path]!), [
+    'packages/bake/src/objects/acquisition/acquisition-request.test.ts',
+    'packages/bake/src/scene/leaf-raster-scale.test.ts',
+  ]);
+});
+
 test('the tests of restored packages stay in the lane that restores them', () => {
   const root = resolve(import.meta.dirname, '../../..');
   const tracked = execFileSync('git', ['ls-files', '-z', '--', ...BAKE_OBJECT_TEST_PATHS], { cwd: root, encoding: 'utf8' }).split('\0').filter(Boolean);
