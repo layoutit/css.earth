@@ -111,7 +111,7 @@ async function imageLayerBillboard(id: string, descriptor: Record<string, unknow
 export async function prepareLensBillboards(projectRoot = process.cwd()) {
   const objects = resolve(projectRoot, 'src/objects');
   const banks: { id: string; payloadSha256: string; contextVisibility: 'galactic' | 'independent'; attached: boolean;
-    view?: { back: Vector; right: Vector; down: Vector }; radiusUnits?: number; image?: Buffer }[] = [];
+    view?: { back: Vector; right: Vector; down: Vector }; radiusUnits?: number; framingRadiusUnits?: number; image?: Buffer }[] = [];
   for (const id of (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort()) {
     let descriptor: Record<string, unknown>;
     try { descriptor = requireRecord(JSON.parse(await readFile(resolve(objects, id, 'object.json'), 'utf8'))); }
@@ -130,7 +130,10 @@ export async function prepareLensBillboards(projectRoot = process.cwd()) {
       throw new TypeError(`${id}: default lens frame differs from the descriptor frame.`);
     }
     // A cloud that accompanies a body stays dark until that body's dataset asks for it.
-    const bank = { id, payloadSha256: entry.sha256, contextVisibility, attached: data.attachedTo !== undefined } as (typeof banks)[number];
+    const framingRadiusUnits = data.framingRadiusUnits;
+    if (typeof framingRadiusUnits !== 'number' || !(framingRadiusUnits > 0)) throw new TypeError(`${id}: lenses need a positive framingRadiusUnits, got ${String(framingRadiusUnits)}.`);
+    // The authored framing radius is what the universe hangs the bank's caption under, before any lens loads.
+    const bank = { id, payloadSha256: entry.sha256, contextVisibility, attached: data.attachedTo !== undefined, framingRadiusUnits } as (typeof banks)[number];
     if (volume.impostors !== undefined) {
       const impostors = requireRecord(volume.impostors, `${id} impostors`);
       const frame = requireRecord(volume.frame) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];
@@ -161,6 +164,7 @@ export async function prepareLensBillboards(projectRoot = process.cwd()) {
     { alphaQuality: 100, effort: 6 });
   const metadata = { schema: 'cssearth-lens-billboards@1', atlas: { columns, rows, cellPx: CELL_PX, sha256: sha256(atlas) },
     banks: banks.map(bank => ({ id: bank.id, payloadSha256: bank.payloadSha256, contextVisibility: bank.contextVisibility, attached: bank.attached,
+      ...(bank.framingRadiusUnits === undefined ? {} : { framingRadiusUnits: bank.framingRadiusUnits }),
       ...(bank.view ? { billboard: { cell: drawn.indexOf(bank), radiusUnits: bank.radiusUnits, ...bank.view } } : {}) })) };
   await writeIfChanged(resolve(projectRoot, OUTPUT.atlas), atlas);
   await writeIfChanged(resolve(projectRoot, OUTPUT.metadata), `${JSON.stringify(metadata)}\n`);

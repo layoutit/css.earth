@@ -1,7 +1,7 @@
 import type { PreparedTriangle, RadialSamplingProfile, RadialFaces, TerrainGrid } from '../../../geometry/index.ts';
 import type { createSourceManifest } from '@cssearth/objects/node';
 import { requireTerrainMesh, radialTriangles, simplifyRadialShape, simplifyRadialTerrain, shadeRadialFaces, validateClosedMesh, measureImageDemReduction, loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadVtkShape, loadPdsRadiusTable, loadPdsRadialTable, loadPdsRadialTableMesh, orientObservedSurface } from '../../../geometry/index.ts';
-import { isArray, requireRecord, requireArray, requireFiniteNumber } from '@cssearth/core';
+import { isArray, requireRecord, requireArray, requireFiniteNumber, dotN as dot } from '@cssearth/core';
 import { matchesPreparationGenerator } from '../../../sources/index.ts';
 import { parseRadialSource } from '../records/radial-source.ts';
 import { loadEllipsoidParameters } from '../ellipsoid-parameters.ts';
@@ -132,6 +132,29 @@ export function rasterLeafStyle(g: { matrix: readonly number[]; leafWidth: numbe
   return `transform:matrix3d(${g.matrix.map((value, i) => i < 8 ? value * k : value).join(',')});background-position:${px(g.backgroundPosition)};background-size:${px(g.backgroundSize)};--polycss-atlas-width:${g.leafWidth / k}px;--polycss-atlas-height:${g.leafHeight / k}px`;
 }
 
+/** Capped seam miters can shear a narrow triangle inward. Expand only that prepared
+ * raster footprint, before sampling its texture, until it encloses its source face.
+ * Source vertices, winding and topology remain unchanged. */
+function coverSourceFace(corners: number[][], source: readonly number[][], face: number): number[][] {
+  const ab = sub(corners[1], corners[0]), ac = sub(corners[2], corners[0]);
+  const aa = dot(ab, ab), cc = dot(ac, ac), mixed = dot(ab, ac), determinant = aa * cc - mixed * mixed;
+  if (!Number.isFinite(determinant) || determinant <= Number.EPSILON * aa * cc)
+    throw new Error(`Radial face ${face} has a degenerate prepared raster triangle.`);
+  let minimum = 0;
+  for (const point of source) {
+    const ap = sub(point, corners[0]), alongB = dot(ap, ab), alongC = dot(ap, ac);
+    const b = (cc * alongB - mixed * alongC) / determinant, c = (aa * alongC - mixed * alongB) / determinant;
+    if (![b, c].every(Number.isFinite)) throw new Error(`Radial face ${face} has non-finite source coverage.`);
+    minimum = Math.min(minimum, 1 - b - c, b, c);
+  }
+  if (minimum >= 0) return corners;
+  // Homothety about the centroid maps barycentric weight w to
+  // 1/3 + (w - 1/3) / scale. This is the smallest enclosing uniform expansion.
+  const scale = (1 - 3 * minimum) * (1 + 64 * Number.EPSILON);
+  const center = [0, 1, 2].map(axis => corners.reduce((sum, point) => sum + point[axis], 0) / 3);
+  return corners.map(point => point.map((value, axis) => center[axis] + (value - center[axis]) * scale));
+}
+
 export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number) {
   if (!Number.isSafeInteger(texelsPerFace) || texelsPerFace < 16 || !Number.isSafeInteger(quantum) || quantum < 1) throw new TypeError('Invalid radial texel budget.');
   const polygons = faces.map(face => ({ vertices: face.vertices.map(p => {if(p.length!==3)throw new Error('Invalid triangle point.');return [p[0],p[1],p[2]] as [number,number,number];}), color: '#888888' }));
@@ -147,7 +170,8 @@ export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerF
     // The planner's canonical leaf maps its bottom corners and top centre to the overlapped triangle.
     const m = plan.transformText.slice(9, -1).split(',').map(Number), size = SOLID_TRIANGLE_CANONICAL_SIZE;
     const at = (x: number, y: number) => [0, 1, 2].map(i => m[i] * x + m[4 + i] * y + m[12 + i]);
-    const corners = [at(0, size), at(size, size), at(size / 2, 0)];
+    const source = face.vertices.map(([x, y, z]) => [y * BASE_TILE, x * BASE_TILE, z * BASE_TILE]);
+    const corners = coverSourceFace([at(0, size), at(size, size), at(size / 2, 0)], source, index);
     let best: { base: number; length: number; rise: number } | undefined;
     for (let base = 0; base < 3; base++) {
       const a = corners[base], b = corners[(base + 1) % 3], c = corners[(base + 2) % 3];

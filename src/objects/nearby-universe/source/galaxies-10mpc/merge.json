@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "galaxies-10mpc",
+  "meaning": "A nested level of galaxies around the Milky Way, out to 10 Mpc: the galaxies it adds to the levels around it bring it to its own even density, so zooming in never empties the view. Each dot is one galaxy at its measured distance, in the colour of its morphological type.",
+  "banks": [
+    "galaxies"
+  ],
+  "densityCap": {
+    "perMpc3": 0.09,
+    "kernelMpc": 2.4,
+    "taperMpc": [
+      5,
+      10
+    ],
+    "basis": "Presentation choice: 90 per 1,000 Mpc\u00b3, under the 94 CF4 holds from 3 to 10 Mpc. The kernel holds about five galaxies at the cap. Real concentrations above the cap are thinned to it; sparser regions, as the zone the Milky Way's disc hides, stay as they are."
+  },
+  "within": [
+    "galaxies-200mpc",
+    "galaxies-60mpc",
+    "galaxies-20mpc"
+  ]
+}

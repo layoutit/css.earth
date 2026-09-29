@@ -491,14 +491,14 @@
         "expectedVertices": 99846,
         "expectedFaces": 196608
       },
-      "faceBudget": 3500,
+      "faceBudget": 2000,
       "texelsPerFace": 16384,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
-        "targetFaces": 3500,
+        "targetFaces": 2000,
         "maximumErrorMeters": 1065,
-        "regularize": true
+        "regularize": false
       }
     }
   },

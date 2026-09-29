@@ -1,13 +1,11 @@
-import { expect, test, vi } from 'vitest';
+import { expect, test } from 'vitest';
 import { parseHTML } from 'linkedom';
 import type { VolumeCameraPublication } from '../volume/types.js';
-import { mountGalaxyPoints } from './galaxy-points.js';
 import { backgroundPointsOpacity, mountBackgroundPoints } from './background-points.js';
-vi.mock('./galaxy-points.js', () => ({ mountGalaxyPoints: vi.fn() }));
 const pc = 3.085677581491367e16;
 const publication: VolumeCameraPublication = { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
   pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } },
-  viewport: { focalPixels: 500, principalOffsetPixels: [0, 0] } };
+  viewport: { focalPixels: 500, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 } };
 
 test('outer-universe field fades continuously between Milky Way and Local Group scales', () => {
   expect(backgroundPointsOpacity(30_000 * pc)).toBe(0);
@@ -24,30 +22,21 @@ test('outer-universe field fades continuously between Milky Way and Local Group 
   }
 });
 
-test('near views neither load nor publish the field; an in-flight load cannot reveal it', async () => {
+test('near views neither load nor show the galaxy banks', async () => {
   const { document } = parseHTML('<div id="host"><i></i></div>');
   const host = document.getElementById('host')!, before = host.firstElementChild!;
-  const publish = vi.fn(), destroy = vi.fn();
-  let finish!: (runtime: Awaited<ReturnType<typeof mountGalaxyPoints>>) => void;
-  vi.mocked(mountGalaxyPoints).mockReturnValueOnce(new Promise(resolve => { finish = resolve; }));
-  const field = mountBackgroundPoints(host, before, '/points.json');
-  const root = host.querySelector<HTMLElement>('[data-galaxy-field]')!;
+  const fetched: string[] = [];
+  const field = mountBackgroundPoints(host, before, ['/a.json', '/b.json'], async url => { fetched.push(url); return new Promise(() => {}); });
+  const roots = [...host.querySelectorAll<HTMLElement>('[data-catalogue-points]')];
+  expect(roots).toHaveLength(2);
   field.publish(publication, 30_000 * pc);
-  expect(root.style.display).toBe('none');
-  expect(mountGalaxyPoints).not.toHaveBeenCalled();
+  expect(fetched).toEqual([]);
+  expect(roots.map(root => root.style.display)).toEqual(['none', 'none']);
   field.publish(publication, 1e6 * pc);
-  expect(mountGalaxyPoints).toHaveBeenCalledTimes(1);
+  expect(fetched).toEqual(['/a.json', '/b.json']);
+  expect(roots.map(root => root.style.opacity)).toEqual(['1', '1']);
   field.publish(publication, 30_000 * pc);
-  finish({ publish, destroy, roots: [] });
-  await Promise.resolve();
-  expect(root.style.display).toBe('none');
-  expect(publish).not.toHaveBeenCalled();
-  field.publish(publication, 1e6 * pc);
-  expect(publish).toHaveBeenCalledTimes(1);
-  expect(root.style.opacity).toBe('1');
-  field.publish(publication, 30_000 * pc);
-  expect(publish).toHaveBeenCalledTimes(1);
-  expect(root.style.opacity).toBe('0');
+  expect(roots.map(root => root.style.display)).toEqual(['none', 'none']);
   field.destroy();
-  expect(destroy).toHaveBeenCalledOnce();
+  expect(host.querySelectorAll('[data-catalogue-points]')).toHaveLength(0);
 });

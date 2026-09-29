@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "nearby-stars",
+  "table": {
+    "path": "gcns-sample.csv.gz",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=2000000&QUERY=SELECT+t.RA_ICRS,t.DE_ICRS,t.Dist50,t.%22Gmag%22+FROM+%22J/A%2BA/649/A6/table1c%22+AS+t",
+    "bytes": 89899,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 1,
+      "decDeg": 2,
+      "distance": 3
+    },
+    "distanceUnit": "kpc"
+  },
+  "sample": "The tracked file keeps one row in 64 of the 331,312 the query returns, in catalogue order (sorted by right ascension). Presentation choice: enough stars for the 100 pc level of the Milky Way's dots.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "gaia-2021-gcns",
+  "meaning": "Every star of the Gaia Catalogue of Nearby Stars (Gaia Collaboration, Smart et al. 2021), each at its median distance (Dist50): the census of stars within 100 pc of the Sun.",
+  "appearance": {
+    "colorCss": "#ffe6cc",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "toneBy": {
+      "magnitudeColumn": 4,
+      "band": "Gaia G",
+      "brightMagnitude": 4,
+      "faintMagnitude": 16,
+      "faintTone": 0.25,
+      "steps": 8,
+      "basis": "Presentation of a measured quantity: each star's absolute G magnitude (Gmag at its Dist50) darkens its colour, from full at M_G 4, about the Sun's, to 25% at 16, linear in magnitude. Most stars of the census are red dwarfs (median M_G 10.7), so most dots are dim."
+    }
+  }
+}

@@ -25,7 +25,12 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   if (options.acquisitionCache) await acquireVolumeSource(sourceDirectory, recipe, resolve(options.acquisitionCache));
   const previousTextures = await readPreviousVolumeTextures(outputDirectory);
   await mkdir(outputDirectory, { recursive: true });
-  const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory, recipe });
+  // A volume that draws no slices integrates none: its field is drawn by other prepared layers.
+  const bounds = descriptor.volume.boundsUnits;
+  const slices = recipe.drawSlices === false ? { quads: [], boundsUnits: { min: [...bounds.min] as [number, number, number], max: [...bounds.max] as [number, number, number] }, provenance: { drawSlices: false },
+    approximation: { method: 'No slices are drawn: other prepared layers of the object draw it.', radialEmission: 'None.', limitations: [],
+      samplesPerSlab: 1, opticalWeight: 1, exposureGain: 1, sliceCounts: { x: 0, y: 0, z: 0 }, slabPitchUnits: { x: 0, y: 0, z: 0 } } }
+    : await prepareVolumeSlices({ sourceDirectory, outputDirectory, recipe });
   let data = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, slices, recipe });
   // A density volume has no whole-cloud impostor views: the same slices draw it at every distance.
   data = await prepareFixedDiscVolume({ volume: data, slices, recipe, outputDirectory });

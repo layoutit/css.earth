@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "hot-stars",
+  "table": {
+    "path": "zari-sample.csv.gz",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=2000000&QUERY=SELECT+RA_ICRS,DE_ICRS,d50kin,Ksmag+FROM+%22J/A%2BA/650/A112/filtered%22",
+    "bytes": 2308902,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 1,
+      "decDeg": 2,
+      "distance": 3
+    },
+    "distanceUnit": "kpc"
+  },
+  "sample": "The tracked file keeps one row in 4 of the 417,535 the query returns, in catalogue order (sorted by right ascension). Presentation choice: enough stars for the 800 pc level of the Milky Way's dots (tracers/merge.json) at 1,500 dots per kpc\u00b2, where the catalogue holds about 8,000.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "zari-2021-hot-stars",
+  "meaning": "Hot luminous stars (OBA) of Zari et al. (2021), their filtered sample, each at its median astro-kinematic distance (d50kin): the young disc across the whole sky out to several kiloparsecs.",
+  "appearance": {
+    "colorCss": "#b9d0ff",
+    "radiusPx": 0.5,
+    "opacity": 0.85,
+    "note": "Presentation only: the blue-white of hot stars.",
+    "toneBy": {
+      "magnitudeColumn": 4,
+      "band": "2MASS Ks",
+      "brightMagnitude": -2.5,
+      "faintMagnitude": 0,
+      "faintTone": 0.45,
+      "steps": 8,
+      "basis": "Presentation of a measured quantity: each star's absolute Ks magnitude (Ksmag at its d50kin) darkens its colour, from full at M_Ks -2.5 to 45% at 0, linear in magnitude. Zari et al. select stars brighter than about M_Ks 0, and the bounds are about the 5th and 95th percentiles of the sample (-2.48 and -0.05). Ks is not corrected for dust, which dims it far less than visible light."
+    }
+  }
+}

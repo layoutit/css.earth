@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "local-3kpc",
+  "meaning": "A nested level of the Milky Way's star dots around the Sun, out to 3000 pc: the dots it adds to the levels around it bring it to its own even density, so zooming in never empties the view.",
+  "banks": [
+    "hot-stars",
+    "nearby-stars",
+    "open-clusters",
+    "cepheids",
+    "masers",
+    "hou-han-masers",
+    "hou-han-hii",
+    "hou-han-gmc"
+  ],
+  "maxKinematicSigmaKpc": 1,
+  "maxKinematicSigmaBasis": "Presentation choice, not a paper value: a kinematic distance whose \u00b17 km/s uncertainty exceeds 1 kpc is left out. Those are the sources toward tangent points, the Galactic centre and the anticentre, which pile onto a circle through the Sun and the centre; 1 kpc drops 917 of the 7,589 tracers inside the frame and three quarters of the ones on that circle. Hou & Han (2014) weight a kinematic distance down from 0.5 kpc of uncertainty.",
+  "colourTowardWhite": 0.5,
+  "colourTowardWhiteBasis": "Presentation choice: each catalogue colour mixed halfway to white before the gamma, because the saturated colours read as neon over the backing. The hue order of every catalogue is kept.",
+  "colourGamma": 1.6,
+  "colourGammaBasis": "Presentation choice, picked from three renders over the backing (full opacity, 65% opacity, gamma 1.6): each colour channel raised to the power 1.6, so the coloured dots sink into the painted arms and the whitest keep their sparkle.",
+  "densityCap": {
+    "atSunPerKpc2": 150,
+    "scaleLengthKpc": 2.6,
+    "kernelKpc": 0.2,
+    "taperKpc": [
+      1.5,
+      3
+    ],
+    "basis": "The same disc law as the galaxy level (tracers/merge.json): exponential in Galactocentric radius with the thin disc's 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529, https://arxiv.org/abs/1602.07702). Presentation choice: ten times the galaxy level's 15 dots per kpc\u00b2, inside the 3 kpc where the hot-star catalogue holds about 8,000 per kpc\u00b2; the taper softens the level's edge."
+  },
+  "within": [
+    "tracers"
+  ]
+}

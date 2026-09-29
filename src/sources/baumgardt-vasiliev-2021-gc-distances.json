@@ -1,0 +1,55 @@
+{
+  "id": "baumgardt-vasiliev-2021-gc-distances",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/stab1474"
+    },
+    {
+      "type": "arxiv",
+      "value": "2105.09526"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2105.09526",
+      "label": "arXiv:2105.09526"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1093/mnras/stab1474",
+      "label": "MNRAS 505, 5957"
+    },
+    {
+      "role": "archive",
+      "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+      "label": "Fundamental parameters of Galactic globular clusters: orbits table with Rsun"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2105.09526",
+      "checkedOn": "2026-09-28",
+      "locator": "Abstract: accurate distances to Galactic globular clusters from Gaia EDR3 parallaxes, HST kinematic distances and literature distances"
+    }
+  ],
+  "creators": [
+    "Holger Baumgardt",
+    "Eugene Vasiliev"
+  ],
+  "publisher": "MNRAS 505, 5957",
+  "publicationDate": "2021",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Baumgardt et al. (2021), MNRAS 505, 5957.",
+      "scope": "Catalogue positions",
+      "evidence": "https://arxiv.org/abs/2105.09526"
+    }
+  ]
+}

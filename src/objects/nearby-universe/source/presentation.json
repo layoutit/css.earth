@@ -3,34 +3,131 @@
     "name": "Nearby Universe",
     "products": [
       {
-        "id": "galaxy-field",
-        "label": "Nearby galaxy distribution",
-        "process": "Join CF4 and HyperLEDA identities; prepare a bounded position sample and Gaussian galaxy-count concentrations.",
-        "recipe": "source/preparation/field.json",
-        "selector": "/sampling",
+        "id": "galaxies",
+        "label": "Cosmicflows-4 galaxies by type",
+        "process": "Place every CF4 galaxy between 3 and 200 Mpc at its measured distance; colour it by its HyperLEDA type through the Kinney-Calzetti template of that type (CIE 1931 into sRGB).",
+        "recipe": "source/galaxies/points.json",
+        "selector": "",
         "inputs": [
-          "cosmicflows-4",
-          "hyperleda-pgc",
-          "hyperleda-hi",
-          "navigation-frame"
+          "galaxies-table",
+          "kc96-elliptical",
+          "kc96-s0",
+          "kc96-sa",
+          "kc96-sb",
+          "kc96-sc"
         ],
         "outputs": [
-          "prepared/points.json",
-          "prepared/cloud.webp"
+          "prepared/galaxies.json"
         ],
         "interpretation": {
           "kind": "catalogue-count-visualization",
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "Authored rendering parameters. Sampled points retain measured catalogue positions; covariance clouds represent smoothed galaxy counts, not gas or measured matter density.",
-          "Positive HI velocity / H0 fallback is uncorrected for peculiar velocities. Survey gaps and exclusions do not prove cosmic voids."
+          "The templates are spectra of galaxy centres, not whole-galaxy light; types later than Sc take the Sc template.",
+          "A galaxy with no HyperLEDA type is drawn white."
+        ]
+      },
+      {
+        "id": "galaxies-200mpc",
+        "label": "Galaxy dots, 200 Mpc level",
+        "process": "Keep galaxies, in a fixed shuffle, while the ones within the kernel stay under the level's even density; nested levels add only galaxies the enclosing levels do not draw.",
+        "recipe": "source/galaxies-200mpc/merge.json",
+        "selector": "",
+        "inputs": [
+          "galaxies-table"
+        ],
+        "outputs": [
+          "prepared/galaxies-200mpc.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "An even density is a presentation choice: real concentrations above it are thinned; sparser regions, as the zone the Milky Way's disc hides, are the catalogue's gaps, not voids."
+        ]
+      },
+      {
+        "id": "galaxies-60mpc",
+        "label": "Galaxy dots, 60 Mpc level",
+        "process": "Keep galaxies, in a fixed shuffle, while the ones within the kernel stay under the level's even density; nested levels add only galaxies the enclosing levels do not draw.",
+        "recipe": "source/galaxies-60mpc/merge.json",
+        "selector": "",
+        "inputs": [
+          "galaxies-table"
+        ],
+        "outputs": [
+          "prepared/galaxies-60mpc.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "An even density is a presentation choice: real concentrations above it are thinned; sparser regions, as the zone the Milky Way's disc hides, are the catalogue's gaps, not voids."
+        ]
+      },
+      {
+        "id": "galaxies-20mpc",
+        "label": "Galaxy dots, 20 Mpc level",
+        "process": "Keep galaxies, in a fixed shuffle, while the ones within the kernel stay under the level's even density; nested levels add only galaxies the enclosing levels do not draw.",
+        "recipe": "source/galaxies-20mpc/merge.json",
+        "selector": "",
+        "inputs": [
+          "galaxies-table"
+        ],
+        "outputs": [
+          "prepared/galaxies-20mpc.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "An even density is a presentation choice: real concentrations above it are thinned; sparser regions, as the zone the Milky Way's disc hides, are the catalogue's gaps, not voids."
+        ]
+      },
+      {
+        "id": "galaxies-10mpc",
+        "label": "Galaxy dots, 10 Mpc level",
+        "process": "Keep galaxies, in a fixed shuffle, while the ones within the kernel stay under the level's even density; nested levels add only galaxies the enclosing levels do not draw.",
+        "recipe": "source/galaxies-10mpc/merge.json",
+        "selector": "",
+        "inputs": [
+          "galaxies-table"
+        ],
+        "outputs": [
+          "prepared/galaxies-10mpc.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "An even density is a presentation choice: real concentrations above it are thinned; sparser regions, as the zone the Milky Way's disc hides, are the catalogue's gaps, not voids."
+        ]
+      },
+      {
+        "id": "dots",
+        "label": "Galaxy dots at every zoom",
+        "process": "Join the four levels, outermost first, into one bank the app draws as a growing prefix: the field whole within 100 Mpc, each inner level's galaxies one at a time as the view narrows past its radius.",
+        "recipe": "source/dots/stack.json",
+        "selector": "",
+        "inputs": [
+          "galaxies-table"
+        ],
+        "outputs": [
+          "prepared/dots.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "The appearance windows are presentation choices."
         ]
       }
     ]
-  },
-  "pointExposure": 4,
-  "pointReferenceDistanceMpc": 100,
-  "cloudExposure": 2,
-  "cloudMaximumOpacity": 0.3
+  }
 }

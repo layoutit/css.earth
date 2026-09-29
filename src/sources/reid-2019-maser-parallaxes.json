@@ -1,0 +1,71 @@
+{
+  "id": "reid-2019-maser-parallaxes",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Trigonometric Parallaxes of High-mass Star-forming Regions: Our View of the Milky Way",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/ab4a11"
+    },
+    {
+      "type": "arxiv",
+      "value": "1910.03357"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1910.03357",
+      "label": "arXiv:1910.03357"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.3847/1538-4357/ab4a11",
+      "label": "ApJ 885, 131"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/885/131",
+      "label": "CDS J/ApJ/885/131"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1910.03357",
+      "checkedOn": "2026-09-28",
+      "locator": "Table 1: trigonometric parallaxes and proper motions of about 200 high-mass star-forming regions"
+    }
+  ],
+  "creators": [
+    "M. J. Reid",
+    "K. M. Menten",
+    "A. Brunthaler",
+    "X. W. Zheng",
+    "T. M. Dame",
+    "Y. Xu",
+    "J. Li",
+    "N. Sakai",
+    "Y. Wu",
+    "K. Immer",
+    "B. Zhang",
+    "A. Sanna",
+    "L. Moscadelli",
+    "K. L. J. Rygl",
+    "A. Bartkiewicz",
+    "B. Hu",
+    "L. H. Quiroga-Nunez",
+    "H. J. van Langevelde"
+  ],
+  "publisher": "ApJ 885, 131",
+  "publicationDate": "2019",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Reid et al. (2019), ApJ 885, 131.",
+      "scope": "Catalogue positions",
+      "evidence": "https://arxiv.org/abs/1910.03357"
+    }
+  ]
+}

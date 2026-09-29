@@ -7,16 +7,23 @@ import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/proj
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
-import { logarithmicFade, preparedVolumeOpacity } from './world-context/context-scale.js';
+import { fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
+import { mountGalaxyBacking, parseGalaxyBacking } from './galaxy-backing.js';
+import { logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
+import { GALAXY_SCALE } from '../labels/universe-label-policy.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 
 /** Retained sky, stellar sample and galaxy share one exposure-aware handoff. */
 export function createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
-  prefetchUrls, prefetchDistanceM }: {
+  prefetchUrls, prefetchDistanceM, cataloguePointUrls = [], backingUrl }: {
   root: HTMLElement; end: Node; lifetime: SceneLifetime; plan: PreparedWorldContext;
   payload: PreparedCssVolume; pointAppearance: PreparedPointAppearance; sky: boolean;
   resolveResource(path: string): string;
   prefetchUrls: readonly string[]; prefetchDistanceM: number;
+  /** Published star catalogues inside the galaxy, drawn as dust with it (PreparedUniverseOptions.galaxyCataloguePoints). */
+  cataloguePointUrls?: readonly string[];
+  /** A face-on image of the galaxy under its catalogue dots, shown with them (PreparedUniverseOptions.galaxyBacking). */
+  backingUrl?: string;
 }) {
   const document = root.ownerDocument;
   const volumeHost = document.createElement('div');
@@ -34,6 +41,8 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
   let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
   let stellarPoints: ReturnType<typeof mountStellarPoints> = null;
   let volumeLayer: ReturnType<typeof mountPreparedVolumeLod> | null = null;
+  const cataloguePoints: ReturnType<typeof mountCataloguePoints>[] = [];
+  let backing: ReturnType<typeof mountGalaxyBacking> | null = null, backingLoading = false, publishedBacking = NaN;
   let stellarEnabled = true, stellarPublication: VolumeCameraPublication | null = null, stellarOpacity = 0;
   let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
   let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
@@ -55,6 +64,12 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       // The galaxy is its bulge slices and one flat disc plane at every distance; it has no impostor views.
       volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource }, () => 1);
       lifetime.onDispose(() => volumeLayer?.destroy());
+      // Their own layer over the galaxy's: the dots show from just past the Solar System, where the galaxy volume is still clear.
+      for (const url of cataloguePointUrls) {
+        const points = mountCataloguePoints({ host: root, before: end, url, fetchJson: fetchPreparedJson });
+        cataloguePoints.push(points);
+        lifetime.onDispose(() => points.destroy());
+      }
     },
     setStellarPointsEnabled(enabled: boolean) {
       const next = enabled === true;
@@ -102,6 +117,26 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       stellarOpacity = stellarPointsOpacity(starsHandoff, completedContribution) * detailContextOpacity;
       stellarPoints?.publish(stellarPublication, stellarEnabled ? stellarOpacity : 0);
       if (volumeVisible && volumeSize > 0) volumeLayer!.publish({ world, viewport });
+      // The catalogue dots are the stars around the Solar System (starFieldFade), whole before the host stars give way to
+      // them past the system (world-context-planner.ts); measured like them from the selected body. The backing is the
+      // galaxy seen from outside its disc: it fades in later, over the galaxy scale.
+      const shownDots = detailContextOpacity * starFieldFade(volumeDistanceM, plan.system);
+      for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots);
+      const shownBacking = volumeVisible && volumeSize > 0 ? logarithmicFade(volumeDistanceM, GALAXY_SCALE.handoffStartM, GALAXY_SCALE.handoffEndM) : 0;
+      if (backing) {
+        if (shownBacking !== publishedBacking) {
+          backing.root.style.opacity = String(shownBacking); backing.root.style.display = shownBacking > 0 ? '' : 'none'; publishedBacking = shownBacking;
+        }
+        if (shownBacking > 0) backing.publish({ world, viewport });
+      } else if (shownBacking > 0 && backingUrl && !backingLoading) {
+        // Fetched the first time the dots show; drawn under them from the next frame on.
+        backingLoading = true;
+        void fetchPreparedJson(backingUrl).then(value => {
+          if (lifetime.disposed) return;
+          backing = mountGalaxyBacking({ host: volumeImage, before: volumeEnd, payload: parseGalaxyBacking(value, backingUrl), resolveResource });
+          lifetime.onDispose(() => backing?.destroy());
+        }).catch(error => console.error(`Galaxy backing ${backingUrl} failed`, error));
+      }
       return volumeOpacity;
     },
   };

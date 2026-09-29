@@ -101,10 +101,14 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       clusters: { fadeStartDistanceM: fades.clusters.fadeStartDistanceM, fullDistanceM: fades.clusters.fullDistanceM } };
     const universe = createPreparedUniverse({
       environmentLinks: { 'milky-way': (link => link.pathname + link.search)(withOverviewScope(new URL(`/${applicationContext.focus.id}/`, location.origin), 'milky-way')) }, stellarExtents: STELLAR_EXTENTS,
+      // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
+      // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
+      // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).
+      galaxyCataloguePoints: ['globular-clusters', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.json`)),
+      galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: applicationContext, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens,
-      backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'),
-      backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'),
+      backgroundCataloguePoints: [backgroundPointSet.resolve('prepared/dots.json')],
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },
