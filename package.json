@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "astro build && node packages/bake/cli/run-implemented-objects.mts assemble",
-    "build:deploy": "pnpm build:packages && pnpm setup:asset-data && pnpm prepare:tool-inputs && pnpm prepare:world-presentation && pnpm prepare:shell-assets && node packages/bake/cli/restore-object-json.mts && pnpm prepare:dataset-sprites && node packages/bake/cli/prepare-factsheets.mts --quiet && node site/build/prepare/prepare-feature-index.mts && pnpm prepare:lens-billboards && pnpm prepare:environment-images && node packages/bake/cli/prepare-nebulae.mts --if-missing && node site/build/prepare/prepare-facilities.mts --catalog-only && astro build && node packages/bake/cli/run-implemented-objects.mts assemble && node site/build/bundle-netlify-functions.mts && node site/build/prerender-focus-pages.mts",
+    "build:deploy": "pnpm build:packages && pnpm setup:asset-data && pnpm prepare:tool-inputs && pnpm prepare:world-presentation && pnpm prepare:shell-assets && node packages/bake/cli/restore-object-json.mts && pnpm prepare:dataset-sprites && node packages/bake/cli/prepare-factsheets.mts --quiet && node site/build/prepare/prepare-feature-index.mts && pnpm prepare:lens-billboards && pnpm prepare:environment-images && node packages/bake/cli/prepare-nebulae.mts --if-missing && node site/build/prepare/prepare-facilities.mts --catalog-only && astro build && node site/build/share-images.mts && node packages/bake/cli/run-implemented-objects.mts assemble && node site/build/bundle-netlify-functions.mts && node site/build/prerender-focus-pages.mts",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
     "build:core": "pnpm --filter @cssearth/core build",

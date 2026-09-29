@@ -21,6 +21,25 @@ export function focusSeo(focus: { id: string; name: string }, options?: Paramete
   return objectSeo({ id: focus.id, name: focus.name, route: `/${focus.id}/`, description: `${focus.name} in the cssEarth 3D explorer` }, options);
 }
 
+/** The site's own page, `/`: it opens on Earth but is named and addressed as the site. */
+export function homeSeo(earth: ReturnType<typeof objectSeo>) {
+  return { ...earth, title: "cssEarth: the universe in HTML and CSS",
+    description: "Explore planets, moons, stars and galaxies built from open space data as 3D HTML and CSS, without WebGL or canvas.",
+    canonical: new URL("/", SITE_ORIGIN).href };
+}
+
+/** schema.org for the home page: the site's name, which search results show beside its address. */
+export function websiteJsonLd() {
+  return { "@context": "https://schema.org", "@type": "WebSite", name: "cssEarth", alternateName: "css.earth", url: new URL("/", SITE_ORIGIN).href };
+}
+
+/** schema.org for a body's page: the pages from the site down its orbit chain (cssEarth › Sun › Mars › Phobos). */
+export function breadcrumbJsonLd(trail: readonly { readonly name: string; readonly route: string }[]) {
+  return { "@context": "https://schema.org", "@type": "BreadcrumbList",
+    itemListElement: [{ name: "cssEarth", route: "/" }, ...trail].map((step, index) => ({
+      "@type": "ListItem", position: index + 1, name: step.name, item: new URL(step.route, SITE_ORIGIN).href })) };
+}
+
 /** Write a page's title, address and description into the live head when an in-place selection changes which page it is.
  * The share image stays the loaded page's: only the build knows which captures exist. */
 export function applySeoHead(document: Document, seo: Pick<ReturnType<typeof objectSeo>, "title" | "description" | "canonical">) {
