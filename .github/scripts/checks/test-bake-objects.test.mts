@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { matchesGlob, resolve } from 'node:path';
 import test from 'node:test';
 import { BAKE_OBJECT_TEST_PATHS, bakeObjectTests } from './test-bake-objects.mts';
 
@@ -47,3 +47,32 @@ test('preparation suites stay out while relocated Node suites join without objec
   ]);
 });
 
+test('T2d relocated selector suites remain discoverable after their paths and imports change', () => {
+  const root = resolve(import.meta.dirname, '../../..');
+  const tracked = execFileSync('git', ['ls-files', '-z', '--', ...BAKE_OBJECT_TEST_PATHS], { cwd: root, encoding: 'utf8' }).split('\0').filter(Boolean);
+  const selected = bakeObjectTests(tracked, path => readFileSync(resolve(root, path), 'utf8'));
+  const relocated = [
+    'packages/bake/src/astronomy/fixtures/small-kernel.oracle.test.mts',
+    'packages/bake/src/objects/default-view/fixtures/new-horizons-approach.oracle.test.mts',
+    'packages/bake/src/photometry/whole-disc-colour.test.mts',
+    'packages/bake/src/surface-previews/surface-preview-rasters.test.mts',
+  ];
+  for (const path of relocated) assert.ok(selected.includes(path), `original selector lane retained: ${path}`);
+  assert.deepEqual(bakeObjectTests(relocated, () => "import test from 'node:test';"), relocated.sort());
+});
+
+test('every data-dependent preparation exclusion stays out of the sparse-tree selector', () => {
+  const root = resolve(import.meta.dirname, '../../..');
+  const tracked = execFileSync('git', ['ls-files', '-z', '--', 'packages/bake/src'], { cwd: root, encoding: 'utf8' }).split('\0').filter(Boolean);
+  const config = readFileSync(resolve(root, 'packages/bake/vitest.config.ts'), 'utf8');
+  // The following group owns preparation data; earlier relocated Node exclusions and later object-library exclusions
+  // belong to other runners. Test the actual files, including node:test and sourceTest suites, rather than their labels.
+  const preparationGroup = config.slice(config.indexOf("'src/scene/scene.test.ts'"), config.indexOf('// The object libraries'));
+  const patterns = [...preparationGroup.matchAll(/'([^']+\.test\.ts)'/gu)].map(match => `packages/bake/${match[1]}`);
+  assert.ok(patterns.includes('packages/bake/src/density/*.test.ts'), 'preparation group found');
+  const preparation = tracked.filter(path => patterns.some(pattern => matchesGlob(path, pattern)));
+  preparation.push('packages/bake/src/objects/surface-features/atlas-edge.test.ts');
+  assert.ok(preparation.length >= 20, 'all preparation suites discovered');
+  const selected = bakeObjectTests(tracked, path => readFileSync(resolve(root, path), 'utf8'));
+  for (const path of [...preparation, ...RESTORED_PACKAGE_TESTS]) assert.ok(!selected.includes(path), `requires restored data: ${path}`);
+});

@@ -1,7 +1,7 @@
 /** The pinned pyuvdata boundary for UVFITS visibilities, run in the astroquery toolchain's Python. */
 import { spawn } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryToolchain } from './toolchain.js';
+import { astroqueryToolchain } from './toolchain/toolchain.js';
 
 /** pyuvdata owns UVFITS random-group conventions, polarization decoding, UVW and flags. */
 export interface PyuvdataUvfitsRequest {

@@ -1,7 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "include": [
-    "sbmt/**/*.mts",
+    "venus/**/*.mts",
+    "../../packages/bake/src/delivery/fixtures/external-modules.d.mts",
+    "../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/**/*.mts",
     "test-fits.mts",
     "test-sbmt.mts",
     "../../tests/objects/unit/venus/oracle.test.mts",

@@ -35,7 +35,7 @@ the lock. Observatory data keep their own attribution and reuse terms in each pr
 
 ## Decisions checked on 23 September 2026
 
-**SPICE.** Retain the preparation evaluator ([`@cssearth/spice`](../packages/spice/README.md)) for now. [The tracked-kernel oracle](../tests/oracles/spice/small-kernel.oracle.test.mts) (now [`tests/oracles/spice/small-kernel.oracle.test.mts`](../tests/oracles/spice/small-kernel.oracle.test.mts))
+**SPICE.** Retain the preparation evaluator ([`@cssearth/spice`](../packages/spice/README.md)) for now. [The tracked-kernel oracle](https://github.com/layoutit/cssEarth/blob/2af5c9c167ecfd6cf7317cf681240fe7b1fe6885/tests/oracles/spice/small-kernel.oracle.test.mts) (now [`packages/bake/src/astronomy/fixtures/small-kernel.oracle.test.mts`](../packages/bake/src/astronomy/fixtures/small-kernel.oracle.test.mts))
 checks UTC-to-ET and a body frame against [SpiceyPy](https://spiceypy.readthedocs.io/en/main/) 8.2.0 / CSPICE_N0067 with
 a checked-in LSK and PCK. [The full DART oracle](../tests/oracles/spice/dart-draco.oracle.test.mts) (now [`tests/oracles/spice/dart-draco.oracle.test.mts`](../tests/oracles/spice/dart-draco.oracle.test.mts)) checks spacecraft states, light-time
 corrections, camera geometry and more frame classes when its pinned, ignored kernel bank is installed. The small test alone

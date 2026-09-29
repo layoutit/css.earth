@@ -34,6 +34,60 @@
           }
         ]
       }
+    },
+    {
+      "id": "hadfield-wr-table",
+      "path": "src/objects/m83/source/hadfield-wr/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BHCS2005%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F439%2F265%2Ftablea1%22",
+      "title": "A spectroscopic search for the non-nuclear Wolf-Rayet population of the metal-rich spiral galaxy M83, table.csv",
+      "credit": "L. J. Hadfield, P. A. Crowther, H. Schild, W. Schmutz; A&A 439, 265",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through hadfield-wr/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hadfield-2005-m83-wolf-rayet",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%22%5BHCS2005%5D%22%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F439%2F265%2Ftablea1%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "long-hii-table",
+      "path": "src/objects/m83/source/long-hii/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F929%2F144%2Fhiireg%22",
+      "title": "Supernova remnants in M83 as observed with MUSE, table.csv",
+      "credit": "K. S. Long, W. P. Blair, P. F. Winkler, L. Della Bruna; ApJ 929, 144",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through long-hii/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "long-2022-m83-hii",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F929%2F144%2Fhiireg%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "winkler-snr-table",
+      "path": "src/objects/m83/source/winkler-snr/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F943%2F15%2Ftable5%22",
+      "title": "High-resolution spectra of supernova remnants in M83, table.csv",
+      "credit": "P. F. Winkler, K. S. Long, W. P. Blair, S. D. Points; ApJ 943, 15",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through winkler-snr/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "winkler-2023-m83-snr",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FApJ%2F943%2F15%2Ftable5%22"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -88,6 +142,54 @@
             "evidence": "https://arxiv.org/abs/2512.11744"
           }
         ]
+      }
+    },
+    {
+      "id": "dots-merge",
+      "kind": "authored-document",
+      "path": "src/objects/m83/source/dots/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "hadfield-wr-points",
+      "kind": "authored-document",
+      "path": "src/objects/m83/source/hadfield-wr/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A spectroscopic search for the non-nuclear Wolf-Rayet population of the metal-rich spiral galaxy M83 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "long-hii-points",
+      "kind": "authored-document",
+      "path": "src/objects/m83/source/long-hii/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Supernova remnants in M83 as observed with MUSE rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "winkler-snr-points",
+      "kind": "authored-document",
+      "path": "src/objects/m83/source/winkler-snr/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the High-resolution spectra of supernova remnants in M83 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
       }
     }
   ],

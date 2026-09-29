@@ -1110,6 +1110,16 @@
         "lenses"
       ],
       "lensId": "elevation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
+            "missionId": "mars-global-surveyor",
+            "evidence": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m"
+          }
+        ]
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1138,6 +1148,16 @@
         "lenses"
       ],
       "lensId": "albedo",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "mars-global-surveyor",
+            "missionId": "mars-global-surveyor",
+            "evidence": "https://astrogeology.usgs.gov/search/map/mars_mgs_tes_global_bolometric_albedo_map_7410m"
+          }
+        ]
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

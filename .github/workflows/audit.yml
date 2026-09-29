@@ -92,7 +92,7 @@ jobs:
         # The astronomy data ledger check below resolves the ledger and its library through the built
         # @cssearth/bake package, like every other packages/bake/cli entry; --ignore-scripts above skipped
         # the postinstall build.
-        run: pnpm --filter @cssearth/bake build
+        run: pnpm --filter "@cssearth/bake..." build
       - name: Check the astronomy data ledger
         if: ${{ !cancelled() }}
         # SQLite integrity, evidence hashes, source counts, proposal writeups and the export slices.
@@ -165,7 +165,7 @@ jobs:
             echo "This change selects no universe area; the source catalogue has nothing to reconcile."
             exit 0
           fi
-          if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
+          if [ "${GITHUB_EVENT_NAME:-}" != pull_request ]; then
             pnpm setup:asset-data
           else
             node .github/scripts/ci/prepare-ci-inputs.mts universe
@@ -174,18 +174,18 @@ jobs:
           node site/build/prepare/prepare-feature-index.mts
           # The source catalogue the facility tests reconcile is a generated, ignored file.
           node site/build/prepare/prepare-facilities.mts --catalog-only
-          if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
-            # Authoring replays the volume presentations from pinned FITS.
+          if [ "${GITHUB_EVENT_NAME:-}" != pull_request ]; then
+            # Authoring replays the volume presentations from their FITS sources.
             node packages/bake/cli/restore-source-inputs.mts --repository-volumes
-            CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
           else
-            CSSEARTH_SOURCE_CHECK_MODE=published node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
+            CSSEARTH_SOURCE_CHECK_MODE=published node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
           fi
       - name: Reproduce the prepared bank from its pinned inputs
         if: ${{ !cancelled() }}
         # Moved off the `Preparation / world` gate lane. These re-run a bake and compare it with the recorded
         # output: finalization idempotence and catalogue-row reconciliation. The site never bakes anything — it
-        # serves the published bank, whose bytes `Contract lint` still verifies by SHA-256 — so a reproduction gap is a stale recipe or a drifted
+        # serves the published bank at its R2 content address, so a reproduction gap is a stale recipe or a drifted
         # toolchain, visible here, and not a broken page. Nothing is skipped: the same commands run in full.
         env:
           CI_AUDIT_PREPARATION: ${{ needs.changes.outputs.run_universe_preparation }}

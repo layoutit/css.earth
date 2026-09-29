@@ -19,7 +19,8 @@ source manifest, whose validation belongs to the application: callers pass the m
 
 Preparation receipts, oracle fixtures, archived cameras and evidence reports depend on exactly what this reader
 returns. Change a state, rotation, time conversion or error message only on purpose, together with every test and oracle
-that pins it. The SpiceyPy comparisons live in `tests/oracles/spice/` beside the scripts that write their fixtures.
+that pins it. The SpiceyPy comparisons live in `tests/oracles/spice/`, `packages/bake/src/astronomy/fixtures/` and
+`packages/bake/src/objects/default-view/fixtures/`; the fixtures follow their comparing tests.
 
 ## Shared package contract
 

@@ -14,7 +14,7 @@ It is the only planet known around HD 235088. Its orbit and size follow Nardiell
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-235088b.json).
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-235088b.json).
 
 
 ## Known problems

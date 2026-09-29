@@ -2,12 +2,12 @@
  * model atmosphere (Marley et al. 2021), by its structure file, and reads back the intensity PICASO emits at each Gauss angle through a
  * passband, and the quadratic law fitted to it. The environment and its data are separate from the other toolchains
  * (picaso-toolchain.json says what each is). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts picaso install */
-import { runToolchainProcess } from './toolchain-process.js';
+import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, readdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { TOOLCHAINS, WORKSPACE } from './paths.js';
-import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain-marker.js';
+import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const PICASO_ROOT = resolve(WORKSPACE, 'output/toolchains/picaso');

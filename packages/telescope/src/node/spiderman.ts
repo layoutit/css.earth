@@ -2,12 +2,12 @@
  * published fit's own parameters in SPIDERMAN's own names and reads back the map it evaluates and the light curve it integrates.
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
  * (spiderman-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install */
-import { runToolchainProcess } from './toolchain-process.js';
+import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { TOOLCHAINS, WORKSPACE } from './paths.js';
-import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain-marker.js';
+import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const SPIDERMAN_ROOT = resolve(WORKSPACE, 'output/toolchains/spiderman');

@@ -168,9 +168,10 @@ for (const name of ["README.md", "PROPOSALS.md"]) {
 // Every dataset that names a target links to at least one body; a dataset without one says why in its record.
 const linked = new Set(
   db
-    .prepare("SELECT DISTINCT source||char(0)||dataset_id k FROM dataset_bodies")
+    // Joined here, not in SQL: Node 22's node:sqlite truncates a returned string at its first NUL.
+    .prepare("SELECT DISTINCT source, dataset_id FROM dataset_bodies")
     .all()
-    .map((r) => string(r.k)),
+    .map((r) => string(r.source) + "\0" + string(r.dataset_id)),
 );
 for (const r of rows)
   if (!linked.has(r.source + "\0" + r.id))

@@ -2,12 +2,12 @@
  * cssEarth passes a published fit's own parameters in starry's own names and reads back the intensities and light curves starry
  * evaluates. The environment is separate from the astroquery toolchain because starry 1.2.0 runs on Theano-PyMC and NumPy below 1.22
  * (starry-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts starry install */
-import { runToolchainProcess } from './toolchain-process.js';
+import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { TOOLCHAINS, WORKSPACE } from './paths.js';
-import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain-marker.js';
+import { assertInstalledMarker, readToolchainPins, writeInstalledMarker } from './toolchain/marker.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const STARRY_ROOT = resolve(WORKSPACE, 'output/toolchains/starry');

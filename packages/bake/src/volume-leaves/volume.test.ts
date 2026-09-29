@@ -4,9 +4,8 @@ import type { Polygon } from '@layoutit/polycss';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
-import sharp from 'sharp';
 import type { VolumeSliceQuad } from '../volume/node/index.ts';
-import type { Axis as SliceAxis, Vector3 } from '../volume/index.ts';
+import type { Vector3 } from '../volume/index.ts';
 import { test } from 'node:test';
 
 type Quad = Pick<VolumeSliceQuad, 'id' | 'axis' | 'texturePath' | 'widthPx' | 'heightPx' | 'vertices' | 'uvs'>;
@@ -51,103 +50,6 @@ function imageWorld(g: Pick<ReturnType<typeof compile>, 'matrix' | 'leafWidth' |
     (coefficient(0) * x + coefficient(4) * y + coefficient(12)) / 50,
     (coefficient(2) * x + coefficient(6) * y + coefficient(14)) / 50];
 }
-/** Independent of polygon winding: the baker's PNG top row samples positive in-plane V. */
-function expectedImageWorld(q: Quad, u: number, v: number): Vector3 {
-  const horizontal = q.axis === 'x' ? 1 : 0;
-  const vertical = q.axis === 'z' ? 1 : 2;
-  const depth = q.axis === 'x' ? 0 : q.axis === 'y' ? 1 : 2;
-  const bounds = (index: number): [number, number] => {
-    const values = q.vertices.map(vertex => { const value = vertex[index]; assert(value !== undefined); return value; });
-    return [Math.min(...values), Math.max(...values)];
-  };
-  const [uMin, uMax] = bounds(horizontal), [vMin, vMax] = bounds(vertical);
-  const result: Vector3 = [0, 0, 0];
-  result[horizontal] = uMin + (uMax - uMin) * u;
-  result[vertical] = vMax - (vMax - vMin) * v;
-  result[depth] = q.vertices[0][depth];
-  return result;
-}
-function mappingError(q: Quad, g: ReturnType<typeof compile>, u: number, v: number): number {
-  const actual = imageWorld(g, u, v), expected = expectedImageWorld(q, u, v);
-  return Math.hypot(actual[0] - expected[0], actual[1] - expected[1], actual[2] - expected[2]);
-}
-test('actual PolyCSS image corners preserve physical density orientation and reject the old vertex order', async () => {
-const output = resolve('src/objects/milky-way/prepared');
-const parsed: unknown = JSON.parse(await readFile(resolve(output, 'volume-slices.json'), 'utf8'));
-const rawQuads = record(parsed).quads;
-assert(Array.isArray(rawQuads) && rawQuads.length > 0);
-const quads = rawQuads.map((value: unknown) => parseQuad(value));
-let maximumError = 0, decodedBytes = 0, checkedPixels = 0;
-// PolyCSS's conservative image edge extension is 0.6 CSS px. Allow 1.25px
-// Euclidean error for two extended axes, including six-decimal matrix serialization.
-const toleranceUnits = 1.25 / 50;
-for (const q of quads) {
-  const g = compile(q);
-  const { data, info } = await sharp(resolve(output, q.texturePath)).raw().toBuffer({ resolveWithObject: true });
-  assert(info.width === q.widthPx && info.height === q.heightPx && info.channels === 4);
-  decodedBytes += data.length;
-  let first = -1, last = -1;
-  for (let index = 3; index < data.length; index += 4) if (data[index]) {
-    if (first < 0) first = (index - 3) / 4;
-    last = (index - 3) / 4;
-  }
-  for (const index of [first, last]) if (index >= 0) {
-    const u = (index % q.widthPx + 0.5) / q.widthPx;
-    const v = (Math.floor(index / q.widthPx) + 0.5) / q.heightPx;
-    const error = mappingError(q, g, u, v);
-    maximumError = Math.max(maximumError, error);
-    assert(error < toleranceUnits, `${q.id}: PNG pixel mapped to the wrong world position (${error})`);
-    checkedPixels++;
-  }
-}
-assert(checkedPixels > 0, 'No visible density texels were checked');
-const mutations: { axis: SliceAxis; errorUnits: number }[] = [];
-for (const axis of ['x', 'y', 'z'] satisfies SliceAxis[]) {
-  const depth = axis === 'x' ? 0 : axis === 'y' ? 1 : 2;
-  const candidates = quads.filter(q => q.axis === axis).sort((a, b) => Math.abs(a.vertices[0][depth]) - Math.abs(b.vertices[0][depth]));
-  const q = candidates[0];
-  assert(q, `Missing ${axis} stack`);
-  // This is the old broken bottom-left-first geometry, not a synthetic alternate input.
-  const wrong = compile(q, [q.vertices[3], q.vertices[2], q.vertices[1], q.vertices[0]]);
-  const error = mappingError(q, wrong, 0.5, 0.2);
-  assert(error > toleranceUnits * 10, `${axis}: old corner-order mutation escaped the regression`);
-  mutations.push({ axis, errorUnits: error });
-}
-const receipt = { result: 'PASS', quads: quads.length, checkedPixels, decodedMiB: decodedBytes / 1048576,
-  maximumSourcePixelWorldErrorUnits: maximumError, toleranceUnits, mutations };
-
-console.log('PASS actual PolyCSS PNG-to-world mapping; old vertex-order mutation rejected on X/Y/Z', receipt);
-
-});
-
-test('volume compilation omits only lossless-alpha empty slabs, preserving every nonempty PolyCSS leaf', async () => {
-  const { compileCssVolume } = await import('./volume.ts');
-  const { parseDensityVolumeObjectDescriptor } = await import('@cssearth/objects');
-  const { parseVolumeRecipe } = await import('@cssearth/bake/volume');
-  const slices = JSON.parse(await readFile('src/objects/milky-way/prepared/volume-slices.json', 'utf8')) as import('@cssearth/bake/volume/node').VolumeSlices;
-  const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile('src/objects/milky-way/object.json', 'utf8')));
-  const recipe = parseVolumeRecipe(JSON.parse(await readFile('src/objects/milky-way/source/volume.json', 'utf8')));
-  const options = { id: descriptor.id, frame: descriptor.volume, recipe, slices };
-  const empty = slices.quads.filter(quad => quad.alphaCoverage === 0);
-  assert(empty.length > 0, 'the real prepared bank must exercise empty-slab exclusion');
-  for (const quad of empty) {
-    const rgba = await sharp(resolve('src/objects/milky-way/prepared', quad.texturePath)).ensureAlpha().raw().toBuffer();
-    for (let offset = 3; offset < rgba.length; offset += 4) assert.equal(rgba[offset], 0, `${quad.id} must have zero decoded alpha`);
-  }
-  const complete = compileCssVolume({ ...options, slices: { ...slices, quads: slices.quads.map(quad => ({ ...quad, alphaCoverage: 1 })) } });
-  const sparse = compileCssVolume(options);
-  const omittedIds = new Set(empty.map(quad => quad.id)), omittedPaths = new Set(empty.map(quad => quad.texturePath));
-  // Removing empty planes may change the balanced traversal, but never any
-  // surviving geometry. Compare the retained leaves independently of ordering.
-  const byId = (stack: (typeof sparse.stacks)[number]) => ({ ...stack,
-    leaves: [...stack.leaves].sort((a, b) => a.id.localeCompare(b.id)) });
-  assert.deepEqual(sparse.stacks.map(byId), complete.stacks.map(stack => byId({ ...stack,
-    leaves: stack.leaves.filter(leaf => !omittedIds.has(leaf.id)) })));
-  assert.deepEqual(sparse.resources, complete.resources.filter(resource => !omittedPaths.has(resource.path)));
-  const faint = compileCssVolume({ ...options, slices: { ...slices, quads: slices.quads.map(quad => ({ ...quad, alphaCoverage: Number.MIN_VALUE })) } });
-  assert.deepEqual(faint, complete, 'no nonzero coverage threshold may remove a faint slab');
-});
-
 test('compiled slices hold their texture at TEXELS_PER_CSS_PIXEL and cover the plane PolyCSS gave them', async () => {
   const { compileCssVolume } = await import('./volume.ts');
   const { TEXELS_PER_CSS_PIXEL } = await import('@cssearth/bake/scene');

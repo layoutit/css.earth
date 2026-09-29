@@ -170,7 +170,7 @@ test('nothing imports a package command entry: another entry, package code and t
   const violations = evaluateRules(graph(
     ['packages/bake/cli/fit-epic-limb.mts', 'packages/bake/cli/kernel-bank.mts'],
     ['packages/bake/src/photometry/limb.ts', 'packages/bake/cli/fit-epic-limb.mts', 'type'],
-    ['tests/photometry/limb.test.mts', 'packages/telescope-cli/cli/run.mts'],
+    ['packages/bake/src/photometry/limb.test.mts', 'packages/telescope-cli/cli/run.mts'],
     ['site/build/x.mts', 'packages/bake/cli/kernel-bank.mts'],
     ['packages/bake/cli/kernel-bank.mts', 'packages/bake/src/objects/cameras/index.ts'],
     ['packages/bake/src/cli/x.ts', 'packages/bake/src/raster/index.ts'],
@@ -181,9 +181,9 @@ test('nothing imports a package command entry: another entry, package code and t
   assert.deepEqual((violations.get('nothing-imports-cli-entries') ?? []).map(item => `${item.from}>${item.to}`), [
     'packages/astronomy/cli/generate-series.mts>packages/astronomy/cli/fetch-fixtures.mts',
     'packages/bake/cli/fit-epic-limb.mts>packages/bake/cli/kernel-bank.mts',
+    'packages/bake/src/photometry/limb.test.mts>packages/telescope-cli/cli/run.mts',
     'packages/bake/src/photometry/limb.ts>packages/bake/cli/fit-epic-limb.mts',
     'site/build/x.mts>packages/bake/cli/kernel-bank.mts',
-    'tests/photometry/limb.test.mts>packages/telescope-cli/cli/run.mts',
   ], 'an entry may import libraries; a folder named cli inside src is not an entry folder');
 });
 

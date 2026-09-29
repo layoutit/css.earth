@@ -29,13 +29,25 @@ const universeEntries = [
   'packages/bake/src/shell/shell.test.ts',
   'packages/bake/src/shell/mesh-subdivision.test.ts',
 ];
+// Relocated contracts and oracles retain their original Node/audit lanes. Moving them beside an object module
+// must not also admit them to preparation discovery, which previously only reached tests/objects/.
+const NON_PREPARATION_TESTS: readonly string[] = [
+  'packages/bake/src/objects/content/prepare-factsheets-cli.test.mts',
+  'packages/bake/src/objects/default-view/fixtures/new-horizons-approach.oracle.test.mts',
+  'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.test.mts',
+  'packages/bake/src/objects/layers/terrestrial/surface-observations/inspect-osiris-geo.test.mts',
+  'packages/bake/src/objects/provenance/object-provenance.test.mts',
+  'packages/bake/src/objects/provenance/recover-provenance.test.mts',
+  'packages/bake/src/objects/scene/authored-rotation-contract.test.mts',
+  'packages/bake/src/objects/sources/source-manifest-parsers.test.mts',
+];
 async function discover(directory: string, suffix: string): Promise<string[]> {
   const files: string[] = [];
   for (const entry of await readdir(resolve(root, directory), { withFileTypes: true })) {
     if (['.local', 'dist', 'node_modules', 'unit', 'oracle'].includes(entry.name)) continue;
     const path = `${directory}/${entry.name}`;
     if (entry.isDirectory()) files.push(...await discover(path, suffix));
-    else if (entry.name.endsWith(suffix)) files.push(path);
+    else if (entry.name.endsWith(suffix) && !NON_PREPARATION_TESTS.includes(path)) files.push(path);
   }
   return files.sort();
 }

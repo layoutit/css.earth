@@ -25,7 +25,7 @@ its validators accept); the renderer never imports the bake.
   and directional-Sun contracts and preparers it validates, and the material-track source planning (frame lookups and banks)
   the layer presentations build on. It imports `scene` and `raster`. The host passes material
   tracks and lens navigation in (`PresentationHostAdapters`); nothing here loads tools or platform modules itself. Its
-  tests are `node --test` suites in `tests/presentation/` (the activation groups, node tree, CSSOM, leaf boxes and layouts).
+  tests are `node --test` suites in `src/presentation/` (the activation groups, node tree, CSSOM, leaf boxes and layouts).
 - `src/volume-leaves/` is published as `@cssearth/bake/volume-leaves` (Node only): the CSS volume compilers that turn
   slice stacks into retained PolyCSS leaves, their bounds and depth order, and the volume impostors.
   It imports `scene` and `volume`.
@@ -59,7 +59,7 @@ its validators accept); the renderer never imports the bake.
   cascade check (Playwright's Chromium) that keeps each moved leaf's computed style, the interior fill of a cut-open
   body, and the authored-motion bindings that resolve a presentation's motion, activation groups, leaf boxes, depth
   partitions and interior fill against the object's page styles, which the application passes in (`pageStyles`, its
-  `objectPageStyles`). It imports `presentation` and `raster`. Its tests are `node --test` suites in `tests/prepared-presentation/`.
+  `objectPageStyles`). It imports `presentation` and `raster`. Its tests are `node --test` suites in `src/prepared-presentation/`.
 - `src/delivery/` is published as `@cssearth/bake/delivery` (Node only): writing and publishing prepared output. The
   atomic prepared-set and text writers, the page metadata written beside a restored runtime, the WebP encodings prepared
   images are optimised with, the pinned source bytes an acquisition publishes, the verify-after-publish gate for the asset
@@ -68,7 +68,7 @@ its validators accept); the renderer never imports the bake.
   the inventoried runtime-asset locations (the R2 key, URL and restore path of each inventoried file, for a checkout root
   the caller passes in), the public scene images an object ships (its runtime manifest) and the publication of a staged
   preparation into the object package. It imports `objects/sources`. Its tests are `node --test` suites in
-  `tests/delivery/`; the runtime-manifest and publication tests are in `src/delivery/`, where `pnpm test:preparation` finds them.
+  `src/delivery/`; the runtime-manifest and publication tests are in `src/delivery/`, where `pnpm test:preparation` finds them.
 - `src/sources/` is published as `@cssearth/bake/sources` (Node only): source records preparation reads beside an
   object: its authored descriptor, the independent records of the source catalogue (`src/sources/`), the authored
   physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure;
@@ -81,7 +81,7 @@ its validators accept); the renderer never imports the bake.
   shared surveys they quote (`data/investigations/`) and the report over them (`packages/bake/cli/report-investigations.mts`
   is its command). The application passes in the route its context objects show at
   (`CONTEXT_ROUTE`) and its dataset routes. It imports `runtime-source`, `objects/content` and `delivery`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
-  JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
+  JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `src/sources/`.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
   and the renderer's object controls, and the audits that read a prepared presentation and its authored runtime sources back
@@ -91,14 +91,14 @@ its validators accept); the renderer never imports the bake.
   `.github/scripts/checks/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
   transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
   and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
-  Its tests are in `tests/contract/`.
+  Its tests are in `src/contract/`.
 - `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime
   asset host. Staging a pull request's baked bytes against its frozen inventories, publishing the inventoried files, the
   published-asset gate, the deploy check (which reads the renderer's prepared world-context parsers) and the dry-run prune
   report. It is its own topic so that `delivery`'s many importers do not load `undici` or those parsers. It imports `delivery`
   and `objects/sources`. Its commands are `packages/bake/cli/{stage-published-assets,publish-runtime-assets,
   check-assets-published,check-deploy-assets,prune-runtime-assets}.mts` (publish-assets.yml runs the first three from the
-  trusted checkout); its tests are in `tests/asset-publication/`.
+  trusted checkout); its tests are in `src/asset-publication/`.
 - `src/astronomy/` is published as `@cssearth/bake/astronomy` (Node only): preparation's access to the built astronomy
   package (`loadAstronomyPackage`), which finds the build through this package's own name so the path holds from `dist/`.
   It imports no topic. `packages/bake/cli/prepare-solar-geometry.mts` generates `src/platform/solar-geometry.mts` from it;
@@ -112,17 +112,17 @@ its validators accept); the renderer never imports the bake.
   presentation with the renderer's rules (`@cssearth/renderer/navigation/marker-presentation.ts`, which the shell uses to
   draw them). It imports `raster`, `delivery`, `sources`, `astronomy`, and `objects/raster` (loaded only when a marker is
   drawn from a science raster). `packages/bake/cli/prepare-navigation.mts` is its command. Its tests are `node --test`
-  suites in `tests/navigation/`, with the navigation preparation's in `site/test/`.
+  suites in `src/navigation/`, with the navigation preparation's in `site/test/`.
 - `src/facility-renders/` is published as `@cssearth/bake/facility-renders` (Node only): the illustrative poses of the rendered
   facility models, and the types of the three.js renderer (`render.ts`) that `packages/bake/cli/prepare-facility-renders.mts`
   bundles from its source into a browser page. The command loads the application's dataset routes from the checkout and passes
-  them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `tests/facility-renders/`.
+  them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `src/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
   not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the planets'
   photometric phase charts, and the Cesium minimap excerpts vendored into `site/vendor/` (it depends on `@cesium/engine`
   for them and checks the pinned version when the excerpts are made). It imports `raster`, `runtime-source`,
   `objects/raster` and `objects/charts`. Its commands are `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,
-  scientific-charts,cesium-minimap}.mts`; its tests are in `tests/site-assets/` and `site/test/`. The vendored files keep
+  scientific-charts,cesium-minimap}.mts`; its tests are in `src/site-assets/` and `site/test/`. The vendored files keep
   the generator path they were written with (`tools/prepare/prepare-cesium-minimap.mts`, now `packages/bake/cli/prepare-cesium-minimap.mts`), which the ownership inventory
   anchors on.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
@@ -138,19 +138,19 @@ its validators accept); the renderer never imports the bake.
   holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
   because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
-  Its tests are `node --test` suites in `tests/preparation/`.
+  Its tests are `node --test` suites in `src/preparation/`.
 - `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
   scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
-  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command; its tests are in `tests/preparation/`.
+  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command; its scheduler is tested in `src/prepare-objects/`.
 - `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the preparation cache (a verified
   receipt, from `preparation`, skips an unchanged object) over `run-implemented-objects`'s scheduler. It imports
   `preparation` and `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command; its tests are in
-  `tests/preparation/`.
+  `src/prepare-objects/`.
 - `src/prepare-object/` is published as `@cssearth/bake/prepare-object` (Node only): the ordered preparation chain for one
   or more authored objects end to end (builds, catalogue, geometry, the authored preparation, page data, text, markers,
   billboard, world context, provenance), naming the step that failed and how to resume. It imports no topic; its steps
   shell out to the other bake and site-owned preparation commands by path. `packages/bake/cli/prepare-object.mts` is its
-  command; its tests are in `tests/preparation/`.
+  command; its tests are in `src/prepare-object/`.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
   libuv's thread pool, where sharp encodes, to the cores. A command imports it before any other bake entry. It is the one
   entry `package.json` lists under `sideEffects`.

@@ -611,7 +611,7 @@ fields and metadata; the parser fills the bank's fields in, and the bake copies
 the bank's files into the body's scene directory instead of encoding them, so
 the body's prepared output, inventory and published files are what encoding
 would give. `prepare-lighting-bank.mts --check`, run by
-[its test](../tests/raster/lighting-bank-bake.test.ts), bakes each bank afresh
+[its test](../packages/bake/src/raster/lighting-bank-bake.test.ts), bakes each bank afresh
 and compares it with the tracked files byte for byte, so the copy is never stale.
 A body whose lighting differs (Neptune, Uranus, the HD 110067 planets) keeps its
 inline block and its own encode. The `sphere` bank's law is authored: a 0.35
@@ -779,10 +779,10 @@ The 2026-09-26 preparation covers all 722 body scenes:
 1,444 inventoried files and 28,064,758 image bytes. Each image is 1024 square;
 its receipt matched the runtime, default dataset, camera rotation and both
 inventory hashes. Quaoar's rings required a distance of 16 radii; the other
-721 captures used eight. The [representative sheet](performance/evidence/arrival-billboards/overview.webp)
+721 captures used eight. The [representative sheet](images/arrival-billboards/overview.webp)
 shows the existing datasets, including their unobserved regions and modeled colours.
 
-The [Earth-to-Lutetia sequence](performance/evidence/arrival-billboards/earth-to-lutetia.webp)
+The [Earth-to-Lutetia sequence](images/arrival-billboards/earth-to-lutetia.webp)
 contains eight of 50 native iPad frames from the performance build at that
 revision (iPad15,7, iOS 26.6, portrait). Times are relative to the first screen
 grab. The 4.902, 5.213 and 5.377 second frames bracket the billboard reveal;

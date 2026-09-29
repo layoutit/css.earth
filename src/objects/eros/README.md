@@ -45,7 +45,7 @@ Lim and Nittler (2009) recalibrated the X-ray data of [Nittler et al. (2001)](ht
 
 ### Native SBMT comparison, 14 September 2026
 
-The [shared SBMT oracle](../../../tests/oracles/sbmt/README.md) reads this body's
+The [shared SBMT oracle](https://github.com/layoutit/cssEarth/blob/897b286a62cc2a4d325fe9177690339fdb71d2f1/tests/oracles/sbmt/README.md) (now [here](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md)) reads this body's
 full Gaskell ver128q mesh and the 537×244 NEAR MSI exposure M0146235607 directly.
 Its [corrected SUM](source/observations/M0146235607.SUM) and
 [SPICE INFO](source/observations/M0146235607F4_2P_CIF_DBL.INFO) are separate camera
@@ -53,7 +53,7 @@ cases. They give identical sampled image values and matching visible intercepts
 between the native reference and cssEarth; the maximum tested UV difference is
 0.0817 pixel, within the fixed quarter-pixel comparison limit. These results
 cover the probes and software/input pins in the
-[committed fixture](../../../tests/oracles/sbmt/projection.json).
+[committed fixture](https://github.com/layoutit/cssEarth/blob/897b286a62cc2a4d325fe9177690339fdb71d2f1/tests/oracles/sbmt/projection.json) (now [here](../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json)).
 
 The new observation records support preparation tests. The production surface
 continues to use the controlled Golish maps listed above. The comparison does

@@ -202,7 +202,8 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
       assert.equal(body.orbit.centerBodyId, parent);
       assert(agrees(modelPositionM(parent), body.orbit.centerPositionM), `${id} orbit differs from its parent's independent ephemeris`);
     }
-    // A placed star with an orbiting planet roots its own planetary system.
+    // A placed star with an orbiting planet roots its own planetary system and frames every planet, as the Sun does;
+    // the radius share only leaves small moons out of a planet's framing.
     for (const id of HOSTED_PLANET_IDS) {
       const host = result.bodies.find((body: { id: string }) => body.id === BODIES[id].parent);
       assert.ok(host.systemView?.memberIds.includes(id), `${host.id} frames its planet ${id}`);
