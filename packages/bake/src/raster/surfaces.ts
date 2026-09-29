@@ -1,4 +1,5 @@
 import sharp, { type Sharp } from 'sharp';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createPolarSprite, packLatitudeRaster, applySurfaceExposure } from '@cssearth/objects';
 import { RASTER_DENSITY, type RasterRecipe } from './config.ts';
@@ -71,6 +72,7 @@ async function writeRasterPages(image: Sharp, pages: RasterPagePlan, bands: numb
 export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: string, publicDirectory: string, interpret?: ObservationInterpretation) {
     const pages = rasterPagePlan(config, RASTER_DENSITY);
     const decoded = new Map<string, Uint8Array>();
+    const constantSurfaces: Record<string, { packedWidth: number; packedHeight: number; rgba: number[] }> = {};
     const metadata: Record<string, unknown> = {};
     const interpretations: Record<string, Record<string, Readonly<Record<string, unknown>>>> = {};
     const nativeSourcePoles = new Map<string, Promise<NativePoleSampler>>();
@@ -218,6 +220,17 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             await writeLossyWebp(raster(disc, plateSize, plateSize).resize(config.thumbnail.size, config.thumbnail.size, { kernel: 'lanczos3' }),
                 assetPath(publicDirectory, surface.thumbnail, 1, surface.id), { alphaQuality: 100, effort: 6 });
         }
+        // A lossless, spatially constant opaque surface has one texel of information. Keep the packed
+        // coordinate domain for geometry preparation, but never transport its millions of identical pixels.
+        // Poles, limb plates and thumbnails above still consume the full raster; alpha coverage is never collapsed.
+        if (nearest && !pages && !surface.encoding) {
+            const { data, info } = await sharp(await readFile(output)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+            const rgba = [...data.subarray(0, 4)];
+            if (info.channels === 4 && rgba[3] === 255 && data.every((value, index) => value === rgba[index % 4])) {
+                constantSurfaces[surface.id] = { packedWidth: info.width, packedHeight: info.height, rgba };
+                await raster(data.subarray(0, 4), 1, 1).webp({ lossless: true, effort: 6 }).toFile(output);
+            }
+        }
     }
     // Angular poles are sampled from the whole source map (and an incomplete lens is completed from its fallback), so they
     // are drawn once every source is loaded. Each lens writes its own north-then-south sprite, as the bilinear poles do.
@@ -238,5 +251,5 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             else await writeLossyWebp(image, path, { alphaQuality: 100 });
         }
     }
-    return { metadata, decoded, interpretations };
+    return { metadata, decoded, interpretations, constantSurfaces };
 }

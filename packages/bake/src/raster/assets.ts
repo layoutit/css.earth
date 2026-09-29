@@ -1,5 +1,6 @@
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
+import { isRecord } from '@cssearth/core';
 import { resolve } from 'node:path';
 import { RASTER_DENSITY, type RasterRecipe } from './config.ts';
 import { prepareSurfaces } from './surfaces.ts';
@@ -25,7 +26,7 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
 }) {
     await mkdir(publicDirectory, { recursive: true });
     await mkdir(outputDirectory, { recursive: true });
-    const { metadata, interpretations } = await prepareSurfaces(config, sourceDirectory, publicDirectory, interpret);
+    const { metadata, interpretations, constantSurfaces } = await prepareSurfaces(config, sourceDirectory, publicDirectory, interpret);
     const limbFor = (block: LimbBlock | undefined, where: string) => block ? prepareLimb(block, sourceDirectory, publicDirectory, config, where, shape?.polarToEquatorial ?? NaN) : Promise.resolve(undefined);
     const lighting = config.lighting ? await prepareLighting(config, config.lighting, publicDirectory, await limbFor(config.lighting.limb, 'lighting.limb')) : undefined;
     const atmosphere = config.atmosphere ? await prepareAtmosphere(config.atmosphere, sourceDirectory, publicDirectory, (await limbFor(config.atmosphere.limb, 'atmosphere.limb'))!) : undefined;
@@ -44,7 +45,7 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
         const name = outputName(template, RASTER_DENSITY, surfaceId);
         return emptyPlates.has(name) ? {} : { [`${key}Url`]: config.publicBase + name, [`${key}Url2x`]: config.publicBase + name };
     };
-    const surfaces = Object.fromEntries(config.surfaces.map(surface => [surface.id, { id: surface.id, falseColor: surface.falseColor, ...(surface.resolutionScale ? { dimensions: { width: config.width * surface.resolutionScale, height: config.height * surface.resolutionScale } } : {}), url: config.publicBase + outputName(surface.output, RASTER_DENSITY, surface.id), url2x: config.publicBase + outputName(surface.output, RASTER_DENSITY, surface.id), ...(config.emission ? { ...plate('corona', config.emission.offLimbOutput, surface.id), ...plate('limb', config.emission.limbOutput, surface.id) } : {}), ...(metadata[surface.id] ? { coverageCompletion: metadata[surface.id] } : {}), ...(interpretations[surface.id] ? { interpretation: interpretations[surface.id] } : {}) }]));
+    const surfaces = Object.fromEntries(config.surfaces.map(surface => [surface.id, { id: surface.id, falseColor: surface.falseColor, ...(constantSurfaces[surface.id] ? { constantRaster: constantSurfaces[surface.id] } : {}), ...(surface.resolutionScale ? { dimensions: { width: config.width * surface.resolutionScale, height: config.height * surface.resolutionScale } } : {}), url: config.publicBase + outputName(surface.output, RASTER_DENSITY, surface.id), url2x: config.publicBase + outputName(surface.output, RASTER_DENSITY, surface.id), ...(config.emission ? { ...plate('corona', config.emission.offLimbOutput, surface.id), ...plate('limb', config.emission.limbOutput, surface.id) } : {}), ...(metadata[surface.id] ? { coverageCompletion: metadata[surface.id] } : {}), ...(interpretations[surface.id] ? { interpretation: interpretations[surface.id] } : {}) }]));
     const files = new Set<string>(), density = RASTER_DENSITY;
     for (const surface of config.surfaces) {
         files.add(outputName(surface.thumbnail, 1, surface.id));
@@ -91,4 +92,22 @@ async function fullyTransparent(path: string) {
     const { data, info } = await sharp(path).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     for (let i = info.channels - 1; i < data.length; i += info.channels) if (data[i] !== 0) return false;
     return true;
+}
+
+/** Compacted constant surfaces retain their full atlas coordinate domain. A leaf's prepared
+ * raster scale must not change when an image with identical pixels is stored as one texel. */
+export function surfaceCoordinateWidth(assets: unknown, url: string, imageWidth: number): number {
+    if (!isRecord(assets) || !isRecord(assets.surfaces)) return imageWidth;
+    for (const surface of Object.values(assets.surfaces)) {
+        if (!isRecord(surface) || (surface.url !== url && surface.url2x !== url) || surface.constantRaster === undefined) continue;
+        const value = surface.constantRaster;
+        if (!isRecord(value) || !Number.isSafeInteger(value.packedWidth) || !(Number(value.packedWidth) > 0) ||
+            !Number.isSafeInteger(value.packedHeight) || !(Number(value.packedHeight) > 0) ||
+            !Array.isArray(value.rgba) || value.rgba.length !== 4 || value.rgba[3] !== 255 ||
+            !value.rgba.every(channel => Number.isInteger(channel) && channel >= 0 && channel <= 255) || imageWidth !== 1) {
+            throw new TypeError('Invalid constant surface raster: ' + url);
+        }
+        return Number(value.packedWidth);
+    }
+    return imageWidth;
 }

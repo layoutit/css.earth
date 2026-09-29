@@ -1,4 +1,4 @@
-import { expect, test } from 'vitest';
+import { expect, test, vi } from 'vitest';
 import { mountLensBillboards, parseLensBillboards } from './lens-billboards.js';
 
 const sha = 'a'.repeat(64);
@@ -22,7 +22,7 @@ test('prepared billboards carry every bank, pinned, with an in-atlas cell', () =
   expect(() => parseLensBillboards({ ...input, banks: [{ ...input.banks[1], attached: undefined }] })).toThrow(/attached/);
 });
 
-test('a billboard samples its atlas cell only once shown, and hides behind the camera or at zero opacity', () => {
+test('a billboard waits for its shared atlas decode, then samples its cell and obeys visibility', () => {
   const nodes: { tag: string; style: Record<string, string> & { cssText?: string }; dataset: Record<string, string>; append(node: unknown): void }[] = [];
   const create = (tag: string) => {
     const node = { tag, style: {} as Record<string, string>, dataset: {} as Record<string, string>, children: [] as unknown[],
@@ -31,7 +31,8 @@ test('a billboard samples its atlas cell only once shown, and hides behind the c
   };
   const host = { ownerDocument: { createElement: create }, insertBefore() {} } as unknown as HTMLElement;
   const { atlas, banks } = parseLensBillboards(input);
-  const layer = mountLensBillboards({ host, before: null, atlasUrl: '/atlas.webp', atlas,
+  const prepareAtlas = vi.fn(() => false);
+  const layer = mountLensBillboards({ host, before: null, atlasUrl: '/atlas.webp', atlas, prepareAtlas,
     entries: [{ id: 'nebula', frame, billboard: banks.get('nebula')!.billboard! }] });
   const leaf = nodes.find(node => node.dataset.lensBillboard === 'nebula')!;
   expect(leaf.style.cssText).toContain('background-size:200% 200%;background-position:100% 100%');
@@ -39,6 +40,17 @@ test('a billboard samples its atlas cell only once shown, and hides behind the c
   const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 400, heightPixels: 300 };
   const world = (orientationXyzw: readonly [number, number, number, number]) =>
     ({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10] as const, orientationXyzw } });
+  layer.publish(0, 0, world([0, 0, 0, 1]), viewport);
+  expect(prepareAtlas).not.toHaveBeenCalled();
+  layer.publish(0, 0.5, world([0, 0, 0, 1]), viewport);
+  expect(prepareAtlas).toHaveBeenCalledOnce();
+  expect(leaf.style.backgroundImage).toBeUndefined();
+  expect(leaf.style.display).not.toBe('block');
+  prepareAtlas.mockReturnValue(true);
+  layer.setCoasting(true);
+  layer.publish(0, 0.5, world([0, 0, 0, 1]), viewport);
+  expect(leaf.style.backgroundImage).toBeUndefined();
+  layer.setCoasting(false);
   layer.publish(0, 0.5, world([0, 0, 0, 1]), viewport);
   // A fixed 128 px box (two texels per CSS pixel of a 256 px cell) scaled to the 20 px it projects to: the camera
   // changes only its transform (motion-freezes-membership.md).

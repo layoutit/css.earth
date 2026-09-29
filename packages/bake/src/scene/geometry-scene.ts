@@ -10,6 +10,7 @@ import { createLeafProjector, rendererPolygon, type LeafImagePixels } from './pr
 import { prepareCutaway } from './cutaway.ts';
 import { prepareSeamOutsetSteps } from './seam-outset.ts';
 import { ringWedgeLayout, wedgeMatrix } from './ring-wedges.ts';
+import { prepareProjectiveTextureLayer } from './projective-surface-raster.ts';
 import type { InteriorAssets } from './cutaway.ts';
 import { prepareAtmosphericMaterial } from './atmosphere.ts';
 export { parseGeometryProfile } from './profile.ts';
@@ -64,8 +65,10 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
  const planes=(profile.planes??[]).map(plane=>{
   const scale=2*plane.radius*profile.projection.tileSize/plane.size,half=scale*plane.size/2,round=(value:number)=>Number(value.toFixed(6));
   const className=`${profile.namespace}-${plane.id}-leaf`,wedges=assets.ringWedges?.[plane.url.slice(plane.url.lastIndexOf('/')+1)];
+  const matrix=[0,round(scale),0,0,round(scale),0,0,0,0,0,1,0,round(-half),round(-half),0,1];
   const leaves=wedges?wedgeLeaves(plane,wedges,scale,className):[{tag:'s',className,
-    style:`transform:matrix3d(0,${round(scale)},0,0,${round(scale)},0,0,0,0,0,1,0,${round(-half)},${round(-half)},0,1);`+
+    projectiveTextureLayer:prepareProjectiveTextureLayer(matrix),
+    style:`transform:matrix3d(${matrix});`+
      `--polycss-atlas-width:${plane.size}px;--polycss-atlas-height:${plane.size}px;background-position:0 0;`+
      `background-size:${plane.size}px ${plane.size}px;backface-visibility:visible`}];
   return {id:plane.id,className:`${profile.namespace}-${plane.id}-plane`,url:plane.url,color:plane.color,radius:plane.radius,leaves};
@@ -73,9 +76,14 @@ export async function prepareGeometryScene({profile,raster,assets,solarSource,st
  function wedgeLeaves(plane:{size:number;id:string},wedges:{count:number;contentPixels:number},scale:number,className:string){
   const layout=ringWedgeLayout({size:plane.size,count:wedges.count,contentPixels:wedges.contentPixels});
   if(layout.innerPixels*scale<=profile.surface.radius*profile.projection.tileSize)throw new TypeError(`Ring ${plane.id} wedges would reach into the body; they need more wedges or a ring that begins farther out.`);
-  return layout.angles.map((_,k)=>({tag:'s',className,
-   style:`transform:matrix3d(${wedgeMatrix(layout,k,scale)});--polycss-atlas-width:${layout.width}px;--polycss-atlas-height:${layout.height}px;`+
-    `background-position:0 ${-k*layout.height}px;background-size:${layout.width}px ${layout.height*layout.count}px;backface-visibility:visible`}));
+  return layout.angles.map((_,k)=>{
+   const matrix=wedgeMatrix(layout,k,scale);
+   // Rings share the prepared backing-size contract: keep the same frame and texture address,
+   // while the node compiler scales the leaf's box and its inverse transform together.
+   return {tag:'s',className,projectiveTextureLayer:prepareProjectiveTextureLayer(matrix),
+   style:`transform:matrix3d(${matrix});--polycss-atlas-width:${layout.width}px;--polycss-atlas-height:${layout.height}px;`+
+    `background-position:0 ${-k*layout.height}px;background-size:${layout.width}px ${layout.height*layout.count}px;backface-visibility:visible`};
+  });
  }
  const interior=profile.cutaway&&assets.interior?prepareCutaway(profile,assets.interior,polygons,leaves,projector):undefined;
  if(Boolean(profile.cutaway)!==Boolean(assets.interior))throw new TypeError('Cutaway geometry and prepared assets must be supplied together.');

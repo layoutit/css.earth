@@ -71,6 +71,25 @@ export function restoreDepthSource<T extends PreparedPresentationDefinition>(def
  * a visibility cycle stays native. Neither path cuts or changes a source face.
  * Sixty-four is a packing target, not a claim about irreducible cycle sizes. */
 export function partitionSurface(triangles: readonly SurfaceTriangle[], maximumLeaves = MAXIMUM_DEPTH_LEAVES, frontSigns?: readonly number[]) {
+  const groups: number[][] = [];
+  function leaf(ids: number[]): PreparedDepthOrder { const group = groups.length; groups.push(ids.sort((a, b) => a - b)); return { group }; }
+  // Resolve the whole surface before considering geometric split planes. A
+  // separating plane is not evidence that the painter order needs to change
+  // with the eye. Fixed priorities keep rotation to transform publication.
+  if (frontSigns) {
+    const components = visibilityComponents(triangles, frontSigns);
+    const sequence: PreparedDepthOrder[] = []; let pending: number[] = [];
+    const flush = () => { if (pending.length) sequence.push(leaf(pending)); pending = []; };
+    for (const members of components) {
+      if (pending.length + members.length > maximumLeaves) flush();
+      // Never split a visibility cycle into independently flattened contexts.
+      // Its faces need native depth, even when it exceeds the packing target.
+      if (members.length > maximumLeaves) sequence.push(leaf(members));
+      else pending.push(...members);
+    }
+    flush();
+    return { order: sequence.length === 1 ? sequence[0] : { sequence }, groups };
+  }
   const normals = new Map<string, number[]>();
   for (const points of triangles) for (let edge = 0; edge < points.length; edge++) {
     const a = points[edge], b = points[(edge + 1) % points.length];
@@ -86,8 +105,6 @@ export function partitionSurface(triangles: readonly SurfaceTriangle[], maximumL
     const low = Math.min(...distances), high = Math.max(...distances);
     return low < -1e-5 && high > 1e-5 ? 2 : low + high >= 0 ? 1 : -1;
   }) }));
-  const groups: number[][] = [];
-  function leaf(ids: number[]): PreparedDepthOrder { const group = groups.length; groups.push(ids.sort((a, b) => a - b)); return { group }; }
   function visit(ids: number[]): PreparedDepthOrder {
     let best: { candidate: typeof candidates[number]; score: number } | null = null;
     if (ids.length > maximumLeaves) for (const candidate of candidates) {
@@ -101,21 +118,7 @@ export function partitionSurface(triangles: readonly SurfaceTriangle[], maximumL
       const score = Math.max(front, back);
       if (!best || score < best.score) best = { candidate, score };
     }
-    if (!best) {
-      if (!frontSigns || ids.length <= maximumLeaves) return leaf(ids);
-      const components = visibilityComponents(ids.map(id => triangles[id]), ids.map(id => frontSigns[id]));
-      if (components.length === 1) return leaf(ids);
-      const sequence: PreparedDepthOrder[] = []; let pending: number[] = [];
-      const flush = () => { if (pending.length) sequence.push(leaf(pending)); pending = []; };
-      for (const component of components) {
-        const members = component.map(index => ids[index]);
-        if (pending.length + members.length > maximumLeaves) flush();
-        if (members.length > maximumLeaves) sequence.push(visit(members));
-        else pending.push(...members);
-      }
-      flush();
-      return sequence.length === 1 ? sequence[0] : { sequence };
-    }
+    if (!best) return leaf(ids);
     const { normal, sides } = best.candidate;
     return { plane: [normal[0], normal[1], normal[2], 0], back: visit(ids.filter(id => sides[id] === -1)), front: visit(ids.filter(id => sides[id] === 1)) };
   }

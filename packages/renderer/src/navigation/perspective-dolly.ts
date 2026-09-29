@@ -269,7 +269,10 @@ export function createPerspectiveDolly({
       }
       const genericBody = genericBodyProjection(genericPresentation, bodyRadius, focal);
       projectedBody = genericBody;
-      const requestedLod = levelOfDetailFor(levelOfDetail, genericBody.silhouetteDiameter);
+      // An oblique sphere can project a large ellipse millions of pixels outside
+      // the viewport. Size alone must not reactivate its hidden render layers.
+      const inView = bodyIntersectsViewport(genericPresentation, bodyRadius, focal, visibleRect!);
+      const requestedLod = levelOfDetailFor(levelOfDetail, inView ? genericBody.silhouetteDiameter : 0);
       retainedDetail = presentedDetail && isCameraMoving() && requestedLod.stage !== 'geometry';
       // An input reversal must not retire textures and reset every reveal batch.
       // The already-mounted mesh follows the camera until motion settles; cold
@@ -415,6 +418,20 @@ export function createPerspectiveDolly({
       });
     },
   });
+}
+
+/** Conservative sphere/frustum test, including spheres crossing the eye plane. */
+function bodyIntersectsViewport(
+  presentation: ReturnType<typeof presentWorldCamera>, radius: number, focal: number, rect: VisibleRect,
+): boolean {
+  const [x, y] = presentation.bodyCenterUnits, depth = presentation.depthUnits;
+  if (depth + radius <= 0) return false;
+  const left = rect.left / focal, right = rect.right / focal;
+  const top = rect.top / focal, bottom = rect.bottom / focal;
+  return x - left * depth >= -radius * Math.hypot(1, left)
+    && x - right * depth <= radius * Math.hypot(1, right)
+    && y - top * depth >= -radius * Math.hypot(1, top)
+    && y - bottom * depth <= radius * Math.hypot(1, bottom);
 }
 
 function genericBodyProjection(

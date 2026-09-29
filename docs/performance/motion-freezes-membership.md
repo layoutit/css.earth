@@ -56,7 +56,9 @@ Once a mesh is presented, its geometry and material demand remain resident throu
 Crossing the distant billboard threshold must not hide the scene or reset its prepared reveal groups during that
 motion: a quick reversal would recreate the same composited leaves repeatedly. Proxy opacity still follows projected
 size. When the shared motion signal becomes inactive, the camera publishes the current level once and retires detail
-if it is still distant. A cold distant mount does not activate detail merely because the camera is moving, and a mesh
+if it is still distant. A cold distant or off-screen mount does not activate detail merely because the camera is moving. Detail demand first
+tests the physical sphere against the measured viewport: an oblique silhouette can be large yet entirely outside it.
+This also prevents a hidden departing mesh from restarting its reveal groups off-screen. A mesh
 without committed material still cannot reveal.
 
 ## Hidden stays out of compositing
@@ -75,7 +77,7 @@ These change paint every frame on purpose, and each has a budget:
 | Exception | What changes | Budget | Why it stays |
 | --- | --- | --- | --- |
 | Orbit strokes (`solar-system/prepared-orbit-lines.ts`) | SVG `points`, `stroke-opacity` | the visible runs | Static 3D chords cost 14 ms against 3.0 ms for the shared SVG ([prepared orbit strokes](prepared-orbit-strokes.md)) |
-| Batched star points (`universe/batched-spatial-points.ts`) | `box-shadow` point lists | 8 nodes | Camera motion changes paint, never DOM shape |
+| Batched star points (`universe/batched-spatial-points.ts`) | SVG circle paths for opaque catalogue palettes; `box-shadow` for translucent or distance-dependent stellar photometry | One retained path per prepared colour, or 8 shadow nodes | Camera motion changes paint, never DOM shape; catalogue dots avoid the native shadow renderer |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 | Surface minimap viewport boxes (`site/minimap/surface-minimap.mts`) | `left`, `top`, `width`, `height` of up to three small boxes | 3 boxes | They follow the camera live. A transform would scale their border and the map image drawn inside them |
@@ -121,6 +123,11 @@ opacity split when a flight ends on its system card. Overview controls annotatio
 not restore a second image over the mounted host.
 
 Arrival commits the selection without publishing the old shell. After the incoming content owners bind, the router publishes once. Later renderer readiness notifications retain the same shell subject; focus-card, system-card and selection setters skip unchanged DOM values. Stage cleanup still restores values that actually changed, because the next object may not declare the same bindings.
+
+Departure history checkpoints reuse the view already saved after a drag. The URL, history entry identity and saved
+view must all match before a replacement can be skipped. A new camera pose or stale history state still publishes;
+explicit pushes remain distinct entries even when they name the same URL. Back restoration still remembers the
+departed view before adopting the incoming entry.
 
 ### Optional controls and scene retirement
 

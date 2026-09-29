@@ -12,6 +12,19 @@ Original images, meshes and labels
   → write prepared assets and provenance
 ```
 
+## Constant surface rasters
+
+The raster lane stores a lossless surface as a 1×1 WebP only when every decoded
+pixel is exactly the same opaque RGBA value. This is lossless spatial compaction;
+any color difference or partial alpha keeps the full raster. Paged surfaces and
+JPEG outputs keep their existing storage. Pole coverage and limb plates are not
+compacted by this pass.
+
+The surface's `constantRaster` record retains its packed coordinate dimensions
+and color. Geometry preparation uses that coordinate width, so compaction does
+not change leaf boxes, transforms, or camera framing. CSS already supplies the
+prepared background size and position; the runtime needs no special path.
+
 ## Find the processing step
 
 | Step | Implementation |

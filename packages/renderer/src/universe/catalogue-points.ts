@@ -200,6 +200,10 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
             ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
             : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit),
           screenPointCount(spread, cameraUnits, latest?.viewport.focalPixels ?? 0)),
+          // A single SVG path unions overlapping subpaths. Preserve per-dot alpha
+          // accumulation for translucent banks with the shadow painter.
+          paintPalette: [...styles.values()].every(style => style.opacity === 1)
+            ? [...styles.values()].map(style => `${style.colorCss}ff`) : undefined,
           className: `catalogue-points-${bank.id}`, stylePoint: point => styles.get(point.colorCss)! });
         root.dataset.cataloguePoints = bank.id;
         if (latest) runtime.publish(latest);
