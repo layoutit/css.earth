@@ -19,10 +19,10 @@ test('measured bright HIP survives missing Tycho astrometry, wins identity, and 
   assert.ok(star.decDegrees < star.sourceDecDegrees); assert.equal(star.photometry.errorMagnitudeV, null);
   assert.equal(result.stars[1]!.magnitudeV, 7.91); assert.equal(result.stars[1]!.colorIndexBV, .85);
 });
-test('scientific pin survives changed response timestamp but rejects changed photometry', () => {
-  const pin = readFieldCatalogueTsv(hip, 'hipparcos').dataSha256;
-  assert.equal(readFieldCatalogueTsv('#INFO\tDate=new\n' + hip, 'hipparcos').dataSha256, pin);
-  assert.notEqual(readFieldCatalogueTsv(hip.replace('2.85', '3.85'), 'hipparcos').dataSha256, pin);
+test('scientific rows ignore a changed response timestamp but carry changed photometry', () => {
+  const rows = readFieldCatalogueTsv(hip, 'hipparcos').rows;
+  assert.deepEqual(readFieldCatalogueTsv('#INFO\tDate=new\n' + hip, 'hipparcos').rows, rows);
+  assert.notDeepEqual(readFieldCatalogueTsv(hip.replace('2.85', '3.85'), 'hipparcos').rows, rows);
 });
 test('error responses, missing columns, invalid numbers and duplicate HIP IDs fail', () => {
   assert.throws(() => readFieldCatalogueTsv('<html>Unavailable</html>', 'hipparcos'));

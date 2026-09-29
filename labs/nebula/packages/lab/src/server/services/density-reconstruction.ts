@@ -18,11 +18,12 @@ import { lensLevels } from './lens-levels.ts';
 import { lensDifferenceHandler } from './lens-difference.ts';
 import { lensRadialHandler } from './lens-radial.ts';
 
+import { isResultName } from '../../features/result-name.ts';
 const cache = '.local/nebula-lab/reconstructions';
 const removalCache = '.local/nebula-lab/star-removal-nox-applied';
 const record = (value: unknown): value is Record<string, any> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 /** A reconstruction is named by what it was made from: `<subject>-<image>`, or a model or lens name built the same way. */
-const token = (value: unknown): value is string => typeof value === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(value) && value.length <= 160;
+const token = isResultName;
 /** The saved request of a result directory equals `expected`, compared structurally. */
 async function sameRequest(root: string, directory: string, expected: unknown) {
   const bytes = await readFile(resolve(root, directory, 'request.json')).catch(error => { if (error.code === 'ENOENT') return null; throw error; });

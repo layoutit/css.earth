@@ -4,7 +4,7 @@
  * Particle records have 12/9/11 float32 values respectively; mass precedes xyz.
  * No stellar ages, luminosities, colors, gas or dust are inferred here.
  */
-import { createHash, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { mkdir, open, rename, rm, writeFile } from 'node:fs/promises';
 import type { FileHandle } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -36,7 +36,7 @@ export interface TipsyImportOptions {
   massUnitSolarMass: number;
   center?: 'none' | 'median';
   layout?: 'float32';
-  expected?: Partial<TipsyCounts> & { snapshotSha256?: string };
+  expected?: Partial<TipsyCounts>;
 }
 interface AxisStatistics {
   boundsKpc: { min: Vec3; max: Vec3 };
@@ -44,7 +44,7 @@ interface AxisStatistics {
 }
 export interface TipsyImportReceipt {
   schema: 'cssearth-tipsy-stars-lab@1';
-  source: { path: string; sha256: string; bytes: number; header: TipsyHeader };
+  source: { path: string; bytes: number; header: TipsyHeader };
   selection: {
     family: 'stars'; start: number; count: number; endExclusive: number;
     firstSourceByte: number; sourceRecordBytes: 44;
@@ -55,7 +55,7 @@ export interface TipsyImportReceipt {
   outputStatistics: AxisStatistics;
   mass: { sumSourceUnits: number; sumSolarMass: number; minSourceUnits: number; maxSourceUnits: number };
   output: {
-    path: string; sha256: string; bytes: number; count: number;
+    path: string; bytes: number; count: number;
     layout: 'float32-le-xyz-mass'; recordBytes: 16;
     maximumPositionRoundingErrorKpc: Vec3;
   };
@@ -154,9 +154,6 @@ function validateOptions(options: TipsyImportOptions): void {
     throw new TypeError('Output must not replace the source snapshot.');
   }
   const expected = options.expected;
-  if (expected?.snapshotSha256 !== undefined && !/^[a-f0-9]{64}$/.test(expected.snapshotSha256)) {
-    throw new TypeError('Expected snapshot SHA-256 must be lowercase hexadecimal.');
-  }
   for (const key of ['totalCount', 'gasCount', 'darkCount', 'starCount'] as const) {
     if (expected?.[key] !== undefined) integer(expected[key], `Expected ${key}`);
   }
@@ -179,12 +176,6 @@ export async function importTipsyStars(options: TipsyImportOptions): Promise<Tip
     }
     const { start, count } = options.starRange;
     if (start + count > header.starCount) throw new RangeError('Requested range exceeds the Tipsy star family.');
-    const sourceHash = createHash('sha256');
-    for await (const chunk of file.createReadStream({ start: 0, autoClose: false })) sourceHash.update(chunk);
-    const snapshotSha256 = sourceHash.digest('hex');
-    if (options.expected?.snapshotSha256 !== undefined && snapshotSha256 !== options.expected.snapshotSha256) {
-      throw new TypeError('Tipsy snapshot SHA-256 differs from the pinned source.');
-    }
     const firstSourceByte = header.starByteOffset + start * STAR_BYTES;
     const output = Buffer.alloc(count * RECORD_BYTES);
     const axes = [new Float32Array(count), new Float32Array(count), new Float32Array(count)];
@@ -237,13 +228,13 @@ export async function importTipsyStars(options: TipsyImportOptions): Promise<Tip
     }
     const receipt: TipsyImportReceipt = {
       schema: 'cssearth-tipsy-stars-lab@1',
-      source: { path: options.snapshotPath, sha256: snapshotSha256, bytes: before.size, header },
+      source: { path: options.snapshotPath, bytes: before.size, header },
       selection: { family: 'stars', start, count, endExclusive: start + count, firstSourceByte, sourceRecordBytes: 44 },
       units: { position: 'kpc', massUnitSolarMass: options.massUnitSolarMass, time: 'uninterpreted-source-value' },
       centering: { method, offsetKpc, operation: 'output xyz = float32(source xyz - offsetKpc); source axes are not rotated or rescaled' },
       sourceStatistics, outputStatistics: statistics(axes),
       mass: { sumSourceUnits: massSum, sumSolarMass: massSolar, minSourceUnits: minMass, maxSourceUnits: maxMass },
-      output: { path: options.outputPath, sha256: createHash('sha256').update(output).digest('hex'), bytes: output.length,
+      output: { path: options.outputPath, bytes: output.length,
         count, layout: 'float32-le-xyz-mass', recordBytes: 16, maximumPositionRoundingErrorKpc },
       interpretation: 'Simulation star-family particles, not observed individual stars. Source masses are unchanged; no ages, populations, luminosities or dust are inferred.',
     };

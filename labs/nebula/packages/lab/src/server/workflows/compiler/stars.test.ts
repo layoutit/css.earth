@@ -16,7 +16,7 @@ function image(gain = 1, scale = 1, background = 0, centers: [number, number][] 
       original[at] = residual[at]! + 20;
     }
   }
-  const layer = (data: Uint8Array) => ({ width, height, data, path: 'fixture', sha256: 'fixture' });
+  const layer = (data: Uint8Array) => ({ width, height, data, path: 'fixture' });
   const sampleOriginal = (x: number, y: number, out: [number, number, number]) => {
     const px = Math.floor(x / scale), py = Math.floor(-y / scale);
     if (px < 0 || py < 0 || px >= width || py >= height) return false;
@@ -171,7 +171,7 @@ test('more than 6000 sharper faint peaks cannot preempt a bright broad star befo
   }
   for (let y = 0; y < 80; y++) for (let x = 0; x < 81; x++) add(8 + x * 12, 8 + y * 12, 180, .8);
   add(500, 985, 90, 10);
-  const layer = { width, height, data, path: 'fixture', sha256: 'fixture' };
+  const layer = { width, height, data, path: 'fixture' };
   const sample = (x: number, y: number, out: [number, number, number]) => {
     const px = Math.floor(x), py = Math.floor(-y);
     if (px < 0 || py < 0 || px >= width || py >= height) return false;

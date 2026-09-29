@@ -22,7 +22,7 @@ async function fixture(t: { after(fn: () => Promise<void>): void }) {
     exposureGain: 1, masterWidth: 8, masterDirectory: join(root, 'masters'), unitsPerSourceUnit: 1, provenance: {}, cropTransparent: true,
     deliveryBanks: [{ width: 8, outputDirectory: join(root, 'neutral'), imageEncoding: { format: 'png' } }],
     sampleEmission(x, y, z, out) { out.fill(Math.max(Math.abs(x), Math.abs(y), Math.abs(z)) < .6 ? .2 : 0); }, onProgress() {} });
-  const slices = banks[0]!.slices, fieldIdentity = 'a'.repeat(64), alphaSha256 = await compilerAlphaDigest(join(root, 'neutral'), slices);
+  const slices = banks[0]!.slices, fieldIdentity = 'fixture-field', alphaSha256 = await compilerAlphaDigest(join(root, 'neutral'), slices);
   slices.provenance = { fieldIdentity, alphaSha256 };
   await writeFile(join(root, 'neutral/volume-slices.json'), JSON.stringify(slices));
   const volume = compileCssVolume({ id: 'compiler-empty-layers', frame, slices: compilerPreparedSlices(slices), recipe: { anchors: [] } });

@@ -25,6 +25,14 @@ export async function findVariant(directory: string, request: unknown, file = 'r
   return null;
 }
 
+/** Whether `directory/<file>` records exactly `inputs`; a missing file means nothing has been saved there yet. */
+export async function savedInputsMatch(directory: string, inputs: unknown, file = 'inputs.json') {
+  const text = await readFile(resolve(directory, file), 'utf8').catch((error: NodeJS.ErrnoException) => {
+    if (error.code === 'ENOENT' || error.code === 'ENOTDIR') return null; throw error;
+  });
+  return text !== null && sameRequest(JSON.parse(text), inputs);
+}
+
 /** An existing variant for `request`, or a fresh random name for a new one. */
 export async function variantFor(directory: string, request: unknown, file = 'request.json') {
   const existing = await findVariant(directory, request, file);

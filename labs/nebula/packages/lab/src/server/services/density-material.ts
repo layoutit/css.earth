@@ -2,7 +2,7 @@ import { createConcurrencyLimit } from './concurrency.ts';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Node-only integrated-signal gating of immutable prepared cloud textures. */
-import { createHash, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { resolveReconstructionSubject } from './density-reconstruction.ts';
 import { mkdir, readFile, readdir, realpath, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
@@ -14,7 +14,7 @@ import { createIntegratedSignalSampler, filterCloudDensityRgba, validateCloudDen
 
 type Vec3 = [number, number, number];
 interface Subject { id: string; directory: string; cloudParts?: { descriptor: string; catalogue: string } }
-interface SourceResource { path: string; sha256: string; width: number; height: number;
+interface SourceResource { path: string; width: number; height: number;
   backgroundSize: [number, number]; backgroundPosition: [number, number]; matrix: number[] }
 export interface CloudDensityPreparationRequest { subjectId: string; filter: CloudDensityFilter }
 export interface CloudDensityResource { sourcePath: string; url: string; width: number; height: number }
@@ -22,7 +22,8 @@ export interface CloudDensityStats { native: boolean; resources: number; density
   sampledDensityMinimum: number; sampledDensityMaximum: number; sampledDensityMean: number; sampledPixels: number;
   approximation: string }
 
-const digest = (value: Uint8Array | string) => createHash('sha256').update(value).digest('hex');
+/** A cache file name for one prepared resource path. */
+const cacheName = (path: string) => path.replace(/[^A-Za-z0-9._-]+/gu, '__');
 const record = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 const px = (value: unknown): number => {
   const match = typeof value === 'string' && /^(-?(?:\d+\.?\d*|\.\d+))px$/u.exec(value.trim());
@@ -80,7 +81,7 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
       .every(key => JSON.stringify(left[key]) === JSON.stringify(right[key]));
   }
   async function context(request: CloudDensityPreparationRequest): Promise<{
-    resources: SourceResource[]; sampleSignal: (x: number, y: number, z: number) => number; maximum: number; geometryHash: string;
+    resources: SourceResource[]; sampleSignal: (x: number, y: number, z: number) => number; maximum: number; directory: string;
   }> {
     const subjects = await json('labs/nebula/packages/lab/src/state/subjects.json') as Subject[];
     const subject = subjects.find(item => item.id === request.subjectId) ?? await resolveReconstructionSubject(root, request.subjectId);
@@ -93,12 +94,11 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
     const descriptor = await json(relative(root, resolve(root, reconstructedDirectory, subject.cloudParts.descriptor)));
     const manifestPath = relative(root, resolve(root, reconstructedDirectory, descriptor.prepared?.url ?? ''));
     const manifestBytes = await readFile(await safe(manifestPath));
-    if (digest(manifestBytes) !== descriptor.prepared?.sha256) throw new TypeError('Cloud inspection manifest hash differs.');
     const manifest = parseLabModelJson(manifestBytes.toString());
     if (!Array.isArray(manifest.data?.resources) || manifest.data.resources.length < 1 || manifest.data.resources.length > 4096) {
       throw new TypeError('Cloud inspection resource bank is invalid.');
     }
-    let recipeBytes: Buffer, targetBytes: Buffer;
+    let recipeBytes: Buffer, targetBytes: Buffer, signalPath: string;
     let mapping: { boundsUnits: { min: [number, number]; max: [number, number] }; distanceUnits: number };
     let target: { data: Buffer; info: OutputInfo };
     if (subject.id.startsWith('reconstruction-')) {
@@ -109,8 +109,9 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
       if (provenance.schema !== 'cssearth-nebula-reconstruction-provenance@1' || !sameFrame(manifest.data.frame, provenance.request?.frame ?? {}))
         throw new TypeError('Reconstruction signal and volume frames differ.');
       const artifacts = await json(`${reconstructedDirectory}/manifest.json`);
-      targetBytes = await readFile(await safe(`${reconstructedDirectory}/source/aligned-image.png`));
-      if (digest(targetBytes) !== artifacts.artifacts?.['source/aligned-image.png']?.sha256) throw new TypeError('Reconstruction signal image differs.');
+      signalPath = `${reconstructedDirectory}/source/aligned-image.png`;
+      if (!record(artifacts.artifacts?.['source/aligned-image.png'])) throw new TypeError(`${reconstructedDirectory}/manifest.json does not list source/aligned-image.png.`);
+      targetBytes = await readFile(await safe(signalPath));
       target = await sharp(targetBytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
       const signalMetadata = provenance.densityProjection ?? provenance.photo;
       if (target.info.width !== signalMetadata.width || target.info.height !== signalMetadata.height || target.info.channels !== 3)
@@ -119,20 +120,17 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
       mapping = { boundsUnits: signalGeometry.tangentBoundsKpc, distanceUnits: signalGeometry.observerDistanceKpc };
     } else {
       const evidence = manifest.data.provenance?.reference, recipePin = evidence?.recipe;
-    if (typeof recipePin?.path !== 'string' || typeof recipePin.sha256 !== 'string') throw new TypeError('Cloud reconstruction recipe pin is missing.');
+    if (typeof recipePin?.path !== 'string') throw new TypeError('Cloud reconstruction provenance names no recipe path.');
     recipeBytes = await readFile(await safe(recipePin.path));
-    if (digest(recipeBytes) !== recipePin.sha256) throw new TypeError('Cloud reconstruction recipe differs from its provenance pin.');
     const recipe = parseLabModelJson(recipeBytes.toString());
     if (recipe.schema !== 'cssearth-filled-observation@1' || !recipe.variants?.some((item: { id: string; directory: string }) =>
-      item.id === subject.id && item.directory === subject.directory) || typeof recipe.frame?.path !== 'string' || typeof recipe.frame.sha256 !== 'string') {
+      item.id === subject.id && item.directory === subject.directory) || typeof recipe.frame?.path !== 'string') {
       throw new TypeError('Cloud reconstruction recipe does not identify this prepared subject.');
     }
-    const frameBytes = await readFile(await safe(recipe.frame.path));
-    if (digest(frameBytes) !== recipe.frame.sha256) throw new TypeError('Cloud frame differs from its recipe pin.');
-    const frame = parseLabModelJson(frameBytes.toString()).properties?.volume;
+    const frame = parseLabModelJson(await readFile(await safe(recipe.frame.path), 'utf8')).properties?.volume;
     if (!sameFrame(manifest.data.frame, frame ?? {})) throw new TypeError('Cloud integrated signal and prepared volume frames differ.');
     mapping = createObservationMapping(recipe.wcs, frame);
-    const targetPath = `${recipe.directory}/source/target.png`; targetBytes = await readFile(await safe(targetPath));
+    const targetPath = `${recipe.directory}/source/target.png`; signalPath = targetPath; targetBytes = await readFile(await safe(targetPath));
     target = await sharp(targetBytes).flop().removeAlpha().raw().toBuffer({ resolveWithObject: true });
     if (target.info.width !== evidence.observation?.width || target.info.height !== evidence.observation?.height || target.info.channels !== 3) {
       throw new TypeError('Integrated cloud target dimensions differ from reconstruction evidence.');
@@ -155,28 +153,37 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
       if (prior && JSON.stringify(prior) !== JSON.stringify(geometry)) throw new TypeError('Shared cloud texture has inconsistent leaf geometry.');
       leafByPath.set(path, geometry);
     }
-    const resources: SourceResource[] = manifest.data.resources.map((item: { path: string; sha256: string; width: number; height: number }) => {
+    const resources: SourceResource[] = manifest.data.resources.map((item: { path: string; width: number; height: number }) => {
       const path = relative(root, resolve(root, preparedDirectory, item.path)).split(sep).join('/');
       const leaf = leafByPath.get(path);
       if (!leaf || !Number.isInteger(item.width) || !Number.isInteger(item.height) || item.width < 1 || item.height < 1 ||
           !(leaf.width > 0) || !(leaf.height > 0) || !(leaf.size[0] > 0) || !(leaf.size[1] > 0)) {
         throw new TypeError(`Cloud resource has no matching fixed slice geometry: ${item.path}`);
       }
-      return { ...item, path, backgroundSize: leaf.size, backgroundPosition: leaf.position, matrix: leaf.matrix };
+      return { path, width: item.width, height: item.height, backgroundSize: leaf.size, backgroundPosition: leaf.position, matrix: leaf.matrix };
     });
     if (resources.length !== leafByPath.size) throw new TypeError('Cloud resources do not close over fixed leaf geometry.');
-    return { resources, sampleSignal, maximum, geometryHash: digest(Buffer.concat([recipeBytes, targetBytes, Buffer.from(signal.buffer),
-      Buffer.from(JSON.stringify(resources.map(item => [item.path, item.sha256, item.width, item.height,
-        item.backgroundSize, item.backgroundPosition, item.matrix])))])) };
+    // One cache directory per subject. It is kept while its saved request (recipe, signal image, prepared manifest)
+    // and the decoded signal are the same; otherwise it is cleared before any map or filtered texture is written.
+    const directory = resolve(cache, subject.id), saved = { recipe: recipeBytes.toString(), signalPath, manifest: manifestBytes.toString() };
+    const signalBytes = Buffer.from(signal.buffer, signal.byteOffset, signal.byteLength);
+    await cacheLimit(async () => {
+      const [request, previous] = await Promise.all([readFile(resolve(directory, 'request.json'), 'utf8').catch(() => null),
+        readFile(resolve(directory, 'signal.f32')).catch(() => null)]);
+      if (request !== null && request === JSON.stringify(saved) && previous?.equals(signalBytes)) return;
+      await rm(directory, { recursive: true, force: true }); await mkdir(directory, { recursive: true });
+      await writeFile(resolve(directory, 'signal.f32'), signalBytes); await writeFile(resolve(directory, 'request.json'), JSON.stringify(saved));
+    });
+    return { resources, sampleSignal, maximum, directory };
   }
   async function densityMap(resource: SourceResource, sampleSignal: (x: number, y: number, z: number) => number,
-    geometryHash: string): Promise<{ map: Float32Array; path: string }> {
-    const key = digest(JSON.stringify(['cloud-density-map-v3-integrated-ray', geometryHash, resource.path, resource.sha256]));
+    directory: string): Promise<{ map: Float32Array; path: string }> {
+    const key = resolve(directory, 'maps', `${cacheName(resource.path)}.f32`);
     let pending = mapInflight.get(key);
     if (!pending) {
       pending = textureLimit(async () => {
-        await mkdir(cache, { recursive: true });
-        const path = resolve(cache, `${key}.f32`), expected = resource.width * resource.height * 4;
+        await mkdir(dirname(key), { recursive: true });
+        const path = key, expected = resource.width * resource.height * 4;
         const cached = await readFile(path).catch(() => null);
         if (cached?.length === expected) return { map: new Float32Array(cached.buffer.slice(cached.byteOffset, cached.byteOffset + cached.byteLength)), path };
         const map = new Float32Array(resource.width * resource.height);
@@ -192,19 +199,18 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
     }
     return pending;
   }
-  async function prepareOne(resource: SourceResource, sampleSignal: (x: number, y: number, z: number) => number, geometryHash: string,
+  async function prepareOne(resource: SourceResource, sampleSignal: (x: number, y: number, z: number) => number, directory: string,
     filter: CloudDensityFilter, totals: Float64Array, protectedMaps: Set<string>): Promise<CloudDensityResource> {
     const path = await safe(resource.path), bytes = await readFile(path);
-    if (digest(bytes) !== resource.sha256) throw new TypeError('Immutable cloud texture hash differs.');
     const sourcePath = relative(root, path).split(sep).join('/');
     if (filter.cutoff === 0 && !filter.showRemoved) return { sourcePath, url: `/@fs${path}`, width: resource.width, height: resource.height };
-    const mapped = await densityMap(resource, sampleSignal, geometryHash), map = mapped.map; protectedMaps.add(mapped.path);
-    const key = digest(Buffer.concat([Buffer.from(JSON.stringify(['cloud-density-v1', filter])), bytes,
-      Buffer.from(digest(Buffer.from(map.buffer)))]));
+    const mapped = await densityMap(resource, sampleSignal, directory), map = mapped.map; protectedMaps.add(mapped.path);
+    const filterName = `cutoff-${filter.cutoff}-softness-${filter.softness}${filter.showRemoved ? '-removed' : ''}`;
+    const key = resolve(directory, 'filtered', filterName, `${cacheName(resource.path)}.webp`);
     let pending = outputInflight.get(key);
     if (!pending) {
       pending = textureLimit(async () => {
-        await mkdir(cache, { recursive: true }); const outputPath = resolve(cache, `${key}.webp`);
+        await mkdir(dirname(key), { recursive: true }); const outputPath = key;
         if (!await stat(outputPath).catch(() => null)) {
           const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
           if (decoded.info.width !== resource.width || decoded.info.height !== resource.height || decoded.info.channels !== 4) {
@@ -227,7 +233,7 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
   }
   async function prune(protectedPaths: ReadonlySet<string>): Promise<void> {
     await cacheLimit(async () => {
-      const files = await readdir(cache).catch(() => []), entries = await Promise.all(files.filter(name => /\.(?:png|webp|f32)$/u.test(name)).map(async name => {
+      const files = await readdir(cache, { recursive: true }).catch(() => []), entries = await Promise.all(files.filter(name => /\.(?:png|webp|f32)$/u.test(name) && !name.endsWith('signal.f32')).map(async name => {
         const path = resolve(cache, name), info = await stat(path); return { path, bytes: info.size, time: info.mtimeMs };
       }));
       let bytes = entries.reduce((sum, item) => sum + item.bytes, 0), count = entries.length;
@@ -246,7 +252,7 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
       const model = await context(request), native = request.filter.cutoff === 0 && !request.filter.showRemoved;
       const totals = new Float64Array([0, 0, Infinity, 0]), protectedMaps = new Set<string>();
       const results = await Promise.allSettled(model.resources.map(resource => processingLimit(() => prepareOne(resource, model.sampleSignal,
-        model.geometryHash, request.filter, totals, protectedMaps))));
+        model.directory, request.filter, totals, protectedMaps))));
       const failure = results.find(result => result.status === 'rejected'); if (failure?.status === 'rejected') throw failure.reason;
       const resources = results.map(result => (result as PromiseFulfilledResult<CloudDensityResource>).value);
       if (!native) await prune(new Set([...protectedMaps, ...resources.map(item => item.url.startsWith('/@fs') ? item.url.slice(4) : '')]));

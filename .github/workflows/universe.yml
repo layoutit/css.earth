@@ -564,7 +564,7 @@ jobs:
           detect-shapes structure-wavelets structure-map ridge-graph
           material-solver shape-prior solver
           acquisition footprint image-links image-ranking
-          operation-jobs plugin-lifecycle implementation
+          operation-jobs plugin-lifecycle
           lab-shell shape-cloud-state shape-cloud-scheduler
           control-portals browser-regression browser-camera overlay-store
           workspace-sections workspace-portals workspace-objects camera-model-panel image-appearance-panel

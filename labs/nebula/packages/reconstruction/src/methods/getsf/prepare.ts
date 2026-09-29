@@ -1,11 +1,11 @@
 /** Adapter for the author's locally installed getsf, with no replacement implementation or vendored code. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { digest, readBenchmarkImage } from './benchmark-products.ts';
+import { readBenchmarkImage } from './benchmark-products.ts';
 import type {GetSfFitsTransport} from './transport.ts';
 
 export interface GetSfInput {
-  imagePath: string; imageSha256: string; width: number; height: number; workDirectory: string;
+  imagePath: string; width: number; height: number; workDirectory: string;
   pixelScaleArcsec: number; beamFwhmPx: number;
   sourceMaxFootprintRadiusPx: number; filamentMaxFootprintRadiusPx: number;
   wcs: { referencePixel: readonly [number, number]; referenceSkyDeg: readonly [number, number]; rotationDeg: number };
@@ -13,7 +13,7 @@ export interface GetSfInput {
 
 export async function prepareGetSfBenchmark(options: GetSfInput, transport:Pick<GetSfFitsTransport,'encodeFits'|'float32LittleEndian'>, originLabel:string) {
  const {encodeFits,float32LittleEndian}=transport;
-  const image = await readBenchmarkImage(options.imagePath, options.imageSha256, options.width, options.height);
+  const image = await readBenchmarkImage(options.imagePath, options.width, options.height);
   for (const value of [options.pixelScaleArcsec, options.beamFwhmPx,
     options.sourceMaxFootprintRadiusPx, options.filamentMaxFootprintRadiusPx])
     if (!Number.isFinite(value) || value <= 0) throw new TypeError('getsf scales must be positive.');
@@ -62,8 +62,7 @@ n | visualize
     writeFile(resolve(runs, '+getsf.cfg'), config),
   ]);
   const receipt = { schema: 'cssearth-getsf-input@1', ...options,
-    sourceSha256: digest(await readFile(options.imagePath)), inputFitsSha256: digest(fits),
-    inputFloat32Sha256: digest(float32LittleEndian(image.luminance)), configurationSha256: digest(config),
+    inputs: { fits: 'images/display.fits', float32: 'input.f32' }, configuration: config,
     intensity: 'Float32 Rec.709 dot product of 8-bit sRGB /255, without linear-light conversion. Not calibrated radiance.',
     fitsUnitCaveat: 'BUNIT MJy/sr is a getsf-required compatibility placeholder. Wavelength 001 and distance100 are unused physical placeholders; no physical flux, mass, or membership is inferred.',
     rowOrder: 'FITS Y is reversed from DOM; exported maps reverse it back without reprojection.',

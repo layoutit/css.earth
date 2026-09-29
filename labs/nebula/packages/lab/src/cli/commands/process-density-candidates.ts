@@ -1,6 +1,5 @@
 /** Explicit, resumable research comparisons; never promotes projection-only material to the application. */
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createStarRemover, resolveAppliedRemovalLayers } from '../../server/services/star-removal.ts';
@@ -14,12 +13,11 @@ function record(value: unknown): Record<string, unknown> {
 }
 function rows(value: unknown) { assert.ok(Array.isArray(value)); return value.map(record); }
 function text(value: unknown) { assert.equal(typeof value, 'string'); return value as string; }
-const hash = (value: Uint8Array) => createHash('sha256').update(value).digest('hex');
 const root = process.cwd();
 const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, path), 'utf8'));
 const [path, ...extra] = process.argv.slice(2);
 assert.ok(path && !extra.length, 'Usage: process-density-candidates <recipe.json>');
-const recipeBytes = await readFile(path), recipe = record(JSON.parse(recipeBytes.toString()));
+const recipe = record(JSON.parse(await readFile(path, 'utf8')));
 assert.equal(recipe.schema, 'cssearth-density-comparison@1');
 const subjectId = text(recipe.subjectId), imageIds = recipe.imageIds;
 assert.match(subjectId, /^[a-z0-9-]+$/);
@@ -28,9 +26,8 @@ assert.equal(new Set(imageIds).size, imageIds.length);
 const subject = rows(await json('labs/nebula/packages/lab/src/state/subjects.json')).find(item => item.id === subjectId);
 assert.ok(subject);
 const plan = record(await json(text(record(subject.density).processingPlan)));
-const proofPin = record(plan.alignmentReport), proofBytes = await readFile(text(proofPin.path));
-assert.equal(hash(proofBytes), proofPin.sha256);
-const proof = record(JSON.parse(proofBytes.toString()));
+const proofPin = record(plan.alignmentReport);
+const proof = record(JSON.parse(await readFile(text(proofPin.path), 'utf8')));
 assert.equal(proof.pass, true, 'Alignment must pass before processing');
 const sources = rows(proof.sources);
 const inputs = rows(record(await json(text(plan.catalogue))).targets).flatMap(target => rows(target.images));
@@ -38,16 +35,16 @@ for (const id of imageIds) {
   const source = sources.find(item => item.id === id), input = inputs.find(item => item.id === id);
   assert.ok(source && input, `Missing alignment proof: ${id}`);
   assert.equal(source.pass, true, `Alignment failed: ${id}`);
-  assert.equal(source.sourcePath, input.path); assert.equal(source.sourceSha256, input.sha256);
+  assert.equal(source.sourcePath, input.path, `${id}: alignment proof names ${String(source.sourcePath)}, catalogue names ${String(input.path)}`);
   const geometry = input.registration ? { kind: 'matched-star-homography', registration: input.registration } : { kind: 'fixed-publisher-wcs', wcs: input.wcs };
   assert.deepEqual(source.geometry, geometry);
-  const gate = record(source.gate); assert.equal(hash(await readFile(text(gate.path))), gate.sha256);
+  const gate = record(record(source.gate)); await readFile(text(gate.path));
 }
 if (record(subject.density).modelPlacement) await prepareConfiguredDensityPlacements(root, subjectId);
 else await bakeDensity(root, text(record(subject.density).directory));
 const directory = resolve(root, '.local/nebula-lab/density-comparisons', subjectId);
 await mkdir(directory, { recursive: true });
-const receipt = { schema: 'cssearth-density-comparison-receipt@1', recipe: { path, sha256: hash(recipeBytes) },
+const receipt = { schema: 'cssearth-density-comparison-receipt@1', recipe: { path },
   subjectId, qualification: 'Projection-only fixed-density research comparison; not qualified 3D emission or application promotion.',
   results: [] as { imageId: string; stellarTreatment: 'nox' | 'preserve'; treatmentReason?: string; removalResultId: string; resultId: string }[] };
 const remove = createStarRemover(root), reconstruct = createReconstructor(root);

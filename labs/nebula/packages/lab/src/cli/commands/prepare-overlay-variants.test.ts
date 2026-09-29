@@ -1,6 +1,5 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { prepareOverlayVariants } from './prepare-overlay-variants.ts';
@@ -9,16 +8,15 @@ import { overlayVariantsPath } from '../../features/legacy-viewer/overlay-varian
 test('delivery rejects failed proof, changed registration and changed prepared geometry before writing variants', async () => {
   const directory = await mkdtemp('.local/nebula-lab/variant-proof-test-');
   const before = await readFile(overlayVariantsPath);
-  const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
   const plan = JSON.parse(await readFile('labs/nebula/models/lmc/star-separation/plan.json', 'utf8'));
   const catalogue = JSON.parse(await readFile(plan.catalogue, 'utf8'));
-  const writeJson = async (path: string, value: unknown) => { const bytes = Buffer.from(JSON.stringify(value)); await writeFile(path, bytes); return hash(bytes); };
+  const writeJson = async (path: string, value: unknown) => { await writeFile(path, JSON.stringify(value)); };
   const planPath = join(directory, 'plan.json'), cataloguePath = join(directory, 'catalogue.json');
   try {
     const report = JSON.parse(await readFile(plan.alignmentReport.path, 'utf8'));
     const failedPath = join(directory, 'failed-proof.json');
-    const failedHash = await writeJson(failedPath, { ...report, pass: false, status: 'failed' });
-    await writeJson(planPath, { ...plan, alignmentReport: { path: failedPath, sha256: failedHash } });
+    await writeJson(failedPath, { ...report, pass: false, status: 'failed' });
+    await writeJson(planPath, { ...plan, alignmentReport: { path: failedPath } });
     await assert.rejects(prepareOverlayVariants(planPath, ['wise-wide-infrared']), /report did not pass/);
 
     const changed = structuredClone(catalogue), source = changed.targets[0].images.find((item: { id: string }) => item.id === 'wise-wide-infrared');

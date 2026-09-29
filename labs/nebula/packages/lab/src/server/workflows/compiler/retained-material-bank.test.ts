@@ -16,7 +16,7 @@ import { prepareRetainedMaterialBank, type RetainedMaterialBankOptions } from '.
 async function fixture(t: TestContext, variable = false) {
   const root = await mkdtemp(join(tmpdir(), 'retained-material-')); t.after(() => rm(root, { recursive: true, force: true }));
   const boundsArcsec = { min: [10, 20, 30] as [number, number, number], max: [12, 22, 32] as [number, number, number] };
-  const { frame, localBounds, origin } = compilerFrame(boundsArcsec), fieldIdentity = 'a'.repeat(64);
+  const { frame, localBounds, origin } = compilerFrame(boundsArcsec), fieldIdentity = 'fixture-field';
   const layerPlan = variable ? { schema: 'cssearth-volume-layer-plan@1' as const,
     referenceSliceCounts: { x: 4, y: 4, z: 4 }, referenceSamplesPerSlab: 4,
     axes: { x: [{ startCell: 0, endCell: 1 }, { startCell: 1, endCell: 4 }],
@@ -31,7 +31,7 @@ async function fixture(t: TestContext, variable = false) {
   const slices = baked.banks[0]!.slices, alphaSha256 = await compilerAlphaDigest(join(root, 'neutral'), slices);
   slices.provenance = { fieldIdentity, alphaSha256 };
   async function pin(path: string, value: unknown) {
-    const bytes = Buffer.from(JSON.stringify(value) + '\n'); await writeFile(join(root, path), bytes); return { path, sha256: sha256(bytes) };
+    await writeFile(join(root, path), JSON.stringify(value) + '\n'); return { path };
   }
   const neutral = await pin('neutral/volume.json', compileCssVolume({ id: 'compiler-fixture', frame, slices, recipe: { anchors: [] } }));
   const scene = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity, frame, boundsArcsec,

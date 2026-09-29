@@ -46,9 +46,9 @@ test('choosing another lens repaints the retained leaves without changing geomet
 });
 
 test('only saved results naming the same model geometry and star layer may swap in place', () => {
-  const model = 'a'.repeat(64), group = 'smc-constrained-observation';
+  const model = 'smc-constrained-emission-envelope', group = 'smc-constrained-observation';
   assert.equal(sharesMaterialGeometry({ materialGeometry: model, comparisonGroup: group }, { materialGeometry: model, comparisonGroup: group }), true);
-  assert.equal(sharesMaterialGeometry({ materialGeometry: model, comparisonGroup: group }, { materialGeometry: 'b'.repeat(64), comparisonGroup: group }), false);
+  assert.equal(sharesMaterialGeometry({ materialGeometry: model, comparisonGroup: group }, { materialGeometry: 'smc-constrained-emission-two-modes', comparisonGroup: group }), false);
   assert.equal(sharesMaterialGeometry({ comparisonGroup: group }, { comparisonGroup: group }), false);
   assert.equal(sharesMaterialGeometry({ materialGeometry: model, comparisonGroup: group }, { materialGeometry: model, comparisonGroup: 'other-frame' }), false);
   assert.equal(sharesMaterialGeometry({ materialGeometry: model, comparisonGroup: group }, { materialGeometry: model, comparisonGroup: group, stars: 'stars.json' }), false);

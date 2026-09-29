@@ -76,10 +76,10 @@ test('validated envelope chroma bounds the exact round2 green-channel roundoff w
   const recipe = readPhotometricMgeRecipe({ ...published, inclinationDegrees: 90,
     gaussians: [{ centralAmplitude: 1, sigmaArcsec, projectedAxisRatio: 1 }] });
   const skyBounds = { min: [-1, -1] as [number, number], max: [1, 1] as [number, number] };
-  const model: EmissionFieldModel = { schema: 'cssearth-conditional-emission-field@1', identity: 'e'.repeat(64),
+  const model: EmissionFieldModel = { schema: 'cssearth-conditional-emission-field@1', identity: 'fixture-field',
     controls: { detail: 1, faint: .35, depth: 1 }, components: [], bounds: { min: [-1, -1, -1], max: [1, 1, 1] }, skyBounds, scaffold: null,
     assumptions: { kernel: 'regression fixture', projectionUnits: 'relative light', depth: 'regression fixture', halo: 'none', haloRadiusArcsec: 1, equalNearFarSplit: false, velocityUncoveredComponents: 0 },
-    photometricEnvelope: { schema: 'cssearth-photometric-envelope@1', priorIdentity: 'a'.repeat(64), recipe,
+    photometricEnvelope: { schema: 'cssearth-photometric-envelope@1', priorIdentity: 'fixture-prior', recipe,
       width: 2, height: 2, bounds: skyBounds, zRange: [-1, 1], gain: [1, 1, 1, 1] } };
   const field = createPhotometricEmission(model), out: [number, number, number] = [0, 0, 0];
   field.sampleEmission(0, 0, 0, out); assert.equal(out[0], light);

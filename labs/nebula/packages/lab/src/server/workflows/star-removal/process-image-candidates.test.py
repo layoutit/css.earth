@@ -1,4 +1,3 @@
-import hashlib
 import importlib.util
 import json
 from pathlib import Path
@@ -30,7 +29,7 @@ class BatchGateTests(unittest.TestCase):
         for candidate_id in ['first', 'second']:
             image_path = self.directory / (candidate_id + '.png')
             cv2.imwrite(str(image_path), np.full((3, 4, 3), 80, np.uint8))
-            source = {'path': str(image_path), 'sha256': batch.digest(image_path), 'nativeDimensions': [4, 3]}
+            source = {'path': str(image_path), 'nativeDimensions': [4, 3]}
             recipe_path = self.directory / (candidate_id + '.json')
             recipe = {'schema': 'cssearth-star-separation@1', 'source': source,
                       'outputDirectory': str(self.directory / '.local' / candidate_id)}
@@ -41,22 +40,19 @@ class BatchGateTests(unittest.TestCase):
             self.report['selectedIds'].append(candidate_id)
             wcs = {'fixture': candidate_id}
             self.report['sources'].append({'id': candidate_id, 'status': 'passed', 'pass': True,
-                'sourcePath': str(image_path), 'sourceSha256': source['sha256'], 'sourceDimensions': [4, 3],
-                'gate': {'path': str(gate_path), 'sha256': batch.digest(gate_path)},
+                'sourcePath': str(image_path), 'sourceDimensions': [4, 3],
+                'gate': {'path': str(gate_path)},
                 'geometry': {'kind': 'fixed-publisher-wcs', 'wcs': wcs}})
-            self.catalogue['targets'][0]['images'].append({'id': candidate_id, 'path': str(image_path),
-                                                         'sha256': source['sha256'], 'wcs': wcs})
+            self.catalogue['targets'][0]['images'].append({'id': candidate_id, 'path': str(image_path), 'wcs': wcs})
         self.persist()
 
     def write(self, path, value):
         Path(path).write_text(json.dumps(value))
 
     def persist(self):
-        for selection, (path, recipe) in zip(self.plan['selections'], self.recipes):
+        for path, recipe in self.recipes:
             self.write(path, recipe)
-            selection['recipeSha256'] = batch.digest(path)
         self.write(self.report_path, self.report)
-        self.plan['alignmentReport']['sha256'] = batch.digest(self.report_path)
         self.write(self.catalogue_path, self.catalogue)
         self.write(self.plan_path, self.plan)
 
@@ -66,9 +62,9 @@ class BatchGateTests(unittest.TestCase):
             process.assert_not_called()
 
     def test_second_source_failure_prevents_first_job(self):
-        Path(self.recipes[1][1]['source']['path']).write_bytes(b'altered image')
+        cv2.imwrite(self.recipes[1][1]['source']['path'], np.full((5, 4, 3), 80, np.uint8))
         with patch.object(batch, 'process_recipe') as process:
-            with self.assertRaisesRegex(ValueError, 'Existing source SHA256'):
+            with self.assertRaisesRegex(ValueError, 'Decoded native dimensions'):
                 batch.run(self.plan_path)
             process.assert_not_called()
 
@@ -86,13 +82,13 @@ class BatchGateTests(unittest.TestCase):
                 batch.run(self.plan_path)
             process.assert_not_called()
 
-    def test_altered_report_and_underlying_gate_fail_hashes(self):
+    def test_unpassed_report_and_failed_underlying_gate_are_refused(self):
         self.report_path.write_text('{}')
-        with self.assertRaisesRegex(ValueError, 'Pinned JSON hash'):
+        with self.assertRaisesRegex(ValueError, 'Alignment report has not passed'):
             batch.preflight(self.plan_path)
         self.persist()
-        Path(self.report['sources'][1]['gate']['path']).write_text('{}')
-        with self.assertRaisesRegex(ValueError, 'Pinned JSON hash'):
+        Path(self.report['sources'][1]['gate']['path']).write_text('{"pass": false}')
+        with self.assertRaisesRegex(ValueError, 'Underlying direction gate failed'):
             batch.preflight(self.plan_path)
 
     def test_unapproved_and_wrong_native_dimensions_are_rejected(self):

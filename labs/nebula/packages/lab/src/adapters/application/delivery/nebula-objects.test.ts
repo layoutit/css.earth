@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
@@ -7,9 +6,8 @@ import { test } from 'node:test';
 import sharp from 'sharp';
 import type { PreparedCssVolume, VolumeAxis } from '@cssearth/renderer/volume/types.ts';
 import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
+import { hash as volumeResourceDigest } from '@cssearth/bake/volume/node';
 import { prepareNebulaObject, readNebulaDelivery } from './nebula-objects.ts';
-
-const hash = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 
 test('a pinned optical composite is a compiler delivery stage, never a symmetry fallback', async () => {
   const recipe: unknown = JSON.parse(await readFile('src/objects/m45/source/delivery.json', 'utf8'));
@@ -26,7 +24,7 @@ async function put(root: string, path: string, bytes: Uint8Array | string) {
   await writeFile(join(root,path),bytes);
 }
 async function fixture(root: string) {
-  // The delivery identity reads these source files from its checkout; keep the fixture isolated.
+  // The delivery reads these source files from its checkout; keep the fixture isolated.
   for (const directory of ['packages/bake/src/nebula','packages/bake/src/volume','packages/bake/src/volume-leaves','packages/renderer/src/volume','packages/bake/src/density']) {
     for (const name of await readdir(directory,{recursive:true})) {
       if (!name.endsWith('.ts')) continue;
@@ -42,7 +40,7 @@ async function fixture(root: string) {
   }
   await put(root,'input/request.json',request);
   await put(directory,'source/delivery.json',JSON.stringify({...recipe,
-    request:{path:'input/request.json',sha256:hash(request)},inputPins:[],compactInputs:undefined,compactMethod:undefined,symmetryDirectory:'input'}));
+    request:{path:'input/request.json'},inputPins:[],compactInputs:undefined,compactMethod:undefined,symmetryDirectory:'input'}));
   await copyFile('src/objects/m2-9/source/nebula.json',join(directory,'source/nebula.json'));
   const pixels = await sharp({create:{width:2,height:2,channels:4,background:{r:220,g:80,b:30,alpha:0.6}}}).png().toBuffer();
   const matrices: Record<VolumeAxis,string> = {
@@ -58,17 +56,17 @@ async function fixture(root: string) {
       id:axis,centerUnits:[0,0,0],texturePath:'slice.png',widthPx:2,heightPx:2,
       style:{width:'2px',height:'2px',transform:`matrix3d(${matrices[axis]})`,backgroundSize:'2px 2px',backgroundPosition:'0px 0px'},
     }]})),
-    resources:[{path:'slice.png',sha256:hash(pixels),bytes:pixels.length,width:2,height:2}],provenance:{},approximation:{},
+    resources:[{path:'slice.png',sha256:volumeResourceDigest(pixels),bytes:pixels.length,width:2,height:2}],provenance:{},approximation:{},
   };
   const prepared = JSON.stringify({data:volume});
   await put(root,'input/prepared/volume.json',prepared);
   await put(root,'input/prepared/slice.png',pixels);
-  await put(root,'input/object.json',JSON.stringify({properties:{preparation:{sha256:hash(request)}},
-    prepared:{url:'prepared/volume.json',sha256:hash(prepared)}}));
+  await put(root,'input/object.json',JSON.stringify({properties:{preparation:{source:'request.json'}},
+    prepared:{url:'prepared/volume.json'}}));
   return {directory,pixels};
 }
 
-test('delivery restores missing impostors, rejects drift and rebuilds when their generator changes',async()=>{
+test('delivery restores missing impostors with their exact bytes',async()=>{
   const root = await mkdtemp(join(tmpdir(),'nebula-impostor-delivery-'));
   try {
     const {directory,pixels} = await fixture(root);
@@ -81,7 +79,6 @@ test('delivery restores missing impostors, rejects drift and rebuilds when their
     assert.ok(proxies.length>0,'Generated views must join the fixed resource inventory.');
     for (const resource of lens.volume.resources) {
       const bytes = await readFile(join(directory,'prepared',resource.path));
-      assert.equal(hash(bytes),resource.sha256);
       assert.equal(bytes.length,resource.bytes);
     }
     assert.equal(lens.volume.resources.filter(resource=>resource.path.includes('/atlases/')).length,3);
@@ -92,14 +89,7 @@ test('delivery restores missing impostors, rejects drift and rebuilds when their
     const proxy = proxies[0]!, path = join(directory,'prepared',proxy.path), original = await readFile(path);
     await rm(path);
     assert.equal((await prepareNebulaObject(root,directory,true,true)).status,'prepared');
-    assert.equal(hash(await readFile(path)),proxy.sha256,'Missing proxies must reproduce their exact bytes.');
-    await writeFile(path,'corrupt');
-    await assert.rejects(prepareNebulaObject(root,directory,true,true),/Nebula source hash mismatch/);
-    await writeFile(path,original);
-    const generator = resolve(root,'packages/bake/src/volume-leaves/volume-impostors.ts');
-    await writeFile(generator,`${await readFile(generator,'utf8')}\n// changed fixture generator\n`);
-    assert.equal((await prepareNebulaObject(root,directory,true,true)).status,'prepared');
-    assert.equal(hash(await readFile(path)),proxy.sha256);
+    assert.ok((await readFile(path)).equals(original),'Missing proxies must reproduce their exact bytes.');
     assert.equal((await prepareNebulaObject(root,directory,true,true)).status,'verified');
   } finally { await rm(root,{recursive:true,force:true}); }
 });

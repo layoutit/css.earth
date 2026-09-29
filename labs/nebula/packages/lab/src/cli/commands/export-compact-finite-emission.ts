@@ -10,7 +10,6 @@
  * its saved reconstructions and writes their replay inputs; the application preparation owns the replay.
  */
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
 import { basename, dirname, resolve } from 'node:path';
@@ -20,8 +19,8 @@ import { readPreparedReconstruction } from '../../server/services/density-recons
 import { finiteModelStarsPath } from '../../server/services/finite-lens-bundles.ts';
 import { parseVolumeLensPromotion } from '../../server/workflows/density/volume-lens-promotion.ts';
 import { validateChannelGain, validateLensToneCurve } from '@cssearth/bake/volume';
+import { hash as volumeReaderDigest } from '@cssearth/bake/volume/node';
 
-const sha256 = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 const text = (value: unknown, at: string): string => { assert.ok(typeof value === 'string' && value, `Expected text: ${at}`); return value; };
 const record = (value: unknown, at: string): Record<string, unknown> => {
   assert.ok(value && typeof value === 'object' && !Array.isArray(value), `Expected an object: ${at}`);
@@ -35,22 +34,21 @@ assert.match(objectDirectory, /^src\/objects\/[a-z][a-z0-9-]*$/, 'The delivery o
 const compact = `${objectDirectory}/source/compact`;
 const references = `${objectDirectory}/source/bake-inputs/references`;
 
-const recipeBytes = await readFile(resolve(root, recipeArgument));
-const recipe = parseVolumeLensPromotion(parseLabModelJson(recipeBytes.toString()));
+const recipe = parseVolumeLensPromotion(parseLabModelJson(await readFile(resolve(root, recipeArgument), 'utf8')));
 
 await rm(resolve(root, compact), { recursive: true, force: true });
 await rm(resolve(root, references), { recursive: true, force: true });
 await mkdir(resolve(root, compact), { recursive: true });
 await mkdir(resolve(root, references), { recursive: true });
 
-/** Write a delivered file and return its checked-in pin. */
+/** Write a delivered file and return its checked-in path and size. */
 async function put(path: string, bytes: Uint8Array) {
   await mkdir(dirname(resolve(root, path)), { recursive: true });
   await writeFile(resolve(root, path), bytes);
-  return { path, sha256: sha256(bytes), bytes: bytes.byteLength };
+  return { path, bytes: bytes.byteLength };
 }
 const putJson = (path: string, value: unknown) => put(path, gzipSync(Buffer.from(JSON.stringify(value)), { level: 9 }));
-const pinOf = async (path: string) => ({ path, sha256: sha256(await readFile(resolve(root, path))) });
+const pinOf = async (path: string) => { await readFile(resolve(root, path)); return { path }; };
 
 // Every lens of one promotion shares a model; its saved reconstruction names the model and its baseline.
 // The per-lens display corrections are read from the lens's own pinned provenance: the normalized saved
@@ -96,11 +94,10 @@ const priorRecipe = await put(`${compact}/prior/volume.json`, priorRecipeBytes);
 const priorGrid = record(parseLabModelJson(priorRecipeBytes.toString()), 'prior recipe').grid;
 const gridPin = record(priorGrid, 'prior grid');
 assert.ok(typeof gridPin.path === 'string', 'The depth density must name its grid.');
-// Every sibling the recipe pins travels with it: the grid and its own provenance record.
+// Every sibling the recipe names travels with it: the grid and its own provenance record.
 for (const sibling of [gridPin, record(record(parseLabModelJson(priorRecipeBytes.toString()), 'prior recipe').provenance, 'prior provenance')]) {
   const relative = text(sibling.path, 'prior sibling path');
   const bytes = await readFile(resolve(root, priorDirectory, relative));
-  assert.equal(sha256(bytes), sibling.sha256, `The pinned depth density input changed: ${relative}`);
   await put(`${compact}/prior/${basename(relative)}`, bytes);
 }
 
@@ -142,7 +139,9 @@ for (const { lens, result, finite, channelGain, toneCurve } of lensInputs) {
     await sharp(mask, { raw: { width: meta.width, height: meta.height, channels: 4 } }).png({ compressionLevel: 9, effort: 10 }).toBuffer());
   lenses.push({ imageId: lens.imageId, sourceResultId: finite.sourceResultId, resultId: lens.resultId,
     tangentBoundsKpc: record(baseline.geometry, 'baseline geometry').tangentBoundsKpc,
-    sourceDigest: record(work.source, 'baseline source').sha256,
+    // The finite-emission reader (packages/bake/src/volume/node/compact-inputs/finite-emission.ts) still requires a digest
+    // of the registered source; it is computed by that reader's own helper.
+    sourceDigest: volumeReaderDigest(await readFile(resolve(root, text(record(work.source, 'baseline source').path, 'baseline source path')))),
     registered, coverage, densityFilter: lens.density, enabledIds: lens.enabledIds,
     provenance: await pinOf(`${objectDirectory}/source/lenses/${lens.imageId}/provenance.json`),
     presentation: { label: lens.label, description: lens.description, sourceUrl: result.subject.sourcePageUrl },
@@ -174,8 +173,8 @@ const inputs = {
 const inputsPin = await put(`${compact}/inputs.json`, Buffer.from(JSON.stringify(inputs, null, 2) + '\n'));
 await writeFile(resolve(root, objectDirectory, 'source/compact-delivery.json'), JSON.stringify({
   schema: 'cssearth-compact-density-delivery@1', id: recipe.id,
-  delivery: { directory: objectDirectory, method: 'finite-emission', compactInputs: { path: inputsPin.path, sha256: inputsPin.sha256 } },
-  researchRecipe: { path: recipeArgument, sha256: sha256(recipeBytes) },
+  delivery: { directory: objectDirectory, method: 'finite-emission', compactInputs: { path: inputsPin.path } },
+  researchRecipe: { path: recipeArgument },
 }, null, 2) + '\n');
 
 // Numbered records of the laboratory inputs behind these bytes, in the shape the other nebulae use. The
@@ -197,7 +196,7 @@ const referenced = [
 for (const [index, entry] of referenced.entries()) {
   const bytes = await readFile(resolve(root, entry.path));
   await writeFile(resolve(root, references, `${String(index + 1).padStart(2, '0')}-${entry.name}.json`),
-    JSON.stringify({ schema: 'cssearth-delivered-input-reference@1', originalPath: entry.path, sha256: sha256(bytes), bytes: bytes.length,
-      role: 'Laboratory record behind a delivered replay input; the delivered bytes are pinned in source/compact/inputs.json.' }, null, 2) + '\n');
+    JSON.stringify({ schema: 'cssearth-delivered-input-reference@1', originalPath: entry.path, bytes: bytes.length,
+      role: 'Laboratory record behind a delivered replay input; the delivered files are listed in source/compact/inputs.json.' }, null, 2) + '\n');
 }
 console.log(JSON.stringify({ compact, inputs: inputsPin, lenses: lenses.length, references: referenced.length }, null, 2));

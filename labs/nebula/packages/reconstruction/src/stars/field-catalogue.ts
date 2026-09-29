@@ -1,7 +1,5 @@
-import {createHash} from 'node:crypto';
 const HIP_COLUMNS = ['HIP', 'RAICRS', 'DEICRS', 'Vmag', 'B-V', 'e_B-V', 'Plx', 'e_Plx', 'pmRA', 'pmDE', 'e_pmRA', 'e_pmDE'];
 const TYCHO_COLUMNS = ['TYC1', 'TYC2', 'TYC3', 'RAmdeg', 'DEmdeg', 'pmRA', 'pmDE', 'e_pmRA', 'e_pmDE', 'BTmag', 'e_BTmag', 'VTmag', 'e_VTmag', 'HIP'];
-const sha = (b: Buffer | string) => createHash('sha256').update(b).digest('hex');
 const record = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 const text = (v: unknown, label: string): string => { if (typeof v !== 'string' || !v) throw new TypeError(`Missing ${label}.`); return v; };
 const num = (v: string | undefined): number | null => {
@@ -25,8 +23,8 @@ export function readFieldCatalogueTsv(source: string, kind: 'hipparcos' | 'tycho
     for (const cell of cells) num(cell); return row;
   });
   if (!rows.length) throw new TypeError('Catalogue query returned no stars.');
-  // VizieR regenerates timestamps in headers; pin ordered scientific values separately.
-  return { rows, dataSha256: sha(JSON.stringify(rows)) };
+  // VizieR regenerates timestamps in headers; only the ordered scientific rows are read.
+  return { rows };
 }
 export interface ObservedFieldStar {
   id: string; hip: number | null; tycho: string[]; raDegrees: number; decDegrees: number;

@@ -19,6 +19,7 @@ import { inferEmission, type InferenceGrid } from '@cssearth/nebula-reconstructi
 import { circumstellarAuthor, type EdgeOnReconstruction, type EdgeOnSolveInputs } from '../../../adapters/preparation/circumstellar.ts';
 import { densityEncoder } from '../../../adapters/preparation/density-encoding.ts';
 
+/** The record's digests are the contract of its reader, packages/telescope-cli/authoring/circumstellar (EdgeOnReconstruction). */
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const id = process.argv[2];
 if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || process.argv.length !== 3) throw new TypeError('Usage: reconstruct-circumstellar <object id>');
@@ -72,17 +73,17 @@ for (const inputs of lenses) {
     return Math.hypot(x, y) < inputs.innerMaskUnits ? 1 : 0;
   });
   const volumes: Float32Array[] = [], reports: { relativeProjectionError: number; iteration: number }[] = [], fills: { filledVoxels: number; unobservedGroups: number }[] = [];
-  const solved = new Map<string, number>();
+  const solvedImages: Buffer[] = [];
   for (const [c, channel] of shown.entries()) {
-    const image = Float32Array.from(channel, (v, p) => weights[p]! > 0 ? Math.max(0, v) : 0), key = sha256(new Uint8Array(image.buffer));
+    const image = Float32Array.from(channel, (v, p) => weights[p]! > 0 ? Math.max(0, v) : 0), pixels = Buffer.from(image.buffer);
     // A lens that feeds one band to every channel is solved once.
-    const again = solved.get(key);
-    if (again !== undefined) { volumes.push(volumes[again]!); reports.push(reports[again]!); fills.push(fills[again]!); continue; }
+    const again = solvedImages.findIndex(previous => previous.equals(pixels));
+    if (again >= 0) { volumes.push(volumes[again]!); reports.push(reports[again]!); fills.push(fills[again]!); solvedImages.push(pixels); continue; }
     const started = Date.now();
     const result = inferEmission({ grid, image, weights, fillable, prior, tau, iterations,
       onIteration: report => { if (report.iteration % 25 === 0) console.log(`${lens.id} channel ${c}: iteration ${report.iteration}, projection error ${report.relativeProjectionError.toFixed(4)}`); } });
     console.log(`${lens.id} channel ${c}: ${((Date.now() - started) / 1000).toFixed(0)} s, projection error ${result.report.relativeProjectionError.toFixed(4)}, ${result.fill.filledVoxels} voxels filled from their groups`);
-    solved.set(key, volumes.length); volumes.push(result.volume); reports.push(result.report); fills.push(result.fill);
+    solvedImages.push(pixels); volumes.push(result.volume); reports.push(result.report); fills.push(result.fill);
   }
   // Solver units reproject as the column sum over the square root of the depth; per unit length that is v / (sqrt(depth) step),
   // so a column's integral is the displayed value it reprojects to, the scale the author's exposure assumes.

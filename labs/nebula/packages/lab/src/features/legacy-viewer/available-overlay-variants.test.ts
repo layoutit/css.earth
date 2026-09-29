@@ -10,7 +10,7 @@ import { overlayVariantsPath } from './overlay-variants.js';
 test('a clean lab offers originals until valid extracted previews exist', async () => {
   const root = await mkdtemp(join(tmpdir(), 'nebula-available-'));
   try {
-    const row = { imageId: 'test', originalTextureSha256: 'a'.repeat(64), sourceSha256: 'b'.repeat(64), receiptPath: 'receipts/test.json',
+    const row = { imageId: 'test', receiptPath: 'receipts/test.json',
       layers: [
         { id: 'diffuse', label: 'Without stars', texturePath: 'prepared/diffuse.webp', widthPx: 200, heightPx: 100 },
         { id: 'stars', label: 'Residual', texturePath: 'prepared/stars.webp', widthPx: 200, heightPx: 100 },

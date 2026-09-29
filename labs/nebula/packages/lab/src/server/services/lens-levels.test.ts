@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, rm, writeFile, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
@@ -114,18 +113,17 @@ test('the lens raster is placed through its own tangent bounds, never stretched 
   assert.ok(stretchedRight > 0, 'the stretched reading paints the half this lens never observed');
 });
 
-const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
-/** A saved lens in the exact file shape `bakeFiniteLens` publishes, with its own manifest pins. */
+/** A saved lens in the exact file shape `bakeFiniteLens` publishes, with its own artifact manifest. */
 async function fixture(options: { lensBounds?: { min: number[]; max: number[] }; corrupt?: boolean } = {}) {
   const root = await mkdtemp(join(tmpdir(), 'nebula-lens-levels-'));
-  const resultId = 'a'.repeat(64), directory = `.local/nebula-lab/reconstructions/${resultId}`;
+  const resultId = 'test-model-test-lens', directory = `.local/nebula-lab/reconstructions/${resultId}`;
   const width = 32, height = 24, lensWidth = 64, lensHeight = 48;
   const projectionBounds = { min: [-4, -3], max: [4, 3] };
-  const artifacts: Record<string, { sha256: string; bytes: number }> = {};
+  const artifacts: Record<string, { bytes: number }> = {};
   const save = async (path: string, bytes: Buffer) => {
     const full = join(root, directory, path);
     await mkdir(dirname(full), { recursive: true }); await writeFile(full, bytes);
-    artifacts[path] = { sha256: digest(bytes), bytes: bytes.length };
+    artifacts[path] = { bytes: bytes.length };
   };
   const projection = Buffer.alloc(width * height);
   for (let p = 0; p < width * height; p++) projection[p] = 40 + (p % 180);
@@ -142,12 +140,11 @@ async function fixture(options: { lensBounds?: { min: number[]; max: number[] };
     method: 'simulation-guided-finite-material@1',
     densityProjection: { width, height, tangentBoundsKpc: projectionBounds },
     sourceRegistration: { tangentBoundsKpc: options.lensBounds ?? projectionBounds } })));
-  if (options.corrupt) await writeFile(join(root, directory, 'source/registered-image.png'),
-    await sharp(Buffer.alloc(lensWidth * lensHeight * 3, 9), { raw: { width: lensWidth, height: lensHeight, channels: 3 } }).png().toBuffer());
+  if (options.corrupt) await rm(join(root, directory, 'source/registered-image.png'));
   await writeFile(join(root, directory, 'manifest.json'), JSON.stringify({
     schema: 'cssearth-nebula-reconstruction-artifacts@1', id: `reconstruction-${resultId}`, artifacts }));
   const prepared = { schema: 'cssearth-nebula-reconstruction@1', resultId, imageId: 'test-lens', removalResultId: '', placement: {},
-    subject: { id: `reconstruction-${resultId}`, directory }, finiteMaterial: { modelResultId: 'b'.repeat(64), sourceResultId: 'c'.repeat(64) },
+    subject: { id: `reconstruction-${resultId}`, directory }, finiteMaterial: { modelResultId: 'test-model', sourceResultId: 'test-subject-test-lens' },
   } as unknown as PreparedReconstruction;
   return { root, prepared, width, height };
 }
@@ -161,7 +158,7 @@ test('one saved lens is measured from its own pinned rasters, and only from them
     assert.deepEqual(levels.grid, { width, height });
     assert.equal(levels.footprintPixels, width * height);
     assert.equal(levels.files.projection, 'source/fit-projection.png');
-    assert.equal(levels.files.sha256['source/registered-image.png']!.length, 64);
+    assert.equal(levels.files.source, 'source/registered-image.png');
     // The delivered render is the projection level wearing the image's peak-normalized chromaticity.
     const [red, green, blue] = levels.channels;
     assert.ok(Math.abs(green!.renderP90 / red!.renderP90 - .5) < .02, `green ${green!.renderP90} of red ${red!.renderP90}`);
@@ -173,10 +170,10 @@ test('one saved lens is measured from its own pinned rasters, and only from them
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('a lens raster that no longer matches its manifest pin is refused, and a non-lens result is refused', async () => {
+test('a lens raster missing from its saved result is refused, and a non-lens result is refused', async () => {
   const { root, prepared } = await fixture({ corrupt: true });
   try {
-    await assert.rejects(lensLevels(root, prepared), /Saved lens artifact differs: source\/registered-image\.png/);
+    await assert.rejects(lensLevels(root, prepared), /Saved lens artifact is missing: source\/registered-image\.png/);
     const density = { ...prepared, finiteMaterial: undefined } as PreparedReconstruction;
     await assert.rejects(lensLevels(root, density), /baked image lens/);
   } finally { await rm(root, { recursive: true, force: true }); }
@@ -192,7 +189,7 @@ test('a lens registered on half the model field covers half the footprint', asyn
 });
 
 test('the route’s own accepted LMC lenses are measured, when they are present in this checkout', async (t) => {
-  const root = process.cwd(), resultId = 'ab68c0e77c37c690181d44a0a1c438d534a655b9b4071c5495168922415fe559';
+  const root = process.cwd(), resultId = 'lmc-clouds-emission-envelope-horalek-widefield';
   const directory = `.local/nebula-lab/reconstructions/${resultId}`;
   const present = await readFile(join(root, directory, 'manifest.json')).then(() => true, () => false);
   if (!present) return t.skip('The accepted Horálek lens is not baked in this checkout.');

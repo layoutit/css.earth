@@ -12,7 +12,7 @@ function image(id: string, points: { x: number; y: number; peak: number }[], gai
     const value = points.reduce((sum, point) => sum + Math.round(point.peak * Math.exp(-((x - point.x) ** 2 + (y - point.y) ** 2) / 4)), 0);
     for (let c = 0; c < 3; c++) data[(y * width + x) * 3 + c] = value * gain;
   }
-  const layer = { width, height: width, data, path: 'fixture', sha256: 'fixture' };
+  const layer = { width, height: width, data, path: 'fixture' };
   const pixelToSky = (x: number, y: number): [number, number] => rotated ? [64 - y, -x] : [x, -y];
   const sample = (x: number, y: number, out: [number, number, number]) => {
     const px = Math.floor(rotated ? -y : x), py = Math.floor(rotated ? 64 - x : -y);

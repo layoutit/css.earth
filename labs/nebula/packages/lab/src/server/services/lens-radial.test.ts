@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
@@ -129,16 +128,15 @@ test('the footprint mask is respected, and empty or degenerate bins report null 
   assert.deepEqual(radialProfileStatistics(untouched, material, 40), stats);
 });
 
-const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 /** A saved lens in the file shape `bakeFiniteLens` publishes, reused from the difference-map fixture pattern. */
 async function fixture() {
   const root = await mkdtemp(join(tmpdir(), 'nebula-lens-radial-'));
-  const resultId = 'e'.repeat(64), directory = `.local/nebula-lab/reconstructions/${resultId}`;
+  const resultId = 'test-model-radial-lens', directory = `.local/nebula-lab/reconstructions/${resultId}`;
   const width = 32, height = 24, bounds = { min: [-4, -3], max: [4, 3] };
-  const artifacts: Record<string, { sha256: string; bytes: number }> = {};
+  const artifacts: Record<string, { bytes: number }> = {};
   const save = async (path: string, bytes: Buffer) => {
     await mkdir(dirname(join(root, directory, path)), { recursive: true }); await writeFile(join(root, directory, path), bytes);
-    artifacts[path] = { sha256: digest(bytes), bytes: bytes.length };
+    artifacts[path] = { bytes: bytes.length };
   };
   const cx = (width - 1) / 2, cy = (height - 1) / 2;
   const grey = (i: number, j: number) => Math.max(0, Math.round(200 - 9 * Math.hypot(i - cx, j - cy)));
@@ -154,7 +152,7 @@ async function fixture() {
   await writeFile(join(root, directory, 'manifest.json'), JSON.stringify({
     schema: 'cssearth-nebula-reconstruction-artifacts@1', id: `reconstruction-${resultId}`, artifacts }));
   const prepared = { schema: 'cssearth-nebula-reconstruction@1', resultId, imageId: 'test-lens', subject: { id: `reconstruction-${resultId}`, directory },
-    finiteMaterial: { modelResultId: 'b'.repeat(64), sourceResultId: 'c'.repeat(64) } } as unknown as PreparedReconstruction;
+    finiteMaterial: { modelResultId: 'test-model', sourceResultId: 'test-subject-radial-lens' } } as unknown as PreparedReconstruction;
   return { root, prepared };
 }
 async function get(handler: ReturnType<typeof lensRadialHandler>, url: string, method = 'GET') {
@@ -186,7 +184,7 @@ test('the route refuses writes, bad identities and non-lens results', async () =
   try {
     const handler = lensRadialHandler(root, async () => prepared);
     assert.equal((await get(handler, `/?resultId=${prepared.resultId}`, 'POST')).status, 400);
-    assert.match((await get(handler, '/?resultId=nope')).body.toString(), /Invalid reconstruction identity/);
+    assert.match((await get(handler, '/?resultId=Not%2FA%20Name')).body.toString(), /Invalid reconstruction name/);
     const density = lensRadialHandler(root, async () => ({ ...prepared, finiteMaterial: undefined }) as PreparedReconstruction);
     assert.match((await get(density, `/?resultId=${prepared.resultId}`)).body.toString(), /baked image lens/);
   } finally { await rm(root, { recursive: true, force: true }); }
