@@ -1,10 +1,10 @@
 {
   "date": "2026-09-29",
   "baseCommit": "016fb7b259179c3cfff61b0e1e77f5dc31ce2d3d",
-  "change": "Presentation bindings regenerated from the installed runtime and actual page CSS; runtime implementation unchanged.",
+  "change": "Presentation bindings regenerated from the hash-verified published runtime baseline and actual page CSS; runtime implementation unchanged.",
   "scope": {
-    "refreshedBodies": 659,
-    "changedRuntimeInventories": 624,
+    "refreshedBodies": 514,
+    "changedRuntimeInventories": 514,
     "unchanged": [
       "geometry nodes",
       "images",
@@ -17,7 +17,9 @@
     "changedTreeFields": [
       "textureBindings",
       "activationGroups"
-    ]
+    ],
+    "localCandidatesAudited": 659,
+    "staleLocalInputsAlreadyPreparedInPublishedBaseline": 145
   },
   "device": {
     "model": "iPad15,7",
@@ -71,12 +73,17 @@
       "skipped": 0
     },
     "preparationBindings": "passed",
-    "assetPublication": "624 changed content-addressed runtime JSON keys verified live after publication"
+    "assetPublication": "514 changed texture-consumer runtime keys verified live; canonical runtime inventories retained for 145 stale local inputs."
   },
   "limits": [
     "Single-run normal comparisons, not statistical benchmarks. The prior normal run continued to additional bodies after the matched first two destinations.",
     "Debug/native recordings carry instrumentation overhead and are used for causality, not comparable timing.",
     "First-image paint/commit work remains; this change does not claim that all long frames are removed.",
     "The complete default-view device sweep is still in progress."
-  ]
+  ],
+  "correction": {
+    "supersedes": "b496664108e1c28537778b206aae1f8ed93f9372",
+    "reason": "The first bulk refresh trusted 145 stale local runtimes. Restored their published canonical versions; 110 incorrect inventory changes are removed. Badenia and Bamberga inputs matched the published baseline, so their measurements remain applicable.",
+    "ci": "Exact previously failing prepare-facilities --catalog-only step passes after restoring canonical datasets."
+  }
 }
