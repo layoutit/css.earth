@@ -35,6 +35,7 @@
   "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. The surrounding stellar field uses Gaia astrometry and parallax-informed distance estimates, independently of the image footprint.",
   "defaultLens": "eso-optical",
   "framingRadiusUnits": 2400,
+  "acceptedLabResult": "m42-compiler",
   "fieldStars": {
     "path": "src/objects/m42/source/stellar-field.json"
   },

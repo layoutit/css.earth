@@ -900,7 +900,7 @@
     },
     {
       "path": "observations/nh-charon-color-download.json",
-      "purpose": "Actual full binary download HTTP headers and SHA256 receipt.",
+      "purpose": "Actual full binary download HTTP headers and byte-count receipt.",
       "credit": "cssEarth",
       "acquisition": "Recorded by the project when the colour mosaic was downloaded: the HTTP response headers and the SHA-256 of the received bytes."
     },

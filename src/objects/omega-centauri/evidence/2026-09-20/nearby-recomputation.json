@@ -49,9 +49,6 @@
     },
     "differences": [
       {
-        "path": "/products/0/outputs/0/sha256"
-      },
-      {
         "path": "/products/0/outputs/0/bytes",
         "old": 345401,
         "new": 345406,

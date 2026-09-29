@@ -14,12 +14,12 @@ links the USGS archive. Its current Individual Investigations object service is
 `https://dwjtvz5c9xobz.cloudfront.net/`. All paths below are under
 `dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/`.
 
-| Product | Relative archive path | Bytes | SHA-256 |
-| --- | --- | ---: | --- |
-| Dione cube | `data/dione/dione_notnorm_pc_modified_2.img` | 66,355,200 | `57eb3fcc82c5e2ac3e239008cde901c1ade5641d540088514a880c755de275e6` |
-| Rhea cube | `data/rhea/rhea_notnorm_pc_modified_2.img` | 66,355,200 | `b36eb4c5d7c43c76c623fe2e1a5d8a133fd5836ba9f4c4c0442daf478553b9f6` |
-| Wavelength table | `data/vims_wavelengths_ir.tab` | 2,304 | `8cb35dca77944143d27db18860ddee6b5ee29369b0fd0e1441b246c90a89a449` |
-| Preparation guide | `document/information_file.pdf` | 201,977 | `c6a7599777535917c6ab6d5fc38beab6e811e1045df5e651eba67f5a21da527e` |
+| Product | Relative archive path | Bytes |
+| --- | --- | ---: |
+| Dione cube | `data/dione/dione_notnorm_pc_modified_2.img` | 66,355,200 |
+| Rhea cube | `data/rhea/rhea_notnorm_pc_modified_2.img` | 66,355,200 |
+| Wavelength table | `data/vims_wavelengths_ir.tab` | 2,304 |
+| Preparation guide | `document/information_file.pdf` | 201,977 |
 
 Each cube has a companion `.xml` PDS4 label and `.hdr` ENVI header. These, the
 wavelength label, the source observation lists and phase-function coefficients

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-dactyl-registration-result@1",
   "qualifiedSurface": false,
-  "dependencySha256": [
+  "dependencies": [
     {
       "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts"
     },

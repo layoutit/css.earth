@@ -20446,7 +20446,7 @@
       "credit": "NASA/ESA Hubble Space Telescope, programme 14650 (PI M. Brown); MAST (STScI)",
       "displayCredit": "NASA/ESA HST, MAST",
       "license": "HST data served by MAST are public after their exclusive access period and carry no copyright; credit the mission, the programme and MAST.",
-      "acquisition": "Written by packages/telescope-cli/authoring/hst/slit-scan-map.mts from the 60 MAST frames pinned by URI, size and sha256 in packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json, with the pinned Horizons responses beside it; measured in europa-salt-map.scan.reproduction.json. Re-run: node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <frames> <out> --fetch.",
+      "acquisition": "Written by packages/telescope-cli/authoring/hst/slit-scan-map.mts from the 60 MAST frames pinned by URI and size in packages/telescope-cli/src/archives/hst/programs/europa-salt-map.scan.json, with the pinned Horizons responses beside it; measured in europa-salt-map.scan.reproduction.json. Re-run: node packages/telescope-cli/authoring/hst/slit-scan-map.mts europa-salt-map <frames> <out> --fetch.",
       "redistribution": "Derived from public Hubble data; retain the credit.",
       "consumers": [
         "hst-sodium-chloride"

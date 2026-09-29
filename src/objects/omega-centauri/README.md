@@ -28,7 +28,7 @@ experiment remain in the [physical evidence](source/bake-inputs/references/04-ph
 
 ## Current 500-element bake
 
-The current 500-element result is the selected one.
+The selected result is `omega-centauri-compiler`.
 Its [delivery recipe](source/delivery.json) records the failed visual qualification;
 `acceptedLabResult` identifies this candidate, not an acceptance certificate.
 
