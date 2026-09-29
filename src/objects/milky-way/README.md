@@ -299,8 +299,9 @@ of 255) keep it under the dots. It is 184 KB at 2048 px.
 
 **Past the Solar System.** The dots fade in from about Neptune's orbit (a
 twentieth of the distance where the Solar System starts to retire) and are whole
-by 670 AU; as the planets fade, by 1 light-year, the dots take over from the
-app's stars: only featured stars
+by 670 AU; over the same range the other systems' stars, dimmed while the camera
+is among the planets, come up to full. Once the planets have faded, from 1 to 10
+light-years, the dots take over from the app's stars: only featured stars
 keep their markers, as landmarks. The overview reads Solar System until the
 planets fade, Milky Way while inside the galaxy, and Local Group once the
 galaxy's nebulae have faded, about 19 kpc out.

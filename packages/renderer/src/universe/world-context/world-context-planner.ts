@@ -12,6 +12,8 @@ import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
 import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, LOCAL_GROUP_SCALE, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
+/** How many times farther than a system's hidden distance its host stars have given way to the catalogue dots. */
+const HOST_HANDOFF_SPAN = 10;
 const ORBIT_LOD_PIXELS = 0.1;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
@@ -161,9 +163,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const orbitOverview = selectionPreview ? false : overview;
       const frame = createWorldFrameProjection(plan.focus, orbitFocus.body, toEye, project);
       const selectedEye = frame.eye(selected);
-      // Past a system (its bodies' fade), a host star that is not featured gives way to the galaxy's catalogue dots: one
-      // value for the whole field, from the selected body, shared with those dots (universe-background.ts).
-      const galaxyHandoff = logarithmicFade(Math.hypot(...selectedEye), plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+      // Once the camera has left a system (its bodies hidden), a host star that is not featured gives way to the galaxy's
+      // catalogue dots over a tenfold widening of the view: one value for the whole field, from the selected body. The
+      // dots are already whole by then (universe-background.ts), so inside the system every star keeps its full marker.
+      const galaxyHandoff = logarithmicFade(Math.hypot(...selectedEye), plan.system.hiddenDistanceM, plan.system.hiddenDistanceM * HOST_HANDOFF_SPAN);
       const selectedDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, selectedDiameter);

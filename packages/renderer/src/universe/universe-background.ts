@@ -9,12 +9,10 @@ import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
 import { fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
 import { mountGalaxyBacking, parseGalaxyBacking } from './galaxy-backing.js';
-import { logarithmicFade, preparedVolumeOpacity } from './world-context/context-scale.js';
+import { logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
 import { GALAXY_SCALE } from '../labels/universe-label-policy.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 
-/** How many times nearer than the Solar System's fade the catalogue dots start to appear. */
-const DOTS_BEFORE_SYSTEM_FADE = 20;
 /** Retained sky, stellar sample and galaxy share one exposure-aware handoff. */
 export function createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
   prefetchUrls, prefetchDistanceM, cataloguePointUrls = [], backingUrl }: {
@@ -119,12 +117,10 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       stellarOpacity = stellarPointsOpacity(starsHandoff, completedContribution) * detailContextOpacity;
       stellarPoints?.publish(stellarPublication, stellarEnabled ? stellarOpacity : 0);
       if (volumeVisible && volumeSize > 0) volumeLayer!.publish({ world, viewport });
-      // The catalogue dots are the stars around the Solar System: they fade in while the camera is still among its outer
-      // bodies, from a twentieth of the distance where the system starts to retire (about Neptune's orbit) to that
-      // distance, so they are whole before the planet hosts give way to them (world-context-planner.ts). Measured like
-      // them from the selected body. The backing is the galaxy seen from outside its disc: it fades in later, over the
-      // galaxy scale.
-      const shownDots = detailContextOpacity * logarithmicFade(volumeDistanceM, plan.system.fadeOutStartDistanceM / DOTS_BEFORE_SYSTEM_FADE, plan.system.fadeOutStartDistanceM);
+      // The catalogue dots are the stars around the Solar System (starFieldFade), whole before the host stars give way to
+      // them past the system (world-context-planner.ts); measured like them from the selected body. The backing is the
+      // galaxy seen from outside its disc: it fades in later, over the galaxy scale.
+      const shownDots = detailContextOpacity * starFieldFade(volumeDistanceM, plan.system);
       for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots);
       const shownBacking = volumeVisible && volumeSize > 0 ? logarithmicFade(volumeDistanceM, GALAXY_SCALE.handoffStartM, GALAXY_SCALE.handoffEndM) : 0;
       if (backing) {
