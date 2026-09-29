@@ -368,6 +368,11 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.deepEqual([planets[0]!.thermal !== undefined, planets[1]!.thermal !== undefined], [true, false]);
   assert.match(skipped.join('; '), /HD 1 d: found by radial velocity, and the archive gives no orbit rows for it/u);
   assert.match(notes.join('; '), /HD 1 c: no measured dayside brightness temperature/u);
+  // WASP-8 b's dayside, 938 K (archive, 2026-09-29), is too cool for a black-body colour: it takes its host's light, and says why.
+  const cool = { ...archive, async text(url: string) { return (await archive.text(url)).replace(',1400,80,-80,', ',938,40,-40,'); } };
+  const cooled = await archiveSpec(cool, 'HD 1', { ids: new Set(), names: new Map(), stars: [] });
+  assert.equal((cooled.spec.planets as { thermal?: unknown }[])[0]!.thermal, undefined);
+  assert.match(cooled.notes.join('; '), /HD 1 b: its dayside brightness temperature, 938 K \(Four et al\. 2022\), is too cool to glow \(a black-body colour needs over 1000 K\); its gray takes the host's light/u);
   assert.equal((spec.temperature as { value: number }).value, 5000);
   assert.equal(spec.gaia, '123456789', 'the archive\'s Gaia DR3 id, which SIMBAD must agree with');
   // A host the universe holds under another id, found by the name its planets use: its new planets become an addition to it.

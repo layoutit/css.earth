@@ -74,7 +74,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     // A planet found without a transit takes the measured-orbit route: one paper's whole orbit, or it is left out with the reason.
     const measured = !row.transit, method = row.method.toLowerCase();
     if (measured && !planetRows.length) return { skip: `${row.planet}: found by ${method}, and the archive gives no orbit rows for it`, note };
-    const [composite, { thermal }, archiveRadius] = await Promise.all([compositeMass(archive, row.planet), thermalFromArchive(archive, row.planet), measured ? compositeRadius(archive, row.planet) : undefined]);
+    const [composite, { thermal, why }, archiveRadius] = await Promise.all([compositeMass(archive, row.planet), thermalFromArchive(archive, row.planet), measured ? compositeRadius(archive, row.planet) : undefined]);
     let assembled;
     // The draft only checks that a measured orbit can be placed; its a/R* is not kept (the spec keeps the route), and generation
     // divides the paper's semi-major axis by the host's recorded radius, which may be Gaia's and unknown here.
@@ -84,7 +84,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     const modelSize = assembled.radius.row.reference === 'CALCULATED_VALUE';
     const defaultRow = assembled.row ?? planetRows.find(entry => entry.isDefault)!;
     // A measured dayside temperature in the archive's emission table gives the planet its thermal colour (planet-lenses.mts).
-    if (!thermal) note.push(`${name}: no measured dayside brightness temperature in the archive's emission table; its gray takes the host's light`);
+    if (!thermal) note.push(`${name}: ${why}; its gray takes the host's light`);
     const quotes = await wikipediaQuotes(archive, [name, hostname], [name, row.planet]);
     if (!quotes) note.push(`${name}: no Wikipedia lead to quote`);
     if (measured) note.push(`${name}: found by ${method}; its whole orbit is ${defaultRow.label}'s fit${defaultRow.isDefault ? ', the archive\'s default' : ''}${modelSize ? ", and its size the archive's model from its mass" : ''}`);
