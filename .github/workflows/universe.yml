@@ -193,7 +193,7 @@ jobs:
           node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" ".github/scripts/architecture/*.test.mts" "tests/asset-publication/*.test.mts" \
             tests/delivery/publish-verification.test.mts tests/delivery/source-acquisition.test.mts tests/delivery/asset-origin-scenes.test.mts tests/preparation/stale-builds.test.mts \
             "tests/inventory/runtime-asset-*.test.mts" \
-            tests/objects/survey-install-spawns.test.mts packages/bake/authoring/juno/jiram-mosaic.test.mts site/test/recovery-commands.test.mts
+            packages/bake/src/objects/sphere-survey/survey-install-spawns.test.mts packages/bake/authoring/juno/jiram-mosaic.test.mts site/test/recovery-commands.test.mts
 
   typecheck:
     name: Typecheck
@@ -473,7 +473,7 @@ jobs:
           case "$CI_PREPARATION_LANE" in
             publication)
               pnpm exec playwright install --with-deps --only-shell chromium
-              node --test --test-concurrency=1 tests/objects/publication.test.mts \
+              node --test --test-concurrency=1 packages/bake/src/delivery/publication.test.mts \
                 tests/delivery/write-prepared-set.test.mts tests/preparation/preparation-cache.test.mts \
                 tests/preparation/prepare-objects.test.mts
               ;;

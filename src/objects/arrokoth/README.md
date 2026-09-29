@@ -37,7 +37,7 @@ for validation and never paints the surface. Its held-out lit edges have **2.29 
 RMS** residual. This measures image-to-shape alignment, not absolute terrain
 accuracy. The full report retains unmatched edges and maximum errors.
 
-[Independent Astropy results](../../../tests/objects/fixtures/arrokoth/new-horizons-astropy.json)
+[Independent Astropy results](../../../packages/bake/src/objects/layers/terrestrial/missions/fixtures/arrokoth/new-horizons-astropy.json)
 cover all three FITS HDUs of both registration images and the four-band MVIC cube.
 The reader tests compare native pixels, quality decisions and 50 TAN-SIP camera
 projections across the detectors. Both million-pixel detector quality masks also
@@ -85,7 +85,7 @@ and production browser record
 retain their original build identities. All three routes passed at DPR 1 and 2;
 those captures predate the combined population build.
 
-The [PNG/FITS registration check](../../../tests/objects/fixtures/arrokoth/arrokoth-registration.json)
+The [PNG/FITS registration check](../../../packages/bake/src/objects/layers/terrestrial/missions/fixtures/arrokoth/arrokoth-registration.json)
 compares 24 decoded anchors. A recorded albedo drag
 retained all 111,002 scene nodes and made no interaction requests. It covered one
 local headless workload, mostly facing uniform source fill; inspected images
@@ -215,7 +215,7 @@ source intersections; 3D transfer uses local surface points.
 The PDS PNG and raw FITS arrays have opposite row order. Twenty-four independent
 PNG anchors reproduce FITS values within 3e-6 albedo using the label's approximate
 integer conversion. Lower-left OBJ V indexes raw FITS rows directly. The
-[registration record](../../../tests/objects/fixtures/arrokoth/arrokoth-registration.json)
+[registration record](../../../packages/bake/src/objects/layers/terrestrial/missions/fixtures/arrokoth/arrokoth-registration.json)
 binds those checks to exact source hashes.
 
 ## Source survey
