@@ -74,5 +74,5 @@ test('every data-dependent preparation exclusion stays out of the sparse-tree se
   preparation.push('packages/bake/src/objects/surface-features/atlas-edge.test.ts');
   assert.ok(preparation.length >= 20, 'all preparation suites discovered');
   const selected = bakeObjectTests(tracked, path => readFileSync(resolve(root, path), 'utf8'));
-  for (const path of [...preparation, ...RESTORED_PACKAGE_TESTS]) assert.ok(!selected.includes(path), `requires restored data: ${path}`);
+  for (const path of preparation) assert.ok(!selected.includes(path), `requires restored data: ${path}`);
 });

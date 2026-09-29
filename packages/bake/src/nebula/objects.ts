@@ -6,6 +6,7 @@ import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, pre
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 import { parsePreparedNebulaCatalog } from '@cssearth/catalog';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
@@ -78,10 +79,11 @@ export function readNebulaDelivery(v: unknown) {
     ...(r.fieldStars === undefined ? {} : { fieldStars: pin(r.fieldStars) }),
     ...(r.symmetryDirectory === undefined ? {} : { symmetryDirectory: text(r.symmetryDirectory) }) };
 }
-/** Reuse an installed bank only when its receipt, descriptor and every resource it names are present. */
-async function installed(directory: string): Promise<boolean> {
+/** Reuse an installed bank only when its receipt records the current recipe and its descriptor and every resource it
+ * names are present. The receipt keeps the whole recipe, so a changed recipe is compared, not trusted. */
+async function installed(directory: string, recipe: unknown): Promise<boolean> {
   try {
-    record(await read(directory,'prepared/delivery.json'));
+    if (!isDeepStrictEqual(record(await read(directory,'prepared/delivery.json')).recipe, recipe)) return false;
     const descriptor = record(await read(directory,'object.json')), prepared = pin({ path:record(descriptor.prepared).url });
     const envelope = record(JSON.parse((await pinned(directory,prepared)).toString())), data = validatePreparedVolumeLenses(envelope.data);
     for (const lens of data.lenses) for (const resource of lens.volume.resources) await pinned(directory,{path:`prepared/${resource.path}`});
@@ -111,7 +113,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     await verifyReplayReferences(root, directory, [recipe.request,...recipe.inputPins,...(recipe.compositeRecipe ? [recipe.compositeRecipe] : [])]);
   }
   for (const input of [...(recipe.fieldStars ? [recipe.fieldStars] : []), ...(recipe.compactInputs ? [recipe.compactInputs] : [])]) await pinned(root,input);
-  if (ifMissing && await installed(directory)) return { id:recipe.id,status:'verified' };
+  if (ifMissing && await installed(directory, JSON.parse(recipeBytes.toString()))) return { id:recipe.id,status:'verified' };
   // Deploy builds may tolerate a package missing from R2 instead of baking one from scratch here (no source
   // acquisition service runs at build time): report it unavailable and move on, loudly.
   if (allowMissing) {
@@ -225,7 +227,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     const renderElements = assertCompilerDeliveryElementBudget(compilerSampling, data);
     const envelope = json({schema:'cssearth-prepared-object@1',id:recipe.id,type:'volume-lens-bank',format:'cssearth-volume-lenses@1',data});
     await put(resolve(staging,'lenses.json'),envelope);
-    await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@1',sourceResult,
+    await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@1',recipe:JSON.parse(recipeBytes.toString()),sourceResult,
       acceptedLabResult:recipe.acceptedLabResult,...(fieldStars ? {fieldStars} : {}), ...(renderElements ? { renderElements } : {}),
       lenses:lenses.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length}))}));
     // Install complete generated files only. Authored source inputs stay untouched.

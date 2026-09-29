@@ -55,7 +55,7 @@ test('every volume the nebula delivery validates is sanitized, and an explicit b
   assert.ok(validated > 0, 'the delivery validates at least one prepared volume');
   assert.equal(sanitized, validated, 'each validated volume passes straight through sanitizeVolumeProvenance');
   // `--if-missing` is a consumer path: it reuses an installed bank whose files are all present, without rebaking.
-  assert.match(source, /installed\(directory\)/);
+  assert.match(source, /installed\(directory, /);
 });
 
 test('a prepared m1 lens bank, if baked locally, records no process-pid staging directory', async () => {
@@ -135,6 +135,11 @@ test('the real installer rejects post-compiler field stars before replacing the 
   const receipt: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/delivery.json'), 'utf8'));
   assert.ok(receipt && typeof receipt === 'object' && 'renderElements' in receipt);
   assert.deepEqual(receipt.renderElements, { starCount: 1, slabCount: 3, impostorCount: 26, totalElements: 56 });
+  // --if-missing reuses the bank while its receipt records this recipe, and rebuilds it once the recipe changes.
+  assert.equal((await prepareNebulaObject(root, directory, true, backend)).status, 'verified');
+  const recipe: unknown = JSON.parse(await readFile(resolve(directory, 'source/delivery.json'), 'utf8'));
+  await writeFile(resolve(directory, 'source/delivery.json'), JSON.stringify({ ...(recipe as object), description: 'Changed recipe' }));
+  assert.equal((await prepareNebulaObject(root, directory, true, backend)).status, 'prepared');
 });
 
 test('application preparation dispatches only delivery schemas owned by the nebula pipeline', () => {

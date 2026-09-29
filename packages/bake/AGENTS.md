@@ -85,10 +85,10 @@ its validators accept); the renderer never imports the bake.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
   and the renderer's object controls, and the audits that read a prepared presentation and its authored runtime sources back
-  against the descriptor (`check-prepared-presentation.ts`, `prepared-object-source.ts`; the prepared format constant comes
+  against the descriptor (`check-prepared-presentation.ts`; the prepared format constant comes
   from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
-  `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command;
-  `.github/scripts/checks/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
+  `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command,
+  run over every object by `pnpm test:universe:runtime`. `prepared-object-pin.ts` pins a prepared object to its
   transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
   and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
   Its tests are in `src/contract/`.
@@ -130,22 +130,18 @@ its validators accept); the renderer never imports the bake.
   coverage direction of each lens's map, which the world-navigation stage turns a partial lens toward. It imports the topics
   `LOWER_TOPICS` declares for it (`raster`, `scene`, `objects/scene`, `objects/default-view`, `objects/interpretation` and
   three layers).
-- `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the preparation cache and the record format
-  of the preparation trace, and the esbuild plugin (`bundle-renderer.ts`) that bundles `@cssearth/renderer`'s TypeScript source
-  subpaths into a Node bundle that keeps other packages external (the preparation test runner and bundle-building tests use it). `packages/bake/cli/preparation-trace.mts` is the trace itself, which
-  `packages/bake/cli/prepare-objects.mts` loads into each body's preparation with `NODE_OPTIONS=--import`; it loads this entry
-  before it starts recording, so the entry imports no project module but `@cssearth/core`. It imports no topic. It also
-  holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
+- `src/preparation/` is published as `@cssearth/bake/preparation` (Node only): the esbuild plugin (`bundle-renderer.ts`)
+  that bundles `@cssearth/renderer`'s TypeScript source subpaths into a Node bundle that keeps other packages external (the
+  preparation test runner and bundle-building tests use it). It imports no topic. It also holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
   because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
   Its tests are `node --test` suites in `src/preparation/`.
 - `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
   scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
-  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command; its scheduler is tested in `src/prepare-objects/`.
-- `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the preparation cache (a verified
-  receipt, from `preparation`, skips an unchanged object) over `run-implemented-objects`'s scheduler. It imports
-  `preparation` and `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command; its tests are in
-  `src/prepare-objects/`.
+  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
+- `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the catalogue-wide preparation run,
+  each object through `run-implemented-objects`'s scheduler, then navigation and the inventories. It imports
+  `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command.
 - `src/prepare-object/` is published as `@cssearth/bake/prepare-object` (Node only): the ordered preparation chain for one
   or more authored objects end to end (builds, catalogue, geometry, the authored preparation, page data, text, markers,
   billboard, world context, provenance), naming the step that failed and how to resume. It imports no topic; its steps
@@ -205,11 +201,9 @@ its validators accept); the renderer never imports the bake.
     ALMA, the ESO archive, MAST, DataCite and the JMMC diameters (a query and a pure summary of its rows each), the imagery
     candidates (OPUS frames finer than a body ships, archive leads for a named body) and the resolved-star candidates. It
     imports no topic. `packages/bake/cli/imagery-candidates.mts` and `star-candidates.mts` print them.
-  - `objects/provenance`: the record readers and recipe bindings of a layered body's provenance (the product inputs, recipe
-    and outputs each preparation family records); `object-provenance.ts` compiles the record from them, and
-    `recover-provenance.ts` writes every scene body's record, with the facilities catalogue compilation the application passes
-    in (`site/build/prepare/prepare-provenance.mts`). It imports `objects/layers/terrestrial`, `objects/acquisition`,
-    `objects/sources`, `delivery` and `sources`.
+  - `objects/lineage`: which manifest sources each prepared product of a layered body reads, built in memory from its
+    source records (`body-lineage.ts`) by each preparation family's recipe bindings (`lineage-recipes.ts`). The facilities
+    and sources catalogues read it; nothing writes it. It imports `objects/layers/terrestrial`.
   - `objects/default-view`: what a prepared object's default camera looks at, from the runtime's own camera math and the
     solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; the default
     lens's data coverage, read from its prepared minimap, that the default camera turns toward; and the turn toward a partial
