@@ -64,7 +64,8 @@ Each system has the same overview, `?overview=system` on its star's route:
 - Approaching the star opens its card once its disc is 48 px wide and the zoom
   has passed halfway from the system framing to the close-up.
 - Orbit lines, markers and labels fade with the camera's distance from their
-  own star.
+  own star, and the overview gives way to the Milky Way once they have faded,
+  by that same distance.
 - Breadcrumbs, the overview card, its results and the Milky Way's Systems list
   name the object's own system. The Milky Way, Local Group and Nearby Universe
   are measured from the Sun and are pages of its scene, `/milky-way/` and so on.
