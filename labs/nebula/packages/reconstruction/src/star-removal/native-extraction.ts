@@ -1,6 +1,4 @@
 /** Full-resolution offline variant; bounded histograms replace pixel-sized JavaScript sort arrays. */
-import { createHash } from 'node:crypto';
-import { createReadStream } from 'node:fs';
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
@@ -37,8 +35,7 @@ export async function extractNativeSource(options: ExtractionOptions, createSupp
   const outputMode = options.outputMode ?? 'all';
   if (outputMode !== 'all' && outputMode !== 'diffuse-only') throw new TypeError('Unknown extraction output mode.');
   const id = options.id ?? basename(options.inputPath).replace(/\.[^.]+$/, '');
-  const before = await stat(options.inputPath), sourceHash = createHash('sha256');
-  for await (const chunk of createReadStream(options.inputPath)) sourceHash.update(chunk);
+  const before = await stat(options.inputPath);
   const metadata = await sharp(options.inputPath).metadata();
   const decoded = await sharp(options.inputPath).rotate().removeAlpha().toColourspace('srgb')
     .raw().toBuffer({ resolveWithObject: true });
@@ -108,19 +105,15 @@ export async function extractNativeSource(options: ExtractionOptions, createSupp
   const after = await stat(options.inputPath);
   if (after.size !== before.size || after.mtimeMs !== before.mtimeMs)
     throw new TypeError('Native extraction source changed during processing.');
-  const outputHashes: Record<string, string> = {};
-  for (const file of Object.values(files)) {
-    const digest = createHash('sha256');
-    for await (const chunk of createReadStream(resolve(options.outputDirectory, file))) digest.update(chunk);
-    outputHashes[file] = digest.digest('hex');
-  }
+  const outputBytes: Record<string, number> = {};
+  for (const file of Object.values(files)) outputBytes[file] = (await stat(resolve(options.outputDirectory, file))).size;
   const receipt: NativeExtractionReceipt = {
     schema: 'cssearth-nebula-extraction-lab@1', id, width, height, skyRgb: sky, threshold,
-    supportFraction: supportSum / (width * height), outputs: files, outputHashes,
+    supportFraction: supportSum / (width * height), outputs: files, outputBytes,
     options: { maxPixels: null, medianSize, outputMode, supportPixels: options.supportPixels ?? 420,
       thresholdSigma: options.thresholdSigma ?? 6, bridgeFraction: options.bridgeFraction ?? 0.006,
       softEdgeFraction: options.softEdgeFraction ?? 0.018 },
-    source: { path: options.inputPath, sha256: sourceHash.digest('hex'), bytes: before.size,
+    source: { path: options.inputPath, bytes: before.size,
       depth: metadata.depth ?? 'unknown', width: metadata.width!, height: metadata.height! },
     processing: { nativeResolution: true, medianSize, outputMode,
       borderStatistic: 'Full border histograms: 256 bins per RGB channel; exact four-decimal luminance lattice for median and MAD.',

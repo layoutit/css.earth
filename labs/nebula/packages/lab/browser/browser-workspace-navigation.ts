@@ -1,7 +1,6 @@
 /** Shared navigation and retained workbench layout; isolated storage, no processing writes. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile, readFile, readdir } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { chromium, type Page } from 'playwright';
 import { blockProcessingWrites } from './browser-regression.ts';
 
@@ -25,16 +24,16 @@ await context.route('**/__nebula/*', async route => {
       path === '/__nebula/prepare-tone' && neutral) { metadataPosts.push({ path, payload: value }); return route.continue(); }
   return route.fallback();
 });
-async function receiptHashes() {
-  const hashes: Record<string, string> = {};
+async function receiptTexts() {
+  const texts: Record<string, string> = {};
   for (const directory of (await readdir('.local/nebula-lab')).filter(name => name.endsWith('-jobs')).sort()) {
     for (const name of (await readdir(`.local/nebula-lab/${directory}`, { recursive: true })).filter(name => name.endsWith('.json')).sort()) {
-      const path = `.local/nebula-lab/${directory}/${name}`; hashes[path] = createHash('sha256').update(await readFile(path)).digest('hex');
+      const path = `.local/nebula-lab/${directory}/${name}`; texts[path] = await readFile(path, 'utf8');
     }
   }
-  return hashes;
+  return texts;
 }
-const receiptsBefore = await receiptHashes();
+const receiptsBefore = await receiptTexts();
 const errors: string[] = [], failed: { url: string; status: number }[] = [];
 page.on('pageerror', error => errors.push(error.message));
 page.on('response', response => { if (response.status() >= 400) failed.push({ url: response.url(), status: response.status() }); });
@@ -140,8 +139,8 @@ try {
     await page.screenshot({ path: `${output}/smc-alignment.png` }); receipts.push({ subject: 'smc-particles', alignmentImageUnavailable: true, geometry });
   }
   assert.deepEqual(errors, []); assert.deepEqual(failed, []); assert.deepEqual(guard.blocked, []);
-  const receiptsAfter = await receiptHashes(); assert.deepEqual(receiptsAfter, receiptsBefore, 'Display actions preserve every durable scientific job receipt');
-  await writeFile(`${output}/receipt-hashes.json`, JSON.stringify({ before: receiptsBefore, after: receiptsAfter }, null, 2));
+  const receiptsAfter = await receiptTexts(); assert.deepEqual(receiptsAfter, receiptsBefore, 'Display actions preserve every durable scientific job receipt');
+  await writeFile(`${output}/receipts-unchanged.json`, JSON.stringify(Object.keys(receiptsAfter), null, 2));
   await writeFile(`${output}/${headerOnly ? 'header' : 'result'}.json`, JSON.stringify({ status: 'passed', base, headerOnly, browser: browser.version(), receipts, errors, failed, metadataPosts, blockedWrites: guard.blocked }, null, 2));
   console.log(`WORKSPACE_NAVIGATION_PASS ${headerOnly ? 'header' : 'header-and-docks'} ${receipts.length} checks; no errors or expensive processing`);
 } catch (error) {

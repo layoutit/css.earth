@@ -1,7 +1,7 @@
 /** Real API, registered inputs and completed prepared PolyCSS outputs. No mocked processing. */
 import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
-import { createHash, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { readStructureCatalogue } from '../src/features/observations/models/structures-model.js';
 import { readGeometryMap } from '../src/features/observations/models/geometry-model.js';
 import { initializeShapeCloud } from '../src/features/shape-cloud/model.ts';
@@ -31,24 +31,24 @@ async function apply(request: ShapeCloudRequest): Promise<{ jobId: string; resul
   assert.equal(result.quality, request.quality ?? 'detailed');
   return { jobId, result };
 }
-const results = [], originals: { path: string; sha256: string }[] = [];
+const results = [], originals: { path: string; bytes: Buffer }[] = [];
 for (const image of catalogue.images) {
   assert.ok(image.geometry);
   const geometry = readGeometryMap(JSON.parse(await readFile(`${image.directory}/${image.geometry.file}`, 'utf8')), image);
   const settings = initializeShapeCloud(geometry);
-  const request: ShapeCloudRequest = { action: 'apply', imageId: image.id, cataloguePath, geometrySha256: image.geometry.sha256,
+  const request: ShapeCloudRequest = { action: 'apply', imageId: image.id, cataloguePath, geometryFile: image.geometry.file,
     width: image.width, height: image.height, settings };
   for (const file of ['map.json', 'source.png']) {
     const path = `${image.directory}/${file}`;
-    originals.push({ path, sha256: createHash('sha256').update(await readFile(path)).digest('hex') });
+    originals.push({ path, bytes: await readFile(path) });
   }
   const started = performance.now(), completed = await apply(request);
   assert.equal(completed.result.empty, false);
-  assert.equal(completed.result.geometrySha256, image.geometry.sha256);
+  assert.equal(completed.result.geometryFile, image.geometry.file);
   results.push({ imageId: image.id, request, ...completed });
   console.log(`SHAPE_CLOUD_API_READY ${image.id} components=${settings.components.length} seconds=${((performance.now() - started) / 1000).toFixed(2)} ${completed.result.neutral?.path}`);
 }
-for (const original of originals) assert.equal(createHash('sha256').update(await readFile(original.path)).digest('hex'), original.sha256);
+for (const original of originals) assert.ok((await readFile(original.path)).equals(original.bytes), `${original.path} changed`);
 const first = results[0]!;
 const repeated = await apply(first.request); assert.equal(repeated.result.id, first.result.id, 'Same recipe must restore its exact prepared result.');
 const draftStarted = performance.now(), draft = await apply({ ...first.request, quality: 'draft' });

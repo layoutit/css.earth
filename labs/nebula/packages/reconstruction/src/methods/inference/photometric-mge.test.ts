@@ -30,7 +30,7 @@ test('deprojection integrates back to the published projected ellipse at differe
   assert.ok(Math.abs(column({ ...recipe, positionAngleEastOfNorthDegrees: 90 }, 20, 0) - Math.exp(-.5)) < 1e-6);
 });
 
-test('line-of-sight mirror is an explicit degeneracy and source pins participate in identity', () => {
+test('line-of-sight mirror is an explicit degeneracy with its own prior name', () => {
   const first = createPhotometricMgePrior(recipe), mirror = createPhotometricMgePrior({ ...recipe, lineOfSightTiltSign: -1 });
   assert.equal(first.sampleDensity(10, 7, 13), mirror.sampleDensity(10, 7, -13));
   assert.notEqual(first.identity, mirror.identity);
@@ -66,7 +66,7 @@ test('conditional draws reject unsupported light and thick boundary kernels inst
   const settings: SimulationDepthSettings = { depthSamples: 64, modeRelativeThreshold: .1, maximumModes: 1,
     minimumSigmaZ: .5, maximumSigmaZ: 10, featureThicknessRatio: 1, supportSigma: 4, placement: 'conditional-quantile' };
   const bounds = { min: [-100, -100, -100] as [number, number, number], max: [100, 100, 100] as [number, number, number] };
-  assert.throws(() => conditionSimulationComponents([component], { identity: 'a'.repeat(64), bounds, sampleDensity: () => 0 }, settings), /positive prior support/);
-  assert.throws(() => conditionSimulationComponents([component], { identity: 'a'.repeat(64), bounds,
+  assert.throws(() => conditionSimulationComponents([component], { identity: 'fixture-prior', bounds, sampleDensity: () => 0 }, settings), /positive prior support/);
+  assert.throws(() => conditionSimulationComponents([component], { identity: 'fixture-prior', bounds,
     sampleDensity: (_x, _y, z) => z > 90 ? 1 : 0 }, settings), /do not clamp/);
 });

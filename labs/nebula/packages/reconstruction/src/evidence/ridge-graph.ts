@@ -1,5 +1,4 @@
 /** Server/offline graph preparation from the existing registered ridge fields. */
-import { createHash } from 'node:crypto';
 import type { CombinedEvidence, EvidenceInputs } from './model.ts';
 import { defaultRidgeGraphSettings, readRidgeGraphSettings, type RidgeGraph, type RidgeNode, type RidgePoint, type RidgePolyline } from './ridge-model.ts';
 import { ridgeNeighbors, ridgeSkeleton } from './ridge-skeleton.ts';
@@ -108,9 +107,8 @@ export function buildRidgeGraph(inputs: EvidenceInputs, combined: CombinedEviden
       points, lengthPixels, lengthArcseconds: lengthPixels * inputs.grid.arcsecondsPerPixel,
       meanScore: points.reduce((sum, p) => sum + p.score, 0) / points.length, peakScore: points.reduce((peak, p) => Math.max(peak, p.score), 0), sourceSupport });
   }
-  const data: Omit<RidgeGraph, 'id'> = { schema: 'cssearth-projected-ridge-graph@1', inputIdentity: inputs.identity, grid: inputs.grid, settings, combination: combined.settings,
-    sources: inputs.sources.map(s => ({ id: s.id, label: s.label, sourceSha256: s.sourceSha256, mapSha256: s.mapSha256, sourcePanelSha256: s.sourcePanelSha256 })), nodes, polylines,
+  return { schema: 'cssearth-projected-ridge-graph@1', inputIdentity: inputs.identity, grid: inputs.grid, settings, combination: combined.settings,
+    sources: inputs.sources.map(s => ({ id: s.id, label: s.label, mapDirectory: s.mapDirectory, sourcePanel: s.sourcePanel })), nodes, polylines,
     diagnostics: { thresholdPixels: supported.reduce((a, b) => a + b, 0), skeletonPixels: mask.reduce((a, b) => a + b, 0), retainedComponents: components.length, discardedComponents, thinningPasses: passes },
     interpretation: 'Thresholded ridge-support skeleton in the common sky grid. Junctions indicate projected contact only, not physical association or depth. No gaps are bridged; short connected components are filtered without deleting source evidence. Pixel centers are not subpixel ridge fits or measured filament widths.' };
-  return { ...data, id: createHash('sha256').update(JSON.stringify(data)).digest('hex') };
 }

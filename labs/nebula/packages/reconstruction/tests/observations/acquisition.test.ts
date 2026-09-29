@@ -17,5 +17,4 @@ test('archive acquisition uses injected endpoint, angular window and transport w
   assert.equal(agent, 'test-science-client');
   assert.equal(receipt.status, 'complete');
   assert.equal(receipt.matchedCount, 0);
-  assert.match(receipt.responseSha256!, /^[a-f0-9]{64}$/);
 });

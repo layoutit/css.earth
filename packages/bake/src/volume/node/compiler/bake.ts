@@ -1,4 +1,5 @@
 /** Offline transport for one fitted neutral field and source-dependent RGB lenses. */
+import { createHash } from 'node:crypto';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative } from 'node:path';
 import sharp from 'sharp';
@@ -8,11 +9,12 @@ import { type VolumeSlices, readVolumeLayerPlan } from '../../contracts/volume-s
 import { compilerSlabMaterial } from '../../materials/slab-material.ts';
 import { optimizeVolumeLayers, readLayerOptimizationReport } from '../../sampling/layer-optimization.ts';
 import { createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, type RenderElementProfile } from '../../contracts/render-element-budget.ts';
-import { readCompilerBakeResult, validCompilerName, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites } from '../../contracts/compiler-bake.ts';
+import { readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites } from '../../contracts/compiler-bake.ts';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from '../../contracts/emission.ts';
 import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices, compilerSliceCounts, validCompilerBounds } from '../../coordinates/compiler-frame.ts';
 import type { CompilerStarInput } from '../../contracts/compiler-star-input.ts';
 import { containedPath, sourceBytes } from '../compact-inputs/density-grid.ts';
+import { sha256 } from '@cssearth/core/node';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { bakeMasterVolumeSlices } from '../slices/emission.ts';
 
@@ -29,7 +31,7 @@ export interface CompilerLensInput {
 }
 /** A host validates its own retained representation; the baker owns only pixels and generic resource pins. */
 export interface CompiledVolumeArtifact {
-  resources: readonly { path: string; bytes: number }[];
+  resources: readonly { path: string; sha256: string; bytes: number }[];
 }
 export interface CompilerBakeBackend {
   /** Host-owned, tested cost of its retained geometry, points and delivery wrappers. */
@@ -115,9 +117,8 @@ function validSkyBounds(bounds: SkyBounds): boolean {
 async function pin(root: string, path: string, value: unknown): Promise<CompilerPin> {
   const bytes = json(value); await writeFile(containedPath(root, path), bytes); return { path };
 }
-/** Every slab's raw alpha bytes, in quad order. */
-export async function compilerAlpha(directory: string, slices: VolumeSlices, signal?: AbortSignal): Promise<Buffer[]> {
-  const alphas: Buffer[] = [];
+export async function compilerAlphaDigest(directory: string, slices: VolumeSlices, signal?: AbortSignal): Promise<string> {
+  const digest = createHash('sha256');
   for (const quad of slices.quads) {
     cancel(signal);
     const bytes = await sourceBytes(directory, { path: quad.texturePath });
@@ -125,25 +126,24 @@ export async function compilerAlpha(directory: string, slices: VolumeSlices, sig
     if (info.width !== quad.widthPx || info.height !== quad.heightPx || info.channels !== 4) throw new Error('Compiler alpha inspection found changed slice dimensions.');
     const alpha = Buffer.alloc(info.width * info.height);
     for (let i = 0; i < alpha.length; i++) alpha[i] = data[i * 4 + 3]!;
-    alphas.push(alpha);
+    digest.update(alpha);
   }
-  return alphas;
+  return digest.digest('hex');
 }
 
-/** Focused handoff check used by the baker and its regression test: a material bank keeps the neutral bank's alpha bytes. */
-export async function verifyCompilerSharedAlpha(expected: readonly Buffer[],
+/** Focused handoff check used by the baker and its regression test. */
+export async function verifyCompilerAlphaIdentity(expected: string,
   candidateDirectory: string, candidate: VolumeSlices, signal?: AbortSignal): Promise<void> {
-  const actual = await compilerAlpha(candidateDirectory, candidate, signal);
-  if (actual.length !== expected.length) throw new Error(`Compiler material has ${actual.length} slabs; the neutral bank has ${expected.length}.`);
-  for (const [index, alpha] of actual.entries()) if (!alpha.equals(expected[index]!))
-    throw new Error(`Compiler material changed the shared alpha bytes: ${candidate.quads[index]!.texturePath}.`);
+  if (!/^[a-f0-9]{64}$/.test(expected)) throw new TypeError('Compiler reference alpha digest is invalid.');
+  const actual = await compilerAlphaDigest(candidateDirectory, candidate, signal);
+  if (actual !== expected) throw new Error('Compiler material changed the shared alpha bytes.');
 }
 
 /** Builds all RGB materials from the same decoded alpha and centered west/north/away frame. */
 export async function bakeCompiler(options: BakeCompilerOptions, backend: CompilerBakeBackend): Promise<CompilerBakeResult> {
   const { root, outputDirectory, boundsArcsec, skyBoundsArcsec, signal } = options;
-  if (!isAbsolute(root) || isAbsolute(outputDirectory) || !outputDirectory || !validCompilerName(options.id) ||
-      !validCompilerName(options.fieldIdentity) || !validCompilerBounds(boundsArcsec) || !validSkyBounds(skyBoundsArcsec) ||
+  if (!isAbsolute(root) || isAbsolute(outputDirectory) || !outputDirectory || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(options.id) ||
+      !/^[a-z0-9][a-z0-9-]{0,159}$/.test(options.fieldIdentity) || !validCompilerBounds(boundsArcsec) || !validSkyBounds(skyBoundsArcsec) ||
       typeof options.sampleEmission !== 'function' || !Array.isArray(options.lenses) || options.lenses.length < 1 || options.lenses.length > 8)
     throw new TypeError('Invalid compiler bake input.');
   const lensIds = new Set<string>();
@@ -201,8 +201,8 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   if (!neutralSlices) throw new Error('Compiler did not derive the cropped neutral bank.');
   await rm(masterDirectory, { recursive: true, force: true });
   neutralSlices.approximation.method = 'Direct XYZ relative-emissivity samples per arcsecond; shared exponential opacity and optical RGB ratios; lossless cropped RGBA8 delivery.';
-  const neutralAlpha = await compilerAlpha(neutralDirectory, neutralSlices, signal);
-  neutralSlices.provenance = { ...provenance };
+  const neutralAlpha = await compilerAlphaDigest(neutralDirectory, neutralSlices, signal);
+  neutralSlices.provenance = { ...provenance, alphaSha256: neutralAlpha };
   await writeFile(containedPath(neutralDirectory, 'volume-slices.json'), json(neutralSlices));
   const painted: { input: CompilerLensInput; slices: VolumeSlices; coverage: { positiveAlphaTexels: number; recoloredTexels: number; outsideImageTexels: number } }[] = [];
   for (let lensIndex = 0; lensIndex < options.lenses.length; lensIndex++) {
@@ -215,8 +215,8 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
         return slabMaterial(x + origin[0], y + origin[1], z + origin[2], out, slab);
       }, onProgress(progress) { cancel(signal); options.progress?.({ phase: 'texture', completed: lensIndex * totalSlices + progress.completed,
         total: options.lenses.length * totalSlices, message: `Painting ${lens.label}; preserving shared opacity` }); } });
-    await verifyCompilerSharedAlpha(neutralAlpha, directory, result.slices, signal);
-    result.slices.provenance = { ...provenance, materialLensId: lens.id, coverage: result.coverage };
+    await verifyCompilerAlphaIdentity(neutralAlpha, directory, result.slices, signal);
+    result.slices.provenance = { ...provenance, alphaSha256: neutralAlpha, materialLensId: lens.id, coverage: result.coverage };
     await writeFile(containedPath(directory, 'volume-slices.json'), json(result.slices));
     painted.push({ input: lens, slices: result.slices, coverage: { positiveAlphaTexels: result.coverage.positiveAlphaTexels,
       recoloredTexels: result.coverage.recoloredTexels, outsideImageTexels: result.coverage.outsideImageTexels } });
@@ -238,7 +238,7 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
     boundsArcsec: structuredClone(boundsArcsec), skyBoundsArcsec: structuredClone(skyBoundsArcsec),
     spanArcsec: Math.max(skyBoundsArcsec.max[0] - skyBoundsArcsec.min[0], skyBoundsArcsec.max[1] - skyBoundsArcsec.min[1]),
     sourceImage: { width: 512, height: 512 }, coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin,
-      earthView: 'observer-at-negative-z-looking-away' }, neutral: pins.get('neutral'),
+      earthView: 'observer-at-negative-z-looking-away' }, neutral: pins.get('neutral'), alphaSha256: neutralAlpha,
     lenses: painted.map(item => ({ id: item.input.id, label: item.input.label, volume: pins.get(item.input.id), coverage: item.coverage })),
     stars, ...starSprites, sampling });
 }

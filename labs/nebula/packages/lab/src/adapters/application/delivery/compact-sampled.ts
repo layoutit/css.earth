@@ -1,4 +1,4 @@
-import { readCompactPin as pinned, replayCompactSampled as replay } from '@cssearth/bake/volume/node';
+import { readCompactPin as pinned, replayCompactSampled as replay, hash as volumeReaderDigest } from '@cssearth/bake/volume/node';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
@@ -6,7 +6,6 @@ import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gzipSync, gunzipSync } from "node:zlib";
-import { geometrySha } from "../../../server/workflows/geometry/registered-source.ts";
 import { jointRecord } from "../../../features/joint-fit/model.ts";
 import { readSampledRecipe } from "../../../features/sampled-prior/model.ts";
 import { readCompilerResult } from "../../../features/compiler/result.ts";
@@ -52,7 +51,7 @@ async function json(root: string, path: string) {
 }
 async function save(root: string, path: string, bytes: Buffer) {
   await writeFile(resolve(root, path), bytes);
-  return { path, sha256: geometrySha(bytes) };
+  return { path };
 }
 export async function exportCompactSampled(
   root: string,
@@ -90,14 +89,12 @@ export async function exportCompactSampled(
   );
   const materials = array(object(method.materials).receipts),
     lenses = [];
+  // The compact sampled reader (packages/bake/src/volume/node/compact-inputs/sampled.ts) still compares each replayed
+  // bank against this digest of its accepted rendering; it is computed by that reader's own helper.
   const expected: Record<string, string> = {};
   for (const lens of result.scene.lenses) {
-    const volume = object(
-      JSON.parse((await pinned(root, lens.volume)).toString()),
-    );
-    const data = volume;
-    const { provenance: _provenance, ...rendered } = data;
-    expected[lens.id] = geometrySha(JSON.stringify(rendered));
+    const { provenance: _provenance, ...rendered } = object(JSON.parse((await pinned(root, lens.volume)).toString()));
+    expected[lens.id] = volumeReaderDigest(JSON.stringify(rendered));
   }
   for (const image of images.images) {
     const colors =

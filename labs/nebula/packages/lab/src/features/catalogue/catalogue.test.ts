@@ -45,11 +45,12 @@ test('unknown counts, duplicate file hits, and partial searches cannot produce a
   const targets = catalogue.objects.map(o => ({objectId:o.id,queries:(['mast','irsa','eso'] as const).map(p=>pendingQuery(p,o))}));
   targets[0]!.queries[0] = {...targets[0]!.queries[0]!,status:'complete',queriedAt:new Date().toISOString(),matchedCount:1,images:[image]};
   targets[1]!.queries[0] = {...targets[1]!.queries[0]!,status:'truncated',queriedAt:new Date().toISOString(),images:[image]};
-  const inventory = readMessierInventory({schema:'cssearth-messier-inventory@1',generatedAt:new Date().toISOString(),catalogueSha256:'a'.repeat(64),policy:'test',targets});
+  const inventory = readMessierInventory({schema:'cssearth-messier-inventory@1',generatedAt:new Date().toISOString(),catalogue:'labs/nebula/models/messier/catalogue.json',policy:'test',targets});
   assert.equal(inventoryStorage(inventory).uniqueImages,1); assert.equal(inventoryStorage(inventory).estimatedBytes,0);
   assert.equal(inventoryStorage(inventory).unknownSizes,1); assert.equal(inventoryStorage(inventory).isLowerBound,true);
   assert.throws(()=>readArchiveQuery({...targets[0]!.queries[0],matchedCount:2}));
-  assert.throws(()=>readArchiveQuery({...targets[0]!.queries[0],imagesPath:'../../unsafe',imagesSha256:'a'.repeat(64),imageCount:1}));
+  assert.throws(()=>readArchiveQuery({...targets[0]!.queries[0],imagesPath:'../../unsafe',imageCount:1}));
+  assert.throws(()=>readArchiveQuery({...targets[0]!.queries[0],recordedDigest:'x'}),/unexpected fields/);
   assert.throws(()=>readArchiveImage({...image,sourceUrl:'javascript:alert(1)'}));
 });
 test('MAST discovery box wraps at RA zero; query scopes keep detailed partial images', () => {

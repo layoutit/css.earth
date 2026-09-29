@@ -57,5 +57,5 @@ export async function checkObservationGeometry(page: Page, image: StructureImage
   await modes.getByRole('button', { name: 'Regions', exact: true }).click();
   assert.equal(await svg.isVisible(), false);
   assert.equal(await node.evaluate(element => element.isConnected), true, 'Mode switching discarded detections.');
-  return { id: image.id, candidates: geometry.candidates.length, geometrySha256: image.geometry.sha256 };
+  return { id: image.id, candidates: geometry.candidates.length, geometryFile: image.geometry.file };
 }

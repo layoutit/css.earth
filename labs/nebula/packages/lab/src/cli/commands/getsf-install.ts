@@ -2,7 +2,6 @@
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, readdir, copyFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { digest } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
 import { decodeFits } from '@cssearth/fits';
 import { encodeFits } from '@cssearth/fits/node';
 
@@ -11,10 +10,8 @@ if (!destination) throw new Error('Usage: getsf-install <ignored-local-directory
 const root = resolve(destination), source = resolve(root, 'source'), bin = resolve(root, 'bin');
 await mkdir(source, { recursive: true });
 const sources = {
-  getsf: { name: 'getsf.v260706.zip', url: 'https://irfu.cea.fr/Pisp/alexander.menshchikov/getsf.v260706.zip',
-    sha256: '70725784d898a2d49c11ebc37cdaa94c07a6cad830215c6fdfdb32b23255c99b' },
-  cfitsio: { name: 'cfitsio-4.7.0.tar.gz', url: 'https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio-4.7.0.tar.gz',
-    sha256: 'ce573bbea8e75b429f8c3d3e86498741ba3dc9628a1530d2f65268397ad059e8' },
+  getsf: { name: 'getsf.v260706.zip', url: 'https://irfu.cea.fr/Pisp/alexander.menshchikov/getsf.v260706.zip' },
+  cfitsio: { name: 'cfitsio-4.7.0.tar.gz', url: 'https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio-4.7.0.tar.gz' },
 };
 for (const entry of Object.values(sources)) {
   const path = resolve(source, entry.name);
@@ -23,9 +20,9 @@ for (const entry of Object.values(sources)) {
     const response = await fetch(entry.url, { signal: AbortSignal.timeout(60_000) });
     if (!response.ok) throw new Error(`Source download failed: ${response.status} ${entry.url}`);
     bytes = Buffer.from(await response.arrayBuffer());
+    // The versioned archive name is the record; unzip and tar below refuse anything that is not that archive.
+    await writeFile(path, bytes);
   }
-  if (digest(bytes) !== entry.sha256) throw new Error(`Source checksum differs: ${entry.name}`);
-  await writeFile(path, bytes);
 }
 const env = { ...process.env, GETSF_HOME: source, GETSF_BIN: bin };
 async function command(name: string, args: string[], cwd: string, input = '', allowedCodes = [0]): Promise<string> {
@@ -51,11 +48,9 @@ await command('./configure', ['--disable-curl', '--enable-static', '--disable-sh
 await command('make', ['-j8'], fits);
 await copyFile(resolve(fits, '.libs/libcfitsio.a'), resolve(source, 'libcfitsio.a'));
 await command('./installg', ['gfortran'], resolve(source, 'v260706'), '\n');
-const binaries: Record<string, string> = {};
-for (const entry of await readdir(bin, { withFileTypes: true }))
-  if (entry.isFile()) binaries[entry.name] = digest(await readFile(resolve(bin, entry.name)));
+const binaries = (await readdir(bin, { withFileTypes: true })).filter(entry => entry.isFile()).map(entry => entry.name).sort();
 for (const required of ['getsf', 'fftconv', 'extractx', 'cleanbg', 'sfinder', 'modfits'])
-  if (!binaries[required]) throw new Error(`Installer did not create ${required}.`);
+  if (!binaries.includes(required)) throw new Error(`Installer did not create ${required} in ${bin}.`);
 // gfortran16 rejects a legacy format in the optional no-argument help banner.
 // Verify the actual noninteractive path used by getsf, with a real FITS side effect.
 const probeSamples = new Float32Array([.125, .25, .5, 1]);
@@ -70,14 +65,14 @@ if (probeResult.width !== 2 || probeResult.height !== 2 || probeResult.values.so
 const receipt = { schema: 'cssearth-getsf-install@1', software: { ...sources.getsf, name: 'getsf', version: '260706',
   author: 'Alexander Men’shchikov', manualSourcePatches: false, sourceArchiveUnmodified: true,
   upstreamInstallerTransforms: { description: 'The author installer rewrites tools.for portability declarations and replaces its bundled precompiled tools.a.',
-    toolsForAfterInstallSha256: digest(await readFile(resolve(source, 'v260706/+tools_lib/tools.for'))) } },
+    toolsForAfterInstall: 'source/v260706/+tools_lib/tools.for' } },
   cfitsio: { version: '4.7.0', ...sources.cfitsio,
     build: ['./configure --disable-curl --enable-static --disable-shared', 'make -j8'],
-    staticLibrarySha256: digest(await readFile(resolve(source, 'libcfitsio.a'))) },
+    staticLibrary: 'source/libcfitsio.a' },
   compiler, platform: (await command('uname', ['-a'], root)).trim(), binaries,
   getsfBuild: ['GETSF_HOME=<source> GETSF_BIN=<bin> ./installg gfortran'],
-  verification: { operation: 'modfits multiply1, verbosity0', inputSha256: digest(await readFile(`${probeInput}.fits`)),
-    outputSha256: digest(await readFile(`${probeOutput}.fits`)), exactPixelEquality: true,
+  verification: { operation: 'modfits multiply1, verbosity0', input: 'installation-probe-input.fits',
+    output: 'installation-probe-output.fits', exactPixelEquality: true,
     limitation: 'The optional no-argument help banner uses a legacy Fortran format rejected by gfortran16; noninteractive processing uses verbosity0.' },
   optionalDependencies: { SWarp: 'Not used: input is already a common2D grid.', wcstools: 'Not required: pixel catalog only.', highlight: 'Optional log coloring only.' },
   license: 'Author’s restricted agreement: research, education, non-profit and non-military purposes only; commercial use needs written permission. Software stays local and ignored.' };

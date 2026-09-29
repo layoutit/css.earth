@@ -1,6 +1,5 @@
 /** A pinned processing recipe can lend completed native layers to a broader intake. No processing is performed here. */
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { readObservationRecipe, scienceObservationSources, type ObservationRecipe, type ObservationSource } from '../../../features/observations/recipe.js';
 

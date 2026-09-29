@@ -20,7 +20,7 @@ export interface PreparedReconstruction {
 }
 export interface ReconstructionCandidate {
   imageId: string; label: string; sourcePageUrl: string; credit: string;
-  sourcePreviewSha256: string; removalResultId?: string;
+  removalResultId?: string;
   placement: OverlayPlacement; placementBasis: string;
   ready: boolean; reason?: string; prepared?: PreparedReconstruction;
   /** Why this image cannot be displayed for the current model; it stays listed. */

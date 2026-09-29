@@ -21,8 +21,9 @@ export function shellVelocities(offsetArcsec: number, parameters: KinematicParam
   return [(-b - root) / (2 * zz) * speedPerArcsec, (-b + root) / (2 * zz) * speedPerArcsec];
 }
 /** Server/preparation only. Points remain observations; model has exactly two surfaces. */
-export function prepareKinematicsComparison(evidence: SlitEvidence, parameters: KinematicParameters, evidenceSha256: string): PreparedKinematics {
-  if (!/^[a-f0-9]{64}$/.test(evidenceSha256) || /^0+$/.test(evidenceSha256)) throw new TypeError('Missing source identity.');
+export function prepareKinematicsComparison(evidence: SlitEvidence, parameters: KinematicParameters, evidenceSource: string): PreparedKinematics {
+  if (!/^labs\/nebula\/models\/[^\\]+\.json$/.test(evidenceSource) || evidenceSource.split('/').includes('..'))
+    throw new TypeError(`Slit evidence ${evidence.id} needs its model recipe path, not ${evidenceSource}.`);
   const p = readKinematicParameters(parameters), f = evidence.figure;
   const observed = evidence.samples.map(sample => {
     const heliocentricKmS = calibratedValue(sample.pixelY, f.velocityCalibration);
@@ -49,7 +50,7 @@ export function prepareKinematicsComparison(evidence: SlitEvidence, parameters: 
     squared += distance ** 2; comparedPoints++;
   }
   const center = shellVelocities(0, p)!;
-  return { schema: 'cssearth-kinematics-comparison@1', evidenceSha256, evidence, parameters: p,
+  return { schema: 'cssearth-kinematics-comparison@1', evidenceSource, evidence, parameters: p,
     chart: { width, height, left, right, top, bottom, zeroY: yMap(0), zeroX: xMap(0),
       systemicBandTop: yMap(evidence.systemic.uncertaintyKmS), systemicBandHeight: yMap(-evidence.systemic.uncertaintyKmS) - yMap(evidence.systemic.uncertaintyKmS),
       xTicks: [-100, -50, 0, 50, 100].filter(value => Math.abs(value) <= boundX).map(value => ({ value, position: xMap(value) })),

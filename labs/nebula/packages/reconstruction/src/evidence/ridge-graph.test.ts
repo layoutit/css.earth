@@ -6,8 +6,8 @@ import type { EvidenceInputs, EvidenceSource } from '@cssearth/nebula-reconstruc
 import { readRidgeGraphSettings } from '@cssearth/nebula-reconstruction/evidence/ridge-model';
 
 function fixture(size = 64, count = 2): EvidenceInputs {
-  const sources: EvidenceSource[] = Array.from({ length: count }, (_, index) => ({ id: `source-${index}`, label: `Band ${index}`, sourceSha256: 'a'.repeat(64),
-    mapSha256: 'b'.repeat(64), sourcePanelSha256: 'c'.repeat(64), imageToFrame: [1, 0, 0, 1, 0, 0], workingWidth: size, workingHeight: size,
+  const sources: EvidenceSource[] = Array.from({ length: count }, (_, index) => ({ id: `source-${index}`, label: `Band ${index}`, mapDirectory: `.local/structures/source-${index}`,
+    sourcePanel: `.local/structures/source-${index}/source.png`, imageToFrame: [1, 0, 0, 1, 0, 0], workingWidth: size, workingHeight: size,
     registeredRgba: new Uint8Array(size * size * 4), footprint: new Uint8Array(size * size).fill(1),
     channels: { broad: { signal: new Float32Array(size * size), coverage: new Uint8Array(size * size).fill(1), noiseSigma: 1 },
       ridges: { signal: new Float32Array(size * size), coverage: new Uint8Array(size * size).fill(1), noiseSigma: 1 },

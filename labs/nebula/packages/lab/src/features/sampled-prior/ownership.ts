@@ -1,52 +1,24 @@
-/** Shared browser/CLI boundary for the extra owners of a sampled-volume preparation. */
-export interface SampledOwnerPin { path: string; sha256: string }
-/** The shared FITS reader a sampled preparation pins. `tools/fits/fits.mts` is where it lived before `@cssearth/fits`: a
- * recorded pin of it is history, still read, but no longer a path that resolves. */
-export const sampledFitsOwners: ReadonlySet<string> = new Set(['packages/fits/src/fits.ts', 'packages/fits/src/transport.ts']);
-export const isSampledFitsOwner = (path: string) => sampledFitsOwners.has(path) || path === 'tools/fits/fits.mts';
-/** The sampled owners that moved out of the nebula lab's volume-core and volume-bake packages into `@cssearth/bake`,
- * each with the lab path a recorded pin of it names: that is history, still read, but no longer a path that resolves. */
-const relocatedSampledOwners: Readonly<Record<string, string>> = {
-  'packages/bake/src/volume/contracts/sampled-recipe.ts': 'labs/nebula/packages/volume-core/src/contracts/sampled-recipe.ts',
-  'packages/bake/src/volume/contracts/sampled-emission-fit.ts': 'labs/nebula/packages/volume-core/src/contracts/sampled-emission-fit.ts',
-  'packages/bake/src/volume/fields/sampled.ts': 'labs/nebula/packages/volume-core/src/fields/sampled.ts',
-  'packages/bake/src/volume/materials/sampled.ts': 'labs/nebula/packages/volume-core/src/materials/sampled.ts',
-  'packages/bake/src/volume/node/compact-inputs/sampled.ts': 'labs/nebula/packages/volume-bake/src/compact-inputs/sampled.ts',
-};
-export const sampledBakeOwners: ReadonlySet<string> = new Set(Object.keys(relocatedSampledOwners));
-const historicalSampledOwners: ReadonlySet<string> = new Set(Object.values(relocatedSampledOwners));
-export const isSampledBakeOwner = (path: string) => sampledBakeOwners.has(path) || historicalSampledOwners.has(path);
-// Exact relocated sampled owners; unrelated package modules are not implementation pins.
-export const sampledImplementationOwners = new Set([
-  'labs/nebula/packages/lab/src/server/workflows/sampled-prior/compile.ts',
-  'labs/nebula/packages/lab/src/server/workflows/float32-little-endian.ts',
-  'labs/nebula/packages/reconstruction/src/methods/sampled/material-fit.ts',
-  ...sampledFitsOwners,
-  ...sampledBakeOwners,
-  'labs/nebula/packages/reconstruction/src/methods/sampled/emission-detail.ts',
-  'labs/nebula/packages/reconstruction/src/methods/sampled/emission-fit.ts',
-  'labs/nebula/packages/reconstruction/src/methods/sampled/material-solver.ts',
-]);
+/** Shared browser/CLI boundary for the source owners of a sampled-volume preparation, named by path. Git identifies the code. */
+export interface SampledOwnerPin { path: string }
+/** The shared FITS reader a sampled preparation reads its point source through. */
+export const isSampledFitsOwner = (path: string) => path === 'packages/fits/src/fits.ts' || path === 'packages/fits/src/transport.ts';
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
-function pin(v: unknown): SampledOwnerPin {
-  if (!record(v) || typeof v.path !== 'string' || !(/^(labs\/nebula\/|\.local\/nebula-lab\/)/.test(v.path) || isSampledFitsOwner(v.path) || isSampledBakeOwner(v.path)) ||
-      /[\\?#\s]/.test(v.path) || v.path.split('/').some(p => !p || p === '..') || typeof v.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(v.sha256))
-    throw new TypeError('Invalid sampled preparation owner.');
-  return { path: v.path, sha256: v.sha256 };
+function pin(v: unknown, field: string): SampledOwnerPin {
+  if (!record(v) || typeof v.path !== 'string' || !/^(labs\/nebula\/|\.local\/nebula-lab\/)/.test(v.path) ||
+      /[\\?#\s]/.test(v.path) || v.path.split('/').some(p => !p || p === '..') || Object.keys(v).join() !== 'path')
+    throw new TypeError(`Invalid sampled preparation owner in ${field}: ${JSON.stringify(v)}`);
+  return { path: v.path };
 }
+/** The recipe, evidence and point source a saved sampled method was prepared from, and the snapshots it keeps of them. */
 export function sampledOwnerPins(method: unknown, recipePath: string): SampledOwnerPin[] {
-  if (!record(method) || !record(method.sampledPrior) || !Array.isArray(method.inputPins) || method.inputPins.length < 3 || method.inputPins.length > 30 ||
-      !Array.isArray(method.extraImplementation) || !method.extraImplementation.length || method.extraImplementation.length > 40)
-    throw new TypeError('Missing sampled preparation input/implementation ownership.');
-  const inputs = method.inputPins.map(pin), implementations = method.extraImplementation.map(pin);
-  for (const implementation of implementations) if (!isSampledFitsOwner(implementation.path) && !isSampledBakeOwner(implementation.path) && !sampledImplementationOwners.has(implementation.path) && !/^labs\/nebula\/src\/reconstruction\/(sampled-prior\/[a-z0-9-]+|getsf-fits)\.ts$/.test(implementation.path))
-    throw new TypeError('Invalid sampled implementation path.');
-  const snapshot = pin(method.sampledPrior.recipe), evidence = pin(method.sampledPrior.evidence), source = pin(method.sampledPrior.source);
+  if (!record(method) || !record(method.sampledPrior) || !Array.isArray(method.inputPins) || method.inputPins.length < 3 || method.inputPins.length > 30)
+    throw new TypeError('Missing sampled preparation input ownership.');
+  const inputs = method.inputPins.map(value => pin(value, 'inputPins'));
+  const snapshot = pin(method.sampledPrior.recipe, 'sampledPrior.recipe'), evidence = pin(method.sampledPrior.evidence, 'sampledPrior.evidence');
+  const source = pin(method.sampledPrior.source, 'sampledPrior.source');
   if (!snapshot.path.startsWith('.local/nebula-lab/compiler/') || !evidence.path.startsWith('.local/nebula-lab/compiler/') ||
-      !inputs.some(p => p.path === recipePath && p.sha256 === snapshot.sha256) ||
-      !inputs.some(p => p.path.startsWith('labs/nebula/models/') && p.sha256 === evidence.sha256) ||
-      !inputs.some(p => p.path === source.path && p.sha256 === source.sha256)) throw new TypeError('Sampled snapshots differ from their source owners.');
-  const all = [...inputs, ...implementations];
-  if (new Set(all.map(p => p.path)).size !== all.length) throw new TypeError('Duplicate sampled source ownership.');
-  return all;
+      !inputs.some(p => p.path === recipePath) || !inputs.some(p => p.path.startsWith('labs/nebula/models/') && p.path !== recipePath) ||
+      !inputs.some(p => p.path === source.path)) throw new TypeError(`Sampled snapshots of ${recipePath} differ from their source owners.`);
+  if (new Set(inputs.map(p => p.path)).size !== inputs.length) throw new TypeError('Duplicate sampled source ownership.');
+  return inputs;
 }

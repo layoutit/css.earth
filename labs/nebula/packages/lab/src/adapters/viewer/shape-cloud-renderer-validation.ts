@@ -13,16 +13,13 @@ export function assertSharedGeometry(neutral: PreparedCssVolume, textured: Prepa
           (Object.keys(a.style) as (keyof typeof a.style)[]).some(key => a.style[key] !== b.style[key])) throw new Error('Cloud materials do not share the same prepared geometry.');
     }
   }
-  const first = supportHash(neutral.provenance, result), second = supportHash(textured.provenance, result);
-  if (first !== second) throw new Error('Cloud materials have different prepared alpha support.');
+  checkProvenance(neutral.provenance, result); checkProvenance(textured.provenance, result);
 }
-function supportHash(value: unknown, result: PreparedShapeScene): string {
-  if (!record(value) || value.schema !== 'cssearth-shape-cloud-provenance@1' || typeof value.alphaSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.alphaSha256) ||
-      value.sourceSha256 !== result.sourceSha256 || value.mapSha256 !== result.mapSha256 || value.geometrySha256 !== result.geometrySha256 ||
+function checkProvenance(value: unknown, result: PreparedShapeScene): void {
+  if (!record(value) || value.schema !== 'cssearth-shape-cloud-provenance@1' || value.geometryFile !== result.geometryFile ||
       (value.quality === undefined ? 'detailed' : value.quality) !== result.quality ||
       !record(value.projection) || value.projection.width !== result.width || value.projection.height !== result.height || value.projection.unitsPerPixel !== result.unitsPerPixel) {
-    throw new TypeError('Prepared cloud provenance or alpha support differs from its result.');
+    throw new TypeError('Prepared cloud provenance differs from its result.');
   }
-  return value.alphaSha256;
 }
 function record(value: unknown): value is Record<string, unknown> { return Boolean(value) && typeof value === 'object' && !Array.isArray(value); }

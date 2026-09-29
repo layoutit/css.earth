@@ -28,9 +28,9 @@ export interface RidgePolyline {
   meanScore: number; peakScore: number; sourceSupport: { sourceId: string; coveredFraction: number; supportedFraction: number; meanScore: number | null }[];
 }
 export interface RidgeGraph {
-  schema: 'cssearth-projected-ridge-graph@1'; id: string; inputIdentity: string;
+  schema: 'cssearth-projected-ridge-graph@1'; inputIdentity: string;
   grid: EvidenceGrid; settings: RidgeGraphSettings; combination: EvidenceSettings;
-  sources: { id: string; label: string; sourceSha256: string; mapSha256: string; sourcePanelSha256: string }[];
+  sources: { id: string; label: string; mapDirectory: string; sourcePanel: string }[];
   nodes: RidgeNode[]; polylines: RidgePolyline[];
   diagnostics: { thresholdPixels: number; skeletonPixels: number; retainedComponents: number; discardedComponents: number; thinningPasses: number };
   interpretation: string;

@@ -31,7 +31,7 @@ export async function readRecipe(root: string, path: string): Promise<BakeRecipe
   for (const image of recipe.images) {
     parseCloudAppearance(image.appearance);
     parseReconstructionRequest({ action: 'apply', subjectId: recipe.subjectId, imageId: image.imageId,
-      placement: image.placement, appearance: image.appearance, removalResultId: `${'0'.repeat(64)}.${'0'.repeat(64)}` });
+      placement: image.placement, appearance: image.appearance, removalResultId: image.imageId });
   }
   return recipe;
 }

@@ -2,6 +2,7 @@ import records from '../../state/subjects.json';
 import { readLabWorkflow } from '../../state/lab-workflows.ts';
 import sourceCatalog from '../../adapters/sources/nebula-catalogue.ts';
 import { relativePath } from './overlay-catalogue';
+import { isResultName } from '../result-name.ts';
 declare const __NEBULA_REPO_ROOT__: string;
 export interface LabSubjectRecord {
   id: string;
@@ -78,8 +79,8 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
     }
   }
   if (record.reconstructionNeutral && !relativePath(record.reconstructionNeutral.descriptor)) throw new TypeError('Invalid neutral material descriptor.');
-  if (record.materialGeometry !== undefined && (typeof record.materialGeometry !== 'string' || !/^[a-f0-9]{64}$/.test(record.materialGeometry)))
-    throw new TypeError('Invalid shared material geometry identity.');
+  if (record.materialGeometry !== undefined && !isResultName(record.materialGeometry))
+    throw new TypeError(`Lab subject ${record.id} names an invalid shared material model: ${JSON.stringify(record.materialGeometry)}`);
   if (record.density?.processingPlan !== undefined && !relativePath(record.density.processingPlan))
     throw new TypeError(`Lab subject ${record.id} has an invalid density processing plan.`);
   const candidateIds = record.density?.candidateImageIds;
@@ -122,7 +123,7 @@ export const subjects = subjectRecords.map(prepareSubjectRecord);
 /** Saved banks enter the same prepared-object loader as the checked-in benchmark. */
 export function registerReconstructionSubject(record: LabSubjectRecord) {
   const base = subjects.find(item => item.id === record.sourceSubjectId);
-  if (!/^reconstruction-[a-f0-9]{64}$/.test(record.id) || !base || !base.density ||
+  if (!/^reconstruction-[a-z0-9][a-z0-9-]*$/.test(record.id) || !base || !base.density ||
       !relativePath(record.directory) || !record.directory.startsWith('.local/nebula-lab/') ||
       !record.imagePath || !relativePath(record.imagePath) || !record.cloudParts ||
       !relativePath(record.cloudParts.descriptor) || !relativePath(record.cloudParts.catalogue) ||

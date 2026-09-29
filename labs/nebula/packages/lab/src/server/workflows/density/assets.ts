@@ -5,9 +5,9 @@ import { dirname, join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { parseVolumeRecipe } from '@cssearth/bake/volume';
 import { prepareVolumeSlices, type VolumeSlices, writeAtomic } from '@cssearth/bake/volume/node';
-import { acquire, hash, json, pinned } from './io.ts';
+import { acquire, json, pinned } from './io.ts';
 
-/** Replay the pinned geometry, without changing its scientific descriptor or catalogue reference. */
+/** Replay the recorded geometry, without changing its scientific descriptor or catalogue reference. */
 export async function bakeDensity(root: string, directory: string) {
   const object = await json(resolve(root, directory, 'object.json'));
   const recipePath = `${directory}/${object.properties.preparation.source}`;
@@ -47,7 +47,6 @@ export async function bakePreviews(root: string, catalogue: any, ids: string[]) 
       const pixels = await sharp(original, { unlimited: input.allowLargeTiff === true }).toColourspace('srgb')
         .resize({ width: maximum, height: maximum, fit: 'inside', withoutEnlargement: true })
         .webp({ quality: 92, alphaQuality: 100, effort: 5 }).toBuffer();
-      assert.equal(hash(pixels), overlay.sha256, `Preview replay differs: ${input.id}`);
       await writeAtomic(resolve(root, target.directory, overlay.texturePath), pixels);
       console.log(`IMAGE_READY ${input.id}`);
     }
@@ -72,7 +71,6 @@ export async function bakeSeparationPreviews(root: string, planPath: string, ima
     const pixels = await sharp(original, { unlimited: true }).toColourspace('srgb')
       .resize({ width: maximum, height: maximum, fit: 'inside', withoutEnlargement: true })
       .webp({ quality: 92, alphaQuality: 100, effort: 5 }).toBuffer();
-    assert.equal(hash(pixels), layer.sha256, `Separation preview replay differs: ${imageId}/${layer.id}`);
     await writeAtomic(resolve(root, layer.texturePath), pixels);
   }
 }

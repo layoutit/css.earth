@@ -5,14 +5,13 @@ import { readPhotometricMgeRecipe, samplePhotometricMge, type PhotometricMgeReci
 import { createEnvelopeSampler, sampleEnvelopeGrid } from './simulation-envelope.ts';
 
 export interface RetainedPhotometricEnvelope {
-  schema: 'cssearth-photometric-envelope@1'; recipe: PhotometricMgeRecipe;
+  schema: 'cssearth-photometric-envelope@1'; priorIdentity: string; recipe: PhotometricMgeRecipe;
   width: number; height: number; bounds: SkyBounds; zRange: [number, number]; gain: number[];
 }
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const pair = (v: unknown): v is [number, number] => Array.isArray(v) && v.length === 2 && v.every(Number.isFinite);
 export function readPhotometricEnvelope(v: unknown): RetainedPhotometricEnvelope {
-  if (record(v) && Object.hasOwn(v, 'priorIdentity')) throw new TypeError('Retained photometric envelope carries the removed prior digest field priorIdentity.');
-  if (!record(v) || v.schema !== 'cssearth-photometric-envelope@1' ||
+  if (!record(v) || v.schema !== 'cssearth-photometric-envelope@1' || typeof v.priorIdentity !== 'string' || !/^[a-z0-9][a-z0-9-]{0,159}$/.test(v.priorIdentity) ||
       typeof v.width !== 'number' || !Number.isInteger(v.width) || v.width < 2 || v.width > 2048 ||
       typeof v.height !== 'number' || !Number.isInteger(v.height) || v.height < 2 || v.height > 2048 || v.width * v.height > 2_000_000 ||
       !record(v.bounds) || !pair(v.bounds.min) || !pair(v.bounds.max) ||
@@ -22,7 +21,7 @@ export function readPhotometricEnvelope(v: unknown): RetainedPhotometricEnvelope
   if (v.bounds.min.some((n, i) => n >= maximum[i]!)) throw new TypeError('Invalid retained envelope bounds.');
   const recipe = readPhotometricMgeRecipe(v.recipe);
   if (!recipe.envelope) throw new TypeError('Retained envelope requires explicit recipe settings.');
-  return { schema: v.schema, recipe, width: v.width, height: v.height,
+  return { schema: v.schema, priorIdentity: v.priorIdentity, recipe, width: v.width, height: v.height,
     bounds: { min: v.bounds.min, max: v.bounds.max }, zRange: v.zRange, gain: v.gain };
 }
 export interface EnvelopeColors { width: number; height: number; rgb: number[] }
@@ -38,7 +37,7 @@ export function createPhotometricEmission(model: EmissionFieldModel) {
   const finite = createEmissionField(model), retained = model.photometricEnvelope;
   const envelope = retained && readPhotometricEnvelope(retained);
   const sampleEnvelope = envelope && createEnvelopeSampler({ ...envelope, gain: Float32Array.from(envelope.gain) },
-    samplePhotometricMge(envelope.recipe));
+    { identity: envelope.priorIdentity, ...samplePhotometricMge(envelope.recipe) });
   const bounds = envelope ? { min: [...finite.bounds.min] as EmissionVector3, max: [...finite.bounds.max] as EmissionVector3 } : finite.bounds;
   if (envelope) for (let axis = 0; axis < 3; axis++) {
     bounds.min[axis] = Math.min(bounds.min[axis]!, axis === 2 ? envelope.zRange[0] : envelope.bounds.min[axis]!);

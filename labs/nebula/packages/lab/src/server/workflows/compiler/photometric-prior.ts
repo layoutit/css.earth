@@ -1,6 +1,5 @@
 import { readFile, realpath } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
-import { geometrySha } from '../geometry/registered-source.ts';
 import { jointPath, jointRecord } from '../../../features/joint-fit/model.ts';
 import { readPhotometricMgeRecipe as readScientificRecipe, createPhotometricMgePrior, type PhotometricMgeRecipe } from '@cssearth/nebula-reconstruction/methods/inference/photometric-mge';
 import { fitSimulationGuidedEmission, type SimulationDepthSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-guided';
@@ -32,7 +31,7 @@ export async function loadPhotometricPrior(root: string, path: string, subjectId
   const evidenceBytes = await source(recipe.evidence.path);
   const evidence: unknown = JSON.parse(evidenceBytes.toString());
   verifyPhotometricEvidence(recipe, evidence, subjectId);
-  return { recipe, recipeBytes, evidenceBytes, recipeSha256: geometrySha(recipeBytes), prior: createPhotometricMgePrior(recipe) };
+  return { recipe, recipeBytes, evidenceBytes, recipePath: path, prior: createPhotometricMgePrior(recipe) };
 }
 
 /** Finite light features receive one conditional depth realization, not an extruded image or claimed stellar distance. */
@@ -50,7 +49,7 @@ export function fitPhotometricEmission(input: EmissionFitInput, controls: unknow
   if (!envelope) return fitted;
   fitted.field.photometricEnvelope = { schema: 'cssearth-photometric-envelope@1', priorIdentity: model.prior.identity,
     recipe: model.recipe, ...envelope.grid, gain: Array.from(envelope.grid.gain) };
-  fitted.field.identity = geometrySha(JSON.stringify({ finiteIdentity: fitted.field.identity, envelope: fitted.field.photometricEnvelope }));
+  fitted.field.identity = `${model.recipe.id}-photometric-envelope`;
   fitted.field.bounds = createPhotometricEmission(fitted.field).bounds;
   fitted.field.assumptions.depth += ' The smooth envelope retains the oblate MGE density at every depth; only positive residual features receive conditional quantile depths.';
   let targetSum = 0, modeledSum = 0, missing = 0, excess = 0, before = 0, after = 0, count = 0;

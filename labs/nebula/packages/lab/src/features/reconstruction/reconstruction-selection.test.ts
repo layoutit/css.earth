@@ -6,8 +6,8 @@ import { reconstructionProcessingCapability } from './reconstruction-capabilitie
 import type { PreparedReconstruction } from './reconstruction-types.ts';
 
 const saved = (resultId: string, method: string) => ({ resultId, processing: reconstructionProcessingCapability(method) }) as unknown as PreparedReconstruction;
-const lens = saved('a'.repeat(64), 'simulation-guided-finite-material@1'), repaint = saved('b'.repeat(64), 'alignment-density-material-v1');
-const finite = { finiteModel: { modelResultId: 'c'.repeat(64), bundle: 'bundle.json' }, candidates: [{ prepared: lens }, {}] };
+const lens = saved('test-model-first-lens', 'simulation-guided-finite-material@1'), repaint = saved('test-subject-first-lens', 'alignment-density-material-v1');
+const finite = { finiteModel: { modelResultId: 'test-model', bundle: 'bundle.json' }, candidates: [{ prepared: lens }, {}] };
 const density = { candidates: [{ prepared: repaint }, {}] };
 
 test('Preview follows the selected image and its owning finite model, not the displayed result', () => {
@@ -17,14 +17,14 @@ test('Preview follows the selected image and its owning finite model, not the di
   assert.match(selectedProcessing(finite, finite.candidates[1])?.reason ?? '', /offline recipe/);
   assert.equal(selectedPreviewAllowed(density, density.candidates[0]), true);
   assert.equal(selectedPreviewAllowed(density, density.candidates[1]), true);
-  assert.equal(selectedPreviewAllowed(density, { prepared: { resultId: 'd'.repeat(64) } as unknown as PreparedReconstruction }), false);
+  assert.equal(selectedPreviewAllowed(density, { prepared: { resultId: 'test-subject-second-lens' } as unknown as PreparedReconstruction }), false);
 });
 
 test('a linked or remembered result is ignored unless the current finite model baked it', () => {
   assert.equal(acceptsSavedResult(finite, lens.resultId), true);
   assert.equal(acceptsSavedResult(finite, repaint.resultId), false);
-  assert.equal(acceptsSavedResult(finite, 'e'.repeat(64)), false);
-  assert.equal(acceptsSavedResult(density, 'e'.repeat(64)), true);
+  assert.equal(acceptsSavedResult(finite, 'test-subject-third-lens'), false);
+  assert.equal(acceptsSavedResult(density, 'test-subject-third-lens'), true);
 });
 
 test('the controls use these rules for links, restored display and every Preview gate', () => {

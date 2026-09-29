@@ -1,10 +1,9 @@
-import {implementationPins} from '@cssearth/nebula-lab/server/implementation';
 import {applyRecordedPointMasks,emissionInputChannels,emissionRasterPixels,createInferredEmissionSampler} from '@cssearth/nebula-reconstruction/methods/symmetry/processing';
 /** Offline planetary-nebula experiment; never runs from a browser mount. */
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
+import { refuseRecordedDigests } from '@cssearth/nebula-reconstruction/observations/recorded-digests';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { inferEmission, projectEmission, type InferenceGrid, type SymmetryPrior } from '@cssearth/nebula-reconstruction/methods/symmetry/solver';
@@ -16,7 +15,7 @@ import { nativeStarless, type NativeRemoval } from '../../server/workflows/emiss
 
 interface Recipe {
   schema: 'cssearth-emission-inference@1'; id: string;
-  source: { url: string; sha256: string; width: number; height: number; publisher: string; credit: string };
+  source: { url: string; width: number; height: number; publisher: string; credit: string };
   crop: { left: number; top: number; width: number; height: number };
   pointMasks: { x: number; y: number; radius: number }[];
   grid: InferenceGrid; prior: SymmetryPrior; tau: number; iterations: number;
@@ -25,16 +24,17 @@ interface Recipe {
   shapePrior?: ShapePrior;
   modelReference?: { paper: string };
 }
-const hash = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 const json = async (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 const recipePath = process.argv[2];
 if (!recipePath || process.argv.length !== 3) throw new TypeError('Usage: prepare-emission <recipe.json>');
-const recipeBytes = await readFile(recipePath), recipe = JSON.parse(recipeBytes.toString()) as Recipe;
+const recipeText = await readFile(recipePath, 'utf8'), rawRecipe: unknown = JSON.parse(recipeText);
+refuseRecordedDigests(rawRecipe, recipePath);
+const recipe = rawRecipe as Recipe;
 if (recipe.schema !== 'cssearth-emission-inference@1' || !/^[a-z0-9-]+$/.test(recipe.id) ||
-    !/^[a-f0-9]{64}$/.test(recipe.source.sha256) || !/^https:\/\//.test(recipe.source.url) ||
+    !/^https:\/\//.test(recipe.source.url) ||
     !Number.isFinite(recipe.blackLevel) || recipe.blackLevel < 0 || recipe.blackLevel >= 1)
   throw new TypeError('Invalid emission recipe.');
-const cache = resolve('.local/nebula-lab/planetary'), sourcePath = resolve(cache, `${recipe.source.sha256}.jpg`);
+const cache = resolve('.local/nebula-lab/planetary'), sourcePath = resolve(cache, `${recipe.id}-original.jpg`);
 await mkdir(cache, { recursive: true });
 let source: Buffer;
 try { source = await readFile(sourcePath); }
@@ -42,10 +42,8 @@ catch {
   const response = await fetch(recipe.source.url);
   if (!response.ok) throw new Error(`Source download failed: ${response.status}`);
   source = Buffer.from(await response.arrayBuffer());
-  if (hash(source) !== recipe.source.sha256) throw new Error('Downloaded source hash differs from recipe.');
   await writeFile(sourcePath, source);
 }
-if (hash(source) !== recipe.source.sha256) throw new Error('Cached source hash differs from recipe.');
 const native = await sharp(source).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
 if (native.info.width !== recipe.source.width || native.info.height !== recipe.source.height || native.info.channels !== 3)
   throw new Error('Source dimensions differ from recipe.');
@@ -81,8 +79,7 @@ const voxelSize = 10 / grid.width;
 const bounds = { min: [-grid.width * voxelSize / 2, -grid.height * voxelSize / 2, -grid.depth * voxelSize / 2] as [number, number, number],
   max: [grid.width * voxelSize / 2, grid.height * voxelSize / 2, grid.depth * voxelSize / 2] as [number, number, number] };
 const provenance = { method: depthPrior ? 'Image-conditioned emission in an authored geometric prior; no image-only depth inference' : 'Wenger, Lorenz & Magnor 2013, equations 1–7; independent TypeScript implementation',
-  doi: depthPrior ? recipe.modelReference?.paper : 'https://doi.org/10.1111/cgf.12216', recipePath, recipeSha256: hash(recipeBytes), recipe,
-  implementation: await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/cli/commands/prepare-emission.ts']),
+  doi: depthPrior ? recipe.modelReference?.paper : 'https://doi.org/10.1111/cgf.12216', recipePath, recipe,
   nativeRemoval: removed?.provenance,
   ...(depthPrior ? { uncoveredSignalFractions: results.map(result => 'uncoveredSignalFraction' in result ? result.uncoveredSignalFraction : 0),
     projectionCaveat: 'Agreement on supported rays is imposed by normalization and does not validate depth geometry.' } : {}),
@@ -101,7 +98,7 @@ validatePreparedCssVolume(data);
 const preparedBytes = Buffer.from(JSON.stringify({ schema: 'cssearth-prepared-object@1', id: recipe.id,
   type: 'density-volume', format: 'cssearth-density-volume@1', data }) + '\n');
 await writeFile(resolve(preparedDirectory, 'volume.json'), preparedBytes);
-await writeFile(resolve(staging, 'experiment.json'), recipeBytes);
+await writeFile(resolve(staging, 'experiment.json'), recipeText);
 const descriptor = { schema: 'cssearth-object@1', id: recipe.id, type: 'density-volume',
   properties: { volume: frame, preparation: { source: 'experiment.json' } },
   prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json' } };

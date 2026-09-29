@@ -25,7 +25,7 @@ interface Selection { imageId: string; displayedResultId?: string; }
 const active = (job: Job | SavedJob | null) => Boolean(job && ['queued', 'running', 'cancelling'].includes(job.status));
 const selectionKey = (subjectId: string) => `cssearth-nebula-reconstruction-v1:${subjectId}`;
 const jobKey = (subjectId: string, imageId: string) => `cssearth-nebula-reconstruction-job-v1:${subjectId}:${imageId}`;
-const resultId = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
+const resultId = (value: unknown): value is string => typeof value === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(value);
 function readSelection(subjectId: string): Selection {
   try {
     const saved = JSON.parse(localStorage.getItem(selectionKey(subjectId)) ?? 'null');
@@ -231,7 +231,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
           catalogue = value;
           if (!selection.imageId || candidate()?.unavailable) selection.imageId = value.candidates.find(row => row.prepared)?.imageId ?? 'benchmark';
           if (selection.imageId !== 'benchmark' && !candidate()) selection.imageId = 'benchmark';
-          const requested = /^reconstruction-([a-f0-9]{64})$/.exec(new URL(location.href).searchParams.get('subject') ?? '')?.[1];
+          const requested = /^reconstruction-([a-z0-9][a-z0-9-]*)$/.exec(new URL(location.href).searchParams.get('subject') ?? '')?.[1];
           if (requested && acceptsSavedResult(value, requested)) {
             const prepared = value.candidates.find(row => row.prepared?.resultId === requested)?.prepared ??
               await json(`/__nebula/reconstruction/result/${requested}`) as PreparedReconstruction;

@@ -8,7 +8,7 @@ export interface MessierObject {
 }
 export interface MessierCatalogue {
   schema: 'cssearth-messier-catalogue@1';
-  sources: { id: string; url: string; credit: string; retrievedAt?: string; sha256?: string }[];
+  sources: { id: string; url: string; credit: string; retrievedAt?: string }[];
   objects: MessierObject[];
 }
 export interface InventoryStorage {
@@ -17,14 +17,13 @@ export interface InventoryStorage {
 }
 export interface MessierInventory {
   schema: 'cssearth-messier-inventory@1'; generatedAt: string;
-  catalogueSha256: string; policy: string; targets: { objectId: string; queries: ArchiveQuery[] }[]; storage?: InventoryStorage;
+  catalogue: string; policy: string; targets: { objectId: string; queries: ArchiveQuery[] }[]; storage?: InventoryStorage;
 }
 function text(value: unknown): value is string { return typeof value === 'string'; }
 function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value); }
 function nullableNumber(value: unknown): boolean { return value === null || finite(value); }
 function positiveOrNull(value: unknown): boolean { return value === null || (finite(value) && value > 0); }
 function strings(value: unknown): value is string[] { return Array.isArray(value) && value.every(text); }
-function hash(value: unknown): boolean { return text(value) && /^[a-f0-9]{64}$/.test(value); }
 function date(value: unknown): boolean { return text(value) && Number.isFinite(Date.parse(value)); }
 export function readArchiveQuery(value: unknown): ArchiveQuery { return readQuery(value,path=>/^\.local\/nebula-lab\/catalogue\/messier\/queries\/m\d+-(mast|irsa|eso)\.json$/.test(path)); }
 export function readMessierCatalogue(value: unknown): MessierCatalogue {
@@ -44,7 +43,7 @@ export function readMessierCatalogue(value: unknown): MessierCatalogue {
   return value as unknown as MessierCatalogue;
 }
 export function readMessierInventory(value: unknown): MessierInventory {
-  if (!record(value) || value.schema !== 'cssearth-messier-inventory@1' || !date(value.generatedAt) || !hash(value.catalogueSha256) ||
+  if (!record(value) || value.schema !== 'cssearth-messier-inventory@1' || !date(value.generatedAt) || !text(value.catalogue) || !value.catalogue ||
       !text(value.policy) || !Array.isArray(value.targets) || value.targets.length !== 110) throw new TypeError('Invalid Messier inventory.');
   const ids = new Set<string>();
   const storage = value.storage;

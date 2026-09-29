@@ -1,5 +1,4 @@
 /** Bounded metadata GETs and file HEADs only. Call after inventory acquisition has stopped. */
-import { createHash } from 'node:crypto';
 import { readArchiveImage, safeArchiveUrl, type ArchiveImage } from '../../../features/catalogue/types.ts';
 import { isRecord as record } from '@cssearth/core';
 
@@ -9,7 +8,7 @@ export interface MetadataLink {
 export interface MetadataEvidence {
   stage: 'datalink' | 'mast-preview' | 'science-head' | 'preview-head';
   status: 'resolved' | 'unavailable' | 'error'; requestUrl: string; resolvedUrl?: string;
-  retrievedAt: string; httpStatus?: number; responseSha256?: string; responseBytes?: number;
+  retrievedAt: string; httpStatus?: number; responseBytes?: number;
   contentType?: string; contentLength?: number; etag?: string; lastModified?: string;
   links?: MetadataLink[]; previewScope?: 'observation'; note?: string; error?: string;
 }
@@ -108,7 +107,7 @@ async function metadataGet(url: string, signal: AbortSignal | undefined, fetcher
   } catch (error) { await reader.cancel(); throw error; }
   const bytes = Buffer.concat(chunks);
   return { text: bytes.toString('utf8'), resolvedUrl: response.url || url, httpStatus: response.status, contentType: type,
-    responseBytes: bytes.length, responseSha256: createHash('sha256').update(bytes).digest('hex') };
+    responseBytes: bytes.length };
 }
 async function head(url: string, stage: 'science-head' | 'preview-head', signal: AbortSignal | undefined, fetcher: Fetcher): Promise<MetadataEvidence> {
   const requestUrl = secureProviderUrl(url), base = { stage, requestUrl, retrievedAt: new Date().toISOString() };

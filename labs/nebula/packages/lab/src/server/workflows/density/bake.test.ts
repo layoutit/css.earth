@@ -3,7 +3,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import test from 'node:test';
-import { acquire, hash, localPath, pinned } from './io.ts';
+import { acquire, localPath, pinned } from './io.ts';
 import { parseBakeArgs, readRecipe } from './config.ts';
 
 test('bake arguments reject misspelled stages rather than unexpectedly running all processing', () => {

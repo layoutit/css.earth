@@ -3,8 +3,6 @@ import { createHash } from 'node:crypto';
 import { fitEmissionField } from './fit.ts';
 import { createEmissionField, createEmissionMaterial, type MaterialImage, readCompilerControls, type EmissionFitInput, type EmissionComponent, type EmissionFieldModel, type EmissionBounds } from '@cssearth/bake/volume';
 export interface SimulationDepthPrior {
-  /** SHA-256 identity of the pinned source and its sampling transform. */
-  identity: string;
   bounds: EmissionBounds;
   /** Same angular/tangent XYZ units as the field. Caller owns any physical ray mapping. */
   sampleDensity(x:number,y:number,z:number):number;
@@ -20,7 +18,7 @@ export interface SimulationDepthAssignment {
   modes:{center:number;sigma:number;priorWeight:number}[];
 }
 function validate(prior:SimulationDepthPrior,s:SimulationDepthSettings):void {
-  if(!/^[a-f0-9]{64}$/.test(prior.identity)||typeof prior.sampleDensity!=='function'||prior.bounds.min.length!==3||prior.bounds.max.length!==3||
+  if(typeof prior.sampleDensity!=='function'||prior.bounds.min.length!==3||prior.bounds.max.length!==3||
     prior.bounds.min.some((v,i)=>!Number.isFinite(v)||!Number.isFinite(prior.bounds.max[i])||v>=prior.bounds.max[i]!))throw Error('Invalid pinned simulation depth prior');
   if(!Number.isInteger(s.depthSamples)||s.depthSamples<8||s.depthSamples>4096||!Number.isInteger(s.maximumModes)||s.maximumModes<1||s.maximumModes>8||
     !Number.isFinite(s.modeRelativeThreshold)||s.modeRelativeThreshold<=0||s.modeRelativeThreshold>1||
@@ -58,8 +56,9 @@ export function conditionSimulationComponents(components:readonly EmissionCompon
     }
     const modes:{center:number;sigma:number;priorWeight:number}[]=[];
     if(mass>0&&settings.placement==='conditional-quantile') {
-      // The salt is the pinned prior, not image intensity or colour. Component IDs identify the fitted support.
-      const quantile=(createHash('sha256').update(prior.identity+':'+component.id).digest().readUInt32BE(0)+.5)/4294967296;
+      // A fixed deterministic draw per fitted support, never image intensity or colour: SHA-256 is used here only as a
+      // uniform pseudo-random generator seeded by the component ID; nothing is stored or compared.
+      const quantile=(createHash('sha256').update('cssearth-conditional-depth@1:'+component.id).digest().readUInt32BE(0)+.5)/4294967296;
       let cumulative=0,index=0;
       for(;index<n-1;index++){if(cumulative+profile[index]!>=quantile*mass)break;cumulative+=profile[index]!;}
       const fraction=profile[index]!>0?(quantile*mass-cumulative)/profile[index]!:0.5;
@@ -114,12 +113,12 @@ export function fitSimulationGuidedEmission(input:EmissionFitInput,requestedCont
         'Every finite feature requires positive conditional prior support; unsupported features or draws whose kernels exceed the prior bounds reject the fit. No midplane fallback or inward-clamped draws.':
         'Unsupported features remain at an explicitly authored local depth with finite feature-sized thickness and are counted separately. No image repetition across a global depth tube.'}};
   field.bounds=createEmissionField(field).bounds;
-  field.identity=createHash('sha256').update(JSON.stringify({field,prior:prior.identity,settings,assignments:conditioned.assignments})).digest('hex');
+  field.identity='simulation-guided-finite-emission';
   const prepared=createEmissionField(field);
   // The finite kernel integrates exactly to projectedWeight, independent of its assigned Z and sigmaZ.
   return {field,sampleEmission:prepared.sampleEmission,material:(image:MaterialImage)=>createEmissionMaterial(field,image,prepared),
     projection:fitted.projection,residual:fitted.residual,coverage:fitted.coverage,unassigned:fitted.unassigned,
     metrics:{...fitted.metrics,componentCount:field.components.length,unsupportedComponents:conditioned.unsupportedComponents,
       unsupportedComponentFraction:conditioned.unsupportedComponentFraction,unsupportedProjectedLightFraction:conditioned.unsupportedProjectedLightFraction},
-    depthAssignments:conditioned.assignments,priorIdentity:prior.identity,settings};
+    depthAssignments:conditioned.assignments,settings};
 }

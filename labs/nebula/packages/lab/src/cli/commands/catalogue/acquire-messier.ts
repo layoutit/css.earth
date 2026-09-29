@@ -1,5 +1,4 @@
 /** Metadata acquisition only. Never downloads or processes science images. */
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -137,7 +136,6 @@ export function buildMessierCatalogue(basicText: string, aliasesText: string, re
   for (let id = 1; id <= 110; id++) if (!seen.has(id)) throw new Error(`Missing M${id}.`);
   const sources = (['basic', 'aliases'] satisfies QueryName[]).map(query => ({
     id: `simbad-${query}`, url: queryUrl(query), endpoint, query: queries[query], retrievedAt,
-    sha256: createHash('sha256').update(query === 'basic' ? basicText : aliasesText).digest('hex'),
     bytes: Buffer.byteLength(query === 'basic' ? basicText : aliasesText),
     credit: 'CDS SIMBAD, Strasbourg, France; Wenger et al. (2000), A&AS 143, 9.',
     reference: 'https://doi.org/10.1051/aas:2000332',

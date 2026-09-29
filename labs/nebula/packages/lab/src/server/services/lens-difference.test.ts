@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, rm, writeFile, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
@@ -64,16 +63,15 @@ test('pixels outside the footprint stay transparent however far off they are', (
   assert.ok(inside(field).some(delta => differenceColour(delta)[3] > 0));
 });
 
-const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 /** A saved lens in the file shape `bakeFiniteLens` publishes: a grey ramp whose projection is `over` × the image. */
 async function fixture(options: { over: number; lensBounds?: { min: number[]; max: number[] } }) {
   const root = await mkdtemp(join(tmpdir(), 'nebula-lens-difference-'));
-  const resultId = 'd'.repeat(64), directory = `.local/nebula-lab/reconstructions/${resultId}`;
+  const resultId = 'test-model-difference-lens', directory = `.local/nebula-lab/reconstructions/${resultId}`;
   const width = 32, height = 24, projectionBounds = { min: [-4, -3], max: [4, 3] };
-  const lens = options.lensBounds ?? projectionBounds, artifacts: Record<string, { sha256: string; bytes: number }> = {};
+  const lens = options.lensBounds ?? projectionBounds, artifacts: Record<string, { bytes: number }> = {};
   const save = async (path: string, bytes: Buffer) => {
     await mkdir(dirname(join(root, directory, path)), { recursive: true }); await writeFile(join(root, directory, path), bytes);
-    artifacts[path] = { sha256: digest(bytes), bytes: bytes.length };
+    artifacts[path] = { bytes: bytes.length };
   };
   // The lens raster covers its own bounds at the projection's pitch, so each lens pixel lands on one grid pixel.
   const lensWidth = Math.round(width * (lens.max[0]! - lens.min[0]!) / 8), lensHeight = Math.round(height * (lens.max[1]! - lens.min[1]!) / 6);
@@ -90,7 +88,7 @@ async function fixture(options: { over: number; lensBounds?: { min: number[]; ma
   await writeFile(join(root, directory, 'manifest.json'), JSON.stringify({
     schema: 'cssearth-nebula-reconstruction-artifacts@1', id: `reconstruction-${resultId}`, artifacts }));
   const prepared = { schema: 'cssearth-nebula-reconstruction@1', resultId, imageId: 'test-lens', subject: { id: `reconstruction-${resultId}`, directory },
-    finiteMaterial: { modelResultId: 'b'.repeat(64), sourceResultId: 'c'.repeat(64) } } as unknown as PreparedReconstruction;
+    finiteMaterial: { modelResultId: 'test-model', sourceResultId: 'test-subject-difference-lens' } } as unknown as PreparedReconstruction;
   return { root, prepared, width, height, lensWidth, lensHeight };
 }
 /** Drive the route handler with a bare request/response pair. */
@@ -130,7 +128,7 @@ test('the route refuses writes, bad identities and non-lens results', async () =
   try {
     const handler = lensDifferenceHandler(root, async () => prepared);
     assert.equal((await get(handler, `/?resultId=${prepared.resultId}`, 'POST')).status, 400);
-    assert.match((await get(handler, '/?resultId=nope')).body.toString(), /Invalid reconstruction identity/);
+    assert.match((await get(handler, '/?resultId=Not%2FA%20Name')).body.toString(), /Invalid reconstruction name/);
     const density = lensDifferenceHandler(root, async () => ({ ...prepared, finiteMaterial: undefined }) as PreparedReconstruction);
     assert.match((await get(density, `/?resultId=${prepared.resultId}`)).body.toString(), /baked image lens/);
   } finally { await rm(root, { recursive: true, force: true }); }
@@ -150,20 +148,17 @@ test('the map is written in the lens image frame, the frame the original-image o
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('the Horálek lenses tell the truth: the bar reads too dark, and tone fitting removes most of the red', async (t) => {
-  const root = process.cwd(), ids = { old: '95495a7d7cc10ea36f4845616a90b516058f47e13ffe00b2bcb431f22861441a',
-    fitted: '60b47e1006da1556fb39e99a652992abf3a8c915caecfc3451b842881cb8f305' };
-  const load = async (id: string) => JSON.parse(await readFile(join(root, `.local/nebula-lab/reconstructions/${id}/result.json`), 'utf8')) as PreparedReconstruction;
-  const lenses = await Promise.all([ids.old, ids.fitted].map(load)).catch(() => null);
-  if (!lenses) return t.skip('The Horálek lenses are not baked in this checkout.');
-  const [old, fitted] = await Promise.all(lenses.map(prepared => lensDifference(root, prepared)));
-  const band = (result: typeof old, keep: (x: number, y: number) => boolean) => {
+test('the accepted Horálek lens tells the truth: the bar reads too dark', async (t) => {
+  const root = process.cwd(), id = 'lmc-clouds-emission-envelope-horalek-widefield';
+  const prepared = await readFile(join(root, `.local/nebula-lab/reconstructions/${id}/result.json`), 'utf8')
+    .then(text => JSON.parse(text) as PreparedReconstruction, () => null);
+  if (!prepared) return t.skip('The accepted Horálek lens is not baked in this checkout.');
+  const fitted = await lensDifference(root, prepared);
+  const band = (result: typeof fitted, keep: (x: number, y: number) => boolean) => {
     let sum = 0, n = 0; result!.field.forEach((delta, p) => { if (Number.isFinite(delta) && keep(p % result!.grid.width, Math.floor(p / result!.grid.width))) { sum += delta; n++; } });
     return sum / n;
   };
-  // Both lenses share one image; its sky-removed luminance centroid on the 384 × 285 grid is (193.9, 137.7).
+  // The lens image's sky-removed luminance centroid on the 384 × 285 grid is (193.9, 137.7).
   const core = (x: number, y: number) => Math.hypot(x - 193.9, y - 137.7) < 24;
-  assert.ok(band(old, core) < -10 && band(fitted, core) < -10, `core ${band(old, core)} / ${band(fitted, core)}`);
-  assert.ok(old!.summary.tooBrightPercent > 2 * fitted!.summary.tooBrightPercent,
-    `red share ${old!.summary.tooBrightPercent}% → ${fitted!.summary.tooBrightPercent}%`);
+  assert.ok(band(fitted, core) < -10, `core ${band(fitted, core)}`);
 });

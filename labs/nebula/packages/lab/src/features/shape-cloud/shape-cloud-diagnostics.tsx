@@ -11,7 +11,7 @@ interface Props {
   comparison?: ShapeCloudComparison; channel: ComparisonChannel; level: number; matrix: Matrix;
   frame: { width: number; height: number }; view: ComparisonView; onView(value: ComparisonView): void;
 }
-function imageUrl(pin: ShapeCloudPin): string { return `${localFile(pin.path)}?v=${pin.sha256}`; }
+function imageUrl(pin: ShapeCloudPin): string { return localFile(pin.path); }
 
 /** Only prepared diagnostic rasters enter this component; no runtime image processing. */
 export function ShapeCloudDiagnostics({ comparison, channel, level, ...props }: Props) {

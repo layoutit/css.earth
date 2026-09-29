@@ -8,7 +8,6 @@
     "./server/job-routes": "./src/server/routes/jobs.ts",
     "./cli": "./src/cli/run.ts",
     "./server/worker": "./src/server/workers/run.ts",
-    "./server/implementation": "./src/server/services/implementation.ts",
     "./adapters/viewer/inspection-camera-renderer": "./src/adapters/viewer/inspection-camera-renderer.ts",
     "./adapters/viewer/shape-cloud-renderer": "./src/adapters/viewer/shape-cloud-renderer.ts",
     "./adapters/viewer/shape-cloud-viewer": "./src/adapters/viewer/shape-cloud-viewer.ts",

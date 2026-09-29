@@ -1,6 +1,5 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, writeFile, stat, rm } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
@@ -17,7 +16,6 @@ test('alignment-only missing or invalid receipt cannot launch NOX or create a wo
   const cache = resolve('.local/nebula-lab');
   await mkdir(cache, { recursive: true });
   const directory = await mkdtemp(resolve(cache, 'native-readonly-test-'));
-  const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
   try {
     const model = Buffer.from('deliberately not a neural network; this test must never invoke inference');
     const modelPath = resolve(directory, 'model.pb'), output = resolve(directory, 'native');
@@ -29,7 +27,7 @@ test('alignment-only missing or invalid receipt cannot launch NOX or create a wo
     await assert.rejects(nativeStarless(source, [8, 8], { directory: relative(process.cwd(), output),
       model: { path: modelPath } }, { allowProcessing: false }), /cannot start NOX/);
     await assert.rejects(stat(resolve(output, 'request.json')), { code: 'ENOENT' });
-    await writeFile(resolve(output, 'result.json'), JSON.stringify({ schema: 'cssearth-nox-output@1', operation: 'apply', sourceSha256: 'wrong-source' }));
+    await writeFile(resolve(output, 'result.json'), JSON.stringify({ schema: 'cssearth-nox-output@1', operation: 'apply', nativeDimensions: [4, 4] }));
     await assert.rejects(nativeStarless(source, [8, 8], { directory: relative(process.cwd(), output),
       model: { path: modelPath } }, { allowProcessing: false }), /does not match/);
     await assert.rejects(stat(resolve(output, 'request.json')), { code: 'ENOENT' });

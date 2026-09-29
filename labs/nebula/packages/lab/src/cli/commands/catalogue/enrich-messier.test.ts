@@ -48,7 +48,7 @@ test('enrichment never GETs science pixels; validates preview and records origin
   assert.equal(result.metadataOriginal.accessUrl, original.accessUrl);
   assert.equal(result.accessUrl, 'https://example.org/a.fits'); assert.equal(result.estimatedBytes, 5678);
   assert.equal(result.previewUrl, 'https://example.org/p.jpg'); assert.equal(result.metadataEvidence.length, 3);
-  assert.equal(result.metadataEvidence[0]!.responseSha256?.length, 64);
+  assert.ok((result.metadataEvidence[0]!.responseBytes ?? 0) > 0);
   assert.equal(calls.filter(call => call.method === 'GET').length, 1);
   assert.equal(original.previewUrl, null);
 });
@@ -107,7 +107,7 @@ test('overlap copies keep their own identity and metadata while shared access up
   const first = image(), copy = image({ id: 'copy-id', title: 'Another target receipt' });
   const query = { provider: 'irsa' as const, status: 'complete' as const, queriedAt: '2026-09-13', endpoint: 'https://irsa.ipac.caltech.edu/TAP/sync',
     query: 'original query', radiusDegrees: 1, matchedCount: 1, matchedEstimatedBytes: 0, matchedUnknownSizeCount: 1, images: [first] };
-  const inventory: MessierInventory = { schema: 'cssearth-messier-inventory@1', generatedAt: '2026-09-13', catalogueSha256: '0'.repeat(64), policy: 'test',
+  const inventory: MessierInventory = { schema: 'cssearth-messier-inventory@1', generatedAt: '2026-09-13', catalogue: 'labs/nebula/models/messier/catalogue.json', policy: 'test',
     targets: [{ objectId: 'm1', queries: [query] }, { objectId: 'm2', queries: [{ ...query, status: 'truncated', matchedCount: null, images: [copy] }] }] };
   const update = { ...first, accessUrl: 'https://example.org/resolved.fits', accessFormat: 'image/fits', estimatedBytes: 100,
     metadataOriginal: { publishedId: published, accessUrl: first.accessUrl, accessFormat: first.accessFormat, estimatedBytes: null, previewUrl: null }, metadataEvidence: [] };

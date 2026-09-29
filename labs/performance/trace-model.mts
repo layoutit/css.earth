@@ -62,5 +62,5 @@ export interface TraceLocation {
 }
 export interface OriginalLocation {
   source: string; line: number; column: number; name?: string | undefined;
-  sourceContentSha256: string | null; excerpt: string | null;
+  excerpt: string | null;
 }

@@ -1,4 +1,3 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 import { observationEnvelope, type VolumeRecipe, type ImageWcs } from '@cssearth/bake/volume';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Lab experiment: registered native photograph + full stellar prior → filled, colored 3D components. */
@@ -7,7 +6,7 @@ import { dirname, resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { loadVolumeSource, type VolumeSlices, bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
-import { sha256 } from '@cssearth/core/node';
+import { savedInputsMatch } from '../../server/services/saved-variants.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { createObservationMapping, reprojectObservationPrior } from '../../adapters/preparation/observation-prior.ts';
 import { decomposeFilledComponents, type FilledComponentOptions } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';
@@ -16,7 +15,7 @@ import { rectifyObservation, writeObservationPanel, extendedMap, validateObserva
 import { validateCoherentAxisSampling } from '@cssearth/nebula-reconstruction/methods/density-prior/coherent-validation';
 
 type Vec3 = [number, number, number];
-interface Pin { path: string; sha256: string; }
+interface Pin { path: string }
 interface Recipe {
   schema: 'cssearth-filled-observation@1'; id: string; directory: string;
   photo: Pin & { url: string; width: number; height: number; credit: string; license: string; publisherUrl: string };
@@ -34,22 +33,20 @@ interface Recipe {
   limitations: string[];
 }
 const json = (path: string, data: unknown) => writeFile(path, JSON.stringify(data, null, 2) + '\n');
-async function pinned(pin: Pin, url?: string) {
-  let bytes = await readFile(pin.path).catch(async (error: NodeJS.ErrnoException) => {
+/** A recipe input by path; a missing source with a URL is acquired from it once and kept at that path. */
+async function pinned(pin: Pin, url?: string): Promise<Buffer> {
+  return readFile(pin.path).catch(async (error: NodeJS.ErrnoException) => {
     if (error.code !== 'ENOENT' || !url) throw error;
-    console.log(`FILLED_SOURCE_DOWNLOAD ${url}`);
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Source download failed: ${response.status}`);
-    return Buffer.from(await response.arrayBuffer());
+    const response = await fetch(url); if (!response.ok) throw new Error(`Source download of ${url} for ${pin.path} failed: ${response.status}`);
+    const bytes = Buffer.from(await response.arrayBuffer());
+    await mkdir(dirname(pin.path), { recursive: true }); await writeFile(pin.path, bytes);
+    return bytes;
   });
-  if (sha256(bytes) !== pin.sha256) throw new Error(`Pinned input drifted: ${pin.path}`);
-  if (url) { await mkdir(dirname(pin.path), { recursive: true }); await writeFile(pin.path, bytes); }
-  return bytes;
 }
 
 const [recipePath, selection, extra] = process.argv.slice(2);
 if (!recipePath || extra) throw new Error('Usage: prepare-filled <recipe.json> [variant-id|analysis]');
-const recipeBytes = await readFile(recipePath), recipe: Recipe = parseLabModelJson(recipeBytes.toString());
+const recipe: Recipe = parseLabModelJson(await readFile(recipePath, 'utf8'));
 if (recipe.schema !== 'cssearth-filled-observation@1') throw new Error('Invalid filled observation recipe.');
 if (!recipe.variants.length || recipe.variants.some(v => !['broad', 'coherent'].includes(v.mode)) ||
     new Set(recipe.variants.map(v => v.id)).size !== recipe.variants.length) throw new Error('Invalid experiment variants.');
@@ -81,15 +78,14 @@ const priorPath = resolve(sourceDirectory, 'observation-prior.f32.gz');
 const priorBytes = Buffer.alloc(prior.density.length * 4);
 prior.density.forEach((value, index) => priorBytes.writeFloatLE(value, index * 4));
 await writeFile(priorPath, gzipSync(priorBytes, { level: 9 }));
-const pins = Object.fromEntries((await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/cli/commands/prepare-filled.ts'])).map(pin => [pin.path, pin.sha256]));
 const bounds = prior.boundsKpc;
-const evidence = { schema: 'cssearth-filled-observation-evidence@1', recipe: { path: recipePath, sha256: sha256(recipeBytes) },
-  photo: recipe.photo, wcs: recipe.wcs, pins, observation: { tangentBoundsKpc: bounds, physicalBoundsKpc: observationEnvelope(mapping,bounds),
+const evidence = { schema: 'cssearth-filled-observation-evidence@1', recipe: { path: recipePath },
+  photo: recipe.photo, wcs: recipe.wcs, observation: { tangentBoundsKpc: bounds, physicalBoundsKpc: observationEnvelope(mapping,bounds),
     distanceKpc: mapping.distanceUnits, width: photo.width, height: photo.height, coveredPixels: photo.coveredPixels,
     sourceFootprint: 'Full photograph, rectified with calibrated WCS. No manual scale, rotation, or displacement.',
     intensityMeaning: 'Rec.709-weighted encoded sRGB display signal; not linear radiance or a gas-density measurement.' },
   prior: { ...prior.diagnostics, source: recipe.stellarPrior, boundsKpc: prior.boundsKpc, dimensions: prior.dimensions,
-    sha256: sha256(await readFile(priorPath)) }, decomposition: decomposition.diagnostics,
+    path: 'source/observation-prior.f32.gz' }, decomposition: decomposition.diagnostics,
   channels: recipe.channels, limitations: recipe.limitations };
 await json(resolve(sourceDirectory, 'analysis.json'), evidence);
 if (selection === 'analysis') { console.log('FILLED_ANALYSIS_COMPLETE'); process.exit(0); }
@@ -117,18 +113,22 @@ for (const variant of selected) {
     bakeSupport: { tangentBoundsKpc: sampler.supportBoundsKpc, physicalBoundsKpc: physicalBounds,
       method: 'Conservative emission support computed after depth assignment; the entire source prior remains unchanged.' } };
   console.log(`FILLED_FIELD_READY ${variant.id} ${JSON.stringify(sampler.diagnostics)}`);
-  const cacheKey = sha256(Buffer.from(JSON.stringify({ provenance, master: recipe.master }))).slice(0, 16);
-  const masterDirectory = resolve('.local/nebula-lab/filled', cacheKey, 'masters');
+  // One lossless master per variant, reused while it was baked from the same provenance and master settings.
+  const inputs = { provenance, master: recipe.master }, variantCache = resolve('.local/nebula-lab/filled', `${recipe.id}-${variant.id}`);
+  const masterDirectory = resolve(variantCache, 'masters');
   const deliveryBanks = [{ width: recipe.delivery.width, outputDirectory: resolve(variant.directory, 'prepared'),
     imageEncoding: { format: 'webp' as const, quality: recipe.delivery.quality } }];
-  const cached = await readFile(resolve(masterDirectory, 'volume-slices.json'), 'utf8').catch((error: NodeJS.ErrnoException) => {
+  const cached = await savedInputsMatch(variantCache, inputs) ? await readFile(resolve(masterDirectory, 'volume-slices.json'), 'utf8').catch((error: NodeJS.ErrnoException) => {
     if (error.code !== 'ENOENT') throw error; return null;
-  });
+  }) : null;
   let slices: VolumeSlices;
   if (cached) slices = (await deriveMasterVolumeSlices({ masters: parseLabModelJson(cached), masterDirectory, deliveryBanks }))[0]!.slices;
-  else slices = (await bakeMasterVolumeSlices({ sampleEmission: sample, boundsKpc: physicalBounds,
-    sliceCounts: recipe.master.sliceCounts, samplesPerSlab: recipe.master.samplesPerSlab, exposureGain: recipe.exposureGain,
-    masterWidth: recipe.master.width, masterDirectory, deliveryBanks, unitsPerSourceUnit: 1, provenance })).banks[0]!.slices;
+  else {
+    slices = (await bakeMasterVolumeSlices({ sampleEmission: sample, boundsKpc: physicalBounds,
+      sliceCounts: recipe.master.sliceCounts, samplesPerSlab: recipe.master.samplesPerSlab, exposureGain: recipe.exposureGain,
+      masterWidth: recipe.master.width, masterDirectory, deliveryBanks, unitsPerSourceUnit: 1, provenance })).banks[0]!.slices;
+    await json(resolve(variantCache, 'inputs.json'), inputs);
+  }
   const outputFrame = { ...frame, boundsUnits: physicalBounds };
   const data = compileCssVolume({ id: variant.id, frame: outputFrame, slices, recipe: { anchors: [] } });
   const prepared = { schema: 'cssearth-prepared-object@1', id: variant.id, type: 'density-volume',
@@ -139,8 +139,7 @@ for (const variant of selected) {
   await json(resolve(variant.directory, 'source/validation.json'), validation);
   await writeFile(resolve(variant.directory, 'prepared/volume.json'), preparedBytes);
   await json(resolve(variant.directory, 'object.json'), { schema: 'cssearth-object@1', id: variant.id, type: 'density-volume',
-    properties: { volume: outputFrame, preparation: { source: 'source/provenance.json',
-      sha256: sha256(await readFile(resolve(variant.directory, 'source/provenance.json'))) } },
+    properties: { volume: outputFrame, preparation: { source: 'source/provenance.json' } },
     prepared: { format: prepared.format, url: 'prepared/volume.json' } });
   console.log(`FILLED_PREPARED ${variant.id} ${data.resources.length} images ${data.resources.reduce((s, r) => s + r.bytes, 0)} bytes`);
 }

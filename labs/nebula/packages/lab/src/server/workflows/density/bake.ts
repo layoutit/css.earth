@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, readFile, rename, rm } from 'node:fs/promises';
+import { mkdir, rename, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createStarRemover } from '../../services/star-removal.ts';
 import { createReconstructor } from '../../services/density-reconstruction.ts';
@@ -7,7 +7,7 @@ import { promoteVolumeLenses, type VolumeLensPromotion } from './volume-lens-pro
 import { parseBakeArgs, readRecipe } from './config.ts';
 import { bakeDensity, bakePreviews, bakeSeparationPreviews } from './assets.ts';
 import { prepareBaseline, prepareEnvironment } from './removal.ts';
-import { hash, json, localPath, pinned } from './io.ts';
+import { json, localPath, pinned } from './io.ts';
 import { writeAtomic } from '@cssearth/bake/volume/node';
 import { deliveryReady, restoreDelivery } from './delivery.ts';
 import { prepareConfiguredDensityPlacements } from './configured-placement.ts';
@@ -89,25 +89,21 @@ export async function bakeNebula(root: string, args: string[]) {
         return { ...lens, resultId: results.find(value => value.imageId === image.imageId)!.resultId! };
       });
       const replay = { ...promotion, defaultLens: lenses.some(lens => lens.imageId === promotion.defaultLens) ? promotion.defaultLens : lenses[0]!.imageId, lenses };
-      const key = hash(JSON.stringify([hash(await readFile(recipePath)), results]));
-      output = `.local/nebula-lab/bakes/${recipe.id}-${key}`;
+      output = `.local/nebula-lab/bakes/${recipe.id}-lenses`;
       const pending = resolve(root, output + '.pending');
       await rm(pending, { recursive: true, force: true });
       try {
         await promoteVolumeLenses(root, replay, pending);
         const manifest = await json(resolve(pending, 'source/lens-manifest.json'));
         for (const path of Object.keys(manifest.outputs)) await pinned(pending, { path });
-        // Identical results can be replayed without overwriting an earlier completed bank.
-        try { await rename(pending, resolve(root, output)); }
-        catch (error) {
-          if (!['ENOTEMPTY', 'EEXIST'].includes((error as NodeJS.ErrnoException).code!)) throw error;
-          for (const path of Object.keys(manifest.outputs)) await pinned(resolve(root, output), { path });
-        }
+        // The recipe's lens bank is replaced whole by its newest complete replay.
+        await rm(resolve(root, output), { recursive: true, force: true });
+        await rename(pending, resolve(root, output));
       } finally { await rm(pending, { recursive: true, force: true }); }
       if (recipe.delivery) await restoreDelivery(root, recipe.delivery, results);
     }
     controller.signal.throwIfAborted();
-    const receipt = { schema: 'cssearth-nebula-bake-receipt@1', recipe: { path: options.recipe, sha256: hash(await readFile(recipePath)) },
+    const receipt = { schema: 'cssearth-nebula-bake-receipt@1', recipe: { path: options.recipe },
       stage: options.stage, images: results, output, completedAt: new Date().toISOString() };
     await writeAtomic(resolve(directory, `${recipe.id}-${options.stage}${options.image ? '-' + options.image : ''}.json`), JSON.stringify(receipt, null, 2) + '\n');
     console.log(`BAKE_COMPLETE ${recipe.id}${output ? ': ' + output : ': ' + options.stage}`);

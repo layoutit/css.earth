@@ -13,6 +13,7 @@ import sharp from 'sharp';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
 import { lensLevelPairs, loadLensLevelGrid, type Bounds, type LensLevelGrid, type LensLevelMaterial } from './lens-levels.ts';
+import { isResultName } from '../../features/result-name.ts';
 
 /**
  * Analytic front-projection light ÷ delivered-bank light, per footprint pixel, at the delivered alpha 1–3
@@ -119,7 +120,7 @@ export function lensDifferenceHandler(root: string, read: (resultId: string) => 
     try {
       if (request.method !== 'GET') throw new TypeError('The difference map is read-only.');
       const url = new URL(request.url ?? '/', 'http://localhost'), id = url.searchParams.get('resultId') ?? '';
-      if (!/^[a-f0-9]{64}$/.test(id)) throw new TypeError('Invalid reconstruction identity.');
+      if (!isResultName(id)) throw new TypeError(`Invalid reconstruction name: ${JSON.stringify(id)}`);
       const { png, summary } = await lensDifference(root, await read(id));
       response.setHeader('Cache-Control', 'no-store');
       if (url.searchParams.get('format') === 'png') { response.setHeader('Content-Type', 'image/png'); response.end(png); }

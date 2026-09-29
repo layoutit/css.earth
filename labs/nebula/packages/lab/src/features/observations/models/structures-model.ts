@@ -7,9 +7,10 @@ export type Decision = typeof decisions[number];
 export type Morphology = typeof morphologies[number];
 export type StructureLayer = typeof structureLayers[number];
 export interface StructureImage {
-  id: string; label: string; sourceSha256: string; sourceUrl: string; nativeWidth: number; nativeHeight: number; width: number; height: number;
-  imageToFrame: Matrix; directory: string; mapSha256: string; credit: string; page: string;
-  geometry?: { file: string; sha256: string };
+  id: string; label: string; sourceUrl: string; nativeWidth: number; nativeHeight: number; width: number; height: number;
+  /** One structure analysis run: `<recipe>/structures/<image>/analysis-<UTC time>`. */
+  imageToFrame: Matrix; directory: string; credit: string; page: string;
+  geometry?: { file: string };
 }
 export interface StructureCatalogue { frame: Observations['frame']; images: StructureImage[] }
 export interface ReviewRegion {
@@ -20,7 +21,7 @@ export interface ReviewRegion {
 export interface ReviewMap {
   dimensions: { width: number; height: number };
   panels: { id: StructureLayer; label: string; file: string; description: string }[];
-  regions: ReviewRegion[]; atlases: { file: string; width: number; height: number; sha256: string }[];
+  regions: ReviewRegion[]; atlases: { file: string; width: number; height: number }[];
   metrics: { reconstructionMaxError: number; unassignedFraction: number };
 }
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -28,9 +29,9 @@ const finite = (value: unknown): value is number => typeof value === 'number' &&
 const integer = (value: unknown, min = 0): value is number => finite(value) && Number.isInteger(value) && value >= min;
 const text = (value: unknown): value is string => typeof value === 'string' && value.length > 0;
 const path = (value: unknown): value is string => text(value) && !value.startsWith('/') && !/[\\:?#]/.test(value) && value.split('/').every(part => part !== '..' && part !== '.');
-const hash = (value: unknown): value is string => text(value) && /^[a-f0-9]{64}$/.test(value);
 const point = (value: unknown): value is Point => Array.isArray(value) && value.length === 2 && value.every(finite);
 const matrix = (value: unknown): value is Matrix => Array.isArray(value) && value.length === 6 && value.every(finite) && Math.abs(value[0] * value[3] - value[1] * value[2]) > 1e-12;
+const imageKeys = ['id', 'label', 'sourceUrl', 'credit', 'page', 'nativeWidth', 'nativeHeight', 'width', 'height', 'imageToFrame', 'directory', 'geometry'];
 const layer = (value: unknown): value is StructureLayer => structureLayers.some(id => id === value);
 const morphology = (value: unknown): value is Morphology => morphologies.some(id => id === value);
 export const decision = (value: unknown): value is Decision => decisions.some(id => id === value);
@@ -39,16 +40,18 @@ export function readStructureCatalogue(value: unknown): StructureCatalogue {
   const f = value.frame;
   if (!integer(f.width, 1) || !integer(f.height, 1) || !point(f.fieldArcminutes) || !f.fieldArcminutes.every(n => n > 0) || !point(f.centerIcrsDegrees) || f.northUp !== true) throw new Error('Invalid structure sky frame.');
   const images = value.images.map((item: unknown): StructureImage => {
-    if (!record(item) || !text(item.id) || !text(item.label) || !hash(item.sourceSha256) || !text(item.sourceUrl) || !hash(item.mapSha256) || !path(item.directory) ||
+    if (record(item) && Object.keys(item).some(key => !imageKeys.includes(key)))
+      throw new Error(`Structure source ${String(item.id)} has unexpected fields: ${Object.keys(item).filter(key => !imageKeys.includes(key)).join(', ')}`);
+    if (!record(item) || !text(item.id) || !text(item.label) || !text(item.sourceUrl) || !path(item.directory) ||
         !integer(item.nativeWidth, 1) || !integer(item.nativeHeight, 1) || !integer(item.width, 1) || !integer(item.height, 1) || !matrix(item.imageToFrame) ||
         !text(item.credit) || !text(item.page) || !item.page.startsWith('https://')) throw new Error('Invalid structure source.');
     let geometry: StructureImage['geometry'];
     if (item.geometry !== undefined) {
-      if (!record(item.geometry) || !path(item.geometry.file) || !hash(item.geometry.sha256)) throw new Error('Invalid prepared geometry reference.');
-      geometry = { file: item.geometry.file, sha256: item.geometry.sha256 };
+      if (!record(item.geometry) || !path(item.geometry.file) || Object.keys(item.geometry).join() !== 'file') throw new Error(`Invalid prepared geometry reference for ${item.id}.`);
+      geometry = { file: item.geometry.file };
     }
-    return { id: item.id, label: item.label, sourceSha256: item.sourceSha256, sourceUrl: item.sourceUrl, nativeWidth: item.nativeWidth, nativeHeight: item.nativeHeight,
-      width: item.width, height: item.height, imageToFrame: item.imageToFrame, directory: item.directory, mapSha256: item.mapSha256, credit: item.credit, page: item.page,
+    return { id: item.id, label: item.label, sourceUrl: item.sourceUrl, nativeWidth: item.nativeWidth, nativeHeight: item.nativeHeight,
+      width: item.width, height: item.height, imageToFrame: item.imageToFrame, directory: item.directory, credit: item.credit, page: item.page,
       ...(geometry === undefined ? {} : { geometry }) };
   });
   if (new Set(images.map(image => image.id)).size !== images.length) throw new Error('Duplicate structure source.');
@@ -61,7 +64,7 @@ function bounds(value: unknown): ReviewRegion['bounds'] {
 export function readReviewMap(value: unknown, image: StructureImage): ReviewMap {
   if (!record(value) || value.schema !== 'cssearth-observation-structure-map@1' || !record(value.dimensions) || value.dimensions.width !== image.width || value.dimensions.height !== image.height ||
       !Array.isArray(value.panels) || !Array.isArray(value.regions) || !Array.isArray(value.atlases) || !record(value.metrics)) throw new Error('Invalid prepared review map.');
-  if (value.id !== image.id || !record(value.source) || value.source.sha256 !== image.sourceSha256 || value.source.width !== image.nativeWidth || value.source.height !== image.nativeHeight ||
+  if (value.id !== image.id || !record(value.source) || value.source.width !== image.nativeWidth || value.source.height !== image.nativeHeight ||
       value.nativeWidth !== image.nativeWidth || value.nativeHeight !== image.nativeHeight || !matrix(value.imageToFrame) || value.imageToFrame.some((entry, index) => entry !== image.imageToFrame[index])) throw new Error('Prepared map registration or source does not match its catalogue.');
   const panels = value.panels.map((item: unknown) => {
     if (!record(item) || !layer(item.id) || !text(item.label) || !path(item.file) || !text(item.description)) throw new Error('Invalid review image panel.');
@@ -69,8 +72,8 @@ export function readReviewMap(value: unknown, image: StructureImage): ReviewMap 
   });
   if (panels.length !== structureLayers.length || new Set(panels.map(panel => panel.id)).size !== structureLayers.length) throw new Error('Incomplete review image panels.');
   const atlases = value.atlases.map((item: unknown) => {
-    if (!record(item) || !path(item.file) || !integer(item.width, 1) || !integer(item.height, 1) || !hash(item.sha256)) throw new Error('Invalid prepared support atlas.');
-    return { file: item.file, width: item.width, height: item.height, sha256: item.sha256 };
+    if (!record(item) || !path(item.file) || !integer(item.width, 1) || !integer(item.height, 1)) throw new Error('Invalid prepared support atlas.');
+    return { file: item.file, width: item.width, height: item.height };
   });
   const regions = value.regions.map((item: unknown): ReviewRegion => {
     if (!record(item) || !text(item.id) || !integer(item.scale) || !morphology(item.morphology) || !point(item.centroid) || !integer(item.areaPixels, 1) ||
@@ -88,7 +91,8 @@ export function readReviewMap(value: unknown, image: StructureImage): ReviewMap 
   if (!finite(m.reconstructionMaxError) || m.reconstructionMaxError < 0 || !finite(m.unassignedFraction) || m.unassignedFraction < 0 || m.unassignedFraction > 1) throw new Error('Invalid review accounting.');
   return { dimensions: { width: image.width, height: image.height }, panels, regions, atlases, metrics: { reconstructionMaxError: m.reconstructionMaxError, unassignedFraction: m.unassignedFraction } };
 }
-export const reviewStorageKey = (catalogue: string, image: StructureImage) => `nebula-structure-review@1:${catalogue}:${image.id}:${image.sourceSha256}:${image.mapSha256}`;
+/** Reviews belong to one analysis run of one source; a new extraction gets a new run directory and a fresh review. */
+export const reviewStorageKey = (catalogue: string, image: StructureImage) => `nebula-structure-review@2:${catalogue}:${image.id}:${image.directory}`;
 export function readDecisions(value: unknown): Record<string, Decision> {
   if (!record(value)) return {};
   return Object.fromEntries(Object.entries(value).filter((entry): entry is [string, Decision] => decision(entry[1])));

@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -21,7 +20,6 @@ function snapshot(stars: Star[], little = true, gas = 1, dark = 2): Buffer {
   });
   return bytes;
 }
-const hash = (b: Uint8Array) => createHash('sha256').update(b).digest('hex');
 async function fixture(run: (directory: string) => Promise<void>): Promise<void> {
   const directory = await mkdtemp(join(tmpdir(), 'tipsy-lab-'));
   try { await run(directory); } finally { await rm(directory, { recursive: true, force: true }); }
@@ -34,12 +32,12 @@ for (const little of [true, false]) {
     await writeFile(snapshotPath, input);
     const receipt = await importTipsyStars({ snapshotPath, outputPath, starRange: { start: 1, count: 2 },
       positionUnit: 'kpc', massUnitSolarMass: 232000,
-      expected: { snapshotSha256: hash(input), totalCount: 7, gasCount: 1, darkCount: 2, starCount: 4 } });
+      expected: { totalCount: 7, gasCount: 1, darkCount: 2, starCount: 4 } });
     const output = await readFile(outputPath);
     assert.deepEqual(Array.from({ length: 8 }, (_, i) => output.readFloatLE(i * 4)), [3, 5, 7, 2, 11, 13, 17, 4]);
     assert.equal(receipt.source.header.endian, little ? 'little' : 'big');
     assert.equal(receipt.selection.firstSourceByte, 32 + 48 + 72 + 44);
-    assert.equal(receipt.source.sha256, hash(input)); assert.equal(receipt.output.sha256, hash(output));
+    assert.equal(receipt.source.bytes, input.length); assert.equal(receipt.output.bytes, output.length);
     assert.equal(receipt.mass.sumSolarMass, 6 * 232000);
     assert.deepEqual(receipt.outputStatistics.boundsKpc, { min: [3, 5, 7], max: [11, 13, 17] });
     assert.deepEqual(receipt.centering.offsetKpc, [0, 0, 0]);
@@ -83,7 +81,7 @@ test('invalid ranges, source pins and selected positions fail without replacing 
   await assert.rejects(importTipsyStars({ ...options, starRange: { start: -1, count: 1 } }), /range start/);
   await assert.rejects(importTipsyStars({ ...options, starRange: { start: 0, count: 0 } }), /range count/);
   await assert.rejects(importTipsyStars({ ...options, expected: { starCount: 2 } }), /expected source count/);
-  await assert.rejects(importTipsyStars({ ...options, expected: { snapshotSha256: '0'.repeat(64) } }), /pinned source/);
+  await assert.rejects(importTipsyStars({ ...options, expected: { starCount: 5 } }), /starCount differs/);
   await assert.rejects(importTipsyStars({ ...options, outputPath: snapshotPath }), /replace the source/);
   await writeFile(snapshotPath, snapshot([[2, NaN, 2, 3]]));
   await assert.rejects(importTipsyStars(options), /Nonfinite position/);

@@ -20,6 +20,6 @@ test('preservation keeps compact emission exactly and needs no NOX model or work
     assert.deepEqual((await nativePreserved(source, [2, 2], directory, { allowProcessing: false })).pixels, pixels);
     await assert.rejects(readFile(resolve(directory, 'request.json')), /ENOENT/);
     await writeFile(resolve(directory, 'stars.png'), source);
-    await assert.rejects(nativePreserved(source, [2, 2], directory, { allowProcessing: false }), /differ from identity/);
+    await assert.rejects(nativePreserved(source, [2, 2], directory, { allowProcessing: false }), /differ from the identity treatment/);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

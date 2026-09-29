@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
 import type { Plugin } from 'vite';
 import { createStarRemovalJobs, starRemovalJobsHandler } from '../jobs/operation-jobs.ts';
-import { readFusionRequest, readFusionResult, fusionRecord, fusionHash, type FusionRequest, type FusionResult } from '../../features/evidence-fusion/jobs-model.ts';
+import { readFusionRequest, readFusionResult, fusionRecord, fusionName, type FusionRequest, type FusionResult } from '../../features/evidence-fusion/jobs-model.ts';
 import { validateFusionResult } from '../workflows/evidence-fusion/presentation.ts';
 import { readGeometryPin } from '../workflows/geometry/registered-source.ts';
 async function worker(root: string, request: FusionRequest, signal: AbortSignal, progress: (message: string) => void) {
@@ -27,7 +27,7 @@ export function evidenceFusionPlugin(root:string):Plugin {
       try{
         if(request.method!=='GET')throw new TypeError('Use GET for prepared samples.');
         const url=new URL(request.url??'', 'http://localhost'),id=url.searchParams.get('id'),x=Number(url.searchParams.get('x')),y=Number(url.searchParams.get('y'));
-        if(!fusionHash(id)||!Number.isInteger(x)||!Number.isInteger(y))throw new TypeError('Invalid sample coordinate.');
+        if(!fusionName(id)||!Number.isInteger(x)||!Number.isInteger(y))throw new TypeError('Invalid sample coordinate.');
         const result=readFusionResult(JSON.parse(await readFile(resolve(root,`.local/nebula-lab/evidence-fusion/results/${id}/result.json`),'utf8')));
         if(x<0||y<0||x>=result.width||y>=result.height)throw new TypeError('Sample is outside the field.');
         const bytes=await readGeometryPin(root,result.samples),stride=result.sources.length*2+2;

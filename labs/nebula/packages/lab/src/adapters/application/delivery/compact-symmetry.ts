@@ -2,13 +2,11 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gzipSync } from "node:zlib";
-import { createHash } from "node:crypto";
 import { replayCompactSymmetry as replay } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from "@cssearth/bake/volume-leaves";
 import { validatePreparedCssVolume } from "@cssearth/renderer/volume/validation.ts";
 import { jointRecord } from "../../../features/joint-fit/model.ts";
 import type { CompilerPin } from "@cssearth/bake/volume";
-const sha = (b: Uint8Array) => createHash("sha256").update(b).digest("hex");
 function objectVolume(value: unknown) {
   if (!jointRecord(value)) throw new Error("Invalid volume envelope");
   return validatePreparedCssVolume(value.data);
@@ -43,8 +41,6 @@ export async function exportCompactSymmetry(
     await writeFile(resolve(root, path), compressed);
     channels.push({
       path,
-      sha256: sha(compressed),
-      uncompressedSha256: sha(bytes),
       bytes: bytes.length,
     });
   }
@@ -55,7 +51,6 @@ export async function exportCompactSymmetry(
           schema: "cssearth-compact-symmetry@1",
           recipe,
           channels,
-          expectedSha256: sha(Buffer.from(JSON.stringify(expected))),
           provenance: expected.provenance,
           interpretation:
             "Three RGB emissivity voxel fields before optical integration, not rendered slices.",

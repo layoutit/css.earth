@@ -1,4 +1,3 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 import {supportRuns} from '@cssearth/nebula-reconstruction/evidence/support-runs';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Frozen-image benchmark. No named-region masks, depth assignment or runtime baking. */
@@ -8,20 +7,20 @@ import { gzipSync } from 'node:zlib';
 import sharp from 'sharp';
 import { decomposeStructures } from '@cssearth/nebula-reconstruction/evidence/wavelets';
 import type { StructureRegion, WaveletSettings } from '@cssearth/nebula-reconstruction/evidence/wavelets';
-import { digest, readBenchmarkImage, writeMethodProducts } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
+import { readBenchmarkImage, writeMethodProducts } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
 import type { BenchmarkImage, BenchmarkMethod, ComponentMaps } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
 
 interface Recipe {
   schema: 'cssearth-structure-benchmark-recipe@1'; id: string; title: string;
-  input: { path: string; sha256: string; width: number; height: number; conversion: string; name?: string;
+  input: { path: string; width: number; height: number; conversion: string; name?: string;
     crop: { left: number; top: number; width: number; height: number };
-    original: { path: string; sha256: string; publisherUrl: string; credit: string; license: string } };
+    original: { path: string; publisherUrl: string; credit: string; license: string } };
   outputDirectory: string; cacheDirectory: string; medianSize: number; wavelets: WaveletSettings;
   waveletSensitivity?: { significanceSigma: number }; residualDisplayRange: number;
   getsf?: Record<string, unknown>;
 }
 interface GetsfImport {
-  sourceSha256: string; width: number; height: number;
+  source: string; width: number; height: number;
   maps: { diffuse: string; compact: string; elongated: string };
   note: string; metrics?: Record<string, number | string>; provenance: string;
 }
@@ -51,24 +50,24 @@ function structureOverlay(image: BenchmarkImage, catalog: StructureRegion[]) {
 
 async function importGetsf(path: string, recipe: Recipe, image: BenchmarkImage) {
   const data: GetsfImport = parseLabModelJson(await readFile(path, 'utf8'));
-  if (data.sourceSha256 !== recipe.input.sha256 || data.width !== image.width || data.height !== image.height)
+  if (resolve(data.source) !== resolve(recipe.input.path) || data.width !== image.width || data.height !== image.height)
     throw new Error('getsf import must use the identical frozen source and dimensions.');
   const maps: ComponentMaps = { diffuse: new Float32Array(image.luminance.length), compact: new Float32Array(image.luminance.length),
     elongated: new Float32Array(image.luminance.length), residual: new Float32Array(image.luminance.length) };
-  const inputs: Record<string, { path: string; sha256: string }> = {};
+  const inputs: Record<string, { path: string; bytes: number }> = {};
   for (const key of ['diffuse', 'compact', 'elongated'] as const) {
     const bytes = await readFile(data.maps[key]);
     if (bytes.length !== image.luminance.length * 4) throw new Error(`getsf ${key}: unexpected raw map size.`);
     for (let p = 0; p < image.luminance.length; p++) maps[key][p] = bytes.readFloatLE(p * 4);
-    inputs[key] = { path: data.maps[key], sha256: digest(bytes) };
+    inputs[key] = { path: data.maps[key], bytes: bytes.length };
   }
   for (let p = 0; p < image.luminance.length; p++) maps.residual[p] = image.luminance[p]! -
     maps.diffuse[p]! - maps.compact[p]! - maps.elongated[p]!;
   const provenanceBytes = await readFile(data.provenance);
   await mkdir(resolve(recipe.outputDirectory, 'getsf'), { recursive: true });
   await writeFile(resolve(recipe.outputDirectory, 'getsf/import-receipt.json'), JSON.stringify({
-    importSha256: digest(await readFile(path)), sourceSha256: data.sourceSha256, inputs,
-    provenanceSha256: digest(provenanceBytes), provenance: parseLabModelJson(provenanceBytes.toString()),
+    import: path, source: data.source, inputs,
+    provenancePath: data.provenance, provenance: parseLabModelJson(provenanceBytes.toString()),
   }, null, 2) + '\n');
   return writeMethodProducts({ ...recipe, id: 'getsf', name: 'getsf · official extraction', note: data.note,
     residualRange: recipe.residualDisplayRange, image, maps, metrics: data.metrics });
@@ -77,19 +76,17 @@ async function importGetsf(path: string, recipe: Recipe, image: BenchmarkImage) 
 const [recipePath, ...args] = process.argv.slice(2);
 if (!recipePath || args.some(arg => arg !== '--refresh-source' && !arg.startsWith('--getsf-import=')))
   throw new TypeError('Usage: prepare-structures <recipe.json> [--refresh-source] [--getsf-import=<receipt.json>]');
-const recipeBytes = await readFile(recipePath), recipe: Recipe = parseLabModelJson(recipeBytes.toString());
+const recipe: Recipe = parseLabModelJson(await readFile(recipePath, 'utf8'));
 if (recipe.schema !== 'cssearth-structure-benchmark-recipe@1') throw new Error('Unsupported structure benchmark recipe.');
 if (!Number.isInteger(recipe.medianSize) || recipe.medianSize < 3 || recipe.medianSize % 2 !== 1)
   throw new Error('Median size must be an odd integer of at least3.');
 await Promise.all([mkdir(recipe.outputDirectory, { recursive: true }), mkdir(recipe.cacheDirectory, { recursive: true })]);
 if (args.includes('--refresh-source')) {
   const bytes = await readFile(recipe.input.original.path);
-  if (digest(bytes) !== recipe.input.original.sha256) throw new Error('Original TIFF source pin differs.');
   const png = await sharp(bytes).rotate().extract(recipe.input.crop).removeAlpha().toColourspace('srgb').png().toBuffer();
-  if (digest(png) !== recipe.input.sha256) throw new Error('Regenerated native crop pin differs.');
   await writeFile(recipe.input.path, png);
 }
-const image = await readBenchmarkImage(recipe.input.path, recipe.input.sha256, recipe.input.width, recipe.input.height);
+const image = await readBenchmarkImage(recipe.input.path, recipe.input.width, recipe.input.height);
 const common = { outputDirectory: recipe.outputDirectory, cacheDirectory: recipe.cacheDirectory,
   image, residualRange: recipe.residualDisplayRange };
 const started = performance.now(), result = decomposeStructures(image.luminance, image.width, image.height, recipe.wavelets);
@@ -153,15 +150,14 @@ else {
     return null;
   });
   const attempt = bytes ? parseLabModelJson(bytes.toString()) : null;
-  const matches = recipe.getsf !== undefined && attempt?.sourceSha256 === recipe.input.sha256 &&
-    attempt?.getsfParametersSha256 === digest(JSON.stringify(recipe.getsf)) && typeof attempt?.summary === 'string';
+  const matches = recipe.getsf !== undefined && attempt?.source === recipe.input.path &&
+    JSON.stringify(attempt?.getsfParameters) === JSON.stringify(recipe.getsf) && typeof attempt?.summary === 'string';
   methods.push({ id: 'getsf', name: 'getsf · official extraction', status: 'unavailable', panels: [],
     note: matches ? attempt.summary :
       'This bake has no verified getsf import. Run the local research comparator and rebuild with --getsf-import; no substitute result is shown.',
     ...(matches ? { metrics: attempt.metrics } : {}) });
 }
 
-const codePins = Object.fromEntries((await implementationPins(process.cwd(), ['labs/nebula/packages/lab/src/cli/commands/prepare-structures.ts'])).map(pin => [pin.path, pin.sha256]));
 const manifest = { schema: 'cssearth-structure-benchmark@1', title: recipe.title,
     source: { imagePath: 'source.png', name: recipe.input.name ?? recipe.title, widthPx: image.width, heightPx: image.height,
     description: recipe.input.conversion, credit: recipe.input.original.credit, sourcePageUrl: recipe.input.original.publisherUrl },
@@ -171,7 +167,7 @@ const manifest = { schema: 'cssearth-structure-benchmark@1', title: recipe.title
       'Compact/filament labels describe morphology; they do not distinguish foreground stars from intrinsic knots.',
       'Residuals must remain accounted for. Exact reconstruction alone cannot validate a decomposition.',
       'This experiment compares automatic 2D extraction. No new 3D depth model has been baked.'] },
-  provenance: { recipePath, recipeSha256: digest(recipeBytes), input: recipe.input, codePins,
-    catalogSha256: digest(catalogBytes), settings: recipe.wavelets, diagnostics: result.diagnostics } };
+  provenance: { recipePath, input: recipe.input, catalog: 'wavelets/catalog.json.gz',
+    settings: recipe.wavelets, diagnostics: result.diagnostics } };
 await writeFile(resolve(recipe.outputDirectory, 'benchmark.json'), JSON.stringify(manifest, null, 2) + '\n');
 console.log(`STRUCTURE_BENCHMARK_COMPLETE: ${recipe.outputDirectory}/benchmark.json`);

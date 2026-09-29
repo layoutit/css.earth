@@ -16,13 +16,13 @@ for (const name of await readdir(jobs)) {
   if (!name.endsWith('.json')) continue;
   const value: unknown = JSON.parse(await readFile(`${jobs}/${name}`, 'utf8'));
   if (!object(value) || value.status !== 'completed' || typeof value.id !== 'string' || !object(value.result) ||
-      value.result.preparationVersion !== undefined || value.result.imageId !== image.id || value.result.geometrySha256 !== image.geometry?.sha256) continue;
+      value.result.preparationVersion !== undefined || value.result.imageId !== image.id || value.result.geometryFile !== image.geometry?.file) continue;
   const result = readShapeCloudResult(value.result); if (result.quality !== 'detailed' || !result.neutral || result.empty) continue;
   const bank: unknown = JSON.parse(await readFile(result.neutral.path, 'utf8'));
   if (object(bank) && typeof bank.id === 'string' && bank.id.startsWith('shape-cloud-')) { legacy = { id: value.id, result }; break; }
 }
 assert.ok(legacy, 'This migration check needs an existing completed pre-upgrade shape-cloud receipt.');
-const key = `nebula:shape-cloud:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}`;
+const key = `nebula:shape-cloud:2:${cataloguePath}:${image.id}:${image.directory}:${image.geometry?.file}`;
 const browser = await chromium.launch({ headless: true }), page = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
 const baseUrl = process.argv[2] ?? 'http://127.0.0.1:4331';
 const directory = '.local/nebula-lab/shape-cloud/cache-browser'; await mkdir(directory, { recursive: true });

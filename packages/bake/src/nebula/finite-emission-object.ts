@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
-import { restoreCompactFiniteEmission, hash, localPath, pinned, type Pin, writeAtomic } from '../volume/node/index.ts';
+import { restoreCompactFiniteEmission, localPath, pinned, type Pin, writeAtomic } from '../volume/node/index.ts';
 import { cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, parsePreparedLmcStars } from '../volume/index.ts';
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { prepareVolumeAtlases } from '../density/index.ts';
@@ -22,7 +22,7 @@ function parsePin(value: unknown, at: string): Pin {
 }
 const read = async (root: string, pin: Pin) => json(await pinned(root, pin), pin.path.endsWith('.gz'));
 
-/** True when the installed bank matches the committed descriptor and every texture it names is intact. */
+/** True when the descriptor names a prepared bank and every texture it lists is present at its recorded size. */
 async function deliveredBankVerified(directory: string, installed: string): Promise<boolean> {
   try {
     const descriptor = record(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'descriptor');
@@ -56,8 +56,8 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
   assert.ok(typeof framingRadiusUnits === 'number' && framingRadiusUnits > 0, 'A delivered bank needs a framing radius.');
   const frame = record(inputs.frame, 'delivered frame');
   const installed = resolve(directory, 'prepared');
-  // A cached delivery counts only when the installed bank is the one the committed descriptor pins, and
-  // every atlas it names is present with the expected bytes. Presence alone would accept a stale bank.
+  // A cached delivery counts only when the descriptor names a prepared bank and every atlas that bank lists is present
+  // with its recorded byte count.
   if (ifMissing && await deliveredBankVerified(directory, installed)) return { id: bankId, status: 'verified' };
   // Deploy builds may tolerate a bank missing from R2 instead of baking one from scratch here (no source
   // acquisition service runs at build time): report it unavailable and move on, loudly.
@@ -94,8 +94,8 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
         resources: compiled.resources.map(resource => ({ ...resource, path: `${lens.imageId}/${resource.path}` })),
         stacks: compiled.stacks.map(stack => ({ ...stack,
           leaves: stack.leaves.map(leaf => ({ ...leaf, texturePath: `${lens.imageId}/${leaf.texturePath}` })) })) };
-      receipts.push({ id: lens.imageId, volumeSha256: hash(stringify(prefixed)),
-        textures: prefixed.resources.map(resource => ({ path: resource.path, sha256: resource.sha256, bytes: resource.bytes })),
+      receipts.push({ id: lens.imageId,
+        textures: prefixed.resources.map(resource => ({ path: resource.path, bytes: resource.bytes })),
         coverage: lens.coverage });
 
       const points = starsPayload.stars.map(star => {
@@ -142,7 +142,7 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
     }
     await writeAtomic(resolve(installed, 'lenses.json'), envelope);
     await writeAtomic(resolve(installed, 'delivery.json'), stringify({ schema: 'cssearth-finite-emission-delivery-receipt@1',
-      compactInputs, modelResultId: text(inputs.modelResultId, 'model id'), lenses: receipts }));
+      compactInputs, lenses: receipts }));
     await writeAtomic(resolve(directory, 'object.json'), stringify({ schema: 'cssearth-object@1', id: bankId, type: 'volume-lens-bank',
       properties: { frame, preparation: { source: 'source/compact-delivery.json' } },
       prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json' } }));

@@ -1,6 +1,5 @@
 /** Real slider gestures, visible drafts, source isolation and durable reload. Uses isolated browser storage. */
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { readStructureCatalogue } from '../src/features/observations/models/structures-model';
@@ -11,9 +10,8 @@ import { readDetectionResult } from '../src/features/geometry/jobs-model.ts';
 const cataloguePath = '.local/nebula-lab/observations/helix/structures/catalogue.json';
 const catalogue = readStructureCatalogue(JSON.parse(await readFile(cataloguePath, 'utf8'))), source = catalogue.images[0]!, other = catalogue.images[1]!;
 const output = '.local/nebula-lab/geometry-controls-browser'; await mkdir(output, { recursive: true });
-const hash = async (path: string) => createHash('sha256').update(await readFile(path)).digest('hex');
 const pins = [cataloguePath, ...catalogue.images.flatMap(image => [`${image.directory}/source.png`, `${image.directory}/map.json`])];
-const originals = await Promise.all(pins.map(async path => ({ path, hash: await hash(path) })));
+const originals = await Promise.all(pins.map(async path => ({ path, bytes: await readFile(path) })));
 const browser = await chromium.launch({ headless: true }), context = await browser.newContext({ viewport: { width: 1600, height: 1000 } });
 const page = await context.newPage(), errors: string[] = [], posts: string[] = [];
 page.on('pageerror', error => errors.push(error.message));
@@ -74,7 +72,7 @@ try {
   const geometry = readGeometryMap(JSON.parse(await readFile(`${source.directory}/${result.geometry.file}`, 'utf8')), source);
   const baseline = readGeometryMap(JSON.parse(await readFile(`${source.directory}/${source.geometry.file}`, 'utf8')), source);
   assert.notDeepEqual(geometry.candidates, baseline.candidates);
-  assert.equal(await controls.getAttribute('data-applied-sha'), result.geometry.sha256);
+  assert.equal(await controls.getAttribute('data-applied-geometry'), result.geometry.file);
   const completePosts = posts.length;
   await page.reload(); await cloudReady();
   assert.equal(posts.length, completePosts, 'Reload reprocessed the current final fit.');
@@ -88,7 +86,7 @@ try {
   await page.reload(); await cloudReady();
   assert.equal(await controls.getAttribute('data-job-id'), activeId, 'Refresh did not reconnect to the accepted final request.');
   await page.locator('#structure-image').selectOption(other.id);
-  await page.waitForFunction(sha => document.querySelector('.geometry-detection-controls')?.getAttribute('data-applied-sha') === sha, other.geometry.sha256);
+  await page.waitForFunction(file => document.querySelector('.geometry-detection-controls')?.getAttribute('data-applied-geometry') === file, other.geometry.file);
   assert.equal(await slider.inputValue(), '100', 'Detector settings leaked across sources.');
   await page.locator('#structure-image').selectOption(source.id); await cloudReady();
   await page.getByRole('button', { name: 'Structure', exact: true }).click();
@@ -101,7 +99,7 @@ try {
   }));
   assert.ok(rows.every(row => !row.overflow && Math.max(...row.centers) - Math.min(...row.centers) < 4));
   await page.screenshot({ path: `${output}/live-structure-1000.png` });
-  for (const pin of originals) assert.equal(await hash(pin.path), pin.hash, `Detection changed ${pin.path}`);
+  for (const pin of originals) assert.ok((await readFile(pin.path)).equals(pin.bytes), `Detection changed ${pin.path}`);
   assert.deepEqual(errors, []);
   const report = { status: 'passed', visibleDrafts: drafts.size, firstDraftMs, events, detectionPosts: detectionPosts(),
     retainedHostAndCamera: true, refreshResumed: true, sourceIsolated: true, finalSettings: result.settings };

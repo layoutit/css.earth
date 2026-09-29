@@ -1,6 +1,6 @@
 /** Offline handoff of existing cloud geometry, prepared pixels and saved display choices. */
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
+import { hash as volumeResourceDigest } from '@cssearth/bake/volume/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative, sep } from 'node:path';
 import { createCloudDensityPreparer } from '../../services/density-material.ts';
@@ -18,14 +18,12 @@ export interface LensPromotion {
 }
 export interface VolumeLensPromotion {
   schema: 'cssearth-volume-lens-promotion@1'; id: string; defaultLens: string; framingRadiusUnits: number;
-  settingsReceiptSha256: string; lenses: LensPromotion[];
+  lenses: LensPromotion[];
   /** Object-owned copies of the emission and lens recipes behind a compact finite-emission export. */
   evidence?: { emissionRecipe: string; lensRecipe: string };
 }
-const hash = (value: string | Uint8Array) => createHash('sha256').update(value).digest('hex');
 const bytes = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
 const token = (value: unknown): value is string => typeof value === 'string' && /^[a-z][a-z0-9-]*$/.test(value);
-const sha = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const json = async (path: string) => JSON.parse(await readFile(path, 'utf8'));
 async function put(path: string, value: string | Uint8Array) { await mkdir(dirname(path), { recursive: true }); await writeFile(path, value); }
 function safeRelative(path: string) {
@@ -34,7 +32,10 @@ function safeRelative(path: string) {
 }
 export function parseVolumeLensPromotion(value: VolumeLensPromotion): VolumeLensPromotion {
   assert.equal(value?.schema, 'cssearth-volume-lens-promotion@1');
-  assert.ok(token(value.id) && token(value.defaultLens) && sha(value.settingsReceiptSha256));
+  assert.ok(token(value.id) && token(value.defaultLens), 'A lens promotion names its bank id and default lens.');
+  const keys = ['schema', 'id', 'defaultLens', 'framingRadiusUnits', 'lenses', 'evidence'];
+  const unexpected = Object.keys(value).filter(key => !keys.includes(key));
+  assert.equal(unexpected.length, 0, `Lens promotion ${value.id} has unexpected fields: ${unexpected.join(', ')}`);
   assert.ok(Number.isFinite(value.framingRadiusUnits) && value.framingRadiusUnits > 0);
   assert.ok(Array.isArray(value.lenses) && value.lenses.length > 0 && value.lenses.length <= 8);
   assert.equal(new Set(value.lenses.map(lens => lens.imageId)).size, value.lenses.length);
@@ -49,7 +50,7 @@ export function parseVolumeLensPromotion(value: VolumeLensPromotion): VolumeLens
     }
   }
   for (const lens of value.lenses) {
-    assert.ok(token(lens.imageId) && sha(lens.resultId) && typeof lens.label === 'string' && lens.label && typeof lens.description === 'string');
+    assert.ok(token(lens.imageId) && token(lens.resultId) && typeof lens.label === 'string' && lens.label && typeof lens.description === 'string');
     assert.ok(Array.isArray(lens.enabledIds) && lens.enabledIds.every(token));
     validateCloudBrightness(lens.brightness); validateCloudDensityFilter(lens.density);
     const stars = lens.stars;
@@ -62,10 +63,10 @@ export function parseVolumeLensPromotion(value: VolumeLensPromotion): VolumeLens
 /** Call into a staging directory, verify, then install it. Existing unrelated files are never deleted. */
 export async function promoteVolumeLenses(root: string, input: VolumeLensPromotion, destination: string) {
   const recipe = parseVolumeLensPromotion(input), prepareFilter = createCloudDensityPreparer(root);
-  const lenses = [], outputs: Record<string, { sha256: string; bytes: number }> = {};
+  const lenses = [], outputs: Record<string, { bytes: number }> = {};
   const output = async (path: string, content: string | Uint8Array) => {
     safeRelative(path); await put(resolve(destination, path), content);
-    outputs[path] = { sha256: hash(content), bytes: Buffer.byteLength(content) };
+    outputs[path] = { bytes: Buffer.byteLength(content) };
   };
   let commonFrame: unknown, commonStars: unknown;
   const inputs = await Promise.all(recipe.lenses.map(async lens => {
@@ -74,15 +75,13 @@ export async function promoteVolumeLenses(root: string, input: VolumeLensPromoti
     const directory = resolve(root, result.subject.directory);
     const descriptor = await json(resolve(directory, 'inspection-object.json'));
     const preparedBytes = await readFile(resolve(directory, safeRelative(descriptor.prepared.url)));
-    assert.equal(hash(preparedBytes), descriptor.prepared.sha256);
     const volume = validatePreparedCssVolume(JSON.parse(preparedBytes.toString()).data);
     const catalogueBytes = await readFile(resolve(directory, safeRelative(descriptor.properties.preparation.source)));
-    assert.equal(hash(catalogueBytes), descriptor.properties.preparation.sha256);
     const catalogue = parseCloudCatalogue(JSON.parse(catalogueBytes.toString()), result.subject.id, volume.stacks.flatMap(stack => stack.leaves.map(leaf => leaf.id)));
     const inspection = createCloudInspection(catalogue); inspection.setSelection(lens.enabledIds);
     assert.ok(volume.stacks.every(stack => stack.leaves.some(leaf => inspection.includes(leaf.id))), 'A promoted lens must contain cloud signal on all axes');
     // A star layer belongs either to the subject catalogue or, for a finite emission model, to the
-    // model itself; the model-owned index verifies its own pin, frame and realizing model.
+    // model itself; the model-owned index checks its own path, frame and realizing model.
     const owner = result.subject.sourceSubjectId;
     assert.ok(result.subject.stars || (result.finiteMaterial && token(owner)), 'A promoted lens needs a star layer or an owning subject');
     const starsPath = result.subject.stars ?? await finiteModelStarsPath(root, owner!, result.finiteMaterial!.modelResultId);
@@ -106,7 +105,8 @@ export async function promoteVolumeLenses(root: string, input: VolumeLensPromoti
       const image = await readFile(source.url.slice(4));
       const path = `${lens.imageId}/${resource.path}`;
       await output(`prepared/${path}`, image);
-      resources.push({ ...resource, path, sha256: hash(image), bytes: image.length });
+      // The renderer's volume resource contract still requires a digest per texture (cssearth-density-volume@1).
+      resources.push({ ...resource, path, sha256: volumeResourceDigest(image), bytes: image.length });
     }
     const preparedVolume: PreparedCssVolume = { ...volume, id: `${recipe.id}-${lens.imageId}`, resources,
       stacks: stacks.map(stack => ({ ...stack, leaves: stack.leaves.map(leaf => ({ ...leaf, texturePath: `${lens.imageId}/${leaf.texturePath}` })) })) };

@@ -36,6 +36,7 @@ import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { ceilingShare, composeToneCurve, coreDisc, fitCorrection, highlightExposureBound, identityToneCurve, pairedPixels, pinnedShare,
   predictToneCurve, reexposeProjection, solveExposure, splitFootprint, toneScore, TOLERANCE, type CoreDisc } from './lens-tone-fitting.ts';
 import type { LensToneCurve } from '@cssearth/bake/volume';
+import { isResultName } from '../../features/result-name.ts';
 
 export { TOLERANCE };
 /** Score is in tolerance units, so EPSILON is a twentieth of a tolerance band. */
@@ -44,12 +45,14 @@ const EPSILON = .05, PIN_LIMIT = .05, BANDING_LIMIT = 1.1, SHARE_SLACK = .005;
 const root = process.cwd(), args = process.argv.slice(2);
 const option = (name: string, fallback: number) => { const i = args.indexOf(name); const v = i >= 0 ? Number(args[i + 1]) : fallback; if (!Number.isFinite(v)) throw TypeError(`Invalid ${name}`); return v; };
 const text = (name: string) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : undefined; };
-const startId = args.find(a => /^[a-f0-9]{64}$/.test(a) && args[args.indexOf(a) - 1] !== '--model');
+// The lens is the one positional argument; every option takes the argument after it.
+const valued = new Set(['--delivery-loss', '--max-bakes', '--recipe', '--model', '--server']);
+const startId = args.find((a, i) => !a.startsWith('--') && !valued.has(args[i - 1] ?? '') && isResultName(a));
 if (!startId) throw TypeError('Usage: lens-tone-fit <lensResultId> [--delivery-loss 0.12] [--max-bakes 3] [--solve-exposure [--recipe <settings.json>]] [--model <modelResultId>] [--server http://127.0.0.1:4331]');
 const loss = option('--delivery-loss', .12), maxBakes = option('--max-bakes', 3), scale = 1 + loss;
 const server = text('--server') ?? 'http://127.0.0.1:4331', recipePath = text('--recipe'), modelOption = text('--model');
 const solving = args.includes('--solve-exposure');
-if (modelOption !== undefined && !/^[a-f0-9]{64}$/.test(modelOption)) throw TypeError('--model takes a 64-hex model result id');
+if (modelOption !== undefined && !isResultName(modelOption)) throw TypeError(`--model takes a saved model name, not ${JSON.stringify(modelOption)}`);
 if (solving && modelOption) throw TypeError('--solve-exposure makes the model; --model moves a lens onto one. Use one.');
 
 /** The delivered faint zone, from the baked textures themselves: alpha 1–3 share and tint, alpha 1–8 roughness. */

@@ -5,7 +5,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { loadVolumeSource, type VolumeSlices, bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
-import { sha256 } from '@cssearth/core/node';
+import { savedInputsMatch } from '../../server/services/saved-variants.ts';
 import { compileCssVolume, type PreparedCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { decomposeFilledComponents, type FilledComponentOptions } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-components';
 import { createFilledPartsSampler, type FilledVolumePart } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-parts';
@@ -14,7 +14,7 @@ import { createObservationMapping, reprojectObservationPrior } from '../../adapt
 
 type Vec3 = [number, number, number];
 type Bounds3 = { min: Vec3; max: Vec3 };
-interface Pin { path: string; sha256: string }
+interface Pin { path: string }
 interface Recipe {
   schema: 'cssearth-filled-observation@1'; directory: string;
   photo: Pin & { url: string }; wcs: ImageWcs; frame: Pin; stellarPrior: Pin;
@@ -29,22 +29,22 @@ interface Recipe {
 interface PreparedObject { schema: string; id: string; type: string; format: string; data: PreparedCssVolume }
 
 const json = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
+/** A recipe input by path; a missing source with a URL is acquired from it once and kept at that path. */
 async function pinned(pin: Pin, url?: string): Promise<Buffer> {
-  const bytes = await readFile(pin.path).catch(async (error: NodeJS.ErrnoException) => {
+  return readFile(pin.path).catch(async (error: NodeJS.ErrnoException) => {
     if (error.code !== 'ENOENT' || !url) throw error;
-    const response = await fetch(url); if (!response.ok) throw new Error(`Source download failed: ${response.status}`);
-    return Buffer.from(await response.arrayBuffer());
+    const response = await fetch(url); if (!response.ok) throw new Error(`Source download of ${url} for ${pin.path} failed: ${response.status}`);
+    const bytes = Buffer.from(await response.arrayBuffer());
+    await mkdir(dirname(pin.path), { recursive: true }); await writeFile(pin.path, bytes);
+    return bytes;
   });
-  if (sha256(bytes) !== pin.sha256) throw new Error(`Pinned input drifted: ${pin.path}`);
-  if (url) { await mkdir(dirname(pin.path), { recursive: true }); await writeFile(pin.path, bytes); }
-  return bytes;
 }
 const span = (bounds: Bounds3, axis: number) => bounds.max[axis]! - bounds.min[axis]!;
 const safe = (id: string) => id.replace(/[^a-z0-9_-]+/giu, '-').replace(/^-+|-+$/gu, '').toLowerCase();
 
 const [recipePath = 'labs/nebula/models/lmc/clouds.json', requestedVariant, extra] = process.argv.slice(2);
 if (extra) throw new Error('Usage: prepare-parts [recipe.json] [coherent-variant-id]');
-const recipeBytes = await readFile(recipePath), recipe: Recipe = parseLabModelJson(recipeBytes.toString());
+const recipe: Recipe = parseLabModelJson(await readFile(recipePath, 'utf8'));
 if (recipe.schema !== 'cssearth-filled-observation@1') throw new TypeError('Invalid filled observation recipe.');
 const coherent = recipe.variants.filter(item => item.mode === 'coherent');
 const variant = requestedVariant ? coherent.find(item => item.id === requestedVariant) : coherent.at(-1);
@@ -89,9 +89,9 @@ async function bakePart(part: FilledVolumePart): Promise<{ part: FilledVolumePar
     y: Math.min(512, Math.max(16, Math.ceil(recipe.master.sliceCounts.y * ratios[1]!))),
     z: Math.min(512, Math.max(16, Math.ceil(recipe.master.sliceCounts.z * ratios[2]!))) };
   const width = Math.max(16, Math.ceil(512 * Math.max(ratios[0]!, ratios[1]!)));
-  const key = sha256(Buffer.from(JSON.stringify({ recipe: sha256(recipeBytes), part: part.id, physicalBounds,
-    counts, width, implementation: sha256(await readFile('labs/nebula/packages/lab/src/server/workflows/density/filled-volume.ts')) }))).slice(0, 16);
-  const name = safe(part.id), masterDirectory = resolve('.local/nebula-lab/cloud-parts', key, 'masters');
+  // One lossless master per reference part, reused while it was baked from the same recipe, bounds and sampling.
+  const name = safe(part.id), inputs = { recipePath, recipe, part: part.id, physicalBounds, counts, width };
+  const partCache = resolve('.local/nebula-lab/cloud-parts', `${targetId}-${name}`), masterDirectory = resolve(partCache, 'masters');
   const outputDirectory = resolve(targetDirectory, 'prepared/parts', name);
   const deliveryBanks = [{ width: Math.min(512, width), outputDirectory,
     imageEncoding: { format: 'webp' as const, quality: recipe.delivery.quality } }];
@@ -99,9 +99,9 @@ async function bakePart(part: FilledVolumePart): Promise<{ part: FilledVolumePar
     const [tx, ty] = mapping.tangentAtPoint(x, y, z); part.sample(tx, ty, z, out);
     const metric = mapping.rayPathPerDepth(tx, ty); out[0] /= metric; out[1] /= metric; out[2] /= metric;
   };
-  const cached = await readFile(resolve(masterDirectory, 'volume-slices.json'), 'utf8').catch((error: NodeJS.ErrnoException) => {
+  const cached = await savedInputsMatch(partCache, inputs) ? await readFile(resolve(masterDirectory, 'volume-slices.json'), 'utf8').catch((error: NodeJS.ErrnoException) => {
     if (error.code !== 'ENOENT') throw error; return null;
-  });
+  }) : null;
   let slices: VolumeSlices;
   if (cached) slices = (await deriveMasterVolumeSlices({ masters: parseLabModelJson(cached), masterDirectory, deliveryBanks }))[0]!.slices;
   else slices = (await bakeMasterVolumeSlices({ sampleEmission: sample, boundsKpc: physicalBounds, sliceCounts: counts,
@@ -110,6 +110,7 @@ async function bakePart(part: FilledVolumePart): Promise<{ part: FilledVolumePar
       interpretation: part.interpretation, frozenReference: targetId }, onProgress(progress) {
         if (progress.completed === progress.total) console.log(`CLOUD_PARTS_BANK ${part.id} ${progress.total} slices`);
       } })).banks[0]!.slices;
+  if (!cached) await json(resolve(partCache, 'inputs.json'), inputs);
   const outputFrame = { ...frame, boundsUnits: physicalBounds };
   return { part, data: compileCssVolume({ id: `${targetId}-${name}`, frame: outputFrame, slices, recipe: { anchors: [] } }) };
 }
@@ -156,7 +157,7 @@ for (const { data } of results) for (let axis = 0; axis < 3; axis++) {
 const combined: PreparedObject = { ...reference, data: { ...reference.data,
   frame: { ...reference.data.frame, boundsUnits: combinedBounds }, stacks,
   resources: [...reference.data.resources, ...partResources], provenance: { reference: reference.data.provenance,
-    inspection: { schema: 'cssearth-cloud-parts@1', recipe: recipePath, recipeSha256: sha256(recipeBytes),
+    inspection: { schema: 'cssearth-cloud-parts@1', recipe: recipePath,
       composition: 'Exact reference leaves remain the default. Filtered independent RGBA source-over is contribution inspection and is not an exact arbitrary-subset reconstruction.' } } } };
 await mkdir(resolve(targetDirectory, 'source'), { recursive: true });
 await json(resolve(targetDirectory, 'prepared/inspection.json'), combined);
@@ -170,9 +171,7 @@ await json(resolve(targetDirectory, 'source/cloud-parts.json'), { schema: 'cssea
     ...(part.scale === undefined ? {} : { scale: part.scale }), ...(part.radius === undefined ? {} : { radius: part.radius }),
     signalFraction: part.integratedIntensity / sourceTotal, defaultEnabled: part.kind === 'extended', leafIds: partLeafIds.get(part.id)! })), referenceLeafIds,
   composition: 'The unfiltered default uses exact reference leaves. Filtered part leaves are independently encoded source-over contribution inspection; their combined RGBA is order-dependent and approximate.' });
-const inspectionBytes = await readFile(resolve(targetDirectory, 'prepared/inspection.json'));
 await json(resolve(targetDirectory, 'inspection-object.json'), { schema: 'cssearth-object@1', id: targetId,
-  type: 'density-volume', properties: { volume: combined.data.frame,
-    preparation: { source: 'source/cloud-parts.json', sha256: sha256(await readFile(resolve(targetDirectory, 'source/cloud-parts.json'))) } },
-  prepared: { format: 'cssearth-density-volume@1', url: 'prepared/inspection.json', sha256: sha256(inspectionBytes) } });
+  type: 'density-volume', properties: { volume: combined.data.frame, preparation: { source: 'source/cloud-parts.json' } },
+  prepared: { format: 'cssearth-density-volume@1', url: 'prepared/inspection.json' } });
 console.log(`CLOUD_PARTS_COMPLETE ${results.length} parts ${partResources.length} resources ${partResources.reduce((sum, item) => sum + item.bytes, 0)} bytes`);

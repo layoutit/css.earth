@@ -14,7 +14,8 @@ export interface EvidencePlane {
   signal: Float32Array; coverage: Uint8Array; noiseSigma: number;
 }
 export interface EvidenceSource {
-  id: string; label: string; sourceSha256: string; mapSha256: string; sourcePanelSha256: string;
+  /** The structure analysis run and its registered source panel; paths only. */
+  id: string; label: string; mapDirectory: string; sourcePanel: string;
   imageToFrame: Matrix; workingWidth: number; workingHeight: number;
   registeredRgba: Uint8Array; footprint: Uint8Array;
   channels: Record<EvidenceChannel, EvidencePlane>;

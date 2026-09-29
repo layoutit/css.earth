@@ -21,7 +21,6 @@
  * lens; the difference is the delivery loss, not a different measurement.
  */
 import sharp from 'sharp';
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
@@ -52,7 +51,7 @@ export interface LensLevels {
   schema: 'cssearth-nebula-lens-levels@1';
   resultId: string; imageId: string;
   modelResultId: string; sourceResultId: string;
-  files: { projection: string; source: string; coverage: string; sha256: Record<string, string> };
+  files: { projection: string; source: string; coverage: string };
   grid: { width: number; height: number };
   footprintPixels: number; gridPixels: number;
   /** Per-channel 5th percentile of the registered image inside the footprint, removed from the source. */
@@ -231,14 +230,12 @@ export function resampleOntoProjection(inputs: {
 }
 
 const PROJECTION = 'source/fit-projection.png', REGISTERED = 'source/registered-image.png', COVERAGE = 'source/original-image.png';
-const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
-
-/** Read one artifact of a saved result and verify it against that result's own manifest. */
-async function artifact(directory: string, manifest: Record<string, { sha256?: unknown }>, path: string) {
-  const bytes = await readFile(resolve(directory, path));
-  const pin = manifest[path]?.sha256;
-  if (typeof pin !== 'string' || digest(bytes) !== pin) throw new TypeError(`Saved lens artifact differs: ${path}`);
-  return bytes;
+/** Read one artifact that the saved result's own manifest lists. */
+async function artifact(directory: string, manifest: Record<string, unknown>, path: string) {
+  if (!manifest[path]) throw new TypeError(`Saved lens manifest in ${directory} does not list ${path}`);
+  return readFile(resolve(directory, path)).catch((error: NodeJS.ErrnoException) => {
+    if (error.code === 'ENOENT') throw new TypeError(`Saved lens artifact is missing: ${path}`); throw error;
+  });
 }
 
 /**
@@ -246,12 +243,12 @@ async function artifact(directory: string, manifest: Record<string, { sha256?: u
  * identity checks `readPreparedReconstruction` owns; nothing here writes.
  */
 export async function lensLevels(root: string, prepared: PreparedReconstruction): Promise<LensLevels> {
-  const { grid, material, pins } = await loadLensLevelGrid(root, prepared);
+  const { grid, material } = await loadLensLevelGrid(root, prepared);
   const statistics = lensLevelStatistics(grid, material);
   if (!statistics.footprintPixels) throw new TypeError('This lens image covers none of the model projection.');
   return { schema: 'cssearth-nebula-lens-levels@1', resultId: prepared.resultId, imageId: prepared.imageId,
     modelResultId: prepared.finiteMaterial!.modelResultId, sourceResultId: prepared.finiteMaterial!.sourceResultId,
-    files: { projection: PROJECTION, source: REGISTERED, coverage: COVERAGE, sha256: pins },
+    files: { projection: PROJECTION, source: REGISTERED, coverage: COVERAGE },
     grid: { width: grid.width, height: grid.height }, ...statistics,
     note: 'Source: this lens’s own registered image, sky pedestal removed. Render: the model’s analytic front ' +
       'projection wearing this lens’s peak-normalized chromaticity and its own recorded channel gain and tone curve. Analytic light, so it reads brighter than the ' +
@@ -262,7 +259,7 @@ export async function lensLevels(root: string, prepared: PreparedReconstruction)
 
 /** The measurement's inputs for one saved lens: the pinned grid and the lens's recorded material corrections. */
 export async function loadLensLevelGrid(root: string, prepared: PreparedReconstruction):
-  Promise<{ grid: LensLevelGrid; material: LensLevelMaterial; pins: Record<string, string>;
+  Promise<{ grid: LensLevelGrid; material: LensLevelMaterial;
     /** The projection grid's and the lens image's own tangent bounds; the lens bounds are the overlay's frame. */
     bounds: { projection: Bounds; lens: Bounds } }> {
   if (!prepared.finiteMaterial) throw new TypeError('Levels compare a baked image lens against its own source image.');
@@ -272,7 +269,7 @@ export async function loadLensLevelGrid(root: string, prepared: PreparedReconstr
   if (manifest.schema !== 'cssearth-nebula-reconstruction-artifacts@1' || manifest.id !== prepared.subject.id ||
       !manifest.artifacts || typeof manifest.artifacts !== 'object')
     throw new TypeError('Saved lens artifact manifest differs.');
-  const artifacts = manifest.artifacts as Record<string, { sha256?: unknown }>;
+  const artifacts = manifest.artifacts as Record<string, unknown>;
   const provenance = parseLabModelJson((await artifact(directory, artifacts, 'source/provenance.json')).toString());
   const grid = provenance.densityProjection, lensBounds = bounds(provenance.sourceRegistration?.tangentBoundsKpc);
   if (!grid || !Number.isInteger(grid.width) || !Number.isInteger(grid.height) || grid.width < 2 || grid.height < 2)
@@ -293,6 +290,5 @@ export async function loadLensLevelGrid(root: string, prepared: PreparedReconstr
   const material = { channelGain: finite.channelGain == null ? null : validateChannelGain(finite.channelGain),
     toneCurve: finite.toneCurve == null ? null : validateLensToneCurve(finite.toneCurve) };
   return { grid: { width: grid.width, height: grid.height, projection: flat, source, mask }, material,
-    bounds: { projection: projectionBounds, lens: lensBounds },
-    pins: Object.fromEntries([PROJECTION, REGISTERED, COVERAGE].map(path => [path, String(artifacts[path]!.sha256)])) };
+    bounds: { projection: projectionBounds, lens: lensBounds } };
 }

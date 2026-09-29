@@ -13,12 +13,12 @@ export interface SeriesPoint { atMs: number; meanMs: number | null; intervals: n
 interface SeriesHeader {
   schema: 'cssearth-frame-average@2'; exclusionPolicy: 'chrome-explicit-idle@1';
   windowMs: typeof AVERAGE_WINDOW_MS; stepMs: typeof AVERAGE_STEP_MS; durationMs: number;
-  excludedGaps: readonly unknown[]; label?: unknown; sha256?: unknown; source?: unknown;
+  excludedGaps: readonly unknown[]; label?: unknown; source?: unknown;
 }
 /** A validated series, possibly read from an earlier agent-brief.json. */
 export interface ComparableSeries extends SeriesHeader { points: readonly SeriesPoint[] }
 export interface AverageSeries extends ComparableSeries {
-  label: string; sha256: string; source: string; metric: string; excludedGaps: IdleGap[]; alignment: string; points: SeriesPoint[];
+  label: string; source: string; metric: string; excludedGaps: IdleGap[]; alignment: string; points: SeriesPoint[];
 }
 
 // A presentation interval can span a period in which Chrome explicitly stopped
@@ -57,7 +57,7 @@ export function chartIdleGaps(events: readonly TraceEvent[], frames: readonly Ti
 }
 
 export function averageFrames(frames: readonly { index?: number; endMs: number; intervalMs: number }[],
-  { durationMs, label, sha256, source, excludedGaps = [] }: { durationMs: number; label: string; sha256: string; source: string; excludedGaps?: IdleGap[] }): AverageSeries {
+  { durationMs, label, source, excludedGaps = [] }: { durationMs: number; label: string; source: string; excludedGaps?: IdleGap[] }): AverageSeries {
   const excluded = new Set<number | undefined>(excludedGaps.map(gap => gap.index));
   const rows = frames.filter(f => !excluded.has(f.index) && Number.isFinite(f.endMs) && Number.isFinite(f.intervalMs) && f.intervalMs > 0)
     .sort((a, b) => a.endMs - b.endMs);
@@ -71,7 +71,7 @@ export function averageFrames(frames: readonly { index?: number; endMs: number; 
     while (first < last && rows[first].endMs <= t - AVERAGE_WINDOW_MS) sum -= rows[first++].intervalMs;
     points.push({ atMs: round(t), meanMs: last > first ? round(sum / (last - first)) : null, intervals: last - first });
   }
-  return { schema: 'cssearth-frame-average@2', label, sha256, source, durationMs,
+  return { schema: 'cssearth-frame-average@2', label, source, durationMs,
     metric: 'arithmetic mean of non-idle presentation intervals ending in the trailing window',
     exclusionPolicy: 'chrome-explicit-idle@1', excludedGaps,
     windowMs: AVERAGE_WINDOW_MS, stepMs: AVERAGE_STEP_MS, alignment: 'elapsed time from selected trace window start', points };
@@ -124,7 +124,7 @@ export function renderAverageChart(series: readonly ComparableSeries[]) {
       d += `${connected ? 'L' : 'M'}${round(x(p.atMs))} ${round(y(p.meanMs))}`; connected = true;
     }
     const color = colors[i % colors.length], lx = left + (i % 2) * 500, ly = top + plotHeight + 78 + Math.floor(i / 2) * 26;
-    svg += `<path data-trace="${escapeHtml(s.sha256 ?? s.label)}" d="${d}" fill="none" stroke="${color}" stroke-width="2.4"${i >= colors.length ? ' stroke-dasharray="7 3"' : ''}/><path d="M${lx} ${ly - 4}h24" stroke="${color}" stroke-width="3"/><text x="${lx + 34}" y="${ly}" font-size="13">${escapeHtml(String(s.label).slice(0, 58))}</text>`;
+    svg += `<path data-trace="${escapeHtml(String(s.label))}" d="${d}" fill="none" stroke="${color}" stroke-width="2.4"${i >= colors.length ? ' stroke-dasharray="7 3"' : ''}/><path d="M${lx} ${ly - 4}h24" stroke="${color}" stroke-width="3"/><text x="${lx + 34}" y="${ly}" font-size="13">${escapeHtml(String(s.label).slice(0, 58))}</text>`;
   });
   const omitted = series.map(s => s.excludedGaps.length).join(' / ');
   return svg + `<text x="${left}" y="${height - 14}" font-size="11" fill="#a5b4ca">Excluded idle intervals, legend order: ${omitted} · raw frame data unchanged</text></g></svg>`;

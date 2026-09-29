@@ -55,7 +55,7 @@ export function buildDiagnosis(brief: TraceBrief) {
   if (!brief.invalidations.available) missing.push('No detailed node invalidations; affected setters/selectors cannot be reconstructed.');
   if (brief.invalidations.domOwnership === 'unavailable') missing.push('No validated DOM snapshots; backend IDs cannot be assigned to app owners.');
   if (!brief.capture?.alignment?.valid) missing.push('No matched recorder clock; camera, residency and publication state unavailable.');
-  if (!brief.buildSources?.some(s => s.verification === 'matches capture manifest')) missing.push('No verified captured bundle bytes; original source attribution is unproven.');
+  missing.push('Supplied bundle bytes are not checked against the capture; original source attribution is unproven.');
   if (!brief.evidenceCoverage.jsSamples) missing.push('No sampled JS call stacks.');
   if (!brief.evidenceCoverage.styleSchedulingStacks) missing.push('No scheduling-call stacks captured. Node invalidation setters remain separate evidence.');
   if (!brief.buildSources?.some(s => s.sourceMap?.status?.startsWith('provided-build-map'))) missing.push('No original-source maps available; generated locations are retained.');
@@ -85,7 +85,7 @@ export function renderReport(brief: TraceBrief, diagnosis: TraceDiagnosis, chart
   }).join(' · ') : 'No matched video available.';
   return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>cssEarth performance · ${esc(brief.averageSeries.label)}</title>
 <style>body{max-width:1140px;margin:32px auto;padding:0 24px;background:#0c1220;color:#e2eaf6;font:15px/1.55 system-ui}h1{font-size:25px}h2{margin-top:32px;font-size:19px}p{max-width:100ch}.muted{color:#a5b4ca}a{color:#85c8ff}svg{width:100%;height:auto}.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;vertical-align:top;padding:9px;border-bottom:1px solid #29344a}th{color:#b5c6dd}details{margin:16px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.stats{display:flex;gap:14px;flex-wrap:wrap}.stats div{padding:14px 20px;background:#182136;border-radius:7px}.stats strong{display:block;font-size:24px}</style>
-<h1>${esc(brief.averageSeries.label)}</h1><p>${esc(diagnosis.status)} · ${esc(brief.capture.status)} · ${esc(present(brief.input.sha256, 'input SHA-256').slice(0, 12))}</p>
+<h1>${esc(brief.averageSeries.label)}</h1><p>${esc(diagnosis.status)} · ${esc(brief.capture.status)} · ${esc(present(brief.input.name, 'input name'))}</p>
 ${diagnosis.captureErrors.length ? `<p>Capture validation failed: ${esc(diagnosis.captureErrors.join('; '))}</p>` : ''}
 <div class="stats"><div><strong>${esc(brief.presentation.p95Ms ?? '—')} ms</strong>raw interval p95</div><div><strong>${esc(worst[0]?.totalMs ?? '—')} ms</strong>worst interval main work</div><div><strong>${esc(brief.presentation.maxMs ?? '—')} ms</strong>largest raw interval</div></div>
 ${chart}<p class="muted">Arithmetic mean of intervals ending in the previous 500 ms, sampled every 100 ms. Missing observations break the line. Raw hitches are retained below and in <a href="frame-times.svg">the unaveraged timeline</a>. Elapsed-time alignment does not align different gestures.</p>

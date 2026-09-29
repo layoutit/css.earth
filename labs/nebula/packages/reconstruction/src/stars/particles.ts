@@ -1,5 +1,4 @@
 /** Generic offline conversion of xyz+mass particles into the existing RGBA8/Zstd KTX2 density source. */
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
@@ -37,25 +36,24 @@ export interface ParticleVolumeOptions {
 }
 export interface ParticleVolumeReceipt {
   schema: 'cssearth-particle-volume-lab@1';
-  input: { path: string; sha256: string; bytes: number; layout: 'float32-le-xyzmass-kpc' };
+  input: { path: string; bytes: number; layout: 'float32-le-xyzmass-kpc' };
   options: {
     dimensions: Vec3; boundsKpc: Bounds; smoothingSigmaVoxels: number;
     normalizationQuantile: number; encoding: ParticleVolumeOptions['encoding'];
     fallbackColor: Vec3; zstdLevel: number;
-    colorConstraint?: Omit<ParticleColorConstraint, 'imagePath'> & { imagePath: string; imageSha256: string };
+    colorConstraint?: Omit<ParticleColorConstraint, 'imagePath'> & { imagePath: string };
     photoEmission?: ParticlePhotoEmissionOptions;
   };
   particles: { count: number; accepted: number; inputMass: number; acceptedMass: number; depositedMass: number };
   normalization: { quantile: number; densityAtUnit: number; encoding: ParticleVolumeOptions['encoding'] };
   diagnostics: { occupiedVoxels: number; axisVariation: Vec3 };
-  outputs: { gridPath: string; gridSha256: string; decodedSha256: string; bytes: number };
-  densityField?: { path: string; sha256: string; bytes: number;
+  outputs: { gridPath: string; bytes: number };
+  densityField?: { path: string; bytes: number;
     layout: 'float32-le-x-fastest-density'; dimensions: Vec3; boundsKpc: Bounds };
   interpretation: { density: string; color: string; dust: string };
   emission?: { mode: 'photo-constrained'; encodingScale: number; diagnostics: PhotoEmissionDiagnostics };
 }
 
-const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 const dot = (a: Vec3, b: Vec3) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 function validVec(value: Vec3, name: string): void {
@@ -97,7 +95,7 @@ async function loadColor(constraint: ParticleColorConstraint | undefined) {
   if (Math.abs(dot(right, up)) > 1e-4) throw new TypeError('Color projection directions must be orthogonal.');
   const imageBytes = await readFile(constraint.imagePath);
   const decoded = await sharp(imageBytes).rotate().ensureAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
-  return { ...decoded, right, up, imageSha256: sha(imageBytes) };
+  return { ...decoded, right, up };
 }
 
 export interface ParticleVolumeEncoding {encode(grid:{width:number;height:number;depth:number;encodedRgba:Uint8Array},level:number):Buffer}
@@ -203,21 +201,21 @@ export async function convertParticlesToDensityVolume(options: ParticleVolumeOpt
     const path = resolve(options.outputDirectory, options.densityOutputPath);
     await mkdir(dirname(path), { recursive: true });
     await writeFile(path, densityBytes);
-    densityField = { path, sha256: sha(densityBytes), bytes: densityBytes.length,
+    densityField = { path, bytes: densityBytes.length,
       layout: 'float32-le-x-fastest-density', dimensions: [...options.dimensions],
       boundsKpc: { min: [...options.boundsKpc.min], max: [...options.boundsKpc.max] } };
   }
   const receipt: ParticleVolumeReceipt = {
     schema: 'cssearth-particle-volume-lab@1',
-    input: { path: options.particlePath, sha256: sha(particleBytes), bytes: particleBytes.length, layout: 'float32-le-xyzmass-kpc' },
+    input: { path: options.particlePath, bytes: particleBytes.length, layout: 'float32-le-xyzmass-kpc' },
     options: { dimensions: options.dimensions, boundsKpc: options.boundsKpc, smoothingSigmaVoxels: options.smoothingSigmaVoxels,
       normalizationQuantile: options.normalizationQuantile, encoding: options.encoding, fallbackColor: fallback, zstdLevel,
       ...(options.photoEmission ? { photoEmission: options.photoEmission } : {}),
-      ...(options.colorConstraint && color ? { colorConstraint: { ...options.colorConstraint, imageSha256: color.imageSha256 } } : {}) },
+      ...(options.colorConstraint && color ? { colorConstraint: { ...options.colorConstraint } } : {}) },
     particles: { count, accepted, inputMass, acceptedMass, depositedMass: field.reduce((sum, value) => sum + value, 0) },
     normalization: { quantile: options.normalizationQuantile, densityAtUnit, encoding: options.encoding },
     diagnostics: { occupiedVoxels: positive.length, axisVariation },
-    outputs: { gridPath: 'density.ktx2', gridSha256: sha(ktx), decodedSha256: sha(rgba), bytes: ktx.length },
+    outputs: { gridPath: 'density.ktx2', bytes: ktx.length },
     ...(densityField ? { densityField } : {}),
     interpretation: { density: 'Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.',
       color: projected ? 'Photographic brightness and color distributed through the simulated conditional depth profile. Authored display emissivity, not measured gas, dust or stellar population synthesis.' :

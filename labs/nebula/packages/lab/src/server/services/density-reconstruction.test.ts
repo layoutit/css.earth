@@ -3,37 +3,36 @@ import assert from 'node:assert/strict';
 import { mkdtemp, rm, mkdir, writeFile, utimes } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
-import { createHash, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { parseReconstructionRequest, reconstructionCatalogue } from './density-reconstruction.ts';
 import { defaultOverlayPlacement } from '@cssearth/bake/volume';
 import { createStarRemovalJobs } from '../jobs/operation-jobs.ts';
 
 const request = { action: 'apply', subjectId: 'lmc-clouds', imageId: 'horalek-widefield',
-  removalResultId: `${'a'.repeat(64)}.${'b'.repeat(64)}`, placement: defaultOverlayPlacement() };
-test('the catalogue restores the newest completed placement, independent of hash ordering', async () => {
+  removalResultId: 'horalek-widefield', placement: defaultOverlayPlacement() };
+test('the catalogue restores the newest completed placement, independent of name ordering', async () => {
   const root = await mkdtemp(join(tmpdir(), 'nebula-reconstruction-order-'));
-  const hash = (text: string) => createHash('sha256').update(text).digest('hex');
   async function save(path: string, value: unknown) {
-    const text = JSON.stringify(value), full = join(root, path);
-    await mkdir(dirname(full), { recursive: true }); await writeFile(full, text); return hash(text);
+    const full = join(root, path);
+    await mkdir(dirname(full), { recursive: true }); await writeFile(full, JSON.stringify(value));
   }
   try {
-    const source = 'c'.repeat(64), removal = 'd'.repeat(64), overlay = 'labs/nebula/models/lmc/candidates';
+    const overlay = 'labs/nebula/models/lmc/candidates';
     await save('labs/nebula/packages/lab/src/state/subjects.json', [{ id: request.subjectId, density: { overlays: `${overlay}/overlays.json`, processingPlan: 'processing/plan.json' } }]);
-    await save('catalogue.json', { targets: [{ directory: overlay, images: [{ id: request.imageId, label: 'Test', sha256: source }] }] });
-    const alignmentSha = await save('alignment.json', { pass: false });
-    await save('processing/plan.json', { catalogue: 'catalogue.json', alignmentReport: { path: 'alignment.json', sha256: alignmentSha } });
+    await save('catalogue.json', { targets: [{ directory: overlay, images: [{ id: request.imageId, label: 'Test' }] }] });
+    await save('alignment.json', { pass: false });
+    await save('processing/plan.json', { catalogue: 'catalogue.json', alignmentReport: { path: 'alignment.json' } });
     await save(`${overlay}/overlays.json`, { overlays: [{ id: request.imageId, style: { transform: '' } }] });
-    const removalPath = `.local/nebula-lab/star-removal-nox-applied/${removal}`;
-    await save(`${removalPath}/request.json`, { source: { sha256: source } });
-    const removalSha = await save(`${removalPath}/result.json`, { operation: 'apply' });
-    const newest = '1'.repeat(64), oldest = 'f'.repeat(64);
+    const removalPath = `.local/nebula-lab/star-removal-nox-applied/${request.imageId}`;
+    await save(`${removalPath}/request.json`, { imageId: request.imageId });
+    await save(`${removalPath}/result.json`, { operation: 'apply' });
+    const newest = 'lmc-clouds-horalek-widefield', oldest = 'a-lmc-clouds-horalek-widefield-trial';
     for (const id of [newest, oldest]) {
       const directory = `.local/nebula-lab/reconstructions/${id}`;
-      const sha256 = await save(`${directory}/volume.json`, { data: { resources: [] } });
-      await save(`${directory}/object.json`, { id: `reconstruction-${id}`, type: 'density-volume', prepared: { url: 'volume.json', sha256 } });
+      await save(`${directory}/volume.json`, { data: { resources: [] } });
+      await save(`${directory}/object.json`, { id: `reconstruction-${id}`, type: 'density-volume', prepared: { url: 'volume.json' } });
       await save(`${directory}/result.json`, { schema: 'cssearth-nebula-reconstruction@1', resultId: id, imageId: request.imageId,
-        removalResultId: `${removal}.${removalSha}`, placement: { ...request.placement, scale: id === newest ? 2 : 1 },
+        removalResultId: request.imageId, placement: { ...request.placement, scale: id === newest ? 2 : 1 },
         subject: { id: `reconstruction-${id}`, directory } });
       const time = new Date(id === newest ? '2026-09-09' : '2026-09-08');
       await utimes(join(root, directory, 'result.json'), time, time);

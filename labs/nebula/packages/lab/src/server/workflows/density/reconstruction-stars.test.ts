@@ -4,7 +4,6 @@ import test from 'node:test';
 import { prepareReconstructionStars, type ReconstructionStarsInput } from './reconstruction-stars.ts';
 import { mountPreparedLmcStars, type PreparedLmcStars } from '@cssearth/nebula-lab/adapters/viewer/catalogue-stars';
 import { loadVolumeSource, sampleEncoded } from '@cssearth/bake/volume/node';
-import { sha256 } from '@cssearth/core/node';
 import { prepareDensityProjection } from './density-projection.ts';
 
 const path = 'labs/nebula/models/lmc/stars/prepared/stars.json';
@@ -27,9 +26,9 @@ const fixturePromise = (async () => {
 
 test('all 943 stars follow the fixed reference-image fit and occupy the unchanged source density', async () => {
   const { catalogue, input, projection, overlay } = await fixturePromise, before = structuredClone(catalogue);
-  const gridBefore = sha256(input.densitySource.encodedRgba), result = prepareReconstructionStars(catalogue, input);
+  const gridBefore = Buffer.from(input.densitySource.encodedRgba), result = prepareReconstructionStars(catalogue, input);
   assert.equal(result.stars.length, 943); assert.deepEqual(catalogue, before);
-  assert.equal(sha256(input.densitySource.encodedRgba), gridBefore);
+  assert.deepEqual(Buffer.from(input.densitySource.encodedRgba), gridBefore);
   const m = overlay.style.transform.slice(9, -1).split(',').map(Number), w = input.reference.wcs;
   const rad = Math.PI / 180, [a0, d0] = w.referenceValueDeg.map(v => v * rad), angle = w.rotationDeg * rad;
   const distance = Math.hypot(...input.frame.originM) / input.frame.metersPerUnit, encoded: [number, number, number, number] = [0, 0, 0, 0];

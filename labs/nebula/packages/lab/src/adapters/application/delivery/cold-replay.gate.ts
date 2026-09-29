@@ -13,23 +13,21 @@ import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
 import { replayCompactCompiler, readCompactCompiler, replayCompactSampled } from '@cssearth/bake/volume/node';
 import { readCompilerBakeResult } from '@cssearth/bake/volume';
-import { assertReplayScene, replaySha, verifyReplayFiles } from './cold-replay-parity.ts';
+import { assertReplayScene, verifyReplayFiles } from './cold-replay-parity.ts';
 
 const ids = ['m42', 'helix', 'm45', 'm8', 'm1'];
 const isRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const record = (v: unknown): Record<string, unknown> => { assert.ok(isRecord(v)); return v; };
-const pin = (v: unknown): { path: string; sha256: string } => {
+const pin = (v: unknown): { path: string } => {
   const p = record(v);
-  assert.ok(typeof p.path === 'string' && !p.path.startsWith('/') && !p.path.split('/').includes('..'));
-  assert.ok(typeof p.sha256 === 'string' && /^[a-f0-9]{64}$/.test(p.sha256));
-  return { path: p.path, sha256: p.sha256 };
+  assert.ok(typeof p.path === 'string' && !p.path.startsWith('/') && !p.path.split('/').includes('..'), `Invalid compact input path: ${JSON.stringify(v)}`);
+  return { path: p.path };
 };
 async function worker(id: string, source: string): Promise<void> {
   assert.ok(ids.includes(id));
   const root = process.cwd();
-  async function copy(path: string, expected?: string): Promise<Buffer> {
+  async function copy(path: string): Promise<Buffer> {
     const bytes = await readFile(resolve(source, path));
-    if (expected) assert.equal(replaySha(bytes), expected, `Input pin differs: ${path}`);
     await mkdir(dirname(resolve(root, path)), { recursive: true });
     await writeFile(resolve(root, path), bytes);
     return bytes;
@@ -38,18 +36,18 @@ async function worker(id: string, source: string): Promise<void> {
   const delivery: unknown = JSON.parse(await readFile(resolve(source, `src/objects/${id}/source/delivery.json`), 'utf8'));
   const acceptedInput = pin(record(delivery).compactInputs);
   assert.equal(acceptedInput.path, path);
-  const bytes = await copy(path, acceptedInput.sha256);
+  const bytes = await copy(path);
   const value: unknown = JSON.parse(gunzipSync(bytes).toString());
   const model = record(value), expected = readCompilerBakeResult(model.scene);
   if (expected.starSprites) await copy(expected.starSprites.profile.path);
   if (id === 'm1') {
     assert.ok(Array.isArray(model.lenses));
     for (const item of [model.particles, ...model.lenses.map(lens => record(lens).points)]) {
-      const input = pin(item); await copy(input.path, input.sha256);
+      await copy(pin(item).path);
     }
   } else assert.equal(readCompactCompiler(value).objectId, id);
   console.log(`START ${id}: ${expected.lenses.length} lenses; isolated compact inputs ready`);
-  const inputPin = { path, sha256: replaySha(bytes) };
+  const inputPin = { path };
   const result = id === 'm1'
     ? await replayCompactSampled(root, inputPin, 'prepared', nebulaBakeBackend)
     : await replayCompactCompiler(root, inputPin, 'prepared', nebulaBakeBackend);

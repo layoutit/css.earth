@@ -1,5 +1,4 @@
 /** Offline Gaia/Bailer-Jones neighbourhoods in the shared physical volume frame. */
-import { sha256 } from '@cssearth/core/node';
 import { readFile, realpath } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/objects';
@@ -77,7 +76,7 @@ async function readPinned(root: string, inputPin: unknown) {
   const owner = await realpath(root), target = await realpath(resolve(owner, path));
   if (outside(owner, target)) throw new TypeError('Catalogue field source escapes its repository owner.');
   const bytes = await readFile(target);
-  return { input: { path, sha256: sha256(bytes), bytes: bytes.length }, field: parseField(JSON.parse(bytes.toString()) as unknown) };
+  return { input: { path, bytes: bytes.length }, field: parseField(JSON.parse(bytes.toString()) as unknown) };
 }
 
 function direction(raDeg: number, decDeg: number): Vector {

@@ -26,7 +26,7 @@ export function EvidenceFusion({ cataloguePath, observationManifest }: { catalog
 }
 function FusionSession({ catalogue, cataloguePath, observationManifest }: { catalogue: StructureCatalogue; cataloguePath: string; observationManifest?: string }) {
   const matrices = useMemo(() => catalogueMatrices(catalogue, observationManifest), [catalogue, observationManifest]);
-  const key = `nebula:joint-evidence:1:${cataloguePath}:${JSON.stringify(catalogue.images.map(image => [image.id,image.sourceSha256,image.mapSha256,matrices[image.id]]))}`;
+  const key = `nebula:joint-evidence:2:${cataloguePath}:${JSON.stringify(catalogue.images.map(image => [image.id,image.directory,matrices[image.id]]))}`;
   const defaults: FusionRequest['settings'] = { channel: 'ridges', weights: catalogue.images.map(() => 1), sensitivity: 1 };
   const [settings, setSettings] = useState(() => { try { return readFusionSettings(JSON.parse(localStorage.getItem(key) ?? 'null')); } catch { return defaults; } });
   const request = useMemo<FusionRequest>(() => ({ action: 'apply', imageId: 'joint-evidence', cataloguePath, imageToFrame: matrices, settings }), [cataloguePath, matrices, settings]);
@@ -74,7 +74,7 @@ function FusionSession({ catalogue, cataloguePath, observationManifest }: { cata
     } catch (reason) { setSampleError(reason instanceof Error ? reason.message : 'Sample failed.'); }
   }
   const bg = result?.sources.find(s => s.id === background), chosen = result?.[display];
-  const imageUrl = (asset: { path: string; sha256: string }) => `${localFile(asset.path)}?v=${asset.sha256}`;
+  const imageUrl = (asset: { path: string }) => localFile(asset.path);
   return <fieldset className="evidence-fusion-controls" data-result-id={result?.id ?? ''} data-busy={state.busy}>
     <legend>Image and appearance</legend>
     <div className="emission-layer-buttons" role="group" aria-label="Evidence display">

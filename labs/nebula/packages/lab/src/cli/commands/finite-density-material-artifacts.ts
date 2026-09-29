@@ -17,7 +17,8 @@ export async function verifyFiniteMaterialArtifacts(directory:string,expectedId:
   const manifest=parseLabModelJson(await readFile(resolve(directory,'manifest.json'),'utf8'));
   if(manifest.schema!=='cssearth-nebula-reconstruction-artifacts@1'||manifest.id!==expectedId||!manifest.artifacts||typeof manifest.artifacts!=='object'||!manifest.artifacts['object.json']||!manifest.artifacts['prepared/volume.json'])throw Error('Invalid reconstruction artifact manifest');
   for(const[path,value]of Object.entries(manifest.artifacts)){
-    if(!value||typeof value!=='object'||!('sha256'in value)||typeof value.sha256!=='string'||!('bytes'in value)||typeof value.bytes!=='number')throw Error('Invalid artifact pin');
-    const bytes=await sourceBytes(directory,{path});if(bytes.length!==value.bytes)throw Error('Artifact byte length mismatch');
+    if(!value||typeof value!=='object'||Object.keys(value).join()!=='bytes'||!('bytes'in value)||typeof value.bytes!=='number')
+      throw Error(`Artifact manifest of ${expectedId} entry ${path} must record only its byte count`);
+    const bytes=await sourceBytes(directory,{path});if(bytes.length!==value.bytes)throw Error(`Artifact ${path} of ${expectedId} has ${bytes.length} bytes, not ${value.bytes}`);
   }
 }

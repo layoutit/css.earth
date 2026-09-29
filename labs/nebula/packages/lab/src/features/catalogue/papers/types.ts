@@ -9,18 +9,17 @@ export interface Paper {
 }
 export interface PaperPage {
   schema: typeof paperSchema; objectId: string; simbadId: string; retrievedAt: string;
-  query: string; sourceSha256: string; expectedCount: number; papers: Paper[];
+  query: string; source: string; expectedCount: number; papers: Paper[];
 }
 export interface PaperReference {
   objectId: string; simbadId: string; expectedCount: number; count: number;
   status: 'complete' | 'partial' | 'pending' | 'error'; error?: string;
-  path?: string; sha256?: string; bytes?: number;
+  path?: string; bytes?: number;
 }
 export interface PaperIndex {
-  schema: 'cssearth-messier-paper-index@1'; catalogueSha256: string; generatedAt: string;
-  countQuery: string; countSourceSha256: string; objects: PaperReference[];
+  schema: 'cssearth-messier-paper-index@1'; catalogue: string; generatedAt: string;
+  countQuery: string; countSource: string; objects: PaperReference[];
 }
-const hash = (v: unknown): v is string => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
 const text = (v: unknown): v is string => typeof v === 'string';
 const nullableText = (v: unknown): v is string | null => v === null || text(v);
 const count = (v: unknown): v is number => typeof v === 'number' && Number.isSafeInteger(v) && v >= 0;
@@ -36,23 +35,23 @@ export function readPaper(value: unknown): Paper {
 }
 export function readPaperPage(value: unknown): PaperPage {
   if (!record(value) || value.schema !== paperSchema || !id(value.objectId) || !text(value.simbadId) || !matchesId(value.objectId,value.simbadId) ||
-    !date(value.retrievedAt) || !text(value.query) || !hash(value.sourceSha256) || !count(value.expectedCount) || !Array.isArray(value.papers)) throw new TypeError('Invalid paper page.');
+    !date(value.retrievedAt) || !text(value.query) || value.source !== `${paperRoot}/source-${value.objectId}.json.gz` || !count(value.expectedCount) || !Array.isArray(value.papers)) throw new TypeError('Invalid paper page.');
   const papers = value.papers.map(readPaper);
   if (new Set(papers.map(p => p.bibcode)).size !== papers.length) throw new TypeError('Duplicate papers.');
-  return {schema:paperSchema,objectId:value.objectId,simbadId:value.simbadId,retrievedAt:value.retrievedAt,query:value.query,sourceSha256:value.sourceSha256,expectedCount:value.expectedCount,papers};
+  return {schema:paperSchema,objectId:value.objectId,simbadId:value.simbadId,retrievedAt:value.retrievedAt,query:value.query,source:value.source,expectedCount:value.expectedCount,papers};
 }
 export function readPaperIndex(value: unknown): PaperIndex {
-  if (!record(value) || value.schema !== 'cssearth-messier-paper-index@1' || !hash(value.catalogueSha256) || !date(value.generatedAt) ||
-    !text(value.countQuery) || !hash(value.countSourceSha256) || !Array.isArray(value.objects) || value.objects.length !== 110) throw new TypeError('Invalid paper index.');
+  if (!record(value) || value.schema !== 'cssearth-messier-paper-index@1' || !text(value.catalogue) || !date(value.generatedAt) ||
+    !text(value.countQuery) || value.countSource !== `${paperRoot}/counts.json.gz` || !Array.isArray(value.objects) || value.objects.length !== 110) throw new TypeError('Invalid paper index.');
   const objects = value.objects.map((o): PaperReference => {
     if (!record(o) || !id(o.objectId) || !text(o.simbadId) || !matchesId(o.objectId,o.simbadId) || !count(o.expectedCount) || !count(o.count) ||
       !(o.status === 'complete' || o.status === 'partial' || o.status === 'pending' || o.status === 'error') || o.error !== undefined && !text(o.error)) throw new TypeError('Invalid paper reference.');
-    if (o.path !== undefined && (o.path !== `${paperRoot}/${o.objectId}-${o.sha256}.json.gzip` || !hash(o.sha256) || !count(o.bytes) || !o.bytes)) throw new TypeError('Invalid paper artifact.');
+    if (o.path !== undefined && (o.path !== `${paperRoot}/${o.objectId}.json.gzip` || !count(o.bytes) || !o.bytes)) throw new TypeError(`Invalid paper artifact for ${String(o.objectId)}.`);
     if ((o.status === 'complete' || o.status === 'partial') && !o.path || o.status === 'complete' && o.count !== o.expectedCount) throw new TypeError('Incomplete paper reference.');
     return {objectId:o.objectId,simbadId:o.simbadId,expectedCount:o.expectedCount,count:o.count,
       status:o.status,...(text(o.error)?{error:o.error}:{}),
-      ...(text(o.path)&&hash(o.sha256)&&count(o.bytes)?{path:o.path,sha256:o.sha256,bytes:o.bytes}:{})};
+      ...(text(o.path)&&count(o.bytes)?{path:o.path,bytes:o.bytes}:{})};
   });
   if (new Set(objects.map(o=>o.objectId)).size !== 110) throw new TypeError('Duplicate paper targets.');
-  return {schema:'cssearth-messier-paper-index@1',catalogueSha256:value.catalogueSha256,generatedAt:value.generatedAt,countQuery:value.countQuery,countSourceSha256:value.countSourceSha256,objects};
+  return {schema:'cssearth-messier-paper-index@1',catalogue:value.catalogue,generatedAt:value.generatedAt,countQuery:value.countQuery,countSource:value.countSource,objects};
 }

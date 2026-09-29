@@ -3,7 +3,6 @@ import test from 'node:test';
 import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { compilerTarget, loadCompilerImages } from './images.ts';
 import type { CompilerRequest } from '../../../features/compiler/model.ts';
@@ -16,7 +15,7 @@ test('pinned image layers use native rotation, scale, translation and sky offset
     const data = new Uint8Array(width * height * 3);
     for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) data.set(pixel(x, y), (y * width + x) * 3);
     const bytes = await sharp(data, { raw: { width, height, channels: 3 } }).png().toBuffer(), path = `.local/nebula-lab/layers/${name}.png`;
-    await writeFile(join(root, path), bytes); return { path, width, height, sha256: createHash('sha256').update(bytes).digest('hex') };
+    await writeFile(join(root, path), bytes); return { path, width, height };
   }
   const original = await layer('original', 8, 12, (x, y) => [10 * x + 2 * y, 80 + 3 * x + 5 * y, 40 + 2 * x + y]);
   const diffuse = await layer('diffuse', 4, 3, (x, y) => [10 + 17 * x + 2 * y, 20 + 5 * x + 31 * y, 40 + 11 * x + 7 * y]);
@@ -24,7 +23,7 @@ test('pinned image layers use native rotation, scale, translation and sky offset
   const catalogue = { schema: 'cssearth-nebula-observations@1', id: 'test',
     frame: { width: 40, height: 30, fieldArcminutes: [4, 3], centerIcrsDegrees: [10, 0], northUp: true },
     images: ['first', 'second'].map(id => ({ id, label: id, source: { width: 8, height: 12, url: 'https://example.test/original',
-      sha256: original.sha256, credit: 'Synthetic fixture', page: 'https://example.test/source' }, layers: { original, diffuse, stars },
+      credit: 'Synthetic fixture', page: 'https://example.test/source' }, layers: { original, diffuse, stars },
       imageToFrame: [1, 0, 0, 1, 2, 3], registration: { status: 'verified', matchedStars: 10, rmsPixels: .1, maxResidualPixels: .2 } })) };
   await writeFile(join(root, 'observations.json'), JSON.stringify(catalogue));
   const request: CompilerRequest = { action: 'apply', imageId: 'compiler', recipePath: 'labs/nebula/models/test/recipe.json', cataloguePath: '.local/nebula-lab/test/catalogue.json',
@@ -42,26 +41,23 @@ test('pinned image layers use native rotation, scale, translation and sky offset
   // Composite preparation must consume native separation, not the lower-resolution UI layers.
   const nativeDiffuse = await layer('diffuse', 8, 12, (x, y) => [8 + 10 * x + 3 * y, 40 + 5 * x + 7 * y, 10 + 4 * x + y]);
   const nativeStars = await layer('stars', 8, 12, () => [0, 0, 0]);
-  const receipt = Buffer.from(JSON.stringify({ schema: 'cssearth-nox-output@1', sourceSha256: 'normalized-source', nativeDimensions: [8, 12],
-    artifactSha256: { 'diffuse.png': nativeDiffuse.sha256, 'stars.png': nativeStars.sha256 },
-    applied: { verification: { coverageComplete: true, maximumReconstructionErrorCodeValues: 0 } } }));
-  await writeFile(join(root, '.local/nebula-lab/layers/result.json'), receipt);
+  const receipt = { schema: 'cssearth-nox-output@1', nativeDimensions: [nativeDiffuse.width, nativeStars.height],
+    applied: { verification: { coverageComplete: true, maximumReconstructionErrorCodeValues: 0 } } };
+  await writeFile(join(root, '.local/nebula-lab/layers/result.json'), JSON.stringify(receipt));
   const nativeCatalogue = { ...catalogue, images: catalogue.images.map(image => ({ ...image, source: { ...image.source, path: original.path },
-    removal: { settings: { directory: '.local/nebula-lab/layers' }, sourceSha256: 'normalized-source',
-      receiptSha256: createHash('sha256').update(receipt).digest('hex'), diffuseSha256: nativeDiffuse.sha256, residualSha256: nativeStars.sha256 } })) };
+    removal: { settings: { directory: '.local/nebula-lab/layers' } } })) };
   await writeFile(join(root, 'native-observations.json'), JSON.stringify(nativeCatalogue));
   const nativeImages = await loadCompilerImages(root, 'native-observations.json', request, [10, .01], true);
   assert.equal(nativeImages.images[0].diffuse.width, 8); assert.equal(nativeImages.images[0].diffuse.height, 12);
   assert.ok(nativeImages.images[0].sampleRgb(-30, 3, rgb)); assert.deepEqual(rgb, [61.5, 119, 29.5]);
   assert.deepEqual(nativeImages.images[0].pixelToSky(3, 10), sky);
-  nativeCatalogue.images[0].removal.diffuseSha256 = '0'.repeat(64);
-  await writeFile(join(root, 'native-observations.json'), JSON.stringify(nativeCatalogue));
-  await assert.rejects(loadCompilerImages(root, 'native-observations.json', request, [10, .01], true), /separation pins differ/);
+  await writeFile(join(root, '.local/nebula-lab/layers/result.json'), JSON.stringify({ ...receipt, nativeDimensions: [4, 3] }));
+  await assert.rejects(loadCompilerImages(root, 'native-observations.json', request, [10, .01], true), /first: separation grid \[4,3\] differs/);
 });
 
 function targetInputs(): EvidenceInputs {
   const width = 12, height = 8, pixels = width * height;
-  const sources: EvidenceSource[] = ['a', 'b'].map(id => ({ id, label: id, sourceSha256: 'a'.repeat(64), mapSha256: 'b'.repeat(64), sourcePanelSha256: 'c'.repeat(64),
+  const sources: EvidenceSource[] = ['a', 'b'].map(id => ({ id, label: id, mapDirectory: `.local/nebula-lab/structures/${id}`, sourcePanel: 'source.png',
     imageToFrame: [1, 0, 0, 1, 0, 0], workingWidth: width, workingHeight: height, registeredRgba: new Uint8Array(pixels * 4), footprint: new Uint8Array(pixels),
     channels: { broad: { signal: new Float32Array(pixels), coverage: new Uint8Array(pixels), noiseSigma: 1 },
       ridges: { signal: new Float32Array(pixels), coverage: new Uint8Array(pixels), noiseSigma: 1 }, compact: { signal: new Float32Array(pixels), coverage: new Uint8Array(pixels), noiseSigma: 1 } },

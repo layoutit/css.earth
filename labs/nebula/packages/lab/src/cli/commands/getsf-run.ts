@@ -4,7 +4,7 @@ import { spawn } from 'node:child_process';
 import { createWriteStream } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { digest } from '@cssearth/nebula-reconstruction/methods/getsf/benchmark-products';
+import { access, constants } from 'node:fs/promises';
 import { prepareGetSfBenchmark, type GetSfInput } from '../../server/workflows/density/getsf.ts';
 import { collectGetSfBenchmark } from '../../server/workflows/density/getsf-collect.ts';
 
@@ -16,10 +16,11 @@ if (!recipe.getsf) throw new Error('The benchmark recipe must declare getsf morp
 const binary = resolve(executablePath), bin = dirname(binary), installationRoot = dirname(bin);
 const installationReceiptPath = resolve(installationRoot, 'install-receipt.json');
 const installation = parseLabModelJson(await readFile(installationReceiptPath, 'utf8'));
-if (digest(await readFile(binary)) !== installation.binaries.getsf)
-  throw new Error('getsf executable differs from its pinned installation receipt.');
+if (!Array.isArray(installation.binaries) || !installation.binaries.includes('getsf'))
+  throw new Error(`${installationReceiptPath} does not list the getsf executable it installed.`);
+await access(binary, constants.X_OK);
 const input: GetSfInput = {
-  ...recipe.getsf, imagePath: resolve(recipe.input.path), imageSha256: recipe.input.sha256,
+  ...recipe.getsf, imagePath: resolve(recipe.input.path),
   width: recipe.input.width, height: recipe.input.height, workDirectory: resolve(workPath),
 };
 await prepareGetSfBenchmark(input);

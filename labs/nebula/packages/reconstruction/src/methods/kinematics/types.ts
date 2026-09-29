@@ -2,7 +2,7 @@ export interface KinematicParameters { radiusArcsec: number; inclinationDegrees:
 export interface CalibrationAnchor { pixel: number; value: number }
 export interface SlitEvidence {
   schema: 'cssearth-slit-evidence@1'; id: string; title: string;
-  citation: { label: string; url: string; pdfUrl: string; sourceUrl: string; sourceArchiveSha256: string; member: string; memberSha256: string; figureSha256: string };
+  citation: { label: string; url: string; pdfUrl: string; sourceUrl: string; member: string };
   figure: { width: number; height: number; cachePath: string; extraction: string; pixelConvention: string;
     offsetCalibration: [CalibrationAnchor, CalibrationAnchor]; velocityCalibration: [CalibrationAnchor, CalibrationAnchor];
     readoutUncertaintyPixels: number; readoutNote: string };
@@ -15,7 +15,8 @@ export interface SlitEvidence {
 }
 export interface VelocityPoint { id: string; offsetArcsec: number; heliocentricKmS: number; relativeKmS: number; cx: number; cy: number }
 export interface PreparedKinematics {
-  schema: 'cssearth-kinematics-comparison@1'; evidenceSha256: string; evidence: SlitEvidence; parameters: KinematicParameters;
+  /** The model recipe the slit evidence was read from. */
+  schema: 'cssearth-kinematics-comparison@1'; evidenceSource: string; evidence: SlitEvidence; parameters: KinematicParameters;
   chart: { width: number; height: number; left: number; right: number; top: number; bottom: number;
     xTicks: { value: number; position: number }[]; yTicks: { value: number; position: number }[];
     systemicBandTop: number; systemicBandHeight: number; zeroY: number; zeroX: number;

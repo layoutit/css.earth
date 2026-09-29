@@ -4,7 +4,9 @@ import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import { sourceTest } from '../../objects/source-test.mts';
 const test = sourceTest();
+import ts from 'typescript';
 import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
+import { hash as volumeResourceDigest } from '@cssearth/bake/volume/node';
 import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/bake/volume';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
@@ -36,6 +38,34 @@ test('sanitizeVolumeProvenance leaves provenance without a staging path untouche
   assert.equal(sanitizeVolumeProvenance(lookalike), lookalike);
 });
 
+test('every volume the nebula delivery validates is sanitized, and an explicit bake records the sanitizer', async () => {
+  const path = 'packages/bake/src/nebula/objects.ts', source = await readFile(resolve(root, path), 'utf8');
+  const file = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true);
+  let validated = 0, sanitized = 0;
+  const visit = (node: ts.Node): void => {
+    if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === 'validatePreparedCssVolume') {
+      validated++;
+      const parent = node.parent;
+      if (ts.isCallExpression(parent) && ts.isIdentifier(parent.expression) && parent.expression.text === 'sanitizeVolumeProvenance' &&
+        parent.arguments.length === 1 && parent.arguments[0] === node) sanitized++;
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(file);
+  assert.ok(validated > 0, 'the delivery validates at least one prepared volume');
+  assert.equal(sanitized, validated, 'each validated volume passes straight through sanitizeVolumeProvenance');
+  // `--if-missing` is a consumer path: it reuses an installed bank whose files are all present, without rebaking.
+  assert.match(source, /installed\(directory\)/);
+});
+
+test('a prepared m1 lens bank, if baked locally, records no process-pid staging directory', async () => {
+  const path = resolve(root, 'src/objects/m1/prepared/lenses.json');
+  let bytes: string;
+  try { bytes = await readFile(path, 'utf8'); }
+  catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return; throw error; }
+  assert.doesNotMatch(bytes, /\.prepared-\d+(?=[\\/])/, 'A bake must never record its own staging directory name in committed-shaped provenance.');
+});
+
 test('the real installer rejects post-compiler field stars before replacing the delivered package', async t => {
   await mkdir(resolve(root, 'output'), { recursive: true });
   const directory = await mkdtemp(resolve(root, 'output/nebula-budget-install-'));
@@ -63,7 +93,7 @@ test('the real installer rejects post-compiler field stars before replacing the 
     provenance: {}, approximation: {}, stacks: axes.map(axis => ({ axis, leaves: [{ id: `${axis}-0`,
       centerUnits: [0, 0, 0], texturePath: `${axis}.png`, widthPx: 1, heightPx: 1,
       style: { width: '1px', height: '1px', transform: transforms[axis], backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-    resources: axes.map(axis => ({ path: `${axis}.png`, bytes: texture.length, width: 1, height: 1 })) };
+    resources: axes.map(axis => ({ path: `${axis}.png`, sha256: volumeResourceDigest(texture), bytes: texture.length, width: 1, height: 1 })) };
   const volumePin = await save('volume.json', volume);
   // Explicit synthetic fixture row: the real catalogue-field owner adds it after compiler admission.
   const fieldStars = await save('field.json', { schema: 'cssearth-gaia-nebula-field@1', id: 'budget-fixture', coordinateEpochJulianYear: 2016,
@@ -75,11 +105,11 @@ test('the real installer rejects post-compiler field stars before replacing the 
     request, inputPins: [], sky: { centerIcrsDegrees: [0, 0], distancePc: 1, imageRotationDegrees: 0, arcsecPerUnit: 1 },
     sourceUrl: 'https://example.org/fixture', description: 'Synthetic installer regression', defaultLens: 'first',
     framingRadiusUnits: 1, acceptedLabResult: 'fixture', attachedTo: 'sun', fieldStars });
-  const scene: CompilerBakeResult = { schema: 'cssearth-compiler-bake@1', id: 'fixture', frame,
+  const scene: CompilerBakeResult = { schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity: 'fixture', frame,
     boundsArcsec: { min: [-1, -1, -1], max: [1, 1, 1] }, skyBoundsArcsec: { min: [-1, -1], max: [1, 1] }, spanArcsec: 2, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: [0, 0, 0], earthView: 'observer-at-negative-z-looking-away' },
     neutral: volumePin, lenses: [{ id: 'first', label: 'First', volume: volumePin,
-      coverage: { positiveAlphaTexels: 3, recoloredTexels: 3, outsideImageTexels: 0 } }], stars: [],
+      coverage: { positiveAlphaTexels: 3, recoloredTexels: 3, outsideImageTexels: 0 } }], stars: [], alphaSha256: 'b'.repeat(64),
     sampling: { imageWidth: 512, samplesPerSlab: 4, sliceCounts: { x: 1, y: 1, z: 1 },
       renderBudget: createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, 0, 3) } };
   const backend: NebulaResearchBackend = {

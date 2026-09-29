@@ -1,6 +1,5 @@
-import { createHash } from 'node:crypto';
 import { readFile, realpath } from 'node:fs/promises';
-import { basename, isAbsolute, resolve, sep } from 'node:path';
+import { basename, isAbsolute, relative, resolve, sep } from 'node:path';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Plugin } from 'vite';
 import { prepareKinematicsComparison } from '@cssearth/nebula-reconstruction/methods/kinematics/forward-model';
@@ -14,7 +13,7 @@ export async function loadKinematicEvidence(root: string, sourcePath: string) {
   if (!path.startsWith(directory + sep)) throw new TypeError('Source is outside the model directory.');
   const bytes = await readFile(path);
   if (bytes.byteLength > 262144) throw new TypeError('Slit evidence is too large.');
-  return { evidence: readSlitEvidence(JSON.parse(bytes.toString()) as unknown), evidenceSha256: createHash('sha256').update(bytes).digest('hex') };
+  return { evidence: readSlitEvidence(JSON.parse(bytes.toString()) as unknown), evidenceSource: relative(await realpath(root), path).split(sep).join('/') };
 }
 async function readBody(request: IncomingMessage): Promise<unknown> {
   const chunks: Buffer[] = []; let length = 0;
@@ -33,18 +32,17 @@ export function createKinematicsHandler(root: string) {
       const body = request.method === 'POST' ? record(await readBody(request)) : null;
       const sourcePath = body ? body.sourcePath : query.get('source');
       if (typeof sourcePath !== 'string') throw new TypeError('Missing slit source.');
-      const { evidence, evidenceSha256 } = await loadKinematicEvidence(root, sourcePath);
+      const { evidence, evidenceSource } = await loadKinematicEvidence(root, sourcePath);
       if (!body && query.get('figure') === '1') {
         const base = await realpath(resolve(root, '.local/nebula-lab/kinematics'));
         const figurePath = await realpath(resolve(root, evidence.figure.cachePath));
         if (!figurePath.startsWith(base + sep)) throw new TypeError('Figure lies outside the prepared kinematics cache.');
         const bytes = await readFile(figurePath);
-        if (createHash('sha256').update(bytes).digest('hex') !== evidence.citation.figureSha256) throw new TypeError('Published figure checksum changed.');
         response.setHeader('content-type', 'image/jpeg'); response.end(bytes); return;
       }
       const parameters = body ? readKinematicParameters(body.parameters) : evidence.defaults;
       if (parameters.radiusArcsec !== evidence.defaults.radiusArcsec) throw new TypeError('This comparison retains its source-pinned projected radius.');
-      const prepared = prepareKinematicsComparison(evidence, parameters, evidenceSha256);
+      const prepared = prepareKinematicsComparison(evidence, parameters, evidenceSource);
       response.setHeader('content-type', 'application/json'); response.end(JSON.stringify(prepared));
     } catch (error) {
       response.statusCode = 400; response.setHeader('content-type', 'application/json');

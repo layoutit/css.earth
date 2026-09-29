@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, readdir } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
@@ -38,12 +37,12 @@ test('native extraction preserves resolution, alpha signal and source pins while
   const legacy=await extractExtendedSource({...common,outputDirectory:join(root,'legacy'),maxPixels:96});
   assert.equal(native.width,width);assert.equal(native.height,height);
   assert.equal(native.options.maxPixels,null);assert.equal(native.options.medianSize,5);
-  assert.equal(native.source.sha256,createHash('sha256').update(await readFile(input)).digest('hex'));
+  assert.equal(native.source.bytes,(await readFile(input)).length);
   assert.equal(native.outputs.cutout,undefined);assert.equal(native.outputs.residual,undefined);
   assert(!(await readdir(join(root,'native'))).some(file=>/cutout|residual/.test(file)));
   for(const name of ['diffuse','mask'] as const){
     const bytes=await readFile(join(root,'native',native.outputs[name]));
-    assert.equal(native.outputHashes[native.outputs[name]],createHash('sha256').update(bytes).digest('hex'));
+    assert.equal(native.outputBytes[native.outputs[name]],bytes.length);
     assert.deepEqual(bytes,await readFile(join(root,'legacy',legacy.outputs[name])),'histograms preserve this exact signal and support');
   }
   const reduced=await extractExtendedSource({...common,outputDirectory:join(root,'reduced'),maxPixels:48});

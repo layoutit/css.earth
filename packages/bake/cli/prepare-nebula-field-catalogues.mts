@@ -1,4 +1,4 @@
-/** Bounded, source-pinned Gaia DR3/Bailer-Jones stellar neighbourhood intake. */
+/** Bounded Gaia DR3/Bailer-Jones stellar neighbourhood intake, recorded by its archive query. */
 import { readFile, writeFile, mkdir, rename, stat } from 'node:fs/promises';
 
 const arguments_=process.argv.slice(2), magnitudeOptions=arguments_.filter(value=>value.startsWith('--magnitude-limit='));
@@ -26,27 +26,27 @@ function numeric(v:string|undefined, nullable=false): number|null {
 }
 const endpoint='https://dc.zah.uni-heidelberg.de/tap/async';
 const absent = (error:unknown) => error instanceof Error && 'code' in error && error.code==='ENOENT';
-/** A cached answer, named by its object and request, is reused only for the very query it answered (kept beside it). */
-async function cachedAnswer(cache:string, query:string): Promise<Buffer|null> {
+/** A cached archive answer is reused only for the query saved beside it; any other query fetches again. */
+async function cachedAnswer(cache:string, query:string) {
   try {
     const saved:unknown=JSON.parse(await readFile(`${cache}.query.json`,'utf8'));
     if(!saved || typeof saved!=='object' || !('query' in saved) || saved.query!==query) return null;
     return await readFile(cache);
-  } catch(error) { if(absent(error)) return null; throw error; }
+  } catch(error) {if(absent(error)) return null;throw error;}
 }
-async function keepAnswer(cache:string, query:string, bytes:Buffer) {
+async function saveAnswer(cache:string, query:string, bytes:Buffer) {
   await writeFile(`${cache}.pending`,bytes);await rename(`${cache}.pending`,cache);
   await writeFile(`${cache}.query.json`,JSON.stringify({query},null,2)+'\n');
 }
 async function acquire(id:string, query:string, limit:number, expectedColumns:readonly string[]=columns) {
   const cache=`.local/nebula-lab/stellar-fields/${id}.csv`, jobPath=`${cache}.job.json`;
-  const cached=await cachedAnswer(cache,query);
-  if(cached) return {bytes:cached,cache,retrievedAt:(await stat(cache)).mtime.toISOString(),jobUrl:null};
-  // A job submitted for this very query is resumed; one for another query is left behind.
-  const saved:unknown=await readFile(jobPath,'utf8').then(text=>JSON.parse(text) as unknown,(error:unknown)=>{if(absent(error))return null;throw error;});
-  let jobUrl:string;
-  if(saved && typeof saved==='object' && 'query' in saved && saved.query===query && 'jobUrl' in saved && typeof saved.jobUrl==='string') jobUrl=saved.jobUrl;
-  else {
+  const saved=await cachedAnswer(cache,query);
+  if(saved) return {bytes:saved,cache,retrievedAt:(await stat(cache)).mtime.toISOString(),jobUrl:null};
+  // A submitted job is resumed only for the same query; a job file for another query is replaced by a new submission.
+  const savedJob:unknown=await readFile(jobPath,'utf8').then(text=>JSON.parse(text),(error:unknown)=>{if(absent(error)) return null;throw error;});
+  let jobUrl=savedJob && typeof savedJob==='object' && 'query' in savedJob && savedJob.query===query && 'jobUrl' in savedJob &&
+    typeof savedJob.jobUrl==='string' ? savedJob.jobUrl : null;
+  if(jobUrl===null) {
     const response=await fetch(endpoint,{method:'POST',redirect:'manual',signal:AbortSignal.timeout(30000),
       body:new URLSearchParams({REQUEST:'doQuery',LANG:'ADQL',FORMAT:'csv',MAXREC:String(limit),QUERY:query})});
     const location=response.headers.get('location');
@@ -75,7 +75,7 @@ async function acquire(id:string, query:string, limit:number, expectedColumns:re
       if(!result.ok) throw new Error(`${id}: TAP result HTTP ${result.status}: ${(await result.text()).slice(0,2000)}`);
       const bytes=Buffer.from(await result.arrayBuffer());
       if(!bytes.toString().startsWith(expectedColumns.join(','))) throw new Error(`${id}: TAP did not return the requested CSV: ${bytes.toString().slice(0,2000)}`);
-      await keepAnswer(cache,query,bytes);
+      await saveAnswer(cache,query,bytes);
       return {bytes,cache,retrievedAt:new Date().toISOString(),jobUrl};
     }
     if(phase==='ERROR' || phase==='ABORTED') {
@@ -102,7 +102,7 @@ async function acquireDistances(id:string, query:string, limit:number) {
     if(!response.ok) throw new Error(`${id}: indexed distance lookup HTTP ${response.status}: ${(await response.text()).slice(0,2000)}`);
     bytes=Buffer.from(await response.arrayBuffer());
     csvRows(bytes,['source_id','r_med_geo','r_lo_geo','r_hi_geo']);
-    await keepAnswer(cache,query,bytes);
+    await saveAnswer(cache,query,bytes);
   }
   return {bytes,cache,retrievedAt:(await stat(cache)).mtime.toISOString(),queryUrl:'https://dc.zah.uni-heidelberg.de/tap/sync',query};
 }
@@ -117,7 +117,7 @@ async function acquireInTwoStages(id:string, query:string, gaiaColumns:readonly 
   const batchSize=1000;
   for(let offset=0;offset<sourceIds.length;offset+=batchSize) {
     const requests=[sourceIds.slice(offset,offset+batchSize)];
-    const results=await Promise.allSettled(requests.map(batch=>acquireDistances(`${id}-distance-${String(offset/batchSize).padStart(3,'0')}`,
+    const results=await Promise.allSettled(requests.map(batch=>acquireDistances(`${id}-distance-${offset/batchSize+1}`,
       `SELECT source_id,r_med_geo,r_lo_geo,r_hi_geo FROM gedr3dist.main WHERE source_id IN (${batch.join(',')})`,batch.length)));
     for(const result of results) {
       if(result.status==='rejected') throw result.reason;
@@ -130,8 +130,7 @@ async function acquireInTwoStages(id:string, query:string, gaiaColumns:readonly 
   const matched=rows.flatMap(row=>{const distance=distances.get(row[0]!);return distance?[[...row,...distance].join(',')]:[];});
   const bytes=Buffer.from([columns.join(','),...matched,''].join('\n'));
   const cache=`.local/nebula-lab/stellar-fields/${id}-joined.csv`;
-  const existing=await readFile(cache).catch((error:unknown)=>{if(absent(error))return null;throw error;});
-  if(!existing?.equals(bytes)) await writeFile(cache,bytes);
+  await writeFile(`${cache}.pending`,bytes);await rename(`${cache}.pending`,cache);
   return {bytes,cache,retrievedAt:gaia.retrievedAt,jobUrl:gaia.jobUrl,acquisitions,candidateRows:rows.length,
     candidateLimit,candidateTruncated:rows.length===candidateLimit,missingDistances:rows.length-matched.length};
 }
@@ -237,7 +236,7 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
       ...(previousImageAnchors===undefined?{}:{imageAnchors:previousImageAnchors}),
       retainedSources:previousRetainedSources!==undefined?previousRetainedSources:id==='m45'?'Eight explicitly named major HIP stars retained from the existing scene because Gaia may omit saturated bright sources. Their existing depths remain inferred; they are not Bailer-Jones catalogue distances.':id==='m1'?'The explicitly named Crab pulsar retains its prior scene placement; surrounding Gaia field rows use Bailer-Jones median distances.':null}};
   const path=`src/objects/${id}/source/stellar-field.json`, text=JSON.stringify(field,null,2)+'\n';await writeFile(path,text);
-  console.log(JSON.stringify({id,stars:stars.length,radiusPc:radius,queryRows:lines.length,truncated:twoStage?truncated:lines.length===limit,path,bytes:Buffer.byteLength(text)}));
+  console.log(JSON.stringify({id,stars:stars.length,radiusPc:radius,queryRows:lines.length,truncated:twoStage?truncated:lines.length===limit,path,bytes:text.length}));
 }
 // Three independent staged object acquisitions; each has only one active archive request.
 const concurrency=twoStage?3:2;

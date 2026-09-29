@@ -23,11 +23,11 @@ test('sampled final scene prepares every spectral star color after merging mater
   const neutralStars: PreparedCompilerStar[] = sourceStars.map(({ positionArcsec, materials: _materials, ...star }) => ({ ...star,
     positionUnits: [positionArcsec[0] - origin[0], positionArcsec[1] - origin[1], positionArcsec[2] - origin[2]] }));
   const sprites = await prepareCompilerStarSprites(root, 'neutral', neutralStars);
-  const registered = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity: 'a'.repeat(64), frame, boundsArcsec,
+  const registered = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity: 'fixture-field', frame, boundsArcsec,
     skyBoundsArcsec: { min: [10, 20], max: [14, 24] }, spanArcsec: 4, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' },
-    neutral: { path: 'registered/neutral/volume.json', sha256: 'b'.repeat(64) }, alphaSha256: 'c'.repeat(64),
-    lenses: ['radio', 'optical'].map(id => ({ id, label: id, volume: { path: `registered/${id}/volume.json`, sha256: 'd'.repeat(64) },
+    neutral: { path: 'registered/neutral/volume.json' }, alphaSha256: 'c'.repeat(64),
+    lenses: ['radio', 'optical'].map(id => ({ id, label: id, volume: { path: `registered/${id}/volume.json` },
       alphaSha256: 'e'.repeat(64), coverage: { positiveAlphaTexels: 1, recoloredTexels: 1, outsideImageTexels: 0 } })),
     stars: neutralStars, ...sprites, sampling: { sliceCounts: { x: 2, y: 2, z: 2 }, imageWidth: 512, samplesPerSlab: 4 } });
   assert.ok(registered.starSprites);

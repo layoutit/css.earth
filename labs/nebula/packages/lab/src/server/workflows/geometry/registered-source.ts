@@ -1,11 +1,9 @@
 /** One guarded registered-image boundary shared by detection and shape preview jobs. */
-import { createHash } from 'node:crypto';
 import { readFile, realpath } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { readStructureCatalogue, readReviewMap } from '../../../features/observations/models/structures-model.ts';
-import { geometryRecord as record, geometryHash, geometryLocalPath } from '../../../features/geometry/jobs-model.ts';
+import { geometryRecord as record, geometryLocalPath } from '../../../features/geometry/jobs-model.ts';
 
-export const geometrySha = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 export async function readGeometryLocal(root: string, path: string): Promise<Buffer> {
   if (!geometryLocalPath(path)) throw new TypeError('Invalid local registered resource.');
   const actual = await realpath(resolve(root, path)), offset = relative(await realpath(root), actual);
@@ -26,8 +24,8 @@ export async function readRegisteredGeometrySource(root: string, cataloguePath: 
   readReviewMap(raw, image);
   if (!record(raw) || !Array.isArray(raw.panels)) throw new TypeError('Registered source panel is missing.');
   const panel = raw.panels.find(item => record(item) && item.id === 'source');
-  if (!record(panel) || typeof panel.file !== 'string' || !geometryHash(panel.sha256)) throw new TypeError('Registered source panel identity is missing.');
-  const source = { path: `${image.directory}/${panel.file}`, sha256: panel.sha256 };
+  if (!record(panel) || typeof panel.file !== 'string') throw new TypeError(`Structure map ${image.directory}/map.json names no source panel file.`);
+  const source = { path: `${image.directory}/${panel.file}` };
   const bytes = await readGeometryPin(root, source);
   return { image, source, bytes };
 }

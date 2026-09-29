@@ -6,7 +6,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, stat } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { parsePreparedLmcStars, type PreparedLmcStars, rayToOverlayPlane, overlayCorners, type ImageWcs, registeredOverlayCorners, type ImageRegistration } from '@cssearth/bake/volume';
 import { loadFiniteModelStarContext, finiteModelDirectory, type FiniteModelStarContext } from './finite-model-star-context.ts';
@@ -132,7 +131,7 @@ test('the joint CDF guards reject rays without emission or density and never bri
     /Invalid catalogue star id prefix/);
 });
 
-test('the model-owned index is what lens discovery attaches, and it is pinned to these bytes and this subject', { skip }, async () => {
+test('the model-owned index is what lens discovery attaches, and it names this layer and this subject', { skip }, async () => {
   const context = (await contextPromise)!;
   const subjectId = await finiteModelSubjectId(root, context.modelResultId);
   const indexPath = finiteModelStarsIndex(context.modelResultId);
@@ -141,7 +140,7 @@ test('the model-owned index is what lens discovery attaches, and it is pinned to
   assert.equal(index.modelResultId, context.modelResultId);
   assert.equal(index.subjectId, subjectId);
   assert.equal(index.stars.path, prepared);
-  assert.equal(index.stars.sha256, createHash('sha256').update(await readFile(prepared)).digest('hex'));
+  assert.deepEqual(index.stars, { path: prepared });
   // The real discovery path: the lab attaches this layer to every lens of the model.
   assert.equal(await finiteModelStarsPath(root, subjectId, context.modelResultId), prepared);
   // Mutation proof: the index belongs to one subject and one model; a foreign owner is refused, never attached.

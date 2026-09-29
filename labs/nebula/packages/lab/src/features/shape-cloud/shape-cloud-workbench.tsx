@@ -44,7 +44,7 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
   mode: ShapeCloudMode; stageMode: Exclude<ShapeCloudMode, 'structure'>; setMode(value: ShapeCloudMode): void; view: CloudView; setView(value: CloudView): void;
 }) {
   const state = useShapeCloudState(image, geometry, cataloguePath, initialQuality, preset), { settings, result } = state;
-  const selectionKey = `nebula:shape-cloud-selection:1:${cataloguePath}:${image.id}:${image.sourceSha256}:${image.mapSha256}:${image.geometry?.sha256}${preset ? `:fit:${preset.id}` : ''}`;
+  const selectionKey = `nebula:shape-cloud-selection:2:${cataloguePath}:${image.id}:${image.directory}:${image.geometry?.file}${preset ? `:fit:${preset.id}` : ''}`;
   const [scope, setScope] = useState<EditScope>('selected'), [selectedId, selectId] = useState(() => {
     try { return localStorage.getItem(selectionKey) ?? ''; } catch { return ''; }
   });
@@ -55,11 +55,11 @@ function Session({ image, geometry, cataloguePath, host, matrix, frame, onDetect
   const [hoveredId, setHoveredId] = useState(''), [formula, setFormula] = useState<string | null>(null), [formulaError, setFormulaError] = useState('');
   const [channel, setChannel] = useState<ComparisonChannel>('luminosity'), [level, setLevel] = useState(0);
   const [comparisonView, setComparisonView] = useState(earthComparisonView);
-  useEffect(() => { setBeforeSolo(null); setFormula(null); setFormulaError(''); setHoveredId(''); }, [image.geometry?.sha256, preset?.id]);
+  useEffect(() => { setBeforeSolo(null); setFormula(null); setFormulaError(''); setHoveredId(''); }, [image.geometry?.file, preset?.id]);
   const selected = settings.components.find(item => item.id === selectedId) ?? settings.components[0];
   const workingMatrix = useMemo<Matrix>(() => [matrix[0] * image.nativeWidth / image.width, matrix[1] * image.nativeWidth / image.width,
     matrix[2] * image.nativeHeight / image.height, matrix[3] * image.nativeHeight / image.height, matrix[4], matrix[5]], [matrix, image]);
-  const source = `${localFile(result?.source.path ?? `${image.directory}/source.png`)}?v=${result?.source.sha256 ?? image.mapSha256}`;
+  const source = localFile(result?.source.path ?? `${image.directory}/source.png`);
   function edit(field: NumericField, value: number) {
     if (selected) state.edit(editShapeComponents(settings, selected, scope, field, value));
   }

@@ -1,5 +1,4 @@
 /** Discover metadata only. Resumable snapshots never download or bake scientific imagery. */
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { archiveProviders, readArchiveQuery, readMessierCatalogue, readMessierInventory, type ArchiveProvider, type MessierInventory } from '../../../features/catalogue/types.ts';
@@ -14,22 +13,22 @@ const providers = args.filter(a => a.startsWith('--provider=')).map(a => a.slice
 const maxRecords = Number(args.find(a => a.startsWith('--max-records='))?.slice(14) ?? 2000);
 if (!Number.isSafeInteger(maxRecords) || maxRecords < 1 || maxRecords > 20000) throw new TypeError('max-records must be 1–20000 per object/archive.');
 const cataloguePath = 'labs/nebula/models/messier/catalogue.json', bytes = await readFile(resolve(root, cataloguePath));
-const catalogue = readMessierCatalogue(JSON.parse(bytes.toString())), catalogueSha256 = createHash('sha256').update(bytes).digest('hex');
+const catalogue = readMessierCatalogue(JSON.parse(bytes.toString()));
 const directory = resolve(root, '.local/nebula-lab/catalogue/messier');
 await mkdir(directory, { recursive: true });
 await mkdir(resolve(directory, 'queries'), { recursive: true });
 const indexPath = resolve(directory, 'index.json');
-let inventory: MessierInventory = { schema: 'cssearth-messier-inventory@1', generatedAt: new Date().toISOString(), catalogueSha256,
+let inventory: MessierInventory = { schema: 'cssearth-messier-inventory@1', generatedAt: new Date().toISOString(), catalogue: cataloguePath,
   policy: inventoryPolicy, targets: catalogue.objects.map(object => ({ objectId: object.id, queries: archiveProviders.map(p => pendingQuery(p, object)) })) };
 try {
   const saved = readMessierInventory(JSON.parse(await readFile(indexPath, 'utf8')));
-  if (saved.catalogueSha256 === catalogueSha256 && saved.policy === inventoryPolicy) {
+  if (saved.catalogue === cataloguePath && saved.policy === inventoryPolicy) {
     for (const target of saved.targets) for (let index = 0; index < target.queries.length; index++) {
       const query = target.queries[index]!;
       if (!query.imagesPath) continue;
-      const content = await readFile(resolve(root, query.imagesPath));
-      if (createHash('sha256').update(content).digest('hex') !== query.imagesSha256) throw new Error('Cached archive query hash mismatch.');
-      target.queries[index] = readArchiveQuery(JSON.parse(content.toString()));
+      const content = await readFile(resolve(root, query.imagesPath)), page = readArchiveQuery(JSON.parse(content.toString()));
+      if (page.provider !== query.provider || page.images.length !== query.imageCount) throw new Error(`Cached archive page ${query.imagesPath} does not match its index entry.`);
+      target.queries[index] = page;
     }
     delete saved.storage; inventory = saved;
   }
@@ -44,21 +43,20 @@ function save() {
   const snapshot: MessierInventory = { ...inventory, storage: inventoryStorage(inventory), targets: inventory.targets.map(target => ({ ...target,
     queries: target.queries.map(query => {
       const file = files.find(f => f.query === query); return file ? { ...query, images: [], imageCount: query.images.length,
-        imagesPath: file.path, imagesSha256: createHash('sha256').update(file.contents).digest('hex') } : query;
+        imagesPath: file.path } : query;
     }),
   })) };
   writing = writing.then(async () => {
-    // Write each changed page first, then atomically replace its index. Readers verify the page hash.
+    // Write each changed page first, then atomically replace its index. Readers check each page's provider and count.
     for (const file of files) {
-      const digest = createHash('sha256').update(file.contents).digest('hex');
-      if (writtenHashes.get(file.path) === digest) continue;
-      const path = resolve(root, file.path); await writeFile(`${path}.tmp`, file.contents); await rename(`${path}.tmp`, path); writtenHashes.set(file.path, digest);
+      if (writtenPages.get(file.path) === file.contents) continue;
+      const path = resolve(root, file.path); await writeFile(`${path}.tmp`, file.contents); await rename(`${path}.tmp`, path); writtenPages.set(file.path, file.contents);
     }
     const temporary = `${indexPath}.tmp`; await writeFile(temporary, JSON.stringify(snapshot)); await rename(temporary, indexPath);
   });
   return writing;
 }
-const writtenHashes = new Map<string, string>();
+const writtenPages = new Map<string, string>();
 await save();
 const controller = new AbortController();
 process.once('SIGINT', () => controller.abort()); process.once('SIGTERM', () => controller.abort());
@@ -78,7 +76,7 @@ await Promise.all(archiveProviders.filter(p => !providers.length || providers.in
 }));
 await writing;
 const verified = readMessierInventory(JSON.parse(await readFile(indexPath, 'utf8'))), storage = inventoryStorage(verified);
-await writeFile(resolve(directory, 'summary.json'), `${JSON.stringify({ generatedAt: verified.generatedAt, catalogueSha256,
+await writeFile(resolve(directory, 'summary.json'), `${JSON.stringify({ generatedAt: verified.generatedAt, catalogue: cataloguePath,
   policy: verified.policy, ...storage, indexBytes: (await readFile(indexPath)).byteLength }, null, 2)}\n`);
 console.log(`MESSIER_INVENTORY_SAVED ${JSON.stringify(storage)}`);
 // Partial/error receipts are useful evidence, but must not masquerade as successful queries.

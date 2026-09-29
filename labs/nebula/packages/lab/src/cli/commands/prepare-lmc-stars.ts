@@ -2,7 +2,6 @@ import {sampleJointDepth as sampleDepth} from '@cssearth/nebula-reconstruction/s
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Offline preparation of the published Bonanos et al. (2009) massive LMC star sample. */
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { basename } from 'node:path';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { prepareStarPhotometry, STAR_PHOTOMETRY, rayToOverlayPlane, type ImageWcs } from '@cssearth/bake/volume';
@@ -13,7 +12,6 @@ import { loadStarCloudModel, type StarCloudModel } from '../../server/workflows/
 import type { PreparedLmcStar, PreparedLmcStars } from '../../adapters/viewer/catalogue-stars';
 
 const directory = 'labs/nebula/models/lmc/stars';
-const sha256 = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const number = (line: string, first: number, last: number) => {
   const text = line.slice(first - 1, last).trim(); return text ? Number(text) : NaN;
 };
@@ -52,17 +50,11 @@ export function prepareCatalogue(table: string, frame: DensityVolumeFrame, wcs: 
   return stars.sort((a, b) => a.magnitude - b.magnitude || a.id.localeCompare(b.id));
 }
 export async function prepareLmcStars() {
-  const recipeBytes = await readFile('labs/nebula/models/lmc/clouds.json');
-  const recipe = parseLabModelJson(recipeBytes.toString());
-  const frameBytes = await readFile(recipe.frame.path);
-  if (sha256(frameBytes) !== recipe.frame.sha256) throw new Error('LMC reference frame pin changed.');
-  const frame = parseLabModelJson(frameBytes.toString()).properties.volume as DensityVolumeFrame;
+  const recipe = parseLabModelJson(await readFile('labs/nebula/models/lmc/clouds.json', 'utf8'));
+  const frame = parseLabModelJson(await readFile(recipe.frame.path, 'utf8')).properties.volume as DensityVolumeFrame;
   const manifest = parseLabModelJson(await readFile(`${directory}/source/catalogue.json`, 'utf8'));
-  const sources = await Promise.all(manifest.files.map(async (entry: {path:string;sha256:string}) => {
-    const bytes = await readFile(`${directory}/source/${entry.path}`);
-    if (sha256(bytes) !== entry.sha256) throw new Error(`Catalogue pin changed: ${entry.path}`);
-    return { ...entry, bytes: bytes.length };
-  }));
+  const sources = await Promise.all(manifest.files.map(async (entry: {path:string;url:string}) =>
+    ({ ...entry, bytes: (await readFile(`${directory}/source/${entry.path}`)).length })));
   const model = await loadStarCloudModel(frame);
   const table = await readFile(`${directory}/source/table3.dat`, 'utf8');
   const stars = prepareCatalogue(table, frame, recipe.wcs, model);
@@ -77,7 +69,7 @@ export async function prepareLmcStars() {
       limitation: 'Cloud-conditioned display placement, not measured distances. The reconstructed emission and population-agnostic, clipped/quantized simulation mass density are model assumptions. No bright-star selection function or physical cloud membership is inferred.' }, paperUrl: 'https://arxiv.org/abs/0905.1328', doi: '10.1088/0004-6256/138/4/1003',
       selection: 'Table 3 published massive LMC stars with finite Johnson V <= 16, inside the full native SMASH WCS footprint. No foreground catalogue added; this is an incomplete massive-star sample, not all LMC stars.',
       inputRows: table.trimEnd().split('\n').length, selectedRows: stars.length,
-      frame: recipe.frame, footprint: { recipe: 'labs/nebula/models/lmc/clouds.json', sha256: sha256(recipeBytes), wcs: recipe.wcs },
+      frame: recipe.frame, footprint: { recipe: 'labs/nebula/models/lmc/clouds.json', wcs: recipe.wcs },
       color: 'Published B-V mapped through the existing catalogue display-color approximation; white when B absent. No dereddening. Point area and opacity preserve magnitude-derived relative display light with color compensation. Finite display sizes are not measured stellar diameters; the screen is not a radiometric instrument.' } };
   await mkdir(`${directory}/prepared`, { recursive: true });
   await writeFile(`${directory}/prepared/stars.json`, JSON.stringify(payload, null, 2) + '\n');
