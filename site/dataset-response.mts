@@ -25,15 +25,16 @@ export class UnreadableSavedView extends RangeError {
 /** A native request uses the same authenticated prepared records and serializer
  * as the static page. Only the existing scene and its dataset controls change. */
 export async function renderDatasetResponse(html: string, url: URL, pageId: string, fetcher: typeof fetch = fetch,
-  { focusPage = false }: { focusPage?: boolean } = {}): Promise<string> {
+  { drawnPage = false }: { drawnPage?: boolean } = {}): Promise<string> {
   const settingRequest = url.searchParams.has('settings');
   const featureParams = url.searchParams.getAll('feature');
   if (featureParams.length > 1 || featureParams.length && !/^(?:city-)?[0-9]{1,16}$/u.test(featureParams[0]!)) throw new RangeError('Invalid feature selection.');
   // A city link (`city-<id>`) is selected by the page on arrival; only surface features are drawn here.
   const featureIds = featureParams.filter(id => !id.startsWith(PLACE_FEATURE_PREFIX));
   const views = url.searchParams.getAll('v');
-  // A catalogue focus's page always renders its focus; any other page changes only for what its query asks.
-  if (!focusPage && !url.searchParams.has('dataset') && !settingRequest && !featureIds.length && !views.length) return html;
+  // The page of a subject the scene draws (a catalogue focus, an overview) always renders its scene and subject; a scene's
+  // own page changes only for what its query asks.
+  if (!drawnPage && !url.searchParams.has('dataset') && !settingRequest && !featureIds.length && !views.length) return html;
   if (views.length > 1) throw new RangeError(`Invalid saved view: ${views.length} v parameters.`);
   let saved;
   try { saved = views.length ? parseSharedView(`v=${views[0]}`) : null; }

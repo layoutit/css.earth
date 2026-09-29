@@ -351,12 +351,14 @@ export function createSceneRouter({
     if (destroyed) return false;
     if (intent.kind === 'focus' && scenes.current) id = objectId;
     else if (id !== objectId) {
-      // A page of something the world draws (a catalogue subject or an overview; a link or history entry) keeps the
-      // mounted scene, or mounts the world's host on the first mount (navigation-scope.mts).
+      // A page of something the world draws (a link or history entry) opens on its scene (navigation-scope.mts): an
+      // overview's is the world's host, as zooming out reaches it; a catalogue focus is drawn by the mounted scene, or by
+      // the host on the first mount.
       const { registry } = await ensureContext();
-      const drawn = isOverviewPage(id) || (registry.knownObject(id) ?? await registry.loadObject(id).catch(() => null))?.kind === 'prepared-focus';
+      const focus = !isOverviewPage(id) && (registry.knownObject(id) ?? await registry.loadObject(id).catch(() => null))?.kind === 'prepared-focus';
       if (destroyed) return false;
-      if (drawn) id = scenes.current ? objectId : WORLD_HOST_ID;
+      if (isOverviewPage(id)) id = WORLD_HOST_ID;
+      else if (focus) id = scenes.current ? objectId : WORLD_HOST_ID;
     }
     // Entry and system-view reads may finish in any order. Only the latest selection can start a flight.
     const ready = await readiness.prepare(id, intent.kind !== 'feature');

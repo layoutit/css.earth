@@ -1,7 +1,7 @@
 import { createObjectBrowserController } from '../object-browser.mts';
 import { applySeoHead, focusSeo, objectSeo } from '../seo.mts';
 import { knownObject } from '../object-directory.mts';
-import { isOverviewPage } from '../navigation/navigation-scope.mts';
+import { overviewPage, type OverviewPageId } from '../navigation/navigation-scope.mts';
 import { OVERVIEW_TITLES } from '../overview-titles.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { createPreparedFocusCard } from '../prepared-focus-card.mts';
@@ -78,11 +78,15 @@ export function mountObjectShell({
   // The card switches between detail and overview layouts: a layout change, so it waits while the camera coasts and
   // follows once the coast stops (docs/performance/motion-freezes-membership.md).
   let coasting = false;
+  // Zooming across overviews changes the page while the camera may coast; its head and forms follow once it stops.
+  let pendingPage: Parameters<typeof presentPage> | null = null;
   const motionChanged = (event: Event) => {
     const next = event instanceof CustomEvent && (event.detail as { coasting?: unknown } | null)?.coasting === true;
     if (next === coasting) return;
     coasting = next;
-    if (!coasting) updateBodyCard();
+    if (coasting) return;
+    if (pendingPage) presentPage(...pendingPage);
+    updateBodyCard();
   };
   drawer.ownerDocument.addEventListener('objectmotionchange', motionChanged, { capture: true });
   lifetime.onDispose(() => drawer.ownerDocument.removeEventListener('objectmotionchange', motionChanged, { capture: true }));
@@ -99,12 +103,15 @@ export function mountObjectShell({
   }
   /** The page the shell shows changed in place: its head, and the forms and links that return to it. */
   function presentPage(route: string, seo: Parameters<typeof applySeoHead>[1]) {
+    if (coasting) { pendingPage = [route, seo]; return; }
+    pendingPage = null;
     applySeoHead(documentTarget, seo);
     for (const [selector, attribute] of [['.object-sidebar-search-card', 'action'], ['.object-sidebar-search-clear', 'href'], ['[data-settings-form]', 'action']] as const) {
       const element = documentTarget.querySelector(selector);
       if (element && element.getAttribute(attribute) !== route) element.setAttribute(attribute, route);
     }
   }
+  const overviewPageRecord = (id: OverviewPageId | null) => id === null ? null : { id, name: OVERVIEW_TITLES[id].label };
   let presentedSubject: ReturnType<typeof readSelection> | null = null;
   function presentSelection() {
     if (lifetime.disposed) return;
@@ -112,15 +119,15 @@ export function mountObjectShell({
     if (presentedSubject === subject) { updateBodyCard(); return; }
     // What the world draws around the scene (a catalogue focus, an overview) is its own page, `/<id>/`.
     const drawnPage = (selected: typeof subject | null) => selected?.kind === 'focus' ? selected.record
-      : selected?.kind === 'overview' && isOverviewPage(selected.overview.scope)
-        ? { id: selected.overview.scope, name: OVERVIEW_TITLES[selected.overview.scope].label } : null;
+      : selected?.kind === 'overview' ? overviewPageRecord(overviewPage(objectId, selected.overview.scope)) : null;
     const leftPage = presentedSubject?.kind === 'focus' || drawnPage(presentedSubject) !== null;
     presentedSubject = subject;
     const focus = subject.kind === 'focus' ? subject : null, page = drawnPage(subject);
     // Leaving one returns to the scene's page, whose head and forms a scene change would otherwise write
     // (object-browser.mts bindObject).
     if (page) presentPage(`/${page.id}/`, focusSeo(page));
-    else if (leftPage) {
+    // A focus whose record is still loading is already this page's subject: its head waits for the record.
+    else if (leftPage && !focus) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
       if (scene?.kind === 'scene') presentPage(scene.route, objectSeo(scene));
     }

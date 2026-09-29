@@ -10,7 +10,7 @@ import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { presentFeatureResults, presentOverviewResults, createSearchPresentation } from '../search/search-results-presentation.mts';
 import { objectIdAtPath } from '../root-object.mts';
-import { drawnPageFromUrl, overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
+import { drawnPageFromUrl, isOverviewPage, overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
 
 /** Modify only the shared shell. Everything outside these boundaries, including
  * the authenticated scene, head, styles and application scripts, passes through byte for byte. */
@@ -96,8 +96,8 @@ export async function handleSearchRequest(request: Request, data: SearchData, fe
   // The page's own address: a catalogue focus's page is named by its path, which the rewrite to the function drops.
   const address = new URL(url);
   if (address.pathname === '/.netlify/functions/search') { address.pathname = `/${objectId}/`; address.searchParams.delete('object'); }
-  const focusPage = (await data.catalogue()).some(entry => entry.kind === 'prepared-focus' && entry.id === objectId);
-  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher, { focusPage }), target, data);
+  const drawnPage = isOverviewPage(objectId) || (await data.catalogue()).some(entry => entry.kind === 'prepared-focus' && entry.id === objectId);
+  const render = async (target: URL) => renderSearchResponse(await renderDatasetResponse(page, target, objectId, fetcher, { drawnPage }), target, data);
   let html: string;
   try {
     try { html = await render(address); }

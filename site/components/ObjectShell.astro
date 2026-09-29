@@ -39,9 +39,9 @@ const {
   navigation = false,
 } = Astro.props;
 requireObjectControls({ lenses, settings }, objectId);
-// The object the page is: its scene's, or a catalogue focus the scene draws. Its forms and links return to that page.
+// The page: its scene's, or a catalogue subject or overview the scene draws. Its forms and links return to that page.
 const pageId = Astro.params.id ?? objectId;
-const focusPageRoute = pageId !== objectId ? `/${pageId}/` : undefined;
+const pageRoute = pageId !== objectId ? `/${pageId}/` : undefined;
 const speedSetting = settings?.controls.find((setting) =>
   setting.kind === "cycle" && setting.name === "speed");
 const shadowSetting = settings?.controls.find((setting) =>
@@ -95,7 +95,7 @@ const searchCategories = [
   <div class="object-search-toolbar">
     <div class="object-search-browser-shell">
       <form id={searchFormId} class="object-sidebar-search-card" role="search" aria-label="Object search"
-        action={focusPageRoute ?? activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
+        action={pageRoute ?? activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
         {['v', 'view', 'overview', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
         <span class="object-sidebar-search-icon" aria-hidden="true">
           <MaterialSymbol name="search" />
@@ -110,7 +110,7 @@ const searchCategories = [
           aria-controls={`${objectId}-object-browser`}
           autocomplete="off"
         />
-        <a class="object-sidebar-search-clear" href={focusPageRoute ?? activeObject?.route} aria-label="Clear search" title="Clear search">
+        <a class="object-sidebar-search-clear" href={pageRoute ?? activeObject?.route} aria-label="Clear search" title="Clear search">
           <MaterialSymbol name="close" />
         </a>
         <button
@@ -150,7 +150,7 @@ const searchCategories = [
   </div>
 </header>
 <div class="object-dataset-context-dock">
-<form id="object-settings-form" action={focusPageRoute ?? `/${objectId}/`} method="get" data-settings-form hidden>
+<form id="object-settings-form" action={pageRoute ?? `/${objectId}/`} method="get" data-settings-form hidden>
   <input type="hidden" name="settings" value="1" />
   {['v', 'view', 'overview', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
 </form>

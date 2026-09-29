@@ -1,9 +1,9 @@
 // Entry script: node site/build/prerender-focus-pages.mts (in build:deploy, after bundle-netlify-functions.mts)
 /**
  * The page of anything the world draws (a catalogue subject, an overview) is the world host's page with it selected
- * (site/pages/[id].astro). The search function renders that selection (card, lenses and camera) into the page for any
- * query URL. This renders it into each such static page once, through the same bundled function, so the page opens on
- * its subject with or without JavaScript.
+ * (site/pages/[id].astro). The search function renders that selection (the scene, card and lenses, and a focus's
+ * camera; an overview's camera is framed on arrival) into the page for any query URL. This renders it into each such
+ * static page once, through the same bundled function, so the page opens on its subject with or without JavaScript.
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { extname, resolve, sep } from 'node:path';

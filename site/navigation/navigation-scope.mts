@@ -31,9 +31,11 @@ export function preparedFocusFromUrl(url: string | URL, sceneId: string) {
 }
 
 /** The page of drawn subject `id` (a catalogue focus or an overview), or of scene `sceneId` when `id` is null. The front
- * page (`/`) already names its scene and keeps its path. */
+ * page (`/`) already names its scene and keeps its path. A drawn subject's page carries none of the scene's own
+ * selections (its `dataset`, `feature`): opened cold it mounts the world's host, which would read them as its own. */
 function withPage(url: URL, sceneId: string, id: string | null): URL {
   if (id !== null || objectIdAtPath(url.pathname) !== sceneId) url.pathname = `/${id ?? sceneId}/`;
+  if (id !== null) { url.searchParams.delete('dataset'); url.searchParams.delete('feature'); }
   return url;
 }
 
@@ -80,10 +82,18 @@ export function withPreparedFocus(url: URL, sceneId: string, id: string | null, 
   return url;
 }
 
-/** Selects the named overview on the page of scene `sceneId`: its own page, or the scene page's `overview=system`. */
-export function withOverviewScope(url: URL, sceneId: string, scope: OverviewPageId | 'system' | null): URL {
-  if (isOverviewPage(scope)) {
-    withPage(url, sceneId, scope);
+/** The page an overview selected on scene `sceneId` is, or null when it is the scene page's `overview=system`. An
+ * overview's page is the world host's scene; another star's scene zoomed out past its system (the scopes are measured
+ * from the host, so this is at once) stays that star's system overview, so its URL still reopens the scene it shows. */
+export function overviewPage(sceneId: string, scope: string | null): OverviewPageId | null {
+  return isOverviewPage(scope) && sceneId === WORLD_HOST_ID ? scope : null;
+}
+
+/** Selects the named overview on the page of scene `sceneId`: its page, or the scene page's `overview=system`. */
+export function withOverviewScope(url: URL, sceneId: string, requested: OverviewPageId | 'system' | null): URL {
+  const page = overviewPage(sceneId, requested), scope = page ?? (requested === null ? null : 'system');
+  if (page !== null) {
+    withPage(url, sceneId, page);
     url.searchParams.delete('overview');
     url.searchParams.delete('view');
     return url;
