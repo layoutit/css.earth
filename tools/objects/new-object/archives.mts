@@ -16,7 +16,7 @@ export interface Archive {
 /** A dropped connection, before or during the transfer, is retried twice, a second apart; an HTTP error answer is not, so a
  * failed service is reported at once. Every failure names its URL. A request that gives nothing for TRANSFER_TIMEOUT_MS is a
  * dropped connection: the archives answer in seconds, and a hung one would otherwise hold a batch forever. A service that asks us
- * to slow down (429, or 503 with Retry-After) is waited for as it asks and tried again, up to three times; and a host with a
+ * to slow down (429, or 503 with Retry-After) is waited for as it asks and tried again, up to five times for a 429 and three for a 5xx; and a host with a
  * published request pace is never asked faster than that (PACE_MS). */
 export const TRANSFER_TIMEOUT_MS = 120_000;
 export const USER_AGENT = 'cssEarth-telescope/1.0 (https://css.earth)';
@@ -39,10 +39,14 @@ async function transfer<T>(url: string, read: (response: Response) => Promise<T>
       const retryAfter = Number(response.headers.get('retry-after'));
       // A rate limit or a server error is the archive's moment, not an answer: wait (as long as it asks) and ask again. A draft of
       // 24 hosts met a bare 503 from the NASA TAP service, which used to leave the whole host out.
-      if ((response.status === 429 || response.status >= 500) && slowed < 3) {
+      // arXiv still answered 429 after 10 + 20 + 30 s during an 818-host batch (2026-09-29), so a rate limit is given five tries,
+      // doubling from 15 s: about six minutes in all. The same batch met Gaia's TAP answering 500 through 1 + 2 + 3 s; a 5xx now waits 5,
+      // 10 and 15 s.
+      const limited = response.status === 429;
+      if ((limited || response.status >= 500) && slowed < (limited ? 5 : 3)) {
         slowed++; attempt--;
         await response.body?.cancel();
-        await new Promise(done => setTimeout(done, Math.min(120, retryAfter > 0 ? retryAfter : (response.status === 429 ? 10 : 1) * slowed) * 1000));
+        await new Promise(done => setTimeout(done, Math.min(120, retryAfter > 0 ? retryAfter : limited ? 15 * 2 ** (slowed - 1) : 5 * slowed) * 1000));
         continue;
       }
       if (!response.ok) throw new HttpError(`${url} answered ${response.status} ${response.statusText}${init?.body ? ` for ${String(init.body).slice(0, 200)}` : ''}.`);
@@ -137,7 +141,9 @@ export const telescopeResolver = (root: string): Resolver => async name => {
 /** SIMBAD's identifiers for a spec's target or Gaia source; a target and a Gaia id that name different stars are refused. */
 export async function identify(resolver: Resolver, target: string | undefined, gaia: string | undefined, id: string): Promise<Identifiers & { readonly gaia: string }> {
   // A catalogue name SIMBAD does not hold (some KIC numbers) is not fatal when the spec also gives the star's Gaia DR3 source.
-  const byTarget = target ? await resolver(target) : undefined, name = byTarget || !gaia ? target ?? `Gaia DR3 ${gaia}` : `Gaia DR3 ${gaia}`;
+  // The archive writes a binary's component apart ("K2-288 B"); SIMBAD may hold it joined ("K2-288B").
+  const joined = target && /^(.+\S) ([A-C])$/u.exec(target);
+  const byTarget = target ? await resolver(target) ?? (joined ? await resolver(`${joined[1]}${joined[2]}`) : undefined) : undefined, name = byTarget || !gaia ? target ?? `Gaia DR3 ${gaia}` : `Gaia DR3 ${gaia}`;
   const found = byTarget ?? await resolver(name);
   // A Gaia source SIMBAD has never catalogued (most distant giants) is still that source: the Gaia row the generator reads
   // next is its identity and its evidence. A target without a Gaia source is refused.

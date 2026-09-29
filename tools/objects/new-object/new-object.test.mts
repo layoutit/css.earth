@@ -371,7 +371,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.equal((spec.temperature as { value: number }).value, 5000);
   assert.equal(spec.gaia, '123456789', 'the archive\'s Gaia DR3 id, which SIMBAD must agree with');
   // A host the universe holds under another id, found by the name its planets use: its new planets become an addition to it.
-  const held = await archiveSpec(archive, 'HD 1', { ids: new Set(['hd-1b-host']), names: new Map([['hd1', 'hd-1b-host']]), stars: [] });
+  const held = await archiveSpec(archive, 'HD 1', { ids: new Set(['hd-1b-host']), names: new Map([['hd1', 'hd-1b-host']]), stars: [{ id: 'hd-1b-host', ra: 1, dec: 1, epoch: 2016, pmra: 0, pmdec: 0 }] });
   assert.equal(held.spec.host, 'hd-1b-host');
   assert.deepEqual((held.spec.planets as { id: string }[]).map(planet => planet.id), ['hd-1b-host-b', 'hd-1b-host-c']);
   // The text says what the factsheet cannot: how and when each planet was found, how many its star has, and the star's planets.
@@ -408,6 +408,21 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   assert.equal((fromTic.text as { introduction: string }).introduction, 'Its radius follows One et al. 2019, and its temperature the TESS Input Catalog v8.2.');
   const noGaia = { ...ticArchive, async text(url: string) { return url.includes('asu-tsv') ? '' : ticArchive.text(url); } };
   await assert.rejects(archiveSpec(noGaia, 'HD 1', { ids: new Set(), names: new Map(), stars: [] }), /no archive row gives a stellar temperature, nor does TIC v8.2 for Gaia DR3 123456789/u);
+  // A companion's planet: TOI-2267 d orbits TOI-2267 B (archive, 2026-09-29). The planet TOI-2267 b is not its host, nor is the
+  // placed primary its name prefix finds; B is drafted as its own star in the primary's system.
+  const companionHost = stars.replaceAll(',HD 1,1,', ',HD 1 B,1,');
+  const companion = { ...archive, async text(url: string) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? companionHost : archive.text(url); } };
+  const pair = { ids: new Set(['hd-1', 'hd-1b']), names: new Map([['hd1', 'hd-1'], ['hd1b', 'hd-1b']]), stars: [{ id: 'hd-1', ra: 1, dec: 1, epoch: 2016, pmra: 0, pmdec: 0 }] };
+  const b = (await archiveSpec(companion, 'HD 1 B', pair)).spec as { id: string; host?: string; system: string };
+  assert.deepEqual([b.id, b.host, b.system], ['hd-1-b', undefined, 'HD 1 system']);
+  // No archive row gives a mass: Gaia DR3 FLAME's when it has one, else TIC v8.2's (the Lafarga et al. 2026 TIC hosts, 2026-09-29).
+  const noMass = stars.replaceAll(',0.85,0.03,', ',,,').replace(',0.85,,', ',,,');
+  const gaiaRow = (mass: string) => `source_id,ref_epoch,ra,dec,parallax,parallax_error,pmra,pmdec,radial_velocity,radial_velocity_error,ruwe,phot_g_mean_mag,bp_rp,has_xp_sampled,mass_flame,mass_flame_lower,mass_flame_upper,radius_flame,radius_flame_lower,radius_flame_upper\n123456789,2016.0,10,20,50,0.02,1,1,,,1.0,9.0,1.0,true,${mass},0.79,0.8,0.8,0.78,0.82`;
+  const massArchive = (mass: string) => ({ ...ticArchive, async text(url: string) { if (url.includes('tap-server')) return gaiaRow(mass); if (url.includes('asu-tsv')) return tic; const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? noMass : archive.text(url); } });
+  assert.equal((await archiveSpec(massArchive('0.8'), 'HD 1', { ids: new Set(), names: new Map(), stars: [] })).spec.mass, 'gaia-flame');
+  const ticMass = (await archiveSpec(massArchive(''), 'HD 1', { ids: new Set(), names: new Map(), stars: [] })).spec.mass as { value: number; uncertainty: number; source: string };
+  assert.deepEqual([ticMass.value, ticMass.uncertainty], [0.84, 0.1]);
+  assert.match(ticMass.source, /TIC 42 \(VizieR IV\/39\/tic82\); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME$/u);
 });
 
 test('ids follow one rule, and a body the universe holds is found whatever its id', async () => {
@@ -828,6 +843,16 @@ test('a Gaia source SIMBAD never catalogued is identified by that source; a targ
   const unknown = async () => undefined;
   assert.deepEqual(await identify(unknown, 'Gaia DR3 6881624509796808576', '6881624509796808576', 'gaia-dr3-6881624509796808576'), { main: 'Gaia DR3 6881624509796808576', gaia: '6881624509796808576' });
   await assert.rejects(identify(unknown, 'HV 9999', undefined, 'hv-9999'), /hv-9999: SIMBAD does not know HV 9999\./u);
+});
+
+test('a binary component the archive writes apart is looked up under the name SIMBAD joins', async () => {
+  const { identify } = await import('./archives.mts');
+  // SIMBAD, 2026-09-29: "K2-288 B", the archive's hostname, is not an identifier; K2-288B is LP 413-32 B, with Gaia DR2
+  // 44838019756570112 and no DR3 source (Gaia's dr2_neighbourhood maps that DR2 source to K2-288 A, 0.79 arcsec away), so it is refused.
+  const simbad = async (name: string) => name === 'K2-288B' ? { mainId: 'LP 413-32 B', identifiers: ['LP 413-32 B', 'Gaia DR2 44838019756570112', 'NAME K2-288B'] } : undefined;
+  await assert.rejects(identify(simbad, 'K2-288 B', undefined, 'k2-288-b'), /k2-288-b: SIMBAD lists no Gaia DR3 identifier for K2-288 B/u);
+  const withDr3 = async (name: string) => name === 'Star 1B' ? { mainId: 'Star 1B', identifiers: ['Gaia DR3 1'] } : undefined;
+  assert.deepEqual(await identify(withDr3, 'Star 1 B', undefined, 'star-1-b'), { main: 'Star 1B', gaia: '1' });
 });
 
 test('a binary whose primary Gaia sees eclipsing on another period is refused; long orbits Gaia cannot measure are not checked', async () => {

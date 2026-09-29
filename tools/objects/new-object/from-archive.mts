@@ -8,7 +8,7 @@
  * universe holds is found by the Gaia DR3 source its position cites, then by name. The card and introduction are
  * drafted from the row's numbers and cite the row's paper; a person edits them, or keeps them. */
 import { archiveHostQuery, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, decodeEntities, NASA_TAP, parseArchiveRows } from './orbit.mts';
-import type { Archive } from './archives.mts';
+import { fetchGaiaRow, type Archive } from './archives.mts';
 import { duplicateName, hostId as idForHost, planetId, planetPrefix, type Existing } from './identity.mts';
 import { TIC, ticRow, wideCompanions } from './companions.mts';
 import { wikipediaQuotes } from './prose.mts';
@@ -47,10 +47,13 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   if (!rows.length) throw new Error(`The NASA Exoplanet Archive has no default parameter set for a host named ${hostname}.`);
   // A planet around both stars of a pair needs the pair's orbit, which only a paper gives: built by hand, as Kepler-16 is.
   if (rows.some(row => row.circumbinary)) throw new Error(`${hostname}: its planets orbit both stars of a pair (circumbinary); the pair's orbit comes from a paper, so build it by hand as Kepler-16 is.`);
-  const first = rows[0]!, prefix = planetPrefix(first.planet, first.letter);
+  // A planet's name prefix names its host, except that a companion's planet (TOI-2267 d, around TOI-2267 B) is named by the system.
+  const first = rows[0]!, named = planetPrefix(first.planet, first.letter), prefix = named && hostname.match(/^(.+) [B-D]$/u)?.[1] === named ? undefined : named;
   // The host as the universe knows it, by id or name; else its id by the rule (identity.mts).
   // By the Gaia DR3 source its position cites first: the universe may name it otherwise (eps Indi A for the archive's eps Ind A).
-  const known = (first.gaiaDr3 ? universe.gaia?.get(first.gaiaDr3) : undefined) ?? [hostname, prefix].flatMap(name => name ? [duplicateName(universe, name)] : []).find(Boolean);
+  // A name is matched only to a placed star: TOI-2267 B, the host of TOI-2267 d, is not the planet TOI-2267 b (toi-2267b).
+  const placedStar = (id: string | undefined) => id !== undefined && universe.stars.some(placed => placed.id === id) ? id : undefined;
+  const known = (first.gaiaDr3 ? universe.gaia?.get(first.gaiaDr3) : undefined) ?? [hostname, prefix].flatMap(name => name ? [placedStar(duplicateName(universe, name))] : []).find(Boolean);
   const hostId = known ?? idForHost({ ...(prefix ? { planetPrefix: prefix } : {}), hostname, ...(first.hd ? { hd: first.hd } : {}), ...(first.hip ? { hip: first.hip } : {}), ...(first.gaiaDr3 ? { gaiaDr3: `Gaia DR3 ${first.gaiaDr3}` } : {}) });
   const skipped: string[] = [], notes: string[] = [], existing = (id: string) => universe.ids.has(id);
   // Quotes from the Wikipedia lead (prose.mts): a planet's own article first, then its host's, whose lead names the planet.
@@ -125,6 +128,15 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   if (!teff && !(tic?.TIC && Number(tic.Teff) > 0)) throw new Error(`${hostname}: no archive row gives a stellar temperature${star.gaiaDr3 ? `, nor does TIC v8.2 for Gaia DR3 ${star.gaiaDr3}` : ', and it has no Gaia DR3 source to look up'}; give this host a spec by hand.`);
   const kelvin = teff?.value ?? Number(tic!.Teff), temperature = teff ? undefined : { value: kelvin, ...(Number(tic!.s_Teff) > 0 ? { uncertainty: Number(tic!.s_Teff) } : {}), source: `${TIC.credit}, the effective temperature of TIC ${tic!.TIC} (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one`, url: TIC.url };
   const from = (row: StarRow) => row === star ? `the default parameter set of ${row.planet}` : `${row.planet}'s parameter set from ${row.label} (the default leaves it empty)`;
+  // No archive row gives the radius or mass: Gaia DR3 FLAME for the same source, else the TIC v8.2 value, as for the temperature.
+  const flame = (rad && mass) || !star.gaiaDr3 ? undefined : (await fetchGaiaRow(archive, star.gaiaDr3)).row;
+  const ticFor = async () => tic ?? await ticRow(archive, star.gaiaDr3!);
+  const fallback = async (have: unknown, key: 'radiusFlame' | 'massFlame', column: 'Rad' | 'Mass', what: string) => {
+    if (have || !flame || flame[key]) return undefined;
+    const row = await ticFor();
+    return row?.TIC && Number(row[column]) > 0 ? { value: Number(row[column]), ...(Number(row[`s_${column}`]) > 0 ? { uncertainty: Number(row[`s_${column}`]) } : {}), source: `${TIC.credit}, the ${what} of TIC ${row.TIC} (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME`, url: TIC.url } : undefined;
+  };
+  const [ticRadius, ticMass] = [await fallback(rad, 'radiusFlame', 'Rad', 'radius'), await fallback(mass, 'massFlame', 'Mass', 'mass')];
   const cited = (picked: ReturnType<typeof pick>, key: string) => picked === undefined ? 'gaia-flame' as const : { value: picked.value, ...(picked.err ? { uncertainty: picked.err } : {}), source: `${picked.row.label}, the stellar ${key} of ${from(picked.row)} in the NASA Exoplanet Archive`, url: picked.row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
   // "a star of 8,450 K" needs no article chosen by the number; the distance is set off by commas mid-sentence.
   const n = planets.length, dist = star.dist === undefined ? '' : `, ${short(star.dist, 3)} parsecs away`, mid = dist ? `${dist},` : '', allTransit = sorted.every(item => item.transits);
@@ -132,14 +144,14 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
   if (existing(hostId)) notes.push(`${hostname} is already in the universe as ${hostId}`);
   const entry = existing(hostId) ? { host: hostId, planets, notes: skipped } : {
     // The host is named as its planets name it (pi Men for pi Men c), the archive's host name when they match.
-    id: hostId, name: prefix ?? hostname, system: `${(prefix ?? hostname).replace(/\s+A$/u, '')} system`, description: `Star of ${Math.round(kelvin).toLocaleString('en-US')} K${mid} with ${n} ${kind}.`,
+    id: hostId, name: prefix ?? hostname, system: `${(prefix ?? hostname).replace(/\s+[A-D]$/u, '')} system`, description: `Star of ${Math.round(kelvin).toLocaleString('en-US')} K${mid} with ${n} ${kind}.`,
     target: hostname, ...(star.gaiaDr3 ? { gaia: star.gaiaDr3 } : {}), paper: { url: star.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', credit: star.label },
-    radius: cited(rad, 'radius'), temperature: temperature ?? cited(teff, 'temperature'), mass: cited(mass, 'mass'),
+    radius: ticRadius ?? cited(rad, 'radius'), temperature: temperature ?? cited(teff, 'temperature'), mass: ticMass ?? cited(mass, 'mass'),
     // The factsheet shows the star's size and distance; the text names its planets and whose values the star follows.
     text: { card: fit(110, allTransit ? (n === 1 ? `${names[0]} crosses ${hostname} as seen from Earth, which is how it was found.` : `${n} planets cross ${hostname} as seen from Earth: ${list}.`)
         : n === 1 ? `${hostname}'s planet ${names[0]} is placed on the orbit its paper measured.` : `${hostname}'s planets ${list} are placed on the orbits their papers measured.`,
       `${hostname} has ${n} known ${kind}.`),
-      introduction: (([r, t]) => r === t ? `Its radius and temperature follow ${r}.` : `Its radius follows ${r}, and its temperature ${t}.`)([rad ? rad.row.label : 'Gaia DR3 FLAME', teff ? teff.row.label : 'the TESS Input Catalog v8.2']),
+      introduction: (([r, t]) => r === t ? `Its radius and temperature follow ${r}.` : `Its radius follows ${r}, and its temperature ${t}.`)([rad ? rad.row.label : ticRadius ? 'the TESS Input Catalog v8.2' : 'Gaia DR3 FLAME', teff ? teff.row.label : 'the TESS Input Catalog v8.2']),
       locator: `NASA Exoplanet Archive ps table (st_refname ${[...new Set([teff, rad, mass].flatMap(picked => picked ? [picked.row.reference] : []))].join(', ')}): ${teff ? `st_teff ${teff.value}` : `no st_teff; TIC ${tic!.TIC} Teff ${tic!.Teff}`}${rad ? `, st_rad ${rad.value}` : ''}${mass ? `, st_mass ${mass.value}` : ''}`,
       ...await quotesFor([hostname], [hostname]) },
     planets, notes: skipped };
