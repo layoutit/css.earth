@@ -77,7 +77,7 @@ export async function assertPinnedInputs(inputs: readonly { path: string; bytes?
       if (!pin || (input.bytes !== undefined && pin.bytes !== input.bytes)) throw new Error(`FITS test archive record changed: ${input.path}`);
       continue;
     }
-    if (/^tests\/fixtures\/fits\/[a-z0-9-]+\.fits$/u.test(input.path) ||
+    if (/^(?:tests\/fixtures\/fits|packages\/telescope-cli\/src\/fixtures\/fits)\/[a-z0-9-]+\.fits$/u.test(input.path) ||
         (input.path.endsWith('.fits') && Object.values(relocatedPaths).includes(input.path))) {
       verifyOracleBytes(input, await readFile(oraclePath(input.path)));
       continue;

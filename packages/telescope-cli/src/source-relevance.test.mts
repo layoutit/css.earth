@@ -11,7 +11,7 @@ import { main } from './cli.mts';
 import { assessSourceRelevance } from './source-relevance.mts';
 import { SIMBAD_TAP } from '@cssearth/telescope/node';
 
-const fits=resolve(import.meta.dirname,'../../../tests/fixtures/telescope-vo/eso-circle.fits');
+const fits=resolve(import.meta.dirname,'vo/fixtures/telescope-vo/eso-circle.fits');
 const position={raDegrees:88.79293875,decDegrees:7.40706389};
 
 async function fetched(root:string,raDegrees:number){

@@ -4,7 +4,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { bodyMeanRadiusKm, fetchOpus, searchOpus, type OpusFetch } from './opus.mts';
 
-const fixture = async (name: string) => readFile(new URL(`../../../tests/fixtures/telescope-opus/${name}`, import.meta.url), 'utf8');
+const fixture = async (name: string) => readFile(new URL(`fixtures/telescope-opus/${name}`, import.meta.url), 'utf8');
 const json = async (name: string): Promise<unknown> => JSON.parse(await fixture(name));
 /** Recorded OPUS answers keyed by the request that produced them; any other request fails the test. */
 const recorded = (answers: Readonly<Record<string, string>>): OpusFetch => async (path, parameters) => {

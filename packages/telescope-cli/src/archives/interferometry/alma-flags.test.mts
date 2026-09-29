@@ -7,7 +7,7 @@ import { agentFlagCommands, loggedFlagging, pipelineFlagSummary } from './alma-f
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const root = WORKSPACE;
-const read = (name: string) => readFile(resolve(root, 'tests/fixtures/alma', name), 'utf8');
+const read = (name: string) => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma', name), 'utf8');
 const vis = 'uid___A002_X10ed869_X1ec34.ms';
 
 test('the hifa_flagdata command file is replayed without its summaries', async () => {

@@ -47,7 +47,7 @@ pass the epoch down, so no module here imports it.
 The sky band composer is `src/sky/` (exported as `./sky/*`): `sky-band-composite.mts` composes pinned hips2fits, AllWISE
 atlas and JWST level-3 bands on one TAN grid, and `author-sky-bands.mts` acquires and pins those bands. It moved from
 `tools/objects/observation/` (now here) because it imports this package's JWST imaging modules. `site/build/prepare/prepare-volume-provenance.mts`
-and the nebula lab's sky-band adapter use it; its tests are in `tests/objects/observation/`, using the
+and the nebula lab's sky-band adapter use it; its tests are beside the composer in `src/sky/` and the request reader in `src/resolution-evidence.test.mts`, using the
 `@cssearth/objects/node/source-test` helper and FITS fixtures they read.
 
 The workspace's tools import it only through the subpaths `package.json` exports. Its node tests run with

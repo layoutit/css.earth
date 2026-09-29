@@ -9,7 +9,7 @@ from pathlib import Path
 import astropy
 from astropy.io import fits
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import ROOT, write
 
 rows = 4
@@ -32,7 +32,7 @@ table = fits.BinTableHDU.from_columns(columns, name='OI_TEST')
 table.header['TSCAL11'], table.header['TZERO11'] = 0.5, 10.0
 table.header['INSNAME'] = 'ORACLE'
 table.header['HIERARCH ESO PRO CATG'] = 'CALIB_RAW_INT'
-path = ROOT / 'tests/fixtures/fits/binary-table-columns.fits'
+path = ROOT / 'packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits'
 fits.HDUList([fits.PrimaryHDU(), table]).writeto(path, overwrite=True)
 
 with fits.open(path, memmap=False, mask_and_scale=False) as hdus:

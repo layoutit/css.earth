@@ -8,7 +8,9 @@ import {executableFamilyOperations} from './family-operation.mts';
 import {parseProductDescriptor} from './product-descriptor.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
-const root=WORKSPACE,base=resolve(root,'tests/fixtures/telescope-family-examples');
+import { fixturePath, fixtureMemberPath } from './fixtures/paths.mts';
+
+const root=WORKSPACE,base=resolve(root,'packages/telescope-cli/src/families/fixtures/telescope-family-examples');
 const assigned=['F01','F02','F03','F04','F05','F06','F07','F08','F09','F10','F11','F12','F13','F14','F15','F16','F17','F18'];
 const sha256=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
 
@@ -23,19 +25,19 @@ test('checked family examples contain exactly one pinned representative per assi
     assert.equal(example.proposalBaseline.status,'complete');
     assert.ok(Array.isArray(example.proposalBaseline.requiredCases));
     for(const key of ['owner','independentCheck','limit'])assert.ok(typeof example[key]==='string'&&example[key].length>0);
-    for(const pin of [example.source,example.artifact]){const file=resolve(pin===example.source?root:base,pin.path),bytes=await readFile(file);assert.ok(bytes.length>0,`${example.family} ${pin.path} bytes`);}
+    for(const pin of [example.source,example.artifact]){const file=pin===example.source?fixturePath(pin.path):resolve(base,pin.path),bytes=await readFile(file);assert.ok(bytes.length>0,`${example.family} ${pin.path} bytes`);}
     assert.match(example.source.url,/^https:\/\//u);
-    assert.equal((await stat(resolve(root,example.productRecordReadback.test))).isFile(),true);
-    assert.equal((await stat(resolve(root,example.independentCheck))).isFile(),true);
+    assert.equal((await stat(fixturePath(example.productRecordReadback.test))).isFile(),true);
+    assert.equal((await stat(fixturePath(example.independentCheck))).isFile(),true);
     assert.doesNotMatch(JSON.stringify(example),/\/Users\/|file:\/\//u);
     const tokens=example.command.split(' ');assert.equal(tokens[0],'telescope');assert.ok(tokens.includes('--out'));assert.doesNotMatch(example.command,/[;&|`$]/u);
     if(example.family==='F01')assert.equal(tokens[1],'export');
     else{
-      assert.equal(tokens[1],'family-run');const descriptorPath=tokens[2],operationId=tokens[3],descriptor=parseProductDescriptor(JSON.parse(await readFile(resolve(root,descriptorPath),'utf8')));
-      if(descriptor.dataset.acquisition.identity.startsWith('../'))assert.equal((await stat(resolve(root,descriptorPath,'..',descriptor.dataset.acquisition.identity))).isFile(),true,`${example.family} acquisition identity`);
+      assert.equal(tokens[1],'family-run');const descriptorPath=tokens[2],operationId=tokens[3],descriptor=parseProductDescriptor(JSON.parse(await readFile(fixturePath(descriptorPath),'utf8')));
+      if(descriptor.dataset.acquisition.identity.startsWith('../'))assert.equal((await stat(fixtureMemberPath(fixturePath(descriptorPath),descriptor.dataset.acquisition.identity))).isFile(),true,`${example.family} acquisition identity`);
       assert.deepEqual(descriptor.dataset.families,[example.family]);assert.ok(executableFamilyOperations(descriptor).some(operation=>operation.id===operationId&&operation.available),`${example.family} ${operationId} executable`);
-      for(const member of descriptor.members){const file=resolve(resolve(root,descriptorPath),'..',member.path),bytes=await readFile(file);assert.ok(bytes.length>0,member.path);}
-      const params=tokens.indexOf('--params');if(params>=0){const value=JSON.parse(await readFile(resolve(root,tokens[params+1]!),'utf8'));assert.equal(value.operationId,operationId);}
+      for(const member of descriptor.members){const file=fixtureMemberPath(fixturePath(descriptorPath),member.path),bytes=await readFile(file);assert.ok(bytes.length>0,member.path);}
+      const params=tokens.indexOf('--params');if(params>=0){const value=JSON.parse(await readFile(fixturePath(tokens[params+1]!),'utf8'));assert.equal(value.operationId,operationId);}
     }
   }
   assert.deepEqual(manifest.examples.find((entry:any)=>entry.family==='F02').proposalBaseline.requiredCases,['mixed time/spectral/polarization slicing']);

@@ -34,7 +34,7 @@ test('local import specification is data-only and exact',()=>{
 test('one pinned local FITS science member uses the shared image output route without claiming archive calibration',async()=>{
   const root=await mkdtemp(resolve(tmpdir(),'telescope-import-fits-'));
   try{
-    const file=resolve(import.meta.dirname,'../../../tests/fixtures/fits/float32.fits');
+    const file=resolve(import.meta.dirname,'fixtures/fits/float32.fits');
     const imported=await importLocalArtifact({schema:'cssearth-telescope-local-import-spec@1',datasetId:'generic-fits',
       sources:[{path:file,role:'science'}],limits:{maxMembers:1,maxBytes:10000,maxFileBytes:10000}},resolve(root,'imported'));
     const offered=await listArtifactOutputs(imported.receipt);
@@ -63,7 +63,7 @@ test('local import refuses bounds and symbolic links before publishing a destina
 });
 
 test('a real supported local FITS crosses import, outputs, family export and product readback without a hand-authored descriptor',async()=>{
-  const root=await mkdtemp(resolve(tmpdir(),'telescope-import-family-')),source=resolve(import.meta.dirname,'../../../tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits'),copy=resolve(root,'full-stokes.fits'),out=resolve(root,'imported'),specification=resolve(root,'import-spec.json'),parameters=resolve(root,'parameters.json');
+  const root=await mkdtemp(resolve(tmpdir(),'telescope-import-family-')),source=resolve(import.meta.dirname,'families/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits'),copy=resolve(root,'full-stokes.fits'),out=resolve(root,'imported'),specification=resolve(root,'import-spec.json'),parameters=resolve(root,'parameters.json');
   try{
     await copyFile(source,copy);
     await writeFile(specification,JSON.stringify({schema:'cssearth-telescope-local-import-spec@1',datasetId:'rm-lite-import',sources:[{path:copy,role:'science',name:'full-stokes.fits'}],declarations:{familyHints:['F02']},limits:{maxMembers:1,maxBytes:8192,maxFileBytes:8192}}));
@@ -78,7 +78,7 @@ test('a real supported local FITS crosses import, outputs, family export and pro
 });
 
 test('local HEALPix import reuses its Astropy-owned descriptor and operations',async()=>{
-  const root=await mkdtemp(resolve(tmpdir(),'telescope-import-healpix-')),source=resolve(import.meta.dirname,'../../../tests/fixtures/telescope-families/f14-healpix/bayestar.fits.gz'),copy=resolve(root,'bayestar.fits.gz'),out=resolve(root,'imported');
+  const root=await mkdtemp(resolve(tmpdir(),'telescope-import-healpix-')),source=resolve(import.meta.dirname,'families/fixtures/telescope-families/f14-healpix/bayestar.fits.gz'),copy=resolve(root,'bayestar.fits.gz'),out=resolve(root,'imported');
   try{
     await copyFile(source,copy);const result=await importLocalArtifact({schema:'cssearth-telescope-local-import-spec@1',datasetId:'bayestar-import',sources:[{path:copy,role:'science'}],declarations:{familyHints:['F14']},limits:{maxMembers:1,maxBytes:200000,maxFileBytes:200000}},out),inspected=await listArtifactOutputs(result.manifest);
     assert.equal(result.value.descriptor?.path,'descriptor.json');assert.ok('familyOperations' in inspected&&inspected.familyOperations?.some(operation=>operation.id==='healpix-select'&&operation.available));

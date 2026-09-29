@@ -8,7 +8,7 @@ import astropy.units as u
 from astropy.constants import c, h
 from astropy.modeling.models import BlackBody
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import external_record, write
 
 
@@ -74,7 +74,7 @@ for path in REFERENCE_PATHS:
         references.append(external_record(url, response.read()))
 
 write(
-    'physical-units/spectral.json',
+    str(Path(__file__).with_suffix('.json')),
     'Astropy blackbody and Rayleigh unit conversions',
     'tests/oracles/physical-units/spectral.py',
     {'astropy': astropy.__version__, 'methods': 'BlackBody, exact constants and Rayleigh units'},

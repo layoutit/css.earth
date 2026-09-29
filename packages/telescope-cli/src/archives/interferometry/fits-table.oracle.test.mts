@@ -8,7 +8,7 @@ import { binaryTable, findTable, numbers, readFitsHdus, tableColumn, text, write
 const fixture = await readOracleFixture('fits/binary-table.json');
 const input = fixture.inputs.find(entry => entry.path === 'tests/fixtures/fits/binary-table-columns.fits');
 assert.ok(input);
-const bytes = await readOracleInput(input), entry = requireRecord(fixture.cases['oi-test']);
+const bytes = await readOracleInput({ ...input, path: 'packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits' }), entry = requireRecord(fixture.cases['oi-test']);
 
 test('Astropy binary-table cells: every column type, TNULL as NaN, HIERARCH keys', () => {
   const table = findTable(bytes, requireString(entry.extname)), cells = requireRecord(entry.cells);

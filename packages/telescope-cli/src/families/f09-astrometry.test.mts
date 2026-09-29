@@ -7,7 +7,7 @@ test('F09 row selection and sky view retain identifiers and stated coordinates',
 
 const MAS=180/Math.PI*3.6e6,close=(actual:number,expected:number,tolerance:number,label:string)=>assert.ok(Math.abs(actual-expected)<=tolerance,`${label}: ${actual} differs from ${expected}`);
 test('F09 reads a real Gaia DR3 CSV by archive column names and matches Astropy sky offsets',async()=>{
-  const text=await readFile(resolve(root,'tests/fixtures/telescope-families/f09-gaia-hd-189733/gaia-dr3-astrometry.csv'),'utf8'),gaia=readAstrometryCsv(text);assert.equal(gaia.length,36);
+  const text=await readFile(resolve(root,'packages/telescope-cli/src/families/fixtures/telescope-families/f09-gaia-hd-189733/gaia-dr3-astrometry.csv'),'utf8'),gaia=readAstrometryCsv(text);assert.equal(gaia.length,36);
   const star=gaia.find(row=>row.id==='1827242816201846144')!;assert.equal(star.raErrorMas,0.009658503);assert.equal(star.raDecCorrelation,0.044162523);assert.equal(star.epochJulianYear,2016);assert.equal(gaia.find(row=>row.id==='1827242816182176512')!.pmRaCosDecMasYr,undefined);
   const faint=gaia.find(row=>row.id==='1827242816176119296')!;
   close(faint.decErrorMas!,34.24364,1e-9,'faint declination error');close(faint.raDecCorrelation!,0.97039557,1e-9,'faint RA–Dec correlation');

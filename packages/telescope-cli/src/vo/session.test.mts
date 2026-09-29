@@ -24,7 +24,7 @@ import type { QueryInputs } from '../query-contract.mts';
 
 test('confirmed direct FITS table reaches F08 export through saved exploration and get', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'vo-table-session-'));
-  const fixtures = resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo');
+  const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-vo');
   const fits = Buffer.concat([primaryHdu([['OBJECT', 'Betelgeuse']]),
     binaryTableHdu('CATALOG', [{ name: 'FLUX', form: 'E' }], [[1.5], [2.5]], [])]);
   const twoTables = Buffer.concat([fits, binaryTableHdu('OTHER', [{ name: 'FLUX', form: 'E' }], [[3.5]], [])]);
@@ -75,7 +75,7 @@ test('confirmed direct FITS table reaches F08 export through saved exploration a
 
 test('saved VO choice acquires, qualifies, exports through existing owners, and refuses tampered evidence', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'vo-session-'));
-  const fixtures = resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo'), fits = await readFile(resolve(fixtures, 'eso-circle.fits'));
+  const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-vo'), fits = await readFile(resolve(fixtures, 'eso-circle.fits'));
   const archive = resolve(root, 'science.zip');
   execFileSync('python3', ['-c', "import sys,zipfile\nwith zipfile.ZipFile(sys.argv[2], 'w') as z:\n z.write(sys.argv[1], 'science.fits')\n z.writestr('labels/product.lbl', '^IMAGE = \\\"../science.fits\\\"\\n')", resolve(fixtures, 'eso-circle.fits'), archive]);
   const packageBytes = await readFile(archive);
@@ -125,7 +125,7 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
 
 test('two saved SODA subsets of one parent keep separate acquisition, qualification, and delivery records', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'vo-two-subsets-'));
-  const fixtures = resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo'), fits = await readFile(resolve(fixtures, 'eso-circle.fits'));
+  const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-vo'), fits = await readFile(resolve(fixtures, 'eso-circle.fits'));
   const requests: string[] = [];
   const server = createServer((request, response) => { requests.push(request.url!); response.end(fits); });
   await new Promise<void>(done => server.listen(0, '127.0.0.1', done));

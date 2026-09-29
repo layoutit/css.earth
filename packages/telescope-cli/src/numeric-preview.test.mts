@@ -17,7 +17,7 @@ test('Astropy and Matplotlib render bounded previews from pinned family data',as
     assert.equal(spectrum.astropy,'8.0.1');assert.ok((await stat(resolve(directory,'spectrum','preview.png'))).size>1_000);
     const histogram=await plotNumericPreview(resolve(directory,'histogram'),{kind:'histogram',title:'Chandra energy counts',xLabel:'Energy (eV)',yLabel:'Counts',edges:[500,1_000,2_000,4_000,7_000],counts:[12,18,7,3]});
     assert.equal(histogram.kind,'histogram');assert.ok((await stat(resolve(directory,'histogram','preview.svg'))).size>1_000);
-    const radar=await readFile(resolve(root,'tests/fixtures/telescope-families/geographos-radar/ge007.fit'));
+    const radar=await readFile(resolve(root,'packages/telescope-cli/src/families/fixtures/telescope-families/geographos-radar/ge007.fit'));
     const values:number[]=[];for(let index=0;index<64*127;index++)values.push(radar.readDoubleBE(2880+index*8));
     const raster=await plotNumericPreview(resolve(directory,'radar'),{kind:'raster',title:'Geographos delay-Doppler',xLabel:'Native delay pixel',yLabel:'Native Doppler pixel',width:64,height:127,values,colorLabel:'Radar echo power'});
     assert.equal(raster.kind,'raster');assert.ok((await stat(resolve(directory,'radar','preview.png'))).size>1_000);

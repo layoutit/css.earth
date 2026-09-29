@@ -11,8 +11,8 @@ import { applycalStatement, pipelineTcleanArguments, restoreScript, type Replaye
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const root = WORKSPACE;
-const record = () => readFile(resolve(root, 'tests/fixtures/alma/uid___A002_X10dde56_X29a8.ms.calapply.txt'), 'utf8');
-const fixture = (name: string) => readFile(resolve(root, 'tests/fixtures/alma', name), 'utf8');
+const record = () => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma/uid___A002_X10dde56_X29a8.ms.calapply.txt'), 'utf8');
+const fixture = (name: string) => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma', name), 'utf8');
 const imaging = async () => pipelineImaging(await fixture('casa_commands.tclean.log'), 'R_Dor');
 const selfcal = async () => parseSelfCalibration(JSON.parse(await fixture('selfcal.json')));
 const plan = { target: 'R_Dor', scienceWindows: '25,27,29,31' };

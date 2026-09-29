@@ -4,7 +4,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { card, imageFixture } from '../../../tests/fixtures/fits/helpers.mts';
+import { card, imageFixture } from './fixtures/fits/helpers.mts';
 import { parseSourceProducts, SOURCE_PRODUCTS_SCHEMA } from './source-product-contract.mts';
 import { loadSourceProducts, sourceRun, SOURCE_RUN_FILES } from './source-products.mts';
 import { qualifySourceProduct, inspectFits, assertPdsDependencies } from './qualify-source.mts';

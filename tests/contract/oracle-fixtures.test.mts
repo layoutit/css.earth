@@ -11,6 +11,7 @@ import { runtimeLock, generatorFingerprint } from '../../packages/bake/src/objec
 // The scripts sit beside their fixtures; SBMT's JSON bridge manifests and runtime lock are not fixtures.
 const NOT_FIXTURES = new Set(['sbmt/package.json', 'sbmt/package-lock.json', 'sbmt/runtime.lock.json']);
 const relocatedFixtures: Readonly<Record<string, string>> = {
+  "physical-units/spectral.json": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.json",
   "sbmt/projection.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json",
 
   "spice/dart-draco.json": "packages/bake/src/astronomy/fixtures/dart-draco.json",
@@ -41,6 +42,8 @@ const relocatedFixtures: Readonly<Record<string, string>> = {
   "pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json"
 };
 const relocatedScripts: Readonly<Record<string, string>> = {
+  "fits/binary-table.py": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/fits/binary-table.py",
+  "physical-units/spectral.py": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.py",
   "spice/new-horizons-approach.py": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.py",
 
   "eclipse-map/numerics.py": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.py",
@@ -94,7 +97,7 @@ test('oracle fixtures name their generator, a pinned tool version and pinned inp
     }
     assert.ok(pinned >= 1, `${name} records its pinned environment`);
     assert.ok(fixture.inputs.length + fixture.references.length >= 1, `${name} lists its inputs or pinned references`);
-    await assertPinnedInputs(fixture.inputs, kernelBankPaths);
+    await assertPinnedInputs(fixture.inputs.map(input => input.path === 'tests/fixtures/fits/binary-table-columns.fits' ? { ...input, path: 'packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits' } : input), kernelBankPaths);
     assertPinnedReferences(fixture.references);
   }
 });
