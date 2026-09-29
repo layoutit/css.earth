@@ -27,9 +27,8 @@ measured before anyone builds it.
   each root's opacity. Zero-weight roots are `display: none`. Every leaf exists as three coincident copies whose opacity
   restores the optical path length at oblique angles; the gain stays under 2.15. Leaves outside the frustum are hidden
   one by one through their `boundsCssPixels`.
-- **The isolation of the roots is load-bearing.** `site/test/rendered-page.test.mts` forces `preserve-3d` onto the
-  projection roots and requires the rendered light to collapse, because a root that joins the page's 3D context loses
-  the per-root opacity mix.
+- **The isolation of the roots is load-bearing.** A root that joins the page's 3D context loses the per-root opacity
+  mix.
 - **A body is a flattened root too.** The shell runtime (`packages/renderer/src/shell/prepared-shell-runtime.ts`) mounts a
   flat root with a `preserve-3d` camera and scene, and the PolyCSS leaves inside keep `preserve-3d`. Betelgeuse's
   prepared tree has 457 nodes.

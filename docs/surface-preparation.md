@@ -515,9 +515,7 @@ declares a seam outset, preparation writes two corrections instead:
 
 The historical seam browser test
 measured saved Venus radar views over black and white backdrops and compared
-brightness across seams. The current
-[`rendered-page.test.mts`](../site/test/rendered-page.test.mts) checks built HTML
-structure; it does not measure seam pixels.
+brightness across seams. No current test measures seam pixels.
 These corrections do not change breaks in the source imagery itself, such as
 the one-pixel border columns at the edges of the Venus radar, Mars and Ceres
 source maps.

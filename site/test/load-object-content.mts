@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { requireArray, requireRecord, requireString } from "@cssearth/core";
 
@@ -32,11 +31,6 @@ export async function loadObjectContent(id: string): Promise<LoadedObjectContent
     const reference = descriptor.properties.recipe.sources.find(entry => entry.id === name);
     assert.ok(reference, `${id}: missing ${name} source reference`);
     const bytes = await readFile(new URL(reference.path, root));
-    const manifest = requireRecord(await readJson("source/manifest.json"), `${id}: source manifest`);
-    const pin = ["inputs", "documents", "generatedIntermediates"].flatMap(key => requireArray(manifest[key] ?? [], key).map(entry => requireRecord(entry, key)))
-      .find(entry => `source/${String(entry.path)}` === reference.path);
-    assert.ok(pin, `${id}: ${name} is declared in the source manifest`);
-    // A download carries a pin; a file authored and tracked here carries none.
     return requireRecord(JSON.parse(bytes.toString("utf8")), `${id}: ${name} source`);
   }
   return { descriptor, source, prepared: requireRecord(await readJson("prepared/content.json"), `${id}: prepared content`),

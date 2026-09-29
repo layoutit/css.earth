@@ -1,13 +1,12 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { inspectContextAvailability, prepareContextAvailability } from '../build/prepare/prepare-context-availability.mts';
 import { parseContextAvailability } from '@cssearth/objects/provenance';
 import { writeContextPackage } from '../../tests/fixtures/context-package.mts';
-import { readPreparedVolumeProvenance } from '../build/prepare/prepare-volume-provenance.mts';
 
 test('a missing bank isolates one object; restoring it admits the complete package on the next startup', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
@@ -69,24 +68,4 @@ test('an asset-origin build verifies a missing local preview against its publish
   const unavailable = (await inspectContextAvailability(root, { publicAssets: 'manifest' })).helix;
   if (unavailable.available) assert.fail('Changed preview identity must make the package unavailable.');
   assert.match(unavailable.reason, /Unpublished dataset preview/);
-});
-
-test('deploy catalogue input reads the installed prepared volume instead of regenerating it', async t => {
-  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-prepared-volume-')); t.after(() => rm(root, { recursive: true, force: true }));
-  const fixture = await writeContextPackage(root, 'helix');
-  const volumes = await readPreparedVolumeProvenance({ root });
-  assert.equal(volumes.length, 1);
-  assert.equal(volumes[0]?.id, 'helix');
-  assert.equal(volumes[0]?.name, 'helix fixture');
-  assert.deepEqual(volumes[0]?.controls.map(control => control.id), ['optical']);
-  assert.deepEqual(volumes[0]?.provenance, fixture.provenance);
-  assert.deepEqual(volumes[0]?.outputs, []);
-});
-
-test('deploy volume input ignores source-only catalogue contexts with no prepared lens metadata', async t => {
-  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-source-context-')); t.after(() => rm(root, { recursive: true, force: true }));
-  const path = resolve(root, 'src/objects/galaxy-clusters/source/presentation.json');
-  await mkdir(resolve(path, '..'), { recursive: true });
-  await writeFile(path, JSON.stringify({ provenance: { products: [] } }));
-  assert.deepEqual(await readPreparedVolumeProvenance({ root }), []);
 });

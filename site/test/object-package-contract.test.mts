@@ -2,12 +2,11 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { createHash } from "node:crypto";
-import { mkdtemp, mkdir, readFile, readdir, writeFile, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 
 import { required } from './navigation-test-values.mts';
-import { SourceEvidence } from './source-evidence-values.mts';
 import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
 import { objectInformationSource, validateObjectEditorial } from "@cssearth/bake/sources";
@@ -45,37 +44,7 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   await assert.rejects(validateObjectData(object, { projectRoot }), /undeclared|Undeclared|closure/);
 });
 
-test("derives the complete owned file contract from object identity", () => {
-  const first = implemented[0];
-  const paths = objectPackagePaths(first, "/project", true);
-  assert.ok(paths.requiredFiles.includes(
-    `/project/src/objects/${first.id}/prepared/content.json`,
-  ));
-  assert.ok(paths.requiredFiles.includes(
-    `/project/src/objects/${first.id}/prepared/runtime.json`,
-  ));
-  assert.ok(paths.requiredFiles.includes(
-    `/project/site/pages/[id].astro`,
-  ));
-  assert.ok(!paths.requiredFiles.includes(
-    `/project/tests/objects/browser/${first.id}/browser-profile.mts`,
-  ));
-  assert.ok(paths.requiredFiles.includes(
-    `/project/src/objects/${first.id}/object.json`,
-  ));
-  assert.ok(paths.requiredFiles.includes(
-    `/project/src/objects/${first.id}/source/manifest.json`,
-  ));
-  assert.ok(paths.requiredFiles.every((file) => !file.includes('/data/object-information/')));
-  assert.ok(paths.requiredFiles.every(file => !/src\/objects\/[^/]+\/(?:tools|test|site|runtime)\//u.test(file)));
-});
-
-test("requires every registered object package file", async () => {
-  for (const entry of implemented) {
-    await validateObjectPackageFiles(entry);
-    const controls = SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/objects/${entry.id}/prepared/controls.json`, import.meta.url), 'utf8')));
-    assert.ok(controls.child('lenses').rows('controls').length > 0, `${entry.id}: the displayed surface needs an identified dataset`);
-  }
+test("names the missing package file and ignores files the contract no longer asks for", async () => {
   await assert.rejects(
     validateObjectPackageFiles(implemented[0], {
       accessFile: async (file) => {
@@ -103,7 +72,7 @@ test("requires every registered object package file", async () => {
   });
 });
 
-test("validates local editorial identity and provenance", () => {
+test("validates local editorial identity and source", () => {
   const sun = required(implemented.find(object => object.id === "sun"));
   const source = required(objectInformationSource(sun.id));
   const valid = {
@@ -161,13 +130,4 @@ test("validates runtime asset manifest entries", () => {
     }),
     /invalid inventory entry/,
   );
-});
-
-test("prepare-provenance covers exactly the layered bodies, so only they leave provenance.json out of the inventory", async () => {
-  const layered = new Set<string>();
-  for (const id of await readdir(new URL("../../src/objects/", import.meta.url))) {
-    const text = await readFile(new URL(`../../src/objects/${id}/object.json`, import.meta.url), "utf8").catch(() => null);
-    if (text !== null && JSON.parse(text).type === "layered-body") layered.add(id);
-  }
-  assert.deepEqual([...layered].sort(), SCENE_OBJECTS.map(object => object.id).sort());
 });

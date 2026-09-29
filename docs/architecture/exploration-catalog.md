@@ -211,7 +211,6 @@ For dataset navigation or card presentation changes, run the affected
 [URL](../../site/test/dataset-url.test.mts) and
 [scene session](../../site/test/scene-session.test.mts) tests. After a build,
 [`rendered-page.test.mts`](../../site/test/rendered-page.test.mts) parses the
-Saturn, Earth and Mercury HTML to check that each page contains one prepared
-scene, a camera, prepared texture references and unique element IDs. It does
-not exercise navigation or inspect browser screenshots.
+built HTML to check that the information-tab rules live in the scene head, not in
+the replaceable card. It does not exercise navigation or inspect browser screenshots.
 A source association does not certify texture delivery or scientific accuracy.

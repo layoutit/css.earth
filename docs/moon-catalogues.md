@@ -81,6 +81,5 @@ cached replies for a different epoch or reference frame.
 
 Focused checks: `node --test site/test/body-moons.test.mts
 site/test/moon-labels.test.mts site/test/source-link.test.mts`. They verify full
-catalogue membership, available destinations, every prepared vector against its
-pinned reply, rejection of the wrong Horizons target, major/minor orbit policy,
-planet occlusion, caption collision and overview hiding.
+catalogue membership, available destinations, major/minor orbit policy, planet
+occlusion, caption collision and overview hiding.

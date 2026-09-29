@@ -1,6 +1,5 @@
 import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
@@ -24,14 +23,8 @@ test('--keep-bindings refuses when the solved system transform moved', () => {
 });
 
 for (const object of SCENE_OBJECTS) {
-  let text;
-  try { text = await readFile(new URL(`../../src/objects/${object.id}/object.json`, import.meta.url), 'utf8'); }
-  catch (error) {
-    if (error !== null && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') continue;
-    throw error;
-  }
   test(`${object.id}: generic JSON transport preserves the complete prepared definition`, async () => {
-    const descriptor = parseObjectDescriptor(text);
+    const descriptor = parseObjectDescriptor(await readFile(new URL(`../../src/objects/${object.id}/object.json`, import.meta.url), 'utf8'));
     assert.ok(descriptor.prepared);
     const raw = await readFile(new URL(`../../src/objects/${descriptor.id}/${descriptor.prepared.url}`, import.meta.url));
     const envelope = readPreparedObject(JSON.parse(raw.toString('utf8')), descriptor, data => data);

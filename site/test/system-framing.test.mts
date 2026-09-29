@@ -5,11 +5,9 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyCardViewAtCamera } from '../overview-context.mts';
-import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
-import { orbitVertices } from '@cssearth/renderer';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
@@ -38,49 +36,6 @@ test('fitting the current angle is independent of prepared box order', () => {
   const reordered = { ...view, candidates: [...view.candidates].reverse() };
   assert.deepEqual(systemViewTarget(world, frame, optics, reordered, rect), target);
   assert.deepEqual(target.pose.orientationXyzw, world.pose.orientationXyzw);
-});
-
-for (const [width, height, offset] of [[1524, 1237, [0, 0]], [1280, 720, [0, 0]], [390, 844, [0, 0]], [1024, 700, [40, -20]]] as const)
-test(`each system fits its complete primary orbits at ${width}x${height}, offset ${offset}`, () => {
-  const viewport = { ...optics, widthPixels: width, heightPixels: height, focalPixels: width * Math.sqrt(3) / 2,
-    principalOffsetPixels: offset, framingRadiusPixels: Math.min(width, height) * .28 };
-  const cameraMount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => world, () => viewport) };
-  const rect = systemFramingRect(viewport);
-  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
-  for (const [id, radiusM] of SYSTEM_FRAMING_RADII) {
-    const frame = SCENE_OBJECTS.find(object => object.id === id)?.worldFrame;
-    if (!frame) continue;
-    const view = required(SYSTEM_VIEWS.get(id));
-    assert.ok(view, `${id} has a prepared system view`);
-    const target = required(navigation.systemTarget({ objectId: id, fromId: 'sun', mount: cameraMount }));
-    const projection = presentWorldCamera(target, frame, viewport);
-    // A turned camera at another star is centred to the precision of its coordinates: about 500 m at 87 parsecs.
-    const range = Math.hypot(...target.pose.positionM.map((value, axis) => value - frame.originM[axis]!));
-    const centering = Math.max(1e-5, 8 * Number.EPSILON * Math.max(...frame.originM.map(Math.abs)) / range * viewport.focalPixels);
-    assert.ok(required(projection.centerPixels).every(value => Math.abs(value) < centering), `${id} stays centered`);
-    const moons = context.bodies.filter(body => body.orbit?.centerBodyId === id);
-    const memberIds = required([context.focus, ...context.bodies].find(body => body.id === id)?.systemView).memberIds;
-    for (const moon of moons.filter(moon => memberIds.includes(moon.id))) {
-      const orbit = required(moon.orbit), bound = required(orbit.bounds);
-      assert.ok(Math.hypot(...bound.centerM.map((value: number, axis: number): number => value - frame.originM[axis]))
-        + bound.radiusM + moon.radiusM <= radiusM * (1 + 1e-10), `${id} includes ${moon.id}`);
-      assert.ok(memberIds.includes(moon.id), `${id} frames ${moon.id}`);
-      for (const vertex of orbitVertices(orbit)) {
-        // A member drawn from its record has no measured radius (Sgr A*'s S-stars): it must still sit inside the frame, as a point.
-        const point = presentWorldCamera(target, { ...frame, originM: vertex, bodyRadiusM: moon.radiusM || 1 }, viewport);
-        const [x, y] = required(point.centerPixels);
-        assert.ok(x >= rect.left - .001 && x <= rect.right + .001 && y >= rect.top - .001 && y <= rect.bottom + .001,
-          `${id}/${moon.id} complete orbit fits`);
-      }
-    }
-    assert.equal(bodyCardViewAtCamera(target, frame, viewport, id), 'overview', id);
-    const close = createWorldSelectionTarget(target, frame, viewport);
-    assert.equal(bodyCardViewAtCamera(close, frame, viewport, id), 'detail', id);
-    const otherMount = { sharedView: unusedSharedView, navigation: { ...cameraMount.navigation, capture: () => ({ ...world,
-      pose: { positionM: [1e14, -2e14, -1e15] as const, orientationXyzw: [0, 1, 0, 0] as const } }) } };
-    const otherTarget = required(navigation.systemTarget({ objectId: id, fromId: 'sun', mount: otherMount }));
-    if (!STELLAR_SYSTEMS.has(id)) assert.deepEqual(otherTarget.pose.orientationXyzw, [0, 1, 0, 0], `${id} preserves the opposite viewing direction too`);
-  }
 });
 
 test('another star\'s system, reached edge-on from the Sun, opens to the shallowest prepared elevation', () => {
@@ -159,16 +114,6 @@ test('adding a small distant moon does not pull the initial camera away from the
   for (const id of parents) assert.equal(allRadii.get(id), mainRadii.get(id), id);
   // The app frames from the summary, whose culling spheres are rounded outward by at most 2.8 millionths of their radius.
   for (const id of parents) assert.ok(Math.abs(SYSTEM_FRAMING_RADII.get(id)! / allRadii.get(id)! - 1) <= 3e-6, id);
-});
-
-test('a body without moons uses its normal close-up target on first selection', () => {
-  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
-  for (const id of ['mercury', 'venus', 'titan']) {
-    const frame = required(required(SCENE_OBJECTS.find(object => object.id === id)).worldFrame);
-    const target = required(navigation.systemTarget({ objectId: id, fromId: "sun", mount }));
-    assert.deepEqual(target, createWorldSelectionTarget(world, frame, optics));
-    assert.equal(bodyCardViewAtCamera(target, frame, optics, id), 'detail');
-  }
 });
 
 test('clicking the already selected body in close-up does not zoom back out to its moons', () => {

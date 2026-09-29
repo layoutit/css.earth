@@ -31,7 +31,6 @@ export function sourceCheckMode(value = process.env.CSSEARTH_SOURCE_CHECK_MODE):
   if (value === 'published') return value;
   throw new TypeError(`Unknown source check mode: ${value}`);
 }
-export const sourceTestVolumes = () => sourceCheckMode() === 'published' ? readPreparedVolumeProvenance() : prepareVolumeProvenance();
 export const sourceTestContexts = () => sourceCheckMode() === 'published' ? readPreparedContextProvenance({ route: CONTEXT_ROUTE }) : prepareContextProvenance({ route: CONTEXT_ROUTE });
 export const prepareTestFacilities = (options: Parameters<typeof prepareFacilities>[0] = {}) =>
   prepareFacilities({ ...options, packageMode: sourceCheckMode() });
