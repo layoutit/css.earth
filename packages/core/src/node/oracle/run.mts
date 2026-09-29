@@ -13,6 +13,14 @@ import { projectRoot } from '../project-root.ts';
 
 const root = projectRoot(import.meta.url), oracles = resolve(root, 'tests/oracles'), python = resolve(root, '.local/oracles/venv/bin/python');
 const relocated: Readonly<Record<string, string>> = {
+  "astronomy/hosted-eccentric": "packages/bake/src/astronomy/fixtures/hosted-eccentric.py",
+  "fits/core": "packages/bake/src/objects/cameras/fixtures/fits/core.py",
+  "fits/pallas": "packages/bake/src/objects/cameras/fixtures/fits/pallas.py",
+  "fits/sky-orientation": "packages/bake/src/objects/cameras/fixtures/fits/sky-orientation.py",
+  "fits/sky-projection": "packages/bake/src/objects/cameras/fixtures/fits/sky-projection.py",
+  "fits/synoptic": "packages/bake/src/objects/cameras/fixtures/fits/synoptic.py",
+  "spice/dart-draco": "packages/bake/src/objects/cameras/fixtures/dart-draco.py",
+
   "fits/binary-table": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/fits/binary-table.py",
   "physical-units/spectral": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.py",
   "sbmt/projection": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.mts",

@@ -4,6 +4,9 @@ import { relative, resolve } from 'node:path';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const moved = [
+  ['tests/fixtures/telescope-families/f04-europa-stis', 'packages/fits/src/node/fixtures/telescope-families/f04-europa-stis'],
+  ['tests/fixtures/telescope-families/family-sources.json', 'packages/fits/src/node/fixtures/telescope-families/family-sources.json'],
+
   ['tests/fixtures/telescope-family-examples', 'packages/telescope-cli/src/families/fixtures/telescope-family-examples'],
   ['tests/fixtures/telescope-families', 'packages/telescope-cli/src/families/fixtures/telescope-families'],
   ['tests/fixtures/alma', 'packages/telescope-cli/src/archives/interferometry/fixtures/alma'],

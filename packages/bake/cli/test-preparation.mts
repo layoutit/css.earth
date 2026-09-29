@@ -32,6 +32,13 @@ const universeEntries = [
 // Relocated contracts and oracles retain their original Node/audit lanes. Moving them beside an object module
 // must not also admit them to preparation discovery, which previously only reached tests/objects/.
 const NON_PREPARATION_TESTS: readonly string[] = [
+  'packages/bake/src/objects/cameras/core.oracle.test.mts',
+  'packages/bake/src/objects/cameras/pallas.test.mts',
+  'packages/bake/src/objects/cameras/sky-orientation.oracle.test.mts',
+  'packages/bake/src/objects/cameras/sky-projection.oracle.test.mts',
+  'packages/bake/src/objects/cameras/synoptic.test.mts',
+  'packages/bake/src/objects/cameras/dart-draco.oracle.test.mts',
+
   'packages/bake/src/objects/content/prepare-factsheets-cli.test.mts',
   'packages/bake/src/objects/default-view/fixtures/new-horizons-approach.oracle.test.mts',
   'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.test.mts',
@@ -80,6 +87,8 @@ function run(args: string[]) {
 }
 // `.mts` entries load natively; esbuild refuses to mark an entry point itself external.
 const native = ['site/test/prepare-spatial-context.test.mts',
+  ...(universeOnly ? [] : ['packages/bake/src/astronomy/hosted-eccentric.oracle.test.mts',
+    'packages/bake/src/astronomy/hosted-orbit-source.test.mts', 'packages/bake/src/photometry/picaso-limb.test.mts']),
   ...(universeOnly ? [] : ['packages/bake/src/presentation/emissive-plates.test.mts', 'packages/bake/src/raster/raster-pages.test.mts',
     'packages/bake/src/delivery/publication.test.mts', 'packages/bake/src/delivery/publication-inventory.test.mts']),
   ...(universeOnly ? [] : [...await discover('tests/objects', '.test.mjs'), ...await discover('tests/objects', '.test.mts'), ...await discover('packages/bake/src/objects', '.test.mts'), ...await discover('packages/bake/authoring', '.test.mjs'), ...await discover('packages/bake/authoring', '.test.mts'), ...await discover('packages/telescope-cli/authoring', '.test.mjs'), ...await discover('packages/telescope-cli/authoring', '.test.mts')])];

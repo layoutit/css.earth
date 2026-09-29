@@ -1,16 +1,17 @@
+import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 // The five Uranian moons' Voyager colour lenses: each frame placed by limb fit and registered to the moon's Schenk mosaic,
 // every placed tile pinned, and the prepared composite reporting its band levels. One test file, five packages: the route is
 // the same and the numbers per moon are read from their own reports.
 import assert from "node:assert/strict";
-import { sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceTest } from './source-test.ts';
 const test = sourceTest();
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { requireRecord } from "@cssearth/core";
-import { required } from "@cssearth/objects/node/contract";
+import { required } from "./contract/index.ts";
 
 const MOONS = ["miranda", "ariel", "umbriel", "titania", "oberon"] as const;
-const root = resolve(import.meta.dirname, "../../../..");
+const root = findProjectRoot(import.meta.url);
 const read = async (moon: string, path: string) => JSON.parse(await readFile(resolve(root, "src/objects", moon, path), "utf8"));
 
 interface Frame { id: string; observation: string; filter: string; placed: boolean; pixelScaleKm: number; limb?: { accepted: boolean; edgePoints: number; rmsPixels: number; seed: string; groundFloor?: number };

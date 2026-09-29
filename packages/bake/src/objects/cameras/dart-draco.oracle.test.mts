@@ -8,7 +8,7 @@ import { requireRecord, requireArray, requireString, requireFiniteNumber } from 
 import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '@cssearth/core/oracle';
 
 /**
- * The SPICE toolkit as the oracle. tests/oracles/spice/dart-draco.py runs
+ * The SPICE toolkit as the oracle. packages/bake/src/objects/cameras/fixtures/dart-draco.py runs
  * SpiceyPy over the same pinned DART kernels and writes what CSPICE computes;
  * this test loads the same kernels through @cssearth/spice and compares. The
  * fixture names the toolkit version and the path and size of every kernel.

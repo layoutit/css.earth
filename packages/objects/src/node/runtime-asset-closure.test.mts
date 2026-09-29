@@ -1,15 +1,16 @@
+import { projectRoot } from '@cssearth/core/node';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import { sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceTest } from './source-test.ts';
 const test = sourceTest();
 
 import {
   assembleRuntimeAssetClosure, inventoryPreparedAssets, inventoryPublicAssets, normalizeRuntimeAssetUrls,
   readInventory, updateInventory, validateInventory, verifyInventory,
-} from "@cssearth/objects/node";
+} from "./index.ts";
 
 const digest = (text: string) => createHash("sha256").update(text).digest("hex");
 
@@ -119,7 +120,7 @@ test("a git-tracked file is refused, in a fixture and against the real checkout"
     gitTrackedPaths: async () => new Set([resolve(preparedRoot, "some-other-tracked-file.json")]) });
   assert.deepEqual(inventory?.assets.map(asset => asset.filename), ["runtime.json"]);
   // The default lookup asks this checkout's git: the tracked object.json next to prepared/ must be refused.
-  const mimas = resolve(import.meta.dirname, "../../src/objects/mimas");
+  const mimas = resolve(projectRoot(import.meta.url), "src/objects/mimas");
   const scratch = await mkdtemp(resolve(tmpdir(), "inventory-tracked-real-"));
   context.after(() => rm(scratch, { recursive: true, force: true }));
   await assert.rejects(inventoryPreparedAssets({ objectId: "mimas", objectDirectory: scratch, preparedRoot: mimas, filenames: ["object.json"] }), /git-tracked.*object\.json/);

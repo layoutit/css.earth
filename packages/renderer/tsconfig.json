@@ -14,5 +14,5 @@
     "tsBuildInfoFile": "../../output/tsbuildinfo/renderer.tsbuildinfo"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.test.ts", "dist"]
+  "exclude": ["src/**/*.test.ts", "dist", "src/**/*.test.mts", "src/**/fixtures/**"]
 }

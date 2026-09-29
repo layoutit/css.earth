@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, test } from 'vitest';
 import { readFitsHdus, readFitsImage } from '../index.js';
-import { card, imageFixture } from '../test-support/fixtures.js';
+import { card, imageFixture } from './fixtures/bytes.js';
 import { readFitsFileHdus, readFitsFileRegion } from './index.js';
 
 let directory = '';

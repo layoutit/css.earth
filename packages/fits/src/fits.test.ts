@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { fitsCardValue, readFitsHeader, readFitsHdu, readFitsHdus, readFitsImage, fitsImageAccessor, assertUnscaledFitsTable, readFitsPrimary, readFitsPlane } from './index.js';
-import { card, imageFixture } from './test-support/fixtures.js';
+import { card, imageFixture } from './node/fixtures/bytes.js';
 
 test('quoted slashes, escaped quotes, undefined metadata and D exponents are preserved', () => {
   assert.equal(fitsCardValue(card('BUNIT', "'W/(m^2*sr*um)' / units")), 'W/(m^2*sr*um)');

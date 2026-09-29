@@ -462,7 +462,7 @@ convention alongside the existing Astropy circular/sky-frame oracle.
 The CSPICE comparison covers 24 states at eccentricities 0.0084, 0.05, 0.5
 and 0.9 with a float64 budget of `1e-11` times semi-major axis for position
 and circular speed for velocity. This checks implementation agreement, not
-the uncertainty of a measured orbit. The [TRAPPIST-1f source fixture](../../tests/fixtures/hosted-orbits/trappist-1f-agol2021/README.md)
+the uncertainty of a measured orbit. The [TRAPPIST-1f source fixture](../bake/src/astronomy/fixtures/trappist-1f-agol2021/README.md)
 retains the published parameters, their convention conversion and limitations.
 
 Existing shipped body records retain their declared circular approximations.

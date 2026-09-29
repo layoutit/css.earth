@@ -1,16 +1,18 @@
+import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
+import { pathToFileURL } from 'node:url';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '@cssearth/objects/node/source-test';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { sourceTest } from './source-test.ts';
+import { readPreparedObjects } from './index.ts';
 import { resolve } from 'node:path';
 const test = sourceTest();
 
-const OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
+const OBJECTS = readPreparedObjects(findProjectRoot(import.meta.url)).sceneObjects;
 
 // Run after prepare:object-json. The checked-in tree gate also runs in CI
 // without requiring generated transports or an asset download.
 for (const { id } of OBJECTS) test(`${id}: serialized activation bank matches its descriptor and tree`, async () => {
-  const root = new URL(`../../src/objects/${id}/`, import.meta.url);
+  const root = new URL(`src/objects/${id}/`, pathToFileURL(findProjectRoot(import.meta.url) + '/'));
   const runtime = JSON.parse(await readFile(new URL('prepared/runtime.json', root), 'utf8'));
   const descriptor = JSON.parse(await readFile(new URL('object.json', root), 'utf8'));
   const bytes = await readFile(new URL(descriptor.prepared.url, root));

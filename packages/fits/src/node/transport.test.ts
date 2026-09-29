@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { decodeFits } from '../index.js';
-import { imageFixture, card } from '../test-support/fixtures.js';
+import { imageFixture, card } from './fixtures/bytes.js';
 import { encodeFits } from './index.js';
 
 test('FITS transport reverses DOM rows exactly once and preserves signed samples', () => {

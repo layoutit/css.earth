@@ -4,7 +4,7 @@
  * The orientation is the linear part of the WCS at the reference pixel (FITS WCS Paper I, section 2.1): the CD matrix, or
  * CDELT scaled by PC, or CDELT with the older CROTA2. Only axis-aligned images are accepted. A rotated or skewed image,
  * swapped axes, a projection whose default LONPOLE is not 180 or a reference point on a celestial pole is refused, because
- * a display raster cannot hold it without resampling. tests/oracles/fits/sky-orientation.py checks this reading against
+ * a display raster cannot hold it without resampling. packages/bake/src/objects/cameras/fixtures/fits/sky-orientation.py checks this reading against
  * Astropy's world coordinates. */
 import type { FitsHeader } from './fits.js';
 import { dot3 as dot } from '@cssearth/core';
@@ -93,7 +93,7 @@ export function skyDisplayRaster<T extends Float32Array | Float64Array>(values: 
 
 /** A gnomonic (TAN) or orthographic (SIN) sky image's pixel <-> ICRS mapping, rotated or not: what an archive mosaic needs to be resampled onto another
  * grid. Distortion terms (SIP, TPV, PV cards other than a plain SIN's zero PV2_1 and PV2_2) are refused, as is a LONPOLE other than 180 or a frame other than ICRS or FK5.
- * Pixels are zero-based (the centre of the first stored pixel is 0, 0). tests/oracles/fits/sky-projection.py checks both
+ * Pixels are zero-based (the centre of the first stored pixel is 0, 0). packages/bake/src/objects/cameras/fixtures/fits/sky-projection.py checks both
  * directions against Astropy's all_world2pix and all_pix2world. */
 export interface SkyProjection {
   /** Zero-based pixel of an ICRS direction, or undefined on the far side of the tangent plane. */

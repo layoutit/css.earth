@@ -15,7 +15,7 @@ constant definitions.
 
 Preparation receipts, oracle fixtures and archived reports depend on exactly what this reader accepts, refuses and
 returns. Change a decoded value, an accepted card convention or an error message only on purpose, together with every
-test and oracle that pins it. The Astropy comparisons live in `tests/oracles/fits/` beside the scripts that write their
+test and oracle that pins it. The Astropy comparisons live in `packages/bake/src/objects/cameras/` beside the scripts that write their
 fixtures; run them with `node tests/oracles/test-fits.mts --unit` after any change here.
 
 ## Shared package contract

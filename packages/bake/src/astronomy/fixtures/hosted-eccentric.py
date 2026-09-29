@@ -12,7 +12,7 @@ from pathlib import Path
 
 import spiceypy as spice
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import ROOT, external_record, write
 
 
@@ -35,7 +35,7 @@ ORBITS = [
      'argumentOfPeriapsisDegrees': 319.0, 'rightAscensionDegrees': 359.5,
      'declinationDegrees': 78.0, 'nodePositionAngleDegrees': 301.0},
 ]
-SOURCE = ROOT / 'tests/fixtures/hosted-orbits/trappist-1f-agol2021/qualification.json'
+SOURCE = ROOT / 'packages/bake/src/astronomy/fixtures/trappist-1f-agol2021/qualification.json'
 published = json.loads(SOURCE.read_text())
 ORBITS.append({**published['orbit'], 'id': published['id'], 'stellarRadiusKm': 1.0,
                'rightAscensionDegrees': 0.0, 'declinationDegrees': 0.0,
