@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-map-sphere-source@1",
   "id": "cmb",
+  "name": "Cosmic microwave background",
   "source": "planck-2018-smica-cmb",
   "meaning": "The cosmic microwave background as Planck's 2018 SMICA map shows it, drawn on the sphere it left from: the surface of last scattering, at the comoving distance of redshift 1089.80 in the Planck 2018 cosmology, 13.9 Gpc (45 billion light-years) away. Seen from outside, it is the edge of the observable universe.",
   "map": {
@@ -28,10 +29,16 @@
     "basis": "z* = 1089.80 \u00b1 0.21, the redshift of last scattering in Planck 2018 VI, Table 2, TT,TE,EE+lowE+lensing+BAO (the parameters Astropy's Planck18 carries); its comoving distance is the sphere's radius."
   },
   "mesh": {
-    "patchesPerEdge": 8,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
     "tilePx": 64,
     "samplesPerTexel": 2,
-    "basis": "Presentation choice: 384 planar patches, a cube-sphere of 8 by 8 per face, each 64 texels on a side (about 0.18 degrees per texel, coarser than the map's 5 arcminute beam), each texel the mean of 2 by 2 samples."
+    "basis": "Presentation choice: the planets' standard sphere, 16 latitude bands of 32 cells (11.25 degrees each), ICRS north up, the top and bottom bands closed by round polar caps: 450 planar patches, each 64 texels on a side (about 0.18 degrees per texel at the equator, coarser than the map's 5 arcminute beam), each texel the mean of 2 by 2 samples."
   },
-  "epochJdTt": 2461286.5
+  "epochJdTt": 2461286.5,
+  "limb": {
+    "law": "linear",
+    "coefficient": 0.6,
+    "basis": "Presentation choice: the last-scattering surface has no limb that anyone could see from outside it, so this is not a measurement. It is the linear limb law, I(mu)/I(1) = 1 - u(1 - mu), drawn as the bodies' limb plates are, with u = 0.6 picked from renders so the ball reads as round."
+  }
 }

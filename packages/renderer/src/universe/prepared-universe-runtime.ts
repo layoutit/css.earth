@@ -154,7 +154,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           billboards: lensBillboards, load: loadVolumeLens, warmDomNodeBudget: warmVolumeLensDomNodeBudget, requestPublication });
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, fetchPreparedJson));
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
-        const meshes = imageMeshes.map(mesh => own(mountImageMesh({ host: root, before: end, url: mesh.url, fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource })));
+        const meshes = imageMeshes.map(mesh => own(mountImageMesh({ host: root, before: end, labelHost: frontRoot, url: mesh.url, fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource })));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeLensBanks,
           initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: lensBillboards, stellarExtents });

@@ -6,20 +6,25 @@ const MPC = 3.0856775814913673e22;
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: MPC,
   boundsUnits: { min: [-100, -100, -100], max: [100, 100, 100] } };
 const leaf = { style: { width: '32px', height: '32px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', backgroundSize: '640px 640px', backgroundPosition: '-32px 0px' } };
-const mesh = { schema: 'cssearth-image-mesh@1', id: 'sphere', frame, radiusUnits: 100, texture: { path: 'sphere/sphere.webp' }, leaves: [leaf, leaf] };
+const mesh = { schema: 'cssearth-image-mesh@1', id: 'sphere', name: 'Sphere', frame, radiusUnits: 100, texture: { path: 'sphere/sphere.webp' }, leaves: [leaf, leaf] };
 const viewport = { focalPixels: 800, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
 const at = (mpc: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, mpc * MPC] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
 
 test('an image mesh bank names its texture, radius and leaves, and refuses a malformed one', () => {
   expect(parseImageMesh(mesh).leaves).toHaveLength(2);
   expect(() => parseImageMesh({ ...mesh, radiusUnits: 0 })).toThrow(/sphere: the mesh needs a positive radius/);
+  expect(() => parseImageMesh({ ...mesh, name: '' })).toThrow(/sphere: the mesh needs the name/);
+  expect(parseImageMesh({ ...mesh, limb: { path: 'sphere/limb.webp', edge: .98 } }).limb).toEqual({ path: 'sphere/limb.webp', edge: .98 });
+  expect(() => parseImageMesh({ ...mesh, limb: { path: 'sphere/limb.webp', edge: 2 } })).toThrow(/limb plate needs/);
   expect(() => parseImageMesh({ ...mesh, leaves: [{ style: { ...leaf.style, transform: '' } }] })).toThrow(/sphere: leaf 0 needs its/);
+  expect(parseImageMesh({ ...mesh, leaves: [{ style: { ...leaf.style, borderRadius: '50%' } }] }).leaves[0]!.style.borderRadius, 'a polar cap is a disc').toBe('50%');
+  expect(() => parseImageMesh({ ...mesh, leaves: [{ style: { ...leaf.style, borderRadius: '3px' } }] })).toThrow(/rounds only to a disc/);
 });
 
 test('a mesh loads when it may show, then shows only from outside, fading in from its radius to twice that', async () => {
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   let fetched = 0;
-  const mounted = mountImageMesh({ host, before: null, url: '/sphere.json', fetchJson: async () => { fetched++; return mesh; }, resolveResource: path => `/${path}` });
+  const mounted = mountImageMesh({ host, before: null, url: '/sphere.json', fetchJson: async () => { fetched++; return { ...mesh, limb: { path: 'sphere/limb.webp', edge: .98 } }; }, resolveResource: path => `/${path}` });
   expect(mounted.publish(at(300), 0)).toBe(0);
   expect(fetched, 'nothing loads while the caller keeps it hidden').toBe(0);
   expect(mounted.publish(at(300), 1)).toBe(0);
@@ -27,6 +32,8 @@ test('a mesh loads when it may show, then shows only from outside, fading in fro
   expect(fetched).toBe(1);
   expect(mounted.root.querySelectorAll('s')).toHaveLength(2);
   expect(mounted.root.querySelector<HTMLElement>('s')!.style.backgroundImage).toContain('/sphere/sphere.webp');
+  expect(mounted.root.querySelector<HTMLElement>('i')!.style.backgroundImage, 'its limb plate').toContain('/sphere/limb.webp');
+  expect(host.querySelector('[data-image-mesh-label="sphere"]')!.textContent, 'and its caption').toBe('Sphere');
   expect(mounted.publish(at(50), 1), 'inside the sphere it is not drawn').toBe(0);
   expect(mounted.root.style.display).toBe('none');
   expect(mounted.publish(at(150), 1)).toBeCloseTo(.5);

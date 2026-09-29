@@ -1,11 +1,11 @@
 {
   "fadeStartDistanceM": 30856775814913670000,
   "fullDistanceM": 308567758149136740000,
-  "maximumDistanceM": 1.3885549116711153e+27,
+  "maximumDistanceM": 1.8514065488948204e+27,
   "minimumDistanceRadii": 0.05,
   "defaultFocusRadiusM": 15428387907456838000,
   "metersPerParsec": 30856775814913670,
-  "note": "Navigation and label presentation, not measured galaxy structure. The 500 pc fallback is a camera framing radius used only when no measured half-light radius or prepared image bounds exist. The 45 Gpc shared camera limit reaches past the cosmic microwave background (about 14 Gpc comoving) so the observable universe can be seen whole; it is a navigation limit.",
+  "note": "Navigation and label presentation, not measured galaxy structure. The 500 pc fallback is a camera framing radius used only when no measured half-light radius or prepared image bounds exist. The 60 Gpc shared camera limit reaches past the cosmic microwave background (about 14 Gpc comoving) so the observable universe can be seen whole with its caption below it; it is a navigation limit.",
   "provenance": {
     "name": "Nearby galaxy catalogue",
     "products": [

@@ -55,8 +55,9 @@ records what was used, replaced and left out.
 Past 200 Mpc the view is DESI's first data release, drawn as the same dots, in
 two shells on DESI's footprint (about a third of the sky, north and south of the
 Milky Way's plane), and at the edge the cosmic microwave background. The
-overview reads **Observable Universe** from 1 Gpc out, and the camera reaches
-45 Gpc, three times the microwave background's distance.
+overview reads **Observable Universe** from 1 Gpc out, opens 52 Gpc from the
+Sun and reaches 60 Gpc, far enough for the microwave background's caption to fit
+below it.
 
 - **Bright galaxies** ([recipe](source/desi-bright-galaxies/points.json)): one
   in 10 of BGS BRIGHT-21.5 (30,005 galaxies, 670 to 1,575 Mpc for the 5th to
@@ -79,24 +80,33 @@ overview reads **Observable Universe** from 1 Gpc out, and the camera reaches
   Planck's 2018 SMICA map (HEALPix Nside 2048) drawn on the sphere its light
   left from, the surface of last scattering: the comoving distance of
   z* = 1089.80 (Planck 2018 VI, Table 2) in the Planck 2018 cosmology,
-  13,884 Mpc or 45.3 billion light-years. The sphere is 384 flat patches (a cube
-  with each face cut 8 by 8, the corners pushed out to the sphere), each a
-  PolyCSS leaf showing its 64-texel tile of one atlas
+  13,884 Mpc or 45.3 billion light-years. The sphere is the planets' standard
+  sphere: 16 latitude bands of 32 flat cells, ICRS north up, the top and bottom
+  bands closed by round polar caps, 450 PolyCSS leaves in all, each showing its
+  own tile of one atlas (64 texels a side for a cell, 192 for a cap, so a cap's
+  texels are no coarser than the equator's)
   ([`prepare-map-sphere.mts`](../../../packages/bake/cli/prepare-map-sphere.mts)).
-  Each texel averages 2 by 2 samples of the map at its direction, turned from
+  Each texel averages 2 by 2 samples of the map at its direction, taken through
+  the same projective mapping the leaf draws its tile with and turned from
   ICRS into the map's Galactic coordinates, and takes the Planck style-guide
   colour for its temperature over ±300 µK, each channel raised to the power 1.6
   so the table's pale middle does not glare beside the dots. Each patch shows only its front, so
   from outside the far side never shows through, and it fades in as the camera
   leaves it, from its radius to twice that: it is the edge of the observable
   universe, seen from outside. From inside it would be the whole sky, which the
-  app does not draw.
+  app does not draw. Like a body it has a limb plate, a prepared image that faces
+  the camera and is fitted each frame to the sphere's exact outline, and its
+  name below it in the selected body's caption. The limb is a presentation
+  choice, not a measurement: nothing sees this surface from outside, so it takes
+  the linear limb law, 1 - 0.6(1 - μ), drawn as the bodies' limb plates are
+  (`limbOverlay`, over the atlas's mean colour).
 
 ## Tests and evidence
 
 On the experimental cosmic-web branch, two more [captures](evidence/2026-09-29/capture.json)
 show [the cosmic microwave background from outside](evidence/2026-09-29/cmb-from-outside.jpg)
-at 40 Gpc, seamless across its 384 patches, and, 7.6 billion light-years out,
+at 52 Gpc, seamless across its 450 patches, with its limb and caption, and, 7.6 billion light-years out
+(captured at 40 Gpc plus three notches, before the opening distance moved),
 [DESI's two cones](evidence/2026-09-29/desi-cones.jpg) of bright galaxies either
 side of the Milky Way's plane, with the Cosmicflows-4 field between them.
 Dragging at 0.9 and 2.2 billion light-years, with every DESI dot drawn, runs at

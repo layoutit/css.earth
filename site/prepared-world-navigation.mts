@@ -108,8 +108,9 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         const frame = frames.get(objectId);
         if (!frame) return null;
         const projection = presentWorldCamera(from, frame, optics);
-        // The observable universe is seen from outside the cosmic microwave background (14 Gpc comoving).
-        const distanceM = (scope === 'observable-universe' ? 40e9 : 1e8) * 3.085677581491367e16;
+        // The observable universe is seen from outside the cosmic microwave background (14 Gpc comoving), far enough that its
+        // caption fits below it on a landscape screen.
+        const distanceM = (scope === 'observable-universe' ? 52e9 : 1e8) * 3.085677581491367e16;
         return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation,
           distanceUnits: distanceM / frame.metersPerUnit }, frame, optics), focusPositionM: frame.originM };
       }
