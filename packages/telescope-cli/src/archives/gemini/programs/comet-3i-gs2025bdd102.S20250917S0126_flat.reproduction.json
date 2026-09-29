@@ -13,7 +13,6 @@
     "product": "gS20250917S0126_flat.fits",
     "uri": "gemini:GEMINI/gS20250917S0126_flat.fits",
     "bytes": 25767360,
-    "md5": "bb61f172739a376331a6575fa5013719",
     "madeBy": "Gemini Observatory's IRAF nightly pipeline (gprepare, gireduce, gemcombine), not DRAGONS"
   },
   "association": "The archive's own association, read from the master rather than made here: gS20250917S0126_flat.fits names these 7 frames in the IMCMB001-IMCMB007 cards of its first extension header, and its primary header carries the same DETECTOR, NAMPS, AMPINTEG, DETRO1XS, DETRO1YS as the science frames.",

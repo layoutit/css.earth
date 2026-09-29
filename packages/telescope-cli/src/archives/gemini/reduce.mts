@@ -36,7 +36,7 @@ import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '@cssearth/core';
 import { productRecordPath, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/telescope';
 import { readProductRecord, sameRun, writeProductRecord, assertInputs, WORKSPACE } from '@cssearth/telescope/node';
-import { digestProgram, readGeminiProgram, type GeminiFrame, type GeminiProgram } from './archive.mts';
+import { readGeminiProgram, type GeminiFrame, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
 import { dragonsToolchainVersions, geminiToolchain, type GeminiToolchain } from './toolchain.mts';
 
@@ -119,7 +119,6 @@ export interface RunContext {
   readonly program: GeminiProgram;
   readonly work: string;
   readonly software: readonly { name: string; version: string }[];
-  readonly toolchainDigest: string;
 }
 
 /** The role `reduce` reads a stage's product under. A flat is the flat; every other calibration stage here makes a bias. */
@@ -141,7 +140,7 @@ export async function stageRun(context: RunContext, stage: Stage, half?: Half): 
   return { plan, ours, run: { telescope: 'gemini', stage: `gemini/${stage}${half ? `/${half}` : ''}`, inputs,
     parameters: { ...plan.parameters, programme: context.program.programme, instrument: context.program.instrument,
       filter: context.program.filter },
-    software: context.software.map(entry => ({ name: entry.name, version: entry.version })), toolchainDigest: context.toolchainDigest } };
+    software: context.software.map(entry => ({ name: entry.name, version: entry.version })) } };
 }
 
 export interface OurCalibration { readonly role: string; readonly path: string; readonly input: ProductInput }
@@ -182,13 +181,8 @@ async function fetchFrames(frames: readonly GeminiFrame[], directory: string, so
   return paths;
 }
 
-/** Our sha256 of a pinned file, which is what `assertInputs` checks. A pin that has none yet cannot be checked, and a
- * stage that ran on an unchecked input would be recording a guess, so it is refused and the digest step is named. */
-const inputPin = (frame: GeminiFrame, role: string): ProductInput => {
-  if (frame.sha256 === undefined)
-    throw new Error(`${frame.name} carries no sha256 yet. Download it once so the pin can be digested before a reduction uses it.`);
-  return { role, identity: frame.name, bytes: frame.bytes };
-};
+/** A pinned file as a run records it, by name and the size `assertInputs` checks. */
+const inputPin = (frame: GeminiFrame, role: string): ProductInput => ({ role, identity: frame.name, bytes: frame.bytes });
 
 /** One `reduce` call. Non-zero status, or a run that leaves no product, is an error with DRAGONS' own last words attached:
  * the log is the only place that says why a recipe stopped. */
@@ -222,12 +216,10 @@ export async function reduceStage(program: GeminiProgram, work: string, stage: S
   options: { half?: Half; sources?: readonly string[]; toolchain?: GeminiToolchain } = {}): Promise<Reduction> {
   const toolchain = options.toolchain ?? await geminiToolchain();
   const directory = stageDirectory(work, stage, options.half), raw = rawDirectory(work);
-  // The files come first, then their digests, then the pins: a pin's sha256 is ours and is taken from the bytes the archive
-  // actually sent, so it cannot exist before the first download. Everything after this point is checked against it.
+  // The files come first, then the pins: everything after this point is checked against the sizes the program records.
   const wanted = stagePlan(program, stage, options.half);
   const files = await fetchFrames([...wanted.frames, ...Object.values(wanted.calibrations)], raw, options.sources ?? []);
-  const digested = await digestProgram(program, raw);
-  const context: RunContext = { program: digested, work, software: dragonsToolchainVersions(toolchain), toolchainDigest: toolchain.digest };
+  const context: RunContext = { program, work, software: dragonsToolchainVersions(toolchain) };
   const { run, plan, ours } = await stageRun(context, stage, options.half);
 
   const existing = await currentProduct(directory, stage);

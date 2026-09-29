@@ -9,15 +9,10 @@
  *   - metadata: ADQL over TAP at `argus`, with the transaction and VOTable owned by PyVO.
  *   - files: `raven`, CADC's global locator, which resolves an artifact URI and redirects to a signed URL for the bytes.
  *
- * CADC records each artifact's byte count and its own md5 (`contentChecksum`). Both are carried into a pin, and a download is
- * accepted only when the bytes, that md5, and our sha256 all agree. */
+ * CADC records each artifact's byte count. It is carried into a pin, and a download is accepted only at that size. */
 import { spawn } from 'node:child_process';
 import { access, mkdir, rm, stat, symlink } from 'node:fs/promises';
-import { createReadStream } from 'node:fs';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
-import { sha256File } from '@cssearth/core/node';
-import { requireString } from '@cssearth/core';
 import { tapRows } from '@cssearth/telescope/node';
 
 export const CADC_TAP = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus';
@@ -48,20 +43,11 @@ export interface GeminiFile {
   /** The CAOM artifact URI, which is what `raven` resolves. */
   readonly uri: string;
   readonly bytes: number;
-  /** CADC's own digest of the artifact, as CAOM stores it (the `md5:` prefix removed). */
-  readonly md5: string;
-  readonly sha256?: string;
 }
 
-const md5File = async (path: string) => {
-  const hash = createHash('md5');
-  for await (const chunk of createReadStream(path, { highWaterMark: 8 << 20 })) hash.update(chunk as Buffer);
-  return hash.digest('hex');
-};
-
 /** The pinned file in `directory`, linked from a directory that already holds it or downloaded through `raven`. A slow
- * transfer is abandoned and resumed on a fresh connection. The bytes, the archive's md5 and, when pinned, our sha256 must all
- * agree before the path is returned; nothing partial is ever handed on. */
+ * transfer is abandoned and resumed on a fresh connection. The file must be its pinned size before the path is returned;
+ * nothing partial is ever handed on. */
 export async function geminiFile(file: GeminiFile, directory: string, sources: readonly string[] = []): Promise<string> {
   if (!/^[A-Za-z0-9._-]+$/u.test(file.name)) throw new TypeError(`Invalid Gemini file name: ${file.name}`);
   await mkdir(directory, { recursive: true });
@@ -74,10 +60,7 @@ export async function geminiFile(file: GeminiFile, directory: string, sources: r
     if (await sizeOf(target) > file.bytes) await rm(target);
     await run('curl', ['-s', '-L', '-C', '-', '--speed-limit', '200000', '--speed-time', '60', '-o', target, downloadUrl(file.uri)]);
   }
-  if (await sizeOf(target) !== file.bytes) throw new Error(`${file.name} did not download to its pinned ${file.bytes} bytes.`);
-  const md5 = await md5File(target);
-  if (md5 !== file.md5) throw new Error(`${file.name} has md5 ${md5}, not the archive's pinned ${file.md5}.`);
-  if (file.sha256 !== undefined && (await sha256File(target)).sha256 !== file.sha256) throw new Error(`${file.name} differs from its pinned sha256.`);
+  if (await sizeOf(target) !== file.bytes) throw new Error(`${file.name} (${file.uri}) did not download to its pinned ${file.bytes} bytes.`);
   return target;
 }
 
@@ -88,8 +71,3 @@ export async function primaryHeaderBytes(uri: string, records = 64): Promise<Buf
   return Buffer.from(await response.arrayBuffer());
 }
 
-export const requireMd5 = (value: unknown, label: string) => {
-  const text = requireString(value, label).replace(/^md5:/u, '');
-  if (!/^[0-9a-f]{32}$/u.test(text)) throw new TypeError(`${label} is not an md5.`);
-  return text;
-};

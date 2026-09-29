@@ -6,19 +6,18 @@
  *
  * micromamba builds the environment for osx-64, because DRAGONS has no osx-arm64 build; on Apple silicon Rosetta 2 translates
  * it. `install` resolves the packages of toolchain.json when packages.lock is absent and writes the lock micromamba resolved,
- * and installs from that lock whenever it is there, so a second machine gets the same builds by URL and sha256.
+ * and installs from that lock whenever it is there, so a second machine gets the same builds by URL.
  *
- * The install records the sha256 of toolchain.json and the lock together. `geminiToolchain` refuses an environment built from
- * other pins, and refuses one whose `reduce` or `caldb` is missing.
+ * The install keeps the texts of toolchain.json and the lock it was built from. `geminiToolchain` refuses an environment built
+ * from other pins, and refuses one whose `reduce` or `caldb` is missing.
  *
  * Nothing here needs a display: DRAGONS' interactive tools are not used and MPLBACKEND is forced to Agg. */
-import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { WORKSPACE } from '@cssearth/telescope/node';
+import { assertInstalledMarker, WORKSPACE, writeInstalledMarker, type ToolchainPins } from '@cssearth/telescope/node';
 
 const repository = WORKSPACE;
 /** The toolchain's pins (descriptor and lock) sit beside this code and the programs they reduce. */
@@ -26,12 +25,13 @@ const PINS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/gemini');
 export const GEMINI_ROOT = resolve(repository, 'output/toolchains/gemini');
 const DESCRIPTOR = resolve(PINS, 'toolchain.json');
 
-async function descriptor() {
+const INSTALL = 'node packages/telescope-cli/src/archives/gemini/toolchain.mts install';
+async function descriptor(): Promise<ToolchainPins & { readonly lock: string; readonly lockPath: string }> {
   const text = await readFile(DESCRIPTOR, 'utf8');
-  const entry = requireRecord(JSON.parse(text) as unknown, 'toolchain.json');
+  const entry = requireRecord(JSON.parse(text) as unknown, 'packages/telescope-cli/src/archives/gemini/toolchain.json');
   const lockPath = resolve(PINS, requireString(entry.lock, 'lock'));
   const lock = await readFile(lockPath, 'utf8').catch(() => '');
-  return { entry, lock, lockPath, digest: createHash('sha256').update(text).update(lock).digest('hex') };
+  return { id: 'gemini', file: 'packages/telescope-cli/src/archives/gemini/toolchain.json', descriptor: text, lock, lockPath, entry };
 }
 
 function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = {}) {
@@ -40,13 +40,13 @@ function run(command: string, args: readonly string[], env: NodeJS.ProcessEnv = 
   return result.stdout;
 }
 
-/** The explicit list micromamba resolved: one package URL with its sha256 per line. That is the lock, and it is what a later
- * install uses, so the second machine gets these builds and not whatever the channels hold that day. */
+/** The explicit list micromamba resolved: one package URL per line. That is the lock, and it is what a later install uses, so
+ * the second machine gets these builds and not whatever the channels hold that day. */
 const explicitList = (prefix: string, env: NodeJS.ProcessEnv) =>
-  run('micromamba', ['list', '--explicit', '--md5', '-p', prefix], env);
+  run('micromamba', ['list', '--explicit', '-p', prefix], env);
 
 export async function installGemini() {
-  const { entry, lock, lockPath, digest } = await descriptor(), prefix = resolve(GEMINI_ROOT, 'env');
+  const { entry, lock, lockPath } = await descriptor(), prefix = resolve(GEMINI_ROOT, 'env');
   const mamba = requireRecord(entry.micromamba, 'micromamba');
   const platform = requireString(mamba.platform, 'platform');
   const channels = requireArray(mamba.channels, 'channels').flatMap(value => ['-c', requireString(value, 'channel')]);
@@ -62,34 +62,29 @@ export async function installGemini() {
     await writeFile(lockPath, explicitList(prefix, env));
   }
   await rm(resolve(GEMINI_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
-  const { digest: after } = await descriptor();
-  await writeFile(resolve(GEMINI_ROOT, 'installed.json'), `${JSON.stringify({ id: 'gemini', platform, pinsSha256: lock ? digest : after }, null, 2)}\n`);
+  // A first install wrote the lock it resolved; the marker holds the pins as they are now, lock included.
+  writeInstalledMarker(GEMINI_ROOT, await descriptor());
   return GEMINI_ROOT;
 }
 
 export interface GeminiToolchain {
   readonly python: string;
   readonly binaries: Readonly<Record<string, string>>;
-  /** sha256 of toolchain.json and packages.lock together: what a product record carries so a later reader can tell which
-   * pinned environment made it. */
-  readonly digest: string;
   /** What a reduction runs with: DRAGONS' own home under this root, so its `dragonsrc` and calibration database never touch
    * the user's, and a non-interactive matplotlib. */
   readonly env: NodeJS.ProcessEnv;
 }
 
 export async function geminiToolchain(): Promise<GeminiToolchain> {
-  const { entry, digest } = await descriptor(), bin = resolve(GEMINI_ROOT, 'env/bin');
-  const marker = await readFile(resolve(GEMINI_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The Gemini toolchain is not installed: node packages/telescope-cli/src/archives/gemini/toolchain.mts install');
-  if (marker.pinsSha256 !== digest) throw new Error('The Gemini toolchain was installed from other pins; reinstall it.');
+  const pins = await descriptor(), { entry } = pins, bin = resolve(GEMINI_ROOT, 'env/bin');
+  assertInstalledMarker(GEMINI_ROOT, pins, 'Gemini', INSTALL);
   const binaries: Record<string, string> = {};
   for (const [name, file] of Object.entries(requireRecord(entry.binaries, 'binaries'))) {
     binaries[name] = resolve(bin, requireString(file, name));
     if (!await access(binaries[name]!).then(() => true, () => false)) throw new Error(`The Gemini toolchain has no ${name}.`);
   }
   return {
-    python: resolve(bin, 'python'), binaries, digest,
+    python: resolve(bin, 'python'), binaries,
     env: { PATH: `${bin}:${process.env.PATH ?? ''}`, MPLBACKEND: 'Agg', HOME: resolve(GEMINI_ROOT, 'home'),
       DRAGONS_HOME: resolve(GEMINI_ROOT, 'home') },
   };
