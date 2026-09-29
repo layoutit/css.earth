@@ -703,7 +703,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 @property --sheet-tucked { syntax: "<length>"; inherits: true; initial-value: 0px; }
 @property --sheet-peek { syntax: "<length>"; inherits: true; initial-value: 0px; }
 @property --sheet-half { syntax: "<length>"; inherits: true; initial-value: 0px; }
-@property --sheet-rest { syntax: "<length>"; inherits: true; initial-value: 0px; }
+@property --sheet-rest { syntax: "<length>"; inherits: false; initial-value: 0px; }
 /* A snap's duration, written on each element the snap moves (shell-sheet.mts). It is not inherited, so the sheet's
    contents never restyle for it, and layouts whose rules do not read it are untouched. */
 @property --sheet-snap-duration { syntax: "<time>"; inherits: false; initial-value: 280ms; }
@@ -730,17 +730,24 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     --sheet-half: max(50dvh, var(--sheet-peek));
     --sheet-radius: 16px;
     --sheet-shadow: 0 -1px 0 rgb(255 255 255 / 8%), 0 -8px 24px rgb(0 0 0 / 55%);
-    /* How far the sheet sits below its open position in its state: layout rests the sheet there, and the search above
-       it rests on it. A drag or a snap moves them by transforms written on each of them (shell-sheet.mts); this never
-       follows the finger. */
-    --sheet-rest: calc(var(--sheet-height) - var(--sheet-peek));
   }
   /* Wait for the controller to publish the initial snap state. */
   body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: hidden; }
-  body[data-object-shell]:where(:has(.object-sheet-handle:checked)),
-  body[data-object-shell][data-sheet="full"] { --sheet-rest: 0px; }
-  body[data-object-shell][data-sheet="half"] { --sheet-rest: calc(var(--sheet-height) - var(--sheet-half)); }
-  body[data-object-shell][data-sheet="tucked"] { --sheet-rest: calc(var(--sheet-height) - var(--sheet-tucked)); }
+  /* How far the sheet sits below its open position in its state: layout rests the sheet there, and the search above
+     it rests on it. A drag or a snap moves them by transforms written on each of them (shell-sheet.mts); this never
+     follows the finger. The rest is set on the three that read it and does not inherit: set on the body, every state
+     change re-resolved the whole document, 11-26 ms of style per snap on the iPad (2026-09-29). */
+  body[data-object-shell] :is(.object-sidebar, .object-search-toolbar, .object-search-categories) {
+    --sheet-rest: calc(var(--sheet-height) - var(--sheet-peek));
+  }
+  body[data-object-shell]:where(:has(.object-sheet-handle:checked)) :is(.object-sidebar, .object-search-toolbar, .object-search-categories),
+  body[data-object-shell][data-sheet="full"] :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { --sheet-rest: 0px; }
+  body[data-object-shell][data-sheet="half"] :is(.object-sidebar, .object-search-toolbar, .object-search-categories) {
+    --sheet-rest: calc(var(--sheet-height) - var(--sheet-half));
+  }
+  body[data-object-shell][data-sheet="tucked"] :is(.object-sidebar, .object-search-toolbar, .object-search-categories) {
+    --sheet-rest: calc(var(--sheet-height) - var(--sheet-tucked));
+  }
 
   .explorer-shell-header {
     position: fixed;
