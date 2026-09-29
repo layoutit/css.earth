@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Spiral galaxy NGC 253",
+  "publisher": "ESO",
+  "sourceId": "eso0902c",
+  "sourcePage": "https://www.eso.org/public/images/eso0902c/",
+  "download": "https://cdn.eso.org/images/large/eso0902c.jpg",
+  "credit": "ESO",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      8285,
+      7510
+    ],
+    "bands": [
+      "WFI",
+      "[O",
+      "III]",
+      "V",
+      "R",
+      "H-alpha"
+    ],
+    "fieldOfViewDeg": [
+      0.5478333333333333,
+      0.4965
+    ]
+  },
+  "checkedSource": {
+    "kind": "Publisher Large JPEG",
+    "dimensions": [
+      8285,
+      7510
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 76.0,
+    "lineOfNodesPaDeg": 55.0,
+    "reference": "Lucero et al. 2015"
+  },
+  "displayModel": "The photograph's light is split by S4G's bulge-plus-disc fit (Salo et al. 2015 (S4G)): the disc's share is decomposed into a midplane residual and a diffuse component spread through 32 slabs with an exponential profile of 426 pc (scale length over 7.3, Kregel et al. 2002); the bulge's is spread through an oblate spheroid sliced in every bank. Depth is modelled, not measured per pixel.",
+  "coverage": "Milky Way foreground stars (Gaia DR3) are removed where they show; fainter and uncatalogued stars remain.",
+  "acquisition": {
+    "url": "https://cdn.eso.org/images/large/eso0902c.jpg",
+    "dimensions": [
+      8285,
+      7510
+    ],
+    "operation": "Download the publisher Large JPEG; no crop or resample."
+  }
+}

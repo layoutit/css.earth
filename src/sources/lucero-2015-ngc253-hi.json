@@ -1,0 +1,52 @@
+{
+  "id": "lucero-2015-ngc253-hi",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "HI observations of the nearest starburst galaxy NGC 253 with the SKA precursor KAT-7",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2015MNRAS.450.3935L"
+    },
+    {
+      "type": "arxiv",
+      "value": "1504.04082"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.3935L",
+      "label": "2015MNRAS.450.3935L"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1504.04082",
+      "label": "arXiv:1504.04082"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1504.04082",
+      "checkedOn": "2026-09-29",
+      "locator": "Sect. 5: adopted constant PA = 235 deg and i = 76 deg for the HI disc (i consistent with Fabry-Perot 76 +/- 4 deg; 3D models at 66, 76 and 86 deg favour 76)."
+    }
+  ],
+  "creators": [
+    "D. M. Lucero",
+    "C. Carignan",
+    "E. C. Elson",
+    "T. H. Randriamampandry"
+  ],
+  "publisher": "MNRAS 450, 3935",
+  "publicationDate": "2015",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Lucero et al. (2015), MNRAS 450, 3935.",
+      "scope": "NGC 253 disc orientation",
+      "evidence": "https://arxiv.org/abs/1504.04082"
+    }
+  ]
+}

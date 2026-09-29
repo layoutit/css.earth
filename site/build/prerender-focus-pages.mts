@@ -9,7 +9,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { extname, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import focuses from '../prepared-focus-objects.json' with { type: 'json' };
-import { OVERVIEW_TITLES } from '../overview-titles.mts';
+import overviews from '../prepared-overview-objects.json' with { type: 'json' };
 
 const root = resolve(import.meta.dirname, '../..'), dist = resolve(root, 'dist');
 const origin = 'https://prerender.invalid';
@@ -34,7 +34,7 @@ if (typeof loaded !== 'object' || loaded === null || !('default' in loaded) || t
   throw new Error('netlify/functions-bundled/search.mjs has no default export handler; run site/build/bundle-netlify-functions.mts first.');
 }
 const handler = loaded.default as (request: Request) => Promise<Response>;
-const pages = [...focuses.map(focus => focus.id), ...Object.keys(OVERVIEW_TITLES)];
+const pages = [...focuses, ...overviews].map(object => object.id);
 for (const id of pages) {
   const response = await handler(new Request(`${origin}/.netlify/functions/search?object=${encodeURIComponent(id)}`));
   if (!response.ok) throw new Error(`${id}: the search function answered ${response.status} for /${id}/: ${(await response.text()).slice(0, 300)}`);

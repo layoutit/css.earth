@@ -195,48 +195,6 @@
       },
       "dependencies": [],
       "license": "STScI reference data; cite Francis et al. (1991)."
-    },
-    {
-      "id": "planck-smica-map",
-      "path": "src/objects/nearby-universe/source/cmb/COM_CMB_IQU-smica_2048_R3.00_full.fits",
-      "origin": "https://irsa.ipac.caltech.edu/data/Planck/release_3/all-sky-maps/maps/component-maps/cmb/COM_CMB_IQU-smica_2048_R3.00_full.fits",
-      "sourceUrl": "https://arxiv.org/abs/1807.06208",
-      "title": "Planck PR3 SMICA CMB map, HEALPix Nside 2048",
-      "credit": "Planck Collaboration (2020), A&A 641, A4; ESA Planck, distributed by IRSA",
-      "acquisition": "Downloaded from IRSA on 2026-09-29 (2,013,312,960 bytes).",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "planck-2018-smica-cmb",
-            "role": "material",
-            "evidence": "src/objects/nearby-universe/source/cmb/sphere.json#/map"
-          }
-        ]
-      },
-      "dependencies": [],
-      "license": "ESA Planck data are public; cite Planck Collaboration (2020) and acknowledge Planck."
-    },
-    {
-      "id": "planck-colour-table",
-      "path": "src/objects/nearby-universe/source/cmb/Planck_Parchment_RGB.txt",
-      "origin": "https://raw.githubusercontent.com/zonca/paperplots/master/data/Planck_Parchment_RGB.txt",
-      "sourceUrl": "https://github.com/zonca/paperplots",
-      "title": "Planck style-guide colour table (parchment)",
-      "credit": "Planck collaboration figure style guide, paperplots repository",
-      "acquisition": "Downloaded 2026-09-29.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "planck-2018-smica-cmb",
-            "role": "method",
-            "evidence": "src/objects/nearby-universe/source/cmb/sphere.json#/colourTable"
-          }
-        ]
-      },
-      "dependencies": [],
-      "license": "Planck style-guide plotting material; cite the Planck collaboration."
     }
   ],
   "documents": [
@@ -379,18 +337,6 @@
       "origin": "project-authored",
       "credit": "cssEarth contributors",
       "acquisition": "Authored reach of the quasar dots.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored processing configuration."
-      }
-    },
-    {
-      "id": "document-cmb",
-      "kind": "authored-document",
-      "path": "src/objects/nearby-universe/source/cmb/sphere.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored CMB sphere recipe.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

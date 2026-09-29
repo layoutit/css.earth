@@ -51,7 +51,7 @@
   "appearance": {
     "colorCss": "#9fe8ff",
     "radiusPx": 1,
-    "opacity": 0.6,
-    "note": "Presentation only: the supernova-remnant colour of the M33 dots, so the two galaxies read alike. Toned to 60% on M31, whose photograph is darker than the Milky Way backing: at full tone these dots outshone the disc. Planetary nebulae keep full tone, since dimmed dots read as dark specks on the bright bulge."
+    "opacity": 1,
+    "note": "Presentation only: the supernova-remnant colour of the M33 dots, so the two galaxies read alike. Each dot takes its tone and half its colour from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
   }
 }

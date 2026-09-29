@@ -1,0 +1,52 @@
+{
+  "id": "congiu-2025-ngc253-pne",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The MUSE view of the Sculptor galaxy: survey overview and the luminosity function of planetary nebulae",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2025A&A...700A.125C"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/700/A125"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.125C",
+      "label": "2025A&A...700A.125C"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/700/A125",
+      "label": "CDS J/A+A/700/A125"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/700/A125/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "catalog: 571 planetary nebulae with J2000 positions."
+    }
+  ],
+  "creators": [
+    "E. Congiu",
+    "F. Scheuermann",
+    "K. Kreckel",
+    "A. Leroy"
+  ],
+  "publisher": "A&A 700, A125",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Congiu et al. (2025), A&A 700, A125.",
+      "scope": "NGC 253 planetary nebulae",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/700/A125/ReadMe"
+    }
+  ]
+}

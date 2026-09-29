@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/m81/source/source.jpg",
+      "origin": "https://noirlab.edu/public/images/noao-m81m82/",
+      "sourceUrl": "https://noirlab.edu/public/images/noao-m81m82/",
+      "title": "Galaxies M81 & M82",
+      "credit": "T.A. Rector (University of Alaska Anchorage) and NOIRLab/NSF/AURA",
+      "displayCredit": "NOIRLab",
+      "acquisition": "The publisher Large JPEG (8315 x 4642 px), restored from its origin; not tracked. Registration re-measured against catalogued positions (recipe observation). The hash identifies the local JPEG bytes, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "noirlab-noao-m81m82",
+            "role": "material",
+            "evidence": "src/objects/m81/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "lensId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Mayall 4-m Mosaic, colour composite",
+            "evidence": "https://noirlab.edu/public/images/noao-m81m82/",
+            "reason": "The publisher's colour composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/m81/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/m81/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/m81/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "stellar-extent",
+      "path": "src/objects/m81/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ibata-2005-m31-extended-disk",
+            "role": "reference",
+            "evidence": "https://arxiv.org/abs/astro-ph/0504164"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

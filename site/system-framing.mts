@@ -84,7 +84,7 @@ export const LENS_VOLUMES: ReadonlyMap<string, DensityVolumeFrame> = new Map(Obj
 
 /** The Local Group as the universe draws it: the Milky Way's volume and the other galaxies the Local Group catalogue draws,
  * each a sphere of its recipe focus radius (site/build/prepare/prepare-catalog.mts), in one box in reference axes. */
-const LOCAL_GROUP_BOX = (() => {
+const DRAWN_GALAXIES_BOX = (() => {
   const rotation = worldRotationFromQuaternion(GALACTIC_VOLUME.localToReferenceXyzw), { min, max } = GALACTIC_VOLUME.boundsUnits;
   const galaxy = [0, 1, 2, 3, 4, 5, 6, 7].map(corner => {
     const offset = rotateWorldPosition(rotation, tuple(axis => ((corner >> axis) & 1 ? max : min)[axis]! * GALACTIC_VOLUME.metersPerUnit));
@@ -103,10 +103,10 @@ const LOCAL_GROUP_BOX = (() => {
     cameraToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1] } };
 })();
 
-/** Fit the Local Group's drawn galaxies at the current viewing angle, centred on them. */
-export function localGroupZoomTarget(from: WorldCameraPose, optics: Optics, rect: MapViewport) {
-  const frame = { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt, originM: LOCAL_GROUP_BOX.centre, bodyRadiusM: 0 };
-  return { world: systemViewTarget(from, frame, optics, { candidates: [LOCAL_GROUP_BOX.candidate] }, rect), focusPositionM: LOCAL_GROUP_BOX.centre };
+/** Fit the drawn galaxies (the Milky Way's volume and the Local Group catalogue's galaxies) at the current viewing angle, centred on them: an overview's `zoom.frame` {fit: drawn-galaxies}. */
+export function drawnGalaxiesZoomTarget(from: WorldCameraPose, optics: Optics, rect: MapViewport) {
+  const frame = { referenceFrame: from.referenceFrame, epochJdTt: from.epochJdTt, originM: DRAWN_GALAXIES_BOX.centre, bodyRadiusM: 0 };
+  return { world: systemViewTarget(from, frame, optics, { candidates: [DRAWN_GALAXIES_BOX.candidate] }, rect), focusPositionM: DRAWN_GALAXIES_BOX.centre };
 }
 
 /** Fit the volume along the current viewing ray, keeping its anchor and orientation. */

@@ -1,0 +1,54 @@
+{
+  "id": "de-blok-2008-things-rotation-curves",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "High-resolution rotation curves and galaxy mass models from THINGS",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2008AJ....136.2648D"
+    },
+    {
+      "type": "arxiv",
+      "value": "0810.2100"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2008AJ....136.2648D",
+      "label": "2008AJ....136.2648D"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/0810.2100",
+      "label": "arXiv:0810.2100"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0810.2100",
+      "checkedOn": "2026-09-29",
+      "locator": "Table 2: NGC 3031 tilted-ring model, D 3.6 Mpc, <i> 59.0 deg, <PA> 330.2 deg."
+    }
+  ],
+  "creators": [
+    "W. J. G. de Blok",
+    "F. Walter",
+    "E. Brinks",
+    "C. Trachternach",
+    "S.-H. Oh",
+    "R. C. Kennicutt"
+  ],
+  "publisher": "AJ 136, 2648",
+  "publicationDate": "2008",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Blok et al. (2008), AJ 136, 2648.",
+      "scope": "M81 disc orientation",
+      "evidence": "https://arxiv.org/abs/0810.2100"
+    }
+  ]
+}

@@ -7,13 +7,15 @@ import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
 interface Props {
   objectId: string;
   lenses: Pick<NonNullable<ShellProps['lenses']>, 'controls' | 'defaultLens'>;
-  /** The lenses of a catalogue focus the scene draws, rather than of the scene's own object. */
+  /** The lenses of something the scene draws (a catalogue focus, an overview), rather than of the scene's own object. */
   focus?: boolean;
+  /** The drawn page these lenses belong to (an overview's id): their buttons select its dataset on its page (page-datasets.mts). */
+  page?: string;
   /** Null leaves the form without an action, so it submits to the page it is spliced into. */
   route?: string | null;
   thumbnailObjectId?: string;
 }
-const { objectId, lenses, focus = false, route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
+const { objectId, lenses, focus = false, page, route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
 const previewUrl = (lens: NonNullable<ShellProps['lenses']>['controls'][number]) =>
   sidebarThumbnail(thumbnailObjectId, lens.id)?.url2x ?? lens.thumbnailUrl;
 const sprite = !focus && lenses.controls.length > 1;
@@ -36,7 +38,7 @@ const defaultControl = lenses.controls.find(lens => lens.id === lenses.defaultLe
 const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.id : defaultControl?.id;
 ---
 <section id={`${objectId}-lenses`} class="object-lenses">
-  <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} hidden>
+  <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} data-drawn-page={page} hidden>
     {['v', 'overview', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
   </form>
   <div id={`${objectId}-layers-menu`} class="object-layers-menu">

@@ -11,7 +11,8 @@ export function selectGalaxyNeighbor(card: HTMLElement, selectedId: string): voi
   distances.sort((a, b) => a.value - b.value);
   const parent = rows[0]?.parentElement;
   if (!parent) return;
-  const selectedName = rows.find(row => row.dataset.neighborId === selectedId)?.querySelector('.object-name')?.textContent ?? '';
+  // `observer`: the distances the catalogue publishes, from the Solar System.
+  const selectedName = selectedId === 'observer' ? 'the Solar System' : rows.find(row => row.dataset.neighborId === selectedId)?.querySelector('.object-name')?.textContent ?? '';
   for (const { row, value } of distances) {
     const active = row.dataset.neighborId === selectedId;
     const link = row.querySelector('a');

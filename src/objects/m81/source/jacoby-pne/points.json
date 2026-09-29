@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "jacoby-pne",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%2A+FROM+%22J%2FApJ%2F344%2F704%2Ftable1%22",
+    "bytes": 16114,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 7,
+      "decDeg": 8
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 368,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs (the relation the THINGS papers adopt), with S4G's disc scale length (Salo et al. 2015): 368 pc. The same thickness as the image layers' slabs; for young objects it is an upper value. Each row's own height is drawn, not measured."
+    },
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "basis": "Old objects fill the bulge as well as the disc: each is a bulge member with the bulge's share of S4G's fitted light at its sky position (faded out between 3 and 6 kpc as the image layers' is), and then sits at a depth drawn from the bulge's density along its sight line. Membership is drawn, not measured."
+    }
+  },
+  "source": "jacoby-1989-m81-pne",
+  "meaning": "Planetary nebulae of M81 found by Jacoby et al. (1989) in [O III] imaging: one dot per nebula at its catalogue position (B1950 in the table; VizieR's ICRS conversion, columns _RA_icrs and _DE_icrs).",
+  "appearance": {
+    "colorCss": "#9dffcf",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the planetary-nebula colour M31's and M33's dots share. Each dot takes its tone and half its colour from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

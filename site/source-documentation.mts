@@ -59,9 +59,3 @@ export function systemSourceDocumentation(system: { readonly id: string; readonl
   const providers = [...new Set([system.id, ...system.memberIds].flatMap(sourceProviders))];
   return { ...sourceDocumentation(system.id, system.name), label: creditLabel(providers) };
 }
-/** An overview's source document is its object's README; the observable universe is drawn from the Nearby Universe's
- * data (its DESI galaxies and quasars and the cosmic microwave background), so its README documents both. */
-const OVERVIEW_DOCUMENT_OWNERS: Readonly<Record<string, string>> = { 'observable-universe': 'nearby-universe' };
-export function overviewSourceDocumentation(scope: string, name: string) {
-  return sourceDocumentation(OVERVIEW_DOCUMENT_OWNERS[scope] ?? scope, name);
-}

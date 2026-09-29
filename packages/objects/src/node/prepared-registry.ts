@@ -5,7 +5,7 @@
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { catalogEntry, defineObjects, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '../registry/index.js';
+import { catalogEntry, defineObjects, defineOverview, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '../registry/index.js';
 import type { CatalogEntry, NavigableObject, ObjectEntry } from '../registry/index.js';
 
 /** The catalogue records `prepare:catalog` writes beside the registry that imports them, relative to the checkout.
@@ -15,6 +15,7 @@ export const PREPARED_CATALOGUE = Object.freeze({
   discoveries: 'site/prepared-object-discovery.json',
   distances: 'site/prepared-object-distances.json',
   focuses: 'site/prepared-focus-objects.json',
+  overviews: 'site/prepared-overview-objects.json',
 });
 
 /** A scene object as preparation sees it: every registry field, and a scene loader that refuses to mount. */
@@ -52,6 +53,8 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   const distances = record(PREPARED_CATALOGUE.distances, 'distances'), discoveries = record(PREPARED_CATALOGUE.discoveries, 'discoveries');
   const focuses: unknown = load(resolve(checkout, PREPARED_CATALOGUE.focuses));
   if (!Array.isArray(focuses)) throw new TypeError(`Invalid prepared catalogue focuses: ${PREPARED_CATALOGUE.focuses}.`);
+  const overviews: unknown = load(resolve(checkout, PREPARED_CATALOGUE.overviews));
+  if (!Array.isArray(overviews)) throw new TypeError(`Invalid prepared catalogue overviews: ${PREPARED_CATALOGUE.overviews}.`);
   const ids = Object.keys(distances);
   if (ids.length !== Object.keys(discoveries).length || ids.some(id => !Object.hasOwn(discoveries, id))) {
     throw new TypeError('Prepared catalogue distances and discoveries list different objects.');
@@ -64,15 +67,15 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
     if (entry.id !== id) throw new TypeError(`Catalogue identity differs: ${id}.`);
     const { order, context, ...object } = entry;
     return object;
-  }), ...focuses.map(definePreparedFocus)]);
+  }), ...focuses.map(definePreparedFocus), ...overviews.map(defineOverview)]);
   const sceneObjects = Object.freeze(objects.filter(isSceneObject));
-  for (const object of objects) if (object.kind === 'prepared-focus' && !sceneObjects.some(host => host.id === object.sceneHostId)) {
-    throw new TypeError(`Prepared focus host is not a registered scene: ${object.id}`);
+  for (const object of objects) if (object.kind !== 'scene' && !sceneObjects.some(host => host.id === object.sceneHostId)) {
+    throw new TypeError(`${object.kind === 'overview' ? 'Overview' : 'Prepared focus'} host is not a registered scene: ${object.id}`);
   }
   return Object.freeze({ objects, sceneObjects, requireSceneObject(id: string) {
     const object = objects.find(candidate => candidate.id === id);
     if (!object) throw new Error(`Unknown cssEarth object: ${id}`);
-    if (!isSceneObject(object)) throw new TypeError(`Object ${id} is a prepared focus, not a scene owner.`);
+    if (!isSceneObject(object)) throw new TypeError(`Object ${id} is ${object.kind === 'overview' ? 'an overview' : 'a prepared focus'}, not a scene owner.`);
     return object;
   } });
 }

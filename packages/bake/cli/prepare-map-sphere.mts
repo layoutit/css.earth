@@ -10,7 +10,11 @@
  * Galactic coordinates), `samplesPerTexel`² samples averaged, through the same projective mapping PolyCSS draws the tile
  * with, and with a one-texel border sampled past the patch; each leaf reaches into that border, so neighbouring patches
  * overlap by a texel and no seam opens between them. The atlas goes through the lossy lane. Writes `prepared/<id>.json`
- * (`cssearth-image-mesh@1`, read by packages/renderer/src/universe/image-mesh.ts) and `prepared/<id>/<id>.webp`.
+ * (`cssearth-image-mesh@1`, read by packages/renderer/src/universe/image-mesh.ts) and `prepared/<id>/<id>.webp`. A recipe
+ * `cutaway` marks the patches of the hemisphere it opens; the runtime hides them and draws the rest's inside behind what
+ * the sphere holds, or shows the whole sphere. Its `datasets` are the page's lenses of the sphere, whole or cut open:
+ * `prepared/datasets.json` carries their card text, the colour table's legend and a picture of each view
+ * (`prepared/<id>/<id>-<view>.webp`, packages/bake/src/raster/map-sphere-preview.ts).
  *
  * Usage: node packages/bake/cli/prepare-map-sphere.mts <object-directory> <id>
  */
@@ -22,7 +26,7 @@ import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Pol
 import { createSurfacePatches } from '@cssearth/objects';
 import { POLAR_CAP_STYLE } from '@cssearth/bake/scene';
 import { compileVolumeLeaf } from '@cssearth/bake/volume-leaves';
-import { encodeLossyWebp } from '@cssearth/bake/raster';
+import { composeMapSpherePreview, encodeLossyWebp, mapSpherePreviewRays } from '@cssearth/bake/raster';
 import { limbOverlay, meanObservedColour, outsideSilhouette } from '@cssearth/bake/photometry';
 
 type Vector3 = [number, number, number];
@@ -34,6 +38,10 @@ const recipePath = resolve(sourceDirectory, 'sphere.json');
 const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as {
   schema?: unknown; id?: unknown; name?: unknown; source?: unknown; meaning?: unknown;
   limb?: { law?: unknown; coefficient?: unknown; basis?: unknown };
+  cutaway?: { hemisphere?: unknown; interiorOpacity?: unknown; exteriorOpacity?: unknown; basis?: unknown };
+  datasets?: { default?: unknown; lenses?: unknown; legend?: { title?: unknown; meta?: unknown; stops?: unknown; unit?: { symbol?: unknown; perMapUnit?: unknown } };
+    attribution?: { label?: unknown; url?: unknown };
+    preview?: { sizePx?: unknown; elevationDeg?: unknown; azimuthDeg?: unknown; samples?: unknown; basis?: unknown } };
   map?: { path?: unknown; origin?: unknown; column?: unknown; coordinates?: unknown; unit?: unknown };
   colourTable?: { path?: unknown; origin?: unknown; basis?: unknown; scale?: unknown; scaleBasis?: unknown; gamma?: unknown; gammaBasis?: unknown };
   range?: { min?: unknown; max?: unknown; basis?: unknown };
@@ -43,7 +51,31 @@ const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as {
 const fail = (message: string): never => { throw new TypeError(`${recipePath}: ${message}`); };
 const text = (value: unknown): value is string => typeof value === 'string' && value.length > 0;
 const integer = (value: unknown, low: number, high: number): value is number => Number.isInteger(value) && (value as number) >= low && (value as number) <= high;
-const { map, colourTable, range, radius, mesh, limb } = recipe;
+const { map, colourTable, range, radius, mesh, limb, cutaway, datasets } = recipe;
+if (cutaway !== undefined && ((cutaway.hemisphere !== 'north' && cutaway.hemisphere !== 'south') || typeof cutaway.interiorOpacity !== 'number'
+  || !(cutaway.interiorOpacity > 0 && cutaway.interiorOpacity <= 1) || typeof cutaway.exteriorOpacity !== 'number'
+  || !(cutaway.exteriorOpacity > 0 && cutaway.exteriorOpacity <= 1) || !text(cutaway.basis))) {
+  fail('cutaway names the hemisphere it opens (north or south), the inside wall\'s and the open shell\'s opacities in (0, 1] and a basis.');
+}
+// The page's datasets of the sphere: each lens shows it whole or cut open, with the card text, a picture of that view and the
+// colour table's legend.
+type DatasetLens = { id: string; view: 'cutaway' | 'full'; label: string; detail: string; title: string; summary: string; description: string };
+const lenses: DatasetLens[] | null = datasets === undefined ? null : Array.isArray(datasets.lenses) ? datasets.lenses.map((lens: unknown) => {
+  const value = lens as Partial<Record<keyof DatasetLens, unknown>> | null;
+  if (!value || !/^[a-z][a-z0-9-]*$/u.test(String(value.id)) || (value.view !== 'cutaway' && value.view !== 'full')
+    || !['label', 'detail', 'title', 'summary', 'description'].every(key => text(value[key as keyof DatasetLens]))) {
+    return fail(`datasets.lenses: ${JSON.stringify(value?.id)} needs an id, a view (cutaway or full), label, detail, title, summary and description.`);
+  }
+  return value as DatasetLens;
+}) : fail('datasets.lenses lists the page\'s datasets of the sphere.');
+const preview = datasets?.preview, legend = datasets?.legend, attribution = datasets?.attribution;
+if (lenses && (!lenses.some(lens => lens.id === datasets!.default) || new Set(lenses.map(lens => lens.id)).size !== lenses.length
+  || (lenses.some(lens => lens.view === 'cutaway') && !cutaway) || !preview || !integer(preview.sizePx, 32, 1024) || typeof preview.elevationDeg !== 'number'
+  || !(Math.abs(preview.elevationDeg) <= 90) || typeof preview.azimuthDeg !== 'number' || !integer(preview.samples, 1, 4) || !text(preview.basis)
+  || !legend || !text(legend.title) || !text(legend.meta) || !integer(legend.stops, 2, 32) || !legend.unit || !text(legend.unit.symbol)
+  || typeof legend.unit.perMapUnit !== 'number' || !(legend.unit.perMapUnit > 0) || !attribution || !text(attribution.label) || !text(attribution.url))) {
+  fail('datasets names distinct lenses and its default among them (a cutaway lens needs the cutaway), its preview (sizePx 32 to 1024, elevationDeg, azimuthDeg, samples 1 to 4, basis), legend (title, meta, stops 2 to 32, unit {symbol, perMapUnit > 0}) and the pictures\' attribution {label, url}.');
+}
 if (!text(recipe.name)) fail('name is what the sphere\'s caption shows.');
 if (limb !== undefined && (limb.law !== 'linear' || typeof limb.coefficient !== 'number' || !(limb.coefficient > 0 && limb.coefficient < 1) || !text(limb.basis))) {
   fail('limb is a linear law, I(mu)/I(1) = 1 - u(1 - mu), with its coefficient u in (0, 1) and a basis.');
@@ -150,6 +182,16 @@ for place in r['places']:
   rgb = np.round(255 * (table[idx] / 255) ** r['colourGamma'] * r['colourScale']).astype(np.uint8)
   atlas[place['y']:place['y'] + C, place['x']:place['x'] + C] = rgb
 open(r['out'], 'wb').write(atlas.tobytes())
+# The dataset pictures' rays: one sample each, no averaging (the picture averages its own rays).
+for key in ('previewNear', 'previewFar'):
+  if key not in r: continue
+  pts = np.frombuffer(open(r[key], 'rb').read(), dtype=np.float64).reshape(-1, 3)
+  gal = pts @ icrs_to_gal.T
+  lon = np.degrees(np.arctan2(gal[:, 1], gal[:, 0])) % 360
+  lat = np.degrees(np.arcsin(np.clip(gal[:, 2], -1, 1)))
+  v = values[hp.lonlat_to_healpix(lon * u.deg, lat * u.deg)].astype(float)
+  idx = np.clip(np.round((v - lo) / (hi - lo) * 255), 0, 255).astype(int)
+  open(r[key] + '.rgb', 'wb').write(np.round(255 * (table[idx] / 255) ** r['colourGamma'] * r['colourScale']).astype(np.uint8).tobytes())
 d = Planck18.comoving_distance(r['redshift']).to(u.Mpc).value
 json.dump({'nside': int(nside), 'ordering': order, 'radiusMpc': float(d), 'min': float(np.nanmin(values)), 'max': float(np.nanmax(values))}, sys.stdout)`;
 const ICRS_TO_GALACTIC = [[-0.0548755604162154, -0.8734370902348850, -0.4838350155487132],
@@ -157,11 +199,16 @@ const ICRS_TO_GALACTIC = [[-0.0548755604162154, -0.8734370902348850, -0.48383501
 const rawPath = resolve(prepared, `${id}.rgb.tmp`), directionsPath = resolve(prepared, `${id}.directions.tmp`);
 await mkdir(prepared, { recursive: true });
 await writeFile(directionsPath, new Uint8Array(directions.buffer));
+const view = preview ? { sizePx: preview.sizePx as number, elevationDeg: preview.elevationDeg as number, azimuthDeg: preview.azimuthDeg as number,
+  samples: preview.samples as number } : null;
+const rays = view ? mapSpherePreviewRays(view) : null;
+const previewPaths = { previewNear: resolve(prepared, `${id}.near.tmp`), previewFar: resolve(prepared, `${id}.far.tmp`) };
+if (rays) { await writeFile(previewPaths.previewNear, new Uint8Array(rays.near.buffer)); await writeFile(previewPaths.previewFar, new Uint8Array(rays.far.buffer)); }
 const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
 const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   input: JSON.stringify({ map: resolve(sourceDirectory, map!.path as string), column: map!.column, table: resolve(sourceDirectory, colourTable!.path as string),
-    icrsToGalactic: ICRS_TO_GALACTIC, directions: directionsPath, places, samples, width: atlasWidth, height: atlasHeight, min: range!.min, max: range!.max, out: rawPath, redshift: radius!.redshift, colourScale: colourTable!.scale ?? 1, colourGamma: colourTable!.gamma ?? 1 }) });
+    icrsToGalactic: ICRS_TO_GALACTIC, directions: directionsPath, places, samples, width: atlasWidth, height: atlasHeight, min: range!.min, max: range!.max, out: rawPath, redshift: radius!.redshift, colourScale: colourTable!.scale ?? 1, colourGamma: colourTable!.gamma ?? 1, ...(rays ? previewPaths : {}) }) });
 if (run.status !== 0) throw new Error(`Map sampling failed: ${run.stderr.slice(-2000)}`);
 const sampled = JSON.parse(run.stdout) as { nside: number; ordering: string; radiusMpc: number; min: number; max: number };
 const atlasBytes = await readFile(resolve(rawPath));
@@ -209,22 +256,57 @@ const leaves = surfacePatches.map((patch, index) => {
   const [sizeX, sizeY] = leaf.style.backgroundSize.split(' ').map(value => Number.parseFloat(value));
   const [offsetX, offsetY] = leaf.style.backgroundPosition.split(' ').map(value => Number.parseFloat(value));
   const scaleX = sizeX! / side, scaleY = sizeY! / side, px = (value: number) => `${Number(value.toFixed(4))}px`;
-  return { id: patch.pole ?? `${patch.latitudeIndex}-${patch.longitudeIndex}`, centerUnits: centre.map(value => Number(value.toFixed(3))),
+  // A cutaway opens one hemisphere of the sphere's own frame (ICRS north is +z): its patches are marked, never removed.
+  const cut = cutaway !== undefined && (cutaway.hemisphere === 'north' ? centre[2] > 0 : centre[2] < 0);
+  return { id: patch.pole ?? `${patch.latitudeIndex}-${patch.longitudeIndex}`, ...(cut ? { cut: true } : {}), centerUnits: centre.map(value => Number(value.toFixed(3))),
     normalUnits: normalise(centre).map(value => Number(value.toFixed(6))),
     ...leaf, style: { ...leaf.style, backgroundSize: `${px(atlasWidth * scaleX)} ${px(atlasHeight * scaleY)}`,
       backgroundPosition: `${px(offsetX! - x * scaleX)} ${px(offsetY! - y * scaleY)}`,
       // Every lane's caps follow one rule (packages/bake/src/scene/polar-cap.ts): the square plate rounded to its disc.
       ...(patch.pole ? { borderRadius: POLAR_CAP_STYLE.split(':')[1]! } : {}) } };
 });
+// Each dataset's picture and card: the view it shows, drawn as the page draws it (map-sphere-preview.ts), and the colour
+// table's legend at evenly spaced stops across the range, in the colours the atlas uses.
+let datasetsOutput: object | undefined;
+if (lenses && rays && view) {
+  const nearColours = await readFile(`${previewPaths.previewNear}.rgb`), farColours = await readFile(`${previewPaths.previewFar}.rgb`);
+  for (const path of Object.values(previewPaths)) { await rm(path); await rm(`${path}.rgb`); }
+  const pictures = new Map<string, string>();
+  for (const lens of lenses) {
+    const rgba = composeMapSpherePreview({ view, rays, nearColours, farColours,
+      limb: limbOutput ? { coefficient: limbOutput.coefficient, referenceColour: limbOutput.referenceColour as [number, number, number] } : null,
+      cut: lens.view === 'cutaway' ? { hemisphere: cutaway!.hemisphere as 'north' | 'south', interiorOpacity: cutaway!.interiorOpacity as number, exteriorOpacity: cutaway!.exteriorOpacity as number } : null });
+    const path = `${id}/${id}-${lens.view}.webp`;
+    if (!pictures.has(lens.view)) await writeFile(resolve(prepared, path), await encodeLossyWebp(sharp(rgba, { raw: { width: view.sizePx, height: view.sizePx, channels: 4 } }), { alphaQuality: 100 }));
+    pictures.set(lens.view, path);
+  }
+  const table = (await readFile(resolve(sourceDirectory, colourTable!.path as string), 'utf8')).trim().split(/\r?\n/u).map(line => line.trim().split(/\s+/u).map(Number));
+  if (table.length !== 256 || table.some(row => row.length !== 3 || row.some(value => !Number.isFinite(value)))) fail('the colour table has 256 RGB rows.');
+  const stops = legend!.stops as number, hex = (value: number) => Math.round(255 * (value / 255) ** (colourTable!.gamma as number ?? 1) * ((colourTable!.scale as number | undefined) ?? 1)).toString(16).padStart(2, '0');
+  const colors = Array.from({ length: stops }, (_, stop) => `#${table[Math.round(stop / (stops - 1) * 255)]!.map(hex).join('')}`);
+  // The range's ends and middle in the legend's unit (the map's own unit times perMapUnit), signed.
+  const unit = legend!.unit as { symbol: string; perMapUnit: number };
+  const inUnit = (value: number) => `${value > 0 ? '+' : value < 0 ? '\u2212' : ''}${Math.round(Math.abs(value) * unit.perMapUnit)} ${unit.symbol}`;
+  const pictureAttribution = { label: attribution!.label as string, url: attribution!.url as string };
+  datasetsOutput = { schema: 'cssearth-map-sphere-datasets@1', objectId: basename(objectDirectory), mesh: `${id}.json`, defaultLens: datasets!.default,
+    view: { ...view, basis: preview!.basis },
+    controls: lenses.map(lens => ({ id: lens.id, view: lens.view, label: lens.label, detail: lens.detail, title: lens.title, summary: lens.summary,
+      description: lens.description, thumbnailUrl: pictures.get(lens.view)!,
+      texture: { url: pictures.get(lens.view)!, width: view.sizePx, height: view.sizePx, attribution: pictureAttribution },
+      legend: { kind: 'scale', title: legend!.title, meta: legend!.meta, colors,
+        labels: [inUnit(range!.min as number), inUnit((range!.min as number + (range!.max as number)) / 2), inUnit(range!.max as number)] } })) };
+}
 const extent = Math.ceil(R);
 const output = { schema: 'cssearth-image-mesh@1', id, name: recipe.name, source: recipe.source, meaning: recipe.meaning,
   frame: { referenceFrame: 'sun-icrf', epochJdTt: recipe.epochJdTt, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: MPC_M,
     boundsUnits: { min: [-extent, -extent, -extent], max: [extent, extent, extent] } },
   radiusUnits: Number(R.toFixed(3)), texture: { path: texturePath, width: atlasWidth, height: atlasHeight, bytes: webp.length },
   ...(limbOutput ? { limb: limbOutput } : {}),
+  ...(cutaway ? { cutaway: { hemisphere: cutaway.hemisphere, interiorOpacity: cutaway.interiorOpacity, exteriorOpacity: cutaway.exteriorOpacity } } : {}),
   sampling: { nside: sampled.nside, ordering: sampled.ordering, mapMin: sampled.min, mapMax: sampled.max, range: range, colourTable: colourTable!.basis, radius: radius, mesh },
   leaves };
 await writeFile(resolve(prepared, `${id}.json`), JSON.stringify(output) + '\n');
+if (datasetsOutput) await writeFile(resolve(prepared, 'datasets.json'), JSON.stringify(datasetsOutput, null, 2) + '\n');
 const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
 await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
 console.log(`Prepared a ${leaves.length}-patch sphere of radius ${R.toFixed(1)} Mpc with a ${atlasWidth} x ${atlasHeight} atlas (${webp.length} bytes).`);

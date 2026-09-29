@@ -4,5 +4,6 @@ export * from './write.js'
 export * from './spatial.js'
 export * from './clusters.js'
 export * from './nebulae.js'
+export * from './classification.js'
 
 export * from './spatial-relations.js';

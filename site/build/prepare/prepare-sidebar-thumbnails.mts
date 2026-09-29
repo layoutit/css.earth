@@ -59,36 +59,42 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   defaults[id] = `${id}/${defaultLens}`;
 }
 
-// The Milky Way has a prepared simulation rather than a publisher photograph.
-// Composite its existing z slabs face-on, preserving their positions and alpha.
-const volumePath = 'src/objects/milky-way/prepared/volume-slices.json';
-const volume = sourceObject(await json(volumePath));
+// A density volume (the Milky Way) has a prepared simulation rather than a publisher photograph. Composite its existing z
+// slabs face-on, preserving their positions and alpha.
 const vector = (value: unknown) => {
   if (!Array.isArray(value) || value.length !== 3 || !value.every(n => typeof n === 'number' && Number.isFinite(n))) throw new TypeError('Invalid prepared slab position');
   return value.map(Number);
 };
-const bounds = sourceObject(volume.boundsUnits), min = vector(bounds.min), max = vector(bounds.max);
-const size = 256, layers: OverlayOptions[] = [], slabInputs = [volumePath];
-for (const raw of sourceArray(volume.quads, sourceObject)) {
-  if (raw.axis !== 'z' || raw.alphaCoverage === 0) continue;
-  const vertices = sourceArray(raw.vertices, vector), upperLeft = vertices[0], lowerRight = vertices[2];
-  if (!upperLeft || !lowerRight) throw new TypeError('Incomplete prepared slab');
-  const x = (value: number) => Math.round((value - min[0]) / (max[0] - min[0]) * size);
-  const y = (value: number) => Math.round((max[1] - value) / (max[1] - min[1]) * size);
-  const left = x(upperLeft[0]), top = y(upperLeft[1]);
-  const width = x(lowerRight[0]) - left, height = y(lowerRight[1]) - top;
-  if (width <= 0 || height <= 0) continue;
-  const path = `src/objects/milky-way/prepared/${sourcePath(raw.texturePath)}`;
-  const bytes = await read(path); slabInputs.push(path);
-  layers.push({ input: await sharp(bytes).resize(width, height).png().toBuffer(), left, top });
+for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
+  const descriptor: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', folder.name, 'object.json'), 'utf8').catch((error: unknown) => {
+    if (hasErrorCode(error, 'ENOENT')) return 'null'; throw error;
+  }));
+  if (!descriptor || typeof descriptor !== 'object' || (descriptor as { type?: unknown }).type !== 'density-volume') continue;
+  const id = folder.name, volumePath = `src/objects/${id}/prepared/volume-slices.json`;
+  const volume = sourceObject(await json(volumePath));
+  const bounds = sourceObject(volume.boundsUnits), min = vector(bounds.min), max = vector(bounds.max);
+  const size = 256, layers: OverlayOptions[] = [], slabInputs = [volumePath];
+  for (const raw of sourceArray(volume.quads, sourceObject)) {
+    if (raw.axis !== 'z' || raw.alphaCoverage === 0) continue;
+    const vertices = sourceArray(raw.vertices, vector), upperLeft = vertices[0], lowerRight = vertices[2];
+    if (!upperLeft || !lowerRight) throw new TypeError(`${volumePath}: incomplete prepared slab`);
+    const x = (value: number) => Math.round((value - min[0]) / (max[0] - min[0]) * size);
+    const y = (value: number) => Math.round((max[1] - value) / (max[1] - min[1]) * size);
+    const left = x(upperLeft[0]), top = y(upperLeft[1]);
+    const width = x(lowerRight[0]) - left, height = y(lowerRight[1]) - top;
+    if (width <= 0 || height <= 0) continue;
+    const path = `src/objects/${id}/prepared/${sourcePath(raw.texturePath)}`;
+    const bytes = await read(path); slabInputs.push(path);
+    layers.push({ input: await sharp(bytes).resize(width, height).png().toBuffer(), left, top });
+  }
+  const image = await sharp({ create: { width: size, height: size, channels: 4, background: '#00000000' } })
+    .composite(layers).png().toBuffer();
+  const creditPath = `src/objects/${id}/source/provenance.json`;
+  const provenance = sourceObject(await json(creditPath));
+  await makeThumbnail(id, 'volume', image, { inputs: [...slabInputs, creditPath], credit: sourceText(provenance.title),
+    sourceUrl: sourceText(sourceObject(provenance.license).dataLicenseDeclaration) });
+  defaults[id] = `${id}/volume`;
 }
-const milkyWay = await sharp({ create: { width: size, height: size, channels: 4, background: '#00000000' } })
-  .composite(layers).png().toBuffer();
-const creditPath = 'src/objects/milky-way/source/provenance.json';
-const provenance = sourceObject(await json(creditPath));
-await makeThumbnail('milky-way', 'volume', milkyWay, { inputs: [...slabInputs, creditPath], credit: sourceText(provenance.title),
-  sourceUrl: sourceText(sourceObject(provenance.license).dataLicenseDeclaration) });
-defaults['milky-way'] = 'milky-way/volume';
 
 // Catalogue IDs and detailed package IDs can differ (for example M 31).
 const cataloguePath = 'src/objects/local-group/prepared/catalogue.json';

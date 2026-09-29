@@ -1,6 +1,7 @@
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { objectIdAtPath } from '../root-object.mts';
+import { withPageDataset } from './navigation-scope.mts';
 import type { NavigationHistory, NavigationIntent } from './navigation-request.mts';
 type Navigate = (id: string, intent: NavigationIntent) => unknown;
 interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; getAttribute(name: string): string | null; }
@@ -9,6 +10,15 @@ function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
   const anchor: unknown = target.closest('a[href]');
   if (!isRecord(anchor) || typeof anchor.href !== 'string' || (anchor.target !== undefined && typeof anchor.target !== 'string') || typeof anchor.hasAttribute !== 'function' || typeof anchor.getAttribute !== 'function') return null;
   return anchor as unknown as NavigationAnchor;
+}
+/** The dataset button of a drawn page's lenses (DatasetLenses `page`), with that page and the lens it selects. */
+function drawnPageLens(target: EventTarget | null): { page: string; lens: string } | null {
+  if (!target || !('closest' in target) || typeof target.closest !== 'function') return null;
+  const button: unknown = target.closest('button[name="dataset"]');
+  // The form's attribute, not `form.dataset`: a form's controls named `dataset` shadow that property.
+  if (!isRecord(button) || typeof button.getAttribute !== 'function' || !isRecord(button.form) || typeof button.form.getAttribute !== 'function') return null;
+  const page = (button.form.getAttribute as (name: string) => string | null)('data-drawn-page'), lens = (button.getAttribute as (name: string) => string | null)('value');
+  return typeof page === 'string' && page && lens ? { page, lens } : null;
 }
 const navigationId = (event: Event): unknown => 'detail' in event && isRecord(event.detail) ? event.detail.objectId : undefined;
 const navigationFeature = (event: Event): string | undefined => 'detail' in event && isRecord(event.detail) && typeof event.detail.feature === 'string' && /^(?:city-)?[0-9]+$/u.test(event.detail.feature) ? event.detail.feature : undefined;
@@ -105,6 +115,15 @@ export function bindNavigationLinks({ documentTarget, windowTarget, navigable, n
   };
   const click = (event: MouseEvent) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    // A drawn page's dataset is chosen like a link to that page with it: the camera stays and the choice is a history entry.
+    const pageLens = drawnPageLens(event.target);
+    if (pageLens) {
+      if (!available(pageLens.page)) return;
+      event.preventDefault();
+      const url = withPageDataset(new URL(windowTarget.location.href), pageLens.page, pageLens.lens);
+      Promise.resolve(navigate(pageLens.page, { kind: 'link', url: url.href })).catch(onError);
+      return;
+    }
     const anchor = closestAnchor(event.target);
     if (!anchor || anchor.hasAttribute('download') || (anchor.target && anchor.target !== '_self')) return;
     const url = new URL(anchor.href, windowTarget.location.href);

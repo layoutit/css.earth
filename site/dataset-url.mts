@@ -10,7 +10,7 @@ export function isFocusDatasetUrl(url: URL, sceneId: string): boolean {
 }
 
 /** The mounted scene's own dataset. On the page of a subject the scene draws (a catalogue focus, an overview) the scene
- * reads none: a focus's `dataset` is the focus's lens, and an overview's page has none. */
+ * reads none: that page's `dataset` is its subject's own lens (a focus's, or an overview's, page-datasets.mts). */
 export function readSceneDatasetUrl(url: URL, sceneId: string): { requested: boolean; id: string | null } {
   return drawnPageFromUrl(url, sceneId) === null ? readDatasetUrl(url) : { requested: false, id: null };
 }

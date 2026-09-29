@@ -1,10 +1,13 @@
-import { catalogEntry, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
+import { catalogEntry, defineOverview, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
+import type { OverviewObject } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
 import { isRecord } from '@cssearth/core';
+import overviews from './prepared-overview-objects.json' with { type: 'json' };
 
 /** The objects a page knows, read one at a time from their prepared entries (`pages/objects/[id]/entry.json.ts`) the first
  * time the page needs them: its own, the Sun's, and whatever it navigates to. A page never loads the whole registry, so an
- * object added to the universe costs nothing on any other page. Both lists are live: consumers that search them find
+ * object added to the universe costs nothing on any other page. The overviews are the exception: every URL is read against
+ * them (a path names either a scene, a catalogue focus or an overview), so the directory starts with their few entries. Both lists are live: consumers that search them find
  * every object loaded so far. The build and the search function seed them from the full registry (`seedObjectDirectory`). */
 export const NAVIGABLE_OBJECTS: NavigableObject[] = [];
 export const SCENE_OBJECTS: ObjectEntry[] = [];
@@ -15,16 +18,21 @@ function add(object: NavigableObject) {
   NAVIGABLE_OBJECTS.push(object);
   if (isSceneObject(object)) SCENE_OBJECTS.push(object);
 }
+/** The overviews, from the nearest level of the zoom ladder out: every page knows them (see above). The build's registry
+ * holds the same entries (objects.mts OVERVIEWS). */
+export const KNOWN_OVERVIEWS: readonly OverviewObject[] = Object.freeze(overviews.map(defineOverview).sort((a, b) => a.order - b.order));
+for (const overview of KNOWN_OVERVIEWS) add(overview);
 /** Whether a loaded object owns a scene. */
 export const isLoadedScene = isSceneObject;
 /** The object with `id` if the page has loaded it. */
 export const knownObject = (id: string): NavigableObject | undefined => NAVIGABLE_OBJECTS.find(object => object.id === id);
 
 /** A prepared entry as the directory serves it: a scene object's descriptor with its navigation distance and discovery,
- * or a prepared focus. */
+ * a prepared focus or an overview. */
 export function objectFromEntry(value: unknown): NavigableObject {
   if (!isRecord(value)) throw new TypeError('Invalid object entry.');
   if (value.kind === 'prepared-focus') return definePreparedFocus(value.focus);
+  if (value.kind === 'overview') return defineOverview(value.overview);
   if (value.kind !== 'scene' || !isRecord(value.descriptor)) throw new TypeError('Invalid object entry.');
   const descriptor = value.descriptor;
   const { order: _order, context: _context, ...object } = catalogEntry(descriptor, async (signal?: AbortSignal) => {

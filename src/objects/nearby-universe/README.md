@@ -16,7 +16,6 @@ drawn: nothing here is invented.
 | [DESI Data Release 1 (2025)](https://arxiv.org/abs/2503.14745), clustering catalogues of [Ross et al. (2025)](https://arxiv.org/abs/2405.16593) | BGS BRIGHT-21.5 (300,043 galaxies, redshift 0.1 to 0.4, volume-limited to absolute r magnitude -21.5) with dereddened g, r and z fluxes; QSO (1,223,391 quasars, redshift 0.8 to 3.5). |
 | [Francis et al. (1991)](https://doi.org/10.1086/170066) | The Large Bright Quasar Survey composite spectrum, from the STScI reference atlases. |
 | [Planck 2018 VI](https://arxiv.org/abs/1807.06209) | The cosmology that turns a redshift into a distance (Astropy's Planck18) and the redshift of last scattering, z* = 1089.80. |
-| [Planck 2018 IV](https://arxiv.org/abs/1807.06208) | The SMICA map of the cosmic microwave background (PR3, HEALPix Nside 2048), and the collaboration's style-guide colour table. |
 
 The [galaxy recipe](source/galaxies/points.json) records both queries and the
 join. The tracked table ([cf4-hyperleda.csv.gz](source/galaxies/cf4-hyperleda.csv.gz),
@@ -54,10 +53,9 @@ records what was used, replaced and left out.
 
 Past 200 Mpc the view is DESI's first data release, drawn as the same dots, in
 two shells on DESI's footprint (about a third of the sky, north and south of the
-Milky Way's plane), and at the edge the cosmic microwave background. The
-overview reads **Observable Universe** from 1 Gpc out, opens 52 Gpc from the
-Sun and reaches 60 Gpc, far enough for the microwave background's caption to fit
-below it.
+Milky Way's plane). At the edge is the cosmic microwave background, which the
+[Observable Universe](../observable-universe/README.md) package draws; that
+overview reads from 1 Gpc out.
 
 - **Bright galaxies** ([recipe](source/desi-bright-galaxies/points.json)): one
   in 10 of BGS BRIGHT-21.5 (30,005 galaxies, 670 to 1,575 Mpc for the 5th to
@@ -76,42 +74,14 @@ below it.
   colour its light arrives with. At redshift 0.8 and beyond the visible range
   is 211 to 433 nm in the quasar's frame, inside the composite's range. They are
   drawn whole within 6,600 Mpc.
-- **The cosmic microwave background** ([recipe](source/cmb/sphere.json)):
-  Planck's 2018 SMICA map (HEALPix Nside 2048) drawn on the sphere its light
-  left from, the surface of last scattering: the comoving distance of
-  z* = 1089.80 (Planck 2018 VI, Table 2) in the Planck 2018 cosmology,
-  13,884 Mpc or 45.3 billion light-years. Its light left 372,000 years after the
-  Big Bang: the age of the universe at z* in the same cosmology (Astropy 8.0.1
-  `Planck18.age`), the figure the overview card quotes. The sphere is the planets' standard
-  sphere: 16 latitude bands of 32 flat cells, ICRS north up, the top and bottom
-  bands closed by round polar caps, 450 PolyCSS leaves in all, each showing its
-  own tile of one atlas (64 texels a side for a cell, 192 for a cap, so a cap's
-  texels are no coarser than the equator's)
-  ([`prepare-map-sphere.mts`](../../../packages/bake/cli/prepare-map-sphere.mts)).
-  Each texel averages 2 by 2 samples of the map at its direction, taken through
-  the same projective mapping the leaf draws its tile with and turned from
-  ICRS into the map's Galactic coordinates, and takes the Planck style-guide
-  colour for its temperature over ±300 µK, each channel raised to the power 1.6
-  so the table's pale middle does not glare beside the dots. Each patch shows only its front, so
-  from outside the far side never shows through, and it fades in as the camera
-  leaves it, from its radius to twice that: it is the edge of the observable
-  universe, seen from outside. From inside it would be the whole sky, which the
-  app does not draw. Like a body it has a limb plate, a prepared image that faces
-  the camera and is fitted each frame to the sphere's exact outline, and its
-  name below it in the selected body's caption. The limb is a presentation
-  choice, not a measurement: nothing sees this surface from outside, so it takes
-  the linear limb law, 1 - 0.6(1 - μ), drawn as the bodies' limb plates are
-  (`limbOverlay`, over the atlas's mean colour).
-
 ## Tests and evidence
 
-On the experimental cosmic-web branch, two more [captures](evidence/2026-09-29/capture.json)
-show [the cosmic microwave background from outside](evidence/2026-09-29/cmb-from-outside.jpg)
-at 52 Gpc, seamless across its 450 patches, with its limb and caption, and, 7.6 billion light-years out
+On the experimental cosmic-web branch, another [capture](evidence/2026-09-29/capture.json)
+shows, 7.6 billion light-years out
 (captured at 40 Gpc plus three notches, before the opening distance moved),
 [DESI's two cones](evidence/2026-09-29/desi-cones.jpg) of bright galaxies either
-side of the Milky Way's plane, with the Cosmicflows-4 field between them. Both
-were taken before overviews had their own pages; they open now at
+side of the Milky Way's plane, with the Cosmicflows-4 field between them. It was
+taken before overviews had their own pages; the view opens now at
 `/observable-universe/`.
 
 A [browser capture](evidence/2026-09-29/capture.json) of this version shows

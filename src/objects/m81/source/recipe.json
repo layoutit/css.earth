@@ -1,0 +1,162 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m81",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      8315,
+      4642
+    ],
+    "originalDimensions": [
+      8315,
+      4642
+    ],
+    "publisherUrl": "https://noirlab.edu/public/images/noao-m81m82/",
+    "downloadUrl": "https://storage.noirlab.edu/media/archives/images/large/noao-m81m82.jpg",
+    "credit": "T.A. Rector (University of Alaska Anchorage) and NOIRLab/NSF/AURA",
+    "license": "CC-BY-4.0",
+    "foregroundStars": {
+      "path": "gaia-dr3-foreground.csv",
+      "raDegColumn": "RA_ICRS",
+      "decDegColumn": "DE_ICRS",
+      "gMagColumn": "Gmag",
+      "source": "gaia-2023-dr3",
+      "basis": "Milky Way foreground stars by the criterion of Ren et al. (2021, Sect. 3.2): a Gaia parallax measured to better than 20% that places the star within 50 kpc, or a proper motion above 0.2 mas/yr plus 2 sigma measured to better than 20%. Applied to Gaia DR3 over the photograph's field; the query is in the Gaia DR3 source record."
+    }
+  },
+  "observation": {
+    "centerRaDeg": 148.8236564,
+    "centerDecDeg": 69.3190852,
+    "fieldOfViewDeg": [
+      0.9811666666666666,
+      0.5478333333333333
+    ],
+    "northClockwiseDeg": 90.2
+  },
+  "target": {
+    "centerRaDeg": 148.8883,
+    "centerDecDeg": 69.065278,
+    "distancePc": 3614099.2
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 59,
+    "lineOfNodesPaDeg": 150.2,
+    "thicknessKpc": 2.208,
+    "depthWeights": [
+      0.005054043639887778,
+      0.006133325082786364,
+      0.007443085032793983,
+      0.009032541738393211,
+      0.010961423911771349,
+      0.013302215218429378,
+      0.016142878073293995,
+      0.019590159098328345,
+      0.023773600454352346,
+      0.028850407785172623,
+      0.03501135770195748,
+      0.04248796679970682,
+      0.051561191603605214,
+      0.06257198637243414,
+      0.07593411550089783,
+      0.09214970198618916,
+      0.09214970198618916,
+      0.07593411550089786,
+      0.06257198637243411,
+      0.051561191603605214,
+      0.04248796679970682,
+      0.0350113577019575,
+      0.028850407785172612,
+      0.023773600454352346,
+      0.019590159098328345,
+      0.016142878073294006,
+      0.013302215218429378,
+      0.010961423911771349,
+      0.009032541738393211,
+      0.007443085032793986,
+      0.006133325082786364,
+      0.005054043639887778
+    ],
+    "supportRadiusKpc": 16.5,
+    "supportTaperFraction": 0.75,
+    "depthScales": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "positionAngleDeg": 145.02,
+      "sersicIndex": 3.557,
+      "halfLightRadiusKpc": 1.804,
+      "surfaceBrightnessAtHalfLight": 20.017,
+      "skyEllipticity": 0.346,
+      "disc": {
+        "centralSurfaceBrightness": 19.833,
+        "scaleLengthKpc": 2.684,
+        "skyEllipticity": 0.457,
+        "positionAngleDeg": 156.3
+      },
+      "extentKpc": {
+        "radius": 6,
+        "height": 4,
+        "fadeFrom": 3
+      }
+    }
+  },
+  "bake": {
+    "maxFacePixels": 4000,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.006,
+    "encoding": {
+      "format": "webp",
+      "quality": 82
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.08,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "bulgeSlices": 40,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 24,
+    "colourTie": {
+      "bv": 0.95,
+      "source": "rc3-1991",
+      "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives a total (B-V)T of 0.95 as observed; red and blue are scaled in linear light so the disc's mean colour matches the engine's catalogue colour for that index, the function that colours the star dots."
+    }
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}
