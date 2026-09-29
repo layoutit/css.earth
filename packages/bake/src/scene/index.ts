@@ -12,4 +12,3 @@ export * from './cutaway.ts';
 export * from './atmosphere.ts';
 export * from './geometry-scene.ts';
 export * from './perspective-camera.ts';
-export * from './map-sphere-preview.ts';

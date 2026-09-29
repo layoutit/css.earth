@@ -14,7 +14,7 @@
  * `cutaway` marks the patches of the hemisphere it opens; the runtime hides them and draws the rest's inside behind what
  * the sphere holds, or shows the whole sphere. Its `datasets` are the page's lenses of the sphere, whole or cut open:
  * `prepared/datasets.json` carries their card text, the colour table's legend and a picture of each view
- * (`prepared/<id>/<id>-<view>.webp`, packages/bake/src/scene/map-sphere-preview.ts).
+ * (`prepared/<id>/<id>-<view>.webp`, packages/bake/src/raster/map-sphere-preview.ts).
  *
  * Usage: node packages/bake/cli/prepare-map-sphere.mts <object-directory> <id>
  */
@@ -24,9 +24,9 @@ import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import { createSurfacePatches } from '@cssearth/objects';
-import { POLAR_CAP_STYLE, composeMapSpherePreview, mapSpherePreviewRays } from '@cssearth/bake/scene';
+import { POLAR_CAP_STYLE } from '@cssearth/bake/scene';
 import { compileVolumeLeaf } from '@cssearth/bake/volume-leaves';
-import { encodeLossyWebp } from '@cssearth/bake/raster';
+import { composeMapSpherePreview, encodeLossyWebp, mapSpherePreviewRays } from '@cssearth/bake/raster';
 import { limbOverlay, meanObservedColour, outsideSilhouette } from '@cssearth/bake/photometry';
 
 type Vector3 = [number, number, number];

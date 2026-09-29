@@ -63,7 +63,7 @@ The opening and both opacities are presentation choices, recorded in the recipe'
 to `prepared/datasets.json`, with the colour table's legend at nine stops from −300 to +300 µK and a picture of each
 view: the sphere from far away along a line 30° above the ICRS equator at right ascension 0h, north up, composed as
 the page draws it from the same map, limb law and opacities
-([`map-sphere-preview.ts`](../../../packages/bake/src/scene/map-sphere-preview.ts)).
+([`map-sphere-preview.ts`](../../../packages/bake/src/raster/map-sphere-preview.ts)).
 
 ## Tests and evidence
 

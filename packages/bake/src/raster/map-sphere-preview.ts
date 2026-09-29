@@ -1,4 +1,4 @@
-import { limbOverlay } from '../photometry/limb.ts';
+import { limbOverlay } from '../photometry/index.ts';
 
 type Vector3 = [number, number, number];
 type Rgb = readonly [number, number, number];
