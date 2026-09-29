@@ -7,6 +7,7 @@ import { prepareVolumeProvenance, readPreparedVolumeProvenance } from '../../sit
 import { prepareContextProvenance, readPreparedContextProvenance } from '@cssearth/bake/sources';
 import { CONTEXT_ROUTE } from '../../src/platform/dataset-destination.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
+import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
@@ -31,7 +32,8 @@ export function sourceCheckMode(value = process.env.CSSEARTH_SOURCE_CHECK_MODE):
   if (value === 'published') return value;
   throw new TypeError(`Unknown source check mode: ${value}`);
 }
-export const sourceTestVolumes = () => sourceCheckMode() === 'published' ? readPreparedVolumeProvenance() : prepareVolumeProvenance();
+// Authoring reads a publisher preview from our source-cache mirror first: some publishers refuse CI runners (APOD).
+export const sourceTestVolumes = () => sourceCheckMode() === 'published' ? readPreparedVolumeProvenance() : prepareVolumeProvenance({ mirrorOrigin: RUNTIME_ASSET_ORIGIN });
 export const sourceTestContexts = () => sourceCheckMode() === 'published' ? readPreparedContextProvenance({ route: CONTEXT_ROUTE }) : prepareContextProvenance({ route: CONTEXT_ROUTE });
 export const prepareTestFacilities = (options: Parameters<typeof prepareFacilities>[0] = {}) =>
   prepareFacilities({ ...options, packageMode: sourceCheckMode() });
