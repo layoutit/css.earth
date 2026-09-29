@@ -1,7 +1,10 @@
-/** `telescope new-object`: the object generator and the bake it hands its objects to, run in the telescope's own process.
- * The telescope parses and checks the command line and calls `newObjectCommand` with the parsed options; the result text and
- * exit code come back to it, a failure is raised to it, and everything printed here is its stderr. */
+/** `telescope new-object`: the object generator and the bake it hands its objects to, run as the workspace's own process.
+ * The telescope parses and checks the command line, then runs this with the parsed options as one JSON argument; the result
+ * text and exit code, or the failure, go back over the IPC channel, and everything printed here is the telescope's stderr. */
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { answerParent } from '@cssearth/core/node';
 import { prepareObjects } from '@cssearth/bake/prepare-object';
 import { liveArchive } from './archives.mts';
 import { writeDrafts } from './drafts.mts';
@@ -10,6 +13,14 @@ import { refreshSpec } from './refresh.mts';
 import { loadSolarEpoch } from './solar-epoch.mts';
 
 export interface NewObjectOptions {readonly spec?:string;readonly ids?:readonly string[];readonly from?:string;readonly names?:readonly string[];readonly out?:string;readonly check:boolean;readonly bake:boolean;readonly refresh:boolean;readonly skipExisting:boolean;readonly json:boolean}
+
+/** The options the telescope parsed, read back from its JSON argument. */
+export function parseNewObjectOptions(value:unknown):NewObjectOptions{
+  const record=requireRecord(value,'new-object options'),flag=(name:string)=>{const found=record[name];if(typeof found!=='boolean')throw new TypeError(`new-object option ${name} must be a boolean.`);return found;};
+  const strings=(name:string)=>record[name]===undefined?{}:{[name]:requireArray(record[name],`new-object ${name}`).map(entry=>requireString(entry,`new-object ${name}`))};
+  const string=(name:string)=>record[name]===undefined?{}:{[name]:requireString(record[name],`new-object ${name}`)};
+  return {...string('spec'),...strings('ids'),...string('from'),...strings('names'),...string('out'),check:flag('check'),bake:flag('bake'),refresh:flag('refresh'),skipExisting:flag('skipExisting'),json:flag('json')};
+}
 
 /** The result text and exit code for one parsed `new-object` command. */
 export async function newObjectCommand(options:NewObjectOptions,root:string,stderr:(text:string)=>void):Promise<{readonly text:string;readonly code:number}>{
@@ -33,4 +44,8 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
     text=options.json?`${JSON.stringify(results)}\n`:formatNewObject(results)+(results.length&&baked&&options.bake?`${results.length} objects baked.\n`:results.length&&baked&&options.check?`${results.length} objects passed the bake's first steps.\n`:'');code=baked&&!results.some(result=>result.failed)?0:1;
   }
   return {text,code};
+}
+
+if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
+  await answerParent(()=>newObjectCommand(parseNewObjectOptions(JSON.parse(process.argv[2]??'null')),resolve(import.meta.dirname,'../../../..'),line=>{process.stderr.write(line);}));
 }

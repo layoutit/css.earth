@@ -28,6 +28,8 @@ import { fetchGeminiSource } from './gemini-source.mts';
 import { fetchOpusSource } from './opus-source.mts';
 import { fetchChandraSource } from './chandra-source.mts';
 import { fetchSpitzerSource } from './spitzer-source.mts';
+import { runWorkspaceCommand } from './workspace-commands.mts';
+import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
 import { type ArtifactInspection, type InspectedArtifact, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
@@ -237,10 +239,7 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
         const result=options.product?await matchProductSoftware(options.product):await searchAscl(options.query!);
         text=options.json?`${JSON.stringify(result)}\n`:formatAscl(result);code=result.mode==='query'&&!result.entries?.length?3:0;
       }else if(options.command==='new-object'){
-        // In this process, from the checkout's directory: the bake it hands its objects to starts its steps by relative path.
-        const {newObjectCommand}=await import('./new-object/cli.mts'),start=process.cwd();
-        process.chdir(root);
-        try{({text,code}=await newObjectCommand(options,root,line=>{process.stderr.write(line);}));}finally{process.chdir(start);}
+        ({text,code}=await runWorkspaceCommand(root,NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
       }else if(options.command==='papers'){
         const result=await searchPapers(root,{target:options.target,...(options.instrument?{instrument:options.instrument}:{}),...(options.host?{host:options.host}:{}),...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
         text=options.json?`${JSON.stringify(result)}\n`:formatPapers(result,options.directory);code=result.works.length?0:3;
