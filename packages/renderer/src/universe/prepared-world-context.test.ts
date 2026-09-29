@@ -841,8 +841,14 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
   layer.destroy();
 });
 
+// Parsed once for every system below.
+let worldContext: Promise<ReturnType<typeof parsePreparedWorldContext>> | undefined;
 test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits stay complete across selection, hover, flight and zoom', async planet => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  worldContext ??= readFile(new URL('../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8').then(text => parsePreparedWorldContext(JSON.parse(text)));
+  // The system alone is mounted: mounting the whole universe once per system grew with systems times bodies, and ~1,000 exoplanet
+  // hosts (batch 1, 2026-09-29) made this test run for most of an hour.
+  const universe = await worldContext, systemIds = new Set([planet, ...required([universe.focus, ...universe.bodies].find(body => body.id === planet)!.systemView).memberIds]);
+  const context = { ...universe, bodies: universe.bodies.filter(body => systemIds.has(body.id)) };
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,

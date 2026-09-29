@@ -9,7 +9,11 @@ const bodies = [plan.focus, ...plan.bodies];
 
 for (const host of bodies.filter(body => body.systemView)) {
   test(`${host.id} keeps the same proxy demand when its system flight finishes`, () => {
-    const calculate = createWorldContextPlanner(plan);
+    // The host's marker is the question, so each test plans the host's own system: planning the whole universe once per host
+    // grew with systems times bodies, and ~1,000 exoplanet hosts (batch 1, 2026-09-29) ran past the job's 25 minutes.
+    const members = new Set([host.id, ...host.systemView!.memberIds]);
+    const system = { ...plan, bodies: plan.bodies.filter(body => members.has(body.id)) }, bodies = [system.focus, ...system.bodies];
+    const calculate = createWorldContextPlanner(system);
     for (const diameter of [4, 45]) {
       const focalPixels = 1000;
       const input: WorldContextView = {
