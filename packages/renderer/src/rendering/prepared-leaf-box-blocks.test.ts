@@ -133,3 +133,27 @@ test('detail beyond the need stays within the budget; past it the groups needed 
   // Without prepared sizes there is no budget: every group may shrink.
   expect(leafBoxShrinkable(binding, wanted, written, lastNeeded, 3)).toBe(null);
 });
+
+test('detached preparation replaces close-up defaults before first paint, then freezes resident boxes in motion', () => {
+  const styles = new Map<string, string>(Object.keys(binding.groups).map(name => [name, '512']));
+  const writes: [string, string][] = [], frames: (() => void)[] = [];
+  const time = timing();
+  const blocks = createLeafBoxBlocks(binding, name => styles.get(name) ?? '', (name, value) => {
+    writes.push([name, value]); styles.set(name, value);
+  }, callback => frames.push(callback), time);
+  const arrival = { ...view(40000), silhouetteDiameter: 20 };
+  blocks.prepare(arrival);
+  expect(styles.get('--silhouette-step')).toBe('32');
+  expect(styles.get('--silhouette-step-0')).toBe('32');
+  expect(styles.get('--silhouette-step-2')).toBe('16');
+  expect(frames).toHaveLength(0);
+  writes.length = 0;
+  blocks.prepare(arrival);
+  expect(writes).toHaveLength(0);
+  blocks.publish({ ...view(1500), silhouetteDiameter: 1000 });
+  while (frames.length) frames.shift()!();
+  expect(writes).toHaveLength(0);
+  time.settle();
+  while (frames.length) frames.shift()!();
+  expect(Number(styles.get('--silhouette-step-0'))).toBeGreaterThan(512);
+});

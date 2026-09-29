@@ -59,6 +59,19 @@ packages/renderer/
 └── CLAUDE.md           symlink to AGENTS.md
 ```
 
+## First connection and backing sizes
+
+A detached presentation selects its initial leaf-box levels from the incoming physical view before its roots connect.
+The prepared stylesheet's close-up default is not a resident raster cache. Keeping it through a distant system arrival
+allocates large backing surfaces for tiny projected faces. `createLeafBoxBlocks.prepare()` applies the existing
+prepared levels while detached; after connection, `publish()` keeps the existing motion freeze and paced settling.
+No new geometry, texture or device-specific level policy is introduced.
+
+The connection-order regression uses Neptune's real prepared groups in `src/platform/object-selection-runtime.test.mts`.
+The leaf-box unit test checks initial selection, unchanged repeated preparation and the subsequent motion freeze.
+[Matched iPad captures](evidence/initial-leaf-backing.json) record the reduced layer allocation, remaining first-paint
+stalls and measurement limits.
+
 ## Evidence
 
 The move from `src/renderers/css` left the site's `astro build` output byte-identical: all 9,508 files outside

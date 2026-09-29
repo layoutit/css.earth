@@ -225,7 +225,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const framePublisher = createPreparedFramePublisher(definition, stage, nodes, sceneElement, controlPitch => {
     for (const { animation, plan } of animations) context.seekAnimation(animation,
       Math.max(0, Math.min(plan.duration, (controlPitch - plan.sourceMinimum) * plan.millisecondsPerDegree)));
-  }, initialProjection);
+  }, initialProjection, owned);
   let selectionPublications = 0, styleWrites = 0;
   const tiledKeys = tiledTextureKeys(definition.textureLevels);
   let selectedTextures = new Map<string, { target: number; name: string }>();
@@ -309,7 +309,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
 /** Publish the same prepared camera-dependent styles in a browser or a native response. */
 export function createPreparedFramePublisher(definition: PreparedPresentationDefinition, stage: HTMLElement,
   nodes: readonly HTMLElement[], sceneElement: HTMLElement, seekPose: (controlPitch: number) => void = () => {},
-  initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection) {
+  initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection, connected = () => sceneElement.isConnected) {
   const publishDepth = createPreparedDepthPartitions(definition.depthPartitions, nodes, sceneElement);
   if (initialProjection) publishDepth(initialProjection);
   const materials = new Map(definition.materials.map(track => [track.id,
@@ -336,7 +336,13 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
         if (moving || wanted === null || styleValue(element, binding.property) === wanted) return 0;
         writeStyle(element, binding.property, wanted); styleWrites++; return 1;
       }, { frame: globalThis.requestAnimationFrame?.bind(globalThis) ?? null });
-      return (value: string) => {
+      return (value: string, detached: boolean) => {
+        if (detached) {
+          wanted = value;
+          const element = target(binding.target);
+          if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
+          return;
+        }
         pacer.published();
         const first = wanted === null && !styleValue(target(binding.target), binding.property);
         wanted = value;
@@ -396,14 +402,17 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
           }
         } else if (binding.kind === "silhouette-step-property" && binding.groups) {
           // Each group of leaf boxes publishes its own step (prepared-leaf-box-blocks.ts).
-          leafBoxBlocks.get(binding)!.publish({ projection: view.projection, silhouetteDiameter: levelOfDetail.silhouetteDiameter,
-            motionAtRest: view.motionAtRest, viewportWidth: view.viewportWidth, viewportHeight: view.viewportHeight });
+          const blocks = leafBoxBlocks.get(binding)!;
+          const next = { projection: view.projection, silhouetteDiameter: levelOfDetail.silhouetteDiameter,
+            motionAtRest: view.motionAtRest, viewportWidth: view.viewportWidth, viewportHeight: view.viewportHeight };
+          if (connected()) blocks.publish(next);
+          else blocks.prepare(next);
         } else if (binding.kind === "silhouette-step-property") {
           // A prepared value per published silhouette step, such as the surface seam outset.
           const level = selectPreparedSilhouetteStep(binding, levelOfDetail.silhouetteDiameter, silhouetteSteps.get(binding));
           if (level !== undefined) {
             silhouetteSteps.set(binding, level);
-            bodySteps.get(binding)!(binding.levels[level].value);
+            bodySteps.get(binding)!(binding.levels[level].value, !connected());
           }
         } else {
           const counter = binding.systemTransform === null ? view.counterRotation : view.counterRotationFor(binding.systemTransform);
