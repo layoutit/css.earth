@@ -2,7 +2,7 @@ import { createCameraMotion } from './camera-motion.js';
 import assert from 'node:assert/strict';
 import { afterEach, test, vi } from 'vitest';
 import { getEventListeners } from 'node:events';
-import * as runtimePolicy from '../../../../site/runtime-policy.mts';
+import { runtimePolicy } from '../../test/runtime-policy-fixture.mts';
 import runtimeDefinition from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
 import { presentWorldCamera, worldCameraFromPresentation } from './world-camera.ts';
 import type { PreparedWorldCameraFrame } from './world-camera.ts';
