@@ -13,10 +13,11 @@ test('publication rejects a stale atlas even when the file matches its inventory
   const bytes=await sharp({create:{width:8,height:12,channels:4,background:'#888'}}).webp().toBuffer();
   const {writeFile}=await import('node:fs/promises');
   await writeFile(join(directory,'surface.webp'),bytes);
+  // The inventory entry carries the R2 content address; the surface record names the file by its URL, size and dimensions.
   const asset={filename:'surface.webp',bytes:bytes.length,sha256:sha256(bytes)};
-  const surface={url:'/scenes/fixture/surface.webp',bytes:asset.bytes,sha256:asset.sha256,width:8,height:12};
+  const surface={url:'/scenes/fixture/surface.webp',bytes:asset.bytes,width:8,height:12};
   const check=(record:unknown)=>verifySurfaceAssetRecords('fixture',{surfaces:[{surface:record}]},{assets:[asset]},directory);
   await check(surface);
-  await assert.rejects(check({...surface,sha256:'0'.repeat(64)}),/record disagrees/);
+  await assert.rejects(check({...surface,bytes:surface.bytes+1}),/record disagrees/);
   await assert.rejects(check({...surface,width:16}),/dimensions disagree/);
 });

@@ -24,7 +24,7 @@ test('the converter is launched from its source beside the acquisition topic, al
 [ "$1" = "-c" ] && exit 0
 [ -f "$1" ] || { echo "no converter at $1" >&2; exit 3; }
 printf '%s' "$1" > "${directory}/script"; printf 'mesh' > "$4"
-printf '{"schema":"cssearth-dsk-mesh-conversion@1","bytes":4,"sha256":"%s"}' "$(shasum -a 256 "$4" | cut -d' ' -f1)"
+printf '{"schema":"cssearth-dsk-mesh-conversion@1","bytes":4}'
 `, { mode: 0o755 });
   await mkdir(sourceRoot); await writeFile(resolve(sourceRoot, 'shape.bds'), Buffer.alloc(16));
   const previous = process.env.CSSEARTH_SPICE_PYTHON; process.env.CSSEARTH_SPICE_PYTHON = python;

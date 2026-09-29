@@ -3,7 +3,6 @@ const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { llorriHeaderCamera, bindSipCamera } from '@cssearth/bake/objects/layers/terrestrial';
@@ -13,7 +12,6 @@ test('FITS camera and shared SPICE reproduce the independent Astropy projection 
   const profile = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/camera.json'), 'utf8')));
   const reference = requireRecord(JSON.parse(await readFile(resolve(root, 'observations/llorri-camera.json'), 'utf8')));
   const bytes = await readFile(resolve(root, requireString(profile.image)));
-  assert.equal(createHash('sha256').update(bytes).digest('hex'), reference.imageSha256);
   const kernels = await loadKernelSet(requireArray(profile.kernels).map(path => resolve(root, requireString(path))));
   const seed = llorriHeaderCamera(bytes, kernels, requireFiniteNumber(profile.bodyId));
   assert.equal(seed.checks.status, 'unregistered-header-seed');

@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { sourceTest } from '../objects/source-test.mts';
@@ -10,7 +9,6 @@ import { applicationDeliveryKind } from '@cssearth/bake/nebula';
 
 const root = resolve(import.meta.dirname, '../..');
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, path), 'utf8'));
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 async function presentedBanks() {
   const entries: { id: string; base: string }[] = [];

@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceLoad, sourceTest } from '../source-test.mts';
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { decodePds4GeometryCube } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';

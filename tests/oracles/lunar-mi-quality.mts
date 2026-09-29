@@ -1,19 +1,17 @@
-/** Audit the prepared 2016 Kaguya MI grids: node tools/oracles/lunar-mi-quality.mts <report.json>.
+/** Audit the prepared 2016 Kaguya MI grids: node tests/oracles/lunar-mi-quality.mts <report.json>.
  * Native-byte fidelity is checked separately by isis-geotiff-grid.mts. This checks every compact cell's
  * display validity and calibration, plus independent mineral closure and discrete model classes. */
 import {fromFile} from 'geotiff';
 import {readFile,writeFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';
 import {loadScienceSurface} from '@cssearth/bake/objects/raster';
 function record(v:unknown):Record<string,unknown>{if(!v||typeof v!=='object'||Array.isArray(v))throw new TypeError('Expected record');return v as Record<string,unknown>;}
 const root=resolve('src/objects/moon/source/science/usgs');
 const names=['fit-quality','iron-oxide','optical-maturity','submicroscopic-iron','plagioclase-grain-size','olivine','orthopyroxene','clinopyroxene','plagioclase'];
 const minerals=['olivine','orthopyroxene','clinopyroxene','plagioclase'];
-const grids=new Map<string,Float32Array>(), hashes:Record<string,string>={};
-for(const name of names){const path=resolve(root,`${name}.tif`),bytes=await readFile(path);hashes[name]=createHash('sha256').update(bytes).digest('hex');const file=await fromFile(path);try{const im=await file.getImage();if(im.getWidth()!==2048||im.getHeight()!==1024||im.getGDALNoData()!==-99999)throw new Error('Grid dimensions or missing value changed');const data=await im.readRasters({interleave:true});if(!(data instanceof Float32Array))throw new Error('Expected float32');grids.set(name,data);}finally{await file.close();}}
-const recipeBytes=await readFile('src/objects/moon/source/preparation/raster.json');
-const recipe=record(JSON.parse(recipeBytes.toString())),surfaces=recipe.surfaces;
+const grids=new Map<string,Float32Array>();
+for(const name of names){const path=resolve(root,`${name}.tif`);const file=await fromFile(path);try{const im=await file.getImage();if(im.getWidth()!==2048||im.getHeight()!==1024||im.getGDALNoData()!==-99999)throw new Error('Grid dimensions or missing value changed');const data=await im.readRasters({interleave:true});if(!(data instanceof Float32Array))throw new Error('Expected float32');grids.set(name,data);}finally{await file.close();}}
+const recipe=record(JSON.parse(await readFile('src/objects/moon/source/preparation/raster.json','utf8'))),surfaces=recipe.surfaces;
 if(!Array.isArray(surfaces))throw new Error('Expected surfaces');
 const fit=grids.get('fit-quality')!,checks=[];
 for(const name of names.filter(n=>n!=='fit-quality')){
@@ -36,5 +34,5 @@ for(const name of names.filter(n=>n!=='fit-quality')){
 let cells=0,maxFractionSumError=0;
 for(let i=0;i<fit.length;i++){if(fit[i]!<0||!Number.isFinite(fit[i]))continue;const sum=minerals.reduce((n,k)=>n+grids.get(k)![i]!,0);maxFractionSumError=Math.max(maxFractionSumError,Math.abs(sum-1));cells++;}
 const passed=checks.every(c=>c.maskMismatches===0&&c.valueMismatches===0)&&maxFractionSumError<1e-6;
-const report={schema:'cssearth-lunar-mi-quality-audit@1',passed,date:new Date().toISOString(),gridSha256:hashes,rasterRecipeSha256:createHash('sha256').update(recipeBytes).digest('hex'),checks,composition:{cells,maxFractionSumError},policy:'All eight views require a finite nonnegative companion fit as a conservative shared coverage gate. FeO also excludes values outside [0,100] weight percent. Raw grids remain unchanged. OMAT values above 0.5 use the capped legend endpoint; no inferred upper quality cutoff.'};
+const report={schema:'cssearth-lunar-mi-quality-audit@1',passed,date:new Date().toISOString(),checks,composition:{cells,maxFractionSumError},policy:'All eight views require a finite nonnegative companion fit as a conservative shared coverage gate. FeO also excludes values outside [0,100] weight percent. Raw grids remain unchanged. OMAT values above 0.5 use the capped legend endpoint; no inferred upper quality cutoff.'};
 if(!process.argv[2])throw new Error('Provide output report path');await writeFile(process.argv[2],JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));if(!passed)process.exitCode=1;

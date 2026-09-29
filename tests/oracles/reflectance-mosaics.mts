@@ -5,11 +5,9 @@
  * not the mission's calibration or the map's physical registration to a shape.
  */
 import {readFile, writeFile} from 'node:fs/promises';
-import {createHash} from 'node:crypto';
 import {resolve, basename} from 'node:path';
 import {requireArray, requireRecord, requireString, requireFiniteNumber} from '@cssearth/core';
 import {loadNativePhotograph} from '@cssearth/bake/objects/layers/terrestrial';
-const hash = (bytes: string | Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const [body, output] = process.argv.slice(2);
 if (!body || !/^[a-z][a-z0-9-]*$/.test(body) || !output) throw new Error('Expected body id and report path.');
 const root = resolve('src/objects', body, 'source');
@@ -83,13 +81,13 @@ for (const recipe of recipes) {
     const passed=expectedDisplay===null?actual===null:actual!==null&&Math.abs(actual-expectedDisplay)<=tolerance&&color.every(c=>c===actual);
     checks.push({x,y,longitude,latitude,nativeValue:expected,expectedDisplay,actual,passed});
   }
-  const result={id,path,labelPath,sourceSha256:hash(bytes),labelSha256:hash(label),wavelengthNm:number('Center'),width,height,
+  const result={id,path,labelPath,sourceBytes:bytes.length,wavelengthNm:number('Center'),width,height,
     byteOffset:offset,referenceRadiusMeters:radius,displayRange:range,valid,total:width*height,negative,clippedLow,clippedHigh,
     minimum:min,maximum:max,validLatitudeCenters:[(top-(southernmostRow+.5)*resolution)/radius*180/Math.PI,(top-(northernmostRow+.5)*resolution)/radius*180/Math.PI],
     toleranceDisplayLevels:tolerance,checks,passed:checks.length>0&&checks.every(check=>check.passed)};
   results.push(result);console.log(`${body}/${id}: ${checks.filter(c=>c.passed).length}/${checks.length} native probes; ${valid}/${width*height} valid source cells`);
 }
 const report={schema:'cssearth-reflectance-mosaic-check@1',body,method:'Independent ISIS-label coordinates and float32 byte reads compared with the production native sampler. Native centers, fractional footprints, extrema, negative values and missing cells; not instrument calibration or physical map-to-shape registration.',
-  manifestSha256:hash(manifestText),recipeSha256:hash(recipeText),oracleSha256:hash(await readFile(import.meta.filename)),results,passed:results.length>0&&results.every(result=>result.passed)};
+  results,passed:results.length>0&&results.every(result=>result.passed)};
 await writeFile(output,JSON.stringify(report,null,2)+'\n');
 if(!report.passed)process.exitCode=1;

@@ -1,7 +1,7 @@
 import {array,boolean,dictionary,number,nullable,optional,shape,text,requireRecord} from '@cssearth/core';
 import {preparedLeaf,textureLayer} from './prepared-schemas.mts';
 const bands=array(shape({visualRotationSeconds:number,leaves:array(preparedLeaf)}));
-const asset=shape({url:text,width:number,height:number,bytes:number,sha256:text});
+const asset=shape({url:text,width:number,height:number,bytes:number});
 const pair=shape({url:text,url2x:text,width:number,height:number,asset,asset2x:asset});
 const frame=shape({assetUrl:text,frameIndex:optional(number),rowIndex:optional(number),backgroundPosition:text,backgroundSize:text});
 const shards=shape({model:text,defaultVariant:text,defaultPreparedFrame:number,defaultPreparedRow:number,initialWarmRows:array(number),
@@ -11,7 +11,7 @@ export const parseSaturnScene=shape({schema:text,systemTransform:text,meshTransf
   camera:shape({state:shape({rotX:number,rotY:number,zoom:number,distance:number,target:array(number)}),sceneStyle:text,orbitPlayback:shape({schema:text,minimumControlPitchDegrees:number,maximumControlPitchDegrees:number,
     defaultControlPitchDegrees:number,maximumScenePitchDegrees:number,durationMilliseconds:number,millisecondsPerControlDegree:number,
     keyframes:array(requireRecord),interpolation:text,runtimeTransport:text,runtimeMatrixConstructionForPitch:boolean,runtimeTransformStringFormattingForPitch:boolean})}),
-  preparedSurface:shape({mode:text,assetUrl:text,assetBytes:number,assetSha256:text,faceCount:number,uvLayout:text,
+  preparedSurface:shape({mode:text,assetUrl:text,assetBytes:number,faceCount:number,uvLayout:text,
     equivalentBodySampleWidth:number,equivalentBodySampleHeight:number,seamRepair:requireRecord}),
   transport:shape({sourceSchema:text,sourceMetadataModule:text,retainedLeafFields:array(text),minorMoonFields:array(text),runtimeSourceParsing:boolean}),
   preparedLighting:shape({mode:text,orbitAtlas:shape({frameCount:number,frameRows:number,minimumScenePitchDegrees:number,maximumScenePitchDegrees:number,runtimeShards:shards})}),

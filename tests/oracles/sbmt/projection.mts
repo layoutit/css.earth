@@ -2,7 +2,7 @@
  * implementation or candidate output is imported here. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { startNative, hashFile } from './runtime.mts';
+import { startNative, fileBytes } from './runtime.mts';
 import { call, construct, nativeArray } from './java.mts';
 import { cases, vector, count, orientations, queryFractions } from './cases.mts';
 import { ORACLE_ROOT, assertPinnedInputs } from '../fixture.mts';
@@ -10,7 +10,7 @@ import { requireArray, requireFiniteNumber } from '@cssearth/core';
 
 const definitions = await cases();
 const inputPaths = [...new Set(['tests/fixtures/sbmt/cases.json', ...definitions.flatMap(c => [c.shape, c.pointing, c.image])])].sort();
-const inputs = await Promise.all(inputPaths.map(async path => ({ path, ...await hashFile(resolve(ORACLE_ROOT, path)) })));
+const inputs = await Promise.all(inputPaths.map(async path => ({ path, ...await fileBytes(resolve(ORACLE_ROOT, path)) })));
 await assertPinnedInputs(inputs);
 const { java, tool } = await startNative();
 const Poly = java.type('edu.jhuapl.saavtk.util.PolyDataUtil');

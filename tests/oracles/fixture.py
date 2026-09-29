@@ -1,19 +1,13 @@
-"""Shared fixture writing for the Python oracles: inputs with sha256, tool versions, deterministic value samples."""
-import hashlib, json, platform, sys
+"""Shared fixture writing for the Python oracles: inputs with their sizes, tool versions, deterministic value samples."""
+import json, platform, sys
 from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 
-def sha256(path):
-    h = hashlib.sha256()
-    with open(path, 'rb') as f:
-        for chunk in iter(lambda: f.read(1 << 20), b''): h.update(chunk)
-    return h.hexdigest()
-
 def input_record(path):
     path = Path(path)
-    return {'path': str(path.resolve().relative_to(ROOT)), 'sha256': sha256(path), 'bytes': path.stat().st_size}
+    return {'path': str(path.resolve().relative_to(ROOT)), 'bytes': path.stat().st_size}
 
 def samples(array, seed, count=48, valid=None):
     """Deterministic sample of flat indices and values; `valid` masks which pixels count as data."""
@@ -25,8 +19,8 @@ def samples(array, seed, count=48, valid=None):
     return [{'index': int(i), 'value': float(flat[i])} for i in chosen]
 
 def external_record(url, data):
-    """A reference outside the repository, pinned by a commit in its URL and by its bytes."""
-    return {'url': url, 'sha256': hashlib.sha256(data).hexdigest(), 'bytes': len(data)}
+    """A reference outside the repository, named by a commit in its URL and by its size."""
+    return {'url': url, 'bytes': len(data)}
 
 def write(name, oracle, generated_by, tool, inputs, cases, references=()):
     fixture = {'schema': 'cssearth-oracle-fixture@1', 'oracle': oracle, 'generatedBy': generated_by,

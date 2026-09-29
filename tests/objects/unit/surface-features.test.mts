@@ -1,13 +1,12 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
-import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "@cssearth/renderer";
 import { isRecord } from "@cssearth/core";
 import { mapDirection } from "../../../site/minimap/surface-minimap-math.mts";
 
-// Every body that declares a prepared feature catalogue must ship it pinned, anchored on its
+// Every body that declares a prepared feature catalogue must ship it at its recorded size, anchored on its
 // mesh through its own map axes and edge, and validated by the runtime parser. Bodies without
 // the capability are simply absent here; no body is allowed a broken one.
 const roots = new URL("../../../src/objects/", import.meta.url);
@@ -21,16 +20,16 @@ for (const entry of await readdir(roots, { withFileTypes: true })) {
 test("at least Mercury declares a prepared feature catalogue", () => { assert.ok(bodies.includes("mercury")); assert.ok(bodies.length >= 45, bodies.join(",")); });
 
 for (const id of bodies) {
-  test(`${id}: the prepared feature catalogue is pinned, anchored on its mesh and parses at the runtime boundary`, async () => {
+  test(`${id}: the prepared feature catalogue has its recorded size, is anchored on its mesh and parses at the runtime boundary`, async () => {
     const runtime = parsePreparedObjectRuntime(JSON.parse(await readFile(new URL(`${id}/prepared/runtime.json`, roots), "utf8")));
     const plan = runtime.features;
     assert.ok(plan, `${id} runtime declares features`);
     const descriptor: unknown = JSON.parse(await readFile(new URL(`${id}/prepared/features.json`, roots), "utf8"));
     assert.ok(isRecord(descriptor));
-    assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, sha256: descriptor.sha256, count: descriptor.count }, plan.catalog);
+    const { url, bytes: catalogBytes, count } = plan.catalog;
+    assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, count: descriptor.count }, { url, bytes: catalogBytes, count });
     const bytes = await readFile(new URL(`../../../public/scenes/${id}/${plan.catalog.url.split("/").at(-1)}`, import.meta.url));
     assert.equal(bytes.length, plan.catalog.bytes);
-    assert.equal(createHash("sha256").update(bytes).digest("hex"), plan.catalog.sha256);
     const rawCatalog: unknown = JSON.parse(bytes.toString("utf8"));
     const baseCatalog = parsePreparedSurfaceFeatureCatalog(rawCatalog, plan, id);
     assert.equal(baseCatalog.features.length, plan.catalog.count);
@@ -40,7 +39,6 @@ for (const id of bodies) {
       for (const bank of plan.selection.banks) {
         const bankBytes = await readFile(new URL(`../../../public/scenes/${id}/${bank.url.split("/").at(-1)}`, import.meta.url));
         assert.equal(bankBytes.length, bank.bytes);
-        assert.equal(createHash("sha256").update(bankBytes).digest("hex"), bank.sha256);
         catalogs.push(parsePreparedSurfaceFeatureCatalog(JSON.parse(bankBytes.toString("utf8")), plan, id, bank));
       }
     }

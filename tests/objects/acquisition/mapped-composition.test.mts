@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
-import {createHash} from 'node:crypto';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
@@ -15,7 +14,7 @@ const metadata = {target:'Reference',observation_name:'original',nan_value:-99,
 function input(document:unknown,selections:unknown[]) {
   const bytes=gzipSync(JSON.stringify(document));
   return {bytes,recipe:parseMappedCompositionRecipe({schema:'cssearth-mapped-composition@1',target:'Reference',referenceRadiusMeters:1560800,
-    observationName:'original',input:'original.json.gz',sha256:createHash('sha256').update(bytes).digest('hex'),selections})};
+    observationName:'original',input:'original.json.gz',selections})};
 }
 test('mapped posterior nodes retain north/east orientation, seam, zero and source gaps through the existing GeoTIFF sampler',async()=>{
   const value=(lon:number,lat:number)=>lon===31&&lat===17?-99:lon===0&&lat===0?0:.2+lon/1000+lat/10000;

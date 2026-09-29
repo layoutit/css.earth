@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile } from "node:fs/promises";
 import pixelmatch from "pixelmatch";
 import { PNG } from "pngjs";
@@ -63,7 +62,6 @@ export async function writeAbsoluteDiff(leftPath: string, rightPath: string, out
     bytes,
     width: output.width,
     height: output.height,
-    sha256: sha256(bytes),
   });
 }
 
@@ -96,7 +94,7 @@ export async function writeTriptych(referencePath: string, browserPath: string, 
   return Object.freeze({
     width: width * 3,
     height,
-    sha256: sha256(bytes),
+    bytes: bytes.length,
   });
 }
 

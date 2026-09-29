@@ -11,8 +11,7 @@ import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../fixture.m
  * The SPICE toolkit as the oracle. tests/oracles/spice/dart-draco.py runs
  * SpiceyPy over the same pinned DART kernels and writes what CSPICE computes;
  * this test loads the same kernels through @cssearth/spice and compares. The
- * fixture names the toolkit version and the sha256 of every kernel, so the
- * comparison is bound to exact inputs.
+ * fixture names the toolkit version and the path and size of every kernel.
  */
 const loaded = await sourceLoad(async () => {
   const fixture = await readOracleFixture('spice/dart-draco.json');

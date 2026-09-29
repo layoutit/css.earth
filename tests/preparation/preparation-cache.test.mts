@@ -6,7 +6,7 @@ import { sourceTest } from '../objects/source-test.mts';
 const test = sourceTest();
 import { observePreparationPath, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "@cssearth/bake/preparation";
 import type { PreparationTraces } from "@cssearth/bake/preparation";
-import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, REGISTRY_MODULE, descriptorDigest } from "@cssearth/bake/preparation";
+import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, REGISTRY_MODULE, descriptorView } from "@cssearth/bake/preparation";
 import type { PreparationAccess, TracedCommand, TracedState } from "@cssearth/bake/preparation";
 
 async function fixture(run: (root: string) => Promise<void>) {
@@ -23,8 +23,8 @@ async function firstState(root: string, path: string): Promise<TracedState> {
   if (!entry) return { missing: true };
   const state: TracedState = { size: entry.size, modified: entry.mtimeMs, ...(entry.isDirectory() ? { directory: true as const } : {}) };
   if (path.endsWith("/object.json")) {
-    const text = await readFile(join(root, path), "utf8");
-    state.views = { registry: descriptorDigest(text, "registry"), recipe: descriptorDigest(text, "recipe"), pins: descriptorDigest(text, "pins") };
+    const value: unknown = JSON.parse(await readFile(join(root, path), "utf8"));
+    state.views = { registry: descriptorView(value, "registry"), recipe: descriptorView(value, "recipe"), pins: descriptorView(value, "pins") };
   }
   return state;
 }
@@ -78,7 +78,7 @@ test("a receipt verifies what preparation read, probed, listed and wrote, and no
 }));
 
 const descriptor = (id: string) => ({ schema: "cssearth-object@1", id, type: "moon",
-  properties: { catalog: { name: id, description: "Card" }, recipe: { radius: 1 }, page: { metadata: { sha256: "a" } }, worldFrame: { radius: 1 } },
+  properties: { catalog: { name: id, description: "Card" }, recipe: { radius: 1 }, page: { metadata: { url: "prepared/page.json" } }, worldFrame: { radius: 1 } },
   prepared: { url: "prepared/b.json" } });
 type Descriptor = ReturnType<typeof descriptor>;
 async function editDescriptor(root: string, id: string, change: (value: Descriptor) => void) {
