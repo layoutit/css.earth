@@ -11,7 +11,6 @@ import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId
 import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { parseSpatialContextCommand, prepareSpatialContext } from '../build/prepare/prepare-spatial-context.ts';
-import { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE } from '../runtime-policy.mts';
 
 const root = process.cwd();
 const sourcePath = resolve(root, 'src/objects/sun/source/navigation/universe.json');
@@ -203,13 +202,11 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
       assert.equal(body.orbit.centerBodyId, parent);
       assert(agrees(modelPositionM(parent), body.orbit.centerPositionM), `${id} orbit differs from its parent's independent ephemeris`);
     }
-    // A placed star with an orbiting planet roots its own planetary system. Framing follows the larger planets, as it
-    // follows the larger moons: a planet under the share of its system's largest stays navigable without being framed.
+    // A placed star with an orbiting planet roots its own planetary system and frames every planet, as the Sun does;
+    // the radius share only leaves small moons out of a planet's framing.
     for (const id of HOSTED_PLANET_IDS) {
       const host = result.bodies.find((body: { id: string }) => body.id === BODIES[id].parent);
-      assert.ok(host.systemView, `${host.id} frames its planets`);
-      const largestKm = Math.max(...HOSTED_PLANET_IDS.filter(other => BODIES[other].parent === host.id).map(other => BODIES[other].meanRadiusKm));
-      if (BODIES[id].meanRadiusKm >= largestKm * SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE) assert.ok(host.systemView.memberIds.includes(id), `${host.id} frames its planet ${id}`);
+      assert.ok(host.systemView?.memberIds.includes(id), `${host.id} frames its planet ${id}`);
     }
     for (const [id, parentId] of [['moon', 'earth'], ['io', 'jupiter'], ['europa', 'jupiter'], ['ganymede', 'jupiter'], ['callisto', 'jupiter']]) {
       const child = result.bodies.find((body: { id: string }) => body.id === id);
