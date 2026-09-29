@@ -1,5 +1,4 @@
 """Pinned source extraction, not terrain synthesis. Requires SpiceyPy 6.0.3/N0067."""
-import hashlib
 import io
 import json
 import pathlib
@@ -40,9 +39,8 @@ def archive_mesh(vertices, plates, recipe, descriptor):
         'transform':'None; exact duplicate XYZ vertices welded in first-occurrence order; original triangle winding retained.',
         'sourceVertices':len(vertices),'sourceFaces':len(plates),'weldedVertices':len(welded),
         'duplicateVertices':len(vertices)-len(welded),
-        'mapping':{'member':'source-vertex-to-output-vertex.u32le','indexBase':0,'encoding':'little-endian uint32','entries':len(mapping),'sha256':hashlib.sha256(mapping_bytes).hexdigest()},
-        'mesh':{'member':recipe['member'],'bytes':len(obj_bytes),'sha256':hashlib.sha256(obj_bytes).hexdigest()},
-        'geometry':{'verticesFloat64LeSha256':hashlib.sha256(welded.astype('<f8').tobytes()).hexdigest(),'facesUint32LeSha256':hashlib.sha256(faces.astype('<u4').tobytes()).hexdigest()},
+        'mapping':{'member':'source-vertex-to-output-vertex.u32le','indexBase':0,'encoding':'little-endian uint32','entries':len(mapping)},
+        'mesh':{'member':recipe['member'],'bytes':len(obj_bytes)},
     }
     output = io.BytesIO()
     with zipfile.ZipFile(output, 'w') as archive:
@@ -84,7 +82,7 @@ def main():
         spice.dascls(handle)
     result, receipt = archive_mesh(vertices,plates,recipe,descriptor)
     pathlib.Path(output).write_bytes(result)
-    print(json.dumps({'schema':'cssearth-dsk-mesh-conversion@1','bytes':len(result),'sha256':hashlib.sha256(result).hexdigest(),'provenance':receipt},sort_keys=True))
+    print(json.dumps({'schema':'cssearth-dsk-mesh-conversion@1','bytes':len(result),'provenance':receipt},sort_keys=True))
 
 if __name__ == '__main__':
     main()

@@ -1,7 +1,6 @@
 import { cross3 as cross, array, number, shape, text } from '@cssearth/core';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createHash} from 'node:crypto';
 import {loadObjShape} from '@cssearth/bake/objects/geometry';
 import { decodeNewHorizonsLorri, newHorizonsCamera, multiplyCameraMatrices, observedLimb, limbThreshold, type LimbEdgePoint } from '@cssearth/bake/objects/layers/terrestrial';
 import { readFitsHeader } from '@cssearth/fits';
@@ -47,9 +46,8 @@ const elapsedSeconds=number(readFitsHeader(independent).header.SPCSCET)-number(r
 const angle=elapsedSeconds/(15.938*3600)*2*Math.PI,c=Math.cos(angle),s=Math.sin(angle);
 const held=audit(independent,{...reference,bodyToJ2000:multiplyCameraMatrices(reference.bodyToJ2000,[[c,-s,0],[s,c,0],[0,0,1]])});
 reports.push({id:'ca06-independent-exposure',path:holdoutPath,...held});
-const report={schema:'cssearth-arrokoth-registration-audit@1',meshSha256:createHash('sha256').update(await readFile(resolve(root,profile.mesh))).digest('hex'),
- controlSha256:createHash('sha256').update(await readFile(resolve(root,'preparation/photography.json'))).digest('hex'),
- generator:{path:'packages/bake/authoring/arrokoth/qualify-photographs.mts',sha256:createHash('sha256').update(await readFile(new URL(import.meta.url))).digest('hex')},
+const report={schema:'cssearth-arrokoth-registration-audit@1',
+ generator:{path:'packages/bake/authoring/arrokoth/qualify-photographs.mts'},
  elapsedSeconds,method:'Frozen mesh attitude and pointing offsets; original TAN-SIP ray distortion. Along-normal ray-hit/miss limb residuals. No correction is fitted by this audit.',
  limits:{maximumHoldoutRmsPixels:3,minimumMatchedHoldoutEdges:100},reports};
 await writeFile(resolve(root,'../evidence/photography/registration.json'),JSON.stringify(report,null,2)+'\n');

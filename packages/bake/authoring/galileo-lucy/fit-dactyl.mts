@@ -6,7 +6,7 @@ import { readFitsPrimary } from '@cssearth/fits';
 import { controlledShapeCamera, decodeCalibratedCamera } from '@cssearth/bake/objects/geometry';
 import { readDaf, ckSegments, parseTextKernel, number as kernelNumber, numbers as kernelNumbers, parseSpacecraftClock, encodeClock, clockToEt, etToClock, parseLeapSeconds, utcToEt, etToUtc } from '@cssearth/spice';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { readPinnedFile } from '@cssearth/spice/node';
+import { readDeclaredFile } from './declared-file.mts';
 
 type Pixel = [number, number];
 type Vector = [number, number, number];
@@ -24,8 +24,8 @@ const pinned = new Map<string, Buffer>();
 for (const item of requireArray(input.files)) {
   const file = requireRecord(item), path = requireString(file.path);
   if ((!path.startsWith('src/objects/') && !path.startsWith('tests/objects/fixtures/dactyl/')) || path.split('/').includes('..')) throw new Error('Invalid source path.');
-  // Kernels are not committed; a missing one is restored from its pinned origin.
-  const bytes = file.url === undefined ? await readFile(path) : await readPinnedFile(path, requireString(file.url), requireString(file.expectedSha256));
+  // Kernels are not committed; a missing one is restored from its declared origin.
+  const bytes = file.url === undefined ? await readFile(path) : await readDeclaredFile(path, requireString(file.url));
   pinned.set(requireString(file.id), bytes);
 }
 function bytes(id: string) {

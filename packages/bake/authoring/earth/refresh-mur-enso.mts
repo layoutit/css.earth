@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import {readJsonSource} from '@cssearth/bake/objects/sources';
 import {hasErrorCode, requireRecord, requireString} from '@cssearth/core';
 import { parseMurReceipt, parseEnsoAdvisory, readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, requireUpdateBytes } from '@cssearth/bake/objects/layers/paged-ellipsoid';

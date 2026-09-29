@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import {requireRecord,shape,text,number} from '@cssearth/core';
 const parseRecipe=shape({inputPath:text,member:text,spiceypyVersion:text,cspiceVersion:text,inputBytes:number,targetId:number,frameId:number,surfaceId:number,sourceVertices:number,sourceFaces:number,weldedVertices:number});
 import {readFile, mkdtemp, rm} from 'node:fs/promises';
@@ -52,8 +51,9 @@ export async function prepareDskMesh({sourceRoot, recipe:recipeValue}:{sourceRoo
       [dskConverter(), path, JSON.stringify(recipe), destination],
       {maxBuffer: 1024 * 1024, timeout: 300000});
     const report = requireRecord(JSON.parse(stdout)), bytes = await readFile(destination);
-    if (report.schema !== 'cssearth-dsk-mesh-conversion@1' || report.bytes !== bytes.length ||
-        report.sha256 !== sha256(bytes)) throw new Error('DSK conversion receipt differs.');
+    if (report.schema !== 'cssearth-dsk-mesh-conversion@1' || report.bytes !== bytes.length) {
+      throw new Error(`DSK conversion receipt for ${recipe.inputPath} differs: schema ${String(report.schema)}, bytes ${String(report.bytes)} (archive holds ${bytes.length}).`);
+    }
     return bytes;
   } finally {await rm(directory, {recursive:true, force:true});}
 }

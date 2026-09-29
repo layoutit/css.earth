@@ -1,9 +1,8 @@
-"""Lossless offline wrapping of pinned PDS4 byte maps for the GeoTIFF reader.
+"""Lossless offline wrapping of declared PDS4 byte maps for the GeoTIFF reader.
 
 The output retains DN values and missing constants. The scientific lens applies
 the explicitly recorded physical scale; no enhancement or resampling occurs.
 """
-import hashlib
 import json
 from pathlib import Path
 import sys
@@ -16,11 +15,12 @@ from rasterio.transform import from_origin
 
 def prepare(path):
     plan = json.loads(path.read_text())
+    if 'pins' in plan:
+        raise ValueError(f'{path}: the "pins" field is retired; recipes declare inputs by path')
     root = path.parent
-    for name, pin in plan['pins'].items():
-        with (root / name).open('rb') as stream:
-            if hashlib.file_digest(stream, 'sha256').hexdigest() != pin:
-                raise ValueError('PDS source pin changed: ' + name)
+    missing = [f'{k} = {plan[k]}' for k in ('label', 'input') if not (root / plan[k]).is_file()]
+    if missing:
+        raise ValueError(f'{path}: missing PDS sources: ' + ', '.join(missing))
     label = (root / plan['label']).read_text()
     if '<!DOCTYPE' in label or '<!ENTITY' in label:
         raise ValueError('Unsupported XML')
@@ -75,7 +75,7 @@ def prepare(path):
                'origin': [x, y], 'resolution': [dx, -dx], 'referenceRadiusMeters': radius,
                'scale': scale, 'validPixels': int(valid.size), 'missingPixels': int(data.size-valid.size),
                'minimum': float(valid.min()) * scale, 'maximum': float(valid.max()) * scale,
-               'output': plan['output'], 'sha256': hashlib.sha256((root / plan['output']).read_bytes()).hexdigest()}
+               'output': plan['output'], 'bytes': (root / plan['output']).stat().st_size}
     (root / plan['receipt']).write_text(json.dumps(receipt, indent=2) + '\n')
     print(json.dumps(receipt))
 

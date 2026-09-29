@@ -16,13 +16,12 @@
  * its colour through its depth. One volume unit is one astronomical unit at the
  * star's distance; the frame is anchored on the star's prepared scene origin, so the star's sphere sits at the centre.
  *
- * --check recomputes every output and fails if any differs from the file on disk. After the first authoring, bake the bank
- * (node packages/bake/cli/prepare-nebulae.mts --object=<id>) and author again: the presentation pins the baked bank. */
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+ * --check recomputes every output and fails if any differs from the file on disk. After authoring, bake the bank
+ * (node packages/bake/cli/prepare-nebulae.mts --object=<id>); the presentation names the baked bank by its path. */
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { sha256, sha256File } from '@cssearth/core/node';
 import { encodeDensityKtx2, gainForTopAlpha, spreadColumns } from '@cssearth/bake/density';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 import { readFitsImage } from '@cssearth/fits';
@@ -46,7 +45,7 @@ export interface CircumstellarLens {
   /** An author's reduced image deposited with its paper, read in place of a MAST mosaic: no sky coordinates, so the recipe states
    * the star's pixel, the plate scale and the orientation (disc-envelope.mts readArrayPlane). Its one band feeds every channel. */
   readonly deposit?: {
-    readonly band: string; readonly path: string; readonly url: string; readonly landing: string; readonly bytes: number; readonly sha256: string;
+    readonly band: string; readonly path: string; readonly url: string; readonly landing: string; readonly bytes: number;
     readonly pixelArcsec: number; readonly orientation: 'north-up-east-left'; readonly starPixel: 'array-centre'; readonly orientationSource: string;
     readonly unit: string; readonly filter: string; readonly instrument: string; readonly observed: string;
     readonly title: string; readonly credit: string; readonly displayCredit: string; readonly license: string; readonly acquisition: string;
@@ -73,11 +72,11 @@ export interface CircumstellarLens {
   readonly colorMap?: { readonly path: string; readonly range: readonly [number, number]; readonly unitScale: number; readonly unit: string; readonly source: string };
   /** Hubble coronagraph images made here: the drizzled products of a PSF subtraction (packages/telescope-cli/src/archives/hst/psf-subtract.mts), two
    * telescope rolls per band averaged on the sky, each band divided by the star's own count rate in it, which is computed from
-   * a published Vega magnitude and the instrument's published zero point. The products are pinned by digest; the run that made
-   * them is reproducible from the raw exposures its program pins. */
+   * a published Vega magnitude and the instrument's published zero point. The products are named by roll and size; the run
+   * that made them is reproducible from the raw exposures its program names. */
   readonly hst?: {
     readonly subtraction: string; readonly work: string;
-    readonly products: Readonly<Record<string, readonly { readonly roll: string; readonly sha256: string; readonly bytes: number }[]>>;
+    readonly products: Readonly<Record<string, readonly { readonly roll: string; readonly bytes: number }[]>>;
     readonly vegaMagnitudes: Readonly<Record<string, number>>; readonly vegaZeropoints: Readonly<Record<string, number>>; readonly zeropointSource: string;
     readonly instrument: string; readonly observed: string; readonly landing: string; readonly credit: string; readonly displayCredit: string; readonly license: string;
   };
@@ -138,8 +137,8 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
     const deposit = lens.deposit === undefined ? undefined : (() => {
       const d = requireRecord(lens.deposit, 'deposit'), text = (key: string) => requireString(d[key], `deposit ${key}`);
       if (d.orientation !== 'north-up-east-left' || d.starPixel !== 'array-centre') throw new TypeError('A deposit states north-up-east-left and an array-centre star.');
-      const sha = text('sha256'); if (!/^[0-9a-f]{64}$/u.test(sha)) throw new TypeError('The deposit pins its sha256.');
-      return { band: text('band'), path: text('path'), url: text('url'), landing: text('landing'), bytes: requireFiniteNumber(d.bytes, 'deposit bytes'), sha256: sha,
+      if (d.sha256 !== undefined) throw new TypeError(`${String(lens.id)}: a deposit is named by its path and origin, not pinned by a hash (CLAUDE.md, sources and prepared delivery).`);
+      return { band: text('band'), path: text('path'), url: text('url'), landing: text('landing'), bytes: requireFiniteNumber(d.bytes, 'deposit bytes'),
         pixelArcsec: requireFiniteNumber(d.pixelArcsec, 'deposit pixelArcsec'), orientation: 'north-up-east-left' as const, starPixel: 'array-centre' as const,
         orientationSource: text('orientationSource'), unit: text('unit'), filter: text('filter'), instrument: text('instrument'), observed: text('observed'),
         title: text('title'), credit: text('credit'), displayCredit: text('displayCredit'), license: text('license'), acquisition: text('acquisition') };
@@ -148,9 +147,9 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
       const h = requireRecord(lens.hst, 'hst'), text = (key: string) => requireString(h[key], `hst ${key}`);
       const numbers = (key: string) => Object.fromEntries(Object.entries(requireRecord(h[key], `hst ${key}`)).map(([band, v]) => [band, requireFiniteNumber(v, `${key} ${band}`)]));
       const products = Object.fromEntries(Object.entries(requireRecord(h.products, 'hst products')).map(([band, list]) => [band, requireArray(list).map(v => {
-        const r = requireRecord(v, 'hst product'), sha = requireString(r.sha256);
-        if (!/^[0-9a-f]{64}$/u.test(sha)) throw new TypeError(`${band}: a product pins its sha256.`);
-        return { roll: requireString(r.roll), sha256: sha, bytes: requireFiniteNumber(r.bytes) };
+        const r = requireRecord(v, 'hst product');
+        if (r.sha256 !== undefined) throw new TypeError(`${String(lens.id)} ${band}: a product is named by its roll and size, not pinned by a hash.`);
+        return { roll: requireString(r.roll), bytes: requireFiniteNumber(r.bytes) };
       })]));
       return { subtraction: text('subtraction'), work: text('work'), products, vegaMagnitudes: numbers('vegaMagnitudes'), vegaZeropoints: numbers('vegaZeropoints'), zeropointSource: text('zeropointSource'),
         instrument: text('instrument'), observed: text('observed'), landing: text('landing'), credit: text('credit'), displayCredit: text('displayCredit'), license: text('license') };
@@ -266,9 +265,9 @@ function hstFilter(band: string) { const filter = band.split('-').at(-1)!; if (!
 /** Where a band's image comes from, as the manifest, provenance and presentation cite it. */
 interface BandOrigin { readonly file: string; readonly url: string; readonly bytes: number; readonly title: string; readonly credit: string; readonly displayCredit: string;
   readonly license: string; readonly acquisition: string; readonly role: string; readonly landing: string; readonly observed: string; readonly instrument: string }
-type BandRead = { band: string; mosaic: string; primary: Record<string, unknown>; sky: SkyPlane; mosaicSha256: string; origin: BandOrigin; inputId?: string };
+type BandRead = { band: string; mosaic: string; primary: Record<string, unknown>; sky: SkyPlane; origin: BandOrigin; inputId?: string };
 
-/** An HST lens's bands: each roll's drizzled PSF-subtracted product, pinned by digest, read about the star where the subtraction
+/** An HST lens's bands: each roll's drizzled PSF-subtracted product, checked by size, read about the star where the subtraction
  * found it, put in millions of electrons per second per steradian and averaged over the rolls on the sky. A pixel one roll
  * leaves blank (the occulting finger turns with the telescope) takes the other roll's value. */
 export async function hstChannels(lens: CircumstellarLens, distancePc: number, halfUnits: number, size: number, bands: BandRead[]) {
@@ -279,15 +278,16 @@ export async function hstChannels(lens: CircumstellarLens, distancePc: number, h
   for (const [band, products] of Object.entries(hst.products)) {
     const filter = hstFilter(band), rolls: SkyPlane[] = [];
     for (const product of products) {
-      const name = `${hst.subtraction}-${filter.toLowerCase()}-roll${product.roll}_drz.fits`, file = resolve(output, name), pinned = await sha256File(file);
-      if (pinned.sha256 !== product.sha256 || pinned.bytes !== product.bytes) throw new Error(`${lens.id}: ${name} is not the pinned product (${pinned.sha256}, ${pinned.bytes} bytes).`);
+      const name = `${hst.subtraction}-${filter.toLowerCase()}-roll${product.roll}_drz.fits`, file = resolve(output, name);
+      const bytes = (await stat(file).catch(() => { throw new Error(`${lens.id}: ${name} is missing from ${hst.work}; run node packages/telescope-cli/src/archives/hst/psf-subtract.mts ${hst.subtraction} ${hst.work}`); })).size;
+      if (bytes !== product.bytes) throw new Error(`${lens.id}: ${name} is ${bytes} bytes, not the ${product.bytes} the recipe names.`);
       const row = rows.find(other => other.band === filter && other.roll === product.roll);
       if (!row) throw new Error(`${lens.id}: the subtraction record has no ${filter} roll ${product.roll}.`);
       const [starRaDeg, starDecDeg] = requireArray(row.starRaDecDeg).map(v => requireFiniteNumber(v)) as [number, number];
       const sky = await readSkyPlane(file, { starRaDeg, starDecDeg, arcsecPerUnit: 1 / distancePc, halfUnits, size, backgroundAnnulusArcsec: lens.backgroundAnnulusArcsec });
       const primary = (await readFitsFileHdus(file))[0]!.header;
       rolls.push(sky);
-      bands.push({ band, inputId: `${lens.id}-${filter.toLowerCase()}-roll${product.roll}`, mosaic: file, primary, sky, mosaicSha256: pinned.sha256,
+      bands.push({ band, inputId: `${lens.id}-${filter.toLowerCase()}-roll${product.roll}`, mosaic: file, primary, sky,
         origin: { file: name, url: hst.landing, bytes: product.bytes, title: `HST programme ${hst.subtraction.replace(/^.*-/u, '')} · ACS/HRC ${filter}, roll ${product.roll}, PSF-subtracted and drizzled here`,
           credit: hst.credit, displayCredit: hst.displayCredit, license: hst.license,
           acquisition: `Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts ${hst.subtraction} ${hst.work} recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/${hst.subtraction.replace(/-\d+$/u, '')}-${hst.subtraction.replace(/^.*-/u, '')}.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/${hst.subtraction}.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.`,
@@ -333,18 +333,19 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
   const bands: BandRead[] = [];
   let read: { channels: Float32Array[]; planes: Map<string, SkyPlane> };
   if (lens.deposit) {
-    // An author's deposited image: its pinned bytes, read about the stated star pixel with the stated scale and orientation.
-    const deposit = lens.deposit, file = resolve(repositoryRoot, deposit.path), { sha256: digest } = await sha256File(file);
-    if (digest !== deposit.sha256) throw new Error(`${lens.id}: ${deposit.path} is not the pinned deposit (${digest}).`);
+    // An author's deposited image, read about the stated star pixel with the stated scale and orientation.
+    const deposit = lens.deposit, file = resolve(repositoryRoot, deposit.path);
+    const bytes = (await stat(file).catch(() => { throw new Error(`${lens.id}: ${deposit.path} is missing; download it from ${deposit.url}.`); })).size;
+    if (bytes !== deposit.bytes) throw new Error(`${lens.id}: ${deposit.path} is ${bytes} bytes, not the ${deposit.bytes} the recipe names; download it again from ${deposit.url}.`);
     const plane = await readArrayPlane(file, { pixelArcsec: deposit.pixelArcsec, orientation: deposit.orientation, starPixel: deposit.starPixel, arcsecPerUnit: 1 / distancePc, halfUnits, size, backgroundAnnulusArcsec: lens.backgroundAnnulusArcsec });
     read = { channels: CHANNELS.map(() => Float32Array.from(plane.plane)), planes: new Map([[deposit.band, plane]]) };
-    bands.push({ band: deposit.band, mosaic: file, primary: { 'DATE-OBS': deposit.observed }, sky: plane, mosaicSha256: digest,
+    bands.push({ band: deposit.band, mosaic: file, primary: { 'DATE-OBS': deposit.observed }, sky: plane,
       origin: { file: deposit.path.replace(/^.*\//u, ''), url: deposit.url, bytes: deposit.bytes, title: deposit.title, credit: deposit.credit, displayCredit: deposit.displayCredit, license: deposit.license,
         acquisition: deposit.acquisition, role: `${deposit.instrument} ${deposit.filter} image deposited with its paper, the ${lens.id} leaves`, landing: deposit.landing, observed: deposit.observed, instrument: deposit.instrument } });
   } else if (lens.archive) {
-    // An archive image with its own sky coordinates: its pinned bytes, read through its WCS about the star where its catalogue
-    // position and proper motion put it on the day of the observation.
-    const archive = lens.archive, file = resolve(repositoryRoot, archive.path), { sha256: digest, bytes } = await sha256File(file).catch(() => { throw new Error(`${lens.id}: ${archive.path} is missing; download it from ${archive.url}.`); });
+    // An archive image with its own sky coordinates, read through its WCS about the star where its catalogue position and
+    // proper motion put it on the day of the observation.
+    const archive = lens.archive, file = resolve(repositoryRoot, archive.path), { size: bytes } = await stat(file).catch(() => { throw new Error(`${lens.id}: ${archive.path} is missing; download it from ${archive.url}.`); });
     if (bytes !== archive.bytes) throw new Error(`${lens.id}: ${archive.path} is ${bytes} bytes, not the ${archive.bytes} the recipe names; download it again from ${archive.url}.`);
     const primary = (await readFitsFileHdus(file))[0]!.header, observed = requireString(primary['DATE-OBS'], `${archive.path} DATE-OBS`);
     const host = starAstrometry(recipe.host as Parameters<typeof starAstrometry>[0]);
@@ -361,7 +362,7 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
       ...(lens.pointSources ? { pointSources: lens.pointSources.sources } : {}), ...(primaryBeam ? { primaryBeam } : {}),
       ...(lens.smoothTo ? { smoothTo: { majorArcsec: lens.smoothTo.beamArcsec[0], minorArcsec: lens.smoothTo.beamArcsec[1], positionAngleDeg: lens.smoothTo.positionAngleDeg } } : {}) });
     read = { channels: CHANNELS.map(() => Float32Array.from(plane.plane)), planes: new Map([[archive.band, plane]]) };
-    bands.push({ band: archive.band, mosaic: file, primary: { 'DATE-OBS': observed, starRaDecDeg: [starRaDeg, starDecDeg] }, sky: plane, mosaicSha256: digest,
+    bands.push({ band: archive.band, mosaic: file, primary: { 'DATE-OBS': observed, starRaDecDeg: [starRaDeg, starDecDeg] }, sky: plane,
       origin: { file: archive.path.replace(/^.*\//u, ''), url: archive.url, bytes: archive.bytes, title: archive.title, credit: archive.credit, displayCredit: archive.displayCredit, license: archive.license,
         acquisition: archive.acquisition, role: `${archive.instrument} ${archive.filter} image from its archive, the ${lens.id} leaves`, landing: archive.landing, observed: archive.observed, instrument: archive.instrument } });
   } else if (lens.hst) {
@@ -371,7 +372,7 @@ async function buildLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, d
       backgroundAnnulusArcsec: lens.backgroundAnnulusArcsec, downloads, sources, ...(starPosition ? { starPosition } : {}) });
     read = channels;
     const { program } = await readImagingProgram(lens.program);
-    for (const { band, entry, mosaic, primary } of channels.entries) bands.push({ band, mosaic, primary, sky: channels.planes.get(band)!, mosaicSha256: (await sha256File(mosaic)).sha256,
+    for (const { band, entry, mosaic, primary } of channels.entries) bands.push({ band, mosaic, primary, sky: channels.planes.get(band)!,
       origin: { file: entry.level3.name, url: mastDownloadUrl(entry.level3.uri), bytes: entry.level3.bytes, title: `MAST JWST programme ${program.programme} · ${entry.observation} level-3 coronagraph mosaic`,
         credit: recipe.credit, displayCredit: 'NASA/ESA/CSA JWST, MAST', license: recipe.license.note,
         acquisition: `Downloaded unchanged from MAST by its URI ${entry.level3.uri} (@cssearth/telescope/node mastFile), the pipeline's own calwebb_coron3 product of the association pinned in packages/telescope-cli/src/archives/jwst/imaging/programs/${lens.program}.json.`,
@@ -480,9 +481,6 @@ export function parseFigureColorMap(value: unknown, path: string) {
   return { rgb, source: requireString(record.source, `${path} source`) };
 }
 
-/** The digest a reconstruction names so the author can tell it was solved from these channels: sha256 of the three float32 planes. */
-export const shownDigest = (shown: readonly Float32Array[]) => sha256(Buffer.concat(shown.map(channel => Buffer.from(channel.buffer, channel.byteOffset, channel.byteLength))));
-
 /** Exposure, opacity and preview, shared by both depth routes. `integral` is each channel's decoded column over the grid peak's scale. */
 /** The baker integrates each channel's decoded density (its column over the grid peak) in its own colour, and the renderer turns
  * the brightest channel's column into 1 - exp(-gain * column). A white column at the top of the stretch carries 1 in every
@@ -496,7 +494,7 @@ export function exposureAndOpacity(topAlpha: number, peak: number, integral: rea
   return { exposureGain, opacity: { drawnColumns: alphas.length, median: quantile(0.5), p90: quantile(0.9), max: alphas.at(-1)! } };
 }
 
-async function finishLens(lens: CircumstellarLens, sky: SkyPlane, shown: readonly Float32Array[], encoded: { ktx2: Uint8Array; decodedSha256: string; peak: number; filledVoxels: number; droppedShare: readonly number[] } & ({ integral: readonly Float64Array[] } | { exposureGain: number; opacity: ReturnType<typeof exposureAndOpacity>['opacity'] })) {
+async function finishLens(lens: CircumstellarLens, sky: SkyPlane, shown: readonly Float32Array[], encoded: { ktx2: Uint8Array; peak: number; filledVoxels: number; droppedShare: readonly number[] } & ({ integral: readonly Float64Array[] } | { exposureGain: number; opacity: ReturnType<typeof exposureAndOpacity>['opacity'] })) {
   const { size } = sky, count = size * size;
   const { exposureGain, opacity } = 'integral' in encoded ? exposureAndOpacity(lens.topAlpha, encoded.peak, encoded.integral) : encoded;
   // A preview of the image as read, in its displayed colours: north up, east left.
@@ -507,7 +505,7 @@ async function finishLens(lens: CircumstellarLens, sky: SkyPlane, shown: readonl
     preview.set([0, 1, 2].map(c => Number.isFinite(shown[c]![p]!) ? Math.round(255 * Math.min(1, shown[c]![p]!)) : 0), (j * size + i) * 3);
   }
   const previewPng = await sharp(preview, { raw: { width: size, height: size, channels: 3 } }).resize(512, 512, { kernel: 'nearest' }).png({ compressionLevel: 9 }).toBuffer();
-  return { spread: { decodedSha256: encoded.decodedSha256, peak: encoded.peak, filledVoxels: encoded.filledVoxels, droppedShare: encoded.droppedShare }, ktx2: encoded.ktx2, exposureGain, opacity, previewPng };
+  return { spread: { peak: encoded.peak, filledVoxels: encoded.filledVoxels, droppedShare: encoded.droppedShare }, ktx2: encoded.ktx2, exposureGain, opacity, previewPng };
 }
 
 /** The ring route's depth: each displayed column spread along the fitted ring's depth profile (column-depth.ts). */
@@ -515,12 +513,12 @@ function spreadAlong(sky: SkyPlane, shown: readonly Float32Array[], density: (x:
   const { size, halfUnits, step } = sky, zs = Array.from({ length: size }, (_, k) => -halfUnits + (k + 0.5) * step);
   const spread = spreadColumns({ width: size, height: size, depth: size, channels: [...shown], depthStep: step,
     profile: (i, j, out) => { const x = -halfUnits + (i + 0.5) * step, y = -halfUnits + (j + 0.5) * step; let total = 0; for (const [k, z] of zs.entries()) { out[k] = density(x, y, z); total += out[k]!; } return total; } });
-  return { ktx2: encodeDensityKtx2({ width: size, height: size, depth: size, encodedRgba: spread.rgba }, 9), decodedSha256: sha256(spread.rgba), peak: spread.peak, integral: spread.integral, filledVoxels: spread.filledVoxels, droppedShare: spread.droppedShare };
+  return { ktx2: encodeDensityKtx2({ width: size, height: size, depth: size, encodedRgba: spread.rgba }, 9), peak: spread.peak, integral: spread.integral, filledVoxels: spread.filledVoxels, droppedShare: spread.droppedShare };
 }
 
 /** What the lab's reconstruction of an edge-on lens reads: the displayed channels, the measured midplane and the grid. */
 export interface EdgeOnSolveInputs {
-  readonly lens: CircumstellarLens; readonly sky: SkyPlane; readonly shown: readonly Float32Array[]; readonly shownSha256: string;
+  readonly lens: CircumstellarLens; readonly sky: SkyPlane; readonly shown: readonly Float32Array[];
   readonly geometry: MidplaneGeometry; readonly innerMaskUnits: number; readonly taperFromUnits: number;
   /** The disc's normal in the grid's own axes: x toward increasing column (west), y toward increasing row (north), z toward the observer. */
   readonly axis: readonly [number, number, number];
@@ -528,17 +526,17 @@ export interface EdgeOnSolveInputs {
 /** The lab-written reconstruction of one edge-on lens, as the recipe's source/ holds it (labs/nebula reconstruct-circumstellar). */
 export interface EdgeOnReconstruction {
   readonly schema: 'cssearth-circumstellar-reconstruction@1'; readonly objectId: string; readonly lensId: string;
-  readonly shownSha256: string; readonly grid: { readonly size: number; readonly halfUnits: number };
-  readonly method: Record<string, unknown>; readonly ktx2: { readonly path: string; readonly sha256: string; readonly bytes: number };
-  readonly decodedSha256: string; readonly peak: number; readonly filledVoxels: number; readonly exposureGain: number;
+  readonly grid: { readonly size: number; readonly halfUnits: number };
+  readonly method: Record<string, unknown>; readonly ktx2: { readonly path: string; readonly bytes: number };
+  readonly peak: number; readonly filledVoxels: number; readonly exposureGain: number;
   readonly opacity: ReturnType<typeof exposureAndOpacity>['opacity']; readonly checks: Record<string, unknown>;
 }
 export const reconstructionPath = (lens: CircumstellarLens) => `reconstruction-${lens.id}.json`;
 
 /** An edge-on disc: its midplane measured and checked against the published position angle, its displayed channels written,
  * and its depth read from the lab's axially symmetric emission reconstruction of those channels (Wenger, Lorenz & Magnor 2013,
- * labs/nebula/packages/reconstruction methods/symmetry). The author computes no depth itself: the reconstruction names the
- * digest of the channels it was solved from, and a reconstruction of other channels is refused. */
+ * labs/nebula/packages/reconstruction methods/symmetry). The author computes no depth itself; a reconstruction on another grid
+ * is refused, and a changed recipe is reconstructed again before authoring. */
 async function buildEdgeOnLens(recipe: CircumstellarRecipe, lens: CircumstellarLens, sky: SkyPlane, read: readonly Float32Array[], bands: readonly BandRead[], innerMaskUnits: number, registrations: ReadonlyMap<string, PlanetRegistration>, inputsOnly: boolean) {
   const { size, halfUnits, step } = sky, { published } = lens, angle = (a: number, b: number) => Math.abs(((a - b) % 180 + 270) % 180 - 90);
   const halfHeightUnits = lens.midplaneHalfHeightUnits ?? 0.15 * lens.outerUnits;
@@ -565,27 +563,27 @@ async function buildEdgeOnLens(recipe: CircumstellarRecipe, lens: CircumstellarL
   const ends = Math.min(...[lightEnds.positive, lightEnds.negative].map(v => v === undefined ? coverageEndsUnits : Math.abs(v)));
   const taperFromUnits = ends > halfUnits && lens.beyondGrid ? halfUnits : ends;
   if (!(taperFromUnits > innerMaskUnits) || taperFromUnits > halfUnits) throw new Error(`${lens.id}: the light along the midplane ends at ${taperFromUnits.toFixed(0)} au, outside the drawable range.`);
-  const shown = shownChannels(lens, sky, read, innerMaskUnits, taperFromUnits), shownSha256 = shownDigest(shown);
+  const shown = shownChannels(lens, sky, read, innerMaskUnits, taperFromUnits);
   // The disc's normal: in the sky basis (east, north, toward the observer) it is the minor axis tilted by the inclination toward
   // the stated near side, as the ring's density builds it; the grid's x runs west, so east flips sign.
   const phi = pa, inclination = published.inclinationDeg * Math.PI / 180, minor = [Math.cos(phi), -Math.sin(phi)];
   const near = Math.cos((lens.nearSidePositionAngleDeg - (geometry.positionAngleDeg + 90)) * Math.PI / 180) >= 0 ? 1 : -1;
   const normalSky = [-near * minor[0]! * Math.sin(inclination), -near * minor[1]! * Math.sin(inclination), Math.cos(inclination)];
   const axis: [number, number, number] = [-normalSky[0]!, normalSky[1]!, normalSky[2]!];
-  if (inputsOnly) return { kind: 'inputs' as const, inputs: { lens, sky, shown, shownSha256, geometry, innerMaskUnits, taperFromUnits, axis } satisfies EdgeOnSolveInputs };
+  if (inputsOnly) return { kind: 'inputs' as const, inputs: { lens, sky, shown, geometry, innerMaskUnits, taperFromUnits, axis } satisfies EdgeOnSolveInputs };
   const recordPath = resolve(repositoryRoot, `src/objects/${recipe.id}/source`, reconstructionPath(lens));
   const reconstruction = JSON.parse(await readFile(recordPath, 'utf8').catch(() => { throw new Error(`${lens.id}: no reconstruction at ${reconstructionPath(lens)}; run node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar ${recipe.id}.`); })) as EdgeOnReconstruction;
   if (reconstruction.schema !== 'cssearth-circumstellar-reconstruction@1' || reconstruction.objectId !== recipe.id || reconstruction.lensId !== lens.id) throw new TypeError(`${reconstructionPath(lens)} is not this lens's reconstruction.`);
-  if (reconstruction.shownSha256 !== shownSha256) throw new Error(`${lens.id}: the reconstruction was solved from other channels (${reconstruction.shownSha256}, now ${shownSha256}); reconstruct again.`);
+  for (const retired of ['shownSha256', 'decodedSha256'] as const) if (retired in reconstruction) throw new TypeError(`${reconstructionPath(lens)} carries the retired ${retired}; reconstruct again.`);
   if (reconstruction.grid.size !== size || reconstruction.grid.halfUnits !== halfUnits) throw new Error(`${lens.id}: the reconstruction's grid differs from the recipe's.`);
   const ktx2 = await readFile(resolve(repositoryRoot, `src/objects/${recipe.id}/source`, reconstruction.ktx2.path));
-  if (sha256(ktx2) !== reconstruction.ktx2.sha256 || ktx2.length !== reconstruction.ktx2.bytes) throw new Error(`${lens.id}: ${reconstruction.ktx2.path} is not the grid the reconstruction wrote.`);
+  if (ktx2.length !== reconstruction.ktx2.bytes) throw new Error(`${lens.id}: ${reconstruction.ktx2.path} is ${ktx2.length} bytes, not the ${reconstruction.ktx2.bytes} the reconstruction wrote.`);
   // Each band's own midplane about the registered star: the offsets say whether the filters agree on where the disc is.
   const bandMidplanes = Object.fromEntries(bands.map(band => { const g = midplaneGeometry(band.sky, { innerMaskUnits, outerUnits: lens.outerUnits, halfHeightUnits, initialPositionAngleDeg: geometry.positionAngleDeg });
     return [band.band, { positionAngleDeg: g.positionAngleDeg, starOffsetUnits: g.starOffsetUnits, ridgeResidualUnits: g.ridgeResidualUnits }]; }));
   return { kind: 'edge-on' as const, lens, bands, geometry, reconstruction, innerMaskUnits, taperFromUnits, coverageEndsUnits, lightEnds, radialProfile, differences, halfHeightUnits, axis,
     registrations: Object.fromEntries(registrations), bandMidplanes,
-    ...(await finishLens(lens, sky, shown, { ktx2, decodedSha256: reconstruction.decodedSha256, peak: reconstruction.peak, filledVoxels: reconstruction.filledVoxels, droppedShare: [0, 0, 0], exposureGain: reconstruction.exposureGain, opacity: reconstruction.opacity })) };
+    ...(await finishLens(lens, sky, shown, { ktx2, peak: reconstruction.peak, filledVoxels: reconstruction.filledVoxels, droppedShare: [0, 0, 0], exposureGain: reconstruction.exposureGain, opacity: reconstruction.opacity })) };
 }
 
 /** The measured record of an edge-on lens, the counterpart of the ring's. */

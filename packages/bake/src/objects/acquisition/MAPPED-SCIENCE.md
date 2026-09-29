@@ -1,7 +1,7 @@
 # Reproduce mapped science inputs
 
 These tools run offline, before the existing celestial-body preparers. They
-produce compact, pinned GeoTIFF inputs. The browser receives only prepared
+produce compact GeoTIFF inputs. The browser receives only prepared
 textures and existing content controls.
 
 Install `requirements-mapped-science.txt` in a Python 3.12+ virtual environment.
@@ -22,10 +22,11 @@ python packages/bake/src/objects/acquisition/pds4-byte-geotiff.py src/objects/ch
 python packages/bake/src/objects/acquisition/test_mapped_science.py
 ```
 
-Each plan pins original bytes and coordinate conventions; each receipt pins the
-result. Failures require source review, never an automatic pin refresh. GDAL and
-compression versions can affect container bytes; numeric samples and mapping
-must also be compared before accepting an output from a changed environment.
+Each plan names its original files by path and fixes their coordinate conventions;
+each receipt records the result's size, sample counts and ranges. A missing
+original or a changed layout stops the run for source review. GDAL and
+compression versions can affect container bytes, so compare numeric samples and
+mapping before accepting an output from a changed environment.
 
 NIMS display uses the guide's same-parity RGB bands. The actual registered TIFF
 CRS and affine govern mapping, as recommended by the guides. PDS labels retain

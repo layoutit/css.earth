@@ -38,7 +38,7 @@ class GeologyTests(unittest.TestCase):
             # The plan names the source sphere, whose radius the script checks against radiusMeters.
             wkt='GEOGCS["GCS_Test",DATUM["D_Test",SPHEROID["Test",2575000.0,0.0]],PRIMEM["Reference_Meridian",0.0],UNIT["Degree",0.0174532925199433]]'
             (root/'source.prj').write_text(wkt)
-            plan=dict(pins={},projectionPath='source.prj',projectionWkt=wkt,
+            plan=dict(projectionPath='source.prj',projectionWkt=wkt,
                 width=32,height=16,radiusMeters=2575000,coordinateUnits='degrees',
                 field='UNIT',unknownValues=[],categories=[dict(value='A'),dict(value='B')],
                 layers=layers,output='units.tif',receipt='receipt.json')

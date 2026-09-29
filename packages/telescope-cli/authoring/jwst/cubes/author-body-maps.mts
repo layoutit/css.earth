@@ -19,7 +19,7 @@
  * --check writes nothing and fails if any file would change. */
 import { selectedProductInput } from '@cssearth/telescope-cli/selected-product';
 import type { ObservationSelection } from '@cssearth/telescope-cli/query-contract';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -30,7 +30,6 @@ import { mastFile } from '@cssearth/telescope/node';
 import { readImagingProgram } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
 import { bandDepth, openSpectralCube, type Window } from '@cssearth/bake/objects/layers/observation';
 import { combineUnderPolicy, formatBodyMapProduct, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/bake/objects/layers/observation';
-import { sha256, sha256File } from '@cssearth/core/node';
 import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
@@ -77,8 +76,8 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
       if(options.selections && !selection) throw new Error(`No selected qualified cube for ${String(stated.program)} ${band.observation}.`);
       if (selection?.request.continuumMicrometres && (JSON.stringify(selection.request.continuumMicrometres) !== JSON.stringify(recipe.continuum) || JSON.stringify(selection.request.wavelengthMicrometres) !== JSON.stringify(recipe.band))) throw new Error('The selected request and map recipe have different band-depth windows.');
       const selected = selection ? await selectedProductInput(REPOSITORY, selection) : undefined;
-      const cubePath = selected?.file ?? await mastFile(band.level3, resolve(REPOSITORY, '.local', id, 'observations'), options.sources ?? []), cubePin = await sha256File(cubePath);
-      inputs.push(selected?.input ?? { role: 'archive spectral cube', identity: band.level3.uri, ...cubePin });
+      const cubePath = selected?.file ?? await mastFile(band.level3, resolve(REPOSITORY, '.local', id, 'observations'), options.sources ?? []);
+      inputs.push(selected?.input ?? { role: 'archive spectral cube', identity: band.level3.uri, bytes: (await stat(cubePath)).size });
       const cube = await openSpectralCube(cubePath);
       if (String(cube.primary.TARGPROP ?? cube.primary.TARGNAME).toUpperCase() !== requireString(entry.target, 'target').toUpperCase()) throw new Error(`${band.level3.name} is a cube of ${String(cube.primary.TARGPROP)}, not ${String(entry.target)}.`);
       const depth = await bandDepth(cube, recipe);

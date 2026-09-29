@@ -2,8 +2,7 @@
  * average native pixel areas, and keep source gaps separate from dark observations. */
 import sharp from 'sharp';
 import {fromFile} from 'geotiff';
-import {createHash} from 'node:crypto';
-import {createReadStream, createWriteStream} from 'node:fs';
+import {createWriteStream} from 'node:fs';
 import {mkdtemp, readFile, rm, stat} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
@@ -37,11 +36,6 @@ export function parseGeoTiffImageRecipe(value: unknown): GeoTiffImageRecipe {
 }
 export async function readGeoTiffImageRecipe(root: string, path: string): Promise<GeoTiffImageRecipe> {
   return parseGeoTiffImageRecipe(JSON.parse(await readFile(containedPath(root, path), 'utf8')));
-}
-async function identity(path: string) {
-  const hash = createHash('sha256');
-  for await (const chunk of createReadStream(path)) hash.update(chunk);
-  return {bytes: (await stat(path)).size, sha256: hash.digest('hex')};
 }
 /** For a fractional boundary, integrate the piecewise-constant native pixel areas. */
 function integral(prefix: Float64Array, x: number) {
@@ -124,8 +118,8 @@ export async function prepareGeoTiffImage(recipe: GeoTiffImageRecipe, options: {
       const bytes = await sharp(rgb, {raw: {width: o.width, height: o.height, channels: 3}}).png().toBuffer();
       return {bytes, report: {schema: 'cssearth-geotiff-image-conversion@1', source: s, output: o,
         processing: 'Native pixel-area mean over each output footprint; all-zero no-data pixels excluded. No observed area is gray grid; partial footprints average only their observations. No gap reconstruction or new contrast stretch.',
-        sourceIdentity: await identity(path), missing, partial, anchors, maximumRowBytes: rowBytes,
-        outputBytes: bytes.length, outputSha256: createHash('sha256').update(bytes).digest('hex')}};
+        sourceIdentity: {bytes: (await stat(path)).size}, missing, partial, anchors, maximumRowBytes: rowBytes,
+        outputBytes: bytes.length}};
     } finally {await tiff.close();}
   } finally {if (temp) await rm(temp, {recursive: true, force: true});}
 }

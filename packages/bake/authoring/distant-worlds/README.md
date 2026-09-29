@@ -30,7 +30,7 @@ Node heap, `UV_THREADPOOL_SIZE=1` and `VIPS_CONCURRENCY=1`.
 `register.py` writes each body’s catalogue metadata and creates its astronomy
 record when missing. Existing astronomy records are preserved. Despite its legacy
 flag name, `finalize-sources.mts --refresh-pins` refreshes document declarations
-and removes descriptor source hashes; it does not create manifest digests.
+and writes no digests.
 Omitting that flag also prepares title and context source images.
 
 `author.py` and `register.py` accept an input JSON path as their first argument;

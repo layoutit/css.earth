@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Convert pinned page-coordinate GIS polygons to a categorical moon GeoTIFF.
+"""Convert declared page-coordinate GIS polygons to a categorical moon GeoTIFF.
 
 Preparation only. Python 3.12, fiona 1.10.1, shapely 2.1.2, numpy 2.5.3,
 rasterio 1.5.1. Registration and overlap precedence belong to the source recipe.
 Equal or unrelated overlapping units remain missing, including polygon holes.
 """
 import argparse
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -21,13 +20,14 @@ from rasterio.transform import from_bounds
 from shapely.geometry import shape
 
 
-def pinned(root, spec):
+def declared(root, spec):
     path = (root / spec['path']).resolve()
     if not path.is_relative_to(root.resolve()):
-        raise ValueError('Source path escapes body package')
-    data = path.read_bytes()
-    if len(data) != spec['bytes'] or hashlib.sha256(data).hexdigest() != spec['sha256']:
-        raise ValueError(f'Source pin changed: {path}')
+        raise ValueError(f"{root.name}: source path {spec['path']} escapes the body package")
+    if not path.is_file():
+        raise ValueError(f"{root.name}: declared source {spec['path']} is missing")
+    if path.stat().st_size != spec['bytes']:
+        raise ValueError(f"{root.name}: {spec['path']} holds {path.stat().st_size} bytes, the recipe declares {spec['bytes']}")
     return path
 
 
@@ -36,9 +36,9 @@ def prepare(recipe_path):
     root = recipe_path.parent.parent
     if recipe['schema'] != 'cssearth-geologic-page-conversion@1':
         raise ValueError('Unsupported geologic conversion recipe')
-    archive = pinned(root, recipe['archive'])
-    support = {spec['path']: pinned(root, spec) for spec in recipe['supportingInputs']}
-    registration = json.loads(pinned(root, recipe['registration']).read_text())
+    archive = declared(root, recipe['archive'])
+    support = {spec['path']: declared(root, spec) for spec in recipe['supportingInputs']}
+    registration = json.loads(declared(root, recipe['registration']).read_text())
     matrix = np.array(registration['matrix'], dtype=float)
     translation = np.array(registration['translation'], dtype=float)
     if matrix.shape != (2, 2) or translation.shape != (2,) or not np.isfinite(matrix).all() or np.linalg.det(matrix) <= 0:
@@ -53,7 +53,7 @@ def prepare(recipe_path):
         evidence = json.loads(support[precedence['evidence']].read_text())
         matches = [pair for pair in evidence if {pair['a'], pair['b']} == {precedence['above'], precedence['below']}]
         if len(matches) != 1 or matches[0]['winner'] != precedence['above']:
-            raise ValueError('Layer precedence differs from pinned publisher-preview evidence')
+            raise ValueError('Layer precedence differs from the declared publisher-preview evidence')
         dominates[indices[precedence['above']], indices[precedence['below']]] = True
     for k in range(len(categories)):
         dominates |= dominates[:, k, None] & dominates[None, k, :]
@@ -125,8 +125,7 @@ def prepare(recipe_path):
     report = dict(schema='cssearth-geologic-conversion-receipt@1',
                   sourceArchive=recipe['archive'], registration=recipe['registration'],
                   supportingInputs=recipe['supportingInputs'],
-                  output=dict(path=recipe['output']['path'], bytes=output.stat().st_size,
-                              sha256=hashlib.sha256(output.read_bytes()).hexdigest()),
+                  output=dict(path=recipe['output']['path'], bytes=output.stat().st_size),
                   sourcePlanarPixelCounts=source_counts, ambiguousCombinations=ambiguous,
                   missingCode=65535, validPixels=int((result != 65535).sum()),
                   sampledSphereCoverage=float(((result != 65535).sum(axis=1) * weights).sum() / (width * weights.sum())),

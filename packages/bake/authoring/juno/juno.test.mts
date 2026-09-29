@@ -70,7 +70,7 @@ const PRODUCT = 'https://planetarydata.jpl.nasa.gov/img/data/juno/JNOJNC_0024/DA
 const MEASURED = parseProgram({ schema: PROGRAM_SCHEMA, id: 'test-program', volume: 'JNOJNC_0024', target: { name: 'EUROPA', naifId: 502, bodyFrame: 'IAU_EUROPA' },
   kernelSet: 'juno', kernels: ['lsk/naif0012.tls', 'pck/pck00011.tpc'],
   images: [{ productId: 'JNCR_2022272_45C00001_V01', startTime: '2022-09-29T09:38:05.691Z', altitudeKm: 1515.1, url: `${PRODUCT}.IMG`, bytes: 35438592,
-    sha256: 'a'.repeat(64), labelUrl: `${PRODUCT}.LBL`, labelBytes: 2500, labelSha256: 'b'.repeat(64) }] });
+    labelUrl: `${PRODUCT}.LBL`, labelBytes: 2500 }] });
 const KERNELS = [{ path: 'lsk/naif0012.tls', bytes: 5023, sha256: 'c'.repeat(64) }, { path: 'pck/pck00011.tpc', bytes: 129000, sha256: 'd'.repeat(64) }];
 
 test('a registration record pins every image, label and kernel the run read, and the policy it held them to', async () => {

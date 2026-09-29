@@ -8,7 +8,6 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { sha256 } from '@cssearth/core/node';
 import { apply, numbers, utcToEt } from '@cssearth/spice';
 import { loadKernelSet } from '@cssearth/spice/node';
 import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
@@ -64,17 +63,17 @@ export function observationTimes(index: string) {
 }
 
 export async function registeredMosaic(recipeFile: string, directory: string, fetchMissing = false) {
-  const recipeBytes = await readFile(recipeFile), recipe = parseRegisteredRecipe(JSON.parse(recipeBytes.toString('utf8')));
+  const recipe = parseRegisteredRecipe(JSON.parse(await readFile(recipeFile, 'utf8')));
   const root = dirname(recipeFile), { policy } = recipe, ppd = recipe.output.pixelsPerDegree, width = 360 * ppd, height = 180 * ppd, cells = width * height;
   if (fetchMissing) await fetchFits(recipe.archive, recipe.orbits, directory);
   const paths = await kernelBankPaths(recipe.kernelSet, recipe.kernels), set = await loadKernelSet(paths);
   const radii = numbers(set.pool, `BODY${recipe.target.naifId}_RADII`), radius = (radii[0] * radii[1] * radii[2]) ** (1 / 3);
   if (radii.length !== 3 || radii.some(v => v <= 0)) throw new Error('Invalid kernel radii.');
   const map = new Float32Array(cells).fill(NaN), best = new Float32Array(cells).fill(Infinity), source = new Int16Array(cells).fill(-1);
-  const frames: { productId: string; orbit: number; visit: string; utc: string; exposureSeconds: number; inputs: Record<string, string>;
+  const frames: { productId: string; orbit: number; visit: string; utc: string; exposureSeconds: number;
     report: ReturnType<typeof registerFrame>['report']; rejected?: string }[] = [];
   const visits: { id: string; frames: string[]; qualifiedCells: number; winningCells: number }[] = [];
-  const indexes: { orbit: number; sha256: string }[] = [];
+  const indexes: { orbit: number }[] = [];
   for (const orbit of recipe.orbits) {
     const orbitName = `PJ${String(orbit).padStart(2, '0')}`, folder = join(directory, orbitName), indexFile = join(directory, `${orbitName}-INDEX.TAB`);
     let index = await readFile(indexFile).catch(() => undefined);
@@ -84,7 +83,7 @@ export async function registeredMosaic(recipeFile: string, directory: string, fe
       await writeFile(indexFile, index);
     }
     if (!index) throw new Error(`${indexFile} is missing; run with --fetch.`);
-    indexes.push({ orbit, sha256: sha256(index) });
+    indexes.push({ orbit });
     const times = observationTimes(index.toString('utf8'));
     const files = (await readdir(folder, { recursive: true })).filter(p => /(?:^|\/)JIR_IMG_RDR_\d{7}T\d{6}_V\d{2}_M_band_radiance\.fits$/u.test(p) && !p.includes('__MACOSX')).sort();
     if (!files.length) throw new Error(`${folder}: no M-band products.`);
@@ -109,11 +108,8 @@ export async function registeredMosaic(recipeFile: string, directory: string, fe
       const millis = Date.parse(time.utc);
       if (millis - last > policy.visitGapMinutes * 60000) { await finish(); visit = `${orbitName}-${time.utc}`; }
       last = millis;
-      const prefix = join(folder, file.replace('band_radiance.fits', '')), inputs: Record<string, string> = {};
-      const plane = async (suffix: string, mask = false) => {
-        const bytes = await readFile(`${prefix}${suffix}.fits`);
-        inputs[suffix] = sha256(bytes); return readPlane(bytes, mask);
-      };
+      const prefix = join(folder, file.replace('band_radiance.fits', ''));
+      const plane = async (suffix: string, mask = false) => readPlane(await readFile(`${prefix}${suffix}.fits`), mask);
       const planes: RegisteredPlanes = { radiance: await plane('band_radiance'), latitude: await plane('latitude'), longitude: await plane('longitude'),
         emission: await plane('emission'), range: await plane('altitude'), saturation: await plane('saturation_mask_80', true).catch(async error => {
           if (!(error instanceof Error) || !('code' in error) || error.code !== 'ENOENT') throw error;
@@ -125,7 +121,7 @@ export async function registeredMosaic(recipeFile: string, directory: string, fe
       const et = utcToEt(set.leapSeconds, time.utc) - (orbit >= 51 ? 0.62 : 0) - (ranges[ranges.length >> 1] ?? 0) / 299792.458;
       const sun = apply(set.rotation(recipe.target.bodyFrame, et), set.ephemeris.apparent(10, recipe.target.naifId, et).position);
       const result = registerFrame(planes, radii, sun.map(v => v / Math.hypot(...sun)), policy);
-      frames.push({ productId, orbit, visit, ...time, inputs, report: result.report, ...(result.rejected ? { rejected: result.rejected } : {}) });
+      frames.push({ productId, orbit, visit, ...time, report: result.report, ...(result.rejected ? { rejected: result.rejected } : {}) });
       if (!result.camera || !result.values) continue;
       projections.push(projectFrame({ camera: result.camera, values: result.values }, radii, ppd, 'night', policy, IFOV, radius));
       accepted.push(productId);
@@ -145,11 +141,10 @@ export async function registeredMosaic(recipeFile: string, directory: string, fe
     const key = `${frame.orbit}:${frame.rejected}`, group = rejected.get(key) ?? { orbit: frame.orbit, reason: frame.rejected, productIds: [] };
     group.productIds.push(frame.productId); rejected.set(key, group);
   }
-  const receipt = { schema: 'cssearth-jiram-registered-receipt@1', recipeSha256: sha256(recipeBytes), archive: recipe.archive,
-    radiiKm: radii, ifovRadians: IFOV, kernels: Object.fromEntries(await Promise.all(paths.map(async (p, i) => [recipe.kernels[i], sha256(await readFile(p))]))),
+  const receipt = { schema: 'cssearth-jiram-registered-receipt@1', archive: recipe.archive,
+    radiiKm: radii, ifovRadians: IFOV,
     coverage: { cells, validCells: count, gridFraction: count / cells, sphericalAreaFraction: area / totalArea }, visits, indexes,
-    screenedFrames: frames.length, frames: frames.filter(f => !f.rejected), rejected: [...rejected.values()],
-    imageSha256: sha256(await readFile(resolve(root, recipe.output.image))) };
+    screenedFrames: frames.length, frames: frames.filter(f => !f.rejected), rejected: [...rejected.values()] };
   await mkdir(dirname(resolve(root, recipe.output.receipt)), { recursive: true });
   await writeFile(resolve(root, recipe.output.receipt), `${JSON.stringify(receipt, null, 2)}\n`);
   // Audit rasters stay in the ignored input directory, outside delivery inventories.

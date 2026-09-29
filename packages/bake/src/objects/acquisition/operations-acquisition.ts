@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import sharp from 'sharp';
 import { lstat, readFile, mkdir, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
@@ -74,6 +73,8 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
 // The mirror is opt-in (default null): a caller must name RUNTIME_ASSET_ORIGIN explicitly to use it. Defaulting to
 // it here would make every caller — including a test that only wired up its own `transport` — silently also try a
 // real request to the production mirror URL, which a narrowly-scoped mock's URL assertion then rejects.
+/** A local archive cache file named after its URL, so the same deposit is downloaded once for every member read from it. */
+const archiveCacheName=(url:string)=>url.replace(/^https?:\/\//,'').replace(/[^A-Za-z0-9._-]+/g,'_').slice(-200);
 const rangeHeaders=(entry:SourceEntry,headers?:Record<string,string>)=>entry.range?{...headers,Range:rangeRequestHeader(entry.range)}:headers;
 const rangedEntry=(manifest:SourceManifest,path:string)=>[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].some(entry=>entry.path===path&&entry.range!==undefined);
 export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch},mirrorOrigin=null,objectId=basename(dirname(sourceRoot))}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null;objectId?:string}) {
@@ -91,7 +92,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   if(step.kind==='download'){
    if(!step.encoding){
     const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
-    // Try our own content-addressed mirror first, through the same injected transport as the publisher (so tests
+    // Try our own mirror (keyed by object id and manifest path) first, through the same injected transport as the publisher (so tests
     // never reach the real network): reliable storage, streamed straight into the pinned-write path, which holds the
     // answer to its declared size before ever touching the real destination. A miss, a non-OK response, an idle
     // stall or a size drift there all surface as a rejected publishPinnedSourceStream and fall back to the publisher
@@ -127,7 +128,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   else if(step.kind==='zip-member'){
    const cache=resolve('.local/source-archives');await mkdir(cache,{recursive:true});
    // The archive is cached by its URL; a complete download is kept until the cache is cleared.
-   const archivePath=resolve(cache,`${sha256(new TextEncoder().encode(step.url))}.zip`);
+   const archivePath=resolve(cache,`${archiveCacheName(step.url)}.zip`);
    if(!await lstat(archivePath).then(info=>info.isFile()&&info.size>0,()=>false)){
     const response=await request(step.url);if(!response.body)throw new Error('ZIP download has no body.');
     const temporary=`${archivePath}.partial-${process.pid}`;
@@ -139,7 +140,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   else if(step.kind==='tar-gz-member'){
    const cache=resolve('.local/source-archives');await mkdir(cache,{recursive:true});
    // As for ZIP members: the archive is cached by its URL and tar streams the one member out of it.
-   const archivePath=resolve(cache,`${sha256(new TextEncoder().encode(step.url))}.tar.gz`);
+   const archivePath=resolve(cache,`${archiveCacheName(step.url)}.tar.gz`);
    if(!await lstat(archivePath).then(info=>info.isFile()&&info.size>0,()=>false)){
     const response=await request(step.url);if(!response.body)throw new Error('tar.gz download has no body.');
     const temporary=`${archivePath}.partial-${process.pid}`;
