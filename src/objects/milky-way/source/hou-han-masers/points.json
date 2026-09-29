@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "hou-han-masers",
+  "table": {
+    "path": "tablea3.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/569/A125/tablea3.dat",
+    "bytes": 122241,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        2,
+        8
+      ],
+      "lDeg": [
+        2,
+        8
+      ],
+      "bDeg": [
+        9,
+        15
+      ]
+    },
+    "distanceFirstOf": [
+      [
+        39,
+        45
+      ],
+      [
+        124,
+        129
+      ]
+    ],
+    "distanceUnit": "kpc",
+    "missingDistance": 0
+  },
+  "filters": [],
+  "frame": {
+    "input": "galactic",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord Galactic to ICRS, heliocentric Cartesian"
+  },
+  "source": "hou-han-2014-spiral-tracers",
+  "meaning": "6.7 GHz methanol masers compiled by Hou & Han (2014), which mark massive star formation in the arms: each at its photometric or trigonometric distance where published, otherwise at the authors' kinematic distance for R0 = 8.3 kpc (D8.3).",
+  "appearance": {
+    "colorCss": "#ffd6e4",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: a pale rose between the maser white and the HII pink.",
+    "emphasis": "Arm tracer: young, massive star formation that outlines the spiral arms, drawn at full strength."
+  },
+  "missingBasis": "Two masers (l = 106.797\u00b0 and 109.920\u00b0) have no measured distance and a kinematic D8.3 of 0.00 kpc, which would put them at the Sun; they count as without a distance.",
+  "kinematicUncertainty": {
+    "kinematic": {
+      "column": [
+        39,
+        45
+      ],
+      "empty": true
+    },
+    "rotation": {
+      "r0Kpc": 8.3,
+      "theta0KmS": 239,
+      "sigmaVKmS": 7
+    },
+    "basis": "Hou & Han (2014), Sect. 2.4: a kinematic distance's uncertainty from a \u00b17 km/s velocity uncertainty through a flat rotation curve (R0 = 8.3 kpc, \u03980 = 239 km/s, their adopted set)."
+  }
+}

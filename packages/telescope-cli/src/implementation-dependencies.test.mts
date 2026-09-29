@@ -106,10 +106,10 @@ test('the navigation, surface-preview, preparation and thread-pool libraries are
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('the galaxy-field and layered-provenance libraries are followed into their bake sources, as when they sat under tools/', async () => {
+test('the layered-provenance library is followed into its bake sources, as when it sat under tools/', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-4b4-'));
   try {
-    const entries = [['@cssearth/bake/galaxy-field', 'packages/bake/src/galaxy-field'], ['@cssearth/bake/objects/provenance', 'packages/bake/src/objects/provenance']] as const;
+    const entries = [['@cssearth/bake/objects/provenance', 'packages/bake/src/objects/provenance']] as const;
     await writeFile(resolve(root, 'entry.mts'), `${entries.map(([specifier], index) => `import { v${index} } from '${specifier}';`).join('\n')}\nexport const used=[${entries.map((_, index) => `v${index}`).join(',')}];\n`);
     for (const [index, [, directory]] of entries.entries()) {
       await mkdir(resolve(root, directory), { recursive: true });

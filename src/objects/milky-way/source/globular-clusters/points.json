@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "globular-clusters",
+  "table": {
+    "path": "orbits_table.txt",
+    "origin": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+    "retrieved": "2026-09-28",
+    "bytes": 43346,
+    "format": "whitespace",
+    "columns": {
+      "name": 1,
+      "lDeg": 4,
+      "bDeg": 5,
+      "distance": 6
+    },
+    "distanceUnit": "kpc"
+  },
+  "frame": {
+    "input": "galactic",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord Galactic to ICRS, heliocentric Cartesian"
+  },
+  "source": "baumgardt-vasiliev-2021-gc-distances",
+  "meaning": "The Milky Way's globular clusters at the distances Baumgardt and Vasiliev (2021) combined from Gaia EDR3 parallaxes, HST kinematics and the literature: the old, round stellar halo around the disc.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 0.85,
+    "note": "Presentation only: one warm orange for these old clusters, 2 px at any distance."
+  }
+}

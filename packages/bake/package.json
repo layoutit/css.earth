@@ -96,11 +96,6 @@
       "import": "./dist/galaxy-catalog.js",
       "default": "./dist/galaxy-catalog.js"
     },
-    "./galaxy-field": {
-      "types": "./dist/galaxy-field.d.ts",
-      "import": "./dist/galaxy-field.js",
-      "default": "./dist/galaxy-field.js"
-    },
     "./cluster-catalog": {
       "types": "./dist/cluster-catalog.d.ts",
       "import": "./dist/cluster-catalog.js",

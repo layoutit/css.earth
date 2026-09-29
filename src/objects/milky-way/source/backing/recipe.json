@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-galaxy-backing-source@1",
+  "id": "backing",
+  "image": {
+    "path": "esa-milky-way.jpg",
+    "origin": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaia%E2%80%99s_star-formation_map_%28slider%29_ESA512394_-_slider.jpg",
+    "bytes": 3938981,
+    "widthPx": 5000,
+    "heightPx": 5000
+  },
+  "source": "esa-gaia-2025-milky-way-artist-impression",
+  "meaning": "An artist's impression of the Milky Way seen from above, by ESA, drawn under the catalogue dots as a backing that shows the galaxy's overall shape. It is artwork, not a measurement; every dot on it is a catalogued object at its published position.",
+  "anchors": {
+    "galacticCentrePx": [
+      2498.0,
+      2499.5
+    ],
+    "sunPx": [
+      2498.5,
+      3516.5
+    ],
+    "view": "north-galactic-pole",
+    "galacticCentre": "up",
+    "longitude90": "left",
+    "basis": "The Sun is the centre of the 4,000 light-year circle ESA draws around it on the companion image (https://commons.wikimedia.org/wiki/File:Gaia%E2%80%99s_star-formation_map_(slider)_ESA512394_-.jpg), found as the bounding box of the pixels that differ from this image: centre (2498.5, 3516.5), radius 156.5 px. The Galactic centre is the centroid of the bar's saturated core (luminance above 240). The image is scaled so the Sun and the centre land on the app's own (8.277 kpc apart); the circle's scale puts them 7.97 kpc apart, so the picture is stretched 4%. The bar's near end lies left of the centre, toward positive longitude, as the Milky Way's does seen from the north Galactic pole with the centre up."
+  },
+  "levels": {
+    "black": 20,
+    "gamma": 1.0,
+    "white": 150,
+    "note": "Presentation only: the same levels on every channel, keeping the artwork's colours: input black point 20, gamma 1, output white 150 of 255, so the backing stays under the dots and its haze ends before the image's square edge."
+  },
+  "outputPx": 2048
+}

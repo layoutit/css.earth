@@ -184,9 +184,6 @@ it must never prune object preparation records.
 
 An explicit `--object=<id>` can select an inventoried context resource for
 shared asset setup. Default scene selection is unchanged. An inventory does
-not claim its files have been published to the runtime asset mirror. The Nearby
-Universe's `pnpm prepare:galaxy-field` command acquires its configured catalogue
-inputs, prepares its fields and refreshes shared lineage/catalogues; source and
-generated-image caches remain ignored. Volume, image-layer and catalogue
+not claim its files have been published to the runtime asset mirror. Volume, image-layer and catalogue
 `prepared/provenance.json` files are baked assets in their inventories. The
 scene-body provenance generator does not reconstruct a missing record for them.

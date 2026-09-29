@@ -24,6 +24,8 @@ export interface VolumeRecipe {
   bake: { sliceCounts: Record<Axis, number>; unitsPerSourceUnit: number; imageWidth: number;
     samplesPerSlab: number; cropTransparent: boolean; opticalWeight: number; imageEncoding?: VolumeImageEncoding; };
   hybrid?: { coreRadiusUnits: number; fadeStartUnits: number };
+  /** false: the object draws no slices of this field (other prepared layers draw it); its frame, anchors and sky remain. */
+  drawSlices?: false;
   anchors: { id: string; referencePositionM: Vector3 }[];
   provenance: { path: string };
   sky?: { path: string };
@@ -98,6 +100,7 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
     const anchor = record(entry, 'anchor'); return { id: text(anchor.id, 'anchor id'), referencePositionM: triple(anchor.referencePositionM, 'anchor position') };
   });
   if (new Set(anchors.map(a => a.id)).size !== anchors.length) throw new TypeError('Anchor IDs must be unique.');
+  if (r.drawSlices !== undefined && (r.drawSlices !== false || r.hybrid !== undefined)) throw new TypeError('drawSlices may only be false, and then without a hybrid core.');
   let hybrid: VolumeRecipe['hybrid'];
   if (r.hybrid !== undefined) {
     const h = record(r.hybrid, 'hybrid');
@@ -146,5 +149,5 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
       samplesPerSlab: positive(b.samplesPerSlab, 'samplesPerSlab', true), cropTransparent: b.cropTransparent,
       opticalWeight: positive(b.opticalWeight, 'opticalWeight'), ...(imageEncoding ? { imageEncoding } : {}) }, anchors,
     provenance: { path: sourcePath(p.path) },
-    ...(sky ? { sky: { path: sourcePath(sky.path) } } : {}), ...(hybrid ? { hybrid } : {}) };
+    ...(sky ? { sky: { path: sourcePath(sky.path) } } : {}), ...(hybrid ? { hybrid } : {}), ...(r.drawSlices === false ? { drawSlices: false as const } : {}) };
 }

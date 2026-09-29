@@ -3,6 +3,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import preparedContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { bodyCardViewAtCamera, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
+import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation';
 import { parsePreparedWorldContext } from '@cssearth/renderer';
 import { systemOverviewDistance, SYSTEM_FRAMING_RADII } from '../system-framing.mts';
@@ -62,13 +63,13 @@ test('body cards switch at the shared camera detail threshold, independent of ca
   assert.equal(bodyCardViewAtCamera(null, frame, optics, "fixture"), 'detail');
 });
 
-test('overview follows the prepared galaxy fade and restores correctly at maximum zoom', () => {
-  const { fadeStartDistanceM: start, fullDistanceM: full } = context.volume;
-  assert.equal(overviewScopeAtCamera(camera(start)), 'system');
-  assert.equal(overviewScopeAtCamera(camera(full)), 'milky-way');
+test('overview leaves the Solar System when its bodies fade and restores correctly at maximum zoom', () => {
+  const { fadeOutStartDistanceM: start, hiddenDistanceM: hidden } = context.system, middle = Math.sqrt(start * hidden);
+  assert.equal(overviewScopeAtCamera(camera(hidden * .99)), 'system');
+  assert.equal(overviewScopeAtCamera(camera(hidden)), 'milky-way');
   assert.equal(overviewScopeAtCamera(camera(context.camera.maximumDistanceM)), 'nearby-universe');
-  assert.equal(overviewScopeAtCamera(camera(start * 1.1), 'milky-way'), 'milky-way');
-  assert.equal(overviewScopeAtCamera(camera(start * .99), 'milky-way'), 'system');
+  assert.equal(overviewScopeAtCamera(camera(middle * 1.01), 'milky-way'), 'milky-way');
+  assert.equal(overviewScopeAtCamera(camera(middle * .99), 'milky-way'), 'system');
 });
 
 test('galactic distance is measured from the Sun, independent of selected body and surface radius', () => {
@@ -96,9 +97,11 @@ test('prepared focus distance follows its catalogue position independently of th
 
 test('extragalactic overview cards follow zoom with hysteresis and preserve distance meaning', () => {
   const pc = 3.085677581491367e16;
-  assert.equal(overviewScopeAtCamera(camera(310000 * pc)), 'local-group');
-  assert.equal(overviewScopeAtCamera(camera(250000 * pc), 'local-group'), 'local-group');
-  assert.equal(overviewScopeAtCamera(camera(230000 * pc), 'local-group'), 'milky-way');
+  const { fadeStartDistanceM: fadeStart, fullDistanceM: fadeEnd } = context.volume, middle = Math.sqrt(fadeStart * fadeEnd);
+  assert.equal(overviewScopeAtCamera(camera(middle)), 'local-group');
+  assert.equal(overviewScopeAtCamera(camera(middle * .99)), 'milky-way');
+  assert.equal(overviewScopeAtCamera(camera(fadeStart * 1.01), 'local-group'), 'local-group');
+  assert.equal(overviewScopeAtCamera(camera(fadeStart * .99), 'local-group'), 'milky-way');
   assert.equal(overviewScopeAtCamera(camera(6e6 * pc)), 'nearby-universe');
   assert.equal(overviewScopeAtCamera(camera(4.5e6 * pc), 'nearby-universe'), 'nearby-universe');
   assert.equal(overviewScopeAtCamera(camera(3.9e6 * pc), 'nearby-universe'), 'local-group');

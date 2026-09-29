@@ -25,7 +25,10 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   expect(Boolean(payload.sky)).toBe(Boolean(recipe.sky));
   // The published bank owns cropped bulge slices only: no flat disc plane and no whole-galaxy impostor views.
   // The full-galaxy bake is intermediate data, retired after the hybrid compile.
-  const images = inventory.assets.filter(asset => asset.location === 'prepared' && /\.(?:png|webp)$/iu.test(asset.filename));
+  // The galaxy's backing image is its own bank (prepared/backing.json, drawn by universe/galaxy-backing.ts), not the volume's.
+  const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u, ''), base);
+  const backing = await readFile(new URL('backing.json', directory), 'utf8').then(text => [JSON.parse(text).leaf.texturePath as string], () => [] as string[]);
+  const images = inventory.assets.filter(asset => asset.location === 'prepared' && /\.(?:png|webp)$/iu.test(asset.filename) && !backing.includes(asset.filename));
   expect(slices.map(leaf => leaf.texturePath).sort()).toEqual(images.map(asset => asset.filename).filter(path => path.startsWith('core/slices/')).sort());
   expect(payload.impostors).toBeUndefined();
   expect(payload.resources).toHaveLength(slices.length + sky.length);
@@ -38,8 +41,7 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   expect(payload.resources.map(({ path, bytes, sha256 }) => ({ filename: path, bytes, sha256 }))
     .sort((a, b) => a.filename.localeCompare(b.filename))).toEqual(images.map(({ filename, bytes, sha256 }) => ({ filename, bytes, sha256 }))
     .sort((a, b) => a.filename.localeCompare(b.filename)));
-  const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u, ''), base);
-  const ownedImages = (await readdir(directory, { recursive: true })).filter(path => /\.(?:png|webp)$/iu.test(path)).sort();
+  const ownedImages = (await readdir(directory, { recursive: true })).filter(path => /\.(?:png|webp)$/iu.test(path) && !backing.includes(path)).sort();
   expect(ownedImages).toEqual(used);
   const skyPaths = new Set(sky.map(face => face.texturePath));
   const banks = { volume: { images: slices.length, bytes: 0, decodedRgbaBytes: 0 }, sky: { images: sky.length, bytes: 0, decodedRgbaBytes: 0 } };
