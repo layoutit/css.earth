@@ -6,6 +6,7 @@ import { retainedPhotographicAtlas, parseNativePhotographicSampling, prepareNati
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { anyChangedAfter } from '../preparation/stale-builds.ts';
 import sharp from 'sharp';
 import type { SolarGeometry } from '../objects/scene/index.ts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
@@ -34,12 +35,6 @@ async function refreshContext(id:string,ids:readonly string[]) {
     return {lensId,observation,surface,input};
   });
   return {id,ids,objectDirectory,sourceDirectory,outputDirectory,stage,publicDirectory,descriptor,recipe,source,sceneBytes,radial,raster,surfacesDocument,surfaces,assetsDocument,selected};
-}
-
-/** Whether any file changed (its contents or its entry) after `time`, or is missing. */
-async function anyChangedAfter(paths:readonly string[],time:number) {
-  for(const path of paths){const info=await stat(path).catch(()=>null);if(!info || Math.max(info.mtimeMs,info.ctimeMs)>time)return true;}
-  return false;
 }
 
 /** What a staged receipt was prepared from. It holds while none of these files changed after the receipt was written. */

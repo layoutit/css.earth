@@ -82,7 +82,6 @@ function config(value: unknown, source: string): Config {
       bytes = number(x.bytes, `input ${id} bytes`);
     if (ids.has(id) || !Number.isSafeInteger(bytes) || bytes < 1)
       throw new TypeError(`Orthophoto input ${id} needs a distinct id and a positive integer bytes count (${JSON.stringify(x.bytes)}).`);
-    if ('sha256' in x) throw new TypeError(`Orthophoto input ${id} sha256 is refused: git and the source mirror identify input bytes.`);
     ids.add(id);
     return {
       id,

@@ -14,7 +14,6 @@ export const preparedObjectCapabilities: ObjectRuntimeCapabilities = Object.free
   createDestinations({ plan: input, ready, lifetime, navigate, reset }) {
     const plan = object(input, 'destinations'), catalog = object(plan.catalog, 'destination catalog');
     const statuses = object(plan.statuses, 'destination statuses');
-    if (Object.hasOwn(catalog, 'sha256')) throw new TypeError('Prepared destination catalog carries sha256; the plan names its catalogue by url.');
     if (typeof catalog.url !== 'string' || !catalog.url.startsWith('/scenes/') ||
         !integer(catalog.bytes, 1) || !integer(catalog.count, 1) ||
         typeof plan.defaultLens !== 'string' || typeof statuses.detail !== 'string' || typeof statuses.overview !== 'string') {

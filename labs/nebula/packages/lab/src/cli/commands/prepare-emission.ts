@@ -3,7 +3,6 @@ import {applyRecordedPointMasks,emissionInputChannels,emissionRasterPixels,creat
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { refuseRecordedDigests } from '@cssearth/nebula-reconstruction/observations/recorded-digests';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { inferEmission, projectEmission, type InferenceGrid, type SymmetryPrior } from '@cssearth/nebula-reconstruction/methods/symmetry/solver';
@@ -28,7 +27,6 @@ const json = async (path: string, value: unknown) => writeFile(path, JSON.string
 const recipePath = process.argv[2];
 if (!recipePath || process.argv.length !== 3) throw new TypeError('Usage: prepare-emission <recipe.json>');
 const recipeText = await readFile(recipePath, 'utf8'), rawRecipe: unknown = JSON.parse(recipeText);
-refuseRecordedDigests(rawRecipe, recipePath);
 const recipe = rawRecipe as Recipe;
 if (recipe.schema !== 'cssearth-emission-inference@1' || !/^[a-z0-9-]+$/.test(recipe.id) ||
     !/^https:\/\//.test(recipe.source.url) ||

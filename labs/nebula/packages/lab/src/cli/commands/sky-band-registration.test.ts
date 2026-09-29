@@ -30,6 +30,4 @@ test('recipes and candidates are validated at runtime', () => {
   assert.throws(() => candidate('x', { url: 'https://example.org/x.png' }), /composed candidates/);
   assert.throws(() => parseSkyBandRegistration({ ...recipe, negativeControls: [{ ...recipe.negativeControls[0]!, receipt: recipe.fixedWcsChecks[0]!.receipt }] }), /exactly once/);
   assert.throws(() => parseSkyBandRegistration({ ...recipe, fixedWcsChecks: undefined }), /Unsupported/);
-  assert.throws(() => parseSkyBandRegistration({ ...recipe, stars: { ...stars, ['sha' + 256]: 'c'.repeat(64) } }), /stars\.sha256 records a file digest/);
-  assert.throws(() => candidate('x', { ['sha' + 256]: 'b'.repeat(64) }), /Image candidate x: sha256 records a file digest/);
 });

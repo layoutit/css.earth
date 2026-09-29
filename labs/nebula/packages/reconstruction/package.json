@@ -7,7 +7,6 @@
     "./registration/particle-alignment": "./src/registration/particle-alignment.ts",
     "./registration/stellar": "./src/registration/stellar.ts",
     "./registration/overlap": "./src/registration/overlap.ts",
-    "./observations/recorded-digests": "./src/observations/recorded-digests.ts",
     "./evidence/wavelets": "./src/evidence/wavelets.ts",
     "./evidence/geometry/ellipse": "./src/evidence/geometry/ellipse.ts",
     "./evidence/geometry/ridges": "./src/evidence/geometry/ridges.ts",

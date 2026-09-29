@@ -136,7 +136,6 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
     const filter = record(lens.densityFilter, 'delivered density filter');
     assert.deepEqual({ cutoff: filter.cutoff, softness: filter.softness, showRemoved: filter.showRemoved },
       { cutoff: 0, softness: .25, showRemoved: false }, 'Compact replay requires the accepted unchanged density filter.');
-    assert.ok(!Object.hasOwn(lens, 'sourceDigest'), `${imageId}: delivered lens carries the removed digest field sourceDigest.`);
     const bounds = bounds2(lens.tangentBoundsKpc, `${imageId} tangent bounds`);
 
     const registered = await pinned(root, parsePin(lens.registered, `${imageId} registered image`));

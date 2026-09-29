@@ -2,7 +2,6 @@
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { refuseRecordedDigests } from '@cssearth/nebula-reconstruction/observations/recorded-digests';
 import { nativeStarless } from '../../server/workflows/emission-inference/native-source.ts';
 import { analyzeStructureMap, colorStructureLayer, structureLayers } from '@cssearth/nebula-reconstruction/evidence/structure-map';
 import type { WaveletSettings } from '@cssearth/nebula-reconstruction/evidence/wavelets';
@@ -21,7 +20,6 @@ if (recipe.schema !== 'cssearth-nebula-structure-recipe@1') throw new TypeError(
 const id = text(recipe.id), width = number(recipe.workingWidth);
 if (!/^[a-z0-9-]+$/.test(id) || !Number.isInteger(width) || width < 64 || width > 1024) throw new TypeError('Bounded id/working raster required.');
 const sourceRecipePath = text(recipe.sourceRecipe), sourceRecipe = record(JSON.parse(await readFile(sourceRecipePath, 'utf8')));
-refuseRecordedDigests(sourceRecipe, sourceRecipePath);
 const source = record(sourceRecipe.source);
 const removal = record(sourceRecipe.nativeRemoval), model = record(removal.model);
 const sourceUrl = text(source.url), nativeWidth = number(source.width), nativeHeight = number(source.height);

@@ -204,7 +204,7 @@ export function requireOptionalPresentation(plan: Record<string, unknown>, tree:
   }
   if (plan.destinations !== undefined) {
     const destinations = record(plan.destinations, 'destinations', ['catalog', 'defaultLens', 'statuses']);
-    const catalog = record(destinations.catalog, 'destination catalog', ['url', 'bytes', 'count']);
+    const catalog = record(destinations.catalog, 'destination catalog', ['url', 'bytes', 'count', 'sourcePage', 'license', 'snapshotDate']);
     if (!text(catalog.url, 'catalog URL').startsWith('/scenes/') || !lensIds.includes(text(destinations.defaultLens, 'destination lens'))) fail('destinations require a /scenes/ catalog and a declared lens');
     integer(catalog.bytes, 'catalog bytes', 1); integer(catalog.count, 'catalog count', 1);
     const statuses = record(destinations.statuses, 'destination statuses', ['detail', 'overview']); text(statuses.detail, 'detail status'); text(statuses.overview, 'overview status');

@@ -79,8 +79,8 @@ test('physical inspection and export share the existing loader, frame and credit
     const terminal=await listArtifactOutputs(handoff.receipt);assert.equal(terminal.terminal,true);assert.deepEqual(terminal.outputs,[]);
     await writeFile(handoff.object,'changed');await assert.rejects(listArtifactOutputs(handoff.receipt),/no longer its recorded size/);
     await writeFile(resolve(copy,'prepared/stars.bin'),'changed');
-    const blocked=await listArtifactOutputs(object),choice=blocked.outputs.find(output=>output.kind==='points');assert.equal(choice?.available,false);assert.match(choice?.reason??'',/identity mismatch|pin mismatch/);
-    await assert.rejects(exportSpatialObject(object,'points',resolve(root,'output')),/identity mismatch|pin mismatch/);
+    const blocked=await listArtifactOutputs(object),choice=blocked.outputs.find(output=>output.kind==='points');assert.equal(choice?.available,false);assert.match(choice?.reason??'',/size/);
+    await assert.rejects(exportSpatialObject(object,'points',resolve(root,'output')),/size/);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 

@@ -28,7 +28,6 @@ export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
  for(const collection of ['inputs','generatedIntermediates','documents'] as const){
   const entries=manifest[collection];if(!Array.isArray(entries)||(collection==='inputs'&&!entries.length))throw new TypeError(`Source manifest ${collection} is missing or empty.`);
   for(const value of entries){const entry=object(value);if(typeof entry.path!=='string')throw new TypeError('Source path is missing.');containedPath('.',entry.path);
-   if('sha256' in entry)throw new TypeError(`Source manifest ${id??'(unnamed)'} ${collection} ${entry.path}: sha256 ${JSON.stringify(entry.sha256)} is refused; git and the source mirror identify source bytes.`);
    if(paths.has(entry.path))throw new TypeError(`Duplicate source path ${entry.path}.`);paths.add(entry.path);
    if(entry.range!==undefined)assertSourceRange(entry as unknown as SourceEntry,`Source ${entry.path}`);
    if(collection==='inputs'||entry.sourceBinding!==undefined)parseSourceBinding(entry.sourceBinding);

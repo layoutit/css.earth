@@ -8,7 +8,7 @@ import { gzipSync } from 'node:zlib';
 import { sha256 as sha } from '@cssearth/core/node';
 import { card } from '../../fixtures/fits/helpers.mts';
 import { encodeAsinhBands } from '@cssearth/bake/objects/color';
-import { composeSkyBandPlanes, composeSkyBands, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from '@cssearth/telescope-cli/sky/sky-band-composite';
+import { composeSkyBandPlanes, composeSkyBands, hips2fitsCachePath, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from '@cssearth/telescope-cli/sky/sky-band-composite';
 import { gridWcs } from '@cssearth/bake/objects/raster';
 
 const width = 16, height = 16, ra = 56.477, dec = 24.17, grid = { width, height, fovDeg: 0.016, centerIcrsDegrees: [ra, dec] as [number, number] };
@@ -24,12 +24,12 @@ function hips2fits(hips: string, sample: (x: number, fitsRow: number) => number,
   for (let row = 0; row < height; row++) for (let x = 0; x < width; x++) data.writeFloatBE(sample(x, row), (row * width + x) * 4);
   return Buffer.concat([header, data]);
 }
-/** The cache names a hips2fits response by its request URL. */
+/** The cache names a hips2fits response by the survey and the grid it was asked for. */
 async function withCache(run: (cache: string, place: (bytes: Buffer, hips: string) => Promise<{ bytes: number }>) => Promise<void>) {
   const cache = await mkdtemp(join(tmpdir(), 'sky-bands-'));
   try {
     await run(cache, async (bytes, hips) => {
-      await mkdir(join(cache, 'hips2fits'), { recursive: true }); await writeFile(join(cache, 'hips2fits', `${sha(skyBandUrl(grid, hips))}.fits`), bytes);
+      await mkdir(join(cache, 'hips2fits'), { recursive: true }); await writeFile(hips2fitsCachePath(grid, hips, cache), bytes);
       return { bytes: bytes.length };
     });
   } finally { await rm(cache, { recursive: true, force: true }); }

@@ -6,7 +6,6 @@ import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { cataloguePosition, METERS_PER_KPC, type Vector3, type VolumeRecipe } from '@cssearth/bake/volume';
 import { planFullDensityGrid } from '@cssearth/nebula-reconstruction/stars/full-density';
 import { sourceBytes, prepareVolumeSlices } from '@cssearth/bake/volume/node';
-import { refuseRecordedDigests } from '@cssearth/nebula-reconstruction/observations/recorded-digests';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 type Pin = {
@@ -26,7 +25,6 @@ function pin(value: unknown): Pin {
 const json = async (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 export async function prepareCatalogueDensity(configPath: string) {
     const root = process.cwd(), config = object(JSON.parse(await readFile(configPath, 'utf8')) as unknown);
-    refuseRecordedDigests(config, configPath);
     if (!['cssearth-catalogue-density@1', 'cssearth-tracer-density@1'].includes(String(config.schema)) || typeof config.id !== 'string' ||
         !/^[a-z0-9-]+$/.test(config.id) || typeof config.outputDirectory !== 'string' ||
         !config.outputDirectory.startsWith('.local/nebula-lab/'))

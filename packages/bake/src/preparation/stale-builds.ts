@@ -8,6 +8,12 @@ import { spawn } from 'node:child_process';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 
+/** Whether any file changed (its contents or its entry) after `time`, or is missing. */
+export async function anyChangedAfter(paths: readonly string[], time: number) {
+  for (const path of paths) { const info = await stat(path).catch(() => null); if (!info || Math.max(info.mtimeMs, info.ctimeMs) > time) return true; }
+  return false;
+}
+
 /** `inputs` names the bundler's metafile: every file the last build read counts as a source, so an import from outside the
  * declared directories (src/platform, a site module) still marks the bundle stale. `base` is the directory tsup ran from,
  * which the metafile's input paths are relative to. */

@@ -52,18 +52,13 @@ export interface ProductRecord extends ProductRun { readonly schema: typeof PROD
 export function parseProductRecord(value: unknown): ProductRecord {
   const record = requireRecord(value, 'product record');
   if (record.schema !== PRODUCT_RECORD_SCHEMA) throw new TypeError(`Unsupported product record schema ${String(record.schema)}.`);
-  // The archive and version control identify bytes; a record carries no content digest, and one that does is refused.
-  const refuseDigests = (entry: Record<string, unknown>, label: string): void => {
-    for (const field of ['sha256', 'toolchainDigest']) if (entry[field] !== undefined) throw new TypeError(`${label} has a ${field} field (${String(entry[field])}); product records carry no content digest.`);
-  };
-  refuseDigests(record, `Product record ${String(record.telescope)}/${String(record.stage)}`);
   const sized = <T extends { bytes: number }>(entry: T, label: string) => {
     if (!Number.isSafeInteger(entry.bytes) || entry.bytes < 0) throw new TypeError(`${label} needs a byte count.`);
     return entry;
   };
-  const inputs = requireArray(record.inputs, 'inputs').map((raw, index) => { const entry = requireRecord(raw, `input ${index}`); refuseDigests(entry, `Input ${index} (${String(entry.identity)})`);
+  const inputs = requireArray(record.inputs, 'inputs').map((raw, index) => { const entry = requireRecord(raw, `input ${index}`);
     return sized({ role: requireString(entry.role, 'input role'), identity: requireString(entry.identity, 'input identity'), bytes: requireFiniteNumber(entry.bytes, 'input bytes') }, `Input ${index}`); });
-  const outputs = requireArray(record.outputs, 'outputs').map((raw, index) => { const entry = requireRecord(raw, `output ${index}`); refuseDigests(entry, `Output ${index} (${String(entry.path)})`);
+  const outputs = requireArray(record.outputs, 'outputs').map((raw, index) => { const entry = requireRecord(raw, `output ${index}`);
     return sized({ path: requireString(entry.path, 'output path'), bytes: requireFiniteNumber(entry.bytes, 'output bytes'),
       ...(entry.units === undefined ? {} : { units: requireString(entry.units, 'units') }),
       ...(entry.conventions === undefined ? {} : { conventions: Object.fromEntries(Object.entries(requireRecord(entry.conventions, 'conventions')).map(([key, text]) => [key, requireString(text, `convention ${key}`)])) }) }, `Output ${index}`); });

@@ -5,7 +5,6 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { prepareOverlayGeometry } from '../../adapters/renderer/overlay-geometry.ts';
-import { refuseRecordedDigests } from '@cssearth/nebula-reconstruction/observations/recorded-digests';
 import { overlayCorners, type ImageWcs, type OverlayFrame, defaultOverlayPlacement, updateOverlayPlacement, type OverlayPlacement, transferOverlayAlignment, registeredOverlayCorners, type ImageRegistration } from '@cssearth/bake/volume';
 import { skyBandCompositeFile } from '../../adapters/sources/sky-bands.ts';
 import { composeSkyBandSource, verifySkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
@@ -57,7 +56,6 @@ async function inputBytes(input: InputImage) {
 
 export async function prepareOverlays(path: string) {
   const recipe: Recipe = parseLabModelJson(await readFile(path, 'utf8'));
-  refuseRecordedDigests(recipe, path);
   if (recipe.schema !== 'cssearth-nebula-overlay-recipe@1' || !Number.isInteger(recipe.maxPixels) ||
       recipe.maxPixels < 256 || recipe.maxPixels > 4096) throw new TypeError('Invalid overlay recipe.');
   for (const target of recipe.targets) {

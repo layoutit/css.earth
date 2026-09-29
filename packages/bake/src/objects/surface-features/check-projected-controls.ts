@@ -65,7 +65,6 @@ export async function checkProjectedControlRecipe(recipePath: string, inputDirec
   const input = async (v: unknown) => {
     const p = record(v, 'input'), file = text(p.file, 'input filename');
     if (basename(file) !== file || file === '.' || file === '..' || file.includes('\\')) throw new Error('Input must be a filename in the input directory.');
-    if ('sha256' in p) throw new Error(`${recipePath}: input ${file} sha256 is refused; git and the source mirror identify input bytes.`);
     const bytes = await readFile(resolve(inputDirectory, file));
     return { file, bytes, path: resolve(inputDirectory, file) };
   };

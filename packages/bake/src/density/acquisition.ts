@@ -22,7 +22,6 @@ export function parseVolumeAcquisition(value: unknown): VolumeAcquisition {
   if (data.schema !== 'cssearth-raw-volume-acquisition@1' || source.layout !== 'x-fastest-rgba8' || source.invertZ !== false ||
     reduction.method !== 'encoded-box-average-round-half-up' || compression.format !== 'ktx2-rgba8-zstd') throw new TypeError('Unsupported raw volume acquisition.');
   if (typeof source.url !== 'string' || new URL(source.url).protocol !== 'https:') throw new TypeError('Raw source requires HTTPS.');
-  if (Object.hasOwn(source, 'sha256')) throw new TypeError(`Raw volume acquisition ${source.url} carries the removed digest field source.sha256.`);
   if (dimensions.some(n => !Number.isSafeInteger(n) || n < 1) || source.bytes !== dimensions[0] * dimensions[1] * dimensions[2] * 4) throw new TypeError('Invalid raw volume dimensions/bytes.');
   const factor = reduction.factor;
   if (typeof factor !== 'number' || !Number.isSafeInteger(factor) || factor < 1 ||

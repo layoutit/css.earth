@@ -1,5 +1,5 @@
 import { parseSharedView } from '@cssearth/renderer/navigation/view-url.ts';
-import { savedWorldCamera } from '@cssearth/renderer/navigation/saved-world-camera.ts';
+import { savedWorldCamera } from '@cssearth/renderer/navigation';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { loadPreparedCssObject } from '@cssearth/renderer';

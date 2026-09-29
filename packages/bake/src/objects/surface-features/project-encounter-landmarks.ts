@@ -47,7 +47,6 @@ function parseConfiguration(value: unknown, sourceDirectory: string): Configurat
     ids.add(id);
     const bytes = finite(input.bytes, `encounter landmark input ${id} bytes`);
     if (!Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError('Encounter landmark input bytes must be a positive integer.');
-    if ('sha256' in input) throw new TypeError(`Encounter landmark input ${id} sha256 is refused: git and the source mirror identify input bytes.`);
     return { id, path: text(input.path, `encounter landmark input ${id} path`), bytes, absolute: safePath(sourceDirectory, input.path, `encounter landmark input ${id} path`) };
   });
   const inputId = (value: unknown, at: string) => { const id = text(value, at); if (!ids.has(id)) throw new TypeError(`${at} must identify a declared input.`); return id; };

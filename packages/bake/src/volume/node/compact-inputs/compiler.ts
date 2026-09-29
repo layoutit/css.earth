@@ -16,8 +16,6 @@ export function readCompactCompiler(value: unknown) {
   if (!record(value) || value.schema !== 'cssearth-compact-compiler@1' || !text(value.objectId) ||
       !record(value.provenance) || !Array.isArray(value.materials) || !Array.isArray(value.sources) || !Array.isArray(value.expected))
     throw new TypeError('Invalid compact compiler inputs.');
-  for (const key of ['resultSha256', 'modelSha256', 'methodSha256']) if (Object.hasOwn(value.provenance, key))
-    throw new TypeError(`Compact compiler inputs for ${value.objectId} carry the removed digest field provenance.${key}.`);
   const scene = readCompilerBakeResult(value.scene), field = readRetainedEmissionField(value.field);
   if (field.identity !== scene.fieldIdentity) throw new TypeError(`Compact field ${field.identity} differs from the scene's field ${scene.fieldIdentity}.`);
   const componentIds = field.components.map(component => component.id);
@@ -43,7 +41,7 @@ export function readCompactCompiler(value: unknown) {
     if (!record(bank) || !text(bank.id) || !Array.isArray(bank.resources)) throw new TypeError('Invalid expected bank.');
     const resources: Resource[] = bank.resources.map((resource: unknown) => {
       if (!record(resource) || !text(resource.path) || !/^[a-z0-9/-]+\.png$/.test(resource.path) || resource.path.split('/').includes('..') ||
-          Object.hasOwn(resource, 'sha256') || typeof resource.bytes !== 'number' || !Number.isSafeInteger(resource.bytes) || resource.bytes <= 0 || typeof resource.width !== 'number' || !Number.isSafeInteger(resource.width) || resource.width <= 0 ||
+          typeof resource.bytes !== 'number' || !Number.isSafeInteger(resource.bytes) || resource.bytes <= 0 || typeof resource.width !== 'number' || !Number.isSafeInteger(resource.width) || resource.width <= 0 ||
           typeof resource.height !== 'number' || !Number.isSafeInteger(resource.height) || resource.height <= 0)
         throw new TypeError('Invalid expected resource.');
       return { path: resource.path, bytes: resource.bytes, width: resource.width, height: resource.height };

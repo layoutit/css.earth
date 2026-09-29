@@ -34,7 +34,7 @@ export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema
   schema: string; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan | null;
   materials: readonly PreparedContractTrack[]; variants: readonly PreparedContractVariant[];
   animations: readonly (Omit<PreparedPresentationDefinition["animations"][number], "keyframes"> & { keyframes: { offset: number; transform: string }[] })[];
-  destinations?: { catalog: { url: string; bytes: number; count: number }; defaultLens: string; statuses: { detail: string; overview: string } };
+  destinations?: { catalog: { url: string; bytes: number; count: number; sourcePage?: string; license?: string; snapshotDate?: string }; defaultLens: string; statuses: { detail: string; overview: string } };
 };
 import { requireObjectControls } from "@cssearth/renderer/runtime/shell-contract.ts";
 import { validatePreparedCubicSky } from "./cubic-sky-contract.ts";
@@ -290,7 +290,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   if (plan.destinations !== undefined) {
     record(plan.destinations, "destinations", ["catalog", "defaultLens", "statuses"]);
     const {catalog,defaultLens,statuses}=plan.destinations;
-    record(catalog, "destinations catalog", ["url", "bytes", "count"]);
+    record(catalog, "destinations catalog", ["url", "bytes", "count", "sourcePage", "license", "snapshotDate"]);
     if (!catalog.url?.startsWith("/scenes/") || !Number.isSafeInteger(catalog.bytes) || catalog.bytes < 1 ||
         !Number.isSafeInteger(catalog.count) || catalog.count < 1 ||
         !lensIds.includes(defaultLens)) fail("destinations require a catalogue and declared lens");

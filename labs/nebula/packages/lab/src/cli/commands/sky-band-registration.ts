@@ -7,7 +7,6 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { verifyFixedCatalogue } from '@cssearth/nebula-reconstruction/registration/fixed-catalogue';
 import { validateImageWcs, type ImageWcs } from '@cssearth/bake/volume';
-import { refuseRecordedDigests } from '@cssearth/nebula-reconstruction/observations/recorded-digests';
 import { verifySkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
 
 type Pin = { path: string };
@@ -46,7 +45,6 @@ const receiptPath = (value: unknown, label: string) => {
 };
 
 export function parseSkyBandRegistration(value: unknown): SkyBandRegistrationRecipe {
-  refuseRecordedDigests(value, 'Sky band registration');
   const row = record(value, 'Sky band registration'), stars = record(row.stars, 'Stars');
   if (row.schema !== 'cssearth-sky-band-registration@1' || !Array.isArray(row.catalogueChecks) || !Array.isArray(row.gridTransfers))
     throw new TypeError('Unsupported sky band registration recipe.');
@@ -83,7 +81,6 @@ export function parseSkyBandRegistration(value: unknown): SkyBandRegistrationRec
 /** A catalogue entry that carries one fixed WCS: a composed sky band raster, or an already pinned publisher raster. */
 export function fixedWcsCandidate(value: unknown, requireSkyBands: boolean, fallbackWcs?: ImageWcs): SkyBandCandidate {
   const row = record(value, 'Image candidate');
-  refuseRecordedDigests(row, `Image candidate ${String(row.id)}`);
   if (requireSkyBands && (row.skyBands === undefined || row.url !== undefined)) throw new TypeError(`${String(row.id)}: sky band registration applies only to composed candidates.`);
   // A negative control supplies the WCS under test; a candidate registered by matched stars has none of its own.
   if (row.wcs === undefined && !fallbackWcs) throw new TypeError(`${String(row.id)}: a fixed-WCS check needs the candidate's own WCS.`);

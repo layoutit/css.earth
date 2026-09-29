@@ -36,7 +36,7 @@ function readSlices(value: unknown): VolumeSliceQuad[] {
         ![q.widthPx, q.heightPx, q.bytes].every(n => Number.isSafeInteger(n) && Number(n) > 0) ||
         Number(q.widthPx) > 1024 || Number(q.heightPx) > 2048 ||
         typeof q.texturePath !== 'string' || !/^slices\/[xyz]\/\d+\.png$/.test(q.texturePath) ||
-        Object.hasOwn(q, 'sha256') || !Array.isArray(q.vertices) || q.vertices.length !== 4 ||
+        !Array.isArray(q.vertices) || q.vertices.length !== 4 ||
         !q.vertices.every(vector) || !vector(q.center) || !vector(q.normal) || !Array.isArray(q.uvs) || q.uvs.length !== 4 || !q.uvs.every(uv) ||
         (q.axis !== 'x' && q.axis !== 'y' && q.axis !== 'z') || q.axis !== q.id[0] || q.sliceIndex !== Number(q.id.slice(2)) ||
         typeof q.alphaCoverage !== 'number' || !Number.isFinite(q.alphaCoverage) || q.alphaCoverage < 0 || q.alphaCoverage > 1)

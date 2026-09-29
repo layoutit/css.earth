@@ -42,34 +42,6 @@ const worldContext = Object.freeze({
   maximumExtentUnits: 1e7,
 });
 
-test("the two stages crossfade in order as the disc shrinks, drawing no billboard disc", () => {
-  const stages = [40, 20, 17, 13, 10, 7, 5.5, 4.4, 3].map((diameter) =>
-    levelOfDetailFor(levelOfDetail, diameter));
-  // A resolving body goes from its marker straight to its mesh. No billboard
-  // disc stands between them, so only the geometry and marker stages remain.
-  assert.deepEqual(stages.map(({ stage }) => stage), [
-    "geometry", "geometry", "geometry", "geometry", "geometry", "geometry",
-    "geometry", "marker", "marker",
-  ]);
-  // The mesh stays painted until the marker is opaque, and the marker is
-  // fully opaque only at the marker stage.
-  for (const sample of stages) {
-    assert.equal(sample.billboardOpacity, 0);
-    assert.ok(sample.proxyOpacity >= 0 && sample.proxyOpacity <= 1);
-    assert.ok(sample.markerOpacity >= 0 && sample.markerOpacity <= 1);
-    // The prepared billboard band only times the selected navigation marker's
-    // fade over the mesh, so it is complete well before the mesh hides.
-    if (sample.markerOpacity > 0) assert.equal(sample.proxyOpacity, 1);
-    assert.equal(sample.stage === "marker", sample.markerOpacity === 1);
-    assert.equal(sample.stage === "geometry", sample.markerOpacity < 1);
-  }
-  assert.ok(Math.abs(stages[2].proxyOpacity - 0.5) < 1e-9);
-  assert.deepEqual(stages.map(({ proxyOpacity }) => Math.round(proxyOpacity * 100) / 100),
-    [0, 0, 0.5, 1, 1, 1, 1, 1, 1]);
-  assert.deepEqual(stages.map(({ markerOpacity }) => Math.round(markerOpacity * 100) / 100),
-    [0, 0, 0, 0, 0, 0.29, 0.71, 1, 1]);
-});
-
 test("the orbit line fades out as the disc fills the viewport", () => {
   const fade = plan.orbitLineFade;
   assert.equal(orbitLineOpacity(fade, 0.05), 1);

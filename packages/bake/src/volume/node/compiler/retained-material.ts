@@ -27,7 +27,7 @@ function quad(v: unknown): v is VolumeSliceQuad {
     integer(v.widthPx) && v.widthPx <= 8192 && integer(v.heightPx) && v.heightPx <= 8192 &&
     Array.isArray(v.vertices) && v.vertices.length === 4 && v.vertices.every(vector) &&
     Array.isArray(v.uvs) && v.uvs.length === 4 && v.uvs.every(uv => Array.isArray(uv) && uv.length === 2 && uv.every(finite)) &&
-    vector(v.center) && vector(v.normal) && !Object.hasOwn(v, 'sha256') && integer(v.bytes) &&
+    vector(v.center) && vector(v.normal) && integer(v.bytes) &&
     finite(v.alphaCoverage) && v.alphaCoverage >= 0 && v.alphaCoverage <= 1;
 }
 /** Validate the external slice manifest before exposing it to the material sampler. */

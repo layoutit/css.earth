@@ -144,7 +144,6 @@ test('raw importer preserves X-fastest RGBA order, encoded filtering and rejects
   assert.equal(unchanged.encodedRgba,raw,'factor one must preserve the original buffer and every encoded byte');
   assert.deepEqual([unchanged.width,unchanged.height,unchanged.depth],[4,4,4]);
   assert.throws(()=>parseVolumeAcquisition({...acquisition,source:{...acquisition.source,invertZ:true}}),/Unsupported/);
-  assert.throws(()=>parseVolumeAcquisition({...acquisition,source:{...acquisition.source,sha256:'recorded'}}),/removed digest field/);
 });
 
 test('OpenSpace shader transfer keeps independent RGB emission and alpha extinction in actual slabs', async () => {

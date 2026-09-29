@@ -128,7 +128,6 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
       !reference || reference.format !== PREPARED_CSS_OBJECT_FORMAT || typeof reference.url !== 'string') {
     throw new TypeError('Authored descriptor identity or source references are invalid.');
   }
-  if (Object.hasOwn(reference, 'sha256')) throw new TypeError(`${objectId}: object.json prepared carries the removed digest field sha256.`);
   const directory = resolve(root, `src/objects/${objectId}`);
   const manifest = requireRecord(JSON.parse(await readText(resolve(directory, 'source/manifest.json'))), 'Source manifest');
   const records = ['inputs', 'documents', 'generatedIntermediates'].flatMap(key => requireArray(manifest[key] ?? [], key).map(value => requireRecord(value, key)));

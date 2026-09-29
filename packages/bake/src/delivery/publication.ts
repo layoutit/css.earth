@@ -87,8 +87,8 @@ export async function verifySurfaceAssetRecords(id: string, surfaces: unknown, m
     if (Array.isArray(value)) { for (const item of value) await visit(item); return; }
     if (value === null || typeof value !== 'object') return;
     const record=requireRecord(value),asset=typeof record.url==='string'?assets.get(record.url):undefined;
-    if (asset && 'sha256' in record && 'bytes' in record) {
-      if (asset.sha256!==record.sha256 || asset.bytes!==record.bytes) throw new Error(`Surface record disagrees with published atlas: ${asset.filename}. Rebake the image and its layout together.`);
+    if (asset && 'bytes' in record) {
+      if (asset.bytes!==record.bytes) throw new Error(`Surface record disagrees with published atlas: ${asset.filename}. Rebake the image and its layout together.`);
       if ('width' in record && 'height' in record) {
         const image=await sharp(resolve(publicDirectory,asset.filename)).metadata();
         if (image.width!==record.width || image.height!==record.height) throw new Error(`Surface dimensions disagree with published atlas: ${asset.filename}.`);
