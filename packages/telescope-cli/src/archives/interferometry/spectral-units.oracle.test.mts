@@ -6,7 +6,7 @@ import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core
 import { brightnessTemperatureKelvin, planckIntensity } from '@cssearth/telescope-cli/archives/interferometry/alma-disc-selfcal';
 import { rayleighPerSample } from '@cssearth/telescope-cli/archives/hst/line-stack-reduction';
 
-const fixture = await readOracleFixture('physical-units/spectral.json');
+const fixture = await readOracleFixture(`${import.meta.dirname}/fixtures/oracles/physical-units/spectral.json`);
 function relativeClose(actual: number, expected: number, label: string, tolerance = 3e-12) {
   const relative = Math.abs(actual - expected) / Math.abs(expected);
   assert.ok(relative <= tolerance, `${label}: ${actual} differs from ${expected} by ${relative}`);

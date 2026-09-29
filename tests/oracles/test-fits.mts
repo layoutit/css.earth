@@ -27,7 +27,7 @@ run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
 const unit = ['tests/oracles/fits/core.oracle.test.mts', 'tests/oracles/fits/sky-orientation.oracle.test.mts', 'tests/oracles/fits/sky-projection.oracle.test.mts',
   'tests/oracles/fits/file-region.oracle.test.mts', 'packages/bake/src/objects/layers/observation/fixtures/fits/rice.oracle.test.mts',
   'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'packages/bake/src/objects/color/color-transfer.oracle.test.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.oracle.test.mts',
-  'packages/bake/src/objects/raster/wise-atlas-mosaic.test.mts', 'tests/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts',
+  'packages/bake/src/objects/raster/wise-atlas-mosaic.test.mts', 'packages/telescope-cli/src/sky/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts',
   "packages/bake/src/objects/raster/observed/observed-fits.test.mts",
   "packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.test.mts",
   "packages/bake/src/objects/raster/fits-image-map.test.mts",

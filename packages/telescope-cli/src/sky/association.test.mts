@@ -8,7 +8,7 @@ import { associate, candidatesAtEpoch, epochMjd, hostedPlanetsOf, readRelativeAs
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const root = WORKSPACE;
-const fixture = resolve(root, 'tests/fixtures/telescope-families/sky-association-beta-pictoris/gravity-2026.csv');
+const fixture = resolve(root, 'packages/telescope-cli/src/families/fixtures/telescope-families/sky-association-beta-pictoris/gravity-2026.csv');
 const temporary = async () => mkdtemp(resolve(tmpdir(), 'sky-association-'));
 
 test('relative astrometry is read in the orbitize! layout and refuses what it cannot represent', async () => {
@@ -76,7 +76,7 @@ test('the association command writes its rows, its limits and a chart for each m
  * planets and a candidate fifth source on 2023 August 3; its Table 3 predicts the known planets for that date with
  * whereistheplanet and judges each axis against the measurement's own error bars.
  */
-const HR_8799 = resolve(root, 'tests/fixtures/telescope-families/sky-association-hr-8799/niriss-ami-2023.csv');
+const HR_8799 = resolve(root, 'packages/telescope-cli/src/families/fixtures/telescope-families/sky-association-hr-8799/niriss-ami-2023.csv');
 const PAPER_PREDICTION = { 'hr-8799-b': [1635.41, 532.42], 'hr-8799-c': [-288.59, 909.70], 'hr-8799-d': [-606.14, -345.32], 'hr-8799-e': [-231.65, 325.88] } as Record<string, [number, number]>;
 /**
  * Table 3's checks: how many of its own sigma the paper needs before each axis agrees. Its declination cell for e is

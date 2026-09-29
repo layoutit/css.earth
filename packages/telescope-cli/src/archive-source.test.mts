@@ -192,7 +192,7 @@ test('Chandra revalidates its ObsID and pins one level-2 event source', async ()
 test('an authentic Chandra ACIS event source enters the existing event operations with pinned bytes', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'archive-chandra-events-'));
   const obsid = 6431, name = 'acisf06431N003_evt2.fits.gz';
-  const bytes = await readFile(resolve(import.meta.dirname, '../../../tests/fixtures/telescope-families/chandra-events', name));
+  const bytes = await readFile(resolve(import.meta.dirname, 'families/fixtures/telescope-families/chandra-events', name));
   const source = { obsid, targetName: 'Polaris', instrument: 'ACIS-S', grating: 'NONE', startDate: '2005-01-01' };
   const observation: ChandraObservation = { ...source, detector: 'ACIS-7', dataMode: 'FAINT', proposalNumber: '1', sequenceNumber: '1',
     startMet: 0, stopMet: 1, livetimeSeconds: 1, catalogueExposureSeconds: 1, datasetDoi: 'fixture', ascdsVersion: 'fixture',

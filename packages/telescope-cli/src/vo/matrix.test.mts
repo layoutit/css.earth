@@ -10,7 +10,7 @@ import { planAccess } from './access.mts';
 import { recordKey, type DiscoverySnapshot, type MetadataResponse } from '@cssearth/telescope/node';
 import { normalizeSnapshot, SERVICES } from './discovery.mts';
 
-const fixtures = resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo');
+const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-vo');
 const target = { id: 'betelgeuse', names: ['Betelgeuse'], classification: 'star', classificationSource: 'fixture catalogue' };
 const baseRequest = { target: target.id, wavelengthMicrometres: [0.78, 0.85] as const, kind: 'image' as const, result: 'telescope-product' as const };
 const circle = (radiusDegrees: number) => ({ frame: 'icrs' as const, shape: 'circle' as const, raDegrees: 88.792938, decDegrees: 7.407063, radiusDegrees });

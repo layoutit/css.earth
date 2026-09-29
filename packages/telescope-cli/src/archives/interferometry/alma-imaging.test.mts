@@ -8,7 +8,7 @@ import { parseContinuumRanges } from './alma-calibration.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const root = WORKSPACE;
-const read = (name: string) => readFile(resolve(root, 'tests/fixtures/alma', name), 'utf8');
+const read = (name: string) => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma', name), 'utf8');
 
 test('the pipeline’s own continuum imaging of a field is read from its command log', async () => {
   const imaging = pipelineImaging(await read('casa_commands.tclean.log'), 'R_Dor');

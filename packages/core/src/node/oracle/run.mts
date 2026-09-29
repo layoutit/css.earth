@@ -13,6 +13,8 @@ import { projectRoot } from '../project-root.ts';
 
 const root = projectRoot(import.meta.url), oracles = resolve(root, 'tests/oracles'), python = resolve(root, '.local/oracles/venv/bin/python');
 const relocated: Readonly<Record<string, string>> = {
+  "fits/binary-table": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/fits/binary-table.py",
+  "physical-units/spectral": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.py",
   "sbmt/projection": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.mts",
   "spice/new-horizons-approach": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.py",
 

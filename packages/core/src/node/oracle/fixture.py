@@ -22,12 +22,45 @@ def external_record(url, data):
     """A reference outside the repository, named by a commit in its URL and by its size."""
     return {'url': url, 'bytes': len(data)}
 
+relocated = {
+    "physical-units/spectral.json": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.json",
+    "sbmt/projection.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json",
+    "spice/dart-draco.json": "packages/bake/src/astronomy/fixtures/dart-draco.json",
+    "spice/new-horizons-approach.json": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.json",
+    "eclipse-map/numerics.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.json",
+    "eclipse-map/theresa-eigenbasis.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.json",
+    "fits/binary-table.json": "packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json",
+    "fits/charon-leisa.json": "packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json",
+    "fits/core.json": "packages/bake/src/objects/layers/observation/fixtures/fits/core.json",
+    "fits/encounter.json": "packages/bake/src/objects/layers/terrestrial/missions/encounter.json",
+    "fits/llorri.json": "packages/bake/src/objects/layers/terrestrial/missions/llorri.json",
+    "fits/lupton-asinh.json": "packages/bake/src/objects/color/fixtures/lupton-asinh.json",
+    "fits/pallas.json": "packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json",
+    "fits/rice.json": "packages/bake/src/objects/layers/observation/fixtures/fits/rice.json",
+    "fits/sky-orientation.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json",
+    "fits/sky-projection.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json",
+    "fits/synoptic.json": "packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json",
+    "fits/wise-atlas-projection.json": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json",
+    "astronomy/hosted-orbit.json": "packages/bake/src/objects/scene/fixtures/hosted-orbit.json",
+    "isis/photometric-truth.json": "packages/bake/src/photometry/fixtures/photometric-truth.json",
+    "isis2/borrelly-micas.json": "packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.json",
+    "npy/psyche-alma.json": "packages/bake/src/objects/raster/numpy/psyche-alma.json",
+    "pds/dart-draco-cube.json": "packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json",
+    "pds3/amica-ddr.json": "packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.json",
+    "pds3/osiris-geo.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.json",
+    "pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json"
+}
+
+def fixture_path(name):
+    """Resolve the logical fixture name through the shared relocation table."""
+    return ROOT / relocated.get(name, "tests/oracles/" + name)
+
 def write(name, oracle, generated_by, tool, inputs, cases, references=()):
     fixture = {'schema': 'cssearth-oracle-fixture@1', 'oracle': oracle, 'generatedBy': generated_by,
                'tool': {**tool, 'python': platform.python_version(), 'numpy': np.__version__},
                'inputs': [input_record(p) for p in inputs], **({'references': list(references)} if references else {}), 'cases': cases}
-    relocated = {'sbmt/projection.json': 'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json', 'spice/dart-draco.json': 'packages/bake/src/astronomy/fixtures/dart-draco.json', 'spice/new-horizons-approach.json': 'packages/bake/src/objects/default-view/fixtures/new-horizons-approach.json', 'eclipse-map/numerics.json': 'packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.json', 'eclipse-map/theresa-eigenbasis.json': 'packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.json', 'fits/binary-table.json': 'packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json', 'fits/charon-leisa.json': 'packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json', 'fits/core.json': 'packages/bake/src/objects/layers/observation/fixtures/fits/core.json', 'fits/encounter.json': 'packages/bake/src/objects/layers/terrestrial/missions/encounter.json', 'fits/llorri.json': 'packages/bake/src/objects/layers/terrestrial/missions/llorri.json', 'fits/lupton-asinh.json': 'packages/bake/src/objects/color/fixtures/lupton-asinh.json', 'fits/pallas.json': 'packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json', 'fits/rice.json': 'packages/bake/src/objects/layers/observation/fixtures/fits/rice.json', 'fits/sky-orientation.json': 'packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json', 'fits/sky-projection.json': 'packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json', 'fits/synoptic.json': 'packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json', 'fits/wise-atlas-projection.json': 'packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json'}
-    out = ROOT / relocated.get(name, "tests/oracles/" + name)
+
+    out = fixture_path(name)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(fixture, indent=1) + '\n')
     print(json.dumps({'written': str(out.relative_to(ROOT)), 'cases': {k: (len(v) if hasattr(v, '__len__') else v) for k, v in cases.items()}}))

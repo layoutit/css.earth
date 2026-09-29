@@ -8,7 +8,7 @@ import { CAPTION_LIMIT, abstractText, arxivQuery, displayName, evidenceScore, ex
 import { parseCli } from './cli-arguments.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
-const fixtures = resolve(import.meta.dirname, '../../../tests/fixtures/telescope-papers');
+const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-papers');
 const openAlex = async (): Promise<unknown> => JSON.parse(await readFile(resolve(fixtures, 'openalex-works.json'), 'utf8'));
 
 test('OpenAlex works are validated and reduced to the reported fields', async () => {

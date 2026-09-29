@@ -6,7 +6,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { gzipSync } from 'node:zlib';
 import { sha256 as sha } from '@cssearth/core/node';
-import { card } from '../../../packages/bake/src/objects/geometry/fixtures/fits-helpers.mts';
+import { card } from '../fixtures/fits/helpers.mts';
 import { encodeAsinhBands } from '@cssearth/bake/objects/color';
 import { composeSkyBandPlanes, composeSkyBands, hips2fitsCachePath, parseSkyBandComposite, skyBandUrl, SKY_BANDS, verifySkyBandRecipe } from '@cssearth/telescope-cli/sky/sky-band-composite';
 import { gridWcs } from '@cssearth/bake/objects/raster';

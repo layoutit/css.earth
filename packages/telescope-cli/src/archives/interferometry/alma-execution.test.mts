@@ -7,7 +7,7 @@ import { arrayTimeToDate, parseExecution, readTarHead } from './alma-execution.m
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const root = WORKSPACE;
-const read = (name: string) => readFile(resolve(root, 'tests/fixtures/alma', name), 'utf8');
+const read = (name: string) => readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma', name), 'utf8');
 
 /** A tar stream carrying the named members in order, each padded to the 512-byte block. */
 function tarStream(members: readonly { name: string; body: string; long?: boolean }[], truncateAt?: number) {

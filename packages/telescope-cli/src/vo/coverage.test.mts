@@ -10,7 +10,7 @@ import { loadVoInputs } from './bridge.mts';
 import { SERVICES } from './discovery.mts';
 import { sodaParameters } from './access.mts';
 
-const fixtures = resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo');
+const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-vo');
 const request = { target: 'betelgeuse', wavelengthMicrometres: [0.78, 0.85] as const, kind: 'image' as const, result: 'telescope-product' as const,
   time: { any: true } as const, angularResolutionArcsec: 1 };
 const catalogue = [{ id: request.target, name: 'Betelgeuse', aliases: [], archiveClass: 'star', classificationSource: 'fixture' }];

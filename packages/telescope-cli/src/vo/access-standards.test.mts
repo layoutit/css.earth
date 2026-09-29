@@ -10,7 +10,7 @@ import { jsonValue, parseLimits, type DiscoverySnapshot, type Json, type Metadat
 import { normalizeSnapshot, SERVICES } from './discovery.mts';
 const test = sourceTest();
 
-const fixtures = resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo');
+const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-vo');
 const target = { id: 'betelgeuse', names: ['Betelgeuse'], classification: 'star', classificationSource: 'fixture catalogue' };
 const request: CapabilityRequest = { target: target.id, wavelengthMicrometres: [0.78, 0.85], kind: 'image', result: 'telescope-product' };
 const circle = { frame: 'icrs' as const, shape: 'circle' as const, raDegrees: 88.792938, decDegrees: 7.407063, radiusDegrees: 0.01 };

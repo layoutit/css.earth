@@ -7,7 +7,7 @@ import { parseApplycal, parseCalibrationRecord, requiredTables } from './alma-ca
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const root = WORKSPACE;
-const RECORD = resolve(root, 'tests/fixtures/alma/uid___A002_X10dde56_X29a8.ms.calapply.txt');
+const RECORD = resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma/uid___A002_X10dde56_X29a8.ms.calapply.txt');
 
 test('the calapply record ALMA ships is read as the applications it states', async () => {
   const applications = parseCalibrationRecord(await readFile(RECORD, 'utf8'));
@@ -55,7 +55,7 @@ test('quoted commas and nested lists survive the split', () => {
 
 test('the pipeline’s line-free ranges are read, and rendered as one selection per window', async () => {
   const { parseContinuumRanges, continuumSelection } = await import('./alma-calibration.mts');
-  const ranges = parseContinuumRanges(await readFile(resolve(root, 'tests/fixtures/alma/cont.dat'), 'utf8'));
+  const ranges = parseContinuumRanges(await readFile(resolve(root, 'packages/telescope-cli/src/archives/interferometry/fixtures/alma/cont.dat'), 'utf8'));
   const star = ranges.get('R_Dor');
   assert.ok(star, 'the delivery names the science target');
   assert.equal(star!.length, 18);

@@ -10,6 +10,15 @@ import { projectRoot } from '../project-root.ts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../validate.ts';
 
 const relocatedPaths: Readonly<Record<string, string>> = {
+  "tests/oracles/physical-units/spectral.json": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.json",
+  "tests/oracles/astronomy/hosted-orbit.json": "packages/bake/src/objects/scene/fixtures/hosted-orbit.json",
+  "tests/oracles/isis/photometric-truth.json": "packages/bake/src/photometry/fixtures/photometric-truth.json",
+  "tests/oracles/isis2/borrelly-micas.json": "packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.json",
+  "tests/oracles/npy/psyche-alma.json": "packages/bake/src/objects/raster/numpy/psyche-alma.json",
+  "tests/oracles/pds/dart-draco-cube.json": "packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json",
+  "tests/oracles/pds3/amica-ddr.json": "packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.json",
+  "tests/oracles/pds3/osiris-geo.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.json",
+  "tests/oracles/pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json",
   "tests/oracles/sbmt/projection.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json",
   "tests/fixtures/sbmt/concave.sum": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.sum",
   "tests/fixtures/sbmt/cases.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/cases.json",
@@ -77,7 +86,7 @@ export async function assertPinnedInputs(inputs: readonly { path: string; bytes?
       if (!pin || (input.bytes !== undefined && pin.bytes !== input.bytes)) throw new Error(`FITS test archive record changed: ${input.path}`);
       continue;
     }
-    if (/^tests\/fixtures\/fits\/[a-z0-9-]+\.fits$/u.test(input.path) ||
+    if (/^(?:tests\/fixtures\/fits|packages\/telescope-cli\/src\/fixtures\/fits)\/[a-z0-9-]+\.fits$/u.test(input.path) ||
         (input.path.endsWith('.fits') && Object.values(relocatedPaths).includes(input.path))) {
       verifyOracleBytes(input, await readFile(oraclePath(input.path)));
       continue;
