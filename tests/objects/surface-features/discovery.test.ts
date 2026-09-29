@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { featureDiscoveryZoomShare } from '@cssearth/bake/objects/surface-features';
 const test = sourceTest();
 

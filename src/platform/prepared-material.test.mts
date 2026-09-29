@@ -2,7 +2,7 @@ import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import { prepareFrameLookup } from "@cssearth/bake/presentation";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createPreparedMaterialPublisher, preparedMaterialFrame } from '@cssearth/renderer/testing';
 import { selectedPreparedVariant } from '@cssearth/renderer/testing';

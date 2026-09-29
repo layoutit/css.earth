@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { binaryTable, binaryTableHdu, headerBlock, numbers, padBlock, primaryHdu, readFitsHdus, tableColumn, writeComplexCell } from '@cssearth/bake/objects/raster';
 import { differentialPhaseChi2, type ImagePlane } from '@cssearth/bake/objects/layers/observation';

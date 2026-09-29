@@ -1,5 +1,5 @@
 import { required, fixtureRecord } from '@cssearth/objects/node/contract';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { parseObjShape, parseVrmlShape, closestTrianglePoint, createShapeSurfaceSampler, parsePdsPlateShape } from '@cssearth/bake/objects/geometry';

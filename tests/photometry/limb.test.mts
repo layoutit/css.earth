@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { limbFactors, limbLawFromRecords, limbOverlay, linearToSrgb, parseLimbBlock, scatteringAngles, srgbToLinear, haloAltitudeKm, haloRatio, parseLimbProfile, PSG_LIMB_TABLE_SCHEMA, parsePhotometricModelRecord } from '@cssearth/bake/photometry';
 

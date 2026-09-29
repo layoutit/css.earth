@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '../../objects/source-test.mts';
+import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { loadKernelSet } from '@cssearth/spice/node';

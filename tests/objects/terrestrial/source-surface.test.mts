@@ -3,7 +3,7 @@ import { parseShapeLens, parseObjShape, createShapeSurfaceSampler } from '@cssea
 import { shape, array, text, number, optional, requireArray } from '@cssearth/core';
 import { fixtureSource } from '../test-source-fixture.mts';
 import type { RadialMaterialSurface } from '@cssearth/bake/objects/layers/terrestrial';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

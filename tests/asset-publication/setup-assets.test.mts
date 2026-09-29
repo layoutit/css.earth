@@ -4,7 +4,7 @@ import { cp, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { installRuntimeAssets, readAllowMissingFlag } from "@cssearth/bake/asset-publication";
 import { inspectContextAvailability } from "../../site/build/prepare/prepare-context-availability.mts";

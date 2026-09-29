@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import {decodeIsis3Raster} from '@cssearth/bake/objects/raster';
 const qualityGrid={width:360,height:180,targetName:'Phoebe',centerLongitude:180,referenceRadiusMeters:106500,polarRadiusMeters:106500,origin:[-334579.61760731,167289.80880366],resolutionMeters:1858.775653374,longitudeRange:[0,360],allowMissingLongitudeBounds:true};

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceLoad, sourceTest } from '../../objects/source-test.mts';
+import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
 import { assertPinnedInputs, ORACLE_ROOT, readOracleFixture } from '../fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { parseApproachRecipe, spacecraftApproach } from '@cssearth/spice';

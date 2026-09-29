@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createPreparedNodeTree, preparedDeclarations, LEAF_BOX_UNSCALE, leafBoxLengths } from "@cssearth/bake/presentation";
 import PREPARED_MOON_SCENE from "../../src/objects/moon/prepared/scene.json" with { type: "json" };

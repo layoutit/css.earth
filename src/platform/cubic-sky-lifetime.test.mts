@@ -1,7 +1,7 @@
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { Surface, orbitFixture } from "@cssearth/renderer/test/orbit-fixture.mts";
 import { createUnboundedMatrixDragControls } from "@cssearth/renderer/platform/camera-input";

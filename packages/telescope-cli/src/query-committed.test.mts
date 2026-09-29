@@ -1,7 +1,7 @@
 /** What the capability query says on the committed ledgers, programs, receipts and source manifests themselves; the cases on
  * small ledgers written in the shapes the real ledgers use are in query.test.mts. */
 import assert from 'node:assert/strict';
-import { restoredSources, sourceTest } from '../../../tests/objects/source-test.mts';
+import { restoredSources, sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

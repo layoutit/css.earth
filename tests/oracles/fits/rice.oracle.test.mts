@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readRiceCompressedImage } from '@cssearth/fits';
 import { hmiPixel, hmiRecordGeometry } from '@cssearth/bake/objects/layers/observation';

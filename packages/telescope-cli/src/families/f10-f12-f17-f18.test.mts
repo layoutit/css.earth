@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { member } from './common.mts';
 import { describeEvents, F10_EVENTS_HANDLER } from './f10-events.mts';

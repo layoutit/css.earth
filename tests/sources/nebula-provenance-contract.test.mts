@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '@cssearth/objects/sources';
 import { evidenceLink, parseInvestigationLedger, readInvestigationSurveys } from '@cssearth/bake/sources';

@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';import { sourceTest } from '../../../tests/objects/source-test.mts';
+import assert from 'node:assert/strict';import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();import {mkdtemp,readFile,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import {resolve} from 'node:path';import {saveFamilyRequestSession} from './session.mts';import {describeDegreeLinearPolarization} from './families/f13-polarimetry.mts';import { parseCli } from './cli-arguments.mts';
 const pin=(id:string)=>({id,path:`${id}.fits`,role:'science' as const});
 const descriptor=()=>describeDegreeLinearPolarization({id:'polar',intensity:pin('intensity'),dolp:pin('dolp'),shape:[2,3],producingRecord:'ESO'});

@@ -1,6 +1,6 @@
 import {requireRecord} from '@cssearth/core';
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createExposure, screenFactor, starPresentation } from "./star-photometry.mts";
 import { STAR_LABEL_POLICY, selectStarLabel } from "./star-labels.mts";

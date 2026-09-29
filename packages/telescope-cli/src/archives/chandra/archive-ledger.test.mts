@@ -1,7 +1,7 @@
 /** What a Chandra receipt has to say for the observation it names to count as reproduced. Everything here runs against a
  * scratch copy of the pinned programs, so nothing asks the Chandra Data Archive anything. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

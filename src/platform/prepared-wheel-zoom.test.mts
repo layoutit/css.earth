@@ -3,7 +3,7 @@ import * as applicationPolicy from "../../site/runtime-policy.mts";
 // wheel tests separately exercise the application policy with release inertia.
 const runtimePolicy = { ...applicationPolicy, WHEEL_ZOOM_INERTIA: null };
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import type { CameraDelta, CameraUpdate } from '@cssearth/renderer/navigation/types.ts';
 function cameraFixture(distance = 1) {
