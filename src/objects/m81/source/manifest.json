@@ -34,6 +34,60 @@
           }
         ]
       }
+    },
+    {
+      "id": "jacoby-pne-table",
+      "path": "src/objects/m81/source/jacoby-pne/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%2A+FROM+%22J%2FApJ%2F344%2F704%2Ftable1%22",
+      "title": "Planetary nebulae as standard candles. III. The distance to M 81, table.csv",
+      "credit": "G. H. Jacoby, R. Ciardullo, H. C. Ford, J. Booth; ApJ 344, 704",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through jacoby-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jacoby-1989-m81-pne",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+%2A+FROM+%22J%2FApJ%2F344%2F704%2Ftable1%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nantais-gc-table",
+      "path": "src/objects/m81/source/nantais-gc/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FAJ%2F139%2F2620%2FM81glob%22",
+      "title": "Spectroscopy of M81 globular clusters, table.csv",
+      "credit": "J. B. Nantais, J. P. Huchra; AJ 139, 2620",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through nantais-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nantais-2010-m81-globular-clusters",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FAJ%2F139%2F2620%2FM81glob%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "vucetic-snr-table",
+      "path": "src/objects/m81/source/vucetic-snr/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fm81%22",
+      "title": "Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission, table.csv",
+      "credit": "M. M. Vucetic, B. Arbutina, D. Urosevic; MNRAS 446, 943",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through vucetic-snr/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vucetic-2015-optical-snr",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fm81%22"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -88,6 +142,54 @@
             "evidence": "https://arxiv.org/abs/1910.14672"
           }
         ]
+      }
+    },
+    {
+      "id": "dots-merge",
+      "kind": "authored-document",
+      "path": "src/objects/m81/source/dots/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "jacoby-pne-points",
+      "kind": "authored-document",
+      "path": "src/objects/m81/source/jacoby-pne/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Planetary nebulae as standard candles. III. The distance to M 81 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "nantais-gc-points",
+      "kind": "authored-document",
+      "path": "src/objects/m81/source/nantais-gc/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Spectroscopy of M81 globular clusters rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "vucetic-snr-points",
+      "kind": "authored-document",
+      "path": "src/objects/m81/source/vucetic-snr/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
       }
     }
   ],
