@@ -15,8 +15,8 @@
     ],
     "cycleClosingEdges": [
       {"from":"site/search","to":"site(root)","imports":8},
-      {"from":"site(root)","to":"site/navigation","imports":7},
       {"from":"site(root)","to":"site/scene","imports":5},
+      {"from":"site(root)","to":"site/navigation","imports":3},
       {"from":"site/shell","to":"site/scene","imports":2},
       {"from":"labs/nebula-pkg/lab","to":"labs/nebula(app)","imports":1},
       {"from":"site/layouts","to":"site/components","imports":1},
