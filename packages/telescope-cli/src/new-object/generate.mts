@@ -6,7 +6,6 @@
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { bindInputs, installColorLens, json } from './lens.mts';
@@ -22,6 +21,7 @@ import { DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Ex
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
 import { gaiaCepheidForm, installLightCurve } from './light-curve.mts';
+import type { SolarEpoch } from './solar-epoch.mts';
 import { gaiaCepheidClass } from '@cssearth/bake/photometry';
 import { CEPHEID_GRAVITIES } from './cepheids.mts';
 import { writeLedger } from './ledger.mts';
@@ -147,7 +147,7 @@ export function eclipsingPeriodAgrees(paperDays: number, gaiaDays: number | unde
 }
 
 /** Compose every file of the package and its shared records. Pure apart from the archive reads; the caller writes. */
-export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order, universe, refresh = false }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean }): Promise<Generated> {
+export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order, universe, refresh = false, solarEpoch }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean; solarEpoch: SolarEpoch }): Promise<Generated> {
   // The Gaia row waits only for the identity; everything else (colour, limb, the papers) is read at once.
   const ids = await identify(resolver, spec.target, spec.gaia, spec.id);
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
@@ -185,7 +185,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
 
   // The package the scaffold writes, then every file the data decide.
   const scaffold = scaffoldStarFiles({ id, name: spec.name, system: spec.system, temperatureK: spec.temperature.value, temperatureSource: `${spec.temperature.source} (${spec.temperature.url})`,
-    description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order }, body, (await import(pathToFileURL(resolve(root, 'src/platform/solar-geometry.mts')).href) as { SOLAR_GEOMETRY_EPOCH_JD_TT: number }).SOLAR_GEOMETRY_EPOCH_JD_TT);
+    description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order }, body, solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT);
   const files = new Map<string, string | Buffer>(scaffold), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   files.set(`packages/astronomy/data/bodies/${id}.json`, `${JSON.stringify(body, null, 1)}\n`);
   files.set(`${s}/photometry/gaia-dr3-source.csv`, csv);
@@ -276,7 +276,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     `**Colour.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${colorHex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, '',
     `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}${gravity && limb.limbDarkening ? ` Gravity: ${gravity.sentence}.` : ''}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],
-    '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.`, '',
+    '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.`, '',
     ...color.crossCheck ? [`- The colour's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../tests/contract/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the rest of the package.`], '',
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
@@ -297,7 +297,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   // The ledger records each choice made above with the links it read.
   const gaiaArchive = 'https://gea.esac.esa.int/archive/', vizier = (credit: string | undefined) => credit?.match(/VizieR (J\/[^\s.,)]+)/u)?.[1];
   // A Cepheid plays Gaia's published light curve, checked against its own row (light-curve.mts).
-  const lightCurve = cepheid?.mode === 'FUNDAMENTAL' ? installLightCurve(files, { id, name: spec.name, sourceId: row.sourceId, csv: cepheidCsv }) : null;
+  const lightCurve = cepheid?.mode === 'FUNDAMENTAL' ? installLightCurve(files, { id, name: spec.name, sourceId: row.sourceId, csv: cepheidCsv }, solarEpoch) : null;
   const colorLinks = color.inputs.map(input => String(input.origin)).filter(origin => origin.startsWith('https://') && !origin.includes('asu-tsv') && !origin.includes('/tap/'));
   writeLedger(files, id, [
     { id: 'placement', subject: 'Placement', evidence: [gaiaArchive, ...place.cited ? [place.cited.url] : [], ...row.radialVelocity === undefined && spec.radialVelocity ? [spec.radialVelocity.url] : []],
@@ -372,7 +372,7 @@ export async function writeGenerated(generated: Generated, root = process.cwd(),
   const presentation = resolve(root, `src/objects/${generated.id}/source/presentation`);
   // The marker needs the package on disk: a placeholder first, then the colour lens as a disc.
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-  const { authorContextMarkers } = await import('../../../packages/telescope-cli/src/source-authoring/context-markers.mts');
+  const { authorContextMarkers } = await import('../source-authoring/context-markers.mts');
   await authorContextMarkers([generated.id]);
   return { written, kept };
 }
@@ -385,11 +385,11 @@ export interface NewObjectResult { readonly id: string; readonly kind: 'star' | 
 const HANDOFF = 'output/new-object/hosted.json';
 const reason = (error: unknown) => (error as Error).message.split('\n')[0]!;
 
-/** Every system of a spec file, generated and written: the one run behind `telescope new-object` and tools/objects/new-object.mts.
+/** Every system of a spec file, generated and written: the one run behind `telescope new-object` and packages/telescope-cli/src/new-object/new-object-cli.mts.
  * Stars and every hosted body's astronomy record are written first; the astronomy package is rebuilt; the hosted packages are then
  * written by a fresh process (runHostedPhase), which loads the rebuilt package. A system that fails is reported with its reason and
  * the rest of the batch goes on; nothing of it is written. `refresh` regenerates bodies the tool made, under refresh.mts's rules. */
-export async function runNewObject(specPath: string, { root = process.cwd(), progress = (_line: string) => {}, skipExisting = false, refresh = false }: { root?: string; progress?: (line: string) => void; skipExisting?: boolean; refresh?: boolean } = {}): Promise<NewObjectResult[]> {
+export async function runNewObject(specPath: string, { root = process.cwd(), progress = (_line: string) => {}, skipExisting = false, refresh = false, solarEpoch }: { root?: string; progress?: (line: string) => void; skipExisting?: boolean; refresh?: boolean; solarEpoch: SolarEpoch }): Promise<NewObjectResult[]> {
   const { readdir } = await import('node:fs/promises'), { parseObjectSpecs } = await import('./spec.mts'), { hostedRecord } = await import('./hosted.mts');
   const parsed = parseObjectSpecs(JSON.parse(await readFile(resolve(specPath), 'utf8')));
   const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
@@ -427,7 +427,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
   const system = async (spec: StarSpec) => {
     progress(`[${++done}/${total}] ${spec.id}: resolving ${spec.target ?? `Gaia DR3 ${spec.gaia}`} and reading the archives (${elapsed()})`);
     let generated: Generated, written: { written: string[]; kept: string[] };
-    try { generated = await generateStar(spec, { root, order: orders.get(spec.id)!, universe, refresh }); written = await writeGenerated(generated, root, refresh); }
+    try { generated = await generateStar(spec, { root, order: orders.get(spec.id)!, universe, refresh, solarEpoch }); written = await writeGenerated(generated, root, refresh); }
     catch (error) { failed(spec.id, 'star', error); for (const entry of [...spec.planets, ...spec.companions]) failed(entry.id, entry.kind, new Error(`its star ${spec.id} failed`)); return; }
     const result: NewObjectResult = { id: spec.id, kind: 'star', files: written.written.length, hex: generated.hex, color: generated.color.route, ...(generated.color.crossCheck ? { crossCheck: generated.color.crossCheck } : {}),
       limb: generated.limb.grid ?? 'none', todo: generated.todo, ...(written.kept.length ? { kept: written.kept } : {}) };
@@ -463,7 +463,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
   }
   if (hosted.length) {
     await mkdir(resolve(root, dirname(HANDOFF)), { recursive: true }); await writeFile(resolve(root, HANDOFF), json({ refresh, records: hosted }));
-    const out = execFileSync(process.execPath, [resolve(root, 'tools/objects/new-object.mts'), '--hosted', HANDOFF], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] }).toString('utf8');
+    const out = execFileSync(process.execPath, [resolve(import.meta.dirname, 'new-object-cli.mts'), '--hosted', HANDOFF], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] }).toString('utf8');
     for (const result of JSON.parse(out) as NewObjectResult[]) { results.push(result); if (result.failed) progress(`  ${result.id}: FAILED, not written: ${result.failed}`); }
   }
   const failures = results.filter(result => result.failed);
@@ -472,9 +472,8 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
 }
 
 /** Phase two, in a process that loads the rebuilt astronomy package: every hosted body's package. */
-export async function runHostedPhase(handoff: string, root = process.cwd()): Promise<NewObjectResult[]> {
+export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_TT }: Pick<SolarEpoch, 'SOLAR_GEOMETRY_EPOCH_JD_TT'>, root = process.cwd()): Promise<NewObjectResult[]> {
   const { hostedPackage } = await import('./hosted.mts');
-  const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await import(pathToFileURL(resolve(root, 'src/platform/solar-geometry.mts')).href) as { SOLAR_GEOMETRY_EPOCH_JD_TT: number };
   const { refresh, records } = JSON.parse(await readFile(resolve(root, handoff), 'utf8')) as { refresh: boolean; records: any[] }, results: NewObjectResult[] = [];
   for (const saved of records) {
     try {
@@ -490,7 +489,7 @@ export async function runHostedPhase(handoff: string, root = process.cwd()): Pro
       await mkdir(presentation, { recursive: true });
       await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
       // Every hosted body's marker is drawn from its default lens: a companion's colour, a planet's colour or map.
-      const { authorContextMarkers } = await import('../../../packages/telescope-cli/src/source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]);
+      const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]);
       results.push({ id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}), ...(kept.length ? { kept } : {}),
         orbit: 'whereistheplanet' in record.spec.orbit ? `whereistheplanet ${record.spec.orbit.whereistheplanet}` : 'archive' in record.spec.orbit ? `NASA Exoplanet Archive (${record.orbitCitation.label})` : 'record' in record.spec.orbit ? `its kept record (${record.orbitCitation.label})` : 'cited elements',
         todo: [...record.todo, ...record.spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the body and its evidence']] });

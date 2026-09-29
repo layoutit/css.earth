@@ -3,7 +3,7 @@
  * Shared by the Cepheid route (generate.mts) and by packages made before it. The bake reads the row, checks it against its own
  * published values and plays it (@cssearth/bake/photometry, light-curve.ts). */
 import { checkGaiaCepheidModel, gaiaCepheidQuery, GAIA_TIME_OFFSET_JD, parseGaiaCepheidRow, PULSATION_SECONDS_PER_DAY } from '@cssearth/bake/photometry';
-import { SOLAR_GEOMETRY_EPOCH_JD_TT, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mts';
+import type { SolarEpoch } from './solar-epoch.mts';
 import { GAIA_TAP } from './archives.mts';
 import { CHECKED } from './color.mts';
 import { bindInputs, json, type PackageFiles } from './lens.mts';
@@ -19,7 +19,7 @@ export function gaiaCepheidForm(sourceId: string): Record<string, string> {
 }
 
 /** Install the light curve read from `csv` (the archive's answer to gaiaCepheidForm) into a package's files. */
-export function installLightCurve(files: PackageFiles, { id, name, sourceId, csv }: { id: string; name: string; sourceId: string; csv: string }) {
+export function installLightCurve(files: PackageFiles, { id, name, sourceId, csv }: { id: string; name: string; sourceId: string; csv: string }, { SOLAR_GEOMETRY_EPOCH_JD_TT, SOLAR_GEOMETRY_EPOCH_LABEL }: SolarEpoch) {
   const o = `src/objects/${id}`, s = `${o}/source`, where = `${id}: Gaia DR3 vari_cepheid ${sourceId}`;
   const read = (path: string) => { const value = files.get(path); if (value === undefined) throw new Error(`${id}: ${path} is not in the package.`); return String(value); };
   const model = parseGaiaCepheidRow(csv, where), check = checkGaiaCepheidModel(model, where);

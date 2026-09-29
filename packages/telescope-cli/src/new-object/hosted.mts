@@ -7,7 +7,7 @@
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { scaffoldHostedPlanetFiles, TODO as HOSTED_TODO } from '../new-hosted-planet.mts';
+import { scaffoldHostedPlanetFiles, TODO as HOSTED_TODO } from './new-hosted-planet.mts';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { citedName, isCollaboration, type Archive, type Publication } from './archives.mts';
@@ -77,7 +77,7 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
     const pick = { whereistheplanetKey: o.whereistheplanet, ...(o.body ? { body: o.body } : {}), measurements: csvName, measurementsSource: o.measurementsSource };
     await writeFile(resolve(work, csvName), measurements); await writeFile(resolve(work, 'pick.json'), json(pick));
     const { astroqueryToolchainSync } = await import('@cssearth/telescope/node'), toolchain = astroqueryToolchainSync();
-    execFileSync(toolchain.python, [resolve(root, 'tools/objects/hosted-orbits/posterior-pick.py'), resolve(work, 'pick.json'), resolve(work, 'orbit.json')], { env: { ...process.env, ...toolchain.env }, stdio: ['ignore', 'ignore', 'inherit'] });
+    execFileSync(toolchain.python, [resolve(import.meta.dirname, 'hosted-orbits/posterior-pick.py'), resolve(work, 'pick.json'), resolve(work, 'orbit.json')], { env: { ...process.env, ...toolchain.env }, stdio: ['ignore', 'ignore', 'inherit'] });
     const orbitText = await readFile(resolve(work, 'orbit.json'), 'utf8');
     orbit = orbitizeHostedOrbit(JSON.parse(orbitText), hostRadiusKm, distance, `${o.source} (${o.url})`, `src/objects/${spec.id}/source/orbits/pick.json`);
     for (const [name, text] of [[csvName, measurements], ['pick.json', json(pick)], ['orbit.json', orbitText]] as const) documents.set(`orbits/${name}`, text);
@@ -199,7 +199,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   }
   const manifest = read(`${s}/manifest.json`);
   manifest.documents = [...manifest.documents, ...[...record.documents.keys()].map(path => ({ path, sourceBinding: { kind: 'local', reason: path.endsWith('pick.json')
-    ? 'The whereistheplanet posterior and the measured positions that choose one sample from it (tools/objects/hosted-orbits/posterior-pick.py).' : path.endsWith('orbit.json')
+    ? 'The whereistheplanet posterior and the measured positions that choose one sample from it (packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py).' : path.endsWith('orbit.json')
       ? 'The sample kept, with the model at every measured position; the astronomy record takes its elements.' : 'The paper\'s published measurements, transcribed for orbitize!.' } })), storedSpecDocument];
   // The spec this package was made from, so `--refresh` can make it again (refresh.mts).
   files.set(`${s}/preparation/new-object.json`, storedHostedSpec(spec, record.hostId, record.order));
@@ -214,7 +214,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     `**Size and mass.** ${String(record.body.physicalNotes)}`, '', `**Orbit.** ${Object.values(record.orbit.sources).join(' ')}`, '',
     ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}, because ${(spec.colorReason ?? 'The archives do not resolve this companion from its star').replace(/^[A-Z](?=[a-z])/u, c => c.toLowerCase())}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : colorLine ? [colorLine, ''] : [],
     ...heat.flatMap(({ line }) => [line, '']),
-    '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
+    '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
     ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));

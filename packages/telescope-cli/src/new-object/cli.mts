@@ -10,6 +10,7 @@ import { liveArchive } from './archives.mts';
 import { writeDrafts } from './drafts.mts';
 import { formatNewObject, runNewObject } from './generate.mts';
 import { refreshSpec } from './refresh.mts';
+import { loadSolarEpoch } from './solar-epoch.mts';
 
 export interface NewObjectOptions {readonly spec?:string;readonly ids?:readonly string[];readonly from?:string;readonly names?:readonly string[];readonly out?:string;readonly check:boolean;readonly bake:boolean;readonly refresh:boolean;readonly skipExisting:boolean;readonly json:boolean}
 
@@ -28,7 +29,7 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
   if(options.ids&&options.refresh){
     const {mkdir,writeFile}=await import('node:fs/promises'),path=resolve(root,'output/new-object/refresh.json');
     await mkdir(resolve(root,'output/new-object'),{recursive:true});await writeFile(path,`${JSON.stringify(await refreshSpec(root,options.ids),null,2)}\n`);
-    const results=await runNewObject(path,{root,progress,refresh:true}),good=results.filter(result=>!result.failed).map(result=>result.id);
+    const results=await runNewObject(path,{root,progress,refresh:true,solarEpoch:await loadSolarEpoch(root)}),good=results.filter(result=>!result.failed).map(result=>result.id);
     const baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{progress,...(options.bake?{}:{to:'page'})}):true;
     text=options.json?`${JSON.stringify(results)}\n`:formatNewObject(results);code=baked&&!results.some(result=>result.failed)?0:1;
   }else if(options.ids){
@@ -38,7 +39,7 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
     const result=await writeDrafts(options.from,options.names??[],options.out!,{root,archive:liveArchive,progress:line=>stderr(`${line}\n`)});
     text=options.json?`${JSON.stringify(result)}\n`:`${result.report.join('\n')}\n${result.entries} entries written to ${result.path}\n`;code=result.entries?0:3;
   }else{
-    const results=await runNewObject(options.spec!,{root,progress:line=>stderr(`${line}\n`),skipExisting:options.skipExisting});
+    const results=await runNewObject(options.spec!,{root,progress:line=>stderr(`${line}\n`),skipExisting:options.skipExisting,solarEpoch:await loadSolarEpoch(root)});
     const good=results.filter(result=>!result.failed).map(result=>result.id),baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{progress,...(options.bake?{}:{to:'page'})}):true;
     text=options.json?`${JSON.stringify(results)}\n`:formatNewObject(results)+(results.length&&baked&&options.bake?`${results.length} objects baked.\n`:results.length&&baked&&options.check?`${results.length} objects passed the bake's first steps.\n`:'');code=baked&&!results.some(result=>result.failed)?0:1;
   }
@@ -46,5 +47,5 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
-  await answerParent(()=>newObjectCommand(parseNewObjectOptions(JSON.parse(process.argv[2]??'null')),resolve(import.meta.dirname,'../../..'),line=>{process.stderr.write(line);}));
+  await answerParent(()=>newObjectCommand(parseNewObjectOptions(JSON.parse(process.argv[2]??'null')),resolve(import.meta.dirname,'../../../..'),line=>{process.stderr.write(line);}));
 }

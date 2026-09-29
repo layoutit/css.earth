@@ -127,18 +127,18 @@
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2603.08787",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-hosted-planet.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-hosted-planet.mts",
+        "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
         "inputs": [
           "eps-indi-ab-observational-measurements"
         ]
       },
-      "generator": "tools/objects/new-hosted-planet.mts",
+      "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "A flat neutral gray disc, the marker of an unresolved surface."
@@ -173,7 +173,7 @@
       "path": "orbits/pick.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The published Octofitter posterior (downloaded from Zenodo, see source/preparation/acquisition.json), the columns that hold each element and the rule that keeps one sample (tools/objects/hosted-orbits/posterior-pick.py)."
+        "reason": "The published Octofitter posterior (downloaded from Zenodo, see source/preparation/acquisition.json), the columns that hold each element and the rule that keeps one sample (packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py)."
       }
     },
     {

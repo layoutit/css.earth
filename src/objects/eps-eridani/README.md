@@ -12,7 +12,7 @@
 
 ## Evidence
 
-Generated 2026-09-26 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
+Generated 2026-09-26 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
 - The colour's cross-check differs by 0 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../tests/contract/object-package-consistency.test.mts) recomputes it after preparation.
 - [`eps-eridani-default-views.png`](evidence/eps-eridani-default-views.png): ε Eridani, ε Eridani b and the system view on this branch's dev server, headless Chromium at 1440 × 900 after each page reported ready; no browser errors.

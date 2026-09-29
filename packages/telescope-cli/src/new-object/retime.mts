@@ -1,7 +1,7 @@
 /** Rewrite the orbit timing of planets the archive route already made, after the ephemeris rule changes (orbit.mts: the period and
  * transit time from one row, the one that predicts EPHEMERIS_EPOCH_BJD best):
  *
- *   node tools/objects/new-object.mts --retime <host id>...
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retime <host id>...
  *
  * Each archive planet's rows are read again and its orbit assembled as a draft would; only the period, the transit time and their
  * two source lines are written back, to the astronomy record, the measurements, the Year fact and the README. The shape, lenses and

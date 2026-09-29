@@ -170,7 +170,7 @@
       "path": "orbits/fit.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The fit's priors, corrections and sampler settings, each from the paper (tools/objects/hosted-orbits/orbitize-fit.py)."
+        "reason": "The fit's priors, corrections and sampler settings, each from the paper (packages/telescope-cli/src/new-object/hosted-orbits/orbitize-fit.py)."
       }
     },
     {

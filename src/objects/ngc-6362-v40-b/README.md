@@ -12,7 +12,7 @@ It has 0.7947 solar masses and 0.997 solar radii; its partner has 0.8337 and 1.3
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ngc-6362-v40-b.json).
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ngc-6362-v40-b.json).
 
 
 ## Known problems

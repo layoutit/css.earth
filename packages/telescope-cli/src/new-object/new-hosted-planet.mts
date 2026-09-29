@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Scaffold a planet of another star from its astronomy record, instead of cloning another planet by find-and-replace.
  *
- *   node tools/objects/new-hosted-planet.mts <id> --name <display name> --system <system name>
+ *   node packages/telescope-cli/src/new-object/new-hosted-planet.mts <id> --name <display name> --system <system name>
  *     --description <catalogue line> --paper <url> --paper-credit <credit> [--order <n>] [--color <#rrggbb>]
  *     [--rotation synchronous|unmeasured] [--self-luminous <K> --temperature-source <citation>]
  *
@@ -19,7 +19,8 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { starStylesheet } from './new-object/scaffold.mts';
+import { starStylesheet } from './scaffold.mts';
+import { loadSolarEpoch } from './solar-epoch.mts';
 import { temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { sphereProjection } from '@cssearth/bake/objects/scene';
 
@@ -229,8 +230,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     preparation('preparation-presentation', 'preparation/presentation.json', `Repository-authored presentation profile: ${glow ? 'emissive' : 'composite'} mode`, ['presentation']),
     preparation('physical-solar-system-recipe', 'presentation/solar-system.json', 'Repository-authored scene recipe: published radius, camera plan', ['scene'])],
     generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', origin: spec.paper,
-      credit: 'Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts', license: 'Project-authored display derivative.', consumers: ['navigation'],
-      recipe: { generator: 'tools/objects/new-hosted-planet.mts', inputs: [`${id}-observational-measurements`] }, generator: 'tools/objects/new-hosted-planet.mts',
+      credit: 'Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-hosted-planet.mts', license: 'Project-authored display derivative.', consumers: ['navigation'],
+      recipe: { generator: 'packages/telescope-cli/src/new-object/new-hosted-planet.mts', inputs: [`${id}-observational-measurements`] }, generator: 'packages/telescope-cli/src/new-object/new-hosted-planet.mts',
       sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
     documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json'].map(path => ({ path,
       ...(path === 'content/object.json' ? { sourceBinding: local('Project-authored factsheet, dataset recipe and legend.') } : {}) })) });
@@ -247,7 +248,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const flag = (name: string) => { const index = args.indexOf(`--${name}`); return index < 0 ? undefined : args[index + 1]; };
   const id = args.find((argument, index) => !argument.startsWith('--') && !args[index - 1]?.startsWith('--'));
   if (!id) throw new TypeError('Usage: new-hosted-planet <id> --name <name> --system <system> --description <line> --paper <url> --paper-credit <credit>');
-  const root = resolve(import.meta.dirname, '../..');
+  const root = resolve(import.meta.dirname, '../../../..');
   const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
   if (await exists(`src/objects/${id}`)) throw new Error(`src/objects/${id} already exists; the scaffold never overwrites a package.`);
   const order = flag('order'), color = flag('color'), rotation = flag('rotation'), glowK = flag('self-luminous'), glowSource = flag('temperature-source');
@@ -258,7 +259,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const read = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;
   const body = requireRecord(await read(`packages/astronomy/data/bodies/${id}.json`), 'astronomy record');
   const hostId = requireString(requireRecord(body.physical, 'physical').parent, 'physical.parent');
-  const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await import('../../src/platform/solar-geometry.mts') as { SOLAR_GEOMETRY_EPOCH_JD_TT: number };
+  const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await loadSolarEpoch(root);
   const files = scaffoldHostedPlanetFiles({
     id, name: requireString(flag('name'), '--name'), system: requireString(flag('system'), '--system'),
     description: requireString(flag('description'), '--description'), paper: requireString(flag('paper'), '--paper'),

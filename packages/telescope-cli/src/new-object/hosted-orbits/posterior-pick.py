@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """One orbit from the posterior an orbit paper distributes through whereistheplanet (Wang et al. 2021).
 
-    python tools/objects/hosted-orbits/posterior-pick.py <pick.json> <orbit.json>
+    python packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py <pick.json> <orbit.json>
 
 When a paper's own orbitize! posterior is published, no refit is needed: the orbit is one of its samples. The pick file
 names the whereistheplanet key, the companion (body 1 unless a joint fit of several says otherwise) and the paper's measured

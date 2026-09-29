@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Refit a directly imaged companion's orbit with orbitize! (Blunt et al. 2020) from a paper's published inputs.
 
-    python tools/objects/hosted-orbits/orbitize-fit.py <fit.json> <results.hdf5>
-    python tools/objects/hosted-orbits/orbitize-fit.py --refine <fit.json> <results.hdf5> <orbit.json>
+    python packages/telescope-cli/src/new-object/hosted-orbits/orbitize-fit.py <fit.json> <results.hdf5>
+    python packages/telescope-cli/src/new-object/hosted-orbits/orbitize-fit.py --refine <fit.json> <results.hdf5> <orbit.json>
 
 A paper that fits an imaged companion's orbit usually publishes its measurements, priors and sampler settings but not
 its posterior samples, and its table gives marginal medians, which are not one orbit. This runs the paper's own tool on

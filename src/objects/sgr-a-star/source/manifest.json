@@ -121,18 +121,18 @@
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2112.07478",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-object.mts",
+      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-object-cli.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-object.mts",
+        "generator": "packages/telescope-cli/src/new-object/new-object-cli.mts",
         "inputs": [
           "sgr-a-star-observational-measurements"
         ]
       },
-      "generator": "tools/objects/new-object.mts",
+      "generator": "packages/telescope-cli/src/new-object/new-object-cli.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "A flat neutral gray disc, the marker of an unresolved surface."

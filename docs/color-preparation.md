@@ -185,13 +185,13 @@ LAMOST and the Pulkovo, Kiehling, Burnashev and Kharitonov spectrophotometric ca
 380-780 nm must be declared as a gap, with its reason. Checked against the Sun, the route turns CALSPEC's solar spectrum
 into #fff2ee, the colour the Sun's swatch takes from a different spectrum (ASTM E490) with Colour Science.
 
-For a new star, [new-object/color.mts](../tools/objects/new-object/color.mts) (run by `telescope new-object`) tries the archives in
+For a new star, [new-object/color.mts](../packages/telescope-cli/src/new-object/color.mts) (run by `telescope new-object`) tries the archives in
 this order and keeps the first spectrum the reader accepts, with the next as its cross-check: the STIS Next Generation Spectral
 Library, Gaia DR3 XP (from the ARI Heidelberg mirror when ESA's DataLink is down), Pulkovo, Kiehling, Kharitonov, then Burnashev's
 part 2. With none, the colour is a Planck spectrum at the cited temperature.
 
 A planet nobody has imaged takes its colour from what is measured
-([new-object/planet-lenses.mts](../tools/objects/new-object/planet-lenses.mts)). Where the NASA Exoplanet Archive's
+([new-object/planet-lenses.mts](../packages/telescope-cli/src/new-object/planet-lenses.mts)). Where the NASA Exoplanet Archive's
 emission-spectroscopy table holds a measured dayside brightness temperature from a secondary eclipse, the planet gets the
 "Thermal glow" lens: a black body at that temperature over the disc, lit by the sphere lighting so the day side faces its
 star, with reflected starlight left out because nothing measured says how much there is. The row is chosen by rule, the
@@ -199,8 +199,8 @@ smallest relative uncertainty and the longest wavelength on a tie, every row is 
 stated in the record. Below about 1,800 K a black body lies outside sRGB and is shown mixed with the least white that brings
 it inside, hue kept, which the lens says. A planet with nothing measured keeps the neutral gray, lit by its host's measured
 colour instead of a white lamp: the gray's brightness with the host colour lens's chromaticity (`hostLitGray` in
-[color-transfer.ts](../packages/bake/src/objects/color/color-transfer.ts)). `telescope new-object --from-archive` does both; `--thermal <id>...`
-and `--host-light <id>...` give them to planets already in the tree.
+[color-transfer.ts](../packages/bake/src/objects/color/color-transfer.ts)). `telescope new-object --from-archive` does both; `node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>...`
+and `--host-light <id>...` (that entry only) give them to planets already in the tree.
 
 ![Lens thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-colour-routes.png)
 

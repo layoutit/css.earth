@@ -196,7 +196,7 @@
       "path": "orbits/pick.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The whereistheplanet posterior and the measured positions that choose one sample from it (tools/objects/hosted-orbits/posterior-pick.py)."
+        "reason": "The whereistheplanet posterior and the measured positions that choose one sample from it (packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py)."
       }
     },
     {

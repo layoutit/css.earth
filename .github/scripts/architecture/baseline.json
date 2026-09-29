@@ -11,16 +11,13 @@
       "labs/nebula(app)",
       "labs/nebula-pkg/lab",
       "site/components",
-      "site/layouts",
-      "tools/objects(root)",
-      "tools/objects/new-object"
+      "site/layouts"
     ],
     "cycleClosingEdges": [
       {"from":"site/search","to":"site(root)","imports":8},
       {"from":"site(root)","to":"site/scene","imports":5},
       {"from":"site(root)","to":"site/navigation","imports":3},
       {"from":"site/shell","to":"site/scene","imports":2},
-      {"from":"tools/objects/new-object","to":"tools/objects(root)","imports":2},
       {"from":"labs/nebula-pkg/lab","to":"labs/nebula(app)","imports":1},
       {"from":"site/layouts","to":"site/components","imports":1},
       {"from":"site/navigation","to":"site/scene","imports":1}
@@ -142,6 +139,13 @@
       {"from":"packages/telescope-cli/src/implementation-dependencies.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/local-import.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/native-metadata.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/telescope-cli/src/new-object/gravity.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/telescope-cli/src/new-object/light-curve.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/telescope-cli/src/new-object/new-hosted-planet.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/telescope-cli/src/new-object/new-object-cli.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/telescope-cli/src/new-object/new-object.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/telescope-cli/src/new-object/phase-curve-lens.test.mts","to":"tests/objects/source-test.mts"},
+      {"from":"packages/telescope-cli/src/new-object/transit-chart.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/numeric-preview.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/observation-families.test.mts","to":"tests/objects/source-test.mts"},
       {"from":"packages/telescope-cli/src/opus.test.mts","to":"tests/objects/source-test.mts"},

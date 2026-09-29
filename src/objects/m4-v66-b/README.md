@@ -12,7 +12,7 @@ It has 0.7443 solar masses and 0.8298 solar radii; its partner has 0.7842 and 0.
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/m4-v66-b.json).
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/m4-v66-b.json).
 
 
 ## Known problems

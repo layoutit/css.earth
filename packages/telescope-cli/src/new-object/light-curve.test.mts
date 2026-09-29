@@ -1,11 +1,13 @@
 /** The Cepheid light curve a package installs (light-curve.mts), on a generated star package's files and S Vul's Gaia DR3
  * vari_cepheid row. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { resolve } from 'node:path';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 import { parsePresentationProfile } from '@cssearth/bake/presentation';
 import { installLightCurve, LIGHT_CURVE_MODEL } from './light-curve.mts';
+import { loadSolarEpoch } from './solar-epoch.mts';
 
-const test = sourceTest();
+const test = sourceTest(), epoch = await loadSolarEpoch(resolve(import.meta.dirname, '../../../..'));
 const o = 'src/objects/s-vul', s = `${o}/source`;
 // The files the installer edits, as the generator writes them for a star (generate.mts).
 const generated = (): [string, string][] => [
@@ -20,7 +22,7 @@ const csv = ['source_id,pf,pf_error,fund_freq1,reference_time_g,zp_mag_g,num_har
 
 test('a Cepheid package gains the row, its acquisition, the profile field and its account, once', () => {
   const files = new Map<string, string | Buffer>(generated());
-  const result = installLightCurve(files, { id: 's-vul', name: 'S Vul', sourceId: '2027971514401523456', csv });
+  const result = installLightCurve(files, { id: 's-vul', name: 'S Vul', sourceId: '2027971514401523456', csv }, epoch);
   assert.equal(result.model.amplitudesMag.length, 2);
   const manifest = JSON.parse(String(files.get(`${s}/manifest.json`))) as { inputs: { path: string; consumers: string[]; sourceBinding: { references: { catalogueId: string }[] } }[] };
   const input = manifest.inputs.find(entry => entry.path === LIGHT_CURVE_MODEL);
@@ -34,6 +36,6 @@ test('a Cepheid package gains the row, its acquisition, the profile field and it
   assert.ok(readme.indexOf('**Brightness.**') < readme.indexOf('## Evidence') && readme.indexOf('- **Brightness.**') > readme.indexOf('## Known problems'));
   assert.match(readme, /2 harmonics of a 69\.47-day period .* swings 0\.425 mag, so at minimum the star gives 68% of its peak light/u);
   const once = new Map(files);
-  installLightCurve(files, { id: 's-vul', name: 'S Vul', sourceId: '2027971514401523456', csv });
+  installLightCurve(files, { id: 's-vul', name: 'S Vul', sourceId: '2027971514401523456', csv }, epoch);
   for (const [path, value] of once) assert.equal(String(files.get(path)), String(value), `${path} is unchanged by a second install`);
 });

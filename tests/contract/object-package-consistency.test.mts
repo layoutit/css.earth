@@ -8,7 +8,7 @@ const test = sourceTest();
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { TODO, starStylesheet } from '../../tools/objects/new-object/scaffold.mts';
+import { TODO, starStylesheet } from '../../packages/telescope-cli/src/new-object/scaffold.mts';
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 

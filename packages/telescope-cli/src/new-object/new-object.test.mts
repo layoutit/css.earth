@@ -4,15 +4,16 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { readIdentifiers, type Archive, type GaiaRow } from './archives.mts';
 import { chooseColor, coverageGaps } from './color.mts';
 import { assembleArchiveOrbit, orbitizeHostedOrbit, parseArchiveRows } from './orbit.mts';
 import { parseObjectSpecs, parseStarSpec } from './spec.mts';
+import { loadSolarEpoch } from './solar-epoch.mts';
 
-const test = sourceTest(), root = resolve(import.meta.dirname, '../../..');
+const test = sourceTest(), root = resolve(import.meta.dirname, '../../../..');
 const star = { id: 'test-star', name: 'Test Star', description: 'A test.', gaia: '123456789', paper: { url: 'https://arxiv.org/abs/2110.06729', credit: 'Willamo et al. (2022)' },
   radius: { value: 1, source: 'a paper', url: 'https://arxiv.org/abs/2110.06729' }, mass: 'gaia-flame', temperature: { value: 5800, source: 'a paper', url: 'https://arxiv.org/abs/2110.06729' } };
 
@@ -543,7 +544,7 @@ test('a whole star package from fixtures is what the bake accepts: declared file
     async bytes(url) { if (url.includes('III/126')) return gzipSync(''); return Buffer.from(''); }, async exists() { return false; } };
   const spec = parseStarSpec({ ...star, id: 'test-fixture-star', name: 'Test Fixture Star', gaia, target: undefined, limb: { none: 'a test fixture' },
     text: { card: 'A test star.', introduction: 'A test star made from fixtures.', locator: 'fixture' } });
-  const generated = await generateStar(spec, { archive, root, order: 9999, universe: { ids: new Set(), names: new Map(), stars: [] },
+  const generated = await generateStar(spec, { archive, root, order: 9999, universe: { ids: new Set(), names: new Map(), stars: [] }, solarEpoch: await loadSolarEpoch(root),
     resolver: async () => ({ mainId: 'Test Fixture Star', identifiers: [`Gaia DR3 ${gaia}`] }) });
   assert.equal(generated.color.route, 'planck', 'no archive spectrum in the fixtures, so the Planck route');
   assertWholePackage(generated.files, spec.id, true);
@@ -583,7 +584,7 @@ test('a star beyond Gaia\'s parallax is placed at its cited distance; a weak or 
     async text(url) { if (url.includes('gea.esac.esa.int/tap')) return twoParameter; if (url.includes('export.arxiv.org')) return arxiv; if (url.includes('asu-tsv')) return '#\n'; throw new Error(`unexpected ${url}`); },
     async bytes(url) { if (url.includes('III/126')) return gzipSync(''); return Buffer.from(''); }, async exists() { return false; } };
   const spec = parseStarSpec({ ...base, distance, limb: { none: 'a test fixture' }, text: { card: 'A far star.', introduction: 'A star in another galaxy made from fixtures.', locator: 'fixture' } });
-  const generated = await generateStar(spec, { archive, root, order: 9998, universe: { ids: new Set(), names: new Map(), stars: [] },
+  const generated = await generateStar(spec, { archive, root, order: 9998, universe: { ids: new Set(), names: new Map(), stars: [] }, solarEpoch: await loadSolarEpoch(root),
     resolver: async () => ({ mainId: 'Test Far Star', identifiers: [`Gaia DR3 ${gaia}`] }) });
   assertWholePackage(generated.files, spec.id, true);
   const body = JSON.parse(String(generated.files.get(`packages/astronomy/data/bodies/${spec.id}.json`)));

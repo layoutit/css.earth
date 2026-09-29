@@ -20,7 +20,7 @@ import { DISC_BAND_COLOR_SCHEMA, loadDiscBandColor } from '@cssearth/bake/object
 import { loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { parseCieTable, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
-import { hostedPlanetStylesheet } from '../new-hosted-planet.mts';
+import { hostedPlanetStylesheet } from './new-hosted-planet.mts';
 import { installPhaseCurveLens, type PhaseCurveEntry } from './phase-curve-lens.mts';
 
 export const EMISSION_COLUMNS = 'plntname,centralwavelng,bandwidth,especlipdep,especlipdeperr1,especlipdeperr2,especlipdeplim,espbritemp,espbritemperr1,espbritemperr2,espbritemplim,facility,instrument,plntreflink';
@@ -253,7 +253,7 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
     }
     lensMarkerEntry(files, id);
     for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
-    const { authorContextMarkers } = await import('../../../packages/telescope-cli/src/source-authoring/context-markers.mts'); await authorContextMarkers([id]);
+    const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([id]);
     progress(lines.at(-1)!);
   }
   return lines;

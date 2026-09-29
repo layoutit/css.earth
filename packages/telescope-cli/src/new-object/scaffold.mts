@@ -1,13 +1,13 @@
 /** The package files of a placed star, shared by the shape-only scaffold and the full generator (generate.mts); the command is
- * tools/objects/new-object.mts. */
+ * packages/telescope-cli/src/new-object/new-object-cli.mts. */
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { sphereProjection } from '@cssearth/bake/objects/scene';
+import type { SolarEpoch } from './solar-epoch.mts';
 
 export const TODO = 'TODO(new-object)';
 const AU_M = 149597870700, PARSEC_M = 3.085677581491367e16, SOLAR_RADIUS_KM = 695700, MAS_RAD = Math.PI / 180 / 3.6e6;
@@ -226,8 +226,8 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     preparation('preparation-celestial', 'preparation/celestial.json', 'Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun', ['starfield']),
     preparation('preparation-presentation', 'preparation/presentation.json', 'Repository-authored presentation profile: emissive mode', ['presentation']),
     preparation('physical-solar-system-recipe', 'presentation/solar-system.json', 'Repository-authored scene recipe: published radius, camera plan', ['scene'])],
-    generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', origin: spec.paper, credit: `Sphere of the published radius; marker written by tools/objects/new-object.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
-      recipe: { generator: 'tools/objects/new-object.mts', inputs: [`${id}-observational-measurements`] }, generator: 'tools/objects/new-object.mts', sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
+    generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', origin: spec.paper, credit: `Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-object-cli.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
+      recipe: { generator: 'packages/telescope-cli/src/new-object/new-object-cli.mts', inputs: [`${id}-observational-measurements`] }, generator: 'packages/telescope-cli/src/new-object/new-object-cli.mts', sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
     documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json'].map(path => ({ path,
       // Provenance refuses a document without a binding; the content record is authored here.
       ...(path === 'content/object.json' ? { sourceBinding: local('Project-authored factsheet, dataset recipe and legend.') } : {}) })) });
@@ -235,10 +235,9 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   return files;
 }
 
-export async function scaffoldStar(spec: StarScaffold, root = process.cwd()) {
+export async function scaffoldStar(spec: StarScaffold, { SOLAR_GEOMETRY_EPOCH_JD_TT }: Pick<SolarEpoch, 'SOLAR_GEOMETRY_EPOCH_JD_TT'>, root = process.cwd()) {
   if (await stat(resolve(root, 'src/objects', spec.id)).then(() => true, () => false)) throw new Error(`src/objects/${spec.id} already exists; the scaffold never overwrites a package.`);
   const record = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${spec.id}.json`), 'utf8')) as unknown;
-  const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await import(pathToFileURL(resolve(root, 'src/platform/solar-geometry.mts')).href) as { SOLAR_GEOMETRY_EPOCH_JD_TT: number };
   const files = scaffoldStarFiles(spec, record, SOLAR_GEOMETRY_EPOCH_JD_TT);
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
   const presentation = resolve(root, 'src/objects', spec.id, 'source/presentation');

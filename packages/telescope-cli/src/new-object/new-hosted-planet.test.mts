@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { scaffoldHostedPlanetFiles } from './new-hosted-planet.mts';
 
@@ -14,7 +14,7 @@ test('the hosted-planet scaffold refuses to invent a uniform synchronous rotatio
 
 test('a self-luminous planet scaffolds the emissive build Beta Pictoris c was made with', async () => {
   const { readFile } = await import('node:fs/promises');
-  const read = async (path: string) => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
+  const read = async (path: string) => readFile(new URL(`../../../../${path}`, import.meta.url), 'utf8');
   const json = async (path: string) => JSON.parse(await read(path)) as Record<string, any>;
   const files = scaffoldHostedPlanetFiles({ id: 'beta-pictoris-c', name: 'Beta Pictoris c', system: 'Beta Pictoris system', description: 'Test', paper: 'https://arxiv.org/abs/2010.04442',
     paperCredit: 'Test source', rotation: 'unmeasured', selfLuminous: { temperatureK: 1250, source: '1250 +/- 50 K, Nowak et al. (2020)' } },
@@ -34,7 +34,7 @@ test('a self-luminous planet scaffolds the emissive build Beta Pictoris c was ma
 
 test('a star on a hosted orbit scaffolds as a self-luminous star with its temperature colour', async () => {
   const { readFile } = await import('node:fs/promises');
-  const json = async (path: string) => JSON.parse(await readFile(new URL(`../../${path}`, import.meta.url), 'utf8')) as Record<string, any>;
+  const json = async (path: string) => JSON.parse(await readFile(new URL(`../../../../${path}`, import.meta.url), 'utf8')) as Record<string, any>;
   const [body, host] = [await json('packages/astronomy/data/bodies/vhs-1256-1257-companion.json'), await json('packages/astronomy/data/bodies/vhs-1256-1257.json')];
   const spec = { id: 'vhs-1256-1257-companion', name: 'VHS 1256-1257 B', system: 'VHS 1256-1257 system', description: 'Test', paper: 'https://arxiv.org/abs/2208.08448',
     paperCredit: 'Test source', rotation: 'unmeasured' as const };

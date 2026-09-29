@@ -1,13 +1,13 @@
 /** A published phase-curve fit as a heat-map lens beside a planet's default lens (phase-curve-lens.mts), offline. */
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 import { installPhaseCurveLens, parsePhaseCurveEntries } from './phase-curve-lens.mts';
 
 const test = sourceTest();
 
 test('the phase-curve route rebuilds HD 209458 b\'s hand-made Zellem heat map: the same record, range, palette and lens, beside the default', async () => {
-  const id = 'hd-209458b', o = `src/objects/${id}`, root = new URL('../../../', import.meta.url);
+  const id = 'hd-209458b', o = `src/objects/${id}`, root = new URL('../../../../', import.meta.url);
   const paths = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/content/object.json', 'source/manifest.json'];
   const files = new Map<string, string | Buffer>(await Promise.all(paths.map(async path => [`${o}/${path}`, await readFile(new URL(`${o}/${path}`, root), 'utf8')] as const)));
   const before = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>;
