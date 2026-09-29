@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadCelestialAdapters, type SolarSource, type StarfieldPlan, type SunPlan } from './adapters.ts';
@@ -14,7 +13,6 @@ export interface CelestialContext { readonly sourceDirectory: string; readonly p
   readonly solarGeometry: SolarGeometry; }
 export interface CelestialAssets { readonly sky: StarfieldPlan; readonly sun: SunPlan | null; }
 const schema = 'cssearth-celestial-preparation@2';
-const sourceDigest = /^[a-f0-9]{64}$/;
 type Input = Record<string, unknown>;
 
 function record(value: unknown, at: string): Input { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`); return value as Input; }

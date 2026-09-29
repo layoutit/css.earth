@@ -1,5 +1,4 @@
 import { linearToSrgb, srgbToLinear } from '../../color/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import { isArray, requireString, requireRecord } from '@cssearth/core';
 import type { RingMotionPoint, prepareRadialMotionAndShadow } from './radial-motion.ts';
 import type { prepareSpectralMaterialVariants } from './spectral-variants.ts';
@@ -37,7 +36,6 @@ interface LayeredInputs extends Omit<RadialPreparation,'ringGroups'> {
   lenses?:Awaited<ReturnType<typeof prepareSpectralMaterialVariants>>;
   views?:Awaited<ReturnType<typeof prepareCutawayMaterials>>;
 }
-import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -1506,7 +1504,6 @@ async function writeVerifiedPreparedShard({
   return Object.freeze({
     assetUrl,
     assetBytes: asset.byteLength,
-    assetSha256: sha256(asset),
     width: sourceBounds.width,
     height: sourceBounds.height,
     decodedRgbaBytes: sourceBounds.width * sourceBounds.height * 4,
@@ -1564,7 +1561,6 @@ async function writePreparedRuntimeAtlas({
   return Object.freeze({
     assetUrl,
     assetBytes: bytes.byteLength,
-    assetSha256: sha256(bytes),
     width,
     height,
     decodedRgbaBytes: width * height * 4,
@@ -1649,7 +1645,6 @@ async function prepareOrbitMaterialRuntimeShards({ variantId, path }: {variantId
     runtimeAtlas,
     defaultAsset,
     rows: Object.freeze(rows),
-    sourceDecodedSha256: sha256(data),
     alphaExactDecodedCropVerification: true,
     selectiveVisibleRgbEncoding: q75AssetUrls.length > 0
       ? PREPARED_Q75_WEBP_ENCODING
@@ -1732,7 +1727,6 @@ async function prepareInteriorAtmosphereRuntimeShards({ assetUrl, path }: {asset
   });
   return Object.freeze({
     sourceAssetUrl: assetUrl,
-    sourceDecodedSha256: sha256(data),
     exactVisibleDecodedCropVerification: true,
     runtimeAtlas,
     defaultAsset,
@@ -2092,7 +2086,6 @@ async function prepareNormalMaterialMasters() {
   const phaseMetadata = {
     approvedReferenceAsset: {
       byteLength: approvedFixedMaterialAsset.byteLength,
-      sha256: sha256(approvedFixedMaterialAsset),
     },
     initialObjectView,
     defaultFixedMaterial: materialMetadata(defaultFixedMaterial),
@@ -2176,7 +2169,6 @@ async function composePlanetTextures({
         return [atlas.id, Object.freeze({
           url: atlas.url,
           bytes: bytes.byteLength,
-          sha256: sha256(bytes),
         })] as const;
       },
     )),
@@ -2244,7 +2236,6 @@ async function composePlanetTextures({
       ));
       return [id, Object.freeze({
         id,
-        sourceDecodedSha256: shards.sourceDecodedSha256,
         exactVisibleDecodedCropVerification:
           shards.exactVisibleDecodedCropVerification,
         runtimeAtlas: shards.runtimeAtlas,
@@ -2312,7 +2303,6 @@ async function composePlanetTextures({
       ));
       return [id, Object.freeze({
         sourceAssetUrl: shards.sourceAssetUrl,
-        sourceDecodedSha256: shards.sourceDecodedSha256,
         exactVisibleDecodedCropVerification:
           shards.exactVisibleDecodedCropVerification,
         runtimeAtlas: shards.runtimeAtlas,
@@ -2353,14 +2343,8 @@ async function composePlanetTextures({
       sourcePath: config.labels.label006,
       assetUrl: PLANET_BODY_SURFACE_TEXTURE_URL,
       assetBytes: bodySurfaceAsset.byteLength,
-      assetSha256: createHash("sha256")
-        .update(bodySurfaceAsset)
-        .digest("hex"),
       sourceAssetUrl: PLANET_SURFACE_TEXTURE_URL,
       sourceAssetBytes: surfaceAsset.byteLength,
-      sourceAssetSha256: createHash("sha256")
-        .update(surfaceAsset)
-        .digest("hex"),
       faceCount: PLANET_TEXTURE_FACE_COUNT,
       uvLayout: "equirectangular-2-to-1-direct-longitude-latitude",
       sourceCellWidth: PLANET_SOURCE_CELL_WIDTH,
@@ -2376,7 +2360,6 @@ async function composePlanetTextures({
         model: config.labels.label007,
         assetUrl: PLANET_POLAR_TEXTURE_URL,
         assetBytes: polarAsset.byteLength,
-        assetSha256: sha256(polarAsset),
         encoding: PREPARED_Q75_WEBP_ENCODING,
         alphaEncoding: "lossless",
         tileSize: PLANET_POLAR_TEXTURE_SIZE,
@@ -2423,7 +2406,6 @@ async function composePlanetTextures({
       sourceUrl: PLANET_SURFACE_TEXTURE_URL,
       assetUrl: PLANET_ORBIT_MATERIAL_TEXTURE_URL,
       assetBytes: orbitMaterialAsset.byteLength,
-      assetSha256: sha256(orbitMaterialAsset),
       frameCount: PLANET_ORBIT_MATERIAL_FRAME_COUNT,
       frameRate: 0,
       faceCount: 1,
@@ -2434,9 +2416,6 @@ async function composePlanetTextures({
       defaultAsset: Object.freeze({
         preparationPath: config.labels.label012,
         assetBytes: fixedMaterialAsset.byteLength,
-        assetSha256: createHash("sha256")
-          .update(fixedMaterialAsset)
-          .digest("hex"),
         embeddedInOrbitAtlas: true,
         backgroundPosition:
           `-${PLANET_ORBIT_MATERIAL_DEFAULT_X}px ` +
@@ -2447,8 +2426,6 @@ async function composePlanetTextures({
         runtimePresentation: Object.freeze({
           assetUrl: orbitMaterialRuntimeShards.runtimeAtlas.assetUrl,
           assetBytes: orbitMaterialRuntimeShards.runtimeAtlas.assetBytes,
-          assetSha256:
-            orbitMaterialRuntimeShards.runtimeAtlas.assetSha256,
           backgroundPosition:
             `-${PLANET_ORBIT_MATERIAL_DEFAULT_X}px ` +
             `-${PLANET_ORBIT_MATERIAL_DEFAULT_Y}px`,
@@ -2461,7 +2438,6 @@ async function composePlanetTextures({
       approvedReferenceAsset: Object.freeze({
         sourcePath: config.labels.label013,
         assetBytes: approvedReferenceAsset.byteLength,
-        assetSha256: approvedReferenceAsset.sha256,
         embeddedInOrbitAtlas: false,
       }),
       presentationScale: PLANET_FIXED_MATERIAL_COVERAGE_SCALE,
@@ -2504,9 +2480,6 @@ async function composePlanetTextures({
         compositedIntoMaterialAsset: true,
         assetUrl: PLANET_ORBIT_MATERIAL_TEXTURE_URL,
         assetBytes: orbitMaterialAsset.byteLength,
-        assetSha256: createHash("sha256")
-          .update(orbitMaterialAsset)
-          .digest("hex"),
         limb: Object.freeze({ models: LIMB_LAW.paths, referenceColor: limbReference }),
         initialObjectViewDirection: initialObjectView.map((component) =>
           Number(component.toFixed(6))),
@@ -2520,16 +2493,10 @@ async function composePlanetTextures({
         model: "prepared-cutaway-full-exterior-material-oblate-texels",
         assetUrl: INTERIOR_ATMOSPHERE_TEXTURE_URL,
         assetBytes: interiorAtmosphereAsset.byteLength,
-        assetSha256: createHash("sha256")
-          .update(interiorAtmosphereAsset)
-          .digest("hex"),
         lensAssets: Object.freeze({
           normal: Object.freeze({
             url: INTERIOR_ATMOSPHERE_TEXTURE_URL,
             bytes: interiorAtmosphereAsset.byteLength,
-            sha256: createHash("sha256")
-              .update(interiorAtmosphereAsset)
-              .digest("hex"),
           }),
           ...interiorAtmosphereLensAssets,
         }),
@@ -2602,9 +2569,6 @@ async function composePlanetTextures({
         model: "prepared-fixed-world-light-and-ring-shadow-view-bank",
         assetUrl: PLANET_ORBIT_MATERIAL_TEXTURE_URL,
         assetBytes: orbitMaterialAsset.byteLength,
-        assetSha256: createHash("sha256")
-          .update(orbitMaterialAsset)
-          .digest("hex"),
         frameCount: PLANET_ORBIT_MATERIAL_FRAME_COUNT,
         frameColumns: PLANET_ORBIT_MATERIAL_COLUMNS,
         frameRows: PLANET_ORBIT_MATERIAL_ROWS,
@@ -2654,8 +2618,6 @@ async function composePlanetTextures({
           defaultVariant: DEFAULT_LENS_ID,
           variants: orbitMaterialRuntimeVariantPlans,
           sourceAssetUrl: PLANET_ORBIT_MATERIAL_TEXTURE_URL,
-          sourceDecodedSha256:
-            orbitMaterialRuntimeShards.sourceDecodedSha256,
           alphaExactDecodedCropVerification:
             orbitMaterialRuntimeShards.alphaExactDecodedCropVerification,
           selectiveVisibleRgbEncoding:
@@ -3606,7 +3568,6 @@ function createRuntimeScenePlan(source:typeof scene) {
       mode: source.preparedSurface.mode,
       assetUrl: source.preparedSurface.assetUrl,
       assetBytes: source.preparedSurface.assetBytes,
-      assetSha256: source.preparedSurface.assetSha256,
       faceCount: source.preparedSurface.faceCount,
       uvLayout: source.preparedSurface.uvLayout,
       equivalentBodySampleWidth:

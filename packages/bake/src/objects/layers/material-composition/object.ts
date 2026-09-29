@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import {readAuthoredSources} from '../../sources/index.ts';
 import {parse} from '@cssearth/core/schema';
 import {PREPARED_CSS_OBJECT_FORMAT} from '@cssearth/renderer/prepared-data/object-format.ts';

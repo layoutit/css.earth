@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import {parse} from '@cssearth/core/schema';
 import { cutawayRecipe, interiorSource, type InteriorSource } from '../cutaway/index.ts';
 import type {ReadonlyVector3, Vector3} from '../../geometry/index.ts';
@@ -118,7 +117,6 @@ const prepared = Object.freeze({
       width: config.thumbnail.width,
       height: config.thumbnail.height,
       bytes: thumbnailBytes.byteLength,
-      sha256: sha256(thumbnailBytes),
       encoding: PREPARED_Q75_WEBP_ENCODING,
     }),
   }),
@@ -257,7 +255,6 @@ async function writePreparedRaster({ url, url2x, width, height, render }: {url:s
       width: rasterWidth,
       height: rasterHeight,
       bytes: bytes.byteLength,
-      sha256: sha256(bytes),
     }));
   }
   return Object.freeze({
@@ -319,7 +316,6 @@ async function writePreparedOuterPoleRaster({
       width,
       height,
       bytes: bytes.byteLength,
-      sha256: sha256(bytes),
     }));
   }
   return Object.freeze({

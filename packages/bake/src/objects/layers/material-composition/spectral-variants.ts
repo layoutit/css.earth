@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '../../../raster/index.ts';
 import {parse} from '@cssearth/core/schema';
 import {spectralRecipe, type SpectralRecipe} from './spectral-recipe.ts';
@@ -158,18 +157,6 @@ async function prepareLens(plan: SpectralLens) {
   ]));
   const thumbnailPath = resolve(publicRoot, `${config.namespace}-lens-${plan.id}.webp`);
   await prepareThumbnail(surfacePath, thumbnailPath);
-  const assets = await Promise.all([
-    surfacePath,
-    surface2xPath,
-    polesPath,
-    ringPath,
-    ring2xPath,
-    ...materialModes.flatMap((mode) => [
-      materialPaths[mode].exterior,
-      materialPaths[mode].interior,
-    ]),
-    thumbnailPath,
-  ].map((assetPath) => readFile(assetPath)));
   return Object.freeze({
     id: plan.id,
     materialLens: plan.id,
@@ -206,22 +193,6 @@ async function prepareLens(plan: SpectralLens) {
       ? [plan.sourceFiles[plan.detailSourceIndex]]
       : []),
     sourceUrls: Object.freeze('sourceUrls' in plan ? plan.sourceUrls : []),
-    assetSha256: Object.freeze({
-      surface: sha256(assets[0]),
-      surface2x: sha256(assets[1]),
-      poles: sha256(assets[2]),
-      rings: sha256(assets[3]),
-      rings2x: sha256(assets[4]),
-      material: sha256(assets[5]),
-      interiorMaterial: sha256(assets[6]),
-      materialNoShadows: sha256(assets[7]),
-      interiorMaterialNoShadows: sha256(assets[8]),
-      materialRingless: sha256(assets[9]),
-      interiorMaterialRingless: sha256(assets[10]),
-      materialRinglessNoShadows: sha256(assets[11]),
-      interiorMaterialRinglessNoShadows: sha256(assets[12]),
-      thumbnail: sha256(assets[13]),
-    }),
   });
 }
 

@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import {parse} from '@cssearth/core/schema';
 import {photometricRecipe, type PhotometricRecipe} from './photometric-contract.ts';
 import type {MaterialAsset} from './material-contract.ts';
@@ -86,7 +85,7 @@ export async function preparePhotometricDisc({sourceDirectory,publicDirectory,co
   if(write&&!publicDirectory)throw new TypeError('Photometric output directory is required for writing.');
   if(write)await mkdir(outputDirectory,{recursive:true});
   const{bank}=config,stride=config.frameSize+bank.gutter*2,rowCount=Math.ceil(bank.frames/bank.framesPerRow),assets:MaterialAsset[]=[],rows=[],presentations=[];
-  const output=async(filename: string,data: Buffer,width: number,height: number)=>{const asset={filename,width,height,bytes:data.length,sha256:sha256(data),data};if(write)await writeFile(resolve(outputDirectory,filename),data);assets.push(asset);return asset;};
+  const output=async(filename: string,data: Buffer,width: number,height: number)=>{const asset={filename,width,height,bytes:data.length,data};if(write)await writeFile(resolve(outputDirectory,filename),data);assets.push(asset);return asset;};
   for(let row=0;row<rowCount;row++){
     const first=row*bank.framesPerRow,count=Math.min(bank.framesPerRow,bank.frames-first),columns=Math.min(bank.columns,count),lines=Math.ceil(count/bank.columns),width=columns*stride,height=lines*stride,composites: OverlayOptions[]=[],filename=config.rowOutput.replace('{row}',String(row).padStart(2,'0'));
     for(let column=0;column<count;column++){
@@ -95,10 +94,10 @@ export async function preparePhotometricDisc({sourceDirectory,publicDirectory,co
       presentations.push({frameIndex:frame,lightViewZ,rowIndex:row,url:`${config.urlPrefix}${filename}`,backgroundPosition:`${-left/config.pixelDensity}px ${-top/config.pixelDensity}px`,backgroundSize:`${width/config.pixelDensity}px ${height/config.pixelDensity}px`,cameraLightDirection:prepared.cameraLightDirection,projection:prepared.projection});
     }
     const bytes=await sharp({create:{width,height,channels:4,background:{r:0,g:0,b:0,alpha:0}}}).composite(composites).webp(config.encoding).toBuffer();
-    const asset=await output(filename,bytes,width,height);rows.push({rowIndex:row,url:`${config.urlPrefix}${filename}`,bytes:asset.bytes,sha256:asset.sha256,width,height,decodedRgbaBytes:width*height*4});
+    const asset=await output(filename,bytes,width,height);rows.push({rowIndex:row,url:`${config.urlPrefix}${filename}`,bytes:asset.bytes,width,height,decodedRgbaBytes:width*height*4});
   }
   const frame=rasterPhotometricDisc(config,1,{shadowless:true}),data=await sharp(frame.data,{raw:{width:config.frameSize,height:config.frameSize,channels:4}}).webp(config.encoding).toBuffer(),fixed=await output(config.shadowlessOutput,data,config.frameSize,config.frameSize);
-  const shadowless={url:`${config.urlPrefix}${fixed.filename}`,bytes:fixed.bytes,sha256:fixed.sha256,width:fixed.width,height:fixed.height,backgroundPosition:'0px 0px',backgroundSize:`${config.presentationSize}px ${config.presentationSize}px`,lightSpace:'prepared-view-aligned-shadowless-flood'};
+  const shadowless={url:`${config.urlPrefix}${fixed.filename}`,bytes:fixed.bytes,width:fixed.width,height:fixed.height,backgroundPosition:'0px 0px',backgroundSize:`${config.presentationSize}px ${config.presentationSize}px`,lightSpace:'prepared-view-aligned-shadowless-flood'};
   const defaultFrame=Math.round((config.referenceLightDirection[2]+1)/2*(bank.frames-1)),defaultRow=Math.floor(defaultFrame/bank.framesPerRow),initialWarmRows=[Math.max(0,defaultRow-1),defaultRow,Math.min(rowCount-1,defaultRow+1)].filter((value,index,array)=>array.indexOf(value)===index);
   return{config,assets,rows,presentations,shadowless,transport:{defaultFrame,defaultRow,initialWarmRows,maximumRetainedRowCount:bank.maximumRetainedRows,framesPerRow:bank.framesPerRow}};
 }

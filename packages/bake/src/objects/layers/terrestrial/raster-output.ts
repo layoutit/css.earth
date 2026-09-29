@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { writeLossyWebp } from '../../../raster/index.ts';
 import type { Sharp, WebpOptions } from 'sharp';
 import sharp from 'sharp';
@@ -16,7 +15,6 @@ export function createRasterEmitter(publicDirectory:string, publicBase:string) {
     if (encoding.lossless || encoding.quality !== undefined) await writeFile(path, bytes);
     const { width, height } = await sharp(bytes).metadata();
     if (!width || !height) throw new Error(`Raster output has no dimensions: ${filename}`);
-    return { url: `${publicBase}${filename}`, width, height, bytes: bytes.length,
-      sha256: sha256(bytes) };
+    return { url: `${publicBase}${filename}`, width, height, bytes: bytes.length };
   };
 }
