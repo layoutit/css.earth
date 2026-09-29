@@ -88,7 +88,7 @@
     "typecheck:packages": "pnpm -r --filter \"./packages/**\" typecheck",
     "typecheck:platform": "tsc -p src/platform/tsconfig.json",
     "typecheck:pr": "pnpm run '/^typecheck:pr:/'",
-    "typecheck:pr:core": "pnpm typecheck:configs && pnpm typecheck:packages && pnpm typecheck:platform && pnpm typecheck:ownership && node .github/scripts/checks/typescript-ownership.mts",
+    "typecheck:pr:core": "pnpm typecheck:configs && pnpm typecheck:packages && pnpm typecheck:platform && pnpm typecheck:ownership && node .github/scripts/checks/typescript-ownership.mts && node .github/scripts/checks/check-no-hashes.mts",
     "typecheck:pr:scripts": "pnpm typecheck:scripts",
     "typecheck:pr:astro": "pnpm typecheck:astro",
     "typecheck:renderer": "pnpm --filter @cssearth/renderer typecheck",
