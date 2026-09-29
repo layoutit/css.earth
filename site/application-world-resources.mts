@@ -14,6 +14,7 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
+import { withOverviewScope } from './navigation/navigation-scope.mts';
 
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
@@ -99,7 +100,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const catalogBank = { fadeStartDistanceM: fades.galaxies.fadeStartDistanceM, fullDistanceM: fades.galaxies.fullDistanceM,
       clusters: { fadeStartDistanceM: fades.clusters.fadeStartDistanceM, fullDistanceM: fades.clusters.fullDistanceM } };
     const universe = createPreparedUniverse({
-      environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, stellarExtents: STELLAR_EXTENTS,
+      environmentLinks: { 'milky-way': (link => link.pathname + link.search)(withOverviewScope(new URL(`/${applicationContext.focus.id}/`, location.origin), 'milky-way')) }, stellarExtents: STELLAR_EXTENTS,
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
       // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).

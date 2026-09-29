@@ -45,7 +45,7 @@ function findData(pin: FeatureIndexPin, read: ReadPrepared): Promise<FindData> {
  * second order; a typed name ranks exact and leading matches first within this order (`searchObjects`). */
 function catalogueLabels(entries: readonly CatalogueIndexEntry[]) {
   return entries.map(entry => ({ entry, name: entry.name.toLocaleLowerCase('en'), names: entry.searchNames, classification: entry.classification,
-    classificationName: entry.classificationName, systemName: entry.systemName, illustration: entry.illustration, candidate: entry.candidate }))
+    classificationName: entry.classificationName, systemName: entry.systemName, illustration: entry.illustration }))
     .sort((a, b) => Number(b.classification === 'planet') - Number(a.classification === 'planet') || a.entry.distanceMeters - b.entry.distanceMeters);
 }
 const catalogueLabelsByIndex = new WeakMap<readonly CatalogueIndexEntry[], ReturnType<typeof catalogueLabels>>();

@@ -99,7 +99,7 @@ cover total accounting and rejection before package replacement.
   resources and zero separate stars, plus two separate dataset previews.
   These file checks do not qualify the rendered appearance.
 - The generic application discovery functions admit one destination at
-  `/sun/?focus=omega-centauri`, classified as a Galactic globular cluster.
+  `/sun/?focus=omega-centauri` (its page is now `/omega-centauri/`), classified as a Galactic globular cluster.
   [Controlled-camera browser automation](evidence/2026-09-20/app-inspection.json)
   captured both lenses, front/oblique and both side axes, with seven captures, no
   page errors or failed requests, one mounted scene/camera and no canvas. It applies

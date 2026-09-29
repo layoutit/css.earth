@@ -20,7 +20,7 @@ const pin = { url: '/features/index.json', count: 1 };
 const entry = (kind: 'scene' | 'prepared-focus', name: string, classification: string, distanceMeters: number, searchNames: string[] = []): CatalogueIndexEntry => {
   const id = name.toLowerCase();
   return { kind, id, name, searchNames, classification, classificationName: classification, systemName: 'solar system',
-    route: kind === 'scene' ? `/${id}/` : `/sun/?focus=${id}`, illustration: false, candidate: false, distanceMeters,
+    route: `/${id}/`, illustration: false, distanceMeters,
     detail: { text: `${distanceMeters} m`, title: 'Observer distance', ariaLabel: `${distanceMeters} m. Observer distance` },
     source: { subject: `${kind === 'scene' ? 'object' : 'focus'}:${id}`, document: `/sources/${id}/`, label: `Sources for ${name}` },
     marker: kind === 'scene' ? { kind: 'scene', id: 'saturn', color: '#fff' } : { kind: 'focus', thumbnail: null } };
@@ -56,7 +56,7 @@ test('native search lists the rows the find function would answer, with the same
   const document = await render('/saturn/?q=orion');
   assert.deepEqual(visibleNames(document), ['M42']);
   const row = document.querySelector('[data-catalogue-list] .object-item a');
-  assert.equal(row?.getAttribute('href'), '/sun/?focus=m42');
+  assert.equal(row?.getAttribute('href'), '/m42/');
   assert.equal(row?.getAttribute('data-source-subject'), 'focus:m42');
   const live = parseFindResponse(await (await handleFindRequest(new Request(`${origin}/.netlify/functions/find?object=saturn&q=orion`), data())).json());
   assert.deepEqual(live.objects.rows.map(result => result.name), visibleNames(document));
@@ -80,13 +80,11 @@ test('native search replaces the selected card, lists the find function\'s match
   }
 });
 
-test('empty submission browses all objects, categories retain the query, pills replace it', async () => {
-  const empty = await render('/saturn/?q=');
+test('empty submission browses all objects, keeps the view context, and pills replace the query', async () => {
+  const empty = await render('/saturn/?q=&v=saved-view');
   assert.deepEqual(visibleNames(empty), ['Saturn', 'Titan', 'M42']);
-  const category = await render('/saturn/?q=&category=satellite&v=saved-view');
-  assert.deepEqual(visibleNames(category), ['Titan']);
-  assert.equal(category.querySelector('input[name=v]')?.getAttribute('value'), 'saved-view');
-  assert.equal(category.querySelector('input[name=v]')?.hasAttribute('disabled'), false);
+  assert.equal(empty.querySelector('input[name=v]')?.getAttribute('value'), 'saved-view');
+  assert.equal(empty.querySelector('input[name=v]')?.hasAttribute('disabled'), false);
   const pill = await render('/saturn/?q=old&browse=Planets');
   assert.deepEqual(visibleNames(pill), ['Saturn']);
   assert.equal(pill.querySelector('input[name=q]')?.getAttribute('value'), 'Planets');
@@ -130,19 +128,19 @@ const contextHtml = html
   .replace('<div data-prepared-focus-card hidden><span data-focus-name></span></div>',
     '<div data-prepared-focus-card data-prepared-focus-id="m42" hidden><span data-focus-name>Orion Nebula</span></div>');
 
-test('a URL that names both a focus and an overview resolves to the focus alone', async () => {
-  const card = (query: string) => render(`/saturn/${query}`, data(), contextHtml);
-  const overview = await card('?overview=system');
+test('a focus page that also names an overview resolves to the focus alone', async () => {
+  const card = (path: string) => render(path, data(), contextHtml);
+  const overview = await card('/saturn/?overview=system');
   assert.equal(overview.querySelector<HTMLElement>('.object-context [data-system-results]')?.hidden, false);
   assert.equal(overview.querySelector<HTMLElement>('.object-context')?.hidden, false);
-  for (const query of ['?overview=system&focus=m42', '?focus=m42&overview=system']) {
+  for (const query of ['/m42/?overview=system', '/m42/?overview=system&q=']) {
     const both = await card(query);
     assert.equal(both.querySelector<HTMLElement>('[data-prepared-focus-card]')?.hidden, false, query);
     assert.equal(both.querySelector<HTMLElement>('.object-context [data-system-results]')?.hidden, true, query);
     assert.equal(both.querySelector<HTMLElement>('.object-context [data-galactic-overview]')?.hidden, true, query);
     // Clearing a search keeps the view context, normalized the same way.
     const clear = new URL(both.querySelector('.object-sidebar-search-clear')?.getAttribute('href') ?? '/', origin);
-    assert.equal(clear.searchParams.get('focus'), 'm42', query);
+    assert.equal(clear.pathname, '/m42/', query);
     assert.equal(clear.searchParams.has('overview'), false, query);
   }
 });
@@ -152,16 +150,17 @@ test('native and live selections share card visibility, inertness, labels and sy
     '.object-context, .object-information-panel, [data-prepared-focus-card], [data-galactic-overview], [data-large-scale-overview], [data-system-results], [data-system-header], [data-solar-system-facts]')]
     .map(element => ({ hidden: element.hidden, inert: element.hasAttribute('inert'), label: element.getAttribute('aria-label'), current: element.hasAttribute('data-system-current') }));
   const cases = [
-    ['', 'saturn', { kind: 'object', objectId: 'saturn' }],
-    ['?overview=system', 'trappist-1', { kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } }],
-    ['?overview=milky-way', 'saturn', { kind: 'overview', overview: { scope: 'milky-way', systemId: 'sun' } }],
-    ['?overview=local-group', 'saturn', { kind: 'overview', overview: { scope: 'local-group', systemId: 'sun' } }],
-    ['?overview=nearby-universe', 'saturn', { kind: 'overview', overview: { scope: 'nearby-universe', systemId: 'sun' } }],
-    ['?focus=m42&overview=system', 'saturn', { kind: 'focus', id: 'm42' }],
+    ['', 'saturn', { kind: 'object', objectId: 'saturn' }, '/saturn/'],
+    ['?overview=system', 'trappist-1', { kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } }, '/trappist-1/'],
+    ['?overview=milky-way', 'saturn', { kind: 'overview', overview: { scope: 'milky-way', systemId: 'sun' } }, '/saturn/'],
+    ['?overview=local-group', 'saturn', { kind: 'overview', overview: { scope: 'local-group', systemId: 'sun' } }, '/saturn/'],
+    ['?overview=nearby-universe', 'saturn', { kind: 'overview', overview: { scope: 'nearby-universe', systemId: 'sun' } }, '/saturn/'],
+    // A catalogue focus's page draws its host scene: the focus wins over an overview it also names.
+    ['?overview=system', 'saturn', { kind: 'focus', id: 'm42' }, '/m42/'],
   ] as const;
-  for (const [query, objectId, subject] of cases) {
+  for (const [query, objectId, subject, page] of cases) {
     const source = contextHtml.replace('data-search-object="saturn"', `data-search-object="${objectId}"`);
-    const native = await render(`/${objectId}/${query}`, data(), source);
+    const native = await render(`${page}${query}`, data(), source);
     const live = parseHTML(source).document;
     const present = createSelectionPresentation(live);
     present.present({ kind: 'overview', overview: { scope: 'system', systemId: 'sun' } });
@@ -222,15 +221,17 @@ test('queries stay text, are bounded, and cannot become executable attributes or
 });
 
 test('Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function', () => {
-  const result = searchRoute(new Request(`${origin}/saturn/?q=titan&category=satellite&v=view&overview=system`));
+  const result = searchRoute(new Request(`${origin}/saturn/?q=titan&dataset=visible&v=view&overview=system`));
   assert.equal(result?.pathname, '/.netlify/functions/search');
   assert.equal(result?.searchParams.get('object'), 'saturn');
-  assert.equal(result?.searchParams.get('category'), 'satellite');
+  assert.equal(result?.searchParams.get('dataset'), 'visible');
   assert.equal(result?.searchParams.get('v'), 'view');
   assert.equal(searchRoute(new Request(result!)), undefined);
-  for (const query of ['overview=system', 'v=view', 'settings=1', 'feature=6152', 'focus=m42', 'focusLens=visible']) {
+  for (const query of ['overview=system', 'v=view', 'settings=1', 'feature=6152', 'dataset=visible']) {
     assert.equal(searchRoute(new Request(`${origin}/saturn/?${query}`))?.pathname, '/.netlify/functions/search');
   }
+  // A catalogue focus's page is routed by its own id; the function renders it on its host scene's page.
+  assert.equal(searchRoute(new Request(`${origin}/m42/?dataset=eso-vista`))?.searchParams.get('object'), 'm42');
   for (const path of ['/saturn/', '/scenes/saturn/image.webp?q=text', '/navigation/saturn/?q=text']) assert.equal(searchRoute(new Request(origin + path)), undefined);
   assert.equal(searchRoute(new Request(origin + '/?q=text'))?.searchParams.get('object'), 'earth');
 });

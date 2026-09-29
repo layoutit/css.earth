@@ -80,10 +80,12 @@ renderer intercepts those buttons and updates the retained scene in place.
 Startup adopts the dataset rendered by the server as its first selection,
 without publishing the default dataset first.
 
-Prepared focus volumes, such as Orion under `/sun/?focus=m42`, use the same
-request path. Their dataset buttons submit `focusLens`; the response selects
-the authenticated bank inside the existing scene and fills the shared focus
-card. Catalogue transport is separate pinned JSON, shared by the response and
+A catalogue focus has its own page, such as Orion's `/m42/`: its host scene's page
+with the focus selected. Its dataset buttons submit `dataset`, as on every page;
+the response selects the authenticated bank inside the existing scene and fills
+the shared focus card. The deploy build renders each focus page through the same
+function once (`site/build/prerender-focus-pages.mts`), so the static page opens
+on its card with or without JavaScript. Catalogue transport is separate pinned JSON, shared by the response and
 browser. Construction-order identities let the live volume publisher adopt
 the response's elements and selected lens. Responsive CSS lengths retain the
 prepared camera's projection until the browser resolves its viewport. A flight
@@ -104,9 +106,8 @@ a compatible dataset and publishes the same feature caption used by live labels;
 JavaScript adds the camera flight after that body is ready.
 
 `netlify/edge-functions/search-route.ts` (its routing is `site/server/search-route.mts`) routes requests containing `q`, `dataset`,
-`settings`, `feature`, `v`, `focus` or `focusLens` to the Node function in
-`netlify/functions/search.ts`. It keeps optional category
-and view parameters, and passes ordinary pages and assets straight through.
+`settings`, `feature`, `v` or `overview` to the Node function in
+`netlify/functions/search.ts`. It keeps the view parameters, and passes ordinary pages and assets straight through.
 The search work runs in Node because parsing the shell and searching the index
 can exceed Netlify's edge CPU budget. The application continues to build static
 pages; it does not need an Astro server adapter.

@@ -3,7 +3,7 @@ import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runti
 import type { PreparedFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 import type { SceneSession } from './scene-session.mts';
 import { errorMessage } from '../browser/browser-types.mts';
-import { readDatasetUrl } from '../dataset-url.mts';
+import { readSceneDatasetUrl } from '../dataset-url.mts';
 
 interface CompanionClouds {
   focusBank(objectId: string): PreparedFocusBank | null;
@@ -64,8 +64,8 @@ export function createDatasetEffects(session: SceneSession, getWorld: () => Comp
   };
 }
 
-export function selectSceneDataset(session: Pick<SceneSession, 'mount' | 'shell'>, href: string, signal: AbortSignal, { initial = false } = {}): boolean | Promise<boolean> {
-  const { id, requested } = readDatasetUrl(new URL(href));
+export function selectSceneDataset(session: Pick<SceneSession, 'objectId' | 'mount' | 'shell'>, href: string, signal: AbortSignal, { initial = false } = {}): boolean | Promise<boolean> {
+  const { id, requested } = readSceneDatasetUrl(new URL(href), session.objectId);
   const datasets = session.mount?.datasets;
   if (requested && (!datasets || !datasets.ids.includes(id!))) throw new RangeError(`Dataset “${id}” is unavailable on this object.`);
   if (!datasets || initial && !requested && !datasets.volumeOf(datasets.current() ?? datasets.defaultId)) return true;

@@ -14,7 +14,7 @@ test('an initial galaxy focus retains its transitive positioned and unpositioned
   const fragment = initialFocusCatalog(catalogue, smc);
   assert.equal(fragment.schema, 'cssearth-galaxy-catalog@1');
   assert.deepEqual(fragment.objects.map(object => object.id), ['lmc', 'smc']);
-  assert.deepEqual(fragment.unpositionedHosts?.map(object => object.id), ['mw']);
+  assert.deepEqual(fragment.unpositionedHosts?.map(object => object.id), ['milky-way']);
   const document = parseHTML(`<script type="application/json" data-initial-focus="smc">${JSON.stringify(fragment)}</script>`).document;
   assert.equal(readInitialFocus(document)?.id, 'smc', 'the explicit identity selects SMC rather than its first positioned host');
 });

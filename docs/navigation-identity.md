@@ -7,7 +7,7 @@ nebula catalogues. Search, aliases and classification tabs use this inventory.
 | Concept | Meaning and owner |
 | --- | --- |
 | Scene destination | A body package with a route, prepared world frame and scene loader. |
-| Prepared-focus destination | A catalogue subject selected on the existing scene’s shared camera. Its canonical URL records a host scene and `focus` identity. |
+| Prepared-focus destination | A catalogue subject the map can open: a galaxy cluster, or a subject an object package details. Its page, `/<id>/`, is its host scene’s page with the subject selected; `?dataset=` selects its lens, as on every page. Other catalogue rows are labels with no page. |
 | Rendering resource | A volume, image bank, point field or other prepared content. A resource descriptor alone does not publish a destination. |
 | Dataset view | A selectable `(objectId, lensId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
@@ -17,9 +17,10 @@ and scene conformance use this filter because a prepared focus does not own
 another scene. `requireObject` resolves either destination kind;
 `requireSceneObject` rejects a focus when a caller needs a scene loader.
 
-The local-group catalogue’s `m_031` is the Andromeda destination. `m31` names
-its image resource through `detailedObjectId`; it does not create a second
-navigable Andromeda. Non-navigable context resources remain outside `OBJECTS`.
+One object has one id. A catalogue row that an object package details takes the
+package's id when the catalogue is prepared: Andromeda is `m31` in the catalogue,
+the registry, its page and its links, and the LVDB key `m_031` stays in its source
+references. Non-navigable context resources remain outside `OBJECTS`.
 Adding a classification does not add a renderer, shell or camera owner.
 
 `sceneHostId` identifies the scene displaying a prepared focus. A galaxy's
