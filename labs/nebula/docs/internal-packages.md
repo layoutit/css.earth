@@ -1,6 +1,6 @@
 # Internal packages and validation
 
-The lab and its scientific libraries are three private pnpm workspace packages inside this repository. They use source TypeScript exports and are not published. The volume contracts and the deterministic volume bake they share are the `@cssearth/bake/volume` and `@cssearth/bake/volume/node` entries of [`packages/bake`](../../../packages/bake/README.md), the repository's build-time preparation package; until 2026-09 they were the lab's `volume-core` and `volume-bake` packages. Recipes, historical receipts and scientific distinctions remain source-owned; moving code does not qualify a new physical model or visual result.
+The lab uses three private pnpm workspace packages: `lab` and `reconstruction` under `labs/nebula/packages/`, and [`volume-viewer`](../../../packages/volume-viewer/README.md) under `packages/`. They use source TypeScript exports and are not published. The volume contracts and the deterministic volume bake they share are the `@cssearth/bake/volume` and `@cssearth/bake/volume/node` entries of [`packages/bake`](../../../packages/bake/README.md), the repository's build-time preparation package; until 2026-09 they were the lab's `volume-core` and `volume-bake` packages. Recipes, historical receipts and scientific distinctions remain source-owned; moving code does not qualify a new physical model or visual result.
 
 ## Ownership
 
@@ -45,7 +45,7 @@ The local `labs/nebula/nebula_lab_refactor.md` plan records remaining migration 
 | --- | --- |
 | Browser/runtime | None, not even an erased type: a type the renderer needs belongs to the renderer's own contracts |
 | Application preparation | The public `@cssearth/bake/volume` and `@cssearth/bake/volume/node` entries |
-| Research workspace | The three private packages and the bake's volume entries, through their declared public exports |
+| Research workspace | `labs/nebula/packages/{lab,reconstruction}`, `packages/volume-viewer` and the bake's volume entries, through their declared public exports |
 | Tests | Public package APIs; tests cannot act as wrappers that bypass production restrictions |
 
 The inbound guard traces imports through local wrappers, resolves static imports, re-exports, module loaders and TypeScript aliases, and rejects direct lab and `packages/bake` source paths. It also rejects statically resolvable filesystem reads into the lab. Computed module loading is rejected in compact application preparation and nebula-bearing loaders. It is not a general proof about arbitrary opaque plugin loaders.

@@ -1,0 +1,49 @@
+{
+  "id": "planck-2018-smica-cmb",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Planck 2018 results. IV. Diffuse component separation",
+  "identifiers": [
+    {
+      "type": "arxiv",
+      "value": "1807.06208"
+    },
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/201833881"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1807.06208",
+      "label": "arXiv:1807.06208"
+    },
+    {
+      "role": "archive",
+      "url": "https://irsa.ipac.caltech.edu/data/Planck/release_3/all-sky-maps/maps/component-maps/cmb/",
+      "label": "Planck PR3 CMB maps at IRSA (COM_CMB_IQU-smica_2048_R3.00_full.fits)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://irsa.ipac.caltech.edu/data/Planck/release_3/all-sky-maps/maps/component-maps/cmb/COM_CMB_IQU-smica_2048_R3.00_full.fits",
+      "checkedOn": "2026-09-29",
+      "locator": "I_STOKES, HEALPix Nside 2048, Galactic, K_CMB"
+    }
+  ],
+  "creators": [
+    "Planck Collaboration"
+  ],
+  "publisher": "A&A 641, A4",
+  "publicationDate": "2020",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Based on observations obtained with Planck (http://www.esa.int/Planck), an ESA science mission with instruments and contributions directly funded by ESA Member States, NASA, and Canada. Cite Planck Collaboration (2020), A&A 641, A4.",
+      "scope": "Cosmic microwave background map",
+      "evidence": "https://arxiv.org/abs/1807.06208"
+    }
+  ]
+}

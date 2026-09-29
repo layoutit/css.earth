@@ -39,7 +39,7 @@ The 40 stars around it are astronomy records in `packages/astronomy/data/bodies/
 drawn from those records, without pages of their own, until each gets a package. [S2](../s2/README.md) has one: the
 generator packages its record as it is (`{ "record": true }` in the spec). S301 comes from its discovery paper
 (GRAVITY Collaboration 2026, [arXiv:2607.12664](https://arxiv.org/abs/2607.12664)). The other 39 are written by
-`packages/astronomy/tools/generate-s-stars.mts`, which reads every value from its publication:
+`packages/astronomy/cli/generate-s-stars.mts`, which reads every value from its publication:
 
 | What | Source |
 | --- | --- |

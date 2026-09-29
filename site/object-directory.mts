@@ -38,7 +38,7 @@ export function objectFromEntry(value: unknown): NavigableObject {
 export function loadObject(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<NavigableObject | null> {
   const known = knownObject(id);
   if (known) return Promise.resolve(known);
-  if (!/^[a-z0-9][a-z0-9-]*$/u.test(id)) return Promise.resolve(null);
+  if (!/^[a-z0-9][a-z0-9_.+-]*$/u.test(id)) return Promise.resolve(null);
   let pending = loading.get(id);
   if (!pending) {
     pending = read(id).then(value => {

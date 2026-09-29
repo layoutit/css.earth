@@ -25,6 +25,7 @@ import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { readInitialFocus } from '../focus-catalog.mts';
+import { drawnPageFromUrl, isOverviewPage, WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from '../navigation/navigation-lifecycle.mts';
@@ -221,7 +222,7 @@ export function createSceneRouter({
       const viewport = world.viewport;
       const factory = await (replacement?.factory ?? loadObject(objectId, readPreparedDescriptor(documentTarget, objectId), session.signal));
       if (!scenes.isCurrent(session)) return;
-      const startup = !replacement ? await prepareStartupBillboard(stage, factory, viewport, session.url ?? windowTarget.location.href, session.signal) : null;
+      const startup = !replacement ? await prepareStartupBillboard(stage, factory, viewport, session.url ?? windowTarget.location.href, session.objectId, session.signal) : null;
       handoff ??= startup ?? undefined;
       publication.publish();
       if (!scenes.isCurrent(session)) return;
@@ -305,7 +306,7 @@ export function createSceneRouter({
       if (!await registry.loadObject(objectId)) throw new Error(`Object ${objectId} has no prepared entry.`);
       const objects = registry.WORLD_OBJECTS, worldIds = new Set(objects.map(object => object.id));
       const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion, windowTarget, documentTarget });
-      const selection = registry.createSceneSelection({ objectId,
+      const selection = registry.createSceneSelection({ objectId, systems: objects,
         initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId, objects),
         initialFocus: readInitialFocus(documentTarget), onChange: publishSelection });
       const activation = registry.createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, getReducedMotion: () => reducedMotionActive });
@@ -316,7 +317,7 @@ export function createSceneRouter({
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
       }
-      navigable = id => worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
+      navigable = id => isOverviewPage(id) || registry.knownObject(id)?.kind === 'prepared-focus' || worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
       if (destroyed) navigation.destroy();
       return context = { registry, objects, navigation, selection, activation };
     });
@@ -349,6 +350,16 @@ export function createSceneRouter({
   async function navigate(id: string, intent: NavigationIntent = { kind: 'object' }): Promise<boolean | undefined> {
     if (destroyed) return false;
     if (intent.kind === 'focus' && scenes.current) id = objectId;
+    else if (id !== objectId) {
+      // A page of something the world draws (a link or history entry) opens on its scene (navigation-scope.mts): an
+      // overview's is the world's host, as zooming out reaches it; a catalogue focus is drawn by the mounted scene, or by
+      // the host on the first mount.
+      const { registry } = await ensureContext();
+      const focus = !isOverviewPage(id) && (registry.knownObject(id) ?? await registry.loadObject(id).catch(() => null))?.kind === 'prepared-focus';
+      if (destroyed) return false;
+      if (isOverviewPage(id)) id = WORLD_HOST_ID;
+      else if (focus) id = scenes.current ? objectId : WORLD_HOST_ID;
+    }
     // Entry and system-view reads may finish in any order. Only the latest selection can start a flight.
     const ready = await readiness.prepare(id, intent.kind !== 'feature');
     if (!ready || destroyed) return false;
@@ -519,8 +530,8 @@ export function createSceneRouter({
 
   /** A focus or overview arrival is placed by the world, so it cannot start before the world has loaded. */
   function worldOwnsArrival() {
-    const params = new URL(windowTarget.location.href).searchParams;
-    return ['focus', 'focusLens', 'overview', 'view'].some(name => params.has(name));
+    const url = new URL(windowTarget.location.href);
+    return drawnPageFromUrl(url, objectId) !== null || ['overview', 'view'].some(name => url.searchParams.has(name));
   }
   function report(error: unknown) {
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }
@@ -530,6 +541,8 @@ export function createSceneRouter({
     const selection = context?.selection;
     if (selection?.followCamera(frame) && scenes.state.kind === 'ready') {
       view.replace(session, selection.url(session.url ?? windowTarget.location.href));
+      // An overview's page carries no scene dataset; the scene's page gets its lens back on the way in.
+      view.syncDataset(session);
     }
   }
   function publishSelection() {
@@ -589,6 +602,7 @@ export function createSceneRouter({
             : { kind: 'object', objectId }, objectId);
           if (next.overview) aimAtSystemCenter(ready);
           view.replace(session, current.url(windowTarget.location.href));
+          view.syncDataset(session);
           session.viewUrl?.flush();
           return;
         }

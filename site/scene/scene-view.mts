@@ -1,6 +1,6 @@
 import { formatSharedView, parseSharedView } from '@cssearth/renderer/navigation';
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import { withDataset } from '../dataset-url.mts';
+import { withSceneDataset } from '../dataset-url.mts';
 import type { createNavigationHistory } from '../navigation/navigation-history.mts';
 import { replaceNavigationUrl } from '../navigation/navigation-history.mts';
 import type { NavigationLifecycle, NavigationRequest } from '../navigation/navigation-lifecycle.mts';
@@ -56,7 +56,7 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
     if (!datasets || !session.url || !scenes.isCurrent(session)) return;
     const id = datasets.current();
     if (id === null) return;
-    const url = withDataset(new URL(capture() ?? session.url, windowTarget.location.href), id === datasets.defaultId ? null : id);
+    const url = withSceneDataset(new URL(capture() ?? session.url, windowTarget.location.href), session.objectId, id === datasets.defaultId ? null : id);
     replace(session, url.href);
     session.shell?.setDatasetNotice?.(null);
   }
@@ -67,7 +67,7 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
     if (!isCurrent()) return;
     const world = getWorld();
     if (!world) return;
-    return world.applyFocus(url, {
+    return world.applyFocus(url, { sceneId: session.objectId,
       signal: request ? AbortSignal.any([session.signal, request.signal]) : session.signal,
       isCurrent, frame, reducedMotion: !frame || windowTarget.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true,
     });

@@ -10,11 +10,12 @@ export interface BatchedSpatialPointStyle { readonly colorCss: string; readonly 
 /** Project a bounded 3D field into retained paint nodes. Fixed prepared palettes
  * use circular SVG paths; distance-dependent styles use eight CSS shadow batches.
  * Camera motion changes paint but never DOM shape.
- * `drawnCount`, given the camera's distance from the frame origin, draws only the first points of the list. */
+ * `drawnCount`, given the camera's distance from the frame origin and its position in the frame, draws only the first
+ * points of the list. */
 export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host, before, frame, points, className, stylePoint, drawnCount, paintPalette }: {
   host: HTMLElement; before?: Element; frame: DensityVolumeFrame; points: readonly T[]; className: string;
   stylePoint(point: T, distanceUnits: number): BatchedSpatialPointStyle | null;
-  drawnCount?(cameraDistanceUnits: number): number;
+  drawnCount?(cameraDistanceUnits: number, cameraUnits: VolumeVector): number;
   /** Fixed prepared colours use retained circular SVG paths instead of box shadows. */
   paintPalette?: readonly string[];
 }) {
@@ -40,7 +41,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     let visible = 0;
     const shadows: string[][]=nodes.map(()=>[]);
     pathPaint?.begin(viewport);
-    const count = drawnCount ? Math.max(0, Math.min(points.length, Math.round(drawnCount(Math.hypot(...local.positionUnits))))) : points.length;
+    const count = drawnCount ? Math.max(0, Math.min(points.length, Math.round(drawnCount(Math.hypot(...local.positionUnits), local.positionUnits)))) : points.length;
     points.slice(0, count).forEach((point,index)=>{
       const x=point.positionUnits[0]-local.positionUnits[0], y=point.positionUnits[1]-local.positionUnits[1], z=point.positionUnits[2]-local.positionUnits[2];
       const depth=-(r[2]!*x+r[5]!*y+r[8]!*z);

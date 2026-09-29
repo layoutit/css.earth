@@ -14,12 +14,15 @@ const VIEWPORT_EDGE_PX = 4;
 const HEADER_CLEARANCE_PX = 64;
 const FOOTER_CLEARANCE_PX = 30;
 
-interface SelectedLabelFlags { overview: boolean; focused: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge }
+export interface SelectedLabelFlags { overview: boolean; focused: boolean; preview: string | null | undefined; edge?: PreparedLabelEdge }
 interface SelectedLabelPlacement { left: number; top: number; rect: LabelScreenRect }
+
+/** What a caption is placed from: a body's centre and radius, and where its package asks for the caption. */
+export type CaptionedBody = Pick<PreparedContextPoint, 'positionM' | 'radiusM'> & { id?: string; labelPlacement?: unknown };
 
 /** Where the caption of `body` sits for this camera, or null when it is hidden: below the body's disc or point, clear of the
  * header and footer, or over the body's middle when its package asks. */
-function placeSelectedBodyLabel(world: WorldCameraPose, viewport: WorldCameraViewport, body: PreparedContextPoint,
+export function placeSelectedBodyLabel(world: WorldCameraPose, viewport: WorldCameraViewport, body: CaptionedBody,
   { overview, focused, preview, edge }: SelectedLabelFlags, width: number, height: number): SelectedLabelPlacement | null {
   if (overview || focused || preview !== undefined && preview !== body.id) return null;
   const widthPixels = viewport.widthPixels, heightPixels = viewport.heightPixels;
@@ -45,7 +48,7 @@ function placeSelectedBodyLabel(world: WorldCameraPose, viewport: WorldCameraVie
   const gap = Math.min(MAX_MESH_GAP_PX, 4 + radiusPixels * MESH_GAP_RADIUS_RATIO);
   const minimumGap = Math.min(16, gap);
   let left: number, top: number;
-  if ('labelPlacement' in body && body.labelPlacement === 'centre' && radiusPixels > height) {
+  if (body.labelPlacement === 'centre' && radiusPixels > height) {
     // The package asks for its caption over the body's middle (Sgr A*'s black shadow), once the disc can hold it.
     left = Math.max(-widthPixels / 2 + width / 2 + VIEWPORT_EDGE_PX, Math.min(x, widthPixels / 2 - width / 2 - VIEWPORT_EDGE_PX));
     top = Math.max(-heightPixels / 2 + headerClearance, Math.min(y - height / 2, maxTop));

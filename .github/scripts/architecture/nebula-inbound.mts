@@ -14,7 +14,7 @@ import ts from 'typescript';
 const packages = {
   '@cssearth/bake': 'packages/bake',
   '@cssearth/nebula-lab': 'labs/nebula/packages/lab', '@cssearth/nebula-reconstruction': 'labs/nebula/packages/reconstruction',
-  '@cssearth/volume-viewer': 'labs/nebula/packages/volume-viewer',
+  '@cssearth/volume-viewer': 'packages/volume-viewer',
 } as const;
 type PackageName = keyof typeof packages;
 type Policy = 'runtime' | 'preparation' | 'test';
@@ -219,8 +219,9 @@ export function checkNebulaInboundBoundaries(inputRoot: string): string[] {
       }
       for (const entry of node.packages) {
         const typeOnly = erased || entry.erased;
-        // Only preparation code imports the bake, not even for a type: a type the runtime needs belongs to the renderer.
-        const allowed = mode === 'test' || entry.name === '@cssearth/bake' && mode === 'preparation';
+        // The viewer keeps its declared volume contract; other runtime code cannot import bake entries.
+        const viewerVolume = origin.label.startsWith('packages/volume-viewer/') && entry.name === '@cssearth/bake' && entry.specifier === '@cssearth/bake/volume';
+        const allowed = mode === 'test' || viewerVolume || entry.name === '@cssearth/bake' && mode === 'preparation';
         if (!allowed) errors.push(`${origin.label}: ${mode} closure forbids ${entry.specifier}${file === current ? '' : ` via ${node.label}`}${typeOnly ? ' (type import)' : ''}`);
       }
       for (const edge of node.edges) visit(edge.file, erased || edge.erased);

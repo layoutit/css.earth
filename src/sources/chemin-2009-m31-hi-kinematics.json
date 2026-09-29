@@ -1,0 +1,51 @@
+{
+  "id": "chemin-2009-m31-hi-kinematics",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "H I kinematics and dynamics of Messier 31",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/705/2/1395"
+    },
+    {
+      "type": "arxiv",
+      "value": "0909.3846"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0909.3846",
+      "label": "arXiv:0909.3846"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/0004-637X/705/2/1395",
+      "label": "ApJ 705, 1395"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0909.3846",
+      "checkedOn": "2026-09-29",
+      "locator": "Sect. 9 (conclusion): mean inclination (74.3 ± 1.1)° and position angle (37.7 ± 0.9)° between R = 6 and 27 kpc; Table 5: tilted-ring profiles"
+    }
+  ],
+  "creators": [
+    "L. Chemin",
+    "C. Carignan",
+    "T. Foster"
+  ],
+  "publisher": "ApJ 705, 1395",
+  "publicationDate": "2009",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Chemin et al. (2009), ApJ 705, 1395.",
+      "scope": "Disc inclination and position angle",
+      "evidence": "https://arxiv.org/abs/0909.3846"
+    }
+  ]
+}

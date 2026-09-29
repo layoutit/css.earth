@@ -30,7 +30,7 @@ import { readJsonSource } from "@cssearth/bake/objects/sources";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { loadAstronomyPackage } from "@cssearth/bake/astronomy";
-import { loadSceneEpochEphemeris } from "../../astronomy/tools/scene-ephemeris.mts";
+import { loadSceneEpochEphemeris } from "../../astronomy/cli/scene-ephemeris.mts";
 import { readPreparedObjects } from "@cssearth/objects/node";
 
 /** Write src/platform/solar-geometry.mts for the registered bodies at the pinned scene epoch and print each body's geometry. */

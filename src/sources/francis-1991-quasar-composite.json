@@ -1,0 +1,50 @@
+{
+  "id": "francis-1991-quasar-composite",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "A high signal-to-noise ratio composite quasar spectrum",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1086/170066"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1086/170066",
+      "label": "ApJ 373, 465"
+    },
+    {
+      "role": "archive",
+      "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/agn/",
+      "label": "STScI reference atlases: AGN (qso_template.fits)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/agn/AA_README_AGN",
+      "checkedOn": "2026-09-29",
+      "locator": "qso_template: 800 to 6000 angstroms, the Large Bright Quasar Survey composite"
+    }
+  ],
+  "creators": [
+    "P. J. Francis",
+    "C. B. Hewett",
+    "C. B. Foltz",
+    "F. H. Chaffee",
+    "R. J. Weymann",
+    "S. L. Morris"
+  ],
+  "publisher": "ApJ 373, 465",
+  "publicationDate": "1991",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Francis et al. (1991), ApJ 373, 465; template from the STScI reference atlases.",
+      "scope": "Quasar colours",
+      "evidence": "https://doi.org/10.1086/170066"
+    }
+  ]
+}

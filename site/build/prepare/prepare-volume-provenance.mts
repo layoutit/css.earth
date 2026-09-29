@@ -178,7 +178,7 @@ export async function readPreparedVolumeProvenance({ root = process.cwd(), input
     const bankUrl = `${base}/${descriptor.prepared!.url}`;
     if (!provenance.products.flatMap(product => product.outputs).some(output => output.url === bankUrl)) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
     const hostedBy = await hostedDatasets(root, base, id, prepared.controls.map(control => control.id), input);
-    results.push({ id, name: sourceText(sourcePresentation.name), route: hostedBy?.route ?? `/sun/?focus=${id}`, base,
+    results.push({ id, name: sourceText(sourcePresentation.name), route: hostedBy?.route ?? `/${id}/`, base,
       controls: prepared.controls, defaultLens: prepared.defaultLens, provenance, outputs: [], ...(hostedBy ? { hostedBy } : {}) });
   }
   return results;
@@ -331,14 +331,19 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
       const bytes = Buffer.from(output.text);
       return { filename: output.path.slice(resolve(root, prefix).length + 1), bytes: bytes.length, sha256: sha256(bytes) };
     });
-    const preparedAssets = descriptor.type === 'image-layer-bank'
+    // An image-layer bank's own entries are its bank, layers, record and presentation; a retired layer leaves with the old
+    // bank, and prepared files other tools write beside it (catalogue dot banks) stay.
+    const imageLayerAssets = descriptor.type === 'image-layer-bank'
       ? [{ filename: bankPath.slice(prefix.length), bytes: installedBank!.length, sha256: sha256(installedBank!) },
-        ...layerOutputs.map(output => ({ filename: output.url.slice(prefix.length), bytes: output.bytes, sha256: output.sha256 })), ...preparedOutputs]
+        ...layerOutputs.map(output => ({ filename: output.url.slice(prefix.length), bytes: output.bytes, sha256: output.sha256 })), ...preparedOutputs] : null;
+    const preparedAssets = imageLayerAssets
+      ? [...(current?.assets.filter(asset => asset.location === 'prepared' && !asset.filename.startsWith('layers/')
+          && !imageLayerAssets.some(own => own.filename === asset.filename)) ?? []), ...imageLayerAssets]
       : [...(current?.assets.filter(asset => asset.location === 'prepared' && !preparedOutputs.some(output => output.filename === asset.filename)) ?? []), ...preparedOutputs];
     const next = mergeInventory(mergeInventory(current, 'public', publicAssets), 'prepared', preparedAssets);
     outputs.push({ path: resolve(root, `${base}/inventory.json`), text: inventoryText(next) });
     const hostedBy = await hostedDatasets(root, base, record.objectId, record.lenses.map(lens => lens.id), input);
-    results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/sun/?focus=${record.objectId}`, base, controls, defaultLens: record.defaultLens, provenance, outputs,
+    results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/${record.objectId}/`, base, controls, defaultLens: record.defaultLens, provenance, outputs,
       ...(hostedBy === undefined ? {} : { hostedBy }) });
   }
   if (objectId !== undefined && results.length !== 1) throw new TypeError(`No volume presentation for ${objectId}.`);

@@ -3,3 +3,6 @@
 export * from './config.ts';
 export * from './resize-rgba.ts';
 export * from './prepare.ts';
+export { imageLayerDisc, imageLayerDiscDistanceKpc, imageLayerView } from './disc.ts';
+export { imageLayerBulgeModel } from './bulge.ts';
+export { removeForegroundStars, removeCompanionGalaxies } from './foreground.ts';

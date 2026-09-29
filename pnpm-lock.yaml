@@ -62,7 +62,7 @@ importers:
         version: link:packages/telescope-cli
       '@cssearth/volume-viewer':
         specifier: workspace:*
-        version: link:labs/nebula/packages/volume-viewer
+        version: link:packages/volume-viewer
       '@types/pngjs':
         specifier: 6.0.5
         version: 6.0.5
@@ -218,11 +218,15 @@ importers:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)
 
-  labs/nebula/packages/volume-viewer:
+  packages/volume-viewer:
     dependencies:
       '@cssearth/bake':
         specifier: workspace:*
-        version: link:../../../../packages/bake
+        version: link:../bake
+    devDependencies:
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
 
   packages/astronomy:
     devDependencies:
@@ -445,7 +449,7 @@ importers:
         version: link:../bake
       '@cssearth/volume-viewer':
         specifier: workspace:*
-        version: link:../../labs/nebula/packages/volume-viewer
+        version: link:../volume-viewer
       '@types/node':
         specifier: ^26.4.0
         version: 26.4.0

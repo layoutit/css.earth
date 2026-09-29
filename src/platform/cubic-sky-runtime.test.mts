@@ -253,7 +253,7 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
 });
 
 test("sky orbit keeps screen axes through reversals, limb crossings and release", async t => {
-  const { Surface } = await import("./test/orbit-fixture.mts");
+  const { Surface } = await import("@cssearth/renderer/test/orbit-fixture.mts");
   const prior = Object.getOwnPropertyDescriptor(globalThis, "HTMLElement");
   Object.defineProperty(globalThis, "HTMLElement", { configurable: true, value: Surface });
   t.after(() => {

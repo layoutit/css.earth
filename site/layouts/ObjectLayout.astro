@@ -4,8 +4,10 @@ import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { googleAnalyticsBootstrap } from "../google-analytics.mts";
 import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
-import { requireSceneObject } from "../objects.mts";
-import { objectSeo } from "../seo.mts";
+import { requireObject, requireSceneObject } from "../objects.mts";
+import { focusSeo, objectSeo } from "../seo.mts";
+import { isOverviewPage } from "../navigation/navigation-scope.mts";
+import { OVERVIEW_TITLES } from "../overview-titles.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
 import "../../src/platform/cubic-sky.css";
 import "@cssearth/renderer/styles/volume.css";
@@ -26,25 +28,29 @@ const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {
   objectId: string;
+  /** The object the page is: `objectId`, or a catalogue focus its scene draws. */
+  pageId?: string;
   navigation?: boolean;
   scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor'>;
   descriptor?: ObjectDescriptor;
 }
 
-const { objectId, navigation = false, scene, descriptor } = Astro.props;
+const { objectId, pageId = objectId, navigation = false, scene, descriptor } = Astro.props;
 const objectUi = await Astro.slots.render('object-ui');
 const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireSceneObject(objectId);
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
-const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID });
+const seoOptions = { socialImages: availableSocialImages(), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
+const pageRecord = isOverviewPage(pageId) ? { kind: 'overview' as const, id: pageId, name: OVERVIEW_TITLES[pageId].label } : requireObject(pageId);
+const seo = pageRecord.kind === 'scene' ? objectSeo(pageRecord, seoOptions) : focusSeo(pageRecord, seoOptions);
 ---
 
 <!doctype html>
 <html lang="en" data-scene-presented={scene ? 'true' : undefined}>
   <head>
     <meta charset="UTF-8" />
-    {!navigation && <script is:inline set:html={initialShellContextBootstrap}></script>}
+    {!navigation && <script is:inline set:html={initialShellContextBootstrap(objectId)}></script>}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content={seo.description} />
     <link rel="canonical" href={seo.canonical} />

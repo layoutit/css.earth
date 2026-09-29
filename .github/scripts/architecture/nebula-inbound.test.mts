@@ -10,7 +10,7 @@ function fixture() {
   const root = mkdtempSync(resolve(tmpdir(), 'nebula-inbound-'));
   const write = (path: string, source: string) => { const file = resolve(root, path); mkdirSync(resolve(file, '..'), { recursive: true }); writeFileSync(file, source); };
   const owners = { 'packages/bake': '@cssearth/bake', 'labs/nebula/packages/lab': '@cssearth/nebula-lab', 'labs/nebula/packages/reconstruction': '@cssearth/nebula-reconstruction',
-    'labs/nebula/packages/volume-viewer': '@cssearth/volume-viewer' };
+    'packages/volume-viewer': '@cssearth/volume-viewer' };
   write('package.json', JSON.stringify({ type: 'module', devDependencies: Object.fromEntries(Object.values(owners).map(name => [name, 'workspace:*'])) }));
   for (const [directory, name] of Object.entries(owners)) {
     write(`${directory}/package.json`, JSON.stringify({ name, exports: { './public': './src/public.ts' } }));
@@ -65,6 +65,17 @@ test('preparation accepts the public bake entries while the runtime accepts none
   } finally { f.cleanup(); }
 });
 
+test('viewer retains its declared volume contract after moving into packages', () => {
+  const f = fixture();
+  try {
+    f.write('packages/volume-viewer/src/viewer.ts', "import {value} from '@cssearth/bake/public';");
+    assert.ok(f.check().some(error => error.includes('runtime closure forbids')));
+    f.write('packages/bake/package.json', JSON.stringify({ name: '@cssearth/bake', exports: { './volume': './src/public.ts' } }));
+    f.write('packages/volume-viewer/src/viewer.ts', "import {value} from '@cssearth/bake/volume';");
+    assert.deepEqual(f.check(), []);
+  } finally { f.cleanup(); }
+});
+
 test('relative, absolute, URL, traversal and tsconfig aliases cannot enter the lab source tree', () => {
   const f = fixture();
   try {
@@ -72,8 +83,8 @@ test('relative, absolute, URL, traversal and tsconfig aliases cannot enter the l
       "export * from '../labs/nebula/packages/volume-core/src/public.ts';",
       "import '../src/../labs/nebula/packages/lab/src/private.ts';",
       "import('/labs/nebula/packages/reconstruction/src/public.ts');",
-      `import('${resolve(f.root, 'labs/nebula/packages/volume-viewer/src/public.ts')}');`,
-      `import('file://${resolve(f.root, 'labs/nebula/packages/volume-viewer/src/public.ts')}');`,
+      `import('${resolve(f.root, 'labs/nebula/packages/lab/src/public.ts')}');`,
+      `import('file://${resolve(f.root, 'labs/nebula/packages/lab/src/public.ts')}');`,
       "import(new URL('../labs/nebula/packages/lab/src/public.ts', import.meta.url).href);",
     ]) {
       f.write('tools/prepare.mts', source); assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')), source);
@@ -127,7 +138,7 @@ test('test exceptions and preparation wrappers cannot be used as inbound runtime
     f.write('site/runtime.mts', "import '../tools/prepare.mts';");
     assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via tools/prepare.mts')));
     f.write('site/runtime.mts', 'export {};');
-    f.write('src/check.test.ts', "import '../labs/nebula/packages/volume-viewer/src/public.ts';");
+    f.write('src/check.test.ts', "import '../labs/nebula/packages/lab/src/public.ts';");
     assert.ok(f.check().some(error => error.includes('direct path into labs/nebula')), 'tests must use public exports too');
   } finally { f.cleanup(); }
 });

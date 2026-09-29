@@ -3,11 +3,11 @@ import { isRecord } from '@cssearth/core';
 import { objectIdAtPath } from '../root-object.mts';
 import type { NavigationHistory, NavigationIntent } from './navigation-request.mts';
 type Navigate = (id: string, intent: NavigationIntent) => unknown;
-interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; }
+interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; getAttribute(name: string): string | null; }
 function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
   if (!target || !('closest' in target) || typeof target.closest !== 'function') return null;
   const anchor: unknown = target.closest('a[href]');
-  if (!isRecord(anchor) || typeof anchor.href !== 'string' || (anchor.target !== undefined && typeof anchor.target !== 'string') || typeof anchor.hasAttribute !== 'function') return null;
+  if (!isRecord(anchor) || typeof anchor.href !== 'string' || (anchor.target !== undefined && typeof anchor.target !== 'string') || typeof anchor.hasAttribute !== 'function' || typeof anchor.getAttribute !== 'function') return null;
   return anchor as unknown as NavigationAnchor;
 }
 const navigationId = (event: Event): unknown => 'detail' in event && isRecord(event.detail) ? event.detail.objectId : undefined;
@@ -111,16 +111,15 @@ export function bindNavigationLinks({ documentTarget, windowTarget, navigable, n
     if (url.origin !== windowTarget.location.origin) return;
     // An object route is `/<id>/`; the front page's `/` is left to the browser, as before.
     const id = url.pathname === '/' ? undefined : objectIdAtPath(url.pathname);
-    if (!id || !available(id)) return;
-    const object = { id };
-    const focusId = url.searchParams.get('focus');
-    if (focusId && !url.searchParams.has('v') && anchor.hasAttribute('data-prepared-focus-id')) {
+    // A catalogue focus link selects its subject in place: the mounted scene draws every focus.
+    if (id && id === anchor.getAttribute('data-prepared-focus-id') && !url.searchParams.has('v')) {
       event.preventDefault();
-      Promise.resolve(navigate(object.id, { kind: 'focus', id: focusId })).catch(onError);
+      Promise.resolve(navigate(id, { kind: 'focus', id })).catch(onError);
       return;
     }
+    if (!id || !available(id)) return;
     event.preventDefault();
-    Promise.resolve(navigate(object.id, { kind: 'link', url: url.href })).catch(onError);
+    Promise.resolve(navigate(id, { kind: 'link', url: url.href })).catch(onError);
   };
   documentTarget.addEventListener('click', click);
   documentTarget.addEventListener('objectnavigate', select);

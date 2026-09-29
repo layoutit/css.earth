@@ -29,7 +29,10 @@ export async function runLabCommand(root: string, [command, ...args]: string[]):
   }
   let execution: string[];
   if (command === 'test') {
-    const discovered = await tests(resolve(root, 'labs/nebula/packages'));
+    const discovered = (await Promise.all([
+      tests(resolve(root, 'labs/nebula/packages')),
+      tests(resolve(root, 'packages/volume-viewer/src')),
+    ])).flat();
     const selected = discovered.filter(path => !args.length || args.includes(basename(path).replace(/\.test\.[cm]?ts$/, ''))).sort();
     if (!selected.length) throw new TypeError('No matching lab tests.');
     console.log(`NEBULA_TEST_DISCOVERY ${selected.length} test files`);

@@ -65,3 +65,15 @@ test('every member names its star’s system', () => {
   const renamed = SCENE_OBJECTS.map(object => object.id === 'wasp-43b' ? { ...object, systemName: 'Sextans' } : object);
   assert.throws(() => planetarySystems(renamed), /wasp-43b orbits WASP-43 but names its system Sextans, not WASP-43 system/u);
 });
+
+test("every system's overview lasts two doublings of distance before its orbits are gone, more than one wheel step", async () => {
+  const { overviewScopeAtCamera } = await import('../overview-context.mts');
+  const { SYSTEM_RANGES } = await import('../system-framing.mts');
+  const { APPLICATION_WORLD_CONTEXT: plan } = await import('../world-context-plan.mts');
+  for (const system of allPlanetarySystems(SCENE_OBJECTS)) {
+    const at = (factor: number) => ({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [system.originM[0] + system.exitDistanceM * factor, system.originM[1], system.originM[2]] as const,
+      orientationXyzw: [0, 0, 0, 1] as const } });
+    assert.equal(overviewScopeAtCamera(at(3.99), 'system', plan, { originM: system.originM, orbitsWithinM: SYSTEM_RANGES.get(system.id) }), 'system', system.id);
+  }
+  assert.ok(systemById(SCENE_OBJECTS, 'sgr-a-star')!.exitDistanceM < 0.8 * 9.4607e15, 'Sgr A* opens at 0.8 ly, not the scaled 3.6 ly');
+});

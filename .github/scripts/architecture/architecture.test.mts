@@ -175,8 +175,12 @@ test('nothing imports a package command entry: another entry, package code and t
     ['site/build/x.mts', 'packages/bake/cli/kernel-bank.mts'],
     ['packages/bake/cli/kernel-bank.mts', 'packages/bake/src/objects/cameras/index.ts'],
     ['packages/bake/src/cli/x.ts', 'packages/bake/src/raster/index.ts'],
+    ['packages/astronomy/cli/generate-series.mts', 'packages/astronomy/cli/lib/sources.mts'],
+    ['tests/astronomy/source.test.mts', 'packages/astronomy/cli/scene-ephemeris.mts'],
+    ['packages/astronomy/cli/generate-series.mts', 'packages/astronomy/cli/fetch-fixtures.mts'],
   ));
   assert.deepEqual((violations.get('nothing-imports-cli-entries') ?? []).map(item => `${item.from}>${item.to}`), [
+    'packages/astronomy/cli/generate-series.mts>packages/astronomy/cli/fetch-fixtures.mts',
     'packages/bake/cli/fit-epic-limb.mts>packages/bake/cli/kernel-bank.mts',
     'packages/bake/src/photometry/limb.ts>packages/bake/cli/fit-epic-limb.mts',
     'site/build/x.mts>packages/bake/cli/kernel-bank.mts',
@@ -303,8 +307,9 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
 
 test('a file under a retired folder is a finding; a sibling folder with a longer name is not', () => {
   assert.deepEqual(retiredFiles(['old/deep/x.json', 'old-labels/x.mts', 'old', 'other/old/x.mts'], ['old']),
-    ['old/deep/x.json: old/ is retired; put the file in the folder its code moved to']);
-  assert.ok(RETIRED_FOLDERS.every(folder => !folder.includes('/') && !folder.endsWith('/')), 'retired folders are top-level folders, named without a trailing slash');
+    ['old/deep/x.json: old/ is retired; put the file in the folder its code moved to',
+      'other/old/x.mts: old/ is retired; put the file in the folder its code moved to']);
+  assert.ok(RETIRED_FOLDERS.every(folder => !folder.includes('/') && !folder.endsWith('/')), 'retired folders are path segments, named without a trailing slash');
   assert.deepEqual([...RETIRED_FOLDERS].sort(), RETIRED_FOLDERS, 'kept sorted');
 });
 
@@ -319,12 +324,12 @@ test('the repository check fails when any file is added under tools/, tracked or
     writeFileSync(join(root, 'labs', 'kept.mts'), 'export {};\n');
     const findings = () => repositoryFindings(root, repositoryFiles(root), [rule]);
     assert.equal(isBroken(findings()), false, 'a tree without tools/ is clean');
-    for (const path of ['tools/new.mts', 'tools/deep/nested/data.json', 'tools/README.md', 'tools/objects/tsconfig.json']) {
+    for (const path of ['tools/new.mts', 'tools/deep/nested/data.json', 'tools/README.md', 'tools/objects/tsconfig.json', 'packages/astronomy/tools/new.mts']) {
       mkdirSync(dirname(join(root, path)), { recursive: true });
       writeFileSync(join(root, path), '{}\n');
       assert.equal(isBroken(findings()), true, `${path} added (untracked) must fail the check`);
       assert.match([...findings().values()].flat().join('\n'), new RegExp(`${path.replace(/[.]/gu, '\\.')}: tools/ is retired`, 'u'));
-      rmSync(join(root, 'tools'), { recursive: true });
+      rmSync(join(root, path.startsWith('tools/') ? 'tools' : 'packages'), { recursive: true });
       assert.equal(isBroken(findings()), false, `removing ${path} clears it`);
     }
     mkdirSync(join(root, 'tools'));
@@ -332,7 +337,10 @@ test('the repository check fails when any file is added under tools/, tracked or
     execFileSync('git', ['add', '-A'], { cwd: root });
     assert.equal(isBroken(findings()), true, 'a tracked file under tools/ fails too');
   } finally { rmSync(root, { recursive: true, force: true }); }
-  assert.deepEqual(retiredFiles(['packages/bake/tools/x.mts', 'toolsmith/x.mts', 'labs/tools/x.mts']), [], 'only the top-level tools/ folder is retired');
+  assert.deepEqual(retiredFiles(['packages/bake/tools/x.mts', 'toolsmith/x.mts', 'labs/tools/x.mts']),
+    ['packages/bake/tools/x.mts: tools/ is retired; put the file in the folder its code moved to',
+      'labs/tools/x.mts: tools/ is retired; put the file in the folder its code moved to'],
+    'tools/ is retired at any depth');
 });
 
 test('a packages/* file may import another workspace package only when its package.json declares it', () => {

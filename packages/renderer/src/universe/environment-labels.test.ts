@@ -150,9 +150,9 @@ test('retained environment captions keep fixed 3D anchors while visibility, phys
 test('an authored environment link is interactive only while its caption is admitted', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
   const labels = mountEnvironmentLabels({host:host as unknown as HTMLElement,before:before as unknown as Element,
-    volume,shells:[],links:{'deep-cloud':'/sun/?overview=milky-way'}});
+    volume,shells:[],links:{'deep-cloud':'/milky-way/'}});
   const label=labels.inspect()['deep-cloud']!;
-  expect(label.getAttribute('href')).toBe('/sun/?overview=milky-way');
+  expect(label.getAttribute('href')).toBe('/milky-way/');
   const publication={world:world([0,0,300]),viewport:{...viewport,widthPixels:800,heightPixels:600},shellStats:[],volumeLabelOpacity:1};
   labels.publish(publication);
   expect(label.style.pointerEvents).toBe('auto');

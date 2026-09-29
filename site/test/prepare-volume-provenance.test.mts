@@ -22,7 +22,7 @@ test('one selected volume prepares without reading unrelated presentation inputs
   } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [['omega-centauri', 2]]);
   assert.ok(seen.includes('src/objects/omega-centauri/source/delivery.json'));
-  assert.equal(entries[0]!.route, '/sun/?focus=omega-centauri');
+  assert.equal(entries[0]!.route, '/omega-centauri/');
   await assert.rejects(prepareVolumeProvenance({ root, objectId: 'absent-test-volume' }), /No volume presentation/);
 });
 
@@ -41,7 +41,7 @@ test('all installed volume lenses retain real source-to-product edges', async ()
   const usage = compileSourceUsage(entries, sources, DATASET_ROUTES), graph = compileContributions(entries, catalog, DATASET_ROUTES);
   for (const entry of entries) {
     assert.equal(entry.provenance.basis, 'recovered');
-    assert.equal(entry.route, entry.hostedBy ? `/${entry.hostedBy.objectId}/` : `/sun/?focus=${entry.id}`);
+    assert.equal(entry.route, entry.hostedBy ? `/${entry.hostedBy.objectId}/` : `/${entry.id}/`);
     assert.ok(entry.controls.some(control => control.id === entry.defaultLens));
     for (const control of entry.controls) {
       assert.notEqual(control.title, control.label);

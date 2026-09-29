@@ -5,7 +5,8 @@ import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from
 import { renderNativeFocus } from './focus-response.mts';
 import { requiredElement } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
-import { readDatasetUrl } from './dataset-url.mts';
+import { readSceneDatasetUrl } from './dataset-url.mts';
+import { drawnPageFromUrl, preparedFocusFromUrl } from './navigation/navigation-scope.mts';
 
 function region(html: string, name: string) {
   const marker = `<!--${name}:start-->`, start = html.indexOf(marker) + marker.length;
@@ -23,24 +24,32 @@ export class UnreadableSavedView extends RangeError {
 
 /** A native request uses the same authenticated prepared records and serializer
  * as the static page. Only the existing scene and its dataset controls change. */
-export async function renderDatasetResponse(html: string, url: URL, objectId: string, fetcher: typeof fetch = fetch): Promise<string> {
-  const dataset = readDatasetUrl(url);
+export async function renderDatasetResponse(html: string, url: URL, pageId: string, fetcher: typeof fetch = fetch,
+  { drawnPage = false }: { drawnPage?: boolean } = {}): Promise<string> {
   const settingRequest = url.searchParams.has('settings');
   const featureParams = url.searchParams.getAll('feature');
   if (featureParams.length > 1 || featureParams.length && !/^(?:city-)?[0-9]{1,16}$/u.test(featureParams[0]!)) throw new RangeError('Invalid feature selection.');
   // A city link (`city-<id>`) is selected by the page on arrival; only surface features are drawn here.
   const featureIds = featureParams.filter(id => !id.startsWith(PLACE_FEATURE_PREFIX));
   const views = url.searchParams.getAll('v');
-  const focusing = url.searchParams.has('focus') || url.searchParams.has('focusLens');
-  if (!dataset.requested && !settingRequest && !featureIds.length && !views.length && !focusing) return html;
+  // The page of a subject the scene draws (a catalogue focus, an overview) always renders its scene and subject; a scene's
+  // own page changes only for what its query asks.
+  if (!drawnPage && !url.searchParams.has('dataset') && !settingRequest && !featureIds.length && !views.length) return html;
   if (views.length > 1) throw new RangeError(`Invalid saved view: ${views.length} v parameters.`);
   let saved;
   try { saved = views.length ? parseSharedView(`v=${views[0]}`) : null; }
   catch { throw new UnreadableSavedView(views[0]!); }
-  let lensId = dataset.id ?? undefined;
+  // The page's scene: the page's own object, or the host of the catalogue focus the page is.
   const descriptorRegion = region(html, 'prepared-descriptor');
   const descriptor = parseObjectDescriptor(JSON.parse(requiredElement(descriptorRegion.document, 'script[data-prepared-descriptor]').textContent ?? ''));
-  if (descriptor.id !== objectId || descriptor.prepared?.url !== 'prepared/object.json') throw new Error('Prepared dataset descriptor identity drifted.');
+  const objectId = descriptor.id, focusId = preparedFocusFromUrl(url, objectId);
+  if ((pageId !== objectId && drawnPageFromUrl(url, objectId) !== pageId) || descriptor.prepared?.url !== 'prepared/object.json') {
+    throw new Error(`Prepared dataset descriptor identity drifted: page ${pageId}, scene ${objectId}, focus ${String(focusId)}.`);
+  }
+  // On a catalogue focus's page `dataset` selects the focus's lens; the scene keeps its own default.
+  const dataset = readSceneDatasetUrl(url, objectId);
+  const focusing = focusId !== null;
+  let lensId = dataset.id ?? undefined;
   const shell = region(html, 'search-shell');
   const buttons = [...shell.document.querySelectorAll<HTMLButtonElement>('.object-information-panel button[name="dataset"]:not([data-dataset-step])')];
   if (lensId && !buttons.some(button => button.getAttribute('value') === lensId)) throw new RangeError('Dataset unavailable on this object.');

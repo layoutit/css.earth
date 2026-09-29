@@ -1,0 +1,50 @@
+{
+  "id": "desi-2025-dr1",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Data Release 1 of the Dark Energy Spectroscopic Instrument",
+  "identifiers": [
+    {
+      "type": "arxiv",
+      "value": "2503.14745"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2503.14745",
+      "label": "arXiv:2503.14745"
+    },
+    {
+      "role": "archive",
+      "url": "https://data.desi.lbl.gov/public/dr1/survey/catalogs/dr1/LSS/iron/LSScats/v1.5/",
+      "label": "DESI DR1 large-scale structure catalogues v1.5"
+    },
+    {
+      "role": "original",
+      "url": "https://arxiv.org/abs/2405.16593",
+      "label": "Ross et al. (2025), the construction of the DESI large-scale structure catalogues"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://data.desi.lbl.gov/public/dr1/survey/catalogs/dr1/LSS/iron/LSScats/v1.5/",
+      "checkedOn": "2026-09-29",
+      "locator": "BGS_BRIGHT-21.5 and QSO _NGC/_SGC_clustering.dat.fits: RA, DEC, Z, flux_g/r/z_dered"
+    }
+  ],
+  "creators": [
+    "DESI Collaboration"
+  ],
+  "publisher": "DESI Collaboration",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite DESI Collaboration (2025), Data Release 1 of the Dark Energy Spectroscopic Instrument, arXiv:2503.14745, and Ross et al. (2025), arXiv:2405.16593, for the clustering catalogues.",
+      "scope": "Galaxy and quasar positions",
+      "evidence": "https://arxiv.org/abs/2503.14745"
+    }
+  ]
+}

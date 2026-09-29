@@ -3,19 +3,24 @@ import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedPointAppearance } from '../stars/types.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
+import type { BackgroundPointBank } from './background-points.js';
 import type { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import type { PreparedPointVisibility } from '../volume/projected-volume-visibility.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { WorldPlannerSource } from './world-context/world-context-planner-client.js';
 import type { LensBillboards } from './lens-billboards.js';
 
-export type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource(path: string): string };
+export type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
+  /** Published catalogues placed in the bank's own frame, drawn as dots over its layers and faded with them. */
+  cataloguePointUrls?: readonly string[] };
 export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
   clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
 export interface PreparedUniverseOptions {
   /** Prepared catalogue point banks of the galaxies beyond the Local Group (background-points.ts). */
-  backgroundCataloguePoints?: readonly string[];
+  backgroundCataloguePoints?: readonly BackgroundPointBank[];
+  /** Closed image meshes around the Sun seen from outside (the cosmic microwave background; image-mesh.ts). */
+  imageMeshes?: readonly { url: string; resolveResource(path: string): string }[];
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
   plannerSource?: WorldPlannerSource;

@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "sarajedini-clusters",
+  "table": {
+    "path": "table3.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/134/447/table3.dat",
+    "bytes": 36740,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        3
+      ],
+      "raH": [
+        5,
+        6
+      ],
+      "raM": [
+        8,
+        9
+      ],
+      "raS": [
+        11,
+        15
+      ],
+      "decSign": [
+        16,
+        16
+      ],
+      "decD": [
+        17,
+        18
+      ],
+      "decM": [
+        20,
+        21
+      ],
+      "decS": [
+        23,
+        26
+      ],
+      "class": [
+        57,
+        64
+      ]
+    }
+  },
+  "filters": [
+    {
+      "column": [
+        57,
+        64
+      ],
+      "op": "==",
+      "value": "Cluster",
+      "basis": "The authors' classification: candidates classed stellar, galaxy, unknown or on a chip gap are left out (ReadMe, Class column)."
+    }
+  ],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M33's image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "sech2",
+      "scaleHeightPc": 175,
+      "source": "ciardullo-2004-m33-pne",
+      "basis": "Ciardullo et al. (2004, Sect. 6) adopt z0 ≈ 175 pc (at least ±25%) for the isothermal sheet sech²(z/z0) of M33's planetary nebulae, and their data exclude z0 ≲ 90 pc beyond 6 kpc. It is the only M33 disc scale height these sources state; young tracers (HII regions, Cepheids, clusters) are thinner in disc galaxies, so for them it is an upper value, used as a presentation choice. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "sarajedini-2007-m33-clusters",
+  "meaning": "Star clusters of M33 in the merged catalogue of Sarajedini & Mancone (2007): one dot per object the authors class as a cluster, at its catalogue sky position.",
+  "appearance": {
+    "colorCss": "#9fd4ff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way open-cluster layer's blue-white, size and opacity, as M31's clusters use."
+  }
+}

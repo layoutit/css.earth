@@ -1,5 +1,5 @@
 import { FIND_PATH, parseDestinationPlace } from '../search/find-protocol.mts';
-import { withDataset } from '../dataset-url.mts';
+import { withSceneDataset } from '../dataset-url.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { SceneSession } from './scene-session.mts';
 
@@ -16,7 +16,7 @@ export async function selectSceneFeature(session: SceneSession, request: Navigat
     signal.throwIfAborted();
     // A feature is a one-time command. The committed dataset and camera describe its result.
     const current = datasets?.current();
-    const url = withDataset(new URL(request.url), current && current !== datasets?.defaultId ? current : null);
+    const url = withSceneDataset(new URL(request.url), session.objectId, current && current !== datasets?.defaultId ? current : null);
     url.searchParams.delete('feature');
     url.searchParams.delete('v');
     request.url = url.href;

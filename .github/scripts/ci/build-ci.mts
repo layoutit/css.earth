@@ -125,7 +125,7 @@ export async function buildCi({ root = resolve(import.meta.dirname, '../../..'),
       const cached = Boolean(hit && task.outputs?.length && task.outputs.every(output => compiledOutputsValid(root, output, identity)));
       if (cached && task.id === 'packages') {
         // The package dist cache intentionally excludes generated TS sources needed by typecheck/tests.
-        await run({ id: 'astronomy-data', after: [], command: process.execPath, args: ['packages/astronomy/tools/body-records.mts'] }, root);
+        await run({ id: 'astronomy-data', after: [], command: process.execPath, args: ['packages/astronomy/cli/body-records.mts'] }, root);
       } else if (!cached) {
         await run(task, root);
         for (const output of task.outputs ?? []) recordOutputs(root, output, identity);
