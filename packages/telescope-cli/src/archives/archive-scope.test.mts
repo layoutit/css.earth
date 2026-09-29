@@ -1,5 +1,5 @@
 /** The archive clients, reducers and ledger builders are generic: which shipped bodies a ledger names or searches by name is data
- * beside that archive's programs or code (`src/archives/<archive>/`, or `tools/objects/<archive>/` until it moves), never a string or key
+ * beside that archive's programs or code (`src/archives/<archive>/`), never a string or key
  * in this package's code.
  *
  * This is a heuristic scan, not a proof. It catches a shipped id written as a whole string or template segment, as any word of

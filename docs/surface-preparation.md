@@ -201,7 +201,7 @@ identifies the cubes and processing behind this illustration.
 
 FITS decoding happens during preparation, never in the browser. The shared
 [reader](../packages/fits/README.md) (`@cssearth/fits`) preserves native pixel/axis order and physical numeric
-values. Every other FITS reader in `tools/` reads headers and HDU bounds through it.
+values. Every other FITS reader in preparation code reads headers and HDU bounds through it.
 Product adapters still own units, quality masks, camera registration,
 spectral selection, missing-data policies and display transforms. Sky images do not
 own their orientation: the package's [`skyImageAxes`](../packages/fits/src/sky.ts) reads it from the WCS. An axis-aligned image is flipped into

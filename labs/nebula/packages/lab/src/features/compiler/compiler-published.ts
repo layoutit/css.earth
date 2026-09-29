@@ -11,7 +11,7 @@ function producerPath(path: string): boolean {
     /^src\/(?:preparation|renderers|platform)\/.+\.[cm]?ts$/.test(path) ||
     // The flat names, `tools/fits/` and the lab's volume-core and volume-bake packages are pre-reorganization pins, kept because a
     // recorded producer identity is history, not a path that still has to resolve; `packages/fits/`, `packages/telescope/`,
-    // `packages/bake/` and `tools/sources/` are where those owners live now; `src/renderers/` above is the renderer runtime
+    // `packages/bake/` is where those owners live now (`tools/sources/` is a pre-reorganization pin like the flat names); `src/renderers/` above is the renderer runtime
     // before it became `packages/renderer/`, and `packages/engine/` holds the star colour fit that was `src/preparation/stars/`.
     // `packages/spice/` is an owner since the sky-band composite reads the WISE atlas grid through `@cssearth/bake/objects/raster`,
     // whose entry (followed whole, like every topic entry) reaches the observer cameras. `packages/objects/` is an owner since

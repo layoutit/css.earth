@@ -25,7 +25,7 @@ held differently while coasting:
 
 ## Why
 
-A USB iPad capture of production css.earth (v0.3455, 2026-09-26, `tools/performance/ios-capture.mts --style-writes`)
+A USB iPad capture of production css.earth (v0.3455, 2026-09-26, [`tools/performance/ios-capture.mts`](https://github.com/layoutit/css.earth/blob/62db411815/tools/performance/ios-capture.mts) (now `labs/performance/ios-capture.mts`) with `--style-writes`)
 recorded a flick and its coast. While moving, the page wrote 19,203 times off the compositor path across 104 kinds.
 The writes included:
 

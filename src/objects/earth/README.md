@@ -195,7 +195,7 @@ source JPEGs remain unchanged. Dataset selection is manual at every zoom level.
 The two polar caps are rastered at their own 256-pixel cell size. They used to share the
 interior shells' four-times raster scale, so Safari backed each cap with a 1,024-pixel layer
 of 36 MB. On the iPhone 17 Pro simulator, during a four-drag Earth capture
-(`tools/performance/ios-capture.mts`, 2026-09-22), each cap layer is now 2.3 MB, and
+([`tools/performance/ios-capture.mts`](https://github.com/layoutit/css.earth/blob/62db411815/tools/performance/ios-capture.mts), now [`labs/performance/ios-capture.mts`](../../../labs/performance/ios-capture.mts), 2026-09-22), each cap layer is now 2.3 MB, and
 composited layers total 153.2 MB, down from 220.7 MB. In the same session, applying the
 256-pixel caps to the live page left the rendered frame pixel-for-pixel identical.
 

@@ -3,7 +3,7 @@
 The repository's one FITS reader, for the preparation tools and the nebula lab. It reads header cards and values,
 HDU layout, image samples, Rice tile-compressed images and the sky orientation and projection stated by a WCS, and it
 writes and reads the float32 transport image the nebula lab exchanges with external programs. It interprets no
-calibration, units, quality masks or display policy: product adapters in `tools/` own those.
+calibration, units, quality masks or display policy: product adapters in `packages/bake` and `packages/telescope-cli` own those.
 
 The main entry parses bytes (a `Uint8Array`, which a Node `Buffer` is) with no Node built-ins, so a browser bundle could
 import it. Reading files, and writing the transport image as a `Buffer`, need Node and live behind the separate

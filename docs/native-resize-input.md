@@ -111,7 +111,7 @@ await build({ entryPoints: ['tests/experiments/native-scroll/camera-browser.mts'
   platform: 'node', format: 'esm', packages: 'external' });
 JS
 CSSEARTH_CHROME_LOG_STDIO=1 node output/native-scroll/camera-browser.mjs chromium
-pnpm --filter @cssearth/engine exec tsc -p ../../tools/experiments/native-scroll/tsconfig.json
+pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-scroll/tsconfig.json
 ```
 
 This is a local Saturn experiment, not a production camera replacement. The
@@ -199,7 +199,7 @@ CSS property for a resize hit target.
 
 ```sh
 CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/browser.mts
-pnpm --filter @cssearth/engine exec tsc -p ../../tools/experiments/native-resize/tsconfig.json
+pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-resize/tsconfig.json
 ```
 
 The checks exercise five starting positions, one-pixel movement, repeated drags,
@@ -234,7 +234,7 @@ containment and adds layout/style containment to the resized element.
 
 ```sh
 CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/compare-browser.mts
-node tools/performance/trace-brief.mts output/playwright/native-resize/matched-input/native-1.json.gz \
+node labs/performance/trace-brief.mts output/playwright/native-resize/matched-input/native-1.json.gz \
   --out output/playwright/native-resize/matched-input/native-1-analysis \
   --framesleuth /path/to/cssGraphics/scripts/frame-sleuth.mjs --url 4351
 ```

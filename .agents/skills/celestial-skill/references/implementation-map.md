@@ -69,7 +69,8 @@ invent a revolution period. The finite display window is not a physical bound
 or a propagation-accuracy claim. See [open trajectories](../../../../docs/prepared-navigation-ownership.md#open-trajectories).
 
 Follow the selected preparation branch into its reusable implementation under
-`tools/objects/`. Preparation owns geometry, source interpretation, atlases,
+`packages/bake/src/objects/` (per-body processing scripts sit in
+`packages/bake/authoring/<body>/`, or `packages/telescope-cli/authoring/<body>/` for telescope work). Preparation owns geometry, source interpretation, atlases,
 lighting and other scene assets; the shared CSS renderer consumes prepared data.
 Body facts stay in the package. Extend a shared capability only when the source
 requires behavior the existing capability cannot express.
