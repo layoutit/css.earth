@@ -48,7 +48,7 @@
   "production": [
     ".github/workflows/nightly.yml", ".github/workflows/deploy.yml", ".github/ci-areas.json",
     ".github/scripts/ci/ci-affected.mts", "package.json", "pnpm-lock.yaml", "site/**", "astro.config.mts",
-    "packages/renderer/src/rendering/**", "tools/prepare-*.mts", "tools/setup*.mts"
+    "packages/renderer/src/rendering/**"
   ],
   "areas": [
     { "id": "docs", "patterns": ["**/*.md", "docs/**", "LICENSE*"], "jobs": [] },
