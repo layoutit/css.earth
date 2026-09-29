@@ -42,3 +42,23 @@ test('a mesh loads when it may show, then shows only from outside, fading in fro
   mounted.destroy();
   expect(host.children).toHaveLength(0);
 });
+
+test('a limb that cannot be resolved leaves the sphere and its caption, and another subject can own the caption', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const errors: unknown[] = [], original = console.error;
+  console.error = (...args: unknown[]) => { errors.push(args); };
+  try {
+    const mounted = mountImageMesh({ host, before: null, url: '/sphere.json', fetchJson: async () => ({ ...mesh, limb: { path: 'sphere/limb.webp', edge: .98 } }),
+      resolveResource: path => { if (path.endsWith('limb.webp')) throw new Error('unavailable'); return `/${path}`; } });
+    mounted.publish(at(300), 1);
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(mounted.root.dataset.imageMesh, 'the sphere mounted').toBe('sphere');
+    expect(mounted.root.querySelector('i'), 'without its limb').toBeNull();
+    expect(host.querySelector('[data-image-mesh-label="sphere"]')!.textContent).toBe('Sphere');
+    expect(errors).toHaveLength(1);
+    const label = host.querySelector<HTMLElement>('[data-image-mesh-label]')!;
+    mounted.publish(at(250), 1, false);
+    expect(label.style.opacity, 'a focus owns the caption').toBe('0');
+    mounted.destroy();
+  } finally { console.error = original; }
+});

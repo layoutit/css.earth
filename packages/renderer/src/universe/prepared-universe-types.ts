@@ -3,6 +3,7 @@ import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedPointAppearance } from '../stars/types.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
+import type { BackgroundPointBank } from './background-points.js';
 import type { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 import type { PreparedPointVisibility } from '../volume/projected-volume-visibility.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -15,7 +16,7 @@ export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; ne
 
 export interface PreparedUniverseOptions {
   /** Prepared catalogue point banks of the galaxies beyond the Local Group (background-points.ts). */
-  backgroundCataloguePoints?: readonly string[];
+  backgroundCataloguePoints?: readonly BackgroundPointBank[];
   /** Closed image meshes around the Sun seen from outside (the cosmic microwave background; image-mesh.ts). */
   imageMeshes?: readonly { url: string; resolveResource(path: string): string }[];
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;

@@ -83,8 +83,8 @@ export function withPreparedFocus(url: URL, sceneId: string, id: string | null, 
 }
 
 /** The page an overview selected on scene `sceneId` is, or null when it is the scene page's `overview=system`. An
- * overview's page is the world host's scene; another star's scene zoomed out past its system (the scopes are measured
- * from the host, so this is at once) stays that star's system overview, so its URL still reopens the scene it shows. */
+ * overview's page is the world host's scene; another star's scene zoomed out past its system stays that star's system
+ * overview in its URL, so a reload reopens the scene it shows and the zoom recomputes the scope from there. */
 export function overviewPage(sceneId: string, scope: string | null): OverviewPageId | null {
   return isOverviewPage(scope) && sceneId === WORLD_HOST_ID ? scope : null;
 }

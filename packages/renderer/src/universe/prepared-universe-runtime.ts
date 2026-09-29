@@ -284,7 +284,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               if (detailContextOpacity > 0) background.prefetch(distanceM);
               additionalPoints.publish({world, viewport}, distanceM);
               // Loaded and drawn only far outside the galaxies' own scale.
-              const meshCover = Math.max(0, ...meshes.map(mesh => mesh.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M))));
+              // A catalogue focus, selected or previewed, owns the caption; the mesh then names nothing.
+              const meshCaptioned = detailedFocus === null && (selectionPreview === undefined || selectionPreview === null);
+              const meshCover = Math.max(0, ...meshes.map(mesh => mesh.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M), meshCaptioned)));
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
               const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId);

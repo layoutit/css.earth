@@ -80,7 +80,9 @@ below it.
   Planck's 2018 SMICA map (HEALPix Nside 2048) drawn on the sphere its light
   left from, the surface of last scattering: the comoving distance of
   z* = 1089.80 (Planck 2018 VI, Table 2) in the Planck 2018 cosmology,
-  13,884 Mpc or 45.3 billion light-years. The sphere is the planets' standard
+  13,884 Mpc or 45.3 billion light-years. Its light left 372,000 years after the
+  Big Bang: the age of the universe at z* in the same cosmology (Astropy 8.0.1
+  `Planck18.age`), the figure the overview card quotes. The sphere is the planets' standard
   sphere: 16 latitude bands of 32 flat cells, ICRS north up, the top and bottom
   bands closed by round polar caps, 450 PolyCSS leaves in all, each showing its
   own tile of one atlas (64 texels a side for a cell, 192 for a cap, so a cap's
@@ -108,10 +110,9 @@ show [the cosmic microwave background from outside](evidence/2026-09-29/cmb-from
 at 52 Gpc, seamless across its 450 patches, with its limb and caption, and, 7.6 billion light-years out
 (captured at 40 Gpc plus three notches, before the opening distance moved),
 [DESI's two cones](evidence/2026-09-29/desi-cones.jpg) of bright galaxies either
-side of the Milky Way's plane, with the Cosmicflows-4 field between them.
-Dragging at 0.9 and 2.2 billion light-years, with every DESI dot drawn, runs at
-a median 8.3 ms and a 90th percentile under 10 ms per frame (headless Chromium,
-GPU, device scale 2).
+side of the Milky Way's plane, with the Cosmicflows-4 field between them. Both
+were taken before overviews had their own pages; they open now at
+`/observable-universe/`.
 
 A [browser capture](evidence/2026-09-29/capture.json) of this version shows
 [the whole field](evidence/2026-09-29/field.jpg) from 200 Mpc: sharp dots in

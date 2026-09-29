@@ -252,7 +252,7 @@
       {
         "id": "cmb",
         "label": "Cosmic microwave background sphere",
-        "process": "Sample the SMICA map onto a cube-sphere atlas of 384 patches, coloured with the Planck table over plus and minus 300 microkelvin, on a sphere at the comoving distance of z* = 1089.80.",
+        "process": "Sample the SMICA temperature map onto the planets' standard sphere (16 latitude bands of 32 cells and two round polar caps, 450 leaves), coloured with the Planck table over plus and minus 300 microkelvin, at the comoving distance of z* = 1089.80; draw a camera-facing limb plate over it.",
         "recipe": "source/cmb/sphere.json",
         "inputs": [
           "planck-smica-map",
@@ -260,15 +260,18 @@
         ],
         "outputs": [
           "prepared/cmb.json",
-          "prepared/cmb/cmb.webp"
+          "prepared/cmb/cmb.webp",
+          "prepared/cmb/cmb-limb.webp"
         ],
         "selector": "",
         "interpretation": {
-          "kind": "catalogue-count-visualization",
-          "sourceKind": "published-catalogue"
+          "kind": "published-sky-map-on-sphere",
+          "sourceKind": "published-map"
         },
         "limitations": [
-          "Presentation choices (shares, reach, colour mapping and tone) are recorded with their basis in each recipe."
+          "Texels are about 10.5 arcminutes at the equator, coarser than the map's 5 arcminute beam.",
+          "The whole sky is drawn, including the 15.8% outside the map's own temperature confidence mask (TMASK), where Milky Way foreground remains.",
+          "The colour table's gamma of 1.6 and the linear limb (u = 0.6) are presentation choices recorded in the recipe; nothing sees this surface from outside."
         ]
       }
     ]

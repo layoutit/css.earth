@@ -85,7 +85,7 @@ export function mountImageMesh({ host, before, labelHost, url, fetchJson, resolv
     if (nextTransform !== transform) scene.style.transform = transform = nextTransform;
   };
   // The outline and the caption below it: transforms and opacity only, written on change.
-  const outline = (publication: VolumeCameraPublication, alpha: number) => {
+  const outline = (publication: VolumeCameraPublication, alpha: number, captioned: boolean) => {
     const centreM = payload!.frame.originM, radiusM = payload!.radiusUnits * payload!.frame.metersPerUnit;
     const shape = alpha > 0 ? sphereSilhouette(publication.world, publication.viewport, centreM, radiusM) : null;
     if (payload!.limb) {
@@ -93,7 +93,7 @@ export function mountImageMesh({ host, before, labelHost, url, fetchJson, resolv
       const next = shape ? `translate(${format(shape.x)}px,${format(shape.y)}px) rotate(${format(shape.angle)}rad) scale(${scale(shape.major)},${scale(shape.minor)})` : '';
       if (next !== limbTransform) { limbTransform = next; if (next) limb.style.transform = next; limb.style.display = next ? '' : 'none'; }
     }
-    const placement = shape && labelSize && placeSelectedBodyLabel(publication.world, publication.viewport, { positionM: centreM, radiusM },
+    const placement = captioned && shape && labelSize && placeSelectedBodyLabel(publication.world, publication.viewport, { positionM: centreM, radiusM },
       { overview: false, focused: false, preview: undefined, edge: () => silhouetteBottom(shape) }, labelSize[0], labelSize[1]);
     const nextLabel = placement ? `translate(${format(placement.left)}px,${format(placement.top)}px) translate(-50%,0)` : labelTransform;
     if (nextLabel !== labelTransform) label.style.transform = labelTransform = nextLabel;
@@ -102,7 +102,8 @@ export function mountImageMesh({ host, before, labelHost, url, fetchJson, resolv
   };
   return Object.freeze({ root,
     /** Publishes the camera and returns the mesh's opacity, so what lies inside it can give way as it closes over. */
-    publish(publication: VolumeCameraPublication, shown = 1): number {
+    /** `captioned` is false while another subject owns the view's caption (a catalogue focus): the mesh then names nothing. */
+    publish(publication: VolumeCameraPublication, shown = 1, captioned = true): number {
       if (destroyed) return 0;
       const distanceM = Math.hypot(...publication.world.pose.positionM);
       const radiusM = payload ? payload.radiusUnits * payload.frame.metersPerUnit : null;
@@ -116,7 +117,7 @@ export function mountImageMesh({ host, before, labelHost, url, fetchJson, resolv
         const display = alpha > 0 ? '' : 'none';
         if (root.style.display !== display) root.style.display = display;
         if (alpha > 0) draw(publication);
-        outline(publication, alpha);
+        outline(publication, alpha, captioned);
         return alpha;
       }
       latest = publication;
@@ -133,14 +134,17 @@ export function mountImageMesh({ host, before, labelHost, url, fetchJson, resolv
           mesh.append(node);
         }
         scene.append(mesh);
-        if (payload.limb) {
-          limb.style.backgroundImage = `url("${resolveResource(payload.limb.path).replace(/["\\\n\r]/gu, character => `\\${character}`)}")`;
-          root.append(limb);
-        }
         label.textContent = payload.name; label.dataset.imageMeshLabel = payload.id;
         (labelHost ?? host).append(label); observer?.observe(label);
+        // The limb is a decoration of the sphere: one that cannot be resolved leaves the sphere and its caption drawn.
+        if (payload.limb) {
+          try {
+            limb.style.backgroundImage = `url("${resolveResource(payload.limb.path).replace(/["\\\n\r]/gu, character => `\\${character}`)}")`;
+            root.append(limb);
+          } catch (error) { console.error(`Image mesh ${url} limb unavailable`, error); }
+        }
         root.dataset.imageMesh = payload.id;
-        if (latest) this.publish(latest, shown);
+        if (latest) this.publish(latest, shown, captioned);
       }).catch(error => { root.dataset.imageMesh = 'failed'; console.error(`Image mesh ${url} failed`, error); });
       return 0;
     },

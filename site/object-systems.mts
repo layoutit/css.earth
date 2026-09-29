@@ -15,8 +15,8 @@ export interface PlanetarySystem {
   readonly radiusM: number;
   /** Leaving this far from the star opens the system overview: the Sun's 100 AU, scaled by the system's prepared size, and
    * no farther than a quarter of the distance where its orbits are gone, where the overview gives way (overview-context.mts).
-   * It then lasts at least two doublings of distance, more than one mouse-wheel step, which multiplies it by about 2.7
-   * (measured headless at light-year scales, 2026-09-29), so zooming out always shows it. Only Sgr A* is held by this: its
+   * It then lasts at least two doublings of distance, wider than a mouse-wheel step at these scales, so zooming out
+   * shows it rather than stepping over it. Only Sgr A* is held by this: its
    * S-star orbits are gone at 3.2 ly, so its overview opens at 0.8 ly, not at the scaled 3.6 ly. */
   readonly exitDistanceM: number;
 }

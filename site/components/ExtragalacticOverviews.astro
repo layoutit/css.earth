@@ -32,7 +32,7 @@ const groups = [
     introduction: 'Selected nearby galaxy clusters. This view is not a complete map of the observable universe.',
     objects: parsePreparedClusterCatalog(clusters).objects.map(object => ({ id: object.id, focusId: object.id, positionM: object.positionM, name: object.name, distancePc: object.distance.valuePc, href: `/${object.id}/` })) },
   { id: 'observable-universe' as const, name: 'Observable Universe', section: 'Galaxy clusters',
-    introduction: 'Everything whose light has had time to reach us: DESI\'s galaxies and quasars out to 6.6 Gpc, and at its edge the cosmic microwave background, light from 380,000 years after the Big Bang, 14 Gpc away.',
+    introduction: 'Everything whose light has had time to reach us: DESI\'s galaxies and quasars out to 6.6 Gpc, and at its edge the cosmic microwave background, light from 372,000 years after the Big Bang, 14 Gpc away.',
     objects: [] },
 ];
 ---
