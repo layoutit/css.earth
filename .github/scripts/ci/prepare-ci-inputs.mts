@@ -43,7 +43,7 @@ function uniqueCiInputs(assets: readonly RuntimeAssetLocation[]): RuntimeAssetLo
 }
 
 /** Published-package inputs for runtime and catalogue-consumer checks, not scientific authoring replay.
- * Runtime ownership, activation and shell contracts inspect every registered body's runtime/scene JSON;
+ * Activation and shell contracts inspect every registered body's runtime/scene JSON;
  * catalogue and feature consumers also inspect inventoried context/public JSON. Keep that open-ended JSON
  * closure. The renderer's volume/loader and shell/loader suites additionally inspect every prepared image in
  * the real Milky Way and Heliosphere fixture banks. Sky and point-field renderer tests read the canonical

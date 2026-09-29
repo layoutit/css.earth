@@ -11,7 +11,7 @@ import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph }
 import { readCiSteps } from '../ci/check-ci.mts';
 import { formatDelta, formatFindings } from './report.mts';
 import { declaredPackage, undeclaredImports } from './declared-dependencies.mts';
-import { isBroken, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
+import { isBroken, objectCodeFiles, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
 import { isTestPath, zoneOf } from './zones.mts';
@@ -302,7 +302,15 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.equal(isBroken(found), true);
   assert.doesNotMatch(formatFindings(clean), /broken/u);
   assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
-  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['retired-folders', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'retired folders, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
+});
+
+test('a script or Astro module inside an object package is a finding; its data is not', () => {
+  assert.deepEqual(objectCodeFiles(['src/objects/mars/object.json', 'src/objects/mars/README.md', 'src/objects/mars/runtime/definition.mjs',
+    'src/objects/mars/site/Card.astro', 'src/objects/mars/x.d.ts', 'src/platform/object-runtime.mts', 'site/objects.mts']),
+  ['src/objects/mars/runtime/definition.mjs: object packages hold data only; put code in packages/ or site/',
+    'src/objects/mars/site/Card.astro: object packages hold data only; put code in packages/ or site/',
+    'src/objects/mars/x.d.ts: object packages hold data only; put code in packages/ or site/']);
 });
 
 test('a file under a retired folder is a finding; a sibling folder with a longer name is not', () => {

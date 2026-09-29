@@ -223,7 +223,8 @@ import of a shared package names no entry it can trace to a source file.
 
 The same check applies repository rules that have no baseline, so any finding
 fails it: no file under the retired `tools/` folder (`RETIRED_FOLDERS` in
-`repository-rules.mts`), the nebula
+`repository-rules.mts`), no script or Astro module under `src/objects/` (object
+packages hold data; the shared runtime owns the DOM and scene state), the nebula
 boundaries (`nebula-packages.mts` and `nebula-inbound.mts`;
 `pnpm check:nebula-boundaries` is an alias of the check), and declared
 dependencies: a `packages/*` file imports another workspace package only when
@@ -249,10 +250,6 @@ your changed paths to (`.github/scripts/ci/ci-affected.mts`, computed by the "Cl
 changes" job) — a job it skips still reports success, never failure, so it never
 blocks merging. When in doubt about what a change affects, it runs everything. A
 nightly workflow checks that every inventoried asset is still published.
-
-`node .github/scripts/checks/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
-(it reads every body's prepared JSON); run `pnpm setup:assets` (which restores `prepared/runtime.json` and
-`prepared/scene.json`, no longer committed) before it, or it fails on missing files rather than ownership defects.
 
 Browser checks also require the exact prepared rendering assets. Sources and
 catalogue preparation restore metadata, not those assets. Successfully opening

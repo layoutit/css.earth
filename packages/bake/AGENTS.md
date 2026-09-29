@@ -51,7 +51,7 @@ its validators accept); the renderer never imports the bake.
 - `src/world-context/` is published as `@cssearth/bake/world-context` (Node only): the spatial world context (sources,
   bodies, orbit banks, system and group views, hyperbolic paths). It imports no topic.
 - `src/runtime-source/` is published as `@cssearth/bake/runtime-source` (Node only): the runtime-source reader that
-  preparation and the runtime ownership checks share. It parses a runtime module into ESTree with its original ranges,
+  preparation shares. It parses a runtime module into ESTree with its original ranges,
   resolves its imports to source files through each package's exports and tsup entries, and reads names, keys and static
   object properties. It imports no topic.
 - `src/prepared-presentation/` is published as `@cssearth/bake/prepared-presentation` (Node only): the passes that rewrite
@@ -84,11 +84,11 @@ its validators accept); the renderer never imports the bake.
   JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `tests/sources/`.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
   writes and tests read back, with its prepared resource catalogue, validated against the prepared-presentation contract
-  and the renderer's object controls, and the audits that read a prepared presentation and its authored runtime sources back
-  against the descriptor (`check-prepared-presentation.ts`, `prepared-object-source.ts`; the prepared format constant comes
+  and the renderer's object controls, and the audit that reads a prepared presentation back against the descriptor
+  (`check-prepared-presentation.ts`; the prepared format constant comes
   from the renderer's `prepared-data/object-format.ts`). The audit reads the registry on first use, not at import. It imports
-  `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command;
-  `.github/scripts/checks/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
+  `presentation`, `runtime-source` and `sources`. `packages/bake/cli/check-prepared-presentation.mts` is the audit's command.
+  `prepared-object-pin.ts` pins a prepared object to its
   transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
   and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
   Its tests are in `tests/contract/`.

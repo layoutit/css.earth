@@ -2,6 +2,8 @@ import type { Linter } from "eslint";
 import typescriptParser from '@typescript-eslint/parser';
 
 export const packageLineLimit = 600;
+// The contract forbids runtime canvas and WebGL (AGENTS.md); WWT's engine is WebGL. Build-time preparation may rasterize.
+const noCanvas = 'The CSS runtime uses no canvas or WebGL (AGENTS.md).';
 
 export default [
   { ignores: ['**/node_modules/**', '**/dist/**', '**/.cache/**', '**/coverage/**',
@@ -133,9 +135,24 @@ export default [
       'no-restricted-imports': ['error', {
         patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '**/tools/**', '**/labs/**', '**/renderers/**',
           'node:*', '@cssearth/bake', '@cssearth/bake/*', '@cssearth/renderer', '@cssearth/renderer/*'],
-          message: 'The renderer runtime imports packages and its own modules only, never the application, preparation code or Node built-ins.' }],
+          message: 'The renderer runtime imports packages and its own modules only, never the application, preparation code or Node built-ins.' },
+        { group: ['@wwtelescope/*'], message: noCanvas }],
       }],
     },
+  },
+  {
+    // The site's browser runtime (not its build steps or tests) and the renderer draw with retained DOM and CSS only.
+    files: ['site/**/*.{ts,mts}', 'packages/renderer/src/**/*.ts'],
+    ignores: ['site/build/**', 'site/test/**', '**/*.test.{ts,mts}'],
+    rules: {
+      'no-restricted-globals': ['error', ...['OffscreenCanvas', 'WebGLRenderingContext', 'WebGL2RenderingContext'].map(name => ({ name, message: noCanvas }))],
+      'no-restricted-properties': ['error', { property: 'getContext', message: noCanvas }],
+    },
+  },
+  {
+    files: ['site/**/*.{ts,mts}'],
+    ignores: ['site/build/**', 'site/test/**', '**/*.test.{ts,mts}'],
+    rules: { 'no-restricted-imports': ['error', { patterns: [{ group: ['@wwtelescope/*'], message: noCanvas }] }] },
   },
   {
     // Moved unchanged from src/renderers/css, which had no line limit; splitting them is separate work. The site bundle's
