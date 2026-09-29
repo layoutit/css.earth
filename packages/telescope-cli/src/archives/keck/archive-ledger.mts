@@ -127,10 +127,10 @@ const finite = (value: unknown) => typeof value === 'number' && Number.isFinite(
  * programs pin now. All three are checked here, against `programs` as they are on disk at this moment:
  *
  *   the comparison itself: at least one extension, each with the sample counts and the two cuts a comparison writes;
- *   the archive side: the exact product the current program pins for this observation, by archive path, byte count and
- *     sha256, and the bytes the comparison read equal to that pin;
+ *   the archive side: the exact product the current program pins for this observation, by archive path and byte count, and
+ *     the bytes the comparison read equal to that pin;
  *   our side: a product record beside the file it names, written by a run of this observation, pinning that file at the
- *     digest the receipt states.
+ *     size the receipt states.
  *
  * Anything short of that is a problem with a reason, not evidence. A receipt written before a pin changed fails here, which
  * is the point: it was evidence about other bytes. */

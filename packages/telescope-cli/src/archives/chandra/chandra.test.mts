@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { addProductEvidence, readProductRecord, runKey, writeProductRecord } from '@cssearth/telescope/node';
+import { addProductEvidence, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { observationMode, obsidDirectory, parseChandraProgram, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
 import { isObjectPointing, chandraLedgerGuide, modeKey, objectBox, OBJECT_RADIUS_DEGREES, pinnedState, CHANDRA_LEDGER } from './archive-ledger.mts';
@@ -145,7 +145,7 @@ test('a program pins level-1 inputs and the archive’s level-2 products, and re
 
 
 
-test('the Crab halo program pins obsid 2798 with every file digested', async () => {
+test('the Crab halo program pins obsid 2798 with every file sized', async () => {
   const pinned = parseChandraProgram(JSON.parse(await readFile(join(PROGRAMS, 'm1-crab-halo.json'), 'utf8')));
   const [entry] = pinned.observations;
   assert.equal(entry?.obsid, 2798);
@@ -180,18 +180,15 @@ test('the Crab halo re-run keeps every archive event and places it within half a
   assert.deepEqual(Object.keys(receipt.differentCards).sort(), ['ASCDSVER', 'BPIXFILE', 'FLTFILE']);
 });
 
-/** The pinned observation with every input digested, as reprocess.mts has it once the files are on disk. */
-const digested = () => {
-  const entry = parseChandraProgram(program()).observations[0]!;
-  return { ...entry, inputs: entry.inputs.map((input, index) => ({ ...input, sha256: String(index).repeat(64) })) };
-};
+/** The pinned observation, as reprocess.mts has it once the files are on disk. */
+const measured = () => parseChandraProgram(program()).observations[0]!;
 /** A reprocessing run's own account of itself, written as that run writes it: the products it made, and no evidence. Nothing
  * here runs CIAO; what is under test is which environment the record carries, not what chandra_repro does. */
 const reprocessed = async (versions: { ciao: string; caldb: string }) => {
   const directory = await mkdtemp(join(tmpdir(), 'chandra-reprocess-')), level2 = 'acisf02798_repro_evt2.fits';
   await writeFile(join(directory, level2), eventFile([event()]));
   const { parameters } = reprocessParameters('NONE', 2 * 2 ** 30);
-  const run = reprocessRun(digested(), { parameters, versions, toolchainDigest: 'c'.repeat(64) });
+  const run = reprocessRun(measured(), { parameters, versions });
   return { directory, level2, record: await writeReprocessRecord(directory, level2, [level2], run) };
 };
 

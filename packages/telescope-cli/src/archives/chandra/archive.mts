@@ -147,7 +147,7 @@ export function parseChandraProgram(value: unknown): ChandraProgram {
   return { schema: row.schema, id: requireString(row.id, 'Program id'), target: requireString(row.target, 'Target'), observations };
 }
 
-/** A pinned file on disk at its pinned size and, once known, its pinned digest: linked from a source directory that already has
+/** A pinned file on disk at its pinned size: linked from a source directory that already has
  * it, or downloaded with curl, which resumes a partial transfer. The archive drops slow transfers, so one under 200 kB/s for a
  * minute is abandoned and resumed on a fresh connection, twenty times at most. The archive's path is kept, because the CIAO
  * tools read an observation as the directory the archive lays out. */
