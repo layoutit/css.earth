@@ -118,8 +118,8 @@ src/objects/itokawa/source/observations/*.lbl -text -whitespace
 src/objects/*/source/observations/*.SUM -text -whitespace
 src/objects/*/source/observations/*.INFO -text -whitespace
 # Native results and byte inventories are reproducible generated evidence.
-tests/oracles/sbmt/projection.json linguist-generated=true
-tests/oracles/sbmt/runtime.lock.json linguist-generated=true
+packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json linguist-generated=true
+packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/runtime.lock.json linguist-generated=true
 
 # Preserve the exact archived VOTable response bytes, including CRLF.
 tests/fixtures/telescope-vo/*.xml -text -whitespace

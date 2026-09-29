@@ -16,11 +16,13 @@ import { pathToFileURL } from 'node:url';
 
 /** Relocated suites without an object-entry import. Keep this list explicit so preparation suites cannot join by accident. */
 const RELOCATED_NODE_TESTS: readonly string[] = [
+  'packages/bake/src/astronomy/fixtures/small-kernel.oracle.test.mts',
   'packages/bake/src/delivery/operations-assemble.test.ts',
   'packages/bake/src/delivery/public-runtime-assets.test.ts',
   'packages/bake/src/delivery/publication-inventory.test.mts',
   'packages/bake/src/delivery/publication.test.mts',
   'packages/bake/src/objects/acquisition/acquisition-request.test.ts',
+  'packages/bake/src/objects/default-view/fixtures/new-horizons-approach.oracle.test.mts',
   'packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-lightcurve-models.test.mts',
   'packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radar-models.test.mts',
   'packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radius-models.test.mts',
@@ -29,15 +31,17 @@ const RELOCATED_NODE_TESTS: readonly string[] = [
   'packages/bake/src/objects/sphere-survey/commands-root.test.mts',
   'packages/bake/src/objects/sphere-survey/survey-install-spawns.test.mts',
   'packages/bake/src/presentation/emissive-plates.test.mts',
+  'packages/bake/src/photometry/whole-disc-colour.test.mts',
   'packages/bake/src/raster/raster-pages.test.mts',
   'packages/bake/src/scene/leaf-raster-scale.test.ts',
+  'packages/bake/src/surface-previews/surface-preview-rasters.test.mts',
 ];
 /** Tracked test files the Node selection may take, as `git ls-files` pathspecs. */
 export const BAKE_OBJECT_TEST_PATHS = ['tests/**/*.test.mts', 'tests/**/*.test.ts', 'packages/bake/src/objects/**/*.test.ts', 'packages/bake/src/objects/**/*.test.mts', 'packages/bake/authoring/**/*.test.mts', 'packages/telescope-cli/authoring/**/*.test.mts', ...RELOCATED_NODE_TESTS] as const;
 const OBJECT_ENTRY = /(?:from|import)\s*\(?\s*['"]@cssearth\/bake\/objects\/(?:layers\/)?[a-z-]+['"]/u;
 /** Tests of an object entry that read the restored prepared packages of real bodies, so they run where those are restored:
  * the source-catalogue step of audit.yml's prepared-universe job. */
-export const RESTORED_PACKAGE_TESTS: readonly string[] = ['tests/contract/object-provenance.test.mts'];
+export const RESTORED_PACKAGE_TESTS: readonly string[] = ['packages/bake/src/objects/provenance/object-provenance.test.mts'];
 
 /** Object-entry tests and relocated bake Node suites, sorted, except tests requiring restored packages. */
 export function bakeObjectTests(files: readonly string[], read: (path: string) => string): string[] {

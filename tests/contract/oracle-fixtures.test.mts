@@ -5,12 +5,17 @@ const test = sourceTest();
 import { access, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readOracleFixture, pinnedOracleVersions, assertPinnedInputs, assertPinnedReferences, ORACLE_ROOT } from '@cssearth/core/oracle';
-import { runtimeLock, generatorFingerprint } from '../oracles/sbmt/runtime.mts';
+import { runtimeLock, generatorFingerprint } from '../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/runtime.mts';
 
 /** Every committed oracle fixture comes from the pinned environment and the pinned inputs; runs in `pnpm test:platform` without Python or restored sources. */
 // The scripts sit beside their fixtures; SBMT's JSON bridge manifests and runtime lock are not fixtures.
 const NOT_FIXTURES = new Set(['sbmt/package.json', 'sbmt/package-lock.json', 'sbmt/runtime.lock.json']);
 const relocatedFixtures: Readonly<Record<string, string>> = {
+  "sbmt/projection.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json",
+
+  "spice/dart-draco.json": "packages/bake/src/astronomy/fixtures/dart-draco.json",
+  "spice/new-horizons-approach.json": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.json",
+
   "eclipse-map/numerics.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.json",
   "eclipse-map/theresa-eigenbasis.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.json",
   "fits/binary-table.json": "packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json",
@@ -36,6 +41,8 @@ const relocatedFixtures: Readonly<Record<string, string>> = {
   "pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json"
 };
 const relocatedScripts: Readonly<Record<string, string>> = {
+  "spice/new-horizons-approach.py": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.py",
+
   "eclipse-map/numerics.py": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.py",
   "eclipse-map/theresa-eigenbasis.py": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.py",
   "fits/charon-leisa.py": "packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.py",

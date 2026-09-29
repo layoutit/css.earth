@@ -11,7 +11,7 @@ import { resolve } from 'node:path';
 import { projectRoot } from '../project-root.ts';
 
 if (process.argv[2] === 'sbmt') {
-  const result = spawnSync(process.execPath, [resolve(projectRoot(import.meta.url), 'tests/oracles/sbmt/setup.mts')], { stdio: 'inherit', timeout: 900_000 });
+  const result = spawnSync(process.execPath, [resolve(projectRoot(import.meta.url), 'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/setup.mts')], { stdio: 'inherit', timeout: 900_000 });
   if (result.error || result.status !== 0) throw new Error(`SBMT setup failed: ${result.error?.message ?? result.status}`);
   process.exit(0);
 }

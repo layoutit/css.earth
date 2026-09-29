@@ -10,6 +10,14 @@ import { projectRoot } from '../project-root.ts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../validate.ts';
 
 const relocatedPaths: Readonly<Record<string, string>> = {
+  "tests/oracles/sbmt/projection.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json",
+  "tests/fixtures/sbmt/concave.sum": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.sum",
+  "tests/fixtures/sbmt/cases.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/cases.json",
+  "tests/fixtures/sbmt/concave.tab": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.tab",
+
+  "tests/oracles/spice/dart-draco.json": "packages/bake/src/astronomy/fixtures/dart-draco.json",
+  "tests/oracles/spice/new-horizons-approach.json": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.json",
+
   "tests/oracles/eclipse-map/numerics.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.json",
   "tests/oracles/eclipse-map/theresa-eigenbasis.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.json",
   "tests/oracles/fits/binary-table.json": "packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json",
