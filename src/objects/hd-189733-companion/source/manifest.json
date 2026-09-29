@@ -284,7 +284,7 @@
       "path": "reference/lofti-candidate-orbits.txt",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence: 300 orbits of HD 189733 B around A accepted by LOFTI (Pearce et al. 2020, lofti_gaia 2.0.8) from both stars' Gaia DR3 astrometry, written by tools/objects/binary-orbits/lofti-fit.py. Kept as the record of how little the orbit is constrained; no orbit is drawn."
+        "reason": "Evidence: 300 orbits of HD 189733 B around A accepted by LOFTI (Pearce et al. 2020, lofti_gaia 2.0.8) from both stars' Gaia DR3 astrometry, written by packages/bake/authoring/hd-189733-companion/lofti-fit.py. Kept as the record of how little the orbit is constrained; no orbit is drawn."
       }
     }
   ]

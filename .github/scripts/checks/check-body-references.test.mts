@@ -8,7 +8,7 @@ test('every declared file is committed, restored by an acquisition step for its 
   const manifest = {
     inputs: [{ path: 'shape/model.obj' }, { path: 'observations/frame.img' }, { path: 'observations/lost.img' }],
     documents: [{ path: 'preparation/recipe.json' }],
-    generatedIntermediates: [{ path: 'observations/mean.fits', generator: 'tools/objects/eht/topset-mean.mts x' }],
+    generatedIntermediates: [{ path: 'observations/mean.fits', generator: 'packages/bake/authoring/eht/topset-mean.mts x' }],
   };
   const acquisition = { operations: [{ kind: 'download', path: 'observations/frame.img', url: 'https://example.org/frame.img' }] };
   assert.deepEqual(problems(bodySourceFindings('x', manifest, acquisition, new Set(['shape/model.obj', 'preparation/recipe.json']))),
