@@ -199,8 +199,8 @@ smallest relative uncertainty and the longest wavelength on a tie, every row is 
 stated in the record. Below about 1,800 K a black body lies outside sRGB and is shown mixed with the least white that brings
 it inside, hue kept, which the lens says. A planet with nothing measured keeps the neutral gray, lit by its host's measured
 colour instead of a white lamp: the gray's brightness with the host colour lens's chromaticity (`hostLitGray` in
-[color-transfer.ts](../packages/bake/src/objects/color/color-transfer.ts)). `telescope new-object --from-archive` does both; `--thermal <id>...`
-and `--host-light <id>...` give them to planets already in the tree.
+[color-transfer.ts](../packages/bake/src/objects/color/color-transfer.ts)). `telescope new-object --from-archive` does both; `node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>...`
+and `--host-light <id>...` (that entry only) give them to planets already in the tree.
 
 ![Lens thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-colour-routes.png)
 
