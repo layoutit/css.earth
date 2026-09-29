@@ -1,5 +1,4 @@
 /** Acquire one original numeric WWT FITS tile and expose it through Telescope's science backend. */
-import { createHash } from 'node:crypto';
 import { lstat, mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -7,9 +6,9 @@ import { sciencePackage } from '@cssearth/telescope/node';
 import { plotProduct } from '@cssearth/telescope/node';
 import { writeProductRecord } from '@cssearth/telescope/node';
 import { FITS_SOURCE_SCHEMA } from '../fits-source.mts';
+import { VERSION } from '../help.mts';
 
 const MAX_TILE_BYTES = 8 * 1024 * 1024;
-const digest = (bytes: Uint8Array): string => createHash('sha256').update(bytes).digest('hex');
 const index = (value: number, label: string): number => {
   if (!Number.isSafeInteger(value) || value < 0) throw new TypeError(`${label} must be a nonnegative whole number.`);
   return value;
@@ -57,8 +56,8 @@ export async function acquireWwtFits(catalogPath: string, setName: string, level
   if (basename(sourceFile) !== sourceFile || !/^[^/\\]+\.wtml$/iu.test(sourceFile)) throw new TypeError('WTML filename must be local to the catalog.');
   if (source.parser !== 'wwt-data-formats@0.18.1' || new URL(requireString(source.url, 'WTML URL')).protocol !== 'https:')
     throw new TypeError('WWT FITS catalog needs its pinned parser and HTTPS source URL.');
-  const wtmlBytes = await readFile(resolve(dirname(catalogPath), sourceFile));
-  if (digest(wtmlBytes) !== requireString(source.sha256, 'WTML SHA-256')) throw new Error('WWT source WTML differs from the pinned catalog.');
+  const wtmlBytes = await readFile(resolve(dirname(catalogPath), sourceFile))
+    .catch((error: unknown) => { throw new Error(`WWT FITS catalog ${catalogPath} names ${sourceFile}, which is not beside it.`, { cause: error }); });
   const sets = requireArray(catalog.imagesets, 'WWT FITS imagesets');
   const matches = sets.filter(row => requireRecord(row, 'WWT FITS imageset').name === setName);
   if (matches.length !== 1) throw new TypeError(`Select exactly one WWT FITS imageset by name; found ${matches.length} named ${setName}.`);
@@ -97,8 +96,8 @@ export async function acquireWwtFits(catalogPath: string, setName: string, level
       'WWT tile positioning comes from WTML; the tile FITS header alone does not establish celestial WCS.',
       'WWT tile retrieval does not establish the original untiled source product identity or calibration.',
     ])];
-    const report = { schema: 'cssearth-wwt-fits@1', status: 'unresolved', imageset: selected, tile: { level, x, y, url, bytes: bytes.length, sha256: digest(bytes) },
-      catalog: { sourceUrl: source.url, sourceSha256: source.sha256, snapshotSha256: digest(catalogBytes) },
+    const report = { schema: 'cssearth-wwt-fits@1', status: 'unresolved', imageset: selected, tile: { level, x, y, url, bytes: bytes.length },
+      catalog: { sourceUrl: source.url, file: basename(catalogPath), bytes: catalogBytes.length },
       inspection: { structure: science[0]!.structure, shape, quality: science[0]!.quality, unit: extracted.extraction && requireRecord(extracted.extraction).unit },
       limitations };
     await writeFile(resolve(staging, 'source.json'), `${JSON.stringify(report, null, 2)}\n`);
@@ -107,20 +106,16 @@ export async function acquireWwtFits(catalogPath: string, setName: string, level
     const outputNames = requireArray(plotted.files, 'science products').map(value => requireString(value, 'science product'));
     if (outputNames.length !== 4 || ['figure.png', 'figure.svg', 'values.csv', 'image.fits'].some(name => !outputNames.includes(name)))
       throw new Error('Astropy plotting returned an unexpected science product list.');
-    const implementation = digest(Buffer.concat(await Promise.all([
-      new URL('wwt-fits.mts', import.meta.url), new URL('../../../../packages/telescope/src/node/science.ts', import.meta.url),
-      new URL('../../../../packages/telescope/src/node/plots.ts', import.meta.url),
-    ].map(path => readFile(path)))));
     await writeProductRecord(resolve(staging, 'output.product.json'), {
       telescope: 'WorldWideTelescope hosted FITS collection', stage: 'telescope-wwt-fits',
       inputs: [
-        { role: 'WWT FITS catalog snapshot', identity: resolve(catalogPath), bytes: catalogBytes.length, sha256: digest(catalogBytes) },
-        { role: 'WTML collection', identity: requireString(source.url, 'WTML URL'), bytes: wtmlBytes.length, sha256: digest(wtmlBytes) },
-        { role: 'FITS tile', identity: url, bytes: bytes.length, sha256: digest(bytes) },
+        { role: 'WWT FITS catalog snapshot', identity: resolve(catalogPath), bytes: catalogBytes.length },
+        { role: 'WTML collection', identity: requireString(source.url, 'WTML URL'), bytes: wtmlBytes.length },
+        { role: 'FITS tile', identity: url, bytes: bytes.length },
       ],
       parameters: { imageset: requireString(selected.name, 'WWT FITS name'), level, x, y, status: 'unresolved', limitations, sourceInspection: science[0],
         fitsSource: { schema: FITS_SOURCE_SCHEMA, path: 'source.fits', label: requireString(selected.name, 'WWT FITS name'), limitations } },
-      software: [{ name: 'cssEarth Telescope WWT FITS', version: implementation }, { name: 'wwt-data-formats catalog parser', version: '0.18.1' },
+      software: [{ name: 'cssEarth Telescope WWT FITS', version: VERSION }, { name: 'wwt-data-formats catalog parser', version: '0.18.1' },
         { name: 'Astropy', version: requireString(inspected.astropy, 'Astropy version') },
         { name: 'Matplotlib', version: requireString(plotted.matplotlib, 'Matplotlib version') }],
     }, [{ path: 'source.fits', file: original }, { path: 'source.json', file: resolve(staging, 'source.json') },

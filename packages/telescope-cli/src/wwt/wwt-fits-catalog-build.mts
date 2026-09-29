@@ -1,5 +1,4 @@
 /** Snapshot a WWT WTML FITS collection with WWT's own parser for runtime-free lookup. */
-import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -43,7 +42,6 @@ const imagesets: unknown = JSON.parse(result.stdout);
 if (!Array.isArray(imagesets) || !imagesets.length || imagesets.some(row => !row || typeof row !== 'object' ||
   typeof (row as Record<string, unknown>).name !== 'string' || typeof (row as Record<string, unknown>).urlTemplate !== 'string'))
   throw new TypeError('WWT parser found no FITS imagesets.');
-const snapshot = { schema: 'cssearth-wwt-fits-catalog@1', source: { url: sourceUrl, file: basename(input),
-  sha256: createHash('sha256').update(sourceBytes).digest('hex'), parser: 'wwt-data-formats@0.18.1' }, imagesets };
+const snapshot = { schema: 'cssearth-wwt-fits-catalog@1', source: { url: sourceUrl, file: basename(input), parser: 'wwt-data-formats@0.18.1' }, imagesets };
 await writeFile(output, `${JSON.stringify(snapshot, null, 2)}\n`);
 process.stdout.write(`${imagesets.length} WWT FITS imagesets -> ${output}\n`);

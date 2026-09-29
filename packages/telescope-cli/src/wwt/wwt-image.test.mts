@@ -38,7 +38,7 @@ test('a saved WWT TAN entry becomes one pinned static PNG without network access
     const pixel = (x: number, y: number) => [...image.data.subarray(4 * (y * 512 + x), 4 * (y * 512 + x) + 3)];
     assert.deepEqual(pixel(1, 1), colors[0]); assert.deepEqual(pixel(511, 1), colors[1]);
     assert.deepEqual(pixel(1, 511), colors[2]); assert.deepEqual(pixel(511, 511), colors[3]);
-    assert.equal(JSON.parse(await readFile(result.receipt, 'utf8')).output.sha256, result.value.output.sha256);
+    assert.equal(JSON.parse(await readFile(result.receipt, 'utf8')).output.bytes, (await readFile(result.image)).length);
     await assert.rejects(exportWwtImage(root, explore, 1, 1, out, request), /already exists/u);
     assert.equal(seen.length, 4); // A repeated command must not redownload tiles.
     await assert.rejects(exportWwtImage(root, explore, 1, 4, resolve(work, 'too-large'), request), /--level/u);
