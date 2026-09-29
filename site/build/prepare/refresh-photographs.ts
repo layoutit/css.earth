@@ -43,7 +43,7 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   const staged = (await readdir(stage, { recursive: true, withFileTypes: true }))
     .filter(entry => entry.isFile()).map(entry => resolve(entry.parentPath, entry.name).slice(stage.length + 1)).filter(filename => filename !== 'assets.json');
   for (const filename of staged) {
-    if (!manifest.assets.some(asset => asset.location === 'public' && asset.filename === filename))
+    if (!manifest.assets.some(asset => asset.filename === filename))
       throw new Error(`${id}: refresh cannot introduce ${filename}, which src/objects/${id}/inventory.json does not publish.`);
     const bytes = await readFile(resolve(stage, filename));
     replacements.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
