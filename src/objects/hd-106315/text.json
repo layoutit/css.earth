@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-106315",
+  "card": {
+    "text": "HD 106315 b crosses HD 106315 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201731276",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract",
+        "label": "Barros et al. (2017), Astronomy & Astrophysics 608 A25",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARROS_ET_AL__2017): st_teff 6327, st_rad 1.296, st_mass 1.091"
+      },
+      {
+        "catalogueId": "wikipedia-hd-106315",
+        "url": "https://en.wikipedia.org/wiki/HD_106315",
+        "label": "Wikipedia, \"HD 106315\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370776951",
+        "quote": "HD 106315, or K2-109, is a single star with a pair of close-orbiting exoplanets, located in the constellation of Virgo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Barros et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201731276",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract",
+        "label": "Barros et al. (2017), Astronomy & Astrophysics 608 A25",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARROS_ET_AL__2017): st_teff 6327, st_rad 1.296, st_mass 1.091"
+      },
+      {
+        "catalogueId": "wikipedia-hd-106315",
+        "url": "https://en.wikipedia.org/wiki/HD_106315",
+        "label": "Wikipedia, \"HD 106315\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370776951",
+        "quote": "Based on parallax measurements, this system lies at a distance of 356 light years from the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

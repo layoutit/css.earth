@@ -1,0 +1,30 @@
+{
+ "id": "wasp-140",
+ "classification": "star",
+ "order": 4788,
+ "physical": {
+  "name": "WASP-140",
+  "horizonsCode": null,
+  "meanRadiusKm": 605259,
+  "gravitationalParameterKm3PerS2": 119441196037.74544,
+  "parent": null,
+  "effectiveTemperatureK": 5300
+ },
+ "physicalNotes": "Radius 0.87 +/- 0.04 solar radii from Hellier et al. 2017, the stellar radius of WASP-140 b's parameter set from Hellier et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract): 605,259 km at 695,700 km per solar radius. Mass 0.9 +/- 0.04 solar masses from Hellier et al. 2017, the stellar mass of WASP-140 b's parameter set from Hellier et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract); GM is that mass times the JPL solar GM. Temperature 5300 +/- 100 K from Alexoudi 2022, the stellar temperature of the default parameter set of WASP-140 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 60.38553599886904,
+  "declinationDegrees": -20.45099622986344,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 116.77881191324317,
+  "properMotionRaMasPerYear": -18.548005017768066,
+  "properMotionDecMasPerYear": 20.321651585131868,
+  "radialVelocityKmPerS": 1.9719152,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5094154336332482304 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wasp-140/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 8.5632 +/- 0.0189 mas (same row, RUWE 1.19): 116.78 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -18.548, 20.322 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 1.97 +/- 0.39 km/s"
+  }
+ }
+}

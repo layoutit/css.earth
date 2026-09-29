@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2081",
+  "card": {
+    "text": "TOI-2081 b crosses TOI-2081 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243731",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+        "label": "Esparza-Borges et al. (2022), Astronomy & Astrophysics 666 A10",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESPARZA_BORGES_ET_AL_2022): st_teff 3800, st_rad 0.534, st_mass 0.54"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Esparza-Borges et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243731",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+        "label": "Esparza-Borges et al. (2022), Astronomy & Astrophysics 666 A10",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESPARZA_BORGES_ET_AL_2022): st_teff 3800, st_rad 0.534, st_mass 0.54"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

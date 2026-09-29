@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-4311",
+  "card": {
+    "text": "TOI-4311 c crosses TOI-4311 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag952",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+        "label": "Eschen et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag952",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESCHEN_ET_AL_2026): st_teff 5063, st_rad 0.8441, st_mass 0.816"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Eschen et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag952",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract",
+        "label": "Eschen et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag952",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ESCHEN_ET_AL_2026): st_teff 5063, st_rad 0.8441, st_mass 0.816"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

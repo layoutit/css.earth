@@ -1,0 +1,24 @@
+{
+  "host": "toi-2094",
+  "planets": [
+    {
+      "id": "toi-2094b",
+      "name": "TOI-2094 b",
+      "description": "Transiting planet of TOI-2094 with a 18.8-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag367J/abstract",
+        "credit": "Jiang et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "JIANG_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-2094 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2094. Its orbit and size follow Jiang et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JIANG_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 18.793193, pl_radj 0.16950694, pl_bmassj 0.0134"
+      },
+      "order": 4243
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-222",
+  "card": {
+    "text": "K2-222 b crosses K2-222 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac3141",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract",
+        "label": "Nava et al. (2022), The Astronomical Journal 163 41",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NAVA_ET_AL_2022): st_teff 5942, st_rad 1.072, st_mass 0.94"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Nava et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac3141",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract",
+        "label": "Nava et al. (2022), The Astronomical Journal 163 41",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NAVA_ET_AL_2022): st_teff 5942, st_rad 1.072, st_mass 0.94"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

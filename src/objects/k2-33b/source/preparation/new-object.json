@@ -1,0 +1,31 @@
+{
+  "host": "k2-33",
+  "planets": [
+    {
+      "id": "k2-33b",
+      "name": "K2-33 b",
+      "description": "Transiting planet of K2-33 with a 5.42-day year, found in 2016.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract",
+        "credit": "Mann et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MANN_ET_AL__2016"
+      },
+      "text": {
+        "card": "K2-33 b was found in 2016 by K2 as it crossed its star.",
+        "introduction": "It is the only planet known around K2-33. Its orbit and size follow Mann et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2016): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 5.424865, pl_radj 0.44963868, pl_bmassj 3.7",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/K2-33",
+          "title": "K2-33",
+          "revision": "1366881676",
+          "card": "It is known to host one planet, a super-Neptune, named K2-33b.",
+          "introduction": "It is also notable for its young age."
+        }
+      },
+      "order": 3509
+    }
+  ]
+}

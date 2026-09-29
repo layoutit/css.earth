@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-5605",
+  "angularDiameterMas": 0.07,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 512,066 km at 95.36 pc = 0.07 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 95.36028075614185,
+  "distanceSource": "Gaia DR3 parallax 10.4865 +/- 0.0145 mas (same row, RUWE 1.17): 95.36 pc, no zero-point correction",
+  "radiusKm": 512065.8,
+  "radiusSource": "Radius 0.736044 solar radii from Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-5605 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract): 512,066 km at 695,700 km per solar radius. Mass 0.743 (0.703 to 0.783) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 4583.79 K from Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-5605 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4583.79,
+  "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-5605 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract)",
+  "surfaceGravityLogg": 4.58,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5605.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.575, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

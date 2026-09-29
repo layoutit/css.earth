@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1093-mnras-stae2323",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sozzetti et al. (2024): K2-370 b: a strongly irradiated sub-Neptune transiting a very active solar-type star",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stae2323"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024MNRAS.535..531S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sozzetti et al. (2024), Monthly Notices of the Royal Astronomical Society 535 531-550",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 535 531-550",
+  "creators": [
+    "A Sozzetti",
+    "M Damasso",
+    "J Fernández Fernández",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

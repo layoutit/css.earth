@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-367",
+  "card": {
+    "text": "GJ 367 b crosses GJ 367 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2606-18355",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract",
+        "label": "Lee et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LEE_ET_AL_2026): st_teff 3535, st_rad 0.457, st_mass 0.451"
+      },
+      {
+        "catalogueId": "wikipedia-gliese-367",
+        "url": "https://en.wikipedia.org/wiki/Gliese_367",
+        "label": "Wikipedia, \"Gliese 367\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1359962868",
+        "quote": "Gliese 367 is a red dwarf star in the constellation of Vela."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lee et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2606-18355",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract",
+        "label": "Lee et al. (2026)",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LEE_ET_AL_2026): st_teff 3535, st_rad 0.457, st_mass 0.451"
+      },
+      {
+        "catalogueId": "wikipedia-gliese-367",
+        "url": "https://en.wikipedia.org/wiki/Gliese_367",
+        "label": "Wikipedia, \"Gliese 367\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1359962868",
+        "quote": "It is relatively nearby, with a distance of 30.7 light-years from Earth as measured from its parallax."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

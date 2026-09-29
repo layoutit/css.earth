@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ross-176b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ross 176 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11735.7
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ross-176b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ross 176 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 9591322.6,
+      "description": "Ross 176 b was found in 2025 by TESS as it crossed its star.",
+      "systemName": "Ross 176 system",
+      "order": 3855,
+      "context": {
+        "order": 3855
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        567589221634039740,
+        -790152181791183100,
+        1054643054812346900
+      ],
+      "presentationToReference": [
+        0.4037680179678971,
+        -0.8081416196364354,
+        -0.4288105762194713,
+        -0.5447626132531117,
+        -0.5889412222898579,
+        0.5969773294601469,
+        0.7349864508056706,
+        0.00744038299600005,
+        0.6780409706153133
+      ],
+      "orbitUpReference": [
+        0.8081416196364354,
+        0.5889412222898579,
+        -0.00744038299600005
+      ],
+      "metersPerUnit": 37857.096774193546,
+      "bodyRadiusM": 11735700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

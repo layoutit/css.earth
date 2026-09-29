@@ -1,0 +1,28 @@
+{
+ "id": "wasp-104b",
+ "classification": "exoplanet",
+ "order": 4768,
+ "physical": {
+  "name": "WASP-104 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 81286.4,
+  "gravitationalParameterKm3PerS2": 161145268.58,
+  "parent": "wasp-104"
+ },
+ "physicalNotes": "Radius 1.137 Jupiter radii from Smith et al. 2014 (2014A&A...570A..64S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract): 81,286.4 km at 71,492 km per Jupiter radius. GM from the mass 1.272 Jupiter masses (Smith et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014A&A...570A..64S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.75540563,
+  "semiMajorAxisStellarRadii": 6.52,
+  "inclinationDegrees": 83.63,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57934.570228,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Chen et al. 2021 (2021MNRAS.500.5420C), via the NASA Exoplanet Archive ps table (pl_refname CHEN_ET_AL_2021): P 1.75540563 d",
+   "shape": "Smith et al. 2014 (2014A&A...570A..64S), via the NASA Exoplanet Archive ps table (pl_refname SMITH_ET_AL__2014): a/R* 6.52; Smith et al. 2014 (2014A&A...570A..64S), via the NASA Exoplanet Archive ps table (pl_refname SMITH_ET_AL__2014): inclination 83.63 degrees",
+   "eccentricity": "Smith et al. 2014 (2014A&A...570A..64S), via the NASA Exoplanet Archive ps table (pl_refname SMITH_ET_AL__2014): e 0",
+   "phase": "Chen et al. 2021 (2021MNRAS.500.5420C), via the NASA Exoplanet Archive ps table (pl_refname CHEN_ET_AL_2021): transit mid-time 2457935.070228 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

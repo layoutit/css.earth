@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5489",
+  "card": {
+    "text": "2 planets cross TOI-5489 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae246f",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G/abstract",
+        "label": "Barrientos et al. (2026), The Astronomical Journal 171 99",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GOMEZ_BARRIENTOS_ET_AL_2026): st_teff 3547, st_rad 0.42, st_mass 0.41"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Gomez Barrientos et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae246f",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G/abstract",
+        "label": "Barrientos et al. (2026), The Astronomical Journal 171 99",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GOMEZ_BARRIENTOS_ET_AL_2026): st_teff 3547, st_rad 0.42, st_mass 0.41"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

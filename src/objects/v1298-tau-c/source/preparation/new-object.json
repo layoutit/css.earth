@@ -1,0 +1,24 @@
+{
+  "host": "v1298-tau",
+  "planets": [
+    {
+      "id": "v1298-tau-c",
+      "name": "V1298 Tau c",
+      "description": "Transiting planet of V1298 Tau with a 8.25-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+        "credit": "Livingston et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LIVINGSTON_ET_AL_2026"
+      },
+      "text": {
+        "card": "V1298 Tau c was found in 2019 by K2 as it crossed its star.",
+        "introduction": "It is one of 4 planets known around V1298 Tau. Its orbit and size follow Livingston et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LIVINGSTON_ET_AL_2026): disc_year 2019, disc_facility K2, sy_pnum 4; pl_orbper 8.249164, pl_radj 0.45320802, pl_bmassj 0.01478785"
+      },
+      "order": 4763
+    }
+  ]
+}

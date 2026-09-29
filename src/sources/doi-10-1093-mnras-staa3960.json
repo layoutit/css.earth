@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-staa3960",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Addison et al. (2021): TOI-257b (HD 19916b): a warm sub-saturn orbiting an evolved F-type star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2001.07345"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staa3960"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021MNRAS.502.3704A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staa3960",
+      "label": "Monthly Notices of the Royal Astronomical Society 502 3704-3722"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Addison et al. (2021), Monthly Notices of the Royal Astronomical Society 502 3704-3722",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 502 3704-3722",
+  "creators": [
+    "Brett C Addison",
+    "Duncan J Wright",
+    "Belinda A Nicholson",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

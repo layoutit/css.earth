@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "lp-791-18",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "LP 791-18",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 126617.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lp-791-18-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "LP 791-18",
+      "classification": "star",
+      "color": "#ffb66b",
+      "distanceAu": 5497099.2,
+      "description": "3 planets cross LP 791-18 as seen from Earth: b, c, d.",
+      "systemName": "LP 791-18 system",
+      "order": 3825,
+      "context": {
+        "order": 3822
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -764391810167188400,
+        194986403907897630,
+        -232275968510719200
+      ],
+      "presentationToReference": [
+        -0.929517188468041,
+        0.2736863732490094,
+        0.24717112582231832,
+        0.23710773916092429,
+        -0.06981035367854162,
+        0.968971844043609,
+        -0.28244949348947945,
+        -0.9592821710096987,
+        0.000003233522987928842
+      ],
+      "orbitUpReference": [
+        -0.2736863732490094,
+        0.06981035367854162,
+        0.9592821710096987
+      ],
+      "metersPerUnit": 408443.22580645164,
+      "bodyRadiusM": 126617400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

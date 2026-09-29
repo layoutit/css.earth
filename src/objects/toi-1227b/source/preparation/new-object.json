@@ -1,0 +1,31 @@
+{
+  "host": "toi-1227",
+  "planets": [
+    {
+      "id": "toi-1227b",
+      "name": "TOI-1227 b",
+      "description": "Transiting planet of TOI-1227 with a 27.4-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..156M/abstract",
+        "credit": "Mann et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MANN_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-1227 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1227. Its orbit and size follow Mann et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 27.36137783684, pl_radj 0.854, pl_bmassj 0.209",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-1227_b",
+          "title": "TOI-1227 b",
+          "revision": "1374087051",
+          "card": "TOI-1227 b is one of the youngest transiting exoplanets discovered, alongside K2-33b and HIP 67522 b.",
+          "introduction": "The exoplanet TOI-1227 b is 5–12 million years old and currently 9.6 R🜨 large."
+        }
+      },
+      "order": 3958
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "hip-65-a",
+  "name": "HIP 65 A",
+  "system": "HIP 65 system",
+  "description": "Star of 4,590 K, 61.8 parsecs away, with 1 transiting planet.",
+  "target": "HIP 65 A",
+  "gaia": "4923860051276772608",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract",
+    "credit": "Nielsen et al. 2020"
+  },
+  "radius": {
+    "value": 0.7242,
+    "source": "Nielsen et al. 2020, the stellar radius of the default parameter set of HIP 65 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract",
+    "uncertainty": 0.0081
+  },
+  "mass": {
+    "value": 0.781,
+    "source": "Nielsen et al. 2020, the stellar mass of the default parameter set of HIP 65 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract",
+    "uncertainty": 0.027
+  },
+  "temperature": {
+    "value": 4590,
+    "source": "Nielsen et al. 2020, the stellar temperature of the default parameter set of HIP 65 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract",
+    "uncertainty": 49
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HIP 65 A b crosses HIP 65 A as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Nielsen et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname NIELSEN_ET_AL__2020): st_teff 4590, st_rad 0.7242, st_mass 0.781"
+  },
+  "notes": [],
+  "order": 3045
+}

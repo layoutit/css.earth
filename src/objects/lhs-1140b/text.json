@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lhs-1140b",
+  "card": {
+    "text": "LHS 1140 b was found in 2017 by MEarth Project as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad1691",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract",
+        "label": "Cadieux et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL__2024): disc_year 2017, disc_facility MEarth Project, sy_pnum 2; pl_orbper 24.7369148, pl_radj 0.15434053, pl_bmassj 0.01761957"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-1140-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_1140_b",
+        "label": "Wikipedia, \"LHS 1140 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375876234",
+        "quote": "LHS 1140 b is an exoplanet orbiting within the conservative habitable zone of the red dwarf star LHS 1140."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around LHS 1140. Its orbit and size follow Cadieux et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad1691",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract",
+        "label": "Cadieux et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL__2024): disc_year 2017, disc_facility MEarth Project, sy_pnum 2; pl_orbper 24.7369148, pl_radj 0.15434053, pl_bmassj 0.01761957"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-1140-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_1140_b",
+        "label": "Wikipedia, \"LHS 1140 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375876234",
+        "quote": "Discovered in 2017 by the MEarth Project, LHS 1140 b is about 5.6 times the mass of Earth and about 70% larger in radius, putting it within the super-Earth category of planets."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "toi-2295",
+  "name": "TOI-2295",
+  "system": "TOI-2295 system",
+  "description": "Star of 5,730 K, 126 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2295",
+  "gaia": "2144184945615891712",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+    "credit": "Heidari et al. 2025"
+  },
+  "radius": {
+    "value": 1.459,
+    "source": "Heidari et al. 2025, the stellar radius of the default parameter set of TOI-2295 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+    "uncertainty": 0.056
+  },
+  "mass": {
+    "value": 1.168,
+    "source": "Heidari et al. 2025, the stellar mass of the default parameter set of TOI-2295 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+    "uncertainty": 0.07
+  },
+  "temperature": {
+    "value": 5730,
+    "source": "Heidari et al. 2025, the stellar temperature of the default parameter set of TOI-2295 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract",
+    "uncertainty": 140
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2295 b crosses TOI-2295 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Heidari et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HEIDARI_ET_AL_2025): st_teff 5730, st_rad 1.459, st_mass 1.168"
+  },
+  "notes": [
+    "TOI-2295 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 4282
+}

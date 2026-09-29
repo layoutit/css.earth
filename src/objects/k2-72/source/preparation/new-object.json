@@ -1,0 +1,46 @@
+{
+  "id": "k2-72",
+  "name": "K2-72",
+  "system": "K2-72 system",
+  "description": "Star of 3,360 K, 66.4 parsecs away, with 4 transiting planets.",
+  "target": "K2-72",
+  "gaia": "2615653023342995584",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+    "credit": "Dressing et al. 2017"
+  },
+  "radius": {
+    "value": 0.330989,
+    "source": "Dressing et al. 2017, the stellar radius of the default parameter set of K2-72 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+    "uncertainty": 0.030366
+  },
+  "mass": {
+    "value": 0.271365,
+    "source": "Dressing et al. 2017, the stellar mass of the default parameter set of K2-72 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+    "uncertainty": 0.079196
+  },
+  "temperature": {
+    "value": 3360.47,
+    "source": "Dressing et al. 2017, the stellar temperature of the default parameter set of K2-72 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+    "uncertainty": 87.24
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "4 planets cross K2-72 as seen from Earth: b, c, d, e.",
+    "introduction": "Its radius and temperature follow Dressing et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DRESSING_ET_AL__2017): st_teff 3360.47, st_rad 0.330989, st_mass 0.271365",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/K2-72",
+      "title": "K2-72",
+      "revision": "1374441778",
+      "card": "K2-72 is a cool red dwarf star of spectral class M2V located about 217 light-years away from the Earth in the constellation of Aquarius.",
+      "introduction": "It is known to host four planets, all similar in size to Earth, with one of them residing within the habitable zone."
+    }
+  },
+  "notes": [],
+  "order": 3606
+}

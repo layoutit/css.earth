@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "xo-2-n",
+  "card": {
+    "text": "XO-2 N b crosses XO-2 N as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348042",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract",
+        "label": "Ruggieri et al. (2024), Astronomy & Astrophysics 684 A116",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RUGGIERI_ET_AL_2024): st_teff 5290, st_rad 0.998, st_mass 0.96"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Ruggieri et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348042",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract",
+        "label": "Ruggieri et al. (2024), Astronomy & Astrophysics 684 A116",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname RUGGIERI_ET_AL_2024): st_teff 5290, st_rad 0.998, st_mass 0.96"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

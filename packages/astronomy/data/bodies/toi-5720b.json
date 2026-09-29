@@ -1,0 +1,28 @@
+{
+ "id": "toi-5720b",
+ "classification": "exoplanet",
+ "order": 4564,
+ "physical": {
+  "name": "TOI-5720 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 6952.1,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-5720"
+ },
+ "physicalNotes": "Radius 0.09724345 Jupiter radii from Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract): 6,952.1 km at 71,492 km per Jupiter radius. No mass is measured: Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract) gives only an upper limit of 0.01352931 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.4344555,
+  "semiMajorAxisStellarRadii": 10.97,
+  "inclinationDegrees": 89.3,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60076.402501,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2024): P 1.4344555 d",
+   "shape": "Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2024): a/R* 10.97; Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2024): inclination 89.3 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Barkaoui et al. 2024 (2024A&A...687A.264B), via the NASA Exoplanet Archive ps table (pl_refname BARKAOUI_ET_AL_2024): transit mid-time 2460076.902501 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

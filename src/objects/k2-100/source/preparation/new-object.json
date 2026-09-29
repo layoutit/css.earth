@@ -1,0 +1,39 @@
+{
+  "id": "k2-100",
+  "name": "K2-100",
+  "system": "K2-100 system",
+  "description": "Star of 5,945 K, 189 parsecs away, with 1 transiting planet.",
+  "target": "K2-100",
+  "gaia": "664337230586013312",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract",
+    "credit": "Barragán et al. 2019"
+  },
+  "radius": {
+    "value": 1.24,
+    "source": "Barragán et al. 2019, the stellar radius of the default parameter set of K2-100 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract",
+    "uncertainty": 0.05
+  },
+  "mass": {
+    "value": 1.15,
+    "source": "Barragán et al. 2019, the stellar mass of the default parameter set of K2-100 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract",
+    "uncertainty": 0.05
+  },
+  "temperature": {
+    "value": 5945,
+    "source": "Barragán et al. 2019, the stellar temperature of the default parameter set of K2-100 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract",
+    "uncertainty": 110
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-100 b crosses K2-100 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Barragán et al. 2019.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BARRAG_AACUTE_N_ET_AL__2019): st_teff 5945, st_rad 1.24, st_mass 1.15"
+  },
+  "notes": [],
+  "order": 3270
+}

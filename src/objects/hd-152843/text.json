@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-152843",
+  "card": {
+    "text": "2 planets cross HD 152843 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae1821",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract",
+        "label": "Nicholson et al. (2024), Monthly Notices of the Royal Astronomical Society 532 4632-4644",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NICHOLSON_ET_AL__2024): st_teff 6310, st_rad 1.43, st_mass 1.15"
+      },
+      {
+        "catalogueId": "wikipedia-hd-152843",
+        "url": "https://en.wikipedia.org/wiki/HD_152843",
+        "label": "Wikipedia, \"HD 152843\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1324300069",
+        "quote": "HD 152843 is a single star with a pair of close-orbiting exoplanets, located in the northern constellation of Hercules."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Nicholson et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae1821",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.532.4632N/abstract",
+        "label": "Nicholson et al. (2024), Monthly Notices of the Royal Astronomical Society 532 4632-4644",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NICHOLSON_ET_AL__2024): st_teff 6310, st_rad 1.43, st_mass 1.15"
+      },
+      {
+        "catalogueId": "wikipedia-hd-152843",
+        "url": "https://en.wikipedia.org/wiki/HD_152843",
+        "label": "Wikipedia, \"HD 152843\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1324300069",
+        "quote": "It is positioned at a distance of 356 light years from the Sun based on parallax measurements, and at that range is too faint to be viewed with the naked eye, having an apparent visual magnitude of 8.85."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

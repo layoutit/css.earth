@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/xo-2-n-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "xo-2-n-b-orbits",
+      "title": "XO-2 N b: orbits around XO-2 N",
+      "output": "xo-2-n-b-system-orbits.svg",
+      "system": "xo-2-n",
+      "highlight": "xo-2-n-b",
+      "description": "The orbits of XO-2 N's planets in this map from above, to scale, with XO-2 N b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): P 2.615859462 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "xo-2-n-b-transit",
+      "title": "XO-2 N b: its transit",
+      "description": "XO-2 N b crossing its star, as TESS recorded it: 3 sectors (20, 47, 60) of the SPOC pipeline's 2-minute light curves of TIC 356473034, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "output": "xo-2-n-b-transit.svg",
+      "metadata": {
+        "tic": "TIC 356473034",
+        "sectors": [
+          20,
+          47,
+          60
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "xo-2-n-b",
+      "sources": [
+        "photometry/tess/tess2019357164649-s0020-0000000356473034-0165-s_lc.fits",
+        "photometry/tess/tess2021364111932-s0047-0000000356473034-0218-s_lc.fits",
+        "photometry/tess/tess2022357055054-s0060-0000000356473034-0249-s_lc.fits"
+      ],
+      "durationHours": 2.6839,
+      "binMinutes": 11,
+      "notes": [
+        "TESS 2-min SPOC · sectors 20, 47, 60",
+        "Folded on the app's orbit; 11-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "k2-55",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 497,426 km at 158.74 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 158.73686249105958,
+  "distanceSource": "Gaia DR3 parallax 6.2997 +/- 0.0150 mas (same row, RUWE 1.02): 158.74 pc, no zero-point correction",
+  "radiusKm": 497425.5,
+  "radiusSource": "Radius 0.715 +/- 0.043 solar radii from Howard et al. 2025, the stellar radius of the default parameter set of K2-55 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract): 497,426 km at 695,700 km per solar radius. Mass 0.688 +/- 0.069 solar masses from Howard et al. 2025, the stellar mass of the default parameter set of K2-55 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract); GM is that mass times the JPL solar GM. Temperature 4300 +/- 107 K from Howard et al. 2025, the stellar temperature of the default parameter set of K2-55 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4300,
+  "effectiveTemperatureSource": "Howard et al. 2025, the stellar temperature of the default parameter set of K2-55 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
+  "surfaceGravityLogg": 4.57,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-55.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.567, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

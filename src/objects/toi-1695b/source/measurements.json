@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1695b",
+  "radiusKm": 12118.4,
+  "radiusSource": "Radius 0.16950694 Jupiter radii from Cherubim et al. 2023 (2023AJ....165..167C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract): 12,118.4 km at 71,492 km per Jupiter radius. GM from the mass 0.0200108 Jupiter masses (Cherubim et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....165..167C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.13429456192,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.13429456192 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1695 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.0200108 Jupiter masses: Cherubim et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....165..167C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C/abstract)."
+}

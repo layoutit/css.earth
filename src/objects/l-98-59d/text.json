@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "l-98-59d",
+  "card": {
+    "text": "L 98-59 d was found in 2019 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adef59",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+        "label": "Cadieux et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL_2025): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 7.4507313, pl_radj 0.14515147, pl_bmassj 0.00516002"
+      },
+      {
+        "catalogueId": "wikipedia-l-98-59-d",
+        "url": "https://en.wikipedia.org/wiki/L_98-59_d",
+        "label": "Wikipedia, \"L 98-59 d\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1376689854",
+        "quote": "L 98-59 d is an exoplanet orbiting the star L 98-59 34.6 light years from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 5 planets known around L 98-59. Its orbit and size follow Cadieux et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adef59",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+        "label": "Cadieux et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL_2025): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 7.4507313, pl_radj 0.14515147, pl_bmassj 0.00516002"
+      },
+      {
+        "catalogueId": "wikipedia-l-98-59-d",
+        "url": "https://en.wikipedia.org/wiki/L_98-59_d",
+        "label": "Wikipedia, \"L 98-59 d\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1376689854",
+        "quote": "L 98-59 d is the third, potentially fourth, planet in its system."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

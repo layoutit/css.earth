@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kepler-411c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.3944152 Jupiter radii from Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.08306327 Jupiter masses: Sun et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...624A..15S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 7.83443074 d; Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive ps table (pl_refname SUN_ET_AL__2019): a/R* derived from its semi-major axis 0.0739 au and stellar radius 0.82 solar radii; Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive ps table (pl_refname SUN_ET_AL__2019): inclination 88.61 degrees; Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive ps table (pl_refname SUN_ET_AL__2019): e 0.108; Sun et al. 2019 (2019A&A...624A..15S), via the NASA Exoplanet Archive ps table (pl_refname SUN_ET_AL__2019): omega 103 degrees; Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): transit mid-time 2454960.387693 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2016ApJS..225....9H/abstract"
+      ]
+    }
+  ]
+}

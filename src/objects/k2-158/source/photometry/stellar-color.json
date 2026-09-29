@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "k2-158",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5503,
+      "lowerKelvin": 5452,
+      "upperKelvin": 5554,
+      "citation": "Livingston et al. 2018, the stellar temperature of the default parameter set of K2-158 c in the NASA Exoplanet Archive: 5503 +/- 51 K, https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

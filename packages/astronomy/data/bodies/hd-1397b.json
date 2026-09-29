@@ -1,0 +1,31 @@
+{
+ "id": "hd-1397b",
+ "classification": "exoplanet",
+ "order": 3163,
+ "physical": {
+  "name": "HD 1397 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 73350.8,
+  "gravitationalParameterKm3PerS2": 52574910.74,
+  "parent": "hd-1397"
+ },
+ "physicalNotes": "Radius 1.026 Jupiter radii from Nielsen et al. 2019 (2019A&A...623A.100N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract): 73,350.8 km at 71,492 km per Jupiter radius. GM from the mass 0.415 Jupiter masses (Nielsen et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...623A.100N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 11.5366,
+  "semiMajorAxisStellarRadii": 10.1,
+  "inclinationDegrees": 88.99,
+  "eccentricity": 0.251,
+  "argumentOfPeriapsisDegrees": 2.1000000000000227,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58331.5817,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Brahm et al. 2019 (2019AJ....158...45B), via the NASA Exoplanet Archive ps table (pl_refname BRAHM_ET_AL__2019): P 11.5366 d",
+   "shape": "Nielsen et al. 2019 (2019A&A...623A.100N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2019): a/R* 10.1; Nielsen et al. 2019 (2019A&A...623A.100N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2019): inclination 88.99 degrees",
+   "eccentricity": "Nielsen et al. 2019 (2019A&A...623A.100N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2019): e 0.251",
+   "argumentOfPeriapsis": "Nielsen et al. 2019 (2019A&A...623A.100N), via the NASA Exoplanet Archive ps table (pl_refname NIELSEN_ET_AL__2019): omega 2.1 degrees",
+   "phase": "Brahm et al. 2019 (2019AJ....158...45B), via the NASA Exoplanet Archive ps table (pl_refname BRAHM_ET_AL__2019): transit mid-time 2458332.0817 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 102 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

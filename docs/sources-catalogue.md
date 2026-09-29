@@ -26,8 +26,10 @@ and ESA's own images are share-alike. Each render-library entry carries its own
 file elsewhere carries the share-alike terms with it.
 
 `site/prepared-sources.json` and `site/prepared-facilities.json` are generated
-from these records and the existing product lineage. They are ignored build
-outputs; do not edit or commit them.
+from these records and the existing product lineage, with
+`site/prepared-source-credits.json`, the short provider list each page's
+"Sources" link shows. The pages read only that list: the whole catalogue is
+tens of megabytes. They are ignored build outputs; do not edit or commit them.
 The [provenance contract](provenance/CONTRACT.md) governs citations, retained data,
 evidence and plain language. Keep scientific tables in their existing records.
 

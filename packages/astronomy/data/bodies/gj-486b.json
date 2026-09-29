@@ -1,0 +1,31 @@
+{
+ "id": "gj-486b",
+ "classification": "exoplanet",
+ "order": 3100,
+ "physical": {
+  "name": "GJ 486 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 8221.4,
+  "gravitationalParameterKm3PerS2": 1104122.53,
+  "parent": "gj-486"
+ },
+ "physicalNotes": "Radius 0.11499708 Jupiter radii from Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract): 8,221.4 km at 71,492 km per Jupiter radius. GM from the mass 0.00871539 Jupiter masses (Weiner Mansfield et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJ...975L..22W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.46712127,
+  "semiMajorAxisStellarRadii": 11.38,
+  "inclinationDegrees": 89.39,
+  "eccentricity": 0.00086,
+  "argumentOfPeriapsisDegrees": 14,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59938.571602,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive ps table (pl_refname WEINER_MANSFIELD_ET_AL__2024): P 1.46712127 d",
+   "shape": "Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive ps table (pl_refname WEINER_MANSFIELD_ET_AL__2024): a/R* 11.38; Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive ps table (pl_refname WEINER_MANSFIELD_ET_AL__2024): inclination 89.39 degrees",
+   "eccentricity": "Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive ps table (pl_refname WEINER_MANSFIELD_ET_AL__2024): e 0.00086",
+   "argumentOfPeriapsis": "Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive ps table (pl_refname WEINER_MANSFIELD_ET_AL__2024): omega 14 degrees",
+   "phase": "Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive ps table (pl_refname WEINER_MANSFIELD_ET_AL__2024): transit mid-time 2459939.071602 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

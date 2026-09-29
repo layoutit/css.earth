@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stad543",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mistry et al. (2023): VaTEST I: validation of sub-Saturn exoplanet TOI-181b in narrow orbit from its host star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2211.07957"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stad543"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.521.1066M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stad543",
+      "label": "Monthly Notices of the Royal Astronomical Society 521 1066-1078"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mistry et al. (2023), Monthly Notices of the Royal Astronomical Society 521 1066-1078",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 521 1066-1078",
+  "creators": [
+    "Priyashkumar Mistry",
+    "Kamlesh Pathak",
+    "Georgios Lekkas",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

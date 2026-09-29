@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-33b",
+  "card": {
+    "text": "WASP-33 b was found in 2010 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHAKRABARTY__AMP__SENGUPTA_2019): disc_year 2010, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.21987089, pl_radj 1.593, pl_bmassj 2.093"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-33b",
+        "url": "https://en.wikipedia.org/wiki/WASP-33b",
+        "label": "Wikipedia, \"WASP-33b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374243508",
+        "quote": "WASP-33b is an extrasolar planet orbiting the star HD 15082."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-33. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHAKRABARTY__AMP__SENGUPTA_2019): disc_year 2010, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.21987089, pl_radj 1.593, pl_bmassj 2.093"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-33b",
+        "url": "https://en.wikipedia.org/wiki/WASP-33b",
+        "label": "Wikipedia, \"WASP-33b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374243508",
+        "quote": "It was the first transiting planet discovered to orbit a Delta Scuti variable star."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The colour of a black body at the 3,398 K day side measured in eclipse."
+    }
+  }
+}

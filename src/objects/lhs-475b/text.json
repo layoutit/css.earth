@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lhs-475b",
+  "card": {
+    "text": "LHS 475 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-023-02064-z",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract",
+        "label": "Lustig-Yaeger et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUSTIG_YAEGER_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.02910765415, pl_radj 0.08841125, pl_bmassj 0.00296"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-475-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_475_b",
+        "label": "Wikipedia, \"LHS 475 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374383729",
+        "quote": "LHS 475 b is a terrestrial exoplanet orbiting the star LHS 475 which is about 40.7 light years away, in the constellation of Octans."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around LHS 475. Its orbit and size follow Lustig-Yaeger et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-023-02064-z",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract",
+        "label": "Lustig-Yaeger et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUSTIG_YAEGER_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.02910765415, pl_radj 0.08841125, pl_bmassj 0.00296"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-475-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_475_b",
+        "label": "Wikipedia, \"LHS 475 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374383729",
+        "quote": "It was the first extrasolar planet to be confirmed by the James Webb Space Telescope."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

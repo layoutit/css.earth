@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5734b",
+  "card": {
+    "text": "TOI-5734 b was found in 2026 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555931",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract",
+        "label": "Filomeno et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FILOMENO_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.1842161, pl_radj 0.18734977, pl_bmassj 0.0286318"
+      },
+      {
+        "catalogueId": "wikipedia-toi-5734-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-5734_b",
+        "label": "Wikipedia, \"TOI-5734 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1377202473",
+        "quote": "TOI-5734 b is a confirmed exoplanet orbiting the young orange dwarf star TOI-5734, a K3-K4 spectral class star, at a distance of approximately 106 light-years from the Sun."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-5734. Its orbit and size follow Filomeno et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555931",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract",
+        "label": "Filomeno et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname FILOMENO_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.1842161, pl_radj 0.18734977, pl_bmassj 0.0286318"
+      },
+      {
+        "catalogueId": "wikipedia-toi-5734-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-5734_b",
+        "label": "Wikipedia, \"TOI-5734 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1377202473",
+        "quote": "The discovery of the object was officially announced by an international team of astronomers led by Simone Filomeno in late February 2026."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

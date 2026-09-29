@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-52",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 549,603 km at 174.64 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 174.63678683207993,
+  "distanceSource": "Gaia DR3 parallax 5.7262 +/- 0.0134 mas (same row, RUWE 0.93): 174.64 pc, no zero-point correction",
+  "radiusKm": 549603,
+  "radiusSource": "Radius 0.79 +/- 0.02 solar radii from Hebrard et al. 2013, the stellar radius of the default parameter set of WASP-52 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract): 549,603 km at 695,700 km per solar radius. Mass 0.87 +/- 0.03 solar masses from Hebrard et al. 2013, the stellar mass of the default parameter set of WASP-52 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract); GM is that mass times the JPL solar GM. Temperature 5000 +/- 100 K from Hebrard et al. 2013, the stellar temperature of the default parameter set of WASP-52 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5000,
+  "effectiveTemperatureSource": "Hebrard et al. 2013, the stellar temperature of the default parameter set of WASP-52 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract)",
+  "surfaceGravityLogg": 4.58,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-52.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.582, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

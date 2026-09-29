@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac3141",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nava et al. (2022): K2-79b and K2-222b: Mass Measurements of Two Small Exoplanets with Periods beyond 10 days that Overlap with Periodic Magnetic Activity Signals",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2111.02608"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac3141"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....163...41N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac3141",
+      "label": "The Astronomical Journal 163 41"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Nava et al. (2022), The Astronomical Journal 163 41",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N"
+    }
+  ],
+  "publisher": "The Astronomical Journal 163 41",
+  "creators": [
+    "Chantanelle Nava",
+    "Mercedes López-Morales",
+    "Annelies Mortier",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

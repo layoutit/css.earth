@@ -1,0 +1,24 @@
+{
+  "host": "toi-3629",
+  "planets": [
+    {
+      "id": "toi-3629b",
+      "name": "TOI-3629 b",
+      "description": "Transiting planet of TOI-3629 with a 3.94-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract",
+        "credit": "Cañas et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CANAS_ET_AL_2022"
+      },
+      "text": {
+        "card": "TOI-3629 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-3629. Its orbit and size follow Cañas et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CANAS_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.9365578, pl_radj 0.74, pl_bmassj 0.26"
+      },
+      "order": 4363
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "gj-143c",
+  "radiusKm": 5689.3,
+  "radiusSource": "Radius 0.07957891 Jupiter radii from Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract): 5,689.3 km at 71,492 km per Jupiter radius. No mass is measured: Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract) gives only an upper limit of 0.01164144 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 7.78978861866,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.78978861866 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 21749 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.01164144 Jupiter masses: Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract)."
+}

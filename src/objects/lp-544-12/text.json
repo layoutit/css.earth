@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lp-544-12",
+  "card": {
+    "text": "LP 544-12 is a star of 2,832 K, bound to GJ 3473 1,346 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 3094290054327367168 and 3094290019967631360, sep_AU 1345.508514263707411, R_chance_align 4.104652514560136289e-06"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "LP 544-12 shares its motion through space with GJ 3473, 1,346 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 3094290054327367168 and 3094290019967631360, sep_AU 1345.508514263707411, R_chance_align 4.104652514560136289e-06"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

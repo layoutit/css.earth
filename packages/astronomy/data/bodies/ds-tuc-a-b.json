@@ -1,0 +1,28 @@
+{
+ "id": "ds-tuc-a-b",
+ "classification": "exoplanet",
+ "order": 3056,
+ "physical": {
+  "name": "DS Tuc A b",
+  "horizonsCode": null,
+  "meanRadiusKm": 36355.1,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "ds-tuc-a"
+ },
+ "physicalNotes": "Radius 0.50851994 Jupiter radii from Newton et al. 2019 (2019ApJ...880L..17N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract): 36,355.1 km at 71,492 km per Jupiter radius. No mass is measured: Benatti et al. 2019 (2019A&A...630A..81B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...630A..81B/abstract) gives only an upper limit of 1.3 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 8.13822304107,
+  "semiMajorAxisStellarRadii": 20.35,
+  "inclinationDegrees": 89.5,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60903.486925,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.13822304107 d",
+   "shape": "Newton et al. 2019 (2019ApJ...880L..17N), via the NASA Exoplanet Archive ps table (pl_refname NEWTON_ET_AL__2019): a/R* 20.35; Newton et al. 2019 (2019ApJ...880L..17N), via the NASA Exoplanet Archive ps table (pl_refname NEWTON_ET_AL__2019): inclination 89.5 degrees",
+   "eccentricity": "Newton et al. 2019 (2019ApJ...880L..17N), via the NASA Exoplanet Archive ps table (pl_refname NEWTON_ET_AL__2019): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460903.986925 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

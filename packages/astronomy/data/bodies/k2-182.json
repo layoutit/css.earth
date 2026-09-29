@@ -1,0 +1,30 @@
+{
+ "id": "k2-182",
+ "classification": "star",
+ "order": 3365,
+ "physical": {
+  "name": "K2-182",
+  "horizonsCode": null,
+  "meanRadiusKm": 548907.3,
+  "gravitationalParameterKm3PerS2": 109222338154.5161,
+  "parent": null,
+  "effectiveTemperatureK": 5128
+ },
+ "physicalNotes": "Radius 0.789 +/- 0.025 solar radii from Thygesen et al. 2023, the stellar radius of the default parameter set of K2-182 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract): 548,907 km at 695,700 km per solar radius. Mass 0.823 +/- 0.036 solar masses from Thygesen et al. 2023, the stellar mass of the default parameter set of K2-182 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract); GM is that mass times the JPL solar GM. Temperature 5128 +/- 79 K from Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-182 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 130.18003679221718,
+  "declinationDegrees": 10.98295117766228,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 154.53894756735744,
+  "properMotionRaMasPerYear": -65.13016264447343,
+  "properMotionDecMasPerYear": 1.5443933714256806,
+  "radialVelocityKmPerS": 22.550472,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 601480723509077632 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-182/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.4709 +/- 0.0286 mas (same row, RUWE 1.54): 154.54 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): -65.130, 1.544 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 22.55 +/- 0.33 km/s"
+  }
+ }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1117b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.21946688 Jupiter radii from Lockley et al. 2025 (2025MNRAS.541..919L), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02800253 Jupiter masses: Lockley et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025MNRAS.541..919L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Lockley et al. 2025 (2025MNRAS.541..919L), via the NASA Exoplanet Archive ps table (pl_refname LOCKLEY_ET_AL_2025): P 2.22816 d; Lockley et al. 2025 (2025MNRAS.541..919L), via the NASA Exoplanet Archive ps table (pl_refname LOCKLEY_ET_AL_2025): a/R* derived from its semi-major axis 0.033 au and stellar radius 1.05 solar radii; Lockley et al. 2025 (2025MNRAS.541..919L), via the NASA Exoplanet Archive ps table (pl_refname LOCKLEY_ET_AL_2025): inclination 88.2 degrees; Lockley et al. 2025 (2025MNRAS.541..919L), via the NASA Exoplanet Archive ps table (pl_refname LOCKLEY_ET_AL_2025): e 0; Lockley et al. 2025 (2025MNRAS.541..919L), via the NASA Exoplanet Archive ps table (pl_refname LOCKLEY_ET_AL_2025): transit mid-time 2459386.964 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 12 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract"
+      ]
+    }
+  ]
+}

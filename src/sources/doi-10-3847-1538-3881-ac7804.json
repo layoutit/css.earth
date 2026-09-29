@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac7804",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cañas et al. (2022): TOI-3714 b and TOI-3629 b: Two Gas Giants Transiting M Dwarfs Confirmed with the Habitable-zone Planet Finder and NEID",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2201.09963"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac7804"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....164...50C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac7804",
+      "label": "The Astronomical Journal 164 50"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cañas et al. (2022), The Astronomical Journal 164 50",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C"
+    }
+  ],
+  "publisher": "The Astronomical Journal 164 50",
+  "creators": [
+    "Caleb I. Cañas",
+    "Shubham Kanodia",
+    "Chad F. Bender",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

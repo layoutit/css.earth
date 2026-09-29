@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "xo-1",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "XO-1",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 612216
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/xo-1-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "XO-1",
+      "classification": "star",
+      "color": "#fff1eb",
+      "distanceAu": 33545150.5,
+      "description": "XO-1 b crosses XO-1 as seen from Earth, which is how it was found.",
+      "systemName": "XO-1 system",
+      "order": 4861,
+      "context": {
+        "order": 4858
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2175117123955465500,
+        -3852223110957638000,
+        2369052073033788400
+      ],
+      "presentationToReference": [
+        -0.4334386836272735,
+        -0.23211161740581746,
+        -0.8707784474828898,
+        -0.7676379795205232,
+        -0.4110803291311082,
+        0.4916755997597488,
+        0.4720835094907524,
+        -0.8815538327672992,
+        -4.237150114582096e-7
+      ],
+      "orbitUpReference": [
+        0.23211161740581746,
+        0.4110803291311082,
+        0.8815538327672992
+      ],
+      "metersPerUnit": 1974890.322580645,
+      "bodyRadiusM": 612216000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

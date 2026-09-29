@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-89345b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-89345b-orbits",
+      "title": "HD 89345 b: orbits around HD 89345",
+      "output": "hd-89345b-system-orbits.svg",
+      "system": "hd-89345",
+      "highlight": "hd-89345b",
+      "description": "The orbits of HD 89345's planets in this map from above, to scale, with HD 89345 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Bourrier et al. 2023 (2023A&A...669A..63B), via the NASA Exoplanet Archive ps table (pl_refname BOURRIER_ET_AL__2023): P 11.8144024 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-89345b-transit",
+      "title": "HD 89345 b: its transit",
+      "description": "HD 89345 b crossing its star, as TESS recorded it: 2 sectors (45, 46) of the SPOC pipeline's 2-minute light curves of TIC 350020859, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 23-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-89345b-transit.svg",
+      "metadata": {
+        "tic": "TIC 350020859",
+        "sectors": [
+          45,
+          46
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-89345b",
+      "sources": [
+        "photometry/tess/tess2021310001228-s0045-0000000350020859-0216-s_lc.fits",
+        "photometry/tess/tess2021336043614-s0046-0000000350020859-0217-s_lc.fits"
+      ],
+      "durationHours": 5.7336,
+      "binMinutes": 23,
+      "notes": [
+        "TESS 2-min SPOC · sectors 45, 46",
+        "Folded on the app's orbit; 23-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

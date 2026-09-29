@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-6038-a-b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.57186288 Jupiter radii from Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.24698862 Jupiter masses: Baliwal et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....169..147B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive ps table (pl_refname BALIWAL_ET_AL_2025): P 5.8267311 d; Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive ps table (pl_refname BALIWAL_ET_AL_2025): a/R* 9.04; Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive ps table (pl_refname BALIWAL_ET_AL_2025): inclination 88.96 degrees; No archive row states an eccentricity; the orbit is taken as circular; Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive ps table (pl_refname BALIWAL_ET_AL_2025): transit mid-time 2459883.058 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract"
+      ]
+    }
+  ]
+}

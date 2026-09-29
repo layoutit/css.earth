@@ -1,0 +1,40 @@
+{
+  "id": "tyc-4404-778-1",
+  "name": "TYC 4404-778-1",
+  "system": "TOI-1173 system",
+  "description": "Star bound to TOI-1173, 11,463 AU away.",
+  "gaia": "1686170870119133440",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.842,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 232965935 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.051
+  },
+  "mass": {
+    "value": 0.831,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 232965935 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.096
+  },
+  "temperature": {
+    "value": 5007,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 232965935 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 122.7
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TYC 4404-778-1 is a star of 5,007 K, bound to TOI-1173 11,463 AU away.",
+    "introduction": "TYC 4404-778-1 shares its motion through space with TOI-1173, 11,463 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 1686171213716517504 and 1686170870119133440, sep_AU 11463.250730593959815, R_chance_align 1.900738370422520539e-05"
+  },
+  "notes": [
+    "TYC 4404-778-1's orbit around TOI-1173 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 3937
+}

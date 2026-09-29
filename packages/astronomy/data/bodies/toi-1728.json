@@ -1,0 +1,30 @@
+{
+ "id": "toi-1728",
+ "classification": "star",
+ "order": 4108,
+ "physical": {
+  "name": "TOI-1728",
+  "horizonsCode": null,
+  "meanRadiusKm": 434325.5,
+  "gravitationalParameterKm3PerS2": 85732236267.09283,
+  "parent": null,
+  "effectiveTemperatureK": 3980
+ },
+ "physicalNotes": "Radius 0.6243 +/- 0.01 solar radii from Kanodia et al. 2020, the stellar radius of the default parameter set of TOI-1728 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract): 434,326 km at 695,700 km per solar radius. Mass 0.646 +/- 0.023 solar masses from Kanodia et al. 2020, the stellar mass of the default parameter set of TOI-1728 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract); GM is that mass times the JPL solar GM. Temperature 3980 +/- 31 K from Kanodia et al. 2020, the stellar temperature of the default parameter set of TOI-1728 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...899...29K/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 120.61171261988358,
+  "declinationDegrees": 64.79716057951354,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 60.923234766934016,
+  "properMotionRaMasPerYear": 103.98547386321036,
+  "properMotionDecMasPerYear": 52.99878299950776,
+  "radialVelocityKmPerS": -42.96552,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1094545653447816064 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1728/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 16.4141 +/- 0.0161 mas (same row, RUWE 1.10): 60.92 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 103.985, 52.999 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -42.97 +/- 0.29 km/s"
+  }
+ }
+}

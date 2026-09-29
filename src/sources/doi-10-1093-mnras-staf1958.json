@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-staf1958",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Carleo et al. (2026): Precise mass and radius determination for two new and one known Neptune-sized planets around G dwarf hosts",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2511.20119"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staf1958"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026MNRAS.549f1958C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staf1958",
+      "label": "Monthly Notices of the Royal Astronomical Society 549 staf1958"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Carleo et al. (2026), Monthly Notices of the Royal Astronomical Society 549 staf1958",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 549 staf1958",
+  "creators": [
+    "Ilaria Carleo",
+    "Grzegorz Nowak",
+    "Felipe Murgas",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "k2-277b",
+  "displayName": "K2-277 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "2.2 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acaf03",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T",
+          "label": "Thygesen et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "6.33 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-acaf03",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T",
+          "label": "Thygesen et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "7.4 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4365-adc5e4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H",
+          "label": "Howard et al. 2025",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by K2-277; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "k2-277b-lens-shape.webp",
+        "surface": "k2-277b-surface-shape@2x.webp",
+        "poles": "k2-277b-poles-shape@2x.webp",
+        "source": {
+          "id": "k2-277b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of K2-277 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of k2-277's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "k2-277b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/k2-277b/k2-277b-system-orbits.svg",
+      "alt": "The orbits of K2-277's planets in this map from above, to scale, with K2-277 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "k2-277b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T"
+      }
+    },
+    {
+      "id": "k2-277b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/k2-277b/k2-277b-transit.svg",
+      "alt": "K2-277 b crossing its star, as TESS recorded it: 3 sectors (10, 37, 91) of the SPOC pipeline's 2-minute light curves of TIC 404421005, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 10 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 25 minutes at these dates, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "k2-277b-tess-sector-10",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019085135100-s0010-0000000404421005-0140-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Thygesen et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract",
+      "credit": "Thygesen et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/k2-277b.json",
+      "credit": "Radius from Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive; mass from Howard et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025ApJS..278...52H), via the NASA Exoplanet Archive; orbit from Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive"
+    }
+  }
+}

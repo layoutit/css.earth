@@ -1,0 +1,46 @@
+{
+  "id": "ltt-9779",
+  "name": "LTT 9779",
+  "system": "LTT 9779 system",
+  "description": "Star of 5,443 K, 80.4 parsecs away, with 1 transiting planet.",
+  "target": "LTT 9779",
+  "gaia": "2307504062045842688",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract",
+    "credit": "Jenkins et al. 2020"
+  },
+  "radius": {
+    "value": 0.949,
+    "source": "Jenkins et al. 2020, the stellar radius of the default parameter set of LTT 9779 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract",
+    "uncertainty": 0.006
+  },
+  "mass": {
+    "value": 1.02,
+    "source": "Jenkins et al. 2020, the stellar mass of the default parameter set of LTT 9779 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5443,
+    "source": "Jenkins et al. 2020, the stellar temperature of the default parameter set of LTT 9779 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract",
+    "uncertainty": 14
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "LTT 9779 b crosses LTT 9779 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Jenkins et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname JENKINS_ET_AL_2020): st_teff 5443, st_rad 0.949, st_mass 1.02",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/LTT_9779",
+      "title": "LTT 9779",
+      "revision": "1374818290",
+      "card": "LTT 9779, also named Uúba, is a G-type main-sequence star located 264 light-years away from the Solar System in the constellation of Sculptor.",
+      "introduction": "The star is about 95% the radius and about the same mass as the Sun, but younger than the Sun at 1.7 billion years old, hence its lower luminosity."
+    }
+  },
+  "notes": [],
+  "order": 3838
+}

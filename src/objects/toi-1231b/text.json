@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1231b",
+  "card": {
+    "text": "TOI-1231 b was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac0432",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract",
+        "label": "Burt et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BURT_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 24.245586, pl_radj 0.32563175, pl_bmassj 0.04845382"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-1231. Its orbit and size follow Burt et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac0432",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract",
+        "label": "Burt et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BURT_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 24.245586, pl_radj 0.32563175, pl_bmassj 0.04845382"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

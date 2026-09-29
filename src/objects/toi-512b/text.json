@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-512b",
+  "card": {
+    "text": "TOI-512 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452887",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract",
+        "label": "Rodrigues et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RODRIGUES_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 7.18873321304, pl_radj 0.13738983, pl_bmassj 0.01123248"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-512. Its orbit and size follow Rodrigues et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452887",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract",
+        "label": "Rodrigues et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RODRIGUES_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 7.18873321304, pl_radj 0.13738983, pl_bmassj 0.01123248"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

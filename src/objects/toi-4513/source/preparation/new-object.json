@@ -1,0 +1,37 @@
+{
+  "id": "toi-4513",
+  "name": "TOI-4513",
+  "system": "TOI-4513 system",
+  "description": "Star of 5,624 K, 103 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4513",
+  "gaia": "2590775232734704128",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.796628,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-4513 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": {
+    "value": 0.979,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 408261725 (VizieR IV/39/tic82); no NASA Exoplanet Archive row gives one, nor does Gaia DR3 FLAME",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.124
+  },
+  "temperature": {
+    "value": 5623.93,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-4513 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4513 b crosses TOI-4513 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 5623.93, st_rad 0.796628"
+  },
+  "notes": [],
+  "order": 4897
+}

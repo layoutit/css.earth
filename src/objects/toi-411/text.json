@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-411",
+  "card": {
+    "text": "3 planets cross HD 22946 as seen from Earth: d, TOI-411 b, TOI-411 c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202345943",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract",
+        "label": "Garai et al. (2023), Astronomy & Astrophysics 674 A44",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GARAI_ET_AL__2023): st_teff 6169, st_rad 1.117, st_mass 1.098"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Garai et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202345943",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract",
+        "label": "Garai et al. (2023), Astronomy & Astrophysics 674 A44",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GARAI_ET_AL__2023): st_teff 6169, st_rad 1.117, st_mass 1.098"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ada26a",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Distler et al. (2025): TESS Hunt for Young and Maturing Exoplanets (THYME). XII. A Young Mini-Neptune on the Upper Edge of the Radius Valley in the Hyades Cluster",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2410.11990"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ada26a"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....169..166D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..166D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ada26a",
+      "label": "The Astronomical Journal 169 166"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..166D",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Distler et al. (2025), The Astronomical Journal 169 166",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..166D"
+    }
+  ],
+  "publisher": "The Astronomical Journal 169 166",
+  "creators": [
+    "Adam Distler",
+    "Melinda Soares-Furtado",
+    "Andrew Vanderburg",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

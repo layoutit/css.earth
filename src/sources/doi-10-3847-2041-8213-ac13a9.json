@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-ac13a9",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wirth et al. (2021): TOI-942b: A Prograde Neptune in a ∼ 60 Myr Old Multi-transiting System*",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2106.14968"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ac13a9"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021ApJ...917L..34W"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ac13a9",
+      "label": "The Astrophysical Journal Letters 917 L34"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wirth et al. (2021), The Astrophysical Journal Letters 917 L34",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 917 L34",
+  "creators": [
+    "Christopher P. Wirth",
+    "George Zhou",
+    "Samuel N. Quinn",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

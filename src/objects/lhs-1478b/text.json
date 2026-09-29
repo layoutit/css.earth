@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lhs-1478b",
+  "card": {
+    "text": "LHS 1478 b was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452611",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+        "label": "August et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AUGUST_ET_AL_2025): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.94953941, pl_radj 0.10473745, pl_bmassj 0.00714222"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-1478-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_1478_b",
+        "label": "Wikipedia, \"LHS 1478 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374087519",
+        "quote": "LHS 1478 b is a super-Earth exoplanet orbiting around LHS 1478, a red dwarf star located 59.4 light-years from Earth in the constellation of Cassiopeia."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around LHS 1478. Its orbit and size follow August et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202452611",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+        "label": "August et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AUGUST_ET_AL_2025): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.94953941, pl_radj 0.10473745, pl_bmassj 0.00714222"
+      },
+      {
+        "catalogueId": "wikipedia-lhs-1478-b",
+        "url": "https://en.wikipedia.org/wiki/LHS_1478_b",
+        "label": "Wikipedia, \"LHS 1478 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374087519",
+        "quote": "It orbits at a distance of 0.018 AU from the star with a inclination of 87° to the plane of the sky."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

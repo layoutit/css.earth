@@ -1,0 +1,24 @@
+{
+  "host": "toi-5817",
+  "planets": [
+    {
+      "id": "toi-5817b",
+      "name": "TOI-5817 b",
+      "description": "Transiting planet of TOI-5817 with a 15.6-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract",
+        "credit": "Naponiello et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "NAPONIELLO_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-5817 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5817. Its orbit and size follow Naponiello et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAPONIELLO_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 15.61031, pl_radj 0.27477967, pl_bmassj 0.03240742"
+      },
+      "order": 4591
+    }
+  ]
+}

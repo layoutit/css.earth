@@ -1,0 +1,39 @@
+{
+  "id": "toi-3884",
+  "name": "TOI-3884",
+  "system": "TOI-3884 system",
+  "description": "Star of 3,180 K, 43.1 parsecs away, with 1 transiting planet.",
+  "target": "TOI-3884",
+  "gaia": "3919169687804622336",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract",
+    "credit": "Libby-Roberts et al. 2023"
+  },
+  "radius": {
+    "value": 0.302,
+    "source": "Libby-Roberts et al. 2023, the stellar radius of the default parameter set of TOI-3884 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract",
+    "uncertainty": 0.012
+  },
+  "mass": {
+    "value": 0.298,
+    "source": "Libby-Roberts et al. 2023, the stellar mass of the default parameter set of TOI-3884 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract",
+    "uncertainty": 0.018
+  },
+  "temperature": {
+    "value": 3180,
+    "source": "Libby-Roberts et al. 2023, the stellar temperature of the default parameter set of TOI-3884 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract",
+    "uncertainty": 88
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-3884 b crosses TOI-3884 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Libby-Roberts et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LIBBY_ROBERTS_ET_AL__2023): st_teff 3180, st_rad 0.302, st_mass 0.298"
+  },
+  "notes": [],
+  "order": 4372
+}

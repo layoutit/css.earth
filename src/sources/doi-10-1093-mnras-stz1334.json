@@ -1,0 +1,55 @@
+{
+  "id": "doi-10-1093-mnras-stz1334",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wells et al. (2019): Validation of a temperate fourth planet in the K2-133 multiplanet system",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1905.05206"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stz1334"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019MNRAS.487.1865W"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stz1334",
+      "label": "Monthly Notices of the Royal Astronomical Society 487 1865-1873"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wells et al. (2019), Monthly Notices of the Royal Astronomical Society 487 1865-1873",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 487 1865-1873",
+  "creators": [
+    "R Wells",
+    "K Poppenhaeger",
+    "C A Watson"
+  ],
+  "publicationDate": "2019"
+}

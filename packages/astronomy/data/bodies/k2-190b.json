@@ -1,0 +1,28 @@
+{
+ "id": "k2-190b",
+ "classification": "exoplanet",
+ "order": 3370,
+ "physical": {
+  "name": "K2-190 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 8653.4,
+  "gravitationalParameterKm3PerS2": 960283.91,
+  "parent": "k2-190"
+ },
+ "physicalNotes": "Radius 0.12103999 Jupiter radii from Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract): 8,653.4 km at 71,492 km per Jupiter radius. GM from the mass 0.00758 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.098858,
+  "semiMajorAxisStellarRadii": 17.225461,
+  "inclinationDegrees": 88.35712,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57224.26792,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): P 10.098858 d",
+   "shape": "Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): a/R* 17.225461; Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): inclination 88.35712 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Mayo et al. 2018 (2018AJ....155..136M), via the NASA Exoplanet Archive ps table (pl_refname MAYO_ET_AL__2018): transit mid-time 2457224.76792 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 337 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "toi-4308b",
+ "classification": "exoplanet",
+ "order": 4396,
+ "physical": {
+  "name": "TOI-4308 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 15428,
+  "gravitationalParameterKm3PerS2": 2559067.94,
+  "parent": "toi-4308"
+ },
+ "physicalNotes": "Radius 0.21580018 Jupiter radii from Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract): 15,428 km at 71,492 km per Jupiter radius. GM from the mass 0.0202 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 9.1512776,
+  "semiMajorAxisStellarRadii": 23.606,
+  "inclinationDegrees": 89.07,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60163.174868,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 9.1512776 d",
+   "shape": "Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): a/R* 23.606; Mistry et al. 2023 (2023AJ....166....9M), via the NASA Exoplanet Archive ps table (pl_refname MISTRY_ET_AL_2023): inclination 89.07 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460163.674868 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

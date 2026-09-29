@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hd-15337c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hd-15337c-orbits",
+      "title": "HD 15337 c: orbits around HD 15337",
+      "output": "hd-15337c-system-orbits.svg",
+      "system": "hd-15337",
+      "highlight": "hd-15337c",
+      "description": "The orbits of HD 15337's planets in this map from above, to scale, with HD 15337 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 17.17966727335 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hd-15337c-transit",
+      "title": "HD 15337 c: its transit",
+      "description": "HD 15337 c crossing its star, as TESS recorded it: 3 sectors (97, 105, 106) of the SPOC pipeline's 2-minute light curves of TIC 120896927, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 12 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 13 minutes at these dates, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "output": "hd-15337c-transit.svg",
+      "metadata": {
+        "tic": "TIC 120896927",
+        "sectors": [
+          97,
+          105,
+          106
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hd-15337c",
+      "sources": [
+        "photometry/tess/tess2025258001959-s0097-0000000120896927-0294-s_lc.fits",
+        "photometry/tess/tess2026164183000-s0105-0000000120896927-0307-s_lc.fits",
+        "photometry/tess/tess2026192185000-s0106-0000000120896927-0308-s_lc.fits"
+      ],
+      "durationHours": 2.232,
+      "binMinutes": 9,
+      "alignMinutes": -12,
+      "notes": [
+        "TESS 2-min SPOC · sectors 97, 105, 106",
+        "Aligned on TESS's dip, 12 min early; 9-min bins.",
+        "The ephemeris's own 1σ there is 4 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

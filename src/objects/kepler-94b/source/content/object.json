@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-94b",
+  "displayName": "Kepler-94 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.31 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0067-0049-210-2-20",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M",
+          "label": "Marcy et al. 2014",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.51 days",
+        "source": {
+          "catalogueId": "doi-10-1088-0067-0049-210-2-20",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M",
+          "label": "Marcy et al. 2014",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.034 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0067-0049-210-2-20",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M",
+          "label": "Marcy et al. 2014",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-94; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-94b-lens-shape.webp",
+        "surface": "kepler-94b-surface-shape@2x.webp",
+        "poles": "kepler-94b-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-94b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-94 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-94's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kepler-94b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-94b/kepler-94b-system-orbits.svg",
+      "alt": "The orbits of Kepler-94's planets in this map from above, to scale, with Kepler-94 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-94b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M"
+      }
+    },
+    {
+      "id": "kepler-94b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kepler-94b/kepler-94b-transit.svg",
+      "alt": "Kepler-94 b crossing its star, as TESS recorded it: 3 sectors (80, 81, 82) of the SPOC pipeline's 2-minute light curves of TIC 123309556, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kepler-94b-tess-sector-80",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024170053053-s0080-0000000123309556-0275-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Marcy et al. 2014",
+      "href": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract",
+      "credit": "Marcy et al. 2014"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-94b.json",
+      "credit": "Radius from Marcy et al. 2014 (2014ApJS..210...20M), via the NASA Exoplanet Archive; mass from Marcy et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014ApJS..210...20M), via the NASA Exoplanet Archive; orbit from Marcy et al. 2014 (2014ApJS..210...20M), via the NASA Exoplanet Archive"
+    }
+  }
+}

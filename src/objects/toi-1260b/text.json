@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1260b",
+  "card": {
+    "text": "TOI-1260 b was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stac3639",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract",
+        "label": "Lam et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAM_ET_AL_2023): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 3.127463, pl_radj 0.21500617, pl_bmassj 0.02693277"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 3 planets known around TOI-1260. Its orbit and size follow Lam et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stac3639",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract",
+        "label": "Lam et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LAM_ET_AL_2023): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 3.127463, pl_radj 0.21500617, pl_bmassj 0.02693277"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

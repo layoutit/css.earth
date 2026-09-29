@@ -1,0 +1,45 @@
+{
+  "id": "lp-544-12",
+  "name": "LP 544-12",
+  "system": "GJ 3473 system",
+  "description": "Star bound to GJ 3473, 1,346 AU away.",
+  "gaia": "3094290019967631360",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.136,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 452866792 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.004
+  },
+  "mass": {
+    "value": 0.11,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 452866792 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 2832,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 452866792 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "LP 544-12 is a star of 2,832 K, bound to GJ 3473 1,346 AU away.",
+    "introduction": "LP 544-12 shares its motion through space with GJ 3473, 1,346 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 3094290054327367168 and 3094290019967631360, sep_AU 1345.508514263707411, R_chance_align 4.104652514560136289e-06"
+  },
+  "notes": [
+    "LP 544-12's orbit around GJ 3473 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 3094290019967631360 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 9,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%203094290019967631360"
+  },
+  "order": 3090
+}

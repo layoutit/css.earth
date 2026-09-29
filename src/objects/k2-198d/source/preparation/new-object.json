@@ -1,0 +1,24 @@
+{
+  "host": "k2-198",
+  "planets": [
+    {
+      "id": "k2-198d",
+      "name": "K2-198 d",
+      "description": "Transiting planet of K2-198 with a 7.45-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+        "credit": "Hedges et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HEDGES_ET_AL__2019"
+      },
+      "text": {
+        "card": "K2-198 d was found in 2019 by K2 as it crossed its star.",
+        "introduction": "It is one of 3 planets known around K2-198. Its orbit and size follow Hedges et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HEDGES_ET_AL__2019): disc_year 2019, disc_facility K2, sy_pnum 3; pl_orbper 7.4500372, pl_radj 0.21750379, pl_bmassj 0.0205"
+      },
+      "order": 3374
+    }
+  ]
+}

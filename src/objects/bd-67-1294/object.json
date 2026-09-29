@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "bd-67-1294",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "BD+67 1294",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 791010.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bd-67-1294-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "BD+67 1294",
+      "classification": "star",
+      "color": "#fff7fc",
+      "distanceAu": 24186666.5,
+      "description": "BD+67 1294 is a star of 6,043 K, bound to TOI-6034 4,700 AU away.",
+      "systemName": "TOI-6034 system",
+      "order": 4602,
+      "context": {
+        "order": 4599
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        987542893618176900,
+        -892821990804228600,
+        3364451408741547500
+      ],
+      "presentationToReference": [
+        0.27293185327550556,
+        0.6897497054001811,
+        -0.6706366731457216,
+        -0.2467533938729882,
+        -0.6235914607979609,
+        -0.7417859884306437,
+        0.9298499696616438,
+        -0.367938899710575,
+        -1.0764802119703324e-7
+      ],
+      "orbitUpReference": [
+        -0.6897497054001811,
+        0.6235914607979609,
+        0.367938899710575
+      ],
+      "metersPerUnit": 2551648.064516129,
+      "bodyRadiusM": 791010900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

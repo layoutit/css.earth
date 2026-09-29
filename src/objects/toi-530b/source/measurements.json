@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-530b",
+  "radiusKm": 59338.4,
+  "radiusSource": "Radius 0.83 Jupiter radii from Gan et al. 2022 (2022MNRAS.511...83G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G/abstract): 59,338.4 km at 71,492 km per Jupiter radius. GM from the mass 0.4 Jupiter masses (Gan et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022MNRAS.511...83G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 6.387573911,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.387573911 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-530 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.4 Jupiter masses: Gan et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022MNRAS.511...83G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G/abstract)."
+}

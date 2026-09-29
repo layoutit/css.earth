@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "tic-46432937b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.188 Jupiter radii from Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "3.2 Jupiter masses: Hartman et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..202H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL_2024): P 1.44044527 d; Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL_2024): a/R* 8.381; Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL_2024): inclination 84.35 degrees; No archive row states an eccentricity; the orbit is taken as circular; Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL_2024): transit mid-time 2459952.28894 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract"
+      ]
+    }
+  ]
+}

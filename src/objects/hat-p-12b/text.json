@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-12b",
+  "card": {
+    "text": "HAT-P-12 b was found in 2009 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-706-1-785",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
+        "label": "Hartman et al. 2009",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL__2009): disc_year 2009, disc_facility HATNet, sy_pnum 1; pl_orbper 3.21305762, pl_radj 0.959, pl_bmassj 0.211"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-12b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-12b",
+        "label": "Wikipedia, \"HAT-P-12b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374169024",
+        "quote": "HAT-P-12b, formally named Puli, is an extrasolar planet approximately 468 light years away from Earth, orbiting the 13th magnitude K-type star HAT-P-12, which is located in Canes Venatici constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HAT-P-12. Its orbit and size follow Hartman et al. 2009's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-706-1-785",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
+        "label": "Hartman et al. 2009",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL__2009): disc_year 2009, disc_facility HATNet, sy_pnum 1; pl_orbper 3.21305762, pl_radj 0.959, pl_bmassj 0.211"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-12b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-12b",
+        "label": "Wikipedia, \"HAT-P-12b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374169024",
+        "quote": "It is a transiting hot Jupiter that was discovered by the HATNet Project on April 29, 2009."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

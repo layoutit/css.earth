@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-663d",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.17129122 Jupiter radii from Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.01636103 Jupiter masses: Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive ps table (pl_refname COINTEPAS_ET_AL__2024): P 7.1027268 d; Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive ps table (pl_refname COINTEPAS_ET_AL__2024): a/R* derived from its semi-major axis 0.0576 au and stellar radius 0.512 solar radii; Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive ps table (pl_refname COINTEPAS_ET_AL__2024): inclination 89.6 degrees; No archive row states an eccentricity; the orbit is taken as circular; Cointepas et al. 2024 (2024A&A...685A..19C), via the NASA Exoplanet Archive ps table (pl_refname COINTEPAS_ET_AL__2024): transit mid-time 2458547.11249 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 15 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract"
+      ]
+    }
+  ]
+}

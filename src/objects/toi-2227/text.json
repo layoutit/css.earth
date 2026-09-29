@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2227",
+  "card": {
+    "text": "TOI-2227 b crosses TOI-2227 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag512",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+        "label": "Lafarga et al. (2026), Monthly Notices of the Royal Astronomical Society 548 stag512",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 5889.54, st_rad 1.20847"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lafarga et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag512",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+        "label": "Lafarga et al. (2026), Monthly Notices of the Royal Astronomical Society 548 stag512",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 5889.54, st_rad 1.20847"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

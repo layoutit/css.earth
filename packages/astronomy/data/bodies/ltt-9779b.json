@@ -1,0 +1,28 @@
+{
+ "id": "ltt-9779b",
+ "classification": "exoplanet",
+ "order": 3839,
+ "physical": {
+  "name": "LTT 9779 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 30104.6,
+  "gravitationalParameterKm3PerS2": 11686904.78,
+  "parent": "ltt-9779"
+ },
+ "physicalNotes": "Radius 0.4210902 Jupiter radii from Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract): 30,104.6 km at 71,492 km per Jupiter radius. GM from the mass 0.09225057 Jupiter masses (Jenkins et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020NatAs...4.1148J), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.7920645022,
+  "semiMajorAxisStellarRadii": 3.877,
+  "inclinationDegrees": 76.39,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60932.675839,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 0.7920645022 d",
+   "shape": "Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive ps table (pl_refname JENKINS_ET_AL_2020): a/R* 3.877; Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive ps table (pl_refname JENKINS_ET_AL_2020): inclination 76.39 degrees",
+   "eccentricity": "Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive ps table (pl_refname JENKINS_ET_AL_2020): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460933.175839 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

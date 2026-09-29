@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-33b",
+  "displayName": "WASP-33 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.6 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C",
+          "label": "Chakrabarty 2019",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "29 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C",
+          "label": "Chakrabarty 2019",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.1 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+          "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C",
+          "label": "Chakrabarty 2019",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body colour at its measured dayside temperature, 3,398 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-33b-lens-thermal.webp",
+        "surface": "wasp-33b-surface-thermal@2x.webp",
+        "poles": "wasp-33b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-33b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015A&A...584A..75V/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of WASP-33 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 1.05 µm (LBT Consortium Large Binocular Telescope (LBT) at Mount Graham International Observatory Large Binocular Camera). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-33b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-33b/wasp-33b-system-orbits.svg",
+      "alt": "The orbits of WASP-33's planets in this map from above, to scale, with WASP-33 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-33b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C"
+      }
+    },
+    {
+      "id": "wasp-33b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-33b/wasp-33b-transit.svg",
+      "alt": "WASP-33 b crossing its star, as TESS recorded it: 3 sectors (18, 58, 85) of the SPOC pipeline's 2-minute light curves of TIC 129979528, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-33b-tess-sector-18",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019306063752-s0018-0000000129979528-0162-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chakrabarty & Sengupta 2019",
+      "href": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+      "credit": "Chakrabarty & Sengupta 2019"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-33b.json",
+      "credit": "Radius from Chakrabarty & Sengupta 2019 (2019AJ....158...39C), via the NASA Exoplanet Archive; mass from Chakrabarty & Sengupta 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158...39C), via the NASA Exoplanet Archive; orbit from Chakrabarty & Sengupta 2019 (2019AJ....158...39C), via the NASA Exoplanet Archive"
+    }
+  }
+}

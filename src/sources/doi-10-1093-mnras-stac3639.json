@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stac3639",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lam et al. (2023): Discovery of TOI-1260d and the characterization of the multiplanet system",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2212.04307"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stac3639"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.519.1437L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stac3639",
+      "label": "Monthly Notices of the Royal Astronomical Society 519 1437-1451"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lam et al. (2023), Monthly Notices of the Royal Astronomical Society 519 1437-1451",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 519 1437-1451",
+  "creators": [
+    "K W F Lam",
+    "J Cabrera",
+    "M J Hooton",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

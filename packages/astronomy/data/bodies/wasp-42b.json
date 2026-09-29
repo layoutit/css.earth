@@ -1,0 +1,31 @@
+{
+ "id": "wasp-42b",
+ "classification": "exoplanet",
+ "order": 4817,
+ "physical": {
+  "name": "WASP-42 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 80214,
+  "gravitationalParameterKm3PerS2": 66763802.31,
+  "parent": "wasp-42"
+ },
+ "physicalNotes": "Radius 1.122 Jupiter radii from Southworth et al. 2016 (2016MNRAS.457.4205S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract): 80,214 km at 71,492 km per Jupiter radius. GM from the mass 0.527 Jupiter masses (Southworth et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016MNRAS.457.4205S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.98168178,
+  "semiMajorAxisStellarRadii": 13.5,
+  "inclinationDegrees": 88,
+  "eccentricity": 0.062,
+  "argumentOfPeriapsisDegrees": 159,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 56472.04482,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 4.98168178 d",
+   "shape": "Southworth et al. 2016 (2016MNRAS.457.4205S), via the NASA Exoplanet Archive ps table (pl_refname SOUTHWORTH_ET_AL__2016): a/R* 13.5; Southworth et al. 2016 (2016MNRAS.457.4205S), via the NASA Exoplanet Archive ps table (pl_refname SOUTHWORTH_ET_AL__2016): inclination 88 degrees",
+   "eccentricity": "Bonomo et al. 2017 (2017A&A...602A.107B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL__2017): e 0.062",
+   "argumentOfPeriapsis": "Bonomo et al. 2017 (2017A&A...602A.107B), via the NASA Exoplanet Archive ps table (pl_refname BONOMO_ET_AL__2017): omega 159 degrees",
+   "phase": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): transit mid-time 2456472.54482 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

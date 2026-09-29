@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "lhs-475",
+  "displayName": "LHS 475",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.28 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-023-02064-z",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L",
+          "label": "Lustig-Yaeger et al. (2023), Nature Astronomy 7 1317-1328",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "12.5 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-lhs-475",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "lhs-475-lens-color.webp",
+        "surface": "lhs-475-surface-color@2x.webp",
+        "poles": "lhs-475-poles-color@2x.webp",
+        "source": {
+          "id": "lhs-475-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6347643496607835520&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,300 K and log g 4.97 (u1 0.154, u2 0.460): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lustig-Yaeger et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract",
+      "credit": "Lustig-Yaeger et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/lhs-475.json",
+      "credit": "Lustig-Yaeger et al. 2023, the stellar radius of the default parameter set of LHS 475 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

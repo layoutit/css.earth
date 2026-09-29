@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "bd-76-227-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "BD+76 227B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 284541.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bd-76-227-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "BD+76 227B",
+      "classification": "star",
+      "color": "#ffc786",
+      "distanceAu": 16714673.2,
+      "description": "BD+76 227B is a star of 3,470 K, bound to TOI-1710 3,609 AU away.",
+      "systemName": "TOI-1710 system",
+      "order": 4099,
+      "context": {
+        "order": 4096
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -44351977148740664,
+        594804594545926700,
+        2428299449756569000
+      ],
+      "presentationToReference": [
+        -0.0177375956189794,
+        -0.07220009856794751,
+        0.9972324320179504,
+        0.2378789869165258,
+        0.9684452029211679,
+        0.07434700076361687,
+        0.9711328257685583,
+        -0.2385393776837622,
+        0.000003003085939464668
+      ],
+      "orbitUpReference": [
+        0.07220009856794751,
+        -0.9684452029211679,
+        0.2385393776837622
+      ],
+      "metersPerUnit": 917875.1612903225,
+      "bodyRadiusM": 284541300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

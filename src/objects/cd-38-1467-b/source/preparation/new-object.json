@@ -1,0 +1,40 @@
+{
+  "id": "cd-38-1467-b",
+  "name": "CD-38 1467B",
+  "system": "TOI-451 system",
+  "description": "Star bound to TOI-451, 4,669 AU away.",
+  "gaia": "4844691297067064576",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.555,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 257605132 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.016
+  },
+  "mass": {
+    "value": 0.55,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 257605132 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3418,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 257605132 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "CD-38 1467B is a star of 3,418 K, bound to TOI-451 4,669 AU away.",
+    "introduction": "CD-38 1467B shares its motion through space with TOI-451, 4,669 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 4844691297067063424 and 4844691297067064576, sep_AU 4669.396498974841052, R_chance_align 8.030418700360694457e-06"
+  },
+  "notes": [
+    "CD-38 1467B's orbit around TOI-451 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 4434
+}

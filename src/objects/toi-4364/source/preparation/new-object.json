@@ -1,0 +1,39 @@
+{
+  "id": "toi-4364",
+  "name": "TOI-4364",
+  "system": "TOI-4364 system",
+  "description": "Star of 3,528 K, 44 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4364",
+  "gaia": "3210444215030339584",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..166D/abstract",
+    "credit": "Distler et al. 2025"
+  },
+  "radius": {
+    "value": 0.4684,
+    "source": "Distler et al. 2025, the stellar radius of the default parameter set of TOI-4364 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..166D/abstract",
+    "uncertainty": 0.0087
+  },
+  "mass": {
+    "value": 0.487,
+    "source": "Distler et al. 2025, the stellar mass of the default parameter set of TOI-4364 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..166D/abstract",
+    "uncertainty": 0.017
+  },
+  "temperature": {
+    "value": 3528,
+    "source": "Distler et al. 2025, the stellar temperature of the default parameter set of TOI-4364 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..166D/abstract",
+    "uncertainty": 33
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4364 b crosses TOI-4364 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Distler et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DISTLER_ET_AL__2025): st_teff 3528, st_rad 0.4684, st_mass 0.487"
+  },
+  "notes": [],
+  "order": 4407
+}

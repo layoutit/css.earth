@@ -1,0 +1,24 @@
+{
+  "host": "kelt-23-a",
+  "planets": [
+    {
+      "id": "kelt-23-a-b",
+      "name": "KELT-23 A b",
+      "description": "Transiting planet of KELT-23 A with a 2.26-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...78J/abstract",
+        "credit": "Johns et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "JOHNS_ET_AL__2019"
+      },
+      "text": {
+        "card": "KELT-23 A b was found in 2019 by KELT-North as it crossed its star.",
+        "introduction": "It is the only planet known around KELT-23 A. Its orbit and size follow Johns et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JOHNS_ET_AL__2019): disc_year 2019, disc_facility KELT-North, sy_pnum 1; pl_orbper 2.255287666, pl_radj 1.323, pl_bmassj 0.938"
+      },
+      "order": 3636
+    }
+  ]
+}

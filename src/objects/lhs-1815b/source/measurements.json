@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "lhs-1815b",
+  "radiusKm": 6939.4,
+  "radiusSource": "Radius 0.09706503 Jupiter radii from Luque & Pallé 2022 (2022Sci...377.1211L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract): 6,939.4 km at 71,492 km per Jupiter radius. GM from the mass 0.00497124 Jupiter masses (Luque & Pallé 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022Sci...377.1211L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.81431355625,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.81431355625 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of LHS 1815 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00497124 Jupiter masses: Luque & Pallé 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022Sci...377.1211L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract)."
+}

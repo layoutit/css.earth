@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1448b",
+  "radiusKm": 17533.4,
+  "radiusSource": "Radius 0.24524978 Jupiter radii from Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract): 17,533.4 km at 71,492 km per Jupiter radius. No mass is measured: Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract) gives only an upper limit of 0.06135386 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 8.112245,
+  "orbitalPeriodSource": "Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): P 8.112245 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1448 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.06135386 Jupiter masses: Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)."
+}

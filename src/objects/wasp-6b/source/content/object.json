@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-6b",
+  "displayName": "WASP-6 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acb154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M",
+          "label": "McGruder et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.36 days",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acb154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M",
+          "label": "McGruder et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.47 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-2041-8213-acb154",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M",
+          "label": "McGruder et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body colour at its measured dayside temperature, 1,235 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-6b-lens-thermal.webp",
+        "surface": "wasp-6b-surface-thermal@2x.webp",
+        "poles": "wasp-6b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-6b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of WASP-6 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-6b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-6b/wasp-6b-system-orbits.svg",
+      "alt": "The orbits of WASP-6's planets in this map from above, to scale, with WASP-6 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-6b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M"
+      }
+    },
+    {
+      "id": "wasp-6b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-6b/wasp-6b-transit.svg",
+      "alt": "WASP-6 b crossing its star, as TESS recorded it: 3 sectors (2, 29, 69) of the SPOC pipeline's 2-minute light curves of TIC 204376737, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-6b-tess-sector-2",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2018234235059-s0002-0000000204376737-0121-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "McGruder et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+      "credit": "McGruder et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-6b.json",
+      "credit": "Radius from McGruder et al. 2023 (2023ApJ...944L..56M), via the NASA Exoplanet Archive; mass from McGruder et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023ApJ...944L..56M), via the NASA Exoplanet Archive; orbit from McGruder et al. 2023 (2023ApJ...944L..56M), via the NASA Exoplanet Archive"
+    }
+  }
+}

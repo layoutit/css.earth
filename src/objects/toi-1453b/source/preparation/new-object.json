@@ -1,0 +1,24 @@
+{
+  "host": "toi-1453",
+  "planets": [
+    {
+      "id": "toi-1453b",
+      "name": "TOI-1453 b",
+      "description": "Transiting planet of TOI-1453 with a 4.31-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..86S/abstract",
+        "credit": "Stalport et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STALPORT_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-1453 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1453. Its orbit and size follow Stalport et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STALPORT_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.3135263, pl_radj 0.10464823, pl_bmassj 0.00729954"
+      },
+      "order": 4053
+    }
+  ]
+}

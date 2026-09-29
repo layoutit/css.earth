@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "xo-2-n-b",
+  "card": {
+    "text": "XO-2 N b was found in 2007 by XO as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348042",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract",
+        "label": "Ruggieri et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RUGGIERI_ET_AL_2024): disc_year 2007, disc_facility XO, sy_pnum 4; pl_orbper 2.615859462, pl_radj 1.019, pl_bmassj 0.629"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around XO-2 N. Its orbit and size follow Ruggieri et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348042",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract",
+        "label": "Ruggieri et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RUGGIERI_ET_AL_2024): disc_year 2007, disc_facility XO, sy_pnum 4; pl_orbper 2.615859462, pl_radj 1.019, pl_bmassj 0.629"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

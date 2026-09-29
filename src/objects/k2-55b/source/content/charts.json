@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-55b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-55b-orbits",
+      "title": "K2-55 b: orbits around K2-55",
+      "output": "k2-55b-system-orbits.svg",
+      "system": "k2-55",
+      "highlight": "k2-55b",
+      "description": "The orbits of K2-55's planets in this map from above, to scale, with K2-55 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 2.8492816 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "k2-55b-transit",
+      "title": "K2-55 b: its transit",
+      "description": "K2-55 b crossing its star, as TESS recorded it: 2 sectors (42, 92) of the SPOC pipeline's 2-minute light curves of TIC 437704321, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "k2-55b-transit.svg",
+      "metadata": {
+        "tic": "TIC 437704321",
+        "sectors": [
+          42,
+          92
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "k2-55b",
+      "sources": [
+        "photometry/tess/tess2021232031932-s0042-0000000437704321-0213-s_lc.fits",
+        "photometry/tess/tess2025127075000-s0092-0000000437704321-0289-s_lc.fits"
+      ],
+      "durationHours": 2.006,
+      "binMinutes": 8,
+      "notes": [
+        "TESS 2-min SPOC · sectors 42, 92",
+        "Folded on the app's orbit; 8-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

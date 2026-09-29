@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202244293",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Barros et al. (2022): HD 23472: a multi-planetary system with three super-Earths and two potential super-Mercuries,",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2209.13345"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202244293"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022A&A...665A.154B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202244293",
+      "label": "Astronomy & Astrophysics 665 A154"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Barros et al. (2022), Astronomy & Astrophysics 665 A154",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 665 A154",
+  "creators": [
+    "S. C. C. Barros",
+    "O. D. S. Demangeon",
+    "Y. Alibert",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

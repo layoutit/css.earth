@@ -1,0 +1,46 @@
+{
+  "id": "wasp-166",
+  "name": "WASP-166",
+  "system": "WASP-166 system",
+  "description": "Star of 6,050 K, 114 parsecs away, with 1 transiting planet.",
+  "target": "WASP-166",
+  "gaia": "5664957444179338240",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+    "credit": "Hellier et al. 2019"
+  },
+  "radius": {
+    "value": 1.22,
+    "source": "Hellier et al. 2019, the stellar radius of the default parameter set of WASP-166 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+    "uncertainty": 0.06
+  },
+  "mass": {
+    "value": 1.19,
+    "source": "Hellier et al. 2019, the stellar mass of the default parameter set of WASP-166 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 6050,
+    "source": "Hellier et al. 2019, the stellar temperature of the default parameter set of WASP-166 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-166 b crosses WASP-166 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hellier et al. 2019.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HELLIER_ET_AL__2019): st_teff 6050, st_rad 1.22, st_mass 1.19",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-166",
+      "title": "WASP-166",
+      "revision": "1375752963",
+      "card": "WASP-166, also named Filetdor, is an F-type main-sequence star 373 light-years away in the constellation Hydra.",
+      "introduction": "With an apparent magnitude of 9.4, it is too faint to be visible to the naked eye."
+    }
+  },
+  "notes": [],
+  "order": 4798
+}

@@ -1,0 +1,28 @@
+{
+ "id": "hip-29442d",
+ "classification": "exoplanet",
+ "order": 4463,
+ "physical": {
+  "name": "HIP 29442 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 9809.5,
+  "gravitationalParameterKm3PerS2": 2048806.27,
+  "parent": "hip-29442"
+ },
+ "physicalNotes": "Radius 0.13721141 Jupiter radii from Egger et al. 2024 (2024A&A...688A.223E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.223E/abstract): 9,809.5 km at 71,492 km per Jupiter radius. GM from the mass 0.01617225 Jupiter masses (Egger et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...688A.223E), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...688A.223E/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 6.429575,
+  "semiMajorAxisStellarRadii": 14.5,
+  "inclinationDegrees": 88.9,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58472.4865,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Egger et al. 2024 (2024A&A...688A.223E), via the NASA Exoplanet Archive ps table (pl_refname EGGER_ET_AL__2024): P 6.429575 d",
+   "shape": "Egger et al. 2024 (2024A&A...688A.223E), via the NASA Exoplanet Archive ps table (pl_refname EGGER_ET_AL__2024): a/R* 14.5; Damasso et al. 2023 (2023A&A...679A..33D), via the NASA Exoplanet Archive ps table (pl_refname DAMASSO_ET_AL_2023): inclination 88.9 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Egger et al. 2024 (2024A&A...688A.223E), via the NASA Exoplanet Archive ps table (pl_refname EGGER_ET_AL__2024): transit mid-time 2458472.9865 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 17 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

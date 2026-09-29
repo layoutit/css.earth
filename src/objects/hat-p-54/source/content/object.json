@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hat-p-54",
+  "displayName": "HAT-P-54",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.62 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-149-4-149",
+          "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B",
+          "label": "Bakos et al. (2015), The Astronomical Journal 149 149",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "143 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hat-p-54",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hat-p-54-lens-color.webp",
+        "surface": "hat-p-54-surface-color@2x.webp",
+        "poles": "hat-p-54-poles-color@2x.webp",
+        "source": {
+          "id": "hat-p-54-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3383298227579280640&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The colour of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,390 K and log g 4.67 (u1 0.750, u2 0.041): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bakos et al. 2015",
+      "href": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract",
+      "credit": "Bakos et al. 2015"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-54.json",
+      "credit": "Bakos et al. 2015, the stellar radius of the default parameter set of HAT-P-54 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

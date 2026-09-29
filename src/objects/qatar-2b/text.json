@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "qatar-2b",
+  "card": {
+    "text": "Qatar-2 b was found in 2011 by Qatar as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stu1286",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+        "label": "Mancini et al. 2014",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANCINI_ET_AL__2014): disc_year 2011, disc_facility Qatar, sy_pnum 1; pl_orbper 1.33711644, pl_radj 1.254, pl_bmassj 2.494"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Qatar-2. Its orbit and size follow Mancini et al. 2014's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stu1286",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+        "label": "Mancini et al. 2014",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANCINI_ET_AL__2014): disc_year 2011, disc_facility Qatar, sy_pnum 1; pl_orbper 1.33711644, pl_radj 1.254, pl_bmassj 2.494"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

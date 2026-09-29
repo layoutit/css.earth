@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-540",
+  "card": {
+    "text": "TOI-540 b crosses TOI-540 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abbd91",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract",
+        "label": "Ment et al. (2021), The Astronomical Journal 161 23",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MENT_ET_AL__2021): st_teff 3216, st_rad 0.1895, st_mass 0.159"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Ment et al. 2021.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abbd91",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract",
+        "label": "Ment et al. (2021), The Astronomical Journal 161 23",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MENT_ET_AL__2021): st_teff 3216, st_rad 0.1895, st_mass 0.159"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

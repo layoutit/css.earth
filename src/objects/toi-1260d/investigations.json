@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1260d",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.27834824 Jupiter radii from Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.03725281 Jupiter masses: Lam et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023MNRAS.519.1437L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): P 16.608164 d; Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): a/R* 35.69; Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): inclination 89.14 degrees; Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): e 0; Lam et al. 2023 (2023MNRAS.519.1437L), via the NASA Exoplanet Archive ps table (pl_refname LAM_ET_AL_2023): transit mid-time 2459062.017406 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 14 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract"
+      ]
+    }
+  ]
+}

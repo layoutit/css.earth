@@ -1,0 +1,24 @@
+{
+  "host": "gj-238",
+  "planets": [
+    {
+      "id": "gj-238b",
+      "name": "GJ 238 b",
+      "description": "Transiting planet of GJ 238 with a 1.74-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract",
+        "credit": "Tey et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "TEY_ET_AL__2024"
+      },
+      "text": {
+        "card": "GJ 238 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around GJ 238. Its orbit and size follow Tey et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TEY_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.744698366, pl_radj 0.05049522, pl_bmassj 0.000398"
+      },
+      "order": 3081
+    }
+  ]
+}

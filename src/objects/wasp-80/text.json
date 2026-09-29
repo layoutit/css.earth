@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-80",
+  "card": {
+    "text": "WASP-80 b crosses WASP-80 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stv706",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract",
+        "label": "Triaud et al. (2015), Monthly Notices of the Royal Astronomical Society 450 2279-2290",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TRIAUD_ET_AL__2015): st_teff 4143, st_rad 0.586, st_mass 0.577"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-80",
+        "url": "https://en.wikipedia.org/wiki/WASP-80",
+        "label": "Wikipedia, \"WASP-80\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370791730",
+        "quote": "WASP-80 is a K-type main-sequence star about 162 light-years away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Triaud et al. 2015.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stv706",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract",
+        "label": "Triaud et al. (2015), Monthly Notices of the Royal Astronomical Society 450 2279-2290",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TRIAUD_ET_AL__2015): st_teff 4143, st_rad 0.586, st_mass 0.577"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-80",
+        "url": "https://en.wikipedia.org/wiki/WASP-80",
+        "label": "Wikipedia, \"WASP-80\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370791730",
+        "quote": "The star's age is much younger than the Sun's at 1.352±0.222 billion years."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

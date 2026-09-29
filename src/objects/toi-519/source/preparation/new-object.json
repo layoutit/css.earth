@@ -1,0 +1,39 @@
+{
+  "id": "toi-519",
+  "name": "TOI-519",
+  "system": "TOI-519 system",
+  "description": "Star of 3,322 K, 116 parsecs away, with 1 transiting planet.",
+  "target": "TOI-519",
+  "gaia": "5707485527450614656",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75..713K/abstract",
+    "credit": "Kagetani et al. 2023"
+  },
+  "radius": {
+    "value": 0.35,
+    "source": "Kagetani et al. 2023, the stellar radius of the default parameter set of TOI-519 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75..713K/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.335,
+    "source": "Kagetani et al. 2023, the stellar mass of the default parameter set of TOI-519 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75..713K/abstract",
+    "uncertainty": 0.008
+  },
+  "temperature": {
+    "value": 3322,
+    "source": "Kagetani et al. 2023, the stellar temperature of the default parameter set of TOI-519 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023PASJ...75..713K/abstract",
+    "uncertainty": 49
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-519 b crosses TOI-519 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Kagetani et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KAGETANI_ET_AL_2023): st_teff 3322, st_rad 0.35, st_mass 0.335"
+  },
+  "notes": [],
+  "order": 4495
+}

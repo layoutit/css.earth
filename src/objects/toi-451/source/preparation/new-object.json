@@ -1,0 +1,39 @@
+{
+  "id": "toi-451",
+  "name": "TOI-451",
+  "system": "TOI-451 system",
+  "description": "Star of 5,490 K, 124 parsecs away, with 3 transiting planets.",
+  "target": "TOI-451",
+  "gaia": "4844691297067063424",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract",
+    "credit": "Barragán et al. 2026"
+  },
+  "radius": {
+    "value": 0.85,
+    "source": "Barragán et al. 2026, the stellar radius of the default parameter set of TOI-451 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.93,
+    "source": "Barragán et al. 2026, the stellar mass of the default parameter set of TOI-451 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 5490,
+    "source": "Barragán et al. 2026, the stellar temperature of the default parameter set of TOI-451 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract",
+    "uncertainty": 115
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "3 planets cross TOI-451 as seen from Earth: b, c, d.",
+    "introduction": "Its radius and temperature follow Barragán et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BARRAGAN_ET_AL_2026): st_teff 5490, st_rad 0.85, st_mass 0.93"
+  },
+  "notes": [],
+  "order": 4430
+}

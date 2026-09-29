@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "wolf-503b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Wolf 503 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 13030.5
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wolf-503b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Wolf 503 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 9205565,
+      "description": "Wolf 503 b was found in 2018 by K2 as it crossed its star.",
+      "systemName": "Wolf 503 system",
+      "order": 4860,
+      "context": {
+        "order": 4860
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1221668785549952000,
+        -618317535225025200,
+        -147322351694525340
+      ],
+      "presentationToReference": [
+        -0.8860753607522739,
+        -0.45360795830382084,
+        -0.09544776179233688,
+        -0.45102805961966635,
+        0.8912013023334628,
+        -0.0483107457493507,
+        -0.10697730835764273,
+        -0.00024265732817052276,
+        0.9942614327298303
+      ],
+      "orbitUpReference": [
+        0.45360795830382084,
+        -0.8912013023334628,
+        0.00024265732817052276
+      ],
+      "metersPerUnit": 42033.87096774193,
+      "bodyRadiusM": 13030500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "hat-p-26-arrival.webp",
+      "bytes": 28338,
+      "sha256": "a3baeaaaeee73e80bd4cf08e39fc2a660341a424fbb9b1130ce434c294d19886"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-26-lens-color.webp",
+      "bytes": 44,
+      "sha256": "460f395fdb613e67e6cec10ade7e7f0bf8048308b71565a98eddcb428ec228dd"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-26-limb-color@2x.webp",
+      "bytes": 100366,
+      "sha256": "c481a89a40291b08092f40e1394a182978bed51e6ceedda7b2338134081145dd"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-26-poles-color@2x.webp",
+      "bytes": 1340,
+      "sha256": "740286b71690ee59ac7c933cf3f8cad00a3910a01acf1c83caa9b818145e6f38"
+    },
+    {
+      "location": "public",
+      "filename": "hat-p-26-surface-color@2x.webp",
+      "bytes": 38,
+      "sha256": "2f0fb385ceaa8c6b5de68ecbde6264267da100fe14eecb613261dee22cb49ec0"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 376,
+      "sha256": "d69ea277aaad0e07828a9babc90875d65f78dedf15f9a8ca58aaa7ae5bc1e1ee"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 2174,
+      "sha256": "f3f9262e024594eb76c7c8d9512fa38add52b0ce8ccc2348647ce10ca148726d"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1407,
+      "sha256": "76d54e8d8dcc050bc400e9de212f05056509201e282f65828de1b21f3952830d"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 1339,
+      "sha256": "d8cc32ba980c1e9dbbae073ce573dfe4a0a18aa7b0c906de2e09f85f664d5a3e"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 352,
+      "sha256": "479d727fcceeb74c1be42a4e5095a38609614c09794bfa5ae7ee01b566ce0381"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 1049,
+      "sha256": "66c0c04ffd22c740222ddebc317863d5768b2d1ccb53a3e1620c4fa0acbd0d09"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 101,
+      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 444,
+      "sha256": "1fd8de36b01ca270a543fc26b3700a8cde05ba2e15f755a57da80acb47715871"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 503851,
+      "sha256": "596043f2921227bea5df7afbad70adf3e984725962da1d9feb5ad82aad3b3e55"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 393380,
+      "sha256": "93b8d393b8320524c38928bba08b860858ece8f0cd957ee8c54995135eb57a9d"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1205,
+      "sha256": "829a707f8e9b12cf3fcb3d674dd8899cfe52e8ad30d89bd8946e5fb140b087ac"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1740,
+      "sha256": "b57e055b8c16f25c918a9bcc312a5602840c21d28ecb47fb105b3f4be251f40b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1174,
+      "sha256": "828db7f3d87798088703f4fc8badc7571a59fa91d5c1dd4bc879cf382a5ef339"
+    }
+  ]
+}

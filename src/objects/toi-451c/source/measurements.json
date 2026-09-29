@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-451c",
+  "radiusKm": 18687.8,
+  "radiusSource": "Radius 0.26139754 Jupiter radii from Barragán et al. 2026 (2026MNRAS.546ag087B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract): 18,687.8 km at 71,492 km per Jupiter radius. GM from the mass 0.0116415 Jupiter masses (Barragán et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.546ag087B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 9.192463,
+  "orbitalPeriodSource": "Barragán et al. 2026 (2026MNRAS.546ag087B), via the NASA Exoplanet Archive ps table (pl_refname BARRAGAN_ET_AL_2026): P 9.192463 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-451 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.0116415 Jupiter masses: Barragán et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026MNRAS.546ag087B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract)."
+}

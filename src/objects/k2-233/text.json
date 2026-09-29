@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-233",
+  "card": {
+    "text": "2 planets cross K2-233 as seen from Earth: b, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1139",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B/abstract",
+        "label": "Barragán et al. (2023), Monthly Notices of the Royal Astronomical Society 522 3458-3471",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARRAG_AMP_AACUTE_N_ET_AL__2023): st_teff 4796, st_rad 0.71, st_mass 0.79"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Barragán et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad1139",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B/abstract",
+        "label": "Barragán et al. (2023), Monthly Notices of the Royal Astronomical Society 522 3458-3471",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARRAG_AMP_AACUTE_N_ET_AL__2023): st_teff 4796, st_rad 0.71, st_mass 0.79"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

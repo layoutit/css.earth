@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "mascara-4",
+  "angularDiameterMas": 0.1,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,245,303 km at 168.25 pc = 0.1 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 168.24669153284663,
+  "distanceSource": "Gaia DR3 parallax 5.9437 +/- 0.0170 mas (same row, RUWE 0.81): 168.25 pc, no zero-point correction",
+  "radiusKm": 1245303,
+  "radiusSource": "Radius 1.79 +/- 0.04 solar radii from Zhang et al. 2022, the stellar radius of the default parameter set of MASCARA-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract): 1,245,303 km at 695,700 km per solar radius. Mass 1.75 +/- 0.05 solar masses from Zhang et al. 2022, the stellar mass of the default parameter set of MASCARA-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract); GM is that mass times the JPL solar GM. Temperature 7800 +/- 200 K from Zhang et al. 2022, the stellar temperature of the default parameter set of MASCARA-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 7800,
+  "effectiveTemperatureSource": "Zhang et al. 2022, the stellar temperature of the default parameter set of MASCARA-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract)",
+  "surfaceGravityLogg": 4.18,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/mascara-4.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.175, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

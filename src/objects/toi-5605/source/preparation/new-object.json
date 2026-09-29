@@ -1,0 +1,32 @@
+{
+  "id": "toi-5605",
+  "name": "TOI-5605",
+  "system": "TOI-5605 system",
+  "description": "Star of 4,584 K, 95.1 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5605",
+  "gaia": "827009013841732096",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.736044,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-5605 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 4583.79,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-5605 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5605 b crosses TOI-5605 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 4583.79, st_rad 0.736044"
+  },
+  "notes": [],
+  "order": 4537
+}

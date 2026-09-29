@@ -1,0 +1,39 @@
+{
+  "id": "toi-6109",
+  "name": "TOI-6109",
+  "system": "TOI-6109 system",
+  "description": "Star of 5,660 K, 152 parsecs away, with 2 transiting planets.",
+  "target": "TOI-6109",
+  "gaia": "241035596174886016",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+    "credit": "Dattilo et al. 2025"
+  },
+  "radius": {
+    "value": 1.021,
+    "source": "Dattilo et al. 2025, the stellar radius of the default parameter set of TOI-6109 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+    "uncertainty": 0.038
+  },
+  "mass": {
+    "value": 1.03,
+    "source": "Dattilo et al. 2025, the stellar mass of the default parameter set of TOI-6109 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+    "uncertainty": 0.05
+  },
+  "temperature": {
+    "value": 5660,
+    "source": "Dattilo et al. 2025, the stellar temperature of the default parameter set of TOI-6109 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-6109 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Dattilo et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DATTILO_ET_AL_2025): st_teff 5660, st_rad 1.021, st_mass 1.03"
+  },
+  "notes": [],
+  "order": 4613
+}

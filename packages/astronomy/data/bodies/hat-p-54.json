@@ -1,0 +1,30 @@
+{
+ "id": "hat-p-54",
+ "classification": "star",
+ "order": 3131,
+ "physical": {
+  "name": "HAT-P-54",
+  "horizonsCode": null,
+  "meanRadiusKm": 429246.9,
+  "gravitationalParameterKm3PerS2": 85599523827.0509,
+  "parent": null,
+  "effectiveTemperatureK": 4390
+ },
+ "physicalNotes": "Radius 0.617 +/- 0.013 solar radii from Bakos et al. 2015, the stellar radius of the default parameter set of HAT-P-54 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract): 429,247 km at 695,700 km per solar radius. Mass 0.645 +/- 0.02 solar masses from Bakos et al. 2015, the stellar mass of the default parameter set of HAT-P-54 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract); GM is that mass times the JPL solar GM. Temperature 4390 +/- 50 K from Bakos et al. 2015, the stellar temperature of the default parameter set of HAT-P-54 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 99.8979923524541,
+  "declinationDegrees": 25.482395944071126,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 143.46913074486815,
+  "properMotionRaMasPerYear": -0.027791966890128084,
+  "properMotionDecMasPerYear": -33.19434777027232,
+  "radialVelocityKmPerS": 30.001242,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3383298227579280640 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hat-p-54/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 6.9701 +/- 0.0174 mas (same row, RUWE 1.04): 143.47 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -0.028, -33.194 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 30.00 +/- 1.21 km/s"
+  }
+ }
+}

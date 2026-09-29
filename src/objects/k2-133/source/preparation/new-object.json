@@ -1,0 +1,39 @@
+{
+  "id": "k2-133",
+  "name": "K2-133",
+  "system": "K2-133 system",
+  "description": "Star of 3,655 K, 75.2 parsecs away, with 4 transiting planets.",
+  "target": "K2-133",
+  "gaia": "148080473682357376",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract",
+    "credit": "Wells et al. 2019"
+  },
+  "radius": {
+    "value": 0.455,
+    "source": "Wells et al. 2019, the stellar radius of the default parameter set of K2-133 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract",
+    "uncertainty": 0.022
+  },
+  "mass": {
+    "value": 0.461,
+    "source": "Wells et al. 2019, the stellar mass of the default parameter set of K2-133 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract",
+    "uncertainty": 0.011
+  },
+  "temperature": {
+    "value": 3655,
+    "source": "Wells et al. 2019, the stellar temperature of the default parameter set of K2-133 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract",
+    "uncertainty": 80
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "4 planets cross K2-133 as seen from Earth: b, c, d, e.",
+    "introduction": "Its radius and temperature follow Wells et al. 2019.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname WELLS_ET_AL__2019): st_teff 3655, st_rad 0.455, st_mass 0.461"
+  },
+  "notes": [],
+  "order": 3303
+}

@@ -1,0 +1,40 @@
+{
+  "id": "hd-275354-b",
+  "name": "HD 275354B",
+  "system": "TOI-6038 system",
+  "description": "Star bound to TOI-6038 A, 3,183 AU away.",
+  "gaia": "237640407346341376",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.896,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 194736419 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.054
+  },
+  "mass": {
+    "value": 0.859,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 194736419 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.102
+  },
+  "temperature": {
+    "value": 5109.7,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 194736419 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 117.2
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HD 275354B is a star of 5,110 K, bound to TOI-6038 A 3,183 AU away.",
+    "introduction": "HD 275354B shares its motion through space with TOI-6038 A, 3,183 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 237640407346340736 and 237640407346341376, sep_AU 3183.310655335887532, R_chance_align 5.202260737715233438e-05"
+  },
+  "notes": [
+    "HD 275354B's orbit around TOI-6038 A is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 4605
+}

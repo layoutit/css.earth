@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-715",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 166,968 km at 42.53 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 42.53070703193344,
+  "distanceSource": "Gaia DR3 parallax 23.5124 +/- 0.0173 mas (same row, RUWE 1.01): 42.53 pc, no zero-point correction",
+  "radiusKm": 166968,
+  "radiusSource": "Radius 0.24 +/- 0.012 solar radii from Dransfield et al. 2024, the stellar radius of the default parameter set of TOI-715 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract): 166,968 km at 695,700 km per solar radius. Mass 0.225 +/- 0.012 solar masses from Dransfield et al. 2024, the stellar mass of the default parameter set of TOI-715 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract); GM is that mass times the JPL solar GM. Temperature 3075 +/- 75 K from Dransfield et al. 2024, the stellar temperature of the default parameter set of TOI-715 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3075,
+  "effectiveTemperatureSource": "Dransfield et al. 2024, the stellar temperature of the default parameter set of TOI-715 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract)",
+  "surfaceGravityLogg": 5.03,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-715.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.030, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

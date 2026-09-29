@@ -1,0 +1,28 @@
+{
+ "id": "toi-1696b",
+ "classification": "exoplanet",
+ "order": 3036,
+ "physical": {
+  "name": "TOI-1696 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 19708.3,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-1696"
+ },
+ "physicalNotes": "Radius 0.27567181 Jupiter radii from Mori et al. 2022 (2022AJ....163..298M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract): 19,708.3 km at 71,492 km per Jupiter radius. No mass is measured: Mori et al. 2022 (2022AJ....163..298M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract) gives only an upper limit of 0.15354197 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.500311,
+  "semiMajorAxisStellarRadii": 17.745,
+  "inclinationDegrees": 88.461,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58833.70115,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Mori et al. 2022 (2022AJ....163..298M), via the NASA Exoplanet Archive ps table (pl_refname MORI_ET_AL__2022): P 2.500311 d",
+   "shape": "Mori et al. 2022 (2022AJ....163..298M), via the NASA Exoplanet Archive ps table (pl_refname MORI_ET_AL__2022): a/R* derived from its semi-major axis 0.0229 au and stellar radius 0.2775 solar radii; Beard et al. 2022 (2022AJ....163..286B), via the NASA Exoplanet Archive ps table (pl_refname BEARD_ET_AL_2022): inclination 88.461 degrees",
+   "eccentricity": "Beard et al. 2022 (2022AJ....163..286B), via the NASA Exoplanet Archive ps table (pl_refname BEARD_ET_AL_2022): e 0",
+   "phase": "Mori et al. 2022 (2022AJ....163..298M), via the NASA Exoplanet Archive ps table (pl_refname MORI_ET_AL__2022): transit mid-time 2458834.20115 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "g-9-40b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "G 9-40 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 12118.4
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/g-9-40b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "G 9-40 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 5740802.5,
+      "description": "G 9-40 b was found in 2019 by K2 as it crossed its star.",
+      "systemName": "G 9-40 system",
+      "order": 3073,
+      "context": {
+        "order": 3073
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -563874559496175740,
+        569424105007436100,
+        308803223235044160
+      ],
+      "presentationToReference": [
+        -0.6685037822829973,
+        0.699350950134759,
+        0.253003837162476,
+        0.6510368287487754,
+        0.7147525392042297,
+        -0.25549922761887905,
+        0.35951876263425325,
+        0.006087384226075152,
+        0.9331180006125803
+      ],
+      "orbitUpReference": [
+        -0.699350950134759,
+        -0.7147525392042297,
+        -0.006087384226075152
+      ],
+      "metersPerUnit": 39091.6129032258,
+      "bodyRadiusM": 12118400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

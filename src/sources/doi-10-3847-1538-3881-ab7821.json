@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ab7821",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hartman et al. (2020): HATS-47b, HATS-48Ab, HATS-49b, and HATS-72b: Four Warm Giant Planets Transiting K Dwarfs*",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2002.05776"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ab7821"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020AJ....159..173H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ab7821",
+      "label": "The Astronomical Journal 159 173"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hartman et al. (2020), The Astronomical Journal 159 173",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H"
+    }
+  ],
+  "publisher": "The Astronomical Journal 159 173",
+  "creators": [
+    "J. D. Hartman",
+    "Andrés Jordán",
+    "D. Bayliss",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

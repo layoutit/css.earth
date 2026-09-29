@@ -1,0 +1,30 @@
+{
+ "id": "toi-2407",
+ "classification": "star",
+ "order": 4300,
+ "physical": {
+  "name": "TOI-2407",
+  "horizonsCode": null,
+  "meanRadiusKm": 394461.9,
+  "gravitationalParameterKm3PerS2": 72726417142.98279,
+  "parent": null,
+  "effectiveTemperatureK": 3530
+ },
+ "physicalNotes": "Radius 0.567 +/- 0.034 solar radii from Janó Muñoz et al. 2025, the stellar radius of the default parameter set of TOI-2407 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J/abstract): 394,462 km at 695,700 km per solar radius. Mass 0.548 +/- 0.016 solar masses from Janó Muñoz et al. 2025, the stellar mass of the default parameter set of TOI-2407 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J/abstract); GM is that mass times the JPL solar GM. Temperature 3530 +/- 100 K from Janó Muñoz et al. 2025, the stellar temperature of the default parameter set of TOI-2407 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 49.746547148880104,
+  "declinationDegrees": -46.458038642908186,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 92.20568176406681,
+  "properMotionRaMasPerYear": 10.868177671872687,
+  "properMotionDecMasPerYear": -98.28721644113027,
+  "radialVelocityKmPerS": 49.57148,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4847001302277419904 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-2407/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 10.8453 +/- 0.0120 mas (same row, RUWE 1.09): 92.21 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 10.868, -98.287 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 49.57 +/- 1.23 km/s"
+  }
+ }
+}

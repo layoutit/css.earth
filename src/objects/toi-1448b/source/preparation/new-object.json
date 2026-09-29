@@ -1,0 +1,24 @@
+{
+  "host": "toi-1448",
+  "planets": [
+    {
+      "id": "toi-1448b",
+      "name": "TOI-1448 b",
+      "description": "Transiting planet of TOI-1448 with a 8.11-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract",
+        "credit": "Hori et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HORI_ET_AL_2024"
+      },
+      "text": {
+        "card": "TOI-1448 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1448. Its orbit and size follow Hori et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HORI_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 8.112245, pl_radj 0.24524978, pl_bmassj 0.06135386"
+      },
+      "order": 4044
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+ "id": "toi-1224",
+ "classification": "star",
+ "order": 3954,
+ "physical": {
+  "name": "TOI-1224",
+  "horizonsCode": null,
+  "meanRadiusKm": 281062.8,
+  "gravitationalParameterKm3PerS2": 53084976016.77576,
+  "parent": null,
+  "effectiveTemperatureK": 3326
+ },
+ "physicalNotes": "Radius 0.404 +/- 0.012 solar radii from Thao et al. 2024, the stellar radius of the default parameter set of TOI-1224 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract): 281,063 km at 695,700 km per solar radius. Mass 0.4 +/- 0.01 solar masses from Thao et al. 2024, the stellar mass of the default parameter set of TOI-1224 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract); GM is that mass times the JPL solar GM. Temperature 3326 +/- 66 K from Thao et al. 2024, the stellar temperature of the default parameter set of TOI-1224 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 37.19797662402812,
+  "declinationDegrees": -80.89910153220916,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 37.27639684766106,
+  "properMotionRaMasPerYear": 159.9654532049238,
+  "properMotionDecMasPerYear": 27.171476467278282,
+  "radialVelocityKmPerS": 14.628054,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4620009665047355520 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1224/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 26.8266 +/- 0.0181 mas (same row, RUWE 1.48): 37.28 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): 159.965, 27.171 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 14.63 +/- 1.92 km/s"
+  }
+ }
+}

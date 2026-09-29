@@ -119,7 +119,7 @@ export function parseAgencies(input: unknown): Readonly<Record<string, Agency>> 
     return [id, Object.freeze({ ...base, src, assetUrl: explorationUrl(value.assetUrl), bytes })];
   })));
 }
-export function parseExplorationCatalog(input: unknown, agencies: Readonly<Record<string, Agency>>, sources: SourceResolver): ExplorationCatalog {
+export function parseExplorationCatalog(input: unknown, agencies: Readonly<Record<string, Agency>>, sources: SourceResolver | undefined): ExplorationCatalog {
   const value = explorationRecord(input, ['schema', 'facilities', 'missions']);
   if (value.schema !== 'cssearth-facility-catalog@4') throw new TypeError('Unsupported facility catalogue schema.');
   const refs = (raw: unknown) => {

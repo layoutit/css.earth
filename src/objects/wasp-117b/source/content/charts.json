@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-117b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-117b-orbits",
+      "title": "WASP-117 b: orbits around WASP-117",
+      "output": "wasp-117b-system-orbits.svg",
+      "system": "wasp-117",
+      "highlight": "wasp-117b",
+      "description": "The orbits of WASP-117's planets in this map from above, to scale, with WASP-117 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 10.02059320738 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "wasp-117b-transmission",
+      "title": "WASP-117 b: transmission spectrum",
+      "description": "WASP-117 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 18 measured bins from Anisman et al. 2020 (Hubble Space Telescope satellite, Wide Field Camera 3), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "wasp-117b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2020arXiv200908916A/abstract",
+        "table": "transitspec",
+        "bins": 18
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 18
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1,
+        "maximum": 1.75,
+        "ticks": [
+          1,
+          1.25,
+          1.5,
+          1.75
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 0.73,
+        "maximum": 0.77,
+        "ticks": [
+          0.73,
+          0.74,
+          0.75,
+          0.76,
+          0.77
+        ]
+      },
+      "notes": [
+        "Anisman et al. 2020",
+        "Hubble Space Telescope satellite, Wide Field Camera…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-117b-transit",
+      "title": "WASP-117 b: its transit",
+      "description": "WASP-117 b crossing its star, as TESS recorded it: 3 sectors (104, 105, 106) of the SPOC pipeline's 2-minute light curves of TIC 166739520, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 24-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-117b-transit.svg",
+      "metadata": {
+        "tic": "TIC 166739520",
+        "sectors": [
+          104,
+          105,
+          106
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-117b",
+      "sources": [
+        "photometry/tess/tess2026137223500-s0104-0000000166739520-0306-s_lc.fits",
+        "photometry/tess/tess2026164183000-s0105-0000000166739520-0307-s_lc.fits",
+        "photometry/tess/tess2026192185000-s0106-0000000166739520-0308-s_lc.fits"
+      ],
+      "durationHours": 5.94,
+      "binMinutes": 24,
+      "notes": [
+        "TESS 2-min SPOC · sectors 104, 105, 106",
+        "Folded on the app's orbit; 24-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

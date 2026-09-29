@@ -1,0 +1,39 @@
+{
+  "id": "k2-344",
+  "name": "K2-344",
+  "system": "K2-344 system",
+  "description": "Star of 4,374 K, 75.2 parsecs away, with 1 transiting planet.",
+  "target": "K2-344",
+  "gaia": "685235991691684352",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "credit": "de Leon et al. 2021"
+  },
+  "radius": {
+    "value": 0.49,
+    "source": "de Leon et al. 2021, the stellar radius of the default parameter set of K2-344 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.51,
+    "source": "de Leon et al. 2021, the stellar mass of the default parameter set of K2-344 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 4374,
+    "source": "de Leon et al. 2021, the stellar temperature of the default parameter set of K2-344 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+    "uncertainty": 38
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-344 b crosses K2-344 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow de Leon et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DE_LEON_ET_AL_2021): st_teff 4374, st_rad 0.49, st_mass 0.51"
+  },
+  "notes": [],
+  "order": 3519
+}

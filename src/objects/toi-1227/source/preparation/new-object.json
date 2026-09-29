@@ -1,0 +1,46 @@
+{
+  "id": "toi-1227",
+  "name": "TOI-1227",
+  "system": "TOI-1227 system",
+  "description": "Star of 3,072 K, 101 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1227",
+  "gaia": "5842480953772012928",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..156M/abstract",
+    "credit": "Mann et al. 2022"
+  },
+  "radius": {
+    "value": 0.56,
+    "source": "Mann et al. 2022, the stellar radius of the default parameter set of TOI-1227 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..156M/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.17,
+    "source": "Mann et al. 2022, the stellar mass of the default parameter set of TOI-1227 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..156M/abstract",
+    "uncertainty": 0.015
+  },
+  "temperature": {
+    "value": 3072,
+    "source": "Mann et al. 2022, the stellar temperature of the default parameter set of TOI-1227 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..156M/abstract",
+    "uncertainty": 74
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1227 b crosses TOI-1227 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mann et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MANN_ET_AL__2022): st_teff 3072, st_rad 0.56, st_mass 0.17",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-1227_b",
+      "title": "TOI-1227 b",
+      "revision": "1374087051",
+      "card": "TOI-1227 b is one of the youngest transiting exoplanets discovered, alongside K2-33b and HIP 67522 b.",
+      "introduction": "The exoplanet TOI-1227 b is 5–12 million years old and currently 9.6 R🜨 large."
+    }
+  },
+  "notes": [],
+  "order": 3957
+}

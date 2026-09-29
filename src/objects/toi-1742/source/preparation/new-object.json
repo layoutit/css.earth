@@ -1,0 +1,39 @@
+{
+  "id": "toi-1742",
+  "name": "TOI-1742",
+  "system": "TOI-1742 system",
+  "description": "Star of 5,815 K, 72.9 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1742",
+  "gaia": "1651818622174190208",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "credit": "MacDougall et al. 2023"
+  },
+  "radius": {
+    "value": 1.131,
+    "source": "MacDougall et al. 2023, the stellar radius of the default parameter set of TOI-1742 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.0181
+  },
+  "mass": {
+    "value": 1.0861,
+    "source": "MacDougall et al. 2023, the stellar mass of the default parameter set of TOI-1742 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 0.034
+  },
+  "temperature": {
+    "value": 5815,
+    "source": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1742 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract",
+    "uncertainty": 76
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1742 b crosses TOI-1742 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow MacDougall et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MACDOUGALL_ET_AL__2023): st_teff 5815, st_rad 1.131, st_mass 1.0861"
+  },
+  "notes": [],
+  "order": 4116
+}

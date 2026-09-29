@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "mascara-1b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.597 Jupiter radii from Hooton et al. 2022 (2022A&A...658A..75H), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "3.7 Jupiter masses: Talens et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017A&A...606A..73T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...606A..73T/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2017A&A...606A..73T/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.1425095 d; Hooton et al. 2022 (2022A&A...658A..75H), via the NASA Exoplanet Archive ps table (pl_refname HOOTON_ET_AL__2022): a/R* 4.1676; Hooton et al. 2022 (2022A&A...658A..75H), via the NASA Exoplanet Archive ps table (pl_refname HOOTON_ET_AL__2022): inclination 88.45 degrees; Hooton et al. 2022 (2022A&A...658A..75H), via the NASA Exoplanet Archive ps table (pl_refname HOOTON_ET_AL__2022): e 0.00034; Hooton et al. 2022 (2022A&A...658A..75H), via the NASA Exoplanet Archive ps table (pl_refname HOOTON_ET_AL__2022): omega -16 degrees, stored as 344; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460556.771408 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract"
+      ]
+    }
+  ]
+}

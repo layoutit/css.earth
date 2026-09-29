@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-715",
+  "card": {
+    "text": "HD 715 b crosses HD 715 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae9095",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract",
+        "label": "Venner et al. (2026), The Astronomical Journal 172 162",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname VENNER_ET_AL_2026): st_teff 6070, st_rad 2.5, st_mass 1.6"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Venner et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ae9095",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract",
+        "label": "Venner et al. (2026), The Astronomical Journal 172 162",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname VENNER_ET_AL_2026): st_teff 6070, st_rad 2.5, st_mass 1.6"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

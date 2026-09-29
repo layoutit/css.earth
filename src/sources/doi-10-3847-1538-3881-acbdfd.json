@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-acbdfd",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cherubim et al. (2023): TOI-1695 b: A Water World Orbiting an Early-M Dwarf in the Planet Radius Valley",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2211.06445"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/acbdfd"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023AJ....165..167C"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/acbdfd",
+      "label": "The Astronomical Journal 165 167"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cherubim et al. (2023), The Astronomical Journal 165 167",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..167C"
+    }
+  ],
+  "publisher": "The Astronomical Journal 165 167",
+  "creators": [
+    "Collin Cherubim",
+    "Ryan Cloutier",
+    "David Charbonneau",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

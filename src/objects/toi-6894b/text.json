@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6894b",
+  "card": {
+    "text": "TOI-6894 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-025-02552-4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+        "label": "Bryant et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BRYANT_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.37077196, pl_radj 0.855, pl_bmassj 0.168"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-6894. Its orbit and size follow Bryant et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-025-02552-4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract",
+        "label": "Bryant et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BRYANT_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.37077196, pl_radj 0.855, pl_bmassj 0.168"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

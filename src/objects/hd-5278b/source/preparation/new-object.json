@@ -1,0 +1,24 @@
+{
+  "host": "hd-5278",
+  "planets": [
+    {
+      "id": "hd-5278b",
+      "name": "HD 5278 b",
+      "description": "Transiting planet of HD 5278 with a 14.3-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...648A..75S/abstract",
+        "credit": "Sozzetti et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SOZZETTI_ET_AL__2021"
+      },
+      "text": {
+        "card": "HD 5278 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HD 5278. Its orbit and size follow Sozzetti et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SOZZETTI_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 14.33913866687, pl_radj 0.21857474, pl_bmassj 0.02454154"
+      },
+      "order": 3225
+    }
+  ]
+}

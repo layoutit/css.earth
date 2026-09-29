@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad53bf",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Galarza et al. (2024): TOI-1173 A b: The First Inflated Super-Neptune in a Wide Binary System",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2403.06240"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad53bf"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....168...91G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad53bf",
+      "label": "The Astronomical Journal 168 91"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Galarza et al. (2024), The Astronomical Journal 168 91",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...91G"
+    }
+  ],
+  "publisher": "The Astronomical Journal 168 91",
+  "creators": [
+    "Jhon Yana Galarza",
+    "Thiago Ferreira",
+    "Diego Lorenzo-Oliveira",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

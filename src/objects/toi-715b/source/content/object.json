@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-715b",
+  "displayName": "TOI-715 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.6 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad1439",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D",
+          "label": "Dransfield et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "19.3 days",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stad1439",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D",
+          "label": "Dransfield et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "3.0 Earth masses (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-715; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-715b-lens-shape.webp",
+        "surface": "toi-715b-surface-shape@2x.webp",
+        "poles": "toi-715b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-715b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-715 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-715's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-715b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-715b/toi-715b-system-orbits.svg",
+      "alt": "The orbits of TOI-715's planets in this map from above, to scale, with TOI-715 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-715b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D"
+      }
+    },
+    {
+      "id": "toi-715b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-715b/toi-715b-transit.svg",
+      "alt": "TOI-715 b crossing its star, as TESS recorded it: 3 sectors (96, 97, 98) of the SPOC pipeline's 2-minute light curves of TIC 271971130, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 8 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 12 minutes at these dates, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-715b-tess-sector-96",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025232030459-s0096-0000000271971130-0293-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Dransfield et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract",
+      "credit": "Dransfield et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-715b.json",
+      "credit": "Radius from Dransfield et al. 2024 (2024MNRAS.527...35D), via the NASA Exoplanet Archive; mass from the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive; orbit from Dransfield et al. 2024 (2024MNRAS.527...35D), via the NASA Exoplanet Archive"
+    }
+  }
+}

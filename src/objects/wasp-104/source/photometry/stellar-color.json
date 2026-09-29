@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "wasp-104",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5475,
+      "lowerKelvin": 5348,
+      "upperKelvin": 5602,
+      "citation": "Smith et al. 2014, the stellar temperature of the default parameter set of WASP-104 b in the NASA Exoplanet Archive: 5475 +/- 127 K, https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

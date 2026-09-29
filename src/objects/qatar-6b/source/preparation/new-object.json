@@ -1,0 +1,24 @@
+{
+  "host": "qatar-6",
+  "planets": [
+    {
+      "id": "qatar-6b",
+      "name": "Qatar-6 b",
+      "description": "Transiting planet of Qatar-6 with a 3.51-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract",
+        "credit": "Alsubai et al. 2018"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ALSUBAI_ET_AL__2018"
+      },
+      "text": {
+        "card": "Qatar-6 b was found in 2017 by Qatar as it crossed its star.",
+        "introduction": "It is the only planet known around Qatar-6. Its orbit and size follow Alsubai et al. 2018's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ALSUBAI_ET_AL__2018): disc_year 2017, disc_facility Qatar, sy_pnum 1; pl_orbper 3.50616494168, pl_radj 1.062, pl_bmassj 0.668"
+      },
+      "order": 3853
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-25",
+  "card": {
+    "text": "K2-25 b crosses K2-25 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abb13a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract",
+        "label": "Stefansson et al. (2020), The Astronomical Journal 160 192",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STEFANSSON_ET_AL__2020): st_teff 3207, st_rad 0.2932, st_mass 0.2634"
+      },
+      {
+        "catalogueId": "wikipedia-k2-25",
+        "url": "https://en.wikipedia.org/wiki/K2-25",
+        "label": "Wikipedia, \"K2-25\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370531720",
+        "quote": "K2-25 is a young red dwarf star located in the Hyades cluster."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stefansson et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abb13a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract",
+        "label": "Stefansson et al. (2020), The Astronomical Journal 160 192",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STEFANSSON_ET_AL__2020): st_teff 3207, st_rad 0.2932, st_mass 0.2634"
+      },
+      {
+        "catalogueId": "wikipedia-k2-25",
+        "url": "https://en.wikipedia.org/wiki/K2-25",
+        "label": "Wikipedia, \"K2-25\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370531720",
+        "quote": "There is a single known Neptune-sized planet in a 3.5 day orbit."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

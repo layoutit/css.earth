@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-4438",
+  "angularDiameterMas": 0.11,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 253,931 km at 30.06 pc = 0.11 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 30.062386430128818,
+  "distanceSource": "Gaia DR3 parallax 33.2642 +/- 0.0154 mas (same row, RUWE 1.32): 30.06 pc, no zero-point correction",
+  "radiusKm": 253930.5,
+  "radiusSource": "Radius 0.365 +/- 0.012 solar radii from Serrano Bell et al. 2026, the stellar radius of the default parameter set of TOI-4438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract): 253,931 km at 695,700 km per solar radius. Mass 0.345 +/- 0.018 solar masses from Serrano Bell et al. 2026, the stellar mass of the default parameter set of TOI-4438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract); GM is that mass times the JPL solar GM. Temperature 3501 +/- 70 K from Serrano Bell et al. 2026, the stellar temperature of the default parameter set of TOI-4438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3501,
+  "effectiveTemperatureSource": "Serrano Bell et al. 2026, the stellar temperature of the default parameter set of TOI-4438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "surfaceGravityLogg": 4.85,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4438.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.851, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

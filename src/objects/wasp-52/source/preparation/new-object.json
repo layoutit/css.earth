@@ -1,0 +1,46 @@
+{
+  "id": "wasp-52",
+  "name": "WASP-52",
+  "system": "WASP-52 system",
+  "description": "Star of 5,000 K, 175 parsecs away, with 1 transiting planet.",
+  "target": "WASP-52",
+  "gaia": "2666015878575546496",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract",
+    "credit": "Hebrard et al. 2013"
+  },
+  "radius": {
+    "value": 0.79,
+    "source": "Hebrard et al. 2013, the stellar radius of the default parameter set of WASP-52 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.87,
+    "source": "Hebrard et al. 2013, the stellar mass of the default parameter set of WASP-52 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 5000,
+    "source": "Hebrard et al. 2013, the stellar temperature of the default parameter set of WASP-52 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-52 b crosses WASP-52 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hebrard et al. 2013.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HEBRARD_ET_AL__2013): st_teff 5000, st_rad 0.79, st_mass 0.87",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-52",
+      "title": "WASP-52",
+      "revision": "1374437761",
+      "card": "WASP-52, also named Anadolu, is a K-type main-sequence star about 570 light-years away in the constellation Pegasus.",
+      "introduction": "It is older than the Sun at 10.7+1.9−4.5 billion years, but it has a similar fraction of heavy elements."
+    }
+  },
+  "notes": [],
+  "order": 4822
+}

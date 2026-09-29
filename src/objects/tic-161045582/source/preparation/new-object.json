@@ -1,0 +1,32 @@
+{
+  "id": "tic-161045582",
+  "name": "TIC 161045582",
+  "system": "TIC 161045582 system",
+  "description": "Star of 5,684 K, 162 parsecs away, with 1 transiting planet.",
+  "target": "TIC 161045582",
+  "gaia": "1590822939745962240",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 1.07976,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TIC 161045582 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5683.87,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 161045582 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TIC 161045582 b crosses TIC 161045582 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 5683.87, st_rad 1.07976"
+  },
+  "notes": [],
+  "order": 3866
+}

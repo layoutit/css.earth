@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5795",
+  "card": {
+    "text": "TOI-5795 b crosses TOI-5795 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202556081",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+        "label": "Manni et al. (2025), Astronomy & Astrophysics 701 A230",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANNI_ET_AL_2025): st_teff 5715, st_rad 1.082, st_mass 0.901"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Manni et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202556081",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+        "label": "Manni et al. (2025), Astronomy & Astrophysics 701 A230",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANNI_ET_AL_2025): st_teff 5715, st_rad 1.082, st_mass 0.901"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

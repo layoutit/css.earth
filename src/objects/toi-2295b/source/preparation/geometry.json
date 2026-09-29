@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "toi-2295b",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/toi-2295b/toi-2295b-surface-shape@2x.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/toi-2295b/toi-2295b-poles-shape@2x.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#a29895"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 0,
+    "interiorSeamBleed": 8,
+    "overlap": 0.015625,
+    "seamOutset": {
+      "targetPixels": 0.5,
+      "stepRatio": 1.4142135623730951,
+      "hysteresis": 0.1,
+      "firstDiameter": 16,
+      "lastDiameter": 32768
+    },
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0.5,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "csstoi-2295b-prepared-runtime-scene@1",
+    "materialSchema": "csstoi-2295b-prepared-lighting@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 0,
+      "sourceProjection": "no observation: the shared neutral gray of an unresolved surface on the reference sphere",
+      "polarPreparation": "the same gray on the polar tiles",
+      "axialTiltNote": "no obliquity or spin of this planet is measured; the display axis is the orbit normal and nothing turns"
+    }
+  }
+}

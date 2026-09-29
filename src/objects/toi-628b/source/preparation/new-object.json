@@ -1,0 +1,31 @@
+{
+  "host": "toi-628",
+  "planets": [
+    {
+      "id": "toi-628b",
+      "name": "TOI-628 b",
+      "description": "Transiting planet of TOI-628 with a 3.41-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract",
+        "credit": "Rodriguez et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "RODRIGUEZ_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-628 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-628. Its orbit and size follow Rodriguez et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RODRIGUEZ_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.4095675, pl_radj 1.06, pl_bmassj 6.33",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-628_b",
+          "title": "TOI-628 b",
+          "revision": "1374392647",
+          "card": "TOI-628 b is an exoplanet whose mass is 6.33 times that of Jupiter.",
+          "introduction": "It has an orbital period of 3.4 days and was discovered by TESS in January 2021."
+        }
+      },
+      "order": 4627
+    }
+  ]
+}

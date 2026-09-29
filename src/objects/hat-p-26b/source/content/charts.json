@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/hat-p-26b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "hat-p-26b-orbits",
+      "title": "HAT-P-26 b: orbits around HAT-P-26",
+      "output": "hat-p-26b-system-orbits.svg",
+      "system": "hat-p-26",
+      "highlight": "hat-p-26b",
+      "description": "The orbits of HAT-P-26's planets in this map from above, to scale, with HAT-P-26 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.2345002 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "hat-p-26b-transmission",
+      "title": "HAT-P-26 b: transmission spectrum",
+      "description": "HAT-P-26 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 23 measured bins from Stevenson et al. 2016 (Magellan II Landon Clay Telescope, LDSS-3C), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "hat-p-26b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2016ApJ...817..141S/abstract",
+        "table": "transitspec",
+        "bins": 23
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 23
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0.6,
+        "maximum": 1.2,
+        "ticks": [
+          0.6,
+          0.8,
+          1,
+          1.2
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 0.3,
+        "maximum": 0.6,
+        "ticks": [
+          0.3,
+          0.4,
+          0.5,
+          0.6
+        ]
+      },
+      "notes": [
+        "Stevenson et al. 2016",
+        "Magellan II Landon Clay Telescope, LDSS-3C",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "hat-p-26b-transit",
+      "title": "HAT-P-26 b: its transit",
+      "description": "HAT-P-26 b crossing its star, as TESS recorded it: 1 sector (50) of the SPOC pipeline's 2-minute light curves of TIC 420779000, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "output": "hat-p-26b-transit.svg",
+      "metadata": {
+        "tic": "TIC 420779000",
+        "sectors": [
+          50
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "hat-p-26b",
+      "sources": [
+        "photometry/tess/tess2022085151738-s0050-0000000420779000-0222-s_lc.fits"
+      ],
+      "durationHours": 2.4552,
+      "binMinutes": 10,
+      "notes": [
+        "TESS 2-min SPOC · sector 50",
+        "Folded on the app's orbit; 10-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-4666",
+  "name": "TOI-4666",
+  "system": "TOI-4666 system",
+  "description": "Star of 3,793 K, 155 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4666",
+  "gaia": "4855422771071903232",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+    "credit": "Dransfield et al. 2026"
+  },
+  "radius": {
+    "value": 0.585,
+    "source": "Dransfield et al. 2026, the stellar radius of the default parameter set of TOI-4666 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+    "uncertainty": 0.018
+  },
+  "mass": {
+    "value": 0.576,
+    "source": "Dransfield et al. 2026, the stellar mass of the default parameter set of TOI-4666 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+    "uncertainty": 0.012
+  },
+  "temperature": {
+    "value": 3793,
+    "source": "Dransfield et al. 2026, the stellar temperature of the default parameter set of TOI-4666 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract",
+    "uncertainty": 80
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4666 b crosses TOI-4666 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Dransfield et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DRANSFIELD_ET_AL_2026): st_teff 3793, st_rad 0.585, st_mass 0.576"
+  },
+  "notes": [],
+  "order": 4459
+}

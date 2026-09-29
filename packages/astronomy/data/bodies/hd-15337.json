@@ -1,0 +1,30 @@
+{
+ "id": "hd-15337",
+ "classification": "star",
+ "order": 3169,
+ "physical": {
+  "name": "HD 15337",
+  "horizonsCode": null,
+  "meanRadiusKm": 594823.5,
+  "gravitationalParameterKm3PerS2": 110018612794.76773,
+  "parent": null,
+  "effectiveTemperatureK": 5131
+ },
+ "physicalNotes": "Radius 0.855 +/- 0.008 solar radii from Rosário et al. 2024, the stellar radius of the default parameter set of HD 15337 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract): 594,824 km at 695,700 km per solar radius. Mass 0.829 +/- 0.038 solar masses from Rosário et al. 2024, the stellar mass of the default parameter set of HD 15337 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract); GM is that mass times the JPL solar GM. Temperature 5131 +/- 74 K from Rosário et al. 2024, the stellar temperature of the default parameter set of HD 15337 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 36.86787306156828,
+  "declinationDegrees": -27.636146588987362,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 44.858800404207244,
+  "properMotionRaMasPerYear": -73.58053456241788,
+  "properMotionDecMasPerYear": -211.9354677035051,
+  "radialVelocityKmPerS": -3.8747983,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5068777809824976256 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-15337/source/photometry/gaia-dr3-source.csv; cross-identification HD 15337, HIP 11433: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5068777809824976256",
+   "distance": "Gaia DR3 parallax 22.2922 +/- 0.0160 mas (same row, RUWE 0.89): 44.86 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -73.581, -211.935 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -3.87 +/- 0.15 km/s"
+  }
+ }
+}

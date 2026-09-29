@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-421c",
+  "card": {
+    "text": "TOI-421 c was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348584",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.301K/abstract",
+        "label": "Krenn et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KRENN_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 16.067541, pl_radj 0.45410017, pl_bmassj 0.04436356"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-421. Its orbit and size follow Krenn et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202348584",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...686A.301K/abstract",
+        "label": "Krenn et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KRENN_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 16.067541, pl_radj 0.45410017, pl_bmassj 0.04436356"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

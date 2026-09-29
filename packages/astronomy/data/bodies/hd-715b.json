@@ -1,0 +1,31 @@
+{
+ "id": "hd-715b",
+ "classification": "exoplanet",
+ "order": 3232,
+ "physical": {
+  "name": "HD 715 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 76496.4,
+  "gravitationalParameterKm3PerS2": 80445947.76,
+  "parent": "hd-715"
+ },
+ "physicalNotes": "Radius 1.07 Jupiter radii from Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract): 76,496.4 km at 71,492 km per Jupiter radius. GM from the mass 0.635 Jupiter masses (Venner et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026AJ....172..162V), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026AJ....172..162V/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 56.4,
+  "semiMajorAxisStellarRadii": 28.9,
+  "inclinationDegrees": 88.91,
+  "eccentricity": 0.21,
+  "argumentOfPeriapsisDegrees": 196,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 60231.0482,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): P 56.4 d",
+   "shape": "Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): a/R* 28.9; Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): inclination 88.91 degrees",
+   "eccentricity": "Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): e 0.21",
+   "argumentOfPeriapsis": "Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): omega 196 degrees",
+   "phase": "Venner et al. 2026 (2026AJ....172..162V), via the NASA Exoplanet Archive ps table (pl_refname VENNER_ET_AL_2026): transit mid-time 2460231.5482 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3830 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "toi-1266b",
+ "classification": "exoplanet",
+ "order": 3989,
+ "physical": {
+  "name": "TOI-1266 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 16072.8,
+  "gravitationalParameterKm3PerS2": 1777757.9,
+  "parent": "toi-1266"
+ },
+ "physicalNotes": "Radius 0.22481973 Jupiter radii from Greklek-McKeon et al. 2025 (2025AJ....169..292G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract): 16,072.8 km at 71,492 km per Jupiter radius. GM from the mass 0.01403273 Jupiter masses (Greklek-McKeon et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....169..292G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.894841,
+  "semiMajorAxisStellarRadii": 35.97,
+  "inclinationDegrees": 89.13,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59660.14605,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Cloutier et al. 2024 (2024MNRAS.527.5464C), via the NASA Exoplanet Archive ps table (pl_refname CLOUTIER_ET_AL__2024): P 10.894841 d",
+   "shape": "Greklek-McKeon et al. 2025 (2025AJ....169..292G), via the NASA Exoplanet Archive ps table (pl_refname GREKLEK_MCKEON_ET_AL_2025): a/R* 35.97; Greklek-McKeon et al. 2025 (2025AJ....169..292G), via the NASA Exoplanet Archive ps table (pl_refname GREKLEK_MCKEON_ET_AL_2025): inclination 89.13 degrees",
+   "eccentricity": "Stefánsson et al. 2020 (2020AJ....160..259S), via the NASA Exoplanet Archive ps table (pl_refname STEF_AACUTE_NSSON_ET_AL__2020): e 0",
+   "phase": "Cloutier et al. 2024 (2024MNRAS.527.5464C), via the NASA Exoplanet Archive ps table (pl_refname CLOUTIER_ET_AL__2024): transit mid-time 2459660.64605 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

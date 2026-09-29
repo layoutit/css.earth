@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-132c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.1642433 Jupiter radii from Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.01969616 Jupiter masses: Grieves et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...693A.144G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive ps table (pl_refname GRIEVES_ET_AL__2025): P 1.01153624 d; Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive ps table (pl_refname GRIEVES_ET_AL__2025): a/R* derived from its semi-major axis 0.01833 au and stellar radius 0.758 solar radii; Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive ps table (pl_refname GRIEVES_ET_AL__2025): inclination 88.82 degrees; Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive ps table (pl_refname GRIEVES_ET_AL__2025): e 0; Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive ps table (pl_refname GRIEVES_ET_AL__2025): transit mid-time 2458597.57584 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+ "id": "lhs-1478",
+ "classification": "star",
+ "order": 3806,
+ "physical": {
+  "name": "LHS 1478",
+  "horizonsCode": null,
+  "meanRadiusKm": 171281.3,
+  "gravitationalParameterKm3PerS2": 30537132453.65025,
+  "parent": null,
+  "effectiveTemperatureK": 3415
+ },
+ "physicalNotes": "Radius 0.2462 +/- 0.008 solar radii from August et al. 2025, the stellar radius of the default parameter set of LHS 1478 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract): 171,281 km at 695,700 km per solar radius. Mass 0.2301 +/- 0.0054 solar masses from August et al. 2025, the stellar mass of the default parameter set of LHS 1478 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract); GM is that mass times the JPL solar GM. Temperature 3415 +/- 82 K from August et al. 2025, the stellar temperature of the default parameter set of LHS 1478 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 44.339286532301905,
+  "declinationDegrees": 76.55134902167823,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 18.21372557633238,
+  "properMotionRaMasPerYear": 690.9197545650943,
+  "properMotionDecMasPerYear": -399.8937562024991,
+  "radialVelocityKmPerS": 69.787834,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 549007291282705024 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/lhs-1478/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 54.9036 +/- 0.0177 mas (same row, RUWE 1.26): 18.21 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 690.920, -399.894 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 69.79 +/- 0.27 km/s"
+  }
+ }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "kepler-78-b",
+  "name": "Kepler-78B",
+  "system": "Kepler-78 system",
+  "description": "Star bound to Kepler-78, 921 AU away.",
+  "gaia": "2078373642781135744",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.306,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 270701666 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.283,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 270701666 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3369,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 270701666 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Kepler-78B is a star of 3,369 K, bound to Kepler-78 921 AU away.",
+    "introduction": "Kepler-78B shares its motion through space with Kepler-78, 921 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 2078373642776670080 and 2078373642781135744, sep_AU 921.447671144207106, R_chance_align 1.522077568372052944e-05"
+  },
+  "notes": [
+    "Kepler-78B's orbit around Kepler-78 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 2078373642781135744 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 40,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%202078373642781135744"
+  },
+  "order": 3785
+}

@@ -1,0 +1,46 @@
+{
+  "id": "toi-178",
+  "name": "TOI-178",
+  "system": "TOI-178 system",
+  "description": "Star of 4,316 K, 62.7 parsecs away, with 6 transiting planets.",
+  "target": "TOI-178",
+  "gaia": "2318295979126499200",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract",
+    "credit": "Leleu et al. 2024"
+  },
+  "radius": {
+    "value": 0.662,
+    "source": "Leleu et al. 2024, the stellar radius of the default parameter set of TOI-178 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.647,
+    "source": "Leleu et al. 2024, the stellar mass of the default parameter set of TOI-178 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 4316,
+    "source": "Leleu et al. 2024, the stellar temperature of the default parameter set of TOI-178 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "6 planets cross TOI-178 as seen from Earth: b, c, d, e, f, g.",
+    "introduction": "Its radius and temperature follow Leleu et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LELEU_ET_AL__2024): st_teff 4316, st_rad 0.662, st_mass 0.647",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-178",
+      "title": "TOI-178",
+      "revision": "1374438915",
+      "card": "TOI-178 is a K-type main-sequence star with six known exoplanets.",
+      "introduction": "It is in the constellation Sculptor."
+    }
+  },
+  "notes": [],
+  "order": 4149
+}

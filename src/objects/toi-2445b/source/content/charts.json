@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-2445b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-2445b-orbits",
+      "title": "TOI-2445 b: orbits around TOI-2445",
+      "output": "toi-2445b-system-orbits.svg",
+      "system": "toi-2445",
+      "highlight": "toi-2445b",
+      "description": "The orbits of TOI-2445's planets in this map from above, to scale, with TOI-2445 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Giacalone et al. 2022 (2022AJ....163...99G), via the NASA Exoplanet Archive ps table (pl_refname GIACALONE_ET_AL__2022): P 0.3711281 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-2445b-transit",
+      "title": "TOI-2445 b: its transit",
+      "description": "TOI-2445 b crossing its star, as TESS recorded it: 2 sectors (4, 31) of the SPOC pipeline's 2-minute light curves of TIC 439867639, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-2445b-transit.svg",
+      "metadata": {
+        "tic": "TIC 439867639",
+        "sectors": [
+          4,
+          31
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-2445b",
+      "sources": [
+        "photometry/tess/tess2018292075959-s0004-0000000439867639-0124-s_lc.fits",
+        "photometry/tess/tess2020294194027-s0031-0000000439867639-0198-s_lc.fits"
+      ],
+      "durationHours": 0.4918187,
+      "binMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 4, 31",
+        "Folded on the app's orbit; 4-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "iras-04125-2902b",
+  "card": {
+    "text": "IRAS 04125+2902 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-024-08123-3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+        "label": "Barber et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARBER_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 8.834978, pl_radj 0.958, pl_bmassj 0.254"
+      },
+      {
+        "catalogueId": "wikipedia-iras-04125-2902-b",
+        "url": "https://en.wikipedia.org/wiki/IRAS_04125%2B2902_b",
+        "label": "Wikipedia, \"IRAS 04125+2902 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1339486124",
+        "quote": "IRAS 04125+2902 b, also known as TIDYE-1b, is an extremely young exoplanet orbiting the young protostar IRAS 04125+2902 approximately 520 light-years from Earth in the constellation of Taurus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around IRAS 04125+2902. Its orbit and size follow Barber et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-024-08123-3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract",
+        "label": "Barber et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARBER_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 8.834978, pl_radj 0.958, pl_bmassj 0.254"
+      },
+      {
+        "catalogueId": "wikipedia-iras-04125-2902-b",
+        "url": "https://en.wikipedia.org/wiki/IRAS_04125%2B2902_b",
+        "label": "Wikipedia, \"IRAS 04125+2902 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1339486124",
+        "quote": "It is the youngest transiting exoplanet so far discovered, with an age of just three million years."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

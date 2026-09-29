@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/gj-486b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "gj-486b-orbits",
+      "title": "GJ 486 b: orbits around GJ 486",
+      "output": "gj-486b-system-orbits.svg",
+      "system": "gj-486",
+      "highlight": "gj-486b",
+      "description": "The orbits of GJ 486's planets in this map from above, to scale, with GJ 486 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive ps table (pl_refname WEINER_MANSFIELD_ET_AL__2024): P 1.46712127 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "gj-486b-transmission",
+      "title": "GJ 486 b: transmission spectrum",
+      "description": "GJ 486 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 203 measured bins from Moran et al. 2023 (NASA 6.5m James Webb Space Telescope (JWST) Satellite Mission, Near Infrared Spectrograph (NIRSpec) - FIREFLy pipeline; NASA 6.5m James Webb Space Telescope (JWST) Satellite Mission, Near Infrared Spectrograph (NIRSpec) - Tiberius pipeline; NASA 6.5m James Webb Space Telescope (JWST) Satellite Mission, Near Infrared Spectrograph (NIRSpec) - Eureka! pipeline), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "gj-486b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2023arXiv230500868M/abstract",
+        "table": "transitspec",
+        "bins": 203
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 203
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 2,
+        "maximum": 6,
+        "ticks": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 0.12,
+        "maximum": 0.16,
+        "ticks": [
+          0.12,
+          0.13,
+          0.14,
+          0.15,
+          0.16
+        ]
+      },
+      "notes": [
+        "Moran et al. 2023",
+        "NASA 6.5m James Webb Space Telescope (JWST) Satelli…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "gj-486b-transit",
+      "title": "GJ 486 b: its transit",
+      "description": "GJ 486 b crossing its star, as TESS recorded it: 2 sectors (23, 50) of the SPOC pipeline's 2-minute light curves of TIC 390651552, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "gj-486b-transit.svg",
+      "metadata": {
+        "tic": "TIC 390651552",
+        "sectors": [
+          23,
+          50
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "gj-486b",
+      "sources": [
+        "photometry/tess/tess2020078014623-s0023-0000000390651552-0177-s_lc.fits",
+        "photometry/tess/tess2022085151738-s0050-0000000390651552-0222-s_lc.fits"
+      ],
+      "durationHours": 1.0158,
+      "binMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 23, 50",
+        "Folded on the app's orbit; 4-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

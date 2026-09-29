@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1468",
+  "card": {
+    "text": "2 planets cross TOI-1468 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202453449",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A..68M/abstract",
+        "label": "Valdés et al. (2025), Astronomy & Astrophysics 698 A68",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MEIER_VALDES_ET_AL_2025): st_teff 3376, st_rad 0.3714, st_mass 0.3527"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Meier Valdés et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202453449",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A..68M/abstract",
+        "label": "Valdés et al. (2025), Astronomy & Astrophysics 698 A68",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MEIER_VALDES_ET_AL_2025): st_teff 3376, st_rad 0.3714, st_mass 0.3527"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

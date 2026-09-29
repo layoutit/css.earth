@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ds-tuc-a",
+  "angularDiameterMas": 0.2,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 670,655 km at 44.18 pc = 0.2 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 44.17595937995562,
+  "distanceSource": "Gaia DR3 parallax 22.6367 +/- 0.0150 mas (same row, RUWE 0.91): 44.18 pc, no zero-point correction",
+  "radiusKm": 670654.8,
+  "radiusSource": "Radius 0.964 +/- 0.029 solar radii from Newton et al. 2019, the stellar radius of the default parameter set of DS Tuc A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract): 670,655 km at 695,700 km per solar radius. Mass 1.01 +/- 0.06 solar masses from Newton et al. 2019, the stellar mass of the default parameter set of DS Tuc A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract); GM is that mass times the JPL solar GM. Temperature 5428 +/- 80 K from Newton et al. 2019, the stellar temperature of the default parameter set of DS Tuc A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5428,
+  "effectiveTemperatureSource": "Newton et al. 2019, the stellar temperature of the default parameter set of DS Tuc A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
+  "surfaceGravityLogg": 4.47,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ds-tuc-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.474, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

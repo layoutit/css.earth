@@ -1,0 +1,24 @@
+{
+  "host": "gj-341",
+  "planets": [
+    {
+      "id": "gj-341b",
+      "name": "GJ 341 b",
+      "description": "Transiting planet of GJ 341 with a 7.58-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+        "credit": "DiTomasso et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DITOMASSO_ET_AL__2025"
+      },
+      "text": {
+        "card": "GJ 341 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around GJ 341. Its orbit and size follow DiTomasso et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DITOMASSO_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 7.5768334, pl_radj 0.07850848, pl_bmassj 0.01258541"
+      },
+      "order": 3085
+    }
+  ]
+}

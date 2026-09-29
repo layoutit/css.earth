@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-1214",
+  "card": {
+    "text": "GJ 1214 b crosses GJ 1214 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad29f3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract",
+        "label": "Mahajan et al. (2024), The Astrophysical Journal Letters 963 L37",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MAHAJAN_ET_AL__2024): st_teff 3101, st_rad 0.2162, st_mass 0.182"
+      },
+      {
+        "catalogueId": "wikipedia-gj-1214",
+        "url": "https://en.wikipedia.org/wiki/GJ_1214",
+        "label": "Wikipedia, \"GJ 1214\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1367392180",
+        "quote": "GJ 1214 is a dim M4.5 red dwarf star in the constellation Ophiuchus with an apparent magnitude of 14.7."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mahajan et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad29f3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract",
+        "label": "Mahajan et al. (2024), The Astrophysical Journal Letters 963 L37",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MAHAJAN_ET_AL__2024): st_teff 3101, st_rad 0.2162, st_mass 0.182"
+      },
+      {
+        "catalogueId": "wikipedia-gj-1214",
+        "url": "https://en.wikipedia.org/wiki/GJ_1214",
+        "label": "Wikipedia, \"GJ 1214\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1367392180",
+        "quote": "It is located at a distance of 47.8 light-years from Earth."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

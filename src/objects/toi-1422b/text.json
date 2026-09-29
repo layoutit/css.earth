@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1422b",
+  "card": {
+    "text": "TOI-1422 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf2030",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f2030N/abstract",
+        "label": "Naponiello et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAPONIELLO_ET_AL_2026): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 12.99894, pl_radj 0.3416903, pl_bmassj 0.02989034"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-1422. Its orbit and size follow Naponiello et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf2030",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f2030N/abstract",
+        "label": "Naponiello et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAPONIELLO_ET_AL_2026): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 12.99894, pl_radj 0.3416903, pl_bmassj 0.02989034"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

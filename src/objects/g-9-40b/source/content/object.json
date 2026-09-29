@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "g-9-40b",
+  "displayName": "G 9-40 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.9 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244426",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L",
+          "label": "Luque et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "5.75 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244426",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L",
+          "label": "Luque et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.0 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244426",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L",
+          "label": "Luque et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by G 9-40; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "g-9-40b-lens-shape.webp",
+        "surface": "g-9-40b-surface-shape@2x.webp",
+        "poles": "g-9-40b-poles-shape@2x.webp",
+        "source": {
+          "id": "g-9-40b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of G 9-40 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of g-9-40's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "g-9-40b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/g-9-40b/g-9-40b-system-orbits.svg",
+      "alt": "The orbits of G 9-40's planets in this map from above, to scale, with G 9-40 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "g-9-40b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L"
+      }
+    },
+    {
+      "id": "g-9-40b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/g-9-40b/g-9-40b-transit.svg",
+      "alt": "G 9-40 b crossing its star, as TESS recorded it: 3 sectors (45, 46, 72) of the SPOC pipeline's 2-minute light curves of TIC 203214081, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "g-9-40b-tess-sector-45",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021310001228-s0045-0000000203214081-0216-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Luque et al. 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract",
+      "credit": "Luque et al. 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/g-9-40b.json",
+      "credit": "Radius from Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive; mass from Luque et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...666A.154L), via the NASA Exoplanet Archive; orbit from Luque et al. 2022 (2022A&A...666A.154L), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "toi-5624e",
+ "classification": "exoplanet",
+ "order": 4548,
+ "physical": {
+  "name": "TOI-5624 e",
+  "horizonsCode": null,
+  "meanRadiusKm": 20709.7,
+  "gravitationalParameterKm3PerS2": 3547543.41,
+  "parent": "toi-5624"
+ },
+ "physicalNotes": "Radius 0.28967844 Jupiter radii from Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract): 20,709.7 km at 71,492 km per Jupiter radius. GM from the mass 0.02800253 Jupiter masses (Bonfanti et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...709A.265B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 21.489936,
+  "semiMajorAxisStellarRadii": 37.7,
+  "inclinationDegrees": 89.405,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59655.1215,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): P 21.489936 d",
+   "shape": "Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): a/R* 37.7; Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): inclination 89.405 degrees",
+   "eccentricity": "Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): e 0",
+   "phase": "Bonfanti et al. 2026 (2026A&A...709A.265B), via the NASA Exoplanet Archive ps table (pl_refname BONFANTI_ET_AL_2026): transit mid-time 2459655.6215 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

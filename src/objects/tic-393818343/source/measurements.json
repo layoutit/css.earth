@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "tic-393818343",
+  "angularDiameterMas": 0.11,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 755,530 km at 94.23 pc = 0.11 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 94.23185683430692,
+  "distanceSource": "Gaia DR3 parallax 10.6121 +/- 0.0154 mas (same row, RUWE 1.01): 94.23 pc, no zero-point correction",
+  "radiusKm": 755530.2,
+  "radiusSource": "Radius 1.086 +/- 0.02 solar radii from Sgro et al. 2024, the stellar radius of the default parameter set of TIC 393818343 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...26S/abstract): 755,530 km at 695,700 km per solar radius. Mass 1.082 +/- 0.055 solar masses from Sgro et al. 2024, the stellar mass of the default parameter set of TIC 393818343 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...26S/abstract); GM is that mass times the JPL solar GM. Temperature 5756 +/- 67 K from Sgro et al. 2024, the stellar temperature of the default parameter set of TIC 393818343 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...26S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5756,
+  "effectiveTemperatureSource": "Sgro et al. 2024, the stellar temperature of the default parameter set of TIC 393818343 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...26S/abstract)",
+  "surfaceGravityLogg": 4.4,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-393818343.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.401, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

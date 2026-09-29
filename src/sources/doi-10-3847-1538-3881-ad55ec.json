@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad55ec",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Giovinazzi et al. (2024): Trials and Tribulations in the Reanalysis of KELT-24 b: A Case Study for the Importance of Stellar Modeling",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2406.04288"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad55ec"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....168..118G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad55ec",
+      "label": "The Astronomical Journal 168 118"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Giovinazzi et al. (2024), The Astronomical Journal 168 118",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G"
+    }
+  ],
+  "publisher": "The Astronomical Journal 168 118",
+  "creators": [
+    "Mark R. Giovinazzi",
+    "Bryson Cale",
+    "Jason D. Eastman",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

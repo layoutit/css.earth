@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1221b",
+  "card": {
+    "text": "TOI-1221 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acc8d4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract",
+        "label": "Mann et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 91.68278, pl_radj 0.25961326, pl_bmassj 3.5"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-1221. Its orbit and size follow Mann et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acc8d4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract",
+        "label": "Mann et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 91.68278, pl_radj 0.25961326, pl_bmassj 3.5"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

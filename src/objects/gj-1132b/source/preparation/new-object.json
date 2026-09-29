@@ -1,0 +1,31 @@
+{
+  "host": "gj-1132",
+  "planets": [
+    {
+      "id": "gj-1132b",
+      "name": "GJ 1132 b",
+      "description": "Transiting planet of GJ 1132 with a 1.63-day year, found in 2015.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract",
+        "credit": "Xue et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "XUE_ET_AL_2024"
+      },
+      "text": {
+        "card": "GJ 1132 b was found in 2015 by Cerro Tololo Inter-American Observatory as it crossed its star.",
+        "introduction": "It is one of 2 planets known around GJ 1132. Its orbit and size follow Xue et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname XUE_ET_AL_2024): disc_year 2015, disc_facility Cerro Tololo Inter-American Observatory, sy_pnum 2; pl_orbper 1.62892911, pl_radj 0.1063, pl_bmassj 0.00578",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/GJ_1132_b",
+          "title": "GJ 1132 b",
+          "revision": "1375986378",
+          "card": "GJ 1132 b is an exoplanet orbiting GJ 1132, a red dwarf star 41 light-years from Earth, in the constellation Vela.",
+          "introduction": "The planet is considered uninhabitable but was thought to be cool enough to possess an atmosphere."
+        }
+      },
+      "order": 3075
+    }
+  ]
+}

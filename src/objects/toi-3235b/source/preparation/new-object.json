@@ -1,0 +1,31 @@
+{
+  "host": "toi-3235",
+  "planets": [
+    {
+      "id": "toi-3235b",
+      "name": "TOI-3235 b",
+      "description": "Transiting planet of TOI-3235 with a 2.59-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+        "credit": "Hobson et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HOBSON_ET_AL_2023"
+      },
+      "text": {
+        "card": "TOI-3235 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-3235. Its orbit and size follow Hobson et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOBSON_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.59261842, pl_radj 1.017, pl_bmassj 0.665",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-3235_b",
+          "title": "TOI-3235 b",
+          "revision": "1374086867",
+          "card": "TOI-3235 b is a gas giant exoplanet found 237 light-years away from Earth.",
+          "introduction": "It was discovered in 2023 by the transit method."
+        }
+      },
+      "order": 4355
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-95338",
+  "card": {
+    "text": "HD 95338 b crosses HD 95338 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202554040",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract",
+        "label": "Kálmán et al. (2025), Astronomy & Astrophysics 701 A240",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): st_teff 5097, st_rad 0.868, st_mass 0.848"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Kálmán et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202554040",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract",
+        "label": "Kálmán et al. (2025), Astronomy & Astrophysics 701 A240",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname K_AMP_AACUTE_LM_AMP_AACUTE_N_ET_AL__2025): st_teff 5097, st_rad 0.868, st_mass 0.848"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

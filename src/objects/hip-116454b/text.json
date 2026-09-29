@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hip-116454b",
+  "card": {
+    "text": "HIP 116454 b was found in 2014 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad60bf",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract",
+        "label": "Thygesen et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname THYGESEN_ET_AL__2024): disc_year 2014, disc_facility K2, sy_pnum 1; pl_orbper 9.1004157, pl_radj 0.22026981, pl_bmassj 0.03051961"
+      },
+      {
+        "catalogueId": "wikipedia-hip-116454-b",
+        "url": "https://en.wikipedia.org/wiki/HIP_116454_b",
+        "label": "Wikipedia, \"HIP 116454 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1348641166",
+        "quote": "HIP 116454 b, or K2-2 b, is an exoplanet orbiting the star HIP 116454, 62 parsecs (201 ly) from Earth toward the constellation Pisces."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HIP 116454. Its orbit and size follow Thygesen et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad60bf",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract",
+        "label": "Thygesen et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname THYGESEN_ET_AL__2024): disc_year 2014, disc_facility K2, sy_pnum 1; pl_orbper 9.1004157, pl_radj 0.22026981, pl_bmassj 0.03051961"
+      },
+      {
+        "catalogueId": "wikipedia-hip-116454-b",
+        "url": "https://en.wikipedia.org/wiki/HIP_116454_b",
+        "label": "Wikipedia, \"HIP 116454 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1348641166",
+        "quote": "It is 32,000 kilometres (20,000 mi) in diameter and 12 times as massive as Earth."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

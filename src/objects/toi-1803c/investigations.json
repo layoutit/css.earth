@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1803c",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.38272882 Jupiter radii from Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.02517081 Jupiter masses: Zingales et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...695A.273Z), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): P 12.885779 d; Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): a/R* 29.3; Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): inclination 88.48 degrees; Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): e 0; Zingales et al. 2025 (2025A&A...695A.273Z), via the NASA Exoplanet Archive ps table (pl_refname ZINGALES_ET_AL__2025): transit mid-time 2458911.6747 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract"
+      ]
+    }
+  ]
+}

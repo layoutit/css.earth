@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-415",
+  "card": {
+    "text": "K2-415 b crosses K2-415 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acb7e1",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract",
+        "label": "Hirano et al. (2023), The Astronomical Journal 165 131",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HIRANO_ET_AL_2023): st_teff 3173, st_rad 0.1965, st_mass 0.1635"
+      },
+      {
+        "catalogueId": "wikipedia-k2-415",
+        "url": "https://en.wikipedia.org/wiki/K2-415",
+        "label": "Wikipedia, \"K2-415\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442604",
+        "quote": "K2-415 is an M5 red dwarf star located 72 light-years from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hirano et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acb7e1",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract",
+        "label": "Hirano et al. (2023), The Astronomical Journal 165 131",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HIRANO_ET_AL_2023): st_teff 3173, st_rad 0.1965, st_mass 0.1635"
+      },
+      {
+        "catalogueId": "wikipedia-k2-415",
+        "url": "https://en.wikipedia.org/wiki/K2-415",
+        "label": "Wikipedia, \"K2-415\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442604",
+        "quote": "K2-415 has a mass that is 16% of the mass of the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

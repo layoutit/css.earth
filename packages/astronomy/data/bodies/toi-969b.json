@@ -1,0 +1,28 @@
+{
+ "id": "toi-969b",
+ "classification": "exoplanet",
+ "order": 4759,
+ "physical": {
+  "name": "TOI-969 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 17635.4,
+  "gravitationalParameterKm3PerS2": 3627263.44,
+  "parent": "toi-969"
+ },
+ "physicalNotes": "Radius 0.2466772 Jupiter radii from Lillo-Box et al. 2023 (2023A&A...669A.109L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...669A.109L/abstract): 17,635.4 km at 71,492 km per Jupiter radius. GM from the mass 0.0286318 Jupiter masses (Lillo-Box et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...669A.109L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...669A.109L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.8237305,
+  "semiMajorAxisStellarRadii": 8.47,
+  "inclinationDegrees": 86.75,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59247.87709,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Lillo-Box et al. 2023 (2023A&A...669A.109L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2023): P 1.8237305 d",
+   "shape": "Lillo-Box et al. 2023 (2023A&A...669A.109L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2023): a/R* 8.47; Lillo-Box et al. 2023 (2023A&A...669A.109L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2023): inclination 86.75 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Lillo-Box et al. 2023 (2023A&A...669A.109L), via the NASA Exoplanet Archive ps table (pl_refname LILLO_BOX_ET_AL_2023): transit mid-time 2459248.37709 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

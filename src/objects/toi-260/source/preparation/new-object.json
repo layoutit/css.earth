@@ -1,0 +1,39 @@
+{
+  "id": "toi-260",
+  "name": "TOI-260",
+  "system": "TOI-260 system",
+  "description": "Star of 4,026 K, 20.2 parsecs away, with 1 transiting planet.",
+  "target": "TOI-260",
+  "gaia": "2428162410789155328",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract",
+    "credit": "Hobson et al. 2024"
+  },
+  "radius": {
+    "value": 0.607,
+    "source": "Hobson et al. 2024, the stellar radius of the default parameter set of TOI-260 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract",
+    "uncertainty": 0.014
+  },
+  "mass": {
+    "value": 0.616,
+    "source": "Hobson et al. 2024, the stellar mass of the default parameter set of TOI-260 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract",
+    "uncertainty": 0.032
+  },
+  "temperature": {
+    "value": 4026,
+    "source": "Hobson et al. 2024, the stellar temperature of the default parameter set of TOI-260 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract",
+    "uncertainty": 14
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-260 b crosses TOI-260 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hobson et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HOBSON_ET_AL_2024): st_teff 4026, st_rad 0.607, st_mass 0.616"
+  },
+  "notes": [],
+  "order": 4328
+}

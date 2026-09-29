@@ -1,0 +1,39 @@
+{
+  "id": "wasp-140",
+  "name": "WASP-140",
+  "system": "WASP-140 system",
+  "description": "Star of 5,300 K, 118 parsecs away, with 1 transiting planet.",
+  "target": "WASP-140",
+  "gaia": "5094154336332482304",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+    "credit": "Alexoudi 2022"
+  },
+  "radius": {
+    "value": 0.87,
+    "source": "Hellier et al. 2017, the stellar radius of WASP-140 b's parameter set from Hellier et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 0.9,
+    "source": "Hellier et al. 2017, the stellar mass of WASP-140 b's parameter set from Hellier et al. 2017 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 5300,
+    "source": "Alexoudi 2022, the stellar temperature of the default parameter set of WASP-140 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-140 b crosses WASP-140 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius follows Hellier et al. 2017, and its temperature Alexoudi 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ALEXOUDI_2022, HELLIER_ET_AL__2017): st_teff 5300, st_rad 0.87, st_mass 0.9"
+  },
+  "notes": [],
+  "order": 4788
+}

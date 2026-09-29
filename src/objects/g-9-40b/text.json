@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "g-9-40b",
+  "card": {
+    "text": "G 9-40 b was found in 2019 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244426",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract",
+        "label": "Luque et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE_ET_AL__2022): disc_year 2019, disc_facility K2, sy_pnum 1; pl_orbper 5.7459982, pl_radj 0.16950694, pl_bmassj 0.01258541"
+      },
+      {
+        "catalogueId": "wikipedia-g-9-40-b",
+        "url": "https://en.wikipedia.org/wiki/G_9-40_b",
+        "label": "Wikipedia, \"G 9-40 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374088475",
+        "quote": "G 9-40 b is a sub-Neptune exoplanet that has an orbital period of 5.7 days."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around G 9-40. Its orbit and size follow Luque et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244426",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract",
+        "label": "Luque et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE_ET_AL__2022): disc_year 2019, disc_facility K2, sy_pnum 1; pl_orbper 5.7459982, pl_radj 0.16950694, pl_bmassj 0.01258541"
+      },
+      {
+        "catalogueId": "wikipedia-g-9-40-b",
+        "url": "https://en.wikipedia.org/wiki/G_9-40_b",
+        "label": "Wikipedia, \"G 9-40 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374088475",
+        "quote": "The host star is a red dwarf located in the constellation Cancer 91 light-years away from Earth."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

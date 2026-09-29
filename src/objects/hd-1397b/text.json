@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-1397b",
+  "card": {
+    "text": "HD 1397 b was found in 2018 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201834577",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract",
+        "label": "Nielsen et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NIELSEN_ET_AL__2019): disc_year 2018, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 11.5366, pl_radj 1.026, pl_bmassj 0.415"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HD 1397. Its orbit and size follow Nielsen et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201834577",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract",
+        "label": "Nielsen et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NIELSEN_ET_AL__2019): disc_year 2018, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 11.5366, pl_radj 1.026, pl_bmassj 0.415"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

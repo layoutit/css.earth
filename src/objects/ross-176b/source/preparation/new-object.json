@@ -1,0 +1,24 @@
+{
+  "host": "ross-176",
+  "planets": [
+    {
+      "id": "ross-176b",
+      "name": "Ross 176 b",
+      "description": "Transiting planet of Ross 176 with a 5.01-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract",
+        "credit": "Geraldía-González et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GERALDIA_GONZALEZ_ET_AL_2025"
+      },
+      "text": {
+        "card": "Ross 176 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around Ross 176. Its orbit and size follow Geraldía-González et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GERALDIA_GONZALEZ_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 5.006622, pl_radj 0.16415409, pl_bmassj 0.01437883"
+      },
+      "order": 3855
+    }
+  ]
+}

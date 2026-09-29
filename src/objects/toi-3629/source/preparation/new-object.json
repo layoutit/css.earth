@@ -1,0 +1,39 @@
+{
+  "id": "toi-3629",
+  "name": "TOI-3629",
+  "system": "TOI-3629 system",
+  "description": "Star of 3,870 K, 130 parsecs away, with 1 transiting planet.",
+  "target": "TOI-3629",
+  "gaia": "2881820324294985856",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract",
+    "credit": "Cañas et al. 2022"
+  },
+  "radius": {
+    "value": 0.6,
+    "source": "Cañas et al. 2022, the stellar radius of the default parameter set of TOI-3629 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.63,
+    "source": "Cañas et al. 2022, the stellar mass of the default parameter set of TOI-3629 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3870,
+    "source": "Cañas et al. 2022, the stellar temperature of the default parameter set of TOI-3629 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract",
+    "uncertainty": 90
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-3629 b crosses TOI-3629 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Cañas et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CANAS_ET_AL_2022): st_teff 3870, st_rad 0.6, st_mass 0.63"
+  },
+  "notes": [],
+  "order": 4362
+}

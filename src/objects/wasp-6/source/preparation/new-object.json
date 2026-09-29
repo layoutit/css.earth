@@ -1,0 +1,46 @@
+{
+  "id": "wasp-6",
+  "name": "WASP-6",
+  "system": "WASP-6 system",
+  "description": "Star of 5,438 K, 197 parsecs away, with 1 transiting planet.",
+  "target": "WASP-6",
+  "gaia": "2385171398768647552",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+    "credit": "McGruder et al. 2023"
+  },
+  "radius": {
+    "value": 0.79,
+    "source": "McGruder et al. 2023, the stellar radius of the default parameter set of WASP-6 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+    "uncertainty": 0.008
+  },
+  "mass": {
+    "value": 0.854,
+    "source": "McGruder et al. 2023, the stellar mass of the default parameter set of WASP-6 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+    "uncertainty": 0.027
+  },
+  "temperature": {
+    "value": 5438,
+    "source": "McGruder et al. 2023, the stellar temperature of the default parameter set of WASP-6 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-6 b crosses WASP-6 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow McGruder et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MCGRUDER_ET_AL__2023): st_teff 5438, st_rad 0.79, st_mass 0.854",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-6",
+      "title": "WASP-6",
+      "revision": "1374406293",
+      "card": "WASP-6, also officially named Márohu, is a type-G yellow dwarf star located about 651 light-years away in the Aquarius constellation.",
+      "introduction": "Dim at magnitude 12, it is visible through a moderate sized amateur telescope."
+    }
+  },
+  "notes": [],
+  "order": 4826
+}

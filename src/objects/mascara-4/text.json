@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mascara-4",
+  "card": {
+    "text": "MASCARA-4 b crosses MASCARA-4 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244203",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract",
+        "label": "Zhang et al. (2022), Astronomy & Astrophysics 666 A47",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZHANG_ET_AL__2022): st_teff 7800, st_rad 1.79, st_mass 1.75"
+      },
+      {
+        "catalogueId": "wikipedia-hd-85628",
+        "url": "https://en.wikipedia.org/wiki/HD_85628",
+        "label": "Wikipedia, \"HD 85628\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375330131",
+        "quote": "HD 85628 (MASCARA-4) is a binary star system in the constellation of Carina."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Zhang et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244203",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract",
+        "label": "Zhang et al. (2022), Astronomy & Astrophysics 666 A47",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ZHANG_ET_AL__2022): st_teff 7800, st_rad 1.79, st_mass 1.75"
+      },
+      {
+        "catalogueId": "wikipedia-hd-85628",
+        "url": "https://en.wikipedia.org/wiki/HD_85628",
+        "label": "Wikipedia, \"HD 85628\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375330131",
+        "quote": "The host star, HD 85628 A, is an A-type main-sequence star, the primary star of the system, with a hot Jupiter in orbit around it."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

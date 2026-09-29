@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5143c",
+  "card": {
+    "text": "TOI-5143 c was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad9dd5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract",
+        "label": "Radzom et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RADZOM_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 5.2097118, pl_radj 1.45, no pl_bmassj in pscomppars"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-5143. Its orbit and size follow Radzom et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad9dd5",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract",
+        "label": "Radzom et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RADZOM_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 5.2097118, pl_radj 1.45, no pl_bmassj in pscomppars"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

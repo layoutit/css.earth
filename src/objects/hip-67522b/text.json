@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hip-67522b",
+  "card": {
+    "text": "HIP 67522 b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad77d9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+        "label": "Barber et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARBER_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 6.9594731, pl_radj 0.891, pl_bmassj 0.225"
+      },
+      {
+        "catalogueId": "wikipedia-hip-67522-b",
+        "url": "https://en.wikipedia.org/wiki/HIP_67522_b",
+        "label": "Wikipedia, \"HIP 67522 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375570410",
+        "quote": "HIP 67522 b is a hot Neptune or sub-Saturn exoplanet orbiting the G-type star HIP 67522, approximately 415 light-years from Earth in the constellation Centaurus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around HIP 67522. Its orbit and size follow Barber et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad77d9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract",
+        "label": "Barber et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARBER_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 6.9594731, pl_radj 0.891, pl_bmassj 0.225"
+      },
+      {
+        "catalogueId": "wikipedia-hip-67522-b",
+        "url": "https://en.wikipedia.org/wiki/HIP_67522_b",
+        "label": "Wikipedia, \"HIP 67522 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375570410",
+        "quote": "It was discovered using the Transiting Exoplanet Survey Satellite (TESS)."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

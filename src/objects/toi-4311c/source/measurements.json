@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-4311c",
+  "radiusKm": 15753.9,
+  "radiusSource": "Radius 0.22035902 Jupiter radii from Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract): 15,753.9 km at 71,492 km per Jupiter radius. No mass is measured: Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract) gives only an upper limit of 0.04272746 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 15.070425,
+  "orbitalPeriodSource": "Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2026): P 15.070425 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-4311 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.04272746 Jupiter masses: Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract)."
+}

@@ -1,0 +1,28 @@
+{
+ "id": "wolf-327b",
+ "classification": "exoplanet",
+ "order": 4858,
+ "physical": {
+  "name": "Wolf 327 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 7908.8,
+  "gravitationalParameterKm3PerS2": 1008459,
+  "parent": "wolf-327"
+ },
+ "physicalNotes": "Radius 0.11062558 Jupiter radii from Murgas et al. 2024 (2024A&A...684A..83M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract): 7,908.8 km at 71,492 km per Jupiter radius. GM from the mass 0.00796027 Jupiter masses (Murgas et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...684A..83M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.5734745,
+  "semiMajorAxisStellarRadii": 5.3,
+  "inclinationDegrees": 84.89,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59252.4811,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Murgas et al. 2024 (2024A&A...684A..83M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2024): P 0.5734745 d",
+   "shape": "Murgas et al. 2024 (2024A&A...684A..83M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2024): a/R* 5.3; Murgas et al. 2024 (2024A&A...684A..83M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2024): inclination 84.89 degrees",
+   "eccentricity": "Murgas et al. 2024 (2024A&A...684A..83M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2024): e 0",
+   "phase": "Murgas et al. 2024 (2024A&A...684A..83M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2024): transit mid-time 2459252.9811 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

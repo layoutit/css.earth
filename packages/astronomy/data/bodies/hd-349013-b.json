@@ -1,0 +1,30 @@
+{
+ "id": "hd-349013-b",
+ "classification": "star",
+ "order": 4421,
+ "physical": {
+  "name": "HD 349013B",
+  "horizonsCode": null,
+  "meanRadiusKm": 237233.7,
+  "gravitationalParameterKm3PerS2": 42866118133.54642,
+  "parent": null,
+  "effectiveTemperatureK": 3328
+ },
+ "physicalNotes": "Radius 0.341 +/- 0.012 solar radii from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 8599017 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467): 237,234 km at 695,700 km per solar radius. Mass 0.323 +/- 0.021 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 8599017 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467); GM is that mass times the JPL solar GM. Temperature 3328 +/- 157 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 8599017 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 279.36130629852425,
+  "declinationDegrees": 18.729003083909078,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 177.16891545813428,
+  "properMotionRaMasPerYear": -5.258340481054916,
+  "properMotionDecMasPerYear": 50.977233469016895,
+  "radialVelocityKmPerS": 0,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4524517290642204928 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-349013-b/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.6443 +/- 0.0673 mas (same row, RUWE 1.09): 177.17 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -5.258, 50.977 mas/yr",
+   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 4524517290642204928 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 60,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%204524517290642204928)"
+  }
+ }
+}

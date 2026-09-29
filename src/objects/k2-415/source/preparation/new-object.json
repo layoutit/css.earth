@@ -1,0 +1,46 @@
+{
+  "id": "k2-415",
+  "name": "K2-415",
+  "system": "K2-415 system",
+  "description": "Star of 3,173 K, 21.8 parsecs away, with 1 transiting planet.",
+  "target": "K2-415",
+  "gaia": "604215144503584640",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract",
+    "credit": "Hirano et al. 2023"
+  },
+  "radius": {
+    "value": 0.1965,
+    "source": "Hirano et al. 2023, the stellar radius of the default parameter set of K2-415 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract",
+    "uncertainty": 0.0058
+  },
+  "mass": {
+    "value": 0.1635,
+    "source": "Hirano et al. 2023, the stellar mass of the default parameter set of K2-415 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract",
+    "uncertainty": 0.0041
+  },
+  "temperature": {
+    "value": 3173,
+    "source": "Hirano et al. 2023, the stellar temperature of the default parameter set of K2-415 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract",
+    "uncertainty": 53
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-415 b crosses K2-415 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hirano et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HIRANO_ET_AL_2023): st_teff 3173, st_rad 0.1965, st_mass 0.1635",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/K2-415",
+      "title": "K2-415",
+      "revision": "1374442604",
+      "card": "K2-415 is an M5 red dwarf star located 72 light-years from Earth.",
+      "introduction": "K2-415 has a mass that is 16% of the mass of the Sun."
+    }
+  },
+  "notes": [],
+  "order": 3576
+}

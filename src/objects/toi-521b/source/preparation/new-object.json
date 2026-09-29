@@ -1,0 +1,24 @@
+{
+  "host": "toi-521",
+  "planets": [
+    {
+      "id": "toi-521b",
+      "name": "TOI-521 b",
+      "description": "Transiting planet of TOI-521 with a 1.54-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract",
+        "credit": "Lacedelli et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LACEDELLI_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-521 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-521. Its orbit and size follow Lacedelli et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LACEDELLI_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.54285047, pl_radj 0.17664407, pl_bmassj 0.01667566"
+      },
+      "order": 4500
+    }
+  ]
+}

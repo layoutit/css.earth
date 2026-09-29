@@ -1,0 +1,35 @@
+{
+  "id": "source-gj-1214b-archive-emission-rows",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "GJ 1214 b · gj 1214b archive emission rows",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+centralwavelng%2Cbandwidth%2Cespeclipdep%2Cespeclipdeperr1%2Cespeclipdeperr2%2Cespeclipdeplim%2Cfacility%2Cinstrument%2Cplntreflink+from+emissionspec+where+plntname%3D%27GJ+1214+b%27+order+by+centralwavelng&format=csv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/gj-1214b/source/manifest.json",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA Exoplanet Archive, emissionspec table",
+      "scope": "The gj 1214b archive emission rows input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

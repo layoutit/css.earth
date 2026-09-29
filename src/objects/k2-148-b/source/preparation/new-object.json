@@ -1,0 +1,40 @@
+{
+  "id": "k2-148-b",
+  "name": "K2-148B",
+  "system": "K2-148 system",
+  "description": "Star bound to K2-148, 1,163 AU away.",
+  "gaia": "2536443724641751680",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.585,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 423358486 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 0.576,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 423358486 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3854,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 423358486 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-148B is a star of 3,854 K, bound to K2-148 1,163 AU away.",
+    "introduction": "K2-148B shares its motion through space with K2-148, 1,163 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 2536443724641751808 and 2536443724641751680, sep_AU 1163.189514114106714, R_chance_align 7.142738220986873821e-07"
+  },
+  "notes": [
+    "K2-148B's orbit around K2-148 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 3328
+}

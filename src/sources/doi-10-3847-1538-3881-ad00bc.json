@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad00bc",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mann et al. (2023): Giant Outer Transiting Exoplanet Mass (GOT ’EM) Survey. III. Recovery and Confirmation of a Temperate, Mildly Eccentric, Single-transit Jupiter Orbiting TOI-2010",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2311.10232"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad00bc"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023AJ....166..239M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad00bc",
+      "label": "The Astronomical Journal 166 239"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mann et al. (2023), The Astronomical Journal 166 239",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M"
+    }
+  ],
+  "publisher": "The Astronomical Journal 166 239",
+  "creators": [
+    "Christopher R. Mann",
+    "Paul A. Dalba",
+    "David Lafrenière",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "wasp-140b",
+  "displayName": "WASP-140 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1002-asna-20224012",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A",
+          "label": "Alexoudi 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.24 days",
+        "source": {
+          "catalogueId": "doi-10-1002-asna-20224012",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A",
+          "label": "Alexoudi 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.4 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stw3005",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H",
+          "label": "Hellier et al. 2017",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by WASP-140; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "wasp-140b-lens-shape.webp",
+        "surface": "wasp-140b-surface-shape@2x.webp",
+        "poles": "wasp-140b-poles-shape@2x.webp",
+        "source": {
+          "id": "wasp-140b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of WASP-140 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of wasp-140's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-140b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-140b/wasp-140b-system-orbits.svg",
+      "alt": "The orbits of WASP-140's planets in this map from above, to scale, with WASP-140 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-140b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A"
+      }
+    },
+    {
+      "id": "wasp-140b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-140b/wasp-140b-transit.svg",
+      "alt": "WASP-140 b crossing its star, as TESS recorded it: 3 sectors (5, 31, 106) of the SPOC pipeline's 2-minute light curves of TIC 178284730, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 6-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-140b-tess-sector-5",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2018319095959-s0005-0000000178284730-0125-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Alexoudi 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract",
+      "credit": "Alexoudi 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-140b.json",
+      "credit": "Radius from Alexoudi 2022 (2022AN....34324012A), via the NASA Exoplanet Archive; mass from Hellier et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017MNRAS.465.3693H), via the NASA Exoplanet Archive; orbit from Alexoudi 2022 (2022AN....34324012A), via the NASA Exoplanet Archive"
+    }
+  }
+}

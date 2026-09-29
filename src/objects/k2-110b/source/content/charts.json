@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-110b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-110b-orbits",
+      "title": "K2-110 b: orbits around K2-110",
+      "output": "k2-110b-system-orbits.svg",
+      "system": "k2-110",
+      "highlight": "k2-110b",
+      "description": "The orbits of K2-110's planets in this map from above, to scale, with K2-110 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): P 13.8636 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "k2-110b-transit",
+      "title": "K2-110 b: its transit",
+      "description": "K2-110 b crossing its star, as TESS recorded it: 1 sector (91) of the SPOC pipeline's 2-minute light curves of TIC 287333762, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 28 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 200 minutes at these dates, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "output": "k2-110b-transit.svg",
+      "metadata": {
+        "tic": "TIC 287333762",
+        "sectors": [
+          91
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "k2-110b",
+      "sources": [
+        "photometry/tess/tess2025099153000-s0091-0000000287333762-0288-s_lc.fits"
+      ],
+      "durationHours": 3.22,
+      "binMinutes": 13,
+      "alignMinutes": -28,
+      "notes": [
+        "TESS 2-min SPOC · sector 91",
+        "Aligned on TESS's dip, 28 min early; 13-min bins.",
+        "The ephemeris's own 1σ there is 67 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

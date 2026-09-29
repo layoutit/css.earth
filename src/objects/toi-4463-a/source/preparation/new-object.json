@@ -1,0 +1,39 @@
+{
+  "id": "toi-4463-a",
+  "name": "TOI-4463 A",
+  "system": "TOI-4463 system",
+  "description": "Star of 5,640 K, 173 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4463 A",
+  "gaia": "4524517290642206336",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract",
+    "credit": "Yee et al. 2023"
+  },
+  "radius": {
+    "value": 1.062,
+    "source": "Yee et al. 2023, the stellar radius of the default parameter set of TOI-4463 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract",
+    "uncertainty": 0.027
+  },
+  "mass": {
+    "value": 1.056,
+    "source": "Yee et al. 2023, the stellar mass of the default parameter set of TOI-4463 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract",
+    "uncertainty": 0.059
+  },
+  "temperature": {
+    "value": 5640,
+    "source": "Yee et al. 2023, the stellar temperature of the default parameter set of TOI-4463 A b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract",
+    "uncertainty": 89
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4463 A b crosses TOI-4463 A as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Yee et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname YEE_ET_AL__2023): st_teff 5640, st_rad 1.062, st_mass 1.056"
+  },
+  "notes": [],
+  "order": 4419
+}

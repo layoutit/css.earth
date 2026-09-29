@@ -1,0 +1,39 @@
+{
+  "id": "gj-238",
+  "name": "GJ 238",
+  "system": "GJ 238 system",
+  "description": "Star of 3,485 K, 15.2 parsecs away, with 1 transiting planet.",
+  "target": "GJ 238",
+  "gaia": "5482827676662168832",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract",
+    "credit": "Tey et al. 2024"
+  },
+  "radius": {
+    "value": 0.4314,
+    "source": "Tey et al. 2024, the stellar radius of the default parameter set of GJ 238 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract",
+    "uncertainty": 0.0075
+  },
+  "mass": {
+    "value": 0.4193,
+    "source": "Tey et al. 2024, the stellar mass of the default parameter set of GJ 238 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract",
+    "uncertainty": 0.0095
+  },
+  "temperature": {
+    "value": 3485,
+    "source": "Tey et al. 2024, the stellar temperature of the default parameter set of GJ 238 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract",
+    "uncertainty": 140
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "GJ 238 b crosses GJ 238 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Tey et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname TEY_ET_AL__2024): st_teff 3485, st_rad 0.4314, st_mass 0.4193"
+  },
+  "notes": [],
+  "order": 3080
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngts-11b",
+  "card": {
+    "text": "NGTS-11 b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ab9eb9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract",
+        "label": "Gill et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILL_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 35.455984, pl_radj 0.817, pl_bmassj 0.344"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around NGTS-11. Its orbit and size follow Gill et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ab9eb9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract",
+        "label": "Gill et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILL_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 35.455984, pl_radj 0.817, pl_bmassj 0.344"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

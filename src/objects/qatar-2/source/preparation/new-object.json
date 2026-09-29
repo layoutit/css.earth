@@ -1,0 +1,46 @@
+{
+  "id": "qatar-2",
+  "name": "Qatar-2",
+  "system": "Qatar-2 system",
+  "description": "Star of 4,645 K, 181 parsecs away, with 1 transiting planet.",
+  "target": "Qatar-2",
+  "gaia": "3620030644476623616",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+    "credit": "Mancini et al. 2014"
+  },
+  "radius": {
+    "value": 0.776,
+    "source": "Mancini et al. 2014, the stellar radius of the default parameter set of Qatar-2 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+    "uncertainty": 0.008
+  },
+  "mass": {
+    "value": 0.743,
+    "source": "Mancini et al. 2014, the stellar mass of the default parameter set of Qatar-2 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+    "uncertainty": 0.021
+  },
+  "temperature": {
+    "value": 4645,
+    "source": "Mancini et al. 2014, the stellar temperature of the default parameter set of Qatar-2 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Qatar-2 b crosses Qatar-2 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mancini et al. 2014.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MANCINI_ET_AL__2014): st_teff 4645, st_rad 0.776, st_mass 0.743",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Qatar-2",
+      "title": "Qatar-2",
+      "revision": "1374438659",
+      "card": "Qatar-2 is a K-type main-sequence star about 595 light-years away in the constellation of Virgo.",
+      "introduction": "The star is much older than Sun, and has a concentration of heavy elements similar to solar abundance."
+    }
+  },
+  "notes": [],
+  "order": 3850
+}

@@ -1,0 +1,46 @@
+{
+  "id": "k2-32",
+  "name": "K2-32",
+  "system": "K2-32 system",
+  "description": "Star of 5,271 K, 158 parsecs away, with 4 transiting planets.",
+  "target": "K2-32",
+  "gaia": "4130539180358512768",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+    "credit": "Lillo-Box et al. 2020"
+  },
+  "radius": {
+    "value": 0.86,
+    "source": "Lillo-Box et al. 2020, the stellar radius of the default parameter set of K2-32 e in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.83,
+    "source": "Lillo-Box et al. 2020, the stellar mass of the default parameter set of K2-32 e in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5271,
+    "source": "Lillo-Box et al. 2020, the stellar temperature of the default parameter set of K2-32 e in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+    "uncertainty": 39
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "4 planets cross K2-32 as seen from Earth: b, c, d, e.",
+    "introduction": "Its radius and temperature follow Lillo-Box et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LILLO_BOX_ET_AL__2020): st_teff 5271, st_rad 0.86, st_mass 0.83",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/K2-32",
+      "title": "K2-32",
+      "revision": "1374406472",
+      "card": "K2-32 is a G9-type main sequence star slightly smaller and less massive than the sun.",
+      "introduction": "Four confirmed transiting exoplanets are known to orbit this star."
+    }
+  },
+  "notes": [],
+  "order": 3490
+}

@@ -323,8 +323,12 @@ export async function reconcileSources(files: Map<string, string | Buffer>, root
   const { readdir } = await import('node:fs/promises'), directory = resolve(root, 'src/sources'), owners = new Map<string, string>();
   type SourceIdentity = { id: string; identityLevel?: string; version?: string; identifiers?: { type: string; value: string }[] };
   const key = (record: SourceIdentity) => (record.identifiers ?? []).map(id => `${record.identityLevel}:${record.version ?? ''}:${id.type}:${id.value}`);
-  for (const name of await readdir(directory)) {
-    const record = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as SourceIdentity;
+  // The catalogue is the directory's JSON records; it also holds folders (astronomy-data) that are not records.
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith('.json')) continue;
+    const name = entry.name, text = await readFile(resolve(directory, name), 'utf8');
+    let record: SourceIdentity;
+    try { record = JSON.parse(text) as SourceIdentity; } catch (error) { throw new TypeError(`src/sources/${name} is not a JSON source record: ${(error as Error).message}`); }
     for (const identity of key(record)) owners.set(identity, record.id);
   }
   const renames = new Map<string, string>();
@@ -471,11 +475,13 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
   return results;
 }
 
+/** Hosts whose planets are written at once (runHostedPhase). */
+export const HOSTED_CONCURRENCY = 8;
 /** Phase two, in a process that loads the rebuilt astronomy package: every hosted body's package. */
 export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_TT }: Pick<SolarEpoch, 'SOLAR_GEOMETRY_EPOCH_JD_TT'>, root = process.cwd()): Promise<NewObjectResult[]> {
   const { hostedPackage } = await import('./hosted.mts');
   const { refresh, records } = JSON.parse(await readFile(resolve(root, handoff), 'utf8')) as { refresh: boolean; records: any[] }, results: NewObjectResult[] = [];
-  for (const saved of records) {
+  const write = async (saved: any): Promise<NewObjectResult> => {
     try {
       const record = { ...saved, documents: new Map(Object.entries(saved.documents as Record<string, string>)) };
       const hostBody = JSON.parse(await readFile(resolve(root, `packages/astronomy/data/bodies/${record.hostId}.json`), 'utf8'));
@@ -490,11 +496,20 @@ export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_
       await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
       // Every hosted body's marker is drawn from its default lens: a companion's colour, a planet's colour or map.
       const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]);
-      results.push({ id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}), ...(kept.length ? { kept } : {}),
+      return { id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}), ...(kept.length ? { kept } : {}),
         orbit: 'whereistheplanet' in record.spec.orbit ? `whereistheplanet ${record.spec.orbit.whereistheplanet}` : 'archive' in record.spec.orbit ? `NASA Exoplanet Archive (${record.orbitCitation.label})` : 'record' in record.spec.orbit ? `its kept record (${record.orbitCitation.label})` : 'cited elements',
-        todo: [...record.todo, ...record.spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the body and its evidence']] });
-    } catch (error) { results.push({ id: saved.spec.id, kind: saved.spec.kind, files: 0, todo: [], failed: reason(error) }); }
-  }
+        todo: [...record.todo, ...record.spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the body and its evidence']] };
+    } catch (error) { return { id: saved.spec.id, kind: saved.spec.kind, files: 0, todo: [], failed: reason(error) }; }
+  };
+  // The planets wait on the archives and MAST, not the CPU (a 20-host slice one at a time used 15% of one core), so HOSTED_CONCURRENCY
+  // hosts are written at once. A host's planets stay one after another: they share its TESS light curves and their source record.
+  const byHost = new Map<string, any[]>();
+  records.forEach(saved => byHost.set(saved.hostId, [...byHost.get(saved.hostId) ?? [], saved]));
+  const hosts = [...byHost.values()], written = new Map<unknown, NewObjectResult>();
+  await Promise.all(Array.from({ length: Math.min(HOSTED_CONCURRENCY, hosts.length) }, async () => {
+    for (let group = hosts.shift(); group; group = hosts.shift()) for (const saved of group) written.set(saved, await write(saved));
+  }));
+  for (const saved of records) results.push(written.get(saved)!);
   return results;
 }
 export const formatNewObject = (results: readonly NewObjectResult[]) => `${results.map(result => result.failed ? `${result.id} (${result.kind}): FAILED, not written: ${result.failed}` : `${result.id} (${result.kind}): ${result.files} files.${result.kept?.length ? ` Kept what a person wrote: ${result.kept.join('; ')}.` : ''}${result.hex ? ` Colour ${result.hex}${result.color ? ` from ${result.color}` : ''}${result.crossCheck ? `, cross-checked against ${result.crossCheck.route} (${result.crossCheck.difference} levels)` : ''}.` : ''}${result.limb ? ` Limb ${result.limb}.` : ''}${result.orbit ? ` Orbit from ${result.orbit}.` : ''}\n${result.todo.length ? `  Still to write: ${result.todo.join('; ')}.` : ''}`).join('\n')}\nReplace every ${TODO}, then bake: node packages/bake/cli/prepare-object.mts <id>\n`;
@@ -511,12 +526,15 @@ export async function draftsFromArchive(hosts: readonly string[], { root = proce
   // DRAFT_CONCURRENCY hosts are read at once; the spec and the report keep the order the hosts were given in.
   const results: ({ drafted: Awaited<ReturnType<typeof archiveSpec>> } | { failure: string })[] = [];
   let next = 0;
+  // The draft chooses the planets: each is added for what was measured of it (from-archive.mts measuredEvidence).
+  const { measuredEvidence } = await import('./from-archive.mts'), { liveTessArchive } = await import('./transit-chart.mts');
+  const evidence = measuredEvidence(liveArchive, await liveTessArchive());
   await Promise.all(Array.from({ length: Math.min(DRAFT_CONCURRENCY, hosts.length) }, async () => {
     for (let i = next++; i < hosts.length; i = next++) {
       const host = hosts[i]!;
       progress(`${host}: reading its default parameter sets`);
       // A host the archive cannot give a spec for is reported and left out; the rest of the batch is still drafted.
-      try { results[i] = { drafted: await archiveSpec(liveArchive, host, universe) }; }
+      try { results[i] = { drafted: await archiveSpec(liveArchive, host, universe, evidence) }; }
       catch (error) { const line = (error as Error).message.split('\n')[0]!; results[i] = { failure: line.startsWith(`${host}:`) ? line : `${host}: ${line}` }; progress(`  left out: ${(results[i] as { failure: string }).failure}`); }
     }
   }));

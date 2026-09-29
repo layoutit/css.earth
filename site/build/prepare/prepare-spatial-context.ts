@@ -99,6 +99,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       // Only notable asteroids are map targets: JPL mission targets and those with real imagery. The rest are plain dots.
       const imagery = (discoveries[object.id] as { imagery?: unknown } | undefined)?.imagery === true;
       if (object.classification === 'asteroid' && !isJplMissionTarget(object) && !imagery) body.plainDot = true;
+      // The galactic map's stars are decorative except the notable ones: a star is a map target only when it is featured (an IAU
+      // name, or marked notable), has real imagery or hosts a body that does. Every other star, archive hosts included, is a
+      // plain dot; its page stays reachable through search.
+      const discovery = discoveries[object.id] as { featured?: unknown; hostsImagery?: unknown } | undefined;
+      if (object.classification === 'star' && body !== input.focus && !imagery && discovery?.featured !== true && discovery?.hostsImagery !== true) body.plainDot = true;
       // A star's dot is its colour dimmed by its luminosity, L/L☉ = (R/R☉)²(T/T☉)⁴ from the radius and effective temperature
       // its package cites, against the IAU 2015 nominal solar values. Baked here, so the map writes nothing per frame for it.
       // A star whose package cites neither keeps its full colour.

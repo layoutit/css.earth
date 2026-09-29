@@ -1,0 +1,24 @@
+{
+  "host": "mascara-1",
+  "planets": [
+    {
+      "id": "mascara-1b",
+      "name": "MASCARA-1 b",
+      "description": "Transiting planet of MASCARA-1 with a 2.14-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+        "credit": "Hooton et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HOOTON_ET_AL__2022"
+      },
+      "text": {
+        "card": "MASCARA-1 b was found in 2017 as it crossed its star.",
+        "introduction": "It is the only planet known around MASCARA-1. Its orbit and size follow Hooton et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOOTON_ET_AL__2022): disc_year 2017, disc_facility Multiple Observatories, sy_pnum 1; pl_orbper 2.1425095, pl_radj 1.597, pl_bmassj 3.7"
+      },
+      "order": 3841
+    }
+  ]
+}

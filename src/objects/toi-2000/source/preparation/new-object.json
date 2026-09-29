@@ -1,0 +1,39 @@
+{
+  "id": "toi-2000",
+  "name": "TOI-2000",
+  "system": "TOI-2000 system",
+  "description": "Star of 5,611 K, 176 parsecs away, with 2 transiting planets.",
+  "target": "TOI-2000",
+  "gaia": "5244434756689177088",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract",
+    "credit": "Sha et al. 2023"
+  },
+  "radius": {
+    "value": 1.134,
+    "source": "Sha et al. 2023, the stellar radius of the default parameter set of TOI-2000 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract",
+    "uncertainty": 0.037
+  },
+  "mass": {
+    "value": 1.082,
+    "source": "Sha et al. 2023, the stellar mass of the default parameter set of TOI-2000 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract",
+    "uncertainty": 0.059
+  },
+  "temperature": {
+    "value": 5611,
+    "source": "Sha et al. 2023, the stellar temperature of the default parameter set of TOI-2000 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract",
+    "uncertainty": 85
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-2000 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Sha et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SHA_ET_AL_2023): st_teff 5611, st_rad 1.134, st_mass 1.082"
+  },
+  "notes": [],
+  "order": 4204
+}

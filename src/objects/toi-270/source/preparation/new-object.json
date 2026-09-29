@@ -1,0 +1,46 @@
+{
+  "id": "toi-270",
+  "name": "TOI-270",
+  "system": "TOI-270 system",
+  "description": "Star of 3,506 K, 22.5 parsecs away, with 3 transiting planets.",
+  "target": "TOI-270",
+  "gaia": "4781196115469953024",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract",
+    "credit": "Kaye et al. 2022"
+  },
+  "radius": {
+    "value": 0.38,
+    "source": "Kaye et al. 2022, the stellar radius of the default parameter set of TOI-270 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract",
+    "uncertainty": 0.008
+  },
+  "mass": {
+    "value": 0.386,
+    "source": "Kaye et al. 2022, the stellar mass of the default parameter set of TOI-270 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract",
+    "uncertainty": 0.008
+  },
+  "temperature": {
+    "value": 3506,
+    "source": "Kaye et al. 2022, the stellar temperature of the default parameter set of TOI-270 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "3 planets cross TOI-270 as seen from Earth: b, c, d.",
+    "introduction": "Its radius and temperature follow Kaye et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname KAYE_ET_AL__2022): st_teff 3506, st_rad 0.38, st_mass 0.386",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-270",
+      "title": "TOI-270",
+      "revision": "1375755552",
+      "card": "TOI-270 is a red dwarf star 73.3 light-years away in the constellation Pictor.",
+      "introduction": "It has about 39% the mass and 38% the radius of the Sun, and a temperature of about 3,506 K. TOI-270 hosts a system of three known exoplanets."
+    }
+  },
+  "notes": [],
+  "order": 4336
+}

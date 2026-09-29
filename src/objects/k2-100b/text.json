@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-100b",
+  "card": {
+    "text": "K2-100 b was found in 2016 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stz2569",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract",
+        "label": "Barragán et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARRAG_AACUTE_N_ET_AL__2019): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 1.6739035, pl_radj 0.34615101, pl_bmassj 0.06859047"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around K2-100. Its orbit and size follow Barragán et al. 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stz2569",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract",
+        "label": "Barragán et al. 2019",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARRAG_AACUTE_N_ET_AL__2019): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 1.6739035, pl_radj 0.34615101, pl_bmassj 0.06859047"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

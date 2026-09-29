@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "ngts-11b",
+  "radiusKm": 58409,
+  "radiusSource": "Radius 0.817 Jupiter radii from Gill et al. 2020 (2020ApJ...898L..11G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract): 58,409 km at 71,492 km per Jupiter radius. GM from the mass 0.344 Jupiter masses (Gill et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020ApJ...898L..11G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 35.455984,
+  "orbitalPeriodSource": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 35.455984 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of NGTS-11 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.344 Jupiter masses: Gill et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020ApJ...898L..11G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract)."
+}

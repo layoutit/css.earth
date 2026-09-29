@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1273b",
+  "radiusKm": 70777.1,
+  "radiusSource": "Radius 0.99 Jupiter radii from Serrano Bell et al. 2024 (2024A&A...684A...6S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract): 70,777.1 km at 71,492 km per Jupiter radius. GM from the mass 0.222 Jupiter masses (Serrano Bell et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...684A...6S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.631296,
+  "orbitalPeriodSource": "Serrano Bell et al. 2024 (2024A&A...684A...6S), via the NASA Exoplanet Archive ps table (pl_refname SERRANO_BELL_ET_AL_2024): P 4.631296 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1273 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.222 Jupiter masses: Serrano Bell et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...684A...6S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract)."
+}

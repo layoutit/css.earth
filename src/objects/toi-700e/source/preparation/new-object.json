@@ -1,0 +1,30 @@
+{
+  "host": "toi-700",
+  "planets": [
+    {
+      "id": "toi-700e",
+      "name": "TOI-700 e",
+      "description": "Transiting planet of TOI-700 with a 27.8-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....172..175P/abstract",
+        "credit": "Pass et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PASS_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-700 e was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around TOI-700. Its orbit and size follow Pass et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASS_ET_AL_2026): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 27.810124, pl_radj 0.08198783, pl_bmassj 0.00226",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-700_e",
+          "title": "TOI-700 e",
+          "revision": "1374086710",
+          "card": "TOI-700 e is the second outermost known exoplanet orbiting TOI-700, a red dwarf star in the constellation of Dorado."
+        }
+      },
+      "order": 4670
+    }
+  ]
+}

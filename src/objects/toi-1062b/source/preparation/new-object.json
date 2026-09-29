@@ -1,0 +1,24 @@
+{
+  "host": "toi-1062",
+  "planets": [
+    {
+      "id": "toi-1062b",
+      "name": "TOI-1062 b",
+      "description": "Transiting planet of TOI-1062 with a 4.12-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract",
+        "credit": "Otegi et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "OTEGI_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-1062 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1062. Its orbit and size follow Otegi et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OTEGI_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.11505271542, pl_radj 0.20207011, pl_bmassj 0.03193547"
+      },
+      "order": 3913
+    }
+  ]
+}

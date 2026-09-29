@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "k2-100b",
+  "radiusKm": 24747,
+  "radiusSource": "Radius 0.34615101 Jupiter radii from Barragán et al. 2019 (2019MNRAS.490..698B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract): 24,747 km at 71,492 km per Jupiter radius. GM from the mass 0.06859047 Jupiter masses (Barragán et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019MNRAS.490..698B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.6739035,
+  "orbitalPeriodSource": "Barragán et al. 2019 (2019MNRAS.490..698B), via the NASA Exoplanet Archive ps table (pl_refname BARRAG_AACUTE_N_ET_AL__2019): P 1.6739035 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-100 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.06859047 Jupiter masses: Barragán et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019MNRAS.490..698B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract)."
+}

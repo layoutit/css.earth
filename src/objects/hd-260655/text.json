@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-260655",
+  "card": {
+    "text": "2 planets cross HD 260655 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243834",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L/abstract",
+        "label": "Luque et al. (2022), Astronomy & Astrophysics 664 A199",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LUQUE_ET_AL_2022): st_teff 3803, st_rad 0.439, st_mass 0.439"
+      },
+      {
+        "catalogueId": "wikipedia-hd-260655",
+        "url": "https://en.wikipedia.org/wiki/HD_260655",
+        "label": "Wikipedia, \"HD 260655\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374441552",
+        "quote": "HD 260655 is a relatively bright and cool M0 V red dwarf star located 33 light-years away from the Solar System in the constellation of Gemini."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Luque et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243834",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L/abstract",
+        "label": "Luque et al. (2022), Astronomy & Astrophysics 664 A199",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LUQUE_ET_AL_2022): st_teff 3803, st_rad 0.439, st_mass 0.439"
+      },
+      {
+        "catalogueId": "wikipedia-hd-260655",
+        "url": "https://en.wikipedia.org/wiki/HD_260655",
+        "label": "Wikipedia, \"HD 260655\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374441552",
+        "quote": "HD 260655 has two confirmed rocky planets, named HD 260655 b and HD 260655 c, that were discovered in 2022."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kelt-20b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kelt-20b-orbits",
+      "title": "KELT-20 b: orbits around KELT-20",
+      "output": "kelt-20b-system-orbits.svg",
+      "system": "kelt-20",
+      "highlight": "kelt-20b",
+      "description": "The orbits of KELT-20's planets in this map from above, to scale, with KELT-20 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.4741012 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "kelt-20b-transit",
+      "title": "KELT-20 b: its transit",
+      "description": "KELT-20 b crossing its star, as TESS recorded it: 3 sectors (74, 75, 81) of the SPOC pipeline's 2-minute light curves of TIC 69679391, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 14-minute bins. Error bars are each bin's standard error.",
+      "output": "kelt-20b-transit.svg",
+      "metadata": {
+        "tic": "TIC 69679391",
+        "sectors": [
+          74,
+          75,
+          81
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "kelt-20b",
+      "sources": [
+        "photometry/tess/tess2024003055635-s0074-0000000069679391-0269-s_lc.fits",
+        "photometry/tess/tess2024030031500-s0075-0000000069679391-0270-s_lc.fits",
+        "photometry/tess/tess2024196212429-s0081-0000000069679391-0276-s_lc.fits"
+      ],
+      "durationHours": 3.57552,
+      "binMinutes": 14,
+      "notes": [
+        "TESS 2-min SPOC · sectors 74, 75, 81",
+        "Folded on the app's orbit; 14-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-50b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-50b-orbits",
+      "title": "WASP-50 b: orbits around WASP-50",
+      "output": "wasp-50b-system-orbits.svg",
+      "system": "wasp-50",
+      "highlight": "wasp-50b",
+      "description": "The orbits of WASP-50's planets in this map from above, to scale, with WASP-50 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Yalçınkaya et al. 2024 (2024MNRAS.530.2475Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2024): P 1.955092447 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-50b-transit",
+      "title": "WASP-50 b: its transit",
+      "description": "WASP-50 b crossing its star, as TESS recorded it: 2 sectors (4, 31) of the SPOC pipeline's 2-minute light curves of TIC 382391899, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-50b-transit.svg",
+      "metadata": {
+        "tic": "TIC 382391899",
+        "sectors": [
+          4,
+          31
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-50b",
+      "sources": [
+        "photometry/tess/tess2018292075959-s0004-0000000382391899-0124-s_lc.fits",
+        "photometry/tess/tess2020294194027-s0031-0000000382391899-0198-s_lc.fits"
+      ],
+      "durationHours": 1.8336,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sectors 4, 31",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

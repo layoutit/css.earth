@@ -1,0 +1,30 @@
+{
+ "id": "wasp-77-a",
+ "classification": "star",
+ "order": 4838,
+ "physical": {
+  "name": "WASP-77 A",
+  "horizonsCode": null,
+  "meanRadiusKm": 633087,
+  "gravitationalParameterKm3PerS2": 119839333357.87126,
+  "parent": null,
+  "effectiveTemperatureK": 5617
+ },
+ "physicalNotes": "Radius 0.91 +/- 0.025 solar radii from Cortés-Zuleta et al. 2020, the stellar radius of the default parameter set of WASP-77 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract): 633,087 km at 695,700 km per solar radius. Mass 0.903 +/- 0.066 solar masses from Cortés-Zuleta et al. 2020, the stellar mass of the default parameter set of WASP-77 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract); GM is that mass times the JPL solar GM. Temperature 5617 +/- 72 K from Cortés-Zuleta et al. 2020, the stellar temperature of the default parameter set of WASP-77 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 37.15553535830327,
+  "declinationDegrees": -7.060667754206362,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 105.67603112682374,
+  "properMotionRaMasPerYear": 93.70813945698654,
+  "properMotionDecMasPerYear": -1.7167750399182646,
+  "radialVelocityKmPerS": 1.4397211,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5178405479961698048 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wasp-77-a/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 9.4629 +/- 0.0183 mas (same row, RUWE 0.91): 105.68 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 93.708, -1.717 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 1.44 +/- 0.17 km/s"
+  }
+ }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac6094",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Angelo et al. (2022): Kepler-1656b’s Extreme Eccentricity: Signature of a Gentle Giant",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2204.00019"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac6094"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....163..227A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac6094",
+      "label": "The Astronomical Journal 163 227"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Angelo et al. (2022), The Astronomical Journal 163 227",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A"
+    }
+  ],
+  "publisher": "The Astronomical Journal 163 227",
+  "creators": [
+    "Isabel Angelo",
+    "Smadar Naoz",
+    "Erik Petigura",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

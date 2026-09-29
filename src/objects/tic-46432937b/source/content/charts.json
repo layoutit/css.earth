@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/tic-46432937b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "tic-46432937b-orbits",
+      "title": "TIC 46432937 b: orbits around TIC 46432937",
+      "output": "tic-46432937b-system-orbits.svg",
+      "system": "tic-46432937",
+      "highlight": "tic-46432937b",
+      "description": "The orbits of TIC 46432937's planets in this map from above, to scale, with TIC 46432937 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Hartman et al. 2024 (2024AJ....168..202H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL_2024): P 1.44044527 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "tic-46432937b-transit",
+      "title": "TIC 46432937 b: its transit",
+      "description": "TIC 46432937 b crossing its star, as TESS recorded it: 1 sector (98) of the SPOC pipeline's 2-minute light curves of TIC 46432937, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "output": "tic-46432937b-transit.svg",
+      "metadata": {
+        "tic": "TIC 46432937",
+        "sectors": [
+          98
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "tic-46432937b",
+      "sources": [
+        "photometry/tess/tess2025312202959-s0098-0000000046432937-0298-s_lc.fits"
+      ],
+      "durationHours": 1.195,
+      "binMinutes": 5,
+      "notes": [
+        "TESS 2-min SPOC · sector 98",
+        "Folded on the app's orbit; 5-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

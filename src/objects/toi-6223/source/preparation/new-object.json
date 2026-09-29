@@ -1,0 +1,39 @@
+{
+  "id": "toi-6223",
+  "name": "TOI-6223",
+  "system": "TOI-6223 system",
+  "description": "Star of 3,895 K, 133 parsecs away, with 1 transiting planet.",
+  "target": "TOI-6223",
+  "gaia": "2872039996566868480",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+    "credit": "Yalçinkaya et al. 2025"
+  },
+  "radius": {
+    "value": 0.576,
+    "source": "Yalçinkaya et al. 2025, the stellar radius of the default parameter set of TOI-6223 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+    "uncertainty": 0.022
+  },
+  "mass": {
+    "value": 0.582,
+    "source": "Yalçinkaya et al. 2025, the stellar mass of the default parameter set of TOI-6223 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+    "uncertainty": 0.027
+  },
+  "temperature": {
+    "value": 3895,
+    "source": "Yalçinkaya et al. 2025, the stellar temperature of the default parameter set of TOI-6223 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract",
+    "uncertainty": 44
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-6223 b crosses TOI-6223 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Yalçinkaya et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname YALCINKAYA_ET_AL_2025): st_teff 3895, st_rad 0.576, st_mass 0.582"
+  },
+  "notes": [],
+  "order": 4622
+}

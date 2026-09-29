@@ -1,0 +1,30 @@
+{
+ "id": "toi-1467",
+ "classification": "star",
+ "order": 4057,
+ "physical": {
+  "name": "TOI-1467",
+  "horizonsCode": null,
+  "meanRadiusKm": 341588.7,
+  "gravitationalParameterKm3PerS2": 64896383180.50835,
+  "parent": null,
+  "effectiveTemperatureK": 3834
+ },
+ "physicalNotes": "Radius 0.491 +/- 0.015 solar radii from Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-1467 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract): 341,589 km at 695,700 km per solar radius. Mass 0.489 +/- 0.02 solar masses from Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1467 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract); GM is that mass times the JPL solar GM. Temperature 3834 +/- 157 K from Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1467 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 19.114667108553338,
+  "declinationDegrees": 49.23311747326056,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 37.51688841880286,
+  "properMotionRaMasPerYear": 108.37694951529784,
+  "properMotionDecMasPerYear": -149.1450608058415,
+  "radialVelocityKmPerS": -25.48802,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 403141126645929728 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1467/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 26.6547 +/- 0.0223 mas (same row, RUWE 1.47): 37.52 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): 108.377, -149.145 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -25.49 +/- 0.22 km/s"
+  }
+ }
+}

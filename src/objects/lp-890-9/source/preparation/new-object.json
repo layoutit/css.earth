@@ -1,0 +1,46 @@
+{
+  "id": "lp-890-9",
+  "name": "LP 890-9",
+  "system": "LP 890-9 system",
+  "description": "Star of 2,850 K, 32.4 parsecs away, with 2 transiting planets.",
+  "target": "LP 890-9",
+  "gaia": "4886243456388510720",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract",
+    "credit": "Delrez et al. 2022"
+  },
+  "radius": {
+    "value": 0.1556,
+    "source": "Delrez et al. 2022, the stellar radius of the default parameter set of LP 890-9 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract",
+    "uncertainty": 0.0086
+  },
+  "mass": {
+    "value": 0.118,
+    "source": "Delrez et al. 2022, the stellar mass of the default parameter set of LP 890-9 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract",
+    "uncertainty": 0.002
+  },
+  "temperature": {
+    "value": 2850,
+    "source": "Delrez et al. 2022, the stellar temperature of the default parameter set of LP 890-9 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract",
+    "uncertainty": 75
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross LP 890-9 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Delrez et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DELREZ_ET_AL_2022): st_teff 2850, st_rad 0.1556, st_mass 0.118",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/LP_890-9",
+      "title": "LP 890-9",
+      "revision": "1374442800",
+      "card": "LP 890-9 is a red dwarf star located 105 light-years (32 pc) away from the Solar System in the constellation of Eridanus.",
+      "introduction": "The star has 12% the mass and 15% the radius of the Sun, and a temperature of 2,871 K. It is extremely faint and, with an apparent magnitude of 18, is the faintest star with exoplanets discovered by the Transiting Exoplanet Survey Satellite (TESS)."
+    }
+  },
+  "notes": [],
+  "order": 3829
+}

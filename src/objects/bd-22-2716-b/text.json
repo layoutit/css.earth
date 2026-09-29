@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "bd-22-2716-b",
+  "card": {
+    "text": "BD+22 2716B is a star of 3,345 K, bound to WASP-14 1,855 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 1242084170974175232 and 1242084166679297920, sep_AU 1855.124194337802919, R_chance_align 2.394043899048555542e-05"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "BD+22 2716B shares its motion through space with WASP-14, 1,855 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 1242084170974175232 and 1242084166679297920, sep_AU 1855.124194337802919, R_chance_align 2.394043899048555542e-05"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

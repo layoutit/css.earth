@@ -1,0 +1,24 @@
+{
+  "host": "toi-1634",
+  "planets": [
+    {
+      "id": "toi-1634b",
+      "name": "TOI-1634 b",
+      "description": "Transiting planet of TOI-1634 with a 0.989-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag520P/abstract",
+        "credit": "Palethorpe et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PALETHORPE_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-1634 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1634. Its orbit and size follow Cloutier et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PALETHORPE_ET_AL_2026): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 0.98934551, pl_radj 0.15692774, pl_bmassj 0.01541712"
+      },
+      "order": 4073
+    }
+  ]
+}

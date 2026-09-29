@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ac8153",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rice et al. (2022): A Tendency Toward Alignment in Single-star Warm-Jupiter Systems",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2207.06511"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac8153"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022AJ....164..104R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..104R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ac8153",
+      "label": "The Astronomical Journal 164 104"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..104R",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Rice et al. (2022), The Astronomical Journal 164 104",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..104R"
+    }
+  ],
+  "publisher": "The Astronomical Journal 164 104",
+  "creators": [
+    "Malena Rice",
+    "Songhu Wang",
+    "Xian-Yu Wang",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

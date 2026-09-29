@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ltt-1445-a-c",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "LTT 1445 A c",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7315.7
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ltt-1445-a-c-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "LTT 1445 A c",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 1415744.5,
+      "description": "LTT 1445 A c was found in 2022 by TESS as it crossed its star.",
+      "systemName": "LTT 1445 system",
+      "order": 3833,
+      "context": {
+        "order": 3833
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        142361592487704100,
+        144672513078084960,
+        -60490062101572216
+      ],
+      "presentationToReference": [
+        0.6395240796183107,
+        0.7422134924782495,
+        0.20031995200576536,
+        0.7138625621000283,
+        -0.6700411437105098,
+        0.20358071658950255,
+        -0.28532296441109684,
+        -0.01280614377365258,
+        0.9583458711035973
+      ],
+      "orbitUpReference": [
+        -0.7422134924782495,
+        0.6700411437105098,
+        0.01280614377365258
+      ],
+      "metersPerUnit": 23599.032258064515,
+      "bodyRadiusM": 7315700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

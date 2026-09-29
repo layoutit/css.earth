@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-23472d",
+  "radiusKm": 4783.6,
+  "radiusSource": "Radius 0.06691063 Jupiter radii from Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract): 4,783.6 km at 71,492 km per Jupiter radius. GM from the mass 0.00173049 Jupiter masses (Barros et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...665A.154B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 3.9766833,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.9766833 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 23472 d is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00173049 Jupiter masses: Barros et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...665A.154B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)."
+}

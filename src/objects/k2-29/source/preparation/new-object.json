@@ -1,0 +1,39 @@
+{
+  "id": "k2-29",
+  "name": "K2-29",
+  "system": "K2-29 system",
+  "description": "Star of 5,358 K, 178 parsecs away, with 1 transiting planet.",
+  "target": "K2-29",
+  "gaia": "150054788545735424",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract",
+    "credit": "Santerne et al. 2016"
+  },
+  "radius": {
+    "value": 0.86,
+    "source": "Santerne et al. 2016, the stellar radius of the default parameter set of K2-29 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.94,
+    "source": "Santerne et al. 2016, the stellar mass of the default parameter set of K2-29 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5358,
+    "source": "Santerne et al. 2016, the stellar temperature of the default parameter set of K2-29 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract",
+    "uncertainty": 38
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-29 b crosses K2-29 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Santerne et al. 2016.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SANTERNE_ET_AL__2016): st_teff 5358, st_rad 0.86, st_mass 0.94"
+  },
+  "notes": [],
+  "order": 3470
+}

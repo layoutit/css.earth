@@ -1,0 +1,31 @@
+{
+ "id": "toi-4507b",
+ "classification": "exoplanet",
+ "order": 4429,
+ "physical": {
+  "name": "TOI-4507 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 52300.4,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-4507"
+ },
+ "physicalNotes": "Radius 0.73155626 Jupiter radii from Espinoza-Retamal et al. 2026 (2026ApJ...996L..13E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract): 52,300.4 km at 71,492 km per Jupiter radius. No mass is measured: Espinoza-Retamal et al. 2026 (2026ApJ...996L..13E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract) gives only an upper limit of 0.06292704 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 104.616063,
+  "semiMajorAxisStellarRadii": 93.4,
+  "inclinationDegrees": 89.93,
+  "eccentricity": 0.09,
+  "argumentOfPeriapsisDegrees": 237,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59668.74457,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Rea et al. 2026 (2026A&A...711A..86R), via the NASA Exoplanet Archive ps table (pl_refname REA_ET_AL_2026): P 104.616063 d",
+   "shape": "Espinoza-Retamal et al. 2026 (2026ApJ...996L..13E), via the NASA Exoplanet Archive ps table (pl_refname ESPINOZA_RETAMAL_ET_AL_2026): a/R* 93.4; Espinoza-Retamal et al. 2026 (2026ApJ...996L..13E), via the NASA Exoplanet Archive ps table (pl_refname ESPINOZA_RETAMAL_ET_AL_2026): inclination 89.93 degrees",
+   "eccentricity": "Espinoza-Retamal et al. 2026 (2026ApJ...996L..13E), via the NASA Exoplanet Archive ps table (pl_refname ESPINOZA_RETAMAL_ET_AL_2026): e 0.09",
+   "argumentOfPeriapsis": "Espinoza-Retamal et al. 2026 (2026ApJ...996L..13E), via the NASA Exoplanet Archive ps table (pl_refname ESPINOZA_RETAMAL_ET_AL_2026): omega -123 degrees, stored as 237",
+   "phase": "Rea et al. 2026 (2026A&A...711A..86R), via the NASA Exoplanet Archive ps table (pl_refname REA_ET_AL_2026): transit mid-time 2459669.24457 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

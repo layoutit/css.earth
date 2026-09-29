@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-12",
+  "card": {
+    "text": "HAT-P-12 b crosses HAT-P-12 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-706-1-785",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
+        "label": "Hartman et al. (2009), The Astrophysical Journal 706 785-796",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HARTMAN_ET_AL__2009): st_teff 4650, st_rad 0.701, st_mass 0.733"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-12",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-12",
+        "label": "Wikipedia, \"HAT-P-12\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1352396823",
+        "quote": "HAT-P-12, also named Komondor, is a magnitude 13 low-metallicity K dwarf star approximately 463 light years away in the constellation Canes Venatici, which hosts one known exoplanet."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hartman et al. 2009.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-706-1-785",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
+        "label": "Hartman et al. (2009), The Astrophysical Journal 706 785-796",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HARTMAN_ET_AL__2009): st_teff 4650, st_rad 0.701, st_mass 0.733"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

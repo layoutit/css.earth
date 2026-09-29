@@ -1,0 +1,24 @@
+{
+  "host": "toi-220",
+  "planets": [
+    {
+      "id": "toi-220b",
+      "name": "TOI-220 b",
+      "description": "Transiting planet of TOI-220 with a 10.7-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.3361H/abstract",
+        "credit": "Hoyer et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HOYER_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-220 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-220. Its orbit and size follow Hoyer et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOYER_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 10.69530651172, pl_radj 0.27031896, pl_bmassj 0.04341966"
+      },
+      "order": 4267
+    }
+  ]
+}

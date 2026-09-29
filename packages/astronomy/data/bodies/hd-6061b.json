@@ -1,0 +1,28 @@
+{
+ "id": "hd-6061b",
+ "classification": "exoplanet",
+ "order": 3227,
+ "physical": {
+  "name": "HD 6061 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 15483.7,
+  "gravitationalParameterKm3PerS2": 3986004.23,
+  "parent": "hd-6061"
+ },
+ "physicalNotes": "Radius 0.21657951 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 15,483.7 km at 71,492 km per Jupiter radius. GM from the mass 0.03146352 Jupiter masses (Polanski et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 5.2544884,
+  "semiMajorAxisStellarRadii": 12.8097,
+  "inclinationDegrees": 88.738,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60608.352345,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 5.2544884 d",
+   "shape": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): a/R* derived from its semi-major axis 0.06 au and stellar radius 1.0072 solar radii; Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): inclination derived from its impact parameter 0.282173 with its a/R* 12.8097 (Winn 2010, eq. 7)",
+   "eccentricity": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460608.852345 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

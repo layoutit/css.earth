@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-ae18c7",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dugan et al. (2025): Early Evidence for Polar Orbits of Sub-Saturns around Hot Stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2510.20740"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ae18c7"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025ApJ...994L..23D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ae18c7",
+      "label": "The Astrophysical Journal Letters 994 L23"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Dugan et al. (2025), The Astrophysical Journal Letters 994 L23",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 994 L23",
+  "creators": [
+    "Emma Dugan",
+    "Xian-Yu Wang",
+    "Agustin Heron",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

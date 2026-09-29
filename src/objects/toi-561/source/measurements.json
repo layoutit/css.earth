@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-561",
+  "angularDiameterMas": 0.09,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 586,475 km at 84.50 pc = 0.09 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 84.50084502816283,
+  "distanceSource": "Gaia DR3 parallax 11.8342 +/- 0.0208 mas (same row, RUWE 1.24): 84.50 pc, no zero-point correction",
+  "radiusKm": 586475.1,
+  "radiusSource": "Radius 0.843 +/- 0.005 solar radii from Piotto et al. 2024, the stellar radius of the default parameter set of TOI-561 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract): 586,475 km at 695,700 km per solar radius. Mass 0.806 +/- 0.036 solar masses from Piotto et al. 2024, the stellar mass of the default parameter set of TOI-561 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract); GM is that mass times the JPL solar GM. Temperature 5342 +/- 57 K from MacDougall et al. 2023, the stellar temperature of TOI-561 b's parameter set from MacDougall et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5342,
+  "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of TOI-561 b's parameter set from MacDougall et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "surfaceGravityLogg": 4.49,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-561.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.493, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

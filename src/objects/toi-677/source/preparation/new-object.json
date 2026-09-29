@@ -1,0 +1,46 @@
+{
+  "id": "toi-677",
+  "name": "TOI-677",
+  "system": "TOI-677 system",
+  "description": "Star of 6,295 K, 142 parsecs away, with 1 transiting planet.",
+  "target": "TOI-677",
+  "gaia": "5313031504751276032",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract",
+    "credit": "Jordán et al. 2020"
+  },
+  "radius": {
+    "value": 1.28,
+    "source": "Jordán et al. 2020, the stellar radius of the default parameter set of TOI-677 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 1.181,
+    "source": "Jordán et al. 2020, the stellar mass of the default parameter set of TOI-677 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract",
+    "uncertainty": 0.058
+  },
+  "temperature": {
+    "value": 6295,
+    "source": "Jordán et al. 2020, the stellar temperature of the default parameter set of TOI-677 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract",
+    "uncertainty": 77
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-677 b crosses TOI-677 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Jordán et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname JORD_AACUTE_N_ET_AL__2020): st_teff 6295, st_rad 1.28, st_mass 1.181",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-677_b",
+      "title": "TOI-677 b",
+      "revision": "1374392731",
+      "card": "TOI-677 b (TOI-677b) is a warm super-Jupiter type exoplanet orbiting the F-type main sequence star TOI-677 in the constellation of Ophiuchus about 466 ly (143 pc) away from Earth.",
+      "introduction": "The mass of the planet has been found to be 1.252 Jupiter masses and the radius of the planet is 1.179 Jupiter radii."
+    }
+  },
+  "notes": [],
+  "order": 4659
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "v1298-tau",
+  "card": {
+    "text": "2 planets cross V1298 Tau as seen from Earth: c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-025-09840-z",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+        "label": "Livingston et al. (2026), Nature 649 310-314",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL_2026): st_teff 4970, st_rad 1.32, st_mass 1.1"
+      },
+      {
+        "catalogueId": "wikipedia-v1298-tauri",
+        "url": "https://en.wikipedia.org/wiki/V1298_Tauri",
+        "label": "Wikipedia, \"V1298 Tauri\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370790833",
+        "quote": "V1298 Tauri is a young weakly-lined T Tauri star that is part of the Taurus-Auriga association in the Taurus Molecular Cloud."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Livingston et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41586-025-09840-z",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+        "label": "Livingston et al. (2026), Nature 649 310-314",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LIVINGSTON_ET_AL_2026): st_teff 4970, st_rad 1.32, st_mass 1.1"
+      },
+      {
+        "catalogueId": "wikipedia-v1298-tauri",
+        "url": "https://en.wikipedia.org/wiki/V1298_Tauri",
+        "label": "Wikipedia, \"V1298 Tauri\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370790833",
+        "quote": "Alternatively it is part of a proposed moving group, called Group 29 that is slightly older."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

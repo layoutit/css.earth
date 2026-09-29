@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-270c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-270c-orbits",
+      "title": "TOI-270 c: orbits around TOI-270",
+      "output": "toi-270c-system-orbits.svg",
+      "system": "toi-270",
+      "highlight": "toi-270c",
+      "description": "The orbits of TOI-270's planets in this map from above, to scale, with TOI-270 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 5.66047732509 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-270c-transit",
+      "title": "TOI-270 c: its transit",
+      "description": "TOI-270 c crossing its star, as TESS recorded it: 3 sectors (32, 97, 98) of the SPOC pipeline's 2-minute light curves of TIC 259377017, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-270c-transit.svg",
+      "metadata": {
+        "tic": "TIC 259377017",
+        "sectors": [
+          32,
+          97,
+          98
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-270c",
+      "sources": [
+        "photometry/tess/tess2020324010417-s0032-0000000259377017-0200-s_lc.fits",
+        "photometry/tess/tess2025258001959-s0097-0000000259377017-0294-s_lc.fits",
+        "photometry/tess/tess2025312202959-s0098-0000000259377017-0298-s_lc.fits"
+      ],
+      "durationHours": 1.682,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sectors 32, 97, 98",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

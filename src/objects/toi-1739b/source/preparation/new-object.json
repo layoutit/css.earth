@@ -1,0 +1,24 @@
+{
+  "host": "toi-1739",
+  "planets": [
+    {
+      "id": "toi-1739b",
+      "name": "TOI-1739 b",
+      "description": "Transiting planet of TOI-1739 with a 8.3-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+        "credit": "Crossfield et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CROSSFIELD_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-1739 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1739. Its orbit and size follow Crossfield et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CROSSFIELD_ET_AL_2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 8.303341406, pl_radj 0.17361079, pl_bmassj 0.014"
+      },
+      "order": 4115
+    }
+  ]
+}

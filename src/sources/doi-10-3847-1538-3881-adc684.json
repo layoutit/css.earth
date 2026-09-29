@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-adc684",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Murphy et al. (2025): HST Transmission Spectra of the Hot Neptune HD 219666 b: Detection of Water and the Challenge of Constraining Both Water and Methane",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2503.03895"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/adc684"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....169..286M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..286M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/adc684",
+      "label": "The Astronomical Journal 169 286"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..286M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Murphy et al. (2025), The Astronomical Journal 169 286",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..286M"
+    }
+  ],
+  "publisher": "The Astronomical Journal 169 286",
+  "creators": [
+    "Matthew M. Murphy",
+    "Thomas G. Beatty",
+    "Luis Welbanks",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

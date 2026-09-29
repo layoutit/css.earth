@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-2041-8213-ab9eb9",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gill et al. (2020): NGTS-11 b (TOI-1847 b): A Transiting Warm Saturn Recovered from a TESS Single-transit Event",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2005.00006"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ab9eb9"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020ApJ...898L..11G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ab9eb9",
+      "label": "The Astrophysical Journal Letters 898 L11"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gill et al. (2020), The Astrophysical Journal Letters 898 L11",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters 898 L11",
+  "creators": [
+    "Samuel Gill",
+    "Peter J. Wheatley",
+    "Benjamin F. Cooke",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

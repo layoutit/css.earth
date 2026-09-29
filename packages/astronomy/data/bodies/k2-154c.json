@@ -1,0 +1,28 @@
+{
+ "id": "k2-154c",
+ "classification": "exoplanet",
+ "order": 3339,
+ "physical": {
+  "name": "K2-154 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 13202.6,
+  "gravitationalParameterKm3PerS2": 1963641.24,
+  "parent": "k2-154"
+ },
+ "physicalNotes": "Radius 0.18467303 Jupiter radii from Livingston et al. 2018 (2018AJ....156...78L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract): 13,202.6 km at 71,492 km per Jupiter radius. GM from the mass 0.0155 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.95478,
+  "semiMajorAxisStellarRadii": 24.9,
+  "inclinationDegrees": 89.034,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57575.88098,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Hirano et al. 2018 (2018AJ....155..127H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): P 7.95478 d",
+   "shape": "Livingston et al. 2018 (2018AJ....156...78L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL__2018): a/R* 24.9; Livingston et al. 2018 (2018AJ....156...78L), via the NASA Exoplanet Archive ps table (pl_refname LIVINGSTON_ET_AL__2018): inclination derived from its impact parameter 0.42 with its a/R* 24.9 (Winn 2010, eq. 7)",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Hirano et al. 2018 (2018AJ....155..127H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): transit mid-time 2457576.38098 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 396 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

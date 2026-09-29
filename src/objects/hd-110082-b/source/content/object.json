@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-110082-b",
+  "displayName": "HD 110082B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.27 solar radii",
+        "source": {
+          "catalogueId": "vizier-iv-39-tic82-hd-189733-companion",
+          "url": "https://doi.org/10.3847/1538-3881/ab3467",
+          "label": "Stassun et al. (2019), The Astronomical Journal 158 138",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "105 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hd-110082-b",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hd-110082-b-lens-color.webp",
+        "surface": "hd-110082-b-surface-color@2x.webp",
+        "poles": "hd-110082-b-poles-color@2x.webp",
+        "source": {
+          "id": "hd-110082-b-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/1538-3881/ab3467"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,262 K and log g 4.96 (u1 0.154, u2 0.466): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269",
+      "href": "https://arxiv.org/abs/2101.05282"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2101.05282",
+      "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-110082-b.json",
+      "credit": "Stassun et al. radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

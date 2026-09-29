@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-138",
+  "card": {
+    "text": "Kepler-138's planets b, c, d, e are placed on the orbits their papers measured.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-022-01835-4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+        "label": "Piaulet et al. (2023), Nature Astronomy",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PIAULET_ET_AL_2023): st_teff 3841, st_rad 0.535, st_mass 0.535"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Piaulet et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-022-01835-4",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+        "label": "Piaulet et al. (2023), Nature Astronomy",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PIAULET_ET_AL_2023): st_teff 3841, st_rad 0.535, st_mass 0.535"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

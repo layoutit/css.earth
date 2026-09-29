@@ -1,0 +1,30 @@
+{
+ "id": "kepler-1313",
+ "classification": "star",
+ "order": 3666,
+ "physical": {
+  "name": "Kepler-1313",
+  "horizonsCode": null,
+  "meanRadiusKm": 591345,
+  "gravitationalParameterKm3PerS2": 122095444838.58423,
+  "parent": null,
+  "effectiveTemperatureK": 5453
+ },
+ "physicalNotes": "Radius 0.85 +/- 0.025 solar radii from Morton et al. 2016, the stellar radius of the default parameter set of Kepler-1313 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract): 591,345 km at 695,700 km per solar radius. Mass 0.92 +/- 0.031 solar masses from Morton et al. 2016, the stellar mass of the default parameter set of Kepler-1313 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract); GM is that mass times the JPL solar GM. Temperature 5453 +/- 82.15 K from Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1313 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 292.38858243628977,
+  "declinationDegrees": 42.233277152971844,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 175.9185249031888,
+  "properMotionRaMasPerYear": 2.0018538670480037,
+  "properMotionDecMasPerYear": 3.864914153840103,
+  "radialVelocityKmPerS": -28.93309,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2125713940547834496 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-1313/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.6844 +/- 0.0092 mas (same row, RUWE 0.80): 175.92 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 2.002, 3.865 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -28.93 +/- 0.66 km/s"
+  }
+ }
+}

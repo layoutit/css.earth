@@ -1,0 +1,28 @@
+{
+ "id": "k2-155c",
+ "classification": "exoplanet",
+ "order": 3342,
+ "physical": {
+  "name": "K2-155 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 16583,
+  "gravitationalParameterKm3PerS2": 2901121.58,
+  "parent": "k2-155"
+ },
+ "physicalNotes": "Radius 0.23195646 Jupiter radii from Díez Alonso et al. 2018 (2018MNRAS.476L..50D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract): 16,583 km at 71,492 km per Jupiter radius. GM from the mass 0.0229 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 13.853487,
+  "semiMajorAxisStellarRadii": 27,
+  "inclinationDegrees": 88.96,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57994.16467,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 13.853487 d",
+   "shape": "Díez Alonso et al. 2018 (2018MNRAS.476L..50D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2018): a/R* 27; Díez Alonso et al. 2018 (2018MNRAS.476L..50D), via the NASA Exoplanet Archive ps table (pl_refname D_IACUTE_EZ_ALONSO_ET_AL__2018): inclination 88.96 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2457994.66467 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

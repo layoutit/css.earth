@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1760",
+  "card": {
+    "text": "TOI-1760 is a star of 3,212 K, bound to TOI-1452 97 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 2264839957167921024 and 2264839952875245696, sep_AU 97.065602280888967, R_chance_align 4.778403379366727773e-08"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "TOI-1760 shares its motion through space with TOI-1452, 97 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 2264839957167921024 and 2264839952875245696, sep_AU 97.065602280888967, R_chance_align 4.778403379366727773e-08"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-2411",
+  "name": "TOI-2411",
+  "system": "TOI-2411 system",
+  "description": "Star of 4,099 K, 59.5 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2411",
+  "gaia": "2471334872292963456",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "credit": "Giacalone et al. 2022"
+  },
+  "radius": {
+    "value": 0.68,
+    "source": "Giacalone et al. 2022, the stellar radius of the default parameter set of TOI-2411 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.65,
+    "source": "Giacalone et al. 2022, the stellar mass of the default parameter set of TOI-2411 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 4099,
+    "source": "Giacalone et al. 2022, the stellar temperature of the default parameter set of TOI-2411 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+    "uncertainty": 123
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2411 b crosses TOI-2411 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Giacalone et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GIACALONE_ET_AL__2022): st_teff 4099, st_rad 0.68, st_mass 0.65"
+  },
+  "notes": [],
+  "order": 4302
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1801",
+  "card": {
+    "text": "TOI-1801 b crosses TOI-1801 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202347346",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract",
+        "label": "Mallorquín et al. (2023), Astronomy & Astrophysics 680 A76",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MALLORQUIN_ET_AL_2023): st_teff 3863, st_rad 0.547, st_mass 0.556"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mallorquín et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202347346",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract",
+        "label": "Mallorquín et al. (2023), Astronomy & Astrophysics 680 A76",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MALLORQUIN_ET_AL_2023): st_teff 3863, st_rad 0.547, st_mass 0.556"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

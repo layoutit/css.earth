@@ -1,0 +1,24 @@
+{
+  "host": "toi-833",
+  "planets": [
+    {
+      "id": "toi-833b",
+      "name": "TOI-833 b",
+      "description": "Transiting planet of TOI-833 with a 1.04-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract",
+        "credit": "Giacalone et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GIACALONE_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-833 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-833. Its orbit and size follow Giacalone et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GIACALONE_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.04188900271, pl_radj 0.11330201, pl_bmassj 0.00678"
+      },
+      "order": 4732
+    }
+  ]
+}

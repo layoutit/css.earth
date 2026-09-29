@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stad1139",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Barragán et al. (2023): Revisiting K2-233 spectroscopic time-series with multidimensional Gaussian processes",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2304.06406"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stad1139"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.522.3458B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stad1139",
+      "label": "Monthly Notices of the Royal Astronomical Society 522 3458-3471"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Barragán et al. (2023), Monthly Notices of the Royal Astronomical Society 522 3458-3471",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 522 3458-3471",
+  "creators": [
+    "Oscar Barragán",
+    "Edward Gillen",
+    "Suzanne Aigrain",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

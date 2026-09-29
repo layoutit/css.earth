@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6038-a",
+  "card": {
+    "text": "TOI-6038 A b crosses TOI-6038 A as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ada959",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract",
+        "label": "Baliwal et al. (2025), The Astronomical Journal 169 147",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BALIWAL_ET_AL_2025): st_teff 6110, st_rad 1.648, st_mass 1.291"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Baliwal et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ada959",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169..147B/abstract",
+        "label": "Baliwal et al. (2025), The Astronomical Journal 169 147",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BALIWAL_ET_AL_2025): st_teff 6110, st_rad 1.648, st_mass 1.291"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

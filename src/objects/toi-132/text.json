@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-132",
+  "card": {
+    "text": "TOI-132 b crosses TOI-132 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staa277",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract",
+        "label": "Díaz et al. (2020), Monthly Notices of the Royal Astronomical Society 493 973-985",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname D_IACUTE_AZ_ET_AL__2020): st_teff 5397, st_rad 0.9, st_mass 0.97"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Díaz et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staa277",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract",
+        "label": "Díaz et al. (2020), Monthly Notices of the Royal Astronomical Society 493 973-985",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname D_IACUTE_AZ_ET_AL__2020): st_teff 5397, st_rad 0.9, st_mass 0.97"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

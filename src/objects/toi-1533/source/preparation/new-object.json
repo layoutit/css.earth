@@ -1,0 +1,39 @@
+{
+  "id": "toi-1533",
+  "name": "TOI-1533",
+  "system": "TOI-1533 system",
+  "description": "Star of 5,146 K, 100 parsecs away, with 2 transiting planets.",
+  "target": "TOI-1533",
+  "gaia": "1998672961158273024",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+    "credit": "Mantovan et al. 2026"
+  },
+  "radius": {
+    "value": 0.849,
+    "source": "Mantovan et al. 2026, the stellar radius of the default parameter set of TOI-1533 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+    "uncertainty": 0.004
+  },
+  "mass": {
+    "value": 0.88,
+    "source": "Mantovan et al. 2026, the stellar mass of the default parameter set of TOI-1533 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+    "uncertainty": 0.04
+  },
+  "temperature": {
+    "value": 5146,
+    "source": "Mantovan et al. 2026, the stellar temperature of the default parameter set of TOI-1533 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract",
+    "uncertainty": 81
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-1533 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Mantovan et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MANTOVAN_ET_AL_2026): st_teff 5146, st_rad 0.849, st_mass 0.88"
+  },
+  "notes": [],
+  "order": 4067
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-411c",
+  "radiusKm": 14848.2,
+  "radiusSource": "Radius 0.20769061 Jupiter radii from Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract): 14,848.2 km at 71,492 km per Jupiter radius. No mass is measured: Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract) gives only an upper limit of 0.03058254 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 9.573083,
+  "orbitalPeriodSource": "Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive ps table (pl_refname GARAI_ET_AL__2023): P 9.573083 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-411 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.03058254 Jupiter masses: Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract)."
+}

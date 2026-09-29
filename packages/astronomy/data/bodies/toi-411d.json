@@ -1,0 +1,28 @@
+{
+ "id": "toi-411d",
+ "classification": "exoplanet",
+ "order": 3199,
+ "physical": {
+  "name": "HD 22946 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 16627.7,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-411"
+ },
+ "physicalNotes": "Radius 0.23258136 Jupiter radii from Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract): 16,627.7 km at 71,492 km per Jupiter radius. No mass is measured: Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..44G/abstract) gives only an upper limit of 0.08359857 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 47.42489,
+  "semiMajorAxisStellarRadii": 57,
+  "inclinationDegrees": 89.542,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59136.0372,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive ps table (pl_refname GARAI_ET_AL__2023): P 47.42489 d",
+   "shape": "Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive ps table (pl_refname GARAI_ET_AL__2023): a/R* 57; Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive ps table (pl_refname GARAI_ET_AL__2023): inclination derived from its impact parameter 0.456 with its a/R* 57 (Winn 2010, eq. 7)",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Garai et al. 2023 (2023A&A...674A..44G), via the NASA Exoplanet Archive ps table (pl_refname GARAI_ET_AL__2023): transit mid-time 2459136.5372 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

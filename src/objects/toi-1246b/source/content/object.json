@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-1246b",
+  "displayName": "TOI-1246 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "3.0 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac69e5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T",
+          "label": "Turtelboom et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.31 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac69e5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T",
+          "label": "Turtelboom et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "8.1 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac69e5",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T",
+          "label": "Turtelboom et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by TOI-1246; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "toi-1246b-lens-shape.webp",
+        "surface": "toi-1246b-surface-shape@2x.webp",
+        "poles": "toi-1246b-poles-shape@2x.webp",
+        "source": {
+          "id": "toi-1246b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of TOI-1246 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of toi-1246's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "toi-1246b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/toi-1246b/toi-1246b-system-orbits.svg",
+      "alt": "The orbits of TOI-1246's planets in this map from above, to scale, with TOI-1246 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "toi-1246b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T"
+      }
+    },
+    {
+      "id": "toi-1246b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/toi-1246b/toi-1246b-transit.svg",
+      "alt": "TOI-1246 b crossing its star, as TESS recorded it: 3 sectors (84, 85, 86) of the SPOC pipeline's 2-minute light curves of TIC 230127302, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 8 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 10 minutes at these dates, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "toi-1246b-tess-sector-84",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024274222008-s0084-0000000230127302-0281-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Turtelboom et al. 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..293T/abstract",
+      "credit": "Turtelboom et al. 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-1246b.json",
+      "credit": "Radius from Turtelboom et al. 2022 (2022AJ....163..293T), via the NASA Exoplanet Archive; mass from Turtelboom et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163..293T), via the NASA Exoplanet Archive; orbit from Turtelboom et al. 2022 (2022AJ....163..293T), via the NASA Exoplanet Archive"
+    }
+  }
+}

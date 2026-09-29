@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-80606b",
+  "displayName": "HD 80606 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.0 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac8dee",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P",
+          "label": "Pearson et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "111 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac8dee",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P",
+          "label": "Pearson et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "4.2 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac8dee",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P",
+          "label": "Pearson et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 80606; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-80606b-lens-shape.webp",
+        "surface": "hd-80606b-surface-shape@2x.webp",
+        "poles": "hd-80606b-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-80606b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 80606 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-80606's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hd-80606b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-80606b/hd-80606b-system-orbits.svg",
+      "alt": "The orbits of HD 80606's planets in this map from above, to scale, with HD 80606 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-80606b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P"
+      }
+    },
+    {
+      "id": "hd-80606b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-80606b/hd-80606b-transit.svg",
+      "alt": "HD 80606 b crossing its star, as TESS recorded it: 2 sectors (21, 47) of the SPOC pipeline's 2-minute light curves of TIC 457134360, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 48-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-80606b-tess-sector-21",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020020091053-s0021-0000000457134360-0167-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pearson et al. 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract",
+      "credit": "Pearson et al. 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-80606b.json",
+      "credit": "Radius from Pearson et al. 2022 (2022AJ....164..178P), via the NASA Exoplanet Archive; mass from Pearson et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....164..178P), via the NASA Exoplanet Archive; orbit from Pearson et al. 2022 (2022AJ....164..178P), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-451",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 591,345 km at 123.47 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 123.4677893669493,
+  "distanceSource": "Gaia DR3 parallax 8.0993 +/- 0.0108 mas (same row, RUWE 0.95): 123.47 pc, no zero-point correction",
+  "radiusKm": 591345,
+  "radiusSource": "Radius 0.85 +/- 0.03 solar radii from Barragán et al. 2026, the stellar radius of the default parameter set of TOI-451 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract): 591,345 km at 695,700 km per solar radius. Mass 0.93 +/- 0.04 solar masses from Barragán et al. 2026, the stellar mass of the default parameter set of TOI-451 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract); GM is that mass times the JPL solar GM. Temperature 5490 +/- 115 K from Barragán et al. 2026, the stellar temperature of the default parameter set of TOI-451 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5490,
+  "effectiveTemperatureSource": "Barragán et al. 2026, the stellar temperature of the default parameter set of TOI-451 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract)",
+  "surfaceGravityLogg": 4.55,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-451.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.548, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

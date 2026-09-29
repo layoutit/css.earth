@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-16b",
+  "card": {
+    "text": "WASP-16 b was found in 2009 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.11860349, pl_radj 1.22, pl_bmassj 1.24"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-16b",
+        "url": "https://en.wikipedia.org/wiki/WASP-16b",
+        "label": "Wikipedia, \"WASP-16b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374242765",
+        "quote": "WASP-16b is an extrasolar planet that travels around its star, WASP-16, every 3.12 days."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-16. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.11860349, pl_radj 1.22, pl_bmassj 1.24"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-16b",
+        "url": "https://en.wikipedia.org/wiki/WASP-16b",
+        "label": "Wikipedia, \"WASP-16b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374242765",
+        "quote": "Likely a hot Jupiter."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

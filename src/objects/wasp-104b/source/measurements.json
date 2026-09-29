@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-104b",
+  "radiusKm": 81286.4,
+  "radiusSource": "Radius 1.137 Jupiter radii from Smith et al. 2014 (2014A&A...570A..64S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract): 81,286.4 km at 71,492 km per Jupiter radius. GM from the mass 1.272 Jupiter masses (Smith et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014A&A...570A..64S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.75540563,
+  "orbitalPeriodSource": "Chen et al. 2021 (2021MNRAS.500.5420C), via the NASA Exoplanet Archive ps table (pl_refname CHEN_ET_AL_2021): P 1.75540563 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of WASP-104 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "1.272 Jupiter masses: Smith et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014A&A...570A..64S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014A&A...570A..64S/abstract)."
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-4479",
+  "name": "TOI-4479",
+  "system": "TOI-4479 system",
+  "description": "Star of 3,400 K, 80.7 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4479",
+  "gaia": "1841177820379504768",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+    "credit": "Esparza-Borges et al. 2022"
+  },
+  "radius": {
+    "value": 0.451,
+    "source": "Esparza-Borges et al. 2022, the stellar radius of the default parameter set of TOI-4479 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+    "uncertainty": 0.085
+  },
+  "mass": {
+    "value": 0.452,
+    "source": "Esparza-Borges et al. 2022, the stellar mass of the default parameter set of TOI-4479 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+    "uncertainty": 0.09
+  },
+  "temperature": {
+    "value": 3400,
+    "source": "Esparza-Borges et al. 2022, the stellar temperature of the default parameter set of TOI-4479 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4479 b crosses TOI-4479 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Esparza-Borges et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ESPARZA_BORGES_ET_AL_2022): st_teff 3400, st_rad 0.451, st_mass 0.452"
+  },
+  "notes": [],
+  "order": 4424
+}

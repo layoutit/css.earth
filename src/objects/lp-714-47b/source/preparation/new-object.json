@@ -1,0 +1,24 @@
+{
+  "host": "lp-714-47",
+  "planets": [
+    {
+      "id": "lp-714-47b",
+      "name": "LP 714-47 b",
+      "description": "Transiting planet of LP 714-47 with a 4.05-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract",
+        "credit": "Serrano Bell et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SERRANO_BELL_ET_AL_2026"
+      },
+      "text": {
+        "card": "LP 714-47 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around LP 714-47. Its orbit and size follow Serrano Bell et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SERRANO_BELL_ET_AL_2026): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.052034, pl_radj 0.37916026, pl_bmassj 0.08929347"
+      },
+      "order": 3824
+    }
+  ]
+}

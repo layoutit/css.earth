@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-3235b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.017 Jupiter radii from Hobson et al. 2023 (2023ApJ...946L...4H), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.665 Jupiter masses: Hobson et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023ApJ...946L...4H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Hobson et al. 2023 (2023ApJ...946L...4H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2023): P 2.59261842 d; Hobson et al. 2023 (2023ApJ...946L...4H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2023): a/R* 15.75; Hobson et al. 2023 (2023ApJ...946L...4H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2023): inclination 88.14 degrees; Ko et al. 2026 (2026AJ....172..174K), via the NASA Exoplanet Archive ps table (pl_refname KO_ET_AL_2026): e 0.03; Ko et al. 2026 (2026AJ....172..174K), via the NASA Exoplanet Archive ps table (pl_refname KO_ET_AL_2026): omega 90 degrees; Hobson et al. 2023 (2023ApJ...946L...4H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2023): transit mid-time 2459690.00173 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2026AJ....172..174K/abstract"
+      ]
+    }
+  ]
+}

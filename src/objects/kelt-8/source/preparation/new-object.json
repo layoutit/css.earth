@@ -1,0 +1,39 @@
+{
+  "id": "kelt-8",
+  "name": "KELT-8",
+  "system": "KELT-8 system",
+  "description": "Star of 5,754 K, 198 parsecs away, with 1 transiting planet.",
+  "target": "KELT-8",
+  "gaia": "4534144923690481408",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 1.46,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of KELT-8 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.08
+  },
+  "mass": {
+    "value": 0.81,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of KELT-8 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.21
+  },
+  "temperature": {
+    "value": 5754,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of KELT-8 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 54
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "KELT-8 b crosses KELT-8 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5754, st_rad 1.46, st_mass 0.81"
+  },
+  "notes": [],
+  "order": 3641
+}

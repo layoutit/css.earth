@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-33b",
+  "card": {
+    "text": "K2-33 b was found in 2016 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-6256-152-3-61",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract",
+        "label": "Mann et al. 2016",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2016): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 5.424865, pl_radj 0.44963868, pl_bmassj 3.7"
+      },
+      {
+        "catalogueId": "wikipedia-k2-33",
+        "url": "https://en.wikipedia.org/wiki/K2-33",
+        "label": "Wikipedia, \"K2-33\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366881676",
+        "quote": "It is known to host one planet, a super-Neptune, named K2-33b."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around K2-33. Its orbit and size follow Mann et al. 2016's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-6256-152-3-61",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract",
+        "label": "Mann et al. 2016",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANN_ET_AL__2016): disc_year 2016, disc_facility K2, sy_pnum 1; pl_orbper 5.424865, pl_radj 0.44963868, pl_bmassj 3.7"
+      },
+      {
+        "catalogueId": "wikipedia-k2-33",
+        "url": "https://en.wikipedia.org/wiki/K2-33",
+        "label": "Wikipedia, \"K2-33\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366881676",
+        "quote": "It is also notable for its young age."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

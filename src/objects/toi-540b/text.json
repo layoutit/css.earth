@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-540b",
+  "card": {
+    "text": "TOI-540 b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abbd91",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract",
+        "label": "Ment et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MENT_ET_AL__2021): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.2391481, pl_radj 0.08056026, pl_bmassj 0.00212"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-540. Its orbit and size follow Ment et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abbd91",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract",
+        "label": "Ment et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MENT_ET_AL__2021): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.2391481, pl_radj 0.08056026, pl_bmassj 0.00212"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

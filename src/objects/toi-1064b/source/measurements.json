@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1064b",
+  "radiusKm": 16500.1,
+  "radiusSource": "Radius 0.23079708 Jupiter radii from Wilson et al. 2022 (2022MNRAS.511.1043W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract): 16,500.1 km at 71,492 km per Jupiter radius. GM from the mass 0.04247575 Jupiter masses (Wilson et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022MNRAS.511.1043W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 6.4438657474,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 6.4438657474 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1064 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.04247575 Jupiter masses: Wilson et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022MNRAS.511.1043W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract)."
+}

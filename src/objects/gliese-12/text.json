@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gliese-12",
+  "card": {
+    "text": "Gliese 12 b crosses Gliese 12 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1703",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract",
+        "label": "Turner et al. (2026), Monthly Notices of the Royal Astronomical Society 545 staf1703",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TURNER_ET_AL_2026): st_teff 3328, st_rad 0.265, st_mass 0.255"
+      },
+      {
+        "catalogueId": "wikipedia-gliese-12",
+        "url": "https://en.wikipedia.org/wiki/Gliese_12",
+        "label": "Wikipedia, \"Gliese 12\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442439",
+        "quote": "Gliese 12 is a red dwarf star located 39.7 light-years away in the constellation Pisces."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Turner et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1703",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract",
+        "label": "Turner et al. (2026), Monthly Notices of the Royal Astronomical Society 545 staf1703",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname TURNER_ET_AL_2026): st_teff 3328, st_rad 0.265, st_mass 0.255"
+      },
+      {
+        "catalogueId": "wikipedia-gliese-12",
+        "url": "https://en.wikipedia.org/wiki/Gliese_12",
+        "label": "Wikipedia, \"Gliese 12\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442439",
+        "quote": "It has about 24% the mass and 26% the radius of the Sun, and a temperature of about 3,296 K. It is an inactive star and hosts one known exoplanet."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

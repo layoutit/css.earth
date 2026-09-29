@@ -1,0 +1,31 @@
+{
+  "host": "wasp-8",
+  "planets": [
+    {
+      "id": "wasp-8b",
+      "name": "WASP-8 b",
+      "description": "Transiting planet of WASP-8 with a 8.16-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "WASP-8 b was found in 2010 by SuperWASP as it crossed its star.",
+        "introduction": "It is one of 2 planets known around WASP-8. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility SuperWASP, sy_pnum 2; pl_orbper 8.1587261, pl_radj 1.13, pl_bmassj 2.54",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-8b",
+          "title": "WASP-8b",
+          "revision": "1374239709",
+          "card": "WASP-8b is an exoplanet orbiting the star WASP-8A in the constellation of Sculptor.",
+          "introduction": "The star is similar to the Sun and forms a binary star with a red dwarf star (WASP-8B) of half the Sun's mass that orbits WASP-8A 4.5 arcseconds away."
+        }
+      },
+      "order": 4911
+    }
+  ]
+}

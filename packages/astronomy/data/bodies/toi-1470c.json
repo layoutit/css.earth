@@ -1,0 +1,28 @@
+{
+ "id": "toi-1470c",
+ "classification": "exoplanet",
+ "order": 4064,
+ "physical": {
+  "name": "TOI-1470 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 15753.9,
+  "gravitationalParameterKm3PerS2": 2885867.26,
+  "parent": "toi-1470"
+ },
+ "physicalNotes": "Radius 0.22035902 Jupiter radii from González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract): 15,753.9 km at 71,492 km per Jupiter radius. GM from the mass 0.02277959 Jupiter masses (González-Álvarez et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...675A.177G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...675A.177G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 18.08816,
+  "semiMajorAxisStellarRadii": 48.46,
+  "inclinationDegrees": 89.47,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58771.676,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive ps table (pl_refname GONZ_AACUTE_LEZ__AACUTE_LVAREZ_ET_AL__2023): P 18.08816 d",
+   "shape": "González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive ps table (pl_refname GONZ_AACUTE_LEZ__AACUTE_LVAREZ_ET_AL__2023): a/R* 48.46; González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive ps table (pl_refname GONZ_AACUTE_LEZ__AACUTE_LVAREZ_ET_AL__2023): inclination 89.47 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "González-Álvarez et al. 2023 (2023A&A...675A.177G), via the NASA Exoplanet Archive ps table (pl_refname GONZ_AACUTE_LEZ__AACUTE_LVAREZ_ET_AL__2023): transit mid-time 2458772.176 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 12 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

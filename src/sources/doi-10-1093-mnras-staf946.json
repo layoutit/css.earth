@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-staf946",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Muñoz et al. (2025): TOI-2407 b: a warm Neptune in the desert",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2506.06195"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staf946"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025MNRAS.541..630J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staf946",
+      "label": "Monthly Notices of the Royal Astronomical Society 541 630-641"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Muñoz et al. (2025), Monthly Notices of the Royal Astronomical Society 541 630-641",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 541 630-641",
+  "creators": [
+    "C Janó Muñoz",
+    "M J Hooton",
+    "P P Pedersen",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

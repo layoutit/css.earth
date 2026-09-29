@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1052b",
+  "card": {
+    "text": "TOI-1052 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad2183",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract",
+        "label": "Armstrong et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ARMSTRONG_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 9.13980396599, pl_radj 0.25604469, pl_bmassj 0.05317335"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-1052. Its orbit and size follow Armstrong et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad2183",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.5804A/abstract",
+        "label": "Armstrong et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ARMSTRONG_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 9.13980396599, pl_radj 0.25604469, pl_bmassj 0.05317335"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

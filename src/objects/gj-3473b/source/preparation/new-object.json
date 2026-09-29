@@ -1,0 +1,24 @@
+{
+  "host": "gj-3473",
+  "planets": [
+    {
+      "id": "gj-3473b",
+      "name": "GJ 3473 b",
+      "description": "Transiting planet of GJ 3473 with a 1.2-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract",
+        "credit": "Kemmer et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KEMMER_ET_AL__2020"
+      },
+      "text": {
+        "card": "GJ 3473 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around GJ 3473. Its orbit and size follow Kemmer et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KEMMER_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 1.19800484, pl_radj 0.11276653, pl_bmassj 0.00585219"
+      },
+      "order": 3089
+    }
+  ]
+}

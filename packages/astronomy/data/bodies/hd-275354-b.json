@@ -1,0 +1,30 @@
+{
+ "id": "hd-275354-b",
+ "classification": "star",
+ "order": 4605,
+ "physical": {
+  "name": "HD 275354B",
+  "horizonsCode": null,
+  "meanRadiusKm": 623347.2,
+  "gravitationalParameterKm3PerS2": 113999985996.02592,
+  "parent": null,
+  "effectiveTemperatureK": 5109.7
+ },
+ "physicalNotes": "Radius 0.896 +/- 0.054 solar radii from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 194736419 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467): 623,347 km at 695,700 km per solar radius. Mass 0.859 +/- 0.102 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 194736419 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467); GM is that mass times the JPL solar GM. Temperature 5109.7 +/- 117.2 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 194736419 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 51.650762242219336,
+  "declinationDegrees": 40.81666129052608,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 178.5506702905343,
+  "properMotionRaMasPerYear": 10.712476000520558,
+  "properMotionDecMasPerYear": -40.0228151222727,
+  "radialVelocityKmPerS": -12.552805,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 237640407346341376 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-275354-b/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 5.6007 +/- 0.0146 mas (same row, RUWE 1.08): 178.55 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 10.712, -40.023 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -12.55 +/- 0.62 km/s"
+  }
+ }
+}

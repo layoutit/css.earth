@@ -1,0 +1,24 @@
+{
+  "host": "hd-106315",
+  "planets": [
+    {
+      "id": "hd-106315b",
+      "name": "HD 106315 b",
+      "description": "Transiting planet of HD 106315 with a 9.58-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract",
+        "credit": "Barros et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BARROS_ET_AL__2017"
+      },
+      "text": {
+        "card": "HD 106315 b was found in 2017 by K2 as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HD 106315. Its orbit and size follow Barros et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARROS_ET_AL__2017): disc_year 2017, disc_facility K2, sy_pnum 2; pl_orbper 9.58028883839, pl_radj 0.21768222, pl_bmassj 0.03964383"
+      },
+      "order": 3142
+    }
+  ]
+}

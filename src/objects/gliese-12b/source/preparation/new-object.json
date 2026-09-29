@@ -1,0 +1,24 @@
+{
+  "host": "gliese-12",
+  "planets": [
+    {
+      "id": "gliese-12b",
+      "name": "Gliese 12 b",
+      "description": "Transiting planet of Gliese 12 with a 12.8-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract",
+        "credit": "Turner et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "TURNER_ET_AL_2026"
+      },
+      "text": {
+        "card": "Gliese 12 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around Gliese 12. Its orbit and size follow Turner et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TURNER_ET_AL_2026): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 12.761418, pl_radj 0.08296919, pl_bmassj 0.00298903"
+      },
+      "order": 3108
+    }
+  ]
+}

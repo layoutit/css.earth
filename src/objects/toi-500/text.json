@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-500",
+  "card": {
+    "text": "TOI-500 b crosses TOI-500 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-022-01641-y",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract",
+        "label": "Serrano et al. (2022), Nature Astronomy 6 736-750",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SERRANO_ET_AL_2022): st_teff 4440, st_rad 0.678, st_mass 0.74"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Serrano et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1038-s41550-022-01641-y",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract",
+        "label": "Serrano et al. (2022), Nature Astronomy 6 736-750",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SERRANO_ET_AL_2022): st_teff 4440, st_rad 0.678, st_mass 0.74"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

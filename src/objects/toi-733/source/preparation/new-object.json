@@ -1,0 +1,39 @@
+{
+  "id": "toi-733",
+  "name": "TOI-733",
+  "system": "TOI-733 system",
+  "description": "Star of 5,585 K, 75.2 parsecs away, with 1 transiting planet.",
+  "target": "TOI-733",
+  "gaia": "5392409372314518656",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract",
+    "credit": "Georgieva et al. 2023"
+  },
+  "radius": {
+    "value": 0.949,
+    "source": "Georgieva et al. 2023, the stellar radius of the default parameter set of TOI-733 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract",
+    "uncertainty": 0.008
+  },
+  "mass": {
+    "value": 0.956,
+    "source": "Georgieva et al. 2023, the stellar mass of the default parameter set of TOI-733 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract",
+    "uncertainty": 0.05
+  },
+  "temperature": {
+    "value": 5585,
+    "source": "Georgieva et al. 2023, the stellar temperature of the default parameter set of TOI-733 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract",
+    "uncertainty": 60
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-733 b crosses TOI-733 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Georgieva et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GEORGIEVA_ET_AL_2023): st_teff 5585, st_rad 0.949, st_mass 0.956"
+  },
+  "notes": [],
+  "order": 4693
+}

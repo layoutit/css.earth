@@ -1,0 +1,24 @@
+{
+  "host": "lhs-1903",
+  "planets": [
+    {
+      "id": "lhs-1903b",
+      "name": "LHS 1903 b",
+      "description": "Transiting planet of LHS 1903 with a 2.16-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026Sci...392l2348W/abstract",
+        "credit": "Wilson et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "WILSON_ET_AL_2026"
+      },
+      "text": {
+        "card": "LHS 1903 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around LHS 1903. Its orbit and size follow Wilson et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WILSON_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 2.1555098, pl_radj 0.12329399, pl_bmassj 0.01032003"
+      },
+      "order": 3815
+    }
+  ]
+}

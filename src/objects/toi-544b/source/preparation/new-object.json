@@ -1,0 +1,24 @@
+{
+  "host": "toi-544",
+  "planets": [
+    {
+      "id": "toi-544b",
+      "name": "TOI-544 b",
+      "description": "Transiting planet of TOI-544 with a 1.55-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract",
+        "credit": "Osborne et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "OSBORNE_ET_AL_2024"
+      },
+      "text": {
+        "card": "TOI-544 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-544. Its orbit and size follow Osborne et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OSBORNE_ET_AL_2024): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 1.548352, pl_radj 0.18003421, pl_bmassj 0.00909296"
+      },
+      "order": 4523
+    }
+  ]
+}

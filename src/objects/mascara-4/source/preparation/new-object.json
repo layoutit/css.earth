@@ -1,0 +1,46 @@
+{
+  "id": "mascara-4",
+  "name": "MASCARA-4",
+  "system": "MASCARA-4 system",
+  "description": "Star of 7,800 K, 171 parsecs away, with 1 transiting planet.",
+  "target": "MASCARA-4",
+  "gaia": "5245968236116294016",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract",
+    "credit": "Zhang et al. 2022"
+  },
+  "radius": {
+    "value": 1.79,
+    "source": "Zhang et al. 2022, the stellar radius of the default parameter set of MASCARA-4 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 1.75,
+    "source": "Zhang et al. 2022, the stellar mass of the default parameter set of MASCARA-4 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract",
+    "uncertainty": 0.05
+  },
+  "temperature": {
+    "value": 7800,
+    "source": "Zhang et al. 2022, the stellar temperature of the default parameter set of MASCARA-4 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract",
+    "uncertainty": 200
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "MASCARA-4 b crosses MASCARA-4 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Zhang et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ZHANG_ET_AL__2022): st_teff 7800, st_rad 1.79, st_mass 1.75",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_85628",
+      "title": "HD 85628",
+      "revision": "1375330131",
+      "card": "HD 85628 (MASCARA-4) is a binary star system in the constellation of Carina.",
+      "introduction": "The host star, HD 85628 A, is an A-type main-sequence star, the primary star of the system, with a hot Jupiter in orbit around it."
+    }
+  },
+  "notes": [],
+  "order": 3842
+}

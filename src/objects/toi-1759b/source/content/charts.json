@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1759b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1759b-orbits",
+      "title": "TOI-1759 b: orbits around TOI-1759",
+      "output": "toi-1759b-system-orbits.svg",
+      "system": "toi-1759",
+      "highlight": "toi-1759b",
+      "description": "The orbits of TOI-1759's planets in this map from above, to scale, with TOI-1759 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Martioli et al. 2022 (2022A&A...660A..86M), via the NASA Exoplanet Archive ps table (pl_refname MARTIOLI_ET_AL_2022): P 18.849975 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-1759b-transit",
+      "title": "TOI-1759 b: its transit",
+      "description": "TOI-1759 b crossing its star, as TESS recorded it: 3 sectors (77, 78, 85) of the SPOC pipeline's 2-minute light curves of TIC 408636441, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 13-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-1759b-transit.svg",
+      "metadata": {
+        "tic": "TIC 408636441",
+        "sectors": [
+          77,
+          78,
+          85
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-1759b",
+      "sources": [
+        "photometry/tess/tess2024085201119-s0077-0000000408636441-0272-s_lc.fits",
+        "photometry/tess/tess2024114025118-s0078-0000000408636441-0273-s_lc.fits",
+        "photometry/tess/tess2024300212641-s0085-0000000408636441-0282-s_lc.fits"
+      ],
+      "durationHours": 3.23,
+      "binMinutes": 13,
+      "notes": [
+        "TESS 2-min SPOC · sectors 77, 78, 85",
+        "Folded on the app's orbit; 13-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+ "id": "wasp-132b",
+ "classification": "exoplanet",
+ "order": 4784,
+ "physical": {
+  "name": "WASP-132 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 64414.3,
+  "gravitationalParameterKm3PerS2": 54221835.65,
+  "parent": "wasp-132"
+ },
+ "physicalNotes": "Radius 0.901 Jupiter radii from Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract): 64,414.3 km at 71,492 km per Jupiter radius. GM from the mass 0.428 Jupiter masses (Grieves et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...693A.144G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.1335125,
+  "semiMajorAxisStellarRadii": 19.1203,
+  "inclinationDegrees": 89.46,
+  "eccentricity": 0.0163,
+  "argumentOfPeriapsisDegrees": 318,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58602.35618,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 7.1335125 d",
+   "shape": "Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive ps table (pl_refname GRIEVES_ET_AL__2025): a/R* derived from its semi-major axis 0.0674 au and stellar radius 0.758 solar radii; Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive ps table (pl_refname GRIEVES_ET_AL__2025): inclination 89.46 degrees",
+   "eccentricity": "Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive ps table (pl_refname GRIEVES_ET_AL__2025): e 0.0163",
+   "argumentOfPeriapsis": "Grieves et al. 2025 (2025A&A...693A.144G), via the NASA Exoplanet Archive ps table (pl_refname GRIEVES_ET_AL__2025): omega 318 degrees",
+   "phase": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): transit mid-time 2458602.85618 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

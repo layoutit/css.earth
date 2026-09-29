@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-561d",
+  "card": {
+    "text": "TOI-561 d was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae2440",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract",
+        "label": "Piotto et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PIOTTO_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 25.7124, pl_radj 0.23329508, pl_bmassj 0.04194087"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around TOI-561. Its orbit and size follow Piotto et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae2440",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract",
+        "label": "Piotto et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PIOTTO_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 25.7124, pl_radj 0.23329508, pl_bmassj 0.04194087"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

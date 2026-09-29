@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-266e",
+  "card": {
+    "text": "K2-266 e was found in 2018 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aae530",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract",
+        "label": "Rodriguez et al. 2018",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RODRIGUEZ_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 4; pl_orbper 19.48348329613, pl_radj 0.24355429, pl_bmassj 0.04499261"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 4 planets known around K2-266. Its orbit and size follow Rodriguez et al. 2018's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aae530",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract",
+        "label": "Rodriguez et al. 2018",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname RODRIGUEZ_ET_AL__2018): disc_year 2018, disc_facility K2, sy_pnum 4; pl_orbper 19.48348329613, pl_radj 0.24355429, pl_bmassj 0.04499261"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

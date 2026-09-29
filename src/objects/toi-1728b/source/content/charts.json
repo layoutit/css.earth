@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-1728b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-1728b-orbits",
+      "title": "TOI-1728 b: orbits around TOI-1728",
+      "output": "toi-1728b-system-orbits.svg",
+      "system": "toi-1728",
+      "highlight": "toi-1728b",
+      "description": "The orbits of TOI-1728's planets in this map from above, to scale, with TOI-1728 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Antonov et. al 2026, via the NASA Exoplanet Archive ps table (pl_refname ANTONOV_ET_AL_2026): P 3.491402 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-1728b-transit",
+      "title": "TOI-1728 b: its transit",
+      "description": "TOI-1728 b crossing its star, as TESS recorded it: 3 sectors (20, 47, 74) of the SPOC pipeline's 2-minute light curves of TIC 285048486, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-1728b-transit.svg",
+      "metadata": {
+        "tic": "TIC 285048486",
+        "sectors": [
+          20,
+          47,
+          74
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-1728b",
+      "sources": [
+        "photometry/tess/tess2019357164649-s0020-0000000285048486-0165-s_lc.fits",
+        "photometry/tess/tess2021364111932-s0047-0000000285048486-0218-s_lc.fits",
+        "photometry/tess/tess2024003055635-s0074-0000000285048486-0269-s_lc.fits"
+      ],
+      "durationHours": 1.96,
+      "binMinutes": 8,
+      "notes": [
+        "TESS 2-min SPOC · sectors 20, 47, 74",
+        "Folded on the app's orbit; 8-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

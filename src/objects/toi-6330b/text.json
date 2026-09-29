@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-6330b",
+  "card": {
+    "text": "TOI-6330 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-add2ef",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract",
+        "label": "Hotnisky et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOTNISKY_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.8500246, pl_radj 0.972, pl_bmassj 10"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-6330. Its orbit and size follow Hotnisky et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-add2ef",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract",
+        "label": "Hotnisky et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOTNISKY_ET_AL__2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.8500246, pl_radj 0.972, pl_bmassj 10"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

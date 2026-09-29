@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stac3404",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Magliano et al. (2023): A systematic validation of hot Neptunes in TESS data",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2211.08490"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stac3404"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.519.1562M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1562M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stac3404",
+      "label": "Monthly Notices of the Royal Astronomical Society 519 1562-1577"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1562M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Magliano et al. (2023), Monthly Notices of the Royal Astronomical Society 519 1562-1577",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1562M"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 519 1562-1577",
+  "creators": [
+    "Christian Magliano",
+    "Giovanni Covone",
+    "Richa Dobal",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

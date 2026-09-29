@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-3847-1538-3881-add2ef",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hotnisky et al. (2025): Searching for GEMS: Two Super-Jupiters Around M Dwarfs that May have Formed via Gravitational Instability",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/add2ef"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....170....1H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hotnisky et al. (2025), The Astronomical Journal 170 1",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H"
+    }
+  ],
+  "publisher": "The Astronomical Journal 170 1",
+  "creators": [
+    "Andrew Hotnisky",
+    "Shubham Kanodia",
+    "Jessica Libby-Roberts",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

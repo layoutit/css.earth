@@ -1,0 +1,30 @@
+{
+ "id": "wasp-145-a",
+ "classification": "star",
+ "order": 4791,
+ "physical": {
+  "name": "WASP-145 A",
+  "horizonsCode": null,
+  "meanRadiusKm": 473076,
+  "gravitationalParameterKm3PerS2": 100861454431.87393,
+  "parent": null,
+  "effectiveTemperatureK": 4900
+ },
+ "physicalNotes": "Radius 0.68 +/- 0.07 solar radii from Hellier et al. 2019, the stellar radius of the default parameter set of WASP-145 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract): 473,076 km at 695,700 km per solar radius. Mass 0.76 +/- 0.04 solar masses from Hellier et al. 2019, the stellar mass of the default parameter set of WASP-145 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract); GM is that mass times the JPL solar GM. Temperature 4900 +/- 150 K from Hellier et al. 2019, the stellar temperature of the default parameter set of WASP-145 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 322.2537932130836,
+  "declinationDegrees": -58.83614508765164,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 91.12564388771071,
+  "properMotionRaMasPerYear": 107.13598089172027,
+  "properMotionDecMasPerYear": 11.076245328551554,
+  "radialVelocityKmPerS": 3.4916816,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 6458529931463278848 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wasp-145-a/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 10.9739 +/- 0.0282 mas (same row, RUWE 1.92): 91.13 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): 107.136, 11.076 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 3.49 +/- 0.26 km/s"
+  }
+ }
+}

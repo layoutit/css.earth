@@ -110,8 +110,32 @@ test('a bulk retry rechecks bytes changed after the first upload attempt', async
     if (attempts !== 1) throw new Error('Unchecked bytes reached a second upload');
     await writeFile(f.victim.file, 'wrong');
     // Let the rejected upload schedule its backoff, then advance the native mock clock.
-    setImmediate(() => t.mock.timers.tick(3000));
+    setImmediate(() => t.mock.timers.tick(30000));
     throw new Error('Transient upload failure');
   } }), /local bytes do not match the inventory/);
   assert.equal(attempts, 1);
+});
+
+test('a bulk retry uploads only the keys R2 still lacks, after the rate limit drains', async t => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-publisher-test-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const bytes = Buffer.from('right'), sha256 = createHash('sha256').update(bytes).digest('hex');
+  const assets: PublishAsset[] = ['a.bin', 'b.bin'].map(key => ({ key, file: join(root, key), bytes: bytes.length, sha256 }));
+  for (const asset of assets) await writeFile(asset.file, bytes);
+  const live = new Set<string>(), sent: string[][] = [];
+  const fetcher: typeof fetch = async (input, init) => {
+    const key = new URL(input instanceof Request ? input.url : String(input)).pathname.slice(1);
+    if (init?.method === 'HEAD') return live.has(key) ? new Response(null, { headers: { 'content-type': contentType(key), 'content-length': String(bytes.length) } }) : new Response(null, { status: 404 });
+    return new Response(bytes);
+  };
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  await publishAssets(assets, { fetcher, runCommand: async (_command, args) => {
+    const keys = (JSON.parse(await readFile(args[args.indexOf('--filename') + 1]!, 'utf8')) as { key: string }[]).map(entry => entry.key);
+    sent.push(keys);
+    live.add(keys[0]!);
+    // Cloudflare's 429 stops wrangler after one file; the retry waits for the window, then asks R2 what is still missing.
+    if (keys.length > 1) { setImmediate(() => t.mock.timers.tick(30000)); throw new Error('npx failed: 1'); }
+    for (const key of keys) live.add(key);
+  } });
+  assert.deepEqual(sent, [['a.bin', 'b.bin'], ['b.bin']]);
 });

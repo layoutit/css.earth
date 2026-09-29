@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-561c",
+  "radiusKm": 18273.3,
+  "radiusSource": "Radius 0.25559862 Jupiter radii from Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract): 18,273.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01865787 Jupiter masses (Piotto et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.535.2763P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 10.778838,
+  "orbitalPeriodSource": "Piotto et al. 2024 (2024MNRAS.535.2763P), via the NASA Exoplanet Archive ps table (pl_refname PIOTTO_ET_AL__2024): P 10.778838 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-561 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01865787 Jupiter masses: Piotto et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024MNRAS.535.2763P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.535.2763P/abstract)."
+}

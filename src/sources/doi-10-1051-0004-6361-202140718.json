@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202140718",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Murgas et al. (2021): TOI-674b: An oasis in the desert of exo-Neptunes transiting a nearby M dwarf",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2106.01246"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202140718"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021A&A...653A..60M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202140718",
+      "label": "Astronomy & Astrophysics 653 A60"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Murgas et al. (2021), Astronomy & Astrophysics 653 A60",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 653 A60",
+  "creators": [
+    "F. Murgas",
+    "N. Astudillo-Defru",
+    "X. Bonfils",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

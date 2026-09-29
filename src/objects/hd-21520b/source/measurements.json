@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-21520b",
+  "radiusKm": 17201.7,
+  "radiusSource": "Radius 0.24061064 Jupiter radii from Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract): 17,201.7 km at 71,492 km per Jupiter radius. No mass is measured: Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract) gives only an upper limit of 0.05569043 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 25.1292,
+  "orbitalPeriodSource": "Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive ps table (pl_refname NIES_ET_AL_2024): P 25.1292 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 21520 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.05569043 Jupiter masses: Nies et al. 2024 (2024MNRAS.534.3744N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract)."
+}

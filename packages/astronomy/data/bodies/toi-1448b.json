@@ -1,0 +1,28 @@
+{
+ "id": "toi-1448b",
+ "classification": "exoplanet",
+ "order": 4044,
+ "physical": {
+  "name": "TOI-1448 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 17533.4,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-1448"
+ },
+ "physicalNotes": "Radius 0.24524978 Jupiter radii from Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract): 17,533.4 km at 71,492 km per Jupiter radius. No mass is measured: Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract) gives only an upper limit of 0.06135386 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 8.112245,
+  "semiMajorAxisStellarRadii": 32.1,
+  "inclinationDegrees": 89.62,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58712.8375,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): P 8.112245 d",
+   "shape": "Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): a/R* 32.1; Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): inclination 89.62 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Hori et al. 2024 (2024AJ....167..289H), via the NASA Exoplanet Archive ps table (pl_refname HORI_ET_AL_2024): transit mid-time 2458713.3375 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

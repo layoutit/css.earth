@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "l-98-59",
+  "card": {
+    "text": "3 planets cross L 98-59 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adef59",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+        "label": "Cadieux et al. (2025), The Astronomical Journal 170 154",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CADIEUX_ET_AL_2025): st_teff 3415, st_rad 0.3155, st_mass 0.2923"
+      },
+      {
+        "catalogueId": "wikipedia-l-98-59",
+        "url": "https://en.wikipedia.org/wiki/L_98-59",
+        "label": "Wikipedia, \"L 98-59\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374442061",
+        "quote": "L 98-59 is a red dwarf star located in the constellation of Volans, at a distance of 10.608 parsecs, as measured by the Gaia spacecraft."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Cadieux et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adef59",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract",
+        "label": "Cadieux et al. (2025), The Astronomical Journal 170 154",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CADIEUX_ET_AL_2025): st_teff 3415, st_rad 0.3155, st_mass 0.2923"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

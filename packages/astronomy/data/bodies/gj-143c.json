@@ -1,0 +1,28 @@
+{
+ "id": "gj-143c",
+ "classification": "exoplanet",
+ "order": 4866,
+ "physical": {
+  "name": "HD 21749 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 5689.3,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "gj-143"
+ },
+ "physicalNotes": "Radius 0.07957891 Jupiter radii from Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract): 5,689.3 km at 71,492 km per Jupiter radius. No mass is measured: Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract) gives only an upper limit of 0.01164144 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.78978861866,
+  "semiMajorAxisStellarRadii": 21.8,
+  "inclinationDegrees": 88.9,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60980.306574,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 7.78978861866 d",
+   "shape": "Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive ps table (pl_refname DRAGOMIR_ET_AL__2019): a/R* 21.8; Dragomir et al. 2019 (2019ApJ...875L...7D), via the NASA Exoplanet Archive ps table (pl_refname DRAGOMIR_ET_AL__2019): inclination 88.9 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460980.806574 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

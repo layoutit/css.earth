@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-2685b",
+  "radiusKm": 102948.5,
+  "radiusSource": "Radius 1.44 Jupiter radii from Jones et al. 2019 (2019A&A...625A..16J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract): 102,948.5 km at 71,492 km per Jupiter radius. GM from the mass 1.17 Jupiter masses (Jones et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...625A..16J), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.1269046,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.1269046 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 2685 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "1.17 Jupiter masses: Jones et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...625A..16J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract)."
+}

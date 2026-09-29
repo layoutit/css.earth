@@ -1,0 +1,24 @@
+{
+  "host": "gj-143",
+  "planets": [
+    {
+      "id": "gj-143c",
+      "name": "HD 21749 c",
+      "description": "Transiting planet of GJ 143 with a 7.79-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract",
+        "credit": "Dragomir et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DRAGOMIR_ET_AL__2019"
+      },
+      "text": {
+        "card": "HD 21749 c was found in 2019 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around GJ 143. Its orbit and size follow Dragomir et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRAGOMIR_ET_AL__2019): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 7.78978861866, pl_radj 0.07957891, pl_bmassj 0.01164144"
+      },
+      "order": 4866
+    }
+  ]
+}

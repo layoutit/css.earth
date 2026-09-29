@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-1397b",
+  "radiusKm": 73350.8,
+  "radiusSource": "Radius 1.026 Jupiter radii from Nielsen et al. 2019 (2019A&A...623A.100N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract): 73,350.8 km at 71,492 km per Jupiter radius. GM from the mass 0.415 Jupiter masses (Nielsen et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...623A.100N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 11.5366,
+  "orbitalPeriodSource": "Brahm et al. 2019 (2019AJ....158...45B), via the NASA Exoplanet Archive ps table (pl_refname BRAHM_ET_AL__2019): P 11.5366 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 1397 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.415 Jupiter masses: Nielsen et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019A&A...623A.100N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract)."
+}

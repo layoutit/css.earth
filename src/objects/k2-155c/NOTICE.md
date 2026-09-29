@@ -1,0 +1,5 @@
+# K2-155 c credits
+
+Radius: Díez Alonso et al. 2018 (2018MNRAS.476L..50D), via the NASA Exoplanet Archive. Mass: the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive.
+
+Orbit: Díez Alonso et al. 2018 (2018MNRAS.476L..50D), via the NASA Exoplanet Archive.

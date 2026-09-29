@@ -1,0 +1,31 @@
+{
+ "id": "toi-912b",
+ "classification": "exoplanet",
+ "order": 4750,
+ "physical": {
+  "name": "TOI-912 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 12309.7,
+  "gravitationalParameterKm3PerS2": 2032861.5,
+  "parent": "toi-912"
+ },
+ "physicalNotes": "Radius 0.17218336 Jupiter radii from Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract): 12,309.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01604639 Jupiter masses (Lacedelli et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...705A.260L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.67806593172,
+  "semiMajorAxisStellarRadii": 20.7,
+  "inclinationDegrees": 88.7,
+  "eccentricity": 0.58,
+  "argumentOfPeriapsisDegrees": 191,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 60854.666066,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.67806593172 d",
+   "shape": "Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2026): a/R* 20.7; Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2026): inclination 88.7 degrees",
+   "eccentricity": "Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2026): e 0.58",
+   "argumentOfPeriapsis": "Lacedelli et al. 2026 (2026A&A...705A.260L), via the NASA Exoplanet Archive ps table (pl_refname LACEDELLI_ET_AL_2026): omega -169 degrees, stored as 191",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460855.166066 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

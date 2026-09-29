@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-1397",
+  "angularDiameterMas": 0.27,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,625,155 km at 80.04 pc = 0.27 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 80.04204523726139,
+  "distanceSource": "Gaia DR3 parallax 12.4934 +/- 0.0170 mas (same row, RUWE 0.98): 80.04 pc, no zero-point correction",
+  "radiusKm": 1625155.2,
+  "radiusSource": "Radius 2.336 +/- 0.052 solar radii from Nielsen et al. 2019, the stellar radius of the default parameter set of HD 1397 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract): 1,625,155 km at 695,700 km per solar radius. Mass 1.324 +/- 0.042 solar masses from Nielsen et al. 2019, the stellar mass of the default parameter set of HD 1397 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract); GM is that mass times the JPL solar GM. Temperature 5521 +/- 60 K from Nielsen et al. 2019, the stellar temperature of the default parameter set of HD 1397 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5521,
+  "effectiveTemperatureSource": "Nielsen et al. 2019, the stellar temperature of the default parameter set of HD 1397 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract)",
+  "surfaceGravityLogg": 3.82,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-1397.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.823, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

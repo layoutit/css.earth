@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stw3005",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hellier et al. (2017): WASP-South transiting exoplanets: WASP-130b, WASP-131b, WASP-132b, WASP-139b, WASP-140b, WASP-141b and WASP-142b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1604.04195"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stw3005"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017MNRAS.465.3693H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stw3005",
+      "label": "Monthly Notices of the Royal Astronomical Society 465 3693-3707"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hellier et al. (2017), Monthly Notices of the Royal Astronomical Society 465 3693-3707",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017MNRAS.465.3693H"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 465 3693-3707",
+  "creators": [
+    "C. Hellier",
+    "D. R. Anderson",
+    "A. Collier Cameron",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

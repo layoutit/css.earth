@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "v1298-tau",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "V1298 Tau",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 918324
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/v1298-tau-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "V1298 Tau",
+      "classification": "star",
+      "color": "#ffe6cf",
+      "distanceAu": 22280367.7,
+      "description": "2 planets cross V1298 Tau as seen from Earth: c, d.",
+      "systemName": "V1298 Tau system",
+      "order": 4762,
+      "context": {
+        "order": 4759
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1501078031591824000,
+        2745376809953388500,
+        1148562983001771300
+      ],
+      "presentationToReference": [
+        0.4503553969727116,
+        0.16531524064152092,
+        0.8774114699667355,
+        0.8236715460923519,
+        0.302350908361512,
+        -0.479738587535757,
+        0.34459425499474905,
+        -0.938751724059458,
+        9.649162209494348e-8
+      ],
+      "orbitUpReference": [
+        -0.16531524064152092,
+        -0.302350908361512,
+        0.938751724059458
+      ],
+      "metersPerUnit": 2962335.4838709678,
+      "bodyRadiusM": 918324000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

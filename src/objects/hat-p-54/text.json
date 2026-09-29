@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-54",
+  "card": {
+    "text": "HAT-P-54 b crosses HAT-P-54 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-149-4-149",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract",
+        "label": "Bakos et al. (2015), The Astronomical Journal 149 149",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BAKOS_ET_AL__2015): st_teff 4390, st_rad 0.617, st_mass 0.645"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bakos et al. 2015.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-6256-149-4-149",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract",
+        "label": "Bakos et al. (2015), The Astronomical Journal 149 149",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BAKOS_ET_AL__2015): st_teff 4390, st_rad 0.617, st_mass 0.645"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

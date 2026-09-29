@@ -1,0 +1,24 @@
+{
+  "host": "ltt-1445-a",
+  "planets": [
+    {
+      "id": "ltt-1445-a-b",
+      "name": "LTT 1445 A b",
+      "description": "Transiting planet of LTT 1445 A with a 5.36-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..171P/abstract",
+        "credit": "Pass et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "PASS_ET_AL__2023"
+      },
+      "text": {
+        "card": "LTT 1445 A b was found in 2019 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around LTT 1445 A. Its orbit and size follow Pass et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname PASS_ET_AL__2023): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 5.358765, pl_radj 0.119547, pl_bmassj 0.00858954"
+      },
+      "order": 3834
+    }
+  ]
+}

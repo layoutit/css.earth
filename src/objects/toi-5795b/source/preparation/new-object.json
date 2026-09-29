@@ -1,0 +1,24 @@
+{
+  "host": "toi-5795",
+  "planets": [
+    {
+      "id": "toi-5795b",
+      "name": "TOI-5795 b",
+      "description": "Transiting planet of TOI-5795 with a 6.14-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract",
+        "credit": "Manni et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MANNI_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-5795 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5795. Its orbit and size follow Manni et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MANNI_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.1406325, pl_radj 0.50138368, pl_bmassj 0.07444269"
+      },
+      "order": 4581
+    }
+  ]
+}

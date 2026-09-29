@@ -1,0 +1,24 @@
+{
+  "host": "k2-352",
+  "planets": [
+    {
+      "id": "k2-352d",
+      "name": "K2-352 d",
+      "description": "Transiting planet of K2-352 with a 14.9-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+        "credit": "de Leon et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DE_LEON_ET_AL_2021"
+      },
+      "text": {
+        "card": "K2-352 d was found in 2021 by K2 as it crossed its star.",
+        "introduction": "It is one of 3 planets known around K2-352. Its orbit and size follow de Leon et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DE_LEON_ET_AL_2021): disc_year 2021, disc_facility K2, sy_pnum 3; pl_orbper 14.871387, pl_radj 0.19894762, pl_bmassj 0.0176"
+      },
+      "order": 3528
+    }
+  ]
+}

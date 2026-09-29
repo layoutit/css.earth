@@ -1,0 +1,28 @@
+{
+ "id": "wasp-7b",
+ "classification": "exoplanet",
+ "order": 4835,
+ "physical": {
+  "name": "WASP-7 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 95084.4,
+  "gravitationalParameterKm3PerS2": 121619070.62,
+  "parent": "wasp-7"
+ },
+ "physicalNotes": "Radius 1.33 Jupiter radii from Southworth et al. 2011 (2011A&A...527A...8S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2011A%26A...527A...8S/abstract): 95,084.4 km at 71,492 km per Jupiter radius. GM from the mass 0.96 Jupiter masses (Southworth et al. 2011, the mass the NASA Exoplanet Archive's composite table adopts (2011A&A...527A...8S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2011A%26A...527A...8S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.95464865738,
+  "semiMajorAxisStellarRadii": 9.074,
+  "inclinationDegrees": 87.03,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60901.206541,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.95464865738 d",
+   "shape": "Southworth et al. 2011 (2011A&A...527A...8S), via the NASA Exoplanet Archive ps table (pl_refname SOUTHWORTH_ET_AL__2011): a/R* 9.074; Southworth et al. 2011 (2011A&A...527A...8S), via the NASA Exoplanet Archive ps table (pl_refname SOUTHWORTH_ET_AL__2011): inclination 87.03 degrees",
+   "eccentricity": "Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460901.706541 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

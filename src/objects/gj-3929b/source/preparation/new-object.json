@@ -1,0 +1,31 @@
+{
+  "host": "gj-3929",
+  "planets": [
+    {
+      "id": "gj-3929b",
+      "name": "GJ 3929 b",
+      "description": "Transiting planet of GJ 3929 with a 2.62-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+        "credit": "Beard et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BEARD_ET_AL_2022"
+      },
+      "text": {
+        "card": "GJ 3929 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around GJ 3929. Its orbit and size follow Beard et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BEARD_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.616235, pl_radj 0.09724345, pl_bmassj 0.00550612",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/GJ_3929_b",
+          "title": "GJ 3929 b",
+          "revision": "1374088370",
+          "card": "GJ 3929 b is a confirmed exoplanet located 52 light-years away orbiting the red dwarf star GJ 3929.",
+          "introduction": "It is an Earth-sized planet, having a radius only 9% larger than that of Earth."
+        }
+      },
+      "order": 3096
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-763c",
+  "radiusKm": 16774.4,
+  "radiusSource": "Radius 0.23463288 Jupiter radii from Fridlund et al. 2020 (2020MNRAS.498.4503F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.4503F/abstract): 16,774.4 km at 71,492 km per Jupiter radius. GM from the mass 0.02932385 Jupiter masses (Fridlund et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020MNRAS.498.4503F), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.4503F/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 12.27724442374,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 12.27724442374 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-763 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02932385 Jupiter masses: Fridlund et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020MNRAS.498.4503F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.498.4503F/abstract)."
+}

@@ -1,0 +1,31 @@
+{
+  "host": "gj-3470",
+  "planets": [
+    {
+      "id": "gj-3470b",
+      "name": "GJ 3470 b",
+      "description": "Transiting planet of GJ 3470 with a 3.34-day year, found in 2012.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract",
+        "credit": "Awiphan et al. 2016"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "AWIPHAN_ET_AL__2016"
+      },
+      "text": {
+        "card": "GJ 3470 b was found in 2012 by La Silla Observatory as it crossed its star.",
+        "introduction": "It is the only planet known around GJ 3470. Its orbit and size follow Awiphan et al. 2016's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AWIPHAN_ET_AL__2016): disc_year 2012, disc_facility La Silla Observatory, sy_pnum 1; pl_orbper 3.3366524, pl_radj 0.40770809, pl_bmassj 0.04373407",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/GJ_3470_b",
+          "title": "GJ 3470 b",
+          "revision": "1374245683",
+          "card": "GJ 3470 b is an exoplanet orbiting the star GJ 3470, located in the constellation Cancer.",
+          "introduction": "With a mass of just under 14 Earth-masses, a radius approximately 4.3 times that of Earth's, and a high equilibrium temperature of 673 K, it is a hot Neptune."
+        }
+      },
+      "order": 3087
+    }
+  ]
+}

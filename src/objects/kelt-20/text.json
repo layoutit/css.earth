@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-20",
+  "card": {
+    "text": "KELT-20 b crosses KELT-20 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa8f95",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract",
+        "label": "Lund et al. (2017), The Astronomical Journal 154 194",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LUND_ET_AL__2017): st_teff 8720, st_rad 1.565, st_mass 1.76"
+      },
+      {
+        "catalogueId": "wikipedia-kelt-20",
+        "url": "https://en.wikipedia.org/wiki/KELT-20",
+        "label": "Wikipedia, \"KELT-20\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374447847",
+        "quote": "KELT-20, also known as MASCARA-2, is an A2 main sequence star in the constellation of Cygnus, about 447 light years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lund et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa8f95",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract",
+        "label": "Lund et al. (2017), The Astronomical Journal 154 194",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LUND_ET_AL__2017): st_teff 8720, st_rad 1.565, st_mass 1.76"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

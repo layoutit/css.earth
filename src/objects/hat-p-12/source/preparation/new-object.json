@@ -1,0 +1,45 @@
+{
+  "id": "hat-p-12",
+  "name": "HAT-P-12",
+  "system": "HAT-P-12 system",
+  "description": "Star of 4,650 K, 143 parsecs away, with 1 transiting planet.",
+  "target": "HAT-P-12",
+  "gaia": "1499514786891168640",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
+    "credit": "Hartman et al. 2009"
+  },
+  "radius": {
+    "value": 0.701,
+    "source": "Hartman et al. 2009, the stellar radius of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 0.733,
+    "source": "Hartman et al. 2009, the stellar mass of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
+    "uncertainty": 0.018
+  },
+  "temperature": {
+    "value": 4650,
+    "source": "Hartman et al. 2009, the stellar temperature of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
+    "uncertainty": 60
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-12 b crosses HAT-P-12 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hartman et al. 2009.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HARTMAN_ET_AL__2009): st_teff 4650, st_rad 0.701, st_mass 0.733",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-12",
+      "title": "HAT-P-12",
+      "revision": "1352396823",
+      "card": "HAT-P-12, also named Komondor, is a magnitude 13 low-metallicity K dwarf star approximately 463 light years away in the constellation Canes Venatici, which hosts one known exoplanet."
+    }
+  },
+  "notes": [],
+  "order": 3112
+}

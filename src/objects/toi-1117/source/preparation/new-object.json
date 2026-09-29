@@ -1,0 +1,49 @@
+{
+  "id": "toi-1117",
+  "name": "TOI-1117",
+  "system": "TOI-1117 system",
+  "description": "Star of 5,635 K, 168 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1117",
+  "gaia": "6436995652638923392",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+    "credit": "Lockley et al. 2025"
+  },
+  "radius": {
+    "value": 1.05,
+    "source": "Lockley et al. 2025, the stellar radius of the default parameter set of TOI-1117 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.97,
+    "source": "Lockley et al. 2025, the stellar mass of the default parameter set of TOI-1117 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5635,
+    "source": "Lockley et al. 2025, the stellar temperature of the default parameter set of TOI-1117 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..919L/abstract",
+    "uncertainty": 62
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1117 b crosses TOI-1117 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lockley et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LOCKLEY_ET_AL_2025): st_teff 5635, st_rad 1.05, st_mass 0.97",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/TOI-1117",
+      "title": "TOI-1117",
+      "revision": "1337544506",
+      "card": "TOI-1117 is a single G-type star in the constellation of Pavo.",
+      "introduction": "It has approximately 0.97 times the mass and 1.05 times the radius of the Sun, with a surface temperature of 5,635±62 K and a spectral type of G7."
+    }
+  },
+  "notes": [
+    "TOI-1117 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)",
+    "TOI-1117 d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3921
+}

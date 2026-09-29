@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-237c",
+  "card": {
+    "text": "TOI-237 c was found in 2026 by La Silla Observatory as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag710",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag710T/abstract",
+        "label": "Timmermans et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TIMMERMANS_ET_AL_2026): disc_year 2026, disc_facility La Silla Observatory, sy_pnum 2; pl_orbper 1.74486147, pl_radj 0.1075923, pl_bmassj 0.00598"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-237. Its orbit and size follow Timmermans et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag710",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag710T/abstract",
+        "label": "Timmermans et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TIMMERMANS_ET_AL_2026): disc_year 2026, disc_facility La Silla Observatory, sy_pnum 2; pl_orbper 1.74486147, pl_radj 0.1075923, pl_bmassj 0.00598"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

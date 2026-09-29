@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2407",
+  "card": {
+    "text": "TOI-2407 b crosses TOI-2407 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf946",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J/abstract",
+        "label": "Muñoz et al. (2025), Monthly Notices of the Royal Astronomical Society 541 630-641",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JANO_MUNOZ_ET_AL_2025): st_teff 3530, st_rad 0.567, st_mass 0.548"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Janó Muñoz et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf946",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.541..630J/abstract",
+        "label": "Muñoz et al. (2025), Monthly Notices of the Royal Astronomical Society 541 630-641",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JANO_MUNOZ_ET_AL_2025): st_teff 3530, st_rad 0.567, st_mass 0.548"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

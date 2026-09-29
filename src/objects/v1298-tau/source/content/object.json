@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "v1298-tau",
+  "displayName": "V1298 Tau",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1038-s41586-025-09840-z",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L",
+          "label": "Livingston et al. (2026), Nature 649 310-314",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "108 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-v1298-tau",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "v1298-tau-lens-color.webp",
+        "surface": "v1298-tau-surface-color@2x.webp",
+        "poles": "v1298-tau-poles-color@2x.webp",
+        "source": {
+          "id": "v1298-tau-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,970 K and log g 4.24 (u1 0.661, u2 0.118): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Livingston et al. 2026",
+      "href": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract",
+      "credit": "Livingston et al. 2026"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/v1298-tau.json",
+      "credit": "Livingston et al. 2026, the stellar radius of the default parameter set of V1298 Tau c in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

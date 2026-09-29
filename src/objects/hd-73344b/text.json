@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-73344b",
+  "card": {
+    "text": "HD 73344 b was found in 2024 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "publication-2024a-a-688a-14s",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract",
+        "label": "Sulis et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SULIS_ET_AL_2024): disc_year 2024, disc_facility K2, sy_pnum 3; pl_orbper 15.611, pl_radj 0.25729369, pl_bmassj 0.03297377"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 3 planets known around HD 73344. Its orbit and size follow Sulis et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "publication-2024a-a-688a-14s",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract",
+        "label": "Sulis et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SULIS_ET_AL_2024): disc_year 2024, disc_facility K2, sy_pnum 3; pl_orbper 15.611, pl_radj 0.25729369, pl_bmassj 0.03297377"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

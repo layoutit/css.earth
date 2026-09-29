@@ -1,0 +1,46 @@
+{
+  "id": "arxiv-2609-09077",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ranshaw et al. (2026): The Discovery of K2-232c: Divergent Formation Histories for Hot and Warm Jupiters Based on Outer Companion Eccentricity",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2609.09077"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026arXiv260909077R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ranshaw et al. (2026)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R"
+    }
+  ],
+  "creators": [
+    "Jessica A. Ranshaw",
+    "Xian-Yu Wang",
+    "Jennifer A. Burt",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

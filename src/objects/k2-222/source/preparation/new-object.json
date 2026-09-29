@@ -1,0 +1,39 @@
+{
+  "id": "k2-222",
+  "name": "K2-222",
+  "system": "K2-222 system",
+  "description": "Star of 5,942 K, 101 parsecs away, with 1 transiting planet.",
+  "target": "K2-222",
+  "gaia": "2584093844170270720",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract",
+    "credit": "Nava et al. 2022"
+  },
+  "radius": {
+    "value": 1.072,
+    "source": "Nava et al. 2022, the stellar radius of the default parameter set of K2-222 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract",
+    "uncertainty": 0.043
+  },
+  "mass": {
+    "value": 0.94,
+    "source": "Nava et al. 2022, the stellar mass of the default parameter set of K2-222 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract",
+    "uncertainty": 0.05
+  },
+  "temperature": {
+    "value": 5942,
+    "source": "Nava et al. 2022, the stellar temperature of the default parameter set of K2-222 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract",
+    "uncertainty": 119
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "K2-222 b crosses K2-222 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Nava et al. 2022.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname NAVA_ET_AL_2022): st_teff 5942, st_rad 1.072, st_mass 0.94"
+  },
+  "notes": [],
+  "order": 3397
+}

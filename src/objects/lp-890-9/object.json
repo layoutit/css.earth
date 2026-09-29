@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "lp-890-9",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "LP 890-9",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 108250.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lp-890-9-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "LP 890-9",
+      "classification": "star",
+      "color": "#ffb263",
+      "distanceAu": 6668272.1,
+      "description": "2 planets cross LP 890-9 as seen from Earth: b, c.",
+      "systemName": "LP 890-9 system",
+      "order": 3829,
+      "context": {
+        "order": 3826
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        383158789323626700,
+        790196031044287200,
+        -473185099641365000
+      ],
+      "presentationToReference": [
+        0.38409894066210254,
+        -0.20695832436612038,
+        0.899797897173481,
+        0.7921349237630024,
+        -0.42680032607949864,
+        -0.43630693807618504,
+        -0.4743313887328488,
+        -0.8803463713982135,
+        -0.000005363372500132764
+      ],
+      "orbitUpReference": [
+        0.20695832436612038,
+        0.42680032607949864,
+        0.8803463713982135
+      ],
+      "metersPerUnit": 349196.4516129032,
+      "bodyRadiusM": 108250900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

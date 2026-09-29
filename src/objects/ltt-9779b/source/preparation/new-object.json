@@ -1,0 +1,31 @@
+{
+  "host": "ltt-9779",
+  "planets": [
+    {
+      "id": "ltt-9779b",
+      "name": "LTT 9779 b",
+      "description": "Transiting planet of LTT 9779 with a 0.792-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract",
+        "credit": "Jenkins et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "JENKINS_ET_AL_2020"
+      },
+      "text": {
+        "card": "LTT 9779 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around LTT 9779. Its orbit and size follow Jenkins et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname JENKINS_ET_AL_2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.7920645022, pl_radj 0.4210902, pl_bmassj 0.09225057",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/LTT_9779_b",
+          "title": "LTT 9779 b",
+          "revision": "1375644436",
+          "card": "LTT 9779 b, officially named Cuancoá, is a Neptune-sized planet orbiting the sunlike star LTT 9779, or Uúba.",
+          "introduction": "As of 2023, it has the highest-known albedo of any planet."
+        }
+      },
+      "order": 3839
+    }
+  ]
+}

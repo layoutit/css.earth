@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-4552",
+  "card": {
+    "text": "TOI-4552 b crosses TOI-4552 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202558749",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract",
+        "label": "Srivastava et al. (2026), Astronomy & Astrophysics 709 A73",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SRIVASTAVA_ET_AL_2026): st_teff 3258, st_rad 0.2869, st_mass 0.2619"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Srivastava et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202558749",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract",
+        "label": "Srivastava et al. (2026), Astronomy & Astrophysics 709 A73",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SRIVASTAVA_ET_AL_2026): st_teff 3258, st_rad 0.2869, st_mass 0.2619"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

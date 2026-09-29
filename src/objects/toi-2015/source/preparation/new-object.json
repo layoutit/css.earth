@@ -1,0 +1,41 @@
+{
+  "id": "toi-2015",
+  "name": "TOI-2015",
+  "system": "TOI-2015 system",
+  "description": "Star of 3,297 K, 47.3 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2015",
+  "gaia": "1270814787767025408",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B/abstract",
+    "credit": "Barkaoui et al. 2025"
+  },
+  "radius": {
+    "value": 0.3273,
+    "source": "Barkaoui et al. 2025, the stellar radius of the default parameter set of TOI-2015 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B/abstract",
+    "uncertainty": 0.0029
+  },
+  "mass": {
+    "value": 0.3041,
+    "source": "Barkaoui et al. 2025, the stellar mass of the default parameter set of TOI-2015 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B/abstract",
+    "uncertainty": 0.0353
+  },
+  "temperature": {
+    "value": 3297,
+    "source": "Barkaoui et al. 2025, the stellar temperature of the default parameter set of TOI-2015 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B/abstract",
+    "uncertainty": 14
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2015 b crosses TOI-2015 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Barkaoui et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BARKAOUI_ET_AL_2025): st_teff 3297, st_rad 0.3273, st_mass 0.3041"
+  },
+  "notes": [
+    "TOI-2015 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by transit timing variations)"
+  ],
+  "order": 4212
+}

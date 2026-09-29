@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202348813",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Murgas et al. (2024): Wolf 327b: A new member of the pack of ultra-short-period super-Earths around M dwarfs",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2401.12150"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202348813"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...684A..83M"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202348813",
+      "label": "Astronomy & Astrophysics 684 A83"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Murgas et al. (2024), Astronomy & Astrophysics 684 A83",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 684 A83",
+  "creators": [
+    "F. Murgas",
+    "E. Pallé",
+    "J. Orell-Miquel",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

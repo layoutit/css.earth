@@ -1,0 +1,45 @@
+{
+  "id": "hat-p-3-b",
+  "name": "HAT-P-3B",
+  "system": "HAT-P-3 system",
+  "description": "Star bound to HAT-P-3, 1,321 AU away.",
+  "gaia": "1510191594552968960",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.283,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 311035839 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.257,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 311035839 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.021
+  },
+  "temperature": {
+    "value": 3300,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 311035839 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-3B is a star of 3,300 K, bound to HAT-P-3 1,321 AU away.",
+    "introduction": "HAT-P-3B shares its motion through space with HAT-P-3, 1,321 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 1510191594552968832 and 1510191594552968960, sep_AU 1321.455196358780086, R_chance_align 9.159582709490321327e-06"
+  },
+  "notes": [
+    "HAT-P-3B's orbit around HAT-P-3 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 1510191594552968960 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 40,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%201510191594552968960"
+  },
+  "order": 3047
+}

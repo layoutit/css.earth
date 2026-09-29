@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202554161",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lacedelli et al. (2025): A transiting rocky super-Earth and a non-transiting sub-Neptune orbiting the M dwarf TOI-771",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2504.18223"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202554161"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...698A.223L"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202554161",
+      "label": "Astronomy & Astrophysics 698 A223"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Lacedelli et al. (2025), Astronomy & Astrophysics 698 A223",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 698 A223",
+  "creators": [
+    "G. Lacedelli",
+    "E. Pallé",
+    "Y. T. Davis",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

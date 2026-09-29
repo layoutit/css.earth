@@ -1,0 +1,31 @@
+{
+ "id": "lhs-1903d",
+ "classification": "exoplanet",
+ "order": 3817,
+ "physical": {
+  "name": "LHS 1903 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 15945.3,
+  "gravitationalParameterKm3PerS2": 2375658.78,
+  "parent": "lhs-1903"
+ },
+ "physicalNotes": "Radius 0.22303545 Jupiter radii from Wilson et al. 2026 (2026Sci...392l2348W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026Sci...392l2348W/abstract): 15,945.3 km at 71,492 km per Jupiter radius. GM from the mass 0.01875226 Jupiter masses (Wilson et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026Sci...392l2348W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026Sci...392l2348W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 12.566287,
+  "semiMajorAxisStellarRadii": 34.32,
+  "inclinationDegrees": 89.494,
+  "eccentricity": 0.112,
+  "argumentOfPeriapsisDegrees": 233,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58843.8901,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Wilson et al. 2026 (2026Sci...392l2348W), via the NASA Exoplanet Archive ps table (pl_refname WILSON_ET_AL_2026): P 12.566287 d",
+   "shape": "Wilson et al. 2026 (2026Sci...392l2348W), via the NASA Exoplanet Archive ps table (pl_refname WILSON_ET_AL_2026): a/R* 34.32; Wilson et al. 2026 (2026Sci...392l2348W), via the NASA Exoplanet Archive ps table (pl_refname WILSON_ET_AL_2026): inclination derived from its impact parameter 0.329 with its a/R* 34.32 and the orbit's e 0.112, omega 233 degrees (Winn 2010, eq. 7)",
+   "eccentricity": "Wilson et al. 2026 (2026Sci...392l2348W), via the NASA Exoplanet Archive ps table (pl_refname WILSON_ET_AL_2026): e 0.112",
+   "argumentOfPeriapsis": "Wilson et al. 2026 (2026Sci...392l2348W), via the NASA Exoplanet Archive ps table (pl_refname WILSON_ET_AL_2026): omega 233 degrees",
+   "phase": "Wilson et al. 2026 (2026Sci...392l2348W), via the NASA Exoplanet Archive ps table (pl_refname WILSON_ET_AL_2026): transit mid-time 2458844.3901 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

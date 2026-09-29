@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "cd-35-16019-b",
+  "angularDiameterMas": 0.05,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 332,545 km at 90.06 pc = 0.05 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 90.05921292453834,
+  "distanceSource": "Gaia DR3 parallax 11.1038 +/- 0.0197 mas (same row, RUWE 1.30): 90.06 pc, no zero-point correction",
+  "radiusKm": 332544.6,
+  "radiusSource": "Radius 0.478 +/- 0.06 solar radii from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 183532608 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467): 332,545 km at 695,700 km per solar radius. Mass 0.56 +/- 0.086 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 183532608 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467); GM is that mass times the JPL solar GM. Temperature 3740 +/- 128.8 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 183532608 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3740,
+  "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 183532608 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
+  "surfaceGravityLogg": 4.83,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/cd-35-16019-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.827, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

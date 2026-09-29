@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "gj-436",
+  "displayName": "GJ 436",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.46 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1501-02711",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M",
+          "label": "Maciejewski et al. (2014), Acta Astronomica, 2014, vol 64, no 4, p. 323-335",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "9.8 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-gj-436",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "gj-436-lens-color.webp",
+        "surface": "gj-436-surface-color@2x.webp",
+        "poles": "gj-436-poles-color@2x.webp",
+        "source": {
+          "id": "gj-436-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.514...77M/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,505 K and log g 4.79 (u1 0.400, u2 0.373): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Maciejewski et al. 2014",
+      "href": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract",
+      "credit": "Maciejewski et al. 2014"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-436.json",
+      "credit": "Maciejewski et al. 2014, the stellar radius of the default parameter set of GJ 436 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

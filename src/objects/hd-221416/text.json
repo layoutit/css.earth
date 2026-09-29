@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-221416",
+  "card": {
+    "text": "HD 221416 b crosses HD 221416 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab1488",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..245H/abstract",
+        "label": "Huber et al. (2019), The Astronomical Journal 157 245",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HUBER_ET_AL__2019): st_teff 5080, st_rad 2.943, st_mass 1.212"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Huber et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab1488",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157..245H/abstract",
+        "label": "Huber et al. (2019), The Astronomical Journal 157 245",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HUBER_ET_AL__2019): st_teff 5080, st_rad 2.943, st_mass 1.212"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

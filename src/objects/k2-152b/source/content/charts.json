@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-152b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-152b-orbits",
+      "title": "K2-152 b: orbits around K2-152",
+      "output": "k2-152b-system-orbits.svg",
+      "system": "k2-152",
+      "highlight": "k2-152b",
+      "description": "The orbits of K2-152's planets in this map from above, to scale, with K2-152 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Hirano et al. 2018 (2018AJ....155..127H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): P 32.6527 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "k2-152b-transit",
+      "title": "K2-152 b: its transit",
+      "description": "K2-152 b crossing its star, as TESS recorded it: 2 sectors (46, 91) of the SPOC pipeline's 2-minute light curves of TIC 56754291, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 76 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 1210 minutes at these dates, then averaged in 16-minute bins. Error bars are each bin's standard error.",
+      "output": "k2-152b-transit.svg",
+      "metadata": {
+        "tic": "TIC 56754291",
+        "sectors": [
+          46,
+          91
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "k2-152b",
+      "sources": [
+        "photometry/tess/tess2021336043614-s0046-0000000056754291-0217-s_lc.fits",
+        "photometry/tess/tess2025099153000-s0091-0000000056754291-0288-s_lc.fits"
+      ],
+      "durationHours": 4,
+      "binMinutes": 16,
+      "alignMinutes": -76,
+      "notes": [
+        "TESS 2-min SPOC · sectors 46, 91",
+        "Aligned on TESS's dip, 76 min early; 16-min bins.",
+        "The ephemeris's own 1σ there is 403 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

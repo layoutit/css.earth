@@ -1,0 +1,41 @@
+{
+  "id": "toi-426",
+  "name": "TOI-426",
+  "system": "TOI-426 system",
+  "description": "Star of 5,750 K, 114 parsecs away, with 1 transiting planet.",
+  "target": "TOI-426",
+  "gaia": "2983316311375470976",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract",
+    "credit": "Castro-González et al. 2026"
+  },
+  "radius": {
+    "value": 0.99,
+    "source": "Castro-González et al. 2026, the stellar radius of the default parameter set of TOI-426 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 1,
+    "source": "Castro-González et al. 2026, the stellar mass of the default parameter set of TOI-426 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 5750,
+    "source": "Castro-González et al. 2026, the stellar temperature of the default parameter set of TOI-426 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract",
+    "uncertainty": 62
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-426 b crosses TOI-426 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Castro-González et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CASTRO_GONZALEZ_ET_AL_2026): st_teff 5750, st_rad 0.99, st_mass 1"
+  },
+  "notes": [
+    "TOI-426 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 4393
+}

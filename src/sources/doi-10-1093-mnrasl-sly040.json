@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1093-mnrasl-sly040",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Alonso et al. (2018): A system of three transiting super-Earths in a cool dwarf star",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnrasl/sly040"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018MNRAS.476L..50D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D",
+      "checkedOn": "2026-09-29",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Alonso et al. (2018), Monthly Notices of the Royal Astronomical Society: Letters 476 L50-L54",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society: Letters 476 L50-L54",
+  "creators": [
+    "E Díez Alonso",
+    "S L Suárez Gómez",
+    "J I González Hernández",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "wasp-99",
+  "name": "WASP-99",
+  "system": "WASP-99 system",
+  "description": "Star of 6,150 K, 159 parsecs away, with 1 transiting planet.",
+  "target": "WASP-99",
+  "gaia": "4745660479479743488",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 1.64,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of WASP-99 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.09
+  },
+  "mass": {
+    "value": 1.21,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of WASP-99 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.28
+  },
+  "temperature": {
+    "value": 6150,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-99 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-99 b crosses WASP-99 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6150, st_rad 1.64, st_mass 1.21"
+  },
+  "notes": [],
+  "order": 4855
+}

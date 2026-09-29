@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "hd-23472f",
+  "displayName": "HD 23472 f",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244293",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B",
+          "label": "Barros et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "12.2 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244293",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B",
+          "label": "Barros et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.77 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244293",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B",
+          "label": "Barros et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by HD 23472; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "hd-23472f-lens-shape.webp",
+        "surface": "hd-23472f-surface-shape@2x.webp",
+        "poles": "hd-23472f-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-23472f-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of HD 23472 f is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of hd-23472's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hd-23472f-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-23472f/hd-23472f-system-orbits.svg",
+      "alt": "The orbits of HD 23472's planets in this map from above, to scale, with HD 23472 f highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-23472f-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B"
+      }
+    },
+    {
+      "id": "hd-23472f-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hd-23472f/hd-23472f-transit.svg",
+      "alt": "HD 23472 f crossing its star, as TESS recorded it: 3 sectors (95, 96, 97) of the SPOC pipeline's 2-minute light curves of TIC 425997655, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 4 minutes earlier to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 21 minutes at these dates, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hd-23472f-tess-sector-95",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025206162959-s0095-0000000425997655-0292-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Barros et al. 2022",
+      "href": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract",
+      "credit": "Barros et al. 2022"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-23472f.json",
+      "credit": "Radius from Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive; mass from Barros et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022A&A...665A.154B), via the NASA Exoplanet Archive; orbit from Barros et al. 2022 (2022A&A...665A.154B), via the NASA Exoplanet Archive"
+    }
+  }
+}

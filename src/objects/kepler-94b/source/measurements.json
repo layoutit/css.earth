@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-94b",
+  "radiusKm": 22377,
+  "radiusSource": "Radius 0.313 Jupiter radii from Marcy et al. 2014 (2014ApJS..210...20M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract): 22,377 km at 71,492 km per Jupiter radius. GM from the mass 0.034 Jupiter masses (Marcy et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014ApJS..210...20M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.50805761,
+  "orbitalPeriodSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 2.50805761 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-94 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.034 Jupiter masses: Marcy et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014ApJS..210...20M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)."
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-181",
+  "card": {
+    "text": "TOI-181 b crosses TOI-181 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad543",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M/abstract",
+        "label": "Mistry et al. (2023), Monthly Notices of the Royal Astronomical Society 521 1066-1078",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MISTRY_ET_AL_2023): st_teff 4994, st_rad 0.745, st_mass 0.822"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mistry et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stad543",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M/abstract",
+        "label": "Mistry et al. (2023), Monthly Notices of the Royal Astronomical Society 521 1066-1078",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MISTRY_ET_AL_2023): st_teff 4994, st_rad 0.745, st_mass 0.822"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

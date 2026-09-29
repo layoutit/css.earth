@@ -1,0 +1,24 @@
+{
+  "host": "toi-4641",
+  "planets": [
+    {
+      "id": "toi-4641b",
+      "name": "TOI-4641 b",
+      "description": "Transiting planet of TOI-4641 with a 22.1-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract",
+        "credit": "Bieryla et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BIERYLA_ET_AL_2024"
+      },
+      "text": {
+        "card": "TOI-4641 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-4641. Its orbit and size follow Bieryla et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BIERYLA_ET_AL_2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 22.09339217881, pl_radj 0.73, pl_bmassj 3.87"
+      },
+      "order": 4456
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-166",
+  "card": {
+    "text": "WASP-166 b crosses WASP-166 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stz1903",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+        "label": "Hellier et al. (2019), Monthly Notices of the Royal Astronomical Society 488 3067-3075",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HELLIER_ET_AL__2019): st_teff 6050, st_rad 1.22, st_mass 1.19"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-166",
+        "url": "https://en.wikipedia.org/wiki/WASP-166",
+        "label": "Wikipedia, \"WASP-166\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375752963",
+        "quote": "WASP-166, also named Filetdor, is an F-type main-sequence star 373 light-years away in the constellation Hydra."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hellier et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stz1903",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract",
+        "label": "Hellier et al. (2019), Monthly Notices of the Royal Astronomical Society 488 3067-3075",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HELLIER_ET_AL__2019): st_teff 6050, st_rad 1.22, st_mass 1.19"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-166",
+        "url": "https://en.wikipedia.org/wiki/WASP-166",
+        "label": "Wikipedia, \"WASP-166\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375752963",
+        "quote": "With an apparent magnitude of 9.4, it is too faint to be visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

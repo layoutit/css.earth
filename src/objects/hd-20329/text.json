@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-20329",
+  "card": {
+    "text": "HD 20329 b crosses HD 20329 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244459",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A.158M/abstract",
+        "label": "Murgas et al. (2022), Astronomy & Astrophysics 668 A158",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MURGAS_ET_AL_2022): st_teff 5596, st_rad 1.13, st_mass 0.9"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Murgas et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244459",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...668A.158M/abstract",
+        "label": "Murgas et al. (2022), Astronomy & Astrophysics 668 A158",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MURGAS_ET_AL_2022): st_teff 5596, st_rad 1.13, st_mass 0.9"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

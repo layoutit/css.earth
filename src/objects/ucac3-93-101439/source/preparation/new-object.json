@@ -1,0 +1,40 @@
+{
+  "id": "ucac3-93-101439",
+  "name": "UCAC3 93-101439",
+  "system": "TOI-815 system",
+  "description": "Star bound to TOI-815, 359 AU away.",
+  "gaia": "5415648821874435584",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.538,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 102840237 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.016
+  },
+  "mass": {
+    "value": 0.534,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 102840237 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.021
+  },
+  "temperature": {
+    "value": 3766,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 102840237 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "UCAC3 93-101439 is a star of 3,766 K, bound to TOI-815 359 AU away.",
+    "introduction": "UCAC3 93-101439 shares its motion through space with TOI-815, 359 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 5415648821879172096 and 5415648821874435584, sep_AU 358.818206063312061, R_chance_align 1.202510707331099577e-06"
+  },
+  "notes": [
+    "UCAC3 93-101439's orbit around TOI-815 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 4728
+}

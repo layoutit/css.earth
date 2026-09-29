@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-2285b",
+  "radiusKm": 11289.2,
+  "radiusSource": "Radius 0.1579091 Jupiter radii from Fukui 2025 (2025RNAAS...9...73F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025RNAAS...9...73F/abstract): 11,289.2 km at 71,492 km per Jupiter radius. No mass is measured: Fukui et al. 2022 (2022PASJ...74L...1F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract) gives only an upper limit of 0.06135386 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 13.635109,
+  "orbitalPeriodSource": "Fukui 2025 (2025RNAAS...9...73F), via the NASA Exoplanet Archive ps table (pl_refname FUKUI_2025): P 13.635109 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-2285 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.06135386 Jupiter masses: Fukui et al. 2022 (2022PASJ...74L...1F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract)."
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-84b",
+  "card": {
+    "text": "WASP-84 b was found in 2014 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnrasl-slad078",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M/abstract",
+        "label": "Maciejewski et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MACIEJEWSKI_ET_AL_2023): disc_year 2014, disc_facility SuperWASP, sy_pnum 2; pl_orbper 8.52349648, pl_radj 0.956, pl_bmassj 0.692"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around WASP-84. Its orbit and size follow Maciejewski et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnrasl-slad078",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M/abstract",
+        "label": "Maciejewski et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MACIEJEWSKI_ET_AL_2023): disc_year 2014, disc_facility SuperWASP, sy_pnum 2; pl_orbper 8.52349648, pl_radj 0.956, pl_bmassj 0.692"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

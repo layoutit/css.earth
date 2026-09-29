@@ -1,0 +1,39 @@
+{
+  "id": "toi-2010",
+  "name": "TOI-2010",
+  "system": "TOI-2010 system",
+  "description": "Star of 5,929 K, 109 parsecs away, with 1 transiting planet.",
+  "target": "TOI-2010",
+  "gaia": "2136815881249993600",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract",
+    "credit": "Mann et al. 2023"
+  },
+  "radius": {
+    "value": 1.079,
+    "source": "Mann et al. 2023, the stellar radius of the default parameter set of TOI-2010 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract",
+    "uncertainty": 0.027
+  },
+  "mass": {
+    "value": 1.112,
+    "source": "Mann et al. 2023, the stellar mass of the default parameter set of TOI-2010 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract",
+    "uncertainty": 0.048
+  },
+  "temperature": {
+    "value": 5929,
+    "source": "Mann et al. 2023, the stellar temperature of the default parameter set of TOI-2010 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract",
+    "uncertainty": 74
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-2010 b crosses TOI-2010 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Mann et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname MANN_ET_AL_2023): st_teff 5929, st_rad 1.079, st_mass 1.112"
+  },
+  "notes": [],
+  "order": 4210
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-6223b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-6223b-orbits",
+      "title": "TOI-6223 b: orbits around TOI-6223",
+      "output": "toi-6223b-system-orbits.svg",
+      "system": "toi-6223",
+      "highlight": "toi-6223b",
+      "description": "The orbits of TOI-6223's planets in this map from above, to scale, with TOI-6223 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Yalçinkaya et al. 2025 (2025A&A...702A.209Y), via the NASA Exoplanet Archive ps table (pl_refname YALCINKAYA_ET_AL_2025): P 3.855219 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-6223b-transit",
+      "title": "TOI-6223 b: its transit",
+      "description": "TOI-6223 b crossing its star, as TESS recorded it: 1 sector (84) of the SPOC pipeline's 2-minute light curves of TIC 288144647, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-6223b-transit.svg",
+      "metadata": {
+        "tic": "TIC 288144647",
+        "sectors": [
+          84
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-6223b",
+      "sources": [
+        "photometry/tess/tess2024274222008-s0084-0000000288144647-0281-s_lc.fits"
+      ],
+      "durationHours": 2.0141,
+      "binMinutes": 8,
+      "notes": [
+        "TESS 2-min SPOC · sector 84",
+        "Folded on the app's orbit; 8-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

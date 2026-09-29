@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "qatar-6",
+  "card": {
+    "text": "Qatar-6 b crosses Qatar-6 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaa000",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract",
+        "label": "Alsubai et al. (2018), The Astronomical Journal 155 52",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ALSUBAI_ET_AL__2018): st_teff 5052, st_rad 0.722, st_mass 0.822"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Alsubai et al. 2018.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaa000",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract",
+        "label": "Alsubai et al. (2018), The Astronomical Journal 155 52",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ALSUBAI_ET_AL__2018): st_teff 5052, st_rad 0.722, st_mass 0.822"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+ "id": "toi-733",
+ "classification": "star",
+ "order": 4693,
+ "physical": {
+  "name": "TOI-733",
+  "horizonsCode": null,
+  "meanRadiusKm": 660219.3,
+  "gravitationalParameterKm3PerS2": 126873092680.09404,
+  "parent": null,
+  "effectiveTemperatureK": 5585
+ },
+ "physicalNotes": "Radius 0.949 +/- 0.008 solar radii from Georgieva et al. 2023, the stellar radius of the default parameter set of TOI-733 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract): 660,219 km at 695,700 km per solar radius. Mass 0.956 +/- 0.05 solar masses from Georgieva et al. 2023, the stellar mass of the default parameter set of TOI-733 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract); GM is that mass times the JPL solar GM. Temperature 5585 +/- 60 K from Georgieva et al. 2023, the stellar temperature of the default parameter set of TOI-733 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 159.40932335925658,
+  "declinationDegrees": -40.8882562645165,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 75.27455167914358,
+  "properMotionRaMasPerYear": 27.527827960300996,
+  "properMotionDecMasPerYear": 19.523800594815643,
+  "radialVelocityKmPerS": -23.919258,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5392409372314518656 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-733/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 13.2847 +/- 0.0127 mas (same row, RUWE 0.98): 75.27 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 27.528, 19.524 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -23.92 +/- 0.15 km/s"
+  }
+ }
+}

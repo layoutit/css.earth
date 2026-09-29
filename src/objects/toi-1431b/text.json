@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1431b",
+  "card": {
+    "text": "TOI-1431 b was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac224e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract",
+        "label": "Addison et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ADDISON_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.650232, pl_radj 1.49, pl_bmassj 3.12"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1431-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-1431_b",
+        "label": "Wikipedia, \"TOI-1431 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366872522",
+        "quote": "TOI-1431 b, also known as MASCARA-5b, is an ultra-hot Jupiter exoplanet orbiting TOI-1431 in the constellation of Cepheus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-1431. Its orbit and size follow Addison et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac224e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract",
+        "label": "Addison et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ADDISON_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.650232, pl_radj 1.49, pl_bmassj 3.12"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1431-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-1431_b",
+        "label": "Wikipedia, \"TOI-1431 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366872522",
+        "quote": "It has an orbital period of 2.7 days."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "gj-1252b",
+  "radiusKm": 7609.1,
+  "radiusSource": "Radius 0.10643251 Jupiter radii from Luque & Pallé 2022 (2022Sci...377.1211L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract): 7,609.1 km at 71,492 km per Jupiter radius. GM from the mass 0.00415318 Jupiter masses (Luque & Pallé 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022Sci...377.1211L), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 0.5182418,
+  "orbitalPeriodSource": "Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): P 0.5182418 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of GJ 1252 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.00415318 Jupiter masses: Luque & Pallé 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022Sci...377.1211L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract)."
+}

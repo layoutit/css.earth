@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/gj-1132b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "gj-1132b-orbits",
+      "title": "GJ 1132 b: orbits around GJ 1132",
+      "output": "gj-1132b-system-orbits.svg",
+      "system": "gj-1132",
+      "highlight": "gj-1132b",
+      "description": "The orbits of GJ 1132's planets in this map from above, to scale, with GJ 1132 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Xue et al. 2024 (2024ApJ...973L...8X), via the NASA Exoplanet Archive ps table (pl_refname XUE_ET_AL_2024): P 1.62892911 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "gj-1132b-transmission",
+      "title": "GJ 1132 b: transmission spectrum",
+      "description": "GJ 1132 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 17 measured bins from Diamond-Lowe et al. 2018 (Magellan II Landon Clay Telescope, LDSS-3C), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "gj-1132b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2018AJ....156...42D/abstract",
+        "table": "transitspec",
+        "bins": 17
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 17
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0.6,
+        "maximum": 1.2,
+        "ticks": [
+          0.6,
+          0.8,
+          1,
+          1.2
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 0.175,
+        "maximum": 0.275,
+        "ticks": [
+          0.175,
+          0.2,
+          0.225,
+          0.25,
+          0.275
+        ]
+      },
+      "notes": [
+        "Diamond-Lowe et al. 2018",
+        "Magellan II Landon Clay Telescope, LDSS-3C",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "gj-1132b-transit",
+      "title": "GJ 1132 b: its transit",
+      "description": "GJ 1132 b crossing its star, as TESS recorded it: 3 sectors (63, 90, 99) of the SPOC pipeline's 2-minute light curves of TIC 101955023, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "gj-1132b-transit.svg",
+      "metadata": {
+        "tic": "TIC 101955023",
+        "sectors": [
+          63,
+          90,
+          99
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "gj-1132b",
+      "sources": [
+        "photometry/tess/tess2023069172124-s0063-0000000101955023-0255-s_lc.fits",
+        "photometry/tess/tess2025071122000-s0090-0000000101955023-0287-s_lc.fits",
+        "photometry/tess/tess2026005125623-s0099-0000000101955023-0300-s_lc.fits"
+      ],
+      "durationHours": 0.76646,
+      "binMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 63, 90, 99",
+        "Folded on the app's orbit; 4-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

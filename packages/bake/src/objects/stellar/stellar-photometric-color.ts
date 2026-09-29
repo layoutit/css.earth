@@ -55,9 +55,13 @@ export function parseStellarColorRecord(value: unknown): StellarColorRecord {
       upper: requireString(temperature.upperColumn, 'temperature.upperColumn') } };
 }
 
+/** The coolest black body a colour is drawn from. Cooler than this, it gives off almost no visible light, so a body's visible
+ * colour is its reflected light, not its glow (a planet's dayside at 938 K, WASP-8 b, takes its host's light instead). */
+export const PLANCK_FLOOR_KELVIN = 1000;
+
 /** Read the temperature and its bounds from the archived catalogue row, by source id. */
 function checkStellarTemperature(temperature: StellarTemperature, label: string): void {
-  if (!(temperature.kelvin > 1000 && temperature.lowerKelvin <= temperature.kelvin && temperature.kelvin <= temperature.upperKelvin)) {
+  if (!(temperature.kelvin > PLANCK_FLOOR_KELVIN && temperature.lowerKelvin <= temperature.kelvin && temperature.kelvin <= temperature.upperKelvin)) {
     throw new TypeError(`The ${label} must be a stellar temperature inside its bounds.`);
   }
 }

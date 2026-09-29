@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1437b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.19983976 Jupiter radii from Pidhorodetska et al. 2024 (2024AJ....168..135P), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..135P/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.03020498 Jupiter masses: Pidhorodetska et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....168..135P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..135P/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..135P/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 18.840891 d; Pidhorodetska et al. 2024 (2024AJ....168..135P), via the NASA Exoplanet Archive ps table (pl_refname PIDHORODETSKA_ET_AL_2024): a/R* 25.7; Pidhorodetska et al. 2024 (2024AJ....168..135P), via the NASA Exoplanet Archive ps table (pl_refname PIDHORODETSKA_ET_AL_2024): inclination 89.53 degrees; Pidhorodetska et al. 2024 (2024AJ....168..135P), via the NASA Exoplanet Archive ps table (pl_refname PIDHORODETSKA_ET_AL_2024): e 0.17; Pidhorodetska et al. 2024 (2024AJ....168..135P), via the NASA Exoplanet Archive ps table (pl_refname PIDHORODETSKA_ET_AL_2024): omega -96.3 degrees, stored as 263.7; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460660.183368 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024AJ....168..135P/abstract"
+      ]
+    }
+  ]
+}

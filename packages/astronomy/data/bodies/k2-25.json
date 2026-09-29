@@ -1,0 +1,30 @@
+{
+ "id": "k2-25",
+ "classification": "star",
+ "order": 3426,
+ "physical": {
+  "name": "K2-25",
+  "horizonsCode": null,
+  "meanRadiusKm": 203979.2,
+  "gravitationalParameterKm3PerS2": 34956456707.04684,
+  "parent": null,
+  "effectiveTemperatureK": 3207
+ },
+ "physicalNotes": "Radius 0.2932 +/- 0.0093 solar radii from Stefansson et al. 2020, the stellar radius of the default parameter set of K2-25 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract): 203,979 km at 695,700 km per solar radius. Mass 0.2634 +/- 0.0077 solar masses from Stefansson et al. 2020, the stellar mass of the default parameter set of K2-25 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract); GM is that mass times the JPL solar GM. Temperature 3207 +/- 58 K from Stefansson et al. 2020, the stellar temperature of the default parameter set of K2-25 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 63.273952149488956,
+  "declinationDegrees": 15.247700118856342,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 44.728225593253704,
+  "properMotionRaMasPerYear": 122.44950869749097,
+  "properMotionDecMasPerYear": -18.603451879024888,
+  "radialVelocityKmPerS": 42.918736,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3311804515502788352 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-25/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 22.3572 +/- 0.0308 mas (same row, RUWE 1.30): 44.73 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 122.450, -18.603 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 42.92 +/- 4.11 km/s"
+  }
+ }
+}

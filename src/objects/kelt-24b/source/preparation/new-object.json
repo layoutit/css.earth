@@ -1,0 +1,24 @@
+{
+  "host": "kelt-24",
+  "planets": [
+    {
+      "id": "kelt-24b",
+      "name": "KELT-24 b",
+      "description": "Transiting planet of KELT-24 with a 5.55-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract",
+        "credit": "Giovinazzi et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GIOVINAZZI_ET_AL__2024"
+      },
+      "text": {
+        "card": "KELT-24 b was found in 2019 by KELT-North as it crossed its star.",
+        "introduction": "It is the only planet known around KELT-24. Its orbit and size follow Giovinazzi et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GIOVINAZZI_ET_AL__2024): disc_year 2019, disc_facility KELT-North, sy_pnum 1; pl_orbper 5.55149296, pl_radj 1.134, pl_bmassj 4.59"
+      },
+      "order": 3638
+    }
+  ]
+}

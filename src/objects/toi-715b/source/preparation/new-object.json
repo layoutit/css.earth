@@ -1,0 +1,31 @@
+{
+  "host": "toi-715",
+  "planets": [
+    {
+      "id": "toi-715b",
+      "name": "TOI-715 b",
+      "description": "Transiting planet of TOI-715 with a 19.3-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.527...35D/abstract",
+        "credit": "Dransfield et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "DRANSFIELD_ET_AL_2024"
+      },
+      "text": {
+        "card": "TOI-715 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-715. Its orbit and size follow Dransfield et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname DRANSFIELD_ET_AL_2024): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 19.288004, pl_radj 0.13828198, pl_bmassj 0.00951",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-715_b",
+          "title": "TOI-715 b",
+          "revision": "1374086698",
+          "card": "TOI-715 b is a super-Earth exoplanet in the habitable zone of its parent M-type star, TOI-715.",
+          "introduction": "The planet is 1.55 times larger than Earth, and is located at 0.083 astronomical units (12,400,000 km) from its star."
+        }
+      },
+      "order": 4683
+    }
+  ]
+}

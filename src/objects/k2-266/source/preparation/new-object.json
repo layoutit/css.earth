@@ -1,0 +1,39 @@
+{
+  "id": "k2-266",
+  "name": "K2-266",
+  "system": "K2-266 system",
+  "description": "Star of 4,285 K, 77.6 parsecs away, with 4 transiting planets.",
+  "target": "K2-266",
+  "gaia": "3855246074629979264",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract",
+    "credit": "Rodriguez et al. 2018"
+  },
+  "radius": {
+    "value": 0.703,
+    "source": "Rodriguez et al. 2018, the stellar radius of the default parameter set of K2-266 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract",
+    "uncertainty": 0.024
+  },
+  "mass": {
+    "value": 0.686,
+    "source": "Rodriguez et al. 2018, the stellar mass of the default parameter set of K2-266 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract",
+    "uncertainty": 0.033
+  },
+  "temperature": {
+    "value": 4285,
+    "source": "Rodriguez et al. 2018, the stellar temperature of the default parameter set of K2-266 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....156..245R/abstract",
+    "uncertainty": 49
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "4 planets cross K2-266 as seen from Earth: b, c, d, e.",
+    "introduction": "Its radius and temperature follow Rodriguez et al. 2018.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname RODRIGUEZ_ET_AL__2018): st_teff 4285, st_rad 0.703, st_mass 0.686"
+  },
+  "notes": [],
+  "order": 3443
+}

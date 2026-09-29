@@ -1,0 +1,30 @@
+{
+ "id": "toi-5734",
+ "classification": "star",
+ "order": 4569,
+ "physical": {
+  "name": "TOI-5734",
+  "horizonsCode": null,
+  "meanRadiusKm": 444552.3,
+  "gravitationalParameterKm3PerS2": 96083806590.3641,
+  "parent": null,
+  "effectiveTemperatureK": 4750
+ },
+ "physicalNotes": "Radius 0.639 +/- 0.034 solar radii from Filomeno et al. 2026, the stellar radius of the default parameter set of TOI-5734 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract): 444,552 km at 695,700 km per solar radius. Mass 0.724 +/- 0.009 solar masses from Filomeno et al. 2026, the stellar mass of the default parameter set of TOI-5734 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract); GM is that mass times the JPL solar GM. Temperature 4750 +/- 100 K from Filomeno et al. 2026, the stellar temperature of the default parameter set of TOI-5734 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..90F/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 111.25581307204982,
+  "declinationDegrees": 37.23112383360879,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 32.57043171319655,
+  "properMotionRaMasPerYear": -27.711885451742045,
+  "properMotionDecMasPerYear": 14.510871843916519,
+  "radialVelocityKmPerS": -9.182047,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 898844639674672640 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-5734/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 30.7027 +/- 0.0181 mas (same row, RUWE 0.93): 32.57 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -27.712, 14.511 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -9.18 +/- 0.18 km/s"
+  }
+ }
+}

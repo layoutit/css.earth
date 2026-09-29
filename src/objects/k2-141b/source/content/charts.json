@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-141b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-141b-orbits",
+      "title": "K2-141 b: orbits around K2-141",
+      "output": "k2-141b-system-orbits.svg",
+      "system": "k2-141",
+      "highlight": "k2-141b",
+      "description": "The orbits of K2-141's planets in this map from above, to scale, with K2-141 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 0.2803246 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "k2-141b-transit",
+      "title": "K2-141 b: its transit",
+      "description": "K2-141 b crossing its star, as TESS recorded it: 3 sectors (42, 70, 92) of the SPOC pipeline's 2-minute light curves of TIC 301235044, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "output": "k2-141b-transit.svg",
+      "metadata": {
+        "tic": "TIC 301235044",
+        "sectors": [
+          42,
+          70,
+          92
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "k2-141b",
+      "sources": [
+        "photometry/tess/tess2021232031932-s0042-0000000301235044-0213-s_lc.fits",
+        "photometry/tess/tess2023263165758-s0070-0000000301235044-0265-s_lc.fits",
+        "photometry/tess/tess2025127075000-s0092-0000000301235044-0289-s_lc.fits"
+      ],
+      "durationHours": 0.94,
+      "binMinutes": 4,
+      "notes": [
+        "TESS 2-min SPOC · sectors 42, 70, 92",
+        "Folded on the app's orbit; 4-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

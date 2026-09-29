@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hip-67522",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5675,
+      "lowerKelvin": 5600,
+      "upperKelvin": 5750,
+      "citation": "Barber et al. 2024, the stellar temperature of the default parameter set of HIP 67522 b in the NASA Exoplanet Archive: 5675 +/- 75 K, https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 120411 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

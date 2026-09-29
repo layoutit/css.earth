@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stad1840",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hawthorn et al. (2023): TOI-908: a planet at the edge of the Neptune desert transiting a G-type star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2306.09758"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stad1840"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023MNRAS.524.3877H"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stad1840",
+      "label": "Monthly Notices of the Royal Astronomical Society 524 3877-3893"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hawthorn et al. (2023), Monthly Notices of the Royal Astronomical Society 524 3877-3893",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.3877H"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 524 3877-3893",
+  "creators": [
+    "Faith Hawthorn",
+    "Daniel Bayliss",
+    "David J Armstrong",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

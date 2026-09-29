@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-191939c",
+  "radiusKm": 20378,
+  "radiusSource": "Radius 0.2850393 Jupiter radii from Orell-Miquel et al. 2023 (2023A&A...669A..40O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O/abstract): 20,378 km at 71,492 km per Jupiter radius. GM from the mass 0.02517081 Jupiter masses (Orell-Miquel et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...669A..40O), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 28.580474,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 28.580474 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 191939 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02517081 Jupiter masses: Orell-Miquel et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...669A..40O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..40O/abstract)."
+}

@@ -1,0 +1,24 @@
+{
+  "host": "toi-122",
+  "planets": [
+    {
+      "id": "toi-122b",
+      "name": "TOI-122 b",
+      "description": "Transiting planet of TOI-122 with a 5.08-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract",
+        "credit": "Waalkes et al. 2021"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "WAALKES_ET_AL__2021"
+      },
+      "text": {
+        "card": "TOI-122 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-122. Its orbit and size follow Waalkes et al. 2021's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname WAALKES_ET_AL__2021): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 5.0780295, pl_radj 0.24266215, pl_bmassj 0.0247"
+      },
+      "order": 3951
+    }
+  ]
+}

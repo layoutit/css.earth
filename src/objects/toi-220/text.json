@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-220",
+  "card": {
+    "text": "TOI-220 b crosses TOI-220 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab1427",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.3361H/abstract",
+        "label": "Hoyer et al. (2021), Monthly Notices of the Royal Astronomical Society 505 3361-3379",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HOYER_ET_AL__2021): st_teff 5298, st_rad 0.858, st_mass 0.825"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hoyer et al. 2021.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab1427",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.3361H/abstract",
+        "label": "Hoyer et al. (2021), Monthly Notices of the Royal Astronomical Society 505 3361-3379",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HOYER_ET_AL__2021): st_teff 5298, st_rad 0.858, st_mass 0.825"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

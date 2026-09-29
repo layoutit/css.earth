@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-451",
+  "card": {
+    "text": "3 planets cross TOI-451 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag087",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract",
+        "label": "Barragán et al. (2026), Monthly Notices of the Royal Astronomical Society 546 stag087",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARRAGAN_ET_AL_2026): st_teff 5490, st_rad 0.85, st_mass 0.93"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Barragán et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stag087",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract",
+        "label": "Barragán et al. (2026), Monthly Notices of the Royal Astronomical Society 546 stag087",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARRAGAN_ET_AL_2026): st_teff 5490, st_rad 0.85, st_mass 0.93"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

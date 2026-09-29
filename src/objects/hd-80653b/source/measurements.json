@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-80653b",
+  "radiusKm": 10338.9,
+  "radiusSource": "Radius 0.14461618 Jupiter radii from Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract): 10,338.9 km at 71,492 km per Jupiter radius. GM from the mass 0.01765103 Jupiter masses (Naponiello et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260719325N), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 0.71957926,
+  "orbitalPeriodSource": "Naponiello et al. 2026 (2026arXiv260719325N), via the NASA Exoplanet Archive ps table (pl_refname NAPONIELLO_ET_AL_2026): P 0.71957926 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 80653 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01765103 Jupiter masses: Naponiello et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026arXiv260719325N), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract)."
+}

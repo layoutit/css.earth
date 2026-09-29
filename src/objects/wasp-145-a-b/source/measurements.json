@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-145-a-b",
+  "radiusKm": 64342.8,
+  "radiusSource": "Radius 0.9 Jupiter radii from Hellier et al. 2019 (2019MNRAS.482.1379H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract): 64,342.8 km at 71,492 km per Jupiter radius. GM from the mass 0.89 Jupiter masses (Hellier et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019MNRAS.482.1379H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.76903814,
+  "orbitalPeriodSource": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 1.76903814 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of WASP-145 A b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.89 Jupiter masses: Hellier et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019MNRAS.482.1379H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract)."
+}

@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202452611",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "August et al. (2025): Hot Rocks Survey I: A possible shallow eclipse for LHS 1478 b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2410.11048"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202452611"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025A&A...695A.171A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202452611",
+      "label": "Astronomy & Astrophysics 695 A171"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "August et al. (2025), Astronomy & Astrophysics 695 A171",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 695 A171",
+  "creators": [
+    "P. C. August",
+    "L. A. Buchhave",
+    "H. Diamond-Lowe",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "wolf-503",
+  "name": "Wolf 503",
+  "system": "Wolf 503 system",
+  "description": "Star of 4,716 K, 44.5 parsecs away, with 1 transiting planet.",
+  "target": "Wolf 503",
+  "gaia": "3620325206217720320",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract",
+    "credit": "Polanski et al. 2021"
+  },
+  "radius": {
+    "value": 0.689,
+    "source": "Polanski et al. 2021, the stellar radius of the default parameter set of Wolf 503 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract",
+    "uncertainty": 0.021
+  },
+  "mass": {
+    "value": 0.688,
+    "source": "Polanski et al. 2021, the stellar mass of the default parameter set of Wolf 503 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract",
+    "uncertainty": 0.023
+  },
+  "temperature": {
+    "value": 4716,
+    "source": "Polanski et al. 2021, the stellar temperature of the default parameter set of Wolf 503 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract",
+    "uncertainty": 60
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "Wolf 503 b crosses Wolf 503 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Polanski et al. 2021.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname POLANSKI_ET_AL__2021): st_teff 4716, st_rad 0.689, st_mass 0.688"
+  },
+  "notes": [],
+  "order": 4859
+}

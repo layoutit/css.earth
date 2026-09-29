@@ -1,0 +1,31 @@
+{
+ "id": "k2-265b",
+ "classification": "exoplanet",
+ "order": 3442,
+ "physical": {
+  "name": "K2-265 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 10895.4,
+  "gravitationalParameterKm3PerS2": 2926458.89,
+  "parent": "k2-265"
+ },
+ "physicalNotes": "Radius 0.1524 Jupiter radii from Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract): 10,895.4 km at 71,492 km per Jupiter radius. GM from the mass 0.0231 Jupiter masses (Thygesen et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023AJ....165..155T), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 2.36916512782,
+  "semiMajorAxisStellarRadii": 7.86,
+  "inclinationDegrees": 87.01,
+  "eccentricity": 0.16,
+  "argumentOfPeriapsisDegrees": 303,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59089.674433,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.36916512782 d",
+   "shape": "Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): a/R* 7.86; Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): inclination 87.01 degrees",
+   "eccentricity": "Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): e 0.16",
+   "argumentOfPeriapsis": "Thygesen et al. 2023 (2023AJ....165..155T), via the NASA Exoplanet Archive ps table (pl_refname THYGESEN_ET_AL__2023): omega -57 degrees, stored as 303",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2459090.174433 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 17 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

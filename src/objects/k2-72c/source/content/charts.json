@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/k2-72c/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "k2-72c-orbits",
+      "title": "K2-72 c: orbits around K2-72",
+      "output": "k2-72c-system-orbits.svg",
+      "system": "k2-72",
+      "highlight": "k2-72c",
+      "description": "The orbits of K2-72's planets in this map from above, to scale, with K2-72 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Dressing et al. 2017 (2017AJ....154..207D), via the NASA Exoplanet Archive ps table (pl_refname DRESSING_ET_AL__2017): P 15.189034 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "k2-72c-transit",
+      "title": "K2-72 c: its transit",
+      "description": "K2-72 c crossing its star, as TESS recorded it: 1 sector (42) of the SPOC pipeline's 2-minute light curves of TIC 38337202, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 126 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 2203 minutes at these dates, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "output": "k2-72c-transit.svg",
+      "metadata": {
+        "tic": "TIC 38337202",
+        "sectors": [
+          42
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "k2-72c",
+      "sources": [
+        "photometry/tess/tess2021232031932-s0042-0000000038337202-0213-s_lc.fits"
+      ],
+      "durationHours": 2.15,
+      "binMinutes": 9,
+      "alignMinutes": 126,
+      "notes": [
+        "TESS 2-min SPOC · sector 42",
+        "Aligned on TESS's dip, 126 min late; 9-min bins.",
+        "The ephemeris's own 1σ there is 734 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

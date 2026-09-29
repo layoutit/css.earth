@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-344",
+  "card": {
+    "text": "K2-344 b crosses K2-344 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab2305",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+        "label": "Leon et al. (2021), Monthly Notices of the Royal Astronomical Society 508 195-218",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DE_LEON_ET_AL_2021): st_teff 4374, st_rad 0.49, st_mass 0.51"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow de Leon et al. 2021.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab2305",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract",
+        "label": "Leon et al. (2021), Monthly Notices of the Royal Astronomical Society 508 195-218",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DE_LEON_ET_AL_2021): st_teff 4374, st_rad 0.49, st_mass 0.51"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

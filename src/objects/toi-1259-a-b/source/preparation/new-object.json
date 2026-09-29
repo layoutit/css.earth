@@ -1,0 +1,24 @@
+{
+  "host": "toi-1259-a",
+  "planets": [
+    {
+      "id": "toi-1259-a-b",
+      "name": "TOI-1259 A b",
+      "description": "Transiting planet of TOI-1259 A with a 3.48-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...708A.272V/abstract",
+        "credit": "Veldhuis et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "VELDHUIS_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-1259 A b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1259 A. Its orbit and size follow Veldhuis et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname VELDHUIS_ET_AL_2026): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.4779792, pl_radj 1.03488447, pl_bmassj 0.44363561"
+      },
+      "order": 3983
+    }
+  ]
+}

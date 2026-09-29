@@ -218,16 +218,6 @@ importers:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)
 
-  packages/volume-viewer:
-    dependencies:
-      '@cssearth/bake':
-        specifier: workspace:*
-        version: link:../bake
-    devDependencies:
-      tsup:
-        specifier: ^8.0.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
-
   packages/astronomy:
     devDependencies:
       '@vitest/coverage-v8':
@@ -557,6 +547,16 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
+
+  packages/volume-viewer:
+    dependencies:
+      '@cssearth/bake':
+        specifier: workspace:*
+        version: link:../bake
+    devDependencies:
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
 
 packages:
 

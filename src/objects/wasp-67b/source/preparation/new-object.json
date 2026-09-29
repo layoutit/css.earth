@@ -1,0 +1,33 @@
+{
+  "host": "wasp-67",
+  "planets": [
+    {
+      "id": "wasp-67b",
+      "name": "WASP-67 b",
+      "description": "Transiting planet of WASP-67 with a 4.61-day year, found in 2012.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "WASP-67 b was found in 2012 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-67. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.6144166, pl_radj 1.15, pl_bmassj 0.43"
+      },
+      "thermal": {
+        "temperatureK": 1015,
+        "uncertaintyK": 74,
+        "wavelengthMicrometres": 4.5,
+        "facility": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC)",
+        "source": "Kammer et al. 2015, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 4831
+    }
+  ]
+}

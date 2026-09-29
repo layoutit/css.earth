@@ -1,0 +1,30 @@
+{
+ "id": "gj-3473",
+ "classification": "star",
+ "order": 3088,
+ "physical": {
+  "name": "GJ 3473",
+  "horizonsCode": null,
+  "meanRadiusKm": 253234.8,
+  "gravitationalParameterKm3PerS2": 47776478415.09818,
+  "parent": null,
+  "effectiveTemperatureK": 3347
+ },
+ "physicalNotes": "Radius 0.364 +/- 0.012 solar radii from Kemmer et al. 2020, the stellar radius of the default parameter set of GJ 3473 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract): 253,235 km at 695,700 km per solar radius. Mass 0.36 +/- 0.016 solar masses from Kemmer et al. 2020, the stellar mass of the default parameter set of GJ 3473 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract); GM is that mass times the JPL solar GM. Temperature 3347 +/- 54 K from Kemmer et al. 2020, the stellar temperature of the default parameter set of GJ 3473 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 120.59355045268761,
+  "declinationDegrees": 3.337110091341309,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 27.314545724409513,
+  "properMotionRaMasPerYear": -403.19796827775485,
+  "properMotionDecMasPerYear": -380.9280968279645,
+  "radialVelocityKmPerS": -1.9450854,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3094290054327367168 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gj-3473/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 36.6105 +/- 0.0243 mas (same row, RUWE 1.30): 27.31 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -403.198, -380.928 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -1.95 +/- 0.40 km/s"
+  }
+ }
+}

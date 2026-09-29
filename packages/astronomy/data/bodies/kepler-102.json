@@ -1,0 +1,30 @@
+{
+ "id": "kepler-102",
+ "classification": "star",
+ "order": 3650,
+ "physical": {
+  "name": "Kepler-102",
+  "horizonsCode": null,
+  "meanRadiusKm": 503686.8,
+  "gravitationalParameterKm3PerS2": 106568089353.67732,
+  "parent": null,
+  "effectiveTemperatureK": 4909
+ },
+ "physicalNotes": "Radius 0.724 +/- 0.018 solar radii from Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-102 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract): 503,687 km at 695,700 km per solar radius. Mass 0.803 +/- 0.021 solar masses from Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-102 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract); GM is that mass times the JPL solar GM. Temperature 4909 +/- 98 K from Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-102 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 281.4824647486216,
+  "declinationDegrees": 47.20782027646408,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 108.08783591940991,
+  "properMotionRaMasPerYear": -41.04418354634443,
+  "properMotionDecMasPerYear": -43.2667361573108,
+  "radialVelocityKmPerS": -28.514318,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2119583201145735808 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kepler-102/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 9.2517 +/- 0.0102 mas (same row, RUWE 0.81): 108.09 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -41.044, -43.267 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -28.51 +/- 0.37 km/s"
+  }
+ }
+}

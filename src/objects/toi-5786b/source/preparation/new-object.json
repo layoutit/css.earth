@@ -1,0 +1,24 @@
+{
+  "host": "toi-5786",
+  "planets": [
+    {
+      "id": "toi-5786b",
+      "name": "TOI-5786 b",
+      "description": "Transiting planet of TOI-5786 with a 12.8-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract",
+        "credit": "Thomas et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "THOMAS_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-5786 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5786. Its orbit and size follow Thomas et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname THOMAS_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 12.779107, pl_radj 0.76188908, pl_bmassj 0.22968369"
+      },
+      "order": 4576
+    }
+  ]
+}

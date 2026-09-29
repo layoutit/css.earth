@@ -1,0 +1,39 @@
+{
+  "id": "toi-4860",
+  "name": "TOI-4860",
+  "system": "TOI-4860 system",
+  "description": "Star of 3,260 K, 80.1 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4860",
+  "gaia": "3571038605366263424",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract",
+    "credit": "Almenara et al. 2024"
+  },
+  "radius": {
+    "value": 0.358,
+    "source": "Almenara et al. 2024, the stellar radius of the default parameter set of TOI-4860 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract",
+    "uncertainty": 0.015
+  },
+  "mass": {
+    "value": 0.34,
+    "source": "Almenara et al. 2024, the stellar mass of the default parameter set of TOI-4860 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract",
+    "uncertainty": 0.009
+  },
+  "temperature": {
+    "value": 3260,
+    "source": "Almenara et al. 2024, the stellar temperature of the default parameter set of TOI-4860 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4860 b crosses TOI-4860 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Almenara et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname ALMENARA_ET_AL_2024): st_teff 3260, st_rad 0.358, st_mass 0.34"
+  },
+  "notes": [],
+  "order": 4471
+}

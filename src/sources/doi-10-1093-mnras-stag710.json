@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-stag710",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Timmermans et al. (2026): Hidden Gems in <i>TESS</i> : <scp>sherlock</scp> finds two new rocky planets around nearby M dwarfs",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2601.21774"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stag710"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026MNRAS.549ag710T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag710T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stag710",
+      "label": "Monthly Notices of the Royal Astronomical Society 549 stag710"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag710T",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Timmermans et al. (2026), Monthly Notices of the Royal Astronomical Society 549 stag710",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag710T"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 549 stag710",
+  "creators": [
+    "M Timmermans",
+    "M Dévora-Pajares",
+    "F J Pozuelos",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

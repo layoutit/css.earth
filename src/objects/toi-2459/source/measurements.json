@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "toi-2459",
+  "angularDiameterMas": 0.17,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 469,667 km at 36.64 pc = 0.17 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 36.63764042371804,
+  "distanceSource": "Gaia DR3 parallax 27.2943 +/- 0.0126 mas (same row, RUWE 1.14): 36.64 pc, no zero-point correction",
+  "radiusKm": 469667.1,
+  "radiusSource": "Radius 0.6751 +/- 0.063 solar radii from Mistry et al. 2023, the stellar radius of the default parameter set of TOI-2459 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract): 469,667 km at 695,700 km per solar radius. Mass 0.66 +/- 0.0763 solar masses from Mistry et al. 2023, the stellar mass of the default parameter set of TOI-2459 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract); GM is that mass times the JPL solar GM. Temperature 4195 +/- 124 K from Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-2459 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4195,
+  "effectiveTemperatureSource": "Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-2459 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract)",
+  "surfaceGravityLogg": 4.6,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2459.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.599, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

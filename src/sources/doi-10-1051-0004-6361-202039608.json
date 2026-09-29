@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202039608",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bonfanti et al. (2021): CHEOPS observations of the HD 108236 planetary system: a fifth planet, improved ephemerides, and planetary radii",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2101.00663"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202039608"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021A&A...646A.157B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202039608",
+      "label": "Astronomy & Astrophysics 646 A157"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bonfanti et al. (2021), Astronomy & Astrophysics 646 A157",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 646 A157",
+  "creators": [
+    "A. Bonfanti",
+    "L. Delrez",
+    "M. J. Hooton",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

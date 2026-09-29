@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201935598",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Benatti et al. (2019): A possibly inflated planet around the bright young star DS Tucanae A",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1904.01591"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201935598"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019A&A...630A..81B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...630A..81B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201935598",
+      "label": "Astronomy & Astrophysics 630 A81"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019A&A...630A..81B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Benatti et al. (2019), Astronomy & Astrophysics 630 A81",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019A&A...630A..81B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 630 A81",
+  "creators": [
+    "S. Benatti",
+    "D. Nardiello",
+    "L. Malavolta",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

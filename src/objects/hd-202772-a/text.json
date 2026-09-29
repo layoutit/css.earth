@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-202772-a",
+  "card": {
+    "text": "HD 202772 A b crosses HD 202772 A as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1906",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract",
+        "label": "Jofré et al. (2025), Monthly Notices of the Royal Astronomical Society 544 3994-4013",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JOFRE_ET_AL_2025): st_teff 6442, st_rad 2.554, st_mass 1.721"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Jofré et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-staf1906",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract",
+        "label": "Jofré et al. (2025), Monthly Notices of the Royal Astronomical Society 544 3994-4013",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JOFRE_ET_AL_2025): st_teff 6442, st_rad 2.554, st_mass 1.721"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

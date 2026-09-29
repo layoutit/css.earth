@@ -1,0 +1,30 @@
+{
+ "id": "toi-1693",
+ "classification": "star",
+ "order": 4091,
+ "physical": {
+  "name": "TOI-1693",
+  "horizonsCode": null,
+  "meanRadiusKm": 320022,
+  "gravitationalParameterKm3PerS2": 65029095620.55029,
+  "parent": null,
+  "effectiveTemperatureK": 3499
+ },
+ "physicalNotes": "Radius 0.46 +/- 0.01 solar radii from Giacalone et al. 2022, the stellar radius of the default parameter set of TOI-1693 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract): 320,022 km at 695,700 km per solar radius. Mass 0.49 +/- 0.03 solar masses from Giacalone et al. 2022, the stellar mass of the default parameter set of TOI-1693 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract); GM is that mass times the JPL solar GM. Temperature 3499 +/- 70 K from Giacalone et al. 2022, the stellar temperature of the default parameter set of TOI-1693 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 90.30834159755712,
+  "declinationDegrees": 34.77308797076601,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 30.847761828409627,
+  "properMotionRaMasPerYear": -22.934239041214173,
+  "properMotionDecMasPerYear": -17.70950119089798,
+  "radialVelocityKmPerS": -11.355158,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3451908921382409472 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/toi-1693/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 32.4173 +/- 0.0218 mas (same row, RUWE 1.09): 30.85 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -22.934, -17.710 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -11.36 +/- 0.38 km/s"
+  }
+ }
+}

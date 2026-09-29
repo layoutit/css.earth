@@ -1,0 +1,28 @@
+{
+ "id": "toi-1221b",
+ "classification": "exoplanet",
+ "order": 3953,
+ "physical": {
+  "name": "TOI-1221 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 18560.3,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-1221"
+ },
+ "physicalNotes": "Radius 0.25961326 Jupiter radii from Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract): 18,560.3 km at 71,492 km per Jupiter radius. No mass is measured: Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..217M/abstract) gives only an upper limit of 3.5 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 91.68278,
+  "semiMajorAxisStellarRadii": 83.7,
+  "inclinationDegrees": 89.75,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58403.6791,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2023): P 91.68278 d",
+   "shape": "Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2023): a/R* 83.7; Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2023): inclination 89.75 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Mann et al. 2023 (2023AJ....165..217M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2023): transit mid-time 2458404.1791 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 14 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

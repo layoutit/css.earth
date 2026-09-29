@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-17156",
+  "card": {
+    "text": "HD 17156 b crosses HD 17156 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acd17a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract",
+        "label": "Kane et al. (2023), The Astronomical Journal 165 252",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KANE_ET_AL__2023): st_teff 6046, st_rad 1.517, st_mass 1.285"
+      },
+      {
+        "catalogueId": "wikipedia-hd-17156",
+        "url": "https://en.wikipedia.org/wiki/HD_17156",
+        "label": "Wikipedia, \"HD 17156\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370777783",
+        "quote": "HD 17156, named Nushagak by the IAU, is a yellow subgiant star approximately 253 light-years away in the constellation of Cassiopeia."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Kane et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-acd17a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract",
+        "label": "Kane et al. (2023), The Astronomical Journal 165 252",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KANE_ET_AL__2023): st_teff 6046, st_rad 1.517, st_mass 1.285"
+      },
+      {
+        "catalogueId": "wikipedia-hd-17156",
+        "url": "https://en.wikipedia.org/wiki/HD_17156",
+        "label": "Wikipedia, \"HD 17156\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370777783",
+        "quote": "The apparent magnitude is 8.16, which means it is not visible to the naked eye but can be seen with good binoculars."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

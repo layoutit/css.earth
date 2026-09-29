@@ -1,0 +1,39 @@
+{
+  "id": "toi-1716",
+  "name": "TOI-1716",
+  "system": "TOI-1716 system",
+  "description": "Star of 5,879 K, 104 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1716",
+  "gaia": "1000423609817438592",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "credit": "Crossfield et al. 2025"
+  },
+  "radius": {
+    "value": 1.24,
+    "source": "Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-1716.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.07
+  },
+  "mass": {
+    "value": 1.07,
+    "source": "Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1716.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.14
+  },
+  "temperature": {
+    "value": 5879,
+    "source": "Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1716.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 141
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1716 b crosses TOI-1716 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Crossfield et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL_2025): st_teff 5879, st_rad 1.24, st_mass 1.07"
+  },
+  "notes": [],
+  "order": 4929
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1883b",
+  "radiusKm": 36036.3,
+  "radiusSource": "Radius 0.50406011 Jupiter radii from Fukuda et al. 2026 (2026PASJ...78.1602F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract): 36,036.3 km at 71,492 km per Jupiter radius. GM from the mass 0.04310502 Jupiter masses (Fukuda et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026PASJ...78.1602F), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.50638,
+  "orbitalPeriodSource": "Peláez-Torres et al. 2024 (2024A&A...690A..62P), via the NASA Exoplanet Archive ps table (pl_refname PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024): P 4.50638 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1883 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.04310502 Jupiter masses: Fukuda et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026PASJ...78.1602F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract)."
+}

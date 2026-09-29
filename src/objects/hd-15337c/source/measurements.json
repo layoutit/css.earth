@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-15337c",
+  "radiusKm": 16111.1,
+  "radiusSource": "Radius 0.22535501 Jupiter radii from Rosário et al. 2024 (2024A&A...686A.282R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract): 16,111.1 km at 71,492 km per Jupiter radius. GM from the mass 0.02137002 Jupiter masses (Rosário et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...686A.282R), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 17.17966727335,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 17.17966727335 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of HD 15337 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.02137002 Jupiter masses: Rosário et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024A&A...686A.282R), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract)."
+}

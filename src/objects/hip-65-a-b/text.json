@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hip-65-a-b",
+  "card": {
+    "text": "HIP 65 A b was found in 2020 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202037941",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract",
+        "label": "Nielsen et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NIELSEN_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.98097217, pl_radj 2.03, pl_bmassj 3.213"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around HIP 65 A. Its orbit and size follow Nielsen et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202037941",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract",
+        "label": "Nielsen et al. 2020",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NIELSEN_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.98097217, pl_radj 2.03, pl_bmassj 3.213"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

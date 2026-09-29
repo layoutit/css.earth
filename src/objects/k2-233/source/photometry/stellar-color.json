@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "k2-233",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4796,
+      "lowerKelvin": 4730,
+      "upperKelvin": 4862,
+      "citation": "Barragán et al. 2023, the stellar temperature of the default parameter set of K2-233 b in the NASA Exoplanet Archive: 4796 +/- 66 K, https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

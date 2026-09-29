@@ -1,0 +1,28 @@
+{
+ "id": "toi-4342c",
+ "classification": "exoplanet",
+ "order": 4404,
+ "physical": {
+  "name": "TOI-4342 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 14982.2,
+  "gravitationalParameterKm3PerS2": 1913282.08,
+  "parent": "toi-4342"
+ },
+ "physicalNotes": "Radius 0.2095641 Jupiter radii from Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract): 14,982.2 km at 71,492 km per Jupiter radius. GM from the mass 0.01510249 Jupiter masses (Parc et al. 2026, the mass the NASA Exoplanet Archive's composite table adopts (2026A&A...708A..81P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 10.688716,
+  "semiMajorAxisStellarRadii": 28.9107,
+  "inclinationDegrees": 89.61,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58658.84623,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Tey et al. 2023 (2023AJ....165...93T), via the NASA Exoplanet Archive ps table (pl_refname TEY_ET_AL_2023): P 10.688716 d",
+   "shape": "Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL_2026): a/R* derived from its semi-major axis 0.0804 au and stellar radius 0.598 solar radii; Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL_2026): inclination 89.61 degrees",
+   "eccentricity": "Parc et al. 2026 (2026A&A...708A..81P), via the NASA Exoplanet Archive ps table (pl_refname PARC_ET_AL_2026): e 0",
+   "phase": "Tey et al. 2023 (2023AJ....165...93T), via the NASA Exoplanet Archive ps table (pl_refname TEY_ET_AL_2023): transit mid-time 2458659.34623 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 5 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

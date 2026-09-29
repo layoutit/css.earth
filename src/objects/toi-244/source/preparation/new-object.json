@@ -1,0 +1,39 @@
+{
+  "id": "toi-244",
+  "name": "TOI-244",
+  "system": "TOI-244 system",
+  "description": "Star of 3,433 K, 22 parsecs away, with 1 transiting planet.",
+  "target": "TOI-244",
+  "gaia": "5001098681543159040",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract",
+    "credit": "Castro-González et al. 2023"
+  },
+  "radius": {
+    "value": 0.426,
+    "source": "Castro-González et al. 2023, the stellar radius of the default parameter set of TOI-244 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract",
+    "uncertainty": 0.025
+  },
+  "mass": {
+    "value": 0.428,
+    "source": "Castro-González et al. 2023, the stellar mass of the default parameter set of TOI-244 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract",
+    "uncertainty": 0.029
+  },
+  "temperature": {
+    "value": 3433,
+    "source": "Castro-González et al. 2023, the stellar temperature of the default parameter set of TOI-244 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-244 b crosses TOI-244 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Castro-González et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CASTRO_GONZALEZ_ET_AL_2023): st_teff 3433, st_rad 0.426, st_mass 0.428"
+  },
+  "notes": [],
+  "order": 4306
+}

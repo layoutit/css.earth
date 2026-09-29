@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-2384b",
+  "card": {
+    "text": "TOI-2384 b was found in 2024 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae2034",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533.3893B/abstract",
+        "label": "Bryant et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BRYANT_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.13570304, pl_radj 1.025, pl_bmassj 1.966"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-2384. Its orbit and size follow Bryant et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae2034",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.533.3893B/abstract",
+        "label": "Bryant et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BRYANT_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.13570304, pl_radj 1.025, pl_bmassj 1.966"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

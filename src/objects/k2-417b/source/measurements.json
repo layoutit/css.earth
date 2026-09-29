@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "k2-417b",
+  "radiusKm": 21111.5,
+  "radiusSource": "Radius 0.29529893 Jupiter radii from Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract): 21,111.5 km at 71,492 km per Jupiter radius. No mass is measured: Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract) gives only an upper limit of 2.2 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 6.535,
+  "orbitalPeriodSource": "Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive ps table (pl_refname INCHA_ET_AL__2023): P 6.535 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-417 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 2.2 Jupiter masses: Incha et al. 2023 (2023MNRAS.523..474I), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract)."
+}

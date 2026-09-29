@@ -1,0 +1,24 @@
+{
+  "host": "kepler-102",
+  "planets": [
+    {
+      "id": "kepler-102e",
+      "name": "Kepler-102 e",
+      "description": "Transiting planet of Kepler-102 with a 16.1-day year, found in 2013.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "credit": "Bonomo et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONOMO_ET_AL_2023"
+      },
+      "text": {
+        "card": "Kepler-102 e was found in 2013 by Kepler as it crossed its star.",
+        "introduction": "It is one of 5 planets known around Kepler-102. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2013, disc_facility Kepler, sy_pnum 5; pl_orbper 16.14568692, pl_radj 0.19359477, pl_bmassj 0.01478785"
+      },
+      "order": 3653
+    }
+  ]
+}

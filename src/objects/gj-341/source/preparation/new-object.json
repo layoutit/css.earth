@@ -1,0 +1,39 @@
+{
+  "id": "gj-341",
+  "name": "GJ 341",
+  "system": "GJ 341 system",
+  "description": "Star of 3,770 K, 10.5 parsecs away, with 1 transiting planet.",
+  "target": "GJ 341",
+  "gaia": "5299440441521812992",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+    "credit": "DiTomasso et al. 2025"
+  },
+  "radius": {
+    "value": 0.5066,
+    "source": "DiTomasso et al. 2025, the stellar radius of the default parameter set of GJ 341 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+    "uncertainty": 0.0169
+  },
+  "mass": {
+    "value": 0.48,
+    "source": "DiTomasso et al. 2025, the stellar mass of the default parameter set of GJ 341 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 3770,
+    "source": "DiTomasso et al. 2025, the stellar temperature of the default parameter set of GJ 341 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract",
+    "uncertainty": 40
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "GJ 341 b crosses GJ 341 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow DiTomasso et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DITOMASSO_ET_AL__2025): st_teff 3770, st_rad 0.5066, st_mass 0.48"
+  },
+  "notes": [],
+  "order": 3084
+}

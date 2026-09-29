@@ -1,0 +1,28 @@
+{
+ "id": "toi-1416b",
+ "classification": "exoplanet",
+ "order": 4026,
+ "physical": {
+  "name": "TOI-1416 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 10332.5,
+  "gravitationalParameterKm3PerS2": 1387128.84,
+  "parent": "toi-1416"
+ },
+ "physicalNotes": "Radius 0.14452697 Jupiter radii from Deeg et al. 2023 (2023A&A...677A..12D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..12D/abstract): 10,332.5 km at 71,492 km per Jupiter radius. GM from the mass 0.0109493 Jupiter masses (Deeg et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...677A..12D), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2023A&A...677A..12D/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.0697621,
+  "semiMajorAxisStellarRadii": 5.14,
+  "inclinationDegrees": 85.7,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60422.763435,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.0697621 d",
+   "shape": "Deeg et al. 2023 (2023A&A...677A..12D), via the NASA Exoplanet Archive ps table (pl_refname DEEG_ET_AL_2023): a/R* 5.14; Deeg et al. 2023 (2023A&A...677A..12D), via the NASA Exoplanet Archive ps table (pl_refname DEEG_ET_AL_2023): inclination 85.7 degrees",
+   "eccentricity": "Deeg et al. 2023 (2023A&A...677A..12D), via the NASA Exoplanet Archive ps table (pl_refname DEEG_ET_AL_2023): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460423.263435 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

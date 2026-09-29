@@ -1,0 +1,39 @@
+{
+  "id": "toi-5319",
+  "name": "TOI-5319",
+  "system": "TOI-5319 system",
+  "description": "Star of 3,580 K, 61.2 parsecs away, with 1 transiting planet.",
+  "target": "TOI-5319",
+  "gaia": "102461087706561024",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+    "credit": "Peláez-Torres et al. 2024"
+  },
+  "radius": {
+    "value": 0.485,
+    "source": "Peláez-Torres et al. 2024, the stellar radius of the default parameter set of TOI-5319 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+    "uncertainty": 0.067
+  },
+  "mass": {
+    "value": 0.5,
+    "source": "Peláez-Torres et al. 2024, the stellar mass of the default parameter set of TOI-5319 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+    "uncertainty": 0.096
+  },
+  "temperature": {
+    "value": 3580,
+    "source": "Peláez-Torres et al. 2024, the stellar temperature of the default parameter set of TOI-5319 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract",
+    "uncertainty": 124.25
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-5319 b crosses TOI-5319 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Peláez-Torres et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname PEL_AMP_AACUTE_EZ_TORRES_ET_AL__2024): st_teff 3580, st_rad 0.485, st_mass 0.5"
+  },
+  "notes": [],
+  "order": 4507
+}

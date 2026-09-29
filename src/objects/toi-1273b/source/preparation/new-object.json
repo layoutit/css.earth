@@ -1,0 +1,24 @@
+{
+  "host": "toi-1273",
+  "planets": [
+    {
+      "id": "toi-1273b",
+      "name": "TOI-1273 b",
+      "description": "Transiting planet of TOI-1273 with a 4.63-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A...6S/abstract",
+        "credit": "Serrano Bell et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SERRANO_BELL_ET_AL_2024"
+      },
+      "text": {
+        "card": "TOI-1273 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-1273. Its orbit and size follow Serrano Bell et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SERRANO_BELL_ET_AL_2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.631296, pl_radj 0.99, pl_bmassj 0.222"
+      },
+      "order": 3999
+    }
+  ]
+}

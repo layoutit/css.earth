@@ -1,0 +1,30 @@
+{
+ "id": "k2-232",
+ "classification": "star",
+ "order": 3406,
+ "physical": {
+  "name": "K2-232",
+  "horizonsCode": null,
+  "meanRadiusKm": 841797,
+  "gravitationalParameterKm3PerS2": 148770645287.01404,
+  "parent": null,
+  "effectiveTemperatureK": 6100
+ },
+ "physicalNotes": "Radius 1.21 +/- 0.036 solar radii from Ranshaw et al. 2026, the stellar radius of the default parameter set of K2-232 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract): 841,797 km at 695,700 km per solar radius. Mass 1.121 +/- 0.063 solar masses from Ranshaw et al. 2026, the stellar mass of the default parameter set of K2-232 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract); GM is that mass times the JPL solar GM. Temperature 6100 +/- 100 K from Ranshaw et al. 2026, the stellar temperature of the default parameter set of K2-232 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 73.76680173697552,
+  "declinationDegrees": 18.65431629611807,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 129.77002747826174,
+  "properMotionRaMasPerYear": 61.99588541727091,
+  "properMotionDecMasPerYear": -48.14077001428976,
+  "radialVelocityKmPerS": 22.209084,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3406687485600728192 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/k2-232/source/photometry/gaia-dr3-source.csv; cross-identification HD 286123: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+3406687485600728192",
+   "distance": "Gaia DR3 parallax 7.7059 +/- 0.0170 mas (same row, RUWE 0.99): 129.77 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 61.996, -48.141 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 22.21 +/- 0.19 km/s"
+  }
+ }
+}

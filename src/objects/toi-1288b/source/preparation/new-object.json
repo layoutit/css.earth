@@ -1,0 +1,24 @@
+{
+  "host": "toi-1288",
+  "planets": [
+    {
+      "id": "toi-1288b",
+      "name": "TOI-1288 b",
+      "description": "Transiting planet of TOI-1288 with a 2.7-day year, found in 2022.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract",
+        "credit": "Polanski et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "POLANSKI_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-1288 b was found in 2022 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1288. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname POLANSKI_ET_AL__2024): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.6998294, pl_radj 0.44325757, pl_bmassj 0.13875412"
+      },
+      "order": 4007
+    }
+  ]
+}

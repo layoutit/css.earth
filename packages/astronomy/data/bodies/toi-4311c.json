@@ -1,0 +1,28 @@
+{
+ "id": "toi-4311c",
+ "classification": "exoplanet",
+ "order": 4398,
+ "physical": {
+  "name": "TOI-4311 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 15753.9,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-4311"
+ },
+ "physicalNotes": "Radius 0.22035902 Jupiter radii from Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract): 15,753.9 km at 71,492 km per Jupiter radius. No mass is measured: Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract) gives only an upper limit of 0.04272746 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 15.070425,
+  "semiMajorAxisStellarRadii": 28.43,
+  "inclinationDegrees": 89.05,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58394.2242,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2026): P 15.070425 d",
+   "shape": "Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2026): a/R* 28.43; Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2026): inclination 89.05 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Eschen et al. 2026 (2026MNRAS.549ag952E), via the NASA Exoplanet Archive ps table (pl_refname ESCHEN_ET_AL_2026): transit mid-time 2458394.7242 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 22 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "id": "ltt-1445-a-c",
+ "classification": "exoplanet",
+ "order": 3833,
+ "physical": {
+  "name": "LTT 1445 A c",
+  "horizonsCode": null,
+  "meanRadiusKm": 7315.7,
+  "gravitationalParameterKm3PerS2": 613844.39,
+  "parent": "ltt-1445-a"
+ },
+ "physicalNotes": "Radius 0.10232866 Jupiter radii from Winters et al. 2022 (2022AJ....163..168W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..168W/abstract): 7,315.7 km at 71,492 km per Jupiter radius. GM from the mass 0.00484538 Jupiter masses (Winters et al. 2022, the mass the NASA Exoplanet Archive's composite table adopts (2022AJ....163..168W), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2022AJ....163..168W/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.123898,
+  "semiMajorAxisStellarRadii": 21.56,
+  "inclinationDegrees": 87.43,
+  "eccentricity": 0.05,
+  "argumentOfPeriapsisDegrees": 163,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 58424.578182,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Lavie et al. 2023 (2023A&A...673A..69L), via the NASA Exoplanet Archive ps table (pl_refname LAVIE_ET_AL__2023): P 3.123898 d",
+   "shape": "Winters et al. 2022 (2022AJ....163..168W), via the NASA Exoplanet Archive ps table (pl_refname WINTERS_ET_AL_2022): a/R* 21.56; Winters et al. 2022 (2022AJ....163..168W), via the NASA Exoplanet Archive ps table (pl_refname WINTERS_ET_AL_2022): inclination 87.43 degrees",
+   "eccentricity": "Lavie et al. 2023 (2023A&A...673A..69L), via the NASA Exoplanet Archive ps table (pl_refname LAVIE_ET_AL__2023): e 0.05",
+   "argumentOfPeriapsis": "Lavie et al. 2023 (2023A&A...673A..69L), via the NASA Exoplanet Archive ps table (pl_refname LAVIE_ET_AL__2023): omega 163 degrees",
+   "phase": "Lavie et al. 2023 (2023A&A...673A..69L), via the NASA Exoplanet Archive ps table (pl_refname LAVIE_ET_AL__2023): transit mid-time 2458425.078182 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 4 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5624",
+  "card": {
+    "text": "4 planets cross TOI-5624 as seen from Earth: b, c, d, e.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202558740",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract",
+        "label": "Bonfanti et al. (2026), Astronomy & Astrophysics 709 A265",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONFANTI_ET_AL_2026): st_teff 5327, st_rad 0.82, st_mass 0.858"
+      },
+      {
+        "catalogueId": "wikipedia-toi-5624",
+        "url": "https://en.wikipedia.org/wiki/TOI-5624",
+        "label": "Wikipedia, \"TOI-5624\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406089",
+        "quote": "TOI-5624 is a Sun-like star located in the zodiacal constellation Ursa Major, approximately 331 light-years away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bonfanti et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202558740",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract",
+        "label": "Bonfanti et al. (2026), Astronomy & Astrophysics 709 A265",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONFANTI_ET_AL_2026): st_teff 5327, st_rad 0.82, st_mass 0.858"
+      },
+      {
+        "catalogueId": "wikipedia-toi-5624",
+        "url": "https://en.wikipedia.org/wiki/TOI-5624",
+        "label": "Wikipedia, \"TOI-5624\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406089",
+        "quote": "Four sub-Neptunes, identified via transit photometry, are in orbit around the star, accompanied by an outer companion detected through transit timing variations."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

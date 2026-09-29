@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/gliese-12b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "gliese-12b-orbits",
+      "title": "Gliese 12 b: orbits around Gliese 12",
+      "output": "gliese-12b-system-orbits.svg",
+      "system": "gliese-12",
+      "highlight": "gliese-12b",
+      "description": "The orbits of Gliese 12's planets in this map from above, to scale, with Gliese 12 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Turner et al. 2026 (2026MNRAS.545f1703T), via the NASA Exoplanet Archive ps table (pl_refname TURNER_ET_AL_2026): P 12.761418 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "gliese-12b-transit",
+      "title": "Gliese 12 b: its transit",
+      "description": "Gliese 12 b crossing its star, as TESS recorded it: 3 sectors (57, 70, 84) of the SPOC pipeline's 2-minute light curves of TIC 52005579, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "output": "gliese-12b-transit.svg",
+      "metadata": {
+        "tic": "TIC 52005579",
+        "sectors": [
+          57,
+          70,
+          84
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "gliese-12b",
+      "sources": [
+        "photometry/tess/tess2022273165103-s0057-0000000052005579-0245-s_lc.fits",
+        "photometry/tess/tess2023263165758-s0070-0000000052005579-0265-s_lc.fits",
+        "photometry/tess/tess2024274222008-s0084-0000000052005579-0281-s_lc.fits"
+      ],
+      "durationHours": 1.2,
+      "binMinutes": 5,
+      "notes": [
+        "TESS 2-min SPOC · sectors 57, 70, 84",
+        "Folded on the app's orbit; 5-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

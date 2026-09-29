@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kepler-42c",
+  "radiusKm": 21557.9,
+  "radiusSource": "Radius 0.3015434 Jupiter radii from Muirhead et al. 2012 (2012ApJ...750L..37M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012ApJ...750L..37M/abstract): 21,557.9 km at 71,492 km per Jupiter radius. No mass is measured: Ofir et al. 2025 (2025AJ....169...90O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...90O/abstract) gives only an upper limit of 0.18984143 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 0.45328731,
+  "orbitalPeriodSource": "Mann et al. 2017 (2017AJ....153..267M), via the NASA Exoplanet Archive ps table (pl_refname MANN_ET_AL__2017): P 0.45328731 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of Kepler-42 c is measured; only its size, mass and orbit are."
+  },
+  "massSource": "Under 0.18984143 Jupiter masses: Ofir et al. 2025 (2025AJ....169...90O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...90O/abstract)."
+}

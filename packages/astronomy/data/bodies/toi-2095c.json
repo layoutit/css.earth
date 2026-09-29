@@ -1,0 +1,28 @@
+{
+ "id": "toi-2095c",
+ "classification": "exoplanet",
+ "order": 4246,
+ "physical": {
+  "name": "TOI-2095 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 8482.9,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "toi-2095"
+ },
+ "physicalNotes": "Radius 0.11865486 Jupiter radii from Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract): 8,482.9 km at 71,492 km per Jupiter radius. No mass is measured: Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A.182M/abstract) gives only an upper limit of 0.023283 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 28.1722,
+  "semiMajorAxisStellarRadii": 67.19,
+  "inclinationDegrees": 89.91,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59661.6464,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Quintana et al. 2023 (2023AJ....166..195Q), via the NASA Exoplanet Archive ps table (pl_refname QUINTANA_ET_AL__2023): P 28.1722 d",
+   "shape": "Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2023): a/R* 67.19; Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2023): inclination 89.91 degrees",
+   "eccentricity": "Murgas et al. 2023 (2023A&A...677A.182M), via the NASA Exoplanet Archive ps table (pl_refname MURGAS_ET_AL_2023): e 0",
+   "phase": "Quintana et al. 2023 (2023AJ....166..195Q), via the NASA Exoplanet Archive ps table (pl_refname QUINTANA_ET_AL__2023): transit mid-time 2459662.1464 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 8 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "hr-8799-arrival.webp",
-      "bytes": 27334,
-      "sha256": "d7de8758462a2d280d14ce3ef1f4ca902f25e0a8a04cf84db3e4c26907291ba8"
+      "bytes": 27312,
+      "sha256": "cda87e2d84f46b30f9e426210fc60eb9d95944cc433ee074a8ef226c81bbb29f"
     },
     {
       "location": "public",
@@ -84,6 +84,12 @@
       "filename": "minimaps/color.webp",
       "bytes": 440,
       "sha256": "08125ac129658c79bdd5ea6af49f5d3700d32968aaec0a2353ed184ce1cf4f52"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/shape.webp",
+      "bytes": 424,
+      "sha256": "db5f9365ac1126293a111f13117d88044659fb134f62d7e01b0bb92cfbef60a3"
     },
     {
       "location": "prepared",

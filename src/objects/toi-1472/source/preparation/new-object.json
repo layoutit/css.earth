@@ -1,0 +1,39 @@
+{
+  "id": "toi-1472",
+  "name": "TOI-1472",
+  "system": "TOI-1472 system",
+  "description": "Star of 5,100 K, 122 parsecs away, with 2 transiting planets.",
+  "target": "TOI-1472",
+  "gaia": "402396521052843264",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract",
+    "credit": "Carleo et al. 2026"
+  },
+  "radius": {
+    "value": 0.84,
+    "source": "Carleo et al. 2026, the stellar radius of the default parameter set of TOI-1472 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract",
+    "uncertainty": 0.02
+  },
+  "mass": {
+    "value": 0.87,
+    "source": "Carleo et al. 2026, the stellar mass of the default parameter set of TOI-1472 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 5100,
+    "source": "Carleo et al. 2026, the stellar temperature of the default parameter set of TOI-1472 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract",
+    "uncertainty": 50
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross TOI-1472 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Carleo et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CARLEO_ET_AL_2026): st_teff 5100, st_rad 0.84, st_mass 0.87"
+  },
+  "notes": [],
+  "order": 3037
+}

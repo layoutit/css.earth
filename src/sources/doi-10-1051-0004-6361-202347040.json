@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202347040",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ghachoui et al. (2023): TESS discovery of a super-Earth orbiting the M-dwarf star TOI-1680",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2307.05368"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202347040"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023A&A...677A..31G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202347040",
+      "label": "Astronomy & Astrophysics 677 A31"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ghachoui et al. (2023), Astronomy & Astrophysics 677 A31",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 677 A31",
+  "creators": [
+    "M. Ghachoui",
+    "A. Soubkiou",
+    "R. D. Wells",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "toi-1799",
+  "name": "TOI-1799",
+  "system": "TOI-1799 system",
+  "description": "Star of 5,690 K, 62.1 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1799",
+  "gaia": "761300339243646848",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "credit": "Crossfield et al. 2025"
+  },
+  "radius": {
+    "value": 0.957,
+    "source": "Crossfield et al. 2025, the stellar radius of the default parameter set of TOI-1799 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.046
+  },
+  "mass": {
+    "value": 1.01,
+    "source": "Crossfield et al. 2025, the stellar mass of the default parameter set of TOI-1799 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 0.13
+  },
+  "temperature": {
+    "value": 5690,
+    "source": "Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1799 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+    "uncertainty": 123
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1799 b crosses TOI-1799 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Crossfield et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CROSSFIELD_ET_AL_2025): st_teff 5690, st_rad 0.957, st_mass 1.01"
+  },
+  "notes": [],
+  "order": 4163
+}

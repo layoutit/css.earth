@@ -1,0 +1,41 @@
+{
+  "id": "k2-233",
+  "name": "K2-233",
+  "system": "K2-233 system",
+  "description": "Star of 4,796 K, 67.5 parsecs away, with 2 transiting planets.",
+  "target": "K2-233",
+  "gaia": "6253186686054822784",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B/abstract",
+    "credit": "Barragán et al. 2023"
+  },
+  "radius": {
+    "value": 0.71,
+    "source": "Barragán et al. 2023, the stellar radius of the default parameter set of K2-233 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B/abstract",
+    "uncertainty": 0.01
+  },
+  "mass": {
+    "value": 0.79,
+    "source": "Barragán et al. 2023, the stellar mass of the default parameter set of K2-233 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B/abstract",
+    "uncertainty": 0.01
+  },
+  "temperature": {
+    "value": 4796,
+    "source": "Barragán et al. 2023, the stellar temperature of the default parameter set of K2-233 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B/abstract",
+    "uncertainty": 66
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross K2-233 as seen from Earth: b, d.",
+    "introduction": "Its radius and temperature follow Barragán et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BARRAG_AMP_AACUTE_N_ET_AL__2023): st_teff 4796, st_rad 0.71, st_mass 0.79"
+  },
+  "notes": [
+    "K2-233 c: Barragán et al. 2023's mass 0.01447322 Jupiter masses in 0.11348043 Jupiter radii is 12.3 g/cm^3, outside what the records accept"
+  ],
+  "order": 3409
+}

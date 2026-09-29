@@ -1,0 +1,31 @@
+{
+  "host": "toi-5624",
+  "planets": [
+    {
+      "id": "toi-5624c",
+      "name": "TOI-5624 c",
+      "description": "Transiting planet of TOI-5624 with a 7.89-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A.265B/abstract",
+        "credit": "Bonfanti et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BONFANTI_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5624 c was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is one of 5 planets known around TOI-5624. Its orbit and size follow Bonfanti et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 7.885385, pl_radj 0.22071588, pl_bmassj 0.01510249",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-5624_c",
+          "title": "TOI-5624 c",
+          "revision": "1374248102",
+          "card": "TOI-5624 c is the second closest of the discovered exoplanets orbiting the star TOI-5624, located approximately 331 light-years from Earth in the constellation Ursa Major.",
+          "introduction": "The planet was confirmed in April 2026 using the transit method."
+        }
+      },
+      "order": 4546
+    }
+  ]
+}

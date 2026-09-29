@@ -1,0 +1,28 @@
+{
+ "id": "kelt-20b",
+ "classification": "exoplanet",
+ "order": 3634,
+ "physical": {
+  "name": "KELT-20 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 124467.6,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "kelt-20"
+ },
+ "physicalNotes": "Radius 1.741 Jupiter radii from Lund et al. 2017 (2017AJ....154..194L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract): 124,467.6 km at 71,492 km per Jupiter radius. No mass is measured: Lund et al. 2017 (2017AJ....154..194L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract) gives only an upper limit of 3.382 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.4741012,
+  "semiMajorAxisStellarRadii": 7.42,
+  "inclinationDegrees": 86.12,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60337.486375,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 3.4741012 d",
+   "shape": "Lund et al. 2017 (2017AJ....154..194L), via the NASA Exoplanet Archive ps table (pl_refname LUND_ET_AL__2017): a/R* 7.42; Lund et al. 2017 (2017AJ....154..194L), via the NASA Exoplanet Archive ps table (pl_refname LUND_ET_AL__2017): inclination 86.12 degrees",
+   "eccentricity": "Talens et al. 2018 (2018A&A...612A..57T), via the NASA Exoplanet Archive ps table (pl_refname TALENS_ET_AL__2018): e 0",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460337.986375 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

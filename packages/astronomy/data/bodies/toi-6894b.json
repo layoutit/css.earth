@@ -1,0 +1,28 @@
+{
+ "id": "toi-6894b",
+ "classification": "exoplanet",
+ "order": 4662,
+ "physical": {
+  "name": "TOI-6894 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 61125.7,
+  "gravitationalParameterKm3PerS2": 21283337.36,
+  "parent": "toi-6894"
+ },
+ "physicalNotes": "Radius 0.855 Jupiter radii from Bryant et al. 2025 (2025NatAs...9.1031B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract): 61,125.7 km at 71,492 km per Jupiter radius. GM from the mass 0.168 Jupiter masses (Bryant et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025NatAs...9.1031B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.37077196,
+  "semiMajorAxisStellarRadii": 24.59,
+  "inclinationDegrees": 89.58,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 60312.91167,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Bryant et al. 2025 (2025NatAs...9.1031B), via the NASA Exoplanet Archive ps table (pl_refname BRYANT_ET_AL_2025): P 3.37077196 d",
+   "shape": "Bryant et al. 2025 (2025NatAs...9.1031B), via the NASA Exoplanet Archive ps table (pl_refname BRYANT_ET_AL_2025): a/R* 24.59; Bryant et al. 2025 (2025NatAs...9.1031B), via the NASA Exoplanet Archive ps table (pl_refname BRYANT_ET_AL_2025): inclination 89.58 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Bryant et al. 2025 (2025NatAs...9.1031B), via the NASA Exoplanet Archive ps table (pl_refname BRYANT_ET_AL_2025): transit mid-time 2460313.41167 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

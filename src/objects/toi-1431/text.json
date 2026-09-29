@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1431",
+  "card": {
+    "text": "TOI-1431 b crosses TOI-1431 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac224e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract",
+        "label": "Addison et al. (2021), The Astronomical Journal 162 292",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ADDISON_ET_AL__2021): st_teff 7690, st_rad 1.92, st_mass 1.9"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1431-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-1431_b",
+        "label": "Wikipedia, \"TOI-1431 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366872522",
+        "quote": "TOI-1431 b, also known as MASCARA-5b, is an ultra-hot Jupiter exoplanet orbiting TOI-1431 in the constellation of Cepheus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Addison et al. 2021.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac224e",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract",
+        "label": "Addison et al. (2021), The Astronomical Journal 162 292",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname ADDISON_ET_AL__2021): st_teff 7690, st_rad 1.92, st_mass 1.9"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1431-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-1431_b",
+        "label": "Wikipedia, \"TOI-1431 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1366872522",
+        "quote": "It has an orbital period of 2.7 days."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

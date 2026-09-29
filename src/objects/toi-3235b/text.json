@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-3235b",
+  "card": {
+    "text": "TOI-3235 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-acbd9a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+        "label": "Hobson et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOBSON_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.59261842, pl_radj 1.017, pl_bmassj 0.665"
+      },
+      {
+        "catalogueId": "wikipedia-toi-3235-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-3235_b",
+        "label": "Wikipedia, \"TOI-3235 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086867",
+        "quote": "TOI-3235 b is a gas giant exoplanet found 237 light-years away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-3235. Its orbit and size follow Hobson et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-acbd9a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+        "label": "Hobson et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HOBSON_ET_AL_2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.59261842, pl_radj 1.017, pl_bmassj 0.665"
+      },
+      {
+        "catalogueId": "wikipedia-toi-3235-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-3235_b",
+        "label": "Wikipedia, \"TOI-3235 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086867",
+        "quote": "It was discovered in 2023 by the transit method."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

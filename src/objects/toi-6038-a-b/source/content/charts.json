@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-6038-a-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-6038-a-b-orbits",
+      "title": "TOI-6038 A b: orbits around TOI-6038 A",
+      "output": "toi-6038-a-b-system-orbits.svg",
+      "system": "toi-6038-a",
+      "highlight": "toi-6038-a-b",
+      "description": "The orbits of TOI-6038 A's planets in this map from above, to scale, with TOI-6038 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Baliwal et al. 2025 (2025AJ....169..147B), via the NASA Exoplanet Archive ps table (pl_refname BALIWAL_ET_AL_2025): P 5.8267311 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-6038-a-b-transit",
+      "title": "TOI-6038 A b: its transit",
+      "description": "TOI-6038 A b crossing its star, as TESS recorded it: 2 sectors (18, 86) of the SPOC pipeline's 2-minute light curves of TIC 194736418, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 20-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-6038-a-b-transit.svg",
+      "metadata": {
+        "tic": "TIC 194736418",
+        "sectors": [
+          18,
+          86
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-6038-a-b",
+      "sources": [
+        "photometry/tess/tess2019306063752-s0018-0000000194736418-0162-s_lc.fits",
+        "photometry/tess/tess2024326142117-s0086-0000000194736418-0283-s_lc.fits"
+      ],
+      "durationHours": 5.042,
+      "binMinutes": 20,
+      "notes": [
+        "TESS 2-min SPOC · sectors 18, 86",
+        "Folded on the app's orbit; 20-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

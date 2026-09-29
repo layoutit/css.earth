@@ -1,0 +1,24 @@
+{
+  "host": "ngts-35",
+  "planets": [
+    {
+      "id": "ngts-35b",
+      "name": "NGTS-35 b",
+      "description": "Transiting planet of NGTS-35 with a 732-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract",
+        "credit": "Kendall et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "KENDALL_ET_AL_2026"
+      },
+      "text": {
+        "card": "NGTS-35 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around NGTS-35. Its orbit and size follow Kendall et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname KENDALL_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 731.9966539026, pl_radj 0.97243454, pl_bmassj 0.47824548"
+      },
+      "order": 3001
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-21520",
+  "card": {
+    "text": "HD 21520 b crosses HD 21520 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae2079",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract",
+        "label": "Nies et al. (2024), Monthly Notices of the Royal Astronomical Society 534 3744-3760",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NIES_ET_AL_2024): st_teff 5871, st_rad 1.044, st_mass 1.09"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Nies et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stae2079",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract",
+        "label": "Nies et al. (2024), Monthly Notices of the Royal Astronomical Society 534 3744-3760",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname NIES_ET_AL_2024): st_teff 5871, st_rad 1.044, st_mass 1.09"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

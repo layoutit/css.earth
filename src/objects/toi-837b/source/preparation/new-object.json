@@ -1,0 +1,24 @@
+{
+  "host": "toi-837",
+  "planets": [
+    {
+      "id": "toi-837b",
+      "name": "TOI-837 b",
+      "description": "Transiting planet of TOI-837 with a 8.32-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract",
+        "credit": "Barragán et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BARRAG_AACUTE_N_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-837 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-837. Its orbit and size follow Barragán et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BARRAG_AACUTE_N_ET_AL__2024): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 8.3249113, pl_radj 0.818, pl_bmassj 0.379"
+      },
+      "order": 4734
+    }
+  ]
+}

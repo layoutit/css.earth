@@ -1,0 +1,28 @@
+{
+ "id": "hats-71b",
+ "classification": "exoplanet",
+ "order": 3136,
+ "physical": {
+  "name": "HATS-71 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 73207.8,
+  "gravitationalParameterKm3PerS2": 46874016.8,
+  "parent": "hats-71"
+ },
+ "physicalNotes": "Radius 1.024 Jupiter radii from Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract): 73,207.8 km at 71,492 km per Jupiter radius. GM from the mass 0.37 Jupiter masses (Bakos et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....159..267B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.7955195,
+  "semiMajorAxisStellarRadii": 16.84,
+  "inclinationDegrees": 88.82,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 59110.82287,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): P 3.7955195 d",
+   "shape": "Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2020): a/R* 16.84; Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2020): inclination 88.82 degrees",
+   "eccentricity": "Bakos et al. 2020 (2020AJ....159..267B), via the NASA Exoplanet Archive ps table (pl_refname BAKOS_ET_AL__2020): e 0",
+   "phase": "Patel & Espinoza 2022 (2022AJ....163..228P), via the NASA Exoplanet Archive ps table (pl_refname PATEL__AMP__ESPINOZA_2022): transit mid-time 2459111.32287 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

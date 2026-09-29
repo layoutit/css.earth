@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-10",
+  "card": {
+    "text": "WASP-10 b crosses WASP-10 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-692-2-l100",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...692L.100J/abstract",
+        "label": "Johnson et al. (2009), The Astrophysical Journal 692 L100-L104",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JOHNSON_ET_AL__2009): st_teff 4675, st_rad 0.698, st_mass 0.75"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-10",
+        "url": "https://en.wikipedia.org/wiki/WASP-10",
+        "label": "Wikipedia, \"WASP-10\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374438662",
+        "quote": "WASP-10 is a star 461 light-years away in the constellation Pegasus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Johnson et al. 2009.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-692-2-l100",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...692L.100J/abstract",
+        "label": "Johnson et al. (2009), The Astrophysical Journal 692 L100-L104",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname JOHNSON_ET_AL__2009): st_teff 4675, st_rad 0.698, st_mass 0.75"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-10",
+        "url": "https://en.wikipedia.org/wiki/WASP-10",
+        "label": "Wikipedia, \"WASP-10\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374438662",
+        "quote": "It hosts a transiting planet discovered by the SuperWASP project."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

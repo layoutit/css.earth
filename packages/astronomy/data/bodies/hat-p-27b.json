@@ -1,0 +1,28 @@
+{
+ "id": "hat-p-27b",
+ "classification": "exoplanet",
+ "order": 3130,
+ "physical": {
+  "name": "HAT-P-27 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 72921.8,
+  "gravitationalParameterKm3PerS2": 78545649.78,
+  "parent": "hat-p-27"
+ },
+ "physicalNotes": "Radius 1.02 Jupiter radii from Brown et al. 2012 (2012ApJ...760..139B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012ApJ...760..139B/abstract): 72,921.8 km at 71,492 km per Jupiter radius. GM from the mass 0.62 Jupiter masses (Brown et al. 2012, the mass the NASA Exoplanet Archive's composite table adopts (2012ApJ...760..139B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2012ApJ...760..139B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 3.03957804,
+  "semiMajorAxisStellarRadii": 9.804,
+  "inclinationDegrees": 85,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57127.81066,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.03957804 d",
+   "shape": "Brown et al. 2012 (2012ApJ...760..139B), via the NASA Exoplanet Archive ps table (pl_refname BROWN_ET_AL__2012): a/R* 9.804; Brown et al. 2012 (2012ApJ...760..139B), via the NASA Exoplanet Archive ps table (pl_refname BROWN_ET_AL__2012): inclination 85 degrees",
+   "eccentricity": "Brown et al. 2012 (2012ApJ...760..139B), via the NASA Exoplanet Archive ps table (pl_refname BROWN_ET_AL__2012): e 0",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2457128.31066 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

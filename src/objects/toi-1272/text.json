@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1272",
+  "card": {
+    "text": "TOI-1272 b crosses TOI-1272 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202660043",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+        "label": "Mancini et al. (2026), Astronomy & Astrophysics 712 A147",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANCINI_ET_AL_2026): st_teff 4985, st_rad 0.8, st_mass 0.828"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mancini et al. 2026.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202660043",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract",
+        "label": "Mancini et al. (2026), Astronomy & Astrophysics 712 A147",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MANCINI_ET_AL_2026): st_teff 4985, st_rad 0.8, st_mass 0.828"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

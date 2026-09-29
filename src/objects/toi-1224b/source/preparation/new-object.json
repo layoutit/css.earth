@@ -1,0 +1,24 @@
+{
+  "host": "toi-1224",
+  "planets": [
+    {
+      "id": "toi-1224b",
+      "name": "TOI-1224 b",
+      "description": "Transiting planet of TOI-1224 with a 4.18-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract",
+        "credit": "Thao et al. 2024"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "THAO_ET_AL__2024"
+      },
+      "text": {
+        "card": "TOI-1224 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1224. Its orbit and size follow Thao et al. 2024's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname THAO_ET_AL__2024): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.1782745, pl_radj 0.18770663, pl_bmassj 0.016"
+      },
+      "order": 3955
+    }
+  ]
+}

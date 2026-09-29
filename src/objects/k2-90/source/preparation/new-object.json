@@ -1,0 +1,39 @@
+{
+  "id": "k2-90",
+  "name": "K2-90",
+  "system": "K2-90 system",
+  "description": "Star of 4,422 K, 134 parsecs away, with 2 transiting planets.",
+  "target": "K2-90",
+  "gaia": "65331198513957376",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+    "credit": "Dressing et al. 2017"
+  },
+  "radius": {
+    "value": 0.634754,
+    "source": "Dressing et al. 2017, the stellar radius of the default parameter set of K2-90 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+    "uncertainty": 0.029302
+  },
+  "mass": {
+    "value": 0.704613,
+    "source": "Dressing et al. 2017, the stellar mass of the default parameter set of K2-90 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+    "uncertainty": 0.070461
+  },
+  "temperature": {
+    "value": 4421.98,
+    "source": "Dressing et al. 2017, the stellar temperature of the default parameter set of K2-90 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract",
+    "uncertainty": 93.48
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross K2-90 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Dressing et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname DRESSING_ET_AL__2017): st_teff 4421.98, st_rad 0.634754, st_mass 0.704613"
+  },
+  "notes": [],
+  "order": 3622
+}

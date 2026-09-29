@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-672b",
+  "card": {
+    "text": "TOI-672 b was found in 2023 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202558343",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract",
+        "label": "Osborn et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OSBORN_ET_AL_2026): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.633575, pl_radj 0.47372729, pl_bmassj 0.16014931"
+      },
+      {
+        "catalogueId": "wikipedia-toi-672-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-672_b",
+        "label": "Wikipedia, \"TOI-672 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1212743387",
+        "quote": "TOI-672 b is a Neptune-like exoplanet, located 218 light-years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-672. Its orbit and size follow Osborn et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202558343",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract",
+        "label": "Osborn et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OSBORN_ET_AL_2026): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.633575, pl_radj 0.47372729, pl_bmassj 0.16014931"
+      },
+      {
+        "catalogueId": "wikipedia-toi-672-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-672_b",
+        "label": "Wikipedia, \"TOI-672 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1212743387",
+        "quote": "The exoplanet was discovered in the year 2023."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

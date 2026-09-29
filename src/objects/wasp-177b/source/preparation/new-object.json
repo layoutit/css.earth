@@ -1,0 +1,24 @@
+{
+  "host": "wasp-177",
+  "planets": [
+    {
+      "id": "wasp-177b",
+      "name": "WASP-177 b",
+      "description": "Transiting planet of WASP-177 with a 3.07-day year, found in 2019.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5790T/abstract",
+        "credit": "Turner et al. 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "TURNER_ET_AL__2019"
+      },
+      "text": {
+        "card": "WASP-177 b was found in 2019 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-177. Its orbit and size follow Turner et al. 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TURNER_ET_AL__2019): disc_year 2019, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.07172019, pl_radj 1.58, pl_bmassj 0.508"
+      },
+      "order": 4801
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-141b",
+  "card": {
+    "text": "K2-141 b was found in 2018 by K2 as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2018, disc_facility K2, sy_pnum 2; pl_orbper 0.2803246, pl_radj 0.13471341, pl_bmassj 0.01563737"
+      },
+      {
+        "catalogueId": "wikipedia-k2-141b",
+        "url": "https://en.wikipedia.org/wiki/K2-141b",
+        "label": "Wikipedia, \"K2-141b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249200",
+        "quote": "K2-141b is a massive rocky exoplanet orbiting extremely close to a K Type orange main-sequence star K2-141."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around K2-141. Its orbit and size follow Bonomo et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202346211",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+        "label": "Bonomo et al. 2023",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL_2023): disc_year 2018, disc_facility K2, sy_pnum 2; pl_orbper 0.2803246, pl_radj 0.13471341, pl_bmassj 0.01563737"
+      },
+      {
+        "catalogueId": "wikipedia-k2-141b",
+        "url": "https://en.wikipedia.org/wiki/K2-141b",
+        "label": "Wikipedia, \"K2-141b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374249200",
+        "quote": "The planet was first discovered by the Kepler space telescope during its K2 “Second Light” mission and later observed by the HARPS-N spectrograph."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

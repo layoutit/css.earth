@@ -1,0 +1,24 @@
+{
+  "host": "toi-5349",
+  "planets": [
+    {
+      "id": "toi-5349b",
+      "name": "TOI-5349 b",
+      "description": "Transiting planet of TOI-5349 with a 3.32-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract",
+        "credit": "Sandoval et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SANDOVAL_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-5349 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5349. Its orbit and size follow Sandoval et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SANDOVAL_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 3.317921, pl_radj 0.91, pl_bmassj 0.4"
+      },
+      "order": 4514
+    }
+  ]
+}

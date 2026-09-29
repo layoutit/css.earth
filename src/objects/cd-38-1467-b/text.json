@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "cd-38-1467-b",
+  "card": {
+    "text": "CD-38 1467B is a star of 3,418 K, bound to TOI-451 4,669 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 4844691297067063424 and 4844691297067064576, sep_AU 4669.396498974841052, R_chance_align 8.030418700360694457e-06"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "CD-38 1467B shares its motion through space with TOI-451, 4,669 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 4844691297067063424 and 4844691297067064576, sep_AU 4669.396498974841052, R_chance_align 8.030418700360694457e-06"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

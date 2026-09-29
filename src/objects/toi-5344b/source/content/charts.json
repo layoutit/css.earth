@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-5344b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-5344b-orbits",
+      "title": "TOI-5344 b: orbits around TOI-5344",
+      "output": "toi-5344b-system-orbits.svg",
+      "system": "toi-5344",
+      "highlight": "toi-5344b",
+      "description": "The orbits of TOI-5344's planets in this map from above, to scale, with TOI-5344 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Hartman et al. 2023 (2023AJ....166..163H), via the NASA Exoplanet Archive ps table (pl_refname HARTMAN_ET_AL__2023): P 3.792622 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-5344b-transit",
+      "title": "TOI-5344 b: its transit",
+      "description": "TOI-5344 b crossing its star, as TESS recorded it: 1 sector (71) of the SPOC pipeline's 2-minute light curves of TIC 16005254, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 7-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-5344b-transit.svg",
+      "metadata": {
+        "tic": "TIC 16005254",
+        "sectors": [
+          71
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-5344b",
+      "sources": [
+        "photometry/tess/tess2023289093419-s0071-0000000016005254-0266-s_lc.fits"
+      ],
+      "durationHours": 1.773,
+      "binMinutes": 7,
+      "notes": [
+        "TESS 2-min SPOC · sector 71",
+        "Folded on the app's orbit; 7-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

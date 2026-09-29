@@ -1,0 +1,40 @@
+{
+  "id": "bd-14-1137-b",
+  "name": "BD-14 1137B",
+  "system": "TOI-421 system",
+  "description": "Star bound to TOI-421, 2,206 AU away.",
+  "gaia": "2984582227215748224",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.357,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 94986312 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.011
+  },
+  "mass": {
+    "value": 0.342,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 94986312 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.02
+  },
+  "temperature": {
+    "value": 3388,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 94986312 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "BD-14 1137B is a star of 3,388 K, bound to TOI-421 2,206 AU away.",
+    "introduction": "BD-14 1137B shares its motion through space with TOI-421, 2,206 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 2984582227215748864 and 2984582227215748224, sep_AU 2206.146321126648218, R_chance_align 1.055337357843260119e-04"
+  },
+  "notes": [
+    "BD-14 1137B's orbit around TOI-421 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 4392
+}

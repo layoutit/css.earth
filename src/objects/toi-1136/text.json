@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1136",
+  "card": {
+    "text": "6 planets cross TOI-1136 as seen from Earth: b, c, d, e, f, g.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aca327",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...33D/abstract",
+        "label": "Dai et al. (2023), The Astronomical Journal 165 33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DAI_ET_AL_2023): st_teff 5770, st_rad 0.968, st_mass 1.022"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1136",
+        "url": "https://en.wikipedia.org/wiki/TOI-1136",
+        "label": "Wikipedia, \"TOI-1136\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1373175479",
+        "quote": "TOI-1136 is a G-type main-sequence star 276 light-years away in the constellation of Draco."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Dai et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aca327",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...33D/abstract",
+        "label": "Dai et al. (2023), The Astronomical Journal 165 33",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname DAI_ET_AL_2023): st_teff 5770, st_rad 0.968, st_mass 1.022"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1136",
+        "url": "https://en.wikipedia.org/wiki/TOI-1136",
+        "label": "Wikipedia, \"TOI-1136\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1373175479",
+        "quote": "It is slightly smaller than the Sun and similar in mass and temperature, but is much younger, with an age of about 700 million years."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

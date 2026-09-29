@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-80606",
+  "card": {
+    "text": "HD 80606 b crosses HD 80606 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac8dee",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract",
+        "label": "Pearson et al. (2022), The Astronomical Journal 164 178",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PEARSON_ET_AL__2022): st_teff 5565, st_rad 1.05, st_mass 1.05"
+      },
+      {
+        "catalogueId": "wikipedia-hd-80606-and-hd-80607",
+        "url": "https://en.wikipedia.org/wiki/HD_80606_and_HD_80607",
+        "label": "Wikipedia, \"HD 80606 and HD 80607\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374864114",
+        "quote": "HD 80606 and HD 80607 are two stars comprising a binary star system."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Pearson et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac8dee",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract",
+        "label": "Pearson et al. (2022), The Astronomical Journal 164 178",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname PEARSON_ET_AL__2022): st_teff 5565, st_rad 1.05, st_mass 1.05"
+      },
+      {
+        "catalogueId": "wikipedia-hd-80606-and-hd-80607",
+        "url": "https://en.wikipedia.org/wiki/HD_80606_and_HD_80607",
+        "label": "Wikipedia, \"HD 80606 and HD 80607\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374864114",
+        "quote": "They are 215 light-years away in the constellation of Ursa Major."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

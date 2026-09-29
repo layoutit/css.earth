@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-24",
+  "card": {
+    "text": "KELT-24 b crosses KELT-24 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad55ec",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract",
+        "label": "Giovinazzi et al. (2024), The Astronomical Journal 168 118",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GIOVINAZZI_ET_AL__2024): st_teff 6426, st_rad 1.338, st_mass 1.268"
+      },
+      {
+        "catalogueId": "wikipedia-kelt-24",
+        "url": "https://en.wikipedia.org/wiki/KELT-24",
+        "label": "Wikipedia, \"KELT-24\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1329899560",
+        "quote": "KELT-24 is a multiple star system in the constellation Ursa Major at a distance of approximately 316 light-years from Sun."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Giovinazzi et al. 2024.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad55ec",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..118G/abstract",
+        "label": "Giovinazzi et al. (2024), The Astronomical Journal 168 118",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GIOVINAZZI_ET_AL__2024): st_teff 6426, st_rad 1.338, st_mass 1.268"
+      },
+      {
+        "catalogueId": "wikipedia-kelt-24",
+        "url": "https://en.wikipedia.org/wiki/KELT-24",
+        "label": "Wikipedia, \"KELT-24\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1329899560",
+        "quote": "The apparent magnitude of the primary star is +8.33."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

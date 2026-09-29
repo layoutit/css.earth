@@ -1,0 +1,39 @@
+{
+  "id": "toi-512",
+  "name": "TOI-512",
+  "system": "TOI-512 system",
+  "description": "Star of 5,277 K, 67.4 parsecs away, with 1 transiting planet.",
+  "target": "TOI-512",
+  "gaia": "5574111674620962688",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract",
+    "credit": "Rodrigues et al. 2025"
+  },
+  "radius": {
+    "value": 0.89,
+    "source": "Rodrigues et al. 2025, the stellar radius of the default parameter set of TOI-512 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.74,
+    "source": "Rodrigues et al. 2025, the stellar mass of the default parameter set of TOI-512 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 5277,
+    "source": "Rodrigues et al. 2025, the stellar temperature of the default parameter set of TOI-512 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract",
+    "uncertainty": 67
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-512 b crosses TOI-512 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Rodrigues et al. 2025.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname RODRIGUES_ET_AL_2025): st_teff 5277, st_rad 0.89, st_mass 0.74"
+  },
+  "notes": [],
+  "order": 4484
+}

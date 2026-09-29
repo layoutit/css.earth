@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1093-mnras-staf2030",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Naponiello et al. (2026): A 34.6-d transiting sub-Neptune in the TOI-1422 planetary system",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2511.11492"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/staf2030"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2026MNRAS.545f2030N"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f2030N",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/staf2030",
+      "label": "Monthly Notices of the Royal Astronomical Society 545 staf2030"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f2030N",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Naponiello et al. (2026), Monthly Notices of the Royal Astronomical Society 545 staf2030",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f2030N"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 545 staf2030",
+  "creators": [
+    "L Naponiello",
+    "P Leonardi",
+    "M Damasso",
+    "et al."
+  ],
+  "publicationDate": "2026"
+}

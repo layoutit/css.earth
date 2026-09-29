@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-260655b",
+  "card": {
+    "text": "HD 260655 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243834",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L/abstract",
+        "label": "Luque et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.7694936, pl_radj 0.11062558, pl_bmassj 0.00673319"
+      },
+      {
+        "catalogueId": "wikipedia-hd-260655",
+        "url": "https://en.wikipedia.org/wiki/HD_260655",
+        "label": "Wikipedia, \"HD 260655\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374441552",
+        "quote": "HD 260655 has two confirmed rocky planets, named HD 260655 b and HD 260655 c, that were discovered in 2022."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around HD 260655. Its orbit and size follow Luque et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243834",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L/abstract",
+        "label": "Luque et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LUQUE_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.7694936, pl_radj 0.11062558, pl_bmassj 0.00673319"
+      },
+      {
+        "catalogueId": "wikipedia-hd-260655",
+        "url": "https://en.wikipedia.org/wiki/HD_260655",
+        "label": "Wikipedia, \"HD 260655\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374441552",
+        "quote": "Both planets were detected by the TESS mission and confirmed independently with archival and new precise radial velocity data obtained with the HIRES observatory since 1998, and the CARMENES survey instruments since 2016."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

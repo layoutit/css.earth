@@ -1,0 +1,28 @@
+{
+ "id": "toi-1438c",
+ "classification": "exoplanet",
+ "order": 4036,
+ "physical": {
+  "name": "TOI-1438 c",
+  "horizonsCode": null,
+  "meanRadiusKm": 17539.8,
+  "gravitationalParameterKm3PerS2": 4225164.33,
+  "parent": "toi-1438"
+ },
+ "physicalNotes": "Radius 0.24533899 Jupiter radii from Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract): 17,539.8 km at 71,492 km per Jupiter radius. GM from the mass 0.03335133 Jupiter masses (Persson et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...702A..69P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 9.428089,
+  "semiMajorAxisStellarRadii": 21.6,
+  "inclinationDegrees": 87.61,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58689.4136,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): P 9.428089 d",
+   "shape": "Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): a/R* 21.6; Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): inclination 87.61 degrees",
+   "eccentricity": "Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): e 0",
+   "phase": "Persson et al. 2025 (2025A&A...702A..69P), via the NASA Exoplanet Archive ps table (pl_refname PERSSON_ET_AL_2025): transit mid-time 2458689.9136 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 2 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

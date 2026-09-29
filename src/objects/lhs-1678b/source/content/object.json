@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "lhs-1678b",
+  "displayName": "LHS 1678 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.69 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad3040",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S",
+          "label": "Silverstein et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "21 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad3040",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S",
+          "label": "Silverstein et al. 2024",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "Under 0.35 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ac32e3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S",
+          "label": "Silverstein et al. 2022",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by LHS 1678; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "lhs-1678b-lens-shape.webp",
+        "surface": "lhs-1678b-surface-shape@2x.webp",
+        "poles": "lhs-1678b-poles-shape@2x.webp",
+        "source": {
+          "id": "lhs-1678b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of LHS 1678 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of lhs-1678's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "lhs-1678b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/lhs-1678b/lhs-1678b-system-orbits.svg",
+      "alt": "The orbits of LHS 1678's planets in this map from above, to scale, with LHS 1678 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "lhs-1678b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S"
+      }
+    },
+    {
+      "id": "lhs-1678b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/lhs-1678b/lhs-1678b-transit.svg",
+      "alt": "LHS 1678 b crossing its star, as TESS recorded it: 3 sectors (31, 32, 98) of the SPOC pipeline's 2-minute light curves of TIC 77156829, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 4-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "lhs-1678b-tess-sector-31",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020294194027-s0031-0000000077156829-0198-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Silverstein et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S/abstract",
+      "credit": "Silverstein et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/lhs-1678b.json",
+      "credit": "Radius from Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive; mass from Silverstein et al. 2022 (2022AJ....163..151S), via the NASA Exoplanet Archive; orbit from Silverstein et al. 2024 (2024AJ....167..255S), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-270",
+  "card": {
+    "text": "3 planets cross TOI-270 as seen from Earth: b, c, d.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab3483",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract",
+        "label": "Kaye et al. (2022), Monthly Notices of the Royal Astronomical Society 510 5464-5485",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KAYE_ET_AL__2022): st_teff 3506, st_rad 0.38, st_mass 0.386"
+      },
+      {
+        "catalogueId": "wikipedia-toi-270",
+        "url": "https://en.wikipedia.org/wiki/TOI-270",
+        "label": "Wikipedia, \"TOI-270\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375755552",
+        "quote": "TOI-270 is a red dwarf star 73.3 light-years away in the constellation Pictor."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Kaye et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stab3483",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract",
+        "label": "Kaye et al. (2022), Monthly Notices of the Royal Astronomical Society 510 5464-5485",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname KAYE_ET_AL__2022): st_teff 3506, st_rad 0.38, st_mass 0.386"
+      },
+      {
+        "catalogueId": "wikipedia-toi-270",
+        "url": "https://en.wikipedia.org/wiki/TOI-270",
+        "label": "Wikipedia, \"TOI-270\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375755552",
+        "quote": "It has about 39% the mass and 38% the radius of the Sun, and a temperature of about 3,506 K. TOI-270 hosts a system of three known exoplanets."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

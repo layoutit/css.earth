@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-109833",
+  "card": {
+    "text": "2 planets cross HD 109833 as seen from Earth: b, c.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aca8fc",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract",
+        "label": "Wood et al. (2023), The Astronomical Journal 165 85",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WOOD_ET_AL_2023): st_teff 5881, st_rad 1, st_mass 1.08"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Wood et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aca8fc",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract",
+        "label": "Wood et al. (2023), The Astronomical Journal 165 85",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname WOOD_ET_AL_2023): st_teff 5881, st_rad 1, st_mass 1.08"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

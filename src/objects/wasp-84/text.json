@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-84",
+  "card": {
+    "text": "WASP-84 b crosses WASP-84 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnrasl-slad078",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M/abstract",
+        "label": "Maciejewski et al. (2023), Monthly Notices of the Royal Astronomical Society: Letters 525 L43-L49",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2017, MACIEJEWSKI_ET_AL_2023): st_teff 5300, st_rad 0.768, st_mass 0.853"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-84",
+        "url": "https://en.wikipedia.org/wiki/WASP-84",
+        "label": "Wikipedia, \"WASP-84\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406445",
+        "quote": "WASP-84, also known as BD+02 2056, is a G-type main-sequence star 327 light-years away in the constellation Hydra."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius follows Maciejewski et al. 2023, and its temperature Bonomo et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnrasl-slad078",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..43M/abstract",
+        "label": "Maciejewski et al. (2023), Monthly Notices of the Royal Astronomical Society: Letters 525 L43-L49",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2017, MACIEJEWSKI_ET_AL_2023): st_teff 5300, st_rad 0.768, st_mass 0.853"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-84",
+        "url": "https://en.wikipedia.org/wiki/WASP-84",
+        "label": "Wikipedia, \"WASP-84\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406445",
+        "quote": "Its surface temperature is 5350±31 K and is slightly enriched in heavy elements compared to the Sun, with a metallicity Fe/H index of 0.05±0.02."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

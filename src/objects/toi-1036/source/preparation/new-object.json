@@ -1,0 +1,32 @@
+{
+  "id": "toi-1036",
+  "name": "TOI-1036",
+  "system": "TOI-1036 system",
+  "description": "Star of 5,665 K, 184 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1036",
+  "gaia": "5368266433430785280",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 1.17554,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-1036 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5664.68,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-1036 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1036 b crosses TOI-1036 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 5664.68, st_rad 1.17554"
+  },
+  "notes": [],
+  "order": 3908
+}

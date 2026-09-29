@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1839c",
+  "card": {
+    "text": "TOI-1839 c was found in 2026 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-05413",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract",
+        "label": "Castro-González et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CASTRO_GONZALEZ_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.0239478, pl_radj 0.22303545, pl_bmassj 0.01887811"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around TOI-1839. Its orbit and size follow Castro-González et al. 2026's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-05413",
+        "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract",
+        "label": "Castro-González et al. 2026",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CASTRO_GONZALEZ_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.0239478, pl_radj 0.22303545, pl_bmassj 0.01887811"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

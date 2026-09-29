@@ -1,0 +1,24 @@
+{
+  "host": "toi-7009",
+  "planets": [
+    {
+      "id": "toi-7009b",
+      "name": "TOI-7009 b",
+      "description": "Transiting planet of TOI-7009 with a 2.32-day year, found in 2026.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M/abstract",
+        "credit": "Morello et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "MORELLO_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-7009 b was found in 2026 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-7009. Its orbit and size follow Morello et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MORELLO_ET_AL_2026): disc_year 2026, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.3206612, pl_radj 0.3309846, pl_bmassj 0.0418"
+      },
+      "order": 4673
+    }
+  ]
+}

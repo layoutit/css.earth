@@ -1,0 +1,24 @@
+{
+  "host": "toi-912",
+  "planets": [
+    {
+      "id": "toi-912b",
+      "name": "TOI-912 b",
+      "description": "Transiting planet of TOI-912 with a 4.68-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract",
+        "credit": "Lacedelli et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "LACEDELLI_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-912 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-912. Its orbit and size follow Lacedelli et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LACEDELLI_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.67806593172, pl_radj 0.17218336, pl_bmassj 0.01604639"
+      },
+      "order": 4750
+    }
+  ]
+}

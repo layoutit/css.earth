@@ -1,0 +1,31 @@
+{
+  "host": "toi-2257",
+  "planets": [
+    {
+      "id": "toi-2257b",
+      "name": "TOI-2257 b",
+      "description": "Transiting planet of TOI-2257 with a 35.2-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...657A..45S/abstract",
+        "credit": "Schanche et al. 2022"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SCHANCHE_ET_AL__2022"
+      },
+      "text": {
+        "card": "TOI-2257 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-2257. Its orbit and size follow Schanche et al. 2022's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SCHANCHE_ET_AL__2022): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 35.189346, pl_radj 0.19573591, pl_bmassj 0.0171",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-2257_b",
+          "title": "TOI-2257 b",
+          "revision": "1374086937",
+          "card": "TOI-2257 b is an extremely eccentric (0.496) exoplanet in or near the circumstellar habitable zone of the star TOI-2257, 188 light-years away.",
+          "introduction": "It is likely a sub-Neptune exoplanet, with a mass of 5.71 M🜨 and a radius of 2.19 R🜨."
+        }
+      },
+      "order": 4273
+    }
+  ]
+}

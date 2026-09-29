@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad3df1",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Tey et al. (2024): GJ 238 b: A 0.57 Earth Radius Planet Orbiting an M2.5 Dwarf Star at 15.2 pc",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2407.18199"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad3df1"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....167..283T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad3df1",
+      "label": "The Astronomical Journal 167 283"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Tey et al. (2024), The Astronomical Journal 167 283",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T"
+    }
+  ],
+  "publisher": "The Astronomical Journal 167 283",
+  "creators": [
+    "Evan Tey",
+    "Avi Shporer",
+    "Zifan Lin",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

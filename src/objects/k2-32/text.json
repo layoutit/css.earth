@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-32",
+  "card": {
+    "text": "4 planets cross K2-32 as seen from Earth: b, c, d, e.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202037896",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+        "label": "Lillo-Box et al. (2020), Astronomy & Astrophysics 640 A48",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LILLO_BOX_ET_AL__2020): st_teff 5271, st_rad 0.86, st_mass 0.83"
+      },
+      {
+        "catalogueId": "wikipedia-k2-32",
+        "url": "https://en.wikipedia.org/wiki/K2-32",
+        "label": "Wikipedia, \"K2-32\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406472",
+        "quote": "K2-32 is a G9-type main sequence star slightly smaller and less massive than the sun."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lillo-Box et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202037896",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...640A..48L/abstract",
+        "label": "Lillo-Box et al. (2020), Astronomy & Astrophysics 640 A48",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LILLO_BOX_ET_AL__2020): st_teff 5271, st_rad 0.86, st_mass 0.83"
+      },
+      {
+        "catalogueId": "wikipedia-k2-32",
+        "url": "https://en.wikipedia.org/wiki/K2-32",
+        "label": "Wikipedia, \"K2-32\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374406472",
+        "quote": "Four confirmed transiting exoplanets are known to orbit this star."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

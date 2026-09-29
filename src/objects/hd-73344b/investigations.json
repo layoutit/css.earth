@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-73344b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.25729369 Jupiter radii from Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.03297377 Jupiter masses: Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive ps table (pl_refname SULIS_ET_AL_2024): P 15.611 d; Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive ps table (pl_refname SULIS_ET_AL_2024): a/R* 23.556; Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive ps table (pl_refname SULIS_ET_AL_2024): inclination 88.082 degrees; Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive ps table (pl_refname SULIS_ET_AL_2024): e 0.03; Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive ps table (pl_refname SULIS_ET_AL_2024): omega 153.891 degrees; Sulis et al. 2024 (2024A&A...688A..14S), via the NASA Exoplanet Archive ps table (pl_refname SULIS_ET_AL_2024): transit mid-time 2458095.9 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 9 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract"
+      ]
+    }
+  ]
+}

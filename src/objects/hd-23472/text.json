@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-23472",
+  "card": {
+    "text": "5 planets cross HD 23472 as seen from Earth: b, c, d, e, f.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244293",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract",
+        "label": "Barros et al. (2022), Astronomy & Astrophysics 665 A154",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARROS_ET_AL_2022): st_teff 4684, st_rad 0.71, st_mass 0.67"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Barros et al. 2022.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244293",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract",
+        "label": "Barros et al. (2022), Astronomy & Astrophysics 665 A154",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARROS_ET_AL_2022): st_teff 4684, st_rad 0.71, st_mass 0.67"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

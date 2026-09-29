@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-0004-637x-818-1-87",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Schlieder et al. (2016): TWO SMALL TEMPERATE PLANETS TRANSITING NEARBY M DWARFS IN K2 CAMPAIGNS 0 AND 1* † ‡",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1601.02706"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/0004-637X/818/1/87"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2016ApJ...818...87S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/0004-637X/818/1/87",
+      "label": "The Astrophysical Journal 818 87"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Schlieder et al. (2016), The Astrophysical Journal 818 87",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 818 87",
+  "creators": [
+    "Joshua E. Schlieder",
+    "Ian J. M. Crossfield",
+    "Erik A. Petigura",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

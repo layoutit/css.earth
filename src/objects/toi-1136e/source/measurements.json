@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "toi-1136e",
+  "radiusKm": 16236.5,
+  "radiusSource": "Radius 0.22710987 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 16,236.5 km at 71,492 km per Jupiter radius. GM from the mass 0.01909836 Jupiter masses (Beard et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....167...70B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024AJ....167...70B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 18.79554696537,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 18.79554696537 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of TOI-1136 e is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.01909836 Jupiter masses: Beard et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024AJ....167...70B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167...70B/abstract)."
+}

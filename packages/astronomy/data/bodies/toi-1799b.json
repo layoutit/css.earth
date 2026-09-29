@@ -1,0 +1,28 @@
+{
+ "id": "toi-1799b",
+ "classification": "exoplanet",
+ "order": 4164,
+ "physical": {
+  "name": "TOI-1799 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 10472.8,
+  "gravitationalParameterKm3PerS2": 1594401.95,
+  "parent": "toi-1799"
+ },
+ "physicalNotes": "Radius 0.14648968 Jupiter radii from Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract): 10,472.8 km at 71,492 km per Jupiter radius. GM from the mass 0.01258541 Jupiter masses (Polanski et al. 2024, the mass the NASA Exoplanet Archive's composite table adopts (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 7.085738,
+  "semiMajorAxisStellarRadii": 16.2908,
+  "inclinationDegrees": 88.67,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58904.3318,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): P 7.085738 d",
+   "shape": "Crossfield et al. 2025 (2025AJ....169...89C), via the NASA Exoplanet Archive ps table (pl_refname CROSSFIELD_ET_AL_2025): a/R* derived from its semi-major axis 0.072502 au and stellar radius 0.957 solar radii; Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): inclination derived from its impact parameter 0.37157 with its a/R* 16.0102 (Winn 2010, eq. 7)",
+   "eccentricity": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): e 0",
+   "phase": "Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive ps table (pl_refname POLANSKI_ET_AL__2024): transit mid-time 2458904.8318 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 38 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

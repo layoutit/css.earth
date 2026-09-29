@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "k2-71",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4006,
+      "lowerKelvin": 3873,
+      "upperKelvin": 4139,
+      "citation": "Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-71 b in the NASA Exoplanet Archive: 4006 +/- 133 K, https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

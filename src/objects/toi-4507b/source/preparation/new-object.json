@@ -1,0 +1,31 @@
+{
+  "host": "toi-4507",
+  "planets": [
+    {
+      "id": "toi-4507b",
+      "name": "TOI-4507 b",
+      "description": "Transiting planet of TOI-4507 with a 105-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract",
+        "credit": "Espinoza-Retamal et al. 2026"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "ESPINOZA_RETAMAL_ET_AL_2026"
+      },
+      "text": {
+        "card": "TOI-4507 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-4507. Its orbit and size follow Espinoza-Retamal et al. 2026's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ESPINOZA_RETAMAL_ET_AL_2026): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 104.616063, pl_radj 0.73155626, pl_bmassj 0.06292704",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TOI-4507_b",
+          "title": "TOI-4507 b",
+          "revision": "1374091145",
+          "card": "TOI-4507 b is an exoplanet discovered in October 2025 that is roughly 578 light-years away.",
+          "introduction": "It is a similar size to Jupiter; however, it is roughly 30 times the mass of Earth."
+        }
+      },
+      "order": 4429
+    }
+  ]
+}

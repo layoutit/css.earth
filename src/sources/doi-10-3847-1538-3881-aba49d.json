@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-aba49d",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Davis et al. (2020): TOI 564 b and TOI 905 b: Grazing and Fully Transiting Hot Jupiters Discovered by TESS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1912.10186"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aba49d"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020AJ....160..229D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aba49d",
+      "label": "The Astronomical Journal 160 229"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Davis et al. (2020), The Astronomical Journal 160 229",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D"
+    }
+  ],
+  "publisher": "The Astronomical Journal 160 229",
+  "creators": [
+    "Allen B. Davis",
+    "Songhu Wang",
+    "Matias Jones",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

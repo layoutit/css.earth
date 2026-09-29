@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "qatar-6",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Qatar-6",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 502295.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/qatar-6-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Qatar-6",
+      "classification": "star",
+      "color": "#ffddc5",
+      "distanceAu": 20823875.7,
+      "description": "Qatar-6 b crosses Qatar-6 as seen from Earth, which is how it was found.",
+      "systemName": "Qatar-6 system",
+      "order": 3852,
+      "context": {
+        "order": 3849
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2137071758655723000,
+        -1938451526657541600,
+        1174669103309827300
+      ],
+      "presentationToReference": [
+        -0.6860128922805332,
+        -0.27929433995067926,
+        -0.6718489289240642,
+        -0.6222546028061581,
+        -0.25333809935339424,
+        0.7406882047815805,
+        0.3770749539699611,
+        -0.9261827460536739,
+        -0.0000010136902570071814
+      ],
+      "orbitUpReference": [
+        0.27929433995067926,
+        0.25333809935339424,
+        0.9261827460536739
+      ],
+      "metersPerUnit": 1620307.7419354839,
+      "bodyRadiusM": 502295400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

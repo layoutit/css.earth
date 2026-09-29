@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "toi-1135b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.885 Jupiter radii from Dugan et al. 2025 (2025ApJ...994L..23D), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "Under 0.185 Jupiter masses: Dugan et al. 2025 (2025ApJ...994L..23D), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 8.0277326 d; Dugan et al. 2025 (2025ApJ...994L..23D), via the NASA Exoplanet Archive ps table (pl_refname DUGAN_ET_AL_2025): a/R* 14.57; Dugan et al. 2025 (2025ApJ...994L..23D), via the NASA Exoplanet Archive ps table (pl_refname DUGAN_ET_AL_2025): inclination 89.3 degrees; Dugan et al. 2025 (2025ApJ...994L..23D), via the NASA Exoplanet Archive ps table (pl_refname DUGAN_ET_AL_2025): e 0.062; Dugan et al. 2025 (2025ApJ...994L..23D), via the NASA Exoplanet Archive ps table (pl_refname DUGAN_ET_AL_2025): omega -10 degrees, stored as 350; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460658.97426 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract"
+      ]
+    }
+  ]
+}

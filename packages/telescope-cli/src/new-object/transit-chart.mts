@@ -58,12 +58,14 @@ async function ticAndDuration(archive: Archive, planet: string) {
   return digits && hours > 0 ? { tic: digits, durationHours: hours } : undefined;
 }
 
-/** Add the transit chart's files, recipe and control to a planet's package, or say why there is none. */
-export async function installTransitChart(files: PackageFiles, id: string, name: string, archive: Archive, tess: TessArchive, fold?: Fold, timingSigmaDays?: (epochBjd: number) => number) {
-  const s = `src/objects/${id}/source`, found = await ticAndDuration(archive, name);
-  if (!found) return { report: `${id}: no TIC id or transit duration in the archive, so no transit chart` };
+/** Whether TESS shows planet `name`'s transit: its newest SPOC light curves folded on `fold`, the dip looked for within ALIGN_SIGMA
+ * times the ephemeris's uncertainty and kept only at DETECTION_SIGMA or more. The draft asks this to choose planets, and the chart
+ * to draw one; `reason` says why there is none. */
+export async function detectTransit(archive: Archive, name: string, tess: TessArchive, fold?: Fold, timingSigmaDays?: (epochBjd: number) => number) {
+  const found = await ticAndDuration(archive, name);
+  if (!found) return { reason: 'no TIC id or transit duration in the archive' } as const;
   const lightCurves = (await tess.lightCurves(found.tic)).sort((a, b) => a.sector - b.sector);
-  if (!lightCurves.length) return { report: `${id}: TESS holds no 2-minute SPOC light curve of TIC ${found.tic}, so no transit chart` };
+  if (!lightCurves.length) return { reason: `TESS holds no 2-minute SPOC light curve of TIC ${found.tic}` } as const;
   const bytes = await Promise.all(lightCurves.map(file => tess.download(file)));
   // The dip is looked for within ALIGN_SIGMA times the ephemeris's uncertainty at these dates, and drawn only when a whole transit
   // folds (the bake would refuse an empty one) and the dip there is at least DETECTION_SIGMA times its standard error.
@@ -74,10 +76,18 @@ export async function installTransitChart(files: PackageFiles, id: string, name:
     const m = fold.measure(bytes, found.durationHours, shift);
     if (m.transits > 0 && (!measured || m.depthPpm / m.errorPpm > measured.depthPpm / measured.errorPpm)) measured = { ...m, shift };
   }
-  if (fold && !measured) return { report: `${id}: no whole transit in TESS sectors ${sectorList}, so no transit chart` };
+  if (fold && !measured) return { reason: `no whole transit in TESS sectors ${sectorList}` } as const;
   const where = sigmaMinutes ? ` within ${ALIGN_SIGMA} sigma (${Math.round(ALIGN_SIGMA * sigmaMinutes)} min) of its ephemeris` : ' at its ephemeris';
   if (measured && !(measured.depthPpm >= DETECTION_SIGMA * measured.errorPpm))
-    return { report: `${id}: TESS sectors ${sectorList} show no ${DETECTION_SIGMA}-sigma dip${where} (best ${Math.round(measured.depthPpm)} ± ${Math.round(measured.errorPpm)} ppm over ${measured.transits} transits), so no transit chart` };
+    return { reason: `TESS sectors ${sectorList} show no ${DETECTION_SIGMA}-sigma dip${where} (best ${Math.round(measured.depthPpm)} ± ${Math.round(measured.errorPpm)} ppm over ${measured.transits} transits)` } as const;
+  return { found, lightCurves, bytes, measured, sigmaMinutes } as const;
+}
+
+/** Add the transit chart's files, recipe and control to a planet's package, or say why there is none. */
+export async function installTransitChart(files: PackageFiles, id: string, name: string, archive: Archive, tess: TessArchive, fold?: Fold, timingSigmaDays?: (epochBjd: number) => number, archiveName = name) {
+  const s = `src/objects/${id}/source`, detected = await detectTransit(archive, archiveName, tess, fold, timingSigmaDays);
+  if ('reason' in detected) return { report: `${id}: ${detected.reason}, so no transit chart` };
+  const { found, lightCurves, bytes, measured, sigmaMinutes } = detected;
   // A dip found off the ephemeris, within its uncertainty, is drawn where TESS measures it, and the chart says by how much.
   const align = measured && Math.abs(measured.shift) > 2 ? measured.shift : 0, sigmaText = Math.max(1, Math.round(sigmaMinutes));
   const paths = lightCurves.map(file => `photometry/tess/${file.name}`), sectors = lightCurves.map(file => file.sector).join(', ');

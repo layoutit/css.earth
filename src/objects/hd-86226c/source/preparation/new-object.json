@@ -1,0 +1,24 @@
+{
+  "host": "hd-86226",
+  "planets": [
+    {
+      "id": "hd-86226c",
+      "name": "HD 86226 c",
+      "description": "Transiting planet of HD 86226 with a 3.98-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...96T/abstract",
+        "credit": "Teske et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "TESKE_ET_AL__2020"
+      },
+      "text": {
+        "card": "HD 86226 c was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HD 86226. Its orbit and size follow Teske et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname TESKE_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 3.9846589, pl_radj 0.19270229, pl_bmassj 0.02281094"
+      },
+      "order": 3241
+    }
+  ]
+}

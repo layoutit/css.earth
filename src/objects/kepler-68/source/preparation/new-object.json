@@ -1,0 +1,49 @@
+{
+  "id": "kepler-68",
+  "name": "Kepler-68",
+  "system": "Kepler-68 system",
+  "description": "Star of 5,847 K, 144 parsecs away, with 2 transiting planets.",
+  "target": "Kepler-68",
+  "gaia": "2129550445852902656",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "credit": "Bonomo et al. 2023"
+  },
+  "radius": {
+    "value": 1.2564,
+    "source": "Bonomo et al. 2023, the stellar radius of the default parameter set of Kepler-68 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "uncertainty": 0.0084
+  },
+  "mass": {
+    "value": 1.057,
+    "source": "Bonomo et al. 2023, the stellar mass of the default parameter set of Kepler-68 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "uncertainty": 0.022
+  },
+  "temperature": {
+    "value": 5847,
+    "source": "Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-68 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract",
+    "uncertainty": 75
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "2 planets cross Kepler-68 as seen from Earth: b, c.",
+    "introduction": "Its radius and temperature follow Bonomo et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL_2023): st_teff 5847, st_rad 1.2564, st_mass 1.057",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-68",
+      "title": "Kepler-68",
+      "revision": "1374404611",
+      "card": "Kepler-68 is a Sun-like main sequence star located 471 light-years away in the constellation Cygnus.",
+      "introduction": "It is known to have at least four planets orbiting around it."
+    }
+  },
+  "notes": [
+    "Kepler-68 d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)",
+    "Kepler-68 e: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3777
+}

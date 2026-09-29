@@ -7,18 +7,16 @@ import { SOLAR_SYSTEM_ID, allPlanetarySystems, planetarySystems, systemById, sys
 
 test('planetary systems follow prepared orbit chains to their stars', () => {
   const systems = allPlanetarySystems(SCENE_OBJECTS);
-  assert.deepEqual(systems.map(system => [system.id, system.name, system.route]),
-    [[SOLAR_SYSTEM_ID, 'Solar System', '/sun/'], ['wasp-43', 'WASP-43 system', '/wasp-43/'], ['hd-189733', 'HD 189733 system', '/hd-189733/'],
-      ['hd-209458', 'HD 209458 system', '/hd-209458/'], ['k2-18', 'K2-18 system', '/k2-18/'], ['kepler-186', 'Kepler-186 system', '/kepler-186/'],
-      ['kepler-452', 'Kepler-452 system', '/kepler-452/'], ['trappist-1', 'TRAPPIST-1 system', '/trappist-1/'],
-      ['wasp-39', 'WASP-39 system', '/wasp-39/'], ['beta-pictoris', 'Beta Pictoris system', '/beta-pictoris/'], ['hr-8799', 'HR 8799 system', '/hr-8799/'],
-      ['sgr-a-star', 'Galactic Centre', '/sgr-a-star/'], ['hd-110067', 'HD 110067 system', '/hd-110067/'], ['hd-29391', '51 Eridani system', '/hd-29391/'],
-      ['kepler-16-a', 'Kepler-16 system', '/kepler-16-a/'], ['wd-1856-534', 'WD 1856+534 system', '/wd-1856-534/'], ['kelt-9', 'KELT-9 system', '/kelt-9/'],
-      ['vhs-1256-1257', 'VHS 1256-1257 system', '/vhs-1256-1257/'], ['gq-lup', 'GQ Lup system', '/gq-lup/'], ['dh-tau', 'DH Tau system', '/dh-tau/'],
-      ['roxs-42b', 'ROXs 42B system', '/roxs-42b/'], ['wasp-76', 'WASP-76 system', '/wasp-76/'], ['pds-70', 'PDS 70 system', '/pds-70/'], ['wasp-18', 'WASP-18 system', '/wasp-18/'], ['wasp-121', 'WASP-121 system', '/wasp-121/'], ['luhman-16', 'Luhman 16 system', '/luhman-16/'],
-      ['hip-65426', 'HIP 65426 system', '/hip-65426/'], ['af-lep', 'AF Lep system', '/af-lep/'], ['ab-pic', 'AB Pic system', '/ab-pic/'], ['yses-1', 'YSES 1 system', '/yses-1/'],
-      ['hd-206893', 'HD 206893 system', '/hd-206893/'], ['hd-95086', 'HD 95086 system', '/hd-95086/'], ['gj-504', 'GJ 504 system', '/gj-504/'], ['hd-135344-a', 'HD 135344 A system', '/hd-135344-a/'],
-      ['eps-indi-a', 'Epsilon Indi system', '/eps-indi-a/'], ['hd-219134', 'HD 219134 system', '/hd-219134/'], ['hip-56998', 'HIP 56998 system', '/hip-56998/'], ['hd-136352', 'HD 136352 system', '/hd-136352/'], ['gj-143', 'GJ 143 system', '/gj-143/'], ['hd-39091', 'HD 39091 system', '/hd-39091/'], ['toi-2194', 'TOI-2194 system', '/toi-2194/'], ['toi-5789', 'TOI-5789 system', '/toi-5789/'], ['hd-97658', 'HD 97658 system', '/hd-97658/'], ['hd-63433', 'HD 63433 system', '/hd-63433/'], ['toi-2134', 'TOI-2134 system', '/toi-2134/'], ['hd-207496', 'HD 207496 system', '/hd-207496/'], ['toi-836', 'TOI-836 system', '/toi-836/'], ['hd-207897', 'HD 207897 system', '/hd-207897/'], ['hd-73583', 'HD 73583 system', '/hd-73583/'], ['hr-858', 'HR 858 system', '/hr-858/'], ['toi-431', 'TOI-431 system', '/toi-431/'], ['hd-88986', 'HD 88986 system', '/hd-88986/'], ['hd-60779', 'HD 60779 system', '/hd-60779/'], ['kepler-444', 'Kepler-444 system', '/kepler-444/']]);
+  // Every archive batch adds systems (exoplanet batch 1, 2026-09-29), so the list is held to its rules, not pinned: the Solar
+  // System first, each system named and routed after its star, each once, and the hand-built systems all present.
+  assert.deepEqual([systems[0]!.id, systems[0]!.name, systems[0]!.route], [SOLAR_SYSTEM_ID, 'Solar System', '/sun/']);
+  assert.equal(new Set(systems.map(system => system.id)).size, systems.length);
+  for (const system of systems.slice(1)) {
+    const star = SCENE_OBJECTS.find(object => object.id === system.id);
+    assert.ok(star, `${system.id} is a registered star`);
+    assert.deepEqual([system.name, system.route], [star.systemName, `/${system.id}/`]);
+  }
+  for (const id of ['wasp-43', 'hd-189733', 'hd-209458', 'k2-18', 'kepler-186', 'kepler-452', 'trappist-1', 'wasp-39', 'beta-pictoris', 'hr-8799', 'sgr-a-star', 'hd-110067', 'hd-29391', 'kepler-16-a', 'wd-1856-534', 'kelt-9', 'vhs-1256-1257', 'gq-lup', 'dh-tau', 'roxs-42b', 'wasp-76', 'pds-70', 'wasp-18', 'wasp-121', 'luhman-16', 'hip-65426', 'af-lep', 'ab-pic', 'yses-1', 'hd-206893', 'hd-95086', 'gj-504', 'hd-135344-a', 'eps-indi-a', 'hd-219134', 'hip-56998', 'hd-136352', 'gj-143', 'hd-39091', 'toi-2194', 'toi-5789', 'hd-97658', 'hd-63433', 'toi-2134', 'hd-207496', 'toi-836', 'hd-207897', 'hd-73583', 'hr-858', 'toi-431', 'hd-88986', 'hd-60779', 'kepler-444']) assert.ok(systems.some(system => system.id === id), `${id} keeps its system`);
   // A page builds its systems from the world summary alone; they match the registry's.
   assert.deepEqual(allPlanetarySystems(WORLD_OBJECTS), systems);
   // HD 189733 B has no measured orbit; it belongs to the system through the Gaia measurement that binds it to A (boundTo).

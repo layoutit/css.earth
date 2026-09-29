@@ -1,0 +1,39 @@
+{
+  "id": "k2-198",
+  "name": "K2-198",
+  "system": "K2-198 system",
+  "description": "Star of 5,213 K, 111 parsecs away, with 3 transiting planets.",
+  "target": "K2-198",
+  "gaia": "3628687065162340224",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+    "credit": "Hedges et al. 2019"
+  },
+  "radius": {
+    "value": 0.757,
+    "source": "Hedges et al. 2019, the stellar radius of the default parameter set of K2-198 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+    "uncertainty": 0.035
+  },
+  "mass": {
+    "value": 0.799,
+    "source": "Hedges et al. 2019, the stellar mass of the default parameter set of K2-198 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+    "uncertainty": 0.091
+  },
+  "temperature": {
+    "value": 5212.9,
+    "source": "Hedges et al. 2019, the stellar temperature of the default parameter set of K2-198 c in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract",
+    "uncertainty": 99
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "3 planets cross K2-198 as seen from Earth: b, c, d.",
+    "introduction": "Its radius and temperature follow Hedges et al. 2019.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HEDGES_ET_AL__2019): st_teff 5212.9, st_rad 0.757, st_mass 0.799"
+  },
+  "notes": [],
+  "order": 3372
+}

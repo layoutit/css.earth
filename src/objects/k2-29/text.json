@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "k2-29",
+  "card": {
+    "text": "K2-29 b crosses K2-29 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-637x-824-1-55",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract",
+        "label": "Santerne et al. (2016), The Astrophysical Journal 824 55",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SANTERNE_ET_AL__2016): st_teff 5358, st_rad 0.86, st_mass 0.94"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Santerne et al. 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-637x-824-1-55",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract",
+        "label": "Santerne et al. (2016), The Astrophysical Journal 824 55",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SANTERNE_ET_AL__2016): st_teff 5358, st_rad 0.86, st_mass 0.94"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

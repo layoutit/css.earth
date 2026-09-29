@@ -1,0 +1,39 @@
+{
+  "id": "wasp-156",
+  "name": "WASP-156",
+  "system": "WASP-156 system",
+  "description": "Star of 5,036 K, 122 parsecs away, with 1 transiting planet.",
+  "target": "WASP-156",
+  "gaia": "2514360548993901312",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.tmp..940L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.76,
+    "source": "Bourrier et al. 2023, the stellar radius of WASP-156 b's parameter set from Bourrier et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 0.842,
+    "source": "Bourrier et al. 2023, the stellar mass of WASP-156 b's parameter set from Bourrier et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract",
+    "uncertainty": 0.052
+  },
+  "temperature": {
+    "value": 5036,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of WASP-156 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.tmp..940L/abstract",
+    "uncertainty": 104
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-156 b crosses WASP-156 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius follows Bourrier et al. 2023, and its temperature Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026, BOURRIER_ET_AL__2023): st_teff 5036, st_rad 0.76, st_mass 0.842"
+  },
+  "notes": [],
+  "order": 4909
+}

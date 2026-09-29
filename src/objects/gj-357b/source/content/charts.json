@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/gj-357b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "gj-357b-orbits",
+      "title": "GJ 357 b: orbits around GJ 357",
+      "output": "gj-357b-system-orbits.svg",
+      "system": "gj-357",
+      "highlight": "gj-357b",
+      "description": "The orbits of GJ 357's planets in this map from above, to scale, with GJ 357 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Oddo et al. 2023 (2023AJ....165..134O), via the NASA Exoplanet Archive ps table (pl_refname ODDO_ET_AL__2023): P 3.9306 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "gj-357b-transit",
+      "title": "GJ 357 b: its transit",
+      "description": "GJ 357 b crossing its star, as TESS recorded it: 3 sectors (62, 89, 99) of the SPOC pipeline's 2-minute light curves of TIC 413248763, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 5-minute bins. Error bars are each bin's standard error.",
+      "output": "gj-357b-transit.svg",
+      "metadata": {
+        "tic": "TIC 413248763",
+        "sectors": [
+          62,
+          89,
+          99
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "gj-357b",
+      "sources": [
+        "photometry/tess/tess2023043185947-s0062-0000000413248763-0254-s_lc.fits",
+        "photometry/tess/tess2025042113628-s0089-0000000413248763-0286-s_lc.fits",
+        "photometry/tess/tess2026005125623-s0099-0000000413248763-0300-s_lc.fits"
+      ],
+      "durationHours": 1.291,
+      "binMinutes": 5,
+      "notes": [
+        "TESS 2-min SPOC · sectors 62, 89, 99",
+        "Folded on the app's orbit; 5-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

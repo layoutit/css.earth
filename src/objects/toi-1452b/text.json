@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-1452b",
+  "card": {
+    "text": "TOI-1452 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac7cea",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...96C/abstract",
+        "label": "Cadieux et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 11.06199374459, pl_radj 0.14916611, pl_bmassj 0.01516542"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1452-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-1452_b",
+        "label": "Wikipedia, \"TOI-1452 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086980",
+        "quote": "TOI-1452 b is a confirmed super-Earth exoplanet, possibly a water world, orbiting a red dwarf star TOI-1452 about 100 light-years away in the Draco constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-1452. Its orbit and size follow Cadieux et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ac7cea",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022AJ....164...96C/abstract",
+        "label": "Cadieux et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CADIEUX_ET_AL__2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 11.06199374459, pl_radj 0.14916611, pl_bmassj 0.01516542"
+      },
+      {
+        "catalogueId": "wikipedia-toi-1452-b",
+        "url": "https://en.wikipedia.org/wiki/TOI-1452_b",
+        "label": "Wikipedia, \"TOI-1452 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374086980",
+        "quote": "The exoplanet is about 70% larger in diameter than Earth, and roughly five times as massive."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

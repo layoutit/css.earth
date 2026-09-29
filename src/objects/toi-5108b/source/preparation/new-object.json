@@ -1,0 +1,24 @@
+{
+  "host": "toi-5108",
+  "planets": [
+    {
+      "id": "toi-5108b",
+      "name": "TOI-5108 b",
+      "description": "Transiting planet of TOI-5108 with a 6.75-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract",
+        "credit": "Thomas et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "THOMAS_ET_AL_2025"
+      },
+      "text": {
+        "card": "TOI-5108 b was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-5108. Its orbit and size follow Thomas et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname THOMAS_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 6.753581, pl_radj 0.58881358, pl_bmassj 0.10068326"
+      },
+      "order": 4483
+    }
+  ]
+}

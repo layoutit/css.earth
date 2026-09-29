@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-1132b",
+  "card": {
+    "text": "GJ 1132 b was found in 2015 by Cerro Tololo Inter-American Observatory as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad72e9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract",
+        "label": "Xue et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname XUE_ET_AL_2024): disc_year 2015, disc_facility Cerro Tololo Inter-American Observatory, sy_pnum 2; pl_orbper 1.62892911, pl_radj 0.1063, pl_bmassj 0.00578"
+      },
+      {
+        "catalogueId": "wikipedia-gj-1132-b",
+        "url": "https://en.wikipedia.org/wiki/GJ_1132_b",
+        "label": "Wikipedia, \"GJ 1132 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375986378",
+        "quote": "GJ 1132 b is an exoplanet orbiting GJ 1132, a red dwarf star 41 light-years from Earth, in the constellation Vela."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around GJ 1132. Its orbit and size follow Xue et al. 2024's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-ad72e9",
+        "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract",
+        "label": "Xue et al. 2024",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname XUE_ET_AL_2024): disc_year 2015, disc_facility Cerro Tololo Inter-American Observatory, sy_pnum 2; pl_orbper 1.62892911, pl_radj 0.1063, pl_bmassj 0.00578"
+      },
+      {
+        "catalogueId": "wikipedia-gj-1132-b",
+        "url": "https://en.wikipedia.org/wiki/GJ_1132_b",
+        "label": "Wikipedia, \"GJ 1132 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1375986378",
+        "quote": "The planet is considered uninhabitable but was thought to be cool enough to possess an atmosphere."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

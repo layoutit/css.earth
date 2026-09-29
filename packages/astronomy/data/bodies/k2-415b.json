@@ -1,0 +1,28 @@
+{
+ "id": "k2-415b",
+ "classification": "exoplanet",
+ "order": 3577,
+ "physical": {
+  "name": "K2-415 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 6473.8,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "k2-415"
+ },
+ "physicalNotes": "Radius 0.09055239 Jupiter radii from Hirano et al. 2023 (2023AJ....165..131H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract): 6,473.8 km at 71,492 km per Jupiter radius. No mass is measured: Hirano et al. 2023 (2023AJ....165..131H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract) gives only an upper limit of 0.02359764 Jupiter masses, so GM is 0, the records' unpublished value. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.0179694,
+  "semiMajorAxisStellarRadii": 29.63,
+  "inclinationDegrees": 89.32,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58099.57116,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Hirano et al. 2023 (2023AJ....165..131H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL_2023): P 4.0179694 d",
+   "shape": "Hirano et al. 2023 (2023AJ....165..131H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL_2023): a/R* 29.63; Hirano et al. 2023 (2023AJ....165..131H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL_2023): inclination 89.32 degrees",
+   "eccentricity": "No archive row states an eccentricity; the orbit is taken as circular",
+   "phase": "Hirano et al. 2023 (2023AJ....165..131H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL_2023): transit mid-time 2458100.07116 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 3 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

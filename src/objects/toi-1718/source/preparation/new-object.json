@@ -1,0 +1,32 @@
+{
+  "id": "toi-1718",
+  "name": "TOI-1718",
+  "system": "TOI-1718 system",
+  "description": "Star of 5,305 K, 52.3 parsecs away, with 1 transiting planet.",
+  "target": "TOI-1718",
+  "gaia": "885778666260181632",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.939285,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-1718 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5304.91,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-1718 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-1718 b crosses TOI-1718 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 5304.91, st_rad 0.939285"
+  },
+  "notes": [],
+  "order": 4102
+}

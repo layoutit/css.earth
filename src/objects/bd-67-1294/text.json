@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "bd-67-1294",
+  "card": {
+    "text": "BD+67 1294 is a star of 6,043 K, bound to TOI-6034 4,700 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 2270404997834401664 and 2270407952771897472, sep_AU 4699.533541322043675, R_chance_align 3.642720779183174261e-04"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "BD+67 1294 shares its motion through space with TOI-6034, 4,700 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-09-29",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 2270404997834401664 and 2270407952771897472, sep_AU 4699.533541322043675, R_chance_align 3.642720779183174261e-04"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

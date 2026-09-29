@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hd-221416",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5080,
+      "lowerKelvin": 4990,
+      "upperKelvin": 5170,
+      "citation": "Huber et al. 2019, the stellar temperature of the default parameter set of HD 221416 b in the NASA Exoplanet Archive: 5080 +/- 90 K, https://ui.adsabs.harvard.edu/abs/2019AJ....157..245H/abstract"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 221416 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the colour is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

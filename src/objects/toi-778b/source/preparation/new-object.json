@@ -1,0 +1,24 @@
+{
+  "host": "toi-778",
+  "planets": [
+    {
+      "id": "toi-778b",
+      "name": "TOI-778 b",
+      "description": "Transiting planet of TOI-778 with a 4.63-day year, found in 2023.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract",
+        "credit": "Clark et al. 2023"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CLARK_ET_AL__2023"
+      },
+      "text": {
+        "card": "TOI-778 b was found in 2023 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-778. Its orbit and size follow Clark et al. 2023's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CLARK_ET_AL__2023): disc_year 2023, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 4.6336155, pl_radj 1.37, pl_bmassj 2.8"
+      },
+      "order": 4719
+    }
+  ]
+}

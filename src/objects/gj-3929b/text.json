@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-3929b",
+  "card": {
+    "text": "GJ 3929 b was found in 2022 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ac8480",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+        "label": "Beard et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BEARD_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.616235, pl_radj 0.09724345, pl_bmassj 0.00550612"
+      },
+      {
+        "catalogueId": "wikipedia-gj-3929-b",
+        "url": "https://en.wikipedia.org/wiki/GJ_3929_b",
+        "label": "Wikipedia, \"GJ 3929 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374088370",
+        "quote": "GJ 3929 b is a confirmed exoplanet located 52 light-years away orbiting the red dwarf star GJ 3929."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 2 planets known around GJ 3929. Its orbit and size follow Beard et al. 2022's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ac8480",
+        "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract",
+        "label": "Beard et al. 2022",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BEARD_ET_AL_2022): disc_year 2022, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 2.616235, pl_radj 0.09724345, pl_bmassj 0.00550612"
+      },
+      {
+        "catalogueId": "wikipedia-gj-3929-b",
+        "url": "https://en.wikipedia.org/wiki/GJ_3929_b",
+        "label": "Wikipedia, \"GJ 3929 b\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374088370",
+        "quote": "It is an Earth-sized planet, having a radius only 9% larger than that of Earth."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

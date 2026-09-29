@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ad1330",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Beard et al. (2024): The TESS-Keck Survey. XVII. Precise Mass Measurements in a Young, High-multiplicity Transiting Planet System Using Radial Velocities and Transit Timing Variations",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2312.04635"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad1330"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024AJ....167...70B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...70B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad1330",
+      "label": "The Astronomical Journal 167 70"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...70B",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Beard et al. (2024), The Astronomical Journal 167 70",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...70B"
+    }
+  ],
+  "publisher": "The Astronomical Journal 167 70",
+  "creators": [
+    "Corey Beard",
+    "Paul Robertson",
+    "Fei Dai",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

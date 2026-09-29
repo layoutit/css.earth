@@ -1,0 +1,31 @@
+{
+  "host": "lhs-1478",
+  "planets": [
+    {
+      "id": "lhs-1478b",
+      "name": "LHS 1478 b",
+      "description": "Transiting planet of LHS 1478 with a 1.95-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract",
+        "credit": "August et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "AUGUST_ET_AL_2025"
+      },
+      "text": {
+        "card": "LHS 1478 b was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around LHS 1478. Its orbit and size follow August et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname AUGUST_ET_AL_2025): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.94953941, pl_radj 0.10473745, pl_bmassj 0.00714222",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/LHS_1478_b",
+          "title": "LHS 1478 b",
+          "revision": "1374087519",
+          "card": "LHS 1478 b is a super-Earth exoplanet orbiting around LHS 1478, a red dwarf star located 59.4 light-years from Earth in the constellation of Cassiopeia.",
+          "introduction": "It orbits at a distance of 0.018 AU from the star with a inclination of 87° to the plane of the sky."
+        }
+      },
+      "order": 3807
+    }
+  ]
+}

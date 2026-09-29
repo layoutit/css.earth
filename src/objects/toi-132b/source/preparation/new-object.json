@@ -1,0 +1,24 @@
+{
+  "host": "toi-132",
+  "planets": [
+    {
+      "id": "toi-132b",
+      "name": "TOI-132 b",
+      "description": "Transiting planet of TOI-132 with a 2.11-day year, found in 2020.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract",
+        "credit": "Díaz et al. 2020"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "D_IACUTE_AZ_ET_AL__2020"
+      },
+      "text": {
+        "card": "TOI-132 b was found in 2020 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-132. Its orbit and size follow Díaz et al. 2020's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname D_IACUTE_AZ_ET_AL__2020): disc_year 2020, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.1096935, pl_radj 0.30511196, pl_bmassj 0.07047793"
+      },
+      "order": 4011
+    }
+  ]
+}

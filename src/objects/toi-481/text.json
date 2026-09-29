@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-481",
+  "card": {
+    "text": "TOI-481 b crosses TOI-481 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abba3b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract",
+        "label": "Brahm et al. (2020), The Astronomical Journal 160 235",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BRAHM_ET_AL__2020): st_teff 5735, st_rad 1.66, st_mass 1.14"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Brahm et al. 2020.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-abba3b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract",
+        "label": "Brahm et al. (2020), The Astronomical Journal 160 235",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BRAHM_ET_AL__2020): st_teff 5735, st_rad 1.66, st_mass 1.14"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

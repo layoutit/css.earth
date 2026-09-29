@@ -1,0 +1,49 @@
+{
+  "id": "corot-7",
+  "name": "CoRoT-7",
+  "system": "CoRoT-7 system",
+  "description": "Star of 5,275 K, 160 parsecs away, with 1 transiting planet.",
+  "target": "CoRoT-7",
+  "gaia": "3107267177757848576",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 0.83,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of CoRoT-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 0.82,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of CoRoT-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.17
+  },
+  "temperature": {
+    "value": 5275,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of CoRoT-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 75
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "CoRoT-7 b crosses CoRoT-7 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5275, st_rad 0.83, st_mass 0.82",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/CoRoT-7",
+      "title": "CoRoT-7",
+      "revision": "1352673533",
+      "card": "CoRoT-7 is a binary star system made up of a late G-type star and a M-dwarf star that was discovered in 2021.",
+      "introduction": "The primary star has three exoplanets, including CoRoT-7b, a super-Earth exoplanet that is remarkable due to its extremely high temperature and very short orbital period, around 20 hours."
+    }
+  },
+  "notes": [
+    "CoRoT-7 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)",
+    "CoRoT-7 d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity)"
+  ],
+  "order": 3053
+}

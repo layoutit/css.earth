@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-3235",
+  "card": {
+    "text": "TOI-3235 b crosses TOI-3235 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-acbd9a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+        "label": "Hobson et al. (2023), The Astrophysical Journal Letters 946 L4",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HOBSON_ET_AL_2023): st_teff 3388.8, st_rad 0.3697, st_mass 0.3939"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Hobson et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-2041-8213-acbd9a",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract",
+        "label": "Hobson et al. (2023), The Astrophysical Journal Letters 946 L4",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname HOBSON_ET_AL_2023): st_teff 3388.8, st_rad 0.3697, st_mass 0.3939"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

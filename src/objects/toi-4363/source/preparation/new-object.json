@@ -1,0 +1,32 @@
+{
+  "id": "toi-4363",
+  "name": "TOI-4363",
+  "system": "TOI-4363 system",
+  "description": "Star of 4,278 K, 77.8 parsecs away, with 1 transiting planet.",
+  "target": "TOI-4363",
+  "gaia": "5147525146139589632",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract",
+    "credit": "Lafarga et al. 2026"
+  },
+  "radius": {
+    "value": 0.69132,
+    "source": "Lafarga et al. 2026, the stellar radius of the default parameter set of TOI-4363 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 4278.45,
+    "source": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-4363 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-4363 b crosses TOI-4363 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Lafarga et al. 2026.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LAFARGA_ET_AL_2026): st_teff 4278.45, st_rad 0.69132"
+  },
+  "notes": [],
+  "order": 4405
+}

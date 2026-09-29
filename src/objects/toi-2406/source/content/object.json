@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "toi-2406",
+  "displayName": "TOI-2406",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.2 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-ad4115",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H",
+          "label": "Hori et al. (2024), The Astronomical Journal 167 289",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "55.6 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-toi-2406",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "toi-2406-lens-color.webp",
+        "surface": "toi-2406-surface-color@2x.webp",
+        "poles": "toi-2406-poles-color@2x.webp",
+        "source": {
+          "id": "toi-2406-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract"
+        },
+        "falseColor": false,
+        "notes": "The colour of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,100 K and log g 5.04 (u1 0.167, u2 0.501): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hori et al. 2024",
+      "href": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract",
+      "credit": "Hori et al. 2024"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/toi-2406.json",
+      "credit": "Hori et al. 2024, the stellar radius of the default parameter set of TOI-2406 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

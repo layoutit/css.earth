@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-62b",
+  "card": {
+    "text": "WASP-62 b was found in 2012 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.41193868, pl_radj 1.32, pl_bmassj 0.52"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-62",
+        "url": "https://en.wikipedia.org/wiki/WASP-62",
+        "label": "Wikipedia, \"WASP-62\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370791676",
+        "quote": "It is an F-class main-sequence star, orbited by a planet, WASP-62b."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-62. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.41193868, pl_radj 1.32, pl_bmassj 0.52"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-62",
+        "url": "https://en.wikipedia.org/wiki/WASP-62",
+        "label": "Wikipedia, \"WASP-62\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1370791676",
+        "quote": "The age of WASP-62 is much younger than the Sun at 0.8±0.6 billion years, and it has a metal abundance similar to the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

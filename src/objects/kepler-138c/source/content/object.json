@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "kepler-138c",
+  "displayName": "Kepler-138 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-022-01835-4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P",
+          "label": "Piaulet et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "13.8 days",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-022-01835-4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P",
+          "label": "Piaulet et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.3 Earth masses",
+        "source": {
+          "catalogueId": "doi-10-1038-s41550-022-01835-4",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P",
+          "label": "Piaulet et al. 2023",
+          "checked": "2026-09-29",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-138; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "kepler-138c-lens-shape.webp",
+        "surface": "kepler-138c-surface-shape@2x.webp",
+        "poles": "kepler-138c-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-138c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or colour of Kepler-138 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of kepler-138's light, as its colour lens measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kepler-138c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-138c/kepler-138c-system-orbits.svg",
+      "alt": "The orbits of Kepler-138's planets in this map from above, to scale, with Kepler-138 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-138c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P"
+      }
+    },
+    {
+      "id": "kepler-138c-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kepler-138c/kepler-138c-transit.svg",
+      "alt": "Kepler-138 c crossing its star, as TESS recorded it: 3 sectors (80, 81, 82) of the SPOC pipeline's 2-minute light curves of TIC 159376971, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kepler-138c-tess-sector-80",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024170053053-s0080-0000000159376971-0275-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Piaulet et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract",
+      "credit": "Piaulet et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-138c.json",
+      "credit": "Radius from Piaulet et al. 2023 (2023NatAs...7..206P), via the NASA Exoplanet Archive; mass from Piaulet et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023NatAs...7..206P), via the NASA Exoplanet Archive; orbit from Piaulet et al. 2023 (2023NatAs...7..206P), via the NASA Exoplanet Archive"
+    }
+  }
+}

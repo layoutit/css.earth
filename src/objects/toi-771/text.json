@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-771",
+  "card": {
+    "text": "TOI-771 b crosses TOI-771 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202554161",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract",
+        "label": "Lacedelli et al. (2025), Astronomy & Astrophysics 698 A223",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LACEDELLI_ET_AL_2025): st_teff 3370, st_rad 0.232, st_mass 0.22"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Lacedelli et al. 2025.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202554161",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract",
+        "label": "Lacedelli et al. (2025), Astronomy & Astrophysics 698 A223",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname LACEDELLI_ET_AL_2025): st_teff 3370, st_rad 0.232, st_mass 0.22"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

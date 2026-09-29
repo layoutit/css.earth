@@ -1,0 +1,24 @@
+{
+  "host": "hd-35843",
+  "planets": [
+    {
+      "id": "hd-35843c",
+      "name": "HD 35843 c",
+      "description": "Transiting planet of HD 35843 with a 47-day year, found in 2025.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..108H/abstract",
+        "credit": "Hesse et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "HESSE_ET_AL_2025"
+      },
+      "text": {
+        "card": "HD 35843 c was found in 2025 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around HD 35843. Its orbit and size follow Hesse et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HESSE_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 46.9622, pl_radj 0.22660401, pl_bmassj 0.0356167"
+      },
+      "order": 3219
+    }
+  ]
+}

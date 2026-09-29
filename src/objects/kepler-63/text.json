@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-63",
+  "card": {
+    "text": "Kepler-63 b crosses Kepler-63 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-775-1-54",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...775...54S/abstract",
+        "label": "Sanchis-Ojeda et al. (2013), The Astrophysical Journal 775 54",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SANCHIS_OJEDA_ET_AL__2013): st_teff 5576, st_rad 0.901, st_mass 0.984"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-63",
+        "url": "https://en.wikipedia.org/wiki/Kepler-63",
+        "label": "Wikipedia, \"Kepler-63\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374405156",
+        "quote": "Kepler-63 is a G-type main-sequence star about 638 light-years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Sanchis-Ojeda et al. 2013.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-775-1-54",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...775...54S/abstract",
+        "label": "Sanchis-Ojeda et al. (2013), The Astrophysical Journal 775 54",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SANCHIS_OJEDA_ET_AL__2013): st_teff 5576, st_rad 0.901, st_mass 0.984"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-63",
+        "url": "https://en.wikipedia.org/wiki/Kepler-63",
+        "label": "Wikipedia, \"Kepler-63\"",
+        "checked": "2026-09-29",
+        "locator": "Lead section, revision 1374405156",
+        "quote": "The star is much younger than the Sun, at 0.21 billion years."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

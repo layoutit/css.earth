@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-85-a",
+  "card": {
+    "text": "WASP-85 A b crosses WASP-85 A as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-6256-151-6-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract",
+        "label": "Močnik et al. (2016), The Astronomical Journal 151 150",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MO__X10D_NIK_ET_AL__2016): st_teff 6112, st_rad 0.935, st_mass 1.09"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Mo&#x10D;nik et al. 2016.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-0004-6256-151-6-150",
+        "url": "https://ui.adsabs.harvard.edu/abs/2016AJ....151..150M/abstract",
+        "label": "Močnik et al. (2016), The Astronomical Journal 151 150",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table (st_refname MO__X10D_NIK_ET_AL__2016): st_teff 6112, st_rad 0.935, st_mass 1.09"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Colour",
+      "detail": "From its temperature",
+      "summary": "The colour of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

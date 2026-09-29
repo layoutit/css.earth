@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "toi-5800b",
+  "card": {
+    "text": "TOI-5800 b was found in 2025 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555523",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract",
+        "label": "Naponiello et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAPONIELLO_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.6278838, pl_radj 0.21946688, pl_bmassj 0.02989034"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around TOI-5800. Its orbit and size follow Naponiello et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202555523",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract",
+        "label": "Naponiello et al. 2025",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAPONIELLO_ET_AL_2025): disc_year 2025, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 2.6278838, pl_radj 0.21946688, pl_bmassj 0.02989034"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

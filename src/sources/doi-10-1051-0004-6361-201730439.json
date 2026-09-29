@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201730439",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Anderson et al. (2017): The discoveries of WASP-91b, WASP-105b and WASP-107b: Two warm Jupiters and a planet in the transition region between ice giants and gas giants",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1701.03776"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201730439"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017A&A...604A.110A"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...604A.110A",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201730439",
+      "label": "Astronomy & Astrophysics 604 A110"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...604A.110A",
+      "checkedOn": "2026-09-29",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Anderson et al. (2017), Astronomy & Astrophysics 604 A110",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017A&A...604A.110A"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 604 A110",
+  "creators": [
+    "D. R. Anderson",
+    "A. Collier Cameron",
+    "L. Delrez",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}
