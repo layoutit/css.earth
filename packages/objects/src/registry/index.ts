@@ -18,5 +18,7 @@ export { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from './object-sc
 export type { ObjectClassification, ObjectDefinitionInput, ObjectEntry, ObjectPositionM, ObjectWorldFrame } from './object-schema.js';
 export { definePreparedFocus, isSceneObject } from './prepared-focus-object.js';
 export type { NavigableObject, PreparedFocusObject } from './prepared-focus-object.js';
+export { defineOverview, overviewEntry, overviewHolding } from './overview-object.js';
+export type { OverviewDistance, OverviewFrame, OverviewHolding, OverviewObject, OverviewZoom } from './overview-object.js';
 export { validateWorldReflection, validateWorldRotation } from './world-rotation.js';
 export type { WorldRotation } from './world-rotation.js';

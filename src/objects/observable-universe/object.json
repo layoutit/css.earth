@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "observable-universe",
+  "type": "map-sphere",
+  "properties": {
+    "overview": {
+      "name": "Observable Universe",
+      "description": "Everything whose light has had time to reach us: DESI's galaxies and quasars out to 6.6 Gpc, and at its edge the cosmic microwave background, light from 372,000 years after the Big Bang, 14 Gpc away.",
+      "order": 4,
+      "zoom": {
+        "enter": {
+          "distancePc": 1000000000.0
+        },
+        "returnBelow": {
+          "distancePc": 800000000.0
+        },
+        "frame": {
+          "distance": {
+            "distancePc": 52000000000.0
+          }
+        }
+      },
+      "holds": [],
+      "packages": []
+    },
+    "preparation": {
+      "source": "source/cmb/sphere.json"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-mesh@1",
+    "url": "prepared/cmb.json"
+  }
+}

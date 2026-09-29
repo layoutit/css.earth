@@ -1,21 +1,22 @@
 import { objectIdAtPath } from '../root-object.mts';
-import { OVERVIEW_TITLES } from '../overview-titles.mts';
+import { knownObject } from '../object-directory.mts';
+import type { OverviewScope } from '../overview-context.mts';
 import { SOLAR_SYSTEM_ID } from '../object-systems.mts';
 
 /** Every page is `/<id>/`. A page is either a scene (a body, a star) or something the shared world draws around the
  * mounted scene: a catalogue subject (a galaxy, a cluster, a nebula) or an overview (the Milky Way, the Local Group, the
- * nearby universe). The second kind keeps whatever scene is mounted, and a page of it opened cold mounts the world's
- * host. This module owns reading and writing those paths: every writer goes through it. The system overview of a star is
- * the only overview without an id of its own; it is its scene page's `overview=system`. */
+ * nearby and the observable universe). All three are entries of the one registry (`OBJECTS`), told apart by their kind.
+ * The second kind keeps whatever scene is mounted, and a page of it opened cold mounts its host, the world's. This module
+ * owns reading and writing those paths: every writer goes through it. The system overview of a star is the only overview
+ * without an id of its own; it is its scene page's `overview=system`. */
 
 /** The scene a drawn page mounts when it is opened cold: the world's host, the star every catalogue subject and overview
  * is placed from (site/build/prepare/prepare-catalog.mts gives each catalogue subject the same host). */
 export const WORLD_HOST_ID = SOLAR_SYSTEM_ID;
 
-/** The overviews that are pages. */
-export type OverviewPageId = keyof typeof OVERVIEW_TITLES;
-export const OVERVIEW_PAGE_IDS = Object.freeze(Object.keys(OVERVIEW_TITLES) as OverviewPageId[]);
-export const isOverviewPage = (id: string | null | undefined): id is OverviewPageId => typeof id === 'string' && Object.hasOwn(OVERVIEW_TITLES, id);
+/** The overviews that are pages: the registry's overview entries, every level of the zoom ladder above a star's system. */
+export type OverviewPageId = Exclude<OverviewScope, 'system'>;
+export const isOverviewPage = (id: string | null | undefined): id is OverviewPageId => typeof id === 'string' && knownObject(id)?.kind === 'overview';
 
 /** The page a URL names when it is something the mounted scene `sceneId` draws, not the scene itself; null on the
  * scene's own page. The URL is the selection from the moment it is named, before any bank has loaded. */
@@ -31,11 +32,23 @@ export function preparedFocusFromUrl(url: string | URL, sceneId: string) {
 }
 
 /** The page of drawn subject `id` (a catalogue focus or an overview), or of scene `sceneId` when `id` is null. The front
- * page (`/`) already names its scene and keeps its path. A drawn subject's page carries none of the scene's own
- * selections (its `dataset`, `feature`): opened cold it mounts the world's host, which would read them as its own. */
+ * page (`/`) already names its scene and keeps its path. A page's `dataset` and `feature` are its own: moving to another
+ * page drops them, so a drawn subject's page never carries the scene's (opened cold it mounts the world's host, which
+ * would read them as its own), and staying on a page keeps its own (an overview's dataset, page-datasets.mts). */
 function withPage(url: URL, sceneId: string, id: string | null): URL {
-  if (id !== null || objectIdAtPath(url.pathname) !== sceneId) url.pathname = `/${id ?? sceneId}/`;
-  if (id !== null) { url.searchParams.delete('dataset'); url.searchParams.delete('feature'); }
+  const target = id ?? sceneId;
+  if (objectIdAtPath(url.pathname) === target) return url;
+  url.pathname = `/${target}/`;
+  url.searchParams.delete('dataset'); url.searchParams.delete('feature');
+  return url;
+}
+
+/** Selects dataset `lens` of drawn page `page` (an overview's, page-datasets.mts) from any URL: that page, keeping the
+ * camera (`v`); a page reached from elsewhere carries none of the previous page's selections. */
+export function withPageDataset(url: URL, page: string, lens: string): URL {
+  withPage(url, page, page);
+  url.searchParams.delete('overview'); url.searchParams.delete('view');
+  url.searchParams.set('dataset', lens);
   return url;
 }
 
@@ -75,7 +88,8 @@ export function withSatelliteSystemView(url: URL, selected: boolean): URL {
  * scene's own dataset never crosses into it or back. */
 export function withPreparedFocus(url: URL, sceneId: string, id: string | null, lens: string | null): URL {
   const focused = preparedFocusFromUrl(url, sceneId) !== null;
-  withPage(url, sceneId, id);
+  // Clearing a focus leaves an overview's page to withOverviewScope, which keeps it or returns to the scene.
+  if (id !== null || !isOverviewPage(objectIdAtPath(url.pathname))) withPage(url, sceneId, id);
   if (id !== null && lens) url.searchParams.set('dataset', lens);
   else if (id !== null || focused) url.searchParams.delete('dataset');
   if (id) { url.searchParams.delete('overview'); url.searchParams.delete('view'); }

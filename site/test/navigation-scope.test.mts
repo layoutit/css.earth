@@ -47,3 +47,13 @@ test("a drawn subject's page carries none of the scene's own selections, so a co
   assert.deepEqual(readSceneDatasetUrl(at('/milky-way/?dataset=spectral-slope'), 'sun'), { requested: false, id: null });
   assert.equal(withSceneDataset(at('/milky-way/'), 'sun', 'spectral-slope').search, '', 'the scene never writes its dataset there');
 });
+
+test("a drawn page keeps its own dataset while it is the page, and a page reached from elsewhere carries none", async () => {
+  const { withPageDataset } = await import('../navigation/navigation-scope.mts');
+  const path = (url: URL) => url.pathname + url.search;
+  assert.equal(write('/observable-universe/?v=A&dataset=full', 'sun', 'observable-universe'), '/observable-universe/?v=A&dataset=full');
+  assert.equal(write('/observable-universe/?v=A&dataset=full', 'sun', 'nearby-universe'), '/nearby-universe/?v=A');
+  assert.equal(path(withPageDataset(at('/observable-universe/?v=A&dataset=full'), 'observable-universe', 'cutaway')), '/observable-universe/?v=A&dataset=cutaway');
+  assert.equal(path(withPageDataset(at('/sun/?v=A&dataset=colour&feature=3&overview=system&view=satellites'), 'observable-universe', 'full')),
+    '/observable-universe/?v=A&dataset=full');
+});

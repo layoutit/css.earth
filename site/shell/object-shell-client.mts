@@ -1,8 +1,8 @@
 import { createObjectBrowserController } from '../object-browser.mts';
 import { applySeoHead, focusSeo, objectSeo } from '../seo.mts';
 import { knownObject } from '../object-directory.mts';
-import { overviewPage, type OverviewPageId } from '../navigation/navigation-scope.mts';
-import { OVERVIEW_TITLES } from '../overview-titles.mts';
+import { overviewPage } from '../navigation/navigation-scope.mts';
+import { presentPageDatasets } from '../page-datasets.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { createPreparedFocusCard } from '../prepared-focus-card.mts';
 import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from '../focus-fragment.mts';
@@ -111,21 +111,25 @@ export function mountObjectShell({
       if (element && element.getAttribute(attribute) !== route) element.setAttribute(attribute, route);
     }
   }
-  const overviewPageRecord = (id: OverviewPageId | null) => id === null ? null : { id, name: OVERVIEW_TITLES[id].label };
   let presentedSubject: ReturnType<typeof readSelection> | null = null;
   function presentSelection() {
     if (lifetime.disposed) return;
     const subject = readSelection();
+    // A page's datasets follow its address on every publication, a dataset-only change included (page-datasets.mts).
+    presentPageDatasets(documentTarget, windowTarget.location.href, objectId);
     if (presentedSubject === subject) { updateBodyCard(); return; }
     // What the world draws around the scene (a catalogue focus, an overview) is its own page, `/<id>/`.
-    const drawnPage = (selected: typeof subject | null) => selected?.kind === 'focus' ? selected.record
-      : selected?.kind === 'overview' ? overviewPageRecord(overviewPage(objectId, selected.overview.scope)) : null;
+    const drawnPage = (selected: typeof subject | null) => {
+      if (selected?.kind === 'focus') return selected.record ? { id: selected.record.id, seo: focusSeo(selected.record) } : null;
+      const overview = selected?.kind === 'overview' ? knownObject(overviewPage(objectId, selected.overview.scope) ?? '') : undefined;
+      return overview?.kind === 'overview' ? { id: overview.id, seo: objectSeo(overview) } : null;
+    };
     const leftPage = presentedSubject?.kind === 'focus' || drawnPage(presentedSubject) !== null;
     presentedSubject = subject;
     const focus = subject.kind === 'focus' ? subject : null, page = drawnPage(subject);
     // Leaving one returns to the scene's page, whose head and forms a scene change would otherwise write
     // (object-browser.mts bindObject).
-    if (page) presentPage(`/${page.id}/`, focusSeo(page));
+    if (page) presentPage(`/${page.id}/`, page.seo);
     // A focus whose record is still loading is already this page's subject: its head waits for the record.
     else if (leftPage && !focus) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);

@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { onTestFinished, test } from 'vitest';
+import { readOverviews } from './catalog-directory.js';
+
+const zoom = { enter: { distancePc: 1 }, returnBelow: { distancePc: 0.5 }, frame: { distance: { distancePc: 2 } } };
+async function objects(packages: Record<string, unknown>) {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-overviews-'));
+  onTestFinished(() => rm(root, { force: true, recursive: true }));
+  for (const [id, overview] of Object.entries(packages)) {
+    await mkdir(join(root, id), { recursive: true });
+    await writeFile(join(root, id, 'object.json'), JSON.stringify({ schema: 'cssearth-object@1', id, type: 'x', properties: overview === null ? {} : { overview } }));
+  }
+  return root;
+}
+const level = (order: number, classifications: string[], packages: string[] = []) =>
+  ({ name: `Level ${order}`, description: 'A level.', order, zoom, holds: [{ classifications }], packages });
+
+test('reads the overviews the packages author, from the nearest level out, hosted by the world host', async () => {
+  const root = await objects({ outer: level(2, ['galaxy-cluster']), inner: level(1, ['nebula'], ['stars']), stars: null });
+  const overviews = await readOverviews(root, 'sun');
+  assert.deepEqual(overviews.map(overview => [overview.id, overview.sceneHostId]), [['inner', 'sun'], ['outer', 'sun']]);
+});
+
+test('refuses levels that share an order, a classification or draw a missing package, naming them', async () => {
+  await assert.rejects(readOverviews(await objects({ a: level(1, ['nebula']), b: level(1, ['galaxy']) }), 'sun'), /a and b share order 1/);
+  await assert.rejects(readOverviews(await objects({ a: level(1, ['galaxy']), b: level(2, ['galaxy']) }), 'sun'), /a and b both hold galaxy/);
+  await assert.rejects(readOverviews(await objects({ a: level(1, ['nebula'], ['stars']) }), 'sun'), /a draws package stars/);
+});

@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parsePreparedGalaxyCatalog } from '@cssearth/catalog';
+import { catalogueClassification, parsePreparedGalaxyCatalog } from '@cssearth/catalog';
 import { parsePreparedClusterCatalog, isPreparedCluster, isNavigableCatalogObject } from '@cssearth/catalog';
 import { parsePreparedNebulaCatalog, isPreparedNebula } from '@cssearth/catalog';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
@@ -23,7 +23,7 @@ export function prepareSceneDistance(descriptor: unknown) {
 }
 
 export function prepareFocusObject(object: PreparedCatalogObject, sceneHostId: string) {
-  const classification = isPreparedCluster(object) ? 'galaxy-cluster' : isPreparedNebula(object) ? object.kind : 'galaxy';
+  const classification = catalogueClassification(object);
   return definePreparedFocus({ kind: 'prepared-focus', id: object.id, focusId: object.id, name: object.name,
     searchNames: [...new Set([object.id, object.name, ...object.aliases].flatMap(name => {
       const normalized = normalizeDestinationQuery(name);

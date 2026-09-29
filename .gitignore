@@ -339,6 +339,7 @@ src/objects/*/source/**/*.bpc
 # Navigation capability projections rebuilt by prepare:catalog.
 /site/prepared-object-distances.json
 /site/prepared-focus-objects.json
+/site/prepared-overview-objects.json
 
 # Image-layer galaxy sidebar outputs are restored by prepare:sources.
 

@@ -2,6 +2,7 @@ import { isRecord } from '@cssearth/core';
 import { parseNavigationDistance } from './navigation-distance.js';
 import type { NavigationDistance } from './navigation-distance.js';
 import type { ObjectEntry } from './object-schema.js';
+import type { OverviewObject } from './overview-object.js';
 
 export interface PreparedFocusObject {
   readonly kind: 'prepared-focus';
@@ -15,7 +16,8 @@ export interface PreparedFocusObject {
   readonly sceneHostId: string;
   readonly distance: NavigationDistance;
 }
-export type NavigableObject<Scene = unknown, Signal = unknown> = ObjectEntry<Scene, Signal> | PreparedFocusObject;
+/** Every entry of the one registry: a scene, or what a host scene draws without one (a catalogue focus, an overview). */
+export type NavigableObject<Scene = unknown, Signal = unknown> = ObjectEntry<Scene, Signal> | PreparedFocusObject | OverviewObject;
 export const isSceneObject = <Scene, Signal>(object: NavigableObject<Scene, Signal>): object is ObjectEntry<Scene, Signal> => object.kind === 'scene';
 
 /** A focus reuses its host scene and camera; it has no scene loader. */

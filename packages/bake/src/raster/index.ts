@@ -17,3 +17,4 @@ export * from './interior.ts';
 export * from './surfaces.ts';
 export * from './assets.ts';
 export * from './prepared-atmosphere.ts';
+export * from './map-sphere-preview.ts';

@@ -10,6 +10,7 @@ import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { presentFeatureResults, presentOverviewResults, createSearchPresentation } from '../search/search-results-presentation.mts';
 import { objectIdAtPath } from '../root-object.mts';
+import { presentPageDatasets } from '../page-datasets.mts';
 import { drawnPageFromUrl, isOverviewPage, overviewScopeFromUrl, withOverviewScope } from '../navigation/navigation-scope.mts';
 
 /** Modify only the shared shell. Everything outside these boundaries, including
@@ -79,6 +80,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
     presentation.setEmptyHidden(found.objects.total + detailCount + overviewCount > 0);
   }
   createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, WORLD_OBJECTS));
+  presentPageDatasets(document, url, objectId);
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 

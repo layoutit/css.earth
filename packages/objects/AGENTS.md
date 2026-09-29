@@ -13,7 +13,7 @@ An object type describes supported behavior and data, not an individual planet.
 Do not ship per-object configuration, generated payload modules, shell content, or renderer code here.
 Keep one shared object contract; application discovery remains in the existing registry.
 `src/registry/` holds that registry's shared contracts, exported from the main entry: the entry schema and catalogue
-decoding (`defineObjects`, `catalogEntry`), the discovery, distance, arrival and prepared-focus parsers, the classification
+decoding (`defineObjects`, `catalogEntry`), the discovery, distance, arrival, prepared-focus and overview parsers, the classification
 categories, the fact order, the destination-name normalisation preparation and search share, the context colour and
 world-rotation validation. `site/objects.mts` stays the one `OBJECTS` registry: it binds these contracts to the shell's
 scene loader. The registry here never loads a scene, reads a file or lists an object. Preparation reads that same
@@ -21,7 +21,7 @@ registry with `readPreparedObjects` (`src/node/prepared-registry.ts`): the prepa
 contracts, without a scene loader. It is a read of the one registry, never a second list; keep it assembled as
 `site/objects.mts` assembles `OBJECTS`. The catalogue is prepared from the object folders themselves: `readCatalog` and
 `readContextObjects` (`src/node/catalog-directory.ts`) read the descriptors that opt into the catalogue and the context objects
-without an entry; the caller passes the navigation distance in (`prepareSceneDistance` in `@cssearth/bake/navigation`).
+without an entry, and `readOverviews` the levels of the zoom ladder a package authors under `properties.overview` (its zoom thresholds and framing, the classifications it holds, the packages it draws), refusing two levels with one order or one classification; the caller passes the navigation distance in (`prepareSceneDistance` in `@cssearth/bake/navigation`).
 Preparation must remain reproducible from source inputs and provenance outside packages.
 
 ## Shared package contract

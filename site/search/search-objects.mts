@@ -14,6 +14,7 @@ export function objectNavigation<T extends { distance: { meters: number }; class
   });
 }
 
-const navigation = objectNavigation(OBJECTS);
+// Overviews have no distance of their own; search lists them in their own rows (CatalogueOverviewRows.astro).
+const navigation = objectNavigation(OBJECTS.filter(object => object.kind !== 'overview'));
 export const SEARCH_OBJECTS = navigation.search;
 export const PLANET_NAVIGATION_OBJECTS = navigation.planets;

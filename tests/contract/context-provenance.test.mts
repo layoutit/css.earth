@@ -11,7 +11,7 @@ import { sha256 } from '@cssearth/core/node';
 
 test('context provenance binds every declared output and installs one complete inventory', async () => {
   const contexts=await prepareContextProvenance({route:CONTEXT_ROUTE});
-  assert.deepEqual(contexts.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe']);
+  assert.deepEqual(contexts.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe','observable-universe']);
   assert.ok(contexts.every(context=>context.route==='/sun/'));
   for(const context of contexts){
     const inventories=context.outputs.filter(o=>o.path.endsWith('/inventory.json'));
@@ -36,7 +36,7 @@ test('deploy catalogue recovery reads prepared contexts without authoring interm
     assert.doesNotMatch(path, /sun\/prepared\/world-context\.json/u);
     return readFile(path);
   } });
-  assert.deepEqual(contexts.map(context => context.id), ['galaxy-clusters', 'local-group', 'nearby-universe']);
+  assert.deepEqual(contexts.map(context => context.id), ['galaxy-clusters', 'local-group', 'nearby-universe', 'observable-universe']);
   assert.ok(contexts.every(context => context.outputs.length === 0));
   // The application route passed in is what the catalogue links each context to: the Sun's scene.
   assert.ok(contexts.every(context => context.route === '/sun/'));
@@ -60,7 +60,7 @@ test('changed prepared bytes are rejected; an authored source document is read a
 test('offline context recovery is independent of installed generated images and filesystem insertion order', async t => {
   const root=await mkdtemp(join(tmpdir(),'context-offline-'));
   t.after(()=>rm(root,{recursive:true,force:true}));
-  for(const id of ['nearby-universe','local-group','galaxy-clusters']) {
+  for(const id of ['nearby-universe','observable-universe','local-group','galaxy-clusters']) {
     const base=`src/objects/${id}`;
     await mkdir(join(root,base,'prepared'),{recursive:true});
     await cp(`${base}/source`,join(root,base,'source'),{recursive:true});
@@ -73,7 +73,7 @@ test('offline context recovery is independent of installed generated images and 
     join(root,'src/objects/sun/source/navigation/universe.json'),
   );
   const offline=await prepareContextProvenance({route:CONTEXT_ROUTE,root,input:path=>readFile(/^(tools|packages)\//u.test(path)?path:join(root,path))});
-  assert.deepEqual(offline.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe']);
+  assert.deepEqual(offline.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe','observable-universe']);
   const installed=await prepareContextProvenance({route:CONTEXT_ROUTE});
   assert.deepEqual(offline.map(c=>c.provenance),installed.map(c=>c.provenance));
   assert.deepEqual(offline.map(c=>c.outputs.map(o=>o.text)),installed.map(c=>c.outputs.map(o=>o.text)));

@@ -16,7 +16,11 @@ const focus = { kind: 'prepared-focus', id: 'helix', focusId: 'helix', name: 'He
   systemName: 'Milky Way', route: '/helix/', sceneHostId: 'sun',
   distance: { meters: 3.085677581491367e16, value: 1, unit: 'pc', quantity: 'catalogue', referencePoint: 'observer', epochJdTt: null } };
 
-async function checkout(records: { distances?: unknown; discoveries?: unknown; focuses?: unknown } = {}) {
+const overview = { kind: 'overview', id: 'milky-way', name: 'Milky Way', description: 'Our galaxy.', order: 1,
+  zoom: { enter: { fade: 'system', at: 'end' }, returnBelow: { fade: 'system', at: 'middle' }, frame: { distance: { distancePc: 8000 } } },
+  holds: [{ classifications: ['nebula'] }], packages: [], route: '/milky-way/', sceneHostId: 'sun' };
+
+async function checkout(records: { distances?: unknown; discoveries?: unknown; focuses?: unknown; overviews?: unknown } = {}) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-registry-'));
   onTestFinished(() => rm(root, { force: true, recursive: true }));
   for (const [id, order, classification] of [['sun', 0, 'star'], ['mars', 4, 'planet']] as const) {
@@ -25,14 +29,14 @@ async function checkout(records: { distances?: unknown; discoveries?: unknown; f
   }
   await mkdir(join(root, 'site'));
   // The catalogue order is the order prepare:catalog wrote, not the alphabetical one.
-  const written = { distances: { sun: au(0), mars: au(1.5) }, discoveries: { sun: discovery(false), mars: discovery(true) }, focuses: [focus], ...records };
+  const written = { distances: { sun: au(0), mars: au(1.5) }, discoveries: { sun: discovery(false), mars: discovery(true) }, focuses: [focus], overviews: [overview], ...records };
   for (const [name, value] of Object.entries(written)) await writeFile(join(root, PREPARED_CATALOGUE[name as keyof typeof PREPARED_CATALOGUE]), JSON.stringify(value));
   return root;
 }
 
-test('reads the registry in catalogue order, with distances, discoveries and prepared focuses', async () => {
+test('reads the registry in catalogue order, with distances, discoveries, prepared focuses and overviews', async () => {
   const registry = readPreparedObjects(await checkout());
-  assert.deepEqual(registry.objects.map(object => object.id), ['sun', 'mars', 'helix']);
+  assert.deepEqual(registry.objects.map(object => object.id), ['sun', 'mars', 'helix', 'milky-way']);
   assert.deepEqual(registry.sceneObjects.map(object => object.id), ['sun', 'mars']);
   const mars = registry.requireSceneObject('mars');
   assert.equal(mars.distance.value, 1.5);
@@ -42,6 +46,7 @@ test('reads the registry in catalogue order, with distances, discoveries and pre
   assert.ok(!('order' in mars) && !('context' in mars));
   await assert.rejects(mars.loadScene(), /cannot mount a scene/);
   assert.throws(() => registry.requireSceneObject('helix'), /prepared focus/);
+  assert.throws(() => registry.requireSceneObject('milky-way'), /is an overview, not a scene owner/);
   assert.throws(() => registry.requireSceneObject('pluto'), /Unknown/);
 });
 
@@ -57,6 +62,8 @@ test('refuses catalogue records that disagree or a focus without its host', asyn
     [{ distances: { sun: au(0), mars: au(1.5), pluto: au(39) }, discoveries: { sun: discovery(false), mars: discovery(true), pluto: discovery(false) } }, /Cannot find module|ENOENT/],
     [{ focuses: [{ ...focus, sceneHostId: 'mars', route: '/helix/' }, { ...focus, id: 'm1', focusId: 'm1', route: '/m1/', sceneHostId: 'jupiter' }] }, /not a registered scene: m1/],
     [{ focuses: {} }, /focuses/],
+    [{ overviews: [{ ...overview, sceneHostId: 'jupiter' }] }, /Overview host is not a registered scene: milky-way/],
+    [{ overviews: {} }, /overviews/],
   ];
   for (const [records, error] of cases) {
     const root = await checkout(records);
