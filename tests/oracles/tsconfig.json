@@ -9,7 +9,8 @@
     "../../packages/bake/src/objects/raster/fixtures/isis-geotiff-grid.mts",
     "../../packages/bake/src/objects/raster/fixtures/geotiff-image.mts",
     "../../packages/bake/src/objects/raster/fixtures/lunar-mi-quality.mts",
-    "../../packages/bake/src/objects/layers/terrestrial/fixtures/reflectance-mosaics.mts"
+    "../../packages/bake/src/objects/layers/terrestrial/fixtures/reflectance-mosaics.mts",
+    "../../packages/bake/src/objects/layers/observation/fixtures/fits/archive-inputs.mts"
   ],
   "exclude": []
 }

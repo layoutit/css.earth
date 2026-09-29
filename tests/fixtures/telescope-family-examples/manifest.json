@@ -21,7 +21,7 @@
         "assertion": "The owner writes output.product.json and the focused public-path test reopens and verifies every recorded output pin."
       },
       "owner": "packages/telescope-cli/src/artifact-outputs.mts#exportOutput",
-      "independentCheck": "tests/oracles/fits/sky-orientation.json",
+      "independentCheck": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json",
       "limit": "Native image values only; no wavelength coverage, uncertainty array, or achieved angular resolution is claimed."
     },
     {

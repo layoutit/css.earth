@@ -247,7 +247,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "2499f417acb6e42b859f2e702576c4f9aff1d144235136bd5836f5cd51474795"
     },
-    "tests/fixtures/fits/lupton-bands.fits": {
+    "packages/bake/src/objects/color/fixtures/lupton-bands.fits": {
       "bytes": "8640",
       "hdus": "d8b92ea9a8666f01728d28354132b5411b214b779fd0b52539b99d2f24b271f8",
       "image@0": "d6c17503437a10a3dd872ddd1965e17e8728429dc7c6c6e5322f07ab8b982cec",
@@ -257,7 +257,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "c72ca9fe2a83bf0f6879459435940657d19c41229033686108801bdb3641c3ed"
     },
-    "tests/fixtures/fits/rice-int16.fits": {
+    "packages/bake/src/objects/layers/observation/fixtures/rice-int16.fits": {
       "bytes": "8640",
       "hdus": "refused: Unsupported grouped or compressed FITS data.",
       "image@0": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
@@ -267,7 +267,7 @@
       "rice": "fd8e90052b30be4cca18112c9916aed11fc484043dbe307b970748da738ebb62",
       "fileHdus": "refused: Unsupported grouped or compressed FITS data."
     },
-    "tests/fixtures/fits/rice-int32.fits": {
+    "packages/bake/src/objects/layers/observation/fixtures/rice-int32.fits": {
       "bytes": "8640",
       "hdus": "refused: Unsupported grouped or compressed FITS data.",
       "image@0": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
@@ -277,7 +277,7 @@
       "rice": "5cad2435332526743442ee0ee5d0ed5da2c373b407f80bdb4ca8f9b46d364338",
       "fileHdus": "refused: Unsupported grouped or compressed FITS data."
     },
-    "tests/fixtures/fits/rice-uint8.fits": {
+    "packages/bake/src/objects/layers/observation/fixtures/rice-uint8.fits": {
       "bytes": "8640",
       "hdus": "refused: Unsupported grouped or compressed FITS data.",
       "image@0": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
@@ -385,7 +385,7 @@
       "rice": "refused: No tile-compressed FITS image.",
       "fileHdus": "ed631660be6002e1eb60cb934e6524260808fa5c227049da29c0705b6594e8e9"
     },
-    "tests/fixtures/fits/wise-atlas-lmc-centre.fits": {
+    "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-centre.fits": {
       "bytes": "11520",
       "hdus": "ecde284fdd6473f2b4fdd64286ee47a1d07e5184fe6aeead0d8fd068f469778b",
       "image@0": "a6145169eb8eabb92532fab2fc9b9827847ac9de3265f8eea849ad621bf25280",
@@ -397,7 +397,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "680c5d5f816b92ebe89a4bcd92890e260e128728fe9c35d9d0f0416575612a37"
     },
-    "tests/fixtures/fits/wise-atlas-lmc-far-corner.fits": {
+    "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-far-corner.fits": {
       "bytes": "11520",
       "hdus": "d070d1723dc1487792d6fca55dc0171babbf5ff52bebe2364e2c7ba41a7dda58",
       "image@0": "5adffacdf08f944a01e407b582449adfec4e3f08cb0074dd083b0dfe8a032008",
@@ -409,7 +409,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "94d3164acc9811b9f4a6a56d7b4d73d04ca643fd926d8652e78a44f31825f256"
     },
-    "tests/fixtures/fits/wise-atlas-pleiades-tile.fits": {
+    "packages/bake/src/objects/raster/fixtures/wise-atlas-pleiades-tile.fits": {
       "bytes": "11520",
       "hdus": "43d6d8812edb156e39eac5845bd17f852e2d7a200f0a3f1ff84af7210e271491",
       "image@0": "9113573c9473c1108478b10218f03f8653e4abc93a9c1e98aa269bc5d70cadf5",

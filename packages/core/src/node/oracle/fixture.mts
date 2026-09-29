@@ -5,15 +5,40 @@
  * oracle.
  */
 import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { isAbsolute, resolve } from 'node:path';
 import { projectRoot } from '../project-root.ts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../validate.ts';
+
+const relocatedPaths: Readonly<Record<string, string>> = {
+  "tests/oracles/eclipse-map/numerics.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.json",
+  "tests/oracles/eclipse-map/theresa-eigenbasis.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.json",
+  "tests/oracles/fits/binary-table.json": "packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json",
+  "tests/oracles/fits/charon-leisa.json": "packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json",
+  "tests/oracles/fits/core.json": "packages/bake/src/objects/layers/observation/fixtures/fits/core.json",
+  "tests/oracles/fits/encounter.json": "packages/bake/src/objects/layers/terrestrial/missions/encounter.json",
+  "tests/oracles/fits/llorri.json": "packages/bake/src/objects/layers/terrestrial/missions/llorri.json",
+  "tests/oracles/fits/lupton-asinh.json": "packages/bake/src/objects/color/fixtures/lupton-asinh.json",
+  "tests/oracles/fits/pallas.json": "packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json",
+  "tests/oracles/fits/rice.json": "packages/bake/src/objects/layers/observation/fixtures/fits/rice.json",
+  "tests/oracles/fits/sky-orientation.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json",
+  "tests/oracles/fits/sky-projection.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json",
+  "tests/oracles/fits/synoptic.json": "packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json",
+  "tests/oracles/fits/wise-atlas-projection.json": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json",
+  "tests/fixtures/fits/lupton-bands.fits": "packages/bake/src/objects/color/fixtures/lupton-bands.fits",
+  "tests/fixtures/fits/rice-int16.fits": "packages/bake/src/objects/layers/observation/fixtures/rice-int16.fits",
+  "tests/fixtures/fits/rice-int32.fits": "packages/bake/src/objects/layers/observation/fixtures/rice-int32.fits",
+  "tests/fixtures/fits/rice-uint8.fits": "packages/bake/src/objects/layers/observation/fixtures/rice-uint8.fits",
+  "tests/fixtures/fits/wise-atlas-lmc-centre.fits": "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-centre.fits",
+  "tests/fixtures/fits/wise-atlas-lmc-far-corner.fits": "packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-far-corner.fits",
+  "tests/fixtures/fits/wise-atlas-pleiades-tile.fits": "packages/bake/src/objects/raster/fixtures/wise-atlas-pleiades-tile.fits"
+};
+const oraclePath = (path: string) => resolve(ORACLE_ROOT, relocatedPaths[path] ?? path);
 
 export const ORACLE_ROOT = projectRoot(import.meta.url);
 export interface OracleSample { index: number; value: number }
 
 export async function readOracleFixture(name: string) {
-  const fixture = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'tests/oracles', name), 'utf8')));
+  const fixture = requireRecord(JSON.parse(await readFile(oraclePath(isAbsolute(name) ? name : `tests/oracles/${name}`), 'utf8')));
   if (fixture.schema !== 'cssearth-oracle-fixture@1') throw new Error(`${name} is not an oracle fixture.`);
   const inputs = requireArray(fixture.inputs).map(entry => { const e = requireRecord(entry); return { path: requireString(e.path), bytes: requireFiniteNumber(e.bytes) }; });
   // References outside the repository, such as another project's test data, are named by a commit in the URL and their size.
@@ -32,11 +57,11 @@ export async function pinnedOracleVersions() {
 export async function assertPinnedInputs(inputs: readonly { path: string; bytes?: number }[], verifyKernelBank?: (set: string, kernels: readonly string[]) => Promise<unknown>) {
   for (const input of inputs) {
     if (/^tests\/fixtures\/hosted-orbits\/[a-z0-9-]+\/qualification\.json$/u.test(input.path)) {
-      verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+      verifyOracleBytes(input, await readFile(oraclePath(input.path)));
       continue;
     }
     if (/^tests\/fixtures\/sbmt\/[a-z0-9-]+\.(json|tab|sum|info)$/u.test(input.path)) {
-      verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+      verifyOracleBytes(input, await readFile(oraclePath(input.path)));
       continue;
     }
     if (input.path.startsWith('.local/fits-reference/')) {
@@ -44,8 +69,9 @@ export async function assertPinnedInputs(inputs: readonly { path: string; bytes?
       if (!pin || (input.bytes !== undefined && pin.bytes !== input.bytes)) throw new Error(`FITS test archive record changed: ${input.path}`);
       continue;
     }
-    if (/^tests\/fixtures\/fits\/[a-z0-9-]+\.fits$/u.test(input.path)) {
-      verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+    if (/^tests\/fixtures\/fits\/[a-z0-9-]+\.fits$/u.test(input.path) ||
+        (input.path.endsWith('.fits') && Object.values(relocatedPaths).includes(input.path))) {
+      verifyOracleBytes(input, await readFile(oraclePath(input.path)));
       continue;
     }
     const kernel = /^src\/spice\/([a-z][a-z0-9-]*)\/(.+)$/u.exec(input.path);
@@ -53,7 +79,7 @@ export async function assertPinnedInputs(inputs: readonly { path: string; bytes?
       // A shared kernel bank verifies its own pins (packages/bake/cli/kernel-bank.mts).
       if (!verifyKernelBank) throw new Error('Kernel oracle inputs require the caller bank verifier.');
       await verifyKernelBank(kernel[1]!, [kernel[2]!]);
-      verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+      verifyOracleBytes(input, await readFile(oraclePath(input.path)));
       continue;
     }
     const match = /^src\/objects\/([^/]+)\/source\/(.+)$/u.exec(input.path);
@@ -61,7 +87,7 @@ export async function assertPinnedInputs(inputs: readonly { path: string; bytes?
     const manifest = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', match[1], 'source/manifest.json'), 'utf8')));
     const entry = [...requireArray(manifest.inputs), ...requireArray(manifest.documents)].map(e => requireRecord(e)).find(e => e.path === match[2]);
     if (!entry) throw new Error(`Oracle input is not a manifest input or document: ${input.path}`);
-    verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+    verifyOracleBytes(input, await readFile(oraclePath(input.path)));
   }
 }
 
@@ -73,7 +99,7 @@ export function verifyOracleBytes(input: { path: string; bytes?: number }, bytes
 
 export async function readOracleInput(input: { path: string; bytes?: number }, verifyKernelBank?: (set: string, kernels: readonly string[]) => Promise<unknown>) {
   await assertPinnedInputs([input], verifyKernelBank);
-  try { return verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path))); }
+  try { return verifyOracleBytes(input, await readFile(oraclePath(input.path))); }
   catch (error) {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT')
       throw new Error(`Missing FITS oracle input ${input.path}. Run pnpm test:fits --restore.`, { cause: error });
