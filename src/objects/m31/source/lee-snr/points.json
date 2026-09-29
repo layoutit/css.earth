@@ -30,6 +30,19 @@
     }
   },
   "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection."
+  },
   "source": "lee-2014-m31-snr-candidates",
-  "meaning": "Supernova remnant candidates found by Lee & Lee (2014) in the Local Group Galaxies Survey H-alpha and [S II] images: one dot per candidate at its catalogue sky position."
+  "meaning": "Supernova remnant candidates found by Lee & Lee (2014) in the Local Group Galaxies Survey H-alpha and [S II] images: one dot per candidate at its catalogue sky position.",
+  "appearance": {
+    "colorCss": "#9fe8ff",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the supernova-remnant colour of the M33 dots, so the two galaxies read alike."
+  }
 }

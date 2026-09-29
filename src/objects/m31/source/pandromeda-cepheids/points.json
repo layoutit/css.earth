@@ -30,6 +30,19 @@
     }
   },
   "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection."
+  },
   "source": "kodric-2013-m31-cepheids",
-  "meaning": "Cepheids found by Kodric et al. (2013) in the first year of Pan-STARRS1 PAndromeda monitoring, which covers the whole disc: one dot per Cepheid at its catalogue sky position. The periods are kept for a later age cut; none is applied here."
+  "meaning": "Cepheids found by Kodric et al. (2013) in the first year of Pan-STARRS1 PAndromeda monitoring, which covers the whole disc: one dot per Cepheid at its catalogue sky position. The periods are kept for a later age cut; none is applied here.",
+  "appearance": {
+    "colorCss": "#ffe2a8",
+    "radiusPx": 0.75,
+    "opacity": 0.9,
+    "note": "Presentation only: the Milky Way Cepheid layer's colour, size and opacity."
+  }
 }

@@ -10,7 +10,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id: 'test-stars', frame,
 
 test('the prepared catalogues the app draws are valid banks of every selected row with a distance', () => {
   for (const [object, id] of [['milky-way', 'cepheids'], ['milky-way', 'globular-clusters'], ['milky-way', 'hou-han-gmc'], ['milky-way', 'hou-han-hii'],
-    ['milky-way', 'hou-han-masers'], ['milky-way', 'masers'], ['milky-way', 'open-clusters'], ['milky-way', 'dots'], ['nearby-universe', 'dots']]) {
+    ['milky-way', 'hou-han-masers'], ['milky-way', 'masers'], ['milky-way', 'open-clusters'], ['milky-way', 'dots'], ['nearby-universe', 'dots'], ['m31', 'dots']]) {
     const prepared = JSON.parse(readFileSync(new URL(`../../../../src/objects/${object}/prepared/${id}.json`, import.meta.url), 'utf8'));
     const parsed = parseCataloguePoints(prepared);
     expect(parsed.id).toBe(id);

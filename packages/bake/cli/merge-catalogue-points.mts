@@ -2,7 +2,7 @@
  * Merge prepared catalogue point banks into one bank of dots, drawn by the app like its other stars: projected every
  * frame, sharp at any zoom. `source/<id>/merge.json` lists the banks; each keeps its catalogue colour, and its opacity
  * darkens that colour, so every dot is opaque and only its colour carries its tone. An entry may be `{ bank, withinPcOfCentre, keepEvery, basis }`: only points within that
- * distance of the galaxy's centre (its volume frame origin), and one in `keepEvery` of those in catalogue order.
+ * distance of the galaxy's centre (its volume or image-layer frame origin), and one in `keepEvery` of those in catalogue order.
  * A kinematic distance whose uncertainty (prepare-catalogue-points.mts `kinematicUncertainty`) exceeds `maxKinematicSigmaKpc` is left
  * out: those are the sources the rotation curve cannot place, and they pile onto a circle through the Sun and the
  * centre. `colourTowardWhite` mixes each colour that fraction of the way to white first (presentation: the catalogue
@@ -85,7 +85,13 @@ const toned = (colour: string, tone: number) => tone === 1 ? colour
   : '#' + [1, 3, 5].map(i => Math.round(parseInt(colour.slice(i, i + 2), 16) * tone).toString(16).padStart(2, '0')).join('');
 // The galaxy's centre: its volume frame origin, read only by the rules that need it.
 const needsCentre = cap?.mode === 'disc' || entries.some(value => value.withinPcOfCentre !== undefined);
-const galaxyFrame = needsCentre ? parseDensityVolumeFrame((JSON.parse(await readFile(resolve(prepared, 'volume.json'), 'utf8')) as { data?: { frame?: unknown } }).data?.frame) : null;
+// A density-volume galaxy (prepared/volume.json) or one drawn as image layers (prepared/image-layers.json).
+const galaxyFrameValue = async () => {
+  const volume = await readFile(resolve(prepared, 'volume.json'), 'utf8').catch(() => null);
+  return volume === null ? (JSON.parse(await readFile(resolve(prepared, 'image-layers.json'), 'utf8')) as { frame?: unknown }).frame
+    : (JSON.parse(volume) as { data?: { frame?: unknown } }).data?.frame;
+};
+const galaxyFrame = needsCentre ? parseDensityVolumeFrame(await galaxyFrameValue()) : null;
 const centreKpc = galaxyFrame ? galaxyFrame.originM.map(value => value / KPC_M) : null;
 const hex = (value: unknown): value is string => typeof value === 'string' && /^#[0-9a-f]{6}$/iu.test(value);
 

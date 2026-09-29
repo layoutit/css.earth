@@ -3,3 +3,4 @@
 export * from './config.ts';
 export * from './resize-rgba.ts';
 export * from './prepare.ts';
+export { imageLayerDisc, imageLayerDiscDistanceKpc } from './disc.ts';

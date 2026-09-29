@@ -19,6 +19,12 @@ import { STELLAR_EXTENTS } from './stellar-extents.mts';
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
 const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
 const ASTRONOMICAL_UNIT_M = 149_597_870_700;
+// Published catalogues placed on a galaxy's disc plane, drawn over its image layers (src/objects/m31/README.md,
+// src/objects/m33/README.md).
+const IMAGE_LAYER_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
+  m31: ['dots'],
+  m33: ['lggs-stars', 'hodge-hii', 'pellerin-cepheids', 'sarajedini-clusters', 'ciardullo-pne', 'long-snr'],
+};
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -73,7 +79,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       if (!imageLayerIds.has(id)) throw new TypeError(`Unknown prepared image-layer bank: ${id}.`);
       const set = resourceSet(id);
       return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
-        resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
+        resolveResource: (path: string) => set.resolve(`prepared/${path}`),
+        cataloguePointUrls: (IMAGE_LAYER_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.json`)) };
     });
     const plainDots = new Set(plainDotIds);
     const sprites = preparedBodyBillboards([applicationContext.focus, ...applicationContext.bodies], plainDots,

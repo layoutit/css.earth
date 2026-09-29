@@ -22,6 +22,19 @@
     }
   },
   "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection."
+  },
   "source": "azimlu-2011-m31-hii-regions",
-  "meaning": "HII regions of M31 found by Azimlu et al. (2011) in the Local Group Galaxies Survey H-alpha images, which cover the whole disc: one dot per region at its catalogue sky position. The catalogue gives no distance along the line of sight; every region lies in M31's disc."
+  "meaning": "HII regions of M31 found by Azimlu et al. (2011) in the Local Group Galaxies Survey H-alpha images, which cover the whole disc: one dot per region at its catalogue sky position. The catalogue gives no distance along the line of sight; every region lies in M31's disc.",
+  "appearance": {
+    "colorCss": "#ff7a9c",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way HII layer's pink (hou-han-hii), so the same kind of object reads alike in both galaxies."
+  }
 }

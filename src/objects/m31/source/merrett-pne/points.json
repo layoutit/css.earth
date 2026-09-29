@@ -55,24 +55,37 @@
   },
   "filters": [
     {
-      "column": "note",
-      "keepEmpty": true,
-      "empty": [
-        "",
-        "-"
+      "column": [
+        43,
+        47
       ],
-      "reason": "Note E or R marks a probable HII region or background galaxy, and 'other' an object excluded as a planetary nebula by its flux (ReadMe note 1)."
+      "op": "==",
+      "value": "-",
+      "basis": "Note E or R marks a probable HII region or background galaxy, and 'other' an object excluded as a planetary nebula by its flux (ReadMe note 1)."
     },
     {
-      "column": "host",
-      "keepEmpty": true,
-      "empty": [
-        "",
-        "-"
+      "column": [
+        49,
+        58
       ],
-      "reason": "A host marks an object of M32, NGC 205, Andromeda IV, the Northern Spur, a possible Southern Stream extension or a background source (ReadMe note 2)."
+      "op": "==",
+      "value": "-",
+      "basis": "A host marks an object of M32, NGC 205, Andromeda IV, the Northern Spur, a possible Southern Stream extension or a background source (ReadMe note 2)."
     }
   ],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection."
+  },
   "source": "merrett-2006-m31-planetary-nebulae",
-  "meaning": "Planetary nebulae of M31 from the Planetary Nebula Spectrograph survey of Merrett et al. (2006): one dot per nebula at its catalogue sky position. Of 3,300 emission-line objects, 2,574 remain once the authors' own flags for HII regions, background objects and other galaxies are applied. The planetary nebulae trace M31's old stars, bulge and disc alike."
+  "meaning": "Planetary nebulae of M31 from the Planetary Nebula Spectrograph survey of Merrett et al. (2006): one dot per nebula at its catalogue sky position. Of 3,300 emission-line objects, 2,574 remain once the authors' own flags for HII regions, background objects and other galaxies are applied. The planetary nebulae trace M31's old stars, bulge and disc alike.",
+  "appearance": {
+    "colorCss": "#9dffcf",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the planetary-nebula colour of the M33 dots, so the two galaxies read alike."
+  }
 }

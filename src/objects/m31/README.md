@@ -15,9 +15,23 @@ A publisher optical image supplies the color of an authored 1 kpc depth envelope
 | [Merrett et al. (2006)](https://doi.org/10.1111/j.1365-2966.2006.10268.x) | [Planetary nebulae](source/merrett-pne/points.json): 2,574 of 3,300 emission-line objects, after the authors' own flags for HII regions, background objects and other galaxies (CDS J/MNRAS/369/120). |
 | [Johnson et al. (2015)](https://doi.org/10.1088/0004-637X/802/2/127) | [Star clusters](source/phat-clusters/points.json): 2,753 clusters from the PHAT Hubble imaging, which covers only the north-east third of the disc (CDS J/ApJ/802/127). |
 
-The five catalogues give sky positions only. They are recorded for a future layer of catalogue dots over the image, in the Milky Way's style; nothing reads them yet.
+The catalogues give sky positions only, so each object is placed where its sight line crosses the midplane of the disc the image layers are baked on. `packages/bake/cli/prepare-catalogue-points.mts` uses the image-layer bake's own intersection for this (`frame.placement: image-layer-disc`, [`disc.ts`](../../../packages/bake/src/image-layers/disc.ts)), so every dot lies on the photograph's midplane. [`merge-catalogue-points.mts`](../../../packages/bake/cli/merge-catalogue-points.mts) then joins four of them into the [dots](source/dots/merge.json) the app draws over the image layers:
 
-The [disc geometry](source/disc-geometry.json) that will place them on M31's disc is inclination 77.7° and position angle 38°, the [Corbelli et al. (2010)](https://doi.org/10.1051/0004-6361/200913297) H I fit between 10 and 25 kpc, around SIMBAD's M31 centre. Three published measurements are recorded beside it:
+| Catalogue | Dots | Left out |
+| --- | --- | --- |
+| HII regions (Azimlu et al. 2011) | 3,961 | none |
+| Cepheids (Kodric et al. 2013) | 1,993 | 16 beyond the photograph |
+| Supernova remnant candidates (Lee & Lee 2014) | 156 | none |
+| Planetary nebulae (Merrett et al. 2006) | 2,475 | 99 beyond the photograph, 726 flagged by the authors |
+
+- **Where the dots stop:** only inside the image layers' 35 kpc support radius, so every dot sits on the photograph. Planetary nebulae also trace the bulge and halo. One far along the minor axis lands at a large disc radius, up to 126 kpc, when put on the disc; those are the ones this drops.
+- **Colours:** each catalogue takes the Milky Way colour for its kind of object (supernova remnants and planetary nebulae take the M33 dots' colours), mixed halfway to white and raised to the power 1.6 as the Milky Way's dots are. These are presentation choices.
+- **PHAT clusters are not drawn:** the survey covers only the north-east third of the disc, so its 2,753 clusters would crowd that third and leave the rest as it is. The bank is prepared but left out of the dots.
+- **Checks:** the HII regions peak at 10–12 kpc from the centre, M31's star-forming ring. `tests/image-layers/disc.test.mts` pins the placement against the disc's own geometry.
+
+The dots use the image layers' inclination (77.5°) and line of nodes (37.7°), so that they sit on the photograph.
+
+The published [disc geometry](source/disc-geometry.json) is inclination 77.7° and position angle 38°, the [Corbelli et al. (2010)](https://doi.org/10.1051/0004-6361/200913297) H I fit between 10 and 25 kpc, around SIMBAD's M31 centre. Three published measurements are recorded beside it:
 
 - [Dalcanton et al. (2023)](https://doi.org/10.3847/1538-3881/accc83) measure 77° ± 0.5° from the stars themselves, within 0.7° of it.
 - [Chemin et al. (2009)](https://doi.org/10.1088/0004-637X/705/2/1395) agree on the position angle (37.7° ± 0.9°) but find 74.3° ± 1.1° for the inclination.

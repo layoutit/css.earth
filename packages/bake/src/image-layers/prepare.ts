@@ -6,6 +6,7 @@ import sharp from 'sharp';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';
 import type { ImageLayerRecipe, LayerAxis, Vec3 } from './config.ts';
 import { resizeRgbaLanczos3 } from './resize-rgba.ts';
+import { imageLayerDisc, norm, rad, unit } from './disc.ts';
 import { compileVolumeLeaf } from '../volume-leaves/index.ts';
 
 type Quad = { id: string; axis: LayerAxis; offsetKpc: number; centerUnits: Vec3; doubleSided: true; texturePath: string; widthPx: number; heightPx: number;
@@ -20,12 +21,6 @@ export interface PreparedImageLayerBank {
   provenance: unknown; approximation: { model: string; canonicalRecomposition: string; limitations: string[] };
 }
 const M_PER_PC = 3.0856775814913673e16, M_PER_KPC = M_PER_PC * 1000;
-const rad = (n: number): number => n * Math.PI / 180;
-const unit = (raDeg: number, decDeg: number): Vec3 => {
-  const ra = rad(raDeg), dec = rad(decDeg), c = Math.cos(dec); return [c * Math.cos(ra), c * Math.sin(ra), Math.sin(dec)];
-};
-
-const norm = (a: Vec3): Vec3 => { const n = Math.hypot(...a); return [a[0] / n, a[1] / n, a[2] / n]; };
 const scale = (a: Vec3, n: number): Vec3 => [a[0] * n, a[1] * n, a[2] * n];
 const add = (...v: Vec3[]): Vec3 => v.reduce<Vec3>((a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]], [0, 0, 0]);
 function quaternionFromBasis(x: Vec3, y: Vec3, z: Vec3): [number, number, number, number] {
@@ -56,10 +51,9 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   const base=Buffer.alloc(info.width*info.height*4), floor=recipe.bake.backgroundFloor*255;
   for(let p=0;p<info.width*info.height;p++) { const i=p*3,o=p*4,r=Math.max(0,rgb[i]-floor),g=Math.max(0,rgb[i+1]-floor),b=Math.max(0,rgb[i+2]-floor),a=Math.max(r,g,b);
     base[o]=a?Math.round(r*255/a):0;base[o+1]=a?Math.round(g*255/a):0;base[o+2]=a?Math.round(b*255/a):0;base[o+3]=Math.round(a*255/(255-floor)); }
-  const inclination=rad(recipe.geometry.inclinationDeg), pa=rad(recipe.geometry.lineOfNodesPaDeg), theta=rad(recipe.observation.northClockwiseDeg);
-  const target=unit(recipe.target.centerRaDeg,recipe.target.centerDecDeg), north=norm([-Math.cos(rad(recipe.target.centerRaDeg))*Math.sin(rad(recipe.target.centerDecDeg)),-Math.sin(rad(recipe.target.centerRaDeg))*Math.sin(rad(recipe.target.centerDecDeg)),Math.cos(rad(recipe.target.centerDecDeg))]);
-  const east=norm(cross(north,target)), origin=scale(target,recipe.target.distancePc*M_PER_PC), q=quaternionFromBasis(east,north,target);
-  const diskNormal:Vec3=[Math.sin(inclination)*Math.cos(pa),-Math.sin(inclination)*Math.sin(pa),Math.cos(inclination)];
+  const pa=rad(recipe.geometry.lineOfNodesPaDeg), theta=rad(recipe.observation.northClockwiseDeg);
+  const { target, north, east, diskNormal }=imageLayerDisc(recipe);
+  const origin=scale(target,recipe.target.distancePc*M_PER_PC), q=quaternionFromBasis(east,north,target);
   const obs=unit(recipe.observation.centerRaDeg,recipe.observation.centerDecDeg),obsNorth=norm([-Math.cos(rad(recipe.observation.centerRaDeg))*Math.sin(rad(recipe.observation.centerDecDeg)),-Math.sin(rad(recipe.observation.centerRaDeg))*Math.sin(rad(recipe.observation.centerDecDeg)),Math.cos(rad(recipe.observation.centerDecDeg))]);
   const obsEast=norm(cross(obsNorth,obs)),imageRight=add(scale(obsNorth,Math.sin(theta)),scale(obsEast,-Math.cos(theta))),imageUp=add(scale(obsNorth,Math.cos(theta)),scale(obsEast,Math.sin(theta)));
   const tanX=Math.tan(rad(recipe.observation.fieldOfViewDeg[0])/2),tanY=Math.tan(rad(recipe.observation.fieldOfViewDeg[1])/2),distanceKpc=recipe.target.distancePc/1000;

@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "meaning": "M31's catalogued objects as dots on its photograph's disc: HII regions, Cepheids, supernova remnants and planetary nebulae from whole-disc surveys, each where its sight line crosses the disc midplane.",
+  "banks": [
+    { "bank": "azimlu-hii", "withinPcOfCentre": 35000, "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 35 kpc support radius (recipe.json)." },
+    { "bank": "pandromeda-cepheids", "withinPcOfCentre": 35000, "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 35 kpc support radius (recipe.json)." },
+    { "bank": "lee-snr", "withinPcOfCentre": 35000, "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 35 kpc support radius (recipe.json)." },
+    { "bank": "merrett-pne", "withinPcOfCentre": 35000, "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 35 kpc support radius (recipe.json). Planetary nebulae also trace the bulge and halo; one far along the minor axis lands at a large disc radius when placed on the disc, and those are the ones this leaves out." }
+  ],
+  "colourTowardWhite": 0.5,
+  "colourTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colourGamma": 1.6,
+  "colourGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

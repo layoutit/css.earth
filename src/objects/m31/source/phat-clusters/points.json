@@ -26,6 +26,19 @@
     }
   },
   "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M31's image layers are baked on (recipe.json), through the image-layer bake's own intersection."
+  },
   "source": "johnson-2015-phat-clusters",
-  "meaning": "Star clusters found by Andromeda Project volunteers in the PHAT Hubble imaging, as catalogued by Johnson et al. (2015): one dot per cluster at its catalogue sky position. PHAT covers only the north-east third of the disc, so this layer is complete there and empty elsewhere."
+  "meaning": "Star clusters found by Andromeda Project volunteers in the PHAT Hubble imaging, as catalogued by Johnson et al. (2015): one dot per cluster at its catalogue sky position. PHAT covers only the north-east third of the disc, so this layer is complete there and empty elsewhere.",
+  "appearance": {
+    "colorCss": "#9fd4ff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way open-cluster layer's blue-white, size and opacity."
+  }
 }
