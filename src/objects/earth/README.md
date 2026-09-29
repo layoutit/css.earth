@@ -418,7 +418,7 @@ Muted core colors distinguish those schematic layers from the modeled mantle.
 
 The checked-in 520,307-byte numeric subset contains depth means, both cut planes, and the outer
 mantle shell slice. `interior/tomography.json` records the original 343,763,392-byte NetCDF's
-URL and SHA-256. Catalog and metadata snapshots retain the provider's revision, variable
+URL and byte count. Catalog and metadata snapshots retain the provider's revision, variable
 definitions and citations.
 
 Normal preparation uses this pinned subset, and does not need Python or the complete volume.
@@ -469,7 +469,7 @@ python packages/bake/src/objects/layers/paged-ellipsoid/extract-tomography.py \
 node site/build/prepare/prepare-authored.ts earth --write
 ```
 
-The extractor verifies the upstream SHA-256 and source axes before reading the volume. The
+The extractor verifies the upstream byte count and source axes before reading the volume. The
 checked subset allows deterministic offline JS texture preparation. The numeric tests compare
 six independently decoded NetCDF anchors, including both hemispheres and both meridians, and
 verify registration against the prepared geographic frame.

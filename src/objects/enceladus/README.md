@@ -96,7 +96,7 @@ were inspected, not claimed byte-identical. The unchanged arrival image is retai
 
 All 56 runtime assets were published and
 [freshly restored](evidence/infrared-mosaic/restoration.json) from R2 with the
-standard installer's byte-count and SHA-256 checks: 32,151,471 bytes for the
+standard installer's byte-count checks: 32,151,471 bytes for the
 whole Enceladus package. The final browser captures use those restored files.
 Each cold browser case fetched the same 1,928,874-byte infrared surface texture;
 this is the texture body size, not the full page transfer. No full-site build

@@ -175,7 +175,7 @@ Ganymede is Jupiter's largest moon. This standalone package uses the common obje
 
 ## Sources and coordinates
 
-The pinned inputs are recorded in `source/manifest.json`. Runtime installation requires prepared assets, not these source TIFFs. Source byte counts and SHA-256 identities are recorded in the manifest.
+The pinned inputs are recorded in `source/manifest.json`. Runtime installation requires prepared assets, not these source TIFFs. Source byte counts are recorded in the manifest.
 
 - The source observations have varying resolution, approximately 400 m–20 km/pixel. Coarse observed imagery is not replaced with invented high-resolution detail.
 

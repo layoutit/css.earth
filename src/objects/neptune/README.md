@@ -144,7 +144,7 @@ Checked on 27 September 2026; subsequent changes add documentation and retained 
 
 [Source inspection](evidence/opal-source-inspection.json) retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. It also retains the two examined but deferred early releases. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
 
-The three packages restored 479 files (160.17 MB) into an empty directory, with every byte count and SHA-256 matching its inventory. This body adds 2.90 MB including metadata. The existing public textures match the base revision byte for byte; their default arrival previews remain unchanged. The source-cache upload contains all 116 new RGB/FITS inputs. These totals describe whole packages, not one page’s initial download.
+The three packages restored 479 files (160.17 MB) into an empty directory, with every file matching its inventory entry. This body adds 2.90 MB including metadata. The existing public textures match the base revision byte for byte; their default arrival previews remain unchanged. The source-cache upload contains all 116 new RGB/FITS inputs. These totals describe whole packages, not one page’s initial download.
 
 ![Dated OPAL map with the shared sequence controls](evidence/opal-dates-desktop.webp)
 

@@ -4,7 +4,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 ## Sources
 
-2008 EV5 is a small near-Earth asteroid with a radar-derived equatorial ridge interrupted by a large concavity. The [original NASA/JPL mesh](https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj) and [study](https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf) are pinned by byte count and SHA-256.
+2008 EV5 is a small near-Earth asteroid with a radar-derived equatorial ridge interrupted by a large concavity. The [original NASA/JPL mesh](https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj) and [study](https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf) are pinned by byte count.
 
 Shape uses the normal missing-imagery grid on the original source geometry. No regolith texture, optical reflectance or artificial crater imagery is supplied. Shadows default off; prepared directional lighting is available through the common setting.
 

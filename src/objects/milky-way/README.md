@@ -104,7 +104,7 @@ pnpm build:tools
 pnpm prepare:volume src/objects/milky-way --acquire-source .local/volume-source-cache
 ```
 
-This reacquires both original sources and needs about 1.3 GiB temporary space. The pinned HTTPS source, raw SHA256,
+This reacquires both original sources and needs about 1.3 GiB temporary space. The pinned HTTPS source,
 X-fastest RGBA order, factor-one lossless import and Zstd level are
 recorded in `source/acquisition.json`; the exact Node/Zstd versions are in
 `source/provenance.json`. The import rejects any raw or derivative mismatch.
@@ -163,7 +163,7 @@ celestial map](https://svs.gsfc.nasa.gov/4851/). Its linear RGB HALF source is
 north is at the top. The full HDR source is preserved bit for bit in two
 Zstd row chunks, 117.15 MiB total; neither Git blob exceeds 100 MiB. The
 original 130.95 MiB EXR stays in the acquisition cache. Source acquisition,
-original and decoded SHA256, exact Node/Zstd versions, NASA/Gaia credits and
+original and decoded byte counts, exact Node/Zstd versions, NASA/Gaia credits and
 usage notice live together under `source/sky/`.
 
 Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**,

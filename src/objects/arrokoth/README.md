@@ -26,7 +26,7 @@ units. This fixes screen encoding; it does not reconstruct natural color.
 
 ## Evidence
 
-The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count and SHA-256. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
 [Displayed surface](evidence/color-encoding/color-dpr1.png) · [DPR 2](evidence/color-encoding/color-dpr2.png) · [Shadows](evidence/color-encoding/oblique-shadows-dpr1.png) · [Mobile](evidence/color-encoding/mobile.png). The native MVIC label and independent Astropy sample/camera checks still apply: the cube, camera and shape are unchanged; the final display encoding changed.
 
@@ -48,7 +48,7 @@ package and preparation code to the inspected views. LORRI and MVIC switch
 successfully at DPR 1 and 2; each retains 1,000 triangles with Shadows and Orbit
 off. The reverse view shows the unmapped grid. The 390 px mobile view switches
 datasets without horizontal overflow. A fresh remote install verifies all 41
-runtime files, totaling 10.45 MB, against their size and SHA-256 pins.
+runtime files, totaling 10.45 MB, against their inventory entries.
 
 Clean checks: native readers and color sampling, source/UV tests, source and
 runtime closure, preparation and affected-test TypeScript, JavaScript ownership,

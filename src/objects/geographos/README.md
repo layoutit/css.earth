@@ -4,7 +4,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 ## Sources
 
-Geographos is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical light curves. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj) is attributed to Hudson and Ostro (1999), Icarus 140, 369–378; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts and SHA-256 hashes.
+Geographos is an elongated near-Earth asteroid reconstructed from Goldstone radar and optical light curves. The selected [NASA/JPL OBJ](https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj) is attributed to Hudson and Ostro (1999), Icarus 140, 369–378; Goldstone and NASA/JPL radar astronomy. The original mesh and paper are pinned with byte counts.
 
 Shape uses the shared missing-imagery grid. It shows modeled geometry under prepared lighting, without optical reflectance, generic regolith, invented craters or composition.
 
