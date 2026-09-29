@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { checkGaiaCepheidModel, gaiaCepheidQuery, gaiaMagnitude, GAIA_TIME_OFFSET_JD, linearToSrgb, parseGaiaCepheidRow, pulsationTrack, PULSATION_SECONDS_PER_DAY } from '@cssearth/bake/photometry';
 

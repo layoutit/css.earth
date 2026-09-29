@@ -1,6 +1,6 @@
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { createObjectControlBinding } from '@cssearth/renderer/testing';

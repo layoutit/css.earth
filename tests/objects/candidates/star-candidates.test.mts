@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { aboutStar, candidateVerdict, readmeImageLines, readmeInterferometric, summariseOidb } from '@cssearth/bake/objects/candidates';
 import { fetchRetrying } from '@cssearth/bake/objects/candidates';
 const test = sourceTest();

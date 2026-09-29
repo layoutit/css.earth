@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { diskGain, diskValue, assertDiskModel, NORMAL_GEOMETRY, type DiskModel, phaseGain } from '@cssearth/bake/photometry';
 

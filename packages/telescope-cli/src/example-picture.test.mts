@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, stat } from 'node:fs/promises';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import sharp from 'sharp';
 import { binEventCounts, colourOf, displayOrder, examplePixels, northAndEastOnScreen, parseExampleRecipe, parseExampleRecipes, renderExamplePicture, stretchSample } from './example-picture.mts';

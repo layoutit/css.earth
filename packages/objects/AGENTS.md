@@ -9,6 +9,7 @@ inventory (`src/node/`, the Node-only `@cssearth/objects/node` entry); the main,
 import `node/`.
 `src/node/contract/` is the Node-only `@cssearth/objects/node/contract` entry: the helpers tests use to check an object
 against its contract (its final prepared definition, and fixture values required before a test inspects them).
+`src/node/source-test.ts` is the Node-only `@cssearth/objects/node/source-test` entry for tests that need restored object sources.
 An object type describes supported behavior and data, not an individual planet.
 Do not ship per-object configuration, generated payload modules, shell content, or renderer code here.
 Keep one shared object contract; application discovery remains in the existing registry.

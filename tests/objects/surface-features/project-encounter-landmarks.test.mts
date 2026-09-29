@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { commitEncounterLandmarkOutputs, evaluateEncounterAnchor, transformImageControlStages } from '@cssearth/bake/objects/surface-features';
 import { fitImageControls } from '@cssearth/bake/objects/surface-features';

@@ -2,7 +2,7 @@
  * product's units are read, and what the measured summaries measure. Nothing here asks MAST anything: the FITS units are
  * written by hand into a scratch directory, and the qualified programs are read from this repository. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

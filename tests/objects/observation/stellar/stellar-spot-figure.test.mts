@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { sourceLoad, sourceTest } from '../../source-test.mts';
+import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
 import { srgbToLinear } from '@cssearth/bake/objects/color';
 import { addSpotFigureToLimbPlate, limbDarkeningPlate, parseSpotFigureModel } from '@cssearth/bake/objects/stellar';
 

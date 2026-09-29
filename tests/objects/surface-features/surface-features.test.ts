@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseDbf } from '@cssearth/bake/objects/surface-features';
 import { budgetTracePaths, nodeIndex as nodeIndexForTest, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, selectTraces } from '@cssearth/bake/objects/surface-features';
 import { extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection } from '@cssearth/bake/objects/surface-features';

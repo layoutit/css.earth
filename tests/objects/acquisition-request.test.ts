@@ -1,4 +1,4 @@
-import { sourceTest } from './source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';

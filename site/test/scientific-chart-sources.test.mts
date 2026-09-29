@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { parseHTML } from "linkedom";
 import { requireRecord } from "@cssearth/core";
 import { validateScientificChartsContext } from "@cssearth/bake/site-assets";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
 const PLANET_IDS = Object.freeze([

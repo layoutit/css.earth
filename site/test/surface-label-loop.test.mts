@@ -1,7 +1,7 @@
 import { physicalProjectionFromCamera } from '@cssearth/renderer/prepared-data/physical-projection.ts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import { mountSurfaceFeatureLabels } from '@cssearth/renderer';

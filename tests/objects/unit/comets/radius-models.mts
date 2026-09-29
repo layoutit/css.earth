@@ -1,7 +1,7 @@
 import {SHAPE_MATERIAL, ellipsoidParameterMesh} from '@cssearth/bake/objects/layers/terrestrial';
 import {preparedModelTerrain, modelConfig, modelSurfaces, modelSettings} from './model-fixture.mts';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';

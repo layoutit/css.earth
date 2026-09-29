@@ -3,7 +3,7 @@
  * inputs give. Without this the eight numbers per frame are hand-copied constants and the derivation is code the
  * build never runs. The disc centre is part of the derivation, so it is checked too: nothing in the recipe is fitted.
  */
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
 import { readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';

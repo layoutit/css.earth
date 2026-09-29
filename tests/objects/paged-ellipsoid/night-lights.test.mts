@@ -1,4 +1,4 @@
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { accumulateRadianceRow, finishRadianceGrid, nightLightColor, validateNightLightGrid } from '@cssearth/bake/objects/layers/paged-ellipsoid';

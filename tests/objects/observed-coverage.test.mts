@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from './source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import {polarZeroCoverage,resizeObservedRgb,prepareMeasuredPolarAtlas} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {measureScalarCoverage,finitePercentiles} from '@cssearth/bake/objects/layers/observed-surfaces';

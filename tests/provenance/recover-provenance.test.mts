@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import type { PreparedOutput } from '@cssearth/bake/delivery';
 import { recoverObjectProvenance } from '@cssearth/bake/objects/provenance';
 const test = sourceTest();

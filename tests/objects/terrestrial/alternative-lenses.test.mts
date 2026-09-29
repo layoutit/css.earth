@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { alternativeForLens, alternativeLensIds, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 

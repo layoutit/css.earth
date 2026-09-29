@@ -1,7 +1,7 @@
 import { fixtureRecord } from '@cssearth/objects/node/contract';
 import type { SourcePin } from '@cssearth/bake/objects/geometry';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { mapRadius, ringRayOccluded, rasterAnnularField, parseRadialLayerRecipe } from '@cssearth/bake/objects/layers/giant';
 const test = sourceTest();

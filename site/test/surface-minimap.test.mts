@@ -1,4 +1,4 @@
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import type { PositionM } from '@cssearth/engine';
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';

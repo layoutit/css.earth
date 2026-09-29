@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import { parseLonLatSliceTable } from '@cssearth/bake/objects/raster';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { requireRecord } from '@cssearth/core';
 import { deriveObjectDiscovery } from '../../../site/build/prepare/prepare-object-discovery.mts';
 import { parseObjectDiscovery, discoveryDescription } from '@cssearth/objects';

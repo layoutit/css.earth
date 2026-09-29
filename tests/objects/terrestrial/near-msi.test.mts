@@ -1,4 +1,4 @@
-import { sourceLoad, sourceTest } from '../source-test.mts';
+import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { decodeNearMsi, mathildeImageCamera, readMathildeImageGeometry } from '@cssearth/bake/objects/layers/terrestrial';

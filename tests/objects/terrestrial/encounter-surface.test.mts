@@ -1,5 +1,5 @@
 import { required } from '@cssearth/objects/node/contract';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import {sampleFootprint} from '@cssearth/bake/objects/layers/terrestrial';

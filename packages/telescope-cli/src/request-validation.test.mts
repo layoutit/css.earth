@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { queryCapabilities } from './query.mts';
 import { type QueryInputs } from './query-contract.mts';
 import type { CapabilityRequest } from './recipe-request.mts';
