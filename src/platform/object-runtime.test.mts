@@ -1,4 +1,4 @@
-import { orbitFixture } from './test/orbit-fixture.mts';
+import { orbitFixture } from '@cssearth/renderer/test/orbit-fixture.mts';
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
@@ -105,7 +105,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
       },
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...overrides,
     });
-    const { worldContext, viewport, framePresenter, cameraMotion } = orbitFixture(null).arguments;
+    const { worldContext, viewport, framePresenter, cameraMotion } = orbitFixture(runtimePolicy, null).arguments;
     runtime = mount(stage, { worldContext, viewport, framePresenter, cameraMotion, diagnostics, initialWorldCamera: options.initialWorldCamera, inputSurface: stage, runtimePolicy,
       capabilities: fixtureObjectCapabilities,
       onError: error => errors.push(error) });

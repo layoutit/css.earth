@@ -1,6 +1,6 @@
 import { createCameraMotion } from '@cssearth/renderer/navigation';
-import * as runtimePolicy from "../../../site/runtime-policy.mts";
-import { createRetainedCubicSkyOrbit, type OrbitServices, type RetainedCubicSkyOrbit, type RetainedOrbitOptions } from "@cssearth/renderer/platform/object-orbit";
+import type { RuntimePolicy } from '@cssearth/renderer/navigation/runtime-policy.ts';
+import { createRetainedCubicSkyOrbit, type OrbitServices, type RetainedCubicSkyOrbit, type RetainedOrbitOptions } from '@cssearth/renderer/platform/object-orbit';
 import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
 
 type Listener = (event: PointerEvent) => void;
@@ -47,7 +47,7 @@ class MediaQuery implements MediaQueryList {
 
 type OrbitFailure = "drag" | "wheel" | "policy" | "fit" | "publish" | null | undefined;
 type NativeOwner = { mobile: boolean; update(value: unknown): void; stop(): void; stats(): Record<string, never>; destroy(): void };
-export function orbitFixture(failure: OrbitFailure, cleanupFailure = false, dependencies: Partial<OrbitServices> = {}) {
+export function orbitFixture(runtimePolicy: RuntimePolicy, failure: OrbitFailure, cleanupFailure = false, dependencies: Partial<OrbitServices> = {}) {
   const owners = new Set<string>(), callbacks: OrbitCallbacks = {}, stage = new Surface();
   const acquire = (name: string): NativeOwner => { if (failure === name) throw new Error(`${name} failure`); owners.add(name); return { mobile: false, update() {}, stop() {}, stats: () => ({}), destroy() { owners.delete(name); if (cleanupFailure && name === "wheel") throw new Error("wheel cleanup failure"); } }; };
   // These objects model only the browser boundary reached by this fixture.

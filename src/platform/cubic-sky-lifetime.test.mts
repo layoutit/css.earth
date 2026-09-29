@@ -3,7 +3,7 @@ import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { Surface, orbitFixture } from "./test/orbit-fixture.mts";
+import { Surface, orbitFixture } from "@cssearth/renderer/test/orbit-fixture.mts";
 import { createUnboundedMatrixDragControls } from "@cssearth/renderer/platform/camera-input";
 import { errorMessage, type TrackballMetrics } from "@cssearth/renderer/navigation/types.ts";
 
@@ -61,7 +61,7 @@ test("drag destruction releases listeners and capture even if interaction comple
 
 
 test("live cubic publication failure retires every owner once before reporting fatal", () => {
-  const fixture = orbitFixture(null);
+  const fixture = orbitFixture(runtimePolicy, null);
   let fail = false;
   const errors: unknown[] = [];
   fixture.arguments.onPublish = () => { if (fail) throw new Error("live publication"); };
@@ -101,7 +101,7 @@ test("native drag publication failure releases capture/listeners and reports ins
 
 for (const failure of ["wheel", "policy", "fit", "publish"] as const) {
   test(`cubic orbit constructor releases earlier owners when ${failure} fails`, () => {
-    const fixture = orbitFixture(failure);
+    const fixture = orbitFixture(runtimePolicy, failure);
     assert.throws(() => fixture.create(fixture.arguments), new RegExp(`${failure} failure`));
     assert.deepEqual([...fixture.owners], []);
     assert.equal(fixture.stage.listenerCount(), 0);
@@ -109,7 +109,7 @@ for (const failure of ["wheel", "policy", "fit", "publish"] as const) {
 }
 
 test("cubic orbit completes independent cleanup and preserves construction error when cleanup also fails", () => {
-  const fixture = orbitFixture("publish", true);
+  const fixture = orbitFixture(runtimePolicy, "publish", true);
   assert.throws(() => fixture.create(fixture.arguments), (error) => {
     assert.ok(error instanceof AggregateError); assert.ok(error.cause instanceof Error);
     assert.equal(error.cause.message, "publish failure");
@@ -121,7 +121,7 @@ test("cubic orbit completes independent cleanup and preserves construction error
 });
 
 test("cubic orbit destruction is idempotent and disables later camera publication", () => {
-  const fixture = orbitFixture(null, true);
+  const fixture = orbitFixture(runtimePolicy, null, true);
   const orbit = fixture.create(fixture.arguments);
   const publications = orbit.stats().publications;
   assert.throws(() => orbit.destroy(), /cleanup failed/);

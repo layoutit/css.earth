@@ -1,6 +1,6 @@
 import { afterEach, expect, test, vi } from 'vitest';
 import * as runtimePolicy from '../../../../site/runtime-policy.mts';
-import { Surface } from '../../../../src/platform/test/orbit-fixture.mts';
+import { Surface } from '../../test/orbit-fixture.mts';
 import { createPreparedWheelZoomControls, pinchTargetDistance } from './prepared-wheel-zoom.js';
 import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import type { NavigationCamera, CameraDelta } from './types.ts';
