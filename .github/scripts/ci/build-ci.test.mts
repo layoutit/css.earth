@@ -5,7 +5,7 @@ import { dirname, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { buildCi, ciBuildPlan, type CiBuildTask } from './build-ci.mts';
 
-const digest = 'a'.repeat(64);
+const digest = 'a'.repeat(40);
 function fixture(t: TestContext) {
   const root = mkdtempSync(resolve(tmpdir(), 'cssearth-build-ci-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
@@ -54,13 +54,16 @@ test('cache hits with missing JS, declarations, nested chunks or receipt rebuild
   }
 });
 
-test('a different exact identity or corrupted output cannot reuse compiled files', async t => {
+test('a different exact identity, an emptied output or a stale extra chunk cannot reuse compiled files', async t => {
   const f = fixture(t);
   await buildCi({ ...f, mode: 'lint', digest });
-  f.write('packages/renderer/dist/index.js', 'wrong output');
-  const corrupted = await buildCi({ ...f, mode: 'lint', digest, cacheHit: true });
-  assert.equal(corrupted.find(result => result.id === 'packages')?.cached, false);
-  const different = await buildCi({ ...f, mode: 'lint', digest: 'b'.repeat(64), cacheHit: true });
+  f.write('packages/renderer/dist/index.js', '');
+  const emptied = await buildCi({ ...f, mode: 'lint', digest, cacheHit: true });
+  assert.equal(emptied.find(result => result.id === 'packages')?.cached, false);
+  f.write('packages/renderer/dist/stale-chunk.js', 'left over');
+  const extra = await buildCi({ ...f, mode: 'lint', digest, cacheHit: true });
+  assert.equal(extra.find(result => result.id === 'packages')?.cached, false);
+  const different = await buildCi({ ...f, mode: 'lint', digest: 'b'.repeat(40), cacheHit: true });
   assert.ok(different.every(result => !result.cached));
 });
 
@@ -68,7 +71,7 @@ test('exit zero without real compiled artifacts is failure and never produces a 
   const f = fixture(t);
   await assert.rejects(buildCi({ root: f.root, mode: 'lint', digest, run: async () => {} }), /ENOENT|did not produce/);
   assert.throws(() => readFileSync(resolve(f.root, 'packages/astronomy/dist/.ci-build-files.json')), /ENOENT/);
-  await assert.rejects(buildCi({ ...f, mode: 'lint', digest: '' }), /exact SHA-256/);
+  await assert.rejects(buildCi({ ...f, mode: 'lint', digest: '' }), /exact Git object ids/);
 });
 
 test('native package graph and the real renderer package → catalogue dependency are preserved', t => {
@@ -82,15 +85,15 @@ test('native package graph and the real renderer package → catalogue dependenc
 });
 
 test('CI-only changes can reuse package outputs, the renderer included, while shell preparation still runs every time', async t => {
-  const f = fixture(t), packageDigest = 'b'.repeat(64);
+  const f = fixture(t), packageDigest = 'b'.repeat(40);
   await buildCi({ ...f, mode: 'lint', digest, packageDigest });
   f.executed.length = 0;
-  const results = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest,
+  const results = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(40), packageDigest,
     cacheHit: false, packageCacheHit: true });
   assert.deepEqual(results.filter(result => result.cached).map(result => result.id).sort(), ['packages']);
   assert.ok(f.executed.includes('catalog'));
   unlinkSync(resolve(f.root, 'packages/astronomy/dist/index.d.ts'));
-  const missing = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(64), packageDigest,
+  const missing = await buildCi({ ...f, mode: 'lint', digest: 'd'.repeat(40), packageDigest,
     cacheHit: true, packageCacheHit: true });
   assert.equal(missing.find(result => result.id === 'packages')?.cached, false);
 });
