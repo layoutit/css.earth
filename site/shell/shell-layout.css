@@ -187,7 +187,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
 .explorer-shell-header .object-sidebar-search-card {
   display: grid;
-  grid-template-columns: 20px minmax(0, 1fr) 24px;
+  grid-template-columns: 20px minmax(0, 1fr);
   align-items: center;
   justify-content: start;
   column-gap: 8px;
@@ -249,7 +249,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   appearance: none;
   position: absolute;
   top: 50%;
-  right: 38px;
+  right: 10px;
   display: grid;
   place-items: center;
   width: 24px;
@@ -279,35 +279,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   color: var(--shell-text);
 }
 
-.explorer-shell-header .object-sidebar-view-all {
-  position: static;
-  grid-area: 1 / 3;
-  width: 24px;
-  height: var(--explorer-search-height);
-  border-radius: 0;
-}
-
-.explorer-shell-header .object-search-browser-caret {
-  width: 8px;
-  height: 8px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: translateY(-2px) rotate(45deg);
-  transition: transform 150ms ease;
-}
-.explorer-shell-header .object-sidebar-view-all[aria-expanded="true"] .object-search-browser-caret {
-  transform: translateY(2px) rotate(225deg);
-}
-
 .explorer-shell-header .object-toolbar-action { width: 32px; }
-
-.explorer-shell-header .object-sidebar-view-all:hover {
-  background: transparent;
-}
-
-.explorer-shell-header .object-sidebar-view-all:focus-visible {
-  outline: none;
-}
 
 .object-search-toolbar {
   display: flex;
@@ -330,7 +302,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   height: var(--explorer-search-height);
 }
 
-.object-sidebar .object-browser[data-navigation-filtered] #object-category-results {
+.object-sidebar .object-browser[data-search-results] #object-category-results {
   padding-block-start: 0;
 }
 
@@ -785,7 +757,6 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     /* The field inherits this font; keep the mobile size on its owner. */
     font-size: 16px;
   }
-  .explorer-shell-header .object-sidebar-search-clear { right: 38px; }
 
   /* With search on the sheet, the header row holds the wordmark and the app actions. */
   .object-header-actions { display: flex; grid-row: 1; grid-column: 3; }

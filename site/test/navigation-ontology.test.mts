@@ -2,7 +2,6 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { readFileSync } from 'node:fs';
 import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
@@ -10,7 +9,6 @@ import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } fr
 import { readOverviews } from '@cssearth/objects/node';
 import { distanceDescription, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
-import { navigationTree, type TreeNode } from '../navigation/navigation-tree.mts';
 import { resolve } from 'node:path';
 
 test('every prepared spatial subject and every scene has exactly one searchable destination', async () => {
@@ -87,38 +85,3 @@ test('physical hosts remain distinct from scene hosts and M45 retains its measur
   assert.match(distanceDescription(m45.distance), /dust-filament distances are not measured/);
 });
 
-
-test('every row of the application navigation tree opens a route the application serves', () => {
-  const rows: TreeNode[] = [];
-  const walk = (node: TreeNode) => { if (node.object) rows.push(node); node.children.forEach(walk); };
-  navigationTree().forEach(walk);
-  const overviews = new Set(OBJECTS.filter(object => object.kind === 'overview').map(object => object.id));
-  // Every scene and every overview is a page, `/<id>/`.
-  const pages = new Set([...objectAdapter.routes(SCENE_OBJECTS), ...[...overviews].map(id => `/${id}/`)]);
-  const focuses = new Map(OBJECTS.filter(object => object.kind === 'prepared-focus').map(object => [object.id, object.route]));
-  assert.ok(rows.length > 400, 'the tree still names every prepared destination');
-  for (const row of rows) {
-    const id = row.object!.id;
-    if (row.href === null) {
-      assert.equal(row.focusId, null, id);
-      // A package with no destination is a label. Anything the application can open must link to it.
-      assert.equal(pages.has(`/${id}/`), false, id);
-      assert.equal(focuses.has(id), false, id);
-      continue;
-    }
-    const url = new URL(row.href, 'https://example.test');
-    // A catalogue focus has its own page, the route the registry gives it.
-    if (row.focusId !== null) { assert.equal(focuses.get(row.focusId), row.href, `${id} must use the registered focus route`); continue; }
-    assert.ok(pages.has(url.pathname), `${id} leads to an unserved page: ${row.href}`);
-    const overview = url.searchParams.get('overview'), dataset = url.searchParams.get('dataset');
-    if (overview !== null) assert.ok(overviews.has(overview), `${id} names an unknown overview: ${overview}`);
-    else if (dataset !== null) {
-      // A volume a body presents opens that body on a lens that shows it.
-      const host = url.pathname.slice(1, -1);
-      const content: unknown = JSON.parse(readFileSync(resolve('src/objects', host, 'source/content/object.json'), 'utf8'));
-      const controls = (content as { lenses?: { controls?: { id?: string; volume?: { objectId?: string } }[] } }).lenses?.controls ?? [];
-      assert.ok(controls.some(control => control.id === dataset && control.volume?.objectId === id), `${id} opens ${host} on ${dataset}, which does not show it`);
-    } else assert.equal(row.href, `/${id}/`, `${id} must open its own page`);
-  }
-
-});

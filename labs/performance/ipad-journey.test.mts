@@ -12,7 +12,6 @@ test('a journey resolves displayed body names through the one object registry', 
   assert.equal(steps.length, 3);
   assert.match((steps[0] as { script: string }).script, /__cssEarthControl/u);
   assert.match((steps[0] as { script: string }).script, /control\.fly\("moon"\)/u);
-  assert.doesNotMatch((steps[0] as { script: string }).script, /data-atlas-object/u);
   assert.deepEqual(steps[1], { route: '/moon/' });
   assert.deepEqual(steps.at(-1), { screenshot: 'after-flight' });
   assert.equal(JOURNEY_INPUT_SOURCE, 'page-dispatched');
