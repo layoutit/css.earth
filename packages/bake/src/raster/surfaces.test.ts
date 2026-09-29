@@ -4,10 +4,47 @@ import { join } from 'node:path';
 import sharp from 'sharp';
 import { describe, expect, it } from 'vitest';
 import { loadNativeSourcePoleSampler, prepareSurfaces } from './surfaces.ts';
-import { parseRasterRecipe, prepareRasterAssets } from './assets.ts';
+import { parseRasterRecipe, prepareRasterAssets, surfaceCoordinateWidth } from './assets.ts';
 import { loadNativeObservationPoleSampler, parseObservationLens } from '../objects/layers/observation/index.ts';
 
 describe('native source pole sampling', () => {
+    it('stores constant opaque lossless surfaces as one exact texel while preserving their coordinate domain and polar alpha', async () => {
+        const directory = await mkdtemp(join(tmpdir(), 'cssearth-constant-surface-'));
+        try {
+            const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@1', publicBase: '/scenes/test/', sourceWidth: 64, sourceHeight: 32,
+                width: 64, height: 32, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
+                polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
+                thumbnail: { size: 8 }, surfaces: [{ id: 'color', source: 'color.json', falseColor: false, output: '{id}{suffix}.webp',
+                    thumbnail: 'thumb-{id}.webp', science: { kind: 'test' } }] });
+            for (const variant of ['constant', 'detail', 'alpha'] as const) {
+                const prepared = await prepareRasterAssets({ config, sourceDirectory: directory, publicDirectory: directory, outputDirectory: directory,
+                    interpret: async (_surface, width, height) => {
+                        const data = new Uint8Array(width * height * 4);
+                        for (let i = 0; i < data.length; i += 4) data.set([255, 224, 193, 255], i);
+                        const centre = (Math.floor(height / 2) * width + Math.floor(width / 2)) * 4;
+                        if (variant === 'detail') data[centre] = 254;
+                        if (variant === 'alpha') data[centre + 3] = 254;
+                        return { data, channels: 4, nearest: true };
+                    } });
+                const bytes = await readFile(join(directory, 'color@2x.webp'));
+                const { data, info } = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+                if (variant === 'constant') {
+                    expect([info.width, info.height, ...data]).toEqual([1, 1, 255, 224, 193, 255]);
+                    expect(prepared.surfaces.color.constantRaster).toEqual({ packedWidth: 136, packedHeight: 96, rgba: [255, 224, 193, 255] });
+                    expect(surfaceCoordinateWidth(prepared, '/scenes/test/color@2x.webp', 1)).toBe(136);
+                    expect(() => surfaceCoordinateWidth(prepared, '/scenes/test/color@2x.webp', 136)).toThrow(/Invalid constant/);
+                } else {
+                    expect([info.width, info.height]).toEqual([136, 96]);
+                    expect(prepared.surfaces.color.constantRaster).toBeUndefined();
+                    expect(surfaceCoordinateWidth(prepared, '/scenes/test/color@2x.webp', 136)).toBe(136);
+                }
+                const pole = await sharp(await readFile(join(directory, 'poles-color@2x.webp'))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+                expect([pole.info.width, pole.info.height]).toEqual([64, 32]);
+                expect(pole.data.some((v, i) => i % 4 === 3 && v === 0)).toBe(true);
+                expect((await sharp(await readFile(join(directory, 'thumb-color.webp'))).metadata()).width).toBe(8);
+            }
+        } finally { await rm(directory, { recursive: true, force: true }); }
+    });
     it('adds lossless numeric maps to source-packed angular poles without changing photographic assets', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-numeric-angular-'));
         try {

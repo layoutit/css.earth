@@ -32,9 +32,18 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     if (url) snapshots.set(entry, url);
     return url;
   }
+  function isCurrentView(url: string) {
+    const current: unknown = windowTarget.history.state;
+    if (!isRecord(current) || current.cssEarthEntry !== entry || typeof current.cssEarthView !== 'string') return false;
+    const href = windowTarget.location.href;
+    try { return new URL(url, href).href === href && new URL(current.cssEarthView, href).href === href; }
+    catch { return false; }
+  }
   function checkpoint() {
     const url = remember();
-    if (url) windowTarget.history.replaceState({ ...state(), cssEarthView: url }, '', url);
+    // A settled drag already published this entry. Replacing it again fires Safari's
+    // native navigation work even with identical state and URL.
+    if (url && !isCurrentView(url)) windowTarget.history.replaceState({ ...state(), cssEarthView: url }, '', url);
   }
   const onPopState = (event: PopStateEvent) => {
     if (disposed) return;
@@ -75,7 +84,7 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
       snapshots.set(entry, path);
       // An embedded scene shares the host page's session history, so it never adds entries of its own.
       const push = history === 'push' && !embedded;
-      windowTarget.history[push ? 'pushState' : 'replaceState']({ ...state(), cssEarthView: path }, '', path);
+      if (push || !isCurrentView(path)) windowTarget.history[push ? 'pushState' : 'replaceState']({ ...state(), cssEarthView: path }, '', path);
     },
     destroy() { if (!disposed) { disposed = true; windowTarget.removeEventListener('popstate', onPopState); } },
   });

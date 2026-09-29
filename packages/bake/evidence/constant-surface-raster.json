@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "testedBase": "df0d621fa4",
+  "change": "Exact opaque constant-raster compaction in raster/surfaces.ts; original coordinate width retained in raster/assets.ts and prepare-authored.ts.",
+  "device": "iPad15,7, iPadOS 26.6, 1640x2360 native screenshot",
+  "input": "Page-dispatched fly, zoom and drag through the existing visible Safari tab; normal Web Inspector timeline; no native profiling or continuous screenshots.",
+  "objects": [
+    "epic-201933710",
+    "epic-202602988"
+  ],
+  "invariants": [
+    "Entire prepared runtime JSON deeply equal to baseline",
+    "Pole, limb, arrival and minimap images byte-identical"
+  ],
+  "surface": {
+    "before": {
+      "width": 2080,
+      "height": 1536,
+      "encodedBytes": 178,
+      "decodedRgbaBytes": 12779520
+    },
+    "after": {
+      "width": 1,
+      "height": 1,
+      "encodedBytes": 38,
+      "decodedRgbaBytes": 4
+    }
+  },
+  "comparisons": [
+    {
+      "file": "second-arrival.screen.png",
+      "crop": {
+        "left": 0,
+        "top": 520,
+        "width": 1640,
+        "height": 1400
+      },
+      "threshold": 0.1,
+      "mismatch": 0,
+      "total": 2296000
+    },
+    {
+      "file": "second-close-drag.screen.png",
+      "crop": {
+        "left": 0,
+        "top": 520,
+        "width": 1640,
+        "height": 1400
+      },
+      "threshold": 0.1,
+      "mismatch": 0,
+      "total": 2296000
+    },
+    {
+      "file": "first-return.screen.png",
+      "crop": {
+        "left": 0,
+        "top": 520,
+        "width": 1640,
+        "height": 1400
+      },
+      "threshold": 0.1,
+      "mismatch": 0,
+      "total": 2296000
+    }
+  ],
+  "runs": [
+    {
+      "name": "tablet-constant-star-baseline-drag-normal-2026-09-29T09-34-40-183Z",
+      "flights": [
+        {
+          "label": "01 epic-201933710 → epic-202602988",
+          "worstTaskMs": 29.585
+        },
+        {
+          "label": "02 epic-202602988 → epic-201933710",
+          "worstTaskMs": 14.39
+        }
+      ],
+      "renderingFrames": {
+        "count": 942,
+        "over16ms": 80,
+        "over50ms": 0,
+        "longestMs": 36.3,
+        "totalMs": 5752.4
+      },
+      "surfaces": [
+        {
+          "url": "http://192.168.0.8:4214/scenes/epic-202602988/epic-202602988-surface-color@2x.webp",
+          "bytes": 178,
+          "status": 200
+        }
+      ]
+    },
+    {
+      "name": "tablet-constant-star-compact-normal-2026-09-29T09-35-43-360Z",
+      "flights": [
+        {
+          "label": "01 epic-201933710 → epic-202602988",
+          "worstTaskMs": 31.861
+        },
+        {
+          "label": "02 epic-202602988 → epic-201933710",
+          "worstTaskMs": 19.564
+        }
+      ],
+      "renderingFrames": {
+        "count": 932,
+        "over16ms": 81,
+        "over50ms": 0,
+        "longestMs": 42.1,
+        "totalMs": 5738.4
+      },
+      "surfaces": [
+        {
+          "url": "http://192.168.0.8:4214/scenes/epic-202602988/epic-202602988-surface-color@2x.webp",
+          "bytes": 38,
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "limits": "Single normal run per condition. Native screen crop excludes Safari and content sheet. Camera is unchanged at arrival and return; close drag is wall-clock driven. No claim that residual frame stalls are fixed."
+}

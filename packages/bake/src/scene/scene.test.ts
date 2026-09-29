@@ -13,6 +13,8 @@ import type { RasterRecipe } from '../raster/index.ts';
 import { prepareProjectiveTextureLayer, TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
 import { prepareComposite } from '../presentation/composite.ts';
 import { presentationAdapters } from '../presentation/adapters.ts';
+import { createPreparedNodeTree } from '../presentation/prepared-node-tree.ts';
+import { LEAF_BOX_FACTOR, LEAF_BOX_UNSCALE } from '../presentation/leaf-box.ts';
 import { presentationHostAdapters } from '../objects/host-adapters/index.ts';
 import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import type { PresentationInputs } from '../presentation/types.ts';
@@ -304,11 +306,29 @@ test('a ring drawn as wedges is one leaf per wedge, and every wedge starts outsi
  for(const leaf of rings.leaves){
   const values=/matrix3d\(([^)]+)\)/.exec(leaf.style)?.[1]?.split(',').map(Number);
   assert.ok(values&&values.length===16);
+  const node=createPreparedNodeTree().leaf(leaf);
+  assert.equal(node.style.transform,`matrix3d(${values}) ${LEAF_BOX_UNSCALE}`);
+  // The generic compiler scales the box and the atlas address together; every factor
+  // therefore preserves both the wedge's world corners and the texels at those corners.
+  for(const name of ['--polycss-atlas-width','--polycss-atlas-height'])
+   assert.ok(node.style.getPropertyValue(name).includes(LEAF_BOX_FACTOR),name);
+  assert.ok(node.style.backgroundSize.includes(LEAF_BOX_FACTOR));
+  if(leaf.style.includes('background-position:0 -'))assert.ok(node.style.backgroundPosition.includes(LEAF_BOX_FACTOR));
+  assert.equal(node.style.backfaceVisibility,'visible');
   const height=Number(/--polycss-atlas-height:([0-9.]+)px/.exec(leaf.style)?.[1]);
   // The nearest point of a wedge is the middle of its inner edge.
   const x=values[4]*height/2+values[12],y=values[5]*height/2+values[13];
   assert.ok(Math.hypot(x,y)>bodyRadius,`a wedge starts ${Math.hypot(x,y)} from the centre, inside the body's ${bodyRadius}`);
  }
+});
+test('an unsegmented ring plane also uses the shared prepared backing-size contract',async()=>{
+ const result=await prepareAuthored('uranus',[1,0,0],profile=>profile,{},profileWidths);
+ const rings=('planes' in result?result.planes??[]:[]).find(plane=>plane.id==='rings');
+ assert.ok(rings);assert.equal(rings.leaves.length,1);
+ const leaf=rings.leaves[0]!,node=createPreparedNodeTree().leaf(leaf);
+ assert.equal(node.style.transform,`matrix3d(${matrixOf(leaf.style)}) ${LEAF_BOX_UNSCALE}`);
+ assert.ok(node.style.getPropertyValue('--polycss-atlas-width').includes(LEAF_BOX_FACTOR));
+ assert.ok(node.style.backgroundSize.includes(LEAF_BOX_FACTOR));
 });
 test('ring wedges that would reach into the body are refused',async()=>{
  await assert.rejects(prepareAuthored('uranus',[1,0,0],profile=>profile,{ringWedges:{'uranus-rings-wedges@2x.webp':{count:16,contentPixels:120}}},profileWidths),/reach into the body/);

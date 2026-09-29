@@ -101,6 +101,17 @@ test('physical silhouette fitting replaces shell scale and keeps the prepared ce
   expect(overlay.style.transformOrigin).toBe('50% 50%');
   expect(overlay.style.transform).toBe('translate(70px, -40px) rotate(90deg) scale(2, 1) rotate(-90deg)');
   expect(stage.children).toEqual([overlay]);
+  // A departing scene's presentation is held and receives camera-only publications:
+  // the fitted overlay must still follow the flying body (Pi1 Gruis's corona once stayed centred).
+  mounted.publishCamera({
+    controlPitch: 0, controlYaw: 0, zoom: 1, sceneMatrix: '', sunViewDirection: null,
+    counterRotation: '', counterRotationFor: () => '',
+    projection: {focalPixels:1000, principalOffsetPixels:[0,0], eyeFromScene:[1,0,0,0,0,1,0,0,0,0,1,0,0,0,-1000,1]},
+    principalOffset:[0,0], stageViewport:{principalOffsetPixels:[0,0]},
+    levelOfDetail:{stage:'geometry',silhouetteDiameter:40,billboardOpacity:0,markerOpacity:0},
+    body: { visible: true, silhouette: { centre: [-300, -200], radial: [0, 1], radialSemiAxis: 25.3, tangentialSemiAxis: 25.3 } },
+  } as never);
+  expect(overlay.style.transform).toBe('translate(-300px, -200px) rotate(90deg) scale(0.1, 0.1) rotate(-90deg)');
 });
 
 for (const rejectOld of [false, true]) test(`retired native work cannot clear a reused replacement slot (${rejectOld})`, async () => {

@@ -79,6 +79,19 @@ Scaling a distant photograph to
 match a closer mesh's bounding sphere would change the visible surface features
 at the reveal, even when their outlines agree.
 
+The photograph is only as complete as the mesh it captured. Leaves join across
+frames in paced reveal and texture-activation batches, so preparation waits
+until the hidden-leaf count holds for ten frames, holds looping surface motion
+and light curves at time 0, and keeps a capture only when a second one a few
+frames later has the same coverage. An early capture once shipped HD 29615
+without one leaf and VX Per without whole bands of them.
+
+A departing scene's presentation stays held for the flight and receives
+camera-only publications. Those still move every camera-following overlay
+(silhouette-fitted corona and limb plates, interior discs, counter-rotations)
+with the depth partitions, so an emissive star's corona leaves with its mesh
+instead of staying centred at arrival size.
+
 The optical scale travels with the world camera and follows the same eased
 progress as position and rotation. Completion checks its remaining relative
 change as well as the pose, so arriving at the prepared position cannot snap

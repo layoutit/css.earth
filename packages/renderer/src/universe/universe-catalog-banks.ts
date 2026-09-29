@@ -27,7 +27,7 @@ interface ImageBank {
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
-  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication, billboards: prepared, stellarExtents = {} }: {
+  initialCatalog, catalogBank, loadCatalog, loadImageLayer, onSelect, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardAtlas }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   initialImages: ReadonlyMap<string, PreparedImageLayerBank>;
@@ -38,6 +38,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   loadImageLayer: PreparedUniverseOptions['loadImageLayer'];
   onSelect?: (object: PreparedCatalogObject) => void;
   requestPublication?: () => boolean;
+  prepareBillboardAtlas: () => boolean;
   /** Published stellar extents in metres by object id (PreparedUniverseOptions.stellarExtents). */
   stellarExtents?: Readonly<Record<string, number>>;
   /** The prepared billboards: a galaxy with one shows its Sun-facing view from afar, before and without its slices. */
@@ -59,7 +60,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   });
   // Mounted with the bank declarations, after the opaque galaxy backdrop: the atlas itself loads when one first shows.
   const billboards = billboardEntries.length ? mountLensBillboards({ host: root, before: end, atlasUrl: prepared!.atlasUrl,
-    atlas: prepared!.plan.atlas, entries: billboardEntries }) : null;
+    atlas: prepared!.plan.atlas, entries: billboardEntries, prepareAtlas: prepareBillboardAtlas }) : null;
   if (billboards) lifetime.onDispose(() => billboards.destroy());
   lifetime.onDispose(() => {
     const mounted = catalog;

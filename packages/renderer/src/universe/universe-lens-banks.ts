@@ -32,7 +32,7 @@ interface LensBank {
 
 /** One stable record owns each declared bank through load, publication and eviction. */
 export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifetime, declarations, facts, frame, visibility,
-  billboards: preparedBillboards, load, warmDomNodeBudget, requestPublication }: {
+  billboards: preparedBillboards, load, warmDomNodeBudget, requestPublication, prepareBillboardAtlas }: {
   root: HTMLElement; end: Element; frontRoot: HTMLElement; frontEnd: Element; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   facts: readonly LensBankBillboard[];
@@ -42,6 +42,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
   load: PreparedUniverseOptions['loadVolumeLens'];
   warmDomNodeBudget: number;
   requestPublication?: () => boolean;
+  prepareBillboardAtlas: () => boolean;
 }) {
   let billboardCount = 0, useClock = 0, coasting = false;
   const banks: LensBank[] = declarations.map((declared, index) => ({
@@ -64,7 +65,7 @@ export function createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifeti
   const billboardEntries = banks.flatMap(bank => bank.facts.billboard
     ? [{ id: bank.id, frame: bank.framing.frame, billboard: bank.facts.billboard }] : []);
   const billboards = billboardEntries.length ? mountLensBillboards({ host: root, before: end,
-    atlasUrl: preparedBillboards!.atlasUrl, atlas: preparedBillboards!.plan.atlas, entries: billboardEntries }) : null;
+    atlasUrl: preparedBillboards!.atlasUrl, atlas: preparedBillboards!.plan.atlas, entries: billboardEntries, prepareAtlas: prepareBillboardAtlas }) : null;
   if (billboards) lifetime.onDispose(() => billboards.destroy());
 
   function publishResidency() {

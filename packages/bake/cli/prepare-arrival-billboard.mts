@@ -115,7 +115,18 @@ try {
           entry && typeof entry === 'object' && Reflect.get(entry, 'ready') === true);
       }, object.id);
       {
-        await page.evaluate(() => new Promise<void>(done => requestAnimationFrame(() => requestAnimationFrame(() => done()))));
+        // Prepared leaves join across frames in paced reveal and texture-activation
+        // batches. HD 29615 once shipped a billboard missing one late leaf; wait
+        // until the hidden-leaf count holds for ten frames before capturing.
+        await page.evaluate(() => new Promise<void>(done => {
+          let last = -1, steady = 0;
+          const tick = () => {
+            const hidden = document.querySelectorAll('.object-stage s[style*="display: none"]').length;
+            steady = hidden === last ? steady + 1 : 0; last = hidden;
+            if (steady >= 10) done(); else requestAnimationFrame(tick);
+          };
+          tick();
+        }));
         const settled = requireRecord(await page.evaluate(id => {
           const diagnostic = Reflect.get(window, `__${id}`);
           return Reflect.apply(Reflect.get(diagnostic, 'view'), diagnostic, []);
@@ -123,7 +134,23 @@ try {
         const actualDistanceM = requireFiniteNumber(settled.distanceKilometers) * 1000;
         if (Math.abs(actualDistanceM - distanceM) > Math.max(distanceM * 1e-5, positionPrecisionM))
           throw new Error(`The camera moved away from the requested prepared pose: expected ${distanceM / 1000} km, observed ${settled.distanceKilometers} km.`);
-        const shot = await page.screenshot({ omitBackground: true });
+        // A capture must match a second one a few frames later: coverage still
+        // changing means some leaf had not joined yet.
+        // Pulsating stars loop their surface motion and light curves; hold each loop
+        // at time 0, where the runtime starts it on arrival, so frames can agree.
+        await page.evaluate(() => {
+          for (const animation of document.getAnimations())
+            if (animation.effect?.getTiming().iterations === Infinity) { animation.pause(); animation.currentTime = 0; }
+        });
+        const coverage = async (png: Buffer) => sharp(png).ensureAlpha().extractChannel(3).raw().toBuffer();
+        let shot = await page.screenshot({ omitBackground: true }), stable = false;
+        for (let check = 0; check < 5 && !stable; check++) {
+          await page.evaluate(() => new Promise<void>(done => { let frames = 5; const tick = () => --frames ? requestAnimationFrame(tick) : done(); requestAnimationFrame(tick); }));
+          const again = await page.screenshot({ omitBackground: true });
+          stable = (await coverage(shot)).equals(await coverage(again));
+          shot = again;
+        }
+        if (!stable) throw new Error(`${object.id}: silhouette coverage kept changing across five capture checks.`);
         const raw = await sharp(shot).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
         let extent = 0, opaque = 0;
         for (let y = 0; y < captureSize; y++) for (let x = 0; x < captureSize; x++) {

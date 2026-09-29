@@ -1,0 +1,251 @@
+{
+  "schema": "cssearth-fixed-depth-evidence@1",
+  "testedAt": "2026-09-29",
+  "baseRevision": "17b047053e02674ff6fda4bdbe0db286653d3a6b",
+  "change": "Whole-surface fixed visibility components before depth packing; preserve visibility cycles in native 3D.",
+  "checks": {
+    "focusedPreparationTests": {
+      "passed": 11
+    },
+    "bakeTypecheck": "passed",
+    "rayOracle": {
+      "owner": "tests/prepared-presentation/prepared-visibility-oracle.mts",
+      "eyes": 24,
+      "eyeRadius": "5 * maximum absolute source coordinate",
+      "eyeFormula": "[R*cos(i*pi/12), R*0.5*sin(i*pi/12*0.7), R*sin(i*pi/12)]",
+      "targets": "Centroids of every eighth source face",
+      "rays": 37344,
+      "overlaps": 210,
+      "mismatches": 0,
+      "frontSigns": "Derived from each original CSS leaf transform inverse and checked against its source face normal."
+    }
+  },
+  "bodies": [
+    {
+      "id": "selam",
+      "groups": 13,
+      "maxGroup": 396,
+      "rays": 3072,
+      "overlaps": 88,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "adeona",
+      "groups": 10,
+      "maxGroup": 326,
+      "rays": 2400,
+      "overlaps": 14,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "adrastea",
+      "groups": 10,
+      "maxGroup": 65,
+      "rays": 1440,
+      "overlaps": 5,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "antigone",
+      "groups": 13,
+      "maxGroup": 124,
+      "rays": 2400,
+      "overlaps": 9,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "asteroid-1950-da",
+      "groups": 4,
+      "maxGroup": 677,
+      "rays": 2400,
+      "overlaps": 17,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "bacchus",
+      "groups": 2,
+      "maxGroup": 448,
+      "rays": 1536,
+      "overlaps": 11,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "bellona",
+      "groups": 13,
+      "maxGroup": 94,
+      "rays": 2400,
+      "overlaps": 5,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "chiron",
+      "groups": 8,
+      "maxGroup": 64,
+      "rays": 1440,
+      "overlaps": 6,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "dactyl",
+      "groups": 8,
+      "maxGroup": 64,
+      "rays": 1536,
+      "overlaps": 0,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "despina",
+      "groups": 8,
+      "maxGroup": 64,
+      "rays": 1440,
+      "overlaps": 2,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "ganymed",
+      "groups": 12,
+      "maxGroup": 135,
+      "rays": 2400,
+      "overlaps": 3,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "juliet",
+      "groups": 8,
+      "maxGroup": 90,
+      "rays": 1440,
+      "overlaps": 2,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "naiad",
+      "groups": 8,
+      "maxGroup": 91,
+      "rays": 1440,
+      "overlaps": 2,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "ophelia",
+      "groups": 8,
+      "maxGroup": 68,
+      "rays": 1440,
+      "overlaps": 2,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "oumuamua",
+      "groups": 8,
+      "maxGroup": 64,
+      "rays": 1440,
+      "overlaps": 0,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "polymele",
+      "groups": 8,
+      "maxGroup": 64,
+      "rays": 1440,
+      "overlaps": 1,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "siegena",
+      "groups": 10,
+      "maxGroup": 327,
+      "rays": 2400,
+      "overlaps": 27,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "styx",
+      "groups": 9,
+      "maxGroup": 72,
+      "rays": 1440,
+      "overlaps": 3,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "thalassa",
+      "groups": 10,
+      "maxGroup": 64,
+      "rays": 1440,
+      "overlaps": 0,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    },
+    {
+      "id": "themis",
+      "groups": 12,
+      "maxGroup": 176,
+      "rays": 2400,
+      "overlaps": 13,
+      "geometryUnchanged": true,
+      "texturesUnchanged": true
+    }
+  ],
+  "device": {
+    "model": "iPad15,7",
+    "os": "iPadOS 26.6"
+  },
+  "captures": {
+    "before": "tablet-default-view-sweep-003-satellite-2026-09-29T04-44-10-560Z",
+    "beforeSelamDragCommitMs": 106.877,
+    "after": "tablet-selam-fixed-depth-normal-2026-09-29T05-16-22-345Z",
+    "afterWholeCaptureLongestFrameMs": 26.8,
+    "afterConsoleErrors": 0,
+    "visual": "tablet-fixed-depth-dactyl-selam-siegena-2026-09-29T05-23-42-558Z",
+    "visualInspection": "Forward and reverse drags retain intact surfaces for Dactyl, Selam and Siegena in native screenshots and filmstrip.",
+    "largestNativeGroups": "tablet-fixed-depth-largest-native-groups-2026-09-29T05-25-45-028Z",
+    "largestNativeGroupsInspection": "1950 DA (677-face native group) and Bacchus (448) retain intact surfaces after drag. No task over 50 ms inside either recorded flight; the 119.886 ms commit completed before the first flight request."
+  },
+  "limits": [
+    "Single normal before/after run, not a statistical timing benchmark.",
+    "The visual recording includes a 178 ms frame before the first flight request; it is not counted as a destination drag.",
+    "This evidence checks paint order, retained source geometry and unchanged textures; it adds no scientific qualification."
+  ],
+  "canonicalInputRecheck": {
+    "date": "2026-09-29",
+    "reason": "Adeona and Themis local inputs were stale; reran from their hash-verified published baseRevision runtime assets.",
+    "preserved": [
+      "published camera",
+      "published texture assets",
+      "source triangle geometry"
+    ],
+    "oracle": [
+      {
+        "id": "adeona",
+        "rays": 2400,
+        "overlaps": 14,
+        "groups": 10,
+        "maxGroup": 326
+      },
+      {
+        "id": "themis",
+        "rays": 2400,
+        "overlaps": 13,
+        "groups": 12,
+        "maxGroup": 176
+      }
+    ],
+    "result": "Zero ray-order mismatches; regenerated runtime JSON reproduces exactly. Other 18 input runtimes matched their published baseline."
+  }
+}

@@ -59,6 +59,19 @@ packages/renderer/
 └── CLAUDE.md           symlink to AGENTS.md
 ```
 
+## First connection and backing sizes
+
+A detached presentation selects its initial leaf-box levels from the incoming physical view before its roots connect.
+The prepared stylesheet's close-up default is not a resident raster cache. Keeping it through a distant system arrival
+allocates large backing surfaces for tiny projected faces. `createLeafBoxBlocks.prepare()` applies the existing
+prepared levels while detached; after connection, `publish()` keeps the existing motion freeze and paced settling.
+No new geometry, texture or device-specific level policy is introduced.
+
+The connection-order regression uses Neptune's real prepared groups in `src/platform/object-selection-runtime.test.mts`.
+The leaf-box unit test checks initial selection, unchanged repeated preparation and the subsequent motion freeze.
+[Matched iPad captures](evidence/initial-leaf-backing.json) record the reduced layer allocation, remaining first-paint
+stalls and measurement limits.
+
 ## Evidence
 
 The move from `src/renderers/css` left the site's `astro build` output byte-identical: all 9,508 files outside
@@ -87,3 +100,9 @@ Residency reserves the prepared decoded-byte cost before admitting a URL; downlo
 budget or admit extra assets. Releasing the final lease cancels pending image
 loads and removes their listeners; completed warm handoffs preserve the decoded URL used by retained CSS. Detail
 publication and paced painting continue to wait on the same decoded-resource receipts.
+
+The universe billboard atlas has one shared decode lease for both the nebula and
+image-layer billboard banks. First visible demand starts its asynchronous decode;
+CSS receives the atlas only after readiness, followed by a requested publication.
+The lease ends with the universe. Cold body close-ups do not request this atlas,
+and decoding never reveals a new billboard during an inertial coast.
