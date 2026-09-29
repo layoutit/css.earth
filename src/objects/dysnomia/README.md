@@ -54,7 +54,7 @@ Every examined source, with its decision and what would reopen it, is in the [in
 <details>
 <summary>Preparation and records to change</summary>
 
-The [shared distant-worlds methods](../../../packages/bake/authoring/distant-worlds/README.md) explain the numerical authoring, acquisition and preparation used here; this body's input row is [companions/inputs.json](../../../packages/bake/authoring/companions/inputs.json). The satellite placement is separate: the astronomy record `packages/astronomy/data/bodies/dysnomia.json` declares `acquisition.sceneSatellite`, and `node packages/astronomy/tools/generate-scene-satellites.mts --object=dysnomia` reads the retained responses and the [epoch state record](source/validation/epoch-state.json).
+The [shared distant-worlds methods](../../../packages/bake/authoring/distant-worlds/README.md) explain the numerical authoring, acquisition and preparation used here; this body's input row is [companions/inputs.json](../../../packages/bake/authoring/companions/inputs.json). The satellite placement is separate: the astronomy record `packages/astronomy/data/bodies/dysnomia.json` declares `acquisition.sceneSatellite`, and `node packages/astronomy/cli/generate-scene-satellites.mts --object=dysnomia` reads the retained responses and the [epoch state record](source/validation/epoch-state.json).
 
 Edit source interpretation in [measurements](source/measurements.json) and the existing [preparation records](source/preparation/). Trace the generated result through prepared provenance (`prepared/provenance.json`) and the [runtime asset inventory](inventory.json). Common installation and usage belong in the [body contributor guide](../README.md).
 

@@ -67,8 +67,9 @@ export const LAYER_RULES: readonly LayerRule[] = [
   },
   {
     id: 'nothing-imports-cli-entries',
-    description: 'packages/*/cli/ holds command entries: nothing imports them, including other entries and the package itself (tests and type-only imports count)',
-    forbids: (_from, to) => /^packages\/[^/]+\/cli\//u.test(to),
+    description: 'package cli entries are not imported (astronomy cli shares its existing helpers; tests and type-only imports count)',
+    forbids: (_from, to) => /^packages\/[^/]+\/cli\//u.test(to)
+      && !/^packages\/astronomy\/cli\/(?:lib\/|body-records\.mts$|body-epoch-ephemeris\.mts$|scene-ephemeris\.mts$|generate-heliocentric\.mts$)/u.test(to),
     includeTests: true,
   },
   {

@@ -13,7 +13,7 @@ export interface RepositoryRule {
   readonly check: (root: string, files: readonly string[]) => readonly string[];
 }
 
-/** Top-level folders that no longer exist: `tools/` held preparation code until it moved to its canonical homes
+/** Folders that no longer exist: `tools/` held preparation code until it moved to its canonical homes
  * (`packages/bake`, `packages/telescope-cli`, `site/build`, `.github/scripts`, `labs`, `tests`, `evidence/`). A file under one means
  * code went back to a retired location. */
 export const RETIRED_FOLDERS: readonly string[] = ['tools'];
@@ -21,7 +21,7 @@ export const RETIRED_FOLDERS: readonly string[] = ['tools'];
 /** One finding per file inside a retired folder. */
 export function retiredFiles(files: readonly string[], folders: readonly string[] = RETIRED_FOLDERS): string[] {
   return files.flatMap(file => {
-    const folder = folders.find(item => file.startsWith(`${item}/`));
+    const folder = folders.find(item => file.split('/').slice(0, -1).includes(item));
     return folder === undefined ? [] : [`${file}: ${folder}/ is retired; put the file in the folder its code moved to`];
   });
 }
@@ -29,7 +29,7 @@ export function retiredFiles(files: readonly string[], folders: readonly string[
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
   {
     id: 'retired-folders',
-    description: 'no file lives under the retired tools/ folder (RETIRED_FOLDERS in repository-rules.mts)',
+    description: 'no file lives under a tools/ folder (RETIRED_FOLDERS in repository-rules.mts)',
     check: (_root, files) => retiredFiles(files),
   },
   {

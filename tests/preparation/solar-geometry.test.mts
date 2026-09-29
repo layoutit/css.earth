@@ -5,7 +5,7 @@ import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../packages/astronomy/tools/scene-ephemeris.mts';
+import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../packages/astronomy/cli/scene-ephemeris.mts';
 import { loadAstronomyPackage } from '@cssearth/bake/astronomy';
 import * as geometry from '../../src/platform/solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

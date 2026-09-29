@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
 
-import { readHostedOrbitRecord } from '../../../packages/astronomy/tools/lib/generator-records.mts';
+import { readHostedOrbitRecord } from '../../../packages/astronomy/cli/lib/generator-records.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 const root = resolve(import.meta.dirname, '../../..');
