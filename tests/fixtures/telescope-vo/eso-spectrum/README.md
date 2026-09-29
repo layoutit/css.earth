@@ -10,7 +10,7 @@ The decoder tests additionally cover invalid units, sample order, masks and gaps
 
 ## UVES spectrum excerpt
 
-`uves-hd189733-excerpt.fits` contains 16 consecutive samples (zero-based native indices 5000–5015) from the public UVES product [ADP.2020-06-09T07:00:12.910](https://dataportal.eso.org/dataPortal/file/ADP.2020-06-09T07:00:12.910) of HD 189733 A. The original file is 6,261,120 bytes, SHA-256 `1c574c6cc9005577e05a6fe6a039f0fdc89cdc6c849324015b3a02995afb404c`. Credit: ESO Science Archive / UVES; [ESO data-use policy](https://archive.eso.org/cms/eso-data/eso-data-access-policy.html).
+`uves-hd189733-excerpt.fits` contains 16 consecutive samples (zero-based native indices 5000–5015) from the public UVES product [ADP.2020-06-09T07:00:12.910](https://dataportal.eso.org/dataPortal/file/ADP.2020-06-09T07:00:12.910) of HD 189733 A. The original file is 6,261,120 bytes. Credit: ESO Science Archive / UVES; [ESO data-use policy](https://archive.eso.org/cms/eso-data/eso-data-access-policy.html).
 
 Astropy 8.0.1 copied the native vectors and their units into a one-record excerpt. The excerpt retains the additional `FLUX_REDUCED` and `ERR_REDUCED` columns before the calibrated `FLUX` and `ERR` columns, as well as the archive's `VOCLASS=SPECTRUM v2.0` spelling. The TypeScript reader must select the calibrated columns by name and reproduce the independent Astropy values exactly. `ARCFILE` identifies the parent product, not the excerpt as an archive file.
 
