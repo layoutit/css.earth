@@ -1,16 +1,6 @@
 {
   "schema": "cssearth-usgs-validation@1",
   "date": "2026-09-27T01:55:17.484Z",
-  "testedCode": {
-    "tools/objects/acquisition/geotiff-grid.mts": "d377dd0968f9940cb9f0c1d99549dcb7844e8ccfc8c6b567814d6ebd13661e3c",
-    "tools/objects/operations-acquisition.ts": "e8285a05315bf6aab072a3b6f8a9ba3dbbed1d441538d6b124b00056b887158b",
-    "tools/objects/provenance.mts": "9a575aea379025c8c37666568750aa192d250dbd2ce97e2d7b2bf272b37b2be4",
-    "tools/objects/provenance-recipes.mts": "002f1f061bc76f7f569875dc3191ea45dffa9b993536b9240f90deedd9fd16a9",
-    "tools/oracles/isis-geotiff-grid.mts": "59a8f5738b972e3d342387d822c185fcb957539211234df68f7d77839a4cd7da",
-    "tools/oracles/lunar-mi-quality.mts": "3b859ca7a3efa68a69fb9e0db8d5fd28b68941addc88c6453f27bdb3df220b8d",
-    "packages/bake/src/raster/surfaces.ts": "473c082f9e7f997b3eaca31318aa2ef903ac6582d038aa9e763066cf5df52a1e",
-    "packages/bake/src/raster/validation.ts": "9da72601d631ccd75686de4a28353347ea1d1a8601955eb34799ceb351438a13"
-  },
   "checks": [
     {
       "command": "node --test tools/prepare/prepare-text.test.mts",

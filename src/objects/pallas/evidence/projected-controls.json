@@ -1,12 +1,10 @@
 {
   "status": "diagnostic-unqualified",
-  "recipeSha256": "a3f93b854218ee35d787335cb5a2981d1bf0156c107b7b2654d3052e95f19247",
   "source": "Marsset et al. (2020), Supplementary Table 1, rows 1, 4, 5, 6. https://doi.org/10.1038/s41550-019-1007-5",
   "limitations": "Visual estimates from the native FITS frame before projecting these four coordinates. Fig. 2 identifies the crater configuration; its illustrative sketch supplies no metric pixels. Native linear and paper-described squared-luminosity views were inspected. Bounds describe ambiguous feature centres, not confidence intervals or camera acceptance limits. The published coordinate table does not give individual crater-centre uncertainties. Its correspondence to the released model remains under investigation; these tentative picks must not authorize a photographic surface.",
   "image": {
     "file": "pallas-20171011-cam1.fits",
     "bytes": 593280,
-    "sha256": "bc1aa695bf130dac60be0d13cc44f6db0e8f6961fd3c1f7621e45cec6cdeaef8",
     "width": 256,
     "height": 256,
     "pixelConvention": "zero-based-x-right-y-down-reversed-fits-rows"
@@ -18,26 +16,25 @@
       "id": "adam",
       "shape": {
         "file": "2_Pallas_adam.obj",
-        "bytes": 121798,
-        "sha256": "519ec4ca5b7ed1d0cfc345174eb3aa53d33faaf45967c2467cc8b72510605655"
+        "bytes": 121798
       },
       "cameraSource": "Frozen 20171011 adam limb-refined diagnostic camera from the photographic-projection investigation; geocentric Horizons, LAM spin and ADAM convention, existing refineCameraByLimb. Not a producer camera or qualified control solution. Native picks did not alter this camera.",
       "camera": {
         "schema": "cssearth-archived-camera@1",
         "rayMatrix": [
           [
-            -1.1046870951952486e-8,
-            1.2430790733770957e-8,
+            -1.1046870951952486e-08,
+            1.2430790733770957e-08,
             0.32719745280849855
           ],
           [
-            -1.359147288361474e-8,
-            -1.0872489279132721e-8,
+            -1.359147288361474e-08,
+            -1.0872489279132721e-08,
             -0.14791355856428182
           ],
           [
-            1.7187314495029738e-9,
-            -6.081114156055208e-9,
+            1.7187314495029738e-09,
+            -6.081114156055208e-09,
             0.9333077767159935
           ]
         ],
@@ -199,26 +196,25 @@
       "id": "mpcd",
       "shape": {
         "file": "2_Pallas_mpcd.obj",
-        "bytes": 2703739,
-        "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e"
+        "bytes": 2703739
       },
       "cameraSource": "Frozen 20171011 mpcd limb-refined diagnostic camera from the photographic-projection investigation; geocentric Horizons, LAM spin and ADAM convention, existing refineCameraByLimb. Not a producer camera or qualified control solution. Native picks did not alter this camera.",
       "camera": {
         "schema": "cssearth-archived-camera@1",
         "rayMatrix": [
           [
-            -1.1046863164603473e-8,
-            1.2430797668667612e-8,
+            -1.1046863164603473e-08,
+            1.2430797668667612e-08,
             0.3271974510258137
           ],
           [
-            -1.3591479724964832e-8,
-            -1.0872480664329688e-8,
+            -1.3591479724964832e-08,
+            -1.0872480664329688e-08,
             -0.14791357341361744
           ],
           [
-            1.718727401024897e-9,
-            -6.0811153824822126e-9,
+            1.718727401024897e-09,
+            -6.0811153824822126e-09,
             0.9333077749875945
           ]
         ],

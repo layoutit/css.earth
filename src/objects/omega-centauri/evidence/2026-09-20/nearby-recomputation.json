@@ -1,7 +1,5 @@
 {
   "points.json": {
-    "oldHash": "c70262ba6e3ae288da6acd29971d1b8da0eeb33ae8a924fcfa39ff9b2eceb8d3",
-    "newHash": "595fac1eade3b55da32fe3a8047a751ec992e5eb850d39ab5a15f64dddca2aee",
     "oldBytes": 345401,
     "newBytes": 345406,
     "count": 1454,
@@ -28,8 +26,6 @@
     "frameIdentical": true
   },
   "provenance.json": {
-    "oldHash": "ee12abfd6a352def90493a13ade2c8297f6b75694240690980816e3482b582ea",
-    "newHash": "25fd338e082b947f3071dd635f47ba133067a9a091550e61521b7527e95a107f",
     "oldBytes": 10363,
     "newBytes": 10363,
     "count": 2,
@@ -42,27 +38,25 @@
       "old": 345401,
       "new": 345406,
       "delta": 5,
-      "relative": 0.000014475927979363118
+      "relative": 1.4475927979363118e-05
     },
     "maxRelative": {
       "path": "/products/0/outputs/0/bytes",
       "old": 345401,
       "new": 345406,
       "delta": 5,
-      "relative": 0.000014475927979363118
+      "relative": 1.4475927979363118e-05
     },
     "differences": [
       {
-        "path": "/products/0/outputs/0/sha256",
-        "old": "c70262ba6e3ae288da6acd29971d1b8da0eeb33ae8a924fcfa39ff9b2eceb8d3",
-        "new": "595fac1eade3b55da32fe3a8047a751ec992e5eb850d39ab5a15f64dddca2aee"
+        "path": "/products/0/outputs/0/sha256"
       },
       {
         "path": "/products/0/outputs/0/bytes",
         "old": 345401,
         "new": 345406,
         "delta": 5,
-        "relative": 0.000014475927979363118
+        "relative": 1.4475927979363118e-05
       }
     ],
     "sourceIdentical": true,

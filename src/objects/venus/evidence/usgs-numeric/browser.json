@@ -2,11 +2,6 @@
   "schema": "cssearth-dataset-browser-check@1",
   "date": "2026-09-27T01:59:12.507Z",
   "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
-  "testedFiles": {
-    "source/content/object.json": "b94a261164f68d8677c2f5e4104254931c353740f50900cf3fc023f511640dc9",
-    "text.json": "8e843e35b9e3d26f18967de6f553adb1fa95a279d266babbbae3994efa7c1b28",
-    "inventory.json": "75227739c83ebaa3d81a7e8d5db045652ebd41af2e68f01328997d559dc6d026"
-  },
   "tests": {
     "sourceLabels": {
       "body": "venus",
@@ -84,7 +79,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 430148,
-      "sha256": "a008c58471c0aa111be62f693e93eeb69c1a876850f5cad6dcb7d16570447b95",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -92,7 +86,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 427730,
-      "sha256": "ee53895ca2cc8a90488608cad4be30c3dc931fb7bbec816f423b7986ba6e4459",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -100,7 +93,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 469100,
-      "sha256": "a9edb190e1aa3ccac9e61f98a4c97e2e73462b2991eabf95b65355364f3b5d07",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -108,7 +100,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 439526,
-      "sha256": "b306fcd720b33d04092de91f48c8c4a3cb322c0d90e69c26d95a6b0825b96715",
       "decodedPixelsEqualToCapture": true
     }
   ]

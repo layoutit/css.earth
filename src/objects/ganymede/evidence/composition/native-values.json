@@ -2,19 +2,16 @@
   "schema": "cssearth-mapped-composition-evidence@1",
   "target": "Ganymede",
   "recipe": {
-    "path": "composition/model-recipe.json",
-    "sha256": "3484816c073e6addb01bb505b779bc3fb1034e3152318d1756bbfe36054d6afd"
+    "path": "composition/model-recipe.json"
   },
   "input": {
-    "path": "composition/fit_SPHERE.json.gz",
-    "sha256": "cd7843ce36dcf64782907b29c34b7bfb61937288ffb99fd3ee38e2369261c8e4"
+    "path": "composition/fit_SPHERE.json.gz"
   },
   "comparison": "Every native geographic node matches exactly after float32 rounding; missing samples remain null. Seam equivalence and absent north-pole coverage checked.",
   "products": [
     {
       "id": "ice-fraction",
       "path": "composition/ice-fraction.tif",
-      "sha256": "b614ac1e22a9d2d4a3f87b3975718c2d988966eab1a807a2fb091b8aaa65b9d5",
       "checkedNodes": 64800,
       "valid": 38473,
       "missing": 26327,
@@ -144,7 +141,6 @@
     {
       "id": "dark-material",
       "path": "composition/dark-material.tif",
-      "sha256": "aaf6961e48c6125a804338b6930609ae834a586e7d1f05f1bc934cd094109d3a",
       "checkedNodes": 64800,
       "valid": 38473,
       "missing": 26327,
@@ -274,7 +270,6 @@
     {
       "id": "ice-uncertainty",
       "path": "composition/ice-uncertainty.tif",
-      "sha256": "84bb23bfca177af451d1165f85e9abf4889bd3144ba0ff0cd334e1a64acbe776",
       "checkedNodes": 64800,
       "valid": 38473,
       "missing": 26327,
@@ -404,7 +399,6 @@
     {
       "id": "dark-uncertainty",
       "path": "composition/dark-uncertainty.tif",
-      "sha256": "4fb42e921b4f530359be2f795113d3d2863244daa3f6d679454e7d53923baad9",
       "checkedNodes": 64800,
       "valid": 38473,
       "missing": 26327,

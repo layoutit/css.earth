@@ -14,7 +14,6 @@
     "name": "bennu-21415424.ch1.remosaic.fits",
     "bytes": 11442240,
     "stage": "open-remosaic",
-    "toolchainDigest": "57d10b4f335a2b3f6abbe10732b610db92c3e2089cadcaa0059d4b0a78299cc6",
     "software": [
       {
         "name": "numpy",
@@ -58,7 +57,7 @@
   "statistics": {
     "comparedPixels": 1038727,
     "archiveCoveredPixels": 1042067,
-    "bitIdenticalShare": 9.627168640075785e-7,
+    "bitIdenticalShare": 9.627168640075785e-07,
     "medianRatio": 1.0029993810409956,
     "medianLevel": 0.14505113661289215,
     "medianAbsoluteDifferenceOverLevel": 0.011865977510055508,

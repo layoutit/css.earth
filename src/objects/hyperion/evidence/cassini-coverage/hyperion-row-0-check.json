@@ -1,7 +1,6 @@
 {
   "body": "hyperion",
   "mode": "fixed-camera-validation",
-  "recipeSha256": "db650721f8880503799e94252f0eb2459bb020684ca89571d7369e24da44e064",
   "referenceCamera": {
     "id": "n1506391424",
     "observerLatitude": 10.62,
@@ -20,10 +19,8 @@
     "coverageInsetPixels": 16,
     "backgroundMaximum": 0.003
   },
-  "implementationSha256": "554e629a61076d47a5e3357ad941cd75d86bd42bf8c9dd8e6a45f2afdfa9b7c4",
   "mesh": {
-    "path": "shape/hyperion_30k_plt.tab",
-    "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002"
+    "path": "shape/hyperion_30k_plt.tab"
   },
   "settings": {
     "patchRadiusPixels": 13,
@@ -37,7 +34,7 @@
     "maximumEmissionDegrees": 65,
     "maximumReferenceIncidenceDegrees": 75,
     "minimumValidSignal": 0.002,
-    "minimumDetailVariance": 0.000001,
+    "minimumDetailVariance": 1e-06,
     "minimumConvolutionMarginPixels": 16,
     "maximumSourceMeshVisibilityResidualMeters": 1
   },

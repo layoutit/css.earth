@@ -17,48 +17,39 @@
   "inputPins": [
     {
       "path": "src/objects/helix/prepared/lenses.json",
-      "bytes": 3185043,
-      "sha256": "60f1a0053b12adf61d1ce4a225e723ff586f6ac32a3225ffa82d93f0be3d22cc"
+      "bytes": 3185043
     },
     {
       "path": "src/objects/helix/prepared/provenance.json",
-      "bytes": 42637,
-      "sha256": "6969288c05fa55913c25233b86073ffd04e708a7e482e2e3a32257baa1952665"
+      "bytes": 42637
     },
     {
       "path": "src/objects/m1/prepared/lenses.json",
-      "bytes": 5356756,
-      "sha256": "1cb3f46d09f5f7669e1ec2994c0d1ae1dd99be466f41ebab83c6fad3948f60d0"
+      "bytes": 5356756
     },
     {
       "path": "src/objects/m45/prepared/lenses.json",
-      "bytes": 6710388,
-      "sha256": "d27b5b2d3da99ba735410f60e27e6e59ceb70e6c18d8c54d2df265498437460a"
+      "bytes": 6710388
     },
     {
       "path": "src/objects/helix/prepared/presentation.json",
-      "bytes": 4792,
-      "sha256": "53e3dc0ff60a4050ddb847150cdf4c9c6a1a355279b6f5e3558d2dc7e4cadb95"
+      "bytes": 4792
     },
     {
       "path": "src/objects/m1/prepared/provenance.json",
-      "bytes": 200230,
-      "sha256": "3fb9dedd8208d498d694c6f577e0abf05e1197775fb2d90e1de410d87f2111a4"
+      "bytes": 200230
     },
     {
       "path": "src/objects/m1/prepared/presentation.json",
-      "bytes": 10565,
-      "sha256": "9c48ba41eeb58bb7bb5257f5e9f4e258f37e8566561f26a5d9bf9a4314b4bb3a"
+      "bytes": 10565
     },
     {
       "path": "src/objects/m45/prepared/provenance.json",
-      "bytes": 2066964,
-      "sha256": "ed15a6d0ced9413a9d38d1ec52fae6055f27ed8b3b6e9e081e750c74ca988348"
+      "bytes": 2066964
     },
     {
       "path": "src/objects/m45/prepared/presentation.json",
-      "bytes": 8391,
-      "sha256": "14650f91813ed489b91c1b6fa3235e8d1533b7047f376029733ca01f92d0388a"
+      "bytes": 8391
     }
   ],
   "objects": [
@@ -4148,7 +4139,7 @@
         "distanceRadii": 6813702697.279404,
         "levelOfDetail": {
           "stage": "marker",
-          "silhouetteDiameter": 4.400092508809693e-7,
+          "silhouetteDiameter": 4.400092508809693e-07,
           "billboardOpacity": 0,
           "markerOpacity": 1,
           "proxyOpacity": 1
@@ -4165,7 +4156,7 @@
           "bottom": 500
         },
         "offAxisDegrees": 33.703967008761914,
-        "silhouetteRadius": 2.2000462544048464e-7,
+        "silhouetteRadius": 2.2000462544048464e-07,
         "bodyCenterKilometers": [
           2203035472132090.2,
           -1437229733478327.5,
@@ -4236,7 +4227,7 @@
         "distanceRadii": 1027851252.951214,
         "levelOfDetail": {
           "stage": "marker",
-          "silhouetteDiameter": 0.0000024278379096544427,
+          "silhouetteDiameter": 2.4278379096544427e-06,
           "billboardOpacity": 0,
           "markerOpacity": 1,
           "proxyOpacity": 1
@@ -4253,7 +4244,7 @@
           "bottom": 500
         },
         "offAxisDegrees": 1.8468164157010318,
-        "silhouetteRadius": 0.0000012139189548272213,
+        "silhouetteRadius": 1.2139189548272213e-06,
         "bodyCenterKilometers": [
           21114631090261.21,
           9232980122183.264,

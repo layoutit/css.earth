@@ -6,7 +6,6 @@
   },
   "purpose": "Inspect the expanded Monochrome mosaic at a closer product view. Source/package qualification and the companion capture report establish source and loaded asset identities.",
   "workingTreeChanges": "Cassini close-encounters moon data and capture helper; local nebula preparation changed the M2-9 prepared hash.",
-  "runtimeSha256": "2fc8b94a7cfb4eba3940f70b2f7dd0ac599cafe783a1c64b8950a8f1cfa58a67",
   "browser": "152.0.7977.84",
   "viewport": {
     "width": 1440,
@@ -20,8 +19,7 @@
     "height": 660
   },
   "image": {
-    "file": "monochrome.png",
-    "sha256": "7a3c88b01525f870d3617943f20d48a710a7720b57429fc792e9b28aa3f558de"
+    "file": "monochrome.png"
   },
   "url": "http://127.0.0.1:4284/helene/?v=MMZAWM-Wh_w060FCxzNAAAAAP8uGibS6YTQ_yTocOGmv2z-mtep849aFAAA",
   "pose": {

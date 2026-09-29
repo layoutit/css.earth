@@ -100,38 +100,31 @@
   "inputPins": [
     {
       "path": "src/objects/sun/prepared/world-context.json",
-      "bytes": 7536975,
-      "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+      "bytes": 7536975
     },
     {
       "path": "src/objects/omega-centauri/source/nebula.json",
-      "bytes": 2633,
-      "sha256": "94257a65f14b1fb1fb74d6f893010928afead94b47cc3c4342399f14d332a991"
+      "bytes": 2633
     },
     {
       "path": "src/objects/omega-centauri/prepared/lenses.json",
-      "bytes": 1202415,
-      "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+      "bytes": 1202415
     },
     {
       "path": "site/prepared-context-navigation.mts",
-      "bytes": 13194,
-      "sha256": "39b882f2d0ddf921b50827ba267fe8b83ba61dd6dc27c0ff469115a077045aea"
+      "bytes": 13194
     },
     {
       "path": "src/renderers/css/universe/prepared-universe-runtime.ts",
-      "bytes": 46748,
-      "sha256": "14f1953aa5ba1734b88532980cd2078044225c3b42d59b0cf67831c0dba1b3e0"
+      "bytes": 46748
     },
     {
       "path": "src/renderers/css/universe/prepared-world-context.ts",
-      "bytes": 75841,
-      "sha256": "00758c8d75054092c209c68b4e311605a4a886d59fda5b36cdf86bf5d41d9ab2"
+      "bytes": 75841
     },
     {
       "path": "src/renderers/css/dist/universe.js",
-      "bytes": 10185,
-      "sha256": "ce237fcd30c24ab63ed72016f0f8309de1fe0c2f0a6370649af54b1d8f3569a2"
+      "bytes": 10185
     }
   ],
   "reports": [
@@ -393,7 +386,7 @@
           "RecalcStyleCount": 0,
           "LayoutDuration": 0,
           "RecalcStyleDuration": 0,
-          "DevToolsCommandDuration": 0.00007100000000000162,
+          "DevToolsCommandDuration": 7.100000000000162e-05,
           "ScriptDuration": 0.0003110000000000057,
           "V8CompileDuration": 0,
           "TaskDuration": 0.005376000000000047,
@@ -527,7 +520,7 @@
         "RecalcStyleDuration": 0.055495,
         "DevToolsCommandDuration": 0.026869,
         "ScriptDuration": 0.07459,
-        "V8CompileDuration": 0.000056,
+        "V8CompileDuration": 5.6e-05,
         "TaskDuration": 1.107298,
         "TaskOtherDuration": 0.937121,
         "ThreadTime": 0.855672,
@@ -565,7 +558,7 @@
         "RecalcStyleDuration": 0.143745,
         "DevToolsCommandDuration": 0.034128,
         "ScriptDuration": 0.199241,
-        "V8CompileDuration": 0.000056,
+        "V8CompileDuration": 5.6e-05,
         "TaskDuration": 1.609353,
         "TaskOtherDuration": 1.21806,
         "ThreadTime": 1.312425,
@@ -837,7 +830,7 @@
           "RecalcStyleCount": 0,
           "LayoutDuration": 0,
           "RecalcStyleDuration": 0,
-          "DevToolsCommandDuration": 0.00006899999999999962,
+          "DevToolsCommandDuration": 6.899999999999962e-05,
           "ScriptDuration": 0.00022800000000000598,
           "V8CompileDuration": 0,
           "TaskDuration": 0.003882999999999859,
@@ -930,7 +923,7 @@
         "cdpDelta": {
           "LayoutCount": 1,
           "RecalcStyleCount": 44,
-          "LayoutDuration": 0.00005800000000000076,
+          "LayoutDuration": 5.800000000000076e-05,
           "RecalcStyleDuration": 0.012986000000000004,
           "DevToolsCommandDuration": 0.006305000000000002,
           "ScriptDuration": 0.11778100000000001,
@@ -966,7 +959,7 @@
         "RecalcStyleDuration": 0.060965,
         "DevToolsCommandDuration": 0.024578,
         "ScriptDuration": 0.069118,
-        "V8CompileDuration": 0.000059,
+        "V8CompileDuration": 5.9e-05,
         "TaskDuration": 1.052571,
         "TaskOtherDuration": 0.885354,
         "ThreadTime": 0.817913,
@@ -1004,7 +997,7 @@
         "RecalcStyleDuration": 0.073951,
         "DevToolsCommandDuration": 0.030883,
         "ScriptDuration": 0.186899,
-        "V8CompileDuration": 0.000059,
+        "V8CompileDuration": 5.9e-05,
         "TaskDuration": 1.280576,
         "TaskOtherDuration": 0.976229,
         "ThreadTime": 1.029277,

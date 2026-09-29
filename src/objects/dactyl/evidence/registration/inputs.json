@@ -7,86 +7,73 @@
       "id": "vicar",
       "path": "src/objects/dactyl/evidence/registration/native/2278r.img",
       "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2278r.img",
-      "expectedBytes": 808000,
-      "expectedSha256": "218a59544dc0d6fafbb870297a161a15ac5621ffaf2a3f9542f5f834a6f37370"
+      "expectedBytes": 808000
     },
     {
       "id": "vicar-label",
       "path": "src/objects/dactyl/evidence/registration/native/2278r.lbl",
       "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/ida/c020256/2278r.lbl",
-      "expectedBytes": 11760,
-      "expectedSha256": "302e7448ee3aded3159a091df0b15a9dfebf93776c7300a279cd3d1721c21626"
+      "expectedBytes": 11760
     },
     {
       "id": "catalog-document",
       "path": "src/objects/dactyl/evidence/registration/native/catstat.txt",
       "url": "https://planetarydata.jpl.nasa.gov/img/data/go-a_c-ssi-2-redr-v1.0/go_0016/document/catstat.txt",
-      "expectedBytes": 30148,
-      "expectedSha256": "87a745f68d2cd3300c8548280dca2248fb18b79807ebe3da52229cef454345ed"
+      "expectedBytes": 30148
     },
     {
       "id": "sclk",
       "path": "src/objects/dactyl/evidence/registration/native/mk00062a.tsc",
       "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/sclk/mk00062a.tsc",
-      "expectedBytes": 10127,
-      "expectedSha256": "cea5234f9769f83aa6da65f360c6940a70b72461ed2c577cb531448e7498295c"
+      "expectedBytes": 10127
     },
     {
       "id": "lsk",
       "path": "src/objects/dactyl/evidence/registration/native/naif0008.tls",
       "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/lsk/naif0008.tls",
-      "expectedBytes": 4542,
-      "expectedSha256": "bbf419803aa31b787d681bd9b807930f60c7504695df3ad016bd47ca1bb89f42"
+      "expectedBytes": 4542
     },
     {
       "id": "instrument",
       "path": "src/objects/ida/source/reference/gll36001.ti",
       "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/ik/gll36001.ti",
-      "expectedBytes": 9964,
-      "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+      "expectedBytes": 9964
     },
     {
       "id": "ck",
       "path": "src/objects/dactyl/evidence/galileo/native/gll_plt_rec_1993_tav_v00.bc",
       "url": "https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/ck/gll_plt_rec_1993_tav_v00.bc",
-      "expectedBytes": 342016,
-      "expectedSha256": "0c0c50f8358fe1826e4147a45ec7c6663db92e89df2ebab7bc7e19554a219e86"
+      "expectedBytes": 342016
     },
     {
       "id": "fits",
       "path": "src/objects/dactyl/evidence/galileo/native/i2278.fit",
-      "expectedBytes": 645120,
-      "expectedSha256": "aecdbd30e0c7aa3f2607a89b6c12c6d1553de2ba273cbd0ca9d2ffd1fa60c181"
+      "expectedBytes": 645120
     },
     {
       "id": "i1578-label",
       "path": "src/objects/dactyl/evidence/galileo/native/i1578.lbl",
-      "expectedBytes": 10480,
-      "expectedSha256": "7a717766a0a8f396c30318a386aa71adb7cb0d141ce5a7e1f525309cb682369a"
+      "expectedBytes": 10480
     },
     {
       "id": "i2278-label",
       "path": "src/objects/dactyl/evidence/galileo/native/i2278.lbl",
-      "expectedBytes": 10480,
-      "expectedSha256": "0c527a1b56a9ba54a24d84c542c7283cad08929a48d052e7983fc3c7a0518eeb"
+      "expectedBytes": 10480
     },
     {
       "id": "i2700-label",
       "path": "src/objects/dactyl/evidence/galileo/native/i2700.lbl",
-      "expectedBytes": 10480,
-      "expectedSha256": "3009babb4002308267bdcf1045881e99b76ec5705f6e80f277011528c2ab513c"
+      "expectedBytes": 10480
     },
     {
       "id": "shape",
       "path": "src/objects/dactyl/source/shape/model.json",
-      "expectedBytes": 163,
-      "expectedSha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4"
+      "expectedBytes": 163
     },
     {
       "id": "oracle",
       "path": "tests/objects/fixtures/dactyl/galileo-pointing.json",
-      "expectedBytes": 2421,
-      "expectedSha256": "1fb184b1c89fd426f71b2fa740e15ff91a74716ba8b6a2b9b0fe862bed9e87fd"
+      "expectedBytes": 2421
     }
   ],
   "rangeKm": 3900,

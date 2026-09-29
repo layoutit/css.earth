@@ -3,24 +3,19 @@
   "id": "smc-constrained",
   "outputDirectory": ".local/nebula-lab/smc-constrained",
   "simulation": {
-    "path": ".local/nebula-lab/full-density/smc-full-density.f32",
-    "sha256": "b99bebd44a18fdfd729ed6b0ed77f17ccd1a4671231927e4b13540ac95a6d0c4"
+    "path": ".local/nebula-lab/full-density/smc-full-density.f32"
   },
   "catalogue": {
-    "path": ".local/nebula-lab/smc-vmc/density-rc.tsv",
-    "sha256": "a3efee3625fd8c1fda07049f2c1a40cdb4af8ff31728f0147fa2df3838f4c00e"
+    "path": ".local/nebula-lab/smc-vmc/density-rc.tsv"
   },
   "footprint": {
-    "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz",
-    "sha256": "e27a0db84ce43032161a53fef64af23cabc2a508c481459164d04f88cc86502f"
+    "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz"
   },
   "observedReceipt": {
-    "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
-    "sha256": "46185c29d4f2028691dedc60468ea8afd00fbd2c81362f7be4e2840082279383"
+    "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json"
   },
   "frameObject": {
-    "path": "labs/nebula/models/smc/full-density/object.json",
-    "sha256": "ca7aa69e0c37ca01ae8fd1b437786bb178693996a0d67930c22fce19f57a5957"
+    "path": "labs/nebula/models/smc/full-density/object.json"
   },
   "evidence": {
     "simulation": "https://doi.org/10.5061/dryad.1vhhmgr82",

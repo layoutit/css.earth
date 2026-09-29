@@ -6,50 +6,39 @@
   "browser": "Chrome through Playwright",
   "sources": [
     {
-      "path": "src/planets/arrokoth/object.json",
-      "sha256": "0d352aa9bd6fe1729c6115d7ae91facbe6542649e829df0e300e7699cba8bb80"
+      "path": "src/planets/arrokoth/object.json"
     },
     {
-      "path": "src/planets/arrokoth/source/manifest.json",
-      "sha256": "729909dd1d95664212902bccd6cf3f5ec74367cdaa671d48e742795815935152"
+      "path": "src/planets/arrokoth/source/manifest.json"
     },
     {
-      "path": "src/planets/arrokoth/source/preparation/terrestrial.json",
-      "sha256": "df26536cdfe20b8ee284ba00e45c154f203682904bec2ea6e6be09851f64e1b6"
+      "path": "src/planets/arrokoth/source/preparation/terrestrial.json"
     },
     {
-      "path": "src/planets/arrokoth/source/preparation/photography.json",
-      "sha256": "ba4d45cb602d95a96e83a18f4fe3ec5d918f9f7fc3317397c953d0fc3aafa0cb"
+      "path": "src/planets/arrokoth/source/preparation/photography.json"
     },
     {
-      "path": "src/planets/arrokoth/prepared/runtime.refs.json",
-      "sha256": "a78d31ad502ca52e62ceb1553d7a1c30b4923d9241ef4806c52bae5b6da96381"
+      "path": "src/planets/arrokoth/prepared/runtime.refs.json"
     },
     {
-      "path": "src/planets/arrokoth/runtime-assets.json",
-      "sha256": "f2916396a35ba7d0de0116ef1296763d6b57ff351d1e2c7fa5c6fd9652a16a4b"
+      "path": "src/planets/arrokoth/runtime-assets.json"
     },
     {
-      "path": "tools/objects/terrestrial-layers/new-horizons-geo.mts",
-      "sha256": "75a7c63edbd17dca5cce7fc0e7c172303f177eecfa438d82eabfbaf22a3197ca"
+      "path": "tools/objects/terrestrial-layers/new-horizons-geo.mts"
     },
     {
-      "path": "tools/objects/terrestrial-layers/observed-geo-surface.mts",
-      "sha256": "e1c8c538232f499f7d73c28d1ca50de9f111a533661843ed1d156ab6c4e95e07"
+      "path": "tools/objects/terrestrial-layers/observed-geo-surface.mts"
     },
     {
-      "path": "tools/objects/terrestrial-layers/osiris-geo.mts",
-      "sha256": "b4d6c8dc1f5dcd5d8e59275143f572775f2800b33c8453b3c5cdc097d647e987"
+      "path": "tools/objects/terrestrial-layers/osiris-geo.mts"
     },
     {
-      "path": "tools/objects/arrokoth/prepare-photographic-cameras.mts",
-      "sha256": "aa68da137ea0d510f87be57eed579a42940636d815e27657f8c03358e9dd55e7"
+      "path": "tools/objects/arrokoth/prepare-photographic-cameras.mts"
     }
   ],
   "captures": [
     {
       "path": "lorri-dpr1.png",
-      "sha256": "6e4aa52c964a537c8797a4db49d1f308942d6cfe5420d4640d42f221cedd52ac",
       "bytes": 449787,
       "dpr": 1,
       "viewport": [
@@ -59,7 +48,6 @@
     },
     {
       "path": "mvic-dpr1.png",
-      "sha256": "e5cc7170cc9d7c87959a7a10317dbbaff5a555b1f86313ef64a7598444ad26b5",
       "bytes": 439009,
       "dpr": 1,
       "viewport": [
@@ -69,7 +57,6 @@
     },
     {
       "path": "lorri-dpr2.png",
-      "sha256": "b5d5ebc6618296a23241ea356fa74ad22b2a1c16a37c7d74518c06cc62eb1689",
       "bytes": 1249593,
       "dpr": 2,
       "viewport": [
@@ -79,7 +66,6 @@
     },
     {
       "path": "mvic-dpr2.png",
-      "sha256": "f5f635caefdf65e3c0477a9c5ba12adda1f92ade185daa06a7f6d3b4c95a25d0",
       "bytes": 1143775,
       "dpr": 2,
       "viewport": [
@@ -89,7 +75,6 @@
     },
     {
       "path": "unmapped-dpr2.png",
-      "sha256": "876fdbecfbc117d266c56250e6dd81c7b9eb4346b1f267420c4c2f45040405e2",
       "bytes": 828352,
       "dpr": 2,
       "viewport": [
@@ -99,7 +84,6 @@
     },
     {
       "path": "mobile.png",
-      "sha256": "e2614080ede0b766551855c3e7d7a964e765e3e0ef8529a53694b5b9c7e9e120",
       "bytes": 184989,
       "dpr": 1,
       "viewport": [
@@ -125,7 +109,6 @@
     "installed": 41,
     "reused": 0,
     "bytes": 10452758,
-    "manifestSha256": "f2916396a35ba7d0de0116ef1296763d6b57ff351d1e2c7fa5c6fd9652a16a4b",
     "method": "Public content-addressed URLs installed through the standard setup implementation into an empty directory; every downloaded file checked against its expected bytes and SHA-256."
   },
   "limits": "Visual and dataset qualification only. The README records broader conformance and source-suite failures; these captures do not claim full-site readiness."

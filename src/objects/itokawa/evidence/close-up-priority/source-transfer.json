@@ -1,7 +1,6 @@
 {
   "date": "2026-09-14",
   "sourceMesh": "source/shape/ver128q.tab",
-  "sourceMeshSha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964",
   "readers": [
     "tools/objects/terrestrial-layers/amica-geo.mts",
     "tools/objects/surface-observations/cameras.mts",
@@ -11,7 +10,6 @@
   "rows": [
     {
       "id": "2492225173",
-      "cubeSha256": "d241ebf033e4760583fd72cbeb0fa0024e6b3c37076949b4c8ca3e5d090ea543",
       "nativeXyzSampleStride": 13,
       "samples": 39565,
       "meanMeters": 0.12014991711771197,
@@ -45,13 +43,12 @@
         ],
         "fitPixels": 2870,
         "holdoutPixels": 511490,
-        "maximumResidualPixels": 0.000024809786623481338,
-        "rmsResidualPixels": 0.000008514057294771568
+        "maximumResidualPixels": 2.4809786623481338e-05,
+        "rmsResidualPixels": 8.514057294771568e-06
       }
     },
     {
       "id": "2493031594",
-      "cubeSha256": "9525cf54d1c6f854fa6cab5a0227d453e828a8fa3dcc76cd15768e0595f540ab",
       "nativeXyzSampleStride": 13,
       "samples": 41769,
       "meanMeters": 0.1460694298845007,
@@ -85,8 +82,8 @@
         ],
         "fitPixels": 3034,
         "holdoutPixels": 540000,
-        "maximumResidualPixels": 0.00003720318226017638,
-        "rmsResidualPixels": 0.000010111427166641015
+        "maximumResidualPixels": 3.720318226017638e-05,
+        "rmsResidualPixels": 1.0111427166641015e-05
       }
     }
   ]

@@ -11,7 +11,6 @@
     "name": "j8qj15vjq_flt.fits",
     "uri": "mast:HST/product/j8qj15vjq_flt.fits",
     "bytes": 10762560,
-    "sha256": "70680187738c0e2a754317561694c5d6f5dbd3b52d1670c7435144ea807016dd",
     "CAL_VER": "10.4.1 (08-Aug-2025)",
     "OPUS_VER": "HSTDP 2026_1",
     "PROCTIME": 61188.09491898,
@@ -19,7 +18,6 @@
     "DATE": "2026-05-28"
   },
   "local": {
-    "sha256": "ac4edf25e9feae8935ad3fca5e3954efca40a51e51cfbdce1398a76e33f679dd",
     "CAL_VER": "10.4.1 (08-Aug-2025)",
     "OPUS_VER": "HSTDP 2026_1",
     "PROCTIME": 61188.09491898,
@@ -62,8 +60,8 @@
         "correlation": 0.9999999999999981,
         "relativeDifference": {
           "median": 0,
-          "p99": 9.03059813595064e-8,
-          "largest": 2.387379822721414e-7
+          "p99": 9.03059813595064e-08,
+          "largest": 2.387379822721414e-07
         }
       }
     },
@@ -88,8 +86,8 @@
         "correlation": 1,
         "relativeDifference": {
           "median": 0,
-          "p99": 1.6828954585434985e-7,
-          "largest": 5.211716143094236e-7
+          "p99": 1.6828954585434985e-07,
+          "largest": 5.211716143094236e-07
         }
       }
     },

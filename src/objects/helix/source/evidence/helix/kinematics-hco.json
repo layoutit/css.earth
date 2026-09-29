@@ -9,38 +9,75 @@
     "paper": {
       "url": "https://iopscience.iop.org/article/10.1088/0004-637X/778/1/16/pdf",
       "cachePath": ".local/nebula-lab/kinematics/helix/hco/zeigler2013-iop.pdf",
-      "sha256": "5829a97bed55ecd1cab1e2a5afe280f6b0aaa41c11a56af782fe0cd2cebd7550",
       "bytes": 2530476
     },
     "readme": {
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/778/16/ReadMe",
       "cachePath": ".local/nebula-lab/kinematics/helix/hco/ReadMe",
-      "sha256": "a8df68f4805e633dd019baa8f4f91f1c53bec8bf1eb0f3409cf01d9227d9f19e",
       "bytes": 5877
     }
   },
   "table": {
     "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/778/16/table1.dat",
     "cachePath": ".local/nebula-lab/kinematics/helix/hco/table1.dat",
-    "sha256": "61804353d393ced6650b31424591877a6481f9f01696031b2dabfb5d0cf0acaf",
     "bytes": 13602,
     "format": "cds-fixed-width@1",
     "records": 327,
     "columns": {
-      "raOffset": {"start": 1, "end": 4, "unit": "arcsec"},
-      "decOffset": {"start": 6, "end": 9, "unit": "arcsec"},
-      "intensityLimit": {"start": 11, "end": 11, "unit": "flag"},
-      "intensity": {"start": 12, "end": 16, "unit": "mK"},
-      "fwhm": {"start": 18, "end": 21, "unit": "km/s"},
-      "velocity": {"start": 23, "end": 27, "unit": "km/s"},
-      "inferredColumnDensity": {"start": 29, "end": 36, "unit": "cm-2"},
-      "inferredAbundance": {"start": 38, "end": 45, "unit": "dimensionless"}
+      "raOffset": {
+        "start": 1,
+        "end": 4,
+        "unit": "arcsec"
+      },
+      "decOffset": {
+        "start": 6,
+        "end": 9,
+        "unit": "arcsec"
+      },
+      "intensityLimit": {
+        "start": 11,
+        "end": 11,
+        "unit": "flag"
+      },
+      "intensity": {
+        "start": 12,
+        "end": 16,
+        "unit": "mK"
+      },
+      "fwhm": {
+        "start": 18,
+        "end": 21,
+        "unit": "km/s"
+      },
+      "velocity": {
+        "start": 23,
+        "end": 27,
+        "unit": "km/s"
+      },
+      "inferredColumnDensity": {
+        "start": 29,
+        "end": 36,
+        "unit": "cm-2"
+      },
+      "inferredAbundance": {
+        "start": 38,
+        "end": 45,
+        "unit": "dimensionless"
+      }
     }
   },
-  "tracer": {"species": "HCO+", "transition": "J=1–0", "restFrequencyGHz": 89.1885, "emissionPhase": "molecular gas; distinct from the inner [O III] ionized shell"},
+  "tracer": {
+    "species": "HCO+",
+    "transition": "J=1–0",
+    "restFrequencyGHz": 89.1885,
+    "emissionPhase": "molecular gas; distinct from the inner [O III] ionized shell"
+  },
   "coordinates": {
     "frame": "J2000",
-    "originJ2000Degrees": {"ra": 337.41083333333336, "dec": -20.83833333333333},
+    "originJ2000Degrees": {
+      "ra": 337.41083333333336,
+      "dec": -20.83833333333333
+    },
     "originSexagesimal": "22:29:38.6 −20:50:18 (J2000)",
     "raOffsetPositive": "east",
     "decOffsetPositive": "north",
@@ -52,7 +89,11 @@
     "positive": "receding",
     "unit": "km/s",
     "definitionNote": "The paper and CDS identify Local Standard of Rest velocities but do not explicitly name the LSRK/LSRD convention. Keep the published LSR label; do not silently equate this with an unrelated cube frame.",
-    "publishedHeliocentricConversion": {"lsrMinusHeliocentricKmS": 3.12, "source": "Paper §3, page 2 explicitly states V_LSR = V_hel + 3.12 km/s. This source-specific relation is available for explicitly framed model priors; the loader preserves every measured V_LSR unchanged.", "appliedToMeasurements": false},
+    "publishedHeliocentricConversion": {
+      "lsrMinusHeliocentricKmS": 3.12,
+      "source": "Paper §3, page 2 explicitly states V_LSR = V_hel + 3.12 km/s. This source-specific relation is available for explicitly framed model priors; the loader preserves every measured V_LSR unchanged.",
+      "appliedToMeasurements": false
+    },
     "uncertainties": "not-published",
     "uncertaintyNote": "Table 1 contains Gaussian-fit centroids, FWHM and intensities, but no per-component errors or covariance. Null errors mean unreported, never zero uncertainty. The 1.68 km/s spectral resolution, fitted FWHM and 0.1 km/s printed precision are not centroid errors. Broad and unresolved blends limit interpretation."
   },
@@ -60,8 +101,14 @@
     "telescope": "Arizona Radio Observatory 12 m, Kitt Peak",
     "beamFwhmArcsec": 70,
     "mapSpectralResolutionKmS": 1.68,
-    "backendResolutionsKmS": [0.84, 1.68],
-    "gridSpacingsArcsec": [35, 70],
+    "backendResolutionsKmS": [
+      0.84,
+      1.68
+    ],
+    "gridSpacingsArcsec": [
+      35,
+      70
+    ],
     "source": "Paper §2 and Figure 1 caption: 2008 November–2013 March; 250/500 kHz backends, 70 arcsec FWHM beam. The published map uses 1.68 km/s resolution. Northwest sampling at 35 arcsec is half a beam, not 35 arcsec independent spatial resolution; neighboring pointings overlap."
   },
   "intensity": {
@@ -71,8 +118,17 @@
     "correctedBeamEfficiency": 0.89,
     "source": "Paper §2 gives T_R = T_R*/eta_c with eta_c=0.89. The loader keeps published T_R* in mK and applies no efficiency conversion. These are line peak temperatures, not RGB emission weights or velocity-independent integrated intensities."
   },
-  "broadLineNotice": {"thresholdFwhmKmS": 15, "source": "Paper §3 notes that lines broader than 15 km/s likely contain unresolved components. The loader marks them for inspection and keeps them; it does not split, suppress or relabel them as separate physical features."},
-  "expectedCounts": {"rows": 327, "pointings": 218, "detectedComponents": 279, "detectedPointings": 170, "upperLimits": 48},
+  "broadLineNotice": {
+    "thresholdFwhmKmS": 15,
+    "source": "Paper §3 notes that lines broader than 15 km/s likely contain unresolved components. The loader marks them for inspection and keeps them; it does not split, suppress or relabel them as separate physical features."
+  },
+  "expectedCounts": {
+    "rows": 327,
+    "pointings": 218,
+    "detectedComponents": 279,
+    "detectedPointings": 170,
+    "upperLimits": 48
+  },
   "limitations": [
     "The exact CDS table has 327 rows: 279 detected Gaussian components at 170 distinct offsets, plus 48 upper-limit offsets, for 218 pointings. The paper states 219 pointings and 168 detections. This discrepancy is unresolved; the loader reports the actual pinned table counts and never pads or changes rows to agree with prose.",
     "No (0,0) row exists in this table, although the paper describes a central nondetection. Missing central coverage and the largely unobserved central region are not zero emission; the unlisted central limit cannot be used numerically.",

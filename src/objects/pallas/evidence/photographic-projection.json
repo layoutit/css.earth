@@ -10,26 +10,22 @@
     {
       "file": "2_Pallas_mpcd.obj",
       "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_mpcd.obj",
-      "bytes": 2703739,
-      "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e"
+      "bytes": 2703739
     },
     {
       "file": "2_Pallas_adam.obj",
       "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj",
-      "bytes": 121798,
-      "sha256": "519ec4ca5b7ed1d0cfc345174eb3aa53d33faaf45967c2467cc8b72510605655"
+      "bytes": 121798
     },
     {
       "file": "marsset-shape.txt",
       "url": "https://damit.cuni.cz/projects/damit/stored_files/open/51211/shape.txt",
-      "bytes": 129688,
-      "sha256": "43a882fc1ced4d291b4fc566c4a8e17531f484dedf4d8e998f0ec1899122f3a6"
+      "bytes": 129688
     },
     {
       "file": "marsset-IAUspin.txt",
       "url": "https://damit.cuni.cz/projects/damit/stored_files/open/51209/IAUspin",
-      "bytes": 32,
-      "sha256": "e30f994d22fa8192a0668a0a5031625165a47da527f306593437f7fa446bf2b8"
+      "bytes": 32
     }
   ],
   "modelCorrespondence": {
@@ -52,27 +48,12 @@
     "registration": "Existing registerCameraBands in checkOnly mode. Scratch comparison changes patch radius from 13 to 6 and sample step from 2 to 1; all correlation, fit-count and holdout limits unchanged. Radius 6 gives a 13-pixel patch, about 2.4 of the paper's nominal 20-mas resolution elements at the native 3.63-mas sampling. This is an exploratory parameter choice, not source-prescribed qualification.",
     "reproductionLimit": "The camera-derivation and rendering driver is an ignored exploratory script, not a supported preparation recipe. This record pins its source inputs, derived cameras, parameters and results; it is not a clean-checkout surface reproduction claim."
   },
-  "localDriverHashes": {
-    "acquire-ephemeris.mts": "6df543be14fd0df2017a17628405d323fe7b16ed3eafc9ebdc00863d7f42b415",
-    "project.mts": "21a073cc1ea95dcb3cfe869909509343b8db5f0fd0e265c968934abc985b15bb",
-    "check-transfer.mts": "49638cf9c712a1b7ff0344edc1f2b7865fab1710d838237950ab5fd6c1514835",
-    "registration-small-patches.mts": "4775c7629b53c9495d2f58852211ba8ca2574a64021e867db68e2415f36262c9",
-    "check-small-patches.mts": "7fdd9b02080b6dfc77b6a7d7680bd9bfdc08d9140d731541607da8f89c5e42dc",
-    "check-near-pair.mts": "31357c372010588a1110adc3f14e7897bca50c7ebe116788abab47146ad125dd"
-  },
-  "sharedProducerHashes": {
-    "tools/objects/terrestrial-layers/camera-band-registration.mts": "c0ac20a7f970dff3d8c7ff469e135a91b4688a7add67f6927b4afcf457bf484b",
-    "tools/objects/terrestrial-layers/limb-refinement.mts": "ee2ab7662db8e1ce300d36089185cf7573efdcb70e2f9021cfceb8bf6c5d75f0",
-    "tools/objects/terrestrial-layers/shape-camera-mosaic.mts": "d0942ffb78df494a2a9ae6a76833fdf43ceffbae0cbef6a88fa7e806d23cf262",
-    "tools/objects/surface-observations/geometry.mts": "9421d3f846566ba4654d804f902e7b1d4f8daa337657919bde7917a0e32f450b"
-  },
   "workingTreeDifference": "camera-band-registration.mts contained pre-existing optional referenceRegionPixels support; these trials did not supply that option. No shared implementation was changed for this investigation.",
   "frames": [
     {
       "id": "20171008",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-08T04_56_05.317_zpl_science_imaging_cam1.fits",
       "bytes": 593280,
-      "sha256": "1aef8511bde04ca0624ca9f589249314ffa587add8b411c57e1a4583dfb83f24",
       "candidateCamera": {
         "status": "diagnostic-unqualified",
         "parameters": [
@@ -243,7 +224,6 @@
       "id": "20171011",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_04_27.347_zpl_science_imaging_cam1.fits",
       "bytes": 593280,
-      "sha256": "bc1aa695bf130dac60be0d13cc44f6db0e8f6961fd3c1f7621e45cec6cdeaef8",
       "candidateCamera": {
         "status": "diagnostic-unqualified",
         "parameters": [
@@ -414,7 +394,6 @@
       "id": "201710110508",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_08_49.597_zpl_science_imaging_cam1.fits",
       "bytes": 593280,
-      "sha256": "d64dbfcd0ff0d36b83d11c83c27aadb784fe65aac83c2a656ffa677a03513967",
       "candidateCamera": {
         "status": "diagnostic-unqualified",
         "parameters": [
@@ -585,7 +564,6 @@
       "id": "20190315",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2019-03-15T06_55_56.078_zpl_science_imaging_cam1.fits",
       "bytes": 593280,
-      "sha256": "ba1138288ca972020c2b07fbc4495c52c288e10dc6f3e8eb419068256b920f85",
       "candidateCamera": {
         "status": "diagnostic-unqualified",
         "parameters": [

@@ -296,13 +296,17 @@
       "path": "photometry/narrett-2024-figure-7.jpg",
       "origin": "https://s3.amazonaws.com/aasie/images/0004-6256/167/3/null/ajad1f6cf7_hr.jpg",
       "expectedBytes": 152455,
-      "expectedSha256": "4232ed517e8351e3415191d52979c64562b3757ce89d50088bb416c8c9a09aea",
       "credit": "I. S. Narrett, B. V. Rackham and J. de Wit (2024), AJ 167, 107, Figure 7, left panel; AAS Journals",
       "license": "Creative Commons Attribution 4.0 International, as stated in the open-access article",
-      "licenseEvidence": ["https://doi.org/10.3847/1538-3881/ad1f6c"],
+      "licenseEvidence": [
+        "https://doi.org/10.3847/1538-3881/ad1f6c"
+      ],
       "acquisition": "Downloaded the AAS high-resolution Figure 7 JPEG on 2026-09-23; SHA-256 4232ed517e8351e3415191d52979c64562b3757ce89d50088bb416c8c9a09aea. The left panel is a hypothetical model, not an observed map.",
       "redistribution": "Original Figure 7 with article and author attribution under CC BY 4.0",
-      "consumers": ["assets", "lenses"],
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -322,7 +326,10 @@
       "license": "Project-authored extraction record with cited factual model parameters",
       "acquisition": "Recorded Figure 7 left-panel crop and its two transit-guide rows; transcribed 0.099 TESS intensity ratio and 0.42 mean covering fraction from the paper",
       "redistribution": "Project-authored method and factual parameter transcription",
-      "consumers": ["assets", "lenses"],
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

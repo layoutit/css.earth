@@ -9,68 +9,55 @@
   ],
   "pins": [
     {
-      "path": "src/objects/ganymede/object.json",
-      "sha256": "812cdba29ad406c00e58f69e5cd9d5e55dd73de92e83f753e6eeb963c2eff75a"
+      "path": "src/objects/ganymede/object.json"
     },
     {
-      "path": "src/objects/ganymede/composition.css",
-      "sha256": "2c8f3bed59af164cf449a554a12804ea0f99442e9428431615a8fa6fdf54641c"
+      "path": "src/objects/ganymede/composition.css"
     },
     {
-      "path": "src/objects/ganymede/text.json",
-      "sha256": "92fc06df837beef5fcd50c495d243e20cbbff74e246777dc2134e48af0644901"
+      "path": "src/objects/ganymede/text.json"
     },
     {
-      "path": "src/objects/ganymede/source/preparation/raster.json",
-      "sha256": "ab831101edf4f77f21ca809f7a2800c505e8acf95d268a51ba05c77c9960e2a2"
+      "path": "src/objects/ganymede/source/preparation/raster.json"
     },
     {
-      "path": "src/objects/ganymede/source/content/object.json",
-      "sha256": "c11b7052988d3d181574ab64934546fb5073c99ff2ff8b46ab2a189062386290"
+      "path": "src/objects/ganymede/source/content/object.json"
     },
     {
-      "path": "src/objects/ganymede/prepared/scene.refs.json",
-      "sha256": "bc41eac8e30f4ef2b853caf485c9ed2e57f945d14db9d63b4b77b82a2380ea1d"
+      "path": "src/objects/ganymede/prepared/scene.refs.json"
     },
     {
-      "path": "src/objects/ganymede/prepared/lenses.json",
-      "sha256": "dde4315c7f1a9cff0b64959ffab3fd460fcadcd570d721e433724c805ddfb2f8"
+      "path": "src/objects/ganymede/prepared/lenses.json"
     },
     {
-      "path": "src/objects/ganymede/prepared/page.json",
-      "sha256": "054c894d046b2bdd8513de19b8d39f32e34c6c8b7e6c5bc9e269bf3f81249c21"
+      "path": "src/objects/ganymede/prepared/page.json"
     },
     {
-      "path": "src/objects/ganymede/runtime-assets.json",
-      "sha256": "c364272100fd2006f4442d5dfa18f848a2d209ca3510ea9becf1f63c06895583"
+      "path": "src/objects/ganymede/runtime-assets.json"
     }
   ],
   "screenshots": [
     {
       "path": "dark-material-shadows.png",
       "bytes": 581888,
-      "sha256": "fe19d818de700e0766f375f5d2bbc5a40e71a1b312b49c141c9661b416900e08",
       "width": 1440,
       "height": 1000
     },
     {
       "path": "dark-material.png",
       "bytes": 673626,
-      "sha256": "d4ec5e297d4962c4a00b9569576b5ddea61b19da27556495be8450df0b47df57",
       "width": 1440,
       "height": 1000
     },
     {
       "path": "ice-fraction-dpr2.png",
       "bytes": 1782412,
-      "sha256": "be3a2cad1f2e4d5b6bf8420906d9874c3d2f03be35c2a6d9774ba0b1327df780",
       "width": 2880,
       "height": 2000
     },
     {
       "path": "ice-fraction.png",
       "bytes": 662255,
-      "sha256": "d2e8174a72fa2c57097a150f3696922f1df80070832a90a2d1de713c29448ba0",
       "width": 1440,
       "height": 1000
     }
@@ -121,8 +108,8 @@
         "offAxisDegrees": 0,
         "silhouetteRadius": 219.6000000003523,
         "bodyCenterKilometers": [
-          -3.338884562253952e-8,
-          -5.284138023853301e-8,
+          -3.338884562253952e-08,
+          -5.284138023853301e-08,
           -15172.14172930739
         ]
       }
@@ -172,8 +159,8 @@
         "offAxisDegrees": 0,
         "silhouetteRadius": 219.6000000003523,
         "bodyCenterKilometers": [
-          -3.338884562253952e-8,
-          -5.284138023853301e-8,
+          -3.338884562253952e-08,
+          -5.284138023853301e-08,
           -15172.14172930739
         ]
       }
@@ -234,8 +221,8 @@
       "offAxisDegrees": 0,
       "silhouetteRadius": 259.1999999995413,
       "bodyCenterKilometers": [
-        -5.879905074834824e-9,
-        -2.0077917724847792e-8,
+        -5.879905074834824e-09,
+        -2.0077917724847792e-08,
         -12929.952143595929
       ]
     },

@@ -19,7 +19,6 @@
         "file": "pallas-20171011-cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_04_27.347_zpl_science_imaging_cam1.fits",
         "bytes": 593280,
-        "sha256": "bc1aa695bf130dac60be0d13cc44f6db0e8f6961fd3c1f7621e45cec6cdeaef8",
         "time": "05:04:27",
         "camera": 1,
         "mjd": 58037.21142763,
@@ -33,7 +32,6 @@
         "file": "sequence-050427-cam2.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_04_27.347_zpl_science_imaging_cam2.fits",
         "bytes": 593280,
-        "sha256": "7c92bcce7a9e4e25498a5f123226165124b429c72aac27c9c765959c40b2bd94",
         "time": "05:04:27",
         "camera": 2,
         "mjd": 58037.21142763,
@@ -47,7 +45,6 @@
         "file": "sequence-050639-cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_06_39.145_zpl_science_imaging_cam1.fits",
         "bytes": 593280,
-        "sha256": "cc332c106298be3e97b60b5c8f469f90a8b86ace26fb94c8952d4537059fabff",
         "time": "05:06:39",
         "camera": 1,
         "mjd": 58037.21295307,
@@ -61,7 +58,6 @@
         "file": "sequence-050639-cam2.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_06_39.145_zpl_science_imaging_cam2.fits",
         "bytes": 593280,
-        "sha256": "a348ef4551918c8800e807a71ae69cc961d2aedb5f6e551be4b4624d8179fd88",
         "time": "05:06:39",
         "camera": 2,
         "mjd": 58037.21295307,
@@ -75,7 +71,6 @@
         "file": "pallas-201710110508-cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_08_49.597_zpl_science_imaging_cam1.fits",
         "bytes": 593280,
-        "sha256": "d64dbfcd0ff0d36b83d11c83c27aadb784fe65aac83c2a656ffa677a03513967",
         "time": "05:08:49",
         "camera": 1,
         "mjd": 58037.21446293,
@@ -89,7 +84,6 @@
         "file": "sequence-050849-cam2.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_08_49.597_zpl_science_imaging_cam2.fits",
         "bytes": 593280,
-        "sha256": "e75128409331ad93df3f12844608ae72249f66591907e4992c5f1918aaaa0766",
         "time": "05:08:49",
         "camera": 2,
         "mjd": 58037.21446293,
@@ -103,7 +97,6 @@
         "file": "sequence-051100-cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_11_00.201_zpl_science_imaging_cam1.fits",
         "bytes": 593280,
-        "sha256": "dc6626714d34ffff522540126944e24e43b98376e36d0c3d5d0c76712da95584",
         "time": "05:11:00",
         "camera": 1,
         "mjd": 58037.21597455,
@@ -117,7 +110,6 @@
         "file": "sequence-051100-cam2.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_11_00.201_zpl_science_imaging_cam2.fits",
         "bytes": 593280,
-        "sha256": "6f8444a555f6b4565a39fe6836aa3ffde73ab0b99a3b16bc9a50a3f185b06b79",
         "time": "05:11:00",
         "camera": 2,
         "mjd": 58037.21597455,
@@ -131,7 +123,6 @@
         "file": "sequence-051310-cam1.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_13_10.674_zpl_science_imaging_cam1.fits",
         "bytes": 593280,
-        "sha256": "28e04e3715e914a2028486deb8b67702f49608e29668fd0bc26b918fbdc86d04",
         "time": "05:13:10",
         "camera": 1,
         "mjd": 58037.21748465,
@@ -145,7 +136,6 @@
         "file": "sequence-051310-cam2.fits",
         "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_13_10.674_zpl_science_imaging_cam2.fits",
         "bytes": 593280,
-        "sha256": "0ca72bbdc52955e5c25982d3d66abdf25c6375ee4c36877a7acc191e7722883e",
         "time": "05:13:10",
         "camera": 2,
         "mjd": 58037.21748465,
@@ -167,10 +157,10 @@
       "stretch": "zero-to-99.9-percentile per frame"
     },
     "headerCheck": {
-      "CD1_1": -0.00000100833333333333,
+      "CD1_1": -1.00833333333333e-06,
       "CD1_2": 0,
       "CD2_1": 0,
-      "CD2_2": 0.00000100833333333333,
+      "CD2_2": 1.00833333333333e-06,
       "appliesTo": "all ten primary headers",
       "interpretation": "3.63 mas square pixels; native rows reversed for north-up, east-left inspection; no additional camera flip inferred"
     }
@@ -203,23 +193,19 @@
   "referencePins": [
     {
       "file": "Marsset2020.pdf",
-      "bytes": 2527919,
-      "sha256": "5e5ad5e4478f66e2601eabefadf09e875e63735076f237690b6611cf4125fcf4"
+      "bytes": 2527919
     },
     {
       "file": "Vernazza2021.pdf",
-      "bytes": 25270498,
-      "sha256": "85c45bbcf5705a5173fa1da7593aba777f3c083c61bb6a88ecf15a6513a7725f"
+      "bytes": 25270498
     },
     {
       "file": "fig2-Im0.jpg",
-      "bytes": 158472,
-      "sha256": "b2db8d67098a5979d23a748a150cc2e7bffd45b29130e01cc7ecaedb6855db1c"
+      "bytes": 158472
     },
     {
       "file": "vernazza-pallas-Im14.png",
-      "bytes": 858736,
-      "sha256": "86c402e6a73b6204aa0118dd68556ccbcebece672bda23cac5ad15c2f6ffe013"
+      "bytes": 858736
     }
   ],
   "photoIdentity": {
@@ -794,15 +780,7 @@
     "annotationOmission": "Rows 158–169 of the 170-square figure crop are black in all displayed panels to omit a paper scale-label fragment below the body."
   },
   "experimentScripts": {
-    "location": "Ignored output/pallas-photographic-projection; these exploratory scripts are not a checked-in production recipe.",
-    "sha256": {
-      "sequence.mts": "714d4f7de036d2dba9c2f565578f16b591387be7c75a783839e02691039508f8",
-      "compare-published.mts": "ce03c963752b915be4d4c601f58121f4d67dc2962f61b61b2fbacefd6be196fb",
-      "render-source-model.mts": "080583720e980bd894bf3df360fad1e441e17c1d8516d67f6c4401249a08ddfd",
-      "compare-published-photo.mts": "3380cbed54a5ebe6880d8650c071582d41a516162b844c83ecedafb43aee0c58",
-      "compare-marsset-model.mts": "0441989ece11f5e337e8aa40190d4d8186f3f3f010514b41fd62c9fe8b211c6c",
-      "figure-photo-identity.mts": "d99500f1d64cee9a2d32b444d13aeec8db20a98eae6b12d13bbb020817087253"
-    }
+    "location": "Ignored output/pallas-photographic-projection; these exploratory scripts are not a checked-in production recipe."
   },
   "limits": [
     "No physical camera correction was fitted from these figure comparisons.",

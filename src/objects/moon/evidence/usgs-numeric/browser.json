@@ -2,11 +2,6 @@
   "schema": "cssearth-dataset-browser-check@1",
   "date": "2026-09-27T01:59:09.618Z",
   "scope": "Working implementation above this base. File hashes identify the final reader content and delivered package. Desktop Chromium at 1440x1000; phone captures at 390x844. Each group was entered by a direct dataset URL, stepped through in order, checked at both disabled endpoints, and stepped back with Enter. Arrow runs remain applicable after changing only chooser detail strings to source names: control IDs, order, source/content/object.json and scientific assets are unchanged. The sourceLabels check and screenshots use the final source names. This is agent inspection, not reader testing or scientific validation.",
-  "testedFiles": {
-    "source/content/object.json": "34729f239128d9a53ad690cf360408c30a8b8bea1077c83d606937e5985219b4",
-    "text.json": "74c53fae09908162971224338e0b7efc58dd5007d3a9399c2931d4bd36e45576",
-    "inventory.json": "f0bed11a13338a0526e576c1fc02d8dd6c5f9b46e53260062c6962b23fe874c6"
-  },
   "tests": {
     "sourceLabels": {
       "body": "moon",
@@ -184,7 +179,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 494130,
-      "sha256": "625a56464fdda0832160ec2e0b7ac6374d9d57b6d21189491ad8dd5175858a5f",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -192,7 +186,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 492330,
-      "sha256": "fb55bb26814b7ab205a5ffeb37c6bb53d8188dbcdac7b8fc021adc968403ded4",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -200,7 +193,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 273762,
-      "sha256": "a9ca10a6d017e035097f5bee5e6724d722c587d31900f26011ee6ad4290df0cf",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -208,7 +200,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 473060,
-      "sha256": "96f3b9b6b878950c2e172641aa8bd496f32cae79eb069f21d6015dbdda7b66bd",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -216,7 +207,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 449960,
-      "sha256": "267ce1aac57b2d575aaf31e04d3624d184c72ed2e81ab022fded97b70b0d5330",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -224,7 +214,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 467284,
-      "sha256": "33b8317fc0e504dbc40e54d772f9ed62c494e2317875b30d3dd4f037ca3d4c57",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -232,7 +221,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 550348,
-      "sha256": "a31cece7acf0a9946120d19cbb802df3b1209fc5bcbe654ea742badd8cf968d4",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -240,7 +228,6 @@
       "width": 1440,
       "height": 1000,
       "bytes": 567438,
-      "sha256": "ec3a3ec8a7fce3bdf40880ee7e3a05acd4a206cb649f28318edb3d066edf5256",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -248,7 +235,6 @@
       "width": 390,
       "height": 844,
       "bytes": 83830,
-      "sha256": "265553246ec0965753966a14d2d703cd72faa37ee123fa2403483dd981f4f0fc",
       "decodedPixelsEqualToCapture": true
     },
     {
@@ -256,7 +242,6 @@
       "width": 390,
       "height": 844,
       "bytes": 87356,
-      "sha256": "0f8870fffb04835f7c232fc4358c4a18572f196940f7b4a1b2619244e42f0941",
       "decodedPixelsEqualToCapture": true
     }
   ]

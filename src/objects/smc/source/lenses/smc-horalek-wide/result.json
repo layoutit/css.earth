@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "1d614d3612aa88329880a71823710aaa73e5b41cfdb394caabb5f0b7b64018ed",
   "imageId": "smc-horalek-wide",
   "removalResultId": "e6467648096ee00e1604611cf8ec4fa643d3764eace979fa6d064ef8f4676dbb.e4129024e2d639f47080f406dfd25702af8c18dd63a6e178daacc0612e673c7a",
   "placement": {
@@ -68,12 +67,7 @@
     },
     "reconstructionNeutral": {
       "descriptor": "neutral-object.json"
-    },
-    "materialGeometry": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be"
-  },
-  "finiteMaterial": {
-    "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
-    "sourceResultId": "2d883773406143339e034f4c8497de0ddf42100e38b54dd614324b4854fbd333"
+    }
   },
   "processing": {
     "densityPreview": false,

@@ -1,6 +1,5 @@
 {
   "browser": "Installed Google Chrome, headless",
-  "runtimeInventorySha256": "33de57cd5dbdcc1668a703ed16f2ea568197b3354c519046979b73c0b67f6408",
   "delivery": "Production build with Halley runtime files copied from an independent 34-file R2 installation; shared shell from the production build.",
   "reports": [
     {

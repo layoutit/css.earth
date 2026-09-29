@@ -6,50 +6,42 @@
     {
       "file": "sequence-050427-cam2.fits",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_04_27.347_zpl_science_imaging_cam2.fits",
-      "bytes": 593280,
-      "sha256": "7c92bcce7a9e4e25498a5f123226165124b429c72aac27c9c765959c40b2bd94"
+      "bytes": 593280
     },
     {
       "file": "pallas-201710110508-cam1.fits",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_08_49.597_zpl_science_imaging_cam1.fits",
-      "bytes": 593280,
-      "sha256": "d64dbfcd0ff0d36b83d11c83c27aadb784fe65aac83c2a656ffa677a03513967"
+      "bytes": 593280
     },
     {
       "file": "sequence-050849-cam2.fits",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T05_08_49.597_zpl_science_imaging_cam2.fits",
-      "bytes": 593280,
-      "sha256": "e75128409331ad93df3f12844608ae72249f66591907e4992c5f1918aaaa0766"
+      "bytes": 593280
     },
     {
       "file": "pallas-201710110605-cam2.fits",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T06_05_07.702_zpl_science_imaging_cam2.fits",
-      "bytes": 593280,
-      "sha256": "50fe152b9b58914501fb8b8694f9ebe9d2cf4ce8ae0722ed47455e1ebfe41d19"
+      "bytes": 593280
     },
     {
       "file": "2_Pallas_mpcd.obj",
       "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_mpcd.obj",
-      "bytes": 2703739,
-      "sha256": "5bb49df2e0e0879a6377fa20c94a8ac47eea27e626fb3ec8f618c22f90f8184e"
+      "bytes": 2703739
     },
     {
       "file": "2_Pallas_adam.obj",
       "url": "https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj",
-      "bytes": 121798,
-      "sha256": "519ec4ca5b7ed1d0cfc345174eb3aa53d33faaf45967c2467cc8b72510605655"
+      "bytes": 121798
     },
     {
       "file": "marsset-IAUspin.txt",
       "url": "https://damit.cuni.cz/projects/damit/stored_files/open/51209/IAUspin",
-      "bytes": 32,
-      "sha256": "e30f994d22fa8192a0668a0a5031625165a47da527f306593437f7fa446bf2b8"
+      "bytes": 32
     },
     {
       "file": "pallas-201710110607-cam2.fits",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T06_07_17.855_zpl_science_imaging_cam2.fits",
-      "bytes": 593280,
-      "sha256": "1fbd2dfdf10fe69a57cc8dd2ad47735118c15d875995103f2ee60f6551ec414f"
+      "bytes": 593280
     }
   ],
   "conclusions": [
@@ -126,18 +118,18 @@
         "schema": "cssearth-archived-camera@1",
         "rayMatrix": [
           [
-            -1.1823718906054904e-8,
-            1.1772798980549464e-8,
+            -1.1823718906054904e-08,
+            1.1772798980549464e-08,
             0.3179834196847494
           ],
           [
-            -1.2921357019192074e-8,
-            -1.1581600842393772e-8,
+            -1.2921357019192074e-08,
+            -1.1581600842393772e-08,
             -0.16683176975908706
           ],
           [
-            1.718643297433324e-9,
-            -6.081386097073129e-9,
+            1.718643297433324e-09,
+            -6.081386097073129e-09,
             0.933302579775023
           ]
         ],
@@ -201,7 +193,7 @@
             0.24871025994533302,
             -0.830547670861405
           ],
-          "degrees": 0.00005143636937222015,
+          "degrees": 5.143636937222015e-05,
           "boresightShiftPixels": 6.366050551000391
         },
         "residuals": {
@@ -290,18 +282,18 @@
         "schema": "cssearth-archived-camera@1",
         "rayMatrix": [
           [
-            -1.746537256189014e-8,
+            -1.746537256189014e-08,
             6.431486554903921e-10,
             0.11731846710279535
           ],
           [
-            -1.314067094962662e-9,
-            -1.650078452712605e-8,
+            -1.314067094962662e-09,
+            -1.650078452712605e-08,
             -0.3395689486640822
           ],
           [
-            1.71741658165641e-9,
-            -6.084899388398739e-9,
+            1.71741658165641e-09,
+            -6.084899388398739e-09,
             0.933235932864723
           ]
         ],
@@ -365,7 +357,7 @@
             -0.11062330315522957,
             0.13575427506412568
           ],
-          "degrees": 0.000013201350431929375,
+          "degrees": 1.3201350431929375e-05,
           "boresightShiftPixels": 8.041567332328404
         },
         "residuals": {
@@ -455,10 +447,8 @@
         ]
       },
       "reference": {
-        "id": "201710110508",
-        "sha256": "d64dbfcd0ff0d36b83d11c83c27aadb784fe65aac83c2a656ffa677a03513967"
+        "id": "201710110508"
       },
-      "targetSha256": "d64dbfcd0ff0d36b83d11c83c27aadb784fe65aac83c2a656ffa677a03513967",
       "controls": [
         {
           "partition": "holdout",
@@ -1297,10 +1287,8 @@
         ]
       },
       "reference": {
-        "id": "201710110508",
-        "sha256": "d64dbfcd0ff0d36b83d11c83c27aadb784fe65aac83c2a656ffa677a03513967"
+        "id": "201710110508"
       },
-      "targetSha256": "e75128409331ad93df3f12844608ae72249f66591907e4992c5f1918aaaa0766",
       "controls": [
         {
           "partition": "holdout",
@@ -1853,10 +1841,8 @@
         ]
       },
       "reference": {
-        "id": "20171011",
-        "sha256": "7c92bcce7a9e4e25498a5f123226165124b429c72aac27c9c765959c40b2bd94"
+        "id": "20171011"
       },
-      "targetSha256": "e75128409331ad93df3f12844608ae72249f66591907e4992c5f1918aaaa0766",
       "controls": [
         {
           "partition": "fit",
@@ -2497,10 +2483,8 @@
         ]
       },
       "reference": {
-        "id": "201710110508",
-        "sha256": "e75128409331ad93df3f12844608ae72249f66591907e4992c5f1918aaaa0766"
+        "id": "201710110508"
       },
-      "targetSha256": "50fe152b9b58914501fb8b8694f9ebe9d2cf4ce8ae0722ed47455e1ebfe41d19",
       "controls": [
         {
           "partition": "holdout",
@@ -2833,10 +2817,8 @@
         ]
       },
       "reference": {
-        "id": "201710110508",
-        "sha256": "e75128409331ad93df3f12844608ae72249f66591907e4992c5f1918aaaa0766"
+        "id": "201710110508"
       },
-      "targetSha256": "50fe152b9b58914501fb8b8694f9ebe9d2cf4ce8ae0722ed47455e1ebfe41d19",
       "controls": [
         {
           "partition": "holdout",
@@ -3791,48 +3773,37 @@
     "scope": "Recorded match coordinates and residual statistics replayed against frozen controlled-camera formulas. These are exploratory measurements, not a production preparation recipe; full feature-search drivers remain in ignored output.",
     "drivers": [
       {
-        "file": "prediction-cameras.mts",
-        "sha256": "7823552f6d438d9b7b718bf61dcf8cf958c0c00444cc8e84bd767fbba1b4a655"
+        "file": "prediction-cameras.mts"
       },
       {
-        "file": "predict-mesh-bounds.mts",
-        "sha256": "3072bcef9d53d288abdb33869c88d8371dfe0edf50e88f7f78d6abf5c7d3483e"
+        "file": "predict-mesh-bounds.mts"
       },
       {
-        "file": "registration-mesh-bounds-diagnostic.mts",
-        "sha256": "ac1d8aea1510c649ec5b9e1b105b3667b9b52f1d92136b1895c21a18f5d40bdc"
+        "file": "registration-mesh-bounds-diagnostic.mts"
       },
       {
-        "file": "fit-prediction-pointing.mts",
-        "sha256": "588c3e13e474b44f264dab8f8987210619dbcb172145014772475d64772df9f1"
+        "file": "fit-prediction-pointing.mts"
       },
       {
-        "file": "prediction-instrument-cameras.mts",
-        "sha256": "e991aff4bf65500b545ce6f010bf036e2910ee1a3e0713840991530ebda52d94"
+        "file": "prediction-instrument-cameras.mts"
       },
       {
-        "file": "prediction-iau-cameras.mts",
-        "sha256": "57c9e0312ae5a07ea6e78143b7e2e588f108ea7e4ea4543c76ee5835af5b03f6"
+        "file": "prediction-iau-cameras.mts"
       },
       {
-        "file": "registration-polynomial-diagnostic.mts",
-        "sha256": "fb0027022c302dbdcf2920479e89393729324b6d22e69df17a00e5db87ddc03f"
+        "file": "registration-polynomial-diagnostic.mts"
       },
       {
-        "file": "fit-dual-camera.mts",
-        "sha256": "ba979d2c03da8fc48c8e7e9e7ffaa74a42f314e039afd51516003acf7e53be81"
+        "file": "fit-dual-camera.mts"
       },
       {
-        "file": "registration-repeatable-diagnostic.mts",
-        "sha256": "eaf6b3c0f88fd0b50a8f289c0df7347ffccb751447c6188a283235b6a9c60bfb"
+        "file": "registration-repeatable-diagnostic.mts"
       },
       {
-        "file": "show-prediction.mts",
-        "sha256": "b7037e7d4e5a5545115aad12539d72af2ba0054e0a1f10b42cfd4bb3fc9b4ebb"
+        "file": "show-prediction.mts"
       },
       {
-        "file": "fit-independent-reference.mts",
-        "sha256": "dccd488801903272fc5a4d55f9957eda7a42d23afb1d211cd687210be0588a0d"
+        "file": "fit-independent-reference.mts"
       }
     ]
   },
@@ -3864,7 +3835,6 @@
     "trainingImages": [
       {
         "file": "sequence-050849-cam2.fits",
-        "sha256": "e75128409331ad93df3f12844608ae72249f66591907e4992c5f1918aaaa0766",
         "frame": {
           "id": "201710110508",
           "observerLatitude": -68.95554036464605,
@@ -3890,7 +3860,6 @@
       },
       {
         "file": "sequence-050427-cam2.fits",
-        "sha256": "7c92bcce7a9e4e25498a5f123226165124b429c72aac27c9c765959c40b2bd94",
         "frame": {
           "id": "20171011",
           "observerLatitude": -68.95636585037336,
@@ -3916,7 +3885,6 @@
       },
       {
         "file": "pallas-201710110605-cam2.fits",
-        "sha256": "50fe152b9b58914501fb8b8694f9ebe9d2cf4ce8ae0722ed47455e1ebfe41d19",
         "frame": {
           "id": "201710110605",
           "observerLatitude": -68.94490845752983,
@@ -4204,7 +4172,7 @@
         "loss": 82.70404376316581,
         "accepted": true,
         "stepSize": 0.5390470948176036,
-        "lambda": 0.0000390625,
+        "lambda": 3.90625e-05,
         "offsets": [
           -1.6261061211311714,
           0.20324686047469823,
@@ -4222,7 +4190,7 @@
         "loss": 82.5092374779833,
         "accepted": true,
         "stepSize": 0.3960992614540862,
-        "lambda": 0.000009765625,
+        "lambda": 9.765625e-06,
         "offsets": [
           -1.6610901650282528,
           0.1748141724463569,
@@ -4240,7 +4208,7 @@
         "loss": 82.49984582171514,
         "accepted": true,
         "stepSize": 0.41156588997136495,
-        "lambda": 0.00000244140625,
+        "lambda": 2.44140625e-06,
         "offsets": [
           -1.6845654286905618,
           0.16230402489452217,
@@ -4258,7 +4226,7 @@
         "loss": 82.38394737684452,
         "accepted": true,
         "stepSize": 0.2684121513633587,
-        "lambda": 0.000001,
+        "lambda": 1e-06,
         "offsets": [
           -1.7017985188862799,
           0.17102520852020733,
@@ -4276,7 +4244,7 @@
         "loss": 82.33363826094208,
         "accepted": true,
         "stepSize": 0.19745775927842407,
-        "lambda": 0.000001,
+        "lambda": 1e-06,
         "offsets": [
           -1.6893282209252791,
           0.1642798361304161,
@@ -4294,7 +4262,7 @@
         "loss": 82.30687566439283,
         "accepted": true,
         "stepSize": 0.0712278833078578,
-        "lambda": 0.000001,
+        "lambda": 1e-06,
         "offsets": [
           -1.7010307691557296,
           0.16227306412272685,
@@ -7216,7 +7184,6 @@
       "file": "pallas-201710110607-cam2.fits",
       "url": "https://observations.lam.fr/astero/Data/2Pallas/Deconv/d2Pallas_2017-10-11T06_07_17.855_zpl_science_imaging_cam2.fits",
       "bytes": 593280,
-      "sha256": "1fbd2dfdf10fe69a57cc8dd2ad47735118c15d875995103f2ee60f6551ec414f",
       "ephemeris": {
         "receiveJdUtc": 2458037.75506777,
         "emissionJdUtc": 2458037.744946485,
@@ -7268,7 +7235,7 @@
             0.132877667224909,
             -0.511487072221924
           ],
-          "degrees": 0.000030544637801644274,
+          "degrees": 3.0544637801644274e-05,
           "boresightShiftPixels": 7.751205931390815
         },
         "residuals": {
@@ -7312,7 +7279,6 @@
         },
         "limitations": "One rotation of the camera fitted to the lit limb of the retained mesh; range, focal length and Sun direction keep their source values. Residuals are along-normal limb distances in pixels; terminator and shadow edges are excluded by the mesh lighting, remaining outliers by a robust re-fit."
       },
-      "frozenFitSha256": "7027293cc813175e167eb8b966bfcc29767e88fb1616ff2a81a148d2c56e3f80",
       "camera": {
         "id": "201710110607",
         "observerLatitude": -68.94449887863448,
@@ -7338,7 +7304,7 @@
         "maximumEmissionDegrees": 65,
         "maximumReferenceIncidenceDegrees": 75,
         "minimumValidSignal": 0.002,
-        "minimumDetailVariance": 0.000001,
+        "minimumDetailVariance": 1e-06,
         "minimumConvolutionMarginPixels": 16,
         "maximumSourceMeshVisibilityResidualMeters": 1
       },
@@ -7740,43 +7706,35 @@
     "scripts": [
       {
         "path": "joint-fit.mts",
-        "bytes": 10473,
-        "sha256": "cac5860c640a81619b4a48b9735463ba7e40f5ffe0c6895a8b65415950013270"
+        "bytes": 10473
       },
       {
         "path": "limb-residual-diagnostic.mts",
-        "bytes": 25410,
-        "sha256": "29272507d509f9043ac8b5c389d6ee6fab3a53e9c17f480d134e7de5afb17a5f"
+        "bytes": 25410
       },
       {
         "path": "joint-fit-protocol.json",
-        "bytes": 11184,
-        "sha256": "a2062486ccfde0d40d0aa79a7315522f0bcc15d5d15a58caaff946cd1b29538e"
+        "bytes": 11184
       },
       {
         "path": "joint-fit-result.json",
-        "bytes": 90153,
-        "sha256": "7027293cc813175e167eb8b966bfcc29767e88fb1616ff2a81a148d2c56e3f80"
+        "bytes": 90153
       },
       {
         "path": "fresh-camera.mts",
-        "bytes": 5412,
-        "sha256": "7dc19e05e8ebb6a0ede08dc74361af2dcd6ebdd3e05bea013a834ca5535b1602"
+        "bytes": 5412
       },
       {
         "path": "check-fresh-joint.mts",
-        "bytes": 2290,
-        "sha256": "75f0ffc03920ecf64286f3b09e0709d5ddd5a61fa90a0555794cab415c667bb2"
+        "bytes": 2290
       },
       {
         "path": "registration-mesh-bounds-diagnostic.mts",
-        "bytes": 13335,
-        "sha256": "ac1d8aea1510c649ec5b9e1b105b3667b9b52f1d92136b1895c21a18f5d40bdc"
+        "bytes": 13335
       },
       {
         "path": "show-fresh-joint.mts",
-        "bytes": 4380,
-        "sha256": "cde2ccf1feae604f93585c68a87eaf6c509795534a4b511a8c9a6a1d607bf03c"
+        "bytes": 4380
       }
     ]
   }

@@ -12,72 +12,58 @@
     "https://doi.org/10.1016/j.icarus.2009.06.002",
     "https://www.lpi.usra.edu/meetings/acm2008/pdf/8290.pdf"
   ],
-  "preparationSha256": "c7b0f7fa08935328332c522be8e312e02e17795c8d60e8aed3fd821b34fb6c86",
   "sourcePins": [
     {
       "path": "shape/wild2_cart_full.tab",
-      "expectedBytes": 1392840,
-      "expectedSha256": "e3950d0afae8b0c1ede31f64197ec68c215d9814bb41c101158912edbaa61e80"
+      "expectedBytes": 1392840
     },
     {
       "path": "photography/navcam/n2073we02_rr.fit",
-      "expectedBytes": 13668480,
-      "expectedSha256": "f6944a7e778a556afd929e365585bbd0919ccdd573e1422b4b2c0379b33c035f"
+      "expectedBytes": 13668480
     },
     {
       "path": "photography/navcam/n2073we02_rr.lbl",
-      "expectedBytes": 18720,
-      "expectedSha256": "005c37d785b6622598e76ecb528feb07ac82d16f7fb7dbf5bfa35ad7f15c6180"
+      "expectedBytes": 18720
     },
     {
       "path": "photography/navcam/n2073we02_rr.json",
-      "expectedBytes": 10236,
-      "expectedSha256": "0267d6fe1f8a4c779b0821783337227af8b694bbf060848a8f4c0ab805c02239"
+      "expectedBytes": 10236
     },
     {
       "path": "photography/navcam/n2075we02_rr.fit",
-      "expectedBytes": 13668480,
-      "expectedSha256": "49729e94642129eccf402c03241a21717c31150725cc48826ecf31afa03d6fb0"
+      "expectedBytes": 13668480
     },
     {
       "path": "photography/navcam/n2075we02_rr.lbl",
-      "expectedBytes": 18720,
-      "expectedSha256": "ff61f12cc61b6113de1ebca60526de757fbb1aeb41663267d8833d5684f93e00"
+      "expectedBytes": 18720
     },
     {
       "path": "photography/navcam/n2075we02_rr.json",
-      "expectedBytes": 22375,
-      "expectedSha256": "ee8baf4db4bdddc9606823ead83f6585709b7f04be79b2c2be80fc8c28e39e6a"
+      "expectedBytes": 22375
     },
     {
       "path": "photography/navcam/n2077we02_rr.fit",
-      "expectedBytes": 13668480,
-      "expectedSha256": "9973470135bcc89507adceaba79f4bd2d499893277f62eabebee353d96b2b575"
+      "expectedBytes": 13668480
     },
     {
       "path": "photography/navcam/n2077we02_rr.lbl",
-      "expectedBytes": 18720,
-      "expectedSha256": "a99e07f4e073b00a448122f111b99660d55f6d172aa516befde9b40dfcfb59d0"
+      "expectedBytes": 18720
     },
     {
       "path": "photography/navcam/n2077we02_rr.json",
-      "expectedBytes": 16501,
-      "expectedSha256": "33930e6c289d2e6325455bd36947806fb80c6bf482ce03cb77449bbcfd131771"
+      "expectedBytes": 16501
     },
     {
       "path": "photography/navcam/n2079we02_rr.fit",
-      "expectedBytes": 13668480,
-      "expectedSha256": "bf498d851c2189b0baca42c3f79a3969c1cc95d2f28e07f08f3141a7eea79b34"
+      "expectedBytes": 13668480
     },
     {
       "path": "photography/navcam/n2079we02_rr.lbl",
-      "expectedBytes": 18720,
-      "expectedSha256": "74248fbcbc0ae603ea29c950cc8f93ea377084e53da95542da0593870292b984"
+      "expectedBytes": 18720
     },
     {
       "path": "photography/navcam/n2079we02_rr.json",
-      "expectedBytes": 8964,
-      "expectedSha256": "803cbfb265ad3020894b642bef466fb3a1acd27bfe400c0ffbcbd984fa45c7cd"
+      "expectedBytes": 8964
     }
   ],
   "cases": [

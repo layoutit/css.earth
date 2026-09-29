@@ -1,6 +1,5 @@
 {
   "source": "work/edenhofer-xyz-run/mean_and_std_xyz.crop-400-496-450-546-500-596.fits",
-  "sourceSha256": "c4338d130262e349b41951edbdf18b5fcb064ae9f6d0b1ba0d688c20627abd33",
   "shapeZYX": [
     96,
     96,
@@ -114,7 +113,7 @@
   "preparedNativeStdEqual": true,
   "rgbaScalarBytesEqual": true,
   "validAlphaOpaque": true,
-  "placementOriginRelativeError": 9.035320796576674E-16,
+  "placementOriginRelativeError": 9.035320796576674e-16,
   "voxelEdgeBounds": {
     "min": [
       -1,

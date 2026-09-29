@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
   "imageId": "vista-infrared",
   "removalResultId": "6695dc1957c9ab6b2831bfe3a859f52bb7ce2b55d837739d8ff917d394071a54.d37da4f14fa3f503f8560067b0fe7b300e6ee2f0a16ba06d07f0f815f2ffc4a1",
   "placement": {
@@ -66,12 +65,7 @@
     },
     "reconstructionNeutral": {
       "descriptor": "neutral-object.json"
-    },
-    "materialGeometry": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d"
-  },
-  "finiteMaterial": {
-    "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
-    "sourceResultId": "ba8f4ad93ea837aa3db9190f0a403e17708533ee5047389dd14a1d6c18560c5f"
+    }
   },
   "processing": {
     "densityPreview": false,

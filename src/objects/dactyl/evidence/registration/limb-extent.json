@@ -1,36 +1,27 @@
 {
   "schema": "cssearth-dactyl-limb-extent@1",
   "qualifiedSurface": false,
-  "inputSha256": "36babc47a849fde247a70d43655cb4e4bbd0a87733b47a1c46f155134ce38b24",
-  "generatorSha256": "1fc6f000dcad7600d921d16bdce720af1ae3d6572667829c316df7e2740dc118",
   "dependencySha256": [
     {
-      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts",
-      "sha256": "d0942ffb78df494a2a9ae6a76833fdf43ceffbae0cbef6a88fa7e806d23cf262"
+      "path": "tools/objects/terrestrial-layers/shape-camera-mosaic.mts"
     },
     {
-      "path": "tools/objects/observation/fits.mts",
-      "sha256": "7e500791e91d41e7ef93c9ce13f0239b2b85a1ad3944fec8935f704d79171a66"
+      "path": "tools/objects/observation/fits.mts"
     },
     {
-      "path": "tools/spice/ck.mts",
-      "sha256": "8ffd9a8af1045820cd90cf0529932bfa018c0838aa60def22b48abb1dd5e67f8"
+      "path": "tools/spice/ck.mts"
     },
     {
-      "path": "tools/spice/daf.mts",
-      "sha256": "a58acc8044398b154326d6ce886133e7b719229efecb6e94944c7c94b62f87e6"
+      "path": "tools/spice/daf.mts"
     },
     {
-      "path": "tools/spice/sclk.mts",
-      "sha256": "509b222632dc9f42020913297947128ce0e5848c3cf04bb3237be604459c25fd"
+      "path": "tools/spice/sclk.mts"
     },
     {
-      "path": "tools/spice/lsk.mts",
-      "sha256": "08b4990bfaa2eb8f387bccc36464240ecf85b740bbe76e887a32f5e5f0c18623"
+      "path": "tools/spice/lsk.mts"
     },
     {
-      "path": "tools/spice/text-kernel.mts",
-      "sha256": "4b81fb9ee416c4527476a903da3c6e40af4f85aa217b8d726b00d00511ffe0a9"
+      "path": "tools/spice/text-kernel.mts"
     }
   ],
   "thresholdDN": 10,

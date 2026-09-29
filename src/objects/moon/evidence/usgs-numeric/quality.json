@@ -2,18 +2,6 @@
   "schema": "cssearth-lunar-mi-quality-audit@1",
   "passed": true,
   "date": "2026-09-27T00:31:43.094Z",
-  "gridSha256": {
-    "fit-quality": "56fbf9bcd04cb09ef59251aeaae41c0900f12f3f15cd5524c4893122404bdcf2",
-    "iron-oxide": "ae4d38dd7c6c433f8a19e4500889819127ce49969510c468d8d5e05a700760b6",
-    "optical-maturity": "99481c22faea09d97b728099b2d5ca56bed7ea2f390089e5921845e1ee8728a7",
-    "submicroscopic-iron": "ca9f1bd5490417cdef64d7bd14470545b50f1fc3d370cced5a160733f7e960dd",
-    "plagioclase-grain-size": "3a9373657bb88fd56fbd8059dc90e195ac3aa1d4d795daff61ad8cc89c2822d6",
-    "olivine": "fb0e5ac85dff4482f51b822e4c4d41309c5cd95a23df89eec2d1fedb0c0c316f",
-    "orthopyroxene": "f1719ce7326b9e264712eb5547deb69ca782394863157ddecdaf5d4c82d8b018",
-    "clinopyroxene": "a45eeb154bdb130e9814dfe166bbf091905ba9212b9c6a7687ae477a10383899",
-    "plagioclase": "d785a975bf238c72bbd3b73e0b45fe44d4e5a71d16b512d6787653d70dad3a82"
-  },
-  "rasterRecipeSha256": "15d5b14a7c28ef739120ffc157a5c618ec6257786b128ba6718278d350ba1c58",
   "checks": [
     {
       "name": "iron-oxide",
@@ -119,7 +107,7 @@
   ],
   "composition": {
     "cells": 1140781,
-    "maxFractionSumError": 4.470348358154297e-8
+    "maxFractionSumError": 4.470348358154297e-08
   },
   "policy": "All eight views require a finite nonnegative companion fit as a conservative shared coverage gate. FeO also excludes values outside [0,100] weight percent. Raw grids remain unchanged. OMAT values above 0.5 use the capped legend endpoint; no inferred upper quality cutoff."
 }

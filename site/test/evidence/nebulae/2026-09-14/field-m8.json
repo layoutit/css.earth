@@ -87,18 +87,15 @@
   "inputPins": [
     {
       "path": "src/objects/m8/prepared/lenses.json",
-      "bytes": 2942060,
-      "sha256": "a2508c927c95ebc87ef3ccd2335e790dd0b2b07c70dce60849549584c0339455"
+      "bytes": 2942060
     },
     {
       "path": "src/objects/m8/prepared/provenance.json",
-      "bytes": 56375,
-      "sha256": "ca45b95bf18a70f72936e4d3edd4bb63a8dbc0bc6de80f09b83c95ec148f00c9"
+      "bytes": 56375
     },
     {
       "path": "src/objects/m8/prepared/presentation.json",
-      "bytes": 5139,
-      "sha256": "38b686250769c9bcf3c157e581f950772b5ef015f77ff05da7ae89162290fdee"
+      "bytes": 5139
     }
   ],
   "objects": [

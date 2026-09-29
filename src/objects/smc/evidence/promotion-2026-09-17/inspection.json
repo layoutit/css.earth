@@ -241,18 +241,15 @@
   "inputPins": [
     {
       "path": "src/objects/smc/prepared/lenses.json",
-      "bytes": 6162626,
-      "sha256": "ac06472b4d62c27a2b14c7a95da79f2b4cc48927b2b5f2d140d2b3b56d246925"
+      "bytes": 6162626
     },
     {
       "path": "src/objects/smc/prepared/provenance.json",
-      "bytes": 70105,
-      "sha256": "694a0cd92902b9cff2dffaf9efe16778fceddea5caa0a035ae4f7976de4ed668"
+      "bytes": 70105
     },
     {
       "path": "src/objects/smc/prepared/presentation.json",
-      "bytes": 8145,
-      "sha256": "fc6e20b0e9a08c2889f4a9076742e2311ef92af34b4b586ea62e2f33ec1bf23a"
+      "bytes": 8145
     }
   ],
   "navigation": "label fly-to from the shared sun scene",

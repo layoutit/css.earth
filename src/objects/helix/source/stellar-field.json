@@ -99483,7 +99483,6 @@
     "imageAnchors": {
       "schema": "cssearth-nebula-image-anchor-receipt@1",
       "inputSourceResult": {
-        "id": "26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597",
         "path": ".local/nebula-lab/compiler/26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597/result.json",
         "bytes": 374895
       },
@@ -100290,7 +100289,7 @@
             },
             "imageToFrame": [
               0.12218025293999737,
-              0.00009672327649811602,
+              9.672327649811602e-05,
               -0.0001402964303504322,
               0.12228177754456346,
               86.04029949731812,

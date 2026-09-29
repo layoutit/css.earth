@@ -1,7 +1,6 @@
 {
   "body": "pandora",
   "mode": "feature-fit",
-  "recipeSha256": "92805de0e2753d96d4b3cbad29186f377321421561396dfbd50a984cfcfa5ad5",
   "referenceCamera": {
     "id": "n1504612452_1",
     "path": "../../../../output/cassini-coverage/pandora/N1504612452_1_CALIB.IMG",
@@ -18,10 +17,8 @@
     ],
     "pixelAngleMicroradians": 5.989697719921734
   },
-  "implementationSha256": "554e629a61076d47a5e3357ad941cd75d86bd42bf8c9dd8e6a45f2afdfa9b7c4",
   "mesh": {
-    "path": "shape/pandora_30k_plt.tab",
-    "sha256": "d950c909cf9c991108ef92c07cf63bc6d3bdadc4b19028bb3599aae280f24294"
+    "path": "shape/pandora_30k_plt.tab"
   },
   "settings": {
     "patchRadiusPixels": 13,
@@ -35,7 +32,7 @@
     "maximumEmissionDegrees": 65,
     "maximumReferenceIncidenceDegrees": 75,
     "minimumValidSignal": 0.002,
-    "minimumDetailVariance": 0.000001,
+    "minimumDetailVariance": 1e-06,
     "minimumConvolutionMarginPixels": 16,
     "maximumSourceMeshVisibilityResidualMeters": 1
   },
@@ -97,10 +94,8 @@
         "maximumPixels": 2.519112115137172
       },
       "reference": {
-        "id": "n1504612452_1",
-        "sha256": "08ea50751dd0f69cb76be05b395ad46011e13ab10316d2e8c4a094bc3231d4e0"
+        "id": "n1504612452_1"
       },
-      "targetSha256": "e9bcdbcc6991549b7b01cbd4f56fcefa4aead79640554590a83ca0c7d6225900",
       "controls": [
         {
           "partition": "holdout",
@@ -879,10 +874,8 @@
         "maximumPixels": 1.220899969193141
       },
       "reference": {
-        "id": "n1504612452_1",
-        "sha256": "08ea50751dd0f69cb76be05b395ad46011e13ab10316d2e8c4a094bc3231d4e0"
+        "id": "n1504612452_1"
       },
-      "targetSha256": "50b50f868bfe9373f30b69e358d908bf1f8cae5fc406cf7b0d6fde240d97e8ef",
       "controls": [
         {
           "partition": "holdout",

@@ -112,14 +112,7 @@
       "policy": "Rotate the model before lighting. Aim the prominent dish or camera opening inward; an illustrative pose, not flight attitude."
     },
     "browser": "153.0.8010.53",
-    "sharp": "0.35.3",
-    "implementation": {
-      "tools/prepare/prepare-facility-renders.mts": "1152430566b21a085f31af299a1bda62b795283102c1639dcaeb21f485424351",
-      "tools/facility-renders/render.mts": "79551ff7cf763cd67b9ebfac1c28a36e2eee56764220ed85ecaf3d3e29112119",
-      "tools/facility-renders/poses.mts": "922b7dcc705e68993abeb67df977c630263b806755468d3d339a64455064b424",
-      "tools/facility-renders/voyager.mts": "76621b0757e6fc4d587d5b7f4e847744361b6f24d272748d84b6f6fcd1c94ead",
-      "tools/facility-renders/refresh.mts": "430973626c1fb6d83db32e4f00eb2072f5a56ff2874a360b0de016de37f79790"
-    }
+    "sharp": "0.35.3"
   },
   "entries": [
     {

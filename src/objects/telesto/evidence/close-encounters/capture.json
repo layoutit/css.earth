@@ -5,12 +5,6 @@
     "normal",
     "false-color"
   ],
-  "toolSha256": "081445ea5799e64c2262afdc27d74ee2447ecdeaa16aa37edffb910a7e837ea0",
-  "colorTransferSha256": "8776127478231f2ad63baa212ad499c80a6442c9899f18c0c1a934e84aef0b0b",
-  "recipeSha256": "9a3790e0629eca9ca4c0f3853b0e5b85b1991ef75b9c9ecbf9fd883edaefe8c2",
-  "runtimeSha256": "ab72ddcefd805c93a246f8a7b0ac7c5ad82d87d717a1dffc3e0c6dbd6190ce8c",
-  "geometrySha256": "2d3ddb2bb3a788d72abca4004b9c4e39c874fd2c79ce1b06a5aec26547ba339a",
-  "surfaceTrianglesSha256": "8965be49176e7f362a41761c2b928f293f70054f0ebaa3b4a962f25ff2267753",
   "geometryUnchanged": true,
   "browser": "152.0.7977.84",
   "channel": "chrome",
@@ -18,20 +12,14 @@
   "existingAssetChanges": [
     {
       "filename": "telesto-normal-shadow@2x.webp",
-      "beforeSha256": "f4fae078cb51aedd70d08d844b895957301cb3e607e1065cece38d61dafbe2af",
-      "afterSha256": "d706ecc2a3ccc309c58175d08279207cd70ce7198aef7761198ec7b4337d2a61",
       "reason": "An explicitly declared dataset was re-prepared; its source evidence qualifies this change."
     },
     {
       "filename": "telesto-normal-surface@2x.webp",
-      "beforeSha256": "9799366775ac83afc44cb37be42b2951678d02c58ae31a5b97ab6f92e5b87279",
-      "afterSha256": "d6f770e4bbe3e39285d7bc309e9d8bdbfaf9a22bd2abdbdd067ec2063e1fb69d",
       "reason": "An explicitly declared dataset was re-prepared; its source evidence qualifies this change."
     },
     {
       "filename": "telesto-normal-thumbnail.webp",
-      "beforeSha256": "da406f3637f7716b30dc1ff911bb0ba4fe4d1a2667e4cb6351bf13afe885f279",
-      "afterSha256": "e6741dfefb677b2c381f78357bf55a555cb1e631dc98857ce82d907211c7222b",
       "reason": "An explicitly declared dataset was re-prepared; its source evidence qualifies this change."
     }
   ],
@@ -56,7 +44,6 @@
       "sunView": "matrix3d(0.01791554625,0.649251967693,0.760362358123,0,0,0.760484413041,-0.649356186944,0,-0.999839503722,0.0116335708,0.013624493674,0,0,0,0,1)"
     },
     "stableDom": true,
-    "sha256": "3d0856e21cfa667b04d51037b0e519523707dba3f83cf43b6cbda96a07c3cad1",
     "errors": []
   },
   "reports": [
@@ -76,7 +63,6 @@
         {
           "name": "color",
           "file": "color-dpr1.png",
-          "sha256": "5659ab29e7a309ec907f2c5eff2cf7efa41e8053b167cc77321a41e1e1c78b83",
           "url": "http://127.0.0.1:4284/telesto/?v=MMZAVzl_H5Nh_EFCxzNAAAAAP8XBdl2T0S-_4OaoJMzI1r-73KLgFnmWAAA#dataset=false-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -122,61 +108,51 @@
         {
           "filename": "telesto-directional-sun@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-directional-sun@2x.webp",
-          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
           "bytes": 12530
         },
         {
           "filename": "telesto-lighting.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-lighting.webp",
-          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
           "bytes": 1050836
         },
         {
           "filename": "telesto-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-normal-surface@2x.webp",
-          "sha256": "d6f770e4bbe3e39285d7bc309e9d8bdbfaf9a22bd2abdbdd067ec2063e1fb69d",
           "bytes": 397894
         },
         {
           "filename": "telesto-system-point.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-system-point.webp",
-          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
           "bytes": 96
         },
         {
           "filename": "telesto-false-color-thumbnail.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-false-color-thumbnail.webp",
-          "sha256": "0959a9165fd3c6927da3bd455659d589d7dab240d684dee2d54f5159cc87b2dd",
           "bytes": 2436
         },
         {
           "filename": "telesto-normal-thumbnail.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-normal-thumbnail.webp",
-          "sha256": "e6741dfefb677b2c381f78357bf55a555cb1e631dc98857ce82d907211c7222b",
           "bytes": 4166
         },
         {
           "filename": "telesto-elevation-legend.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-elevation-legend.webp",
-          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
           "bytes": 298
         },
         {
           "filename": "telesto-elevation-thumbnail.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-elevation-thumbnail.webp",
-          "sha256": "e3f0fe4750c8327e3b5532982a3ad04ace203b2b81332154e03fb1180da55740",
           "bytes": 5878
         },
         {
           "filename": "telesto-false-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-false-color-surface@2x.webp",
-          "sha256": "51806fccf7a299f702c424de0fa3387a3477528bc08da3c41f5bc9ec59890dfe",
           "bytes": 280230
         },
         {
           "filename": "telesto-false-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-false-color-shadow@2x.webp",
-          "sha256": "139558572ce7ef3d44f7220d0b67559ecebee583fed282578a2705c56b02ce1d",
           "bytes": 195228
         }
       ],
@@ -198,7 +174,6 @@
         {
           "name": "color",
           "file": "color-dpr2.png",
-          "sha256": "7235781cb16e33d0653de4f54a3ba5cc4f31a4cb2674088e504f2a2f96b7a368",
           "url": "http://127.0.0.1:4284/telesto/?v=MMZAVzl_H5Nh_EFCxzNAAAAAP8XBdl2T0S-_4OaoJMzI1r-73KLgFnmWAAA#dataset=false-color",
           "pose": {
             "schema": "cssearth-camera-pose@1",
@@ -244,61 +219,51 @@
         {
           "filename": "telesto-directional-sun@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-directional-sun@2x.webp",
-          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
           "bytes": 12530
         },
         {
           "filename": "telesto-system-point.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-system-point.webp",
-          "sha256": "1b28b0d70b2845a8e0a0766e24e0165633bc37bb60c3968497c9e50bb70914c6",
           "bytes": 96
         },
         {
           "filename": "telesto-normal-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-normal-surface@2x.webp",
-          "sha256": "d6f770e4bbe3e39285d7bc309e9d8bdbfaf9a22bd2abdbdd067ec2063e1fb69d",
           "bytes": 397894
         },
         {
           "filename": "telesto-lighting.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-lighting.webp",
-          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
           "bytes": 1050836
         },
         {
           "filename": "telesto-normal-thumbnail.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-normal-thumbnail.webp",
-          "sha256": "e6741dfefb677b2c381f78357bf55a555cb1e631dc98857ce82d907211c7222b",
           "bytes": 4166
         },
         {
           "filename": "telesto-elevation-thumbnail.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-elevation-thumbnail.webp",
-          "sha256": "e3f0fe4750c8327e3b5532982a3ad04ace203b2b81332154e03fb1180da55740",
           "bytes": 5878
         },
         {
           "filename": "telesto-false-color-thumbnail.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-false-color-thumbnail.webp",
-          "sha256": "0959a9165fd3c6927da3bd455659d589d7dab240d684dee2d54f5159cc87b2dd",
           "bytes": 2436
         },
         {
           "filename": "telesto-elevation-legend.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-elevation-legend.webp",
-          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
           "bytes": 298
         },
         {
           "filename": "telesto-false-color-surface@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-false-color-surface@2x.webp",
-          "sha256": "51806fccf7a299f702c424de0fa3387a3477528bc08da3c41f5bc9ec59890dfe",
           "bytes": 280230
         },
         {
           "filename": "telesto-false-color-shadow@2x.webp",
           "url": "http://127.0.0.1:4284/scenes/telesto/telesto-false-color-shadow@2x.webp",
-          "sha256": "139558572ce7ef3d44f7220d0b67559ecebee583fed282578a2705c56b02ce1d",
           "bytes": 195228
         }
       ],

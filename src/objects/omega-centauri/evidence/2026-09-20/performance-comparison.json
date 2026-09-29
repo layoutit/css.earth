@@ -148,39 +148,30 @@
   },
   "endPins": [
     {
-      "path": "src/objects/sun/prepared/world-context.json",
-      "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+      "path": "src/objects/sun/prepared/world-context.json"
     },
     {
-      "path": "src/objects/omega-centauri/source/nebula.json",
-      "sha256": "94257a65f14b1fb1fb74d6f893010928afead94b47cc3c4342399f14d332a991"
+      "path": "src/objects/omega-centauri/source/nebula.json"
     },
     {
-      "path": "src/objects/omega-centauri/prepared/lenses.json",
-      "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+      "path": "src/objects/omega-centauri/prepared/lenses.json"
     },
     {
-      "path": "site/prepared-context-navigation.mts",
-      "sha256": "67286a0589f42d990d467d5c1e199661bc8b98b7102d152c527f34fc095e4a36"
+      "path": "site/prepared-context-navigation.mts"
     },
     {
-      "path": "src/renderers/css/universe/prepared-universe-runtime.ts",
-      "sha256": "fd0d735b8f44cd639e3c9cf5333a4f4fbef1a2c9dbbbf8d288cf59a4441dae2f"
+      "path": "src/renderers/css/universe/prepared-universe-runtime.ts"
     },
     {
-      "path": "src/renderers/css/universe/detailed-focus-context.ts",
-      "sha256": "12a727775a8277fede7cd743642b960a30c10a7334f2e47186d97b6e8d5413f4"
+      "path": "src/renderers/css/universe/detailed-focus-context.ts"
     },
     {
-      "path": "src/renderers/css/universe/prepared-world-context.ts",
-      "sha256": "00758c8d75054092c209c68b4e311605a4a886d59fda5b36cdf86bf5d41d9ab2"
+      "path": "src/renderers/css/universe/prepared-world-context.ts"
     },
     {
-      "path": "src/renderers/css/dist/universe.js",
-      "sha256": "a4aa3371c6836dcb1df973ab5cadbf9c9bd5d3ebb2555e9e46aff31fc2b9c520"
+      "path": "src/renderers/css/dist/universe.js"
     }
   ],
-  "scriptSha256": "9afb955048abc24b3f9d8be55f86cb199fb984c59847afd7dfb133cbcaf7abee",
   "protocolUnchanged": true,
   "medianInputReductionPercent": 74.78976411378503,
   "medianTaskReductionPercent": 67.33717704819814

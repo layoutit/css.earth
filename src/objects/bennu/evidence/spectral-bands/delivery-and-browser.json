@@ -3,7 +3,6 @@
   "date": "2026-09-27",
   "body": "bennu",
   "install": {
-    "inventorySha256": "06fee1ecc39b468fd63449622de66c19460ca7853bb7e0b8f81f0a3623582157",
     "files": 65,
     "bytes": 53778038,
     "previousBytes": 35272553,
@@ -11,8 +10,7 @@
     "reused": 0,
     "skipped": 0,
     "source": "https://earth-assets.lowpoly.cc",
-    "verification": "Production installRuntimeAssets into an empty destination; every file size and SHA-256 verified. No source preparation in the installation.",
-    "sharedWorldInventorySha256": "6902d05a2d4054bb5b756bcfcbc33cfc57ed873fdfc5f23d62d2f7d1ab7f2aa9"
+    "verification": "Production installRuntimeAssets into an empty destination; every file size and SHA-256 verified. No source preparation in the installation."
   },
   "geometry": {
     "existingFullSizeAtlasesByteIdentical": true,

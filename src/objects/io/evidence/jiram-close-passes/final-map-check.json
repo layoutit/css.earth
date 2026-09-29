@@ -513,20 +513,16 @@
   },
   "inputs": {
     "src/objects/io/source/science/jiram/io-jiram-m-night-2023-background.IMG": {
-      "bytes": 4147200,
-      "sha256": "caff20d22e39c84fd054c7fe0bcef03f5abae5a266d837266433688c3e76376d"
+      "bytes": 4147200
     },
     "src/objects/io/source/science/jiram/recipe.json": {
-      "bytes": 11231,
-      "sha256": "443dc860aaabb5f708ebdecc09a05c09b763281480aca58db42d78aac90359b9"
+      "bytes": 11231
     },
     "tools/objects/juno/jiram-mosaic.mts": {
-      "bytes": 42742,
-      "sha256": "4999f31f9e5bb8a60a8f2fbf750275caa9c77d1bc4b12fa6fb0bdb7fb067cffe"
+      "bytes": 42742
     },
     "src/objects/io/source/science/davies-2024/psjad4346t10_mrt.txt": {
-      "bytes": 27553,
-      "sha256": "d5fdc71614ec7fe1059eed1344521212193550a2f41d697ea78d4b78fd812cf5"
+      "bytes": 27553
     }
   },
   "background": {
@@ -538,20 +534,16 @@
       "matched": 36,
       "inputs": {
         "src/objects/io/source/science/jiram/io-jiram-m-night-2023.IMG": {
-          "bytes": 4147200,
-          "sha256": "27621dc363c72358485df80bd662ed6d343e1b4ebf9c6d1b4c46c5a9c4031ceb"
+          "bytes": 4147200
         },
         "src/objects/io/source/science/jiram/recipe.json": {
-          "bytes": 11130,
-          "sha256": "a9ca921ddc00b052268c02556ea9b129bc76537615defcb6a7a1f1460c2e51ce"
+          "bytes": 11130
         },
         "tools/objects/juno/jiram-mosaic.mts": {
-          "bytes": 38857,
-          "sha256": "66f566d04443d8357f7034f8bf85b1c415b37381317fe407068a83af7955353a"
+          "bytes": 38857
         },
         "src/objects/io/source/science/davies-2024/psjad4346t10_mrt.txt": {
-          "bytes": 27553,
-          "sha256": "d5fdc71614ec7fe1059eed1344521212193550a2f41d697ea78d4b78fd812cf5"
+          "bytes": 27553
         }
       }
     },

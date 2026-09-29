@@ -19,23 +19,18 @@
     14,
     15
   ],
-  "sourceEdgeReceiptSha256": "5f451e3e28d4d39e92d35679871b276e8ff7cd9c5fc75657072935c5203e3c46",
-  "terrainSha256": "a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178",
-  "cameraModuleSha256": "c4a8f2d534b1252cb847b90beff8c8d4a5daac009912fd40cf5e50f4027b1b04",
   "fullSourcePins": [
     {
       "file": "C1465671822_1_ir.cub",
       "url": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
       "resolvedUrl": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
-      "bytes": 1090377,
-      "sha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee"
+      "bytes": 1090377
     },
     {
       "file": "N1465671822_1_ir.cub",
       "url": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
       "resolvedUrl": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
-      "bytes": 226310,
-      "sha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3"
+      "bytes": 226310
     }
   ],
   "method": {

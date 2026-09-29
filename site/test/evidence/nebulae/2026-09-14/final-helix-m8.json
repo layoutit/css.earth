@@ -2,14 +2,10 @@
   "result": "PASS",
   "inputs": [
     {
-      "id": "helix",
-      "sourceResult": "2794e4cc5c3a11f4fb19c7290d75b721362c9f4fdce8686ba58fdbc22caba292",
-      "payloadSha256": "ec721e6c151bdc4ec26b1ca042ffb92797c6e4049aa1de4c61f1183da6e14989"
+      "id": "helix"
     },
     {
-      "id": "m8",
-      "sourceResult": "7545a7a3af301ef4cc288c84e4343262add505c4db1f8bff8d1c836a7ad8c3e6",
-      "payloadSha256": "3bdbd0a131791ba83048ded4a997bd89c8d529a03bba449a880d453729432588"
+      "id": "m8"
     }
   ],
   "captures": [

@@ -3,7 +3,6 @@
   "rows": [
     {
       "id": "2473604354",
-      "cubeSha256": "8388ce181b20156c072230ca9cdb34618e577c6894ee05d083055e7cca196a5c",
       "nativeXyzSampleStride": 13,
       "samples": 29053,
       "meanMeters": 0.15357395939156773,
@@ -37,8 +36,8 @@
         ],
         "fitPixels": 2106,
         "holdoutPixels": 375607,
-        "maximumResidualPixels": 0.000027128092993644183,
-        "rmsResidualPixels": 0.000007942551994121738
+        "maximumResidualPixels": 2.7128092993644183e-05,
+        "rmsResidualPixels": 7.942551994121738e-06
       }
     }
   ]

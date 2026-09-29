@@ -2,7 +2,6 @@
   "schema": "cssearth-circumstellar-reconstruction@1",
   "objectId": "beta-pictoris-disc",
   "lensId": "colour",
-  "shownSha256": "3d1ac2f1b333014081ffb2ea247fecd5ca57815aced0bb90acc4537a84f8b488",
   "grid": {
     "size": 156,
     "halfUnits": 135
@@ -29,10 +28,8 @@
   },
   "ktx2": {
     "path": "density-colour.ktx2",
-    "sha256": "45d5d304f0ad4901d3f5d8614266726faf84cb7f849d1ade0b0be57e5aa47c61",
     "bytes": 1554371
   },
-  "decodedSha256": "87d11b3b427f389062639f1370ec540c9dd5250af5221f4001d98d60b4bfa697",
   "peak": 0.1585624170716853,
   "filledVoxels": 1606289,
   "exposureGain": 0.1099070923360088,

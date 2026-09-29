@@ -2,36 +2,28 @@
   "recordedAt": "2026-09-20T22:58:26.471435+00:00",
   "sourceFiles": {
     "tools/nebula/application/element-budget.ts": {
-      "bytes": 3096,
-      "sha256": "9d0678bee9988b51b2afbefe874ce92feabecc369a63403a58f03946af592a28"
+      "bytes": 3096
     },
     "tools/nebula/application/element-budget.test.ts": {
-      "bytes": 1717,
-      "sha256": "500c59b9e5ce79dd9912a21be84c400f501c9222ad54fa3296bb6634bb43256b"
+      "bytes": 1717
     },
     "tools/nebula/application/element-budget.cases.ts": {
-      "bytes": 6506,
-      "sha256": "435af09c9f369ccbc579006fb20fd0ef0bc18f6a5a466729175977e830ab223c"
+      "bytes": 6506
     },
     "tools/nebula/application/objects.ts": {
-      "bytes": 23232,
-      "sha256": "3af766116ebc0436162b13db781b851b69b4060f470ff79e36a1cd3912bb04d6"
+      "bytes": 23232
     },
     "tools/nebula/application/objects.test.ts": {
-      "bytes": 1696,
-      "sha256": "cfe387a0db16c48988f29a95ad32914638cc667fb03a02b227386aba52cc63c5"
+      "bytes": 1696
     },
     "tools/nebula/application/objects.cases.ts": {
-      "bytes": 11547,
-      "sha256": "80ee489ed7724993d14aafa766e77b8fa3723af22cea00626011ee45f51e4fdb"
+      "bytes": 11547
     },
     "src/renderers/css/volume/compiler-render-budget.ts": {
-      "bytes": 595,
-      "sha256": "68acdb48f890c5624a819a5a215d242284c8e9603d61aa8a5ca75306015c7b63"
+      "bytes": 595
     },
     "labs/nebula/packages/volume-core/src/contracts/render-element-budget.ts": {
-      "bytes": 4298,
-      "sha256": "ebde15faebea147d751ae75cfe62be549e1b81392a0982915dea8efc982cdc58"
+      "bytes": 4298
     }
   },
   "behavior": {

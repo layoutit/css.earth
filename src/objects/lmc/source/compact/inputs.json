@@ -4,7 +4,6 @@
   "bankId": "lmc",
   "defaultLens": "horalek-widefield",
   "framingRadiusUnits": 5,
-  "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
   "frame": {
     "referenceFrame": "sun-icrf",
     "epochJdTt": 2461286.5,
@@ -117,8 +116,6 @@
   "lenses": [
     {
       "imageId": "horalek-widefield",
-      "sourceResultId": "5fc6d6563f57e5ef6a6d5b4a4f5ebd8e35f8ae8ace946d0cca0997e067424f9b",
-      "resultId": "cab541ef8eac8f8ef410c5a93317a37a2a4a67b27a7d5c0a9154d59f71759559",
       "tangentBoundsKpc": {
         "min": [
           -4.351779483333175,
@@ -129,7 +126,6 @@
           3.3480334410529595
         ]
       },
-      "sourceDigest": "fde07f3a937d444e8c03461403ea365998ef4b25195f85f4b7b07b9fc0eafce2",
       "registered": {
         "path": "src/objects/lmc/source/compact/lenses/horalek-widefield/registered.png",
         "bytes": 1402422
@@ -313,8 +309,6 @@
     },
     {
       "imageId": "vista-infrared",
-      "sourceResultId": "ba8f4ad93ea837aa3db9190f0a403e17708533ee5047389dd14a1d6c18560c5f",
-      "resultId": "f63230933e0e9ebb92baee87b14a0c34e08a6a76ea30267098b635b8dc2ec77f",
       "tangentBoundsKpc": {
         "min": [
           -2.9197263334954138,
@@ -325,7 +319,6 @@
           3.2676669383136834
         ]
       },
-      "sourceDigest": "d595c34af23202b0094b55614575a84e0212b8e4e415bc6fad1f450b674d479d",
       "registered": {
         "path": "src/objects/lmc/source/compact/lenses/vista-infrared/registered.png",
         "bytes": 1839895
@@ -509,8 +502,6 @@
     },
     {
       "imageId": "wise-wide-infrared",
-      "sourceResultId": "19c9f90916a4cfe7100972aa898522fb7eee347dacc83163ffadb3b3337277a6",
-      "resultId": "6223c6cd9b389f00a42d52b9016431a4416d1e77f70ebaaa5694f8ce32fbaff6",
       "tangentBoundsKpc": {
         "min": [
           -10.542579694562741,
@@ -521,7 +512,6 @@
           10.542579694562738
         ]
       },
-      "sourceDigest": "05443d097fa8abda86ba22ed4c5141d085c0614f207d1a278df2e664046767b9",
       "registered": {
         "path": "src/objects/lmc/source/compact/lenses/wise-wide-infrared/registered.png",
         "bytes": 667742

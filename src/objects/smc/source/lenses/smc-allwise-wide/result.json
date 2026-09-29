@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-nebula-reconstruction@1",
-  "resultId": "f3985f790d58be146e421bb43587154050a9fb124ec69dcdee92a87e34c29e14",
   "imageId": "smc-allwise-wide",
   "removalResultId": "a3ad3b73aab7a9cd7f3d778b150ae4939e95e7b382c91d464897bc6e4ad93162.fb89b635c3ea8510db75819641035b8cf7b5f93c3bb410ade39eac3c224a7b84",
   "placement": {
@@ -68,12 +67,7 @@
     },
     "reconstructionNeutral": {
       "descriptor": "neutral-object.json"
-    },
-    "materialGeometry": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be"
-  },
-  "finiteMaterial": {
-    "modelResultId": "ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be",
-    "sourceResultId": "298c402ba303bd906466d0279b4d9b7ee2d15718eb3679ee1b0aa5af8a4ef6cb"
+    }
   },
   "processing": {
     "densityPreview": false,

@@ -4,10 +4,8 @@
     "url": "https://doi.org/10.5061/dryad.1vhhmgr82",
     "paper": "https://doi.org/10.1093/mnras/stag1287",
     "license": "CC0-1.0",
-    "archiveSha256": "21562a5b32c27f39ee67215e9e2c3b1cd2fcfb4a115d2f2c8e0307fc8a51eb54",
     "archiveBytes": 3547448578,
     "entry": "run34681lsmcgabestModelA_HR.00440.gz",
-    "snapshotSha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
     "snapshotAgeGyr": 2.2,
     "massUnitSolarMass": 232000,
     "totalCount": 5005000,
@@ -26,13 +24,11 @@
   "density": "Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.",
   "photo": {
     "path": "labs/nebula/sources/lmc-smash-full.webp",
-    "sha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
     "url": "https://noirlab.edu/public/images/noirlab2030a/",
     "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
     "license": "CC-BY-4.0",
     "acquisition": {
-      "path": "labs/nebula/sources/lmc-smash-full.webp.json",
-      "sha256": "430264b503fa44d7d19f1a97c5323339f13789cbd1d5e115cd6ea94ec13d5bc5"
+      "path": "labs/nebula/sources/lmc-smash-full.webp.json"
     }
   },
   "display": {

@@ -13,18 +13,15 @@
   },
   "reference": {
     "path": "before.png",
-    "bytes": 208938,
-    "sha256": "db841bce6c69c0d8cabec7d016f9dc4f17c2de50c7a16c9139e13cfc3451ec1e"
+    "bytes": 208938
   },
   "result": {
     "path": "current.png",
-    "bytes": 203854,
-    "sha256": "002885d31e72708111999e0d5d1fdb034ab6f2a97176334a801ce7427421031e"
+    "bytes": 203854
   },
   "diff": {
     "path": "change-diff.png",
-    "bytes": 117390,
-    "sha256": "46d8523c7c3a420ceed6f4a931834b6a74cd47daa8bda23296a9a8577c0d205b"
+    "bytes": 117390
   },
   "width": 520,
   "height": 480,

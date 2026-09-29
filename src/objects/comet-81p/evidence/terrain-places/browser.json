@@ -4,52 +4,43 @@
   "implementation": [
     {
       "path": "tools/objects/surface-features/image-controls.mts",
-      "bytes": 10225,
-      "sha256": "9c6e88c2e6aa948511070dafca4b9f0c088c33ad9f2cc5fa7942ab791cb45a7b"
+      "bytes": 10225
     },
     {
       "path": "tools/objects/surface-features/project-encounter-landmarks.mts",
-      "bytes": 15647,
-      "sha256": "6df649af63b8b3dbcbbf8dc91e508a9c0ca0d4dc506c7191cfd26664a657e844"
+      "bytes": 15647
     },
     {
       "path": "tools/objects/surface-features/project-orthophoto-landmarks.mts",
-      "bytes": 11874,
-      "sha256": "b78fe51359ac6fba158c0695e5495b7e9a793d7923c140a651b725a420e5477a"
+      "bytes": 11874
     },
     {
       "path": "tools/objects/surface-features/landmarks.ts",
-      "bytes": 14206,
-      "sha256": "25550574a86c042b29b37abbe4d896f366b470e145c343e69d5b1de6363681f9"
+      "bytes": 14206
     }
   ],
   "inputs": [
     {
       "path": "src/planets/comet-81p/object.json",
-      "bytes": 4112,
-      "sha256": "272d9f167904f6d89c97f055dd7781e26894faaa5e25ca8c6a906c5c44180b04"
+      "bytes": 4112
     },
     {
       "path": "src/planets/comet-81p/source/manifest.json",
-      "bytes": 34612,
-      "sha256": "ed573d5b7a6e657adcae2680dfe6481f194f00a75476a6398ccc601cd400e179"
+      "bytes": 34612
     },
     {
       "path": "src/planets/comet-81p/runtime-assets.json",
-      "bytes": 6155,
-      "sha256": "34924b56ae6467a72d70d7a7e8778cdfb7efce8ac6562dc2fbc77ac6a4c4e7ff"
+      "bytes": 6155
     }
   ],
   "servedFeature": {
     "path": "public/scenes/comet-81p/comet-81p-features.json",
-    "bytes": 4415,
-    "sha256": "1a953df931967f383bbeb978cf8b39fdae7c95425f109edb468c0fc55ee9b7e2"
+    "bytes": 4415
   },
   "remoteFeature": {
-    "url": "https://earth-assets.lowpoly.cc/runtime-assets/1a953df931967f383bbeb978cf8b39fdae7c95425f109edb468c0fc55ee9b7e2/comet-81p-features.json",
+    "url": "comet-81p-features.json",
     "status": 200,
-    "bytes": 4415,
-    "sha256": "1a953df931967f383bbeb978cf8b39fdae7c95425f109edb468c0fc55ee9b7e2"
+    "bytes": 4415
   },
   "surfaceAssets": "79 pre-existing assets across both changed bodies have the same hashes as the base inventories. Only the two feature JSONs are new.",
   "browser": {
@@ -164,7 +155,6 @@
       {
         "image": "desktop.png",
         "bytes": 572422,
-        "sha256": "49ac6db2131acb2f2cd73b8920faed6ed5983bb251555c72c157c1688cb7bb73",
         "viewport": {
           "width": 1440,
           "height": 900
@@ -208,8 +198,8 @@
           "offAxisDegrees": 0,
           "silhouetteRadius": 259.20000062134494,
           "bodyCenterKilometers": [
-            2.895130592150963e-8,
-            -5.050900199421449e-9,
+            2.895130592150963e-08,
+            -5.050900199421449e-09,
             -9.420833903816966
           ]
         },
@@ -218,7 +208,6 @@
       {
         "image": "mobile.png",
         "bytes": 187727,
-        "sha256": "4a11935dad6346400ad8bf63a8e81f52a2c862bd9b23f373843d430b9c91f1d4",
         "viewport": {
           "width": 390,
           "height": 844
@@ -262,8 +251,8 @@
           "offAxisDegrees": 0,
           "silhouetteRadius": 81.89759237710796,
           "bodyCenterKilometers": [
-            -3.206312885595253e-8,
-            -9.984810958485468e-9,
+            -3.206312885595253e-08,
+            -9.984810958485468e-09,
             -8.135359793660326
           ]
         },

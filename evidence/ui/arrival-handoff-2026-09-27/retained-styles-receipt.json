@@ -7,7 +7,6 @@
   },
   "finalBuild": {
     "schema": "cssearth-performance-build@1",
-    "sourceDigest": "e945a2aa96fa1e47b9f8252cd487dc766232b70c375e49f0195bcce53cd1030c",
     "builtAt": "2026-09-27T03:13:42.903Z"
   },
   "experiments": {
@@ -27,7 +26,6 @@
             "layout": 0.182
           }
         },
-        "traceSha256": "f5a9b4187bbd4ce5d4c0e862501b05de913a4c26b86a50d742b0c303344fdee5",
         "contentBeforeMotionMs": 391.31100000000015
       },
       {
@@ -45,7 +43,6 @@
             "layout": 0.085
           }
         },
-        "traceSha256": "8a49356f69041564be4c995312b7bfc6740d7a91ae6e781d3f596c86c5611521",
         "contentBeforeMotionMs": 168.35600000000022
       },
       {
@@ -63,14 +60,12 @@
             "layout": 0.096
           }
         },
-        "traceSha256": "a67e0da612fea89fa15f47d6e4b6d47b3dd2c981cf9d27d9f530f40885dd5aec",
         "contentBeforeMotionMs": 195.85400000000027
       }
     ],
     "retainAtHandoff": {
       "build": {
         "schema": "cssearth-performance-build@1",
-        "sourceDigest": "e415ec1022503c40acbe298f6e6ec79c601a61b0cd7d52f85ebd177f6a5cf4b1",
         "builtAt": "2026-09-27T03:00:18.967Z"
       },
       "runs": [
@@ -89,7 +84,6 @@
               "layout": 0.092
             }
           },
-          "traceSha256": "03568be5da0a002538a223db9e14a54c2eb742f95abba47cf4752feb056c43a0",
           "contentBeforeMotionMs": 138.74199999999973
         },
         {
@@ -107,7 +101,6 @@
               "layout": 0.095
             }
           },
-          "traceSha256": "e12a06b3a815593ef9214550b7b179796dfcb28e8383619ac8d6ddfde2b228ae",
           "contentBeforeMotionMs": 152.94699999999966
         },
         {
@@ -125,7 +118,6 @@
               "layout": 0.104
             }
           },
-          "traceSha256": "4e01f11f824fea592491a32a90c30065ef20fb75004f43c9f880bcf85966f355",
           "contentBeforeMotionMs": 161.84799999999996
         }
       ]
@@ -133,7 +125,6 @@
     "installDuringPreparation": {
       "build": {
         "schema": "cssearth-performance-build@1",
-        "sourceDigest": "180523f45ff577200be91b9bfd8ffe53a7d376892087b309b0236d6a9f2f4d22",
         "builtAt": "2026-09-27T03:05:27.668Z"
       },
       "runs": [
@@ -152,7 +143,6 @@
               "layout": 0.102
             }
           },
-          "traceSha256": "509d4d8a99df9266dfc4151cee715b8edb892337001b10a2acf0bfdc6d0d314b",
           "contentBeforeMotionMs": 185.98599999999988
         },
         {
@@ -170,7 +160,6 @@
               "layout": 0.088
             }
           },
-          "traceSha256": "15f0f49986a212a6497408fa982b4ca9328148286f959cf43f7eaece9482a175",
           "contentBeforeMotionMs": 173.62800000000016
         },
         {
@@ -188,7 +177,6 @@
               "layout": 0.097
             }
           },
-          "traceSha256": "89e4bb866edc9f7eb2dfaf5e421d145ed27335a4b3c96a7c8534f484923b4825",
           "contentBeforeMotionMs": 207.01800000000003
         }
       ]
@@ -209,12 +197,10 @@
         "layout": 0.092
       }
     },
-    "traceSha256": "37a607d22f30cd72e9b51ebe1ae747df6f1b0b8930cf5476aaf87299a6ba1c7b",
     "contentBeforeMotionMs": 197.42599999999993
   },
   "roundTrip": {
     "capture": "tablet-retained-arrival-round-trip-2026-09-27T03-13-45-926Z",
-    "reportSha256": "ce16c3bd9d703d83e5fc775b075be3ba07928c88e50e3f593e51ce03fefa0a1f",
     "checks": [
       {
         "phase": "earth-start",
@@ -291,20 +277,17 @@
       {
         "file": "retained-filmstrip.png",
         "source": "filmstrip.png",
-        "bytes": 209172,
-        "sha256": "57eaf4c761abb99acc9121ca54a8a53e608ad3e9f51f778d7dfa399fffcc7739"
+        "bytes": 209172
       },
       {
         "file": "retained-covered.jpg",
         "source": "screens/1790478900713.jpg",
-        "bytes": 83857,
-        "sha256": "4d8e6ce5e9324d94c120f5f2e5573fff6d981da89b1f387a4e515f52eab044b3"
+        "bytes": 83857
       },
       {
         "file": "retained-revealed.jpg",
         "source": "screens/1790478900906.jpg",
-        "bytes": 77564,
-        "sha256": "30ba4022d9de1b86851edfb6846c3ef007c8d3eb75716403146de405b2ca0cf5"
+        "bytes": 77564
       }
     ]
   },

@@ -1,7 +1,4 @@
 {
-  "uncommittedCode": {
-    "src/renderers/css/styles/jupiter-surfaces.css": "999add7eb502791ac73bc64cf061db86836aad17290d45a5f2cf29d4019d7b6b"
-  },
   "date": "2026-09-26",
   "browser": "Chromium via Playwright CLI",
   "viewport": {
@@ -9,7 +6,6 @@
     "height": 760,
     "deviceScaleFactor": 1
   },
-  "inventorySha256": "c7401573720c5c476cdd87901a626edc569563b926615584f72f0174050593d7",
   "captures": [
     "visible-2025a.png",
     "magnetic.png",
@@ -41,8 +37,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/c4fa43221b71a856edb3af485819569ac427fba934f22389ba63479883597dd7/jupiter-visible-2015a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/83c7849cb2ab18e237b8fbbb6af9f403546ac530ffd06a517ad0b2b0549b4ff1/jupiter-visible-2015a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2015a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2015a-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -50,8 +46,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/1f809033ee5e80c1e2777b5e27babd22866f5ecd5752cf8f779c1994c8cb4e7e/jupiter-visible-2016a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/66c5e4dd01789bea39e6f2460cedff04bd9112cf9842b2cc4e32cc459f1b94fb/jupiter-visible-2016a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2016a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2016a-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -59,8 +55,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/0debc7e6140fbbc3d7868cf63e15993a03b7d4a51ffe67ee8d7b71280684fd3f/jupiter-visible-2017a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/354119f05224a6c29704218c84bce56ca17bcd67efc679c28096679c5548d79e/jupiter-visible-2017a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2017a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2017a-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -68,8 +64,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/f430c0438b8ff627a091169e445a7335cd13089e650b888e60deff3f3a54f253/jupiter-visible-2018a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/102b56c59f272b7b33072b6128d00e13efb54fa57b80204f66b7932be47cae65/jupiter-visible-2018a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2018a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2018a-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -77,8 +73,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/6ffd816cf48440d73be4ca5b62cab6b71c4be94772dab320732607921cd171e6/jupiter-visible-2019a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/c92dd107b5dce6ed0f32bd393db0811fc9ab109e9545e9152821e8625228453e/jupiter-visible-2019a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2019a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2019a-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -86,8 +82,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/b2627696902afbb29c7dfe4f842162176d15cdf1b197cc013e86c71ab4e8449a/jupiter-visible-2020a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/fd464b25044aae0849201eea1d59b88b981e6d2b6c50a388e36a345059efe3f7/jupiter-visible-2020a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2020a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2020a-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -95,8 +91,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/cd13162cd54768a1f7e8f9a8de27c067d2ed1780984d97e4d24d9d62486ea30d/jupiter-visible-2021a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/699513346bd406fd5833f6d6d85d74663e6069c0db24f2d64ba680c854b79708/jupiter-visible-2021a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2021a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2021a-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -104,8 +100,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/24f227095a34adca9e8e85d3141e1b7318608480177084d8dc64c6f28c867c1c/jupiter-visible-2022a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/fccbd48956788ca4e2dccc5507b1eedee0299b813f3961fa276d83e041f97aca/jupiter-visible-2022a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2022a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2022a-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -113,8 +109,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/f9b6133dee40192cefd9df4424fc7c7aeb1ea533fba35d0cb597eb6a14cb1027/jupiter-visible-2024a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/f2cdbfbfe8cd707da7c73e5596f0a31ca5963a6befcf6d06ca788634984da7a1/jupiter-visible-2024a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2024a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2024a-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -122,8 +118,8 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/951a4a991af9b3c942e4404a12a02dc01e6a93dea1aff5cf081ad7bfe3b9acac/jupiter-visible-2024c@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/64248e86e799bdadd92e7c6632521ccb2a73058c824806a25d7349cb62c38caa/jupiter-visible-2024c-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2024c@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2024c-poles@2x.webp\")"
     },
     {
       "ready": true,
@@ -131,13 +127,13 @@
       "nodes": 797,
       "mounted": 1,
       "error": null,
-      "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/9c9151ef91b3ba3987516c4136b1a1ef7348b14e028ac2ab3e2dcb4bf89251fe/jupiter-visible-2025a@2x.webp\")",
-      "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/25a0e65795165bd3058df1d2a7b3b14e318b3deaebd5fababa509096e137e232/jupiter-visible-2025a-poles@2x.webp\")"
+      "surface": "url(\"jupiter-visible-2025a@2x.webp\")",
+      "pole": "url(\"jupiter-visible-2025a-poles@2x.webp\")"
     }
   ],
   "magnetic": {
-    "surface": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/d1180681d717583031948722cea2901dc395ea337c47251b28c0c8168e174ee6/jupiter-magnetic@2x.webp\")",
-    "pole": "url(\"https://earth-assets.lowpoly.cc/runtime-assets/916c222f5b8a07d0c158fa6979b1844463b645dabb81b6c6a1f9d3532c08b985/jupiter-magnetic-poles@2x.webp\")"
+    "surface": "url(\"jupiter-magnetic@2x.webp\")",
+    "pole": "url(\"jupiter-magnetic-poles@2x.webp\")"
   },
   "mobile": {
     "app": {

@@ -3,23 +3,18 @@
   "lensIds": [
     "normal"
   ],
-  "recipeSha256": "a912e380dfc02f25635fbef8fb7c010a654e5360ac6d3845e9e3cbcf3461b11c",
-  "retainedSceneSha256": "968ad6454c4a992320af48d58bcbc974a5cc63af1d1d5a67e52a14bcbbfc666d",
   "refreshedRuntimeAssets": [
     {
       "filename": "pan-normal-shadow@2x.webp",
-      "bytes": 264760,
-      "sha256": "96e9e457085b1ef85b59033c936fd597146657313cf09726cf3b95cab1bf9d62"
+      "bytes": 264760
     },
     {
       "filename": "pan-normal-surface@2x.webp",
-      "bytes": 414778,
-      "sha256": "b92a502fbd32de0216f03b14145c93d779e6187c44bdbf1c135e1e128cd929f9"
+      "bytes": 414778
     },
     {
       "filename": "pan-normal-thumbnail.webp",
-      "bytes": 1614,
-      "sha256": "1efb373911ddf3fb6e8adeba25dca2c7949572c0f5c9ac5ff859bca8b3d884bf"
+      "bytes": 1614
     }
   ],
   "retainedRuntimeAssetCount": 35,
@@ -918,68 +913,52 @@
       },
       "sourceIds": [
         {
-          "id": "n1867604669",
-          "sha256": "72b88946ad1a78b872c1fad81bf388e67a85fe728ba0293c86ce93bf0b9a59b3"
+          "id": "n1867604669"
         },
         {
-          "id": "n1867604117",
-          "sha256": "9b2078a7b7193d66d6d06a06002d153a177c41edadb0fcae063ed2e108fb8b31"
+          "id": "n1867604117"
         },
         {
-          "id": "n1867602962",
-          "sha256": "a1faae7cbed026141d02330ff649b634b84e4e9999b291a9c1da239849279098"
+          "id": "n1867602962"
         },
         {
-          "id": "n1867606181",
-          "sha256": "36272fa6916b72ed6c756d23bf8c7451569ea45c1236cbdf590d0949af698fd8"
+          "id": "n1867606181"
         },
         {
-          "id": "n1867606742",
-          "sha256": "5905445d86bce05ff06eb44cd0076d42c5321d085cec206a973cb607347117fc"
+          "id": "n1867606742"
         },
         {
-          "id": "n1867604669-label",
-          "sha256": "af5be8512bd7e5e06d4826c3938b6d68410f990bff662a92ca6517758a5eeb43"
+          "id": "n1867604669-label"
         },
         {
-          "id": "n1867604117-label",
-          "sha256": "4ab94e29b23c2482356de0f934606e376b555331ff2640122e78788351d0ee7e"
+          "id": "n1867604117-label"
         },
         {
-          "id": "n1867602962-label",
-          "sha256": "970f28908e3d6f614d1e722b9e26771905fe0eac9ca04eb30386db9ab2d4675b"
+          "id": "n1867602962-label"
         },
         {
-          "id": "n1867606181-label",
-          "sha256": "d17bf9a646077d57020d31437588f2fae27bcae5a95c84c7c5ecdce3618b4bf0"
+          "id": "n1867606181-label"
         },
         {
-          "id": "n1867606742-label",
-          "sha256": "35b31d73c8999ccf80d035dc772aeb9e20fcc83a28781cb84fa9aa08d5650b76"
+          "id": "n1867606742-label"
         },
         {
-          "id": "n1530371111_1",
-          "sha256": "bee47aebd6c1c979703e22f7f63d7910f1e5432d97eda62e9ea2e05544394feb"
+          "id": "n1530371111_1"
         },
         {
-          "id": "n1530371111_1-label",
-          "sha256": "041ea65079461ecd689583fca47c86afad4b093fca7f207276b1ac4b83e027db"
+          "id": "n1530371111_1-label"
         },
         {
-          "id": "n1524970213_1",
-          "sha256": "4006279a75d5ab439a9016b18e61e776249fc00e698e88e540f79e81769621af"
+          "id": "n1524970213_1"
         },
         {
-          "id": "n1524970213_1-label",
-          "sha256": "faeca3db3fe04f5f25d7fb23a187e71b0e9d27f364289817f449af9c74f1b9b2"
+          "id": "n1524970213_1-label"
         },
         {
-          "id": "n1867600368_1",
-          "sha256": "bd0bdacea2ea7907066ba68e4463f04ccd23174d096ad356198f3e5041727682"
+          "id": "n1867600368_1"
         },
         {
-          "id": "n1867600368_1-label",
-          "sha256": "1f281aa728972f0b6ebed6796e3300b357cd72d4a60059417df7ea200f044963"
+          "id": "n1867600368_1-label"
         }
       ],
       "previewPolicy": "The flat preview samples unique radial intersections only; the retained triangle atlas samples the closest full-source surface point in 3D.",
@@ -1007,7 +986,6 @@
       "sampleSources": {
         "file": "normal-source-index.json",
         "bytes": 141851,
-        "sha256": "b091e936d44a129be50f70025ad39aba029fa11907efdec9246c5c5b0cc01954",
         "width": 2048,
         "height": 6400,
         "includesAtlasBleed": true,

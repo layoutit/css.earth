@@ -8,168 +8,127 @@
   "environment": "Python 3.12, numpy 2.5.3, rasterio 1.4.3, pyshp 2.3.1 (packages/bake/src/objects/acquisition/requirements-mapped-science.txt).",
   "inputs": {
     "alluvial-fans/FanSurvey_2005_2008_clon0.query.json": {
-      "bytes": 23733,
-      "sha256": "60cd69c377092f87fce4b0e73fe4840da94bd48fa36e7a3fdf3f0e63072d5e0d"
+      "bytes": 23733
     },
     "alluvial-fans/mars-alluvial-fans.tif": {
-      "bytes": 80668,
-      "sha256": "921780a949c494f2fc9f3fbac05edee75967b73dd57dfb57aadfb9fd78ecf791"
+      "bytes": 80668
     },
     "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-01.json": {
-      "bytes": 297197,
-      "sha256": "d774db10af857970e6ab5223f79e31ffd41bb7368ea58a327db8c21de4c34bb8"
+      "bytes": 297197
     },
     "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-02.json": {
-      "bytes": 303335,
-      "sha256": "e333fa9d371a9016c461827320ee099fdd3d75e4f6597183adb5561baaed6ce4"
+      "bytes": 303335
     },
     "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-03.json": {
-      "bytes": 302035,
-      "sha256": "d36926552d7146a27fb99b94844344c8d578bab53c19aabde9466d84a1eff112"
+      "bytes": 302035
     },
     "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-04.json": {
-      "bytes": 304994,
-      "sha256": "2fe78dab3681ec477f3bd8e415da915fb8650ed3b4d4712fbad6c2dab6c0bd7f"
+      "bytes": 304994
     },
     "aqueous-minerals/Aqueous_Mineral_Distribution_Options_clon0.query-05.json": {
-      "bytes": 172670,
-      "sha256": "1e0afcc1f06cb2834edcdc602899f5e07d6a4c2cc1af6a8b829d7563c4d0d8b5"
+      "bytes": 172670
     },
     "aqueous-minerals/mars-aqueous-classes.tif": {
-      "bytes": 91738,
-      "sha256": "751ac1303de814f86c882b8ac3470230173481c59c3327b9c6023a3ee628fbd7"
+      "bytes": 91738
     },
     "chloride/Chloride_Salt-bearing_Material_THEMIS_clon0.query.json": {
-      "bytes": 303555,
-      "sha256": "94a4a6090ccb7dd3508618a1831341e6c2d1195c0fb1fa5977958b33be98d0be"
+      "bytes": 303555
     },
     "chloride/mars-chloride-deposits.tif": {
-      "bytes": 82411,
-      "sha256": "99632fafa452cccce9733a8b40d8614dfe16bd024a47928be3560894cf8d71a1"
+      "bytes": 82411
     },
     "dune-fields/Dune_Field.query.json": {
-      "bytes": 1562973,
-      "sha256": "c6f14e24fdc3725b7e4afd47547fc8c04d4de30bf1e4338c7086194225b69c90"
+      "bytes": 1562973
     },
     "dune-fields/mars-dune-fields.tif": {
-      "bytes": 87227,
-      "sha256": "b109075f45179f2a27aa8eb3d2a6837c2fb7abd28e437335bb231ae6f948cece"
+      "bytes": 87227
     },
     "glacial-valleys/Glacial_Valleys_2010_clon0.query.json": {
-      "bytes": 19658,
-      "sha256": "1a67a2e06efca710be7bfa615326fef69a0e898a2c02edafed81ba35e35d7a26"
+      "bytes": 19658
     },
     "glacial-valleys/mars-glacial-valleys.tif": {
-      "bytes": 80863,
-      "sha256": "073418347ebe93f2e76207841e25eec064506367954102ee4f4f1a7109eaaa4d"
+      "bytes": 80863
     },
     "glacier-like-forms/Glacier-like_Forms_GLFs_2012_clon0.query-01.json": {
-      "bytes": 778006,
-      "sha256": "42637284f1ee9e8307c49932474cc3de8e5289339944e20b9f407a8682636c6b"
+      "bytes": 778006
     },
     "glacier-like-forms/Glacier-like_Forms_GLFs_2012_clon0.query-02.json": {
-      "bytes": 242805,
-      "sha256": "b4188950da44a8d251148766a89a92c52a0ec2d7e55a897b47fbb40970c238b4"
+      "bytes": 242805
     },
     "glacier-like-forms/mars-glacier-like-forms.tif": {
-      "bytes": 84753,
-      "sha256": "6abf402e41fb155906af66406034a59a56fcb9db6c1b2bae364f3e416a00cbe8"
+      "bytes": 84753
     },
     "gullies/Gullied_Landform_Survey_2015_clon0.query-01.json": {
-      "bytes": 308377,
-      "sha256": "03f1a92c4266702e24c020f401d9e2f307a46404d876af1714e1abb2feeae637"
+      "bytes": 308377
     },
     "gullies/Gullied_Landform_Survey_2015_clon0.query-02.json": {
-      "bytes": 311968,
-      "sha256": "7249119a21a7b17c5646a7b875e73d7282d3795350cc10bff590a9228569a2ac"
+      "bytes": 311968
     },
     "gullies/Gullied_Landform_Survey_2015_clon0.query-03.json": {
-      "bytes": 312775,
-      "sha256": "ec119309e45f5289c9a64ad21e3d740c592c7bdb9e8e34d077768022d5ed5229"
+      "bytes": 312775
     },
     "gullies/Gullied_Landform_Survey_2015_clon0.query-04.json": {
-      "bytes": 313482,
-      "sha256": "a22e4f7efa91f2251d098b7b29b1ae62e1ab5f560b7ce8dc238858bd3fcf576e"
+      "bytes": 313482
     },
     "gullies/Gullied_Landform_Survey_2015_clon0.query-05.json": {
-      "bytes": 304859,
-      "sha256": "a7717e150b283a698e4c52e18b9379c59fdb0c6abb12bd9404d17ba4d77f9732"
+      "bytes": 304859
     },
     "gullies/mars-gullies.tif": {
-      "bytes": 100432,
-      "sha256": "019a3338c465cd20618910220e4eba351efcb5d5b52e234363b3b6d5aa8a9d66"
+      "bytes": 100432
     },
     "hydrous-minerals/Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.query-01.json": {
-      "bytes": 315731,
-      "sha256": "c6b34f52dd24d8a3813875aa273f76fd7f056afe27a3d76f81a35682b55908d9"
+      "bytes": 315731
     },
     "hydrous-minerals/Hydrous_Mineral_Detections_OMEGA_CRISM_clon02.query-02.json": {
-      "bytes": 205039,
-      "sha256": "8318a23155bd71abc9c913d5eeab850ebaf0831713a9c810846c18e843f4b417"
+      "bytes": 205039
     },
     "hydrous-minerals/mars-hydrous-minerals.tif": {
-      "bytes": 87890,
-      "sha256": "0c15f34ce08e4aa7dcc75de787974c2d5884b1f9e78a451a224fe65ea0e23fd2"
+      "bytes": 87890
     },
     "recent-activity/RSLs_Gullies_New-IcyCraters_clon0.query.json": {
-      "bytes": 142470,
-      "sha256": "853c7ca9cfbc9d17a78337eb24f5fde14bce51380116c1dc94028156033ceeaf"
+      "bytes": 142470
     },
     "recent-activity/mars-recent-activity.tif": {
-      "bytes": 83083,
-      "sha256": "6c351b349a755f0f5c9fb74a2a30d5839f1e8a2ec4cf5c1df238cdc46a596cde"
+      "bytes": 83083
     },
     "recessional-glfs/Recessional_GLF_Options_2016_clon0.query.json": {
-      "bytes": 316947,
-      "sha256": "429e583f872ba616f7719ad070a32f0a1df80b670970216de91e095291a7c7e6"
+      "bytes": 316947
     },
     "recessional-glfs/mars-recessional-glfs.tif": {
-      "bytes": 82002,
-      "sha256": "b864b880ea8065e24149fa496fc03887b74203ef7b1f80bad39d556c0dbb609e"
+      "bytes": 82002
     },
     "valley-networks/Hynek_Valley_Networks.query-01.json": {
-      "bytes": 4911291,
-      "sha256": "138284f21c12b9d232b3bf62ff576babe6cbd94dcdc6bcb2a23917fe897ed2bf"
+      "bytes": 4911291
     },
     "valley-networks/Hynek_Valley_Networks.query-02.json": {
-      "bytes": 8024913,
-      "sha256": "4bcd6722fbceb6f4bafcf7ca03204a325b41acf69124f00da93dad16a8e43cf1"
+      "bytes": 8024913
     },
     "valley-networks/Hynek_Valley_Networks.query-03.json": {
-      "bytes": 5974076,
-      "sha256": "35dc45143ac9be59d015b865e76eb4f1b176417a980183d4b06da1b21f954687"
+      "bytes": 5974076
     },
     "valley-networks/Hynek_Valley_Networks.query-04.json": {
-      "bytes": 6602718,
-      "sha256": "1e8bafa5bb8eaa5315695c4fae5d3493154c19d51659d4ec44e58355e51aaed5"
+      "bytes": 6602718
     },
     "valley-networks/Hynek_Valley_Networks.query-05.json": {
-      "bytes": 4804746,
-      "sha256": "583ae34d341c7823502e49ea917a1e485161bd873451518b99eb4f9c9dea6ccf"
+      "bytes": 4804746
     },
     "valley-networks/Hynek_Valley_Networks.query-06.json": {
-      "bytes": 5914914,
-      "sha256": "0735f477d62b62a7fc325e0c1f13150575db62bceddec850aee61cd6d7c82b42"
+      "bytes": 5914914
     },
     "valley-networks/Hynek_Valley_Networks.query-07.json": {
-      "bytes": 3207880,
-      "sha256": "d7067ec539fc8a382d12e85781fc3822138be832d159244ba62f3e7dac787280"
+      "bytes": 3207880
     },
     "valley-networks/Hynek_Valley_Networks.query-08.json": {
-      "bytes": 3799765,
-      "sha256": "8fa05d642585205528b27c7c279d2d78dce282d21e595b1c82ba954c65103dc4"
+      "bytes": 3799765
     },
     "valley-networks/Hynek_Valley_Networks.query-09.json": {
-      "bytes": 2842566,
-      "sha256": "8d2a121a150932d07b8d041068b8b5d5c319ec6bab4c72d7461a41526027a288"
+      "bytes": 2842566
     },
     "valley-networks/Hynek_Valley_Networks.query-10.json": {
-      "bytes": 2864676,
-      "sha256": "4940c67a8088a45f48bf79fcbea36c9d6994e705f80df5e7921f025e60ff0ed5"
+      "bytes": 2864676
     },
     "valley-networks/mars-valley-networks.tif": {
-      "bytes": 240359,
-      "sha256": "f2b90950eba8167c4585b5e710c8f6d4fa01a8ea05537fca87636a401f61ba5f"
+      "bytes": 240359
     }
   },
   "checks": [

@@ -1,9 +1,15 @@
 {
   "schema": "cssearth-emissivity-comparison@1",
   "sourceIdentity": "magellan-global-emissivity",
-  "unchanged": ["Native USGS product", "Calibration (DN - 1) / 10000", "Missing value -32768", "Palette", "Displayed range 0.29-1.00", "2048 by 1024 displayed grid"],
+  "unchanged": [
+    "Native USGS product",
+    "Calibration (DN - 1) / 10000",
+    "Missing value -32768",
+    "Palette",
+    "Displayed range 0.29-1.00",
+    "2048 by 1024 displayed grid"
+  ],
   "previous": {
-    "assetSha256": "0a6e46340c31bfa2bd38d40c0ccf0e70b215db8246799bc9b2e2f85ae8e419bd",
     "bytes": 182456,
     "webpChunk": "VP8 ",
     "encoding": "lossy",
@@ -11,7 +17,6 @@
     "originBasis": "Recipe omits outputLongitudeOrigin; paintScienceSurface defaults to 0."
   },
   "current": {
-    "assetSha256": "8be565d12d7a8210cc8bd1b971964ea4db07eb71fcff3295d6863031b5b394d5",
     "bytes": 1142498,
     "webpChunk": "VP8L",
     "encoding": "lossless",

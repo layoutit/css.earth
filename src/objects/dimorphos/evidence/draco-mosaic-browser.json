@@ -78,11 +78,7 @@
         "retained": true,
         "density": 2
       },
-      "errors": [],
-      "lighting": [
-        "a809a3cf45b45fe737b21aa2673da1cf35707fc7e8b9033242d369bd48e3c091",
-        "4584bc68e77eaacaf5fb38b92668d59a12649662e3be9148e49e54f2308077f1"
-      ]
+      "errors": []
     },
     {
       "id": "dimorphos",
@@ -159,11 +155,7 @@
         "retained": true,
         "density": 2
       },
-      "errors": [],
-      "lighting": [
-        "ed88b22296991e7f436b3d425985dc678733fceb59fbe66341c83bdef8683944",
-        "c28f613e40e4d75e1f5d19de2e3c1f995b332975f17fd91fd9e5953e74d660c9"
-      ]
+      "errors": []
     },
     {
       "id": "dimorphos",
@@ -219,7 +211,7 @@
             "top": -422,
             "bottom": 422
           },
-          "offAxisDegrees": 0.0000031945284701301985,
+          "offAxisDegrees": 3.1945284701301985e-06,
           "silhouetteRadius": 224.24999810107437
         },
         "features": {
@@ -240,11 +232,7 @@
         "retained": true,
         "density": 2
       },
-      "errors": [],
-      "lighting": [
-        "b6498d8c4c58badd0d349694ced07ebcd04471e3070f6c8d503b5624512a3bfe",
-        "61dcd33ce8e90106870c14dc9fc020c836d790814cc2c422a4948d2cc7f7961e"
-      ]
+      "errors": []
     }
   ],
   "finalCaptures": {
@@ -260,7 +248,6 @@
     "files": [
       {
         "path": "draco-mosaic-overview.webp",
-        "sha256": "e5a04021a83bb51c86732e8e0b454c12b6b6838f5c51f4ffd6538065e272310c",
         "capture": {
           "id": "dimorphos",
           "zoom": 1.35,
@@ -297,14 +284,13 @@
               "top": -500,
               "bottom": 500
             },
-            "offAxisDegrees": 0.0000012074182697257333,
+            "offAxisDegrees": 1.2074182697257333e-06,
             "silhouetteRadius": 282.2727349049661
           }
         }
       },
       {
         "path": "draco-mosaic-close.webp",
-        "sha256": "778676f1801402d79ddb5c0c399882a06f423ef07ae4b85631185ce6d1050eb8",
         "capture": {
           "id": "dimorphos",
           "zoom": 2.2275,

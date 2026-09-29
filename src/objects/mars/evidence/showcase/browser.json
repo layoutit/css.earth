@@ -1,7 +1,4 @@
 {
-  "uncommittedCode": {
-    "src/renderers/css/styles/jupiter-surfaces.css": "999add7eb502791ac73bc64cf061db86836aad17290d45a5f2cf29d4019d7b6b"
-  },
   "date": "2026-09-26",
   "browser": "Chromium via Playwright CLI",
   "viewport": {
@@ -9,7 +6,6 @@
     "height": 760,
     "deviceScaleFactor": 1
   },
-  "inventorySha256": "52ed02221f8cdb20a275cf72d5118692950d440ed0881e6b9293b4855ff1ee80",
   "captures": [
     "geology.png"
   ],
