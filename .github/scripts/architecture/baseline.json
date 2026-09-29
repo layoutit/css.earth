@@ -27,7 +27,6 @@
     "authoring-is-leaf": [],
     "bake-nebula-and-objects-independent": [],
     "nothing-imports-applications": [
-      {"from":".github/scripts/checks/check-object-runtime-ownership.mts","to":"site/objects.mts"},
       {"from":"labs/nebula/packages/lab/src/adapters/viewer/inspection-camera-renderer.ts","to":"site/runtime-policy.mts"},
       {"from":"labs/performance/ipad-journey.mts","to":"site/objects.mts"},
       {"from":"labs/performance/ipad-run.mts","to":"site/objects.mts"},

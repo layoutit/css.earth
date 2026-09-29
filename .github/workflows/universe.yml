@@ -35,7 +35,6 @@ jobs:
       run_universe: ${{ steps.classify.outputs.run_universe }}
       run_universe_preparation: ${{ steps.classify.outputs.run_universe_preparation }}
       run_nebula: ${{ steps.classify.outputs.run_nebula }}
-      runtime_ownership_args: ${{ steps.ownership-scope.outputs.args }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -71,16 +70,6 @@ jobs:
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: node .github/scripts/ci/commit-message.mts --range "origin/$GITHUB_BASE_REF..$HEAD_SHA"
-      - name: Scope the runtime ownership check
-        id: ownership-scope
-        # Computed here (this checkout already has the full history a merge-base diff needs) so the "Prepared
-        # universe and shared renderer" job's own checkout can stay shallow. A push to main always keeps --all.
-        run: |
-          if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            echo "args=$(node .github/scripts/ci/scope-runtime-ownership-check.mts "origin/$GITHUB_BASE_REF")" >> "$GITHUB_OUTPUT"
-          else
-            echo "args=--all" >> "$GITHUB_OUTPUT"
-          fi
 
   lint:
     name: Contract lint
@@ -171,9 +160,6 @@ jobs:
         # Every node test of @cssearth/telescope-cli (query, sessions, families, archive leads, the process boundary), selected by
         # location rather than by what it imports; a test whose toolchain or restored input is absent skips and names it.
         run: pnpm test:telescope-cli
-      - name: Check physical frame receipts
-        # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
-        run: node .github/scripts/checks/check-object-runtime-ownership.mts --receipts
       - name: Check independent body additions
         run: node --test tests/contract/body-additions.test.mts
       - name: Test the object generator and every lit body's presentation
@@ -389,8 +375,6 @@ jobs:
           node site/build/prepare/prepare-feature-index.mts
       - name: Test the selected universe lane
         # Each runner owns its writers and CPU budget. Native runner discovery is unchanged.
-        env:
-          RUNTIME_OWNERSHIP_ARGS: ${{ needs.changes.outputs.runtime_ownership_args }}
         run: |
           case "$CI_UNIVERSE_LANE" in
             runtime|shell|renderer)

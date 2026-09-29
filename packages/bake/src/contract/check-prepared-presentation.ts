@@ -13,7 +13,7 @@ import { requireObjectRuntimeDefinition } from "./object-runtime-contract.ts";
 import { requireAuthoredWorldFrame } from '../sources/index.ts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/renderer/prepared-data/object-format.ts';
 import { requireObjectControls } from '@cssearth/renderer/runtime/shell-contract.ts';
-import { nodeName, sourceStart, sourceEnd, staticObjectProperties } from '../runtime-source/index.ts';
+import { nodeName, staticObjectProperties } from '../runtime-source/index.ts';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';
 import { readPreparedObjects } from "@cssearth/objects/node";
 
@@ -29,20 +29,6 @@ export function readPreparedJsonModule(source: string, expectedExport?: string):
   if (!match || expectedExport && match[1] !== expectedExport) throw new TypeError("Prepared module must export one serialized JSON record.");
   const expression = match[2];
   return { name: match[1], value: JSON.parse(expression.startsWith("Object.freeze(") && expression.endsWith(")") ? expression.slice(14, -1) : expression) };
-}
-export function readPreparedJsonExports(source: string): PreparedJsonExport[] {
-  try { return [readPreparedJsonModule(source)]; } catch { /* Multiple literal exports are also data. */ }
-  const ast = parseAst(source), exports: PreparedJsonExport[] = [];
-  for (const statement of ast.body) {
-    if (statement.type !== "ExportNamedDeclaration" || statement.declaration?.type !== "VariableDeclaration" || statement.declaration.kind !== "const") throw new TypeError("Prepared modules cannot contain executable statements.");
-    for (const declaration of statement.declaration.declarations) {
-      if (declaration.id.type !== "Identifier" || !/^[A-Z][A-Z0-9_]*$/.test(declaration.id.name) || !declaration.init) throw new TypeError("Prepared module export is not a data binding.");
-      const expression = source.slice(sourceStart(declaration.init), sourceEnd(declaration.init));
-      exports.push(readPreparedJsonModule(`export const ${declaration.id.name} = ${expression};`));
-    }
-  }
-  if (!exports.length) throw new TypeError("Prepared module has no data exports.");
-  return exports;
 }
 export function readPreparedPresentationModule(source: string): unknown {
   return readPreparedJsonModule(source, "PREPARED_PRESENTATION").value;

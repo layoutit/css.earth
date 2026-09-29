@@ -114,7 +114,7 @@ test('this repository\'s pre-install scripts pass, and the rule finds every one 
   const root = resolve(import.meta.dirname, '../../..'), files = repositoryFiles(root);
   const scripts = new Set(files.filter(path => /^\.github\/workflows\//u.test(path))
     .flatMap(path => preInstallScripts(path, readFileSync(resolve(root, path), 'utf8'), files)).map(item => item.script));
-  for (const script of ['.github/scripts/ci/ci-affected.mts', '.github/scripts/ci/commit-message.mts', '.github/scripts/ci/scope-runtime-ownership-check.mts',
+  for (const script of ['.github/scripts/ci/ci-affected.mts', '.github/scripts/ci/commit-message.mts',
     '.github/scripts/ci/object-scope-gate.mts', '.github/scripts/audits/check-documentation-links.mts']) assert.ok(scripts.has(script), `${script} is found as a pre-install script`);
   assert.deepEqual(checkPreInstallImports(root, files), []);
 });

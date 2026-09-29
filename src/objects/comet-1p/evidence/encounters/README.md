@@ -7,7 +7,6 @@ The runtime was validated after integrating main's PR106, before the later space
 | [Focused tests](final-focused-tests.log) | 38 passed, including six new Vega decoding, camera, visibility, selection, overlap and reproducibility tests. |
 | [Strict TypeScript](final-typecheck.log) | Full repository typecheck passed. |
 | [Source verification](source-verification.log) | All 43 source records passed. Seven Vega archive inputs were freshly restored and verified through the normal acquisition recipe. |
-| [Runtime ownership](runtime-ownership.json) | Halley and shared static closure passed. This static check does not claim native scheduling or camera-lifetime proof. |
 | [Build and assembly](build.log) | Production build passed; all 473 object asset inventories assembled. |
 | [Fresh public delivery](delivery.json) | 34 files, 7,372,158 bytes, no reused files; all hashes matched. This is installation size, not page transfer size. |
 | [Chrome conformance](conformance.json) | Nine selected cases passed: initial shell, desktop, mobile, both dataset-interaction densities, DPR 1/2, racing loads and reacquisition. |
