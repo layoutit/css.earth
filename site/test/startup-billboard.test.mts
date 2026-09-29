@@ -51,8 +51,8 @@ test('startup uses the baked perspective and viewport texture demand before moun
   assert.deepEqual(readStartupSavedView(`https://css.earth/earth/?${query}`), saved);
   assert.deepEqual(readStartupSavedView('https://css.earth/earth/', query.slice(2)), saved);
   // A page URL carries more than the camera: the overview, focus and dataset links start, with or without a saved camera.
-  assert.deepEqual(readStartupSavedView(`https://css.earth/sun/?overview=milky-way&${query}`), saved);
-  for (const page of ['https://css.earth/sun/?overview=local-group', 'https://css.earth/sun/?focus=m31', 'https://css.earth/mars/?dataset=albedo', 'https://css.earth/earth/']) {
+  assert.deepEqual(readStartupSavedView(`https://css.earth/milky-way/?${query}`), saved);
+  for (const page of ['https://css.earth/local-group/', 'https://css.earth/m31/', 'https://css.earth/mars/?dataset=albedo', 'https://css.earth/earth/']) {
     assert.equal(readStartupSavedView(page), null, page);
   }
   const viewport = { read: () => ({ bounds: { x: 0, y: 0, left: 0, top: 0, width: 820, height: 1180 }, focalPixels: 900,

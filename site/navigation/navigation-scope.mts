@@ -46,14 +46,12 @@ export function readPreparedFocusSelection(url: URL, sceneId: string): { id: str
   return { id, lens: lenses[0] ?? null };
 }
 
-/** The overview a URL names: its page's, or a scene page's `overview` (the system overview, and links written before
- * overviews had pages). A catalogue focus's page has none. */
+/** The overview a URL names: its page's, or on a scene's page `overview=system`. A catalogue focus's page has none. */
 export function overviewScopeFromUrl(url: string | URL, sceneId: string) {
   const page = drawnPageFromUrl(url, sceneId);
   if (isOverviewPage(page)) return page;
   if (page !== null) return null;
-  const scope = new URL(url).searchParams.get('overview');
-  return scope === 'system' || scope === 'milky-way' || scope === 'local-group' || scope === 'nearby-universe' ? scope : null;
+  return new URL(url).searchParams.get('overview') === 'system' ? 'system' : null;
 }
 
 /** Satellite systems are selections on a body's route, below the stellar overview. */
@@ -83,7 +81,7 @@ export function withPreparedFocus(url: URL, sceneId: string, id: string | null, 
 }
 
 /** Selects the named overview on the page of scene `sceneId`: its own page, or the scene page's `overview=system`. */
-export function withOverviewScope(url: URL, sceneId: string, scope: string | null): URL {
+export function withOverviewScope(url: URL, sceneId: string, scope: OverviewPageId | 'system' | null): URL {
   if (isOverviewPage(scope)) {
     withPage(url, sceneId, scope);
     url.searchParams.delete('overview');

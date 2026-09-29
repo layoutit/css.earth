@@ -87,9 +87,10 @@ test('every row of the application navigation tree opens a route the application
   const rows: TreeNode[] = [];
   const walk = (node: TreeNode) => { if (node.object) rows.push(node); node.children.forEach(walk); };
   navigationTree().forEach(walk);
-  const pages = new Set(objectAdapter.routes(SCENE_OBJECTS));
-  const focuses = new Map(OBJECTS.filter(object => object.kind === 'prepared-focus').map(object => [object.id, object.route]));
   const overviews = new Set(Object.keys(OVERVIEW_TITLES));
+  // Every scene and every overview is a page, `/<id>/`.
+  const pages = new Set([...objectAdapter.routes(SCENE_OBJECTS), ...[...overviews].map(id => `/${id}/`)]);
+  const focuses = new Map(OBJECTS.filter(object => object.kind === 'prepared-focus').map(object => [object.id, object.route]));
   assert.ok(rows.length > 400, 'the tree still names every prepared destination');
   for (const row of rows) {
     const id = row.object!.id;
