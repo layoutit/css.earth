@@ -351,8 +351,53 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
     })()] as const] : []));
   const interiorDiscs = new Map(definition.viewBindings.flatMap(binding => binding.kind === "interior-disc"
     ? [[binding.target, createPreparedInteriorDisc(binding)] as const] : []));
+  /** Camera-following overlays: transforms (and a one-off visibility when the body hides). They follow every
+   * camera publication, including a departing scene whose presentation is held by navigation: a held Pi1 Gruis
+   * once left its corona plate centred and full size while the mesh flew away. */
+  function followCamera(binding: PreparedViewBinding, element: HTMLElement, view: PreparedView): boolean {
+    if (binding.kind === "interior-disc") {
+      const transform = interiorDiscs.get(binding.target)!(view.projection);
+      const visibility = transform ? "visible" : "hidden";
+      if (element.style.visibility !== visibility) { element.style.visibility = visibility; styleWrites++; }
+      if (transform && element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
+    } else if (binding.kind === "silhouette-fit") {
+      // The overlay fitted to the projected silhouette: an ellipse,
+      // slightly elongated and shifted outward when off-axis, exactly the
+      // mathematical silhouette the prepared frames are registered to,
+      // never smaller than the prepared floor (the marker it lights).
+      const silhouette = view.body.silhouette;
+      // Written only on change: this binding publishes every frame (motion-freezes-membership.md).
+      const visibility = view.body.visible === false ? "hidden" : "";
+      if (element.style.visibility !== visibility) { element.style.visibility = visibility; styleWrites++; }
+      if (silhouette) {
+        // This transform already owns physical framing. The legacy shell's
+        // individual scale would otherwise apply the same fit a second time.
+        if (element.style.scale !== "1") element.style.scale = "1";
+        if (element.style.transformOrigin !== "50% 50%") element.style.transformOrigin = "50% 50%";
+        const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
+        const radial = Math.max(silhouette.radialSemiAxis, binding.minimumRadius);
+        const tangential = Math.max(silhouette.tangentialSemiAxis, binding.minimumRadius);
+        // The silhouette is measured from the camera root's centre; this overlay sits on the stage beside the root,
+        // so it takes the root's move too (the phone layout lifts the root above the sheet).
+        const shiftX = view.stageViewport.principalOffsetPixels[0] - view.principalOffset[0];
+        const shiftY = view.stageViewport.principalOffsetPixels[1] - view.principalOffset[1];
+        const transform = `translate(${formatNumber(silhouette.centre[0] + shiftX)}px, ${formatNumber(silhouette.centre[1] + shiftY)}px) ` +
+          `rotate(${formatNumber(radialAngle)}deg) ` +
+          `scale(${formatNumber(radial * binding.unitScale)}, ${formatNumber(tangential * binding.unitScale)}) ` +
+          `rotate(${formatNumber(-radialAngle)}deg)`;
+        if (element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
+      }
+    } else if (binding.kind === "counter-rotation") {
+      const counter = binding.systemTransform === null ? view.counterRotation : view.counterRotationFor(binding.systemTransform);
+      if (element.style.transform !== counter) { element.style.transform = counter; transformWrites++; }
+    } else return false;
+    return true;
+  }
   return {
-    publishCamera(view: PreparedView) { publishDepth(view.projection); },
+    publishCamera(view: PreparedView) {
+      publishDepth(view.projection);
+      for (const binding of definition.viewBindings) followCamera(binding, target(binding.target), view);
+    },
     publish({ selection, view, resources }: PreparedFramePublication) {
       publishDepth(view.projection);
       const levelOfDetail = view.levelOfDetail;
@@ -368,38 +413,8 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
         } else if (binding.kind === "view-property") {
           const value = formatNumber(round(binding.source === "billboard-opacity" ? levelOfDetail.billboardOpacity : levelOfDetail.markerOpacity, binding.precision));
           if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
-        } else if (binding.kind === "interior-disc") {
-          const transform = interiorDiscs.get(binding.target)!(view.projection);
-          const visibility = transform ? "visible" : "hidden";
-          if (element.style.visibility !== visibility) { element.style.visibility = visibility; styleWrites++; }
-          if (transform && element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
-        } else if (binding.kind === "silhouette-fit") {
-          // The overlay fitted to the projected silhouette: an ellipse,
-          // slightly elongated and shifted outward when off-axis, exactly the
-          // mathematical silhouette the prepared frames are registered to,
-          // never smaller than the prepared floor (the marker it lights).
-          const silhouette = view.body.silhouette;
-          // Written only on change: this binding publishes every frame (motion-freezes-membership.md).
-          const visibility = view.body.visible === false ? "hidden" : "";
-          if (element.style.visibility !== visibility) { element.style.visibility = visibility; styleWrites++; }
-          if (silhouette) {
-            // This transform already owns physical framing. The legacy shell's
-            // individual scale would otherwise apply the same fit a second time.
-            if (element.style.scale !== "1") element.style.scale = "1";
-            if (element.style.transformOrigin !== "50% 50%") element.style.transformOrigin = "50% 50%";
-            const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
-            const radial = Math.max(silhouette.radialSemiAxis, binding.minimumRadius);
-            const tangential = Math.max(silhouette.tangentialSemiAxis, binding.minimumRadius);
-            // The silhouette is measured from the camera root's centre; this overlay sits on the stage beside the root,
-            // so it takes the root's move too (the phone layout lifts the root above the sheet).
-            const shiftX = view.stageViewport.principalOffsetPixels[0] - view.principalOffset[0];
-            const shiftY = view.stageViewport.principalOffsetPixels[1] - view.principalOffset[1];
-            const transform = `translate(${formatNumber(silhouette.centre[0] + shiftX)}px, ${formatNumber(silhouette.centre[1] + shiftY)}px) ` +
-              `rotate(${formatNumber(radialAngle)}deg) ` +
-              `scale(${formatNumber(radial * binding.unitScale)}, ${formatNumber(tangential * binding.unitScale)}) ` +
-              `rotate(${formatNumber(-radialAngle)}deg)`;
-            if (element.style.transform !== transform) { element.style.transform = transform; transformWrites++; }
-          }
+        } else if (followCamera(binding, element, view)) {
+          continue;
         } else if (binding.kind === "silhouette-step-property" && binding.groups) {
           // Each group of leaf boxes publishes its own step (prepared-leaf-box-blocks.ts).
           const blocks = leafBoxBlocks.get(binding)!;
@@ -414,9 +429,6 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
             silhouetteSteps.set(binding, level);
             bodySteps.get(binding)!(binding.levels[level].value, !connected());
           }
-        } else {
-          const counter = binding.systemTransform === null ? view.counterRotation : view.counterRotationFor(binding.systemTransform);
-          if (element.style.transform !== counter) { element.style.transform = counter; transformWrites++; }
         }
       }
       seekPose(view.controlPitch);
