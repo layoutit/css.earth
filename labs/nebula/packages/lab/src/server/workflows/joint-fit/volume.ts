@@ -4,7 +4,6 @@ import { isAbsolute, relative, resolve } from 'node:path';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Bounds3, Vector3, JointVolumeResult } from '@cssearth/bake/volume';
 import { containedPath, bakeMasterVolumeSlices, type MasterSliceProgress } from '@cssearth/bake/volume/node';
-import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 

@@ -5,7 +5,7 @@ import { prepareEvidenceInputs } from '../evidence-fusion/provider.ts';
 import { combineEvidence } from '@cssearth/nebula-reconstruction/evidence/combine';
 import { buildRidgeGraph } from '@cssearth/nebula-reconstruction/evidence/ridge-graph';
 import { loadMolecularCatalogue } from '../kinematics/molecular-source.ts';
-import { readGeometryLocal, geometrySha } from '../geometry/registered-source.ts';
+import { readGeometryLocal } from '../geometry/registered-source.ts';
 import { readJointRecipe, type JointRequest, type JointEvidence, type JointRidgePoint } from '../../../features/joint-fit/model.ts';
 import { velocityPoint } from '@cssearth/nebula-reconstruction/methods/joint/fitter';
 
@@ -15,7 +15,7 @@ export function tangentOffsetWestNorth(origin: [number, number], center: [number
   return [-ra * Math.cos(center[1] * Math.PI / 180) * 3600, (origin[1] - center[1]) * 3600];
 }
 export async function prepareJointInput(root: string, request: JointRequest) {
-  const recipeBytes = await readFile(resolve(root, request.recipePath)), recipe = readJointRecipe(JSON.parse(recipeBytes.toString()));
+  const recipe = readJointRecipe(JSON.parse(await readFile(resolve(root, request.recipePath), 'utf8')));
   const catalogue = readStructureCatalogue(JSON.parse((await readGeometryLocal(root, request.cataloguePath)).toString()));
   const [inputs, molecular] = await Promise.all([
     prepareEvidenceInputs(root, request.cataloguePath, { imageToFrame: request.imageToFrame }),
@@ -42,5 +42,5 @@ export async function prepareJointInput(root: string, request: JointRequest) {
   const velocities = molecular.points.filter(p => p.status === 'detection' && p.velocityLsrKmS !== null).map(p =>
     velocityPoint(p.id, p.pointingKey, p.xWestArcsec + molecularOffset[0], p.yNorthArcsec + molecularOffset[1], p.velocityLsrKmS!));
   const evidence: JointEvidence = { ridges, velocities, beamFwhmArcsec: molecular.recipe.instrument.beamFwhmArcsec };
-  return { recipe, recipeSha256: geometrySha(recipeBytes), catalogue, inputs, combined, graph, molecular, evidence, pixelToSky, skyToPixel, molecularOffset };
+  return { recipe, recipePath: request.recipePath, catalogue, inputs, combined, graph, molecular, evidence, pixelToSky, skyToPixel, molecularOffset };
 }

@@ -36,7 +36,7 @@ export interface MolecularPointing {
   detectedComponents: number; upperLimits: number;
 }
 export interface MolecularCatalogue {
-  schema: 'cssearth-molecular-catalogue@1'; recipe: MolecularRecipe; recipeSha256: string;
+  schema: 'cssearth-molecular-catalogue@1'; recipe: MolecularRecipe; recipePath: string;
   points: MolecularPoint[]; pointings: MolecularPointing[];
   diagnostics: { rows: number; pointings: number; detectedComponents: number; detectedPointings: number;
     upperLimits: number; multiComponentPointings: number; maximumComponents: number; broadComponents: number;

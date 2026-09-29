@@ -1,10 +1,11 @@
 /** Node-only evidence presentation: the browser receives decoded prepared rasters. */
 import { readFile, mkdir, writeFile, rename } from 'node:fs/promises';
+import { variantFor } from '../../services/saved-variants.ts';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { prepareEvidenceInputs } from './provider.ts';
 import { combineEvidence } from '@cssearth/nebula-reconstruction/evidence/combine';
-import { geometrySha, readGeometryPin } from '../geometry/registered-source.ts';
+import { readGeometryPin } from '../geometry/registered-source.ts';
 import { FUSION_VERSION, readFusionResult, type FusionAsset, type FusionRequest, type FusionResult } from '../../../features/evidence-fusion/jobs-model.ts';
 const palette = ['#69d4a5','#ba97f2','#f3b669','#66b8ec','#ee9cac','#e0d282','#83d9d7','#b7c783'];
 export async function validateFusionResult(root: string, value: unknown) {
@@ -15,17 +16,19 @@ export async function validateFusionResult(root: string, value: unknown) {
 export async function prepareFusionPresentation(root: string, request: FusionRequest, signal: AbortSignal, progress: (message: string) => void): Promise<FusionResult> {
   signal.throwIfAborted(); progress('Loading aligned multiscale evidence…');
   const inputs = await prepareEvidenceInputs(root, request.cataloguePath, { imageToFrame: request.imageToFrame });
-  const owner = geometrySha(await readFile(resolve(root,'labs/nebula/packages/lab/src/server/workflows/evidence-fusion/presentation.ts')));
-  const id = geometrySha(JSON.stringify({ input: inputs.identity, version: FUSION_VERSION, owner, settings: request.settings }));
-  const directory = `.local/nebula-lab/evidence-fusion/results/${id}`, receipt = resolve(root,directory,'result.json');
-  try { return await validateFusionResult(root, JSON.parse(await readFile(receipt,'utf8'))); }
-  catch (error) { if (!(error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT')) throw error; }
+  const identity = { input: inputs.identity, version: FUSION_VERSION, settings: request.settings };
+  const cache = '.local/nebula-lab/evidence-fusion/results', variant = await variantFor(resolve(root, cache), identity);
+  const id = variant.name, directory = `${cache}/${id}`, receipt = resolve(root,directory,'result.json');
+  if (variant.existing) {
+    try { return await validateFusionResult(root, JSON.parse(await readFile(receipt,'utf8'))); }
+    catch (error) { if (!(error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT')) throw error; }
+  }
   signal.throwIfAborted(); progress('Combining features across observations…');
   const combined = combineEvidence(inputs, request.settings), { width, height } = combined, pixels = width * height;
   await mkdir(resolve(root,directory), { recursive: true });
   async function save(name: string, bytes: Uint8Array): Promise<FusionAsset> {
     signal.throwIfAborted(); const path = `${directory}/${name}`, target = resolve(root,path);
-    await writeFile(`${target}.pending`,bytes); await rename(`${target}.pending`,target); return { path, sha256: geometrySha(bytes) };
+    await writeFile(`${target}.pending`,bytes); await rename(`${target}.pending`,target); return { path };
   }
   async function rgba(name: string, bytes: Uint8Array) {
     return save(name, await sharp(bytes,{ raw: { width,height,channels: 4 } }).png().toBuffer());
@@ -57,6 +60,7 @@ export async function prepareFusionPresentation(root: string, request: FusionReq
   progress('Saving registered comparison layers…');
   const result: FusionResult = { schema:'cssearth-joint-evidence@1',id,preparationVersion:FUSION_VERSION,inputIdentity:inputs.identity,width,height,settings:request.settings,sources,
     union:await rgba('union.png',layer(combined.union)),agreement:await rgba('agreement.png',layer(combined.agreement)),colors:await rgba('colors.png',colors),samples:await save('samples.bin',sampleBytes) };
-  await save('method.json',Buffer.from(JSON.stringify({ inputIdentity:inputs.identity,grid:inputs.grid,method:inputs.method,sources:inputs.sources.map(s=>({id:s.id,sourceSha256:s.sourceSha256,mapSha256:s.mapSha256,sourcePanelSha256:s.sourcePanelSha256,imageToFrame:s.imageToFrame})) },null,2)));
+  await save('method.json',Buffer.from(JSON.stringify({ inputIdentity:inputs.identity,grid:inputs.grid,method:inputs.method,sources:inputs.sources.map(s=>({id:s.id,mapDirectory:s.mapDirectory,sourcePanel:s.sourcePanel,imageToFrame:s.imageToFrame})) },null,2)));
+  await save('request.json',Buffer.from(JSON.stringify(identity)));
   signal.throwIfAborted(); await save('result.json',Buffer.from(JSON.stringify(result,null,2)+'\n')); return result;
 }

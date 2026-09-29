@@ -42,7 +42,7 @@ export function useJointFit(request: JointRequest, storageKey: string) {
           if (saved?.signature === key) next = await observe(saved.id);
           else { const id = crypto.randomUUID(); await api('', { requestId: id, request: current }); localStorage.setItem(jobKey, JSON.stringify({ id, signature: key })); next = await observe(id); }
           if (JSON.stringify(next.controls) !== JSON.stringify(current.controls)) throw new Error('Prepared fit controls do not match the requested values.');
-          await Promise.all(next.sources.map(async source => { const image = new Image(); image.src = `${localFile(source.image.path)}?v=${source.image.sha256}`; await image.decode(); }));
+          await Promise.all(next.sources.map(async source => { const image = new Image(); image.src = localFile(source.image.path); await image.decode(); }));
           if (stopped) break; accepted = key; setResult(next); setProgress('');
         } while (accepted !== signature(desired.current));
       } catch (cause) { if (!stopped) setError(cause instanceof Error ? cause.message : 'Joint fit failed.'); }

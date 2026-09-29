@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
@@ -24,7 +23,6 @@ const excerpt = [
   ' 455  -70   23.0  3.5 -17.9 5.587e10 7.450e-9',
   ' 455    0   50.6 14.3 -24.5 5.022e11 6.696e-8',
 ].join('\n') + '\n';
-const sha = (text: string) => createHash('sha256').update(text).digest('hex');
 const recipe: MolecularRecipe = { ...originalRecipe, table: { ...originalRecipe.table, records: 10, bytes: Buffer.byteLength(excerpt) },
   expectedCounts: { rows: 10, pointings: 8, detectedComponents: 7, detectedPointings: 5, upperLimits: 3 } };
 
@@ -90,7 +88,7 @@ async function fixtureRoot(t: test.TestContext) {
   const root = await mkdtemp(join(tmpdir(), 'nebula-molecular-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const readme = 'Unit-test metadata for the printed Table 1 excerpt.\n';
-  const local = { ...recipe, citation: { ...recipe.citation, readme: { ...recipe.citation.readme, bytes: Buffer.byteLength(readme), sha256: sha(readme) } } };
+  const local = { ...recipe, citation: { ...recipe.citation, readme: { ...recipe.citation.readme, bytes: Buffer.byteLength(readme) } } };
   await mkdir(dirname(resolve(root, recipePath)), { recursive: true });
   await writeFile(resolve(root, recipePath), JSON.stringify(local));
   return { root, local, readme };

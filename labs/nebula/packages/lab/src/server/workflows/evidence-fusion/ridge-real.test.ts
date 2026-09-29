@@ -23,7 +23,7 @@ test('real three-source ridge graph preserves every sampled footprint and projec
     }
   }
   assert.deepEqual(buildRidgeGraph(inputs, combined), graph);
-  const directory = resolve('.local/nebula-lab/evidence-fusion/ridge-verification', graph.id); await mkdir(directory, { recursive: true });
+  const directory = resolve('.local/nebula-lab/evidence-fusion/ridge-verification', inputs.identity); await mkdir(directory, { recursive: true });
   const { width, height } = inputs.grid;
   const reference = await sharp(inputs.sources[2].registeredRgba, { raw: { width, height, channels: 4 } }).png().toBuffer();
   const palette = ['#69d4a5', '#ba97f2', '#f3b669'];
@@ -36,7 +36,7 @@ test('real three-source ridge graph preserves every sampled footprint and projec
   await writeFile(resolve(directory, 'ridge-graph.json'), JSON.stringify(graph));
   await writeFile(resolve(directory, 'ridge-overlay.svg'), svg);
   await sharp(Buffer.from(svg)).png().toFile(resolve(directory, 'ridge-overlay.png'));
-  const report = { graphId: graph.id, inputIdentity: inputs.identity, graphMs, nodes: graph.nodes.length, junctions: graph.nodes.filter(n => n.kind === 'junction').length,
+  const report = { inputIdentity: inputs.identity, graphMs, nodes: graph.nodes.length, junctions: graph.nodes.filter(n => n.kind === 'junction').length,
     polylines: graph.polylines.length, points: graph.polylines.reduce((n, p) => n + p.points.length, 0), jsonBytes: Buffer.byteLength(JSON.stringify(graph)), diagnostics: graph.diagnostics };
   await writeFile(resolve(directory, 'report.json'), JSON.stringify(report, null, 2));
   console.log(JSON.stringify({ directory, ...report }));

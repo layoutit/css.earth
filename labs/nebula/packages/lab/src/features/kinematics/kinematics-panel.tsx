@@ -25,11 +25,11 @@ export function KinematicsPanel({ sourcePath, endpoint = '/__nebula/kinematics' 
         if (!response.ok) throw new Error(typeof record(value).error === 'string' ? String(record(value).error) : 'Slit data unavailable.');
         const next = readPreparedKinematics(value);
         if (serial !== generation.current) return;
-        sourceIdentity.current = next.evidenceSha256; loadedSettings.current = JSON.stringify(next.parameters);
+        sourceIdentity.current = next.evidenceSource; loadedSettings.current = JSON.stringify(next.parameters);
         let savedParameters = next.parameters;
         try {
           const stored = localStorage.getItem(storageKey);
-          if (stored) { const saved = record(JSON.parse(stored) as unknown); if (saved.evidenceSha256 === next.evidenceSha256) savedParameters = readKinematicParameters(saved.parameters); }
+          if (stored) { const saved = record(JSON.parse(stored) as unknown); if (saved.evidenceSource === next.evidenceSource) savedParameters = readKinematicParameters(saved.parameters); }
         } catch { /* Invalid/obsolete local edits cannot change scientific input. */ }
         setResult(next); setParameters(savedParameters);
       } catch (cause) { if (!controller.signal.aborted) setError(cause instanceof Error ? cause.message : 'Slit data unavailable.'); }
@@ -50,10 +50,10 @@ export function KinematicsPanel({ sourcePath, endpoint = '/__nebula/kinematics' 
         const value: unknown = await response.json();
         if (!response.ok) throw new Error(typeof record(value).error === 'string' ? String(record(value).error) : 'Prediction unavailable.');
         const next = readPreparedKinematics(value);
-        if (next.evidenceSha256 !== sourceIdentity.current) throw new Error('Slit evidence changed; reopen this comparison.');
+        if (next.evidenceSource !== sourceIdentity.current) throw new Error('Slit evidence changed; reopen this comparison.');
         if (serial !== generation.current) return;
         loadedSettings.current = JSON.stringify(next.parameters); setResult(next); setError('');
-        try { localStorage.setItem(storageKey, JSON.stringify({ evidenceSha256: next.evidenceSha256, parameters: next.parameters })); }
+        try { localStorage.setItem(storageKey, JSON.stringify({ evidenceSource: next.evidenceSource, parameters: next.parameters })); }
         catch { setError('Comparison updated; local storage could not save these controls.'); }
       } catch (cause) { if (!controller.signal.aborted) setError(cause instanceof Error ? cause.message : 'Prediction unavailable.'); }
       finally { if (!controller.signal.aborted) setUpdating(false); }
@@ -71,7 +71,7 @@ export function KinematicsPanel({ sourcePath, endpoint = '/__nebula/kinematics' 
     { key: 'expansionKmS', label: 'Speed', min: 1, max: 40, step: .5, unit: ' km/s', value: parameters.expansionKmS,
       title: 'Outward homologous expansion: velocity proportional to distance. This is a hypothesis, not a velocity measured from image pixels.' },
   ];
-  return <><section className="kinematics-panel" aria-label="Velocity comparison" data-source-id={evidence.id} data-evidence-sha={result.evidenceSha256}
+  return <><section className="kinematics-panel" aria-label="Velocity comparison" data-source-id={evidence.id} data-evidence-source={result.evidenceSource}
     data-updating={updating} data-prediction-settings={JSON.stringify(result.parameters)}>
     <header><div><h2>Independent shell</h2><p>Measured [O III] slit</p></div></header>
     {error && <p className="kinematics-error" role="alert">{error}</p>}</section>
