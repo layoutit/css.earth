@@ -5,13 +5,13 @@
  * - HD 189733b: Lally et al. (2025)'s MIRI brightness-temperature map seen from the host star, in the lens's palette and range.
  * - HD 189733 B: the colour of its Gaia XP spectrum as a uniform disc; no limb darkening is measured.
  *
- *   node tools/objects/source-authoring/hd-189733/author.mts [--check]
+ *   node packages/telescope-cli/authoring/hd-189733/author.mts [--check]
  *
  * --check recomputes the markers and fails if any differs from the file on disk. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { MARKER_PATH, planetMarker, starMarker } from '../context-markers.mts';
+import { MARKER_PATH, planetMarker, starMarker } from '../../src/source-authoring/context-markers.mts';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
 

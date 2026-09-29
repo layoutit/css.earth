@@ -67,7 +67,7 @@ the map's existence does not qualify a surface texture here.
 **Shape, scale and orientation**
 
 The [measurements](source/measurements.json) record the radius-table formula and
-pole conversion. The [table tool](../../../tools/objects/source-authoring/README.md)
+pole conversion. The [table tool](../../../packages/telescope-cli/src/source-authoring/README.md)
 reproduces the pinned radii. The [navigation recipe](source/preparation/navigation.json)
 records the context image; shared preparation produces the scene.
 

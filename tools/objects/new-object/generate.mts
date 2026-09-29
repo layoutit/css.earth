@@ -372,7 +372,7 @@ export async function writeGenerated(generated: Generated, root = process.cwd(),
   const presentation = resolve(root, `src/objects/${generated.id}/source/presentation`);
   // The marker needs the package on disk: a placeholder first, then the colour lens as a disc.
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
-  const { authorContextMarkers } = await import('../source-authoring/context-markers.mts');
+  const { authorContextMarkers } = await import('../../../packages/telescope-cli/src/source-authoring/context-markers.mts');
   await authorContextMarkers([generated.id]);
   return { written, kept };
 }
@@ -490,7 +490,7 @@ export async function runHostedPhase(handoff: string, root = process.cwd()): Pro
       await mkdir(presentation, { recursive: true });
       await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
       // Every hosted body's marker is drawn from its default lens: a companion's colour, a planet's colour or map.
-      const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]);
+      const { authorContextMarkers } = await import('../../../packages/telescope-cli/src/source-authoring/context-markers.mts'); await authorContextMarkers([record.spec.id]);
       results.push({ id: record.spec.id, kind: record.spec.kind, files: written.length, ...(hex ? { hex } : {}), ...(kept.length ? { kept } : {}),
         orbit: 'whereistheplanet' in record.spec.orbit ? `whereistheplanet ${record.spec.orbit.whereistheplanet}` : 'archive' in record.spec.orbit ? `NASA Exoplanet Archive (${record.orbitCitation.label})` : 'record' in record.spec.orbit ? `its kept record (${record.orbitCitation.label})` : 'cited elements',
         todo: [...record.todo, ...record.spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the body and its evidence']] });

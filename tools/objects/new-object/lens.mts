@@ -58,8 +58,8 @@ export async function installColorLens(files: PackageFiles, id: string, color: C
   const markerInputs = [`${id}-stellar-color`, ...color.inputs.filter(entry => entry.id !== `${id}-stellar-color` && entry.id !== `${id}-crosscheck-spectrum`).map(entry => String(entry.id)), ...(limb.inputs ?? []).map(input => String(input.id)), `${id}-preparation-raster`];
   manifest.generatedIntermediates = [...(manifest.generatedIntermediates ?? []).filter((entry: { path: string }) => entry.path !== 'presentation/context.png'), {
     id: limb.limbDarkening ? 'limb-darkened-disc-context-marker' : 'uniform-disc-context-marker', path: 'presentation/context.png', origin: String(color.inputs[0]?.origin),
-    credit: `The colour lens as a disc${limb.limbDarkening ? ', dimmed toward the limb by its model law' : ''}; rendered by tools/objects/source-authoring/context-markers.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
-    recipe: { generator: 'tools/objects/source-authoring/context-markers.mts', inputs: markerInputs }, generator: 'tools/objects/source-authoring/context-markers.mts',
+    credit: `The colour lens as a disc${limb.limbDarkening ? ', dimmed toward the limb by its model law' : ''}; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts`, license: 'Project-authored display derivative.', consumers: ['navigation'],
+    recipe: { generator: 'packages/telescope-cli/src/source-authoring/context-markers.mts', inputs: markerInputs }, generator: 'packages/telescope-cli/src/source-authoring/context-markers.mts',
     sourceBinding: { kind: 'local', reason: `The colour lens rendered as a disc${limb.limbDarkening ? ' with its limb darkening' : ''}; \`context-markers.mts --check\` recomputes it.` } }];
   files.set(`${s}/manifest.json`, json(manifest));
   const plan = read(`${s}/preparation/acquisition.json`);

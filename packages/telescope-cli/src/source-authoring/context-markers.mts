@@ -12,7 +12,7 @@
  *
  * Both are deterministic functions of pinned package inputs.
  *
- *   node tools/objects/source-authoring/context-markers.mts <id>... [--check]
+ *   node packages/telescope-cli/src/source-authoring/context-markers.mts <id>... [--check]
  *
  * --check recomputes each marker and fails if it differs from the file on disk. */
 import { readFile, writeFile } from 'node:fs/promises';
@@ -25,7 +25,7 @@ import { limbIntensity, loadStellarPhotometricColor } from '@cssearth/bake/objec
 import { colorForValue, loadScienceSurface } from '@cssearth/bake/objects/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
-const objects = resolve(import.meta.dirname, '../../../src/objects');
+const objects = resolve(import.meta.dirname, '../../../../src/objects');
 export const MARKER_PATH = 'presentation/context.png';
 export const MARKER_SIZE = 512;
 /** The disc fills this share of the marker, as the scaffold's disc did. */

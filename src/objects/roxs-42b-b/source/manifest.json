@@ -122,20 +122,20 @@
       "id": "lens-colour-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2402.09533",
-      "credit": "The default lens's colour as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The default lens's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "roxs-42b-b-observational-measurements",
           "roxs-42b-b-preparation-raster",
           "roxs-42b-b-band-color"
         ]
       },
-      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."

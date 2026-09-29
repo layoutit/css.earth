@@ -235,13 +235,13 @@
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/archive/",
-      "credit": "Photosphere colour from the Gaia DR3 XP spectrum as a uniform disc; rendered by tools/objects/source-authoring/hd-189733/author.mts",
+      "credit": "Photosphere colour from the Gaia DR3 XP spectrum as a uniform disc; rendered by packages/telescope-cli/authoring/hd-189733/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+        "generator": "packages/telescope-cli/authoring/hd-189733/author.mts",
         "inputs": [
           "hd-189733-companion-stellar-color",
           "hd-189733-companion-gaia-dr3-xp-sampled",
@@ -249,7 +249,7 @@
           "hd-189733-companion-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+      "generator": "packages/telescope-cli/authoring/hd-189733/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."

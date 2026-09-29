@@ -242,19 +242,19 @@
       "id": "nirspec-map-context-marker",
       "path": "presentation/context.png",
       "origin": "https://zenodo.org/records/12627524",
-      "credit": "The Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by tools/objects/source-authoring/wasp-43/author.mts",
+      "credit": "The Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by packages/telescope-cli/authoring/wasp-43/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/wasp-43/author.mts",
+        "generator": "packages/telescope-cli/authoring/wasp-43/author.mts",
         "inputs": [
           "wasp-43b-challener-2024-deposit",
           "wasp-43b-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/wasp-43/author.mts",
+      "generator": "packages/telescope-cli/authoring/wasp-43/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The default lens rendered as the dayside disc; `author.mts --check` recomputes it."

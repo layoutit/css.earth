@@ -63,7 +63,7 @@
       "id": "navigation-marker",
       "subject": "Distant marker for HD 189733 B",
       "status": "included",
-      "finding": "A uniform disc in the spectrum colour, rendered by tools/objects/source-authoring/hd-189733/author.mts; --check recomputes it.",
+      "finding": "A uniform disc in the spectrum colour, rendered by packages/telescope-cli/authoring/hd-189733/author.mts; --check recomputes it.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/hd-189733-companion/source/presentation/context.png"
       ]

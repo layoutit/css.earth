@@ -3,14 +3,14 @@
  * marker is that colour as a uniform disc, and the catalogue and surface colours are its hex. All three are deterministic
  * functions of the pinned spectrum, its record and the CIE observer.
  *
- *   node tools/objects/source-authoring/stellar-spectra/author.mts [--check] [<id> ...]
+ *   node packages/telescope-cli/authoring/stellar-spectra/author.mts [--check] [<id> ...]
  *
  * --check recomputes everything and fails where a file differs. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
-import { MARKER_PATH, starMarker } from '../context-markers.mts';
+import { MARKER_PATH, starMarker } from '../../src/source-authoring/context-markers.mts';
 import { requireArray, requireRecord, requireString, isRecord } from '@cssearth/core';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
