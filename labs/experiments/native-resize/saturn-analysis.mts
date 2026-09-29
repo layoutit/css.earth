@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { loadTrace } from '../../performance/load-trace.mts';
-import { occupiedMs } from '../../performance/trace-brief.mts';
+import { occupiedMs } from '../../performance/trace-sources.mts';
 import { arrayOf, hasDuration, isTraceEvent, isFiniteNumber, present, recordOf } from '../../performance/trace-model.mts';
 
 const directory = 'output/playwright/native-resize/saturn-transparent';

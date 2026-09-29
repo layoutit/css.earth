@@ -8,7 +8,7 @@ import { build } from 'vite';
 import type { Rollup } from 'vite';
 import type { MappingItem } from 'source-map-js';
 import { performanceSourceMaps } from '../../site/build/source-maps.mts';
-import { inspectBuild, readSourceMap } from './trace-brief.mts';
+import { inspectBuild, readSourceMap } from './trace-sources.mts';
 import type { TraceLocation } from './trace-model.mts';
 import { recordOf } from './trace-model.mts';
 

@@ -7,7 +7,7 @@ import { createCostIndex } from './trace-costs.mts';
 import { dataOf, isTraceEvent, type TraceEvent } from './trace-model.mts';
 import { traceCauses, causeTraceEvents } from './webkit-trace-causes.mts';
 import { traceClues } from './webkit-trace-clues.mts';
-import { inspectBuild } from './trace-brief.mts';
+import { inspectBuild } from './trace-sources.mts';
 import { compositorClues, compositorTraceEvents } from './webkit-compositor-clues.mts';
 import { analysisHtml } from './webkit-trace-report.mts';
 
