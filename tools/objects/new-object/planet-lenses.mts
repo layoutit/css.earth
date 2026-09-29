@@ -253,7 +253,7 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
     }
     lensMarkerEntry(files, id);
     for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
-    const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([id]);
+    const { authorContextMarkers } = await import('../../../packages/telescope-cli/src/source-authoring/context-markers.mts'); await authorContextMarkers([id]);
     progress(lines.at(-1)!);
   }
   return lines;
@@ -264,7 +264,7 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
 export function lensMarkerEntry(files: PackageFiles, id: string) {
   const path = `src/objects/${id}/source/manifest.json`, manifest = JSON.parse(String(files.get(path))) as { inputs: { id: string }[]; generatedIntermediates?: Record<string, unknown>[] };
   const lensInputs = manifest.inputs.map(input => input.id).filter(input => [`${id}-preparation-raster`, `${id}-observational-measurements`, `${id}-thermal-color`].includes(input) || input.endsWith('-band-color'));
-  const generator = 'tools/objects/source-authoring/context-markers.mts', previous = manifest.generatedIntermediates?.find(entry => entry.path === 'presentation/context.png');
+  const generator = 'packages/telescope-cli/src/source-authoring/context-markers.mts', previous = manifest.generatedIntermediates?.find(entry => entry.path === 'presentation/context.png');
   manifest.generatedIntermediates = [...(manifest.generatedIntermediates ?? []).filter(entry => entry.path !== 'presentation/context.png'), {
     id: 'lens-colour-context-marker', path: 'presentation/context.png', origin: String(previous?.origin ?? ''), credit: `The default lens's colour as a disc; rendered by ${generator}`,
     license: 'Project-authored display derivative.', consumers: ['navigation'], recipe: { generator, inputs: lensInputs }, generator,
