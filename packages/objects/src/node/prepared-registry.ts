@@ -75,7 +75,7 @@ function decodeRegistry(checkout: string): PreparedObjectRegistry {
   return Object.freeze({ objects, sceneObjects, requireSceneObject(id: string) {
     const object = objects.find(candidate => candidate.id === id);
     if (!object) throw new Error(`Unknown cssEarth object: ${id}`);
-    if (!isSceneObject(object)) throw new TypeError(`Object ${id} is a ${object.kind === 'overview' ? 'overview' : 'prepared focus'}, not a scene owner.`);
+    if (!isSceneObject(object)) throw new TypeError(`Object ${id} is ${object.kind === 'overview' ? 'an overview' : 'a prepared focus'}, not a scene owner.`);
     return object;
   } });
 }
