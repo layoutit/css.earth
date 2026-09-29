@@ -5,7 +5,7 @@ decoders and structural guards for values that arrive from outside the type syst
 `median`, `isArray`, `canonical` and CLI argument parsing.
 Keep the main and `schema` entries dependency-free and host-neutral: no Node built-ins, DOM globals or file I/O, so the
 browser runtime and the preparation tools import the same module. `src/node/` is the one exception: it is published as
-`@cssearth/core/node`, may import `node:*` (hashing, the project root), and nothing outside `src/node/` may import it.
+`@cssearth/core/node`, may import `node:*` (the runtime asset content address, the project root), and nothing outside `src/node/` may import it.
 Reading files stays with the callers.
 Tree-shaking must keep working: no top-level side effects beyond constant definitions.
 
