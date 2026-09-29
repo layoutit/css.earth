@@ -132,7 +132,7 @@ export function quickSteps(steps:readonly CiStep[]):CiStep[] {
 }
 
 /** Paths whose change can break types outside one object package: `--typecheck` appends `pnpm typecheck` for them. */
-export const SHARED_CODE=/^(?:\.github\/scripts|site|src\/platform|src\/renderers|packages)\//u;
+export const SHARED_CODE=/^(?:\.github\/scripts|site|src\/platform|src\/renderers|packages)\/|^tsconfig\.(?:base|scripts)\.json$/u;
 export function sharedCodeChanged(paths:readonly string[]):boolean {return paths.some(path=>SHARED_CODE.test(path));}
 // Keep these prerequisites with their consumer so command deduplication cannot discard them.
 export const SHARED_TYPECHECK_STEP:CiStep={
