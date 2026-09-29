@@ -37,7 +37,7 @@ This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Hor
 
 ### Reproduction
 
-The [table tool](../../../tools/objects/source-authoring/README.md) reproduces the
+The [table tool](../../../packages/telescope-cli/src/source-authoring/README.md) reproduces the
 pinned radii from [measurements](source/measurements.json). The
 [navigation recipe](source/preparation/navigation.json) records the context image.
 

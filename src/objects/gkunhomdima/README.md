@@ -49,7 +49,7 @@ has aliases, so no qualified sidereal spin or absolute surface attitude is claim
 Source recipes pin units, assumptions and numerical axes. Geometry is prepared
 before runtime and uses 480 native raster triangles. Shadows defaults off.
 
-The [table tool](../../../tools/objects/source-authoring/README.md) reproduces the
+The [table tool](../../../packages/telescope-cli/src/source-authoring/README.md) reproduces the
 pinned radii from [measurements](source/measurements.json).
 
 ## Source survey
