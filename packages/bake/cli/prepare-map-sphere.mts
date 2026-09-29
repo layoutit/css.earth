@@ -30,7 +30,7 @@ const recipePath = resolve(sourceDirectory, 'sphere.json');
 const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as {
   schema?: unknown; id?: unknown; source?: unknown; meaning?: unknown;
   map?: { path?: unknown; origin?: unknown; column?: unknown; coordinates?: unknown; unit?: unknown };
-  colourTable?: { path?: unknown; origin?: unknown; basis?: unknown };
+  colourTable?: { path?: unknown; origin?: unknown; basis?: unknown; scale?: unknown; scaleBasis?: unknown; gamma?: unknown; gammaBasis?: unknown };
   range?: { min?: unknown; max?: unknown; basis?: unknown };
   radius?: { redshift?: unknown; cosmology?: unknown; basis?: unknown };
   mesh?: { patchesPerEdge?: unknown; tilePx?: unknown; samplesPerTexel?: unknown; basis?: unknown };
@@ -44,6 +44,12 @@ if (recipe.schema !== 'cssearth-map-sphere-source@1' || recipe.id !== id || !tex
 }
 if (!map || !text(map.path) || !text(map.origin) || !text(map.column) || map.coordinates !== 'galactic' || !text(map.unit)) fail('map names its FITS path, origin, column, unit and Galactic coordinates.');
 if (!colourTable || !text(colourTable.path) || !text(colourTable.origin) || !text(colourTable.basis)) fail('colourTable names its path, origin and basis.');
+if (colourTable!.scale !== undefined && (typeof colourTable!.scale !== 'number' || !(colourTable!.scale > 0 && colourTable!.scale <= 1) || !text(colourTable!.scaleBasis))) {
+  fail('colourTable.scale darkens every colour by a factor in (0, 1], with its scaleBasis.');
+}
+if (colourTable!.gamma !== undefined && (typeof colourTable!.gamma !== 'number' || !(colourTable!.gamma > 0) || !text(colourTable!.gammaBasis))) {
+  fail('colourTable.gamma raises each colour channel to a positive power, with its gammaBasis.');
+}
 if (!range || typeof range.min !== 'number' || typeof range.max !== 'number' || !(range.max > range.min) || !text(range.basis)) fail('range is an increasing min and max with a basis.');
 if (!radius || typeof radius.redshift !== 'number' || !(radius.redshift > 0) || radius.cosmology !== 'planck18' || !text(radius.basis)) fail('radius is a positive redshift in the planck18 cosmology, with a basis.');
 if (!mesh || !integer(mesh.patchesPerEdge, 1, 16) || !integer(mesh.tilePx, 8, 256) || !integer(mesh.samplesPerTexel, 1, 4) || !text(mesh.basis)) {
@@ -106,7 +112,7 @@ for face in range(6):
       v = values[pix].reshape(C * S, C * S).astype(float)
       v = v.reshape(C, S, C, S).mean(axis=(1, 3))
       idx = np.clip(np.round((v - lo) / (hi - lo) * 255), 0, 255).astype(int)
-      rgb = table[idx].astype(np.uint8)
+      rgb = np.round(255 * (table[idx] / 255) ** r['colourGamma'] * r['colourScale']).astype(np.uint8)
       row, col = divmod(k, cols)
       # PolyCSS lays a leaf's image on its vertices in order: top-left on corner (0, 0), top-right on (1, 0), bottom-right
       # on (1, 1). So the tile's rows run with t, from the patch's (s, 0) edge.
@@ -123,7 +129,7 @@ const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
 const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   input: JSON.stringify({ map: resolve(sourceDirectory, map!.path as string), column: map!.column, table: resolve(sourceDirectory, colourTable!.path as string),
-    icrsToGalactic: ICRS_TO_GALACTIC, faces: FACES, patches, tile, samples, gutter: GUTTER, columns, rows, min: range!.min, max: range!.max, out: rawPath, redshift: radius!.redshift }) });
+    icrsToGalactic: ICRS_TO_GALACTIC, faces: FACES, patches, tile, samples, gutter: GUTTER, columns, rows, min: range!.min, max: range!.max, out: rawPath, redshift: radius!.redshift, colourScale: colourTable!.scale ?? 1, colourGamma: colourTable!.gamma ?? 1 }) });
 if (run.status !== 0) throw new Error(`Map sampling failed: ${run.stderr.slice(-2000)}`);
 const sampled = JSON.parse(run.stdout) as { nside: number; ordering: string; radiusMpc: number; min: number; max: number };
 const atlasBytes = await readFile(resolve(rawPath));

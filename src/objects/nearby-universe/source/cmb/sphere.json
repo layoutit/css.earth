@@ -13,7 +13,9 @@
   "colourTable": {
     "path": "Planck_Parchment_RGB.txt",
     "origin": "https://raw.githubusercontent.com/zonca/paperplots/master/data/Planck_Parchment_RGB.txt",
-    "basis": "The Planck collaboration's style-guide colour table for CMB maps (the paperplots repository of its figure style guide), 256 colours from blue through parchment to red."
+    "basis": "The Planck collaboration's style-guide colour table for CMB maps (the paperplots repository of its figure style guide), 256 colours from blue through parchment to red.",
+    "gamma": 1.6,
+    "gammaBasis": "Presentation choice, picked from renders (full colour, colour at 60% and 45%, gamma 1.6 and 2.2): each colour channel of the table raised to the power 1.6, as the star dots are, so the table's cream middle, where most of the sky sits, darkens most and the ball stops glaring beside the dots while its reds and blues keep their colour."
   },
   "range": {
     "min": -0.0003,

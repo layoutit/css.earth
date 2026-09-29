@@ -85,7 +85,8 @@ overview reads **Observable Universe** from 1 Gpc out, and the camera reaches
   ([`prepare-map-sphere.mts`](../../../packages/bake/cli/prepare-map-sphere.mts)).
   Each texel averages 2 by 2 samples of the map at its direction, turned from
   ICRS into the map's Galactic coordinates, and takes the Planck style-guide
-  colour for its temperature over ±300 µK. Each patch shows only its front, so
+  colour for its temperature over ±300 µK, each channel raised to the power 1.6
+  so the table's pale middle does not glare beside the dots. Each patch shows only its front, so
   from outside the far side never shows through, and it fades in as the camera
   leaves it, from its radius to twice that: it is the edge of the observable
   universe, seen from outside. From inside it would be the whole sky, which the
