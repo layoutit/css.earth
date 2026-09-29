@@ -27,6 +27,7 @@ import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 import { createUniverseLensBanks } from './universe-lens-banks.js';
 import { createUniverseCatalogBanks } from './universe-catalog-banks.js';
 import { createUniverseBackground } from './universe-background.js';
+import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:
@@ -149,9 +150,13 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const background = createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
           prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM, cataloguePointUrls: galaxyCataloguePoints,
           ...(galaxyBacking ? { backingUrl: galaxyBacking } : {}) });
+        // Both billboard layers sample one atlas. Keep one demand-driven decode lease
+        // for the universe lifetime, and publish again when its pixels are ready.
+        const billboardTextures = own(createVolumeTextureReadiness(() => { requestPublication?.(); }));
+        const prepareBillboardAtlas = () => lensBillboards !== undefined && billboardTextures.ready([lensBillboards.atlasUrl]);
         const lenses = createUniverseLensBanks({ root, end, frontRoot, frontEnd, lifetime,
           declarations: volumeLensBanks, facts: lensFacts, frame: plan.frame, visibility: lensVisibility,
-          billboards: lensBillboards, load: loadVolumeLens, warmDomNodeBudget: warmVolumeLensDomNodeBudget, requestPublication });
+          billboards: lensBillboards, load: loadVolumeLens, warmDomNodeBudget: warmVolumeLensDomNodeBudget, requestPublication, prepareBillboardAtlas });
         // A cut-open mesh draws the inside of its far wall here, behind the points it holds; its outer shell stays over them.
         const meshInterior = document.createElement('span'); meshInterior.hidden = true; root.insertBefore(meshInterior, end);
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, fetchPreparedJson));
@@ -161,7 +166,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource, cutaway: mesh.cutaway?.() ?? true })) }));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: volumeLensBanks,
-          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: lensBillboards, stellarExtents });
+          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, onSelect: onSelectGalaxy, requestPublication, billboards: lensBillboards, stellarExtents, prepareBillboardAtlas });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
         let overview = false;

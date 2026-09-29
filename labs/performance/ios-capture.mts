@@ -1569,6 +1569,14 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     const value = await evaluate(READ_RESIDENCY_PROBE);
     residencySnapshots.push(isRecord(value) ? { ...value, step } : { step, error: 'Residency probe unavailable after navigation.' });
   };
+  // Register the capture's global input listeners during setup. WebKit rebuilds
+  // event regions for the wheel listener; recording that commit misattributes
+  // observer setup to the idle app. Two frame boundaries let setup paint finish.
+  // A cold load discards this document, so it needs no input logger here.
+  if (!option.coldLoad) {
+    await evaluate(INPUT_LOGGER);
+    await evaluate('new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
+  }
   const recordingStart = events.length;
   await session.send('Memory.startTracking');
 
@@ -1612,7 +1620,6 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   // A script step that returns a promise (a scripted camera move, say) finishes before the next step.
   // --eval runs one expression in the page before recording: an experiment's switch (hide a layer, set a flag).
   if (option.eval) await evaluate(option.eval);
-  await evaluate(INPUT_LOGGER);
   const styleWritesStarted = Date.now();
   if (option.styleWrites) await evaluate(STYLE_WRITES_LOGGER);
   if (option.debug) { await evaluate(INSTALL_TRACE_CAUSES); debugInstalled = true; }
@@ -1721,16 +1728,18 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     console.error(`No device ${sampler} samples (${result.error.trim().split('\n').at(-1)}). ${DEVELOPER_SERVICES}`);
   const endUrl = await evaluate('location.href').catch(() => null);
   const viewport = await evaluate('[innerWidth, innerHeight]').catch(() => null);
-  const input = await evaluate('window.__captureInput ? window.__captureInput.stop() : null').catch(() => null);
-  const styleWrites = option.styleWrites ? await evaluate('window.__captureStyles ? window.__captureStyles.stop() : null').catch(() => null) : null;
-  if (styleWrites) await writeFile(resolve(out, 'style-writes.json'), JSON.stringify({ startedMs: styleWritesStarted, ...styleWrites }, null, 1) + '\n');
-  if (input) await writeFile(resolve(out, 'input.json'), JSON.stringify(input) + '\n');
   await session.send('Timeline.stop');
   await session.send('Memory.stopTracking');
   await session.send('CPUProfiler.stopTracking');
   await session.send('ScriptProfiler.stopTracking');
   for (const worker of workers.keys()) await session.send('ScriptProfiler.stopTracking', {}, worker);
   const recorded = xctrace ? await stopRecording(xctrace) : false;
+  // Removing global listeners invalidates event regions too. End both recorders
+  // before dismantling their observers, keeping teardown outside app timing.
+  const input = await evaluate('window.__captureInput ? window.__captureInput.stop() : null').catch(() => null);
+  const styleWrites = option.styleWrites ? await evaluate('window.__captureStyles ? window.__captureStyles.stop() : null').catch(() => null) : null;
+  if (styleWrites) await writeFile(resolve(out, 'style-writes.json'), JSON.stringify({ startedMs: styleWritesStarted, ...styleWrites }, null, 1) + '\n');
+  if (input) await writeFile(resolve(out, 'input.json'), JSON.stringify(input) + '\n');
   // The export runs while the page side is read.
   const nativeExport: Promise<Awaited<ReturnType<typeof exportTimeProfile>> | { error: string }> = !xctrace ? Promise.resolve({ error: 'Not recorded (--native off).' })
     : recorded ? exportTimeProfile(native, pagePid) : Promise.resolve({ error: 'xctrace did not finish its recording within 120 s.' });

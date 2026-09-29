@@ -6,7 +6,7 @@ import { createObjectSelectionRuntime } from '@cssearth/renderer/testing';
 import { cameraMotionSignalFor } from '@cssearth/renderer/navigation';
 import { createPreparedResidency } from '@cssearth/renderer/testing';
 import { retainedPresentationFixture, preparedSelectionFixture } from "../../tests/platform/object-runtime-package.mts";
-import { mountPreparedPresentation } from '@cssearth/renderer/testing';
+import { mountPreparedPresentation, initialObjectSelection } from '@cssearth/renderer/testing';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
 import type { ObjectRuntimeDefinition } from '@cssearth/renderer/runtime/object-runtime-types.ts';
@@ -356,4 +356,36 @@ test('held departure moves and hides every Ryugu depth partition without publish
   assert.equal(h.commits.length, commits);
   assert.equal(h.coordinator.stats().requests, requests);
   h.lifetime.destroy(); release();
+});
+
+test('detached first publication selects leaf boxes before connection, without a live repaint queue', async t => {
+  const definition = parsePreparedObjectRuntime(await loadObjectTestDefinition('neptune'));
+  const f = retainedPresentationFixture(definition); t.after(f.restore);
+  const created: ReturnType<typeof f.document.createElement>[] = [];
+  const create = f.document.createElement;
+  f.document.createElement = tag => { const element = create(tag); created.push(element); return element; };
+  const frames: FrameRequestCallback[] = [];
+  const previousFrame = Object.getOwnPropertyDescriptor(globalThis, 'requestAnimationFrame');
+  Object.defineProperty(globalThis, 'requestAnimationFrame', { configurable: true, value: (callback: FrameRequestCallback) => frames.push(callback) });
+  t.after(() => { if (previousFrame) Object.defineProperty(globalThis, 'requestAnimationFrame', previousFrame); else Reflect.deleteProperty(globalThis, 'requestAnimationFrame'); });
+  const presentation = mountPreparedPresentation(f.stage, f.context, definition, undefined, undefined, false, true);
+  assert.equal(f.stage.children.length, 0);
+  const binding = definition.viewBindings.find(binding => binding.kind === 'silhouette-step-property' && binding.groups);
+  assert.ok(binding?.kind === 'silhouette-step-property' && binding.groups);
+  const leaves = Object.values(binding.groups).flat();
+  assert.ok(leaves.length && binding.placements, 'Use the actual prepared leaf groups');
+  const radius = binding.placements.body.radius;
+  const projection = (distance: number): PreparedView['projection'] => ({ focalPixels: 1000, principalOffsetPixels: [0, 0],
+    eyeFromScene: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -distance, 1] });
+  const publication = { selection: initialObjectSelection(definition.controls), resources: f.resources,
+    view: { ...f.view, projection: projection(radius * 100), motionAtRest: true, levelOfDetail: { ...f.view.levelOfDetail, silhouetteDiameter: 20 } } };
+  presentation.publishFrame(publication);
+  const leaf = created[leaves[0]], first = leaf.style.getPropertyValue(binding.property);
+  assert.ok(Number(first) <= 32 && Number(first) >= 16, 'The first small-system view must not inherit close-up backing sizes');
+  assert.equal(frames.length, 0, 'Detached preparation must finish before connection');
+  presentation.connect();
+  assert.ok(f.stage.children.length > 0);
+  presentation.publishFrame({ ...publication, view: { ...publication.view, projection: projection(radius * 3),
+    levelOfDetail: { ...publication.view.levelOfDetail, silhouetteDiameter: 1000 } } });
+  assert.equal(leaf.style.getPropertyValue(binding.property), first, 'Mounted boxes stay frozen until motion settles');
 });

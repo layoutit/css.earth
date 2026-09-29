@@ -73,3 +73,7 @@ The [production navigation check](../dinkinesh/evidence/galileo-lucy/production-
 ## Preparation
 
 [Reproduction instructions](../../../packages/bake/authoring/galileo-lucy/README.md). The canonical prepared mesh contains 1024 triangles, independent of device DPR. Sources, conversion and reduction happen before runtime.
+
+The shared presentation compiler groups these faces in a fixed visibility order before packing them into retained paint contexts. Selam uses 13 contexts; two inseparable groups of 396 and 72 faces retain native 3D depth. Rotation changes their transforms without changing their paint-order ranks. This changes rendering preparation only; the source shape and texture bytes are unchanged.
+
+[Fixed-order preparation checks](evidence/fixed-depth-order.json) record unchanged geometry and textures, independent ray-order checks, and the iPad drag comparison.

@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import type { AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from '@cssearth/bake/objects/sources';
-import { parseRasterRecipe, prepareLimb, prepareRasterAssets, prepareLighting, prepareAtmosphere, outputName, RASTER_DENSITY } from '@cssearth/bake/raster';
+import { parseRasterRecipe, prepareLimb, prepareRasterAssets, surfaceCoordinateWidth, prepareLighting, prepareAtmosphere, outputName, RASTER_DENSITY } from '@cssearth/bake/raster';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { parsePresentationProfile, prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
 import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
@@ -299,6 +299,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const definition = attached.definition as typeof prepared.definition;
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
+      preparedDirectory: outputDirectory,
       allowPreparationArtifacts: true,
       values: [definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, definition);
@@ -310,6 +311,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const prepared = await prepareLayeredGiantObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
+      preparedDirectory: outputDirectory,
       values: [prepared.raster, prepared.celestial, prepared.scene, prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
     return Object.freeze({ ...prepared });
@@ -318,7 +320,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     genericLaneOnly();
     const { prepareShapeModel } = await import('@cssearth/bake/objects/layers/shape-model');
     const prepared = await prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets, solarGeometry: await solarGeometry() });
-    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, objectDirectory: outputDirectory, allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
+    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, objectDirectory: outputDirectory, preparedDirectory: outputDirectory, allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
     return Object.freeze({ descriptor, sources, ...prepared });
   }
   if (source(sources, 'terrestrial')) {
@@ -336,6 +338,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const prepared = { ...terrestrialPrepared, definition: terrestrialDefinition as typeof terrestrialPrepared.definition };
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
+      preparedDirectory: outputDirectory,
       allowPreparationArtifacts: true,
       values: [prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
@@ -409,7 +412,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (!url.startsWith(rasterConfig.publicBase)) throw new TypeError(`${descriptor.id}: leaf image ${url} is not under ${rasterConfig.publicBase}.`);
     const path = resolve(publicDirectory, url.slice(rasterConfig.publicBase.length));
     const { width } = await sharp(path).metadata().catch((error: unknown) => { throw new Error(`${descriptor.id}: leaf image ${url} (${path}) cannot be measured.`, { cause: error }); });
-    return width ?? Number.NaN;
+    return surfaceCoordinateWidth(raster, url, width ?? Number.NaN);
   });
   const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig,
     assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(await solarGeometry()), outputDirectory, imagePixels });

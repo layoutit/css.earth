@@ -69,7 +69,7 @@ test('catalogue point banks refuse malformed points and appearances, naming the 
 test('a catalogue loads on its first publication and draws every point as the same small dot', async () => {
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   let fetched = 0;
-  const points = mountCataloguePoints({ host, url: '/cepheids.json', fetchJson: async () => { fetched++; return bank; } });
+  const points = mountCataloguePoints({ host, url: '/cepheids.json', fetchJson: async () => { fetched++; return {...bank, appearance: {...bank.appearance, opacity: 1}}; } });
   expect(fetched).toBe(0);
   const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
   const world = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } };
@@ -77,9 +77,15 @@ test('a catalogue loads on its first publication and draws every point as the sa
   await new Promise(resolve => setTimeout(resolve, 0));
   expect(fetched).toBe(1);
   expect(points.root.dataset.cataloguePoints).toBe('test-stars');
-  const shadows = [...points.root.querySelectorAll('i')].map(node => node.style.boxShadow).filter(shadow => shadow && shadow !== 'none');
-  expect(shadows).toHaveLength(2);
-  for (const shadow of shadows) expect(shadow).toContain('0.250px #ffe2a8b3');
+  const paths = [...points.root.querySelectorAll('path')];
+  expect(paths).toHaveLength(1);
+  expect(paths[0]!.getAttribute('fill')).toBe('#ffe2a8ff');
+  expect(paths[0]!.getAttribute('d')!.match(/M/g)).toHaveLength(2);
+  expect(paths[0]!.getAttribute('d')).toContain('a0.750 0.750');
+  const retainedPath = paths[0];
+  points.publish({ world: {...world, pose: {...world.pose, positionM: [1,0,0]}}, viewport });
+  expect(points.root.querySelector('path')).toBe(retainedPath);
+  expect(points.root.querySelectorAll('i')).toHaveLength(0);
   points.publish({ world, viewport }); expect(fetched).toBe(1);
   points.destroy(); expect(host.children).toHaveLength(0);
 });
@@ -91,4 +97,16 @@ test('zooming out draws a shrinking prefix of the catalogue', async () => {
   expect(drawnPointCount(4004, 20 * kpc)).toBe(2002);
   expect(drawnPointCount(4004, 200 * kpc)).toBe(300);
   expect(drawnPointCount(165, 1000 * kpc), 'a sparse catalogue keeps every point').toBe(165);
+});
+
+test('translucent catalogues preserve per-dot alpha accumulation', async () => {
+  const {document} = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const points = mountCataloguePoints({host, url:'/translucent.json', fetchJson:async()=>bank});
+  points.publish({world:{referenceFrame:'sun-icrf',epochJdTt:2451545,
+    pose:{positionM:[0,0,0],orientationXyzw:[0,0,0,1]}},
+    viewport:{focalPixels:100,principalOffsetPixels:[0,0],widthPixels:1000,heightPixels:800}});
+  await new Promise(resolve=>setTimeout(resolve,0));
+  expect(points.root.querySelectorAll('path')).toHaveLength(0);
+  expect([...points.root.querySelectorAll('i')].some(node=>node.style.boxShadow.includes('#ffe2a8b3'))).toBe(true);
+  points.destroy();
 });

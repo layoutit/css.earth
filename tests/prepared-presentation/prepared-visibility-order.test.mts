@@ -44,3 +44,23 @@ test('prepared component painting matches independent front-facing ray intersect
   const targets = Array.from({ length: 25 }, (_, i): Triangle[number] => [(i % 5 - 2) / 4, (Math.floor(i / 5) - 2) / 4, 0]);
   assert.ok(verifyRayOrder(triangles, signs, plan, eyes, targets).overlaps > 50);
 });
+
+
+test('a separable convex surface keeps a fixed paint order through every camera octant', () => {
+  const triangles: Triangle[] = [], signs: number[] = [];
+  for (const x of [-1, 1]) for (const y of [-1, 1]) for (const z of [-1, 1]) {
+    triangles.push([[x, 0, 0], [0, y, 0], [0, 0, z]]);
+    signs.push(x * y * z);
+  }
+  // Geometric splitting is possible, but no two front-facing convex faces
+  // occlude each other. It must not create camera-dependent z-index changes.
+  const plan = partitionSurface(triangles, 1, signs);
+  assert.ok('sequence' in plan.order);
+  assert.ok(plan.order.sequence.every(entry => 'group' in entry));
+  assert.equal(plan.groups.length, 8);
+  const eyes: Triangle[number][] = [];
+  for (const x of [-20, 20]) for (const y of [-20, 20]) for (const z of [-20, 20]) eyes.push([x, y, z]);
+  const targets: Triangle[number][] = triangles.map(([a, b, c]) => [(a[0] + b[0] + c[0]) / 3,
+    (a[1] + b[1] + c[1]) / 3, (a[2] + b[2] + c[2]) / 3]);
+  assert.equal(verifyRayOrder(triangles, signs, plan, eyes, targets).rays, 64);
+});

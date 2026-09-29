@@ -30,7 +30,7 @@ async function fixture(attached = false) {
   const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
   const root = document.getElementById('back')!, frontRoot = document.getElementById('front')!;
   const lifetime = createSceneLifetime();
-  const banks = createUniverseLensBanks({ root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
+  const banks = createUniverseLensBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
     lifetime, declarations: [{ id: 'fixture', frame }], facts: [{ id: 'fixture', payloadSha256: 'a'.repeat(64), contextVisibility: 'independent', attached }],
     frame, visibility, warmDomNodeBudget: 10000, load: async () => ({ payload, resolveResource: path => path }) });
   await banks.focusBank('fixture')!.load();
