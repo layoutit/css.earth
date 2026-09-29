@@ -19,6 +19,7 @@
   "surfaces": [
     {
       "id": "normal",
+      "resolutionScale": 0.25,
       "output": "iapetus-{id}{suffix}.webp",
       "thumbnail": "iapetus-lens-{id}.webp",
       "source": "observations/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",

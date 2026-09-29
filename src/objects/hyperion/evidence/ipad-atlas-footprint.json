@@ -1,0 +1,51 @@
+{
+  "testedAt": "2026-09-28",
+  "base": "225f2f1e6b",
+  "changes": "Seven Saturn moon recipe, inventory and closed-surface culling changes in this commit. Application JavaScript and arrival handoff unchanged.",
+  "device": "iPad15,7 A16, iPadOS 26.6",
+  "capture": "tablet-saturn-seven-atlases-final-normal-2026-09-29T00-37-47-983Z",
+  "mode": "normal; page-dispatched flight, drag and zoom; JavaScript sampling off; native device screenshots",
+  "defaultTexture": {
+    "location": "public",
+    "filename": "hyperion-normal-surface-alpha@2x.webp",
+    "bytes": 542274,
+    "sha256": "1c83ccd31b7e173ddbc4111c19eb6152b9f63362dbde8d61226d4fb9caa9bc01",
+    "width": 2142,
+    "height": 2294,
+    "estimatedDecodedRgbaBytes": 19654992,
+    "previous": {
+      "location": "public",
+      "filename": "hyperion-normal-surface-alpha@2x.webp",
+      "bytes": 1164248,
+      "sha256": "80126e808dcd42cb3192fe7dc522c58e5f59c8c949bc8832edc38be3c93c04e2",
+      "width": 4283,
+      "height": 4590,
+      "estimatedDecodedRgbaBytes": 78635880
+    }
+  },
+  "previousObservedArrivalWorstTaskMs": 57.776,
+  "arrivals": [
+    {
+      "label": "06 titan → hyperion",
+      "outcome": "finished",
+      "durationMs": 4161.876,
+      "worstTaskMs": 20.458,
+      "worstTaskExclusiveMs": {
+        "gc": 0,
+        "style": 0,
+        "layout": 0,
+        "prepaint": 0,
+        "paint": 0.16,
+        "layers": 0,
+        "commit": 20.298,
+        "compile": 0,
+        "script": 0,
+        "other": 0
+      },
+      "maxPaintMs": 3.095
+    }
+  ],
+  "visualCheck": "Native full-device arrival screenshots and route filmstrip inspected. Complete visible surfaces. Existing texture seams and source coverage gaps remain.",
+  "limits": "Decoded RGBA is an image-size estimate, not measured process memory. Display detail is reduced; preserved source data is unchanged. Different route/capture conditions prevent an isolated percentage-speedup claim. All 56 steps finished with zero console errors. Residual route tasks include 146.346 ms style leaving Phoebe and 523.778 ms composite returning to Saturn; no zero-jank claim.",
+  "previousCapture": "tablet-titan-iapetus-hyperion-phoebe-normal-2026-09-28T23-38-06-908Z"
+}

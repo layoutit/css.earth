@@ -24,7 +24,8 @@
         },
         "nativePhotographicSampling": {
           "samplesPerAxis": 2
-        }
+        },
+        "textureScale": 0.25
       },
       {
         "id": "enhanced",
@@ -35,7 +36,8 @@
         },
         "nativePhotographicSampling": {
           "samplesPerAxis": 2
-        }
+        },
+        "textureScale": 0.25
       },
       {
         "id": "infrared",
@@ -111,7 +113,8 @@
             0.7071067811865476
           ],
           "ambient": 0.25
-        }
+        },
+        "textureScale": 0.25
       },
       {
         "id": "relative-albedo",
@@ -154,7 +157,8 @@
             -2153.874190046
           ]
         },
-        "displaySampling": "nearest"
+        "displaySampling": "nearest",
+        "textureScale": 0.25
       },
       {
         "id": "ice-absorption",
