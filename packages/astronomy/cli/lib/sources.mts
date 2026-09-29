@@ -5,6 +5,9 @@ import { dirname } from 'node:path'
 
 export const CACHE_DIR = new URL('../.cache/', import.meta.url).pathname
 
+/** Preserve paths serialized by generators before the tools-to-cli move. */
+export const HISTORICAL_GENERATOR_DIRECTORY = 'tools'
+
 /** Download once into `cli/.cache`, which is gitignored. */
 export async function cached(url: string, name: string) {
   const file = CACHE_DIR + name
@@ -36,9 +39,9 @@ export const HEADER = (source: string, generator: string) =>
   `// GENERATED FILE — do not edit by hand.
 //
 // Source:    ${source}
-// Generator: packages/astronomy/tools/${generator}
+// Generator: packages/astronomy/${HISTORICAL_GENERATOR_DIRECTORY}/${generator}
 //
-// Regenerate with \`node tools/${generator}\` from packages/astronomy. The
+// Regenerate with \`node ${HISTORICAL_GENERATOR_DIRECTORY}/${generator}\` from packages/astronomy. The
 // generator re-downloads the source series, re-derives the truncation, and
 // prints the error budget it certifies; the numbers in README.md come from it.
 `
