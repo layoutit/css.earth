@@ -439,6 +439,7 @@
     "logicalBodyDiameter": 460,
     "pitchBounded": false,
     "yawBounded": false,
+    "drag": { "model": "pole-held-tumble" },
     "responsiveFit": {
       "model": "continuous-aspect-smoothstep",
       "portraitBaseWidthShare": 0.34,

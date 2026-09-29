@@ -53,7 +53,9 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     physicalRadiusM: bodyRadiusM, renderedRadiusUnits });
   const alreadyPhysical = sources.has('shape-model') || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
     sources.get('terrestrial')?.kind === 'solid-observation-body';
-  const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, pagedSurfaceArcPerCssPixel(sources.get('paged-ellipsoid')));
+  const paged = sources.get('paged-ellipsoid');
+  const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, pagedSurfaceArcPerCssPixel(paged),
+    pagedDrag(paged));
   // The default camera has one owner: this stage derives it and rewrites every prepared value computed from it, so a rule change
   // re-runs this stage, not the lanes.
   const surfacesReport = await readFile(resolve(objectDirectory, 'prepared/surfaces.json'), 'utf8').then(JSON.parse, () => null);
@@ -202,7 +204,18 @@ function pagedSurfaceArcPerCssPixel(paged: Input | undefined): number | undefine
   return texelsPerCssPixel * 2 * Math.PI / (sourceWidth * density);
 }
 
-function physicalCamera(camera: Input, projection: Input, surfaceArcPerCssPixelRadians: number | undefined): Input {
+/** A paged globe's recipe camera owns its drag model (Earth's "pole-held-tumble"), so this pass carries a change to it
+ * without re-baking the globe. */
+function pagedDrag(paged: Input | undefined): Input | undefined {
+  const drag = paged?.camera?.drag;
+  if (drag === undefined) return undefined;
+  if (drag?.model !== 'screen-axis-tumble' && drag?.model !== 'pole-held-tumble') {
+    throw new TypeError(`${String(paged?.namespace)}: paged-ellipsoid camera.drag.model must be screen-axis-tumble or pole-held-tumble; found ${JSON.stringify(drag)}.`);
+  }
+  return { model: drag.model };
+}
+
+function physicalCamera(camera: Input, projection: Input, surfaceArcPerCssPixelRadians: number | undefined, recipeDrag?: Input): Input {
   const hadPerspective = camera.projection?.model === 'css-perspective-shared-with-sky';
   return { ...camera,
     projection: hadPerspective ? camera.projection : { model: 'css-perspective-shared-with-sky', ...projection,
@@ -212,7 +225,7 @@ function physicalCamera(camera: Input, projection: Input, surfaceArcPerCssPixelR
       ...(surfaceArcPerCssPixelRadians === undefined ? {} : { surfaceArcPerCssPixelRadians }) },
     levelOfDetail: camera.levelOfDetail ?? { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20, billboardFullDiscPixels: 14, markerFadeStartDiscPixels: 8, markerFullDiscPixels: 4.5 },
     orbitLineFade: camera.orbitLineFade ?? { visibleBelowDiscHeightShare: .12, hiddenAboveDiscHeightShare: .3 },
-    drag: camera.drag ?? { model: 'screen-axis-tumble' } };
+    drag: recipeDrag ?? camera.drag ?? { model: 'screen-axis-tumble' } };
 }
 function matrixCss(m: Matrix3): string {
   return `matrix3d(${[m[0], m[3], m[6], 0, m[1], m[4], m[7], 0, m[2], m[5], m[8], 0, 0, 0, 0, 1].map(value => Math.abs(value) < 1e-15 ? 0 : value).join(',')})`;
