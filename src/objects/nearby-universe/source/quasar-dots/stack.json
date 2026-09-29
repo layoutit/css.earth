@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-catalogue-points-stack@1",
+  "id": "quasar-dots",
+  "meaning": "DESI's quasars, drawn whole while the camera is within their reach.",
+  "levels": [
+    {
+      "bank": "quasars",
+      "fullDetailUnits": 6600
+    }
+  ],
+  "basis": "Presentation choice: every dot is drawn within 6,600 Mpc of the Milky Way, the sample's reach; farther out a share that falls with distance."
+}

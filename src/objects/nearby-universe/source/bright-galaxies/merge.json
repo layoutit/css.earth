@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "bright-galaxies",
+  "meaning": "DESI's bright galaxies as dots: one in 3 of the tracked sample (one in 30 of the catalogue), in catalogue order.",
+  "banks": [
+    {
+      "bank": "desi-bright-galaxies",
+      "keepEvery": 3,
+      "basis": "Presentation choice: about 10,000 dots, the size of the Cosmicflows-4 field. A random share keeps the web's real contrast; the sample is volume-limited, so no density cap is needed to even it."
+    }
+  ]
+}

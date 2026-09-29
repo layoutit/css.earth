@@ -107,7 +107,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: applicationContext, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens,
-      backgroundCataloguePoints: [backgroundPointSet.resolve('prepared/dots.json')],
+      backgroundCataloguePoints: ['dots', 'bright-galaxy-dots', 'quasar-dots'].map(id => backgroundPointSet.resolve(`prepared/${id}.json`)),
+      // The cosmic microwave background sphere, where this checkout has baked it (the experimental cosmic-web branch).
+      imageMeshes: typeof CONTEXT_OBJECT_ASSET_URLS['../src/objects/nearby-universe/prepared/cmb.json'] === 'string'
+        ? [{ url: backgroundPointSet.resolve('prepared/cmb.json'), resolveResource: (path: string) => backgroundPointSet.resolve(`prepared/${path}`) }] : [],
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },

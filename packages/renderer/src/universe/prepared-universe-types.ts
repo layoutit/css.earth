@@ -16,6 +16,8 @@ export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; ne
 export interface PreparedUniverseOptions {
   /** Prepared catalogue point banks of the galaxies beyond the Local Group (background-points.ts). */
   backgroundCataloguePoints?: readonly string[];
+  /** Closed image meshes around the Sun seen from outside (the cosmic microwave background; image-mesh.ts). */
+  imageMeshes?: readonly { url: string; resolveResource(path: string): string }[];
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
   plannerSource?: WorldPlannerSource;

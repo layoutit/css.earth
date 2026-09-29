@@ -3,6 +3,30 @@
   "assets": [
     {
       "location": "prepared",
+      "filename": "bright-galaxies.json",
+      "bytes": 330691,
+      "sha256": "d1c03cbcd4deb5bb7e4a36e5551032caec99af9031e646b5e162385dbdc1dc29"
+    },
+    {
+      "location": "prepared",
+      "filename": "bright-galaxy-dots.json",
+      "bytes": 330539,
+      "sha256": "b01fbb2075354dfa9f52e5101fb06ebe52836ad4f8ccc35a1dcc8c0be0b155cb"
+    },
+    {
+      "location": "prepared",
+      "filename": "desi-bright-galaxies.json",
+      "bytes": 996733,
+      "sha256": "19f0c0cf5ff19695af9405890e32cfdcf151f3c91e28806a34686eca669cea41"
+    },
+    {
+      "location": "prepared",
+      "filename": "desi-quasars.json",
+      "bytes": 850889,
+      "sha256": "28e7d5af9694241ac59bcace4cf8a7a98104a37743bae0d565e4578878c21027"
+    },
+    {
+      "location": "prepared",
       "filename": "dots.json",
       "bytes": 213633,
       "sha256": "59c6917f5efc53704c22bae1644e9d8fd24071f4dd2efba376967ded7a36305a"
@@ -48,6 +72,18 @@
       "filename": "provenance.json",
       "bytes": 30648,
       "sha256": "1626551d1b21136198457e64685e7a2227643681f8cb6de987de90956af423dd"
+    },
+    {
+      "location": "prepared",
+      "filename": "quasar-dots.json",
+      "bytes": 283906,
+      "sha256": "9db5f059042f8cace3a464ba4a9f562a3fada7f2436f23bcd6dcc91859b62439"
+    },
+    {
+      "location": "prepared",
+      "filename": "quasars.json",
+      "bytes": 283949,
+      "sha256": "7c327c21126025d3c86fcd2495824113627babbd40d1291b8c3bd556580c6524"
     }
   ]
 }

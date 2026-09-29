@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "desi-quasars",
+  "table": {
+    "path": "qso-sample.csv.gz",
+    "origin": "https://data.desi.lbl.gov/public/dr1/survey/catalogs/dr1/LSS/iron/LSScats/v1.5/QSO_NGC_clustering.dat.fits and QSO_SGC_clustering.dat.fits",
+    "bytes": 495492,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "redshift-planck18"
+  },
+  "sample": "The tracked file keeps one row in 50 of the 1,223,391 quasars of the two clustering catalogues (793,219 NGC, then 430,172 SGC), in catalogue order, with TARGETID, RA, DEC and Z.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "Mpc",
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "desi-2025-dr1",
+  "meaning": "The quasars of DESI Data Release 1 (redshift 0.8 to 3.5), each at its comoving distance in the Planck 2018 cosmology: the farthest objects placed, 2.8 to 6.6 Gpc away across DESI's footprint.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "colorBySpectrumAtRedshift": {
+      "spectrum": {
+        "path": "qso_template.fits",
+        "bytes": 23040,
+        "wavelength": "WAVELENGTH",
+        "flux": "FLUX",
+        "wavelengthUnit": "angstrom"
+      },
+      "step": 0.1,
+      "basis": "The Large Bright Quasar Survey composite (Francis et al. 1991), stretched by 1 + z to each quasar's redshift in steps of 0.1: the colour its light arrives with. At z 0.8 and beyond, the visible range is 211 to 433 nm in the quasar's frame, inside the composite's 80 to 600 nm."
+    }
+  },
+  "cosmology": "planck-2018-cosmology"
+}

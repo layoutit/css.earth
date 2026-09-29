@@ -36,14 +36,15 @@ if (recipe.schema !== 'cssearth-catalogue-points-source@1' || recipe.id !== id) 
 /** A column is a 1-based whitespace or comma-separated field, or a 1-based inclusive byte range of a fixed-width table. */
 type Column = number | [number, number];
 /** Galactic coordinates come from columns, or from a `G<l><±b>` identifier in the name column (as in G305.20+00.01).
- * A distance is a column in pc or kpc, a trigonometric parallax in mas taken as 1/parallax, or a distance modulus
- * (10^(m - M)/5 + 1 pc). `distanceByFlag` reads
+ * A distance is a column in pc or kpc, a trigonometric parallax in mas taken as 1/parallax, a distance modulus
+ * (10^(m - M)/5 + 1 pc), or a redshift: the comoving distance in the Planck 2018 cosmology (Astropy's Planck18,
+ * Planck Collaboration 2020, A&A 641, A6), and for a tone the luminosity distance in the same cosmology. `distanceByFlag` reads
  * it from the column the authors' own flag names, as a near/far kinematic distance resolved by the catalogue;
  * `distanceFirstOf` takes the first filled column, as a measured distance before the catalogue's kinematic one. */
 const table = recipe.table as { path: string; bytes: number; format: 'whitespace' | 'fixed-width' | 'csv'; gzip?: boolean;
   columns: { name: Column; lDeg?: Column; bDeg?: Column; raDeg?: Column; decDeg?: Column; distance?: Column } & Record<string, Column>; galacticFromName?: boolean;
   distanceByFlag?: { flag: Column; columns: Record<string, Column> }; distanceFirstOf?: Column[];
-  distanceUnit: 'pc' | 'kpc' | 'parallax-mas' | 'distance-modulus'; missingDistance?: number;
+  distanceUnit: 'pc' | 'kpc' | 'parallax-mas' | 'distance-modulus' | 'redshift-planck18'; missingDistance?: number;
   /** Several rows per object (one per observation): keep the first row with a distance for each name. */
   onePerName?: boolean };
 if ([table.columns.distance, table.distanceByFlag, table.distanceFirstOf].filter(value => value !== undefined).length !== 1) {
@@ -73,15 +74,38 @@ type Spectrum = { path: string; bytes: number; wavelength: string; flux: string;
 const appearance = recipe.appearance as { colorCss: string; radiusPx: number; opacity: number;
   colorBy?: { column: Column; stops: [number, string][]; steps: number };
   colorByClass?: { column: Column; classes: { label: string; below?: number; spectrum: Spectrum }[]; missing: { label: string; colorCss: string; basis: string } };
-  toneBy?: { magnitudeColumn: Column; band: string; brightMagnitude: number; faintMagnitude: number; faintTone: number; steps: number; basis: string } };
+  toneBy?: { magnitudeColumn: Column; band: string; brightMagnitude: number; faintMagnitude: number; faintTone: number; steps: number; basis: string;
+    /** The column holds a flux in nanomaggies (m = 22.5 - 2.5 log10 f, the Legacy Surveys' zero point), not a magnitude. */
+    nanomaggies?: true };
+  /** Each row's colour from three flux columns, one per display channel, each times its scale, the brightest channel full:
+   * the colour an image made with those scales gives the object. */
+  colorByBands?: { red: { column: Column; scale: number }; green: { column: Column; scale: number }; blue: { column: Column; scale: number };
+    levels: number; basis: string };
+  /** Each row coloured by a template spectrum stretched to the row's redshift (a redshift-planck18 distance), rounded
+   * to `step`: the colour its light arrives with. */
+  colorBySpectrumAtRedshift?: { spectrum: Spectrum; step: number; basis: string } };
 if (!['whitespace', 'fixed-width', 'csv'].includes(table.format)) throw new TypeError(`${at('table.format')} must be whitespace, fixed-width or csv (with a header row).`);
-if (!['pc', 'kpc', 'parallax-mas', 'distance-modulus'].includes(table.distanceUnit)) throw new TypeError(`${at('table.distanceUnit')} must be pc, kpc, parallax-mas or distance-modulus.`);
+if (!['pc', 'kpc', 'parallax-mas', 'distance-modulus', 'redshift-planck18'].includes(table.distanceUnit)) {
+  throw new TypeError(`${at('table.distanceUnit')} must be pc, kpc, parallax-mas, distance-modulus or redshift-planck18.`);
+}
 if (frame.unit !== undefined && frame.unit !== 'kpc' && frame.unit !== 'Mpc') throw new TypeError(`${at('frame.unit')} must be kpc or Mpc.`);
 if (!['galactic', 'icrs'].includes(frame.input) || frame.output !== 'sun-icrf' || !Number.isFinite(frame.epochJdTt)) throw new TypeError(`${at('frame')} must convert galactic or icrs to sun-icrf at a finite epoch.`);
 if (icrsInput && kinematicUncertainty) throw new TypeError(`${at('kinematicUncertainty')} needs Galactic input: its rotation curve reads Galactic longitude.`);
 const hex = /^#[0-9a-f]{6}$/iu;
 if (!hex.test(appearance.colorCss) || !(appearance.radiusPx > 0) || !(appearance.opacity > 0 && appearance.opacity <= 1)) throw new TypeError(`${at('appearance')} needs a hex colour, a positive radius and an opacity in (0, 1].`);
-const colorBy = appearance.colorBy, colorByClass = appearance.colorByClass, toneBy = appearance.toneBy;
+const colorBy = appearance.colorBy, colorByClass = appearance.colorByClass, toneBy = appearance.toneBy, colorByBands = appearance.colorByBands,
+  colorBySpectrumAtRedshift = appearance.colorBySpectrumAtRedshift;
+if ([colorBy, colorByClass, colorByBands, colorBySpectrumAtRedshift].filter(Boolean).length > 1) {
+  throw new TypeError(`${at('appearance')} takes one of colorBy, colorByClass, colorByBands and colorBySpectrumAtRedshift.`);
+}
+if (colorBySpectrumAtRedshift && (table.distanceUnit !== 'redshift-planck18' || !colorBySpectrumAtRedshift.spectrum || !(colorBySpectrumAtRedshift.step > 0) ||
+    typeof colorBySpectrumAtRedshift.basis !== 'string')) {
+  throw new TypeError(`${at('appearance.colorBySpectrumAtRedshift')} needs a redshift-planck18 distance, a spectrum, a positive step and a basis.`);
+}
+if (colorByBands && (!(['red', 'green', 'blue'] as const).every(channel => colorByBands[channel] && colorByBands[channel].scale > 0) ||
+    !Number.isInteger(colorByBands.levels) || colorByBands.levels < 2 || colorByBands.levels > 16 || typeof colorByBands.basis !== 'string')) {
+  throw new TypeError(`${at('appearance.colorByBands')} needs a flux column and a positive scale for red, green and blue, 2 to 16 levels and a basis.`);
+}
 if (toneBy && (typeof toneBy.band !== 'string' || !(toneBy.faintMagnitude > toneBy.brightMagnitude) || !(toneBy.faintTone > 0 && toneBy.faintTone < 1) ||
     !Number.isInteger(toneBy.steps) || toneBy.steps < 2 || toneBy.steps > 16 || typeof toneBy.basis !== 'string' || !toneBy.basis)) {
   throw new TypeError(`${at('appearance.toneBy')} needs a magnitude column and its band, faint > bright magnitudes, a faint tone in (0, 1), 2 to 16 steps and a basis.`);
@@ -150,7 +174,7 @@ with opener(r['table'], 'rt', encoding='utf8') as handle:
     if r['onePerName'] and name in named: continue
     if not d == d or ('missing' in r and d == r['missing']): missing += 1; continue
     named.add(name)
-    if not d > 0 and r['unit'] != 'distance-modulus': raise ValueError('non-positive distance %r for %s' % (d, name))
+    if not d > 0 and r['unit'] not in ('distance-modulus', 'redshift-planck18'): raise ValueError('non-positive distance %r for %s' % (d, name))
     if r['unit'] == 'parallax-mas': d = 1 / d
     if r['unit'] == 'distance-modulus': d = 10 ** (d / 5 + 1)
     if r['fromName']:
@@ -164,25 +188,40 @@ with opener(r['table'], 'rt', encoding='utf8') as handle:
     magnitude = None
     if r['toneColumn'] is not None:
       mtext = field(line, r['toneColumn'])
-      parsecs = d if r['unit'] in ('pc', 'distance-modulus') else d * 1000
-      magnitude = float(mtext) - 5 * math.log10(parsecs / 10) if mtext else None
-    kept.append((name, l, b, d, color, kinematic_sigma(line, l, b, d) if r['weight'] else None, magnitude))
-scale = u.pc if r['unit'] in ('pc', 'distance-modulus') else u.kpc
+      if mtext and r['nanomaggies']: magnitude = 22.5 - 2.5 * math.log10(float(mtext)) if float(mtext) > 0 else None
+      elif mtext: magnitude = float(mtext)
+      if magnitude is not None and r['unit'] != 'redshift-planck18':
+        parsecs = d if r['unit'] in ('pc', 'distance-modulus') else d * 1000
+        magnitude -= 5 * math.log10(parsecs / 10)
+    bands = [max(0.0, float(field(line, c['column']) or 0) * c['scale']) for c in r['bands']] if r['bands'] else None
+    kept.append((name, l, b, d, color, kinematic_sigma(line, l, b, d) if r['weight'] else None, magnitude, bands))
+if r['unit'] == 'redshift-planck18':
+  # A redshift becomes the comoving distance for the position and the luminosity distance for a tone, both in Planck18.
+  from astropy.cosmology import Planck18
+  import numpy as np
+  zs = np.array([k[3] for k in kept])
+  comoving = Planck18.comoving_distance(zs).to(u.pc).value
+  luminosity = Planck18.luminosity_distance(zs).to(u.pc).value
+  redshifts = [float(z) for z in zs]
+  kept = [(k[0], k[1], k[2], float(dc), k[4], k[5], None if k[6] is None else k[6] - 5 * math.log10(dl / 10), k[7]) for k, dc, dl in zip(kept, comoving, luminosity)]
+else: redshifts = None
+scale = u.pc if r['unit'] in ('pc', 'distance-modulus', 'redshift-planck18') else u.kpc
 out = u.Mpc if r['outUnit'] == 'Mpc' else u.kpc
 # In ICRS input, the l and b slots hold right ascension and declination.
 if r['icrs']: xyz = SkyCoord(ra=[k[1] for k in kept] * u.deg, dec=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='icrs').cartesian.xyz.to(out).value.T
 else: xyz = SkyCoord(l=[k[1] for k in kept] * u.deg, b=[k[2] for k in kept] * u.deg, distance=[k[3] for k in kept] * scale, frame='galactic').icrs.cartesian.xyz.to(out).value.T
 json.dump({'rows': rows, 'selected': len(kept) + missing, 'missingDistance': missing, 'astropy': astropy.__version__,
-  'points': [[round(float(v), 4) for v in p] for p in xyz], 'colors': [k[4] for k in kept], 'magnitudes': [k[6] for k in kept], 'sigmas': [None if k[5] is None else round(min(k[5], 1e6), 4) for k in kept], 'maxDistanceKpc': max(k[3] for k in kept) * (.001 if r['unit'] in ('pc', 'distance-modulus') else 1)}, sys.stdout)`;
+  'points': [[round(float(v), 4) for v in p] for p in xyz], 'colors': [k[4] for k in kept], 'magnitudes': [k[6] for k in kept], 'bands': [k[7] for k in kept], 'redshifts': redshifts, 'sigmas': [None if k[5] is None else round(min(k[5], 1e6), 4) for k in kept], 'maxDistanceKpc': max(k[3] for k in kept) * (.001 if r['unit'] in ('pc', 'distance-modulus', 'redshift-planck18') else 1)}, sys.stdout)`;
 const { astroqueryToolchainSync } = await import('@cssearth/telescope/node');
 const toolchain = astroqueryToolchainSync();
 const run = spawnSync(toolchain.python, ['-c', python], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024,
   input: JSON.stringify({ table: resolve(sourceDirectory, table.path), gzip: table.gzip === true, columns: table.columns, unit: table.distanceUnit,
     fromName: table.galacticFromName === true, byFlag: table.distanceByFlag ?? null, icrs: icrsInput, csv: table.format === 'csv', weight: kinematicUncertainty ?? null, firstOf: table.distanceFirstOf ?? null, onePerName: table.onePerName === true,
-    filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
+    filters, colorColumn: colorBy?.column ?? colorByClass?.column ?? null, toneColumn: toneBy?.magnitudeColumn ?? null, nanomaggies: toneBy?.nanomaggies === true,
+    bands: colorByBands ? [colorByBands.red, colorByBands.green, colorByBands.blue] : null, outUnit: frame.unit ?? 'kpc', ...(table.missingDistance === undefined ? {} : { missing: table.missingDistance }) }) });
 if (run.status !== 0) throw new Error(`Catalogue point conversion failed for ${table.path}: ${run.stderr.slice(-2000)}`);
 const converted = JSON.parse(run.stdout) as { rows: number; selected: number; missingDistance: number; astropy: string; points: number[][]; colors: (number | null)[];
-  magnitudes: (number | null)[];
+  magnitudes: (number | null)[]; bands: (number[] | null)[]; redshifts: number[] | null;
   sigmas: (number | null)[]; maxDistanceKpc: number };
 
 // A colour column maps onto the stops' piecewise-linear sRGB ramp, quantised to a small palette the bank carries.
@@ -200,40 +239,67 @@ const paletteIndex = (value: number | null) => {
   const [low, high] = [colorBy.stops[0]![0], colorBy.stops.at(-1)![0]];
   return Math.round((Math.max(low, Math.min(high, value)) - low) / (high - low) * (colorBy.steps - 1));
 };
-// Class colours: each template spectrum, linearly interpolated to the observer's 1 nm grid from 380 to 780 nm, through
-// the CIE 1931 2° observer into linear sRGB, brightest channel 1. A colour outside the sRGB gamut is refused.
-const classColours = colorByClass ? await (async () => {
-  const cie = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
-  return Promise.all(colorByClass.classes.map(async ({ label, spectrum }) => {
-    const bytes = await readFile(resolve(sourceDirectory, spectrum.path));
-    if (bytes.length !== spectrum.bytes) throw new TypeError(`${at('appearance.colorByClass')}: ${spectrum.path} has ${bytes.length} bytes, not ${spectrum.bytes}.`);
-    const hdu = readFitsHdus(bytes).find(candidate => candidate.header.XTENSION === 'BINTABLE');
-    if (!hdu || spectrum.wavelengthUnit !== 'angstrom') throw new TypeError(`${at('appearance.colorByClass')}: ${spectrum.path} needs a binary table in angstroms.`);
-    const table = binaryTable(hdu), column = (name: string) => Array.from({ length: table.rows }, (_, row) => numbers(bytes, table, row, tableColumn(table, name))[0]!);
-    const wavelengths = column(spectrum.wavelength).map(value => value / 10), flux = column(spectrum.flux);
-    const last = wavelengths.at(-1)!;
-    if (!(wavelengths[0]! <= 380) || (last < 780) !== (spectrum.endsNm !== undefined) || (spectrum.endsNm && Math.abs(spectrum.endsNm.value - last) > 0.5)) {
-      throw new TypeError(`${at('appearance.colorByClass')}: ${spectrum.path} covers ${wavelengths[0]} to ${last} nm; a template ending before 780 nm must say so in endsNm, with its basis.`);
-    }
-    const power = (nm: number) => {
-      if (nm > last) return 0;
-      const upper = wavelengths.findIndex(value => value >= nm), lower = Math.max(0, upper - 1);
-      const t = wavelengths[upper] === wavelengths[lower] ? 0 : (nm - wavelengths[lower]!) / (wavelengths[upper]! - wavelengths[lower]!);
-      return flux[lower]! * (1 - t) + flux[upper]! * t;
-    };
-    const raw = spectrumLinearSrgb(Array.from({ length: 401 }, (_, i) => 380 + i), power, cie), peak = Math.max(...raw);
-    if (raw.some(value => value < 0)) throw new TypeError(`${at('appearance.colorByClass')}: the ${label} template falls outside the sRGB gamut.`);
-    return '#' + raw.map(value => Math.round(255 * linearToSrgb(value / peak)).toString(16).padStart(2, '0')).join('');
-  }));
-})() : null;
+// Template colours: a template spectrum, linearly interpolated to the observer's 1 nm grid from 380 to 780 nm, through
+// the CIE 1931 2° observer into linear sRGB, brightest channel 1. A colour outside the sRGB gamut is refused. With a
+// redshift the spectrum is first stretched by 1 + z: the colour its light arrives with.
+const cie = colorByClass || colorBySpectrumAtRedshift ? parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3) : null;
+const readSpectrum = async (spectrum: Spectrum, where: string) => {
+  const bytes = await readFile(resolve(sourceDirectory, spectrum.path));
+  if (bytes.length !== spectrum.bytes) throw new TypeError(`${at(where)}: ${spectrum.path} has ${bytes.length} bytes, not ${spectrum.bytes}.`);
+  const hdu = readFitsHdus(bytes).find(candidate => candidate.header.XTENSION === 'BINTABLE');
+  if (!hdu || spectrum.wavelengthUnit !== 'angstrom') throw new TypeError(`${at(where)}: ${spectrum.path} needs a binary table in angstroms.`);
+  const table = binaryTable(hdu), column = (name: string) => Array.from({ length: table.rows }, (_, row) => numbers(bytes, table, row, tableColumn(table, name))[0]!);
+  return { wavelengths: column(spectrum.wavelength).map(value => value / 10), flux: column(spectrum.flux) };
+};
+const templateColour = ({ wavelengths, flux }: { wavelengths: number[]; flux: number[] }, spectrum: Spectrum, label: string, where: string, redshift = 0) => {
+  const stretch = 1 + redshift, first = wavelengths[0]! * stretch, last = wavelengths.at(-1)! * stretch;
+  if (!(first <= 380) || (last < 780) !== (spectrum.endsNm !== undefined) || (spectrum.endsNm && Math.abs(spectrum.endsNm.value - last) > 0.5)) {
+    throw new TypeError(`${at(where)}: ${spectrum.path} covers ${first} to ${last} nm${redshift ? ` at z = ${redshift}` : ''}; a template ending before 780 nm must say so in endsNm, with its basis.`);
+  }
+  const power = (nm: number) => {
+    if (nm > last) return 0;
+    const rest = nm / stretch, upper = wavelengths.findIndex(value => value >= rest), lower = Math.max(0, upper - 1);
+    const t = wavelengths[upper] === wavelengths[lower] ? 0 : (rest - wavelengths[lower]!) / (wavelengths[upper]! - wavelengths[lower]!);
+    return flux[lower]! * (1 - t) + flux[upper]! * t;
+  };
+  const raw = spectrumLinearSrgb(Array.from({ length: 401 }, (_, i) => 380 + i), power, cie!), peak = Math.max(...raw);
+  if (raw.some(value => value < 0)) throw new TypeError(`${at(where)}: the ${label} template falls outside the sRGB gamut.`);
+  return '#' + raw.map(value => Math.round(255 * linearToSrgb(value / peak)).toString(16).padStart(2, '0')).join('');
+};
+const classColours = colorByClass ? await Promise.all(colorByClass.classes.map(async ({ label, spectrum }) =>
+  templateColour(await readSpectrum(spectrum, 'appearance.colorByClass'), spectrum, label, 'appearance.colorByClass'))) : null;
+// Redshifted template colours, one per redshift step: each row's redshift rounded to the step.
+const redshiftSpectrum = colorBySpectrumAtRedshift ? await readSpectrum(colorBySpectrumAtRedshift.spectrum, 'appearance.colorBySpectrumAtRedshift') : null;
+const redshiftPalette: string[] = [], redshiftIndex = new Map<number, number>();
+const redshiftColour = (index: number) => {
+  const step = colorBySpectrumAtRedshift!.step, z = Math.round(converted.redshifts![index]! / step) * step, key = Number(z.toFixed(6));
+  if (!redshiftIndex.has(key)) {
+    redshiftIndex.set(key, redshiftPalette.length);
+    redshiftPalette.push(templateColour(redshiftSpectrum!, colorBySpectrumAtRedshift!.spectrum, `z = ${key}`, 'appearance.colorBySpectrumAtRedshift', key));
+  }
+  return redshiftIndex.get(key)!;
+};
 const classIndex = (value: number | null) => value === null || !Number.isFinite(value) ? colorByClass!.classes.length
   : Math.max(0, colorByClass!.classes.findIndex(entry => entry.below === undefined || value < entry.below));
 const reachKpc = Math.ceil(converted.maxDistanceKpc);
 const outputMpc = frame.unit === 'Mpc', reach = outputMpc ? Math.ceil(converted.maxDistanceKpc / 1000) : reachKpc;
 const classPalette = classColours ? [...classColours, colorByClass!.missing.colorCss] : null;
+// Band colours: the three scaled fluxes, the brightest channel full, each channel in `levels` steps. A row with no
+// positive flux in any band takes the bank's colour.
+const bandPalette: string[] = [], bandIndex = new Map<string, number>();
+const bandColour = (index: number) => {
+  const channels = converted.bands[index], peak = channels ? Math.max(...channels) : 0;
+  const levels = colorByBands!.levels;
+  const colour = !channels || !(peak > 0) ? appearance.colorCss
+    : '#' + channels.map(value => Math.round(Math.round(value / peak * (levels - 1)) / (levels - 1) * 255).toString(16).padStart(2, '0')).join('');
+  if (!bandIndex.has(colour)) { bandIndex.set(colour, bandPalette.length); bandPalette.push(colour); }
+  return bandIndex.get(colour)!;
+};
+const bandIndices = colorByBands ? converted.points.map((_, index) => bandColour(index)) : null;
 // Each point's colour before its tone, as an index into the base palette (one entry for a single-colour bank).
-const basePalette = classPalette ?? palette ?? [appearance.colorCss];
-const baseIndex = (index: number) => colorByClass ? classIndex(converted.colors[index] ?? null) : palette ? paletteIndex(converted.colors[index] ?? null) : 0;
+const redshiftIndices = colorBySpectrumAtRedshift ? converted.points.map((_, index) => redshiftColour(index)) : null;
+const basePalette = colorByBands ? bandPalette : colorBySpectrumAtRedshift ? redshiftPalette : classPalette ?? palette ?? [appearance.colorCss];
+const baseIndex = (index: number) => bandIndices ? bandIndices[index]! : redshiftIndices ? redshiftIndices[index]! : colorByClass ? classIndex(converted.colors[index] ?? null) : palette ? paletteIndex(converted.colors[index] ?? null) : 0;
 const toneStep = (magnitude: number | null) => {
   const tone = toneBy!;
   if (magnitude === null || !Number.isFinite(magnitude)) return tone.steps - 1;
@@ -255,7 +321,10 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
   frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
     metersPerUnit: outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
   appearance: { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity,
-    ...(toneBy ? { palette: tonedPalette, paletteTone } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
+    ...(toneBy ? { palette: tonedPalette, paletteTone } : colorByBands ? { palette: bandPalette } : colorBySpectrumAtRedshift ? { palette: redshiftPalette } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
+  ...(colorBySpectrumAtRedshift ? { spectrumColour: { spectrum: colorBySpectrumAtRedshift.spectrum.path, step: colorBySpectrumAtRedshift.step, basis: colorBySpectrumAtRedshift.basis,
+    colours: Object.fromEntries([...redshiftIndex].map(([z, index]) => [z, redshiftPalette[index]])) } } : {}),
+  ...(colorByBands ? { bandColour: { red: colorByBands.red, green: colorByBands.green, blue: colorByBands.blue, levels: colorByBands.levels, basis: colorByBands.basis } } : {}),
   ...(toneBy ? { tone: { band: toneBy.band, brightMagnitude: toneBy.brightMagnitude, faintMagnitude: toneBy.faintMagnitude, faintTone: toneBy.faintTone, basis: toneBy.basis,
     absoluteMagnitudePercentiles: Object.fromEntries([5, 25, 50, 75, 95].map(q => [q, Number(magnitudes[Math.floor(magnitudes.length * q / 100)]?.toFixed(2))])),
     withoutMagnitude: converted.magnitudes.length - magnitudes.length } } : {}),
@@ -267,7 +336,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
   conversion: `Astropy ${converted.astropy} SkyCoord: ${icrsInput ? 'right ascension, declination' : 'Galactic longitude, latitude'} and distance to heliocentric ICRS Cartesian, ${outputMpc ? 'Mpc, rounded to 0.1 kpc' : 'kpc, rounded to 0.1 pc'}.`,
   ...(kinematicUncertainty ? { kinematicUncertainty: { basis: kinematicUncertainty.basis, rotation: kinematicUncertainty.rotation },
     kinematicSigmaKpc: converted.sigmas } : {}),
-  points: toneBy || colorByClass || palette ? converted.points.map((point, index) => [...point, pointIndex[index]!]) : converted.points };
+  points: toneBy || colorByClass || colorByBands || colorBySpectrumAtRedshift || palette ? converted.points.map((point, index) => [...point, pointIndex[index]!]) : converted.points };
 const outputPath = resolve(objectDirectory, 'prepared', `${id}.json`);
 await writeFile(outputPath, JSON.stringify(bank) + '\n');
 const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
