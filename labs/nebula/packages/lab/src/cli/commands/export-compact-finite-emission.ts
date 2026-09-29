@@ -19,7 +19,6 @@ import { readPreparedReconstruction } from '../../server/services/density-recons
 import { finiteModelStarsPath } from '../../server/services/finite-lens-bundles.ts';
 import { parseVolumeLensPromotion } from '../../server/workflows/density/volume-lens-promotion.ts';
 import { validateChannelGain, validateLensToneCurve } from '@cssearth/bake/volume';
-import { hash as volumeReaderDigest } from '@cssearth/bake/volume/node';
 
 const text = (value: unknown, at: string): string => { assert.ok(typeof value === 'string' && value, `Expected text: ${at}`); return value; };
 const record = (value: unknown, at: string): Record<string, unknown> => {
@@ -139,9 +138,7 @@ for (const { lens, result, finite, channelGain, toneCurve } of lensInputs) {
     await sharp(mask, { raw: { width: meta.width, height: meta.height, channels: 4 } }).png({ compressionLevel: 9, effort: 10 }).toBuffer());
   lenses.push({ imageId: lens.imageId, sourceResultId: finite.sourceResultId, resultId: lens.resultId,
     tangentBoundsKpc: record(baseline.geometry, 'baseline geometry').tangentBoundsKpc,
-    // The finite-emission reader (packages/bake/src/volume/node/compact-inputs/finite-emission.ts) still requires a digest
-    // of the registered source; it is computed by that reader's own helper.
-    sourceDigest: volumeReaderDigest(await readFile(resolve(root, text(record(work.source, 'baseline source').path, 'baseline source path')))),
+    sourcePath: text(record(work.source, 'baseline source').path, 'baseline source path'),
     registered, coverage, densityFilter: lens.density, enabledIds: lens.enabledIds,
     provenance: await pinOf(`${objectDirectory}/source/lenses/${lens.imageId}/provenance.json`),
     presentation: { label: lens.label, description: lens.description, sourceUrl: result.subject.sourcePageUrl },

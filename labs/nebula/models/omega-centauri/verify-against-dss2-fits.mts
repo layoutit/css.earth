@@ -3,19 +3,17 @@
  * population of stars on both sides. Reuses the shared algorithm only; no new matching logic. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { decodeFits } from '@cssearth/fits';
 import { detectStars, matchStars, verifyRegistration, publisherTransform, type SkyRaster, type SkyFrame } from '../../packages/reconstruction/src/registration/stellar.ts';
 
 const root = process.cwd();
-const sha256 = (b: Buffer) => createHash('sha256').update(b).digest('hex');
-const load = async (p: string, expected: string) => { const b = await readFile(resolve(root, p)); if (sha256(b) !== expected) throw new Error(`Pin differs: ${p}`); return b; };
+const load = async (p: string) => readFile(resolve(root, p));
 
 // DSS2 red-band FITS, exact-by-construction WCS: fov=0.91667deg=3300", width=3300 -> 1.0"/px.
 const dss2Path = '.local/nebula-lab/source-originals/omega-centauri-dss2.fits';
 const dss2Bytes = await readFile(resolve(root, dss2Path));
-console.log('DSS2 sha256', sha256(dss2Bytes), 'bytes', dss2Bytes.length);
+console.log('DSS2 bytes', dss2Bytes.length);
 const fits = decodeFits(dss2Bytes);
 console.log('DSS2 FITS', fits.width, fits.height);
 let lo = Infinity, hi = -Infinity;
@@ -34,9 +32,9 @@ const dss2Stars = await detectStars(dss2Png, [fits.width, fits.height], fits.wid
 console.log('DSS2 stars', dss2Stars.length);
 
 const candidates = [
-  { id: 'eso1119b', path: '.local/nebula-lab/source-originals/eso1119b.tif', sha256: '8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6',
+  { id: 'eso1119b', path: '.local/nebula-lab/source-originals/eso1119b.tif',
     width: 14540, height: 14540, fieldArcminutes: [50.88, 50.88] as [number, number], centerIcrsDegrees: [201.69695833333333, -47.47953888888889] as [number, number], northRightDegrees: 0.00051173061 },
-  { id: 'eso0844a', path: '.local/nebula-lab/source-originals/eso0844a.tif', sha256: '384d1cfc31e6a2b78e5c7018f9eaecfe49a1014630bcb1bd8dceb563d69e6429',
+  { id: 'eso0844a', path: '.local/nebula-lab/source-originals/eso0844a.tif',
     width: 8040, height: 7560, fieldArcminutes: [31.88, 29.99] as [number, number], centerIcrsDegrees: [201.69716666666667, -47.479683333333334] as [number, number], northRightDegrees: -0.00724264734 },
 ];
 
@@ -48,7 +46,7 @@ const FRAME_WIDTHS = [3600, 1800, 900, 450, 225];
 const report: { schema: string; pass: boolean; sources: unknown[] } = { schema: 'cssearth-image-alignment-report@1', pass: true, sources: [] };
 for (const c of candidates) {
   console.log(`--- ${c.id} downsampled to ~1"/px ---`);
-  const bytes = await load(c.path, c.sha256);
+  const bytes = await load(c.path);
   const targetScale = 1; // arcsec/px, matching DSS2 native
   const newWidth = Math.round(c.width * (c.fieldArcminutes[0] * 60 / c.width) / targetScale);
   const resized = await sharp(bytes).resize({ width: newWidth }).removeAlpha().toColourspace('srgb').png().toBuffer({ resolveWithObject: true });
@@ -79,7 +77,7 @@ for (const c of candidates) {
   }
   if (!outcome) { outcome = { pass: false, matrix: null, evidence: { status: 'publisher', interpretation: 'No frame width in the swept range reached 45 matched pairs.' }, frameWidth: -1 }; console.log(c.id, 'IMPASSE: never reached 45 matched pairs'); }
   if (!outcome.pass) report.pass = false;
-  report.sources.push({ id: c.id, pass: outcome.pass, sourcePath: c.path, sourceSha256: c.sha256, downsampledTo: [actualW, actualH], frameWidth: outcome.frameWidth,
+  report.sources.push({ id: c.id, pass: outcome.pass, sourcePath: c.path, downsampledTo: [actualW, actualH], frameWidth: outcome.frameWidth,
     geometry: { kind: 'matched-star-homography-vs-dss2-fits', matrix: outcome.matrix }, evidence: outcome.evidence });
 }
 await writeFile(resolve(root, 'labs/nebula/models/omega-centauri/dss2-fits-registration-report.json'), JSON.stringify(report, null, 2) + '\n');

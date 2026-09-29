@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, rm, writeFile, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createHash } from 'node:crypto';
 import { conditionDepthComponents, depthSurfaceAt, readDepthRecipe, verifyDepthEvidence, loadDepthModel, type DepthRecipe, type DepthSurface } from './depth-model.ts';
 import { createEmissionField, projectEmissionComponent, type EmissionComponent, type EmissionFieldModel, type EmissionFitInput } from '@cssearth/bake/volume';
 import { fitEmissionField } from './fit.ts';

@@ -103,6 +103,8 @@ async function main(settingsPath:string){
  if(envelope)console.log(JSON.stringify({phase:'envelope',...envelope.metrics}));
  const detailTarget=envelope?target.map((v,p)=>coverage[p]?Math.max(0,v-envelope.projection[p]!):0):target;
  const fitted=fitSimulationGuidedEmission({target:detailTarget,coverage,width,height,bounds},s.controls,prior,s.depth,{onProgress:console.log});
+ // The fitted field carries the model's name, so every lens material names the model it colours.
+ fitted.field.identity=resultId;
  const chroma=envelopeSettings?envelopeChromaSettings(envelopeSettings):null;
  const envelopeAt=envelope?createEnvelopeSampler(envelope.grid,prior):null,envelopeColor=envelope&&envelopeSettings&&chroma?envelopeChromaticity(envelopeSource?.rgb??rgb,envelopeSource?.coverage??coverage,width,height,bounds,envelopeSettings.scalePixels,chroma.halfSaturationQuantile,chroma.skyQuantile,chroma.coverageTaper):null;
  const totalProjection=envelope?fitted.projection.map((v,p)=>v+envelope.projection[p]!):fitted.projection,totalResidual=totalProjection.map((v,p)=>coverage[p]?target[p]!-v:0);

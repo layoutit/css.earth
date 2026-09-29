@@ -165,7 +165,7 @@ export async function loadFiniteModelStarContext(root: string, modelResultId: st
   if (!record(request.cloud.provenance)) throw new TypeError('Missing simulation pin.');
   return { modelResultId, frame, mapping, supportBounds: physical, sampleEmission, densityAt, inFootprint, sampleSignal, partIds,
     provenance: { modelResultId, directory, provenance: provenanceFile.pin, emissionField: fieldFile.pin, envelope: envelopePin,
-      depthDensity: densityPin, depthDensityIdentity: prior.identity,
+      depthDensity: densityPin,
       depthDensitySource: envelopeCloud ? 'The cloud pinned by this model\'s own envelope record.' : 'The model request\'s pinned cloud; this envelope record pins none of its own.', footprint: { image: originalFile.pin, width, height, alphaThreshold: 250, exclusions },
       cutoffSignal: signalFile.pin, cloudParts: partsFile.pin, observerDistanceKpc: distance, tangentBoundsKpc: tangentBounds, physicalBoundsKpc: physical } };
 }

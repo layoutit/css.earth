@@ -96,8 +96,8 @@ async function prepareComposite(root: string, recipePath: string, previewOnly: b
   if (supplied?.sourceInputs.some(pin => !inputs.some(input => input.path === pin.path)))
     throw new Error('Composite source inputs changed during preparation.');
   const baseBytes = Buffer.from(JSON.stringify(base));
-  // Named by the composite recipe; reused only while the saved request (recipe, base cloud, inputs, fit) is unchanged.
-  const id = recipe.id, identity = { recipePath, recipe, base: supplied ? { result: base, neutralSlices } : recipe.baseResult, inputs, fit: composite.metadata };
+  // Named by the compiler and composite recipes; reused only while the saved request (recipe, base cloud, inputs, fit) is unchanged.
+  const id = `${compilerRecipe.id}-${recipe.id}`, identity = { recipePath, recipe, base: supplied ? { result: base, neutralSlices } : recipe.baseResult, inputs, fit: composite.metadata };
   const directory = `.local/nebula-lab/compiler/${id}`;
   if (supplied) {
     const saved = await readFile(resolve(root, directory, 'request.json'), 'utf8').catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });

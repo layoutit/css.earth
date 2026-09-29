@@ -1,4 +1,4 @@
-/** Resolve historical recipe paths without rewriting their hash-pinned scientific bytes. */
+/** Resolve historical recipe paths without rewriting their scientific bytes. */
 const relocated: [string, string][] = [
   ['lmc-', 'lmc/'], ['smc-', 'smc/'],
 ];
