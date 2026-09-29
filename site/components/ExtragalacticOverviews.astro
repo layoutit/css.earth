@@ -5,6 +5,8 @@ import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import InformationTabs from './InformationTabs.astro';
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import { requireObject } from '../objects.mts';
+import DatasetLenses from './DatasetLenses.astro';
+import { pageDatasetLenses } from '../page-datasets-content.mts';
 import { appNavigationDestination } from '../navigation/navigation-destination.mts';
 import type { OverviewScope } from '../overview-context.mts';
 import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog } from '@cssearth/catalog';
@@ -34,13 +36,18 @@ const groups = [
 ].map(group => {
   const overview = requireObject(group.id);
   if (overview.kind !== 'overview') throw new TypeError(`${group.id} is not an overview.`);
-  return { ...group, id: overview.id as OverviewScope, name: overview.name, introduction: overview.description };
+  return { ...group, id: overview.id as OverviewScope, name: overview.name, introduction: overview.description, datasets: pageDatasetLenses(overview.id) };
 });
 ---
 {groups.map(group => <ObjectCard class="object-overview-card" data-large-scale-overview={group.id} data-large-scale-name={group.name} hidden>
   <ObjectCardHeader heading={false} title={{ label: group.name }} introduction={group.introduction}>
     <ObjectBreadcrumbs scope={group.id} />
   </ObjectCardHeader>
+  {group.datasets && <div class="object-dataset-content" data-page-datasets={group.id} data-default-lens={group.datasets.defaultLens}
+    data-lens-views={JSON.stringify(group.datasets.views)}>
+    <DatasetLenses objectId={`page-${group.id}`} thumbnailObjectId={group.id} page={group.id} route={`/${group.id}/`}
+      lenses={{ controls: group.datasets.controls, defaultLens: group.datasets.defaultLens }} focus />
+  </div>}
   {group.objects.length > 0 && <InformationTabs idPrefix={group.id} group={group.id} label={`${group.name} information`} hidden
     tabs={[{ id: 'objects', label: group.section, count: group.objects.length }]} />}
   <div class="object-results-scroll object-card-tabpanel" id={`${group.id}-objects-content`} hidden

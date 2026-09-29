@@ -26,7 +26,7 @@
   "radius": {
     "redshift": 1089.8,
     "cosmology": "planck18",
-    "basis": "z* = 1089.80 \u00b1 0.21, the redshift of last scattering in Planck 2018 VI, Table 2, TT,TE,EE+lowE+lensing+BAO (the parameters Astropy's Planck18 carries); its comoving distance is the sphere's radius."
+    "basis": "z* = 1089.80 ± 0.21, the redshift of last scattering in Planck 2018 VI, Table 2, TT,TE,EE+lowE+lensing+BAO (the parameters Astropy's Planck18 carries); its comoving distance is the sphere's radius."
   },
   "mesh": {
     "latitudeSegments": 16,
@@ -40,5 +40,46 @@
     "law": "linear",
     "coefficient": 0.6,
     "basis": "Presentation choice: the last-scattering surface has no limb that anyone could see from outside it, so this is not a measurement. It is the linear limb law, I(mu)/I(1) = 1 - u(1 - mu), drawn as the bodies' limb plates are, with u = 0.6 picked from renders so the ball reads as round."
+  },
+  "cutaway": {
+    "hemisphere": "north",
+    "interiorOpacity": 0.55,
+    "exteriorOpacity": 0.85,
+    "basis": "Presentation choice: the sphere opens its ICRS northern hemisphere so the galaxies and quasars inside it show. While it is open, the inside of the southern half is drawn at 55% opacity so it reads as the inside wall, and the outer shell at 85% so the inside stands out. Nothing is cut in the data."
+  },
+  "datasets": {
+    "default": "cutaway",
+    "lenses": [
+      {
+        "id": "cutaway",
+        "view": "cutaway",
+        "label": "Cut open",
+        "detail": "Northern half open",
+        "title": "The cosmic microwave background, cut open",
+        "summary": "Planck's map of the oldest light, with its northern half open so the galaxies and quasars inside show.",
+        "description": "Planck's 2018 SMICA map of the cosmic microwave background, drawn on the sphere the light left from, 13.9 Gpc away. The ICRS northern half is left out of the drawing so the inside shows: the far wall's inside at 55% opacity, the rest of the shell at 85%. The opening is a way of looking, not a feature of the sky."
+      },
+      {
+        "id": "full",
+        "view": "full",
+        "label": "Full sphere",
+        "detail": "The whole shell",
+        "title": "The whole cosmic microwave background",
+        "summary": "Planck's map of the oldest light on the whole sphere it left from: the edge of the observable universe, seen from outside.",
+        "description": "Planck's 2018 SMICA map of the cosmic microwave background, drawn on the sphere the light left from, 13.9 Gpc away, as a closed shell. Seen from outside it hides everything inside it."
+      }
+    ],
+    "legend": {
+      "title": "CMB temperature",
+      "meta": "microkelvin around the mean",
+      "stops": 9
+    },
+    "preview": {
+      "sizePx": 256,
+      "elevationDeg": 30,
+      "azimuthDeg": 0,
+      "basis": "Presentation choice: each dataset's picture is the sphere seen from far away along a line 30 degrees above the ICRS equator at right ascension 0h, north up, drawn each pixel the mean of 3 by 3 rays, from the same map, limb law and cutaway opacities the page uses, over black.",
+      "samples": 3
+    }
   }
 }

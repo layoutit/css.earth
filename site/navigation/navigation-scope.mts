@@ -32,11 +32,14 @@ export function preparedFocusFromUrl(url: string | URL, sceneId: string) {
 }
 
 /** The page of drawn subject `id` (a catalogue focus or an overview), or of scene `sceneId` when `id` is null. The front
- * page (`/`) already names its scene and keeps its path. A drawn subject's page carries none of the scene's own
- * selections (its `dataset`, `feature`): opened cold it mounts the world's host, which would read them as its own. */
+ * page (`/`) already names its scene and keeps its path. A page's `dataset` and `feature` are its own: moving to another
+ * page drops them, so a drawn subject's page never carries the scene's (opened cold it mounts the world's host, which
+ * would read them as its own), and staying on a page keeps its own (an overview's dataset, page-datasets.mts). */
 function withPage(url: URL, sceneId: string, id: string | null): URL {
-  if (id !== null || objectIdAtPath(url.pathname) !== sceneId) url.pathname = `/${id ?? sceneId}/`;
-  if (id !== null) { url.searchParams.delete('dataset'); url.searchParams.delete('feature'); }
+  const target = id ?? sceneId;
+  if (objectIdAtPath(url.pathname) === target) return url;
+  url.pathname = `/${target}/`;
+  url.searchParams.delete('dataset'); url.searchParams.delete('feature');
   return url;
 }
 
@@ -76,7 +79,8 @@ export function withSatelliteSystemView(url: URL, selected: boolean): URL {
  * scene's own dataset never crosses into it or back. */
 export function withPreparedFocus(url: URL, sceneId: string, id: string | null, lens: string | null): URL {
   const focused = preparedFocusFromUrl(url, sceneId) !== null;
-  withPage(url, sceneId, id);
+  // Clearing a focus leaves an overview's page to withOverviewScope, which keeps it or returns to the scene.
+  if (id !== null || !isOverviewPage(objectIdAtPath(url.pathname))) withPage(url, sceneId, id);
   if (id !== null && lens) url.searchParams.set('dataset', lens);
   else if (id !== null || focused) url.searchParams.delete('dataset');
   if (id) { url.searchParams.delete('overview'); url.searchParams.delete('view'); }

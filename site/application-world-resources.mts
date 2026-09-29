@@ -14,6 +14,18 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
+import { presentPageDatasets, readPageDatasets, selectedPageLens } from './page-datasets.mts';
+
+/** The view the page `page` shows its image mesh in (page-datasets.mts): its selected lens's, read from the address once per
+ * change of it, when the cards follow it too. A page without datasets shows its mesh cut open. */
+let datasetHref = '', cards: ReturnType<typeof readPageDatasets> | null = null;
+// The cards are retained shell markup: read once.
+const pageDatasets = () => cards ??= readPageDatasets(document);
+function meshView(page: string): string {
+  if (location.href !== datasetHref) { datasetHref = location.href; presentPageDatasets(document, datasetHref); }
+  const datasets = pageDatasets().find(candidate => candidate.page === page);
+  return datasets ? datasets.views.get(selectedPageLens(datasetHref, datasets))! : 'cutaway';
+}
 import { withOverviewScope } from './navigation/navigation-scope.mts';
 
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
@@ -112,9 +124,13 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       // Universe pages never download them.
       backgroundCataloguePoints: [{ url: backgroundPointSet.resolve('prepared/dots.json') },
         ...['bright-galaxy-dots', 'quasar-dots'].map(id => ({ url: backgroundPointSet.resolve(`prepared/${id}.json`), fromDistanceM: 300e6 * PARSEC_M }))],
-      // The cosmic microwave background sphere, where this checkout has baked it (the experimental cosmic-web branch).
-      imageMeshes: typeof CONTEXT_OBJECT_ASSET_URLS['../src/objects/nearby-universe/prepared/cmb.json'] === 'string'
-        ? [{ url: backgroundPointSet.resolve('prepared/cmb.json'), resolveResource: (path: string) => backgroundPointSet.resolve(`prepared/${path}`) }] : [],
+      // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
+      // open unless its page's dataset shows it whole.
+      imageMeshes: parsedDescriptors.filter(descriptor => descriptor.prepared?.format === 'cssearth-image-mesh@1').map(descriptor => {
+        const set = resourceSet(descriptor.id);
+        return { url: set.resolve(descriptor.prepared!.url), resolveResource: (path: string) => set.resolve(`prepared/${path}`),
+          cutaway: () => meshView(descriptor.id) === 'cutaway' };
+      }),
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },
