@@ -5,6 +5,7 @@ import type { ObjectEntry } from './objects.mts';
 import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
 import { SYSTEM_FRAMING_RADII, systemFramingRadii } from './system-framing.mts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
+import { systemFadeDistances } from '@cssearth/renderer/universe/world-context/context-scale.ts';
 
 /** A star and every prepared body whose orbit chain leads back to it. The Sun's is the Solar System. */
 export interface PlanetarySystem {
@@ -12,12 +13,18 @@ export interface PlanetarySystem {
   readonly memberIds: readonly string[];
   /** The prepared framing radius: the farthest framed orbit plus its body. */
   readonly radiusM: number;
-  /** Leaving this far from the star opens the system overview: the Sun's 100 AU, scaled by the system's prepared size. */
+  /** Leaving this far from the star opens the system overview: the Sun's 100 AU, scaled by the system's prepared size, and
+   * no farther than a quarter of the distance where its orbits are gone, where the overview gives way (overview-context.mts).
+   * It then lasts at least two doublings of distance, more than one mouse-wheel step, which multiplies it by about 2.7
+   * (measured headless at light-year scales, 2026-09-29), so zooming out always shows it. Only Sgr A* is held by this: its
+   * S-star orbits are gone at 3.2 ly, so its overview opens at 0.8 ly, not at the scaled 3.6 ly. */
   readonly exitDistanceM: number;
 }
 /** The Solar System's star: the prepared world context's focus. */
 export const SOLAR_SYSTEM_ID = context.focus.id;
-type Plan = Pick<PreparedWorldContext, 'focus' | 'bodies' | 'orbitCenters'>;
+type Plan = Pick<PreparedWorldContext, 'focus' | 'bodies' | 'orbitCenters' | 'system'>;
+/** How many times its opening distance a system overview lasts before its orbits are gone: two doublings. */
+const SYSTEM_OVERVIEW_SPAN = 4;
 
 export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'name' | 'systemName' | 'classification' | 'route'> & { readonly worldFrame?: { readonly originM: PositionM } | null })[],
   plan: Plan = context, radii: ReadonlyMap<string, number> = plan === context ? SYSTEM_FRAMING_RADII : systemFramingRadii(plan)): readonly PlanetarySystem[] {
@@ -42,8 +49,10 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
       const member = registry.get(id);
       if (member && member.systemName !== star.systemName) throw new TypeError(`${id} orbits ${star.name} but names its system ${member.systemName}, not ${star.systemName}.`);
     }
+    const fade = systemFadeDistances(plan.system, 'orbitsWithinM' in host ? host.orbitsWithinM : undefined);
     return Object.freeze({ id: host.id, name: star.systemName, route: star.route, originM: star.worldFrame?.originM ?? host.positionM,
-      memberIds: Object.freeze(memberIds), radiusM, exitDistanceM: policy.exitSunDistanceM * radiusM / solarRadiusM });
+      memberIds: Object.freeze(memberIds), radiusM,
+      exitDistanceM: Math.min(policy.exitSunDistanceM * radiusM / solarRadiusM, fade.hiddenDistanceM / SYSTEM_OVERVIEW_SPAN) });
   }));
 }
 

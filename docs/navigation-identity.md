@@ -60,12 +60,18 @@ Each system has the same overview, `?overview=system` on its star's route:
 
 - Zooming out of a member past the system's exit distance opens that system's
   overview, never another's. The Sun's exit is 100 AU; other systems scale it
-  by their prepared framing radius, so WASP-43's is 0.05 AU.
+  by their prepared framing radius, so WASP-43's is 0.05 AU. An exit is never
+  farther than a quarter of where the system's orbits are gone, so its overview
+  lasts longer than one mouse-wheel step (about ×2.7); only Sgr A*'s, at 0.8 ly,
+  is held by this.
 - Approaching the star opens its card once its disc is 48 px wide and the zoom
   has passed halfway from the system framing to the close-up.
 - Orbit lines, markers and labels fade with the camera's distance from their
   own star, and the overview gives way to the Milky Way once they have faded,
   by that same distance.
+- Every larger scope is measured from that star too, so zooming out gives the
+  same sequence whichever way the camera faces. A star past the Milky Way's own
+  boundary, in the Magellanic Clouds, goes from its system to the Local Group.
 - Breadcrumbs, the overview card, its results and the Milky Way's Systems list
   name the object's own system. The Milky Way, Local Group and Nearby Universe
   are measured from the Sun and are pages of its scene, `/milky-way/` and so on.
