@@ -33,7 +33,7 @@ for body in ('pluto', 'charon'):
                    'direction': [float(v) / radius for v in toward], 'longitudeDeg': float(spice.dpr() * longitude), 'latitudeDeg': float(spice.dpr() * latitude)}
 kernels = json.loads((root / 'src/objects/pluto/source/preparation/approach.json').read_text())['kernels']
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import write
 write('spice/new-horizons-approach.json', 'spiceypy', 'tests/oracles/spice/new-horizons-approach.py',
       {'spiceypy': spice.__version__, 'cspice': spice.tkvrsn('TOOLKIT')}, [bank / kernel for kernel in kernels], cases)

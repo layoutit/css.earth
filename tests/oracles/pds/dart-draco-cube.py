@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 import numpy as np
 import pds4_tools
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import ROOT as root, write
 source = root / 'src/objects/dimorphos/source'
 label = source / 'observations/dart_0401930040_12262_01_geo.xml'

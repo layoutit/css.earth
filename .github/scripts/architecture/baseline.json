@@ -35,7 +35,6 @@
     "packages-import-only-packages": [
       {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/objects.mts"},
       {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/system-framing.mts"},
-      {"from":"packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts","to":"tests/oracles/fixture.mts"},
       {"from":"packages/telescope-cli/src/qualify.test.mts","to":"tests/fixtures/fits/helpers.mts"},
       {"from":"packages/telescope-cli/src/source-products.test.mts","to":"tests/fixtures/fits/helpers.mts"}
     ],

@@ -38,8 +38,7 @@
     },
     "./node/source-test": {
       "types": "./dist/node/source-test.d.ts",
-      "import": "./dist/node/source-test.js",
-      "require": "./dist/node/source-test.cjs"
+      "import": "./dist/node/source-test.js"
     }
   },
   "scripts": {

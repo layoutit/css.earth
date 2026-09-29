@@ -6,12 +6,10 @@
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { fitsArchiveInputs } from './fits/archive-inputs.mts';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
+import { projectRoot } from '../project-root.ts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../validate.ts';
 
-export const ORACLE_ROOT = resolve(import.meta.dirname, '../..');
-/** The compiled acquisition operations. Loaded here because `sbmt/` is its own package scope, which cannot see the root `#preparation` imports. */
-export const acquisitionOperations = async () => ({...await import('@cssearth/bake/objects/sources'), ...await import('@cssearth/bake/objects/acquisition')});
+export const ORACLE_ROOT = projectRoot(import.meta.url);
 export interface OracleSample { index: number; value: number }
 
 export async function readOracleFixture(name: string) {
@@ -25,12 +23,13 @@ export async function readOracleFixture(name: string) {
 
 /** The pinned requirement versions, `name==version`, keyed by lower-case distribution name. */
 export async function pinnedOracleVersions() {
-  const text = await readFile(resolve(ORACLE_ROOT, 'tests/oracles/requirements.txt'), 'utf8');
+  const text = await readFile(resolve(import.meta.dirname, 'requirements.txt'), 'utf8');
   return new Map(text.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('#')).map(line => { const [name, version] = line.split('=='); return [name.toLowerCase().replace(/-/g, '_'), version] as const; }));
 }
 
-/** Every input is a body manifest input, a checked-in FITS fixture or a test-only archive record. */
-export async function assertPinnedInputs(inputs: readonly { path: string; bytes?: number }[]) {
+/** Every input is a body manifest input, a checked-in FITS fixture or a test-only archive record.
+ * Kernel callers supply their existing bank verifier; core does not own acquisition. */
+export async function assertPinnedInputs(inputs: readonly { path: string; bytes?: number }[], verifyKernelBank?: (set: string, kernels: readonly string[]) => Promise<unknown>) {
   for (const input of inputs) {
     if (/^tests\/fixtures\/hosted-orbits\/[a-z0-9-]+\/qualification\.json$/u.test(input.path)) {
       verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
@@ -52,8 +51,8 @@ export async function assertPinnedInputs(inputs: readonly { path: string; bytes?
     const kernel = /^src\/spice\/([a-z][a-z0-9-]*)\/(.+)$/u.exec(input.path);
     if (kernel) {
       // A shared kernel bank verifies its own pins (packages/bake/cli/kernel-bank.mts).
-      const { kernelBankPaths } = await import('@cssearth/bake/objects/cameras');
-      await kernelBankPaths(kernel[1]!, [kernel[2]!]);
+      if (!verifyKernelBank) throw new Error('Kernel oracle inputs require the caller bank verifier.');
+      await verifyKernelBank(kernel[1]!, [kernel[2]!]);
       verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
       continue;
     }
@@ -72,8 +71,8 @@ export function verifyOracleBytes(input: { path: string; bytes?: number }, bytes
   return bytes;
 }
 
-export async function readOracleInput(input: { path: string; bytes?: number }) {
-  await assertPinnedInputs([input]);
+export async function readOracleInput(input: { path: string; bytes?: number }, verifyKernelBank?: (set: string, kernels: readonly string[]) => Promise<unknown>) {
+  await assertPinnedInputs([input], verifyKernelBank);
   try { return verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path))); }
   catch (error) {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT')
@@ -90,4 +89,21 @@ export function assertPinnedReferences(references: readonly { url: string; bytes
     if (!/^https:\/\/(raw\.githubusercontent\.com\/[^/]+\/[^/]+\/[0-9a-f]{40}\/|github\.com\/[^/]+\/[^/]+\/blob\/[0-9a-f]{40}\/)/u.test(reference.url)) throw new Error(`Oracle reference is not pinned to a commit: ${reference.url}`);
     if (!(reference.bytes > 0)) throw new Error(`Oracle reference lacks its size: ${reference.url}`);
   }
+}
+
+async function fitsArchiveInputs() {
+  const record = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'tests/fixtures/fits/archive-inputs.json'), 'utf8')));
+  if (record.schema !== 'cssearth-fits-reference-inputs@1') throw new Error('Invalid FITS reference input record.');
+  const inputs = requireArray(record.inputs).map(raw => {
+    const entry = requireRecord(raw), path = requireString(entry.path), url = requireString(entry.url);
+    const bytes = requireFiniteNumber(entry.bytes);
+    if (!/^\.local\/fits-reference\/[a-z0-9-]+\.fits$/u.test(path) || !/^https:\/\//u.test(url) ||
+        !Number.isSafeInteger(bytes) || bytes < 1 || bytes > 64 * 1024 * 1024)
+      throw new Error('Invalid FITS reference input identity or size.');
+    const headers = Object.fromEntries(Object.entries(requireRecord(entry.headers ?? {})).map(([key, value]) => [key, requireString(value)]));
+    return { path, url, bytes, headers };
+  });
+  if (!inputs.length || inputs.length > 16 || new Set(inputs.map(i => i.path)).size !== inputs.length)
+    throw new Error('Invalid FITS reference input population.');
+  return inputs;
 }

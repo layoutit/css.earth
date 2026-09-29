@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
-import { ORACLE_ROOT } from '../fixture.mts';
+import { ORACLE_ROOT } from '@cssearth/core/oracle';
 
 export const orientations = ['identity', 'flip-x', 'flip-y', 'rotate-90', 'rotate-180', 'rotate-270'] as const;
 export const queryFractions = [-.25,0,.125,.25,.375,.5,.625,.75,.875,1,1.25];

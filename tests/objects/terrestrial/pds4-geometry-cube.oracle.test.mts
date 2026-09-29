@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { decodePds4GeometryCube } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '@cssearth/core/oracle';
 
 /**
  * NASA's pds4_tools as the oracle for the geometry-cube decoder.

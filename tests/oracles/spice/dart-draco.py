@@ -83,7 +83,7 @@ for point in cube_points:
     direction = np.array(state[:3]); direction /= np.linalg.norm(direction)
     surface.append({'pixel': point['pixel'], 'xyz': point['xyz'], 'directionInDraco': vec(direction), 'rangeKm': float(np.linalg.norm(state[:3])), 'lightTime': float(lt)})
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import write
 write('spice/dart-draco.json', 'spiceypy', 'tests/oracles/spice/dart-draco.py',
       {'spiceypy': spice.__version__, 'cspice': spice.tkvrsn('TOOLKIT'), 'pds4_tools': pds4_tools.__version__},

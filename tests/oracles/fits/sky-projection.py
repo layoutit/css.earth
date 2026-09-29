@@ -13,7 +13,7 @@ import astropy
 from astropy.io import fits
 from astropy.wcs import WCS
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import ROOT, write
 
 JWST_F187N = ('JWST NIRCam F187N level-3 mosaic of NGC 3132, programme 2733 (jw02733-o001_t001_nircam_clear-f187n_i2d.fits, SCI extension)',

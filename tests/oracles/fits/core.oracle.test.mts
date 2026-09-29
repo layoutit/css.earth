@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFitsHdus, readFitsImage } from '@cssearth/fits';
-import { readOracleFixture, readOracleInput, verifyOracleBytes } from '../fixture.mts';
+import { readOracleFixture, readOracleInput, verifyOracleBytes } from '@cssearth/core/oracle';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/core.json');

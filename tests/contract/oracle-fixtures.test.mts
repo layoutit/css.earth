@@ -1,9 +1,10 @@
+import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { access, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readOracleFixture, pinnedOracleVersions, assertPinnedInputs, assertPinnedReferences, ORACLE_ROOT } from '../oracles/fixture.mts';
+import { readOracleFixture, pinnedOracleVersions, assertPinnedInputs, assertPinnedReferences, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { runtimeLock, generatorFingerprint } from '../oracles/sbmt/runtime.mts';
 
 /** Every committed oracle fixture comes from the pinned environment and the pinned inputs; runs in `pnpm test:platform` without Python or restored sources. */
@@ -25,7 +26,7 @@ test('oracle fixtures name their generator, a pinned tool version and pinned inp
       // Known gap: since the committed fixture's tool record holds no runtimeLockSha256 or generatorSha256, so the
       // comparison below fails whenever this test runs past its restored-source skips. Recorded, not repaired here.
       assert.deepEqual(fixture.tool,{sbmt:lock.sbmt,release:lock.release,java:lock.java,'java-bridge':lock.bridge,runtimeLockSha256:digest,generatorSha256:await generatorFingerprint()});
-      await assertPinnedInputs(fixture.inputs);
+      await assertPinnedInputs(fixture.inputs, kernelBankPaths);
       assertPinnedReferences(fixture.references);
       assert.ok(fixture.inputs.some(p=>p.path==='tests/fixtures/sbmt/cases.json'));
       continue;
@@ -42,7 +43,7 @@ test('oracle fixtures name their generator, a pinned tool version and pinned inp
     }
     assert.ok(pinned >= 1, `${name} records its pinned environment`);
     assert.ok(fixture.inputs.length + fixture.references.length >= 1, `${name} lists its inputs or pinned references`);
-    await assertPinnedInputs(fixture.inputs);
+    await assertPinnedInputs(fixture.inputs, kernelBankPaths);
     assertPinnedReferences(fixture.references);
   }
 });

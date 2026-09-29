@@ -5,7 +5,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readRiceCompressedImage } from '@cssearth/fits';
 import { hmiPixel, hmiRecordGeometry } from '@cssearth/bake/objects/layers/observation';
-import { ORACLE_ROOT, readOracleFixture, readOracleInput } from '../fixture.mts';
+import { ORACLE_ROOT, readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/rice.json');
