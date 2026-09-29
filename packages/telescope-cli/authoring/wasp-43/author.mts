@@ -4,12 +4,12 @@
  * - WASP-43: the photosphere colour of its colour lens, dimmed toward the limb by the limb-darkening law measured from transits.
  * - WASP-43b: the published NIRSpec brightness-temperature map (the default lens), seen from the host star.
  *
- *   node tools/objects/source-authoring/wasp-43/author.mts [--check]
+ *   node packages/telescope-cli/authoring/wasp-43/author.mts [--check]
  *
  * --check recomputes both markers and fails if either differs from the file on disk. */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { authorContextMarkers } from '../context-markers.mts';
+import { authorContextMarkers } from '../../src/source-authoring/context-markers.mts';
 
 
 export const authorWasp43Markers = ({ check = false } = {}) => authorContextMarkers(['wasp-43', 'wasp-43b'], { check });
