@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { readFitsHdus, skyProjection } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
-import { readOracleFixture, readOracleInput } from '../fixture.mts';
+import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/sky-projection.json');

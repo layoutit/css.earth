@@ -3,7 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { extractVoPackage } from './package.mts';
 

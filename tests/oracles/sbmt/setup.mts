@@ -24,4 +24,4 @@ for (const name of ['package.json', 'package-lock.json']) await copyFile(resolve
 run('npm', ['ci', '--prefix', bridge, '--ignore-scripts', '--no-audit', '--no-fund'], 120_000);
 await verifyFiles(base, bridgeFiles);
 await restoreInputs();
-console.log('SBMT ready. Regenerate with node tests/oracles/run.mts sbmt/projection (one bounded, headless process at a time).');
+console.log('SBMT ready. Regenerate with node packages/core/src/node/oracle/run.mts sbmt/projection (one bounded, headless process at a time).');

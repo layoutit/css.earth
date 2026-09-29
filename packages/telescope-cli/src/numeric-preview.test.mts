@@ -3,7 +3,7 @@ import { mkdtemp, readFile, rm, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { PNG } from 'pngjs';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { plotNumericPreview, WORKSPACE } from '@cssearth/telescope/node';
 

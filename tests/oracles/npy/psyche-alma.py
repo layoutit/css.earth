@@ -7,7 +7,7 @@ Usage: .local/oracles/venv/bin/python tests/oracles/npy/psyche-alma.py
 import sys
 from pathlib import Path
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import ROOT, samples, write
 
 source = ROOT / 'src/objects/psyche/source/thermal'

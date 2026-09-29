@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { datasetContributors, datasetSourceDetail } from '../dataset-context.mts';

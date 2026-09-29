@@ -1,4 +1,4 @@
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { assertCalibratedAsteroidSource } from './asteroid-calibration-contract.mts';
 import { anchorTable, numberList, selectedObjectIds } from './anchor-table.mts';

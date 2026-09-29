@@ -3,7 +3,7 @@ import { execFile } from 'node:child_process';
 import { mkdir, mkdtemp, rename, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { promisify } from 'node:util';
 import { DEFAULT_OBJECT_DIRECTORY_LIMIT, PIPELINE_CHANGE_LABEL, evaluateObjectScopeGate,

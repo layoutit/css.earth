@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFitsHdus, skyDisplayRaster, skyImageAxes } from '@cssearth/fits';
-import { readOracleFixture, readOracleInput } from '../fixture.mts';
+import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 
 const fixture = await readOracleFixture('fits/sky-orientation.json');

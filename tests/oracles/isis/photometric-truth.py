@@ -7,7 +7,7 @@ Usage: .local/oracles/venv/bin/python tests/oracles/isis/photometric-truth.py
 """
 import re, sys, urllib.request
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import write, external_record
 
 COMMIT = '1638a583e95be76d50e16cbe70f2c8e237528132'  # ISIS tag 10.0.0_LTS

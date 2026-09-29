@@ -26,6 +26,10 @@
       "types": "./dist/node.d.ts",
       "import": "./dist/node.js",
       "require": "./dist/node.cjs"
+    },
+    "./oracle": {
+      "types": "./dist/oracle/fixture.d.ts",
+      "import": "./dist/oracle/fixture.js"
     }
   },
   "scripts": {

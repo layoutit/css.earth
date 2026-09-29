@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { parseHTML } from "linkedom";
 import { requireRecord } from "@cssearth/core";
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
 import {

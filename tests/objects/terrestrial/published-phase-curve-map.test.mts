@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { planckRadiance, mapPhaseCurve, mirrorGrid, type EmissionGrid, phaseCurveBrightnessTemperature as brightnessTemperature, depositedChannelWeights, impliedStellarTemperature, loadPublishedPhaseCurveMap, parsePublishedPhaseCurve, parseStarryPhaseCurve, sinusoidMap } from '@cssearth/bake/objects/raster';
 import { hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { starryMapGrid, starrySystemFlux } from '@cssearth/telescope/node';

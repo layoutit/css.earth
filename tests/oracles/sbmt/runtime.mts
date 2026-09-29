@@ -4,7 +4,7 @@ import { createReadStream, existsSync } from 'node:fs';
 import { readFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import { ORACLE_ROOT } from '../fixture.mts';
+import { ORACLE_ROOT } from '@cssearth/core/oracle';
 import { javaBridge, call, construct } from './java.mts';
 
 export const base = resolve(ORACLE_ROOT, '.local/oracles/sbmt');

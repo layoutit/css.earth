@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { loadNpyDictionaryMap, readNpyObject, npyArrayAt } from '@cssearth/bake/objects/raster';
-import { sourceTest } from './source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readMeasuredSpectrum } from '@cssearth/bake/objects/charts';
 
 const test = sourceTest('hd-189733b');

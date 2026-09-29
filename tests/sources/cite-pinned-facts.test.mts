@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { citePinnedFacts, conversionsFor, discoveryMatches, displayedValue, equalAtDisplayedPrecision, fieldMeasures, parseHorizonsElements, parseSatelliteTable, recordCitation, recordLeaves, smallBodyQuery, statedNumbers } from '@cssearth/bake/sources';
 

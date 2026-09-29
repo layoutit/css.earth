@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFitsHdus } from '@cssearth/fits';
-import { readOracleFixture, readOracleInput } from '../../oracles/fixture.mts';
+import { readOracleFixture, readOracleInput } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { atlasToGridPixel, gridWcs } from '@cssearth/bake/objects/raster';
 

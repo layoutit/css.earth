@@ -3,7 +3,7 @@ import hashlib, json, platform, sys
 from pathlib import Path
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file())
 
 def sha256(path):
     h = hashlib.sha256()

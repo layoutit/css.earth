@@ -5,13 +5,15 @@
  * farther, a share that falls with distance), each next one with `appearUnits: [from, to]`, the half-width of the view
  * at the bank's origin over which its dots appear, the first at `from` and the last at `to`, evenly in the logarithm of
  * the half-width. A level starts where its region covers the view, so its edge is never on screen while it fills in,
- * and its dots are in merge-catalogue-points.mts's fixed shuffle, so they appear across the region at once. Writes `prepared/<id>.json`.
+ * and its dots are in merge-catalogue-points.mts's fixed shuffle, so they appear across the region at once. The stacked bank
+ * is what the app fetches, so its recipe says `published: true` and it is written to `prepared/<id>.json` and inventoried.
  *
  * Usage: node packages/bake/cli/stack-catalogue-points.mts <object-directory> <id>
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
+import { readCatalogueBank, recipePublished, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const [objectArgument, id] = process.argv.slice(2);
 if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: stack-catalogue-points.mts <object-directory> <id>');
@@ -42,7 +44,7 @@ for (const level of inner) {
 const palette: string[] = [], points: number[][] = [], counts: number[] = [];
 let frame: unknown = null, metersPerUnit = 0;
 for (const [index, level] of levels!.entries()) {
-  const bank = JSON.parse(await readFile(resolve(prepared, `${String(level.bank)}.json`), 'utf8')) as { schema?: unknown; source?: unknown; frame?: unknown;
+  const bank = await readCatalogueBank(objectDirectory, String(level.bank)) as { schema?: unknown; source?: unknown; frame?: unknown;
     within?: unknown; appearance?: { palette?: unknown }; points?: unknown };
   const parsed = parseDensityVolumeFrame(bank.frame);
   if (bank.schema !== 'cssearth-catalogue-points@1' || bank.source !== 'merge' || !Array.isArray(bank.points) || !Array.isArray(bank.appearance?.palette)) {
@@ -68,7 +70,5 @@ const output = { schema: 'cssearth-catalogue-points@1', id, source: 'stack', mea
     levels: levels!.map((level, index) => ({ bank: level.bank, points: counts[index],
       ...(index === 0 ? { fullDetailUnits: level.fullDetailUnits } : { appearUnits: level.appearUnits }) })) },
   basis: recipe.basis, counts: { points: points.length }, points };
-await writeFile(resolve(prepared, `${id}.json`), JSON.stringify(output) + '\n');
-const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
-await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
+await writeCatalogueBank({ objectDirectory, id, bank: output, published: recipePublished(recipe, recipePath) });
 console.log(`Stacked ${points.length} dots in ${levels!.length} levels: ${counts.join(', ')}.`);

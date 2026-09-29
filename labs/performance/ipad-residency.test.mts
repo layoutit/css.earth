@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { runInNewContext } from 'node:vm';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { INSTALL_RESIDENCY_PROBE, READ_RESIDENCY_PROBE, STOP_RESIDENCY_PROBE } from './ipad-residency.mts';
 const test = sourceTest();
 

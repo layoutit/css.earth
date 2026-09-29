@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceLoad, sourceTest } from '../../objects/source-test.mts';
-import { assertPinnedInputs, ORACLE_ROOT, readOracleFixture } from '../fixture.mts';
+import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { assertPinnedInputs, ORACLE_ROOT, readOracleFixture } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { parseApproachRecipe, spacecraftApproach } from '@cssearth/spice';
 import { loadKernelSet } from '@cssearth/spice/node';
@@ -14,7 +14,7 @@ import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
  */
 const loaded = await sourceLoad(async () => {
   const fixture = await readOracleFixture('spice/new-horizons-approach.json');
-  await assertPinnedInputs(fixture.inputs);
+  await assertPinnedInputs(fixture.inputs, kernelBankPaths);
   const results = await Promise.all(['pluto', 'charon'].map(async body => {
     const recipe = parseApproachRecipe(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', body, 'source/preparation/approach.json'), 'utf8')), body);
     return [body, spacecraftApproach(await loadKernelSet(await kernelBankPaths(recipe.kernelSet, recipe.kernels)), recipe)] as const;

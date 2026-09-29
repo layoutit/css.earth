@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { mapBasisCurves, realSphericalHarmonics, bandBrightnessTemperature, brightnessTemperature, planckRadiance, continuousHotspot, eigenBasis, equalAngleGrid, evaluateFit, fitEigenmap, percentiles, sampleEigenmap, seededRandom, symmetricEigen } from '@cssearth/bake/objects/raster';

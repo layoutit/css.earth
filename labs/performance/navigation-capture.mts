@@ -1,6 +1,6 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, stat } from 'node:fs/promises';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { createGzip } from 'node:zlib';
 import { createWriteStream } from 'node:fs';
 import { Readable } from 'node:stream';
@@ -10,7 +10,6 @@ import { resolve, dirname } from 'node:path';
 import os from 'node:os';
 import { chromium } from 'playwright';
 import type { Browser, CDPSession, Page } from 'playwright';
-import { previewSite } from '../../site/server/preview.mts';
 import { errorMessage, recordOf } from './trace-model.mts';
 
 // A real, adaptive input journey. No request interception, cache disabling,
@@ -70,7 +69,56 @@ const report: CaptureReport = { sourceHead: git('rev-parse', 'HEAD').trim(), sou
 await writeFile(output + '/source.patch', git('diff', 'HEAD', '--binary'));
 await writeFile(output + '/capture.mts', await readFile(import.meta.filename));
 report.captureSha256 = sha256(await readFile(import.meta.filename));
-const server = process.env.CSSEARTH_CAPTURE_ORIGIN ? { close: async () => {} } : await previewSite({ port: 4241 });
+// Start the site's existing preview entry as a separate application process.
+// The capture only needs its HTTP surface, not its server implementation.
+async function startPreview(): Promise<{ close(): Promise<void> }> {
+  const child = spawn(process.execPath, [resolve(root, 'site/server/preview.mts'), '--port', '4241'],
+    { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
+  const stopChild = () => { child.kill('SIGTERM'); };
+  const interrupt = () => { stopChild(); process.exit(130); };
+  const terminate = () => { stopChild(); process.exit(143); };
+  const removeCleanup = () => {
+    process.off('exit', stopChild);
+    process.off('SIGINT', interrupt);
+    process.off('SIGTERM', terminate);
+  };
+  process.once('exit', stopChild);
+  process.once('SIGINT', interrupt);
+  process.once('SIGTERM', terminate);
+  child.once('exit', removeCleanup);
+  let output = '';
+  let startError: Error | undefined;
+  child.on('error', error => { startError = error; });
+  child.stdout?.on('data', chunk => { output += String(chunk); });
+  child.stderr?.on('data', chunk => { output += String(chunk); });
+  try {
+    for (let attempt = 0; attempt < 100; attempt++) {
+      if (startError) throw startError;
+      if (child.exitCode !== null || child.signalCode !== null) throw Error(`Preview exited before serving: ${output}`);
+      if (!output.includes('http://127.0.0.1:4241/')) {
+        await new Promise(resolveWait => setTimeout(resolveWait, 100));
+        continue;
+      }
+      try {
+        const response = await fetch(origin + route);
+        if (response.ok) return { close: async () => {
+          if (child.exitCode !== null || child.signalCode !== null) return;
+          await new Promise<void>(resolveExit => {
+            child.once('exit', () => resolveExit());
+            child.kill('SIGTERM');
+          });
+        } };
+      } catch { /* Wait for the preview listener. */ }
+      await new Promise(resolveWait => setTimeout(resolveWait, 100));
+    }
+    throw Error(`Preview did not serve ${origin + route}: ${output}`);
+  } catch (error) {
+    stopChild();
+    removeCleanup();
+    throw error;
+  }
+}
+const server = process.env.CSSEARTH_CAPTURE_ORIGIN ? { close: async () => {} } : await startPreview();
 let browser: Browser | undefined, page: Page | undefined, cdp: CDPSession | undefined, recording: unknown, tracing = false, trace = false;
 const frames: VideoFrame[] = [], writes: Promise<void>[] = [], urls = new Set<string>();
 try {
@@ -287,37 +335,39 @@ try {
   });
 } catch (error) { report.errors.push(recordOf(error)?.stack); }
 finally {
-  if (cdp && videoEnabled) await cdp.send('Page.stopScreencast').catch(() => {});
-  if (!recording && page) recording = await page.evaluate(() => {
-    const opt = (target: unknown, key: PropertyKey): unknown => target === null || target === undefined ? undefined : Reflect.get(Object(target), key);
-    const recorder: unknown = Reflect.get(window, '__cssEarthRecorder');
-    if (recorder !== null && recorder !== undefined) {
-      const stop = opt(recorder, 'stop');
-      if (typeof stop !== 'function') throw new TypeError('stop is not a function');
-      Reflect.apply(stop, recorder, ['failure']);
+  try {
+    if (cdp && videoEnabled) await cdp.send('Page.stopScreencast').catch(() => {});
+    if (!recording && page) recording = await page.evaluate(() => {
+      const opt = (target: unknown, key: PropertyKey): unknown => target === null || target === undefined ? undefined : Reflect.get(Object(target), key);
+      const recorder: unknown = Reflect.get(window, '__cssEarthRecorder');
+      if (recorder !== null && recorder !== undefined) {
+        const stop = opt(recorder, 'stop');
+        if (typeof stop !== 'function') throw new TypeError('stop is not a function');
+        Reflect.apply(stop, recorder, ['failure']);
+      }
+      return opt(recorder, 'lastRecording');
+    }).catch(() => null);
+    if (tracing && cdp) {
+      const session = cdp;
+      const done = new Promise<{ dataLossOccurred: boolean; stream?: string }>(accept => session.once('Tracing.tracingComplete', accept));
+      await session.send('Tracing.end'); const completed = await done;
+      report.traceDataLoss = completed.dataLossOccurred ?? false;
+      const handle = completed.stream;
+      if (handle === undefined) throw Error('Chrome completed tracing without a trace stream.');
+      try {
+        await pipeline(Readable.from((async function* () {
+          for (;;) {
+            const part = await session.send('IO.read', { handle, size: 4 * 1024 ** 2 });
+            yield Buffer.from(part.data, part.base64Encoded ? 'base64' : 'utf8');
+            if (part.eof) break;
+          }
+        })()), createGzip(), createWriteStream(output + '/trace.json.gz'));
+        trace = true;
+      } finally { await session.send('IO.close', { handle }); }
     }
-    return opt(recorder, 'lastRecording');
-  }).catch(() => null);
-  if (tracing && cdp) {
-    const session = cdp;
-    const done = new Promise<{ dataLossOccurred: boolean; stream?: string }>(accept => session.once('Tracing.tracingComplete', accept));
-    await session.send('Tracing.end'); const completed = await done;
-    report.traceDataLoss = completed.dataLossOccurred ?? false;
-    const handle = completed.stream;
-    if (handle === undefined) throw Error('Chrome completed tracing without a trace stream.');
-    try {
-      await pipeline(Readable.from((async function* () {
-        for (;;) {
-          const part = await session.send('IO.read', { handle, size: 4 * 1024 ** 2 });
-          yield Buffer.from(part.data, part.base64Encoded ? 'base64' : 'utf8');
-          if (part.eof) break;
-        }
-      })()), createGzip(), createWriteStream(output + '/trace.json.gz'));
-      trace = true;
-    } finally { await session.send('IO.close', { handle }); }
-  }
-  if (report.domSnapshot && cdp) await writeFile(output + '/dom-after.json', JSON.stringify(await cdp.send('DOMSnapshot.captureSnapshot', { computedStyles: [] })));
-  await Promise.all(writes); await browser?.close(); await server.close();
+    if (report.domSnapshot && cdp) await writeFile(output + '/dom-after.json', JSON.stringify(await cdp.send('DOMSnapshot.captureSnapshot', { computedStyles: [] })));
+    await Promise.all(writes); await browser?.close();
+  } finally { await server.close(); }
   for (const url of urls) {
     const u = new URL(url); if (u.origin !== origin) continue;
     const file = resolve(root, process.env.CSSEARTH_CAPTURE_DIST ?? 'dist', '.' + decodeURIComponent(u.pathname) + (u.pathname.endsWith('/') ? 'index.html' : ''));

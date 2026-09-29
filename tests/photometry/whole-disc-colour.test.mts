@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
 import { displayBandRatios, keepLuminance, tieBandRatios, latitudeWeightedLuminance, loadWholeDiscColour, parseWholeDiscColour, softShoulder, WHOLE_DISC_COLOUR_SCHEMA } from '@cssearth/bake/objects/raster';

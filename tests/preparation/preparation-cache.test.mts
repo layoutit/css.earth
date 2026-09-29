@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { lstat, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { observePreparationPath, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "@cssearth/bake/preparation";
 import type { PreparationTraces } from "@cssearth/bake/preparation";

@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '../source-test.mts';
+import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeAmicaGeo } from '@cssearth/bake/objects/layers/terrestrial';
-import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 
 /** pvl, numpy and astropy as the oracle for the AMICA Gaskell DDR reader (Itokawa). */

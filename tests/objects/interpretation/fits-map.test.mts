@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { prepareFitsMap, type FitsMapRecipe, createSolarSynopticInterpreter } from '@cssearth/bake/objects/layers/observation';
 import { parseSynopticRecipe } from '@cssearth/bake/objects/interpretation';
 import { readFitsPrimary } from '@cssearth/fits';

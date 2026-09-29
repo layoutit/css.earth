@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { hostSkyFrame, hostedOrbitStateRelativeBmjdTdb, type HostedOrbit } from '@cssearth/astronomy';
-import { readOracleFixture } from '../../oracles/fixture.mts';
+import { readOracleFixture } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, dotN as dot } from '@cssearth/core';
 
 const fixture = await readOracleFixture('astronomy/hosted-eccentric.json');

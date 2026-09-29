@@ -39,7 +39,7 @@ packages/fits/
 ## Evidence
 
 The package's tests are self-contained. The comparisons with Astropy live beside the scripts that write their fixtures
-in [`tests/oracles/fits/`](../../tests/oracles/README.md), and
+in [`tests/oracles/fits/`](../../packages/core/src/node/oracle/README.md), and
 [`tests/fits/repository-inputs.test.mts`](../../tests/fits/repository-inputs.test.mts) reads every FITS file the
 repository tracks through this package and checks one digest per reading against those recorded from the three readers
 it replaced (`tools/fits/fits.mts` with its rice and sky modules, `tools/objects/observation/fits.mts` and

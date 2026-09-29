@@ -9,7 +9,7 @@ import astropy.units as u
 import numpy as np
 from astropy.modeling.models import BlackBody
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import external_record, write
 
 

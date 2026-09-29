@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '@cssearth/renderer';
 import type { PreparedResidencyOptions, PreparedResourcePool, PreparedResourceEntry, PreparedAssets } from '@cssearth/renderer/platform/prepared-residency';

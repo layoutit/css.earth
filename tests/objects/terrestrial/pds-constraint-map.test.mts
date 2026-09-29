@@ -1,7 +1,7 @@
 import { fixtureSource } from '../test-source-fixture.mts';
 import { required } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import sharp from 'sharp';
 import { parsePdsPlanetocentricShape } from '@cssearth/bake/objects/geometry';

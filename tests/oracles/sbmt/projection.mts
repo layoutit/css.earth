@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { startNative, hashFile } from './runtime.mts';
 import { call, construct, nativeArray } from './java.mts';
 import { cases, vector, count, orientations, queryFractions } from './cases.mts';
-import { ORACLE_ROOT, assertPinnedInputs } from '../fixture.mts';
+import { ORACLE_ROOT, assertPinnedInputs } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber } from '@cssearth/core';
 
 const definitions = await cases();

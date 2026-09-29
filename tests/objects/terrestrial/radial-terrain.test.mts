@@ -2,7 +2,7 @@ import { required, fixtureRecord } from '@cssearth/objects/node/contract';
 import { fixtureSource } from '../test-source-fixture.mts';
 import { createIndexedShape, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from '@cssearth/bake/objects/geometry';
 import assert from 'node:assert/strict';
-import { sourceTest } from '../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';

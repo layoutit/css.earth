@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { sourceTest } from '../../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { hostedOrbit } from '@cssearth/astronomy';
 import { addSpotOccultationToLimbPlate, parseSpotOccultation, spotDiscCentre } from '@cssearth/bake/objects/stellar';
 const test = sourceTest();

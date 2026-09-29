@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, rm, stat, utimes, writeFile } from 'node:fs/p
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToParentKm,
   systemBarycentreHeliocentricAu, M_PER_AU, STAR_IDS, starStateKm, HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm, hostedBarycentreCompanion, hostedOrbitCentreStateKm } from '@cssearth/astronomy';

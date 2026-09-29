@@ -4,7 +4,12 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { checkoutState, missingSourceReason } from './source-test.mts';
+import { checkoutState, missingSourceReason, restoredSources } from '@cssearth/objects/node/source-test';
+
+test('restored source paths resolve from the objects package to the repository root', () => {
+  assert.equal(restoredSources('saturn', 'manifest.json').skip, false);
+  assert.deepEqual(restoredSources('saturn', 'observations/not-restored.tif').missing, ['observations/not-restored.tif']);
+});
 
 test('only absent inputs skip: coverage that finds an undeclared file fails', () => {
   assert.equal(missingSourceReason(new Error('Fixture source manifest coverage failed. Undeclared: stray.txt. Missing: none.')), null);
@@ -14,13 +19,13 @@ test('only absent inputs skip: coverage that finds an undeclared file fails', ()
 });
 
 test('an untracked source sharp reports missing skips; a tracked one still fails', () => {
-  const root = new URL('../../', import.meta.url).pathname;
+  const root = new URL('../../../', import.meta.url).pathname;
   assert.match(missingSourceReason(new Error(`Input file is missing: ${root}src/objects/saturn/source/observations/not-restored.tif`)) ?? '', /saturn: .*not-restored\.tif is not restored/u);
   assert.equal(missingSourceReason(new Error(`Input file is missing: ${root}src/objects/saturn/source/manifest.json`)), null);
 });
 
 test('a tracked file a sparse checkout leaves out is absent from this checkout; one missing from its checkout still fails', () => {
-  const root = new URL('../../', import.meta.url).pathname, file = `${root}src/objects/betelgeuse/source/observations/not-here.fits`;
+  const root = new URL('../../../', import.meta.url).pathname, file = `${root}src/objects/betelgeuse/source/observations/not-here.fits`;
   const missing = Object.assign(new Error(`ENOENT: no such file or directory, open '${file}'`), { code: 'ENOENT', path: file });
   assert.match(missingSourceReason(missing, null, () => 'outside-sparse-checkout') ?? '', /outside this sparse checkout; run git sparse-checkout add '\/src\/objects\/betelgeuse\/source\/observations\/not-here\.fits'/u);
   assert.equal(missingSourceReason(missing, null, () => 'checked-out'), null, 'a tracked file its checkout should hold is a failure');

@@ -1,6 +1,6 @@
 # SBMT preparation oracle
 
-This is an optional native backend for the [shared oracle framework](../README.md).
+This is an optional native backend for the [shared oracle framework](../../../packages/core/src/node/oracle/README.md).
 It runs the released Small Body Mapping Tool's readers, mesh intersection and
 texture-coordinate code, then compares saved results with cssEarth preparation
 code. It supplies test evidence; it never supplies production source data,
@@ -61,8 +61,8 @@ matched. The report records whether all cases or a selected subset ran.
 Native regeneration is opt-in and currently qualified on **macOS ARM**:
 
 ```sh
-node tests/oracles/setup.mts sbmt
-node tests/oracles/run.mts sbmt/projection
+node packages/core/src/node/oracle/setup.mts sbmt
+node packages/core/src/node/oracle/run.mts sbmt/projection
 ```
 
 Setup verifies and reuses `.local/oracles/sbmt`, restores only missing selected
@@ -73,7 +73,7 @@ runs one child process with a 192 MiB Node heap, 512 MiB Java heap, bounded
 threads and a four-minute timeout. Those are heap limits, not a total RSS cap.
 Native VTK initialization can take longer on its first run.
 
-Default `node tests/oracles/run.mts` continues to run the Python fixture oracles; it does
+Default `node packages/core/src/node/oracle/run.mts` continues to run the Python fixture oracles; it does
 not implicitly launch SBMT. Native regeneration on other operating systems needs
 its own verified release lock. The committed comparison fixtures are portable.
 
@@ -92,8 +92,8 @@ changed inputs, wrong software bytes and incomplete stages fail explicitly.
 | Footprints | Native `SmallBodyModel.computeFrustumIntersection` | SBMT footprint cell counts are retained diagnostics; they do not prove a cssEarth footprint implementation |
 | Image coordinates and UVs | Native `PolyDataUtil.generateTextureCoordinates` versus cssEarth `project` | Identity, both axis flips, three quarter turns, central crop; every boundary, interior grid, off-image and behind-camera cases |
 | FITS image values | SBMT's bundled nom-tam-fits versus `readFitsImage` | Pinned raw axes, encoding and up to 65 distinct samples per image; no photometric normalization claim |
-| FITS encodings, missing values and extensions | Existing [FITS oracle](../README.md) and `tests/oracles/fits/core.oracle.test.mts` | Scaled integers, float NaNs, cubes and extension policy; not reimplemented here |
-| PDS3/PDS4 image and geometry planes | Existing [PDS oracle comparisons](../README.md) | Label-driven dimensions, offsets, quality and units; this backend consumes SUM/INFO, not SPICE kernels or geometry cubes |
+| FITS encodings, missing values and extensions | Existing [FITS oracle](../../../packages/core/src/node/oracle/README.md) and `tests/oracles/fits/core.oracle.test.mts` | Scaled integers, float NaNs, cubes and extension policy; not reimplemented here |
+| PDS3/PDS4 image and geometry planes | Existing [PDS oracle comparisons](../../../packages/core/src/node/oracle/README.md) | Label-driven dimensions, offsets, quality and units; this backend consumes SUM/INFO, not SPICE kernels or geometry cubes |
 | Released OBJ UV islands and raster sampling | `tests/objects/terrestrial/obj-uv-fits.test.mts` | Barycentric transfer, seams, nearest/bilinear sampling policy, orientation and missing support; existing unit checks, **not native SBMT qualification** |
 | Bad or unsupported inputs | `projection.test.mts` | Missing/duplicate fields, unsafe paths, hash drift, dimensions, degenerate cameras, non-affine frusta and unsupported SUM distortion/K matrices |
 
@@ -131,7 +131,7 @@ does not establish their physical registration or certify a new surface lens.
 
 ### Known problem: native regeneration is not bit-reproducible
 
-Two consecutive `node tests/oracles/run.mts sbmt/projection` runs against the same pinned
+Two consecutive [`node tests/oracles/run.mts sbmt/projection`](https://github.com/layoutit/cssEarth/blob/beb2b9343efb112af8a6d6e4856d3ce6173a6985/tests/oracles/run.mts) (now `node packages/core/src/node/oracle/run.mts sbmt/projection`) runs against the same pinned
 inputs and locked SBMT/Java bytes do not agree byte for byte: 1,643 of 34,777
 numeric leaves in `tests/oracles/sbmt/projection.json` differ between runs, with
 a maximum absolute difference of about 1.6e-4 and a maximum relative difference

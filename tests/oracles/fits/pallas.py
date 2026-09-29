@@ -5,7 +5,7 @@ from pathlib import Path
 import astropy
 from astropy.io import fits
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import ROOT, sha256, write
 
 record = json.loads((ROOT / 'tests/fixtures/fits/archive-inputs.json').read_text())

@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import { sourceTest } from '../../../../../tests/objects/source-test.mts';
+import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();import {resolve} from 'node:path';import {WORKSPACE} from '@cssearth/telescope/node';
 import {APOLLO_PSE_STATIONS,CONSERT_67P_FSS_RANGING,F16_PLANETARY_COVERAGE_HANDLER,describeSparsePlanetaryCoverage,exportSparsePlanetaryCoverageCsv,exportSparsePlanetaryCoverageJson,inspectSparsePlanetaryCoverage,pairPds3AsciiRows,pds3AsciiRows,pds3GeometryUnit,readFdsnStationRows,readPds3AsciiTable,refuseSparseCoveragePromotion,sparseCoverageSamples,type SparseCoverageKind,type SparsePlanetaryCoverageInput} from './f16-planetary-coverage.mts';
 import {member} from '../common.mts';

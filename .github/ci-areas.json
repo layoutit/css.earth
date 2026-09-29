@@ -57,7 +57,7 @@
     { "id": "preparation", "patterns": ["packages/bake/cli/test-preparation.mts"], "jobs": ["typecheck", "universePreparation"] },
     { "id": "renderer", "patterns": ["packages/renderer/**", "src/renderers/**"], "jobs": ["typecheck", "universe", "universePreparation"] },
     { "id": "site", "patterns": ["site/**"], "jobs": ["typecheck", "universe"] },
-    { "id": "oracles", "patterns": ["tests/fits/**", "tests/oracles/**"], "jobs": ["typecheck", "universe"] },
+    { "id": "oracles", "patterns": ["tests/fits/**", "tests/oracles/**", "packages/core/src/node/oracle/**"], "jobs": ["typecheck", "universe", "nebula"] },
     { "id": "architecture", "patterns": [".github/scripts/architecture/**"], "jobs": ["typecheck"] },
     { "id": "nebula", "patterns": ["tests/nebula/**", "labs/nebula/**", "packages/volume-viewer/**"], "jobs": ["typecheck", "nebula"] }
   ]

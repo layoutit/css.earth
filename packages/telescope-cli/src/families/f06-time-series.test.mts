@@ -1,4 +1,4 @@
-import assert from'node:assert/strict';import{sourceTest}from'../../../../tests/objects/source-test.mts';import{readFile}from'node:fs/promises';import{resolve}from'node:path';import{readTessLightCurve}from'@cssearth/bake/objects/raster';import{member}from'./common.mts';import{binTimeSeries,describeTimeSeries,foldTimeSeries,selectTimeSeries,timeSeriesPlotData}from'./f06-time-series.mts';
+import assert from'node:assert/strict';import{sourceTest}from'@cssearth/objects/node/source-test';import{readFile}from'node:fs/promises';import{resolve}from'node:path';import{readTessLightCurve}from'@cssearth/bake/objects/raster';import{member}from'./common.mts';import{binTimeSeries,describeTimeSeries,foldTimeSeries,selectTimeSeries,timeSeriesPlotData}from'./f06-time-series.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 const root=WORKSPACE,path='src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits';
 const test=sourceTest();

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
-import { sourceTest } from '../objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { runCachedPreparationObjects } from '@cssearth/bake/prepare-objects';
 import type { CachedPreparationOptions } from '@cssearth/bake/prepare-objects';

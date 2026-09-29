@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 import { checkLimbLaw, interpolateGrid, limbIntensity, readHowarthNode, readPublishedPowerLaw } from '@cssearth/bake/objects/stellar';
 
 const test = sourceTest();

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import catalogues from '../source/moon-catalogues.json' with { type: 'json' };
 import { parseMoonCatalogue, prepareBodyMoons, prepareBodyRelations } from '../prepare-body-moons.mts';

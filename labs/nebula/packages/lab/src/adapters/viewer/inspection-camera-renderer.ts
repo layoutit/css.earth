@@ -1,7 +1,7 @@
 /** The app's input policy and canonical physical-camera representation. */
 import type { InspectionCameraBackend } from '@cssearth/volume-viewer/camera/inspection-camera';
 import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
-import * as runtimePolicy from '../../../../../../../site/runtime-policy.mts';
+import { runtimePolicy } from './inspection-runtime-policy';
 import { createObjectInteractionControls } from '@cssearth/renderer/navigation/object-interaction-controls.ts';
 import { createCameraMotion } from '@cssearth/renderer/navigation/camera-motion.ts';
 import { worldCameraFromCenteredPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
