@@ -2,6 +2,7 @@ import { createObjectBrowserController } from '../object-browser.mts';
 import { applySeoHead, focusSeo, objectSeo } from '../seo.mts';
 import { knownObject } from '../object-directory.mts';
 import { overviewPage } from '../navigation/navigation-scope.mts';
+import { presentPageDatasets } from '../page-datasets.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { createPreparedFocusCard } from '../prepared-focus-card.mts';
 import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from '../focus-fragment.mts';
@@ -114,6 +115,8 @@ export function mountObjectShell({
   function presentSelection() {
     if (lifetime.disposed) return;
     const subject = readSelection();
+    // A page's datasets follow its address on every publication, a dataset-only change included (page-datasets.mts).
+    presentPageDatasets(documentTarget, windowTarget.location.href, objectId);
     if (presentedSubject === subject) { updateBodyCard(); return; }
     // What the world draws around the scene (a catalogue focus, an overview) is its own page, `/<id>/`.
     const drawnPage = (selected: typeof subject | null) => {

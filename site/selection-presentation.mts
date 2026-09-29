@@ -19,8 +19,8 @@ export function createSelectionPresentation(documentTarget: Document, {
   // Search/navigation and the selection share one sidebar content owner. The
   // selected content stays retained while the browser temporarily replaces it.
   const context = requiredElement<HTMLElement>(documentTarget, '.object-context');
-  const galaxy = context.querySelector<HTMLElement>('[data-galactic-overview]');
-  const largeScaleCards = [...context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')];
+  // One card per overview (OverviewCard.astro).
+  const overviewCards = [...context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')];
   const focusCard = context.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const system = context.querySelector<HTMLElement>('[data-system-results]');
   let systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
@@ -49,19 +49,19 @@ export function createSelectionPresentation(documentTarget: Document, {
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
     const focus = subject.kind === 'focus' ? subject : null;
     const overview = subject.kind === 'overview' ? subject.overview : null;
-    const galactic = overview?.scope === 'milky-way';
-    const neighborCard = largeScaleCards.find(card => card.dataset.largeScaleOverview === 'local-group');
-    const galaxySelected = focus && neighborCard
-      && [...neighborCard.querySelectorAll<HTMLElement>('[data-neighbor-id]')]
-        .some(row => row.dataset.neighborId === focus.id);
-    const largeScale = galaxySelected ? neighborCard : overview
-      ? largeScaleCards.find(card => card.dataset.largeScaleOverview === overview.scope) : undefined;
-    if (neighborCard && (galaxySelected || galactic || largeScale === neighborCard)) {
-      selectGalaxyNeighbor(neighborCard, galaxySelected && focus ? focus.id : 'milky-way');
-    }
-    for (const card of largeScaleCards) setPanelHidden(card, card !== largeScale);
+    // The subject a card may list: a catalogue focus, or an overview that is a member of a larger level (the Milky Way in
+    // the Local Group).
+    const subjectId = focus ? focus.id : overview && overview.scope !== 'system' ? overview.scope : null;
+    const lists = (card: HTMLElement) => subjectId !== null
+      && [...card.querySelectorAll<HTMLElement>('[data-neighbor-id]')].some(row => row.dataset.neighborId === subjectId);
+    // An overview shows its own card; a catalogue focus shows the card of the level that lists it.
+    const shown = overview && overview.scope !== 'system' ? overviewCards.find(card => card.dataset.largeScaleOverview === overview.scope)
+      : focus ? overviewCards.find(lists) : undefined;
+    // Each card measures its distances from the subject it lists, or else from its home (the member holding the stars, or
+    // the observer).
+    for (const card of overviewCards) selectGalaxyNeighbor(card, lists(card) ? subjectId! : card.dataset.neighborHome ?? 'observer');
+    for (const card of overviewCards) setPanelHidden(card, card !== shown);
     if (focusCard) setPanelHidden(focusCard, !focus);
-    if (galaxy) setPanelHidden(galaxy, !galactic);
     const systemSelected = overview?.scope === 'system';
     if (system) setPanelHidden(system, !systemSelected);
     systemContent.show(systemSelected);
@@ -78,7 +78,7 @@ export function createSelectionPresentation(documentTarget: Document, {
     selectNavigation(navigationSelection);
     const label = subject.kind === 'focus'
       ? (focusCard?.dataset.preparedFocusId === subject.id ? focusCard.querySelector('[data-focus-name]')?.textContent : null) || 'Selected object'
-      : subject.kind === 'overview' ? largeScale?.dataset.largeScaleName ?? overviewName(subject.overview)
+      : subject.kind === 'overview' ? overviewName(subject.overview)
       : subject.kind === 'satellite-system' ? objectName(subject.hostId) || 'Selected system'
       : objectName(subject.objectId) || 'Selected object';
     if (context.getAttribute('aria-label') !== label) context.setAttribute('aria-label', label);

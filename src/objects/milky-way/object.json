@@ -6,7 +6,51 @@
     "overview": {
       "name": "Milky Way",
       "description": "Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.",
-      "order": 1
+      "order": 1,
+      "zoom": {
+        "enter": {
+          "fade": "system",
+          "at": "end"
+        },
+        "returnBelow": {
+          "fade": "system",
+          "at": "middle"
+        },
+        "centreWithin": {
+          "fade": "galaxy",
+          "at": "middle"
+        },
+        "frame": {
+          "between": [
+            {
+              "labels": "galaxy-handoff-end"
+            },
+            {
+              "fade": "galaxy",
+              "at": "middle"
+            }
+          ]
+        }
+      },
+      "holds": [
+        {
+          "classifications": [
+            "star"
+          ],
+          "list": "Systems"
+        },
+        {
+          "classifications": [
+            "nebula",
+            "globular-cluster",
+            "black-hole"
+          ]
+        }
+      ],
+      "packages": [
+        "stellar-neighbourhood"
+      ],
+      "classification": "galaxy"
     },
     "volume": {
       "referenceFrame": "sun-icrf",

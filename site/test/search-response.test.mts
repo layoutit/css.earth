@@ -42,9 +42,10 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
       <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div>
   </nav><div class="object-selected-content"><div class="object-context" hidden>
     <div data-prepared-focus-card hidden><span data-focus-name></span></div>
-    <div data-galactic-overview hidden>Milky Way</div>
+    <div data-large-scale-overview="milky-way" data-large-scale-name="Milky Way" data-neighbor-home="observer" hidden>Milky Way</div>
     <div data-large-scale-overview="local-group" data-large-scale-name="Local Group" hidden></div>
     <div data-large-scale-overview="nearby-universe" data-large-scale-name="Nearby Universe" hidden></div>
+    <div data-large-scale-overview="observable-universe" data-large-scale-name="Observable Universe" hidden></div>
     <div data-system-results hidden><section class="object-selected-panel" data-system-header="sun" data-system-current>Solar System introduction</section>
       <section class="object-selected-panel" data-system-header="trappist-1">TRAPPIST-1 system</section><div data-solar-system-facts></div></div>
     </div><section class="object-information-panel">Saturn</section></div></div><!--search-shell:end-->
@@ -110,7 +111,7 @@ test('features are pinned, rendered into existing rows and have ordinary destina
 test('typed search shows a flat result list without the navigation tree, including queries that name an overview', async () => {
   for (const query of ['t', 'Milky Way']) {
     const document = await render(`/saturn/?q=${encodeURIComponent(query)}`);
-    assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('[data-large-scale-overview="milky-way"]')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('.object-selected-content')?.hidden, true);
     assert.equal(document.querySelectorAll('[data-object-tab]').length, 0);
     assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, true);
@@ -137,7 +138,7 @@ test('a focus page that also names an overview resolves to the focus alone', asy
     const both = await card(query);
     assert.equal(both.querySelector<HTMLElement>('[data-prepared-focus-card]')?.hidden, false, query);
     assert.equal(both.querySelector<HTMLElement>('.object-context [data-system-results]')?.hidden, true, query);
-    assert.equal(both.querySelector<HTMLElement>('.object-context [data-galactic-overview]')?.hidden, true, query);
+    assert.equal(both.querySelector<HTMLElement>('.object-context [data-large-scale-overview="milky-way"]')?.hidden, true, query);
     // Clearing a search keeps the view context, normalized the same way.
     const clear = new URL(both.querySelector('.object-sidebar-search-clear')?.getAttribute('href') ?? '/', origin);
     assert.equal(clear.pathname, '/m42/', query);
@@ -147,7 +148,7 @@ test('a focus page that also names an overview resolves to the focus alone', asy
 
 test('native and live selections share card visibility, inertness, labels and system headers', async () => {
   const state = (document: Document) => [...document.querySelectorAll<HTMLElement>(
-    '.object-context, .object-information-panel, [data-prepared-focus-card], [data-galactic-overview], [data-large-scale-overview], [data-system-results], [data-system-header], [data-solar-system-facts]')]
+    '.object-context, .object-information-panel, [data-prepared-focus-card], [data-large-scale-overview], [data-system-results], [data-system-header], [data-solar-system-facts]')]
     .map(element => ({ hidden: element.hidden, inert: element.hasAttribute('inert'), label: element.getAttribute('aria-label'), current: element.hasAttribute('data-system-current') }));
   const cases = [
     ['', 'saturn', { kind: 'object', objectId: 'saturn' }, '/saturn/'],

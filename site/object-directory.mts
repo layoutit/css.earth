@@ -1,4 +1,5 @@
 import { catalogEntry, defineOverview, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
+import type { OverviewObject } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
 import { isRecord } from '@cssearth/core';
 import overviews from './prepared-overview-objects.json' with { type: 'json' };
@@ -17,7 +18,10 @@ function add(object: NavigableObject) {
   NAVIGABLE_OBJECTS.push(object);
   if (isSceneObject(object)) SCENE_OBJECTS.push(object);
 }
-for (const overview of overviews) add(defineOverview(overview));
+/** The overviews, from the nearest level of the zoom ladder out: every page knows them (see above). The build's registry
+ * holds the same entries (objects.mts OVERVIEWS). */
+export const KNOWN_OVERVIEWS: readonly OverviewObject[] = Object.freeze(overviews.map(defineOverview).sort((a, b) => a.order - b.order));
+for (const overview of KNOWN_OVERVIEWS) add(overview);
 /** Whether a loaded object owns a scene. */
 export const isLoadedScene = isSceneObject;
 /** The object with `id` if the page has loaded it. */

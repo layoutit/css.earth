@@ -43,6 +43,15 @@ function withPage(url: URL, sceneId: string, id: string | null): URL {
   return url;
 }
 
+/** Selects dataset `lens` of drawn page `page` (an overview's, page-datasets.mts) from any URL: that page, keeping the
+ * camera (`v`); a page reached from elsewhere carries none of the previous page's selections. */
+export function withPageDataset(url: URL, page: string, lens: string): URL {
+  withPage(url, page, page);
+  url.searchParams.delete('overview'); url.searchParams.delete('view');
+  url.searchParams.set('dataset', lens);
+  return url;
+}
+
 /** Parse a selection at either entry point: the focus its page names, and the lens its `dataset` selects, as on any page. */
 export function readPreparedFocusSelection(url: URL, sceneId: string): { id: string; lens: string | null } | null {
   const id = preparedFocusFromUrl(url, sceneId);

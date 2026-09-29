@@ -57,6 +57,16 @@ export async function readOverviews(objectsDirectory: string, sceneHostId: strin
     overviews.push(overview);
   }
   overviews.sort((a, b) => a.order - b.order);
-  if (overviews.some((overview, index) => index > 0 && overview.order === overviews[index - 1]!.order)) throw new TypeError('Two overviews share a place on the zoom ladder.');
+  for (const [index, overview] of overviews.entries()) {
+    if (index > 0 && overview.order === overviews[index - 1]!.order) throw new TypeError(`Overviews ${overviews[index - 1]!.id} and ${overview.id} share order ${overview.order} on the zoom ladder.`);
+    for (const id of overview.packages) {
+      try { await readFile(resolve(objectsDirectory, id, 'object.json')); }
+      catch (error) { if (hasErrorCode(error, 'ENOENT')) throw new TypeError(`Overview ${overview.id} draws package ${id}, which is not in ${objectsDirectory}.`); throw error; }
+    }
+    // One level holds each classification: a subject's breadcrumbs lead to exactly one.
+    for (const other of overviews.slice(0, index)) for (const classification of overview.holds.flatMap(group => group.classifications)) {
+      if (other.holds.some(group => group.classifications.includes(classification))) throw new TypeError(`Overviews ${other.id} and ${overview.id} both hold ${classification}.`);
+    }
+  }
   return overviews;
 }

@@ -23,9 +23,11 @@ The [recipe](source/cmb/sphere.json) names the map, colour table, range, radius,
 ## Registry entry
 
 [object.json](object.json) authors the overview under `properties.overview`: its name, card description and place on the
-zoom ladder (4, after the Milky Way, the Local Group and the Nearby Universe). `pnpm prepare:catalog` writes it to
-`site/prepared-overview-objects.json` with the world host, and `site/objects.mts` adds it to `OBJECTS`. Its prepared
-file is the image mesh (`cssearth-image-mesh@1`); the world draws every context object prepared as one.
+zoom ladder (4, after the Milky Way, the Local Group and the Nearby Universe); its `zoom`, entered from 1 Gpc and left
+below 800 Mpc, and framed 52 Gpc from the Sun; and what it holds (nothing yet: its card has no list). `pnpm
+prepare:catalog` writes it to `site/prepared-overview-objects.json` with the world host, and `site/objects.mts` adds it
+to `OBJECTS`. Its prepared file is the image mesh (`cssearth-image-mesh@1`); the world draws every context object prepared
+as one.
 
 ## Processing
 

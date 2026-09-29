@@ -80,7 +80,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
     presentation.setEmptyHidden(found.objects.total + detailCount + overviewCount > 0);
   }
   createSelectionPresentation(document).present(selectionTargetFromUrl(url, objectId, WORLD_OBJECTS));
-  presentPageDatasets(document, url);
+  presentPageDatasets(document, url, objectId);
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 

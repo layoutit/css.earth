@@ -1,6 +1,7 @@
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { objectIdAtPath } from '../root-object.mts';
+import { withPageDataset } from './navigation-scope.mts';
 import type { NavigationHistory, NavigationIntent } from './navigation-request.mts';
 type Navigate = (id: string, intent: NavigationIntent) => unknown;
 interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; getAttribute(name: string): string | null; }
@@ -110,9 +111,7 @@ export function bindNavigationLinks({ documentTarget, windowTarget, navigable, n
     if (pageLens) {
       if (!available(pageLens.page)) return;
       event.preventDefault();
-      const url = new URL(windowTarget.location.href);
-      if (objectIdAtPath(url.pathname) !== pageLens.page) url.pathname = `/${pageLens.page}/`;
-      url.searchParams.set('dataset', pageLens.lens);
+      const url = withPageDataset(new URL(windowTarget.location.href), pageLens.page, pageLens.lens);
       Promise.resolve(navigate(pageLens.page, { kind: 'link', url: url.href })).catch(onError);
       return;
     }

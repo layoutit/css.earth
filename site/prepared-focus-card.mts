@@ -1,9 +1,11 @@
-import { isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
+import { catalogueClassification, isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
 import { publishDatasetPreview } from '@cssearth/renderer';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import { preparedFocusObjectId } from './prepared-focus.mts';
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import { requiredElement } from './browser/browser-types.mts';
+import { overviewHolding } from '@cssearth/objects';
+import { KNOWN_OVERVIEWS } from './object-directory.mts';
 
 interface PreparedFocusCard {
   set(record: PreparedCatalogObject | null, sources?: readonly SpatialCitation[], presentation?: PreparedFocusPresentation | null): void;
@@ -96,7 +98,9 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     write('introduction', nebula ? record.introduction.text : aliases ? `Also known as ${aliases}` : '');
     fields.introduction.hidden = !nebula && !aliases;
     if (aliasesRow) aliasesRow.hidden = !nebula || !aliases;
-    const parentScope = cluster ? 'nearby-universe' : nebula ? 'milky-way' : 'local-group';
+    // The trail leads to the level that holds the focus's classification (its overview's `holds`).
+    const parent = overviewHolding(KNOWN_OVERVIEWS, catalogueClassification(record));
+    const parentScope = parent?.id;
     for (const trail of breadcrumbs) trail.hidden = trail.dataset.focusBreadcrumbScope !== parentScope;
     fields.status.hidden = nebula;
     write('status', nebula ? '' : cluster ? record.classification.name : `${words(record.status)} galaxy`);
@@ -111,7 +115,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       : minusPc !== undefined && plusPc !== undefined ? `−${number.format(minusPc)} / +${number.format(plusPc)} pc` : 'Not supplied');
     if (fields.uncertainty.parentElement) fields.uncertainty.parentElement.hidden = !uncertainty && minusPc === undefined && plusPc === undefined;
     if (fields.membership.parentElement) fields.membership.parentElement.hidden = cluster;
-    write('membership', cluster ? 'Galaxy cluster' : nebula ? 'Milky Way' : words(record.membership.group));
+    write('membership', cluster ? 'Galaxy cluster' : nebula ? parent?.name ?? '' : words(record.membership.group));
     write('association', cluster ? `${record.redshift.value}` : nebula ? record.kind === 'globular-cluster' ? 'Galactic globular cluster' : 'Galactic nebula' : words(record.membership.subgroup));
     for (const [index, link] of links.entries()) {
       const source = sources[index];

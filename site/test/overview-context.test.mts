@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import preparedContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { bodyCardViewAtCamera, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
+import { bodyCardViewAtCamera, overviewFrameDistanceM, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation';
 import { parsePreparedWorldContext } from '@cssearth/renderer';
@@ -85,6 +85,18 @@ test('zooming out from the Sun walks the registry overviews in their order, and 
     if (scope !== 'system' && walked.at(-1) !== scope) walked.push(scope);
   }
   assert.deepEqual(walked, OVERVIEWS.map(overview => overview.id));
+});
+
+test('the ladder is the overview entries: an authored fifth level is reached past its own threshold', async () => {
+  const { defineOverview } = await import('@cssearth/objects');
+  const beyond = defineOverview({ kind: 'overview', id: 'beyond-the-horizon', name: 'Beyond', description: 'A test level.', order: 5,
+    zoom: { enter: { distancePc: 3e10 }, returnBelow: { distancePc: 2e10 }, frame: { distance: { distancePc: 5e10 } } },
+    holds: [], packages: [], route: '/beyond-the-horizon/', sceneHostId: 'sun' });
+  const levels = [...OVERVIEWS, beyond], gpc = 1e9 * 3.085677581491367e16;
+  assert.equal(overviewScopeAtCamera(camera(40 * gpc), 'observable-universe', context, undefined, levels), 'beyond-the-horizon');
+  assert.equal(overviewScopeAtCamera(camera(25 * gpc), 'observable-universe', context, undefined, levels), 'observable-universe');
+  assert.equal(overviewScopeAtCamera(camera(25 * gpc), 'beyond-the-horizon', context, undefined, levels), 'beyond-the-horizon', 'it returns only below its lower threshold');
+  assert.equal(overviewFrameDistanceM(beyond, context), 5e10 * 3.085677581491367e16);
 });
 
 test("another star's system overview is left by the distance from that star, not from the Sun", () => {

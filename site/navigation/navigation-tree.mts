@@ -115,16 +115,19 @@ export function navigationTree(): TreeNode[] {
   const group = (key: string, label: string, children: TreeNode[]): TreeNode[] => children.length ? [node(key, label, null, children)] : [];
   const home = systems.get(context.focus.id), solarSystem = include(home ? [home] : []);
   const stars = group('stars', 'Stars', [...include(starSystems), ...include(loneStars.filter(entry => !placed.has(entry.key)))]);
-  // Catalogued subjects sit where their catalogue places them; nebulae, globular clusters and black holes lie in the Milky Way.
-  const inSection = (section: string) => include([...byId.values()].filter(entry => entry.object?.section === section && entry.object.group === 'galaxy' && !placed.has(entry.key)));
-  const unjoined = (group: string) => (outside.get(group) ?? []).filter(entry => !joined.has(entry.key));
-  const milkyWay = group('milky-way-section', 'Milky Way', [...place('milky-way'), ...place('stellar-neighbourhood'),
-    ...include(unjoined('nebula')), ...include(unjoined('globular-cluster')), ...include(unjoined('black-hole')), ...inSection('milky-way')]);
-  const localGroup = group('local-group-section', 'Local Group', [...place('local-group'), ...inSection('local-group')]);
-  const beyond = group('beyond', 'Beyond', [...place('nearby-universe'), ...place('galaxy-clusters')]);
+  // Each overview is a section, from the nearest level out (their object.json): its own row, the packages it draws, the
+  // packages of the classifications it holds (nebulae, globular clusters and black holes in the Milky Way; stars keep
+  // their own section), then the catalogued subjects its catalogue places in it (the Magellanic Clouds). A galaxy the Milky
+  // Way's section takes is gone before the Local Group's holding looks.
+  const inSection = (section: string) => include([...byId.values()].filter(entry => entry.object?.section === section && !placed.has(entry.key)));
+  const unjoined = (group: string) => (outside.get(group) ?? []).filter(entry => !joined.has(entry.key) && !placed.has(entry.key));
+  const sections = OVERVIEWS.flatMap(overview => group(`${overview.id}-section`, overview.name, [...place(overview.id),
+    ...overview.packages.flatMap(place),
+    ...overview.holds.flatMap(holding => holding.classifications).filter(classification => classification !== 'star')
+      .flatMap(classification => include(unjoined(classification))), ...inSection(overview.id)]));
   // A package that opens nothing and belongs to no body, such as the heliosphere behind its shell setting, is not listed.
   const rest = [...byId.values()].filter(entry => !placed.has(entry.key) && !hosted.has(entry.key) && !joined.has(entry.key) && entry.href !== null);
-  return [...solarSystem, ...stars, ...milkyWay, ...localGroup, ...beyond, ...group('other', 'Other', rest)];
+  return [...solarSystem, ...stars, ...sections, ...group('other', 'Other', rest)];
 }
 
 /** How many objects a node holds, itself included. */

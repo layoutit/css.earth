@@ -72,7 +72,11 @@
     "legend": {
       "title": "CMB temperature",
       "meta": "microkelvin around the mean",
-      "stops": 9
+      "stops": 9,
+      "unit": {
+        "symbol": "µK",
+        "perMapUnit": 1000000.0
+      }
     },
     "preview": {
       "sizePx": 256,
@@ -80,6 +84,10 @@
       "azimuthDeg": 0,
       "basis": "Presentation choice: each dataset's picture is the sphere seen from far away along a line 30 degrees above the ICRS equator at right ascension 0h, north up, drawn each pixel the mean of 3 by 3 rays, from the same map, limb law and cutaway opacities the page uses, over black.",
       "samples": 3
+    },
+    "attribution": {
+      "label": "Planck Collaboration (2020); ESA",
+      "url": "https://irsa.ipac.caltech.edu/data/Planck/release_3/all-sky-maps/maps/component-maps/cmb/COM_CMB_IQU-smica_2048_R3.00_full.fits"
     }
   }
 }

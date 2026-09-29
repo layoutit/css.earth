@@ -1,4 +1,5 @@
 import { LENS_VISIBILITY } from './runtime-policy.mts';
+import { isRecord } from '@cssearth/core';
 // Generated after the prepared lens payloads are restored: text now, validated below.
 import lensBillboardText from './prepared-lens-billboards.json?raw';
 import lensBillboardAtlasUrl from './prepared-lens-billboards.webp?url';
@@ -14,19 +15,18 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
-import { presentPageDatasets, readPageDatasets, selectedPageLens } from './page-datasets.mts';
+import { readPageDatasets, selectedPageLens } from './page-datasets.mts';
 
-/** The view the page `page` shows its image mesh in (page-datasets.mts): its selected lens's, read from the address once per
- * change of it, when the cards follow it too. A page without datasets shows its mesh cut open. */
-let datasetHref = '', cards: ReturnType<typeof readPageDatasets> | null = null;
+/** The view the page `page` shows its image mesh in: its selected lens's (page-datasets.mts), read from the address. The
+ * shell presents the cards (object-shell-client.mts); a page without datasets shows its mesh cut open. */
+let cards: ReturnType<typeof readPageDatasets> | null = null;
 // The cards are retained shell markup: read once.
 const pageDatasets = () => cards ??= readPageDatasets(document);
 function meshView(page: string): string {
-  if (location.href !== datasetHref) { datasetHref = location.href; presentPageDatasets(document, datasetHref); }
   const datasets = pageDatasets().find(candidate => candidate.page === page);
-  return datasets ? datasets.views.get(selectedPageLens(datasetHref, datasets))! : 'cutaway';
+  return datasets ? datasets.views.get(selectedPageLens(location.href, datasets))! : 'cutaway';
 }
-import { withOverviewScope } from './navigation/navigation-scope.mts';
+import { isOverviewPage, withOverviewScope } from './navigation/navigation-scope.mts';
 
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
@@ -69,7 +69,16 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         } } };
     };
     const volumeSet = resourceSet(applicationContext.volume.objectId), starSet = resourceSet(applicationContext.stars.objectId);
-    const backgroundPointSet = resourceSet('nearby-universe');
+    // Every galaxy point field draws its dots, and its far banks (`properties.farBanks`) once the camera is that far out.
+    const backgroundCataloguePoints = parsedDescriptors.filter(descriptor => descriptor.type === 'galaxy-point-field').flatMap(descriptor => {
+      const set = resourceSet(descriptor.id), far = descriptor.properties.farBanks;
+      if (!descriptor.prepared) throw new TypeError(`src/objects/${descriptor.id}/object.json: a galaxy point field names its prepared dots.`);
+      if (far !== undefined && !(isRecord(far) && Array.isArray(far.banks) && far.banks.every(bank => typeof bank === 'string')
+        && typeof far.fromDistancePc === 'number' && far.fromDistancePc > 0)) {
+        throw new TypeError(`src/objects/${descriptor.id}/object.json properties.farBanks: expected banks (prepared paths) and fromDistancePc > 0, not ${JSON.stringify(far)}.`);
+      }
+      return [{ url: set.resolve(descriptor.prepared.url) }, ...(far ? (far.banks as string[]).map(bank => ({ url: set.resolve(bank), fromDistanceM: (far.fromDistancePc as number) * PARSEC_M })) : [])];
+    });
     const [volume, pointAppearance] = await Promise.all([
       loadPreparedCssVolume(volumeSet.descriptor, volumeSet.transport),
       loadPreparedPointAppearance(starSet.descriptor, starSet.transport),
@@ -119,7 +128,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const catalogBank = { fadeStartDistanceM: fades.galaxies.fadeStartDistanceM, fullDistanceM: fades.galaxies.fullDistanceM,
       clusters: { fadeStartDistanceM: fades.clusters.fadeStartDistanceM, fullDistanceM: fades.clusters.fullDistanceM } };
     const universe = createPreparedUniverse({
-      environmentLinks: { 'milky-way': (link => link.pathname + link.search)(withOverviewScope(new URL(`/${applicationContext.focus.id}/`, location.origin), applicationContext.focus.id, 'milky-way')) }, stellarExtents: STELLAR_EXTENTS,
+      // The world's volume is an overview's package (the Milky Way): clicking it opens that overview's page.
+      environmentLinks: isOverviewPage(applicationContext.volume.objectId) ? { [applicationContext.volume.objectId]: (link => link.pathname + link.search)(
+        withOverviewScope(new URL(`/${applicationContext.focus.id}/`, location.origin), applicationContext.focus.id, applicationContext.volume.objectId)) } : {},
+      stellarExtents: STELLAR_EXTENTS,
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
       // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).
@@ -127,10 +139,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: applicationContext, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens,
-      // DESI's shells (0.7 Gpc and beyond) begin past the Cosmicflows-4 field, 300 Mpc out, so the Local Group and Nearby
-      // Universe pages never download them.
-      backgroundCataloguePoints: [{ url: backgroundPointSet.resolve('prepared/dots.json') },
-        ...['bright-galaxy-dots', 'quasar-dots'].map(id => ({ url: backgroundPointSet.resolve(`prepared/${id}.json`), fromDistanceM: 300e6 * PARSEC_M }))],
+      backgroundCataloguePoints,
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
       // open unless its page's dataset shows it whole.
       imageMeshes: parsedDescriptors.filter(descriptor => descriptor.prepared?.format === 'cssearth-image-mesh@1').map(descriptor => {

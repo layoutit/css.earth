@@ -29,8 +29,9 @@ interface WorldFlightRequest {
 }
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
-import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, LENS_VOLUMES, localGroupZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
-import { bodyCardViewAtCamera, milkyWayOverviewDistanceM } from './overview-context.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, LENS_VOLUMES, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { bodyCardViewAtCamera, overviewFrameDistanceM } from './overview-context.mts';
+import { KNOWN_OVERVIEWS } from './object-directory.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, worldCameraViewport, savedWorldCamera, parseSharedView, presentWorldCamera } from '@cssearth/renderer/navigation';
 
@@ -99,30 +100,21 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         const world = this.systemTarget({ objectId, fromId, mount, force: true });
         return world ? { world, focusPositionM: frames.get(objectId)!.originM } : null;
       }
-      if (!['milky-way', 'local-group', 'nearby-universe', 'observable-universe'].includes(scope)) return null;
+      const overview = KNOWN_OVERVIEWS.find(candidate => candidate.id === scope);
+      if (!overview) return null;
       const owner = mount?.navigation;
       const from = owner?.capture() ?? lastCamera, current = owner?.optics() ?? lastOptics;
       if (!from || !current) return null;
       // An overview is framed through the normal lens, not a close-up's magnification, so its page looks the same however
       // it is reached (a cold load has no close-up to inherit).
       const optics = worldCameraViewport({ projectionScale: 1 }, current);
-      if (scope === 'local-group') return localGroupZoomTarget(from, optics, systemFramingRect(optics, documentTarget));
-      if (scope === 'nearby-universe' || scope === 'observable-universe') {
-        const frame = frames.get(objectId);
-        if (!frame) return null;
-        const projection = presentWorldCamera(from, frame, optics);
-        // The observable universe is seen from outside the cosmic microwave background (14 Gpc comoving), far enough that its
-        // caption fits below it on a landscape screen.
-        const distanceM = (scope === 'observable-universe' ? 52e9 : 1e8) * 3.085677581491367e16;
-        return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation,
-          distanceUnits: distanceM / frame.metersPerUnit }, frame, optics), focusPositionM: frame.originM };
-      }
-      // The Milky Way card is the view from inside the galaxy (overview-context.mts): the flight lands in the middle of that
-      // range, looking the way the camera already looks.
+      // Its `zoom.frame` (object.json): fit what it draws, or a distance from the centre, looking the way the camera looks.
+      const distanceM = overviewFrameDistanceM(overview);
+      if (distanceM === null) return drawnGalaxiesZoomTarget(from, optics, systemFramingRect(optics, documentTarget));
       const frame = frames.get(objectId);
       if (!frame) return null;
       const projection = presentWorldCamera(from, frame, optics);
-      return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: milkyWayOverviewDistanceM() / frame.metersPerUnit },
+      return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: distanceM / frame.metersPerUnit },
         frame, optics), focusPositionM: frame.originM };
     },
     /** Fit a volume the body shows through its lens, when the view does not already hold it. Null when the view is

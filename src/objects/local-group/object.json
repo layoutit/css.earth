@@ -6,7 +6,29 @@
     "overview": {
       "name": "Local Group",
       "description": "Our galaxy group, including the Milky Way, Andromeda and their neighboring galaxies.",
-      "order": 2
+      "order": 2,
+      "zoom": {
+        "enter": {
+          "fade": "galaxy",
+          "at": "middle"
+        },
+        "returnBelow": {
+          "fade": "galaxy",
+          "at": "start"
+        },
+        "frame": {
+          "fit": "drawn-galaxies"
+        }
+      },
+      "holds": [
+        {
+          "classifications": [
+            "galaxy"
+          ],
+          "list": "Galaxies"
+        }
+      ],
+      "packages": []
     },
     "preparation": {
       "source": "source/catalogue.json"

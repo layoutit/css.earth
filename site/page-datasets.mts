@@ -1,5 +1,6 @@
 import { publishDatasetPreview } from '@cssearth/renderer';
 import { objectIdAtPath } from './root-object.mts';
+import { knownObject } from './object-directory.mts';
 
 /** The datasets of a page the world draws around the mounted scene (an overview): its package's lenses, shown with the
  * shared dataset card inside its card and chosen, as on every page, by `?dataset=` on its own page. The card carries each
@@ -24,9 +25,13 @@ export function selectedPageLens(url: string | URL, datasets: Pick<PageDatasets,
   return requested !== null && datasets.views.has(requested) ? requested : datasets.defaultLens;
 }
 
-/** Mark each page's selected lens in its card, in the server's document or the live page. */
-export function presentPageDatasets(document: ParentNode, url: string | URL) {
+/** Mark each page's selected lens in its card, in the server's document or the live page. A page's datasets show only on
+ * the scene that hosts it (`sceneId`): another star zoomed out to the same level shows the level's card without them,
+ * since choosing one would mean leaving that star for the page. */
+export function presentPageDatasets(document: ParentNode, url: string | URL, sceneId: string) {
   for (const datasets of readPageDatasets(document)) {
+    const page = knownObject(datasets.page), hosted = page?.kind === 'overview' && page.sceneHostId === sceneId;
+    if (datasets.root.hidden !== !hosted) datasets.root.hidden = !hosted;
     const lens = selectedPageLens(url, datasets);
     const buttons = [...datasets.root.querySelectorAll<HTMLButtonElement>('button[name="dataset"]')];
     for (const button of buttons) {

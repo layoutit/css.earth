@@ -16,7 +16,9 @@ const focus = { kind: 'prepared-focus', id: 'helix', focusId: 'helix', name: 'He
   systemName: 'Milky Way', route: '/helix/', sceneHostId: 'sun',
   distance: { meters: 3.085677581491367e16, value: 1, unit: 'pc', quantity: 'catalogue', referencePoint: 'observer', epochJdTt: null } };
 
-const overview = { kind: 'overview', id: 'milky-way', name: 'Milky Way', description: 'Our galaxy.', order: 1, route: '/milky-way/', sceneHostId: 'sun' };
+const overview = { kind: 'overview', id: 'milky-way', name: 'Milky Way', description: 'Our galaxy.', order: 1,
+  zoom: { enter: { fade: 'system', at: 'end' }, returnBelow: { fade: 'system', at: 'middle' }, frame: { distance: { distancePc: 8000 } } },
+  holds: [{ classifications: ['nebula'] }], packages: [], route: '/milky-way/', sceneHostId: 'sun' };
 
 async function checkout(records: { distances?: unknown; discoveries?: unknown; focuses?: unknown; overviews?: unknown } = {}) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-registry-'));

@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { projectRoot } from '@cssearth/core/node';
+import { OVERVIEWS } from '../objects.mts';
 
 /** Package labels and catalogue-subject bindings used by navigation preparation. */
 const REPOSITORY = projectRoot(import.meta.url);
@@ -8,12 +9,11 @@ const OBJECTS_DIRECTORY = resolve(REPOSITORY, 'src/objects');
 
 /** Sidebar order only. Labels are the descriptors' own classification values, or the prepared catalogue each package belongs to. */
 const ORDER = ['star', 'planet', 'dwarf-planet', 'satellite', 'trans-neptunian', 'comet', 'asteroid', 'interstellar', 'exoplanet', 'black-hole', 'nebula', 'globular-cluster', 'galaxy', 'galaxy-cluster', 'heliosphere'];
-/** The scene packages the app groups by hand: its own extragalactic sections, its star field and the Sun's heliopause. */
+/** The context packages without a catalogue entry that the tree groups by what they draw: the galaxy-cluster catalogue,
+ * the star field and the Sun's heliopause. An overview's own package takes its entry's classification, or `overview`. */
 const SCENE_CLASSIFICATIONS: Record<string, string> = {
-  // site/components/ExtragalacticOverviews.astro lists the Milky Way with the Local Group under Galaxies,
-  // and the nearby-universe cluster catalogue under Galaxy clusters.
-  'milky-way': 'galaxy', 'local-group': 'galaxy', 'nearby-universe': 'galaxy-cluster', 'galaxy-clusters': 'galaxy-cluster',
-  'stellar-neighbourhood': 'star', heliosphere: 'heliosphere',
+  'galaxy-clusters': 'galaxy-cluster', 'stellar-neighbourhood': 'star', heliosphere: 'heliosphere',
+  ...Object.fromEntries(OVERVIEWS.map(overview => [overview.id, overview.classification ?? 'overview'])),
 };
 /** The Local Group catalogue names the packages it details; each nebula package carries its own classified record.
  * The same rows say which catalogue subject a package details, which is how the application reaches a package
@@ -32,7 +32,9 @@ function catalogueSubjects(): { classifications: Map<string, string>; focusIds: 
   const galaxies = readJson(resolve(OBJECTS_DIRECTORY, 'local-group/prepared/catalogue.json'));
   for (const object of list(isRecord(galaxies) ? galaxies.objects : null).filter(isRecord)) {
     const membership = isRecord(object.membership) ? object.membership : {};
-    detail(object, 'galaxy', membership.subgroup === 'milky-way' ? 'milky-way' : membership.group === 'local-group' ? 'local-group' : null);
+    // The catalogue's membership names the level a galaxy lies in (a satellite of the Milky Way, a Local Group member).
+    const section = [membership.subgroup, membership.group].map(text).find(id => id !== null && OVERVIEWS.some(overview => overview.id === id)) ?? null;
+    detail(object, 'galaxy', section);
   }
   for (const entry of readdirSync(OBJECTS_DIRECTORY, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
@@ -41,7 +43,7 @@ function catalogueSubjects(): { classifications: Map<string, string>; focusIds: 
     for (const object of list(nebulae.objects).filter(isRecord)) {
       const kind = text(object.kind);
       if (!kind) throw new Error(`src/objects/${entry.name}/source/nebula.json: row ${String(object.id)} has no kind.`);
-      detail(object, kind, 'milky-way');
+      detail(object, kind, null);
     }
   }
   return { classifications, focusIds, sections };
@@ -72,8 +74,8 @@ function attachedVolumes(): Map<string, { hostId: string; lensId: string }> {
 }
 const DISTANCE_ORDERED = new Set(['star', 'planet', 'dwarf-planet']);
 
-/** The application's own sections a catalogued subject belongs in. */
-export type NavigationSection = 'milky-way' | 'local-group';
+/** The overview a catalogued subject's catalogue places it in (an overview id). */
+export type NavigationSection = string;
 
 export interface NavigationPackage {
   id: string; title: string; group: string; system: string | null; distanceAu: number | null;

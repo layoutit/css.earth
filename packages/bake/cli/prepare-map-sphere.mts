@@ -39,7 +39,8 @@ const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as {
   schema?: unknown; id?: unknown; name?: unknown; source?: unknown; meaning?: unknown;
   limb?: { law?: unknown; coefficient?: unknown; basis?: unknown };
   cutaway?: { hemisphere?: unknown; interiorOpacity?: unknown; exteriorOpacity?: unknown; basis?: unknown };
-  datasets?: { default?: unknown; lenses?: unknown; legend?: { title?: unknown; meta?: unknown; stops?: unknown };
+  datasets?: { default?: unknown; lenses?: unknown; legend?: { title?: unknown; meta?: unknown; stops?: unknown; unit?: { symbol?: unknown; perMapUnit?: unknown } };
+    attribution?: { label?: unknown; url?: unknown };
     preview?: { sizePx?: unknown; elevationDeg?: unknown; azimuthDeg?: unknown; samples?: unknown; basis?: unknown } };
   map?: { path?: unknown; origin?: unknown; column?: unknown; coordinates?: unknown; unit?: unknown };
   colourTable?: { path?: unknown; origin?: unknown; basis?: unknown; scale?: unknown; scaleBasis?: unknown; gamma?: unknown; gammaBasis?: unknown };
@@ -67,12 +68,13 @@ const lenses: DatasetLens[] | null = datasets === undefined ? null : Array.isArr
   }
   return value as DatasetLens;
 }) : fail('datasets.lenses lists the page\'s datasets of the sphere.');
-const preview = datasets?.preview, legend = datasets?.legend;
+const preview = datasets?.preview, legend = datasets?.legend, attribution = datasets?.attribution;
 if (lenses && (!lenses.some(lens => lens.id === datasets!.default) || new Set(lenses.map(lens => lens.id)).size !== lenses.length
   || (lenses.some(lens => lens.view === 'cutaway') && !cutaway) || !preview || !integer(preview.sizePx, 32, 1024) || typeof preview.elevationDeg !== 'number'
   || !(Math.abs(preview.elevationDeg) <= 90) || typeof preview.azimuthDeg !== 'number' || !integer(preview.samples, 1, 4) || !text(preview.basis)
-  || !legend || !text(legend.title) || !text(legend.meta) || !integer(legend.stops, 2, 32))) {
-  fail('datasets names distinct lenses and its default among them (a cutaway lens needs the cutaway), its preview (sizePx 32 to 1024, elevationDeg, azimuthDeg, samples 1 to 4, basis) and legend (title, meta, stops 2 to 32).');
+  || !legend || !text(legend.title) || !text(legend.meta) || !integer(legend.stops, 2, 32) || !legend.unit || !text(legend.unit.symbol)
+  || typeof legend.unit.perMapUnit !== 'number' || !(legend.unit.perMapUnit > 0) || !attribution || !text(attribution.label) || !text(attribution.url))) {
+  fail('datasets names distinct lenses and its default among them (a cutaway lens needs the cutaway), its preview (sizePx 32 to 1024, elevationDeg, azimuthDeg, samples 1 to 4, basis), legend (title, meta, stops 2 to 32, unit {symbol, perMapUnit > 0}) and the pictures\' attribution {label, url}.');
 }
 if (!text(recipe.name)) fail('name is what the sphere\'s caption shows.');
 if (limb !== undefined && (limb.law !== 'linear' || typeof limb.coefficient !== 'number' || !(limb.coefficient > 0 && limb.coefficient < 1) || !text(limb.basis))) {
@@ -282,15 +284,17 @@ if (lenses && rays && view) {
   if (table.length !== 256 || table.some(row => row.length !== 3 || row.some(value => !Number.isFinite(value)))) fail('the colour table has 256 RGB rows.');
   const stops = legend!.stops as number, hex = (value: number) => Math.round(255 * (value / 255) ** (colourTable!.gamma as number ?? 1) * ((colourTable!.scale as number | undefined) ?? 1)).toString(16).padStart(2, '0');
   const colors = Array.from({ length: stops }, (_, stop) => `#${table[Math.round(stop / (stops - 1) * 255)]!.map(hex).join('')}`);
-  const microkelvin = (kelvin: number) => `${kelvin > 0 ? '+' : kelvin < 0 ? '\u2212' : ''}${Math.round(Math.abs(kelvin) * 1e6)} \u00b5K`;
-  const attribution = { label: 'Planck Collaboration (2020); ESA', url: map!.origin as string };
+  // The range's ends and middle in the legend's unit (the map's own unit times perMapUnit), signed.
+  const unit = legend!.unit as { symbol: string; perMapUnit: number };
+  const inUnit = (value: number) => `${value > 0 ? '+' : value < 0 ? '\u2212' : ''}${Math.round(Math.abs(value) * unit.perMapUnit)} ${unit.symbol}`;
+  const pictureAttribution = { label: attribution!.label as string, url: attribution!.url as string };
   datasetsOutput = { schema: 'cssearth-map-sphere-datasets@1', objectId: basename(objectDirectory), mesh: `${id}.json`, defaultLens: datasets!.default,
     view: { ...view, basis: preview!.basis },
     controls: lenses.map(lens => ({ id: lens.id, view: lens.view, label: lens.label, detail: lens.detail, title: lens.title, summary: lens.summary,
       description: lens.description, thumbnailUrl: pictures.get(lens.view)!,
-      texture: { url: pictures.get(lens.view)!, width: view.sizePx, height: view.sizePx, attribution },
+      texture: { url: pictures.get(lens.view)!, width: view.sizePx, height: view.sizePx, attribution: pictureAttribution },
       legend: { kind: 'scale', title: legend!.title, meta: legend!.meta, colors,
-        labels: [microkelvin(range!.min as number), microkelvin(0), microkelvin(range!.max as number)] } })) };
+        labels: [inUnit(range!.min as number), inUnit((range!.min as number + (range!.max as number)) / 2), inUnit(range!.max as number)] } })) };
 }
 const extent = Math.ceil(R);
 const output = { schema: 'cssearth-image-mesh@1', id, name: recipe.name, source: recipe.source, meaning: recipe.meaning,
