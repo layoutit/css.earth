@@ -356,7 +356,10 @@ supports both a sampled radial surface and reduction of the original mesh.
 A radial surface supplies one radius per direction. `source-meshoptimizer`
 reduces source triangles instead; it can retain surfaces that a single radius
 cannot describe. Face budgets, open boundaries and error limits are checked by
-that path. The simplifier's error estimate and the measured source-transfer
+that path. Every radial display mesh has a ceiling of 2,000 faces, including
+source-preserving meshoptimizer reduction. Alternative lens meshes are checked
+individually; their combined transport count is not the active face count.
+The simplifier's error estimate and the measured source-transfer
 distance are separate quantities.
 
 ![Nine asteroid pairs comparing each original source mesh with its reduced mesh](images/mesh-source-comparison.webp)

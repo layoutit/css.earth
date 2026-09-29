@@ -38,6 +38,8 @@ test('a source within the face target is kept whole, and an unreachable target n
   const vertices = [[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]], tetrahedron = [[0,1,2],[0,3,1],[0,2,3],[1,3,2]];
   const small = await simplifyRadialShape(createIndexedShape(vertices, tetrahedron, { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }),
     { faceBudget: 8, simplification, source: 'tetra: shape.txt' }, 1);
+  await assert.rejects(simplifyRadialShape(createIndexedShape(vertices, tetrahedron, { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }),
+    { faceBudget: 2001, simplification }, 1), /Invalid source mesh simplification/);
   assert.equal(small.length, 4);
   assert.deepEqual([fixtureRecord(small.simplification).outputFaces, fixtureRecord(small.simplification).estimatedErrorMeters], [4, 0]);
   // A once-subdivided octahedron on the unit sphere: no collapse fits a millimetre, eight faces fit once the bound is lifted.
