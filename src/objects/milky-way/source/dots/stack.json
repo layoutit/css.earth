@@ -34,7 +34,14 @@
         0.02,
         0.005
       ]
+    },
+    {
+      "bank": "local-sky",
+      "appearUnits": [
+        0.005,
+        5e-05
+      ]
     }
   ],
-  "basis": "Presentation choice: each level starts to appear when the view's half-width at the Sun shrinks to the level's radius, so its edge is off screen, and is whole when it reaches the next level's radius; the 20 pc census is whole at 5 pc. The galaxy level is drawn whole within 10 kpc, as before."
+  "basis": "Presentation choice: each level starts to appear when the view's half-width at the Sun shrinks to the level's radius, so its edge is off screen, and is whole when it reaches the next level's radius; the 20 pc census is whole at 5 pc. The galaxy level is drawn whole within 10 kpc, as before. The sky level appears as the view narrows from 5 pc to 0.05 pc (10,000 AU), where the view from just outside the Solar System is a sky of stars."
 }

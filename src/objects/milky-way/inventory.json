@@ -28,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "dots.json",
-      "bytes": 362155,
-      "sha256": "7776b51124731d79092cdadb24d0fa38509c4c84461fce081832b2128329e51f"
+      "bytes": 889774,
+      "sha256": "4bc9cd6319721a367d75eaa686235ddb514e182328b06447bdf0917cb450feac"
     },
     {
       "location": "prepared",
@@ -87,6 +87,12 @@
     },
     {
       "location": "prepared",
+      "filename": "local-sky.json",
+      "bytes": 508812,
+      "sha256": "622ed2e958cbbad2900ad7bbf7d425adfe67041e3b0af7934f104c9015cd72db"
+    },
+    {
+      "location": "prepared",
       "filename": "masers.json",
       "bytes": 5585,
       "sha256": "400fd14ff211484284eaa9ae75d4d0ef64a54c6b060eea2f078554103ded1c94"
@@ -96,6 +102,12 @@
       "filename": "nearby-stars-20pc.json",
       "bytes": 68632,
       "sha256": "b3f7971fecd4ba7979e281dede851b62a7fcbb428984b6ed50c6996aebb7d900"
+    },
+    {
+      "location": "prepared",
+      "filename": "nearby-stars-sky.json",
+      "bytes": 543315,
+      "sha256": "5511d02e27fffc0e9ec480503dd873c32b7d42325ed0f1241bbb70022c46539a"
     },
     {
       "location": "prepared",
