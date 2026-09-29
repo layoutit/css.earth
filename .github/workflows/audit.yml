@@ -92,7 +92,7 @@ jobs:
         # The astronomy data ledger check below resolves the ledger and its library through the built
         # @cssearth/bake package, like every other packages/bake/cli entry; --ignore-scripts above skipped
         # the postinstall build.
-        run: pnpm --filter @cssearth/bake build
+        run: pnpm --filter "@cssearth/bake..." build
       - name: Check the astronomy data ledger
         if: ${{ !cancelled() }}
         # SQLite integrity, evidence hashes, source counts, proposal writeups and the export slices.

@@ -3,7 +3,7 @@
  * The environment is separate from the astroquery toolchain because spiderman-package 1.0.3 builds only against NumPy 1.x
  * (spiderman-toolchain.json says why). Install: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts spiderman install */
 import { createHash } from 'node:crypto';
-import { runToolchainProcess } from './toolchain-process.js';
+import { runToolchainProcess } from './toolchain/process.js';
 import { accessSync, mkdirSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

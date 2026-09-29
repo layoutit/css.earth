@@ -781,10 +781,10 @@ The 2026-09-26 preparation covers all 722 body scenes:
 1,444 inventoried files and 28,064,758 image bytes. Each image is 1024 square;
 its receipt matched the runtime, default dataset, camera rotation and both
 inventory hashes. Quaoar's rings required a distance of 16 radii; the other
-721 captures used eight. The [representative sheet](performance/evidence/arrival-billboards/overview.webp)
+721 captures used eight. The [representative sheet](images/arrival-billboards/overview.webp)
 shows the existing datasets, including their unobserved regions and modeled colours.
 
-The [Earth-to-Lutetia sequence](performance/evidence/arrival-billboards/earth-to-lutetia.webp)
+The [Earth-to-Lutetia sequence](images/arrival-billboards/earth-to-lutetia.webp)
 contains eight of 50 native iPad frames from the performance build at that
 revision (iPad15,7, iOS 26.6, portrait). Times are relative to the first screen
 grab. The 4.902, 5.213 and 5.377 second frames bracket the billboard reveal;

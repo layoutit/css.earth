@@ -56,6 +56,9 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/saturn/source/cassini-pia21611.jpg
 !src/objects/saturn/source/approved/saturn-fixed-material.webp
 !src/objects/saturn/source/saturn-weather-static.webp
+# Kept in git: a figure converted from its published TIFF, and a sampled spectrum Gaia does not publish for this faint source.
+!src/objects/iapetus/source/figures/pia07005-map.png
+!src/objects/wd-1856-534/source/photometry/gaia-dr3-xp-sampled.csv
 
 # IAU/USGS Gazetteer of Planetary Nomenclature centre-point archives: the
 # upstream feed regenerates weekly, so the committed snapshot identifies the

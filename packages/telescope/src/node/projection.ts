@@ -1,6 +1,6 @@
 /** PlanetMapper owns navigation and resampling; no interactive viewer is started. */
 import { spawn } from 'node:child_process';
-import { astroqueryToolchain } from './toolchain.js';
+import { astroqueryToolchain } from './toolchain/toolchain.js';
 import { requireRecord } from '@cssearth/core';
 
 export const PROJECTION_PYTHON = String.raw`

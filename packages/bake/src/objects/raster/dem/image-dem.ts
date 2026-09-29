@@ -1,6 +1,6 @@
-import {parseImageDemProfile,decodeProfile} from './source-records.ts';
+import {parseImageDemProfile,decodeProfile} from '../source-records.ts';
 import { readFile } from 'node:fs/promises';
-import { createIndexedShape } from '../geometry/index.ts';
+import { createIndexedShape } from '../../geometry/index.ts';
 
 /** Released Cartesian elevation samples in an image plane. Missing rows remain
  * missing surface; connectivity never bridges a vacant grid cell. The explicit

@@ -14,3 +14,4 @@ name the recorder and trace identifiers instead.
 | [Retained layout boundaries](retained-layout-boundaries.md) | Style containment that keeps invalidation local |
 | [Coasting freezes membership](motion-freezes-membership.md) | The inertia gate: what may change while the camera coasts |
 | [World-context delta publication](world-context-delta-publication.md) | Publishing only changed world-context bodies |
+| [Billboard-first startup](startup-billboard.md) | A default page's arrival image in place of the scene DOM at startup |

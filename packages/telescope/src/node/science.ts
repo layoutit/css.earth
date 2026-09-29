@@ -1,6 +1,6 @@
 /** Astropy owns FITS units/WCS; css.earth owns association, conservative masks and claims. */
 import { spawn } from 'node:child_process';
-import { astroqueryToolchain } from './toolchain.js';
+import { astroqueryToolchain } from './toolchain/toolchain.js';
 import { requireRecord, requireString } from '@cssearth/core';
 import { CUBE_OUTPUT_PYTHON } from './cube-outputs.js';
 export const SCIENCE_PYTHON = String.raw`

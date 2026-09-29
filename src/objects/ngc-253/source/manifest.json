@@ -34,6 +34,60 @@
           }
         ]
       }
+    },
+    {
+      "id": "cantiello-gc-table",
+      "path": "src/objects/ngc-253/source/cantiello-gc/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F611%2FA21%2Ftable3%22+WHERE+Class+%3D+%27Bona_Fide%27",
+      "title": "A VST and VISTA study of globular clusters in NGC253, table.csv",
+      "credit": "M. Cantiello, A. Grado, M. Rejkuba, M. Arnaboldi; A&A 611, A21",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through cantiello-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cantiello-2018-ngc253-globular-clusters",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F611%2FA21%2Ftable3%22+WHERE+Class+%3D+%27Bona_Fide%27"
+          }
+        ]
+      }
+    },
+    {
+      "id": "congiu-pne-table",
+      "path": "src/objects/ngc-253/source/congiu-pne/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F700%2FA125%2Fcatalog%22",
+      "title": "The MUSE view of the Sculptor galaxy: survey overview and the luminosity function of planetary nebulae, table.csv",
+      "credit": "E. Congiu, F. Scheuermann, K. Kreckel, A. Leroy; A&A 700, A125",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through congiu-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "congiu-2025-ngc253-pne",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+ID%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F700%2FA125%2Fcatalog%22"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rodriguez-groups-table",
+      "path": "src/objects/ngc-253/source/rodriguez-groups/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F479%2F961%2Fcatalog%22",
+      "title": "Identification and analysis of the young population in the starburst galaxy NGC 253, table.csv",
+      "credit": "M. J. Rodriguez, G. Baume, C. Feinstein; MNRAS 479, 961",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through rodriguez-groups/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "rodriguez-2018-ngc253-young-groups",
+            "role": "material",
+            "evidence": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F479%2F961%2Fcatalog%22"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -88,6 +142,54 @@
             "evidence": "https://arxiv.org/abs/1105.0005"
           }
         ]
+      }
+    },
+    {
+      "id": "cantiello-gc-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-253/source/cantiello-gc/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the A VST and VISTA study of globular clusters in NGC253 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "congiu-pne-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-253/source/congiu-pne/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the The MUSE view of the Sculptor galaxy: survey overview and the luminosity function of planetary nebulae rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "dots-merge",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-253/source/dots/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored merge of the catalogue dot banks into one layer.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "rodriguez-groups-points",
+      "kind": "authored-document",
+      "path": "src/objects/ngc-253/source/rodriguez-groups/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored selection, frame and colour of the Identification and analysis of the young population in the starburst galaxy NGC 253 rows drawn as dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
       }
     }
   ],

@@ -487,6 +487,16 @@
         "lenses"
       ],
       "lensId": "topography",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "messenger",
+            "missionId": "messenger",
+            "evidence": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m"
+          }
+        ]
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
