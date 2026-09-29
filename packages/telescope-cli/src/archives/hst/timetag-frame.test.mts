@@ -396,3 +396,11 @@ test('a centred crop is refused on an odd grid, and keeps the target in the midd
   // The target stands at continuous 4; the crop starts at 2, so it stands at continuous 2 in a crop 4 across.
   assert.equal(centredCrop(values, size, 2).values[0], 18);
 });
+
+test('the rest-frame image and picture still carry the FITS ORIGIN string they serialized before the archive code moved into telescope-cli', () => {
+  const pixels = 128, run = runOf(pixels, 200, 0, new Float64Array(pixels * pixels));
+  const science = readFitsHdus(timeTagProduct(run))[1]!.header;
+  const picture = readFitsHdus(timeTagPicture(run))[0]!.header;
+  assert.equal(science.ORIGIN, 'cssEarth tools/objects/hst/timetag-frame.mts');
+  assert.equal(picture.ORIGIN, 'cssEarth tools/objects/hst/timetag-frame.mts');
+});

@@ -8,6 +8,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { PROGRAMS, parseProgram } from './archive.mts';
 import { checkRegistration, junoReceipts } from './archive-ledger.mts';
+import { registrationSoftware } from './measure.mts';
 
 const read = async (name: string) => JSON.parse(await readFile(resolve(PROGRAMS, name), 'utf8')) as Record<string, unknown>;
 
@@ -76,4 +77,10 @@ test('a receipt is read against the program it claims', async () => {
 test('every receipt beside the pinned programs is accepted', async () => {
   const { problems } = await junoReceipts();
   assert.deepEqual(problems, [], 'run node packages/telescope-cli/src/archives/juno/archive-ledger.mts --local');
+});
+
+test('registrationSoftware still reports the software name it recorded before the archive code moved into telescope-cli', async () => {
+  const software = await registrationSoftware();
+  assert.equal(software[0]!.name, 'cssearth tools/objects/juno/measure.mts');
+  assert.match(software[0]!.version, /^[0-9a-f]{64}$/u);
 });
