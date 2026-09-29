@@ -40,18 +40,23 @@ export interface PhotographicAtlas {
 }
 
 /** Repaint the existing atlas rectangles and exactly the existing lighting model. */
-export async function prepareNativePhotographicAtlas({radial,sourceDirectory,source,validity,sampling,publicDirectory,publicBase,id,sunDirection,mapWidth}: {
+export async function prepareNativePhotographicAtlas({radial,sourceDirectory,source,validity,sampling,publicDirectory,publicBase,id,sunDirection,mapWidth,textureScale=1}: {
   radial:PhotographicAtlas; sourceDirectory:string; source:unknown; validity:unknown; sampling:NativePhotographicSampling;
-  publicDirectory:string; publicBase:string; id:string; sunDirection:readonly number[]; mapWidth:number;
+  publicDirectory:string; publicBase:string; id:string; sunDirection:readonly number[]; mapWidth:number; textureScale?:number;
 }) {
   const sampler=await loadNativePhotograph(sourceDirectory,source,validity);
-  const {width,height}=radial;
+  // CSS and mesh remain canonical; each output texel covers 1/scale canonical pixels.
+  const width=radial.width*textureScale,height=radial.height*textureScale;
+  if (![1,.5,.25,.125].includes(textureScale)) throw new TypeError('Invalid photographic texture scale.');
   if (![width,height].every(n=>Number.isSafeInteger(n)&&n>0) || width>16383 || height>16383 ||
     sunDirection.length!==3 || !sunDirection.every(Number.isFinite)) throw new TypeError('Invalid retained photographic atlas.');
   const flood=Buffer.alloc(width*height*4),shadow=Buffer.alloc(width*height*4),color=[0,0,0];
   let missingTexels=0;
-  for(const {face,rect,matrix:m,geometry} of radial.plans) {
-    if(face.estimated || m.length!==16 || !m.every(Number.isFinite) || geometry.leafWidth!==rect.width || geometry.leafHeight!==rect.height ||
+  for(const {face,rect:canonicalRect,matrix:canonicalMatrix,geometry} of radial.plans) {
+    const rect={x:canonicalRect.x*textureScale,y:canonicalRect.y*textureScale,width:canonicalRect.width*textureScale,height:canonicalRect.height*textureScale};
+    if (!Object.values(rect).every(Number.isSafeInteger)) throw new TypeError('Photographic atlas rectangles must scale to whole pixels.');
+    const m=canonicalMatrix.map((value,index)=>index<8?value/textureScale:value);
+    if(face.estimated || m.length!==16 || !m.every(Number.isFinite) || geometry.leafWidth!==canonicalRect.width || geometry.leafHeight!==canonicalRect.height ||
       rect.x<0 || rect.y<0 || rect.x+rect.width>width || rect.y+rect.height>height) throw new Error('Native photograph requires unchanged, measured atlas faces.');
     const [a,b,c]=face.vertices,ab=b.map((v,i)=>v-a[i]),ac=c.map((v,i)=>v-a[i]);
     const aa=ab.reduce((v,n,i)=>v+n*ab[i],0),bb=ac.reduce((v,n,i)=>v+n*ac[i],0),abac=ab.reduce((v,n,i)=>v+n*ac[i],0),denominator=aa*bb-abac*abac;

@@ -1,3 +1,4 @@
+import sharp from 'sharp';
 import { parseRuntimeManifest } from './public-runtime-assets.ts';
 import { sha256 } from '@cssearth/core/node';
 import { readInventory, mergeInventory, inventoryText } from '@cssearth/objects/node';
@@ -78,12 +79,33 @@ function minimapPaths(value: unknown): string[] {
   return paths;
 }
 
+/** A file can match inventory.json while belonging to an older atlas layout. Validate
+ * the surface records against that inventory and the actual image before publishing. */
+export async function verifySurfaceAssetRecords(id: string, surfaces: unknown, manifest: RuntimeManifest, publicDirectory: string) {
+  const prefix=`/scenes/${id}/`, assets=new Map(manifest.assets.map(asset=>[prefix+asset.filename,asset]));
+  const visit=async (value: unknown): Promise<void> => {
+    if (Array.isArray(value)) { for (const item of value) await visit(item); return; }
+    if (value === null || typeof value !== 'object') return;
+    const record=requireRecord(value),asset=typeof record.url==='string'?assets.get(record.url):undefined;
+    if (asset && 'sha256' in record && 'bytes' in record) {
+      if (asset.sha256!==record.sha256 || asset.bytes!==record.bytes) throw new Error(`Surface record disagrees with published atlas: ${asset.filename}. Rebake the image and its layout together.`);
+      if ('width' in record && 'height' in record) {
+        const image=await sharp(resolve(publicDirectory,asset.filename)).metadata();
+        if (image.width!==record.width || image.height!==record.height) throw new Error(`Surface dimensions disagree with published atlas: ${asset.filename}.`);
+      }
+    }
+    for (const item of Object.values(record)) await visit(item);
+  };
+  await visit(surfaces);
+}
+
 /** Publish finalized images, previews, JSON and the descriptor as one prepared set. */
 export async function publishPreparedObject({ id, stage, objectDirectory, publicDirectory, outputDirectory, projectRoot }: {
   id: string; stage: string; objectDirectory: string; publicDirectory: string; outputDirectory: string; projectRoot: string;
 }) {
   const data = resolve(stage, 'prepared'), outputs = [...await readPreparedJsonOutputs(data), ...await readPreparedBinaryOutputs(data)];
   const manifest = parseRuntimeManifest(await optionalJson(resolve(data, 'inventory.json')), id);
+  await verifySurfaceAssetRecords(id, await optionalJson(resolve(data, 'surfaces.json')), manifest, resolve(stage, 'public'));
   const current = await readInventory(id, objectDirectory);
   const stagedPrepared = await readInventory(id, stage);
   if (!stagedPrepared) throw new Error(`Prepared publication inventory is missing: ${id}.`);
