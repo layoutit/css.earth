@@ -284,7 +284,9 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...focus, ...(focusView ? { systemView: focusView } : {}) }),
     ...(Object.keys(classificationViews).length ? { classificationViews: freeze(classificationViews) } : {}),
     bodies: freeze(bodies.map(body => {
-      const systemView = systemViewPolicy === undefined ? undefined : prepareSystemView(body, bodies, states, systemViewPolicy, orbitCenters);
+      // The radius share leaves out small moons. A star frames all its planets, as the root system does.
+      const policy = systemViewPolicy && facts[body.id]?.classification === 'star' ? { ...systemViewPolicy, minimumRadiusShare: 0 } : systemViewPolicy;
+      const systemView = policy === undefined ? undefined : prepareSystemView(body, bodies, states, policy, orbitCenters);
       return systemView ? freeze({ ...body, systemView }) : body;
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }
