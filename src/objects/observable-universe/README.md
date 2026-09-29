@@ -75,7 +75,6 @@ the page draws it from the same map, limb law and opacities
   [the whole sphere from outside](evidence/2026-09-29/cmb-from-outside.jpg) seamless across its 450 patches.
 - The registry tests check that the four overviews are `OBJECTS` entries and that zooming out from the Sun walks them in
   their order (`site/test/navigation-ontology.test.mts`, `site/test/overview-context.test.mts`).
-- The [context provenance tests](../../../tests/contract/context-provenance.test.mts) verify output and inventory pins.
 
 ## Known problems
 

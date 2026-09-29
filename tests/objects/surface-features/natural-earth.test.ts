@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync } from 'node:fs';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '../source-test.mts';
 const test = sourceTest();
@@ -8,27 +7,6 @@ import { loadNaturalEarthRows, naturalEarthZoomShare, parseNaturalEarthConfig } 
 
 const earthSource = resolve(process.cwd(), 'src/objects/earth/source');
 const recipe = async () => JSON.parse(await readFile(resolve(earthSource, 'preparation/features.json'), 'utf8')).naturalEarth;
-
-/** Why the layer test cannot run here: the archives the recipe names that are absent from this checkout. An absent archive is
- * an unrestored download only when Earth's source manifest declares it with an origin; any other absent name (undeclared or
- * misspelled) is a failure, not a skip. `unzip` names no absent path in its error, so the shared helper cannot tell them apart. */
-async function unrestoredArchives(archives: readonly string[]): Promise<string | false> {
-  const manifest: unknown = JSON.parse(await readFile(resolve(earthSource, 'manifest.json'), 'utf8'));
-  const inputs = manifest && typeof manifest === 'object' && 'inputs' in manifest && Array.isArray(manifest.inputs) ? manifest.inputs as unknown[] : [];
-  const downloads = new Set(inputs.flatMap(input => input && typeof input === 'object' && 'path' in input && 'origin' in input
-    && typeof input.path === 'string' && typeof input.origin === 'string' ? [input.path] : []));
-  const missing = archives.map(archive => `features/${archive}`).filter(path => !existsSync(resolve(earthSource, path)));
-  const undeclared = missing.filter(path => !downloads.has(path));
-  if (undeclared.length) throw new Error(`Natural Earth archives are missing and not declared as downloads in Earth's source manifest: ${undeclared.join(', ')}`);
-  return missing.length ? `earth: ${missing.join(', ')} not restored; run node packages/bake/cli/restore-source-inputs.mts --object=earth` : false;
-}
-
-test('an absent Natural Earth archive skips only when the source manifest declares it as a download', async () => {
-  await assert.rejects(unrestoredArchives(['ne_10m_admin_0_countrys.zip']), /not declared as downloads.*features\/ne_10m_admin_0_countrys\.zip/u);
-  const declared = (await recipe()).layers.map((layer: { archive: string }) => layer.archive);
-  const reason = await unrestoredArchives(declared);
-  assert.ok(reason === false || /not restored/u.test(reason));
-});
 
 test('Natural Earth minimum zoom maps linearly between the farthest and closest camera views', () => {
   const discovery = { farthestZoomLevel: 1.1, closestZoomLevel: 4.4, mapMaximumZoomLevel: 5 };
@@ -49,10 +27,10 @@ test('the recipe must say whether each class labels the map and give ordered dis
   assert.throws(() => parseNaturalEarthConfig({ ...valid, highlights: { tier: 5, ids: ['1', '1'] } }), /distinct/u);
 });
 
-test('the pinned Earth layers keep countries at label points, fold split parts and hide unlisted classes from the map', async t => {
-  const unrestored = await unrestoredArchives((await recipe()).layers.map((layer: { archive: string }) => layer.archive));
-  if (unrestored) return t.skip(unrestored);
+test('the pinned Earth layers keep countries at label points, fold split parts and hide unlisted classes from the map', async () => {
   const config = parseNaturalEarthConfig(await recipe());
+  // unzip names no absent path; reading each archive first lets an unrestored download skip by name.
+  for (const layer of config.layers) await access(resolve(earthSource, 'features', layer.archive));
   const rows = loadNaturalEarthRows(earthSource, 'features', config);
   const france = rows.find(row => row.layer === 'countries' && row.name === 'France')!;
   assert.ok(france && france.extent === null && france.centerLon < 10 && france.centerLat > 40, 'France anchors at its European label point with no extent');

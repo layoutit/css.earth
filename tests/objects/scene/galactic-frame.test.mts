@@ -8,6 +8,7 @@ import {
   degreesFromDirection,
   directionFromDegrees,
   icrsToGalacticMatrix,
+  multiplyMatrices,
   transformDirection,
   transposeMatrix,
 } from "@cssearth/bake/objects/scene";
@@ -34,7 +35,7 @@ test("the galactic matrix derived from the J2000 constants is the Hipparcos matr
   }
   assert.deepEqual([...ICRS_TO_GALACTIC], derived);
   // A proper rotation.
-  const product = multiply(derived, transposeMatrix(derived));
+  const product = multiplyMatrices(derived, transposeMatrix(derived));
   for (let index = 0; index < 9; index += 1) {
     assert.ok(Math.abs(product[index] - (index % 4 === 0 ? 1 : 0)) < 1e-12);
   }
@@ -86,17 +87,6 @@ test("the galactic plane is inclined 60.2 degrees to the ecliptic with the centr
   const inclination = Math.acos(pole[2]) * 180 / Math.PI;
   assert.ok(Math.abs(inclination - 60.19) < 0.02, `inclination ${inclination}`);
 });
-
-function multiply(a: readonly number[], b: readonly number[]) {
-  const result = new Array<number>(9);
-  for (let row = 0; row < 3; row += 1) {
-    for (let column = 0; column < 3; column += 1) {
-      result[row * 3 + column] = a[row * 3] * b[column] +
-        a[row * 3 + 1] * b[3 + column] + a[row * 3 + 2] * b[6 + column];
-    }
-  }
-  return result;
-}
 
 function determinant([a, b, c, d, e, f, g, h, i]: readonly number[]) {
   return a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);

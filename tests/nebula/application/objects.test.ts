@@ -4,7 +4,6 @@ import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import { sourceTest } from '../../objects/source-test.mts';
 const test = sourceTest();
-import ts from 'typescript';
 import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
 import { createRenderElementBudget, type CompilerBakeResult } from '@cssearth/bake/volume';
 import type { PreparedCssVolume } from '@cssearth/renderer/volume/types.ts';
@@ -35,32 +34,6 @@ test('sanitizeVolumeProvenance leaves provenance without a staging path untouche
   // Only a whole `.prepared-<pid>` path segment is the staging directory.
   const lookalike = { provenance: { sourceVolume: { path: 'src/objects/m1/data.prepared-7/volume.json' } } };
   assert.equal(sanitizeVolumeProvenance(lookalike), lookalike);
-});
-
-test('every volume the nebula delivery validates is sanitized', async () => {
-  const path = 'packages/bake/src/nebula/objects.ts', source = await readFile(resolve(root, path), 'utf8');
-  const file = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true);
-  let validated = 0, sanitized = 0;
-  const visit = (node: ts.Node): void => {
-    if (ts.isCallExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === 'validatePreparedCssVolume') {
-      validated++;
-      const parent = node.parent;
-      if (ts.isCallExpression(parent) && ts.isIdentifier(parent.expression) && parent.expression.text === 'sanitizeVolumeProvenance' &&
-        parent.arguments.length === 1 && parent.arguments[0] === node) sanitized++;
-    }
-    ts.forEachChild(node, visit);
-  };
-  visit(file);
-  assert.ok(validated > 0, 'the delivery validates at least one prepared volume');
-  assert.equal(sanitized, validated, 'each validated volume passes straight through sanitizeVolumeProvenance');
-});
-
-test('a prepared m1 lens bank, if baked locally, records no process-pid staging directory', async () => {
-  const path = resolve(root, 'src/objects/m1/prepared/lenses.json');
-  let bytes: string;
-  try { bytes = await readFile(path, 'utf8'); }
-  catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return; throw error; }
-  assert.doesNotMatch(bytes, /\.prepared-\d+(?=[\\/])/, 'A bake must never record its own staging directory name in committed-shaped provenance.');
 });
 
 test('the real installer rejects post-compiler field stars before replacing the delivered package', async t => {

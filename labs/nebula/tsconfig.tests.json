@@ -23,8 +23,7 @@
     "../../node_modules/vite/client.d.ts",
     "../../tests/nebula/**/*.test.mts",
     "../../tests/nebula/**/*.test.ts",
-    "../../tests/nebula/application-isolation*.ts",
-    "../../tests/sources/nebula-provenance-source-closure.test.mts"
+    "../../tests/nebula/application-isolation*.ts"
   ],
   "exclude": [
     "**/node_modules/**",

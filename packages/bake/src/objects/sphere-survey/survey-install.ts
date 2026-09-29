@@ -187,11 +187,6 @@ export async function installSetup(objectId: string, options: { root: string; le
   ledger.entries = entries;
   await writeJson(resolve(objectDirectory, 'investigations.json'), ledger);
 
-  // The asteroid package anchors list each package's lenses; a body with a row gains this one, edited in place so the
-  // file's own number formatting survives.
-  const anchorsPath = resolve(root, 'tests/objects/unit/anchors/asteroid-packages.json');
-  await writeFile(anchorsPath, withAnchoredLens(await readFile(anchorsPath, 'utf8'), objectId, LENS_ID));
-
   // Evidence, README and credits.
   await mkdir(resolve(objectDirectory, 'evidence'), { recursive: true });
   for (const file of ['published-comparison.json', 'published-comparison.webp']) await copyFile(resolve(work, 'evidence', file), resolve(objectDirectory, 'evidence', file));

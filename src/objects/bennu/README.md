@@ -56,8 +56,6 @@ An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equ
 
 The earlier source notes report Headless Chrome 152 checks of the then-selected lenses with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
-[Source anchors](../../../tests/objects/unit/anchors/asteroid-calibration.json) checked by the shared [calibration runner](../../../tests/objects/unit/asteroid-calibration.test.mts).
-
 The [native-value check](evidence/spectral-bands/native-values.json) compares the production sampler with independent float32 byte reads and coordinates from the original ISIS labels. It checks native pixels, fractional footprints, extrema, negative values and gaps for all four bands. This verifies decoding and display transfer, not the instrument calibration or boulder-level registration.
 
 The native check passed 1,047 source probes. At most 0.007% of valid native samples in any band lie outside the common display range. The [restoration check](evidence/spectral-bands/source-restoration.json) extracted every added input and label through the production acquisition recipe into an empty directory and matched the preparation inputs byte for byte; it reused the cached publisher ZIP.
