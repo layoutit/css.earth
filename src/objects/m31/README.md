@@ -35,6 +35,9 @@ measure per-pixel distance.
   the survey, 10,004,307 from the fill.
 - **Fill matched to the survey:** per-channel histogram matching over the pixels both cover, and a 2′ fade inside the
   mosaic's edge ([report](evidence/2026-09-29/optical-composite.json)).
+- **Restored from the source cache:** the composite is not tracked, and its manifest `origin` is the NOIRLab page, not
+  the file. Its `generator` field sends `restore-source-inputs.mts` to `source-cache/m31/src/objects/m31/source/optical-composite.jpg`
+  only. When that copy is missing, the restore fails and names the script to run.
 
 The image-layer bake ([`prepare.ts`](../../../packages/bake/src/image-layers/prepare.ts)) then, in this order:
 

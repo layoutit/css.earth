@@ -8,14 +8,16 @@ import { parseVolumeRecipe } from '../volume/index.ts';
 import { sourceBytes } from '../volume/node/index.ts';
 import { publishSourceBytes } from '../delivery/index.ts';
 import { sourceArray, sourceObject, sourcePath } from '@cssearth/objects/sources';
-import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../objects/sources/index.ts';
+import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl, sourceFileFormatProblem, sourceFormatProblem } from '../objects/sources/index.ts';
 
 /**
  * Restore and verify the declared source inputs of the objects `argumentsList` selects (`--object=<id>`, or every one), in the
  * checkout at `root`: a volume's pinned grid and the prepared star bank its sky reads, a repository volume's downloads (from
- * the source mirror at `assetOrigin` first), Earth's MUR imagery, and every other body through its acquisition plan
- * (`packages/bake/cli/object-operations.mts acquire`). `--repository-volumes` restores only the repository volumes, found
+ * the source mirror at `assetOrigin` first; an input with a `generator` only from there), Earth's MUR imagery, and every
+ * other body through its acquisition plan (`packages/bake/cli/object-operations.mts acquire`). `--repository-volumes` restores only the repository volumes, found
  * from `src/objects` before the scene catalogue exists. `assetOrigin` is the asset host; a test points it at a local server.
+ * A repository volume file is written only when its bytes are the format its extension names (`sourceFormatProblem`), so a
+ * publisher page answering HTTP 200 is refused rather than saved as the image.
  */
 export async function restoreSourceInputs(argumentsList: readonly string[], { root: projectRoot = process.cwd(), assetOrigin = RUNTIME_ASSET_ORIGIN } = {}) {
   const repositoryVolumeMode = argumentsList.length === 1 && argumentsList[0] === '--repository-volumes';
@@ -45,31 +47,54 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
     const manifest = sourceObject(JSON.parse(manifestBytes.toString('utf8')));
     if (manifest.schema !== 'cssearth-volume-source-manifest@1') return false;
     if (manifest.pathBase !== 'repository') throw new TypeError(`Invalid repository volume source manifest: ${id}.`);
-    const entries = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section =>
-      sourceArray(manifest[section] ?? [], sourceObject).map(raw => ({ raw, generated: section === 'generatedIntermediates' })));
-    for (const { raw, generated } of entries) {
+    const entries = (['inputs', 'documents', 'generatedIntermediates'] as const).flatMap(section =>
+      sourceArray(manifest[section] ?? [], sourceObject).map(raw => ({ raw, section })));
+    for (const { raw, section } of entries) {
       const path = sourcePath(raw.path);
       if (path.startsWith('.local/')) continue;
-      // A tracked file arrives with the checkout; a download is fetched only while it is missing.
+      const entry = `${id}: ${path} (source/manifest.json ${section}, id ${JSON.stringify(raw.id ?? null)})`;
+      // A tracked file arrives with the checkout; a download is fetched only while it is missing. A present file is never
+      // replaced, but one whose bytes are not what its name says (a web page saved as an image) is refused before a bake reads it.
       const destination = resolve(projectRoot, path);
       const present = await lstat(destination).then(() => true, error => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; });
-      if (present) continue;
+      if (present) {
+        const problem = await sourceFileFormatProblem(path, destination).catch(error => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+        if (problem) throw new Error(`${entry} holds ${problem}. Delete it and restore again.`);
+        continue;
+      }
+      const mirror = sourceCacheUrl(assetOrigin, id, path);
+      // A file this repository builds (a composite, a crop) has no publisher download: its origin names the material, not
+      // the file. Only the source mirror holds it; otherwise its generator must make it.
+      if (raw.generator !== undefined) {
+        const generator = sourcePath(raw.generator), failure = await restore(path, destination, mirror);
+        if (failure) throw new Error(`${entry} is built by field "generator" = "${generator}" and the source mirror has no usable copy: ` +
+          `${mirror} ${failure}. Run node ${generator}, then publish it with node packages/bake/cli/publish-source-cache.mts --object=${id}.`);
+        continue;
+      }
       const origin = typeof raw.origin === 'string' && raw.origin ? raw.origin : null;
       // A generated intermediate is written by the step the manifest names, not restored. It is ignored, so a
       // fresh checkout never holds one; the step that needs it fails on its own terms if it was never produced.
-      if (!origin && generated) continue;
-      if (!origin) throw new Error(`Repository volume source is missing and has no origin: ${id}/${path}.`);
-      let lastError: unknown;
-      for (const url of [sourceCacheUrl(assetOrigin, id, path), origin]) {
-        try {
-          await publishSourceBytes({ destination, bytes: await fetchWithRetry(fetch, url) });
-          lastError = undefined;
-          break;
-        } catch (error) { lastError = error; }
-      }
-      if (lastError) throw lastError;
+      if (!origin && section === 'generatedIntermediates') continue;
+      if (!origin) throw new Error(`${entry} is missing and has no field "origin" to restore it from.`);
+      const mirrorFailure = await restore(path, destination, mirror);
+      if (!mirrorFailure) continue;
+      const originFailure = await restore(path, destination, origin);
+      if (originFailure) throw new Error(`${entry} could not be restored. Source mirror ${mirror} ${mirrorFailure}. ` +
+        `Field "origin" = "${origin}" ${originFailure}. If the origin is a publisher page rather than the file, give the entry a "generator" ` +
+        `or publish the file with node packages/bake/cli/publish-source-cache.mts --object=${id}.`);
     }
     return true;
+  }
+
+  /** Fetch `url` and write it to `destination` when its bytes are the format `path` names; otherwise say why not. */
+  async function restore(path: string, destination: string, url: string): Promise<string | null> {
+    let bytes: Buffer;
+    try { bytes = await fetchWithRetry(fetch, url); }
+    catch (error) { return `failed: ${error instanceof Error ? error.message : String(error)}`; }
+    const problem = sourceFormatProblem(path, bytes);
+    if (problem) return `returned ${problem}`;
+    await publishSourceBytes({ destination, bytes });
+    return null;
   }
 
   // Repository-volume restoration runs before the generated site catalogue exists in the nebula CI lane.

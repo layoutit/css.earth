@@ -8,6 +8,7 @@ import test, { type TestContext } from 'node:test';
 import { validateObjectPackageFiles } from '../../site/build/object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
+import { sourceFormatProblem } from '@cssearth/bake/objects/sources';
 import { requireInventory } from '@cssearth/objects/node';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
@@ -130,7 +131,7 @@ test('checkout restores a missing compressed observation without refreshing exis
 });
 
 test('repository volume package restores a missing download from the object source mirror', async t => {
-  const root = await fixture(t, 'nebula'), bytes = Buffer.from('mirrored repository volume');
+  const root = await fixture(t, 'nebula'), bytes = Buffer.from('\x89PNG\r\n\x1a\nmirrored repository volume', 'latin1');
   const requests: (string | undefined)[] = [];
   const server = createServer((req, res) => { requests.push(req.url); res.end(bytes); });
   await new Promise<void>(accept => server.listen(0, '127.0.0.1', accept));
@@ -153,11 +154,92 @@ test('repository volume package restores a missing download from the object sour
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/source.bin')), bytes);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), bytes);
 
-  const kept = Buffer.from('a present file is never replaced');
+  const kept = Buffer.from('\x89PNG\r\n\x1a\na present file is never replaced', 'latin1');
   await writeFile(resolve(root, 'src/objects/nebula/preview.png'), kept);
   await run(root, [RESTORE, '--repository-volumes']);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), kept);
   assert.equal(requests.length, 2, 'a present file is not fetched again');
+});
+
+test('repository volume restore refuses a publisher page and takes a built input only from the source mirror', async t => {
+  const root = await fixture(t, 'galaxy'), jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0x00, 0x10, 0x4a, 0x46, 0x49, 0x46]);
+  const page = Buffer.from('<!DOCTYPE html>\n<html lang="en"><head><title>Panorama of Spiral Galaxy</title></head></html>');
+  // The mirror holds only what the test puts there; every other URL is a publisher page answering 200 with HTML.
+  const mirror = new Map<string, Buffer>(), requests: (string | undefined)[] = [];
+  const server = createServer((req, res) => {
+    requests.push(req.url);
+    const held = req.url === undefined ? undefined : mirror.get(req.url);
+    if (req.url?.startsWith('/source-cache/') && !held) { res.writeHead(404); res.end('Not Found'); return; }
+    res.writeHead(200, { 'content-type': held ? 'image/jpeg' : 'text/html' }); res.end(held ?? page);
+  });
+  await new Promise<void>(accept => server.listen(0, '127.0.0.1', accept));
+  t.after(() => new Promise<void>(accept => server.close(() => accept())));
+  const address = server.address();
+  assert.ok(address && typeof address !== 'string');
+  const origin = `http://127.0.0.1:${address.port}`;
+  await writeRestore(root, origin);
+  const composite = 'src/objects/galaxy/source/optical-composite.jpg', generator = 'packages/bake/authoring/galaxy/compose-optical.mts';
+  const manifest = (input: Record<string, unknown>) => json(resolve(root, 'src/objects/galaxy/source/manifest.json'), {
+    schema: 'cssearth-volume-source-manifest@1', pathBase: 'repository', documents: [], generatedIntermediates: [],
+    inputs: [{ id: 'optical', path: composite, origin: `${origin}/public/images/panorama/`, ...input }],
+  });
+  await json(resolve(root, 'src/objects/galaxy/source/presentation.json'), { schema: 'cssearth-volume-presentation-source@1' });
+  await rm(resolve(root, 'site/objects.mts'));
+
+  // A download whose origin turns out to be a page: both the mirror miss and the HTML body are named, and nothing is written.
+  await manifest({});
+  await assert.rejects(run(root, [RESTORE, '--repository-volumes']), (error: Error) => {
+    assert.match(error.message, /galaxy: src\/objects\/galaxy\/source\/optical-composite\.jpg \(source\/manifest\.json inputs, id "optical"\) could not be restored/u);
+    assert.match(error.message, /HTTP 404/u);
+    assert.match(error.message, /Field "origin" = "http:\/\/127\.0\.0\.1:\d+\/public\/images\/panorama\/" returned an HTML document \(\d+ bytes\), not a JPEG image/u);
+    return true;
+  });
+  await assert.rejects(readFile(resolve(root, composite)), { code: 'ENOENT' });
+
+  // A built input never falls back to its origin: the mirror miss names the object, file, field and value.
+  await manifest({ generator });
+  requests.length = 0;
+  await assert.rejects(run(root, [RESTORE, '--repository-volumes']), (error: Error) => {
+    assert.match(error.message, /galaxy: src\/objects\/galaxy\/source\/optical-composite\.jpg \(source\/manifest\.json inputs, id "optical"\) is built by field "generator" = "packages\/bake\/authoring\/galaxy\/compose-optical\.mts"/u);
+    assert.match(error.message, /Run node packages\/bake\/authoring\/galaxy\/compose-optical\.mts/u);
+    return true;
+  });
+  assert.ok(requests.length > 0 && requests.every(url => url === `/source-cache/galaxy/${composite}`), `only the mirror is asked: ${requests.join(', ')}`);
+  await assert.rejects(readFile(resolve(root, composite)), { code: 'ENOENT' });
+
+  // Once the mirror holds the composite, it is restored from there.
+  mirror.set(`/source-cache/galaxy/${composite}`, jpeg);
+  await run(root, [RESTORE, '--repository-volumes']);
+  assert.deepEqual(await readFile(resolve(root, composite)), jpeg);
+
+  // A page already saved under the image name is refused, not passed on to the bake, and not replaced.
+  await writeFile(resolve(root, composite), page);
+  await assert.rejects(run(root, [RESTORE, '--repository-volumes']),
+    /optical-composite\.jpg \(source\/manifest\.json inputs, id "optical"\) holds an HTML document \(\d+ bytes\), not a JPEG image\. Delete it and restore again\./u);
+  assert.deepEqual(await readFile(resolve(root, composite)), page);
+});
+
+test('source format check matches each image and archive extension and refuses pages and text', () => {
+  const html = Buffer.from('\ufeff  <!doctype html><html></html>');
+  const cases: readonly (readonly [string, Buffer, string | null])[] = [
+    ['a.jpg', Buffer.from([0xff, 0xd8, 0xff, 0xdb]), null],
+    ['a.JPEG', html, 'an HTML document (33 bytes), not a JPEG image'],
+    ['a.png', Buffer.from('\x89PNG\r\n\x1a\n', 'latin1'), null],
+    ['a.png', Buffer.from([0xff, 0xd8, 0xff, 0xdb]), 'a JPEG image (4 bytes), not a PNG image'],
+    ['a.webp', Buffer.from('RIFF\x10\0\0\0WEBPVP8 ', 'latin1'), null],
+    ['a.webp', Buffer.from('RIFF\x10\0\0\0WAVEfmt ', 'latin1'), 'unrecognised bytes starting 5249464610000000 (16 bytes), not a WebP image'],
+    ['a.tif', Buffer.from('II*\0', 'latin1'), null],
+    ['a.tiff', Buffer.from('MM\0*', 'latin1'), null],
+    ['a.tif', Buffer.from('Not Found'), 'a text body (9 bytes), not a TIFF image'],
+    ['a.fits', Buffer.from('SIMPLE  =                    T'), null],
+    ['a.fits', Buffer.alloc(0), 'an empty file, not a FITS file'],
+    ['a.fits.gz', Buffer.from([0x1f, 0x8b, 0x08]), null],
+    ['a.fits.gz', Buffer.from('SIMPLE  =                    T'), 'a FITS file (30 bytes), not a gzip stream'],
+    ['table.dat', Buffer.from('  1 00 42 30.1 +41 16 09\n'), null],
+    ['record.json', html, 'an HTML document (33 bytes), not a data file'],
+    ['page.html', html, null],
+  ];
+  for (const [path, bytes, problem] of cases) assert.equal(sourceFormatProblem(path, bytes), problem, path);
 });
 
 test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {
