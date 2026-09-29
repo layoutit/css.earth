@@ -1,0 +1,58 @@
+{
+  "id": "dorman-2013-m31-structural-decomposition",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A new approach to detailed structural decomposition from the SPLASH and PHAT surveys: kicked-up disk stars in the Andromeda galaxy?",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/779/2/103"
+    },
+    {
+      "type": "arxiv",
+      "value": "1310.4179"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1310.4179",
+      "label": "arXiv:1310.4179"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/0004-637X/779/2/103",
+      "label": "ApJ 779, 103"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1310.4179",
+      "checkedOn": "2026-09-29",
+      "locator": "Sect. 5.3: disk position angle (44.4 ± 0.5)°, 6-8° greater than the H I disk at R ~ 5-20 kpc; ellipticity 0.725 ± 0.005, inclination 74.0° ± 0.3° in the infinitely thin limit"
+    }
+  ],
+  "creators": [
+    "C. E. Dorman",
+    "L. M. Widrow",
+    "P. Guhathakurta",
+    "A. C. Seth",
+    "D. Foreman-Mackey",
+    "E. F. Bell",
+    "J. J. Dalcanton",
+    "K. M. Gilbert",
+    "E. D. Skillman",
+    "B. F. Williams"
+  ],
+  "publisher": "ApJ 779, 103",
+  "publicationDate": "2013",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Dorman et al. (2013), ApJ 779, 103.",
+      "scope": "Old stellar disc position angle",
+      "evidence": "https://arxiv.org/abs/1310.4179"
+    }
+  ]
+}

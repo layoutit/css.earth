@@ -1,0 +1,57 @@
+{
+  "id": "dalcanton-2023-m31-thick-disk",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Panchromatic Hubble Andromeda Treasury. XX. The disk of M31 is thick",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/1538-3881/accc83"
+    },
+    {
+      "type": "arxiv",
+      "value": "2304.08613"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2304.08613",
+      "label": "arXiv:2304.08613"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.3847/1538-3881/accc83",
+      "label": "AJ 166, 80"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2304.08613",
+      "checkedOn": "2026-09-29",
+      "locator": "Sect. 3.2: the inclination is 77° ± 0.5° from the maximum reddened-star fraction and the old disc's axial ratio; Appendix A: deprojection of (α, δ) onto an inclined disc"
+    }
+  ],
+  "creators": [
+    "J. J. Dalcanton",
+    "E. F. Bell",
+    "Y. Choi",
+    "A. E. Dolphin",
+    "M. Fouesneau",
+    "L. Girardi",
+    "D. W. Hogg",
+    "A. C. Seth",
+    "B. F. Williams"
+  ],
+  "publisher": "AJ 166, 80",
+  "publicationDate": "2023",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Dalcanton et al. (2023), AJ 166, 80.",
+      "scope": "Stellar disc inclination",
+      "evidence": "https://arxiv.org/abs/2304.08613"
+    }
+  ]
+}

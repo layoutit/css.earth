@@ -15,7 +15,15 @@ A publisher optical image supplies the color of an authored 1 kpc depth envelope
 | [Merrett et al. (2006)](https://doi.org/10.1111/j.1365-2966.2006.10268.x) | [Planetary nebulae](source/merrett-pne/points.json): 2,574 of 3,300 emission-line objects, after the authors' own flags for HII regions, background objects and other galaxies (CDS J/MNRAS/369/120). |
 | [Johnson et al. (2015)](https://doi.org/10.1088/0004-637X/802/2/127) | [Star clusters](source/phat-clusters/points.json): 2,753 clusters from the PHAT Hubble imaging, which covers only the north-east third of the disc (CDS J/ApJ/802/127). |
 
-The five catalogues give sky positions only. They are recorded for a future layer of catalogue dots over the image, in the Milky Way's style; nothing reads them yet. Placing them needs M31's disc orientation, which the geometry reference above leaves unqualified.
+The five catalogues give sky positions only. They are recorded for a future layer of catalogue dots over the image, in the Milky Way's style; nothing reads them yet.
+
+The [disc geometry](source/disc-geometry.json) that will place them on M31's disc is inclination 77.7° and position angle 38°, the [Corbelli et al. (2010)](https://doi.org/10.1051/0004-6361/200913297) H I fit between 10 and 25 kpc, around SIMBAD's M31 centre. Three published measurements are recorded beside it:
+
+- [Dalcanton et al. (2023)](https://doi.org/10.3847/1538-3881/accc83) measure 77° ± 0.5° from the stars themselves, within 0.7° of it.
+- [Chemin et al. (2009)](https://doi.org/10.1088/0004-637X/705/2/1395) agree on the position angle (37.7° ± 0.9°) but find 74.3° ± 1.1° for the inclination.
+- [Dorman et al. (2013)](https://doi.org/10.1088/0004-637X/779/2/103) find 44.4° ± 0.5° for the old red-giant disc, which the paper says can look more face-on than the young disc. It is not used for young tracers.
+
+One flat plane ignores the warp, which tilts the disc to 86° beyond 30 kpc.
 
 The image is publisher-prepared display RGB, not common calibrated flux or a qualified natural-color measurement. Observation dates are not retained in the selected records. The 361.93 × 234.08 arcmin field describes the parent image, not the 4783 × 5000 crop; crop coordinates and conversion are retained in the acquisition record.
 
@@ -31,7 +39,7 @@ The [manifest](source/manifest.json) records byte identities, complete credits, 
 
 - The wide DSS2 field contains the full visible galaxy and substantial surrounding sky, foreground stars and background objects. Those released sources are retained. Faint halo coverage is limited by the survey composite.
 - Foreground stars and background objects remain in the image. Compact features are not classified or individually placed in three dimensions; no point-source removal is applied.
-- Exact source fields, uncertainties and coordinate epoch for adopted orientation and placement remain incompletely recorded. No independent sky-registration or measured-depth acceptance is available here.
+- The image-layer recipe's inclination (77.5°) matches none of the papers above; its position angle (37.7°) is Chemin et al. (2009)'s mean. The recipe cites Chemin, whose mean inclination is 74.3°. Coordinate epoch and placement remain incompletely recorded. No independent sky-registration or measured-depth acceptance is available here.
 
 <details>
 <summary>Image-layer preparation and reproduction</summary>
