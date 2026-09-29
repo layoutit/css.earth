@@ -13,7 +13,7 @@ const descriptor = (id: string, order: number, classification: string) => ({ sch
 const au = (value: number) => ({ meters: value * 149597870700, value, unit: 'AU', quantity: 'geometric', referencePoint: 'heliocentre', epochJdTt: 2461286.5 });
 const discovery = (featured: boolean) => ({ featured, imagery: featured, illustration: false });
 const focus = { kind: 'prepared-focus', id: 'helix', focusId: 'helix', name: 'Helix Nebula', searchNames: ['helix'], classification: 'nebula',
-  systemName: 'Milky Way', route: '/sun/?focus=helix', sceneHostId: 'sun',
+  systemName: 'Milky Way', route: '/helix/', sceneHostId: 'sun',
   distance: { meters: 3.085677581491367e16, value: 1, unit: 'pc', quantity: 'catalogue', referencePoint: 'observer', epochJdTt: null } };
 
 async function checkout(records: { distances?: unknown; discoveries?: unknown; focuses?: unknown } = {}) {
@@ -55,7 +55,7 @@ test('refuses catalogue records that disagree or a focus without its host', asyn
     [{ discoveries: { sun: discovery(false) } }, /list different objects/],
     [{ discoveries: { sun: discovery(false), pluto: discovery(false) } }, /list different objects/],
     [{ distances: { sun: au(0), mars: au(1.5), pluto: au(39) }, discoveries: { sun: discovery(false), mars: discovery(true), pluto: discovery(false) } }, /Cannot find module|ENOENT/],
-    [{ focuses: [{ ...focus, sceneHostId: 'mars', route: '/mars/?focus=helix' }, { ...focus, id: 'm1', focusId: 'm1', route: '/jupiter/?focus=m1', sceneHostId: 'jupiter' }] }, /not a registered scene: m1/],
+    [{ focuses: [{ ...focus, sceneHostId: 'mars', route: '/helix/' }, { ...focus, id: 'm1', focusId: 'm1', route: '/m1/', sceneHostId: 'jupiter' }] }, /not a registered scene: m1/],
     [{ focuses: {} }, /focuses/],
   ];
   for (const [records, error] of cases) {

@@ -60,7 +60,7 @@
         6.084473301496455
       ]
     },
-    "implementation": "Independent Python bisection solve and explicit plane-basis evaluation: packages/astronomy/tools/verify-sn263-orbits.py. The existing JS loader independently evaluates rotation matrices and compares both epochs.",
+    "implementation": "Independent Python bisection solve and explicit plane-basis evaluation: https://github.com/layoutit/cssEarth/blob/5599231301/packages/astronomy/tools/verify-sn263-orbits.py (now packages/astronomy/cli/verify-sn263-orbits.py). The existing JS loader independently evaluates rotation matrices and compares both epochs.",
     "sourceFrameIdentityCheck": "Original Fang et al. Table 4 checked at PDF page 6: equatorial J2000, MJD54509; no ecliptic frame conversion. Orbital angles/epoch agree with the JPL API when matched by orbital size, excluding its mismatched physical fields.",
     "elapsedDaysFromSource": 6777,
     "periodUncertaintyLinearPhaseScaleDegrees": 31479.750326607642,

@@ -1,0 +1,52 @@
+{
+  "id": "hodge-1999-m33-hii-regions",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The HII Regions of M33. II. A Photometric Catalog of 1272 Newly Identified Emission Regions",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1086/316374"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/PASP/111/685"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1086/316374",
+      "label": "PASP 111, 685"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/PASP/111/685",
+      "label": "CDS J/PASP/111/685"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/PASP/111/685/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table1.dat: RAh-DEs (J2000), SHa, Area; 1,272 newly identified emission regions. The 1,066 regions of earlier catalogues are not in this table"
+    }
+  ],
+  "creators": [
+    "P. W. Hodge",
+    "J. Balsley",
+    "T. K. Wyder",
+    "B. P. Skelton"
+  ],
+  "publisher": "PASP 111, 685",
+  "publicationDate": "1999",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Hodge et al. (1999), PASP 111, 685.",
+      "scope": "M33 HII region positions",
+      "evidence": "https://doi.org/10.1086/316374"
+    }
+  ]
+}

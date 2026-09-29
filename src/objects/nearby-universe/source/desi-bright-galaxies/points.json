@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "desi-bright-galaxies",
+  "table": {
+    "path": "bgs-bright-21.5-sample.csv.gz",
+    "origin": "https://data.desi.lbl.gov/public/dr1/survey/catalogs/dr1/LSS/iron/LSScats/v1.5/BGS_BRIGHT-21.5_NGC_clustering.dat.fits and BGS_BRIGHT-21.5_SGC_clustering.dat.fits",
+    "bytes": 961523,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "redshift-planck18"
+  },
+  "sample": "The tracked file keeps one row in 10 of the 300,043 galaxies of the two clustering catalogues (217,614 NGC, then 82,429 SGC), in catalogue order, with TARGETID, RA, DEC, Z and the dereddened g, r and z fluxes.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "Mpc",
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "desi-2025-dr1",
+  "meaning": "The bright galaxies of DESI Data Release 1 (BGS BRIGHT, volume-limited to absolute r magnitude -21.5, redshift 0.1 to 0.4), each at its comoving distance in the Planck 2018 cosmology: the cosmic web out to 1.6 Gpc across DESI's footprint.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "colorByBands": {
+      "red": {
+        "column": 7,
+        "scale": 2.2
+      },
+      "green": {
+        "column": 6,
+        "scale": 3.4
+      },
+      "blue": {
+        "column": 5,
+        "scale": 6.0
+      },
+      "levels": 8,
+      "basis": "The Legacy Surveys' own colour rendering of these bands (legacypipe sdss_rgb, https://github.com/legacysurvey/legacypipe/blob/main/py/legacypipe/survey.py): z to red times 2.2, r to green times 3.4, g to blue times 6.0. The stretch there changes brightness only, so the channel ratios are the colour; the brightest channel is drawn full. The fluxes are observed, so the colour is the one the galaxy's light arrives with."
+    },
+    "toneBy": {
+      "magnitudeColumn": 6,
+      "nanomaggies": true,
+      "band": "r (dereddened, no k-correction)",
+      "brightMagnitude": -23.4,
+      "faintMagnitude": -22.5,
+      "faintTone": 0.4,
+      "steps": 8,
+      "basis": "Presentation of a measured quantity: each galaxy's r magnitude (22.5 - 2.5 log10 flux, the Legacy Surveys' zero point) at its Planck 2018 luminosity distance, full at -23.4 and 40% at -22.5, about the 5th and 95th percentiles of the sample (-23.38 and -22.47). No k-correction is applied, so the values are observed-frame and brighter than DESI's -21.5 selection."
+    }
+  },
+  "cosmology": "planck-2018-cosmology"
+}

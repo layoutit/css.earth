@@ -7,19 +7,30 @@ nebula catalogues. Search, aliases and classification tabs use this inventory.
 | Concept | Meaning and owner |
 | --- | --- |
 | Scene destination | A body package with a route, prepared world frame and scene loader. |
-| Prepared-focus destination | A catalogue subject selected on the existing scene’s shared camera. Its canonical URL records a host scene and `focus` identity. |
+| Prepared-focus destination | A catalogue subject the map can open: a galaxy cluster, or a subject an object package details. Its page, `/<id>/`, is its host scene’s page with the subject selected; `?dataset=` selects its lens, as on every page. Other catalogue rows are labels with no page. |
+| Overview | The Milky Way, the Local Group and the Nearby Universe (`OVERVIEW_TITLES`). Its page, `/<id>/`, is the world host's scene page with the overview selected. |
 | Rendering resource | A volume, image bank, point field or other prepared content. A resource descriptor alone does not publish a destination. |
 | Dataset view | A selectable `(objectId, lensId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
+
+Every page is `/<id>/`, one URL system for all three kinds of page:
+[`navigation-scope.mts`](../site/navigation/navigation-scope.mts) reads and
+writes them. A scene's page mounts that scene. A catalogue subject or an overview
+is drawn by a mounted scene: opened cold, its page mounts the world host, the Sun,
+which every catalogue subject and overview is placed from. In place, a catalogue
+subject keeps the mounted scene; an overview is always the host's, as zooming out
+of any system reaches it. Their pages carry none of the scene's own selections
+(`dataset`, `feature`), so a cold open never reads them as the host's.
 
 `SCENE_OBJECTS` filters `OBJECTS` by scene capability. Routes, body preparation
 and scene conformance use this filter because a prepared focus does not own
 another scene. `requireObject` resolves either destination kind;
 `requireSceneObject` rejects a focus when a caller needs a scene loader.
 
-The local-group catalogue’s `m_031` is the Andromeda destination. `m31` names
-its image resource through `detailedObjectId`; it does not create a second
-navigable Andromeda. Non-navigable context resources remain outside `OBJECTS`.
+One object has one id. A catalogue row that an object package details takes the
+package's id when the catalogue is prepared: Andromeda is `m31` in the catalogue,
+the registry, its page and its links, and the LVDB key `m_031` stays in its source
+references. Non-navigable context resources remain outside `OBJECTS`.
 Adding a classification does not add a renderer, shell or camera owner.
 
 `sceneHostId` identifies the scene displaying a prepared focus. A galaxy's
@@ -49,14 +60,26 @@ Each system has the same overview, `?overview=system` on its star's route:
 
 - Zooming out of a member past the system's exit distance opens that system's
   overview, never another's. The Sun's exit is 100 AU; other systems scale it
-  by their prepared framing radius, so WASP-43's is 0.05 AU.
+  by their prepared framing radius, so WASP-43's is 0.05 AU. An exit is never
+  farther than a quarter of where the system's orbits are gone, so its overview
+  lasts at least two doublings of distance, wider than a mouse-wheel step; only
+  Sgr A*'s, at 0.8 ly, is held by this.
 - Approaching the star opens its card once its disc is 48 px wide and the zoom
   has passed halfway from the system framing to the close-up.
 - Orbit lines, markers and labels fade with the camera's distance from their
-  own star.
+  own star, and the overview gives way to the Milky Way once they have faded,
+  by that same distance.
+- Every larger scope is measured from that star too, so zooming out gives the
+  same sequence of cards whichever way the camera faces (the renderer still
+  fades the Milky Way by the distance from the Sun). A star past the Milky Way's
+  own boundary, in the Magellanic Clouds, goes from its system to the Local
+  Group.
 - Breadcrumbs, the overview card, its results and the Milky Way's Systems list
   name the object's own system. The Milky Way, Local Group and Nearby Universe
-  are measured from the Sun and stay on its route.
+  are pages of the Sun's scene, `/milky-way/` and so on, measured from the Sun
+  there.
+  Another star's scene zoomed out that far keeps its route, `?overview=system`,
+  so its URL reopens the scene it shows.
 
 A star or body outside every system keeps its scene until the camera is as far
 from it as the Sun is, then hands off to the galactic scopes.

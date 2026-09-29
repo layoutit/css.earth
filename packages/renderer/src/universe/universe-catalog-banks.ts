@@ -7,6 +7,7 @@ import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-laye
 import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountLensBillboards } from './lens-billboards.js';
+import { mountCataloguePoints } from './catalogue-points.js';
 import type { PreparedCatalogBank, PreparedImageLayerBank, PreparedUniverseOptions } from './prepared-universe-types.js';
 
 interface ImageBank {
@@ -14,6 +15,8 @@ interface ImageBank {
   readonly frame: DensityVolumeFrame;
   readonly radiusUnits: number;
   mounted: ReturnType<typeof mountPreparedCssImageLayers> | null;
+  /** Its catalogue dots, inside the mounted root so they share its opacity. */
+  points: ReturnType<typeof mountCataloguePoints>[];
   loading: Promise<void> | null;
   publishedOpacity: number;
   /** Its leaf in the billboard layer, and whether that billboard fades with the Milky Way; -1 without a billboard. */
@@ -45,7 +48,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   let billboardCount = 0;
   const images: ImageBank[] = declarations.map(bank => {
     const facts = prepared?.plan.banks.get(bank.id);
-    return { ...bank, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, loading: null, publishedOpacity: NaN,
+    return { ...bank, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, points: [], loading: null, publishedOpacity: NaN,
       billboardIndex: facts?.billboard ? billboardCount++ : -1, billboardRadiusUnits: facts?.billboard?.radiusUnits ?? 0,
       independent: facts?.contextVisibility === 'independent' };
   });
@@ -66,9 +69,11 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     mounted?.destroy();
   });
   for (const bank of images) lifetime.onDispose(() => {
-    const mounted = bank.mounted;
+    const mounted = bank.mounted, points = bank.points;
     bank.mounted = null;
+    bank.points = [];
     bank.loading = null;
+    for (const layer of points) layer.destroy();
     mounted?.destroy();
   });
 
@@ -125,8 +130,14 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       if (loaded.payload.id !== bank.id || JSON.stringify(loaded.payload.frame) !== JSON.stringify(bank.frame)) {
         throw new TypeError('Prepared image-layer identity/frame mismatch.');
       }
-      bank.mounted = mountPreparedCssImageLayers({ host: root, before: end, ...loaded });
+      bank.mounted = mountPreparedCssImageLayers({ host: root, before: end, payload: loaded.payload, resolveResource: loaded.resolveResource });
       bank.mounted.root.style.display = 'none';
+      const host = bank.mounted.root;
+      bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host, url, fetchJson: async (target: string) => {
+        const response = await host.ownerDocument.defaultView!.fetch(target);
+        if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
+        return response.json() as Promise<unknown>;
+      } }));
       requestPublication?.();
     }).finally(() => { bank.loading = null; publishResidency(); });
     publishResidency();
@@ -169,7 +180,10 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
           bank.publishedOpacity = opacity;
         }
-        if (opacity > 0) bank.mounted.publish({ world, viewport });
+        if (opacity > 0) {
+          bank.mounted.publish({ world, viewport });
+          for (const points of bank.points) points.publish({ world, viewport });
+        }
       }
     },
   };

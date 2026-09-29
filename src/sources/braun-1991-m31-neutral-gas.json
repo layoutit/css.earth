@@ -1,0 +1,49 @@
+{
+  "id": "braun-1991-m31-neutral-gas",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The distribution and kinematics of neutral gas in M31",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1086/169954"
+    },
+    {
+      "type": "ads",
+      "value": "1991ApJ...372...54B"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1086/169954",
+      "label": "ApJ 372, 54"
+    },
+    {
+      "role": "archive",
+      "url": "https://adsabs.harvard.edu/pdf/1991ApJ...372...54B",
+      "label": "ADS scanned article"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://adsabs.harvard.edu/pdf/1991ApJ...372...54B",
+      "checkedOn": "2026-09-29",
+      "locator": "Sect. 5.3, eq. (13): exponential scale height of the H I layer s_E = 182(±37) + 16(±3) R_kpc pc, a linear regression with considerable intrinsic scatter, about 200 pc at 5 kpc to 600 pc at 25 kpc; Gaussian heights derived the same way are typically 10% smaller"
+    }
+  ],
+  "creators": [
+    "R. Braun"
+  ],
+  "publisher": "ApJ 372, 54",
+  "publicationDate": "1991",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Braun (1991), ApJ 372, 54.",
+      "scope": "M31 gas layer thickness",
+      "evidence": "https://doi.org/10.1086/169954"
+    }
+  ]
+}

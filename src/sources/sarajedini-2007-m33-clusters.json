@@ -1,0 +1,50 @@
+{
+  "id": "sarajedini-2007-m33-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A Catalog of Star Cluster Candidates in M33",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1086/518835"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/AJ/134/447"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1086/518835",
+      "label": "AJ 134, 447"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/134/447",
+      "label": "CDS J/AJ/134/447"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/134/447/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table3.dat: RAh-DEs (J2000); 451 adopted star clusters and candidates"
+    }
+  ],
+  "creators": [
+    "A. Sarajedini",
+    "C. L. Mancone"
+  ],
+  "publisher": "AJ 134, 447",
+  "publicationDate": "2007",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Sarajedini & Mancone (2007), AJ 134, 447.",
+      "scope": "M33 star cluster positions",
+      "evidence": "https://doi.org/10.1086/518835"
+    }
+  ]
+}

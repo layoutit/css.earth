@@ -229,7 +229,7 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
   let packageDigest = full.buildDigest;
   try {
     for (const pkg of packages) {
-      const supported = pkg.script === 'tsup' || pkg.directory === 'packages/astronomy' && pkg.script === 'node tools/body-records.mts && tsup' || pkg.directory === 'packages/telescope-cli' && pkg.script === 'node build.mts';
+      const supported = pkg.script === 'tsup' || pkg.directory === 'packages/astronomy' && pkg.script === 'node cli/body-records.mts && tsup' || pkg.directory === 'packages/telescope-cli' && pkg.script === 'node build.mts';
       if (!supported) throw new TypeError(`Unaudited package build: ${pkg.directory}`);
       const config = pkg.directory === 'packages/telescope-cli' ? null : resolve(root, pkg.directory, 'tsup.config.ts');
       await closure(pkg.directory, config, packageInputs, packageOptions);

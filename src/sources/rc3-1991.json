@@ -1,0 +1,49 @@
+{
+  "id": "rc3-1991",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Third Reference Catalogue of Bright Galaxies (RC3)",
+  "identifiers": [
+    {
+      "type": "CDS/VizieR",
+      "value": "VII/155"
+    },
+    {
+      "type": "ads",
+      "value": "1991rc3..book.....D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155",
+      "label": "CDS VII/155"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync",
+      "checkedOn": "2026-09-29",
+      "locator": "VII/155/rc3 row NGC 224 (PGC 2557): B-VT = 0.92 +/- 0.02, B-VoT = 0.68, U-BT = 0.50 +/- 0.02. Query: SELECT name, PGC, BT, \"B-VT\", \"e_B-VT\", \"B-VoT\", \"U-BT\" FROM \"VII/155/rc3\" WHERE 1=CONTAINS(POINT('ICRS', RA2000, DE2000), CIRCLE('ICRS', 10.6847, 41.2687, 0.1))"
+    }
+  ],
+  "creators": [
+    "G. de Vaucouleurs",
+    "A. de Vaucouleurs",
+    "H. G. Corwin",
+    "R. J. Buta",
+    "G. Paturel",
+    "P. Fouque"
+  ],
+  "publisher": "Springer-Verlag, New York",
+  "publicationDate": "1991",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite de Vaucouleurs et al. (1991), Third Reference Catalogue of Bright Galaxies.",
+      "scope": "M31 integrated colour",
+      "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155"
+    }
+  ]
+}

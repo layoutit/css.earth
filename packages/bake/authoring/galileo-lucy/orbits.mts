@@ -2,8 +2,8 @@
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import { evaluatePublishedOrbit } from '../../../../packages/astronomy/tools/body-epoch-ephemeris.mts';
-import { parsePublishedParameters } from '../../../../packages/astronomy/tools/lib/ephemeris-records.mts';
+import { evaluatePublishedOrbit } from '../../../../packages/astronomy/cli/body-epoch-ephemeris.mts';
+import { parsePublishedParameters } from '../../../../packages/astronomy/cli/lib/ephemeris-records.mts';
 import { bodies, celestiaCommit, celestiaUrl } from './catalog.mts';
 const epochJdTt = 2461286.5;
 const write = async (path: string, value: unknown) => { await mkdir(dirname(path), { recursive: true }); await writeFile(path, JSON.stringify(value, null, 2) + '\n'); };

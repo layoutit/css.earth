@@ -560,7 +560,7 @@ jobs:
         run: >-
           node labs/nebula/run.mts test
           material
-          point-projection cloud-inspection compact shape-cloud-camera
+          point-projection cloud-inspection compiler-framing compact shape-cloud-camera
           nebula-frame bake retained-material-bank optical-composite-preparation
           detect-shapes structure-wavelets structure-map ridge-graph
           material-solver shape-prior solver

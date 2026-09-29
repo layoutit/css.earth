@@ -6,7 +6,7 @@ import { bodyFixedToIcrf, bodyPoleIcrf, bodyRotationAt, ROTATING_BODY_IDS, type 
 import { DAYS_PER_JULIAN_CENTURY } from './time.js'
 
 /**
- * HOW THIS IS CHECKED. `tools/fetch-rotation-fixtures.mjs` asks Horizons for the
+ * HOW THIS IS CHECKED. `cli/fetch-rotation-fixtures.mjs` asks Horizons for the
  * Sun's vector from each body's centre and from two sites fixed to that body —
  * one at 0 degrees longitude on the equator, one at the north pole. The
  * difference is the site's own position in ICRF, which is a body-fixed axis

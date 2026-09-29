@@ -52,7 +52,7 @@ test('deferred rows open the destination the payload names, and a row with none 
     roots: ['root'],
     nodes: {
       root: { label: 'Milky Way', objectId: null, place: true, count: 3, marker: null, children: ['orion', 'clusters', 'saturn'], href: null, focusId: null },
-      orion: { label: 'Orion Nebula (M42)', objectId: 'm42', place: false, count: 1, marker: null, children: [], href: '/sun/?focus=m42', focusId: 'm42' },
+      orion: { label: 'Orion Nebula (M42)', objectId: 'm42', place: false, count: 1, marker: null, children: [], href: '/m42/', focusId: 'm42' },
       clusters: { label: 'Galaxy clusters', objectId: 'galaxy-clusters', place: true, count: 1, marker: null, children: [], href: null, focusId: null },
       saturn: { label: 'Saturn', objectId: 'saturn', place: false, count: 1, marker: null, children: [], href: '/saturn/', focusId: null },
     },
@@ -69,7 +69,7 @@ test('deferred rows open the destination the payload names, and a row with none 
   await controller.select('saturn');
 
   const orion = root.querySelector<HTMLAnchorElement>('a[data-atlas-object="m42"]');
-  assert.equal(orion?.getAttribute('href'), '/sun/?focus=m42', 'a catalogue subject opens on its host scene');
+  assert.equal(orion?.getAttribute('href'), '/m42/', 'a catalogue subject opens on its host scene');
   assert.equal(orion?.dataset.preparedFocusId, 'm42', 'and is selected in place instead of navigating');
   assert.equal(root.querySelector<HTMLAnchorElement>('a[data-atlas-object="saturn"]')?.getAttribute('href'), '/saturn/');
   assert.equal(root.querySelector('a[data-atlas-object="galaxy-clusters"]'), null,

@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "quasars",
+  "meaning": "DESI's quasars as dots: one in 3 of the tracked sample (one in 150 of the catalogue), in catalogue order.",
+  "banks": [
+    {
+      "bank": "desi-quasars",
+      "keepEvery": 3,
+      "basis": "Presentation choice: about 8,000 dots across the quasar shell, 2.8 to 6.6 Gpc away."
+    }
+  ]
+}

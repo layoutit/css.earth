@@ -25,6 +25,12 @@ export function isPreparedCluster(object: PreparedCatalogObject): object is Prep
   return 'kind' in object && object.kind === 'galaxy-cluster';
 }
 
+/** A catalogue subject the application can open: a galaxy cluster, or a subject an object package details. Only these are
+ * clickable on the map and have a page; every other catalogue row is a label. */
+export function isNavigableCatalogObject(object: PreparedCatalogObject): boolean {
+  return isPreparedCluster(object) || Boolean(object.detailedObjectId);
+}
+
 /** Validate once without allocating another scientific row bank. */
 export function parsePreparedClusterCatalog(input: unknown): PreparedClusterCatalog {
   const data = record(input);

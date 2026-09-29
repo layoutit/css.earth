@@ -14,11 +14,18 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
+import { withOverviewScope } from './navigation/navigation-scope.mts';
 
 // An asteroid sprite's smallest drawn size, and a plain asteroid dot's (see world-context.css for its opacity).
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
 const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
-const ASTRONOMICAL_UNIT_M = 149_597_870_700;
+const ASTRONOMICAL_UNIT_M = 149_597_870_700, PARSEC_M = 3.085677581491367e16;
+// Published catalogues placed on a galaxy's disc plane, drawn over its image layers (src/objects/m31/README.md,
+// src/objects/m33/README.md).
+const IMAGE_LAYER_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
+  m31: ['stars', 'dots'],
+  m33: ['stars', 'dots'],
+};
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -73,7 +80,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       if (!imageLayerIds.has(id)) throw new TypeError(`Unknown prepared image-layer bank: ${id}.`);
       const set = resourceSet(id);
       return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
-        resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
+        resolveResource: (path: string) => set.resolve(`prepared/${path}`),
+        cataloguePointUrls: (IMAGE_LAYER_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.json`)) };
     });
     const plainDots = new Set(plainDotIds);
     const sprites = preparedBodyBillboards([applicationContext.focus, ...applicationContext.bodies], plainDots,
@@ -99,7 +107,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const catalogBank = { fadeStartDistanceM: fades.galaxies.fadeStartDistanceM, fullDistanceM: fades.galaxies.fullDistanceM,
       clusters: { fadeStartDistanceM: fades.clusters.fadeStartDistanceM, fullDistanceM: fades.clusters.fullDistanceM } };
     const universe = createPreparedUniverse({
-      environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, stellarExtents: STELLAR_EXTENTS,
+      environmentLinks: { 'milky-way': (link => link.pathname + link.search)(withOverviewScope(new URL(`/${applicationContext.focus.id}/`, location.origin), applicationContext.focus.id, 'milky-way')) }, stellarExtents: STELLAR_EXTENTS,
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
       // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).
@@ -107,7 +115,13 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: applicationContext, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens,
-      backgroundCataloguePoints: [backgroundPointSet.resolve('prepared/dots.json')],
+      // DESI's shells (0.7 Gpc and beyond) begin past the Cosmicflows-4 field, 300 Mpc out, so the Local Group and Nearby
+      // Universe pages never download them.
+      backgroundCataloguePoints: [{ url: backgroundPointSet.resolve('prepared/dots.json') },
+        ...['bright-galaxy-dots', 'quasar-dots'].map(id => ({ url: backgroundPointSet.resolve(`prepared/${id}.json`), fromDistanceM: 300e6 * PARSEC_M }))],
+      // The cosmic microwave background sphere, where this checkout has baked it (the experimental cosmic-web branch).
+      imageMeshes: typeof CONTEXT_OBJECT_ASSET_URLS['../src/objects/nearby-universe/prepared/cmb.json'] === 'string'
+        ? [{ url: backgroundPointSet.resolve('prepared/cmb.json'), resolveResource: (path: string) => backgroundPointSet.resolve(`prepared/${path}`) }] : [],
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       plainDots: { ids: plainDotIds, minimumDiameterPixels: PLAIN_DOT_MINIMUM_PIXELS },

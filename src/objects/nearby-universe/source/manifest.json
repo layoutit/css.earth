@@ -132,6 +132,111 @@
       },
       "dependencies": [],
       "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "desi-bright-galaxies-sample",
+      "path": "src/objects/nearby-universe/source/desi-bright-galaxies/bgs-bright-21.5-sample.csv.gz",
+      "origin": "https://data.desi.lbl.gov/public/dr1/survey/catalogs/dr1/LSS/iron/LSScats/v1.5/",
+      "sourceUrl": "https://arxiv.org/abs/2503.14745",
+      "title": "DESI DR1 BGS BRIGHT-21.5 clustering catalogues, one row in 10",
+      "credit": "DESI Collaboration (2025), arXiv:2503.14745; Ross et al. (2025), arXiv:2405.16593",
+      "acquisition": "Downloaded 2026-09-29 (NGC and SGC files); one row in 10 kept in catalogue order with TARGETID, RA, DEC, Z and the dereddened g, r, z fluxes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "desi-2025-dr1",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/desi-bright-galaxies/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "DESI data are public; cite DESI Collaboration (2025)."
+    },
+    {
+      "id": "desi-quasars-sample",
+      "path": "src/objects/nearby-universe/source/desi-quasars/qso-sample.csv.gz",
+      "origin": "https://data.desi.lbl.gov/public/dr1/survey/catalogs/dr1/LSS/iron/LSScats/v1.5/",
+      "sourceUrl": "https://arxiv.org/abs/2503.14745",
+      "title": "DESI DR1 QSO clustering catalogues, one row in 50",
+      "credit": "DESI Collaboration (2025), arXiv:2503.14745; Ross et al. (2025), arXiv:2405.16593",
+      "acquisition": "Downloaded 2026-09-29 (NGC and SGC files); one row in 50 kept in catalogue order with TARGETID, RA, DEC and Z.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "desi-2025-dr1",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/desi-quasars/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "DESI data are public; cite DESI Collaboration (2025)."
+    },
+    {
+      "id": "quasar-template",
+      "path": "src/objects/nearby-universe/source/desi-quasars/qso_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/agn/qso_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/170066",
+      "title": "Francis et al. (1991) composite quasar spectrum",
+      "credit": "Francis et al. (1991), ApJ 373, 465; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "francis-1991-quasar-composite",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe/source/desi-quasars/points.json#/appearance/colorBySpectrumAtRedshift"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Francis et al. (1991)."
+    },
+    {
+      "id": "planck-smica-map",
+      "path": "src/objects/nearby-universe/source/cmb/COM_CMB_IQU-smica_2048_R3.00_full.fits",
+      "origin": "https://irsa.ipac.caltech.edu/data/Planck/release_3/all-sky-maps/maps/component-maps/cmb/COM_CMB_IQU-smica_2048_R3.00_full.fits",
+      "sourceUrl": "https://arxiv.org/abs/1807.06208",
+      "title": "Planck PR3 SMICA CMB map, HEALPix Nside 2048",
+      "credit": "Planck Collaboration (2020), A&A 641, A4; ESA Planck, distributed by IRSA",
+      "acquisition": "Downloaded from IRSA on 2026-09-29 (2,013,312,960 bytes).",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "planck-2018-smica-cmb",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/cmb/sphere.json#/map"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "ESA Planck data are public; cite Planck Collaboration (2020) and acknowledge Planck."
+    },
+    {
+      "id": "planck-colour-table",
+      "path": "src/objects/nearby-universe/source/cmb/Planck_Parchment_RGB.txt",
+      "origin": "https://raw.githubusercontent.com/zonca/paperplots/master/data/Planck_Parchment_RGB.txt",
+      "sourceUrl": "https://github.com/zonca/paperplots",
+      "title": "Planck style-guide colour table (parchment)",
+      "credit": "Planck collaboration figure style guide, paperplots repository",
+      "acquisition": "Downloaded 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "planck-2018-smica-cmb",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe/source/cmb/sphere.json#/colourTable"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Planck style-guide plotting material; cite the Planck collaboration."
     }
   ],
   "documents": [
@@ -202,6 +307,90 @@
       "origin": "project-authored",
       "credit": "cssEarth contributors",
       "acquisition": "Authored stack of the galaxy dot levels.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-desi-bright-galaxies",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/desi-bright-galaxies/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored DESI bright-galaxy selection, colour and tone.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-desi-quasars",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/desi-quasars/points.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored DESI quasar selection and colour.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-bright-galaxies",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/bright-galaxies/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored share of the bright galaxies drawn.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-quasars",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/quasars/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored share of the quasars drawn.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-bright-galaxy-dots",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/bright-galaxy-dots/stack.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored reach of the bright-galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-quasar-dots",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/quasar-dots/stack.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored reach of the quasar dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-cmb",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/cmb/sphere.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored CMB sphere recipe.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

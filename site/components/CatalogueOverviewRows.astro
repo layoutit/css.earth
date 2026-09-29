@@ -1,15 +1,11 @@
 ---
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import { OVERVIEW_TITLES } from '../overview-titles.mts';
-import { SOLAR_SYSTEM_ID } from '../object-systems.mts';
-import { SCENE_OBJECTS } from '../objects.mts';
 import { overviewSourceDocumentation } from '../source-documentation.mts';
-
-const galacticRoute = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!.route;
 ---
 
 {Object.entries(OVERVIEW_TITLES).map(([scope, title]) => <li data-search-overview={title.label.toLocaleLowerCase('en')} hidden>
-  <a class="object-link object-observation-control object-thumbnail-leading" href={`${galacticRoute}?overview=${scope}`}
+  <a class="object-link object-observation-control object-thumbnail-leading" href={`/${scope}/`}
     data-source-subject={`overview:${scope}`} data-source-document={overviewSourceDocumentation(scope, title.label).href}
     data-source-label={overviewSourceDocumentation(scope, title.label).label}>
     <span class="object-lens-icon"><ContextNavigationMarker objectId={scope} /></span>

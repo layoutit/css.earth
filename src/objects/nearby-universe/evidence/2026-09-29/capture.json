@@ -9,6 +9,21 @@
       "overview": "nearby-universe",
       "view": "UMMAAAAAAAAAAAAAAAAAAAAAxGDQBe4L13pBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA",
       "wheelNotchesOut": 26
+    },
+    {
+      "file": "cmb-from-outside.jpg",
+      "overview": "observable-universe",
+      "wheelNotchesIn": 0,
+      "revision": "exp/cosmic-web with the standard sphere, its limb plate and its caption",
+      "method": "The same headless Chromium, opened at /sun/?overview=observable-universe, the address before overviews had pages; now /observable-universe/ (52 Gpc from the Sun), no wheel, 6 s settle after the app reports ready."
+    },
+    {
+      "file": "desi-cones.jpg",
+      "overview": "observable-universe",
+      "view": "UMOAAAAAAAAAAIAAAAAAAAAAxK67_YHtDQZBQsczQAAAAL_V46h0ihrtAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA",
+      "wheelNotchesIn": 3,
+      "revision": "exp/cosmic-web with the cluster names giving way to the CMB",
+      "method": "The same headless Chromium, opened at /sun/?overview=observable-universe, the address before overviews had pages; now /observable-universe/ (40 Gpc from the Sun), 120-pixel wheel notches inward, 3 s settle."
     }
   ],
   "proves": "The displayed composition: sharp catalogue dots in their colour tones at each scale, with no layer edge on screen. Not a frame-rate measurement."

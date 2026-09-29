@@ -3,6 +3,48 @@
   "assets": [
     {
       "location": "prepared",
+      "filename": "bright-galaxies.json",
+      "bytes": 992937,
+      "sha256": "8f3a19ba3bc39ee77a27fda1b0b8224efeb5308914a91bd136e839b0c13f42a1"
+    },
+    {
+      "location": "prepared",
+      "filename": "bright-galaxy-dots.json",
+      "bytes": 993021,
+      "sha256": "cc2862ce2d428f3535ca73ae7f1cf5fe897517e794110ed61f985473752c0890"
+    },
+    {
+      "location": "prepared",
+      "filename": "cmb.json",
+      "bytes": 172241,
+      "sha256": "40b0603ece3df7117e6fe3c6f7e835110db902b9be0e442614c3fd8baa38c37f"
+    },
+    {
+      "location": "prepared",
+      "filename": "cmb/cmb-limb.webp",
+      "bytes": 18414,
+      "sha256": "36ad0055a17ed2bbf08ef81d7d3280df2ac0935d47f3901cbab8362fe69a6327"
+    },
+    {
+      "location": "prepared",
+      "filename": "cmb/cmb.webp",
+      "bytes": 1300112,
+      "sha256": "a89dc3aaa796f01e733005814e5817b173cf7b740ec802091e9320e4d5c02538"
+    },
+    {
+      "location": "prepared",
+      "filename": "desi-bright-galaxies.json",
+      "bytes": 996733,
+      "sha256": "19f0c0cf5ff19695af9405890e32cfdcf151f3c91e28806a34686eca669cea41"
+    },
+    {
+      "location": "prepared",
+      "filename": "desi-quasars.json",
+      "bytes": 850889,
+      "sha256": "28e7d5af9694241ac59bcace4cf8a7a98104a37743bae0d565e4578878c21027"
+    },
+    {
+      "location": "prepared",
       "filename": "dots.json",
       "bytes": 213633,
       "sha256": "59c6917f5efc53704c22bae1644e9d8fd24071f4dd2efba376967ded7a36305a"
@@ -40,14 +82,26 @@
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 1742,
-      "sha256": "05b12f305f603d5d7478a8316ff914ed21b7ccece55ec1c2bce6d0ae9f32c7b6"
+      "bytes": 3625,
+      "sha256": "6e574d7d12fd376b272b8f91e6cd0a6f438baf3fd1336b86060c2f8506f774d9"
     },
     {
       "location": "prepared",
       "filename": "provenance.json",
-      "bytes": 30648,
-      "sha256": "1626551d1b21136198457e64685e7a2227643681f8cb6de987de90956af423dd"
+      "bytes": 59916,
+      "sha256": "82b0f6ce0b8f57b8dcefffcc22ba0cfba19e3c9126f875100061ba6bae449338"
+    },
+    {
+      "location": "prepared",
+      "filename": "quasar-dots.json",
+      "bytes": 283906,
+      "sha256": "9db5f059042f8cace3a464ba4a9f562a3fada7f2436f23bcd6dcc91859b62439"
+    },
+    {
+      "location": "prepared",
+      "filename": "quasars.json",
+      "bytes": 283949,
+      "sha256": "7c327c21126025d3c86fcd2495824113627babbd40d1291b8c3bd556580c6524"
     }
   ]
 }

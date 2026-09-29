@@ -29,7 +29,7 @@ not supplied: Horizons' available solution ends in January 2018; its displayed
 2026 position remains an explicitly qualified extrapolation of the older fit.
 
 Normal preparation is offline. To deliberately refresh the same nineteen requests,
-run `node packages/astronomy/tools/acquire-scene-ephemeris.mts`, review the changed
+run `node packages/astronomy/cli/acquire-scene-ephemeris.mts`, review the changed
 raw responses and manifest, then run `node packages/bake/cli/prepare-solar-geometry.mts` and regenerate
 the affected prepared world frames and world context with
 `node site/build/prepare/refresh-scene-ephemeris.mts`. This also updates the retained surface

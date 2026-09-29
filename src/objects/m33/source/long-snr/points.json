@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "long-snr",
+  "table": {
+    "path": "table3.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/187/495/table3.dat",
+    "bytes": 11122,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        7
+      ],
+      "raH": [
+        17,
+        18
+      ],
+      "raM": [
+        20,
+        21
+      ],
+      "raS": [
+        23,
+        27
+      ],
+      "decSign": [
+        29,
+        29
+      ],
+      "decD": [
+        30,
+        31
+      ],
+      "decM": [
+        33,
+        34
+      ],
+      "decS": [
+        36,
+        39
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc M33's image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "sech2",
+      "scaleHeightPc": 175,
+      "source": "ciardullo-2004-m33-pne",
+      "basis": "Ciardullo et al. (2004, Sect. 6) adopt z0 ≈ 175 pc (at least ±25%) for the isothermal sheet sech²(z/z0) of M33's planetary nebulae, and their data exclude z0 ≲ 90 pc beyond 6 kpc. It is the only M33 disc scale height these sources state; young tracers (HII regions, Cepheids, clusters) are thinner in disc galaxies, so for them it is an upper value, used as a presentation choice. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "long-2010-m33-snrs",
+  "meaning": "Supernova remnants and candidates of Long et al. (2010), from Local Group Galaxies Survey H-alpha and [S II] images with Chandra X-ray data: one dot per object at its catalogue sky position.",
+  "appearance": {
+    "colorCss": "#9fe8ff",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the supernova-remnant colour M31's dots share."
+  }
+}

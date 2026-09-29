@@ -99,16 +99,21 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
         const world = this.systemTarget({ objectId, fromId, mount, force: true });
         return world ? { world, focusPositionM: frames.get(objectId)!.originM } : null;
       }
-      if (!['milky-way', 'local-group', 'nearby-universe'].includes(scope)) return null;
+      if (!['milky-way', 'local-group', 'nearby-universe', 'observable-universe'].includes(scope)) return null;
       const owner = mount?.navigation;
-      const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
-      if (!from || !optics) return null;
+      const from = owner?.capture() ?? lastCamera, current = owner?.optics() ?? lastOptics;
+      if (!from || !current) return null;
+      // An overview is framed through the normal lens, not a close-up's magnification, so its page looks the same however
+      // it is reached (a cold load has no close-up to inherit).
+      const optics = worldCameraViewport({ projectionScale: 1 }, current);
       if (scope === 'local-group') return localGroupZoomTarget(from, optics, systemFramingRect(optics, documentTarget));
-      if (scope === 'nearby-universe') {
+      if (scope === 'nearby-universe' || scope === 'observable-universe') {
         const frame = frames.get(objectId);
         if (!frame) return null;
         const projection = presentWorldCamera(from, frame, optics);
-        const distanceM = 1e8 * 3.085677581491367e16;
+        // The observable universe is seen from outside the cosmic microwave background (14 Gpc comoving), far enough that its
+        // caption fits below it on a landscape screen.
+        const distanceM = (scope === 'observable-universe' ? 52e9 : 1e8) * 3.085677581491367e16;
         return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation,
           distanceUnits: distanceM / frame.metersPerUnit }, frame, optics), focusPositionM: frame.originM };
       }

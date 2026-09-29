@@ -39,7 +39,7 @@ export interface ResolvedNavigation {
 /** Interpret destination intent here; dataset and camera owners still validate their payloads when applying them. */
 export function readNavigationSelection(url: URL, objectId: string, objects: SystemObjects) {
   return { subject: selectionTargetFromUrl(url, objectId, objects), savedView: url.searchParams.has('v'),
-    dataset: url.searchParams.has('dataset') || isFocusDatasetUrl(url), feature: url.searchParams.get('feature') };
+    dataset: url.searchParams.has('dataset') || isFocusDatasetUrl(url, objectId), feature: url.searchParams.get('feature') };
 }
 
 /** Resolve once, before cancellation: loading, preview, flight and arrival consume the same destination. */
@@ -80,13 +80,13 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
       ? navigation.centerTarget(targetRequest) : null);
   if (intent.kind === 'focus') {
     url.pathname = object.route;
-    url = withPreparedFocus(url, intent.id, null);
+    url = withPreparedFocus(url, object.id, intent.id, null);
     url.searchParams.delete('v');
     history = { history: 'replace' };
   } else if (!linked) {
     url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('feature');
-    url = withDataset(withPreparedFocus(url, null, null), null);
-    withOverviewScope(url, intent.kind === 'overview' ? intent.scope
+    url = withDataset(withPreparedFocus(url, object.id, null, null), null);
+    withOverviewScope(url, object.id, intent.kind === 'overview' ? intent.scope
       : center && intent.kind === 'object' && systemById(objects, object.id) ? 'system' : null);
     withSatelliteSystemView(url, intent.kind === 'satellite-system' || intent.kind === 'object' && familyTarget !== null);
     if (intent.kind === 'feature' && intent.id !== null) url.searchParams.set('feature', intent.id);

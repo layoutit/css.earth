@@ -39,6 +39,9 @@ const {
   navigation = false,
 } = Astro.props;
 requireObjectControls({ lenses, settings }, objectId);
+// The page: its scene's, or a catalogue subject or overview the scene draws. Its forms and links return to that page.
+const pageId = Astro.params.id ?? objectId;
+const pageRoute = pageId !== objectId ? `/${pageId}/` : undefined;
 const speedSetting = settings?.controls.find((setting) =>
   setting.kind === "cycle" && setting.name === "speed");
 const shadowSetting = settings?.controls.find((setting) =>
@@ -92,8 +95,8 @@ const searchCategories = [
   <div class="object-search-toolbar">
     <div class="object-search-browser-shell">
       <form id={searchFormId} class="object-sidebar-search-card" role="search" aria-label="Object search"
-        action={activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
-        {['v', 'view', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
+        action={pageRoute ?? activeObject?.route} method="get" data-search-object={objectId} data-search-prompt={searchPlaceholder}>
+        {['v', 'view', 'overview', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-search-context disabled />)}
         <span class="object-sidebar-search-icon" aria-hidden="true">
           <MaterialSymbol name="search" />
         </span>
@@ -107,7 +110,7 @@ const searchCategories = [
           aria-controls={`${objectId}-object-browser`}
           autocomplete="off"
         />
-        <a class="object-sidebar-search-clear" href={activeObject?.route} aria-label="Clear search" title="Clear search">
+        <a class="object-sidebar-search-clear" href={pageRoute ?? activeObject?.route} aria-label="Clear search" title="Clear search">
           <MaterialSymbol name="close" />
         </a>
         <button
@@ -147,9 +150,9 @@ const searchCategories = [
   </div>
 </header>
 <div class="object-dataset-context-dock">
-<form id="object-settings-form" action={`/${objectId}/`} method="get" data-settings-form hidden>
+<form id="object-settings-form" action={pageRoute ?? `/${objectId}/`} method="get" data-settings-form hidden>
   <input type="hidden" name="settings" value="1" />
-  {['v', 'view', 'overview', 'focus', 'focusLens', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
+  {['v', 'view', 'overview', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
 </form>
 <section
   id="object-settings"
@@ -242,7 +245,7 @@ const searchCategories = [
       aria-label="Celestial objects"
       hidden
     >
-      <ObjectResults activeObjectId={objectId}>
+      <ObjectResults activeObjectId={pageId}>
         <Accordion title="Named features" count={0} class="object-feature-results"
           aria-label={features?.searchLabel ?? 'Named features'} hidden>
           <p class="object-feature-hint object-destination-hint" role="status"></p>
@@ -260,7 +263,7 @@ const searchCategories = [
     <div class="object-selected-content">
     {!navigation && <div class="object-context" hidden><ObjectCard class="object-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="object-selected-panel">
-          {(['milky-way', 'local-group', 'nearby-universe'] as const).map(scope =>
+          {(['milky-way', 'local-group', 'nearby-universe', 'observable-universe'] as const).map(scope =>
             <ObjectBreadcrumbs {scope} currentPage={false} data-focus-breadcrumb-scope={scope} hidden />)}
           <div class="object-title-row">
             <p class="object-title object-title-text" data-focus-name></p>

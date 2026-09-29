@@ -1,0 +1,50 @@
+{
+  "id": "pellerin-2011-m33-cepheids",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The M33 Synoptic Stellar Survey. I. Cepheid Variables",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1088/0067-0049/193/2/26"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/193/26"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1088/0067-0049/193/2/26",
+      "label": "ApJS 193, 26"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/193/26",
+      "label": "CDS J/ApJS/193/26"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/193/26/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table3.dat: RAdeg, DEdeg (J2000), Per, Vmag, Imag, Bmag; 563 Cepheids, main sample"
+    }
+  ],
+  "creators": [
+    "A. Pellerin",
+    "L. M. Macri"
+  ],
+  "publisher": "ApJS 193, 26",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Pellerin & Macri (2011), ApJS 193, 26.",
+      "scope": "M33 Cepheid positions",
+      "evidence": "https://doi.org/10.1088/0067-0049/193/2/26"
+    }
+  ]
+}

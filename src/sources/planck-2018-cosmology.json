@@ -1,0 +1,49 @@
+{
+  "id": "planck-2018-cosmology",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Planck 2018 results. VI. Cosmological parameters",
+  "identifiers": [
+    {
+      "type": "arxiv",
+      "value": "1807.06209"
+    },
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/201833910"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1807.06209",
+      "label": "arXiv:1807.06209"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1051/0004-6361/201833910",
+      "label": "A&A 641, A6"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://docs.astropy.org/en/stable/api/astropy.cosmology.realizations.Planck18.html",
+      "checkedOn": "2026-09-29",
+      "locator": "Astropy Planck18: Table 2 (TT,TE,EE+lowE+lensing+BAO) of the paper"
+    }
+  ],
+  "creators": [
+    "Planck Collaboration"
+  ],
+  "publisher": "A&A 641, A6",
+  "publicationDate": "2020",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Planck Collaboration (2020), A&A 641, A6.",
+      "scope": "Distances from redshift",
+      "evidence": "https://arxiv.org/abs/1807.06209"
+    }
+  ]
+}

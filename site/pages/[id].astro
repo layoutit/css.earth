@@ -1,8 +1,16 @@
 ---
 import ObjectPage from '../components/ObjectPage.astro';
-import { SCENE_OBJECTS } from '../objects.mts';
+import { OBJECTS } from '../objects.mts';
+import { OVERVIEW_PAGE_IDS, WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
 export function getStaticPaths() {
-  return SCENE_OBJECTS.map(({ id }) => ({ params: { id } }));
+  // Every object and overview has its page, `/<id>/`. A scene's page mounts it; the page of anything the world draws
+  // around a scene (a catalogue subject, an overview) mounts the world's host with it selected: the path names it.
+  for (const object of OBJECTS) {
+    if (object.kind === 'prepared-focus' && object.sceneHostId !== WORLD_HOST_ID) throw new TypeError(`${object.id} is hosted by ${object.sceneHostId}, not the world's host ${WORLD_HOST_ID}.`);
+    if ((OVERVIEW_PAGE_IDS as readonly string[]).includes(object.id)) throw new TypeError(`${object.id} is both an object and an overview; one id names one page.`);
+  }
+  return [...OBJECTS.map(object => ({ id: object.id, sceneId: object.kind === 'prepared-focus' ? WORLD_HOST_ID : object.id })),
+    ...OVERVIEW_PAGE_IDS.map(id => ({ id, sceneId: WORLD_HOST_ID }))].map(({ id, sceneId }) => ({ params: { id }, props: { sceneId } }));
 }
 ---
-<ObjectPage objectId={Astro.params.id!} />
+<ObjectPage objectId={Astro.props.sceneId} pageId={Astro.params.id!} />

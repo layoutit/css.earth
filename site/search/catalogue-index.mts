@@ -28,8 +28,6 @@ export interface CatalogueIndexEntry extends CatalogueRow {
   readonly classification: string;
   readonly systemName: string;
   readonly illustration: boolean;
-  /** A catalogue galaxy its source has not confirmed; see PreparedFocusObject.candidate. */
-  readonly candidate: boolean;
   readonly distanceMeters: number;
 }
 
@@ -87,12 +85,12 @@ export function parseCatalogueIndex(value: unknown): CatalogueIndex {
   }
   const entries = value.entries.map((input: unknown, index): CatalogueIndexEntry => {
     const row = parseCatalogueRow(input, index);
-    if (!isRecord(input) || typeof input.illustration !== 'boolean' || typeof input.candidate !== 'boolean' || !Array.isArray(input.searchNames)
+    if (!isRecord(input) || typeof input.illustration !== 'boolean' || !Array.isArray(input.searchNames)
         || !input.searchNames.every(name => typeof name === 'string') || typeof input.distanceMeters !== 'number' || !Number.isFinite(input.distanceMeters)) {
       throw new TypeError(`Invalid object catalogue entry: ${index} (${row.id}).`);
     }
     return Object.freeze({ ...row, searchNames: Object.freeze([...input.searchNames as string[]]), classification: text(input.classification, 'classification'),
-      systemName: text(input.systemName, 'system name'), illustration: input.illustration, candidate: input.candidate, distanceMeters: input.distanceMeters });
+      systemName: text(input.systemName, 'system name'), illustration: input.illustration, distanceMeters: input.distanceMeters });
   });
   return Object.freeze({ schema: value.schema, entries: Object.freeze(entries) });
 }

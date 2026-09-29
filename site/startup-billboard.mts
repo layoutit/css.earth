@@ -5,11 +5,12 @@ import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewpo
 import { prepareArrivalBillboard } from './arrival-billboard.mts';
 import { createPreparedArrival } from './prepared-arrival.mts';
 import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
+import { drawnPageFromUrl } from './navigation/navigation-scope.mts';
 
 /** A custom view never borrows the default arrival photograph. */
-export function usesDefaultStartupView(url: string): boolean {
+export function usesDefaultStartupView(url: string, sceneId: string): boolean {
   const query = new URL(url).searchParams;
-  return !['v', 'view', 'overview', 'focus', 'focusLens', 'feature', 'dataset', 'settings'].some(key => query.has(key));
+  return drawnPageFromUrl(url, sceneId) === null && !['v', 'view', 'overview', 'feature', 'dataset', 'settings'].some(key => query.has(key));
 }
 
 /** Static previews restore from the URL; server-rendered focus responses carry a resolved camera. Only the `v` parameter is
@@ -21,13 +22,13 @@ export function readStartupSavedView(url: string, preparedView?: string) {
 
 /** The same prepared cover and resource lease as fly-to, owned by the initial session. */
 export async function prepareStartupBillboard(stage: HTMLElement, factory: SceneFactory, viewport: CameraViewport,
-  url: string, signal: AbortSignal) {
+  url: string, sceneId: string, signal: AbortSignal) {
   const document = stage.ownerDocument, window = document.defaultView;
   const metadata = document.querySelector<HTMLScriptElement>('script[data-startup-discovery]');
   const image = document.querySelector<HTMLImageElement>('img[data-startup-billboard]');
   if (!window) return null;
   const saved = readStartupSavedView(url, stage.dataset.preparedView);
-  const defaultView = usesDefaultStartupView(url);
+  const defaultView = usesDefaultStartupView(url, sceneId);
   if ((!defaultView && !saved) || !factory.navigation) { image?.remove(); return null; }
   const arrival = metadata ? parseObjectDiscovery(JSON.parse(metadata.textContent ?? '')).arrival : undefined;
   if (!saved && (!arrival?.billboard || !image)) { image?.remove(); return null; }

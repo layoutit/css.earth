@@ -124,7 +124,7 @@ Physical values, retained orbit records and acquisition choices live in
 `data/bodies/<id>.json`; independent shared vector fixtures live in
 `data/fixtures/<sample-id>.json`. Preserve source URLs, units, epochs and fit
 limits. Acquisition tools update selected records; they cache downloads in
-`tools/.cache`. Builds assemble ignored TypeScript exports under
+`cli/.cache`. Builds assemble ignored TypeScript exports under
 `src/data/generated/` without a network request or an application checkout.
 The existing data modules expose these exports and document their interfaces.
 
@@ -160,7 +160,7 @@ periodic term would live inside it forever. A guard alone is just a snapshot of
 whatever the code happens to do. Both, and the assertion that the guard is
 inside the budget, is what makes the claim real.
 
-Fixtures come from `tools/fetch-fixtures.mts` and each records the Horizons URL
+Fixtures come from `cli/fetch-fixtures.mts` and each records the Horizons URL
 that produced it. Never assert against a value this package computed. Never widen
 a tolerance to make a test pass without changing the sentence in the README that
 the number is quoted in.
