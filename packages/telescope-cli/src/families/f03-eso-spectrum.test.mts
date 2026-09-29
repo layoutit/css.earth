@@ -53,7 +53,7 @@ test('large spectrum previews select bounded native samples and retain gap ident
 });
 
 test('real ESPRESSO excerpt agrees with independent Astropy 8.0.1 values', async () => {
-  const fixture = new URL('../../../../tests/fixtures/telescope-vo/eso-spectrum/', import.meta.url);
+  const fixture = new URL('../vo/fixtures/telescope-vo/eso-spectrum/', import.meta.url);
   const reference = JSON.parse(await readFile(new URL('astropy-reference.json', fixture), 'utf8'));
   const source = readEsoSpectrum(await readFile(new URL('espresso-excerpt.fits', fixture)));
   assert.equal(source.wavelengthUnit, reference.wavelengthUnit);
@@ -62,7 +62,7 @@ test('real ESPRESSO excerpt agrees with independent Astropy 8.0.1 values', async
 });
 
 test('real UVES excerpt accepts ESO lowercase v2.0 and selects calibrated FLUX over reduced counts', async () => {
-  const fixture = new URL('../../../../tests/fixtures/telescope-vo/eso-spectrum/', import.meta.url);
+  const fixture = new URL('../vo/fixtures/telescope-vo/eso-spectrum/', import.meta.url);
   const reference = JSON.parse(await readFile(new URL('uves-astropy-reference.json', fixture), 'utf8'));
   const source = readEsoSpectrum(await readFile(new URL('uves-hd189733-excerpt.fits', fixture)));
   assert.equal(reference.voClass, 'SPECTRUM v2.0');

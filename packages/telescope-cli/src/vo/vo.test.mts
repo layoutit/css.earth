@@ -15,7 +15,7 @@ import { voUrl } from './network-policy.mts';
 import { voCandidates } from './bridge.mts';
 import { explorationAnswer } from '../exploration.mts';
 
-const root = WORKSPACE, fixtures = resolve(root, 'tests/fixtures/telescope-vo');
+const root = WORKSPACE, fixtures = resolve(root, 'packages/telescope-cli/src/vo/fixtures/telescope-vo');
 const profile = SERVICES[1]!;
 const target = { id: 'betelgeuse', names: ['Betelgeuse'], classification: 'star', classificationSource: 'fixture catalogue' };
 const request = { target: target.id, wavelengthMicrometres: [0.78, 0.85] as const, kind: 'image' as const, result: 'telescope-product' as const };

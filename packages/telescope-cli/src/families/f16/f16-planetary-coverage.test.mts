@@ -4,7 +4,7 @@ import {APOLLO_PSE_STATIONS,CONSERT_67P_FSS_RANGING,F16_PLANETARY_COVERAGE_HANDL
 import {member} from '../common.mts';
 
 const root=(path:string)=>resolve(WORKSPACE,path);
-const consert=(name:string)=>root(`tests/fixtures/telescope-families/consert-67p-fss/${name}`);
+const consert=(name:string)=>root(`packages/telescope-cli/src/families/fixtures/telescope-families/consert-67p-fss/${name}`);
 const consertPackage=(name:string)=>root(`src/objects/comet-67p/source/telescopes/consert/${name}`);
 const apolloPse=root('src/objects/moon/source/telescopes/apollo-pse/stationxml.xa.0.sxml');
 const LIMITATIONS=['Exact tracks, rays, stations, or profiles remain sparse support; no interpolation is performed.','This coverage cannot be promoted to a grid, volume, material property, interior model, or interpolated field.'];

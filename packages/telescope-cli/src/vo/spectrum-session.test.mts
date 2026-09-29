@@ -17,7 +17,7 @@ import { qualifyVoProduct } from './qualify.mts';
 const test = sourceTest();
 test('ESO FITS spectra reach native F03 export through saved exploration, get and outputs', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'vo-spectrum-session-'));
-  const fixtures = resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo');
+  const fixtures = resolve(import.meta.dirname, 'fixtures/telescope-vo');
   const bytes = await readFile(resolve(fixtures, 'eso-spectrum/espresso-excerpt.fits'));
   const server = createServer((_request, response) => { response.setHeader('content-type', 'application/octet-stream'); response.end(bytes); });
   await new Promise<void>(done => server.listen(0, '127.0.0.1', done));

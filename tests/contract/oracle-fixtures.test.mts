@@ -2,7 +2,8 @@ import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { access, readdir } from 'node:fs/promises';
+import { access, readdir, readFile } from 'node:fs/promises';
+import { test as contractTest } from 'node:test';
 import { resolve } from 'node:path';
 import { readOracleFixture, pinnedOracleVersions, assertPinnedInputs, assertPinnedReferences, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { runtimeLock, generatorFingerprint } from '../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/runtime.mts';
@@ -11,6 +12,7 @@ import { runtimeLock, generatorFingerprint } from '../../packages/bake/src/objec
 // The scripts sit beside their fixtures; SBMT's JSON bridge manifests and runtime lock are not fixtures.
 const NOT_FIXTURES = new Set(['sbmt/package.json', 'sbmt/package-lock.json', 'sbmt/runtime.lock.json']);
 const relocatedFixtures: Readonly<Record<string, string>> = {
+  "physical-units/spectral.json": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.json",
   "sbmt/projection.json": "packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json",
 
   "spice/dart-draco.json": "packages/bake/src/astronomy/fixtures/dart-draco.json",
@@ -41,6 +43,8 @@ const relocatedFixtures: Readonly<Record<string, string>> = {
   "pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json"
 };
 const relocatedScripts: Readonly<Record<string, string>> = {
+  "fits/binary-table.py": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/fits/binary-table.py",
+  "physical-units/spectral.py": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.py",
   "spice/new-horizons-approach.py": "packages/bake/src/objects/default-view/fixtures/new-horizons-approach.py",
 
   "eclipse-map/numerics.py": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.py",
@@ -65,6 +69,24 @@ const directories = await readdir(resolve(ORACLE_ROOT, 'tests/oracles'), { withF
 const names = (await Promise.all(directories.filter(d => d.isDirectory()).map(async d => (await readdir(resolve(ORACLE_ROOT, 'tests/oracles', d.name))).filter(f => f.endsWith('.json')).map(f => `${d.name}/${f}`)))).flat()
   .filter(name => !NOT_FIXTURES.has(name)).concat(Object.keys(relocatedFixtures)).sort();
 const pins = await pinnedOracleVersions();
+
+// This source-only check must run even when scientific inputs are unrestored.
+contractTest('Python writer and TypeScript reader relocate every contract fixture to the same path', async () => {
+  const python = await readFile(resolve(ORACLE_ROOT, 'packages/core/src/node/oracle/fixture.py'), 'utf8');
+  const typescript = await readFile(resolve(ORACLE_ROOT, 'packages/core/src/node/oracle/fixture.mts'), 'utf8');
+  const pythonTable = /\nrelocated = (\{[\s\S]*?\n\})/u.exec(python);
+  const typescriptTable = /const relocatedPaths:[^=]+ = (\{[\s\S]*?\n\});/u.exec(typescript);
+  assert.ok(pythonTable, 'Python relocation table exists');
+  assert.ok(typescriptTable, 'TypeScript relocation table exists');
+  const entries = (table: string) => [...table.matchAll(/["']([^"']+)["']:\s*["']([^"']+)["']/gu)]
+    .map(match => [match[1]!, match[2]!] as const);
+  const pythonEntries = entries(pythonTable[1]!);
+  const readerEntries = entries(typescriptTable[1]!).filter(([key]) => key.startsWith('tests/oracles/'))
+    .map(([key, value]) => [key.slice('tests/oracles/'.length), value] as const);
+  const expected = Object.entries(relocatedFixtures).sort(([a], [b]) => a.localeCompare(b));
+  assert.deepEqual(pythonEntries.sort(([a], [b]) => a.localeCompare(b)), expected, 'Python writer relocation keys and destinations');
+  assert.deepEqual(readerEntries.sort(([a], [b]) => a.localeCompare(b)), expected, 'TypeScript reader relocation keys and destinations');
+});
 
 test('oracle fixtures name their generator, a pinned tool version and pinned inputs', async () => {
   assert.ok(names.length >= 2, `${names.length} fixtures`);
@@ -94,7 +116,7 @@ test('oracle fixtures name their generator, a pinned tool version and pinned inp
     }
     assert.ok(pinned >= 1, `${name} records its pinned environment`);
     assert.ok(fixture.inputs.length + fixture.references.length >= 1, `${name} lists its inputs or pinned references`);
-    await assertPinnedInputs(fixture.inputs, kernelBankPaths);
+    await assertPinnedInputs(fixture.inputs.map(input => input.path === 'tests/fixtures/fits/binary-table-columns.fits' ? { ...input, path: 'packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits' } : input), kernelBankPaths);
     assertPinnedReferences(fixture.references);
   }
 });

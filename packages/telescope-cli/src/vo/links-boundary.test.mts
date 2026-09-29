@@ -14,7 +14,7 @@ import { jsonValue, type DiscoverySnapshot } from '@cssearth/telescope/node';
 
 test('PyVO sends descriptor-bound DataLink parameters and retains the exact response', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'vo-links-boundary-'));
-  const xml = await readFile(resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo/eso-links.xml'));
+  const xml = await readFile(resolve(import.meta.dirname, 'fixtures/telescope-vo/eso-links.xml'));
   const requests: URL[] = [];
   const server = createServer((request, response) => {
     requests.push(new URL(request.url!, 'http://localhost'));
@@ -61,7 +61,7 @@ test('public VO query follows a descriptor-bound nested DataLink service', async
   if (!address || typeof address === 'string') throw new Error('No HTTP port.');
   try {
     const service = `http://127.0.0.1:${address.port}`;
-    const response = (await astroquery({ operation: 'vo-parse', file: resolve(import.meta.dirname, '../../../../tests/fixtures/telescope-vo/eso-obscore.xml'),
+    const response = (await astroquery({ operation: 'vo-parse', file: resolve(import.meta.dirname, 'fixtures/telescope-vo/eso-obscore.xml'),
       url: service, byteLimit: 1_000_000, timeFormat: 'mjd', timeScale: 'utc' })).vo!;
     const request = { target: 'betelgeuse', wavelengthMicrometres: [0.78, 0.85] as const, kind: 'image' as const,
       result: 'telescope-product' as const, time: { any: true } as const, angularResolutionArcsec: 1 };

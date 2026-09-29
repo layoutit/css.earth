@@ -28,10 +28,7 @@
     "bake-nebula-and-objects-independent": [],
     "nothing-imports-applications": [],
     "nothing-imports-cli-entries": [],
-    "packages-import-only-packages": [
-      {"from":"packages/telescope-cli/src/qualify.test.mts","to":"tests/fixtures/fits/helpers.mts"},
-      {"from":"packages/telescope-cli/src/source-products.test.mts","to":"tests/fixtures/fits/helpers.mts"}
-    ],
+    "packages-import-only-packages": [],
     "runtime-imports-no-preparation": [],
     "runtime-imports-no-site-build": [],
     "telescope-imports-no-bake": []

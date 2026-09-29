@@ -163,7 +163,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "2b480fb9eb6f0cf7a47d82d2b8b8e5f50558ccbf1c3062f4837cdcf12e338687"
     },
-    "tests/fixtures/fits/binary-table-columns.fits": {
+    "packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits": {
       "bytes": "11520",
       "hdus": "30ae8087949c9a31f4dd96e8f8d2b31a37360a0fe96beba476898fc57d481683",
       "image@0": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
@@ -216,6 +216,16 @@
       "transport": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
       "rice": "refused: No tile-compressed FITS image.",
       "fileHdus": "676d3155e596985ce2473c875084260d095f2dca30b3fdd968624c65059db520"
+    },
+    "packages/telescope-cli/src/fixtures/fits/float32.fits": {
+      "bytes": "5760",
+      "hdus": "ac5d3f9bd83693be909fa590cf9be79253851cffc024d2d7037c6ec20b8d9845",
+      "image@0": "4c750e32237fe5a13df8a0f93ccd8858730eed052ffc392a50ed89d073d9976f",
+      "sky@0": "refused: A sky image states RA along columns and Dec along rows, with one projection.",
+      "primary": "caba612877c8964f4e2b7bcda5417fadf0a50ffa724438ac9f875a70ca7fe3bc",
+      "transport": "refused: Nonfinite FITS pixel.",
+      "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
+      "fileHdus": "685d17c92240d58fcd2154f353c3d4146373b674f7709843e7f6c01cea02346d"
     },
     "tests/fixtures/fits/float32.fits": {
       "bytes": "5760",
@@ -421,7 +431,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "edf81d40226f02c21f0dea4eb52de377b733da5f6f670bfdfa053e26d7fac457"
     },
-    "tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz": {
+    "packages/telescope-cli/src/families/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz": {
       "bytes": "4112640",
       "hdus": "181a2e7e78bb55e882a09942bdc667fef6301ced2e7df81a24ec6f9b1f461cf1",
       "image@0": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
@@ -444,7 +454,7 @@
       "transport": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
       "rice": "refused: No tile-compressed FITS image."
     },
-    "tests/fixtures/telescope-families/f02-mixed-nd/equatorial_3d.fits": {
+    "packages/telescope-cli/src/families/fixtures/telescope-families/f02-mixed-nd/equatorial_3d.fits": {
       "bytes": "5760",
       "hdus": "342c4504bf74c17d54aba9f1f00ae41f1677782b780451976920c56c7e12c5ed",
       "image@0": "32e1a16c2d24e88363f058b59b631324c7eaafefe6379a15476adad6b8a4cdfc",
@@ -470,7 +480,7 @@
       "rice": "refused: No tile-compressed FITS image.",
       "fileHdus": "ee5d63a48e17cca0f7ad945189fa54b42feb883c794fe48e00ca4112d3262767"
     },
-    "tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits": {
+    "packages/telescope-cli/src/families/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits": {
       "bytes": "5760",
       "hdus": "5c3c4d51f8f73bbf9ad1e1dea5af87bbd37b61fb76100c9ba22a1ef6a97dca17",
       "image@0": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
@@ -480,7 +490,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "145e2c0616f9ea535b4fe529422fdb4f864ff11bb2a28418f1b82fd85001bb7a"
     },
-    "tests/fixtures/telescope-families/f14-healpix/bayestar.fits.gz": {
+    "packages/telescope-cli/src/families/fixtures/telescope-families/f14-healpix/bayestar.fits.gz": {
       "bytes": "12591360",
       "hdus": "5e71afc79de6ea3f51e0e56367448f0b774b89122ed6e5bf3127cfb3647f3685",
       "image@0": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
@@ -491,7 +501,7 @@
       "transport": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
       "rice": "refused: No tile-compressed FITS image."
     },
-    "tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p.fit": {
+    "packages/telescope-cli/src/families/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p.fit": {
       "bytes": "273600",
       "hdus": "569578dc4a2628f73cbb929c9154b48e04d1336c30e83cf81f40ad555750759b",
       "image@0": "0c72deb8ab0f8418c4aa586c994d03295ba2076b632a8f7df8ddc3b93fcb6eee",
@@ -501,7 +511,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "aa600bb2826509977da649f97924845f9773af453293315a2112e35505a5c15a"
     },
-    "tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit": {
+    "packages/telescope-cli/src/families/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit": {
       "bytes": "535680",
       "hdus": "fc487da1b948f059aba899079bf1c03e809000226dd7d6150ae11c9d9f669b68",
       "image@0": "31bfd59a82630f4128af83704439a594367564d00cf96671d9fdf57a233e4610",
@@ -511,7 +521,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "6ba2c4afb1f87f72329371abf04930c497c0fdf31db9a0299c211a877d5b72b0"
     },
-    "tests/fixtures/telescope-families/geographos-radar/ge007.fit": {
+    "packages/telescope-cli/src/families/fixtures/telescope-families/geographos-radar/ge007.fit": {
       "bytes": "72000",
       "hdus": "refused: Invalid FITS header characters.",
       "image@0": "1d4246ac5d938a06906f29cb5c6e1609c084fbe9045acae1487a79633d257d41",
@@ -521,7 +531,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "refused: Invalid FITS header characters."
     },
-    "tests/fixtures/telescope-vo/eso-circle.fits": {
+    "packages/telescope-cli/src/vo/fixtures/telescope-vo/eso-circle.fits": {
       "bytes": "290880",
       "hdus": "1c1254cd6a20cf6f1b7fdcfc21ab93a43cefed9848f460ccd9e11d910302646a",
       "image@0": "af4f141b14d02487a0d2b722cb036990308dccf7f3f094e12781c50a820ad845",
@@ -531,7 +541,7 @@
       "rice": "refused: Unsupported FITS compressed file: primary HDU holds data.",
       "fileHdus": "fefe46309051ed524cd90e739559a063822185a9ebe670bfb301b91587047569"
     },
-    "tests/fixtures/telescope-vo/eso-spectrum/espresso-excerpt.fits": {
+    "packages/telescope-cli/src/vo/fixtures/telescope-vo/eso-spectrum/espresso-excerpt.fits": {
       "bytes": "8640",
       "hdus": "9250f66bf7626601133ce618670241a727ed077b955d68b249ddc3b55116e5e7",
       "image@0": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
@@ -543,7 +553,7 @@
       "rice": "refused: No tile-compressed FITS image.",
       "fileHdus": "50643522bca0d59edc6885c1637d943c9542846a2c124245b54debbd3fdde6d9"
     },
-    "tests/fixtures/telescope-vo/eso-spectrum/uves-hd189733-excerpt.fits": {
+    "packages/telescope-cli/src/vo/fixtures/telescope-vo/eso-spectrum/uves-hd189733-excerpt.fits": {
       "bytes": "11520",
       "hdus": "fb372549f27dfff98c48ff69a1fa39092ef22273b365bc937b01c4c3dc5791a7",
       "image@0": "refused: Unsupported FITS image (requires 2D/3D numeric image, not int64).",
