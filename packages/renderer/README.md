@@ -100,3 +100,9 @@ Residency reserves the prepared decoded-byte cost before admitting a URL; downlo
 budget or admit extra assets. Releasing the final lease cancels pending image
 loads and removes their listeners; completed warm handoffs preserve the decoded URL used by retained CSS. Detail
 publication and paced painting continue to wait on the same decoded-resource receipts.
+
+The universe billboard atlas has one shared decode lease for both the nebula and
+image-layer billboard banks. First visible demand starts its asynchronous decode;
+CSS receives the atlas only after readiness, followed by a requested publication.
+The lease ends with the universe. Cold body close-ups do not request this atlas,
+and decoding never reveals a new billboard during an inertial coast.

@@ -61,8 +61,10 @@ export function parseLensBillboards(value: unknown): LensBillboards {
 
 /** One retained leaf per billboard, sampling its cell of the shared atlas. The atlas is requested only when a
  * billboard first shows; the impostor projection places, sizes and orients it like the bank's own impostors. */
-export function mountLensBillboards({ host, before, atlasUrl, atlas, entries }: {
+export function mountLensBillboards({ host, before, atlasUrl, atlas, entries, prepareAtlas }: {
   host: HTMLElement; before: Node | null; atlasUrl: string; atlas: LensBillboards['atlas'];
+  /** Shared universe lease: transport and decode finish before the atlas reaches CSS. */
+  prepareAtlas: () => boolean;
   entries: readonly { readonly id: string; readonly frame: DensityVolumeFrame; readonly billboard: NonNullable<LensBankBillboard['billboard']> }[];
 }) {
   const document = host.ownerDocument;
@@ -108,6 +110,7 @@ export function mountLensBillboards({ host, before, atlasUrl, atlas, entries }: 
         return;
       }
       if (!leaf.shown && coasting) return;
+      if (!prepareAtlas()) return;
       if (!leaf.node.style.backgroundImage) leaf.node.style.backgroundImage = `url("${atlasUrl.replace(/["\\]/g, '\\$&')}")`;
       const d = projection.diameterPixels;
       const style = `${d}|${projection.x}|${projection.y}|${view.matrix.join(',')}|${opacity}`;
