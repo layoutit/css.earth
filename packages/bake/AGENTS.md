@@ -68,7 +68,7 @@ its validators accept); the renderer never imports the bake.
   the inventoried runtime-asset locations (the R2 key, URL and restore path of each inventoried file, for a checkout root
   the caller passes in), the public scene images an object ships (its runtime manifest) and the publication of a staged
   preparation into the object package. It imports `objects/sources`. Its tests are `node --test` suites in
-  `tests/delivery/`; the runtime-manifest and publication tests are in `tests/objects/`, where `pnpm test:preparation` finds them.
+  `tests/delivery/`; the runtime-manifest and publication tests are in `src/delivery/`, where `pnpm test:preparation` finds them.
 - `src/sources/` is published as `@cssearth/bake/sources` (Node only): source records preparation reads beside an
   object: its authored descriptor, the independent records of the source catalogue (`src/sources/`), the authored
   physical world frame checked against a prepared scene and runtime, and the images embedded in a published PDF figure;
@@ -234,13 +234,13 @@ its validators accept); the renderer never imports the bake.
     package's name), installs it into the body's package (`survey-install.ts`) and measures a lens against its paper's comparison
     figure (`published-comparison.ts`). It imports `objects/cameras`, `objects/geometry`, `objects/layers/terrestrial` and
     `sources`. Its commands are `packages/bake/cli/sphere-survey-{setup,install,apparitions}.mts` and `published-comparison.mts`,
-    which resolve their checkout from their own location and pass it in; its tests are in `tests/objects/sphere-survey/`.
+    which resolve their checkout from their own location and pass it in; its tests are in `src/objects/sphere-survey/`.
   - `objects/interpretation`: the observation interpreter the raster lane packs surfaces through (`createSurfaceInterpreter`
     picks each surface's decoder: solar synoptic maps, terrestrial, shape-model, stellar and static observations, the
     Akatsuki UVI Level 3b grid), with the solar geometry the host passes in. It imports `raster`, `objects/color`,
     `objects/geometry`, `objects/raster`, `objects/scene`, `objects/sources`, `objects/stellar` and the observation,
     shape-model and terrestrial layers. It is a topic of its own, outside `objects/layers/observation`, whose code the nebula
-    lab's compiler identity reaches. Its tests are in `tests/objects/interpretation/`.
+    lab's compiler identity reaches. Its moved tests are in `src/objects/interpretation/`; deferred suites remain in `tests/objects/interpretation/`.
   - `objects/host-adapters`: what the authored preparation passes the scene and presentation compilers
     (`loadGeometryAdapters`, `presentationHostAdapters`), each bound to the solar geometry the host passes in. It imports
     `presentation`, `scene`, `objects/scene` and `objects/layers/terrestrial`.
@@ -271,7 +271,7 @@ its validators accept); the renderer never imports the bake.
     old `tools/objects/terrestrial-layers/` paths; `objects/sources` (`preparation-generator.ts`) binds those names to this code.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
     surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
-    `surface-observations/`, described in its README (its tests are in `tests/objects/surface-observations/`, its evidence in
+    `surface-observations/`, described in its README (its tests are in `src/objects/layers/terrestrial/surface-observations/`, its evidence in
     `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Body pipeline tests stay in `packages/bake/authoring/<body>/`; domain tests also live under

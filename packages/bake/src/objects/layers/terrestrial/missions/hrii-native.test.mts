@@ -6,7 +6,7 @@ import {array,boolean,nullable,number,shape,text} from '@cssearth/core';
 import {decodeHriiSolarTable,fitHriiSpectrum} from '@cssearth/bake/objects/layers/terrestrial';
 const parse=shape({method:text,cases:array(shape({body:text,path:text,detectorRow:number,incidenceCosine:number,heliocentricDistanceAu:number,
  reference:shape({temperatureKelvin:number,slopePercentPer100Nm:number}),samples:array(shape({wavelengthMicrons:number,radiance:nullable(number),valid:boolean}))}))});
-const fixture=parse(JSON.parse(readFileSync(new URL('../../../../../../../tests/objects/fixtures/comets/hrii-native-reference.json',import.meta.url),'utf8')));
+const fixture=parse(JSON.parse(readFileSync(new URL('./fixtures/comets/hrii-native-reference.json',import.meta.url),'utf8')));
 for(const c of fixture.cases)test(`${c.body} native ${c.path.split('/').at(-1)} row ${c.detectorRow}: independent Astropy/SciPy fit`,()=>{
  assert.ok(['comet-9p','comet-103p'].includes(c.body));
  const solar=decodeHriiSolarTable(readFileSync(new URL(`../../../../../../../src/objects/${c.body}/source/science/hrii/hriir_020601_2_0.tab`,import.meta.url),'utf8'));

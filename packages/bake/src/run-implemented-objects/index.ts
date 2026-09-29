@@ -53,7 +53,7 @@ export async function discoverObjectTests(
   // Shared contract runners register one test per table entry; CSSEARTH_TEST_OBJECTS limits them to this body.
   const shared = sharedUnitTestDirectory(projectRoot);
   const runners = (await readDirectory(shared)).filter(isTest).sort().map((filename) => resolve(shared, filename));
-  const tests = [...own, ...runners];
+  const tests = [...own, ...runners, resolve(projectRoot, 'packages/bake/src/raster/raster-pages.test.mts')];
   if (tests.length === 0) {
     throw new Error(`Implemented object ${id} has no tests.`);
   }

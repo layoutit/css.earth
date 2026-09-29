@@ -41,7 +41,7 @@ An earlier version of this package drew 24 of those orbits, dashed. Each of them
 
 Run of 2026-09-17 (this version): [`node tools/prepare/prepare-object.mts hd-189733-companion`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) prepared the package.
 
-- [`stellar-photometric-color.test.mts`](../../../tests/objects/observation/stellar/stellar-photometric-color.test.mts) (now [`tests/objects/observation/stellar/stellar-photometric-color.test.mts`](../../../tests/objects/observation/stellar/stellar-photometric-color.test.mts)) reads the pinned XP spectrum and checks the colour 255, 201, 123.
+- [`stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts) (now [`packages/bake/src/objects/stellar/stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts)) reads the pinned XP spectrum and checks the colour 255, 201, 123.
 - `source.test.mts` verifies the pins and acquisitions, that radius and GM are the catalogue's, that the distance is A's, and that the prepared world positions of A and B are 11.44 arcsec apart as seen from the Sun.
 - `object-discovery.test.mts` checks that B is marked `sourceColor` and stays on the map, while Antares and Polaris stay hidden.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the HD 189733 system's members are the planet and B, and that its exit distance scales the Sun's 100 au.

@@ -13,6 +13,13 @@ import { projectRoot } from '../project-root.ts';
 
 const root = projectRoot(import.meta.url), oracles = resolve(root, 'tests/oracles'), python = resolve(root, '.local/oracles/venv/bin/python');
 const relocated: Readonly<Record<string, string>> = {
+  "eclipse-map/numerics": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.py",
+  "eclipse-map/theresa-eigenbasis": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.py",
+  "fits/charon-leisa": "packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.py",
+  "fits/lupton-asinh": "packages/bake/src/objects/color/fixtures/lupton-asinh.py",
+  "fits/rice": "packages/bake/src/objects/layers/observation/fixtures/fits/rice.py",
+  "fits/wise-atlas-projection": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.py",
+
   "astronomy/hosted-orbit": "packages/bake/src/objects/scene/fixtures/hosted-orbit.py",
   "fits/encounter": "packages/bake/src/objects/layers/terrestrial/missions/encounter.py",
   "fits/llorri": "packages/bake/src/objects/layers/terrestrial/missions/llorri.py",

@@ -76,7 +76,7 @@ that would clip a displayed uncertainty band. It performs no atmospheric fit.
 
 The implementation is [retrieved-profile.ts](../packages/bake/src/objects/charts/retrieved-profile.ts),
 dispatched by [charts.ts](../site/build/charts/charts.ts). Its focused check is
-`node --test tests/objects/charts/retrieved-profile.test.mts`.
+`node --test packages/bake/src/objects/charts/retrieved-profile.test.mts`.
 It covers pressure conversion, interval interpretation, independent figure
 anchors, invalid inputs and the three-table provenance binding. An added body
 needs its own reference values; WASP-18b's anchors do not qualify another fit.

@@ -1,0 +1,92 @@
+Auto-merging .agents/skills/celestial-skill/references/implementation-map.md
+Auto-merging .github/scripts/checks/test-bake-objects.mts
+CONFLICT (content): Merge conflict in .github/scripts/checks/test-bake-objects.mts
+Auto-merging .github/scripts/checks/test-bake-objects.test.mts
+CONFLICT (content): Merge conflict in .github/scripts/checks/test-bake-objects.test.mts
+Auto-merging .github/workflows/universe.yml
+CONFLICT (content): Merge conflict in .github/workflows/universe.yml
+Auto-merging docs/astronomy-package-ownership.md
+Auto-merging docs/object-provenance.md
+Auto-merging package.json
+Auto-merging packages/bake/AGENTS.md
+Auto-merging packages/bake/src/objects/acquisition/dsk-mesh.test.mts
+Auto-merging packages/bake/src/objects/acquisition/test_cassini_fixed_mesh.py
+Auto-merging packages/bake/src/objects/charts/chart-svg.test.mts
+CONFLICT (content): Merge conflict in packages/bake/src/objects/charts/chart-svg.test.mts
+Auto-merging packages/bake/src/objects/charts/retrieved-profile.test.mts
+Auto-merging packages/bake/src/objects/layers/observation/body-maps/body-map-product.test.mts
+Auto-merging packages/bake/src/objects/layers/observed-surfaces/observed-surfaces.test.mts
+CONFLICT (rename/delete): tests/objects/unit/centaur-shape-contract.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/centaur-shape-contract.mts in origin/main, but deleted in HEAD.
+CONFLICT (rename/delete): tests/objects/unit/comet-lightcurve-models.test.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-lightcurve-models.test.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-lightcurve-models.test.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-lightcurve-models.test.mts left in tree.
+CONFLICT (rename/delete): tests/objects/unit/comet-radar-models.test.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radar-models.test.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radar-models.test.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radar-models.test.mts left in tree.
+CONFLICT (rename/delete): tests/objects/unit/comet-radius-models.test.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radius-models.test.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radius-models.test.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radius-models.test.mts left in tree.
+CONFLICT (rename/delete): tests/objects/unit/comets/lightcurve-models.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/comets/lightcurve-models.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/layers/terrestrial/fixtures/comets/lightcurve-models.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/layers/terrestrial/fixtures/comets/lightcurve-models.mts left in tree.
+CONFLICT (rename/delete): tests/objects/unit/comets/model-fixture.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/comets/model-fixture.mts in origin/main, but deleted in HEAD.
+CONFLICT (rename/delete): tests/objects/unit/comets/radar-models.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/comets/radar-models.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/layers/terrestrial/fixtures/comets/radar-models.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/layers/terrestrial/fixtures/comets/radar-models.mts left in tree.
+CONFLICT (rename/delete): tests/objects/unit/comets/radius-models.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/comets/radius-models.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/layers/terrestrial/fixtures/comets/radius-models.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/layers/terrestrial/fixtures/comets/radius-models.mts left in tree.
+CONFLICT (rename/delete): tests/objects/unit/irregular-satellite-fixture.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/irregular-satellite-fixture.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/layers/terrestrial/fixtures/irregular-satellite-fixture.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/layers/terrestrial/fixtures/irregular-satellite-fixture.mts left in tree.
+CONFLICT (rename/delete): tests/objects/unit/radial-fixture.mts renamed to packages/bake/src/objects/layers/terrestrial/fixtures/radial-fixture.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/layers/terrestrial/fixtures/radial-fixture.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/layers/terrestrial/fixtures/radial-fixture.mts left in tree.
+Auto-merging packages/bake/src/objects/layers/terrestrial/missions/encounter-sources.test.mts
+Auto-merging packages/bake/src/objects/layers/terrestrial/missions/hrii-native.test.mts
+Auto-merging packages/bake/src/objects/layers/terrestrial/surface-observations/README.md
+CONFLICT (rename/delete): tests/objects/unit/surface-observation-lens.mts renamed to packages/bake/src/objects/layers/terrestrial/surface-observations/fixtures/surface-observation-lens.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/layers/terrestrial/surface-observations/fixtures/surface-observation-lens.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/layers/terrestrial/surface-observations/fixtures/surface-observation-lens.mts left in tree.
+Auto-merging packages/bake/src/objects/raster/eclipse-map/hd-189733b-raw-map.test.mts
+CONFLICT (rename/delete): tests/objects/unit/observation.mts renamed to packages/bake/src/objects/raster/fixtures/observation.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/raster/fixtures/observation.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/raster/fixtures/observation.mts left in tree.
+CONFLICT (rename/delete): tests/objects/unit/observed-atlas-proof.mts renamed to packages/bake/src/objects/raster/fixtures/observed-atlas-proof.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/raster/fixtures/observed-atlas-proof.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/raster/fixtures/observed-atlas-proof.mts left in tree.
+Auto-merging packages/bake/src/objects/raster/wise-atlas-mosaic.test.mts
+CONFLICT (rename/delete): tests/objects/unit/distant-world-sources.test.mts renamed to packages/bake/src/objects/sources/fixtures/distant-world-sources.test.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/sources/fixtures/distant-world-sources.test.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/sources/fixtures/distant-world-sources.test.mts left in tree.
+CONFLICT (rename/delete): tests/objects/unit/distant-worlds/source-contract.mts renamed to packages/bake/src/objects/sources/fixtures/source-contract.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/sources/fixtures/source-contract.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/sources/fixtures/source-contract.mts left in tree.
+CONFLICT (rename/delete): tests/objects/sphere-survey/figure-labels.test.mts renamed to packages/bake/src/objects/sphere-survey/figure-labels.test.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/sphere-survey/figure-labels.test.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/sphere-survey/figure-labels.test.mts left in tree.
+Auto-merging packages/bake/src/objects/sphere-survey/setup.test.mts
+CONFLICT (rename/delete): tests/objects/survey-install-spawns.test.mts renamed to packages/bake/src/objects/sphere-survey/survey-install-spawns.test.mts in origin/main, but deleted in HEAD.
+CONFLICT (modify/delete): packages/bake/src/objects/sphere-survey/survey-install-spawns.test.mts deleted in HEAD and modified in origin/main.  Version origin/main of packages/bake/src/objects/sphere-survey/survey-install-spawns.test.mts left in tree.
+Auto-merging packages/core/src/node/oracle/README.md
+Auto-merging packages/core/src/node/oracle/fixture.py
+Auto-merging src/objects/alderamin/README.md
+Auto-merging src/objects/altair/README.md
+Auto-merging src/objects/arrokoth/README.md
+Auto-merging src/objects/caph/README.md
+Auto-merging src/objects/charon/README.md
+Auto-merging src/objects/comet-103p/README.md
+Auto-merging src/objects/comet-9p/README.md
+Auto-merging src/objects/hd-189733-companion/README.md
+Auto-merging src/objects/hd-189733/README.md
+Auto-merging src/objects/hd-189733b/README.md
+Auto-merging src/objects/hr-8799-b/README.md
+Auto-merging src/objects/hr-8799-c/README.md
+Auto-merging src/objects/hr-8799-d/README.md
+Auto-merging src/objects/hr-8799-e/README.md
+Auto-merging src/objects/iota-horologii/README.md
+Auto-merging src/objects/jupiter/README.md
+Auto-merging src/objects/kelt-9/README.md
+Auto-merging src/objects/rasalhague/README.md
+Auto-merging src/objects/regulus/README.md
+Auto-merging src/objects/saturn/README.md
+Auto-merging src/objects/sun/README.md
+Auto-merging src/objects/trappist-1/README.md
+Auto-merging src/objects/vega/README.md
+Auto-merging src/objects/wasp-121b/README.md
+Auto-merging src/objects/wasp-18b/README.md
+Auto-merging src/objects/wasp-43/README.md
+Auto-merging src/objects/wasp-43b/README.md
+CONFLICT (modify/delete): tests/contract/oracle-fixtures.test.mts deleted in HEAD and modified in origin/main.  Version origin/main of tests/contract/oracle-fixtures.test.mts left in tree.
+CONFLICT (modify/delete): tests/fixtures/fits/repository-inputs.json deleted in HEAD and modified in origin/main.  Version origin/main of tests/fixtures/fits/repository-inputs.json left in tree.
+Auto-merging tests/fixtures/telescope-family-examples/manifest.json
+Auto-merging tests/oracles/test-fits.mts
+CONFLICT (content): Merge conflict in tests/oracles/test-fits.mts
+Auto-merging tests/oracles/tsconfig.json
+Automatic merge failed; fix conflicts and then commit the result.
