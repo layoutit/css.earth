@@ -74,7 +74,7 @@ for path in REFERENCE_PATHS:
         references.append(external_record(url, response.read()))
 
 write(
-    str(Path(__file__).with_suffix('.json')),
+    'physical-units/spectral.json',
     'Astropy blackbody and Rayleigh unit conversions',
     'tests/oracles/physical-units/spectral.py',
     {'astropy': astropy.__version__, 'methods': 'BlackBody, exact constants and Rayleigh units'},
