@@ -1,5 +1,4 @@
 /** Bounded positive multiscale fit, followed by explicitly conditional 3D depth assignment. */
-import { createHash } from 'node:crypto';
 import { jointRayDepths } from '../joint/geometry.ts';
 import { readJointParameters, createEmissionField, emissionKernel, projectEmissionComponent, defaultCompilerControls, readCompilerControls, type CompilerControls, type EmissionComponent, type EmissionFieldModel, type EmissionFitInput, type EmissionFitResult, createEmissionWindowSampler, readEmissionWindow } from '@cssearth/bake/volume';
 import { conditionDepthComponents, readDepthRecipe, type DepthRecipe } from './depth-model.ts';
@@ -166,7 +165,8 @@ export function fitEmissionField(input: EmissionFitInput, requested: unknown = d
     model.assumptions.halo = 'Outside scoped paper-guided features, the explicitly authored background surface supplies uncertain continuity. Small-scale supports use their own bounded thickness rather than a global depth floor. No observed 3D density or foreground membership is asserted.';
   }
   model.bounds = createEmissionField(model).bounds;
-  model.identity = createHash('sha256').update(JSON.stringify(model)).digest('hex');
+  // Callers name the field after the recipe or model that owns it.
+  model.identity = 'conditional-emission-field';
   const projection = new Float32Array(input.target.length), fullResidual = new Float32Array(input.target.length), unassigned = new Float32Array(input.target.length);
   const coverage = input.coverage ? Uint8Array.from(input.coverage) : new Uint8Array(input.target.length).fill(1);
   const dx = (input.bounds.max[0] - input.bounds.min[0]) / input.width, dy = (input.bounds.max[1] - input.bounds.min[1]) / input.height;

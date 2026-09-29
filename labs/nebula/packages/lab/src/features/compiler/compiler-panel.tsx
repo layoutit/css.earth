@@ -105,7 +105,7 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
   }, [registration, matrices]);
   const evidence = useMemo(() => {
     if (catalogue) {
-      const key = `nebula:joint-evidence:1:${cataloguePath}:${JSON.stringify(catalogue.images.map(image => [image.id, image.sourceSha256, image.mapSha256, matrices[image.id]]))}`;
+      const key = `nebula:joint-evidence:2:${cataloguePath}:${JSON.stringify(catalogue.images.map(image => [image.id, image.directory, matrices[image.id]]))}`;
       try {
         const value = readFusionSettings(JSON.parse(localStorage.getItem(key) ?? 'null'));
         if (value.weights.length === catalogue.images.length) {

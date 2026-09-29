@@ -1,7 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, stat } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { parsePreparedLmcStars, type PreparedLmcStars, rayToOverlayPlane } from '@cssearth/bake/volume';
 import { prepareSmcCatalogue, readBonanos2010Row, readSmcStarManifest, finiteModelStarsIndex, preparedStarsPath, MAGNITUDE_LIMIT } from '../../../cli/commands/prepare-smc-stars.ts';
@@ -35,7 +34,7 @@ const tangentOf = (s: { raDeg: number; decDeg: number }, frame: PreparedLmcStars
 test('pinned Bonanos (2010) rows replay deterministically into the prepared SMC stars and the model frame', { skip }, async () => {
   const context = (await contextPromise)!, payload = await load();
   const { files } = await readSmcStarManifest(root);
-  for (const file of files) assert.equal(createHash('sha256').update(await readFile(`labs/nebula/models/smc/stars/source/${file.path}`)).digest('hex'), file.sha256);
+  for (const file of files) assert.ok((await readFile(`labs/nebula/models/smc/stars/source/${file.path}`)).length > 0, file.path);
   const table = await readFile('labs/nebula/models/smc/stars/source/table3.dat', 'utf8');
   const first = prepareSmcCatalogue(table, context), second = prepareSmcCatalogue(table, context);
   assert.deepEqual(first, second, 'Two replays must place every star identically.');
@@ -44,7 +43,7 @@ test('pinned Bonanos (2010) rows replay deterministically into the prepared SMC 
   parsePreparedLmcStars(payload, context.frame);
   const index = JSON.parse(await readFile(finiteModelStarsIndex(context.modelResultId), 'utf8'));
   assert.equal(index.stars.path, prepared);
-  assert.equal(index.stars.sha256, createHash('sha256').update(await readFile(prepared)).digest('hex'));
+  assert.deepEqual(index.stars, { path: prepared });
   // Frame units: kpc, and the payload frame is exactly the finite model frame the viewer loads.
   assert.ok(Math.abs(payload.frame.metersPerUnit / KPC_M - 1) < 1e-12);
   const lensFrame = JSON.parse(await readFile(`${finiteModelDirectory(context.modelResultId)}/object.json`, 'utf8')).properties.volume;
@@ -164,7 +163,7 @@ test('each prepared layer belongs to its own model and uses the depth density th
   for (const path of layers) {
     const payload = await load(path).catch(() => null);
     if (!payload) continue;
-    const finite = payload.provenance as { finiteModel: { modelResultId: string; lensRecipe: { path: string }; depthDensity: { path: string; sha256: string } } };
+    const finite = payload.provenance as { finiteModel: { modelResultId: string; lensRecipe: { path: string }; depthDensity: { path: string } } };
     const model = finite.finiteModel.modelResultId;
     assert.equal(seen.get(model), undefined, 'Two layers must not claim one model.');
     seen.set(model, path);
@@ -173,12 +172,12 @@ test('each prepared layer belongs to its own model and uses the depth density th
     assert.equal(recipe.modelResultId, model, 'The checked-in recipe still names this model.');
     const index = JSON.parse(await readFile(finiteModelStarsIndex(model), 'utf8'));
     assert.equal(index.stars.path, path);
-    assert.equal(index.stars.sha256, createHash('sha256').update(await readFile(path)).digest('hex'), `${path} index pin`);
-    // The depth density is the cloud the model's own envelope names, and it is the pinned bytes on disk.
+    assert.deepEqual(index.stars, { path }, `${path} index names the layer by path only`);
+    // The depth density is the cloud the model's own envelope names, and it exists on disk.
     const envelope = JSON.parse(await readFile(`${finiteModelDirectory(model)}/source/envelope.json`, 'utf8'));
     const request = JSON.parse(await readFile(`${finiteModelDirectory(model)}/source/provenance.json`, 'utf8')).request;
     assert.deepEqual(finite.finiteModel.depthDensity, envelope.priorCloud ?? request.cloud.provenance);
-    assert.equal(createHash('sha256').update(await readFile(finite.finiteModel.depthDensity.path)).digest('hex'), finite.finiteModel.depthDensity.sha256);
+    await readFile(finite.finiteModel.depthDensity.path);
   }
   assert.ok(seen.size >= 2, `Expected a star layer per prepared model, found ${seen.size}.`);
 });

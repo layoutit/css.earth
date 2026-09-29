@@ -14,7 +14,6 @@ test('photometric evidence validation rejects cross-subject or repinned source s
 import { fitPhotometricEmission } from './photometric-prior.ts';
 import { createPhotometricMgePrior } from '@cssearth/nebula-reconstruction/methods/inference/photometric-mge';
 import { createPhotometricEmission, readRetainedEmissionField, type EmissionFieldModel } from '@cssearth/bake/volume';
-import { geometrySha } from '../geometry/registered-source.ts';
 
 test('two-scale fit retains smooth light and finite residuals, including after JSON replay', async () => {
   const published = readPhotometricMgeRecipe(JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8')));
@@ -26,7 +25,7 @@ test('two-scale fit retains smooth light and finite residuals, including after J
     return Math.exp(-.5 * (x * x + y * y) / 10000) + .5 * Math.exp(-.5 * ((x - 40) ** 2 + (y - 30) ** 2) / 150);
   });
   const fit = fitPhotometricEmission({ target, coverage: new Uint8Array(target.length).fill(1), width, height: width, bounds },
-    { detail: 1, faint: .35, depth: 1 }, { recipe, prior: createPhotometricMgePrior(recipe), recipeBytes: Buffer.from(''), evidenceBytes: Buffer.from(''), recipeSha256: geometrySha('fixture') },
+    { detail: 1, faint: .35, depth: 1 }, { recipe, prior: createPhotometricMgePrior(recipe), recipeBytes: Buffer.from(''), evidenceBytes: Buffer.from(''), recipePath: 'labs/nebula/models/omega-centauri/photometric-mge.json' },
     new AbortController().signal, () => {});
   assert.ok(fit.field.photometricEnvelope);
   assert.ok(fit.field.components.length > 0);

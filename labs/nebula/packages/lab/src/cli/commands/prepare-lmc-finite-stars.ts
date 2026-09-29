@@ -51,9 +51,10 @@ export async function readLmcStarManifest(root: string) {
   if (!record(manifest) || manifest.schema !== 'cssearth-pinned-catalogue@1' || manifest.catalogue !== 'J/AJ/138/1003' ||
       !Array.isArray(manifest.files)) throw new TypeError('Invalid LMC star catalogue manifest.');
   const files = manifest.files.map(entry => {
-    if (!record(entry) || typeof entry.path !== 'string' || !/^[A-Za-z0-9._-]+$/.test(entry.path) || typeof entry.sha256 !== 'string' ||
-        typeof entry.url !== 'string' || !entry.url.startsWith('https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/')) throw new TypeError('Invalid catalogue file pin.');
-    return { path: entry.path, sha256: entry.sha256, url: entry.url };
+    if (!record(entry) || typeof entry.path !== 'string' || !/^[A-Za-z0-9._-]+$/.test(entry.path) || Object.keys(entry).sort().join() !== 'path,url' ||
+        typeof entry.url !== 'string' || !entry.url.startsWith('https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/'))
+      throw new TypeError(`Catalogue manifest file entries name only path and url: ${JSON.stringify(entry)}`);
+    return { path: entry.path, url: entry.url };
   });
   return { files };
 }
@@ -76,7 +77,7 @@ export async function prepareLmcFiniteStars(root = process.cwd(), recipePath?: s
   if (selection.inputRows !== INPUT_ROWS || selection.stars.length < 100)
     throw new Error(`Unexpected catalogue sample: ${JSON.stringify({ ...selection, stars: selection.stars.length })}`);
   const finiteModel = await finiteModelStarProvenance(root, { context, subjectId, command: COMMAND,
-    lensRecipe: { path: finiteLensRecipe, sha256: recipe.sha256 } });
+    lensRecipe: { path: finiteLensRecipe } });
   const payload: PreparedLmcStars = { schema: 'cssearth-catalogue-stars@1', id: 'lmc-stars', starIdPrefix: STAR_ID_PREFIX,
     frame: context.frame, magnitudeBand: 'V', stars: selection.stars,
     sourceUrl: 'https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003',

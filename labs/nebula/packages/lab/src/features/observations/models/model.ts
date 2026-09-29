@@ -55,6 +55,10 @@ export function readObservations(value: unknown): Observations {
   });
   return { id: value.id, frame: { width: f.width, height: f.height, fieldArcminutes: f.fieldArcminutes, centerIcrsDegrees: f.centerIcrsDegrees, northUp: true }, images };
 }
+/** A catalogue is current when the recipe it recorded equals the recipe file as it stands now. */
+export function observationsFromRecipe(catalogue: unknown, recipeText: string): boolean {
+  return record(catalogue) && record(catalogue.provenance) && JSON.stringify(catalogue.provenance.recipe) === JSON.stringify(JSON.parse(recipeText));
+}
 export function transform(m: Matrix, p: Point): Point { return [m[0] * p[0] + m[2] * p[1] + m[4], m[1] * p[0] + m[3] * p[1] + m[5]]; }
 /** A local inspection fit follows measured registration; it never replaces it. */
 export function adjustedMatrix(image: RegisteredImage, frame: Observations['frame'], fit: Adjustment): Matrix {

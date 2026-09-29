@@ -1,10 +1,8 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
 /** Native source replay for a composite; the observation owner alone acquires or removes stars. */
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readObservationRecipe, scienceObservationSources } from '../../../features/observations/recipe.ts';
-import { readObservations } from '../../../features/observations/models/model.ts';
-import { geometrySha } from '../geometry/registered-source.ts';
+import { readObservations, observationsFromRecipe } from '../../../features/observations/models/model.ts';
 import { jointPath, jointRecord } from '../../../features/joint-fit/model.ts';
 import { compilerLayersReady, runCompilerSourceCommand, type CompilerProgress } from './prerequisites.ts';
 import type { CompilerPin } from '@cssearth/bake/volume';
@@ -18,7 +16,7 @@ export interface CompositeSourceRecipe { observationRecipe: string; observationC
 
 /** A preview catalogue alone is insufficient: require its source recipe and every full-native input. */
 export async function opticalCompositeSourcePins(root: string, recipe: CompositeSourceRecipe): Promise<CompilerPin[] | undefined> {
-  const recipeBytes = await readFile(resolve(root, recipe.observationRecipe)), observationsRecipe = readObservationRecipe(JSON.parse(recipeBytes.toString()));
+  const recipeText = await readFile(resolve(root, recipe.observationRecipe), 'utf8'), observationsRecipe = readObservationRecipe(JSON.parse(recipeText));
   const planned = scienceObservationSources(observationsRecipe);
   if (recipe.observationCatalogue !== `.local/nebula-lab/observations/${observationsRecipe.id}/observations.json` ||
       planned.length !== 2 || !planned.some(source => source.id === recipe.detailSourceId) || !planned.some(source => source.id === recipe.wideSourceId))
@@ -26,8 +24,8 @@ export async function opticalCompositeSourcePins(root: string, recipe: Composite
   try {
     const catalogueBytes = await readFile(resolve(root, recipe.observationCatalogue)), raw: unknown = JSON.parse(catalogueBytes.toString());
     const catalogue = readObservations(raw);
-    if (!jointRecord(raw) || !jointRecord(raw.provenance) || raw.provenance.recipeSha256 !== geometrySha(recipeBytes)) return undefined;
-    if (!Array.isArray(raw.images) || catalogue.id !== observationsRecipe.id || catalogue.images.length !== planned.length ||
+    if (!observationsFromRecipe(raw, recipeText)) return undefined;
+    if (!jointRecord(raw) || !Array.isArray(raw.images) || catalogue.id !== observationsRecipe.id || catalogue.images.length !== planned.length ||
         catalogue.images.some(image => !planned.some(source => source.id === image.id &&
           source.width === image.source.width && source.height === image.source.height))) throw new TypeError('Composite catalogue differs from its pinned source recipe.');
     if (!await compilerLayersReady(root, raw)) return undefined;
@@ -56,6 +54,5 @@ export async function restoreOpticalCompositeSources(root: string, recipe: Compo
     pins = await opticalCompositeSourcePins(root, recipe);
     if (!pins) throw new Error('Composite observation preparation did not restore its full native inputs.');
   } else progress('Composite registration and full-native separation reused.');
-  const owners = await implementationPins(root, ['labs/nebula/packages/lab/src/cli/commands/prepare-observations.ts', 'labs/nebula/packages/reconstruction/src/star-removal/star-removal.py']);
-  return [...pins, ...owners];
+  return pins;
 }

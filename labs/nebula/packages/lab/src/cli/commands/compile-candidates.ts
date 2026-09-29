@@ -1,7 +1,6 @@
 /** Reproducible, serial candidate experiment; one failure does not conceal the other results. */
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { readCompilerRecipe, compilerControlsForRecipe } from '../../features/compiler/model.ts';
 import { compileNebula } from '../../server/workflows/compiler/compile.ts';
@@ -27,8 +26,8 @@ const candidates = catalogue.candidates.map((row: unknown) => {
 if (new Set(candidates.map(row => row.id)).size !== candidates.length || requested.some(id => !candidates.some(row => row.id === id))) throw new TypeError('Duplicate or unknown candidate.');
 const selected = candidates.filter(row => !requested.length || requested.includes(row.id));
 if (!selected.length) throw new TypeError('No candidates selected.');
-const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
-const pin = async (path: string) => ({ path, sha256: sha(await readFile(resolve(root, path))) });
+/** A publication names each input by path; the file must exist when it is published. */
+const pin = async (path: string) => { await readFile(resolve(root, path)); return { path }; };
 const save = async (path: string, data: unknown) => {
   await writeFile(`${path}.pending`, JSON.stringify(data, null, 2) + '\n'); await rename(`${path}.pending`, path);
 };
@@ -75,29 +74,16 @@ for (const candidate of selected) {
       const photometric = recipe.photometricPriorRecipe ? await loadPhotometricPrior(root, recipe.photometricPriorRecipe, recipe.id) : undefined;
       if (photometric && recipe.photometricPriorRecipe) inputPaths.push(recipe.photometricPriorRecipe, photometric.recipe.evidence.path);
       const method: unknown = JSON.parse(await readFile(result.method.path, 'utf8'));
-      if (!jointRecord(method) || !Array.isArray(method.implementation)) throw new TypeError('Missing compiler implementation identity.');
+      if (!jointRecord(method)) throw new TypeError(`Compiler method ${result.method.path} is not a record.`);
       const sampledOwners = recipe.sampledRecipe ? sampledOwnerPins(method, recipe.sampledRecipe) : [];
-      inputPaths.push(...sampledOwners.map(owner => owner.path));
+      for (const owner of sampledOwners) if (!inputPaths.includes(owner.path)) inputPaths.push(owner.path);
       if (depth && (!jointRecord(method.physicalDepth) || !jointRecord(method.physicalDepth.recipe) || !jointRecord(method.physicalDepth.evidence) ||
-          method.physicalDepth.recipe.sha256 !== depth.recipeSha256 || method.physicalDepth.evidence.sha256 !== (await pin(depth.recipe.evidence.path)).sha256))
-        throw new TypeError('Compiled depth sources differ from the configured recipe or evidence.');
+          !jointPath(method.physicalDepth.recipe.path) || !jointPath(method.physicalDepth.evidence.path)))
+        throw new TypeError(`Compiled depth snapshots of ${candidate.id} are missing from ${result.method.path}.`);
       if (photometric && (!jointRecord(method.photometricPrior) || !jointRecord(method.photometricPrior.recipe) || !jointRecord(method.photometricPrior.evidence) ||
-          method.photometricPrior.recipe.sha256 !== photometric.recipeSha256 || method.photometricPrior.evidence.sha256 !== (await pin(photometric.recipe.evidence.path)).sha256))
-        throw new TypeError('Compiled photometric sources differ from the configured model or evidence.');
-      for (const owner of method.implementation) {
-        if (!jointRecord(owner) || !jointPath(owner.path) || typeof owner.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(owner.sha256))
-          throw new TypeError('Invalid compiler implementation owner. Compile again with the current implementation.');
-        const current = await pin(owner.path);
-        if (current.sha256 !== owner.sha256) throw new TypeError('Compiler implementation changed during publication. Compile again.');
-        if (!inputPaths.includes(owner.path)) inputPaths.push(owner.path);
-      }
+          !jointPath(method.photometricPrior.recipe.path) || !jointPath(method.photometricPrior.evidence.path)))
+        throw new TypeError(`Compiled photometric snapshots of ${candidate.id} are missing from ${result.method.path}.`);
       const inputs = await Promise.all(inputPaths.map(pin));
-      if (sampledOwners.some(owner => !inputs.some(input => input.path === owner.path && input.sha256 === owner.sha256)))
-        throw new TypeError('Sampled inputs changed during preparation. Compile again.');
-      if (depth && inputs.find(source => source.path === depth.recipePath)?.sha256 !== depth.recipeSha256)
-        throw new TypeError('Depth inputs changed during publication. Compile again.');
-      if (photometric && inputs.find(source => source.path === recipe.photometricPriorRecipe)?.sha256 !== photometric.recipeSha256)
-        throw new TypeError('Photometric inputs changed during publication. Compile again.');
       await save(resolve(published, `${candidate.id}.json`), { schema: 'cssearth-nebula-compiler-published@1', recipePath: candidate.compilerRecipe,
         result: resultPin, inputs });
       results.push({ id: candidate.id, status: 'complete', result: resultPin, metrics: result.metrics, seconds: (performance.now() - started) / 1000 });

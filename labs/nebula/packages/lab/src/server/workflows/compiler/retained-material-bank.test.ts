@@ -51,12 +51,12 @@ async function fixture(t: TestContext, variable = false) {
 }
 
 test('retained material prepares RGB through the existing slab/compiler path with exact geometry and alpha', async t => {
-  const { options, slices } = await fixture(t), sourceHash = sha256(await readFile(join(options.root, options.scene.neutral.path)));
+  const { options, slices } = await fixture(t), neutralBytes = await readFile(join(options.root, options.scene.neutral.path));
   const lens = await prepareRetainedMaterialBank(options);
   const neutral = validatePreparedCssVolume(JSON.parse((await sourceBytes(options.root, options.scene.neutral)).toString()));
   const painted = validatePreparedCssVolume(JSON.parse((await sourceBytes(options.root, lens.volume)).toString()));
-  assertCompilerLensGeometry(neutral, painted, options.scene, {});
-  assert.equal(sha256(await readFile(join(options.root, options.scene.neutral.path))), sourceHash);
+  assertCompilerLensGeometry(neutral, painted, options.scene);
+  assert.ok((await readFile(join(options.root, options.scene.neutral.path))).equals(neutralBytes), 'The neutral bank is left untouched.');
   assert.ok(lens.coverage.recoloredTexels > 0);
   assert.deepEqual(painted.provenance && Object.getOwnPropertyDescriptor(painted.provenance, 'materialLensId')?.value, lens.id);
   for (const q of slices.quads) {
@@ -85,9 +85,8 @@ test('retained nonuniform material preserves intervals and rejects missing repla
   }
 });
 
-test('retained material rejects changed pinned alpha, positions and slab metadata', async t => {
+test('retained material rejects changed alpha, positions and slab metadata', async t => {
   const { options, slices, pin } = await fixture(t);
-  await assert.rejects(prepareRetainedMaterialBank({ ...options, scene: { ...options.scene, alphaSha256: 'f'.repeat(64) } }), /alpha support/);
   for (const mutation of [
     () => { slices.quads[0]!.center[0] += .01; },
     () => { slices.quads[0]!.vertices[0][0] = NaN; },

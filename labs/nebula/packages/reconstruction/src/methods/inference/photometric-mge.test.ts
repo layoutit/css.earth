@@ -30,7 +30,7 @@ test('deprojection integrates back to the published projected ellipse at differe
   assert.ok(Math.abs(column({ ...recipe, positionAngleEastOfNorthDegrees: 90 }, 20, 0) - Math.exp(-.5)) < 1e-6);
 });
 
-test('line-of-sight mirror is an explicit degeneracy and source pins participate in identity', () => {
+test('line-of-sight mirror is an explicit degeneracy with its own prior name', () => {
   const first = createPhotometricMgePrior(recipe), mirror = createPhotometricMgePrior({ ...recipe, lineOfSightTiltSign: -1 });
   assert.equal(first.sampleDensity(10, 7, 13), mirror.sampleDensity(10, 7, -13));
   assert.notEqual(first.identity, mirror.identity);

@@ -11,7 +11,8 @@ export interface CompilerResult { schema: 'cssearth-nebula-compiler-result@1'; i
   metrics: { components: number; unconstrainedComponents: number; stars: number; fitRmse: number; baselineRmse: number; missingSignalFraction: number; excessSignalFraction: number };
   model: CompilerPin; method: CompilerPin; target: CompilerPin; projection: CompilerPin; residual: CompilerPin; interpretation: string }
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
-const hash = (v: unknown): v is string => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
+/** A compiler result is named by its recipe id. */
+const resultName = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(v);
 function pin(v: unknown): CompilerPin {
   if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/')) throw new TypeError('Invalid compiler resource.');
   return { path: v.path };
@@ -21,7 +22,7 @@ function bounds(v: unknown): SkyBounds {
   return { min: [v.min[0], v.min[1]], max: [v.max[0], v.max[1]] };
 }
 export function readCompilerResult(v: unknown): CompilerResult {
-  if (!jointRecord(v) || v.schema !== 'cssearth-nebula-compiler-result@1' || !hash(v.id) || typeof v.label !== 'string' || typeof v.defaultSourceId !== 'string' || typeof v.interpretation !== 'string' ||
+  if (!jointRecord(v) || v.schema !== 'cssearth-nebula-compiler-result@1' || !resultName(v.id) || typeof v.label !== 'string' || typeof v.defaultSourceId !== 'string' || typeof v.interpretation !== 'string' ||
       !Array.isArray(v.sources) || !v.sources.length || v.sources.length > 8 || !Array.isArray(v.pipeline) || v.pipeline.length > 12 || !jointRecord(v.metrics)) throw new TypeError('Invalid compiler result.');
   const sources = v.sources.map((s: unknown): CompilerSource => {
     if (!jointRecord(s) || typeof s.id !== 'string' || typeof s.label !== 'string' || typeof s.credit !== 'string' || typeof s.page !== 'string' || !s.page.startsWith('https://') ||

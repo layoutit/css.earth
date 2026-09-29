@@ -1,7 +1,6 @@
-import { implementationPins } from '@cssearth/nebula-lab/server/implementation';
-import { mkdir, readFile, writeFile, rename, realpath } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, rename, realpath, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute } from 'node:path';
-import { geometrySha, readGeometryPin } from '../geometry/registered-source.ts';
+import { readGeometryPin } from '../geometry/registered-source.ts';
 import { COMPILER_VERSION, type CompilerRequest, type CompilerRecipe } from '../../../features/compiler/model.ts';
 import type { CompilerProgress, CompilerStep } from '../compiler/prerequisites.ts';
 import { readCompilerResult, type CompilerResult } from '../../../features/compiler/result.ts';
@@ -15,7 +14,7 @@ import { float32LittleEndian } from '../float32-little-endian.ts';
 import { readSampledRecipe, verifySampledEvidence } from '../../../features/sampled-prior/model.ts';
 import { sampledStars } from './stars.ts';
 import { sampledPanels } from './panels.ts';
-import { isSampledFitsOwner, sampledOwnerPins, sampledImplementationOwners } from '../../../features/sampled-prior/ownership.ts';
+import { isSampledFitsOwner, sampledOwnerPins } from '../../../features/sampled-prior/ownership.ts';
 import { jointRecord } from '../../../features/joint-fit/model.ts';
 import { sampledBakeProgress } from './progress.ts';
 import { registerComponentBanks } from './layout.ts';
@@ -83,7 +82,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   if (request.controls.depth !== 1) throw new TypeError('The qualified sampled model has a fixed depth scale. Keep Depth at 1.00×.');
   if (request.evidence.weights.length || request.evidence.sensitivity !== 1) throw new TypeError('Sampled models require their pinned component-specific spectral weights.');
   progress('Verifying spatial samples and independent wind geometry…', .2);
-  const recipeBytes = await readFile(resolve(root, request.recipePath)), sampledBytes = await readFile(resolve(root, recipe.sampledRecipe));
+  const sampledBytes = await readFile(resolve(root, recipe.sampledRecipe));
   const sampled = readSampledRecipe(JSON.parse(sampledBytes.toString()));
   if (sampled.id !== recipe.id) throw new TypeError('Sampled prior belongs to another compiler object.');
   const evidenceBytes = await readSourcePin(root, sampled.evidence);
@@ -109,23 +108,23 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   const reference = sourceData.images.find(image => image.id === recipe.defaultSourceId);
   if (!reference || Object.keys(sampled.lensComponents).length !== sourceData.images.length || sourceData.images.some(image => !sampled.lensComponents[image.id]))
     throw new TypeError('Every sampled spectral lens needs an explicit component mixture.');
-  const implementation = await implementationPins(root, ['labs/nebula/packages/lab/src/server/workflows/sampled-prior/compile.ts']);
-  const extraPaths = [...sampledImplementationOwners].sort();
-  const extraImplementation = await Promise.all(extraPaths.map(async path => ({ path, sha256: geometrySha(await readFile(resolve(root, path))) })));
-  const inputPins = [{ path: recipe.sampledRecipe, sha256: geometrySha(sampledBytes) }, sampled.evidence, { path: sampled.source.path }];
-  const id = geometrySha(JSON.stringify({ version: COMPILER_VERSION, implementation, extraImplementation, inputPins,
-    starProfile: geometrySha(await readFile(resolve(root, COMPILER_STAR_PROFILE_PATH))),
-    recipeSha256: geometrySha(recipeBytes), request, sourceLayers: sourceData.images.map(image => [image.id, image.matrix, image.original.sha256, image.diffuse.sha256, image.stars.sha256]) }));
+  const inputPins = [{ path: recipe.sampledRecipe }, { path: sampled.evidence.path }, { path: sampled.source.path }];
+  // Named by its compiler recipe, like every compiler result; reused while its saved request is unchanged.
+  const id = recipe.id, identity = { version: COMPILER_VERSION, recipePath: request.recipePath, recipe, inputPins, starProfile: COMPILER_STAR_PROFILE_PATH,
+    request, sourceLayers: sourceData.images.map(image => [image.id, image.matrix, image.original.path, image.diffuse.path, image.stars.path]) };
   const directory = `.local/nebula-lab/compiler/${id}`;
-  try {
-    const cached = await validateCompilerResult(root, JSON.parse(await readFile(resolve(root, directory, 'result.json'), 'utf8')));
-    const method: unknown = JSON.parse((await readGeometryPin(root, cached.method)).toString());
-    await Promise.all(sampledOwnerPins(method, recipe.sampledRecipe).map(pin => readSourcePin(root, pin)));
-    await validateSpatialArtifacts(root, cached);
-    progress('Prepared spatial model restored', 1); return cached;
+  const saved = await readFile(resolve(root, directory, 'request.json'), 'utf8').catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
+  if (saved !== null && JSON.stringify(JSON.parse(saved)) === JSON.stringify(identity)) {
+    try {
+      const cached = await validateCompilerResult(root, JSON.parse(await readFile(resolve(root, directory, 'result.json'), 'utf8')));
+      const method: unknown = JSON.parse((await readGeometryPin(root, cached.method)).toString());
+      await Promise.all(sampledOwnerPins(method, recipe.sampledRecipe).map(pin => readSourcePin(root, pin)));
+      await validateSpatialArtifacts(root, cached);
+      progress('Prepared spatial model restored', 1); return cached;
+    }
+    catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
   }
-  catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
-  signal.throwIfAborted(); await mkdir(resolve(root, directory), { recursive: true });
+  signal.throwIfAborted(); await rm(resolve(root, directory), { recursive: true, force: true }); await mkdir(resolve(root, directory), { recursive: true });
   async function save(name: string, bytes: Uint8Array): Promise<CompilerPin> {
     signal.throwIfAborted(); const path = `${directory}/${name}`, target = resolve(root, path);
     await writeFile(`${target}.pending`, bytes); await rename(`${target}.pending`, target); return { path };
@@ -135,8 +134,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   let started = performance.now();
   progress('Splatting the released 3D samples and separate analytic wind…', .24);
   const prepared = prepareSampledField(fits.values, sampled, signal), field = prepared.field({ ejecta: 1, pwn: 1 });
-  const fieldIdentity = geometrySha(JSON.stringify({ inputPins, extraImplementation, evidence: prepared.evidence,
-    fittingImages: sampled.emissionFit ? sourceData.images.map(image => [image.id, image.matrix, image.diffuse.sha256]) : undefined }));
+  const fieldIdentity = `${recipe.id}-sampled`;
   const ejecta = await save('ejecta.float32', float32LittleEndian(prepared.ejecta)), wind = await save('wind.float32', float32LittleEndian(prepared.pwn));
   pipeline.push({ id: 'sampled-field', label: 'Qualified ejecta samples + independent wind model', state: 'complete', seconds: (performance.now() - started) / 1000 });
   started = performance.now();
@@ -202,7 +200,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
       boundsArcsec: field.bounds, skyBoundsArcsec: skyBounds, sampleEmission: mixture.sampleEmission,
       lenses: materials, signal,
       progress: p => progress(`${images.map(i => i.label).join(' / ')} · ${p.message}`, .4 + .5 * (groupIndex + sampledBakeProgress(p)) / groups.size) });
-    lenses.push(...bank.lenses.map(lens => ({ ...lens, alphaSha256: bank.alphaSha256 }))); groupIndex++;
+    lenses.push(...bank.lenses); groupIndex++;
   }
   progress('Registering spectral pixels on the retained union geometry…', .91);
   const registered = await registerComponentBanks(root, `${directory}/registered`, neutral, lenses, signal);
@@ -220,8 +218,8 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   const comparison = await sampledPanels(referenceFit?.field ?? prepared.field(sampled.lensComponents[reference.id]!), reference, skyBounds, referenceMaterial);
   const sampledPrior = { recipe: await save('sampled-recipe.json', sampledBytes), evidence: await save('physical-evidence.json', evidenceBytes), source: inputPins[2],
     emissionComponents: sampled.lensComponents, coordinateEvidence: prepared.evidence, emissionFit: sampled.emissionFit, emissionFits };
-  const method = await save('method.json', Buffer.from(JSON.stringify({ version: COMPILER_VERSION, implementation, extraImplementation, inputPins,
-    recipe, recipeSha256: geometrySha(recipeBytes), request, sampledPrior, pipeline,
+  const method = await save('method.json', Buffer.from(JSON.stringify({ version: COMPILER_VERSION, inputPins,
+    recipe, recipePath: request.recipePath, request, sampledPrior, pipeline,
     materials: { method: 'finite-emitter-chromaticity@1', qualification: 'requires-front-and-side-visual-acceptance', receipts: materialReceipts,
       interpretation: 'Registered colors attach to source points before finite XYZ splatting, and to complete finite wind/diffuse components before emission mixing. The painter only samples this 3D material; it cannot repeat an XY image down the cloud. Physical supports, alpha and stars remain unchanged. Color attribution and diffuse depths remain conditional.' },
     stars: 'Observed reference residual positions with deterministic conditional support depths; not measured membership. The named pulsar uses a separately pinned position and authored angular display size, without simulated time variability.',
@@ -235,5 +233,6 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     model, method, target: await save('target.png', comparison.target), projection: await save('projection.png', comparison.projection),
     residual: await save('residual.png', comparison.residual), interpretation: recipe.interpretation };
   readCompilerResult(result); await validateSpatialArtifacts(root, result);
-  await save('result.json', Buffer.from(JSON.stringify(result))); progress('Spatial nebula and pulsar ready', 1); return result;
+  await save('request.json', Buffer.from(JSON.stringify(identity))); await save('result.json', Buffer.from(JSON.stringify(result)));
+  progress('Spatial nebula and pulsar ready', 1); return result;
 }

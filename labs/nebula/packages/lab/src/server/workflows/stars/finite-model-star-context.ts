@@ -5,7 +5,6 @@ import sharp from 'sharp';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { type ObservationMapping, type Bounds3, type Vector3, type EmissionFieldModel, createEmissionField, createIntegratedSignalSampler } from '@cssearth/bake/volume';
 import { createEnvelopeSampler, validateEnvelopeSettings } from '@cssearth/nebula-reconstruction/methods/inference/simulation-envelope';
-import { sha256 } from '@cssearth/core/node';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
 import { verifyFiniteMaterialArtifacts } from '../../../cli/commands/finite-density-material-artifacts.ts';
 import { physicalToField, angularScale } from '../../../cli/commands/simulation-guided-coordinates.ts';
@@ -62,18 +61,16 @@ export interface FiniteModelStarContext {
 }
 
 export async function loadFiniteModelStarContext(root: string, modelResultId: string): Promise<FiniteModelStarContext> {
-  if (!/^[a-f0-9]{64}$/.test(modelResultId)) throw new TypeError('Finite model identity must be a result hash.');
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(modelResultId)) throw new TypeError(`Finite model name must be a saved reconstruction name, not ${JSON.stringify(modelResultId)}.`);
   const directory = finiteModelDirectory(modelResultId), full = resolve(root, directory);
-  // Every file read below is covered by the model's own artifact manifest; mismatches throw here.
+  // Every file read below is listed in the model's own artifact manifest, whose byte counts are checked here.
   await verifyFiniteMaterialArtifacts(full, `reconstruction-${modelResultId}`);
   const manifest: unknown = parseLabModelJson(await readFile(resolve(full, 'manifest.json'), 'utf8'));
   const artifacts = record(manifest) && record(manifest.artifacts) ? manifest.artifacts : null;
   const read = async (path: string) => {
     const pin = artifacts?.[path];
-    if (!record(pin) || typeof pin.sha256 !== 'string') throw new TypeError(`Finite model artifact is not pinned: ${path}`);
-    const bytes = await readFile(resolve(full, path));
-    if (sha256(bytes) !== pin.sha256) throw new TypeError(`Finite model artifact changed: ${path}`);
-    return { bytes, pin: { path: `${directory}/${path}`, sha256: pin.sha256 } };
+    if (!record(pin)) throw new TypeError(`Finite model ${modelResultId} manifest does not list ${path}`);
+    return { bytes: await readFile(resolve(full, path)), pin: { path: `${directory}/${path}` } };
   };
   const provenanceFile = await read('source/provenance.json');
   const provenance: unknown = parseLabModelJson(provenanceFile.bytes.toString());
@@ -108,7 +105,7 @@ export async function loadFiniteModelStarContext(root: string, modelResultId: st
   const envelopeCloud = record(envelopeValue) && envelopeValue.priorCloud !== undefined && envelopeValue.priorCloud !== null ? envelopeValue.priorCloud : null;
   const densityPin = envelopeCloud ?? request.cloud.provenance;
   const prior = await loadSimulationPrior(root, densityPin, distance, tangentBounds);
-  let envelopeAt: ((x: number, y: number, z: number) => number) | null = null, envelopePin: { path: string; sha256: string } | null = null;
+  let envelopeAt: ((x: number, y: number, z: number) => number) | null = null, envelopePin: { path: string } | null = null;
   if (envelopeRecord && record(envelopeValue)) {
     validateEnvelopeSettings(envelopeValue.settings);
     if (prior.identity !== envelopeValue.priorIdentity) throw new TypeError('Depth density differs from the prior this envelope was fitted with.');

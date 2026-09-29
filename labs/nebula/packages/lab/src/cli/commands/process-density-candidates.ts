@@ -65,9 +65,9 @@ try {
     };
     let removalResultId = candidate.removalResultId;
     if (removalResultId) {
-      // The catalogue finds a saved application by source hash alone. One made under a different stellar
-      // treatment, script or model no longer resolves, and this image is then processed again with its own.
-      const resolved = await resolveAppliedRemovalLayers(root, removalResultId, imageId, candidate.sourcePreviewSha256)
+      // A saved application is found by its image. One made under a different stellar treatment or model
+      // no longer matches its saved request, and this image is then processed again with its own.
+      const resolved = await resolveAppliedRemovalLayers(root, removalResultId, imageId)
         .then(() => true, (error: unknown) => { console.log(`${imageId} saved native result is not usable: ${error instanceof Error ? error.message : String(error)}`); return false; });
       if (resolved) console.log(`${imageId} verified saved native removal`);
       else removalResultId = undefined;

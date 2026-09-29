@@ -8,7 +8,7 @@ import { readCompilerRecipe } from '../../../features/compiler/model.ts';
 function inputs(width = 100, height = 100): EvidenceInputs {
   const length = width * height;
   const plane = () => ({ signal: new Float32Array(length), coverage: new Uint8Array(length), noiseSigma: 1 });
-  const source: EvidenceSource = { id: 'observed', label: 'observed', sourceSha256: '', mapSha256: '', sourcePanelSha256: '',
+  const source: EvidenceSource = { id: 'observed', label: 'observed', mapDirectory: '.local/nebula-lab/structures/observed', sourcePanel: 'source.png',
     imageToFrame: [1, 0, 0, 1, 0, 0], workingWidth: width, workingHeight: height, registeredRgba: new Uint8Array(length * 4),
     footprint: new Uint8Array(length), channels: { broad: plane(), ridges: plane(), compact: plane() },
     ridgeDirectionX: new Float32Array(length), ridgeDirectionY: new Float32Array(length), samplingArcseconds: 1 };

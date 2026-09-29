@@ -7,23 +7,22 @@ import { readCompilerResult } from '../../../features/compiler/result.ts';
 import { readDepthRecipe, verifyDepthEvidence } from './depth-model.ts';
 import { readPhotometricMgeRecipe, verifyPhotometricEvidence } from './photometric-prior.ts';
 import type { PreparedCssVolume } from '../../../adapters/renderer/volume-types.ts';
-import type { CompilerBakeResult, CompilerLensVolume, CompilerPin } from '@cssearth/bake/volume';
+import type { CompilerBakeResult, CompilerPin } from '@cssearth/bake/volume';
 
-type BankIdentity = Pick<CompilerBakeResult, 'id' | 'volumeId' | 'frame' | 'fieldIdentity' | 'alphaSha256'>;
+type BankIdentity = Pick<CompilerBakeResult, 'id' | 'volumeId' | 'frame' | 'fieldIdentity'>;
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 
-/** The neutral bank and ordinary RGB lenses retain the scene's original alpha contract. */
+/** The neutral bank and every lens belong to the scene's volume, frame and fitted field. */
 export function assertCompilerBankIdentity(payload: PreparedCssVolume, result: BankIdentity) {
   const provenance = payload.provenance;
   if (payload.id !== `compiler-${result.volumeId ?? result.id}` || JSON.stringify(payload.frame) !== JSON.stringify(result.frame) ||
-      !record(provenance) || provenance.alphaSha256 !== result.alphaSha256 || provenance.fieldIdentity !== result.fieldIdentity)
-    throw new TypeError('Prepared compiler volume belongs to a different result or alpha support.');
+      !record(provenance) || provenance.fieldIdentity !== result.fieldIdentity)
+    throw new TypeError(`Prepared compiler volume ${payload.id} belongs to a different result or field.`);
 }
 
-/** A qualified component mixture can pin different alpha without changing its spatial frame or slabs. */
-export function assertCompilerLensGeometry(neutral: PreparedCssVolume, textured: PreparedCssVolume, result: BankIdentity,
-  lens: Pick<CompilerLensVolume, 'alphaSha256'>) {
-  assertCompilerBankIdentity(textured, { ...result, alphaSha256: lens.alphaSha256 ?? result.alphaSha256 });
+/** A qualified component mixture can carry different alpha without changing its spatial frame or slabs. */
+export function assertCompilerLensGeometry(neutral: PreparedCssVolume, textured: PreparedCssVolume, result: BankIdentity) {
+  assertCompilerBankIdentity(textured, result);
   for (const axis of ['x', 'y', 'z'] as const) {
     const first = neutral.stacks.find(stack => stack.axis === axis)!, second = textured.stacks.find(stack => stack.axis === axis)!;
     if (first.leaves.length !== second.leaves.length) throw new Error('Compiler materials have different slice counts.');
@@ -78,7 +77,7 @@ export async function validateCompilerResult(root: string, value: unknown) {
   const neutral = await readBank(result.scene.neutral);
   assertCompilerBankIdentity(neutral, result.scene);
   for (const lens of result.scene.lenses) {
-    assertCompilerLensGeometry(neutral, await readBank(lens.volume), result.scene, lens);
+    assertCompilerLensGeometry(neutral, await readBank(lens.volume), result.scene);
   }
   return result;
 }

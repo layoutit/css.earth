@@ -1,10 +1,9 @@
 import { collectArtifacts } from '../../server/workflows/density/io.ts';
 /** Offline conditional emission experiment; originals and baseline remain immutable. */
 import {readFile,writeFile,mkdir,cp,rename} from 'node:fs/promises';
-import {resolve,relative} from 'node:path';
+import {resolve,relative,basename} from 'node:path';
 import sharp from 'sharp';
 import {parseLabModelJson} from '../../resources/model-paths.ts';
-import {implementationPins} from '../../server/services/implementation.ts';
 import {compileCssVolume} from '../../adapters/preparation/css-volume.ts';
 import {verifyFiniteMaterialArtifacts} from './finite-density-material-artifacts.ts';
 import {physicalToField,angularScale,physicalBounds} from './simulation-guided-coordinates.ts';
@@ -14,15 +13,16 @@ import {fitSimulationEnvelope,createEnvelopeSampler,envelopeChromaticity,validat
 import {loadSimulationPrior} from './simulation-prior.ts';
 import { compilerSlabMaterial, alphaLimitedSlabMaterial, type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/bake/volume';
 import { bakeMasterVolumeSlices, recolorCloudSlices, sourceBytes, containedPath } from '@cssearth/bake/volume/node';
-import { sha256 } from '@cssearth/core/node';
-const json=async(path:string,value:unknown)=>{const b=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,b);return sha256(b);};
+const json=async(path:string,value:unknown)=>{await writeFile(path,JSON.stringify(value,null,2)+'\n');};
+/** Reconstructions are named by what they were made from, like `<subject>-<image>` or `<subject>-<settings>`. */
+const resultName=(value:unknown):value is string=>typeof value==='string'&&/^[a-z0-9][a-z0-9-]*$/.test(value);
 async function main(settingsPath:string){
- const root=process.cwd(),settingsBytes=await readFile(settingsPath),s=parseLabModelJson(settingsBytes.toString());
- if(s.schema!=='cssearth-simulation-guided-reconstruction@1'||!/^[a-f0-9]{64}$/.test(s.baselineId)||!Number.isInteger(s.width)||s.width<32||s.width>512||!Number.isInteger(s.longestAxisSlabs)||s.longestAxisSlabs<16||s.longestAxisSlabs>256||s.samplesPerSlab!==4||!Number.isFinite(s.backgroundSpread)||s.backgroundSpread<0||s.backgroundSpread>3||!Number.isFinite(s.exposureGain)||s.exposureGain<=0||s.exposureGain>10||!Array.isArray(s.exclusions))throw Error('Invalid bounded simulation-guided settings');
+ const root=process.cwd(),s=parseLabModelJson(await readFile(settingsPath,'utf8'));
+ if(s.schema!=='cssearth-simulation-guided-reconstruction@1'||!resultName(s.baselineId)||!Number.isInteger(s.width)||s.width<32||s.width>512||!Number.isInteger(s.longestAxisSlabs)||s.longestAxisSlabs<16||s.longestAxisSlabs>256||s.samplesPerSlab!==4||!Number.isFinite(s.backgroundSpread)||s.backgroundSpread<0||s.backgroundSpread>3||!Number.isFinite(s.exposureGain)||s.exposureGain<=0||s.exposureGain>10||!Array.isArray(s.exclusions))throw Error('Invalid bounded simulation-guided settings');
  const envelopeSettings=s.envelope===undefined?null:validateEnvelopeSettings(s.envelope);
  const priorCloud=s.priorCloud===undefined?null:s.priorCloud;
- if(priorCloud!==null&&(typeof priorCloud!=='object'||typeof priorCloud.path!=='string'||!/^[a-f0-9]{64}$/.test(priorCloud.sha256)))throw Error('priorCloud must pin a volume recipe path and sha256');
- if(s.envelopeBaselineId!==undefined&&(!/^[a-f0-9]{64}$/.test(s.envelopeBaselineId)||s.envelopeBaselineId===s.baselineId||!envelopeSettings))throw Error('envelopeBaselineId must be a distinct pinned baseline used with envelope settings');
+ if(priorCloud!==null&&(typeof priorCloud!=='object'||typeof priorCloud.path!=='string'||Object.keys(priorCloud).join()!=='path'))throw Error(`priorCloud in ${settingsPath} must name only a volume recipe path, not ${JSON.stringify(priorCloud)}`);
+ if(s.envelopeBaselineId!==undefined&&(!resultName(s.envelopeBaselineId)||s.envelopeBaselineId===s.baselineId||!envelopeSettings))throw Error('envelopeBaselineId must be a distinct pinned baseline used with envelope settings');
  if(s.fullChromaAlphaByte!==undefined&&(!Number.isFinite(s.fullChromaAlphaByte)||s.fullChromaAlphaByte<1||s.fullChromaAlphaByte>255))throw Error('fullChromaAlphaByte must be 1..255');
  // Authored display levels. The black quantile is the lowest footprint luma the fit will paint at all, so
  // with the long-standing 0.25 no recipe value can reach a halo that lives below the footprint's lower
@@ -31,14 +31,19 @@ async function main(settingsPath:string){
  for(const e of s.exclusions)if(![e.x,e.y,e.rx,e.ry].every(Number.isFinite)||e.rx<=0||e.ry<=0||typeof e.reason!=='string')throw Error('Invalid explicit foreground exclusion');
  const baselineId=s.baselineId,baseline=resolve(root,'.local/nebula-lab/reconstructions',baselineId);
  await verifyFiniteMaterialArtifacts(baseline,`reconstruction-${baselineId}`);
- const provenanceBytes=await readFile(resolve(baseline,'source/provenance.json')),oldResultBytes=await readFile(resolve(baseline,'result.json'));
- const provenance=parseLabModelJson(provenanceBytes.toString()),oldResult=parseLabModelJson(oldResultBytes.toString()),work=provenance.request;
+ const provenance=parseLabModelJson(await readFile(resolve(baseline,'source/provenance.json'),'utf8')),oldResult=parseLabModelJson(await readFile(resolve(baseline,'result.json'),'utf8')),work=provenance.request;
  if(provenance.schema!=='cssearth-nebula-reconstruction-provenance@1'||oldResult.resultId!==baselineId||work.cloud.modelPlacement)throw Error('Unsupported baseline geometry');
  await sourceBytes(root,work.source);await sourceBytes(root,work.cloud.slices);await sourceBytes(root,work.cloud.descriptor);
- const implementation=await implementationPins(root,['labs/nebula/packages/lab/src/cli/commands/simulation-guided-reconstruction.ts']);
- const identity={baseline:{resultId:baselineId,provenanceSha256:sha256(provenanceBytes),resultSha256:sha256(oldResultBytes)},settings:{path:relative(root,resolve(settingsPath)),sha256:sha256(settingsBytes)},implementation};
- const resultId=sha256(Buffer.from(JSON.stringify(identity))),id=`reconstruction-${resultId}`,output=resolve(root,'.local/nebula-lab/reconstructions',resultId),staging=output+'.pending';
- try{await readFile(resolve(output,'result.json'));await verifyFiniteMaterialArtifacts(output,id);console.log(JSON.stringify({resultId,output,cached:true}));return;}catch(e){if(!e||typeof e!=='object'||!('code'in e)||e.code!=='ENOENT')throw e;}
+ // The model is named by its subject and settings file, e.g. `smc-constrained-emission-envelope-ellipsoid`.
+ const subjectId=oldResult.subject?.sourceSubjectId,settingsName=basename(settingsPath,'.json');
+ if(!resultName(subjectId)||!resultName(settingsName))throw Error(`Model name needs a subject and a kebab-case settings file: ${JSON.stringify({subjectId,settingsPath})}`);
+ const identity={baseline:{resultId:baselineId},settingsPath:relative(root,resolve(settingsPath)),settings:s};
+ const resultId=`${subjectId}-${settingsName}`,id=`reconstruction-${resultId}`,output=resolve(root,'.local/nebula-lab/reconstructions',resultId),staging=output+'.pending';
+ const saved=await readFile(resolve(output,'request.json'),'utf8').catch((e:NodeJS.ErrnoException)=>{if(e.code==='ENOENT')return null;throw e;});
+ if(saved!==null){
+  if(JSON.stringify(JSON.parse(saved))!==JSON.stringify(identity))throw Error(`${relative(root,output)} was made from another baseline or settings; remove it to rebuild ${resultId}`);
+  await readFile(resolve(output,'result.json'));await verifyFiniteMaterialArtifacts(output,id);console.log(JSON.stringify({resultId,output,cached:true}));return;
+ }
  await mkdir(staging);await cp(resolve(baseline,'source'),resolve(staging,'source'),{recursive:true});await rename(resolve(staging,'source/validation.json'),resolve(staging,'source/baseline-validation.json'));await mkdir(resolve(staging,'prepared'));
  const distance=provenance.geometry.observerDistanceKpc,A=angularScale(distance),tb=provenance.geometry.tangentBoundsKpc;
  const bounds:SkyBounds={min:[tb.min[0]*A,tb.min[1]*A],max:[tb.max[0]*A,tb.max[1]*A]};
@@ -54,11 +59,11 @@ async function main(settingsPath:string){
  const prior=await loadSimulationPrior(root,priorCloud??work.cloud.provenance,distance,tb),priorBounds:EmissionBounds=prior.bounds;
  // An optional second registered image supplies only the broad envelope: deeper calibrated faint light, while
  // fine structure keeps the primary image. Both must be registered in the same observer frame and simulation.
- let envelopeSource:{id:string;provenanceSha256:string;imageId:unknown;target:Float32Array;coverage:Uint8Array;rgb:Buffer;normalization:Record<string,unknown>}|null=null;
+ let envelopeSource:{id:string;imageId:unknown;target:Float32Array;coverage:Uint8Array;rgb:Buffer;normalization:Record<string,unknown>}|null=null;
  if(typeof s.envelopeBaselineId==='string'){
   const other=resolve(root,'.local/nebula-lab/reconstructions',s.envelopeBaselineId);
   await verifyFiniteMaterialArtifacts(other,`reconstruction-${s.envelopeBaselineId}`);
-  const otherBytes=await readFile(resolve(other,'source/provenance.json')),otherProvenance=parseLabModelJson(otherBytes.toString()),otherWork=otherProvenance.request;
+  const otherProvenance=parseLabModelJson(await readFile(resolve(other,'source/provenance.json'),'utf8')),otherWork=otherProvenance.request;
   for(const key of ['referenceFrame','epochJdTt','originM','localToReferenceXyzw','metersPerUnit'])if(JSON.stringify(otherWork.frame[key])!==JSON.stringify(work.frame[key]))throw Error('Envelope baseline observer frame differs: '+key);
   if(Math.abs(otherProvenance.geometry.observerDistanceKpc-distance)>1e-8||JSON.stringify(otherWork.cloud.provenance)!==JSON.stringify(work.cloud.provenance))throw Error('Envelope baseline must share the observer distance and pinned simulation');
   const otb=otherProvenance.geometry.tangentBoundsKpc;
@@ -88,7 +93,7 @@ async function main(settingsPath:string){
   if(!(sharedOther>0)||!(sharedPrimary>0))throw Error('Envelope baseline shares no lit coverage with the primary image');
   const scale=sharedPrimary/sharedOther;
   for(let p=0;p<otherTarget.length;p++)otherTarget[p]*=scale;
-  envelopeSource={id:s.envelopeBaselineId,provenanceSha256:sha256(otherBytes),imageId:otherWork.imageId,target:otherTarget,coverage:otherCoverage,rgb:otherRgb,
+  envelopeSource={id:s.envelopeBaselineId,imageId:otherWork.imageId,target:otherTarget,coverage:otherCoverage,rgb:otherRgb,
    normalization:{black:oBlack,background:oBackground,white:oWhite,gamma:levels.gamma,coveredPixels:otherValues.length,tangentBoundsKpc:otb,
     lightScaleToPrimary:scale,sharedCoverageLight:{primary:sharedPrimary,envelopeSource:sharedOther}}};
   console.log(JSON.stringify({phase:'envelope-source',imageId:otherWork.imageId,...envelopeSource.normalization}));
@@ -103,7 +108,7 @@ async function main(settingsPath:string){
  const totalProjection=envelope?fitted.projection.map((v,p)=>v+envelope.projection[p]!):fitted.projection,totalResidual=totalProjection.map((v,p)=>coverage[p]?target[p]!-v:0);
  let squared=0,targetSquared=0;for(let p=0;p<target.length;p++)if(coverage[p]){squared+=totalResidual[p]!**2;targetSquared+=target[p]!**2;}
  const metrics={...fitted.metrics,detailOnly:!!envelope,totalRelativeSquaredError:targetSquared>0?squared/targetSquared:0,envelope:envelope?.metrics??null};
- const material=fitted.material({id:work.source.sha256,sampleRgb(x,y,out){const u=(x-bounds.min[0])/(bounds.max[0]-bounds.min[0])*width-.5,v=(bounds.max[1]-y)/(bounds.max[1]-bounds.min[1])*height-.5;if(u<0||v<0||u>width-1||v>height-1)return false;const ix=Math.floor(u),iy=Math.floor(v),p=iy*width+ix;if(!coverage[p])return false;for(let c=0;c<3;c++){out[c]=0;for(let dy=0;dy<2;dy++)for(let dx=0;dx<2;dx++)out[c]+=rgb[3*(Math.min(height-1,iy+dy)*width+Math.min(width-1,ix+dx))+c]*(dx?u-ix:1-u+ix)*(dy?v-iy:1-v+iy);}return true;}});
+ const material=fitted.material({id:work.imageId,sampleRgb(x,y,out){const u=(x-bounds.min[0])/(bounds.max[0]-bounds.min[0])*width-.5,v=(bounds.max[1]-y)/(bounds.max[1]-bounds.min[1])*height-.5;if(u<0||v<0||u>width-1||v>height-1)return false;const ix=Math.floor(u),iy=Math.floor(v),p=iy*width+ix;if(!coverage[p])return false;for(let c=0;c<3;c++){out[c]=0;for(let dy=0;dy<2;dy++)for(let dx=0;dx<2;dx++)out[c]+=rgb[3*(Math.min(height-1,iy+dy)*width+Math.min(width-1,ix+dx))+c]*(dx?u-ix:1-u+ix)*(dy?v-iy:1-v+iy);}return true;}});
  const fieldBounds:EmissionBounds=envelope?{min:[Math.min(fitted.field.bounds.min[0],priorBounds.min[0]),Math.min(fitted.field.bounds.min[1],priorBounds.min[1]),Math.min(fitted.field.bounds.min[2],envelope.grid.zRange[0])],max:[Math.max(fitted.field.bounds.max[0],priorBounds.max[0]),Math.max(fitted.field.bounds.max[1],priorBounds.max[1]),Math.max(fitted.field.bounds.max[2],envelope.grid.zRange[1])]}:fitted.field.bounds;
  const physical=physicalBounds(fieldBounds,distance),span=physical.max.map((v,i)=>v-physical.min[i]!),pitch=Math.max(...span)/s.longestAxisSlabs;
  const sliceCounts={x:Math.max(4,Math.ceil(span[0]/pitch)),y:Math.max(4,Math.ceil(span[1]/pitch)),z:Math.max(4,Math.ceil(span[2]/pitch))};
@@ -117,7 +122,7 @@ async function main(settingsPath:string){
  const receipt={identity,settings:s,normalization:{signal:"relative RGB peak, not luminosity; consistent with peak-normalized component chromaticity",levels,black,background,white,gamma:levels.gamma,excludedPixels},metrics,physicalBounds:physical,sliceCounts,pitchKpc:pitch,minimumSigmaZKpc:Math.min(...fitted.field.components.map(c=>c.sigma[2]))/A,qualification};
  await json(resolve(staging,'source/simulation-guided.json'),receipt);await json(resolve(staging,'source/emission-field.json'),fitted.field);await json(resolve(staging,'source/depth-assignments.json'),fitted.depthAssignments);await json(resolve(staging,'source/component-material.json'),material.receipt);
  const raster=async(name:string,a:Float32Array)=>sharp(Buffer.from(a.map(v=>Math.round(255*(1-Math.exp(-Math.max(0,v)*s.exposureGain))))),{raw:{width,height,channels:1}}).png().toFile(resolve(staging,'source',name));
- await raster('aligned-image.png',totalProjection);await raster('fit-target.png',target);await raster('fit-projection.png',totalProjection);await raster('fit-residual.png',totalResidual.map(Math.abs));if(envelope){await raster('envelope-projection.png',envelope.projection);await raster('detail-target.png',detailTarget);await json(resolve(staging,'source/envelope.json'),{schema:'cssearth-simulation-envelope@1',settings:envelopeSettings,priorIdentity:prior.identity,priorCloud,source:envelopeSource?{resultId:envelopeSource.id,provenanceSha256:envelopeSource.provenanceSha256,imageId:envelopeSource.imageId,normalization:envelopeSource.normalization}:null,metrics:envelope.metrics,width:envelope.grid.width,height:envelope.grid.height,bounds:envelope.grid.bounds,zRange:envelope.grid.zRange,gain:Array.from(envelope.grid.gain,v=>Number(v.toPrecision(7)))});}
+ await raster('aligned-image.png',totalProjection);await raster('fit-target.png',target);await raster('fit-projection.png',totalProjection);await raster('fit-residual.png',totalResidual.map(Math.abs));if(envelope){await raster('envelope-projection.png',envelope.projection);await raster('detail-target.png',detailTarget);await json(resolve(staging,'source/envelope.json'),{schema:'cssearth-simulation-envelope@1',settings:envelopeSettings,priorIdentity:prior.identity,priorCloud,source:envelopeSource?{resultId:envelopeSource.id,imageId:envelopeSource.imageId,normalization:envelopeSource.normalization}:null,metrics:envelope.metrics,width:envelope.grid.width,height:envelope.grid.height,bounds:envelope.grid.bounds,zRange:envelope.grid.zRange,gain:Array.from(envelope.grid.gain,v=>Number(v.toPrecision(7)))});}
  console.log(JSON.stringify({resultId,phase:'bake',...receipt}));
  const neutral=await bakeMasterVolumeSlices({sampleEmission,boundsKpc:physical,sliceCounts,samplesPerSlab:s.samplesPerSlab,exposureGain:s.exposureGain,masterWidth:width,masterDirectory:resolve(staging,'masters'),deliveryBanks:[{width,outputDirectory:resolve(staging,'neutral'),imageEncoding:{format:'png'}}],unitsPerSourceUnit:1,provenance:receipt,onProgress:p=>{if(p.completed%24===0)console.log(`Neutral ${p.phase} ${p.completed}/${p.total}`);}});
  const painted=await recolorCloudSlices({slices:neutral.banks[0]!.slices,loadResource:path=>readFile(containedPath(resolve(staging,'neutral'),path)),sampleImageRgb:s.fullChromaAlphaByte===undefined?compilerSlabMaterial(sampleEmission,sampleMaterial):alphaLimitedSlabMaterial(compilerSlabMaterial(sampleEmission,sampleMaterial),sampleEmission,s.exposureGain,s.fullChromaAlphaByte),preserveMaterialIntensity:true,appearance:{saturation:1,detailStrength:0,detailScale:24,brightness:1,gamma:1},outputDirectory:resolve(staging,'prepared'),encoding:{format:'webp',quality:92},onProgress:p=>{if(p.completed%24===0)console.log(`Material ${p.completed}/${p.total}`);}});
@@ -125,18 +130,18 @@ async function main(settingsPath:string){
  await json(resolve(staging,'source/validation.json'),validation);
  const frame={...work.frame,boundsUnits:physical};
  const nextProvenance={...provenance,method:'simulation-guided-finite-emission@1',request:{...work,id,frame,outputDirectory:output},geometry:{...provenance.geometry,physicalBoundsKpc:physical},envelope:envelope?{path:'source/envelope.json',settings:envelopeSettings,metrics:envelope.metrics,priorCloud,source:envelopeSource?{resultId:envelopeSource.id,imageId:envelopeSource.imageId,meaning:'Broad envelope light and colour come from this separate registered image; fine structure comes from the primary baseline image.'}:null,meaning:'Smoothed image light carried along the pinned simulation density: gain(x,y) x simulation(x,y,z). Depth shape is the simulation, not recovered gas depth.'}:null,material:receipt,qualification,densityProjection:{width,height,tangentBoundsKpc:tb,observerDistanceKpc:distance,meaning:'Analytic integrated fitted finite emission, display optical-depth transfer 1-exp(-exposure*projection); not the original stellar prior.'},limitations:['A single optical image does not measure gas depth. Stellar simulation ray modes are conditional guidance only.',...(envelope?['The smooth envelope inherits the stellar simulation\'s depth distribution; it is a shape hypothesis, not measured gas geometry.']:[]),'Foreground exclusion and finite thickness limits are explicit authored settings.','Geometry and neutral opacity are newly fitted; color application alone preserves this new opacity.','Preview slab discretization and finite component chromaticity can lose sub-resolution image detail.'],validation};
- const provenanceSha=await json(resolve(staging,'source/provenance.json'),nextProvenance);painted.slices.provenance=nextProvenance;
+ await json(resolve(staging,'source/provenance.json'),nextProvenance);painted.slices.provenance=nextProvenance;
  await json(resolve(staging,'prepared/volume-slices.json'),painted.slices);
  const data=compileCssVolume({id,frame,slices:painted.slices,recipe:{anchors:[]}}),prepared={schema:'cssearth-prepared-object@1',id,type:'density-volume',format:'cssearth-density-volume@1',data};
- const volumeSha=await json(resolve(staging,'prepared/volume.json'),prepared);
+ await json(resolve(staging,'prepared/volume.json'),prepared);
  const descriptor={schema:'cssearth-object@1',id,type:'density-volume',properties:{volume:frame,preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
  await json(resolve(staging,'object.json'),descriptor);
  const referenceLeafIds=data.stacks.flatMap(stack=>stack.leaves.map(l=>l.id)),partLeafIds=referenceLeafIds.map(leaf=>'all-light::'+leaf);
  const inspection={...prepared,data:{...data,stacks:data.stacks.map(stack=>({...stack,leaves:stack.leaves.flatMap(l=>[l,{...l,id:'all-light::'+l.id}])}))}};
- const inspectionSha=await json(resolve(staging,'prepared/inspection.json'),inspection),partsSha=await json(resolve(staging,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id,parts:[{id:'all-light',label:'Conditional finite emission',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,composition:qualification.reason});
+ await json(resolve(staging,'prepared/inspection.json'),inspection);await json(resolve(staging,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id,parts:[{id:'all-light',label:'Conditional finite emission',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,composition:qualification.reason});
  await json(resolve(staging,'inspection-object.json'),{...descriptor,properties:{...descriptor.properties,preparation:{source:'source/cloud-parts.json'}},prepared:{format:prepared.format,url:'prepared/inspection.json'}});
  const local=relative(root,output),oldLocal=relative(root,baseline),subject=JSON.parse(JSON.stringify(oldResult.subject).replaceAll(oldLocal,local));subject.id=id;subject.name+=' · conditional emission';subject.directory=local;subject.modelNote=qualification.reason;subject.reconstructionImage={...subject.reconstructionImage,label:subject.reconstructionImage.label+' · finite emission',note:qualification.reason};
- await json(resolve(staging,'result.json'),{...oldResult,resultId,subject});
- const artifacts = await collectArtifacts(staging);await json(resolve(staging,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id,sourceSha256:work.source.sha256,artifacts});await verifyFiniteMaterialArtifacts(staging,id);await rename(staging,output);console.log(JSON.stringify({resultId,output,metrics,qualification}));
+ await json(resolve(staging,'request.json'),identity);await json(resolve(staging,'result.json'),{...oldResult,resultId,subject});
+ const artifacts = await collectArtifacts(staging);await json(resolve(staging,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id,artifacts});await verifyFiniteMaterialArtifacts(staging,id);await rename(staging,output);console.log(JSON.stringify({resultId,output,metrics,qualification}));
 }
 await main(process.argv[2]??'');

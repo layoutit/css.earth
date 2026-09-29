@@ -16,7 +16,7 @@ import { verifySkyBandRecipe } from '../../adapters/sources/sky-bands.ts';
 
 const [recipePath, mode, extra] = process.argv.slice(2);
 if (!recipePath || extra || (mode && mode !== '--alignment-only')) throw new TypeError('Usage: prepare-observations <recipe.json> [--alignment-only]');
-const recipe = readObservationRecipe(JSON.parse(await readFile(recipePath, 'utf8')));
+const recipeText = await readFile(recipePath, 'utf8'), recipe = readObservationRecipe(JSON.parse(recipeText));
 const nativeSeparationCache = await loadNativeSeparationCache(recipe);
 const directory = resolve('.local/nebula-lab/observations', recipe.id);
 const json = async (file: string, data: unknown) => { await writeFile(`${file}.pending`, JSON.stringify(data, null, 2) + '\n'); await rename(`${file}.pending`, file); };
@@ -176,7 +176,7 @@ for (const source of scienceObservationSources(recipe)) {
 }
 const publish = () => json(resolve(directory, 'observations.json'), { schema: 'cssearth-nebula-observations@1', id: recipe.id, frame: recipe.frame, images,
   registrationReferences: aligned.filter(row => row.source.processingRole === 'registration-reference').map(row => ({ id: row.source.id, source: row.source, imageToFrame: row.imageToFrame, registration: row.registration })),
-  provenance: { recipePath, sourceFrameConvention: 'Native raster pixel edges; pixel centres at n+.5. CSS matrix x=a*x+c*y+e, y=b*x+d*y+f.',
+  provenance: { recipePath, recipe: JSON.parse(recipeText), sourceFrameConvention: 'Native raster pixel edges; pixel centres at n+.5. CSS matrix x=a*x+c*y+e, y=b*x+d*y+f.',
     registrationMethod: 'Per-source discovery records below; every direct affine fit uses the same deterministic training RANSAC, spatial holdout, residual, coverage and parity gates. Transferred bands carry reference-bridge residuals only.',
     registrationSources: aligned.map(row => ({ id: row.source.id, mode: row.source.registrationTransfer ? 'shared-grid-transfer' : row.source.matchedStarCatalogue ? 'explicit-native-star-catalogue' : row.source.registrationMode ?? 'field-stars',
       compactStarChannel: row.source.compactStarChannel ?? 'minimum-rgb', matchedStarCatalogue: row.source.matchedStarCatalogue, astrometricCalibration: row.source.astrometricCalibration,
