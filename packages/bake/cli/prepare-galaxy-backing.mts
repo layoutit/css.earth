@@ -94,7 +94,7 @@ const quad: VolumeSliceQuad = { id, axis: 'z', sliceIndex: 0, texturePath, width
 const empty = (axis: 'x' | 'y', normal: Vector3): VolumeSliceQuad => ({ id: `${axis}-empty`, axis, sliceIndex: 0, texturePath: `${id}/${axis}-empty`, widthPx: 1, heightPx: 1,
   vertices: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0], normal, sha256: '', bytes: 0, alphaCoverage: 0 });
 const compiled = compileCssVolume({ id, frame, recipe: { anchors: [] }, slices: { quads: [quad, empty('x', [-1, 0, 0]), empty('y', [0, 1, 0])],
-  boundsUnits: frame.boundsUnits, provenance: null, approximation: { method: '', radialEmission: 'None.', limitations: [], samplesPerSlab: 1, opticalWeight: 1,
+  boundsUnits: { min: [...frame.boundsUnits.min] as Vector3, max: [...frame.boundsUnits.max] as Vector3 }, provenance: null, approximation: { method: '', radialEmission: 'None.', limitations: [], samplesPerSlab: 1, opticalWeight: 1,
     exposureGain: 1, sliceCounts: { x: 0, y: 0, z: 1 }, slabPitchUnits: { x: 0, y: 0, z: 0 } } } });
 const leaf = compiled.stacks.find(stack => stack.axis === 'z')!.leaves[0]!;
 await writeFile(resolve(prepared, `${id}.json`), JSON.stringify({ schema: 'cssearth-galaxy-backing@1', id, source: recipe.source, meaning: recipe.meaning,

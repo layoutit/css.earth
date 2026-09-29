@@ -1,0 +1,42 @@
+{
+  "testedAt": "2026-09-28",
+  "base": "68dfd12f7b",
+  "change": "Preparation repairs raster triangles that do not enclose their source faces before sampling the atlas. Phoebe rebaked; source triangle coordinates unchanged.",
+  "sourceFaces": 3500,
+  "previousDepthGroups": 0,
+  "depthGroupSizes": [
+    3213,
+    64,
+    64,
+    64,
+    64,
+    31
+  ],
+  "device": "iPad15,7 A16, iPadOS 26.6",
+  "before": {
+    "capture": "tablet-phoebe-drag-native-2026-09-29T01-39-01-034Z",
+    "durationMs": 9580,
+    "maximumRenderingFrameSpanMs": 1293.0,
+    "maximumMainThreadFrameWorkMs": 39.1,
+    "backboarddSamples": 8920,
+    "depthSortSamples": 6868
+  },
+  "after": {
+    "capture": "tablet-phoebe-coverage-guard-drag-repeat-2026-09-29T02-11-54-960Z",
+    "durationMs": 3571,
+    "maximumRenderingFrameSpanMs": 277.6,
+    "maximumMainThreadFrameWorkMs": 41.3,
+    "backboarddSamples": 2948,
+    "depthSortSamples": 2037,
+    "completedSteps": 8,
+    "consoleErrors": 0,
+    "nativeScreenshots": 8
+  },
+  "method": "Same page-dispatched one-second drag from (300,350) to (580,390), wheel -50 then +50 with 0.5-second waits, native sampling of all processes and native device screenshots. Built performance preview. Both runs include the same uncommitted paced scene retirement renderer experiment; that experiment is outside the preparation change.",
+  "limits": "One comparison, not a distribution or a smoothness guarantee. RenderingFrame span includes time outside main-thread work. Native sample counts are not elapsed CPU percentages. A 3213-face native depth group remains; the repair does not eliminate the drag stalls. No automatic merging or change to source topology.",
+  "checks": [
+    "Nine radial preparation tests passed, including the captured narrow-face regression and degenerate-face rejection.",
+    "Bake package typecheck passed.",
+    "Independent depth compiler accepted repaired layouts for Phoebe, Tethys, Dione and Rhea; only Phoebe was rebaked and device-tested in this change."
+  ]
+}

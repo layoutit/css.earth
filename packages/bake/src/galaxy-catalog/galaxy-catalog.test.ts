@@ -54,8 +54,8 @@ test('canonical catalogue rebakes byte-for-byte from the independently pinned or
 test('four detailed centers retain measured directions and distance references in Sun ICRS', async () => {
   const data = parsePreparedGalaxyCatalog(await json('prepared/catalogue.json'));
   const expected = [
-    ['m_031', 10.683916666666665, 41.26566666666666, 776247.116629, 'Savino2022'],
-    ['m_033', 23.462, 30.6603, 859013.521505, 'Savino2022'],
+    ['m31', 10.683916666666665, 41.26566666666666, 776247.116629, 'Savino2022'],
+    ['m33', 23.462, 30.6603, 859013.521505, 'Savino2022'],
     ['lmc', 78.76, -69.19, 49590.6727505, 'Pietrzynski2019'],
     ['smc', 16.25, -72.42, 62440, 'Graczyk2020'],
   ] as const;

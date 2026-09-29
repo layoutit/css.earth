@@ -63,7 +63,14 @@ function halfLightRadius(row: CsvRow, distance: GalaxyDistance): PreparedGalaxy[
 }
 
 export function prepareGalaxyCatalog(rows: readonly CsvRow[], metadata: ReadonlyMap<string, AuthorMetadata>, table: ReadonlyMap<string, string>, recipe: GalaxyRecipe, sources: GalaxySource[]): PreparedGalaxyCatalog {
-  const objects: PreparedGalaxy[] = [], exclusions: { id: string; reason: string }[] = [], seen = new Set<string>();
+  const objects: PreparedGalaxy[] = [], exclusions: { id: string; reason: string }[] = [], seen = new Set<string>(), kept = new Set<string>();
+  // One id per object: a row that an object package details takes the package's id, which names its page, selection and
+  // links everywhere; the catalogue key stays in its source references.
+  const objectId = (key: string) => recipe.detailObjects[key]?.id ?? key;
+  const rowKeys = new Set(rows.map(row => row.key));
+  for (const [key, detail] of Object.entries(recipe.detailObjects)) {
+    if (detail.id !== key && rowKeys.has(detail.id)) throw new TypeError(`Detail object ${detail.id} of row ${key} is another row's catalogue key.`);
+  }
   for (const row of rows) {
     const id = row.key;
     if (!id || !/^[A-Za-z0-9][A-Za-z0-9_.+-]*$/.test(id) || seen.has(id)) throw new TypeError(`Invalid or repeated galaxy identifier: ${id}`);
@@ -82,9 +89,10 @@ export function prepareGalaxyCatalog(rows: readonly CsvRow[], metadata: Readonly
     const detail = recipe.detailObjects[id], radius = halfLightRadius(row, distance);
     const aliases = [...new Set(author.name_discovery?.other_name ?? [])].filter(alias => alias && alias !== name);
     if (aliases.some(alias => typeof alias !== 'string')) throw new TypeError(`Invalid galaxy aliases: ${id}`);
-    objects.push({ id, name, aliases, positionM: galaxyPositionM(raDeg, decDeg, distance.valuePc),
+    kept.add(id);
+    objects.push({ id: objectId(id), name, aliases, positionM: galaxyPositionM(raDeg, decDeg, distance.valuePc),
       skyPosition: { raDeg, decDeg, sourceRef: author.location?.ref_location || `${recipe.catalogueSourceId}:${id}:location` }, distance,
-      ...(row.host ? { hostId: row.host } : {}), membership: classifyMembership(id, metadata, recipe, table),
+      ...(row.host ? { hostId: objectId(row.host) } : {}), membership: classifyMembership(id, metadata, recipe, table),
       status: row.confirmed_galaxy === '1' && row.confirmed_real === '1' ? 'confirmed' : 'candidate',
       ...(radius ? { halfLightRadius: radius } : {}),
       ...(detail ? { detailedObjectId: detail.id } : {}),
@@ -93,8 +101,7 @@ export function prepareGalaxyCatalog(rows: readonly CsvRow[], metadata: Readonly
   for (const id of [...Object.keys(recipe.distanceOverrides), ...Object.keys(recipe.detailObjects)]) if (!seen.has(id)) throw new TypeError(`Authored override refers to an absent source row: ${id}`);
   objects.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
   exclusions.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
-  const positioned = new Set(objects.map(row => row.id));
-  const pending = objects.flatMap(row => row.hostId && !positioned.has(row.hostId) ? [row.hostId] : []);
+  const pending = rows.flatMap(row => kept.has(row.key!) && row.host && !kept.has(row.host) ? [row.host] : []);
   const unpositionedHosts: NonNullable<PreparedGalaxyCatalog['unpositionedHosts']>[number][] = [];
   const included = new Set<string>();
   for (const id of pending) {
@@ -104,8 +111,8 @@ export function prepareGalaxyCatalog(rows: readonly CsvRow[], metadata: Readonly
     const reason = exclusions.find(row => row.id === id)?.reason;
     if (!source?.name || !author || !reason) throw new TypeError(`Physical host has no source identity: ${id}`);
     const hostId = source.host || undefined;
-    unpositionedHosts.push({ id, name: source.name, sourceRef: `${recipe.catalogueSourceId}:${id}:name_discovery`, reason, ...(hostId ? { hostId } : {}) });
-    if (hostId && !positioned.has(hostId)) pending.push(hostId);
+    unpositionedHosts.push({ id: objectId(id), name: source.name, sourceRef: `${recipe.catalogueSourceId}:${id}:name_discovery`, reason, ...(hostId ? { hostId: objectId(hostId) } : {}) });
+    if (hostId && !kept.has(hostId)) pending.push(hostId);
   }
   unpositionedHosts.sort((a, b) => a.id.localeCompare(b.id));
   return { schema: 'cssearth-galaxy-catalog@1', unpositionedHosts, frame: recipe.frame, sources, objects, exclusions, selection: { description: recipe.description } };

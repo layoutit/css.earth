@@ -37,7 +37,7 @@ const unit = (a: readonly number[]) => a.map(v => v / Math.hypot(...a));
 export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudget: number; sourceTopology?: string; simplification: RadialSimplification; source?: string}, scale: number) {
   const { targetFaces, maximumErrorMeters } = profile.simplification;
   if (!mesh.positions || !mesh.indices || !Number.isInteger(targetFaces) || targetFaces < 4 ||
-      !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 4000 ||
+      !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 2000 ||
       !(maximumErrorMeters > 0) || !Number.isFinite(maximumErrorMeters) || !(scale > 0) ||
       (['regularize', 'prune'] as const).some(key => profile.simplification[key] !== undefined && typeof profile.simplification[key] !== 'boolean')) throw new TypeError('Invalid source mesh simplification.');
   await MeshoptSimplifier.ready;

@@ -1,8 +1,9 @@
 ---
 import ObjectPage from '../components/ObjectPage.astro';
-import { SCENE_OBJECTS } from '../objects.mts';
+import { OBJECTS } from '../objects.mts';
 export function getStaticPaths() {
-  return SCENE_OBJECTS.map(({ id }) => ({ params: { id } }));
+  // Every object has its page. A catalogue focus's page is its host scene's with the focus selected: the path names it.
+  return OBJECTS.map(object => ({ params: { id: object.id }, props: { sceneId: object.kind === 'prepared-focus' ? object.sceneHostId : object.id } }));
 }
 ---
-<ObjectPage objectId={Astro.params.id!} />
+<ObjectPage objectId={Astro.props.sceneId} pageId={Astro.params.id!} />

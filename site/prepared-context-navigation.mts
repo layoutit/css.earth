@@ -21,6 +21,8 @@ export interface FocusCallbacks {
   canPublish(): boolean;
 }
 export interface FocusOperation {
+  /** The scene whose page the URL is on: its path names a focus when it names anything else. */
+  readonly sceneId: string;
   readonly signal: AbortSignal;
   isCurrent(): boolean;
   readonly frame: boolean;
@@ -102,7 +104,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
     const owner = connection?.owner ?? null;
     const current = () => connection?.owner === owner && !operation.signal.aborted && operation.isCurrent();
     if (!owner || !current()) return;
-    const query = new URL(url, windowTarget.location.href).searchParams;
+    const location = new URL(url, windowTarget.location.href), query = location.searchParams;
     const recover = (error: unknown): never => {
       if (current()) {
         const focus = owner.preparedFocus();
@@ -112,7 +114,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
       throw error;
     };
     let selection: ReturnType<typeof readPreparedFocusSelection>;
-    try { selection = readPreparedFocusSelection(query); } catch (error) { return recover(error); }
+    try { selection = readPreparedFocusSelection(location, operation.sceneId); } catch (error) { return recover(error); }
     const activate = () => {
       if (!current()) return;
       const focus = target?.focus ?? null;
@@ -125,7 +127,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         // Preserve an incoming composition while it still contains its named focus.
         const reframe = focus !== null && !(query.has('v') && savedCameraShowsFocus(owner, focus));
         publishContent(reframe && query.has('v') ? 'reframe'
-          : !id || (state && !query.has('focusLens')) ? 'selection' : 'preserve');
+          : !id || (state && !query.has('dataset')) ? 'selection' : 'preserve');
         if (!reframe) return;
       }
       if (!focus) return;

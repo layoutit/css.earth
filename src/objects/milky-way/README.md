@@ -244,7 +244,7 @@ left out.
 | [Young open clusters](source/open-clusters/points.json) | Hunt & Reffert (2023) | Their own quality cuts, younger than 100 Myr |
 | [Young Cepheids](source/cepheids/points.json) | Skowron et al. (2019) | Younger than 60 Myr |
 | [Bulge RR Lyrae](source/bulge-rr-lyrae/points.json) | Prudil et al. (2025) | Within 3 kpc of the centre, one in 16 |
-| [Stars within 100 pc](source/nearby-stars/points.json), [within 20 pc](source/nearby-stars-20pc/points.json) | Gaia Catalogue of Nearby Stars (2021) | One row in 64; every row within 20 pc |
+| [Stars within 100 pc](source/nearby-stars/points.json), [the sky sample](source/nearby-stars-sky/points.json), [within 20 pc](source/nearby-stars-20pc/points.json) | Gaia Catalogue of Nearby Stars (2021) | One row in 64; one in 16; every row within 20 pc |
 | [Globular clusters](source/globular-clusters/points.json) | Baumgardt & Vasiliev (2021) | All 165, drawn as their own bank |
 
 **Which layers follow the arms.** An arm-tracer layer is kept when its dots sit
@@ -281,9 +281,11 @@ holds 15 dots per kpc² at the Sun, the highest that stays even out to 4 kpc
 along the solar circle (6,586 dots). Nested levels around the Sun add dots up
 to 150 per kpc² out to 3 kpc, 1,500 out to 800 pc, 50,000 out to 100 pc and
 1,000,000 out to 20 pc; each adds only dots the levels around it do not draw,
-and its density falls to nothing over its outer half.
+and its density falls to nothing over its outer half. A last level, one in 16
+of the census stars (19,409 more), makes the view from just outside the Solar
+System a sky of stars.
 [`stack-catalogue-points.mts`](../../../packages/bake/cli/stack-catalogue-points.mts) joins them into
-[one bank](source/dots/stack.json) of 13,420 dots. The app draws a growing
+[one bank](source/dots/stack.json) of 32,829 dots. The app draws a growing
 share of it as you zoom in: the galaxy level whole within 10 kpc, then each
 level's dots one at a time as the view narrows past the level's radius. A
 level's edge is never on screen, and a dot you have seen stays while you zoom
@@ -295,8 +297,11 @@ plane in the galaxy's frame, anchored so its Sun and centre land on the app's.
 It is artwork, not a measurement, and the levels (black 20, gamma 1, white 150
 of 255) keep it under the dots. It is 184 KB at 2048 px.
 
-**Past the Solar System.** From the edge of the Solar System (the planets fade
-by 1 light-year) the dots take over from the app's stars: only featured stars
+**Past the Solar System.** The dots fade in from about Neptune's orbit (a
+twentieth of the distance where the Solar System starts to retire) and are whole
+by 670 AU; over the same range the other systems' stars, dimmed while the camera
+is among the planets, come up to full. Once the planets have faded, from 1 to 10
+light-years, the dots take over from the app's stars: only featured stars
 keep their markers, as landmarks. The overview reads Solar System until the
 planets fade, Milky Way while inside the galaxy, and Local Group once the
 galaxy's nebulae have faded, about 19 kpc out.

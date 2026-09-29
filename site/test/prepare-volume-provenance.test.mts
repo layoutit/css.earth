@@ -22,7 +22,7 @@ test('one selected volume prepares without reading unrelated presentation inputs
   } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [['omega-centauri', 2]]);
   assert.ok(seen.includes('src/objects/omega-centauri/source/delivery.json'));
-  assert.equal(entries[0]!.route, '/sun/?focus=omega-centauri');
+  assert.equal(entries[0]!.route, '/omega-centauri/');
   await assert.rejects(prepareVolumeProvenance({ root, objectId: 'absent-test-volume' }), /No volume presentation/);
 });
 

@@ -36,7 +36,7 @@ const object = (id: string, route: string, base: string) => ({ id, name: id, rou
   controls: [{ id: 'optical', label: 'Optical' }], provenance: provenance(id) });
 
 test('observation attribution is explicit and independent of descriptive processing labels', () => {
-  const volume = object('m42', '/sun/?focus=m42', 'src/objects/m42');
+  const volume = object('m42', '/m42/', 'src/objects/m42');
   const product = volume.provenance.products[0]!;
   const withProduct = (change: Partial<typeof product>) => [{ ...volume, provenance: { ...volume.provenance, products: [{ ...product, ...change }] } }];
   assert.equal(compileContributions(withProduct({ interpretation: { kind: 'future-processing-name' } }), catalog, DATASET_ROUTES).edges.length, 1);
@@ -51,18 +51,18 @@ test('observation attribution is explicit and independent of descriptive process
   assert.equal(compileContributions([excludedParent], catalog, DATASET_ROUTES).edges.length, 0, 'a derived preview cannot reintroduce excluded illustration credit');
 });
 
-test('both graph compilers retain body URLs and admit shared-camera focus URLs with explicit source owners', () => {
-  const objects = [object('mercury', '/mercury/', 'src/objects/mercury'), object('m42', '/sun/?focus=m42', 'src/objects/m42')];
+test('both graph compilers give bodies and catalogue focuses the same page dataset URLs', () => {
+  const objects = [object('mercury', '/mercury/', 'src/objects/mercury'), object('m42', '/m42/', 'src/objects/m42')];
   const usage = compileSourceUsage(objects, sources, DATASET_ROUTES), contributions = compileContributions(objects, catalog, DATASET_ROUTES);
   assert.deepEqual(usage.datasets, contributions.datasets);
-  assert.deepEqual(usage.datasets.map(view => view.href), ['/mercury/?dataset=optical', '/sun/?focus=m42&focusLens=optical']);
+  assert.deepEqual(usage.datasets.map(view => view.href), ['/mercury/?dataset=optical', '/m42/?dataset=optical']);
   assert.deepEqual(usage.edges.map(edge => edge.ownerPath), ['src/objects/mercury/source/manifest.json', 'src/objects/m42/source/manifest.json']);
   assert.deepEqual(parseContributionGraph(contributions, catalog, DATASET_ROUTES), contributions);
   assert.deepEqual(parseSourceUsage(usage, sources, DATASET_ROUTES), usage);
 });
 
 test('the graph compilers and parsers format and read dataset URLs only through the routes the application passes them', () => {
-  const objects = [object('mercury', '/mercury/', 'src/objects/mercury'), object('m42', '/sun/?focus=m42', 'src/objects/m42')];
+  const objects = [object('mercury', '/mercury/', 'src/objects/mercury'), object('m42', '/m42/', 'src/objects/m42')];
   const formatted: string[] = [], parsed: string[] = [];
   const routes = {
     destination: (objectId: string, route: string, lensId: string) => { formatted.push(`${objectId} ${route} ${lensId}`); return `/datasets/${objectId}/${lensId}`; },
@@ -75,7 +75,7 @@ test('the graph compilers and parsers format and read dataset URLs only through 
   const usage = compileSourceUsage(objects, sources, routes), contributions = compileContributions(objects, catalog, routes);
   assert.deepEqual(usage.datasets.map(view => view.href), ['/datasets/mercury/optical', '/datasets/m42/optical']);
   assert.deepEqual(contributions.datasets, usage.datasets);
-  assert.deepEqual(formatted, ['mercury /mercury/ optical', 'm42 /sun/?focus=m42 optical', 'mercury /mercury/ optical', 'm42 /sun/?focus=m42 optical']);
+  assert.deepEqual(formatted, ['mercury /mercury/ optical', 'm42 /m42/ optical', 'mercury /mercury/ optical', 'm42 /m42/ optical']);
   assert.deepEqual(parsed, ['mercury/optical', 'm42/optical']);
   assert.deepEqual(parseContributionGraph(contributions, catalog, routes), contributions);
   assert.deepEqual(parseSourceUsage(usage, sources, routes), usage);
@@ -86,31 +86,30 @@ test('the graph compilers and parsers format and read dataset URLs only through 
 });
 
 test('dataset destinations reject external URLs, cross-object or cross-lens selections and ambiguous query state', () => {
-  const volume = object('m42', '/sun/?focus=m42', 'src/objects/m42');
+  const volume = object('m42', '/m42/', 'src/objects/m42');
   const usage = compileSourceUsage([volume], sources, DATASET_ROUTES), contributions = compileContributions([volume], catalog, DATASET_ROUTES);
   const invalid = [
-    'https://example.org/sun/?focus=m42&focusLens=optical', '//example.org/sun/?focus=m42&focusLens=optical',
-    '/sun/?focus=helix&focusLens=optical', '/sun/?focus=m42&focusLens=infrared',
-    '/sun/?focus=m42&focus=m42&focusLens=optical', '/sun/?focus=m42&focusLens=optical&focusLens=optical',
-    '/sun/?focus=m42&focusLens=optical&v=other', '/sun/?focus=m42&focusLens=optical#dataset=optical',
-    '/sun/?focus=m42#dataset=optical', '/sun/#dataset=optical', '/helix/#dataset=optical',
-    '/sun/?focus=m%34%32&focusLens=optical', '/sun/?focus=m42&focusLens=%6fptical',
+    'https://example.org/m42/?dataset=optical', '//example.org/m42/?dataset=optical',
+    '/helix/?dataset=optical', '/m42/?dataset=infrared', '/m42/?dataset=optical&dataset=optical',
+    '/m42/?dataset=optical&v=other', '/m42/?dataset=optical#dataset=optical',
+    '/m42/#dataset=optical', '/helix/#dataset=optical', '/m%34%32/?dataset=optical', '/m42/?dataset=%6fptical',
+    '/sun/?focus=m42&focusLens=optical', '/m42/?focusLens=optical',
   ];
   for (const href of invalid) {
     assert.throws(() => parseDatasetDestination(href, 'm42', 'optical'), /Invalid dataset/);
     assert.throws(() => parseSourceUsage({ ...usage, datasets: [{ ...usage.datasets[0], href }] }, sources, DATASET_ROUTES), /Invalid dataset/);
     assert.throws(() => parseContributionGraph({ ...contributions, datasets: [{ ...contributions.datasets[0], href }] }, catalog, DATASET_ROUTES), /Invalid dataset/);
   }
-  for (const route of ['/helix/', '/sun/?focus=helix', '/sun/?focus=m42&focusLens=optical', '//example.org/']) {
+  for (const route of ['/helix/', '/sun/?focus=m42', '/m42/?dataset=optical', '//example.org/']) {
     assert.throws(() => compileSourceUsage([{ ...volume, route }], sources, DATASET_ROUTES), /Invalid dataset/);
     assert.throws(() => compileContributions([{ ...volume, route }], catalog, DATASET_ROUTES), /Invalid dataset/);
   }
-  assert.throws(() => datasetDestination('../m42', '/sun/?focus=../m42', 'optical'));
-  assert.throws(() => datasetDestination('m42', '/sun/?focus=m42', 'optical&focus=helix'));
+  assert.throws(() => datasetDestination('../m42', '/../m42/', 'optical'));
+  assert.throws(() => datasetDestination('m42', '/m42/', 'optical&dataset=infrared'));
 });
 
 test('source usage derives manifest ownership from the package and rejects escaping or cross-object owners', () => {
-  const volume = object('m42', '/sun/?focus=m42', 'src/objects/m42');
+  const volume = object('m42', '/m42/', 'src/objects/m42');
   for (const base of ['src/objects/helix', '../src/objects/m42', '/src/objects/m42', 'src/objects/m42/..']) {
     assert.throws(() => compileSourceUsage([{ ...volume, base }], sources, DATASET_ROUTES));
   }

@@ -6,7 +6,7 @@ import { createWorldContextBodyInteraction, createWorldContextInteractions } fro
 import { createWorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import type { PlannedWorldContext, WorldContextView } from './world-context/world-context-planner.js';
-import { createSystemFade, indicatorDotDiameter, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
+import { createSystemFade, indicatorDotDiameter, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
 import type { OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
@@ -26,8 +26,10 @@ import type { OpacityClock } from '../stars/opacity-clock.js';
 // Camera movement writes one transform; the inverse scale only compensates
 // those two pseudos when the projected image diameter changes.
 const BILLBOARD_SIZE = BODY_INDICATOR_DIAMETER;
-/** Bodies of other systems, seen from inside the focus star's system; hover restores them. */
+/** Bodies of other systems, seen from inside the focus star's system; hover restores them. They come up to full as the
+ * stars around the system fill the view (starFieldFade), in sixteenths so a zoom restyles them a few times, not per frame. */
 const OTHER_SYSTEM_OPACITY = .3;
+const OTHER_SYSTEM_STEPS = 16;
 // Per-body presentation flags set by id from outside: which parts hide, and which bodies stand out.
 const VISIBILITY_FLAGS = ['bodyHidden', 'orbitHidden', 'labelHidden', 'labelSuppressed', 'indicatorHidden', 'highlighted'] as const;
 /** Each list names the bodies that carry its flag; an omitted flag keeps its current bodies. */
@@ -147,7 +149,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let presentationRevision = 0, policyDirty = true;
   let distantNavigationActive = false;
   const contextFrames = createWorldContextFrameReceiver();
-  let previousHeader: { emphasizedId: string | null; selectionStrength: number; focusSystemShown: boolean; width: number; height: number } | null = null;
+  let previousHeader: { emphasizedId: string | null; selectionStrength: number; otherSystemOpacity: number; width: number; height: number } | null = null;
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
   const selectionPolicy = createContextSelectionPolicy(plan);
   let publishCount = 0;
@@ -481,15 +483,17 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const { emphasizedId, width, height } = frame;
       const selectionStrength = selectionPolicy.strengthAt(emphasizedId, world.pose.positionM);
       // Inside the focus star's system, other systems' bodies stay clickable but read as not belonging to it.
-      const focusSystemShown = systemFade.of(0) > .5;
+      const starField = starFieldFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]!)), plan.system);
+      const otherSystemOpacity = systemFade.of(0) > .5
+        ? OTHER_SYSTEM_OPACITY + (1 - OTHER_SYSTEM_OPACITY) * Math.round(starField * OTHER_SYSTEM_STEPS) / OTHER_SYSTEM_STEPS : 1;
       cameraState.set(world.pose.positionM, 0); cameraState.set(world.pose.orientationXyzw, 3);
       cameraState[7] = viewport.focalPixels; cameraState[8] = width; cameraState[9] = height;
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;
       const policyChanged = resized || distantNavigationChanged || policyDirty || previousHeader?.emphasizedId !== emphasizedId ||
-        previousHeader?.selectionStrength !== selectionStrength || previousHeader?.focusSystemShown !== focusSystemShown;
+        previousHeader?.selectionStrength !== selectionStrength || previousHeader?.otherSystemOpacity !== otherSystemOpacity;
       policyDirty = false;
-      previousHeader = { emphasizedId, selectionStrength, focusSystemShown, width, height };
+      previousHeader = { emphasizedId, selectionStrength, otherSystemOpacity, width, height };
       if (!cameraChanged && !policyChanged && !depthChanged && !interactiveHover && delta.changes.size === 0) {
         skippedPublications++;
         return;
@@ -529,7 +533,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const navigationSuppressed = entry.unpackaged || entry.plainDot || (distantNavigationActive && distantNonNavigableIds.has(body.id));
         if (mask === 0) continue;
         const contextEmphasis = (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1) *
-          (focusSystemShown && !entry.hovered && !systemFade.inFocusSystem(entry.index) ? OTHER_SYSTEM_OPACITY : 1);
+          (!entry.hovered && !systemFade.inFocusSystem(entry.index) ? otherSystemOpacity : 1);
         const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) * contextEmphasis;
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         // All three visual parts share this one zoom/selection alpha and

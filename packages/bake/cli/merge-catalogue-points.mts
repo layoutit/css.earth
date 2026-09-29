@@ -74,7 +74,7 @@ const cap = ((): DiscCap | VolumeCap | undefined => {
   return { mode: 'disc', atSunPerKpc2: value.atSunPerKpc2 as number, scaleLengthKpc: value.scaleLengthKpc as number, kernel: value.kernelKpc as number,
     ...(value.taperKpc ? { taper: value.taperKpc as [number, number] } : {}) };
 })();
-if (recipe.within !== undefined && (!Array.isArray(recipe.within) || !recipe.within.every(bankId) || !cap)) fail('within lists the enclosing levels\' ids, for a level with a density cap.');
+if (recipe.within !== undefined && (!Array.isArray(recipe.within) || !recipe.within.every(bankId))) fail('within lists the enclosing levels\' ids.');
 
 const entries = (recipe.banks as (string | Entry)[]).map(value => typeof value === 'string' ? { bank: value } as Entry : value);
 const maxSigma = recipe.maxKinematicSigmaKpc as number | undefined, colourGamma = (recipe.colourGamma as number | undefined) ?? 1;
@@ -146,7 +146,24 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
 const hash = (index: number) => ((index + 1) * 2654435761) % 4294967296;
 const shuffled = merged.map((point, index) => ({ point, key: hash(index) })).sort((a, b) => a.key - b.key).map(({ point }) => point);
 const capped: Record<string, number> = {};
-let ordered = shuffled;
+// The enclosing levels' dots are already drawn: a dot at one of their positions is theirs, and under a cap they count
+// toward it.
+const enclosing = new Set<string>(), enclosingPoints: number[][] = [];
+for (const level of (recipe.within ?? []) as string[]) {
+  const outer = JSON.parse(await readFile(resolve(prepared, `${level}.json`), 'utf8')) as { schema?: unknown; frame?: unknown; points?: unknown };
+  const outerFrame = parseDensityVolumeFrame(outer.frame);
+  if (outer.schema !== 'cssearth-catalogue-points@1' || !Array.isArray(outer.points) || outerFrame.metersPerUnit !== bankFrame!.metersPerUnit ||
+      outerFrame.referenceFrame !== bankFrame!.referenceFrame || outerFrame.originM.some(value => value !== 0)) {
+    throw new TypeError(`${level}: an enclosing level must be a merged bank in this level's frame and unit.`);
+  }
+  for (const point of outer.points as number[][]) { enclosing.add(point.slice(0, 3).join(',')); enclosingPoints.push(point.slice(0, 3)); }
+}
+const drawnOutside: Record<string, number> = {};
+let ordered = shuffled.filter(point => {
+  if (!enclosing.has(point.reference.join(','))) return true;
+  drawnOutside[point.bank] = (drawnOutside[point.bank] ?? 0) + 1; kept[point.bank]!--; return false;
+});
+if (recipe.within) console.log(`Already drawn by ${(recipe.within as string[]).join(', ')}: ${JSON.stringify(drawnOutside)}.`);
 if (cap) {
   // The space the cap counts in: face-on Galactic x (toward the centre) and y (toward l = 90°) from the Hipparcos
   // rotation for a disc, or the banks' own 3D coordinates for the universe.
@@ -159,25 +176,11 @@ if (cap) {
   const cells = new Map<string, number[][]>(), cellOf = (position: readonly number[]) => position.map(value => Math.floor(value / cap.kernel));
   const offsets = cap.mode === 'disc' ? [-1, 0, 1].flatMap(i => [-1, 0, 1].map(j => [i, j]))
     : [-1, 0, 1].flatMap(i => [-1, 0, 1].flatMap(j => [-1, 0, 1].map(k => [i, j, k])));
-  // The enclosing levels' dots are already drawn: they fill the grid first, and a dot at one of their positions is theirs.
-  const enclosing = new Set<string>();
-  for (const level of (recipe.within ?? []) as string[]) {
-    const outer = JSON.parse(await readFile(resolve(prepared, `${level}.json`), 'utf8')) as { schema?: unknown; frame?: unknown; points?: unknown };
-    const outerFrame = parseDensityVolumeFrame(outer.frame);
-    if (outer.schema !== 'cssearth-catalogue-points@1' || !Array.isArray(outer.points) || outerFrame.metersPerUnit !== bankFrame!.metersPerUnit ||
-        outerFrame.referenceFrame !== bankFrame!.referenceFrame || outerFrame.originM.some(value => value !== 0)) {
-      throw new TypeError(`${level}: an enclosing level must be a merged bank in this level's frame and unit.`);
-    }
-    for (const point of outer.points as number[][]) {
-      const position = place(point.slice(0, 3)), home = cellOf(position), key = home.join(',');
-      enclosing.add(point.slice(0, 3).join(','));
-      const list = cells.get(key);
-      if (list) list.push(position); else cells.set(key, [position]);
-    }
+  for (const point of enclosingPoints) {
+    const position = place(point), key = cellOf(position).join(','), list = cells.get(key);
+    if (list) list.push(position); else cells.set(key, [position]);
   }
-  const drawnOutside: Record<string, number> = {};
-  ordered = shuffled.filter(point => {
-    if (enclosing.has(point.reference.join(','))) { drawnOutside[point.bank] = (drawnOutside[point.bank] ?? 0) + 1; kept[point.bank]!--; return false; }
+  ordered = ordered.filter(point => {
     const position = place(point.reference), fromSun = Math.hypot(...position);
     const taper = cap.taper ? Math.max(0, Math.min(1, (cap.taper[1] - fromSun) / (cap.taper[1] - cap.taper[0]))) : 1;
     const allowed = law(position) * kernelMeasure * taper, home = cellOf(position);
@@ -192,7 +195,6 @@ if (cap) {
     if (list) list.push(position); else cells.set(key, [position]);
     return true;
   });
-  if (recipe.within) console.log(`Already drawn by ${(recipe.within as string[]).join(', ')}: ${JSON.stringify(drawnOutside)}.`);
 }
 const palette = [...new Set(ordered.map(point => point.colour))], paletteIndex = new Map(palette.map((colour, index) => [colour, index]));
 // Around the galaxy's centre: its frame origin, the Sun-centred frame's axes and unit, bounds reaching the farthest dot.

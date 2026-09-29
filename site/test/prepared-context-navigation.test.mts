@@ -33,7 +33,7 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
   const flights: {id:string; reducedMotion?:boolean}[] = [], flightFocuses: PreparedNavigationFocus[] = [];
   const presentationFocuses: (PreparedNavigationFocus | null | undefined)[] = [];
   const callbacks = new Set<() => void>(), errors: Error[] = [], selections: (string | null)[] = [], writes: (string | URL)[] = [], content: Content[] = [];
-  const windowTarget = { location: new URL('https://example.test/mercury/?focus=catalogue:a&v=saved'),
+  const windowTarget = { location: new URL('https://example.test/catalogue-a/?v=saved'),
     history: { state: {}, replaceState(state: unknown, _: string, url?: string | URL | null) { assert.ok(url); windowTarget.location = new URL(url, windowTarget.location); writes.push(url); } } };
   const owner = { frame: { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0,0,0],
       presentationToReference: [1,0,0,0,-1,0,0,0,1], metersPerUnit: 1e18, bodyRadiusM: 1e18 },
@@ -82,7 +82,7 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
     },
     selectGalaxy: (id: string | null, focus?: PreparedNavigationFocus | null) => { selections.push(id); presentationFocuses.push(focus); },
     resolveGalaxy: (id: string): PreparedCatalogObject | null => {
-      if (!['catalogue:a','catalogue:b'].includes(id)) return null;
+      if (!['catalogue-a','catalogue-b'].includes(id)) return null;
       const galaxy: PreparedGalaxyRecord = { id, name: id, aliases: [], status: 'confirmed', positionM: [1e20,0,0],
         skyPosition: { raDeg: 0, decDeg: 0, sourceRef: 'positions:row' },
         distance: { valuePc: 1, method: 'Published distance', sourceRef: 'PublishedBibliographicKey' },
@@ -131,14 +131,14 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
     const finish = () => { if (requests.finish(request, 'finished')) available = true; };
     const fail = (error: unknown) => { if (requests.owns(request)) { assert.ok(error instanceof Error); errors.push(error); } };
     try {
-      const result = executor.apply(url, { signal: request.signal, isCurrent: () => requests.owns(request), frame, reducedMotion: !frame });
+      const result = executor.apply(url, { sceneId: 'mercury', signal: request.signal, isCurrent: () => requests.owns(request), frame, reducedMotion: !frame });
       if (result) return result.catch(fail).finally(finish);
     } catch (error) { fail(error); }
     finish();
   }
   const controller = {
     restore: (url: string) => apply(url, false),
-    select: ({ id }: { id: string }) => apply(withPreparedFocus(new URL(windowTarget.location.href), id, null).href, true),
+    select: ({ id }: { id: string }) => apply(withPreparedFocus(new URL(windowTarget.location.href), 'mercury', id, null).href, true),
     suspend() { available = false; requests.cancel(); },
     destroy() { available = false; requests.cancel(); executor.destroy(); },
   };
@@ -148,10 +148,10 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
 
 test('a saved lens link to an unavailable package still opens its actual catalogue record', () => {
   const f = fixture({ object: { detailedObjectId: 'helix' }, unavailableObjectIds: ['helix'] });
-  f.windowTarget.location.searchParams.set('focusLens', 'eso-vista');
+  f.windowTarget.location.searchParams.set('dataset', 'eso-vista');
   f.controller.restore(f.windowTarget.location.href);
   assert.deepEqual(f.errors, []);
-  assert.equal(last(f.content).record?.id, 'catalogue:a');
+  assert.equal(last(f.content).record?.id, 'catalogue-a');
   assert.equal(last(f.content).presentation, null);
   assert.deepEqual(f.lensWrites, []);
   f.controller.destroy();
@@ -174,7 +174,7 @@ test('a direct focus link without a saved camera frames its target immediately',
   const f = fixture();
   f.windowTarget.location.searchParams.delete('v');
   f.controller.restore(f.windowTarget.location.href);
-  assert.deepEqual(f.flights,[{id:'catalogue:a',reducedMotion:true}]);
+  assert.deepEqual(f.flights,[{id:'catalogue-a',reducedMotion:true}]);
   assert.deepEqual(f.errors,[]);
   f.controller.destroy();
 });
@@ -183,15 +183,15 @@ test('a focus link with a visible saved camera restores selection without refram
   const f = fixture();
   f.controller.restore(f.windowTarget.location.href);
   assert.deepEqual(f.flights,[]);
-  assert.equal(f.owner.preparedFocus()?.id,'catalogue:a');
+  assert.equal(f.owner.preparedFocus()?.id,'catalogue-a');
   f.controller.destroy();
 });
 
 test('a focus link whose saved camera looks away reframes the named target', () => {
   const f = fixture({ cameraPositionM: [1e20, 0, -1e19] });
   f.controller.restore(f.windowTarget.location.href);
-  assert.deepEqual(f.flights,[{id:'catalogue:a',reducedMotion:true}]);
-  assert.equal(f.owner.preparedFocus()?.id,'catalogue:a');
+  assert.deepEqual(f.flights,[{id:'catalogue-a',reducedMotion:true}]);
+  assert.equal(f.owner.preparedFocus()?.id,'catalogue-a');
   assert.equal(f.windowTarget.location.searchParams.has('v'), false);
   assert.deepEqual(f.errors,[]);
   f.controller.destroy();
@@ -200,7 +200,7 @@ test('a focus link whose saved camera looks away reframes the named target', () 
 test('a focus link whose saved camera puts the named target off-screen reframes it', () => {
   const f = fixture({ cameraPositionM: [2e20, 0, 1e19] });
   f.controller.restore(f.windowTarget.location.href);
-  assert.deepEqual(f.flights,[{id:'catalogue:a',reducedMotion:true}]);
+  assert.deepEqual(f.flights,[{id:'catalogue-a',reducedMotion:true}]);
   assert.equal(f.windowTarget.location.searchParams.has('v'), false);
   assert.deepEqual(f.errors,[]);
   f.controller.destroy();
@@ -209,13 +209,13 @@ test('a focus link whose saved camera puts the named target off-screen reframes 
 test('suspension isolates camera restore publications from incoming focus history and cancels an older selection flight', async () => {
   const f = fixture();
   f.controller.restore(f.windowTarget.location.href);
-  assert.equal(required(last(f.content).record).id, 'catalogue:a');
+  assert.equal(required(last(f.content).record).id, 'catalogue-a');
   assert.deepEqual(last(f.content).references.map(source => source.id), ['positions', 'PublishedBibliographicKey', 'membership']);
   assert.equal(required(last(f.content).record).distance.sourceRef, 'PublishedBibliographicKey');
-  const flight = f.controller.select({ id: 'catalogue:b' });
-  assert.equal(required(f.owner.preparedFocus()).id, 'catalogue:b');
-  assert.equal(required(last(f.content).record).id, 'catalogue:b');
-  const incoming = 'https://example.test/mercury/?focus=catalogue:a&v=restored';
+  const flight = f.controller.select({ id: 'catalogue-b' });
+  assert.equal(required(f.owner.preparedFocus()).id, 'catalogue-b');
+  assert.equal(required(last(f.content).record).id, 'catalogue-b');
+  const incoming = 'https://example.test/catalogue-a/?v=restored';
   f.windowTarget.location = new URL(incoming);
   f.controller.suspend();
   f.owner.setPreparedFocus(null); // Shared v restoration clears the runtime pivot.
@@ -224,8 +224,8 @@ test('suspension isolates camera restore publications from incoming focus histor
   await flight;
   assert.equal(f.windowTarget.location.href, incoming);
   f.controller.restore(incoming);
-  assert.equal(required(f.owner.preparedFocus()).id, 'catalogue:a');
-  assert.equal(required(last(f.content).record).id, 'catalogue:a');
+  assert.equal(required(f.owner.preparedFocus()).id, 'catalogue-a');
+  assert.equal(required(last(f.content).record).id, 'catalogue-a');
   assert.equal(f.windowTarget.location.href, incoming);
   assert.deepEqual(f.errors, []);
   f.controller.destroy();
@@ -236,7 +236,7 @@ test('an invalid incoming catalogue ID remains available for diagnosis after res
   const f = fixture();
   f.controller.restore(f.windowTarget.location.href);
   f.controller.suspend();
-  const incoming = 'https://example.test/mercury/?focus=unknown&v=restored';
+  const incoming = 'https://example.test/unknown/?v=restored';
   f.windowTarget.location = new URL(incoming);
   f.owner.setPreparedFocus(null);
   await f.controller.restore(incoming);
@@ -294,7 +294,7 @@ test('volume focus uses its authored framing radius before transparent bounds an
 
 test('focused lens selection follows applied runtime state while URL restore keeps the same camera owner', () => {
   const f = fixture({ volumeLensFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
-  f.windowTarget.location.searchParams.set('focusLens', 'second');
+  f.windowTarget.location.searchParams.set('dataset', 'second');
   const incoming = f.windowTarget.location.href;
   f.controller.restore(incoming);
   assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'second');
@@ -306,7 +306,7 @@ test('focused lens selection follows applied runtime state while URL restore kee
   assert.equal(f.owner.preparedFocus(), focus, 'Changing lens does not replace or move the camera focus');
   assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'third');
   assert.equal(required(last(f.content).presentation).selectedLens, 'third');
-  assert.equal(f.windowTarget.location.searchParams.get('focusLens'), 'third');
+  assert.equal(f.windowTarget.location.searchParams.get('dataset'), 'third');
   assert.equal(f.windowTarget.location.searchParams.get('v'), 'saved');
   f.controller.suspend();
   controls.selectLens('first');
@@ -314,14 +314,14 @@ test('focused lens selection follows applied runtime state while URL restore kee
   f.windowTarget.location = new URL(incoming);
   f.controller.restore(incoming);
   assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'second');
-  f.windowTarget.location.searchParams.delete('focusLens');
+  f.windowTarget.location.searchParams.delete('dataset');
   f.controller.restore(f.windowTarget.location.href);
   assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'first', 'A plain focus restores its authored default');
-  assert.equal(f.windowTarget.location.searchParams.get('focusLens'), 'first');
+  assert.equal(f.windowTarget.location.searchParams.get('dataset'), 'first');
   f.owner.setPreparedFocus(null);
   assert.equal(last(f.content).presentation, null);
-  assert.equal(f.windowTarget.location.searchParams.has('focus'), false);
-  assert.equal(f.windowTarget.location.searchParams.has('focusLens'), false);
+  assert.equal(f.windowTarget.location.pathname, '/mercury/', 'Clearing the focus returns to the scene page');
+  assert.equal(f.windowTarget.location.searchParams.has('dataset'), false);
   assert.equal(f.lensCallbacks.size, 0);
   controls.selectLens('third');
   assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'first', 'Stale controls cannot mutate a departed focus');
@@ -332,7 +332,7 @@ test('focused lens selection follows applied runtime state while URL restore kee
 test('a saved lens waits for its lazy bank instead of rejecting the focus as unknown', async () => {
   const bank = volumeBank();
   const f = fixture({ volumeLensFrames, deferredVolumeBank: bank, object: { detailedObjectId: bank.objectId } });
-  f.windowTarget.location.searchParams.set('focusLens', 'second');
+  f.windowTarget.location.searchParams.set('dataset', 'second');
   const incoming = f.windowTarget.location.href;
   const restoring = f.controller.restore(incoming);
   assert.deepEqual(f.errors, [], 'A bank that is still loading is not an unknown focus lens');
@@ -340,18 +340,18 @@ test('a saved lens waits for its lazy bank instead of rejecting the focus as unk
   assert.deepEqual(f.lensWrites, []);
   f.resolveDeferredVolumeBank(); await restoring;
   assert.deepEqual(f.errors, []);
-  assert.equal(f.owner.preparedFocus()?.id, 'catalogue:a');
+  assert.equal(f.owner.preparedFocus()?.id, 'catalogue-a');
   assert.deepEqual(f.lensWrites, ['second']);
-  assert.equal(last(f.content).record?.id, 'catalogue:a');
+  assert.equal(last(f.content).record?.id, 'catalogue-a');
   assert.equal(required(last(f.content).presentation).selectedLens, 'second');
   assert.equal(f.windowTarget.location.href, incoming, 'The saved lens link is preserved exactly');
   f.controller.destroy();
 });
 
 test('invalid focused lenses retain their diagnostic URL and never apply an arbitrary bank', () => {
-  for (const query of ['focusLens=unknown', 'focusLens=second&focusLens=third']) {
+  for (const query of ['dataset=unknown', 'dataset=second&dataset=third']) {
     const f = fixture({ volumeLensFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
-    const incoming = `https://example.test/mercury/?focus=catalogue:a&${query}`;
+    const incoming = `https://example.test/catalogue-a/?${query}`;
     f.windowTarget.location = new URL(incoming);
     f.controller.restore(incoming);
     assert.equal(f.errors.length, 1);
@@ -363,15 +363,16 @@ test('invalid focused lenses retain their diagnostic URL and never apply an arbi
   }
 });
 
-test('a lens query without a focus is removed and focused bank subscriptions are released on destruction', () => {
+test("a scene page's dataset is the scene's own, never a focus lens, and focused bank subscriptions are released on destruction", () => {
   const f = fixture({ volumeLensFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
   f.controller.restore(f.windowTarget.location.href);
   assert.equal(f.lensCallbacks.size, 1);
-  f.windowTarget.location = new URL('https://example.test/mercury/?focusLens=third&v=saved');
+  f.windowTarget.location = new URL('https://example.test/mercury/?dataset=third&v=saved');
   f.controller.restore(f.windowTarget.location.href);
-  assert.equal(f.windowTarget.location.searchParams.has('focusLens'), false);
+  assert.equal(f.windowTarget.location.searchParams.get('dataset'), 'third');
   assert.equal(f.windowTarget.location.searchParams.get('v'), 'saved');
-  f.windowTarget.location.searchParams.set('focus', 'catalogue:a');
+  assert.equal(f.lensCallbacks.size, 0);
+  f.windowTarget.location = new URL('https://example.test/catalogue-a/?v=saved');
   f.controller.restore(f.windowTarget.location.href);
   assert.equal(f.lensCallbacks.size, 1);
   f.controller.destroy();
@@ -381,7 +382,7 @@ test('a lens query without a focus is removed and focused bank subscriptions are
 
 test('an image-layer focus exposes its single optical dataset without volume-only actions', () => {
   const f = fixture({ imageLayerFrames: {detailed:baseFrame}, object:{detailedObjectId:'detailed'} });
-  f.controller.restore('https://example.test/sun/?focus=catalogue:a&focusLens=optical');
+  f.controller.restore('https://example.test/catalogue-a/?dataset=optical');
   assert.deepEqual(f.errors, []);
   const controls = required(last(f.content).presentation);
   assert.equal(controls.selectedLens, 'optical');
@@ -405,24 +406,24 @@ function coldVolumeFixture() {
 
 test('cold native focus waits for the real bank framing before choosing a destination', async () => {
   const f = coldVolumeFixture();
-  const restoring = f.controller.restore('https://example.test/sun/?focus=catalogue:a');
+  const restoring = f.controller.restore('https://example.test/catalogue-a/');
   assert.deepEqual(f.flights, [], 'Loading may not fly using descriptor fallback bounds');
   assert.equal(f.owner.preparedFocus(), null);
   f.load.accept(volumeBank()); await restoring;
   assert.equal(last(f.flightFocuses).framingRadiusM, 1650 * baseFrame.metersPerUnit);
-  assert.deepEqual(f.flights, [{id:'catalogue:a',reducedMotion:true}]);
+  assert.deepEqual(f.flights, [{id:'catalogue-a',reducedMotion:true}]);
   assert.deepEqual(f.errors, []); f.controller.destroy();
 });
 
 test('ordinary cold selection waits for the same authored framing and cancellation prevents stale focus', async () => {
   const f = coldVolumeFixture();
-  const selecting = f.controller.select({id:'catalogue:a'});
+  const selecting = f.controller.select({id:'catalogue-a'});
   assert.deepEqual(f.flights, []);
   f.load.accept(volumeBank()); await new Promise<void>(resolve => setImmediate(resolve));
   assert.equal(last(f.flightFocuses).framingRadiusM, 1650 * baseFrame.metersPerUnit);
   f.controller.suspend(); await selecting; f.controller.destroy();
   const cancelled = coldVolumeFixture();
-  const stale = cancelled.controller.select({id:'catalogue:a'});
+  const stale = cancelled.controller.select({id:'catalogue-a'});
   cancelled.controller.suspend();
   cancelled.owner.setPreparedFocus({id:'newer-focus',positionM:[0,0,0],framingRadiusM:1,limits:{minimumDistanceM:1,maximumDistanceM:2}});
   cancelled.load.accept(volumeBank()); await new Promise<void>(resolve => setImmediate(resolve));
@@ -433,7 +434,7 @@ test('ordinary cold selection waits for the same authored framing and cancellati
 
 test('cold saved camera keeps its pose while waiting for an explicitly selected lens', async () => {
   const f = coldVolumeFixture();
-  const restoring = f.controller.restore('https://example.test/sun/?focus=catalogue:a&focusLens=second&v=exact-saved-pose');
+  const restoring = f.controller.restore('https://example.test/catalogue-a/?dataset=second&v=exact-saved-pose');
   assert.deepEqual(f.errors, []); assert.deepEqual(f.flights, []);
   f.load.accept(volumeBank()); await restoring;
   assert.deepEqual(f.flights, []); assert.equal(f.owner.preparedFocus()?.framingRadiusM,1650 * baseFrame.metersPerUnit);
@@ -442,7 +443,7 @@ test('cold saved camera keeps its pose while waiting for an explicitly selected 
 
 test('a failed bank load reports its actual error and never falls back to an inaccurate destination', async () => {
   const f = coldVolumeFixture(), failed = Error('Failed to fetch prepared bank');
-  const restoring = f.controller.restore('https://example.test/sun/?focus=catalogue:a');
+  const restoring = f.controller.restore('https://example.test/catalogue-a/');
   f.load.reject(failed); await restoring;
   assert.deepEqual(f.flights, []); assert.equal(f.owner.preparedFocus(),null);
   assert.deepEqual(f.errors,[failed]); f.controller.destroy();
@@ -450,10 +451,10 @@ test('a failed bank load reports its actual error and never falls back to an ina
 
 test('a later saved restore supersedes a pending native focus without a delayed flight', async () => {
   const f = coldVolumeFixture();
-  const old = f.controller.restore('https://example.test/sun/?focus=catalogue:a');
-  const newer = f.controller.restore('https://example.test/sun/?focus=catalogue:b&v=saved-later-pose');
+  const old = f.controller.restore('https://example.test/catalogue-a/');
+  const newer = f.controller.restore('https://example.test/catalogue-b/?v=saved-later-pose');
   f.load.accept(volumeBank()); await Promise.all([old,newer]);
-  assert.equal(f.owner.preparedFocus()?.id,'catalogue:b');
+  assert.equal(f.owner.preparedFocus()?.id,'catalogue-b');
   assert.deepEqual(f.flights,[]); assert.deepEqual(f.errors,[]); f.controller.destroy();
 });
 
@@ -461,8 +462,8 @@ test('a later saved restore supersedes a pending native focus without a delayed 
 test('selecting a catalogue focus replaces the overview it supersedes', async () => {
   const f = fixture();
   f.windowTarget.location = new URL('https://example.test/sun/?overview=system');
-  const flight = f.controller.select({ id: 'catalogue:b' });
-  assert.equal(f.windowTarget.location.searchParams.get('focus'), 'catalogue:b');
+  const flight = f.controller.select({ id: 'catalogue-b' });
+  assert.equal(preparedFocusFromUrl(f.windowTarget.location, 'mercury'), 'catalogue-b');
   assert.equal(f.windowTarget.location.searchParams.has('overview'), false,
     'a focus and an overview are one camera, so the URL may name only one');
   f.controller.suspend(); await flight;
@@ -475,9 +476,9 @@ test('shared context receives the exact authoritative focus on restore, switch a
   f.controller.restore(f.windowTarget.location.href);
   assert.equal(last(f.presentationFocuses), f.owner.preparedFocus());
   assert.equal(required(last(f.presentationFocuses)).framingRadiusM, 500 * baseFrame.metersPerUnit);
-  const selecting = f.controller.select({ id: 'catalogue:b' });
+  const selecting = f.controller.select({ id: 'catalogue-b' });
   assert.equal(last(f.presentationFocuses), f.owner.preparedFocus());
-  assert.equal(required(last(f.presentationFocuses)).id, 'catalogue:b');
+  assert.equal(required(last(f.presentationFocuses)).id, 'catalogue-b');
   f.owner.setPreparedFocus(null);
   assert.equal(f.presentationFocuses.at(-1), null);
   f.controller.suspend(); await selecting;
@@ -487,16 +488,16 @@ test('shared context receives the exact authoritative focus on restore, switch a
 test('a focus waiting for its lazy bank still owns the URL, and resolves to one state', async () => {
   const bank = volumeBank();
   const f = fixture({ volumeLensFrames, deferredVolumeBank: bank, object: { detailedObjectId: bank.objectId } });
-  f.windowTarget.location = new URL('https://example.test/sun/?overview=system&focus=catalogue:a');
+  f.windowTarget.location = new URL('https://example.test/catalogue-a/?overview=system');
   const restoring = f.controller.restore(f.windowTarget.location.href);
   // The runtime cannot report this focus yet, but the URL names it, so nothing
   // may treat the selection as absent and write an overview over it.
   assert.equal(f.owner.preparedFocus(), null);
-  assert.equal(preparedFocusFromUrl(f.windowTarget.location.href), 'catalogue:a');
-  assert.equal(overviewScopeFromUrl(f.windowTarget.location.href), null, 'a pending focus leaves no overview to resolve');
+  assert.equal(preparedFocusFromUrl(f.windowTarget.location.href, 'mercury'), 'catalogue-a');
+  assert.equal(overviewScopeFromUrl(f.windowTarget.location.href, 'mercury'), null, 'a pending focus leaves no overview to resolve');
   f.resolveDeferredVolumeBank(); await restoring;
-  assert.equal(f.owner.preparedFocus()?.id, 'catalogue:a');
-  assert.equal(f.windowTarget.location.searchParams.get('focus'), 'catalogue:a');
+  assert.equal(f.owner.preparedFocus()?.id, 'catalogue-a');
+  assert.equal(preparedFocusFromUrl(f.windowTarget.location, 'mercury'), 'catalogue-a');
   assert.equal(f.windowTarget.location.searchParams.has('overview'), false, 'exactly one state survives');
   assert.deepEqual(f.errors, []);
   f.controller.destroy();

@@ -29,7 +29,7 @@ const index = { schema: 'cssearth-prepared-feature-index@2',
 const pin = { url: '/features/index.json', count: 2 };
 const entry = (id: string, name: string, classification: string, distanceMeters: number, searchNames: string[] = []): CatalogueIndexEntry => ({
   kind: 'scene', id, name, searchNames, classification, classificationName: classification === 'satellite' ? 'moon' : classification, systemName: 'solar system',
-  route: `/${id}/`, illustration: false, candidate: false, distanceMeters,
+  route: `/${id}/`, illustration: false, distanceMeters,
   detail: { text: `${distanceMeters} au`, value: String(distanceMeters), unit: 'au', title: 'Observer distance', ariaLabel: `${distanceMeters} au. Observer distance` },
   source: { subject: `object:${id}`, document: `/sources/${id}/`, label: `Sources for ${name}` }, marker: { kind: 'scene', id: 'earth', color: '#fff' } });
 // Ninety asteroids fill three pages; Europa the moon and 52 Europa the asteroid share a name.

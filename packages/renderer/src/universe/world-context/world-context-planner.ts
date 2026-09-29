@@ -161,9 +161,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const orbitOverview = selectionPreview ? false : overview;
       const frame = createWorldFrameProjection(plan.focus, orbitFocus.body, toEye, project);
       const selectedEye = frame.eye(selected);
-      // Past a system (its bodies' fade), a host star that is not featured gives way to the galaxy's catalogue dots: one
-      // value for the whole field, from the selected body, shared with those dots (universe-background.ts).
-      const galaxyHandoff = logarithmicFade(Math.hypot(...selectedEye), plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+      // Past a system (bodies hidden, then ten times that), a star that is not featured gives way to the catalogue dots.
+      const galaxyHandoff = logarithmicFade(Math.hypot(...selectedEye), plan.system.hiddenDistanceM, plan.system.hiddenDistanceM * 10);
       const selectedDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, selectedDiameter);
@@ -340,9 +339,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // the band where the overview becomes the Local Group, as its name does below. A star in no system has no other fade,
         // so without this every star of the Milky Way stayed a dot from intergalactic distances.
         const beyondLocalGroup = logarithmicFade(Math.hypot(...eye), LOCAL_GROUP_SCALE.returnDistanceM, LOCAL_GROUP_SCALE.enterDistanceM);
-        // Past the system a star gives way to the galaxy's catalogue dots (its planets already fade with their system); the
-        // world's focus stays as the reference point, a featured star stays as a landmark, and a body of another kind (a
-        // black hole) keeps its dot.
+        // The focus, a featured star and a body of another kind (a black hole) keep their dots; planets fade with their system.
         const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
           (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
         const atGalaxyScale = galaxyHost ? galaxyHandoff : 0;
