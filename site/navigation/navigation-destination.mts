@@ -1,12 +1,10 @@
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
-import { SOLAR_SYSTEM_ID } from '../object-systems.mts';
-import { OVERVIEW_TITLES } from '../overview-titles.mts';
+import { isOverviewPage } from './navigation-scope.mts';
 
 /** Where the application opens something, and the catalogue subject to select in
  * place when that destination is a focus on the already mounted world. */
 export interface NavigationDestination { readonly href: string; readonly focusId: string | null }
 
-const galacticRoute = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!.route;
 const pages = new Map(SCENE_OBJECTS.map(object => [object.id, object.route]));
 const focuses = new Map(OBJECTS.filter(object => object.kind === 'prepared-focus').map(object => [object.id, object.route]));
 
@@ -20,6 +18,6 @@ export function appNavigationDestination(objectId: string, focusId: string | nul
   if (page !== undefined) return { href: page, focusId: null };
   const focus = focusId === null ? undefined : focuses.get(focusId);
   if (focus !== undefined) return { href: focus, focusId };
-  if (Object.hasOwn(OVERVIEW_TITLES, objectId)) return { href: `${galacticRoute}?overview=${objectId}`, focusId: null };
+  if (isOverviewPage(objectId)) return { href: `/${objectId}/`, focusId: null };
   return null;
 }

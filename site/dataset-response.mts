@@ -6,7 +6,7 @@ import { renderNativeFocus } from './focus-response.mts';
 import { requiredElement } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';
-import { preparedFocusFromUrl } from './navigation/navigation-scope.mts';
+import { drawnPageFromUrl, preparedFocusFromUrl } from './navigation/navigation-scope.mts';
 
 function region(html: string, name: string) {
   const marker = `<!--${name}:start-->`, start = html.indexOf(marker) + marker.length;
@@ -42,7 +42,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   const descriptorRegion = region(html, 'prepared-descriptor');
   const descriptor = parseObjectDescriptor(JSON.parse(requiredElement(descriptorRegion.document, 'script[data-prepared-descriptor]').textContent ?? ''));
   const objectId = descriptor.id, focusId = preparedFocusFromUrl(url, objectId);
-  if ((pageId !== objectId && focusId !== pageId) || descriptor.prepared?.url !== 'prepared/object.json') {
+  if ((pageId !== objectId && drawnPageFromUrl(url, objectId) !== pageId) || descriptor.prepared?.url !== 'prepared/object.json') {
     throw new Error(`Prepared dataset descriptor identity drifted: page ${pageId}, scene ${objectId}, focus ${String(focusId)}.`);
   }
   // On a catalogue focus's page `dataset` selects the focus's lens; the scene keeps its own default.

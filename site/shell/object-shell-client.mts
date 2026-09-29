@@ -1,6 +1,8 @@
 import { createObjectBrowserController } from '../object-browser.mts';
 import { applySeoHead, focusSeo, objectSeo } from '../seo.mts';
 import { knownObject } from '../object-directory.mts';
+import { isOverviewPage } from '../navigation/navigation-scope.mts';
+import { OVERVIEW_TITLES } from '../overview-titles.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import { createPreparedFocusCard } from '../prepared-focus-card.mts';
 import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from '../focus-fragment.mts';
@@ -108,13 +110,17 @@ export function mountObjectShell({
     if (lifetime.disposed) return;
     const subject = readSelection();
     if (presentedSubject === subject) { updateBodyCard(); return; }
-    const leftFocus = presentedSubject?.kind === 'focus';
+    // What the world draws around the scene (a catalogue focus, an overview) is its own page, `/<id>/`.
+    const drawnPage = (selected: typeof subject | null) => selected?.kind === 'focus' ? selected.record
+      : selected?.kind === 'overview' && isOverviewPage(selected.overview.scope)
+        ? { id: selected.overview.scope, name: OVERVIEW_TITLES[selected.overview.scope].label } : null;
+    const leftPage = presentedSubject?.kind === 'focus' || drawnPage(presentedSubject) !== null;
     presentedSubject = subject;
-    const focus = subject.kind === 'focus' ? subject : null;
-    // A focus is its own page; clearing it returns to the scene's page, whose head and forms a scene change would
-    // otherwise write (object-browser.mts bindObject).
-    if (focus?.record) presentPage(`/${focus.record.id}/`, focusSeo(focus.record));
-    else if (leftFocus) {
+    const focus = subject.kind === 'focus' ? subject : null, page = drawnPage(subject);
+    // Leaving one returns to the scene's page, whose head and forms a scene change would otherwise write
+    // (object-browser.mts bindObject).
+    if (page) presentPage(`/${page.id}/`, focusSeo(page));
+    else if (leftPage) {
       const scene = knownObject(subject.kind === 'object' ? subject.objectId : subject.kind === 'satellite-system' ? subject.hostId : objectId);
       if (scene?.kind === 'scene') presentPage(scene.route, objectSeo(scene));
     }

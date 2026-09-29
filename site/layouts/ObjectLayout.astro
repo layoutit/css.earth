@@ -6,6 +6,8 @@ import { initialShellContextBootstrap } from '../initial-shell-context.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
 import { requireObject, requireSceneObject } from "../objects.mts";
 import { focusSeo, objectSeo } from "../seo.mts";
+import { isOverviewPage } from "../navigation/navigation-scope.mts";
+import { OVERVIEW_TITLES } from "../overview-titles.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
 import "../../src/platform/cubic-sky.css";
 import "@cssearth/renderer/styles/volume.css";
@@ -39,9 +41,9 @@ const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireSceneObject(objectId);
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
-const pageRecord = requireObject(pageId);
 const seoOptions = { socialImages: availableSocialImages(), defaultSocialImageId: DEFAULT_SOCIAL_IMAGE_ID };
-const seo = pageRecord.kind === 'prepared-focus' ? focusSeo(pageRecord, seoOptions) : objectSeo(pageRecord, seoOptions);
+const pageRecord = isOverviewPage(pageId) ? { kind: 'overview' as const, id: pageId, name: OVERVIEW_TITLES[pageId].label } : requireObject(pageId);
+const seo = pageRecord.kind === 'scene' ? objectSeo(pageRecord, seoOptions) : focusSeo(pageRecord, seoOptions);
 ---
 
 <!doctype html>

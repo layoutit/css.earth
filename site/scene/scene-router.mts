@@ -25,7 +25,7 @@ import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { readInitialFocus } from '../focus-catalog.mts';
-import { preparedFocusFromUrl } from '../navigation/navigation-scope.mts';
+import { drawnPageFromUrl, isOverviewPage, WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 import { retainInitialScene } from '../initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from '../navigation/navigation-lifecycle.mts';
@@ -317,7 +317,7 @@ export function createSceneRouter({
         // A link flies in place to any body the world draws; one whose entry has loaded must also share this frame.
         unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, navigable: id => navigable(id), navigate, onError: report });
       }
-      navigable = id => registry.knownObject(id)?.kind === 'prepared-focus' || worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
+      navigable = id => isOverviewPage(id) || registry.knownObject(id)?.kind === 'prepared-focus' || worldIds.has(id) && (!registry.knownObject(id) || navigation.supports(objectId, id));
       if (destroyed) navigation.destroy();
       return context = { registry, objects, navigation, selection, activation };
     });
@@ -351,11 +351,12 @@ export function createSceneRouter({
     if (destroyed) return false;
     if (intent.kind === 'focus' && scenes.current) id = objectId;
     else if (id !== objectId) {
-      // A catalogue focus's page (a link or history entry) selects it in the mounted scene, or in its host's on the first mount.
+      // A page of something the world draws (a catalogue subject or an overview; a link or history entry) keeps the
+      // mounted scene, or mounts the world's host on the first mount (navigation-scope.mts).
       const { registry } = await ensureContext();
-      const entry = registry.knownObject(id) ?? await registry.loadObject(id).catch(() => null);
+      const drawn = isOverviewPage(id) || (registry.knownObject(id) ?? await registry.loadObject(id).catch(() => null))?.kind === 'prepared-focus';
       if (destroyed) return false;
-      if (entry?.kind === 'prepared-focus') id = scenes.current ? objectId : entry.sceneHostId;
+      if (drawn) id = scenes.current ? objectId : WORLD_HOST_ID;
     }
     // Entry and system-view reads may finish in any order. Only the latest selection can start a flight.
     const ready = await readiness.prepare(id, intent.kind !== 'feature');
@@ -528,7 +529,7 @@ export function createSceneRouter({
   /** A focus or overview arrival is placed by the world, so it cannot start before the world has loaded. */
   function worldOwnsArrival() {
     const url = new URL(windowTarget.location.href);
-    return preparedFocusFromUrl(url, objectId) !== null || ['overview', 'view'].some(name => url.searchParams.has(name));
+    return drawnPageFromUrl(url, objectId) !== null || ['overview', 'view'].some(name => url.searchParams.has(name));
   }
   function report(error: unknown) {
     try { reportError(error); } catch { /* Diagnostics cannot interrupt cleanup. */ }

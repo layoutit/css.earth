@@ -94,7 +94,7 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, o
         const lens = subject.presentation?.selectedLens ?? (preparedFocusFromUrl(url, scene) === subject.id ? url.searchParams.get('dataset') : null);
         return withPreparedFocus(url, scene, subject.id, lens).href;
       }
-      return withSatelliteSystemView(withOverviewScope(withPreparedFocus(url, scene, null, null),
+      return withSatelliteSystemView(withOverviewScope(withPreparedFocus(url, scene, null, null), scene,
         subject.kind === 'overview' ? subject.overview.scope : null), subject.kind === 'satellite-system').href;
     },
   };
