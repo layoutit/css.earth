@@ -1,0 +1,25 @@
+{
+  "host": "toi-1782",
+  "planets": [
+    {
+      "id": "toi-1782c",
+      "name": "TOI-1782 c",
+      "description": "Transiting planet of TOI-1782 with a 4.99-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract",
+        "credit": "Crossfield et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CROSSFIELD_ET_AL_2025",
+        "planetName": "TOI-1782.01"
+      },
+      "text": {
+        "card": "TOI-1782 c was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is one of 2 planets known around TOI-1782. Its orbit and size follow Crossfield et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CROSSFIELD_ET_AL_2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 2; pl_orbper 4.987641028, pl_radj 0.21125917, pl_bmassj 0.0195"
+      },
+      "order": 4941
+    }
+  ]
+}

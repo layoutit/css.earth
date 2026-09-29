@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-108236d",
+  "card": {
+    "text": "HD 108236 d was found in 2021 by TESS as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202039608",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract",
+        "label": "Bonfanti et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 14.175876, pl_radj 0.22651441, pl_bmassj 0.022"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 5 planets known around HD 108236. Its orbit and size follow Bonfanti et al. 2021's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202039608",
+        "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract",
+        "label": "Bonfanti et al. 2021",
+        "checked": "2026-09-29",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONFANTI_ET_AL__2021): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 5; pl_orbper 14.175876, pl_radj 0.22651441, pl_bmassj 0.022"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

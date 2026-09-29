@@ -1,0 +1,25 @@
+{
+  "host": "toi-1203",
+  "planets": [
+    {
+      "id": "toi-1203d",
+      "name": "TOI-1203 d",
+      "description": "Transiting planet of TOI-1203 with a 25.5-day year, found in 2021.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025arXiv250910136G/abstract",
+        "credit": "Gandolfi et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GANDOLFI_ET_AL__2025",
+        "planetName": "TOI-1203.01"
+      },
+      "text": {
+        "card": "TOI-1203 d was found in 2021 by TESS as it crossed its star.",
+        "introduction": "It is one of 4 planets known around TOI-1203. Its orbit and size follow Gandolfi et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GANDOLFI_ET_AL__2025): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 4; pl_orbper 25.502672, pl_radj 0.26032697, pl_bmassj 0.02325154"
+      },
+      "order": 4916
+    }
+  ]
+}

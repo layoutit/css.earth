@@ -1,0 +1,44 @@
+{
+  "id": "toi-261",
+  "name": "TOI-261",
+  "system": "TOI-261 system",
+  "description": "Star of 5,890 K, 114 parsecs away, with 1 transiting planet.",
+  "target": "TOI-261",
+  "gaia": "2345033662373296768",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract",
+    "credit": "Hord et al. 2024"
+  },
+  "radius": {
+    "value": 1.28018,
+    "source": "Hord et al. 2024, the stellar radius of the default parameter set of TOI-261.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract"
+  },
+  "mass": {
+    "value": 0.496728,
+    "source": "Hord et al. 2024, the stellar mass of the default parameter set of TOI-261.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract"
+  },
+  "temperature": {
+    "value": 5890.3,
+    "source": "Hord et al. 2024, the stellar temperature of the default parameter set of TOI-261.01 in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "TOI-261 b crosses TOI-261 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Hord et al. 2024.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname HORD_ET_AL__2024): st_teff 5890.3, st_rad 1.28018, st_mass 0.496728"
+  },
+  "notes": [
+    "TOI-261.02: no archive row gives its inclination"
+  ],
+  "radialVelocity": {
+    "value": 9.2,
+    "uncertainty": 0.76,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2345033662373296768 (quality A), from 2020AJ....160...83S; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....160...83S/abstract"
+  },
+  "order": 4948
+}

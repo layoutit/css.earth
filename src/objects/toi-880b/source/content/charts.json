@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/toi-880b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "toi-880b-orbits",
+      "title": "TOI-880 b: orbits around TOI-880",
+      "output": "toi-880b-system-orbits.svg",
+      "system": "toi-880",
+      "highlight": "toi-880b",
+      "description": "The orbits of TOI-880's planets in this map from above, to scale, with TOI-880 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 2.57359428214 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "toi-880b-transit",
+      "title": "TOI-880 b: its transit",
+      "description": "TOI-880 b crossing its star, as TESS recorded it: 2 sectors (33, 87) of the SPOC pipeline's 2-minute light curves of TIC 34077285, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 10 minutes later to where TESS measures the dip, inside the published ephemeris's 3-sigma uncertainty of 660 minutes at these dates, then averaged in 8-minute bins. Error bars are each bin's standard error.",
+      "output": "toi-880b-transit.svg",
+      "metadata": {
+        "tic": "TIC 34077285",
+        "sectors": [
+          33,
+          87
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "toi-880b",
+      "sources": [
+        "photometry/tess/tess2020351194500-s0033-0000000034077285-0203-s_lc.fits",
+        "photometry/tess/tess2024353092137-s0087-0000000034077285-0284-s_lc.fits"
+      ],
+      "durationHours": 1.97,
+      "binMinutes": 8,
+      "alignMinutes": 10,
+      "notes": [
+        "TESS 2-min SPOC · sectors 33, 87",
+        "Aligned on TESS's dip, 10 min late; 8-min bins.",
+        "The ephemeris's own 1σ there is 220 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

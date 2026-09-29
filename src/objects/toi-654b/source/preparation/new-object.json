@@ -1,0 +1,25 @@
+{
+  "host": "toi-654",
+  "planets": [
+    {
+      "id": "toi-654b",
+      "name": "TOI-654 b",
+      "description": "Transiting planet of TOI-654 with a 1.53-day year, found in 2024.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2025PASJ...77.1101I/abstract",
+        "credit": "Ikuta et al. 2025"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "IKUTA_ET_AL_2025",
+        "planetName": "TOI-654.01"
+      },
+      "text": {
+        "card": "TOI-654 b was found in 2024 by TESS as it crossed its star.",
+        "introduction": "It is the only planet known around TOI-654. Its orbit and size follow Ikuta et al. 2025's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname IKUTA_ET_AL_2025): disc_year 2024, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 1.527561, pl_radj 0.21215132, pl_bmassj 0.02740472"
+      },
+      "order": 4962
+    }
+  ]
+}
