@@ -6,12 +6,12 @@ import type { ICruiseOptions } from 'dependency-cruiser';
  * `*.config.*`) are added from the tracked file list, and `.astro` files are scanned separately
  * (`astro-imports.mts`), because dependency-cruiser has no `.astro` transpiler. `.github/scripts` holds the CI and
  * repository checks. */
-export const CRUISE_ROOTS = ['packages', 'src', 'site', 'tools', 'labs', 'tests', 'netlify', '.github/scripts'] as const;
+export const CRUISE_ROOTS = ['packages', 'src', 'site', 'labs', 'tests', 'netlify', '.github/scripts'] as const;
 export const ROOT_CONFIG_FILE = /^[^/]+\.config\.[cm]?[jt]s$/u;
 
 /** Resolution follows the repository's own TypeScript, tsconfig, `package.json#imports` and pnpm
  * workspace rules; `.astro` imports go through the same resolver (`resolver.mts`). The `prepared/` exclude is
- * anchored to bodies' baked output: a bare `/prepared/` also hid the 23 source files in `tools/prepared/`. */
+ * anchored to bodies' baked output: a bare `/prepared/` also hid the 23 source files of a former `prepared/` source folder. */
 export const RESOLVE_EXTENSIONS = ['.ts', '.mts', '.tsx', '.js', '.mjs', '.cjs', '.d.ts', '.d.mts', '.json', '.astro'];
 
 export const EXCLUDE_PATHS = ['(^|/)node_modules/', '(^|/)output/', '(^|/)\\.astro/', '(^|/)atlas/', '^src/objects/[^/]+/prepared/', 'source-cache/'];

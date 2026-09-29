@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-28",
+  "id": "leleakuhonua",
+  "name": "Leleākūhonua",
+  "titleLabel": "Leleākūhonua",
+  "horizons": "541132;",
+  "aliases": [
+    "541132 Leleākūhonua",
+    "2015 TG387",
+    "Leleakuhonua"
+  ],
+  "classification": "trans-neptunian",
+  "population": "Extreme trans-Neptunian object",
+  "fullAxesKm": [
+    220,
+    220,
+    220
+  ],
+  "radiusKm": 110.0,
+  "axesStatus": "Equal axes at the occultation radius, which assumes a circular outline.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "Not adopted",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "rotationFact": false,
+  "shapeLabel": "Sphere at the occultation radius",
+  "source": "https://arxiv.org/abs/2011.03889",
+  "credit": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile",
+  "papers": [
+    "https://arxiv.org/abs/2011.03889",
+    "https://arxiv.org/abs/1810.00013",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+  ],
+  "shapeMeaning": "Sphere of radius 110 km (+14/−10 km), from one detection and one nearby non-detection of the 2018 October 20 stellar occultation (Buie et al. 2020). The radius assumes a circular outline; the shape is not measured.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Leleākūhonua never comes closer to the Sun than about 65 au, and its orbit reaches beyond 2,500 au. Its discoverers reported it as the third known member of the inner Oort cloud.",
+  "card": "Found in 2015; its orbit reaches more than 2,500 au from the Sun.",
+  "datasetSummary": "A sphere of radius 110 km, measured in a 2018 stellar occultation assuming a circular outline.",
+  "distanceAu": 75.56409028198392,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-small-body-database",
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "label": "JPL Small-Body Database",
+      "checked": "2026-09-28",
+      "locator": "Record for 541132 Leleākūhonua (2015 TG387): q = 64.7 au, a = 1322 au, e = 0.951 (Horizons elements at 2026-09-03 TDB); discovery 2015 Oct. 13 at Mauna Kea"
+    },
+    {
+      "catalogueId": "arxiv-1810-00013",
+      "url": "https://arxiv.org/abs/1810.00013",
+      "label": "Sheppard, Trujillo, Tholen & Kaib (2019), The Astronomical Journal 157, 139",
+      "checked": "2026-09-28",
+      "locator": "Abstract: the third known inner Oort cloud object after Sedna and 2012 VP113"
+    }
+  ],
+  "references": [
+    {
+      "file": "buie-2020.pdf",
+      "url": "https://arxiv.org/pdf/2011.03889v1",
+      "license": "Original paper remains author/publisher copyright and is restored from its public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+      "licenseEvidence": [
+        "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "extraction": "Abstract: circular profile radius r = 110 +14/−10 km; geometric albedo 0.21 for adopted H_V = 5.6."
+    }
+  ]
+}

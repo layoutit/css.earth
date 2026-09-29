@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "galaxies",
+  "table": {
+    "path": "cf4-hyperleda.csv.gz",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+PGC,DM,e_DM,DMtf,DMfp,DMsbf,RAJ2000,DEJ2000+FROM+%22J/ApJ/944/94/table2%22+ORDER+BY+PGC",
+    "join": {
+      "columns": [
+        "T",
+        "BTC"
+      ],
+      "on": "PGC",
+      "source": "hyperleda-2014",
+      "origin": "http://atlas.obs-hp.fr/hyperleda/fG.cgi?n=meandata&c=o&of=1,leda,simbad&nra=l&nakd=1&d=pgc%2C%20t%2C%20e_t%2C%20v&sql=t%20is%20not%20null%20and%20v%3C33000&ob=&a=csv%5B%2C%5D",
+      "magnitudeOrigin": "http://atlas.obs-hp.fr/hyperleda/fG.cgi?n=meandata&c=o&of=1,leda,simbad&nra=l&nakd=1&d=pgc%2C%20btc%2C%20itc%2C%20mabs%2C%20v&sql=v%3C33000%20and%20(btc%20is%20not%20null%20or%20itc%20is%20not%20null)&ob=&a=csv%5B%2C%5D",
+      "note": "HyperLEDA's numerical morphological type t and its total B magnitude corrected for Galactic extinction, inclination and redshift (btc), each joined by PGC number; empty where HyperLEDA has none. Queried 2026-09-29."
+    },
+    "bytes": 439324,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "distance-modulus"
+  },
+  "sample": "The tracked file keeps the 27,277 of CF4's 55,877 galaxies whose distance modulus puts them between 3 and 200 Mpc (27.386 to 36.505 mag), in PGC order. Nearer, the Local Group catalogue (src/objects/local-group) draws each galaxy; farther, only the SDSS fundamental-plane sample reaches, over part of the northern sky.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "Mpc",
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "cosmicflows-4",
+  "meaning": "Every galaxy of Cosmicflows-4 (Tully et al. 2023) between 3 and 200 Mpc, each at its measured distance (the distance modulus of all methodologies), coloured by its HyperLEDA morphological type.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "colorByClass": {
+      "column": 5,
+      "classes": [
+        {
+          "label": "elliptical (T below -3.5)",
+          "below": -3.5,
+          "spectrum": {
+            "path": "kc96/elliptical_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "lenticular (T -3.5 to -0.5)",
+          "below": -0.5,
+          "spectrum": {
+            "path": "kc96/s0_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "Sa (T -0.5 to 2)",
+          "below": 2,
+          "spectrum": {
+            "path": "kc96/sa_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "Sb (T 2 to 4)",
+          "below": 4,
+          "spectrum": {
+            "path": "kc96/sb_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "Sc and later (T 4 and above)",
+          "spectrum": {
+            "path": "kc96/sc_template.fits",
+            "bytes": 17280,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom",
+            "endsNm": {
+              "value": 766,
+              "basis": "The Sc template's optical spectrum ends at 766 nm. Cutting the other four templates at 766 nm leaves each colour the same to the sRGB step (checked 2026-09-29), since the eye's response there is under 0.1% of its peak."
+            }
+          }
+        }
+      ],
+      "missing": {
+        "label": "no type in HyperLEDA",
+        "colorCss": "#ffffff",
+        "basis": "The D65 white point: a galaxy with no measured type is drawn without a colour."
+      }
+    },
+    "toneBy": {
+      "magnitudeColumn": 6,
+      "band": "B (HyperLEDA btc, corrected total)",
+      "brightMagnitude": -21.5,
+      "faintMagnitude": -17.5,
+      "faintTone": 0.3,
+      "steps": 8,
+      "basis": "Presentation of a measured quantity: each galaxy's absolute B magnitude (btc minus its CF4 distance modulus) darkens its colour, from full at M_B -21.5 to 30% at -17.5, linear in magnitude. The bounds are about the 5th and 95th percentiles of the field (-21.4 and -17.7), so the tones span the galaxies drawn."
+    }
+  },
+  "classBasis": "Class bounds are the midpoints between the de Vaucouleurs numerical types the templates stand for (E -5, S0 -2, Sa 1, Sb 3, Sc 5); types later than Sc take the Sc template, the latest in the atlas."
+}

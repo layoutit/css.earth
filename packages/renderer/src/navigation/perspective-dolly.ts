@@ -49,10 +49,11 @@ export type PerspectivePublication = ReturnType<ReturnType<PerspectiveDolly['pre
 // pointer leaves its disc, which at a far dolly (the body a few pixels wide,
 // the disc a fifth of the viewport) is nearly everywhere: measured as a
 // 0.99 roll share and 11-27 degrees per 240 px stroke off-centre against
-// 82 degrees of pure tumble at the centre. A body's tumble turns about its own
-// pole and across it rather than about the screen axes, as Cesium holds a globe
-// to its axis, so drags never roll the pole (engine pole-drag.ts). Turns about
-// the pole are unbounded; the tilt stops with the pole facing the eye. The
+// 82 degrees of pure tumble at the centre. A plan with the
+// "pole-held-tumble" model (Earth's) tumbles the same way while its mesh is
+// drawn, but about the body's own pole and across it, as Cesium holds a globe
+// to its axis, so drags never roll the pole (engine pole-drag.ts); its tilt
+// stops with the pole facing the eye. Every other tumble is unbounded. The
 // control pitch anchors in the plan calibrate the affine control-to-scene map
 // and clamp nothing.
 //
@@ -74,7 +75,7 @@ function assertPerspectiveCameraPlan(plan: CameraPlan): asserts plan is Perspect
       !Number.isFinite(plan.dolly.wheelStepPerDelta) ||
       !Number.isFinite(plan.dolly.minimumDistanceRadii) ||
       !Number.isFinite(plan.dolly.maximumDistanceOverOrbitExtent) ||
-      (plan.drag !== undefined && plan.drag?.model !== "screen-axis-tumble") ||
+      (plan.drag !== undefined && !TUMBLE_DRAG_MODELS.includes(plan.drag?.model)) ||
       !plan.orbitLineFade ||
       !Number.isFinite(plan.orbitLineFade.visibleBelowDiscHeightShare) ||
       !Number.isFinite(plan.orbitLineFade?.hiddenAboveDiscHeightShare) ||
@@ -97,6 +98,8 @@ function assertPerspectiveCameraPlan(plan: CameraPlan): asserts plan is Perspect
 
 }
 
+/** The drag models that tumble from anywhere on screen; "pole-held-tumble" also holds the mesh to its pole. */
+export const TUMBLE_DRAG_MODELS: readonly string[] = Object.freeze(["screen-axis-tumble", "pole-held-tumble"]);
 export function validatePerspectiveCameraPlan(plan: CameraPlan): PerspectiveCameraPlan {
   assertPerspectiveCameraPlan(plan);
   return plan;
@@ -363,7 +366,7 @@ export function createPerspectiveDolly({
         viewportCenterX: (stageBounds.left ?? 0) + stageBounds.width / 2,
         viewportCenterY: (stageBounds.top ?? 0) + stageBounds.height / 2,
         // Pointer samples are re-based to the centre: tumble everywhere.
-        tumbleOnly: cameraPlan.drag?.model === "screen-axis-tumble",
+        tumbleOnly: TUMBLE_DRAG_MODELS.includes(cameraPlan.drag?.model ?? ""),
       }));
     },
     state() {

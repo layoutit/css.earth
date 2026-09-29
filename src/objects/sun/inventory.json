@@ -208,8 +208,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 497762,
-      "sha256": "1229b28dc19cef8bd9e612cafbeb4766f7c100f0c16b5fe55adb454808ec437c"
+      "bytes": 514779,
+      "sha256": "5558dd6815abf996adf9e64320c86d35e0e8322816adf1ffc1b36bdb998b6a5d"
     },
     {
       "location": "prepared",
@@ -856,14 +856,14 @@
     {
       "location": "prepared",
       "filename": "world-context-summary.json",
-      "bytes": 2089255,
-      "sha256": "88c871f34e59c8d3e454a5313c4a0dd620eb5967581e5fc132a408d312daf5aa"
+      "bytes": 2074750,
+      "sha256": "2dc4576952f837bf370b32c2030ce1223e25ccc57c9006a47c2eebaf86ce4599"
     },
     {
       "location": "prepared",
       "filename": "world-context.json",
-      "bytes": 19850006,
-      "sha256": "29fd74bb2c33171ae8a737899c3dac309f433e97095bc60273f57a21dcc76eb2"
+      "bytes": 19864813,
+      "sha256": "6ae6f8fce55d724b6828c99d25581de639b2c04f7a7907f2e64cc7734c448d83"
     },
     {
       "location": "prepared",
@@ -1248,6 +1248,18 @@
       "filename": "world-orbits/asteroid-2008-ev5.bin",
       "bytes": 4024,
       "sha256": "179f5ce6ee9c528d2311f897192a3e470773a6abbb68ff6bd7514c7975fa639b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/asteroid-2012-vp113.bin",
+      "bytes": 4024,
+      "sha256": "9a734cd626cf6f8686967ac44862346fb216ea6e6ac4ac612b42f43bb9cedb68"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/asteroid-2017-of201.bin",
+      "bytes": 4024,
+      "sha256": "97b4fc7dc0dfcdc4cc308546e34a56638770ef5e1ce9a6b40d26ed86ab8b4aaa"
     },
     {
       "location": "prepared",
@@ -3276,6 +3288,12 @@
       "filename": "world-orbits/leda.bin",
       "bytes": 4008,
       "sha256": "88d7f802c523e3c1b922641bf18fbce35b5e89bb1c1c7186c5a7432083e603fb"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-orbits/leleakuhonua.bin",
+      "bytes": 4024,
+      "sha256": "377ce90c0b2bf26f60c71c27860aef8ddbd17650fb41182a21e7fc5d936c7577"
     },
     {
       "location": "prepared",

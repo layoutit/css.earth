@@ -52,7 +52,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | `inventory.json` at the body root | Generated inventory of every baked file (public textures and `prepared/*`) used by installation and publication |
 | `site/prepared-sources.json` and `site/prepared-facilities.json` | Ignored source usage and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
-| Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
+| Test fixtures and shared harnesses under `tests/`; preparation code under `packages/bake/` (`src/`, `cli/`, `authoring/`), telescope code under `packages/telescope-cli/`, site build steps under `site/build/`, CI checks under `.github/scripts/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/objects/README.md) | Shared installation, controls, commands and contribution workflow |
 
 Every file under `source/` needs a manifest entry. Body packages contain data,

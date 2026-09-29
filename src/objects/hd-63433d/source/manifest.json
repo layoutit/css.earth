@@ -193,19 +193,19 @@
       "id": "lens-colour-context-marker",
       "path": "presentation/context.png",
       "origin": "https://ui.adsabs.harvard.edu/abs/2024AJ....167...54C/abstract",
-      "credit": "The default lens's colour as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The default lens's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "hd-63433d-observational-measurements",
           "hd-63433d-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."

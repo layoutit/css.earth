@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "leleakuhonua",
+  "entries": [
+    {
+      "id": "published-size",
+      "subject": "Buie et al. (2020), The Astronomical Journal 159, 230: radius 110 +14/−10 km from the 2018 October 20 stellar occultation, assuming a circular profile",
+      "status": "included",
+      "finding": "Sphere of radius 110 km (+14/−10 km), from one detection and one nearby non-detection of the 2018 October 20 stellar occultation (Buie et al. 2020). The radius assumes a circular outline; the shape is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/2011.03889"
+      ]
+    },
+    {
+      "id": "horizons-orbit",
+      "subject": "JPL Horizons elements and independent vectors",
+      "status": "included",
+      "finding": "Horizons' Sun-centred osculating elements at 2026-09-03 place the body and draw its orbit; the README states how far the far end can differ from the barycentric orbit papers quote.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/leleakuhonua/README.md"
+      ]
+    },
+    {
+      "id": "unmapped-surface-grid",
+      "subject": "cssEarth missing-coverage grid as the surface",
+      "status": "included",
+      "finding": "No surface imagery exists for this body, so the page shows the missing-coverage grid with Shadows off.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/leleakuhonua/source/manifest.json"
+      ]
+    }
+  ]
+}

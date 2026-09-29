@@ -1,0 +1,56 @@
+{
+  "id": "kinney-1996-galaxy-templates",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Template Ultraviolet to Near-Infrared Spectra of Star-forming Galaxies and Their Application to K-Corrections",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1086/177583"
+    }
+  ],
+  "links": [
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1086/177583",
+      "label": "ApJ 467, 38"
+    },
+    {
+      "role": "archive",
+      "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/",
+      "label": "STScI reference atlases: kc96"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/",
+      "checkedOn": "2026-09-29",
+      "locator": "elliptical, s0, sa, sb and sc _template.fits: WAVELENGTH (angstroms), FLUX (flam)"
+    }
+  ],
+  "creators": [
+    "A. L. Kinney",
+    "D. Calzetti",
+    "R. C. Bohlin",
+    "K. McQuade",
+    "T. Storchi-Bergmann",
+    "H. R. Schmitt"
+  ],
+  "publisher": "ApJ 467, 38",
+  "publicationDate": "1996",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Kinney et al. (1996), ApJ 467, 38; templates from the STScI reference atlases.",
+      "scope": "Galaxy type colours",
+      "evidence": "https://doi.org/10.1086/177583"
+    },
+    {
+      "kind": "limitation",
+      "text": "The templates are spectra of the galaxies' central regions, through the IUE aperture and matched ground-based slits (10 by 20 arcseconds), not whole-galaxy light.",
+      "scope": "Galaxy type colours",
+      "evidence": "https://doi.org/10.1086/177583"
+    }
+  ]
+}

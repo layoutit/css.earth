@@ -165,35 +165,25 @@ test('an authored environment link is interactive only while its caption is admi
   labels.destroy();
 });
 
-test('a published stellar extent rings the volume and hangs its caption under the ring', () => {
+test('a published stellar extent hangs the caption under the drawn volume and hides it inside the extent', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
-  const labels = mountEnvironmentLabels({ host: host as unknown as HTMLElement, before: before as unknown as Element, volume, shells: [], ringRadiusM: 150 });
-  const label = labels.inspect()['deep-cloud']!, ring = (labels.root as unknown as FakeElement).children.find(node => node.dataset.volumeRing === 'deep-cloud')!;
-  expect(ring.className).toBe('prepared-context-marker');
+  const labels = mountEnvironmentLabels({ host: host as unknown as HTMLElement, before: before as unknown as Element, volume, shells: [], extentRadiusM: 150 });
+  const label = labels.inspect()['deep-cloud']!;
   const publish = (z: number) => labels.publish({ world: world([0, 0, z]), viewport: { ...viewport, widthPixels: 800, heightPixels: 600 }, shellStats: [] });
-  // 1.5 units seen from 3 units away spans 50 px of radius at a 100 px focal length.
+  // The drawn sphere (the frame's 1-unit half extent) seen from 3 units drops 33.333 px; the caption's bottom is 8 px gap
+  // and 14 px of text below that.
   publish(300);
-  expect(ring.style.width).toBe('100px'); expect(ring.style.height).toBe('100px');
-  expect(ring.style.transform).toBe('translate(0px,0px) translate(-50%,-50%)');
-  expect(label.style.transform).toBe('translate(0px,72px) translate(-50%,-100%)');
-  document.defaultView.frame(200);
-  expect(ring.style.visibility).toBe(''); expect(ring.style.opacity).toBe('0.45');
-  // Far away the ring keeps the size of every other marker.
-  publish(100_000);
-  expect(ring.style.width).toBe('16px');
-  // Inside the extent no ring encloses the galaxy, so neither ring nor caption shows.
+  expect(label.style.transform).toBe('translate(0px,55.333px) translate(-50%,-100%)');
+  expect(labels.labelExclusionRects()).toHaveLength(1);
+  expect((labels.root as unknown as FakeElement).children.some(node => node.className === 'prepared-context-marker'), 'no ring is drawn').toBe(false);
+  // Inside the 1.5-unit extent the camera is within the galaxy, and its caption hides.
   publish(120);
   expect(labels.labelExclusionRects()).toHaveLength(0);
-  document.defaultView.frame(200);
-  expect(ring.style.visibility).toBe('hidden');
   labels.destroy();
 });
 
-test('without a published extent the volume keeps its caption and has no ring', () => {
+test('without a published extent the volume keeps its caption where it was', () => {
   const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
-  const labels = mountEnvironmentLabels({ host: host as unknown as HTMLElement, before: before as unknown as Element, volume, shells: [] });
-  expect((labels.root as unknown as FakeElement).children.some(node => node.dataset.volumeRing !== undefined)).toBe(false);
-  expect(() => mountEnvironmentLabels({ host: host as unknown as HTMLElement, before: before as unknown as Element, volume, shells: [], ringRadiusM: 0 }))
+  expect(() => mountEnvironmentLabels({ host: host as unknown as HTMLElement, before: before as unknown as Element, volume, shells: [], extentRadiusM: 0 }))
     .toThrow(/deep-cloud: stellar extent must be a positive radius/);
-  labels.destroy();
 });

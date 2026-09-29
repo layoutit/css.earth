@@ -15,6 +15,7 @@ const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'as
 // Phones get a lighter scene: no celestial sky cube, and no ordinary asteroid markers (see discoveryVisibility).
 const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;
 const defaultFeatures: ReadonlySet<string> = new Set(prepared.defaultFeatureIds);
+const orbitFeatures: ReadonlySet<string> = new Set(prepared.orbitFeatureIds);
 const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !defaultFeatures.has(object.id)).map(object => object.id);
 // Only notable asteroids are map targets; preparation marks the rest as plain dots (site/build/prepare/prepare-spatial-context.ts),
 // with no sprite, caption, hover or click. Their pages stay reachable through search.
@@ -35,7 +36,7 @@ const hiddenOrbitIds = prepared.hiddenOrbitIds;
 // Every body that orbits another and every centre something orbits; a barycentre's own centre is its host star.
 const systemMembers: ReadonlySet<string> = new Set([...orbitCenters].flat());
 const annotationPriorities = Object.fromEntries([...SCENE_OBJECTS.map(object =>
-  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, defaultFeatures.has(object.id) || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]),
+  [object.id, object.discovery.illustration && !orbitFeatures.has(object.id) ? 0 : labelImportance(object.classification, defaultFeatures.has(object.id) || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0, object.discovery.featured)]),
   // A body drawn from its astronomy record is a star or planet hosted by a placed star; its tier is that role in its host's
   // system, the one a catalogued planet of that system has.
   ...applicationContext.bodies.filter(body => 'unpackaged' in body && body.unpackaged === true).map(body => [body.id, labelImportance('planet')])]);
@@ -52,7 +53,7 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
 
   function update() {
     if (lifetime.disposed) return;
-    const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, compact: phone, defaultFeatures, systemMembers });
+    const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, compact: phone, defaultFeatures, systemMembers, orbitFeatures });
     layer.setBodyVisibility({
       bodyHidden: visibility.hiddenBodies.filter(id => !openSystem.has(id)),
       labelHidden: [...visibility.hiddenLabels, ...plainDotIds].filter(id => !openSystem.has(id)),

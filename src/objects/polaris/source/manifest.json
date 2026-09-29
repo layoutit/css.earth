@@ -217,13 +217,13 @@
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://archive.stsci.edu/prepds/stisngsl/",
-      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by packages/telescope-cli/authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
+        "generator": "packages/telescope-cli/authoring/stellar-spectra/author.mts",
         "inputs": [
           "polaris-stellar-color",
           "polaris-stis-ngsl",
@@ -232,7 +232,7 @@
           "polaris-claret-2011-v-quadratic"
         ]
       },
-      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
+      "generator": "packages/telescope-cli/authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."

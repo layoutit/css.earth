@@ -37,7 +37,7 @@ test('a shape-only planet under a star with a measured colour is lit by that col
     const science = raster?.surfaces?.[0]?.science;
     if (science?.kind !== 'neutral-shape' || raster?.emission || science.hostLight) continue;
     const host = body?.physical?.parent, hostRaster = host ? await optional(`src/objects/${host}/source/preparation/raster.json`) : null;
-    if (hostRaster?.surfaces?.[0]?.science?.kind === 'stellar-photometric-color') gray.push(`${id} (host ${host}): telescope new-object --host-light ${id}`);
+    if (hostRaster?.surfaces?.[0]?.science?.kind === 'stellar-photometric-color') gray.push(`${id} (host ${host}): node packages/telescope-cli/src/new-object/new-object-cli.mts --host-light ${id}`);
   }
   assert.deepEqual(gray, []);
 });

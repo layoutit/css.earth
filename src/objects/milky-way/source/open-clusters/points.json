@@ -1,0 +1,83 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "open-clusters",
+  "table": {
+    "path": "clusters.dat.gz",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/673/A114/clusters.dat.gz",
+    "bytes": 2200042,
+    "format": "fixed-width",
+    "gzip": true,
+    "columns": {
+      "name": [
+        1,
+        20
+      ],
+      "lDeg": [
+        339,
+        350
+      ],
+      "bDeg": [
+        352,
+        362
+      ],
+      "distance": [
+        593,
+        607
+      ],
+      "logAge": [
+        800,
+        809
+      ]
+    },
+    "distanceUnit": "pc"
+  },
+  "filters": [
+    {
+      "column": [
+        274,
+        274
+      ],
+      "op": "==",
+      "value": "o"
+    },
+    {
+      "column": [
+        276,
+        286
+      ],
+      "op": ">",
+      "value": 5
+    },
+    {
+      "column": [
+        752,
+        761
+      ],
+      "op": ">",
+      "value": 0.5
+    },
+    {
+      "column": [
+        800,
+        809
+      ],
+      "op": "<",
+      "value": 8
+    }
+  ],
+  "filterBasis": "The authors' high-quality open clusters (Type o, astrometric SNR CST > 5, CMD class > 0.5), younger than 100 Myr (logAge50 < 8): young clusters have not drifted far from the arms they formed in. The age cut is a presentation choice, kept because this layer follows the arms (see source/tracers/merge.json).",
+  "frame": {
+    "input": "galactic",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord Galactic to ICRS, heliocentric Cartesian"
+  },
+  "source": "hunt-reffert-2023-open-clusters",
+  "meaning": "Young open clusters from Hunt & Reffert (2023), each at its median maximum-likelihood distance (dist50) from Gaia DR3 parallaxes.",
+  "appearance": {
+    "colorCss": "#9fd4ff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "note": "Presentation only: the blue-white of young clusters' brightest stars."
+  }
+}

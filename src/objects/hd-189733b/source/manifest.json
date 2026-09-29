@@ -284,19 +284,19 @@
       "id": "eclipse-map-context-marker",
       "path": "presentation/context.png",
       "origin": "https://zenodo.org/records/15103479",
-      "credit": "Lally et al. (2025)'s deposited MIRI temperature map seen from the host star, in the lens's palette; rendered by tools/objects/source-authoring/hd-189733/author.mts",
+      "credit": "Lally et al. (2025)'s deposited MIRI temperature map seen from the host star, in the lens's palette; rendered by packages/telescope-cli/authoring/hd-189733/author.mts",
       "license": "Project-authored display derivative of CC BY 4.0 data.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+        "generator": "packages/telescope-cli/authoring/hd-189733/author.mts",
         "inputs": [
           "hd-189733b-lally-2025-map",
           "hd-189733b-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/hd-189733/author.mts",
+      "generator": "packages/telescope-cli/authoring/hd-189733/author.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The default lens map rendered as a dayside disc; `author.mts --check` recomputes it."

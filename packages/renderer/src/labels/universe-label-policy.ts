@@ -10,13 +10,26 @@ export const UNIVERSE_LABEL_POLICY = Object.freeze({
  * physical boundary). Past it the galaxies are the named objects, and a star's name fades over the same band. */
 export const LOCAL_GROUP_SCALE = Object.freeze({ returnDistanceM: 240e3 * 3.085677581491367e16, enterDistanceM: 300e3 * 3.085677581491367e16 });
 
+/** One handoff between the planet hosts and the galaxy's published tracers, by the camera's distance from the selected
+ * body (the distance that gates the galaxy volume, so a visited far system keeps its own markers): over 4 to 9 kpc the
+ * hosts fade out as the galaxy's dots and backing fade in, so neither shows at full strength beside the other and the
+ * view is never empty. A 5 to 7 kpc band passed in one or two wheel steps and read as a switch; two fades in sequence
+ * left a black gap between them. UI thresholds, not physical ones; the planet hosts follow where surveys looked, not
+ * the galaxy's shape. */
+export const GALAXY_SCALE = Object.freeze({ handoffStartM: 4e3 * 3.085677581491367e16, handoffEndM: 9e3 * 3.085677581491367e16 });
+
 export function labelEligible(facts: { named?: boolean; notable?: boolean }): boolean {
   return facts.named === true || facts.notable === true;
 }
 
 /** A prepared orientation reference (the Sun, then Earth) outranks every classification tier. */
-export function labelImportance(kind: string, major = false, orientationReference = 0): number {
+/** The tier of a featured star; at galaxy scale, bodies below it give way to the galaxy's tracers. */
+export const FEATURED_STAR_TIER = 4;
+
+export function labelImportance(kind: string, major = false, orientationReference = 0, featured = false): number {
   if (orientationReference > 0) return orientationReference;
+  // A featured star (its catalogue's `featured`) is a landmark of the galaxy: it keeps its marker at galaxy scale.
+  if (featured && (kind === 'star' || kind === 'black-hole')) return FEATURED_STAR_TIER;
   // A planet of another star is a planet of its system: the tier is the body's role in the system it belongs to, not whether
   // that system is the Sun's. Without this an imaged exoplanet loses its caption at the scale that frames its own orbit.
   if (['star', 'black-hole', 'planet', 'exoplanet', 'environment', 'galaxy-cluster'].includes(kind)) return 3;

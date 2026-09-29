@@ -12,7 +12,7 @@ It has 0.7665 solar masses and 0.8655 solar radii; its partner has 0.7278 and 0.
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
 
 ## Known problems

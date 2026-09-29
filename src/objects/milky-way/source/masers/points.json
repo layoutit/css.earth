@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "masers",
+  "table": {
+    "path": "table1.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/885/131/table1.dat",
+    "bytes": 24142,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        13
+      ],
+      "distance": [
+        63,
+        67
+      ]
+    },
+    "galacticFromName": true,
+    "distanceUnit": "parallax-mas"
+  },
+  "frame": {
+    "input": "galactic",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord Galactic to ICRS, heliocentric Cartesian"
+  },
+  "source": "reid-2019-maser-parallaxes",
+  "meaning": "High-mass star-forming regions with VLBI trigonometric maser parallaxes compiled by Reid et al. (2019), Table 1, at 1/parallax: the most accurate distances across the disc, a few beyond the Galactic centre.",
+  "appearance": {
+    "colorCss": "#f4fbff",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: near-white, the brightest of the disc tracers.",
+    "emphasis": "Arm tracer: young, massive star formation that outlines the spiral arms, drawn at full strength."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asteroid-2012-vp113",
+  "entries": [
+    {
+      "id": "published-size",
+      "subject": "Sheppard & Trujillo (2016), The Astronomical Journal 152, 221, Table 2: diameter 550 km for an assumed albedo of 0.10",
+      "status": "included",
+      "finding": "Illustrative sphere 550 km across, the diameter Sheppard & Trujillo (2016, Table 2) estimate from its brightness for an assumed moderate albedo of 0.10. The size is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/1608.08772"
+      ]
+    },
+    {
+      "id": "horizons-orbit",
+      "subject": "JPL Horizons elements and independent vectors",
+      "status": "included",
+      "finding": "Horizons' Sun-centred osculating elements at 2026-09-03 place the body and draw its orbit; the README states how far the far end can differ from the barycentric orbit papers quote.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/asteroid-2012-vp113/README.md"
+      ]
+    },
+    {
+      "id": "unmapped-surface-grid",
+      "subject": "cssEarth missing-coverage grid as the surface",
+      "status": "included",
+      "finding": "No surface imagery exists for this body, so the page shows the missing-coverage grid with Shadows off.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/asteroid-2012-vp113/source/manifest.json"
+      ]
+    }
+  ]
+}

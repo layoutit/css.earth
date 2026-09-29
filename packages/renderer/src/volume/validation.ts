@@ -57,7 +57,8 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
 
 function validateStack(stack: Record<string, unknown>, resources: Set<string>, leafIds: Set<string>): void {
   exactKeys(stack, ['axis', 'leaves', ...(Object.hasOwn(stack, 'normalUnits') ? ['normalUnits'] : [])], 'volume stack');
-  if (!isAxis(stack.axis) || !Array.isArray(stack.leaves) || stack.leaves.length === 0) {
+  // An empty stack is a volume that draws no slices; its frame, anchors and sky still serve the scene.
+  if (!isAxis(stack.axis) || !Array.isArray(stack.leaves)) {
     throw new TypeError('Prepared CSS volume stack is invalid.');
   }
   if (stack.normalUnits !== undefined && (!finiteVector(stack.normalUnits) || Math.abs(Math.hypot(...stack.normalUnits) - 1) > 1e-8))

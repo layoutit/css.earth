@@ -152,7 +152,7 @@ jobs:
       - name: Check the architecture against its baseline
         # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
         # .github/scripts/architecture/baseline.json does not record, or breaks a repository rule (repository-rules.mts:
-        # retired tools/ folders, the nebula boundaries, declared workspace dependencies and pre-install imports), which has no baseline. It reads every source file this sparse tree keeps, so a
+        # the retired tools/ folder, the nebula boundaries, declared workspace dependencies and pre-install imports), which has no baseline. It reads every source file this sparse tree keeps, so a
         # missing one stops it as incomplete rather than passing. About eight seconds.
         run: pnpm check:architecture
       - name: Check every investigation ledger
@@ -160,7 +160,7 @@ jobs:
         # report the contract names, so an empty ledger, a check without its commit or a relative evidence path fails here.
         run: pnpm check:investigations
       - name: Test the shared object libraries
-        # The node tests of @cssearth/bake/objects/<topic> sit beside the pipelines in tools/objects/, under tests/objects/ or beside
+        # The node tests of @cssearth/bake/objects/<topic> sit beside the authoring scripts in packages/*/authoring/, under tests/objects/ or beside
         # their module in packages/bake/src/objects/, which no other PR step runs; .github/scripts/checks/test-bake-objects.mts selects
         # every test that imports an object entry, and unrestored downloads skip.
         # They read the generated solar geometry built above and five tracked geology shapefiles (5.4 MB) the sparse tree leaves out.
@@ -180,7 +180,7 @@ jobs:
         # new-object's decisions offline (ids, duplicates, refresh, colour, orbits) and the static check that every lit body's
         # lighting frame is sized to its sphere and every shape planet takes its star's light. About two seconds; the heavy
         # preparation lane also runs them, but only when preparation paths change.
-        run: node --test tools/objects/new-object/new-object.test.mts tests/objects/unit/lighting-frame.test.mts
+        run: node --test packages/telescope-cli/src/new-object/new-object.test.mts tests/objects/unit/lighting-frame.test.mts
       - name: Test asset inventory, publish verification, closure and local CI tooling
         # Self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no network, no
         # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
@@ -192,7 +192,8 @@ jobs:
         run: |
           node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" ".github/scripts/architecture/*.test.mts" "tests/asset-publication/*.test.mts" \
             tests/delivery/publish-verification.test.mts tests/delivery/source-acquisition.test.mts tests/delivery/asset-origin-scenes.test.mts tests/preparation/stale-builds.test.mts \
-            "tests/inventory/runtime-asset-*.test.mts" tests/objects/source-test.test.mts
+            "tests/inventory/runtime-asset-*.test.mts" tests/objects/source-test.test.mts \
+            tests/objects/survey-install-spawns.test.mts packages/bake/authoring/juno/jiram-mosaic.test.mts site/test/recovery-commands.test.mts
 
   typecheck:
     name: Typecheck

@@ -47,7 +47,7 @@ Only prose is left marked TODO(new-object), unless the spec carries drafted text
 NASA Exoplanet Archive's default parameter sets (their transiting planets, with drafted text); --from-debcat drafts both stars of
 an eclipsing binary from DEBCat, --from-apokasc a Kepler-field giant from APOKASC-3, --from-cepheids a Cepheid from Groenewegen
 (2013), --from-k2 a K2-field giant and --from-tess a TESS giant from Khan et al. (2023), --from-gaia any star from Gaia DR3 FLAME, each naming what the spec still needs from the paper; --check runs the bake's first steps on
-what was generated; --skip-existing leaves objects already in the universe alone. The spec format is in tools/objects/new-object/spec.mts.
+what was generated; --skip-existing leaves objects already in the universe alone. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
 Papers lists up to 20 OpenAlex works that name the target (and instrument) in their title or abstract,
 using arXiv's Atom API when OpenAlex is temporarily unavailable. The saved report names the source and fallback reason.
 It ranks open access first, tries one plain GET per open copy, marks browser challenges as blocked, and prints

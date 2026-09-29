@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "asteroid-2017-of201",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "2017 OF201",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 350
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-2017-of201-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        10364683365848.703,
+        6061944523939.02,
+        6546475700279.405
+      ],
+      "presentationToReference": [
+        0.7855045782964389,
+        2.4356826039297786e-17,
+        0.6188558454723796,
+        0.5677891372275657,
+        0.3977771559319137,
+        -0.7206863602601998,
+        0.24616671814384294,
+        -0.9174820620691818,
+        -0.3124557771262547
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1521.7391304347825,
+      "bodyRadiusM": 350000
+    },
+    "catalog": {
+      "name": "2017 OF201",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 91.41772937693106,
+      "description": "Reported in 2025; its orbit reaches about 1,600 au from the Sun.",
+      "systemName": "Solar System",
+      "context": {},
+      "illustrationLenses": [
+        "model"
+      ]
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

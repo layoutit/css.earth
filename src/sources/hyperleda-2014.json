@@ -1,0 +1,53 @@
+{
+  "id": "hyperleda-2014",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HyperLEDA. III. The catalogue of extragalactic distances",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/201423496"
+    },
+    {
+      "type": "arxiv",
+      "value": "1408.3476"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201423496",
+      "label": "A&A 570, A13"
+    },
+    {
+      "role": "archive",
+      "url": "http://atlas.obs-hp.fr/hyperleda/",
+      "label": "HyperLEDA database (Observatoire de Haute-Provence mirror)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "http://atlas.obs-hp.fr/hyperleda/fullsql.html",
+      "checkedOn": "2026-09-29",
+      "locator": "meandata: pgc, t (numerical morphological type), btc (corrected total B magnitude), v"
+    }
+  ],
+  "creators": [
+    "D. Makarov",
+    "P. Prugniel",
+    "N. Terekhova",
+    "H. Courtois",
+    "I. Vauglin"
+  ],
+  "publisher": "A&A 570, A13",
+  "publicationDate": "2014",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This research has made use of the HyperLEDA database (http://leda.univ-lyon1.fr); Makarov et al. (2014), A&A 570, A13.",
+      "scope": "Galaxy morphological types",
+      "evidence": "https://doi.org/10.1051/0004-6361/201423496"
+    }
+  ]
+}

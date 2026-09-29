@@ -4,11 +4,11 @@
   "type": "galaxy-point-field",
   "properties": {
     "preparation": {
-      "source": "source/preparation/field.json"
+      "source": "source/dots/stack.json"
     }
   },
   "prepared": {
-    "format": "cssearth-galaxy-points@1",
-    "url": "prepared/points.json"
+    "format": "cssearth-catalogue-points@1",
+    "url": "prepared/dots.json"
   }
 }

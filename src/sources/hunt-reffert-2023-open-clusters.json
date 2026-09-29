@@ -1,0 +1,55 @@
+{
+  "id": "hunt-reffert-2023-open-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361/202346285"
+    },
+    {
+      "type": "arxiv",
+      "value": "2303.13424"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2303.13424",
+      "label": "arXiv:2303.13424"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1051/0004-6361/202346285",
+      "label": "A&A 673, A114"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+      "label": "CDS J/A+A/673/A114"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/673/A114/ReadMe",
+      "checkedOn": "2026-09-28",
+      "locator": "clusters.dat: Type, CST, CMDCl50, GLON, GLAT, dist50 (pc), logAge50"
+    }
+  ],
+  "creators": [
+    "Emily L. Hunt",
+    "Sabine Reffert"
+  ],
+  "publisher": "A&A 673, A114",
+  "publicationDate": "2023",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Hunt & Reffert (2023), A&A 673, A114.",
+      "scope": "Open cluster positions",
+      "evidence": "https://arxiv.org/abs/2303.13424"
+    }
+  ]
+}

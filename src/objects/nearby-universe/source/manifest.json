@@ -3,89 +3,205 @@
   "pathBase": "repository",
   "inputs": [
     {
-      "id": "cosmicflows-4",
-      "path": ".local/galaxy-field/sources/cosmicflows-4.tsv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=tsv&MAXREC=1000000&QUERY=SELECT+PGC%2CDM%2Ce_DM%2CRAJ2000+AS+RAdeg%2CDEJ2000+AS+DEdeg+FROM+%22J%2FApJ%2F944%2F94%2Ftable2%22+ORDER+BY+PGC",
+      "id": "galaxies-table",
+      "path": "src/objects/nearby-universe/source/galaxies/cf4-hyperleda.csv.gz",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+PGC,DM,e_DM,DMtf,DMfp,DMsbf,RAJ2000,DEJ2000+FROM+%22J/ApJ/944/94/table2%22+ORDER+BY+PGC",
       "sourceUrl": "https://doi.org/10.3847/1538-4357/ac94d8",
-      "title": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94",
-      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; distributed by CDS/VizieR",
-      "acquisition": "Pinned TSV response to the exact ADQL query in source/catalogue.json. Read directly from CDS TAP; no upstream application catalogue used.",
+      "title": "Cosmicflows-4 galaxies between 3 and 200 Mpc, with HyperLEDA morphological types",
+      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94, distributed by CDS/VizieR; HyperLEDA (Makarov et al. 2014, A&A 570, A13)",
+      "acquisition": "CF4 table2 from CDS TAP (the origin query), rows between 3 and 200 Mpc, each joined by PGC to HyperLEDA's numerical type t (the join origin in source/galaxies/points.json). Queried 2026-09-29.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "cosmicflows-4",
             "role": "material",
-            "evidence": "src/objects/nearby-universe/source/catalogue.json#/sources/0"
+            "evidence": "src/objects/nearby-universe/source/galaxies/points.json#/table"
+          },
+          {
+            "catalogueId": "hyperleda-2014",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/galaxies/points.json#/table/join"
           }
         ]
       },
       "dependencies": [],
-      "license": "Original catalogue terms apply; no blanket redistribution license established. Downloads stay ignored; cite original authors and CDS/VizieR."
+      "license": "Original catalogue terms apply; cite Tully et al. (2023), CDS/VizieR and HyperLEDA."
     },
     {
-      "id": "hyperleda-pgc",
-      "path": ".local/galaxy-field/sources/hyperleda-pgc.tsv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=tsv&MAXREC=1000000&QUERY=SELECT+TOP+50000+PGC%2CRAJ2000+AS+RAdeg%2CDEJ2000+AS+DEdeg%2CMType%2ClogD25+FROM+%22VII%2F237%2Fpgc%22+WHERE+logD25+IS+NOT+NULL+AND+RAJ2000+IS+NOT+NULL+AND+DEJ2000+IS+NOT+NULL+ORDER+BY+logD25+DESC%2C+PGC+ASC",
-      "sourceUrl": "https://doi.org/10.1051/0004-6361:20031411",
-      "title": "Paturel et al. (2003), HYPERLEDA I, A&A 412, 45",
-      "credit": "Paturel et al. (2003), HYPERLEDA I, A&A 412, 45; distributed by CDS/VizieR",
-      "acquisition": "Pinned TSV response to the exact ADQL query in source/catalogue.json. Read directly from CDS TAP; no upstream application catalogue used.",
+      "id": "kc96-elliptical",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/elliptical_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/elliptical_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti elliptical template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "hyperleda-pgc",
-            "role": "material",
-            "evidence": "src/objects/nearby-universe/source/catalogue.json#/sources/1"
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe/source/galaxies/points.json#/appearance/colorByClass"
           }
         ]
       },
       "dependencies": [],
-      "license": "Original catalogue terms apply; no blanket redistribution license established. Downloads stay ignored; cite original authors and CDS/VizieR."
+      "license": "STScI reference data; cite Kinney et al. (1996)."
     },
     {
-      "id": "hyperleda-hi",
-      "path": ".local/galaxy-field/sources/hyperleda-hi.tsv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=tsv&MAXREC=1000000&QUERY=SELECT+PGC%2CVHI+FROM+%22VII%2F238%2Fhidat%22+WHERE+VHI+IS+NOT+NULL+ORDER+BY+PGC",
-      "sourceUrl": "https://doi.org/10.1051/0004-6361:20031412",
-      "title": "Paturel et al. (2003), HYPERLEDA II, A&A 412, 57",
-      "credit": "Paturel et al. (2003), HYPERLEDA II, A&A 412, 57; distributed by CDS/VizieR",
-      "acquisition": "Pinned TSV response to the exact ADQL query in source/catalogue.json. Read directly from CDS TAP; no upstream application catalogue used.",
+      "id": "kc96-s0",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/s0_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/s0_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti s0 template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "hyperleda-hi",
-            "role": "material",
-            "evidence": "src/objects/nearby-universe/source/catalogue.json#/sources/2"
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe/source/galaxies/points.json#/appearance/colorByClass"
           }
         ]
       },
       "dependencies": [],
-      "license": "Original catalogue terms apply; no blanket redistribution license established. Downloads stay ignored; cite original authors and CDS/VizieR."
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-sa",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/sa_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/sa_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti sa template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe/source/galaxies/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-sb",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/sb_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/sb_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti sb template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe/source/galaxies/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-sc",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/sc_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/sc_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti sc template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/nearby-universe/source/galaxies/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
     }
   ],
   "documents": [
     {
-      "id": "document-catalogue",
+      "id": "document-galaxies",
       "kind": "authored-document",
-      "path": "src/objects/nearby-universe/source/catalogue.json",
+      "path": "src/objects/nearby-universe/source/galaxies/points.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored source selection, processing or display configuration; not an external observation.",
+      "acquisition": "Authored catalogue selection and colour classes.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
       }
     },
     {
-      "id": "document-field",
+      "id": "document-galaxies-200mpc",
       "kind": "authored-document",
-      "path": "src/objects/nearby-universe/source/preparation/field.json",
+      "path": "src/objects/nearby-universe/source/galaxies-200mpc/merge.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored source selection, processing or display configuration; not an external observation.",
+      "acquisition": "Authored density level of the galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-galaxies-60mpc",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/galaxies-60mpc/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored density level of the galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-galaxies-20mpc",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/galaxies-20mpc/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored density level of the galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-galaxies-10mpc",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/galaxies-10mpc/merge.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored density level of the galaxy dots.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "id": "document-dots",
+      "kind": "authored-document",
+      "path": "src/objects/nearby-universe/source/dots/stack.json",
+      "origin": "project-authored",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored stack of the galaxy dot levels.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -97,22 +213,10 @@
       "path": "src/objects/nearby-universe/source/presentation.json",
       "origin": "project-authored",
       "credit": "cssEarth contributors",
-      "acquisition": "Authored source selection, processing or display configuration; not an external observation.",
+      "acquisition": "Authored provenance presentation.",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
-      }
-    },
-    {
-      "id": "navigation-frame",
-      "kind": "authored-document",
-      "path": "src/objects/sun/source/navigation/universe.json",
-      "origin": "project-authored",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored shared navigation frame; only the frame identity and navigation epoch are read. No solar data supplies galaxy positions.",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Authored application frame identity, not a galaxy measurement."
       }
     }
   ],

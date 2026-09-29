@@ -132,19 +132,19 @@
       "id": "lens-colour-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
-      "credit": "The default lens's colour as a disc; rendered by tools/objects/source-authoring/context-markers.mts",
+      "credit": "The default lens's colour as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/source-authoring/context-markers.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "trappist-1g-observational-measurements",
           "trappist-1g-preparation-raster"
         ]
       },
-      "generator": "tools/objects/source-authoring/context-markers.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
         "reason": "The default lens drawn as a disc; `context-markers.mts --check` recomputes it."

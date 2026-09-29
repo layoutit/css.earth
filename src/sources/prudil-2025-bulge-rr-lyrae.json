@@ -1,0 +1,57 @@
+{
+  "id": "prudil-2025-bulge-rr-lyrae",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Galactic Bulge exploration. IV. RR Lyrae stars as traces of the Galactic bar: 3D and 5D analysis, extinction variation",
+  "identifiers": [
+    {
+      "type": "arxiv",
+      "value": "2501.03497"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2501.03497",
+      "label": "arXiv:2501.03497"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/695/A211",
+      "label": "CDS J/A+A/695/A211"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/695/A211/ReadMe",
+      "checkedOn": "2026-09-28",
+      "locator": "tablec1: OGLE-IV ID, RAdeg, DEdeg and Dist (kpc) for 72,165 RR Lyrae stars"
+    }
+  ],
+  "creators": [
+    "Z. Prudil",
+    "A. Kunder",
+    "L. Beraldo e Silva",
+    "S. Gough-Kelly",
+    "M. Rejkuba",
+    "S. R. Anderson",
+    "V. P. Debattista",
+    "O. Gerhard",
+    "R. M. Rich",
+    "D. M. Nataf",
+    "A. J. Koch-Hansen",
+    "A. Savino",
+    "I. D\u00e9k\u00e1ny"
+  ],
+  "publisher": "A&A 695, A211",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Prudil et al. (2025), A&A 695, A211.",
+      "scope": "Bulge RR Lyrae positions",
+      "evidence": "https://arxiv.org/abs/2501.03497"
+    }
+  ]
+}

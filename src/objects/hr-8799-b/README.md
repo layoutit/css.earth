@@ -24,7 +24,7 @@ Run of 2026-09-23 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places the planet 14.4 mas from JWST's measured position (above); the four planets miss by 11 mas RMS, under 2% of their separations.
 - [`disc-band-color.test.mts`](../../../tests/objects/observation/disc-band-color.test.mts) (now [`tests/objects/observation/disc-band-color.test.mts`](../../../tests/objects/observation/disc-band-color.test.mts)) turns the photometry records into the four colours and checks that they share one range.
-- [`new-hosted-planet.test.mts`](../../../tools/objects/new-hosted-planet.test.mts) checks that the self-luminous scaffold reproduces Beta Pictoris c's emissive build.
+- [`new-hosted-planet.test.mts`](../../../packages/telescope-cli/src/new-object/new-hosted-planet.test.mts) checks that the self-luminous scaffold reproduces Beta Pictoris c's emissive build.
 
 ## Known problems
 

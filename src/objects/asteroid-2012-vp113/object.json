@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "asteroid-2012-vp113",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "2012 VP113",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 275
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-2012-vp113-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6750340564870.027,
+        10717565602721.537,
+        1292771594545.8035
+      ],
+      "presentationToReference": [
+        0.546383067237256,
+        2.4356826039297786e-17,
+        0.8375353985572243,
+        0.7684237045242162,
+        0.3977771559319137,
+        -0.5012966632085221,
+        0.3331524488303945,
+        -0.9174820620691818,
+        -0.21733870253499132
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1195.6521739130435,
+      "bodyRadiusM": 275000
+    },
+    "catalog": {
+      "name": "2012 VP113",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 85.1083587027271,
+      "description": "A Sedna-like body that never comes closer than about 80 au.",
+      "systemName": "Solar System",
+      "context": {},
+      "illustrationLenses": [
+        "model"
+      ]
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

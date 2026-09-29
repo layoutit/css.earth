@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { implementationFingerprint } from './implementation-dependencies.mts';
+import { SOLAR_GEOMETRY_MODULE, sphereImplementationFiles } from './sphere/sphere.mts';
 
 test('implementation identity follows transitive local TypeScript imports', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-closure-'));
@@ -105,10 +106,10 @@ test('the navigation, surface-preview, preparation and thread-pool libraries are
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('the galaxy-field and layered-provenance libraries are followed into their bake sources, as when they sat under tools/', async () => {
+test('the layered-provenance library is followed into its bake sources, as when it sat under tools/', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-prepare-4b4-'));
   try {
-    const entries = [['@cssearth/bake/galaxy-field', 'packages/bake/src/galaxy-field'], ['@cssearth/bake/objects/provenance', 'packages/bake/src/objects/provenance']] as const;
+    const entries = [['@cssearth/bake/objects/provenance', 'packages/bake/src/objects/provenance']] as const;
     await writeFile(resolve(root, 'entry.mts'), `${entries.map(([specifier], index) => `import { v${index} } from '${specifier}';`).join('\n')}\nexport const used=[${entries.map((_, index) => `v${index}`).join(',')}];\n`);
     for (const [index, [, directory]] of entries.entries()) {
       await mkdir(resolve(root, directory), { recursive: true });
@@ -355,8 +356,16 @@ test('a telescope command subpath is followed to the source its package exports 
 });
 
 test('the sphere lane identity follows the native camera, resize input and carried values it renders with, as when they sat under tools/experiments/native-scroll', async () => {
-  const lane = await implementationFingerprint(WORKSPACE, ['tools/objects/telescope-sphere/sphere-html.mts']);
+  const lane = await implementationFingerprint(WORKSPACE, ['packages/telescope-cli/src/sphere/sphere-html.mts']);
   const paths = lane.files.map(file => file.path);
   for (const name of ['carry-values', 'css-values', 'native-camera', 'resize-input'])
     assert.ok(paths.includes(`packages/telescope-cli/src/sphere/native-scroll/${name}.mts`), `${name} joins the sphere lane identity`);
+});
+
+test('the sphere implementation identity covers the solar geometry the lane no longer imports', () => {
+  assert.equal(SOLAR_GEOMETRY_MODULE, 'src/platform/solar-geometry.mts');
+  const files = sphereImplementationFiles({ 'packages/telescope-cli/src/sphere/sphere-lane.mts': {}, '<runtime>': {} });
+  assert.ok(files.includes('src/platform/solar-geometry.mts'));
+  assert.ok(files.includes('packages/telescope-cli/src/sphere/sphere-lane.mts'));
+  assert.ok(!files.some(path => path.startsWith('<')));
 });

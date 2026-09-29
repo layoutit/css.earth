@@ -148,6 +148,38 @@
         "https://sdo.gsfc.nasa.gov/data/channels.php",
         "https://github.com/layoutit/css.earth/blob/main/tests/objects/interpretation/fits-map.test.mts"
       ]
+    },
+    {
+      "id": "extreme-tnos-without-size",
+      "subject": "Extreme trans-Neptunian objects with no published size",
+      "status": "excluded",
+      "finding": "Alicanto (2004 VN112), 2013 RF98, 2007 TG422, 2010 GB174, 2015 BP519 and 2023 KQ14 have Horizons orbits, but no paper states one size for them: JPL SBDB (checked 2026-09-28) lists only H, Becker et al. (2018, AJ 156, 81) give 2015 BP519 400-700 km and Chen et al. (2025, Nature Astronomy) give 2023 KQ14 220-380 km. A body needs a size for its page, and a marker on the map must open a page, so they are not added.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "https://doi.org/10.3847/1538-3881/aad042",
+        "https://doi.org/10.1038/s41550-025-02595-7"
+      ],
+      "revisitWhen": "A paper states one size for any of them (thermal, occultation or a discoverer estimate at a stated albedo)."
+    },
+    {
+      "id": "farfarout-2018-ag37",
+      "subject": "2018 AG37 (FarFarOut)",
+      "status": "excluded",
+      "finding": "JPL SBDB (checked 2026-09-28) fits its orbit to 11 observations over 740 days and gives it condition code 9, the scale's worst; the orbit is not determined, so it is not drawn.",
+      "revisitWhen": "JPL gives 2018 AG37 an orbit with a condition code of 6 or better.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2018%20AG37"
+      ]
+    },
+    {
+      "id": "farout-2018-vg18",
+      "subject": "2018 VG18 (Farout)",
+      "status": "excluded",
+      "finding": "No paper reports it; JPL SBDB (checked 2026-09-28) gives condition code 6 and no size. It is also not an extreme object (semimajor axis 82 au), so the map rule would hide its orbit.",
+      "revisitWhen": "A paper reports 2018 VG18's orbit or size.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2018%20VG18"
+      ]
     }
   ]
 }

@@ -1,0 +1,34 @@
+{
+  "id": "arxiv-2505-15806",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Cheng, Li & Yang (2026): Discovery of a dwarf planet candidate in an extremely wide orbit: 2017 OF201",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2505.15806"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2505.15806",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/asteroid-2017-of201/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal Letters 998, 6",
+  "creators": [
+    "S. Cheng",
+    "J. Li",
+    "E. Yang"
+  ],
+  "publicationDate": "2026"
+}

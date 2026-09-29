@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "asteroid-2017-of201",
+  "entries": [
+    {
+      "id": "published-size",
+      "subject": "Cheng, Li & Yang (2026), The Astrophysical Journal Letters 998, 6: diameter about 700 km for an assumed albedo of 0.13",
+      "status": "included",
+      "finding": "Illustrative sphere 700 km across, the diameter Cheng, Li & Yang estimate from its brightness for an assumed albedo of 0.13. The size is not measured.",
+      "evidence": [
+        "https://arxiv.org/abs/2505.15806"
+      ]
+    },
+    {
+      "id": "horizons-orbit",
+      "subject": "JPL Horizons elements and independent vectors",
+      "status": "included",
+      "finding": "Horizons' Sun-centred osculating elements at 2026-09-03 place the body and draw its orbit; the README states how far the far end can differ from the barycentric orbit papers quote.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/asteroid-2017-of201/README.md"
+      ]
+    },
+    {
+      "id": "unmapped-surface-grid",
+      "subject": "cssEarth missing-coverage grid as the surface",
+      "status": "included",
+      "finding": "No surface imagery exists for this body, so the page shows the missing-coverage grid with Shadows off.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/asteroid-2017-of201/source/manifest.json"
+      ]
+    },
+    {
+      "id": "planet-nine-discussion",
+      "subject": "Discovery paper discussion of the proposed distant planet",
+      "status": "excluded",
+      "finding": "Cheng, Li & Yang discuss this orbit as a challenge to the proposed Planet Nine; the question is disputed, so no text or chart presents it.",
+      "revisitWhen": "A distant planet is found or the clustering question is settled in the literature.",
+      "evidence": [
+        "https://arxiv.org/abs/2505.15806"
+      ]
+    }
+  ]
+}

@@ -10,7 +10,6 @@
  * generated evidence blocks, credits and the evidence itself, then re-pins the package's documents. Preparation, the
  * registration block, source records and publishing follow with their own commands, which it prints.
  */
-import { execFileSync } from 'node:child_process';
 import { access, copyFile, mkdir, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { authorSourceRecords } from '../../sources/index.ts';
@@ -214,7 +213,6 @@ export async function installSetup(objectId: string, options: { root: string; le
     await writeFile(resolve(objectDirectory, 'NOTICE.md'), noticeWithLens(await readFile(resolve(objectDirectory, 'NOTICE.md'), 'utf8'), figure));
   }
 
-  execFileSync(process.execPath, [resolve(root, 'tools/sources/pin-object-documents.mts'), objectId], { cwd: root, stdio: 'inherit' });
   const { restored, missing } = await restorePinnedInputs(objectId, root), moved = await moveUnownedSceneFiles(objectId, root);
   if (restored.length) console.log(`Copied ${restored.length} pinned input(s) from sibling checkouts by hash: ${restored.join(', ')}.`);
   if (missing.length) console.log(`Still missing, restore them before preparing (node packages/bake/cli/object-operations.mts acquire ${objectId}): ${missing.join(', ')}.`);

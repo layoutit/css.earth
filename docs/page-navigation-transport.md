@@ -26,7 +26,7 @@ ownership, stylesheet nodes and world camera stay retained.
 
 ## One scene before and after JavaScript
 
-`serialize-prepared-scene.mts` publishes the package's prepared reference pose,
+`serializePreparedScene` in the renderer (`packages/renderer/src/rendering/prepared-scene-serialization.ts`) publishes the package's prepared reference pose,
 initial variant and texture addresses. It does not generate another mesh or
 process source images. The page remains the same shell at the same URL.
 Information tabs use native radio selection, including body overview, prepared
@@ -174,7 +174,7 @@ After building the packages and renderer, check page metadata with:
 
 ```sh
 node --test site/test/object-page-data.test.mts
-node --test site/test/serialize-prepared-scene.test.mts
+pnpm test:renderer   # includes rendering/prepared-scene-serialization.test.ts
 node --test site/test/rendered-page.test.mts
 node --test site/test/search-response.test.mts
 node --test site/test/dataset-response.test.mts site/test/dataset-url.test.mts
@@ -230,5 +230,5 @@ It illustrates this implementation; it is not a matched camera-pose comparison.
 
 ![Factsheet selected while application scripts are held](images/progressive-enhancement.png)
 
-The [404-object migration and matched captures](page-navigation-transport.md#synchronized-natural-navigation-comparison)
+The 404-object migration and matched captures
 retain their measurements, source pins, failures and later integration scope.

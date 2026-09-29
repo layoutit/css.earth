@@ -87,15 +87,18 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       clusters: bank.clusters?.payload, nebulae: bank.nebulae,
       renderedObjectIds: new Set([...declarations.map(image => image.id), ...volumeDeclarations.map(lens => lens.id)]),
       billboardedObjectIds: new Set([...prepared?.plan.banks.values() ?? []].filter(bank => bank.billboard).map(bank => bank.id)),
-      volumeRings: volumeRings(),
+      galaxyCaptions: galaxyCaptions(),
       nebulaFrames: new Map(volumeDeclarations.map(lens => [lens.id, lens.frame])), onSelect, pickingHost: stage });
     publishResidency();
   }
-  /** Every bank with a published stellar extent, centred on its frame: the catalogue rings it at that radius. */
-  function volumeRings() {
+  /** Every bank with a published stellar extent: its caption hangs under its authored framing sphere (else its
+   * billboard's), and hides inside the extent. */
+  function galaxyCaptions() {
     return new Map([...declarations, ...volumeDeclarations].flatMap(bank => {
-      const radiusM = stellarExtents[bank.id];
-      return radiusM === undefined ? [] : [[bank.id, { frame: bank.frame, radiusUnits: radiusM / bank.frame.metersPerUnit }] as const];
+      const radiusM = stellarExtents[bank.id], facts = prepared?.plan.banks.get(bank.id);
+      const extentRadiusUnits = radiusM === undefined ? 0 : radiusM / bank.frame.metersPerUnit;
+      const drawnRadiusUnits = facts?.framingRadiusUnits ?? facts?.billboard?.radiusUnits ?? extentRadiusUnits;
+      return radiusM === undefined ? [] : [[bank.id, { frame: bank.frame, drawnRadiusUnits, extentRadiusUnits }] as const];
     }));
   }
   function ensureCatalog(): Promise<void> {
