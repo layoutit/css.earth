@@ -106,10 +106,9 @@ Necessary source files must be checked in or restored by the existing acquisitio
 recipe. The manifest also lists documents and generated intermediate files.
 Every new source note inside `source/` needs its own manifest entry.
 
-`prepared/provenance.json` is generated product lineage; see its
-[existing contract](../../docs/object-provenance.md). Layered bodies regenerate it; volumes and
-catalogues restore their baked provenance from the inventory. A recovered record
-is not proof of fresh acquisition. Runtime inventories describe prepared delivery;
+The catalogues read which sources each dataset uses from these records; see
+[object provenance](../../docs/object-provenance.md). No provenance file is generated. That
+lineage is not proof of fresh acquisition. Runtime inventories describe prepared delivery;
 source restoration and runtime installation are separate checks.
 
 A new star, planet or companion starts from `pnpm telescope new-object SPEC.json`
@@ -128,7 +127,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Start the shared development site | `pnpm dev` |
 | Restore missing source inputs | `node packages/bake/cli/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
-| Update scene-body provenance and source/mission catalogues | `node site/build/prepare/prepare-provenance.mts [<id>]` |
+| Update the source/mission catalogues | `node site/build/prepare/prepare-facilities.mts --catalog-only` |
 | Bind new inputs to catalogue records | `node site/build/prepare/author-source-records.mts <id>` |
 | Check shared body runtime behavior | `node --test tests/objects/unit/runtime-package.test.mts`; run affected scientific tests in `tests/objects/unit/` too |
 | Run the full package, renderer, native, preparation and lab sequence | `pnpm test`; choose its individual suites for focused work |

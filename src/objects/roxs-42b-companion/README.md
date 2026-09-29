@@ -25,4 +25,4 @@ Run of 2026-09-23 (this version):
 - The orbit is posterior medians with the node solution chosen by the measured positions, not a single fitted orbit.
 - The paper's text and table disagree on this star's radius (above).
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -164,7 +164,7 @@ Feature notes: 68 of the labelled names carry a caption note, the lead summary o
 - **Geology symbology files:** `layerSymbology/GanymedeUnits.lyr` in the same ZIP is an older lookup (one palimpsest value, a crater-ejecta value) that does not match the shipped attributes; its shared colors equal the project's. NASA Trek's layer uses different colors for p1, p2, pu, pi and reticulate material. Neither is used.
 - **Geology structures:** contacts, grooves, furrows, crater rims and other line and point symbols are not shown. Geology has not been baked or checked in a browser since the color change.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

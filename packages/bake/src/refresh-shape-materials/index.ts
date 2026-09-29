@@ -14,7 +14,6 @@ import { createSourceManifest } from '@cssearth/objects/node';
 import type { SolarGeometry } from '../objects/scene/index.ts';
 import { refreshObservationControls } from '../refresh-surface-observations/index.ts';
 import { prepareSurfaceMinimaps } from '../surface-previews/index.ts';
-import { prepareObjectProvenance } from '../objects/provenance/index.ts';
 import { loadObjectMarkerDescriptor, prepareBodyMarkers, validateMarkerDescriptor, renderMarker } from '../navigation/index.ts';
 import { prepareSearchThumbnails } from '../site-assets/index.ts';
 
@@ -176,7 +175,6 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds, solarGeometry });
   await refreshObservationControls(id, lensIds, new Map(lensIds.map(lensId => [lensId, SHAPE_MATERIAL.color])));
   await refreshShapeMaterialDescriptions(id);
-  await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
   const report = { id, lensIds, seconds: (performance.now() - started) / 1000,
     material: SHAPE_MATERIAL,
     changedAssets: [...changed.values()].map(({ filename, bytes }) => ({ filename, bytes })), retainedAssets: assets.length - changed.size,

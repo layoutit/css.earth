@@ -32,7 +32,7 @@ Ring-image check · Inspected views.
   reconstructed, and gray color and opacity are not measured reflectance or optical depth.
 - Surface detail is unresolved. No sidereal spin or precise rotational phase is installed.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Credits](NOTICE.md)
 
 ## Methods
 

@@ -45,4 +45,4 @@ Profile qualification on the branch:
 - **Profile uncertainty is conditional on the models.** The bands are posterior credible intervals under each retrieval's assumptions. They do not include every systematic uncertainty, and the curves outside the indicated pressure range are weakly constrained. The whole-dayside fit combines emission across the dayside; it is not a third spatial region or an arithmetic average of the hotspot profiles.
 - **Not shown.** The ThERESA 3D temperature grid and ring profiles remain outside this view ([ledger](investigations.json)).
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

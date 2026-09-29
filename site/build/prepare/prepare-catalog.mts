@@ -31,7 +31,9 @@ export function contextObjectModule(contexts: readonly { id: string; type: strin
     // Keep every prepared resource as an independently cached, demand-loaded
     // asset; the existing loaders still decide which bank is fetched.
     `export const CONTEXT_OBJECT_ASSET_URLS: Record<string, unknown> = ${assetExpression};\n` +
-    `export const CONTEXT_OBJECT_PREPARED_JSON: Record<string, unknown> = import.meta.glob(${list(contexts.map(({ id }) => `${folder(id)}/prepared/*.json`))}, { eager: true, import: 'default' });\n`;
+    `export const CONTEXT_OBJECT_PREPARED_JSON: Record<string, unknown> = import.meta.glob(${list(contexts.map(({ id }) => `${folder(id)}/prepared/*.json`))}, { eager: true, import: 'default' });\n` +
+    // The source records a focus dataset credits (its manifest inputs), read at build time.
+    `export const CONTEXT_OBJECT_SOURCE_MANIFESTS: Record<string, unknown> = import.meta.glob(${list(contexts.map(({ id }) => `${folder(id)}/source/manifest.json`))}, { eager: true, import: 'default' });\n`;
 }
 
 /** An asset-origin build resolves context resources exclusively from committed inventories. It neither needs nor

@@ -25,4 +25,4 @@ The shape lens is a gray sphere of the published radius. No image of the star ex
 The masses of Doyle et al. are kept although Sebastian et al. (2025, arXiv:2505.19718) measure both stars 2 to 7% heavier: Doyle's orbits were fitted with Doyle's masses, and the two sets are not mixed. The binary is drawn as a fixed ellipse; its slow apsidal and nodal precession is not modelled. Star B's colour is unmeasured.
 - **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -27,4 +27,4 @@ Run of 2026-09-21 (this version):
 The distance rests on a 9 percent parallax, so the radius carries a 7.4 solar radii uncertainty. Rigel is a multiple system; this package is Rigel A only. No mass is adopted.
 - **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

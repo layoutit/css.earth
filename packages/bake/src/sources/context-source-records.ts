@@ -1,32 +1,43 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseSourceBinding, sourceArray, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
-import type { ProvenanceSource } from '@cssearth/objects/provenance';
+import { hasErrorCode } from '@cssearth/core';
+import { checkLineage, lineageSource } from '@cssearth/objects/provenance';
+import type { LineageSource, ObjectLineage } from '@cssearth/objects/provenance';
+import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
 
-export async function manifestSources(manifest: Record<string, unknown>, root: string, input: (path: string) => Promise<Buffer>): Promise<ProvenanceSource[]> {
-  const entries: ProvenanceSource[] = [];
-  for (const collection of ['inputs', 'documents', 'generatedIntermediates']) {
-    for (const raw of sourceArray(manifest[collection] ?? [], sourceObject)) {
-      const path = sourcePath(raw.path);
-      // Every source must be present: a file authored here through the source reader, a download or a generated file
-      // from the checkout. It is named by its path.
-      const installed = (path.startsWith('.local/') || collection === 'generatedIntermediates') ? await readFile(resolve(root, path)).catch((error: unknown) => {
-        if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error;
-      }) : await input(path);
-      if (installed === null) throw new Error(`Source is missing: ${path}${collection !== 'generatedIntermediates' ? '. Restore it with pnpm setup:sources first.'
-        : path.endsWith('sun/prepared/world-context.json') ? '. It is generated; run pnpm prepare:world-context first.' : '. It is generated; rebuild it with the step that writes it first.'}`);
-      const bytes = installed.length;
-      if (bytes <= 0) throw new TypeError(`Empty source: ${path}`);
-      entries.push({ id: typeof raw.id === 'string' ? raw.id : `document-${path.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`, path, bytes,
-        kind: typeof raw.kind === 'string' ? raw.kind : collection === 'inputs' ? 'source-input' : 'source-document',
-        origin: typeof raw.origin === 'string' ? raw.origin : 'unrecorded', credit: typeof raw.credit === 'string' ? raw.credit : 'unrecorded',
-        acquisition: typeof raw.acquisition === 'string' ? raw.acquisition : 'unrecorded',
-        dependencies: [...sourceArray(raw.dependencies ?? [], sourceText)], verification: 'bytes-verified',
-        sourceBinding: parseSourceBinding(raw.sourceBinding),
-        ...(typeof raw.sourceUrl === 'string' ? { sourceUrl: raw.sourceUrl } : {}),
-        ...(typeof raw.title === 'string' ? { title: raw.title } : {}),
-        ...(typeof raw.license === 'string' ? { license: raw.license } : {}) });
-    }
+/** Every record a context or image-layer manifest lists: its inputs, documents and generated intermediates. */
+export function manifestSources(manifest: Record<string, unknown>): LineageSource[] {
+  return ['inputs', 'documents', 'generatedIntermediates'].flatMap(collection => sourceArray(manifest[collection] ?? [], raw =>
+    lineageSource(raw, { id: `document:${sourceText(sourceObject(raw).path)}`, credit: 'unrecorded' })));
+}
+
+export interface ContextLineage { id: string; name: string; route: string; base: string; controls: readonly never[]; lineage: ObjectLineage }
+
+/** Each catalogue context's lineage, read from the products its `source/presentation.json` declares and its manifest.
+ * `route` is the application route that shows the context objects; the application passes it in. */
+export async function contextLineages({ route, root = process.cwd(), input = (path: string) => readFile(resolve(root, path)) }: {
+  route: string; root?: string; input?: (path: string) => Promise<Buffer>;
+}): Promise<ContextLineage[]> {
+  const results: ContextLineage[] = [];
+  for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+    if (!folder.isDirectory()) continue;
+    const id = folder.name, base = `src/objects/${id}`, presentationPath = `${base}/source/presentation.json`;
+    const exists = await readFile(resolve(root, presentationPath)).then(() => true, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; });
+    if (!exists) continue;
+    const raw = sourceObject(JSON.parse((await input(presentationPath)).toString()));
+    if (raw.provenance === undefined) continue;
+    const presentation = sourceObject(raw.provenance);
+    const manifest = sourceObject(JSON.parse((await input(`${base}/source/manifest.json`)).toString()));
+    if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid context manifest: ${id}`);
+    const products = sourceArray(presentation.products, raw => {
+      const value = sourceObject(raw), interpretation = sourceObject(value.interpretation);
+      return { id: sourceText(value.id), label: sourceText(value.label), inputs: [...sourceArray(value.inputs, sourceText)], parents: [], lensIds: [],
+        observationAttribution: 'none' as const, limitations: [...sourceArray(value.limitations, sourceText)],
+        interpretation: { ...(typeof interpretation.kind === 'string' ? { kind: interpretation.kind } : {}),
+          ...(typeof interpretation.sourceKind === 'string' ? { sourceKind: interpretation.sourceKind } : {}) } };
+    });
+    results.push({ id, name: sourceText(presentation.name), route, base, controls: [],
+      lineage: checkLineage({ objectId: id, manifestPath: 'source/manifest.json', sources: manifestSources(manifest), products }) });
   }
-  return entries;
+  return results;
 }

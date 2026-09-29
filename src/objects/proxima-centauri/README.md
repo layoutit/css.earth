@@ -27,4 +27,4 @@ Run of 2026-09-21 (this version):
 Proxima is a flare star with a planet, Proxima b; neither flares nor the planet are drawn. No mass is adopted.
 - **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

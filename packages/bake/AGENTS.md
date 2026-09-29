@@ -75,9 +75,8 @@ its validators accept); the renderer never imports the bake.
   the checks of a factsheet's cited source evidence, the object-information source records, and the citations of
   factsheet values from the records a body pins (`packages/bake/cli/cite-pinned-facts.mts` is their command); the source
   records a context manifest lists, the factsheet citations and source inventory the prepared source catalogue compiles, the
-  bibliography citations of the prepared galaxy and cluster catalogues, and the record of which object a byte-verified
-  preparation ran for; the context packages' provenance, compiled from their manifests or read
-  as installed, and the facility artwork refresh; and the investigation ledgers beside each object and facility with the
+  bibliography citations of the prepared galaxy and cluster catalogues; the context packages' lineage, read from their
+  manifests and source presentations, and the facility artwork refresh; and the investigation ledgers beside each object and facility with the
   shared surveys they quote (`data/investigations/`) and the report over them (`packages/bake/cli/report-investigations.mts`
   is its command). The application passes in the route its context objects show at
   (`CONTEXT_ROUTE`) and its dataset routes. It imports `runtime-source`, `objects/content` and `delivery`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
@@ -145,7 +144,7 @@ its validators accept); the renderer never imports the bake.
   `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command.
 - `src/prepare-object/` is published as `@cssearth/bake/prepare-object` (Node only): the ordered preparation chain for one
   or more authored objects end to end (builds, catalogue, geometry, the authored preparation, page data, text, markers,
-  billboard, world context, provenance), naming the step that failed and how to resume. It imports no topic; its steps
+  billboard, world context, the shared catalogues), naming the step that failed and how to resume. It imports no topic; its steps
   shell out to the other bake and site-owned preparation commands by path. `packages/bake/cli/prepare-object.mts` is its
   command; its tests are in `tests/preparation/`.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
@@ -202,11 +201,10 @@ its validators accept); the renderer never imports the bake.
     ALMA, the ESO archive, MAST, DataCite and the JMMC diameters (a query and a pure summary of its rows each), the imagery
     candidates (OPUS frames finer than a body ships, archive leads for a named body) and the resolved-star candidates. It
     imports no topic. `packages/bake/cli/imagery-candidates.mts` and `star-candidates.mts` print them.
-  - `objects/provenance`: the record readers and recipe bindings of a layered body's provenance (the product inputs, recipe
-    and outputs each preparation family records); `object-provenance.ts` compiles the record from them, and
-    `recover-provenance.ts` writes every scene body's record, with the facilities catalogue compilation the application passes
-    in (`site/build/prepare/prepare-provenance.mts`). It imports `objects/layers/terrestrial`, `objects/acquisition`,
-    `objects/sources`, `delivery` and `sources`.
+  - `objects/lineage`: which manifest sources each prepared product of a layered body reads, by the recipe bindings of each
+    preparation family (`lineage-recipes.ts`), read from the body's source records in memory (`body-lineage.ts`); the
+    facilities and sources catalogues and the reader-text check read it, and nothing writes it. It imports
+    `objects/layers/terrestrial`.
   - `objects/default-view`: what a prepared object's default camera looks at, from the runtime's own camera math and the
     solar geometry the host passes in, with the check that a photograph lens's default camera faces the lens; the default
     lens's data coverage, read from its prepared minimap, that the default camera turns toward; and the turn toward a partial

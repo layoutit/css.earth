@@ -95,7 +95,7 @@ published law under Lighting law (Shadows toggle), with no atmosphere material;
 Pluto's real haze layers are not modelled. Sky orientation is contextual, not a New Horizons camera solution.
 All these choices are prepared; the browser only transports state.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="pluto-source-and-presentation-contract"></a>
 <a id="pinned-inputs"></a>

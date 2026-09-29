@@ -38,7 +38,7 @@ prepared background size and position; the runtime needs no special path.
 | Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
 | Sample a pressure level from a numeric longitude/latitude table | [CSV slice reader](../packages/bake/src/objects/raster/lonlat-slice-table.ts): `lonlat-slice-table`, one-based `columns`, an exact `slice`, and a coordinate rounding tolerance. It validates periodic longitude and complete cells; latitude coverage ends at the released samples. [WASP-103 b](../src/objects/wasp-103b/README.md) is the climate-model example. |
 | Add or restyle scientific charts | [Chart recipes catalog](chart-recipes.md) |
-| Record input, recipe and output identities | [Provenance bindings](../packages/bake/src/objects/provenance/provenance-recipes.ts) and [record generation](../packages/bake/src/objects/provenance/object-provenance.ts) |
+| Record which inputs each dataset reads | [Lineage bindings](../packages/bake/src/objects/lineage/lineage-recipes.ts) and [the body reader](../packages/bake/src/objects/lineage/body-lineage.ts) |
 
 Terrain preparation separates source loading, mesh operations and material output.
 [The loader](../packages/bake/src/objects/layers/terrestrial/radial/radial-terrain.ts) assembles the
@@ -836,8 +836,8 @@ node site/build/prepare/refresh-photographs.ts io normal enhanced
 Run one body at a time. The command verifies the selected source closure, prepares
 its images and small minimaps, and updates the existing asset inventories and
 captions. It rejects scientific/emissive selections and new resource names.
-Unselected maps and the scene remain retained products; provenance records this
-as a partial refresh rather than a new full-package preparation. The ordinary
+Unselected maps and the scene remain retained products; this is a partial refresh
+rather than a new full-package preparation. The ordinary
 full preparer uses the same image code.
 
 The observed-surface lane's `component-fits` coverage joins an RGB publisher map

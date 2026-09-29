@@ -72,7 +72,7 @@ Rotation has an explicitly arbitrary display meridian, not an absolute rotationa
 
 The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Elektra from 1° to 2° south, so surface the survey did not see keeps the missing-imagery grid.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

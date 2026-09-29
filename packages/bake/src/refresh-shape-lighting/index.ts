@@ -8,7 +8,6 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import type { SolarGeometry } from '../objects/scene/index.ts';
 import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, createRasterEmitter, retainedShapeAtlas } from '../objects/layers/terrestrial/index.ts';
-import { prepareObjectProvenance } from '../objects/provenance/index.ts';
 
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
@@ -81,8 +80,6 @@ export async function publishShapeLighting(id: string) {
     if (file === 'inventory.json') await save(resolve(directory, file), value);
     else await writeFile(resolve(directory, 'prepared', file), JSON.stringify(value) + '\n');
   }
-  await prepareObjectProvenance({ objectDirectory: directory, publicDirectory: resolve('public/scenes', id),
-    outputDirectory: resolve(directory, 'prepared'), basis: 'recovered' });
   const changed = new Set(records(receipt.changedAssets).map(asset => requireString(asset.filename)));
   for (const asset of records(receipt.baselineAssets)) if (!changed.has(requireString(asset.filename)))
     if (sha256(await readFile(resolve('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)

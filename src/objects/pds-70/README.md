@@ -28,4 +28,4 @@ Run of 2026-09-23 (this version):
 - The radial velocity is uncertain by 3 km/s.
 - The proposed third planet, PDS 70 d, is not included ([ledger](investigations.json)).
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

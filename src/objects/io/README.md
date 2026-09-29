@@ -277,7 +277,7 @@ Feature notes: 44 of the labelled names carry a caption note, the lead summary o
 - **Smear and residual artifacts remain.** Column-background subtraction removes the prominent reflection bands, but cannot recover resolution lost to spacecraft motion. Mura et al. use super-resolution and smear correction; we take medians of registered frames. A hot spot is often smaller than one detector pixel. Peaks must not be read as resolved lava boundaries. The old integrated-output agreement above does not establish absolute calibration for the new visits.
 - **Volcanic heat mixes dates.** Each cell comes from the orbit that saw it sharpest, between July 2017 and October 2023. Hot spots vary, so the composite does not describe a single observation date.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

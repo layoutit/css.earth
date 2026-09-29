@@ -9,7 +9,6 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { readInventory, readPreparedObjects } from '@cssearth/objects/node';
 import { anyChangedAfter } from '@cssearth/bake/preparation';
-import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import { refreshShapeMaterialDescriptions, refreshShapeMaterials } from '@cssearth/bake/refresh-shape-materials';
 
 const projectRoot = process.cwd();
@@ -35,7 +34,6 @@ for (const id of ids) {
   }
   if (args.includes('--descriptions-only')) {
     await refreshShapeMaterialDescriptions(id);
-    await prepareObjectProvenance({ objectDirectory: resolve('src/objects', id), publicDirectory: resolve('public/scenes', id), basis: 'recovered' });
     continue;
   }
   if (args.includes('--resume')) {

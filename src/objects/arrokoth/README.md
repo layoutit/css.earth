@@ -121,7 +121,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
   340 m native resolution. The image-space registration approximates the small
   geometry changes during the TDI scan; it is not a new geometric backplane product.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Credits](NOTICE.md)
 
 ## Methods
 

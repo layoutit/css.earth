@@ -21,7 +21,7 @@ takes about 17 s; `pnpm setup:assets` runs the restore on its own. For a
 single body, use `pnpm setup:assets --object=<id>` and open `/<id>/`. Run `pnpm setup:prepared [--object=<id>]` alone to restore only the
 `prepared/*` entries (skipping the public texture download) — useful when
 only the JSON changed. Either restore also derives the files R2 never holds
-(`prepared/object.json`, `page.json` and a layered body's `provenance.json`)
+(`prepared/object.json` and `page.json`)
 for restored bodies that lack them. For a production build, run `pnpm build`, then `pnpm
 preview`; the build first runs `setup:assets` itself, which only downloads
 files that are missing or changed.
@@ -96,7 +96,7 @@ That approval does not publish assets; use the separate workflow above.
 
 ## Publishing prepared assets (maintainers)
 
-Prepared runtime files are served from an R2 bucket, content-addressed as `runtime-assets/<sha256>/<filename>`. One small inventory per object is tracked in Git instead of the baked bytes: `inventory.json`, listing the public browser textures and everything baked under `prepared/`, each entry with its location, filename, bytes and hash (`object.json` and `page.json` are regenerated, not inventoried; layered-body provenance is regenerated too, while volumes, image layers and catalogues publish their baked `provenance.json`). The inventory owner also excludes audit-only terrain reports and source-index rasters.
+Prepared runtime files are served from an R2 bucket, content-addressed as `runtime-assets/<sha256>/<filename>`. One small inventory per object is tracked in Git instead of the baked bytes: `inventory.json`, listing the public browser textures and everything baked under `prepared/`, each entry with its location, filename, bytes and hash (`object.json` and `page.json` are regenerated, not inventoried). The inventory owner also excludes audit-only terrain reports and source-index rasters.
 
 A page embeds only the hashes its first view reads: files its prepared markup and styles name, its startup resources and the textures its server markup writes. Each other resource's hash waits in a same-origin group file, `/objects/<id>/asset-hashes/<group>.json`, which the browser reads the first time a zoom level or dataset needs it. Resources whose keys differ only in their first index share a group (one dataset's pages at one level); keys without an index share one. A hash is 64 characters that do not compress, so Earth's page would otherwise carry 1,754 of them ([`site/asset-origin.mts`](site/asset-origin.mts)).
 

@@ -27,4 +27,4 @@ Run of 2026-09-23 (this version):
 - Three years of positions allow a range of orbits; the one drawn is wider than the paper's median.
 - The radius and mass are model values; the planet is a point in every image.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

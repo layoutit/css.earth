@@ -1,8 +1,8 @@
-// `@cssearth/objects/provenance` (browser-safe): the prepared provenance, exploration and source-usage records the runtime reads
-// and preparation writes: object provenance and its preparation and product-input evidence, the exploration catalogue, its
+// `@cssearth/objects/provenance` (browser-safe): the exploration and source-usage records the runtime reads and preparation
+// writes: the in-memory object lineage they are compiled from and its product-input evidence, the exploration catalogue, its
 // contribution graph and prepared form, source usage and prepared sources, and context availability. The dataset URLs in them
 // are the application's routes, which the host passes in as `DatasetRoutes`.
-export * from './object-provenance.js';
+export * from './object-lineage.js';
 export * from './product-input-evidence.js';
 export * from './exploration-catalog.js';
 export * from './exploration-contributions.js';

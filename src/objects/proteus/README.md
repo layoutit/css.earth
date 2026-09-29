@@ -44,7 +44,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - The applied illumination model is a display normalization, not an albedo inversion.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

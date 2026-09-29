@@ -23,4 +23,4 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** SIMBAD knows the system as OGLE SMC-ECL-1421 but links no Gaia DR3 source; it is placed at the Gaia DR3 source 0.02 arcsec from SIMBAD's position, G = 16.97 against DEBCat's V = 17.18.
 - **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

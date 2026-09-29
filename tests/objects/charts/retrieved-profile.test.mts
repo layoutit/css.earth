@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseRetrievedProfile, readProfileTable, profileWindow, readRetrievedProfile, renderRetrievedProfile } from '@cssearth/bake/objects/charts';
-import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
+import { bodyLineage } from '@cssearth/bake/objects/lineage';
 import { productSourceIds } from '@cssearth/objects/provenance';
 
 const root = resolve(import.meta.dirname, '../../..');
@@ -62,10 +62,8 @@ test('rejects unsafe recipes and clipped uncertainties', async () => {
   assert.throws(() => readProfileTable('0 0 0 0 0 0\n', recipe.series[0]!), /pressure/);
 });
 
-test('generated chart provenance binds all three deposited tables', async () => {
-  const provenance = await prepareObjectProvenance({ objectDirectory: resolve(source, '..'),
-    publicDirectory: resolve(root, 'public/scenes/wasp-18b'), basis: 'recovered', write: false });
-  assert.deepEqual(productSourceIds(provenance, 'chart:0').sort(), [
+test('the chart lineage binds all three deposited tables', async () => {
+  assert.deepEqual(productSourceIds(await bodyLineage(resolve(source, '..')), 'chart:0').sort(), [
     'wasp-18b-hydra-dayside-profile', 'wasp-18b-hydra-hotspot-profile', 'wasp-18b-pyratbay-hotspot-profile',
   ]);
 });

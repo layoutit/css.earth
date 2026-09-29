@@ -44,8 +44,8 @@ export async function pinPreparedObject(id: string, originalDescriptor: Record<s
   await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
     properties: { ...originalProperties, ...properties,
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
-  // Nothing under prepared/ is tracked. Every baked file moves to R2 through this inventory; object.json, page.json
-  // and provenance.json are regenerated on each checkout and stay out of it.
+  // Nothing under prepared/ is tracked. Every baked file moves to R2 through this inventory; object.json and page.json
+  // are regenerated on each checkout and stay out of it.
   await inventoryPreparedAssets({ objectId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory });
   return { bytes: Buffer.byteLength(payload), ...prepared };
 }

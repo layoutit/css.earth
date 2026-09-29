@@ -191,10 +191,10 @@
       "import": "./dist/objects/candidates.js",
       "default": "./dist/objects/candidates.js"
     },
-    "./objects/provenance": {
-      "types": "./dist/objects/provenance.d.ts",
-      "import": "./dist/objects/provenance.js",
-      "default": "./dist/objects/provenance.js"
+    "./objects/lineage": {
+      "types": "./dist/objects/lineage.d.ts",
+      "import": "./dist/objects/lineage.js",
+      "default": "./dist/objects/lineage.js"
     },
     "./objects/acquisition": {
       "types": "./dist/objects/acquisition.d.ts",

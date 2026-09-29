@@ -18,8 +18,7 @@ import { WORKSPACE } from '@cssearth/telescope/node';
  * `@cssearth/bake/{prepared-presentation,delivery,sources,contract}` and `@cssearth/objects/node/contract`, and the provenance,
  * exploration and source-usage records and the runtime asset closure (`src/platform/`) before `@cssearth/objects/provenance` and
  * `@cssearth/objects/node`, and the galaxy, cluster and nebula catalogue readers (`packages/catalog/src/`), which the navigation
- * destinations and the spatial source citations imported by path before they joined the bake, and the layered
- * provenance records and bindings (`tools/objects/`) before `@cssearth/bake/objects/provenance`; following them bundles
+ * destinations and the spatial source citations imported by path before they joined the bake; following them bundles
  * the code the lane runs from the checkout. Other packages stay external, as they always were. */
 const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/fits': 'packages/fits/src/index.ts',
@@ -67,7 +66,6 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
   '@cssearth/bake/objects/layers/terrestrial': 'packages/bake/src/objects/layers/terrestrial/index.ts',
   '@cssearth/bake/objects/stellar': 'packages/bake/src/objects/stellar/index.ts',
   '@cssearth/bake/objects/candidates': 'packages/bake/src/objects/candidates/index.ts',
-  '@cssearth/bake/objects/provenance': 'packages/bake/src/objects/provenance/index.ts',
   '@cssearth/bake/objects/acquisition': 'packages/bake/src/objects/acquisition/index.ts',
   '@cssearth/bake/objects/sphere-survey': 'packages/bake/src/objects/sphere-survey/index.ts',
   '@cssearth/bake/objects/default-view': 'packages/bake/src/objects/default-view/index.ts',

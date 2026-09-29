@@ -27,4 +27,4 @@ Run of 2026-09-23 (this version):
 - The radius and mass are model values; the planet is a point in every image.
 - The posterior holds 1,000 samples, so the orbit kept is the best of those, not a refined maximum.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

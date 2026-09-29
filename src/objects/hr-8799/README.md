@@ -36,4 +36,4 @@ Run of 2026-09-23 (this version):
 - The mass is the one the orbit fit assumed, not a measurement of this package.
 - **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

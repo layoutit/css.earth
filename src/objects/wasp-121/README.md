@@ -25,4 +25,4 @@ Run of 2026-09-23 (this version):
 - **The radius is the phase-curve fit's.** It is kept so the planet's orbit matches the fit its maps come from; the isochrone radius is 4 % larger.
 - **The spin axis is a display convention.** Its tilt to the line of sight is measured; its direction on the sky is not.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

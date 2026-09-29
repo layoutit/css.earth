@@ -21,7 +21,7 @@ test('a missing bank isolates one object; restoring it admits the complete packa
   assert.deepEqual((await prepareContextAvailability({ projectRoot: root, strict: true })).availability, { helix: { available: true }, lmc: { available: true } });
 });
 
-for (const path of ['prepared/slice.webp', 'prepared/presentation.json', 'prepared/provenance.json', '../../../public/scenes/helix/preview.webp']) {
+for (const path of ['prepared/slice.webp', 'prepared/presentation.json', 'source/manifest.json', '../../../public/scenes/helix/preview.webp']) {
   test(`partial package is unavailable when ${path} is missing`, async t => {
     const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
     const f = await writeContextPackage(root, 'helix'); await writeContextPackage(root, 'lmc');
@@ -41,13 +41,13 @@ test('a corrupt prepared bank fails to decode without disabling another package'
   await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /not valid JSON/i);
 });
 
-test('invalid presentation and provenance cannot become available merely because their files exist', async t => {
+test('an invalid presentation or unbound lens source cannot become available merely because the files exist', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
   const f = await writeContextPackage(root, 'helix');
   await writeFile(resolve(f.directory, 'prepared/presentation.json'), JSON.stringify({ ...f.presentation, objectId: 'different' }));
   assert.equal((await inspectContextAvailability(root)).helix.available, false);
   await writeContextPackage(root, 'helix');
-  await writeFile(resolve(f.directory, 'prepared/provenance.json'), JSON.stringify({ ...f.provenance, objectId: 'different' }));
+  await writeFile(resolve(f.directory, 'source/manifest.json'), JSON.stringify({ ...f.manifest, inputs: [{ ...f.manifest.inputs[0], lensId: 'infrared' }] }));
   assert.equal((await inspectContextAvailability(root)).helix.available, false);
   assert.throws(() => parseContextAvailability({ helix: { available: 'true' } }));
   assert.throws(() => parseContextAvailability({ helix: { available: false } }));

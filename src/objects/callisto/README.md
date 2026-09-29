@@ -49,7 +49,7 @@ Feature notes: 12 of the labelled names carry a caption note, the lead summary o
 
 - **Infrared:** This is a partial spectral-color view, not natural color or a mineral-abundance map.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

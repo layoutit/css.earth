@@ -23,4 +23,4 @@ Run of 2026-09-23 (this version): [the four bodies in the app](../eps-indi-a/evi
 - **No surface.** The sphere is neutral gray. Model spectra (cloud-free Bobcat, cloudy Diamondback) were tested and miss a measured dwarf's colour, so none is used, and with no colour lens there is no limb to draw ([ledger](investigations.json)).
 - **The spin axis is a display convention.**
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

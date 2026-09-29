@@ -106,9 +106,6 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
   await writeWorldNavigationArtifacts(outputDirectory, navigation, scene);
   // Captions do not require recompiling texture matrices, seam treatment or body geometry.
   await repinObjectJson(id);
-  const { prepareObjectProvenance } = await import('@cssearth/bake/objects/provenance');
-  // Only these photographs ran. Bind the retained products without claiming a full package preparation.
-  await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

@@ -3,8 +3,9 @@ import { relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedVolumeLenses } from '@cssearth/renderer/universe';
-import { validateObjectProvenance } from '@cssearth/objects/provenance';
+import { lineageSource } from '@cssearth/objects/provenance';
 import type { ContextAvailability } from '@cssearth/objects/provenance';
+import { sourceArray, sourceObject } from '@cssearth/objects/sources';
 import { parsePreparedVolumePresentation } from '../../volume-presentation.mts';
 import { readContextObjects } from '@cssearth/objects/node';
 import { hasErrorCode } from '@cssearth/core';
@@ -40,20 +41,15 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
     try {
       const descriptor = parseObjectDescriptor(JSON.parse((await read(directory, 'object.json')).toString()));
       const bank = await loadPreparedVolumeLenses(descriptor, { read: async path => new Uint8Array(await read(directory, path)).buffer });
-      const provenance = validateObjectProvenance(JSON.parse((await read(directory, 'prepared/provenance.json')).toString()), id);
-      const presentation = parsePreparedVolumePresentation(JSON.parse((await read(directory, 'prepared/presentation.json')).toString()), bank, provenance);
+      const sources = sourceArray(sourceObject(JSON.parse((await read(directory, 'source/manifest.json')).toString())).inputs, raw => lineageSource(raw));
+      const presentation = parsePreparedVolumePresentation(JSON.parse((await read(directory, 'prepared/presentation.json')).toString()), bank, sources);
       for (const lens of bank.lenses) for (const resource of lens.volume.resources)
         await verify(resolve(directory, 'prepared'), resource.path);
-      const outputs = provenance.products.flatMap(product => product.outputs);
-      const bankUrl = `src/objects/${id}/${descriptor.prepared!.url}`;
-      if (!outputs.some(output => output.url === bankUrl)) throw new TypeError(`${id}: prepared/provenance.json products[].outputs[].url never names the prepared bank ${bankUrl}.`);
-      await verify(projectRoot, bankUrl);
       const published = publicAssets === 'manifest'
         ? requireInventory(id, JSON.parse((await read(directory, 'inventory.json')).toString()))
         : null;
       for (const lens of presentation.controls) for (const url of new Set([lens.thumbnailUrl, lens.texture?.url])) {
         if (!url?.startsWith(`/scenes/${id}/`)) throw new TypeError(`Invalid dataset preview URL: ${url}.`);
-        if (!outputs.some(output => output.url === url)) throw new TypeError(`${id}: prepared/provenance.json products[].outputs[].url never names the dataset preview ${url}.`);
         if (published) {
           const filename = url.slice(`/scenes/${id}/`.length);
           if (!published.assets.some(candidate => candidate.filename === filename && candidate.location === 'public'))

@@ -80,7 +80,7 @@ Named features run of 2026-09-15 (this version): [`node tools/objects/dist/prepa
   ice and unavailable imagery remain gaps; the display does not reconstruct
   continuous temperature measurements from RGB.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 - The limb law is a Minnaert fit to whole-disc EPIC frames, clouds included; bins scatter 18–50% about it because clouds move, and a flattened average stands in for every scene. It applies to every lens, including the cloud-free map. The overlay has one colour and alpha per pixel, exact for the map's displayed mean colour. The night-lights lens takes no lighting or halo, since city light is emitted.
 

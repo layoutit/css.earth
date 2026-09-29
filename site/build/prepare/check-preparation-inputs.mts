@@ -90,7 +90,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     if (!ids.includes('sun')) {
       const restored = await restoreDriftedFiles('sun', { keep: worldStepOutput });
       if (restored.length) console.log(`Restored ${restored.length} Sun file(s) that differed from its inventory, before the world and pins steps build on them: ${restored.join(', ')}.`);
-      // A checkout that never restored the Sun also lacks the page data derived from it, which the provenance step reads.
+      // A checkout that never restored the Sun also lacks the page data derived from it, which the sources catalogue step reads.
       await deriveRestoredPreparedFiles(['sun'], root);
     }
   }

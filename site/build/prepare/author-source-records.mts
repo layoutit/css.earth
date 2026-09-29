@@ -1,19 +1,18 @@
 // Entry script: node site/build/prepare/author-source-records.mts <object-id>. Binds an object's inputs to the source catalogue
-// (`authorSourceRecords` in @cssearth/bake/sources), then writes the volume packages' provenance again when a volume's manifest
-// changed, since the application's volume compiler writes that record.
+// (`authorSourceRecords` in @cssearth/bake/sources), then writes the volume packages' presentations again when a volume's
+// manifest changed, since each lens preview credits its manifest input.
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { authorSourceRecords } from '@cssearth/bake/sources';
 import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
-import { writeVolumeProvenance } from './prepare-volume-provenance.mts';
+import { writeVolumePresentations } from './prepare-volume-presentation.mts';
 
 const ids = process.argv.slice(2);
 if (ids.length !== 1 || ids[0].startsWith('--')) throw new TypeError('Usage: author-source-records <object-id>');
 const root = process.cwd(), manifestPath = resolve(root, 'src/objects', ids[0], 'source/manifest.json'), before = await readFile(manifestPath);
 console.log(JSON.stringify(await authorSourceRecords({ root, objectId: ids[0] }), null, 1));
-// A body's provenance record is generated from its manifest on every checkout. A volume package's is still written by the volume compiler.
 const presentation = await readFile(resolve(root, 'src/objects', ids[0], 'source/presentation.json'), 'utf8').then(text => JSON.parse(text) as { schema?: unknown }, () => null);
 if (!before.equals(await readFile(manifestPath)) && presentation?.schema === 'cssearth-volume-presentation-source@1') {
-  const results = await writeVolumeProvenance({ root, mirrorOrigin: RUNTIME_ASSET_ORIGIN });
-  console.log(`Volume provenance recorded again for the changed manifest: ${results.length} volume packages.`);
+  const results = await writeVolumePresentations({ root, mirrorOrigin: RUNTIME_ASSET_ORIGIN });
+  console.log(`Volume presentations written again for the changed manifest: ${results.length} volume packages.`);
 }

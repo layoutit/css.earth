@@ -9,7 +9,6 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { SolarGeometry } from '../objects/scene/index.ts';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
-import { prepareObjectProvenance } from '../objects/provenance/index.ts';
 const records=(value:unknown)=>requireArray(value).map(value=>requireRecord(value));
 
 
@@ -134,7 +133,6 @@ export async function applyStagedTerrainPhotographs(id:string,ids:readonly strin
   for(const [path,document] of documents)await save(path,document);
   inventory.assets=assets.map(asset=>asset.location==='public'&&newAssets.has(requireString(asset.filename))?{...asset,...newAssets.get(requireString(asset.filename))}:asset);
   await save(resolve(context.objectDirectory,'inventory.json'),inventory);
-  await prepareObjectProvenance({objectDirectory:context.objectDirectory,publicDirectory:context.publicDirectory,outputDirectory:context.outputDirectory,basis:'recovered'});
   if(!(await readFile(resolve(context.outputDirectory,'scene.json'))).equals(context.sceneBytes))throw new Error('Photographic refresh changed the retained scene.');
   return results;
 }

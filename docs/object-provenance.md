@@ -4,16 +4,15 @@
 observation-attribution policy and why a selectable dataset view can combine
 several products and published sources.
 
-## Lineage contract
+## Lineage
 
-Every registered scene package uses the same `prepared/provenance.json` contract,
-`cssearth-object-provenance@3`. It connects local inputs to prepared outputs.
-The file is generated and never committed. For layered scene bodies,
-`packages/bake/src/objects/provenance/recover-provenance.ts` regenerates it from the source manifest,
-recipes and inventory during development and builds. Volume, image-layer and
-catalogue packages publish their baked provenance through `inventory.json`;
-asset setup restores it. To change the lineage, change its source records and
-use the owning preparation path.
+An object's provenance is its source records: the source manifest, the recipes
+its descriptor names and, for volumes and catalogue contexts,
+`source/presentation.json`. No generated provenance file is written or
+published. The facilities and sources catalogues build each object's lineage
+(which manifest sources each prepared product reads) in memory from those
+records when they compile, and nothing else keeps it. To change the lineage,
+change its source records.
 The [Sources catalogue](sources-catalogue.md) supplies the published identities
 and combines usage across bodies. Neither infers dependencies from labels or URLs.
 
@@ -22,89 +21,58 @@ and combines usage across bodies. Neither infers dependencies from labels or URL
 1. The object source manifest owns input identity, acquisition information,
    credits, rights and optional human-readable source titles and product URLs.
 2. The authored recipe owns the transformation and its parameters. The shared
-   preparation-family bindings in `packages/bake/src/objects/provenance/provenance-recipes.ts` identify
-   consumed inputs and outputs for each operation.
-3. `prepareAuthoredObject` finalizes provenance after preparing assets, content
-   and previews. The write path also finishes CSS bindings, navigation and page
-   metadata in staging before publishing the outputs together.
-4. The Sources compiler follows this lineage and each input's `sourceBinding`.
+   preparation-family bindings in `packages/bake/src/objects/lineage/lineage-recipes.ts`
+   identify the inputs each operation consumes; `body-lineage.ts` beside it
+   reads a layered body's records into its lineage. A volume's lenses read their
+   own image, their declared further inputs and the shared inputs its
+   `source/presentation.json` names. A catalogue context declares its products
+   and their inputs in the `provenance` block of its `source/presentation.json`.
+3. The Sources compiler follows this lineage and each input's `sourceBinding`.
    It derives usage links to published works. The footer links the selected
    subject's README, where sources, unresolved inputs and limitations are
    documented. Dataset cards use contribution edges to identify their missions
    and observing equipment.
 
-Each source has its declared path. The generator measures its byte count
-when the file is present; absent downloads are marked `download-not-present`.
-These measurements in generated lineage are not manifest pins or proof that a
-download matches earlier bytes. Each product records its
-recipe, a JSON Pointer to the operation, any additional contributing recipes,
-input IDs, parent products, output identities, interpretation and limitations.
-Acquisition operations retain configuration-file dependencies recursively;
-their inputs are checked as well as the final acquired product.
-Preview products inherit their original dataset's input lineage. A recipe may
-describe a scientific model or an illustration; recording lineage does not
-turn either into an observation.
+Each product records its label, the datasets it shows, its input IDs, parent
+products, interpretation and limitations. Acquisition operations
+(`source/preparation/acquisition.json`) add the file an input was built from, and
+its conversion recipe, as dependencies of that input. A dataset that borrows
+another lens's plates has that lens as its parent. A recipe may describe a
+scientific model or an illustration; recording lineage does not turn either into
+an observation.
 
 The manifest's `documents` collection includes provider labels and authored
 records. It does not establish authorship. Preserve each document's origin,
 credit and acquisition description; use `kind: authored-document` only for
 project-authored records. The content recipe identifies authored page content.
-Other documents default to `source-document`; missing credits or acquisition
-details remain explicitly unrecorded. Generated intermediates retain their own
-generator and source credits.
+Other documents default to `source-document`; a missing credit remains
+explicitly unrecorded. Generated intermediates retain their own generator and
+source credits.
 
-The validator rejects missing inputs, missing recipe operations, unpinned
-outputs and dependency cycles. Unknown dataset operations remain explicit
-coverage gaps. Extending a preparation family requires adding its actual
+The lineage check rejects unknown inputs, parents and datasets and dependency
+cycles. A lens whose preparation family has no binding has no product, so it
+credits no source. Extending a preparation family requires adding its actual
 dependency binding and a behavioral test, not a body-specific UI condition.
 
-## Existing assets versus a new preparation run
-
-From the repository root, run:
+After changing source records or bindings, rebuild the catalogues:
 
 ```sh
-node site/build/prepare/prepare-provenance.mts <object-id>
+node site/build/prepare/prepare-facilities.mts --catalog-only
 ```
 
-Omit the ID to regenerate all registered scene-body records. By default the
-command validates and publishes their prospective lineage and both shared
-catalogues together. `--objects-only` writes only the scene-body records; the
-startup/build chains use it before preparing the catalogues. The command does
-not rebake surface assets or regenerate volume/catalogue provenance.
+The lineage establishes the recorded source chain, not a fresh acquisition or a
+reproduced bake. Preserve original execution reports under their owning evidence
+directory and identify the revision they actually tested. An acquisition
+operation records the declared request and processing policy; it is not a
+retrospectively invented execution receipt. Some legacy generated inputs and
+authored scientific specifications do not contain complete upstream acquisition
+histories; the compiler does not invent evidence to fill those gaps.
 
-Each invocation builds current lineage with `basis: recovered` and `verify: false`.
-It does not retain an earlier record, accept `--recover`, or compare an authored
-recipe with a stored manifest digest. Present sources and recipes are measured;
-missing downloads remain explicit. Output identities come from the runtime
-inventory or available prepared outputs. This establishes the recorded source
-chain, not a fresh acquisition or a reproduced bake.
-
-The authored preparation path can produce `basis: prepared` after checking its
-bound outputs and records `lastPreparation` for that run. A later metadata
-regeneration does not carry that snapshot forward as proof of a new run.
-Preserve original execution reports under their owning evidence directory and
-identify the revision and bytes they actually tested.
-
-An acquisition operation records the declared request and processing policy,
-when available. It is not a retrospectively invented execution receipt. Some
-upstream requests only verify an existing source; these are recorded separately
-as verification operations and never substituted for acquisition history. Some
-legacy generated inputs and authored scientific specifications do not contain
-complete upstream acquisition histories. Their identities remain recorded;
-the compiler does not invent evidence to fill those gaps.
-
-Coverage is explicitly `object-datasets-and-bound-rendering-products`.
-This is not a claim of provenance for every scientific statement, every runtime
-byte, the shared sky, or remote geographic delivery. Authored information is
-recorded as authored content. The Sources compiler separately reads the
-[citations on individual facts](factsheets.md); that records attribution, not
-independent verification of the quantity. `generator.path` names the current
-lineage compiler; it does not identify the implementation that originally made
-an installed asset. Git revisions and original run evidence establish that history.
-Shared scene credits retain their existing
-separate owner. The compiler also supports Earth noise page records, but those
-geographic views are absent from Earth's current descriptor. That binding does
-not certify worldwide imagery coverage or remote availability.
+The lineage covers an object's datasets and the rendering products their recipes
+bind. It is not a claim of provenance for every scientific statement, every
+runtime byte, the shared sky, or remote geographic delivery. The Sources compiler
+separately reads the [citations on individual facts](factsheets.md); that
+records attribution, not independent verification of the quantity.
 
 ## Publishing an authored preparation
 
@@ -159,16 +127,16 @@ For source bindings or product-lineage changes, run:
 pnpm test:node
 ```
 This is the broad native suite. For a focused change, select the relevant tests
-under `tests/provenance/`, `tests/contract/`, `tests/sources/` and the affected preparer.
-Report source-dependent skips separately. The suite does not reinstate the
-removed manifest-pin or provenance-retention checks, and a pass does not replace
-independent scientific qualification.
+under `tests/provenance/`, `tests/contract/` (`body-lineage.test.mts`,
+`context-lineage.test.mts`), `tests/sources/` and the affected preparer.
+Report source-dependent skips separately. A pass does not replace independent
+scientific qualification.
 
 ## Prepared context resources
 
-Catalogue fields and image-layer galaxies use the same version-3 provenance
-schema without becoming independently mounted scenes. Their source manifests,
-recipes and prepared receipts feed the shared Sources compiler.
+Catalogue fields and image-layer galaxies feed the shared Sources compiler from
+their source manifests and `source/presentation.json` without becoming
+independently mounted scenes.
 
 Their root `inventory.json` lists every baked file with its location. A
 `prepared` entry's filename may contain safe relative subdirectories and
@@ -183,6 +151,4 @@ it must never prune object preparation records.
 
 An explicit `--object=<id>` can select an inventoried context resource for
 shared asset setup. Default scene selection is unchanged. An inventory does
-not claim its files have been published to the runtime asset mirror. Volume, image-layer and catalogue
-`prepared/provenance.json` files are baked assets in their inventories. The
-scene-body provenance generator does not reconstruct a missing record for them.
+not claim its files have been published to the runtime asset mirror.

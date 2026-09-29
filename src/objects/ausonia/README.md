@@ -67,7 +67,7 @@ The release supplies no registered surface imagery; neutral gray marks that gap.
 
 The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Ausonia from 15° to 16° north, so surface the survey did not see keeps the missing-imagery grid.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

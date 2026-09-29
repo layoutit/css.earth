@@ -39,8 +39,8 @@ and compiled rendering leaves stay with the object and preparation adapter.
 `@cssearth/objects/sources` is the source catalogue: its records, citations and
 bindings and the validators every one passes. It stays browser-safe, because the
 application reads the catalogue with it. `@cssearth/objects/provenance` is the second
-browser-safe entry: the validators for object provenance and its preparation and
-product-input evidence, the exploration catalogue with its contribution graph and prepared
+browser-safe entry: the in-memory object lineage (which manifest sources each prepared
+product reads) and its product-input evidence, the exploration catalogue with its contribution graph and prepared
 form, source usage and prepared sources, and context availability. Preparation writes these
 records and the application reads them, so both import the same validators; its tests are in
 the repository's `tests/provenance/`. Which URL selects a dataset is the application's route,

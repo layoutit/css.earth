@@ -20,4 +20,4 @@ Measured and not shown: mass, 0.281 ± 0.031 ± 0.006 Jupiter masses (Mancini et
 
 JWST has measured this planet’s atmospheric spectrum; none of that is shown. Mancini et al. measure a sky-projected spin-orbit angle of 0 ± 11 degrees, which is not used. The package draws a neutral gray sphere of the measured radius.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

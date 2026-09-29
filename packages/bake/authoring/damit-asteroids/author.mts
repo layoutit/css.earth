@@ -499,7 +499,7 @@ Checked ${checked} by \`packages/bake/authoring/damit-asteroids/author.mts\` fro
 - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain.
 - The displayed rotation phase is arbitrary and not propagated from the model epoch.${model.yorpRadPerDay2 === undefined ? '' : ` The measured YORP spin-up (${model.yorpRadPerDay2} rad/day²) is recorded but not propagated.`} Orbit context is fixed at 2026-09-03 TT.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

@@ -283,7 +283,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     ...limb.limbDarkening ? [`- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and ${gravity?.kind === 'bounded' ? 'a display gravity inside its class\'s published range (see Limb)' : 'gravity'}, not a measurement of this star.`] : [],
     ...spec.notes.map(note => `- **Not shown.** ${note.replace(/\.$/u, '')}.`),
     ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
-    '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
+    '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
 
   files.set(`src/sources/gaia-dr3-${id}.json`, json({ id: `gaia-dr3-${id}`, kind: 'data-product', identityLevel: 'work', title: `Gaia DR3 gaia_source row for ${spec.name} (source_id ${row.sourceId})`,
     identifiers: [{ type: 'Gaia DR3 source_id', value: row.sourceId }], links: [{ role: 'archive', url: 'https://gea.esac.esa.int/archive/', label: 'Gaia Archive' }, { role: 'landing', url: 'https://doi.org/10.1051/0004-6361/202243940', label: 'Gaia Collaboration (2023), Gaia DR3 summary' }],

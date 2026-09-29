@@ -127,7 +127,7 @@ Feature notes: 12 of the labelled names carry a caption note, the lead summary o
 
 - **Reuse:** The Zenodo record is open/`other-open`, but neither the tagged source nor the located record metadata provides explicit terms for reusing the numerical release. Article or preprint licensing does not settle those data rights. The three composition views are therefore withheld: they have no lens, surface recipe or dataset text, and no composition asset is published. The pinned sources, conversion records and evidence stay so the views can return once explicit reuse terms exist.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

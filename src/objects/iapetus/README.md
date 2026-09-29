@@ -58,7 +58,7 @@ Feature notes: 11 of the labelled names carry a caption note, the lead summary o
 - Temperature's grid lines, axis ticks and asterisk are shown as missing (no data) strips and a small square, not filled in. The figure's black and its compression halo are also missing, so the lens cannot show whether a black area was unobserved or colder than 70 K.
 - Geometry is a 734.3 km mean-radius sphere, without the oblate figure or equatorial ridge. No qualified downloadable height raster was found in the 2026-09-06 source search; this does not establish that terrain models do not exist.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="iapetus-sources"></a>
 <a id="monochrome"></a>

@@ -76,4 +76,4 @@ they are not the same quantity, but the superlative is not ours to assert.
 pattern changes over weeks, so the lens is one night of a changing surface.
 - **Measured limb, other band.** The law was measured or fixed outside the visible band the colour is drawn in; the visible limb is not measured.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -171,12 +171,11 @@ jobs:
             node .github/scripts/ci/prepare-ci-inputs.mts universe
           fi
           node packages/bake/cli/restore-object-json.mts
-          node site/build/prepare/prepare-provenance.mts --objects-only
           node site/build/prepare/prepare-feature-index.mts
           # The source catalogue the facility tests reconcile is a generated, ignored file.
           node site/build/prepare/prepare-facilities.mts --catalog-only
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
-            # Authoring replays volume provenance from pinned FITS.
+            # Authoring replays the volume presentations from pinned FITS.
             node packages/bake/cli/restore-source-inputs.mts --repository-volumes
             CSSEARTH_SOURCE_CHECK_MODE=author node --test "tests/provenance/exploration-*.test.mts" "tests/sources/*.test.mts" "site/test/*{source,facilit}*.test.mts" "tests/objects/surface-observations/*.test.mts"
           else

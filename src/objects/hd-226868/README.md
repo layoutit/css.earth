@@ -42,4 +42,4 @@ Generated 2026-09-27 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Distance.** The star is placed at Gaia DR3's 2,253 pc. Miller-Jones et al. derived its radius and mass at their radio distance, 2.22 (+0.18/−0.17) kpc; the two agree within their errors.
 - **Drafted text.** The card and introduction were drafted for this package from Miller-Jones et al. (2021)'s Table 1 values; their quotes are sentences of the Wikipedia article "Cygnus X-1" (revision 1374065663), verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -38,7 +38,7 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
     const pin=requireRecord(recipe[key]),path=relative(root,resolve(root,dirname(recipePath),requireString(pin.path)));
     await read(path);
   }
-  if(kind==='volume-lens-bank')for(const path of ['README.md','prepared/provenance.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
+  if(kind==='volume-lens-bank')for(const path of ['README.md','source/manifest.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
     try{await read(path);}catch(error){if(!(error instanceof Error&&'code'in error&&(error as NodeJS.ErrnoException).code==='ENOENT'))throw error;}
   }
   const entry=new URL(kind==='points'?'../../../packages/renderer/src/stars/loader.ts':kind==='volume'?'../../../packages/renderer/src/volume/loader.ts':'../../../packages/renderer/src/volume/prepared-volume-lenses.ts',import.meta.url);

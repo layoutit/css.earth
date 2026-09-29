@@ -44,7 +44,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - **Orientation:** Small optical librations and dynamical phase errors are not represented.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## False color preparation
 

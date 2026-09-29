@@ -42,7 +42,7 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
     'objects/layers/terrestrial': 'src/objects/layers/terrestrial/index.ts',
     'objects/stellar': 'src/objects/stellar/index.ts',
     'objects/candidates': 'src/objects/candidates/index.ts',
-    'objects/provenance': 'src/objects/provenance/index.ts',
+    'objects/lineage': 'src/objects/lineage/index.ts',
     'objects/acquisition': 'src/objects/acquisition/index.ts',
     'objects/sphere-survey': 'src/objects/sphere-survey/index.ts',
     'objects/default-view': 'src/objects/default-view/index.ts',

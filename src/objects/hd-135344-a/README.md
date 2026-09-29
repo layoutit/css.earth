@@ -27,4 +27,4 @@ Run of 2026-09-23 (this version): see the planet's README for its placement agai
 - The radius is a model or catalogue value; the disc is not measured.
 - The limb darkening is a model: the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 9,540 K (the record) and log g 4.43 (from the record's mass and radius (packages/astronomy/data/bodies/hd-135344-a.json)).
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

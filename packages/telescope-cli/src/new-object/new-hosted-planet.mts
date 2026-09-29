@@ -235,7 +235,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
     documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json'].map(path => ({ path,
       ...(path === 'content/object.json' ? { sourceBinding: local('Project-authored factsheet, dataset recipe and legend.') } : {}) })) });
-  put(`${o}/README.md`, `# ${name}\n\n## Sources\n\n${TODO}: what is measured, what is not, and where each number comes from.\n\n## Evidence\n\n${TODO}\n\n## Known problems\n\n${TODO}\n\n[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)\n`);
+  put(`${o}/README.md`, `# ${name}\n\n## Sources\n\n${TODO}: what is measured, what is not, and where each number comes from.\n\n## Evidence\n\n${TODO}\n\n## Known problems\n\n${TODO}\n\n[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)\n`);
   put(`${o}/NOTICE.md`, `# ${name} credits\n\n${TODO}: the sources this package redistributes and their terms.\n`);
   // Empty, like the TODO prose: `pnpm check:investigations` refuses it until the sources examined are recorded (new-object
   // writes its own choices over it, ledger.mts).

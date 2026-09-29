@@ -79,11 +79,11 @@ reads the files in ID order and rejects duplicate identities.
 
 ## Prepare and check
 
-Run `node site/build/prepare/prepare-provenance.mts` after changing catalogue metadata,
-bindings or capture records. This refreshes scene-body lineage and coordinates
-both shared catalogues. `node site/build/prepare/prepare-facilities.mts --catalog-only`
-rebuilds the catalogues from installed provenance without generating previews;
-volume and catalogue provenance must already be installed from their inventories.
+Run `node site/build/prepare/prepare-facilities.mts --catalog-only` after changing catalogue
+metadata, bindings or capture records. It rebuilds both shared catalogues from each object's
+source records without generating previews; volume presentations must already be installed
+from their inventories. Without `--catalog-only` it also rebuilds the volume presentations
+and previews from their sources.
 
 The source catalogue records its source-file list. Tracked source records carry
 paths, citations and bindings, not descriptor or manifest digest expectations.

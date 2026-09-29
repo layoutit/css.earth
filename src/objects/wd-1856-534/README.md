@@ -23,4 +23,4 @@ The only law fitted to its transits ([Gendreau-Distler et al. 2026](https://doi.
 - The wide M-dwarf companions G 229-20 A and B are not shown.
 - **Measured limb, other band.** The law was measured or fixed outside the visible band the colour is drawn in; the visible limb is not measured.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

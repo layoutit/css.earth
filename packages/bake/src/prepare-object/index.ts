@@ -9,11 +9,11 @@
  * the paged-ellipsoid and raster lanes support it, and it refuses when the published image set would change.
  *
  * Each step is an existing tool. Nothing here decides science: it orders the tools, rebuilds what a step would read stale, and
- * never runs a repository-wide provenance pass (that one upgrades records of unrelated objects whose sources happen to be on
- * this checkout). Resume after a fix with `--from <step>`.
+ * rebuilds the shared sources catalogue from the installed packages, never from other objects' authoring inputs. Resume after a
+ * fix with `--from <step>`.
  *
  * With several objects each step runs once: a shared step (the builds, the catalogue, the world context) once in all, a tool
- * that takes the id list (page data, reader text, markers, provenance) once with every id, and the authored preparation, the
+ * that takes the id list (page data, reader text, markers) once with every id, and the authored preparation, the
  * only CPU-bound step, PREPARATIONS_AT_ONCE objects at a time. Measured on 57 objects (2026-09-24): one call per object and
  * per tool spent about 20 s of start-up on each, an hour in all; this order takes minutes. */
 import { execFile, spawnSync } from 'node:child_process';
@@ -65,7 +65,7 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
     return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('site/build/prepare/prepare-catalog.mts')];
   } },
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
-  { name: 'provenance', purpose: 'record provenance for this object and rebuild the shared sources catalogue', scope: 'ids', commands: async ids => [node('site/build/prepare/prepare-provenance.mts', ...ids)] },
+  { name: 'catalogues', purpose: 'rebuild the shared sources and facilities catalogues from the object\'s source records', scope: 'once', commands: async () => [node('site/build/prepare/prepare-facilities.mts', '--catalog-only')] },
   // The world context is written under the Sun's prepared/; without this its inventory still pins the bytes from before the object existed.
   { name: 'pins', purpose: "pin the Sun's regenerated world files into its inventory", scope: 'once', commands: async () => [node('site/build/prepare/prepare-object-json.mts', 'sun')] },
 ]);

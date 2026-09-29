@@ -106,8 +106,8 @@ matched framing and workloads when comparing quality or cost.
 
 Put the results and known problems in the body's README, alongside its source
 explanation. Link the original test reports and inspected screenshots. Keep
-lengthy source calculations in the existing source notes. A recovered provenance record
-does not prove the preparation was rerun.
+lengthy source calculations in the existing source notes. The lineage the catalogues read
+from the source records does not prove the preparation was rerun.
 
 Report concise outcomes and useful visual links, source/processing limitations
 and any outstanding failure. Do not equate skill validation, registry presence,

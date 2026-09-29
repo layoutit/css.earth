@@ -52,7 +52,7 @@ We checked the Phobos layers that [NASA Phobos Trek](https://trek.nasa.gov/phobo
 - **HRSC V/NIR spectral index.** The only public copy is a colour picture with seven legend classes and an unexplained white class. The producer's PDS release holds four regional colour image sets, not an index grid.
 - **PH9224GT crater catalogue.** Added as the Crater catalogue lens (above). Trek's crater count and abundance maps are binnings of the same catalogue and were not added.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

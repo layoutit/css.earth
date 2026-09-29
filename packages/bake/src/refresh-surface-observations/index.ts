@@ -11,7 +11,6 @@ import type { SolarGeometry } from '../objects/scene/index.ts';
 import { parseSolidPreparationSource, retainedPhotographicAtlas, loadRadialTerrain, prepareRadialMaterials, prepareSolidRasters, prepareSolidSurfacePoles } from '../objects/layers/terrestrial/index.ts';
 import { lensBillboardColors } from '../objects/content/index.ts';
 import { prepareSurfaceMinimaps } from '../surface-previews/index.ts';
-import { prepareObjectProvenance } from '../objects/provenance/index.ts';
 import { repinObjectJson } from '../contract/index.ts';
 
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
@@ -88,11 +87,10 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   await writeFile(resolve(objectDirectory, 'inventory.json'), JSON.stringify(nextInventory, null, 2) + '\n');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds, solarGeometry });
   await refreshObservationControls(id, lensIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
-  await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
   if (!(await readFile(resolve(outputDirectory, 'scene.json'))).equals(originals.get('scene.json')!)) throw new Error('Observation refresh changed the scene.');
   const report = { id, lensIds, seconds: (performance.now() - started) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024,
     refreshedRuntimeAssets: [...changed.values()].map(({ filename, bytes }) => ({ filename, bytes })),
-    retainedRuntimeAssetCount: assets.length - changed.size, provenanceBasis: 'recovered', observations: surfaces.map(surface => surface.observation) };
+    retainedRuntimeAssetCount: assets.length - changed.size, observations: surfaces.map(surface => surface.observation) };
   await writeFile(resolve(stage, 'refresh.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ id, seconds: report.seconds, maxRssMiB: report.maxRssMiB, refreshedAssets: changed.size, retainedAssets: report.retainedRuntimeAssetCount }));
   return report;

@@ -66,7 +66,7 @@ Prime-meridian display phase is explicitly arbitrary; the available IAUspin file
 
 The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Doris from 17° to 19° north, so surface the survey did not see keeps the missing-imagery grid.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
