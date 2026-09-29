@@ -5,7 +5,7 @@
     "../navigation/**/*.mts",
     "../../packages/renderer/src/**/*.test.mts",
     "../../site/env.d.ts",
-    "../../tools/external-modules.d.mts"
+    "../../tests/external-modules.d.mts"
   ],
   "exclude": [
     "**/dist/**",
