@@ -34,8 +34,7 @@ export async function exportCompactCompiler(root: string, objectId: string) {
   for (const bank of banks) {
     const volume = validatePreparedCssVolume(JSON.parse((await pinned(root, bank.volume)).toString()));
     if (bank.id === 'neutral' && record(volume.provenance)) minimumFeatureScaleArcsec = volume.provenance.minimumFeatureScaleArcsec;
-    // Expected resources name each texture by path and size; the replay compares them with its own output.
-    expected.push({ id: bank.id, resources: volume.resources.map(({ sha256: _content, ...resource }) => resource) });
+    expected.push({ id: bank.id, resources: volume.resources });
   }
   const input = { schema: 'cssearth-compact-compiler@1', objectId,
     provenance: { resultPath,

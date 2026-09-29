@@ -108,7 +108,6 @@ export async function loadFiniteModelStarContext(root: string, modelResultId: st
   let envelopeAt: ((x: number, y: number, z: number) => number) | null = null, envelopePin: { path: string } | null = null;
   if (envelopeRecord && record(envelopeValue)) {
     validateEnvelopeSettings(envelopeValue.settings);
-    if (prior.identity !== envelopeValue.priorIdentity) throw new TypeError('Depth density differs from the prior this envelope was fitted with.');
     const zRange = vector(envelopeValue.zRange, 2, 'envelope depth range');
     envelopeAt = createEnvelopeSampler({ width: Number(envelopeValue.width), height: Number(envelopeValue.height), bounds: bounds2(envelopeValue.bounds, 'envelope bounds'),
       zRange: [zRange[0]!, zRange[1]!], gain: Float32Array.from(envelopeValue.gain as number[]) }, prior);

@@ -71,7 +71,7 @@ function completedFixture(options: { depth?: boolean; photometric?: boolean; dep
       frame: { referenceFrame: 'lab-sky-angular', epochJdTt: 2451545, metersPerUnit: 1, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], boundsUnits: bounds },
       sourceImage: { width: 512, height: 512 }, coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: [0, 0, 0], earthView: 'observer-at-negative-z-looking-away' },
       neutral: blob, lenses: [{ id: 'optical', label: 'Optical', volume: blob, coverage: { positiveAlphaTexels: 1, recoloredTexels: 1, outsideImageTexels: 0 } }],
-      stars: [], alphaSha256: 'f'.repeat(64), sampling: { sliceCounts: { x: 1, y: 1, z: 1 }, imageWidth: 512, samplesPerSlab: 4 } } };
+      stars: [], sampling: { sliceCounts: { x: 1, y: 1, z: 1 }, imageWidth: 512, samplesPerSlab: 4 } } };
   const receipt = { ...publication, inputs: inputPaths.map(path => ({ path })), result: put(`${directory}/result.json`, result) };
   const fetchLocal = async (path: string) => path === pointer ? Response.json(receipt) : data.has(path) ? new Response(data.get(path)!) : new Response(null, { status: 404 });
   return { data, receipt, fetchLocal, depthPath, evidencePath, result };

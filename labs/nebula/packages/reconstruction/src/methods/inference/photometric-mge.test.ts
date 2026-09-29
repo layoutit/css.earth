@@ -66,7 +66,7 @@ test('conditional draws reject unsupported light and thick boundary kernels inst
   const settings: SimulationDepthSettings = { depthSamples: 64, modeRelativeThreshold: .1, maximumModes: 1,
     minimumSigmaZ: .5, maximumSigmaZ: 10, featureThicknessRatio: 1, supportSigma: 4, placement: 'conditional-quantile' };
   const bounds = { min: [-100, -100, -100] as [number, number, number], max: [100, 100, 100] as [number, number, number] };
-  assert.throws(() => conditionSimulationComponents([component], { identity: 'fixture-prior', bounds, sampleDensity: () => 0 }, settings), /positive prior support/);
-  assert.throws(() => conditionSimulationComponents([component], { identity: 'fixture-prior', bounds,
+  assert.throws(() => conditionSimulationComponents([component], { bounds, sampleDensity: () => 0 }, settings), /positive prior support/);
+  assert.throws(() => conditionSimulationComponents([component], { bounds,
     sampleDensity: (_x, _y, z) => z > 90 ? 1 : 0 }, settings), /do not clamp/);
 });

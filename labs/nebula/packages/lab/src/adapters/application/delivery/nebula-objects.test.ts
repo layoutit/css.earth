@@ -6,7 +6,6 @@ import { test } from 'node:test';
 import sharp from 'sharp';
 import type { PreparedCssVolume, VolumeAxis } from '@cssearth/renderer/volume/types.ts';
 import { validatePreparedVolumeLenses } from '@cssearth/renderer/volume/prepared-volume-lenses.ts';
-import { hash as volumeResourceDigest } from '@cssearth/bake/volume/node';
 import { prepareNebulaObject, readNebulaDelivery } from './nebula-objects.ts';
 
 test('a pinned optical composite is a compiler delivery stage, never a symmetry fallback', async () => {
@@ -56,7 +55,7 @@ async function fixture(root: string) {
       id:axis,centerUnits:[0,0,0],texturePath:'slice.png',widthPx:2,heightPx:2,
       style:{width:'2px',height:'2px',transform:`matrix3d(${matrices[axis]})`,backgroundSize:'2px 2px',backgroundPosition:'0px 0px'},
     }]})),
-    resources:[{path:'slice.png',sha256:volumeResourceDigest(pixels),bytes:pixels.length,width:2,height:2}],provenance:{},approximation:{},
+    resources:[{path:'slice.png',bytes:pixels.length,width:2,height:2}],provenance:{},approximation:{},
   };
   const prepared = JSON.stringify({data:volume});
   await put(root,'input/prepared/volume.json',prepared);

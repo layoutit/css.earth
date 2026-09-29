@@ -8,7 +8,7 @@ import { sourceBytes, bakeMasterVolumeSlices } from '@cssearth/bake/volume/node'
 import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
-import { compilerAlphaDigest, compilerFrame } from './bake.ts';
+import { compilerFrame } from './bake.ts';
 import { readCompilerBakeResult } from '@cssearth/bake/volume';
 import { assertCompilerLensGeometry } from './bank-validation.ts';
 import { prepareRetainedMaterialBank, type RetainedMaterialBankOptions } from './retained-material-bank.ts';
@@ -28,8 +28,8 @@ async function fixture(t: TestContext, variable = false) {
       { width: 8, outputDirectory: join(root, 'neutral'), imageEncoding: { format: 'png' } }], unitsPerSourceUnit: 1,
     provenance: {}, cropTransparent: true, sampleEmission(x, y, z, out) { out[0] = out[1] = out[2] = Math.hypot(x, y, z) < .9 ? .2 : 0; },
     onProgress() {} });
-  const slices = baked.banks[0]!.slices, alphaSha256 = await compilerAlphaDigest(join(root, 'neutral'), slices);
-  slices.provenance = { fieldIdentity, alphaSha256 };
+  const slices = baked.banks[0]!.slices;
+  slices.provenance = { fieldIdentity };
   async function pin(path: string, value: unknown) {
     await writeFile(join(root, path), JSON.stringify(value) + '\n'); return { path };
   }
@@ -37,7 +37,7 @@ async function fixture(t: TestContext, variable = false) {
   const scene = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: 'fixture', fieldIdentity, frame, boundsArcsec,
     skyBoundsArcsec: { min: [10, 20], max: [12, 22] }, spanArcsec: 2, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' },
-    neutral, alphaSha256, lenses: [{ id: 'original', label: 'Original', volume: neutral,
+    neutral, lenses: [{ id: 'original', label: 'Original', volume: neutral,
       coverage: { positiveAlphaTexels: 0, recoloredTexels: 0, outsideImageTexels: 0 } }], stars: [],
     sampling: { sliceCounts: { x: 2, y: 2, z: 2 }, imageWidth: 512, samplesPerSlab: 4, ...(layerPlan ? { layerPlan } : {}) } });
   const options: RetainedMaterialBankOptions = { root, outputDirectory: 'painted', scene,
@@ -64,7 +64,6 @@ test('retained material prepares RGB through the existing slab/compiler path wit
     const colored = await sharp(join(options.root, 'painted', q.texturePath)).ensureAlpha().raw().toBuffer();
     assert.deepEqual(colored.filter((_b, i) => i % 4 === 3), original.filter((_b, i) => i % 4 === 3));
   }
-  assert.notEqual(painted.resources[0]!.sha256, neutral.resources[0]!.sha256);
 });
 
 test('retained nonuniform material preserves intervals and rejects missing replay metadata', async t => {
@@ -99,7 +98,7 @@ test('retained material rejects changed alpha, positions and slab metadata', asy
   const q = slices.quads[0]!, image = await sharp(join(options.root, 'neutral', q.texturePath)).ensureAlpha().raw().toBuffer();
   image[3] = image[3] === 0 ? 1 : image[3]! - 1;
   const bytes = await sharp(image, { raw: { width: q.widthPx, height: q.heightPx, channels: 4 } }).png().toBuffer();
-  await writeFile(join(options.root, 'neutral', q.texturePath), bytes); q.bytes = bytes.length; q.sha256 = sha256(bytes);
+  await writeFile(join(options.root, 'neutral', q.texturePath), bytes); q.bytes = bytes.length;
   await assert.rejects(prepareRetainedMaterialBank({ ...options, neutralSlicesPin: await pin('neutral/volume-slices.json', slices) }), /changed the shared alpha/);
 });
 

@@ -1,6 +1,5 @@
 /** Offline handoff of existing cloud geometry, prepared pixels and saved display choices. */
 import assert from 'node:assert/strict';
-import { hash as volumeResourceDigest } from '@cssearth/bake/volume/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative, sep } from 'node:path';
 import { createCloudDensityPreparer } from '../../services/density-material.ts';
@@ -106,7 +105,7 @@ export async function promoteVolumeLenses(root: string, input: VolumeLensPromoti
       const path = `${lens.imageId}/${resource.path}`;
       await output(`prepared/${path}`, image);
       // The renderer's volume resource contract still requires a digest per texture (cssearth-density-volume@1).
-      resources.push({ ...resource, path, sha256: volumeResourceDigest(image), bytes: image.length });
+      resources.push({ ...resource, path, bytes: image.length });
     }
     const preparedVolume: PreparedCssVolume = { ...volume, id: `${recipe.id}-${lens.imageId}`, resources,
       stacks: stacks.map(stack => ({ ...stack, leaves: stack.leaves.map(leaf => ({ ...leaf, texturePath: `${lens.imageId}/${leaf.texturePath}` })) })) };

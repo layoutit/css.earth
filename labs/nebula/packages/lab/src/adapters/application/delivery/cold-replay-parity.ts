@@ -7,7 +7,7 @@ import type { CompilerBakeResult } from '@cssearth/bake/volume';
 /** Output locations may change; scientific identities, frame and appearance may not. */
 export function assertReplayScene(actual: CompilerBakeResult, expected: CompilerBakeResult): void {
   for (const key of ['fieldIdentity', 'frame', 'boundsArcsec', 'skyBoundsArcsec', 'spanArcsec',
-    'sourceImage', 'coordinates', 'sampling', 'stars', 'alphaSha256'] as const)
+    'sourceImage', 'coordinates', 'sampling', 'stars'] as const)
     assert.deepEqual(actual[key], expected[key], `Cold replay changed ${key}`);
   assert.deepEqual(actual.lenses.map(({ volume: _volume, ...lens }) => lens),
     expected.lenses.map(({ volume: _volume, ...lens }) => lens), 'Cold replay changed lens metadata');

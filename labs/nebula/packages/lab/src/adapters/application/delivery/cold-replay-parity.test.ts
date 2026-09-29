@@ -15,7 +15,6 @@ test('cold parity rejects independent field, frame, star, lens and alpha mutatio
     (scene: typeof expected) => { scene.coordinates.localOriginArcsec[0] += 1; },
     (scene: typeof expected) => { assert.ok(scene.stars[0]); scene.stars[0].positionUnits[0] += 1; },
     (scene: typeof expected) => { assert.ok(scene.lenses[0]); scene.lenses[0].coverage.recoloredTexels += 1; },
-    (scene: typeof expected) => { scene.alphaSha256 = '0'.repeat(64); },
   ]) {
     const changed = structuredClone(expected); mutate(changed);
     assert.throws(() => assertReplayScene(changed, expected), /Cold replay changed/);

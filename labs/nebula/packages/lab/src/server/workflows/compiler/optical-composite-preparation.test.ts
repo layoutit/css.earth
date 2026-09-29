@@ -10,7 +10,7 @@ import { readObservationRecipe } from '../../../features/observations/recipe.ts'
 import { readGeometryPin } from '../geometry/registered-source.ts';
 import { bakeMasterVolumeSlices } from '@cssearth/bake/volume/node';
 import { jointRecord } from '../../../features/joint-fit/model.ts';
-import { compilerAlphaDigest, compilerFrame } from './bake.ts';
+import { compilerFrame } from './bake.ts';
 import { assertCompilerLensGeometry } from './bank-validation.ts';
 import { readCompilerRecipe, defaultCompilerControls } from '../../../features/compiler/model.ts';
 import { readCompilerResult } from '../../../features/compiler/result.ts';
@@ -69,8 +69,8 @@ async function fixture(t: TestContext) {
     exposureGain: 1, masterWidth: 8, masterDirectory: join(root, directory, 'masters'), deliveryBanks: [
       { width: 8, outputDirectory: join(root, neutralDirectory), imageEncoding: { format: 'png' } } ], unitsPerSourceUnit: 1,
     provenance: {}, cropTransparent: true, sampleEmission: field.sampleEmission, onProgress() {} });
-  const slices = baked.banks[0]!.slices, alphaSha256 = await compilerAlphaDigest(join(root, neutralDirectory), slices);
-  slices.provenance = { fieldIdentity, alphaSha256 };
+  const slices = baked.banks[0]!.slices;
+  slices.provenance = { fieldIdentity };
   const neutral = await save(`${neutralDirectory}/volume.json`, compileCssVolume({ id: `compiler-${id}`, frame, slices, recipe: { anchors: [] } }));
   const neutralSlices = await save(`${neutralDirectory}/volume-slices.json`, slices), bounds = { min: [-30, -30], max: [30, 30] };
   const image = images[0]!, source = image.layers.original, starMaterial = { rgb: [90, 110, 140], diameterUnits: 1, alpha: .5 };
@@ -87,7 +87,7 @@ async function fixture(t: TestContext) {
     sources: [{ id: image.id, label: image.label, credit: image.source.credit, page: image.source.page,
       original: source, starless: image.layers.diffuse, width: 32, height: 32, boundsArcsec: bounds }],
     scene: { schema: 'cssearth-compiler-bake@1', id, fieldIdentity, frame, boundsArcsec: model.bounds, skyBoundsArcsec: bounds,
-      spanArcsec: 60, sourceImage: { width: 512, height: 512 }, neutral, alphaSha256,
+      spanArcsec: 60, sourceImage: { width: 512, height: 512 }, neutral,
       coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' },
       lenses: [{ id: image.id, label: image.label, volume: neutral, coverage: { positiveAlphaTexels: 0, recoloredTexels: 0, outsideImageTexels: 0 } }],
       stars: [{ id: 'retained-star', positionUnits: [1, 2, 3], ...starMaterial, materials: { [image.id]: starMaterial } }],
@@ -100,7 +100,7 @@ test('delivery composites a supplied result with no historical caches and retain
   const publication = await f.save(publicationPath, { retained: 'live user publication' });
   const before = JSON.stringify(f.result), output = await prepareOpticalCompositeForResult(f.root, f.recipePath, f.result);
   assert.equal(JSON.stringify(f.result), before);
-  assert.equal(output.scene.neutral.path, f.result.scene.neutral.path); assert.equal(output.scene.alphaSha256, f.result.scene.alphaSha256);
+  assert.equal(output.scene.neutral.path, f.result.scene.neutral.path);
   assert.equal(output.scene.volumeId, f.result.id); assert.equal(output.scene.lenses.length, 2);
   assert.deepEqual(output.scene.stars[0], { ...f.result.scene.stars[0], materials: { ...f.result.scene.stars[0]!.materials,
     [f.recipe.id]: f.result.scene.stars[0]!.materials![f.recipe.detailSourceId] } });

@@ -9,7 +9,7 @@ function point(origin: Vec, u: Vec, v: Vec, x: number, y: number): Vec {
 function quad(id: string, width: number, height: number, origin: Vec, u: Vec, v: Vec): RegisteredSlice {
   return { id, widthPx: width, heightPx: height, vertices: [origin, point(origin, u, v, width, 0),
     point(origin, u, v, width, height), point(origin, u, v, 0, height)], texturePath: `slices/${id[0]}/7.png`,
-    sha256: 'a'.repeat(64), bytes: width * height * 4 };
+    bytes: width * height * 4 };
 }
 const origin: Vec = [10, 20, 30];
 const raster = Buffer.from([

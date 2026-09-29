@@ -27,14 +27,12 @@ test('compact compiler validates the accepted field, material correspondence and
   assert.throws(() => readCompactCompiler(shape), /resource/);
 });
 
-import { hash as volumeReaderDigest } from '@cssearth/bake/volume/node';
 test('compact replay cannot silently omit a retained density envelope or its colors', async () => {
   const value = await input();
   const recipe = JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8'));
   value.field.photometricEnvelope = { schema: 'cssearth-photometric-envelope@1', priorIdentity: 'fixture-prior', recipe,
     width: 2, height: 2, bounds: { min: [-100, -100], max: [100, 100] }, zRange: [-300, 300], gain: [1, 1, 1, 1] };
   for (const material of value.materials) material.envelopeColors = { width: 2, height: 2, rgb: Array(12).fill(255) };
-  value.provenance.modelSha256 = volumeReaderDigest(JSON.stringify(value.field));
   assert.ok(readCompactCompiler(value).field.photometricEnvelope);
   const missingColors = structuredClone(value); delete missingColors.materials[0].envelopeColors;
   assert.throws(() => readCompactCompiler(missingColors), /envelope colors/);

@@ -12,7 +12,6 @@
  * projection error per channel and a depth check against extrusion. The author then uses that grid only while the digest
  * still matches the channels it displays. */
 import { readFile, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { inferEmission, type InferenceGrid } from '@cssearth/nebula-reconstruction/methods/symmetry/solver';
@@ -20,7 +19,6 @@ import { circumstellarAuthor, type EdgeOnReconstruction, type EdgeOnSolveInputs 
 import { densityEncoder } from '../../../adapters/preparation/density-encoding.ts';
 
 /** The record's digests are the contract of its reader, packages/telescope-cli/authoring/circumstellar (EdgeOnReconstruction). */
-const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const id = process.argv[2];
 if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || process.argv.length !== 3) throw new TypeError('Usage: reconstruct-circumstellar <object id>');
 const root = process.cwd(), sourceDirectory = resolve(root, 'src/objects', id, 'source');
@@ -107,13 +105,13 @@ for (const inputs of lenses) {
   const { exposureGain, opacity } = exposureAndOpacity(lens.topAlpha, peak, integral);
   const mean = volumes[0]!.map((_, i) => volumes.reduce((total, volume) => total + volume[i]!, 0) / volumes.length);
   const record: EdgeOnReconstruction = {
-    schema: 'cssearth-circumstellar-reconstruction@1', objectId: id, lensId: lens.id, shownSha256: inputs.shownSha256,
+    schema: 'cssearth-circumstellar-reconstruction@1', objectId: id, lensId: lens.id,
     grid: { size, halfUnits: recipe.grid.halfUnits },
     method: { name: 'axial-symmetry emission inference', paper: 'Wenger, Lorenz & Magnor (2013), Computer Graphics Forum 32, 93; doi:10.1111/cgf.12216',
       implementation: 'labs/nebula/packages/reconstruction/src/methods/symmetry/solver.ts', command: `node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar ${id}`,
       axis: inputs.axis, center: prior.center, binWidthVoxels: prior.binWidth, tau, iterations,
       weights: 'one for pixels with displayed data, zero under the inner edge and beyond the footprint; a voxel seen only through the blank inside the inner edge takes its group mean, and one seen only beyond the footprint stays empty' },
-    ktx2: { path: file, sha256: sha256(ktx2), bytes: ktx2.length }, decodedSha256: sha256(rgba), peak, filledVoxels, exposureGain, opacity,
+    ktx2: { path: file, bytes: ktx2.length }, peak, filledVoxels, exposureGain, opacity,
     checks: {
       relativeProjectionError: reports.map(report => +report.relativeProjectionError.toFixed(4)),
       voxelsFilledFromGroups: fills.map(fill => fill.filledVoxels), groupsWithNoObservedVoxel: fills.map(fill => fill.unobservedGroups),

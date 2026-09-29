@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, hash as volumeResourceDigest, type MasterVolumeOptions, type VolumeSliceQuad } from '@cssearth/bake/volume/node';
+import { bakeMasterVolumeSlices, deriveMasterVolumeSlices, type MasterVolumeOptions, type VolumeSliceQuad } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import type { VolumeRecipe } from '@cssearth/bake/volume';
@@ -84,7 +84,7 @@ test('delivery reads pinned PNG masters, averages premultiplied color and maps c
   for (const quad of masters.quads) {
     await writeFile(resolve(config.masterDirectory, quad.texturePath), png);
     // Master quads carry the volume format's own texture digest, which the delivery derivation checks.
-    quad.bytes = png.length; quad.sha256 = volumeResourceDigest(png); quad.alphaCoverage = 0.25;
+    quad.bytes = png.length; quad.alphaCoverage = 0.25;
   }
   const deliveryBanks = [2, 1].map(width => ({ width, outputDirectory: resolve(directory, `delivery-${width}`),
     imageEncoding: { format: 'png' as const } }));

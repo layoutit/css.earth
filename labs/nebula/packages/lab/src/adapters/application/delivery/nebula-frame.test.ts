@@ -24,14 +24,13 @@ test('prepared CSS reflection follows PolyCSS physical XY permutation and leaves
   const volume:PreparedCssVolume={schema:'cssearth-css-volume@1',id:'fixture',frame,anchors:[],
     stacks:(['x','y','z'] as const).map(axis=>({axis,leaves:[{id:axis,centerUnits:[1,2,3],texturePath:'texture.png',widthPx:1,heightPx:1,
       boundsCssPixels:{min:[5,10,15],max:[6,11,15]},style:{width:'1px',height:'1px',transform:'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,5,10,15,1)',backgroundSize:'1px 1px',backgroundPosition:'0px 0px'}}]})),
-    resources:[{path:'texture.png',sha256:'a'.repeat(64),bytes:1,width:1,height:1}],provenance:{},approximation:{}};
+    resources:[{path:'texture.png',bytes:1,width:1,height:1}],provenance:{},approximation:{}};
   const result=validatePreparedCssVolume(embedNebulaVolume(volume,embedNebulaFrame(frame,sky),'physical','optical'));
   for(const stack of result.stacks) {
     assert.deepEqual(stack.leaves[0]!.centerUnits,[-1,2,3]);
     assert.equal(stack.leaves[0]!.style.transform,'matrix3d(1,0,0,0,0,-1,0,0,0,0,1,0,5,-10,15,1)');
     assert.deepEqual(stack.leaves[0]!.boundsCssPixels,{min:[5,-11,15],max:[6,-10,15]});
   }
-  assert.equal(result.resources[0]!.sha256,volume.resources[0]!.sha256);
 });
 test('invalid physical frames cannot silently assign units or a sky direction',()=>{
   for(const change of [{distancePc:0},{arcsecPerUnit:NaN},{centerIcrsDegrees:[360,0] as [number,number]},{imageRotationDegrees:Infinity}])
@@ -43,7 +42,7 @@ test('new physical compiler transport and historical source transport produce id
   const angular = compilerFrame(bounds), physical = compilerFrame(bounds, true);
   const slices: VolumeSlices = { boundsUnits: bounds, quads: [{ id: 'z-0', axis: 'z', sliceIndex: 0,
     texturePath: 'a.png', widthPx: 2, heightPx: 2, vertices: [[-2, 2, -1], [2, 2, -1], [2, -2, -1], [-2, -2, -1]],
-    uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, -1], normal: [0, 0, 1], sha256: 'a'.repeat(64), bytes: 12, alphaCoverage: 1 }],
+    uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, -1], normal: [0, 0, 1], bytes: 12, alphaCoverage: 1 }],
     provenance: {}, approximation: { method: 'fixture', radialEmission: 'none', limitations: [], samplesPerSlab: 4,
       opticalWeight: 1, exposureGain: 1, sliceCounts: { x: 1, y: 1, z: 1 }, slabPitchUnits: { x: 8, y: 6, z: 4 } } };
   for (const axis of ['x', 'y'] as const) slices.quads.push({ ...slices.quads[0]!, id: `${axis}-0`, axis,
