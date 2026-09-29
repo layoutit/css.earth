@@ -1,11 +1,10 @@
-import { parseDensityVolumeFrame } from '@cssearth/objects';
+import { MAX_CATALOGUE_POINTS, parseDensityVolumeFrame } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountBatchedSpatialPoints } from './batched-spatial-points.js';
 
-/** Enough for the Milky Way's stacked levels (32,829 dots). The batched projection walks the drawn prefix each frame, and
- * a stacked bank draws its innermost levels only from near its origin, so the whole bank is walked only near the Sun. */
-const MAX_CATALOGUE_POINTS = 40000;
+// MAX_CATALOGUE_POINTS bounds every published bank. The batched projection walks the drawn prefix each frame, and a
+// stacked bank draws its innermost levels only from near its origin, so the whole bank is walked only near the Sun.
 /** Every point shows within this distance of the bank's origin (the Sun). Farther out a catalogue draws a share
  * inversely proportional to the camera's distance: gently, so zooming never floods in or strips away a crowd at once. */
 const FULL_DETAIL_DISTANCE_M = 10e3 * 3.0856775814913673e16;

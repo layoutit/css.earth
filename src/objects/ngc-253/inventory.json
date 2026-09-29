@@ -9,18 +9,6 @@
     },
     {
       "location": "prepared",
-      "filename": "cantiello-gc.json",
-      "bytes": 4761,
-      "sha256": "cab5aec60d0b31595e40f37ede5c9385cfbe28f254e0ea98337c740f6f0d24e4"
-    },
-    {
-      "location": "prepared",
-      "filename": "congiu-pne.json",
-      "bytes": 21762,
-      "sha256": "3922786814cfe0296cff20a2ba804d7ad7e8533a6b7c5308865691a1c1f863f9"
-    },
-    {
-      "location": "prepared",
       "filename": "dots.json",
       "bytes": 40993,
       "sha256": "604db4237bbb73529d7cd3af2bbefa43f662bb7593e01f07feb55e6beafab06b"
@@ -1036,14 +1024,8 @@
     {
       "location": "prepared",
       "filename": "provenance.json",
-      "bytes": 57156,
-      "sha256": "f3454aa7f1d6ec1526c50450d4c83856954f7710fcae9f88bc0714720126ba7f"
-    },
-    {
-      "location": "prepared",
-      "filename": "rodriguez-groups.json",
-      "bytes": 31330,
-      "sha256": "dff46ab0d5f757f6f6fc866ea89cce0ac23ff25dd39d263dd1409e7bd19ff40e"
+      "bytes": 57168,
+      "sha256": "070b2a9072821f7673b6ed0a73546b4e7f429341004db6cada288c97e6966261"
     }
   ]
 }
