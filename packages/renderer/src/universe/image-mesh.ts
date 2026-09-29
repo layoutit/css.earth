@@ -54,8 +54,9 @@ export function mountImageMesh({ host, before, url, fetchJson, resolveResource }
     if (nextTransform !== transform) scene.style.transform = transform = nextTransform;
   };
   return Object.freeze({ root,
-    publish(publication: VolumeCameraPublication, shown = 1) {
-      if (destroyed) return;
+    /** Publishes the camera and returns the mesh's opacity, so what lies inside it can give way as it closes over. */
+    publish(publication: VolumeCameraPublication, shown = 1): number {
+      if (destroyed) return 0;
       const distanceM = Math.hypot(...publication.world.pose.positionM);
       const radiusM = payload ? payload.radiusUnits * payload.frame.metersPerUnit : null;
       // Before the bank loads its radius is unknown; it loads once the camera is past the fade's far end of any mesh
@@ -68,10 +69,10 @@ export function mountImageMesh({ host, before, url, fetchJson, resolveResource }
         const display = alpha > 0 ? '' : 'none';
         if (root.style.display !== display) root.style.display = display;
         if (alpha > 0) draw(publication);
-        return;
+        return alpha;
       }
       latest = publication;
-      if (loading || !(shown > 0)) return;
+      if (loading || !(shown > 0)) return 0;
       loading = true;
       void fetchJson(url).then(value => {
         if (destroyed) return;
@@ -87,6 +88,7 @@ export function mountImageMesh({ host, before, url, fetchJson, resolveResource }
         root.dataset.imageMesh = payload.id;
         if (latest) this.publish(latest, shown);
       }).catch(error => { root.dataset.imageMesh = 'failed'; console.error(`Image mesh ${url} failed`, error); });
+      return 0;
     },
     destroy() { destroyed = true; root.remove(); } });
 }

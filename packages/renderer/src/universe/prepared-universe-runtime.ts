@@ -284,7 +284,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               if (detailContextOpacity > 0) background.prefetch(distanceM);
               additionalPoints.publish({world, viewport}, distanceM);
               // Loaded and drawn only far outside the galaxies' own scale.
-              for (const mesh of meshes) mesh.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M));
+              const meshCover = Math.max(0, ...meshes.map(mesh => mesh.publish({ world, viewport }, logarithmicFade(distanceM, IMAGE_MESH_LOAD_DISTANCE_M / 2, IMAGE_MESH_LOAD_DISTANCE_M))));
               const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
               const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId);
@@ -305,7 +305,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const catalogPresentation = catalogBanks.presentation;
               if (catalogPresentation) {
                 const galaxyOpacity = localAnnotations * logarithmicFade(distanceM, catalogPresentation.fadeStartDistanceM, catalogPresentation.fullDistanceM);
-                const clusterOpacity = catalogPresentation.clusters ? logarithmicFade(distanceM, catalogPresentation.clusters.fadeStartDistanceM, catalogPresentation.clusters.fullDistanceM) : 0;
+                // The clusters lie inside the cosmic microwave background: their names give way as it closes over them.
+                const clusterOpacity = (catalogPresentation.clusters ? logarithmicFade(distanceM, catalogPresentation.clusters.fadeStartDistanceM, catalogPresentation.clusters.fullDistanceM) : 0) * (1 - meshCover);
                 const dotOpacity = (1 - logarithmicFade(distanceM, 30e6 * 3.085677581491367e16, 120e6 * 3.085677581491367e16)) * logarithmicFade(distanceM, catalogPresentation.fadeStartDistanceM, catalogPresentation.fullDistanceM);
                 const nebulaOpacity = (1 - fade) * logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
                 if (!catalogBanks.catalog && Math.max(galaxyOpacity, clusterOpacity, dotOpacity, nebulaOpacity) > 0) void catalogBanks.ensureCatalog().catch(() => {});
