@@ -34,7 +34,7 @@ It is the only planet known around WASP-12. Its orbit and size follow Leonardi e
 
 ## Evidence
 
-Run of 2026-09-25 (this version): [`published-phase-curve-map.test.mts`](../../../tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`tests/objects/terrestrial/published-phase-curve-map.test.mts`](../../../tests/objects/terrestrial/published-phase-curve-map.test.mts)) holds both maps to Table A2: the day side exactly, the night sides and peak offsets within their uncertainties, the peak equal to SPCA's −atan2(D1, C1), and the 2010 map warmer east of noon, the 2013 map west of it.
+Run of 2026-09-25 (this version): [`published-phase-curve-map.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts)) holds both maps to Table A2: the day side exactly, the night sides and peak offsets within their uncertainties, the peak equal to SPCA's −atan2(D1, C1), and the 2010 map warmer east of noon, the 2013 map west of it.
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-12b.json).
 

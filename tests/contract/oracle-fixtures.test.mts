@@ -10,15 +10,37 @@ import { runtimeLock, generatorFingerprint } from '../oracles/sbmt/runtime.mts';
 /** Every committed oracle fixture comes from the pinned environment and the pinned inputs; runs in `pnpm test:platform` without Python or restored sources. */
 // The scripts sit beside their fixtures; SBMT's JSON bridge manifests and runtime lock are not fixtures.
 const NOT_FIXTURES = new Set(['sbmt/package.json', 'sbmt/package-lock.json', 'sbmt/runtime.lock.json']);
+const relocatedFixtures: Readonly<Record<string, string>> = {
+  "astronomy/hosted-orbit.json": "packages/bake/src/objects/scene/fixtures/hosted-orbit.json",
+  "isis/photometric-truth.json": "packages/bake/src/photometry/fixtures/photometric-truth.json",
+  "isis2/borrelly-micas.json": "packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.json",
+  "npy/psyche-alma.json": "packages/bake/src/objects/raster/numpy/psyche-alma.json",
+  "pds/dart-draco-cube.json": "packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.json",
+  "pds3/amica-ddr.json": "packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.json",
+  "pds3/osiris-geo.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.json",
+  "pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json"
+};
+const relocatedScripts: Readonly<Record<string, string>> = {
+  "astronomy/hosted-orbit.py": "packages/bake/src/objects/scene/fixtures/hosted-orbit.py",
+  "fits/encounter.py": "packages/bake/src/objects/layers/terrestrial/missions/encounter.py",
+  "fits/llorri.py": "packages/bake/src/objects/layers/terrestrial/missions/llorri.py",
+  "isis/photometric-truth.py": "packages/bake/src/photometry/fixtures/photometric-truth.py",
+  "isis2/borrelly-micas.py": "packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.py",
+  "npy/psyche-alma.py": "packages/bake/src/objects/raster/numpy/psyche-alma.py",
+  "pds/dart-draco-cube.py": "packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.py",
+  "pds3/amica-ddr.py": "packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.py",
+  "pds3/osiris-geo.py": "packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.py",
+  "pds3/osiris-reflectance.py": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.py"
+};
 const directories = await readdir(resolve(ORACLE_ROOT, 'tests/oracles'), { withFileTypes: true });
 const names = (await Promise.all(directories.filter(d => d.isDirectory()).map(async d => (await readdir(resolve(ORACLE_ROOT, 'tests/oracles', d.name))).filter(f => f.endsWith('.json')).map(f => `${d.name}/${f}`)))).flat()
-  .filter(name => !NOT_FIXTURES.has(name));
+  .filter(name => !NOT_FIXTURES.has(name)).concat(Object.keys(relocatedFixtures));
 const pins = await pinnedOracleVersions();
 
 test('oracle fixtures name their generator, a pinned tool version and pinned inputs', async () => {
   assert.ok(names.length >= 2, `${names.length} fixtures`);
   for (const name of names) {
-    const fixture = await readOracleFixture(name);
+    const fixture = await readOracleFixture(relocatedFixtures[name] ? resolve(ORACLE_ROOT, relocatedFixtures[name]) : name);
     if (fixture.oracle === 'SBMT') {
       const {lock,digest}=await runtimeLock();
       // The committed fixture names the generator's path before the move until SBMT regenerates it.
@@ -34,7 +56,7 @@ test('oracle fixtures name their generator, a pinned tool version and pinned inp
     // Fixtures written before the scripts moved from tools/oracles/ keep that path until they are regenerated.
     const script = /^(?:tools|tests)\/oracles\/([a-z0-9-]+\/[a-z0-9-]+\.py)$/u.exec(fixture.generatedBy);
     assert.ok(script, `${name} names its script`);
-    await access(resolve(ORACLE_ROOT, 'tests/oracles', script[1]!));
+    await access(relocatedScripts[script[1]!] ? resolve(ORACLE_ROOT, relocatedScripts[script[1]!]) : resolve(ORACLE_ROOT, 'tests/oracles', script[1]!));
     let pinned = 0;
     for (const [tool, version] of Object.entries(fixture.tool)) {
       const pin = pins.get(tool.toLowerCase().replace(/-/g, '_'));

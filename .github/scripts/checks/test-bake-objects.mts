@@ -14,7 +14,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 /** Tracked node-test files the selection may take, as `git ls-files` pathspecs. */
-export const BAKE_OBJECT_TEST_PATHS = ['tests/**/*.test.mts', 'tests/**/*.test.ts', 'packages/bake/src/objects/**/*.test.ts', 'packages/bake/authoring/**/*.test.mts', 'packages/telescope-cli/authoring/**/*.test.mts'] as const;
+export const BAKE_OBJECT_TEST_PATHS = ['tests/**/*.test.mts', 'tests/**/*.test.ts', 'packages/bake/src/objects/**/*.test.ts', 'packages/bake/src/objects/**/*.test.mts', 'packages/bake/authoring/**/*.test.mts', 'packages/telescope-cli/authoring/**/*.test.mts'] as const;
 const OBJECT_ENTRY = /(?:from|import)\s*\(?\s*['"]@cssearth\/bake\/objects\/(?:layers\/)?[a-z-]+['"]/u;
 /** Tests of an object entry that read the restored prepared packages of real bodies, so they run where those are restored:
  * the source-catalogue step of audit.yml's prepared-universe job. */
