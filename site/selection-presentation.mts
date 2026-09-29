@@ -7,6 +7,7 @@ import { renderSourceLink, type SourceDocumentReference } from './source-link.mt
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
 import { WORLD_OBJECTS } from './world-objects.mts';
 import { SOLAR_SYSTEM_ID, systemById } from './object-systems.mts';
+import { knownObject } from './object-directory.mts';
 import { fetchSystemHeaders, spliceSystemHeaders } from './system-headers-fragment.mts';
 
 /** Present the selected subject in the retained cards and navigation rows. */
@@ -43,7 +44,7 @@ export function createSelectionPresentation(documentTarget: Document, {
   const objectName = (id: string) => WORLD_OBJECTS.find(object => object.id === id)?.name ?? '';
   const overviewName = ({ scope, systemId }: SceneOverview) => scope === 'system'
     ? systemById(WORLD_OBJECTS, systemId)?.name ?? 'Solar System'
-    : ({ 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe', 'observable-universe': 'Observable Universe' })[scope];
+    : knownObject(scope)?.name ?? '';
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
     renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
     const focus = subject.kind === 'focus' ? subject : null;

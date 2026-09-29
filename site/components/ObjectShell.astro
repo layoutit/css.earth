@@ -4,7 +4,8 @@ import ObjectInformationPanel from "./ObjectInformationPanel.astro";
 import PreparedClusterFacts from './PreparedClusterFacts.astro';
 import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import type { Props } from "../object-shell-types";
-import { SCENE_OBJECTS } from "../objects.mts";
+import { OVERVIEWS, SCENE_OBJECTS } from "../objects.mts";
+import type { OverviewScope } from "../overview-context.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "@cssearth/renderer/runtime/shell-contract.ts";
 import SourcesLink from './SourcesLink.astro';
@@ -21,7 +22,6 @@ import ObjectFactsheet from './ObjectFactsheet.astro';
 import InformationTabs from './InformationTabs.astro';
 import Accordion from './Accordion.astro';
 import ObjectNavigationMarker from './ObjectNavigationMarker.astro';
-import { OVERVIEW_TITLES } from '../overview-titles.mts';
 import { SOLAR_SYSTEM_ID, allPlanetarySystems, systemOfObject } from '../object-systems.mts';
 import overviewFacts from '../source/overview-facts.json';
 import planetarySystems from '../source/planetary-systems.json';
@@ -59,6 +59,8 @@ const initialSpeedState = speedSetting?.state ?? "normal";
 const initialSpeedValue = speedValues[initialSpeedState] ?? 1;
 const activeObject = SCENE_OBJECTS.find((object) => object.id === objectId);
 const systemStar = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!;
+const milkyWay = OVERVIEWS.find(overview => overview.id === 'milky-way');
+if (!milkyWay) throw new Error('The Milky Way card needs its overview entry.');
 // Every prepared planetary system is browsable; the orbits decide, not a list.
 const LIGHT_YEAR_M = 9460730472580800;
 const ownSystem = systemOfObject(SCENE_OBJECTS, objectId);
@@ -263,8 +265,8 @@ const searchCategories = [
     <div class="object-selected-content">
     {!navigation && <div class="object-context" hidden><ObjectCard class="object-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="object-selected-panel">
-          {(['milky-way', 'local-group', 'nearby-universe', 'observable-universe'] as const).map(scope =>
-            <ObjectBreadcrumbs {scope} currentPage={false} data-focus-breadcrumb-scope={scope} hidden />)}
+          {OVERVIEWS.map(({ id }) =>
+            <ObjectBreadcrumbs scope={id as OverviewScope} currentPage={false} data-focus-breadcrumb-scope={id} hidden />)}
           <div class="object-title-row">
             <p class="object-title object-title-text" data-focus-name></p>
             <div class="object-title-tags"><span class="object-classification-tag object-title-tag" data-focus-status></span></div>
@@ -295,8 +297,7 @@ const searchCategories = [
         </div>
       </ObjectCard>
       <ObjectCard class="object-galactic-overview object-overview-card" data-galactic-overview hidden>
-        <ObjectCardHeader heading={false} title={OVERVIEW_TITLES['milky-way']}
-          introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
+        <ObjectCardHeader heading={false} title={{ label: milkyWay.name }} introduction={milkyWay.description}>
           <ObjectBreadcrumbs scope="milky-way" />
         </ObjectCardHeader>
         <InformationTabs idPrefix={`${objectId}-milky-way`} group="milky-way" label="Milky Way information" hidden

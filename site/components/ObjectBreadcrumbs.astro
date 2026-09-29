@@ -2,7 +2,7 @@
 import type { OverviewScope } from '../overview-context.mts';
 import type { HTMLAttributes } from 'astro/types';
 interface Props extends HTMLAttributes<'nav'> { objectId?: string; scope?: OverviewScope; systemId?: string; satelliteSystem?: boolean; includeObject?: boolean; currentPage?: boolean; }
-import { SCENE_OBJECTS } from '../objects.mts';
+import { OVERVIEWS, SCENE_OBJECTS } from '../objects.mts';
 import preparedWorld from '../../src/objects/sun/prepared/world-context.json';
 import { SOLAR_SYSTEM_ID, systemById, systemOfObject } from '../object-systems.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from '../satellite-systems.mts';
@@ -13,15 +13,10 @@ const includeObject = requestedIncludeObject ?? Boolean(objectId && !satelliteSy
   && (satelliteSystemByHost(objectId) || satelliteSystemOfMember(objectId)));
 const currentPage = requestedCurrentPage ?? (Boolean(scope) || satelliteSystem || includeObject);
 const object = SCENE_OBJECTS.find(object => object.id === objectId);
-// Each overview is its own page.
-const galactic: { scope: OverviewScope; label: string }[] = [
-  { scope: 'observable-universe', label: 'Observable Universe' },
-  { scope: 'nearby-universe', label: 'Nearby Universe' },
-  { scope: 'local-group', label: 'Local Group' },
-  { scope: 'milky-way', label: 'Milky Way' },
-];
-const crumbs = galactic.slice(0, scope && scope !== 'system' ? galactic.findIndex(entry => entry.scope === scope) + 1 : galactic.length)
-  .map(entry => ({ label: entry.label, href: `/${entry.scope}/` }));
+// Each overview is its own page; the trail runs from the farthest level in.
+const galactic = [...OVERVIEWS].reverse();
+const crumbs = galactic.slice(0, scope && scope !== 'system' ? galactic.findIndex(entry => entry.id === scope) + 1 : galactic.length)
+  .map(entry => ({ label: entry.name, href: entry.route }));
 // An object's trail passes through its own planetary system; a star outside every system sits directly in the Milky Way.
 const system = scope === 'system' ? systemById(SCENE_OBJECTS, systemId ?? SOLAR_SYSTEM_ID)
   : !scope && object ? systemOfObject(SCENE_OBJECTS, object.id) : null;

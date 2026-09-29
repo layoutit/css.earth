@@ -4,8 +4,8 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { catalogEntry, defineObjects } from '../registry/index.js';
-import type { CatalogEntry, NavigationDistance } from '../registry/index.js';
+import { catalogEntry, defineObjects, overviewEntry } from '../registry/index.js';
+import type { CatalogEntry, NavigationDistance, OverviewObject } from '../registry/index.js';
 
 const byOrder = (a: CatalogEntry, b: CatalogEntry) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
 
@@ -40,4 +40,23 @@ export async function readContextObjects(objectsDirectory: string) {
     contexts.push({ id: directory.name, type: descriptor.type });
   }
   return contexts.sort((a, b) => a.id.localeCompare(b.id, 'en'));
+}
+
+/** The overviews the object folders author (`properties.overview`): levels above the star systems, each an entry of the one
+ * registry hosted by `sceneHostId`, in their order on the zoom ladder. */
+export async function readOverviews(objectsDirectory: string, sceneHostId: string) {
+  const overviews: OverviewObject[] = [];
+  for (const directory of await readdir(objectsDirectory, { withFileTypes: true })) {
+    if (!directory.isDirectory()) continue;
+    let descriptor: unknown;
+    try { descriptor = JSON.parse(await readFile(resolve(objectsDirectory, directory.name, 'object.json'), 'utf8')); }
+    catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
+    const overview = overviewEntry(descriptor, sceneHostId);
+    if (!overview) continue;
+    if (overview.id !== directory.name) throw new TypeError(`Overview identity differs: ${directory.name}.`);
+    overviews.push(overview);
+  }
+  overviews.sort((a, b) => a.order - b.order);
+  if (overviews.some((overview, index) => index > 0 && overview.order === overviews[index - 1]!.order)) throw new TypeError('Two overviews share a place on the zoom ladder.');
+  return overviews;
 }

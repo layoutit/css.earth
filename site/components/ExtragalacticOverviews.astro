@@ -4,8 +4,9 @@ import ObjectCardHeader from './ObjectCardHeader.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import InformationTabs from './InformationTabs.astro';
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
-import { OVERVIEW_TITLES } from '../overview-titles.mts';
+import { requireObject } from '../objects.mts';
 import { appNavigationDestination } from '../navigation/navigation-destination.mts';
+import type { OverviewScope } from '../overview-context.mts';
 import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog } from '@cssearth/catalog';
 import galaxies from '../../src/objects/local-group/prepared/catalogue.json';
 import milkyWay from '../../src/objects/milky-way/object.json';
@@ -24,20 +25,20 @@ const distance = (pc: number) => {
   const divisor = ly >= 1e6 ? 1e6 : ly >= 1e3 ? 1e3 : 1;
   return { value: new Intl.NumberFormat('en', { maximumSignificantDigits: 3 }).format(ly / divisor), unit: divisor === 1e6 ? 'Mly' : divisor === 1e3 ? 'kly' : 'ly' };
 };
+// Each card is an overview entry of the registry: its name and description are the entry's.
 const groups = [
-  { id: 'local-group' as const, name: 'Local Group', section: 'Galaxies',
-    introduction: 'Our galaxy group, including the Milky Way, Andromeda and their neighboring galaxies.',
-    objects: principal },
-  { id: 'nearby-universe' as const, name: 'Nearby Universe', section: 'Galaxy clusters',
-    introduction: 'Selected nearby galaxy clusters. This view is not a complete map of the observable universe.',
+  { id: 'local-group', section: 'Galaxies', objects: principal },
+  { id: 'nearby-universe', section: 'Galaxy clusters',
     objects: parsePreparedClusterCatalog(clusters).objects.map(object => ({ id: object.id, focusId: object.id, positionM: object.positionM, name: object.name, distancePc: object.distance.valuePc, href: `/${object.id}/` })) },
-  { id: 'observable-universe' as const, name: 'Observable Universe', section: 'Galaxy clusters',
-    introduction: 'Everything whose light has had time to reach us: DESI\'s galaxies and quasars out to 6.6 Gpc, and at its edge the cosmic microwave background, light from 372,000 years after the Big Bang, 14 Gpc away.',
-    objects: [] },
-];
+  { id: 'observable-universe', section: 'Galaxy clusters', objects: [] },
+].map(group => {
+  const overview = requireObject(group.id);
+  if (overview.kind !== 'overview') throw new TypeError(`${group.id} is not an overview.`);
+  return { ...group, id: overview.id as OverviewScope, name: overview.name, introduction: overview.description };
+});
 ---
 {groups.map(group => <ObjectCard class="object-overview-card" data-large-scale-overview={group.id} data-large-scale-name={group.name} hidden>
-  <ObjectCardHeader heading={false} title={OVERVIEW_TITLES[group.id]} introduction={group.introduction}>
+  <ObjectCardHeader heading={false} title={{ label: group.name }} introduction={group.introduction}>
     <ObjectBreadcrumbs scope={group.id} />
   </ObjectCardHeader>
   {group.objects.length > 0 && <InformationTabs idPrefix={group.id} group={group.id} label={`${group.name} information`} hidden

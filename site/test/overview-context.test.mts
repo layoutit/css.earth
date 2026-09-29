@@ -7,6 +7,7 @@ import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts
 import { presentWorldCamera } from '@cssearth/renderer/navigation';
 import { parsePreparedWorldContext } from '@cssearth/renderer';
 import { systemOverviewDistance, SYSTEM_FRAMING_RADII } from '../system-framing.mts';
+import { OVERVIEWS } from '../objects.mts';
 
 // The same validated plan the application mounts; the raw JSON import is untyped.
 const context = parsePreparedWorldContext(preparedContext);
@@ -74,6 +75,16 @@ test('overview leaves the Solar System when its bodies fade and restores correct
   assert.equal(overviewScopeAtCamera(camera(.7 * gpc), 'observable-universe'), 'nearby-universe');
   assert.equal(overviewScopeAtCamera(camera(middle * 1.01), 'milky-way'), 'milky-way');
   assert.equal(overviewScopeAtCamera(camera(middle * .99), 'milky-way'), 'system');
+});
+
+test('zooming out from the Sun walks the registry overviews in their order, and nothing else', () => {
+  const walked: string[] = [];
+  let scope: ReturnType<typeof overviewScopeAtCamera> = 'system';
+  for (let distance = context.system.fadeOutStartDistanceM; distance <= context.camera.maximumDistanceM; distance *= 1.05) {
+    scope = overviewScopeAtCamera(camera(distance), scope);
+    if (scope !== 'system' && walked.at(-1) !== scope) walked.push(scope);
+  }
+  assert.deepEqual(walked, OVERVIEWS.map(overview => overview.id));
 });
 
 test("another star's system overview is left by the distance from that star, not from the Sun", () => {

@@ -3,6 +3,11 @@
   "id": "milky-way",
   "type": "density-volume",
   "properties": {
+    "overview": {
+      "name": "Milky Way",
+      "description": "Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.",
+      "order": 1
+    },
     "volume": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,

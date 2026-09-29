@@ -8,7 +8,7 @@ nebula catalogues. Search, aliases and classification tabs use this inventory.
 | --- | --- |
 | Scene destination | A body package with a route, prepared world frame and scene loader. |
 | Prepared-focus destination | A catalogue subject the map can open: a galaxy cluster, or a subject an object package details. Its page, `/<id>/`, is its host scene’s page with the subject selected; `?dataset=` selects its lens, as on every page. Other catalogue rows are labels with no page. |
-| Overview | The Milky Way, the Local Group and the Nearby Universe (`OVERVIEW_TITLES`). Its page, `/<id>/`, is the world host's scene page with the overview selected. |
+| Overview | The Milky Way, the Local Group, the Nearby and the Observable Universe: registry entries of kind `overview`, authored under `properties.overview` in their packages. Its page, `/<id>/`, is the world host's scene page with the overview selected. |
 | Rendering resource | A volume, image bank, point field or other prepared content. A resource descriptor alone does not publish a destination. |
 | Dataset view | A selectable `(objectId, lensId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |

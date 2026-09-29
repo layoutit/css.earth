@@ -1,9 +1,10 @@
-import { catalogEntry, defineObjects, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
-import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry } from '@cssearth/objects';
+import { catalogEntry, defineObjects, defineOverview, definePreparedFocus, isSceneObject, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
+import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry, OverviewObject } from '@cssearth/objects';
 import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';
 import discoveries from './prepared-object-discovery.json' with { type: 'json' };
 import distances from './prepared-object-distances.json' with { type: 'json' };
 import focuses from './prepared-focus-objects.json' with { type: 'json' };
+import overviews from './prepared-overview-objects.json' with { type: 'json' };
 import { isRecord } from '@cssearth/core';
 import type { SceneFactory } from './browser/browser-types.mts';
 
@@ -19,7 +20,7 @@ export const OBJECTS = defineObjects<NavigableObject>([...OBJECT_DESCRIPTORS.map
     return loadPackagedObject(descriptor, signal);
   }, preparedDistance(descriptor), preparedDiscovery(descriptor));
   return object;
-}), ...focuses.map(definePreparedFocus)]);
+}), ...focuses.map(definePreparedFocus), ...overviews.map(defineOverview)]);
 
 function preparedDiscovery(descriptor: unknown) {
   if (!isRecord(descriptor) || typeof descriptor.id !== 'string') throw new TypeError('Invalid catalogue descriptor.');
@@ -33,9 +34,13 @@ function preparedDistance(descriptor: unknown) {
 
 /** A capability projection of OBJECTS, never an independently maintained registry. */
 export const SCENE_OBJECTS = Object.freeze(OBJECTS.filter(isSceneObject));
-for (const object of OBJECTS) if (object.kind === 'prepared-focus' && !SCENE_OBJECTS.some(host => host.id === object.sceneHostId)) {
-  throw new TypeError(`Prepared focus host is not a registered scene: ${object.id}`);
+for (const object of OBJECTS) if (object.kind !== 'scene' && !SCENE_OBJECTS.some(host => host.id === object.sceneHostId)) {
+  throw new TypeError(`${object.kind === 'overview' ? 'Overview' : 'Prepared focus'} host is not a registered scene: ${object.id}`);
 }
+
+/** The overviews, from the nearest level of the zoom ladder out: a projection of OBJECTS like SCENE_OBJECTS. */
+export const OVERVIEWS = Object.freeze(OBJECTS.filter((object): object is OverviewObject => object.kind === 'overview')
+  .sort((a, b) => a.order - b.order));
 
 export function requireObject(id: string) {
   const object = OBJECTS.find(candidate => candidate.id === id);
@@ -45,6 +50,6 @@ export function requireObject(id: string) {
 
 export function requireSceneObject(id: string) {
   const object = requireObject(id);
-  if (!isSceneObject(object)) throw new TypeError(`Object ${id} is a prepared focus, not a scene owner.`);
+  if (!isSceneObject(object)) throw new TypeError(`Object ${id} is a ${object.kind === 'overview' ? 'overview' : 'prepared focus'}, not a scene owner.`);
   return object;
 }

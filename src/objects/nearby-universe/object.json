@@ -3,6 +3,11 @@
   "id": "nearby-universe",
   "type": "galaxy-point-field",
   "properties": {
+    "overview": {
+      "name": "Nearby Universe",
+      "description": "Selected nearby galaxy clusters. This view is not a complete map of the observable universe.",
+      "order": 3
+    },
     "preparation": {
       "source": "source/dots/stack.json"
     }

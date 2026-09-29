@@ -3,10 +3,11 @@ import { APPLICATION_WORLD_CONTEXT as context } from '../world-context-plan.mts'
 import { appNavigationDestination } from './navigation-destination.mts';
 import { readNavigationPackages, type NavigationPackage } from './navigation-packages.mts';
 import { datasetHref } from '../dataset-url.mts';
+import { OVERVIEWS } from '../objects.mts';
 
-/** The places' names as the app's breadcrumb gives them (site/components/ObjectBreadcrumbs.astro). */
+/** The places' names: an overview's is its registry entry's, as the app's breadcrumb gives it (ObjectBreadcrumbs.astro). */
 const PLACE_LABELS: Record<string, string> = {
-  'observable-universe': 'Observable Universe', 'nearby-universe': 'Nearby Universe', 'local-group': 'Local Group', 'milky-way': 'Milky Way',
+  ...Object.fromEntries(OVERVIEWS.map(overview => [overview.id, overview.name])),
   'galaxy-clusters': 'Galaxy clusters', 'stellar-neighbourhood': 'Stellar neighbourhood',
 };
 

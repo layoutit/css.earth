@@ -16,7 +16,7 @@ export function objectSeo(object: Pick<import("./objects.mts").ObjectEntry, "id"
   };
 }
 
-/** The page of something the world draws (a catalogue subject, an overview): titled and addressed as itself. */
+/** The page of a catalogue subject the world draws: titled and addressed as itself. */
 export function focusSeo(focus: { id: string; name: string }, options?: Parameters<typeof objectSeo>[1]) {
   return objectSeo({ id: focus.id, name: focus.name, route: `/${focus.id}/`, description: `${focus.name} in the cssEarth 3D explorer` }, options);
 }

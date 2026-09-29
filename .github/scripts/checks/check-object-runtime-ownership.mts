@@ -8,7 +8,7 @@ import type { Node, Program, ObjectExpression, Property, FunctionDeclaration, Ex
 import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticObjectProperties } from '@cssearth/bake/runtime-source';
 import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
 import { SCENE_OBJECTS as OBJECTS } from "../../../site/objects.mts";
-import { definePreparedFocus, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
+import { defineOverview, definePreparedFocus, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
 import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
 import { readPreparedJsonExports } from '@cssearth/bake/contract';
@@ -321,16 +321,20 @@ async function registryLoaders(source: string, root: string, readSource: (path: 
   }
   const definitions = ast.body.flatMap(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'VariableDeclaration' ? node.declaration.declarations : []).filter(node => nameOf(node.id) === 'OBJECTS');
   const call = definitions[0]?.init, array = call?.type === 'CallExpression' ? call.arguments[0] : undefined;
-  if (definitions.length === 1 && call?.type === 'CallExpression' && imports.get(nameOf(call.callee)) === 'defineObjects' && call.arguments.length === 1 && array?.type === 'ArrayExpression' && array.elements.length === 2 &&
+  if (definitions.length === 1 && call?.type === 'CallExpression' && imports.get(nameOf(call.callee)) === 'defineObjects' && call.arguments.length === 1 && array?.type === 'ArrayExpression' && array.elements.length === 3 &&
       array.elements.every(entry => entry?.type === 'SpreadElement' && entry.argument.type === 'CallExpression')) {
-    const scene = array.elements[0], focus = array.elements[1];
-    if (scene?.type !== 'SpreadElement' || scene.argument.type !== 'CallExpression' || focus?.type !== 'SpreadElement' || focus.argument.type !== 'CallExpression') fail('requires scene and focus capability projections');
-    const mapping = focus.argument;
-    const focusImport = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === './prepared-focus-objects.json');
-    const validatorImport = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === registryPackage);
-    if (focusImport?.type !== 'ImportDeclaration' || focusImport.specifiers.length !== 1 || focusImport.specifiers[0].type !== 'ImportDefaultSpecifier' ||
-        validatorImport?.type !== 'ImportDeclaration' || !validatorImport.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'definePreparedFocus' && nameOf(mapping.arguments[0]) === specifier.local.name) ||
-        mapping.callee.type !== 'MemberExpression' || mapping.callee.computed || nameOf(mapping.callee.object) !== focusImport.specifiers[0].local.name || nameOf(mapping.callee.property) !== 'map' || mapping.arguments.length !== 1) fail('focus destinations must use the prepared inventory and validator');
+    const [scene, ...prepared] = array.elements;
+    if (scene?.type !== 'SpreadElement' || scene.argument.type !== 'CallExpression') fail('requires scene, focus and overview capability projections');
+    // Catalogue focuses and overviews come from their prepared inventories, each through its registry validator.
+    for (const [entry, inventory, validator] of [[prepared[0], './prepared-focus-objects.json', 'definePreparedFocus'], [prepared[1], './prepared-overview-objects.json', 'defineOverview']] as const) {
+      if (entry?.type !== 'SpreadElement' || entry.argument.type !== 'CallExpression') fail('requires scene, focus and overview capability projections');
+      const mapping = entry.argument;
+      const inventoryImport = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === inventory);
+      const validatorImport = ast.body.find(node => node.type === 'ImportDeclaration' && node.source.value === registryPackage);
+      if (inventoryImport?.type !== 'ImportDeclaration' || inventoryImport.specifiers.length !== 1 || inventoryImport.specifiers[0].type !== 'ImportDefaultSpecifier' ||
+          validatorImport?.type !== 'ImportDeclaration' || !validatorImport.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === validator && nameOf(mapping.arguments[0]) === specifier.local.name) ||
+          mapping.callee.type !== 'MemberExpression' || mapping.callee.computed || nameOf(mapping.callee.object) !== inventoryImport.specifiers[0].local.name || nameOf(mapping.callee.property) !== 'map' || mapping.arguments.length !== 1) fail(`${inventory} destinations must use the prepared inventory and ${validator}`);
+    }
     return catalogRegistryLoaders(ast, scene.argument, root, readSource);
   }
   if (definitions.length === 1 && call?.type === 'CallExpression' && imports.get(nameOf(call.callee)) === 'defineObjects' && call.arguments.length === 1 && array?.type === 'CallExpression') {
@@ -722,10 +726,11 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     sharedVisits.set(path, serverOnly);
     sharedClosure.add(path);
     const file = relative(root, path);
-    if (file === 'site/prepared-object-distances.json' || file === 'site/prepared-focus-objects.json' || file === 'site/prepared-object-discovery.json') {
+    if (file === 'site/prepared-object-distances.json' || file === 'site/prepared-focus-objects.json' || file === 'site/prepared-object-discovery.json' || file === 'site/prepared-overview-objects.json') {
       const value: unknown = JSON.parse(await source(path));
       if (file.endsWith('distances.json')) Object.values(requireRecord(value)).forEach(parseNavigationDistance);
       else if (file.endsWith('discovery.json')) Object.values(requireRecord(value)).forEach(parseObjectDiscovery);
+      else if (file.endsWith('overview-objects.json')) requireArray(value).forEach(defineOverview);
       else requireArray(value).forEach(definePreparedFocus);
       return;
     }
