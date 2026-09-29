@@ -3,7 +3,7 @@ import type { SciencePalette, Relief, ScalarGrid, LinearTransform, ScienceProjec
 import type { SourceMesh, SourceScalar } from '../geometry/index.ts';
 import {decodeProfile,parseScienceInput,parseScienceGrid,parseQualitySource,parseQualityMask,parseColorSourceProfile,parseColorEntry,numericRaster,numericRasterBands} from './source-records.ts';
 import {loadPdsFloatMap} from './pds/pds-float-map.ts';
-import { loadImageDemScience } from './image-dem-science.ts';
+import { loadImageDemScience } from './dem/image-dem-science.ts';
 import {loadPdsImage} from './pds/pds-image.ts';
 import {loadFacetScalarSurface} from './facet-scalars.ts';
 import {loadVtkCategories} from './vtk-categories.ts';
@@ -24,7 +24,7 @@ import { loadFitsImageMap } from './fits-image-map.ts';
 import { loadNpyDictionaryMap } from './numpy/npy-dictionary-map.ts';
 import { loadNpyLonLatGrid } from './numpy/npy-lonlat-grid.ts';
 import { loadPds3Grid } from './pds/pds3-grid.ts';
-import { loadVicarGrid } from './vicar-grid.ts';
+import { loadVicarGrid } from './pds/vicar-grid.ts';
 import { loadBareRockEclipse, loadBareRockFit, loadEclipseMapFit } from './eclipse-map/eclipse-map-fit.ts';
 import { loadPublishedPhaseCurveMap } from './eclipse-map/published-phase-curve-map.ts';
 import { loadEigenspectraTemperature } from './eclipse-map/eigenspectra-map.ts';

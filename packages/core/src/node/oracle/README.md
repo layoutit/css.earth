@@ -13,9 +13,9 @@ are older standalone audits; the groups below are fixture oracles.
 | Astropy blackbody, constants and units | Frequency-form Planck intensity and brightness-temperature inversion used by ALMA preparation, plus the HST flux-density-to-Rayleigh conversion | `physical-units/spectral.py` | `tests/objects/units/spectral-units.oracle.test.mts` |
 | NumPy SVD, following pinned ThERESA source | `eigenmap-fit.mts`: signed harmonic curves, scale-independent eigencurve ordering, eigenmap coefficients and rejection of the null spectrum; comparisons are invariant to arbitrary eigenvector signs | `packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.py` | `packages/bake/src/objects/raster/eclipse-map/eigenmap-fit.oracle.test.mts` |
 | NumPy, Astropy, following pinned ThERESA source | Eclipse-map harmonic normalization and signs, weighted linear fit and posterior covariance, Planck radiance and single/band brightness temperatures | `packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.py` | `packages/bake/src/objects/raster/eclipse-map/numerics.oracle.test.mts` |
-| [Native SBMT](../../../../../tests/oracles/sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
-| SpiceyPy (CSPICE N0067) | `@cssearth/spice`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tests/oracles/spice/dart-draco.oracle.test.mts`, and `tests/oracles/spice/small-kernel.oracle.test.mts` for the LSK and PCK alone |
-| SpiceyPy (CSPICE N0067) | `@cssearth/spice` `spacecraftApproach`: New Horizons' closest approaches to Pluto and Charon and the side of each it approached, in the IAU body frame | `spice/new-horizons-approach.py` | `tests/oracles/spice/new-horizons-approach.oracle.test.mts` |
+| [Native SBMT](../../../../bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.mts` | `packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.test.mts` |
+| SpiceyPy (CSPICE N0067) | `@cssearth/spice`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tests/oracles/spice/dart-draco.oracle.test.mts`, and `packages/bake/src/astronomy/fixtures/small-kernel.oracle.test.mts` for the LSK and PCK alone |
+| SpiceyPy (CSPICE N0067) | `@cssearth/spice` `spacecraftApproach`: New Horizons' closest approaches to Pluto and Charon and the side of each it approached, in the IAU body frame | `packages/bake/src/objects/default-view/fixtures/new-horizons-approach.py` | `packages/bake/src/objects/default-view/fixtures/new-horizons-approach.oracle.test.mts` |
 | pds4_tools | `pds4-geometry-cube.mts`: every label-defined plane of the DART DRACO cube, values, flags and unit conversions | `packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.py` | `pds4-geometry-cube.oracle.test.mts` |
 | pvl, numpy | `osiris-geo.mts`: the Rosetta OSIRIS level-5 geometry planes and level-4 quality companion (67P) | `packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.py` | `osiris-geo.oracle.test.mts` |
 | pvl, numpy | `archived-camera.mts`: the OSIRIS level-4 reflectance, sigma and quality planes (Steins) | `packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.py` | `archived-camera.oracle.test.mts` |
@@ -34,7 +34,7 @@ are older standalone audits; the groups below are fixture oracles.
 | astropy, numpy | `observation/spectral-band-maps.mts`: Charon LEISA spectra, per-pixel wavelengths, archived coordinates and ice-band estimators near Organa | `packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.py` | `packages/bake/src/objects/layers/observation/spectral-band-maps.test.mts` |
 | pvl, numpy | `isis2-qube.mts`: the Deep Space 1 MICAS orthographic image and DEM component cubes and their special pixels (Borrelly) | `packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.py` | `isis2-qube.oracle.test.mts` |
 | numpy | `npy-lonlat-grid.mts`: the `.npy` arrays of the Cambioni et al. (2022) ALMA maps of Psyche and nearest-node lookup, including both half-cells at the antimeridian | `packages/bake/src/objects/raster/numpy/psyche-alma.py` | `npy-lonlat-grid.oracle.test.mts` |
-| USGS ISIS 10.0.0_LTS unit-test truth files | `packages/bake/src/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `packages/bake/src/photometry/fixtures/photometric-truth.py` | `tests/photometry/isis.oracle.test.mts` |
+| USGS ISIS 10.0.0_LTS unit-test truth files | `packages/bake/src/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `packages/bake/src/photometry/fixtures/photometric-truth.py` | `packages/bake/src/photometry/isis.oracle.test.mts` |
 
 Script paths in the table are relative to `tests/oracles/` unless they start with
 `packages/`. The moved mission scripts and comparing tests are in
@@ -44,9 +44,10 @@ Script paths in the table are relative to `tests/oracles/` unless they start wit
 `packages/bake/src/photometry/fixtures/`. The source-surface test, fixture and Python
 verifier are in `packages/bake/src/objects/geometry/`.
 
-Domains awaiting later moves remain under `tests/oracles/`: the remaining FITS scripts, SPICE, SBMT,
+Domains awaiting later moves remain under `tests/oracles/`: the remaining FITS scripts and SPICE scripts,
 physical-units, eccentric hosted-orbits and the Venus audits. Bake-owned FITS records and
-eclipse-map cases now live beside their comparing bake suites. Most
+eclipse-map cases now live beside their comparing bake suites. SBMT lives in
+`packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/`. Most
 scripts sit beside the fixture they write. Historical `generatedBy` strings keep
 the generator's original path until regeneration.
 
@@ -63,7 +64,8 @@ only. It no longer holds a runtime-lock or generator digest, while
 test runs past its restored-source skips. The shared FITS reader is the
 `@cssearth/fits` package, whose own tests stay self-contained, so its comparing tests sit beside
 their scripts in `tests/oracles/fits/`. The SPICE reader is the `@cssearth/spice` package, and its comparing tests
-likewise sit beside their scripts in `tests/oracles/spice/`.
+span `tests/oracles/spice/`, `packages/bake/src/astronomy/fixtures/` and
+`packages/bake/src/objects/default-view/fixtures/`; the fixtures follow their comparing tests.
 
 ## Rules
 
@@ -95,7 +97,7 @@ SBMT is an opt-in native backend: `node packages/core/src/node/oracle/setup.mts 
 `node packages/core/src/node/oracle/run.mts sbmt/projection`. It uses the same fixture envelope with a
 pinned executable/software lock (its fixture records no digest; see the known gap above). `node tests/oracles/test-sbmt.mts --unit`
 runs offline in CI; `node tests/oracles/test-sbmt.mts --restore` restores only its selected inputs
-and runs all cases. See its [coverage and known differences](../../../../../tests/oracles/sbmt/README.md).
+and runs all cases. See its [coverage and known differences](../../../../bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md).
 The commands below operate on the Python backends.
 
 ```bash

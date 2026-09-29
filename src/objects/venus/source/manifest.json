@@ -495,6 +495,16 @@
         "lenses"
       ],
       "lensId": "elevation",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m"
+          }
+        ]
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -551,6 +561,16 @@
         "lenses"
       ],
       "lensId": "reflectivity",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_fresnel_reflectivity_4641m"
+          }
+        ]
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -579,6 +599,16 @@
         "lenses"
       ],
       "lensId": "roughness",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_meter_scale_slope_4641m"
+          }
+        ]
+      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

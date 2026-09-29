@@ -235,6 +235,11 @@ equatorial radius and temperature to come back within their errors. The measured
 
 ![The placed stars' colour lenses, each from a measured spectrum](images/star-colours.png)
 
+**Pulsation.** A Cepheid's brightness follows Gaia DR3's published harmonic model through each period; [light-curve.ts](../packages/bake/src/photometry/light-curve.ts)
+reads it as published and checks it against the same row's amplitude and epoch of maximum.
+
+![HV 1345 through one cycle](images/cepheid-light-curve-phases.png)
+
 ## Evidence must match the claim
 
 Check native band identities, units and registration separately from display

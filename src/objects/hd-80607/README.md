@@ -12,7 +12,7 @@ HD 80607 shares its motion through space with HD 80606, 1,355 AU away, so the tw
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object.mts](../../../tools/objects/new-object.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
 
 - The colour's cross-check differs by 2 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../tests/contract/object-package-consistency.test.mts) recomputes it after preparation.
 

@@ -16,7 +16,7 @@ establishes; a valid manifest does not prove that its dates or units match the d
 | --- | --- |
 | Documentation only | Links and affected instructions; no surface bake or browser suite unless the documented behavior also changed. |
 | Research or a source diagnostic | Input interpretation and the focused numerical/tool checks supporting the finding; no delivery or browser qualification for unchanged runtime assets. |
-| Source metadata or bindings | Affected tests in `src/platform/source-*.test.mts` and `tests/sources/*.test.mts`; add body/scientific checks when the interpretation changes. |
+| Source metadata or bindings | Affected tests in `src/platform/source-*.test.mts` and `tests/sources/*.test.mts` and `packages/bake/src/sources/*.test.mts`; add body/scientific checks when the interpretation changes. |
 | New/changed source or preparation | Body/preparer tests, source validity and coordinate interpretation, prepared asset closure, source-to-result visual inspection. |
 | New acquisition path or missing restoration evidence | Restore its required ignored inputs into an empty temporary destination using the documented acquisition path. Preserve working inputs; cached verification does not prove restoration. |
 | Body registration/content | Package contract, reachable route/search/parent context, supported controls and correct attribution. |

@@ -14,7 +14,7 @@ It is one of 4 planets known around V1298 Tau. Its orbit and size follow Livings
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/v1298-tau-d.json).
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/v1298-tau-d.json).
 
 
 ## Known problems

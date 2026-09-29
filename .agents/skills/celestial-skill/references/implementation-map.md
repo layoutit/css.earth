@@ -108,7 +108,7 @@ instead of editing a shared list or atlas position.
   photometric models, including Hapke with macroscopic roughness, for the
   surface-observation and shape-camera routes. Lutetia's
   `source/photometry/` record and its manifest binding are the worked example;
-  `tests/photometry/isis.oracle.test.mts` holds the library to the values ISIS
+  `packages/bake/src/photometry/isis.oracle.test.mts` holds the library to the values ISIS
   prints.
 - **Elevation relief:** Ceres's `source/preparation/terrestrial.json` supplies
   its height datum, validity limits and cartographic lighting to
@@ -407,7 +407,7 @@ photometric models are checked against the truth files of their unit tests,
 which need no ISIS install. See `packages/core/src/node/oracle/README.md`.
 
 For SUM/INFO image-to-shape investigations, use the optional
-[native SBMT preparation oracle](../../../../tests/oracles/sbmt/README.md).
+[native SBMT preparation oracle](../../../../packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/README.md).
 Add a source-pinned case to its shared inventory rather than writing a body-only
 reference script. Its staged comparison separates pointing, visible intercepts,
 FITS samples and UV projection. SBMT's angular UV approximation is not exact
