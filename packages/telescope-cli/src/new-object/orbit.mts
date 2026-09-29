@@ -1,7 +1,7 @@
 /** A planet's or companion's hosted orbit (packages/astronomy `hostedOrbit`), from one of three routes, each keeping its source:
  *
  * - `whereistheplanet`: one sample of the orbit paper's own orbitize! posterior (Wang et al. 2021's whereistheplanet), picked by
- *   tools/objects/hosted-orbits/posterior-pick.py with the paper's measured positions; its orbit.json is converted here.
+ *   packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py with the paper's measured positions; its orbit.json is converted here.
  * - `archive`: one paper's parameter row in the NASA Exoplanet Archive `ps` table (the default row unless the spec names the
  *   reference), for a transiting planet: period, a/R*, inclination, eccentricity and transit time from that one paper.
  * - `elements`: values the spec cites directly.
@@ -25,7 +25,7 @@ export const decodeEntities = (text: string) => text.replace(/&(#x[0-9a-f]+|#\d+
   code.startsWith('#x') ? String.fromCodePoint(parseInt(code.slice(2), 16)) : code.startsWith('#') ? String.fromCodePoint(Number(code.slice(1))) : NAMED_ENTITIES[code] ?? whole);
 const mod360 = (value: number) => ((value % 360) + 360) % 360;
 
-/** orbitize!'s orbit (tools/objects/hosted-orbits/posterior-pick.py's orbit.json) as a hosted orbit around a host of `hostRadiusKm`
+/** orbitize!'s orbit (packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py's orbit.json) as a hosted orbit around a host of `hostRadiusKm`
  * at `distanceParsecs`. `citation` names the paper and its posterior; `pick` how the sample was chosen. */
 export function orbitizeHostedOrbit(orbitJson: unknown, hostRadiusKm: number, distanceParsecs: number, citation: string, pickPath: string): HostedOrbit {
   const input = orbitJson as { source?: string; rule?: string; samples?: number; tauReferenceMjd?: number; orbit?: Record<string, number> };
@@ -35,7 +35,7 @@ export function orbitizeHostedOrbit(orbitJson: unknown, hostRadiusKm: number, di
   if (mass === undefined) throw new TypeError(`${pickPath}: orbit.json gives neither mtot nor m0 and m1.`);
   const periodDays = Math.sqrt(sma ** 3 / mass) * DAYS_PER_YEAR, angularMas = sma * plx, placedAu = angularMas / 1000 * distanceParsecs;
   const reference = input.tauReferenceMjd ?? 0, periastron = reference + tau * periodDays;
-  const picked = `${citation}, distributed as a posterior of ${input.samples ?? '?'} samples by ${input.source ?? 'whereistheplanet'}. Picked with tools/objects/hosted-orbits/posterior-pick.py (${pickPath}): ${input.rule ?? 'see orbit.json'}.`;
+  const picked = `${citation}, distributed as a posterior of ${input.samples ?? '?'} samples by ${input.source ?? 'whereistheplanet'}. Picked with packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py (${pickPath}): ${input.rule ?? 'see orbit.json'}.`;
   return {
     periodDays: round(periodDays, 1), semiMajorAxisStellarRadii: round(placedAu * AU_KM / hostRadiusKm, 1), inclinationDegrees: round(inc, 4), eccentricity: round(ecc, 5),
     argumentOfPeriapsisDegrees: round(mod360(aop + 180), 4), epochDefinition: 'periastron', transitTimeBmjdTdb: round(periastron, 1), ascendingNodePositionAngleDegrees: round(mod360(pan), 4),

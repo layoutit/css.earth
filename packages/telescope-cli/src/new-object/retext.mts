@@ -1,6 +1,6 @@
 /** Rewrite the drafted reader text and size facts of hosts and planets the archive route already made, after the templates change:
  *
- *   node tools/objects/new-object.mts --retext <host id>...
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>...
  *
  * Each host is drafted again from the NASA Exoplanet Archive (from-archive.mts), as if the universe held none of it, and only the
  * drafted fields are written back: the card and introduction with their archive locator in text.json, the stored spec and the

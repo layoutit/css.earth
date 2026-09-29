@@ -1,22 +1,22 @@
 #!/usr/bin/env node
 /** Scaffold a placed-star object package from its astronomy record, instead of cloning another star by find-and-replace.
  *
- *   node tools/objects/new-object.mts --spec <stars.json> [--skip-existing] [--check | --bake]
- *   node tools/objects/new-object.mts --bake <id>...
- *   node tools/objects/new-object.mts --refresh <id>... [--check | --bake]
- *   node tools/objects/new-object.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
- *   node tools/objects/new-object.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
- *   node tools/objects/new-object.mts --star-limb <id>... [--bake]
- *   node tools/objects/new-object.mts --draft-photometry <id>... --out entries.json
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --spec <stars.json> [--skip-existing] [--check | --bake]
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --bake <id>...
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh <id>... [--check | --bake]
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --draft-photometry <id>... --out entries.json
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the colour lens from the best archived
  * spectrum with its cross-check, the model limb law, the catalogue colour, marker, manifest, acquisition plan, source records and
  * credits (new-object/generate.mts). Only prose is left marked. The shape-only scaffold below stays for a star with no temperature
  * and for a black hole:
  *
- *   node tools/objects/new-object.mts <id> --name <display name> --system <system name, e.g. "Beta Pictoris system"> --temperature <K>
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts <id> --name <display name> --system <system name, e.g. "Beta Pictoris system"> --temperature <K>
  *     --temperature-source <citation with URL> --description <catalogue line> --paper <url> --paper-credit <credit>
- *   node tools/objects/new-object.mts <id> --black-hole --shadow-source <citation> --name ... --system ... --description ... --paper ... --paper-credit ...
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts <id> --black-hole --shadow-source <citation> --name ... --system ... --description ... --paper ... --paper-credit ...
  *
  * Requires packages/astronomy/data/bodies/<id>.json with a `star` block and `physical.meanRadiusKm`. Every number here is
  * derived from that record: the world-frame origin, the catalogue distance, the radius facts and the sky-north display axis
@@ -27,6 +27,7 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { scaffoldStar, TODO } from './scaffold.mts';
+import { loadSolarEpoch } from './solar-epoch.mts';
 
 export { scaffoldStar, scaffoldStarFiles, solarRadii, starStylesheet, TODO, type StarScaffold } from './scaffold.mts';
 
@@ -38,7 +39,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   } else if (handoff) {
     // Phase two of a system run (new-object/generate.mts runNewObject), in a process that loads the rebuilt astronomy package.
     const { runHostedPhase } = await import('./generate.mts');
-    process.stdout.write(JSON.stringify(await runHostedPhase(handoff)));
+    process.stdout.write(JSON.stringify(await runHostedPhase(handoff, await loadSolarEpoch(process.cwd()))));
   } else if (args.includes('--draft-photometry')) {
     // Band photometry for imaged planets from the UltracoolSheet: `--draft-photometry ID... --out entries.json`, then `--photometry entries.json` (new-object/ultracool.mts).
     const { readFile, writeFile } = await import('node:fs/promises'), { draftUltracoolPhotometry } = await import('./ultracool.mts'), { liveArchive } = await import('./archives.mts');
@@ -100,7 +101,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { formatNewObject, runNewObject } = await import('./generate.mts'), { prepareObjects } = await import('@cssearth/bake/prepare-object');
     const ids = args.filter(argument => !argument.startsWith('--')), path = resolve('output/new-object/refresh.json');
     await mkdir(resolve('output/new-object'), { recursive: true }); await writeFile(path, `${JSON.stringify(await refreshSpec(process.cwd(), ids), null, 2)}\n`);
-    const results = await runNewObject(path, { progress: line => process.stderr.write(`${line}\n`), refresh: true });
+    const results = await runNewObject(path, { progress: line => process.stderr.write(`${line}\n`), refresh: true, solarEpoch: await loadSolarEpoch(process.cwd()) });
     process.stdout.write(formatNewObject(results));
     const good = results.filter(result => !result.failed).map(result => result.id);
     if (results.some(result => result.failed)) process.exitCode = 1;
@@ -113,7 +114,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     // The full generator: every star in the spec file, from the archives (new-object/generate.mts); also `telescope new-object`.
     // `--check` runs the bake through the page data on what was generated, `--bake` the whole chain (packages/bake/cli/prepare-object.mts).
     const { formatNewObject, runNewObject } = await import('./generate.mts'), { prepareObjects } = await import('@cssearth/bake/prepare-object');
-    const results = await runNewObject(specPath, { progress: line => process.stderr.write(`${line}\n`), skipExisting: args.includes('--skip-existing') });
+    const results = await runNewObject(specPath, { progress: line => process.stderr.write(`${line}\n`), skipExisting: args.includes('--skip-existing'), solarEpoch: await loadSolarEpoch(process.cwd()) });
     process.stdout.write(formatNewObject(results));
     // A body that failed is reported and not written; the rest are checked or baked.
     const good = results.filter(result => !result.failed).map(result => result.id);
@@ -126,7 +127,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const missing = required.filter(name => option(name) === undefined);
     if (!id || missing.length) throw new TypeError(`Usage: new-object --spec <stars.json>, or the shape-only scaffold: new-object <id> ${required.map(name => `--${name} <value>`).join(' ')} [--order <n>]; missing ${missing.join(', ') || 'id'}.`);
     const order = option('order');
-    const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, ...blackHole ? { blackHole: { shadowSource: option('shadow-source')! } } : { temperatureK: Number(option('temperature')), temperatureSource: option('temperature-source')! }, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) });
+    const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, ...blackHole ? { blackHole: { shadowSource: option('shadow-source')! } } : { temperatureK: Number(option('temperature')), temperatureSource: option('temperature-source')! }, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) }, await loadSolarEpoch(process.cwd()));
     console.log(`${written.length} files written. Replace every ${TODO}, then: node packages/bake/cli/prepare-object.mts ${id}`);
   }
 }

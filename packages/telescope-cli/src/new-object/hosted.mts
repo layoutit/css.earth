@@ -199,7 +199,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   }
   const manifest = read(`${s}/manifest.json`);
   manifest.documents = [...manifest.documents, ...[...record.documents.keys()].map(path => ({ path, sourceBinding: { kind: 'local', reason: path.endsWith('pick.json')
-    ? 'The whereistheplanet posterior and the measured positions that choose one sample from it (tools/objects/hosted-orbits/posterior-pick.py).' : path.endsWith('orbit.json')
+    ? 'The whereistheplanet posterior and the measured positions that choose one sample from it (packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py).' : path.endsWith('orbit.json')
       ? 'The sample kept, with the model at every measured position; the astronomy record takes its elements.' : 'The paper\'s published measurements, transcribed for orbitize!.' } })), storedSpecDocument];
   // The spec this package was made from, so `--refresh` can make it again (refresh.mts).
   files.set(`${s}/preparation/new-object.json`, storedHostedSpec(spec, record.hostId, record.order));
@@ -214,7 +214,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     `**Size and mass.** ${String(record.body.physicalNotes)}`, '', `**Orbit.** ${Object.values(record.orbit.sources).join(' ')}`, '',
     ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}, because ${(spec.colorReason ?? 'The archives do not resolve this companion from its star').replace(/^[A-Z](?=[a-z])/u, c => c.toLowerCase())}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : colorLine ? [colorLine, ''] : [],
     ...heat.flatMap(({ line }) => [line, '']),
-    '## Evidence', '', `Generated ${CHECKED} by [new-object.mts](../../../tools/objects/new-object.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
+    '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
     ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
