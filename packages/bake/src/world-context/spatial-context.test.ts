@@ -195,7 +195,7 @@ test('satellite ellipses are translated to their parent with exact prepared cent
   assert.deepEqual(reordered.bodies.find(body => body.id === 'parent')!.systemView, view, 'registry order has no influence on framing');
   // A star frames a planet under a fifth of its largest sibling's radius (TOI-1670 b beside c); a planet leaves out such a moon.
   const siblings = { ...config, bodies: [...bodies, { id: 'giant', name: 'Giant', color: '#aaaaaa' }] };
-  const siblingStates = { ...states, giant: { ...states.satellite!, positionM: [1014, 0, 0] satisfies [number, number, number], semiMajorAxisM: 20 } };
+  const siblingStates: Record<string, OrbitalState> = { ...states, giant: { ...states.satellite!, positionM: [1014, 0, 0], semiMajorAxisM: 20 } };
   const members = (classification: string) => prepareWorldContext(siblings, { ...facts, parent: { ...facts.parent, classification },
     giant: { radiusM: 6 } }, siblingStates, {}, policy).bodies[0]!.systemView!.memberIds;
   assert.deepEqual(members('planet'), ['giant']);
