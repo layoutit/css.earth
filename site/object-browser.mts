@@ -204,8 +204,7 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     if (open) filter();
   };
 
-  // Focus first: focusing search opens the mobile sheet for the keyboard, and closing
-  // the results must still return the sheet to where the search found it.
+  // Closing the results keeps the field focused; the mobile sheet returns to where the results found it.
   const closeKeepingFocus = () => { search.focus(); setOpen(false); };
   trigger.addEventListener("click", event => {
     event.preventDefault();
