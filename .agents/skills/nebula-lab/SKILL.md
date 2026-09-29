@@ -52,7 +52,7 @@ remain unchanged and report when over budget. See
 
 ## Packages and boundaries
 
-`labs/nebula/packages/{lab,reconstruction,volume-viewer}`, with the shared volume code in `packages/bake` (`@cssearth/bake/volume` and `@cssearth/bake/volume/node`).
+`labs/nebula/packages/{lab,reconstruction}` and `packages/volume-viewer`, with the shared volume code in `packages/bake` (`@cssearth/bake/volume` and `@cssearth/bake/volume/node`).
 
 - **`@cssearth/bake/volume`** — pure contracts, fields, materials, coordinates. No node builtins, no sharp, no React.
 - **`@cssearth/bake/volume/node`** — baking and compact-input IO; may read files.
