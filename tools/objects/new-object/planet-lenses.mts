@@ -259,7 +259,7 @@ export async function relensExisting(root: string, ids: readonly string[], mode:
   return lines;
 }
 
-/** A planet's context marker as the marker author draws it from its default lens (source-authoring/context-markers.mts): the
+/** A planet's context marker as the marker author draws it from its default lens (packages/telescope-cli/src/source-authoring/context-markers.mts): the
  * manifest entry names that author and the inputs the lens reads, replacing the scaffold's gray-disc entry. */
 export function lensMarkerEntry(files: PackageFiles, id: string) {
   const path = `src/objects/${id}/source/manifest.json`, manifest = JSON.parse(String(files.get(path))) as { inputs: { id: string }[]; generatedIntermediates?: Record<string, unknown>[] };

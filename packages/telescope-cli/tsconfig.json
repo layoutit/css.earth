@@ -5,7 +5,6 @@
   },
   "include": [
     "src/**/*.mts",
-    "authoring/**/*.mts",
     "build.mts"
   ],
   "exclude": []
