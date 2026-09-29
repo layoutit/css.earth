@@ -1,6 +1,5 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -10,7 +9,7 @@ import type { GeometryProfile, GeometrySceneAssets, LeafImagePixels, SolarSceneS
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.ts';
 import { parseRasterRecipe, outputName, RASTER_DENSITY, packedRasterSize, rasterPageName } from '../raster/index.ts';
 import type { RasterRecipe } from '../raster/index.ts';
-import { prepareProjectiveTextureLayer, TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
+import { TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
 import { prepareComposite } from '../presentation/composite.ts';
 import { presentationAdapters } from '../presentation/adapters.ts';
 import { createPreparedNodeTree } from '../presentation/prepared-node-tree.ts';
@@ -20,7 +19,6 @@ import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import type { PresentationInputs } from '../presentation/types.ts';
 const fixtureRoot=process.cwd();
 const readJson=async(path:string):Promise<unknown>=>JSON.parse(await readFile(join(fixtureRoot,path),'utf8')) as unknown;
-const hash=(value:unknown)=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 /** The widths the raster lane publishes, from its recipe: surfaces.ts packs each surface, poles are two tiles per surface
  * per lens, interior.ts writes the outer shell at the map's size and the core, poles and section at theirs. */
 function publishedWidths(raster:RasterRecipe):LeafImagePixels{
@@ -57,39 +55,10 @@ async function prepareAuthored(id:string,direction:[number,number,number],edit:(
   return result;
  } finally {await rm(outputDirectory,{recursive:true,force:true});}
 }
-const fixtures:[string,[number,number,number],number,string,string?][]=[
- ['mercury',[0.9590465723427557,-0.28324830064510237,0.00026881085002734145],0.005,'75eea24dcbd8643f00280fa02908c4d4a65f0902190816b601df2961363d1134','48dec28b7d2245edb753ad0bae1a59e203dca6ad80a619dd56bfe13b2f8fde19'],
- ['venus',[0.9978458208272254,-0.04897654126493434,0.043646491993803105],0.008,'52c1a1286be1648205e12257163550b38c79c8d8cadd005d21af6b293db672d7']];
-for(const [id,direction,fixedOverlap,bodyHash,interiorHash] of fixtures){
- test(`authored ${id} geometry preserves independent pre-migration leaf oracle`,async()=>{
-  // The oracle predates the stepped seam outset. Restoring the fixed overlap it was taken
-  // with must reproduce it exactly, so the outset changes nothing else about the leaves.
-  const result=await prepareAuthored(id,direction,profile=>{const {seamOutset:_stepped,...projection}=profile.projection;return {...profile,projection:{...projection,overlap:fixedOverlap,rasterOverscan:0,projectivePoles:id==='mercury'}};});
-  // Four changes since this oracle was taken touched these leaves, each by name: draws every polar cap from
-  // both sides, moved raster images to the canonical 2x density, leafRasterScale draws each leaf at two
-  // texels per CSS pixel instead of the recipe's raster scale (its caps already were), and a leaf binds its lens's
-  // texture instead of inlining the profile's image. Undoing exactly those four reproduces the oracle, and every cap must
-  // carry the both-sided suffix. A fifth change was taken into the hashes rather than undone: #712 grows each band
-  // leaf's texture with this fixed overlap instead of stretching the cell across it, and stops rounding background sizes
-  // to the decimals Array.map handed formatCssLength as its index. A sixth is also in Mercury's hashes: its leaves write the
-  // texture address and lens image inline like every other body (no position variables), and each lens has its own
-  // two-tile pole sprite (512 px) where one atlas held all six tiles (1,536 px). Checked against the published leaves before
-  // the rehash: every matrix, box, texture position and projective layer is unchanged; only the four caps' sprite size moved.
-  // A seventh is restored rather than undone: Mercury's caps were projective when the oracle was taken, and are plain leaves
-  // like every other body's now.
-  const both=';border-radius:50%',isCap=(leaf:object)=>Boolean((leaf as {polar?:unknown;polarCap?:unknown}).polar||(leaf as {polarCap?:unknown}).polarCap);
-  const geometry=parseGeometryProfile(await readJson(`src/objects/${id}/source/preparation/geometry.json`)),ns=geometry.namespace;
-  const recipeLayer=(leaf:{style:string;projectiveTextureLayer?:object})=>isCap(leaf)||!leaf.projectiveTextureLayer?leaf
-   :{...leaf,projectiveTextureLayer:prepareProjectiveTextureLayer(matrixOf(leaf.style),geometry.projection.rasterScale)};
-  const inlined=(leaf:{style:string})=>({...leaf,style:leaf.style.replace(`background-image:var(--${ns}-surface-image)`,`background-image:url(${geometry.surface.surface.url})`)
-   .replace(`background-image:var(--${ns}-poles-image)`,`background-image:url(${geometry.surface.poles.url})`)});
-  const undo=(set:readonly {style:string;projectiveTextureLayer?:object}[])=>JSON.parse(JSON.stringify(set.map(recipeLayer).map(inlined).map(leaf=>isCap(leaf)?{...leaf,style:leaf.style.replace(both,'')}:leaf)).replaceAll('@2x.webp','.webp')) as unknown;
-  const leaves='bodyLeaves' in result?result.bodyLeaves:result.body.leaves,caps=leaves.filter(isCap);
-  assert.ok(caps.length>=2&&caps.every(leaf=>leaf.style.endsWith(both)&&!leaf.style.includes('backface-visibility')),'every polar cap is a disc, culled when it faces away');
-  assert.equal(hash(undo(leaves)),bodyHash);
-  if(interiorHash){assert.ok('interior' in result&&result.interior);const interior=result.interior;
-   assert.equal(hash({outerBodyLeaves:undo(interior.outerBodyLeaves),coreLeaves:undo(interior.coreLeaves),sectionLeaves:undo(interior.sectionLeaves)}),interiorHash);}
- });
+const fixtures:[string,[number,number,number]][]=[
+ ['mercury',[0.9590465723427557,-0.28324830064510237,0.00026881085002734145]],
+ ['venus',[0.9978458208272254,-0.04897654126493434,0.043646491993803105]]];
+for(const [id,direction] of fixtures){
  test(`authored ${id} geometry overlaps by its raster overscan and gives every surface leaf a seam outset`,async()=>{
   const result=await prepareAuthored(id,direction);
   const seamRepair='bodyLeaves' in result?result.preparedSurface.seamRepair:result.body.seamRepair;

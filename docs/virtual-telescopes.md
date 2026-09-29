@@ -643,8 +643,7 @@ The ledgers say how much of each archive these routes have been proved on:
 The eight archive ledgers (all but IHW Halley's) are written the same way by
 [`packages/telescope-cli/src/archives/ledger.mts`](../packages/telescope-cli/src/archives/ledger.mts): each archive's `archive-ledger.mts` states how
 to survey its archive, read its ledger back and render its page, and the few ways its command differs (which passes write,
-whether it has a `--local` pass, whether receipt problems fail the run, the JSON indent). Its
-[test](../packages/telescope-cli/src/archives/ledger.test.mts) checks that every tracked ledger page is its ledger rendered.
+whether it has a `--local` pass, whether receipt problems fail the run, the JSON indent).
 
 ## Asking which observations might measure something
 

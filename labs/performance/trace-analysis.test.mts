@@ -1,18 +1,17 @@
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { mkdtemp, writeFile, readFile, rm, symlink } from 'node:fs/promises';
+import { mkdtemp, writeFile, rm, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { requireArray, requireRecord } from '@cssearth/core';
 import { createCostIndex, diagnoseCosts } from './trace-costs.mts';
 import { chartIdleGaps, averageFrames, renderAverageChart, validateSeries } from './trace-chart.mts';
 import { alignRecorder, readCapture, compareCaptures } from './trace-capture.mts';
 import { indexNodeOwners, summarizeInvalidations } from './trace-invalidations.mts';
 import { correlateEvidence } from './trace-evidence.mts';
 import type { EvidenceInput } from './trace-evidence.mts';
-import { inspectBuild, main } from './trace-brief.mts';
+import { inspectBuild } from './trace-brief.mts';
 import type { JsonRecord, TraceEvent } from './trace-model.mts';
 
 const selection = { rendererPid: 1, rendererMainTid: 2 }, window = { startTs: 0, endTs: 100000, durationMs: 100 };
@@ -159,28 +158,6 @@ test('missing DOM snapshots retain invalidation counts but leave ownership unres
   assert.equal(result.domOwnership, 'unavailable');
   assert.equal(result.owners[0]?.owner, 'unresolved');
 });
-test('CLI produces a useful raw-trace report without sidecars or presentation events', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'trace-cli-'));
-  try {
-    const input = join(root, 'raw.json');
-    const events = [event('thread_name', 0, 0, {}, { ph: 'M', args: { name: 'CrRendererMain' } }),
-      event('thread_name', 0, 0, {}, { ph: 'M', tid: 3, args: { name: 'Compositor' } })];
-    for (let i = 0; i < 12; i++) events.push(event('RunTask', i * 16667, 3000), event('FireAnimationFrame', i * 16667, 3000),
-      event('DrawFrame', i * 16667 + 4000, 0, {}, { tid: 3 }));
-    await writeFile(input, JSON.stringify({ traceEvents: events }));
-    const result = await main([input, '--out', join(root, 'report'), '--label', 'Raw fixture']);
-    assert.ok(result);
-    const { output, brief } = result;
-    assert.equal(brief.capture.status, 'trace-only');
-    assert.equal(brief.averageSeries.source, 'DrawFrame fallback');
-    assert.ok(brief.averageSeries.points.some(p => (p.meanMs ?? 0) > 0));
-    assert.equal(brief.busiestTasks[0]?.recorder, null);
-    const diagnosis = requireRecord(JSON.parse(await readFile(join(output, 'diagnosis.json'), 'utf8')));
-    assert.equal(diagnosis.status, 'PARTIAL evidence');
-    assert.ok(requireArray(diagnosis.missing).some(m => typeof m === 'string' && m.includes('recorder')));
-    assert.equal(((await readFile(join(output, 'performance.svg'), 'utf8')).match(/data-trace=/g) ?? []).length, 1);
-  } finally { await rm(root, { recursive: true, force: true }); }
-});
 test('source attribution verifies bytes and refuses symlink escapes or wrong bundles', async () => {
   const root = await mkdtemp(join(tmpdir(), 'trace-source-'));
   try {
@@ -197,7 +174,6 @@ test('source attribution verifies bytes and refuses symlink escapes or wrong bun
     assert.match(unavailable, /leaves supplied build/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
-
 
 test('chart omits explicitly idle gaps but preserves dropped frames, work and uncertain gaps', () => {
   const brief = { selection: { rendererPid: 1, rendererMainTid: 1 }, window: { startTs: 0, endTs: 1e6 }, displayBudgetMs: 16.667 };

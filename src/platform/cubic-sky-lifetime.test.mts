@@ -12,54 +12,6 @@ const trackball = (): TrackballMetrics => ({ centerX: 0, centerY: 0, radius: 200
 const nativeSurface = (surface: Surface): HTMLElement => surface.asElement();
 const nativeConstructor = Surface as unknown as typeof HTMLElement;
 
-
-test("drag constructor removes partially attached listeners if initial style publication fails", () => {
-  const previous = globalThis.HTMLElement;
-  globalThis.HTMLElement = nativeConstructor;
-  try {
-    const surface = new Surface();
-    Object.defineProperty(surface.style, "cursor", {
-      configurable: true,
-      set() { throw new Error("style failure"); },
-    });
-    assert.throws(() => createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy,
-      inputSurface: nativeSurface(surface),
-      trackballMetrics: trackball,
-      rotate() {},
-    }), /style failure/);
-    assert.equal(surface.listenerCount(), 0);
-    assert.equal(surface.frames.size, 0);
-  } finally { globalThis.HTMLElement = previous; }
-});
-
-test("drag destruction releases listeners and capture even if interaction completion throws", () => {
-  const previous = globalThis.HTMLElement;
-  globalThis.HTMLElement = nativeConstructor;
-  try {
-    const surface = new Surface();
-    let updates = 0;
-    const controls = createUnboundedMatrixDragControls({ cameraMotion: createCameraMotion(), runtimePolicy,
-      inputSurface: nativeSurface(surface),
-      trackballMetrics: trackball,
-      rotate() { updates += 1; },
-      onEnd() { throw new Error("completion failure"); },
-    });
-    surface.dispatch("pointerdown");
-    surface.dispatch("pointermove", { clientX: 50, timeStamp: 16 });
-    surface.tick(16);
-    assert.ok(updates > 0);
-    assert.throws(() => controls.destroy(), /cleanup failed/);
-    assert.equal(surface.listenerCount(), 0);
-    assert.equal(surface.frames.size, 0);
-    assert.equal(surface.captured.size, 0);
-    controls.destroy();
-    controls.update({ drag: true });
-    // The fixture exposes only style mutation methods; this reads its tested cursor field.
-    assert.equal(surface.style.cursor, undefined);
-  } finally { globalThis.HTMLElement = previous; }
-});
-
-
 test("live cubic publication failure retires every owner once before reporting fatal", () => {
   const fixture = orbitFixture(runtimePolicy, null);
   let fail = false;

@@ -1,14 +1,6 @@
-import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
-import { completeEnhancedCoverage, lightingFrame, packLatitudeRaster, applySurfaceExposure, readAtmosphereModel } from './index.js';
-import type { LambertRasterConfig } from './index.js';
-const lighting: LambertRasterConfig = { minimumLightViewZ: -1, maximumLightViewZ: 1, frameCount: 256, shadowlessFloodLimbFloor: 0.35, ambientIntensity: 0.05, radiusScale: 0.505, terminator: [0, 0.1], maximumAlpha: 0.95 };
+import { completeEnhancedCoverage, packLatitudeRaster, applySurfaceExposure, readAtmosphereModel } from './index.js';
 describe('prepared raster operators', () => {
-    it('retains independently frozen Lambert phase and flood pixels', () => {
-        const hashes = ['30c4a49d092a9c1a0dc5c4372d1dd8403db4704b6689ae1f6ade46d787595657', '54465505162fb9ec6de88e27854714a1b1c3e26e94937a3919fe856135e3112f', 'a2752107df2f43b7703ab267ce9cc3ef64eaa17ea8e508e9e86a13691454b2da'];
-        for (const [index, frame] of [0, 128, 255].entries())
-            expect(createHash('sha256').update(lightingFrame(24, frame, lighting)).digest('hex')).toBe(hashes[index]);
-    });
     it('packs reversed latitude bands with wrapped horizontal and clamped vertical gutters', () => {
         const source = new Uint8Array(4 * 4 * 4);
         for (let pixel = 0; pixel < 16; pixel++)

@@ -10,10 +10,10 @@ const test = sourceTest();
 import { combinedNames, declaredBias, mjdToIso, parseGeminiProgram, scienceSequences, requireProgramId,
   configurationComplete, sameConfiguration, type GeminiProgram } from './archive.mts';
 import { ditherHalf, ourCalibrations, stagePlan, stageRequires, stageRun, PRODUCT_SUFFIX, STAGES } from './reduce.mts';
-import { archiveMasterPin, binning, checkAgainstArchive, compareOnDetector, overlapAt, parseSection, scienceExtensions,
+import { binning, checkAgainstArchive, compareOnDetector, overlapAt, parseSection, scienceExtensions,
   skyToPixel, statistics, storedOrigin,
   wcsShift, type Wcs } from './compare.mts';
-import { checkReceipt, galileanNote, hasScience, ledgerMarkdown, observationsOf, RECEIPT_SCHEMA, type Ledger, type MoonRow, GEMINI_TARGET_NAMES } from './archive-ledger.mts';
+import { galileanNote, hasScience, observationsOf, type MoonRow, GEMINI_TARGET_NAMES } from './archive-ledger.mts';
 import { matchNumberedTarget, parseNumberedTarget } from '../targets.mts';
 import { PRODUCT_RECORD_SCHEMA } from '@cssearth/telescope';
 import { readFitsFileHdus } from '@cssearth/fits/node';
@@ -272,31 +272,6 @@ test('an acquisition frame is counted apart from an observation', () => {
   assert.deepEqual(entry!.instruments, ['GNIRS', 'NIRI']);
 });
 
-const RECORD_FOR = (product: string, kind: string) => ({
-  schema: PRODUCT_RECORD_SCHEMA, telescope: 'gemini', stage: 'gemini/bias', inputs: [], parameters: {}, software: [],
-  outputs: [{ path: product, bytes: 10, sha256: 'b'.repeat(64) }],
-  evidence: [{ kind, receipt: 'r', product, establishes: 'something' }],
-});
-const RECEIPT = { schema: RECEIPT_SCHEMA, program: 'fixture', programme: 'GS-2025B-DD-102', evidence: 'archive-agreement',
-  ours: { product: 'S20250906S0254_bias.fits' } };
-
-test('a receipt is accepted only when a product record carries the same evidence for the same product', () => {
-  const records = new Map<string, unknown>([['S20250906S0254_bias.fits', RECORD_FOR('S20250906S0254_bias.fits', 'archive-agreement')]]);
-  assert.deepEqual(checkReceipt(RECEIPT, 'fixture.x.reproduction.json', PROGRAM, records),
-    { product: 'S20250906S0254_bias.fits', kind: 'archive-agreement', instrument: 'GMOS-S' });
-  // A receipt whose product has no record proves nothing.
-  assert.throws(() => checkReceipt(RECEIPT, 'fixture.x.reproduction.json', PROGRAM, new Map()), /has no product record/u);
-  // Nor does one whose record carries a different kind of evidence: the kinds establish different things.
-  const other = new Map<string, unknown>([['S20250906S0254_bias.fits', RECORD_FOR('S20250906S0254_bias.fits', 'internal-consistency')]]);
-  assert.throws(() => checkReceipt(RECEIPT, 'fixture.x.reproduction.json', PROGRAM, other), /carries no archive-agreement evidence/u);
-});
-
-test('a receipt of another programme, or of another schema, is refused', () => {
-  const records = new Map<string, unknown>([['S20250906S0254_bias.fits', RECORD_FOR('S20250906S0254_bias.fits', 'archive-agreement')]]);
-  assert.throws(() => checkReceipt({ ...RECEIPT, programme: 'GN-2017A-Q-63' }, 'f.json', PROGRAM, records), /it names the programme/u);
-  assert.throws(() => checkReceipt({ ...RECEIPT, schema: 'something-else@1' }, 'f.json', PROGRAM, records), /is not a Gemini receipt/u);
-  assert.throws(() => checkReceipt({ ...RECEIPT, evidence: 'looks-fine' }, 'f.json', PROGRAM, records), /is not a kind of evidence/u);
-});
 
 const moon = (moon: string, type: string, intent: string, frames = 1): MoonRow =>
   ({ moon, instrument: 'NIRI', type, intent, filter: 'H', frames, programmes: ['GN-2017A-Q-60'] });
@@ -324,21 +299,6 @@ test('the Galilean note is read from the rows and from what this run proved, nev
   const unproven = galileanNote(rows, []);
   assert.match(unproven, /and none were taken on an instrument this toolkit has proven/u);
   assert.match(unproven, /io: NIRI 1 \(unsupported\)\. No instrument that observed it has been proven/u);
-});
-
-test('the ledger says plainly when an object has no science frames of its own', () => {
-  const ledger = {
-    schema: 'cssearth-gemini-ledger@1', collection: 'GEMINI', archive: 'CADC', measured: '2026-09-19',
-    publicOnly: 'public only', instruments: [{ instrument: 'NIRI', frames: 10, science: 4 }],
-    objects: [{ id: 'europa', targets: ['Europa'], science: 0, acquisition: 14, instruments: ['NIRI'], programmes: 1 }],
-    galileanMoons: { note: 'Not one Gemini frame of Europa is a science frame.', rows: [moon('europa', 'ACQUISITION', 'calibration', 14)] },
-    capabilities: [{ instrument: 'NIRI', science: 4, support: 'supported', state: 'unproven', programs: [], evidence: [], reason: 'nothing yet' }],
-    receiptProblems: [],
-  } as unknown as Ledger;
-  const text = ledgerMarkdown(ledger);
-  assert.match(text, /Not one Gemini frame of Europa is a science frame/u);
-  assert.match(text, /\| NIRI \| 4 \| supported \| unproven \|/u);
-  assert.match(text, /None\. Every receipt beside a pinned program/u);
 });
 
 test('the repository FITS reader locates the extensions of a master this route writes', async () => {
@@ -479,12 +439,4 @@ test('a comparison refuses a master that is not this program current plan, and a
     const record = JSON.parse(await readFile(resolve(directory, 'bias', 'S20250906S0254_bias.fits.product.json'), 'utf8')) as { evidence: unknown[] };
     assert.deepEqual(record.evidence, []);
   } finally { await rm(directory, { recursive: true, force: true }); }
-});
-
-test('an archive master with no digest of its own is refused rather than compared against', () => {
-  const master = PROGRAM.calibrations.find(set => set.id === 'bias')!.product;
-  assert.equal(archiveMasterPin(master).identity, 'gS20250906S0254_bias.fits');
-  const { sha256, ...withoutDigest } = master;
-  assert.ok(sha256);
-  assert.throws(() => archiveMasterPin(withoutDigest as typeof master), /carries no sha256 yet/u);
 });

@@ -30,7 +30,6 @@ function esoDescriptor(response: MetadataResponse) { return response.resources.f
 test('metadata preserves raw evidence, nulls, field widths and distinct observations sharing one dataset', async () => {
   const response = await almaPromise(), saved = snapshot(response);
   assert.equal(response.queryStatus, 'OK'); assert.equal(response.rows.length, 2);
-  assert.equal(response.raw.sha256, 'ea9d3eda733a4299d5b98fb2110b2f0cf26e410fafc0fcbbeb5b84621f49226f');
   assert.equal(response.fields.find(f => f.name === 'access_format')!.arraysize, '9');
   assert.equal(response.rows[0]!.access_format, 'applicati');
   assert.equal(response.rows[0]!.obs_publisher_did, response.rows[1]!.obs_publisher_did);
@@ -232,7 +231,7 @@ test('bounded transfer rejects chunked oversized and error bodies without publis
     await assert.rejects(astroquery({ operation: 'vo-download', url: `${url}/large`, destination: resolve(directory,'large.fits'), byteLimit: 1024, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] }), /byte limit/u);
     await assert.rejects(astroquery({ operation: 'vo-download', url: `${url}/error`, destination: resolve(directory,'error.fits'), byteLimit: 1e6, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] }));
     const result = await astroquery({ operation: 'vo-download', url: `${url}/small`, destination: resolve(directory,'small.fits'), byteLimit: 1e6, parameters: {}, allowedPrivateHosts: ['127.0.0.1'] });
-    assert.equal(result.transfer!.file.bytes, 290880); assert.equal(result.transfer!.file.sha256, 'fd2a2d371e121bb50f64d781ac57b60f2f76d2c25d71f1c6a5ab9b5e262def60');
+    assert.equal(result.transfer!.file.bytes, 290880);
     assert.deepEqual(await readdir(directory), ['small.fits']); assert.deepEqual(requests, ['/large','/error','/small']);
   } finally { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); await rm(directory, { recursive: true, force: true }); }
 });

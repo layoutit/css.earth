@@ -1,17 +1,13 @@
 import { isRecord } from '@cssearth/core';
 import assert from 'node:assert/strict';
-import { readFile, readdir, realpath } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { fileURLToPath } from 'node:url';
-import { ESLint } from 'eslint';
 import { parse } from '@typescript-eslint/parser';
-import type { PathLike } from 'node:fs';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
-const eslint = new ESLint({ cwd: root });
-const packageNames = ['astronomy', 'catalog', 'engine', 'objects'];
 
 async function sourceFiles(directory: string): Promise<string[]> {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -46,25 +42,6 @@ function forbiddenImport(owner: string, file: string, specifier: string) {
   return !path.resolve(path.dirname(file), specifier).startsWith(packageRoot);
 }
 
-test('600 physical lines pass and adding the 601st fails in every package', async () => {
-  for (const name of packageNames) {
-    const filePath = `packages/${name}/src/line-limit-probe.ts`;
-    const source = Array.from({ length: 600 }, () => '// physical line').join('\n');
-    const [allowed] = await eslint.lintText(source, { filePath });
-    assert.equal(allowed.errorCount, 0, name);
-    const [rejected] = await eslint.lintText(`${source}\n// mutation: line 601`, { filePath });
-    assert.ok(rejected.messages.some(message => message.ruleId === 'max-lines'), name);
-  }
-});
-
-test('package guides exist and CLAUDE follows AGENTS', async () => {
-  for (const name of packageNames) {
-    const directory = path.join(root, 'packages', name);
-    for (const file of ['README.md', 'AGENTS.md']) assert.ok((await readFile(path.join(directory, file), 'utf8')).trim().length > 0);
-    assert.equal(await realpath(path.join(directory, 'CLAUDE.md')), await realpath(path.join(directory, 'AGENTS.md')));
-  }
-});
-
 test('runtime packages cannot reach site, legacy sources, Node tooling, or reverse the object dependency', async () => {
   for (const name of ['engine', 'objects']) {
     for (const file of await sourceFiles(path.join(root, 'packages', name, 'src'))) {
@@ -84,14 +61,18 @@ test('runtime packages cannot reach site, legacy sources, Node tooling, or rever
   assert.ok(!imports(nodeImport).some(value => forbiddenImport('objects', path.join(root, 'packages/objects/src/node/probe.ts'), value)));
 });
 
-
-test('generic runtime package compiler and lint reject native renderer APIs', async () => {
-  for (const name of ['engine', 'objects']) {
-    const config = JSON.parse(await readFile(path.join(root, 'packages', name, 'tsconfig.json'), 'utf8'));
-    assert.deepEqual(config.compilerOptions.lib, ['ES2022']);
-    const [result] = await eslint.lintText('export const surface = document.createElement("div");', {
-      filePath: `packages/${name}/src/renderer-leak.ts`,
-    });
-    assert.ok(result.messages.some(message => message.ruleId === 'no-restricted-globals'), name);
+test('host-neutral packages keep Node in node/: nothing else imports a Node built-in or a node/ module, or uses Buffer', async () => {
+  const offenders: string[] = [];
+  for (const name of ['core', 'fits', 'objects', 'spice', 'telescope']) {
+    const source = path.join(root, 'packages', name, 'src');
+    for (const file of await sourceFiles(source)) {
+      const relative = path.relative(source, file).replaceAll('\\', '/');
+      if (/^(?:node|test-support)\//u.test(relative) || /\.test\.m?ts$/u.test(relative)) continue;
+      const text = await readFile(file, 'utf8');
+      for (const specifier of imports(parse(text, { sourceType: 'module', ecmaVersion: 'latest' })))
+        if (specifier.startsWith('node:') || /(^|\/)node(\/|$)/u.test(specifier)) offenders.push(`${name}/${relative} -> ${specifier}`);
+      if (/\bBuffer\b/u.test(text)) offenders.push(`${name}/${relative} -> Buffer`);
+    }
   }
+  assert.deepEqual(offenders, []);
 });

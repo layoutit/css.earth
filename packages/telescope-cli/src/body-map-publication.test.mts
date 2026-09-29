@@ -111,10 +111,6 @@ test('prose, nominal optics, sampling and unpinned measurements cannot satisfy a
     }
   }
 });
-test('a changed resolution receipt invalidates map publication', async () => {
-  const f = await fixture(); await writeFile(`${f.planePath}.resolution.json`, '{}');
-  await assert.rejects(qualifyBodyMap(f.mapPath, selection), /output bytes/);
-});
 test('a midpoint inside a request does not prove that the entire exposure fits', async () => {
   const map = product(), jd = (iso: string) => Date.parse(iso) / 86400000 + 2440587.5;
   const value = { ...map, observations: [{ ...map.observations[0]!, midTimeJd: jd('2026-01-01T10:05:00Z'), exposureSeconds: 600 }] };

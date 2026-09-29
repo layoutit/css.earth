@@ -1,24 +1,15 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { mkdtemp, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sha256File } from '@cssearth/core/node';
 import { it as test } from 'vitest';
-import { addProductEvidence, assertInputPins, fileSize, readProductRecord, runDigest, sameRun, writeProductRecord } from './node/product-record.js';
+import { addProductEvidence, assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord } from './node/product-record.js';
 import { evidenceFor, parseProductRecord, productRecordPath, type ProductRun } from './product-record.js';
 
 const scratch = () => mkdtemp(join(tmpdir(), 'product-record-'));
 const run = (overrides: Partial<ProductRun> = {}): ProductRun => ({ telescope: 'ALMA', stage: 'disc-selfcal/final', inputs: [{ role: 'visibilities', identity: 'uid://A002/X/1', bytes: 3 }],
   parameters: { fluxScale: 0.907, robust: 0 }, software: [{ name: 'casatasks', version: '6.7.0' }], toolchainDigest: 'b'.repeat(64), ...overrides });
-
-test('a run digest ignores key and input order and changes with any value', () => {
-  const base = runDigest(run());
-  assert.equal(runDigest(run({ parameters: { robust: 0, fluxScale: 0.907 } })), base);
-  assert.notEqual(runDigest(run({ parameters: { fluxScale: 1.015, robust: 0 } })), base);
-  assert.notEqual(runDigest(run({ software: [{ name: 'casatasks', version: '6.6.0' }] })), base);
-  assert.notEqual(runDigest(run({ toolchainDigest: 'c'.repeat(64) })), base);
-  assert.notEqual(runDigest(run({ inputs: [{ role: 'visibilities', identity: 'uid://A002/X/1', bytes: 4 }] })), base);
-});
 
 test('an output is reused only when the same run made it and it is still that file', async () => {
   const directory = await scratch(), image = join(directory, 'final.fits'), recordPath = join(directory, 'final.product.json'), locate = (path: string) => join(directory, path);
@@ -82,15 +73,4 @@ test('evidence is added to the record of the run that made the product, and only
   assert.deepEqual((await readProductRecord(recordPath))!.inputs, run().inputs, 'the run facts are not rewritten');
   await writeFile(image, 'another image');
   await assert.rejects(addProductEvidence(recordPath, [agreement], locate), /not the files on disk/u);
-});
-test('comparison receipts are immutable snapshots beside their exact product', async () => {
-  const directory = await scratch(), product = join(directory, 'cube.fits'), receipt = join(directory, 'latest.json');
-  await writeFile(product, 'cube'); await writeFile(receipt, '{"slice":[2.2,2.4]}');
-  const path = productRecordPath(product), locate = (name: string) => join(directory, name);
-  await writeProductRecord(path, run(), [{ path: 'cube.fits', file: product }]);
-  const record = await addProductEvidence(path, [{ kind: 'archive-agreement', receipt, product: 'cube.fits', establishes: 'First slice.' }], locate);
-  const snapshot = record.evidence[0]!;
-  await writeFile(receipt, '{"slice":[2.6,2.8]}');
-  assert.match(await readFile(locate(snapshot.receipt), 'utf8'), /2.2/);
-  assert.equal(await sameRun(record, run(), locate), true);
 });

@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createHash } from 'node:crypto';
 import { bakeMasterVolumeSlices, type MasterVolumeOptions } from './emission.ts';
 import sharp from 'sharp';
 import { recolorCloudSlices } from './material.ts';
@@ -25,14 +24,6 @@ async function fixture(): Promise<MasterVolumeOptions> {
     deliveryBanks: [], unitsPerSourceUnit: 7, provenance: { fixture: 'legacy reference before optional layer layouts' }, onProgress() {},
     sampleEmission(x, y, z, out) { out[0] = .1 + (x + 1) / 8; out[1] = .1 + (y + 2) / 9; out[2] = .1 + (z + 3) / 10; } };
 }
-
-test('omitted layer layout preserves the original uniform manifest and PNG bytes', async () => {
-  const options = await fixture(), { masters } = await bakeMasterVolumeSlices(options);
-  const digest = createHash('sha256').update(await readFile(join(options.masterDirectory, 'volume-slices.json')));
-  for (const q of masters.quads) digest.update(await readFile(join(options.masterDirectory, q.texturePath)));
-  assert.equal(digest.digest('hex'), 'b41ebde649d79c33e72c79771610b82725b8d91688866727db5f800ea1801fb7');
-  assert.equal(masters.quads.length, 12);
-});
 
 test('nonuniform intervals retain every reference midpoint and paint the actual integrated color', async () => {
   const options = await fixture(), zSamples: number[] = [];

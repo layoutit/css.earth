@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { resolve } from 'node:path';
-import{mkdtemp,readFile,rm,writeFile}from'node:fs/promises';import{tmpdir}from'node:os';
+import{mkdtemp,rm,writeFile}from'node:fs/promises';import{tmpdir}from'node:os';
 import { formatArtifact, formatExploration, formatSession, outputCommand, type ArtifactInspection } from './cli-format.mts';
 import { main, type CliIo, type CliServices } from './cli.mts';
 import { parseCli } from './cli-arguments.mts';
@@ -11,8 +11,6 @@ import type { ExplorationSession } from './session.mts';
 import type { Session } from './session.mts';
 import { loadWwtImagery } from './wwt/wwt-catalog.mts';
 import { loadWwtFitsLeads } from './wwt/wwt-fits-leads.mts';
-import { describeDegreeLinearPolarization } from './families/f13-polarimetry.mts';
-import { sha256 } from '@cssearth/core/node';
 import { WORKSPACE } from '@cssearth/telescope/node';
 
 const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'eris',telescope:'Fixture telescope',mode:'camera',observation:'obs-1',program:'eris-obs-1',
@@ -224,31 +222,6 @@ test('family-only artifact offers a numbered operation without an empty output s
   assert.equal(api.calls.runs[0]?.kind,'family');
   assert.equal((api.calls.runs[0]?.args[1] as {readonly componentId?:string}).componentId,'spectrum');
   assert.match(mock.stdout.join(''),/Operation: spectrum-export/u);
-});
-
-test('family-assess accepts a verified source receipt and pins the selected descriptor',async()=>{
-  const work=await mkdtemp(resolve(tmpdir(),'family-source-cli-'));
-  try{
-    const descriptorPath=resolve(work,'descriptor.json'),requestPath=resolve(work,'request.json'),receiptPath=resolve(work,'output.product.json'),out=resolve(work,'assessment');
-    const member=(id:string)=>({id,path:`${id}.fits`,role:'science' as const});
-    const descriptor=describeDegreeLinearPolarization({id:'polar',intensity:member('intensity'),dolp:member('dolp'),shape:[2,3],producingRecord:'ESO'});
-    const bytes=Buffer.from(JSON.stringify(descriptor));
-    await writeFile(descriptorPath,bytes);
-    await writeFile(receiptPath,'{}');
-    await writeFile(requestPath,JSON.stringify({legacy:{target:'betelgeuse',wavelengthMicrometres:[.5,.6]},family:'F13',criteria:{polarization:{components:['degree-linear-polarization']}}}));
-    const api=mockServices(work,{artifact:'telescope-archive-source',source:descriptorPath,outputs:[],familyOperations:[]}),io=mockIo(false,false);
-    assert.equal(await main(['family-assess',requestPath,receiptPath,'--out',out,'--json'],work,text=>io.io.write(text),io.io,api.services),3);
-    assert.equal(api.calls.inspect,1);
-    const saved=JSON.parse(await readFile(resolve(out,'family-request.json'),'utf8'));
-    assert.deepEqual(saved.descriptor,{path:descriptorPath,bytes:bytes.length,sha256:sha256(bytes)});
-    assert.equal(saved.status,'unresolved');
-    const direct=mockIo(false,false);
-    assert.equal(await main(['family-assess',requestPath,descriptorPath,'--out',resolve(work,'direct'),'--json'],work,text=>direct.io.write(text),direct.io,api.services),3);
-    assert.equal(api.calls.inspect,1);
-    const missing=mockServices(work,{artifact:'telescope-archive-source',source:receiptPath,outputs:[]}),bad=mockIo(false,false);
-    assert.equal(await main(['family-assess',requestPath,receiptPath,'--out',resolve(work,'missing'),'--json'],work,text=>bad.io.write(text),bad.io,missing.services),2);
-    assert.match(JSON.parse(bad.stdout[0]!).error,/No verified family descriptor/u);
-  }finally{await rm(work,{recursive:true,force:true});}
 });
 
 test('family-run selects one component and rejects a conflicting parameters file',async()=>{

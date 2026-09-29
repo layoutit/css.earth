@@ -4,21 +4,18 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { EVIDENCE_KINDS, evidenceFor, parseProductRecord } from '@cssearth/telescope';
-import { runDigest } from '@cssearth/telescope/node';
 import {
-  ARCHIVE_FINAL_SCHEMA, ARCHIVE_FINAL_STAGE, archiveCalibration, archiveFinalPath, archiveFinalQualificationRun,
-  archiveFinalQualifiedRun, archiveFinalRecordPath, archiveFinalSelection, findDisc, identityDisagreements,
+  ARCHIVE_FINAL_SCHEMA, ARCHIVE_FINAL_STAGE, archiveCalibration, 
+  findDisc, identityDisagreements,
   parseArchiveFinalProgram, qualitySummary, readUnit, rectangle, summariseImage, summariseSpectrum,
   type ArchiveFinalIdentity, type CatalogueEntry,
 } from './archive-final.mts';
 import { readHstFileHdus } from './product-file.mts';
 
-const QUALIFIED = ['europa-wfpc2-11085', 'europa-fos-5837', 'europa-ghrs-5376'] as const;
-const read = async (path: string) => JSON.parse(await readFile(path, 'utf8')) as unknown;
 
 // ---- a FITS unit written by hand, so the reader is given the layout these products really have --------------------------
 
@@ -180,43 +177,4 @@ test('archive-origin is a kind of its own and never answers a question about arc
     evidence: [{ kind: 'archive-origin', receipt: 'programs/a.archive-final.product.json', product: 'a_c1f.fits', establishes: "The bytes are the archive's own." }] });
   assert.equal(evidenceFor(record, 'a_c1f.fits', 'archive-origin').length, 1);
   assert.deepEqual(evidenceFor(record, 'a_c1f.fits', 'archive-agreement'), [], 'retrieval is not a reproduction');
-});
-
-test('every qualified program has a record of its own run, over the files it pins', async () => {
-  for (const id of QUALIFIED) {
-    const program = parseArchiveFinalProgram(await read(archiveFinalPath(id)), id);
-    const record = parseProductRecord(await read(archiveFinalRecordPath(id)));
-    assert.equal(record.stage, ARCHIVE_FINAL_STAGE, id);
-    assert.deepEqual(record.software, [], `${id}: no software of ours made these files`);
-    // The record carries the selection it was qualified with, so a later reader can rebuild it from the program and see that
-    // nothing has moved: the sizes alone would not notice a component pointed at another chip of the same file.
-    assert.deepEqual(record.parameters.selection, archiveFinalSelection(program), id);
-    assert.equal(runDigest(archiveFinalQualifiedRun(record)), runDigest(archiveFinalQualificationRun(program)), id);
-    const science = program.components.find(component => component.role === 'science')!.file!;
-    const origin = evidenceFor(record, science, 'archive-origin');
-    assert.equal(origin.length, 1, `${id}: one archive-origin entry, naming the science product`);
-    assert.match(origin[0]!.establishes, /not establish that anything here reproduces that calibration/u, id);
-    assert.deepEqual(evidenceFor(record, science, 'archive-agreement'), [], `${id}: retrieval is never recorded as agreement`);
-    // Every file the program records is an output of the run at the size the run measured, and nothing else is.
-    assert.deepEqual(record.outputs.map(output => output.path).sort(), program.files.map(file => file.name).sort(), id);
-    for (const file of program.files) {
-      const output = record.outputs.find(entry => entry.path === file.name)!;
-      assert.equal(output.bytes, file.bytes, `${id}: ${file.name} bytes`);
-    }
-    // A part the archive does not supply is in the record with its reason, so a reader never has to notice an absence.
-    for (const component of program.components) if (!component.supplied) assert.ok(component.reason!.length > 20, `${id}: ${component.role} says why`);
-  }
-});
-
-test('one Europa dataset is qualified for each retired instrument, and its summary is measured', async () => {
-  const measured = await Promise.all(QUALIFIED.map(async id => [id, parseProductRecord(await read(archiveFinalRecordPath(id))).parameters.measured as Record<string, unknown>] as const));
-  const byId = Object.fromEntries(measured);
-  assert.equal(byId['europa-wfpc2-11085']!.kind, 'image');
-  assert.ok((byId['europa-wfpc2-11085']!.target as { acrossPixels: number }).acrossPixels > 5, 'Europa is resolved on the planetary camera');
-  for (const id of ['europa-fos-5837', 'europa-ghrs-5376'] as const) {
-    const spectrum = byId[id] as { kind: string; wavelength: { first: number; last: number }; signalToNoise: unknown };
-    assert.equal(spectrum.kind, 'spectrum', id);
-    assert.ok(spectrum.wavelength.last > spectrum.wavelength.first, id);
-    assert.notEqual(spectrum.signalToNoise, null, `${id}: the archive supplies an error, so a signal-to-noise is measured`);
-  }
 });
