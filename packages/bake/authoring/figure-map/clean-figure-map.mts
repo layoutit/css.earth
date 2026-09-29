@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Clean a published map figure into a masked crop for the gridded byte-image observation route.
  *
- *   node tools/objects/figure-map/clean-figure-map.mts <recipe.json>
+ *   node packages/bake/authoring/figure-map/clean-figure-map.mts <recipe.json>
  *
  * A published figure draws its measurements inside a labelled longitude/latitude frame and adds annotations
  * (grid lines, ticks, symbols) plus lossy-compression halos around them. Annotation colour cannot separate them from
@@ -117,7 +117,7 @@ export async function cleanFigureMap(recipePath: string): Promise<FigureMapRepor
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const recipePath = process.argv[2];
-  if (!recipePath) throw new TypeError('Usage: node tools/objects/figure-map/clean-figure-map.mts <recipe.json>');
+  if (!recipePath) throw new TypeError('Usage: node packages/bake/authoring/figure-map/clean-figure-map.mts <recipe.json>');
   const report = await cleanFigureMap(recipePath);
   process.stdout.write(`${JSON.stringify(report, null, 1)}\n`);
 }
