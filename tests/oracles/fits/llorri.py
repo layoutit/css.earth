@@ -10,7 +10,7 @@ import numpy as np
 import astropy
 from astropy.io import fits
 from astropy.wcs import WCS
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import ROOT, samples, write
 warnings.simplefilter('ignore')
 

@@ -10,7 +10,7 @@ import re, sys
 from pathlib import Path
 import numpy as np
 import pvl
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
 from fixture import ROOT, samples, write, find
 
 source = ROOT / 'src/objects/comet-19p/source/micas'

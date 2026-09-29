@@ -27,7 +27,7 @@ export default [
     },
   },
   {
-    files: ['packages/{core,engine,fits,objects,telescope}/src/**/*.ts'],
+    files: ['packages/{core,engine,fits,objects,telescope}/src/**/*.ts', 'packages/core/src/**/*.mts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-globals': ['error', 'window', 'document', 'HTMLElement', 'DOMMatrix', 'DOMMatrixReadOnly', 'Image', 'CSSStyleDeclaration', 'requestAnimationFrame'],
@@ -43,7 +43,7 @@ export default [
   {
     // `@cssearth/core/node`, `@cssearth/fits/node`, `@cssearth/objects/node`, `@cssearth/spice/node` and `@cssearth/telescope/node` are the Node-only entries: they may
     // use Node built-ins, and nothing else in their package may import them.
-    files: ['packages/{core,fits,objects,spice,telescope}/src/node/**/*.ts'],
+    files: ['packages/{core,fits,objects,spice,telescope}/src/node/**/*.ts', 'packages/core/src/node/**/*.mts'],
     ignores: ['**/*.test.ts'],
     rules: {
       'no-restricted-imports': ['error', {

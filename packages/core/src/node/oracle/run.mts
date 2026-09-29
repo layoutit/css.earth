@@ -9,8 +9,9 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { projectRoot } from '@cssearth/core/node';
 
-const root = resolve(import.meta.dirname, '../..'), oracles = resolve(root, 'tests/oracles'), python = resolve(root, '.local/oracles/venv/bin/python');
+const root = projectRoot(import.meta.url), oracles = resolve(root, 'tests/oracles'), python = resolve(root, '.local/oracles/venv/bin/python');
 const known = readdirSync(oracles, { withFileTypes: true }).filter(entry => entry.isDirectory())
   .flatMap(group => readdirSync(resolve(oracles, group.name)).filter(file => file.endsWith('.py'))
     .filter(file => /^from fixture import .*\bwrite\b/mu.test(readFileSync(resolve(oracles, group.name, file), 'utf8')))
@@ -20,7 +21,7 @@ if (unknown.length) throw new Error(`Unknown oracle ${unknown.join(', ')}; known
 for (const name of requested.length ? requested : known) {
   console.log(`oracle ${name}`);
   const sbmt = name === 'sbmt/projection';
-  if (!sbmt && !existsSync(python)) throw new Error('No Python oracle environment: run node tests/oracles/setup.mts first.');
+  if (!sbmt && !existsSync(python)) throw new Error('No Python oracle environment: run node packages/core/src/node/oracle/setup.mts first.');
   const result = spawnSync(sbmt ? process.execPath : python,
     sbmt ? ['--max-old-space-size=192', resolve(oracles, `${name}.mts`)] : [resolve(oracles, `${name}.py`)],
     { cwd: root, stdio: 'inherit', ...(sbmt ? { timeout: 240_000, killSignal: 'SIGKILL' as const,

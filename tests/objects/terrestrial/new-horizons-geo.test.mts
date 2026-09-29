@@ -6,7 +6,7 @@ import { decodeNewHorizonsLorri, decodeArrokothMvic, newHorizonsCamera, bindSipC
 import { readFitsPrimary } from '@cssearth/fits';
 import {array,number,nullable,optional,shape,text} from '@cssearth/core';
 import {validateSurfaceObservation} from '@cssearth/bake/objects/layers/terrestrial';
-import {pinnedOracleVersions} from '../../oracles/fixture.mts';
+import {pinnedOracleVersions} from '@cssearth/core/oracle';
 
 const source=new URL('../../../src/objects/arrokoth/source/',import.meta.url);
 const read=async(path:string)=>JSON.parse(await readFile(new URL(path,source),'utf8'));

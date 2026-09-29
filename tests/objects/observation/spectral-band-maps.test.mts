@@ -4,7 +4,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { estimateBand, fitsCube, paintCell, parseSpectralBandRecipe, prepareSpectralBandMaps } from '@cssearth/bake/objects/layers/observation';
-import { readOracleFixture, assertPinnedInputs, readOracleInput, ORACLE_ROOT } from '../../oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, readOracleInput, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 
 const source = resolve(ORACLE_ROOT, 'src/objects/charon/source');

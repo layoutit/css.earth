@@ -3,7 +3,7 @@ import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality } from '@cssearth/bake/objects/layers/terrestrial';
-import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
+import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 
 /** pvl and numpy as the oracle for the OSIRIS level-5 geometry and level-4 quality readers (67P). */

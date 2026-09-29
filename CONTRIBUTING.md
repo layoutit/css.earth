@@ -236,9 +236,9 @@ built-ins and files that job's sparse checkout keeps (`pre-install-imports.mts`)
 unused files in library folders (untangle item K).
 
 Reference implementations live under `tests/oracles/` with their own pinned
-Python environment (`node tests/oracles/setup.mts`); the fixtures beside them
+Python environment (`node packages/core/src/node/oracle/setup.mts`); the fixtures beside them
 are committed evidence, and the comparing tests run without Python. See
-[tests/oracles/README.md](tests/oracles/README.md) before adding or regenerating
+[packages/core/src/node/oracle/README.md](packages/core/src/node/oracle/README.md) before adding or regenerating
 one. When an archive product has no reader, route or kernel bank yet, open an
 issue from the archive-product template instead of writing a reader for one body.
 

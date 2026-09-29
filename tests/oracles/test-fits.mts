@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from './fixture.mts';
+import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { fitsArchiveInputs } from './fits/archive-inputs.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 

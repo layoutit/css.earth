@@ -385,7 +385,7 @@ if a third attached-label, pointer-addressed PDS3 geometry archive appears.
 
 The pipeline derives nothing from an oracle; an oracle recomputes what the
 pipeline computed so a test can compare. `tests/oracles/` holds them with a
-pinned Python environment (`node tests/oracles/setup.mts`, `tests/oracles/requirements.txt`),
+pinned Python environment (`node packages/core/src/node/oracle/setup.mts`, `packages/core/src/node/oracle/requirements.txt`),
 and each writes a fixture under `tests/oracles/` that names its versions, input
 paths and byte counts. Existing decoder references include
 SpiceyPy for `@cssearth/spice` (a microsecond in time, a millimetre in position, a
@@ -404,7 +404,7 @@ fixtures. Camera controls still need their geometric checks. Regenerate a fixtur
 only when its tool or inputs change, and say so in the PR. ALE and usgscsm (pixel models and
 distortion) need conda and arrive with the first Cassini ISS lens. ISIS's
 photometric models are checked against the truth files of their unit tests,
-which need no ISIS install. See `tests/oracles/README.md`.
+which need no ISIS install. See `packages/core/src/node/oracle/README.md`.
 
 For SUM/INFO image-to-shape investigations, use the optional
 [native SBMT preparation oracle](../../../../tests/oracles/sbmt/README.md).
@@ -428,7 +428,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Restore missing declared source files | `node packages/bake/cli/object-operations.mts acquire <id>` |
 | Check declared source-file coverage without acquiring | `node packages/bake/cli/object-operations.mts acquire <id> --verify-only`; this does not verify source digests |
 | Prepare selected objects through the cache and shared steps | `pnpm prepare:objects -- --object=<id>` |
-| Create the oracle environment and regenerate oracle fixtures | `node tests/oracles/setup.mts`, then `node tests/oracles/run.mts [group/name ...]` |
+| Create the oracle environment and regenerate oracle fixtures | `node packages/core/src/node/oracle/setup.mts`, then `node packages/core/src/node/oracle/run.mts [group/name ...]` |
 | Invoke authored preparation directly | `node site/build/prepare/prepare-authored.ts <id> --write` |
 | Prepare one authored object end to end, resumable by step | `node packages/bake/cli/prepare-object.mts <id> [--from <step>] [--reuse-images]` (a paged-ellipsoid or raster body redraws only its lighting and atmosphere banks by default when nothing else changed; `prepare-authored.ts <id> --write --full` bakes everything; `--reuse-images` forces the redraw-only run and stops after the prepare step): stale install and builds, reader text budgets and the Sun's installed files, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
 | Say which build a run would read stale | `node packages/bake/cli/check-stale-builds.mts` |

@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { compare } from './compare.mts';
-import { ORACLE_ROOT } from '../fixture.mts';
+import { ORACLE_ROOT } from '@cssearth/core/oracle';
 
 const result=await compare(), directory=resolve(ORACLE_ROOT,'output/oracles/sbmt');
 await mkdir(directory,{recursive:true});
