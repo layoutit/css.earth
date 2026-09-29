@@ -1,6 +1,6 @@
 # Small Magellanic Cloud image intake
 
-Eight source fields were acquired and visually inspected on 2026-09-16. Exact URLs, credits, byte counts, SHA-256 pins, decoded dimensions and embedded AVM are in [candidate-intake.json](candidate-intake.json). Originals and inspection products remain in the ignored local cache. This record describes acquisition; it does not certify registration, star removal or 3D reconstruction.
+Eight source fields were acquired and visually inspected on 2026-09-16. Exact URLs, credits, byte counts, decoded dimensions and embedded AVM are in [candidate-intake.json](candidate-intake.json). Originals and inspection products remain in the ignored local cache. This record describes acquisition; it does not certify registration, star removal or 3D reconstruction.
 
 | Candidate | Raster | Coverage and limits |
 | --- | --- | --- |
@@ -31,7 +31,7 @@ Four composites were built on 2026-09-17 from calibrated or archival survey band
 
 | Composite | Bands and channels | Acquisition and units | Known limits |
 | --- | --- | --- | --- |
-| `smc-dss2-fits` | DSS2 red plate → red, DSS2 blue plate → blue, green = their mean (the convention of the CDS DSS2 colour survey) | CDS hips2fits, pinned by sha256 and byte count. Relative photographic units, with no flux calibration | Saturated plate stars are masked as no coverage (below). Plate-to-plate level steps remain: plate footprints are not in the pinned inputs |
+| `smc-dss2-fits` | DSS2 red plate → red, DSS2 blue plate → blue, green = their mean (the convention of the CDS DSS2 colour survey) | CDS hips2fits, checked by byte count. Relative photographic units, with no flux calibration | Saturated plate stars are masked as no coverage (below). Plate-to-plate level steps remain: plate footprints are not in the pinned inputs |
 | `smc-wise-stellar` | W2 → red, W1 → blue, green = mean | 61 AllWISE atlas tiles per band, background-matched. MJy/sr from Explanatory Supplement factors | A smooth W2 background gradient toward the south-east remains |
 | `smc-wise-starforming` | W4 → red, W3 → green, W1 → blue | As above | In faint regions W4 is dominated by noise and small leftover tile levels. W3 shows Galactic cirrus and scattered-light streaks to the east |
 | `smc-herschel-dust` | SPIRE 250 µm, monochrome | ESASky Herschel HiPS through hips2fits. The HiPS declares no unit, so values are relative | Only the main body is covered. NaN stays missing, shown as black. Dark stripes from individual scans remain |
@@ -58,18 +58,18 @@ The chance control in the gate is density-aware. The earlier rule compared each 
 | AllWISE W2/W1 composite, shifted 40 px | 215 | 250 | 0.86 | 1.761 / 2.397 | Refused |
 | WISE press image on its publisher SIN WCS | 109 | 40 | 2.73 | 1.682 / 2.344 | Refused |
 
-The three negative controls are the regression: a dense composite with a deliberately shifted reference pixel keeps a ratio near one, and the WISE press image on its own SIN astrometry stays below the margin and also fails the residual limits. `fixed-catalogue.test.ts` locks these recorded numbers in. The AllWISE re-run reports identical matches, residuals, hull and quadrants, and the same matched-star table hash as before; only the protocol fields changed. The relative star-pattern registrations of VISTA, SMASH, DSS2 and Horálek use the unchanged Python routine and are untouched, as are the recorded failures of the WISE press image, Spitzer and Irida.
+The three negative controls are the regression: a dense composite with a deliberately shifted reference pixel keeps a ratio near one, and the WISE press image on its own SIN astrometry stays below the margin and also fails the residual limits. `fixed-catalogue.test.ts` locks these recorded numbers in. The AllWISE re-run reports identical matches, residuals, hull and quadrants, and the same matched-star table as before; only the protocol fields changed. The relative star-pattern registrations of VISTA, SMASH, DSS2 and Horálek use the unchanged Python routine and are untouched, as are the recorded failures of the WISE press image, Spitzer and Irida.
 
-SPIRE 250 has too few point sources for its own gate, so it inherits the grid from the AllWISE W2/W1 composite through `smc-herschel-dust-grid-transfer.json`: both are pinned to bytes that only the compositor can produce, and the compositor checks every band header against this exact TAN grid. That transfer qualifies the request grid and its pixel convention, not the Herschel HiPS survey's own astrometry. Its own failing gate is kept beside it as a diagnostic.
+SPIRE 250 has too few point sources for its own gate, so it inherits the grid from the AllWISE W2/W1 composite through `smc-herschel-dust-grid-transfer.json`: both are rasters that only the compositor writes, and the compositor checks every band header against this exact TAN grid. That transfer qualifies the request grid and its pixel convention, not the Herschel HiPS survey's own astrometry. Its own failing gate is kept beside it as a diagnostic.
 
-**Star removal.** Before/after crops showed that NOX erases compact dust: the five brightest knots kept only 38% of their compact excess in W4 and 73% in SPIRE 250 (`output/smc-vmc/fits-lenses/wise-starforming-w4-nox-crops.png` and `herschel-dust-nox-crops.png`). The two dust and PAH composites therefore use the observation lane's identity treatment, configured per image in [processing-plan.json](processing-plan.json) with its reason. That treatment writes the source itself as the diffuse layer and an empty star layer, and its receipt is re-proved from the pinned source on every read, so a "preserved" result that is not the identity of its source can never restore. The optical composites keep native NOX.
+**Star removal.** Before/after crops showed that NOX erases compact dust: the five brightest knots kept only 38% of their compact excess in W4 and 73% in SPIRE 250 (`output/smc-vmc/fits-lenses/wise-starforming-w4-nox-crops.png` and `herschel-dust-nox-crops.png`). The two dust and PAH composites therefore use the observation lane's identity treatment, configured per image in [processing-plan.json](processing-plan.json) with its reason. That treatment writes the source itself as the diffuse layer and an empty star layer, and its receipt is re-proved from the source on every read, so a "preserved" result that is not the identity of its source can never restore. The optical composites keep native NOX.
 
 | Composite | Treatment | Baseline result | Lens result |
 | --- | --- | --- | --- |
-| DSS2 blue/red | NOX | `22c714c9…` | `4883473b…` |
-| AllWISE W2/W1 | NOX | `c310f4c2…` | `cfc1b237…` |
-| AllWISE W4/W3/W1 | Preserve | `d5920356…` | `6f05ac57…` |
-| Herschel SPIRE 250 | Preserve | `a227754d…` | `ce0197e3…` |
+| DSS2 blue/red | NOX | `smc-constrained-smc-dss2-fits` | `smc-constrained-emission-envelope-smc-dss2-fits` |
+| AllWISE W2/W1 | NOX | `smc-constrained-smc-wise-stellar` | `smc-constrained-emission-envelope-smc-wise-stellar` |
+| AllWISE W4/W3/W1 | Preserve | `smc-constrained-smc-wise-starforming` | `smc-constrained-emission-envelope-smc-wise-starforming` |
+| Herschel SPIRE 250 | Preserve | `smc-constrained-smc-herschel-dust` | `smc-constrained-emission-envelope-smc-herschel-dust` |
 
 **Saturated plate stars and no coverage.** A scanned Schmidt plate saturates, and NOX leaves the bright core and photographic halo behind as a blob of invented galaxy light. Saturation is measured from the plate scan itself: a core counts as saturated where a ring still sits within 98% of the peak two pixels out or further, which a point spread function cannot produce at 9 arcsecond sampling, and the halo is grown until the ring median reaches the plate's own measured background. The red plate has 7 such cores over 88,902 pixels and the blue plate 41 over 263,803 pixels, with masked radii from 8 to the declared 120-pixel bound.
 
@@ -77,6 +77,6 @@ Those pixels are neither galaxy light nor zero. The composite recipe now declare
 
 **Plate-to-plate background steps are not corrected.** The steps are real and visible: a robust 10th-percentile background map at 40-pixel cells shows straight-edged plate regions, and the median step across a region boundary is about 360 counts on a 1,938-count sky in the red plate. They are not corrected, because the plate identities and footprints are not in the pinned inputs and could not be recovered from them. A first attempt segmented that background map by its own neighbour steps and solved one constant per region with the shared Montage-style solver; the result was rejected here rather than shipped, because at this cell size the SMC's own extended light produces larger cell-to-cell differences than the seams, so the segmentation cut out galaxy islands and assigned them offsets of ±1,250 counts. Correcting this needs either a pinned plate-footprint table, for which no machine-readable source was found, or a line-aware seam detector that uses the straightness of a plate edge. Until then the straight plate edge remains in the render, and the composite says so.
 
-All four are baked as finite lenses on model `ed90b7bc…` and switch in the Model tab of `?subject=smc-constrained`; the stars toggle still works. Screenshots and the check report are in `output/smc-vmc/fits-lenses/`.
+All four are baked as finite lenses on model `smc-constrained-emission-envelope` and switch in the Model tab of `?subject=smc-constrained`; the stars toggle still works. Screenshots and the check report are in `output/smc-vmc/fits-lenses/`.
 
 Credits: Digitized Sky Survey (STScI/NASA; UK Schmidt plates, ROE/AAO) with CDS HiPS; NASA/JPL-Caltech/UCLA WISE AllWISE Atlas via IRSA; ESA Herschel/SPIRE through the Herschel Science Archive with ESASky HiPS; CDS hips2fits.

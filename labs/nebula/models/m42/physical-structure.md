@@ -25,7 +25,7 @@ The [2020 Huygens-shell study](https://arxiv.org/html/2003.01840v1) gives distin
 
 ## Coordinate and measurement rules
 
-The [physical source manifest](physical-sources.json) pins seven downloaded MUSE maps by URL, SHA-256 and byte count, with inspected FITS metadata. These files supply **no per-pixel uncertainty or quality-mask extensions**. Exact zeros, nonfinite values, density sentinels and velocity outliers require a documented validity policy. Six maps contain celestial WCS; the Hα flux map does not. Some physical units/normalizations must be recovered from the publication before numerical fitting. The files are research inputs, not ready-made density constraints.
+The [physical source manifest](physical-sources.json) names seven downloaded MUSE maps by URL and byte count, with inspected FITS metadata. These files supply **no per-pixel uncertainty or quality-mask extensions**. Exact zeros, nonfinite values, density sentinels and velocity outliers require a documented validity policy. Six maps contain celestial WCS; the Hα flux map does not. Some physical units/normalizations must be recovered from the publication before numerical fitting. The files are research inputs, not ready-made density constraints.
 
 The wider [Higgins et al. SOFIA release](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/652/A77) is accessible: a 3.63 GB position–position–velocity FITS cube covering about 1.15 square degrees of Orion A. Only its header has been retrieved and verified so far. The released cube has an 18″ beam, 3.525″ pixels and 0.3 km/s channels in the LSRK frame; the manifest distinguishes that header hash from a full-file hash. Full voxel/noise qualification remains outstanding.
 

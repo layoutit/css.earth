@@ -99483,7 +99483,7 @@
     "imageAnchors": {
       "schema": "cssearth-nebula-image-anchor-receipt@1",
       "inputSourceResult": {
-        "path": ".local/nebula-lab/compiler/26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597/result.json",
+        "path": ".local/nebula-lab/compiler/helix-image-anchors/result.json",
         "bytes": 374895
       },
       "referenceImage": {
@@ -100228,19 +100228,8 @@
           "path": ".local/nebula-lab/observations/helix/observations.json"
         },
         "model": {
-          "path": ".local/nebula-lab/compiler/26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597/field.json"
+          "path": ".local/nebula-lab/compiler/helix-image-anchors/field.json"
         },
-        "implementation": [
-          {
-            "path": "labs/nebula/src/reconstruction/compiler/stars.ts"
-          },
-          {
-            "path": "labs/nebula/src/reconstruction/compiler/star-union.ts"
-          },
-          {
-            "path": "labs/nebula/src/reconstruction/compiler/images.ts"
-          }
-        ],
         "inspection": {
           "path": "output/helix-core-diagnosis/union-stars-2000.json",
           "bytes": 2411038

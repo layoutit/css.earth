@@ -4,7 +4,7 @@
   "asOf": "2026-09-13",
   "status": "rejected; visual correction incomplete",
   "blockingFinding": "The XY depth repetition is removed, but finite component averaging erases front detail; isotropic inferred detail atoms introduce beads. Connected filament geometry is the next model candidate, not a demonstrated solution.",
-  "liveResult": "88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596",
+  "liveResult": "m1",
   "liveResultReplaced": false,
   "frames": [
     "Earth",
@@ -70,103 +70,5 @@
       "path": "output/m1-material/tests.log"
     },
     "scope": "Finite-material boundary, mixed RGB/black transport, fixed geometry/source samples, numerical operator/solver, actual 3D material diagnostics and default compiler boundary. Visual acceptance failed despite these passing checks."
-  },
-  "implementation": [
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/bake-types.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/bake.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/bank-validation.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/compile.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/component-material.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/depth-model.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/field-types.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/field.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/fit.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/images.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/material.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/model.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/prerequisites.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/result.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/server.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/star-union.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/stars.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/compiler/worker.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/compile.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/emission-detail.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/emission-fit-model.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/emission-fit.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/field.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/layout.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/material-fit.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/material-solver.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/material.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/model.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/ownership.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/panels.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/progress.ts"
-    },
-    {
-      "path": "labs/nebula/src/reconstruction/sampled-prior/stars.ts"
-    }
-  ]
+  }
 }

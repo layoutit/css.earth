@@ -41,7 +41,7 @@ Next, isolate target-associated emission and residual stellar halos **without cr
 
 Implementation validation: strict lab TypeScript and the lab build pass; the lab test run reports 294 passed, 2 skipped and no failures. All twelve original previews load, with M78 visibly marked unverified and its missing separation controls disabled. These checks cover the lab only; no production suites were run.
 
-Completed result identities, in target order above: `fec6fa781e9ac155b5c53c48469afe7677c365baa818e3d346623883b0ae19b4`, `23abbe9ed2343dee93fd56ab13e5d758eefaefa696c530580371b45bced54f39`, `919868fcfa304c242380dcd6d4c6a1e20fd402e8cd16551f1e5f22cab16d496b`, `ce071ef9a3cd7dc267755f660bdaac0186a28499ef31678c15fd04af942b2fb7`, `fdc0523ce7248132545800b69d8afb6b45207a68e0b4c16db8ed7e04eb6363b2`. Each immutable local result records its exact recipes, compiler implementation hashes and source/evidence identities. Later implementation changes must not silently relabel these results as newly tested.
+Completed result identities, in target order above: `m42`, `m8`, `carina`, `ngc6357`, `horsehead`. Each local result records its exact recipes and the paths of its sources and evidence. Later implementation changes must not silently relabel these results as newly tested.
 
 ### Evidence-guided continuation
 

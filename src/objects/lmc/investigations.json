@@ -6,7 +6,7 @@
       "id": "lens-vista-infrared",
       "subject": "vista-infrared shipped image lens",
       "status": "included",
-      "finding": "Shipped lens, now recolouring the finite-emission model a9e2048a… with its own fitted tone curve (result f6323093…). Registration unchanged: 5340 held-out matches qualify it inside its matched hull; exterior placement is extrapolated. After the tone fit its analytic render is still 16.6% brighter than its own image (hue error 5.70°), because every lens shares the one opacity fitted to Horálek; a per-lens opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): Default ESO Y/J/Ks display, 8954 by 10000 pixels, repaints the existing simulated density without changing geometry or alpha. The 5340 held-out matches qualify relative registration inside its matched hull; exterior placement is extrapolated.",
+      "finding": "Shipped lens, now recolouring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-vista-infrared). Registration unchanged: 5340 held-out matches qualify it inside its matched hull; exterior placement is extrapolated. After the tone fit its analytic render is still 16.6% brighter than its own image (hue error 5.70°), because every lens shares the one opacity fitted to Horálek; a per-lens opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): Default ESO Y/J/Ks display, 8954 by 10000 pixels, repaints the existing simulated density without changing geometry or alpha. The 5340 held-out matches qualify relative registration inside its matched hull; exterior placement is extrapolated.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/vista-infrared/provenance.json",
@@ -19,7 +19,7 @@
       "id": "lens-horalek-widefield",
       "subject": "horalek-widefield shipped image lens",
       "status": "included",
-      "finding": "Default lens and the image the finite-emission model a9e2048a… was fitted to (result cab541ef…, tone-fitted). Registration unchanged: 198 held-out matches over a 60.2 percent hull; extended placement is extrapolated. After the tone fit its analytic render is 1.8% brighter than its own image with a 3.76° hue error. Earlier finding (2026-09-14, repaint delivery): Horálek visible-light photograph, 6582 by 4388 pixels, with acquisition instrument/bands unresolved. The 198 held-out matches qualify relative registration over a 60.2 percent hull. Exact density/alpha and the shared catalogue remain fixed; extended placement is extrapolated.",
+      "finding": "Default lens and the image the finite-emission model lmc-clouds-emission-envelope was fitted to (result lmc-clouds-emission-envelope-horalek-widefield, tone-fitted). Registration unchanged: 198 held-out matches over a 60.2 percent hull; extended placement is extrapolated. After the tone fit its analytic render is 1.8% brighter than its own image with a 3.76° hue error. Earlier finding (2026-09-14, repaint delivery): Horálek visible-light photograph, 6582 by 4388 pixels, with acquisition instrument/bands unresolved. The 198 held-out matches qualify relative registration over a 60.2 percent hull. Exact density/alpha and the shared catalogue remain fixed; extended placement is extrapolated.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/horalek-widefield/provenance.json",
@@ -32,7 +32,7 @@
       "id": "lens-wise-wide-infrared",
       "subject": "wise-wide-infrared shipped image lens",
       "status": "included",
-      "finding": "Shipped lens, now recolouring the finite-emission model a9e2048a… with its own fitted tone curve (result 6223c6cd…). Its fixed WCS check is unchanged. After the tone fit its analytic render is still 264% brighter than its own image (hue error 8.14°): its composite spans about 19 grey levels inside its footprint and the curve is pinned at its floor under the shared opacity, so a per-lens opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): NASA/IPAC AllWISE W4/W2/W1 color HiPS mosaic, 6000² pixels across 24 degrees. Its fixed WCS passed 34,811 independently retrieved AllWISE W1 matches without fitting a transform. This validates W1 geometry, not diffuse photometry, visible seams or simulated gas depth.",
+      "finding": "Shipped lens, now recolouring the finite-emission model lmc-clouds-emission-envelope with its own fitted tone curve (result lmc-clouds-emission-envelope-wise-wide-infrared). Its fixed WCS check is unchanged. After the tone fit its analytic render is still 264% brighter than its own image (hue error 8.14°): its composite spans about 19 grey levels inside its footprint and the curve is pinned at its floor under the shared opacity, so a per-lens opacity scale would be needed. Earlier finding (2026-09-14, repaint delivery): NASA/IPAC AllWISE W4/W2/W1 color HiPS mosaic, 6000² pixels across 24 degrees. Its fixed WCS passed 34,811 independently retrieved AllWISE W1 matches without fitting a transform. This validates W1 geometry, not diffuse photometry, visible seams or simulated gas depth.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/wise-wide-infrared/provenance.json",
@@ -206,7 +206,7 @@
       "id": "finite-emission-model",
       "subject": "Two-scale finite emission on the measured sky registration",
       "status": "included",
-      "finding": "Model a9e2048a… (recipe emission-envelope.json, exposure 2.418, alpha chroma limit 11) fits the registered, star-removed Horálek image: 470 components, projection RMSE 0.10458 -> 0.03247, total relative squared error 0.013060, envelope 80.75% of the light with 3.29% excess, all components on prior support. Placement is the identity, which reproduces the registered corners to 0.000 arcsec; the envelope keeps the simulation shape. materialGatePassed is false: the depth structure is a hypothesis.",
+      "finding": "Model lmc-clouds-emission-envelope (recipe emission-envelope.json, exposure 2.418, alpha chroma limit 11) fits the registered, star-removed Horálek image: 470 components, projection RMSE 0.10458 -> 0.03247, total relative squared error 0.013060, envelope 80.75% of the light with 3.29% excess, all components on prior support. Placement is the identity, which reproduces the registered corners to 0.000 arcsec; the envelope keeps the simulation shape. materialGatePassed is false: the depth structure is a hypothesis.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/emission-envelope.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/envelope/EMISSION-METHOD.md",

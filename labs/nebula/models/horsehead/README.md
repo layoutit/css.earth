@@ -20,7 +20,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 ## Registration and reproducibility
 
-- `observations.json` pins each downloaded TIFF by SHA-256 and actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
+- `observations.json` names each downloaded TIFF by URL with its actual dimensions, exact embedded publisher AVM TAN WCS, original master dimensions/link, and a common north-up frame. AVM reference pixels use the declared reference dimensions; they are not necessarily centered or expressed on the TIFF grid.
 - The common frame contains all native source corners with a six-percent angular margin. No frame was cropped to make the photographs agree.
 - `observation-structures.json` configures the shared wavelet structure extraction.
 - `compiler.json` configures the generic relative-emission compiler. No Helix joint-fit recipe or planetary expansion prior is reused.
@@ -30,7 +30,7 @@ ESO imagery is distributed under [CC BY 4.0 with the full credit retained](https
 
 The wide optical DSS2 and full VISTA frames include Horsehead, Flame and NGC2023. They are an environment rather than one isolated object. The Horsehead is a dark silhouette, so a positive-emission compiler cannot yet recover its absorbing material. Star halos and diffraction spikes need explicit inspection after NOX. This is a model-limitation benchmark, not an accepted Horsehead density reconstruction.
 
-The source packet was verified against both image SHA-256 values and decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
+The source packet was verified against both images' decoded TIFF dimensions using the strict TypeScript observation, structure and compiler readers. This source qualification does **not** assert passed stellar registration, completed star removal, a completed bake or a validated 3D shape. Those processing receipts remain tied to their specific output identities.
 
 Without spectroscopy or an independent volume, the compiler’s depth is a conditional diffuse prior. Compact lights are detected image features with illustrative depths; they are not a catalog of confirmed members with measured distances.
 

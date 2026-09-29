@@ -267,31 +267,31 @@
       ]
     }
   ],
-  "resultId": "a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8",
+  "resultId": "m45",
   "integrationReplay": {
     "schema": "cssearth-compiler-integration-replay@1",
     "status": "passed",
     "subjectId": "m45",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/ec423626da931fb5a62af42c4a280793b2877afdba0e5712204b4fb9af7b381d/result.json"
+      "path": ".local/nebula-lab/compiler/m45-before-integration-replay/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640/result.json"
+      "path": ".local/nebula-lab/compiler/m45-integration-replay/result.json"
     },
-    "previousResultId": "ec423626da931fb5a62af42c4a280793b2877afdba0e5712204b4fb9af7b381d",
-    "currentResultId": "93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640",
+    "previousResultId": "m45-before-integration-replay",
+    "currentResultId": "m45-integration-replay",
     "reason": "Shared per-lens alpha validation changed the implementation identity. Object recipes, numerical fields and rendered materials were not refined.",
     "checks": {
       "strictResultsAndAllPins": true,
-      "identicalInputIdentity": "91ade54ac9314f5547cfd90d907f4e7dbc4ee9466da9ef4fdff6c7e38bf9aad3",
+      "identicalInputIdentity": true,
       "identicalRecipeAndRequest": true,
-      "identicalFieldIdentity": "6cff9b3891eb1d3c62a3bf847f20d0ca0fab47c80480afe8c17e0f638db8958f",
+      "identicalFieldIdentity": true,
       "identicalModelAndPanels": {
-        "model": "166244f60354bab872d7618dca64e80edc4d331ab8d1600ed59e0a6cec63c7ca",
-        "target": "56b0dcb42f7608b7ff81a6e70db74dd1caa1a0c33733ba730bc2b6211e269dc1",
-        "projection": "f23d92d1d188223a17df08eaa649ed5b8a7431afdf9534cae95224f484572c6d",
-        "residual": "0213441742e55099305d3c514166b0abb8adab6d75320c0b29910e613d43de86"
+        "model": true,
+        "target": true,
+        "projection": true,
+        "residual": true
       },
       "identicalGeometry": true,
       "identicalStars": 450,
@@ -351,12 +351,12 @@
       "receipt": {
         "path": "output/nebula-processing/m45-inspected-prior-receipt.json"
       },
-      "resultId": "ec423626da931fb5a62af42c4a280793b2877afdba0e5712204b4fb9af7b381d",
+      "resultId": "m45-before-integration-replay",
       "archiveNote": "Receipt copied from the complete pre-replay file read captured before the browser script replaced the original inspection directory. That directory now contains the fresh current-result screenshots; first-trial screenshots remain in output/m45-inspection-round1/."
     },
     "freshBrowser": {
       "status": "passed",
-      "id": "93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640",
+      "id": "m45-integration-replay",
       "lenses": [
         "noirlab-optical",
         "spitzer-irac",
@@ -394,24 +394,24 @@
     "subjectId": "m45",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640/result.json"
+      "path": ".local/nebula-lab/compiler/m45-integration-replay/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4/result.json"
+      "path": ".local/nebula-lab/compiler/m45-star-selection-correction/result.json"
     },
-    "previousResultId": "93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640",
-    "currentResultId": "8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4",
+    "previousResultId": "m45-integration-replay",
+    "currentResultId": "m45-star-selection-correction",
     "reason": "The shared detector now retains every bounded residual maximum before measured aperture light applies the unchanged star budget. No object recipe or cloud/material fit changed.",
     "checks": {
       "strictResultsAndAllPins": true,
-      "identicalInputIdentity": "91ade54ac9314f5547cfd90d907f4e7dbc4ee9466da9ef4fdff6c7e38bf9aad3",
+      "identicalInputIdentity": true,
       "identicalRecipeAndRequest": true,
-      "identicalFieldIdentity": "6cff9b3891eb1d3c62a3bf847f20d0ca0fab47c80480afe8c17e0f638db8958f",
+      "identicalFieldIdentity": true,
       "identicalModelAndPanels": {
-        "model": "166244f60354bab872d7618dca64e80edc4d331ab8d1600ed59e0a6cec63c7ca",
-        "target": "56b0dcb42f7608b7ff81a6e70db74dd1caa1a0c33733ba730bc2b6211e269dc1",
-        "projection": "f23d92d1d188223a17df08eaa649ed5b8a7431afdf9534cae95224f484572c6d",
-        "residual": "0213441742e55099305d3c514166b0abb8adab6d75320c0b29910e613d43de86"
+        "model": true,
+        "target": true,
+        "projection": true,
+        "residual": true
       },
       "identicalGeometry": true,
       "starCount": 450,
@@ -471,7 +471,7 @@
     },
     "freshBrowser": {
       "status": "passed",
-      "id": "8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4",
+      "id": "m45-star-selection-correction",
       "lenses": [
         "noirlab-optical",
         "spitzer-irac",
@@ -574,24 +574,24 @@
     "subjectId": "m45",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4/result.json"
+      "path": ".local/nebula-lab/compiler/m45-star-selection-correction/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8/result.json"
+      "path": ".local/nebula-lab/compiler/m45/result.json"
     },
-    "previousResultId": "8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4",
-    "currentResultId": "a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8",
+    "previousResultId": "m45-star-selection-correction",
+    "currentResultId": "m45",
     "reason": "Shared opt-in star-union owner replay; this object retains its reference catalogue route.",
     "checks": {
       "strictResultsAndAllPins": true,
-      "identicalInputIdentity": "91ade54ac9314f5547cfd90d907f4e7dbc4ee9466da9ef4fdff6c7e38bf9aad3",
+      "identicalInputIdentity": true,
       "identicalCloudRecipeAndRequest": true,
-      "identicalFieldIdentity": "6cff9b3891eb1d3c62a3bf847f20d0ca0fab47c80480afe8c17e0f638db8958f",
+      "identicalFieldIdentity": true,
       "identicalModelAndPanels": {
-        "model": "166244f60354bab872d7618dca64e80edc4d331ab8d1600ed59e0a6cec63c7ca",
-        "target": "56b0dcb42f7608b7ff81a6e70db74dd1caa1a0c33733ba730bc2b6211e269dc1",
-        "projection": "f23d92d1d188223a17df08eaa649ed5b8a7431afdf9534cae95224f484572c6d",
-        "residual": "0213441742e55099305d3c514166b0abb8adab6d75320c0b29910e613d43de86"
+        "model": true,
+        "target": true,
+        "projection": true,
+        "residual": true
       },
       "identicalGeometry": true,
       "starCount": 450,
@@ -651,7 +651,7 @@
     },
     "previousFullBrowser": {
       "status": "passed",
-      "id": "8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4",
+      "id": "m45-star-selection-correction",
       "lenses": [
         "noirlab-optical",
         "spitzer-irac",

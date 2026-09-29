@@ -20915,15 +20915,15 @@
       "limitation": "A bounded display-light proxy on an sRGB CSS surface, not calibrated screen radiance or physical stellar diameter."
     },
     "finiteModel": {
-      "directory": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
+      "directory": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope",
       "provenance": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/provenance.json"
+        "path": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope/source/provenance.json"
       },
       "emissionField": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/emission-field.json"
+        "path": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope/source/emission-field.json"
       },
       "envelope": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/envelope.json"
+        "path": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope/source/envelope.json"
       },
       "depthDensity": {
         "path": "labs/nebula/models/lmc/full-density/source/volume.json"
@@ -20931,7 +20931,7 @@
       "depthDensitySource": "The model request's pinned cloud; this envelope record pins none of its own.",
       "footprint": {
         "image": {
-          "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/original-image.png"
+          "path": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope/source/original-image.png"
         },
         "width": 384,
         "height": 285,
@@ -20939,10 +20939,10 @@
         "exclusions": []
       },
       "cutoffSignal": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/aligned-image.png"
+        "path": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope/source/aligned-image.png"
       },
       "cloudParts": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/cloud-parts.json"
+        "path": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope/source/cloud-parts.json"
       },
       "observerDistanceKpc": 49.590672750490434,
       "tangentBoundsKpc": {

@@ -2,11 +2,10 @@
   "schema": "cssearth-nebula-edge-taper-evidence@1",
   "id": "m8",
   "status": "target-qualified-and-app-inspected",
-  "baselineResult": "dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5",
+  "baselineResult": "m8-edge-taper-baseline",
   "baselineMethod": {
-    "path": ".local/nebula-lab/compiler/dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5/method.json"
+    "path": ".local/nebula-lab/compiler/m8-edge-taper-baseline/method.json"
   },
-  "inputIdentity": "07b19faccd44114bde21775ff587a6f1105abdb528c86340917943f7939fbb00",
   "recipe": {
     "path": "labs/nebula/models/m8/compiler.json"
   },
@@ -59,7 +58,7 @@
   "interpretation": "Authored inward source reliability and display extent, not measured nebular boundaries. Original rasters, no-data coverage, source weights, background subtraction and depth-prior parameters stay unchanged. The refit and actual application appearance require a new bake; target agreement does not qualify 3D visual quality.",
   "appInspection": {
     "date": "2026-09-14",
-    "sourceResult": "7545a7a3af301ef4cc288c84e4343262add505c4db1f8bff8d1c836a7ad8c3e6",
+    "sourceResult": "m8-edge-taper",
     "lenses": [
       "eso-optical",
       "eso-vista",

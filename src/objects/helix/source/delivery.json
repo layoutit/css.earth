@@ -32,7 +32,7 @@
   "description": "Source-colored relative emission fitted to aligned ESO images with a molecular-velocity scaffold where measured. Unsupported depth and front/back assignment remain conditional. The surrounding field uses Gaia astrometry and estimated distances. A bounded set of bright image cores stays attached to residual halos at the existing model depth; these placements are illustrative, not their measured stellar distances.",
   "defaultLens": "eso-wfi",
   "framingRadiusUnits": 1500,
-  "acceptedLabResult": "helix-compiler",
+  "acceptedLabResult": "helix",
   "fieldStars": {
     "path": "src/objects/helix/source/stellar-field.json"
   },

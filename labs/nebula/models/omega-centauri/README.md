@@ -85,7 +85,7 @@ no unfinished application package or new runtime bank is shipped here.
   A valid convex color mixture produced `255.00000000000003`. The correction
   rejects nonfinite values before bounding finite roundoff; its regression and
   32,173,980 retained samples per lens pass. This does not qualify the renderer.
-- **Bake 3:** `5d934218dcc59475e632d503bea59dfeb3bb156431d8d88d3616830808b23df9`
+- **Bake 3:** `omega-centauri-bake3`
   completed both lenses in 271.59 seconds for local inspection. The
   [compile receipt](evidence/2026-09-20/bake3-compile.json) and
   [Lab browser report](evidence/2026-09-20/bake3-browser.json) identify that state.
@@ -112,7 +112,7 @@ and records reused checks, local failures and omitted application qualification.
 New compiler bakes plan at most **500 total XYZ slabs** while integrating every
 reference depth sample. This experiment reused bake 3's pinned field and both
 materials without source acquisition or refitting. Its inspection identity is
-`7a4f8781a7d19fafa57f11e65eae6ee24975082d3fcae0c1644cbdd68a5ac549`.
+`omega-centauri-adaptive`.
 The [bake receipt](evidence/2026-09-20/layer-bake.json) records 461 planned slabs
 (147/143/171), 459 retained slabs (146/142/171), and 230.94 seconds for the bake.
 That is **41.1% fewer retained planes**, with approximately 5–7% fewer texture bytes.

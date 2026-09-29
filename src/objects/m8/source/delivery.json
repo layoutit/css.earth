@@ -35,7 +35,7 @@
   "description": "Relative display emission on one authored coherent front, with locally paper-guided topology. Foreground extinction, separate molecular clouds and unknown front/back distances are not reconstructed. Shared RGB lenses retain one geometry; surrounding stars use Gaia astrometry and estimated distances independently of source-image boundaries. No gas velocity is converted to depth.",
   "defaultLens": "eso-optical",
   "framingRadiusUnits": 3414.784262,
-  "acceptedLabResult": "m8-compiler",
+  "acceptedLabResult": "m8",
   "fieldStars": {
     "path": "src/objects/m8/source/stellar-field.json"
   },

@@ -154,103 +154,14 @@
     "elapsedSeconds": 287.174715917,
     "derivation": {
       "originalResult": {
-        "path": ".local/nebula-lab/compiler/5d934218dcc59475e632d503bea59dfeb3bb156431d8d88d3616830808b23df9/result.json"
+        "path": ".local/nebula-lab/compiler/omega-centauri-bake3/result.json"
       },
       "originalModel": {
-        "path": ".local/nebula-lab/compiler/5d934218dcc59475e632d503bea59dfeb3bb156431d8d88d3616830808b23df9/field.json"
+        "path": ".local/nebula-lab/compiler/omega-centauri-bake3/field.json"
       },
       "originalMethod": {
-        "path": ".local/nebula-lab/compiler/5d934218dcc59475e632d503bea59dfeb3bb156431d8d88d3616830808b23df9/method.json"
+        "path": ".local/nebula-lab/compiler/omega-centauri-bake3/method.json"
       },
-      "implementation": [
-        {
-          "path": "labs/nebula/packages/lab/src/adapters/application/star-sprites.ts"
-        },
-        {
-          "path": "labs/nebula/packages/lab/src/adapters/preparation/css-volume.ts"
-        },
-        {
-          "path": "labs/nebula/packages/lab/src/adapters/renderer/volume-validation.ts"
-        },
-        {
-          "path": "labs/nebula/packages/lab/src/server/workflows/compiler/bake.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-bake/package.json"
-        },
-        {
-          "path": "labs/nebula/packages/volume-bake/src/compact-inputs/density-grid.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-bake/src/compiler/bake.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-bake/src/slices/emission.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-bake/src/slices/material.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-bake/src/slices/raster.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-core/package.json"
-        },
-        {
-          "path": "labs/nebula/packages/volume-core/src/contracts/compiler-bake.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-core/src/contracts/render-element-budget.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-core/src/contracts/volume-slices.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-core/src/coordinates/compiler-frame.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-core/src/materials/cloud-appearance.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-core/src/materials/slab-material.ts"
-        },
-        {
-          "path": "labs/nebula/packages/volume-core/src/sampling/layer-optimization.ts"
-        },
-        {
-          "path": "src/preparation/stars/config.ts"
-        },
-        {
-          "path": "src/renderers/css/preparation/leaf-bounds.ts"
-        },
-        {
-          "path": "src/renderers/css/preparation/stars/material.ts"
-        },
-        {
-          "path": "src/renderers/css/preparation/volume-order.ts"
-        },
-        {
-          "path": "src/renderers/css/preparation/volume.ts"
-        },
-        {
-          "path": "src/renderers/css/rendering/prepared-leaf-frustum.ts"
-        },
-        {
-          "path": "src/renderers/css/sky/validation.ts"
-        },
-        {
-          "path": "src/renderers/css/volume/compiler-render-budget.ts"
-        },
-        {
-          "path": "src/renderers/css/volume/validation.ts"
-        },
-        {
-          "path": "src/renderers/css/volume/volume-impostor-validation.ts"
-        },
-        {
-          "path": "tools/nebula/application/star-sprites.ts"
-        }
-      ],
       "renderProfile": {
         "schema": "cssearth-render-element-profile@1",
         "id": "css-volume-single-topology@1",

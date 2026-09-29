@@ -34,7 +34,7 @@ node labs/nebula/run.mts prepare-overlays
 pnpm lab:nebula
 ```
 
-Missing originals download into the ignored cache and must match their recorded hashes. New previews retain up to 4096 pixels, with native originals retained for future high-resolution processing. Gaia's prepared derivative retains its CC BY-SA 4.0 licence; credits and source links remain in the image panel and provenance.
+Missing originals download into the ignored cache and must match their recorded dimensions. New previews retain up to 4096 pixels, with native originals retained for future high-resolution processing. Gaia's prepared derivative retains its CC BY-SA 4.0 licence; credits and source links remain in the image panel and provenance.
 
 ## Shared angular scale
 

@@ -1,4 +1,4 @@
-import { readCompactPin as pinned, replayCompactSampled as replay, hash as volumeReaderDigest } from '@cssearth/bake/volume/node';
+import { readCompactPin as pinned, replayCompactSampled as replay } from '@cssearth/bake/volume/node';
 import { CSS_COMPILER_RENDER_BUDGET } from '@cssearth/renderer/volume/compiler-render-budget.ts';
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
 import { validatePreparedCssVolume } from '@cssearth/renderer/volume/validation.ts';
@@ -89,13 +89,6 @@ export async function exportCompactSampled(
   );
   const materials = array(object(method.materials).receipts),
     lenses = [];
-  // The compact sampled reader (packages/bake/src/volume/node/compact-inputs/sampled.ts) still compares each replayed
-  // bank against this digest of its accepted rendering; it is computed by that reader's own helper.
-  const expected: Record<string, string> = {};
-  for (const lens of result.scene.lenses) {
-    const { provenance: _provenance, ...rendered } = object(JSON.parse((await pinned(root, lens.volume)).toString()));
-    expected[lens.id] = volumeReaderDigest(JSON.stringify(rendered));
-  }
   for (const image of images.images) {
     const colors =
         recipe.lensComponents[image.id]!.ejecta > 0
@@ -140,7 +133,6 @@ export async function exportCompactSampled(
         recipe,
         particles,
         lenses,
-        expected,
         scene: result.scene,
         provenance: {
           model: result.model,

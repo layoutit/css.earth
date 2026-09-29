@@ -2375,7 +2375,7 @@
     "projection": "TAN",
     "rotationDegrees": 0,
     "framing": "Square field = 1.4×the documented major extent, minimum180arcsec; unknownextentuses1200arcsec×1.4. Preview framing is authored, not measured object size.",
-    "interpretation": "DSS2 red and blue photographic surveys, with synthetic green as their mean. Recognition JPEGs are not calibrated photometry, reconstruction sources, full native survey data, or image registration evidence. Local files are ignored; every JPEG is pinned by SHA256 and decoded dimensions.",
+    "interpretation": "DSS2 red and blue photographic surveys, with synthetic green as their mean. Recognition JPEGs are not calibrated photometry, reconstruction sources, full native survey data, or image registration evidence. Local files are ignored; every JPEG is checked by its decoded dimensions.",
     "acknowledgment": "This work made use of hips2fits, a service provided by CDS. Full survey acknowledgment is retained in presentation-sources/dss2-properties.txt.",
     "extents": "Supplementary historical visible extents for open clusters and missing catalogue axes; nebulae M8/M17/M20 use HEASARC diffuse-nebula rows. M16 uses the broader Sharpless H II-region diameter. M40 is labeled optical-pair separation. M73 remains unknown. Other targets retain their original SIMBAD axes. These heterogeneous measures are useful for browsing, not a common isophotal aperture or guaranteed full emission extent."
   }

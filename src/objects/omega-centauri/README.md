@@ -28,7 +28,7 @@ experiment remain in the [physical evidence](source/bake-inputs/references/04-ph
 
 ## Current 500-element bake
 
-The selected result is `omega-centauri-compiler`.
+The selected result is `omega-centauri`.
 Its [delivery recipe](source/delivery.json) records the failed visual qualification;
 `acceptedLabResult` identifies this candidate, not an acceptance certificate.
 
@@ -42,7 +42,7 @@ Its [delivery recipe](source/delivery.json) records the failed visual qualificat
   envelope, registration and optical materials are unchanged. Zero separate
   stellar points were present before or after; no stellar light was silently
   dropped or counted twice. The source-owned [compact input](source/bake-inputs.json.gz)
-  is 2,229,420 bytes.
+  is 2,211,132 bytes.
 - **Replay:** the ordinary application command ran without the Lab, caches or
   network in 232.93 seconds. It reproduced all 447 expected raw PNGs and 59
   delivery texture/bank files exactly. The current final receipt admits 493
@@ -82,12 +82,13 @@ cover total accounting and rejection before package replacement.
 
 ## Earlier integration evidence
 
-- The earlier selected result was the first adaptive quota bake.
+- The earlier selected result was `omega-centauri-adaptive`.
   Its [delivery recipe](source/delivery.json) explicitly records
   `app-integration-candidate` and failed visual handoff. The legacy field
   `acceptedLabResult` identifies this selected source; it is not an acceptance
   certificate.
-- The earlier 2,277,027-byte compact input retains the emission field, component materials and adaptive sampling.
+- The earlier 2,277,027-byte compact input
+  retains the emission field, component materials and adaptive sampling.
   [Cold application replay](evidence/2026-09-20/cold-replay.json) reproduced all
   1,377 expected raw resource identities across neutral and two optical banks,
   then matched all 60 prepared delivery files in 218.60 seconds. It started

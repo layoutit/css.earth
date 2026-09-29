@@ -2,7 +2,7 @@
   "schema": "cssearth-nebula-processing-evidence@1",
   "subjectId": "m8",
   "date": "2026-09-13",
-  "resultId": "5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8",
+  "resultId": "m8-registered-star-union",
   "checks": {
     "compilerResultHashes": "pass",
     "sameGeometryAcrossLenses": true,
@@ -112,7 +112,7 @@
     "paperGuidedComponents": 3,
     "authoredComponents": 441,
     "method": {
-      "path": ".local/nebula-lab/compiler/5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8/method.json"
+      "path": ".local/nebula-lab/compiler/m8-registered-star-union/method.json"
     },
     "interpretation": "Local topology is paper-guided; all numeric depth and thickness values remain authored."
   },
@@ -141,7 +141,7 @@
     "candidates": [
       {
         "id": "m8",
-        "result": "60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1",
+        "result": "m8-bounded-refinement",
         "lenses": [
           "eso-optical",
           "eso-vista",
@@ -228,9 +228,9 @@
   "boundedRefinement": {
     "maximumBakes": 3,
     "completedBakes": 3,
-    "initial": "35ef825cadebeeaae0ac07f5e041af9e29ce309843c69cc041e479ce02d6724f",
-    "weightedRefinement": "37ee7ab5ff4821516fb97a154bcb09428fd111ce1c2d5fae62663bffb259211c",
-    "savedRecipeReplay": "60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1",
+    "initial": "m8-bounded-refinement-initial",
+    "weightedRefinement": "m8-bounded-refinement-weighted",
+    "savedRecipeReplay": "m8-bounded-refinement",
     "outcome": "Reduced VISTA residual influence; native detail and side-view fidelity remain limited. Targets differ after weighting, so RMSE changes are not matched physical validation."
   },
   "integrationReplay": {
@@ -239,24 +239,24 @@
     "subjectId": "m8",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1/result.json"
+      "path": ".local/nebula-lab/compiler/m8-bounded-refinement/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482/result.json"
+      "path": ".local/nebula-lab/compiler/m8-integration-replay/result.json"
     },
-    "previousResultId": "60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1",
-    "currentResultId": "4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482",
+    "previousResultId": "m8-bounded-refinement",
+    "currentResultId": "m8-integration-replay",
     "reason": "Shared per-lens alpha validation changed the implementation identity. Object recipes, numerical fields and rendered materials were not refined.",
     "checks": {
       "strictResultsAndAllPins": true,
-      "identicalInputIdentity": "07b19faccd44114bde21775ff587a6f1105abdb528c86340917943f7939fbb00",
+      "identicalInputIdentity": true,
       "identicalRecipeAndRequest": true,
-      "identicalFieldIdentity": "31eee1a6bfe214d9967a2fa53a283975e6704b24bd8b07bb86a6d09392eeff41",
+      "identicalFieldIdentity": true,
       "identicalModelAndPanels": {
-        "model": "64803d99cacac5e4b5801fd6fa57390c8cdf71437321cb4ea419e65d17be6473",
-        "target": "ec34fe88c9f4853d92ef58cf2de6662c2338c76bf31ecfd9a5f54a12c0ea4801",
-        "projection": "fd76e2ad5180fe0f2166834d8dc73f688fdf3054ed4cf828b934885994057505",
-        "residual": "6aa37ba92367f628d636cc26f83222228b58ba909969bdab21f0c6979333ae41"
+        "model": true,
+        "target": true,
+        "projection": true,
+        "residual": true
       },
       "identicalGeometry": true,
       "identicalStars": 650,
@@ -309,7 +309,7 @@
       "receipt": {
         "path": "output/m8-reconstruction/browser-final/result.json"
       },
-      "resultId": "60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1",
+      "resultId": "m8-bounded-refinement",
       "archiveNote": "Original browser receipt and every screenshot byte/hash remain unchanged in output/m8-reconstruction/browser-final/."
     }
   },
@@ -319,24 +319,24 @@
     "subjectId": "m8",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482/result.json"
+      "path": ".local/nebula-lab/compiler/m8-integration-replay/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810/result.json"
+      "path": ".local/nebula-lab/compiler/m8-star-selection-correction/result.json"
     },
-    "previousResultId": "4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482",
-    "currentResultId": "8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810",
+    "previousResultId": "m8-integration-replay",
+    "currentResultId": "m8-star-selection-correction",
     "reason": "The shared detector now retains every bounded residual maximum before measured aperture light applies the unchanged star budget. No object recipe or cloud/material fit changed.",
     "checks": {
       "strictResultsAndAllPins": true,
-      "identicalInputIdentity": "07b19faccd44114bde21775ff587a6f1105abdb528c86340917943f7939fbb00",
+      "identicalInputIdentity": true,
       "identicalRecipeAndRequest": true,
-      "identicalFieldIdentity": "31eee1a6bfe214d9967a2fa53a283975e6704b24bd8b07bb86a6d09392eeff41",
+      "identicalFieldIdentity": true,
       "identicalModelAndPanels": {
-        "model": "64803d99cacac5e4b5801fd6fa57390c8cdf71437321cb4ea419e65d17be6473",
-        "target": "ec34fe88c9f4853d92ef58cf2de6662c2338c76bf31ecfd9a5f54a12c0ea4801",
-        "projection": "fd76e2ad5180fe0f2166834d8dc73f688fdf3054ed4cf828b934885994057505",
-        "residual": "6aa37ba92367f628d636cc26f83222228b58ba909969bdab21f0c6979333ae41"
+        "model": true,
+        "target": true,
+        "projection": true,
+        "residual": true
       },
       "identicalGeometry": true,
       "starCount": 650,
@@ -414,7 +414,7 @@
       "candidates": [
         {
           "id": "m8",
-          "result": "8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810",
+          "result": "m8-star-selection-correction",
           "lenses": [
             "eso-optical",
             "eso-vista",
@@ -586,24 +586,24 @@
     "subjectId": "m8",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810/result.json"
+      "path": ".local/nebula-lab/compiler/m8-star-selection-correction/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8/result.json"
+      "path": ".local/nebula-lab/compiler/m8-registered-star-union/result.json"
     },
-    "previousResultId": "8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810",
-    "currentResultId": "5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8",
+    "previousResultId": "m8-star-selection-correction",
+    "currentResultId": "m8-registered-star-union",
     "reason": "The optical and VISTA registered residual detections now form one deduplicated shared catalogue; unchanged650 budget and cloud fit.",
     "checks": {
       "strictResultsAndAllPins": true,
-      "identicalInputIdentity": "07b19faccd44114bde21775ff587a6f1105abdb528c86340917943f7939fbb00",
+      "identicalInputIdentity": true,
       "identicalCloudRecipeAndRequest": true,
-      "identicalFieldIdentity": "31eee1a6bfe214d9967a2fa53a283975e6704b24bd8b07bb86a6d09392eeff41",
+      "identicalFieldIdentity": true,
       "identicalModelAndPanels": {
-        "model": "64803d99cacac5e4b5801fd6fa57390c8cdf71437321cb4ea419e65d17be6473",
-        "target": "ec34fe88c9f4853d92ef58cf2de6662c2338c76bf31ecfd9a5f54a12c0ea4801",
-        "projection": "fd76e2ad5180fe0f2166834d8dc73f688fdf3054ed4cf828b934885994057505",
-        "residual": "6aa37ba92367f628d636cc26f83222228b58ba909969bdab21f0c6979333ae41"
+        "model": true,
+        "target": true,
+        "projection": true,
+        "residual": true
       },
       "identicalGeometry": true,
       "starCount": 650,
@@ -711,7 +711,7 @@
       "candidates": [
         {
           "id": "m8",
-          "result": "5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8",
+          "result": "m8-registered-star-union",
           "lenses": [
             "eso-optical",
             "eso-vista",
@@ -905,7 +905,7 @@
       ]
     },
     "method": {
-      "path": ".local/nebula-lab/compiler/5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8/method.json"
+      "path": ".local/nebula-lab/compiler/m8-registered-star-union/method.json"
     },
     "sourceCoreDiagnostic": {
       "boundsArcsec": {

@@ -102,7 +102,7 @@ The 5% target is a proposed engineering tolerance, not a scientific uncertainty.
 | [Tarantula core with MUSE](https://doi.eso.org/10.18727/0722-6691/5053) and [SAM-FP gas study](https://academic.oup.com/mnras/article/469/3/3424/3752450) | Investigate line emission, cavities and kinematic components | Literature leads; data access/coverage still need checking. A spectral cube's third axis is velocity or wavelength, not geometric depth. |
 | [STARRED](https://arxiv.org/abs/2305.18526), [MCA examples](https://www.cosmostat.org/statistical-methods/mca/mca-experiments), [MuSCADeT](https://arxiv.org/abs/1603.00473) | Decomposition and point/extended or multiband separation methods | Read methods, assumptions and licenses before selecting an implementation; availability of a paper is not proof of suitability for this image. |
 
-For each newly acquired input, record publisher, paper/data identifier, bands, WCS, dimensions, pixel convention, license, SHA256 and modifications. If access is blocked, report the exact paper/file and why it is needed; do not substitute unrelated imagery or infer depth from velocity without a physical model. Higher-resolution infrared images remain separate observational views unless an explicit multiband model is justified.
+For each newly acquired input, record publisher, paper/data identifier, bands, WCS, dimensions, pixel convention, license, byte count and modifications. If access is blocked, report the exact paper/file and why it is needed; do not substitute unrelated imagery or infer depth from velocity without a physical model. Higher-resolution infrared images remain separate observational views unless an explicit multiband model is justified.
 
 ## Scope, artifacts and stopping rules
 

@@ -52,7 +52,7 @@ The inbound guard traces imports through local wrappers, resolves static imports
 
 Application bakes record no fingerprint of the code that ran them; git identifies it. The host resolves packages through their public manifests and does not assume their location.
 
-Current manifests and presentation recipes use object-owned source evidence. Historical receipts retain their original paths, revisions and hashes; source catalogue statements link to those pinned revisions. Historical metadata does not require the current lab files to exist.
+Current manifests and presentation recipes use object-owned source evidence. Historical receipts retain their original paths and revisions; source catalogue statements link to those revisions. Historical metadata does not require the current lab files to exist.
 
 ### Isolated application delivery proof
 

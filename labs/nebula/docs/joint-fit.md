@@ -50,7 +50,7 @@ The complete [compiler setup](emission-compiler.md#reproduce-from-a-clean-checko
 
 Only TypeScript, recipes and method records are committed. Generated graph, source panels, fit parameters, all component residuals, method receipt and XYZ textures live under `.local/nebula-lab/joint-fit/`. Cache identities include source/recipe pins, transforms, actual fit evidence, graph identity, settings and implementation. Asset hashes are verified on replay.
 
-The default `molecular-wall-joint-fit@1` run on 2026-09-12 produced receipt `9f9aa4a4ce7d9f5f0aa48b8842419850a15205d530f1fb7ca0653e836f0d65ec`: 1808 selected ridge points, 4608 evaluated models, and both XYZ banks in 4.85 seconds using existing verified inputs. Its method receipt pins the exact implementation and evidence, independently of subsequent documentation edits.
+The default `molecular-wall-joint-fit@1` run on 2026-09-12 produced its receipt: 1808 selected ridge points, 4608 evaluated models, and both XYZ banks in 4.85 seconds using existing verified inputs. Its method receipt names the recipe and evidence it used, independently of subsequent documentation edits.
 
 | Candidate | Image RMS | Matched train / withheld velocity RMS | Missing train / withheld components |
 | --- | --- | --- | --- |

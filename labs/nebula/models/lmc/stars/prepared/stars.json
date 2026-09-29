@@ -21210,15 +21210,6 @@
         "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
         "license": "CC-BY-4.0"
       },
-      "implementation": {
-        "stars/lmc-star-cloud-model.ts": "5a1a1888e5e32a47bca3c28ba6641fb8530b36e9d2d8897e4e69b97d6f622209",
-        "cli/prepare-lmc-stars.ts": "034384b77c25b5ddbc6ea883c073fe9466bd721b6a8141024bdf63efa098827a",
-        "reconstruction/filled-products.ts": "0acb45c17fd087831c34fd8145c02d6f411b4724ac07200083cc19984b3c3cfd",
-        "reconstruction/filled-components.ts": "59b4bab583fbac938db5cacd2d739fc75d266e737d7692bc43bf0c28d31bc211",
-        "reconstruction/filled-volume.ts": "3ade146b4f8344238976e19c1a941515519f7112519c56e202e3179d77bf785b",
-        "density/observation-prior.ts": "2fcea9ced78129de6d2ce846ba1840c1e929a82c2c9b2f38efc7df1b51575c20",
-        "density/cloud-density.ts": "345bf036e022f9c090cab9fb1e494d1c55fc607f4f41e70593312077180303d4"
-      },
       "grid": {
         "path": "density.ktx2",
         "dimensions": [

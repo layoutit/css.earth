@@ -23,14 +23,14 @@ pnpm lab:nebula:structures --getsf-import=.local/nebula-lab/getsf/import.json
 pnpm lab:nebula
 ```
 
-The install command downloads verified original archives, builds static CFITSIO with `--disable-curl --enable-static --disable-shared`, then runs the unmodified author installer with `gfortran`. It preserves the software notices. The benchmark command has a30minute runtime bound; interrupted or incomplete results are never imported as complete. Restarting is an explicit fresh invocation. Keep the same recipe for an existing work directory; use a different directory for another parameter variant.
+The install command downloads the named original archives, builds static CFITSIO with `--disable-curl --enable-static --disable-shared`, then runs the unmodified author installer with `gfortran`. It preserves the software notices. The benchmark command has a30minute runtime bound; interrupted or incomplete results are never imported as complete. Restarting is an explicit fresh invocation. Keep the same recipe for an existing work directory; use a different directory for another parameter variant.
 
-The tested environment was macOS arm64, GNU Fortran16.2.0 and CFITSIO4.7.0. The optional no-argument `modfits` help banner contains a legacy Fortran format rejected by gfortran16; the configured noninteractive verbosity0 path works. Installation verification performs a real FITS operation and checks exact output pixels. No SWarp is invoked because the supplied single image already occupies the comparison grid. Optional WCSTools is absent, so detection catalogs contain pixel coordinates, not independent sky-coordinate measurements. Optional log coloring is also absent. The local `install-receipt.json` records compiler, platform, archive and binary hashes; `installation.log` records the commands.
+The tested environment was macOS arm64, GNU Fortran16.2.0 and CFITSIO4.7.0. The optional no-argument `modfits` help banner contains a legacy Fortran format rejected by gfortran16; the configured noninteractive verbosity0 path works. Installation verification performs a real FITS operation and checks exact output pixels. No SWarp is invoked because the supplied single image already occupies the comparison grid. Optional WCSTools is absent, so detection catalogs contain pixel coordinates, not independent sky-coordinate measurements. Optional log coloring is also absent. The local `install-receipt.json` records compiler, platform, the archives' names and origins and the installed binaries; `installation.log` records the commands.
 
-| Original input | SHA256 |
+| Original input | Archive |
 | --- | --- |
-| [getsf260706 ZIP](https://irfu.cea.fr/Pisp/alexander.menshchikov/getsf.v260706.zip) | `70725784d898a2d49c11ebc37cdaa94c07a6cad830215c6fdfdb32b23255c99b` |
-| [CFITSIO4.7.0 source](https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio-4.7.0.tar.gz) | `ce573bbea8e75b429f8c3d3e86498741ba3dc9628a1530d2f65268397ad059e8` |
+| [getsf260706 ZIP](https://irfu.cea.fr/Pisp/alexander.menshchikov/getsf.v260706.zip) | `getsf.v260706.zip` |
+| [CFITSIO4.7.0 source](https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio-4.7.0.tar.gz) | `cfitsio-4.7.0.tar.gz` |
 
 ## Frozen comparison input
 
