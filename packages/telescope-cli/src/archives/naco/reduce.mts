@@ -32,7 +32,7 @@ import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { esoEnvironment, esoHeader, rawFrames, type EsoHeader, type SetOfFrames } from '@cssearth/telescope/node';
-import { assertInputPins, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { readProgram, writeProgram, type NacoFrame, type NacoMode, type NacoProgram } from './archive.mts';
 import { nacoToolchainDescriptor, nacoToolchainPath } from './toolchain.mts';
@@ -235,7 +235,7 @@ export async function pinnedInputs(frames: readonly NacoFrame[], rawDirectory: s
     if (!found) throw new Error(`${frame.dpId} is not in ${rawDirectory}: a run consumes the frames it downloaded.`);
     inputs.push({ role: frame.tag, identity: frame.dpId, bytes: found.bytes });
   }
-  await assertInputPins(inputs, new Map(frames.map(frame => [frame.dpId, file(frame)])));
+  await assertInputs(inputs, new Map(frames.map(frame => [frame.dpId, file(frame)])));
   return inputs;
 }
 

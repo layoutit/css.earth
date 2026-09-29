@@ -118,7 +118,7 @@ def rows(table):
 operation = request['operation']
 answer = {'schema': 'cssearth-astroquery-answer@2', 'astroquery': astroquery.__version__, 'operation': operation}
 if operation == 'vo-download':
-    import os, hashlib, tempfile, io, requests
+    import os, tempfile, io, requests
     from astropy.io.votable import parse
     from astropy.io import fits
     from pyvo.dal.adhoc import DatalinkResults, SodaQuery
@@ -138,7 +138,7 @@ if operation == 'vo-download':
         if descriptor:
             pin = descriptor['file']
             with open(pin['path'], 'rb') as f: raw = f.read()
-            if len(raw) != pin['bytes'] or hashlib.sha256(raw).hexdigest() != pin['sha256']: raise TransferFailure('identity', 'Descriptor pin changed')
+            if len(raw) != pin['bytes']: raise TransferFailure('identity', 'Descriptor ' + pin['path'] + ' is ' + str(len(raw)) + ' bytes, the record says ' + str(pin['bytes']))
             links = DatalinkResults(parse(io.BytesIO(raw)), url=request['url'])
             row = links[descriptor['row']]
             if row.service_def != descriptor['serviceId']: raise TransferFailure('identity', 'Service row changed')
@@ -164,11 +164,11 @@ if operation == 'vo-download':
                 if response.status_code == 204: raise TransferFailure('no-content', 'No science content (HTTP 204)')
                 if response.status_code in (401,403): raise TransferFailure('authentication', 'Archive authorization failed (HTTP ' + str(response.status_code) + ')')
                 response.raise_for_status()
-                size, mark, digest = 0, 10000000, hashlib.sha256()
+                size, mark = 0, 10000000
                 for chunk in response.iter_content(chunk_size=1024 * 1024):
                     size += len(chunk)
                     if size > limit: raise TransferFailure('byte-limit', 'Science transfer byte limit exceeded')
-                    f.write(chunk); digest.update(chunk)
+                    f.write(chunk)
                     if size >= mark:
                         print(f'VO product: {size / 1e6:.1f} MB', file=sys.stderr, flush=True)
                         mark = (size // 10000000 + 1) * 10000000
@@ -186,7 +186,7 @@ if operation == 'vo-download':
                 except Exception as error: raise TransferFailure('protocol', 'Invalid science FITS response: ' + str(error)) from error
             # Never overwrite a previously acquired artifact at this destination.
             os.link(temporary, request['destination'])
-            answer['transfer'] = {'file': {'path': request['destination'], 'bytes': size, 'sha256': digest.hexdigest()},
+            answer['transfer'] = {'file': {'path': request['destination'], 'bytes': size},
                 'effectiveUrl': response.url, 'contentType': response.headers.get('Content-Type'), 'etag': response.headers.get('ETag'), 'lastModified': response.headers.get('Last-Modified')}
         finally:
             response.close()
@@ -200,7 +200,7 @@ if operation == 'vo-download':
                 'local-io' if isinstance(error, OSError) else 'protocol')
         answer['failure'] = {'code': code, 'httpStatus': status, 'message': str(error)}
 elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
-    import io, os, hashlib, warnings, tempfile
+    import io, os, warnings, tempfile
     from datetime import datetime, timezone
     from astropy.io.votable import parse
     from astropy.time import Time
@@ -232,11 +232,19 @@ elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
         finally: response.close()
         if len(payload) > limit: raise ValueError('VO metadata byte limit exceeded')
         os.makedirs(request['directory'], exist_ok=True)
-        raw_path = os.path.join(request['directory'], hashlib.sha256(payload).hexdigest() + '.xml')
+        # Each response keeps its own file, named by the operation and the moment it was fetched; none is overwritten.
+        stamp = ''.join(c for c in fetched if c.isdigit())
         fd, staging = tempfile.mkstemp(dir=request['directory'], suffix='.partial')
         try:
             with os.fdopen(fd, 'wb') as f: f.write(payload)
-            os.replace(staging, raw_path)
+            for attempt in range(1000):
+                raw_path = os.path.join(request['directory'], operation + '-' + stamp + ('' if attempt == 0 else '-' + str(attempt)) + '.xml')
+                try:
+                    os.link(staging, raw_path)
+                    break
+                except FileExistsError:
+                    continue
+            else: raise OSError('No free response name in ' + request['directory'])
         finally:
             if os.path.exists(staging): os.unlink(staging)
     if len(payload) > limit: raise ValueError('VO metadata byte limit exceeded')
@@ -256,7 +264,7 @@ elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
         return {**field(p), 'value': lossless(p.value), 'constraints': {'minimum': lossless(p.values.min), 'maximum': lossless(p.values.max),
             'options': lossless(p.values.options), 'null': lossless(p.values.null)}}
     metadata = {'schema': 'cssearth-vo-metadata@1', 'pyvo': pyvo.__version__,
-        'raw': {'path': raw_path, 'bytes': len(payload), 'sha256': hashlib.sha256(payload).hexdigest()},
+        'raw': {'path': raw_path, 'bytes': len(payload)},
         'effectiveUrl': effective_url, 'fetchedAt': fetched, 'httpStatus': http_status,
         'queryStatus': 'ERROR', 'fields': [], 'rows': [], 'resources': [], 'coordinateSystems': [], 'timeSystems': [], 'times': [], 'bindings': [], 'issues': []}
     try:

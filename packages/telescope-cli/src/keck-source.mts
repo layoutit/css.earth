@@ -1,9 +1,9 @@
 /** Retrieve one saved KOA lead as pinned, uncalibrated native source bytes. */
-import { lstat, mkdir, mkdtemp, open, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { lstat, mkdir, mkdtemp, open, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writeProductRecord } from '@cssearth/telescope/node';
+import { VERSION } from './help.mts';
 import { INSTRUMENT_TABLES, koaDownload, koaQuery, lev0Url, TAP_SYNC } from './archives/keck/koa.mts';
 import { EXPLORATION_SCHEMA } from './exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
@@ -22,10 +22,10 @@ function savedLead(value: unknown): KeckSourceLead {
   const table = requireString(row.table, 'KOA table'), instrument = requireString(row.instrument, 'KOA instrument');
   const koaid = requireString(row.koaid, 'KOA file id'), targetName = requireString(row.targetName, 'KOA target name');
   const handle = requireString(row.filehand, 'KOA filehand'), dateObs = requireString(row.dateObs, 'KOA date');
-  const evidence = requireString(row.evidence, 'KOA metadata pin');
+  const evidence = requireString(row.evidence, 'KOA discovery evidence name');
   if (!(INSTRUMENT_TABLES as readonly string[]).includes(table) || instrument !== table.slice(4).toUpperCase() ||
       !/^[A-Za-z0-9._-]+\.fits$/u.test(koaid) || basename(handle) !== koaid || !filehand(handle) ||
-      !/^[a-f0-9]{64}$/u.test(evidence)) throw new TypeError('Saved Keck source identity is invalid.');
+      !/^[A-Za-z0-9._-]+$/u.test(evidence)) throw new TypeError(`Saved Keck source ${koaid} (${table}) has an invalid identity or evidence name ${evidence}.`);
   return { table, instrument, koaid, targetName, filehand: handle, dateObs, evidence };
 }
 
@@ -46,12 +46,12 @@ export async function fetchKeckSource(explorationPath: string, pick: number, out
   const evidenceFile = resolve(dirname(explorationPath), 'archive-source-evidence', `${selected.evidence}.json`);
   const evidenceBytes = await readFile(evidenceFile).catch(() => readFile(resolve(dirname(explorationPath), 'keck-source-evidence', `${selected.evidence}.json`)));
   const evidence = requireRecord(JSON.parse(evidenceBytes.toString('utf8')), 'saved KOA response');
-  if (sha256(evidenceBytes) !== selected.evidence || evidence.source !== TAP_SYNC ||
+  if (evidence.source !== TAP_SYNC ||
       !requireArray(evidence.rows, 'saved KOA rows').some(value => {
         const row = requireRecord(value, 'saved KOA row');
         return row.koaid === selected.koaid && row.targname === selected.targetName && row.koaimtyp === 'object' &&
           row.filehand === selected.filehand && row.date_obs === selected.dateObs;
-      })) throw new Error('The saved KOA source differs from its pinned discovery response. Explore again.');
+      })) throw new Error(`The saved KOA source ${selected.koaid} is not in its discovery response ${selected.evidence}. Explore again.`);
   const adql = `SELECT koaid,targname,koaimtyp,filehand,date_obs FROM ${selected.table} WHERE koaid=${quote(selected.koaid)}`;
   const rows = await query(adql);
   if (rows.length !== 1) throw new Error('KOA no longer has one public row for this exact source. Explore again.');
@@ -68,8 +68,8 @@ export async function fetchKeckSource(explorationPath: string, pick: number, out
     const source = resolve(staging, selected.koaid), url = lev0Url(selected.filehand);
     const pin = await download(url, source, undefined, maximum);
     if (pin.bytes > maximum) throw new RangeError('KOA file exceeds the transfer bound.');
-    const actual = await sha256File(source);
-    if (actual.bytes !== pin.bytes || actual.sha256 !== pin.sha256) throw new Error('Downloaded KOA file differs from its verified size or digest.');
+    const actual = (await stat(source)).size;
+    if (actual !== pin.bytes) throw new Error(`Downloaded KOA file ${selected.koaid} is ${actual} bytes; the transfer reported ${pin.bytes}.`);
     const handle = await open(source, 'r');
     let prefix: string;
     try { const header = Buffer.alloc(80); await handle.read(header, 0, 80, 0); prefix = header.toString('ascii'); }
@@ -77,21 +77,20 @@ export async function fetchKeckSource(explorationPath: string, pick: number, out
     if (!prefix.startsWith('SIMPLE  =')) throw new TypeError('KOA returned a file without a FITS primary header.');
     const metadata = Buffer.from(`${JSON.stringify({ service: TAP_SYNC, query: adql, rows }, null, 2)}\n`);
     const report = { schema: 'cssearth-keck-source@1', status: 'unresolved', target, selected,
-      acquisition: { url, bytes: pin.bytes, sha256: pin.sha256, limitBytes: maximum }, limitations };
+      acquisition: { url, bytes: pin.bytes, limitBytes: maximum }, limitations };
     await writeFile(resolve(staging, 'explore.json'), explorationBytes);
     await writeFile(resolve(staging, 'discovery.json'), evidenceBytes);
     await writeFile(resolve(staging, 'current-metadata.json'), metadata);
     await writeFile(resolve(staging, 'source.json'), `${JSON.stringify(report, null, 2)}\n`);
-    const implementation = sha256(Buffer.concat(await Promise.all([new URL('keck-source.mts', import.meta.url), new URL('./archives/keck/koa.mts', import.meta.url)].map(path => readFile(path)))));
     await writeProductRecord(resolve(staging, 'output.product.json'), {
       telescope: 'Keck Observatory Archive', stage: 'telescope-keck-source',
-      inputs: [{ role: 'saved exploration', identity: resolve(explorationPath), bytes: explorationBytes.length, sha256: sha256(explorationBytes) },
-        { role: 'KOA discovery response', identity: TAP_SYNC, bytes: evidenceBytes.length, sha256: selected.evidence },
-        { role: 'KOA current exact-file response', identity: TAP_SYNC, bytes: metadata.length, sha256: sha256(metadata) },
-        { role: 'KOA raw FITS', identity: url, bytes: pin.bytes, sha256: pin.sha256 }],
+      inputs: [{ role: 'saved exploration', identity: resolve(explorationPath), bytes: explorationBytes.length },
+        { role: 'KOA discovery response', identity: `${TAP_SYNC}#${selected.evidence}`, bytes: evidenceBytes.length },
+        { role: 'KOA current exact-file response', identity: TAP_SYNC, bytes: metadata.length },
+        { role: 'KOA raw FITS', identity: url, bytes: pin.bytes }],
       parameters: { target, koaid: selected.koaid, instrument: selected.instrument, status: 'unresolved', limitations,
         fitsSource: { schema: FITS_SOURCE_SCHEMA, path: selected.koaid, label: selected.koaid, limitations } },
-      software: [{ name: 'cssEarth Telescope Keck source', version: implementation }, { name: 'PyVO', version: '1.9.1' }],
+      software: [{ name: 'cssEarth Telescope Keck source', version: VERSION }, { name: 'PyVO', version: '1.9.1' }],
     }, [{ path: selected.koaid, file: source }, ...['explore.json', 'discovery.json', 'current-metadata.json', 'source.json']
       .map(path => ({ path, file: resolve(staging, path) }))]);
     await rename(staging, destination);

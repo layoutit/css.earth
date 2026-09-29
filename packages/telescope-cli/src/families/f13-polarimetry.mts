@@ -1,6 +1,5 @@
 /** F13 keeps ESO's paired intensity/DOLP products distinct from Stokes products. */
 import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { plotNumericPreview, type FigureOptions } from '@cssearth/telescope/node';

@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { basename, join, dirname, resolve } from 'node:path';
 import { parseImagingProgram } from '../imaging/archive.mts';
 import { imagingProductRun, pipelineSoftware, recordProductEvidence } from '../imaging/image3.mts';
-import { sameRun, runDigest, writeProductRecord } from '@cssearth/telescope/node';
+import { sameRun, runKey, writeProductRecord } from '@cssearth/telescope/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { compareSamples, cubeComparisonScope, archivePlaneOffset, requestedSpectralGrid } from './spec3.mts';
 import type { SpectralCube } from '@cssearth/bake/objects/layers/observation';
@@ -47,7 +47,7 @@ test('a spec3 run pins both detectors of every dither, and a finer sky grid is a
   assert.deepEqual(run.software, [{ name: 'jwst', version: '2.0.1' }, { name: 'stcal', version: '1.20.0' }]);
   assert.equal(run.toolchainDigest, 'e'.repeat(64));
   // A cube drizzled onto a finer grid than the pipeline's 0.1 arcsecond is a different product, so it is built rather than reused.
-  assert.notEqual(runDigest(cubeRun({ arcsecPerPixel: 0.05 })), runDigest(run));
+  assert.notEqual(runKey(cubeRun({ arcsecPerPixel: 0.05 })), runKey(run));
 });
 
 test('the cube comparison adds its agreement to the record beside that cube, and only that cube', async () => {

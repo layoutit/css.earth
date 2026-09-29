@@ -30,7 +30,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { flagValue, positionalArguments, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { addProductEvidence, assertInputPins, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
+import { addProductEvidence, assertInputs, fileSize, readProductRecord, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductInput, ProductRun } from '@cssearth/telescope';
 import { defaultDataRoot, PROGRAMS, readSpitzerProgram, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { defaultWorkRoot, mosaicMembers, mosaicName, STAGE, TELESCOPE } from './mosaic.mts';
@@ -87,7 +87,7 @@ export async function compareMosaics(ours: ComparedFile, archive: ComparedFile, 
   const entries = [ours, archive, uncertainty, coverage];
   if (new Set(entries.map(entry => entry.pin.identity)).size !== entries.length)
     throw new Error('The four compared files must be four different pinned files.');
-  await assertInputPins(entries.map(entry => entry.pin), new Map(entries.map(entry => [entry.pin.identity, entry.path])));
+  await assertInputs(entries.map(entry => entry.pin), new Map(entries.map(entry => [entry.pin.identity, entry.path])));
   const compared: ProductInput[] = [];
   for (const entry of entries) compared.push({ role: entry.pin.role, identity: entry.pin.identity, ...await fileSize(entry.path) });
 

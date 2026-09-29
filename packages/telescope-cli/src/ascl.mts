@@ -1,6 +1,5 @@
 /** Live ASCL software discovery. A catalog match is a citation lead, never evidence that code ran. */
 import { readFile } from 'node:fs/promises';
-import { sha256 } from '@cssearth/core/node';
 import { requireRecord, requireString } from '@cssearth/core';
 import { verifiedProduct } from './verified-product.mts';
 import { delivery } from './outputs.mts';
@@ -11,7 +10,7 @@ const MAX_CATALOG_BYTES = 8 * 1024 * 1024;
 const MAX_RESULTS = 20;
 export interface AsclEntry { readonly id:string;readonly title:string;readonly url:string;readonly description?:string;readonly preferredCitation?:string;readonly codeSites:readonly string[] }
 export interface AsclSoftwareMatch { readonly name:string;readonly version:string;readonly matches:readonly AsclEntry[] }
-export interface AsclLookup { readonly source:string;readonly sourceSha256:string;readonly mode:'query'|'product';readonly query?:string;readonly product?:string;readonly entries?:readonly AsclEntry[];readonly software?:readonly AsclSoftwareMatch[];readonly sourceProcessing?:readonly (AsclSoftwareMatch & {readonly evidence:string})[];readonly caveat:string }
+export interface AsclLookup { readonly source:string;readonly sourceBytes:number;readonly mode:'query'|'product';readonly query?:string;readonly product?:string;readonly entries?:readonly AsclEntry[];readonly software?:readonly AsclSoftwareMatch[];readonly sourceProcessing?:readonly (AsclSoftwareMatch & {readonly evidence:string})[];readonly caveat:string }
 
 function entry(value:unknown):AsclEntry|null{
   const row=requireRecord(value,'ASCL catalog entry');
@@ -25,13 +24,13 @@ function entry(value:unknown):AsclEntry|null{
 const normalize=(name:string):string=>name.normalize('NFKC').toLocaleLowerCase('en').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const shortTitle=(title:string):string=>title.split(':',1)[0]!.trim();
 
-async function catalog(request:typeof fetch):Promise<{entries:AsclEntry[];sha256:string}>{
+async function catalog(request:typeof fetch):Promise<{entries:AsclEntry[];bytes:number}>{
   const response=await request(ASCL_CATALOG,{signal:AbortSignal.timeout(45_000)});
   if(!response.ok||!response.body)throw new Error(`ASCL catalog HTTP ${response.status}`);
   const chunks:Uint8Array[]=[];let bytes=0;
   for await(const chunk of response.body){bytes+=chunk.byteLength;if(bytes>MAX_CATALOG_BYTES){await response.body.cancel().catch(()=>{});throw new Error('ASCL catalog exceeded the 8 MiB lookup limit');}chunks.push(chunk);}
   const body=Buffer.concat(chunks),parsed=requireRecord(JSON.parse(body.toString('utf8')),'ASCL catalog');
-  return {entries:Object.values(parsed).map(entry).filter((item):item is AsclEntry=>item!==null),sha256:sha256(body)};
+  return {entries:Object.values(parsed).map(entry).filter((item):item is AsclEntry=>item!==null),bytes:body.length};
 }
 
 export async function searchAscl(query:string,request:typeof fetch=fetch):Promise<AsclLookup>{
@@ -42,7 +41,7 @@ export async function searchAscl(query:string,request:typeof fetch=fetch):Promis
     const aFirst=normalize(shortTitle(a.title)).startsWith(term)?0:1,bFirst=normalize(shortTitle(b.title)).startsWith(term)?0:1;
     return aFirst-bFirst||a.title.localeCompare(b.title);
   }).slice(0,MAX_RESULTS);
-  return {source:ASCL_CATALOG,sourceSha256:found.sha256,mode:'query',query,entries:matches,
+  return {source:ASCL_CATALOG,sourceBytes:found.bytes,mode:'query',query,entries:matches,
     caveat:'ASCL lists research software. Search results do not show that code ran on a particular observation or that a target was detected.'};
 }
 
@@ -55,7 +54,7 @@ export async function matchProductSoftware(product:string,request:typeof fetch=f
   const software=record.software.map(item=>({name:item.name,version:item.version,
     matches:matches(item.name)}));
   const sourceProcessing=recordedSourceProcessing(record);
-  return {source:ASCL_CATALOG,sourceSha256:found.sha256,mode:'product',product,software,
+  return {source:ASCL_CATALOG,sourceBytes:found.bytes,mode:'product',product,software,
     ...(sourceProcessing.length?{sourceProcessing:sourceProcessing.map(item=>({...item,matches:matches(item.name)}))}:{}),
     caveat:'Verified receipts identify software recorded for the current run. Source-declared earlier processing is a separate authored claim with its own evidence. An exact ASCL title match is only a citation lead; it does not verify the software version, scientific fitness, or target detection. Unmatched names may still exist in ASCL.'};
 }

@@ -1,8 +1,7 @@
 /** Exact recorded dependencies. Retrieval does not establish calibration accuracy. */
 import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
 import { dirname, resolve, relative, basename } from 'node:path';
-import { createHash } from 'node:crypto';
-import { fileSize } from '@cssearth/telescope/node';
+import { fileSize, plainName } from '@cssearth/telescope/node';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { readFitsFileHdus } from '@cssearth/fits/node';
 export interface CalibrationDependency {
@@ -44,10 +43,11 @@ export async function calibrationDependencies(root:string, references:readonly {
   for(const ref of references){
     const origin=calibrationOrigin(ref.value);
     if(!origin){rows.push({field:ref.field,reference:ref.value,status:'unresolved',applicability:'unknown',reason:'No exact archive resolver for this reference.'});continue;}
-    const key=createHash('sha256').update(origin).digest('hex'), dir=resolve(root,'output/telescopes/calibration',key), file=resolve(dir,basename(new URL(origin).pathname)), manifest=resolve(dir,'pin.json');
+    // Cached under the archive host and path it came from, so the cache reads as the archive does.
+    const url=new URL(origin), dir=resolve(root,'output/telescopes/calibration',plainName(url.hostname),...url.pathname.split('/').slice(1,-1).map(part=>plainName(part)||'_'),...(url.search?[plainName(url.search)]:[])), file=resolve(dir,basename(url.pathname)), manifest=resolve(dir,'pin.json');
     try{
       const saved=await readFile(manifest,'utf8').then(t=>requireRecord(JSON.parse(t)),()=>undefined);
-      if(saved){const current=await fileSize(file);if(current.bytes!==saved.bytes||saved.origin!==origin)throw new Error('Calibration cache integrity mismatch');}
+      if(saved){const current=await fileSize(file);if(current.bytes!==saved.bytes||saved.origin!==origin)throw new Error(`Calibration cache integrity mismatch: ${file} is ${current.bytes} bytes from ${String(saved.origin)}; ${manifest} records ${String(saved.bytes)} bytes from ${origin}.`);}
       else {
         const fetcher=options.fetcher??fetch;
         const response=await fetcher(origin,{signal:AbortSignal.timeout(30_000)});

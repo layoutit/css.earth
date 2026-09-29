@@ -8,7 +8,7 @@ import type { MetadataResponse } from './vo-contracts.js';
 
 const field = (name: string, unit: string | null) => ({ name, id: null, datatype: 'char', arraysize: null, unit, ucd: null, utype: null, xtype: null, ref: null });
 const response = (rows: MetadataResponse['rows'], units: Readonly<Record<string, string | null>> = { ra: 'deg', dec: 'deg', coo_err_maj: 'mas' }): MetadataResponse => ({
-  schema: 'cssearth-vo-metadata@1', pyvo: '1.9.1', raw: { path: 'simbad.xml', bytes: 1, sha256: '0'.repeat(64) }, effectiveUrl: 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync',
+  schema: 'cssearth-vo-metadata@1', pyvo: '1.9.1', raw: { path: 'simbad.xml', bytes: 1 }, effectiveUrl: 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync',
   fetchedAt: '2026-09-22T00:00:00Z', httpStatus: 200, queryStatus: 'OK',
   fields: [...Object.entries(units).map(([name, unit]) => field(name, unit)), field('main_id', null), field('oid', null), field('coo_bibcode', null), field('otype', null), field('id', null)],
   rows, resources: [], coordinateSystems: [], timeSystems: [], issues: [], times: rows.map(() => ({})), bindings: [] });

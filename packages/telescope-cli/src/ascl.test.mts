@@ -21,7 +21,7 @@ test('ASCL title search returns catalog provenance and bounded, validated entrie
   const result=await searchAscl('astro',response);
   assert.deepEqual(result.entries?.map(item=>item.id),['1304.002','1708.004']);
   assert.equal(result.entries?.[1]?.preferredCitation,'Cite the Astroquery paper.');
-  assert.match(result.sourceSha256,/^[0-9a-f]{64}$/u);
+  assert.equal(result.sourceBytes,Buffer.byteLength(JSON.stringify(rows)));
   assert.match(result.caveat,/not show that code ran/u);
   assert.equal((await searchAscl('absent',response)).entries?.length,0);
   await assert.rejects(searchAscl('x',response),/at least two/u);

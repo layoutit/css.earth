@@ -4,9 +4,9 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
  * The instruments stay different: an event list, a spectral cube, a calibrated image and a strip camera want different
  * operations, and each toolkit keeps its own. What they share is what a caller must be able to ask of any product:
  *
- * - **what went in**, exactly: every input by identity, byte count and available content digest;
- * - **how it was made**: the stage, its parameters, and the software with the versions and toolchain pin that ran;
- * - **what came out**, exactly: every output by path, byte count and content digest, with its units and conventions;
+ * - **what went in**, exactly: every input by identity and byte count;
+ * - **how it was made**: the stage, its parameters, and the software with the versions that ran;
+ * - **what came out**, exactly: every output by path and byte count, with its units and conventions;
  * - **what was checked, and what that check means**: evidence names its kind. Agreement with the archive's own product,
  *   consistency between two of our own reductions, registration against geometry and agreement with a published value
  *   establish different things, and a receipt's existence establishes none of them: evidence is resolved by the exact
@@ -31,11 +31,11 @@ export const EVIDENCE_KINDS = ['archive-agreement', 'archive-origin', 'archive-r
 
 export type EvidenceKind = typeof EVIDENCE_KINDS[number];
 
-export interface ProductInput { readonly role: string; readonly identity: string; readonly bytes: number; readonly sha256?: string }
+export interface ProductInput { readonly role: string; readonly identity: string; readonly bytes: number }
 
 export interface ProductSoftware { readonly name: string; readonly version: string }
 
-export interface ProductOutput { readonly path: string; readonly bytes: number; readonly sha256?: string; readonly units?: string; readonly conventions?: Readonly<Record<string, string>> }
+export interface ProductOutput { readonly path: string; readonly bytes: number; readonly units?: string; readonly conventions?: Readonly<Record<string, string>> }
 
 export interface ProductEvidence { readonly kind: EvidenceKind; readonly receipt: string; readonly product: string; readonly establishes: string }
 
@@ -45,8 +45,6 @@ export interface ProductRun {
   readonly inputs: readonly ProductInput[];
   readonly parameters: Readonly<Record<string, unknown>>;
   readonly software: readonly ProductSoftware[];
-  /** Digest of the toolchain pin the software was installed from, where the toolkit has one. */
-  readonly toolchainDigest?: string;
 }
 
 export interface ProductRecord extends ProductRun { readonly schema: typeof PRODUCT_RECORD_SCHEMA; readonly outputs: readonly ProductOutput[]; readonly evidence: readonly ProductEvidence[] }
@@ -54,22 +52,19 @@ export interface ProductRecord extends ProductRun { readonly schema: typeof PROD
 export function parseProductRecord(value: unknown): ProductRecord {
   const record = requireRecord(value, 'product record');
   if (record.schema !== PRODUCT_RECORD_SCHEMA) throw new TypeError(`Unsupported product record schema ${String(record.schema)}.`);
-  const digest = (value: unknown, label: string): string | undefined => {
-    if (value === undefined) return undefined; // Historical records can be read, but cannot be reused without a digest.
-    const text = requireString(value, label);
-    if (!/^[a-f0-9]{64}$/u.test(text)) throw new TypeError(`${label} must be a SHA-256 digest.`);
-    return text;
+  // The archive and version control identify bytes; a record carries no content digest, and one that does is refused.
+  const refuseDigests = (entry: Record<string, unknown>, label: string): void => {
+    for (const field of ['sha256', 'toolchainDigest']) if (entry[field] !== undefined) throw new TypeError(`${label} has a ${field} field (${String(entry[field])}); product records carry no content digest.`);
   };
+  refuseDigests(record, `Product record ${String(record.telescope)}/${String(record.stage)}`);
   const sized = <T extends { bytes: number }>(entry: T, label: string) => {
     if (!Number.isSafeInteger(entry.bytes) || entry.bytes < 0) throw new TypeError(`${label} needs a byte count.`);
     return entry;
   };
-  const inputs = requireArray(record.inputs, 'inputs').map((raw, index) => { const entry = requireRecord(raw, `input ${index}`), sha256 = digest(entry.sha256, 'input digest');
-    return sized({ role: requireString(entry.role, 'input role'), identity: requireString(entry.identity, 'input identity'), bytes: requireFiniteNumber(entry.bytes, 'input bytes'),
-      ...(sha256 ? { sha256 } : {}) }, `Input ${index}`); });
-  const outputs = requireArray(record.outputs, 'outputs').map((raw, index) => { const entry = requireRecord(raw, `output ${index}`), sha256 = digest(entry.sha256, 'output digest');
+  const inputs = requireArray(record.inputs, 'inputs').map((raw, index) => { const entry = requireRecord(raw, `input ${index}`); refuseDigests(entry, `Input ${index} (${String(entry.identity)})`);
+    return sized({ role: requireString(entry.role, 'input role'), identity: requireString(entry.identity, 'input identity'), bytes: requireFiniteNumber(entry.bytes, 'input bytes') }, `Input ${index}`); });
+  const outputs = requireArray(record.outputs, 'outputs').map((raw, index) => { const entry = requireRecord(raw, `output ${index}`); refuseDigests(entry, `Output ${index} (${String(entry.path)})`);
     return sized({ path: requireString(entry.path, 'output path'), bytes: requireFiniteNumber(entry.bytes, 'output bytes'),
-      ...(sha256 ? { sha256 } : {}),
       ...(entry.units === undefined ? {} : { units: requireString(entry.units, 'units') }),
       ...(entry.conventions === undefined ? {} : { conventions: Object.fromEntries(Object.entries(requireRecord(entry.conventions, 'conventions')).map(([key, text]) => [key, requireString(text, `convention ${key}`)])) }) }, `Output ${index}`); });
   const software = requireArray(record.software, 'software').map((raw, index) => { const entry = requireRecord(raw, `software ${index}`); return { name: requireString(entry.name, 'software name'), version: requireString(entry.version, 'software version') }; });
@@ -80,7 +75,7 @@ export function parseProductRecord(value: unknown): ProductRecord {
     return { kind: kind as EvidenceKind, receipt: requireString(entry.receipt, 'evidence receipt'), product, establishes: requireString(entry.establishes, 'evidence establishes') }; });
   if (!outputs.length) throw new TypeError('A product record names at least one output.');
   return { schema: PRODUCT_RECORD_SCHEMA, telescope: requireString(record.telescope, 'telescope'), stage: requireString(record.stage, 'stage'), inputs, parameters: requireRecord(record.parameters, 'parameters'), software,
-    ...(record.toolchainDigest === undefined ? {} : { toolchainDigest: requireString(record.toolchainDigest, 'toolchainDigest') }), outputs, evidence };
+    outputs, evidence };
 }
 
 /** Where a product's record sits: beside the product, under its own name. Every toolkit writes it there, so a reader holding a

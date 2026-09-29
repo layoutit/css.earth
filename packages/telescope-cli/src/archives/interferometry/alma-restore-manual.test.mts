@@ -7,7 +7,7 @@ import { basename, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { manualDeliveryPins, manualImaging, manualRestoreRun, manualRestoreScript, manualRestoreTarget, manualTcleanArguments, recordArchiveComparison } from './alma-restore-manual.mts';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
+import { readProductRecord, runKey, writeProductRecord } from '@cssearth/telescope/node';
 import { loggedSpectralWindowMap, parseManualCalibration, resolveNamedMaps } from './alma-manual-calibration.mts';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
@@ -149,12 +149,12 @@ test('a manual restore is identified by the delivery it replays, the script it g
     assert.equal(run.parameters.mask, 'calibrated_final_cont.mask.tgz');
     assert.deepEqual(run.software, casa);
     assert.equal(run.toolchainDigest, 'f'.repeat(64));
-    const base = runDigest(run);
+    const base = runKey(run);
     // Cleaning without the mask the reducer drew, another CASA, and any changed delivery file are each another run.
-    assert.notEqual(runDigest(manualRestoreRun(pins, { target: 'Europa', script: maskless(), mask: null }, casa, 'f'.repeat(64))), base);
-    assert.notEqual(runDigest(manualRestoreRun(pins, { target: 'Europa', script: script(), mask: files.mask }, casa, 'a'.repeat(64))), base);
+    assert.notEqual(runKey(manualRestoreRun(pins, { target: 'Europa', script: maskless(), mask: null }, casa, 'f'.repeat(64))), base);
+    assert.notEqual(runKey(manualRestoreRun(pins, { target: 'Europa', script: script(), mask: files.mask }, casa, 'a'.repeat(64))), base);
     await writeFile(files.imagingScript, 'a delivery that imaged something else');
-    assert.notEqual(runDigest(manualRestoreRun(await manualDeliveryPins(files), { target: 'Europa', script: script(), mask: files.mask }, casa, 'f'.repeat(64))), base);
+    assert.notEqual(runKey(manualRestoreRun(await manualDeliveryPins(files), { target: 'Europa', script: script(), mask: files.mask }, casa, 'f'.repeat(64))), base);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

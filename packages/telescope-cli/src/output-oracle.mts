@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { mkdir } from 'node:fs/promises';
 import { requireRecord } from '@cssearth/core';
 export const ORACLE_PYTHON=String.raw`
-import json,sys,hashlib,csv
+import json,sys,csv
 from pathlib import Path
 import numpy as np
 import astropy, specutils, photutils
@@ -20,12 +20,13 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 r=json.load(sys.stdin); directory=Path(r['directory']); out=Path(r['out'])
 record=json.loads((directory/'output.product.json').read_text()); selection=record['parameters']['selection']; kind=selection['kind']
-for item in record['outputs']:
-    if hashlib.sha256((directory/item['path']).read_bytes()).hexdigest()!=item['sha256']: raise ValueError('Output pin mismatch')
+def sized(file,bytes,label):
+    if not file.is_file() or file.stat().st_size!=bytes: raise ValueError(f'{label} {file} is not the recorded {bytes} bytes')
+for item in record['outputs']: sized(directory/item['path'],item['bytes'],'Output')
 delivery=next(i for i in record['inputs'] if i['role']=='delivery'); path=Path(delivery['identity'])
-if hashlib.sha256(path.read_bytes()).hexdigest()!=delivery['sha256']: raise ValueError('Delivery pin mismatch')
+sized(path,delivery['bytes'],'Delivery')
 d=json.loads(path.read_text()); source=path.parent/d['product']; pin=next(i for i in d['files'] if i['path']==d['product'])
-if hashlib.sha256(source.read_bytes()).hexdigest()!=pin['sha256']: raise ValueError('Source pin mismatch')
+sized(source,pin['bytes'],'Source')
 with fits.open(source) as hdus:
     h=hdus[selection['hdu']]; data=np.array(h.data,dtype=float); header=h.header
     if data.ndim!=3: raise ValueError('This oracle currently checks three-dimensional FITS cubes')
@@ -91,7 +92,7 @@ if not valid.any(): raise ValueError('No comparable valid samples')
 delta=actual-reference; maximum=float(np.max(np.abs(delta[valid])));scale=max(float(np.max(np.abs(reference[valid]))),1e-30)
 units_equal=u.Unit(record['parameters'].get('measurement',{}).get('unit',record['parameters']['metadata']['units']['value']))==expected_unit
 passed=mask_equal and units_equal and maximum<=1e-10*scale
-report={'passed':passed,'kind':kind,'reference':owner,'sourceSha256':pin['sha256'],'comparedSamples':int(valid.sum()),'maskEqual':mask_equal,'unitsEqual':bool(units_equal),'maxAbsoluteError':maximum,'maxErrorOverPeak':maximum/scale,'toleranceOverPeak':1e-10,'versions':{'specutils':specutils.__version__,'photutils':photutils.__version__,'astropy':astropy.__version__},'limits':['Independent extraction arithmetic; FITS/WCS decoding still shares Astropy.','This compares values, units and masks, not calibration accuracy or feature significance.','Uncertainty propagation is separately checked against analytic fixtures; this comparison does not validate unknown covariance.']}
+report={'passed':passed,'kind':kind,'reference':owner,'source':{'path':d['product'],'bytes':pin['bytes']},'comparedSamples':int(valid.sum()),'maskEqual':mask_equal,'unitsEqual':bool(units_equal),'maxAbsoluteError':maximum,'maxErrorOverPeak':maximum/scale,'toleranceOverPeak':1e-10,'versions':{'specutils':specutils.__version__,'photutils':photutils.__version__,'astropy':astropy.__version__},'limits':['Independent extraction arithmetic; FITS/WCS decoding still shares Astropy.','This compares values, units and masks, not calibration accuracy or feature significance.','Uncertainty propagation is separately checked against analytic fixtures; this comparison does not validate unknown covariance.']}
 plt.rcParams.update({'font.size':10})
 if actual.ndim==2:
     fig,axes=plt.subplots(1,3,figsize=(12,4),layout='constrained')

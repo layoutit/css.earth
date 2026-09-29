@@ -202,7 +202,7 @@ export async function writeGeminiProgram(program: GeminiProgram): Promise<Gemini
 /** Add our own sha256 to every pinned file that is on disk and has none yet, and check the ones that have one.
  *
  * The archive states a byte count and an md5, and `geminiFile` refuses a download that misses either. The sha256 is ours: it
- * is what `assertInputPins` checks before a reduction runs, so a frame that changed under us stops the pipeline instead of
+ * is what `assertInputs` checks before a reduction runs, so a frame that changed under us stops the pipeline instead of
  * quietly reducing into a product. A file that is not on disk is left alone rather than guessed at. */
 export async function digestProgram(program: GeminiProgram, directory: string): Promise<GeminiProgram> {
   const digests = new Map<string, string>();

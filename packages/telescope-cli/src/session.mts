@@ -2,9 +2,8 @@
 import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { sha256File } from '@cssearth/core/node';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { readProductRecord } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord } from '@cssearth/telescope/node';
 import type { ProductRecord } from '@cssearth/telescope';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection } from './query.mts';
 import { type CapabilityAnswer, type QueryInputs } from './query-contract.mts';
@@ -138,8 +137,8 @@ export async function saveExploration(root: string, args: readonly string[], dir
         await mkdir(evidenceDirectory, { recursive: true });
         for (const pin of pins) {
           const original = resolve(root, 'output/telescopes/archive-leads', `${pin}.json`);
-          if ((await sha256File(original)).sha256 !== pin) throw new Error(`Archive discovery evidence changed before exploration was saved: ${pin}`);
-          await copyFile(original, resolve(evidenceDirectory, `${pin}.json`));
+          await copyFile(original, resolve(evidenceDirectory, `${pin}.json`)).catch((error: unknown) => {
+            throw new Error(`Archive discovery evidence ${pin} is missing at ${original}; explore again.`, { cause: error }); });
         }
       }
       await writeFile(temporary, `${JSON.stringify(session, null, 2)}\n`); await rename(temporary, path);
@@ -160,7 +159,7 @@ function readSavedChoice(value: unknown, pick: number) {
   return { args, ...(choice.acquisitionKey === undefined ? {} : { selectedObservation: requireString(choice.observation) }), target: requireString(session.target, 'saved target'), key: choiceKey({ ...(choice.acquisitionKey === undefined ? {} : { acquisitionKey: requireString(choice.acquisitionKey) }), telescope: requireString(choice.telescope), mode: requireString(choice.mode),
     observation: requireString(choice.observation), program: requireString(choice.program) }) };
 }
-interface FilePin { readonly bytes: number; readonly sha256: string }
+interface FilePin { readonly bytes: number }
 interface ExportFile extends FilePin { readonly path: string; readonly original: string }
 interface Artifact {
   readonly file: string; readonly receipt: string; readonly record: string; readonly outputRoot: string;
@@ -186,28 +185,25 @@ async function exportArtifact(root: string, destination: string, artifact: Artif
   const record = await readProductRecord(artifact.record);
   if (!record) throw new Error('Qualification product record is missing.');
   const expected = new Map<string, FilePin>();
-  for (const output of record.outputs) {
-    if (!output.sha256) throw new Error('The producing record has no content digest. Requalify this observation before delivery.');
-    expected.set(resolve(artifact.outputRoot, output.path), { bytes: output.bytes, sha256: output.sha256 });
-  }
+  for (const output of record.outputs) expected.set(resolve(artifact.outputRoot, output.path), { bytes: output.bytes });
   if (!expected.has(artifact.file)) throw new Error('The chosen file is not a qualified output.');
   for (const evidence of record.evidence) {
     const path = resolve(artifact.outputRoot, evidence.receipt);
-    expected.set(path, await sha256File(path));
+    expected.set(path, await fileSize(path));
   }
-  for (const path of [artifact.record, artifact.receipt, ...artifact.extraEvidence]) if (!expected.has(path)) expected.set(path, await sha256File(path));
+  for (const path of [artifact.record, artifact.receipt, ...artifact.extraEvidence]) if (!expected.has(path)) expected.set(path, await fileSize(path));
   const files: ExportFile[] = [], realRoot = await realpath(root);
   for (const [file, pin] of expected) {
     relativeFile(realRoot, await realpath(file));
-    const source = await sha256File(file);
-    if (source.bytes !== pin.bytes || source.sha256 !== pin.sha256) throw new Error(`Artifact changed or did not match its qualification: ${file}`);
+    const source = await fileSize(file).catch(() => null);
+    if (source?.bytes !== pin.bytes) throw new Error(`Artifact ${file} is ${source ? `${source.bytes} bytes` : 'missing'}; its qualification records ${pin.bytes} bytes.`);
     const original = relativeFile(root, file), path = `files/${original}`, target = resolve(destination, path);
     await mkdir(dirname(target), { recursive: true });
     progress(`${reuse ? 'Verifying' : 'Copying'} ${basename(file)} (${(pin.bytes / 1e6).toFixed(1)} MB)`);
     if (!reuse) await copyFile(file, target);
     relativeFile(await realpath(destination), await realpath(target));
-    const copied = await sha256File(target);
-    if (copied.bytes !== pin.bytes || copied.sha256 !== pin.sha256) throw new Error(`Artifact changed or did not match its qualification: ${original}`);
+    const copied = await fileSize(target).catch(() => null);
+    if (copied?.bytes !== pin.bytes) throw new Error(`Delivered ${target} is ${copied ? `${copied.bytes} bytes` : 'missing'}; its qualification records ${pin.bytes} bytes for ${original}.`);
     files.push({ path, original, ...copied });
   }
   return { files, record };
@@ -375,9 +371,9 @@ export async function getSession(root: string, directory: string, pick: number, 
 
 /** Additive saved assessment for a selected family descriptor. It deliberately does not run the strict archive query. */
 export const FAMILY_REQUEST_SESSION_SCHEMA='cssearth-telescope-family-request@1' as const;
-export interface FamilyRequestSession {readonly schema:typeof FAMILY_REQUEST_SESSION_SCHEMA;readonly createdAt:string;readonly original:import('./family-request.mts').NormalizedFamilyRequest;readonly assessment:import('./family-request.mts').FamilyRequestAssessment;readonly status:'matched'|'unresolved'|'refused';readonly descriptor?:{readonly path:string;readonly bytes:number;readonly sha256:string}}
+export interface FamilyRequestSession {readonly schema:typeof FAMILY_REQUEST_SESSION_SCHEMA;readonly createdAt:string;readonly original:import('./family-request.mts').NormalizedFamilyRequest;readonly assessment:import('./family-request.mts').FamilyRequestAssessment;readonly status:'matched'|'unresolved'|'refused';readonly descriptor?:{readonly path:string;readonly bytes:number}}
 export async function saveFamilyRequestSession(directory:string,input:import('./family-request.mts').FamilyScientificRequest,descriptor:unknown,
-  source?:{readonly path:string;readonly bytes:number;readonly sha256:string}):Promise<FamilyRequestSession>{
+  source?:{readonly path:string;readonly bytes:number}):Promise<FamilyRequestSession>{
   const {assessFamilyRequest}=await import('./family-request.mts');const assessment=await assessFamilyRequest(input,descriptor),answers=Object.values(assessment.verdicts).filter((value):value is NonNullable<typeof value>=>value!==undefined),status=answers.some(v=>v.answer==='no')?'refused':answers.length&&answers.every(v=>v.answer==='yes')?'matched':'unresolved';
   return locked(directory,async()=>{const path=resolve(directory,'family-request.json');try{await readFile(path);throw new Error(`${path} already exists. Use a new --out directory.`);}catch(error){if(!hasErrorCode(error,'ENOENT'))throw error;}const saved:FamilyRequestSession={schema:FAMILY_REQUEST_SESSION_SCHEMA,createdAt:new Date().toISOString(),original:assessment.request,assessment,status,...(source?{descriptor:source}:{})};const temporary=`${path}.${randomUUID()}.partial`;try{await writeFile(temporary,`${JSON.stringify(saved,null,2)}\n`);await rename(temporary,path);}finally{await rm(temporary,{force:true});}return saved;});
 }

@@ -8,7 +8,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { EVIDENCE_KINDS, evidenceFor, parseProductRecord } from '@cssearth/telescope';
-import { runDigest } from '@cssearth/telescope/node';
+import { runKey } from '@cssearth/telescope/node';
 import {
   ARCHIVE_FINAL_SCHEMA, ARCHIVE_FINAL_STAGE, archiveCalibration, archiveFinalPath, archiveFinalQualificationRun,
   archiveFinalQualifiedRun, archiveFinalRecordPath, archiveFinalSelection, findDisc, identityDisagreements,
@@ -191,7 +191,7 @@ test('every qualified program has a record of its own run, over the files it pin
     // The record carries the selection it was qualified with, so a later reader can rebuild it from the program and see that
     // nothing has moved: the sizes alone would not notice a component pointed at another chip of the same file.
     assert.deepEqual(record.parameters.selection, archiveFinalSelection(program), id);
-    assert.equal(runDigest(archiveFinalQualifiedRun(record)), runDigest(archiveFinalQualificationRun(program)), id);
+    assert.equal(runKey(archiveFinalQualifiedRun(record)), runKey(archiveFinalQualificationRun(program)), id);
     const science = program.components.find(component => component.role === 'science')!.file!;
     const origin = evidenceFor(record, science, 'archive-origin');
     assert.equal(origin.length, 1, `${id}: one archive-origin entry, naming the science product`);

@@ -1,5 +1,4 @@
 /** F14 HEALPix: Astropy reads FITS metadata; astropy-healpix owns native pixel indexing. */
-import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { astroqueryToolchain } from '@cssearth/telescope/node';

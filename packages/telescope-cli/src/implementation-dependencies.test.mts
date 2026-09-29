@@ -3,52 +3,25 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { dirname, resolve } from 'node:path';
+import { dirname, relative, resolve } from 'node:path';
 import { WORKSPACE } from '@cssearth/telescope/node';
-import { implementationFingerprint } from './implementation-dependencies.mts';
-import { SOLAR_GEOMETRY_MODULE, sphereImplementationFiles } from './sphere/sphere.mts';
+import { build } from 'esbuild';
+import { followedWorkspaceSources } from './implementation-dependencies.mts';
 
-test('implementation identity follows transitive local TypeScript imports', async () => {
+/** The workspace sources an entry bundles when the followed workspace entries resolve to their sources. */
+async function closure(root: string, entries: readonly string[]): Promise<string[]> {
+  const result = await build({ absWorkingDir: root, entryPoints: entries.map(entry => resolve(root, entry)), bundle: true, write: false, metafile: true, platform: 'node', format: 'esm',
+    packages: 'external', conditions: ['types'], treeShaking: false, logLevel: 'silent', outdir: resolve(root, '.closure-output'), plugins: [followedWorkspaceSources(root)] });
+  return Object.keys(result.metafile.inputs).map(path => relative(root, resolve(root, path))).filter(path => !path.startsWith('..')).sort();
+}
+
+test('the closure follows transitive local TypeScript imports', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-closure-'));
   try {
     await writeFile(resolve(root, 'entry.mts'), "import { value } from './helper.mts'; export const answer=value;\n");
     await writeFile(resolve(root, 'helper.mts'), 'export const value=1;\n');
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'helper.mts']);
-    await writeFile(resolve(root, 'helper.mts'), 'export const value=2;\n');
-    const after = await implementationFingerprint(root, ['entry.mts']);
-    assert.notEqual(after.sha256, before.sha256);
-  } finally { await rm(root, { recursive: true, force: true }); }
-});
-
-test('production-shaped two-entry fingerprints retain both dependency closures without writing bundles', async () => {
-  const root = await mkdtemp(resolve(tmpdir(), 'implementation-multiple-'));
-  try {
-    await writeFile(resolve(root, 'dispatcher.mts'), "import './shared.mts'; export const dispatch=true;\n");
-    await writeFile(resolve(root, 'owner.mts'), "import './shared.mts'; import './science.mts'; export const owner=true;\n");
-    await writeFile(resolve(root, 'shared.mts'), 'export const shared=1;\n');
-    await writeFile(resolve(root, 'science.mts'), 'export const method=1;\n');
-    const found = await implementationFingerprint(root, ['dispatcher.mts', 'owner.mts']);
-    assert.deepEqual(found.files.map(file => file.path), ['dispatcher.mts', 'owner.mts', 'science.mts', 'shared.mts']);
-    await assert.rejects(readFile(resolve(root, '.fingerprint-output/dispatcher.js')), /ENOENT/u);
-  } finally { await rm(root, { recursive: true, force: true }); }
-});
-
-test('fingerprints generated-module imports through authored sources without a dist build', async () => {
-  const root = await mkdtemp(resolve(tmpdir(), 'implementation-authored-'));
-  try {
-    await writeFile(resolve(root, 'entry.mts'), "import { value } from './dist/universe.js'; export const answer=value;\n");
-    await mkdir(resolve(root, 'universe'), { recursive: true });
-    await writeFile(resolve(root, 'universe/index.ts'), 'export const value=1;\n');
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'universe/index.ts']);
-    await mkdir(resolve(root, 'dist'));
-    await writeFile(resolve(root, 'dist/universe.js'), 'export const value=999;\n');
-    const withBuild = await implementationFingerprint(root, ['entry.mts']);
-    assert.equal(withBuild.sha256, before.sha256);
-    await writeFile(resolve(root, 'universe/index.ts'), 'export const value=2;\n');
-    const after = await implementationFingerprint(root, ['entry.mts']);
-    assert.notEqual(after.sha256, before.sha256);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', 'helper.mts']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -59,10 +32,8 @@ test('the runtime-source reader is followed into @cssearth/bake/runtime-source, 
     await mkdir(resolve(root, 'packages/bake/src/runtime-source'), { recursive: true });
     await writeFile(resolve(root, 'packages/bake/src/runtime-source/runtime-source-graph.ts'), 'export const parseRuntimeSource=()=>1;\n');
     await writeFile(resolve(root, 'packages/bake/src/runtime-source/index.ts'), "export * from './runtime-source-graph.ts';\n");
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/bake/src/runtime-source/index.ts', 'packages/bake/src/runtime-source/runtime-source-graph.ts']);
-    await writeFile(resolve(root, 'packages/bake/src/runtime-source/runtime-source-graph.ts'), 'export const parseRuntimeSource=()=>2;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', 'packages/bake/src/runtime-source/index.ts', 'packages/bake/src/runtime-source/runtime-source-graph.ts']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -78,10 +49,8 @@ test('the prepared, asset, source and contract libraries are followed into their
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
       await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
     }
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
-    await writeFile(resolve(root, 'packages/bake/src/delivery/value.ts'), 'export const v1=10;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -96,11 +65,10 @@ test('the navigation, surface-preview, preparation and thread-pool libraries are
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
       await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
     }
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
     for (const [index, [, directory]] of entries.entries()) {
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index + 10};\n`);
-      assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256, directory);
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
     }
   } finally { await rm(root, { recursive: true, force: true }); }
@@ -116,11 +84,10 @@ test('the layered-provenance library is followed into its bake sources, as when 
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
       await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
     }
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
     for (const [index, [, directory]] of entries.entries()) {
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index + 10};\n`);
-      assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256, directory);
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
     }
   } finally { await rm(root, { recursive: true, force: true }); }
@@ -134,10 +101,8 @@ test('the facility-render poses are followed into their bake source, as when the
     await mkdir(resolve(root, directory), { recursive: true });
     await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=0;\n');
     await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
-    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=10;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -149,10 +114,8 @@ test('the asset-publication commands are followed into their bake source, as whe
     await mkdir(resolve(root, directory), { recursive: true });
     await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=0;\n');
     await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
-    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=10;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -164,10 +127,8 @@ test('the site-assets preparers are followed into their bake source, as when the
     await mkdir(resolve(root, directory), { recursive: true });
     await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=0;\n');
     await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
-    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=10;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -179,10 +140,8 @@ test('the astronomy package loader is followed into its bake source, as when it 
     await mkdir(resolve(root, directory), { recursive: true });
     await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=0;\n');
     await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
-    await writeFile(resolve(root, directory, 'value.ts'), 'export const v0=10;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', `${directory}/index.ts`, `${directory}/value.ts`]);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -196,11 +155,10 @@ test('the provenance records and the runtime asset closure are followed into @cs
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
       await writeFile(resolve(root, directory, 'index.ts'), "export * from './value.ts';\n");
     }
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', ...entries.flatMap(([, directory]) => [`${directory}/index.ts`, `${directory}/value.ts`])].sort());
     for (const [index, [, directory]] of entries.entries()) {
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index + 10};\n`);
-      assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256, directory);
       await writeFile(resolve(root, directory, 'value.ts'), `export const v${index}=${index};\n`);
     }
   } finally { await rm(root, { recursive: true, force: true }); }
@@ -209,8 +167,8 @@ test('the provenance records and the runtime asset closure are followed into @cs
 test('the catalogue readers are followed into @cssearth/catalog, as when the spatial citations and navigation imported them by path', async () => {
   const CATALOGUE = ['packages/catalog/src/clusters.ts', 'packages/catalog/src/spatial-relations.ts', 'packages/catalog/src/spatial.ts'];
   for (const entry of ['packages/bake/src/sources/spatial-source-citations.ts', 'site/build/prepare/prepare-facilities.mts', 'packages/bake/src/navigation/navigation-destinations.ts']) {
-    const paths = new Set((await implementationFingerprint(WORKSPACE, [entry])).files.map(file => file.path));
-    for (const path of CATALOGUE) assert.ok(paths.has(path), `${entry} identity names ${path}`);
+    const paths = new Set((await closure(WORKSPACE, [entry])));
+    for (const path of CATALOGUE) assert.ok(paths.has(path), `${entry} bundle names ${path}`);
   }
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-catalog-'));
   try {
@@ -218,10 +176,8 @@ test('the catalogue readers are followed into @cssearth/catalog, as when the spa
     await mkdir(resolve(root, 'packages/catalog/src'), { recursive: true });
     await writeFile(resolve(root, 'packages/catalog/src/spatial.ts'), 'export const parsePreparedGalaxyCatalog=()=>1;\n');
     await writeFile(resolve(root, 'packages/catalog/src/index.ts'), "export * from './spatial.js';\n");
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/catalog/src/index.ts', 'packages/catalog/src/spatial.ts']);
-    await writeFile(resolve(root, 'packages/catalog/src/spatial.ts'), 'export const parsePreparedGalaxyCatalog=()=>2;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', 'packages/catalog/src/index.ts', 'packages/catalog/src/spatial.ts']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -233,10 +189,8 @@ test('the FITS reader package is followed into its sources, as when it was a loc
     await writeFile(resolve(root, 'packages/fits/src/fits.ts'), 'export const readFitsHdus=()=>1;\n');
     await writeFile(resolve(root, 'packages/fits/src/index.ts'), "export { readFitsHdus } from './fits.js';\n");
     await writeFile(resolve(root, 'packages/fits/src/node/index.ts'), 'export const readFitsFileHdus=()=>2;\n');
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/fits/src/fits.ts', 'packages/fits/src/index.ts', 'packages/fits/src/node/index.ts']);
-    await writeFile(resolve(root, 'packages/fits/src/fits.ts'), 'export const readFitsHdus=()=>3;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', 'packages/fits/src/fits.ts', 'packages/fits/src/index.ts', 'packages/fits/src/node/index.ts']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -252,30 +206,25 @@ test('the source catalogue, manifest checks and main entry are followed into @cs
     await mkdir(resolve(root, 'packages/objects/src/registry'), { recursive: true });
     await writeFile(resolve(root, 'packages/objects/src/registry/world-rotation.ts'), 'export const parseObjectDescriptor=()=>4;\n');
     await writeFile(resolve(root, 'packages/objects/src/index.ts'), "export { parseObjectDescriptor } from './registry/world-rotation.js';\n");
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/objects/src/index.ts', 'packages/objects/src/node/index.ts',
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', 'packages/objects/src/index.ts', 'packages/objects/src/node/index.ts',
       'packages/objects/src/registry/world-rotation.ts', 'packages/objects/src/sources/catalog.ts', 'packages/objects/src/sources/index.ts']);
     await writeFile(resolve(root, 'packages/objects/src/sources/catalog.ts'), 'export const parseSourceBinding=()=>3;\n');
-    const changedSources = await implementationFingerprint(root, ['entry.mts']);
-    assert.notEqual(changedSources.sha256, before.sha256);
+    const changedSources = await closure(root, ['entry.mts']);
     // A dependency of the main entry is an owner too: the renderer's world-rotation validation lives there now.
-    await writeFile(resolve(root, 'packages/objects/src/registry/world-rotation.ts'), 'export const parseObjectDescriptor=()=>5;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, changedSources.sha256);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
 test('the telescope library is followed into its sources, as when its modules sat under tools/objects', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-telescope-'));
   try {
-    await writeFile(resolve(root, 'entry.mts'), "import { parseProductRecord } from '@cssearth/telescope'; import { runDigest } from '@cssearth/telescope/node';\nexport const used=[parseProductRecord,runDigest];\n");
+    await writeFile(resolve(root, 'entry.mts'), "import { parseProductRecord } from '@cssearth/telescope'; import { runKey } from '@cssearth/telescope/node';\nexport const used=[parseProductRecord,runKey];\n");
     await mkdir(resolve(root, 'packages/telescope/src/node'), { recursive: true });
     await writeFile(resolve(root, 'packages/telescope/src/product-record.ts'), 'export const parseProductRecord=()=>1;\n');
     await writeFile(resolve(root, 'packages/telescope/src/index.ts'), "export { parseProductRecord } from './product-record.js';\n");
-    await writeFile(resolve(root, 'packages/telescope/src/node/index.ts'), 'export const runDigest=()=>2;\n');
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/telescope/src/index.ts', 'packages/telescope/src/node/index.ts', 'packages/telescope/src/product-record.ts']);
-    await writeFile(resolve(root, 'packages/telescope/src/product-record.ts'), 'export const parseProductRecord=()=>3;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
+    await writeFile(resolve(root, 'packages/telescope/src/node/index.ts'), 'export const runKey=()=>2;\n');
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', 'packages/telescope/src/index.ts', 'packages/telescope/src/node/index.ts', 'packages/telescope/src/product-record.ts']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -289,29 +238,12 @@ test('the shared object libraries are followed into their bake sources, as when 
       await writeFile(resolve(root, `packages/bake/src/objects/${topic}/library.ts`), 'export const method=1;\n');
       await writeFile(resolve(root, `packages/bake/src/objects/${topic}/index.ts`), "export * from './library.ts';\n");
     }
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', ...topics.flatMap(topic => [`packages/bake/src/objects/${topic}/index.ts`, `packages/bake/src/objects/${topic}/library.ts`]).sort()]);
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', ...topics.flatMap(topic => [`packages/bake/src/objects/${topic}/index.ts`, `packages/bake/src/objects/${topic}/library.ts`]).sort()]);
     for (const topic of topics) {
       await writeFile(resolve(root, `packages/bake/src/objects/${topic}/library.ts`), 'export const method=2;\n');
-      const after = await implementationFingerprint(root, ['entry.mts']);
-      assert.notEqual(after.sha256, before.sha256, topic);
       await writeFile(resolve(root, `packages/bake/src/objects/${topic}/library.ts`), 'export const method=1;\n');
     }
-  } finally { await rm(root, { recursive: true, force: true }); }
-});
-
-test('a workspace command the operation runs as a process is followed into its source, as when the operation imported it', async () => {
-  const root = await mkdtemp(resolve(tmpdir(), 'implementation-dispatch-'));
-  try {
-    await mkdir(resolve(root, 'workspace-commands'), { recursive: true });
-    await writeFile(resolve(root, 'entry.mts'), "import { BAKE } from './workspace-commands/bake.mts'; export const run = BAKE;\n");
-    await writeFile(resolve(root, 'workspace-commands/bake.mts'), "export const BAKE = { script: 'dist/bake.js', source: 'bake.mts' };\n");
-    await writeFile(resolve(root, 'bake.mts'), "import { step } from './step.mts'; export const bake = step;\n");
-    await writeFile(resolve(root, 'step.mts'), 'export const step = 1;\n');
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['bake.mts', 'entry.mts', 'step.mts', 'workspace-commands/bake.mts']);
-    await writeFile(resolve(root, 'step.mts'), 'export const step = 2;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -325,47 +257,31 @@ test('the telescope command package is followed into its sources, as when its mo
     await writeFile(resolve(root, 'packages/telescope-cli/src/query.mts'), "import { step } from './step.mts'; export const query = step;\n");
     await writeFile(resolve(root, 'packages/telescope-cli/src/step.mts'), 'export const step = 1;\n');
     await writeFile(resolve(root, 'packages/telescope-cli/src/archives/ledger.mts'), 'export const ledger = 1;\n');
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', 'packages/telescope-cli/src/archives/ledger.mts', 'packages/telescope-cli/src/query.mts', 'packages/telescope-cli/src/step.mts'],
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', 'packages/telescope-cli/src/archives/ledger.mts', 'packages/telescope-cli/src/query.mts', 'packages/telescope-cli/src/step.mts'],
       'a nested subpath (archives/ledger) is followed as a single-segment one is');
-    await writeFile(resolve(root, 'packages/telescope-cli/src/archives/ledger.mts'), 'export const ledger = 2;\n');
-    const ledgerChanged = await implementationFingerprint(root, ['entry.mts']);
-    assert.notEqual(ledgerChanged.sha256, before.sha256);
-    await writeFile(resolve(root, 'packages/telescope-cli/src/step.mts'), 'export const step = 2;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, ledgerChanged.sha256);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
 test('a telescope command subpath is followed to the source its package exports declare, digits included (imaging/image3)', async () => {
   const specifier = '@cssearth/telescope-cli/archives/jwst/imaging/image3', source = 'packages/telescope-cli/src/archives/jwst/imaging/image3.mts';
-  const composite = await implementationFingerprint(WORKSPACE, ['packages/telescope-cli/src/sky/sky-band-composite.mts']);
-  assert.ok(composite.files.some(file => file.path === source), 'the observation composite identity holds the JWST image3 source it imports');
+  const composite = await closure(WORKSPACE, ['packages/telescope-cli/src/sky/sky-band-composite.mts']);
+  assert.ok(composite.includes(source), 'the observation composite bundles the JWST image3 source it imports');
   const root = await mkdtemp(resolve(tmpdir(), 'implementation-telescope-cli-exports-'));
   try {
     await mkdir(resolve(root, dirname(source)), { recursive: true });
     await writeFile(resolve(root, 'packages/telescope-cli/package.json'), await readFile(resolve(WORKSPACE, 'packages/telescope-cli/package.json')));
     await writeFile(resolve(root, 'entry.mts'), `import { stage } from '${specifier}'; export const used = stage;\n`);
     await writeFile(resolve(root, source), 'export const stage = 1;\n');
-    const before = await implementationFingerprint(root, ['entry.mts']);
-    assert.deepEqual(before.files.map(file => file.path), ['entry.mts', source], 'followed through the real exports entry');
-    await writeFile(resolve(root, source), 'export const stage = 2;\n');
-    assert.notEqual((await implementationFingerprint(root, ['entry.mts'])).sha256, before.sha256, 'a change to image3 moves the identity');
+    const found = await closure(root, ['entry.mts']);
+    assert.deepEqual(found, ['entry.mts', source], 'followed through the real exports entry');
     await writeFile(resolve(root, 'entry.mts'), "import { stage } from '@cssearth/telescope-cli/archives/jwst/imaging/unexported'; export const used = stage;\n");
-    assert.deepEqual((await implementationFingerprint(root, ['entry.mts'])).files.map(file => file.path), ['entry.mts'], 'an unexported subpath stays external');
+    assert.deepEqual((await closure(root, ['entry.mts'])), ['entry.mts'], 'an unexported subpath stays external');
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('the sphere lane identity follows the native camera, resize input and carried values it renders with, as when they sat under tools/experiments/native-scroll', async () => {
-  const lane = await implementationFingerprint(WORKSPACE, ['packages/telescope-cli/src/sphere/sphere-html.mts']);
-  const paths = lane.files.map(file => file.path);
+test('the sphere lane bundle follows the native camera, resize input and carried values it renders with, as when they sat under tools/experiments/native-scroll', async () => {
+  const paths = await closure(WORKSPACE, ['packages/telescope-cli/src/sphere/sphere-html.mts']);
   for (const name of ['carry-values', 'css-values', 'native-camera', 'resize-input'])
-    assert.ok(paths.includes(`packages/telescope-cli/src/sphere/native-scroll/${name}.mts`), `${name} joins the sphere lane identity`);
-});
-
-test('the sphere implementation identity covers the solar geometry the lane no longer imports', () => {
-  assert.equal(SOLAR_GEOMETRY_MODULE, 'src/platform/solar-geometry.mts');
-  const files = sphereImplementationFiles({ 'packages/telescope-cli/src/sphere/sphere-lane.mts': {}, '<runtime>': {} });
-  assert.ok(files.includes('src/platform/solar-geometry.mts'));
-  assert.ok(files.includes('packages/telescope-cli/src/sphere/sphere-lane.mts'));
-  assert.ok(!files.some(path => path.startsWith('<')));
+    assert.ok(paths.includes(`packages/telescope-cli/src/sphere/native-scroll/${name}.mts`), `${name} joins the sphere lane bundle`);
 });

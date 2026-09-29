@@ -7,7 +7,7 @@ import { fileSize } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/telescope';
 import { parseBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { assertBodyMapPlanes, bodyMapProductRecord, formatProductRecord } from './body-map-publication.mts';
-import { sha256, sha256File } from '@cssearth/core/node';
+import { VERSION } from './help.mts';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { projectWithPlanetMapper } from '@cssearth/telescope/node';
 import { canonical } from '@cssearth/telescope/node';
@@ -35,7 +35,7 @@ export function parseGeometry(raw:unknown,root:string){
   if(method==='disc'&&!evidencePin)throw new TypeError('Disc registration requires an evidence file');
   return {observer:requireString(g.observer),kernels,registration:{method,explanation,...(parameters?{parameters}: {}),...(evidencePin?{evidence:evidencePin}:{})},width,height,maximumEmissionDegrees};
 }
-async function checkPins(inputs:readonly ProductInput[]){for(const input of inputs){const actual=await (input.sha256?sha256File(input.identity):fileSize(input.identity));if(actual.bytes!==input.bytes||input.sha256&&'sha256'in actual&&actual.sha256!==input.sha256)throw new Error(`Input content pin mismatch: ${input.identity}`);}}
+async function checkPins(inputs:readonly ProductInput[]){for(const input of inputs){const actual=await fileSize(input.identity).catch(()=>null);if(actual?.bytes!==input.bytes)throw new Error(`Input ${input.identity} (${input.role}) is ${actual?`${actual.bytes} bytes`:'missing'}; the record says ${input.bytes} bytes.`);}}
 
 export async function validateProjectionSource(source:Awaited<ReturnType<typeof verifiedProduct>>){
   if(source.record.stage!=='telescope-output'||!source.record.outputs.some(o=>o.path==='image.fits'))throw new TypeError('Body-map export requires a telescope image output.product.json');
@@ -45,9 +45,9 @@ export async function validateProjectionSource(source:Awaited<ReturnType<typeof 
   const deliveryPins=source.record.inputs.filter(i=>i.role==='delivery');
   if(deliveryPins.length!==1)throw new Error('Measurement must name exactly one source delivery');
   const deliveryPin=deliveryPins[0]!,d=await delivery(deliveryPin.identity);
-  if(d.pin.bytes!==deliveryPin.bytes||deliveryPin.sha256&&d.pin.sha256!==deliveryPin.sha256)throw new Error('Measurement source delivery changed');
+  if(d.pin.bytes!==deliveryPin.bytes)throw new Error(`Measurement source delivery ${deliveryPin.identity} is ${d.pin.bytes} bytes; the measurement records ${deliveryPin.bytes}.`);
   const context=sourceContext(source.record.parameters);if(canonical(context)!==canonical(d.context))throw new Error('Measurement source context differs from its delivery');
-  const inputs:ProductInput[]=[{role:'measurement record',identity:source.file,...source.pin},...source.record.outputs.map(o=>({role:'measurement output',identity:localOutput(source.root,o.path),bytes:o.bytes,...(o.sha256?{sha256:o.sha256}:{})})),...source.record.inputs];
+  const inputs:ProductInput[]=[{role:'measurement record',identity:source.file,...source.pin},...source.record.outputs.map(o=>({role:'measurement output',identity:localOutput(source.root,o.path),bytes:o.bytes})),...source.record.inputs];
   await checkPins(inputs);
   return {source,d,context,selection,definition,metadata,measurement,inputs};
 }
@@ -75,14 +75,13 @@ export async function projectOutput(recordPath:string,geometryPath:string,output
       ...(Array.isArray(band)?{wavelengthIntervalsMicrometres:[band]}:selection.kind==='image'&&Array.isArray(spectral.centersMicrometres)&&typeof selection.plane==='number'?{wavelengthIntervalsMicrometres:[[spectral.centersMicrometres[selection.plane],spectral.centersMicrometres[selection.plane]]]}:{}),
       method:{measurement,selection:Object.fromEntries(Object.entries(selection).filter(([key])=>key!=='hdu')),projection:{owner:'PlanetMapper',interpolation:'nearest',latitude:'planetocentric',shape:nav.shape,uncertainty:nav.uncertainty}},source:source.file},
       frame:{body:d.target,radiusKm:nav.radiusKm,rotation:{model:rotation.file,bodyCode:nav.bodyCode}},grid:{width:geometry.width,height:geometry.height,longitude:'east-positive-from-0',rows:'north-to-south'},
-      planes:{file:'map.fits',sha256:sha256(plane),value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:geometry.maximumEmissionDegrees,missing:'NaN'},
+      planes:{file:'map.fits',value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:geometry.maximumEmissionDegrees,missing:'NaN'},
       observations:[{id:nav.observation,telescope:d.telescope,instrument:nav.instrument,midTimeJd:nav.midTimeJd,startTimeJd:nav.startTimeJd,endTimeJd:nav.endTimeJd,startIso:nav.startIso,endIso:nav.endIso,exposureSeconds:nav.exposureSeconds,rangeKm:nav.rangeKm,subObserver:nav.subObserver,angularResolution:resolution}]});
     assertBodyMapPlanes(plane,product);const bytes=Buffer.from(JSON.stringify(product,null,2)+'\n');await writeFile(resolve(staging,'map.fits.body-map.json'),bytes);
     await writeFile(resolve(staging,'navigation.json'),JSON.stringify({...nav,sourceContext:context,sourceResolution:{angularResolutionArcsec:facts.angularResolutionArcsec??null,evidence:facts.resolutionEvidence??[]},publication:'not-evaluated'},null,2)+'\n');
     const names=['navigation.json','texture.png','poles.png','figure.png'],extras=await Promise.all(names.map(async path=>({path,bytes:await readFile(resolve(staging,path))})));
-    const implementation=sha256(Buffer.concat(await Promise.all(['projection.mts','../../../packages/telescope/src/node/projection.ts','../../../packages/bake/src/objects/layers/observation/body-maps/body-map-product.ts','body-map-publication.mts'].map(path=>readFile(new URL(path,import.meta.url))))));
-    const software=[{name:'cssEarth projection',version:implementation},...Object.entries(requireRecord(nav.software)).map(([name,v])=>({name,version:requireString(v)}))];
-    const record=bodyMapProductRecord(product,plane,bytes,inputs,software,(await astroqueryToolchain()).digest,extras);
+    const software=[{name:'cssEarth projection',version:VERSION},...Object.entries(requireRecord(nav.software)).map(([name,v])=>({name,version:requireString(v)}))];
+    const record=bodyMapProductRecord(product,plane,bytes,inputs,software,extras);
     await checkPins(inputs);await writeFile(resolve(staging,'map.fits.product.json'),formatProductRecord(record));
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,map:resolve(destination,'map.fits'),figure:resolve(destination,'figure.png'),receipt:resolve(destination,'map.fits.product.json'),sourceContext:context,registration:geometry.registration,publication:'not-evaluated' as const};

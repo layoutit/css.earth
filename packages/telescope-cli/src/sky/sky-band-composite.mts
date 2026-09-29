@@ -3,7 +3,7 @@
  * bands, a grid, one background and one peak percentile for every band, and one common display.
  * Each band is divided by its own measured range, the usual survey false-colour practice, because
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
-import { sha256, sha256File } from '@cssearth/core/node';
+import { plainName } from '@cssearth/telescope/node';
 import { createWriteStream } from 'node:fs';
 import { mkdir, readFile, rename, rm, writeFile, stat } from 'node:fs/promises';
 import { Readable } from 'node:stream';
@@ -106,7 +106,6 @@ export interface SkyBandComposite {
   readonly pointSources?: 'mask';
 }
 
-const digest = (value: unknown, label: string) => { const text = requireString(value, label); if (!/^[0-9a-f]{64}$/u.test(text)) throw new TypeError(`${label} must be a SHA-256.`); return text; };
 const repositoryPath = (value: unknown) => {
   const path = requireString(value, 'Tile list path');
   if (path.startsWith('/') || path.split('/').includes('..') || !path.endsWith('.json')) throw new TypeError('Tile lists are repository-relative JSON files.');
@@ -169,9 +168,11 @@ export interface SkyBandIo {
   readonly progress?: (message: string) => void;
 }
 
-/** The cache names a hips2fits response by its request URL. */
+/** The cache names a hips2fits response by the survey and the grid it was asked for. */
+export const hips2fitsCachePath = (grid: SkyGrid, hips: string, cache: string): string => resolve(cache, 'hips2fits',
+  `${plainName(hips, `${grid.centerIcrsDegrees[0]}_${grid.centerIcrsDegrees[1]}`, `fov${grid.fovDeg}`, `${grid.width}x${grid.height}`)}.fits`);
 async function hips2fitsBytes(grid: SkyGrid, band: { band: string; bytes: number }, hips: string, cache: string) {
-  const url = skyBandUrl(grid, hips), path = resolve(cache, 'hips2fits', `${sha256(url)}.fits`);
+  const url = skyBandUrl(grid, hips), path = hips2fitsCachePath(grid, hips, cache);
   let bytes = await readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
   if (bytes === null) {
     const response = await fetch(url, { signal: AbortSignal.timeout(600_000) });
@@ -208,8 +209,8 @@ export async function acquireMastProduct(product: string, cache: string, expecte
   const part = resolve(cache, 'mast', `${product}.part`);
   await mkdir(dirname(part), { recursive: true });
   await pipeline(Readable.fromWeb(response.body as import('node:stream/web').ReadableStream), createWriteStream(part));
-  const pin = await sha256File(part);
-  if (expected && pin.bytes !== expected.bytes) { await rm(part, { force: true }); throw new Error(`Changed MAST product: ${url}`); }
+  const pin = { bytes: (await stat(part)).size };
+  if (expected && pin.bytes !== expected.bytes) { await rm(part, { force: true }); throw new Error(`MAST product ${url} is ${pin.bytes} bytes; the recipe records ${expected.bytes}.`); }
   await rename(part, resolve(cache, 'mast', product));
   return pin;
 }
@@ -429,6 +430,6 @@ export async function composeSkyBandPng(recipePin: { readonly path: string }, io
   const composed = await composeSkyBands(recipe, io);
   const bytes = await sharp(composed.rgb, { raw: { width: composed.width, height: composed.height, channels: composed.channels } })
     .png({ compressionLevel: 9, adaptiveFiltering: false }).toBuffer();
-  return { bytes, sha256: sha256(bytes), width: composed.width, height: composed.height, wcs: composed.wcs, missingPixels: composed.missingPixels,
-    evidence: { ...composed.evidence, recipe: recipePin, output: { sha256: sha256(bytes), bytes: bytes.length, format: 'png', channels: composed.channels, bitDepth: 8 } } };
+  return { bytes, width: composed.width, height: composed.height, wcs: composed.wcs, missingPixels: composed.missingPixels,
+    evidence: { ...composed.evidence, recipe: recipePin, output: { bytes: bytes.length, format: 'png', channels: composed.channels, bitDepth: 8 } } };
 }

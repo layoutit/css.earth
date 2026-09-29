@@ -1,9 +1,8 @@
 /** Bounded live archive leads. These are observations to investigate, never acquisition or science qualifications. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sha256 } from '@cssearth/core/node';
-import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { astroqueryToolchainSync } from '@cssearth/telescope/node';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
+import { astroqueryToolchainSync, plainName } from '@cssearth/telescope/node';
 import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from './archives/keck/koa.mts';
 import { CADC_TAP, query as cadcQuery } from './archives/gemini/cadc.mts';
 import { cadcFrame, FRAME_COLUMNS, FRAME_JOIN } from './archives/gemini/archive.mts';
@@ -33,7 +32,7 @@ export interface KeckSourceLead {
   readonly evidence: string;
 }
 export interface GeminiSourceLead {
-  readonly name: string; readonly uri: string; readonly bytes: number; readonly md5: string;
+  readonly name: string; readonly uri: string; readonly bytes: number;
   readonly targetName: string; readonly instrument: string; readonly telescope: string;
   readonly observation: string; readonly dataRelease: string; readonly evidence: string;
 }
@@ -52,11 +51,17 @@ const namesOf = (target: TargetCatalogueEntry) => [...new Set([target.name, ...t
 const message = (error: unknown) => error instanceof Error ? error.message : String(error);
 const column = (row: Readonly<Record<string, string>>, name: string): string | undefined =>
   Object.entries(row).find(([key]) => key.toLowerCase() === name)?.[1];
-export async function saveArchiveLeadEvidence(root: string, source: string, request: unknown, rows: unknown): Promise<string> {
-  const directory = resolve(root, 'output/telescopes/archive-leads'), text = `${JSON.stringify({ source, request, rows }, null, 2)}\n`, digest = sha256(text);
+/** Save one archive answer and return its name. Each answer keeps its own file, named by the archive host and the moment it
+ * was saved; none is overwritten. */
+export async function saveArchiveLeadEvidence(root: string, source: string, request: unknown, rows: unknown, now = new Date()): Promise<string> {
+  const directory = resolve(root, 'output/telescopes/archive-leads'), text = `${JSON.stringify({ source, request, rows }, null, 2)}\n`;
+  const host = URL.canParse(source) ? new URL(source).hostname : source, stem = plainName(host, now.toISOString().replace(/[^0-9]/gu, ''));
   await mkdir(directory, { recursive: true });
-  await writeFile(resolve(directory, `${digest}.json`), text);
-  return digest;
+  for (let attempt = 0; ; attempt++) {
+    const name = attempt ? `${stem}-${attempt}` : stem;
+    try { await writeFile(resolve(directory, `${name}.json`), text, { flag: 'wx' }); return name; }
+    catch (error) { if (!hasErrorCode(error, 'EEXIST') || attempt >= 999) throw error; }
+  }
 }
 const save = saveArchiveLeadEvidence;
 
@@ -117,7 +122,7 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
     instruments, sources: sources.sort((a,b)=>a.instrument.localeCompare(b.instrument)||a.koaid.localeCompare(b.koaid)), evidence };
 }
 
-/** CADC mirrors Gemini's public raw files and supplies stable artifact URI, size and MD5. */
+/** CADC mirrors Gemini's public raw files and supplies a stable artifact URI and size. */
 export async function searchGeminiLeads(root: string, target: TargetCatalogueEntry, query: typeof cadcQuery = cadcQuery,
   filter?: ArchiveLeadFilter): Promise<ArchiveLeadService> {
   const names = namesOf(target), searched = names.slice(0, 12), limit = 500;
@@ -143,7 +148,7 @@ export async function searchGeminiLeads(root: string, target: TargetCatalogueEnt
       const telescope = frame.name.startsWith('N') ? 'Gemini North' : 'Gemini South', groupKey = `${telescope}/${instrument}`;
       const group = groups.get(groupKey) ?? { telescope, instrument, records: 0, sample: frame.name };
       group.records++; groups.set(groupKey, group);
-      if (group.records <= 3) sources.push({ name: frame.name, uri: frame.uri, bytes: frame.bytes, md5: frame.md5,
+      if (group.records <= 3) sources.push({ name: frame.name, uri: frame.uri, bytes: frame.bytes,
         targetName: name, instrument, telescope, observation: frame.observation, dataRelease: frame.dataRelease, evidence: pin });
     }
     const instruments = [...groups.values()].sort((a, b) => b.records - a.records || a.instrument.localeCompare(b.instrument));

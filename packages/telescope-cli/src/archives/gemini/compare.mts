@@ -36,7 +36,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { positionalArguments } from '@cssearth/core';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
-import { addProductEvidence, assertInputPins, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { addProductEvidence, assertInputs, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { productRecordPath, type EvidenceKind, type ProductInput, type ProductRecord } from '@cssearth/telescope';
 import { PROGRAMS, readGeminiProgram, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
@@ -394,7 +394,7 @@ export async function checkAgainstArchive(program: GeminiProgram, work: string, 
       + `frames, which nothing here has established. Re-run \`reduce ${stage}\` for this program.`);
 
   const archivePath = await geminiFile(set.product, rawDirectory(work), sources);
-  await assertInputPins([archiveMasterPin(set.product)], new Map([[set.product.name, archivePath]]));
+  await assertInputs([archiveMasterPin(set.product)], new Map([[set.product.name, archivePath]]));
 
   const { extensions, total } = await compareOnDetector(resolve(directory, product), archivePath);
   const path = await writeReceipt(receiptPath(program.id, product), {

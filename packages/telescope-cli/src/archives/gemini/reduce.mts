@@ -25,7 +25,7 @@
  * halves are interleaved rather than cut in the middle, so each holds dither positions from across the sequence instead of
  * one end of it.
  *
- * Every stage refuses inputs that are not the pinned ones (`assertInputPins`) **before** DRAGONS reads anything, writes a
+ * Every stage refuses inputs that are not the pinned ones (`assertInputs`) **before** DRAGONS reads anything, writes a
  * `cssearth-telescope-product@1` record beside its product, and is skipped when that record says this same run already made
  * the files that are there (`sameRun`). Nothing needs a display: DRAGONS' interactive tools are not used and matplotlib is
  * forced to a non-interactive backend by the toolchain. */
@@ -35,7 +35,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '@cssearth/core';
 import { productRecordPath, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/telescope';
-import { readProductRecord, sameRun, writeProductRecord, assertInputPins, WORKSPACE } from '@cssearth/telescope/node';
+import { readProductRecord, sameRun, writeProductRecord, assertInputs, WORKSPACE } from '@cssearth/telescope/node';
 import { digestProgram, readGeminiProgram, type GeminiFrame, type GeminiProgram } from './archive.mts';
 import { geminiFile } from './cadc.mts';
 import { dragonsToolchainVersions, geminiToolchain, type GeminiToolchain } from './toolchain.mts';
@@ -182,7 +182,7 @@ async function fetchFrames(frames: readonly GeminiFrame[], directory: string, so
   return paths;
 }
 
-/** Our sha256 of a pinned file, which is what `assertInputPins` checks. A pin that has none yet cannot be checked, and a
+/** Our sha256 of a pinned file, which is what `assertInputs` checks. A pin that has none yet cannot be checked, and a
  * stage that ran on an unchecked input would be recording a guess, so it is refused and the digest step is named. */
 const inputPin = (frame: GeminiFrame, role: string): ProductInput => {
   if (frame.sha256 === undefined)
@@ -240,7 +240,7 @@ export async function reduceStage(program: GeminiProgram, work: string, stage: S
   // Every input, wherever it lives: the raw frames under the work directory's `raw`, and the masters this toolkit made in
   // their own stage directories. All of them are checked against their pins before DRAGONS opens anything.
   const located = new Map([...files, ...ours.map(entry => [entry.input.identity, entry.path] as const)]);
-  await assertInputPins(run.inputs, located);
+  await assertInputs(run.inputs, located);
   await rm(directory, { recursive: true, force: true });
   await mkdir(directory, { recursive: true });
   const userCal = [...Object.entries(plan.calibrations).map(([role, frame]) => `${role}:${files.get(frame.name)!}`),

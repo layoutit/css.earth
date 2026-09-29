@@ -3,9 +3,8 @@ import { parseCalibrationDependencies, verifyCalibrationDependencies } from './c
 import { parseNativeMetadata } from './native-metadata.mts';
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { sha256, sha256File } from '@cssearth/core/node';
 import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '@cssearth/core';
-import { readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { fileSize, plainName, readProductRecord, sameRun } from '@cssearth/telescope/node';
 import { assessInput, assessRequest, type ProductFacts } from './request-satisfaction.mts';
 import type { CapabilityRequest } from './recipe-request.mts';
 import { parseResolutionEvidence } from '@cssearth/bake/objects/layers/observation';
@@ -54,8 +53,9 @@ export function parseProductFacts(raw: unknown): ProductFacts {
   if(value.calibrationDependencies !== undefined) facts.calibrationDependencies = parseCalibrationDependencies(value.calibrationDependencies);
   return facts;
 }
-const implementation = async () => sha256(Buffer.concat(await Promise.all(['./vo/package.mts', '../../../packages/telescope/src/node/vo-contracts.ts', './vo/discovery.mts', './vo/access.mts', './vo/bridge.mts', './vo/qualify.mts', '../../../packages/telescope/src/node/astroquery.ts', './qualify.mts', './product-science.mts', './native-metadata.mts', './calibration-dependencies.mts', '../../../packages/telescope/src/node/science.ts', '../../../packages/telescope/toolchains/requirements.lock', 'archives/jwst/cubes/resolution.mts', 'archives/jwst/cubes/spec3.mts', 'archives/jwst/sample-agreement.mts', 'archives/jwst/requirements.lock']
-  .map(path => readFile(new URL(path, import.meta.url))))));
+/** One remembered qualification per observation, named by what was qualified. */
+const qualificationName = (result: Pick<QualifiedObservation, 'telescope' | 'mode' | 'program' | 'observation'>): string =>
+  `${plainName(result.telescope, result.mode, result.program, result.observation)}.json`;
 export async function rememberQualification(root: string, result: QualifiedObservation): Promise<void> {
   const locations = Object.fromEntries((['product', 'receipt', 'productRecord', 'outputRoot'] as const).map(key => [key, relative(root, resolve(root, result[key]))]));
   const facts = parseProductFacts(result.facts), bound = facts.angularResolutionBound;
@@ -67,25 +67,24 @@ export async function rememberQualification(root: string, result: QualifiedObser
     return { ...evidence, receipt: { ...evidence.receipt, file: relative(root, file) } };
   }));
   const pins = await Promise.all([result.product, result.receipt, result.productRecord, ...(bound ? [bound.receipt] : []),
-    ...resolutionEvidence.flatMap(evidence => evidence.receipt ? [evidence.receipt.file] : []), ...(facts.calibrationDependencies ?? []).flatMap(r=>r.file?[r.file]:[])].map(async file => ({ path: relative(root, resolve(root, file)), ...(await sha256File(resolve(root, file))) })));
+    ...resolutionEvidence.flatMap(evidence => evidence.receipt ? [evidence.receipt.file] : []), ...(facts.calibrationDependencies ?? []).flatMap(r=>r.file?[r.file]:[])].map(async file => ({ path: relative(root, resolve(root, file)), ...(await fileSize(resolve(root, file))) })));
   const portableFacts = { ...facts, ...(facts.resolutionEvidence ? { resolutionEvidence } : {}), ...(bound ? { angularResolutionBound: { ...bound, receipt: relative(root, resolve(root, bound.receipt)) } } : {}) };
-  const value = { ...result, ...locations, schema: 'cssearth-qualified-observation@1', facts: portableFacts, implementation: await implementation(), pins };
+  const value = { ...result, ...locations, schema: 'cssearth-qualified-observation@1', facts: portableFacts, pins };
   const text = `${JSON.stringify(value, null, 2)}\n`, directory = resolve(root, 'output/telescopes', result.target, 'qualifications');
-  await mkdir(directory, { recursive: true }); await writeFile(resolve(directory, `${sha256(text)}.json`), text);
+  await mkdir(directory, { recursive: true }); await writeFile(resolve(directory, qualificationName(result)), text);
 }
 export async function loadQualifiedObservations(root: string, target: string): Promise<QualifiedObservation[]> {
   const directory = resolve(root, 'output/telescopes', target, 'qualifications');
   const names = await readdir(directory).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return []; throw error; });
-  const version = await implementation(), products: QualifiedObservation[] = [];
+  const products: QualifiedObservation[] = [];
   for (const name of names.filter(name => name.endsWith('.json')).sort()) {
     const text = await readFile(resolve(directory, name), 'utf8');
-    if (name !== `${sha256(text)}.json`) continue;
     const value = requireRecord(JSON.parse(text), 'qualified observation');
-    if (value.schema !== 'cssearth-qualified-observation@1' || value.target !== target || value.implementation !== version) continue;
+    if (value.schema !== 'cssearth-qualified-observation@1' || value.target !== target) continue;
     let current = true;
     for (const raw of requireArray(value.pins, 'qualified pins')) {
-      const pin = requireRecord(raw), found = await sha256File(resolve(root, requireString(pin.path))).catch(() => null);
-      if (!found || found.bytes !== pin.bytes || found.sha256 !== pin.sha256) current = false;
+      const pin = requireRecord(raw), found = await fileSize(resolve(root, requireString(pin.path))).catch(() => null);
+      if (!found || found.bytes !== pin.bytes || pin.sha256 !== undefined) current = false;
     }
     if (!current) continue;
     const fields = Object.fromEntries(['target', 'telescope', 'mode', 'observation', 'program', 'product', 'receipt', 'productRecord', 'outputRoot'].map(key => [key, requireString(value[key], key)]));

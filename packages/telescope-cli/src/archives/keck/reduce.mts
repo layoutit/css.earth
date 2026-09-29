@@ -5,7 +5,7 @@
  *
  * The frames the program pins are staged into the run directory under the names the observatory wrote them with, because the
  * KCWI DRP reads a night by that convention (`kb<yymmdd>_<frame>.fits`) and KOA stores them under its own ids. Every staged
- * file is then checked against the program's pin, through the shared `assertInputPins`, before the pipeline is started: a run
+ * file is then checked against the program's pin, through the shared `assertInputs`, before the pipeline is started: a run
  * that would read other bytes does not start.
  *
  * The pipeline is run in group mode, which is how it is meant to be driven over a night's files: it sorts them by image type
@@ -32,7 +32,7 @@ import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '@cssearth/core/node';
 import { positionalArguments } from '@cssearth/core';
-import { assertInputPins, readProductRecord, sameRun, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { assertInputs, readProductRecord, sameRun, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/telescope';
 import { DOWNLOADS, readKeckProgram, type KeckFile, type KeckObservation, type KeckProgram } from './archive.mts';
 import { keckToolchain, keckToolchainDigest, type KeckToolchain } from './toolchain.mts';
@@ -86,7 +86,7 @@ export async function keckSoftware(toolchain: KeckToolchain): Promise<ProductSof
 }
 
 /** Put the pinned frames of one observation in `directory`, each under the name the observatory wrote it with. Returns the
- * staged names in the order the pipeline is given them, and where each pinned input landed, for `assertInputPins`. */
+ * staged names in the order the pipeline is given them, and where each pinned input landed, for `assertInputs`. */
 export async function stageFrames(program: KeckProgram, observation: KeckObservation, directory: string, channel?: (name: string) => string) {
   await mkdir(directory, { recursive: true });
   const staged: string[] = [], files = new Map<string, string>();
@@ -182,7 +182,7 @@ export async function reduceObservation(id: string, koaid: string, run: string):
   await rm(run, { recursive: true, force: true });
   const { staged, files } = await stageFrames(program, observation, run, how.channel);
   // Nothing is read by the pipeline until the bytes it will read are the bytes the program pins.
-  await assertInputPins(inputs, files);
+  await assertInputs(inputs, files);
   await writeFile(resolve(run, 'kcwi.cfg'), configuration.text);
   const args = [...how.args(channel), '-c', 'kcwi.cfg', '-f', ...staged];
   const code = await runPipeline(toolchain.binaries[how.binary]!, args, run, log, toolchain.env);

@@ -9,7 +9,7 @@ import { bandMode, bandOfHeader, isCubeBand, JWST_BANDS } from './bands.mts';
 import { assertCubeMembers, spec3Steps } from '../cubes/spec3.mts';
 import { gridResample, imagingProductRun, pipelineSoftware, recordProductEvidence } from './image3.mts';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
+import { readProductRecord, runKey, writeProductRecord } from '@cssearth/telescope/node';
 import { toolchainPython } from '@cssearth/telescope/node';
 import { findPointSources } from '@cssearth/bake/objects/layers/observation';
 
@@ -172,10 +172,10 @@ test('an image3 run is identified by the exposures it was given, its settings an
   assert.deepEqual(run.software, [{ name: 'jwst', version: '2.0.1' }, { name: 'stcal', version: '1.20.0' }, { name: 'stpipe', version: '1.1.0' }]);
   assert.equal(run.toolchainDigest, 'b'.repeat(64));
   // Another CRDS context, another grid, another exposure or another pipeline pin is another run, so the mosaic is made again.
-  const base = runDigest(run);
-  assert.notEqual(runDigest(imageRun(pinnedProgram({ crdsContext: 'jwst_1400.pmap', image3: { tweakreg: { abs_refcat: 'GAIADR3' } } }))), base);
-  assert.notEqual(runDigest(imageRun(pinned, { grid: gridResample({ width: 1024, height: 1024, fovDeg: 0.025, centerIcrsDegrees: [151.75735, -40.4364056] as [number, number] }) })), base);
-  assert.notEqual(runDigest(imagingProductRun(pinned, pinned.bands[0]!, 'image3', { image3: pinned.image3 ?? {}, grid: null },
+  const base = runKey(run);
+  assert.notEqual(runKey(imageRun(pinnedProgram({ crdsContext: 'jwst_1400.pmap', image3: { tweakreg: { abs_refcat: 'GAIADR3' } } }))), base);
+  assert.notEqual(runKey(imageRun(pinned, { grid: gridResample({ width: 1024, height: 1024, fovDeg: 0.025, centerIcrsDegrees: [151.75735, -40.4364056] as [number, number] }) })), base);
+  assert.notEqual(runKey(imagingProductRun(pinned, pinned.bands[0]!, 'image3', { image3: pinned.image3 ?? {}, grid: null },
     { ...toolchain, toolchainDigest: 'c'.repeat(64) })), base);
   // A member with no digest is not a pin, and a lock that pins no pipeline is not a version.
   assert.throws(() => imageRun(parseImagingProgram(program())), /no digest/u);
@@ -229,8 +229,8 @@ test('a coronagraph run pins the PSF references it subtracted with, and is not t
   assert.deepEqual(run.inputs.map(input => input.role), ['level-2 exposure', 'level-2 PSF reference']);
   // Another reference star is another subtraction, so the mosaic beside an older record is not reused.
   const other = pinnedProgram({ bands: [{ ...band, references: [digested('jw01386002001_0310a_00002_nrcalong_calints.fits', 'f'.repeat(64))] }] });
-  assert.notEqual(runDigest(imagingProductRun(other, other.bands[0]!, 'coron3', { psfReferences: 1 }, toolchain)), runDigest(run));
-  assert.notEqual(runDigest(imagingProductRun(pinned, band, 'image3', { psfReferences: 1 }, toolchain)), runDigest(run));
+  assert.notEqual(runKey(imagingProductRun(other, other.bands[0]!, 'coron3', { psfReferences: 1 }, toolchain)), runKey(run));
+  assert.notEqual(runKey(imagingProductRun(pinned, band, 'image3', { psfReferences: 1 }, toolchain)), runKey(run));
 });
 
 const CARD = 80, BLOCK = 2880;

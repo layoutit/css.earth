@@ -195,8 +195,6 @@ export const APOLLO_PSE_STATIONS={
   bundleUrl:'https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/',
   stationXmlUrl:'https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/data/xa/metadata/stationxml.xa.0.sxml',
   labelUrl:'https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/data/xa/metadata/stationxml.xa.0.xml',
-  stationXmlSha256:'c712de6a38934ec4e82b08fefe8cc8cb10475c49c164ebc8ae2801f8caef88cb',
-  labelSha256:'e96464245c87e9ce98d19691ad3081ed32240ca0ac941c79ebfc6d35d101cffe',
   frame:{kind:'body-fixed',name:'DE421 Mean Earth / Rotation Axis'},
   /** apollo_pse_description.pdf section 3.3.4 Coordinate Systems states the frame; StationXML itself never names one. */
   frameEvidence:'https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/document/apollo_pse_description.pdf',
@@ -213,12 +211,10 @@ export const CONSERT_67P_FSS_RANGING={
   frameEvidence:'https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat',
   orbiter:{productId:'CN_G_O_FSSRNG_F',
     labelUrl:'https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fssrng_f.lbl',
-    tableUrl:'https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fssrng_f.tab',
-    labelSha256:'7575a78a7b9a7cca84f8f1e0549d1a113a02f77a69a93dc997ab29e1b2464d91',tableSha256:'5286b4985aa342abee7c3f3437334101293a79ccfefb4bde1235b1ad19d16b7c'},
+    tableUrl:'https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fssrng_f.tab'},
   lander:{productId:'CN_G_L_FSSRNG_F',
     labelUrl:'https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fssrng_f.lbl',
-    tableUrl:'https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fssrng_f.tab',
-    labelSha256:'2b972f28765e131a29de6c6e4f2d5a9d97c9c4a8f2381b7f031cda8dc3739636',tableSha256:'04fe8bc3adfd3441ee3ceb2ec97bd5f3b6e8717b8fa1c9d3fe7b208d91cae00f'},
+    tableUrl:'https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fssrng_f.tab'},
   positionColumns:['UTC','SC_POS_X','SC_POS_Y','SC_POS_Z'] as const,
   /** The archive unit each position column states; `pds3GeometryUnit` maps it, it is never assumed. */
   positionArchiveUnit:'KILOMETER',

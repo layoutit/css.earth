@@ -49,7 +49,7 @@ import { positionalArguments, requireArray, requireFiniteNumber, requireRecord, 
 import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope/node';
-import { assertInputPins, writeProductRecord } from '@cssearth/telescope/node';
+import { assertInputs, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/telescope';
 import { PROGRAMS } from './archive.mts';
 import { readHstFileHdus, type HstFileHdu } from './product-file.mts';
@@ -427,7 +427,7 @@ export async function runArchiveFinal(id: string, work: string, sources: readonl
     log(`${file.name}: ${bytes} bytes, sha256 ${sha256}${file.sha256 === undefined ? ' (first download; the pin records it)' : ''}`);
   }
   // Nothing is read before the pins are met: a record must describe the files its run actually used.
-  await assertInputPins(downloaded.map(file => ({ role: roleOf(program, file.name), identity: file.uri, bytes: file.bytes, sha256: file.sha256 })),
+  await assertInputs(downloaded.map(file => ({ role: roleOf(program, file.name), identity: file.uri, bytes: file.bytes, sha256: file.sha256 })),
     new Map(downloaded.map(file => [file.uri, file.path])));
   // Every pinned file is read with this repository's own reader. One it cannot read stops the run and says why: a product half
   // read is not a product pinned, and nothing here guesses at a layout.
@@ -486,7 +486,7 @@ export const archiveFinalSelection = (program: ArchiveFinalProgram) => ({
 });
 
 /** The part of a run that a later reader can rebuild from the program alone: the recorded files at their sizes, and the
- * selection above. `runDigest` over this is what says a record still describes the program beside it. What the run measured
+ * selection above. `runKey` over this is what says a record still describes the program beside it. What the run measured
  * stays out of it, because nothing can recompute that without the files. */
 export function archiveFinalQualificationRun(program: ArchiveFinalProgram): ProductRun {
   const inputs: ProductInput[] = program.files.map(file => ({ role: roleOf(program, file.name), identity: file.uri, bytes: file.bytes }));

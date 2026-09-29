@@ -30,7 +30,7 @@ import { resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { mastRequest } from '@cssearth/telescope/node';
 import { evidenceFor, parseProductRecord, type ProductRecord } from '@cssearth/telescope';
-import { runDigest } from '@cssearth/telescope/node';
+import { runKey } from '@cssearth/telescope/node';
 import { HST_PROGRAMS, parseHstProgram, PROGRAMS } from './archive.mts';
 import { ARCHIVE_FINAL_STAGE, archiveFinalQualificationRun, archiveFinalQualifiedRun, parseArchiveFinalProgram, type ArchiveFinalProgram } from './archive-final.mts';
 import { PIPELINES } from './calibrate.mts';
@@ -214,7 +214,7 @@ export function archiveFinalQualification(program: ArchiveFinalProgram, record: 
   // every size still agrees. The run is therefore rebuilt from the program as it is NOW (its selection, the units each part is
   // read from, the identity the check ran against) and the record must be the record of that run.
   const expected = archiveFinalQualificationRun(program), stated = archiveFinalQualifiedRun(record);
-  if (runDigest(expected) !== runDigest(stated)) {
+  if (runKey(expected) !== runKey(stated)) {
     const wanted = expected.parameters.selection as Record<string, unknown>, held = stated.parameters.selection;
     // The verdict is the digest, which ignores key order; the message sorts keys too, so it never blames a field that only moved.
     const said = !isRecord(held) ? 'it states no selection at all, so nothing says which units it read'

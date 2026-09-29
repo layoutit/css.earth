@@ -29,7 +29,7 @@ import { readFitsFileHdus, type FitsFileHdu } from '@cssearth/fits/node';
 import { skyImageAxes } from '@cssearth/fits';
 import { positionalArguments } from '@cssearth/core';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
-import { assertInputPins, fileSize, writeProductRecord } from '@cssearth/telescope/node';
+import { assertInputs, fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductEvidence, ProductInput, ProductRun } from '@cssearth/telescope';
 import { HST_PROGRAMS, PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses } from './line-stack-ephemeris.mts';
@@ -198,7 +198,7 @@ export async function runTimeTagFrame(definition: TimeTagDefinition, options: Ti
   // The pins are checked before a byte of science is read: a stage that reduced another file would write a record naming
   // this one.
   const inputs = await productInputs(definition, files);
-  if (options.verifyDigests ?? true) await assertInputPins(inputs, files);
+  if (options.verifyDigests ?? true) await assertInputs(inputs, files);
   const eventsUri = definition.files.find(file => file.role === 'events')!.uri;
   const file = await readEventsFile(files.get(eventsUri)!, definition);
   const live = liveSeconds(file.intervals), span = spanSeconds(file.intervals);

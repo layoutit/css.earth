@@ -5,10 +5,10 @@ import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
-import { runDigest } from '@cssearth/telescope/node';
+import { runKey } from '@cssearth/telescope/node';
 import { instrumentTable, INSTRUMENT_TABLES, lev0Url, lev1Url } from './koa.mts';
 import { CALIBRATION_TYPES, KOAID, nightsAround, parseKeckProgram, PROGRAMS } from './archive.mts';
-import { assertInputPins } from '@cssearth/telescope/node';
+import { assertInputs } from '@cssearth/telescope/node';
 import { checkReceipt, keckTargetObject, nameCandidates, pinnedEvidence, REDUCTION_STATE } from './archive-ledger.mts';
 import { normaliseTargetName } from '../targets.mts';
 import { assertNoPlotServer, configureWithoutPlots, pinnedInput, PLOT_SERVER_LINES, PLOTS_OFF, REDUCIBLE, reductionRun, stagedName } from './reduce.mts';
@@ -221,8 +221,8 @@ test('the reduction record names the frames it read, the channel, and the two se
   const other = reductionRun(parsed, parsed.observations[0]!, [...inputs].reverse(),
     { channel: 'KB', command: ['kcwiReduce', '-g', '-b'], configuration: { source: 'kcwidrp/configs/kcwi.cfg', sha256: 'b'.repeat(64), changed: { enable_bokeh: { shipped: 'True', used: 'False' } } } },
     [{ name: 'kcwidrp', version: '1.3.1' }], 'c'.repeat(64));
-  assert.equal(runDigest(made), runDigest(other));
-  assert.notEqual(runDigest(made), runDigest({ ...made, parameters: { ...made.parameters, channel: 'KR' } }));
+  assert.equal(runKey(made), runKey(other));
+  assert.notEqual(runKey(made), runKey({ ...made, parameters: { ...made.parameters, channel: 'KR' } }));
 });
 
 test('what the comparison establishes is tied to the exact product it checked', () => {
@@ -311,7 +311,7 @@ test('an archive product that is not the pinned bytes is refused before a sample
     await write(pin.identity, bytes);
   }
   const pinnedNow = pins.map(pin => ({ ...pin, sha256: createHash('sha256').update(genuine.get(pin.identity)!).digest('hex') }));
-  await assertInputPins(pinnedNow, files);
+  await assertInputs(pinnedNow, files);
 });
 
 test('a receipt counts only where it records a whole comparison of the bytes the program pins now', async (t) => {

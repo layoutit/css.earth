@@ -18,13 +18,11 @@ export interface PyuvdataUvfitsAnswer {
   readonly rows?: readonly { readonly row: number; readonly timeJulianDate: number; readonly antenna1: number; readonly antenna2: number; readonly uvwMeters: readonly [number, number, number]; readonly frequencyHz: number; readonly polarization: number; readonly real: number; readonly imaginary: number; readonly weight: number; readonly flagged: boolean }[];
 }
 const PYUVDATA_UVFITS = String.raw`
-import hashlib, json, warnings, sys
+import json, warnings, sys
 import pyuvdata
 from pyuvdata import UVData
 request = json.load(sys.stdin)
 pin = request['file']
-with open(pin['path'], 'rb') as source:
-    raw = source.read()
 with warnings.catch_warnings(record=True) as caught:
     warnings.simplefilter('always')
     data = UVData.from_file(pin['path'])

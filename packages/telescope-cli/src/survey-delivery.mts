@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { createHash, randomBytes } from 'node:crypto';
+import { randomBytes } from 'node:crypto';
 /** Repeatable local-observation survey through the public saved-query/delivery API. No claim of fresh archive discovery. */
 import { readFile, writeFile, mkdir, access, readdir, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -13,7 +13,8 @@ import { requestFromArguments } from './query.mts';
 import { type QueryInputs } from './query-contract.mts';
 import { assessRequest } from './request-satisfaction.mts';
 export function shuffled<T>(items:readonly T[],seed:string):T[]{
-  let state=createHash('sha256').update(seed).digest().readUInt32LE();const result=[...items];
+  // The seed text is folded into the generator's 32-bit state, so one seed always gives one order.
+  let state=0;for(const char of seed)state=(Math.imul(state,31)+char.codePointAt(0)!)>>>0;const result=[...items];
   for(let i=result.length-1;i>0;i--){state=(Math.imul(state,1664525)+1013904223)>>>0;const j=Math.floor(state/4294967296*(i+1));[result[i],result[j]]=[result[j]!,result[i]!];}
   return result;
 }

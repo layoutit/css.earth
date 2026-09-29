@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { addProductEvidence, readProductRecord, runDigest, writeProductRecord } from '@cssearth/telescope/node';
+import { addProductEvidence, readProductRecord, runKey, writeProductRecord } from '@cssearth/telescope/node';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
 import { observationMode, obsidDirectory, parseChandraProgram, PROGRAMS, refuseObservation, REFUSED_MODES } from './archive.mts';
 import { isObjectPointing, chandraLedgerGuide, modeKey, objectBox, OBJECT_RADIUS_DEGREES, pinnedState, CHANDRA_LEDGER } from './archive-ledger.mts';
