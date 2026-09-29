@@ -11,7 +11,7 @@ test('rendered nebulae contribute common names and catalogue aliases to search',
     ['Pleiades','m45'],['M45','m45'],['Seven Sisters','m45'],['Crab','m1'],['M1','m1'],['NGC 1952','m1'],['Lagoon','m8'],['M8','m8'],['NGC 6523','m8']]) {
     const match = rows.find(row => row.searchNames.some(name => name.includes(normalizeDestinationQuery(query!))));
     assert.equal(match?.focusId,id);
-    assert.equal(match?.route,`/sun/?focus=${id}`);
+    assert.equal(match?.route,`/${id}/`);
   }
   assert.throws(()=>defineObjects([rows[0]!,rows[0]!]),/Duplicate object/);
   assert.throws(()=>definePreparedFocus({}));

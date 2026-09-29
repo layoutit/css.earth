@@ -34,7 +34,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
     <input type="hidden" name="v" data-search-context disabled></form><input class="object-sheet-handle" type="checkbox">
   <div class="object-drawer-content"><nav class="object-browser" hidden>
     <div data-object-navigation-tree></div>
-    <div id="object-category-results" role="region" aria-label="Search results"><ul><li data-search-overview="milky way" hidden><a href="/sun/?overview=milky-way">Milky Way</a></li></ul>
+    <div id="object-category-results" role="region" aria-label="Search results"><ul><li data-search-overview="milky way" hidden><a href="/milky-way/">Milky Way</a></li></ul>
     <ul class="object-list" data-catalogue-list></ul>
     <p class="object-error" data-search-error hidden>Couldn't load search results. <button type="button" data-search-retry>Retry</button></p>
     <p class="object-empty" hidden>No matching results</p>
@@ -152,9 +152,10 @@ test('native and live selections share card visibility, inertness, labels and sy
   const cases = [
     ['', 'saturn', { kind: 'object', objectId: 'saturn' }, '/saturn/'],
     ['?overview=system', 'trappist-1', { kind: 'overview', overview: { scope: 'system', systemId: 'trappist-1' } }, '/trappist-1/'],
-    ['?overview=milky-way', 'saturn', { kind: 'overview', overview: { scope: 'milky-way', systemId: 'sun' } }, '/saturn/'],
-    ['?overview=local-group', 'saturn', { kind: 'overview', overview: { scope: 'local-group', systemId: 'sun' } }, '/saturn/'],
-    ['?overview=nearby-universe', 'saturn', { kind: 'overview', overview: { scope: 'nearby-universe', systemId: 'sun' } }, '/saturn/'],
+    // An overview's page draws the Sun's scene.
+    ['', 'sun', { kind: 'overview', overview: { scope: 'milky-way', systemId: 'sun' } }, '/milky-way/'],
+    ['', 'sun', { kind: 'overview', overview: { scope: 'local-group', systemId: 'sun' } }, '/local-group/'],
+    ['', 'sun', { kind: 'overview', overview: { scope: 'nearby-universe', systemId: 'sun' } }, '/nearby-universe/'],
     // A catalogue focus's page draws its host scene: the focus wins over an overview it also names.
     ['?overview=system', 'saturn', { kind: 'focus', id: 'm42' }, '/m42/'],
   ] as const;

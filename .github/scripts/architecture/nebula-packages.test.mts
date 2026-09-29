@@ -15,7 +15,7 @@ test('actual illegal imports, missing exports and line overflows fail the packag
   const write = (path: string, value: string) => { const target = resolve(root, path); mkdirSync(resolve(target, '..'), { recursive: true }); writeFileSync(target, value); };
   const source = 'labs/nebula/packages/reconstruction/src/fit.ts';
   try {
-    for (const [directory, name] of Object.entries(nebulaPackages)) write(`labs/nebula/packages/${directory}/package.json`, JSON.stringify({
+    for (const [directory, name] of Object.entries(nebulaPackages)) write(`${directory === 'volume-viewer' ? 'packages' : 'labs/nebula/packages'}/${directory}/package.json`, JSON.stringify({
       name, private: true, exports: { '.': './src/index.ts' }, dependencies: { [bakePackage]: 'workspace:*' },
     }));
     bakeManifest(write);
@@ -35,7 +35,7 @@ test('actual illegal imports, missing exports and line overflows fail the packag
     write(source, `import '${bakeVolumeEntries.main}';\n`);
     assert.ok(checkNebulaBoundaries(root).some(error => error.includes(`undeclared workspace import ${bakePackage}`)));
     write('labs/nebula/packages/reconstruction/package.json', JSON.stringify({ name: nebulaPackages.reconstruction, private: true, exports: {}, dependencies: { [bakePackage]: 'workspace:*' } }));
-    write(source, "import '../../volume-viewer/src/private.ts';\n");
+    write(source, "import '../../../../../../packages/volume-viewer/src/private.ts';\n");
     assert.ok(checkNebulaBoundaries(root).some(error => error.includes('relative import leaves package')));
     write(source, '\n'.repeat(601));
     assert.ok(checkNebulaBoundaries(root).some(error => error.includes('exceeds 600')));

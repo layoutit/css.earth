@@ -2,7 +2,7 @@
 // Existing navigation preparation refreshes carriers, sky, sunlight and bindings;
 // surface geometry and image inputs are reused without a new shape bake.
 import { chromium } from 'playwright';
-import { loadSceneEpochEphemeris } from '../../../packages/astronomy/tools/scene-ephemeris.mts';
+import { loadSceneEpochEphemeris } from '../../../packages/astronomy/cli/scene-ephemeris.mts';
 import { SOLAR_GEOMETRY_EPOCH_JD_TT, BODY_ORBITS } from '../../../src/platform/solar-geometry.mts';
 import { prepareObjectJson } from './prepare-object-json.mts';
 

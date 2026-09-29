@@ -19,6 +19,7 @@
   "include": [
     "packages/**/*.test.ts",
     "packages/**/*.test.mts",
+    "../../packages/volume-viewer/src/**/*.test.ts",
     "../../node_modules/vite/client.d.ts",
     "../../tests/nebula/**/*.test.mts",
     "../../tests/nebula/**/*.test.ts",

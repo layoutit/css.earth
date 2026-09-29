@@ -1,0 +1,8 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "bright-galaxies",
+  "meaning": "DESI's bright galaxies as dots: every row of the tracked sample (one in 10 of the catalogue).",
+  "banks": [
+    "desi-bright-galaxies"
+  ]
+}

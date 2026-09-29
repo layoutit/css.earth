@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "incremental": true,
-    "tsBuildInfoFile": "../../../../output/tsbuildinfo/nebula-volume-viewer.tsbuildinfo",
+    "tsBuildInfoFile": "../../output/tsbuildinfo/nebula-volume-viewer.tsbuildinfo",
     "lib": [
       "ES2023",
       "DOM",

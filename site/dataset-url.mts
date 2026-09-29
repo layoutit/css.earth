@@ -1,5 +1,5 @@
 import { parseDatasetDestination } from '../src/platform/dataset-destination.mts';
-import { preparedFocusFromUrl } from './navigation/navigation-scope.mts';
+import { drawnPageFromUrl, preparedFocusFromUrl } from './navigation/navigation-scope.mts';
 
 /** Prepared source links select their focused object directly on the shared camera of scene `sceneId`. */
 export function isFocusDatasetUrl(url: URL, sceneId: string): boolean {
@@ -9,14 +9,15 @@ export function isFocusDatasetUrl(url: URL, sceneId: string): boolean {
   catch { return false; }
 }
 
-/** The mounted scene's own dataset. On a catalogue focus's page `dataset` is the focus's lens, so the scene reads none. */
+/** The mounted scene's own dataset. On the page of a subject the scene draws (a catalogue focus, an overview) the scene
+ * reads none: a focus's `dataset` is the focus's lens, and an overview's page has none. */
 export function readSceneDatasetUrl(url: URL, sceneId: string): { requested: boolean; id: string | null } {
-  return preparedFocusFromUrl(url, sceneId) === null ? readDatasetUrl(url) : { requested: false, id: null };
+  return drawnPageFromUrl(url, sceneId) === null ? readDatasetUrl(url) : { requested: false, id: null };
 }
 
-/** Writes the mounted scene's dataset, except on a catalogue focus's page, whose `dataset` is the focus's lens. */
+/** Writes the mounted scene's dataset, except on the page of a subject the scene draws (navigation-scope.mts withPage). */
 export function withSceneDataset(url: URL, sceneId: string, id: string | null): URL {
-  return preparedFocusFromUrl(url, sceneId) === null ? withDataset(url, id) : new URL(url);
+  return drawnPageFromUrl(url, sceneId) === null ? withDataset(url, id) : new URL(url);
 }
 
 /** Dataset selections are canonical query parameters. */

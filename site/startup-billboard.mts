@@ -5,12 +5,12 @@ import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewpo
 import { prepareArrivalBillboard } from './arrival-billboard.mts';
 import { createPreparedArrival } from './prepared-arrival.mts';
 import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
-import { preparedFocusFromUrl } from './navigation/navigation-scope.mts';
+import { drawnPageFromUrl } from './navigation/navigation-scope.mts';
 
 /** A custom view never borrows the default arrival photograph. */
 export function usesDefaultStartupView(url: string, sceneId: string): boolean {
   const query = new URL(url).searchParams;
-  return preparedFocusFromUrl(url, sceneId) === null && !['v', 'view', 'overview', 'feature', 'dataset', 'settings'].some(key => query.has(key));
+  return drawnPageFromUrl(url, sceneId) === null && !['v', 'view', 'overview', 'feature', 'dataset', 'settings'].some(key => query.has(key));
 }
 
 /** Static previews restore from the URL; server-rendered focus responses carry a resolved camera. Only the `v` parameter is

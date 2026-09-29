@@ -27,7 +27,7 @@ test('a source-owned globular cluster is discovered, classified and searched thr
     assert.ok(focus);
     assert.equal(focus.classification, 'globular-cluster');
     assert.equal(focus.systemName, 'Milky Way');
-    assert.equal(focus.route, '/sun/?focus=test-cluster');
+    assert.equal(focus.route, '/test-cluster/');
     assert.equal(focus.distance.quantity, 'catalogue');
     const labels = [{ name: focus.name.toLowerCase(), names: focus.searchNames, classification: focus.classification,
       classificationName: 'globular cluster', systemName: focus.systemName.toLowerCase() }];

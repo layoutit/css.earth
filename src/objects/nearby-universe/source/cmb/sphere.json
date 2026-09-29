@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-map-sphere-source@1",
+  "id": "cmb",
+  "name": "Cosmic microwave background",
+  "source": "planck-2018-smica-cmb",
+  "meaning": "The cosmic microwave background as Planck's 2018 SMICA map shows it, drawn on the sphere it left from: the surface of last scattering, at the comoving distance of redshift 1089.80 in the Planck 2018 cosmology, 13.9 Gpc (45 billion light-years) away. Seen from outside, it is the edge of the observable universe.",
+  "map": {
+    "path": "COM_CMB_IQU-smica_2048_R3.00_full.fits",
+    "origin": "https://irsa.ipac.caltech.edu/data/Planck/release_3/all-sky-maps/maps/component-maps/cmb/COM_CMB_IQU-smica_2048_R3.00_full.fits",
+    "column": "I_STOKES",
+    "coordinates": "galactic",
+    "unit": "K_CMB"
+  },
+  "colourTable": {
+    "path": "Planck_Parchment_RGB.txt",
+    "origin": "https://raw.githubusercontent.com/zonca/paperplots/master/data/Planck_Parchment_RGB.txt",
+    "basis": "The Planck collaboration's style-guide colour table for CMB maps (the paperplots repository of its figure style guide), 256 colours from blue through parchment to red.",
+    "gamma": 1.6,
+    "gammaBasis": "Presentation choice, picked from renders (full colour, colour at 60% and 45%, gamma 1.6 and 2.2): each colour channel of the table raised to the power 1.6, as the star dots are, so the table's cream middle, where most of the sky sits, darkens most and the ball stops glaring beside the dots while its reds and blues keep their colour."
+  },
+  "range": {
+    "min": -0.0003,
+    "max": 0.0003,
+    "basis": "Plus and minus 300 microkelvin around the mean, the range of the Planck 2018 CMB figures; the few hotter or colder pixels take the table's end colours."
+  },
+  "radius": {
+    "redshift": 1089.8,
+    "cosmology": "planck18",
+    "basis": "z* = 1089.80 \u00b1 0.21, the redshift of last scattering in Planck 2018 VI, Table 2, TT,TE,EE+lowE+lensing+BAO (the parameters Astropy's Planck18 carries); its comoving distance is the sphere's radius."
+  },
+  "mesh": {
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "tilePx": 64,
+    "samplesPerTexel": 2,
+    "basis": "Presentation choice: the planets' standard sphere, 16 latitude bands of 32 cells (11.25 degrees each), ICRS north up, the top and bottom bands closed by round polar caps: 450 planar patches, each 64 texels on a side (about 0.18 degrees per texel at the equator, coarser than the map's 5 arcminute beam), each texel the mean of 2 by 2 samples."
+  },
+  "epochJdTt": 2461286.5,
+  "limb": {
+    "law": "linear",
+    "coefficient": 0.6,
+    "basis": "Presentation choice: the last-scattering surface has no limb that anyone could see from outside it, so this is not a measurement. It is the linear limb law, I(mu)/I(1) = 1 - u(1 - mu), drawn as the bodies' limb plates are, with u = 0.6 picked from renders so the ball reads as round."
+  }
+}

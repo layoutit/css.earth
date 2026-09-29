@@ -10,7 +10,7 @@ src/
 
 Dependencies: `@cssearth/bake/volume`; host-provided renderer operations. Consume explicit package exports rather than another package’s source paths.
 
-Run `pnpm --filter @cssearth/volume-viewer typecheck` from the repository root after installing dependencies. The lab command runner discovers tests beside package owners.
+Run `pnpm --filter @cssearth/volume-viewer typecheck` from the repository root after installing dependencies. The lab command runner discovers tests in this package.
 
 Scene constructors require a per-instance backend and a path resolver. The lab adapters bind the canonical CSS renderer, camera publication, resource validators and local asset URLs. There is no default repository root or mutable renderer registration in this package.
 

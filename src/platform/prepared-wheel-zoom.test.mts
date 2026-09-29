@@ -16,7 +16,7 @@ import {
 } from "@cssearth/renderer/platform/prepared-wheel-zoom";
 
 test("a wheel publication failure removes its listener and pending camera frame", async t => {
-  const {Surface}=await import('./test/orbit-fixture.mts');
+  const {Surface}=await import('@cssearth/renderer/test/orbit-fixture.mts');
   const prior=globalThis.HTMLElement;Reflect.set(globalThis, 'HTMLElement', Surface);
   t.after(()=>{globalThis.HTMLElement=prior});
   const inputSurface=new Surface(), errors: unknown[]=[];
@@ -32,7 +32,7 @@ test("a wheel publication failure removes its listener and pending camera frame"
 });
 
 test("a perspective dolly scales the distance by the wheel magnitude and never turns the scene", async t => {
-  const { Surface } = await import("./test/orbit-fixture.mts");
+  const { Surface } = await import("@cssearth/renderer/test/orbit-fixture.mts");
   const prior = globalThis.HTMLElement; Reflect.set(globalThis, 'HTMLElement', Surface);
   t.after(() => { globalThis.HTMLElement = prior; });
   const surface = new Surface();

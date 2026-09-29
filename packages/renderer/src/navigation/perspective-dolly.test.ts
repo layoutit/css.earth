@@ -1,4 +1,4 @@
-import { fixedCameraOrientation } from '../../../../src/platform/test/camera-orientation-fixture.mts';
+import { fixedCameraOrientation } from '../../test/camera-orientation-fixture.mts';
 import { expect, it } from 'vitest';
 import type { PerspectiveDolly } from './perspective-dolly.js';
 import type { PreparedWorldCameraFrame } from './world-camera.js';

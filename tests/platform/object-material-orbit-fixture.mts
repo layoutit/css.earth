@@ -1,10 +1,11 @@
+import * as runtimePolicy from '../../site/runtime-policy.mts';
 import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
 import { createObjectRuntime } from '@cssearth/renderer';
 import { createSceneLifetime } from '@cssearth/engine';
 import { createPreparedResidency } from '../../src/platform/prepared-residency.mts';
 import { createObjectSelectionRuntime } from '../../src/platform/object-selection-runtime.mts';
 import { retainedPresentationFixture } from './object-runtime-package.mts';
-import { Surface, orbitFixture, type OrbitCallbacks } from '../../src/platform/test/orbit-fixture.mts';
+import { Surface, orbitFixture, type OrbitCallbacks } from '@cssearth/renderer/test/orbit-fixture.mts';
 import { requireObjectRuntimeDefinition } from '../../src/platform/object-runtime-contract.mts';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import type { ObjectRuntimeDefinition, ObjectRuntimeServices } from '@cssearth/renderer';
@@ -42,7 +43,7 @@ export function materialOrbitFixture(id: string) {
       sunViewDirection: () => [0, 0, 1],
       captureCounterRotation: () => () => identity, setSceneRotation() {},
       reset() {}, rotate() {}, snapshot: () => ({}) }) };
-  const shared = orbitFixture(null, false, sharedDependencies as unknown as Partial<import('@cssearth/renderer/platform/object-orbit').OrbitServices>);
+  const shared = orbitFixture(runtimePolicy, null, false, sharedDependencies as unknown as Partial<import('@cssearth/renderer/platform/object-orbit').OrbitServices>);
   const f = { ...shared, stage: nativeStage, errors: [], writes: 0, fail: false, create: async () => undefined, event: () => undefined, restore() {} } as unknown as MaterialFixture;
   const publish = () => { f.writes++; if (f.fail) throw new Error('material publication failed'); };
   const services = {

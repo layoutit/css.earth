@@ -26,7 +26,7 @@ test('near views neither load nor show the galaxy banks', async () => {
   const { document } = parseHTML('<div id="host"><i></i></div>');
   const host = document.getElementById('host')!, before = host.firstElementChild!;
   const fetched: string[] = [];
-  const field = mountBackgroundPoints(host, before, ['/a.json', '/b.json'], async url => { fetched.push(url); return new Promise(() => {}); });
+  const field = mountBackgroundPoints(host, before, [{ url: '/a.json' }, { url: '/b.json' }], async url => { fetched.push(url); return new Promise(() => {}); });
   const roots = [...host.querySelectorAll<HTMLElement>('[data-catalogue-points]')];
   expect(roots).toHaveLength(2);
   field.publish(publication, 30_000 * pc);
@@ -39,4 +39,17 @@ test('near views neither load nor show the galaxy banks', async () => {
   expect(roots.map(root => root.style.display)).toEqual(['none', 'none']);
   field.destroy();
   expect(host.querySelectorAll('[data-catalogue-points]')).toHaveLength(0);
+});
+
+test('a far survey begins at its own distance: fetched there, whole one doubling later', async () => {
+  const { document } = parseHTML('<div id="host"><i></i></div>');
+  const host = document.getElementById('host')!, before = host.firstElementChild!;
+  const fetched: string[] = [];
+  const field = mountBackgroundPoints(host, before, [{ url: '/near.json' }, { url: '/far.json', fromDistanceM: 300e6 * pc }],
+    async url => { fetched.push(url); return new Promise(() => {}); });
+  field.publish(publication, 100e6 * pc);
+  expect(fetched, 'the Nearby Universe loads only the near bank').toEqual(['/near.json']);
+  field.publish(publication, 450e6 * pc);
+  expect(fetched).toEqual(['/near.json', '/far.json']);
+  field.destroy();
 });

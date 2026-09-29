@@ -5,6 +5,7 @@ import { overviewScopeAtCamera, type OverviewScope } from '../overview-context.m
 import { overviewScopeFromUrl, preparedFocusFromUrl, satelliteSystemFromUrl, withOverviewScope, withPreparedFocus, withSatelliteSystemView } from '../navigation/navigation-scope.mts';
 import { SOLAR_SYSTEM_ID, systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
+import { SYSTEM_RANGES } from '../system-framing.mts';
 
 export interface SceneOverview { readonly scope: OverviewScope; readonly systemId: string; }
 export type SceneContext =
@@ -45,8 +46,10 @@ export function selectionKey(subject: SelectionTarget): string {
 }
 
 /** One committed subject. Mounted scene ownership and temporary browsing/flight previews remain independent. */
-export function createSceneSelection({ initial, objectId, initialFocus = null, onChange }: {
+export function createSceneSelection({ initial, objectId, initialFocus = null, systems = [], onChange }: {
   initial: SelectionTarget; objectId: string; initialFocus?: PreparedCatalogObject | null;
+  /** The world's bodies, for a system overview's star: its overview is left by the distance from that star. */
+  systems?: SystemObjects;
   onChange(): void;
 }) {
   // The mounted scene: a URL that selects no focus is on its page.
@@ -82,7 +85,9 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, o
     followCamera(world: WorldCameraPose) {
       const context = selectionContext(subject);
       if (context.kind !== 'overview') return false;
-      const scope = overviewScopeAtCamera(world, context.overview.scope);
+      const star = systemById(systems, context.overview.systemId);
+      const scope = overviewScopeAtCamera(world, context.overview.scope, undefined,
+        star ? { originM: star.originM, orbitsWithinM: SYSTEM_RANGES.get(star.id) } : undefined);
       if (scope === context.overview.scope) return false;
       const next: SceneContext = { kind: 'overview', overview: { ...context.overview, scope } };
       return publish(subject.kind === 'focus' ? { ...subject, context: next } : next);
@@ -94,7 +99,7 @@ export function createSceneSelection({ initial, objectId, initialFocus = null, o
         const lens = subject.presentation?.selectedLens ?? (preparedFocusFromUrl(url, scene) === subject.id ? url.searchParams.get('dataset') : null);
         return withPreparedFocus(url, scene, subject.id, lens).href;
       }
-      return withSatelliteSystemView(withOverviewScope(withPreparedFocus(url, scene, null, null),
+      return withSatelliteSystemView(withOverviewScope(withPreparedFocus(url, scene, null, null), scene,
         subject.kind === 'overview' ? subject.overview.scope : null), subject.kind === 'satellite-system').href;
     },
   };

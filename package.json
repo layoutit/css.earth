@@ -81,7 +81,7 @@
     "typecheck:configs": "tsc -p tsconfig.configs.json",
     "typecheck:nebula": "pnpm run '/^typecheck:nebula:/'",
     "typecheck:nebula:config": "pnpm exec tsc -p labs/nebula/tsconfig.json",
-    "typecheck:nebula:packages": "pnpm -r --filter \"./labs/nebula/packages/**\" typecheck",
+    "typecheck:nebula:packages": "pnpm -r --filter \"./labs/nebula/packages/**\" --filter @cssearth/volume-viewer typecheck",
     "typecheck:nebula:tests": "pnpm exec tsc -p labs/nebula/tsconfig.tests.json --pretty false",
     "typecheck:oracles": "tsc -p tests/oracles/tsconfig.json",
     "typecheck:ownership": "pnpm --filter @cssearth/engine exec tsc -p ../../.github/scripts/checks/typescript-ownership.tsconfig.json",
