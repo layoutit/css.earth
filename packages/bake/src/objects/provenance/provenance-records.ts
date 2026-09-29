@@ -13,13 +13,12 @@ export const numbers = (value: unknown) => requireArray(value).map(item => requi
 export const namedRecords = (value: unknown) => records(value).map(item => Object.assign({}, item, {id: requireString(item.id)}));
 export const textValues = (value: unknown) => Object.values(requireRecord(value)).map(item => requireString(item));
 
+/** The size of a published or prepared file, from its inventory entry or prepared record. */
 export function identity(value: unknown) {
-  const input = requireRecord(value);
-  return {bytes: requireFiniteNumber(input.bytes), sha256: requireString(input.sha256)};
+  return {bytes: requireFiniteNumber(requireRecord(value).bytes)};
 }
 export function sourceEntry(value: unknown) {
   const input = requireRecord(value);
-  // Only bytes git does not hold are pinned; an authored file is identified from disk when the record is written.
   return Object.assign({}, input, {path: requireString(input.path)},
     input.capture === undefined ? {} : { capture: parseCapture(input.capture) },
     input.sourceBinding === undefined ? {} : { sourceBinding: parseSourceBinding(input.sourceBinding) });
@@ -32,7 +31,7 @@ export function provenanceManifest(value: unknown) {
     return Object.assign({}, entry, {id: requireString(entry.id), consumers: texts(entry.consumers), sourceBinding: parseSourceBinding(entry.sourceBinding)});
   }), documents: requireArray(input.documents ?? []).map(sourceEntry), generatedIntermediates: requireArray(input.generatedIntermediates ?? []).map(sourceEntry)};
 }
-export interface ProvenanceRecipeSource {id: string; path: string; sha256: string; parameters: Record<string, unknown>;}
+export interface ProvenanceRecipeSource {id: string; path: string; parameters: Record<string, unknown>;}
 export interface ProductBinding {
   inputRoles?: Readonly<Record<string, { role: InputRole; evidence: string }>>;
   observationAttribution: 'source-lineage' | 'none';

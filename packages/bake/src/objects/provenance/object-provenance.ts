@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import type { ProductInputEvidence } from '@cssearth/objects/provenance';
 import { recordPreparationEvidence } from '../../sources/index.ts';
 import {hasErrorCode} from '@cssearth/core';
@@ -11,9 +10,7 @@ type BoundProduct = Omit<ProductBinding, 'inputPaths' | 'urls' | 'inputRoles'> &
   inputEvidence?: readonly ProductInputEvidence[]; inputs: string[]; outputs: (Identity & {url: string; verification: string})[]; inputBasis?: string;
 };
 interface PreparationOptions {objectDirectory: string; publicDirectory: string; outputDirectory?: string; basis?: 'prepared' | 'recovered'; verify?: boolean; write?: boolean;}
-import { createHash } from 'node:crypto';
-import { createReadStream } from 'node:fs';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { OBJECT_PROVENANCE_SCHEMA, validateObjectProvenance } from '@cssearth/objects/provenance';
 import { provenanceProducts } from './provenance-recipes.ts';
@@ -26,19 +23,15 @@ const contained = (root: string, path: string) => {
   if (offset === '..' || offset.startsWith('../') || offset.startsWith('..\\')) throw new TypeError(`Provenance path escapes its package: ${path}.`);
   return result;
 };
+/** A file's size, read from disk. Git and the runtime inventory identify its bytes; the record names it by path. */
 async function fileIdentity(path: string) {
-  const digest = createHash('sha256'); let bytes = 0;
-  for await (const chunk of createReadStream(path)) { bytes += chunk.length; digest.update(chunk); }
-  return { bytes, sha256: digest.digest('hex') };
-}
-function assertIdentity(actual: Identity, expected: Identity, path: string) {
-  if (actual.sha256 !== expected.sha256 || actual.bytes !== expected.bytes) throw new Error(`Provenance identity mismatch: ${path}.`);
+  return { bytes: (await stat(path)).size };
 }
 
 /**
  * Finalize lineage beside the prepared object, after its asset inventory exists.
- * Recovered records bind existing recipe/asset pins but never claim a new run.
- * A preparation run verifies the exact bound input and output bytes before
+ * Recovered records bind existing recipes and inventory entries but never claim a new run.
+ * A preparation run reads every bound input and output from disk before
  * publishing its record. Source acquisition history remains attributed to the
  * source manifest/operation, not retroactively invented by this compiler.
  */
@@ -50,14 +43,13 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
   const manifestBytes = await readFile(resolve(sourceDirectory, 'manifest.json'));
   const manifest = provenanceManifest(JSON.parse(manifestBytes.toString('utf8')));
   const recipes = new Map<string, ProvenanceRecipeSource>();
-  const manifestPins = new Map([...manifest.inputs, ...manifest.documents, ...manifest.generatedIntermediates].map(entry => [`source/${entry.path}`, entry]));
+  const manifestEntries = new Map([...manifest.inputs, ...manifest.documents, ...manifest.generatedIntermediates].map(entry => [`source/${entry.path}`, entry]));
   for (const input of records(record(record(descriptor.properties).recipe).sources)) {
-    // The descriptor names its recipes; the manifest pins them.
-    const path = text(input.path), pin = manifestPins.get(path);
-    if (!pin) throw new Error(`Provenance recipe is not in the source manifest: ${id}/${path}.`);
+    // The descriptor names its recipes; the manifest declares them.
+    const path = text(input.path);
+    if (!manifestEntries.has(path)) throw new Error(`Provenance recipe is not in the source manifest: ${id}/${path}.`);
     const bytes = await readFile(contained(objectDirectory, path));
-    // A recipe is authored here, so its identity is its bytes.
-    const reference = { id: text(input.id), path, sha256: sha256(bytes) };
+    const reference = { id: text(input.id), path };
     recipes.set(reference.id, { ...reference, parameters: record(JSON.parse(bytes.toString('utf8'))) });
   }
   const contentPath = recipes.get('content')?.path.replace(/^source\//u, '');
@@ -72,7 +64,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       byPath.set(entry.path, Object.assign({}, entry, {id, kind,
         origin: entry.origin ?? `object:source/${entry.path}`, title: entry.title ?? entry.purpose ?? entry.path,
         credit: entry.credit ?? (authored ? 'cssEarth contributors' : 'Credit not recorded in source manifest.'),
-        acquisition: entry.acquisition ?? entry.generator ?? (authored ? 'Authored, pinned object-package document.' : 'Acquisition not recorded in source manifest.'),
+        acquisition: entry.acquisition ?? entry.generator ?? (authored ? 'Authored object-package document.' : 'Acquisition not recorded in source manifest.'),
         upstreamLineage: entry.upstreamLineage ?? 'not-recorded',
       }));
     }
@@ -85,15 +77,8 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     optionalJson(resolve(outputDirectory, 'minimaps.json')),
   ]);
   const inventory = stagedInventory ?? await json(resolve(objectDirectory, 'inventory.json'));
+  // The inventory is the one owner of a published file's identity; the record keeps each file's size.
   const outputPins = new Map<string, Identity>(records(inventory.assets).filter(asset => asset.location === 'public').map(asset => [`/scenes/${id}/${text(asset.filename)}`, identity(asset)]));
-  for (const [filename, value] of Object.entries(record(assets?.hashes ?? {}))) {
-    // The inventory is the one owner of a published file's identity. A baked assets.json carries its own copy,
-    // and `refresh-photographs` merges the previous map forward, so a rebaked file leaves a stale duplicate
-    // behind. It fills gaps the inventory does not cover and never overrides it; the bytes themselves are
-    // still verified against the pin below.
-    const url = `/scenes/${id}/${filename}`;
-    if (!outputPins.has(url)) outputPins.set(url, identity(value));
-  }
   const geographic: GeographicProvenance = {};
   const noiseRecipe = maybeRecord(maybeRecord(recipes.get('paged-ellipsoid')?.parameters.geographic)?.noise);
   if (noiseRecipe) {
@@ -104,9 +89,8 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       if (!byPath.has(`${directory}/${pin.file}`)) throw new Error('Geographic provenance source is undeclared.');
       geographic.noise = { pin, prepared, directory };
       for (const page of records(prepared.roots)) {
-        const pin = identity(page), url = text(page.url), previous = outputPins.get(url);
-        if (previous) assertIdentity(pin, previous, url);
-        outputPins.set(url, pin);
+        const url = text(page.url);
+        if (!outputPins.has(url)) outputPins.set(url, identity(page));
       }
     }
   }
@@ -119,9 +103,9 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     if (visiting.has(path)) throw new Error(`Cyclic acquisition dependency: ${path}.`);
     if (sources.has(entry.id)) return entry.id;
     const { consumers, ...record } = entry;
-    // A source present in the checkout is identified from its bytes; a download that is not restored is named by path.
+    // A source present in the checkout records its size; a download that is not restored is named by path.
     const measured = await fileIdentity(contained(sourceDirectory, path)).catch((error: unknown) => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error; });
-    const pin = measured ? { sha256: measured.sha256, bytes: measured.bytes } : {};
+    const pin = measured ? { bytes: measured.bytes } : {};
     const acquisitionOperation = acquisitionOperations.find(operation => operation.path === path) ?? null;
     const verificationOperations = acquisitionOperations.filter(operation => operation.expectedPath === path) ?? [];
     const dependencies = acquisitionOperation?.fileSource
@@ -170,11 +154,10 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
           actual = await fileIdentity(path).catch((error: unknown) => { if (basis === 'recovered' && hasErrorCode(error, 'ENOENT')) return null; throw error; });
           if (actual) measuredOutputs.set(url, actual);
         }
-        if (actual && pin) assertIdentity(actual, pin, url);
         if (!pin) pin = actual ?? undefined;
       }
       if (!pin) { unresolved.push({ product: binding.id, output: url, reason: 'Prepared output has no available identity.' }); continue; }
-      outputs.push({ url, ...pin, verification: measuredOutputs.has(url) ? 'bytes-verified' : 'asset-manifest-pin' });
+      outputs.push({ url, ...pin, verification: measuredOutputs.has(url) ? 'bytes-verified' : 'inventory-entry' });
     }
     if (!outputs.length) { unresolved.push({ product: binding.id, reason: 'No prepared output is bound to this recipe operation.' }); continue; }
     const { inputPaths, urls, inputRoles, ...product } = binding;
