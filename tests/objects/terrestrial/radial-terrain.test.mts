@@ -178,6 +178,35 @@ test('raster atlas: each face gets its own rectangle at one texel density, and i
   assert.ok(plans[2].rect.width > 5 * plans[2].rect.height);
 });
 
+test('raster atlas repairs inward seam padding without changing a narrow source face', () => {
+  // Phoebe face 131: the capped seam miter clipped its apex, disabling depth partitions for the whole body.
+  const css = [[3393.3800083990614, -7429.115725201879, 8028.963796366199],
+    [2370.498872098592, -6396.024641300471, 9043.333313272302],
+    [3700.5284269107983, -7367.5697577323945, 8031.322425525822]];
+  const vertices = css.map(([x, y, z]) => [y / 50, x / 50, z / 50]);
+  const original = structuredClone(vertices);
+  const face = { vertices, normal: [0, 0, 1], vertexNormals: vertices.map(() => [0, 0, 1]) };
+  const { plans } = rasterAtlasLayout([face], 4096, 1);
+  const { matrix: m, rect } = plans[0];
+  const at = (x: number, y: number) => [0, 1, 2].map(axis => m[axis] * x + m[axis + 4] * y + m[axis + 12]);
+  const corners = [at(0, rect.height), at(rect.width, rect.height), at(rect.width / 2, 0)];
+  const cross = (a: number[], b: number[]) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const subtract = (a: number[], b: number[]) => a.map((value, axis) => value - b[axis]);
+  const normal = cross(subtract(corners[1], corners[0]), subtract(corners[2], corners[0]));
+  for (const point of css) for (let edge = 0; edge < 3; edge++) {
+    const a = corners[edge], b = corners[(edge + 1) % 3];
+    const side = cross(subtract(b, a), subtract(point, a)).reduce((sum, value, axis) => sum + value * normal[axis], 0);
+    assert.ok(side >= -1e-3, `source vertex lies outside raster edge ${edge}: ${side}`);
+  }
+  assert.deepEqual(vertices, original, 'repair changes only the sampled raster footprint');
+  assert.equal(plans.length, 1, 'repair preserves the source face');
+});
+
+test('raster atlas refuses a degenerate face with its preparation index', () => {
+  const vertices = [[0, 0, 0], [1, 1, 1], [2, 2, 2]];
+  assert.throws(() => rasterAtlasLayout([{ vertices, normal: [0, 0, 1], vertexNormals: vertices.map(() => [0, 0, 1]) }], 4096, 1), /Radial face 0/);
+});
+
 test('undrawn atlas texels copy the nearest sampled texel in their row, the left one on a tie', () => {
   const undrawn = Uint8Array.from([1, 0, 1, 1, 1, 0, 1, 1,
                                    0, 1, 1, 1, 1, 1, 1, 1]);

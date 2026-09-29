@@ -441,6 +441,14 @@ The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
 top-centre shape. A fixed square per triangle would give large and thin triangles
 several times fewer texels per metre than small ones, at the same bytes.
 
+Before packing, preparation checks every source vertex against its triangle's
+prepared raster footprint. Capped seam miters can clip narrow faces; an inward
+footprint is expanded about its centroid just enough to enclose the source face,
+and the atlas is sampled using that repaired footprint. This preserves source
+vertices and topology. Degenerate footprints stop preparation with the face index.
+The later depth-partition compiler still independently checks rendered CSS coverage;
+it does not relax its rejection to accommodate a bad footprint.
+
 The `u` leaf cuts its triangle with `corner-shape: bevel` on its two top corners.
 Safari 26 and Firefox have no `corner-shape`, so they round those corners into an
 ellipse and each face shows an oval of its slice. For every atlas a `u` face reads,

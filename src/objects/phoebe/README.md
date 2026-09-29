@@ -114,3 +114,13 @@ The [body registration record](source/cassini-ice/evidence/registration.md), [pr
 Normal albedo, elevation, maplet-resolution and image-count display atlases use half dimensions. Infrared and ice absorption retain their existing half-size setting. The half-size grid keeps integral atlas cells; quarter dimensions would not.
 
 This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.
+
+## Prepared triangle coverage
+
+The shared raster preparation checks that each CSS triangle encloses its source
+face before sampling the atlas. This rebake repairs inward seam padding without
+changing Phoebe's 3,500 source triangles. The depth compiler now accepts six
+groups; the largest still contains 3,213 faces. The
+[iPad comparison](evidence/ipad-triangle-coverage-guard.json) records a completed
+drag and zoom, reduced frame spans, and the remaining compositor stalls. It does
+not establish smooth interaction.
