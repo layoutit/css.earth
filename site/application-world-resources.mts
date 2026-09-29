@@ -25,6 +25,8 @@ const ASTRONOMICAL_UNIT_M = 149_597_870_700, PARSEC_M = 3.085677581491367e16;
 const IMAGE_LAYER_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
   m31: ['stars', 'dots'],
   m33: ['stars', 'dots'],
+  m81: ['dots'],
+  'ngc-253': ['dots'],
 };
 
 // Inventory of prepared resources, not navigation entries or runtime generators.

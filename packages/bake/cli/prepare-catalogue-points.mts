@@ -299,12 +299,6 @@ if (bulgePlacement !== undefined && (!discPlacement || typeof bulgePlacement.sou
   throw new TypeError(`${at('frame.bulge')} needs frame.placement image-layer-disc, a source and a basis; got ${JSON.stringify(bulgePlacement)}.`);
 }
 let bulgeMembers = 0;
-const inBulge: boolean[] = [];
-// A bulge member may take its own tone (`appearance.bulgeOpacity`): a dimmed dot reads as a dark speck on the bright bulge.
-const bulgeOpacity = (recipe.appearance as { bulgeOpacity?: unknown }).bulgeOpacity;
-if (bulgeOpacity !== undefined && (!bulgePlacement || typeof bulgeOpacity !== 'number' || !(bulgeOpacity > 0 && bulgeOpacity <= 1) || toneBy || colorBy || colorByClass || colorByBv || colorByBands || colorBySpectrumAtRedshift)) {
-  throw new TypeError(`${at('appearance.bulgeOpacity')} needs frame.bulge, a single-colour bank and a value in (0, 1]; got ${JSON.stringify(bulgeOpacity)}.`);
-}
 if (discPlacement) {
   // Each row on the image layers' disc midplane: its sight line's unit vector times the distance to the midplane, in kpc.
   const { parseImageLayerRecipe, imageLayerDisc, imageLayerDiscDistanceKpc, imageLayerBulgeModel } = await import('@cssearth/bake/image-layers');
@@ -344,7 +338,7 @@ if (discPlacement) {
         let k = 0, running = weights[0]!;
         while (running < target && k < samples - 1) running += weights[++k]!;
         const distance = midplane - reach + (k + 0.5) / samples * 2 * reach;
-        bulgeMembers++; inBulge[index] = true;
+        bulgeMembers++;
         converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, distance);
         return ray.map(value => Math.round(value * distance * 1e4) / 1e4);
       }
@@ -458,16 +452,51 @@ const pointIndex = converted.points.map((_, index) => {
   }
   return combos.get(key)!;
 });
-// Disc and bulge members as two tones of the one colour: the layer carries the brighter, paletteTone scales each.
-const bulgeTone = typeof bulgeOpacity === 'number' ? (() => {
-  const layer = Math.max(appearance.opacity, bulgeOpacity);
-  return { layer, tones: [Number((appearance.opacity / layer).toFixed(4)), Number((bulgeOpacity / layer).toFixed(4))] };
+/** Every disc bank of catalogued objects takes each dot's look from the photograph under it, so the dots read as part of the galaxy's light:
+ * a dot's tone follows the photograph's brightness there, relative to the 90th percentile over the bank's dots on the
+ * photograph and never below PHOTOGRAPH_TONE_FLOOR, and its colour moves PHOTOGRAPH_COLOUR_MIX of the way to the
+ * photograph's local colour, keeping a hint of its kind's. Positions stay the catalogue's. Tones come in eight steps and
+ * colours in sixteen levels a channel, so the palette stays small. The photograph is the one the layers show
+ * (prepareImageLayerFace): cleaned, levelled and colour-tied. Both constants are presentation choices, picked by eye
+ * from M81 rendered in the app at mixes 0, 0.5 and 0.8 against flat tints, which showed as dark specks on the bright
+ * bulge. Star banks coloured by their measured B-V (colorByBv) keep their look: their colour is a measurement. */
+const PHOTOGRAPH_TONE_FLOOR = 0.15, PHOTOGRAPH_COLOUR_MIX = 0.5;
+if (discPlacement && (toneBy || colorBy || colorByClass || colorByBands || colorBySpectrumAtRedshift)) {
+  throw new TypeError(`${at('appearance')}: a disc bank takes its tone and colour from the photograph, or colorByBv for stars; got ${Object.keys(appearance).join(', ')}.`);
+}
+const photographLook = discPlacement && !colorByBv ? await (async () => {
+  const { parseImageLayerRecipe, imageLayerView, prepareImageLayerFace } = await import('@cssearth/bake/image-layers');
+  const layerRecipe = parseImageLayerRecipe(JSON.parse(await readFile(resolve(objectDirectory, 'source', 'recipe.json'), 'utf8')));
+  const view = imageLayerView(layerRecipe), { rgb: data, info } = await prepareImageLayerFace({ sourceDirectory: resolve(objectDirectory, 'source'), recipe: layerRecipe });
+  // The mean over a square about 1/400 of the face wide: the light around the dot, not one noisy pixel.
+  const window = Math.max(2, Math.round(info.width / 800));
+  const samples = converted.sky!.map(([ra, dec]) => {
+    const crop = view.crop(ra, dec); if (!crop) return { light: 0, rgb: [0, 0, 0], inside: false };
+    const cx = Math.round((crop[0] + 1) / 2 * info.width - 0.5), cy = Math.round((1 - crop[1]) / 2 * info.height - 0.5), rgb = [0, 0, 0]; let n = 0;
+    for (let dy = -window; dy <= window; dy++) for (let dx = -window; dx <= window; dx++) { const x = cx + dx, y = cy + dy; if (x < 0 || y < 0 || x >= info.width || y >= info.height) continue; const o = 3 * (y * info.width + x); for (let c = 0; c < 3; c++) rgb[c]! += data[o + c]!; n++; }
+    const mean = rgb.map(v => n ? v / n : 0);
+    return { light: 0.2126 * mean[0]! + 0.7152 * mean[1]! + 0.0722 * mean[2]!, rgb: mean, inside: cx >= 0 && cy >= 0 && cx < info.width && cy < info.height };
+  });
+  // The percentile counts only dots on the photograph: dots beyond it (halo clusters) have no light to share.
+  const sorted = samples.filter(s => s.inside).map(s => s.light).sort((a, b) => a - b), reference = Math.max(1, sorted[Math.floor(0.9 * (sorted.length - 1))] ?? 255);
+  const hexOf = (rgb: number[]) => '#' + rgb.map(v => Math.round(Math.max(0, Math.min(255, v)) / 17) * 17).map(v => v.toString(16).padStart(2, '0')).join('');
+  const own = [1, 3, 5].map(i => parseInt(appearance.colorCss.slice(i, i + 2), 16));
+  const entries = new Map<string, number>(), colours: string[] = [], tones: number[] = [];
+  const indices = samples.map(sample => {
+    const peak = Math.max(...sample.rgb, 1), local = sample.rgb.map(v => v * 255 / peak), base = own;
+    const colour = hexOf(base.map((v, c) => v * (1 - PHOTOGRAPH_COLOUR_MIX) + local[c]! * PHOTOGRAPH_COLOUR_MIX));
+    const tone = Math.max(PHOTOGRAPH_TONE_FLOOR, Math.min(1, sample.light / reference)), step = Math.round(tone * 7) / 7;
+    const key = `${colour}:${step}`;
+    if (!entries.has(key)) { entries.set(key, colours.length); colours.push(colour); tones.push(Number(Math.max(PHOTOGRAPH_TONE_FLOOR, step).toFixed(4))); }
+    return entries.get(key)!;
+  });
+  return { colours, tones, indices, reference: Number(reference.toFixed(1)) };
 })() : null;
 const magnitudes = converted.magnitudes.filter((value): value is number => value !== null && Number.isFinite(value)).sort((a, b) => a - b);
 const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recipe.meaning,
   frame: { referenceFrame: frame.output, epochJdTt: frame.epochJdTt, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
     metersPerUnit: outputMpc ? 3.0856775814913673e22 : 3.0856775814913673e19, boundsUnits: { min: [-reach, -reach, -reach], max: [reach, reach, reach] } },
-  appearance: bulgeTone ? { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: bulgeTone.layer, palette: [appearance.colorCss, appearance.colorCss], paletteTone: bulgeTone.tones }
+  appearance: photographLook ? { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity, palette: photographLook.colours, paletteTone: photographLook.tones }
     : { colorCss: appearance.colorCss, radiusPx: appearance.radiusPx, opacity: appearance.opacity,
       ...(toneBy ? { palette: tonedPalette, paletteTone } : colorByBands ? { palette: bandPalette } : colorBySpectrumAtRedshift ? { palette: redshiftPalette } : palette ?? classPalette ? { palette: palette ?? classPalette } : {}) },
   ...(colorBySpectrumAtRedshift ? { spectrumColour: { spectrum: colorBySpectrumAtRedshift.spectrum.path, step: colorBySpectrumAtRedshift.step, basis: colorBySpectrumAtRedshift.basis,
@@ -488,7 +517,8 @@ const bank = { schema: 'cssearth-catalogue-points@1', id, source, meaning: recip
     : `Astropy ${converted.astropy} SkyCoord: ${icrsInput ? 'right ascension, declination' : 'Galactic longitude, latitude'} and distance to heliocentric ICRS Cartesian, ${outputMpc ? 'Mpc, rounded to 0.1 kpc' : 'kpc, rounded to 0.1 pc'}.`,
   ...(kinematicUncertainty ? { kinematicUncertainty: { basis: kinematicUncertainty.basis, rotation: kinematicUncertainty.rotation },
     kinematicSigmaKpc: converted.sigmas } : {}),
-  points: bulgeTone ? converted.points.map((point, index) => [...point, inBulge[index] ? 1 : 0])
+  ...(photographLook ? { photographLook: { toneFloor: PHOTOGRAPH_TONE_FLOOR, colourMix: PHOTOGRAPH_COLOUR_MIX, referenceLight: photographLook.reference } } : {}),
+  points: photographLook ? converted.points.map((point, index) => [...point, photographLook.indices[index]!])
     : toneBy || colorByClass || colorByBands || colorBySpectrumAtRedshift || palette ? converted.points.map((point, index) => [...point, pointIndex[index]!]) : converted.points };
 const outputPath = resolve(objectDirectory, 'prepared', `${id}.json`);
 await writeFile(outputPath, JSON.stringify(bank) + '\n');

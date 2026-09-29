@@ -1,0 +1,52 @@
+{
+  "id": "salo-2015-s4g-decompositions",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Spitzer Survey of Stellar Structure in Galaxies (S4G): multi-component decomposition strategies and data release",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2015ApJS..219....4S"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJS/219/4"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015ApJS..219....4S",
+      "label": "2015ApJS..219....4S"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+      "label": "CDS J/ApJS/219/4"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/219/4/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table7: 3.6 micron bulge (Sersic) plus exponential disc models. NGC3031: bulge 45.8% of the light, mag 7.088, q 0.654, PA 145.02, Re 102.96 arcsec, n 3.557; disc mag 6.912, q 0.543, PA -23.7, hr 153.17 arcsec, mu0 19.833. NGC0253: bulge 28.3%, mag 7.508, q 0.586, PA 66.65, Re 103.93 arcsec, n 3.872; disc mag 6.502, q 0.193, PA 51.29, hr 185.12 arcsec, mu0 19.835."
+    }
+  ],
+  "creators": [
+    "H. Salo",
+    "E. Laurikainen",
+    "J. Laine",
+    "S. Comerón"
+  ],
+  "publisher": "ApJS 219, 4",
+  "publicationDate": "2015",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Salo et al. (2015), ApJS 219, 4.",
+      "scope": "Bulge-plus-disc fits of M81 and NGC 253",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/219/4/ReadMe"
+    }
+  ]
+}

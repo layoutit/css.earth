@@ -1,0 +1,41 @@
+{
+  "id": "eso-eso0902c",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Spiral galaxy NGC 253",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "eso0902c"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso0902c/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/eso0902c.jpg",
+      "label": "Large JPEG"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso0902c/",
+      "checkedOn": "2026-09-29",
+      "locator": "8285 x 7510 px; 32.87 x 29.79 arcmin; MPG/ESO 2.2-metre WFI in [O III], V, R and H-alpha; page orientation 1.6 deg right of vertical, re-measured as 0.09 deg from two Gaia stars (the recipe's observation). The same field as eso0902a without that release's inset. Found by `telescope explore \"ngc 253\"`."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso0902c/"
+    }
+  ]
+}

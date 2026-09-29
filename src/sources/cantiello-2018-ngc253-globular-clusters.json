@@ -1,0 +1,52 @@
+{
+  "id": "cantiello-2018-ngc253-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A VST and VISTA study of globular clusters in NGC253",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2018A&A...611A..21C"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/611/A21"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...611A..21C",
+      "label": "2018A&A...611A..21C"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/611/A21",
+      "label": "CDS J/A+A/611/A21"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/611/A21/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table3: 347 globular cluster candidates with J2000 positions and a class; 82 Bona_Fide, 155 Uncertain, 110 No."
+    }
+  ],
+  "creators": [
+    "M. Cantiello",
+    "A. Grado",
+    "M. Rejkuba",
+    "M. Arnaboldi"
+  ],
+  "publisher": "A&A 611, A21",
+  "publicationDate": "2018",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Cantiello et al. (2018), A&A 611, A21.",
+      "scope": "NGC 253 globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/611/A21/ReadMe"
+    }
+  ]
+}

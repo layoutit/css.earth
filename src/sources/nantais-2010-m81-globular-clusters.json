@@ -1,0 +1,50 @@
+{
+  "id": "nantais-2010-m81-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Spectroscopy of M81 globular clusters",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2010AJ....139.2620N"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/AJ/139/2620"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010AJ....139.2620N",
+      "label": "2010AJ....139.2620N"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/139/2620",
+      "label": "CDS J/AJ/139/2620"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/139/2620/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "M81glob: 108 spectroscopically confirmed globular clusters with J2000 positions."
+    }
+  ],
+  "creators": [
+    "J. B. Nantais",
+    "J. P. Huchra"
+  ],
+  "publisher": "AJ 139, 2620",
+  "publicationDate": "2010",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Nantais & Huchra (2010), AJ 139, 2620.",
+      "scope": "M81 globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/139/2620/ReadMe"
+    }
+  ]
+}

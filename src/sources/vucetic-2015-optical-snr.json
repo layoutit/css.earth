@@ -1,0 +1,51 @@
+{
+  "id": "vucetic-2015-optical-snr",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Optical supernova remnants in nearby galaxies and their influence on star formation rates derived from H-alpha emission",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2015MNRAS.446..943V"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/MNRAS/446/943"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.446..943V",
+      "label": "2015MNRAS.446..943V"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/446/943",
+      "label": "CDS J/MNRAS/446/943"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/446/943/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "m81: 41 optical supernova remnants of M81 with J2000 positions."
+    }
+  ],
+  "creators": [
+    "M. M. Vucetic",
+    "B. Arbutina",
+    "D. Urosevic"
+  ],
+  "publisher": "MNRAS 446, 943",
+  "publicationDate": "2015",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Vucetic et al. (2015), MNRAS 446, 943.",
+      "scope": "M81 supernova remnants",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/446/943/ReadMe"
+    }
+  ]
+}
