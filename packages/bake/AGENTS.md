@@ -91,7 +91,7 @@ its validators accept); the renderer never imports the bake.
   `.github/scripts/checks/check-object-runtime-ownership.mts` imports the readers. `prepared-object-pin.ts` pins a prepared object to its
   transport (the `prepared/object.json` payload, page metadata, the descriptor's `prepared` pin and the inventory); the world-navigation
   and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
-  Its tests are in `tests/contract/`.
+  Its tests are in `src/contract/`.
 - `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime
   asset host. Staging a pull request's baked bytes against its frozen inventories, publishing the inventoried files, the
   published-asset gate, the deploy check (which reads the renderer's prepared world-context parsers) and the dry-run prune

@@ -9,7 +9,7 @@
     },
     "bakeTypecheck": "passed",
     "rayOracle": {
-      "owner": "tests/prepared-presentation/prepared-visibility-oracle.mts",
+      "owner": "https://github.com/layoutit/cssEarth/blob/2af5c9c167ecfd6cf7317cf681240fe7b1fe6885/tests/prepared-presentation/prepared-visibility-oracle.mts (now packages/bake/src/prepared-presentation/fixtures/prepared-visibility-oracle.mts)",
       "eyes": 24,
       "eyeRadius": "5 * maximum absolute source coordinate",
       "eyeFormula": "[R*cos(i*pi/12), R*0.5*sin(i*pi/12*0.7), R*sin(i*pi/12)]",

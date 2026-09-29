@@ -11,7 +11,7 @@ folder). The whole-disc colour policy is in `@cssearth/bake/objects/raster`
 ([`whole-disc-colour.ts`](../objects/raster/whole-disc-colour.ts)), the commands that
 make records are in [`packages/bake/cli/`](../../cli/) (`fit-epic-limb.mts`,
 `acquire-psg-limb-table.mts`), and the tests, which import the entry, are in
-[`tests/photometry/`](./).
+[`packages/bake/src/photometry/`](./).
 
 ## Modules
 
@@ -105,7 +105,7 @@ Check each point against the source before merging a record:
 
 ## Tests and oracle
 
-- In `tests/photometry/`, `disk.test.mts` holds the disk functions to exact equality with frozen copies
+- In `packages/bake/src/photometry/`, `disk.test.mts` holds the disk functions to exact equality with frozen copies
   of the historical arithmetic.
 - `hapke.test.mts` and `normalization.test.mts` check defining limits:
   Chandrasekhar's H(1), phase-function normalization, opposition peaks,
