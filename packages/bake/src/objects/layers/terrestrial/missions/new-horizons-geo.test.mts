@@ -12,7 +12,7 @@ const source=new URL('../../../../../../../src/objects/arrokoth/source/',import.
 const read=async(path:string)=>JSON.parse(await readFile(new URL(path,source),'utf8'));
 const fixture=shape({schema:text,tool:text,version:text,images:array(shape({path:text,bytes:number,
   planes:array(shape({name:text,shape:array(number),samples:array(shape({index:number,value:nullable(number)}))})),
-  wcs:optional(array(shape({pixel:array(number),raDecDegrees:array(number)}))),exposureSeconds:optional(number),acceptedPixels:optional(number)}))})(JSON.parse(await readFile(new URL('../../../../../../../tests/objects/fixtures/arrokoth/new-horizons-astropy.json',import.meta.url),'utf8')));
+  wcs:optional(array(shape({pixel:array(number),raDecDegrees:array(number)}))),exposureSeconds:optional(number),acceptedPixels:optional(number)}))})(JSON.parse(await readFile(new URL('./fixtures/arrokoth/new-horizons-astropy.json',import.meta.url),'utf8')));
 
 test('three pinned New Horizons products match independent Astropy pixels and HDU layouts',async()=>{
   assert.equal(fixture.tool,'Astropy');assert.equal(fixture.images.length,3);

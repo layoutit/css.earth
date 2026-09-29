@@ -9,6 +9,10 @@ export default defineConfig({
       'src/cluster-catalog/*.test.ts', 'src/world-context/spatial-context.test.ts',
       // The object libraries' node tests run under `pnpm test:bake-objects` (.github/scripts/checks/test-bake-objects.mts).
       'src/objects/**/*.test.ts', 'src/objects/**/*.test.mts',
+      'src/delivery/operations-assemble.test.ts', 'src/delivery/public-runtime-assets.test.ts',
+      'src/delivery/publication*.test.mts', 'src/presentation/emissive-plates.test.mts',
+      'src/scene/leaf-raster-scale.test.ts', 'src/world-context/world-navigation.test.ts',
+      'src/raster/raster-pages.test.mts',
       // The authoring pipelines' node tests run under `pnpm test:node` and `pnpm test:bake-objects`; they use
       // `node:test`, not Vitest.
       'authoring/**/*.test.mts'],

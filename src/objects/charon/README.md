@@ -255,8 +255,8 @@ radiance units, while the collection overview describes these products as I/F.
 The overview mistypes the missing-value exponent; native bytes contain about
 −3.4028235e38. These ratios use the overview's I/F interpretation.
 
-The [astropy fixture](../../../tests/oracles/fits/charon-leisa.json) and
-[comparing test](../../../tests/objects/observation/spectral-band-maps.test.mts)
+The [astropy fixture](../../../packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json) and
+[comparing test](../../../packages/bake/src/objects/layers/observation/spectral-band-maps.test.mts)
 check both scans' native values and independently calculated cells around
 Organa's published coordinate (310.9° E, 54.3° N). This proves decoding and
 arithmetic, not a new mineralogical detection. The published map supplies the

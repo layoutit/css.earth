@@ -5,7 +5,7 @@ import { existsSync } from 'node:fs';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from '@cssearth/core/oracle';
-import { fitsArchiveInputs } from './fits/archive-inputs.mts';
+import { fitsArchiveInputs } from '../../packages/bake/src/objects/layers/observation/fixtures/fits/archive-inputs.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const args = process.argv.slice(2);
@@ -25,9 +25,9 @@ const run = (args: string[], command = process.execPath) => {
 // The reader's own behaviour tests, including the float32 transport image, are the package's.
 run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
 const unit = ['tests/oracles/fits/core.oracle.test.mts', 'tests/oracles/fits/sky-orientation.oracle.test.mts', 'tests/oracles/fits/sky-projection.oracle.test.mts',
-  'tests/oracles/fits/file-region.oracle.test.mts', 'tests/oracles/fits/rice.oracle.test.mts', 'tests/fits/repository-inputs.test.mts',
-  'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'tests/objects/color/color-transfer.oracle.test.mts', 'tests/objects/observation/wise-atlas-mosaic.oracle.test.mts',
-  'tests/objects/observation/wise-atlas-mosaic.test.mts', 'tests/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts', 'tests/contract/oracle-fixtures.test.mts',
+  'tests/oracles/fits/file-region.oracle.test.mts', 'packages/bake/src/objects/layers/observation/fixtures/fits/rice.oracle.test.mts', 'tests/fits/repository-inputs.test.mts',
+  'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'packages/bake/src/objects/color/color-transfer.oracle.test.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.oracle.test.mts',
+  'packages/bake/src/objects/raster/wise-atlas-mosaic.test.mts', 'tests/objects/observation/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts', 'tests/contract/oracle-fixtures.test.mts',
   "packages/bake/src/objects/raster/observed/observed-fits.test.mts",
   "packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.test.mts",
   "packages/bake/src/objects/raster/fits-image-map.test.mts",
@@ -112,4 +112,4 @@ run(['--test', '--test-concurrency=1',
   'packages/bake/src/objects/layers/terrestrial/missions/llorri-geo.oracle.test.mts',
   'packages/bake/src/objects/layers/terrestrial/missions/pds4-geometry-cube.oracle.test.mts',
   'packages/bake/src/objects/layers/terrestrial/missions/new-horizons-geo.test.mts',
-  'tests/objects/observation/spectral-band-maps.test.mts']);
+  'packages/bake/src/objects/layers/observation/spectral-band-maps.test.mts']);

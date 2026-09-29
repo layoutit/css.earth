@@ -9,7 +9,7 @@ import {createHash} from 'node:crypto';
 import { decodeEncounterFits, encounterCamera, validateEncounterControls } from '@cssearth/bake/objects/layers/terrestrial';
 const root=resolve(import.meta.dirname,'../../../../../../..');
 const parseAnchors=shape({products:array(shape({body:text,path:text,width:number,height:number,units:text,anchors:array(shape({x:number,y:number,quality:number,radiance:nullable(number)}))}))});
-const anchors=parseAnchors(JSON.parse(await readFile(resolve(root,'tests/objects/fixtures/comets/encounter-decoder-anchors.json'), 'utf8')));
+const anchors=parseAnchors(JSON.parse(await readFile(resolve(root,'packages/bake/src/objects/layers/terrestrial/missions/fixtures/comets/encounter-decoder-anchors.json'), 'utf8')));
 for(const body of ['comet-81p','comet-9p','comet-103p'])test(`${body}: real source pixels match independent FITS decoding and all cameras pass held-out controls`,async()=>{
  const source=resolve(root,`src/objects/${body}/source`),recipe=JSON.parse(await readFile(resolve(source,'preparation/terrestrial.json'), 'utf8')),manifest=JSON.parse(await readFile(resolve(source,'manifest.json'), 'utf8'));
  const shape=required(requireArray(manifest.inputs).map(value=>fixtureRecord(value)).find(e=>e.path===recipe.geometry.radialTerrain.path));

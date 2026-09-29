@@ -13,7 +13,7 @@ decode → camera → pixel geometry → photometry → footprint → surface tr
 
 The stages below are the modules beside this README, part of the terrestrial layer's shared libraries
 (`@cssearth/bake/objects/layers/terrestrial`). Their tests are in
-[`tests/objects/surface-observations/`](../../../../../../../tests/objects/surface-observations/), the pipeline evidence in
+[`tests/objects/surface-observations/`](./), the pipeline evidence in
 [`evidence/photograph-pipeline/`](../../../../../../../evidence/photograph-pipeline/), and the OSIRIS shape comparison is
 [`packages/bake/cli/osiris-shape-comparison.mts`](../../../../../cli/osiris-shape-comparison.mts).
 

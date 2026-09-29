@@ -6,7 +6,7 @@ import {decodeHriiSolarTable,fitHriiContinuum,fitHriiThermal,fitHriiSpectrum,pla
 import {array,number,shape,text} from '@cssearth/core';
 
 const parse=shape({reference:text,temperatureKelvin:number,amplitude:number,slopePercentPer100Nm:number,incidenceCosine:number,heliocentricDistanceAu:number,samples:array(array(number)),planckAnchors:array(array(number))});
-const reference=parse(JSON.parse(await readFile(new URL('../../../../../../../tests/objects/fixtures/comets/hrii-spectral-reference.json',import.meta.url),'utf8')));
+const reference=parse(JSON.parse(await readFile(new URL('./fixtures/comets/hrii-spectral-reference.json',import.meta.url),'utf8')));
 const solar={wavelengthMicrons:reference.samples.map(x=>x[0]),irradiance:reference.samples.map(x=>x[1])};
 const samples=reference.samples.map(x=>({wavelengthMicrons:x[0],radiance:x[2],valid:true}));
 const illumination={incidenceCosine:reference.incidenceCosine,heliocentricDistanceAu:reference.heliocentricDistanceAu};

@@ -11,6 +11,21 @@ import { runtimeLock, generatorFingerprint } from '../oracles/sbmt/runtime.mts';
 // The scripts sit beside their fixtures; SBMT's JSON bridge manifests and runtime lock are not fixtures.
 const NOT_FIXTURES = new Set(['sbmt/package.json', 'sbmt/package-lock.json', 'sbmt/runtime.lock.json']);
 const relocatedFixtures: Readonly<Record<string, string>> = {
+  "eclipse-map/numerics.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.json",
+  "eclipse-map/theresa-eigenbasis.json": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.json",
+  "fits/binary-table.json": "packages/bake/src/objects/layers/observation/fixtures/fits/binary-table.json",
+  "fits/charon-leisa.json": "packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.json",
+  "fits/core.json": "packages/bake/src/objects/layers/observation/fixtures/fits/core.json",
+  "fits/encounter.json": "packages/bake/src/objects/layers/terrestrial/missions/encounter.json",
+  "fits/llorri.json": "packages/bake/src/objects/layers/terrestrial/missions/llorri.json",
+  "fits/lupton-asinh.json": "packages/bake/src/objects/color/fixtures/lupton-asinh.json",
+  "fits/pallas.json": "packages/bake/src/objects/layers/observation/fixtures/fits/pallas.json",
+  "fits/rice.json": "packages/bake/src/objects/layers/observation/fixtures/fits/rice.json",
+  "fits/sky-orientation.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json",
+  "fits/sky-projection.json": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-projection.json",
+  "fits/synoptic.json": "packages/bake/src/objects/layers/observation/fixtures/fits/synoptic.json",
+  "fits/wise-atlas-projection.json": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.json",
+
   "astronomy/hosted-orbit.json": "packages/bake/src/objects/scene/fixtures/hosted-orbit.json",
   "isis/photometric-truth.json": "packages/bake/src/photometry/fixtures/photometric-truth.json",
   "isis2/borrelly-micas.json": "packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.json",
@@ -21,6 +36,13 @@ const relocatedFixtures: Readonly<Record<string, string>> = {
   "pds3/osiris-reflectance.json": "packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.json"
 };
 const relocatedScripts: Readonly<Record<string, string>> = {
+  "eclipse-map/numerics.py": "packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.py",
+  "eclipse-map/theresa-eigenbasis.py": "packages/bake/src/objects/raster/eclipse-map/fixtures/theresa-eigenbasis.py",
+  "fits/charon-leisa.py": "packages/bake/src/objects/layers/terrestrial/missions/charon-leisa.py",
+  "fits/lupton-asinh.py": "packages/bake/src/objects/color/fixtures/lupton-asinh.py",
+  "fits/rice.py": "packages/bake/src/objects/layers/observation/fixtures/fits/rice.py",
+  "fits/wise-atlas-projection.py": "packages/bake/src/objects/raster/fixtures/wise-atlas-projection.py",
+
   "astronomy/hosted-orbit.py": "packages/bake/src/objects/scene/fixtures/hosted-orbit.py",
   "fits/encounter.py": "packages/bake/src/objects/layers/terrestrial/missions/encounter.py",
   "fits/llorri.py": "packages/bake/src/objects/layers/terrestrial/missions/llorri.py",

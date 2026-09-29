@@ -3,7 +3,7 @@
  * authoring scripts under each package's authoring/ folder and the contracts in tests/, because they read body sources,
  * kernel banks and oracle fixtures through the repository's test helpers, so the package's own Vitest run does not reach them.
  * The node tests that need none of those helpers sit beside their module in packages/bake/src/objects/, which Vitest skips.
- * A test belongs here when it imports an object entry; a moved library's tests therefore join without a list to maintain.
+ * Tests importing an object entry, all colocated object suites, and the other bake-owned Node suites belong here.
  * Tests whose restored sources are absent skip, as they do everywhere else.
  *
  *   node .github/scripts/checks/test-bake-objects.mts           run them (the packages must be built)
@@ -13,17 +13,16 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-/** Tracked node-test files the selection may take, as `git ls-files` pathspecs. */
-export const BAKE_OBJECT_TEST_PATHS = ['tests/**/*.test.mts', 'tests/**/*.test.ts', 'packages/bake/src/objects/**/*.test.ts', 'packages/bake/src/objects/**/*.test.mts', 'packages/bake/authoring/**/*.test.mts', 'packages/telescope-cli/authoring/**/*.test.mts'] as const;
+/** Tracked test files the Node selection may take, as `git ls-files` pathspecs. */
+export const BAKE_OBJECT_TEST_PATHS = ['tests/**/*.test.mts', 'tests/**/*.test.ts', 'packages/bake/src/**/*.test.ts', 'packages/bake/src/**/*.test.mts', 'packages/bake/authoring/**/*.test.mts', 'packages/telescope-cli/authoring/**/*.test.mts'] as const;
 const OBJECT_ENTRY = /(?:from|import)\s*\(?\s*['"]@cssearth\/bake\/objects\/(?:layers\/)?[a-z-]+['"]/u;
 /** Tests of an object entry that read the restored prepared packages of real bodies, so they run where those are restored:
  * the source-catalogue step of audit.yml's prepared-universe job. */
 export const RESTORED_PACKAGE_TESTS: readonly string[] = ['tests/contract/object-provenance.test.mts'];
 
-/** The test files among `files` whose source (read by `read`) imports an `@cssearth/bake/objects/<topic>` or
- * `@cssearth/bake/objects/layers/<kind>` entry, sorted, except the tests of restored packages. */
+/** Object-entry tests and relocated bake Node suites, sorted, except tests requiring restored packages. */
 export function bakeObjectTests(files: readonly string[], read: (path: string) => string): string[] {
-  return files.filter(path => /\.test\.m?ts$/u.test(path) && !RESTORED_PACKAGE_TESTS.includes(path) && OBJECT_ENTRY.test(read(path))).sort();
+  return files.filter(path => /\.test\.m?ts$/u.test(path) && !RESTORED_PACKAGE_TESTS.includes(path) && (OBJECT_ENTRY.test(read(path)) || path.startsWith('packages/bake/src/objects/') || (path.startsWith('packages/bake/src/') && /(?:node:test|@cssearth\/objects\/node\/source-test)/u.test(read(path))))).sort();
 }
 
 function trackedTests(root: string): string[] {
