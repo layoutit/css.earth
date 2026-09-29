@@ -1,10 +1,10 @@
 /** The short provider index each page's "Sources" link shows, computed once from the prepared source usage when the catalogue
- * is written (prepare-facilities.mts). The site reads this file instead of the whole catalogue: with batch 1 of the exoplanets
+ * is written (site/build/prepare/prepare-facilities.mts). The site reads this file instead of the whole catalogue: with batch 1 of the exoplanets
  * (2026-09-29) `site/prepared-sources.json` reached 41 MB, and importing it put the dev server and the site typecheck past 4 GB.
  * The complete author and institutional credits stay in each body's README, which the link opens. */
 import { isRecord } from '@cssearth/core';
-import type { SourceResolver } from '@cssearth/objects/sources';
-import type { SourceUsage } from '@cssearth/objects/provenance';
+import type { SourceResolver } from '../sources/catalog.js';
+import type { SourceUsage } from './source-usage.js';
 
 export const SOURCE_CREDITS_SCHEMA = 'cssearth-prepared-source-credits@1';
 export interface SourceCredits { readonly schema: typeof SOURCE_CREDITS_SCHEMA; readonly providers: Readonly<Record<string, readonly string[]>> }

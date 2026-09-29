@@ -10,5 +10,6 @@ export * from './exploration-contributions.js';
 export * from './prepared-exploration.js';
 export * from './source-usage.js';
 export * from './prepared-sources.js';
+export * from './source-credits.js';
 export * from './dataset-routes.js';
 export * from './context-availability.js';

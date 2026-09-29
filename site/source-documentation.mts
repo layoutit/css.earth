@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog';
 import credits from './prepared-source-credits.json' with { type: 'json' };
-import { parseSourceCredits } from './build/prepare/source-credits.mts';
+import { parseSourceCredits } from '@cssearth/objects/provenance';
 import { projectRoot } from '@cssearth/core/node';
 
 // Astro prepares these ordinary links. The browser never reads Markdown or
@@ -18,7 +18,7 @@ const revision = process.env.COMMIT_REF || execFileSync('git', ['rev-parse', 'HE
 }).trim();
 if (!/^[a-f0-9]{40}$/u.test(revision)) throw new Error('Source documentation needs the build commit.');
 const checked = new Set<string>();
-// Each object's provider index, computed when the source catalogue was written (build/prepare/source-credits.mts).
+// Each object's provider index, computed when the source catalogue was written (@cssearth/objects/provenance source-credits.ts).
 const PROVIDERS = parseSourceCredits(credits).providers;
 const sourceProviders = (objectId: string): readonly string[] => PROVIDERS[objectId] ?? [];
 const creditLabel = (providers: readonly string[]) => {
