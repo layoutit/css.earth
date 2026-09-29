@@ -14,8 +14,8 @@ vi.mock('../image-layers/prepared-image-layer-runtime.js', () => ({
 
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
   metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
-const plan = parseLensBillboards({ schema: 'cssearth-lens-billboards@1', atlas: { columns: 1, rows: 1, cellPx: 256, sha256: 'b'.repeat(64) },
-  banks: [{ id: 'galaxy', payloadSha256: 'a'.repeat(64), contextVisibility: 'galactic', attached: false,
+const plan = parseLensBillboards({ schema: 'cssearth-lens-billboards@1', atlas: { columns: 1, rows: 1, cellPx: 256 },
+  banks: [{ id: 'galaxy', contextVisibility: 'galactic', attached: false,
     billboard: { cell: 0, radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] } }] });
 
 test('a galaxy drawn from image layers shows its billboard from afar and hands it to its slices once they load', async () => {

@@ -9,7 +9,7 @@ export interface SurfaceFeaturePolicy {
   readonly minimumDiameterPixels: number; readonly alwaysVisibleCount: number; readonly maximumVisible: number; readonly limbCosine: number;
 }
 export interface SurfaceFeatureCatalogDescriptor {
-  readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number;
+  readonly url: string; readonly bytes: number; readonly count: number;
 }
 export interface SurfaceFeatureSelectionPlan {
   readonly count: number; readonly banks: readonly SurfaceFeatureCatalogDescriptor[];

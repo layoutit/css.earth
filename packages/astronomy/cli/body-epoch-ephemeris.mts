@@ -1,5 +1,4 @@
 // Node-only, source-owned geometric snapshots. Never evaluate them at another epoch.
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
@@ -69,11 +68,7 @@ export async function loadBodyEpochEphemeris({ bodyRoot, bodyId, centerBodyId, t
         Math.abs(Number(query.get('TLIST')) - requestEpochJdUtc) > 1e-9) {
       throw new TypeError(`Body ephemeris request convention differs: ${bodyId}.`);
     }
-    const bytes = await readFile(resolve(bodyRoot, source.path));
-    if (bytes.length !== source.bytes) {
-      throw new TypeError(`Body ephemeris source length differs: ${bodyId}.`);
-    }
-    const text = bytes.toString('utf8');
+    const text = await readFile(resolve(bodyRoot, source.path), 'utf8');
     const responseTarget = text.match(/^Target body name:.*\((\d+)\)/m)?.[1];
     const responseCenter = text.match(/^Center body name:.*\((\d+)\)/m)?.[1];
     if (Number(responseTarget) !== expectedTarget || Number(responseCenter) !== expectedCenter ||
@@ -104,11 +99,7 @@ async function loadPublishedRecord({ record, bodyRoot, bodyId, centerBodyId, epo
       !/^source\/orbit\/[a-z0-9-]+\.json$/u.test(record.source?.path ?? '')) {
     throw new TypeError(`Published body ephemeris identity, epoch or convention differs: ${bodyId}.`);
   }
-  const bytes = await readFile(resolve(bodyRoot, record.source.path));
-  if (bytes.length !== record.source.bytes) {
-    throw new TypeError(`Published body ephemeris source length differs: ${bodyId}.`);
-  }
-  const parameters = parsePublishedParameters(JSON.parse(bytes.toString('utf8')));
+  const parameters = parsePublishedParameters(JSON.parse(await readFile(resolve(bodyRoot, record.source.path), 'utf8')));
   if (parameters.schema !== 'cssearth-published-mutual-orbit@1' || parameters.id !== bodyId ||
       parameters.centerBodyId !== centerBodyId || typeof parameters.timeQualification !== 'string' ||
       !parameters.timeQualification.trim() || !parameters.citation || !record.validation) {
@@ -152,13 +143,13 @@ async function loadPublishedRecord({ record, bodyRoot, bodyId, centerBodyId, epo
   }
   const sources = new Map<string, string>();
   for (const [key, source] of Object.entries(record.sourcePins ?? {})) {
-    sources.set(key, await readPinnedText(bodyRoot, source));
+    sources.set(key, await readSourceText(bodyRoot, source));
   }
   let parentHeliocentricState;
   if (record.parentHeliocentricState || record.parentHeliocentricSource) {
     const source = record.parentHeliocentricSource;
     if (!source || !record.parentHeliocentricState) throw new TypeError("Published parent ephemeris source/state must be supplied together.");
-    const text = await readPinnedText(bodyRoot, source);
+    const text = await readSourceText(bodyRoot, source);
     if (source.targetKind !== 'numbered-asteroid' || source.center !== 10 ||
         !Number.isFinite(source.requestEpochJdUtc) || source.ttMinusUtcSeconds !== 69.184 ||
         Math.abs(source.requestEpochJdUtc + source.ttMinusUtcSeconds / 86400 - epochJdTt) > 1e-9) {
@@ -191,15 +182,11 @@ async function loadPublishedRecord({ record, bodyRoot, bodyId, centerBodyId, epo
       limitations: record.limitations, validation: record.validation }) });
 }
 
-async function readPinnedText(bodyRoot: string, source: SourcePin) {
+async function readSourceText(bodyRoot: string, source: SourcePin) {
   if (!/^source\/orbit\/[a-z0-9-]+\.(?:txt|xml|dat)$/u.test(source?.path ?? '')) {
-    throw new TypeError('Published ephemeris evidence path differs.');
+    throw new TypeError(`Published ephemeris evidence ${bodyRoot} path ${JSON.stringify(source?.path)} is not a source/orbit text file.`);
   }
-  const bytes = await readFile(resolve(bodyRoot, source.path));
-  if (bytes.length !== source.bytes) {
-    throw new TypeError('Published ephemeris evidence length differs.');
-  }
-  return bytes.toString('utf8');
+  return readFile(resolve(bodyRoot, source.path), 'utf8');
 }
 
 function numberedAsteroidRows(source: SourcePin, text: string, target: number, center: number, correction: 'NONE' | 'LT') {

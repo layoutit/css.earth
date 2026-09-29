@@ -8,7 +8,7 @@ are numbers, pixels, and validated recipes; outputs contain no DOM or CSS.
 Node file/image I/O and CSS projection are separate application adapters.
 
 `parseAuthoredObjectDescriptor()` is the authored-data boundary for migrated
-objects. It returns a typed `recipe` composed from pinned source references,
+objects. It returns a typed `recipe` composed from declared source references,
 shape, surfaces and lenses, materials, frame banks, optional layers and motion,
 plus bounded paging or destination plans. Preparation adapters consume those
 capabilities; this package does not choose a renderer or execute object tools.
@@ -27,7 +27,7 @@ test (run in the universe runtime lane) holds both reads equal. The object-runti
 or out of preparation, in a later slice.
 
 `parseDensityVolumeObjectDescriptor()` validates density-volume objects with a
-physical frame, bounds, and pinned preparation source. Volume images, concrete
+physical frame, bounds, and declared preparation source. Volume images, concrete
 sampling, and renderer-specific slice geometry remain outside this package.
 
 `parseImageLayerBankDescriptor()` uses the same physical-frame contract for

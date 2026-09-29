@@ -6,7 +6,7 @@ aberration, and assembles the pinhole camera a kernel set places for one photogr
 checked against SpiceyPy (CSPICE N0067); it interprets no image, product label or prepared payload.
 
 The main entry evaluates bytes (a `Uint8Array`, which a Node `Buffer` is) and kernel text with no Node built-ins, so a
-browser bundle could import it. Reading kernels from disk and restoring the pinned mission kernel banks need Node and
+browser bundle could import it. Reading kernels from disk and restoring the declared mission kernel banks need Node and
 live behind the separate `@cssearth/spice/node` entry.
 
 | entry | what it holds | failure |
@@ -21,9 +21,9 @@ live behind the separate `@cssearth/spice/node` entry.
 | | cameras: `spiceCamera`, `pixelModel`, `invert`, `aberrationRotation` | as the kernels it reads |
 | | flybys: `parseApproachRecipe`, `spacecraftApproach` (the side a spacecraft approached, from a loaded kernel set) | `TypeError` naming the recipe field |
 | `@cssearth/spice/node` | `loadKernelSet`: kernels read in metakernel order into one pool, ephemeris, CK lookups, clocks and frame providers | as the readers, or the file error |
-| | kernel banks: `KERNEL_BANK_ROOT`, `kernelBankRoot`, `kernelBanks` (restore, verify and add kernels, bound to a manifest reader), `readPinnedFile` | `Kernel bank … does not declare …`, `Kernel download failed …` |
+| | kernel banks: `KERNEL_BANK_ROOT`, `kernelBankRoot`, `kernelBanks` (restore, verify and add kernels, bound to a manifest reader), `readRestoredFile` (read a file, restoring it from its origin when missing) | `Kernel bank … does not declare …`, `Kernel download failed …` |
 
-A kernel bank is one pinned set of a mission's kernels under the checkout's `src/spice/<set>/`. Only its manifest is
+A kernel bank is one declared set of a mission's kernels under the checkout's `src/spice/<set>/`. Only its manifest is
 committed. The package finds `src/spice` from its own package name, so the path is the same from `src/`, from `dist/`
 and from any caller. A bank's `manifest.json` has the shape of a body's source manifest, and that format belongs to
 `@cssearth/objects/node`, so `kernelBanks` takes the manifest reader as an argument.
@@ -31,9 +31,9 @@ and from any caller. A bank's `manifest.json` has the shape of a body's source m
 `@cssearth/objects/node` (`createSourceManifest`) for the preparation tools, and it is also the command line:
 
 ```sh
-node packages/bake/cli/kernel-bank.mts acquire <set>        # restore missing kernels, then verify every pin
-node packages/bake/cli/kernel-bank.mts verify <set>         # verify every pin
-node packages/bake/cli/kernel-bank.mts add <set> <url>...   # download, pin and append kernels [--credit] [--license] [--catalogue]
+node packages/bake/cli/kernel-bank.mts acquire <set>        # restore missing kernels, then verify the declared files
+node packages/bake/cli/kernel-bank.mts verify <set>         # verify the declared files
+node packages/bake/cli/kernel-bank.mts add <set> <url>...   # download, declare and append kernels [--credit] [--license] [--catalogue]
 ```
 
 ```text
@@ -49,7 +49,7 @@ packages/spice/
 
 The package's tests are self-contained: they build DAF files and text kernels in memory. The comparisons with SpiceyPy
 live beside the scripts that write their fixtures in [`tests/oracles/spice/`](../../tests/oracles/README.md):
-`dart-draco.oracle.test.mts` (the fifteen pinned DART kernels: time, clock, states with every aberration correction,
+`dart-draco.oracle.test.mts` (the fifteen declared DART kernels: time, clock, states with every aberration correction,
 every frame class and the DRACO camera), `small-kernel.oracle.test.mts` (one LSK and one PCK) and
 `new-horizons-approach.oracle.test.mts` (the approach sides of Pluto and Charon). They need the kernels restored first.
 

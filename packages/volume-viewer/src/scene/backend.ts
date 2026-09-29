@@ -1,7 +1,7 @@
 import type { CompilerBakeResult, CompilerLensVolume, DensityVolumeFrame } from '@cssearth/bake/volume';
 import type { ViewFraming } from '../camera/framing.ts';
 
-export interface BankResource { readonly path: string; readonly sha256: string; readonly bytes: number; readonly width: number; readonly height: number }
+export interface BankResource { readonly path: string; readonly bytes: number; readonly width: number; readonly height: number }
 export interface SceneImage { width: number; height: number; unitsPerPixel: number }
 export interface SceneViewport { width: number; height: number }
 export interface SceneCamera<Publication> { publication: Publication; transform: string }

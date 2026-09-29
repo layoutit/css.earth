@@ -1,12 +1,11 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { mkdtemp, open, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, beforeAll, test } from 'vitest';
 import { readFitsHdus, readFitsImage } from '../index.js';
 import { card, imageFixture } from '../test-support/fixtures.js';
-import { readFitsFileHdus, readFitsFileRegion, sha256FitsData } from './index.js';
+import { readFitsFileHdus, readFitsFileRegion } from './index.js';
 
 let directory = '';
 beforeAll(async () => { directory = await mkdtemp(join(tmpdir(), 'fits-file-')); });
@@ -31,8 +30,6 @@ test('HDUs located on disk agree with the byte reader, and regions apply BSCALE,
   assert.deepEqual([...region.values], [3, NaN, 7, 9]);
   await assert.rejects(readFitsFileRegion(path, located[1]!, { x0: 1, y0: 0, width: 2, height: 1 }), /outside/);
   await assert.rejects(readFitsFileRegion(path, located[1]!, { x0: 0, y0: 0, width: 2, height: 2 }, 31), /budget/);
-  const stored = bytes.subarray(located[1]!.dataStart, located[1]!.dataStart + located[1]!.dataBytes);
-  assert.equal(await sha256FitsData(path, located[1]!), createHash('sha256').update(stored).digest('hex'));
 });
 
 test('a caller-held handle is used and left open; a truncated file is refused', async () => {

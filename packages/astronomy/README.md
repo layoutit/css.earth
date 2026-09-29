@@ -373,7 +373,7 @@ from the six-fixture maxima with 15% margin, rounded upward.
 Hiʻiaka, Menoetius, Squannit and Romulus use `sceneSatelliteStateKm` at exactly
 JD 2461286.5 TT. A request at any other epoch throws. Their position accuracy is
 explicitly unknown (`estimateKm: null`); these snapshots do not extend the fitted
-satellite theory. Source hashes, target/center identities, gravity, frame and
+satellite theory. Source paths, target/center identities, gravity, frame and
 independent checks are validated by `cli/body-epoch-ephemeris.mts` before the
 compact math table is generated. Detailed evidence remains in each body package. Generic `dwarfPlanetFrameSpecs()` excludes these scene-only moons, so its propagated time domain remains intact. The scene generator takes no arguments and replaces output only after validating all four bodies.
 

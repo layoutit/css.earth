@@ -8,8 +8,6 @@ import { projectTrackballDelta } from
 export const SURFACE_FLY_TO = Object.freeze({
   schema: "cssearth-surface-fly-to@4",
   qualification: "REFERENCE_APP_7.3.7.1327_NATIVE_TRAINING_FIT",
-  rendererSha256:
-    "11c6efe1ea0a75535485ab3804a09fc6f2ad3dd7c43f8c7d695a48d928890cd0",
   durationMilliseconds: 3652.3984590021428,
   angularDurationMilliseconds: 3652.3984590021428,
   zoomPrimaryDurationMilliseconds: 3652.3984590021428,

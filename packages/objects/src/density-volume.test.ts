@@ -13,7 +13,7 @@ const volume = () => ({
 });
 
 describe('density-volume object descriptor', () => {
-  it('preserves a physical local frame and pinned source reference', () => {
+  it('preserves a physical local frame and its source reference', () => {
     const parsed = parseDensityVolumeObjectDescriptor(volume());
     expect(parsed.volume.originM).toEqual([8.2e20, -1.1e20, 3.4e19]);
     expect(parsed.preparation.source).toBe('source/preparation/volume.json');

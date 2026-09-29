@@ -15,7 +15,7 @@ function fixture(): PreparedCssSurfaceShell {
     atlas: { path: 'materials/rim.png', tileSize: 16, columns: 4, frames: 8 },
     visibility: { hiddenInsideM: 10, fullUntilM: 100, hiddenBeyondM: 200 },
     faces: [face('near', [0, 0, 1], [0, 0, 1], [0, 0, 1]), face('far', [0, 0, -1], [0, 0, -1], [0, 0, -1])],
-    resources: [{ path: 'materials/rim.png', sha256: 'a'.repeat(64), bytes: 100, width: 64, height: 32 }], provenance: {},
+    resources: [{ path: 'materials/rim.png', bytes: 100, width: 64, height: 32 }], provenance: {},
   };
 }
 function face(id: string, centerUnits: readonly [number, number, number], faceNormal: readonly [number, number, number], radialNormal: readonly [number, number, number]): PreparedCssSurfaceShell['faces'][number] {
@@ -141,7 +141,7 @@ test.each([
   ['atlas wrong format', (data: any) => { data.atlas.path = 'rim.svg'; data.resources[0].path = 'rim.svg'; }],
   ['missing atlas resource', (data: any) => { data.resources = []; }],
   ['resource mismatch', (data: any) => { data.resources[0].path = 'other.png'; }],
-  ['invalid resource hash', (data: any) => { data.resources[0].sha256 = 'not-a-digest'; }],
+  ['stray resource hash', (data: any) => { data.resources[0].sha256 = 'a'.repeat(64); }],
   ['invalid resource byte length', (data: any) => { data.resources[0].bytes = 0; }],
   ['wrong atlas dimensions', (data: any) => { data.resources[0].height = 64; }],
   ['fractional atlas frame count', (data: any) => { data.atlas.frames = 1.5; }],

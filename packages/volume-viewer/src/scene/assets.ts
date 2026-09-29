@@ -3,12 +3,12 @@ import type { CompilerViewerBackend } from './backend.ts';
 export interface LoadedBank<Bank> { payload: Bank; textures: Map<string, string>; urls: string[] }
 
 export async function loadBank<Bank, Publication>(backend: CompilerViewerBackend<Bank, Publication>, reference: CompilerPin, resolvePath: (path: string) => string, signal?: AbortSignal): Promise<LoadedBank<Bank>> {
-  const bytes = await readPinned(reference, resolvePath, signal);
+  const bytes = await readResource(reference, resolvePath, signal);
   const payload = backend.validateBank(JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)));
   const directory = reference.path.slice(0, reference.path.lastIndexOf('/') + 1), textures = new Map<string, string>(), urls: string[] = [];
   const queue = [...backend.resources(payload)], settled = await Promise.allSettled(Array.from({ length: Math.min(6, queue.length) }, async () => {
     while (queue.length) {
-      const resource = queue.shift()!, content = await readPinned({ path: `${directory}${resource.path}` }, resolvePath, signal);
+      const resource = queue.shift()!, content = await readResource({ path: `${directory}${resource.path}` }, resolvePath, signal);
       if (content.byteLength !== resource.bytes) throw new Error(`Compiler texture byte length differs: ${resource.path}`);
       const blob = new Blob([content]), url = URL.createObjectURL(blob); urls.push(url);
       let image: ImageBitmap;
@@ -25,14 +25,14 @@ export async function loadBank<Bank, Publication>(backend: CompilerViewerBackend
 }
 export async function loadStarAtlas(result: CompilerBakeResult, resolvePath: (path: string) => string, signal?: AbortSignal) {
   const sprites = result.starSprites!;
-  const bytes = await readPinned(sprites.atlas, resolvePath, signal), blob = new Blob([bytes], { type: 'image/png' });
+  const bytes = await readResource(sprites.atlas, resolvePath, signal), blob = new Blob([bytes], { type: 'image/png' });
   const image = await createImageBitmap(blob);
   try {
     if (image.width !== sprites.width || image.height !== sprites.height) throw new Error('Compiler stellar atlas dimensions changed.');
   } finally { image.close(); }
   signal?.throwIfAborted(); return URL.createObjectURL(blob);
 }
-async function readPinned(reference: CompilerPin, resolvePath: (path: string) => string, signal?: AbortSignal): Promise<ArrayBuffer> {
+async function readResource(reference: CompilerPin, resolvePath: (path: string) => string, signal?: AbortSignal): Promise<ArrayBuffer> {
   if (!reference || !relativePath(reference.path)) throw new TypeError('Compiler resource path is invalid.');
   const response = await fetch(resolvePath(reference.path), { signal }); if (!response.ok) throw new Error(`Compiler resource failed to load: ${reference.path} (${response.status})`);
   return response.arrayBuffer();

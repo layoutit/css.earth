@@ -14,7 +14,7 @@ Run `pnpm --filter @cssearth/volume-viewer typecheck` from the repository root a
 
 Scene constructors require a per-instance backend and a path resolver. The lab adapters bind the canonical CSS renderer, camera publication, resource validators and local asset URLs. There is no default repository root or mutable renderer registration in this package.
 
-- `scene/compiler-viewer` owns pinned resource loading, retained materials, compiler stars and disposal.
+- `scene/compiler-viewer` owns prepared resource loading, retained materials, compiler stars and disposal.
 - `scene/shape-cloud-viewer` and `scene/joint-fit-viewer` own prepared scene lifetimes. The shape backend supplies the full host result validator; joint result validation uses the canonical core contract.
 - `scene/inspection-banks`, `camera/inspection-camera`, `scene/catalogue-stars` and `scene/image-plane` own reusable inspection rendering. The host retains subject discovery, scientific catalogue validation, saved controls and image selection.
 - Renderer backends own CSS renderer selectors, mounting, publication and projection. The viewer never reconstructs scientific fields or prepared geometry.

@@ -1,5 +1,3 @@
-import { parsePreparationEvidence } from './preparation-evidence.js';
-import type { PreparationEvidence } from './preparation-evidence.js';
 import { validateInputEvidence } from './product-input-evidence.js';
 import type { ProductInputEvidence } from './product-input-evidence.js';
 import { isArray } from '@cssearth/core';
@@ -12,8 +10,8 @@ export interface ProvenanceOperation { readonly url?: string; readonly [key: str
 export interface ProvenanceSource {
   readonly id: string; readonly kind?: string; readonly path: string; readonly origin: string;
   readonly credit: string; readonly acquisition: string;
-  /** Measured from the bytes when the file is present; a download that is not restored records none. */
-  readonly sha256?: string; readonly bytes?: number;
+  /** Measured when the file is present; a download that is not restored records none. */
+  readonly bytes?: number;
   readonly dependencies: readonly string[]; readonly verification: string; readonly license?: string;
   readonly redistribution?: string; readonly sourceUrl?: string;
   readonly displayCredit?: string; readonly title?: string; readonly label?: string; readonly attributionGroup?: { readonly id: string };
@@ -24,8 +22,9 @@ export interface ProvenanceSource {
   readonly acquisitionOperation?: ProvenanceOperation | null;
   readonly verificationOperations?: readonly ProvenanceOperation[];
 }
-export interface ProvenanceRecipe { readonly id: string; readonly path: string; readonly sha256: string; readonly parameters: ProvenanceJson; }
-export interface ProvenanceOutput { readonly url: string; readonly sha256: string; readonly bytes: number; readonly verification: string; }
+export interface ProvenanceRecipe { readonly id: string; readonly path: string; readonly parameters: ProvenanceJson; }
+/** An output is named by its URL; the repository or the object's inventory identifies its bytes. */
+export interface ProvenanceOutput { readonly url: string; readonly bytes?: number; readonly verification: string; }
 export interface ProvenanceProduct {
   readonly inputEvidence?: readonly ProductInputEvidence[];
   /** Whether source capture lineage may credit a displayed view; never an observation-quality claim. */
@@ -36,7 +35,6 @@ export interface ProvenanceProduct {
   readonly outputs: readonly ProvenanceOutput[]; readonly limitations?: readonly string[]; readonly lensIds?: readonly string[];
 }
 export interface ProvenanceDocument {
-  readonly lastPreparation?: PreparationEvidence;
   readonly schema: string; readonly objectId: string; readonly basis: string;
   readonly manifest: { readonly path: string };
   readonly generator: { readonly path: string };
@@ -45,7 +43,7 @@ export interface ProvenanceDocument {
 }
 /** Portable, prepared source-to-product lineage. No file access or UI inference. */
 export const OBJECT_PROVENANCE_SCHEMA = 'cssearth-object-provenance@3';
-const digest = (value: unknown) => typeof value === 'string' && /^[a-f0-9]{64}$/u.test(value);
+const byteCount = (value: unknown) => value === undefined || typeof value === 'number' && Number.isSafeInteger(value) && value >= 0;
 const nonempty = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
 const unique = (values: readonly unknown[], label: string) => {
   if (new Set(values).size !== values.length) throw new TypeError(`Duplicate provenance ${label}.`);
@@ -79,7 +77,7 @@ function operation(value: unknown): value is ProvenanceOperation {
 }
 function sourceShape(value: unknown): value is ProvenanceSource {
   return record(value) && ['id','path','origin','credit','acquisition','verification'].every(key => typeof value[key] === 'string')
-    && optionalString(value.sha256) && (value.bytes === undefined || typeof value.bytes === 'number') && strings(value.dependencies)
+    && byteCount(value.bytes) && strings(value.dependencies)
     && ['kind','license','redistribution','sourceUrl','displayCredit','title','label','lensId'].every(key => optionalString(value[key]))
     && (value.attributionGroup === undefined || record(value.attributionGroup) && typeof value.attributionGroup.id === 'string')
     && (value.capture === undefined || validCapture(value.capture))
@@ -94,10 +92,10 @@ function validSourceBinding(value: unknown): value is SourceBinding {
   try { parseSourceBinding(value); return true; } catch { return false; }
 }
 function recipeShape(value: unknown): value is ProvenanceRecipe {
-  return record(value) && ['id','path','sha256'].every(key => typeof value[key] === 'string') && json(value.parameters);
+  return record(value) && ['id','path'].every(key => typeof value[key] === 'string') && json(value.parameters);
 }
 function outputShape(value: unknown): value is ProvenanceOutput {
-  return record(value) && ['url','sha256','verification'].every(key => typeof value[key] === 'string') && typeof value.bytes === 'number';
+  return record(value) && ['url','verification'].every(key => typeof value[key] === 'string') && byteCount(value.bytes);
 }
 function productShape(value: unknown): value is ProvenanceProduct {
   return record(value) && ['id','label','process','recipe','selector'].every(key => typeof value[key] === 'string')
@@ -118,7 +116,25 @@ function documentShape(value: unknown): value is ProvenanceDocument {
     && isArray(value.coverage.unresolved) && value.coverage.unresolved.every(entry => json(entry));
 }
 
+/** Hash fields are refused, not ignored: a record names its files by path, and the repository or the object's inventory
+ * identifies their bytes. Returns the first stray field's location. */
+function strayHashField(input: unknown): string | undefined {
+  if (!record(input)) return undefined;
+  const stray = (value: unknown, at: string) => {
+    const key = record(value) ? ['sha256', 'lastPreparation'].find(field => Object.hasOwn(value, field)) : undefined;
+    return key === undefined ? undefined : `${at}.${key}`;
+  };
+  const list = (value: unknown) => isArray(value) ? value : [];
+  return stray(input, 'document')
+    ?? list(input.sources).map((source, index) => stray(source, `sources[${index}]`)).find(Boolean)
+    ?? list(input.recipes).map((recipe, index) => stray(recipe, `recipes[${index}]`)).find(Boolean)
+    ?? list(input.products).flatMap((product, index) => record(product)
+      ? list(product.outputs).map((output, outputIndex) => stray(output, `products[${index}].outputs[${outputIndex}]`)) : []).find(Boolean);
+}
+
 export function validateObjectProvenance(input: unknown, objectId?: string): ProvenanceDocument {
+  const stray = strayHashField(input);
+  if (stray) throw new TypeError(`Object provenance ${objectId ?? (record(input) ? String(input.objectId) : 'unknown')} carries ${stray}; provenance names files by path and records no hash.`);
   if (!documentShape(input)) throw new TypeError('Invalid object provenance document.');
   const value = input;
   objectId ??= value.objectId;
@@ -127,19 +143,17 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
       || !isArray(value.sources) || !isArray(value.recipes) || !isArray(value.products)
       || value.coverage?.scope !== 'object-datasets-and-bound-rendering-products'
       || !isArray(value.coverage?.unresolved)) throw new TypeError('Invalid object provenance document.');
-  if (value.lastPreparation !== undefined && parsePreparationEvidence(value.lastPreparation).objectId !== objectId) throw new TypeError('Preparation evidence belongs to a different object.');
   unique(value.sources.map(source => source.id), 'source');
   unique(value.recipes.map(recipe => recipe.id), 'recipe');
   unique(value.products.map(product => product.id), 'product');
   for (const source of value.sources) {
     if (source.kind === 'source-input' && source.sourceBinding === undefined) throw new TypeError(`Unbound canonical source input: ${source.id}.`);
-    if (![source.id, source.path, source.origin, source.credit, source.acquisition].every(nonempty)
-        || (source.sha256 !== undefined && !digest(source.sha256)) || (source.bytes !== undefined && (!Number.isSafeInteger(source.bytes) || source.bytes < 0)))
+    if (![source.id, source.path, source.origin, source.credit, source.acquisition].every(nonempty))
       throw new TypeError(`Invalid provenance source: ${source.id}.`);
     if (source.capture) parseCapture(source.capture);
   }
   for (const recipe of value.recipes) {
-    if (![recipe.id, recipe.path].every(nonempty) || !digest(recipe.sha256) || !recipe.parameters) throw new TypeError('Invalid provenance recipe.');
+    if (![recipe.id, recipe.path].every(nonempty) || !recipe.parameters) throw new TypeError(`Invalid provenance recipe ${JSON.stringify(recipe.id)}: it needs an id, a path and parameters.`);
   }
   const sources = new Set(value.sources.map(source => source.id)), recipes = new Set(value.recipes.map(recipe => recipe.id));
   const sourceById = new Map(value.sources.map(source => [source.id, source]));
@@ -168,8 +182,7 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
     validateInputEvidence(product);
     unique(product.parents, 'product parent');
     for (const output of product.outputs) {
-      if (!nonempty(output.url) || !digest(output.sha256) || !Number.isSafeInteger(output.bytes) || output.bytes < 0)
-        throw new TypeError(`Unpinned provenance output: ${product.id}.`);
+      if (!nonempty(output.url)) throw new TypeError(`Provenance product ${product.id} has an output without a url.`);
       if (value.basis === 'prepared' && output.verification !== 'bytes-verified')
         throw new TypeError('Prepared provenance contains unverified output bytes.');
     }

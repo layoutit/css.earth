@@ -16,7 +16,7 @@ const valid = (): PreparedCssVolume => ({
       style: { width: '2px', height: '2px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', backgroundSize: '2px 2px', backgroundPosition: '0px 0px' } }] },
     { axis: 'z', leaves: [{ id: 'z-0', centerUnits: [0, 0, 0], texturePath: 'slices/z/00.png', widthPx: 2, heightPx: 2,
       style: { width: '2px', height: '2px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', backgroundSize: '2px 2px', backgroundPosition: '0px 0px' } }] }],
-  resources: ['x', 'y', 'z'].map(axis => ({ path: `slices/${axis}/00.png`, sha256: 'a'.repeat(64), bytes: 2, width: 2, height: 2 })),
+  resources: ['x', 'y', 'z'].map(axis => ({ path: `slices/${axis}/00.png`, bytes: 2, width: 2, height: 2 })),
   provenance: {}, approximation: {},
 });
 

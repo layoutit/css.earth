@@ -83,7 +83,7 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
       (value.contextVisibility !== undefined && !['galactic', 'independent'].includes(value.contextVisibility))) {
     throw new TypeError('Prepared volume lens identity, framing or bank is invalid.');
   }
-  const ids = new Set<string>(), resources = new Map<string, string>();
+  const ids = new Set<string>(), resources = new Map<string, PreparedCssVolume['resources'][number]>();
   const lenses = value.lenses.map(lens => {
     if (!lens || !validId(lens.id) || ids.has(lens.id) || [lens.label, lens.title, lens.description].some(text => typeof text !== 'string' || !text.trim()) ||
         typeof lens.sourceUrl !== 'string' || !/^https:\/\//u.test(lens.sourceUrl) ||
@@ -97,10 +97,12 @@ export function validatePreparedVolumeLenses(input: unknown): PreparedVolumeLens
       return Number.isFinite(number) && number >= 0 && number <= 1;
     })) throw new TypeError('Prepared volume brightness must contain overall/X/Y/Z attenuation between zero and one.');
     for (const resource of volume.resources) {
-      if (resources.has(resource.path) && resources.get(resource.path) !== resource.sha256) {
-        throw new TypeError('Prepared lens resource paths must identify the same bytes throughout the fixed bank.');
+      // One path is one published file: every lens that names it must describe it alike.
+      const known = resources.get(resource.path);
+      if (known && (known.bytes !== resource.bytes || known.width !== resource.width || known.height !== resource.height)) {
+        throw new TypeError(`Prepared volume lens ${lens.id} describes ${resource.path} differently from an earlier lens in the fixed bank.`);
       }
-      resources.set(resource.path, resource.sha256);
+      resources.set(resource.path, resource);
     }
     return Object.freeze({ id: lens.id, label: lens.label, title: lens.title, description: lens.description,
       sourceUrl: lens.sourceUrl, volume, stars, brightness: Object.freeze({ ...lens.brightness }),

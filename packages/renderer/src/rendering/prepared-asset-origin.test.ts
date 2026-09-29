@@ -26,18 +26,6 @@ test('a nested filename keeps its remaining path segments', () => {
     .toBe(`https://earth-assets.lowpoly.cc/runtime-assets/${sha}/city/tile-0-0.webp`);
 });
 
-test('an inline sha256 pin resolves without an asset map', () => {
-  const origin = { origin: 'https://earth-assets.lowpoly.cc' };
-  expect(resolvePreparedAssetUrl('/scenes/earth/earth-destinations.json', origin, sha))
-    .toBe(`https://earth-assets.lowpoly.cc/runtime-assets/${sha}/earth-destinations.json`);
-});
-
-test('an inline pin and the asset map must agree', () => {
-  const origin = { origin: 'https://earth-assets.lowpoly.cc', assets: { 'earth-destinations.json': other } };
-  expect(() => resolvePreparedAssetUrl('/scenes/earth/earth-destinations.json', origin, sha))
-    .toThrow(/disagreement/);
-});
-
 test('an address missing from the map throws rather than fabricating a URL', () => {
   const origin = { origin: 'https://earth-assets.lowpoly.cc', assets: {} };
   expect(() => resolvePreparedAssetUrl('/scenes/saturn/saturn-surface@2x.webp', origin)).toThrow(/No published asset hash/);

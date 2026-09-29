@@ -9,10 +9,10 @@ Other moons retain their existing relative models but inherit the corrected
 parent origin.
 
 The manifest binds the request URL, target and center NAIF IDs, reference frame,
-units, time convention, retrieval date and SHA-256 of every raw response. The
+units, time convention and retrieval date of every raw response. The
 response headers retain the JPL integration solution names (including SAT441,
 NEP098 and DE441). Preparation checks both the query and returned headers and
-fails on missing data, a changed epoch, or a hash mismatch.
+fails on missing data, a changed epoch, or a response that answers a different query.
 
 The scene epoch is JD 2461286.5 TT (2026-09-03 00:00:00 TT). Horizons vector tables
 support TDB or UT, so these requests use UT: JD 2461286.499199259, or 2026-09-02

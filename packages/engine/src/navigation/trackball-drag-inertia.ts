@@ -12,8 +12,6 @@ export const TRACKBALL_DRAG_INERTIA = Object.freeze({
   schema: "cssearth-trackball-throw@10",
   qualification:
     "REFERENCE_APP_7.3.7.1327_NATIVE_PROJECTION_AND_DECOMPILED_THROW",
-  rendererSha256:
-    "11c6efe1ea0a75535485ab3804a09fc6f2ad3dd7c43f8c7d695a48d928890cd0",
   historyCapacity: 16,
   averagingFrameCount: 5,
   // The normalized pointer spans two units across the viewport. Its release

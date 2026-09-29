@@ -2,7 +2,7 @@ import type { ObjectDescriptor } from './descriptor.js';
 import { parseObjectDescriptor } from './parse.js';
 
 export type ShapeKind = 'sphere' | 'ellipsoid' | 'radial-terrain';
-/** A recipe input by id and package path. Its bytes are pinned once, in the source manifest, never here. */
+/** A recipe input by id and package path. The source manifest declares the file once, never here. */
 export interface SourceReference { readonly id: string; readonly path: string; }
 export interface ShapeRecipe { readonly kind: ShapeKind; readonly radiusKm: number; readonly polarRadiusKm?: number; readonly secondaryRadiusKm?: number; }
 export interface MaterialRecipe { readonly id: string; readonly source: string; readonly model: 'lit' | 'unlit' | 'emissive'; readonly frameBank?: string; }
@@ -35,7 +35,6 @@ export interface AuthoredRecipe {
 export interface AuthoredObjectDescriptor extends ObjectDescriptor { readonly recipe: AuthoredRecipe; }
 
 const identifier = /^[a-z][a-z0-9]*(?:[.-][a-z0-9]+)*$/;
-const digest = /^[a-f0-9]{64}$/;
 type Input = Record<string, unknown>;
 
 function record(value: unknown, at: string): Input {

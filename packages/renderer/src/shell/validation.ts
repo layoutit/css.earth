@@ -36,9 +36,8 @@ export function validatePreparedCssSurfaceShell(input: unknown): PreparedCssSurf
     atlas.triangleInsetPixels * 2 >= atlas.tileSize || atlas.facingLevels === undefined)) throw new TypeError('Invalid prepared triangle pixel guard.');
   if (!Array.isArray(value.resources) || value.resources.length !== 1) throw new TypeError('Prepared CSS surface shell needs its single shared atlas resource.');
   const resource = record(value.resources[0], 'surface shell resource');
-  exactKeys(resource, ['path', 'sha256', 'bytes', 'width', 'height'], 'surface shell resource');
-  if (!pngPath(resource.path) || resource.path !== atlas.path || typeof resource.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(resource.sha256) ||
-      !positiveInteger(resource.bytes) || !positiveInteger(resource.width) || !positiveInteger(resource.height) ||
+  exactKeys(resource, ['path', 'bytes', 'width', 'height'], 'surface shell resource');
+  if (!pngPath(resource.path) || resource.path !== atlas.path || !positiveInteger(resource.bytes) || !positiveInteger(resource.width) || !positiveInteger(resource.height) ||
       resource.width !== atlas.columns * atlas.tileSize || resource.height !== Math.ceil(atlas.frames / atlas.columns) * atlas.tileSize) {
     throw new TypeError('Prepared CSS surface shell resource metadata is invalid.');
   }

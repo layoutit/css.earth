@@ -1,11 +1,9 @@
-import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import type { PreparedCssPointField, PreparedCssPointFieldManifest } from '../src/stars/types.ts';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '../src/stars/validation.ts';
 
 const base = new URL('../../../src/objects/stellar-neighbourhood/', import.meta.url);
-const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
 /** Node test fixture: the checked-in stellar neighbourhood manifest and bank. */
 export function readCanonicalPointFieldFiles(): { readonly descriptor: unknown; readonly url: string; readonly bankUrl: string;
@@ -17,7 +15,9 @@ export function readCanonicalPointFieldFiles(): { readonly descriptor: unknown; 
   const manifest = readPreparedObject(JSON.parse(manifestBytes.toString('utf8')), parsed, parsePreparedCssPointFieldManifest).data;
   const bankUrl = `${prepared.url.slice(0, prepared.url.lastIndexOf('/') + 1)}${manifest.bank.path}`;
   const bankBytes = readFileSync(new URL(bankUrl, base));
-  if (bankBytes.length !== manifest.bank.bytes || digest(bankBytes) !== manifest.bank.sha256) throw new TypeError('Checked-in point-field bank drifted from its pin.');
+  if (bankBytes.length !== manifest.bank.bytes) {
+    throw new TypeError(`stellar-neighbourhood ${bankUrl} holds ${bankBytes.length} bytes; its manifest bank.bytes says ${manifest.bank.bytes}.`);
+  }
   return { descriptor, url: prepared.url, bankUrl, manifestBytes, bankBytes, manifest };
 }
 

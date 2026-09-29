@@ -21,9 +21,8 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   const resources = new Set<string>();
   for (const resourceInput of resourcesInput) {
     const resource = record(resourceInput, 'volume resource');
-    exactKeys(resource, ['path', 'sha256', 'bytes', 'width', 'height'], 'volume resource');
-    if (!relativePath(resource.path) || resources.has(resource.path) || typeof resource.sha256 !== 'string' ||
-        !/^[a-f0-9]{64}$/u.test(resource.sha256) || !positiveInteger(resource.bytes) ||
+    exactKeys(resource, ['path', 'bytes', 'width', 'height'], 'volume resource');
+    if (!relativePath(resource.path) || resources.has(resource.path) || !positiveInteger(resource.bytes) ||
         !positiveInteger(resource.width) || !positiveInteger(resource.height)) {
       throw new TypeError('Prepared CSS volume resource metadata is invalid.');
     }
