@@ -40,13 +40,17 @@ async function requireLocalAsset(asset: PublishAsset): Promise<void> {
 // (observed live: a single "fetch failed" mid-batch aborts wrangler's whole bulk-put run, having uploaded only
 // a handful of the batch). Re-running the same batch is safe (`--force`, content-addressed keys) and cheap
 // relative to giving up, so retry the whole batch a few times before surfacing the failure.
-async function bulkPut(batch: readonly PublishAsset[], type: string, runCommand: typeof run, attempts = 8): Promise<void> {
+// A retry asks R2 again which keys are still missing and uploads only those: a 429 aborts wrangler part-way, and re-sending
+// the whole batch spent the rate limit on files already written (observed 2026-09-29: a 502-file batch failed all 8 attempts).
+async function bulkPut(pending: readonly PublishAsset[], type: string, runCommand: typeof run,
+  stillMissing: (assets: readonly PublishAsset[]) => Promise<readonly PublishAsset[]> = async assets => assets, attempts = 8): Promise<void> {
+  let batch = pending;
   if (!batch.length) return;
   const directory = await mkdtemp(join(tmpdir(), "cssearth-publish-assets-"));
   try {
     const filename = join(directory, "assets.json");
-    await writeFile(filename, JSON.stringify(batch.map(({ key, file }) => ({ key, file }))));
     for (let attempt = 1; ; attempt++) {
+      await writeFile(filename, JSON.stringify(batch.map(({ key, file }) => ({ key, file }))));
       // Validate at the upload boundary, including retries after local files may have changed.
       for (const asset of batch) await requireLocalAsset(asset);
       try {
@@ -59,9 +63,12 @@ async function bulkPut(batch: readonly PublishAsset[], type: string, runCommand:
         return;
       } catch (error) {
         if (attempt >= attempts) throw error;
-        const waitMs = 3000 * attempt;
-        console.log(`Bulk upload attempt ${attempt}/${attempts} failed (${(error as Error).message}); retrying the batch in ${waitMs}ms.`);
+        // Cloudflare's API limit is counted over five minutes; a longer wait lets a rate-limited window drain.
+        const waitMs = 30000 * attempt;
         await new Promise(accept => setTimeout(accept, waitMs));
+        batch = await stillMissing(batch);
+        console.log(`Bulk upload attempt ${attempt}/${attempts} failed (${(error as Error).message}); ${batch.length} key(s) still missing after ${waitMs}ms.`);
+        if (!batch.length) return;
       }
     }
   } finally {
@@ -134,8 +141,9 @@ export async function publishAssets(assets: readonly PublishAsset[], options: Pu
   // already verified live do not need to be materialized locally just to publish a newly generated subset.
   for (const asset of misses) await requireLocalAsset(asset);
   console.log(`${assets.length - misses.length} already published; uploading ${misses.length} miss(es).`);
-  await bulkPut(misses.filter(a => a.key.endsWith(".json")), "application/json", runCommand);
-  await bulkPut(misses.filter(a => !a.key.endsWith(".json")), "application/octet-stream", runCommand);
+  const stillMissing = (batch: readonly PublishAsset[]) => findMisses(batch, fetcher);
+  await bulkPut(misses.filter(a => a.key.endsWith(".json")), "application/json", runCommand, stillMissing);
+  await bulkPut(misses.filter(a => !a.key.endsWith(".json")), "application/octet-stream", runCommand, stillMissing);
   // A key that was just written can briefly HEAD as missing on some edge before R2 finishes propagating it
   // (observed: a fresh write not yet visible seconds later). Retry the whole HEAD + byte verification pass a
   // few times with backoff before treating a miss as real; the check itself never loosens.
