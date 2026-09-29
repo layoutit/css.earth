@@ -1,5 +1,4 @@
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -24,7 +23,7 @@ const root = resolve(import.meta.dirname, '../../..');
 const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
 export const describe = (findings: readonly TextFinding[]) => findings.map(({ objectId, slot, rule, detail }) => `  ${objectId} ${slot}: ${rule} — ${detail}`).join('\n');
 
-interface BodyText { readonly id: string; readonly directory: string; readonly sha256: string; readonly text: ObjectText; readonly context: TextContext }
+interface BodyText { readonly id: string; readonly directory: string; readonly text: ObjectText; readonly context: TextContext }
 
 async function readBody(projectRoot: string, object: { id: string; name: string }, catalogue: ReadonlySet<string>): Promise<BodyText> {
   const directory = resolve(projectRoot, 'src/objects', object.id);
@@ -33,7 +32,7 @@ async function readBody(projectRoot: string, object: { id: string; name: string 
   const lenses = requireRecord(page.controls).lenses;
   const provenance = validateObjectProvenance(await readJson(resolve(directory, 'prepared/provenance.json')), object.id);
   return {
-    id: object.id, directory, sha256: sha256(bytes),
+    id: object.id, directory,
     text: parseObjectText(JSON.parse(bytes.toString('utf8')), object.id),
     context: {
       name: object.name, catalogue,

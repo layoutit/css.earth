@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -30,17 +29,13 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
         throw error;
       }
     };
-    const verified = new Map<string, string>();
-    const verify = async (base: string, path: string, pin: { sha256: string; bytes: number }) => {
-      const file = resolve(base, path), identity = `${pin.sha256}/${pin.bytes}`;
-      if (verified.has(file)) {
-        if (verified.get(file) !== identity) throw new TypeError(`Conflicting prepared pins: ${path}.`);
-        return;
-      }
-      const bytes = await read(base, path);
-      if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256)
-        throw new TypeError(`Prepared identity mismatch: ${relative(projectRoot, file)}.`);
-      verified.set(file, identity);
+    // Each file the package names must be present; inventory.json and the R2 restore own its bytes.
+    const present = new Set<string>();
+    const verify = async (base: string, path: string) => {
+      const file = resolve(base, path);
+      if (present.has(file)) return;
+      await read(base, path);
+      present.add(file);
     };
     try {
       const descriptor = parseObjectDescriptor(JSON.parse((await read(directory, 'object.json')).toString()));
@@ -48,25 +43,22 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
       const provenance = validateObjectProvenance(JSON.parse((await read(directory, 'prepared/provenance.json')).toString()), id);
       const presentation = parsePreparedVolumePresentation(JSON.parse((await read(directory, 'prepared/presentation.json')).toString()), bank, provenance);
       for (const lens of bank.lenses) for (const resource of lens.volume.resources)
-        await verify(resolve(directory, 'prepared'), resource.path, resource);
+        await verify(resolve(directory, 'prepared'), resource.path);
       const outputs = provenance.products.flatMap(product => product.outputs);
       const bankUrl = `src/objects/${id}/${descriptor.prepared!.url}`;
-      const bankPin = outputs.find(output => output.url === bankUrl);
-      if (!bankPin) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
-      await verify(projectRoot, bankUrl, bankPin);
+      if (!outputs.some(output => output.url === bankUrl)) throw new TypeError(`${id}: prepared/provenance.json products[].outputs[].url never names the prepared bank ${bankUrl}.`);
+      await verify(projectRoot, bankUrl);
       const published = publicAssets === 'manifest'
         ? requireInventory(id, JSON.parse((await read(directory, 'inventory.json')).toString()))
         : null;
       for (const lens of presentation.controls) for (const url of new Set([lens.thumbnailUrl, lens.texture?.url])) {
         if (!url?.startsWith(`/scenes/${id}/`)) throw new TypeError(`Invalid dataset preview URL: ${url}.`);
-        const pin = outputs.find(output => output.url === url);
-        if (!pin) throw new TypeError(`Unpinned dataset preview: ${url}.`);
+        if (!outputs.some(output => output.url === url)) throw new TypeError(`${id}: prepared/provenance.json products[].outputs[].url never names the dataset preview ${url}.`);
         if (published) {
           const filename = url.slice(`/scenes/${id}/`.length);
-          const asset = published.assets.find(candidate => candidate.filename === filename && candidate.location === 'public');
-          if (!asset || asset.sha256 !== pin.sha256 || asset.bytes !== pin.bytes)
-            throw new TypeError(`Unpublished dataset preview: ${url}.`);
-        } else await verify(resolve(projectRoot, 'public'), url.slice(1), pin);
+          if (!published.assets.some(candidate => candidate.filename === filename && candidate.location === 'public'))
+            throw new TypeError(`Unpublished dataset preview: ${id}/inventory.json has no public asset ${filename} for ${url}.`);
+        } else await verify(resolve(projectRoot, 'public'), url.slice(1));
       }
       return [id, { available: true }] as const;
     } catch (error) {

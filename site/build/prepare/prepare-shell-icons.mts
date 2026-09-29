@@ -1,5 +1,4 @@
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 

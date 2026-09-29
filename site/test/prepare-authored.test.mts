@@ -14,7 +14,7 @@ async function publishedIapetus(publishedEdge: number) {
   await copyFile(resolve(real, 'inventory.json'), resolve(directory, 'inventory.json'));
   await mkdir(resolve(directory, 'prepared'));
   const { entries } = await readAuthoredSources(directory);
-  await writeFile(resolve(directory, 'prepared/authored-preparation.json'), JSON.stringify({ sources: entries.map(entry => entry.reference) }));
+  await writeFile(resolve(directory, 'prepared/authored-preparation.json'), JSON.stringify({ sources: entries.map(entry => ({ id: entry.reference.id, path: entry.reference.path })) }));
   await writeFile(resolve(directory, 'prepared/features.json'), JSON.stringify({ mapLeftEdgeLongitudeDeg: publishedEdge }));
   return directory;
 }
@@ -22,9 +22,11 @@ async function publishedIapetus(publishedEdge: number) {
 test('a redraw carries feature anchors only while the surface map keeps their left edge', async () => {
   const edge = (JSON.parse(await readFile(resolve(process.cwd(), 'src/objects/iapetus/source/presentation/surface-map.json'), 'utf8')) as { mapLeftEdgeLongitudeDeg: number }).mapLeftEdgeLongitudeDeg;
   const same = await publishedIapetus(edge), moved = await publishedIapetus(edge + 180);
+  // The published recipes are the working tree's own bytes.
+  const unchanged = (file: string) => readFile(file);
   try {
-    assert.deepEqual(await redrawOnlyDecision(same), { redraw: true, acceptChanged: [], reason: 'no recipe changed' });
-    assert.deepEqual(await redrawOnlyDecision(moved),
+    assert.deepEqual(await redrawOnlyDecision(same, unchanged), { redraw: true, acceptChanged: [], reason: 'no recipe changed' });
+    assert.deepEqual(await redrawOnlyDecision(moved, unchanged),
       { redraw: false, reason: `the surface map's left edge is ${edge}° E, but the published feature anchors used ${edge + 180}° E` });
   } finally {
     await Promise.all([same, moved].map(directory => rm(directory, { recursive: true, force: true })));
