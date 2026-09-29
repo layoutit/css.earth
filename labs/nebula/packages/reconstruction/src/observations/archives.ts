@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { fetchTap, tapUrl, type TapRequestConfig } from './tap.ts';
 import { readArchiveImage, safeArchiveUrl, type ArchiveImage, type ArchiveProvider, type ArchiveQuery, type ArchiveTarget } from './model.ts';
 
@@ -30,8 +29,8 @@ export function queryWhere(provider: ArchiveProvider, object: ArchiveTarget, rad
 export function imageFromRow(provider: ArchiveProvider, row: Record<string, unknown>, queryUrl: string): ArchiveImage {
   const accessUrl = safeArchiveUrl(row.access_url), nativeId = stringValue(row.obs_publisher_did) ?? stringValue(row.obs_id);
   if (!nativeId) throw new TypeError('Archive image has no published identity.');
-  // A MAST observation DID can own multiple files; a file URI is part of identity.
-  const id = `${nativeId}#${createHash('sha256').update(accessUrl ?? '').digest('hex').slice(0,16)}`;
+  // A MAST observation DID can own multiple files; the file URL is part of identity.
+  const id = accessUrl ? `${nativeId}#${accessUrl}` : nativeId;
   const size = positive(row.access_estsize), format = stringValue(row.access_format);
   let previewUrl: string | null = null, sourceUrl = accessUrl ?? queryUrl;
   if (provider === 'eso') {
@@ -71,7 +70,6 @@ export async function inventoryQuery(provider: ArchiveProvider, object: ArchiveT
     for (const row of result.rows) { const image = imageFromRow(provider, row, result.url); unique.set(image.id, image); }
     const capped = result.overflow || result.rows.length > maxRecords;
     base.images = [...unique.values()].slice(0, maxRecords);
-    base.responseSha256 = createHash('sha256').update(result.bytes).digest('hex');
     base.status = capped ? 'truncated' : 'complete';
     base.matchedCount = capped ? null : base.images.length;
     base.matchedUnknownSizeCount = capped ? null : base.images.filter(i => i.estimatedBytes === null).length;

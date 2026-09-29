@@ -5,14 +5,14 @@ import { paperLinks, paperTopics, selectPapers, titleNamesObject, topicsForPaper
 import type { Paper, PaperIndex, PaperPage } from './types';
 import './papers.css';
 
-export function PapersView({object,catalogueSha256,localFile}:{object:MessierObject;catalogueSha256:string;localFile:(path:string)=>string}) {
+export function PapersView({object,catalogue,localFile}:{object:MessierObject;catalogue:string;localFile:(path:string)=>string}) {
   const [index,setIndex]=useState<PaperIndex|null>(null),[page,setPage]=useState<PaperPage|null>(null);
   const [error,setError]=useState(''),[busy,setBusy]=useState(true),[reload,setReload]=useState(0);
   const [search,setSearch]=useState(''),[topic,setTopic]=useState<PaperTopic|'all'>('all'),[order,setOrder]=useState<PaperOrder>('object');
   const [since,setSince]=useState(''),[number,setNumber]=useState(0);
   useEffect(()=>{
     const controller=new AbortController();setBusy(true);setError('');setPage(null);setIndex(null);
-    void loadPaperIndex(localFile,catalogueSha256,controller.signal).then(async snapshot=>{
+    void loadPaperIndex(localFile,catalogue,controller.signal).then(async snapshot=>{
       if(controller.signal.aborted)return;
       setIndex(snapshot);const reference=snapshot?.objects.find(o=>o.objectId===object.id);
       if(reference?.status==='error')throw new Error(reference.error??'Bibliography query failed.');
@@ -20,7 +20,7 @@ export function PapersView({object,catalogueSha256,localFile}:{object:MessierObj
     }).catch(reason=>{if(!controller.signal.aborted)setError(reason instanceof Error?reason.message:'Papers unavailable.');})
       .finally(()=>{if(!controller.signal.aborted)setBusy(false);});
     return()=>controller.abort();
-  },[object.id,catalogueSha256,localFile,reload]);
+  },[object.id,catalogue,localFile,reload]);
   const reference=index?.objects.find(o=>o.objectId===object.id);
   const filtered=useMemo(()=>selectPapers(page?.papers??[],object,search,topic,order,/^\d{4}$/.test(since)?Number(since):null),[page,object,search,topic,order,since]);
   const pages=Math.max(1,Math.ceil(filtered.length/20)),actual=Math.min(number,pages-1);

@@ -32,7 +32,6 @@ export function parseOverlayCatalogue(value: unknown): DensityOverlayCatalogue {
     if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Invalid density overlay.');
     const item = input as Record<string, unknown>, style = item.style as Record<string, unknown>;
     const styleKeys = ['width', 'height', 'transform', 'backgroundSize', 'backgroundPosition'];
-    if ('sha256' in item) throw new TypeError(`Density overlay ${String(item.id)} records a sha256; overlays name their texture by path only.`);
     if (typeof item.id !== 'string' || !item.id || ids.has(item.id) || typeof item.label !== 'string' || !item.label ||
         !relativePath(item.texturePath) || !Number.isInteger(item.widthPx) || (item.widthPx as number) < 1 ||
         !Number.isInteger(item.heightPx) || (item.heightPx as number) < 1 || !style || Array.isArray(style) ||

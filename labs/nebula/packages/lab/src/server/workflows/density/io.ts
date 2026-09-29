@@ -1,12 +1,10 @@
 import { spawn } from 'node:child_process';
 import { writeAtomic } from '@cssearth/bake/volume/node';
-import { createHash } from 'node:crypto';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import { isAbsolute, relative, resolve } from 'node:path';
 import { parseLabModelJson, resolveLabModelPath } from '../../../resources/model-paths.ts';
 
 export interface Pin { path: string }
-export const hash = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 export const json = async (path: string) => parseLabModelJson(await readFile(path, 'utf8'));
 export function localPath(root: string, path: string) {
   const full = resolve(root, resolveLabModelPath(path)), offset = relative(root, full);
@@ -28,13 +26,13 @@ export async function acquire(root: string, pin: Pin & { url: string }) {
   await writeAtomic(path, bytes);
 }
 /** Record every staged artifact before its manifest is written. Paths remain relative to that stage. */
-export async function collectArtifacts(root: string): Promise<Record<string, { sha256: string; bytes: number }>> {
-  const artifacts: Record<string, { sha256: string; bytes: number }> = {};
+export async function collectArtifacts(root: string): Promise<Record<string, { bytes: number }>> {
+  const artifacts: Record<string, { bytes: number }> = {};
   async function collect(directory: string) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const path = resolve(directory, entry.name);
       if (entry.isDirectory()) await collect(path);
-      else { const bytes = await readFile(path); artifacts[relative(root, path)] = { sha256: hash(bytes), bytes: bytes.length }; }
+      else artifacts[relative(root, path)] = { bytes: (await stat(path)).size };
     }
   }
   await collect(root);

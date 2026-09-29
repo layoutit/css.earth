@@ -1,10 +1,10 @@
-/** Configured native-grid processing; cache ownership and pin selection belong to the caller. */
+/** Configured native-grid processing; cache ownership and input selection belong to the caller. */
 import { spawn } from 'node:child_process';
 import sharp from 'sharp';
 
 export interface NativeRemovalRequest {
   schema: 'cssearth-star-removal@1'; operation: 'apply';
-  source: { path: string; sha256: string; nativeDimensions: [number, number] };
+  source: { path: string; nativeDimensions: [number, number] };
   model: { path: string }; outputDirectory: string;
 }
 export interface NativeExecution { executable: string; script: string; cwd: string }

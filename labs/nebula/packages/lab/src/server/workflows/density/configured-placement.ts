@@ -12,8 +12,8 @@ export async function prepareConfiguredDensityPlacements(root: string, subjectId
     const density = subject.density;
     if (!density?.modelPlacement) continue;
     const pin = density.modelPlacement;
-    if (typeof pin.path !== 'string' || typeof pin.sha256 !== 'string' || typeof density.directory !== 'string')
-      throw new TypeError('Density placement requires pinned settings and an output directory.');
+    if (typeof pin.path !== 'string' || Object.keys(pin).join() !== 'path' || typeof density.directory !== 'string')
+      throw new TypeError(`Subject ${subject.id} field density.modelPlacement must name only a settings path, with density.directory as output.`);
     const placement: unknown = JSON.parse((await pinned(root, pin)).toString());
     if (!placement || typeof placement !== 'object' || !('sourceDirectory' in placement) || typeof placement.sourceDirectory !== 'string')
       throw new TypeError('Density placement must name its original compact density.');

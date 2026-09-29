@@ -1,6 +1,5 @@
 import { collectArtifacts } from '../workflows/density/io.ts';
-import { implementationPins } from '../services/implementation.ts';
-/** Offline material replacement on the exact pinned Alignment density cloud. Never infer new shape from an image. */
+/** Offline material replacement on the exact named Alignment density cloud. Never infer new shape from an image. */
 import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
 import { dirname, resolve, relative, isAbsolute, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,13 +12,12 @@ import { registeredImageSampler, registeredScalarSampler, writeOriginalOverlay }
 import { recolorCloudSlices, containedPath, loadVolumeSource, type VolumeSlices } from '@cssearth/bake/volume/node';
 import { prepareDensityProjection } from '../workflows/density/density-projection.ts';
 import { prepareReconstructionStars } from '../workflows/density/reconstruction-stars.ts';
-import { sha256 } from '@cssearth/core/node';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 
 type Progress = { type:'progress'; stage:string; current:number; total:number; message:string };
 export const RECONSTRUCTION_SETTINGS = { analysisWidth:1024,originalWidth:2048,quality:92 };
 
-const json=async(path:string,value:unknown)=>{const bytes=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,bytes);return sha256(bytes);};
+const json=async(path:string,value:unknown)=>{await writeFile(path,Buffer.from(JSON.stringify(value,null,2)+'\n'));};
 async function pinned(root:string,pin:{path:string}) {
   if(isAbsolute(pin.path))throw new TypeError('Inputs require repository-relative paths.');
   return readFile(containedPath(root,pin.path));
@@ -55,7 +53,6 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   const w=work.overlay.widthPx,h=work.overlay.heightPx;
   const mapping=createAlignedObservationMapping({style:{width:`${w}px`,height:`${h}px`,transform:work.overlay.transform,
     backgroundSize:`${w}px ${h}px`,backgroundPosition:'0px 0px'},pivotCssPx:work.overlay.pivotCssPx,placement:work.overlay.placement},frame);
-  const implementation=Object.fromEntries((await implementationPins(root, ['labs/nebula/packages/lab/src/server/workers/density-reconstruction.ts'])).map(pin => [pin.path, pin.sha256]));
   await mkdir(resolve(output,'source'),{recursive:true});await mkdir(resolve(output,'prepared'),{recursive:true});
   progress('rectifying',0,2,'Registering image colors into the fixed cloud and catalogue frame');
   const photo=await rectifyObservation(native,mapping,settings.analysisWidth);
@@ -94,7 +91,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
     outputDirectory:resolve(output,'prepared'),encoding:{format:'webp',quality:settings.quality},
     onProgress:p=>{if(p.completed%16===0||p.completed===p.total)progress('material',p.completed,p.total,`Painted ${p.completed}/${p.total} fixed cloud slices`);}});
   const validation={sameGeometry:true,sameAlpha:true,sameStars:true,coverage:painted.coverage};
-  const provenance={schema:'cssearth-nebula-reconstruction-provenance@1',method:'alignment-density-material-v1',request:work,settings,implementation,
+  const provenance={schema:'cssearth-nebula-reconstruction-provenance@1',method:'alignment-density-material-v1',request:work,settings,
     canonicalCloud:work.cloud,source:work.source,original:work.original,
     material:{appearance,detailMethod:CLOUD_DETAIL_METHOD,scale:'Radius in pixels at 1024px registered width.',
       contrast:'Three coverage-normalized box passes; bounded local luminance ratio deepens dark structure, preserving highlight headroom. Authored RGB material only; no inferred depth.'},alignment:{...work.overlay,
@@ -116,16 +113,16 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   await json(resolve(output,'prepared/volume-slices.json'),painted.slices);
   const data=compileCssVolume({id:work.id,frame,slices:painted.slices,recipe:{anchors:[]}});
   const prepared={schema:'cssearth-prepared-object@1',id:work.id,type:'density-volume',format:'cssearth-density-volume@1',data};
-  const provenanceSha=await json(resolve(output,'source/provenance.json'),provenance);
+  await json(resolve(output,'source/provenance.json'),provenance);
   await json(resolve(output,'source/validation.json'),validation);
-  const volumeSha=await json(resolve(output,'prepared/volume.json'),prepared);
+  await json(resolve(output,'prepared/volume.json'),prepared);
   const resultDescriptor={schema:'cssearth-object@1',id:work.id,type:'density-volume',properties:{volume:frame,
     preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
   await json(resolve(output,'object.json'),resultDescriptor);
   const referenceLeafIds=data.stacks.flatMap(stack=>stack.leaves.map(leaf=>leaf.id)),partLeafIds=referenceLeafIds.map(id=>'all-light::'+id);
   const inspection={...prepared,data:{...data,stacks:data.stacks.map(stack=>({...stack,leaves:stack.leaves.flatMap(leaf=>[leaf,{...leaf,id:'all-light::'+leaf.id}])}))}};
-  const inspectionSha=await json(resolve(output,'prepared/inspection.json'),inspection);
-  const catalogueSha=await json(resolve(output,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id:work.id,
+  await json(resolve(output,'prepared/inspection.json'),inspection);
+  await json(resolve(output,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id:work.id,
     parts:[{id:'all-light',label:'Reference cloud',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,
     composition:'One immutable Alignment density cloud; candidate images replace material colors only.'});
   await json(resolve(output,'inspection-object.json'),{...resultDescriptor,properties:{...resultDescriptor.properties,
