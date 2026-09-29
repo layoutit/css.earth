@@ -13,7 +13,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-The [2023 geometry check](source/validation/2023-geometry-qualification.json) separates solver estimated error from independent barycentric samples; scientific uncertainty remains spatially variable.
+The [2023 geometry check](source/validation/2023-geometry-qualification.json) records the historical 3,500-face display. The [2,000-face comparison](evidence/mesh-budget-2026-09-29.json) records the current reduction and its larger sampled deviation. Both separate solver estimates from independent barycentric samples; scientific uncertainty remains spatially variable.
 
 The B9 qualification report records exact source-map replay and selected package and interaction checks.
 
@@ -28,7 +28,7 @@ Feature notes: 1 of the labelled names carry a caption note, the lead summary of
 - **SPC albedo and height:** Finite Q512 values include unsupported interpolation. Display requires at least five images and valid finest-maplet spacing no worse than 1500 m/vertex. This conservative policy is not a published truth mask; image count does not establish independent viewing angles. Relative albedo is not natural color, geometric albedo or composition.
 - **VIMS coverage and placement:** Both views cover about 1.84% of reference-sphere solid angle, not physical mesh area. Registration is coarse, with several-kilometer placement uncertainty; the fitted origin offset is not an author-supplied vector. IR 1465670650_1 is withheld for systematic independent holdout bias.
 - **VIMS interpretation:** Neither view measures ice abundance. No photometric correction or cross-observation level matching is applied. Illumination, viewing angle, grain size, noise and archive filtering affect the signal.
-- Native VIMS gaps remain missing. Bilinear/WebP packing can soften infrared mask edges, and the fixed 3500-face terrain shows coarse lighting facets. More display texels do not add measurements.
+- Native VIMS gaps remain missing. Bilinear/WebP packing can soften infrared mask edges, and the fixed 2000-face terrain shows coarse lighting facets. More display texels do not add measurements.
 - The retained rotation phase has no new qualification in these records. The separate SBIB regional RGB candidate still has no qualified registration to the revised shape and center.
 
 [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
@@ -44,7 +44,7 @@ Feature notes: 1 of the labelled names carry a caption note, the lead summary of
 
 The four SPC views use PDS bundle `urn:nasa:pds:satellite-phoebe.cassini.shape-models-maps::1.0`. Original OBJ, numeric ISIS cubes, detached labels, image/kernel inventories and product/assessment documentation are pinned beside the body. The 2023 release date is not a new spacecraft encounter. Relative albedo is normalized near mean one and is not a directly photographed texture. Radial height converts the paired Q512 radius from meters to km before subtracting the reference sphere.
 
-The Radial height −15 to +15 km scale covers the retained source values. This is not a geoid, independent altimetry, or an assertion that the 1.195 km Q128 displayed geometry resolves the ~301 m raster. Fixed cartographic relief is separate from the directional Shadows control.
+The Radial height −15 to +15 km scale covers the retained source values. This is not a geoid, independent altimetry, or an assertion that the reduced Q128 display geometry resolves the ~301 m raster. Fixed cartographic relief is separate from the directional Shadows control.
 
 Maplet resolution array values are 125, 250, 300, 500, 750, 1000 and 1500 m/vertex, with 6,714 missing cells whose literal value is 99999. The product prose says 9999; all 64,800 source cells were checked, and none contain 9999. The recipe withholds the actual 99999 sentinel.
 
@@ -52,7 +52,7 @@ Maplet resolution array values are 125, 250, 300, 500, 750, 1000 and 1500 m/vert
 
 The native Q512 radius/albedo cubes are 2222 × 1111 Real LSB ISIS3 pixels at 301.26023555494 m; quality maps are 360 × 180 at 1858.775653374 m. The source specifies SimpleCylindrical, planetocentric latitude, PositiveEast, center longitude 180°, and a 106500 m sphere. Both longitude limit keywords are absent. A narrow explicit loader option verifies the native global pixel footprint from the exact origin/resolution/dimensions. It preserves the albedo/radius edge padding to 360.1296596434412° and −90.06482982171792° rather than resizing or inventing label fields. Numeric sampling and support masks use nearest source pixels. Outside the geographic sphere and valid support mask is withheld. Display raster size does not add source resolution.
 
-The paired official OBJ has 99,846 vertices and 196,608 triangles in km. Its +X axis is 0° longitude and +Z the positive pole. The release documents the same source images and SPICE kernels as the older model, minor processing changes, and a 1.03 km shift to the center of figure. The exact published XYZ coordinates are retained, without an inferred compensating translation. The source-preserving display uses 3500 faces with a closed, consistently wound single-component topology (Euler 2). Source GSD and these rendering approximation checks are not absolute mapping accuracy.
+The paired official OBJ has 99,846 vertices and 196,608 triangles in km. Its +X axis is 0° longitude and +Z the positive pole. The release documents the same source images and SPICE kernels as the older model, minor processing changes, and a 1.03 km shift to the center of figure. The exact published XYZ coordinates are retained, without an inferred compensating translation. The source-preserving display uses 2000 faces with a closed, consistently wound single-component topology (Euler 2). Source GSD and these rendering approximation checks are not absolute mapping accuracy.
 
 The retained source-model orientation is RA 356.90°, Dec 77.88°, W = 178.58° + 931.639° per day from J2000. The 2023 release does not publish a replacement pole solution; its image/kernel identity and paired body coordinates are explicit. Physical radius and orbit continue to use the JPL-backed astronomy package.
 
@@ -101,7 +101,7 @@ Infrared assigns native channels near 2.02, 1.59 and 1.28 µm to red, green and 
 
 Native detector apertures and sampled exposure geometry define support. Original saturation, special values, missing background and their archive-filter dependencies are excluded per band; finite calibrated values alone do not establish detector validity. Numerical maps do not interpolate gaps into measured coverage. The 1440 × 720 output grid adds no native resolution. Exact observation/source-pixel companion TIFFs preserve ownership. Infrared uses the existing photographic bilinear/WebP packing; ice absorption uses nearest scalar sampling. The maps use the existing preparation and unchanged mesh and retained scene.
 
-The source camera and frame transfer map the 41 accepted pixels onto the unchanged 3500-face mesh. A two-angle fit has seven untouched limb checks with a maximum residual of 0.704 fast sample. Nine exposure poses, incidence/emission, closest-hit visibility, self-shadow and radial ambiguity checks constrain output support. These are sampled sensitivities, not a continuous pointing bound or integrated detector PSF. The rejected IR 1465670650_1 fit remains separate evidence and does not inherit the accepted observation's correction.
+The historical VIMS qualification mapped the 41 accepted pixels onto the then-current 3500-face mesh. Those registration checks have not been rerun against the current 2000-face display; they remain evidence for the source camera fit, not a fresh display-placement qualification. A two-angle fit has seven untouched limb checks with a maximum residual of 0.704 fast sample. Nine exposure poses, incidence/emission, closest-hit visibility, self-shadow and radial ambiguity checks constrain output support. These are sampled sensitivities, not a continuous pointing bound or integrated detector PSF. The rejected IR 1465670650_1 fit remains separate evidence and does not inherit the accepted observation's correction.
 
 The final 1440 × 720 grid supersedes the historical 720 × 360 source trial. That earlier trial remains identified in the B9 source review.
 
@@ -114,3 +114,29 @@ The [body registration record](source/cassini-ice/evidence/registration.md), [pr
 Normal albedo, elevation, maplet-resolution and image-count display atlases use half dimensions. Infrared and ice absorption retain their existing half-size setting. The half-size grid keeps integral atlas cells; quarter dimensions would not.
 
 This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.
+
+## Prepared triangle coverage
+
+The shared raster preparation checks that each CSS triangle encloses its source
+face before sampling the atlas. This rebake repairs inward seam padding without
+changing source geometry. The initial 3,500-face rebake produced six
+groups; the largest still contained 3,213 faces. The
+[iPad comparison](evidence/ipad-triangle-coverage-guard.json) records a completed
+drag and zoom, reduced frame spans, and the remaining compositor stalls. It does
+not establish smooth interaction.
+
+## Display mesh budget
+
+The current bake reduces the 196,608-face source to 2,000 triangles using
+meshoptimizer 1.2.0 with `ErrorAbsolute`. It retains source positions and closed,
+consistently wound single-component topology (Euler 2). Removing `RegularizeLight`
+lets the simplifier reach the shared ceiling without increasing the 1,065 m
+solver error limit; its estimate is 787.4 m.
+
+Four independent barycentric samples per output face give a maximum distance
+of 1,423.5 m, p95 603.6 m and RMS 308.6 m to the full source mesh. The former
+3,500-face display measured 1,178.3 m maximum, p95 468.9 m and RMS 240.8 m.
+This coarser display does **not** satisfy the historical 1,195 m sampled criterion.
+These are one-way sampled approximation measurements, not a Hausdorff bound or
+scientific source uncertainty. The [comparison receipt](evidence/mesh-budget-2026-09-29.json)
+also records the audit of other installed triangle surfaces.
