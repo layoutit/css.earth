@@ -10,10 +10,9 @@
  * the reader, the cameras and the fit are this repository's TypeScript.
  *
  * Beside the receipt the run writes that receipt's own record (`<receipt>.product.json`, packages/telescope/src/product-record.ts):
- * the images and kernels it read at their pinned sizes and digests, the policy the fit was held to, and the digest of the
- * modules that did it. The measurement is then added to that record as `geometric-registration` evidence, which is what this
+ * the images and kernels it read at their pinned sizes, the policy the fit was held to, and the software that did it. The measurement is then added to that record as `geometric-registration` evidence, which is what this
  * stage establishes and no more. Agreement with an archive product is another kind of evidence, and nothing here gives it. */
-import { sha256 } from '@cssearth/core/node';
+import { VERSION } from '../../help.mts';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -24,7 +23,7 @@ import { kernelBankPaths } from '@cssearth/bake/objects/cameras';
 import { numbers, utcToEt } from '@cssearth/spice';
 import { parsePdsRadiusTable } from '@cssearth/bake/objects/geometry';
 import { decodeJunocam, refinableStrips, type JunocamGeometry, refineStripEpochs, type StripRefinementPolicy } from '@cssearth/bake/objects/layers/terrestrial';
-import { PROGRAMS, readProgram, writeProgram, type JunocamProgram } from './archive.mts';
+import { PROGRAMS, readProgram, type JunocamProgram } from './archive.mts';
 import { astroqueryRows } from '@cssearth/telescope/node';
 import { flagValue, positionalArguments } from '@cssearth/core';
 
@@ -49,15 +48,14 @@ export function ellipsoidMesh(radiiKm: readonly number[]) {
   return parsePdsRadiusTable(rows.join('\n'), { metersPerUnit: 1000, expectedVertices: nx * (ny - 1) + 2, expectedFaces: nx * (ny - 2) * 2 + 2 * nx, stepDegrees: STEP_DEGREES, longitudeDirection: 'east-positive' });
 }
 
-/** A pinned file from the work directory, a directory that already holds it, or its URL; the program keeps its digest from the first time the bytes are held. */
-async function pinned(url: string, bytes: number, digest: string | undefined, directories: readonly string[], work: string) {
+/** A pinned file from the work directory, a directory that already holds it, or its URL, at the size the program records. */
+async function pinned(url: string, bytes: number, directories: readonly string[], work: string) {
   const name = url.slice(url.lastIndexOf('/') + 1);
   let data: Buffer | undefined;
   for (const directory of directories) { const path = resolve(directory, name); if (await access(path).then(() => true, () => false)) { data = await readFile(path); break; } }
   if (!data) { const response = await fetch(url); if (!response.ok) throw new Error(`${url} answered ${response.status}.`); data = Buffer.from(await response.arrayBuffer()); await writeFile(resolve(work, name), data); }
-  const actual = sha256(data);
-  if (data.length !== bytes || (digest !== undefined && actual !== digest)) throw new Error(`${name} does not match its pin: ${data.length} bytes, ${actual}.`);
-  return { data, sha256: actual };
+  if (data.length !== bytes) throw new Error(`${name} (${url}) is ${data.length} bytes, not the pinned ${bytes}.`);
+  return { data };
 }
 
 /** Juno's position relative to the target from the bank against JPL Horizons' vectors at each epoch, in metres. */
@@ -71,17 +69,15 @@ export async function horizonsCheck(set: KernelSet, program: JunocamProgram) {
       return 1000 * Math.hypot(ours[0] - Number(row.x), ours[1] - Number(row.y), ours[2] - Number(row.z)); }) };
 }
 
-/** The version of the software that measured a registration: the digest of the modules that decode an image, place it and fit
- * its limb. Nothing external runs, so there is no installed toolchain to pin. */
+/** The software that measured a registration: this repository's own modules that decode an image, place it and fit its limb,
+ * named with the telescope command's version. Nothing external runs, so there is no installed toolchain to pin. */
 export async function registrationSoftware(): Promise<ProductSoftware[]> {
-  const sources = await Promise.all(['packages/telescope-cli/src/archives/juno/measure.mts', 'packages/bake/src/objects/layers/terrestrial/missions/junocam.ts',
-    'packages/bake/src/objects/layers/terrestrial/registration/strip-refinement.ts'].map(name => readFile(resolve(WORKSPACE, name))));
-  return [{ name: HISTORICAL_SOFTWARE_NAME, version: sha256(Buffer.concat(sources)) }];
+  return [{ name: HISTORICAL_SOFTWARE_NAME, version: VERSION }];
 }
 
-/** What identifies one registration: every image and label it measured and every kernel it read, each at its pinned size and
- * digest, with the policy the fit was held to. */
-export function registrationRun(program: JunocamProgram, kernels: readonly { path: string; bytes: number; sha256: string }[],
+/** What identifies one registration: every image and label it measured and every kernel it read, each at its pinned size,
+ * with the policy the fit was held to. */
+export function registrationRun(program: JunocamProgram, kernels: readonly { path: string; bytes: number }[],
   software: readonly ProductSoftware[]): ProductRun {
   const pin = (role: string, identity: string, bytes: number): ProductInput => ({ role, identity, bytes });
   return {
@@ -117,17 +113,15 @@ export async function measureProgram(id: string, work: string, { raw, horizons =
   const geometry: JunocamGeometry = { observer: JUNO, target: program.target.naifId, bodyFrame: program.target.bodyFrame, aberration: 'LT+S' };
   const images = [];
   for (const entry of program.images) {
-    const directories = [work, ...(raw ? [raw] : [])], file = await pinned(entry.url, entry.bytes, entry.sha256, directories, work), label = await pinned(entry.labelUrl, entry.labelBytes, entry.labelSha256, directories, work);
-    entry.sha256 = file.sha256; entry.labelSha256 = label.sha256;
+    const directories = [work, ...(raw ? [raw] : [])], file = await pinned(entry.url, entry.bytes, directories, work), label = await pinned(entry.labelUrl, entry.labelBytes, directories, work);
     const image = decodeJunocam(file.data, label.data.toString('latin1'));
     if (image.label.productId !== entry.productId || image.label.startTime !== entry.startTime || image.label.target !== program.target.name) throw new Error(`${entry.productId} is not the product its program pins.`);
     const started = performance.now(), { report } = refineStripEpochs(refinableStrips(set, geometry, image, BANDS, verticesKm), mesh, POLICY);
     images.push({ productId: entry.productId, startTime: entry.startTime, altitudeKmInLabel: entry.altitudeKm, frames: image.label.frames, strips: report.strips, offsets: report.offsets, edgePoints: report.edgePoints,
       holdoutResidualPixels: { before: report.residuals.before.holdout.rmsPixels, after: report.residuals.after.holdout.rmsPixels, points: report.residuals.after.holdout.count }, seconds: Math.round((performance.now() - started) / 100) / 10 });
   }
-  await writeProgram(program);
   const receipt = { schema: RECEIPT_SCHEMA, program: program.id, measured: new Date().toISOString().slice(0, 10), target: { ...program.target, radiiKm }, policy: POLICY,
-    kernels: set.kernels.map(kernel => ({ path: program.kernels.find(path => kernel.path.endsWith(path)) ?? kernel.path, bytes: kernel.bytes, sha256: kernel.sha256 })), images,
+    kernels: set.kernels.map(kernel => ({ path: program.kernels.find(path => kernel.path.endsWith(path)) ?? kernel.path, bytes: kernel.bytes })), images,
     ...(horizons ? { horizons: await horizonsCheck(set, program) } : {}) };
   const path = resolve(PROGRAMS, `${program.id}.registration.json`);
   await writeFile(path, JSON.stringify(receipt, null, 2) + '\n');

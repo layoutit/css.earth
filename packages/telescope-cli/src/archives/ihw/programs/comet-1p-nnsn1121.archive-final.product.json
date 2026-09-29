@@ -21,6 +21,6 @@
     { "path": "nnsn1121.fit", "bytes": 480960, "units": "REL. INT.", "conventions": { "pixelScale": "0.36 arcsec per pixel", "orientation": "celestial north clock angle 0 degrees", "registration": "no celestial WCS or comet-surface registration is supplied" } }
   ],
   "evidence": [
-    { "kind": "archive-origin", "receipt": "tools/objects/ihw/programs/comet-1p-nnsn1121.archive-final.product.json", "product": "nnsn1121.fit", "establishes": "nnsn1121.fit is the PDS Small Bodies Node byte stream for IHW product NNSN1121. Its size, SHA-256 and archive-published MD5 were checked, and its label, index row and FITS header agree on the observation. This establishes origin and integrity only; no local calibration ran and no archive agreement is claimed." }
+    { "kind": "archive-origin", "receipt": "tools/objects/ihw/programs/comet-1p-nnsn1121.archive-final.product.json", "product": "nnsn1121.fit", "establishes": "nnsn1121.fit is the PDS Small Bodies Node byte stream for IHW product NNSN1121. Its size was checked, and its label, index row and FITS header agree on the observation. This establishes origin only; no local calibration ran and no archive agreement is claimed." }
   ]
 }

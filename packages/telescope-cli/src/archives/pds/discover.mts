@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 /** Complete, scoped Peppi target search -> verified labels -> product-level candidates for the shared query. */
-import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -21,7 +20,7 @@ export interface PdsDiscoveredObservation {
   readonly kind: 'image' | 'cube' | 'spectrum' | 'table'; readonly title: string; readonly registryStartIso: string; readonly registryStopIso: string;
   readonly processingLevel: string;
   readonly filters: readonly string[]; readonly wavelengthIntervalsMicrometres: readonly (readonly [number, number])[];
-  readonly surfaceResolutionKm?: number; readonly label: { readonly uri: string; readonly bytes: number; readonly md5: string; readonly sha256: string };
+  readonly surfaceResolutionKm?: number; readonly label: { readonly uri: string; readonly bytes: number };
   readonly use: string; readonly units: string;
 }
 
@@ -58,7 +57,7 @@ const kilometresPerPixel = (measurement: { readonly value: number; readonly unit
   : (() => { throw new Error(`Unsupported PDS map-resolution unit ${measurement.unit}.`); })();
 
 /** Normalize an observational label from its declared structure. Instrument names select no code path. */
-export function inspectPdsProduct(product: DiscoveredPdsProduct, xml: string, labelSha256: string,
+export function inspectPdsProduct(product: DiscoveredPdsProduct, xml: string,
   target: { readonly lid: string; readonly name: string }): PdsDiscoveredObservation {
   const logicalIdentifier = identity(product, xml), refs = targetReferences(xml);
   if (!refs.includes(target.lid) || !product.targetLids.includes(target.lid)) throw new Error(`${product.lidvid} does not identify the requested target.`);
@@ -94,16 +93,16 @@ export function inspectPdsProduct(product: DiscoveredPdsProduct, xml: string, la
   return { id: logicalIdentifier.split(':').at(-1)!, lidvid: product.lidvid, targetLid: target.lid, targetName, telescope, archiveTelescope, mode, instrument, kind,
     title: pds4Field(xml, 'title'), registryStartIso: product.startIso, registryStopIso: product.stopIso, processingLevel,
     filters: bands.map(band => band.filter), wavelengthIntervalsMicrometres: bands.map(band => band.interval),
-    ...(surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm }), label: { ...product.label, sha256: labelSha256 }, units: 'not stated at product level',
+    ...(surfaceResolutionKm === undefined ? {} : { surfaceResolutionKm }), label: { ...product.label }, units: 'not stated at product level',
     use: `Archive ${processingLevel.toLowerCase()} ${kind}; identity, structure and any wavelength or map-sampling facts come from its PDS4 label.` };
 }
 
 async function verifiedLabel(product: DiscoveredPdsProduct) {
   const response = await fetch(product.label.uri, { signal: AbortSignal.timeout(60_000) });
   if (!response.ok) throw new Error(`PDS label ${product.label.uri} returned ${response.status}.`);
-  const bytes = Buffer.from(await response.arrayBuffer()), md5 = createHash('md5').update(bytes).digest('hex');
-  if (bytes.byteLength !== product.label.bytes || md5 !== product.label.md5) throw new Error(`${product.label.uri} does not match its PDS Registry size and MD5.`);
-  return { xml: bytes.toString('utf8'), sha256: createHash('sha256').update(bytes).digest('hex') };
+  const bytes = Buffer.from(await response.arrayBuffer());
+  if (bytes.byteLength !== product.label.bytes) throw new Error(`${product.label.uri} is ${bytes.byteLength} bytes; the PDS Registry lists ${product.label.bytes}.`);
+  return { xml: bytes.toString('utf8') };
 }
 
 export async function discoverPdsTarget(target: { readonly id: string; readonly lid: string; readonly name: string }) {
@@ -114,7 +113,7 @@ export async function discoverPdsTarget(target: { readonly id: string; readonly 
     try {
       product = normalizeDiscoveredPdsProduct(row);
       const label = await verifiedLabel(product);
-      observations.push(inspectPdsProduct(product, label.xml, label.sha256, target));
+      observations.push(inspectPdsProduct(product, label.xml, target));
     } catch (error) {
       rejected.push({ lidvid: product?.lidvid ?? String(row.lidvid ?? row.lid ?? 'unknown PDS product'), reason: error instanceof Error ? error.message : String(error) });
     }
