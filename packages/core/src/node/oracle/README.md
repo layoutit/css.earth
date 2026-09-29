@@ -3,12 +3,12 @@
 An oracle is a reference implementation that recomputes what the preparation
 pipeline computes, so a test can compare the two. The pipeline stays strict
 TypeScript and derives nothing from an oracle; the oracle only says whether the
-pipeline's result is right. `tests/oracles/comet-19p/` and `tests/oracles/venus/`
+pipeline's result is right. `packages/bake/src/objects/layers/terrestrial/registration/fixtures/comet-19p/` and `tests/oracles/venus/`
 are older standalone audits; the groups below are fixture oracles.
 
 | Oracle | Verifies | Script | Comparing test |
 | --- | --- | --- | --- |
-| Astropy ICRS geometry, NumPy vectors | The declared circular hosted-orbit contract: sky frames, phase/state vectors, and the synchronous body orientation derived from them (not physical ephemeris accuracy) | `astronomy/hosted-orbit.py` | `tests/objects/hosted-orbits/hosted-orbit.oracle.test.mts` |
+| Astropy ICRS geometry, NumPy vectors | The declared circular hosted-orbit contract: sky frames, phase/state vectors, and the synchronous body orientation derived from them (not physical ephemeris accuracy) | `packages/bake/src/objects/scene/fixtures/hosted-orbit.py` | `tests/objects/hosted-orbits/hosted-orbit.oracle.test.mts` |
 | SpiceyPy (CSPICE N0067) | Eccentric hosted-orbit position and velocity, including a sourced TRAPPIST-1f convention conversion; both implementations receive the same representable BMJD_TDB timestamp | `astronomy/hosted-eccentric.py` | `tests/objects/hosted-orbits/hosted-eccentric.oracle.test.mts` |
 | Astropy blackbody, constants and units | Frequency-form Planck intensity and brightness-temperature inversion used by ALMA preparation, plus the HST flux-density-to-Rayleigh conversion | `physical-units/spectral.py` | `tests/objects/units/spectral-units.oracle.test.mts` |
 | NumPy SVD, following pinned ThERESA source | `eigenmap-fit.mts`: signed harmonic curves, scale-independent eigencurve ordering, eigenmap coefficients and rejection of the null spectrum; comparisons are invariant to arbitrary eigenvector signs | `eclipse-map/theresa-eigenbasis.py` | `tests/objects/eclipse-map/eigenmap-fit.oracle.test.mts` |
@@ -16,12 +16,12 @@ are older standalone audits; the groups below are fixture oracles.
 | [Native SBMT](../../../../../tests/oracles/sbmt/README.md) | SUM/INFO pointing, PDS vertex-facet geometry, visibility, FITS samples and image-to-mesh UV projection; differences remain explicit | `sbmt/projection.mts` | `sbmt/projection.test.mts` |
 | SpiceyPy (CSPICE N0067) | `@cssearth/spice`: leap seconds, TDB, SCLK, SPK states with `NONE`, `LT`, `LT+S`, `CN`, `CN+S`, every frame class, and where the DRACO camera places archived intercepts (read with pds4_tools) | `spice/dart-draco.py` | `tests/oracles/spice/dart-draco.oracle.test.mts`, and `tests/oracles/spice/small-kernel.oracle.test.mts` for the LSK and PCK alone |
 | SpiceyPy (CSPICE N0067) | `@cssearth/spice` `spacecraftApproach`: New Horizons' closest approaches to Pluto and Charon and the side of each it approached, in the IAU body frame | `spice/new-horizons-approach.py` | `tests/oracles/spice/new-horizons-approach.oracle.test.mts` |
-| pds4_tools | `pds4-geometry-cube.mts`: every label-defined plane of the DART DRACO cube, values, flags and unit conversions | `pds/dart-draco-cube.py` | `pds4-geometry-cube.oracle.test.mts` |
-| pvl, numpy | `osiris-geo.mts`: the Rosetta OSIRIS level-5 geometry planes and level-4 quality companion (67P) | `pds3/osiris-geo.py` | `osiris-geo.oracle.test.mts` |
-| pvl, numpy | `archived-camera.mts`: the OSIRIS level-4 reflectance, sigma and quality planes (Steins) | `pds3/osiris-reflectance.py` | `archived-camera.oracle.test.mts` |
-| pvl, numpy, astropy | `amica-geo.mts`: the Hayabusa AMICA Gaskell DDR cube, detector FITS and flat field (Itokawa) | `pds3/amica-ddr.py` | `amica-geo.oracle.test.mts` |
-| astropy | `llorri-geo.mts`: the Lucy L'LORRI HDUs and the TAN-SIP distortion through `astropy.wcs` (Donaldjohanson) | `fits/llorri.py` | `llorri-geo.oracle.test.mts` |
-| astropy | `encounter-fits.mts`: Deep Impact ITS (Tempel 1), Stardust NAVCAM (Wild 2) and MRI (Hartley 2) planes, identity and accept or reject counts | `fits/encounter.py` | `encounter-fits.oracle.test.mts` |
+| pds4_tools | `pds4-geometry-cube.mts`: every label-defined plane of the DART DRACO cube, values, flags and unit conversions | `packages/bake/src/objects/layers/terrestrial/missions/dart-draco-cube.py` | `pds4-geometry-cube.oracle.test.mts` |
+| pvl, numpy | `osiris-geo.mts`: the Rosetta OSIRIS level-5 geometry planes and level-4 quality companion (67P) | `packages/bake/src/objects/layers/terrestrial/missions/osiris-geo.py` | `osiris-geo.oracle.test.mts` |
+| pvl, numpy | `archived-camera.mts`: the OSIRIS level-4 reflectance, sigma and quality planes (Steins) | `packages/bake/src/objects/layers/terrestrial/missions/osiris-reflectance.py` | `archived-camera.oracle.test.mts` |
+| pvl, numpy, astropy | `amica-geo.mts`: the Hayabusa AMICA Gaskell DDR cube, detector FITS and flat field (Itokawa) | `packages/bake/src/objects/layers/terrestrial/missions/amica-ddr.py` | `amica-geo.oracle.test.mts` |
+| astropy | `llorri-geo.mts`: the Lucy L'LORRI HDUs and the TAN-SIP distortion through `astropy.wcs` (Donaldjohanson) | `packages/bake/src/objects/layers/terrestrial/missions/llorri.py` | `llorri-geo.oracle.test.mts` |
+| astropy | `encounter-fits.mts`: Deep Impact ITS (Tempel 1), Stardust NAVCAM (Wild 2) and MRI (Hartley 2) planes, identity and accept or reject counts | `packages/bake/src/objects/layers/terrestrial/missions/encounter.py` | `encounter-fits.oracle.test.mts` |
 | astropy | Shared FITS numeric decoding, scaling, missing values, cube planes, image extensions and CONTINUE long strings | `fits/core.py` | `tests/oracles/fits/core.oracle.test.mts` |
 | astropy | `@cssearth/fits` `readRiceCompressedImage`: RICE_1 tile-compressed images (8-, 16- and 32-bit; constant, small-difference and directly coded blocks; JSOC's BSCALE, BZERO and table BLANK) and `hmi-continuum.mts` HMI pixels under CROTA2 through `astropy.wcs` | `fits/rice.py` | `tests/oracles/fits/rice.oracle.test.mts` |
 | astropy | `observation/wise-atlas-mosaic.mts`: AllWISE atlas SIN tile pixels to the hips2fits-convention TAN grid, near the centre and at a 24° field corner | `fits/wise-atlas-projection.py` | `observation/wise-atlas-mosaic.oracle.test.mts` |
@@ -32,17 +32,30 @@ are older standalone audits; the groups below are fixture oracles.
 | astropy | Every ESO HIERARCH value and every pixel of four released Pallas SPHERE images; no camera or surface qualification | `fits/pallas.py` | `tests/oracles/fits/pallas.test.mts` |
 | astropy | Sun synoptic and Jupiter HST/OPAL images, including archived header conventions | `fits/synoptic.py` | `tests/oracles/fits/synoptic.test.mts` |
 | astropy, numpy | `observation/spectral-band-maps.mts`: Charon LEISA spectra, per-pixel wavelengths, archived coordinates and ice-band estimators near Organa | `fits/charon-leisa.py` | `observation/spectral-band-maps.test.mts` |
-| pvl, numpy | `isis2-qube.mts`: the Deep Space 1 MICAS orthographic image and DEM component cubes and their special pixels (Borrelly) | `isis2/borrelly-micas.py` | `isis2-qube.oracle.test.mts` |
-| numpy | `npy-lonlat-grid.mts`: the `.npy` arrays of the Cambioni et al. (2022) ALMA maps of Psyche and nearest-node lookup, including both half-cells at the antimeridian | `npy/psyche-alma.py` | `npy-lonlat-grid.oracle.test.mts` |
-| USGS ISIS 10.0.0_LTS unit-test truth files | `packages/bake/src/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `isis/photometric-truth.py` | `tests/photometry/isis.oracle.test.mts` |
+| pvl, numpy | `isis2-qube.mts`: the Deep Space 1 MICAS orthographic image and DEM component cubes and their special pixels (Borrelly) | `packages/bake/src/objects/layers/terrestrial/missions/borrelly-micas.py` | `isis2-qube.oracle.test.mts` |
+| numpy | `npy-lonlat-grid.mts`: the `.npy` arrays of the Cambioni et al. (2022) ALMA maps of Psyche and nearest-node lookup, including both half-cells at the antimeridian | `packages/bake/src/objects/raster/numpy/psyche-alma.py` | `npy-lonlat-grid.oracle.test.mts` |
+| USGS ISIS 10.0.0_LTS unit-test truth files | `packages/bake/src/photometry/`: Hapke with shadow hiding, Hapke (1984) roughness and both ISIS phase functions, and the Lunar-Lambert, Minnaert and Lommel-Seeliger disk functions | `packages/bake/src/photometry/fixtures/photometric-truth.py` | `tests/photometry/isis.oracle.test.mts` |
 
-Each script sits in `tests/oracles/<group>/` beside the fixture it writes, which has the
-same name (`fits/core.py` writes `fits/core.json`), and the comparing tests are under
-`tests/objects/terrestrial/` unless a path is given. Fixtures written before the scripts moved
-here from `tools/oracles/` still name that path in `generatedBy` until they are regenerated.
-Five files keep their bytes because body evidence pins their SHA-256: `isis-geotiff-grid.mts`,
-`lunar-mi-quality.mts`, `geotiff-image.mts`, `reflectance-mosaics.mts` and `tsconfig.json`. The
-four scripts' usage comments still show the old `tools/oracles/` path; run them from `tests/oracles/`.
+Script paths in the table are relative to `tests/oracles/` unless they start with
+`packages/`. The moved mission scripts and comparing tests are in
+`packages/bake/src/objects/layers/terrestrial/missions/`; NumPy surface cases are in
+`packages/bake/src/objects/raster/numpy/`, circular hosted-orbit fixtures in
+`packages/bake/src/objects/scene/fixtures/`, and ISIS photometric fixtures in
+`packages/bake/src/photometry/fixtures/`. The source-surface test, fixture and Python
+verifier are in `packages/bake/src/objects/geometry/`.
+
+Domains awaiting later moves remain under `tests/oracles/`: FITS (including the
+fixtures still written by the moved `encounter.py` and `llorri.py`), SPICE, SBMT,
+eclipse-map, physical-units, eccentric hosted-orbits and the Venus audits. Most
+scripts sit beside the fixture they write. Historical `generatedBy` strings keep
+the generator's original path until regeneration.
+
+Four scripts keep their bytes because body evidence pins their SHA-256:
+`packages/bake/src/objects/raster/fixtures/{isis-geotiff-grid,lunar-mi-quality,geotiff-image}.mts`
+and `packages/bake/src/objects/layers/terrestrial/fixtures/reflectance-mosaics.mts`.
+Their usage comments retain historical paths; run their current paths with Node
+from the repository root. `tests/oracles/tsconfig.json` is maintained to include
+the relocated scripts.
 
 Known gap: the SBMT fixture's tool record names the SBMT, release, Java and java-bridge versions
 only. It no longer holds a runtime-lock or generator digest, while
@@ -72,8 +85,9 @@ likewise sit beside their scripts in `tests/oracles/spice/`.
 - Regenerate a fixture only when the oracle version or an input changes, and say
   so in the PR. Fixtures are deterministic: the same environment and inputs write
   the same bytes.
-- Oracles never write under `src/`; nothing an oracle produces becomes a source,
-  a recipe or a prepared file.
+- Oracles write only reference fixtures in their owner directories (including
+  the moved fixtures under `packages/bake/src/`) or audit reports under `output/`;
+  nothing an oracle produces becomes a body source, recipe or prepared file.
 
 ## Setup and use
 

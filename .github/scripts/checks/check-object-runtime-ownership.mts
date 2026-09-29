@@ -7,7 +7,7 @@ import { pathToFileURL } from "node:url";
 import type { Node, Program, ObjectExpression, Property, FunctionDeclaration, Expression, CallExpression, VariableDeclarator } from "estree";
 import { nodeName, propertyKey, sourceStart, sourceEnd, objectProperty, staticObjectProperties } from '@cssearth/bake/runtime-source';
 import type { RuntimeSourceReader } from '@cssearth/bake/runtime-source';
-import { SCENE_OBJECTS as OBJECTS } from "../../../site/objects.mts";
+import { readContextObjects, readPreparedObjects } from '@cssearth/objects/node';
 import { defineOverview, definePreparedFocus, parseNavigationDistance, parseObjectDiscovery } from '@cssearth/objects';
 import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "@cssearth/bake/presentation";
@@ -15,7 +15,8 @@ import { readPreparedJsonExports } from '@cssearth/bake/contract';
 import { parseRuntimeSource, resolveRuntimeSource } from '@cssearth/bake/runtime-source';
 import { readDescriptorDefinition, requireAuthoredSourcePins, requireDescriptorAdapterSource } from '@cssearth/bake/contract';
 import { requireAuthoredWorldFrameReceipt } from '@cssearth/bake/sources';
-import { readContextObjects } from '@cssearth/objects/node';
+
+const OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
 const registryPath = "site/objects.mts";
 // The registry assembles its entries with the shared registry contracts the objects package's main entry exports.

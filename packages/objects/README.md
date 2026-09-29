@@ -23,8 +23,8 @@ Preparation reads the same registry through `readPreparedObjects(root)` in `@css
 prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`, in catalogue order) with these contracts and binds a
 `loadScene` that refuses to mount, so a preparer that lists objects through it does not import the application. A site
 test (run in the universe runtime lane) holds both reads equal. The object-runtime ownership check
-(`.github/scripts/checks/check-object-runtime-ownership.mts`) still imports `site/objects.mts`; it moves to this reader,
-or out of preparation, in a later slice.
+(`.github/scripts/checks/check-object-runtime-ownership.mts`) reads this prepared registry for object ids and
+inspects `site/objects.mts` as the application's runtime loader source.
 
 `parseDensityVolumeObjectDescriptor()` validates density-volume objects with a
 physical frame, bounds, and pinned preparation source. Volume images, concrete

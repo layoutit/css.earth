@@ -1,0 +1,41 @@
+{
+  "id": "eso-eso1037a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Spiral galaxy NGC 300",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "eso1037a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1037a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/eso1037a.jpg",
+      "label": "Large JPEG"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso1037a/",
+      "checkedOn": "2026-09-29",
+      "locator": "7603 x 7603 px; 30.22 x 30.22 arcmin; MPG/ESO 2.2-metre WFI in B, [O III], V, R and H-alpha; page orientation 0.1 deg left of vertical. The page centre is 28 px off the image, re-measured from Gaia stars (the recipe's observation). Found in the WorldWide Telescope image index (data/wwt/core-imagesets.jsonl)."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso1037a/"
+    }
+  ]
+}

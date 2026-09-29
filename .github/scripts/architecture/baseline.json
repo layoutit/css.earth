@@ -26,15 +26,9 @@
   "rules": {
     "authoring-is-leaf": [],
     "bake-nebula-and-objects-independent": [],
-    "nothing-imports-applications": [
-      {"from":".github/scripts/checks/check-object-runtime-ownership.mts","to":"site/objects.mts"},
-      {"from":"labs/performance/ipad-journey.mts","to":"site/objects.mts"},
-      {"from":"labs/performance/ipad-run.mts","to":"site/objects.mts"}
-    ],
+    "nothing-imports-applications": [],
     "nothing-imports-cli-entries": [],
     "packages-import-only-packages": [
-      {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/objects.mts"},
-      {"from":"packages/renderer/src/universe/prepared-world-context.test.ts","to":"site/system-framing.mts"},
       {"from":"packages/telescope-cli/src/qualify.test.mts","to":"tests/fixtures/fits/helpers.mts"},
       {"from":"packages/telescope-cli/src/source-products.test.mts","to":"tests/fixtures/fits/helpers.mts"}
     ],

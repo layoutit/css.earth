@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "vucetic-snr",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Name%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FMNRAS%2F446%2F943%2Fngc300%22",
+    "bytes": 1097,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 211,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with S4G's disc scale length (Salo et al. 2015): 211 pc. The same thickness as the image layers' slabs; for young objects it is an upper value. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "vucetic-2015-optical-snr",
+  "meaning": "Optically identified supernova remnants of NGC 300 from Vucetic et al. (2015): one dot per remnant at its catalogue position.",
+  "appearance": {
+    "colorCss": "#9fe8ff",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the supernova-remnant colour M31's and M33's dots share. Each dot takes its tone and half its colour from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

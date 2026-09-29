@@ -94,7 +94,7 @@ changed inputs, wrong software bytes and incomplete stages fail explicitly.
 | FITS image values | SBMT's bundled nom-tam-fits versus `readFitsImage` | Pinned raw axes, encoding and up to 65 distinct samples per image; no photometric normalization claim |
 | FITS encodings, missing values and extensions | Existing [FITS oracle](../../../packages/core/src/node/oracle/README.md) and `tests/oracles/fits/core.oracle.test.mts` | Scaled integers, float NaNs, cubes and extension policy; not reimplemented here |
 | PDS3/PDS4 image and geometry planes | Existing [PDS oracle comparisons](../../../packages/core/src/node/oracle/README.md) | Label-driven dimensions, offsets, quality and units; this backend consumes SUM/INFO, not SPICE kernels or geometry cubes |
-| Released OBJ UV islands and raster sampling | `tests/objects/terrestrial/obj-uv-fits.test.mts` | Barycentric transfer, seams, nearest/bilinear sampling policy, orientation and missing support; existing unit checks, **not native SBMT qualification** |
+| Released OBJ UV islands and raster sampling | `packages/bake/src/objects/raster/obj-uv-fits.test.mts` | Barycentric transfer, seams, nearest/bilinear sampling policy, orientation and missing support; existing unit checks, **not native SBMT qualification** |
 | Bad or unsupported inputs | `projection.test.mts` | Missing/duplicate fields, unsafe paths, hash drift, dimensions, degenerate cameras, non-affine frusta and unsupported SUM distortion/K matrices |
 
 This is coverage of the named input and numerical cases, not every SBMT feature

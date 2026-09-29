@@ -167,7 +167,7 @@ node packages/bake/cli/object-operations.mts acquire arrokoth
 node packages/bake/authoring/arrokoth/prepare-photographic-cameras.mts
 node packages/bake/authoring/arrokoth/qualify-photographs.mts
 node site/build/prepare/prepare-authored.ts arrokoth --write
-node --test tests/objects/terrestrial/new-horizons-geo.test.mts
+node --test packages/bake/src/objects/layers/terrestrial/missions/new-horizons-geo.test.mts
 ```
 
 The Astropy fixture was captured with the repository's pinned Astropy 8.0.1 and

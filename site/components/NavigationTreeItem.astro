@@ -1,5 +1,6 @@
 ---
-import { treeCount, type TreeNode } from '../navigation/navigation-tree.mts';
+import { treeCount, treeSearch, type TreeNode } from '../navigation/navigation-tree.mts';
+import { moreLabel, windowRows } from '../navigation/navigation-window.mts';
 import { treeMarker } from '../navigation/tree-marker.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
 
@@ -14,6 +15,9 @@ const nameClass = depth === 0 ? 'atlas-tree-root' : 'atlas-tree-group';
 const marker = node.object ? treeMarker(node.object.id) : null;
 const open = holds(node);
 const deferred = !eager && node.children.length > 0 && !open;
+// A large branch shows a window of rows around the one that holds the current object; its pill lists the rest.
+const { rows, hidden } = windowRows(node.children, node.children.findIndex(holds));
+const search = hidden ? treeSearch(node) : null;
 // Packages without an application destination retain their marker and label.
 const href = node.object && node.href && satelliteSystemByHost(node.object.id) && !node.focusId
   ? `${node.href}?view=satellites` : node.object ? node.href : null;
@@ -27,7 +31,10 @@ const href = node.object && node.href && satelliteSystemByHost(node.object.id) &
           : <span class:list={['atlas-tree-body', marker?.className]} style={marker?.style} data-atlas-place={node.object.id}>{node.label}</span>
         : <span class={nameClass}>{label}</span>}</summary>
       {!deferred && <ul>
-        {node.children.map(child => <li><Astro.self node={child} current={current} depth={depth + 1} {eager} /></li>)}
+        {rows.map(child => <li><Astro.self node={child} current={current} depth={depth + 1} {eager} /></li>)}
+        {hidden > 0 && <li>{search
+          ? <button type="button" class="atlas-row atlas-tree-more" data-search-classification={search}>{moreLabel(hidden)}</button>
+          : <span class="atlas-row atlas-tree-more">{moreLabel(hidden)}</span>}</li>}
       </ul>}
     </details>
   : node.object && (href

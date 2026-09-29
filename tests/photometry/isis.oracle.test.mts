@@ -7,7 +7,7 @@ import { radianceFactor, type ScatteringAngles } from '@cssearth/bake/photometry
 import type { HapkeModel, ParticlePhaseFunction } from '@cssearth/bake/photometry';
 
 /**
- * USGS ISIS3 as the oracle. tests/oracles/isis/photometric-truth.py reads the truth
+ * USGS ISIS3 as the oracle. packages/bake/src/photometry/fixtures/photometric-truth.py reads the truth
  * files of ISIS's photometric model unit tests at the 10.0.0_LTS commit: the
  * parameters, the (phase, incidence, emission) geometries, and the values that
  * ISIS's own Hapke.cpp, LunarLambert.cpp, Minnaert.cpp and LommelSeeliger.cpp
@@ -16,7 +16,7 @@ import type { HapkeModel, ParticlePhaseFunction } from '@cssearth/bake/photometr
  * Henyey-Greenstein and Legendre phase functions, its 1981 H function (Hfunc in
  * PhotoModel.h), shadow hiding, and Hapke (1984) roughness.
  */
-const fixture = await readOracleFixture('isis/photometric-truth.json');
+const fixture = await readOracleFixture(new URL('../../packages/bake/src/photometry/fixtures/photometric-truth.json', import.meta.url).pathname);
 const rows = (key: string) => requireArray(fixture.cases[key]).map(row => requireRecord(row));
 
 // ISIS converts degrees as angle * PI / 180; the same order keeps 90° exactly π/2.

@@ -1,0 +1,52 @@
+{
+  "id": "pena-2012-ngc300-pne",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A catalog of planetary nebula candidates in the Sculptor spiral galaxy NGC300",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2012A&A...547A..78P"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/547/A78"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012A&A...547A..78P",
+      "label": "2012A&A...547A..78P"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/547/A78",
+      "label": "CDS J/A+A/547/A78"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/547/A78/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table2: 112 planetary nebulae with J2000 positions; the Com column marks compact HII regions (cHII) and uncertain or indefinite cases."
+    }
+  ],
+  "creators": [
+    "M. Pena",
+    "J. Reyes-Perez",
+    "L. Hernandez-Martinez",
+    "M. Perez-Guillen"
+  ],
+  "publisher": "A&A 547, A78",
+  "publicationDate": "2012",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Pena et al. (2012), A&A 547, A78.",
+      "scope": "NGC 300 planetary nebulae",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/547/A78/ReadMe"
+    }
+  ]
+}

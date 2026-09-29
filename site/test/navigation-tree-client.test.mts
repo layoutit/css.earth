@@ -3,6 +3,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import { createNavigationTreeController } from '../navigation/navigation-tree-client.mts';
+import { TREE_WINDOW } from '../navigation/navigation-window.mts';
 import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload } from '../../src/navigation/navigation-tree-schema.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 
@@ -11,11 +12,11 @@ test('deferred navigation materializes only the selected path from its verified 
     schema: NAVIGATION_TREE_SCHEMA,
     roots: ['root'],
     nodes: {
-      root: { label: 'Root', objectId: null, place: true, count: 2, marker: null, children: ['branch'], href: null, focusId: null },
+      root: { label: 'Root', objectId: null, place: true, count: 2, marker: null, children: ['branch'], href: null, focusId: null, search: null },
       branch: { label: 'Branch', objectId: 'branch', place: false, count: 2,
-        marker: { className: 'atlas-marker atlas-marker-sprite', style: '--atlas-marker-size:8px' }, children: ['leaf'], href: '/branch/', focusId: null },
+        marker: { className: 'atlas-marker atlas-marker-sprite', style: '--atlas-marker-size:8px' }, children: ['leaf'], href: '/branch/', focusId: null, search: null },
       leaf: { label: 'Leaf', objectId: 'leaf', place: false, count: 1,
-        marker: { className: 'atlas-marker atlas-marker-catalog', style: '' }, children: [], href: '/leaf/', focusId: null },
+        marker: { className: 'atlas-marker atlas-marker-catalog', style: '' }, children: [], href: '/leaf/', focusId: null, search: null },
     },
   };
   const text = JSON.stringify(payload);
@@ -51,10 +52,10 @@ test('deferred rows open the destination the payload names, and a row with none 
     schema: NAVIGATION_TREE_SCHEMA,
     roots: ['root'],
     nodes: {
-      root: { label: 'Milky Way', objectId: null, place: true, count: 3, marker: null, children: ['orion', 'clusters', 'saturn'], href: null, focusId: null },
-      orion: { label: 'Orion Nebula (M42)', objectId: 'm42', place: false, count: 1, marker: null, children: [], href: '/m42/', focusId: 'm42' },
-      clusters: { label: 'Galaxy clusters', objectId: 'galaxy-clusters', place: true, count: 1, marker: null, children: [], href: null, focusId: null },
-      saturn: { label: 'Saturn', objectId: 'saturn', place: false, count: 1, marker: null, children: [], href: '/saturn/', focusId: null },
+      root: { label: 'Milky Way', objectId: null, place: true, count: 3, marker: null, children: ['orion', 'clusters', 'saturn'], href: null, focusId: null, search: null },
+      orion: { label: 'Orion Nebula (M42)', objectId: 'm42', place: false, count: 1, marker: null, children: [], href: '/m42/', focusId: 'm42', search: null },
+      clusters: { label: 'Galaxy clusters', objectId: 'galaxy-clusters', place: true, count: 1, marker: null, children: [], href: null, focusId: null, search: null },
+      saturn: { label: 'Saturn', objectId: 'saturn', place: false, count: 1, marker: null, children: [], href: '/saturn/', focusId: null, search: null },
     },
   };
   const text = JSON.stringify(payload);
@@ -106,11 +107,11 @@ test('reset collapses unrelated branches and restores the selected path', async 
     schema: NAVIGATION_TREE_SCHEMA,
     roots: ['root'],
     nodes: {
-      root: { label: 'Root', objectId: null, place: true, count: 3, marker: null, children: ['planets', 'stars'], href: null, focusId: null },
-      planets: { label: 'Planets', objectId: null, place: true, count: 1, marker: null, children: ['earth'], href: null, focusId: null },
-      earth: { label: 'Earth', objectId: 'earth', place: false, count: 1, marker: null, children: [], href: '/earth/', focusId: null },
-      stars: { label: 'Stars', objectId: null, place: true, count: 1, marker: null, children: ['sirius'], href: null, focusId: null },
-      sirius: { label: 'Sirius', objectId: 'sirius', place: false, count: 1, marker: null, children: [], href: '/sirius/', focusId: null },
+      root: { label: 'Root', objectId: null, place: true, count: 3, marker: null, children: ['planets', 'stars'], href: null, focusId: null, search: null },
+      planets: { label: 'Planets', objectId: null, place: true, count: 1, marker: null, children: ['earth'], href: null, focusId: null, search: null },
+      earth: { label: 'Earth', objectId: 'earth', place: false, count: 1, marker: null, children: [], href: '/earth/', focusId: null, search: null },
+      stars: { label: 'Stars', objectId: null, place: true, count: 1, marker: null, children: ['sirius'], href: null, focusId: null, search: null },
+      sirius: { label: 'Sirius', objectId: 'sirius', place: false, count: 1, marker: null, children: [], href: '/sirius/', focusId: null, search: null },
     },
   };
   const text = JSON.stringify(payload);
@@ -137,8 +138,8 @@ test('a deferred selection that finishes after a newer one leaves the newer entr
     schema: NAVIGATION_TREE_SCHEMA,
     roots: ['root'],
     nodes: {
-      root: { label: 'Root', objectId: null, place: true, count: 1, marker: null, children: ['leaf'], href: null, focusId: null },
-      leaf: { label: 'Leaf', objectId: 'leaf', place: false, count: 1, marker: null, children: [], href: '/leaf/', focusId: null },
+      root: { label: 'Root', objectId: null, place: true, count: 1, marker: null, children: ['leaf'], href: null, focusId: null, search: null },
+      leaf: { label: 'Leaf', objectId: 'leaf', place: false, count: 1, marker: null, children: [], href: '/leaf/', focusId: null, search: null },
     },
   };
   const text = JSON.stringify(payload);
@@ -168,8 +169,8 @@ test('a deferred selection that finishes after a newer one leaves the newer entr
 test('closing while a branch loads prevents hidden mutations and reopening uses the latest selection', async () => {
   const payload: NavigationTreePayload = {
     schema: NAVIGATION_TREE_SCHEMA, roots: ['root'], nodes: {
-      root: { label: 'Root', objectId: null, place: true, count: 1, marker: null, children: ['leaf'], href: null, focusId: null },
-      leaf: { label: 'Leaf', objectId: 'leaf', place: false, count: 1, marker: null, children: [], href: '/leaf/', focusId: null },
+      root: { label: 'Root', objectId: null, place: true, count: 1, marker: null, children: ['leaf'], href: null, focusId: null, search: null },
+      leaf: { label: 'Leaf', objectId: 'leaf', place: false, count: 1, marker: null, children: [], href: '/leaf/', focusId: null, search: null },
     },
   };
   const { document, window } = parseHTML('<div data-object-navigation-tree data-atlas-tree-src="/tree.json"><details data-atlas-depth="0" data-atlas-key="root" data-atlas-lazy><summary>Root</summary></details><details data-atlas-depth="0" data-atlas-key="other"><summary>Other</summary><a data-atlas-object="other">Other</a><details data-atlas-depth="1"><summary>Retained branch</summary></details></details></div>');
@@ -192,5 +193,35 @@ test('closing while a branch loads prevents hidden mutations and reopening uses 
   await controller.setVisible(false);
   await controller.setVisible(true);
   assert.equal(branch.open, true, 'reopening preserves manually expanded branches');
+  controller.destroy();
+});
+
+test('a branch over the window materializes the rows around the selected one and a row for the rest', async () => {
+  const stars = Array.from({ length: 120 }, (_, i) => `star-${String(i).padStart(3, '0')}`);
+  const payload: NavigationTreePayload = {
+    schema: NAVIGATION_TREE_SCHEMA,
+    roots: ['stars'],
+    nodes: {
+      stars: { label: 'Stars', objectId: null, place: true, count: stars.length, marker: null, children: stars, href: null, focusId: null, search: 'star' },
+      ...Object.fromEntries(stars.map(id => [id, { label: id, objectId: id, place: false, count: 1, marker: null, children: [], href: `/${id}/`, focusId: null, search: null }])),
+    },
+  };
+  const { document, window } = parseHTML(`<div data-object-navigation-tree data-atlas-current="star-100"
+    data-atlas-tree-src="/navigation-tree.json">
+    <ul class="atlas-tree"><li><details data-atlas-depth="0" data-atlas-key="stars" data-atlas-lazy><summary><span>Stars (120)</span></summary></details></li></ul>
+  </div>`);
+  window.fetch = async () => new Response(JSON.stringify(payload));
+  const root = document.querySelector<HTMLElement>('[data-object-navigation-tree]')!;
+  const controller = createNavigationTreeController(root, window as unknown as BrowserWindow);
+
+  await controller.select('star-100');
+  const rows = [...root.querySelectorAll<HTMLAnchorElement>('a[data-atlas-object]')].map(anchor => anchor.dataset.atlasObject);
+  assert.equal(rows.length, TREE_WINDOW, 'a window of rows, not the whole branch');
+  assert.ok(rows.includes('star-100'), 'the selected row is inside the window');
+  assert.equal(rows[0], 'star-072', 'the window ends at the branch end, in branch order');
+  assert.equal(root.querySelector<HTMLAnchorElement>('a[data-atlas-object="star-100"]')?.getAttribute('aria-current'), 'page');
+  const more = root.querySelector<HTMLButtonElement>('button.atlas-tree-more');
+  assert.equal(more?.textContent, '72 more');
+  assert.equal(more?.dataset.searchClassification, 'star', 'the rest is one pill away');
   controller.destroy();
 });

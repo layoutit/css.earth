@@ -1,0 +1,52 @@
+{
+  "id": "long-2022-m83-hii",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Supernova remnants in M83 as observed with MUSE",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2022ApJ...929..144L"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/929/144"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...929..144L",
+      "label": "2022ApJ...929..144L"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/929/144",
+      "label": "CDS J/ApJ/929/144"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/929/144/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "hiireg: 188 HII regions with J2000 positions, in the MUSE fields over the inner disc."
+    }
+  ],
+  "creators": [
+    "K. S. Long",
+    "W. P. Blair",
+    "P. F. Winkler",
+    "L. Della Bruna"
+  ],
+  "publisher": "ApJ 929, 144",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Long et al. (2022), ApJ 929, 144.",
+      "scope": "M83 HII regions",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/929/144/ReadMe"
+    }
+  ]
+}

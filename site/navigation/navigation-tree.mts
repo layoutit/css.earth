@@ -130,5 +130,13 @@ export function navigationTree(): TreeNode[] {
   return [...solarSystem, ...stars, ...sections, ...group('other', 'Other', rest)];
 }
 
+/** The one classification a branch's members share, which is the pill that lists them; null when they differ.
+ * A system counts as its leading member, the star it is named for. */
+export function treeSearch(node: TreeNode): string | null {
+  const leading = (entry: TreeNode): string | null => entry.object?.group ?? (entry.children[0] ? leading(entry.children[0]) : null);
+  const groups = new Set(node.children.map(leading));
+  return groups.size === 1 ? [...groups][0]! : null;
+}
+
 /** How many objects a node holds, itself included. */
 export const treeCount = (node: TreeNode): number => (node.object ? 1 : 0) + node.children.reduce((total, child) => total + treeCount(child), 0);

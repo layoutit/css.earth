@@ -1,5 +1,5 @@
 import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload, type NavigationTreeRecord } from '../../src/navigation/navigation-tree-schema.mts';
-import { treeCount, type TreeNode } from './navigation-tree.mts';
+import { treeCount, treeSearch, type TreeNode } from './navigation-tree.mts';
 import { treeMarker } from './tree-marker.mts';
 
 /** Where the application shell fetches the branches it did not render (`site/pages/navigation-tree.json.ts`). */
@@ -19,6 +19,7 @@ export function navigationTreeText(tree: readonly TreeNode[]): string {
       children: node.children.map(child => child.key),
       href: node.href,
       focusId: node.focusId,
+      search: node.children.length ? treeSearch(node) : null,
     };
     for (const child of node.children) visit(child);
   };

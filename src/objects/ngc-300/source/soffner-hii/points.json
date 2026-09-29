@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "soffner-hii",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+Field+%7C%7C+%27-%27+%7C%7C+HII%2C+RA2000%2C+DE2000+FROM+%22J%2FA%2BA%2F306%2F9%2Ftab3-5%22",
+    "bytes": 4042,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 211,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with S4G's disc scale length (Salo et al. 2015): 211 pc. The same thickness as the image layers' slabs; for young objects it is an upper value. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "soffner-1996-ngc300-hii",
+  "meaning": "HII regions of NGC 300 from Soffner et al. (1996): one dot per region at its catalogue position, in their three fields.",
+  "appearance": {
+    "colorCss": "#ff7a9c",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way HII layer's pink (hou-han-hii), as M31's and M33's HII regions use. Each dot takes its tone and half its colour from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "pietrzynski-2002-ngc300-cepheids",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The ARAUCARIA project: discovery of Cepheid variables in NGC 300 from a wide-field imaging survey",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2002AJ....123..789P"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/AJ/123/789"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2002AJ....123..789P",
+      "label": "2002AJ....123..789P"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/123/789",
+      "label": "CDS J/AJ/123/789"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/123/789/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "table2: 117 Cepheids with J2000 positions and periods, from WFI imaging of the whole galaxy."
+    }
+  ],
+  "creators": [
+    "G. Pietrzynski",
+    "W. Gieren",
+    "P. Fouque",
+    "F. Pont"
+  ],
+  "publisher": "AJ 123, 789",
+  "publicationDate": "2002",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Pietrzynski et al. (2002), AJ 123, 789.",
+      "scope": "NGC 300 Cepheids",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/123/789/ReadMe"
+    }
+  ]
+}

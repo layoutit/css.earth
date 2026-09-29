@@ -728,7 +728,7 @@ after building the tools and restoring Arrokoth's inputs:
 ```sh
 node packages/bake/cli/object-operations.mts acquire arrokoth --verify-only
 node site/build/prepare/prepare-authored.ts arrokoth --write
-node --test tests/objects/terrestrial/obj-uv-fits.test.mts
+node --test packages/bake/src/objects/raster/obj-uv-fits.test.mts
 ```
 
 The UV test checks interpolation, row order, missing values and bounded transfer.

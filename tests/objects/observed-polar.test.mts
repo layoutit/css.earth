@@ -5,7 +5,7 @@ import {readFile,mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import sharp from 'sharp';
-import {imageFixture} from '../fixtures/fits/helpers.mts';
+import {imageFixture} from '../../packages/bake/src/objects/geometry/fixtures/fits-helpers.mts';
 import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '@cssearth/bake/objects/layers/giant';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from '@cssearth/bake/objects/layers/observed-surfaces';
 import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from '@cssearth/bake/objects/layers/giant';

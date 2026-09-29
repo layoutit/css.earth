@@ -1,0 +1,52 @@
+{
+  "id": "hadfield-2005-m83-wolf-rayet",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A spectroscopic search for the non-nuclear Wolf-Rayet population of the metal-rich spiral galaxy M83",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2005A&A...439..265H"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/439/265"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2005A&A...439..265H",
+      "label": "2005A&A...439..265H"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/439/265",
+      "label": "CDS J/A+A/439/265"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/439/265/ReadMe",
+      "checkedOn": "2026-09-29",
+      "locator": "tablea1: 132 sources with confirmed Wolf-Rayet signatures, J2000 positions, from VLT imaging and multi-object spectroscopy of the disc."
+    }
+  ],
+  "creators": [
+    "L. J. Hadfield",
+    "P. A. Crowther",
+    "H. Schild",
+    "W. Schmutz"
+  ],
+  "publisher": "A&A 439, 265",
+  "publicationDate": "2005",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Hadfield et al. (2005), A&A 439, 265.",
+      "scope": "M83 Wolf-Rayet stars",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/439/265/ReadMe"
+    }
+  ]
+}
