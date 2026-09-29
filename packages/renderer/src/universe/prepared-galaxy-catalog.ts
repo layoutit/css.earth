@@ -12,7 +12,7 @@ import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import { createLabelBudget, labelEligible, type LabelBudget } from '../labels/universe-label-policy.js';
 
-import { placeVolumeRing, projectVolumeRing } from './volume-ring.js';
+import { projectGalaxyCaptionAnchor } from './galaxy-caption-anchor.js';
 interface Entry {
   object: PreparedCatalogObject;
   readonly marker: HTMLElement;
@@ -22,8 +22,8 @@ interface Entry {
   readonly aperture: HTMLElement | null;
   readonly activate: (event: Event) => void;
   readonly cornersM: readonly (readonly number[])[] | null;
-  /** The published stellar extent around the object's volume: its marker grows into a ring there. */
-  readonly ring: VolumeRingSource | null;
+  /** The object's drawn sphere and published stellar extent: its caption hangs under the one, hides inside the other. */
+  readonly caption: GalaxyCaptionSource | null;
   placement: number; shown: boolean;
   width: number;
   height: number;
@@ -34,18 +34,18 @@ interface Entry {
   interactive: boolean | null;
 }
 
-export interface VolumeRingSource { readonly frame: DensityVolumeFrame; readonly radiusUnits: number }
+export interface GalaxyCaptionSource { readonly frame: DensityVolumeFrame; readonly drawnRadiusUnits: number; readonly extentRadiusUnits: number }
 
 /** One fixed catalogue bank, shared by every detailed scene and every camera focus. */
-export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, galaxySample, nebulae, nebulaFrames, renderedObjectIds, billboardedObjectIds, volumeRings, onSelect = () => {}, pickingHost = host }: {
+export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, galaxySample, nebulae, nebulaFrames, renderedObjectIds, billboardedObjectIds, galaxyCaptions, onSelect = () => {}, pickingHost = host }: {
   host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; nebulae?: unknown; onSelect?: (object: PreparedCatalogObject) => void; pickingHost?: HTMLElement;
   nebulaFrames?: ReadonlyMap<string, DensityVolumeFrame>;
   renderedObjectIds?: ReadonlySet<string>;
   /** Objects whose own image marks them from afar: their caption stands without a ring over that image. */
   billboardedObjectIds?: ReadonlySet<string>;
-  /** Objects with a published stellar extent, by detailed object id: their marker is a ring at that radius, and
-   * their caption hangs under it. */
-  volumeRings?: ReadonlyMap<string, VolumeRingSource>;
+  /** Objects with a published stellar extent, by detailed object id: their caption hangs under their drawn sphere and
+   * hides while the camera is inside the extent. */
+  galaxyCaptions?: ReadonlyMap<string, GalaxyCaptionSource>;
   galaxySample?: unknown;
 }) {
   const catalog = parsePreparedGalaxyCatalog(payload), document = host.ownerDocument;
@@ -110,9 +110,8 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     // mount inert marker/caption nodes that can resemble a destination.
     if (navigable) root.append(marker, label);
     const frame = isPreparedNebula(object) ? nebulaFrames?.get(object.detailedObjectId ?? object.id) : undefined;
-    const ring = !isPreparedCluster(object) && object.detailedObjectId !== undefined ? volumeRings?.get(object.detailedObjectId) ?? null : null;
-    if (ring) marker.dataset.volumeRing = object.id;
-    const entry: Entry = { object, marker, dot, navigable, label, aperture, activate, cornersM: frame && !ring ? catalogVolumeCorners(frame) : null, ring,
+    const caption = !isPreparedCluster(object) && object.detailedObjectId !== undefined ? galaxyCaptions?.get(object.detailedObjectId) ?? null : null;
+    const entry: Entry = { object, marker, dot, navigable, label, aperture, activate, cornersM: frame && !caption ? catalogVolumeCorners(frame) : null, caption,
       placement: 0, shown: false, width: 0, height: 0, labelX: 0, labelY: 0, interactive: null };
     return entry;
   };
@@ -184,16 +183,15 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
             apertures.add(entry.object.id);
           }
         }
-        const ring = entry.ring ? projectVolumeRing(world, viewport, entry.ring.frame, entry.ring.radiusUnits) : null;
-        // Inside the sphere a cloud fills, no ring can enclose it, and its caption would hang in the middle of it.
-        if (entry.ring && !ring) continue;
-        const reach = ring ? ring.radiusPixels : 4, centre = ring ?? point;
+        const anchor = entry.caption ? projectGalaxyCaptionAnchor(world, viewport, entry.caption.frame, entry.caption.drawnRadiusUnits, entry.caption.extentRadiusUnits) : null;
+        // Inside its published extent the camera is within the galaxy: no caption names it from outside.
+        if (entry.caption && !anchor) continue;
+        const reach = anchor ? anchor.y - anchor.centreY : 4, centre = anchor ? { x: anchor.x, y: anchor.centreY } : point;
         if (Math.abs(centre.x) > width / 2 + reach || Math.abs(centre.y) > height / 2 + reach) continue;
         visible.add(entry.object.id);
-        if (ring) placeVolumeRing(entry.marker, ring);
-        else entry.marker.style.transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
-        if (entry.dot) entry.dot.style.transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
-        const bounds = ring ? { left: ring.x - ring.radiusPixels, right: ring.x + ring.radiusPixels, top: ring.y - ring.radiusPixels, bottom: ring.y + ring.radiusPixels }
+        entry.marker.style.transform = `translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
+        if (entry.dot) entry.dot.style.transform = entry.marker.style.transform;
+        const bounds = anchor ? { left: anchor.x - reach, right: anchor.x + reach, top: anchor.centreY - reach, bottom: anchor.y }
           : entry.cornersM ? projectCatalogBounds(entry.cornersM, world, viewport) : null;
         if (entry.cornersM && !bounds) continue;
         const x = bounds ? (bounds.left + bounds.right) / 2 : point.x;
@@ -235,7 +233,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
           entry.label.style.transform = `translate(${entry.labelX}px,${entry.labelY}px) translate(-50%,-100%)`;
         }
         const billboarded = !isPreparedCluster(entry.object) && entry.object.detailedObjectId !== undefined && billboardedObjectIds?.has(entry.object.detailedObjectId) === true;
-        fader.set(entry.marker, projected && (entry.ring || !billboarded) ? objectAlpha * .45 : 0, 200);
+        fader.set(entry.marker, projected && !billboarded ? objectAlpha * .45 : 0, 200);
         if (entry.aperture) fader.set(entry.aperture, apertures.has(entry.object.id) ? objectAlpha * .2 : 0, 200);
         // Interactivity flips rarely; rewriting it for every galaxy each frame reflected three attributes.
         if (entry.dot) fader.set(entry.dot, visible.has(entry.object.id) ? Math.max(0, Math.min(1, dotOpacity)) * (1 - (projected ? objectAlpha : 0)) * .4 : 0, 200);

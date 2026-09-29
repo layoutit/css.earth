@@ -75,12 +75,13 @@ are converted to the shared Sun-centred ICRF frame, with two corrections:
 [`volume.test.ts`](../../../packages/bake/src/density/volume.test.ts) checks
 both against the asset and the Sgr A* package.
 
-The universe rings the galaxy at its [stellar extent](source/stellar-extent.json),
-26 kpc from the centre: López-Corredoira et al. (2018, A&A 612, L8;
+The galaxy's [stellar extent](source/stellar-extent.json) is 26 kpc from the
+centre: López-Corredoira et al. (2018, A&A 612, L8;
 [arXiv:1804.03064](https://arxiv.org/abs/1804.03064)) detect disc stars beyond
-that radius at 99.7% confidence. The ring encloses every Milky Way star the app
-places (the farthest is 20.9 kpc from Sgr A*) and marks where stars are still
-measured, not a boundary; the caption hangs under it.
+that radius at 99.7% confidence, and every Milky Way star the app places lies
+inside it (the farthest is 20.9 kpc from Sgr A*). While the camera is inside
+that radius the galaxy's caption hides; outside it the caption hangs just under
+the drawn bulge.
 
 Only the bulge and inner disc are drawn. The display keeps full volumetric
 support inside 1.5 model units (2.9 kpc) and smoothly reduces it to zero at
@@ -222,14 +223,48 @@ features across independent depth layers. Neither geometry nor imagery is
 generated in the browser. The NASA source epoch stays in provenance; shared
 camera metadata uses the volume's Sun-centered ICRF frame and epoch.
 
+## Star catalogues in the galaxy
+
+Five published catalogues are drawn inside the galaxy as small fixed dots, in
+the galaxy's own image layer, so they fade and hide with it. Each keeps its
+original table unchanged in `source/<id>/` beside a `points.json` recipe naming
+the columns, the authors' selection and the citation.
+[`tools/objects/catalogue-points/prepare.mts`](../../../tools/objects/catalogue-points/prepare.mts)
+has Astropy convert each row's Galactic longitude, latitude and distance to
+Sun-centred ICRS coordinates and writes `prepared/<id>.json`. Rows without a
+distance are left out, not filled.
+
+| Layer | Source | Points | What it traces |
+| --- | --- | --- | --- |
+| [Classical Cepheids](source/cepheids/points.json) | Skowron et al. (2019, Science 365, 478; [arXiv:1806.10653](https://arxiv.org/abs/1806.10653)), `Data_Table_1.dat` | 2214 of 2,431 (217 have no distance) | The young thin disc and its warp; coloured by published age, blue (30 Myr) to gold (300 Myr) |
+| [HII regions](source/hii-regions/points.json) | Anderson et al. (2014, ApJS 212, 1; [arXiv:1312.6202](https://arxiv.org/abs/1312.6202)), CDS table 6 | 1286 with a distance (maser-parallax rows left to the next layer) | Star-forming regions on both sides of the centre; mostly kinematic distances |
+| [Masers](source/masers/points.json) | Reid et al. (2019, ApJ 885, 131; [arXiv:1910.03357](https://arxiv.org/abs/1910.03357)), Table 1 | 199, at 1/parallax | The most accurate distances across the disc, 12 beyond the centre |
+| [Open clusters](source/open-clusters/points.json) | Hunt & Reffert (2023, A&A 673, A114; [arXiv:2303.13424](https://arxiv.org/abs/2303.13424)), high-quality sample | 4004 of the 4,105 with CMD class > 0.5 and CST > 5σ (open clusters only) | Arm segments and the warp within about 4 kpc of the Sun; coloured by log age |
+| [Globular clusters](source/globular-clusters/points.json) | Baumgardt & Vasiliev (2021, MNRAS 505, 5957; [arXiv:2105.09526](https://arxiv.org/abs/2105.09526)), orbits table | 165 | The old, round halo |
+
+The Skowron table's authors ask for a citation and do not license it under MIT
+or CC. Twenty Cepheids lie beyond 25 kpc from the centre; the table gives no
+reason to drop them, so they stay.
+
+The maps are lopsided because of what can be seen from Earth: 90% of the
+Cepheids and every open cluster lie on the Sun's side of the centre, where dust
+hides less. The HII regions (335 beyond the centre) and masers (12) are what
+reaches the far side; nothing is mirrored or modelled to fill it.
+
+Zoomed out, each layer draws only the start of its prepared order: every point
+within 10 kpc of the Sun, then a share falling as 1/distance, never below 300.
+The preparer orders points in sparse places first and crowds last (neighbours
+within 1 kpc times a fixed pseudo-random factor), so the far side and outer disc
+stay nearly whole while the crowd around the Sun thins. At galaxy scale the
+app's planet-host stars fade out (from 5 to 15 kpc from the camera): they follow
+where planet surveys looked, not the galaxy's shape.
+
 ## Bulge evidence
 
 Two [browser captures](evidence/2026-09-28/capture.json) of this version show the
 galaxy as its bulge slices only: 603 slice elements, no disc image and no impostor
 view. From the [Milky Way overview](evidence/2026-09-28/bulge-overview.jpg) the
-bulge surrounds the Sagittarius A* circle, and the galaxy's 26 kpc ring (573 px)
-encloses it and its stars, with the LMC and SMC rings at their own published
-extents. From 39,183 light-years above the
+bulge surrounds the Sagittarius A* circle. From 39,183 light-years above the
 [Sun's neighbourhood](evidence/2026-09-28/near-sun.jpg) the inner disc fades out
 before the Sun. On css.earth before this change the same camera showed a 344 px
 face-on impostor picture of the whole galaxy beside the Sun, although the camera

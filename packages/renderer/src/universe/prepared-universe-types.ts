@@ -32,9 +32,14 @@ export interface PreparedUniverseOptions {
   lensVisibility?: PreparedPointVisibility;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   environmentLinks?: Readonly<Record<string, string>>;
-  /** Published stellar extents, radius in metres by object id: each such galaxy is ringed at it, with its
-   * caption under the ring. Objects without one keep their ordinary marker. */
+  /** Published stellar extents, radius in metres by object id: each such galaxy's caption hangs under what is drawn of
+   * it and hides while the camera is inside the extent. Objects without one keep their ordinary caption. */
   stellarExtents?: Readonly<Record<string, number>>;
+  /** Prepared `cssearth-catalogue-points@1` banks of stars inside the galaxy, by URL: drawn as dust with the galaxy
+   * volume, fetched the first time it shows. */
+  galaxyCataloguePoints?: readonly string[];
+  /** A prepared slice volume of catalogue points in the galaxy's frame, shown at the galaxy handoff. */
+  galaxyTracerVolume?: string;
   imageLayers?: readonly PreparedImageLayerBank[];
   /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus. */
   imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame }[];

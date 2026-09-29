@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "hou-han-hii",
+  "table": {
+    "path": "tablea1.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/569/A125/tablea1.dat",
+    "bytes": 933705,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        4
+      ],
+      "lDeg": [
+        6,
+        12
+      ],
+      "bDeg": [
+        13,
+        19
+      ]
+    },
+    "distanceFirstOf": [
+      [
+        103,
+        108
+      ],
+      [
+        209,
+        214
+      ]
+    ],
+    "distanceUnit": "kpc",
+    "onePerName": true
+  },
+  "filters": [],
+  "frame": {
+    "input": "galactic",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord Galactic to ICRS, heliocentric Cartesian"
+  },
+  "source": "hou-han-2014-spiral-tracers",
+  "meaning": "HII regions compiled by Hou & Han (2014) to outline the spiral arms: each at its photometric or trigonometric distance (Dist) where one is published, otherwise at the kinematic distance the authors computed from R0 = 8.3 kpc and a flat rotation curve (D8.3), with their near/far resolution. One dot per region; the table lists a row per observation.",
+  "appearance": {
+    "colorCss": "#ff7a9c",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the pink of ionised hydrogen, a shade deeper than the WISE layer.",
+    "emphasis": "Arm tracer: young, massive star formation that outlines the spiral arms, drawn at full strength."
+  },
+  "mapWeight": {
+    "kind": {
+      "column": [
+        217,
+        222
+      ],
+      "scale": 0.01,
+      "missing": 0.1
+    },
+    "kinematic": {
+      "column": [
+        103,
+        108
+      ],
+      "empty": true
+    },
+    "rotation": {
+      "r0Kpc": 8.3,
+      "theta0KmS": 239,
+      "sigmaVKmS": 7
+    },
+    "basis": "Hou & Han (2014), Sect. 2.4 and Eq. 2: a weight for the kind of tracer, times 0.5/\u03c3 in each disc axis (1 when \u03c3 < 0.5 kpc) for a kinematic distance, with \u03c3 from a \u00b17 km/s velocity uncertainty through a flat rotation curve (R0 = 8.3 kpc, \u03980 = 239 km/s, their adopted set). W_HII = U/100 from the excitation parameter U8.3; 0.1 where no radio flux gives U."
+  }
+}

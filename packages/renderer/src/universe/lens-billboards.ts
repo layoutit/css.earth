@@ -13,6 +13,8 @@ export interface LensBankBillboard {
   readonly contextVisibility: 'galactic' | 'independent';
   /** A cloud that accompanies a body stays dark until that body's dataset asks for it. */
   readonly attached: boolean;
+  /** A volume bank's authored framing radius, in its frame's units: its caption hangs under this sphere. */
+  readonly framingRadiusUnits?: number;
   /** The default lens's impostor view that faces the Sun, as one cell of the shared atlas. */
   readonly billboard?: { readonly cell: number; readonly radiusUnits: number; readonly back: Vector; readonly right: Vector; readonly down: Vector };
 }
@@ -41,7 +43,7 @@ export function parseLensBillboards(value: unknown): LensBillboards {
   if (!/^[a-f0-9]{64}$/.test(atlas.sha256) || atlas.columns < 1 || atlas.rows < 1) throw new TypeError('Lens billboard atlas is invalid.');
   const banks = new Map<string, LensBankBillboard>();
   for (const value of array(input.banks, 'lens billboard banks')) {
-    const bank = record(value, 'lens billboard bank', ['id', 'payloadSha256', 'contextVisibility', 'attached', 'billboard']);
+    const bank = record(value, 'lens billboard bank', ['id', 'payloadSha256', 'contextVisibility', 'attached', 'framingRadiusUnits', 'billboard']);
     const id = text(bank.id, 'lens billboard bank id'), payloadSha256 = text(bank.payloadSha256, 'lens billboard payload sha256');
     if (banks.has(id) || !/^[a-f0-9]{64}$/.test(payloadSha256)) throw new TypeError('Lens billboard banks must be unique and pinned.');
     if (bank.contextVisibility !== 'galactic' && bank.contextVisibility !== 'independent') throw new TypeError('Unsupported lens context visibility.');
@@ -54,7 +56,9 @@ export function parseLensBillboards(value: unknown): LensBillboards {
       billboard = Object.freeze({ cell, radiusUnits: positive(input.radiusUnits, 'lens billboard radius'),
         back: vector(input.back, 'lens billboard back'), right: vector(input.right, 'lens billboard right'), down: vector(input.down, 'lens billboard down') });
     }
-    banks.set(id, Object.freeze({ id, payloadSha256, contextVisibility: bank.contextVisibility, attached: bank.attached, ...(billboard ? { billboard } : {}) }));
+    const framingRadiusUnits = bank.framingRadiusUnits === undefined ? undefined : positive(bank.framingRadiusUnits, 'lens billboard framing radius');
+    banks.set(id, Object.freeze({ id, payloadSha256, contextVisibility: bank.contextVisibility, attached: bank.attached,
+      ...(framingRadiusUnits === undefined ? {} : { framingRadiusUnits }), ...(billboard ? { billboard } : {}) }));
   }
   return Object.freeze({ atlas, banks });
 }

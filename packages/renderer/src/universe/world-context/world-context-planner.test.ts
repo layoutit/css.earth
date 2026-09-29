@@ -748,13 +748,17 @@ test('past the Local Group scale the stars give their names to the galaxies', as
   expect(named(1e6), 'from 1 Mpc no star or planet is named').toEqual([]);
 });
 
-test('past the Local Group scale no star is drawn as a dot; the Milky Way stands for them', () => {
+test('at galaxy scale the planet hosts give way to the galaxy; past the Local Group no body keeps a dot', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const dotted = (parsecs: number) => {
     input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
     return calculate(input).projectedBodies.filter(body => body.markerOpacity > 0).map(body => [plan.focus, ...plan.bodies][body.index]!.id);
   };
-  expect(dotted(200e3).length, 'from 200 kpc the Milky Way\'s stars are still dots').toBeGreaterThan(100);
+  expect(dotted(3e3).length, 'within 5 kpc of the camera the planet hosts are dots').toBeGreaterThan(100);
+  const galactic = dotted(30e3);
+  expect(galactic, 'from 30 kpc the Sun and Sgr A* stay as references').toEqual(expect.arrayContaining(['sun', 'sgr-a-star']));
+  expect(galactic.length, 'from 30 kpc the planet hosts have given way to the galaxy').toBeLessThan(10);
+  expect(dotted(200e3).sort(), 'from 200 kpc only the references keep a dot').toEqual(['sgr-a-star', 'sun']);
   expect(dotted(1e6), 'from 1 Mpc, in the overview, no body keeps a dot').toEqual([]);
 });
 
