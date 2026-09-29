@@ -7,7 +7,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
-import { fitPowerLawDisc } from '@cssearth/telescope-cli/archives/interferometry/disc-fit';
+import { fitPowerLawDisc } from '../archives/interferometry/disc-fit.mts';
 
 const SEASONS = 'packages/telescope-cli/src/archives/interferometry/seasons';
 /** The band each instrument's calibrated file is fitted in, as its season's observations record it. */

@@ -19,7 +19,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { starStylesheet } from './new-object/scaffold.mts';
+import { starStylesheet } from './scaffold.mts';
 import { temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { sphereProjection } from '@cssearth/bake/objects/scene';
 
@@ -247,7 +247,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const flag = (name: string) => { const index = args.indexOf(`--${name}`); return index < 0 ? undefined : args[index + 1]; };
   const id = args.find((argument, index) => !argument.startsWith('--') && !args[index - 1]?.startsWith('--'));
   if (!id) throw new TypeError('Usage: new-hosted-planet <id> --name <name> --system <system> --description <line> --paper <url> --paper-credit <credit>');
-  const root = resolve(import.meta.dirname, '../..');
+  const root = resolve(import.meta.dirname, '../../../..');
   const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
   if (await exists(`src/objects/${id}`)) throw new Error(`src/objects/${id} already exists; the scaffold never overwrites a package.`);
   const order = flag('order'), color = flag('color'), rotation = flag('rotation'), glowK = flag('self-luminous'), glowSource = flag('temperature-source');
@@ -258,7 +258,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const read = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;
   const body = requireRecord(await read(`packages/astronomy/data/bodies/${id}.json`), 'astronomy record');
   const hostId = requireString(requireRecord(body.physical, 'physical').parent, 'physical.parent');
-  const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await import('../../src/platform/solar-geometry.mts') as { SOLAR_GEOMETRY_EPOCH_JD_TT: number };
+  const { SOLAR_GEOMETRY_EPOCH_JD_TT } = await import('../../../../src/platform/solar-geometry.mts') as { SOLAR_GEOMETRY_EPOCH_JD_TT: number };
   const files = scaffoldHostedPlanetFiles({
     id, name: requireString(flag('name'), '--name'), system: requireString(flag('system'), '--system'),
     description: requireString(flag('description'), '--description'), paper: requireString(flag('paper'), '--paper'),

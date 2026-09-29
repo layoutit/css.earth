@@ -46,5 +46,5 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
-  await answerParent(()=>newObjectCommand(parseNewObjectOptions(JSON.parse(process.argv[2]??'null')),resolve(import.meta.dirname,'../../..'),line=>{process.stderr.write(line);}));
+  await answerParent(()=>newObjectCommand(parseNewObjectOptions(JSON.parse(process.argv[2]??'null')),resolve(import.meta.dirname,'../../../..'),line=>{process.stderr.write(line);}));
 }

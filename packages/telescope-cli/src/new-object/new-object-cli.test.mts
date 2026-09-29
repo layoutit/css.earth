@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { skyPlaneOrientation } from '@cssearth/astronomy';
-import { TODO, scaffoldStarFiles, solarRadii } from './new-object.mts';
+import { TODO, scaffoldStarFiles, solarRadii } from './new-object-cli.mts';
 import { temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 
-const root = resolve(import.meta.dirname, '../..');
+const root = resolve(import.meta.dirname, '../../../..');
 const EPOCH = 2461286.5;
 const spec = { id: 'antares', name: 'Antares', system: 'Scorpius', temperatureK: 3660, temperatureSource: 'Effective temperature 3660 ± 120 K from Ohnaka et al. 2013 (https://arxiv.org/abs/1304.4800), abstract.', description: 'Red supergiant in Scorpius.', paper: 'https://arxiv.org/abs/1304.4800', paperCredit: 'Ohnaka et al. (2013)' };
 

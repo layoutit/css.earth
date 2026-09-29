@@ -150,6 +150,11 @@ export default [
     rules: { 'max-lines': 'off' },
   },
   {
+    // Moved unchanged from tools/objects/new-object, where the limit only warned; splitting it is separate work.
+    files: ['packages/telescope-cli/src/new-object/new-object.test.mts'],
+    rules: { 'max-lines': 'off' },
+  },
+  {
     // Moved unchanged from tools/objects/source-authoring, where the limit only warned; splitting it is separate work.
     files: ['packages/bake/authoring/betelgeuse-shell/author.mts'],
     rules: { 'max-lines': 'off' },

@@ -3,7 +3,7 @@
  * Shared by the Cepheid route (generate.mts) and by packages made before it. The bake reads the row, checks it against its own
  * published values and plays it (@cssearth/bake/photometry, light-curve.ts). */
 import { checkGaiaCepheidModel, gaiaCepheidQuery, GAIA_TIME_OFFSET_JD, parseGaiaCepheidRow, PULSATION_SECONDS_PER_DAY } from '@cssearth/bake/photometry';
-import { SOLAR_GEOMETRY_EPOCH_JD_TT, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mts';
+import { SOLAR_GEOMETRY_EPOCH_JD_TT, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../../src/platform/solar-geometry.mts';
 import { GAIA_TAP } from './archives.mts';
 import { CHECKED } from './color.mts';
 import { bindInputs, json, type PackageFiles } from './lens.mts';

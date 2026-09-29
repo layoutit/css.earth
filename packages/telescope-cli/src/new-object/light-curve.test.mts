@@ -1,7 +1,7 @@
 /** The Cepheid light curve a package installs (light-curve.mts), on a generated star package's files and S Vul's Gaia DR3
  * vari_cepheid row. */
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
 import { parsePresentationProfile } from '@cssearth/bake/presentation';
 import { installLightCurve, LIGHT_CURVE_MODEL } from './light-curve.mts';
 
