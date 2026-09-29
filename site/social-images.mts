@@ -18,12 +18,12 @@ export function committedSocialImages(root = process.cwd()): ReadonlySet<string>
   return new Set(names);
 }
 
-/** Pages without a committed capture whose share image the deploy draws from their arrival billboard
+/** Scene pages without a committed capture whose share image the deploy draws from their arrival billboard
  * (`site/build/share-images.mts`), keyed by id: the billboard's `/scenes/<id>/…` address. */
-export function billboardSocialImages(objects: readonly Pick<ObjectEntry, 'id' | 'kind' | 'discovery'>[],
+export function billboardSocialImages(objects: readonly Pick<ObjectEntry, 'id' | 'discovery'>[],
   committed = committedSocialImages()): ReadonlyMap<string, string> {
   return new Map(objects.flatMap(object => {
-    const billboard = object.kind === 'scene' ? object.discovery?.arrival?.billboard : undefined;
+    const billboard = object.discovery?.arrival?.billboard;
     return billboard && !committed.has(object.id) ? [[object.id, billboard.url] as const] : [];
   }));
 }

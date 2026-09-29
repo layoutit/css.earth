@@ -5,14 +5,15 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../objects.mts';
 import { billboardSocialImages } from '../social-images.mts';
 import { resolveBuildSceneAddress } from '../asset-origin.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const WIDTH = 1200, HEIGHT = 630;
-// Decorative: the preview a link unfurls into, never science. q82 keeps the limb and ring edges clean at 10 to 45 KB a card.
-const JPEG = { quality: 82, mozjpeg: true } as const;
+// Decorative, at the cliff decoration is compressed to: a 199-card sample averages 12.8 KB at q82 (47 MB for every page)
+// and 6.6 KB at q40 (24 MB), with no visible change at link-preview size. JPEG, because not every unfurler reads WebP.
+const JPEG = { quality: 40, mozjpeg: true } as const;
 
 async function billboardBytes(id: string, address: string): Promise<Buffer> {
   const local = resolve(root, 'public', address.replace(/^\//u, ''));
@@ -33,7 +34,7 @@ export async function shareCard(billboard: Buffer): Promise<Buffer> {
 }
 
 if (import.meta.main) {
-  const pending = [...billboardSocialImages(OBJECTS)], output = resolve(root, 'dist/social'), failures: string[] = [];
+  const pending = [...billboardSocialImages(SCENE_OBJECTS)], output = resolve(root, 'dist/social'), failures: string[] = [];
   await mkdir(output, { recursive: true });
   let written = 0, bytes = 0;
   await Promise.all(Array.from({ length: 16 }, async () => {

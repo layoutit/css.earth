@@ -22,7 +22,7 @@ Every page has a share image of its own. The 16 committed captures in
 application controls hidden. Every other scene page uses its arrival billboard:
 `site/build/share-images.mts` runs in `pnpm build:deploy` after `astro build`. It
 centres each billboard on black at 1200×630 and writes `dist/social/<id>.jpg`
-(about 3,570 cards, 48 MB). A billboard it cannot read fails the deploy. Pages
+(about 3,570 cards, 24 MB). A billboard it cannot read fails the deploy. Pages
 with neither, such as catalogue focus pages, fall back to the Earth capture.
 None of these images adds requests to ordinary page loads.
 

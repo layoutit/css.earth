@@ -1,13 +1,13 @@
 import assert from "node:assert/strict";
 import { sourceTest } from "@cssearth/objects/node/source-test";
 const test = sourceTest();
-import { OBJECTS, requireObject } from "../objects.mts";
+import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
 import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
 import { availableSocialImages, billboardSocialImages, committedSocialImages } from "../social-images.mts";
 
 test("the home page is named and addressed as the site, not as the Earth page it opens on", () => {
-  const earth = objectSeo(requireObject("earth")), home = homeSeo(earth);
+  const earth = objectSeo(requireSceneObject("earth")), home = homeSeo(earth);
   assert.equal(home.canonical, "https://css.earth/");
   assert.notEqual(home.title, earth.title);
   assert.equal(home.image, earth.image);
@@ -26,11 +26,11 @@ test("breadcrumbs follow the orbit chain through pages, passing over centres tha
 });
 
 test("every scene page has a share image of its own: a committed capture or its arrival billboard", () => {
-  const committed = committedSocialImages(), billboards = billboardSocialImages(OBJECTS, committed);
+  const committed = committedSocialImages(), billboards = billboardSocialImages(SCENE_OBJECTS, committed);
   for (const id of committed) assert.ok(!billboards.has(id), `${id}: a committed capture wins over the billboard`);
-  const available = availableSocialImages(OBJECTS);
-  const without = OBJECTS.filter(object => object.kind === "scene" && !available.has(object.id)).map(object => object.id);
-  assert.deepEqual(without, OBJECTS.filter(object => object.kind === "scene" && !object.discovery?.arrival?.billboard && !committed.has(object.id)).map(object => object.id));
+  const available = availableSocialImages(SCENE_OBJECTS);
+  const without = SCENE_OBJECTS.filter(object => !available.has(object.id)).map(object => object.id);
+  assert.deepEqual(without, SCENE_OBJECTS.filter(object => !object.discovery?.arrival?.billboard && !committed.has(object.id)).map(object => object.id));
   assert.ok(billboards.size > 3000, `${billboards.size} billboard share images`);
-  assert.equal(objectSeo(requireObject("betelgeuse"), { socialImages: available }).image, "https://css.earth/social/betelgeuse.jpg");
+  assert.equal(objectSeo(requireSceneObject("betelgeuse"), { socialImages: available }).image, "https://css.earth/social/betelgeuse.jpg");
 });
