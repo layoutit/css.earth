@@ -1,6 +1,4 @@
-import { sha256 } from '@cssearth/core/node';
 import { readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, parseCoraltempRecipe, parseEnsoAdvisory, readCoraltempAnomaly, ensoContent, ensoText } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, writeFile, rename, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -24,7 +22,7 @@ export function newestCoraltemp(listings: readonly string[], throughDate: string
 
 
 
-// Explicit acquisition step; ordinary preparation remains offline and pinned.
+// Explicit acquisition step; ordinary preparation remains offline on the declared files.
 export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
   const object = resolve(root, 'src/objects/earth'), source = resolve(object, 'source');
   const config = await readMapConfiguration(resolve(source, 'preparation/paged-ellipsoid.json'));
@@ -47,13 +45,9 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
   const listings = await Promise.all(years.map(year => fetchBytes(`${base}${year}/`).then(bytes => bytes.toString())));
   const latest = newestCoraltemp(listings, today);
   const date = `${latest.date.slice(0, 4)}-${latest.date.slice(4, 6)}-${latest.date.slice(6)}`;
-  if (date < recipe.date) throw new Error('Latest NOAA file is older than the pinned source.');
+  if (date < recipe.date) throw new Error(`earth: the latest NOAA CoralTemp file ${latest.filename} is older than the recipe date ${recipe.date}.`);
   const url = `${base}${latest.date.slice(0, 4)}/${latest.filename}`;
-  const [bytes, checksum, advisoryBytes] = await Promise.all([
-    fetchBytes(url), fetchBytes(`${url}.md5`), fetchBytes(advisoryUrl) ]);
-  const [publisherMd5, publisherFilename] = checksum.toString().trim().split(/\s+/);
-  if (publisherFilename !== latest.filename || publisherMd5 !== createHash('md5').update(bytes).digest('hex'))
-    throw new Error('NOAA publisher checksum differs.');
+  const [bytes, advisoryBytes] = await Promise.all([fetchBytes(url), fetchBytes(advisoryUrl)]);
   Object.assign(recipe, { filename: latest.filename, date, checked: now.toISOString(), advisory: parseEnsoAdvisory(advisoryBytes.toString()) });
   const temp = await mkdtemp(resolve(tmpdir(), 'earth-enso-'));
   try {
@@ -68,17 +62,16 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
     if (!binding) throw new Error('ENSO presentation binding is missing.');
     binding.qualification = lens.notes;
     const updates = new Map<string, Buffer>([
-      ['science/coraltemp-latest.nc', bytes], ['science/coraltemp-latest.nc.md5', checksum],
+      ['science/coraltemp-latest.nc', bytes],
       ['preparation/paged-ellipsoid.json', json(config)], ['content/object.json', json(content)],
       ['content/lens-bindings.json', json(bindings)] ]);
     const manifest = await readRefreshManifest(resolve(source, 'manifest.json'));
-    manifest.inputs = manifest.inputs.filter(entry => !['noaa-oisst', 'noaa-coraltemp-product', 'noaa-enso-advisory'].includes(entry.id));
-    const newInputs = [ { id: 'noaa-coraltemp-anomaly', path: map.path, origin: url },
-      { id: 'noaa-coraltemp-checksum', path: 'science/coraltemp-latest.nc.md5', origin: `${url}.md5` } ];
+    manifest.inputs = manifest.inputs.filter(entry => !['noaa-oisst', 'noaa-coraltemp-product', 'noaa-enso-advisory', 'noaa-coraltemp-checksum'].includes(entry.id));
+    const newInputs = [ { id: 'noaa-coraltemp-anomaly', path: map.path, origin: url } ];
     for (const input of newInputs) {
       const record = { ...input,
         credit: 'NOAA Coral Reef Watch and NOAA Climate Prediction Center', license: 'US government public domain',
-        licenseEvidence: ['https://www.ncei.noaa.gov/archive'], acquisition: `Analysis checked ${today}; native netCDF and publisher checksum retained. The recipe records the separately dated NOAA advisory and its URL.`,
+        licenseEvidence: ['https://www.ncei.noaa.gov/archive'], acquisition: `Analysis checked ${today}; native netCDF retained. The recipe records the separately dated NOAA advisory and its URL.`,
         redistribution: 'Retained NOAA data with attribution', consumers: ['enso'] };
       const at = manifest.inputs.findIndex(entry => entry.id === input.id);
       if (at < 0) manifest.inputs.push(record); else manifest.inputs[at] = record;
@@ -94,7 +87,7 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
     const text = JSON.parse(await readFile(resolve(object, 'text.json'), 'utf8'));
     text.datasets.enso = ensoText(recipe);
     await writeFile(resolve(object, 'text.json'), json(text));
-    return { ...decoded.receipt, sourceSha256: sha256(bytes), publisherMd5, checked: recipe.checked, advisory: recipe.advisory };
+    return { ...decoded.receipt, sourceBytes: bytes.length, checked: recipe.checked, advisory: recipe.advisory };
   } finally { await rm(temp, { recursive: true, force: true }); }
 }
 

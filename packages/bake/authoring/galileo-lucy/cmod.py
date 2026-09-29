@@ -8,7 +8,6 @@ Exactly zero-area source faces are omitted and listed in the conversion receipt.
 """
 
 import argparse
-import hashlib
 import json
 import math
 from pathlib import Path
@@ -106,7 +105,6 @@ def inspect(path, maximum_extent_meters):
     extents = [max(p[k] for p in positions) - min(p[k] for p in positions)
                for k in range(3)]
     return positions, vertices, faces, {
-        "sourceSha256": hashlib.sha256(data).hexdigest(),
         "sourceBytes": len(data), "meshes": len(meshes),
         "vertices": len(vertices), "faces": len(faces),
         "sourceFaces": source_face_count,

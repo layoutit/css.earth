@@ -41,7 +41,8 @@ repository root with Node 24. It uses only checked-in inputs and writes to
 `output/dactyl-registration/`; an optional first argument changes that directory.
 It runs serially and does not prepare or mount a scene.
 
-The command verifies every byte pin in Dactyl's `evidence/registration/inputs.json`,
+The command reads every input Dactyl's `evidence/registration/inputs.json` names,
+restoring a missing kernel or archive frame from its URL,
 compares the FITS storage array with original VICAR detector pixels, evaluates
 the original scan-platform CK at shutter-center SCET, and checks that calculation
 against the pinned native CSPICE fixture. It then fits an ellipsoid orientation
@@ -94,11 +95,11 @@ node packages/bake/authoring/galileo-lucy/fit-dactyl-published-controls.mts /pat
 ```
 
 An optional second argument changes the default `output/dactyl-published-controls/`
-directory. The PDF SHA-256 must match Dactyl's
+directory. The PDF's byte count must match Dactyl's
 [`published-controls.json`](../../../../src/objects/dactyl/evidence/registration/published-controls.json).
 It is a supplied reference input, excluded from redistribution. This command
-reads three exact embedded JPEG streams using offsets specific to that pinned
-PDF; both the complete PDF and each stream are verified before decoding. It
+reads three exact embedded JPEG streams using offsets specific to that
+PDF; the sizes of the complete PDF and of each stream are checked before decoding. It
 neither installs a PDF runtime nor re-encodes those streams as new sources.
 
 The report records the paper-to-native similarity alignment, regional/filter
@@ -118,7 +119,7 @@ explains the remaining map/model correspondence and visibility requirements.
 
 ## Dactyl published map review
 
-Run with Node 24 and the same pinned local publisher PDF:
+Run with Node 24 and the same local publisher PDF:
 
 ```sh
 node packages/bake/authoring/galileo-lucy/review-dactyl-map.mts /path/to/1-s2.0-S0019103596900457-main.pdf

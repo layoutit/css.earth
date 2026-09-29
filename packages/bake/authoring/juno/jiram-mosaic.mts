@@ -26,7 +26,6 @@
  *
  * Output: a PDS3 simple-cylindrical float map with a detached label, as `pds3-float-map` reads it, and a receipt with
  * every frame's registration. */
-import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -372,44 +371,43 @@ async function readDetectorMask(recipe: JiramRecipe, frame: JiramFrame, rdrLabel
   const [image, label] = buffers;
   const mask = detectorMask(image, label.toString('latin1'), rdrLabel, recipe, maximumDn);
   await Promise.all([writeFile(resolve(directory, `${productId}.IMG`), image), writeFile(resolve(directory, `${productId}.LBL`), label)]);
-  return {mask, productId, volume, imageSha256: sha256(image), labelSha256: sha256(label), maximumDn, withheldPixels: mask.reduce((n,v)=>n+v,0)};
+  return {mask, productId, volume, maximumDn, withheldPixels: mask.reduce((n,v)=>n+v,0)};
 }
 
 export async function runMosaic(recipePath: string, framesDirectory: string, fetchMissing = false, previews?: string) {
   const root = dirname(recipePath), recipe = parseRecipe(JSON.parse(await readFile(recipePath, 'utf8')));
   const ppd = recipe.output.pixelsPerDegree, cells = 360 * ppd * 180 * ppd, padX = recipe.policy.searchCrossTrackPixels, padY = recipe.policy.searchAlongTrackPixels;
-  const frames: FrameResult[] = [], kernelsUsed = new Map<string, string>(), inputs: {productId: string; volume: string; imageSha256: string; labelSha256: string}[] = [];
+  const frames: FrameResult[] = [], inputs: {productId: string; volume: string}[] = [];
   const detectorChecks: Omit<Awaited<ReturnType<typeof readDetectorMask>>, 'mask'>[] = [];
   let radii: number[] = [], ifov = 0;
   for (const visit of recipe.visits) {
     const paths = await kernelBankPaths(recipe.kernelSet, [...recipe.commonKernels, ...visit.kernels]);
     const set: KernelSet = await loadKernelSet(paths);
-    for (const k of set.kernels) kernelsUsed.set(k.path.slice(k.path.indexOf('src/spice/')), k.sha256);
     radii = numbers(set.pool, `BODY${recipe.target.naifId}_RADII`); ifov = numbers(set.pool, `INS${recipe.band.instrument}_IFOV`)[0];
-    for (const pinned of visit.frames) {
-      const [bytes, labelBytes] = await readArchivedFrame(recipe, pinned, framesDirectory, fetchMissing);
-      inputs.push({...pinned, imageSha256: sha256(bytes), labelSha256: sha256(labelBytes)});
+    for (const archived of visit.frames) {
+      const [bytes, labelBytes] = await readArchivedFrame(recipe, archived, framesDirectory, fetchMissing);
+      inputs.push({productId: archived.productId, volume: archived.volume});
       const label = labelBytes.toString('latin1'), decoded = decodeFrame(bytes, label, recipe);
       const scale = recipe.unitScale[decoded.unit];
-      if (scale === undefined) throw new Error(`${pinned.productId}: no stated scale for the archived unit ${decoded.unit}.`);
+      if (scale === undefined) throw new Error(`${archived.productId}: no stated scale for the archived unit ${decoded.unit}.`);
       const values = decoded.values.map(v => v * scale);
       const registrationValues = values.slice();
       if (visit.maximumDetectorDn !== undefined) {
-        const {mask, ...record} = await readDetectorMask(recipe, pinned, label, framesDirectory, fetchMissing, visit.maximumDetectorDn);
+        const {mask, ...record} = await readDetectorMask(recipe, archived, label, framesDirectory, fetchMissing, visit.maximumDetectorDn);
         detectorChecks.push(record);
         for (let i = 0; i < values.length; i++) if (mask[i]) values[i] = NaN;
       }
       const et = (utcToEt(set.leapSeconds, `${decoded.start}Z`) + utcToEt(set.leapSeconds, `${decoded.stop}Z`)) / 2;
       const camera = spiceCamera({ pool: set.pool, ephemeris: set.ephemeris, rotation: set.rotation, observer: JUNO, target: recipe.target.naifId, bodyFrame: recipe.target.bodyFrame, instrument: recipe.band.instrument, et, aberration: 'LT+S', pixels: recipe.band.pixels });
       const { model, w, lit } = litModel(camera, radii, padX, padY);
-      const base = { productId: pinned.productId, visit: visit.id, utc: decoded.start, rangeKm: camera.report.rangeKm, phaseDegrees: camera.report.phaseAngleDegrees, unit: decoded.unit, litPixels: lit, values };
+      const base = { productId: archived.productId, visit: visit.id, utc: decoded.start, rangeKm: camera.report.rangeKm, phaseDegrees: camera.report.phaseAngleDegrees, unit: decoded.unit, litPixels: lit, values };
       if (lit < recipe.policy.minimumLitPixels) { frames.push({ ...base, camera, registration: { method: 'rejected', dx: 0, dy: 0, correlation: NaN, reason: 'too little sunlit disc in the search window' } }); continue; }
       const fit = correlate(registrationImage(registrationValues), model, w, padX, padY);
       const accepted = fit.correlation >= recipe.policy.minimumCorrelation && !fit.atSearchEdge;
       frames.push({ ...base, camera: accepted ? shiftCamera(camera, fit.dx, fit.dy) : camera,
         registration: accepted ? { method: 'lit-disc', dx: fit.dx, dy: fit.dy, correlation: fit.correlation }
           : { method: 'rejected', dx: fit.dx, dy: fit.dy, correlation: fit.correlation, reason: fit.atSearchEdge ? 'best offset at the search edge' : 'correlation below the policy' } });
-      console.error(`${pinned.productId} lit ${lit} dx ${fit.dx.toFixed(2)} dy ${fit.dy.toFixed(2)} r ${fit.correlation.toFixed(3)}${accepted ? '' : ' REJECTED'}`);
+      console.error(`${archived.productId} lit ${lit} dx ${fit.dx.toFixed(2)} dy ${fit.dy.toFixed(2)} r ${fit.correlation.toFixed(3)}${accepted ? '' : ' REJECTED'}`);
     }
   }
   const meanRadius = (radii[0] * radii[1] * radii[2]) ** (1 / 3);
@@ -436,7 +434,7 @@ export async function runMosaic(recipePath: string, framesDirectory: string, fet
   const final = build(f => f.registration.method !== 'rejected');
   await writeMap(root, recipe, final.map);
   const covered = final.map.reduce((n, v) => n + (Number.isFinite(v) ? 1 : 0), 0);
-  const receipt = { schema: RECEIPT_SCHEMA, recipe: recipe.output.productId, side: recipe.side, kernels: Object.fromEntries(kernelsUsed), inputs, detectorChecks, radiiKm: radii, ifovRadians: ifov,
+  const receipt = { schema: RECEIPT_SCHEMA, recipe: recipe.output.productId, side: recipe.side, inputs, detectorChecks, radiiKm: radii, ifovRadians: ifov,
     coverage: { cells, [`${recipe.side}Cells`]: covered, fraction: covered / cells },
     visits: recipe.visits.map((v, i) => ({ id: v.id, frames: frames.filter(f => f.visit === v.id).length, winningCells: final.source.reduce((n, s) => n + (s === i ? 1 : 0), 0) })),
     frames: frames.map(f => ({ productId: f.productId, visit: f.visit, utc: f.utc, unit: f.unit, rangeKm: Math.round(f.rangeKm), phaseDegrees: +f.phaseDegrees.toFixed(2), litPixels: f.litPixels, sunlitRadiance: f.sunlitRadiance === undefined ? null : +f.sunlitRadiance.toPrecision(4),

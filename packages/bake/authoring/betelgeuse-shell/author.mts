@@ -19,24 +19,23 @@ import sharp from 'sharp';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { fitsImageAccessor, readFitsHdu, readFitsImage, skyImageAxes } from '@cssearth/fits';
-import { sha256 } from '@cssearth/core/node';
 import { encodeDensityKtx2 } from '@cssearth/bake/density';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse-shell/source');
 const packageBase = 'src/objects/betelgeuse-shell/source';
 /** Original downloads, and the ALMA boxes cut from them, stay out of git and out of the source closure as every volume's
- * downloads do: the manifest pins them by hash, and the source cache mirrors the ones no publisher serves byte for byte. */
+ * downloads do: the manifest names them by path and origin, and the source cache mirrors the ones no publisher serves byte for byte. */
 export const DOWNLOADS_BASE = '.local/betelgeuse-shell';
 const downloads = resolve(import.meta.dirname, '../../../..', DOWNLOADS_BASE);
 /** The two publisher figures this package cites, kept beside it because preparation reads them for the dataset previews. */
 export const PREVIEWS = Object.freeze({
   'zimpol-v': { path: 'previews/aa61023-26-fig3.jpg', url: 'https://www.aanda.org/articles/aa/full_html/2026/07/aa61023-26/aa61023-26-fig3.jpg',
-    origin: 'https://doi.org/10.1051/0004-6361/202661023', sha256: '016094a65ecf21a125dc9e4f45625ecf4edf97ddfaa10cd9b955d64bb5cc3292', bytes: 323819,
+    origin: 'https://doi.org/10.1051/0004-6361/202661023', bytes: 323819,
     title: 'Degree of linear polarisation around Betelgeuse, V band, 3 December 2024',
     credit: 'Montarg\u00e8s et al. 2026, A&A 711, L12, Fig. B.1; ESO/VLT/SPHERE-ZIMPOL',
     license: 'CC-BY-4.0. Open access under the Creative Commons Attribution 4.0 International licence; retain the citation.' },
   'veil-2019-12': { path: 'previews/eso2109a.jpg', url: 'https://cdn.eso.org/images/screen/eso2109a.jpg',
-    origin: 'https://www.eso.org/public/images/eso2109a/', sha256: 'dc91807cd8b41719cc7e4cc310c99082d9ad02c49a08b51155bb00be2d1fbf17', bytes: 45713,
+    origin: 'https://www.eso.org/public/images/eso2109a/', bytes: 45713,
     title: 'Betelgeuse\u2019s surface before and during its 2019\u20132020 Great Dimming',
     credit: 'ESO/M. Montarg\u00e8s et al.', crop: { left: 320, top: 40, width: 318, height: 520 },
     license: 'CC-BY-4.0. ESO images are released under the Creative Commons Attribution 4.0 International licence; retain the credit.' },
@@ -46,16 +45,16 @@ const starScene = resolve(import.meta.dirname, '../../../../src/objects/betelgeu
 /** The two V-band products as ESO serves them: the pipeline intensity and its ancillary degree of linear polarisation. */
 export const PRODUCTS = Object.freeze({
   intensity: { path: 'observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_phase3.fits', dpId: 'ADP.2026-08-19T13:19:07.655',
-    sha256: 'b40cfcb32103c99c5de9f77588519bbb6c9322eb250d7bc9756339fee8abd8eb', bytes: 8458560 },
+    bytes: 8458560 },
   dolp: { path: 'observations/SPHERE_ZIMPOL_Betelgeuse_P1_V_DOLP.fits', dpId: 'ADP.2026-08-19T13:19:07.656',
-    sha256: '0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687', bytes: 8455680 },
+    bytes: 8455680 },
 });
 /** The ALMA SiO v=0 J=5-4 cube of August 2023, cut out of the archive's own pipeline product around this star,
  * continuum-subtracted and windowed to the line by reduce-alma-sio.mts. This is the one dataset here whose depth is
  * measured rather than inferred from a projection: the line-of-sight velocity of each pixel places it. */
 export const ALMA_SIO = Object.freeze({
   path: 'observations/betelgeuse-alma-sio-v0-5-4-2023-08.fits',
-  sha256: 'fd94c4ff071920e8222cb9780b04f8ef9f71d459a9c3751f6e21932ea604c151', bytes: 1428480,
+  bytes: 1428480,
   proposal: '2022.A.00026.S', member: 'uid://A001/X360d/Xae',
   product: 'member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits',
   /** The product is 72 GB. The archive's SODA service cuts it on the server, and this circle about the observation's
@@ -65,7 +64,7 @@ export const ALMA_SIO = Object.freeze({
    * before it images a cube, so this is the only product of the observation that shows where the star is. */
   continuum: Object.freeze({
     path: 'observations/betelgeuse-alma-continuum-2023-08.fits',
-    sha256: '28b7cfb6075b5cdb5dcfac176f94f3e116e1ce986903393314f26c8cf887bd68', bytes: 40320,
+    bytes: 40320,
     product: 'member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits',
     url: 'https://almascience.eso.org/dataPortal/member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits',
   }),
@@ -132,7 +131,7 @@ export const PIXEL_SCALE_MAS = 3.6;
  * Only its light outside the photosphere is used; the disc itself is already the star's drawn sphere. */
 export const EMISSION_2020 = Object.freeze({
   path: 'observations/betelgeuse-matisse-2020-02-continuum-4mas.fits',
-  sha256: '43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd', bytes: 135360,
+  bytes: 135360,
   /** The image states its own pixel in milliarcseconds, and the reconstruction is convolved to this beam. */
   pixelMas: 0.78, beamMas: 4,
   /** The published disc: 42.45 mas across. Inside it the sphere is drawn, and within one beam of it the light is the
@@ -212,10 +211,15 @@ function bilinear(values: Float64Array, width: number, height: number, x: number
 }
 function smoothstep(a: number, b: number, t: number): number { const u = Math.max(0, Math.min(1, (t - a) / (b - a))); return u * u * (3 - 2 * u); }
 
-async function pinnedFits(product: { path: string; sha256: string; bytes: number }) {
-  const bytes = await readFile(resolve(downloads, product.path));
-  if (bytes.length !== product.bytes || sha256(bytes) !== product.sha256) throw new Error(`ESO product differs from its pin: ${product.path}`);
-  return readFitsImage(bytes);
+/** A declared download, read whole: a missing file or a different length names the product and what was found. */
+async function declaredDownload(product: { path: string; bytes: number }) {
+  const path = resolve(downloads, product.path);
+  const bytes = await readFile(path).catch((cause: unknown) => { throw new Error(`betelgeuse-shell: declared download ${product.path} is missing at ${path}.`, { cause }); });
+  if (bytes.length !== product.bytes) throw new Error(`betelgeuse-shell: ${product.path} holds ${bytes.length} bytes; the author declares ${product.bytes}.`);
+  return bytes;
+}
+async function declaredFits(product: { path: string; bytes: number }) {
+  return readFitsImage(await declaredDownload(product));
 }
 
 /** Score simple envelopes against a measured radial profile and keep the best. Constant depth is always a candidate,
@@ -273,16 +277,16 @@ function encodeGrid(sample: (x: number, y: number, z: number) => number | readon
 }
 
 /** The slab recipe both grids share: one emission channel, shared opacity, twenty-four slabs an axis. */
-function volumeRecipe(grid: string, gridSha256: string, decodedSha256: string, provenanceSha256: string, material: Record<string, unknown>) {
+function volumeRecipe(grid: string, material: Record<string, unknown>) {
   return {
     schema: 'cssearth-volume-recipe@1',
-    grid: { path: grid, sha256: gridSha256, decodedSha256, dimensions: [GRID.size, GRID.size, GRID.size], encoding: 'sqrt-density-unorm8',
+    grid: { path: grid, dimensions: [GRID.size, GRID.size, GRID.size], encoding: 'sqrt-density-unorm8',
       bounds: { min: [-GRID.halfUnits, -GRID.halfUnits, -GRID.halfUnits], max: [GRID.halfUnits, GRID.halfUnits, GRID.halfUnits] } },
     material: { intensityScale: 1, stepScale: 1, stepMetric: 'source', ...material },
     bake: { sliceCounts: { x: GRID.slabs, y: GRID.slabs, z: GRID.slabs }, unitsPerSourceUnit: 1, imageWidth: 320, samplesPerSlab: 4,
       cropTransparent: true, opticalWeight: 1, imageEncoding: { format: 'webp', quality: 90 } },
     anchors: [{ id: 'betelgeuse', referencePositionM: [0, 0, 0] }],
-    provenance: { path: 'provenance.json', sha256: provenanceSha256 },
+    provenance: { path: 'provenance.json' },
   };
 }
 
@@ -295,7 +299,7 @@ export async function author(defaultLens = 'zimpol-v') {
   const { size, halfUnits } = GRID, step = 2 * halfUnits / size;
 
   // --- the measured lens: the 2024 polarisation map, spread along the line of sight by scattering angle ---
-  const intensity = await pinnedFits(PRODUCTS.intensity), dolp = await pinnedFits(PRODUCTS.dolp);
+  const intensity = await declaredFits(PRODUCTS.intensity), dolp = await declaredFits(PRODUCTS.dolp);
   if (intensity.width !== dolp.width || intensity.height !== dolp.height) throw new Error('Intensity and polarisation grids differ.');
   const { width, height } = intensity, I = intensity.values, P = dolp.values;
   // Star centre: the intensity centroid within fifteen pixels of the peak, iterated. The header reference pixel is the
@@ -389,7 +393,7 @@ export async function author(defaultLens = 'zimpol-v') {
   // --- the third measured lens: the 4 micrometre light outside the photosphere, given the same treatment ---
   // The reconstruction that paints the star's own sphere also carries a fifth of its flux outside the disc. On the
   // sphere that light is a flat plate behind the body; here it is asked for a shape, exactly as the polarisation was.
-  const emissionFits = await pinnedFits(EMISSION_2020);
+  const emissionFits = await declaredFits(EMISSION_2020);
   const { width: ew, height: eh } = emissionFits, E = emissionFits.values;
   const emissionPixelsPerUnit = radiusArcsec * 1000 / EMISSION_2020.pixelMas;
   let esx = 0, esy = 0, es = 0;
@@ -469,9 +473,7 @@ export async function author(defaultLens = 'zimpol-v') {
   // --- the measured lens: silicon monoxide about the star, placed in depth by its own velocities ---
   // Every other dataset here is a sky image given a shape. This one is a cube: two sky axes measured, and the third from
   // the Doppler shift of every channel under a stated outflow, the first reading of an expanding circumstellar envelope.
-  const sioBytes = await readFile(resolve(downloads, ALMA_SIO.path)), sioContinuumBytes = await readFile(resolve(downloads, ALMA_SIO.continuum.path));
-  for (const [bytes, pin] of [[sioBytes, ALMA_SIO], [sioContinuumBytes, ALMA_SIO.continuum]] as const)
-    if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`${pin.path} differs from its pin.`);
+  const sioBytes = await declaredDownload(ALMA_SIO), sioContinuumBytes = await declaredDownload(ALMA_SIO.continuum);
   const sio = readCube(sioBytes), sioContinuum = readCube(sioContinuumBytes), radiusMas = radiusArcsec * 1000;
   // Where the star is: the centroid of its continuum above half the peak. The archive references both images to the
   // observation's phase centre, and the phase centre is not the star.
@@ -725,11 +727,11 @@ export async function author(defaultLens = 'zimpol-v') {
       'ESO (VLTI/MATISSE, February 2020, observations of Drevon et al. 2024)', `ALMA (ESO/NAOJ/NRAO), project ${ALMA_SIO.proposal}`],
     license: { spdx: 'CC-BY-4.0', dataLicenseDeclaration: 'https://archive.eso.org/cms/eso-data-access-policy.html', note: 'ESO Phase 3 release description BETELGEUSE-B DR1, 2026-08-19: science data products from the ESO archive may be distributed under the Creative Commons Attribution 4.0 International license with credit to the ESO provenance. The 2019 clump parameters are published numbers from Montargès et al. 2021, Extended Data Table 3. The 4 micrometre image is this repository\u2019s SQUEEZE reconstruction of ESO/VLTI/MATISSE visibilities, which are ESO archive data under the same policy. The SiO cube is ALMA archive data, public under the ALMA data access policy with the ALMA credit line retained.' },
     sources: [
-      { id: 'zimpol-v-intensity', dpId: PRODUCTS.intensity.dpId, url: `https://dataportal.eso.org/dataPortal/file/${PRODUCTS.intensity.dpId}`, sha256: PRODUCTS.intensity.sha256, bytes: PRODUCTS.intensity.bytes, role: 'star centre and intensity floor' },
-      { id: 'zimpol-v-dolp', dpId: PRODUCTS.dolp.dpId, url: `https://dataportal.eso.org/dataPortal/file/${PRODUCTS.dolp.dpId}`, sha256: PRODUCTS.dolp.sha256, bytes: PRODUCTS.dolp.bytes, role: 'degree of linear polarisation, the quantity the 2024 leaves carry' },
-      { id: 'matisse-2020-02-continuum-4mas', url: 'https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455', paper: 'https://doi.org/10.1051/0004-6361/202347719', sha256: EMISSION_2020.sha256, bytes: EMISSION_2020.bytes, role: 'the 4 micrometre light outside the photosphere that the emission-2020 leaves carry: this repository\u2019s SQUEEZE reconstruction of the ESO/VLTI/MATISSE visibilities of February 2020 (Drevon et al. 2024), the image Betelgeuse\u2019s own sphere is painted from' },
-      { id: 'alma-sio-v0-5-4-2023-08', url: ALMA_SIO.cutout, landing: 'https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S', sha256: ALMA_SIO.sha256, bytes: ALMA_SIO.bytes, role: `the SiO v=0 J=5-4 line cube the sio-2023 leaves carry: ALMA (ESO/NAOJ/NRAO) project ${ALMA_SIO.proposal}, member ${ALMA_SIO.member}, observed ${sioDateText}, boxed and windowed by reduce-alma-sio.mts` },
-      { id: 'alma-continuum-2023-08', url: ALMA_SIO.continuum.url, landing: 'https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S', sha256: ALMA_SIO.continuum.sha256, bytes: ALMA_SIO.continuum.bytes, role: `the same observation's continuum image, which locates the star the SiO is read about` },
+      { id: 'zimpol-v-intensity', dpId: PRODUCTS.intensity.dpId, url: `https://dataportal.eso.org/dataPortal/file/${PRODUCTS.intensity.dpId}`, bytes: PRODUCTS.intensity.bytes, role: 'star centre and intensity floor' },
+      { id: 'zimpol-v-dolp', dpId: PRODUCTS.dolp.dpId, url: `https://dataportal.eso.org/dataPortal/file/${PRODUCTS.dolp.dpId}`, bytes: PRODUCTS.dolp.bytes, role: 'degree of linear polarisation, the quantity the 2024 leaves carry' },
+      { id: 'matisse-2020-02-continuum-4mas', url: 'https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455', paper: 'https://doi.org/10.1051/0004-6361/202347719', bytes: EMISSION_2020.bytes, role: 'the 4 micrometre light outside the photosphere that the emission-2020 leaves carry: this repository\u2019s SQUEEZE reconstruction of the ESO/VLTI/MATISSE visibilities of February 2020 (Drevon et al. 2024), the image Betelgeuse\u2019s own sphere is painted from' },
+      { id: 'alma-sio-v0-5-4-2023-08', url: ALMA_SIO.cutout, landing: 'https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S', bytes: ALMA_SIO.bytes, role: `the SiO v=0 J=5-4 line cube the sio-2023 leaves carry: ALMA (ESO/NAOJ/NRAO) project ${ALMA_SIO.proposal}, member ${ALMA_SIO.member}, observed ${sioDateText}, boxed and windowed by reduce-alma-sio.mts` },
+      { id: 'alma-continuum-2023-08', url: ALMA_SIO.continuum.url, landing: 'https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S', bytes: ALMA_SIO.continuum.bytes, role: `the same observation's continuum image, which locates the star the SiO is read about` },
       { id: 'veil-parameters', url: 'https://doi.org/10.1038/s41586-021-03546-8', preprint: 'https://arxiv.org/abs/2201.10551', role: 'Montargès et al. 2021, Nature 594, 365, Extended Data Table 3 and Figure 6: the December 2019 clump centre, radius, density, composition and grain size, and the coordinate system they are given in' },
     ],
     paper: { doi: '10.1051/0004-6361/202661023', citation: 'Montargès et al. 2026, A&A 711, L12 (the 2024 polarimetry)' },
@@ -775,7 +777,6 @@ export async function author(defaultLens = 'zimpol-v') {
     ],
   };
   const provenanceBytes = Buffer.from(JSON.stringify(provenance, null, 2) + '\n');
-  const provenanceSha = sha256(provenanceBytes);
   const grids = [
     { id: 'zimpol-v', label: 'SPHERE/ZIMPOL · polarised dust, 2024', file: 'density-zimpol-v.ktx2', built: zimpol,
       sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B',
@@ -804,19 +805,19 @@ export async function author(defaultLens = 'zimpol-v') {
         absorption: [], emissionTransfer: 'shared-opacity', exposureGain: sioGain } },
   ];
   const outputs: [string, Buffer][] = [['provenance.json', provenanceBytes], [EMISSION_PREVIEW_PATH, emissionPreview], [SIO_PREVIEW_PATH, sioPreview]];
-  const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string; sha256: string }; occultingCentreUnits?: [number, number, number] }[] = [];
+  const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string }; occultingCentreUnits?: [number, number, number] }[] = [];
   for (const grid of grids) {
-    const recipeBytes = Buffer.from(JSON.stringify(volumeRecipe(grid.file, sha256(grid.built.ktx2), sha256(grid.built.rgba), provenanceSha, grid.material), null, 2) + '\n');
+    const recipeBytes = Buffer.from(JSON.stringify(volumeRecipe(grid.file, grid.material), null, 2) + '\n');
     outputs.push([grid.file, Buffer.from(grid.built.ktx2)], [`volume-${grid.id}.json`, recipeBytes]);
     deliveryGrids.push({ id: grid.id, label: grid.label, sourceUrl: grid.sourceUrl,
-      recipe: { path: `src/objects/betelgeuse-shell/source/volume-${grid.id}.json`, sha256: sha256(recipeBytes) },
+      recipe: { path: `src/objects/betelgeuse-shell/source/volume-${grid.id}.json` },
       ...('occultingCentreUnits' in grid ? { occultingCentreUnits: grid.occultingCentreUnits } : {}) });
   }
   const delivery = {
     schema: 'cssearth-nebula-delivery@1', id: 'betelgeuse-shell', method: 'density-grid',
     request: deliveryGrids.find(grid => grid.id === defaultLens)!.recipe,
-    inputPins: [{ path: 'src/objects/betelgeuse-shell/source/provenance.json', sha256: provenanceSha },
-      ...grids.map(grid => ({ path: `src/objects/betelgeuse-shell/source/${grid.file}`, sha256: sha256(grid.built.ktx2) }))],
+    inputPins: [{ path: 'src/objects/betelgeuse-shell/source/provenance.json' },
+      ...grids.map(grid => ({ path: `src/objects/betelgeuse-shell/source/${grid.file}` }))],
     sky: { centerIcrsDegrees: [raDeg, decDeg], distancePc: distanceM / METERS_PER_PARSEC, imageRotationDegrees: 0, arcsecPerUnit: radiusArcsec },
     sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B',
     description: 'Dust around Betelgeuse in two datasets that share one frame: the degree of linear polarisation measured by VLT/SPHERE-ZIMPOL on 3 December 2024, and the dust clump Montargès et al. fitted to the Great Dimming of December 2019. One unit is one stellar radius; the depth of each is a stated model, not a measurement.',
@@ -857,8 +858,8 @@ export async function author(defaultLens = 'zimpol-v') {
   const presentation = {
     schema: 'cssearth-volume-presentation-source@1', objectId: 'betelgeuse-shell', name: 'Betelgeuse dust shell',
     defaultLens,
-    bank: { path: 'src/objects/betelgeuse-shell/prepared/lenses.json', sha256: '', bytes: 0 },
-    recipes: deliveryGrids.map(grid => ({ id: grid.id, path: grid.recipe.path, sha256: grid.recipe.sha256, bytes: 0 })),
+    bank: { path: 'src/objects/betelgeuse-shell/prepared/lenses.json' },
+    recipes: deliveryGrids.map(grid => ({ id: grid.id, path: grid.recipe.path })),
     sharedInputs: [],
     inputEvidence: [],
     lenses: grids.map(grid => ({
@@ -885,13 +886,10 @@ export async function author(defaultLens = 'zimpol-v') {
       ...(grid.id === 'sio-2023' ? { inputEvidence: [{ sourceId: 'alma-continuum-2023-08', role: 'registration',
         evidence: 'The star every SiO position is measured from: the centroid of its continuum in this image.' }] } : {}),
       preview: grid.id === 'sio-2023'
-        ? { path: `${packageBase}/${SIO_PREVIEW_PATH}`, sha256: sha256(sioPreview), bytes: sioPreview.length,
-            authoredFrom: 'alma-sio-v0-5-4-2023-08' }
+        ? { path: `${packageBase}/${SIO_PREVIEW_PATH}`, authoredFrom: 'alma-sio-v0-5-4-2023-08' }
         : grid.id === 'emission-2020'
-        ? { path: `${packageBase}/${EMISSION_PREVIEW_PATH}`, sha256: sha256(emissionPreview), bytes: emissionPreview.length,
-            authoredFrom: 'matisse-2020-02-continuum-4mas' }
+        ? { path: `${packageBase}/${EMISSION_PREVIEW_PATH}`, authoredFrom: 'matisse-2020-02-continuum-4mas' }
         : { path: `${packageBase}/${PREVIEWS[grid.id as keyof typeof PREVIEWS].path}`,
-            sha256: PREVIEWS[grid.id as keyof typeof PREVIEWS].sha256, bytes: PREVIEWS[grid.id as keyof typeof PREVIEWS].bytes,
             url: PREVIEWS[grid.id as keyof typeof PREVIEWS].url,
             ...('crop' in PREVIEWS[grid.id as keyof typeof PREVIEWS] ? { crop: (PREVIEWS[grid.id as keyof typeof PREVIEWS] as { crop: unknown }).crop } : {}) },
     })),
@@ -909,19 +907,8 @@ export async function author(defaultLens = 'zimpol-v') {
   }, null, 2) + '\n')]);
   outputs.push(['presentation.json', Buffer.from(JSON.stringify(presentation, null, 2) + '\n')]);
 
-  // The bank pin closes over the baked output, so it is filled on the pass after a bake; the first pass leaves it empty
-  // and preparation refuses it, which is the intended order: author, bake, author again.
-  const bankPath = resolve(root, '..', 'prepared/lenses.json');
-  const bankBytes = await readFile(bankPath).catch(() => null);
-  if (bankBytes) { presentation.bank = { path: 'src/objects/betelgeuse-shell/prepared/lenses.json', sha256: sha256(bankBytes), bytes: bankBytes.length }; }
-  for (const recipe of presentation.recipes) {
-    const bytes = outputs.find(([name]) => `${packageBase}/${name}` === recipe.path)?.[1];
-    if (bytes) recipe.bytes = bytes.length;
-  }
-  outputs[outputs.findIndex(([name]) => name === 'presentation.json')] = ['presentation.json', Buffer.from(JSON.stringify(presentation, null, 2) + '\n')];
-
-  // Every retained byte under source/, accounted for once. Files this script writes are hashed from what it just
-  // produced; the archive products and publisher figures beside them are hashed from disk.
+  // Every retained file under source/, accounted for once: the files this script writes and the archive products and
+  // publisher figures beside them.
   const produced = new Map(outputs.map(([name, bytes]) => [name, bytes]));
   const walked: { name: string; downloaded: boolean }[] = [];
   const walk = async (base: string, relativePath: string, downloaded: boolean) => {
@@ -942,9 +929,8 @@ export async function author(defaultLens = 'zimpol-v') {
   };
   const previewByPath = new Map(Object.entries(PREVIEWS).map(([id, preview]) => [preview.path, { id, ...preview }]));
   const inputs: unknown[] = [], documents: unknown[] = [], intermediates: unknown[] = [];
-  // The catalogue records are generated by site/build/prepare/author-source-records.mts from these bindings. Their evidence names
-  // the commit the manifest was pinned at, which that tool writes with --evidence; a binding already pinned keeps its
-  // revision so re-authoring never unpins a record.
+  // The catalogue records are generated by site/build/prepare/author-source-records.mts from these bindings. A binding the
+  // current manifest already records keeps its evidence, so re-authoring never rewrites a record.
   type PinnedManifest = { inputs?: { id?: string; sourceBinding?: { references?: { catalogueId?: string; evidence?: string }[] } }[] };
   const pinnedManifest: PinnedManifest = await readFile(resolve(root, 'manifest.json'), 'utf8').then(
     text => JSON.parse(text) as PinnedManifest, (): PinnedManifest => ({}));
@@ -999,7 +985,7 @@ export async function author(defaultLens = 'zimpol-v') {
         title: 'VLTI/MATISSE 4 \u00b5m reconstruction, February 2020, convolved to the 4 mas beam',
         credit: 'Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)',
         displayCredit: 'ESO/VLTI/MATISSE; reconstruction by this repository',
-        acquisition: 'The same bytes Betelgeuse\u2019s own package ships and pins, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star\u2019s drawn sphere.',
+        acquisition: 'The same bytes Betelgeuse\u2019s own package ships, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star\u2019s drawn sphere.',
         license: 'Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy.',
         lensId: 'emission-2020' });
     } else if (name === 'veil-2019-12-parameters.json') {

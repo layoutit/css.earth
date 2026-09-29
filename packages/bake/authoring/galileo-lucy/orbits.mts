@@ -1,5 +1,4 @@
 // Prepare explicitly illustrative moon phases using published size/period constraints.
-import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { evaluatePublishedOrbit } from '../../../../packages/astronomy/cli/body-epoch-ephemeris.mts';
@@ -43,7 +42,7 @@ for (const body of bodies) {
   await write(`${s}/validation/epoch-state.json`, { schema: 'cssearth-published-body-epoch-ephemeris@1', id: body.id, centerBodyId: body.parent,
     epochJdTt, referenceFrame: 'ICRF', units: 'KM-D', correction: 'NONE', runtimeExtrapolation: false,
     ...state, gravitationalParametersKm3PerS2: { combined: gm, body: 0, parent: gm },
-    source: { path: 'source/orbit/published-parameters.json', bytes: bytes.length, sha256: sha256(bytes) },
+    source: { path: 'source/orbit/published-parameters.json', bytes: bytes.length },
     limitations: [body.qualification, parameters.derivedAssumptions, parameters.gravityQualification],
     validation: { sourceEpochState: state, scope: 'Arithmetic consistency of the declared illustrative conic only; no independent 2026 phase or astrometric residual is available.' } });
   if (body.id === 'dactyl') {

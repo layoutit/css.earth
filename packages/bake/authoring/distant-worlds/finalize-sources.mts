@@ -64,9 +64,4 @@ for (const b of bodies) {
     documents.push(document);
   }
   await write(resolve(src,'manifest.json'),manifest);
-  // A recipe source carries only its id and path; the authored-object parser rejects any other field, and the
-  // source manifest above already pins each file's bytes, so a hash here would be a second owner of the same fact.
-  const descriptor=await read(resolve(pkg,'object.json'));
-  for(const ref of records(requireRecord(requireRecord(descriptor.properties).recipe).sources))delete ref.sha256;
-  await write(resolve(pkg,'object.json'),descriptor);
 }

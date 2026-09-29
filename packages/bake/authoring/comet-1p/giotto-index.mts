@@ -2,7 +2,6 @@
 import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sha256 } from '@cssearth/core/node';
 const archive = 'https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/';
 export function parseGiottoIndex(text: string, mode: 'sdm' | 'mdm') {
   return text.trim().split(/\r?\n/u).map(line => {
@@ -29,7 +28,7 @@ export async function surveyGiottoIndex(directory: string, download = false) {
       if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
       bytes = Buffer.from(await response.arrayBuffer()); await writeFile(path, bytes);
     }
-    files.push({ name, url, bytes: bytes.length, sha256: sha256(bytes), rows: parseGiottoIndex(bytes.toString('ascii'), mode) });
+    files.push({ name, url, bytes: bytes.length, rows: parseGiottoIndex(bytes.toString('ascii'), mode) });
   }
   const rows = files.flatMap(file => file.rows);
   assert.equal(new Set(rows.map(row => row.id)).size, rows.length, 'Duplicate archive image');

@@ -11,7 +11,6 @@
  * latitude bands are much coarser than its longitude boundaries. The script refuses a pixel that straddles a grid cell, a cell covered twice, or an uncovered cell, so
  * the grid is a lossless re-indexing of the table. Nothing is interpolated, smoothed or filled.
  */
-import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -34,7 +33,7 @@ function number(value: unknown, label: string) {
 
 interface Field { name: string; location: number; length: number; unit: string | null }
 
-/** Read the fixed-width field table and the publisher's checksum from the PDS4 label. */
+/** Read the fixed-width field table from the PDS4 label. */
 function readLabel(xml: string, path: string) {
   const fields: Field[] = [...xml.matchAll(/<Field_Character>([\s\S]*?)<\/Field_Character>/gu)].map(match => {
     const body = match[1]!;
@@ -43,12 +42,11 @@ function readLabel(xml: string, path: string) {
   });
   const records = Number(xml.match(/<Table_Character>[\s\S]*?<records>(\d+)<\/records>/u)?.[1]);
   const recordLength = Number(xml.match(/<record_length unit="byte">(\d+)<\/record_length>/u)?.[1]);
-  const md5 = xml.match(/<md5_checksum>([0-9a-f]{32})<\/md5_checksum>/u)?.[1];
-  if (!fields.length || !Number.isSafeInteger(records) || !Number.isSafeInteger(recordLength) || !md5 ||
+  if (!fields.length || !Number.isSafeInteger(records) || !Number.isSafeInteger(recordLength) ||
       fields.some(field => !field.name || !Number.isSafeInteger(field.location) || !Number.isSafeInteger(field.length))) {
-    throw new Error(`${path}: the label does not describe a fixed-width character table with a checksum.`);
+    throw new Error(`${path}: the label does not describe a fixed-width character table.`);
   }
-  return { fields, records, recordLength, md5 };
+  return { fields, records, recordLength };
 }
 
 function npy(values: Float64Array, shape: readonly number[]) {
@@ -76,8 +74,6 @@ for (const entry of plan.products) {
   if (!Number.isSafeInteger(width) || !Number.isSafeInteger(height)) throw new Error(`${id}: steps ${latStep} x ${lonStep} do not divide the sphere.`);
   const bytes = readFileSync(resolve(directory, tablePath));
   const label = readLabel(readFileSync(resolve(directory, labelPath), 'utf8'), labelPath);
-  const digest = createHash('md5').update(bytes).digest('hex');
-  if (digest !== label.md5) throw new Error(`${id}: ${tablePath} md5 ${digest} differs from its label's ${label.md5}.`);
   if (label.records !== product.records || bytes.length !== label.records * label.recordLength) {
     throw new Error(`${id}: ${tablePath} has ${bytes.length} bytes; the label states ${label.records} records of ${label.recordLength}.`);
   }
