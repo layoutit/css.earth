@@ -1,4 +1,3 @@
-import { sha256 } from '@cssearth/core/node';
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
 import { isDeepStrictEqual } from "node:util";
@@ -140,9 +139,10 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
   const recipe = requireRecord(requireRecord(descriptor.properties).recipe, 'Authored recipe');
   const reference = requireRecord(descriptor.prepared, 'Prepared reference');
   if (!recipe || typeof recipe !== 'object' || recipe.schema !== 'cssearth-authored-object@1' || !isArray(recipe.sources) ||
-      !reference || reference.format !== PREPARED_CSS_OBJECT_FORMAT || (typeof reference.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(reference.sha256)) || typeof reference.url !== 'string') {
+      !reference || reference.format !== PREPARED_CSS_OBJECT_FORMAT || typeof reference.url !== 'string') {
     throw new TypeError('Authored descriptor identity or source references are invalid.');
   }
+  if (Object.hasOwn(reference, 'sha256')) throw new TypeError(`${objectId}: object.json prepared carries the removed digest field sha256.`);
   const directory = resolve(root, `src/objects/${objectId}`);
   const manifest = requireRecord(JSON.parse(await readText(resolve(directory, 'source/manifest.json'))), 'Source manifest');
   const records = ['inputs', 'documents', 'generatedIntermediates'].flatMap(key => requireArray(manifest[key] ?? [], key).map(value => requireRecord(value, key)));
@@ -160,7 +160,6 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
     throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
   }
   const payloadBytes = await readText(payloadPath);
-  if (sha256(payloadBytes) !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
   const payload = requireRecord(JSON.parse(payloadBytes), 'Prepared JSON payload');
   const runtimePath = resolve(preparedDirectory, 'runtime.json');
   const runtime = requireObjectRuntimeDefinition(JSON.parse(await readText(runtimePath)), { objectId });
@@ -193,7 +192,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
         const definition = prepared.runtime;
         requireObjectRuntimeDefinition(definition, { objectId: object.id });
         entries.push({ id: object.id, complete: true, evidence: 'validated-authored-json', observedOwners: null,
-          source: { runtimeSha256: sha256(await readText(prepared.payloadPath)), authoredRuntimeSha256: sha256(await readText(prepared.runtimePath)) },
+          source: { runtime: relative(root, prepared.payloadPath), authoredRuntime: relative(root, prepared.runtimePath) },
           nodes: definition.tree.nodes.length, roots: definition.tree.nodes.filter(node => node.parent === -1).length,
           variants: definition.variants.length,
           controls: { lenses: definition.controls.lenses?.controls.map(lens => lens.id) ?? [],
@@ -221,7 +220,8 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
       requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id, controls: objectControls });
 
       entries.push({ id, complete: true, evidence: "validated-source-data", observedOwners: null,
-        source: { definitionSha256: sha256(definitionSource), presentationSha256: sha256(presentationSource), controlsSha256: sha256(controlSource) },
+        source: { definition: relative(root, `${prefix}/runtime/definition.mjs`), presentation: relative(root, `${prefix}/runtime/preparedPresentation.mjs`),
+          controls: relative(root, `${prefix}/site/control-content.mjs`) },
         nodes: plan.tree.nodes.length, roots: plan.tree.nodes.filter(node => node.parent === -1).length,
         variants: plan.variants.length,
         controls: { lenses: objectControls.lenses?.controls.map(lens => lens.id) ?? [],

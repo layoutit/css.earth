@@ -7,7 +7,7 @@ import { prepareSurfaces } from './surfaces.ts';
 import { prepareAtmosphere } from './materials.ts';
 import { prepareLighting } from './lighting.ts';
 import { prepareInterior } from './interior.ts';
-import { outputName, hashFile } from './io.ts';
+import { outputName } from './io.ts';
 import { loadLimbLaw, meanObservedColour, type LimbBlock } from '../photometry/index.ts';
 import type { PreparedLimb } from './lighting.ts';
 import type { ObservationInterpretation } from './science.ts';
@@ -46,29 +46,7 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
         return emptyPlates.has(name) ? {} : { [`${key}Url`]: config.publicBase + name, [`${key}Url2x`]: config.publicBase + name };
     };
     const surfaces = Object.fromEntries(config.surfaces.map(surface => [surface.id, { id: surface.id, falseColor: surface.falseColor, ...(constantSurfaces[surface.id] ? { constantRaster: constantSurfaces[surface.id] } : {}), ...(surface.resolutionScale ? { dimensions: { width: config.width * surface.resolutionScale, height: config.height * surface.resolutionScale } } : {}), url: config.publicBase + outputName(surface.output, RASTER_DENSITY, surface.id), url2x: config.publicBase + outputName(surface.output, RASTER_DENSITY, surface.id), ...(config.emission ? { ...plate('corona', config.emission.offLimbOutput, surface.id), ...plate('limb', config.emission.limbOutput, surface.id) } : {}), ...(metadata[surface.id] ? { coverageCompletion: metadata[surface.id] } : {}), ...(interpretations[surface.id] ? { interpretation: interpretations[surface.id] } : {}) }]));
-    const files = new Set<string>(), density = RASTER_DENSITY;
-    for (const surface of config.surfaces) {
-        files.add(outputName(surface.thumbnail, 1, surface.id));
-        files.add(outputName(surface.output, density, surface.id));
-        files.add(outputName(config.polesOutput, density, surface.id));
-        if (config.emission)
-            for (const template of [config.emission.offLimbOutput, config.emission.limbOutput])
-                if (!emptyPlates.has(outputName(template, density, surface.id)))
-                    files.add(outputName(template, density, surface.id));
-    }
-    if (config.lighting)
-        for (let row = 0; row < Math.ceil(config.lighting.frameCount / config.lighting.columns); row++)
-            files.add(outputName(config.lighting.rowOutput, density).replace('{row}', String(row).padStart(2, '0')));
-    if (config.atmosphere)
-        for (const template of [config.atmosphere.materialOutput, config.atmosphere.observationOutput, config.atmosphere.lightingOutput])
-            files.add(outputName(template, density));
-    if (config.interior)
-        for (const template of [config.interior.outerOutput, config.interior.outerPolesOutput, config.interior.outerUnlitOutput, config.interior.outerUnlitPolesOutput, config.interior.coreOutput, config.interior.corePolesOutput, config.interior.sectionOutput])
-            files.add(outputName(template, density));
-    if (config.interior)
-        files.add(outputName(config.interior.thumbnail, 1));
-    const hashes = Object.fromEntries(await Promise.all([...files].map(async (file) => [file, await hashFile(resolve(publicDirectory, file))])));
-    const prepared = { schema: config.surfaceMetadata.schema, ...(config.emission ? { emission: { ...config.emission.metadata, offLimbSize: config.emission.offLimbSize, limbSize: config.emission.limbSize, bodyDiameter: config.emission.bodyDiameter } } : {}), sourceDimensions: { width: config.sourceWidth, height: config.sourceHeight }, surfaceDimensions: { width: config.width, height: config.height }, surfaces, ...(lighting ? { lighting } : {}), ...(atmosphere ? { atmosphere } : {}), ...(interior ? { interior } : {}), hashes };
+    const prepared = { schema: config.surfaceMetadata.schema, ...(config.emission ? { emission: { ...config.emission.metadata, offLimbSize: config.emission.offLimbSize, limbSize: config.emission.limbSize, bodyDiameter: config.emission.bodyDiameter } } : {}), sourceDimensions: { width: config.sourceWidth, height: config.sourceHeight }, surfaceDimensions: { width: config.width, height: config.height }, surfaces, ...(lighting ? { lighting } : {}), ...(atmosphere ? { atmosphere } : {}), ...(interior ? { interior } : {}) };
     await writeFile(resolve(outputDirectory, 'assets.json'), JSON.stringify(prepared) + '\n');
     return prepared;
 }

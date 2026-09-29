@@ -2,12 +2,13 @@
 // [--source-root=<path>] [--shard=<index>/<count>]. The work is in @cssearth/bake/refresh-shape-materials, with the
 // generated solar geometry this entry loads from the checkout.
 import { sha256 } from '@cssearth/core/node';
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { readInventory, readPreparedObjects } from '@cssearth/objects/node';
+import { anyChangedAfter } from '@cssearth/bake/preparation';
 import { prepareObjectProvenance } from '@cssearth/bake/objects/provenance';
 import { refreshShapeMaterialDescriptions, refreshShapeMaterials } from '@cssearth/bake/refresh-shape-materials';
 
@@ -41,10 +42,17 @@ for (const id of ids) {
     let receipt;
     try { receipt = await json(resolve('output/shape-material-refresh', id, 'refresh.json')); }
     catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
-    if (receipt && receipt.recipeSha256 === sha256(await readFile(resolve('src/objects', id, 'source/preparation/terrestrial.json'))) &&
-        receipt.retainedSceneSha256 === sha256(await readFile(resolve('src/objects', id, 'prepared/scene.json')))) {
-      for (const asset of records(receipt.changedAssets)) if (sha256(await readFile(resolve('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
-        throw new Error(`Refreshed asset changed before resume: ${id}/${asset.filename}.`);
+    // A finished refresh holds while its recipe and retained scene have not changed since its report was written.
+    const written = await stat(resolve('output/shape-material-refresh', id, 'refresh.json')).then(info => info.mtimeMs, () => -Infinity);
+    if (receipt && !await anyChangedAfter([resolve('src/objects', id, 'source/preparation/terrestrial.json'),
+      resolve('src/objects', id, 'prepared/scene.json')], written)) {
+      // The installed refreshed files still match their inventory rows.
+      const inventory = await readInventory(id, resolve('src/objects', id));
+      for (const asset of records(receipt.changedAssets)) {
+        const filename = requireString(asset.filename), row = inventory?.assets.find(entry => entry.location === 'public' && entry.filename === filename);
+        if (!row || sha256(await readFile(resolve('public/scenes', id, filename))) !== row.sha256)
+          throw new Error(`Refreshed asset changed before resume: ${id}/${filename}.`);
+      }
       continue;
     }
   }

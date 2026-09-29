@@ -1,10 +1,9 @@
 import sharp from 'sharp';
-import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 export const outputName = (template: string, density: number, id = '') => template.replaceAll('{density}', String(density)).replaceAll('{suffix}', density === 1 ? '' : '@2x').replaceAll('{id}', id);
 export const raster = (data: Uint8Array, width: number, height: number) => sharp(Buffer.from(data), { raw: { width, height, channels: 4 } });
-export async function hashFile(path: string) { const bytes = await readFile(path); return { bytes: bytes.byteLength, sha256: createHash('sha256').update(bytes).digest('hex') }; }
+export async function fileBytes(path: string) { return { bytes: (await stat(path)).size }; }
 export async function readRgba(path: string, width: number, height: number, resize = false, sharpen?: number) {
     let image = sharp(path);
     if (resize)

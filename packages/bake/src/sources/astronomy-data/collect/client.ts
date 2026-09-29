@@ -1,7 +1,6 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { createHash } from "node:crypto";
 import { createRequire } from "node:module";
-import { dirname, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
 // The checkout this module's own @cssearth/bake install sits in, independent of the caller's cwd (as
 // ../model.ts resolves it; duplicated here rather than imported to avoid a cycle, since model.ts imports this file).
 const CHECKOUT_ROOT = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
@@ -9,6 +8,12 @@ export const workDir = resolve(
   CHECKOUT_ROOT,
   process.env.OPUS_WORK_DIR ?? "output/opus-audit",
 );
+/** Where a response to `url` is kept in a throwaway local cache: the escaped URL itself, cut into directory names short
+ * enough for any file system. The caller creates the parent directory. */
+export function urlCachePath(directory: string, url: string, extension: string) {
+  const parts = encodeURIComponent(url).match(/.{1,200}/gu) ?? ["_"];
+  return join(directory, ...parts) + extension;
+}
 export type Obj = Record<string, unknown>;
 export function object(value: unknown): Obj {
   if (!value || typeof value !== "object" || Array.isArray(value))
@@ -47,11 +52,11 @@ export async function get(
     api +
     endpoint +
     (Object.keys(params).length ? "?" + new URLSearchParams(params) : "");
-  const key = createHash("sha256").update(url).digest("hex");
-  await mkdir(cache, { recursive: true });
+  const path = urlCachePath(cache, url, ".json");
+  await mkdir(dirname(path), { recursive: true });
   try {
     const saved = object(
-      JSON.parse(await readFile(cache + "/" + key + ".json", "utf8")),
+      JSON.parse(await readFile(path, "utf8")),
     );
     if (saved.url !== url) throw Error("Cache URL mismatch");
     return saved.body;
@@ -66,7 +71,7 @@ export async function get(
       const body: unknown = await r.json();
       if (object(body).error) throw Error(JSON.stringify(body));
       await writeFile(
-        cache + "/" + key + ".json",
+        path,
         JSON.stringify({ url, retrievedAt: new Date().toISOString(), body }) +
           "\n",
       );

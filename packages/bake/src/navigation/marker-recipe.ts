@@ -1,5 +1,4 @@
 import { safeRelativePath } from '@cssearth/objects/node';
-import { sha256 } from '@cssearth/core/node';
 import { isArray } from '@cssearth/core';
 /** A pin identifies bytes git does not hold; a marker image authored in this repository carries none. */
 export interface MarkerSource { path: string; origin: string; credit: string; license: string; raster?: { kind: string }; width?: number; height?: number; }
@@ -22,7 +21,6 @@ import { readFile } from "node:fs/promises";
 import sharp, { type Sharp } from "sharp";
 import { blackFillCoverage, paintMissingCoverage } from "../raster/index.ts";
 
-const SHA256 = /^[0-9a-f]{64}$/u;
 const OBJECT_ID = /^[a-z][a-z0-9-]*$/u;
 const OPERATION_TYPES = new Set([
   "orthographic",

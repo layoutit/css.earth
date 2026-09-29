@@ -65,13 +65,14 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
       if (url !== requireRecord(old[key]).url) throw new Error(`Refresh cannot change the ${key} resource name.`);
       const filename = url.split('/').at(-1)!;
       const bytes = await readFile(resolve(stage, filename));
-      if (sha256(bytes) !== value.sha256 || bytes.length !== value.bytes) throw new Error(`Invalid staged asset ${filename}.`);
+      if (bytes.length !== value.bytes) throw new Error(`${id}: staged asset ${filename} is ${bytes.length} bytes; its surface records ${String(value.bytes)}.`);
+      // The inventory row names the refreshed file by its R2 content address.
       if (assets.some(asset => asset.location === 'public' && asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
     }
   }
   // Confirm the package has not changed while preparing, before applying any replacements.
-  for (const [name, bytes] of originals) if (sha256(await readFile(resolve(outputDirectory, name))) !== sha256(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
-  if (sha256(await readFile(recipePath)) !== sha256(recipeBytes)) throw new Error('Recipe changed during refresh.');
+  for (const [name, bytes] of originals) if (!(await readFile(resolve(outputDirectory, name))).equals(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
+  if (!(await readFile(recipePath)).equals(recipeBytes)) throw new Error('Recipe changed during refresh.');
   for (const name of ['surfaces.json', 'material.json']) {
     const document = requireRecord(JSON.parse(originals.get(name)!.toString('utf8')));
     document.surfaces = records(document.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
@@ -88,9 +89,9 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds, solarGeometry });
   await refreshObservationControls(id, lensIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
-  if (sha256(await readFile(resolve(outputDirectory, 'scene.json'))) !== sha256(originals.get('scene.json')!)) throw new Error('Observation refresh changed the scene.');
+  if (!(await readFile(resolve(outputDirectory, 'scene.json'))).equals(originals.get('scene.json')!)) throw new Error('Observation refresh changed the scene.');
   const report = { id, lensIds, seconds: (performance.now() - started) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024,
-    recipeSha256: sha256(recipeBytes), retainedSceneSha256: sha256(originals.get('scene.json')!), refreshedRuntimeAssets: [...changed.values()],
+    refreshedRuntimeAssets: [...changed.values()].map(({ filename, bytes }) => ({ filename, bytes })),
     retainedRuntimeAssetCount: assets.length - changed.size, provenanceBasis: 'recovered', observations: surfaces.map(surface => surface.observation) };
   await writeFile(resolve(stage, 'refresh.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ id, seconds: report.seconds, maxRssMiB: report.maxRssMiB, refreshedAssets: changed.size, retainedAssets: report.retainedRuntimeAssetCount }));
