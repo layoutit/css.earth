@@ -48,22 +48,54 @@ it('the Python writer finds the module-relative root in both source and distribu
   }
 });
 
-it('Python records preserve historical input identities for relocated FITS and hosted-orbit inputs', async () => {
+it('every relocated generator resolves its logical output and preserves historical input identities without writing', async () => {
   const reader = await readFile(new URL('fixture.mts', import.meta.url), 'utf8');
+  const runner = await readFile(new URL('run.mts', import.meta.url), 'utf8');
   const table = /const relocatedPaths:[^=]+ = (\{[\s\S]*?\n\});/u.exec(reader);
-  if (!table) throw new Error('Expected the reader relocation table.');
+  const generatorTable = /const relocated:[^=]+ = (\{[\s\S]*?\n\});/u.exec(runner);
+  if (!table || !generatorTable) throw new Error('Expected oracle relocation tables.');
   const entries = [...table[1]!.matchAll(/"([^"]+)":\s*"([^"]+)"/gu)]
-    .map(match => [match[1]!, match[2]!] as const)
-    .filter(([historical, current]) => historical.startsWith('tests/fixtures/') &&
-      (current.startsWith('packages/fits/') || current.startsWith('packages/bake/src/astronomy/')));
-  entries.push(['tests/fixtures/fits/float32.fits', 'packages/fits/src/node/fixtures/fits/float32.fits']);
-  for (const [historical, current] of entries.sort(([a], [b]) => a.localeCompare(b))) {
-    const result = spawnSync('python3', ['-c',
-      'import json, runpy, sys, types; sys.modules["numpy"] = types.ModuleType("numpy"); m = runpy.run_path(sys.argv[1]); print(json.dumps(m["input_record"](m["ROOT"] / sys.argv[2])))',
-      resolve(root, 'packages/core/src/node/oracle/fixture.py'), current], { cwd: tmpdir(), encoding: 'utf8' });
-    expect(result.status, result.stderr).toBe(0);
-    expect(requireString(requireRecord(JSON.parse(result.stdout)).path), current).toBe(historical);
-  }
+    .map(match => [match[1]!, match[2]!] as const);
+  const generators = [...generatorTable[1]!.matchAll(/"([^"]+)":\s*"([^"]+)"/gu)]
+    .map(match => [match[1]!, match[2]!] as const).filter(([, path]) => path.endsWith('.py'));
+  expect(generators.length).toBeGreaterThan(0);
+  const inputs = entries.filter(([historical]) => historical.startsWith('tests/fixtures/'));
+  const result = spawnSync('python3', ['-B', '-c', `
+import ast, json, runpy, sys, types
+sys.modules['numpy'] = types.ModuleType('numpy')
+m = runpy.run_path(sys.argv[1])
+root = m['ROOT']
+request = json.loads(sys.stdin.read())
+outputs = dict(request['outputs'])
+for logical, generator in request['generators']:
+    tree = ast.parse((root / generator).read_text())
+    calls = [n for n in ast.walk(tree) if isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == 'write']
+    assert len(calls) == 1, generator
+    name = ast.literal_eval(calls[0].args[0])
+    assert name == logical + '.json', generator
+    assert str(m['fixture_path'](name).relative_to(root)) == outputs['tests/oracles/' + name], generator
+    fixture = json.loads(m['fixture_path'](name).read_text())
+    # The earlier tools-to-tests move changed the generator prefix; retain that existing difference.
+    assert ast.literal_eval(calls[0].args[2]) == fixture['generatedBy'].replace('tools/oracles/', 'tests/oracles/'), generator
+    for record in fixture['inputs']:
+        if record['path'] in outputs:
+            assert m['input_record'](root / outputs[record['path']]) == record, (generator, record)
+    if logical == 'fits/rice':
+        assignment = next(n for n in ast.walk(tree) if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Subscript) and isinstance(n.targets[0].value, ast.Name) and n.targets[0].value.id == 'cases' and isinstance(n.value, ast.Dict) and any(isinstance(key, ast.Constant) and key.value == 'path' for key in n.value.keys))
+        expression = next(value for key, value in zip(assignment.value.keys, assignment.value.values) if isinstance(key, ast.Constant) and key.value == 'path')
+        for case in fixture['cases'].values():
+            if 'path' not in case: continue
+            path = root / outputs[case['path']]
+            actual = eval(compile(ast.Expression(expression), generator, 'eval'), {'path': path, 'ROOT': root, 'input_record': m['input_record']})
+            assert actual == case['path'], (generator, actual)
+for historical, current in request['inputs']:
+    assert m['input_record'](root / current)['path'] == historical, current
+print(json.dumps({'generators': len(request['generators']), 'inputs': len(request['inputs'])}))
+`, resolve(root, 'packages/core/src/node/oracle/fixture.py')], {
+    cwd: tmpdir(), encoding: 'utf8', input: JSON.stringify({ outputs: entries, generators, inputs }),
+  });
+  expect(result.status, result.stderr).toBe(0);
+  expect(JSON.parse(result.stdout)).toEqual({ generators: generators.length, inputs: inputs.length });
 });
 
 it('Python and TypeScript resolve relocated oracle fixtures to the same current files', async () => {

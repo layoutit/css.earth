@@ -111,7 +111,7 @@ for url in REFERENCE_URLS:
 write(
     'eclipse-map/numerics.json',
     'NumPy linear algebra and Astropy blackbody numerics',
-    'packages/bake/src/objects/raster/eclipse-map/fixtures/numerics.py',
+    'tests/oracles/eclipse-map/numerics.py',
     {'astropy': astropy.__version__, 'methods': 'Legendre derivatives, numpy.linalg, astropy BlackBody'},
     [],
     {'harmonics': harmonic_case(), 'fit': fit_case(), 'temperature': temperature_case()},

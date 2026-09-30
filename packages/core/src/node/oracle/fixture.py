@@ -12,6 +12,7 @@ def input_record(path):
         'packages/fits/src/node/fixtures/fits/cube.fits': 'tests/fixtures/fits/cube.fits',
         'packages/fits/src/node/fixtures/fits/eso-hierarchy.fits': 'tests/fixtures/fits/eso-hierarchy.fits',
         'packages/fits/src/node/fixtures/fits/extensions.fits': 'tests/fixtures/fits/extensions.fits',
+        'packages/fits/src/node/fixtures/fits/float32.fits': 'tests/fixtures/fits/float32.fits',
         'packages/fits/src/node/fixtures/fits/float64.fits': 'tests/fixtures/fits/float64.fits',
         'packages/fits/src/node/fixtures/fits/long-string.fits': 'tests/fixtures/fits/long-string.fits',
         'packages/fits/src/node/fixtures/fits/scaled-blank.fits': 'tests/fixtures/fits/scaled-blank.fits',
@@ -23,7 +24,17 @@ def input_record(path):
         'packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/SOURCE.json': 'tests/fixtures/telescope-families/f04-europa-stis/SOURCE.json',
         'packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits': 'tests/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits',
         'packages/fits/src/node/fixtures/telescope-families/family-sources.json': 'tests/fixtures/telescope-families/family-sources.json',
-        'packages/fits/src/node/fixtures/fits/float32.fits': 'tests/fixtures/fits/float32.fits',
+        'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.sum': 'tests/fixtures/sbmt/concave.sum',
+        'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/cases.json': 'tests/fixtures/sbmt/cases.json',
+        'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/inputs/concave.tab': 'tests/fixtures/sbmt/concave.tab',
+        'packages/bake/src/objects/color/fixtures/lupton-bands.fits': 'tests/fixtures/fits/lupton-bands.fits',
+        'packages/bake/src/objects/layers/observation/fixtures/rice-int16.fits': 'tests/fixtures/fits/rice-int16.fits',
+        'packages/bake/src/objects/layers/observation/fixtures/rice-int32.fits': 'tests/fixtures/fits/rice-int32.fits',
+        'packages/bake/src/objects/layers/observation/fixtures/rice-uint8.fits': 'tests/fixtures/fits/rice-uint8.fits',
+        'packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-centre.fits': 'tests/fixtures/fits/wise-atlas-lmc-centre.fits',
+        'packages/bake/src/objects/raster/fixtures/wise-atlas-lmc-far-corner.fits': 'tests/fixtures/fits/wise-atlas-lmc-far-corner.fits',
+        'packages/bake/src/objects/raster/fixtures/wise-atlas-pleiades-tile.fits': 'tests/fixtures/fits/wise-atlas-pleiades-tile.fits',
+        'packages/telescope-cli/src/fixtures/fits/binary-table-columns.fits': 'tests/fixtures/fits/binary-table-columns.fits',
     }
     current = str(path.resolve().relative_to(ROOT))
     return {'path': recorded.get(current, current), 'bytes': path.stat().st_size}

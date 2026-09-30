@@ -10,7 +10,7 @@ from astropy.io import fits
 from astropy.wcs import WCS
 import numpy as np
 sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
-from fixture import ROOT, write
+from fixture import input_record, ROOT, write
 
 rng = np.random.default_rng(20260918)
 directory = ROOT / 'packages/bake/src/objects/layers/observation/fixtures'
@@ -46,7 +46,7 @@ for name, dtype, low, high, scaled in [('rice-int16', 'int16', -32767, 32767, Tr
         physical = np.asarray(hdus[1].data, dtype='float64')
     with fits.open(path, memmap=False, disable_image_compression=True) as hdus:
         table = hdus[1].header
-    cases[name] = {'path': str(path.relative_to(ROOT)), 'width': int(raw.shape[1]), 'height': int(raw.shape[0]),
+    cases[name] = {'path': input_record(path)['path'], 'width': int(raw.shape[1]), 'height': int(raw.shape[0]),
                    'raw': [int(v) for v in raw.reshape(-1)], 'physical': [float(v) if np.isfinite(v) else None for v in physical.reshape(-1)],
                    'bscale': float(table.get('BSCALE', 1)), 'bzero': float(table.get('BZERO', 0)), 'blank': table.get('BLANK'),
                    'bytePix': int(np.dtype(dtype).itemsize), 'zcmptype': table['ZCMPTYPE']}
