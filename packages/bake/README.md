@@ -89,7 +89,7 @@ The build bundles the renderer modules a topic imports and writes `dist/metafile
 tracked compact inputs under `src/objects/`. Many topics keep `node --test` suites beside their modules. The scene and
 presentation suites prepare real bodies from published prepared data, so `vitest.config.ts` leaves them out;
 `pnpm test:preparation` runs them once that data is restored. The object libraries' tests sit beside the pipelines in
-`packages/bake/authoring/<body>/` or under `tests/objects/<topic>/`; `pnpm test:bake-objects` runs every test that imports
+`packages/bake/authoring/<body>/` or under `packages/bake/src/objects/<topic>/`; `pnpm test:bake-objects` runs every test that imports
 an object entry.
 
 ## Fixed surface paint order
