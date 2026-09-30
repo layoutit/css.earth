@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { distance, magnitude } from './__fixtures__/compare.js'
 import { HORIZONS } from './__fixtures__/horizons.js'
 import { bodyData } from './bodies.js'
@@ -161,40 +163,40 @@ const TOLERANCE_KM: Record<SatelliteId, number> = {
 }
 
 describe('satellite ephemerides against JPL Horizons', () => {
-  it.each(SATELLITE_IDS)('places %s within its fit residual at epochs the fit never saw', (id) => {
+  for (const id of SATELLITE_IDS) it(`places ${id} within its fit residual at epochs the fit never saw`, () => {
     const fixture = HORIZONS[`${id}FromParent`]!
-    expect(fixture.rows.length).toBe(6)
+    assert.equal(fixture.rows.length, 6)
     let worst = 0
     for (const row of fixture.rows) {
       worst = Math.max(worst, distance(satellitePositionKm(id, row.jdTdb), row.positionKm))
     }
-    expect(worst).toBeLessThan(TOLERANCE_KM[id])
+    assert.ok(worst < TOLERANCE_KM[id])
   })
 
   it('records the current-era fit window and denser cadence for the fast and resonant added Saturn moons', () => {
     const currentEra = ['hyperion', 'janus', 'epimetheus', 'atlas', 'prometheus', 'pandora'] as const
     for (const id of currentEra) {
       const record = satelliteRecord(id)
-      expect([record.fitFromJdTdb, record.fitToJdTdb, record.fitStepDays]).toEqual([2458849.5, 2463232.5, 5])
+      assert.deepEqual(([record.fitFromJdTdb, record.fitToJdTdb, record.fitStepDays]), [2458849.5, 2463232.5, 5])
     }
     for (const id of ['phoebe', 'telesto'] as const) {
       const record = satelliteRecord(id)
-      expect([record.fitFromJdTdb, record.fitToJdTdb, record.fitStepDays]).toEqual([2415020.5, 2488069.5, 30])
+      assert.deepEqual(([record.fitFromJdTdb, record.fitToJdTdb, record.fitStepDays]), [2415020.5, 2488069.5, 30])
     }
     const pan = satelliteRecord('pan')
-    expect([pan.fitFromJdTdb, pan.fitToJdTdb, pan.fitStepDays]).toEqual([2433282.5, 2469807.5, 5])
+    assert.deepEqual(([pan.fitFromJdTdb, pan.fitToJdTdb, pan.fitStepDays]), [2433282.5, 2469807.5, 5])
   })
 
-  it.each(SATELLITE_IDS)('checks %s only against independent vectors inside its source fit window', (id) => {
+  for (const id of SATELLITE_IDS) it(`checks ${id} only against independent vectors inside its source fit window`, () => {
     const record = satelliteRecord(id)
     for (const row of HORIZONS[`${id}FromParent`]!.rows) {
-      expect(row.jdTdb).toBeGreaterThan(record.fitFromJdTdb)
-      expect(row.jdTdb).toBeLessThan(record.fitToJdTdb)
-      expect((row.jdTdb - record.fitFromJdTdb) % record.fitStepDays).not.toBe(0)
+      assert.ok(row.jdTdb > record.fitFromJdTdb)
+      assert.ok(row.jdTdb < record.fitToJdTdb)
+      assert.notEqual(((row.jdTdb - record.fitFromJdTdb) % record.fitStepDays), 0)
     }
   })
 
-  it.each(SATELLITE_IDS)('gets %s to the right distance from its planet, not just the right direction', (id) => {
+  for (const id of SATELLITE_IDS) it(`gets ${id} to the right distance from its planet, not just the right direction`, () => {
     // Separated out because a wrong Laplace basis moves the direction and
     // leaves the radius alone, while a wrong semi-major axis does the reverse.
     const fixture = HORIZONS[`${id}FromParent`]!
@@ -204,18 +206,18 @@ describe('satellite ephemerides against JPL Horizons', () => {
       // The post-impact Dimorphos fit measures a 3.135% radial residual.
       // Himalia's corrected fit is back inside the common 2% guard.
       const radialTolerance = ({ dimorphos: 0.033 } as Partial<Record<SatelliteId, number>>)[id] ?? 0.02
-      expect(Math.abs(computed - reference) / reference).toBeLessThan(radialTolerance)
+      assert.ok((Math.abs(computed - reference) / reference) < radialTolerance)
     }
   })
 
-  it.each(SATELLITE_IDS)('bounds %s relative to its physical parent over a hundred orbits', (id) => {
+  for (const id of SATELLITE_IDS) it(`bounds ${id} relative to its physical parent over a hundred orbits`, () => {
     const record = satelliteRecord(id)
     const elements = record.elements as KeplerianElements
     const bound = satelliteApoapsisKm(id)
     const companion = record.barycentreCompanion && bodyData(record.barycentreCompanion as SatelliteId)
     const weight = companion ? companion.gravitationalParameterKm3PerS2 /
       (companion.gravitationalParameterKm3PerS2 + bodyData(record.parent as 'pluto').gravitationalParameterKm3PerS2) : 0
-    expect(bound).toBe(keplerApoapsisKm(elements) +
+    assert.equal(bound, keplerApoapsisKm(elements) +
       (record.positionCorrection ? periodicCorrectionBoundKm(record.positionCorrection) : 0) +
       (companion ? satelliteApoapsisKm(companion.id as SatelliteId) * weight : 0))
     const period = (2 * Math.PI) / elements.meanMotionRadPerDay
@@ -223,24 +225,24 @@ describe('satellite ephemerides against JPL Horizons', () => {
     for (let i = 0; i <= 5000; i++) {
       farthest = Math.max(farthest, magnitude(satellitePositionKm(id, 2451545 + (i * period * 100) / 5000)))
     }
-    expect(farthest).toBeLessThanOrEqual(bound)
+    assert.ok(farthest <= bound)
   })
 
   it('builds an orthonormal Laplace basis for every moon', () => {
     for (const id of SATELLITE_IDS) {
       const { nodeAxis, completingAxis, poleAxis } = satelliteLaplaceBasis(satelliteRecord(id))
-      for (const axis of [nodeAxis, completingAxis, poleAxis]) expect(magnitude(axis)).toBeCloseTo(1, 12)
+      for (const axis of [nodeAxis, completingAxis, poleAxis]) assert.ok(Math.abs(magnitude(axis) - (1)) < 10 ** -12 / 2, `${magnitude(axis)} is not close to ${1}`)
       const dot = (a: readonly number[], b: readonly number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!
-      expect(dot(nodeAxis, completingAxis)).toBeCloseTo(0, 12)
-      expect(dot(nodeAxis, poleAxis)).toBeCloseTo(0, 12)
-      expect(dot(completingAxis, poleAxis)).toBeCloseTo(0, 12)
+      assert.ok(Math.abs(dot(nodeAxis, completingAxis) - (0)) < 10 ** -12 / 2, `${dot(nodeAxis, completingAxis)} is not close to ${0}`)
+      assert.ok(Math.abs(dot(nodeAxis, poleAxis) - (0)) < 10 ** -12 / 2, `${dot(nodeAxis, poleAxis)} is not close to ${0}`)
+      assert.ok(Math.abs(dot(completingAxis, poleAxis) - (0)) < 10 ** -12 / 2, `${dot(completingAxis, poleAxis)} is not close to ${0}`)
       // Right-handed: node x completing = pole.
       const cross = [
         nodeAxis[1] * completingAxis[2] - nodeAxis[2] * completingAxis[1],
         nodeAxis[2] * completingAxis[0] - nodeAxis[0] * completingAxis[2],
         nodeAxis[0] * completingAxis[1] - nodeAxis[1] * completingAxis[0],
       ]
-      expect(distance(cross, poleAxis)).toBeLessThan(1e-12)
+      assert.ok(distance(cross, poleAxis) < 1e-12)
     }
   })
 
@@ -256,17 +258,17 @@ describe('satellite ephemerides against JPL Horizons', () => {
         (i) => (-at(2 * h)[i]! + 8 * at(h)[i]! - 8 * at(-h)[i]! + at(-2 * h)[i]!) / (12 * h),
       )
       const analytic = satelliteStateKm(id, epoch).velocityKmPerDay
-      expect(distance(numeric, analytic) / magnitude(analytic)).toBeLessThan(1e-8)
+      assert.ok((distance(numeric, analytic) / magnitude(analytic)) < 1e-8)
     }
   })
 
   it('agrees with the body table about which planet each moon orbits', () => {
     for (const id of SATELLITE_IDS) {
-      expect(satelliteRecord(id).parent).toBe(bodyData(id).parent)
+      assert.equal(satelliteRecord(id).parent, bodyData(id).parent)
     }
   })
 
   it('rejects an unknown satellite', () => {
-    expect(() => satellitePositionKm('missing' as SatelliteId, 2451545)).toThrow(/unknown satellite/)
+    assert.throws(() => satellitePositionKm('missing' as SatelliteId, 2451545), /unknown satellite/)
   })
 })

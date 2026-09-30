@@ -1,6 +1,6 @@
 import {readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { parsePreparedObjectRuntime } from './index.js';
 import { record, array } from './guards.js';
 

@@ -28,9 +28,11 @@ export function readAllowMissingFlag(args: readonly string[] = []) {
 // files, so a 429 is retried like a 5xx, after the Retry-After it names when it names one.
 export const RUNTIME_ASSET_CONCURRENCY = 256;
 export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation[], { fetcher = fetch, concurrency = RUNTIME_ASSET_CONCURRENCY,
-  allowMissing = false, trustFresh = false, onProgress = () => {} }: {fetcher?: typeof fetch; concurrency?: number; allowMissing?: boolean;
+  allowMissing = false, trustFresh = false, onProgress = () => {}, wait = delay }: {fetcher?: typeof fetch; concurrency?: number; allowMissing?: boolean;
   /** Trust a file written after its inventory by its size (a developer's `setup:assets`); CI hashes every file. */
-  trustFresh?: boolean; onProgress?: (progress: InstallProgress) => void} = {}) {
+  trustFresh?: boolean; onProgress?: (progress: InstallProgress) => void;
+  /** The pause before a retry; a test passes one that returns at once. */
+  wait?: (ms: number) => Promise<void>} = {}) {
   let next = 0, installed = 0, reused = 0, skipped = 0;
   // A fresh checkout should learn about every missing or drifted file in one
   // run, so keep installing after a failure and report them together.
@@ -68,7 +70,7 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
               response = await fetcher(asset.url, { signal: AbortSignal.timeout(120000) });
               if ((response.status >= 500 || response.status === 429) && attempt < TRANSIENT_RETRIES) {
                 const after = Number(response.headers.get('retry-after'));
-                await response.body?.cancel(); await delay(after > 0 ? Math.min(after, 30) * 1000 : RETRY_BACKOFF_MS * 2 ** attempt); continue;
+                await response.body?.cancel(); await wait(after > 0 ? Math.min(after, 30) * 1000 : RETRY_BACKOFF_MS * 2 ** attempt); continue;
               }
               // A deploy build may tolerate one object's asset genuinely missing from R2 (a 404, not a flaky
               // 5xx/network error) rather than fail the whole build: skip it loudly and let the object's own
@@ -89,7 +91,7 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
             } catch (error) {
               // An HTTP answer is final; only a network error (before or during the body) is retried.
               if (response && !response.ok || attempt >= TRANSIENT_RETRIES || (error instanceof Error && error.message.startsWith('Prepared asset'))) throw error;
-              await delay(RETRY_BACKOFF_MS * 2 ** attempt);
+              await wait(RETRY_BACKOFF_MS * 2 ** attempt);
             }
           }
           if (bytes === 'missing') {

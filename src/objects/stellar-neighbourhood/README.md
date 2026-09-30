@@ -22,7 +22,7 @@ From the repository root:
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:tools
 node packages/bake/cli/prepare-stars.mts src/objects/stellar-neighbourhood
-pnpm test:preparation --universe
+pnpm test:packages
 ```
 
 Every source row survives. Eight explicit Hipparcos identities share the detailed

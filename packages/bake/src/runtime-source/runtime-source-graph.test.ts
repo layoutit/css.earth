@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { resolveRuntimeSource } from './runtime-source-graph.ts';
 
 const root = fileURLToPath(new URL('../../../..', import.meta.url));

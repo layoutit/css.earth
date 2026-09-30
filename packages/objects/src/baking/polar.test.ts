@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createPolarSprite } from './polar.js';
 
 describe('prepared polar sprites', () => {
@@ -6,7 +8,7 @@ describe('prepared polar sprites', () => {
         const map = new Uint8Array(16 * 8 * 4);
         for (let index = 0; index < map.length; index += 4)
             map.set([index / 4 % 251, 40, 80, 255], index);
-        expect(createPolarSprite(map, 16, 8, 8, 4)).toEqual(createPolarSprite(map, 16, 8, 8, 4, { sampling: 'bilinear' }));
+        assert.deepEqual(createPolarSprite(map, 16, 8, 8, 4), createPolarSprite(map, 16, 8, 8, 4, { sampling: 'bilinear' }));
     });
 
     it('samples an opted-in high-frequency photograph before creating output-resolution coverage', () => {
@@ -27,11 +29,11 @@ describe('prepared polar sprites', () => {
             nativePhotograph: native,
             missingColor: () => [12, 34, 56],
         });
-        expect(Math.max(...fallback.filter((_, index) => index % 4 === 0))).toBe(0);
-        expect(Math.max(...direct.filter((_, index) => index % 4 === 0))).toBe(255);
+        assert.equal(Math.max(...fallback.filter((_, index) => index % 4 === 0)), 0);
+        assert.equal(Math.max(...direct.filter((_, index) => index % 4 === 0)), 255);
         // A failed contributor gets the grid color at the polar output size, never a filtered source-map value.
         const center = (16 * (32 * 2) + 16) * 4;
-        expect(Array.from(direct.slice(center, center + 3))).toEqual([12, 34, 56]);
+        assert.deepEqual(Array.from(direct.slice(center, center + 3)), [12, 34, 56]);
     });
 
     it('retains native source opacity in a direct pole sample', () => {
@@ -43,12 +45,12 @@ describe('prepared polar sprites', () => {
             } },
             missingColor: () => [0, 0, 0],
         });
-        expect(polar[(4 * 16 + 4) * 4 + 3]).toBe(128);
+        assert.equal(polar[(4 * 16 + 4) * 4 + 3], 128);
     });
 
     it('rejects native sampling for a nearest-valued surface', () => {
         const map = new Uint8Array(8 * 4 * 4);
-        expect(() => createPolarSprite(map, 8, 4, 8, 4, { sampling: 'nearest', nativePhotograph: { sample: () => true },
-            missingColor: () => [0, 0, 0] })).toThrow('cannot replace nearest');
+        assert.throws(() => createPolarSprite(map, 8, 4, 8, 4, { sampling: 'nearest', nativePhotograph: { sample: () => true },
+            missingColor: () => [0, 0, 0] }), /cannot replace nearest/);
     });
 });

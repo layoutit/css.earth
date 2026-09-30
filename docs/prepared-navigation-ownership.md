@@ -112,8 +112,7 @@ comparisons and the interpretation used for its model.
 
 ## Verification
 
-- `node --test packages/bake/src/presentation/prepared-activation-registry.test.mts packages/objects/src/node/prepared-activation-transport.test.mts`
-  checks activation ownership and cancellation.
+- `node --test packages/objects/src/node/prepared-activation-transport.test.mts` checks the served transport carries the runtime whole.
 - `node --test site/test/navigation-lifecycle.test.mts site/test/scene-session.test.mts`
   checks navigation and retained scene state.
 - `node --test site/test/rendered-page.test.mts` parses built HTML for the

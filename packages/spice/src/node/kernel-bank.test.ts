@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { KERNEL_BANK_ROOT, kernelBankRoot, kernelBanks, readRestoredFile, type KernelBankManifestLocation } from './index.js';
 
 test('the kernel banks are the checkout src/spice, found from the package, not from this file', () => {

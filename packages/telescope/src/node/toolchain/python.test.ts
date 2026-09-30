@@ -3,12 +3,12 @@ import { execFileSync } from 'node:child_process';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { it as test } from 'vitest';
+import { it as test } from 'node:test';
 import { toolchainPython } from './python.js';
 
 const python = (() => { try { execFileSync('python3', ['--version']); return 'python3'; } catch { return null; } })();
 
-test.skipIf(!python)('inline Python returns its last stdout line and keeps the whole log', async () => {
+test('inline Python returns its last stdout line and keeps the whole log', { skip: !python }, async () => {
   const work = await mkdtemp(join(tmpdir(), 'toolchain-python-'));
   try {
     const log = join(work, 'run.log'), toolchain = { python: python!, env: { CSSEARTH_PROBE: 'pinned' } };

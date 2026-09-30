@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { readDaf } from './daf.js';
 
 /** Build a minimal two-segment DAF with the SPK summary shape (ND=2, NI=6). */

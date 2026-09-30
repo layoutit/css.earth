@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 import { readFile } from 'node:fs/promises';
 import { createWorldSelectionTarget } from './selection-target.js';
@@ -16,16 +18,16 @@ for (const [fromId, toId] of [['mercury', 'venus'], ['venus', 'mercury']]) {
     const from = worldCameraFromCenteredPresentation({ rotation: [1,0,0,0,1,0,0,0,1], distanceUnits: 3000 }, source, viewport);
     const result = createWorldSelectionTarget(from, target, viewport);
     const presentation = presentWorldCamera(result, target, viewport);
-    expect(presentation.centerPixels![0]).toBeCloseTo(0, 6);
-    expect(presentation.centerPixels![1]).toBeCloseTo(0, 6);
-    expect(presentation.silhouette!.tangentialSemiAxis).toBeCloseTo(259.2, 6);
-    expect(result.pose.orientationXyzw).toEqual(from.pose.orientationXyzw);
-    expect(presentation.distanceM).toBeGreaterThan(target.bodyRadiusM);
-    expect(Math.hypot(...result.pose.orientationXyzw)).toBeCloseTo(1, 12);
+    assert.ok(Math.abs(presentation.centerPixels![0] - (0)) < 10 ** -6 / 2, `${presentation.centerPixels![0]} is not close to ${0}`);
+    assert.ok(Math.abs(presentation.centerPixels![1] - (0)) < 10 ** -6 / 2, `${presentation.centerPixels![1]} is not close to ${0}`);
+    assert.ok(Math.abs(presentation.silhouette!.tangentialSemiAxis - (259.2)) < 10 ** -6 / 2, `${presentation.silhouette!.tangentialSemiAxis} is not close to ${259.2}`);
+    assert.deepEqual(result.pose.orientationXyzw, from.pose.orientationXyzw);
+    assert.ok(presentation.distanceM > target.bodyRadiusM);
+    assert.ok(Math.abs(Math.hypot(...result.pose.orientationXyzw) - (1)) < 10 ** -12 / 2, `${Math.hypot(...result.pose.orientationXyzw)} is not close to ${1}`);
   });
 }
 
-test.each([-1, 1])('a departure above or below the orbital plane (%s) approaches the screen center without rotation', sign => {
+for (const sign of [-1, 1]) test(`a departure above or below the orbital plane (${sign}) approaches the screen center without rotation`, () => {
   const frame = parsePreparedWorldCameraFrame({ referenceFrame: 'test', epochJdTt: 1,
     originM: [0,0,0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1],
     metersPerUnit: 1, bodyRadiusM: 1, orbitUpReference: [0,-1,0] })!;
@@ -36,22 +38,22 @@ test.each([-1, 1])('a departure above or below the orbital plane (%s) approaches
   let previousOffset = Infinity;
   for (let step = 0; step <= 60; step++) {
     const sample = sampleSelectionFlight(flight, step * flight.durationS / 60);
-    expect(sample.orientationXyzw).toEqual(from.pose.orientationXyzw);
+    assert.deepEqual(sample.orientationXyzw, from.pose.orientationXyzw);
     const projection = presentWorldCamera({ ...from, pose: sample }, frame, viewport);
-    expect(projection.centerPixels).not.toBeNull();
+    assert.notEqual(projection.centerPixels, null);
     const offset = Math.hypot(...projection.centerPixels!);
-    expect(offset).toBeLessThanOrEqual(previousOffset + 1e-8);
+    assert.ok(offset <= previousOffset + 1e-8);
     previousOffset = offset;
   }
-  expect(previousOffset).toBeLessThan(1e-8);
-  expect(sampleSelectionFlight(flight, flight.durationS).positionM).toEqual(to.pose.positionM);
+  assert.ok(previousOffset < 1e-8);
+  assert.deepEqual(sampleSelectionFlight(flight, flight.durationS).positionM, to.pose.positionM);
 });
 
 test('invalid epoch, reflected frame, and non-unit prepared horizon fail at their boundaries', () => {
   const frame = { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1, bodyRadiusM: 1 };
-  expect(() => parsePreparedWorldCameraFrame({ ...frame, orbitUpReference: [0,2,0] })).toThrow('unit');
-  expect(() => parsePreparedWorldCameraFrame({ ...frame, presentationToReference: [1,0,0,0,1,0,0,0,1] })).toThrow('handedness');
+  assert.throws(() => parsePreparedWorldCameraFrame({ ...frame, orbitUpReference: [0,2,0] }), /unit/);
+  assert.throws(() => parsePreparedWorldCameraFrame({ ...frame, presentationToReference: [1,0,0,0,1,0,0,0,1] }), /handedness/);
   const valid = parsePreparedWorldCameraFrame(frame)!;
-  expect(() => createWorldSelectionTarget({ referenceFrame: 'test', epochJdTt: 2,
-    pose: { positionM: [0,0,10], orientationXyzw: [0,0,0,1] } }, valid, viewport)).toThrow('epoch');
+  assert.throws(() => createWorldSelectionTarget({ referenceFrame: 'test', epochJdTt: 2,
+    pose: { positionM: [0,0,10], orientationXyzw: [0,0,0,1] } }, valid, viewport), /epoch/);
 });

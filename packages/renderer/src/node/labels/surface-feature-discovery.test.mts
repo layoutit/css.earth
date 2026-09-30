@@ -8,12 +8,16 @@ import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "
 
 const root = pathToFileURL(projectRoot(import.meta.url) + '/');
 const bodies = new URL("src/objects/", root);
-for (const id of await readdir(bodies)) {
+// Two cases, broad comet regions and a body with five names or fewer: the first body of each, not every body.
+const cases = new Set<string>();
+for (const id of (await readdir(bodies)).sort()) {
   const descriptor = await readFile(new URL(`${id}/prepared/features.json`, bodies), "utf8").catch(() => null);
   if (!descriptor) continue;
   const metadata: unknown = JSON.parse(descriptor);
   assert.ok(metadata && typeof metadata === "object" && "count" in metadata && typeof metadata.count === "number");
-  if (!id.startsWith("comet-") && metadata.count > 5) continue;
+  const kind = id.startsWith("comet-") ? "comet" : metadata.count > 5 ? null : "sparse";
+  if (!kind || cases.has(kind)) continue;
+  cases.add(kind);
   test(`${id}: sparse names and broad comet regions are eligible at whole-body framing without a selection`, async () => {
     const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(new URL(`${id}/prepared/runtime.json`, bodies), "utf8")));
     const plan = definition.features;

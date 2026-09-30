@@ -1,4 +1,5 @@
-import { assert, test } from "vitest";
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
 import { createPreparedPlayback } from "./prepared-playback.js";
 type TestAnimation = Omit<import("./prepared-playback.js").PreparedAnimation, "playState"> & { playState: AnimationPlayState; calls: string[] };
 function animation(time = 12): TestAnimation {

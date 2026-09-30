@@ -271,7 +271,7 @@ Both preserved-view and animated handoffs use this transfer.
 
 ## Verification
 
-`pnpm test:node` covers interrupted flights, history, dataset selection,
+`pnpm test:site` covers interrupted flights, history, dataset selection,
 late transport disposal and superseded saved-view restoration. The focused
 `site/test/navigation-lifecycle.test.mts` suite checks commit authority and
 cleanup ordering, including abort callbacks and failed destructors.
@@ -289,7 +289,6 @@ builds disable them. Keep the built assets unchanged throughout the matrix.
 Choose checks for the changed behavior after building and preparing its inputs:
 
 ```sh
-node --test packages/bake/src/presentation/prepared-activation-registry.test.mts
 node --test packages/objects/src/node/prepared-activation-transport.test.mts
 node --test site/test/navigation-lifecycle.test.mts
 node --test site/test/scene-session.test.mts

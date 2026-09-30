@@ -1,16 +1,7 @@
-import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
-import { fileURLToPath } from 'node:url';
-import { preparedObjectText } from '@cssearth/objects/node';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import { refuseStaleKeptBindings } from '../build/prepare/prepare-object-json.mts';
-import { readPreparedObjects } from '@cssearth/objects/node';
-import { resolve } from 'node:path';
-
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
 test('--keep-bindings refuses when the solved system transform moved', () => {
   // A body outside any solved lane (world-context focus, or a lane with nothing to solve) carries no system transform.
@@ -24,15 +15,3 @@ test('--keep-bindings refuses when the solved system transform moved', () => {
   assert.throws(() => refuseStaleKeptBindings('mimas', moved), /mimas/);
 });
 
-for (const object of SCENE_OBJECTS) {
-  test(`${object.id}: generic JSON transport preserves the complete prepared definition`, async () => {
-    const descriptor = parseObjectDescriptor(await readFile(new URL(`../../src/objects/${object.id}/object.json`, import.meta.url), 'utf8'));
-    assert.ok(descriptor.prepared);
-    const raw = await preparedObjectText(fileURLToPath(new URL(`../../src/objects/${descriptor.id}/`, import.meta.url)), descriptor);
-    const envelope = readPreparedObject(JSON.parse(raw), descriptor, data => data);
-    const runtimeDefinition = await loadObjectTestDefinition(object.id);
-    assert.deepEqual(envelope.data, JSON.parse(JSON.stringify(runtimeDefinition)));
-    assert.equal(envelope.id, object.id);
-    assert.equal(envelope.type, descriptor.type);
-  });
-}

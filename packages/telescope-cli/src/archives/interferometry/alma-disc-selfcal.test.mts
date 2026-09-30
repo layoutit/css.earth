@@ -60,7 +60,9 @@ test('the fit recovers a disc it is given, including where the disc sits', () =>
     cells.push({ u, v, real: amplitude * Math.cos(phase), imaginary: amplitude * Math.sin(phase), weight: 1 });
   }
   assert.ok(cells.length > 400, `the simulated grid has ${cells.length} cells`);
-  const fit = fitLimbDarkenedDisc(cells, diameter);
+  // Each scan step builds an amplitude table, nearly all of the fit's time; the refinement after the scan reaches the limb
+  // darkening from a coarse step as well, so the test scans at 0.25 (32 tables) rather than the default 0.05 (81, 95 s in CI).
+  const fit = fitLimbDarkenedDisc(cells, diameter, 0.25);
   close(fit.totalFluxJy, truth.flux, 1e-4, 'the fitted total flux density');
   close(fit.limbDarkening, truth.limbDarkening, 5e-3, 'the fitted limb darkening');
   close(fit.offsetRaMas, truth.offsetRaMas, 0.1, 'the fitted offset in right ascension');

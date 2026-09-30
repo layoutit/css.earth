@@ -2,13 +2,17 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { onTestFinished, test } from 'vitest';
+import { after, test } from 'node:test';
 import { readOverviews } from './catalog-directory.js';
+
+// Temporary checkouts the tests make, removed once the file's tests finish.
+const temporary: string[] = [];
+after(() => Promise.all(temporary.map(path => rm(path, { recursive: true, force: true }))));
 
 const zoom = { enter: { distancePc: 1 }, returnBelow: { distancePc: 0.5 }, frame: { distance: { distancePc: 2 } } };
 async function objects(packages: Record<string, unknown>) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-overviews-'));
-  onTestFinished(() => rm(root, { force: true, recursive: true }));
+  temporary.push(root);
   for (const [id, overview] of Object.entries(packages)) {
     await mkdir(join(root, id), { recursive: true });
     await writeFile(join(root, id, 'object.json'), JSON.stringify({ schema: 'cssearth-object@2', id, type: 'x', properties: overview === null ? {} : { overview } }));

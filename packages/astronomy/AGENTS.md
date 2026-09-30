@@ -115,7 +115,7 @@ Assert against a reference value with a documented error budget, never an
 equality. Reference sources, in order of preference: JPL Horizons vectors, the
 published catalogue row, then a second independent implementation.
 
-`vitest run` here is fast and has no browser. Keep it that way — a test that
+These tests are fast and have no browser. Keep it that way — a test that
 needs a DOM belongs with the application renderer.
 
 ## The ephemeris layer (M2)
