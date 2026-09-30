@@ -19,6 +19,8 @@ export function mountPointPaths(host: HTMLElement, palette: readonly string[]) {
   host.append(svg);
   let origin = '';
   return {
+    /** The paths' svg: a camera turn can move what it painted as one warp (batched-spatial-points.ts). */
+    svg,
     residentElements: paths.size + 2,
     begin(viewport: WorldCameraViewport) {
       const next = `translate(${(viewport.widthPixels ?? 0) / 2} ${(viewport.heightPixels ?? 0) / 2})`;
