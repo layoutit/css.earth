@@ -5,7 +5,7 @@ import { createWorldContextBodyInteraction, createWorldContextInteractions } fro
 import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import type { PlannedWorldContext } from './world-context/world-context-planner.js';
-import { packWorldBodies, type PackedWorldContextView } from './world-context/world-context-view-transport.js';
+import { bindWorldBodyColumns, createWorldBodyColumns, type PackedWorldContextView } from './world-context/world-context-view-transport.js';
 import { createSystemFade, indicatorDotDiameter, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
 import type { OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -221,6 +221,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       hovered: false, groupHovered: false,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
   });
+  // Each body's presentation lives in its row of these columns (bindWorldBodyColumns): a frame sends a copy of them.
+  const bodyColumns = createWorldBodyColumns(bodies.length);
+  bodies.forEach((entry, index) => bindWorldBodyColumns(entry, bodyColumns, index));
   const entriesById = new Map(bodies.map(entry => [entry.body.id, entry]));
   for (const entry of bodies) if (entry.orbit) entry.parentPaint = entriesById.get(entry.orbit.centerBodyId)?.paint;
   const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail, depthBase);
@@ -277,7 +280,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const refresh = () => { requestPublication?.(); };
   // Any change to what the planner decides also invalidates frames already captured.
   const invalidatePolicy = () => { presentationRevision++; policyDirty = true; };
-  const invalidateLabelSizes = () => { invalidatePolicy(); for (const entry of bodies) entry.labelSize.width = 0; };
+  const invalidateLabelSizes = () => { invalidatePolicy(); for (const entry of bodies) entry.labelSize = { ...entry.labelSize, width: 0 }; };
   const fonts = host.ownerDocument.fonts;
   fonts?.addEventListener('loadingdone', invalidateLabelSizes);
   let annotationFrame: number | null = null;
@@ -324,8 +327,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         preserveCommittedAnnotations: rotationPhase === 'released',
         labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
-        // Each body's presentation, packed straight from its entry for the planner's worker.
-        bodyColumns: packWorldBodies(bodies) };
+        // Each body's presentation as it stands, copied for the planner's worker (the copy is transferred).
+        bodyColumns: bodyColumns.slice() };
   };
   const layer = Object.freeze({ root,
     /** `frameBlockers` hold only for this camera, such as the selected body's caption, which moves with it. */
