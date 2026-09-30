@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 
 export async function fitsArchiveInputs() {
-  const record = requireRecord(JSON.parse(await readFile(resolve(projectRoot(import.meta.url), 'tests/fixtures/fits/archive-inputs.json'), 'utf8')));
+  const record = requireRecord(JSON.parse(await readFile(resolve(projectRoot(import.meta.url), 'packages/bake/src/objects/layers/observation/fixtures/fits/archive-inputs.json'), 'utf8')));
   if (record.schema !== 'cssearth-fits-reference-inputs@1') throw new Error('Invalid FITS reference input record.');
   const inputs = requireArray(record.inputs).map(raw => {
     const entry = requireRecord(raw), path = requireString(entry.path), url = requireString(entry.url);

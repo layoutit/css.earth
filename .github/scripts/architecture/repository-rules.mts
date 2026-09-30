@@ -1,6 +1,7 @@
 /** Rules the architecture check applies to the repository itself rather than to the import graph. They have no
  * baseline: the repository satisfies each of them today, so every finding fails the check, and
  * `--update-baseline` never records one. */
+import { isTestPath } from './zones.mts';
 import { checkDeclaredDependencies } from './declared-dependencies.mts';
 import { checkNebulaBoundaries } from './nebula-packages.mts';
 import { checkPreInstallImports } from './pre-install-imports.mts';
@@ -32,7 +33,7 @@ const OBJECT_CODE = /^src\/objects\/.+\.(?:[cm]?[jt]sx?|astro)$/u;
 
 /** One finding per script or Astro module inside an object package. */
 export function objectCodeFiles(files: readonly string[]): string[] {
-  return files.filter(file => OBJECT_CODE.test(file)).map(file => `${file}: object packages hold data only; put code in packages/ or site/`);
+  return files.filter(file => OBJECT_CODE.test(file) && !isTestPath(file)).map(file => `${file}: object packages hold data only; put code in packages/ or site/`);
 }
 
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [

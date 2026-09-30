@@ -242,7 +242,8 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
 
 test('a script or Astro module inside an object package is a finding; its data is not', () => {
   assert.deepEqual(objectCodeFiles(['src/objects/mars/object.json', 'src/objects/mars/README.md', 'src/objects/mars/runtime/definition.mjs',
-    'src/objects/mars/site/Card.astro', 'src/objects/mars/x.d.ts', 'src/platform/object-runtime.mts', 'site/objects.mts']),
+    'src/objects/mars/site/Card.astro', 'src/objects/mars/x.d.ts', 'src/platform/object-runtime.mts', 'site/objects.mts', 'src/objects/earth/paged-ellipsoid-scene.test.mts',
+    'src/objects/europa/scientific-focus.test.mts', 'src/objects/earth/fixtures/polar-caps.mts']),
   ['src/objects/mars/runtime/definition.mjs: object packages hold data only; put code in packages/ or site/',
     'src/objects/mars/site/Card.astro: object packages hold data only; put code in packages/ or site/',
     'src/objects/mars/x.d.ts: object packages hold data only; put code in packages/ or site/']);

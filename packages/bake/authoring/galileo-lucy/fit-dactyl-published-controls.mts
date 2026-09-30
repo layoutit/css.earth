@@ -29,7 +29,7 @@ const previous = requireRecord(JSON.parse(inputBytes.toString())), inputs = new 
 for (const item of requireArray(previous.files)) {
   const p = requireRecord(item), path = requireString(p.path);
   if ((!path.startsWith('src/objects/') && !path.startsWith('tests/objects/fixtures/dactyl/')) || path.split('/').includes('..')) throw new Error('Invalid input path.');
-  const b = await readFile(path); verify(b, p); inputs.set(requireString(p.id), b);
+  const b = await readFile(path === 'tests/objects/fixtures/dactyl/galileo-pointing.json' ? 'src/objects/dactyl/fixtures/galileo-pointing.json' : path); verify(b, p); inputs.set(requireString(p.id), b);
 }
 function input(id: string) {const b = inputs.get(id); if (!b) throw new Error(`Missing input ${id}.`); return b;}
 const source = decodeCalibratedCamera(input('vicar'), 'vicar-byte-dn');

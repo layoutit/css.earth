@@ -50,7 +50,7 @@ The linked reports identify their tested sources, prepared files and limitations
 - **Scientific maps:** numeric height checks, six independent tomography anchors and
   geographic registration. Elevation ·
   Tomography · Night-light interpretation ·
-  [MUR native pixel checks](../../../tests/objects/fixtures/earth-enso/mur-native-witnesses.json).
+  [MUR native pixel checks](../../../src/objects/earth/fixtures/mur-native-witnesses.json).
 - **Retired geographic release:** the September 5 report records 19,632 published objects and
   25,344,236,995 bytes verified for release `fef1519d5f243617`, with Chrome checks at
   device pixel ratios (DPR) 1 and 2. This is dated delivery evidence, not a live availability check or

@@ -71,7 +71,7 @@ and display scale. Celmis never ranks these fits, but it was inspected during
 development, so this is an orientation-sensitivity check rather than blind
 qualification. It changes neither the original input pins nor the renderer.
 
-The independent [numerical fixture](../../../../tests/objects/fixtures/dactyl/galileo-pointing.json)
+The independent [numerical fixture](../../../../src/objects/dactyl/fixtures/galileo-pointing.json)
 records Python 3.12.14, SpiceyPy 8.2.0 and CSPICE N0067, the exact loaded kernels,
 load order, UTCs, API calls and native results. To repeat the native calculation
 in a SpiceyPy environment: clear the kernel pool, `furnsh` those three files in

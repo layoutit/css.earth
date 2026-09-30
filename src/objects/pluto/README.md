@@ -23,7 +23,7 @@ The LEISA reader matches 192 independent Astropy/NumPy sample decisions and the
 accepted cell counts for all three ice maps. The unchanged native maps give
 69.31% methane-rich ice and 19.88% nitrogen-rich ice averaged over 60–90° N,
 matching the paper's rounded 69% and 20% in section 3 and Figure 9.
-[Pinned reference values](../../../tests/objects/fixtures/pluto/leisa-astropy.json)
+[Pinned reference values](../../../src/objects/pluto/fixtures/leisa-astropy.json)
 and the comparison test
 identify the exact source files and oracle versions. These checks establish
 decoding, source sampling and the declared mask; they do not validate the

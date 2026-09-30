@@ -53,3 +53,8 @@ I used the repository's bounded `pnpm telescope papers` OpenAlex search with tar
 | Beta Pictoris b, `atmosphere` | 5 | [2026 JWST NIRCam variability work](https://arxiv.org/abs/2607.13133) is a candidate for time-dependent brightness, but does not report a spatially resolved limb profile. |
 
 The full authoring provenance pass could not complete in this selective checkout because the unrelated M31 image-layer bank is absent. The affected bodies' provenance was regenerated directly, and the published-catalogue check above passed. Repository-wide typechecking also needs ignored prepared assets outside these packages and was not used as evidence for this change.
+
+Current locations of the recorded suites:
+
+- [`tests/objects/unit/exoplanet-radius.test.mts`](https://github.com/layoutit/cssEarth/blob/3908a480ace01d884f66fdb93ed13f5f54dcde42/tests/objects/unit/exoplanet-radius.test.mts) (now `site/test/exoplanet-radius.test.mts`).
+- [`tests/objects/unit/runtime-package.test.mts`](https://github.com/layoutit/cssEarth/blob/3908a480ace01d884f66fdb93ed13f5f54dcde42/tests/objects/unit/runtime-package.test.mts) (now `site/test/runtime-package.test.mts`).

@@ -61,7 +61,7 @@ This bounded gate bundles the actual application preparation entrypoint, copies 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm -r --filter "./packages/**" build
-node tests/nebula/application-isolation.gate.ts
+node labs/nebula/application-isolation.gate.ts
 ```
 
 Logs and the resolved implementation closure are written under ignored `output/nebula-application-isolation/`. The gate is separate from routine unit discovery because it generates real atlases.

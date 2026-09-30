@@ -23,6 +23,7 @@ const relocatedPaths: Readonly<Record<string, string>> = {
   "tests/fixtures/fits/cube.fits": "packages/fits/src/node/fixtures/fits/cube.fits",
   "tests/fixtures/fits/eso-hierarchy.fits": "packages/fits/src/node/fixtures/fits/eso-hierarchy.fits",
   "tests/fixtures/fits/extensions.fits": "packages/fits/src/node/fixtures/fits/extensions.fits",
+  "tests/fixtures/fits/float32.fits": "packages/fits/src/node/fixtures/fits/float32.fits",
   "tests/fixtures/fits/float64.fits": "packages/fits/src/node/fixtures/fits/float64.fits",
   "tests/fixtures/fits/long-string.fits": "packages/fits/src/node/fixtures/fits/long-string.fits",
   "tests/fixtures/fits/scaled-blank.fits": "packages/fits/src/node/fixtures/fits/scaled-blank.fits",

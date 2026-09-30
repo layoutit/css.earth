@@ -5,7 +5,7 @@ const test = sourceTest();
 import { createObjectSelectionRuntime } from '@cssearth/renderer/testing';
 import { cameraMotionSignalFor } from '@cssearth/renderer/navigation';
 import { createPreparedResidency } from '@cssearth/renderer/testing';
-import { retainedPresentationFixture, preparedSelectionFixture } from "../../tests/platform/object-runtime-package.mts";
+import { retainedPresentationFixture, preparedSelectionFixture } from "./fixtures/object-runtime-package.mts";
 import { mountPreparedPresentation, initialObjectSelection } from '@cssearth/renderer/testing';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
