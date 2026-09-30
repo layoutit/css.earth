@@ -21,8 +21,11 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
     assert.deepEqual([system.name, system.route], [star.systemName, `/${system.id}/`]);
   }
   for (const id of ['wasp-43', 'hd-189733', 'hd-209458', 'k2-18', 'kepler-186', 'kepler-452', 'trappist-1', 'wasp-39', 'beta-pictoris', 'hr-8799', 'sgr-a-star', 'hd-110067', 'hd-29391', 'kepler-16-a', 'wd-1856-534', 'kelt-9', 'vhs-1256-1257', 'gq-lup', 'dh-tau', 'roxs-42b', 'wasp-76', 'pds-70', 'wasp-18', 'wasp-121', 'luhman-16', 'hip-65426', 'af-lep', 'ab-pic', 'yses-1', 'hd-206893', 'hd-95086', 'gj-504', 'hd-135344-a', 'eps-indi-a', 'hd-219134', 'hip-56998', 'hd-136352', 'gj-143', 'hd-39091', 'toi-2194', 'toi-5789', 'hd-97658', 'hd-63433', 'toi-2134', 'hd-207496', 'toi-836', 'hd-207897', 'hd-73583', 'hr-858', 'toi-431', 'hd-88986', 'hd-60779', 'kepler-444']) assert.ok(systems.some(system => system.id === id), `${id} keeps its system`);
-  // A page builds its systems from the world summary alone; they match the registry's.
-  assert.deepEqual(allPlanetarySystems(WORLD_OBJECTS), systems);
+  // A page builds its systems from the world summary alone; they match the registry's. The summary is regenerated on each
+  // machine, so positions of order 1e18 m agree to 12 significant digits, not to the last bit.
+  const rounded = (value: unknown): unknown => typeof value === 'number' ? Number(value.toPrecision(12))
+    : Array.isArray(value) ? value.map(rounded) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([key, item]) => [key, rounded(item)])) : value;
+  assert.deepEqual(rounded(allPlanetarySystems(WORLD_OBJECTS)), rounded(systems));
   // HD 189733 B has no measured orbit; it belongs to the system through the Gaia measurement that binds it to A (boundTo).
   // VHS 1256-1257 B and ROXs 42B B do have one: each circles A on its measured orbit, and the planet circles the pair.
   for (const [id, system] of [['earth', 'sun'], ['moon', 'sun'], ['comet-3i', 'sun'], ['sun', 'sun'], ['wasp-43b', 'wasp-43'], ['wasp-43', 'wasp-43'],

@@ -34,10 +34,6 @@
       "title": "Stereo and shading terrain model",
       "summary": "Height relative to the source ellipsoid, clipped at ±1 km, from stereo and shading."
     },
-    "shape": {
-      "title": "JPL v2 SPC shape model",
-      "summary": "Plain surface over a simplified version of JPL's corrected v2 shape; the original v1 solution is not used."
-    },
     "ice-absorption": {
       "title": "Partial Cassini VIMS water-ice signature",
       "detail": "Partial VIMS",

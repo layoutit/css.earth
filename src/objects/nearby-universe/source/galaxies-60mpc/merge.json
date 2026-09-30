@@ -7,12 +7,16 @@
   ],
   "densityCap": {
     "perMpc3": 0.005,
-    "kernelMpc": 6,
     "taperMpc": [
       30,
       60
     ],
-    "basis": "Presentation choice: 5 per 1,000 Mpc\u00b3, under the 8 CF4 holds from 20 to 40 Mpc. The kernel holds about five galaxies at the cap. Real concentrations above the cap are thinned to it; sparser regions, as the zone the Milky Way's disc hides, stay as they are."
+    "basis": "Presentation choice: 5 per 1,000 Mpc\u00b3, under the 8 CF4 holds from 20 to 40 Mpc. It is counted in shells 3 Mpc wide around the Sun, so only the catalogue's fall-off with distance is evened and a cluster keeps its contrast with the space around it.",
+    "shellMpc": 3,
+    "groupsFirst": {
+      "background": 1,
+      "basis": "Presentation choice: a shell's room goes first to galaxies in Cosmicflows-4 groups of two or more, the richest group first, so the dots trace the groups, filaments and clusters; as many again, drawn at random from the rest, fill the space between them, so the view still reads as open space. Doubling the dots cost no measurable time in the zoom profile (2026-09-30)."
+    }
   },
   "within": [
     "galaxies-200mpc"

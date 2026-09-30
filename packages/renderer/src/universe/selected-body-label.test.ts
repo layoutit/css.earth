@@ -1,11 +1,14 @@
 import { parseHTML } from 'linkedom';
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import { mountSelectedBodyLabel } from './selected-body-label.js';
+import { stubGlobal } from '@cssearth/objects/node/contract';
 
 const observations = new Map<Element, ResizeObserverCallback>();
-vi.stubGlobal('ResizeObserver', class {
+stubGlobal('ResizeObserver', class {
   private readonly callback: ResizeObserverCallback;
   constructor(callback: ResizeObserverCallback) { this.callback = callback; }
   observe(element: Element) { observations.set(element, this.callback); }
@@ -32,11 +35,11 @@ test('the caption sits below a body that fits, and leaves once it cannot sit cle
   label.prepare(body(10)); deliverSize(label.label);
   // About 100 px: the caption goes under the disc.
   const small = label.publish(camera, viewport, body(10), view);
-  expect(small).not.toBeNull();
-  expect(small!.top).toBeGreaterThan(100);
+  assert.notEqual(small, null);
+  assert.ok(small!.top > 100);
   // About 510 px: the lower limb passes the footer, so there is no clear place below. No edge or overlay placement.
-  expect(label.publish(camera, viewport, body(2.2), view)).toBeNull();
-  expect(label.label.dataset.placement).toBeUndefined();
+  assert.equal(label.publish(camera, viewport, body(2.2), view), null);
+  assert.equal(label.label.dataset.placement, undefined);
   label.destroy();
 });
 
@@ -44,12 +47,12 @@ test('the caption box offered to the context planner is the box it publishes for
   const label = mountSelectedBodyLabel(host, clock);
 
   // Before the caption is measured for a body there is no box to offer.
-  expect(label.rect(camera, viewport, body(10), view)).toBeNull();
-  expect(label.publish(camera, viewport, body(10), view)).toBeNull();
+  assert.equal(label.rect(camera, viewport, body(10), view), null);
+  assert.equal(label.publish(camera, viewport, body(10), view), null);
   deliverSize(label.label);
   const published = label.publish(camera, viewport, body(10), view);
-  expect(label.rect(camera, viewport, body(10), view)).toEqual(published);
-  expect(label.rect(camera, viewport, body(10), { ...view, overview: true })).toBeNull();
+  assert.deepEqual(label.rect(camera, viewport, body(10), view), published);
+  assert.equal(label.rect(camera, viewport, body(10), { ...view, overview: true }), null);
   label.destroy();
 });
 
@@ -59,29 +62,29 @@ test('the prepared destination caption keeps its node and transform when preview
   Object.defineProperties(node, { offsetWidth: { get: () => { measurements++; return 50; } }, offsetHeight: { get: () => 18 } });
   const destination = { ...body(10), id: 'lutetia', name: 'Lutetia', radiusM: 1.4 };
   owner.prepare(destination);
-  expect(measurements).toBe(0);
+  assert.equal(measurements, 0);
   deliverSize(node);
   const approaching = owner.publish(camera, viewport, destination, { ...view, preview: destination.id });
   const transform = node.style.transform;
   const settled = owner.publish(camera, viewport, destination, view);
-  expect(settled).toEqual(approaching);
-  expect(node.style.transform).toBe(transform);
-  expect(owner.label).toBe(node);
-  expect(measurements).toBe(0);
-  expect(node.textContent).toBe('Lutetia');
+  assert.deepEqual(settled, approaching);
+  assert.equal(node.style.transform, transform);
+  assert.equal(owner.label, node);
+  assert.equal(measurements, 0);
+  assert.equal(node.textContent, 'Lutetia');
   owner.destroy();
 });
 
 test('a new name waits for layout and requests publication; disposal releases its observer', () => {
-  const publish = vi.fn(() => true), owner = mountSelectedBodyLabel(host, clock, publish);
+  const publish = mock.fn(() => true), owner = mountSelectedBodyLabel(host, clock, publish);
   owner.prepare(body(10)); deliverSize(owner.label);
-  expect(publish).toHaveBeenCalledTimes(1);
+  assert.equal(publish.mock.callCount(), 1);
   const destination = { ...body(10), id: 'other', name: 'Other' };
   owner.prepare(destination);
-  expect(owner.rect(camera, viewport, destination, view)).toBeNull();
+  assert.equal(owner.rect(camera, viewport, destination, view), null);
   deliverSize(owner.label);
-  expect(owner.rect(camera, viewport, destination, view)).not.toBeNull();
-  owner.destroy(); expect(observations.has(owner.label)).toBe(false);
+  assert.notEqual(owner.rect(camera, viewport, destination, view), null);
+  owner.destroy(); assert.equal(observations.has(owner.label), false);
 });
 
 
@@ -91,11 +94,11 @@ test('a flattened mesh caption follows its projected lower edge instead of its l
   const sphere = owner.publish(camera, viewport, flattened, view)!;
   const projected = owner.publish(camera, viewport, flattened, { ...view, edge: () => 60 })!;
   const sphereRadius = viewport.focalPixels / Math.sqrt(24);
-  expect(sphere.top - projected.top).toBeCloseTo(sphereRadius - 60);
-  expect(owner.rect(camera, viewport, flattened, { ...view, edge: () => 60 })).toEqual(projected);
+  assert.ok(Math.abs((sphere.top - projected.top) - (sphereRadius - 60)) < 10 ** -2 / 2, `${(sphere.top - projected.top)} is not close to ${sphereRadius - 60}`);
+  assert.deepEqual(owner.rect(camera, viewport, flattened, { ...view, edge: () => 60 }), projected);
   // A rotated model reports its new lower edge without moving or replacing the label node.
   const rotated = owner.publish(camera, viewport, flattened, { ...view, edge: () => 90 })!;
-  expect(rotated.top - projected.top).toBe(30);
-  expect(owner.publish(camera, viewport, flattened, { ...view, edge: () => null })).toEqual(sphere);
+  assert.equal((rotated.top - projected.top), 30);
+  assert.deepEqual(owner.publish(camera, viewport, flattened, { ...view, edge: () => null }), sphere);
   owner.destroy();
 });

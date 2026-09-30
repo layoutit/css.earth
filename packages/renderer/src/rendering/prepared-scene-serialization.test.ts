@@ -2,7 +2,9 @@ import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { preparedObjectText } from '@cssearth/objects/node';
 import { readFile } from 'node:fs/promises';
-import { expect, test as vitestTest } from 'vitest';
+import { test as nodeTest } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedCssObject } from '../loader.js';
 import { serializePreparedScene } from './prepared-scene-serialization.js';
@@ -13,7 +15,7 @@ import { initialObjectSelection } from '../runtime/object-contract.js';
 const root = new URL('../../../../', import.meta.url);
 // Saturn's prepared runtime is restored, not tracked; an unrestored checkout skips the file as the site test did through sourceTest().
 const restored = existsSync(new URL('src/objects/saturn/prepared/runtime.json', root));
-const test = vitestTest.skipIf(!restored);
+const test = (name: string, body: () => void | Promise<void>) => nodeTest(name, { skip: !restored }, body);
 async function fixture(id = 'saturn') {
   const descriptor = parseObjectDescriptor(await readFile(new URL(`src/objects/${id}/object.json`, root), 'utf8'));
   if (!descriptor.prepared) throw new Error('Fixture requires its prepared reference.');
@@ -26,12 +28,12 @@ const definition = restored ? await loadPreparedCssObject(descriptor, { async re
 test('serialization publishes the authenticated topology without changing its prepared records', () => {
   const before = JSON.stringify(definition);
   const scene = serializePreparedScene(definition);
-  expect(scene.nodes).toBe(definition.tree.nodes.length);
+  assert.equal(scene.nodes, definition.tree.nodes.length);
   // What the initial selection hides stays out of the markup (prepared-omitted-nodes.ts).
   const variant = selectedPreparedVariant(definition, initialObjectSelection(definition.controls));
-  expect([...scene.html.matchAll(/data-prepared-node="\d+"/g)].length).toBe(definition.tree.nodes.length - omittedPreparedNodes(definition.tree, variant).size);
-  expect([...scene.html.matchAll(/class="polycss-scene"/g)].length).toBe(1);
-  expect(JSON.stringify(definition)).toBe(before);
+  assert.equal([...scene.html.matchAll(/data-prepared-node="\d+"/g)].length, definition.tree.nodes.length - omittedPreparedNodes(definition.tree, variant).size);
+  assert.equal([...scene.html.matchAll(/class="polycss-scene"/g)].length, 1);
+  assert.equal(JSON.stringify(definition), before);
 });
 
 test('every Saturn dataset publishes the nodes it shows and applies its prepared presentation', () => {
@@ -39,17 +41,16 @@ test('every Saturn dataset publishes the nodes it shows and applies its prepared
   const normal = serializePreparedScene(definition);
   for (const dataset of definition.controls.datasets!.controls) {
     const scene = serializePreparedScene(definition, dataset.id);
-    expect(scene.nodes).toBe(normal.nodes);
+    assert.equal(scene.nodes, normal.nodes);
     // Each dataset's markup is the whole tree less what its selection hides.
     const omitted = omittedPreparedNodes(definition.tree, selectedPreparedVariant(definition, initialObjectSelection(definition.controls, dataset.id)));
-    expect([...scene.html.matchAll(/data-prepared-node="(\d+)"/g)].map(match => Number(match[1])).sort((a, b) => a - b))
-      .toEqual(definition.tree.nodes.map((_, index) => index).filter(index => !omitted.has(index)));
-    if (dataset.id === 'normal') expect(scene).toEqual(normal);
-    else expect(scene.html).not.toBe(normal.html);
-    if (dataset.id === 'ultraviolet') expect(scene.attributes['data-dataset']).toBe('ultraviolet');
+    assert.deepEqual([...scene.html.matchAll(/data-prepared-node="(\d+)"/g)].map(match => Number(match[1])).sort((a, b) => a - b), definition.tree.nodes.map((_, index) => index).filter(index => !omitted.has(index)));
+    if (dataset.id === 'normal') assert.deepEqual(scene, normal);
+    else assert.notEqual(scene.html, normal.html);
+    if (dataset.id === 'ultraviolet') assert.equal(scene.attributes['data-dataset'], 'ultraviolet');
   }
-  expect(() => serializePreparedScene(definition, 'unknown')).toThrow(/Unknown object dataset/);
-  expect(JSON.stringify(definition)).toBe(before);
+  assert.throws(() => serializePreparedScene(definition, 'unknown'), /Unknown object dataset/);
+  assert.equal(JSON.stringify(definition), before);
 });
 
 test('HTML escaping and ordered CSS writes preserve quoted semicolons and the initial selection', () => {
@@ -64,16 +65,16 @@ test('HTML escaping and ordered CSS writes preserve quoted semicolons and the in
       { target: -1, kind: 'attribute', name: 'data-dataset', value: 'initial' },
     ] }],
   });
-  expect(scene.html).toMatch(/title="&lt;a &amp; &quot;b&quot;&gt;"/);
-  expect(scene.html).toMatch(/color:blue;--label:&quot;a;b&quot;;background-image:url\(&quot;\/a;b.png&quot;\)/);
-  expect(scene.attributes).toEqual({ 'data-dataset': 'initial' });
-  expect(scene.classes).toEqual(['prepared']);
+  assert.match(scene.html, /title="&lt;a &amp; &quot;b&quot;&gt;"/);
+  assert.match(scene.html, /color:blue;--label:&quot;a;b&quot;;background-image:url\(&quot;\/a;b.png&quot;\)/);
+  assert.deepEqual(scene.attributes, { 'data-dataset': 'initial' });
+  assert.deepEqual(scene.classes, ['prepared']);
 });
 
 test('a view resolves only the textures it writes, and reports them', () => {
   const resolved: string[] = [];
   const scene = serializePreparedScene(definition, undefined, undefined, (key, address) => { resolved.push(key); return `https://earth-assets.example${address}`; });
-  expect(resolved).toEqual(scene.textures.map(texture => texture.key));
-  expect(scene.textures.length > 0 && scene.textures.length < definition.assets.entries.length).toBe(true);
-  for (const { address } of scene.textures) expect(scene.html.includes(`https://earth-assets.example${address}`.replaceAll('"', '&quot;'))).toBe(true);
+  assert.deepEqual(resolved, scene.textures.map(texture => texture.key));
+  assert.equal((scene.textures.length > 0 && scene.textures.length < definition.assets.entries.length), true);
+  for (const { address } of scene.textures) assert.equal(scene.html.includes(`https://earth-assets.example${address}`.replaceAll('"', '&quot;')), true);
 });

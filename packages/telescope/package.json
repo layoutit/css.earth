@@ -37,8 +37,7 @@
   "scripts": {
     "build": "tsup",
     "prepack": "npm run build",
-    "typecheck": "tsc --noEmit -p tsconfig.lib.json && tsc --noEmit -p tsconfig.node.json",
-    "test": "vitest run"
+    "typecheck": "tsc --noEmit -p tsconfig.lib.json && tsc --noEmit -p tsconfig.node.json"
   },
   "dependencies": {
     "@cssearth/core": "workspace:*",
@@ -47,7 +46,6 @@
   "devDependencies": {
     "@types/node": "^26.4.0",
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3",
-    "vitest": "^3.1.1"
+    "typescript": "^5.3.3"
   }
 }

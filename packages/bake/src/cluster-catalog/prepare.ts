@@ -3,7 +3,10 @@ import { M_PER_PC } from '@cssearth/astronomy';
 import type { PreparedClusterCatalog, PreparedClusterRecord, SpatialCatalogSource } from '@cssearth/catalog';
 import { galaxyPositionM } from '../galaxy-catalog/index.ts';
 
-export interface ClusterSelection { readonly id: string; readonly name: string; readonly catalogueId: string; readonly aliases: readonly string[] }
+/** A cluster the recipe selects: its MCXC-II row, its Cosmicflows-4 group (the PGC number of the group's dominant galaxy),
+ * whose measured distance places it, and optionally the package that details it (its member dots). */
+export interface ClusterSelection { readonly id: string; readonly name: string; readonly catalogueId: string; readonly aliases: readonly string[];
+  readonly cf4Group: string; readonly detailedObjectId?: string }
 export interface ClusterRecipe {
   readonly schema: 'cssearth-cluster-catalog-source@1';
   readonly frame: PreparedClusterCatalog['frame'];
@@ -14,7 +17,11 @@ export interface ClusterRecipe {
   readonly selection: readonly ClusterSelection[];
   readonly description: string;
   readonly distanceCaveat: string;
+  /** The source whose group distances place the clusters. */
+  readonly groupDistanceSourceId: string;
 }
+/** A Cosmicflows-4 group's distance: the group's distance modulus on the calibrated scale (table 3, DMzp), in parsecs. */
+export interface ClusterGroupDistance { readonly group: string; readonly valuePc: number }
 export interface McxcRow {
   readonly catalogueId: string; readonly originalName: string; readonly alternateName: string;
   readonly raDeg: number; readonly decDeg: number; readonly redshift: number;
@@ -52,7 +59,7 @@ export function comovingDistanceMpc(redshift: number, hubbleKmPerSecPerMpc: numb
   return 299792.458 / hubbleKmPerSecPerMpc * step * sum / 3;
 }
 
-export function prepareClusterCatalog(rows: readonly McxcRow[], recipe: ClusterRecipe): PreparedClusterCatalog {
+export function prepareClusterCatalog(rows: readonly McxcRow[], recipe: ClusterRecipe, groupDistances: ReadonlyMap<string, ClusterGroupDistance>): PreparedClusterCatalog {
   if (recipe.schema !== 'cssearth-cluster-catalog-source@1' || rows.length !== recipe.rowCount || recipe.cosmology.model !== 'flat-lambda-cdm') throw new TypeError('Cluster source recipe does not match its release.');
   const byId = new Map(rows.map(row => [row.catalogueId, row]));
   const objects: PreparedClusterRecord[] = recipe.selection.map(selection => {
@@ -64,11 +71,18 @@ export function prepareClusterCatalog(rows: readonly McxcRow[], recipe: ClusterR
     if (Math.abs(angularScale - row.scaleKpcPerArcsec) > .000051) throw new TypeError(`MCXC-II angular scale disagrees with adopted cosmology: ${row.catalogueId}`);
     const ref = `${recipe.catalogueSourceId}:${row.catalogueId}`, properRadiusM = row.r500Mpc * 1e6 * M_PER_PC;
     const comovingRadiusM = properRadiusM * (1 + row.redshift);
+    // The cluster sits at its Cosmicflows-4 group's measured distance, where the field draws its member galaxies. The
+    // redshift's comoving distance only checks the catalogue's angular scale above.
+    const group = groupDistances.get(selection.cf4Group);
+    if (!group) throw new TypeError(`${selection.id}: Cosmicflows-4 group ${selection.cf4Group} has no group distance in ${recipe.groupDistanceSourceId}.`);
+    const distance = { valuePc: group.valuePc, sourceRef: `${recipe.groupDistanceSourceId}:${group.group}`,
+      method: 'Cosmicflows-4 group distance: the weighted average of its members\' distance moduli on the calibrated scale (table 3, DMzp).' };
     return { id: selection.id, name: selection.name, kind: 'galaxy-cluster', status: 'confirmed',
       aliases: [...new Set([...selection.aliases, row.originalName, row.alternateName, row.catalogueId].filter(Boolean))],
-      positionM: galaxyPositionM(row.raDeg, row.decDeg, distanceMpc * 1e6),
+      positionM: galaxyPositionM(row.raDeg, row.decDeg, distance.valuePc),
       skyPosition: { raDeg: row.raDeg, decDeg: row.decDeg, sourceRef: ref },
-      distance: { valuePc: distanceMpc * 1e6, method: 'Redshift-derived comoving distance in flat ΛCDM; peculiar velocities are not corrected.', sourceRef: ref },
+      distance,
+      ...(selection.detailedObjectId === undefined ? {} : { detailedObjectId: selection.detailedObjectId }),
       redshift: { value: row.redshift, type: row.redshiftType, sourceRef: row.redshiftRef },
       classification: { name: 'X-ray selected galaxy cluster', sourceRef: ref,
         basis: 'MCXC-II R500 is an X-ray-derived overdensity aperture (500 times the critical density), not the cluster boundary or member distribution.' },

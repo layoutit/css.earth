@@ -53,6 +53,8 @@ test('surface labels keep no frame loop while they are off, the default', async 
   const loaded = labels.loaded();
   release(new Response(JSON.stringify({ schema: 'cssearth-prepared-surface-features@1', objectId: 'moon',
     source: 'fixture', snapshotDate: '2026-09-27', sourcePage: 'https://example.org', license: 'fixture', qualification: 'fixture', features: [] })));
+  // The catalogue is written into the labels on frames: run them until it has loaded.
+  while (!labels.stats().loaded) { await new Promise(resolve => setTimeout(resolve, 0)); run(); }
   await loaded;
   const pieces = [...host.querySelectorAll('[data-feature-outline-piece]')];
   assert.equal(pieces.length, 256, 'an explicit catalogue request prepares the retained outline capacity');

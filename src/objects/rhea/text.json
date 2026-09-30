@@ -58,10 +58,6 @@
       "title": "SPC relative brightness model",
       "summary": "Brightness solved with the Cassini shape, relative to an average of 1; not visible color or reflectance."
     },
-    "shape": {
-      "title": "SPC shape model",
-      "summary": "Plain surface over a 2,000-face version of Cassini's Q128 shape; small terrain is left out."
-    },
     "infrared": {
       "title": "Cassini VIMS infrared mosaic",
       "detail": "False color",

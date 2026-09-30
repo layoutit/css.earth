@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { test } from "vitest";
+import { test } from 'node:test';
 import { createPreparedEllipsoidProjection, readPreparedCounterMatrix } from '../prepared-data/prepared-ellipsoid-projection.js';
 import { readPreparedMatrix4 } from '@cssearth/core';
 

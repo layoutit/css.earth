@@ -1,0 +1,173 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "members",
+      "path": "src/objects/fornax-cluster/source/dots/fcc-members.csv.gz",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/VII/180/p2tbl2.dat.gz",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/ftp/VII/180/p2tbl2.dat.gz",
+      "title": "Fornax Cluster members from the Fornax Cluster Catalog that Cosmicflows-4 does not hold",
+      "credit": "Ferguson (1989), AJ 98, 367; CDS VII/180",
+      "acquisition": "Written 2026-09-30 by packages/bake/authoring/fornax-cluster/members.mts from the CDS table (the origin), with each member's Cosmicflows-4 group distance from the Nearby Universe's tracked table.",
+      "generator": "packages/bake/authoring/fornax-cluster/members.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ferguson-1989-fcc",
+            "role": "material",
+            "evidence": "src/objects/fornax-cluster/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "cosmicflows-4-groups"
+      ],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    },
+    {
+      "id": "cosmicflows-4-groups",
+      "path": "src/objects/nearby-universe/source/galaxies/cf4-hyperleda.csv.gz",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/944/94/table3.dat.gz",
+      "sourceUrl": "https://doi.org/10.3847/1538-4357/ac94d8",
+      "title": "Cosmicflows-4 group distances, as joined into the Nearby Universe's tracked galaxy table",
+      "credit": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94, distributed by CDS/VizieR",
+      "acquisition": "Read from the Nearby Universe's tracked table, whose G1PGC and GDMzp columns packages/bake/authoring/nearby-universe/cf4-groups.mts joined from CDS tables 2 and 3.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cosmicflows-4",
+            "role": "method",
+            "evidence": "src/objects/fornax-cluster/source/dots/points.json#/table/groupDistance"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite Tully et al. (2023) and CDS/VizieR."
+    },
+    {
+      "id": "kc96-elliptical",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/elliptical_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/elliptical_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti elliptical template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/fornax-cluster/source/dots/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-s0",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/s0_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/s0_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti s0 template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/fornax-cluster/source/dots/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-sa",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/sa_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/sa_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti sa template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/fornax-cluster/source/dots/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-sb",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/sb_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/sb_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti sb template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/fornax-cluster/source/dots/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    },
+    {
+      "id": "kc96-sc",
+      "path": "src/objects/nearby-universe/source/galaxies/kc96/sc_template.fits",
+      "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/sc_template.fits",
+      "sourceUrl": "https://doi.org/10.1086/177583",
+      "title": "Kinney-Calzetti sc template spectrum",
+      "credit": "Kinney et al. (1996), ApJ 467, 38; STScI reference atlases",
+      "acquisition": "Downloaded from the STScI reference atlases on 2026-09-29.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "kinney-1996-galaxy-templates",
+            "role": "method",
+            "evidence": "src/objects/fornax-cluster/source/dots/points.json#/appearance/colorByClass"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "STScI reference data; cite Kinney et al. (1996)."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/fornax-cluster/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/fornax-cluster/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { containsScaledFocusPosition, presentPhysicalPoseInVolume } from './scaled-focus-frame.js';
 import type { PhysicalCameraPose } from './selection-flight.js';
 import type { ScaledFocusFrame } from './scaled-focus-frame.js';
@@ -17,23 +19,23 @@ describe('scaled focus frame', () => {
     };
     const original = structuredClone(observer);
     const local = presentPhysicalPoseInVolume(observer, frame);
-    expect(local.positionUnits.every(Number.isFinite)).toBe(true);
-    expect(local.orientationXyzw).toEqual([0, -Math.SQRT1_2, 0, Math.SQRT1_2]);
-    expect(observer).toEqual(original);
+    assert.equal(local.positionUnits.every(Number.isFinite), true);
+    assert.deepEqual(local.orientationXyzw, [0, -Math.SQRT1_2, 0, Math.SQRT1_2]);
+    assert.deepEqual(observer, original);
   });
 
   it('keeps kpc-scale observers finite and treats prepared bounds as non-clamping coverage', () => {
     const local = presentPhysicalPoseInVolume({ positionM: [-7e20, 6e20, 9e19], orientationXyzw: quarterTurn }, frame);
-    expect(local.positionUnits.every(Number.isFinite)).toBe(true);
-    expect(containsScaledFocusPosition(frame, [0, 0, 0])).toBe(true);
-    expect(containsScaledFocusPosition(frame, [11, 0, 0])).toBe(false);
+    assert.equal(local.positionUnits.every(Number.isFinite), true);
+    assert.equal(containsScaledFocusPosition(frame, [0, 0, 0]), true);
+    assert.equal(containsScaledFocusPosition(frame, [11, 0, 0]), false);
   });
 
-  it.each([
+  for (const [invalid] of [
     [{ ...frame, metersPerUnit: 0 } as ScaledFocusFrame],
     [{ ...frame, boundsUnits: { min: [0, 0, 0], max: [0, 1, 1] } } as ScaledFocusFrame],
     [{ ...frame, localToReferenceXyzw: [0, 0, 0, 2] } as ScaledFocusFrame],
-  ])('rejects invalid physical frame %#', invalid => {
-    expect(() => presentPhysicalPoseInVolume({ positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] }, invalid)).toThrow();
+  ]) it(`rejects invalid physical frame ${invalid}`, () => {
+    assert.throws(() => presentPhysicalPoseInVolume({ positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] }, invalid));
   });
 });

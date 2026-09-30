@@ -1,0 +1,126 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "dots",
+  "published": true,
+  "table": {
+    "path": "evcc-members.csv.gz",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/215/22/table2.dat",
+    "generator": "packages/bake/authoring/virgo-cluster/members.mts",
+    "bytes": 9871,
+    "format": "csv",
+    "gzip": true,
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 6
+    },
+    "distanceUnit": "distance-modulus",
+    "groupDistance": {
+      "group": 5,
+      "distance": 6,
+      "depth": "isotropic",
+      "source": "cosmicflows-4",
+      "basis": "Every member sits at the cluster's Cosmicflows-4 group distance (table 3, DMzp), as the Nearby Universe places the members Cosmicflows-4 holds, spread in depth as widely as the members spread across the sky: that the cluster is as deep as it is wide is an assumption, not a measurement of any member's depth."
+    },
+    "note": "Column 4 is RC3's numerical stage of each galaxy's EVCC morphology (members.mts): E and dE -5, S0 and dS0 -2, Sa 1, Sb 3, Sc 5, Sd 7, Sm 9, Irr 10; an unsubdivided spiral or edge-on disk has none."
+  },
+  "sample": "The 797 of the Extended Virgo Cluster Catalog's 1,028 certain members (table 2, MmI = M, by redshift against the Virgo infall model) that Cosmicflows-4 does not hold: the other 231 are within 10 arcsec of a Cosmicflows-4 galaxy the Nearby Universe field draws.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "unit": "Mpc",
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "kim-2014-evcc",
+  "meaning": "Virgo Cluster member galaxies from the Extended Virgo Cluster Catalog (Kim et al. 2014) that the Nearby Universe field does not draw, one dot each at Virgo's Cosmicflows-4 group distance, in the colour of its type. Drawn when the cluster is selected.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "colorByClass": {
+      "column": 4,
+      "classes": [
+        {
+          "label": "elliptical (T below -3.5)",
+          "below": -3.5,
+          "spectrum": {
+            "path": "../../../nearby-universe/source/galaxies/kc96/elliptical_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "lenticular (T -3.5 to -0.5)",
+          "below": -0.5,
+          "spectrum": {
+            "path": "../../../nearby-universe/source/galaxies/kc96/s0_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "Sa (T -0.5 to 2)",
+          "below": 2,
+          "spectrum": {
+            "path": "../../../nearby-universe/source/galaxies/kc96/sa_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "Sb (T 2 to 4)",
+          "below": 4,
+          "spectrum": {
+            "path": "../../../nearby-universe/source/galaxies/kc96/sb_template.fits",
+            "bytes": 20160,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom"
+          }
+        },
+        {
+          "label": "Sc and later (T 4 and above)",
+          "spectrum": {
+            "path": "../../../nearby-universe/source/galaxies/kc96/sc_template.fits",
+            "bytes": 17280,
+            "wavelength": "WAVELENGTH",
+            "flux": "FLUX",
+            "wavelengthUnit": "angstrom",
+            "endsNm": {
+              "value": 766,
+              "basis": "The Sc template's optical spectrum ends at 766 nm. Cutting the other four templates at 766 nm leaves each colour the same to the sRGB step (checked 2026-09-29), since the eye's response there is under 0.1% of its peak."
+            }
+          }
+        }
+      ],
+      "missing": {
+        "label": "no type",
+        "colorCss": "#ffffff",
+        "basis": "The D65 white point: a galaxy with no measured type is drawn without a colour."
+      }
+    },
+    "toneBy": {
+      "magnitudeColumn": 7,
+      "band": "B from the EVCC's SDSS g and r magnitudes (Jester et al. 2005: B = g + 0.39 (g - r) + 0.21), not corrected for extinction",
+      "brightMagnitude": -21.5,
+      "faintMagnitude": -17.5,
+      "faintTone": 0.3,
+      "steps": 8,
+      "basis": "The Nearby Universe field's tone scale (its galaxies' recipe), so a member is as bright as a field galaxy of the same absolute magnitude: each galaxy's absolute B magnitude (its B magnitude minus the group's distance modulus) darkens its colour, from full at M_B -21.5 to 30% at -17.5, linear in magnitude. Galactic extinction toward the cluster, about 0.1 mag in B, is not removed."
+    },
+    "fullDetail": {
+      "units": 100,
+      "basis": "Presentation choice: whole within 100 Mpc of the Sun, where the Nearby Universe draws its field whole, so every member shows while the cluster is selected (the bank's origin is the Sun; the renderer's default of 10 kpc suits a galaxy's own dots)."
+    }
+  },
+  "classBasis": "Class bounds are the midpoints between the de Vaucouleurs numerical types the templates stand for (E -5, S0 -2, Sa 1, Sb 3, Sc 5); types later than Sc take the Sc template, the latest in the atlas."
+}

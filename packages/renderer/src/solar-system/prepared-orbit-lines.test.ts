@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { mountPreparedOrbitLines, ORBIT_OPACITY_LEVELS } from './prepared-orbit-lines.js';
 import type { OrbitSegment } from './types.js';
 
@@ -33,55 +35,55 @@ test('strokes share one svg per world context, name each group by its body and j
   const mars = orbit('mars'), earth = orbit('earth');
   const a = mountPreparedOrbitLines(mars.root, { renderer: 'strokes', id: 'mars', depthBase: 700 });
   const b = mountPreparedOrbitLines(earth.root, { renderer: 'strokes', id: 'earth', dashed: true, depthBase: 700 });
-  expect(root.children.filter(child => child.tagName === 'svg')).toHaveLength(0);
+  assert.equal(root.children.filter(child => child.tagName === 'svg').length, 0);
   a.publish([chord(0, 0, 10, 0, 1), chord(10, 0, 10, 10, 1), chord(20, 20, 30, 20, .5), chord(30, 20, 30, 30, .3)]);
   b.publish([chord(0, 0, 1, 0, 1)]);
   const svgs = root.children.filter(child => child.tagName === 'svg');
-  expect(svgs).toHaveLength(1);
+  assert.equal(svgs.length, 1);
   // Its box is a world-context.css rule; only the stage's depth is inline.
-  expect(svgs[0]!.style).toEqual({ zIndex: '700' });
+  assert.deepEqual(svgs[0]!.style, { zIndex: '700' });
   const [groupA, groupB] = svgs[0]!.children;
   // No inline colour: the published swatch rule for [data-context-orbit] colours the group like its marker.
-  expect(groupA!.style.color).toBeUndefined(); expect(groupA!.dataset.contextOrbit).toBe('mars');
-  expect(groupB!.dataset.contextPlacement).toBe('approximate');
-  expect(a.presentation.dataset).toBe(groupA!.dataset); expect(b.presentation.dataset).toBe(groupB!.dataset);
+  assert.equal(groupA!.style.color, undefined); assert.equal(groupA!.dataset.contextOrbit, 'mars');
+  assert.equal(groupB!.dataset.contextPlacement, 'approximate');
+  assert.equal(a.presentation.dataset, groupA!.dataset); assert.equal(b.presentation.dataset, groupB!.dataset);
   a.publish([chord(0, 0, 10, 0, 1), chord(10, 0, 10, 10, 1), chord(20, 20, 30, 20, .5), chord(30, 20, 30, 30, .3)]);
   // Polylines are created in ascending opacity level: a weight takes the level at or above it.
   const level = (weight: number) => Math.ceil(weight * ORBIT_OPACITY_LEVELS) / ORBIT_OPACITY_LEVELS;
   const lines = groupA!.children;
-  expect(lines.map(line => line.tagName)).toEqual(['polyline', 'polyline', 'polyline']);
-  expect(lines.map(line => line.getAttribute('points'))).toEqual(['30,20 30,30', '20,20 30,20', '0,0 10,0 10,10']);
-  expect(lines.map(line => Number(line.style.strokeOpacity))).toEqual([level(.3), level(.5), 1]);
-  expect(lines.every(line => line.style.opacity === undefined)).toBe(true);
+  assert.deepEqual(lines.map(line => line.tagName), ['polyline', 'polyline', 'polyline']);
+  assert.deepEqual(lines.map(line => line.getAttribute('points')), ['30,20 30,30', '20,20 30,20', '0,0 10,0 10,10']);
+  assert.deepEqual(lines.map(line => Number(line.style.strokeOpacity)), [level(.3), level(.5), 1]);
+  assert.equal(lines.every(line => line.style.opacity === undefined), true);
   // Group opacity reaches the compositor as stroke opacity on every run, never as an effect.
   a.presentation.style.opacity = '0.5';
-  expect(a.presentation.style.opacity).toBe('0.5');
-  expect(lines.map(line => Number(line.style.strokeOpacity))).toEqual([level(.3) / 2, level(.5) / 2, .5]);
-  expect(groupA!.style.opacity).toBeUndefined();
+  assert.equal(a.presentation.style.opacity, '0.5');
+  assert.deepEqual(lines.map(line => Number(line.style.strokeOpacity)), [level(.3) / 2, level(.5) / 2, .5]);
+  assert.equal(groupA!.style.opacity, undefined);
   a.presentation.style.opacity = '1';
-  expect(groupA!.style.display).toBe('');
+  assert.equal(groupA!.style.display, '');
   // The same chords write nothing; a break in the chain starts a second run.
   const writes = a.stats().pointWrites;
   a.publish([chord(0, 0, 10, 0, 1), chord(10, 0, 10, 10, 1), chord(20, 20, 30, 20, .5), chord(30, 20, 30, 30, .3)]);
-  expect(a.stats().pointWrites).toBe(writes);
+  assert.equal(a.stats().pointWrites, writes);
   a.publish([chord(0, 0, 10, 0, 1), chord(40, 40, 50.06, 40.04, 1)]);
-  expect(groupA!.children.filter(line => line.getAttribute('points')).map(line => line.getAttribute('points'))).toEqual(['0,0 10,0', '40,40 50.1,40']);
+  assert.deepEqual(groupA!.children.filter(line => line.getAttribute('points')).map(line => line.getAttribute('points')), ['0,0 10,0', '40,40 50.1,40']);
   // A dashed orbit keeps every chord; the stylesheet dashes the group.
   b.publish([chord(0, 0, 1, 0, 1), chord(1, 0, 2, 0, 1), chord(2, 0, 3, 0, 1)]);
-  expect(groupB!.children[0]!.getAttribute('points')).toBe('0,0 1,0 2,0 3,0');
+  assert.equal(groupB!.children[0]!.getAttribute('points'), '0,0 1,0 2,0 3,0');
   a.publish([]);
-  expect(groupA!.style.display).toBe('none'); expect(lines.every(line => line.getAttribute('points') === null)).toBe(true);
+  assert.equal(groupA!.style.display, 'none'); assert.equal(lines.every(line => line.getAttribute('points') === null), true);
   a.destroy();
-  expect(svgs[0]!.children).toEqual([groupB]);
+  assert.deepEqual(svgs[0]!.children, [groupB]);
 });
 
 test('bars keep their host as presentation and an orbit-less root gets bars whatever the renderer', () => {
   const { orbit } = world();
   const venus = orbit('venus').root, bars = mountPreparedOrbitLines(venus, { renderer: 'bars', capacity: 8 });
-  expect(bars.presentation).toBe(venus);
+  assert.equal(bars.presentation, venus);
   const detached = new FakeDocument().createElement('div') as unknown as HTMLElement;
   const fallback = mountPreparedOrbitLines(detached, { renderer: 'strokes', capacity: 4 });
-  expect(fallback.presentation).toBe(detached);
+  assert.equal(fallback.presentation, detached);
 });
 
 
@@ -89,11 +91,11 @@ test('detached orbit owners attach only a populated group on demand and reuse it
   const { root } = world(), host = root.ownerDocument.createElement('div');
   const orbit = mountPreparedOrbitLines(host as unknown as HTMLElement, { renderer: 'strokes', strokeHost: root as unknown as HTMLElement, id: 'test', depthBase: 7 });
   orbit.publish([]);
-  expect(root.children).toHaveLength(0);
+  assert.equal(root.children.length, 0);
   orbit.publish([chord(0, 0, 10, 10, 1)]);
   const svg = root.children[0]!, group = svg.children[0]!, line = group.children[0]!;
-  expect(line.getAttribute('points')).toBe('0,0 10,10');
+  assert.equal(line.getAttribute('points'), '0,0 10,10');
   orbit.publish([]); orbit.publish([chord(0, 0, 10, 10, 1)]);
-  expect(root.children).toEqual([svg]); expect(svg.children).toEqual([group]); expect(group.children).toEqual([line]);
-  orbit.destroy(); expect(svg.children).toHaveLength(0);
+  assert.deepEqual(root.children, [svg]); assert.deepEqual(svg.children, [group]); assert.deepEqual(group.children, [line]);
+  orbit.destroy(); assert.equal(svg.children.length, 0);
 });

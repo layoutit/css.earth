@@ -1,4 +1,4 @@
-import { onTestFinished, test } from 'vitest';
+import { after, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -9,6 +9,10 @@ import { recolorCloudSlices } from './material.ts';
 import { compilerSlabMaterial } from '../../materials/slab-material.ts';
 import { readVolumeLayerPlan, validateVolumeLayerSlices, type VolumeLayerPlan } from '../../contracts/volume-slices.ts';
 
+// Temporary checkouts the tests make, removed once the file's tests finish.
+const temporary: string[] = [];
+after(() => Promise.all(temporary.map(path => rm(path, { recursive: true, force: true }))));
+
 function plan(): VolumeLayerPlan {
   return { schema: 'cssearth-volume-layer-plan@1', referenceSliceCounts: { x: 4, y: 4, z: 4 }, referenceSamplesPerSlab: 4,
     axes: { x: [{ startCell: 0, endCell: 1 }, { startCell: 1, endCell: 4 }],
@@ -18,7 +22,7 @@ function plan(): VolumeLayerPlan {
 
 async function fixture(): Promise<MasterVolumeOptions> {
   const directory = await mkdtemp(join(tmpdir(), 'volume-layer-test-'));
-  onTestFinished(() => rm(directory, { recursive: true, force: true }));
+  temporary.push(directory);
   return { boundsKpc: { min: [-1, -2, -3], max: [2, 2, 3] }, sliceCounts: { x: 3, y: 4, z: 5 },
     samplesPerSlab: 4, exposureGain: .7, masterWidth: 4, masterDirectory: join(directory, 'master'),
     deliveryBanks: [], unitsPerSourceUnit: 7, provenance: { fixture: 'legacy reference before optional layer layouts' }, onProgress() {},

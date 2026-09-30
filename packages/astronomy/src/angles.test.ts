@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { distance, magnitude } from './__fixtures__/compare.js'
 import {
   ARCSEC_PER_RAD,
@@ -20,20 +22,20 @@ import type { Vec3 } from './vec3.js'
 describe('angle units', () => {
   it('round-trips degrees and arcseconds', () => {
     for (const deg of [0, 1, -1, 23.4392911, 359.999, -720.5]) {
-      expect(radToDeg(degToRad(deg))).toBeCloseTo(deg, 12)
+      assert.ok(Math.abs(radToDeg(degToRad(deg)) - (deg)) < 10 ** -12 / 2, `${radToDeg(degToRad(deg))} is not close to ${deg}`)
     }
-    expect(arcsecToRad(3600)).toBeCloseTo(degToRad(1), 15)
-    expect(RAD_PER_ARCSEC * ARCSEC_PER_RAD).toBeCloseTo(1, 15)
-    expect(RAD_PER_DEG * 180).toBeCloseTo(Math.PI, 15)
+    assert.ok(Math.abs(arcsecToRad(3600) - (degToRad(1))) < 10 ** -15 / 2, `${arcsecToRad(3600)} is not close to ${degToRad(1)}`)
+    assert.ok(Math.abs((RAD_PER_ARCSEC * ARCSEC_PER_RAD) - (1)) < 10 ** -15 / 2, `${(RAD_PER_ARCSEC * ARCSEC_PER_RAD)} is not close to ${1}`)
+    assert.ok(Math.abs((RAD_PER_DEG * 180) - (Math.PI)) < 10 ** -15 / 2, `${(RAD_PER_DEG * 180)} is not close to ${Math.PI}`)
   })
 
   it('normalizes into [0, 2*pi) including negatives and many turns', () => {
     for (const rad of [0, 0.5, -0.5, Math.PI, 7 * Math.PI, -7 * Math.PI, 1e6]) {
       const wrapped = normalizeAngleRad(rad)
-      expect(wrapped).toBeGreaterThanOrEqual(0)
-      expect(wrapped).toBeLessThan(2 * Math.PI)
-      expect(Math.abs(Math.sin(wrapped) - Math.sin(rad))).toBeLessThan(1e-9)
-      expect(Math.abs(Math.cos(wrapped) - Math.cos(rad))).toBeLessThan(1e-9)
+      assert.ok(wrapped >= 0)
+      assert.ok(wrapped < 2 * Math.PI)
+      assert.ok(Math.abs(Math.sin(wrapped) - Math.sin(rad)) < 1e-9)
+      assert.ok(Math.abs(Math.cos(wrapped) - Math.cos(rad)) < 1e-9)
     }
   })
 })
@@ -42,21 +44,21 @@ describe('the ecliptic-to-ICRF rotation', () => {
   const sample: Vec3 = [0.34057967686, -1.38700201594, -0.03741722679]
 
   it('is an inverse pair', () => {
-    expect(distance(icrfToEclipticJ2000(eclipticJ2000ToIcrf(sample)), sample)).toBeLessThan(1e-15)
-    expect(distance(eclipticJ2000ToIcrf(icrfToEclipticJ2000(sample)), sample)).toBeLessThan(1e-15)
+    assert.ok(distance(icrfToEclipticJ2000(eclipticJ2000ToIcrf(sample)), sample) < 1e-15)
+    assert.ok(distance(eclipticJ2000ToIcrf(icrfToEclipticJ2000(sample)), sample) < 1e-15)
   })
 
   it('preserves length and the shared x axis', () => {
     const rotated = eclipticJ2000ToIcrf(sample)
-    expect(magnitude(rotated)).toBeCloseTo(magnitude(sample), 12)
-    expect(rotated[0]).toBe(sample[0])
+    assert.ok(Math.abs(magnitude(rotated) - (magnitude(sample))) < 10 ** -12 / 2, `${magnitude(rotated)} is not close to ${magnitude(sample)}`)
+    assert.equal(rotated[0], sample[0])
   })
 
   it('turns the ecliptic pole by exactly the obliquity', () => {
     const eclipticPole: Vec3 = [0, 0, 1]
     const inIcrf = eclipticJ2000ToIcrf(eclipticPole)
-    expect(Math.acos(inIcrf[2])).toBeCloseTo(OBLIQUITY_J2000_RAD, 14)
-    expect(OBLIQUITY_J2000_RAD * ARCSEC_PER_RAD).toBeCloseTo(84381.448, 6)
+    assert.ok(Math.abs(Math.acos(inIcrf[2]) - (OBLIQUITY_J2000_RAD)) < 10 ** -14 / 2, `${Math.acos(inIcrf[2])} is not close to ${OBLIQUITY_J2000_RAD}`)
+    assert.ok(Math.abs((OBLIQUITY_J2000_RAD * ARCSEC_PER_RAD) - (84381.448)) < 10 ** -6 / 2, `${(OBLIQUITY_J2000_RAD * ARCSEC_PER_RAD)} is not close to ${84381.448}`)
   })
 })
 
@@ -67,11 +69,11 @@ describe('the VSOP87 dynamical-frame rotation', () => {
     // is exact: rounding it into an exact rotation would silently change the
     // frame it defines.
     const columns = [0, 1, 2].map((c) => [VSOP87_TO_ICRF[c]!, VSOP87_TO_ICRF[c + 3]!, VSOP87_TO_ICRF[c + 6]!])
-    for (const column of columns) expect(Math.abs(magnitude(column) - 1)).toBeLessThan(1e-11)
+    for (const column of columns) assert.ok(Math.abs(magnitude(column) - 1) < 1e-11)
     const dot = (a: number[], b: number[]) => a[0]! * b[0]! + a[1]! * b[1]! + a[2]! * b[2]!
-    expect(Math.abs(dot(columns[0]!, columns[1]!))).toBeLessThan(1e-11)
-    expect(Math.abs(dot(columns[1]!, columns[2]!))).toBeLessThan(1e-11)
-    expect(Math.abs(dot(columns[0]!, columns[2]!))).toBeLessThan(1e-11)
+    assert.ok(Math.abs(dot(columns[0]!, columns[1]!)) < 1e-11)
+    assert.ok(Math.abs(dot(columns[1]!, columns[2]!)) < 1e-11)
+    assert.ok(Math.abs(dot(columns[0]!, columns[2]!)) < 1e-11)
   })
 
   it('is NOT the obliquity rotation — it carries the dynamical-equinox offset too', () => {
@@ -83,12 +85,12 @@ describe('the VSOP87 dynamical-frame rotation', () => {
     const throughDynamical = vsop87ToIcrf(sample)
     const throughObliquityOnly = eclipticJ2000ToIcrf(sample)
     const separationArcsec = (distance(throughDynamical, throughObliquityOnly) / magnitude(sample)) * ARCSEC_PER_RAD
-    expect(separationArcsec).toBeGreaterThan(0.05)
-    expect(separationArcsec).toBeLessThan(0.5)
+    assert.ok(separationArcsec > 0.05)
+    assert.ok(separationArcsec < 0.5)
   })
 
   it('agrees with applyMatrix3 on the same matrix', () => {
     const sample: Vec3 = [1, 2, 3]
-    expect(vsop87ToIcrf(sample)).toEqual(applyMatrix3(VSOP87_TO_ICRF, sample))
+    assert.deepEqual(vsop87ToIcrf(sample), applyMatrix3(VSOP87_TO_ICRF, sample))
   })
 })

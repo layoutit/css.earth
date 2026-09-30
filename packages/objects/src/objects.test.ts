@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseAuthoredObjectDescriptor, parseAuthoredRecipe, parseObjectDescriptor, prepareObject, readPreparedObject } from './index.js';
 import type { JsonRecord, ObjectPreparation } from './index.js';
 
@@ -31,22 +33,22 @@ const recipe = () => ({
 describe('object descriptor boundary', () => {
   it('parses a composed authored recipe with source-pinned capabilities', () => {
     const parsed = parseAuthoredRecipe(recipe());
-    expect(parsed.surfaces[0]?.datasets[0]?.material).toBe('surface-lit');
-    expect(parsed.frameBanks?.[0]).toMatchObject({ frames: 128, rows: 32, residentRows: 3 });
-    expect(parsed.destinations?.maxEntries).toBe(34135);
+    assert.equal(parsed.surfaces[0]?.datasets[0]?.material, 'surface-lit');
+    assert.partialDeepStrictEqual(parsed.frameBanks?.[0], { frames: 128, rows: 32, residentRows: 3 });
+    assert.equal(parsed.destinations?.maxEntries, 34135);
     const object = parseAuthoredObjectDescriptor({ ...descriptor(), properties: { recipe: recipe() } });
-    expect(object.recipe.worldFrame?.referenceFrame).toBe('sun-icrf');
+    assert.equal(object.recipe.worldFrame?.referenceFrame, 'sun-icrf');
   });
 
-  it.each([
+  for (const [_name, mutate] of [
     ['missing source', (value: ReturnType<typeof recipe>) => { value.surfaces[0]!.source = 'missing'; }],
     ['unsafe source path', (value: ReturnType<typeof recipe>) => { value.sources[0]!.path = '../raster.json'; }],
     ['invalid frame budget', (value: ReturnType<typeof recipe>) => { value.frameBanks[0]!.residentRows = 33; }],
     ['unknown layer motion', (value: ReturnType<typeof recipe>) => { value.motion[1]!.target = 'atmosphere'; Reflect.set(value, 'atmosphere', undefined); }],
-  ])('rejects %s rather than passing malformed capabilities to a baker', (_name, mutate) => {
+  ] as const) it(`rejects ${_name} rather than passing malformed capabilities to a baker`, () => {
     const value = recipe();
     mutate(value);
-    expect(() => parseAuthoredRecipe(value)).toThrow();
+    assert.throws(() => parseAuthoredRecipe(value));
   });
 
   it('accepts a triaxial surface without datasets and rejects inverted or zero axes', () => {
@@ -54,24 +56,24 @@ describe('object descriptor boundary', () => {
       surfaces: [{ id: 'body', source: 'raster', projection: 'equirectangular', datasets: [] }] };
     const shape = { kind: 'ellipsoid', radiusKm: 1161, secondaryRadiusKm: 852, polarRadiusKm: 513 };
     const parsed = parseAuthoredRecipe({ ...source, shape });
-    expect(parsed.shape).toEqual(shape);
-    expect(parsed.surfaces[0]!.datasets).toEqual([]);
+    assert.deepEqual(parsed.shape, shape);
+    assert.deepEqual(parsed.surfaces[0]!.datasets, []);
     for (const secondaryRadiusKm of [0, 500, 1200]) {
-      expect(() => parseAuthoredRecipe({ ...source, shape: { ...shape, secondaryRadiusKm } })).toThrow();
+      assert.throws(() => parseAuthoredRecipe({ ...source, shape: { ...shape, secondaryRadiusKm } }));
     }
   });
 
   it('requires a typed recipe at the authored object boundary', () => {
-    expect(() => parseAuthoredObjectDescriptor(descriptor())).toThrow(/properties.recipe/);
+    assert.throws(() => parseAuthoredObjectDescriptor(descriptor()), /properties.recipe/);
   });
 
   it('parses JSON into an immutable owned record', () => {
     const source = descriptor();
     const parsed = parseObjectDescriptor(JSON.stringify(source));
-    expect(parsed).toEqual(source);
-    expect(Object.isFrozen(parsed.properties.layers)).toBe(true);
+    assert.deepEqual(parsed, source);
+    assert.equal(Object.isFrozen(parsed.properties.layers), true);
     source.properties.layers.push('atmosphere');
-    expect(parsed.properties.layers).toEqual(['surface']);
+    assert.deepEqual(parsed.properties.layers, ['surface']);
   });
 
   it('keeps configuration independent of individual objects and renderer implementations', async () => {
@@ -85,11 +87,11 @@ describe('object descriptor boundary', () => {
     };
     const first = await prepareObject(parseObjectDescriptor(descriptor('first')), preparation, { multiplier: 3 });
     const second = await prepareObject(parseObjectDescriptor(descriptor('second')), preparation, { multiplier: 3 });
-    expect(first.data).toBe(6);
-    expect(second).toEqual({ ...first, id: 'second' });
+    assert.equal(first.data, 6);
+    assert.deepEqual(second, { ...first, id: 'second' });
   });
 
-  it.each([
+  for (const input of [
     '{broken',
     { ...descriptor(), schema: 'cssearth-object@99' },
     { ...descriptor(), id: '../escape' },
@@ -102,31 +104,31 @@ describe('object descriptor boundary', () => {
     { ...descriptor(), prepared: { ...descriptor().prepared, sha256: 'a'.repeat(64) } },
     { ...descriptor(), prepared: { ...descriptor().prepared, url: ' ' } },
     { ...descriptor(), unexpected: true },
-  ])('rejects malformed or unsupported descriptors %#', input => {
-    expect(() => parseObjectDescriptor(input)).toThrow();
+  ]) it(`rejects malformed or unsupported descriptors ${input}`, () => {
+    assert.throws(() => parseObjectDescriptor(input));
   });
 
   it('rejects cyclic and unsafe property records', () => {
     const cyclic: { child?: unknown } = {};
     cyclic.child = cyclic;
-    expect(() => parseObjectDescriptor({ ...descriptor(), properties: cyclic })).toThrow(/cycle/);
-    expect(() => parseObjectDescriptor('{"schema":"cssearth-object@2","id":"example","type":"layered-body","properties":{"__proto__":{}}}')).toThrow(/data field/);
+    assert.throws(() => parseObjectDescriptor({ ...descriptor(), properties: cyclic }), /cycle/);
+    assert.throws(() => parseObjectDescriptor('{"schema":"cssearth-object@2","id":"example","type":"layered-body","properties":{"__proto__":{}}}'), /data field/);
   });
 
   it('allows additional layers as data without changing the parser or preparation dispatcher', () => {
     const parsed = parseObjectDescriptor({ ...descriptor(), properties: {
       radiusKm: 3, layers: [{ type: 'surface', source: 'surface-map' }, { type: 'paged-detail', levels: [1, 2] }],
     } });
-    expect(parsed.properties.layers).toHaveLength(2);
+    assert.equal((parsed.properties.layers as readonly unknown[]).length, 2);
   });
 
   it('rejects a mismatched preparation before running its work', async () => {
     let called = false;
-    await expect(prepareObject(parseObjectDescriptor(descriptor()), {
+    await assert.rejects(prepareObject(parseObjectDescriptor(descriptor()), {
       type: 'other-type', format: 'example-artifact@1', parse: value => value,
       bake() { called = true; return null; },
-    }, null)).rejects.toThrow(/No other-type preparation/);
-    expect(called).toBe(false);
+    }, null), /No other-type preparation/);
+    assert.equal(called, false);
   });
 
   it('validates identity and format before handing prepared data to the injected decoder', () => {
@@ -135,10 +137,10 @@ describe('object descriptor boundary', () => {
     let calls = 0;
     const decode = (data: unknown) => { calls++; if (typeof data !== 'number') throw new TypeError('payload'); return data; };
     for (const invalid of [{ ...prepared, id: 'different' }, { ...prepared, format: 'unknown@1' }, { ...prepared, type: 'unknown' }]) {
-      expect(() => readPreparedObject(invalid, input, decode)).toThrow(/does not match/);
+      assert.throws(() => readPreparedObject(invalid, input, decode), /does not match/);
     }
-    expect(calls).toBe(0);
-    expect(readPreparedObject(prepared, input, decode).data).toBe(5);
-    expect(() => readPreparedObject({ ...prepared, data: 'wrong' }, input, decode)).toThrow(/payload/);
+    assert.equal(calls, 0);
+    assert.equal(readPreparedObject(prepared, input, decode).data, 5);
+    assert.throws(() => readPreparedObject({ ...prepared, data: 'wrong' }, input, decode), /payload/);
   });
 });

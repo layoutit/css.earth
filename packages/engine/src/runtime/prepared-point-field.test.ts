@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { selectPreparedPointField, selectVisiblePreparedStars, type Node, type Point } from './prepared-point-field.js';
 
 const stars: readonly Point[] = Array.from({ length: 8 }, (_, index) => ({
@@ -24,23 +26,23 @@ function select(maxRepresentatives = 2048, targetErrorPx = 2) {
 describe('prepared point-field selector', () => {
   it('refines the largest projected node and preserves exact star references', () => {
     const result = select();
-    expect(result.coveredCount).toBe(stars.length);
-    expect(result.representatives).toEqual([
+    assert.equal(result.coveredCount, stars.length);
+    assert.deepEqual(result.representatives, [
       { kind: 'star', index: 0 }, { kind: 'star', index: 1 },
       { kind: 'star', index: 2 }, { kind: 'star', index: 3 },
       { kind: 'star', index: 4 }, { kind: 'star', index: 5 },
       { kind: 'star', index: 6 }, { kind: 'star', index: 7 },
     ]);
-    expect(result.maxProjectedErrorPx).toBe(0);
-    expect(result.budgetLimited).toBe(false);
+    assert.equal(result.maxProjectedErrorPx, 0);
+    assert.equal(result.budgetLimited, false);
   });
 
   it('reports budget pressure while emitting only exact star references', () => {
     const result = select(2, 0);
-    expect(result.representatives).toEqual([{ kind: 'star', index: 0 }, { kind: 'star', index: 1 }]);
-    expect(result.coveredCount).toBe(8);
-    expect(result.budgetLimited).toBe(true);
-    expect(result.representatives.every(reference => reference.kind === 'star')).toBe(true);
+    assert.deepEqual(result.representatives, [{ kind: 'star', index: 0 }, { kind: 'star', index: 1 }]);
+    assert.equal(result.coveredCount, 8);
+    assert.equal(result.budgetLimited, true);
+    assert.equal(result.representatives.every(reference => reference.kind === 'star'), true);
   });
 
   it('keeps eye-crossing spheres finite and frustum-bounded', () => {
@@ -48,8 +50,8 @@ describe('prepared point-field selector', () => {
       viewRotation: [1, 0, 0, 0, 1, 0, 0, 0, 1], focalPx: 100,
       viewportHalfWidthPx: 500, viewportHalfHeightPx: 500, maxRepresentatives: 2,
       targetErrorPx: 0 });
-    expect(Number.isFinite(result.maxProjectedErrorPx)).toBe(true);
-    expect(result.maxProjectedErrorPx).toBeLessThanOrEqual(Math.hypot(500, 500) + 1e-9);
+    assert.equal(Number.isFinite(result.maxProjectedErrorPx), true);
+    assert.ok(result.maxProjectedErrorPx <= Math.hypot(500, 500) + 1e-9);
   });
 
   it('selects exact visible stars by apparent magnitude and retains anchors', () => {
@@ -57,26 +59,26 @@ describe('prepared point-field selector', () => {
       viewRotation: [1, 0, 0, 0, 1, 0, 0, 0, 1], focalPx: 100,
       viewportHalfWidthPx: 500, viewportHalfHeightPx: 500, maxRepresentatives: 2,
       limitingMagnitude: 0.2, coverageAnchorIndices: [7] });
-    expect(result.consideredCount).toBe(8);
-    expect(result.drawnCount).toBe(2);
-    expect(result.representatives).toEqual([{ kind: 'star', index: 7 }, { kind: 'star', index: 0 }]);
-    expect(result.representatives.every(reference => reference.kind === 'star')).toBe(true);
+    assert.equal(result.consideredCount, 8);
+    assert.equal(result.drawnCount, 2);
+    assert.deepEqual(result.representatives, [{ kind: 'star', index: 7 }, { kind: 'star', index: 0 }]);
+    assert.equal(result.representatives.every(reference => reference.kind === 'star'), true);
   });
 
   it('keeps catalogue coverage while omitting culled coarse proxies', () => {
     const result = selectPreparedPointField({ stars, nodes, eyeUnits: [0, 0, 0],
       viewRotation: [1, 0, 0, 0, 1, 0, 0, 0, 1], focalPx: 100,
       viewportHalfWidthPx: 10, viewportHalfHeightPx: 10, maxRepresentatives: 8, targetErrorPx: 0 });
-    expect(result.coveredCount).toBe(8);
-    expect(result.representatives.every(reference => reference.kind === 'star')).toBe(true);
+    assert.equal(result.coveredCount, 8);
+    assert.equal(result.representatives.every(reference => reference.kind === 'star'), true);
   });
 
   it('is deterministic and rejects overlapping hierarchy ranges', () => {
-    expect(select(5).representatives).toEqual(select(5).representatives);
-    expect(() => selectPreparedPointField({ stars, nodes: nodes.map((node, index) => index === 2
+    assert.deepEqual(select(5).representatives, select(5).representatives);
+    assert.throws(() => selectPreparedPointField({ stars, nodes: nodes.map((node, index) => index === 2
       ? { ...node, first: 3 } : node), eyeUnits: [0, 0, 0],
       viewRotation: [1, 0, 0, 0, 1, 0, 0, 0, 1], focalPx: 100,
-      viewportHalfWidthPx: 500, viewportHalfHeightPx: 500 })).toThrow();
+      viewportHalfWidthPx: 500, viewportHalfHeightPx: 500 }));
   });
 
   it('handles translated and rotated observers without losing catalogue coverage', () => {
@@ -86,8 +88,8 @@ describe('prepared point-field selector', () => {
     const second = selectPreparedPointField({ stars, nodes, eyeUnits: [-12, 0, 35],
       viewRotation: [1, 0, 0, 0, 1, 0, 0, 0, 1], focalPx: 160,
       viewportHalfWidthPx: 80, viewportHalfHeightPx: 60, maxRepresentatives: 8, targetErrorPx: 1 });
-    expect(first.coveredCount).toBe(8);
-    expect(second.coveredCount).toBe(8);
-    expect(first.representatives).not.toEqual(second.representatives);
+    assert.equal(first.coveredCount, 8);
+    assert.equal(second.coveredCount, 8);
+    assert.notDeepEqual(first.representatives, second.representatives);
   });
 });

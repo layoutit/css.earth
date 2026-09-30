@@ -574,17 +574,8 @@ export function requireBodyOrbit(bodyId: string): BodyOrbit {
     "../../../src/platform/solar-geometry.mts",
   );
   await writeFile(target, module);
-  for (const entry of entries) {
-    console.log(
-      `${entry.body.padEnd(8)} subsolar lat ` +
-        `${entry.subsolarLatitudeDegrees.toFixed(3).padStart(8)}°  lon ` +
-        `${entry.subsolarLongitudeDegrees.toFixed(3).padStart(9)}°  ` +
-        `pole tilt ${entry.poleTiltDegrees.toFixed(2).padStart(6)}°  ` +
-        `Sun ecl. lat ${entry.sunEclipticLatitudeDegrees.toFixed(2).padStart(6)}°  ` +
-        `orbit incl. ${entry.orbitInclinationDegrees.toFixed(3).padStart(6)}°`,
-    );
-  }
-  console.log(`Prepared solar geometry -> ${target}`);
+  // One line, not one per body: the per-body table printed thousands of lines of zeros for planets of other stars.
+  console.log(`Prepared solar geometry for ${entries.length} bodies -> ${target}`);
 }
 
 await prepareSolarGeometry();

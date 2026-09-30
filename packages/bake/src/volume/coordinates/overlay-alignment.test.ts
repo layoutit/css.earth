@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { transferOverlayAlignment } from './overlay-alignment.ts';
 import type { OverlayPlacement } from './overlay-placement.ts';
 

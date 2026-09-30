@@ -1,12 +1,14 @@
 import { fixedCameraOrientation } from '../../test/camera-orientation-fixture.mts';
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { createCameraViewport } from './camera-viewport.js';
 import { createPerspectiveDolly } from './perspective-dolly.js';
-import scene from '../../../../src/objects/mercury/prepared/scene.json';
+import scene from '../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
 
 test('prepared FOVs retain independent measurements across switches and resize together', () => {
   let width = 1000, reads = 0, resize!: () => void, refresh!: FrameRequestCallback;
-  const remove = vi.fn();
+  const remove = mock.fn(() => {});
   const view = {
     ResizeObserver: class { constructor(callback: () => void) { resize = callback; } observe() {} disconnect() {} },
     getComputedStyle: (probe: HTMLElement) => { reads++; return { perspective: `${parseFloat(probe.style.perspective) * width / 100}px` }; },
@@ -18,22 +20,22 @@ test('prepared FOVs retain independent measurements across switches and resize t
   const viewport = createCameraViewport(stage as unknown as HTMLElement);
   const wide = viewport.read('80cqw'), narrow = viewport.read('120cqw');
   const preparedReads = reads;
-  expect(viewport.read('80cqw')).toBe(wide);
-  expect(viewport.read('120cqw')).toBe(narrow);
-  expect(reads).toBe(preparedReads);
-  expect(wide.focalPixels).toBe(800); expect(narrow.focalPixels).toBe(1200);
+  assert.equal(viewport.read('80cqw'), wide);
+  assert.equal(viewport.read('120cqw'), narrow);
+  assert.equal(reads, preparedReads);
+  assert.equal(wide.focalPixels, 800); assert.equal(narrow.focalPixels, 1200);
   width = 700; resize();
   const resizedReads = reads;
-  expect(viewport.read('80cqw').focalPixels).toBe(560);
-  expect(viewport.read('120cqw').focalPixels).toBe(840);
-  expect(reads).toBe(resizedReads);
-  viewport.destroy(); expect(remove).toHaveBeenCalledTimes(2);
+  assert.equal(viewport.read('80cqw').focalPixels, 560);
+  assert.equal(viewport.read('120cqw').focalPixels, 840);
+  assert.equal(reads, resizedReads);
+  viewport.destroy(); assert.equal(remove.mock.callCount(), 2);
 });
 
 test('one viewport snapshot survives camera mounts and refreshes on layout changes', () => {
   let width = 1200, reads = 0, resize!: () => void;
   const frames = new Map<number, FrameRequestCallback>(), events = new Map<string, () => void>();
-  const remove = vi.fn(), disconnect = vi.fn();
+  const remove = mock.fn(() => {}), disconnect = mock.fn(() => {});
   const view = {
     ResizeObserver: class { constructor(callback: () => void) { resize = callback; } observe() {} disconnect = disconnect; },
     getComputedStyle: () => { reads++; return { perspective: `${width * .8}px` }; },
@@ -56,22 +58,22 @@ test('one viewport snapshot survives camera mounts and refreshes on layout chang
     stage: element(), cameraElement: element(), skyElement: element(), sceneElement: element(),
   } as unknown as Parameters<typeof createPerspectiveDolly>[0], () => fixedCameraOrientation());
   const a = camera(), b = camera();
-  expect(a.state().focal).toBe(960); expect(b.trackball().centerY).toBe(380);
-  expect(viewport.read(scene.camera.projection.cssPerspective)).toBe(first);
-  expect(reads).toBe(measured);
-  const changed = vi.fn(() => b.remeasure()), unsubscribe = viewport.subscribe(changed);
+  assert.equal(a.state().focal, 960); assert.equal(b.trackball().centerY, 380);
+  assert.equal(viewport.read(scene.camera.projection.cssPerspective), first);
+  assert.equal(reads, measured);
+  const changed = mock.fn(() => b.remeasure()), unsubscribe = viewport.subscribe(changed);
   resize();
-  expect(viewport.read(scene.camera.projection.cssPerspective)).toBe(first);
-  expect(reads).toBeGreaterThan(measured);
-  expect(frames.size).toBe(0);
-  expect(changed).not.toHaveBeenCalled();
+  assert.equal(viewport.read(scene.camera.projection.cssPerspective), first);
+  assert.ok(reads > measured);
+  assert.equal(frames.size, 0);
+  assert.equal(changed.mock.callCount(), 0);
   width = 900; events.get('resize')!();
-  expect(frames.size).toBe(1);
+  assert.equal(frames.size, 1);
   resize();
-  expect(frames.size).toBe(0);
-  expect(changed).toHaveBeenCalledOnce(); expect(b.state().focal).toBe(720);
-  expect(viewport.read(scene.camera.projection.cssPerspective).bounds.width).toBe(900);
+  assert.equal(frames.size, 0);
+  assert.equal(changed.mock.callCount(), 1); assert.equal(b.state().focal, 720);
+  assert.equal(viewport.read(scene.camera.projection.cssPerspective).bounds.width, 900);
   unsubscribe(); viewport.destroy(); viewport.destroy();
-  expect(disconnect).toHaveBeenCalledOnce(); expect(remove).toHaveBeenCalledOnce();
-  expect(events.size).toBe(0);
+  assert.equal(disconnect.mock.callCount(), 1); assert.equal(remove.mock.callCount(), 1);
+  assert.equal(events.size, 0);
 });

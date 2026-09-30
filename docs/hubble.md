@@ -283,7 +283,7 @@ node packages/telescope-cli/src/archives/hst/compare.mts   europa-15419 idr203wt
 node packages/telescope-cli/src/archives/hst/drizzle.mts   europa-15419 idr203wtq .local/hst/europa-15419-idr203wtq
 node packages/telescope-cli/src/archives/hst/compare.mts   europa-15419 idr203wtq .local/hst/europa-15419-idr203wtq/drizzle
 node packages/telescope-cli/src/archives/hst/archive-ledger.mts --write
-pnpm test:telescope-cli
+pnpm test:packages
 node --import ./packages/core/src/node/register-vite-suffix.mts --test packages/telescope-cli/authoring/hst/slit-scan-map.test.mts
 ```
 

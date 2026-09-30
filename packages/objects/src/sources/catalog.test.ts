@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { parseSourceCatalog, sourceResolver, parseSourceBinding, parseSourceCitation } from './catalog.js';
 const record = (id = 'work') => ({id,title:'Published work',kind:'data-product',identityLevel:'work',identifiers:[],links:[{role:'landing',url:'https://example.org/product',label:'Provider'}],
   evidence:[{path:'source/record.json',locator:'/product'}],relations:[],statements:[]});

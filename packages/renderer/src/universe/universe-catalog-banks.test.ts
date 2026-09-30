@@ -1,16 +1,20 @@
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
-import { createUniverseCatalogBanks } from './universe-catalog-banks.js';
-import { parseDatasetBillboards } from './dataset-billboards.js';
+import { waitFor } from '@cssearth/objects/node/contract';
 
-vi.mock('../image-layers/prepared-image-layer-runtime.js', () => ({
+mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
   mountPreparedCssImageLayers: ({ host, before }: { host: HTMLElement; before: Element }) => {
     const root = host.ownerDocument.createElement('div');
     host.insertBefore(root, before);
     return { root, publish() {}, revealLarge() {}, destroy() { root.remove(); } };
   },
-}));
+} });
+// The modules under test import the mocked ones, so they load after the mocks.
+const { createUniverseCatalogBanks } = await import('./universe-catalog-banks.js');
+const { parseDatasetBillboards } = await import('./dataset-billboards.js');
 
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
   metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
@@ -29,11 +33,31 @@ test('a galaxy drawn from image layers shows its billboard from afar and hands i
     pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
   { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, volumeOpacity, detailed);
   publish(0);
-  expect(billboard.style.display, 'inside the Milky Way the sky shows it, as a galactic dataset billboard').not.toBe('block');
+  assert.notEqual(billboard.style.display, 'block', 'inside the Milky Way the sky shows it, as a galactic dataset billboard');
   publish(1);
-  expect([billboard.style.display, Number(billboard.style.opacity)], 'from outside the Milky Way the galaxy shows').toEqual(['block', 1]);
+  assert.deepEqual(([billboard.style.display, Number(billboard.style.opacity)]), ['block', 1], 'from outside the Milky Way the galaxy shows');
   publish(1, 'galaxy');
-  await vi.waitFor(() => expect(root.dataset.imageLayerResidentBankCount).toBe('1'));
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
   publish(1, 'galaxy');
-  expect(billboard.style.display === 'none' || Number(billboard.style.opacity) === 0, 'its loaded slices replace the billboard').toBe(true);
+  assert.equal((billboard.style.display === 'none' || Number(billboard.style.opacity) === 0), true, 'its loaded slices replace the billboard');
+});
+
+test('a package of catalogue dots mounts them when its row is selected, and hides them when another is', () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
+    pointBanks: [{ id: 'cluster', url: '/cluster/dots.bin' }] });
+  const publish = (selected?: string) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, selected);
+  const layer = () => root.querySelector<HTMLElement>('[data-catalogue-points]');
+  publish();
+  assert.equal(layer(), null, 'nothing is mounted or fetched before its row is selected');
+  publish('cluster');
+  assert.equal(layer()?.style.display, '', 'selected, its dots draw');
+  publish('another');
+  assert.equal(layer()?.style.display, 'none', 'another selection hides them and keeps them mounted');
+  lifetime.destroy();
+  assert.equal(layer(), null, 'the scene takes them with it');
 });

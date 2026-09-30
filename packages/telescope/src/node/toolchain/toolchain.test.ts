@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, rm, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { it as test } from 'vitest';
+import { it as test } from 'node:test';
 import { findInstalledRoot, installedToolchain, toolchainRootIssue } from './toolchain.js';
 import { writeInstalledMarker, type ToolchainPins } from './marker.js';
 

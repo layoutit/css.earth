@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { readFile } from 'node:fs/promises';
 import { preparedScenePitch } from '@cssearth/engine';
 import { prepareLocationPoint, prepareLocationCamera } from '@cssearth/bake/objects/layers/paged-ellipsoid';
@@ -18,19 +20,19 @@ test('surface correction is a finite proper rotation toward the real physical ey
   for (const centre of [[0, 0, -100], [0, 0, 100], [35.474, 0, -253.001], [-90, 60, -200], [1, 0, 0],
     [1e308, -1e308, 1e308], [1e-200, 0, -1e-200], [1e-12, -1e-12, 10]]) {
     const matrix = prepareSurfaceTargetRotation(Object.freeze(centre));
-    expect(matrix.every(Number.isFinite)).toBe(true);
+    assert.equal(matrix.every(Number.isFinite), true);
     const max = Math.max(...centre.map(Math.abs)), direction = centre.map(value => -value / max);
     const length = Math.hypot(...direction), actual = apply(matrix, [0, 0, 1]);
-    actual.forEach((value, axis) => expect(value).toBeCloseTo(direction[axis] / length, 13));
+    actual.forEach((value, axis) => assert.ok(Math.abs(value - (direction[axis] / length)) < 10 ** -13 / 2, `${value} is not close to ${direction[axis] / length}`));
     const rows = [matrix.slice(0, 3), matrix.slice(3, 6), matrix.slice(6, 9)];
-    for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) expect(dot(rows[i], rows[j])).toBeCloseTo(Number(i === j), 13);
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) assert.ok(Math.abs(dot(rows[i], rows[j]) - (Number(i === j))) < 10 ** -13 / 2, `${dot(rows[i], rows[j])} is not close to ${Number(i === j)}`);
     const determinant = matrix[0] * (matrix[4] * matrix[8] - matrix[5] * matrix[7]) -
       matrix[1] * (matrix[3] * matrix[8] - matrix[5] * matrix[6]) + matrix[2] * (matrix[3] * matrix[7] - matrix[4] * matrix[6]);
-    expect(determinant).toBeCloseTo(1, 13);
+    assert.ok(Math.abs(determinant - (1)) < 10 ** -13 / 2, `${determinant} is not close to ${1}`);
   }
-  expect(prepareSurfaceTargetRotation([0, 0, -1])).toEqual(identity);
+  assert.deepEqual(prepareSurfaceTargetRotation([0, 0, -1]), identity);
   for (const invalid of [[0, 0, 0], [0, 0], [0, NaN, -1], [Infinity, 0, -1]]) {
-    expect(() => prepareSurfaceTargetRotation(invalid)).toThrow();
+    assert.throws(() => prepareSurfaceTargetRotation(invalid));
   }
 });
 
@@ -48,7 +50,7 @@ test('prepared destination correction preserves close-range framing when the glo
   local = rotate(local, 'y', destination.controlYaw);
   local = rotate(local, 'x', preparedScenePitch(destination.controlPitch, config.camera));
   local = local.map(value => value * config.camera.sceneScale);
-  expect(Math.hypot(local[0], local[1])).toBeLessThan(1e-10);
+  assert.ok(Math.hypot(local[0], local[1]) < 1e-10);
   // Desktop shell framing at 1400×1000, with the eye just outside the
   // current authored globe. Radius changes must not invalidate this oracle.
   const focal = 1212.44, offset = [-170, 0], depth = Math.hypot(...local) * 1.000004;
@@ -58,7 +60,7 @@ test('prepared destination correction preserves close-range framing when the glo
     return [870 + offset[0] + focal * q[0] / -q[2], 500 + focal * q[1] / -q[2]];
   };
   const corrected = project(prepareSurfaceTargetRotation(centre));
-  expect(corrected[0]).toBeCloseTo(870, 8); expect(corrected[1]).toBeCloseTo(500, 8);
-  expect(project(identity)[0]).not.toBeCloseTo(870, 8);
-  expect(destination.zoom).toBe(2048);
+  assert.ok(Math.abs(corrected[0] - (870)) < 10 ** -8 / 2, `${corrected[0]} is not close to ${870}`); assert.ok(Math.abs(corrected[1] - (500)) < 10 ** -8 / 2, `${corrected[1]} is not close to ${500}`);
+  assert.ok(!(Math.abs(project(identity)[0] - (870)) < 10 ** -8 / 2));
+  assert.equal(destination.zoom, 2048);
 });

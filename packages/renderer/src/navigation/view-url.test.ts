@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'node:test';
+import { isDeepStrictEqual } from 'node:util';
 import { formatSharedView, parseSharedView } from './view-url.js';
 import type { SharedView, PhysicalSharedCamera } from './view-url.js';
 
@@ -19,16 +20,16 @@ function translated(): SharedView & { camera: PhysicalSharedCamera } {
 describe('view URL wire contract', () => {
   it('preserves one physical rotation, distance and time in the current format', () => {
     const view = physical(), query = formatSharedView(view);
-    expect(new DataView(bytes(query).buffer).getUint16(0) >>> 12).toBe(5);
+    assert.equal((new DataView(bytes(query).buffer).getUint16(0) >>> 12), 5);
     let restored = parseSharedView(query);
     const check = (actual: SharedView | null) => {
       if (!actual) throw new Error('Missing shared camera.');
-      expect(actual.preparedEpochJdTt).toBe(view.preparedEpochJdTt);
-      expect(actual.playback).toEqual(view.playback);
-      expect(actual.camera.distanceKilometers).toBe(view.camera.distanceKilometers);
-      expect(actual.camera.pose.schema).toBe('cssearth-camera-pose@2');
+      assert.equal(actual.preparedEpochJdTt, view.preparedEpochJdTt);
+      assert.deepEqual(actual.playback, view.playback);
+      assert.equal(actual.camera.distanceKilometers, view.camera.distanceKilometers);
+      assert.equal(actual.camera.pose.schema, 'cssearth-camera-pose@2');
       const expected = view.camera.pose.scene.slice(9, -1).split(',').map(Number);
-      actual.camera.pose.scene.slice(9, -1).split(',').map(Number).forEach((value, index) => expect(value).toBeCloseTo(expected[index], 9));
+      actual.camera.pose.scene.slice(9, -1).split(',').map(Number).forEach((value, index) => assert.ok(Math.abs(value - (expected[index])) < 10 ** -9 / 2, `${value} is not close to ${expected[index]}`));
     };
     check(restored);
     for (let index = 0; index < 100; index++) {
@@ -36,37 +37,37 @@ describe('view URL wire contract', () => {
       restored = parseSharedView(formatSharedView(restored));
     }
     check(restored);
-    expect(Object.keys(restored!.camera).sort()).toEqual(['distanceKilometers', 'pose']);
+    assert.deepEqual(Object.keys(restored!.camera).sort(), ['distanceKilometers', 'pose']);
   });
 
   it('preserves nonenumerable poses and rejects all retired wire versions', () => {
     const view = physical();
     view.camera.pose.scene = identity;
     Object.defineProperty(view.camera, 'pose', { enumerable: false });
-    expect(parseSharedView(formatSharedView(view))?.camera.pose).toEqual(view.camera.pose);
+    assert.deepEqual(parseSharedView(formatSharedView(view))?.camera.pose, view.camera.pose);
     const payload = bytes(formatSharedView(view));
     for (const version of [1, 2, 3, 4, 6, 15]) {
       const old = payload.slice(); old[0] = (old[0] & 15) | (version << 4);
-      expect(() => parseSharedView(encoded(old))).toThrow(/unsupported version/);
+      assert.throws(() => parseSharedView(encoded(old)), /unsupported version/);
     }
   });
 
   it('the current format stores one translated centre instead of a redundant range and round-trips the whole observer', () => {
     const view = translated(), query = formatSharedView(view), payload = bytes(query);
-    expect(new DataView(payload.buffer).getUint16(0) >>> 12).toBe(5);
+    assert.equal((new DataView(payload.buffer).getUint16(0) >>> 12), 5);
     const centred: SharedView = { ...view, camera: { distanceKilometers: view.camera.distanceKilometers, pose: view.camera.pose } };
-    expect(payload.length).toBe(bytes(formatSharedView(centred)).length + 16);
-    for (let axis = 0; axis < 3; axis++) expect(new DataView(payload.buffer).getFloat64(2 + axis * 8)).toBe(view.camera.bodyCenterKilometers![axis]);
+    assert.equal(payload.length, bytes(formatSharedView(centred)).length + 16);
+    for (let axis = 0; axis < 3; axis++) assert.equal(new DataView(payload.buffer).getFloat64(2 + axis * 8), view.camera.bodyCenterKilometers![axis]);
     let restored = parseSharedView(query);
     for (let index = 0; index < 100; index++) {
       if (!restored || restored.camera.pose.schema !== 'cssearth-camera-pose@2') throw new Error('Missing physical view.');
-      expect(restored.camera).toHaveProperty('bodyCenterKilometers', view.camera.bodyCenterKilometers);
-      expect(restored.camera.distanceKilometers).toBe(view.camera.distanceKilometers);
-      expect(restored.playback).toEqual(view.playback);
-      expect(restored.preparedEpochJdTt).toBe(view.preparedEpochJdTt);
+      assert.deepEqual(restored.camera['bodyCenterKilometers'], view.camera.bodyCenterKilometers);
+      assert.equal(restored.camera.distanceKilometers, view.camera.distanceKilometers);
+      assert.deepEqual(restored.playback, view.playback);
+      assert.equal(restored.preparedEpochJdTt, view.preparedEpochJdTt);
       const expected = view.camera.pose.scene.slice(9, -1).split(',').map(Number);
       restored.camera.pose.scene.slice(9, -1).split(',').map(Number).forEach((component, axis) =>
-        expect(Math.abs(component - expected[axis])).toBeLessThan(1e-10));
+        assert.ok(Math.abs(component - expected[axis]) < 1e-10));
       restored = parseSharedView(formatSharedView(restored));
     }
   });
@@ -74,36 +75,36 @@ describe('view URL wire contract', () => {
   it('rejects malformed translated positions, truncatedv4, nonfinite fields and reserved flags', () => {
     const view = translated(), valid = bytes(formatSharedView(view));
     const mismatch = translated(); mismatch.camera.distanceKilometers *= 2;
-    expect(() => formatSharedView(mismatch)).toThrow();
+    assert.throws(() => formatSharedView(mismatch));
     const sparse = translated(); Reflect.deleteProperty(sparse.camera.bodyCenterKilometers!, '1');
-    expect(() => formatSharedView(sparse)).toThrow();
-    for (let length = 0; length < valid.length; length++) expect(() => parseSharedView(encoded(valid.slice(0, length)))).toThrow();
+    assert.throws(() => formatSharedView(sparse));
+    for (let length = 0; length < valid.length; length++) assert.throws(() => parseSharedView(encoded(valid.slice(0, length))));
     for (const invalidValue of [NaN, Infinity, -Infinity]) {
       const modified = valid.slice(); new DataView(modified.buffer).setFloat64(2, invalidValue);
-      expect(() => parseSharedView(encoded(modified))).toThrow();
+      assert.throws(() => parseSharedView(encoded(modified)));
     }
     const zero = valid.slice(); zero.fill(0, 2, 26);
-    expect(() => parseSharedView(encoded(zero))).toThrow();
+    assert.throws(() => parseSharedView(encoded(zero)));
     const reserved = valid.slice(); reserved[0] |= 1;
-    expect(() => parseSharedView(encoded(reserved))).toThrow();
-    expect(() => parseSharedView(encoded(Uint8Array.from([...valid, 0])))).toThrow();
-    expect(() => parseSharedView(formatSharedView(view) + '=')).toThrow();
+    assert.throws(() => parseSharedView(encoded(reserved)));
+    assert.throws(() => parseSharedView(encoded(Uint8Array.from([...valid, 0]))));
+    assert.throws(() => parseSharedView(formatSharedView(view) + '='));
   });
 
   it('rejects malformed, repeated, noncanonical and truncated input', () => {
     for (const query of ['v=', 'v=A', 'v=AA', 'v=AAAAA', 'v=EAB', 'v=EAA=', 'v=EAA&v=EAA', 'v=EAA&extra=1']) {
-      expect(() => parseSharedView(query)).toThrow();
-      expect(() => parseSharedView(query)).toThrow();
+      assert.throws(() => parseSharedView(query));
+      assert.throws(() => parseSharedView(query));
     }
     const query = formatSharedView(physical());
-    for (const cut of [1, 2, 4, 12]) expect(() => parseSharedView(query.slice(0, -cut))).toThrow();
+    for (const cut of [1, 2, 4, 12]) assert.throws(() => parseSharedView(query.slice(0, -cut)));
     const invalid = physical(); invalid.camera.pose.scene = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,10,0,0,1)';
-    expect(() => formatSharedView(invalid)).toThrow();
+    assert.throws(() => formatSharedView(invalid));
     const noEpoch = physical(); Reflect.deleteProperty(noEpoch, 'preparedEpochJdTt');
-    expect(() => formatSharedView(noEpoch)).toThrow(/preparedEpochJdTt/);
+    assert.throws(() => formatSharedView(noEpoch), /preparedEpochJdTt/);
     const timeless = { ...physical(), preparedEpochJdTt: null };
     timeless.camera.pose.scene = identity;
-    expect(parseSharedView(formatSharedView(timeless))).toEqual(timeless);
+    assert.deepEqual(parseSharedView(formatSharedView(timeless)), timeless);
   });
 });
 
@@ -174,15 +175,15 @@ it('validates bounded payloads, playback and pure rotations before encoding', ()
   for (const scene of ['rotateX(45deg)', 'matrix3d(2,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
     'matrix3d(-1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', 'matrix3d(,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)']) {
     const view = physical(); view.camera.pose.scene = scene;
-    expect(() => formatSharedView(view)).toThrow(/pose/);
+    assert.throws(() => formatSharedView(view), /pose/);
   }
   for (const times of [[-1], [NaN], Array.from({ length: 4096 }, () => 1)]) {
     const view = physical(); view.playback.times = times;
-    expect(() => formatSharedView(view)).toThrow();
+    assert.throws(() => formatSharedView(view));
   }
   for (const speed of [-1, NaN, Infinity]) {
     const view = physical(); view.playback.speed = speed;
-    expect(() => formatSharedView(view)).toThrow();
+    assert.throws(() => formatSharedView(view));
   }
-  expect(() => parseSharedView(encoded(new Uint8Array(4097)))).toThrow();
+  assert.throws(() => parseSharedView(encoded(new Uint8Array(4097))));
 });

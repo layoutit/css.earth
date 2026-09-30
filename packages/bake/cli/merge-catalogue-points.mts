@@ -19,6 +19,13 @@
  * - a galaxy's disc, seen face-on (kpc banks): `atSunPerKpc2` at the Sun's radius, exponential in Galactocentric radius
  *   with `scaleLengthKpc`, counted within `kernelKpc`; or
  * - the universe, in 3D (Mpc banks): `perMpc3` everywhere, counted within `kernelMpc`.
+ * A volume cap may count per spherical shell around the Sun instead (`shellMpc`, the shell's width): each shell keeps
+ * its galaxies up to the cap times the shell's volume less what the enclosing levels draw there, so a cluster keeps its
+ * contrast with its surroundings and only the catalogue's fall-off with distance is evened. With `groupsFirst` (banks
+ * whose points carry their `groups`, prepare-catalogue-points.mts `groupDistance`), a shell's room goes first to members
+ * of groups of two or more, the richest group first, then a random share of the rest (`background` times the room,
+ * again) fills the space between them; `wholeGroupsOf` keeps every member of a group that large, room or not, so a
+ * cluster is whole from wherever it is seen.
  * With a taper (`taperKpc` or `taperMpc`: [from, to]) the cap falls linearly to nothing between those distances from
  * the Sun: a nested level of denser dots around the Sun, with a soft edge. `within` names the enclosing levels, already
  * merged: their dots count toward this level's cap and are not drawn again, so a level only adds dots, and nested
@@ -29,7 +36,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
-import { readCatalogueBank, recipePublished, writeCatalogueBank } from '@cssearth/bake/volume/node';
+import { readCatalogueBank, recipePublished, selectByShell, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const KPC_M = 3.0856775814913673e19, MPC_M = 3.0856775814913673e22;
 const [objectArgument, id] = process.argv.slice(2);
@@ -58,16 +65,24 @@ if (recipe.colourTowardWhite !== undefined && (typeof recipe.colourTowardWhite !
   !text(recipe.colourTowardWhiteBasis))) fail('colourTowardWhite is a fraction from 0 to 1, with its basis.');
 
 type DiscCap = { mode: 'disc'; atSunPerKpc2: number; scaleLengthKpc: number; kernel: number; taper?: [number, number] };
-type VolumeCap = { mode: 'volume'; perMpc3: number; kernel: number; taper?: [number, number] };
+type VolumeCap = { mode: 'volume'; perMpc3: number; kernel: number; shell?: number; taper?: [number, number];
+  groupsFirst?: { background: number; wholeGroupsOf?: number } };
 const cap = ((): DiscCap | VolumeCap | undefined => {
   const value = recipe.densityCap as Record<string, unknown> | undefined;
   if (value === undefined) return undefined;
   if (typeof value !== 'object' || value === null || !text(value.basis)) return fail('densityCap needs its basis.');
   if (value.perMpc3 !== undefined) {
-    if (!positive(value.perMpc3) || !positive(value.kernelMpc) || (value.taperMpc !== undefined && !pair(value.taperMpc))) {
-      fail('a volume densityCap needs positive perMpc3 and kernelMpc, and an optional increasing taperMpc pair.');
+    if (!positive(value.perMpc3) || (positive(value.kernelMpc) === positive(value.shellMpc)) || (value.taperMpc !== undefined && !pair(value.taperMpc))) {
+      fail('a volume densityCap needs positive perMpc3, one of kernelMpc or shellMpc, and an optional increasing taperMpc pair.');
     }
-    return { mode: 'volume', perMpc3: value.perMpc3 as number, kernel: value.kernelMpc as number, ...(value.taperMpc ? { taper: value.taperMpc as [number, number] } : {}) };
+    const groups = value.groupsFirst as { background?: unknown; wholeGroupsOf?: unknown; basis?: unknown } | undefined;
+    if (groups !== undefined && (!positive(value.shellMpc) || typeof groups !== 'object' || groups === null || typeof groups.background !== 'number' || !(groups.background >= 0)
+      || (groups.wholeGroupsOf !== undefined && !(Number.isSafeInteger(groups.wholeGroupsOf) && (groups.wholeGroupsOf as number) >= 2)) || !text(groups.basis))) {
+      fail('groupsFirst needs shellMpc, a background share of at least 0, an optional wholeGroupsOf of at least 2, and its basis.');
+    }
+    return { mode: 'volume', perMpc3: value.perMpc3 as number, kernel: (value.kernelMpc ?? value.shellMpc) as number,
+      ...(positive(value.shellMpc) ? { shell: value.shellMpc as number } : {}), ...(value.taperMpc ? { taper: value.taperMpc as [number, number] } : {}),
+      ...(groups ? { groupsFirst: { background: groups.background as number, ...(groups.wholeGroupsOf === undefined ? {} : { wholeGroupsOf: groups.wholeGroupsOf as number }) } } : {}) };
   }
   if (!positive(value.atSunPerKpc2) || !positive(value.scaleLengthKpc) || !positive(value.kernelKpc) || (value.taperKpc !== undefined && !pair(value.taperKpc))) {
     fail('a disc densityCap needs positive atSunPerKpc2, scaleLengthKpc and kernelKpc, and an optional increasing taperKpc pair.');
@@ -101,11 +116,11 @@ const centreKpc = galaxyFrame ? galaxyFrame.originM.map(value => value / KPC_M) 
 const hex = (value: unknown): value is string => typeof value === 'string' && /^#[0-9a-f]{6}$/iu.test(value);
 
 const unplaced: Record<string, number> = {}, kept: Record<string, number> = {};
-const merged: { reference: number[]; colour: string; bank: string }[] = [];
+const merged: { reference: number[]; colour: string; bank: string; group?: string }[] = [];
 let bankFrame: ReturnType<typeof parseDensityVolumeFrame> | null = null, rawFrame: unknown = null;
 for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
   const bank = await readCatalogueBank(objectDirectory, bankIdValue) as { schema?: unknown; frame?: unknown; source?: unknown;
-    appearance?: { colorCss?: unknown; opacity?: unknown; palette?: unknown; paletteTone?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown };
+    appearance?: { colorCss?: unknown; opacity?: unknown; palette?: unknown; paletteTone?: unknown }; points?: unknown; kinematicSigmaKpc?: unknown; groups?: unknown };
   const parsedFrame = parseDensityVolumeFrame(bank?.frame), appearance = bank?.appearance;
   if (bank?.schema !== 'cssearth-catalogue-points@1' || !appearance || !hex(appearance.colorCss) || typeof appearance.opacity !== 'number' ||
       !(appearance.opacity > 0 && appearance.opacity <= 1) || !Array.isArray(bank.points)) throw new TypeError(`${bankIdValue}: not a catalogue point bank.`);
@@ -128,6 +143,10 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
     throw new TypeError(`${bankIdValue}: kinematicSigmaKpc must be one positive number or null per point.`);
   }
   if (sigmas !== undefined && maxSigma === undefined) fail(`${bankIdValue} carries kinematic distance uncertainties; name maxKinematicSigmaKpc.`);
+  const groups = bank.groups;
+  if (groups !== undefined && (!Array.isArray(groups) || groups.length !== bank.points.length || !groups.every(value => typeof value === 'string'))) {
+    throw new TypeError(`${bankIdValue}: groups must be one group name per point.`);
+  }
   const layerTone = appearance.opacity;
   let near = 0;
   kept[bankIdValue] = 0;
@@ -141,7 +160,8 @@ for (const { bank: bankIdValue, withinPcOfCentre, keepEvery = 1 } of entries) {
     const colour = palette ? palette[point[3] as number] : appearance.colorCss;
     if (!hex(colour)) throw new TypeError(`${bankIdValue}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
     const tone = (tones ? (tones as number[])[point[3] as number]! : 1) * layerTone;
-    merged.push({ reference: position, colour: toned(graded(colour), tone), bank: bankIdValue }); kept[bankIdValue]!++;
+    const group = groups ? (groups as string[])[index]! : '';
+    merged.push({ reference: position, colour: toned(graded(colour), tone), bank: bankIdValue, ...(group ? { group: `${bankIdValue}:${group}` } : {}) }); kept[bankIdValue]!++;
   });
 }
 const hash = (index: number) => ((index + 1) * 2654435761) % 4294967296;
@@ -165,7 +185,23 @@ let ordered = shuffled.filter(point => {
   drawnOutside[point.bank] = (drawnOutside[point.bank] ?? 0) + 1; kept[point.bank]!--; return false;
 });
 if (recipe.within) console.log(`Already drawn by ${(recipe.within as string[]).join(', ')}: ${JSON.stringify(drawnOutside)}.`);
-if (cap) {
+if (cap?.mode === 'volume' && cap.shell !== undefined) {
+  // Per shell around the Sun: the cap's count for the shell's volume, less the enclosing levels' dots in it, kept in the
+  // fixed shuffle, so the share kept is random within the shell and its clusters keep their contrast.
+  const width = cap.shell, shellOf = (position: readonly number[]) => Math.floor(Math.hypot(...position) / width);
+  const drawn = new Map<number, number>();
+  for (const point of enclosingPoints) drawn.set(shellOf(point), (drawn.get(shellOf(point)) ?? 0) + 1);
+  const roomOf = (shell: number) => {
+    const middle = (shell + 0.5) * width;
+    const taper = cap.taper ? Math.max(0, Math.min(1, (cap.taper[1] - middle) / (cap.taper[1] - cap.taper[0]))) : 1;
+    return cap.perMpc3 * 4 / 3 * Math.PI * (((shell + 1) * width) ** 3 - (shell * width) ** 3) * taper - (drawn.get(shell) ?? 0);
+  };
+  const selected = new Set(selectByShell(ordered, width, roomOf, cap.groupsFirst));
+  ordered = ordered.filter(point => {
+    if (selected.has(point)) return true;
+    capped[point.bank] = (capped[point.bank] ?? 0) + 1; kept[point.bank]!--; return false;
+  });
+} else if (cap) {
   // The space the cap counts in: face-on Galactic x (toward the centre) and y (toward l = 90°) from the Hipparcos
   // rotation for a disc, or the banks' own 3D coordinates for the universe.
   const axes = [[-0.0548755604162154, -0.8734370902348850, -0.4838350155487132], [0.4941094278755837, -0.4448296299600112, 0.7469822444972189]];

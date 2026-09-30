@@ -16,6 +16,13 @@
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/mcxcii.dat.gz",
       "bytes": 312912,
       "citation": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187, byte columns defined by https://cdsarc.cds.unistra.fr/ftp/J/A+A/688/A187/ReadMe"
+    },
+    {
+      "id": "cosmicflows-4",
+      "path": "../../nearby-universe/source/galaxies/cf4-hyperleda.csv.gz",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+      "bytes": 552964,
+      "citation": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, tables 2 (group membership, 1PGC) and 3 (group distance modulus, DMzp), as joined into the Nearby Universe's tracked table"
     }
   ],
   "catalogueSourceId": "mcxc-ii",
@@ -25,13 +32,17 @@
       "id": "virgo-cluster",
       "name": "Virgo Cluster",
       "catalogueId": "MCXC J1230.7+1220",
-      "aliases": []
+      "aliases": [],
+      "cf4Group": "41220",
+      "detailedObjectId": "virgo-cluster"
     },
     {
       "id": "fornax-cluster",
       "name": "Fornax Cluster",
       "catalogueId": "MCXC J0338.4-3526",
-      "aliases": []
+      "aliases": [],
+      "cf4Group": "13418",
+      "detailedObjectId": "fornax-cluster"
     },
     {
       "id": "hydra-cluster",
@@ -39,7 +50,8 @@
       "catalogueId": "MCXC J1036.6-2731",
       "aliases": [
         "Abell 1060"
-      ]
+      ],
+      "cf4Group": "31478"
     },
     {
       "id": "centaurus-cluster",
@@ -47,7 +59,8 @@
       "catalogueId": "MCXC J1248.7-4118",
       "aliases": [
         "Abell 3526"
-      ]
+      ],
+      "cf4Group": "43296"
     },
     {
       "id": "norma-cluster",
@@ -55,7 +68,8 @@
       "catalogueId": "MCXC J1614.3-6052",
       "aliases": [
         "Abell 3627"
-      ]
+      ],
+      "cf4Group": "57612"
     },
     {
       "id": "perseus-cluster",
@@ -63,7 +77,8 @@
       "catalogueId": "MCXC J0319.7+4130",
       "aliases": [
         "Abell 426"
-      ]
+      ],
+      "cf4Group": "12429"
     },
     {
       "id": "coma-cluster",
@@ -71,9 +86,11 @@
       "catalogueId": "MCXC J1259.7+2756",
       "aliases": [
         "Abell 1656"
-      ]
+      ],
+      "cf4Group": "44715"
     }
   ],
-  "description": "Seven nearby named galaxy clusters, independently selected from MCXC-II. Centres and R500 apertures only; no synthetic members or density model.",
-  "distanceCaveat": "Comoving positions derived from spectroscopic redshifts using the MCXC-II flat cosmology (H0=70 km/s/Mpc, Omega_m=0.3). No peculiar-velocity correction or redshift-independent local distance is claimed; this matters especially for nearby Virgo and Fornax."
+  "description": "Seven nearby named galaxy clusters, independently selected from MCXC-II, each at the measured distance of its Cosmicflows-4 group (the group of its brightest galaxy). Centres and R500 apertures; Virgo and Fornax link to packages that draw their member galaxies.",
+  "distanceCaveat": "Each centre is the MCXC-II X-ray position at its Cosmicflows-4 group's distance (the weighted average of the members' distance moduli, table 3 DMzp), where the Nearby Universe draws the members. The MCXC-II redshift's comoving distance (H0=70 km/s/Mpc, Omega_m=0.3) now only checks the catalogue's angular scale; it differs from the group distance by peculiar velocities, most for nearby Virgo and Fornax.",
+  "groupDistanceSourceId": "cosmicflows-4"
 }
