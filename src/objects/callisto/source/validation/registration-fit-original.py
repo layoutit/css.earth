@@ -6,7 +6,7 @@ from rasterio.enums import Resampling
 from PIL import Image
 from scipy.ndimage import map_coordinates,gaussian_filter
 from scipy.optimize import minimize
-root=Path('/Users/ekrof/fed/cssEarth-pluto-small-moons')
+root=Path(__file__).resolve().parents[5]
 image=np.array(Image.open('/tmp/b3-callisto/PIA03456-usgs.png')).astype(float)
 photo=image[:,:,:3]@np.array([.299,.587,.114]);hh,ww=photo.shape
 with rasterio.open(root/'src/planets/callisto/source/callisto-global-1km.tif') as f:

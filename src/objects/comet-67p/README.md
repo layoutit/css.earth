@@ -62,7 +62,7 @@ corresponds to 2.61 m, compared with 5.06 m before; it is not uniform resolution
 
 The browser record covers all eight dataset
 buttons, rotation and zoom, Shadows through Settings, and the Hapi feature card.
-The inspected images come from the restored package in the Codex in-app browser,
+The inspected images come from the restored package in a browser,
 1280 × 720. They prove those flows and reveal remaining visual defects; Chrome
 DPR 1/2 captures and a matched drag-cadence comparison remain unmeasured. The PR
 stays draft pending that visual and performance qualification.

@@ -26,7 +26,7 @@
   },
   "differentSettings": {
     "RULEFILE": {
-      "ours": "/Users/ekrof/fed/css.earth-hubble/output/toolchains/hst/env/lib/python3.12/site-packages/fitsblender/wfc3_header.rules",
+      "ours": "output/toolchains/hst/env/lib/python3.12/site-packages/fitsblender/wfc3_header.rules",
       "mast": "/opt/conda/envs/linux/lib/python3.12/site-packages/fitsblender/wfc3_header.rules"
     }
   },

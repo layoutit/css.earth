@@ -4,7 +4,7 @@ import numpy as np
 import rasterio
 from scipy.ndimage import map_coordinates,gaussian_filter
 from PIL import Image,ImageDraw,ImageFont
-p=Path('/tmp/b3-callisto');root=Path('/Users/ekrof/fed/cssEarth-pluto-small-moons')
+p=Path('/tmp/b3-callisto');root=Path(__file__).resolve().parents[5]
 fit=json.loads((p/'registration-exploratory.json').read_text());parameters=fit['parameters'];lat,lon,roll,cx,cy,r=parameters;lat,lon,roll=np.radians([lat,lon,roll]);ratio=739976.3/2410.3
 photo=np.array(Image.open(p/'PIA03456-usgs.png'))[:,:,:3];grey=photo@np.array([.299,.587,.114]);H,W=grey.shape;yy,xx=np.mgrid[:H,:W];dx=(xx-cx)/(r*ratio);dy=(yy-cy)/(r*ratio);a=1+dx*dx+dy*dy;disc=ratio*ratio-a*(ratio*ratio-1);t=(ratio-np.sqrt(np.maximum(0,disc)))/a
 O=np.array([np.cos(lat)*np.cos(lon),np.cos(lat)*np.sin(lon),np.sin(lat)]);EE=np.array([-np.sin(lon),np.cos(lon),0]);N=np.cross(O,EE)
