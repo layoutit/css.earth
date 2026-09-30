@@ -66,8 +66,14 @@ test('a pill category highlights its bodies and reaches the galaxy, cluster and 
   visibility.setHighlightedClassification('planet');
   assert.ok(latest().highlighted?.includes('jupiter'));
   assert.ok(latest().highlighted?.includes('pluto'), 'the Planets pill marks the dwarf planets too');
+  visibility.setHighlightedClassification('exoplanet');
+  assert.ok(latest().highlighted?.includes('hr-8799-b'));
+  assert.ok(!latest().highlighted?.includes('kepler-1651b'), 'only notable exoplanets are marked');
+  assert.ok(latest().labelHidden?.includes('kepler-1651b'), 'and the rest keep their hidden labels');
+  assert.ok(latest().highlighted?.includes('hr-8799'), 'from afar a planet is its star\'s dot, so the star carries the mark');
+  assert.ok(!latest().highlighted?.includes('sun'));
   visibility.setHighlightedClassification('galaxy');
   assert.deepEqual(latest().highlighted, []);
   visibility.setHighlightedClassification(null);
-  assert.deepEqual(categories, ['planet', 'galaxy', null]);
+  assert.deepEqual(categories, ['planet', 'exoplanet', 'galaxy', null]);
 });

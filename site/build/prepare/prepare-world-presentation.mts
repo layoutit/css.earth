@@ -84,20 +84,55 @@ export function prepareCategoryFrame(positionsM: readonly Position[]): CategoryF
   return { centreM, minimumM: minimum.map((value, axis) => value - centreM[axis]!), maximumM: maximum.map((value, axis) => value - centreM[axis]!) };
 }
 
+/** Whether a body is notable: featured itself (a featured discovery or a default feature), or anywhere in the orbit tree of a
+ * featured body, so every planet of a featured star is notable with it. `centreOf` names each body's orbit centre. */
+export function notableBodies(worldObjects: readonly { id: string; discovery: { featured: boolean } }[], defaultFeatures: ReadonlySet<string>,
+  centreOf: ReadonlyMap<string, string>) {
+  const featured = new Set(worldObjects.filter(object => object.discovery.featured || defaultFeatures.has(object.id)).map(object => object.id));
+  const notable = (id: string) => {
+    // A cycle in the orbit graph is a preparation error elsewhere; the walk stops at the graph's size either way.
+    for (let at: string | undefined = id, steps = 0; at !== undefined && steps <= centreOf.size; at = centreOf.get(at), steps++) if (featured.has(at)) return true;
+    return false;
+  };
+  return new Set(worldObjects.filter(object => notable(object.id)).map(object => object.id));
+}
+
 /** Every category's frame, from the members its pill marks: the world's bodies it highlights with the default settings (the same
  * discoveryVisibility the browser runs), and the catalogue rows the galaxy layer draws (packages/renderer/src/universe/
- * prepared-galaxy-catalog.ts: the Local Group's galaxies with a page, the clusters, and the nebulae with a page). The world and the
- * catalogues share the Sun-centred ICRF frame and epoch. */
+ * prepared-galaxy-catalog.ts: the Local Group's galaxies with a page, the clusters, and the nebulae with a page). A category whose
+ * notable bodies (notableBodies) are only some of its members, at least two, is marked and framed by those alone, listed as its
+ * memberIds: the 40 notable exoplanets and stars, not all 865 and 2,174. hostIds lists the placed stars whose systems hold the
+ * marked members: from afar a planet is drawn inside its star's dot, so the pill marks that star too. The world and the catalogues
+ * share the Sun-centred ICRF frame and epoch. */
 export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS, catalogue: readonly PreparedCatalogObject[],
-  defaultFeatures: ReadonlySet<string>, orbitFeatures: ReadonlySet<string>) {
+  defaultFeatures: ReadonlySet<string>, orbitFeatures: ReadonlySet<string>, notable: ReadonlySet<string>,
+  centreOf: ReadonlyMap<string, string>, worldHostId: string) {
+  // Where a member is drawn from afar: inside the dot of the placed star its orbits lead to. The world's own host (the Sun) is
+  // never one, so a pill marks another star only for its members' systems.
+  const placedStars = new Set(worldObjects.filter(object => (object.classification === 'star' || object.classification === 'black-hole') && object.id !== worldHostId).map(object => object.id));
+  const hostOf = (id: string) => {
+    let at = id;
+    for (let steps = 0; steps <= centreOf.size && centreOf.has(at); steps++) at = centreOf.get(at)!;
+    return at !== id && placedStars.has(at) ? at : null;
+  };
   const drawn = catalogue.filter(object => isNavigableCatalogObject(object) && (isPreparedCluster(object) || isPreparedNebula(object) || object.membership.group === 'local-group'));
   const classifications = [...new Set([...worldObjects.map(object => object.classification), ...drawn.map(catalogueClassification)])].sort();
   return Object.fromEntries(classifications.flatMap(classification => {
     const marked = new Set(discoveryVisibility(worldObjects, { illustrations: false, highlighted: classification, defaultFeatures, orbitFeatures }).highlightedBodies);
-    const frame = prepareCategoryFrame([...worldObjects.filter(object => marked.has(object.id)).map(object => object.worldFrame.originM),
+    const bodies = worldObjects.filter(object => marked.has(object.id)), notables = bodies.filter(object => notable.has(object.id));
+    const narrowed = notables.length >= 2 && notables.length < bodies.length;
+    const frame = prepareCategoryFrame([...(narrowed ? notables : bodies).map(object => object.worldFrame.originM),
       ...drawn.filter(object => matchesObjectClassification(catalogueClassification(object), classification)).map(object => object.positionM)]);
-    return frame ? [[classification, frame] as const] : [];
+    const markedBodies = narrowed ? notables : bodies;
+    const hostIds = [...new Set(markedBodies.flatMap(object => hostOf(object.id) ?? []))];
+    return frame ? [[classification, { ...frame, ...(narrowed ? { memberIds: notables.map(object => object.id) } : {}), ...(hostIds.length ? { hostIds } : {}) }] as const] : [];
   }));
+}
+
+/** Each body's orbit centre, and each named centre's own (a circumbinary planet's barycentre leads to its host star). */
+function orbitCentres(context: typeof APPLICATION_WORLD_CONTEXT): ReadonlyMap<string, string> {
+  return new Map([...context.bodies.flatMap(body => body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []),
+    ...Object.entries(context.orbitCenters ?? {}).map(([id, centre]) => [id, centre.centerBodyId] as const)]);
 }
 
 export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<Record<string, string>>, catalogue: readonly PreparedCatalogObject[]) {
@@ -115,7 +150,9 @@ export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<
     galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
       minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },
     clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },
-    categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, catalogue, new Set(defaultFeatureIds), new Set(orbitFeatureIds)),
+    categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, catalogue, new Set(defaultFeatureIds), new Set(orbitFeatureIds),
+      notableBodies(WORLD_OBJECTS, new Set(defaultFeatureIds), orbitCentres(APPLICATION_WORLD_CONTEXT)), orbitCentres(APPLICATION_WORLD_CONTEXT),
+      APPLICATION_WORLD_CONTEXT.focus.id),
   };
 }
 

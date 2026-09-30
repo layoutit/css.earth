@@ -100,6 +100,8 @@ export function createSceneRouter({
   const contentTransport = createNavigationContent({ documentTarget, windowTarget });
   const reducedMotion = windowTarget.matchMedia?.("(prefers-reduced-motion: reduce)");
   let reducedMotionActive = reducedMotion?.matches === true;
+  // A header pill's flight holds the overview hand-over off until it lands, then settles it once.
+  let categoryFlight = false, refreshOverviewSelection: (() => void) | null = null;
   const requests = createNavigationLifecycle({ onError: report, onCancel(request) {
     if (scenes.current?.request === request && scenes.state.kind !== 'ready') retire(scenes.current, null, { preserveShell: true, flush: false });
   } });
@@ -336,12 +338,15 @@ export function createSceneRouter({
       owner.shell = registry.mountObjectShell({ objectId, readSelection: () => current.current, documentTarget, windowTarget,
         preferences: preferences.bind(() => shellOwner === owner && scenes.current !== null),
         onResetDestination: () => { void navigate(objectId, { kind: 'feature', id: null }).catch(report); },
-        // A header pill flies to its category, keeping the selection; a navigation already in flight keeps the camera.
+        // A header pill flies to its category, keeping the selection; a navigation already in flight keeps the camera. The
+        // overview hand-over waits for the landing: swapping scenes on the way out would cancel the flight.
         onFrameCategory: classification => {
           const session = scenes.current;
           if (!session?.mount || !context || requests.current || !scenes.isCurrent(session)) return;
+          categoryFlight = true;
           void context.navigation.frameCategory({ classification, objectId, mount: session.mount, signal: session.signal, reducedMotion: reducedMotionActive })
-            .catch((error: unknown) => { if (!session.signal.aborted) reportError(error); });
+            .catch((error: unknown) => { if (!session.signal.aborted) reportError(error); })
+            .finally(() => { categoryFlight = false; if (scenes.isCurrent(session)) refreshOverviewSelection?.(); });
         },
         navigable: id => navigable(id),
         // A failed prefetch is not an error yet: the navigation that needs it asks again and reports.
@@ -594,7 +599,7 @@ export function createSceneRouter({
     const owner = session.mount?.navigation;
     if (!owner) return;
     const { selection: current, objects, registry } = ready;
-    session.own(registry.watchOverviewSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
+    const watch = registry.watchOverviewSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
       getOverview: () => current.context.kind === 'overview',
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.
@@ -602,7 +607,7 @@ export function createSceneRouter({
       // its prepared bank has loaded and the runtime can report it. The camera
       // scale must not deselect it during that window.
       isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current
-        && current.current.kind !== 'focus',
+        && current.current.kind !== 'focus' && !categoryFlight,
       windowTarget,
       onChange(next) {
         if (!next.overview || next.objectId === objectId) {
@@ -618,7 +623,10 @@ export function createSceneRouter({
         }
         void navigate(next.objectId, { kind: 'overview', scope: 'system', camera: 'preserve' });
       },
-    }));
+    });
+    session.own(watch);
+    refreshOverviewSelection = watch.refresh;
+    session.own(() => { if (refreshOverviewSelection === watch.refresh) refreshOverviewSelection = null; });
   }
   function connectSatelliteSelection(ready: RouterContext, session: Session) {
     if (!satelliteSystemByHost(objectId) && !satelliteSystemOfMember(objectId)) return;

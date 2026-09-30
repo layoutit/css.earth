@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { prepareCategoryFrame, CATEGORY_FRAMED_SHARE } from '../build/prepare/prepare-world-presentation.mts';
+import { notableBodies, prepareCategoryFrame, CATEGORY_FRAMED_SHARE } from '../build/prepare/prepare-world-presentation.mts';
 import { PREPARED_WORLD_PRESENTATION } from '../prepared-world-presentation.mts';
 import { CATEGORY_FRAMES, categoryZoomTarget } from '../system-framing.mts';
 const test = sourceTest();
@@ -23,7 +23,7 @@ test('a category with one member, or with every member at one point, has no fram
 
 test('every header pill has a prepared frame, and the galaxy frame holds the Magellanic Clouds and Andromeda', async () => {
   // The pills in site/components/ObjectShell.astro.
-  for (const classification of ['planet', 'satellite', 'comet', 'asteroid', 'star', 'nebula', 'galaxy']) {
+  for (const classification of ['planet', 'satellite', 'comet', 'asteroid', 'star', 'exoplanet', 'nebula', 'galaxy']) {
     assert.ok(PREPARED_WORLD_PRESENTATION.categoryFrames.has(classification), `${classification} has no prepared frame`);
     assert.ok(CATEGORY_FRAMES.has(classification));
   }
@@ -52,4 +52,21 @@ test('a pill fits its box at the current angle, centred on it, and a category wi
   // Looking down -z, the camera sits on the +z side of the box's centre, beyond its near face.
   assert.ok(target.world.pose.positionM[2] - frame.centre[2] > frame.candidate.maximumM[2]);
   assert.equal(categoryZoomTarget('no-such-category', from, optics, { left: -380, right: 380, top: -280, bottom: 280 }), null);
+});
+
+test('a notable body is featured itself or orbits within a featured system, however deep', () => {
+  const objects = [{ id: 'host', discovery: { featured: true } }, { id: 'barycentre-planet', discovery: { featured: false } },
+    { id: 'plain-star', discovery: { featured: false } }, { id: 'plain-planet', discovery: { featured: false } },
+    { id: 'default-feature', discovery: { featured: false } }];
+  const centres = new Map([['barycentre-planet', 'barycentre'], ['barycentre', 'host'], ['plain-planet', 'plain-star']]);
+  assert.deepEqual([...notableBodies(objects, new Set(['default-feature']), centres)], ['host', 'barycentre-planet', 'default-feature']);
+});
+
+test('the Exoplanets and Stars pills mark and frame their notable members, the directly imaged planets among them', () => {
+  const exoplanets = PREPARED_WORLD_PRESENTATION.categoryFrames.get('exoplanet')?.memberIds;
+  assert.ok(exoplanets && exoplanets.size >= 2);
+  for (const id of ['hr-8799-b', 'beta-pictoris-b', 'pds-70-b', 'trappist-1e', 'wasp-18b']) assert.ok(exoplanets.has(id), id);
+  assert.ok(!exoplanets.has('kepler-1651b'), 'a planet of an unfeatured star is left to search');
+  assert.ok(PREPARED_WORLD_PRESENTATION.categoryFrames.get('star')?.memberIds?.has('betelgeuse'));
+  assert.equal(PREPARED_WORLD_PRESENTATION.categoryFrames.get('planet')?.memberIds, undefined, 'every planet is notable');
 });

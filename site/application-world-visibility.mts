@@ -80,11 +80,13 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
 
   function update() {
     if (lifetime.disposed) return;
-    const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, compact: phone, defaultFeatures, systemMembers, orbitFeatures });
+    const category = highlighted === null ? undefined : prepared.categoryFrames.get(highlighted);
+    const highlightedIds = category?.memberIds, hosts: ReadonlySet<string> = new Set(category?.hostIds);
+    const visibility = discoveryVisibility(SCENE_OBJECTS, { illustrations, highlighted, ...(highlightedIds ? { highlightedIds } : {}), compact: phone, defaultFeatures, systemMembers, orbitFeatures });
     layer.setBodyVisibility({
       bodyHidden: visibility.hiddenBodies.filter(id => !openSystem.has(id)),
-      labelHidden: [...visibility.hiddenLabels, ...plainDotIds].filter(id => !openSystem.has(id)),
-      highlighted: visibility.highlightedBodies,
+      labelHidden: [...visibility.hiddenLabels, ...plainDotIds].filter(id => !openSystem.has(id) && !hosts.has(id)),
+      highlighted: [...visibility.highlightedBodies, ...hosts],
       // Mission targets keep circles; ordinary asteroids retain a hover/pick target.
       indicatorHidden: ordinaryAsteroidIds,
       orbitHidden: hiddenOrbitIds.filter(id => id !== selectedCometId),

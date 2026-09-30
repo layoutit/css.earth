@@ -45,7 +45,12 @@ function categoryFrames(value: unknown) {
     if (!isRecord(frame)) throw new TypeError(`Prepared world presentation categoryFrames.${classification} must be a box.`);
     const minimumM = vector(frame.minimumM, `${classification}.minimumM`), maximumM = vector(frame.maximumM, `${classification}.maximumM`);
     if (minimumM.some((value, axis) => value > maximumM[axis]!)) throw new TypeError(`Prepared world presentation categoryFrames.${classification} has a minimum beyond its maximum.`);
-    return [classification, Object.freeze({ centreM: vector(frame.centreM, `${classification}.centreM`), minimumM, maximumM })] as const;
+    // Present when the pill marks and frames only the category's notable members.
+    const memberIds = frame.memberIds === undefined ? undefined : new Set(ids(frame.memberIds, `categoryFrames.${classification}.memberIds`));
+    // The placed stars that carry the members' mark from afar.
+    const hostIds = frame.hostIds === undefined ? undefined : ids(frame.hostIds, `categoryFrames.${classification}.hostIds`);
+    return [classification, Object.freeze({ centreM: vector(frame.centreM, `${classification}.centreM`), minimumM, maximumM,
+      ...(memberIds ? { memberIds } : {}), ...(hostIds ? { hostIds } : {}) })] as const;
   }));
 }
 

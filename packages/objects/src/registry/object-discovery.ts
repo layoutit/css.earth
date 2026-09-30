@@ -43,6 +43,9 @@ export function isDiscoveryAnchor(object: { classification: string }): boolean {
 type DiscoveryObjects = readonly { id: string; classification: string; discovery: ObjectDiscovery }[];
 export interface DiscoveryVisibilityOptions {
   illustrations: boolean; highlighted?: string | null;
+  /** The highlighted category's notable members when its pill marks only those (prepared with its frame); a page passes the same
+   * set for the same category. */
+  highlightedIds?: ReadonlySet<string>;
   /** Objects the default view features (prepared: dwarf planets, featured discoveries, JPL mission-target asteroids). */
   defaultFeatures: ReadonlySet<string>;
   /** Phones: an asteroid that is not a mission target draws nothing unless its category is highlighted. */
@@ -67,7 +70,7 @@ export function discoveryVisibility(objects: DiscoveryObjects, options: Discover
   if (!inputs) visibilityCache.set(objects, inputs = []);
   let entry = inputs.find(item => item.defaultFeatures === options.defaultFeatures && item.systemMembers === options.systemMembers && item.orbitFeatures === options.orbitFeatures);
   if (!entry) inputs.push(entry = { defaultFeatures: options.defaultFeatures, systemMembers: options.systemMembers, orbitFeatures: options.orbitFeatures, results: new Map() });
-  const key = JSON.stringify([options.illustrations, options.compact === true, options.highlighted ?? null]);
+  const key = JSON.stringify([options.illustrations, options.compact === true, options.highlighted ?? null, options.highlightedIds?.size ?? null]);
   let result = entry.results.get(key);
   if (!result) entry.results.set(key, result = computeDiscoveryVisibility(objects, options));
   return result;
@@ -83,7 +86,8 @@ function computeDiscoveryVisibility(objects: DiscoveryObjects, options: Discover
     const namedStar = object.classification !== 'star' || object.discovery.featured || options.systemMembers?.has(object.id) === true;
     const featured = (!illustration || options.illustrations) && (options.defaultFeatures.has(object.id) || isDiscoveryAnchor(object) && namedStar);
     if (offTheMap(object)) { hiddenBodies.push(object.id); hiddenLabels.push(object.id); continue; }
-    const highlighted = matchesObjectClassification(object.classification, options.highlighted) && (!illustration || options.illustrations);
+    const highlighted = matchesObjectClassification(object.classification, options.highlighted) && (!illustration || options.illustrations)
+      && (!options.highlightedIds || options.highlightedIds.has(object.id));
     if (highlighted) highlightedBodies.push(object.id);
     if (illustration && !options.illustrations) hiddenBodies.push(object.id);
     else if (options.compact && object.classification === 'asteroid' && !options.defaultFeatures.has(object.id) && !highlighted) hiddenBodies.push(object.id);
