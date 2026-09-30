@@ -142,7 +142,10 @@ export function mountObjectShell({
     if (DIAGNOSTICS_ENABLED) own(mountDiagnosticRecorder({ documentTarget, windowTarget, readCamera: () => camera }));
     objectBrowser = own(createObjectBrowserController(documentTarget, windowTarget, lifetime, { readSelection, readObjectId: () => objectId,
       onCategoryChange: value => preferences.set('highlightedClassification', value),
-      onResetDestination, onFrameCategory, readIllustrationModels: () => preferences.state.illustrationModelsEnabled,
+      onResetDestination,
+      // The fit measures the shell around the scene, so it waits for the sheet a pill just opened to come to rest.
+      onFrameCategory: classification => { void sheet.whenSettled().then(() => { if (!lifetime.disposed) onFrameCategory?.(classification); }); },
+      readIllustrationModels: () => preferences.state.illustrationModelsEnabled,
       onSearchChange: (open, browsing) => sheet.followSearch(open, browsing) }));
     lifetime.onDispose(preferences.subscribe(key => {
       if (key === 'illustrationModelsEnabled') objectBrowser.refreshIllustrations();

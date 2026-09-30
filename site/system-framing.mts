@@ -158,7 +158,9 @@ export function systemFramingRect(optics: Optics, documentTarget?: Document) {
   if (stage && documentTarget) {
     const cx = stage.left + stage.width / 2, cy = stage.top + stage.height / 2;
     // Read once on selection, never in the animation loop.
-    for (const selector of ['.object-sidebar', '.explorer-shell-header', '.object-footer']) {
+    // On tablets the pill row rides the sheet's top edge, level with the search, over the scene. (The search box itself sits
+    // left of centre there, where this reading would take it for a sidebar.)
+    for (const selector of ['.object-sidebar', '.explorer-shell-header', '.object-footer', '.object-search-categories']) {
       const box = documentTarget.querySelector(selector)?.getBoundingClientRect();
       if (!box || !box.width || !box.height) continue;
       if (box.right < cx) rect.left = Math.max(rect.left, box.right - cx);

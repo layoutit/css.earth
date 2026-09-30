@@ -77,11 +77,16 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
   const clearOffset = () => {
     for (const reader of readers) reader.style.removeProperty("transform");
   };
+  // Callers waiting for the sheet to rest (whenSettled): a camera fit measures the sheet's edge where it stops.
+  let restWaiters: (() => void)[] = [];
   const endSettle = () => {
     if (settleTimer) windowTarget.clearTimeout(settleTimer);
     settleTimer = 0;
     sheet.classList.remove("is-settling");
     for (const reader of readers) reader.style.removeProperty("--sheet-snap-duration");
+    const waiters = restWaiters;
+    restWaiters = [];
+    for (const resolve of waiters) resolve();
   };
   const nearest = (offset: number, points: SheetStops, candidates: readonly SheetState[] = states) =>
     candidates.reduce((best, next) =>
@@ -233,10 +238,10 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     settle(states[Math.max(0, Math.min(states.length - 1, states.indexOf(state) + step))] ?? state);
   }, { signal });
 
-  // Typed results take the whole sheet over the keyboard. A pill's results open halfway, so the map above still shows the
-  // category the camera flies to and marks.
-  const openSearch = (height: "full" | "half") => {
-    if (!mobile.matches || state === "full" || state === height) return;
+  // Typed results take the whole sheet over the keyboard. A pill's results rest at the peek, the height the scene is laid out
+  // around, so the map shows the whole category the camera flies to and marks; the list is a drag away.
+  const openSearch = (height: "full" | "peek") => {
+    if (!mobile.matches || state === height) return;
     searchReturn ??= state;
     settle(height);
   };
@@ -283,8 +288,12 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
       searchReturn = null;
       settle("peek");
     },
+    /** Resolves once the sheet rests: at once when it is not snapping, or when its snap ends or is replaced. */
+    whenSettled() {
+      return sheet.classList.contains("is-settling") ? new Promise<void>(resolve => { restWaiters.push(resolve); }) : Promise.resolve();
+    },
     followSearch(open: boolean, browsing = false) {
-      if (open) openSearch(browsing ? "half" : "full");
+      if (open) openSearch(browsing ? "peek" : "full");
       else leaveSearch();
     },
     destroy() {
