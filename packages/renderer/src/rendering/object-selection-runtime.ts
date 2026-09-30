@@ -175,7 +175,7 @@ export function createObjectSelectionRuntime({
           }
           request.plan = plan;
           residency.beginFrame();
-          try { presentation.commitSelection({ selection, plan, view, resources: residency.resources }); }
+          try { presentation.commitSelection({ selection, plan, view, resources: residency.resources, motion }); }
           finally { residency.endFrame(); }
           if (!current()) { discard(request); return false; }
           residency.commit(ticket);
