@@ -147,7 +147,8 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   await runIpadJourney(process.argv.slice(2)).catch((error: unknown) => {
-    console.error(`ipad-run: ${error instanceof Error ? error.message : String(error)}`);
+    // Some device failures reject with an empty message; the stack still says where.
+    console.error(`ipad-run: ${error instanceof Error ? error.message || error.stack || error.name : String(error)}`);
     process.exitCode = 1;
   });
 }

@@ -17,7 +17,7 @@ async function within<T>(task: Promise<T>, milliseconds: number, message: string
 }
 
 type WorkerReply = { readonly id: number; readonly ok: boolean; readonly error?: string; readonly warning?: string | null; readonly frames?: number };
-type PendingReply = { readonly resolve: (reply: WorkerReply) => void; readonly reject: (error: Error) => void };
+type PendingReply = { readonly resolve: (reply: WorkerReply) => void; readonly reject: (error: Error) => void; readonly op?: string };
 
 /**
  * Python only owns pymobiledevice3's async service calls. This TypeScript file
@@ -121,7 +121,7 @@ async def main(url, udid):
                         else:
                             raise ValueError("unknown operation: " + str(operation))
                     except Exception as error:
-                        reply(id, False, error=str(error))
+                        reply(id, False, error=f"{type(error).__name__}: {error}")
                 await worker.stop()
         finally:
             if session is not None:
@@ -134,7 +134,8 @@ try:
 except KeyboardInterrupt:
     pass
 except Exception as error:
-    print(json.dumps({"id": 0, "ok": False, "error": str(error)}), flush=True)
+    import traceback
+    print(json.dumps({"id": 0, "ok": False, "error": f"{type(error).__name__}: {error}\n{traceback.format_exc()[-1500:]}"}), flush=True)
     raise
 `;
 
@@ -190,8 +191,8 @@ export async function startIpadDeviceSession(url: string, udid: string | null): 
         if (reply.id === 0 && reply.event === 'READY') { ready?.resolve(reply); ready = null; }
         else {
           const request = pending.get(reply.id);
-          if (request) { pending.delete(reply.id); reply.ok ? request.resolve(reply) : request.reject(new Error(reply.error ?? 'iPad worker request failed.')); }
-          else if (!reply.ok) rejectPending(new Error(reply.error ?? 'iPad worker failed.'));
+          if (request) { pending.delete(reply.id); reply.ok ? request.resolve(reply) : request.reject(new Error(`iPad worker ${request.op} failed: ${reply.error || JSON.stringify(reply)}${stderr.length ? `; stderr: ${stderr.join('').trim().slice(-800)}` : ''}`)); }
+          else if (!reply.ok) rejectPending(new Error(`iPad worker failed: ${reply.error || JSON.stringify(reply)}`));
         }
       } catch { rejectPending(workerError(child, stderr, `Invalid iPad worker reply ${JSON.stringify(line)}`)); }
       newline = output.indexOf('\n');
@@ -202,7 +203,7 @@ export async function startIpadDeviceSession(url: string, udid: string | null): 
 
   const request = (op: 'START' | 'STOP' | 'SHOT' | 'CLOSE', fields: Record<string, string> = {}) => new Promise<WorkerReply>((resolveReply, reject) => {
     if (closed || !child.stdin?.writable) { reject(new Error('The iPad device session is closed.')); return; }
-    const id = nextId++; pending.set(id, { resolve: resolveReply, reject });
+    const id = nextId++; pending.set(id, { resolve: resolveReply, reject, op });
     child.stdin.write(`${JSON.stringify({ id, op, ...fields })}\n`, error => {
       if (error) { pending.delete(id); reject(error); }
     });
