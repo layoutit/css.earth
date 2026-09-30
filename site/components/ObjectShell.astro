@@ -244,6 +244,7 @@ const searchCategories = [
             <div class="object-title-tags"><span class="object-classification-tag object-title-tag" data-focus-status></span></div>
           </div>
           <p class="object-introduction" data-focus-introduction hidden></p>
+          <a class="object-learn-more-link" data-focus-learn-more target="_blank" rel="noopener noreferrer" hidden>Learn more ↗</a>
           <p class="object-introduction" data-focus-unavailable role="status" hidden
             data-unavailable-objects={Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id).join(' ')}></p>
         </section>

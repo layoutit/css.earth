@@ -16,7 +16,6 @@ import { createSceneLifetime } from "@cssearth/engine";
 import { createViewReadout } from "../view-readout.mts";
 import { createSurfaceMapReader } from "../minimap/surface-map-context.mts";
 import { mountDiagnosticRecorder } from '../diagnostic-recorder.mts';
-import { bodyCardViewAtCamera } from '../overview-context.mts';
 import { bindNavigationIntent, navigationFragments } from '../navigation/navigation-fragments.mts';
 import { createSheetController } from './shell-sheet.mts';
 import { bindDatasetPicker } from '../dataset-picker.mts';
@@ -49,10 +48,8 @@ export function mountObjectShell({
   let boundCardMaps: HTMLElement[] = [];
   let surfaceReader: ReturnType<typeof createSurfaceMapReader>;
   let releaseArrivalControls = () => {};
-  let navigationTransition: (ShellNavigationTransition & { cardView: 'detail' | 'overview' | null;
-    cardSubject: 'body' | 'satellite-system' | null; retainsSourceCard: boolean }) | null = null;
+  let navigationTransition: (ShellNavigationTransition & { cardSubject: 'body' | 'satellite-system' | null; retainsSourceCard: boolean }) | null = null;
   let camera: ShellCamera | null = null;
-  let unsubscribeCamera: (() => void) | null = null;
   const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
   const focusCard = createPreparedFocusCard(focusRoot, id => focusTabs.show(id));
@@ -70,10 +67,9 @@ export function mountObjectShell({
       windowTarget.reportError(error);
     });
   }
-  lifetime.onDispose(() => unsubscribeCamera?.());
-  // The card panel is retained; a camera frame re-queries it only after a card swap.
+  // The selected card panel stays retained across subject changes.
   let information: HTMLElement | null = null;
-  // The card switches between detail and overview layouts: a layout change, so it waits while the camera coasts and
+  // Switching between a body and its system changes layout, so it waits while the camera coasts and
   // follows once the coast stops (docs/performance/motion-freezes-membership.md).
   let coasting = false;
   // Zooming across overviews changes the page while the camera may coast; its head and forms follow once it stops.
@@ -88,14 +84,11 @@ export function mountObjectShell({
   };
   drawer.ownerDocument.addEventListener('objectmotionchange', motionChanged, { capture: true });
   lifetime.onDispose(() => drawer.ownerDocument.removeEventListener('objectmotionchange', motionChanged, { capture: true }));
-  function updateBodyCard(world = camera?.navigation?.capture()) {
+  function updateBodyCard() {
     if (coasting || navigationTransition?.retainsSourceCard) return;
     if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.object-information-panel');
     const subject = navigationTransition?.cardSubject ?? (readSelection().kind === 'satellite-system' ? 'satellite-system' : 'body');
-    const previous = information?.dataset.cardView;
-    const view = subject === 'satellite-system' ? 'overview' : navigationTransition?.cardView ?? bodyCardViewAtCamera(world, camera?.navigation?.frame,
-      camera?.navigation?.optics?.(), objectId,
-      previous === 'detail' || previous === 'overview' ? previous : undefined);
+    const view = subject === 'satellite-system' ? 'overview' : 'detail';
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
     if (information && information.dataset.cardSubject !== subject) information.dataset.cardSubject = subject;
   }
@@ -185,9 +178,8 @@ export function mountObjectShell({
     presentSelection,
     setCamera(provider: ShellCamera | null) {
       if (!lifetime.disposed) {
-        unsubscribeCamera?.(); camera = provider;
+        camera = provider;
         viewReadout.setCamera(provider);
-        unsubscribeCamera = provider?.navigation?.subscribe(world => updateBodyCard(world)) ?? null;
         updateBodyCard();
       }
     },
@@ -223,11 +215,6 @@ export function mountObjectShell({
       // Removing the offscreen context rail repaints the resident 3D surface in
       // WebKit. Publish the prepared card only after the router retires that scene.
       retainsSourceCard,
-      // Classify the endpoint once; intermediate flight poses must not toggle
-      // the destination's retained overview/detail card.
-      cardView: target.kind === 'satellite-system' ? 'overview' : target.kind === 'object' ? (target.targetWorldCamera
-        ? bodyCardViewAtCamera(target.targetWorldCamera, target.object.worldFrame, camera?.navigation?.optics?.(), target.object.id)
-        : 'detail') : null,
       cardSubject: target.kind === 'overview' ? null : target.kind === 'satellite-system' ? 'satellite-system' : 'body',
       arrive({ subject, content }) {
         if (navigationTransition !== transition || arrived) return;

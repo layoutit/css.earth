@@ -1,6 +1,5 @@
 import { isArray, isRecord, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-/** A `spectrum` chart of an object's chart recipe (`charts.ts` dispatches every kind). It is declared here, not there, so the
- * body overview (site/prepare-body-overview.mts) reads spectra without reaching the other chart kinds or @cssearth/bake. */
+/** Decode source samples for compact spectrum charts independently of the other chart kinds and @cssearth/bake. */
 export interface SpectrumRecipe {id:string;title:string;description:string;output:string;metadata:Record<string,unknown>;kind:'spectrum';source:string;format:'json-columns'|'numeric-lines';pointCount:number;maximum:number;maximumRoundingScale?:number;requiredHeader?:string;xField?:string;yField?:string;countField?:string;countValue?:number;xScale?:number;minimumX?:number;maximumX?:number;metadataFields?:Record<string,string>;}
 export interface SpectrumPoint {wavelength: number; total: number;}
 

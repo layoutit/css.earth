@@ -237,7 +237,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const depthOrder = createDepthOrder(bodies, depthBase);
   // Hidden bodies leave the paint order, except the selected one.
   const refreshDepthBodies = () => depthOrder.setMembers(bodies.filter(entry => !entry.bodyHidden || entry === selectedEntry));
-  let overview = false;
+  let overview = false, overviewSelection = false;
   let highlighting = false;
   let selectionPreview: string | null | undefined;
   let navigationInFlight = false;
@@ -321,7 +321,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       return { world, viewport: { ...viewport,
         widthPixels: viewport.widthPixels ?? host.clientWidth, heightPixels: viewport.heightPixels ?? host.clientHeight },
         contextCommittedId: contextFrames.committedId,
-        selectedId: selectedEntry.body.id, overview, selectionPreview, navigationInFlight, rotationActive: rotationPhase === 'dragging',
+        selectedId: selectedEntry.body.id, overview, overviewSelection, selectionPreview, navigationInFlight, rotationActive: rotationPhase === 'dragging',
         preserveCommittedAnnotations: rotationPhase === 'released',
         labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
@@ -359,11 +359,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       selectionPreview = id;
       refresh();
     },
-    setOverview(enabled: boolean) {
-      if (overview === enabled || destroyed) return;
+    setOverview(enabled: boolean, preserveSelection = false) {
+      const selected = enabled && preserveSelection;
+      if ((overview === enabled && overviewSelection === selected) || destroyed) return;
       settleHover();
       invalidatePolicy();
       overview = enabled;
+      overviewSelection = selected;
       refresh();
     },
     setBodyVisibility(next: BodyVisibility) {
@@ -467,7 +469,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       presentationRevision++;
       const { ranksChanged, changed: depthChanged } = depthOrder.update(world.pose.orientationXyzw, rotating, selectedEntry);
       const { emphasizedId, width, height } = frame;
-      const selectionStrength = selectionPolicy.strengthAt(emphasizedId, world.pose.positionM);
+      const selectionStrength = selectionPolicy.strengthAt(emphasizedId, world.pose.positionM, overviewSelection);
       // Inside the focus star's system, other systems' bodies stay clickable but read as not belonging to it.
       const starField = starFieldFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]!)), plan.system);
       const otherSystemOpacity = systemFade.of(0) > .5

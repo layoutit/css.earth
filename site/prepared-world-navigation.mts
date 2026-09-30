@@ -30,7 +30,7 @@ interface WorldFlightRequest {
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, LENS_VOLUMES, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
-import { bodyCardViewAtCamera, overviewFrameDistanceM } from './overview-context.mts';
+import { bodyViewAtCamera, overviewFrameDistanceM } from './overview-context.mts';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, worldCameraFromCenteredPresentation, worldCameraViewport, savedWorldCamera, parseSharedView, presentWorldCamera } from '@cssearth/renderer/navigation';
@@ -146,7 +146,7 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const owner = mount?.navigation, frame = frames.get(objectId);
       const from = owner?.capture() ?? lastCamera, optics = owner?.optics() ?? lastOptics;
       if (!from || !optics || !frame) return null;
-      if (!force && objectId === fromId && bodyCardViewAtCamera(from, frame, optics, objectId) === 'detail') return null;
+      if (!force && objectId === fromId && bodyViewAtCamera(from, frame, optics, objectId) === 'detail') return null;
       return frameSystem(from, frame, optics, objectId, force);
     },
     /** The world camera a URL's saved view names on the mounted object, or null without one.

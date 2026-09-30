@@ -254,9 +254,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             publishSuppressedLabels();
             spatial.previewSelection(id);
           },
-          setOverview(enabled: boolean, scope?: string) {
+          setOverview(enabled: boolean, scope?: string, preserveSelection = false) {
             overview = enabled;
-            spatial.setOverview(enabled);
+            spatial.setOverview(enabled, preserveSelection);
             publishSuppressedLabels();
           },
           setNavigationInFlight(active: boolean) { spatial.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },

@@ -49,22 +49,15 @@ export function createContextSelectionPolicy(plan: PreparedWorldContext) {
     /** Relax emphasis from half to twice the primary body's solar-orbit radius.
      * Moons share their planet's scale. Distance makes the fade independent of
      * viewing angle; 1/64 steps avoid rewriting opacity for tiny camera changes. */
-    strengthAt(emphasizedId: string | null, cameraPositionM: PositionM): number {
+    strengthAt(emphasizedId: string | null, cameraPositionM: PositionM, selectedSystem = false): number {
       if (emphasizedId === null || systemStars.has(emphasizedId)) return 0;
+      // An explicitly selected satellite family keeps its emphasis until selection changes.
+      if (selectedSystem) return 1;
       const scale = scales.get(systems.get(emphasizedId) ?? emphasizedId);
       if (!scale || !(scale.radius > 0)) return 1;
       const distance = Math.hypot(...cameraPositionM.map((value, axis) => value - scale.position[axis]));
       const t = Math.max(0, Math.min(1, Math.log2(distance / (.5 * scale.radius)) / 2));
       return Math.round((1 - t * t * (3 - 2 * t)) * 64) / 64;
-    },
-    /** An orbit belongs to the family it circles, not the body travelling on it.
-     * The host's stellar orbit stays as dim parent-system context. */
-    orbitOpacity(bodyId: string, emphasizedId: string | null, hovered = false, strength = 1): number {
-      if (hovered || emphasizedId === null || systemStars.has(emphasizedId)) return 1;
-      const center = parents.get(bodyId);
-      const selectedSystem = systems.get(emphasizedId);
-      return center !== undefined && selectedSystem !== undefined && systems.get(center) === selectedSystem
-        ? 1 : 1 - (1 - UNRELATED_OPACITY) * strength;
     },
     opacity(bodyId: string, emphasizedId: string | null, hovered = false, strength = 1): number {
       if (hovered || emphasizedId === null || systemStars.has(emphasizedId) || bodyId === emphasizedId) return 1;

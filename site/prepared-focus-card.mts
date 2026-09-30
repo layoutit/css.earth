@@ -6,6 +6,7 @@ import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import { requiredElement } from './browser/browser-types.mts';
 import { overviewHolding } from '@cssearth/objects';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
+import { wikipediaLearnMoreUrl } from './learn-more.mts';
 
 interface PreparedFocusCard {
   set(record: PreparedCatalogObject | null, sources?: readonly SpatialCitation[], presentation?: PreparedFocusPresentation | null): void;
@@ -24,6 +25,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
   const aliasesRow = root.querySelector<HTMLElement>('[data-focus-aliases-row]');
+  const learnMore = root.querySelector<HTMLAnchorElement>('[data-focus-learn-more]');
   const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
   const sourceRows = [...root.querySelectorAll<HTMLElement>('[data-focus-source-row]')];
   const breadcrumbs = [...root.querySelectorAll<HTMLElement>('[data-focus-breadcrumb-scope]')];
@@ -88,6 +90,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       const message = missing ? `The 3D view of ${record.name} is unavailable in this installation. Catalogue facts remain available.` : '';
       if (unavailable.textContent !== message) unavailable.textContent = message;
     }
+    if (learnMore && !record) learnMore.hidden = true;
     if (!record) return;
     root.dataset.preparedFocusId = record.id;
     for (const bank of root.querySelectorAll<HTMLElement>('[data-focus-record-bank]')) bank.hidden = bank.dataset.focusRecordBank !== record.id;
@@ -97,6 +100,11 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     write('aliases', aliases);
     write('introduction', nebula ? record.introduction.text : aliases ? `Also known as ${aliases}` : '');
     fields.introduction.hidden = !nebula && !aliases;
+    if (learnMore) {
+      const href = wikipediaLearnMoreUrl(record.name);
+      if (learnMore.getAttribute('href') !== href) learnMore.setAttribute('href', href);
+      learnMore.hidden = fields.introduction.hidden;
+    }
     if (aliasesRow) aliasesRow.hidden = !nebula || !aliases;
     // The trail leads to the level that holds the focus's classification (its overview's `holds`).
     const parent = overviewHolding(KNOWN_OVERVIEWS, catalogueClassification(record));

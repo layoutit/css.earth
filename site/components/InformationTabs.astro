@@ -16,7 +16,7 @@ collectInformationTabStyle(Astro.locals, informationTabStyle(`${idPrefix}-inform
   tabs.map(tab => ({ id: `${idPrefix}-${tab.id}-tab`, panelId: `${idPrefix}-${tab.id}-${panelSuffix}` }))));
 ---
 <div class:list={[group === 'overview' ? 'object-tabs' : 'object-card-tabs', 'object-native-tabs']}
-  data-body-overview={group === 'overview' ? true : undefined} role="radiogroup" aria-label={label} {hidden}>
+  role="radiogroup" aria-label={label} {hidden}>
   {tabs.map((tab) => <>
     <input class="object-native-tab" type="radio" name={`${idPrefix}-information`} id={`${idPrefix}-${tab.id}-tab`}
       data-information-tab={tab.id} data-information-group={group} value={tab.id} aria-controls={`${idPrefix}-${tab.id}-${panelSuffix}`} checked={tab.id === (initialTab ?? tabs[0]?.id)} />

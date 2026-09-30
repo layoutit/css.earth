@@ -851,7 +851,7 @@ test('prepared planetary systems retain identified moon paths and retire offscre
   layer.destroy();
 });
 
-test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full emphasis and dims unrelated bodies and paths', orbitRenderer => {
+test.each(['bars', 'strokes'] as const)('%s dims unrelated body markers while keeping orbit opacity independent of selection', orbitRenderer => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const base = plan(1), parent = base.bodies[0]!;
@@ -881,10 +881,10 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
       const actual = opacity(body.id), normal = baseline.get(body.id)!;
       expect(normal.marker).toBeGreaterThan(0); expect(normal.line).toBeGreaterThan(0);
       expect(actual.marker / normal.marker, `${id} -> ${body.id} marker`).toBeCloseTo(expected, 1);
-      expect(actual.line / normal.line, `${id} -> ${body.id} orbit`).toBeCloseTo(body.id === parent.id ? .25 : expected, 1);
+      expect(actual.line / normal.line, `${id} -> ${body.id} orbit`).toBeCloseTo(1, 1);
     }
   }
-  // Finishing the preview keeps orbit emphasis in the selected system overview.
+  // Finishing the preview preserves the same orbit appearance in the system overview.
   layer.previewSelection(parent.id); document.defaultView.advance(200);
   const arrival = new Map(context.bodies.map(body => [body.id, opacity(body.id).line]));
   layer.previewSelection(undefined); document.defaultView.advance(200);
@@ -912,7 +912,7 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
   layer.previewSelection(parent.id);
   publishDistance(40);
   expect(opacity(unrelated.id).marker / baseline.get(unrelated.id)!.marker).toBeCloseTo(.25, 1);
-  expect(opacity(unrelated.id).line / baseline.get(unrelated.id)!.line).toBeCloseTo(.25, 1);
+  expect(opacity(unrelated.id).line / baseline.get(unrelated.id)!.line).toBeCloseTo(1, 1);
   layer.destroy();
 });
 

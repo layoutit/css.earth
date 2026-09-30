@@ -58,6 +58,7 @@ function placedSystemOf(id: string): ReadonlySet<string> {
   return new Set([root, ...placedSystems.members.get(root) ?? []]);
 }
 const hiddenOrbitIds = prepared.hiddenOrbitIds;
+const cometIds = new Set(SCENE_OBJECTS.filter(object => object.classification === 'comet').map(object => object.id));
 // Every body that orbits another and every centre something orbits; a barycentre's own centre is its host star.
 const systemMembers: ReadonlySet<string> = new Set([...orbitCenters].flat());
 const annotationPriorities = Object.fromEntries([...SCENE_OBJECTS.map(object =>
@@ -74,6 +75,7 @@ export const worldVisibilityPolicy = {
 export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLayer, 'setBodyVisibility'>, lifetime: SceneLifetime) {
   let illustrations = false;
   let highlighted: string | null = null;
+  let selectedCometId: string | null = null;
   let openSystem: ReadonlySet<string> = new Set();
 
   function update() {
@@ -85,7 +87,7 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
       highlighted: visibility.highlightedBodies,
       // Mission targets keep circles; ordinary asteroids retain a hover/pick target.
       indicatorHidden: ordinaryAsteroidIds,
-      orbitHidden: hiddenOrbitIds,
+      orbitHidden: hiddenOrbitIds.filter(id => id !== selectedCometId),
     });
   }
 
@@ -96,9 +98,12 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
       if (lifetime.disposed) return;
       // A selected host or moon reveals its satellite family even when illustration models
       // are disabled. Other stars retain their complete planetary system visibility.
+      const comet = cometIds.has(id) && hiddenOrbitIds.includes(id) ? id : null;
+      const cometChanged = selectedCometId !== comet;
+      selectedCometId = comet;
       const family = satelliteSystemByHost(id) ?? satelliteSystemOfMember(id);
       const system = family ? new Set([family.hostId, ...family.memberIds]) : placedSystemOf(id);
-      if (system.size !== openSystem.size || [...system].some(member => !openSystem.has(member))) {
+      if (cometChanged || system.size !== openSystem.size || [...system].some(member => !openSystem.has(member))) {
         openSystem = system;
         update();
       }

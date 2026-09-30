@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-ui-browser-evidence@1",
+  "testedSource": {
+    "branch": "ui/sidebar-tabs",
+    "trackedChanges": true,
+    "date": "2026-09-30"
+  },
+  "browser": "Chrome via Playwright CLI",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "artifacts": [
+    {
+      "file": "jupiter-system.png",
+      "claims": [
+        "Shared search-style rows and cited system introduction",
+        "Selected Jupiter square marker",
+        "Unrelated orbits retain full opacity; body markers remain dimmed"
+      ],
+      "measurements": {
+        "earthOrbitStrokeOpacity": 0.65,
+        "saturnOrbitStrokeOpacity": 0.65,
+        "jupiterOrbitStrokeOpacity": 0.65,
+        "cameraDistanceAu": 24.41
+      }
+    },
+    {
+      "file": "mercury-detail.png",
+      "claims": [
+        "Body detail card replaces obsolete portrait overview",
+        "Datasets first; uppercase 14px tabs",
+        "Wikipedia Learn more link"
+      ]
+    }
+  ],
+  "limits": [
+    "Desktop captures; not a native iPad report",
+    "No matched pixel-difference comparison"
+  ]
+}

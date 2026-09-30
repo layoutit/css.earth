@@ -47,3 +47,15 @@ test('placed stellar systems still reveal their illustrated planets', () => {
     assert.ok(!latest().labelHidden?.includes(id), id);
   }
 });
+
+
+test('only an explicitly selected non-featured comet gains its default-hidden orbit', () => {
+  const { visibility, latest } = fixture();
+  assert.ok(latest().orbitHidden?.includes('comet-2p'));
+  assert.ok(!latest().orbitHidden?.includes('comet-67p'));
+  visibility.selectObject('comet-2p');
+  assert.ok(!latest().orbitHidden?.includes('comet-2p'));
+  assert.ok(latest().orbitHidden?.includes('comet-209p'));
+  visibility.selectObject('earth');
+  assert.ok(latest().orbitHidden?.includes('comet-2p'));
+});
