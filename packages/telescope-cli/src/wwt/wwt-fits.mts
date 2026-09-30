@@ -58,6 +58,8 @@ export async function acquireWwtFits(catalogPath: string, setName: string, level
     throw new TypeError('WWT FITS catalog needs its pinned parser and HTTPS source URL.');
   const wtmlBytes = await readFile(resolve(dirname(catalogPath), sourceFile))
     .catch((error: unknown) => { throw new Error(`WWT FITS catalog ${catalogPath} names ${sourceFile}, which is not beside it.`, { cause: error }); });
+  if (wtmlBytes.length !== requireFiniteNumber(source.bytes, 'WTML bytes'))
+    throw new Error(`WWT FITS catalog ${catalogPath}: ${sourceFile} is ${wtmlBytes.length} bytes and differs from the pinned catalog's ${String(source.bytes)}.`);
   const sets = requireArray(catalog.imagesets, 'WWT FITS imagesets');
   const matches = sets.filter(row => requireRecord(row, 'WWT FITS imageset').name === setName);
   if (matches.length !== 1) throw new TypeError(`Select exactly one WWT FITS imageset by name; found ${matches.length} named ${setName}.`);

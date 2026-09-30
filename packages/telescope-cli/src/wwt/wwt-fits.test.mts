@@ -23,7 +23,7 @@ test('WWT FITS keeps original numeric bytes and reports missing scientific metad
     const wtml = Buffer.from('<Folder/>'), bytes = fits(), snapshot = resolve(root, 'catalog.json');
     await writeFile(resolve(root, 'collection.wtml'), wtml);
     await writeFile(snapshot, JSON.stringify({ schema: 'cssearth-wwt-fits-catalog@1',
-      source: { url: 'https://example.org/collection.wtml', file: 'collection.wtml', parser: 'wwt-data-formats@0.18.1' },
+      source: { url: 'https://example.org/collection.wtml', file: 'collection.wtml', bytes: wtml.length, parser: 'wwt-data-formats@0.18.1' },
       imagesets: [{ name: 'Science', fileType: '.fits', dataSetType: 'Sky', projection: 'Tan',
         urlTemplate: 'http://example.org/{1}/{3}/{3}_{2}.fits', position: { tileLevels: 1, centerXDegrees: 0, centerYDegrees: 0 } }] }));
     const requested: string[] = [], result = await acquireWwtFits(snapshot, 'Science', 0, 0, 0, resolve(root, 'result'), async url => {

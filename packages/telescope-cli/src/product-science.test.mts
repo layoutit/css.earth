@@ -144,7 +144,7 @@ t=QTable.read(sys.argv[1]);assert list(t['value'].mask)==[False,True,False]
 assert list(t['standard_deviation'].mask)==[False,True,False]
 assert t['wavelength'].unit==u.um and t['value'].unit==u.erg/(u.s*u.cm**2*u.AA)
 `,spectrum.data],{env:{...process.env,...tc.env}});
- await writeFile(file,'changed');await assert.rejects(listOutputs(result),/content pin mismatch/);
+ await writeFile(file,'changed');await assert.rejects(listOutputs(result),/is 7 bytes; .* records \d+/);
 });
 
 test('output CLI selections remain explicit and sampling is reproducible',async()=>{

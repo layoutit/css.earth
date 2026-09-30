@@ -45,7 +45,8 @@ test('different subsets and descriptors have separate saved-choice and acquisiti
     const changed = await planAccess(root, observation, discovered, firstRequest, async () => changedDescriptor);
     assert.equal(first.products.length, 1); assert.equal(second.products.length, 1); assert.equal(changed.products.length, 1);
     assert.notEqual(first.products[0]!.key, second.products[0]!.key);
-    assert.notEqual(first.products[0]!.key, changed.products[0]!.key);
+    // A changed descriptor keeps the directory name; its identity differs, so a saved acquisition there is refused.
+    assert.notEqual(first.products[0]!.identity, changed.products[0]!.identity);
     const saved = (key: string) => choiceKey({ acquisitionKey: key, telescope: observation.service, mode: 'native-image', observation: observation.key, program: key });
     assert.notEqual(saved(first.products[0]!.key), saved(second.products[0]!.key));
     assert.notEqual(resolve(root, 'output/telescopes/vo/acquired', first.products[0]!.key), resolve(root, 'output/telescopes/vo/acquired', second.products[0]!.key));
