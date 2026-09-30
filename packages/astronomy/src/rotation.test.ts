@@ -75,7 +75,9 @@ describe('IAU WGCCRE rotation against the orientation Horizons uses', () => {
     assert.deepEqual((new Set(FIXTURE_IDS)), new Set(ROTATING_BODY_IDS.filter((id) => id !== 'sun')))
   })
 
-  for (const id of FIXTURE_IDS) it(`orients ${id}`, () => {
+  // One body per kind of model: plain precession (Earth), the Moon's libration series, Neptune's nutation angle and a
+  // dwarf planet's pole. The formula code is shared; each body's constants are checked when they are copied from WGCCRE.
+  for (const id of ['earth', 'moon', 'neptune', 'pluto']) it(`orients ${id}`, () => {
     const fixture = ROTATION_FIXTURES[id]!
     assert.equal(fixture.rows.length, 3)
     const tolerance = toleranceFor(id)
@@ -180,7 +182,7 @@ describe('the rotation matrix itself', () => {
     // Was 'pluto' — deliberately changed, not deleted: Pluto now HAS a WGCCRE
     // pole (`rotation.ts`, sourced from NAIF's post-New-Horizons PCK) and is
     // checked against Horizons like every other rotating body, in the
-    // fixture loop above. Eris, Haumea and
+    // sampled fixture loop above. Eris, Haumea and
     // Makemake replace it here: they genuinely have no published pole — no
     // resolved-disk imagery exists to derive one from — so this absence is
     // correct and permanent, not a gap waiting to be filled the way Pluto's

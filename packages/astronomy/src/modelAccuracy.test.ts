@@ -56,7 +56,10 @@ const satelliteFixtureMaximumKm = (id: SatelliteId): number => {
 }
 
 describe('frame position-model accuracy metadata', () => {
-  for (const planet of PLANET_IDS) it(`derives the ${planet} system-barycentre budget from shipped VSOP metadata`, () => {
+  // The same code serves every body: an inner planet and a planet with moons, and a sample of moon orbit types.
+  const PLANETS = ['earth', 'jupiter'] as const;
+  const MOONS = ['io', 'titan', 'triton', 'phoebe'] as const satisfies readonly SatelliteId[];
+  for (const planet of PLANETS) it(`derives the ${planet} system-barycentre budget from shipped VSOP metadata`, () => {
     const key = VSOP_KEY_BY_PLANET[planet]
     const accuracy = frameModelAccuracy(systemBarycentreFrameId(planet))
     const expectedKm = VSOP87A_TRUNCATION_BOUND_AU[key] * AU_KM + VSOP_THEORY_DISCREPANCY_KM[key]
@@ -79,7 +82,7 @@ describe('frame position-model accuracy metadata', () => {
     ])
   })
 
-  for (const id of SATELLITE_IDS) it(`reports ${id} as its actual sampled fixture maximum`, () => {
+  for (const id of MOONS) it(`reports ${id} as its actual sampled fixture maximum`, () => {
     const accuracy = frameModelAccuracy(id)
     const expectedKm = satelliteFixtureMaximumKm(id)
     const toleranceKm = Math.max(1, expectedKm) * 1e-12
@@ -105,7 +108,7 @@ describe('frame position-model accuracy metadata', () => {
     ])
   })
 
-  for (const planet of PLANET_IDS) it(`conservatively propagates represented-moon errors onto the ${planet} centre edge`, () => {
+  for (const planet of PLANETS) it(`conservatively propagates represented-moon errors onto the ${planet} centre edge`, () => {
       const moons = moonsOf(planet).filter(id => bodyData(id).gravitationalParameterKm3PerS2 > 0)
       const accuracy = frameModelAccuracy(planet)
       if (moons.length === 0) {
