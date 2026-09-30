@@ -70,14 +70,21 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
   // logarithmicFade with each system's fixed logarithms taken once, not twice per system per frame.
   const logStarts = Float64Array.from(fades, fade => Math.log(fade.fadeOutStartDistanceM));
   const logSpans = Float64Array.from(fades, (fade, index) => Math.log(fade.hiddenDistanceM) - logStarts[index]!);
+  // Most systems sit well past their fade (0) or well inside it (1) for a camera; a squared distance says so without the
+  // square root and logarithm. The margin keeps a camera near either edge on the exact path, so every value is unchanged.
+  const MARGIN = 1e-9;
+  const nearSquares = Float64Array.from(fades, fade => fade.fadeOutStartDistanceM ** 2 * (1 - MARGIN));
+  const farSquares = Float64Array.from(fades, fade => fade.hiddenDistanceM ** 2 * (1 + MARGIN));
   return Object.freeze({
     /** The largest system opacity, after measuring every system from this camera position. */
     update(positionM: readonly number[]) {
       let maximum = 0;
       for (let index = 0; index < roots.length; index++) {
         const star = positions[index]!;
-        const distanceM = Math.hypot(positionM[0]! - star[0], positionM[1]! - star[1], positionM[2]! - star[2]);
-        const t = Math.max(0, Math.min(1, (Math.log(distanceM) - logStarts[index]!) / logSpans[index]!));
+        const dx = positionM[0]! - star[0], dy = positionM[1]! - star[1], dz = positionM[2]! - star[2], square = dx * dx + dy * dy + dz * dz;
+        if (square > farSquares[index]!) { values[index] = 0; continue; }
+        if (square < nearSquares[index]!) { values[index] = 1; maximum = 1; continue; }
+        const t = Math.max(0, Math.min(1, (Math.log(Math.hypot(dx, dy, dz)) - logStarts[index]!) / logSpans[index]!));
         values[index] = 1 - t * t * (3 - 2 * t);
         maximum = Math.max(maximum, values[index]!);
       }
