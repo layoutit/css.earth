@@ -1,7 +1,7 @@
 import { MAX_CATALOGUE_POINTS, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
 import type { CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
-import { mountBatchedSpatialPoints } from './batched-spatial-points.js';
+import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 
 // MAX_CATALOGUE_POINTS bounds every published bank. The batched projection walks the drawn prefix each frame, and a
 // stacked bank draws its innermost levels only from near its origin, so the whole bank is walked only near the Sun.
@@ -200,10 +200,8 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
         const mount = (points: typeof bank.points, count: (total: number) => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
           drawnCount: (distanceUnits, cameraUnits) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: () => share }),
-          // A single SVG path unions overlapping subpaths. Preserve per-dot alpha
-          // accumulation for translucent banks with the shadow painter.
-          paintPalette: [...styles.values()].every(style => style.opacity === 1)
-            ? [...styles.values()].map(style => `${style.colorCss}ff`) : undefined,
+          // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up.
+          paintPalette: [...styles.values()].map(pointPaint),
           className: `catalogue-points-${bank.id}`, stylePoint: point => styles.get(point.colorCss)! });
         // Consecutive levels that share a near opacity draw as one part, so a part can dim as the innermost level fills.
         const levels = bank.appearance.levels ?? [], parts: { start: number; points: number; nearOpacity: number }[] = [];

@@ -158,14 +158,14 @@ test('zooming out draws a shrinking prefix of the catalogue', async () => {
   expect(drawnPointCount(165, 1000 * kpc), 'a sparse catalogue keeps every point').toBe(165);
 });
 
-test('translucent catalogues preserve per-dot alpha accumulation', async () => {
+test('a translucent catalogue draws its dots as paths with their alpha', async () => {
   const {document} = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const points = mountCataloguePoints({host, url:'/translucent.json', fetchJson:async()=>bank});
   points.publish({world:{referenceFrame:'sun-icrf',epochJdTt:2451545,
     pose:{positionM:[0,0,0],orientationXyzw:[0,0,0,1]}},
     viewport:{focalPixels:100,principalOffsetPixels:[0,0],widthPixels:1000,heightPixels:800}});
   await new Promise(resolve=>setTimeout(resolve,0));
-  expect(points.root.querySelectorAll('path')).toHaveLength(0);
-  expect([...points.root.querySelectorAll('i')].some(node=>node.style.boxShadow.includes('#ffe2a8b3'))).toBe(true);
+  expect(points.root.querySelector('i')).toBeNull();
+  expect([...points.root.querySelectorAll('path')].some(path=>path.getAttribute('fill')==='#ffe2a8b3'&&path.getAttribute('d'))).toBe(true);
   points.destroy();
 });

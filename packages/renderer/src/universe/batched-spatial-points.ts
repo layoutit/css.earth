@@ -7,8 +7,11 @@ import { mountPointPaths } from './point-paths.js';
 export interface BatchedSpatialPoint { readonly positionUnits: VolumeVector }
 export interface BatchedSpatialPointStyle { readonly colorCss: string; readonly opacity: number; readonly radiusPx: number }
 
-/** Project a bounded 3D field into retained paint nodes. Fixed prepared palettes
- * use circular SVG paths; distance-dependent styles use eight CSS shadow batches.
+/** The paint colour of a style, `#rrggbbaa`: the colour with its opacity as the alpha byte. */
+export const pointPaint = (style: BatchedSpatialPointStyle) =>
+  `${style.colorCss}${Math.max(0, Math.min(255, Math.round(style.opacity * 255))).toString(16).padStart(2, '0')}`;
+
+/** Project a bounded 3D field into retained SVG circle paths, one per prepared paint colour (point-paths.ts).
  * Camera motion changes paint but never DOM shape.
  * `drawnCount`, given the camera's distance from the frame origin and its position in the frame, draws only the first
  * points of the list. */
@@ -22,25 +25,21 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
   host: HTMLElement; before?: Element; frame: DensityVolumeFrame; points: readonly T[]; className: string;
   stylePoint(point: T, distanceUnits: number): BatchedSpatialPointStyle | null;
   drawnCount?(cameraDistanceUnits: number, cameraUnits: VolumeVector): number;
-  /** Fixed prepared colours use retained circular SVG paths instead of box shadows. */
-  paintPalette?: readonly string[];
+  /** Every paint colour a style can give (`pointPaint`): one retained path each. */
+  paintPalette: readonly string[];
   /** The share of visible points to draw: each point keeps its own fixed rank, so a smaller share drops the same points
    * every frame and nothing flickers. `stats().candidates` counts the visible points before it applies. */
   keepFraction?(): number;
 }) {
   const root = host.ownerDocument.createElement('div'); root.className = className; root.ariaHidden = 'true';
   Object.assign(root.style,{position:'absolute',inset:'0',overflow:'hidden',pointerEvents:'none'});
-  const pathPaint = paintPalette ? mountPointPaths(root, paintPalette) : null;
-  const nodes = Array.from({length:pathPaint ? 0 : 8},()=>{const node=host.ownerDocument.createElement('i');
-    Object.assign(node.style,{position:'absolute',left:'50%',top:'50%',width:'1px',height:'1px',borderRadius:'50%',background:'transparent',pointerEvents:'none'});
-    root.append(node);return node;});
+  const pathPaint = mountPointPaths(root, paintPalette);
   if (before) host.insertBefore(root, before); else host.append(root);
   // The last full paint: the camera's position and everything else it depended on, how many points it drew and the
   // nearest of them. A camera that only moved (a zoom, a pan around a planet) moves no point by a visible amount while
   // its translation is far below that nearest distance, so the paint is kept (parallaxPixels).
   let painted: { position: readonly number[]; rest: readonly number[]; count: number; nearestUnits: number } | null = null, destroyed = false;
-  const residentElements = 1 + (pathPaint ? pathPaint.residentElements : nodes.length);
-  const publishedShadows = nodes.map(() => '');
+  const residentElements = 1 + pathPaint.residentElements;
   let last={visiblePoints:0,candidates:0,residentElements,publishMs:0};
   const publish = ({world,viewport}: VolumeCameraPublication) => {
     if (destroyed) return;
@@ -57,8 +56,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     }
     let nearestUnits = Infinity;
     let visible = 0, candidates = 0;
-    const shadows: string[][]=nodes.map(()=>[]);
-    pathPaint?.begin(viewport);
+    pathPaint.begin(viewport);
     points.slice(0, count).forEach((point,index)=>{
       const x=point.positionUnits[0]-local.positionUnits[0], y=point.positionUnits[1]-local.positionUnits[1], z=point.positionUnits[2]-local.positionUnits[2];
       const distance=Math.hypot(x,y,z);
@@ -74,18 +72,13 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
       candidates++;
       // A fixed low-discrepancy rank per point: the kept share is spread evenly and stable from frame to frame.
       if(keep<1 && (index*0.6180339887498949)%1>=keep)return;
-      const opacity=Math.max(0,Math.min(255,Math.round(style.opacity*255))).toString(16).padStart(2,'0');
-      const spread=Math.max(0,style.radiusPx-.5);
-      if (pathPaint) pathPaint.point(sx, sy, Math.max(.5, style.radiusPx), `${style.colorCss}${opacity}`);
-      else shadows[index%nodes.length]!.push(`${(sx-.5).toFixed(3)}px ${(sy-.5).toFixed(3)}px 0 ${spread.toFixed(3)}px ${style.colorCss}${opacity}`);
+      pathPaint.point(sx, sy, Math.max(.5, style.radiusPx), pointPaint(style));
       visible++;
     });
-    pathPaint?.commit();
-    nodes.forEach((node,index)=>{const shadow=shadows[index]!.join(',')||'none';
-      if(publishedShadows[index]!==shadow){node.style.boxShadow=shadow;publishedShadows[index]=shadow;}});
+    pathPaint.commit();
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
     painted={position:[...local.positionUnits],rest,count,nearestUnits};
     last={visiblePoints:visible,candidates,residentElements,publishMs:performance.now()-started};
   };
-  return Object.freeze({root,nodes:Object.freeze(nodes),publish,stats:()=>Object.freeze({...last}),destroy(){if(destroyed)return;destroyed=true;root.remove();}});
+  return Object.freeze({root,publish,stats:()=>Object.freeze({...last}),destroy(){if(destroyed)return;destroyed=true;root.remove();}});
 }
