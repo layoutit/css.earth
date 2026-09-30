@@ -126,18 +126,6 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
           }
           finally { await rm(cache, { recursive:true, force:true }); }
         }
-        if (recipe.sky) {
-          const [{ parseSkyRecipe }, { installRuntimeAssets }, { inventoryAssets }] = await Promise.all([
-            import('../sky/index.ts'), import('./setup-assets.ts'), import('../delivery/index.ts'),
-          ]);
-          const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(volumeSource, recipe.sky)).toString('utf8')) as unknown);
-          if (skyRecipe.stars) {
-            const starDirectory = resolve(projectRoot, 'src/objects', skyRecipe.stars.object);
-            const assets = await inventoryAssets(projectRoot, [skyRecipe.stars.object], { location: 'prepared' });
-            const result = await installRuntimeAssets(assets);
-            console.log(`${id}: ${skyRecipe.stars.object} prepared dependency restored (${result.installed} downloaded, ${result.reused} reused)`);
-          }
-        }
         console.log(`${id}: pinned volume source restored and verified`);
         continue;
       }
@@ -146,16 +134,11 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
       console.log(`${id}: repository volume source inputs restored and verified`);
       continue;
     }
+    // Earth's ENSO mosaics are rebuilt from their dated tile archives, which the restore fetches from the source mirror;
+    // a date whose mosaic is present is left alone.
     if (id === "earth") {
-      const scienceDirectory = resolve(projectRoot, "src/objects/earth/source/science");
-      try {
-        await lstat(resolve(scienceDirectory, "mur-gibs.png"));
-      } catch (error) {
-        if (!hasErrorCode(error, "ENOENT")) throw error;
-        await run(process.execPath, [
-          resolve(projectRoot, "packages/bake/authoring/earth/mur-imagery.mts"), "restore", scienceDirectory,
-        ]);
-      }
+      await run(process.execPath, [resolve(projectRoot, "packages/bake/authoring/earth/mur-imagery.mts"), "restore",
+        resolve(projectRoot, "src/objects/earth/source/science"), assetOrigin]);
     }
     // The acquisition plan owns formats and URLs. Default acquisition restores
     // only missing pins and verifies existing inputs without refreshing them.

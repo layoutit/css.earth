@@ -5,17 +5,17 @@ import { readCanonicalPointField } from '../../test/canonical-point-field-fixtur
 const field = readCanonicalPointField();
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
 
-it('selects the real 109389-star hierarchy at four observer distances', () => {
+it('selects the sampled 255-star hierarchy at four observer distances', () => {
   const views = [1, 10, 100, 1000].map(distance => ({ eyeUnits: [0, 0, distance] as const }));
   const started = performance.now();
   const selections = views.map(({ eyeUnits }) => selectPreparedPointField({
     stars: field.stars, nodes: field.nodes, eyeUnits, viewRotation: rotation,
     focalPx: 900, viewportHalfWidthPx: 720, viewportHalfHeightPx: 450,
-    maxRepresentatives: 2048, targetErrorPx: 2,
+    maxRepresentatives: 64, targetErrorPx: 2,
   }));
   const elapsedMs = performance.now() - started;
   for (const selection of selections) {
-    expect(selection.representatives.length).toBeLessThanOrEqual(2048);
+    expect(selection.representatives.length).toBeLessThanOrEqual(64);
     expect(selection.coveredCount).toBe(field.stars.length);
     const members = new Set<number>();
     for (const reference of selection.representatives) {

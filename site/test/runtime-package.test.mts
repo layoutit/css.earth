@@ -7,7 +7,7 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../objects.mts';
-import { objectRuntimePackageTests, preparedSelectionFixture } from '../../src/platform/fixtures/object-runtime-package.mts';
+import { objectRuntimePackageTests, preparedSelectionFixture } from '../../packages/renderer/test/node/fixtures/object-runtime-package.mts';
 import { required } from '@cssearth/objects/node/contract';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { selectedObjectIds } from './fixtures/anchor-table.mts';

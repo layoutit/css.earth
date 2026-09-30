@@ -49,8 +49,8 @@ export function overviewDistanceM(value: OverviewDistance, plan = context, orbit
  * star the zoom is centred on (`centre`: the mounted system's; the Sun's on its own scene and every overview page).
  * Zooming backs away along the line of sight, so the camera's path depends on where it looks; the distance from the
  * centre does not, and neither does the sequence.
- * - The centre's system overview until its own bodies have faded out, over the distances the world context fades them,
- *   and back below the middle of that fade.
+ * - The centre's system overview until the first reachable overview's authored handoff, capped by the system fade.
+ *   Other systems keep their existing fade boundary; authored orbit ranges remain fully covered.
  * - Past it, the farthest overview whose threshold the camera has passed: its `enter` distance, or its lower
  *   `returnBelow` distance while the view is already that level or a farther one, so the view does not flicker at an edge
  *   (the overviews' `zoom`, in their object.json). A level with `centreWithin` is skipped from a centre farther from the
@@ -61,11 +61,16 @@ export function overviewScopeAtCamera(world: WorldCameraPose, previous: Overview
   overviews: readonly OverviewObject[] = KNOWN_OVERVIEWS): OverviewScope {
   const range = distance(world.pose.positionM, centre.originM);
   const { fadeOutStartDistanceM, hiddenDistanceM } = systemFadeDistances(plan.system, centre.orbitsWithinM);
-  if (range < (previous !== 'system' ? Math.sqrt(fadeOutStartDistanceM * hiddenDistanceM) : hiddenDistanceM)) return 'system';
   const at = (value: OverviewDistance) => overviewDistanceM(value, plan, centre.orbitsWithinM);
   const centreDistance = distance(centre.originM, plan.focus.positionM);
   const reachable = overviews.filter(overview => !overview.zoom.centreWithin || centreDistance < at(overview.zoom.centreWithin));
   const previousOrder = overviews.find(overview => overview.id === previous)?.order ?? 0;
+  const systemLimit = previous !== 'system' ? Math.sqrt(fadeOutStartDistanceM * hiddenDistanceM) : hiddenDistanceM;
+  const first = reachable[0];
+  const handoff = first && centreDistance === 0 && centre.orbitsWithinM === undefined
+    ? Math.min(systemLimit, at(previousOrder >= first.order ? first.zoom.returnBelow : first.zoom.enter))
+    : systemLimit;
+  if (range < handoff) return 'system';
   for (const overview of [...reachable].reverse()) {
     if (range >= at(previousOrder >= overview.order ? overview.zoom.returnBelow : overview.zoom.enter)) return overview.id;
   }

@@ -20,7 +20,6 @@ interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; ca
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
-import { readCoraltempAnomaly } from "./sst-anomaly.ts";
 import { verifyPreparedMurImage, writeMurLegend } from "./globe/mur-image.ts";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.ts";
 import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.ts";
@@ -65,10 +64,7 @@ if (mode !== 'materials') {
   for (const map of surfaceMaps) {
     let input: string | Buffer = source(map.path);
     if (map.scientific) {
-      if (map.scientific.kind === "coraltemp-anomaly") {
-        const decoded = await readCoraltempAnomaly(source(map.path), map.scientific);
-        input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
-      } else if (map.scientific.kind === "gebco-elevation") {
+      if (map.scientific.kind === "gebco-elevation") {
         const decoded = await preparePagedSurfaceMap({ config, sourceDirectory, map });
         input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
         await writeElevationLegend(map.scientific, output(map.scientific.legend.image));
@@ -77,7 +73,7 @@ if (mode !== 'materials') {
         input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
         await writeNightLightsLegend(map.scientific, output(map.scientific.legend.image));
       } else if (map.scientific.kind === "gibs-mur-imagery") {
-        input = await verifyPreparedMurImage(sourceDirectory, map.scientific);
+        input = await verifyPreparedMurImage(sourceDirectory, map.path, map.scientific);
         await writeMurLegend(sourceDirectory, output("earth-enso-legend.png"));
       } else throw new TypeError("Unknown scientific surface source");
     }

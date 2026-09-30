@@ -99,6 +99,56 @@ test('a catalogue loads on its first publication and draws every point as the sa
   points.destroy(); expect(host.children).toHaveLength(0);
 });
 
+test('a level with a near opacity draws as its own part and dims to it as the innermost level fills the view', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
+  const stacked = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, levels: [
+    { points: 1, fullDetailUnits: 100, nearOpacity: .5 }, { points: 1, appearUnits: [10, 1] }, { points: 1, appearUnits: [1, .01] }] } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => stacked });
+  // The view's half-width at the origin is the camera's distance times hypot(1000, 800) / 2 / 100.
+  const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (distance: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
+    pose: { positionM: [0, 0, distance] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  field.publish(at(1)); await new Promise(resolve => setTimeout(resolve, 0)); field.publish(at(1));
+  const parts = [...field.root.children] as HTMLElement[];
+  expect(parts, 'the dimmed level and the two that share full opacity').toHaveLength(2);
+  expect(parts[0]!.style.opacity, 'before the innermost level appears').toBe('1');
+  const halfWidthPerDistance = Math.hypot(1000, 800) / 200;
+  field.publish(at(Math.sqrt(.01) / halfWidthPerDistance));
+  expect(Number(parts[0]!.style.opacity), 'halfway through its window in the logarithm').toBeCloseTo(.75, 12);
+  field.publish(at(.001));
+  expect(parts[0]!.style.opacity).toBe('0.5'); expect(parts[1]!.style.opacity).toBe('1');
+  field.destroy();
+  for (const nearOpacity of [0, 1.5]) {
+    expect(() => parseCataloguePoints({ ...stacked, appearance: { ...stacked.appearance, levels: [{ ...stacked.appearance.levels[0], nearOpacity }, ...stacked.appearance.levels.slice(1)] } }))
+      .toThrow(`test-stars: level 0 nearOpacity must be in (0, 1], got ${nearOpacity}.`);
+  }
+});
+
+test('a screen budget draws an even, stable share of the visible dots and refuses a bad budget', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  // 1,000 dots spread in front of the camera, all on screen; the budget keeps about 250 of them.
+  const points = Array.from({ length: 1000 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
+  const budgeted = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250 } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => budgeted });
+  const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (x: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
+    pose: { positionM: [x, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const drawn = () => [...field.root.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
+  field.publish(at(0)); await new Promise(resolve => setTimeout(resolve, 0));
+  field.publish(at(0.001)); field.publish(at(0.002));
+  expect(drawn(), 'the first frame counts, the next ones keep a quarter').toBeGreaterThan(200);
+  expect(drawn()).toBeLessThan(300);
+  const kept = drawn();
+  field.publish(at(0.003));
+  expect(drawn(), 'the same dots stay as the camera moves').toBe(kept);
+  field.destroy();
+  for (const screenBudget of [0, 1.5, -3]) {
+    expect(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, screenBudget } }))
+      .toThrow(`test-stars: catalogue point screenBudget must be a positive whole number, got ${screenBudget}.`);
+  }
+});
+
 test('zooming out draws a shrinking prefix of the catalogue', async () => {
   const { drawnPointCount } = await import('./catalogue-points.js');
   const kpc = 3.0856775814913673e19;

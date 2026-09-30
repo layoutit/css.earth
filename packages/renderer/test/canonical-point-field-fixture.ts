@@ -3,9 +3,9 @@ import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import type { PreparedCssPointField, PreparedCssPointFieldManifest } from '../src/stars/types.ts';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '../src/stars/validation.ts';
 
-const base = new URL('../../../src/objects/stellar-neighbourhood/', import.meta.url);
+const base = new URL('./fixtures/point-field/', import.meta.url);
 
-/** Node test fixture: the checked-in stellar neighbourhood manifest and bank. */
+/** Node test fixture: a sampled stellar neighbourhood manifest and bank. */
 export function readCanonicalPointFieldFiles(): { readonly descriptor: unknown; readonly url: string; readonly bankUrl: string;
   readonly manifestBytes: Uint8Array; readonly bankBytes: Uint8Array; readonly manifest: PreparedCssPointFieldManifest } {
   const descriptor: unknown = JSON.parse(readFileSync(new URL('object.json', base), 'utf8'));
@@ -21,7 +21,7 @@ export function readCanonicalPointFieldFiles(): { readonly descriptor: unknown; 
   return { descriptor, url: prepared.url, bankUrl, manifestBytes, bankBytes, manifest };
 }
 
-/** The checked-in point field decoded exactly as the runtime loader decodes it. */
+/** The local prepared point field decoded exactly as the runtime loader decodes it. */
 export function readCanonicalPointField(): PreparedCssPointField {
   const { manifest, bankBytes } = readCanonicalPointFieldFiles();
   return decodePreparedCssPointField(manifest, bankBytes);

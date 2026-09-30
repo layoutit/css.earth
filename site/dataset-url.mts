@@ -1,4 +1,4 @@
-import { parseDatasetDestination } from '../src/platform/dataset-destination.mts';
+import { parseDatasetDestination } from '@cssearth/objects/provenance';
 import { drawnPageFromUrl, preparedFocusFromUrl } from './navigation/navigation-scope.mts';
 
 /** Prepared source links select their focused object directly on the shared camera of scene `sceneId`. */

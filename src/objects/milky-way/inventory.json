@@ -4,8 +4,8 @@
     {
       "location": "prepared",
       "filename": "backing.json",
-      "bytes": 1321,
-      "sha256": "a238ac4695b9209c70960fff67adc2d51cd42a1e104fc3a97988a5a10fe88982"
+      "bytes": 1743,
+      "sha256": "bd52e30567dd48dd9794de7708de46f3614fe0feef174b4120ae7809fdadc5aa"
     },
     {
       "location": "prepared",
@@ -15,51 +15,33 @@
     },
     {
       "location": "prepared",
+      "filename": "backing/bulge.webp",
+      "bytes": 37552,
+      "sha256": "d6f41d2aa801651f44cd1fc19f9917760548dbb40cbbaced161c340a3d1cbc8c"
+    },
+    {
+      "location": "prepared",
+      "filename": "backing/inner.webp",
+      "bytes": 59322,
+      "sha256": "756d2a7107ed14c2d40d49f2fc79d38a3cd4a18925c247902b4e4b810e05553d"
+    },
+    {
+      "location": "prepared",
+      "filename": "backing/middle.webp",
+      "bytes": 106926,
+      "sha256": "788063856464f35576b3d5408e739f06d8cd5518b40cc3da660d2241426cefb1"
+    },
+    {
+      "location": "prepared",
       "filename": "dots.json",
-      "bytes": 889911,
-      "sha256": "c2bf6820d055f44e40be8475462597f23149a0bd2b0ab9452792057ef9607f64"
+      "bytes": 890663,
+      "sha256": "354e2383c81f6c128862aeb58d3f889c4e83854d9d6560b7b81cf6b13ada6548"
     },
     {
       "location": "prepared",
       "filename": "globular-clusters.json",
       "bytes": 5292,
       "sha256": "20ef914f06b6f903af81e060a355b733d8a9384c4c34985843793b53ebe1f67f"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky-near/nx.webp",
-      "bytes": 70270,
-      "sha256": "d4707b7a9f045d60e32ccaab3ea7391f1eb10c6becdb54150fd5a5c2eddb503a"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky-near/ny.webp",
-      "bytes": 72470,
-      "sha256": "5423095b6802d929e91a2678bc40e9088ee322acdbf953376e22f2303c9e65ba"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky-near/nz.webp",
-      "bytes": 79230,
-      "sha256": "d96ab6f57ef43ac1c5de443d56014f8c86bf5c22f9fd00c2231624a3f84f6dd3"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky-near/px.webp",
-      "bytes": 78810,
-      "sha256": "5b4af78883ea827a1d88f03b1bad3733b3eb237725bd6350fe03d367c6088e83"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky-near/py.webp",
-      "bytes": 83556,
-      "sha256": "a9cc197d2f52d5be357ba2b4ff3c45bc7596dd81b197fa46c0cd149ba63c1cac"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky-near/pz.webp",
-      "bytes": 78708,
-      "sha256": "f71d0d207b7bad912b9c8a0b48b0e3c0c2433eb16477dc9c14188dea445a761c"
     },
     {
       "location": "prepared",
@@ -106,8 +88,8 @@
     {
       "location": "prepared",
       "filename": "volume.json",
-      "bytes": 10430,
-      "sha256": "a52cac16be54adba381e5d7e68bb9acfb334bcd096454dd714dafd9ce39751d2"
+      "bytes": 7442,
+      "sha256": "af0ca93bdcd33b80cbc052d64e9ccc41b1dc18a82f60fca2284a8f249743369c"
     }
   ]
 }

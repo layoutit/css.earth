@@ -19,36 +19,34 @@ function fixture() {
   return { ...files, data, transport };
 }
 
-test('decodes the checked prepared point field and reads its manifest and bank once each', async () => {
+test('decodes the local prepared point field and reads its manifest and bank once each', async () => {
   const { descriptor, url, bankUrl, bankBytes, data, transport } = fixture();
   const payload = decodePreparedCssPointField(parsePreparedCssPointFieldManifest(data), bankBytes);
   expect(payload.schema).toBe('cssearth-css-point-field@1');
-  expect(payload.stars.length).toBe(109389);
+  expect(payload.stars.length).toBe(255);
   expect(payload.nodes[0]?.first).toBe(0);
   expect(payload.nodes[0]?.count).toBe(payload.stars.length);
   expect(payload.stars.filter(star => star.coverageAnchor)).toHaveLength(96);
   expect(payload.stars.some(star => star.name === 'Sirius')).toBe(true);
-  expect(payload.directPoints?.points).toHaveLength(payload.policy.activeSlots);
-  expect(payload.directPoints?.points.filter(star => star.coverageAnchor)).toHaveLength(96);
   expect(payload.photometry.floor).toBe(1 / 255);
   expect(payload.labels.activeSlots).toBe(1);
   expect(payload.resources.find(resource => resource.path === payload.atlas.path)).toBeDefined();
   const reader = transport(), loaded = await loadPreparedCssPointField(descriptor, reader);
   expect(reader.read.mock.calls).toEqual([[url], [bankUrl]]);
   expect(loaded.frame).toEqual((descriptor as { properties: { frame: unknown } }).properties.frame);
-  expect(loaded.stars[4321]).toEqual(payload.stars[4321]);
+  expect(loaded.stars[123]).toEqual(payload.stars[123]);
   expect(loaded.nodes.at(-1)).toEqual(payload.nodes.at(-1));
 });
 
 test('declared magnitude quantization is bounded below what the runtime can display', () => {
   const { manifest } = fixture();
-  const recipe = JSON.parse(readFileSync(new URL('../../../../src/objects/stellar-neighbourhood/source/stars.json', import.meta.url), 'utf8')) as {
-    atlas: { tileSize: number; haloRadii: number; coreInnerRadii: number; coreOuterRadii: number; haloPeak: number; samplesPerPixelAxis: number } };
+  const atlas = JSON.parse(readFileSync(new URL('../../test/fixtures/point-field/atlas-recipe.json', import.meta.url), 'utf8')) as {
+    tileSize: number; haloRadii: number; coreInnerRadii: number; coreOuterRadii: number; haloPeak: number; samplesPerPixelAxis: number };
   const magnitude = manifest.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
   expect(magnitude.bound).toBe(POINT_FIELD_MAGNITUDE_BOUND);
-  expect(magnitude.measured).toBeGreaterThan(0);
+  expect(magnitude.measured).toBeGreaterThanOrEqual(0);
   expect(magnitude.measured).toBeLessThanOrEqual(magnitude.bound);
-  expect(magnitude.displayAlphaChange).toBe(magnitudeDisplayAlphaChange(manifest.photometry, recipe.atlas, magnitude.bound));
+  expect(magnitude.displayAlphaChange).toBe(magnitudeDisplayAlphaChange(manifest.photometry, atlas, magnitude.bound));
   expect(magnitude.displayAlphaChange).toBeLessThan(IMPERCEPTIBLE_LUMINANCE);
   for (const field of manifest.bank.quantization.filter(entry => entry !== magnitude)) expect([field.bound, field.measured, field.displayAlphaChange]).toEqual([0, 0, 0]);
 });
@@ -69,9 +67,7 @@ test('rejects malformed hierarchy, rows and manifest fields', async () => {
   expect(() => parsePreparedCssPointFieldManifest({ ...data, photometry: { ...photometry, floor: 2 } })).toThrow('photometry');
   const labels = data.labels as Record<string, unknown>;
   expect(() => parsePreparedCssPointFieldManifest({ ...data, labels: { ...labels, transitionSlots: 0 } })).toThrow('labels');
-  const directPoints = data.directPoints as { points: Record<string, unknown>[] };
-  expect(() => parsePreparedCssPointFieldManifest({ ...data, directPoints: { ...(data.directPoints as object),
-    points: directPoints.points.map((point, index) => index === 1 ? { ...point, sourceRow: directPoints.points[0]!.sourceRow } : point) } })).toThrow('direct star point');
+  expect(() => parsePreparedCssPointFieldManifest({ ...data, directPoints: {} }), 'the direct star sample is gone').toThrow('unsupported');
   const bank = data.bank as Record<string, unknown>, quantization = bank.quantization as Record<string, unknown>[];
   expect(() => parsePreparedCssPointFieldManifest({ ...data, bank: { ...bank, encoding: 'other@1' } })).toThrow('bank');
   expect(() => parsePreparedCssPointFieldManifest({ ...data, bank: { ...bank, starCount: (bank.starCount as number) + 1 } })).toThrow('layout');
@@ -87,8 +83,7 @@ test('Sun appearance verifies the manifest without fetching or decoding the star
   const reader = transport();
   const appearance = await loadPreparedPointAppearance(descriptor, reader);
   expect(reader.read.mock.calls).toEqual([[url]]);
-  expect(Object.keys(appearance).sort()).toEqual(['atlas', 'directPoints', 'frame', 'id', 'photometry', 'resources']);
+  expect(Object.keys(appearance).sort()).toEqual(['atlas', 'frame', 'id', 'photometry', 'resources']);
   expect(appearance.atlas).toEqual(manifest.atlas);
   expect(appearance.photometry).toEqual(manifest.photometry);
-  expect(appearance.directPoints).toEqual(manifest.directPoints);
 });

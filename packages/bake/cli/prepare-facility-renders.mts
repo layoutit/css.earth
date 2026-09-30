@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { dirname, resolve, relative, extname, sep } from 'node:path';
 import { createRequire } from 'node:module';
-import { pathToFileURL } from 'node:url';
+import { DATASET_ROUTES } from '@cssearth/objects/provenance';
 import { build } from 'esbuild';
 import { chromium } from 'playwright';
 import sharp from 'sharp';
@@ -16,8 +16,6 @@ import { getFacilityPose, inwardDirection } from '@cssearth/bake/facility-render
 declare global { interface Window { FacilityRender: { renderFacility: typeof renderFacility; recipe: typeof recipe }; } }
 
 const root = resolve(import.meta.dirname, '../../..');
-/** The application's dataset routes, loaded from the checkout and passed to the artwork refresh: they are application policy. */
-const { DATASET_ROUTES } = await import(pathToFileURL(resolve(root, 'src/platform/dataset-destination.mts')).href) as { DATASET_ROUTES: Parameters<typeof prepareArtworkRefresh>[4] };
 const args = process.argv.slice(2), write = args.includes('--write');
 const inspectAxes = args.includes('--inspect-axes');
 const inspectRolls = args.includes('--inspect-rolls');

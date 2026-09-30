@@ -3,46 +3,49 @@
   "id": "dots",
   "published": true,
   "meaning": "The Milky Way's star dots at every zoom: the galaxy-wide tracers, then the nested levels around the Sun, each adding dots as its region fills the view.",
+  "screenBudget": 4000,
   "levels": [
     {
       "bank": "tracers",
-      "fullDetailUnits": 10
+      "fullDetailUnits": 10,
+      "nearOpacity": 0.5
     },
     {
       "bank": "local-3kpc",
       "appearUnits": [
-        3,
-        0.8
-      ]
+        9,
+        2.4
+      ],
+      "nearOpacity": 0.5
     },
     {
       "bank": "local-800pc",
       "appearUnits": [
-        0.8,
-        0.1
+        2.4,
+        0.3
       ]
     },
     {
       "bank": "local-100pc",
       "appearUnits": [
-        0.1,
-        0.02
+        0.3,
+        0.06
       ]
     },
     {
       "bank": "local-20pc",
       "appearUnits": [
-        0.02,
-        0.005
+        0.06,
+        0.015
       ]
     },
     {
       "bank": "local-sky",
       "appearUnits": [
-        0.005,
+        0.015,
         5e-05
       ]
     }
   ],
-  "basis": "Presentation choice: each level starts to appear when the view's half-width at the Sun shrinks to the level's radius, so its edge is off screen, and is whole when it reaches the next level's radius; the 20 pc census is whole at 5 pc. The galaxy level is drawn whole within 10 kpc, as before. The sky level appears as the view narrows from 5 pc to 0.05 pc (10,000 AU), where the view from just outside the Solar System is a sky of stars."
+  "basis": "Presentation choice: each level starts to appear when the view's half-width at the Sun shrinks to three times the level's radius, so its tapered ball of stars fills in as the camera approaches rather than only once the camera is inside it, and is whole at three times the next level's radius; the 20 pc census is whole at 15 pc. The galaxy level is drawn whole within 10 kpc, as before. The sky level appears as the view narrows from 15 pc to 0.05 pc (10,000 AU), where the view from just outside the Solar System is a sky of stars. The galaxy-wide and 3 kpc levels dim to half as the sky level fills the view: from beside the Sun those distant stars would look faint, and the NASA band behind them is the Milky Way there; half keeps the disc's shape. Presentation choice, chosen by eye on 2026-09-30. At most 4,000 of its dots show at once (screenBudget): past that an even, stable share of the visible dots is drawn, so the count on screen stays near 4,000 from the galaxy down to the Sun's neighbourhood, where the catalogues hold fewer in view; chosen by eye on 2026-09-30 against the earlier 2,900 to 5,200 along one zoom path."
 }

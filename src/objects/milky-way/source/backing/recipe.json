@@ -30,5 +30,51 @@
     "white": 150,
     "note": "Presentation only: the same levels on every channel, keeping the artwork's colours: input black point 20, gamma 1, output white 150 of 255, so the backing stays under the dots and its haze ends before the image's square edge."
   },
-  "outputPx": 2048
+  "outputPx": 2048,
+  "nearFade": {
+    "nearOpacity": 0,
+    "fadeKpc": [
+      12,
+      1.5
+    ]
+  },
+  "sections": [
+    {
+      "id": "middle",
+      "radiusKpc": [
+        7,
+        8.5
+      ],
+      "nearOpacity": 0.45,
+      "fadeKpc": [
+        20,
+        3
+      ]
+    },
+    {
+      "id": "inner",
+      "radiusKpc": [
+        5,
+        6
+      ],
+      "nearOpacity": 0.4545,
+      "fadeKpc": [
+        20,
+        3
+      ]
+    },
+    {
+      "id": "bulge",
+      "radiusKpc": [
+        3,
+        4.5
+      ],
+      "nearOpacity": 1,
+      "fadeKpc": [
+        20,
+        3
+      ]
+    }
+  ],
+  "nearFadeNote": "Presentation only, chosen by eye on 2026-09-30. Close up the image blurs, so its outer disc (around the Sun) fades out between 12 and 1.5 kpc from the viewed body, while rings about the centre step down to 45 % (to 7 kpc), 70 % (to 5 kpc) and 100 % (the bulge, to 3 kpc) between 20 and 3 kpc. Each ring is drawn over the result below it, so its own opacity is (target - below) / (1 - below): the inner ring's 0.4545 over 0.45 gives 0.70."
 }

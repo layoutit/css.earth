@@ -5,7 +5,7 @@ import { fetchPreparedJson } from './catalogue-points.js';
 import { mountImageMesh } from './image-mesh.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
-import { logarithmicFade } from './world-context/context-scale.js';
+import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scale.js';
 import { mountPreparedWorldContext, type BodyVisibility } from './prepared-world-context.js';
 import { parsePreparedWorldContextPlan } from '../prepared-data/world-context.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -55,8 +55,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
     throw new TypeError('Context, volume and point appearance must share their prepared identities and epoch.');
   }
   const pool = `volume:${payload.id}`, pointPool = `focus-point:${pointAppearance.id}`;
-  // The baked-star cube is the sole sky background until the volume takes over.
-  const skyPaths = new Set([...payload.sky?.faces ?? [], ...payload.sky?.nearFaces ?? []].map(face => face.texturePath));
+  // The Milky Way cube is the sole sky background until the volume takes over.
+  const skyPaths = new Set((payload.sky?.faces ?? []).map(face => face.texturePath));
   const entries = payload.resources.map(resource => ({ key: `${pool}:${resource.path}`, url: resolveResource(resource.path), pool }));
   const pointEntries = pointAppearance.resources.filter(resource => resource.path === pointAppearance.atlas.path).map(resource => ({
     key: `${pointPool}:${resource.path}`, url: resolvePointResource(resource.path), pool: pointPool }));
@@ -148,7 +148,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const selectedLabel = own(mountSelectedBodyLabel(frontRoot, opacityClock, requestPublication));
         const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
         // The galaxy backdrop is opaque black: it mounts first, so the dataset banks' billboards, which mount at once, paint over it.
-        const background = createUniverseBackground({ root, end, lifetime, plan, payload, pointAppearance, sky, resolveResource,
+        const background = createUniverseBackground({ root, end, lifetime, plan, payload, sky, resolveResource,
           prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM, cataloguePointUrls: galaxyCataloguePoints,
           ...(galaxyBacking ? { backingUrl: galaxyBacking } : {}) });
         // Both billboard layers sample one atlas. Keep one demand-driven decode lease
@@ -234,11 +234,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           focusBank(id: string) { return datasets.focusBank(id) ?? catalogBanks.focusBank(id); },
           setVolumeDatasetEnabled: datasets.setEnabled,
           selectVolumeDataset: datasets.select,
-          setStellarPointsEnabled(enabled: boolean) {
-            if (!background.setStellarPointsEnabled(enabled)) return;
-            datasets.setStarsVisible(enabled === true);
-            background.publishStellarPoints();
-          },
           captureFrame(world: WorldCameraPose, viewport: WorldCameraViewport) {
             // The context's labels keep clear of the selected body's caption, placed for the same camera.
             const rect = selectedLabel.rect(world, viewport, caption(), captionFlags());
@@ -293,7 +288,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
-              additionalPoints.publish({world, viewport}, distanceM);
+              additionalPoints.publish({world, viewport}, distanceM, galaxyOutsideFade(
+                Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.volume.discHalfHeightM));
               // Loaded and drawn only far outside the galaxies' own scale.
               // A catalogue focus, selected or previewed, owns the caption; the mesh then names nothing.
               const meshCaptioned = detailedFocus === null && (selectionPreview === undefined || selectionPreview === null);
