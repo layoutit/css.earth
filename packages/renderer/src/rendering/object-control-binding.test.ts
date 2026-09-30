@@ -1,4 +1,6 @@
-import { afterEach, expect, test, vi } from 'vitest';
+import { afterEach, test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { createObjectControlBinding, publishDatasetSelection } from './object-control-binding.js';
 import type { ObjectSelectionState } from './object-selection-runtime.js';
@@ -20,18 +22,18 @@ test('a collapsed dataset preview follows the listed member of a selected sequen
     .filter(preview => !preview.hidden).map(preview => preview.dataset.datasetSelected);
 
   publishDatasetSelection(buttons, details, [], new Set(['second']), root);
-  expect(selected()).toEqual(['first']);
-  expect(root.querySelector<HTMLSelectElement>('select')?.value).toBe('first');
+  assert.deepEqual(selected(), ['first']);
+  assert.equal(root.querySelector<HTMLSelectElement>('select')?.value, 'first');
   // Only the active dataset's details are mounted; the others wait in templates (detached-sections.ts).
-  expect(details.map(({ panel }) => panel.isConnected && !panel.closest('template'))).toEqual([false, true, false]);
+  assert.deepEqual(details.map(({ panel }) => panel.isConnected && !panel.closest('template')), [false, true, false]);
 
   publishDatasetSelection(buttons, details, [], new Set(['other']), root);
-  expect(selected()).toEqual(['other']);
-  expect(root.querySelector<HTMLSelectElement>('select')?.value).toBe('other');
-  expect(details.map(({ panel }) => panel.isConnected && !panel.closest('template'))).toEqual([false, false, true]);
+  assert.deepEqual(selected(), ['other']);
+  assert.equal(root.querySelector<HTMLSelectElement>('select')?.value, 'other');
+  assert.deepEqual(details.map(({ panel }) => panel.isConnected && !panel.closest('template')), [false, false, true]);
 });
 
-afterEach(() => vi.useRealTimers());
+afterEach(() => mock.timers.reset());
 
 function sequence(autoplay = true) {
   const ids = ['first', 'last', 'other'];
@@ -65,57 +67,55 @@ function sequence(autoplay = true) {
 }
 
 test('sequence playback wraps, waits for the pending map, and pauses without another selection', () => {
-  vi.useFakeTimers();
+  mock.timers.enable({ apis: ['setTimeout', 'setInterval', 'setImmediate', 'Date'] });
   const h = sequence();
-  expect(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed')).toBe('false');
+  assert.equal(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed'), 'false');
   h.click('#details-last [data-dataset-play]');
-  expect(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed')).toBe('true');
+  assert.equal(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed'), 'true');
   // The on-screen step's fill runs with its hold.
-  expect(h.document.querySelector('#details-last [data-sequence-player]')?.getAttribute('data-sequence-running')).toBe('true');
-  vi.advanceTimersByTime(1500);
-  expect(h.actions).toEqual(['first']);
-  vi.advanceTimersByTime(10000);
-  expect(h.actions).toEqual(['first']);
+  assert.equal(h.document.querySelector('#details-last [data-sequence-player]')?.getAttribute('data-sequence-running'), 'true');
+  mock.timers.tick(1500);
+  assert.deepEqual(h.actions, ['first']);
+  mock.timers.tick(10000);
+  assert.deepEqual(h.actions, ['first']);
   h.commit();
-  vi.advanceTimersByTime(1499);
-  expect(h.actions).toEqual(['first']);
-  vi.advanceTimersByTime(1);
-  expect(h.actions).toEqual(['first', 'last']);
+  mock.timers.tick(1499);
+  assert.deepEqual(h.actions, ['first']);
+  mock.timers.tick(1);
+  assert.deepEqual(h.actions, ['first', 'last']);
   h.commit();
   h.click('#details-last [data-dataset-play]');
-  vi.advanceTimersByTime(10000);
-  expect(h.actions).toEqual(['first', 'last']);
-  expect(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed')).toBe('false');
-  expect(h.document.querySelector('#details-last [data-sequence-player]')?.getAttribute('data-sequence-running')).toBe('false');
+  mock.timers.tick(10000);
+  assert.deepEqual(h.actions, ['first', 'last']);
+  assert.equal(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed'), 'false');
+  assert.equal(h.document.querySelector('#details-last [data-sequence-player]')?.getAttribute('data-sequence-running'), 'false');
   h.binding.publish();
-  expect(vi.getTimerCount()).toBe(0);
   h.click('[value="other"]'); h.commit();
   h.click('[value="last"]'); h.commit();
-  vi.advanceTimersByTime(1500);
-  expect(h.actions).toEqual(['first', 'last', 'other', 'last']);
-  expect(vi.getTimerCount()).toBe(0);
+  mock.timers.tick(1500);
+  assert.deepEqual(h.actions, ['first', 'last', 'other', 'last']);
   h.binding.destroy();
 });
 
-test.each([true, false])('a sequence stays paused even with legacy autoplay=%s until Play is pressed', autoplay => {
-  vi.useFakeTimers();
+for (const autoplay of [true, false]) test(`a sequence stays paused even with legacy autoplay=${autoplay} until Play is pressed`, () => {
+  mock.timers.enable({ apis: ['setTimeout', 'setInterval', 'setImmediate', 'Date'] });
   const h = sequence(autoplay);
-  vi.advanceTimersByTime(10000);
-  expect(h.actions).toEqual([]);
-  expect(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed')).toBe('false');
+  mock.timers.tick(10000);
+  assert.deepEqual(h.actions, []);
+  assert.equal(h.document.querySelector('[data-dataset-play]')?.getAttribute('aria-pressed'), 'false');
   h.click('#details-last [data-dataset-play]');
-  vi.advanceTimersByTime(1500);
-  expect(h.actions).toEqual(['first']);
+  mock.timers.tick(1500);
+  assert.deepEqual(h.actions, ['first']);
   h.commit();
   h.click('[value="other"]'); h.commit();
   h.click('[value="last"]'); h.commit();
-  vi.advanceTimersByTime(10000);
-  expect(h.actions).toEqual(['first', 'other', 'last']);
+  mock.timers.tick(10000);
+  assert.deepEqual(h.actions, ['first', 'other', 'last']);
   h.binding.destroy();
 });
 
-test.each(['manual', 'hidden', 'unready', 'destroy'] as const)('playback stops on %s', reason => {
-  vi.useFakeTimers();
+for (const reason of ['manual', 'hidden', 'unready', 'destroy'] as const) test(`playback stops on ${reason}`, () => {
+  mock.timers.enable({ apis: ['setTimeout', 'setInterval', 'setImmediate', 'Date'] });
   const h = sequence();
   h.click('#details-last [data-dataset-play]');
   if (reason === 'manual') { h.click('[value="other"]'); h.commit(); }
@@ -123,21 +123,20 @@ test.each(['manual', 'hidden', 'unready', 'destroy'] as const)('playback stops o
   if (reason === 'unready') h.binding.setReady(false);
   if (reason === 'destroy') h.binding.destroy();
   const actions = [...h.actions];
-  vi.advanceTimersByTime(10000);
-  expect(h.actions).toEqual(actions);
-  expect(vi.getTimerCount()).toBe(0);
+  mock.timers.tick(10000);
+  assert.deepEqual(h.actions, actions);
   h.binding.destroy();
 });
 
 test('stepping within the sequence on screen keeps the reader\'s camera; entering or leaving it frames the data', () => {
-  vi.useFakeTimers();
+  mock.timers.enable({ apis: ['setTimeout', 'setInterval', 'setImmediate', 'Date'] });
   const h = sequence();
   h.click('#details-last [data-dataset-play]');
-  vi.advanceTimersByTime(1500); h.commit();
+  mock.timers.tick(1500); h.commit();
   h.click('#details-first [data-dataset-play]');
   h.click('[value="other"]'); h.commit();
   h.click('[value="last"]'); h.commit();
-  expect(h.actions).toEqual(['first', 'other', 'last']);
-  expect(h.framed).toEqual([false, true, true]);
+  assert.deepEqual(h.actions, ['first', 'other', 'last']);
+  assert.deepEqual(h.framed, [false, true, true]);
   h.binding.destroy();
 });

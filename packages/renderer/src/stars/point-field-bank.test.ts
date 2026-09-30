@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { encodePointFieldBank, magnitudeDisplayAlphaChange } from '@cssearth/bake/stars';
 import { POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_BOUND, decodePointFieldBank } from './point-field-bank.js';
 import { IMPERCEPTIBLE_LUMINANCE } from './point-field-projection.js';
@@ -26,21 +28,21 @@ const decode = (bytes: Uint8Array, bank: PreparedPointFieldBank) => decodePointF
 
 test('bank decodes stars exactly on the float32 source grid and hierarchy nodes losslessly', () => {
   const { bytes, bank } = encode(), decoded = decode(bytes, bank);
-  expect(bank.bytes).toBe(bytes.length);
-  expect(bank.names).toEqual([[0, 'Aldebaran']]);
-  expect(decoded.stars.map(star => star.id)).toEqual(['row:2', 'row:0', 'row:1']);
-  expect(decoded.stars.map(star => star.positionUnits)).toEqual(stars.map(star => star.positionUnits));
-  expect(decoded.stars.map(star => star.coverageAnchor)).toEqual([true, false, false]);
+  assert.equal(bank.bytes, bytes.length);
+  assert.deepEqual(bank.names, [[0, 'Aldebaran']]);
+  assert.deepEqual(decoded.stars.map(star => star.id), ['row:2', 'row:0', 'row:1']);
+  assert.deepEqual(decoded.stars.map(star => star.positionUnits), stars.map(star => star.positionUnits));
+  assert.deepEqual(decoded.stars.map(star => star.coverageAnchor), [true, false, false]);
   // 0.0004 mag is off the millimagnitude grid: it decodes to 0 within the declared bound.
-  expect(decoded.stars.map(star => star.absoluteMagnitude)).toEqual([stars[0].absoluteMagnitude, stars[1].absoluteMagnitude, 0]);
+  assert.deepEqual(decoded.stars.map(star => star.absoluteMagnitude), [stars[0].absoluteMagnitude, stars[1].absoluteMagnitude, 0]);
   const magnitude = bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
-  expect(magnitude.measured).toBe(stars[2].absoluteMagnitude);
-  expect(magnitude.measured).toBeLessThanOrEqual(magnitude.bound);
-  expect(decoded.nodes).toEqual(nodes);
-  expect(Object.isFrozen(decoded.stars[0]!.positionUnits) && Object.isFrozen(decoded.nodes[0]!.children)).toBe(true);
+  assert.equal(magnitude.measured, stars[2].absoluteMagnitude);
+  assert.ok(magnitude.measured <= magnitude.bound);
+  assert.deepEqual(decoded.nodes, nodes);
+  assert.equal((Object.isFrozen(decoded.stars[0]!.positionUnits) && Object.isFrozen(decoded.nodes[0]!.children)), true);
   // Unaligned views are copied before typed-array decoding.
   const shifted = new Uint8Array(bytes.length + 1); shifted.set(bytes, 1);
-  expect(decode(shifted.subarray(1), bank)).toEqual(decoded);
+  assert.deepEqual(decode(shifted.subarray(1), bank), decoded);
 });
 
 test('bank decoding rejects drifted bytes, headers, layouts and ranges', () => {
@@ -48,27 +50,27 @@ test('bank decoding rejects drifted bytes, headers, layouts and ranges', () => {
   const tampered = (mutate: (copy: Uint8Array, view: DataView) => void) => {
     const copy = Uint8Array.from(bytes); mutate(copy, new DataView(copy.buffer)); return copy;
   };
-  expect(() => decode(bytes.subarray(0, bytes.length - 8), bank)).toThrow('byte length');
-  expect(() => decode(tampered(copy => { copy[0] = 0; }), bank)).toThrow('header');
-  expect(() => decode(tampered((_, view) => view.setUint32(12, 4, true)), bank)).toThrow('header');
-  expect(() => decode(tampered((_, view) => view.setUint32(POINT_FIELD_BANK_HEADER_BYTES, 0, true)), bank)).toThrow('header or directory');
-  expect(() => decode(bytes, { ...bank, columns: bank.columns.map((entry, index) => index === 1 ? { ...entry, offset: entry.offset + 8 } : entry) })).toThrow('layout');
-  expect(() => decode(tampered(copy => { copy[column('star.colorIndex').offset] = 2; }), bank)).toThrow('star');
-  expect(() => decode(tampered((_, view) => view.setUint32(column('star.sourceRow').offset, 0, true)), bank)).toThrow('star');
-  expect(() => decode(tampered((_, view) => view.setFloat32(column('star.positionUnits').offset, Number.NaN, true)), bank)).toThrow('star');
-  expect(() => decode(tampered((_, view) => view.setFloat32(column('star.positionUnits').offset, 2048, true)), bank)).toThrow('star');
-  expect(() => decode(tampered((_, view) => view.setUint32(column('star.coverageAnchor').offset, 3, true)), bank)).toThrow('anchor');
-  expect(() => decode(tampered((_, view) => view.setUint32(column('node.children').offset, 9, true)), bank)).toThrow('children');
-  expect(() => decode(tampered((_, view) => view.setFloat64(column('node.radiusUnits').offset, -1, true)), bank)).toThrow('node');
-  expect(() => decode(bytes, { ...bank, names: [[3, 'Nowhere']] })).toThrow('names');
+  assert.throws(() => decode(bytes.subarray(0, bytes.length - 8), bank), /byte length/);
+  assert.throws(() => decode(tampered(copy => { copy[0] = 0; }), bank), /header/);
+  assert.throws(() => decode(tampered((_, view) => view.setUint32(12, 4, true)), bank), /header/);
+  assert.throws(() => decode(tampered((_, view) => view.setUint32(POINT_FIELD_BANK_HEADER_BYTES, 0, true)), bank), /header or directory/);
+  assert.throws(() => decode(bytes, { ...bank, columns: bank.columns.map((entry, index) => index === 1 ? { ...entry, offset: entry.offset + 8 } : entry) }), /layout/);
+  assert.throws(() => decode(tampered(copy => { copy[column('star.colorIndex').offset] = 2; }), bank), /star/);
+  assert.throws(() => decode(tampered((_, view) => view.setUint32(column('star.sourceRow').offset, 0, true)), bank), /star/);
+  assert.throws(() => decode(tampered((_, view) => view.setFloat32(column('star.positionUnits').offset, Number.NaN, true)), bank), /star/);
+  assert.throws(() => decode(tampered((_, view) => view.setFloat32(column('star.positionUnits').offset, 2048, true)), bank), /star/);
+  assert.throws(() => decode(tampered((_, view) => view.setUint32(column('star.coverageAnchor').offset, 3, true)), bank), /anchor/);
+  assert.throws(() => decode(tampered((_, view) => view.setUint32(column('node.children').offset, 9, true)), bank), /children/);
+  assert.throws(() => decode(tampered((_, view) => view.setFloat64(column('node.radiusUnits').offset, -1, true)), bank), /node/);
+  assert.throws(() => decode(bytes, { ...bank, names: [[3, 'Nowhere']] }), /names/);
 });
 
 test('encoder refuses rows outside the declared storage and bounds', () => {
-  expect(() => encode({ stars: [{ ...stars[0], positionUnits: [0.1, 0, 0] }, ...stars.slice(1)] })).toThrow('float32');
-  expect(() => encode({ stars: [{ ...stars[0], absoluteMagnitude: 40 }, ...stars.slice(1)] })).toThrow('int16');
-  expect(() => encode({ stars: [{ ...stars[0], id: 'other:7' }, ...stars.slice(1)] })).toThrow('source row');
+  assert.throws(() => encode({ stars: [{ ...stars[0], positionUnits: [0.1, 0, 0] }, ...stars.slice(1)] }), /float32/);
+  assert.throws(() => encode({ stars: [{ ...stars[0], absoluteMagnitude: 40 }, ...stars.slice(1)] }), /int16/);
+  assert.throws(() => encode({ stars: [{ ...stars[0], id: 'other:7' }, ...stars.slice(1)] }), /source row/);
   // A photometry table steep enough for half a millimagnitude to be visible fails preparation.
   const steep = { ...photometry, step: 1e-4 };
-  expect(magnitudeDisplayAlphaChange(steep, atlas, POINT_FIELD_MAGNITUDE_BOUND)).toBeGreaterThan(IMPERCEPTIBLE_LUMINANCE);
-  expect(() => encode({ photometry: steep })).toThrow('display threshold');
+  assert.ok(magnitudeDisplayAlphaChange(steep, atlas, POINT_FIELD_MAGNITUDE_BOUND) > IMPERCEPTIBLE_LUMINANCE);
+  assert.throws(() => encode({ photometry: steep }), /display threshold/);
 });

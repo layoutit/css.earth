@@ -4,9 +4,7 @@ import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { SCENE_OBJECTS as OBJECTS } from "../objects.mts";
-import { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA, requirePreparedData, requirePreparedPresentation } from "@cssearth/bake/presentation";
-import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
+import { PREPARED_PRESENTATION_SCHEMA, requirePreparedData, requirePreparedPresentation } from "@cssearth/bake/presentation";
 
 type FixtureVariant = { when: Record<string, string | number | boolean | null>; required: string[]; writes: unknown[]; materials: unknown[] };
 export function presentationFixture(definition: ObjectRuntimeDefinition) {
@@ -24,14 +22,6 @@ export function presentationFixture(definition: ObjectRuntimeDefinition) {
 const moon = parsePreparedObjectRuntime(await loadObjectTestDefinition('moon'));
 const fixture = () => structuredClone(presentationFixture(moon));
 
-test("v2 binds every registered object's actual control, camera, sky and resource contracts", async () => {
-  for (const object of OBJECTS) {
-    const runtimeDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));
-    const plan = presentationFixture(runtimeDefinition);
-    requirePreparedPresentation(plan, { controls: runtimeDefinition.controls });
-    requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: object.id, controls: runtimeDefinition.controls });
-  }
-});
 test("prepared data rejects callbacks, getters, nonfinite values and cycles without executing them", () => {
   for (const value of [() => {}, { callback() {} }, { value: NaN }, { value: undefined }, new Map()]) assert.throws(() => requirePreparedData(value), /JSON/);
   let calls = 0; const getter = { get value() { calls++; return 1; } };

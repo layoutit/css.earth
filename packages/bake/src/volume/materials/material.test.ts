@@ -1,4 +1,4 @@
-import { test } from 'vitest';
+import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { compilerSlabMaterial, alphaLimitedSlabMaterial, channelGainSlabMaterial, datasetChannelGainMaterial, splitChannelGain, validateChannelGain } from './slab-material.ts';
 

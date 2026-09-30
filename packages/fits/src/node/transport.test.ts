@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { decodeFits } from '../index.js';
 import { imageFixture, card } from './fixtures/bytes.js';
 import { encodeFits } from './index.js';

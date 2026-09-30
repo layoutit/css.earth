@@ -1,4 +1,6 @@
-import { expect, it } from 'vitest';
+import { it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { selectPreparedPointField, selectVisiblePreparedStars } from '@cssearth/engine';
 import { readCanonicalPointField } from '../../test/canonical-point-field-fixture.js';
 
@@ -15,16 +17,16 @@ it('selects the sampled 255-star hierarchy at four observer distances', () => {
   }));
   const elapsedMs = performance.now() - started;
   for (const selection of selections) {
-    expect(selection.representatives.length).toBeLessThanOrEqual(64);
-    expect(selection.coveredCount).toBe(field.stars.length);
+    assert.ok(selection.representatives.length <= 64);
+    assert.equal(selection.coveredCount, field.stars.length);
     const members = new Set<number>();
     for (const reference of selection.representatives) {
-      expect(reference.kind).toBe('star');
-      expect(reference.index).toBeGreaterThanOrEqual(0);
-      expect(reference.index).toBeLessThan(field.stars.length);
+      assert.equal(reference.kind, 'star');
+      assert.ok(reference.index >= 0);
+      assert.ok(reference.index < field.stars.length);
       members.add(reference.index);
     }
-    expect(members.size).toBe(selection.representatives.length);
+    assert.equal(members.size, selection.representatives.length);
   }
   console.log(JSON.stringify({ elapsedMs: Number(elapsedMs.toFixed(2)),
     views: selections.map(selection => ({ representatives: selection.representatives.length,
@@ -59,6 +61,6 @@ it('matches brute-force visible-brightness top-K across six directions and four 
     const selected = selectVisiblePreparedStars({ stars: field.stars, nodes: field.nodes, eyeUnits: eye,
       viewRotation: view.rotation, focalPx: 900, viewportHalfWidthPx: 720, viewportHalfHeightPx: 450,
       maxRepresentatives: 128, targetErrorPx: 2, limitingMagnitude: 20 });
-    expect(selected.representatives.map(reference => reference.index)).toEqual(bruteTop(eye, view.rotation));
+    assert.deepEqual(selected.representatives.map(reference => reference.index), bruteTop(eye, view.rotation));
   }
 });

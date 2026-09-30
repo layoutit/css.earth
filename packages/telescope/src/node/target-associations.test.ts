@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { it as test } from 'vitest';
+import { it as test } from 'node:test';
 
 test('transport failures remain distinct from identity contradictions', async () => {
   const { loadTargetAssociations } = await import('./target-associations.js');

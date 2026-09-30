@@ -1,14 +1,15 @@
-import { afterEach, expect, test, vi } from 'vitest';
+import { afterEach, test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
-import { createUniverseDatasetBanks } from './universe-dataset-banks.js';
 import type { PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 
-const decode = vi.hoisted(() => ({ ready: true }));
-vi.mock('../volume/volume-texture-readiness.js', () => ({
+const decode = { ready: true };
+mock.module('../volume/volume-texture-readiness.js', { namedExports: {
   createVolumeTextureReadiness: () => ({ ready: () => decode.ready, destroy() {} }),
-}));
-vi.mock('../volume/prepared-volume-datasets.js', () => ({
+} });
+mock.module('../volume/prepared-volume-datasets.js', { namedExports: {
   createPreparedVolumeDatasets: ({ payload }: { payload: PreparedVolumeDatasets }) => ({ payload,
     mount: ({ host, before, frontHost, frontBefore }: { host: HTMLElement; before: Element; frontHost: HTMLElement; frontBefore: Element }) => {
       const root = host.ownerDocument.createElement('div'), frontRoot = host.ownerDocument.createElement('div');
@@ -16,7 +17,9 @@ vi.mock('../volume/prepared-volume-datasets.js', () => ({
       return { root, frontRoot, textureUrls: () => ['/slice.webp'], publish() {}, setStarsVisible() {}, destroy() { root.remove(); frontRoot.remove(); } };
     },
   }),
-}));
+} });
+// The modules under test import the mocked ones, so they load after the mocks.
+const { createUniverseDatasetBanks } = await import('./universe-dataset-banks.js');
 afterEach(() => { decode.ready = true; });
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const,
   localToReferenceXyzw: [0, 0, 0, 1] as const, metersPerUnit: 1,
@@ -42,14 +45,14 @@ async function fixture(attached = false) {
   return { banks, targets, publish, lifetime };
 }
 
-test.each([true, false])('a resident bank recovers after a decode gap; still coasting=%s', async stillCoasting => {
+for (const stillCoasting of [true, false]) test(`a resident bank recovers after a decode gap; still coasting=${stillCoasting}`, async () => {
   const f = await fixture();
   f.publish();
-  for (const root of f.targets) expect(root.style.opacity).toBe('1');
+  for (const root of f.targets) assert.equal(root.style.opacity, '1');
   f.banks.setCoasting(true); decode.ready = false; f.publish();
-  for (const root of f.targets) { expect(root.style.opacity).toBe('0'); expect(root.style.display).toBe('block'); }
+  for (const root of f.targets) { assert.equal(root.style.opacity, '0'); assert.equal(root.style.display, 'block'); }
   f.banks.setCoasting(stillCoasting); decode.ready = true; f.publish();
-  for (const root of f.targets) { expect(root.style.opacity).toBe('1'); expect(root.style.display).toBe('block'); }
+  for (const root of f.targets) { assert.equal(root.style.opacity, '1'); assert.equal(root.style.display, 'block'); }
   f.lifetime.destroy();
 });
 
@@ -57,31 +60,31 @@ test('hidden banks wait for coast to stop; steady publication writes no styles',
   const f = await fixture();
   decode.ready = false; f.publish();
   f.banks.setCoasting(true); decode.ready = true; f.publish();
-  for (const root of f.targets) expect(root.style.display).toBe('none');
+  for (const root of f.targets) assert.equal(root.style.display, 'none');
   f.banks.setCoasting(false); f.publish();
-  for (const root of f.targets) { expect(root.style.opacity).toBe('1'); expect(root.style.display).toBe('block'); }
+  for (const root of f.targets) { assert.equal(root.style.opacity, '1'); assert.equal(root.style.display, 'block'); }
   const writes = f.targets.map(root => {
-    const opacity = vi.fn(), display = vi.fn();
+    const opacity = mock.fn(() => {}), display = mock.fn(() => {});
     Object.defineProperty(root.style, 'opacity', { get: () => '1', set: opacity });
     Object.defineProperty(root.style, 'display', { get: () => 'block', set: display });
     return { opacity, display };
   });
   f.publish();
-  for (const write of writes) { expect(write.opacity).not.toHaveBeenCalled(); expect(write.display).not.toHaveBeenCalled(); }
+  for (const write of writes) { assert.equal(write.opacity.mock.callCount(), 0); assert.equal(write.display.mock.callCount(), 0); }
   f.lifetime.destroy();
 });
 
 test('close-ups suppress distant banks while attached shells and the selected nebula remain visible', async () => {
   const distant = await fixture();
   distant.publish(0);
-  for (const node of distant.targets) expect(node.style.display).toBe('none');
+  for (const node of distant.targets) assert.equal(node.style.display, 'none');
   distant.publish(.5);
-  for (const node of distant.targets) expect(node.style.opacity).toBe('0.5');
+  for (const node of distant.targets) assert.equal(node.style.opacity, '0.5');
   distant.publish(0, 'fixture');
-  for (const node of distant.targets) expect(node.style.opacity).toBe('1');
+  for (const node of distant.targets) assert.equal(node.style.opacity, '1');
   distant.lifetime.destroy();
   const attached = await fixture(true);
   attached.publish(0);
-  for (const node of attached.targets) expect(node.style.opacity).toBe('1');
+  for (const node of attached.targets) assert.equal(node.style.opacity, '1');
   attached.lifetime.destroy();
 });

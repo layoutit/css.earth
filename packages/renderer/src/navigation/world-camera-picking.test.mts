@@ -1,6 +1,6 @@
 import { createCameraMotion } from './camera-motion.js';
 import assert from 'node:assert/strict';
-import { afterEach, test, vi } from 'vitest';
+import { afterEach, test, mock } from 'node:test';
 import { getEventListeners } from 'node:events';
 import { runtimePolicy } from '../../test/runtime-policy-fixture.mts';
 import runtimeDefinition from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
@@ -11,8 +11,9 @@ import { hitsProjectedBody } from './world-camera-hit.ts';
 import { bindWorldCameraPicking } from './world-camera-picking.ts';
 import { screenPicking } from './screen-picking.ts';
 import { createUnboundedMatrixDragControls } from './camera-input.ts';
+import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => unstubAllGlobals());
 const bounds = { x: 0, y: 0, width: 1000, height: 800 } satisfies Pick<DOMRect, 'x' | 'y' | 'width' | 'height'>;
 // The shared world camera presents Mercury's physical radius through a 900 px focal length.
 const radiusUnits = runtimeDefinition.camera.logicalBodyDiameter / 2;
@@ -115,7 +116,7 @@ function fixture(hitTest: (x: number, y: number) => boolean = () => false,
   // The test supplies only the native document fields consumed by the input owners.
   Reflect.defineProperty(document, 'defaultView', { value: window });
   documentStates.set(document, { window, targets: [], group: null });
-  vi.stubGlobal('HTMLElement', FakeSurface); vi.stubGlobal('PointerEvent', FakePointer);
+  stubGlobal('HTMLElement', FakeSurface); stubGlobal('PointerEvent', FakePointer);
   const surface = new FakeSurface(), host = new FakeSurface();
   surface.ownerDocument = document; host.ownerDocument = document;
   const registry = screenPicking(narrowElement(host));
@@ -368,7 +369,7 @@ test('hover coalesces pointer events and follows the latest published targets wh
   const f = fixture();
   const intents: unknown[] = [];
   f.host.addEventListener('objecthoverchange', event => { intents.push(event instanceof CustomEvent ? event.detail.interactive : event); });
-  const pick = vi.spyOn(f.registry, 'pick');
+  const pick = mock.method(f.registry, 'pick');
   f.document.targets = [f.target];
   f.fire('pointermove', 1, { buttons: 0 });
   f.fire('pointermove', 2, { buttons: 0 });

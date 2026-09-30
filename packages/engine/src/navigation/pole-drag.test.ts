@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { composeDragRotation, rotationFromAngularVelocity } from './sphere-drag.js';
 import { poleTumbleTurn, poleTurnRotation, rotateVector } from './pole-drag.js';
 import { createDragHistory, estimateDragThrow, projectTrackballDelta, recordDragSample } from './trackball-drag-inertia.js';
@@ -26,10 +28,10 @@ const east = Array.from({ length: 60 }, () => [5, 0] as [number, number]);
 
 describe('pole-held tumble', () => {
   it('turns a sideways drag about the pole where the screen-axis tumble swung it sideways', () => {
-    expect(Math.abs(lean(drag(east, opening, 'screen')))).toBeGreaterThan(10);
+    assert.ok(Math.abs(lean(drag(east, opening, 'screen'))) > 10);
     const held = drag(east, opening, 'pole');
-    expect(lean(held)).toBeCloseTo(0, 9);
-    expect(toward(held)).toBeCloseTo(17.6, 9);
+    assert.ok(Math.abs(lean(held) - (0)) < 10 ** -9 / 2, `${lean(held)} is not close to ${0}`);
+    assert.ok(Math.abs(toward(held) - (17.6)) < 10 ** -9 / 2, `${toward(held)} is not close to ${17.6}`);
   });
 
   it('is the screen-axis tumble while the pole stands upright on screen', () => {
@@ -37,24 +39,24 @@ describe('pole-held tumble', () => {
     for (const [dx, dy] of [[12, 0], [0, -9], [7, 5]] as const) {
       const a = byPole(upright, dx, dy), b = screenAxes(dx, dy);
       // Each step of the screen tumble turns about one combined axis; the pole turn composes its two. They agree to first order.
-      a.forEach((value, i) => expect(value).toBeCloseTo(b[i]!, 3));
+      a.forEach((value, i) => assert.ok(Math.abs(value - (b[i]!)) < 10 ** -3 / 2, `${value} is not close to ${b[i]!}`));
     }
   });
 
   it('keeps a rolled view at its roll and follows the pole on screen', () => {
     const rolled: Vector3 = [Math.sin(0.4) * Math.cos(0.3), -Math.cos(0.4) * Math.cos(0.3), Math.sin(0.3)];
     const turned = drag(Array.from({ length: 30 }, () => [4, -3] as [number, number]), rolled, 'pole');
-    expect(lean(turned)).toBeCloseTo(lean(rolled), 9);
+    assert.ok(Math.abs(lean(turned) - (lean(rolled))) < 10 ** -9 / 2, `${lean(turned)} is not close to ${lean(rolled)}`);
     // A drag along the pole's screen direction only tilts: no turn about the pole.
     const along = poleTumbleTurn(projectTrackballDelta({ ...trackball, previousX: 704, previousY: 479.5,
       currentX: 704 + 10 * Math.sin(0.4), currentY: 479.5 - 10 * Math.cos(0.4) }), rolled);
-    expect(along.spin).toBeCloseTo(0, 12);
+    assert.ok(Math.abs(along.spin - (0)) < 10 ** -12 / 2, `${along.spin} is not close to ${0}`);
   });
 
   it('stops the pole at the line of sight instead of turning the body over', () => {
     const over = drag(Array.from({ length: 200 }, () => [0, 6] as [number, number]), opening, 'pole');
-    expect(over[2]).toBeGreaterThan(0.999999);
-    expect(lean(drag([[0, -40], [30, 0]], over, 'pole'))).toBeCloseTo(0, 6);
+    assert.ok(over[2] > 0.999999);
+    assert.ok(Math.abs(lean(drag([[0, -40], [30, 0]], over, 'pole')) - (0)) < 10 ** -6 / 2, `${lean(drag([[0, -40], [30, 0]], over, 'pole'))} is not close to ${0}`);
   });
 
   it('coasts a throw about the pole', () => {
@@ -63,8 +65,8 @@ describe('pole-held tumble', () => {
     const projectTurn = (input: Parameters<typeof projectTrackballDelta>[0]) => poleTumbleTurn(projectTrackballDelta({ ...trackball, ...input, radius: trackball.radius }), opening);
     const motion = estimateDragThrow({ history, releaseTimestamp: 48, trackball, pole: opening, projectTurn });
     if (!motion?.poleTurnPerMillisecond) throw new Error('Expected a pole throw.');
-    expect(motion.poleTurnPerMillisecond.tilt).toBeCloseTo(0, 12);
-    expect(lean(rotateVector(composeDragRotation(motion.launchRotation, [0, 0, 0, 1]), opening))).toBeCloseTo(0, 9);
-    expect(estimateDragThrow({ history, releaseTimestamp: 48, trackball })?.poleTurnPerMillisecond).toBeNull();
+    assert.ok(Math.abs(motion.poleTurnPerMillisecond.tilt - (0)) < 10 ** -12 / 2, `${motion.poleTurnPerMillisecond.tilt} is not close to ${0}`);
+    assert.ok(Math.abs(lean(rotateVector(composeDragRotation(motion.launchRotation, [0, 0, 0, 1]), opening)) - (0)) < 10 ** -9 / 2, `${lean(rotateVector(composeDragRotation(motion.launchRotation, [0, 0, 0, 1]), opening))} is not close to ${0}`);
+    assert.equal(estimateDragThrow({ history, releaseTimestamp: 48, trackball })?.poleTurnPerMillisecond, null);
   });
 });

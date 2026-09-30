@@ -1,5 +1,7 @@
 import { readFileSync } from 'node:fs';
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { contextAnnotationOpacity } from './marker-presentation.js';
 
 // The world context marks each body's annotation strength with a prepared level attribute, and world-context.css holds
@@ -10,10 +12,10 @@ test('every annotation strength the rule returns has its final opacity in the wo
   const short = (value: number) => String(value).replace(/^0\./, '.');
   for (const { line, label } of classifications.map(contextAnnotationOpacity)) {
     if (line !== .65) {
-      expect(css).toContain(`[data-context-line-alpha="${line}"]::before`);
-      expect(css).toContain(`[data-context-line-alpha="${line}"] > .context-locator { opacity: ${short(line)}; }`);
+      assert.ok(css.includes(`[data-context-line-alpha="${line}"]::before`));
+      assert.ok(css.includes(`[data-context-line-alpha="${line}"] > .context-locator { opacity: ${short(line)}; }`));
     }
-    if (label !== .65) expect(css).toContain(`[data-context-label-alpha="${label}"] > .context-caption::after { opacity: ${short(label)}; }`);
+    if (label !== .65) assert.ok(css.includes(`[data-context-label-alpha="${label}"] > .context-caption::after { opacity: ${short(label)}; }`));
   }
-  expect(css).not.toMatch(/--context-(?:line|label)-alpha/);
+  assert.doesNotMatch(css, /--context-(?:line|label)-alpha/);
 });

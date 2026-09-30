@@ -182,23 +182,6 @@ jobs:
           else
             CSSEARTH_SOURCE_CHECK_MODE=published node --test packages/objects/src/node/provenance/exploration-catalog.test.mts src/sources/factsheet-sources.test.mts "packages/bake/src/sources/*.test.mts" packages/bake/src/objects/sources/source-manifest-parsers.test.mts "site/test/*{source,facilit}*.test.mts"
           fi
-      - name: Reproduce the prepared bank from its pinned inputs
-        if: ${{ !cancelled() }}
-        # Moved off the `Preparation / world` gate lane. These re-run a bake and compare it with the recorded
-        # output: finalization idempotence and catalogue-row reconciliation. The site never bakes anything — it
-        # serves the published bank at its R2 content address, so a reproduction gap is a stale recipe or a drifted
-        # toolchain, visible here, and not a broken page. Nothing is skipped: the same commands run in full.
-        env:
-          CI_AUDIT_PREPARATION: ${{ needs.changes.outputs.run_universe_preparation }}
-        run: |
-          if [ "${GITHUB_EVENT_NAME:-}" = pull_request ] && [ "$CI_AUDIT_PREPARATION" != true ]; then
-            echo "This change selects no preparation area; there is no bake to reproduce."
-            exit 0
-          fi
-          node .github/scripts/ci/prepare-ci-inputs.mts universe-preparation
-          # The galaxy writer finishes before world/provenance readers in this workspace.
-          node packages/bake/cli/restore-source-inputs.mts --repository-volumes
-          pnpm test:preparation --universe
       - name: Explain that this job does not gate the merge
         if: failure()
         run: |
@@ -208,5 +191,5 @@ jobs:
             echo "This job reports repository completeness and provenance backlog. It is **not** a required"
             echo "status check: it does not block this pull request. Fix it in the change that owns the gap,"
             echo "or file it as backlog. Merge-blocking proof is what ships: it compiles (\`Typecheck\`), it"
-            echo "builds, and it behaves (the universe runtime/shell/renderer lanes and \`Contract lint\`)."
+            echo "builds, and it behaves (the universe packages and site lanes and \`Contract lint\`)."
           } >> "$GITHUB_STEP_SUMMARY"

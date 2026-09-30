@@ -35,8 +35,8 @@ behavior justifies them; missing features do not need invented test scenarios.
 Use the [body commands](../../../../src/objects/README.md) for the selected package.
 Follow the contract's [PR check rules](../../../../docs/provenance/CONTRACT.md#pull-requests)
 for reuse, broader checks and unrelated failures. Inspect runner arguments before
-launching a suite: `pnpm test:node` is the broad native suite, while
-`pnpm test:preparation --universe` selects the preparation subset. Use direct
+launching a suite: `pnpm test:packages` and `pnpm test:site` are the two
+folder lanes of `pnpm test:run`. Use direct
 test files for focused work; the old per-body test directories and planet runner
 are retired. Do not infer body qualification from source-dependent skips. Run expensive source restoration, preparation
 and browser work in sequence so they do not compete for memory.

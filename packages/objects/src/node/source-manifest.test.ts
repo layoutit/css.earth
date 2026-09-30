@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { onTestFinished, test } from 'vitest';
+import { after, test } from 'node:test';
 
 import {
 assertRangeResponse,
@@ -10,6 +10,10 @@ rangeRequestHeader,
 validateSourceManifest,
 verifySourceManifest,
 } from "./source-manifest.js";
+
+// Temporary checkouts the tests make, removed once the file's tests finish.
+const temporary: string[] = [];
+after(() => Promise.all(temporary.map(path => rm(path, { recursive: true, force: true }))));
 
 test('document descriptions are optional without weakening generator identity', () => {
   const base = sourceManifest({ 'input/source.txt': Buffer.from('input') });
@@ -23,7 +27,7 @@ test('document descriptions are optional without weakening generator identity', 
 
 test("validates and verifies every authoritative source entry class", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-source-manifest-"));
-  onTestFinished(() => rm(root, { force: true, recursive: true }));
+  temporary.push(root);
   await mkdir(join(root, "input"));
   await mkdir(join(root, "generated"));
   await mkdir(join(root, "docs"));
@@ -86,7 +90,7 @@ test("validates and verifies every authoritative source entry class", async () =
 
 test("rejects a declared file missing from the source tree", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-source-missing-"));
-  onTestFinished(() => rm(root, { force: true, recursive: true }));
+  temporary.push(root);
   const bytes = Buffer.from("input");
   const files = { "input/source.txt": bytes };
   const manifest = validateSourceManifest("fixture", {

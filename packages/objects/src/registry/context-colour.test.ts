@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { composited, contextColour, contrastRatio, readableOnSky } from './context-colour.js';
 
 const onSky = (hex: string, opacity: number) => contrastRatio(composited(hex, opacity), '#000000');

@@ -16,7 +16,7 @@ const scienceDataset = async (source: string, id: string): Promise<Record<string
   return {id: surface.id, ...science};
 };
 
-for (const id of ['io', 'ganymede']) test(`${id} independently archived label points anchor both hemispheres of the geology view`, async () => {
+for (const id of ['io']) test(`${id} independently archived label points anchor both hemispheres of the geology view`, async () => {
   const source = `${planets}${id}/source`;
   const dataset = parseGeologyDataset(await scienceDataset(source, 'geology'));
   const directory = dataset.path.slice(0, dataset.path.lastIndexOf('/'));

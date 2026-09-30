@@ -1,6 +1,8 @@
 import { readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { requireInventory } from '@cssearth/objects/node';
 import { loadPreparedCssVolume } from './loader.js';
 
@@ -15,12 +17,12 @@ async function fixture() {
 
 test('loads the inventoried density artifact with its complete hybrid asset bank', async () => {
   const { base, descriptor, bytes, recipe, inventory } = await fixture();
-  const read = vi.fn(async () => bytes);
+  const read = mock.fn(async () => bytes);
   const payload = await loadPreparedCssVolume(descriptor, { read });
-  expect(read).toHaveBeenCalledExactlyOnceWith(descriptor.prepared.url);
+  assert.equal(read.mock.callCount(), 1); assert.deepEqual(read.mock.calls[0]!.arguments, [descriptor.prepared.url]);
   const slices = payload.stacks.flatMap(stack => stack.leaves);
   const sky = payload.sky?.faces ?? [];
-  expect(Boolean(payload.sky)).toBe(Boolean(recipe.sky));
+  assert.equal(Boolean(payload.sky), Boolean(recipe.sky));
   // The published bank owns cropped bulge slices only: no flat disc plane and no whole-galaxy impostor views.
   // The full-galaxy bake is intermediate data, retired after the hybrid compile.
   // The galaxy's backing image is its own bank (prepared/backing.json, drawn by universe/galaxy-backing.ts), not the volume's.
@@ -30,37 +32,37 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
     return [bank.leaf.texturePath, ...(bank.sections ?? []).map(section => section.texturePath)];
   }, () => [] as string[]);
   const images = inventory.assets.filter(asset => asset.location === 'prepared' && /\.(?:png|webp)$/iu.test(asset.filename) && !backing.includes(asset.filename));
-  expect(slices.map(leaf => leaf.texturePath).sort()).toEqual(images.map(asset => asset.filename).filter(path => path.startsWith('core/slices/')).sort());
-  expect(payload.impostors).toBeUndefined();
-  expect(payload.resources).toHaveLength(slices.length + sky.length);
+  assert.deepEqual(slices.map(leaf => leaf.texturePath).sort(), images.map(asset => asset.filename).filter(path => path.startsWith('core/slices/')).sort());
+  assert.equal(payload.impostors, undefined);
+  assert.equal(payload.resources.length, slices.length + sky.length);
   // The prepared traversal owns presentation order; source depth order is not
   // a loader instruction. Keep every leaf and transport the authored ordering.
   const prepared = JSON.parse(new TextDecoder().decode(bytes));
-  expect(payload.stacks).toEqual(prepared.data.stacks);
+  assert.deepEqual(payload.stacks, prepared.data.stacks);
   const used = [...slices, ...sky].map(image => image.texturePath).sort();
-  expect(payload.resources.map(resource => resource.path).sort()).toEqual(used);
-  expect(payload.resources.map(({ path, bytes }) => ({ filename: path, bytes }))
-    .sort((a, b) => a.filename.localeCompare(b.filename))).toEqual(images.map(({ filename, bytes }) => ({ filename, bytes }))
+  assert.deepEqual(payload.resources.map(resource => resource.path).sort(), used);
+  assert.deepEqual(payload.resources.map(({ path, bytes }) => ({ filename: path, bytes }))
+    .sort((a, b) => a.filename.localeCompare(b.filename)), images.map(({ filename, bytes }) => ({ filename, bytes }))
     .sort((a, b) => a.filename.localeCompare(b.filename)));
   const ownedImages = (await readdir(directory, { recursive: true })).filter(path => /\.(?:png|webp)$/iu.test(path) && !backing.includes(path)).sort();
-  expect(ownedImages).toEqual(used);
+  assert.deepEqual(ownedImages, used);
   const skyPaths = new Set(sky.map(face => face.texturePath));
   const banks = { volume: { images: slices.length, bytes: 0, decodedRgbaBytes: 0 }, sky: { images: sky.length, bytes: 0, decodedRgbaBytes: 0 } };
   for (const resource of payload.resources) {
     const image = await readFile(new URL(resource.path, directory)), metadata = await sharp(image).metadata();
-    expect(image.byteLength, resource.path).toBe(resource.bytes);
-    expect([metadata.width, metadata.height], resource.path).toEqual([resource.width, resource.height]);
-    if (skyPaths.has(resource.path) && metadata.hasAlpha) expect((await sharp(image).ensureAlpha().stats()).channels[3]!.min, resource.path).toBe(255);
+    assert.equal(image.byteLength, resource.bytes, resource.path);
+    assert.deepEqual(([metadata.width, metadata.height]), [resource.width, resource.height], resource.path);
+    if (skyPaths.has(resource.path) && metadata.hasAlpha) assert.equal((await sharp(image).ensureAlpha().stats()).channels[3]!.min, 255, resource.path);
     const bank = skyPaths.has(resource.path) ? banks.sky : banks.volume;
     bank.bytes += image.byteLength; bank.decodedRgbaBytes += resource.width * resource.height * 4;
   }
   console.info('Prepared image bank integrity:', JSON.stringify(banks));
-  expect(payload.frame).toEqual(descriptor.properties.volume);
+  assert.deepEqual(payload.frame, descriptor.properties.volume);
 });
 
 test('rejects authenticated frame drift before rendering', async () => {
   const { descriptor, bytes } = await fixture();
   const drifted = structuredClone(descriptor);
   drifted.properties.volume.originM[0] += 1e18;
-  await expect(loadPreparedCssVolume(drifted, { read: async () => bytes })).rejects.toThrow('frame');
+  await assert.rejects(loadPreparedCssVolume(drifted, { read: async () => bytes }), /frame/);
 });

@@ -1,22 +1,25 @@
-import { expect, test, vi } from 'vitest';
+import { test, mock } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { prepareObjectResources } from './prepared-resource-lease.js';
 import { createPreparedResidency, type PreparedAssets } from '../rendering/prepared-residency.js';
+import { waitFor } from '@cssearth/objects/node/contract';
 
 const assets: PreparedAssets = { entries: [], pools: [], startup: [] };
 test('preflight owns a bank until exactly one matching scene claims it', async () => {
   const controller = new AbortController();
   const native = createPreparedResidency({ assets });
-  const destroy = vi.fn(() => native.destroy());
+  const destroy = mock.fn(() => native.destroy());
   const residency = { ...native, destroy };
   const lease = prepareObjectResources(assets, { signal: controller.signal, createResources: () => residency });
   await lease.ready;
-  expect(() => lease.claim({ ...assets }, {})).toThrow('another definition');
-  expect(lease.claim(assets, {})).toBe(residency);
-  expect(() => lease.claim(assets, {})).toThrow('unavailable');
+  assert.throws(() => lease.claim({ ...assets }, {}), /another definition/);
+  assert.equal(lease.claim(assets, {}), residency);
+  assert.throws(() => lease.claim(assets, {}), /unavailable/);
   controller.abort(); lease.destroy();
-  expect(destroy).not.toHaveBeenCalled();
+  assert.equal(destroy.mock.callCount(), 0);
   residency.destroy();
-  expect(destroy).toHaveBeenCalledOnce();
+  assert.equal(destroy.mock.callCount(), 1);
 });
 test('preflight resolves its image bank against the published asset origin', async () => {
   const assets: PreparedAssets = {
@@ -32,7 +35,7 @@ test('preflight resolves its image bank against the published asset origin', asy
     }),
   });
   await lease.ready;
-  expect(images[0]?.src).toBe(`https://earth-assets.example/runtime-assets/${'a'.repeat(64)}/surface.webp`);
+  assert.equal(images[0]?.src, `https://earth-assets.example/runtime-assets/${'a'.repeat(64)}/surface.webp`);
   lease.destroy();
 });
 test('an image whose hash the page did not embed loads from the published origin after its group arrives', async () => {
@@ -51,26 +54,26 @@ test('an image whose hash the page did not embed loads from the published origin
     }),
   });
   await lease.ready;
-  expect(reads).toEqual(['/objects/earth/asset-hashes/page.normal.level.2048.json']);
-  expect(images[0]?.src).toBe(`https://earth-assets.example/runtime-assets/${'c'.repeat(64)}/page-level-1024.webp`);
+  assert.deepEqual(reads, ['/objects/earth/asset-hashes/page.normal.level.2048.json']);
+  assert.equal(images[0]?.src, `https://earth-assets.example/runtime-assets/${'c'.repeat(64)}/page-level-1024.webp`);
   lease.destroy();
 });
 test('cancelled preflight releases an unclaimed bank and cannot reach a scene', async () => {
   const controller = new AbortController(); controller.abort();
   const residency = createPreparedResidency({ assets });
   const lease = prepareObjectResources(assets, { signal: controller.signal, createResources: () => residency });
-  await expect(lease.ready).rejects.toThrow('cancelled');
-  expect(() => lease.claim(assets, {})).toThrow('unavailable');
+  await assert.rejects(lease.ready, /cancelled/);
+  assert.throws(() => lease.claim(assets, {}), /unavailable/);
   lease.destroy();
-  expect(await residency.prepareStartup()).toBeNull();
+  assert.equal((await residency.prepareStartup()), null);
 });
 test('ready unclaimed resources are cancelled promptly without double destruction', async () => {
   const controller = new AbortController();
   const residency = createPreparedResidency({ assets });
   const lease = prepareObjectResources(assets, { signal: controller.signal, createResources: () => residency });
   await lease.ready; controller.abort(); lease.destroy();
-  expect(() => lease.claim(assets, {})).toThrow('unavailable');
-  expect(await residency.prepareStartup()).toBeNull();
+  assert.throws(() => lease.claim(assets, {}), /unavailable/);
+  assert.equal((await residency.prepareStartup()), null);
 });
 
 function decodingFixture() {
@@ -95,20 +98,20 @@ test('startup yields its reservation; a moving view replaces stale demand before
   const f = decodingFixture();
   let key = 'a';
   const prepared = f.lease.prepareDemand(() => ({ required: [key] }));
-  expect([...f.decodes.keys()]).toEqual(['/base.webp']);
+  assert.deepEqual(([...f.decodes.keys()]), ['/base.webp']);
   f.decodes.get('/base.webp')!.resolve();
-  await vi.waitFor(() => expect(f.decodes.has('/a.webp')).toBe(true));
+  await waitFor(() => assert.equal(f.decodes.has('/a.webp'), true));
   key = 'b';
   f.decodes.get('/a.webp')!.resolve();
-  await vi.waitFor(() => expect(f.decodes.has('/b.webp')).toBe(true));
+  await waitFor(() => assert.equal(f.decodes.has('/b.webp'), true));
   f.decodes.get('/b.webp')!.resolve();
   await prepared;
   const residency = f.lease.claim(f.assets, {});
-  expect([...residency.resources.readyKeys()].sort()).toEqual(['b', 'base']);
+  assert.deepEqual([...residency.resources.readyKeys()].sort(), ['b', 'base']);
   const ticket = residency.request({ required: ['b'] });
-  expect(await ticket.ready).toBe(ticket);
+  assert.equal((await ticket.ready), ticket);
   residency.commit(ticket);
-  expect(f.decodes.size).toBe(3); // The mount reuses the decoded image handle.
+  assert.equal(f.decodes.size, 3); // The mount reuses the decoded image handle.
   residency.destroy();
 });
 
@@ -116,15 +119,15 @@ test('view preparation cancels pending native decode and propagates required ima
   const cancelled = decodingFixture();
   const pending = cancelled.lease.prepareDemand(() => ({ required: ['a'] }));
   cancelled.controller.abort();
-  await expect(pending).rejects.toThrow('cancelled');
-  expect(() => cancelled.lease.claim(cancelled.assets, {})).toThrow('unavailable');
+  await assert.rejects(pending, /cancelled/);
+  assert.throws(() => cancelled.lease.claim(cancelled.assets, {}), /unavailable/);
 
   const failed = decodingFixture();
   const preparation = failed.lease.prepareDemand(() => ({ required: ['a'] }));
   failed.decodes.get('/base.webp')!.resolve();
-  await vi.waitFor(() => expect(failed.decodes.has('/a.webp')).toBe(true));
+  await waitFor(() => assert.equal(failed.decodes.has('/a.webp'), true));
   failed.decodes.get('/a.webp')!.reject(new Error('image failed'));
-  await expect(preparation).rejects.toThrow('did not decode');
+  await assert.rejects(preparation, /did not decode/);
   failed.lease.destroy();
 });
 
@@ -140,12 +143,12 @@ test('one native release failure does not retain the other prepared images', asy
     createImage: () => { const image = { src: '', decoding: 'async' as const, naturalWidth: 8, naturalHeight: 8, decode: async () => {} }; images.push(image); return image; },
   }) });
   await lease.ready;
-  expect(images.map(image => image.src).sort()).toEqual(['/a.webp', '/b.webp', '/c.webp']);
+  assert.deepEqual(images.map(image => image.src).sort(), ['/a.webp', '/b.webp', '/c.webp']);
   const failing = images.find(image => image.src === '/b.webp')!;
   failing.removeAttribute = () => { throw new Error('release failed'); };
-  expect(() => lease.destroy()).toThrow(/cleanup failed/);
-  expect(images.filter(image => image !== failing).every(image => image.src === '')).toBe(true);
-  expect(() => lease.claim(assets, {})).toThrow('unavailable');
+  assert.throws(() => lease.destroy(), /cleanup failed/);
+  assert.equal(images.filter(image => image !== failing).every(image => image.src === ''), true);
+  assert.throws(() => lease.claim(assets, {}), /unavailable/);
 });
 
 function boundedLease(startup: string[], capacity: number) {
@@ -161,11 +164,11 @@ function boundedLease(startup: string[], capacity: number) {
 test('a full default startup pool yields to an unpublished incoming view without increasing capacity', async () => {
   const f = boundedLease(['a', 'b', 'c'], 3);
   await f.lease.prepareDemand(() => ({ required: ['d'], prewarm: ['e', 'f'] }));
-  expect(f.residency.stats().committed).toEqual([]);
-  expect(f.residency.stats().pools[0].resident).toBeLessThanOrEqual(3);
+  assert.deepEqual(f.residency.stats().committed, []);
+  assert.ok(f.residency.stats().pools[0].resident <= 3);
   const adopted = f.lease.claim(f.assets, {});
-  expect(adopted.stats().committed).toEqual(['d']);
-  expect(adopted.resources.has('d')).toBe(true);
+  assert.deepEqual(adopted.stats().committed, ['d']);
+  assert.equal(adopted.resources.has('d'), true);
   adopted.destroy();
 });
 
@@ -173,17 +176,17 @@ test('a second preflight checkpoint replaces a ready unpublished selection inste
   const f = boundedLease([], 2);
   await f.lease.prepareDemand(() => ({ required: ['a', 'b'] }));
   await f.lease.prepareDemand(() => ({ required: ['c', 'd'] }));
-  expect(f.residency.stats().committed).toEqual([]);
-  expect(f.residency.stats().pools[0].resident).toBe(2);
+  assert.deepEqual(f.residency.stats().committed, []);
+  assert.equal(f.residency.stats().pools[0].resident, 2);
   const adopted = f.lease.claim(f.assets, {});
-  expect(adopted.stats().committed).toEqual(['c', 'd']);
-  expect(adopted.resources.has('c')).toBe(true); expect(adopted.resources.has('d')).toBe(true);
+  assert.deepEqual(adopted.stats().committed, ['c', 'd']);
+  assert.equal(adopted.resources.has('c'), true); assert.equal(adopted.resources.has('d'), true);
   adopted.destroy();
 });
 
 
 test('first-paint decode rechecks selected handles once without refetching or publishing readiness', async () => {
-  const calls: string[] = [], ready = vi.fn();
+  const calls: string[] = [], ready = mock.fn(() => {});
   const assets: PreparedAssets = {
     entries: [{ key: 'surface', url: '/atlas.webp', pool: 'material' }, { key: 'poles', url: '/atlas.webp', pool: 'material' }, { key: 'other', url: '/other.webp', pool: 'material' }],
     pools: [{ id: 'material', capacity: 3, concurrency: 2, retention: 'mount', reuse: false }], startup: [],
@@ -195,14 +198,14 @@ test('first-paint decode rechecks selected handles once without refetching or pu
   } });
   const ticket = residency.request({ required: ['surface', 'poles'], prewarm: ['other'] });
   await ticket.ready; residency.commit(ticket);
-  await vi.waitFor(() => expect(residency.resources.has('other')).toBe(true));
-  calls.length = 0; ready.mockClear();
-  expect(await residency.decodeForPaint()).toBe(true);
-  expect(calls).toEqual(['/atlas.webp']);
-  expect(images).toHaveLength(2);
-  expect(ready).not.toHaveBeenCalled();
-  expect(residency.stats().paintDecodeChecks).toBe(1);
-  residency.destroy(); expect(await residency.decodeForPaint()).toBe(false);
+  await waitFor(() => assert.equal(residency.resources.has('other'), true));
+  calls.length = 0; ready.mock.resetCalls();
+  assert.equal((await residency.decodeForPaint()), true);
+  assert.deepEqual(calls, ['/atlas.webp']);
+  assert.equal(images.length, 2);
+  assert.equal(ready.mock.callCount(), 0);
+  assert.equal(residency.stats().paintDecodeChecks, 1);
+  residency.destroy(); assert.equal((await residency.decodeForPaint()), false);
 });
 
 test('first-paint decode propagates failure and remains cancelled after its owner retires', async () => {
@@ -215,24 +218,24 @@ test('first-paint decode propagates failure and remains cancelled after its owne
   const ticket = residency.request({ required: ['surface'] }); await ticket.ready; residency.commit(ticket);
   delayed = true;
   const pending = residency.decodeForPaint();
-  const failed = expect(pending).rejects.toThrow('discarded');
+  const failed = assert.rejects(pending, /discarded/);
   residency.destroy();
   if (!rejectNext) throw new Error('No pending decode');
   const reject: (reason: Error) => void = rejectNext;
   reject(new Error('discarded')); await failed;
-  expect(await residency.decodeForPaint()).toBe(false);
+  assert.equal((await residency.decodeForPaint()), false);
 });
 
 
 test('view-driven preflight skips the close-up startup bank until detail is requested', async () => {
   const assets: PreparedAssets = { entries: [{key:'surface',url:'/surface.webp',pool:'material'}],
     pools: [{id:'material',capacity:1,concurrency:1,reuse:false,retention:'selection',eviction:'unused'}], startup:['surface'] };
-  const decode = vi.fn(async () => {});
+  const decode = mock.fn(async () => {});
   const lease = prepareObjectResources(assets, {startup:false, createResources: options => createPreparedResidency({...options,
     createImage: () => ({src:'',decoding:'async',naturalWidth:1,naturalHeight:1,decode})})});
   await lease.prepareDemand(() => ({required:[]}));
-  expect(decode).not.toHaveBeenCalled();
+  assert.equal(decode.mock.callCount(), 0);
   await lease.prepareDemand(() => ({required:['surface']}));
-  expect(decode).toHaveBeenCalledOnce();
+  assert.equal(decode.mock.callCount(), 1);
   lease.destroy();
 });

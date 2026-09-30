@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { gillessenOrbits, gravityOrbits, habibiStars, multiStarFitStars, parseVizierTsv, sStarRecords } from './s-stars.mts';
 import { readHostedOrbitRecord } from './generator-records.mts';
 
@@ -29,26 +31,26 @@ const inputs = () => ({ host: HOST, solarGm: 132712440041.93938, gillessen: gill
 
 describe('S-star records from their publications', () => {
   it('reads each table as published', () => {
-    expect(gillessenOrbits(parseVizierTsv(TABLE3)).map(orbit => [orbit.star, orbit.a, orbit.period])).toEqual([['S1', '0.5950', '166.00'], ['S2', '0.1255', '16.00'], ['S85', '4.6000', '3580.00'], ['S111', '-12.3000', '']]);
-    expect(gravityOrbits(GRAVITY).map(orbit => [orbit.star, orbit.a, orbit.omega, orbit.tp])).toEqual([['S2', '0.12495', '66.25', '2018.3789'], ['S38', '0.14254', '27.17', '2022.7044']]);
-    expect(multiStarFitStars(SELECTION)).toEqual(['S2', 'S1', 'S55']);
-    expect(habibiStars(HABIBI)).toEqual([{ star: 'S1', teff: '27450', radius: ['5.19', '1.13', '0.76'], mass: ['12.40', '2.0', '1.7'], spectralType: 'B0-B3' }]);
-    expect(() => multiStarFitStars('We selected thus the following 4 stars for a multi-star fit: S2, S1. ')).toThrow(/4 stars/u);
+    assert.deepEqual(gillessenOrbits(parseVizierTsv(TABLE3)).map(orbit => [orbit.star, orbit.a, orbit.period]), [['S1', '0.5950', '166.00'], ['S2', '0.1255', '16.00'], ['S85', '4.6000', '3580.00'], ['S111', '-12.3000', '']]);
+    assert.deepEqual(gravityOrbits(GRAVITY).map(orbit => [orbit.star, orbit.a, orbit.omega, orbit.tp]), [['S2', '0.12495', '66.25', '2018.3789'], ['S38', '0.14254', '27.17', '2022.7044']]);
+    assert.deepEqual(multiStarFitStars(SELECTION), ['S2', 'S1', 'S55']);
+    assert.deepEqual(habibiStars(HABIBI), [{ star: 'S1', teff: '27450', radius: ['5.19', '1.13', '0.76'], mass: ['12.40', '2.0', '1.7'], spectralType: 'B0-B3' }]);
+    assert.throws(() => multiStarFitStars('We selected thus the following 4 stars for a multi-star fit: S2, S1. '), /4 stars/u);
   });
 
   it('writes the checked S1 and S2 orbits, circles a weak orbit and skips an unbound one', () => {
     const { records, skipped } = sStarRecords(inputs());
     const orbit = (id: string) => readHostedOrbitRecord((records.find(record => record.id === id) as { hostedOrbit: unknown }).hostedOrbit);
     // The values checked against Gillessen et al. (2017) table5 positions and radial velocities before this tool existed.
-    expect(orbit('s1')).toMatchObject({ periodDays: 60631.5, semiMajorAxisStellarRadii: 24435.3183, argumentOfPeriapsisDegrees: 302.3, transitTimeBmjdTdb: 52201.95 });
-    expect(orbit('s2')).toMatchObject({ periodDays: 5860.3205, semiMajorAxisStellarRadii: 5131.4168, argumentOfPeriapsisDegrees: 246.25, transitTimeBmjdTdb: 58257.3932, ascendingNodePositionAngleDegrees: 228.19 });
-    expect(orbit('s1').weaklyConstrained).toBeUndefined();
-    expect(orbit('s85').weaklyConstrained).toBe(true);
-    expect(orbit('s85').sources.constraint).toMatch(/S2, S1, S55\. S85 is not among them/u);
+    assert.partialDeepStrictEqual(orbit('s1'), { periodDays: 60631.5, semiMajorAxisStellarRadii: 24435.3183, argumentOfPeriapsisDegrees: 302.3, transitTimeBmjdTdb: 52201.95 });
+    assert.partialDeepStrictEqual(orbit('s2'), { periodDays: 5860.3205, semiMajorAxisStellarRadii: 5131.4168, argumentOfPeriapsisDegrees: 246.25, transitTimeBmjdTdb: 58257.3932, ascendingNodePositionAngleDegrees: 228.19 });
+    assert.equal(orbit('s1').weaklyConstrained, undefined);
+    assert.equal(orbit('s85').weaklyConstrained, true);
+    assert.match(orbit('s85').sources.constraint ?? '', /S2, S1, S55\. S85 is not among them/u);
     const s1 = records.find(record => record.id === 's1') as { order: number; physical: { meanRadiusKm: number; gravitationalParameterKm3PerS2: number } };
-    expect(s1.order).toBe(1255);
-    expect(s1.physical).toMatchObject({ meanRadiusKm: 3610683, gravitationalParameterKm3PerS2: 1645634256520 });
-    expect(records.find(record => record.id === 's85')).toMatchObject({ order: 1256, physical: { meanRadiusKm: 0, gravitationalParameterKm3PerS2: 0 } });
-    expect(skipped).toEqual([expect.objectContaining({ star: 'S111' })]);
+    assert.equal(s1.order, 1255);
+    assert.partialDeepStrictEqual(s1.physical, { meanRadiusKm: 3610683, gravitationalParameterKm3PerS2: 1645634256520 });
+    assert.partialDeepStrictEqual(records.find(record => record.id === 's85'), { order: 1256, physical: { meanRadiusKm: 0, gravitationalParameterKm3PerS2: 0 } });
+    assert.equal(skipped.length, 1); assert.partialDeepStrictEqual(skipped[0], { star: 'S111' });
   });
 });

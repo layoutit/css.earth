@@ -50,9 +50,9 @@ export async function discoverObjectTests(
     // A body covered only by the shared contract runners keeps no directory of its own.
   }
   const own = filenames.filter(isTest).sort().map((filename) => resolve(directory, filename));
-  // Shared contract runners register one test per table entry; CSSEARTH_TEST_OBJECTS limits them to this body.
+  // The shared runtime runner tests once per runtime structure; CSSEARTH_TEST_OBJECTS limits it to this body.
   const shared = sharedUnitTestDirectory(projectRoot);
-  const sharedSuites = new Set(['exoplanet-limb-coverage.test.mts', 'exoplanet-radius.test.mts', 'lighting-frame.test.mts', 'runtime-package.test.mts']);
+  const sharedSuites = new Set(['runtime-package.test.mts']);
   const runners = (await readDirectory(shared)).filter(filename => sharedSuites.has(filename)).sort().map((filename) => resolve(shared, filename));
   const tests = [...own, ...runners, resolve(projectRoot, 'packages/bake/src/raster/raster-pages.test.mts')];
   if (tests.length === 0) {

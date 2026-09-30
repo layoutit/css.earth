@@ -75,7 +75,7 @@ pnpm install --frozen-lockfile --ignore-scripts
 python3 src/objects/heliosphere/source/ibex/extract.py --check
 pnpm build:tools
 node packages/bake/cli/prepare-shell.mts src/objects/heliosphere
-node packages/bake/cli/test-preparation.mts --universe
+pnpm test:packages
 ```
 
 Both original scientific inputs are checked in. To regenerate their numerical

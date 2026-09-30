@@ -1,4 +1,6 @@
-import { expect, test } from 'vitest';
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { isDeepStrictEqual } from 'node:util';
 import { cameraPoseToReferenceFrame } from '@cssearth/engine';
 import { validatePreparedCssVolume } from './validation.js';
 import type { PreparedCssVolume } from './types.js';
@@ -21,13 +23,13 @@ const valid = (): PreparedCssVolume => ({
 });
 
 test('accepts the direct prepared CSS volume payload and all three stacks', () => {
-  expect(validatePreparedCssVolume(valid()).stacks).toHaveLength(3);
+  assert.equal(validatePreparedCssVolume(valid()).stacks.length, 3);
 });
 
 test('rejects a runtime URL in authored leaf style', () => {
   const value = valid();
   Object.assign(value.stacks[0]!.leaves[0]!, { style: { ...value.stacks[0]!.leaves[0]!.style, transform: 'url(/runtime.png)' } });
-  expect(() => validatePreparedCssVolume(value)).toThrow('URL-free');
+  assert.throws(() => validatePreparedCssVolume(value), /URL-free/);
 });
 
 test('projects the Sun anchor and arbitrary points through the same canonical observer', () => {
@@ -56,9 +58,9 @@ test('projects the Sun anchor and arbitrary points through the same canonical ob
         viewport.focalPixels + (dot(view, 6, source) - dot(view, 6, local.positionM)) * 50,
       ];
       const actual = transformPoint(transform.rotation, transform.translationCssPixels, point, 50);
-      expect(actual[0]).toBeCloseTo(expected[0], 8);
-      expect(actual[1]).toBeCloseTo(expected[1], 8);
-      expect(actual[2]).toBeCloseTo(expected[2], 8);
+      assert.ok(Math.abs(actual[0] - (expected[0])) < 10 ** -8 / 2, `${actual[0]} is not close to ${expected[0]}`);
+      assert.ok(Math.abs(actual[1] - (expected[1])) < 10 ** -8 / 2, `${actual[1]} is not close to ${expected[1]}`);
+      assert.ok(Math.abs(actual[2] - (expected[2])) < 10 ** -8 / 2, `${actual[2]} is not close to ${expected[2]}`);
     }
   }
 });
@@ -85,7 +87,7 @@ test('rotated bank normals must remain an orthonormal basis', () => {
   const value = valid();
   const normals = [[0, 1, 0], [-1, 0, 0], [0, 0, 1]];
   value.stacks.forEach((stack, i) => Object.assign(stack, { normalUnits: normals[i] }));
-  expect(validatePreparedCssVolume(value).stacks[0]!.normalUnits).toEqual([0, 1, 0]);
-  Object.assign(value.stacks[1]!, { normalUnits: [0, 1, 0] }); expect(() => validatePreparedCssVolume(value)).toThrow('orthogonal');
-  Object.assign(value.stacks[1]!, { normalUnits: [0, 2, 0] }); expect(() => validatePreparedCssVolume(value)).toThrow('unit vector');
+  assert.deepEqual(validatePreparedCssVolume(value).stacks[0]!.normalUnits, [0, 1, 0]);
+  Object.assign(value.stacks[1]!, { normalUnits: [0, 1, 0] }); assert.throws(() => validatePreparedCssVolume(value), /orthogonal/);
+  Object.assign(value.stacks[1]!, { normalUnits: [0, 2, 0] }); assert.throws(() => validatePreparedCssVolume(value), /unit vector/);
 });

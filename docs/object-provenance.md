@@ -124,7 +124,7 @@ After changing either kind of attribution, use the
 For source bindings or product-lineage changes, run:
 
 ```sh
-pnpm test:node
+pnpm test:site
 ```
 This is the broad native suite. For a focused change, select the relevant tests
 under `packages/objects/src/provenance/`, `packages/bake/src/objects/lineage/body-lineage.test.mts`,

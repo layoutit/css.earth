@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import mercury from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
 import venus from '../../../../src/objects/venus/prepared/runtime.json' with { type: 'json' };
 import { MOBILE_OPEN_AREA_SHARE, PHONE_OPEN_AREA_SHARE, selectPreparedResponsiveZoom } from './camera-layout.ts';

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'vitest';
+import { test } from 'node:test';
 import { createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, renderElementCount, type RenderElementProfile } from './render-element-budget.ts';
 
 const profile: RenderElementProfile = { schema: 'cssearth-render-element-profile@1', id: 'test-retained-renderer@1',
