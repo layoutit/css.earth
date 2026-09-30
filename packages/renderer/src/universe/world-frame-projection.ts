@@ -25,11 +25,23 @@ export function createWorldFrameProjection(focus: WorldPoint, selected: WorldPoi
     // hides nothing there. Chords reach the chord test only after near clipping, so none of them can meet it either.
     // Without this, the Sun behind the camera on a sunlit view sent every chord of every drawn orbit through the
     // detailed split.
-    if (center[2] - point.radiusM > 0) return { id: point.id, mayOcclude: () => false,
+    if (center[2] - point.radiusM > 0) return { id: point.id, mayOcclude: () => false, cover: () => 0,
       hidden: (target: Vector3) => target[2] > 0 && rayHitsSphereBefore(target, center, point.radiusM) };
+    const distance = Math.hypot(...center), angle = Math.asin(Math.min(1, point.radiusM / distance));
     return { id: point.id,
       hidden: (target: Vector3) => rayHitsSphereBefore(target, center, point.radiusM),
-      mayOcclude: createSphereChordTest(center, point.radiusM, project) };
+      mayOcclude: createSphereChordTest(center, point.radiusM, project),
+      // How much of a farther sphere's disc this one's disc covers, from their angular radii and separation:
+      // 0 none, 1 part, 2 all. atan2 keeps the separation exact for small angles, where acos loses it.
+      cover(target: Vector3, radius: number) {
+        const targetDistance = Math.hypot(...target);
+        if (!(targetDistance > distance)) return 0;
+        const separation = Math.atan2(Math.hypot(target[1] * center[2] - target[2] * center[1],
+          target[2] * center[0] - target[0] * center[2], target[0] * center[1] - target[1] * center[0]),
+        target[0] * center[0] + target[1] * center[1] + target[2] * center[2]);
+        const targetAngle = Math.asin(Math.min(1, radius / targetDistance));
+        return separation >= angle + targetAngle ? 0 : separation + targetAngle <= angle ? 2 : 1;
+      } };
   }
   const getSphere = (point: WorldPoint) => {
     let value = spheres.get(point.id);
@@ -41,6 +53,17 @@ export function createWorldFrameProjection(focus: WorldPoint, selected: WorldPoi
     hidden(target: Vector3, exceptId?: string) {
       for (const occluder of occluders) if (occluder.id !== exceptId && occluder.hidden(target)) return true;
       return false;
+    },
+    /** `true` when one occluder hides a sphere's whole disc, else the id of one that hides part of it, else null. */
+    cover(target: Vector3, radius: number, exceptId?: string): string | true | null {
+      let part: string | null = null;
+      for (const occluder of occluders) {
+        if (occluder.id === exceptId) continue;
+        const cover = occluder.cover(target, radius);
+        if (cover === 2) return true;
+        if (cover === 1) part ??= occluder.id;
+      }
+      return part;
     },
     mayOcclude(start: readonly number[], end: readonly number[]) {
       for (const occluder of occluders) if (occluder.mayOcclude(start, end)) return true;

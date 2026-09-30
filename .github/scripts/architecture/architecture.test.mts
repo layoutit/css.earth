@@ -5,14 +5,15 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { test } from 'node:test';
 import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './astro-imports.mts';
-import { decodeBaseline } from './baseline.mts';
+import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, measure } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
 import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph } from './graph.mts';
-import { formatFindings } from './report.mts';
+import { formatDelta, formatFindings } from './report.mts';
 import { declaredPackage, undeclaredImports } from './declared-dependencies.mts';
 import { isBroken, objectCodeFiles, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
 import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
+import { packageCycles, packageCycleText } from './package-cycles.mts';
 import { isTestPath, zoneOf } from './zones.mts';
 
 /** A small graph from `from -> to` pairs; every named path becomes a file. */
@@ -137,7 +138,7 @@ test('strongly connected folders, the greedy layer order and the edges that clos
   assert.deepEqual(cycleClosingEdges(folders.edges, folderCycles(folders), order).map(edge => `${edge.from}>${edge.to}`), ['src/c>src/a']);
 });
 
-test('layer rules name each forbidden file import once, and tests are exempt except in packages', () => {
+test('layer rules name each forbidden file import once, and tests are exempt except in packages and for application imports', () => {
   const violations = evaluateRules(graph(
     ['packages/p/src/a.ts', 'src/platform/x.mts'], ['packages/p/src/a.test.ts', 'labs/helper.mts'],
     ['src/renderers/css/x.ts', 'labs/prepared/y.mts'], ['src/renderers/css/x.ts', 'labs/prepared/y.mts'],
@@ -156,7 +157,7 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
   assert.deepEqual(pairs('packages-import-only-packages'), ['packages/bake/src/g.ts>site/build/prepare/p.mts', 'packages/p/src/a.test.ts>labs/helper.mts',
     'packages/p/src/a.ts>src/platform/x.mts', 'packages/renderer/src/f.ts>site/build/prepare/p.mts'], 'no package reaches site/build, not even the bake or a renderer type');
   assert.deepEqual(pairs('nothing-imports-applications'), ['.github/scripts/ci/y.mts>labs/ci/z.mts', 'labs/ci/x.mts>.github/scripts/ci/y.mts', 'labs/objects/o.mts>site/objects.mts', 'packages/bake/src/g.ts>site/build/prepare/p.mts',
-    'packages/renderer/src/f.ts>site/build/prepare/p.mts', 'src/renderers/css/x.ts>labs/prepared/y.mts'], 'CI scripts in .github/ are an application tree too');
+    'packages/p/src/a.test.ts>labs/helper.mts', 'packages/renderer/src/f.ts>site/build/prepare/p.mts', 'src/renderers/css/x.ts>labs/prepared/y.mts'], 'CI scripts in .github/ are an application tree too');
   assert.deepEqual(pairs('runtime-imports-no-preparation'), [
     'packages/renderer/src/sky/d.ts>packages/telescope-cli/src/archives/programs.mts', 'packages/renderer/src/stars/bank.ts>packages/bake/src/stars/index.ts',
     'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>packages/bake/src/prepared/y.mts', 'site/c.mts>packages/telescope-cli/src/query.mts',
@@ -373,4 +374,108 @@ test('retired root tests and dependent integration owners fail without a baselin
     write('integration/example.test.mts', "import '../site/a.mts'; import '../src/a.mts';\n");
     assert.equal(broken(), false, 'relative application imports count as owners');
   } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('package-only and application-entry layers fail without a baseline, including updates', () => {
+  const baseline = createBaseline(measure(graph()));
+  for (const id of ['packages-import-only-packages', 'nothing-imports-applications']) {
+    const rule = LAYER_RULES.find(rule => rule.id === id);
+    assert.ok(rule?.noBaseline, `${id} must have no baseline`);
+    const measurement = measure(graph(['packages/core/src/x.ts', 'site/x.mts']), [rule]);
+    assert.equal(Object.hasOwn(baseline.rules, id), false);
+    assert.equal(isWorse(compare(baseline, measurement)), true, `${id} finding is red`);
+    assert.match(formatDelta(compare(baseline, measurement)), new RegExp(`${id}: 1 file-to-file imports \\(no baseline; any finding fails\\)`, 'u'));
+    assert.throws(() => createBaseline(measurement), /Cannot baseline/u, 'update cannot bless the finding');
+    const stale = { ...baseline, rules: { ...baseline.rules, [id]: measurement.rules.get(id)! } };
+    assert.equal(isWorse(compare(stale, measurement)), true, 'a stale recorded violation is no exemption');
+    assert.equal(Object.hasOwn(decodeBaseline(stale).rules, id), false, 'decoding drops stale no-baseline keys');
+    assert.deepEqual(compare(decodeBaseline(stale), measure(graph())).unknownRules, [], 'no stale unknown-rule keys');
+    const mutation = measure(graph(['packages/core/src/x.ts', 'site/x.mts']), [{ ...rule, noBaseline: false }]);
+    assert.equal(isWorse(compare(createBaseline(mutation), mutation)), false, 'disabling no-baseline lets the mutation bless the violation');
+  }
+});
+
+test('nothing-imports-applications covers tests and every non-application tree, with one named exception', () => {
+  const rule = LAYER_RULES.find(item => item.id === 'nothing-imports-applications')!;
+  const found = (...pairs: readonly (readonly [string, string])[]) => measure(graph(...pairs), [rule]).rules.get(rule.id)!.length;
+  for (const from of ['src/platform/x.mts', 'src/platform/x.test.mts', 'integration/x.test.mts', 'packages/core/src/x.test.ts', 'labs/other/x.test.mts'])
+    assert.equal(found([from, 'site/runtime-policy.mts']), 1, `${from} -> site/ fails`);
+  assert.equal(found(['src/platform/x.mts', 'labs/nebula/y.mts']), 1, 'src -> labs fails');
+  assert.equal(found(['src/platform/x.mts', '.github/scripts/y.mts']), 1, 'src -> .github fails');
+  assert.equal(found(['labs/performance/source-maps.test.mts', 'site/build/source-maps.mts']), 0, 'the named exception passes');
+  assert.equal(found(['labs/performance/other.test.mts', 'site/build/source-maps.mts']), 1, 'a sibling test does not inherit it');
+  assert.equal(found(['labs/performance/source-maps.test.mts', 'site/build/other.mts']), 1, 'the exception is one file pair');
+  const mutation = measure(graph(['src/platform/x.test.mts', 'site/a.mts']), [{ ...rule, includeTests: false }]);
+  assert.equal(mutation.rules.get(rule.id)!.length, 0, 'dropping includeTests hides a test import, so the test above is what guards it');
+});
+
+test('recorded cycle-closing folder edges pass but every new closing edge fails', () => {
+  const original = measure(graph(...TANGLED)), baseline = createBaseline(original);
+  assert.equal(isWorse(compare(baseline, original)), false);
+  const heavier = measure(graph(...TANGLED, ['src/c/two.mts', 'src/a/one.mts']));
+  assert.deepEqual(createBaseline(heavier, baseline).cycles, baseline.cycles, 'tightening keeps recorded order and never raises existing import counts');
+  const lighter = { ...original, folderEdges: original.folderEdges.map(edge => ({ ...edge, imports: 0.5 })) };
+  assert.deepEqual(createBaseline(lighter, baseline).cycles, baseline.cycles, 'retained edge bytes survive import-count changes in either direction');
+  const extended = measure(graph(...TANGLED, ['src/c/two.mts', 'src/b/two.mts']));
+  const delta = compare(baseline, extended);
+  assert.deepEqual(delta.cycleClosing.added.map(({ from, to }) => [from, to]), [['src/c', 'src/b']]);
+  assert.equal(delta.largestCycle.now, delta.largestCycle.baseline, 'same SCC size cannot conceal a new closing edge');
+  assert.equal(isWorse(delta), true);
+});
+
+test('manifest cycles ratchet every canonical cycle and SCC, across all dependency fields', () => {
+  const root = mkdtempSync(join(tmpdir(), 'package-cycles-'));
+  const write = (id: string, fields: Record<string, unknown> = {}) => {
+    const path = join(root, 'packages', id, 'package.json');
+    mkdirSync(dirname(path), { recursive: true });
+    writeFileSync(path, JSON.stringify({ name: `@cssearth/${id}`, ...fields }));
+  };
+  const snapshot = () => measure(graph(), LAYER_RULES, packageCycles(root, repositoryFiles(root)));
+  try {
+    execFileSync('git', ['init', '-q'], { cwd: root });
+    write('a', { dependencies: { '@cssearth/b': 'workspace:*' } });
+    write('b', { devDependencies: { '@cssearth/a': 'workspace:*' }, peerDependencies: { '@cssearth/c': 'workspace:*' } });
+    write('c', { dependencies: { '@cssearth/a': 'workspace:*' } });
+    write('d');
+    const initial = snapshot(), baseline = decodeBaseline(JSON.parse(formatBaseline(createBaseline(initial))));
+    assert.deepEqual(initial.packageCycles.map(packageCycleText), ['@cssearth/a -> @cssearth/b -> @cssearth/c -> @cssearth/a', '@cssearth/a -> @cssearth/b -> @cssearth/a']);
+    assert.equal(isWorse(compare(baseline, initial)), false, 'baselined cycles pass');
+    const missing = decodeBaseline({ ...baseline, packageCycles: undefined });
+    assert.equal(isWorse(compare(missing, initial)), true, 'deleting the package baseline cannot bypass the ratchet');
+    write('a', { dependencies: { '@cssearth/b': 'workspace:*', '@cssearth/c': 'workspace:*' } });
+    const chord = compare(baseline, snapshot());
+    assert.equal(isWorse(chord), true, 'new cycle inside the same SCC fails');
+    assert.match(formatDelta(chord), /workspace package cycle: @cssearth\/a -> @cssearth\/c -> @cssearth\/a/u);
+    assert.equal(isWorse({ ...chord, packageCycles: { ...chord.packageCycles, added: [], grown: [] } }), false, 'removing the package comparison makes the mutation green');
+    assert.equal(isWorse(compare(baseline, measure(graph()))), false, 'removing package graph evaluation makes the mutation green');
+    write('a', { dependencies: { '@cssearth/b': 'workspace:*' } });
+    write('c', { dependencies: { '@cssearth/a': 'workspace:*', '@cssearth/d': 'workspace:*' } });
+    write('d', { peerDependencies: { '@cssearth/a': 'workspace:*' } });
+    const grown = compare(baseline, snapshot());
+    assert.equal(isWorse(grown), true, 'a larger elementary cycle fails');
+    assert.equal(grown.packageCycles.grown.length, 2, 'both recorded cycles have a growing SCC');
+    assert.equal(isWorse({ ...grown, packageCycles: { ...grown.packageCycles, added: [] } }), true, 'SCC growth independently fails even if a new cycle comparison is removed');
+    write('c'); write('d');
+    const shrunk = snapshot(), better = compare(baseline, shrunk);
+    assert.equal(isWorse(better), false);
+    assert.equal(isStale(better), true);
+    assert.match(formatDelta(better), /Better than the baseline:[\s\S]*workspace package cycle gone/u);
+    const tightened = createBaseline(shrunk);
+    assert.equal(tightened.packageCycles?.length, 1);
+    assert.equal(isStale(compare(tightened, shrunk)), false);
+    write('a', { peerDependencies: { '@cssearth/a': 'workspace:*' } });
+    assert.deepEqual(snapshot().packageCycles.map(packageCycleText), ['@cssearth/a -> @cssearth/a'], 'self-dependency is a cycle');
+    write('a', { dependencies: [] });
+    assert.throws(snapshot, /dependencies/u, 'malformed manifest fields fail rather than hiding edges');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('package cycle baseline validates canonical paths and component membership', () => {
+  const baseline = createBaseline(measure(graph()));
+  for (const cycle of [
+    { nodes: [], scc: [] }, { nodes: ['@cssearth/a'], scc: [] },
+    { nodes: ['@cssearth/b', '@cssearth/a'], scc: ['@cssearth/a', '@cssearth/b'] },
+    { nodes: ['@cssearth/a', '@cssearth/a'], scc: ['@cssearth/a'] },
+    { nodes: ['npm'], scc: ['npm'] },
+  ]) assert.throws(() => decodeBaseline({ ...baseline, packageCycles: [cycle] }), /canonical package cycle/u);
 });

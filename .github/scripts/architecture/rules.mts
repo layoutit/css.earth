@@ -1,5 +1,5 @@
 /** Layer rules over the file-level import graph. Each rule names the imports it forbids; the committed
- * baseline lists the ones that already exist, and the check fails only on new ones. */
+ * baseline lists existing debt for ratcheted rules; no-baseline rules fail on every finding. */
 import type { ImportEdge, ImportGraph } from './graph.mts';
 import { byText } from './zones.mts';
 
@@ -10,6 +10,8 @@ export interface LayerRule {
   readonly forbids: (from: string, to: string) => boolean;
   /** Tests may break this rule too (for rules about what a package can reach). */
   readonly includeTests?: boolean;
+  /** Every finding fails; baseline updates must never record this rule. */
+  readonly noBaseline?: boolean;
 }
 export interface Violation { readonly from: string; readonly to: string }
 
@@ -34,6 +36,11 @@ export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[c
 
 export const APPLICATION_TREES = ['site', 'labs', '.github'] as const;
 
+/** The one existing test that reaches into an application tree from outside it: the performance lab's source-map test
+ * builds with the site's `performanceSourceMaps` plugin. Named exactly (`from\nto`) rather than baselined, so any other
+ * import, in a test or not, still fails; the smell is recorded in untangle/ABSTRACTIONS.md. */
+export const APPLICATION_IMPORT_EXCEPTIONS: ReadonlySet<string> = new Set(['labs/performance/source-maps.test.mts\nsite/build/source-maps.mts']);
+
 const BAKE_NEBULA = 'packages/bake/src/nebula/', BAKE_OBJECTS = 'packages/bake/src/objects/';
 
 /** Per-body and per-mission authoring folders: `authoring-is-leaf` forbids importing into them from outside. */
@@ -45,15 +52,18 @@ const AUTHORING_LEAF_EXCEPTIONS = new Set(['labs/nebula/packages/lab/src/adapter
 export const LAYER_RULES: readonly LayerRule[] = [
   {
     id: 'packages-import-only-packages',
+    noBaseline: true,
     description: 'packages/* may import only packages/*, npm dependencies and Node built-ins (type-only imports count)',
     forbids: (from, to) => from.startsWith('packages/') && !to.startsWith('packages/'),
     includeTests: true,
   },
   {
     id: 'nothing-imports-applications',
-    description: 'site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue excepted (type-only imports count)',
+    noBaseline: true,
+    description: 'site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue and APPLICATION_IMPORT_EXCEPTIONS excepted (tests and type-only imports count)',
     forbids: (from, to) => APPLICATION_TREES.some(tree => topLevel(to) === tree && topLevel(from) !== tree)
-      && !ENTRY_GLUE.some(pattern => pattern.test(from)),
+      && !ENTRY_GLUE.some(pattern => pattern.test(from)) && !APPLICATION_IMPORT_EXCEPTIONS.has(`${from}\n${to}`),
+    includeTests: true,
   },
   {
     id: 'runtime-imports-no-preparation',
@@ -110,3 +120,5 @@ function applies(rule: LayerRule, edge: ImportEdge): boolean { return rule.inclu
 export function compareViolations(left: Violation, right: Violation): number {
   return byText(left.from, right.from) || byText(left.to, right.to);
 }
+
+export const NO_BASELINE_RULES: ReadonlySet<string> = new Set(LAYER_RULES.filter(rule => rule.noBaseline).map(rule => rule.id));
