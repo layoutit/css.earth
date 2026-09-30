@@ -274,7 +274,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [packages, site]
+        lane: [packages-1, packages-2, site]
     env:
       CI_UNIVERSE_LANE: ${{ matrix.lane }}
     needs: changes
@@ -340,12 +340,12 @@ jobs:
           node .github/scripts/ci/build-ci.mts full
           node site/build/prepare/prepare-feature-index.mts
       - name: Test the selected folder lane
-        # `test:packages` runs every test under packages/; `test:site` runs site/, src/, integration/ and .github/.
-        # A test whose restored input this job leaves out skips through sourceTest() and names it.
+        # `test:packages` runs every test under packages/, split in two by Node's --test-shard; `test:site` runs site/, src/,
+        # integration/ and .github/. A test whose restored input this job leaves out skips through sourceTest() and names it.
         run: |
           node site/build/prepare/prepare-facilities.mts --catalog-only
           pnpm exec playwright install --with-deps --only-shell chromium
-          if [ "$CI_UNIVERSE_LANE" = packages ]; then
+          if [ "$CI_UNIVERSE_LANE" != site ]; then
             # The volume packages' previews and compact inputs, as the nebula job keeps them, the tracked density sources
             # the volume tests decode (52 MB) and the tracked geology shapefiles.
             git grep -l 'cssearth-volume-source-manifest@2' -- 'src/objects/*/source/manifest.json' |
@@ -355,7 +355,10 @@ jobs:
           else
             pnpm typecheck:oracles
           fi
-          pnpm "test:$CI_UNIVERSE_LANE"
+          case "$CI_UNIVERSE_LANE" in
+            packages-*) TEST_SHARD="${CI_UNIVERSE_LANE#packages-}/2" pnpm test:packages ;;
+            *) pnpm "test:$CI_UNIVERSE_LANE" ;;
+          esac
   universe:
     name: Prepared universe and shared renderer
     needs: [changes, universe-checks]
