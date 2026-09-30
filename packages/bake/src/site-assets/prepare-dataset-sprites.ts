@@ -15,19 +15,22 @@ export async function prepareDatasetSprites(root = process.cwd()) {
   await rm(destination, { recursive: true, force: true });
   await mkdir(destination, { recursive: true });
 
-  let count = 0;
-  for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true }))
-    .filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
-    const id = sourceId(folder.name);
+  // Each body's sprite is its own file, so the bodies are drawn 16 at a time: one after another, sharp's thread pool sat
+  // idle and this step cost every dev start 8 s.
+  const folders = (await readdir(resolve(root, 'src/objects'), { withFileTypes: true }))
+    .filter(entry => entry.isDirectory()).map(entry => entry.name).sort((a, b) => a.localeCompare(b));
+  let next = 0, count = 0;
+  const drawBody = async (name: string) => {
+    const id = sourceId(name);
     // The runtime's controls, as published beside it; a folder without them has no datasets to draw.
     let controls: unknown;
     try { controls = JSON.parse(await readFile(resolve(root, 'src/objects', id, 'prepared/controls.json'), 'utf8')); }
     catch (error) {
-      if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') continue;
+      if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') return;
       throw error;
     }
     const datasets = sourceArray(sourceObject(sourceObject(controls).datasets).controls, sourceObject);
-    if (datasets.length < 2) continue;
+    if (datasets.length < 2) return;
     const columns = Math.ceil(Math.sqrt(datasets.length));
     const parts = await Promise.all(datasets.map(async (dataset, index) => {
       const datasetId = sourceId(dataset.id);
@@ -44,7 +47,8 @@ export async function prepareDatasetSprites(root = process.cwd()) {
       background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite(parts).webp(DECORATIVE_WEBP).toBuffer();
     await writeFile(resolve(destination, `${id}.webp`), bytes);
     count++;
-  }
+  };
+  await Promise.all(Array.from({ length: 16 }, async () => { while (next < folders.length) await drawBody(folders[next++]!); }));
   return count;
 }
 
