@@ -11,9 +11,9 @@ const copy = (bytes: Uint8Array) => new Uint8Array(bytes).buffer;
 function fixture() {
   const files = readCanonicalPointFieldFiles();
   const data = (JSON.parse(new TextDecoder().decode(files.manifestBytes)) as { data: Record<string, unknown> }).data;
-  const transport = (manifestBytes = files.manifestBytes, bankBytes = files.bankBytes) => ({ read: vi.fn(async (path: string) => {
+  const transport = (manifestBytes = files.manifestBytes, bankFile = files.bankFile) => ({ read: vi.fn(async (path: string) => {
     if (path === files.url) return copy(manifestBytes);
-    if (path === files.bankUrl) return copy(bankBytes);
+    if (path === files.bankUrl) return copy(bankFile);
     throw new Error(`Unexpected prepared request ${path}.`);
   }) });
   return { ...files, data, transport };

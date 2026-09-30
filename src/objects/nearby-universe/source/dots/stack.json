@@ -2,7 +2,7 @@
   "schema": "cssearth-catalogue-points-stack@1",
   "id": "dots",
   "published": true,
-  "meaning": "The galaxies of Cosmicflows-4 at every zoom: the whole field, then the nested levels around the Milky Way, each adding galaxies as its region fills the view.",
+  "meaning": "The galaxies of Cosmicflows-4 at every zoom: the whole field, then the nested levels around the Milky Way, each adding galaxies as its region fills the view, and innermost the Local Volume Database galaxies nearer than the field.",
   "levels": [
     {
       "bank": "galaxies-200mpc",
@@ -28,7 +28,14 @@
         10,
         3
       ]
+    },
+    {
+      "bank": "galaxies-3mpc",
+      "appearUnits": [
+        3,
+        1
+      ]
     }
   ],
-  "basis": "Presentation choice: the field is drawn whole within 100 Mpc, half its radius; each level starts to appear when the view's half-width at the Milky Way shrinks to the level's radius, so its edge is off screen, and is whole when it reaches the next level's radius; the 10 Mpc level is whole at 3 Mpc, where the Local Group catalogue takes over."
+  "basis": "Presentation choice: the field is drawn whole within 100 Mpc, half its radius; each level starts to appear when the view's half-width at the Milky Way shrinks to the level's radius, so its edge is off screen, and is whole when it reaches the next level's radius; the 10 Mpc level is whole at 3 Mpc, where the Local Group catalogue takes over. The Local Volume Database level appears as the half-width shrinks from 3 to 1 Mpc: it starts where the 10 Mpc level is whole, the field's nearest galaxy."
 }

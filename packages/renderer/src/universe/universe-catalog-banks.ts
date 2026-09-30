@@ -7,7 +7,7 @@ import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-laye
 import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { mountCataloguePoints } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
 import type { PreparedCatalogBank, PreparedImageLayerBank, PreparedUniverseOptions } from './prepared-universe-types.js';
 
 interface ImageBank {
@@ -138,11 +138,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       bank.mounted = mountPreparedCssImageLayers({ host: root, before: end, payload: loaded.payload, resolveResource: loaded.resolveResource });
       bank.mounted.root.style.display = 'none';
       const host = bank.mounted.root;
-      bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host, url, fetchJson: async (target: string) => {
-        const response = await host.ownerDocument.defaultView!.fetch(target);
-        if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
-        return response.json() as Promise<unknown>;
-      } }));
+      bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host, url,
+        loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => host.ownerDocument.defaultView!.fetch(input, init)) }));
       requestPublication?.();
     }).finally(() => { bank.loading = null; publishResidency(); });
     publishResidency();

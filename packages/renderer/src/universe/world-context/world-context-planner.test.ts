@@ -6,6 +6,7 @@ import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { packWorldBodies, unpackWorldBodies } from './world-context-view-transport.js';
 import { FEATURED_STAR_TIER, labelImportance } from '../../labels/universe-label-policy.js';
+import { unpackPreparedBinary } from '@cssearth/objects/node';
 
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(
   new URL('../../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
@@ -621,7 +622,7 @@ test('inside its authored range a system draws every member orbit, named or not,
 test('the planner plans from the summary alone, names the paths it lacked, and draws them once their bank arrives', async () => {
   const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-  const bank = async (id: string) => { const bytes = await readFile(new URL(`world-orbits/${id}.bin`, prepared)); return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength); };
+  const bank = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
   const planner = createWorldContextPlanner(summary), current = view();
   const before = planner(current), wanted = planner.takeWantedOrbits();
   // From 20 au over the Sun the planets' orbits would be drawn; without their banks none is, and each is named once.
