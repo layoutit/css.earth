@@ -375,6 +375,17 @@ individually; their combined transport count is not the active face count.
 The simplifier's error estimate and the measured source-transfer
 distance are separate quantities.
 
+A terrestrial recipe without `radialTerrain` draws no mesh: its globe is the banded
+sphere (16 latitude bands of 32 leaves and two polar caps, about 450 leaves), shaped
+by the object recipe's ellipsoid (`solidEllipsoidRadii` in
+[solid-scene.ts](../packages/bake/src/objects/layers/terrestrial/solid-scene.ts)).
+The long axis takes the display radius and the other axes keep their published
+ratios; labels are cast onto the same ellipsoid. WebKit composites one layer per
+leaf, so a nearly round body is cheaper this way: Enceladus, Rhea and Dione moved
+from 2,000 triangles to their IAU triaxial radii, and on Enceladus the IAU ellipsoid
+stays within 0.97% of the former mesh. A dataset projected onto the shape, such as
+Tethys's Cassini ISS frame, still needs the mesh.
+
 ![Nine asteroid pairs comparing each original source mesh with its reduced mesh](images/mesh-source-comparison.webp)
 
 Mesh reduction example: each pair shows the source mesh at left and prepared mesh

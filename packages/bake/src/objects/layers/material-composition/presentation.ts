@@ -32,6 +32,8 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
   const config=parse(input,layeredPresentationRecipe,'layered presentation recipe'),datasets=parseLayeredDatasets(datasetInput);
   const {namespace,camera}=config;
   const exteriorAtlas = parseLayeredAtlas(plan.preparedLighting.orbitAtlas.runtimeShards), interiorAtlas = parseLayeredAtlas(plan.interior.atmosphere.runtimeShards);
+  // The cutaway is parked (no interior dataset): the scene then carries no cutaway nodes, interior material or assets.
+  const cutawayShown = datasets.controls.some(dataset => dataset.view === "interior");
   const exteriorDatasets = datasets.controls.filter(dataset => dataset.view !== "interior"), normal = exteriorDatasets.find(dataset => dataset.id === datasets.defaultDataset);
   if (!normal) throw new Error('Layered presentation has no default exterior dataset.');
   const datasetAssets = (dataset:ReturnType<typeof parseLayeredDatasets>['controls'][number]) => [
@@ -41,7 +43,7 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     ...(dataset.id !== datasets.defaultDataset && views.assets.outerPoles[dataset.id]
       ? [{ key: `outer-poles:${dataset.id}`, url: canonicalPreparedAsset(views.assets.outerPoles[dataset.id]) }] : []),
   ];
-  const interior = [...Object.entries(views.interiorDatasets.normal.assets).map(([name, asset]) => ({ key: `interior:${name}`, url: canonicalPreparedAsset(asset), pool: "interior" })),
+  const interior = !cutawayShown ? [] : [...Object.entries(views.interiorDatasets.normal.assets).map(([name, asset]) => ({ key: `interior:${name}`, url: canonicalPreparedAsset(asset), pool: "interior" })),
     { key: "interior:outer-poles", url: canonicalPreparedAsset(views.assets.outerPoles.normal), pool: "interior" }];
   const rowBanks = new Map<string,Awaited<ReturnType<typeof prepareAtlasRows>> & {pool:string}>();
   const stills = new Map<string,Awaited<ReturnType<typeof prepareAtlasStill>> & {pool:string}>();
@@ -52,7 +54,7 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     if ((tileScales.get(pool) ?? scale) !== scale) throw new Error(`Layered ${pool} atlases draw their tiles at different scales.`);
     tileScales.set(pool, scale);
   };
-  for (const [pool, atlas, prefix] of [["exterior-material", exteriorAtlas, "exterior"], ["interior-material", interiorAtlas, "interior-material"]] as const) {
+  for (const [pool, atlas, prefix] of [["exterior-material", exteriorAtlas, "exterior"], ...(cutawayShown ? [["interior-material", interiorAtlas, "interior-material"]] as const : [])] as const) {
     for (const [name, variant] of Object.entries(atlas.variants)) {
       if (pool === "interior-material" && name !== "normal" && !name.startsWith("normal-")) continue;
       const resource = `${prefix}:${name}`;
@@ -78,9 +80,9 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     ...[...stills.values()].map(({ entry, pool }) => ({ ...entry, pool })),
   ];
   const leaves = [plan.ringPlane, plan.ringShadowPlane, ...plan.ringMotionPlates.map(plate => plate.leaf),
-    ...plan.bodyBands.flatMap(band => band.leaves), ...plan.interior.outerBodyBands.flatMap(band => band.leaves),
-    ...plan.interior.shells.flatMap(shell => shell.leaves), ...plan.interior.sectionLeaves,
-    plan.fixedMaterialPlane.leaf, plan.interior.atmosphere.leaf];
+    ...plan.bodyBands.flatMap(band => band.leaves), ...!cutawayShown ? [] : [...plan.interior.outerBodyBands.flatMap(band => band.leaves),
+      ...plan.interior.shells.flatMap(shell => shell.leaves), ...plan.interior.sectionLeaves, plan.interior.atmosphere.leaf],
+    plan.fixedMaterialPlane.leaf];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(leaves.map(leaf => leaf.style)) });
   const cameraNode = b.element("div", "polycss-camera object-render-root", plan.camera.style);
   const scene = b.element("div", "polycss-scene", plan.camera.sceneStyle, { "aria-hidden": "true" });
@@ -112,29 +114,30 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     }
     for (const leaf of band.leaves) b.append(carriers.get(key)!, leaf.tag === "s" ? b.leaf(leaf) : b.element(requireString(leaf.tag), null, leaf.style));
   }
-  const cutaway = b.mesh(`${namespace}-cutaway`);
-  cutaway.style.display = "none";
-  b.append(system, cutaway);
-  for (const band of plan.interior.outerBodyBands) {
+  const cutaway = cutawayShown ? b.mesh(`${namespace}-cutaway`) : null;
+  if (cutaway) { cutaway.style.display = "none"; b.append(system, cutaway); }
+  if (cutaway) for (const band of plan.interior.outerBodyBands) {
     if (!band.leaves.length) continue;
     const polar = band.leaves.some(leaf => leaf.className?.includes(`${namespace}-cutaway-outer-pole`));
     const mesh = b.mesh(polar ? `${namespace}-body ${namespace}-cutaway-body ${namespace}-cutaway-polar-band` : `${namespace}-body ${namespace}-cutaway-body`, plan.meshTransform);
     b.append(cutaway, mesh); for (const leaf of band.leaves) b.append(mesh, b.leaf(leaf));
   }
-  for (const shell of plan.interior.shells) {
-    const mesh = b.mesh(`${namespace}-interior-shell ${shell.className}`, plan.meshTransform); b.append(cutaway, mesh);
-    for (const leaf of shell.leaves) b.append(mesh, b.leaf(leaf, layouts.classes[shell.className]));
+  if (cutaway) {
+    for (const shell of plan.interior.shells) {
+      const mesh = b.mesh(`${namespace}-interior-shell ${shell.className}`, plan.meshTransform); b.append(cutaway, mesh);
+      for (const leaf of shell.leaves) b.append(mesh, b.leaf(leaf, layouts.classes[shell.className]));
+    }
+    const sections = b.mesh(`${namespace}-interior-sections`, plan.meshTransform); b.append(cutaway, sections);
+    for (const leaf of plan.interior.sectionLeaves) b.append(sections, b.leaf(leaf));
   }
-  const sections = b.mesh(`${namespace}-interior-sections`, plan.meshTransform); b.append(cutaway, sections);
-  for (const leaf of plan.interior.sectionLeaves) b.append(sections, b.leaf(leaf));
   const materialMesh = b.mesh(`${namespace}-fixed-material`, plan.fixedMaterialPlane.transform);
   const materialCounter = b.mesh(`${namespace}-fixed-material-counter`), materialSystem = b.mesh(`${namespace}-system`, plan.systemTransform);
-  const exteriorLeaf = b.leaf(plan.fixedMaterialPlane.leaf), interiorLeaf = b.leaf(plan.interior.atmosphere.leaf);
+  const exteriorLeaf = b.leaf(plan.fixedMaterialPlane.leaf), interiorLeaf = cutaway ? b.leaf(plan.interior.atmosphere.leaf) : null;
   // A browser backs a layer at its box: Saturn's lighting drew a 256 px tile in a 1,024 px box, 36 MB at DPR 3. Each leaf's
   // box is now its tile and its matrix scales the tile back up, so every texel lands where it did (base · S = the old
   // placement of the enlarged box) and the runtime fit (prepared-ellipsoid-projection.ts) maps the same ellipse.
   const tileBox = new Map<PreparedNode, number>();
-  for (const [leaf, pool] of [[exteriorLeaf, "exterior-material"], [interiorLeaf, "interior-material"]] as const) {
+  for (const [leaf, pool] of [[exteriorLeaf, "exterior-material"], ...(interiorLeaf ? [[interiorLeaf, "interior-material"]] as const : [])] as const) {
     for (const name of ["background-image", "background-position", "background-size"]) leaf.style.removeProperty(name);
     const scale = tileScales.get(pool) ?? 1, size = plan.fixedMaterialPlane.interactionProjection.textureSize / scale;
     if (!Number.isFinite(size) || size <= 0) throw new Error(`Layered ${pool} tile box is invalid.`);
@@ -143,9 +146,11 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     tileBox.set(leaf, size);
   }
   exteriorLeaf.className = [exteriorLeaf.className, `${namespace}-exterior-material`].filter(Boolean).join(" ");
-  interiorLeaf.className = [...new Set([...(interiorLeaf.className ?? "").split(/\s+/).filter(Boolean), `${namespace}-interior-material`])].join(" ");
-  interiorLeaf.style.backgroundImage = "none";
-  b.append(scene, materialSystem); b.append(materialSystem, materialCounter); b.append(materialCounter, materialMesh); b.append(materialMesh, exteriorLeaf, interiorLeaf);
+  if (interiorLeaf) {
+    interiorLeaf.className = [...new Set([...(interiorLeaf.className ?? "").split(/\s+/).filter(Boolean), `${namespace}-interior-material`])].join(" ");
+    interiorLeaf.style.backgroundImage = "none";
+  }
+  b.append(scene, materialSystem); b.append(materialSystem, materialCounter); b.append(materialCounter, materialMesh); b.append(materialMesh, exteriorLeaf, ...interiorLeaf ? [interiorLeaf] : []);
   const { tree, index } = b.finish({ camera: cameraNode, scene });
   const shape = plan.fixedMaterialPlane.interactionProjection;
   // Each material leaf is fitted in its own box, from its own (tile-scaled) matrix.
@@ -185,19 +190,19 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     const mode = !rings ? shadows ? "ringless" : "ringless-no-shadows" : shadows ? "full" : "no-shadows";
     const material = mode === "full" ? dataset.materialDataset : `${dataset.materialDataset}-${mode}`;
     return { when: { datasetId: dataset.id, rings, shadows }, required: [...datasetAssets(content).map(entry => entry.key), ...(interiorView ? interior.map(entry => entry.key) : [])],
-      writes: [{ kind: "style", target: index(cutaway), name: "display", value: interiorView ? "block" : "none" },
+      writes: [...cutaway ? [{ kind: "style", target: index(cutaway), name: "display", value: interiorView ? "block" : "none" }] : [],
         { kind: "attribute", target: -1, name: "data-view", value: interiorView ? "interior" : null },
         { kind: "attribute", target: -1, name: "data-dataset", value: interiorView || dataset.id === datasets.defaultDataset ? null : dataset.id },
         { kind: "class", target: -1, name: `${namespace}-hide-rings`, value: !rings },
         { kind: "class", target: -1, name: `${namespace}-hide-shadows`, value: !shadows }],
       materials: [{ track: "exterior", bank: material, mode: shadows ? "frames" : "fixed", enabled: true, rotationEnabled: true, frameOverride: null, clearWhenHidden: false, fixedMode: "fixed" },
-        { track: "interior", bank: interiorView ? material : "normal", mode: interiorView && !shadows ? "fixed" : "frames", enabled: interiorView, rotationEnabled: true, frameOverride: null, clearWhenHidden: true, fixedMode: "fixed" }] };
+        ...cutaway ? [{ track: "interior", bank: interiorView ? material : "normal", mode: interiorView && !shadows ? "fixed" as const : "frames" as const, enabled: interiorView, rotationEnabled: true, frameOverride: null, clearWhenHidden: true, fixedMode: "fixed" }] : []] };
   })));
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       preparedResourcePool("datasets", entries, { retention: "selection", decoding: "sync", capacity: 8, concurrency: 8 }),
-      preparedResourcePool("interior", entries, { retention: "selection", decoding: "sync" }),
-      ...["exterior-material", "interior-material"].map(id => preparedResourcePool(id, entries, { retention: "selection", decoding: "sync", capacity: 2, concurrency: 2 }))],
+      ...cutawayShown ? [preparedResourcePool("interior", entries, { retention: "selection", decoding: "sync" })] : [],
+      ...["exterior-material", ...cutawayShown ? ["interior-material"] : []].map(id => preparedResourcePool(id, entries, { retention: "selection", decoding: "sync", capacity: 2, concurrency: 2 }))],
       startup: [...entries.filter(entry => entry.pool === "warm").map(entry => entry.key)] },
-    tree, variants, materials: [track("exterior", exteriorLeaf, exteriorAtlas, false), track("interior", interiorLeaf, interiorAtlas, true)],
+    tree, variants, materials: [track("exterior", exteriorLeaf, exteriorAtlas, false), ...interiorLeaf ? [track("interior", interiorLeaf, interiorAtlas, true)] : []],
     viewBindings: [{ kind: "counter-rotation", target: index(materialCounter), systemTransform: materialSystem.style.transform }], animations: [] };
 }

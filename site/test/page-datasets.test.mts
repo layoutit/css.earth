@@ -26,7 +26,8 @@ test('the card marks the chosen dataset on its host scene and hides its datasets
   presentPageDatasets(document, 'https://css.earth/observable-universe/?dataset=full', 'sun');
   assert.equal(root.hidden, false);
   assert.deepEqual([...document.querySelectorAll('button')].map(button => button.getAttribute('aria-pressed')), ['false', 'true']);
-  assert.deepEqual([...document.querySelectorAll<HTMLElement>('[data-focus-dataset-details]')].map(detail => detail.hidden), [true, false]);
+  // Only the chosen dataset's details are mounted; the other waits in a template (detached-sections.ts).
+  assert.deepEqual([...document.querySelectorAll<HTMLElement>('[data-focus-dataset-details]')].map(detail => detail.dataset.focusDatasetDetails), ['full']);
   // Another star zoomed out to the same level shows the level's card without them: choosing one would leave that star.
   presentPageDatasets(document, 'https://css.earth/trappist-1/?overview=system', 'trappist-1');
   assert.equal(root.hidden, true);

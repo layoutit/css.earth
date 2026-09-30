@@ -42,7 +42,7 @@ class Root {
   };
 }
 type InformationPanel = { querySelector(selector: string): { elements: Input[]; closest(): Root } | null; querySelectorAll(): never[] };
-type HarnessDocument = { querySelector(selector: string): Root | InformationPanel | null; getElementById(id: string): { hidden: boolean; querySelectorAll(): never[] } | null };
+type HarnessDocument = { querySelector(selector: string): Root | InformationPanel | null; querySelectorAll(): never[]; getElementById(id: string): { hidden: boolean; querySelectorAll(): never[] } | null };
 type HarnessMutation = (parts: { datasetInputs: Input[]; settingInputs: Input[]; stage: HTMLElement; document: HarnessDocument; datasetRoot: Root }) => void;
 function selectionState(initial: ObjectSelection): ObjectSelectionState {
   return { committed: null, committedBy: null, desired: initial, plan: null, pending: true, loadingMaterial: false, ready: false, error: null, viewRevision: null };
@@ -59,8 +59,9 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
   const panels = new Map(datasetInputs.map(input => { input.setAttribute('aria-controls', input.value); return [input.value, { hidden: false, querySelectorAll: (): never[] => [] }]; }));
   const form = { elements: datasetInputs, closest: () => datasetRoot };
   const information: InformationPanel = { querySelector: selector => selector === 'form[data-dataset-form]' ? form : null, querySelectorAll: () => [] };
+  // Every dataset's details are mounted here, so the binding finds them by id; no section waits in a template.
   const document: HarnessDocument = { querySelector: selector => selector === ".object-information-panel" ? information : selector === ".object-datasets" ? datasetRoot : settingsRoot,
-    getElementById: id => panels.get(id) ?? null };
+    querySelectorAll: () => [], getElementById: id => panels.get(id) ?? null };
   // The binding accepts an HTMLElement only to reach ownerDocument; this mock supplies that boundary.
   const stage = { ownerDocument: document as unknown as Document } as unknown as HTMLElement;
   const errors: unknown[] = [], actions: ObjectAction[] = []; let state = selectionState(initial);
@@ -151,10 +152,10 @@ test("pending controls project desired values while pressed datasets remain comm
   assert.equal(h.settingsRoot.attributes["aria-busy"], "false");
   assert.equal(h.errors.length, 1); h.binding.destroy();
 });
-test("the same declared dataset controls can project simultaneous material and interior pressed states", () => {
+test("the same declared dataset controls can project two pressed datasets at once", () => {
   const h = harness(saturnControls); h.ready();
-  h.setState({ ...h.state(), plan: { required: [], prewarm: [], materials: {}, pressedDatasets: ["methane", "cross-section"] } });
-  assert.deepEqual(h.datasetInputs.filter(input => input.attributes["aria-pressed"] === "true").map(input => input.value), ["methane", "cross-section"]);
+  h.setState({ ...h.state(), plan: { required: [], prewarm: [], materials: {}, pressedDatasets: ["methane", "thermal"] } });
+  assert.deepEqual(h.datasetInputs.filter(input => input.attributes["aria-pressed"] === "true").map(input => input.value), ["methane", "thermal"]);
   h.binding.destroy();
 });
 test("invalid range events restore the selected rate, and a late failure cannot update a disposed binding", async () => {

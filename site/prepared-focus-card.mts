@@ -1,9 +1,8 @@
 import { catalogueClassification, isPreparedCluster, isPreparedNebula } from '@cssearth/catalog';
-import { publishDatasetPreview } from '@cssearth/renderer';
+import { publishDatasetPreview, sectionElements, showSection } from '@cssearth/renderer';
 import type { PreparedCatalogObject, SpatialCitation } from '@cssearth/catalog';
 import { preparedFocusObjectId } from './prepared-focus.mts';
 import type { PreparedFocusPresentation } from './prepared-focus.mts';
-import { requiredElement } from './browser/browser-types.mts';
 import { overviewHolding } from '@cssearth/objects';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
 import { wikipediaLearnMoreUrl } from './learn-more.mts';
@@ -22,13 +21,15 @@ const words = (value: string) => value.replaceAll('-', ' ').replace(/^./u, lette
  * Its visibility belongs to the selection presentation (`selection-presentation.mts`). */
 export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: string) => void = () => {}): PreparedFocusCard {
   if (!root) return { set() {}, adoptBanks() {}, destroy() {} };
+  // The factsheet tab's panel waits in a template while closed (tab-panels.mts): its fields are found there too.
+  const find = <E extends HTMLElement = HTMLElement>(selector: string) => sectionElements<E>(root, selector);
   const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']
-    .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
-  const aliasesRow = root.querySelector<HTMLElement>('[data-focus-aliases-row]');
-  const learnMore = root.querySelector<HTMLAnchorElement>('[data-focus-learn-more]');
-  const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
-  const sourceRows = [...root.querySelectorAll<HTMLElement>('[data-focus-source-row]')];
-  const breadcrumbs = [...root.querySelectorAll<HTMLElement>('[data-focus-breadcrumb-scope]')];
+    .map(name => { const field = find(`[data-focus-${name}]`)[0]; if (!field) throw new Error(`Prepared focus field is missing: ${name}.`); return [name, field]; }));
+  const aliasesRow = find('[data-focus-aliases-row]')[0] ?? null;
+  const learnMore = find<HTMLAnchorElement>('[data-focus-learn-more]')[0] ?? null;
+  const links = find<HTMLAnchorElement>('[data-focus-source]');
+  const sourceRows = find('[data-focus-source-row]');
+  const breadcrumbs = find('[data-focus-breadcrumb-scope]');
   const events = new AbortController();
   const unavailable = root.querySelector<HTMLElement>('[data-focus-unavailable]');
   const unavailableIds = new Set(unavailable?.dataset.unavailableObjects?.split(' ') ?? []);
@@ -38,12 +39,12 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   type Bank = { root: HTMLElement; buttons: HTMLButtonElement[]; details: HTMLElement[]; contexts: HTMLElement[] };
   const banks: Bank[] = [];
   const adopt = () => {
-    for (const element of root.querySelectorAll<HTMLElement>('[data-focus-dataset-bank], [data-focus-facts-bank]')) {
+    for (const element of find('[data-focus-dataset-bank], [data-focus-facts-bank]')) {
       if (banks.some(bank => bank.root === element)) continue;
       const bank = { root: element,
         buttons: [...element.querySelectorAll<HTMLButtonElement>('[data-focus-dataset]')],
-        details: [...element.querySelectorAll<HTMLElement>('[data-focus-dataset-details]')],
-        contexts: [...element.querySelectorAll<HTMLElement>('[data-dataset-context]')],
+        details: sectionElements(element, '[data-focus-dataset-details]'),
+        contexts: sectionElements(element, '[data-dataset-context]'),
       };
       for (const button of bank.buttons) button.addEventListener('click', event => {
         if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusDatasetBank) {
@@ -64,7 +65,8 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     currentRecordId = record?.id;
     for (const bank of banks) {
       const active = currentPresentation?.objectId === (bank.root.dataset.focusDatasetBank ?? bank.root.dataset.focusFactsBank);
-      bank.root.hidden = !active;
+      // Only the selected object's bank is mounted; the others wait in templates (detached-sections.ts).
+      showSection(bank.root, active);
       if (!active || !currentPresentation) continue;
       const available = new Set(currentPresentation.datasets.map(dataset => dataset.id));
       for (const button of bank.buttons) {
@@ -75,8 +77,8 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
         if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
       }
       publishDatasetPreview(bank.root, bank.buttons);
-      for (const detail of bank.details) detail.hidden = detail.dataset.focusDatasetDetails !== currentPresentation.selectedDataset;
-      for (const context of bank.contexts) context.hidden = context.dataset.datasetContext !== currentPresentation.selectedDataset;
+      for (const detail of bank.details) showSection(detail, detail.dataset.focusDatasetDetails === currentPresentation.selectedDataset);
+      for (const context of bank.contexts) showSection(context, context.dataset.datasetContext === currentPresentation.selectedDataset);
     }
   };
   const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
@@ -93,7 +95,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     if (learnMore && !record) learnMore.hidden = true;
     if (!record) return;
     root.dataset.preparedFocusId = record.id;
-    for (const bank of root.querySelectorAll<HTMLElement>('[data-focus-record-bank]')) bank.hidden = bank.dataset.focusRecordBank !== record.id;
+    for (const bank of find('[data-focus-record-bank]')) showSection(bank, bank.dataset.focusRecordBank === record.id);
     const cluster = isPreparedCluster(record), nebula = isPreparedNebula(record);
     const aliases = record.aliases.join(', ');
     write('name', record.name);
@@ -114,9 +116,9 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     write('status', nebula ? '' : cluster ? record.classification.name : `${words(record.status)} galaxy`);
     const distanceScale = record.distance.valuePc >= 1e6 ? 1e6 : record.distance.valuePc >= 1e3 ? 1e3 : 1;
     write('distance', `${number.format(record.distance.valuePc / distanceScale)} ${distanceScale === 1e6 ? 'Mpc' : distanceScale === 1e3 ? 'kpc' : 'pc'}`);
-    const associationLabel = root.querySelector<HTMLElement>('[data-focus-fact-label=association]');
+    const associationLabel = find('[data-focus-fact-label=association]')[0] ?? null;
     if (associationLabel) associationLabel.textContent = cluster ? 'Redshift' : 'Association';
-    const distanceLabel = root.querySelector<HTMLElement>('[data-focus-fact-label=distance]');
+    const distanceLabel = find('[data-focus-fact-label=distance]')[0] ?? null;
     if (distanceLabel) distanceLabel.textContent = cluster ? 'Comoving distance' : 'Observer distance';
     const { minusPc, plusPc, uncertainty } = record.distance;
     write('uncertainty', uncertainty ? `${number.format(uncertainty.statisticalPc)} pc statistical; ${number.format(uncertainty.systematicPc)} pc systematic`

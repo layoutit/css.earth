@@ -1,3 +1,4 @@
+import { showSection } from '@cssearth/renderer';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
@@ -17,6 +18,12 @@ export function setPanelHidden(panel: HTMLElement, hidden: boolean) {
   // Loading gates belong to the card's individual controls, not its retained container.
   const inert = hidden;
   if (panel.hasAttribute('inert') !== inert) panel.toggleAttribute('inert', inert);
+}
+
+/** A card only a selection shows is mounted while shown and waits in a template otherwise (detached-sections.ts). */
+export function setSectionShown(panel: HTMLElement, shown: boolean) {
+  showSection(panel, shown);
+  if (shown) setPanelHidden(panel, false);
 }
 
 export type ShellCamera = Pick<ObjectSceneLifecycle, 'navigation' | 'sharedView'>;

@@ -1,6 +1,8 @@
+import { sectionElements } from '@cssearth/renderer';
 /** Update retained, prepared neighbor rows; positions and distances were compiled by the shell. */
 export function selectGalaxyNeighbor(card: HTMLElement, selectedId: string): void {
-  const rows = [...card.querySelectorAll<HTMLElement>('[data-neighbor-id]')];
+  // A list in a closed tab waits in a template (tab-panels.mts); its rows still take the distances.
+  const rows = sectionElements(card, '[data-neighbor-id]');
   const distances = rows.map(row => {
     const values: unknown = JSON.parse(row.dataset.neighborDistances ?? '{}');
     if (!values || typeof values !== 'object' || Array.isArray(values)) throw new TypeError('Invalid prepared neighbor distances');

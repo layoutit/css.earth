@@ -55,28 +55,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "science/b2-intake/dione_128_o.obj",
-      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_128_o.obj",
-      "headers": {
-        "User-Agent": "cssEarth source verification (public PDS data)"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "science/b2-intake/dione_128_o.xml",
-      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_128_o.xml",
-      "headers": {
-        "User-Agent": "cssEarth source verification (public PDS data)"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "science/b2-intake/dione_512_o.xml",
       "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_512_o.xml",
       "headers": {

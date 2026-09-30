@@ -2,7 +2,8 @@ import { createSystemBodiesPresentation } from './system-bodies-fragment.mts';
 import { createSystemCardContent } from './system-card-content.mts';
 import type { SceneOverview, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey } from './scene/scene-selection.mts';
-import { requiredElement, setPanelHidden, setLinkSelected, type BrowserWindow } from './browser/browser-types.mts';
+import { requiredElement, setPanelHidden, setSectionShown, setLinkSelected, type BrowserWindow } from './browser/browser-types.mts';
+import { sectionElements } from '@cssearth/renderer';
 import type { CatalogueSelection } from './search/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
 import { selectGalaxyNeighbor } from './galaxy-neighbor-selection.mts';
@@ -19,11 +20,13 @@ export function createSelectionPresentation(documentTarget: Document, {
   const information = requiredElement<HTMLElement>(documentTarget, '.object-information-panel');
   // Search/navigation and the selection share one sidebar content owner. The
   // selected content stays retained while the browser temporarily replaces it.
-  const context = requiredElement<HTMLElement>(documentTarget, '.object-context');
+  // The context and each of its cards are mounted only while shown (detached-sections.ts); the others wait in templates.
+  const context = sectionElements(documentTarget, '.object-context')[0];
+  if (!context) throw new Error('Object shell context is missing.');
   // One card per overview (OverviewCard.astro).
-  const overviewCards = [...context.querySelectorAll<HTMLElement>('[data-large-scale-overview]')];
-  const focusCard = context.querySelector<HTMLElement>('[data-prepared-focus-card]');
-  const system = context.querySelector<HTMLElement>('[data-system-results]');
+  const overviewCards = sectionElements(context, '[data-large-scale-overview]');
+  const focusCard = sectionElements(context, '[data-prepared-focus-card]')[0] ?? null;
+  const system = sectionElements(context, '[data-system-results]')[0] ?? null;
   let systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
   // Other systems' headers load with the first overview that needs one (`system-headers-fragment.mts`).
   let currentSystemHeader = SOLAR_SYSTEM_ID, systemHeadersLoading: Promise<void> | null = null;
@@ -40,7 +43,7 @@ export function createSelectionPresentation(documentTarget: Document, {
       showSystemHeader(currentSystemHeader);
     }).catch(error => { systemHeadersLoading = null; windowTarget.reportError(error); });
   };
-  const solarSystemFacts = system?.querySelector<HTMLElement>('[data-solar-system-facts]');
+  const solarSystemFacts = system ? sectionElements(system, '[data-solar-system-facts]')[0] ?? null : null;
   const systemBodies = createSystemBodiesPresentation(system, windowTarget);
   let systemContent = createSystemCardContent(documentTarget);
   const objectName = (id: string) => WORLD_OBJECTS.find(object => object.id === id)?.name ?? '';
@@ -48,28 +51,28 @@ export function createSelectionPresentation(documentTarget: Document, {
     ? systemById(WORLD_OBJECTS, systemId)?.name ?? 'Solar System'
     : knownObject(scope)?.name ?? '';
   const present = (subject: SelectionTarget, sourceLinks?: ReadonlyMap<string, SourceDocumentReference>): CatalogueSelection => {
-    renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
     const focus = subject.kind === 'focus' ? subject : null;
     const overview = subject.kind === 'overview' ? subject.overview : null;
     // The subject a card may list: a catalogue focus, or an overview that is a member of a larger level (the Milky Way in
     // the Local Group).
     const subjectId = focus ? focus.id : overview && overview.scope !== 'system' ? overview.scope : null;
     const lists = (card: HTMLElement) => subjectId !== null
-      && [...card.querySelectorAll<HTMLElement>('[data-neighbor-id]')].some(row => row.dataset.neighborId === subjectId);
+      && sectionElements(card, '[data-neighbor-id]').some(row => row.dataset.neighborId === subjectId);
     // An overview shows its own card; a catalogue focus shows the card of the level that lists it.
     const shown = overview && overview.scope !== 'system' ? overviewCards.find(card => card.dataset.largeScaleOverview === overview.scope)
       : focus ? overviewCards.find(lists) : undefined;
     // Each card measures its distances from the subject it lists, or else from its home (the member holding the stars, or
     // the observer).
     for (const card of overviewCards) selectGalaxyNeighbor(card, lists(card) ? subjectId! : card.dataset.neighborHome ?? 'observer');
-    for (const card of overviewCards) setPanelHidden(card, card !== shown);
-    if (focusCard) setPanelHidden(focusCard, !focus);
     const systemSelected = overview?.scope === 'system';
-    if (system) setPanelHidden(system, !systemSelected);
-    systemContent.show(systemSelected);
     const showContext = subject.kind === 'overview' || subject.kind === 'focus';
+    for (const card of overviewCards) setSectionShown(card, card === shown);
+    if (focusCard) setSectionShown(focusCard, !!focus);
+    if (system) setSectionShown(system, systemSelected);
+    systemContent.show(systemSelected);
     setPanelHidden(information, showContext);
-    setPanelHidden(context, !showContext);
+    setSectionShown(context, showContext);
+    renderSourceLink(documentTarget, selectionKey(subject), sourceLinks);
     const headerSystemId = systemSelected ? overview.systemId : SOLAR_SYSTEM_ID;
     showSystemHeader(headerSystemId);
     systemBodies.show(systemSelected ? headerSystemId : null);

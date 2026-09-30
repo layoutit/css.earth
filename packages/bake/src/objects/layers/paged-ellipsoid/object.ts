@@ -31,10 +31,14 @@ export interface PagedEllipsoidContext {
   acceptChanged?: readonly string[];
 }
 
-import { prepareTextureLevels } from './texture-levels.ts';
+import { keepTextureLevelBanks, prepareTextureLevels } from './texture-levels.ts';
+import { surfaceBankInventory } from './surface-banks.ts';
 import { preparePagedEllipsoidAssetsInParallel } from './parallel-assets.ts';
 
 const json = readJsonSource;
+// Published JSON may order keys differently from a fresh run; compare values, not serializations.
+const canonical = (value: unknown): string => JSON.stringify(value, (_key, item: unknown) => item && typeof item === 'object' && !Array.isArray(item)
+  ? Object.fromEntries(Object.entries(item).sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0)) : item);
 const write = (directory: string, name: string, value: unknown) => writeFile(resolve(directory, `${name}.json`), `${JSON.stringify(value)}\n`);
 
 
@@ -45,9 +49,6 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   if (!reuseImages) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, objectName: config.displayName });
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const published = async (name: string) => requireRecord(await json(resolve(outputDirectory, `${name}.json`)), `published ${name}`);
-  // Published JSON may order keys differently from a fresh run; compare values, not serializations.
-  const canonical = (value: unknown): string => JSON.stringify(value, (_key, item: unknown) => item && typeof item === 'object' && !Array.isArray(item)
-    ? Object.fromEntries(Object.entries(item).sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0)) : item);
   // Read the published plan before any stage below rewrites a file in this output directory.
   const publishedPlan = reuseImages ? { scene: await published('scene'), 'surface-raster-plan': await published('surface-raster-plan'), datasets: await published('datasets') } : null;
   if (reuseImages) {
@@ -92,15 +93,28 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   }; }) };
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   const content = { ...preparedContent.content, ...(catalog ? { destinations: { searchLabel: config.destinations.searchLabel, description: `${catalog.count.toLocaleString('en')}${config.destinations.descriptionSuffix}` } } : {}) };
-  const textureLevels = reuseImages ? await json(resolve(outputDirectory, 'texture-levels.json')).then(value => value === null ? null : requireRecord(value, 'published texture-levels') as unknown as Awaited<ReturnType<typeof prepareTextureLevels>>,
-      error => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error; })
+  const publishedLevels = reuseImages ? await json(resolve(outputDirectory, 'texture-levels.json')).then(value => value === null ? null : requireRecord(value, 'published texture-levels') as unknown as Awaited<ReturnType<typeof prepareTextureLevels>>,
+      error => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error; }) : null;
+  // A reuse run may drop datasets: their banks and pole atlases leave the published levels, the rest stay as published.
+  const textureLevels = reuseImages ? publishedLevels && keepTextureLevelBanks(publishedLevels,
+      new Set(surfaceBankInventory(scene, datasets, config.publicBase).map(bank => bank.id)), new Set(datasets.controls.map(dataset => dataset.id)))
     : await prepareTextureLevels({ config, plan: scene, datasets, publicDirectory });
   if (textureLevels) await write(outputDirectory, 'texture-levels', textureLevels);
-  if (publishedPlan && canonical(publishedPlan.datasets) !== canonical(datasets)) throw new Error(`${descriptor.id}: datasets differ from the published preparation; run the full preparation.`);
+  if (publishedPlan && !publishedSubset(publishedPlan.datasets, datasets)) throw new Error(`${descriptor.id}: datasets differ from the published preparation beyond removed datasets; run the full preparation.`);
   const controls = requireObjectControls(preparedContent.controls, descriptor.id);
   const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, datasets, sky, sun, catalog, textureLevels, controls });
   const definition = withFocusedCamera(rawDefinition, sky);
   for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(catalog ? { places: catalog } : {}), datasets, content, runtime: definition })) await write(outputDirectory, name, value);
   await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true} });
   return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content, recomputedImages };
+}
+
+/** Whether `current` is the published datasets less some of them: every remaining control and provenance line is
+ * unchanged, and nothing else differs. */
+function publishedSubset(published: Record<string, unknown>, current: {controls: readonly {id: string}[]; provenance?: Record<string, unknown>}) {
+  const controls = new Map(requireArray(published.controls, 'published dataset controls').map(control => [requireString(requireRecord(control, 'published dataset').id, 'published dataset id'), canonical(control)]));
+  const provenance = requireRecord(published.provenance ?? {}, 'published dataset provenance');
+  const { controls: _published, provenance: _provenance, ...rest } = published, { controls: currentControls, provenance: currentProvenance = {}, ...currentRest } = current;
+  return canonical(rest) === canonical(currentRest) && currentControls.every(control => controls.get(control.id) === canonical(control))
+    && Object.entries(currentProvenance).every(([key, value]) => canonical(provenance[key]) === canonical(value));
 }

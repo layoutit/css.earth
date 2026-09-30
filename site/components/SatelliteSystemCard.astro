@@ -9,24 +9,26 @@ import { prepareBodyMoons } from '../prepare-body-moons.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
 import { systemSourceDocumentation } from '../source-documentation.mts';
 
-interface Props { hostId: string; }
-const { hostId } = Astro.props;
+interface Props { hostId: string; detached: boolean; }
+/** The system card is mounted only while it is the card's subject (`updateBodyCard` in object-shell-client.mts). */
+const { hostId, detached } = Astro.props;
 const system = satelliteSystemByHost(hostId);
 const host = system ? SCENE_OBJECTS.find(object => object.id === hostId) : null;
 if (system && !host) throw new TypeError(`Satellite-system host ${hostId} has no scene object.`);
 const source = system ? systemSourceDocumentation({ id: hostId, name: system.name, memberIds: system.memberIds }) : null;
 const moons = system ? prepareBodyMoons(hostId) : [];
+import Detached from './Detached.astro';
 ---
 
 {system && host && source && <>
-  <ObjectCardHeader title={{ label: system.name }} heading={false} introduction={PREPARED_WORLD_PRESENTATION.satelliteSystemIntroductions[hostId]} data-satellite-system
+  <Detached {detached}><ObjectCardHeader title={{ label: system.name }} heading={false} introduction={PREPARED_WORLD_PRESENTATION.satelliteSystemIntroductions[hostId]} data-satellite-system
     data-source-subject={`satellite-system:${hostId}`} data-source-document={source.href} data-source-label={source.label}>
     <ObjectBreadcrumbs objectId={hostId} satelliteSystem />
-  </ObjectCardHeader>
-  <InformationTabs idPrefix={`${hostId}-system`} group="satellite-system" satelliteSystem
-    label={`${system.name} information`} tabs={[{ id: 'moons', label: 'Celestial bodies', count: moons.length + 1 }]} />
-  <div id={`${hostId}-system-moons-content`} class="object-results-scroll object-card-tabpanel" data-satellite-system
+  </ObjectCardHeader></Detached>
+  <Detached {detached}><InformationTabs idPrefix={`${hostId}-system`} group="satellite-system" satelliteSystem
+    label={`${system.name} information`} tabs={[{ id: 'moons', label: 'Celestial bodies', count: moons.length + 1 }]} /></Detached>
+  <Detached {detached}><div id={`${hostId}-system-moons-content`} class="object-results-scroll object-card-tabpanel" data-satellite-system
     role="region" aria-label={`Bodies in the ${system.name}`}>
     <MoonList {moons} {host} />
-  </div>
+  </div></Detached>
 </>}

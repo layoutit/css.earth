@@ -14,7 +14,7 @@ import { prepareSunReferenceViewDirection, prepareEclipticPresentationFrame } fr
 import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
 import { DIRECTIONAL_SUN_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
 import { prepareSolidRasters, prepareSolidMaterial } from './solid/solid-raster.ts';
-import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles, type SolidSceneSolarGeometry } from './solid-scene.ts';
+import { prepareSolidScene, prepareSolidPresentation, solidCameraAngles, type SolidSceneSolarGeometry, type SolidShape } from './solid-scene.ts';
 import { prepareRadialMaterials } from './radial/radial-materials.ts';
 import { loadRadialModels, combineRadialModels } from './radial/radial-models.ts';
 import { validateRadialTableProfile, validateFacetFieldRecipe } from '../../geometry/index.ts';
@@ -267,7 +267,7 @@ export function prepareTerrestrialSun({ config, surfacesReport, solarGeometry }:
 }
 
 /** Source inputs feed reusable raster, geometry, celestial and presentation operations. */
-export async function prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory, config: input, prepareContent, replaceReviewedImages = false, solarGeometry }:Directories & {config:unknown;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>;replaceReviewedImages?:boolean;solarGeometry:SolidSceneSolarGeometry}) {
+export async function prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory, config: input, prepareContent, replaceReviewedImages = false, shape = null, solarGeometry }:Directories & {config:unknown;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>;replaceReviewedImages?:boolean;shape?:SolidShape|null;solarGeometry:SolidSceneSolarGeometry}) {
   const config = parseTerrestrialProfile(input);
   if (typeof prepareContent !== 'function') throw new TypeError('Terrestrial preparation requires the shared content preparer.');
   const source = await createSourceManifest({ objectId: config.namespace, objectName: config.displayName, sourceRoot: sourceDirectory });
@@ -300,7 +300,7 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
   await writeFile(resolve(outputDirectory, 'assets.json'), `${JSON.stringify(assets)}\n`);
   const content = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   const celestial = await prepareTerrestrialCelestial({ ...context, solarGeometry });
-  const scene = await prepareSolidScene({ ...context, celestial, radial: combineRadialModels(models, config.namespace), solarGeometry });
+  const scene = await prepareSolidScene({ ...context, celestial, radial: combineRadialModels(models, config.namespace), shape, solarGeometry });
   const definition = await prepareSolidPresentation({ ...context, scene, material: raster, controls: content.controls, solarGeometry });
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(definition)}\n`);
   return { raster, celestial, scene, definition, content };

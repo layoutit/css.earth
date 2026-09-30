@@ -25,12 +25,13 @@
     {
       "id": "spc-q128-shape",
       "subject": "Dione 2025 SPC Q128 OBJ",
-      "status": "included",
-      "finding": "Selected Q128 OBJ supplies geometry and Shape; 2,000-face rendering approximation remains distinct from source uncertainty and cartographic registration.",
+      "status": "excluded",
+      "finding": "Replaced on 2026-09-30 by the IAU triaxial ellipsoid. The 2,000-triangle display mesh composited one layer per triangle on the iPad; the ellipsoid draws 452 leaves. Measured against this mesh at equal mean size, the ellipsoid differs by 0.17% RMS, 0.78% at most of the radius, a sphere by 0.25% RMS, 1.08% at most.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://doi.org/10.26033/bxx6-g543"
-      ]
+      ],
+      "revisitWhen": "The globe needs relief beyond about 1% of the radius, or a dataset must be projected onto the shape."
     },
     {
       "id": "spc-radius-elevation",
@@ -81,6 +82,17 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/source/manifest.json",
         "https://doi.org/10.26033/bxx6-g543"
+      ]
+    },
+    {
+      "id": "iau-triaxial-ellipsoid",
+      "subject": "IAU 2015 triaxial radii (NAIF pck00011)",
+      "status": "included",
+      "finding": "The globe is the 563.4 × 561.3 × 559.6 km ellipsoid of Archinal et al. (2018), long axis toward Saturn at 0° longitude, drawn on the sphere lane. Label anchors lie on the drawn surface within 0.01% of the radius.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/dione/README.md",
+        "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+        "https://doi.org/10.1007/s10569-017-9805-5"
       ]
     }
   ]

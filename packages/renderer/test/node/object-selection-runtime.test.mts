@@ -179,18 +179,17 @@ test("decode failure preserves the actual committed plan and pages, and a retry 
   const retry = h.dataset("topography"); await h.resolveJobs(); assert.equal(await retry, true);
   assert.equal(h.coordinator.state().error, null); assert.notEqual(h.coordinator.state().plan, committed); assert.deepEqual(h.fatal, []);
 });
-test("Saturn's actual cutaway is exclusive and repeated selection stays selected", async t => {
+test("Saturn's last dataset wins and repeated selection stays selected", async t => {
   const h = await preparedSelectionFixture(saturnDefinition); t.after(h.restore);
   const a = h.selection.dispatch({ kind: "dataset", id: "methane" }); await h.flush();
-  const b = h.selection.dispatch({ kind: "dataset", id: "cross-section" });
+  const b = h.selection.dispatch({ kind: "dataset", id: "thermal" });
   const c = h.selection.dispatch({ kind: "toggle", name: "rings", value: false });
   await h.settle(); assert.deepEqual(await Promise.all([a, b, c]), [false, false, true]);
-  const cutaway = h.selection.state().committed; assert.ok(cutaway); assert.equal(cutaway.datasetId, "cross-section"); assert.equal(cutaway.rings, false);
-  assert.equal(Object.hasOwn(cutaway, "interior"), false);
-  const again = h.selection.dispatch({ kind: "dataset", id: "cross-section" }); await h.settle(); assert.equal(await again, true);
-  assert.deepEqual(h.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["cross-section"]);
-  const exterior = h.selection.dispatch({ kind: "dataset", id: "methane" }); await h.settle(); assert.equal(await exterior, true);
-  const methane = h.selection.state().committed; assert.ok(methane); assert.equal(methane.datasetId, "methane");
+  const thermal = h.selection.state().committed; assert.ok(thermal); assert.equal(thermal.datasetId, "thermal"); assert.equal(thermal.rings, false);
+  const again = h.selection.dispatch({ kind: "dataset", id: "thermal" }); await h.settle(); assert.equal(await again, true);
+  assert.deepEqual(h.buttons.filter(button => button["aria-pressed"] === "true").map(button => button.value), ["thermal"]);
+  const methane = h.selection.dispatch({ kind: "dataset", id: "methane" }); await h.settle(); assert.equal(await methane, true);
+  assert.equal(h.selection.state().committed?.datasetId, "methane");
 });
 // Earth's flood lighting pins the atmosphere to its full-phase frame, so a camera move asks for no
 // new row and there is no row miss to recover from. The row-miss path itself is exercised by a

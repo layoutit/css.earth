@@ -1,5 +1,7 @@
+import { syncTabPanels } from './tab-panels.mts';
 import { parseHTML } from 'linkedom';
 import { parseObjectDescriptor } from '@cssearth/objects';
+import { sectionElements } from '@cssearth/renderer';
 import { loadPreparedVolumeDatasets, createPreparedVolumeDatasets, imageFocusDatasets } from '@cssearth/renderer/universe';
 import { worldCameraFromCenteredPresentation, presentWorldCamera, createWorldSelectionTarget, savedWorldCamera } from '@cssearth/renderer/navigation';
 import type { PreparedWorldCameraFrame, SharedView } from '@cssearth/renderer/navigation';
@@ -25,13 +27,14 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   const selected = catalog?.objects.find(record => record.id === selection.id);
   if (!catalog || !selected) throw new RangeError('Prepared focus is unavailable.');
   const objectId = preparedFocusObjectId(selected);
-  const root = requiredElement<HTMLElement>(shell, '[data-prepared-focus-card]');
+  const root = sectionElements(shell, '[data-prepared-focus-card]')[0];
+  if (!root) throw new Error('Prepared focus card is missing.');
   if (focusBanksPending(root)) {
     const html = await fetchFocusFragment(path => fetcher(new URL(path, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) }));
     spliceFocusBanks(root, parseHTML(html).document);
   }
-  const unavailable = objectId !== undefined && (shell.querySelector<HTMLElement>('[data-focus-unavailable]')?.dataset.unavailableObjects?.split(' ') ?? []).includes(objectId);
-  const bank = unavailable ? undefined : [...shell.querySelectorAll<HTMLElement>('[data-focus-dataset-bank]')].find(bank => bank.dataset.focusDatasetBank === objectId);
+  const unavailable = objectId !== undefined && (root.querySelector<HTMLElement>('[data-focus-unavailable]')?.dataset.unavailableObjects?.split(' ') ?? []).includes(objectId);
+  const bank = unavailable ? undefined : sectionElements(root, '[data-focus-dataset-bank]').find(bank => bank.dataset.focusDatasetBank === objectId);
   let presentation: PreparedFocusPresentation | undefined;
   if (bank) {
     const input: unknown = JSON.parse(requiredElement(bank, 'script[data-focus-resources]').textContent ?? '');
@@ -83,6 +86,7 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   });
   card.set(selected, preparedFocusCitations(selected, catalog.sources), presentation);
   card.destroy();
+  syncTabPanels(root);
   // A page the build already rendered its focus into answers a query again: one initial record, the latest.
   for (const previous of root.querySelectorAll(':scope > script[data-initial-focus]')) previous.remove();
   const initial = shell.createElement('script'); initial.type = 'application/json'; initial.dataset.initialFocus = selected.id;

@@ -15,27 +15,15 @@
     },
     {
       "location": "public",
-      "filename": "dione-elevation-shadow-alpha@2x.webp",
-      "bytes": 252512,
-      "sha256": "02eec37efaccb46f1ac39486b6a07e9ce6aca323038800f04d5bb925fadbfaf7"
-    },
-    {
-      "location": "public",
-      "filename": "dione-elevation-shadow@2x.webp",
-      "bytes": 101790,
-      "sha256": "12fea11aaade5822e5b59325e0b7822a1384f79e7626fbc80afb6006a835d0d9"
-    },
-    {
-      "location": "public",
-      "filename": "dione-elevation-surface-alpha@2x.webp",
-      "bytes": 390414,
-      "sha256": "3bbf15abcecbb9f5a760859b9edf6e17fabd48c7732dbf2706afe50a9ca357bb"
+      "filename": "dione-elevation-poles@2x.webp",
+      "bytes": 7762,
+      "sha256": "c89d2aa7bf52bb667a8942be31996002dc45565be7976ed11f7fb26b7c5d05e8"
     },
     {
       "location": "public",
       "filename": "dione-elevation-surface@2x.webp",
-      "bytes": 287414,
-      "sha256": "02734e9c15550b85571682b59c454dbac739da6670cc3b82b255f82c29f2adfe"
+      "bytes": 273660,
+      "sha256": "243113082bd1d378720213dcb3d69fc0cc11597eeb82d0be91f32adf8e3cc17e"
     },
     {
       "location": "public",
@@ -45,27 +33,15 @@
     },
     {
       "location": "public",
-      "filename": "dione-enhanced-shadow-alpha@2x.webp",
-      "bytes": 266004,
-      "sha256": "fd741ec8608e91bf71e6ef0e2c2ca12ca4e1dc022f5c6ba1d0d792f79088e4f0"
-    },
-    {
-      "location": "public",
-      "filename": "dione-enhanced-shadow@2x.webp",
-      "bytes": 174268,
-      "sha256": "21f3ffa9249e7062bf21c829c2921b8f8f3f45f12453f40c3fbdba45693b4130"
-    },
-    {
-      "location": "public",
-      "filename": "dione-enhanced-surface-alpha@2x.webp",
-      "bytes": 530252,
-      "sha256": "14c0b0525d0aee5d70e4d36ce53a1059954b82581c74630c0585f9e797fc0440"
+      "filename": "dione-enhanced-poles@2x.webp",
+      "bytes": 19026,
+      "sha256": "1d60032c76e351a042ba2fcf3d1d99c59e92088db3a2a5ffb336011c1cfcfcd3"
     },
     {
       "location": "public",
       "filename": "dione-enhanced-surface@2x.webp",
-      "bytes": 568742,
-      "sha256": "71977c58568d5706b998a940b8d64a43f8fb9904df62f042a44b1ca7254d70b1"
+      "bytes": 614474,
+      "sha256": "a3b12daac28f8bf6c1883a6221c8d98a996d2d86a2582da3ec8b50caaff09fe1"
     },
     {
       "location": "public",
@@ -76,8 +52,8 @@
     {
       "location": "public",
       "filename": "dione-features.json",
-      "bytes": 213600,
-      "sha256": "b45ba3cdcdfd680af13f55c263805cacf624dac93462d1b775507e1242b45c50"
+      "bytes": 213703,
+      "sha256": "c4af71be34c7552282f57cda65370f0cc3cab300eecea6d6401a3eb4bd4f9137"
     },
     {
       "location": "public",
@@ -87,27 +63,15 @@
     },
     {
       "location": "public",
-      "filename": "dione-ice-absorption-shadow-alpha@2x.webp",
-      "bytes": 301982,
-      "sha256": "51cc3eb2161725ca9c7e94eb6fa672c7d5278a8ab234c9e03a55fe85d0505adf"
-    },
-    {
-      "location": "public",
-      "filename": "dione-ice-absorption-shadow@2x.webp",
-      "bytes": 174314,
-      "sha256": "d7552c0769c8c4d1623b8e71d7d061349a9d3700f223b0ff4567eca29891f5f8"
-    },
-    {
-      "location": "public",
-      "filename": "dione-ice-absorption-surface-alpha@2x.webp",
-      "bytes": 294538,
-      "sha256": "00088a94136d6dd82f4df362aa8b8b29b1591e8761972770d41e00f7168474cb"
+      "filename": "dione-ice-absorption-poles@2x.webp",
+      "bytes": 3550,
+      "sha256": "8bb0d899c8dd305b348e0aa509c06178cb93ef43b27bebf5d8a4c9d83b8ab977"
     },
     {
       "location": "public",
       "filename": "dione-ice-absorption-surface@2x.webp",
-      "bytes": 145866,
-      "sha256": "5328abe6f3cd4b70ffa68ddda515dbd97644cf518a4e9625821cffe201e9999b"
+      "bytes": 62556,
+      "sha256": "594255f939643186d470746ce4fa0c182afd9196cca6d99ad35704e2ce18e600"
     },
     {
       "location": "public",
@@ -117,27 +81,15 @@
     },
     {
       "location": "public",
-      "filename": "dione-infrared-shadow-alpha@2x.webp",
-      "bytes": 324604,
-      "sha256": "7562e1d07810bd7d55abab2f335d66a727dbe5e48e9b5f01ced51031e1937882"
-    },
-    {
-      "location": "public",
-      "filename": "dione-infrared-shadow@2x.webp",
-      "bytes": 207728,
-      "sha256": "e3feae7966aa3be98bdce43e5642fcc4127b04521930f90416ee3d78f39f650d"
-    },
-    {
-      "location": "public",
-      "filename": "dione-infrared-surface-alpha@2x.webp",
-      "bytes": 374192,
-      "sha256": "bf325626490a3f9b322e93ff53c6dea51a788347f02e71fb2800524545c1f25b"
+      "filename": "dione-infrared-poles@2x.webp",
+      "bytes": 5470,
+      "sha256": "ced584b07292bcaef34fd2a62cebfc21dac707a40f7cf093da6dfc1da6e3a34b"
     },
     {
       "location": "public",
       "filename": "dione-infrared-surface@2x.webp",
-      "bytes": 256740,
-      "sha256": "a70a8845f1ac836083d601ae093e3a2879b3ea961ece544396c257f1f6a62068"
+      "bytes": 119782,
+      "sha256": "42399758421096de6e27efbd5da4f36fa3d418e52b26a60b8b06a1bf038d81ed"
     },
     {
       "location": "public",
@@ -147,27 +99,21 @@
     },
     {
       "location": "public",
-      "filename": "dione-normal-shadow-alpha@2x.webp",
-      "bytes": 352464,
-      "sha256": "ba5bfa848e1149f8ceebdc766f4db226a94a107b87ed50d95d82ce360e6a1afb"
+      "filename": "dione-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
     },
     {
       "location": "public",
-      "filename": "dione-normal-shadow@2x.webp",
-      "bytes": 328962,
-      "sha256": "5c255b919d744697f0d6c674677727f71ec4e160878343f5039420630aaf1229"
-    },
-    {
-      "location": "public",
-      "filename": "dione-normal-surface-alpha@2x.webp",
-      "bytes": 658186,
-      "sha256": "bbc83cc6f76b908cdd303ca4dcf86c7d426f6ac3bbd4b36e12b1ee935c76d820"
+      "filename": "dione-normal-poles@2x.webp",
+      "bytes": 16770,
+      "sha256": "8594482d164d8b2b3b10d4120c4edac9d907f62233bad7eb8ec7f029c0055155"
     },
     {
       "location": "public",
       "filename": "dione-normal-surface@2x.webp",
-      "bytes": 763492,
-      "sha256": "d7f5815aa3376d8d6d5ee4638e7747052e96dec6606bf3d83d942d09561e31c3"
+      "bytes": 819644,
+      "sha256": "ff75d702a9369c787106944f4308b1239837257c50e746415e33be3e065801dc"
     },
     {
       "location": "public",
@@ -183,63 +129,21 @@
     },
     {
       "location": "public",
-      "filename": "dione-relative-albedo-shadow-alpha@2x.webp",
-      "bytes": 1339466,
-      "sha256": "ddc6873b48ef759d3087cf4ab28bf60be8559c6685f3f093e06b42e2a3aec128"
-    },
-    {
-      "location": "public",
-      "filename": "dione-relative-albedo-shadow@2x.webp",
-      "bytes": 1135880,
-      "sha256": "bb4ea18fab0ffa05ebf023923b4708b1cff48a6cddbabd05b485ca7d68c8b212"
-    },
-    {
-      "location": "public",
-      "filename": "dione-relative-albedo-surface-alpha@2x.webp",
-      "bytes": 1064662,
-      "sha256": "ac04c33be6504950a4ed838a0957a6c5ce87dd64c20fe5835c3033b6a4c701fd"
+      "filename": "dione-relative-albedo-poles@2x.webp",
+      "bytes": 52304,
+      "sha256": "dc514ba893b675f3c18200e3f7adcb66a158b23cc22c0da0b0d317a1b8cc270a"
     },
     {
       "location": "public",
       "filename": "dione-relative-albedo-surface@2x.webp",
-      "bytes": 889562,
-      "sha256": "f3324f9658aebff0e91faa811c2df46d3e29b1d2fd0bad95d998d4838dcc075f"
+      "bytes": 1008016,
+      "sha256": "b7fb6641df4d760726729007e329d449692aa4c514d10b4993b6e9a4b362a488"
     },
     {
       "location": "public",
       "filename": "dione-relative-albedo-thumbnail.webp",
       "bytes": 3040,
       "sha256": "0e6ddde3daddf6a8b8e02f54e158d513c3c094998139a3063d5e63997d786f58"
-    },
-    {
-      "location": "public",
-      "filename": "dione-shape-shadow-alpha@2x.webp",
-      "bytes": 879636,
-      "sha256": "377fae1364e6694cd01d99653d0782fbab3356745de968cec7e9b8b399f57773"
-    },
-    {
-      "location": "public",
-      "filename": "dione-shape-shadow@2x.webp",
-      "bytes": 109906,
-      "sha256": "c9114f43d61749d8ff3e2a25482f45265f14eae38ba04d7ea148c02a3ac6f578"
-    },
-    {
-      "location": "public",
-      "filename": "dione-shape-surface-alpha@2x.webp",
-      "bytes": 876552,
-      "sha256": "ec1f53bee2b2ddadf9811718c730ea70b5b6529e864693de8a2ebf17e8e1a5e5"
-    },
-    {
-      "location": "public",
-      "filename": "dione-shape-surface@2x.webp",
-      "bytes": 101834,
-      "sha256": "76bf1a5212f5c2a88547e2130fa1dd471d987b36165207c36d4688ee6eafb881"
-    },
-    {
-      "location": "public",
-      "filename": "dione-shape-thumbnail.webp",
-      "bytes": 44,
-      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
     },
     {
       "location": "prepared",
@@ -250,44 +154,44 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1733,
-      "sha256": "8f2d451a6ff85cfa6250a619028d42bd7a7908ff261f4f9cc2ca8c75bbfa7042"
+      "bytes": 1485,
+      "sha256": "737d9f59ca12f63f102af0196cf87eff85a089b3c04f2e7517e4c379506fb380"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 3099,
-      "sha256": "36c5cc31f210a97320eda742e26fb35c889ddde2993dd17d8de4b0cd90a83dee"
+      "bytes": 3331,
+      "sha256": "fee61c8d9dd4a77e0561d66c4d0899cbf5b697757a1bab2b9819e2fb552c4b48"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1888,
-      "sha256": "752bafb31a9868684efbf49797d26114858c3a345264de8775276c7dd5ec8a17"
+      "bytes": 1785,
+      "sha256": "8ac1ab9a87b0065d83f1c22069212beef5787aed91d9293e9c91a4f902bb80a5"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 4287,
-      "sha256": "169287bd182ce8658b5f3ea0938d4b2e743f17eb9f246ac0174d25fa6b61a3ad"
+      "bytes": 3827,
+      "sha256": "13cba5e5033222c7b7b914988f9e75f89d3234941522078e7df63e155379af98"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 586,
-      "sha256": "3cf0c209cd099d13befb30d4e655a68ee4c3d9da8e7a5b7103f1dc3b2157d768"
+      "sha256": "dc0e21bb60034f2cc3915bf3134b9ed0d1ae37be44e07fda93a0e9cceaba4500"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 8501,
-      "sha256": "745c9973cac31e5f9fbb4799ae19f45cdf9f241859783573d1a4b1ba9ce2ec82"
+      "bytes": 25137,
+      "sha256": "7bd50b5b7b9360109dd42ffc12089e32338cd15b40a0f6abf7c0596fb8a9b8fe"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 754,
-      "sha256": "ab14b2afc9dc01cba2274ee4f807ddafd99280749d954e751df2496b0e2c0143"
+      "bytes": 666,
+      "sha256": "6a2df0d154dcb222563e8d53bd6d86652b4e9c35dce34edfc335d6e0623b4598"
     },
     {
       "location": "prepared",
@@ -327,21 +231,15 @@
     },
     {
       "location": "prepared",
-      "filename": "minimaps/shape.webp",
-      "bytes": 424,
-      "sha256": "db5f9365ac1126293a111f13117d88044659fb134f62d7e01b0bb92cfbef60a3"
-    },
-    {
-      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1220287,
-      "sha256": "68e1015d4d732eee146c43ca79cdabd623e689b4011171041e9e078ce57208c5"
+      "bytes": 221816,
+      "sha256": "e04b10ad9a205d5c1ca0de4644f26f4a76417f363012202c2928c64a47a3561c"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1466119,
-      "sha256": "57cdd286e25319d7b5171996d0fbaa5ba5c82122b2d9c8edf8032dd1fc726733"
+      "bytes": 291765,
+      "sha256": "5e08410dab927488ac6a3874e515cb7c1db1717d914e4cdb7402f1d0468ccdf8"
     },
     {
       "location": "prepared",
@@ -358,8 +256,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 8504,
-      "sha256": "decb3e08839e7b5248b5c0f100a804d7126fef51a6b5230a8b1bd8174be025e5"
+      "bytes": 9943,
+      "sha256": "a1da0526ded359b3c3cad108a654e03da24619aaf0261faec52c069f0a7cf8da"
     },
     {
       "location": "prepared",
@@ -371,7 +269,7 @@
       "location": "prepared",
       "filename": "world-navigation.json",
       "bytes": 1220,
-      "sha256": "66150d9bd04ea8dbe9ec33cfbe46d0c297a086ad10ccc5b7b082502dccc7f919"
+      "sha256": "e4028e2caebfc9b996bb4672a9c57f317e4f2f41eada793f6abced92a3751e48"
     }
   ]
 }

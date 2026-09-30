@@ -7,6 +7,7 @@ import { presentWorldCamera } from '../navigation/world-camera.js';
 import { preparedCameraBasis } from '../navigation/prepared-camera-basis.js';
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import { createPreparedFramePublisher } from './prepared-presentation.js';
+import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 
 /** A native response publishes into the retained prepared tree with the live
  * material and frame publishers. CSS resolves its responsive focal length. */
@@ -17,8 +18,7 @@ export function publishPreparedNativeView(definition: ObjectRuntimeDefinition, s
   const world = savedWorldCamera(saved, frame, viewport), presentation = presentWorldCamera(world, frame, viewport);
   // Server markup omits what the selection hides; writes to those nodes go to detached stand-ins.
   const variant = definition.variants.find(entry => Object.entries(entry.when).every(([name, value]) => selection[name] === value));
-  const hidden = new Set(variant?.hiddenSubtrees ?? []), omitted = new Set<number>();
-  definition.tree.nodes.forEach((record, index) => { if (hidden.has(record.parent) || omitted.has(record.parent)) omitted.add(index); });
+  const omitted = omittedPreparedNodes(definition.tree, variant);
   const nodes = definition.tree.nodes.map((record, index) => {
     const node = stage.querySelector<HTMLElement>(`[data-prepared-node="${index}"]`);
     if (node) return node;

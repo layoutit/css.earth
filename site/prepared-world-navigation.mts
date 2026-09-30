@@ -29,7 +29,7 @@ interface WorldFlightRequest {
 }
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
-import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, DATASET_VOLUMES, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, DATASET_VOLUMES, categoryZoomTarget, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from './system-framing.mts';
 import { bodyViewAtCamera, overviewFrameDistanceM } from './overview-context.mts';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
@@ -116,6 +116,18 @@ export function createPreparedWorldNavigation({ objects, motion = createCameraMo
       const projection = presentWorldCamera(from, frame, optics);
       return { world: worldCameraFromCenteredPresentation({ rotation: projection.rotation, distanceUnits: distanceM / frame.metersPerUnit },
         frame, optics), focusPositionM: frame.originM };
+    },
+    /** Fly to every member of one classification on the map (its header pill), keeping the camera angle and the selection.
+     * Framed through the normal dataset like an overview, so it looks the same from any close-up. Nothing to fly to without a
+     * prepared box; another camera move that cancels the flight is not a failure. */
+    async frameCategory({ classification, ...request }: Omit<FocusRequest, 'targetWorldCamera' | 'targetFocusPositionM' | 'centerSelection'> & { classification: string }) {
+      const owner = request.mount.navigation;
+      if (!owner) return;
+      const optics = worldCameraViewport({ projectionScale: 1 }, owner.optics());
+      const target = categoryZoomTarget(classification, owner.capture(), optics, systemFramingRect(optics, documentTarget));
+      if (!target) return;
+      try { await this.focus({ ...request, targetWorldCamera: target.world, targetFocusPositionM: target.focusPositionM, centerSelection: true }); }
+      catch (error) { if (!(error instanceof Error && error.name === 'AbortError')) throw error; }
     },
     /** Fit a volume the body shows through its dataset, when the view does not already hold it. Null when the view is
      * already as far out as the fit, or the volume is unknown. */

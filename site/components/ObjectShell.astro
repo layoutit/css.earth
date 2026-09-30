@@ -62,9 +62,11 @@ const searchCategories = [
   { classification: 'comet', icon: 'motion_blur', label: 'Comets' },
   { classification: 'asteroid', icon: 'grain', label: 'Asteroids' },
   { classification: 'star', icon: 'asterisk', label: 'Stars' },
+  { classification: 'exoplanet', icon: 'planet', label: 'Exoplanets' },
   { classification: 'nebula', icon: 'grain', label: 'Nebulae' },
   { classification: 'galaxy', icon: 'public', label: 'Galaxies' },
 ] as const;
+import Detached from './Detached.astro';
 ---
 
 <header class="explorer-shell-header">
@@ -229,7 +231,7 @@ const searchCategories = [
       </ObjectResults>
     </nav>}
     <div class="object-selected-content">
-    {!navigation && <div class="object-context" hidden><ObjectCard class="object-prepared-information-panel" data-prepared-focus-card hidden>
+    {!navigation && <Detached detached><div class="object-context" hidden><Detached detached><ObjectCard class="object-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="object-selected-panel">
           {OVERVIEWS.map(({ id }) =>
             <ObjectBreadcrumbs scope={id} currentPage={false} data-focus-breadcrumb-scope={id} hidden />)}
@@ -248,7 +250,7 @@ const searchCategories = [
           {/* The dataset banks are the same on every page; the first focus selection fetches them (`site/focus-fragment.mts`). */}
           <div data-focus-banks-slot="datasets" hidden></div>
         </div>
-        <div class="object-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
+        <Detached detached><div class="object-card-tabpanel" id="prepared-focus-factsheet-content" data-information-panel="factsheet"
           data-information-group="prepared-focus" role="region" aria-label="Factsheet">
           <div class="object-factsheet-body"><div class="object-facts"><ul class="object-primary-facts">
             <li data-focus-aliases-row hidden><span class="object-fact-label">Also known as</span><span class="object-fact-value" data-focus-aliases></span></li>
@@ -257,10 +259,10 @@ const searchCategories = [
           </ul></div></div>
           <div data-focus-banks-slot="facts" hidden></div>
           <PreparedClusterFacts />
-        </div>
-      </ObjectCard>
+        </div></Detached>
+      </ObjectCard></Detached>
       {OVERVIEWS.map(overview => <OverviewCard {overview} />)}
-      <ObjectCard class="object-overview-card" data-system-results>
+      <Detached detached><ObjectCard class="object-overview-card" data-system-results>
         {/* The Solar System's header and this page's own; the others arrive with the first overview of another system. */}
         <SystemHeaders only={[SOLAR_SYSTEM_ID, ...(ownSystem ? [ownSystem.id] : [])]} />
         <span data-system-headers-slot hidden></span>
@@ -275,7 +277,7 @@ const searchCategories = [
         <div data-system-bodies-slot>
           {Astro.url.searchParams.get('overview') === 'system' && <SystemBodies systemId={ownSystem?.id ?? SOLAR_SYSTEM_ID} />}
         </div>
-      </ObjectCard></div>}
+      </ObjectCard></Detached></div></Detached>}
     {/* Every page carries the selected-city panel: a visit that starts on another body can open a city on Earth. */}
     <section class="object-destination-panel" aria-label="Selected city" hidden>
       <button class="object-destination-back" type="button">← Back to {activeObject?.name}</button>

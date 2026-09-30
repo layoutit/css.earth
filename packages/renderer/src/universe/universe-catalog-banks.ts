@@ -45,6 +45,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   billboards?: PreparedUniverseOptions['datasetBillboards'];
 }) {
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
+  // The header pill's category, applied again when the catalogue mounts after it was pressed.
+  let highlightedClassification: string | null = null;
   let catalogPayload = initialCatalog, catalogLoading: Promise<void> | null = null;
   let billboardCount = 0;
   const images: ImageBank[] = declarations.map(bank => {
@@ -95,6 +97,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       billboardedObjectIds: new Set([...prepared?.plan.banks.values() ?? []].filter(bank => bank.billboard).map(bank => bank.id)),
       galaxyCaptions: galaxyCaptions(),
       nebulaFrames: new Map(volumeDeclarations.map(dataset => [dataset.id, dataset.frame])), onSelect, pickingHost: stage });
+    catalog.highlight(highlightedClassification);
     publishResidency();
   }
   /** Every bank with a published stellar extent: its caption hangs under its authored framing sphere (else its
@@ -145,6 +148,11 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
 
   return {
     get catalog() { return catalog; },
+    setHighlightedClassification(classification: string | null) {
+      highlightedClassification = classification;
+      catalog?.highlight(classification);
+      requestPublication?.();
+    },
     get presentation() { return catalogPayload ?? catalogBank; },
     ensureCatalog,
     publishResidency,

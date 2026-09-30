@@ -1,6 +1,7 @@
 import type { PreparedTree } from './prepared-presentation.js';
 import { writePreparedStyle } from './style-access.js';
 import { rewritePreparedStyleUrls, type PreparedAssetOrigin } from './prepared-asset-origin.js';
+import { meshProfile } from './prepared-omitted-nodes.js';
 
 type Own = (cleanup: () => void) => unknown;
 interface BuiltTree { nodes: HTMLElement[]; roots: HTMLElement[]; }
@@ -57,9 +58,10 @@ function builder(tree: PreparedTree, document: Document, own: Own, assetOrigin?:
 }
 
 /** The server can publish this exact tree before the interactive owner arrives.
- * Validate the entire topology before taking ownership of any existing node. The server may omit the descendants of a
- * subtree its selection hides (`hiddenSubtrees`); they are built here, whole, from their prepared records. */
-export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: Own, hiddenSubtrees: ReadonlySet<number> = new Set(),
+ * Validate the entire topology before taking ownership of any existing node. The server omits what its selection hides
+ * (`omittedPreparedNodes`): those nodes are built here from their prepared records. An unused mesh's leaves stay
+ * unattached until a selection shows that mesh. */
+export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: Own, omitted: ReadonlySet<number> = new Set(),
   assetOrigin?: PreparedAssetOrigin | null): BuiltTree | null {
   if (!stage.dataset.preparedObject) return null;
   if (stage.dataset.preparedObject !== stage.dataset.objectId) throw new TypeError('Initial prepared tree belongs to another object.');
@@ -67,23 +69,26 @@ export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: O
   // Prepared records are topological, but need not be in DOM preorder.
   const indexed = new Map(existing.map(node => [node.dataset.preparedNode, node]));
   const nodes = tree.nodes.map((_, index) => indexed.get(String(index)));
-  // A hidden subtree arrives whole or not at all: its root is present with no server children.
-  const emptyHidden = new Set([...hiddenSubtrees].filter(root => nodes[root] && !tree.nodes.some((child, at) => child.parent === root && nodes[at])));
-  const built = new Set<number>();
+  const built = new Set<number>(), detached = new Set<number>();
   const resolved = nodes.includes(undefined) ? treeStyles(tree, assetOrigin) : null;
   for (const [index, record] of tree.nodes.entries()) if (!nodes[index]) {
-    if (!emptyHidden.has(record.parent) && !built.has(record.parent)) throw new TypeError('Initial prepared tree has invalid node identities.');
+    // An omitted node's parent is either built here too or a server node the selection shows: a subtree the server cut
+    // part-way (a present omitted parent) is refused.
+    const parentBuilt = built.has(record.parent), parentShown = record.parent !== -1 && !!nodes[record.parent] && !omitted.has(record.parent);
+    if (!omitted.has(index) || (record.parent !== -1 && !parentBuilt && !parentShown)) throw new TypeError('Initial prepared tree has invalid node identities.');
     nodes[index] = createPreparedNode(tree, index, stage.ownerDocument, resolved);
     built.add(index);
+    if (meshProfile(record.style)) detached.add(index);
   }
   if (indexed.size !== existing.length || existing.length + built.size !== tree.nodes.length) throw new TypeError('Initial prepared tree has a different node count.');
-  for (const index of built) nodes[tree.nodes[index].parent]!.appendChild(nodes[index]!);
+  for (const index of built) if (!detached.has(index)) nodes[tree.nodes[index].parent]!.appendChild(nodes[index]!);
   const owned = nodes.filter((node): node is HTMLElement => node !== undefined);
   const children = tree.nodes.map(() => [] as HTMLElement[]);
-  for (const [index, record] of tree.nodes.entries()) if (record.parent !== -1) children[record.parent].push(owned[index]);
+  for (const [index, record] of tree.nodes.entries()) if (record.parent !== -1 && !detached.has(index)) children[record.parent].push(owned[index]);
   const roots: HTMLElement[] = [];
   for (const [index, node] of owned.entries()) {
     const record = tree.nodes[index];
+    if (detached.has(index)) continue;
     if ((!built.has(index) && node.dataset.preparedNode !== String(index)) || node.localName !== record.tag ||
         node.parentElement !== (record.parent === -1 ? stage : nodes[record.parent]) ||
         node.children.length !== children[index].length || [...node.children].some((child, indexInParent) => child !== children[index][indexInParent])) {
@@ -97,8 +102,8 @@ export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: O
 }
 
 export function buildPreparedTree(tree: PreparedTree, document: Document, own: Own, stage?: HTMLElement, assetOrigin?: PreparedAssetOrigin | null,
-  hiddenSubtrees?: ReadonlySet<number>): BuiltTree {
-  const existing = stage ? adoptPreparedTree(tree, stage, own, hiddenSubtrees, assetOrigin) : null;
+  omitted?: ReadonlySet<number>): BuiltTree {
+  const existing = stage ? adoptPreparedTree(tree, stage, own, omitted, assetOrigin) : null;
   if (existing) return existing;
   const build = builder(tree, document, own, assetOrigin);
   while (!build.complete) build.append();

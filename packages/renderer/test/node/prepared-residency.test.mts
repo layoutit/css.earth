@@ -236,14 +236,14 @@ test("frame-used fallback stays protected until a later publication reads its re
   manager.destroy();
 });
 
-test('Saturn actual interior atmosphere banks keep the published variant through rejection and retry',async()=>{
-  const definition=definitions.saturn,track=definition.materials.find(track=>track.id==='interior'); assert.ok(track);
+test('Saturn actual material banks keep the published variant through rejection and retry',async()=>{
+  const definition=definitions.saturn,track=definition.materials.find(track=>track.id==='exterior'); assert.ok(track);
   // A shadowless bank ships one fixed frame and no rows; its resource is that frame's.
   const urls=track.banks.map(bank=>assetUrl(definition,(bank.frames[0]??bank.fixed).resource));
-  assert.ok(urls.length>=3,'Use the actual retained cutaway material variants');
+  assert.ok(urls.length>=3,'Use the actual retained material variants');
   const {manager,commit,jobs,complete}=harness(catalog(urls,{capacity:2,reuse:false}));
   await commit(['0']);
-  const failed=manager.request({required:['1']});const job=jobs.at(-1);assert.ok(job);job.done=true;job.reject(new Error('interior material unavailable'));
+  const failed=manager.request({required:['1']});const job=jobs.at(-1);assert.ok(job);job.done=true;job.reject(new Error('material unavailable'));
   await assert.rejects(failed.ready,/decode/);await flush();assert.deepEqual(manager.stats().committed,['0']);
   const replacement=manager.request({required:['2']});await complete();await replacement.ready;manager.commit(replacement);
   assert.deepEqual(manager.stats().committed,['2']);assert.equal(manager.stats().pools[0].resident,1);manager.destroy();

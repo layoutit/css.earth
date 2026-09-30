@@ -37,6 +37,7 @@ const opening = (members: Control[]) => members[0]?.step?.opens === 'last' ? mem
 const listed = (dataset: Control) => !dataset.step || opening(stepMembers(dataset))?.id === dataset.id;
 const defaultControl = datasets.controls.find(dataset => dataset.id === datasets.defaultDataset);
 const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultControl))?.id : defaultControl?.id;
+import Detached from './Detached.astro';
 ---
 <section id={`${objectId}-dataset-list`} class="object-datasets">
   <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} data-drawn-page={page} hidden>
@@ -92,7 +93,7 @@ const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultContro
 >
   <div class="object-dataset-details-body" aria-live="polite" aria-atomic="true">
     {datasets.controls.map((dataset) => (
-      <div
+      <Detached detached={dataset.id !== datasets.defaultDataset}><div
         id={`${objectId}-${dataset.id}-details`}
         data-dataset-details={focus ? undefined : dataset.id}
         data-system-dataset-details={!focus && dataset.systemDataset ? dataset.id : undefined}
@@ -120,7 +121,7 @@ const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultContro
           {borrowedLegend(dataset) && <DatasetLegend {objectId} dataset={borrowedLegend(dataset)!} owner={dataset.id} />}
           <DatasetLegend {objectId} {dataset} />
         </DatasetDescription>
-      </div>
+      </div></Detached>
     ))}
   </div>
 </section>

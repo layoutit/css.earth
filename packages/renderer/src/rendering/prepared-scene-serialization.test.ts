@@ -6,6 +6,9 @@ import { expect, test as vitestTest } from 'vitest';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedCssObject } from '../loader.js';
 import { serializePreparedScene } from './prepared-scene-serialization.js';
+import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
+import { selectedPreparedVariant } from './prepared-presentation.js';
+import { initialObjectSelection } from '../runtime/object-contract.js';
 
 const root = new URL('../../../../', import.meta.url);
 // Saturn's prepared runtime is restored, not tracked; an unrestored checkout skips the file as the site test did through sourceTest().
@@ -24,22 +27,25 @@ test('serialization publishes the authenticated topology without changing its pr
   const before = JSON.stringify(definition);
   const scene = serializePreparedScene(definition);
   expect(scene.nodes).toBe(definition.tree.nodes.length);
-  expect([...scene.html.matchAll(/data-prepared-node="\d+"/g)].length).toBe(definition.tree.nodes.length);
+  // What the initial selection hides stays out of the markup (prepared-omitted-nodes.ts).
+  const variant = selectedPreparedVariant(definition, initialObjectSelection(definition.controls));
+  expect([...scene.html.matchAll(/data-prepared-node="\d+"/g)].length).toBe(definition.tree.nodes.length - omittedPreparedNodes(definition.tree, variant).size);
   expect([...scene.html.matchAll(/class="polycss-scene"/g)].length).toBe(1);
   expect(JSON.stringify(definition)).toBe(before);
 });
 
-test('every Saturn dataset keeps the same topology and applies its prepared presentation', () => {
+test('every Saturn dataset publishes the nodes it shows and applies its prepared presentation', () => {
   const before = JSON.stringify(definition);
   const normal = serializePreparedScene(definition);
   for (const dataset of definition.controls.datasets!.controls) {
     const scene = serializePreparedScene(definition, dataset.id);
     expect(scene.nodes).toBe(normal.nodes);
-    expect([...scene.html.matchAll(/data-prepared-node="\d+"/g)].map(match => match[0]))
-      .toEqual([...normal.html.matchAll(/data-prepared-node="\d+"/g)].map(match => match[0]));
+    // Each dataset's markup is the whole tree less what its selection hides.
+    const omitted = omittedPreparedNodes(definition.tree, selectedPreparedVariant(definition, initialObjectSelection(definition.controls, dataset.id)));
+    expect([...scene.html.matchAll(/data-prepared-node="(\d+)"/g)].map(match => Number(match[1])).sort((a, b) => a - b))
+      .toEqual(definition.tree.nodes.map((_, index) => index).filter(index => !omitted.has(index)));
     if (dataset.id === 'normal') expect(scene).toEqual(normal);
     else expect(scene.html).not.toBe(normal.html);
-    if (dataset.id === 'cross-section') expect(scene.attributes['data-view']).toBe('interior');
     if (dataset.id === 'ultraviolet') expect(scene.attributes['data-dataset']).toBe('ultraviolet');
   }
   expect(() => serializePreparedScene(definition, 'unknown')).toThrow(/Unknown object dataset/);

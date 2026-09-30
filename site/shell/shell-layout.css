@@ -415,6 +415,11 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 .object-search-category[aria-pressed="true"] { background: var(--explorer-header-control-selected); }
 .object-search-category:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
 .object-search-category .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
+/* Eight pills with icons need 840 px of header row, which a landscape screen narrower than 1440 px does not have (732 px at
+   1280): there the pills are words alone, 648 px. */
+@media (min-width: 821px) and (max-width: 1439px) and (orientation: landscape) {
+  .object-search-category .material-symbol { display: none; }
+}
 /* GitHub is an icon-only circle, like the panel toggles. */
 .object-header-link {
   display: inline-grid;

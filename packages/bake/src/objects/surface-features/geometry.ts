@@ -13,6 +13,12 @@ export function surfaceDirection(longitudeDeg: number, latitudeDeg: number, axes
 
 export const round = (value: number, digits = 6) => Number(value.toFixed(digits));
 
+/** The point along a direction where it meets a triaxial ellipsoid with semi-axes along the map's prime, east and north
+ * axes: (x/a)² + (y/b)² + (z/c)² = 1 in that basis. */
+export function triaxialSurfacePoint(direction: Vector3, axes: SurfaceFeatureAxes, [a, b, c]: readonly [number, number, number]): Vector3 {
+  return scaled(direction, 1 / Math.hypot(dot(direction, axes.prime) / a, dot(direction, axes.east) / b, dot(direction, axes.north) / c));
+}
+
 
 
 export const scaled = (v: Vector3, s: number, digits = 3): Vector3 => [round(v[0] * s, digits), round(v[1] * s, digits), round(v[2] * s, digits)];

@@ -382,48 +382,6 @@
             "value": "Other densities or another average thickness give a different map. Detail follows the gravity model: finer in the north, coarse in the south. Under Rachmaninoff basin the model falls slightly below zero, to −3 km, which is not physical."
           }
         ]
-      },
-      {
-        "id": "interior",
-        "label": "Interior",
-        "thumbnail": "mercury-dataset-interior.webp",
-        "surface": "mercury-interior-section@2x.webp",
-        "source": {
-          "id": "mercury-structure",
-          "path": "../interior/mercury-structure.json",
-          "url": "https://science.nasa.gov/mercury/facts/"
-        },
-        "poles": "mercury-interior-core-poles@2x.webp",
-        "legend": {
-          "kind": "categories",
-          "title": "Structure",
-          "meta": "Schematic",
-          "items": [
-            {
-              "label": "Metallic core",
-              "description": "85% of radius",
-              "color": [
-                158,
-                94,
-                55
-              ]
-            },
-            {
-              "label": "Mantle + crust",
-              "description": "366 km shell",
-              "color": [
-                112,
-                108,
-                101
-              ]
-            }
-          ],
-          "sourceUrl": "https://science.nasa.gov/mercury/facts/"
-        },
-        "falseColor": false,
-        "filter": "NASA-dimensioned retained 3D metallic-core cutaway",
-        "view": "interior",
-        "notes": "Interior structure"
       }
     ],
     "labels": {
@@ -431,7 +389,6 @@
       "color": "Color",
       "enhanced": "Enhanced color",
       "topography": "Elevation",
-      "interior": "Cross section",
       "loi": "Monochrome",
       "gravity": "Gravity",
       "crust": "Crust"

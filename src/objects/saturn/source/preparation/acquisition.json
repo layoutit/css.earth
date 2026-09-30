@@ -6,7 +6,7 @@
       "groups": [
         "refresh"
       ],
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
+      "path": "datasets/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits"
     },
     {
@@ -14,7 +14,7 @@
       "groups": [
         "refresh"
       ],
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
+      "path": "datasets/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
     },
     {
@@ -22,7 +22,7 @@
       "groups": [
         "refresh"
       ],
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
+      "path": "datasets/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits"
     },
     {
@@ -30,7 +30,7 @@
       "groups": [
         "refresh"
       ],
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
+      "path": "datasets/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
     },
     {
@@ -38,7 +38,7 @@
       "groups": [
         "refresh"
       ],
-      "path": "lenses/manifest.json",
+      "path": "datasets/manifest.json",
       "value": {
         "schema": "csssaturn-observation-dataset-sources@1",
         "sources": [

@@ -15,27 +15,15 @@
     },
     {
       "location": "public",
-      "filename": "enceladus-elevation-shadow-alpha@2x.webp",
-      "bytes": 1898206,
-      "sha256": "d746e98b91706e3dc39573890e9c04e9de5a4e57d4c5a85f0ceb0a4dd1fba922"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-elevation-shadow@2x.webp",
-      "bytes": 1502180,
-      "sha256": "2799bf94aad395d58ac927d8be54269136aefdf7a296eece7b06469f6d9579ce"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-elevation-surface-alpha@2x.webp",
-      "bytes": 4325726,
-      "sha256": "e5e4211107299ccc461054265f774af4338621b313b0afeb06a57919d01f002e"
+      "filename": "enceladus-elevation-poles@2x.webp",
+      "bytes": 193684,
+      "sha256": "25b1bc3e51aca7619c10fcfaa07397cd7ee5c2c041660f99f2f1c20dd012688f"
     },
     {
       "location": "public",
       "filename": "enceladus-elevation-surface@2x.webp",
-      "bytes": 4383018,
-      "sha256": "846878b5b8d6558cbdf0628f470649b87926622cf190b5187b89c7f9dc7920f2"
+      "bytes": 7466654,
+      "sha256": "41b6a3cbe10fe2d463f510ad458293340841bf34087422686efaf9f3c711a05d"
     },
     {
       "location": "public",
@@ -46,32 +34,20 @@
     {
       "location": "public",
       "filename": "enceladus-features.json",
-      "bytes": 318088,
-      "sha256": "4d7e508ea947c5fd5ef84bfdfac498b8926c98c3868c2d2afc22bd622f81c037"
+      "bytes": 317522,
+      "sha256": "0494f70bbe1b3666207c42e219df21039cb0c90feddd246794546b03c7397205"
     },
     {
       "location": "public",
-      "filename": "enceladus-geology-shadow-alpha@2x.webp",
-      "bytes": 566550,
-      "sha256": "052c1714b71072b2aab484667e75e9a64f829144199a9dd0851636eb0d9228e7"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-geology-shadow@2x.webp",
-      "bytes": 254964,
-      "sha256": "5bd9bd0bf8eb64dd78f54becb1707d65ccc5ba0a3f914d2cf54a560fd35a7a6b"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-geology-surface-alpha@2x.webp",
-      "bytes": 286508,
-      "sha256": "6d3b78f36fd8943a0c59f7b56d2ecf549a5a5b2162d721f1db6e989b38fe38f9"
+      "filename": "enceladus-geology-poles@2x.webp",
+      "bytes": 872,
+      "sha256": "7c80ab5f46aadae1990d12fa7e0276f88f5142e1b02f64b8731d2a5f13f8b2e7"
     },
     {
       "location": "public",
       "filename": "enceladus-geology-surface@2x.webp",
-      "bytes": 17846,
-      "sha256": "4c0d9512dc33baee75798c236b5a30aa9699edb64c82f2e8028be67b6f3a55bd"
+      "bytes": 12778,
+      "sha256": "61f3125799783d45d4f74ae1be532da3f211bbf73a1fc98ac40225bd00965237"
     },
     {
       "location": "public",
@@ -87,27 +63,15 @@
     },
     {
       "location": "public",
-      "filename": "enceladus-ice-absorption-shadow-alpha@2x.webp",
-      "bytes": 265484,
-      "sha256": "2a7991c76c49724e1aaa9b283fd70cc744b49f2fb3f435212ba579bdf387ef01"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-ice-absorption-shadow@2x.webp",
-      "bytes": 138552,
-      "sha256": "4a03214c7977622c2061c8c3a9c94ce0229d0645ffe7987550076d5c1cbc1073"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-ice-absorption-surface-alpha@2x.webp",
-      "bytes": 170688,
-      "sha256": "39416cab3eebd8e19116febc1323ad3c39f27f5fc0cc7b8e82307e5a0db62841"
+      "filename": "enceladus-ice-absorption-poles@2x.webp",
+      "bytes": 1728,
+      "sha256": "070a63e7aa4182c1403f153aa9aeca56c1a91e843f65f5d82f62f3850fa7c709"
     },
     {
       "location": "public",
       "filename": "enceladus-ice-absorption-surface@2x.webp",
-      "bytes": 53450,
-      "sha256": "373e3dbcc3f17b935ccbf25c278ceb174ff00f67d38e2855726666a0a204316d"
+      "bytes": 17068,
+      "sha256": "cfdfeb0d8a1c5e2352205b9bd46cc88cd2dc4ce54ac4974a7b39a62f8b352e75"
     },
     {
       "location": "public",
@@ -117,33 +81,27 @@
     },
     {
       "location": "public",
+      "filename": "enceladus-infrared-poles@2x.webp",
+      "bytes": 9500,
+      "sha256": "564e6f924678def69715f505ffcf61bec4ac9773107459e80ba25f58fee2e971"
+    },
+    {
+      "location": "public",
       "filename": "enceladus-infrared-ratio-legend.webp",
       "bytes": 196,
       "sha256": "cb891375c261f05e633ed9af6366e538fe4a3551f53ea2e5edcdd8c0c7897c7f"
     },
     {
       "location": "public",
-      "filename": "enceladus-infrared-ratio-shadow-alpha@2x.webp",
-      "bytes": 268880,
-      "sha256": "9d6d5493aa6ef24114246dc79fec27058da0110db7b9aa5df1fc46d0c5b8ce2d"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-infrared-ratio-shadow@2x.webp",
-      "bytes": 155720,
-      "sha256": "161d3277b1007a6d0a3e58c4c945da114eab3fa835e4882f93729e89410aedd3"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-infrared-ratio-surface-alpha@2x.webp",
-      "bytes": 173110,
-      "sha256": "2932896d87397346e2299395501d7a0e1cdd9c5cc39604ac718d6c7551e7d493"
+      "filename": "enceladus-infrared-ratio-poles@2x.webp",
+      "bytes": 1728,
+      "sha256": "070a63e7aa4182c1403f153aa9aeca56c1a91e843f65f5d82f62f3850fa7c709"
     },
     {
       "location": "public",
       "filename": "enceladus-infrared-ratio-surface@2x.webp",
-      "bytes": 55138,
-      "sha256": "fa3316a7282d6719a97a52cd9239c2ec0c4c6a9fef487da9a4ed982d23291a8a"
+      "bytes": 17298,
+      "sha256": "2140278382d5c6dba2f7319f26ec0e311cc7f160775be1adb4e1d262deacc876"
     },
     {
       "location": "public",
@@ -153,27 +111,9 @@
     },
     {
       "location": "public",
-      "filename": "enceladus-infrared-shadow-alpha@2x.webp",
-      "bytes": 224688,
-      "sha256": "7408e21f7a442c438c89224205a8df60d8dfb9a42a4678aae4b709c4149592ce"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-infrared-shadow@2x.webp",
-      "bytes": 80974,
-      "sha256": "2cdfd01b55bbcf25b3c69f264eaae3e35d50465850dbba5c32b43bc2c2dccf6e"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-infrared-surface-alpha@2x.webp",
-      "bytes": 320488,
-      "sha256": "12e1400c0e776b1e87b8daf7a19bc2513261512654e8e8e8120f48b88addc5eb"
-    },
-    {
-      "location": "public",
       "filename": "enceladus-infrared-surface@2x.webp",
-      "bytes": 272736,
-      "sha256": "824bc7625d75a8eb9f929e03b8d231e13c1704744fd744ca73c09af6025b5857"
+      "bytes": 239830,
+      "sha256": "58fd7f2df138aa342cc56ab0bfc072e5f0305c45ccf1edfedc07315412ca3139"
     },
     {
       "location": "public",
@@ -183,63 +123,27 @@
     },
     {
       "location": "public",
-      "filename": "enceladus-normal-shadow-alpha@2x.webp",
-      "bytes": 202600,
-      "sha256": "14999578bc5485acb14b27f5dae3b05b3268cfcf6ade58cec72a3eef11891a40"
+      "filename": "enceladus-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
     },
     {
       "location": "public",
-      "filename": "enceladus-normal-shadow@2x.webp",
-      "bytes": 79650,
-      "sha256": "c3f85e5aa3357527026261b21ce80ef7cdf002ec348fcbd9c83f838272109dbe"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-normal-surface-alpha@2x.webp",
-      "bytes": 333684,
-      "sha256": "7fc75ad5694acf82ca437dd489f4350e7392f17c02154f046f3fadc87e8e4dbb"
+      "filename": "enceladus-normal-poles@2x.webp",
+      "bytes": 16856,
+      "sha256": "609a597446b059ef564410543817e7977326c2e8f3d9b12c522173ce17f475f3"
     },
     {
       "location": "public",
       "filename": "enceladus-normal-surface@2x.webp",
-      "bytes": 344132,
-      "sha256": "41380d37aa33907aa560e5a8a639f3f06f454f27675e68cc38f2e645495c4a5e"
+      "bytes": 458524,
+      "sha256": "39ce876865b509ccf2bc6d85056fefd569738bb222ec2aef664a62023d81c139"
     },
     {
       "location": "public",
       "filename": "enceladus-normal-thumbnail.webp",
       "bytes": 1722,
       "sha256": "a7fadfaa0174835105a0ed8fe0fbdb6b80457d78e4f8b3bbfdf43d4f5cb328db"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-shape-shadow-alpha@2x.webp",
-      "bytes": 807600,
-      "sha256": "4d7e2670f458177187c2da6634c1c08eb0d738048bb24aff89ac4c4415f1fdac"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-shape-shadow@2x.webp",
-      "bytes": 109578,
-      "sha256": "e137fd6552e626972622a3d569c8ff2d800a8653ef60505339f69dbef85f8ac0"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-shape-surface-alpha@2x.webp",
-      "bytes": 803776,
-      "sha256": "3c000636741b91ce6453604775d8290cab656332d069cb49aa57b99f49931267"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-shape-surface@2x.webp",
-      "bytes": 101234,
-      "sha256": "084e4efd6c44d4237fc5d46cad06d729bd48cceed2ac2ad5332943b07e21bd63"
-    },
-    {
-      "location": "public",
-      "filename": "enceladus-shape-thumbnail.webp",
-      "bytes": 44,
-      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
     },
     {
       "location": "prepared",
@@ -250,44 +154,44 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1947,
-      "sha256": "44b9997db9ad1d0475703912969e613f506eb839cfd666564b2a10ec8ec19a76"
+      "bytes": 1667,
+      "sha256": "3f014e341a428299555e20367fe65a901bccca65b608ca6980a6b080d96da7f9"
     },
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 2873,
-      "sha256": "76d003a5b7f1c716993cba0d4382ea2ceef4e717282e948b441d8bf9c8666e9c"
+      "bytes": 2887,
+      "sha256": "22729b088db72f993d00faf673b0abf609063a810caa8c3e86b1d6617e0f4282"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3010,
-      "sha256": "52907c515183bbe00bbd234b8181fac756c051bfb9abaa0816e5aace5dd458c8"
+      "bytes": 2899,
+      "sha256": "305533703e29391200057ba6bedfd5fa8492947998402e3fcad3b308ca977cd2"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 5821,
-      "sha256": "e3e0af9cc1fac094702b9a73debe0b189390faebbe5e28e50a795dec93306451"
+      "bytes": 5329,
+      "sha256": "ad1dadf3558dd60b8641f559e5dd72410e82f94cb057eff560e5d3f4d0ffabb1"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 598,
-      "sha256": "dca692f8877e9c7400c89f3bfb082a0d2265b40fb5d7445c7034323732289a5e"
+      "sha256": "c43722cb49cef7184c55af181ef60afa9b244430496b188aba901e57c08f7432"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 9139,
-      "sha256": "9635cdd3e86ba3fac61aaf66209ddca07eebd774760ee0ac2ccd31823cb17471"
+      "bytes": 25750,
+      "sha256": "01133c9f58ff27050cb8163ecd29408bffdc066175236c188c1f8b30fc3e5163"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 718,
-      "sha256": "ced76af61ffff3c410936f65ad00fd01ba25aac9b5a1a28104a07118de3f7d97"
+      "bytes": 630,
+      "sha256": "b376e27d26356d0520fa65a1e51ea0516afd371843bfa77ec484d8785d652e28"
     },
     {
       "location": "prepared",
@@ -327,21 +231,15 @@
     },
     {
       "location": "prepared",
-      "filename": "minimaps/shape.webp",
-      "bytes": 424,
-      "sha256": "db5f9365ac1126293a111f13117d88044659fb134f62d7e01b0bb92cfbef60a3"
-    },
-    {
-      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1358403,
-      "sha256": "5a2978d802613829d43b7aece73a335d1c501784a34e5c2b3a27cf14355422fb"
+      "bytes": 224266,
+      "sha256": "1009a49965f9efe6acff839ee58ff5ee73d4a11cd6bd0f7de7715539cf62446d"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1474489,
-      "sha256": "2570d76b39f30e77e4ff06a8fced94be75db475bda99146b6f08c3cde5d0e1a3"
+      "bytes": 291563,
+      "sha256": "751195ebe101001fee085e59c396cc26be9b4ff20bea93fa8445591b267ec8a8"
     },
     {
       "location": "prepared",
@@ -358,8 +256,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 9146,
-      "sha256": "dbb54ff43c625309fa482117312169bf4db0d7598a54fce315d40ab06019fee1"
+      "bytes": 10506,
+      "sha256": "5ff564fc9f7eb5c3ee390978319e8bb4bef3d5974c0df0fcf03c332bf8f682d6"
     },
     {
       "location": "prepared",
@@ -370,8 +268,8 @@
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1223,
-      "sha256": "302c330a1bc8ea15da39d0d8e44411fcfa1f9c60b97d258f81ff3c4ab0502622"
+      "bytes": 1235,
+      "sha256": "7388eca86a5ee61e40166c4e2b8f2042a2ccceef7346d2f997613f69426d5912"
     }
   ]
 }

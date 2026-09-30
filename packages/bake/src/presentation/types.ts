@@ -30,7 +30,7 @@ export interface Bank { billboard: Billboard; presentations: AtlasAddress[]; row
 export interface RasterAssets {
   surfaceDimensions: { width: number; height: number };
   lighting: { banks: Record<string, Bank>; frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number };
-  interior: Record<string, string>;
+  interior?: Record<string, string>;
   /** An unlit body's plate sizes; present instead of a lighting bank. */
   emission?: { offLimbContext: { logicalSize: number }; limbMaterial: { logicalSize: number } };
 }
@@ -43,7 +43,7 @@ export interface Scene {
   camera: CameraPlan & {defaultTransform: string}; systemTransform: string; bodyTransform: string;
   starfield: CubicSkyPlan;
   bodyLeaves: PreparedLeaf[]; body: {leaves: PreparedLeaf[]; seamRepair?: SeamRepair; surfacePages?: RasterPagePlan}; preparedSurface?: {seamRepair?: SeamRepair};
-  interior: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
+  interior?: {bodyTransform: string; outerBodyLeaves: PreparedLeaf[]; coreLeaves: PreparedLeaf[]; sectionLeaves: PreparedLeaf[];
     presentationOrbit: {durationMilliseconds: number; millisecondsPerControlDegree: number; keyframes: Keyframe[]}};
   /** Flat discs in the body's equatorial plane, such as a ring, drawn under the same system node as the surface. */
   planes?: {id: string; className: string; url: string; color: string; radius: number; leaves: PreparedLeaf[]}[];

@@ -1,3 +1,4 @@
+import { sectionElements } from '@cssearth/renderer';
 /**
  * The prepared focus card's dataset banks (every deep-sky volume and image-layer
  * bank, with their controls, context panels and resource maps) are the same on
@@ -10,7 +11,7 @@ export const FOCUS_FRAGMENT_URL = '/focus-fragment/';
 
 /** True while the card still holds the empty placeholders. */
 export function focusBanksPending(root: ParentNode): boolean {
-  return root.querySelector('[data-focus-banks-slot]') !== null;
+  return sectionElements(root, '[data-focus-banks-slot]').length > 0;
 }
 
 export async function fetchFocusFragment(fetchUrl: (url: string) => Promise<Response>): Promise<string> {
@@ -22,7 +23,8 @@ export async function fetchFocusFragment(fetchUrl: (url: string) => Promise<Resp
 /** Replace each placeholder with the matching bank group of a parsed fragment. */
 export function spliceFocusBanks(root: HTMLElement, fragment: ParentNode): void {
   const document = root.ownerDocument;
-  for (const slot of [...root.querySelectorAll<HTMLElement>('[data-focus-banks-slot]')]) {
+  // A slot can sit in a closed tab's detached panel (tab-panels.mts).
+  for (const slot of sectionElements(root, '[data-focus-banks-slot]')) {
     const name = slot.dataset.focusBanksSlot;
     const group = fragment.querySelector<HTMLElement>(`[data-focus-banks="${name}"]`);
     if (!group) throw new Error(`Focus fragment ${FOCUS_FRAGMENT_URL} has no "${name}" bank group.`);

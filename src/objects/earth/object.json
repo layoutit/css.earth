@@ -104,14 +104,6 @@
               "id": "enso-2026-09-28",
               "source": "content",
               "material": "atmosphere"
-            },
-            {
-              "id": "cross-section",
-              "source": "content"
-            },
-            {
-              "id": "mantle-tomography",
-              "source": "content"
             }
           ]
         }
@@ -123,11 +115,6 @@
           "model": "lit"
         }
       ],
-      "cutaway": {
-        "source": "paged-ellipsoid",
-        "surface": "body",
-        "dataset": "cross-section"
-      },
       "atmosphere": {
         "source": "paged-ellipsoid",
         "material": "atmosphere"
