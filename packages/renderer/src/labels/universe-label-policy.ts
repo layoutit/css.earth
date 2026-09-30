@@ -11,9 +11,9 @@ export const UNIVERSE_LABEL_POLICY = Object.freeze({
 export const LOCAL_GROUP_SCALE = Object.freeze({ returnDistanceM: 240e3 * 3.085677581491367e16, enterDistanceM: 300e3 * 3.085677581491367e16 });
 
 /** One handoff between the planet hosts and the galaxy's published tracers, by the camera's distance from the selected
- * body (the distance that gates the galaxy volume, so a visited far system keeps its own markers): over 4 to 9 kpc the
- * hosts fade out as the galaxy's dots and backing fade in, so neither shows at full strength beside the other and the
- * view is never empty. A 5 to 7 kpc band passed in one or two wheel steps and read as a switch; two fades in sequence
+ * body (so a visited far system keeps its own markers): over 4 to 9 kpc the
+ * hosts fade out as the galaxy's dots fade in, so neither shows at full strength beside the other and the view is never
+ * empty. A 5 to 7 kpc band passed in one or two wheel steps and read as a switch; two fades in sequence
  * left a black gap between them. UI thresholds, not physical ones; the planet hosts follow where surveys looked, not
  * the galaxy's shape. */
 export const GALAXY_SCALE = Object.freeze({ handoffStartM: 4e3 * 3.085677581491367e16, handoffEndM: 9e3 * 3.085677581491367e16 });

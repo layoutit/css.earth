@@ -126,18 +126,6 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
           }
           finally { await rm(cache, { recursive:true, force:true }); }
         }
-        if (recipe.sky) {
-          const [{ parseSkyRecipe }, { installRuntimeAssets }, { inventoryAssets }] = await Promise.all([
-            import('../sky/index.ts'), import('./setup-assets.ts'), import('../delivery/index.ts'),
-          ]);
-          const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(volumeSource, recipe.sky)).toString('utf8')) as unknown);
-          if (skyRecipe.stars) {
-            const starDirectory = resolve(projectRoot, 'src/objects', skyRecipe.stars.object);
-            const assets = await inventoryAssets(projectRoot, [skyRecipe.stars.object], { location: 'prepared' });
-            const result = await installRuntimeAssets(assets);
-            console.log(`${id}: ${skyRecipe.stars.object} prepared dependency restored (${result.installed} downloaded, ${result.reused} reused)`);
-          }
-        }
         console.log(`${id}: pinned volume source restored and verified`);
         continue;
       }

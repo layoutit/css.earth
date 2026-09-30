@@ -28,8 +28,6 @@ test('decodes the checked prepared point field and reads its manifest and bank o
   expect(payload.nodes[0]?.count).toBe(payload.stars.length);
   expect(payload.stars.filter(star => star.coverageAnchor)).toHaveLength(96);
   expect(payload.stars.some(star => star.name === 'Sirius')).toBe(true);
-  expect(payload.directPoints?.points).toHaveLength(payload.policy.activeSlots);
-  expect(payload.directPoints?.points.filter(star => star.coverageAnchor)).toHaveLength(96);
   expect(payload.photometry.floor).toBe(1 / 255);
   expect(payload.labels.activeSlots).toBe(1);
   expect(payload.resources.find(resource => resource.path === payload.atlas.path)).toBeDefined();
@@ -69,9 +67,7 @@ test('rejects malformed hierarchy, rows and manifest fields', async () => {
   expect(() => parsePreparedCssPointFieldManifest({ ...data, photometry: { ...photometry, floor: 2 } })).toThrow('photometry');
   const labels = data.labels as Record<string, unknown>;
   expect(() => parsePreparedCssPointFieldManifest({ ...data, labels: { ...labels, transitionSlots: 0 } })).toThrow('labels');
-  const directPoints = data.directPoints as { points: Record<string, unknown>[] };
-  expect(() => parsePreparedCssPointFieldManifest({ ...data, directPoints: { ...(data.directPoints as object),
-    points: directPoints.points.map((point, index) => index === 1 ? { ...point, sourceRow: directPoints.points[0]!.sourceRow } : point) } })).toThrow('direct star point');
+  expect(() => parsePreparedCssPointFieldManifest({ ...data, directPoints: {} }), 'the direct star sample is gone').toThrow('unsupported');
   const bank = data.bank as Record<string, unknown>, quantization = bank.quantization as Record<string, unknown>[];
   expect(() => parsePreparedCssPointFieldManifest({ ...data, bank: { ...bank, encoding: 'other@1' } })).toThrow('bank');
   expect(() => parsePreparedCssPointFieldManifest({ ...data, bank: { ...bank, starCount: (bank.starCount as number) + 1 } })).toThrow('layout');
@@ -87,8 +83,7 @@ test('Sun appearance verifies the manifest without fetching or decoding the star
   const reader = transport();
   const appearance = await loadPreparedPointAppearance(descriptor, reader);
   expect(reader.read.mock.calls).toEqual([[url]]);
-  expect(Object.keys(appearance).sort()).toEqual(['atlas', 'directPoints', 'frame', 'id', 'photometry', 'resources']);
+  expect(Object.keys(appearance).sort()).toEqual(['atlas', 'frame', 'id', 'photometry', 'resources']);
   expect(appearance.atlas).toEqual(manifest.atlas);
   expect(appearance.photometry).toEqual(manifest.photometry);
-  expect(appearance.directPoints).toEqual(manifest.directPoints);
 });

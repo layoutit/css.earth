@@ -64,17 +64,17 @@ test('body navigation switches at the shared camera detail threshold, independen
   assert.equal(bodyViewAtCamera(null, frame, optics, "fixture"), 'detail');
 });
 
-test('overview leaves the Solar System when its bodies fade and restores correctly at maximum zoom', () => {
+test('overview leaves the Solar System midway through its fade, with a lower return threshold', () => {
   const { fadeOutStartDistanceM: start, hiddenDistanceM: hidden } = context.system, middle = Math.sqrt(start * hidden);
-  assert.equal(overviewScopeAtCamera(camera(hidden * .99)), 'system');
-  assert.equal(overviewScopeAtCamera(camera(hidden)), 'milky-way');
+  assert.equal(overviewScopeAtCamera(camera(middle * .99)), 'system');
+  assert.equal(overviewScopeAtCamera(camera(middle)), 'milky-way');
   assert.equal(overviewScopeAtCamera(camera(context.camera.maximumDistanceM)), 'observable-universe');
   const gpc = 1e9 * 3.085677581491367e16;
   assert.equal(overviewScopeAtCamera(camera(.9 * gpc)), 'nearby-universe', 'short of 1 Gpc the view is the nearby universe');
   assert.equal(overviewScopeAtCamera(camera(.9 * gpc), 'observable-universe'), 'observable-universe', 'and returns only below 800 Mpc');
   assert.equal(overviewScopeAtCamera(camera(.7 * gpc), 'observable-universe'), 'nearby-universe');
-  assert.equal(overviewScopeAtCamera(camera(middle * 1.01), 'milky-way'), 'milky-way');
-  assert.equal(overviewScopeAtCamera(camera(middle * .99), 'milky-way'), 'system');
+  assert.equal(overviewScopeAtCamera(camera(start * 1.01), 'milky-way'), 'milky-way');
+  assert.equal(overviewScopeAtCamera(camera(start * .99), 'milky-way'), 'system');
 });
 
 test('zooming out from the Sun walks the registry overviews in their order, and nothing else', () => {

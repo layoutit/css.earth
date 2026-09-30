@@ -25,7 +25,7 @@ import { restoreFactsheetEvidence } from '@cssearth/bake/objects/acquisition';
 import type { FactsheetSourceTransport } from '@cssearth/bake/objects/acquisition';
 import { prepareVolumePresentations, readPreparedVolumes, volumePresentationCompilerClosure } from './prepare-volume-presentation.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
-import { CONTEXT_ROUTE, DATASET_ROUTES } from '../../../src/platform/dataset-destination.mts';
+import { CONTEXT_ROUTE, DATASET_ROUTES } from '@cssearth/objects/provenance';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
@@ -39,7 +39,7 @@ export const explorationCompilerClosure = [
   'site/source/agency-logos.json', 'packages/bake/src/sources/read-source-catalogue.ts',
   'packages/objects/src/sources/catalog.ts', 'packages/objects/src/provenance/source-usage.ts', 'packages/objects/src/node/source-manifest.ts',
   'packages/objects/src/provenance/prepared-sources.ts', 'packages/bake/src/sources/source-catalogue-inputs.ts',
-  'src/platform/dataset-destination.mts', 'packages/objects/src/provenance/dataset-routes.ts', ...volumePresentationCompilerClosure,
+  'packages/objects/src/provenance/dataset-destination.ts', 'packages/objects/src/provenance/dataset-routes.ts', ...volumePresentationCompilerClosure,
   'packages/bake/src/sources/factsheet-sources.ts', 'packages/objects/src/registry/fact-order.ts', 'packages/bake/src/objects/acquisition/restore-factsheet-evidence.ts',
   'packages/core/src/validate.ts', 'packages/bake/src/objects/acquisition/object-operations.ts', 'packages/bake/src/objects/acquisition/operations-acquisition.ts',
   'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',

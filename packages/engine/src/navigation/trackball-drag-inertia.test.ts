@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '@cssearth/objects/node/source-test';
-const test = sourceTest();
-import { projectSphereDrag } from "@cssearth/engine";
+import { test } from 'vitest';
+import { projectSphereDrag } from "./sphere-drag.js";
 
 import {
   advanceDragThrow,
@@ -13,7 +12,7 @@ import {
   projectTrackballDelta,
   recordDragSample,
   resetDragHistory,
-} from "./trackball-drag-inertia.mts";
+} from "./trackball-drag-inertia.js";
 
 const trackball = {centerX:346.5,centerY:300,radius:144.65263161811257,viewportWidth:693,surfaceRadius:144.65263161811257,
   focalLength:598.73636504};

@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
-import { sourceTest } from '@cssearth/objects/node/source-test';
-const test = sourceTest();
-import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "@cssearth/engine";
+import { test } from 'vitest';
+import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity } from "./sphere-drag.js";
 
 const metrics = { centerX: 704, centerY: 479.5, radius: 295.4867,
   focalLength: 1408 * Math.sqrt(3) / 2 };

@@ -33,14 +33,11 @@ rows, never centroid proxies. One real brightest apparent star per each of 96
 all-sky cube cells receives the prepared alpha floor. The complete bank supports
 the fixed 2,048 active and 2,048 transition slots used by specialist consumers.
 
-The application does not load that complete bank. The manifest carries a
-deterministic 2,048-row direct display sample: all 96 prepared sky-coverage
-anchors, then the brightest remaining HYG rows by apparent magnitude at the
-Sun. Positions and magnitudes include the explicit astrometry reconciliation
-above; palette indices remain from the pinned catalogue. The browser projects the sample through
-eight retained CSS `box-shadow` nodes. It fades in as the baked near-star cube
-fades out, over the plain Milky Way image, and fades out when the completed
-Milky Way volume contribution takes over.
+The application does not load that complete bank. It reads only the manifest's
+atlas and photometry for the Sun's navigation marker. It no longer draws any of
+these stars itself: since 2026-09-30 the stars around the Sun are the Milky Way's
+catalogue dots (`src/objects/milky-way`), and the 2,048-row display sample the
+manifest used to carry for a separate star layer is gone.
 
 The HYG Stellar Database by David Nash / Astronexus and its prepared derivatives
 are licensed CC-BY-SA-4.0. This is a local stellar neighbourhood (all rows within

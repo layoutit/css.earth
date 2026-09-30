@@ -33,8 +33,8 @@ its validators accept); the renderer never imports the bake.
   sources, palette, hierarchy, point atlas and photometry, diffuse sky, encoded bank). It imports `raster` and `volume`.
 - `src/shell/` is published as `@cssearth/bake/shell` (Node only): the surface-shell bake and its CSS compiler. It
   imports `scene` and `volume`.
-- `src/sky/` is published as `@cssearth/bake/sky` (Node only): the cubic sky bake (recipes, EXR source, baked faces,
-  near-star sprites) and its CSS compiler. It imports `volume-leaves` and `volume`.
+- `src/sky/` is published as `@cssearth/bake/sky` (Node only): the cubic sky bake (recipes, EXR source, baked faces)
+  and its CSS compiler. It imports `volume-leaves` and `volume`.
 - `src/density/` is published as `@cssearth/bake/density` (Node only): the density-volume object bake (acquisition,
   column depth, fixed discs, slice atlases and retirement, dataset-bank promotion). It imports `sky`, `volume-leaves` and
   `volume`.
@@ -116,8 +116,8 @@ its validators accept); the renderer never imports the bake.
   suites in `src/navigation/`, with the navigation preparation's in `site/test/`.
 - `src/facility-renders/` is published as `@cssearth/bake/facility-renders` (Node only): the illustrative poses of the rendered
   facility models, and the types of the three.js renderer (`render.ts`) that `packages/bake/cli/prepare-facility-renders.mts`
-  bundles from its source into a browser page. The command loads the application's dataset routes from the checkout and passes
-  them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `src/facility-renders/`.
+  bundles from its source into a browser page. The command imports the canonical dataset routes from
+  `@cssearth/objects/provenance` and passes them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `src/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
   not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the planets'
   photometric phase charts. It imports `raster`, `runtime-source`, `objects/raster` and `objects/charts`. Its commands are

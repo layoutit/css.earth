@@ -23,7 +23,7 @@ export function createSearchPresentation(documentTarget: Document) {
     present(open: boolean, searching: boolean) {
       setPanelHidden(browser, !open);
       setPanelHidden(selectedContent, open);
-      browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial objects');
+      browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial bodies');
       browser.toggleAttribute('data-search-results', searching);
       results.hidden = !searching;
     },

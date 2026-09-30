@@ -101,6 +101,13 @@ export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolum
   return profile.nearOpacity + (profile.fullOpacity - profile.nearOpacity) * fade;
 }
 
+/** Inside the galaxy the NASA band is the sky; outside it the galaxy is its picture and the galaxies beyond show. The
+ * camera is outside once it is farther from the body it looks at than the disc's half-height, fully at twice that: by
+ * zoom, so orbiting at one distance never switches between them. Without a disc height the camera is always outside. */
+export function galaxyOutsideFade(distanceM: number, discHalfHeightM: number | undefined): number {
+  return discHalfHeightM === undefined ? 1 : logarithmicFade(distanceM, discHalfHeightM, 2 * discHalfHeightM);
+}
+
 /** How many times nearer than a system's fade the stars around it start to fill the view. */
 const STAR_FIELD_BEFORE_SYSTEM_FADE = 20;
 /**

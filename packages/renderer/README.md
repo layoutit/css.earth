@@ -54,6 +54,7 @@ packages/renderer/
 │   ├── solar-system/   heliocentric geometry, orbits, and the prepared cubic-sky and directional-Sun contracts
 │   ├── sky/, stars/, volume/, shell/, image-layers/, labels/
 │   └── styles/         runtime stylesheets
+├── test/node/          Node suites and fixtures; test:node runs them, Vitest excludes them
 ├── tsup.config.ts      built entries
 ├── AGENTS.md           package rules
 └── CLAUDE.md           symlink to AGENTS.md
@@ -67,7 +68,7 @@ allocates large backing surfaces for tiny projected faces. `createLeafBoxBlocks.
 prepared levels while detached; after connection, `publish()` keeps the existing motion freeze and paced settling.
 No new geometry, texture or device-specific level policy is introduced.
 
-The connection-order regression uses Neptune's real prepared groups in `src/platform/object-selection-runtime.test.mts`.
+The connection-order regression uses Neptune's real prepared groups in `packages/renderer/test/node/object-selection-runtime.test.mts`.
 The leaf-box unit test checks initial selection, unchanged repeated preparation and the subsequent motion freeze.
 Matched iPad captures record the reduced layer allocation, remaining first-paint
 stalls and measurement limits.
