@@ -25,12 +25,9 @@
     "tsBuildInfoFile": "../../output/tsbuildinfo/platform.tsbuildinfo"
   },
   "include": [
-    "**/*.mts",
-    "../navigation/**/*.mts"
+    "solar-geometry.mts"
   ],
   "exclude": [
-    "test",
-    "**/*.test.mts",
-    "../navigation/**/*.test.mts"
+    "**/*.test.mts"
   ]
 }

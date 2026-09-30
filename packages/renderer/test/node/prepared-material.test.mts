@@ -8,11 +8,11 @@ import { createPreparedMaterialPublisher, preparedMaterialFrame } from '@csseart
 import { selectedPreparedVariant } from '@cssearth/renderer/testing';
 import { initialObjectSelection } from '@cssearth/renderer/testing';
 import { retainedPresentationFixture } from "./fixtures/object-runtime-package.mts";
-import definitionJson from "../../src/objects/venus/prepared/runtime.json" with {type: "json"};
+
 
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';
 import { parse, object, array, tuple, number, boolean, string } from '@cssearth/core/schema';
-const definition = parsePreparedObjectRuntime(definitionJson);
+const definition = parsePreparedObjectRuntime(await loadObjectTestDefinition('venus'));
 const referenceSchema = object({ source: object({}), records: array(object({
   shadows: boolean, direction: tuple(number, number, number),
   expected: object({frame: number, lightRollDegrees: number, sunViewDirection: tuple(number, number, number), shadowsEnabled: boolean}),
@@ -22,7 +22,7 @@ const referenceSchema = object({ source: object({}), records: array(object({
 const nativeElement = (element: ReturnType<ReturnType<typeof retainedPresentationFixture>['document']['createElement']>) => element as unknown as HTMLElement;
 
 test("Venus preserves roll and shadow boundaries while selecting physical directional phases",()=>{
-  const reference=parse(JSON.parse(readFileSync(new URL("./test/fixtures/venus-material-reference.json",import.meta.url), "utf8")), referenceSchema, "Venus material reference");
+  const reference=parse(JSON.parse(readFileSync(new URL("./fixtures/venus-material-reference.json",import.meta.url), "utf8")), referenceSchema, "Venus material reference");
   assert.ok(reference.records.length>400);
   const f=retainedPresentationFixture(definition);
   try{

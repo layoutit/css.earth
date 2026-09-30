@@ -4,7 +4,7 @@ import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";
+import { SCENE_OBJECTS as OBJECTS } from "../objects.mts";
 import { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA, requirePreparedData, requirePreparedPresentation } from "@cssearth/bake/presentation";
 import { requireObjectRuntimeDefinition } from "@cssearth/bake/contract";
 
