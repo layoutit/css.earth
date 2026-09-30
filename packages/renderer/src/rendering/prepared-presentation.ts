@@ -357,7 +357,7 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
         if (paced) { const leaves = leafBoxes.drainOutset(wanted, budget); styleWrites += leaves; return leaves; }
         if (readStep(binding.target, binding.property) === wanted) return 0;
         writeStep(binding.target, binding.property, wanted); return 1;
-      }, { frame: globalThis.requestAnimationFrame?.bind(globalThis) ?? null });
+      });
       return (value: string, detached: boolean) => {
         if (detached) {
           wanted = value;

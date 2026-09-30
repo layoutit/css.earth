@@ -1,18 +1,21 @@
+import { opacityClockFor, type OpacityWindow } from '../stars/opacity-clock.js';
 import type { SceneLifetime } from '@cssearth/engine';
 
-export function waitForScenePaint(lifetime: SceneLifetime, windowTarget: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame'> = window): Promise<void> {
+export function waitForScenePaint(lifetime: SceneLifetime, windowTarget: OpacityWindow = window): Promise<void> {
   if (lifetime.disposed) return Promise.resolve();
+  // The document's one frame clock (opacity-clock.ts).
+  const clock = opacityClockFor(windowTarget);
   return new Promise(resolve => {
     let frame = 0;
     lifetime.onDispose(() => {
-      if (frame) windowTarget.cancelAnimationFrame(frame);
+      if (frame) clock.cancel(frame);
       frame = 0;
       resolve();
     });
-    frame = windowTarget.requestAnimationFrame(() => {
+    frame = clock.request(() => {
       frame = 0;
       if (lifetime.disposed) return;
-      frame = windowTarget.requestAnimationFrame(() => { frame = 0; resolve(); });
+      frame = clock.request(() => { frame = 0; resolve(); });
     });
   });
 }

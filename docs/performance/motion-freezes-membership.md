@@ -45,10 +45,11 @@ gesture.
 - **Signal:** `src/renderers/css/navigation/camera-motion-signal.ts` tells whether the camera moves and whether it
   coasts. It is announced as `objectmotionchange` `{ active, coasting }` on the input surface. The drag controls report
   `drag`, `inertia` and `fly-to`; the wheel zoom reports `zoom` and `glide`.
-- **Pacer:** `src/renderers/css/rendering/settle-pacer.ts` holds deferred work, either while the camera moves or only
-  while it coasts. It then runs the work a slice per frame. A slice starts at 16 units and can grow to 64; after a frame
-  over 25 ms the pacer waits a frame and halves the slice. Leaf-box steps use it and hold during any motion, because a
-  resized leaf repaints.
+- **Pacer:** a document has one pacer (`packages/renderer/src/rendering/settle-pacer.ts`), on its one frame clock
+  (`packages/renderer/src/stars/opacity-clock.ts`), and one budget a frame that every owner shares in turn. A frame
+  starts at 16 units and can grow to 64; after a frame over 25 ms the pacer waits a frame and halves it. Each owner says
+  what holds its work: any motion (leaf-box steps and the seam outset, because a resized leaf repaints), only a coast, or
+  nothing (a mesh's reveal, a mount's activation and a body's feature names, which land during a zoom or a flight).
 
 ## Mesh detail survives input reversals
 

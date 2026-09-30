@@ -6,6 +6,8 @@ import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import { orbitSegmentTransform } from '../solar-system/orbit-segment-presentation.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
+import { opacityClockFor } from '../stars/opacity-clock.js';
+import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
 import type { LabelScreenRect } from './screen-label-layout.js';
 import { labelOcclusionFor } from './label-occlusion.js';
 import { admitSurfaceFeatureLabels, passesZoomGate, projectSurfaceFeature, projectSurfaceOutline, zoomShare, POINT_LABEL_GAP_PX } from './surface-feature-layout.js';
@@ -56,14 +58,15 @@ const ARRIVAL_DIAMETER_SHARE = 0.45;
 const MINIMUM_FRAMED_RADIUS_M = 25_000;
 
 const CLICK_SLOP_PIXELS = 5;
-/** Catalogue names are written and measured in batches. All 2,000 names of a body at once took
- * one 56-70 ms task in the middle of the arrival flight. */
-const LABELS_PER_FRAME = 128;
+// Catalogue names are written in slices of the document's pacer (settle-pacer.ts), a name a unit. All 2,000 names of a
+// body at once took one 56-70 ms task in the middle of the arrival flight.
 
 export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene, zoomRange, navigation, flightLimits, onFlight, onSelect, lifetime, pickingHost, inputSurface, onError, transport }: SurfaceFeatureMountOptions): SurfaceFeatureLayerRuntime {
   if (!host?.ownerDocument || !target || !scene.contains(target)) throw new TypeError('Surface feature labels need a host and a mesh target inside the scene.');
   const document = host.ownerDocument, windowTarget = document.defaultView;
   if (!windowTarget) throw new TypeError('Surface feature labels require a mounted window.');
+  // The document's one frame clock (opacity-clock.ts): one frame callback a frame, whoever asks.
+  const clock = opacityClockFor(windowTarget);
   const root = host.querySelector<HTMLElement>(':scope > .prepared-surface-features') ?? document.createElement('div');
   if (root.dataset.surfaceFeatures && root.dataset.surfaceFeatures !== objectId) throw new TypeError('Prepared feature caption belongs to another object.');
   root.className = 'prepared-surface-features';
@@ -83,7 +86,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   let destroyed = false, playing = false, enabled = false, frames = 0, zoomGate = false, outlinePieces = 0;
   /** The default catalogue: requested (or held until a flight lands), fetched, written into the labels in batches, then loaded. */
   let load: { readonly kind: 'idle' } | { readonly kind: 'held' } | { readonly kind: 'fetching' }
-    | { readonly kind: 'populating'; readonly catalog: PreparedSurfaceFeatureCatalog; frame: number | null }
+    | { readonly kind: 'populating'; readonly catalog: PreparedSurfaceFeatureCatalog; next: number }
     | { readonly kind: 'loaded'; readonly catalog: PreparedSurfaceFeatureCatalog }
     | { readonly kind: 'failed'; readonly error: string } = { kind: 'idle' };
   let view: Parameters<SurfaceFeatureLayerRuntime['publish']>[0] | null = null;
@@ -181,8 +184,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
       if (destroyed) return;
       createEntries();
       catalog.features.forEach((feature, index) => { entries[index]!.feature = feature; });
-      load = { kind: 'populating', catalog, frame: null };
-      populate(0);
+      load = { kind: 'populating', catalog, next: 0 };
+      populating.request();
     }, failure => {
       if (destroyed || controller.signal.aborted) { rejectLoaded(failure); return; }
       load = { kind: 'failed', error: failure instanceof Error ? failure.message : String(failure) };
@@ -202,25 +205,25 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     // A changing camera is not work for an empty/disabled label layer. Keep
     // one pass when visible labels or a caption actually need to be cleared.
     if (pendingFrame !== null || loopFrame !== null || (!canDraw() && visible.size === 0 && shownIndex === null)) return;
-    pendingFrame = windowTarget!.requestAnimationFrame(() => { pendingFrame = null; refresh(); });
+    pendingFrame = clock.request(() => { pendingFrame = null; refresh(); });
   }
-  function populate(start: number) {
-    const populating = load;
-    if (destroyed || populating.kind !== 'populating') return;
-    populating.frame = null;
-    const { catalog } = populating, end = Math.min(catalog.features.length, start + LABELS_PER_FRAME);
+  // The arrival flight keeps moving while the names are written: nothing holds them.
+  const populating = createSettlePacer(budget => {
+    const current = load;
+    if (destroyed || current.kind !== 'populating') return 0;
+    const { catalog } = current, start = current.next, end = Math.min(catalog.features.length, start + Math.max(1, Math.floor(budget)));
     for (let index = start; index < end; index++) {
       const entry = entries[index]!, feature = entry.feature!;
       populateEntry(entry, feature);
     }
-    if (end < catalog.features.length) {
-      populating.frame = windowTarget!.requestAnimationFrame(() => populate(end));
-      return;
+    current.next = end;
+    if (end === catalog.features.length) {
+      load = { kind: 'loaded', catalog };
+      schedule();
+      resolveLoaded(catalog);
     }
-    load = { kind: 'loaded', catalog };
-    schedule();
-    resolveLoaded(catalog);
-  }
+    return end - start;
+  }, { frame: framePacerFor(windowTarget), holdWhile: 'never' });
   function populateEntry(entry: Entry, feature: PreparedSurfaceFeature) {
     entry.feature = feature;
     entry.element.dataset.featureLabel = feature.id;
@@ -255,8 +258,8 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     syncLoop();
   }
   function syncLoop() {
-    if (following() && loopFrame === null) loopFrame = windowTarget!.requestAnimationFrame(loop);
-    if (!following() && loopFrame !== null) { windowTarget!.cancelAnimationFrame(loopFrame); loopFrame = null; }
+    if (following() && loopFrame === null) loopFrame = clock.request(loop);
+    if (!following() && loopFrame !== null) { clock.cancel(loopFrame); loopFrame = null; }
   }
   /** The mesh node's current transform chain up to the scene root, spin included. */
   function readLocal(): DOMMatrix {
@@ -420,9 +423,9 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     if (load.kind === 'idle' || load.kind === 'held') rejectLoaded(new DOMException('Surface feature loading was cancelled.', 'AbortError'));
     controller.abort();
     flight?.cancel(); flight = null;
-    if (pendingFrame !== null) windowTarget!.cancelAnimationFrame(pendingFrame);
-    if (loopFrame !== null) windowTarget!.cancelAnimationFrame(loopFrame);
-    if (load.kind === 'populating' && load.frame !== null) windowTarget!.cancelAnimationFrame(load.frame);
+    if (pendingFrame !== null) clock.cancel(pendingFrame);
+    if (loopFrame !== null) clock.cancel(loopFrame);
+    populating.destroy();
     fonts?.removeEventListener('loadingdone', measure);
     pickingHost.removeEventListener('objecthoverchange', onHover);
     document.body.removeEventListener('objectsurfacelabelschange', onLabelsChange);
