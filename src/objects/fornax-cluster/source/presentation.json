@@ -1,0 +1,33 @@
+{
+  "provenance": {
+    "name": "Fornax Cluster members",
+    "products": [
+      {
+        "id": "dots",
+        "label": "Fornax Cluster Catalog, CDS VII/180",
+        "process": "Keep the catalogue's certain members that Cosmicflows-4 does not hold; place each at the cluster's Cosmicflows-4 group distance, spread in depth as widely as the members spread across the sky; colour by type and tone by absolute B magnitude as the Nearby Universe field does.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "members",
+          "cosmicflows-4-groups",
+          "kc96-elliptical",
+          "kc96-s0",
+          "kc96-sa",
+          "kc96-sb",
+          "kc96-sc"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "A member's depth within the cluster is assumed (as deep as wide), not measured."
+        ]
+      }
+    ]
+  }
+}

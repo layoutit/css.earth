@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import type { PreparedGalaxyRecord } from '@cssearth/catalog';
-import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogAperture, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
+import { admitGalaxyLabels, catalogVolumeCorners, projectCatalogBounds, projectCatalogPosition } from './galaxy-catalog-layout.js';
 
 const world = { referenceFrame: 'test', epochJdTt: 1,
   pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } };
@@ -46,17 +46,6 @@ test('catalogues use the shared desktop budget, including a distant selected lab
   assert.equal(accepted.length, 24); assert.equal(accepted[0]!.object.id, '39');
   assert.deepEqual(admitGalaxyLabels([...rows].reverse(), [], '39'), accepted);
 });
-test('an R500 aperture is projected with sphere perspective, including off-axis displacement and the near-plane limit', () => {
-  const centred = projectCatalogPosition([0, 0, -100], world, viewport)!;
-  const result = projectCatalogAperture(10, centred, viewport)!;
-  assert.equal(result.x, 2); assert.equal(result.y, -3);
-  assert.ok(Math.abs(result.a - (100 * 10 / Math.sqrt(10000 - 100))) < 10 ** -10 / 2, `${result.a} is not close to ${100 * 10 / Math.sqrt(10000 - 100)}`);
-  assert.ok(Math.abs(result.b - (result.a)) < 10 ** -10 / 2, `${result.b} is not close to ${result.a}`);
-  const off = projectCatalogAperture(10, projectCatalogPosition([50, 0, -100], world, viewport)!, viewport)!;
-  assert.ok(off.x > 52); assert.ok(off.a > off.b);
-  assert.equal(projectCatalogAperture(101, centred, viewport), null);
-});
-
 test('cloud bounds follow physical scale and orientation instead of its central catalogue marker', () => {
   const corners = catalogVolumeCorners({ referenceFrame: 'test', epochJdTt: 1,
     originM: [0, 0, -100], metersPerUnit: 2, localToReferenceXyzw: [0, 0, Math.SQRT1_2, Math.SQRT1_2],

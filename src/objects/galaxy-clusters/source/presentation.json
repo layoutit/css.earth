@@ -8,11 +8,12 @@
       {
         "id": "catalogue",
         "label": "MCXC-II, CDS J/A+A/688/A187, 2024-11-29",
-        "process": "Select seven MCXC-II identifiers and integrate their redshifts in the declared flat cosmology.",
+        "process": "Select seven MCXC-II identifiers; place each at the distance of its Cosmicflows-4 group (the group of its brightest galaxy); integrate the redshifts in the declared flat cosmology only to check the catalogue's angular scale.",
         "recipe": "source/catalogue.json",
         "selector": "",
         "inputs": [
-          "mcxc-ii"
+          "mcxc-ii",
+          "cosmicflows-4-groups"
         ],
         "outputs": [
           "prepared/catalogue.json"
@@ -22,7 +23,7 @@
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "Distances are modelled comoving values; no peculiar-velocity correction or physical boundary is claimed."
+          "Each centre is the X-ray position at its group's averaged distance; no cluster boundary is claimed, and R500 is an analysis aperture."
         ]
       }
     ]

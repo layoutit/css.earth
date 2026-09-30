@@ -48,8 +48,7 @@ export function sourceDocumentation(objectId: string, name: string) {
 }
 
 export function focusSourceDocumentation(object: PreparedCatalogObject, catalogId: string) {
-  const owner = isPreparedCluster(object) ? 'galaxy-clusters'
-    : object.detailedObjectId ?? (catalogId === 'galaxies' ? 'local-group' : object.id);
+  const owner = object.detailedObjectId ?? (isPreparedCluster(object) ? 'galaxy-clusters' : catalogId === 'galaxies' ? 'local-group' : object.id);
   return sourceDocumentation(owner, object.name);
 }
 

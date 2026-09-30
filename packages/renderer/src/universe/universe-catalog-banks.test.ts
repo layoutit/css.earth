@@ -41,3 +41,23 @@ test('a galaxy drawn from image layers shows its billboard from afar and hands i
   publish(1, 'galaxy');
   assert.equal((billboard.style.display === 'none' || Number(billboard.style.opacity) === 0), true, 'its loaded slices replace the billboard');
 });
+
+test('a package of catalogue dots mounts them when its row is selected, and hides them when another is', () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
+    pointBanks: [{ id: 'cluster', url: '/cluster/dots.bin' }] });
+  const publish = (selected?: string) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, selected);
+  const layer = () => root.querySelector<HTMLElement>('[data-catalogue-points]');
+  publish();
+  assert.equal(layer(), null, 'nothing is mounted or fetched before its row is selected');
+  publish('cluster');
+  assert.equal(layer()?.style.display, '', 'selected, its dots draw');
+  publish('another');
+  assert.equal(layer()?.style.display, 'none', 'another selection hides them and keeps them mounted');
+  lifetime.destroy();
+  assert.equal(layer(), null, 'the scene takes them with it');
+});
