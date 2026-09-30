@@ -18,6 +18,7 @@ import { loadGeometryAdapters, presentationHostAdapters } from '@cssearth/bake/o
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.ts';
 import { attachSurfaceFeatures, longitudeDistanceDeg, measureAtlasLeftEdge, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
+import { attachSurfacePanoramas } from '@cssearth/bake/objects/panoramas';
 import { loadNativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean;
@@ -158,6 +159,14 @@ async function assertDefaultViewsFaceDatasets(objectDirectory: string, definitio
 /** Feature anchors address scene-tree nodes, so they carry over only while the tree keeps the published node topology. A node's
  * style and the shared declaration table may change (a leaf's raster size, say) without moving any node. When nodes move
  * (a removed dataset's cutaway), `null` asks the caller to anchor them afresh: that reads only tracked JSON and the scene. */
+/** Surface panoramas join the definition after its features. A reuse run carries the published plan: its faces are already
+ * published, and re-sampling the source images would only repeat them. */
+async function withSurfacePanoramas(definition: Record<string, unknown>, context: { descriptor: AuthoredObjectDescriptor; sources: ReadonlyMap<string, VerifiedSource>;
+  sourceDirectory: string; publicDirectory: string; published?: Record<string, unknown> | null }): Promise<Record<string, unknown>> {
+  if (!context.descriptor.recipe.panoramas) return definition;
+  if (context.published && isRecord(context.published.panoramas)) return { ...definition, panoramas: context.published.panoramas };
+  return (await attachSurfacePanoramas({ ...context, definition })).definition;
+}
 function carryPublishedFeatures(definition: Record<string, unknown>, published: { runtime: Record<string, unknown>; content: Record<string, unknown> }) {
   if (published.runtime.features === undefined) return { definition, features: null };
   // Finalization appends nodes and activation groups to the lane's tree; the lane's own tree must be the published prefix.
@@ -294,8 +303,10 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     // Named features anchor on the rendered ellipsoid (attach.ts casts map directions through the lane's own surface sampler).
     const attached = (publishedFeatures && carryPublishedFeatures(prepared.definition as unknown as Record<string, unknown>, publishedFeatures))
       ?? await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: prepared.definition as unknown as Record<string, unknown> });
-    if (attached.features) { await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`); await writeFeatureContent(outputDirectory, attached.features); }
-    const definition = attached.definition as typeof prepared.definition;
+    const pagedDefinition = await withSurfacePanoramas(attached.definition, { descriptor, sources, sourceDirectory, publicDirectory, published: publishedFeatures?.runtime });
+    if (attached.features) await writeFeatureContent(outputDirectory, attached.features);
+    if (attached.features || pagedDefinition !== attached.definition) await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(pagedDefinition)}\n`);
+    const definition = pagedDefinition as unknown as typeof prepared.definition;
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       objectDirectory: write ? objectDirectory : outputDirectory,
       preparedDirectory: outputDirectory,
@@ -332,7 +343,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (terrestrialAttached.features) await writeFeatureContent(outputDirectory, terrestrialAttached.features);
     // Triangle faces also publish atlases masked to their triangles, for browsers without corner-shape.
     const { prepareTriangleAlphaAtlases } = await import('@cssearth/bake/objects/layers/terrestrial');
-    const terrestrialDefinition = await prepareTriangleAlphaAtlases(terrestrialAttached.definition as never, { namespace: descriptor.id, publicDirectory, publicBase: `/scenes/${descriptor.id}/` });
+    const terrestrialDefinition = await prepareTriangleAlphaAtlases(await withSurfacePanoramas(terrestrialAttached.definition, { descriptor, sources, sourceDirectory, publicDirectory }) as never, { namespace: descriptor.id, publicDirectory, publicBase: `/scenes/${descriptor.id}/` });
     await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(terrestrialDefinition)}\n`);
     const prepared = { ...terrestrialPrepared, definition: terrestrialDefinition as typeof terrestrialPrepared.definition };
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
@@ -426,7 +437,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.datasetFocus ? { datasetFocus: presentation.datasetFocus } : {}), ...(lightCurve ? { lightCurve } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], datasets: content.datasets as unknown as PresentationInputs['datasets'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] }, presentationHostAdapters(await solarGeometry()));
   const attached = (publishedFeatures && carryPublishedFeatures(definition as unknown as Record<string, unknown>, publishedFeatures))
     ?? await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: definition as unknown as Record<string, unknown> });
-  const runtime = attached.definition, features = attached.features !== null;
+  const runtime = await withSurfacePanoramas(attached.definition, { descriptor, sources, sourceDirectory, publicDirectory, published: publishedFeatures?.runtime }), features = attached.features !== null;
   if (attached.features) await writeFeatureContent(outputDirectory, attached.features);
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);
   await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,

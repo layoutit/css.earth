@@ -1,3 +1,4 @@
+import type { PreparedSurfacePanoramas } from '../panorama/types.js';
 import type { ObjectControls, ObjectSelection, DatasetVolume } from "./object-contract.js";
 import type { SceneLifetime } from "@cssearth/engine";
 import type { PerspectiveCameraPlan } from "../navigation/types.js";
@@ -24,6 +25,7 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
   readonly destinations?: unknown;
   readonly surfaceHit?: PreparedSurfaceHit;
   readonly features?: PreparedSurfaceFeaturePlan;
+  readonly panoramas?: PreparedSurfacePanoramas;
   /** Set only when the build published this object's textures and scene JSON to an
    * asset origin (`ASSET_ORIGIN`); unset reproduces today's same-origin `/scenes/` behavior. */
   readonly assetOrigin?: PreparedAssetOrigin;

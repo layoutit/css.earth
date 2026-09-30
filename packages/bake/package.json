@@ -141,6 +141,11 @@
       "import": "./dist/objects/surface-features.js",
       "default": "./dist/objects/surface-features.js"
     },
+    "./objects/panoramas": {
+      "types": "./dist/objects/panoramas.d.ts",
+      "import": "./dist/objects/panoramas.js",
+      "default": "./dist/objects/panoramas.js"
+    },
     "./objects/layers/observation": {
       "types": "./dist/objects/layers/observation.d.ts",
       "import": "./dist/objects/layers/observation.js",

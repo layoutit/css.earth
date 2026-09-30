@@ -60,6 +60,7 @@
     "./runtime/*": "./src/runtime/*",
     "./shell/*": "./src/shell/*",
     "./sky/*": "./src/sky/*",
+    "./panorama/*": "./src/panorama/*",
     "./solar-system/*": "./src/solar-system/*",
     "./stars/*": "./src/stars/*",
     "./test/*": "./test/*",

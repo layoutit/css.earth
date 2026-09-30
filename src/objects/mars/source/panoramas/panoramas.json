@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-surface-panoramas@1",
+  "source": "Mastcam-Z 360° Panorama Collection, Arizona State University",
+  "sourcePage": "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/",
+  "retrievedAt": "2026-09-30",
+  "projection": {
+    "quote": "Most of the images are in a simple cylindrical projection, with 0° azimuth (due north in the Martian or Site frame) in the center and 180° azimuth (due south) at the left and right edges, and typically -70° elevation at the bottom and +10° elevation at the top.",
+    "quoteUrl": "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/",
+    "azimuthAtCentreDeg": 0,
+    "topElevationDeg": 10
+  },
+  "localization": {
+    "path": "features/traverses/m2020_best_tactical.csv",
+    "product": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/"
+  },
+  "panoramas": [
+    {
+      "id": "butler-landing",
+      "title": "Octavia E. Butler Landing",
+      "sols": [3, 11],
+      "camera": "Mastcam-Z",
+      "image": "panoramas/Mastcam-Z_360_Butler_Landing_1_Sols03-11_L0_natural.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "pageUrl": "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/"
+    },
+    {
+      "id": "van-zyl-overlook",
+      "title": "Van Zyl Overlook",
+      "sols": [53, 64],
+      "camera": "Mastcam-Z",
+      "image": "panoramas/Mastcam-Z_360_Van_Zyl_Sols53-64_L0_natural_2x.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "pageUrl": "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/"
+    },
+    {
+      "id": "three-forks-depot",
+      "title": "Three Forks sample depot",
+      "sols": [690, 692],
+      "camera": "Mastcam-Z",
+      "image": "panoramas/Mastcam-Z_360_Three_Forks_Depot_2_Sols690-692_L0_natural.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "pageUrl": "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/"
+    },
+    {
+      "id": "belva",
+      "title": "Belva crater",
+      "sols": [789, 791],
+      "camera": "Mastcam-Z",
+      "image": "panoramas/Mastcam-Z_360_Belva_Sols789-791_L0_natural.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "pageUrl": "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/"
+    },
+    {
+      "id": "bright-angel",
+      "title": "Bright Angel",
+      "sols": [1178, 1178],
+      "camera": "Mastcam-Z",
+      "image": "panoramas/Mastcam-Z_360_Bright_Angel_Z63_Sol1178_L0_natural.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "pageUrl": "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "source-mars-asu-mastcam-z-360-butler-landing",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Mars · asu mastcam z 360 butler landing",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Butler_Landing_1_Sols03-11_L0_natural.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs/95"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech/ASU/MSSS",
+      "scope": "The asu mastcam z 360 butler landing input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Free for public or scientific community use without explicit permission; photo credit NASA/JPL-Caltech/ASU/MSSS and a reference to Bell et al. (2025), LPSC 56, abstract 1719, requested",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

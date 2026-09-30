@@ -6,6 +6,7 @@ import { requireSky, requireSun } from './sky.js';
 import { requireMaterials } from './materials.js';
 import { requireAnimations, requireOptionalPresentation, requireVariants, requireViewBindings, requireTextureLevels } from './presentation.js';
 import { requireDepthPartitions } from './depth-partitions.js';
+import { requireSurfacePanoramas } from '../panorama/validation.js';
 
 /** Validate external prepared JSON before any DOM, image, or animation is created.
  * `parsedJson` marks a direct JSON.parse result: only its numbers need the
@@ -17,7 +18,7 @@ export function parsePreparedObjectRuntime(value: unknown, { parsedJson = false 
 function requireDefinition(value: unknown, parsedJson: boolean): asserts value is ObjectRuntimeDefinition {
   if (!parsedJson || !parsedJsonNumbersFinite(value)) requireJsonData(value);
   const plan = record(value, 'runtime plan', ['schema', 'id', 'controls', 'camera', 'sky', 'sun', 'assets', 'tree', 'variants', 'materials',
-    'viewBindings', 'animations', 'motion', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'surfaceHit', 'textureLevels', 'features']);
+    'viewBindings', 'animations', 'motion', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'surfaceHit', 'textureLevels', 'features', 'panoramas']);
   if (plan.schema !== 'cssearth-object-runtime@5') fail('runtime schema is incompatible');
   const id = text(plan.id, 'object id'); if (!/^[a-z][a-z0-9-]*$/.test(id)) fail('object identity is invalid');
   requireControls(plan.controls); requireCamera(plan.camera); requireSky(plan.sky);
@@ -33,4 +34,5 @@ function requireDefinition(value: unknown, parsedJson: boolean): asserts value i
   if (plan.motion !== undefined) requireAnimations(plan.motion, plan.tree, true);
   requireDepthPartitions(plan.depthPartitions, plan.tree);
   requireOptionalPresentation(plan, plan.tree, plan.controls);
+  if (plan.panoramas !== undefined) requireSurfacePanoramas(plan.panoramas);
 }

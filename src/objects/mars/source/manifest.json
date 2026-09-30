@@ -423,7 +423,8 @@
       "acquisition": "Downloaded 2026-09-12 from https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/.",
       "redistribution": "NASA data product, credit the publisher",
       "consumers": [
-        "features"
+        "features",
+        "panoramas"
       ],
       "title": "Perseverance traverse (PLACES localizations)",
       "displayCredit": "NASA PDS",
@@ -2575,6 +2576,141 @@
           }
         ]
       }
+    },
+    {
+      "id": "asu-mastcam-z-360-butler-landing",
+      "path": "panoramas/Mastcam-Z_360_Butler_Landing_1_Sols03-11_L0_natural.jpg",
+      "origin": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Butler_Landing_1_Sols03-11_L0_natural.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "license": "Free for public or scientific community use without explicit permission; photo credit NASA/JPL-Caltech/ASU/MSSS and a reference to Bell et al. (2025), LPSC 56, abstract 1719, requested",
+      "licenseEvidence": [
+        "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/",
+        "https://www.jpl.nasa.gov/jpl-image-use-policy",
+        "https://www.hou.usra.edu/meetings/lpsc2025/pdf/1719.pdf"
+      ],
+      "acquisition": "Full-resolution natural-colour JPEG linked from the Mastcam-Z 360° Panorama Collection page, retrieved 2026-09-30",
+      "redistribution": "Prepared cube faces and a list thumbnail, resampled from the published image, with the team's credit line and abstract reference",
+      "consumers": [
+        "panoramas"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-asu-mastcam-z-360-butler-landing",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "asu-mastcam-z-360-van-zyl-overlook",
+      "path": "panoramas/Mastcam-Z_360_Van_Zyl_Sols53-64_L0_natural_2x.jpg",
+      "origin": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Van_Zyl_Sols53-64_L0_natural_2x.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "license": "Free for public or scientific community use without explicit permission; photo credit NASA/JPL-Caltech/ASU/MSSS and a reference to Bell et al. (2025), LPSC 56, abstract 1719, requested",
+      "licenseEvidence": [
+        "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/",
+        "https://www.jpl.nasa.gov/jpl-image-use-policy",
+        "https://www.hou.usra.edu/meetings/lpsc2025/pdf/1719.pdf"
+      ],
+      "acquisition": "Full-resolution natural-colour JPEG linked from the Mastcam-Z 360° Panorama Collection page, retrieved 2026-09-30",
+      "redistribution": "Prepared cube faces and a list thumbnail, resampled from the published image, with the team's credit line and abstract reference",
+      "consumers": [
+        "panoramas"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-asu-mastcam-z-360-van-zyl-overlook",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "asu-mastcam-z-360-three-forks-depot",
+      "path": "panoramas/Mastcam-Z_360_Three_Forks_Depot_2_Sols690-692_L0_natural.jpg",
+      "origin": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Three_Forks_Depot_2_Sols690-692_L0_natural.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "license": "Free for public or scientific community use without explicit permission; photo credit NASA/JPL-Caltech/ASU/MSSS and a reference to Bell et al. (2025), LPSC 56, abstract 1719, requested",
+      "licenseEvidence": [
+        "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/",
+        "https://www.jpl.nasa.gov/jpl-image-use-policy",
+        "https://www.hou.usra.edu/meetings/lpsc2025/pdf/1719.pdf"
+      ],
+      "acquisition": "Full-resolution natural-colour JPEG linked from the Mastcam-Z 360° Panorama Collection page, retrieved 2026-09-30",
+      "redistribution": "Prepared cube faces and a list thumbnail, resampled from the published image, with the team's credit line and abstract reference",
+      "consumers": [
+        "panoramas"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-asu-mastcam-z-360-three-forks-depot",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "asu-mastcam-z-360-belva",
+      "path": "panoramas/Mastcam-Z_360_Belva_Sols789-791_L0_natural.jpg",
+      "origin": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Belva_Sols789-791_L0_natural.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "license": "Free for public or scientific community use without explicit permission; photo credit NASA/JPL-Caltech/ASU/MSSS and a reference to Bell et al. (2025), LPSC 56, abstract 1719, requested",
+      "licenseEvidence": [
+        "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/",
+        "https://www.jpl.nasa.gov/jpl-image-use-policy",
+        "https://www.hou.usra.edu/meetings/lpsc2025/pdf/1719.pdf"
+      ],
+      "acquisition": "Full-resolution natural-colour JPEG linked from the Mastcam-Z 360° Panorama Collection page, retrieved 2026-09-30",
+      "redistribution": "Prepared cube faces and a list thumbnail, resampled from the published image, with the team's credit line and abstract reference",
+      "consumers": [
+        "panoramas"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-asu-mastcam-z-360-belva",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "asu-mastcam-z-360-bright-angel",
+      "path": "panoramas/Mastcam-Z_360_Bright_Angel_Z63_Sol1178_L0_natural.jpg",
+      "origin": "https://mcz-images.sese.asu.edu/Mastcam-Z_360_Bright_Angel_Z63_Sol1178_L0_natural.jpg",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS",
+      "license": "Free for public or scientific community use without explicit permission; photo credit NASA/JPL-Caltech/ASU/MSSS and a reference to Bell et al. (2025), LPSC 56, abstract 1719, requested",
+      "licenseEvidence": [
+        "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/",
+        "https://www.jpl.nasa.gov/jpl-image-use-policy",
+        "https://www.hou.usra.edu/meetings/lpsc2025/pdf/1719.pdf"
+      ],
+      "acquisition": "Full-resolution natural-colour JPEG linked from the Mastcam-Z 360° Panorama Collection page, retrieved 2026-09-30",
+      "redistribution": "Prepared cube faces and a list thumbnail, resampled from the published image, with the team's credit line and abstract reference",
+      "consumers": [
+        "panoramas"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-asu-mastcam-z-360-bright-angel",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -2894,6 +3030,25 @@
     {
       "path": "catalogues/chloride/Chloride_Salt-bearing_Material_THEMIS_clon0.layer.json",
       "purpose": "Published GIS layer description: fields, extent, spatial reference and symbols (renderer)."
+    },
+    {
+      "id": "mars-surface-panoramas",
+      "path": "panoramas/panoramas.json",
+      "origin": "Repository-authored list of Mastcam-Z 360° panoramas from https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/ (retrieved 2026-09-30), with the collection's own projection sentence and the PDS PLACES localisation table that places each panorama by its sols",
+      "credit": "NASA/JPL-Caltech/ASU/MSSS; NASA PDS",
+      "license": "Repository-authored factual compilation; the quoted sentence remains the Mastcam-Z team's text",
+      "licenseEvidence": [
+        "https://mastcamz.asu.edu/mastcam-zs-360-panorama-collection/"
+      ],
+      "acquisition": "Compiled 2026-09-30 from the collection page",
+      "redistribution": "Facts with citations; no images",
+      "consumers": [
+        "panoramas"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Repository-authored panorama list; each image is its own catalogued input."
+      }
     }
   ]
 }

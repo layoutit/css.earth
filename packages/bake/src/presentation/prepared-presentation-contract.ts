@@ -1,3 +1,4 @@
+import { requireSurfacePanoramas } from "@cssearth/renderer/panorama/validation.ts";
 import { requireTextureBindings } from '@cssearth/renderer/validation/texture-bindings.ts';
 import { requireTextureLevels, requireTexturePlacements } from '@cssearth/renderer/validation/prepared-texture-levels.ts';
 import { isArray } from '@cssearth/core';
@@ -79,8 +80,9 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   const controls = requireObjectControls(options.controls);
   const assets = options.assets ?? plan?.assets;
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "surfaceHit", "textureLevels", "features"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "surfaceHit", "textureLevels", "features", "panoramas"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
+  if ((plan as { panoramas?: unknown }).panoramas !== undefined) requireSurfacePanoramas((plan as { panoramas?: unknown }).panoramas);
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
   validatePreparedCubicSky(plan.sky);
