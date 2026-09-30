@@ -88,6 +88,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   }
   function mountCatalog(bank: PreparedCatalogBank) {
     if (catalog || lifetime.disposed) return;
+    globalThis.performance?.mark?.('cssEarth:catalog:mount');
     catalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: bank.payload, galaxySample: bank.galaxySample,
       clusters: bank.clusters?.payload, nebulae: bank.nebulae,
       renderedObjectIds: new Set([...declarations.map(image => image.id), ...volumeDeclarations.map(dataset => dataset.id)]),
