@@ -12,7 +12,7 @@ import { fetchFocusFragment, focusBanksPending, spliceFocusBanks } from '../focu
 import { selectionKey } from '../scene/scene-selection.mts';
 import type { DestinationPresentation } from '../destination-browser.mts';
 import type { ShellCamera, PlaybackState } from '../browser/browser-types.mts';
-import { errorMessage, requiredElement } from '../browser/browser-types.mts';
+import { errorMessage, requiredElement, sectionElement } from '../browser/browser-types.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 import { createSceneLifetime } from "@cssearth/engine";
@@ -93,7 +93,7 @@ export function mountObjectShell({
   lifetime.onDispose(() => drawer.ownerDocument.removeEventListener('objectmotionchange', motionChanged, { capture: true }));
   function updateBodyCard() {
     if (coasting || navigationTransition?.retainsSourceCard) return;
-    if (!information?.isConnected || !drawer.contains(information)) information = drawer.querySelector<HTMLElement>('.object-information-panel');
+    if (!information || !drawer.contains(sectionPlaceholder(information))) information = sectionElement(drawer, '.object-information-panel');
     const subject = navigationTransition?.cardSubject ?? (readSelection().kind === 'satellite-system' ? 'satellite-system' : 'body');
     const view = subject === 'satellite-system' ? 'overview' : 'detail';
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
@@ -238,7 +238,7 @@ export function mountObjectShell({
         settlePreview(keep);
         if (content) {
           setObject(content);
-          const controls = [...drawer.querySelectorAll<HTMLElement>('.object-information-panel .object-card-tabs, .object-information-panel [data-information-panel]')]
+          const controls = [...sectionElement(drawer, '.object-information-panel')?.querySelectorAll<HTMLElement>('.object-card-tabs, [data-information-panel]') ?? []]
             .filter(node => node.dataset.informationGroup !== 'overview').map(node => [node, node.inert] as const);
           for (const [node] of controls) node.inert = true;
           releaseArrivalControls = () => { for (const [node, inert] of controls) if (node.inert !== inert) node.inert = inert; };

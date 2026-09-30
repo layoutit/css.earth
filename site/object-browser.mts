@@ -4,7 +4,7 @@ import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from './browser/browser-types.mts';
 import type { SceneSubject } from './scene/scene-selection.mts';
 import type { DestinationPresentation } from './destination-browser.mts';
-import { requiredElement } from './browser/browser-types.mts';
+import { requiredElement, sectionElement } from './browser/browser-types.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { presentOverviewResults, createSearchPresentation } from './search/search-results-presentation.mts';
@@ -50,8 +50,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   };
   const search = documentTarget.querySelector(".object-sidebar-search");
   const searchCard = documentTarget.querySelector(".object-sidebar-search-card");
-  const information = documentTarget.querySelector(".object-information-panel");
-  const browser = documentTarget.querySelector(".object-browser");
+  const information = sectionElement(documentTarget, ".object-information-panel");
+  const browser = sectionElement(documentTarget, ".object-browser");
   if (!(search instanceof windowTarget.HTMLInputElement) ||
       !(searchCard instanceof windowTarget.HTMLElement) ||
       !(information instanceof windowTarget.HTMLElement) ||

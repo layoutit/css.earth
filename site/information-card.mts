@@ -1,6 +1,7 @@
 import type { SceneLifetime } from '@cssearth/engine';
-import type { BrowserWindow } from './browser/browser-types.mts';
+import { sectionElement, type BrowserWindow } from './browser/browser-types.mts';
 import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
+import { mountDatasetPickerLayout } from './dataset-picker.mts';
 
 type Panel = readonly [string, HTMLDetailsElement];
 const TREE_PANEL_STATE = 'tree-sections@1';
@@ -13,10 +14,11 @@ export function mountInformationCard(drawer: HTMLElement, objectId: string,
     return controller;
   };
   const tabs = retain(createInformationTabsController(drawer, lifetime));
-  const dataset = drawer.querySelector<HTMLDetailsElement>('.object-information-panel > .object-dataset-content');
+  const dataset = sectionElement(drawer, '.object-information-panel')?.querySelector<HTMLDetailsElement>(':scope > .object-dataset-content');
   // The dataset is a desktop tab and a stacked mobile section, always expanded.
   if (dataset && !dataset.open) dataset.open = true;
   retain(createChartPixelAlignmentController(drawer, windowTarget));
+  retain(mountDatasetPickerLayout(drawer, windowTarget));
   return {
     show: tabs.show,
     // Restore saved openness after the minimap and view readout are bound.
@@ -37,7 +39,7 @@ function informationPanels(card: HTMLElement, windowTarget: BrowserWindow): Pane
 }
 
 export function createInformationTabsController(drawer: HTMLElement, lifetime: SceneLifetime, requestedGroup?: string) {
-  return createTabsController(drawer.querySelector<HTMLElement>('.object-information-panel'), lifetime, requestedGroup);
+  return createTabsController(sectionElement(drawer, '.object-information-panel'), lifetime, requestedGroup);
 }
 
 /** Programmatic selection for camera/dataset navigation. The browser owns
@@ -65,7 +67,7 @@ export function createTabsController(card: HTMLElement | null, lifetime: SceneLi
 
 function createPanelController(drawer: HTMLElement, objectId: string, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
   const storageKey = `css.earth:${objectId}:panels`;
-  const informationPanel = drawer.querySelector<HTMLElement>(".object-information-panel");
+  const informationPanel = sectionElement(drawer, ".object-information-panel");
   if (!(informationPanel instanceof windowTarget.HTMLElement)) {
     throw new Error("Object shell combined information panel is missing.");
   }

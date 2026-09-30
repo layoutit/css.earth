@@ -1,3 +1,4 @@
+import { sectionPlaceholder, showSection } from '../rendering/detached-sections.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
 import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/native-projection.js';
@@ -145,6 +146,8 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     if (detailVisible && full.style.display === 'none') revealLayer(full, presentation.stacks.flatMap(stack => stack.leaves)
       .filter(leaf => leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS).map(leaf => options.resolveResource(leaf.texturePath)));
     full.style.display = detailVisible ? 'block' : 'none';
+    // Off, the whole slice volume leaves the page; a distance crossing brings it back (detached-sections.ts).
+    if (runtime && full.hidden === detailVisible) showSection(full, detailVisible);
     distant.style.display = impostorsVisible ? 'block' : 'none';
     if (responsive) options.host.style.setProperty('--native-volume-mix', nativeProjectedFade(diameterPixels,
       publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels));
@@ -180,7 +183,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     for (const node of views.values()) node.style.backgroundImage = '';
   }, destroy() {
     if (destroyed) return; destroyed = true;
-    runtime?.destroy(); full.remove(); distant.remove();
+    runtime?.destroy(); sectionPlaceholder(full).remove(); full.remove(); distant.remove();
   } });
 }
 

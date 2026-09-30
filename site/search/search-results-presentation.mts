@@ -1,5 +1,5 @@
 import type { FindResult } from './find-protocol.mts';
-import { requiredElement, setPanelHidden } from '../browser/browser-types.mts';
+import { requiredElement, requiredSection, setPanelHidden, setSectionShown } from '../browser/browser-types.mts';
 
 /** Keep existing overview destinations reachable as ordinary search rows. */
 export function presentOverviewResults(browser: HTMLElement, value: string) {
@@ -14,14 +14,15 @@ export function presentOverviewResults(browser: HTMLElement, value: string) {
 
 /** Native requests and live interactions publish the same retained sidebar. */
 export function createSearchPresentation(documentTarget: Document) {
-  const browser = requiredElement<HTMLElement>(documentTarget, '.object-browser');
+  // The browser is mounted only while search is open (detached-sections.ts).
+  const browser = requiredSection(documentTarget, '.object-browser');
   const selectedContent = requiredElement<HTMLElement>(documentTarget, '.object-selected-content');
   const results = requiredElement<HTMLElement>(browser, '#object-category-results');
   const empty = requiredElement<HTMLElement>(browser, '.object-empty');
   const categories = [...documentTarget.querySelectorAll<HTMLElement>('.object-search-category')];
   return {
     present(open: boolean, searching: boolean) {
-      setPanelHidden(browser, !open);
+      setSectionShown(browser, open);
       setPanelHidden(selectedContent, open);
       browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial bodies');
       browser.toggleAttribute('data-search-results', searching);

@@ -19,7 +19,8 @@ const setAttribute = (element: Element, name: string, value: string) => { if (el
 /** Keep the collapsed dataset's image and text aligned with the committed option, including sequence steps. */
 export function publishDatasetPreview(root: ParentNode | null, buttons: readonly HTMLButtonElement[]) {
   if (!root) return;
-  const previews = root.querySelectorAll<HTMLElement>('[data-dataset-selected]');
+  // Only the committed dataset's preview is mounted; the others wait off the page (detached-sections.ts).
+  const previews = sectionElements(root, '[data-dataset-selected]');
   const select = root.querySelector<HTMLSelectElement>('[data-dataset-native-select]');
   if (previews.length === 0 && !select) return;
   const pressed = buttons.find(button => button.getAttribute('aria-pressed') === 'true');
@@ -33,7 +34,7 @@ export function publishDatasetPreview(root: ParentNode | null, buttons: readonly
   const selected = visible?.getAttribute('value') ?? listed?.getAttribute('value') ?? pressed?.getAttribute('value');
   for (const preview of previews) {
     const hidden = preview.dataset.datasetSelected !== selected;
-    if (preview.hidden !== hidden) preview.hidden = hidden;
+    if (preview.hidden !== hidden || preview.isConnected === hidden) showSection(preview, !hidden);
   }
   if (select && selected) {
     for (const option of select.querySelectorAll('option')) {
@@ -77,12 +78,19 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     throw new TypeError("Object controls require the mounted document and shared selection endpoint.");
   }
   const document = stage.ownerDocument;
-  const information = document.querySelector(".object-information-panel");
+  // The body card and settings may wait off the page (detached-sections.ts) while an overview is shown.
+  const information = sectionElements(document, ".object-information-panel")[0];
   // Form ownership survives moving a dataset from the body card to its system card.
   const datasetForm = information?.querySelector<HTMLFormElement>('form[data-dataset-form]');
   const datasetRoot = datasetForm?.closest(".object-datasets");
-  const settingsRoot = document.querySelector(".object-settings");
-  const formButtons = [...(datasetForm?.elements ?? [])]
+  const settingsRoot = sectionElements(document, ".object-settings")[0];
+  // A form owns only its connected controls (a `form` attribute associates nothing off the page), and its card or rows may
+  // wait off the page (detached-sections.ts), so its buttons are read where they are: in its card, or wherever a `form`
+  // attribute names it from.
+  const found = datasetForm ? sectionElements(document, 'button[name="dataset"]')
+    .filter(button => datasetForm.contains(button) || button.getAttribute('form') === datasetForm.id) : [];
+  const owned = found.length ? found : [...(datasetForm?.elements ?? [])];
+  const formButtons = owned
     .filter((input): input is HTMLButtonElement => input.tagName === 'BUTTON' && input.getAttribute('name') === 'dataset');
   // Step buttons submit a neighbouring dataset of a sequence; they are not the dataset's own control.
   const datasetInputs = formButtons.filter(input => !input.hasAttribute('data-dataset-step'));

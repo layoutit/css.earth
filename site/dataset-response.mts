@@ -3,7 +3,7 @@ import { parseObjectDescriptor } from '@cssearth/objects';
 import { serializePreparedScene, createPreparedAssetResolver, loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection, publishDatasetSelection, sectionElements } from '@cssearth/renderer';
 import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '@cssearth/renderer/navigation';
 import { renderNativeFocus } from './focus-response.mts';
-import { requiredElement } from './browser/browser-types.mts';
+import { requiredElement, requiredSection } from './browser/browser-types.mts';
 import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
 import { readSceneDatasetUrl } from './dataset-url.mts';
 import { drawnPageFromUrl, preparedFocusFromUrl } from './navigation/navigation-scope.mts';
@@ -51,7 +51,8 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   const focusing = focusId !== null;
   let datasetId = dataset.id ?? undefined;
   const shell = region(html, 'search-shell');
-  const buttons = [...shell.document.querySelectorAll<HTMLButtonElement>('.object-information-panel button[name="dataset"]:not([data-dataset-step])')];
+  const information = requiredSection(shell.document, '.object-information-panel');
+  const buttons = [...information.querySelectorAll<HTMLButtonElement>('button[name="dataset"]:not([data-dataset-step])')];
   if (datasetId && !buttons.some(button => button.getAttribute('value') === datasetId)) throw new RangeError('Dataset unavailable on this object.');
   const read = async (path: string) => {
     const response = await fetcher(new URL(path, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
@@ -130,8 +131,8 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
   }
   publishDatasetSelection(buttons,
     sectionElements(shell.document, '[data-dataset-details]').map(panel => ({ id: panel.dataset.datasetDetails!, panel })),
-    [...shell.document.querySelectorAll<HTMLElement>('.object-information-panel')].flatMap(panel => sectionElements(panel, '[data-dataset-context]')), new Set([activeDataset ?? null]),
-    shell.document.querySelector('.object-information-panel .object-datasets'));
+    sectionElements(information, '[data-dataset-context]'), new Set([activeDataset ?? null]),
+    information.querySelector('.object-datasets'));
   if (dataset.requested || featureIds.length || focusing) requiredElement(shell.document, '.object-sheet-handle').setAttribute('checked', '');
   for (const input of shell.document.querySelectorAll<HTMLInputElement>('.object-settings input[name]')) {
     if (Object.hasOwn(settings, input.name)) {
@@ -139,7 +140,7 @@ export async function renderDatasetResponse(html: string, url: URL, pageId: stri
       else input.setAttribute('value', String(settings[input.name]));
     }
   }
-  if (dataset.requested) shell.document.querySelector('.object-information-panel > details[data-information-panel="dataset"]')?.setAttribute('open', '');
+  if (dataset.requested) information.querySelector(':scope > details[data-information-panel="dataset"]')?.setAttribute('open', '');
   // Replace from the end so the original shell offsets remain valid.
   html = html.slice(0, scene.start) + scene.document.body.innerHTML + html.slice(scene.end);
   return html.slice(0, shell.start) + shell.document.body.innerHTML + html.slice(shell.end);

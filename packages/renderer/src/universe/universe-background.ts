@@ -1,3 +1,4 @@
+import { sectionPlaceholder, showSection } from '../rendering/detached-sections.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -85,7 +86,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
     // Separate host placement from layer mounting to retain startup and DOM order.
     mount() {
       if (sky && payload.sky) {
-        skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
+        skyLayer = mountPreparedCssSky({ host: root, before: sectionPlaceholder(volumeHost), payload: payload.sky, resources: payload.resources, resolveResource });
         lifetime.onDispose(() => skyLayer?.destroy());
       }
       // The galaxy is its bulge slices and one flat disc plane at every distance; it has no impostor views.
@@ -115,7 +116,8 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       const outside = galaxyOutsideFade(volumeDistanceM, plan.volume.discHalfHeightM);
       const volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
       const volumeVisible = outside * detailContextOpacity > 0;
-      if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
+      // Out of range, the galaxy's backdrop and image leave the page; the distance crossing brings them back (detached-sections.ts).
+      if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; showSection(volumeHost, volumeVisible); publishedVolumeVisible = volumeVisible; }
       if (outside !== publishedVolumeOpacity) { volumeHost.dataset.volumeOpacity = String(outside); publishedVolumeOpacity = outside; }
       // A detailed focus suppresses the volume without brightening the sky behind it.
       const completedContribution = outside;

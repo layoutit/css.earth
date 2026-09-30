@@ -4,6 +4,7 @@ import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera
 import type { PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser/browser-types.mts';
 import { requiredElement } from './browser/browser-types.mts';
+import { sectionElements } from '@cssearth/renderer';
 import type { SurfaceMapReader } from './minimap/surface-map-context.mts';
 import { parseSurfaceMapConfig } from './minimap/surface-map-context.mts';
 import type { OverviewScope } from './overview-context.mts';
@@ -59,7 +60,8 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     if (events.signal.aborted || documentTarget.hidden) return;
     lastRender = windowTarget.performance.now();
     const navigation = camera?.navigation;
-    const scene = documentTarget.querySelector<HTMLElement>('.polycss-scene');
+    // A far body's scene waits off the page (perspective-dolly.ts); the readout still reads its frame.
+    const scene = sectionElements(documentTarget, '.polycss-scene')[0];
     if (!navigation || !scene) { clearReading({ date: true }); return; }
     const map = maps.find(map => !map.closest<HTMLElement>('[data-dataset-details]')?.hidden) ?? maps[0];
     const surface = preparedFocus ? null : surfaceReader ? surfaceReader.read(map, camera)

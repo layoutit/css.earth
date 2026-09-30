@@ -1,11 +1,13 @@
 import { initialObjectSelection, type ObjectControls } from './object-contract.js';
+import { sectionElements } from '../rendering/detached-sections.js';
 
 /** Preparation and attachment read the same transported selection and live controls. */
 export function initialStageSelection(controls: ObjectControls, stage: HTMLElement) {
   const dataset = stage.dataset.preparedDataset;
   if (stage.dataset.preparedSettings) initialObjectSelection(controls, dataset, JSON.parse(stage.dataset.preparedSettings));
   const settings: Record<string, boolean | number> = {};
-  const inputs = [...stage.ownerDocument.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')];
+  // The settings panel may wait off the page while it is closed (detached-sections.ts).
+  const inputs = sectionElements(stage.ownerDocument, '.object-settings').flatMap(root => [...root.querySelectorAll<HTMLInputElement>('input[form][name]')]);
   for (const control of controls.settings?.controls ?? []) {
     const input = inputs.find(input => input.name === control.name);
     if (input) settings[control.name] = control.kind === 'toggle' ? input.checked : Number(input.value);
