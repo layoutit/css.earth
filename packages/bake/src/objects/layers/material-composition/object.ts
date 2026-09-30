@@ -51,7 +51,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   if(!isLayeredOblateRecipe(geometry)||[geometry,surface,materials,radialMotion,presentationConfig].some(config=>config.namespace!==descriptor.id))throw new TypeError('Authored capability identity differs.');
   if(descriptor.recipe.shape.kind!=='ellipsoid')throw new TypeError('Layered oblate preparation requires an ellipsoid.');
   if(descriptor.recipe.shape.radiusKm!==geometry.parameters.objectEquatorialRadiusKm||descriptor.recipe.shape.polarRadiusKm!==geometry.parameters.objectPolarRadiusKm)throw new TypeError('Authored ellipsoid shape differs from pinned preparation facts.');
-  if(descriptor.recipe.shape.kind!=='ellipsoid'||!descriptor.recipe.rings||!descriptor.recipe.cutaway)throw new TypeError('Layered oblate preparation requires declared ellipsoid, radial layer, and cutaway capabilities.');
+  if(descriptor.recipe.shape.kind!=='ellipsoid'||!descriptor.recipe.rings)throw new TypeError('Layered oblate preparation requires declared ellipsoid and radial layer capabilities.');
   const declared=descriptor.recipe.surfaces.flatMap(surface=>surface.datasets.map(dataset=>dataset.id));
   if(JSON.stringify(declared)!==JSON.stringify(contentSource.datasets.controls.map(dataset=>dataset.id)))throw new TypeError('Authored datasets differ from content controls.');
   const sourceDirectory=resolve(objectRoot,'source');

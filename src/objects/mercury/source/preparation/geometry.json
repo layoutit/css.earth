@@ -50,33 +50,10 @@
     "ambientIntensity": 0.05
   },
   "bodyRotationDegrees": 118,
-  "cutaway": {
-    "coreLatitudeSegments": 8,
-    "coreLongitudeSegments": 32,
-    "surfaceWidth": 1024,
-    "surfaceHeight": 512,
-    "polarTileSize": 256,
-    "polarWidth": 512,
-    "polarHeight": 256,
-    "polarRadiusScale": 1.025,
-    "polarOffset": 0.05,
-    "sectionWidth": 2048,
-    "sectionHeight": 2048,
-    "sectionPresentationWidth": 256,
-    "sectionPresentationHeight": 512,
-    "rotationDegrees": -120,
-    "color": "#8f5d3d",
-    "assistStartDegrees": 55,
-    "assistMaximumDegrees": 32,
-    "controlMaximumDegrees": 89,
-    "millisecondsPerDegree": 1000
-  },
   "output": {
     "schema": "cssmercury-prepared-retained-scene@3",
     "materialSchema": "cssmercury-prepared-material-presentation@2",
     "layout": "retained",
-    "cutawaySchema": "cssmercury-prepared-cutaway@1",
-    "interiorOrbitSchema": "cssmercury-prepared-interior-presentation-orbit@1",
     "motion": {
       "visualRotationSeconds": 72,
       "physicalSiderealRotationEarthDays": 58.646,

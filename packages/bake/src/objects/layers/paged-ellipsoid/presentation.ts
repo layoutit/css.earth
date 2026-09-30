@@ -38,14 +38,15 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
   const defaultDataset=datasets.controls.find(dataset=>dataset.id===datasets.defaultDataset);
   if (!defaultDataset) throw new TypeError('Paged presentation requires its declared default dataset.');
   const banks=surfaceBankInventory(plan,datasets,config.publicBase);
-  // The cutaway shell is the surface: an interior dataset reads the default dataset's pages and poles.
-  const bankId=(dataset: PagedDataset): string=>dataset.view==="interior"?bankId(defaultDataset):dataset.surfaceBankId??dataset.id;
-  const pageKeys=(dataset: PagedDataset)=>{
-    const bank=banks.find(bank=>bank.id===bankId(dataset));
-    if (!bank) throw new TypeError(`Missing prepared surface bank: ${bankId(dataset)}`);
-    return bank.urls.map((_,i)=>`page:${bankId(dataset)}:${i}`);
+  const bankId=(dataset: PagedDataset,shadows=false)=>dataset.view==="interior"&&shadows?`${dataset.id}-lit`:dataset.surfaceBankId??dataset.id;
+  const pageKeys=(dataset: PagedDataset,shadows=false)=>{
+    const bank=banks.find(bank=>bank.id===bankId(dataset,shadows));
+    if (!bank) throw new TypeError(`Missing prepared surface bank: ${bankId(dataset,shadows)}`);
+    return bank.urls.map((_,i)=>`page:${bankId(dataset,shadows)}:${i}`);
   };
-  const interiorUrls=[...new Set([
+  // The cutaway is parked (no interior dataset): the scene then carries no cutaway nodes or interior textures.
+  const cutawayShown=datasets.controls.some(dataset=>dataset.view==='interior');
+  const interiorUrls=!cutawayShown?[]:[...new Set([
     ...plan.interior.shells.flatMap(shell=>shell.leaves.map(leaf=>leaf.asset)),
     ...plan.interior.sectionLeaves.map(leaf=>leaf.asset)].map(pair=>canonicalPreparedAsset(pair)))];
   const interiorBanks=new Map(datasets.controls.filter(dataset=>dataset.view==='interior').map(dataset=>{
@@ -58,17 +59,17 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
   }));
   const levelled=new Set(textureLevels?.entries.map(entry=>entry.key));
   const entries=[...(textureLevels?.entries??banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"})))),
-    ...datasets.controls.filter(dataset=>dataset.view!=="interior"&&!levelled.has(`poles:${dataset.id}`)).map(dataset=>
-      ({key:`poles:${dataset.id}`,url:canonicalPreparedAsset(requireString(dataset.polesUrl, `Pole texture for ${dataset.id}`)),pool:"mounted"})),
-    // The cutaway shell's caps: the default surface's poles with the wedge cut out (assets.ts).
-    ...(datasets.controls.some(dataset=>dataset.view==="interior")?[{key:"poles:cutaway",url:`${config.publicBase}${config.namespace}-interior-outer-poles.webp`,pool:"mounted"}]:[]),
+    ...datasets.controls.filter(dataset=>!levelled.has(`poles:${dataset.id}`)).flatMap(dataset=>dataset.view==="interior"?
+      [{key:`poles:${dataset.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
+        {key:`poles:${dataset.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
+      [{key:`poles:${dataset.id}`,url:canonicalPreparedAsset(requireString(dataset.polesUrl, `Pole texture for ${dataset.id}`)),pool:"mounted"}]),
     ...[...interiorBanks.values()].flat(),
     ...materialIds.flatMap(id=>[
       {key:`default:${id}`,url:canonicalPreparedAsset(plan.material[id].defaultAssets),pool:"default-materials"},
       ...(plan.material[id].floodAssets?[{key:`${id}:flood`,url:canonicalPreparedAsset(plan.material[id].floodAssets),pool:id}]:[]),
       ...plan.material[id].preparedRows.map(row=>({key:`${id}:${row.rowIndex}`,url:canonicalPreparedAsset(row.assets),pool:id}))])];
-  const allLeaves=[...plan.body.bands.flatMap(band=>band.leaves),...plan.interior.outerBodyBands.flatMap(band=>band.leaves),
-    ...plan.interior.shells.flatMap(shell=>shell.leaves),...plan.interior.sectionLeaves,
+  const allLeaves=[...plan.body.bands.flatMap(band=>band.leaves),...!cutawayShown?[]:[...plan.interior.outerBodyBands.flatMap(band=>band.leaves),
+    ...plan.interior.shells.flatMap(shell=>shell.leaves),...plan.interior.sectionLeaves],
     plan.material.atmosphere.leaf];
   const b=createPreparedNodeTree({cssomReads:await prepareCssomDeclarationReads(allLeaves.map(leaf=>leaf.style))});
   const camera=b.element("div","polycss-camera object-render-root",plan.camera.style);
@@ -109,18 +110,18 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
     return resource.url;
   });
   const body=bands(system,plan.body.bands,`${config.namespace}-body`,`${config.namespace}-body-polar`,`${config.namespace}-polar`,initialUrls,canonicalPreparedAsset(plan.body.assets.poles));
-  const cutaway=b.mesh(`${config.namespace}-cutaway`);
-  b.append(system,cutaway);
+  const cutaway=cutawayShown?b.mesh(`${config.namespace}-cutaway`):null;
+  if(cutaway)b.append(system,cutaway);
   // Inactive datasets own no browser image references. Selection publishes
   // their prepared URLs only after the complete resource demand is decoded.
-  const interior=bands(cutaway,plan.interior.outerBodyBands,`${config.namespace}-cutaway-body`,`${config.namespace}-cutaway-body-polar`,`${config.namespace}-interior-outer-polar`,[],null);
+  const interior=cutaway?bands(cutaway,plan.interior.outerBodyBands,`${config.namespace}-cutaway-body`,`${config.namespace}-cutaway-body-polar`,`${config.namespace}-interior-outer-polar`,[],null):{surface:[],polar:[]};
   const interiorTextureNodes: {node: PreparedNode; url: string}[]=[];
-  for(const shell of plan.interior.shells) {
+  if(cutaway)for(const shell of plan.interior.shells) {
     const mesh=b.mesh(`${config.namespace}-interior-shell ${shell.className}`,meshTransform);b.append(cutaway,mesh);
     for(const leaf of shell.leaves) {const node=b.leaf(leaf),url=canonicalPreparedAsset(leaf.asset);node.style.backgroundImage="none";b.append(mesh,node);interiorTextureNodes.push({node,url});}
   }
-  const sections=b.mesh(`${config.namespace}-interior-sections`,meshTransform);b.append(cutaway,sections);
-  for(const leaf of plan.interior.sectionLeaves) {
+  const sections=cutaway?b.mesh(`${config.namespace}-interior-sections`,meshTransform):null;if(cutaway&&sections)b.append(cutaway,sections);
+  if(sections)for(const leaf of plan.interior.sectionLeaves) {
     const node=b.leaf(leaf);node.style.backgroundImage="none";
     if(leaf.backfaceVisible)node.style.backfaceVisibility="visible";b.append(sections,node);
     interiorTextureNodes.push({node,url:canonicalPreparedAsset(leaf.asset)});
@@ -148,15 +149,15 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
       frameAttribute:null,modeAttribute:null,quoted:true};
   });
   const variants=datasets.controls.flatMap(dataset=>[false,true].map(shadows=>{
-    const isInterior=dataset.view==="interior",keys=pageKeys(dataset),texture=(node: PreparedNode,name: string,resource: string | null)=>({kind:"texture",target:index(node),name,resource,quoted:true});
+    const isInterior=dataset.view==="interior",keys=pageKeys(dataset,shadows),texture=(node: PreparedNode,name: string,resource: string | null)=>({kind:"texture",target:index(node),name,resource,quoted:true});
     const interiorBank=interiorBanks.get(dataset.id);
     if (isInterior && !interiorBank) throw new TypeError(`Missing prepared interior bank: ${dataset.id}`);
     const pageWrites=(carriers: readonly PreparedNode[],active: boolean)=>carriers.flatMap(node=>Array.from({length:pages},(_,i)=>texture(node,`--${config.namespace}-surface-page-${i}`,active?keys[i]:null)));
     // Outside the interior view the cutaway is not shown (earth-surfaces.css), so page markup leaves its 500-odd nodes out.
-    return {when:{datasetId:dataset.id,shadows},...(isInterior?{}:{hiddenSubtrees:[index(cutaway)]}),navigation:{maximumZoom:dataset.maximumZoom,camera:dataset.camera??null},required:[...keys,isInterior?"poles:cutaway":`poles:${bankId(dataset)}`,...(interiorBank?.map(entry=>entry.key)??[])],
+    return {when:{datasetId:dataset.id,shadows},...(isInterior||!cutaway?{}:{hiddenSubtrees:[index(cutaway)]}),navigation:{maximumZoom:dataset.maximumZoom,camera:dataset.camera??null},required:[...keys,`poles:${bankId(dataset,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
       writes:[...pageWrites(isInterior?interior.surface:body.surface,true),
         ...(isInterior?interiorTextureNodes.map(({node,url})=>texture(node,'background-image',requireInteriorResource(interiorBank, interiorUrls.indexOf(url)))):[]),
-        ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,isInterior?"poles:cutaway":`poles:${bankId(dataset)}`)),
+        ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(dataset,shadows)}`)),
         ...pageWrites(isInterior?body.surface:interior.surface,false),
         {kind:"attribute",target:-1,name:"data-view",value:isInterior?"interior":null},
         {kind:"attribute",target:-1,name:"data-dataset",value:dataset.id}],

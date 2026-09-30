@@ -40,13 +40,12 @@ test('every Saturn dataset publishes the nodes it shows and applies its prepared
   for (const dataset of definition.controls.datasets!.controls) {
     const scene = serializePreparedScene(definition, dataset.id);
     expect(scene.nodes).toBe(normal.nodes);
-    // Each dataset's markup is the whole tree less what its selection hides: the cutaway only for cross-section.
+    // Each dataset's markup is the whole tree less what its selection hides.
     const omitted = omittedPreparedNodes(definition.tree, selectedPreparedVariant(definition, initialObjectSelection(definition.controls, dataset.id)));
     expect([...scene.html.matchAll(/data-prepared-node="(\d+)"/g)].map(match => Number(match[1])).sort((a, b) => a - b))
       .toEqual(definition.tree.nodes.map((_, index) => index).filter(index => !omitted.has(index)));
     if (dataset.id === 'normal') expect(scene).toEqual(normal);
     else expect(scene.html).not.toBe(normal.html);
-    if (dataset.id === 'cross-section') expect(scene.attributes['data-view']).toBe('interior');
     if (dataset.id === 'ultraviolet') expect(scene.attributes['data-dataset']).toBe('ultraviolet');
   }
   expect(() => serializePreparedScene(definition, 'unknown')).toThrow(/Unknown object dataset/);

@@ -22,7 +22,7 @@ export async function readPagedEllipsoid(solarGeometry: SolarGeometry, objectDir
   const config = parsePagedProfile(required('paged-ellipsoid')), bindingSource = parsePagedDatasetBindings(required('dataset-bindings'));
   if (!isPagedEllipsoidRecipe(config) || config.namespace !== descriptor.id || config.publicBase !== `/scenes/${descriptor.id}/`) throw new TypeError('Paged ellipsoid identity differs.');
   if (config.geometry.BODY_LATITUDE_SEGMENTS !== 16 || config.geometry.BODY_LONGITUDE_SEGMENTS !== 32) throw new TypeError('Unsupported segmented projective globe topology.');
-  if (descriptor.recipe.shape.radiusKm !== config.equatorialRadiusKm || !descriptor.recipe.cutaway || !descriptor.recipe.atmosphere) throw new TypeError('Authored physical capabilities differ from their prepared operators.');
+  if (descriptor.recipe.shape.radiusKm !== config.equatorialRadiusKm || !descriptor.recipe.atmosphere) throw new TypeError('Authored physical capabilities differ from their prepared operators.');
   const declared = descriptor.recipe.surfaces.flatMap(surface => surface.datasets.map(dataset => dataset.id));
   if (JSON.stringify(declared) !== JSON.stringify(bindingSource.controls.map(dataset => dataset.id))) throw new TypeError('Authored datasets differ from presentation bindings.');
   const sourceDirectory = resolve(objectDirectory, 'source'), sourceManifest = validateSourceManifest(config.namespace, await json(resolve(sourceDirectory, 'manifest.json')));

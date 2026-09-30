@@ -1,8 +1,8 @@
 # Saturn sources
 
 Saturn combines a Hubble OPAL visible body map, Hubble spectral maps, a Cassini
-UVIS ring opacity profile, schematic thermal and interior views, and modeled
-atmosphere charts.
+UVIS ring opacity profile, a schematic thermal view, and modeled atmosphere
+charts.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -99,7 +99,8 @@ The FQ889N identification follows the
 [WFC3 UVIS filter reference](https://hst-docs.stsci.edu/wfc3ihb/chapter-6-uvis-imaging-with-wfc3/6-5-uvis-spectral-elements).
 The thermal illustration is schematic.
 
-The interior view is a schematic model of the diffuse core of
+The cross-section view is parked: its sources and preparation stay, but the page
+no longer offers it. It is a schematic model of the diffuse core of
 [Mankovich and Fuller](https://doi.org/10.1038/s41550-021-01448-3), out to
 about 60 percent of Saturn's radius, cross-checked against the CC0
 [Saturn density profiles](https://doi.org/10.7291/D1P07G).

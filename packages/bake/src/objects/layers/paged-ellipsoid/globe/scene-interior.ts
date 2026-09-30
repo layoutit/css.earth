@@ -35,12 +35,12 @@ export function prepareInteriorPlan(ctx: PagedSceneContext) {
     ...entry,
     leaf: Object.freeze({
       ...entry.leaf,
-      // The cutaway shell is the surface itself: its pages are the surface's, and only its caps read the surface's poles
-      // cut open by the wedge (assets.ts writes them beside the default poles).
       ...(entry.polarCap ? {
         className: `${profile.namespace}-interior-outer-polar ${profile.namespace}-interior-outer-polar-${entry.polarCap}`,
-        asset: Object.freeze({ one: `${profile.publicBase}${profile.namespace}-interior-outer-poles.webp`,
-          two: `${profile.publicBase}${profile.namespace}-interior-outer-poles.webp` }),
+        asset: Object.freeze({
+          one: `${profile.publicBase}${profile.namespace}-interior-outer-poles.webp`,
+          two: `${profile.publicBase}${profile.namespace}-interior-outer-poles@2x.webp`,
+        }),
       } : {}),
     }),
   }));
@@ -111,6 +111,25 @@ export function prepareInteriorPlan(ctx: PagedSceneContext) {
     }),
     cutaway: INTERIOR_CUTAWAY,
     outerBodyBands,
+    outerAssets: Object.freeze({
+      surface: Object.freeze({
+        one: `${profile.publicBase}${profile.namespace}-interior-outer.webp`,
+        two: `${profile.publicBase}${profile.namespace}-interior-outer@2x.webp`,
+        oneUrls: surfacePageUrls(`${profile.namespace}-interior-outer`, surfaceRasterPlan.pages.length),
+        twoUrls: surfacePageUrls(`${profile.namespace}-interior-outer`, surfaceRasterPlan.pages.length, "@2x"),
+      }),
+      poles: Object.freeze({
+        one: `${profile.publicBase}${profile.namespace}-interior-outer-poles.webp`,
+        two: `${profile.publicBase}${profile.namespace}-interior-outer-poles@2x.webp`,
+      }),
+      litSurface: Object.freeze({
+        urls: surfacePageUrls(`${profile.namespace}-interior-outer-lit`, surfaceRasterPlan.pages.length, "@2x"),
+      }),
+      litPoles: Object.freeze({
+        one: `${profile.publicBase}${profile.namespace}-interior-outer-lit-poles.webp`,
+        two: `${profile.publicBase}${profile.namespace}-interior-outer-lit-poles@2x.webp`,
+      }),
+    }),
     shells,
     sectionLeaves,
     leafCount,

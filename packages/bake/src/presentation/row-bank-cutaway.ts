@@ -24,7 +24,9 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
     throw new Error("Object has no prepared billboard lighting atlas.");
   }
   for (const dataset of datasets.controls) if (!/^#[0-9a-f]{6}$/u.test(dataset.billboardColor ?? "")) throw new Error(`Object dataset ${dataset.id} has no prepared billboard colour.`);
-  const interiorKeys = ["outerSurface", "outerPoles", "outerSurfaceUnlit", "outerPolesUnlit", "core", "corePoles", "section"];
+  // A body without a cutaway (the recipe's `cutaway`, parked on Mercury) has no interior assets, nodes or pose.
+  const interiorAssets = assets.interior, interiorPlan = interiorAssets ? plan.interior : null;
+  const interiorKeys = interiorPlan ? ["outerSurface", "outerPoles", "outerSurfaceUnlit", "outerPolesUnlit", "core", "corePoles", "section"] : [];
   const entries = [
     { key: "shadowless", url: bank.shadowless.url, pool: "warm" },
     { key: SHADOWLESS_BILLBOARD_KEY, url: billboard.shadowless.url, pool: "warm" },
@@ -35,11 +37,11 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
       return [{ key: `surface:${dataset.id}`, url: canonicalPreparedAsset(dataset.surfaceUrl, dataset.surface2xUrl), pool },
         { key: `poles:${dataset.id}`, url: canonicalPreparedAsset(dataset.polesUrl, dataset.poles2xUrl), pool }];
     }),
-    ...interiorKeys.map(name => ({ key: `interior:${name}`, pool: "datasets", url: canonicalPreparedAsset(assets.interior[`${name}Url`], assets.interior[`${name}2xUrl`]) })),
+    ...interiorAssets ? interiorKeys.map(name => ({ key: `interior:${name}`, pool: "datasets", url: canonicalPreparedAsset(interiorAssets[`${name}Url`], interiorAssets[`${name}2xUrl`]) })) : [],
     ...bank.rows.map((row, index) => ({ key: `lighting:${index}`, url: row.url, pool: "lighting" })),
   ];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([
-    ...plan.bodyLeaves, ...plan.interior.outerBodyLeaves, ...plan.interior.coreLeaves, ...plan.interior.sectionLeaves].map(leaf => leaf.style)) });
+    ...plan.bodyLeaves, ...interiorPlan ? [...interiorPlan.outerBodyLeaves, ...interiorPlan.coreLeaves, ...interiorPlan.sectionLeaves] : []].map(leaf => leaf.style)) });
   // A true perspective camera (the shared orbit writes its perspective and
   // eye from the prepared plan): the body is placed by dolly on the scene
   // root, the roots are never scaled.
@@ -55,21 +57,24 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   texture(body, `--${ns}-surface-image`, surfaceUrl); texture(body, `--${ns}-poles-image`, polesUrl);
   b.append(null, camera); b.append(camera, scene); b.append(scene, system); b.append(system, body);
   for (const leaf of plan.bodyLeaves) b.append(body, b.leaf(leaf));
-  const cutaway = b.mesh(`${ns}-cutaway`), cutawayBody = b.mesh(`${ns}-cutaway-body`); cutawayBody.style.transform = plan.interior.bodyTransform;
-  // A hidden retained subtree must not fetch its cutaway textures on mount.
-  cutaway.style.display = "none";
-  // Every leaf reads its own mesh's surface and poles images (scene/projector.ts): the cutaway shell, the core and the
-  // sections each set theirs, and the dataset variants rewrite them.
-  const interiorUrl = (name: string) => canonicalPreparedAsset(assets.interior[`${name}Url`], assets.interior[`${name}2xUrl`]);
-  texture(cutawayBody, `--${ns}-surface-image`, interiorUrl("outerSurface")); texture(cutawayBody, `--${ns}-poles-image`, interiorUrl("outerPoles"));
-  b.append(system, cutaway); b.append(cutaway, cutawayBody);
-  for (const leaf of plan.interior.outerBodyLeaves) b.append(cutawayBody, b.leaf(leaf));
-  const core = b.mesh(`${ns}-interior-core`); core.style.transform = plan.interior.bodyTransform; b.append(cutaway, core);
-  texture(core, `--${ns}-surface-image`, interiorUrl("core")); texture(core, `--${ns}-poles-image`, interiorUrl("corePoles"));
-  for (const leaf of plan.interior.coreLeaves) b.append(core, b.leaf(leaf));
-  const sections = b.mesh(`${ns}-interior-sections`); sections.style.transform = plan.interior.bodyTransform; b.append(cutaway, sections);
-  texture(sections, `--${ns}-surface-image`, interiorUrl("section"));
-  for (const leaf of plan.interior.sectionLeaves) b.append(sections, b.leaf(leaf));
+  const cutaway = interiorPlan ? b.mesh(`${ns}-cutaway`) : null, cutawayBody = interiorPlan ? b.mesh(`${ns}-cutaway-body`) : null;
+  if (interiorAssets && interiorPlan && cutaway && cutawayBody) {
+    cutawayBody.style.transform = interiorPlan.bodyTransform;
+    // A hidden retained subtree must not fetch its cutaway textures on mount.
+    cutaway.style.display = "none";
+    // Every leaf reads its own mesh's surface and poles images (scene/projector.ts): the cutaway shell, the core and the
+    // sections each set theirs, and the dataset variants rewrite them.
+    const interiorUrl = (name: string) => canonicalPreparedAsset(interiorAssets[`${name}Url`], interiorAssets[`${name}2xUrl`]);
+    texture(cutawayBody, `--${ns}-surface-image`, interiorUrl("outerSurface")); texture(cutawayBody, `--${ns}-poles-image`, interiorUrl("outerPoles"));
+    b.append(system, cutaway); b.append(cutaway, cutawayBody);
+    for (const leaf of interiorPlan.outerBodyLeaves) b.append(cutawayBody, b.leaf(leaf));
+    const core = b.mesh(`${ns}-interior-core`); core.style.transform = interiorPlan.bodyTransform; b.append(cutaway, core);
+    texture(core, `--${ns}-surface-image`, interiorUrl("core")); texture(core, `--${ns}-poles-image`, interiorUrl("corePoles"));
+    for (const leaf of interiorPlan.coreLeaves) b.append(core, b.leaf(leaf));
+    const sections = b.mesh(`${ns}-interior-sections`); sections.style.transform = interiorPlan.bodyTransform; b.append(cutaway, sections);
+    texture(sections, `--${ns}-surface-image`, interiorUrl("section"));
+    for (const leaf of interiorPlan.sectionLeaves) b.append(sections, b.leaf(leaf));
+  }
   // The overlay root carries the billboard (a flat disc of the surface's mean
   // colour fitted to the same silhouette as the overlay above it, which
   // lights it) and the terminator overlay.
@@ -99,8 +104,8 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
     return { when: { datasetId: dataset.id, shadows }, required: interior
       ? [`surface:${datasets.defaultDataset}`, `poles:${datasets.defaultDataset}`, ...interiorKeys.filter(name => shadows ? !name.endsWith('Unlit') : !['outerSurface','outerPoles'].includes(name)).map(name => `interior:${name}`)] : [`surface:${dataset.id}`, `poles:${dataset.id}`],
       writes: [
-        { kind: "style", target: index(cutaway), name: "display", value: interior ? "block" : "none" },
-        ...(interior ? [writeTexture(cutawayBody, `--${ns}-surface-image`, `interior:outerSurface${shadows?'':'Unlit'}`),
+        ...(cutaway ? [{ kind: "style" as const, target: index(cutaway), name: "display", value: interior ? "block" : "none" }] : []),
+        ...(interior && cutawayBody ? [writeTexture(cutawayBody, `--${ns}-surface-image`, `interior:outerSurface${shadows?'':'Unlit'}`),
           writeTexture(cutawayBody, `--${ns}-poles-image`, `interior:outerPoles${shadows?'':'Unlit'}`)]
           : [writeTexture(body, `--${ns}-surface-image`, `surface:${dataset.id}`), writeTexture(body, `--${ns}-poles-image`, `poles:${dataset.id}`)]),
         { kind: "attribute", target: -1, name: "data-view", value: interior ? "interior" : null },
@@ -114,11 +119,10 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
           { name: "data-material-mode", source: "literal", value: shadows ? null : "full-phase-curvature" }],
       }] };
   }));
-  const pose = plan.interior.presentationOrbit;
   const startup = entries.filter(entry => entry.pool === "warm").map(entry => entry.key);
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun,
     assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
-      preparedResourcePool("datasets", entries, { retention: "selection", decoding: "sync", capacity: interiorKeys.length + 1, concurrency: interiorKeys.length + 1 }),
+      preparedResourcePool("datasets", entries, { retention: "selection", decoding: "sync", capacity: Math.max(interiorKeys.length + 1, 2), concurrency: Math.max(interiorKeys.length + 1, 2) }),
       preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
         concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true }),
       preparedResourcePool("billboard", entries, { retention: "selection", decoding: "sync" })],
@@ -135,6 +139,6 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
       { kind: "view-property", target: index(materialRoot), property: `--${ns}-billboard-opacity`, source: "billboard-opacity", precision: 6 },
       ...(seamOutset ? [seamOutsetBinding(seamOutset, index(system))] : []),
     ],
-    animations: [{ target: index(cutaway), id: `${ns}-interior-presentation-orbit`, mode: "pose", duration: pose.durationMilliseconds,
-      sourceMinimum: plan.camera.minimumControlPitchDegrees, millisecondsPerDegree: pose.millisecondsPerControlDegree, keyframes: pose.keyframes }] };
+    animations: interiorPlan && cutaway ? [{ target: index(cutaway), id: `${ns}-interior-presentation-orbit`, mode: "pose", duration: interiorPlan.presentationOrbit.durationMilliseconds,
+      sourceMinimum: plan.camera.minimumControlPitchDegrees, millisecondsPerDegree: interiorPlan.presentationOrbit.millisecondsPerControlDegree, keyframes: interiorPlan.presentationOrbit.keyframes }] : [] };
 }

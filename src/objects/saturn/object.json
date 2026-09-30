@@ -102,11 +102,6 @@
               "material": "projective"
             },
             {
-              "id": "cross-section",
-              "source": "surface",
-              "material": "projective"
-            },
-            {
               "id": "visible-2018a",
               "source": "observations",
               "material": "projective"
@@ -158,12 +153,7 @@
           "source": "geometry",
           "model": "lit"
         }
-      ],
-      "cutaway": {
-        "source": "materials",
-        "surface": "body",
-        "dataset": "cross-section"
-      }
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

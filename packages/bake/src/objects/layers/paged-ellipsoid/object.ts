@@ -67,8 +67,8 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
     // The reused outputs read the surface raster plan whole, and from the scene only its surface asset banks (texture
     // levels resolve them); the rest of the scene is presentation, which this lane prepares afresh.
     const banks = (plan: Record<string, unknown>) => {
-      const body = requireRecord(plan.body, 'scene body');
-      return { surface: requireRecord(requireRecord(body.assets, 'body assets').surface, 'body surface') };
+      const body = requireRecord(plan.body, 'scene body'), interior = requireRecord(plan.interior, 'scene interior');
+      return { surface: requireRecord(requireRecord(body.assets, 'body assets').surface, 'body surface'), interior: interior.outerAssets };
     };
     if (canonical(banks(publishedPlan.scene)) !== canonical(banks(requireRecord(scene, 'scene'))))
       throw new Error(`${descriptor.id}: scene surface banks differ from the published preparation; run the full preparation.`);
