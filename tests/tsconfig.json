@@ -21,7 +21,6 @@
     "../packages/**/*.spec.ts",
     "../packages/**/*.spec.mts",
     "../site/env.d.ts",
-    "../site/cesium-module-types.d.ts",
     "../packages/bake/src/delivery/fixtures/external-modules.d.mts",
     "../packages/bake/src/**/fixtures/**/*.mts"
   ],

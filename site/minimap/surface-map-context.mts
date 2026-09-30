@@ -3,7 +3,7 @@ import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-nav
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { requiredElement } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
-import type { SurfaceAxes } from './surface-minimap-math.mts';
+export interface SurfaceAxes { prime: PositionM; east: PositionM; north: PositionM; }
 /** Axes and the map's left edge longitude: latitude and longitude sit where the prepared feature labels place them. */
 export interface SurfaceMapConfig extends SurfaceAxes { readonly surfaceSelector: string; readonly mapLeftEdgeLongitudeDeg: number; }
 export interface SurfaceCamera { readonly navigation?: ObjectWorldNavigation; }

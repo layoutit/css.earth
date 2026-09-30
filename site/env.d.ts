@@ -1,4 +1,3 @@
-/// <reference path="./cesium-module-types.d.ts" />
 import 'vite/client';
 
 import type { publishObjectDiagnostics } from '@cssearth/renderer/runtime/object-diagnostics.ts';
