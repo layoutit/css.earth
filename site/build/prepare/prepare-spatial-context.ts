@@ -332,7 +332,9 @@ function record(value: unknown, name: string): Record<string, unknown> { if (!va
 function text(value: unknown, name: string): string { if (typeof value !== 'string' || value.length === 0) throw new TypeError(`${name} must be text.`); return value; }
 function number(value: unknown, name: string): number { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${name} must be finite.`); return value; }
 function positive(value: unknown, name: string): number { const result = number(value, name); if (!(result > 0)) throw new TypeError(`${name} must be positive.`); return result; }
-function eccentricity(value: unknown, id: string): number { const result = number(value, `${id} eccentricity`); if (result < 0 || result === 1) throw new TypeError(`${id} eccentricity is invalid.`); return result; }
+// Eccentricity 1 is a placed source moving straight along its line of sight (prepare-solar-geometry.mts); the world context
+// accepts it only for a body it places without drawing a path.
+function eccentricity(value: unknown, id: string): number { const result = number(value, `${id} eccentricity`); if (result < 0) throw new TypeError(`${id} eccentricity is invalid.`); return result; }
 
 const invoked = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (invoked) {

@@ -45,6 +45,15 @@ export function overviewDistanceM(value: OverviewDistance, plan = context, orbit
   return value.at === 'start' ? start! : value.at === 'end' ? end! : Math.sqrt(start! * end!);
 }
 
+/** The overviews a zoom centred at `centreM` reaches, from the nearest level out: a level with `centreWithin` is skipped
+ * from a centre farther from the world's centre than that (M87* has no Local Group step, the Magellanic Clouds no Milky
+ * Way step). An object's breadcrumbs lead through the same levels. */
+export function overviewsReachableFrom(centreM: readonly number[], plan = context, orbitsWithinM?: number,
+  overviews: readonly OverviewObject[] = KNOWN_OVERVIEWS): readonly OverviewObject[] {
+  const centreDistance = distance(centreM, plan.focus.positionM);
+  return overviews.filter(overview => !overview.zoom.centreWithin || centreDistance < overviewDistanceM(overview.zoom.centreWithin, plan, orbitsWithinM));
+}
+
 /** The scope the camera frames. UI scale thresholds, not physical boundaries or membership claims, each measured from the
  * star the zoom is centred on (`centre`: the mounted system's; the Sun's on its own scene and every overview page).
  * Zooming backs away along the line of sight, so the camera's path depends on where it looks; the distance from the
@@ -63,7 +72,7 @@ export function overviewScopeAtCamera(world: WorldCameraPose, previous: Overview
   const { fadeOutStartDistanceM, hiddenDistanceM } = systemFadeDistances(plan.system, centre.orbitsWithinM);
   const at = (value: OverviewDistance) => overviewDistanceM(value, plan, centre.orbitsWithinM);
   const centreDistance = distance(centre.originM, plan.focus.positionM);
-  const reachable = overviews.filter(overview => !overview.zoom.centreWithin || centreDistance < at(overview.zoom.centreWithin));
+  const reachable = overviewsReachableFrom(centre.originM, plan, centre.orbitsWithinM, overviews);
   const previousOrder = overviews.find(overview => overview.id === previous)?.order ?? 0;
   const systemLimit = previous !== 'system' ? Math.sqrt(fadeOutStartDistanceM * hiddenDistanceM) : hiddenDistanceM;
   const first = reachable[0];

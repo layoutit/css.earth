@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m87-star",
+  "card": {
+    "text": "The black hole at the centre of the galaxy M87, 6.5 billion solar masses, whose shadow the EHT imaged in 2017.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1906-11238",
+        "url": "https://arxiv.org/abs/1906.11238",
+        "label": "EHT Collaboration 2019 (M87 Paper I)",
+        "checked": "2026-09-30",
+        "locator": "Abstract",
+        "quote": "derive a central mass"
+      },
+      {
+        "catalogueId": "arxiv-1906-11238",
+        "url": "https://arxiv.org/abs/1906.11238",
+        "label": "EHT Collaboration 2019 (M87 Paper I)",
+        "checked": "2026-09-30",
+        "locator": "Title",
+        "quote": "The Shadow of the Supermassive Black Hole"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M87* sits at the heart of the giant elliptical galaxy M87, 16.8 million parsecs away. In 2019 the Event Horizon Telescope showed its shadow inside a ring of light.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1906-11238",
+        "url": "https://arxiv.org/abs/1906.11238",
+        "label": "EHT Collaboration 2019 (M87 Paper I)",
+        "checked": "2026-09-30",
+        "locator": "Section 2",
+        "quote": "adopt a distance to M87 of 16.8"
+      },
+      {
+        "catalogueId": "arxiv-1906-11238",
+        "url": "https://arxiv.org/abs/1906.11238",
+        "label": "EHT Collaboration 2019 (M87 Paper I)",
+        "checked": "2026-09-30",
+        "locator": "Section 1",
+        "quote": "a bright emission ring"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "EHT image, 2017 April 11",
+      "detail": "1.3 mm",
+      "summary": "The EHT image around a black disc the size of the shadow. Colours are a brightness legend.",
+      "sources": [
+        {
+          "catalogueId": "arxiv-1906-11241",
+          "url": "https://arxiv.org/abs/1906.11241",
+          "label": "EHT Collaboration 2019 (M87 Paper IV)",
+          "checked": "2026-09-30",
+          "locator": "Section 7.1",
+          "quote": "Fiducial M87 Images"
+        }
+      ]
+    }
+  }
+}

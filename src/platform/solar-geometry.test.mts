@@ -96,6 +96,18 @@ test('regeneration retains every current registry orbit, including moons and com
   assert.equal(new Map(Object.entries(geometry.BODY_POSITION_PROVENANCE)).get('daphnis'), undefined, 'unavailable contemporary ephemeris is not relabeled as observed');
 });
 
+test('a source with no proper motion moves straight along its line of sight, and keeps its true Sun direction', () => {
+  // M87* is an ICRF3 radio source: its motion is its radial velocity only, so r x v is rounding noise and its path is a line.
+  const orbit = geometry.BODY_ORBITS['m87-star']!, sun = geometry.BODY_FIXED_SUN_DIRECTIONS['m87-star']!;
+  assert.equal(orbit.eccentricity, 1);
+  assert.equal(orbit.trueAnomalyDegrees, 0);
+  assert.ok(orbit.semiMajorAxisAu < 0, 'receding faster than escape: a hyperbolic energy');
+  // The path is measured from the body's own direction, which is the opposite of its Sun direction.
+  assert.ok(orbit.perihelionDirection.every((value, axis) => Math.abs(value + sun[axis]!) < 1e-12));
+  const normal = geometry.BODY_FIXED_ORBIT_NORMAL_DIRECTIONS['m87-star']!;
+  assert.ok(Math.abs(normal.reduce((sum, value, axis) => sum + value * orbit.perihelionDirection[axis]!, 0)) < 1e-12);
+});
+
 test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong center and missing body', async () => {
   await assert.rejects(loadSceneEpochEphemeris(epoch + 1), /epoch/);
   const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-epoch-source-test-'));

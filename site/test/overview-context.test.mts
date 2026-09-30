@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import preparedContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { bodyViewAtCamera, overviewFrameDistanceM, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
+import { bodyViewAtCamera, overviewFrameDistanceM, overviewScopeAtCamera, overviewsReachableFrom, viewDistance } from '../overview-context.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation';
 import { parsePreparedWorldContext } from '@cssearth/renderer';
@@ -120,6 +120,13 @@ test("another star's system overview is left by the distance from that star, not
   const around = (offsetM: number) => ({ ...camera(0), pose: { ...camera(0).pose, positionM: [sgr[0]! + offsetM, 0, 0] as const } });
   assert.equal(overviewScopeAtCamera(around(range * 1.9), 'system', context, { originM: sgr, orbitsWithinM: range }), 'system');
   assert.equal(overviewScopeAtCamera(around(range * 2), 'system', context, { originM: sgr, orbitsWithinM: range }), 'milky-way');
+});
+
+test('a centre reaches only the levels around it: M87* no Local Group, a Magellanic Cloud star no Milky Way', () => {
+  const at = (id: string) => overviewsReachableFrom(context.bodies.find(body => body.id === id)!.positionM, context).map(overview => overview.id);
+  assert.deepEqual(at('sgr-a-star'), OVERVIEWS.map(overview => overview.id));
+  assert.deepEqual(at('hv-1005'), ['local-group', 'nearby-universe', 'observable-universe']);
+  assert.deepEqual(at('m87-star'), ['nearby-universe', 'observable-universe']);
 });
 
 test('galactic distance is measured from the Sun, independent of selected body and surface radius', () => {
