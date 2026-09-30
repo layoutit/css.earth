@@ -1,7 +1,8 @@
 import { pathToFileURL } from 'node:url';
 /** `node site/build/prepare/prepare-world-presentation.mts`: the world view's static presentation facts, prepared once from their
  * sources so the browser reads one small file instead of source tables and recipes: which moons are major, which orbits
- * the default view hides, which objects are default features, and the galaxy and cluster fade distances. */
+ * the default view hides, which objects are default features, the galaxy and cluster fade distances, and which bodies each
+ * planetary system holds (read from the world context's orbit graph once here, not by walking it in the browser). */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import majorMoons from '../../source/major-moons.json' with { type: 'json' };
@@ -9,6 +10,7 @@ import galaxies from '../../../src/objects/local-group/source/presentation.json'
 import clusters from '../../../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import type { ObjectDiscovery } from '@cssearth/objects';
 import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
+import { planetarySystemMembers } from '../../planetary-system-members.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
@@ -58,11 +60,12 @@ export function orbitFeature(object: { id: string; classification: string }): bo
 export function prepareWorldPresentation() {
   const minor = minorMoonOrbitIds(APPLICATION_WORLD_CONTEXT.bodies);
   return {
-    schema: 'cssearth-world-presentation@1',
+    schema: 'cssearth-world-presentation@2',
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds: SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id),
     orbitFeatureIds: SCENE_OBJECTS.filter(orbitFeature).map(object => object.id),
     hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor],
+    planetarySystems: planetarySystemMembers(APPLICATION_WORLD_CONTEXT),
     galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
       minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },
     clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },

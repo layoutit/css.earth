@@ -94,6 +94,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
   const landmarkMoonIds = new Set(annotationLandmarks);
   const points = [plan.focus, ...plan.bodies];
   const byId = new Map(points.map(point => [point.id, point]));
+  const indexById = new Map(points.map((point, index) => [point.id, index] as const).reverse()); // Each id's first slot, looked up per frame.
   const systemFade = createSystemFade(plan);
   const selectionPolicy = createContextSelectionPolicy(plan);
   const prepared = points.map(body => {
@@ -124,7 +125,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       Object.assign(state, view.bodies[index]); state.indicatorCutout = false;
       return state;
     });
-    const selectedEntry = bodies.find(entry => entry.body.id === selectedId);
+    const selectedEntry = bodies[indexById.get(selectedId) ?? -1];
     if (!selectedEntry) throw new TypeError('Selected context body is unavailable.');
     // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
     const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
@@ -153,7 +154,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const selected = selectedEntry.body;
       // Orbit occlusion and close-up fading follow the destination during the
       // approach. Attaching its detail must not change a stationary orbit field.
-      const orbitFocus = bodies.find(entry => entry.body.id === selectionPreview) ?? selectedEntry;
+      const orbitFocus = (selectionPreview ? bodies[indexById.get(selectionPreview) ?? -1] : undefined) ?? selectedEntry;
       const orbitOverview = selectionPreview ? false : overview;
       const frame = createWorldFrameProjection(plan.focus, orbitFocus.body, toEye, project);
       const selectedEye = frame.eye(selected);
