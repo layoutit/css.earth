@@ -1,0 +1,5511 @@
+{
+  "schema": "cssearth-prepared-object@1",
+  "id": "stellar-neighbourhood",
+  "type": "point-field",
+  "format": "cssearth-css-point-field-bank@1",
+  "data": {
+    "schema": "cssearth-css-point-field-bank@1",
+    "id": "stellar-neighbourhood",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "localToReferenceXyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670,
+      "boundsUnits": {
+        "min": [
+          -1024,
+          -1024,
+          -1024
+        ],
+        "max": [
+          1024,
+          1024,
+          1024
+        ]
+      }
+    },
+    "bank": {
+      "encoding": "cssearth-point-field-bank@1",
+      "path": "stars.bin",
+      "bytes": 16384,
+      "starIdPrefix": "hyg-v4.4-row",
+      "starCount": 255,
+      "nodeCount": 203,
+      "childLinkCount": 202,
+      "anchorCount": 96,
+      "columns": [
+        {
+          "name": "star.sourceRow",
+          "storage": "uint32",
+          "count": 255,
+          "offset": 168,
+          "bytes": 1020
+        },
+        {
+          "name": "star.positionUnits",
+          "storage": "float32",
+          "count": 765,
+          "offset": 1192,
+          "bytes": 3060
+        },
+        {
+          "name": "star.absoluteMagnitude",
+          "storage": "int16",
+          "count": 255,
+          "offset": 4256,
+          "bytes": 510
+        },
+        {
+          "name": "star.colorIndex",
+          "storage": "uint8",
+          "count": 255,
+          "offset": 4768,
+          "bytes": 255
+        },
+        {
+          "name": "star.coverageAnchor",
+          "storage": "uint32",
+          "count": 96,
+          "offset": 5024,
+          "bytes": 384
+        },
+        {
+          "name": "node.positionUnits",
+          "storage": "float64",
+          "count": 609,
+          "offset": 5408,
+          "bytes": 4872
+        },
+        {
+          "name": "node.radiusUnits",
+          "storage": "float64",
+          "count": 203,
+          "offset": 10280,
+          "bytes": 1624
+        },
+        {
+          "name": "node.absoluteMagnitude",
+          "storage": "float64",
+          "count": 203,
+          "offset": 11904,
+          "bytes": 1624
+        },
+        {
+          "name": "node.colorIndex",
+          "storage": "uint8",
+          "count": 203,
+          "offset": 13528,
+          "bytes": 203
+        },
+        {
+          "name": "node.first",
+          "storage": "uint32",
+          "count": 203,
+          "offset": 13736,
+          "bytes": 812
+        },
+        {
+          "name": "node.count",
+          "storage": "uint32",
+          "count": 203,
+          "offset": 14552,
+          "bytes": 812
+        },
+        {
+          "name": "node.childCount",
+          "storage": "uint8",
+          "count": 203,
+          "offset": 15368,
+          "bytes": 203
+        },
+        {
+          "name": "node.children",
+          "storage": "uint32",
+          "count": 202,
+          "offset": 15576,
+          "bytes": 808
+        }
+      ],
+      "names": [
+        [
+          11,
+          "Fang"
+        ],
+        [
+          13,
+          "Antares"
+        ],
+        [
+          17,
+          "Uridim"
+        ],
+        [
+          19,
+          "Acrux"
+        ],
+        [
+          21,
+          "Dschubba"
+        ],
+        [
+          24,
+          "Spica"
+        ],
+        [
+          28,
+          "Sabik"
+        ],
+        [
+          30,
+          "Zubenelgenubi"
+        ],
+        [
+          31,
+          "Kulou"
+        ],
+        [
+          32,
+          "Menkent"
+        ],
+        [
+          33,
+          "Rigil Kentaurus"
+        ],
+        [
+          47,
+          "Dabih"
+        ],
+        [
+          49,
+          "Peacock"
+        ],
+        [
+          51,
+          "Aldhanab"
+        ],
+        [
+          52,
+          "Kaus Australis"
+        ],
+        [
+          55,
+          "Alnair"
+        ],
+        [
+          56,
+          "Kaus Borealis"
+        ],
+        [
+          58,
+          "Fomalhaut"
+        ],
+        [
+          59,
+          "Deneb Algedi"
+        ],
+        [
+          60,
+          "Skat"
+        ],
+        [
+          71,
+          "Markeb"
+        ],
+        [
+          74,
+          "Naos"
+        ],
+        [
+          79,
+          "Canopus"
+        ],
+        [
+          81,
+          "Suhail"
+        ],
+        [
+          84,
+          "Miaplacidus"
+        ],
+        [
+          88,
+          "Sirius"
+        ],
+        [
+          91,
+          "Alphard"
+        ],
+        [
+          93,
+          "Adhara"
+        ],
+        [
+          106,
+          "Achernar"
+        ],
+        [
+          109,
+          "Ankaa"
+        ],
+        [
+          110,
+          "Acamar"
+        ],
+        [
+          113,
+          "Diphda"
+        ],
+        [
+          116,
+          "Zaurak"
+        ],
+        [
+          117,
+          "Baten Kaitos"
+        ],
+        [
+          119,
+          "Phact"
+        ],
+        [
+          127,
+          "Rigel"
+        ],
+        [
+          138,
+          "Izar"
+        ],
+        [
+          140,
+          "Unukalhai"
+        ],
+        [
+          141,
+          "Alphecca"
+        ],
+        [
+          142,
+          "Vindemiatrix"
+        ],
+        [
+          143,
+          "Rasalhague"
+        ],
+        [
+          144,
+          "Tianji"
+        ],
+        [
+          145,
+          "Arcturus"
+        ],
+        [
+          147,
+          "Seginus"
+        ],
+        [
+          148,
+          "Cor Caroli"
+        ],
+        [
+          149,
+          "Alioth"
+        ],
+        [
+          151,
+          "Eltanin"
+        ],
+        [
+          152,
+          "Kochab"
+        ],
+        [
+          165,
+          "Tarazed"
+        ],
+        [
+          168,
+          "Altair"
+        ],
+        [
+          169,
+          "Vega"
+        ],
+        [
+          170,
+          "Aljanah"
+        ],
+        [
+          171,
+          "Alderamin"
+        ],
+        [
+          174,
+          "Markab"
+        ],
+        [
+          175,
+          "Scheat"
+        ],
+        [
+          176,
+          "Fawaris"
+        ],
+        [
+          181,
+          "Enif"
+        ],
+        [
+          189,
+          "Deneb"
+        ],
+        [
+          196,
+          "Algieba"
+        ],
+        [
+          198,
+          "Regulus"
+        ],
+        [
+          199,
+          "Procyon"
+        ],
+        [
+          200,
+          "Pollux"
+        ],
+        [
+          201,
+          "Talitha"
+        ],
+        [
+          204,
+          "Ras Elased Australis"
+        ],
+        [
+          205,
+          "Tania Australis"
+        ],
+        [
+          207,
+          "Dubhe"
+        ],
+        [
+          208,
+          "Muscida"
+        ],
+        [
+          211,
+          "Yuyu"
+        ],
+        [
+          224,
+          "Sheratan"
+        ],
+        [
+          225,
+          "Capella"
+        ],
+        [
+          226,
+          "Hamal"
+        ],
+        [
+          229,
+          "Elnath"
+        ],
+        [
+          230,
+          "Menkar"
+        ],
+        [
+          232,
+          "Mirach"
+        ],
+        [
+          233,
+          "Algenib"
+        ],
+        [
+          238,
+          "Mirfak"
+        ],
+        [
+          241,
+          "Betelgeuse"
+        ],
+        [
+          245,
+          "Polaris"
+        ],
+        [
+          247,
+          "Tiansi"
+        ]
+      ],
+      "quantization": [
+        {
+          "field": "star.positionUnits",
+          "storage": "float32",
+          "decode": "identity",
+          "unit": "pc",
+          "bound": 0,
+          "measured": 0,
+          "displayAlphaChange": 0
+        },
+        {
+          "field": "star.absoluteMagnitude",
+          "storage": "int16",
+          "decode": "float32(q / 1000)",
+          "unit": "mag",
+          "bound": 0.0005,
+          "measured": 0,
+          "displayAlphaChange": 0.0010881339704160243
+        },
+        {
+          "field": "node.positionUnits",
+          "storage": "float64",
+          "decode": "identity",
+          "unit": "pc",
+          "bound": 0,
+          "measured": 0,
+          "displayAlphaChange": 0
+        },
+        {
+          "field": "node.radiusUnits",
+          "storage": "float64",
+          "decode": "identity",
+          "unit": "pc",
+          "bound": 0,
+          "measured": 0,
+          "displayAlphaChange": 0
+        },
+        {
+          "field": "node.absoluteMagnitude",
+          "storage": "float64",
+          "decode": "identity",
+          "unit": "mag",
+          "bound": 0,
+          "measured": 0,
+          "displayAlphaChange": 0
+        }
+      ]
+    },
+    "atlas": {
+      "path": "point-atlas.webp",
+      "columns": 32,
+      "tileSize": 32,
+      "colors": [
+        [
+          255,
+          68,
+          0
+        ],
+        [
+          255,
+          80,
+          0
+        ],
+        [
+          255,
+          92,
+          0
+        ],
+        [
+          255,
+          103,
+          0
+        ],
+        [
+          255,
+          115,
+          0
+        ],
+        [
+          255,
+          127,
+          0
+        ],
+        [
+          255,
+          139,
+          20
+        ],
+        [
+          255,
+          151,
+          50
+        ],
+        [
+          255,
+          163,
+          78
+        ],
+        [
+          255,
+          174,
+          104
+        ],
+        [
+          255,
+          186,
+          128
+        ],
+        [
+          255,
+          198,
+          152
+        ],
+        [
+          255,
+          210,
+          174
+        ],
+        [
+          255,
+          222,
+          195
+        ],
+        [
+          255,
+          234,
+          216
+        ],
+        [
+          255,
+          245,
+          236
+        ],
+        [
+          254,
+          248,
+          255
+        ],
+        [
+          229,
+          234,
+          255
+        ],
+        [
+          215,
+          226,
+          255
+        ],
+        [
+          205,
+          220,
+          255
+        ],
+        [
+          197,
+          215,
+          255
+        ],
+        [
+          190,
+          211,
+          255
+        ],
+        [
+          185,
+          208,
+          255
+        ],
+        [
+          180,
+          204,
+          255
+        ],
+        [
+          175,
+          202,
+          255
+        ],
+        [
+          171,
+          199,
+          255
+        ],
+        [
+          168,
+          196,
+          255
+        ],
+        [
+          164,
+          194,
+          255
+        ],
+        [
+          161,
+          192,
+          255
+        ],
+        [
+          158,
+          190,
+          255
+        ],
+        [
+          155,
+          188,
+          255
+        ],
+        [
+          152,
+          186,
+          255
+        ]
+      ],
+      "haloRadii": 2.5
+    },
+    "photometry": {
+      "minimumMagnitude": -25,
+      "maximumMagnitude": 35,
+      "step": 0.05,
+      "floor": 0.00392156862745098,
+      "limitingMagnitude": 7.351688460470012,
+      "hintsLimitMagnitude": 6.421057228616808,
+      "minimumRadiusPx": 0.6,
+      "samples": [
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.25,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.24242844681,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.212392635322,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.183039783399,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.154357169324,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.126332124653,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.09895204756,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.072204415185,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.046076795028,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 1.020556855412,
+          "luminance": 0.95
+        },
+        {
+          "radiusPx": 0.995632375074,
+          "luminance": 0.940243354002
+        },
+        {
+          "radiusPx": 0.971291251917,
+          "luminance": 0.921205157627
+        },
+        {
+          "radiusPx": 0.947521510956,
+          "luminance": 0.902533787226
+        },
+        {
+          "radiusPx": 0.92431131151,
+          "luminance": 0.884223337047
+        },
+        {
+          "radiusPx": 0.901648953673,
+          "luminance": 0.866267923363
+        },
+        {
+          "radiusPx": 0.879522884101,
+          "luminance": 0.84866168957
+        },
+        {
+          "radiusPx": 0.857921701153,
+          "luminance": 0.831398810921
+        },
+        {
+          "radiusPx": 0.836834159432,
+          "luminance": 0.814473498898
+        },
+        {
+          "radiusPx": 0.816249173742,
+          "luminance": 0.797880005241
+        },
+        {
+          "radiusPx": 0.796155822517,
+          "luminance": 0.781612625656
+        },
+        {
+          "radiusPx": 0.776543350746,
+          "luminance": 0.765665703207
+        },
+        {
+          "radiusPx": 0.757401172416,
+          "luminance": 0.750033631422
+        },
+        {
+          "radiusPx": 0.738718872523,
+          "luminance": 0.734710857117
+        },
+        {
+          "radiusPx": 0.720486208668,
+          "luminance": 0.719691882951
+        },
+        {
+          "radiusPx": 0.702693112272,
+          "luminance": 0.704971269743
+        },
+        {
+          "radiusPx": 0.685329689428,
+          "luminance": 0.690543638541
+        },
+        {
+          "radiusPx": 0.668386221429,
+          "luminance": 0.676403672479
+        },
+        {
+          "radiusPx": 0.65185316499,
+          "luminance": 0.66254611842
+        },
+        {
+          "radiusPx": 0.635721152178,
+          "luminance": 0.648965788399
+        },
+        {
+          "radiusPx": 0.619980990096,
+          "luminance": 0.635657560891
+        },
+        {
+          "radiusPx": 0.604623660314,
+          "luminance": 0.622616381895
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.574270290389
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.515102720144
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.461218683857
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.412197749937
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.36765048885
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.327216317707
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.290561485962
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.257377193731
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.227377834663
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.20029935574
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.175897726768
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.153947512724
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.13424054251
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.116584668006
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.100802607685
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.086730869357
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.074218746957
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.063127386562
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.053328917121
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.04470564166
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.037149284974
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.030560294053
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.024847187743
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.019925952344
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.01571948005
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.012157047353
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.00917383069
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.006710456806
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.004712585459
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.003130522242
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.001918859462
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.001036143118
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.000444564189
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 0.000109672522
+        },
+        {
+          "radiusPx": 0.6,
+          "luminance": 1.11752e-7
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        },
+        {
+          "radiusPx": 0,
+          "luminance": 0
+        }
+      ]
+    },
+    "policy": {
+      "activeSlots": 255,
+      "transitionSlots": 255,
+      "maxErrorPx": 2,
+      "transitionMs": 180
+    },
+    "labels": {
+      "activeSlots": 1,
+      "transitionSlots": 1,
+      "capHeightPx": 12,
+      "gapPx": 7,
+      "maxAlpha": 0.55,
+      "fadeMs": 300
+    },
+    "resources": [
+      {
+        "path": "point-atlas.webp",
+        "bytes": 734,
+        "width": 1024,
+        "height": 32
+      }
+    ]
+  }
+}

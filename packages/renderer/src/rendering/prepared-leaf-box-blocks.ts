@@ -2,7 +2,7 @@ import { transformPreparedPoint } from '@cssearth/core';
 import { walkSilhouetteLevels, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
 import { unseenTextureWrites, type PreparedTexturePlacements } from './prepared-texture-levels.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
-import { createSettlePacer, SETTLE_PACING } from './settle-pacer.js';
+import { createSettlePacer, SETTLE_PACING, type SettlePacerOptions } from './settle-pacer.js';
 
 // Leaf boxes by group (packages/bake/src/presentation/leaf-box.ts). Every leaf reads the silhouette step `binding.property`; the prepared
 // groups say which leaves share one. A block of surface leaves (named in the placements) takes the step for the body's
@@ -125,7 +125,8 @@ export function leafBoxShrinkable(binding: LeafBoxBinding, wanted: ReadonlyMap<s
  * group's leaves. Without an animation frame (a native response, a test) every group is written at once; in a browser the
  * queue drains a few groups per frame, publications or not, once the camera has stopped (settle-pacer.ts). */
 export function createLeafBoxBlocks(binding: LeafBoxBinding, read: (name: string) => string, write: (name: string, value: string) => void,
-  frame: ((callback: (now?: number) => void) => unknown) | null = globalThis.requestAnimationFrame?.bind(globalThis) ?? null,
+  /** The pacer the groups join: the document's by default (settle-pacer.ts); null writes every group at once. */
+  frame?: SettlePacerOptions['frame'],
   { clock = () => globalThis.performance?.now() ?? Date.now(), later = (callback: () => void, ms: number) => { globalThis.setTimeout(callback, ms); },
     devicePixelRatio = globalThis.devicePixelRatio ?? 1 }:
     { clock?: () => number; later?: (callback: () => void, ms: number) => void; devicePixelRatio?: number } = {}) {
@@ -160,7 +161,7 @@ export function createLeafBoxBlocks(binding: LeafBoxBinding, read: (name: string
       pacer.published();
       const published = clock();
       for (const [name, { level }] of needs) { const current = written.get(name); if (current === undefined || level >= current) lastNeeded.set(name, published); }
-      if (!frame) { apply([...needs].filter(([name, need]) => written.get(name) !== need.level).map(([name]) => name)); return; }
+      if (frame === null) { apply([...needs].filter(([name, need]) => written.get(name) !== need.level).map(([name]) => name)); return; }
       // A group that shows no step yet is written on the next frame, moving or not.
       pacer.request([...needs.keys()].some(name => !written.has(name)));
     },

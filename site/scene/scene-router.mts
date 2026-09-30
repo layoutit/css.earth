@@ -483,11 +483,10 @@ export function createSceneRouter({
   function finishArrival(ready: RouterContext, session: Session, request?: NavigationRequest, interrupted = false) {
     if (request) requests.finish(request, interrupted ? 'interrupted' : 'finished');
     const mounted = !request || request.scene === 'replace';
-    if (mounted) {
-      if (session.mount?.navigation) followSelectionCamera(session, session.mount.navigation.capture());
-      publishSelection();
-      if (ready.selection.current.kind === 'overview') aimAtSystemCenter(ready);
-    }
+    if (mounted && session.mount?.navigation) followSelectionCamera(session, session.mount.navigation.capture());
+    // Retained arrivals commit their URL after selection; page datasets must follow that committed address too.
+    publishSelection();
+    if (mounted && ready.selection.current.kind === 'overview') aimAtSystemCenter(ready);
     syncPlayback();
     if (mounted) {
       connectOverviewSelection(ready, session);

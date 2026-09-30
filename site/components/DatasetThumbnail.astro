@@ -1,0 +1,7 @@
+---
+interface Props { src: string; class?: string }
+const { src, class: className } = Astro.props;
+---
+<span class:list={['object-dataset-round-preview', className]} aria-hidden="true">
+  <img class="object-search-preview" {src} width="40" height="40" alt="" loading="lazy" decoding="async" />
+</span>

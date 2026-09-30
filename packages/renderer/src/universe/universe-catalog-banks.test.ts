@@ -8,7 +8,7 @@ vi.mock('../image-layers/prepared-image-layer-runtime.js', () => ({
   mountPreparedCssImageLayers: ({ host, before }: { host: HTMLElement; before: Element }) => {
     const root = host.ownerDocument.createElement('div');
     host.insertBefore(root, before);
-    return { root, publish() {}, destroy() { root.remove(); } };
+    return { root, publish() {}, revealLarge() {}, destroy() { root.remove(); } };
   },
 }));
 

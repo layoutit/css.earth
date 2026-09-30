@@ -1,14 +1,9 @@
 ---
-import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import { OVERVIEWS } from '../objects.mts';
-import { sourceDocumentation } from '../source-documentation.mts';
+import { overviewResult } from '../server/overview-result.mts';
+import { objectResultMarkup } from '../server/object-result-markup.mts';
 ---
 
-{OVERVIEWS.map(overview => <li data-search-overview={overview.name.toLocaleLowerCase('en')} hidden>
-  <a class="object-link object-observation-control object-thumbnail-leading" href={overview.route}
-    data-source-subject={`overview:${overview.id}`} data-source-document={sourceDocumentation(overview.id, overview.name).href}
-    data-source-label={sourceDocumentation(overview.id, overview.name).label}>
-    <span class="object-dataset-icon"><ContextNavigationMarker objectId={overview.id} /></span>
-    <span class="object-name object-dataset-label">{overview.name}</span>
-  </a>
+{OVERVIEWS.map(overview => <li class="object-item" data-search-overview={overview.name.toLocaleLowerCase('en')} hidden>
+  <Fragment set:html={objectResultMarkup(overviewResult(overview))} />
 </li>)}

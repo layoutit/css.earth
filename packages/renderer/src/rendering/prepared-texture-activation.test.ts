@@ -2,6 +2,7 @@ import { expect, test } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { parseHTML } from 'linkedom';
 import { prepareTextureActivation, TEXTURE_PENDING_ATTRIBUTE } from './prepared-texture-activation.js';
+import { createFramePacer, SETTLE_PACING } from './settle-pacer.js';
 
 // The fake DOM has no cascade: a leaf's drawn image and display are its inline values unless its pending attribute's
 // !important rules (triangle-faces.css) replace them.
@@ -24,7 +25,9 @@ function fixture() {
   let id = 0;
   window.requestAnimationFrame = fn => { callbacks.set(++id, fn); return id; };
   window.cancelAnimationFrame = id => { callbacks.delete(id); };
-  const controller = prepareTextureActivation([leaves.slice(0, 2), leaves.slice(2)], fn => cleanup.push(fn));
+  // One batch a frame: a pacer whose budget never exceeds one unit admits exactly one whole batch each frame.
+  const pacer = createFramePacer(callback => window.requestAnimationFrame(now => callback(now)), { ...SETTLE_PACING, startUnits: 1, maximumUnits: 1 });
+  const controller = prepareTextureActivation([leaves.slice(0, 2), leaves.slice(2)], fn => cleanup.push(fn), pacer);
   document.body.append(root);
   return { root, leaves, controller, callbacks, dispose() { cleanup.forEach(fn => fn()); },
     paint() { const pending = [...callbacks.values()]; callbacks.clear(); pending.forEach(fn => fn(0)); } };

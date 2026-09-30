@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "stellar-neighbourhood",
+  "type": "point-field",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "localToReferenceXyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 30856775814913670,
+      "boundsUnits": {
+        "min": [
+          -1024,
+          -1024,
+          -1024
+        ],
+        "max": [
+          1024,
+          1024,
+          1024
+        ]
+      }
+    },
+    "preparation": {
+      "source": "atlas-recipe.json"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-point-field-bank@1",
+    "url": "stars.json"
+  }
+}

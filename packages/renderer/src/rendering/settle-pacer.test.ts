@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest';
-import { createSettlePacer, SETTLE_PACING } from './settle-pacer.js';
+import { createFramePacer, createSettlePacer, SETTLE_PACING } from './settle-pacer.js';
 import { cameraMotionSignalFor } from '../navigation/camera-motion-signal.js';
 
 function harness(holdWhile: 'motion' | 'coasting', pending: number) {
@@ -47,4 +47,28 @@ test('held work lands a paced slice per frame, halving after a slow frame', () =
   expect(slices.at(-1)).toEqual([SETTLE_PACING.startUnits / 2, false]);
   while (frames.length) run(60 + slices.length * 10);
   expect(left()).toBe(0);
+});
+
+test('owners of one document share one frame budget and take turns', () => {
+  const frames: ((now?: number) => void)[] = [];
+  const pacer = createFramePacer(callback => { frames.push(callback); });
+  const taken: [string, number][] = [];
+  const owner = (name: string, pending: number) => {
+    let left = pending;
+    return createSettlePacer(budget => { const wrote = Math.min(left, budget); left -= wrote; if (wrote) taken.push([name, wrote]); return wrote; },
+      { frame: pacer, holdWhile: 'never' });
+  };
+  const a = owner('a', 40), b = owner('b', 40);
+  a.request(); b.request();
+  expect(frames).toHaveLength(1);
+  frames.shift()!(0);
+  // One budget for the frame: the first owner takes it all, the second waits.
+  expect(taken).toEqual([['a', SETTLE_PACING.startUnits]]);
+  frames.shift()!(10);
+  // The next frame starts with the other owner, from a budget grown after a quick frame.
+  expect(taken[1]).toEqual(['b', SETTLE_PACING.startUnits * 1.5]);
+  while (frames.length) frames.shift()!(20 + taken.length * 10);
+  expect(taken.filter(([name]) => name === 'a').reduce((sum, [, wrote]) => sum + wrote, 0)).toBe(40);
+  expect(taken.filter(([name]) => name === 'b').reduce((sum, [, wrote]) => sum + wrote, 0)).toBe(40);
+  a.destroy(); b.destroy();
 });

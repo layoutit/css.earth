@@ -127,7 +127,9 @@ export function createWorldContextMarkerPaint(marker: HTMLElement, mover: HTMLEl
       // Opacity lives on the mover so its marker pseudos do not restyle on camera motion.
       if (policyChanged || !wasShown || hoverChanged) fader.multiply(mover, emphasis, animated ? 120 : 0);
       fader.set(mover, frame.billboardShown && !plannedShown ? 0 : markerOpacity);
-      const transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
+      // Positions to a thousandth of a pixel, what the stored transform keeps: a finer change writes a value CSS already
+      // holds (4,414 of 20,913 marker transform writes in one stress run did, 2026-09-30).
+      const transform = `translate(${Math.round(x * 1000) / 1000}px,${Math.round(y * 1000) / 1000}px) translate(-50%,-50%)`;
       if (markerTransform !== transform) { mover.style.transform = transform; markerTransform = transform; }
       const scale = `scale(${markerDiameter / BODY_INDICATOR_DIAMETER * (flatDot ? 1 : sprite?.imageScale ?? 1)})`;
       if (spriteTransform !== scale) { spriteLeaf.style.transform = scale; spriteTransform = scale; }

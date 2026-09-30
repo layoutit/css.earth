@@ -31,7 +31,7 @@ Past 200 Mpc the view is DESI's first data release, drawn as the same dots, in t
 
 ## Evidence
 
-A browser capture shows the whole field from 200 Mpc: sharp dots in their type colours and brightness tones, even across the view. The renderer's catalogue point tests (`packages/renderer/src/universe/catalogue-points.test.ts`) check that a stacked bank only adds dots as the view narrows. The [context lineage test](../../../src/platform/context-lineage.test.mts) checks that its products read only its source records.
+A browser capture shows the whole field from 200 Mpc: sharp dots in their type colours and brightness tones, even across the view. The renderer's catalogue point tests (`packages/renderer/src/universe/catalogue-points.test.ts`) check that a stacked bank only adds dots as the view narrows. The [context lineage test](../../../site/test/context-lineage.test.mts) checks that its products read only its source records.
 
 ## Known problems
 

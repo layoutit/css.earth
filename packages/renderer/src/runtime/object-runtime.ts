@@ -31,6 +31,7 @@ import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
 /** A User Timing mark per mount step, so a trace splits a scene handoff (`cssEarth:mount:<step>`). */
 const mountMark = (step: string) => { globalThis.performance?.mark?.(`cssEarth:mount:${step}`); };
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
+import { createRevealDecodeGate } from './reveal-decode-gate.js';
 
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
   createPlayback: createPreparedPlayback, createSelection: createObjectSelectionRuntime, createControls: createObjectControlBinding, createOrbit: createRetainedCubicSkyOrbit,
@@ -71,6 +72,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     /** Camera, datasets and shared views answer only between readiness and disposal. */
     const live = () => phase === 'ready' && !lifetime.disposed;
     let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null;
+    // A hidden mesh shows again only once its images are decoded (reveal-decode-gate.ts).
+    const revealDecode = createRevealDecodeGate({ decode: () => resources.decodeForPaint(), onDecoded: () => guarded(() => orbit?.invalidate()) });
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
     let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null, featuresInFlight = arriving;
     let allowed = false, navigatedDataset: string | null = null, maximumZoom = definition.camera.maximumZoom;
@@ -305,6 +308,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // but must not schedule detail/readout work for the scene being left behind.
       const hiddenDeparture = departing && publication.levelOfDetail.stage !== 'geometry'
         && previousPublication?.levelOfDetail.stage !== 'geometry';
+      // A decode for a reveal holds only until the mesh shows or the body leaves the geometry stage.
+      if (publication.levelOfDetail.stage !== 'geometry' || mounted?.sceneElement.hidden === false) revealDecode.reset();
       reference ??= publication;
       currentView = Object.freeze({ ...publication, reference, previous: previousPublication, revision: ++revision, motionAtRest: playback.motionAtRest() });
       previousPublication = publication;
@@ -325,9 +330,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       controls = environment.createControls({ stage, controls: definition.controls, initialSelection,
         getState: () => selection?.state() ?? { desired: initialSelection, committed: null, committedBy: null, pending: true, plan: null, loadingMaterial: false, ready: false, error: null, viewRevision: null },
-        onAction: async action => {
+        onAction: async (action, options) => {
           const before = selection?.state().committed?.datasetId;
-          const committed = await (selection?.dispatch(action) ?? false);
+          const committed = await (selection?.dispatch(action, options) ?? false);
           // Re-selecting the committed dataset is still an explicit valid choice,
           // including when it replaces an invalid dataset URL.
           if (committed && action.kind === 'dataset' && action.id === before && !lifetime.disposed) {
@@ -361,10 +366,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onMaterialError: error => console.error(error) });
       context.own(() => selection?.destroy());
       mountMark('selection-created');
+      const canReveal = () => selection?.state().plan?.deferredTextures !== true
+        && (phase === 'mounting' || !mounted!.sceneElement.hidden || revealDecode.ready());
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
         ...(mounted.revealGroups ? { revealGroups: mounted.revealGroups } : {}),
-        // An undrawn mesh commits no textures; it stays hidden until it has them.
-        canReveal: () => selection?.state().plan?.deferredTextures !== true,
+        // An undrawn mesh commits no textures; it stays hidden until it has them, and until they are decoded again.
+        canReveal,
         // Connected activation owns leaf attachment during mount.
         // Dolly staging takes over only for subsequent LOD re-entry.
         canStageReveal: () => phase !== 'mounting',

@@ -36,6 +36,7 @@ const COMPARE: { readonly [K in keyof BodyValues]-?: (a: Body[K], b: Body[K]) =>
   x: sameValue, y: sameValue, diameter: sameValue, markerOpacity: sameValue, visible: sameValue, annotationVisible: sameValue,
   hovered: sameValue, lineWidth: sameValue, orbitVisibility: sameValue, labelShown: sameValue, labelPlacement: sameValue,
   indicatorShown: sameValue, indicatorCutout: sameValue, labelPosition: sameNumbers, orbitBounds: sameBounds, orbitAppearance: sameAppearance,
+  coveredBy: sameValue,
 };
 const VALUE_KEYS = Object.keys(COMPARE) as (keyof BodyValues)[];
 function changedValues(old: Body | undefined, body: Body): Partial<BodyValues> | null {
@@ -61,7 +62,7 @@ function changedPaint(old: Body | undefined, values: Partial<BodyValues>, orbitP
   const moved = has('x') || has('y');
   let mask = 0;
   const shownBefore = markerShown(old), shownAfter = (next('visible') || (next('annotationVisible') && (next('indicatorShown') || next('labelShown')))) && next('markerOpacity') > 0;
-  if (has('visible') || has('markerOpacity') || ((shownBefore || shownAfter) && (moved || has('diameter')))) mask |= ContextChange.marker;
+  if (has('visible') || has('coveredBy') || has('markerOpacity') || ((shownBefore || shownAfter) && (moved || has('diameter')))) mask |= ContextChange.marker;
   // The pseudo consumes resolved visibility; its continuous zoom alpha belongs
   // to the billboard. Eligibility alpha is planner state, not another paint.
   if (has('indicatorShown') || ((old.indicatorShown || next('indicatorShown')) && moved)) mask |= ContextChange.indicator;

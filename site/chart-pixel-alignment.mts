@@ -1,3 +1,4 @@
+import { opacityClockFor } from '@cssearth/renderer';
 import type { BrowserWindow } from './browser/browser-types.mts';
 /** Align only visible charts. Hidden content owns no measurement frame, and
  * reading all positions before publishing avoids per-chart layout flushes. */
@@ -5,9 +6,11 @@ export function createChartPixelAlignmentController(drawer: HTMLElement, windowT
   const charts = [...drawer.querySelectorAll<HTMLElement>('.object-chart')];
   if (!charts.length) return { destroy() {} };
   const visible = new Set<HTMLElement>(), offsets = new Map<HTMLElement, number>(), events = new AbortController();
+  // The document's one frame clock.
+  const clock = opacityClockFor(windowTarget);
   let frame: number | null = null, disposed = false;
   const cancel = () => {
-    if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+    if (frame !== null) clock.cancel(frame);
     frame = null;
   };
   const align = () => {
@@ -25,7 +28,7 @@ export function createChartPixelAlignmentController(drawer: HTMLElement, windowT
     }
   };
   const schedule = () => {
-    if (!disposed && visible.size && frame === null) frame = windowTarget.requestAnimationFrame(align);
+    if (!disposed && visible.size && frame === null) frame = clock.request(align);
   };
   const observer = new windowTarget.IntersectionObserver(entries => {
     if (disposed) return;

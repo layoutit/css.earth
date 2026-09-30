@@ -120,7 +120,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         if (errors.length) throw new AggregateError(errors, 'Prepared universe cleanup failed.');
       };
       try {
-        lifetime.onDispose(() => { delete stage.dataset.contextScale; });
         const opacityClock = opacityClockFor(document.defaultView!);
         const root = document.createElement('div');
         lifetime.onDispose(() => root.remove());
@@ -182,7 +181,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const caption = () => previewCaption ?? captionBody;
         const captionFlags = () => ({ overview: selectionPreview ? false : overview, focused: detailedFocus !== null, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
         let detailedFocus: { objectId: string; focus: PreparedNavigationFocus } | null = null;
-        let publishedScale = '';
         background.mount();
         catalogBanks.loadInitialImages();
         for (const shell of shells) shellLayers.push(own(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell })));
@@ -328,10 +326,6 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
               focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,
                 ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });
-              // Near the selected body its own scale wins, wherever that body sits: a placed star is an object at stellar distances.
-              const selectedDistanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]));
-              const scale = fade > 0 ? 'galactic' : selectedDistanceM <= selected.radiusM * 100 ? 'object' : distanceM > plan.stars.fadeStartDistanceM ? 'stellar' : 'system';
-              if (scale !== publishedScale) { stage.dataset.contextScale = scale; publishedScale = scale; }
             });
           },
         });

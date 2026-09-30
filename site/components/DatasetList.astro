@@ -1,6 +1,7 @@
 ---
 import type { Props as ShellProps } from '../object-shell-types';
 import DatasetLegend from './DatasetLegend.astro';
+import DatasetThumbnail from './DatasetThumbnail.astro';
 import DatasetDescription from './DatasetDescription.astro';
 import SequencePlayer from './SequencePlayer.astro';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
@@ -28,12 +29,14 @@ const borrowedLegend = (dataset: NonNullable<ShellProps['datasets']>['controls']
   // A dataset that carries the very scale it borrows publishes it once, not twice.
   return JSON.stringify(lender.legend) === JSON.stringify(dataset.legend) ? undefined : lender;
 };
-// A dataset shown as a sequence lists its group once, as its first step; every step's details step to its neighbours.
+// A dataset shown as a sequence lists its group once, as the step it opens on (its first, or its last for a record whose
+// newest date leads); every step's details step to its neighbours.
 type Control = NonNullable<ShellProps['datasets']>['controls'][number];
 const stepMembers = (dataset: Control) => dataset.step ? datasets.controls.filter(candidate => candidate.step?.group === dataset.step!.group) : [];
-const listed = (dataset: Control) => !dataset.step || stepMembers(dataset)[0]?.id === dataset.id;
+const opening = (members: Control[]) => members[0]?.step?.opens === 'last' ? members.at(-1) : members[0];
+const listed = (dataset: Control) => !dataset.step || opening(stepMembers(dataset))?.id === dataset.id;
 const defaultControl = datasets.controls.find(dataset => dataset.id === datasets.defaultDataset);
-const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.id : defaultControl?.id;
+const defaultListedId = defaultControl?.step ? opening(stepMembers(defaultControl))?.id : defaultControl?.id;
 ---
 <section id={`${objectId}-dataset-list`} class="object-datasets">
   <form id={`${objectId}-datasets`} action={route ?? undefined} method="get" data-dataset-form data-focus-form={focus || undefined} data-drawn-page={page} hidden>
@@ -45,7 +48,7 @@ const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.i
         <span class="object-dataset-picker-current">
           {datasets.controls.filter(listed).map(dataset => <span class="object-dataset-picker-selection"
             data-dataset-selected={dataset.id} hidden={dataset.id !== defaultListedId}>
-            <span class="object-dataset-picker-preview"><img src={previewUrl(dataset)} width="40" height="40" alt="" loading="lazy" decoding="async" /></span>
+            <DatasetThumbnail class="object-dataset-picker-preview" src={previewUrl(dataset)} />
             <span class="object-dataset-picker-text"><span class="object-dataset-picker-label">{dataset.label}</span>
               {dataset.detail && <span class="object-dataset-picker-detail">{dataset.detail}</span>}</span>
           </span>)}
@@ -73,9 +76,7 @@ const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.i
             aria-controls={`${objectId}-${dataset.id}-details`}
             title={dataset.title}
           >
-            <span class="object-dataset-icon object-dataset-round-preview" aria-hidden="true">
-              <img class="object-search-preview" src={previewUrl(dataset)} width="40" height="40" alt="" loading="lazy" decoding="async" />
-            </span>
+            <DatasetThumbnail class="object-dataset-icon" src={previewUrl(dataset)} />
             <span class="object-dataset-label">{dataset.label}</span>
             {dataset.detail && <span class="object-dataset-detail">{dataset.detail}</span>}
           </button>

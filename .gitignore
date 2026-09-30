@@ -28,6 +28,8 @@ output/playwright/
 src/objects/*/source/**/*.csv
 # LGGS M31 star table (12.5 MB); restored from its CDS origin (src/objects/m31/source/lggs-stars/points.json).
 src/objects/m31/source/lggs-stars/table4.dat.gz
+# Earth's dated NASA MUR tile archives (45 MB a day); restored from the source mirror (src/objects/earth/source/manifest.json).
+src/objects/earth/source/science/mur/*/tiles.tar.gz
 src/objects/*/source/**/*.fits
 src/objects/*/source/**/*.fit
 src/objects/*/source/**/*.gif
@@ -48,8 +50,7 @@ src/objects/*/source/**/*.bsp
 src/objects/*/source/**/*.bc
 src/objects/*/source/**/*.bds
 # Akatsuki UVI Level 3b map exposures: a versioned DARTS volume behind a DOI, restored by the body's
-# acquisition plan from a stable URL. Earth's NOAA CoralTemp grid stays committed, so this is not a
-# rule about NetCDF; it is about which archive can hand the same bytes back.
+# acquisition plan from a stable URL. The rule is about which archive can hand the same bytes back, not about NetCDF.
 src/objects/venus/source/akatsuki/*.nc
 
 # Accepted Saturn source-of-truth inputs without a direct acquisition URL.

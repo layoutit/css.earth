@@ -157,7 +157,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   const [controls, datasets, bindings] = await Promise.all([
     optionalJson(resolve(outputDirectory, 'controls.json')),
     optionalJson(resolve(outputDirectory, 'datasets.json')),
-    optionalJson(resolve(objectDirectory, 'source/content/lens-bindings.json')),
+    optionalJson(resolve(objectDirectory, 'source/content/dataset-bindings.json')),
   ]);
   const shell=controls?.datasets ? parsePreviewControls(controls.datasets).controls : [];
   assertSurfacePreviewCoverage(shell.filter(dataset => !excluded.includes(dataset.id) && (!selected || selected.has(dataset.id))), images,

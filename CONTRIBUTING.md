@@ -202,6 +202,8 @@ a shared package counts as an import of the source file its entry is built
 from. It groups the files into folders and fails when a change adds:
 
 - an import that closes a folder cycle;
+- a new workspace package dependency cycle (dependencies, devDependencies and
+  peerDependencies), or growth of a recorded cycle's strongly connected component;
 - an import from `packages/*` into any other tree;
 - an import into `site/`, `labs/` or `.github/` from outside that tree (Netlify
   functions and root `*.config.*` files are allowed);
@@ -212,10 +214,13 @@ from. It groups the files into folders and fails when a change adds:
 - an import of `@cssearth/bake` from `packages/telescope`, tests included;
 - an import between `nebula/` and `objects/` inside `@cssearth/bake`, either way.
 
-Type-only imports count. Existing cases are listed in
+Type-only imports count. The package-only and application-entry layer rules have
+no baseline: every violation fails, including during a baseline update. Existing
+folder edges and canonical workspace package cycles are listed in
 `.github/scripts/architecture/baseline.json`, so they do not fail the check. If the
-check reports that something got better, or that a change looks like a rename,
-run `pnpm check:architecture --update-baseline` and commit the baseline. It needs
+check reports that something got better,
+run `pnpm check:architecture --update-baseline` and commit the baseline. Updates
+refuse new violations; recorded package cycles may only shrink. It needs
 every source file on disk and the shared packages built (`pnpm install` does
 both). It stops, rather than passing, when a source file is missing or an
 import of a shared package names no entry it can trace to a source file.

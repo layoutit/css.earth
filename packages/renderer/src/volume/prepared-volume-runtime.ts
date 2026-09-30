@@ -3,6 +3,10 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { cssViewFromOrientation, worldRotationFromQuaternion, worldRotationCss } from '../navigation/world-camera-math.js';
 import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, PreparedCssVolume, VolumeCameraPublication, VolumeLocalCamera, VolumeVector, PreparedVolumeCameraTransform } from './types.js';
 import { validatePreparedCssVolume } from './validation.js';
+import { revealLayer } from '../rendering/layer-reveal.js';
+
+/** A leaf image this large decodes off the main thread before it shows again (layer-reveal.ts). */
+export const LARGE_IMAGE_PIXELS = 1 << 20;
 
 const AXES = ['x', 'y', 'z'] as const;
 
@@ -26,7 +30,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   const roots: HTMLElement[] = [];
   const cameras: HTMLElement[] = [];
   const scenes: HTMLElement[] = [];
-  const boundedLeaves: { nodes: HTMLElement[]; bounds: PreparedLeafBounds | undefined; shown: boolean | null }[] = [];
+  // `large`: the image of a leaf big enough that a synchronous decode shows (layer-reveal.ts), or null.
+  const boundedLeaves: { nodes: HTMLElement[]; bounds: PreparedLeafBounds | undefined; shown: boolean | null; axis: number; large: string | null }[] = [];
   const pendingTextures = AXES.map(() => new Map<{ nodes: HTMLElement[]; shown: boolean | null }, string>());
   const materialLeaves: { axis: number; leaf: typeof boundedLeaves[number] }[] = [];
   const opticalCopies: { nodes: HTMLElement[][]; alpha: number[] }[] = [];
@@ -54,7 +59,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     opticalCopies.push(copies);
     for (const leaf of stack.leaves) {
       const textureUrl = options.resolveResource(leaf.texturePath);
-      const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels ?? frameBounds, shown: null as boolean | null };
+      const bounded = { nodes: [] as HTMLElement[], bounds: leaf.boundsCssPixels ?? frameBounds, shown: null as boolean | null,
+        axis: AXES.indexOf(axis), large: leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS ? textureUrl : null };
       boundedLeaves.push(bounded);
       materialLeaves.push({ axis: AXES.indexOf(axis), leaf: bounded });
       pendingTextures[AXES.indexOf(axis)]!.set(bounded, textureUrl);
@@ -111,7 +117,9 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         const shown = preparedLeafMayContribute(leaf.bounds, planes);
         if (shown === leaf.shown) continue;
         leaf.shown = shown;
-        for (const node of leaf.nodes) node.style.visibility = shown ? '' : 'hidden';
+        // A large image returning to the view decodes off the main thread first: M31's 3,700 px detail slice decoded
+        // inside one 170 ms paint each time it came back on the iPad (2026-09-30).
+        for (const node of leaf.nodes) if (shown && leaf.large) revealLayer(node, leaf.large); else node.style.visibility = shown ? '' : 'hidden';
       }
     }
     const strengths = axisWeights(presentPhysicalPoseInVolume(world.pose, payload.frame), payload.stacks, payload.frame.boundsUnits);
@@ -140,6 +148,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         root.style.visibility = visible ? 'visible' : 'hidden';
         // A zero-weight axis stack leaves layout and compositing, not just paint.
         root.style.display = visible ? 'block' : 'none';
+        if (visible) for (const leaf of boundedLeaves) if (leaf.axis === index && leaf.large && leaf.shown !== false) for (const node of leaf.nodes) revealLayer(node, leaf.large);
         rootVisible[index] = visible;
       }
       if (rootOpacity[index] !== opacity) { root.style.opacity = opacity; rootOpacity[index] = opacity; }
@@ -165,6 +174,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       throw new TypeError('Prepared material texture index or URL is invalid.');
     if (destroyed) return;
     const { axis, leaf } = materialLeaves[index]!;
+    if (leaf.large) leaf.large = url;
     if (pendingTextures[axis]!.has(leaf)) pendingTextures[axis]!.set(leaf, url);
     else for (const node of leaf.nodes) node.style.backgroundImage = `url("${escapeUrl(url)}")`;
   };
@@ -188,6 +198,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         node.style.backgroundPosition = material.backgroundPosition;
       }
       pendingTextures[axis]!.set(leaf, material.textureUrl);
+      if (leaf.large) leaf.large = material.textureUrl;
     });
   }, roots: Object.freeze(roots), destroy() {
     if (destroyed) return;

@@ -19,3 +19,11 @@ test('a manual group carries one consistent autoplay choice', () => {
   assert.doesNotThrow(() => validateDatasetSteps('x', [first, last]));
   assert.throws(() => validateDatasetSteps('x', [first, { ...last, step: { ...last.step, autoplay: true } }]), /agree on autoplay/);
 });
+
+test('a group opens on its first step unless every member says it opens on its last', () => {
+  const older = { id: 'enso-2026-09-27', step: { group: 'enso', label: '27 Sept', opens: 'last' } };
+  const newest = { id: 'enso-2026-09-28', step: { group: 'enso', label: '28 Sept', opens: 'last' } };
+  assert.doesNotThrow(() => validateDatasetSteps('x', [older, newest]));
+  assert.throws(() => validateDatasetSteps('x', [older, { id: newest.id, step: { group: 'enso', label: '28 Sept' } }]), /agree on the step it opens on/);
+  assert.throws(() => validateDatasetSteps('x', [older, { ...newest, step: { ...newest.step, opens: 'newest' } }]), /opens must be "first" or "last"/);
+});

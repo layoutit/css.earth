@@ -1871,7 +1871,8 @@ test('the selected moon family shows readable labels, then fades at system dista
   expect(label.dataset.objectNavigateActivation).toBe('click'); expect(declared(label, 'pointerEvents')).toBe('none');
   const [left, top] = captionPosition(label);
   const rect = child.labelRect!;
-  expect(rect.left).toBeCloseTo(left, 5); expect(rect.top).toBeCloseTo(top, 5);
+  // The caption's DOM position is written to a thousandth of a pixel (world-context-marker-paint.ts); its hit rect is exact.
+  expect(rect.left).toBeCloseTo(left, 2); expect(rect.top).toBeCloseTo(top, 2);
   expect(rect.right - rect.left).toBe(label.dataset.contextName.length * 6);
   expect(layer.labelExclusionRects()).toContainEqual(rect);
   layer.publish(camera(1000), viewport);
