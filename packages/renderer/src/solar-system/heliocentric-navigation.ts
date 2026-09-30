@@ -45,6 +45,28 @@ function releaseDelegatedPresses(owner: EventTarget) {
   pressDelegates.delete(owner);
 }
 
+// A target's availability is keyboard, accessibility and hit state: it changes no pixel. While the camera moves
+// (`objectmotionchange`, camera-motion-signal.ts) each target's latest state waits, and lands once it stops: a pinch on a
+// Mars stress run flipped about 2,000 of these attributes on the iPad (2026-09-30).
+const motionHolds = new WeakMap<EventTarget, { moving: boolean; readonly pending: Map<object, () => void> }>();
+function motionHold(element: ObjectNavigationTarget) {
+  const owner = 'ownerDocument' in element ? element.ownerDocument : null;
+  if (!owner || typeof EventTarget === 'undefined' || !(owner instanceof EventTarget)) return null;
+  let hold = motionHolds.get(owner);
+  if (!hold) {
+    const created = { moving: false, pending: new Map<object, () => void>() };
+    owner.addEventListener('objectmotionchange', (event: Event) => {
+      created.moving = (event as CustomEvent<{ active?: unknown }>).detail?.active === true;
+      if (created.moving) return;
+      const landing = [...created.pending.values()];
+      created.pending.clear();
+      for (const land of landing) land();
+    }, { capture: true });
+    motionHolds.set(owner, hold = created);
+  }
+  return hold;
+}
+
 export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host: EventTarget,
   { activation = 'click', pointerTarget = true }: { activation?: 'click' | 'dblclick';
     /** False when a stage picker owns hits: the target keeps no pointer or cursor style. */
@@ -72,7 +94,13 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
   element.addEventListener('dblclick', activation === 'dblclick' ? activate : stopPointer);
   element.addEventListener('click', activation === 'click' ? activate : stopPointer);
   element.addEventListener('keydown', keyboard);
+  const hold = motionHold(element), key = {};
   const update = (next: string | null, name?: string) => {
+    if (hold?.moving) { hold.pending.set(key, () => write(next, name)); return; }
+    hold?.pending.delete(key);
+    write(next, name);
+  };
+  const write = (next: string | null, name?: string) => {
     const label = next === null ? null : `Go to ${name ?? next}`;
     if (objectId === next && previousLabel === label) return;
     objectId = next;
@@ -94,9 +122,10 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
       element.setAttribute('aria-label', label!);
     }
   };
-  update(null);
+  write(null);
   return Object.freeze({ update, destroy() {
-    update(null);
+    hold?.pending.delete(key);
+    write(null);
     if (pressOwner) releaseDelegatedPresses(pressOwner);
     else {
       element.removeEventListener('pointerdown', stopPointer);
