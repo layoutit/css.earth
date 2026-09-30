@@ -8,14 +8,16 @@ test('a spatial point field reprojects through one retained SVG path per paint c
     metersPerUnit:1,boundsUnits:{min:[-20,-20,-20] as const,max:[20,20,20] as const}};
   const style={colorCss:'#ffb38a',opacity:.85,radiusPx:1};
   expect(pointPaint(style)).toBe('#ffb38ad9');
+  let clock=0;
   const field=mountBatchedSpatialPoints({host,before,frame,points:[{positionUnits:[1,0,-10] as const}],className:'test-points',
-    stylePoint:()=>style,paintPalette:[pointPaint(style)]});
+    stylePoint:()=>style,paintPalette:[pointPaint(style)],now:()=>clock});
   const viewport={focalPixels:100,principalOffsetPixels:[0,0] as const,widthPixels:1000,heightPixels:800};
   const world={referenceFrame:'sun-icrf',epochJdTt:2451545,pose:{positionM:[0,0,0] as const,orientationXyzw:[0,0,0,1] as const}};
   field.publish({world,viewport});
   const path=field.root.querySelector('path')!,first=path.getAttribute('d');
   expect(field.root.querySelectorAll('path')).toHaveLength(1);expect(path.getAttribute('stroke')).toBe('#ffb38ad9');
   expect(field.root.querySelector('i')).toBeNull();expect(field.stats().visiblePoints).toBe(1);expect(first).toMatch(/^M/);
+  clock=100;
   field.publish({world:{...world,pose:{...world.pose,positionM:[1,0,0]}},viewport});
   expect(path.getAttribute('d')).not.toBe(first);expect(field.stats().visiblePoints).toBe(1);expect(host.children).toHaveLength(2);
   field.destroy();expect(host.children).toHaveLength(1);
@@ -122,11 +124,12 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
   const cells = catalogueCells(rows, undefined, 32);
   const points = rows.map(row => ({ positionUnits: [row[0], row[1], row[2]] as unknown as readonly [number, number, number], colour: row[3] }));
   const styles = [{ colorCss: '#ffffff', opacity: .5, radiusPx: 1 }, { colorCss: '#ff8800', opacity: 1, radiusPx: 2.5 }];
-  let keep = 1, drawn = rows.length;
+  // A clock 100 ms on every trial: every publication may repaint, so both fields decide by their paint alone.
+  let keep = 1, drawn = rows.length, clock = 0;
   const mount = (withCells: boolean) => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
       ...(withCells ? { cells: { boxes: Float64Array.from(cells.boxes.flat()), of: Int32Array.from(cells.of) } } : {}),
-      stylePoint: point => styles[point.colour]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep }); };
+      stylePoint: point => styles[point.colour]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep, now: () => clock }); };
   const dots = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')]
     .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?\d+ -?\d+h0/g)].map(match => match[0]).sort().join(''));
   const plain = mount(false), celled = mount(true);
@@ -148,7 +151,7 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
     if (trial % 3 !== 2) { keep = trial % 5 === 0 ? .4 : 1; drawn = trial % 7 === 0 ? Math.round(random() * rows.length) : rows.length; }
     const publication = { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: {
       positionM: position as unknown as readonly [number, number, number], orientationXyzw: orientation as unknown as readonly [number, number, number, number] } }, viewport };
-    plain.publish(publication); celled.publish(publication);
+    clock += 100; plain.publish(publication); celled.publish(publication);
     expect(dots(celled), `trial ${trial}`).toEqual(dots(plain));
     expect(celled.stats().visiblePoints).toBe(plain.stats().visiblePoints);
     expect(celled.stats().candidates).toBe(plain.stats().candidates);
@@ -161,4 +164,38 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
   expect(skippedSome, 'some views leave most points out').toBe(true);
   expect(skippedCells / 300, 'the cells skip most of what a view leaves out').toBeGreaterThan(cells.boxes.length / 4);
   plain.destroy(); celled.destroy();
+});
+
+test('a travelling camera repaints at most every 25 ms, warps the frames between and settles to the exact paint', async () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
+  const points = Array.from({ length: 30 }, (_, index) => ({ positionUnits: [(index % 6) - 2.5, Math.floor(index / 6) - 2, -10] as const }));
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  let clock = 0, settled = 0;
+  const mount = () => { const { document } = parseHTML('<div id="host"></div>');
+    return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
+      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'], now: () => clock, onSettle: () => settled++ }); };
+  const exact0 = () => { const fresh = mount(); fresh.publish(at(-3)); const d = fresh.root.querySelector('path')!.getAttribute('d'); fresh.destroy(); return d; };
+  const field = mount(), path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
+  field.publish(at(0));
+  const first = path.getAttribute('d');
+  clock = 16; field.publish(at(-1));
+  expect(path.getAttribute('d'), 'a frame 16 ms after a repaint keeps it').toBe(first);
+  expect(svg.style.transform, 'and warps it').toMatch(/^matrix3d/);
+  clock = 33; field.publish(at(-2));
+  expect(path.getAttribute('d'), 'a frame 33 ms after it repaints').not.toBe(first);
+  expect(svg.style.transform).toBe('');
+  clock = 49; field.publish(at(-3));
+  expect(path.getAttribute('d'), 'another paced frame').not.toBe(exact0());
+  // The camera stops: a publication that barely moves may not keep a paint left behind by a paced frame.
+  clock = 60; field.publish(at(-3));
+  expect(path.getAttribute('d'), 'a stop right after a paced frame repaints exactly').toBe(exact0());
+  clock = 80; field.publish(at(-4));
+  await new Promise(resolve => setTimeout(resolve, 200));
+  const exact = mount(); exact.publish(at(-4));
+  expect(path.getAttribute('d'), 'a pause repaints exactly').toBe(exact.root.querySelector('path')!.getAttribute('d'));
+  expect(settled, 'and tells its owner once, so a screen budget settles on the stopped view').toBe(1);
+  expect(svg.style.transform).toBe('');
+  field.destroy(); exact.destroy();
 });

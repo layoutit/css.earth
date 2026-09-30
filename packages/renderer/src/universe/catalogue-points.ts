@@ -241,8 +241,11 @@ export function mountCataloguePoints({ host, before, url, loadBank }: {
         };
         const distanceOf = (publication: VolumeCameraPublication) =>
           Math.hypot(...publication.world.pose.positionM.map((value, axis) => value - bank.frame.originM[axis]!)) / bank.frame.metersPerUnit;
+        // A level's exact repaint after a pause measures the view the camera stopped at: the shares are recomputed from it and
+        // published once more, so a still view keeps the same dots however the frames before it were paced.
+        const settled = () => { if (latest && runtime) { runtime.publish(latest); runtime.publish(latest); } };
         const mount = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
-          cells: { boxes: bank.cells.boxes, of: cellOf },
+          cells: { boxes: bank.cells.boxes, of: cellOf }, onSettle: settled,
           drawnCount: (distanceUnits, cameraUnits) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: share }),
           // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up; a part
