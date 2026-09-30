@@ -105,7 +105,6 @@
     "oracles:run": "node packages/core/src/node/oracle/run.mts"
   },
   "dependencies": {
-    "@cesium/engine": "26.3.0",
     "@layoutit/polycss": "0.2.11",
     "linkedom": "^0.18.13"
   },

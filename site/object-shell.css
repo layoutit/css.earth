@@ -179,46 +179,12 @@
   height: auto;
   border-radius: 0;
 }
-.object-lens-texture:not([src]) { visibility: hidden; }
 
 .object-surface-minimap {
   position: relative;
   margin-inline-end: 0;
   overflow: hidden;
   border-radius: 0;
-}
-
-.object-surface-minimap[data-surface-minimap] {
-  touch-action: none;
-  user-select: none;
-  cursor: crosshair;
-}
-
-.object-surface-minimap[data-dragging="true"] { cursor: grabbing; }
-.object-surface-minimap:focus { outline: none; }
-
-.object-surface-minimap[data-ready="true"] > .object-lens-texture { opacity: .35; }
-
-.object-minimap-viewport {
-  display: none;
-  position: absolute;
-  box-sizing: border-box;
-  pointer-events: none;
-}
-
-.object-surface-minimap[data-ready="true"] .object-minimap-viewport:not([hidden]) { display: block; }
-
-.object-minimap-viewport {
-  border: 1px solid rgb(255 255 255 / 50%);
-  background-image: var(--surface-preview-image, none);
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 55%);
-  background-origin: border-box;
-  background-repeat: repeat-x;
-}
-
-.object-surface-minimap[data-full-view="true"] .object-minimap-viewport {
-  border-color: transparent;
-  box-shadow: none;
 }
 
 .object-lens-legend-panel {

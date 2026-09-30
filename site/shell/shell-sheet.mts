@@ -137,7 +137,7 @@ export function createSheetController(documentTarget: Document, windowTarget: Br
     return false;
   };
   const ownsGesture = (target: EventTarget | null) => target !== handle && target instanceof windowTarget.Element &&
-    target.closest("input, select, textarea, [data-surface-minimap]") !== null;
+    target.closest("input, select, textarea, [data-sequence-player]") !== null;
 
   // The search and filters ride with the sheet, so a vertical swipe can begin on any of the three.
   // Inputs inside the sheet keep their own gestures; the search field and filter buttons still accept taps.

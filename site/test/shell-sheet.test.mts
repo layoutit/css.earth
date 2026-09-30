@@ -232,3 +232,19 @@ test('destroy leaves the sheet, its riders and the body as the markup made them'
   assert.ok(!sheet.classList.contains('is-dragging') && !sheet.classList.contains('is-settling'));
   assert.equal(document.body.dataset.sheet, undefined);
 });
+
+
+test('passive maps allow sheet scrolling while sequence controls retain their gestures', () => {
+  for (const player of [false, true]) {
+    const { document, sheet, controller, pointer } = mountSheet();
+    const map = document.createElement('div');
+    map.dataset.surfaceMinimap = '{}';
+    if (player) map.dataset.sequencePlayer = '';
+    const imageOrControl = document.createElement(player ? 'button' : 'img');
+    map.append(imageOrControl); sheet.querySelector('.object-drawer-content')!.append(map);
+    pointer('pointerdown', imageOrControl, 800);
+    pointer('pointermove', document, 700);
+    assert.equal(sheet.classList.contains('is-dragging'), !player);
+    controller.destroy();
+  }
+});

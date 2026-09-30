@@ -8,7 +8,7 @@ import type { SurfaceMapReader } from './minimap/surface-map-context.mts';
 import { parseSurfaceMapConfig } from './minimap/surface-map-context.mts';
 import type { OverviewScope } from './overview-context.mts';
 import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
-import { loadSurfaceGeometry, loadedSurfaceGeometry } from './minimap/surface-geometry.mts';
+import { measureView } from './minimap/view-measure.mts';
 import { surfaceMapContext, surfaceMapViewport } from './minimap/surface-map-context.mts';
 import { viewDistance } from './overview-context.mts';
 import { dotN as dot } from '@cssearth/core';
@@ -68,10 +68,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     hidden(dateGroup, !Number.isFinite(world.epochJdTt));
     const day = Number.isFinite(world.epochJdTt) ? Math.floor(world.epochJdTt + .5) : null;
     if (day !== dateDay) { dateDay = day; write(date, formatViewDate(world.epochJdTt)); }
-    // The surface picking math loads after the first frame; the readout fills in when it arrives.
-    const geometry = preparedFocus ? null : loadedSurfaceGeometry();
-    if (!preparedFocus && !geometry) void loadSurfaceGeometry().then(refresh);
-    const value = preparedFocus ? measurePreparedFocusView(world, preparedFocus, optics.focalPixels) : geometry?.measureView({
+    const value = preparedFocus ? measurePreparedFocusView(world, preparedFocus, optics.focalPixels) : measureView({
       eyeM: [world.pose.positionM[0] - navigation.frame.originM[0], world.pose.positionM[1] - navigation.frame.originM[1], world.pose.positionM[2] - navigation.frame.originM[2]],
       radiusM: navigation.frame.bodyRadiusM, rotation: cssCameraAxesFromOrientation(world.pose.orientationXyzw),
       view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes, mapLeftEdgeLongitudeDeg: surface?.mapLeftEdgeLongitudeDeg,
