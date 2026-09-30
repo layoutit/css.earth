@@ -20,7 +20,7 @@ import { DISC_BAND_COLOR_SCHEMA, loadDiscBandColor } from '@cssearth/bake/object
 import { loadStellarPhotometricColor, PLANCK_FLOOR_KELVIN } from '@cssearth/bake/objects/stellar';
 import { parseCieTable, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
-import { hostedPlanetStylesheet } from './new-hosted-planet.mts';
+import { HOSTED_PLANET_STYLESHEET } from './new-hosted-planet.mts';
 import { installPhaseCurveDataset, type PhaseCurveEntry } from './phase-curve-dataset.mts';
 
 export const EMISSION_COLUMNS = 'plntname,centralwavelng,bandwidth,especlipdep,especlipdeperr1,especlipdeperr2,especlipdeplim,espbritemp,espbritemperr1,espbritemperr2,espbritemplim,facility,instrument,plntreflink';
@@ -162,11 +162,10 @@ export async function installBandColorDataset(files: PackageFiles, id: string, n
   return { hex: colorHex, credit: `Colour: infrared false colour from the flux densities of ${photometry.source.citation} (${bands.join(', ')}).` };
 }
 
-/** The planet's own stylesheet, which sizes its lighting frame, listed on the page. Planets scaffolded before the tool had none,
- * and their lighting frame measured 0×0, a flat unlit disc. */
+/** The hosted-planet stylesheet, which sizes the planet's lighting frame, listed on its page. Planets scaffolded before the tool
+ * had none, and their lighting frame measured 0×0, a flat unlit disc. */
 export function ensureStylesheet(files: PackageFiles, id: string) {
-  const path = `src/renderers/css/styles/${id}-surfaces.css`, o = `src/objects/${id}`;
-  files.set(path, hostedPlanetStylesheet(id));
+  const path = HOSTED_PLANET_STYLESHEET, o = `src/objects/${id}`;
   const descriptor = JSON.parse(String(files.get(`${o}/object.json`))) as { properties: { page: { stylesheets: string[] } } };
   if (!descriptor.properties.page.stylesheets.includes(path)) descriptor.properties.page.stylesheets.push(path);
   files.set(`${o}/object.json`, json(descriptor));
@@ -221,7 +220,7 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
     // A self-luminous body (an imaged young planet, drawn emissive) shines with its own heat; no starlight to tint.
     if (mode === 'host-light' && raster.emission !== undefined) { lines.push(`${id}: self-luminous, no starlight on it`); progress(lines.at(-1)!); continue; }
     // Whatever the mode, a lit shape planet gets its own stylesheet if it never had one (the lighting frame is 0×0 without it).
-    if (kind === 'neutral-shape' && raster.emission === undefined && !(JSON.parse(String(files.get(`src/objects/${id}/object.json`))) as { properties: { page: { stylesheets: string[] } } }).properties.page.stylesheets.includes(`src/renderers/css/styles/${id}-surfaces.css`)) { ensureStylesheet(files, id); lines.push(`${id}: stylesheet written, its lighting frame had no size`); progress(lines.at(-1)!); }
+    if (kind === 'neutral-shape' && raster.emission === undefined && !(JSON.parse(String(files.get(`src/objects/${id}/object.json`))) as { properties: { page: { stylesheets: string[] } } }).properties.page.stylesheets.includes(HOSTED_PLANET_STYLESHEET)) { ensureStylesheet(files, id); lines.push(`${id}: stylesheet written, its lighting frame had no size`); progress(lines.at(-1)!); }
     if (mode === 'phase-curve') {
       // A heat map is added beside the default dataset, so the marker, drawn from the default dataset, stays as it is.
       for (const entry of phaseCurves.get(id) ?? []) {

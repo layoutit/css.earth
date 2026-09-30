@@ -31,50 +31,9 @@ const GEOMETRY_SCALE = 1.25;
 /** The shared neutral gray of an unresolved surface, as the shape-only bodies use. */
 const NEUTRAL_GRAY = '#9a9a9a';
 
-/** Static presentation for a hosted planet's 460px lighting frames. It names no dataset image: each dataset's variant writes the
- * textures every leaf reads (scene/projector.ts, presentation/composite.ts). */
-export function hostedPlanetStylesheet(id: string): string {
-  const scope = `.object-stage[data-object-id="${id}"]`;
-  const scale = BODY_RADIUS_UNITS * 2 / 460;
-  return `${scope} > .${id}-material-composite {
-  position: absolute;
-  inset: 0;
-  transform-origin: 50% 50%;
-  pointer-events: none;
-  z-index: 2;
-}
-${scope} .polycss-scene s,
-${scope} .${id}-fixed-material {
-  position: absolute;
-  display: block;
-  margin: 0;
-  padding: 0;
-  line-height: 0;
-  text-decoration: none;
-  transform-origin: 0 0;
-  backface-visibility: hidden;
-  background-repeat: no-repeat;
-  pointer-events: none;
-}
-${scope} .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
-  transform-style: preserve-3d;
-}
-/* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
-${scope} .${id}-fixed-material {
-  top: 50%;
-  left: 50%;
-  width: 460px;
-  height: 460px;
-  transform-origin: 50% 50%;
-  transform: translate(-50%, -50%) rotate(var(--${id}-light-roll, 0deg)) scale(${scale});
-}
-${scope}.${id}-hide-shadows .${id}-fixed-material {
-  transform: translate(-50%, -50%) scale(${scale});
-}
-`;
-}
+/** A lit hosted planet's page stylesheet: the shared lane template that sizes its 460px lighting frames. It names no dataset
+ * image: each dataset's variant writes the textures every leaf reads (scene/projector.ts, presentation/composite.ts). */
+export const HOSTED_PLANET_STYLESHEET = 'src/renderers/css/styles/templates/composite-planet.css';
 
 export interface HostedPlanetScaffold {
   readonly id: string; readonly name: string; readonly system: string; readonly description: string;
@@ -128,14 +87,14 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
         { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       ...(glow ? { emission: { source: 'raster', material: 'emission' } } : {}) },
-    page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
+    page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', glow ? `src/renderers/css/styles/${id}-surfaces.css` : HOSTED_PLANET_STYLESHEET], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification, color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10,
       description: spec.description, systemName: spec.system, order, context: { order } },
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1],
       metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
     prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } });
 
-  put(`src/renderers/css/styles/${id}-surfaces.css`, glow ? starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.') : hostedPlanetStylesheet(id));
+  if (glow) put(`src/renderers/css/styles/${id}-surfaces.css`, starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.'));
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@2', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
     latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear',
     polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, centerLongitudeDegrees: 0 },

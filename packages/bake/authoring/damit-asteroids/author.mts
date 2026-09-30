@@ -293,8 +293,6 @@ async function authorBody(body: Body) {
   await write(resolve(src, 'preparation/acquisition.json'), json({ schema: 'cssearth-acquisition-plan@1', operations }));
   const navigation = requireRecord(JSON.parse(await readFile(resolve(template, 'source/preparation/navigation.json'), 'utf8')));
   await write(resolve(src, 'preparation/navigation.json'), json({ ...navigation, objectId: id }));
-  const css = (await readFile(resolve('src/renderers/css/styles', `${TEMPLATE}-surfaces.css`), 'utf8')).replaceAll(TEMPLATE, id);
-  await write(resolve('src/renderers/css/styles', `${id}-surfaces.css`), css);
 
   // Content: facts, datasets, resources.
   const horizonsSource = (locator: string) => ({ url: elementsQuery, label: 'JPL Horizons, 2026-09-03 epoch', checked, path: 'source/reference/horizons-elements.txt', catalogueId: 'jpl-horizons', locator });
@@ -378,7 +376,7 @@ async function authorBody(body: Body) {
       recipe: { ...recipe, shape: { kind: 'radial-terrain', radiusKm } },
       worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: EPOCH_JD, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1],
         metersPerUnit: radiusMeters / geometryRadius, bodyRadiusM: radiusMeters },
-      page: { stylesheets: [`src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
+      page: { stylesheets: ['src/renderers/css/styles/templates/small-body.css'], metadata: { url: 'prepared/page.json' } },
       catalog: { name, classification: 'asteroid', color: '#aaaaaa', distanceAu: semiMajorAxisAu, description: body.text.card, systemName: 'Solar System', context: {} },
     },
     schema: descriptor.schema, type: descriptor.type,

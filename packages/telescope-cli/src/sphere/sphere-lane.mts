@@ -5,7 +5,8 @@ import sharp from 'sharp';
 import { clearInactiveImageBindings } from './sphere-assets.mts';
 import { inventoryAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
-import { requireRecord } from '@cssearth/core';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { objectPageCss } from '@cssearth/objects';
 import { parseRasterRecipe, prepareRasterAssets } from '@cssearth/bake/raster';
 import { parsePreparedObjectRuntime } from '@cssearth/renderer/validation/index.ts';
 import { parseGeometryProfile } from '@cssearth/bake/scene';
@@ -41,10 +42,11 @@ export async function inspectMeasurementSphere(root:string,target:string){
   if (!variant) throw new Error('Standard sphere has no unshadowed surface variant');
   const required = variant.required.filter(key => replacementKeys.has(key));
   if (!required.some(key => key.startsWith('surface:'))) throw new Error('Sphere surface binding is unavailable');
-  const styles = await Promise.all(['src/renderers/css/styles/body-surfaces.css', 'site/object-shell.css'].map(file => pinned(resolve(root, file))));
-  try { styles.push(await pinned(resolve(root, `src/renderers/css/styles/${id}-surfaces.css`))); }
-  catch(error) { if (!error || typeof error !== 'object' || !('code' in error) || error.code !== 'ENOENT') throw error; }
   const descriptor = requireRecord(await json(resolve(object, 'object.json'))),properties = requireRecord(descriptor.properties),worldFrame = properties.worldFrame;
+  // The shared body rules and the shell, then the page's own stylesheets (a lane template names the object as __object__).
+  const shared = ['src/renderers/css/styles/body-surfaces.css', 'site/object-shell.css'];
+  const own = requireArray(requireRecord(properties.page).stylesheets).map(path => requireString(path)).filter(path => !shared.includes(path));
+  const styles = await Promise.all([...shared, ...own].map(async file => Buffer.from(objectPageCss((await pinned(resolve(root, file))).toString(), id))));
   if (!worldFrame) throw new Error('Standard sphere has no prepared physical frame');
   const context = parsePreparedWorldContext(await json(resolve(root, 'src/objects/sun/prepared/world-context.json')));
   return {id,object,inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame,context};
