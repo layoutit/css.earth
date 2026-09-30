@@ -65,6 +65,13 @@ export function createLeafBoxWriter(bindings: readonly PreparedViewBinding[], no
     }
   };
   for (const current of state.values()) publish(current, false, true);
+  const seamed = [...state.values()].filter(current => current.leaf.seam);
+  let seamCursor = seamed.length;
+  const outsetNumber = (value: string) => {
+    const number = Number(value);
+    if (!Number.isFinite(number)) throw new TypeError(`Prepared seam outset is not a number: ${value}`);
+    return number;
+  };
   return {
     /** Whether a write of `name` on node `index` is a leaf-box step or seam outset this writer owns. */
     owns(index: number, name: string) {
@@ -75,13 +82,27 @@ export function createLeafBoxWriter(bindings: readonly PreparedViewBinding[], no
       if (name === SEAM_OUTSET) return String(currentOutset);
       return String(state.get(index)?.step ?? step);
     },
+    /** Moves the seam outset to `value` a slice at a time: up to `budget` leaves take it, and the return is how many
+     * did. An outset change rewrites every seamed leaf's transform (448 on Saturn and Jupiter, 31–49 ms of script in one
+     * iPad frame at rest, 2026-09-30); the settle pacer spreads them as it spreads leaf-box steps. 0 once all show it. */
+    drainOutset(value: string, budget: number) {
+      const number = outsetNumber(value);
+      if (number !== currentOutset) { currentOutset = number; seamCursor = 0; }
+      let leaves = 0;
+      while (seamCursor < seamed.length && leaves < budget) {
+        const before = writes;
+        publish(seamed[seamCursor++]!, true);
+        if (writes > before) leaves++;
+      }
+      return leaves;
+    },
     set(index: number, name: string, value: string) {
       const number = Number(value);
       if (!Number.isFinite(number)) throw new TypeError(`Prepared node ${index} ${name} is not a number: ${value}`);
       const before = writes;
       if (name === SEAM_OUTSET) {
-        currentOutset = number;
-        for (const current of state.values()) if (current.leaf.seam) publish(current, true);
+        currentOutset = number; seamCursor = seamed.length;
+        for (const current of seamed) publish(current, true);
       } else {
         const current = state.get(index);
         if (!current || current.leaf.density === undefined) throw new TypeError(`Prepared node ${index} is not a leaf box.`);

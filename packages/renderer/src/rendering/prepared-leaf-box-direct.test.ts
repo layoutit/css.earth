@@ -51,3 +51,23 @@ test('a mounted leaf receives its values from the record and writes only what ch
   expect(writer.owns(0, '--surface-seam-outset')).toBe(true);
   expect(writer.owns(2, '--silhouette-step')).toBe(true);
 });
+
+test('a seam outset change lands a slice of leaves at a time', () => {
+  const { document } = parseHTML('<html><body></body></html>');
+  const seamed = Array.from({ length: 5 }, (_, index) => ({ ...boxes[0]!, node: index + 1 }));
+  const records = [{ ...bindings[0]!, groups: { '--silhouette-step-0': [1, 2, 3, 4, 5] }, boxes: seamed }, bindings[1]!] as unknown as PreparedViewBinding[];
+  const nodes = Array.from({ length: 6 }, () => document.createElement('s'));
+  const written: number[] = [];
+  const writer = createLeafBoxWriter(records, nodes, (element, name, value) => { written.push(nodes.indexOf(element)); element.style.setProperty(name.replace(/[A-Z]/g, l => `-${l.toLowerCase()}`), value); });
+  written.length = 0;
+  expect(writer.drainOutset('0.002', 2)).toBe(2);
+  expect(written).toEqual([1, 2]);
+  expect(writer.read(0, '--surface-seam-outset')).toBe('0.002');
+  // A new outset before the drain ends restarts it; each leaf still takes only what changed.
+  expect(writer.drainOutset('0.003', 2)).toBe(2);
+  expect(writer.drainOutset('0.003', 2)).toBe(2);
+  expect(writer.drainOutset('0.003', 2)).toBe(1);
+  expect(writer.drainOutset('0.003', 2)).toBe(0);
+  expect(written).toEqual([1, 2, 1, 2, 3, 4, 5]);
+  expect(nodes[5]!.style.getPropertyValue('transform')).toBe(leafBoxStyles(seamed[4]!, 362, 0.003).find(([name]) => name === 'transform')![1]);
+});
