@@ -18,6 +18,7 @@ const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
  // area. A local run has no PR diff to select from, so it substitutes the most thorough answer: run them.
  '${{ needs.changes.outputs.run_universe }}':'true',
  '${{ needs.changes.outputs.run_universe_preparation }}':'true',
+ '${{ needs.changes.outputs.run_tools }}':'true',
  '${{ steps.build-tools-cache.outputs.cache-hit }}':'false',
  '${{ steps.ci-cache-key.outputs.build_digest }}':'',
  '${{ steps.package-cache.outputs.cache-hit }}':'false',

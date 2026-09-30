@@ -35,6 +35,7 @@ jobs:
       run_universe: ${{ steps.classify.outputs.run_universe }}
       run_universe_preparation: ${{ steps.classify.outputs.run_universe_preparation }}
       run_nebula: ${{ steps.classify.outputs.run_nebula }}
+      run_tools: ${{ steps.tools.outputs.run_tools }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -62,6 +63,16 @@ jobs:
             node .github/scripts/ci/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
           else
             node .github/scripts/ci/ci-affected.mts push "${{ github.event.before }}"
+          fi
+      - name: Test the preparation and archive tools only when the change touches them
+        # packages/bake and packages/telescope-cli are offline tools, not what the site ships: a pull request that leaves
+        # them alone skips their tests. A push to main runs them.
+        id: tools
+        run: |
+          if [ -z "${GITHUB_BASE_REF:-}" ] || git diff --name-only "origin/$GITHUB_BASE_REF...HEAD" | grep -qE '^packages/(bake|telescope-cli)/'; then
+            echo run_tools=true >> "$GITHUB_OUTPUT"
+          else
+            echo run_tools=false >> "$GITHUB_OUTPUT"
           fi
       - name: Check that every commit is one Conventional Commits line with no attribution
         # Required with the rest of this job. A local commit-msg hook gives the same answer earlier, but a hook can be
@@ -340,11 +351,17 @@ jobs:
           node .github/scripts/ci/build-ci.mts full
           node site/build/prepare/prepare-feature-index.mts
       - name: Test the selected folder lane
+        env:
+          RUN_TOOLS: ${{ needs.changes.outputs.run_tools }}
         # `test:packages` runs every test under packages/; `test:site` runs site/, src/, integration/ and .github/.
         # A test whose restored input this job leaves out skips through sourceTest() and names it.
         run: |
           node site/build/prepare/prepare-facilities.mts --catalog-only
           pnpm exec playwright install --with-deps --only-shell chromium
+          if [ "$CI_UNIVERSE_LANE" = packages ] && [ "$RUN_TOOLS" = false ]; then
+            pnpm test:shipped-packages
+            exit 0
+          fi
           if [ "$CI_UNIVERSE_LANE" = packages ]; then
             # The volume packages' previews and compact inputs, as the nebula job keeps them, the tracked density sources
             # the volume tests decode (52 MB) and the tracked geology shapefiles.
