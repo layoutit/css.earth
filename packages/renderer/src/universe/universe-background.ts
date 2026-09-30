@@ -3,14 +3,13 @@ import type { PreparedCssVolume, VolumeCameraPublication } from '../volume/types
 import type { PreparedPointAppearance } from '../stars/types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountPreparedVolumeLod } from '../volume/prepared-volume-lod.js';
-import { projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
+import { projectedVolumeOpacity, volumeFramingRadiusUnits, volumeOutsideFade } from '../volume/projected-volume-visibility.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
 import { fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
 import { mountGalaxyBacking, parseGalaxyBacking } from './galaxy-backing.js';
 import { logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
-import { GALAXY_SCALE } from '../labels/universe-label-policy.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 
 /** Retained sky, stellar sample and galaxy share one exposure-aware handoff. */
@@ -45,7 +44,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
   let backing: ReturnType<typeof mountGalaxyBacking> | null = null, backingLoading = false, publishedBacking = NaN;
   let stellarEnabled = true, stellarPublication: VolumeCameraPublication | null = null, stellarOpacity = 0;
   let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
-  let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
+  let publishedVolumeOpacity = NaN;
   let publishedVolumeVisible: boolean | undefined;
   const volumeFramingUnits = volumeFramingRadiusUnits(payload.frame);
   const prefetchAbort = new AbortController();
@@ -92,19 +91,20 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       const starsHandoff = logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
       // Every placed body starts inside the galaxy, so its own distance gates the volume.
       const volumeDistanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - selectedPositionM[axis]!));
+      // The galaxy's nebulae and catalogue images keep their own distance fade; it is what this returns.
       const volumeOpacity = preparedVolumeOpacity(volumeDistanceM, plan.volume.opacityProfile);
-      const volumeBrightness = preparedVolumeOpacity(volumeDistanceM, plan.volume.brightnessProfile);
+      // Inside the galaxy the NASA band is the sky; outside it the galaxy is its slices and face-on image.
+      const outside = volumeOutsideFade(world, payload.frame);
       const volumeSize = projectedVolumeOpacity(world, viewport, payload.frame, volumeFramingUnits);
-      const volumeVisible = volumeOpacity * detailContextOpacity > 0;
+      const volumeVisible = outside * detailContextOpacity > 0;
       if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
-      if (volumeOpacity !== publishedVolumeOpacity) { volumeHost.dataset.volumeOpacity = String(volumeOpacity); publishedVolumeOpacity = volumeOpacity; }
-      if (volumeBrightness !== publishedVolumeBrightness) { volumeImage.dataset.volumeBrightness = String(volumeBrightness); publishedVolumeBrightness = volumeBrightness; }
+      if (outside !== publishedVolumeOpacity) { volumeHost.dataset.volumeOpacity = String(outside); publishedVolumeOpacity = outside; }
       // A detailed focus suppresses the volume without brightening the sky behind it.
-      const completedContribution = skyLayer ? volumeOpacity * volumeBrightness : volumeOpacity;
+      const completedContribution = outside;
       const alpha = completedContribution * detailContextOpacity;
       if (alpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(alpha); publishedVolumeAlpha = alpha; }
       if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - completedContribution);
-      const imageAlpha = (skyLayer ? 1 : volumeBrightness) * volumeSize;
+      const imageAlpha = volumeSize;
       if (imageAlpha !== publishedImageAlpha) {
         volumeImage.style.opacity = skyLayer && imageAlpha === 1 ? '' : String(imageAlpha);
         volumeImage.style.display = imageAlpha > 0 ? '' : 'none';
@@ -119,10 +119,10 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       if (volumeVisible && volumeSize > 0) volumeLayer!.publish({ world, viewport });
       // The catalogue dots are the stars around the Solar System (starFieldFade), whole before the host stars give way to
       // them past the system (world-context-planner.ts); measured like them from the selected body. The backing is the
-      // galaxy seen from outside its disc: it fades in later, over the galaxy scale.
+      // galaxy seen from outside, drawn with the rest of the volume.
       const shownDots = detailContextOpacity * starFieldFade(volumeDistanceM, plan.system);
       for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots);
-      const shownBacking = volumeVisible && volumeSize > 0 ? logarithmicFade(volumeDistanceM, GALAXY_SCALE.handoffStartM, GALAXY_SCALE.handoffEndM) : 0;
+      const shownBacking = volumeVisible && volumeSize > 0 ? 1 : 0;
       if (backing) {
         if (shownBacking !== publishedBacking) {
           backing.root.style.opacity = String(shownBacking); backing.root.style.display = shownBacking > 0 ? '' : 'none'; publishedBacking = shownBacking;

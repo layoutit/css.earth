@@ -18,7 +18,7 @@ import { isPreparedCluster, type PreparedCatalogObject } from '@cssearth/catalog
 import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
-import { DEFAULT_POINT_VISIBILITY } from '../volume/projected-volume-visibility.js';
+import { DEFAULT_POINT_VISIBILITY, volumeOutsideFade } from '../volume/projected-volume-visibility.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context/world-context-planner-client.js';
 import { coveredTopRects, createLabelBudget } from '../labels/universe-label-policy.js';
@@ -291,7 +291,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
-              additionalPoints.publish({world, viewport}, distanceM);
+              additionalPoints.publish({world, viewport}, distanceM, volumeOutsideFade(world, payload.frame));
               // Loaded and drawn only far outside the galaxies' own scale.
               // A catalogue focus, selected or previewed, owns the caption; the mesh then names nothing.
               const meshCaptioned = detailedFocus === null && (selectionPreview === undefined || selectionPreview === null);

@@ -138,14 +138,16 @@ additive HDR raymarching, stochastic sampling or camera-dependent fade.
 The renderer transports the prepared images and geometry. The sky cube holds no
 stars of its own: the stars around the Sun are the catalogue dots described below.
 
-The NASA map is an angular observation from the Sun, not a texture that remains
-correct after interstellar travel. It stays opaque nearby, starts retiring at
-100 AU, and is absent by 0.1 pc. The independently graded volume begins its
-separate entrance at 100 pc and reaches full opacity at 5 kpc; its display gain
-is 0.094 through 1 kpc, rising to one at 25 kpc. The intervening black backdrop
-is intentional: reusing the Solar sky there would assert a viewpoint the source
-does not provide. This is display presentation, not photometric calibration;
-slab transfer, optical correction, and labels retain their separate behavior.
+One rule chooses between the two pictures: inside the galaxy the NASA map is
+the sky; outside it the galaxy is its slices and face-on image, and the galaxies
+beyond it appear. "Inside" is the volume's prepared box, 20 × 20 × 2.5 units of
+1,944 pc about the galactic centre. The NASA map is whole while the camera is in
+the box, and gone once the camera is twice as far out on the box's most exceeded
+axis; between, the two share one weight (`volumeOutsideFade` in the renderer).
+[Six frames zooming out from Earth](evidence/2026-09-29/inside-outside.jpg) show it
+(Earth, 5.8 AU, 6,700 AU, 1,800 ly, 20,000 ly and 232,000 ly, GPU Chrome).
+The NASA map is an angular observation from the Sun, so it shifts slightly as
+the camera leaves the Sun. This is display presentation, not photometric calibration.
 
 Each retained slab has three coincident CSS image elements sharing one texture.
 Their optical contribution compensates for oblique viewing before isolated axis
@@ -165,17 +167,19 @@ original 130.95 MiB EXR stays in the acquisition cache. Source acquisition,
 original and decoded byte counts, exact Node/Zstd versions, NASA/Gaia credits and
 usage notice live together under `source/sky/`.
 
-Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**. The complete
-sky contribution is unchanged by the exterior billboard. The exterior bank
-figures above exclude these sky faces. Sky faces use quality 90. Original source chunks are offline
+Six opaque 1536 × 1536 WebP faces add **1.95 MiB download and 54 MiB decoded**; the
+camera loads the two or three faces in view. The exterior bank figures above
+exclude these sky faces. Sky faces use the repository's decorative quality, 40:
+the source's grain dominates their bytes (one face is 980 KB at quality 90 and
+299 KB at 40), and a 400 px crop at 40 shows no difference beyond that grain. Original source chunks are offline
 inputs and are never sent to the browser.
 
 The offline baker samples linear RGB before applying a fixed exposure of 4.5
 and the standard sRGB display curve. Before final attenuation, the transfer at
 1024 × 512 matches NASA's preview mean RGB within 0.001 and has RGB RMSE
-0.01387 on the [0,1] scale. A final uniform display gain of 0.12 darkens all
-three sRGB channels before quantization without changing source white balance.
-A shared smooth shadow factor suppresses faint image grain: zero below
+0.01387 on the [0,1] scale. The faces keep that brightness, so the band looks as
+it does in NASA's preview. Until 2026-09-29 a display gain of 0.12 darkened
+them, which left the band close to black on screen. A shared smooth shadow factor suppresses faint image grain: zero below
 transferred display luminance 0.04 and full contribution above 0.12. This
 intentionally removes faint background detail. Alpha stays opaque and source HDR pixels stay unchanged. This is a display fit, not calibrated photometry.
 The NASA Milky Way-only image omits bright Hipparcos/Tycho stars, and none are

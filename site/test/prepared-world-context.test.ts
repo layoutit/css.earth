@@ -913,7 +913,8 @@ test('initial Jupiter system framing makes the four large moons and their labels
   layer.destroy();
 });
 
-test.each(['opacityProfile', 'brightnessProfile'] as const)('%s has a constant plateau, a logarithmic smooth ramp and legacy opacity one', key => {
+test('the volume opacity profile has a constant plateau, a logarithmic smooth ramp and legacy opacity one', () => {
+  const key = 'opacityProfile';
   const base = plan(1), profile = { model: 'logarithmic-distance' as const, nearOpacity: .12, fullOpacity: 1, fadeStartDistanceM: 100, fullDistanceM: 100_000 };
   const parsed = parsePreparedWorldContext({ ...base, volume: { ...base.volume, [key]: profile } });
   expect(parsed.volume[key]).toEqual(profile);
