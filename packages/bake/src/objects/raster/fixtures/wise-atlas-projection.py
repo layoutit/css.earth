@@ -10,7 +10,7 @@ from astropy.io import fits
 from astropy.wcs import WCS
 import numpy as np
 sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
-from fixture import ROOT, write
+from fixture import input_record, ROOT, write
 
 directory = ROOT / 'packages/bake/src/objects/raster/fixtures'
 inputs, cases = [], {}
@@ -45,6 +45,6 @@ for name, tile, grid in [
         tile_pixels = np.vstack([[1, 1], [4095, 4095], [2048, 2048], [1, 4095], rng.uniform(1, 4095, size=(12, 2))])
         world = tile_wcs.all_pix2world(tile_pixels, 1)
         grid_pixels = grid_wcs.all_world2pix(world, 1)
-        cases[name] = {'path': str(path.relative_to(ROOT)), 'tile': list(tile), 'grid': list(grid),
+        cases[name] = {'path': input_record(path)['path'], 'tile': list(tile), 'grid': list(grid),
                        'tilePixels': tile_pixels.tolist(), 'gridPixels': grid_pixels.tolist()}
 write('fits/wise-atlas-projection.json', 'astropy', 'tests/oracles/fits/wise-atlas-projection.py', {'astropy': astropy.__version__}, inputs, cases)

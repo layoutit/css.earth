@@ -29,13 +29,13 @@
   "members": [
     {
       "id": "archive",
-      "path": "../../../../packages/telescope-cli/src/archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+      "path": "../../../../archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
       "role": "provenance",
       "mediaType": "application/json"
     },
     {
       "id": "product",
-      "path": "../../../../packages/telescope-cli/src/archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+      "path": "../../../../archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
       "role": "science",
       "mediaType": "application/json"
     }
@@ -43,7 +43,7 @@
   "components": [
     {
       "id": "member-archive",
-      "name": "../../../../packages/telescope-cli/src/archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
+      "name": "../../../../archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.json",
       "families": [
         "F18"
       ],
@@ -73,7 +73,7 @@
     },
     {
       "id": "member-product",
-      "name": "../../../../packages/telescope-cli/src/archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
+      "name": "../../../../archives/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
       "families": [
         "F18"
       ],

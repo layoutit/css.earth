@@ -9,7 +9,7 @@ import astropy
 from astropy.io import fits
 import numpy as np
 sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
-from fixture import ROOT, write
+from fixture import input_record, ROOT, write
 
 directory = ROOT / 'packages/fits/src/node/fixtures/fits'
 directory.mkdir(parents=True, exist_ok=True)
@@ -45,7 +45,7 @@ for name, dtype, raw in [
     inputs.append(path)
     with fits.open(path, memmap=False) as hdus:
         values = hdus[0].data.reshape(-1)
-        cases[name] = {'path': str(path.relative_to(ROOT)).replace('packages/fits/src/node/fixtures/fits/', 'tests/fixtures/fits/'), 'dimensions': list(reversed(hdus[0].data.shape)),
+        cases[name] = {'path': input_record(path)['path'], 'dimensions': list(reversed(hdus[0].data.shape)),
                        'values': [float(v) if np.isfinite(v) else None for v in values],
                        'units': hdus[0].header['BUNIT'], 'observer': hdus[0].header['OBSERVER']}
         if name == 'long-string':
@@ -60,6 +60,6 @@ image.header['BZERO'] = 32768
 fits.HDUList([fits.PrimaryHDU(), image]).writeto(path, overwrite=True)
 inputs.append(path)
 with fits.open(path, memmap=False) as hdus:
-    cases['extensions'] = {'path': str(path.relative_to(ROOT)).replace('packages/fits/src/node/fixtures/fits/', 'tests/fixtures/fits/'), 'dimensions': [2, 2],
+    cases['extensions'] = {'path': input_record(path)['path'], 'dimensions': [2, 2],
                            'values': [int(v) for v in hdus[1].data.reshape(-1)], 'extension': 1}
 write('fits/core.json', 'astropy', 'tests/oracles/fits/core.py', {'astropy': astropy.__version__}, inputs, cases)
