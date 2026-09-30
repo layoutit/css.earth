@@ -183,24 +183,6 @@
       }
     },
     {
-      "id": "oberon-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored Oberon celestial recipe",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Checked preparation recipe maintained beside the inputs.",
-      "redistribution": "Prepared package configuration.",
-      "consumers": [
-        "sky-sun",
-        "starfield",
-        "system-markers"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
-      }
-    },
-    {
       "id": "oberon-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored Oberon presentation recipe",

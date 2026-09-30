@@ -25,7 +25,7 @@ test('a self-luminous planet scaffolds the emissive build Beta Pictoris c was ma
   assert.deepEqual(raster.emission, shipped.emission);
   assert.equal(raster.lighting, undefined);
   assert.equal(raster.surfaces[0].science.qualification, shipped.surfaces[0].science.qualification);
-  for (const path of ['source/preparation/celestial.json', 'source/preparation/presentation.json']) assert.deepEqual(made(`${o}/${path}`), await json(`${o}/${path}`), path);
+  for (const path of ['source/preparation/presentation.json']) assert.deepEqual(made(`${o}/${path}`), await json(`${o}/${path}`), path);
   const object = made(`${o}/object.json`).properties, shippedObject = (await json(`${o}/object.json`)).properties;
   assert.deepEqual([object.preparation.steps, object.recipe.materials, object.recipe.emission, object.recipe.surfaces], [shippedObject.preparation.steps, shippedObject.recipe.materials, shippedObject.recipe.emission, shippedObject.recipe.surfaces]);
   assert.deepEqual(made(`${o}/source/content/object.json`).settings, (await json(`${o}/source/content/object.json`)).settings);

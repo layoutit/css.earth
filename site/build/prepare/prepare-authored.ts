@@ -1,3 +1,4 @@
+import { isRecord } from '@cssearth/core';
 import '@cssearth/bake/thread-pool';
 import { execFileSync } from 'node:child_process';
 import { access, cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
@@ -33,6 +34,11 @@ type Input = Record<string, unknown>;
 
 function record(value: unknown, at: string): Input { if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`); return value as Input; }
 function source(sources: ReadonlyMap<string, VerifiedSource>, id: string): VerifiedSource | undefined { return sources.get(id); }
+/** A star, a black hole or an emissive body is its own light, so it gets no directional Sun; every other body is lit by one. */
+function litBySun(descriptor: AuthoredObjectDescriptor, presentation: unknown): boolean {
+  const catalog = descriptor.properties.catalog, classification = isRecord(catalog) ? catalog.classification : undefined;
+  return !(classification === 'star' || classification === 'black-hole' || parsePresentationProfile(presentation).mode === 'emissive');
+}
 function required(sources: ReadonlyMap<string, VerifiedSource>, id: string): VerifiedSource { const value = source(sources, id); if (!value) throw new TypeError(`Authored recipe requires ${id}.`); return value; }
 function sourceRecord(value: unknown, at: string): Record<string, unknown> { return record(value, at); }
 function physicalSolarSource(value: unknown): SolarSceneSource {
@@ -380,7 +386,8 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     : null;
   const celestial = reuseImages
     ? { sky: await publishedJson('sky'), sun: await publishedJson('sun') } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
-    : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, config: required(sources, 'celestial').value, solarGeometry: await solarGeometry() });
+    : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, directionalSun: litBySun(descriptor, required(sources, 'presentation').value),
+      solarGeometry: await solarGeometry() });
   const geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);
   // A body outside the ephemeris tables (the Sun) frames its scene from the authored world context.
   const contextSource = source(sources, 'world-context');

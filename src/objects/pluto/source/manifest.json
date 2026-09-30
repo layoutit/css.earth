@@ -309,24 +309,6 @@
       }
     },
     {
-      "id": "pluto-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored Pluto sky, sun, and marker recipe",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Checked preparation recipe maintained beside the inputs.",
-      "redistribution": "Prepared celestial assets.",
-      "consumers": [
-        "sky-sun",
-        "starfield",
-        "system-markers"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
-      }
-    },
-    {
       "id": "pluto-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored Pluto presentation capability recipe",

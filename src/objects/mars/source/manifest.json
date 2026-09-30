@@ -285,24 +285,6 @@
       }
     },
     {
-      "id": "mars-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored Mars sky, sun, and marker recipe.",
-      "credit": "cssEarth project",
-      "license": "Repository-authored factual data",
-      "acquisition": "Checked preparation recipe maintained beside Mars inputs.",
-      "redistribution": "Prepared celestial assets.",
-      "consumers": [
-        "sky-sun",
-        "starfield",
-        "system-markers"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored sky, Sun and marker preparation settings."
-      }
-    },
-    {
       "id": "mars-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored Mars presentation capability recipe.",

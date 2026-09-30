@@ -402,22 +402,6 @@
       }
     },
     {
-      "id": "uranus-authored-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Project-authored sky and Sun composition for the shared lane",
-      "credit": "cssEarth",
-      "license": "Project-authored specification",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source",
-      "consumers": [
-        "celestial"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored scene composition; physical and observed inputs retain separate source records."
-      }
-    },
-    {
       "id": "uranus-authored-solar-system",
       "path": "presentation/solar-system.json",
       "origin": "Project-authored physical scene scale",

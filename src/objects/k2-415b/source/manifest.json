@@ -52,23 +52,6 @@
       ]
     },
     {
-      "id": "k2-415b-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "starfield",
-        "sky-sun"
-      ]
-    },
-    {
       "id": "k2-415b-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored presentation profile: composite mode",

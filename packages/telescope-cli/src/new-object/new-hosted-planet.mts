@@ -124,7 +124,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     recipe: { schema: 'cssearth-authored-object@2',
       surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', datasets: [{ id: 'shape', source: 'content', material }] }],
       shape: { kind: 'sphere', radiusKm }, materials: [{ id: material, source: 'raster', model: glow ? 'emissive' : 'lit' }],
-      sources: ['raster', 'geometry', 'celestial', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
+      sources: ['raster', 'geometry', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
         { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       ...(glow ? { emission: { source: 'raster', material: 'emission' } } : {}) },
@@ -167,7 +167,6 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
         polarPreparation: 'the same gray on the polar tiles',
         axialTiltNote: rotation === 'unmeasured' ? 'no obliquity or spin of this planet is measured; the display axis is the orbit normal and nothing turns' : "no obliquity of this planet is measured; the rotation record assumes the spin axis on the orbit normal, as tidal locking implies" } } });
 
-  put(`${o}/source/preparation/celestial.json`, { schema: 'cssearth-celestial-preparation@2', sources: ['presentation/solar-system.json'], ...(glow ? { directionalSun: false } : {}) });
   put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@2', namespace: id, mode: glow ? 'emissive' : 'composite' });
   put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@2', objectId: id, owner: 'object', presentation: { size: 5 },
     source: { path: 'presentation/context.png' }, operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' },
@@ -225,7 +224,6 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       sourceBinding: local('Measurements transcribed in this package with their sources; repinned when edited.') },
     preparation('preparation-raster', 'preparation/raster.json', glow ? 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, self-luminous with transparent plates' : 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star', ['assets', 'datasets']),
     preparation('preparation-geometry', 'preparation/geometry.json', `Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, ${glow ? 'emissive' : 'lit'} material`, ['scene', 'presentation']),
-    preparation('preparation-celestial', 'preparation/celestial.json', glow ? 'Repository-authored celestial recipe: astrometric sky registration for the hosted planet, no directional light' : 'Repository-authored celestial recipe: astrometric sky registration and the host star as the light', glow ? ['starfield'] : ['starfield', 'sky-sun']),
     preparation('preparation-presentation', 'preparation/presentation.json', `Repository-authored presentation profile: ${glow ? 'emissive' : 'composite'} mode`, ['presentation']),
     preparation('physical-solar-system-recipe', 'presentation/solar-system.json', 'Repository-authored scene recipe: published radius, camera plan', ['scene'])],
     generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', origin: spec.paper,
