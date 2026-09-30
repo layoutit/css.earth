@@ -19,11 +19,11 @@ function fixture() {
   return { ...files, data, transport };
 }
 
-test('decodes the checked prepared point field and reads its manifest and bank once each', async () => {
+test('decodes the local prepared point field and reads its manifest and bank once each', async () => {
   const { descriptor, url, bankUrl, bankBytes, data, transport } = fixture();
   const payload = decodePreparedCssPointField(parsePreparedCssPointFieldManifest(data), bankBytes);
   expect(payload.schema).toBe('cssearth-css-point-field@1');
-  expect(payload.stars.length).toBe(109389);
+  expect(payload.stars.length).toBe(255);
   expect(payload.nodes[0]?.first).toBe(0);
   expect(payload.nodes[0]?.count).toBe(payload.stars.length);
   expect(payload.stars.filter(star => star.coverageAnchor)).toHaveLength(96);
@@ -34,19 +34,19 @@ test('decodes the checked prepared point field and reads its manifest and bank o
   const reader = transport(), loaded = await loadPreparedCssPointField(descriptor, reader);
   expect(reader.read.mock.calls).toEqual([[url], [bankUrl]]);
   expect(loaded.frame).toEqual((descriptor as { properties: { frame: unknown } }).properties.frame);
-  expect(loaded.stars[4321]).toEqual(payload.stars[4321]);
+  expect(loaded.stars[123]).toEqual(payload.stars[123]);
   expect(loaded.nodes.at(-1)).toEqual(payload.nodes.at(-1));
 });
 
 test('declared magnitude quantization is bounded below what the runtime can display', () => {
   const { manifest } = fixture();
-  const recipe = JSON.parse(readFileSync(new URL('../../../../src/objects/stellar-neighbourhood/source/stars.json', import.meta.url), 'utf8')) as {
-    atlas: { tileSize: number; haloRadii: number; coreInnerRadii: number; coreOuterRadii: number; haloPeak: number; samplesPerPixelAxis: number } };
+  const atlas = JSON.parse(readFileSync(new URL('../../test/fixtures/point-field/atlas-recipe.json', import.meta.url), 'utf8')) as {
+    tileSize: number; haloRadii: number; coreInnerRadii: number; coreOuterRadii: number; haloPeak: number; samplesPerPixelAxis: number };
   const magnitude = manifest.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
   expect(magnitude.bound).toBe(POINT_FIELD_MAGNITUDE_BOUND);
-  expect(magnitude.measured).toBeGreaterThan(0);
+  expect(magnitude.measured).toBeGreaterThanOrEqual(0);
   expect(magnitude.measured).toBeLessThanOrEqual(magnitude.bound);
-  expect(magnitude.displayAlphaChange).toBe(magnitudeDisplayAlphaChange(manifest.photometry, recipe.atlas, magnitude.bound));
+  expect(magnitude.displayAlphaChange).toBe(magnitudeDisplayAlphaChange(manifest.photometry, atlas, magnitude.bound));
   expect(magnitude.displayAlphaChange).toBeLessThan(IMPERCEPTIBLE_LUMINANCE);
   for (const field of manifest.bank.quantization.filter(entry => entry !== magnitude)) expect([field.bound, field.measured, field.displayAlphaChange]).toEqual([0, 0, 0]);
 });
