@@ -1,8 +1,9 @@
 {
   "schema": "cssearth-ui-browser-evidence@1",
   "testedSource": {
-    "branch": "ui/overview-body-navigation",
-    "trackedChanges": true,
+    "branch": "fix/drop-baked-star-sky",
+    "commit": "913b912b989d4f8ea772edf3af554a12cd33c204",
+    "trackedChanges": false,
     "date": "2026-09-30"
   },
   "browser": "Chrome via Playwright CLI",
@@ -71,7 +72,8 @@
           "uranus",
           "neptune"
         ]
-      }
+      },
+      "testedCommit": "913b912b989d4f8ea772edf3af554a12cd33c204"
     },
     {
       "file": "solar-system-mobile.png",
@@ -86,7 +88,8 @@
         "peekHeightPx": 320,
         "sheetTopPx": 524,
         "firstRowBottomPx": 824.890625
-      }
+      },
+      "testedCommit": "913b912b989d4f8ea772edf3af554a12cd33c204"
     },
     {
       "file": "solar-system-tablet.png",
@@ -101,7 +104,8 @@
         "peekHeightPx": 320,
         "sheetTopPx": 860,
         "firstRowBottomPx": 1138.5
-      }
+      },
+      "testedCommit": "913b912b989d4f8ea772edf3af554a12cd33c204"
     },
     {
       "file": "milky-way-bodies.png",
@@ -115,7 +119,8 @@
       ],
       "measurements": {
         "firstBody": "sun"
-      }
+      },
+      "testedCommit": "913b912b989d4f8ea772edf3af554a12cd33c204"
     },
     {
       "file": "earth-dataset-rows.png",
@@ -137,12 +142,13 @@
         "thumbnailWidthPx": 40,
         "cloudSelected": true,
         "cloudDetailsVisible": true
-      }
+      },
+      "testedCommit": "913b912b989d4f8ea772edf3af554a12cd33c204"
     }
   ],
   "limits": [
     "Chrome desktop and responsive viewport captures, not native iPad evidence",
-    "The first three captures remain valid for their unchanged renderer and body-card claims at the recorded commit",
+    "The first three captures retain their original recorded commit; the remaining five were refreshed on the combined branch.",
     "No matched pixel-difference comparison"
   ],
   "handoff": {
