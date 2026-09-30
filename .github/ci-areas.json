@@ -24,7 +24,6 @@
     ".github/scripts/ci/object-scope-gate.mts",
     "src/platform/solar-geometry.mts",
     "src/platform/*.test.mts",
-    "src/platform/lens/*.test.mts",
     "src/objects/cubic-sky-contract.test.mts",
     "integration/**",
     "packages/objects/src/provenance/dataset-destination.ts",
