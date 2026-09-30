@@ -362,7 +362,9 @@ jobs:
         run: |
           if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
           node site/build/prepare/prepare-facilities.mts --catalog-only
-          pnpm exec playwright install --with-deps --only-shell chromium
+          # The runner image already carries Chrome's system libraries: fetch the browser alone. `--with-deps` ran apt-get,
+          # which once took 6.5 min on a slow mirror.
+          pnpm exec playwright install --only-shell chromium
           if [ "$CI_UNIVERSE_LANE" = packages ] && [ "$CI_TEST_PACKAGES" != all ]; then
             tests=(); for name in $CI_TEST_PACKAGES; do tests+=("packages/$name/**/*.test.{ts,mts}"); done
             pnpm test:run "${tests[@]}"
@@ -450,7 +452,7 @@ jobs:
         run: |
           case "$CI_PREPARATION_LANE" in
             publication)
-              pnpm exec playwright install --with-deps --only-shell chromium
+              pnpm exec playwright install --only-shell chromium
               pnpm test:run --test-concurrency=1 "packages/bake/src/delivery/*.test.{ts,mts}"
               ;;
             *) echo "Unknown preparation lane" >&2; exit 1 ;;
@@ -518,7 +520,7 @@ jobs:
       - name: Restore repository volume inputs used by provenance closure
         run: node packages/bake/cli/restore-source-inputs.mts --repository-volumes
       - name: Install the browser used by isolated control tests
-        run: pnpm exec playwright install --with-deps --only-shell chromium
+        run: pnpm exec playwright install --only-shell chromium
       - name: Check all nebula packages and tests
         # Their dependency boundaries are the architecture check's nebula-boundaries rule, which Contract lint runs on every change.
         env:
