@@ -45,34 +45,43 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
   // The last order, as member indices, and each member's depth. Deepest first, then member order: the one order the stable
   // sort by depth gives. Between two sorts it barely changes, so an insertion pass from the last order does the same work in
   // about n steps; a first sort, or one that would move too much, sorts from scratch.
-  let order: number[] = [], depths = new Float64Array(0);
+  let order: number[] = [], ranked: number[] = [], depths = new Float64Array(0), positions = new Float64Array(0);
   const before = (a: number, b: number) => depths[a]! > depths[b]! || (depths[a] === depths[b] && a < b);
+  // Past about 12n moves a full sort of n (about n log n comparisons for the few thousand bodies) is the cheaper one.
   const insertionSort = () => {
     let moves = 0;
     for (let i = 1; i < order.length; i++) {
       const member = order[i]!; let j = i - 1;
-      while (j >= 0 && before(member, order[j]!)) { order[j + 1] = order[j]!; j--; if (++moves > order.length * 8) return false; }
+      while (j >= 0 && before(member, order[j]!)) { order[j + 1] = order[j]!; j--; if (++moves > order.length * 12) return false; }
       order[j + 1] = member;
     }
     return true;
   };
   return {
     /** Hidden bodies leave the order; the next update re-sorts. */
-    setMembers(next: readonly Entry[]) { members = next; orientation = null; order = []; },
+    setMembers(next: readonly Entry[]) { members = next; orientation = null; order = []; ranked = []; positions = new Float64Array(0); ranks.clear(); },
     update(orientationXyzw: OrientationXyzw, rotating: boolean, selected: Entry) {
       let ranksChanged = false;
       if (!orientation || (!rotating && orientation.some((value, axis) => value !== orientationXyzw[axis]))) {
         orientation = [...orientationXyzw];
         const view = cssViewFromOrientation(orientationXyzw);
-        if (depths.length !== members.length) depths = new Float64Array(members.length);
-        members.forEach((entry, index) => {
-          depths[index] = -(view[6]! * entry.body.positionM[0]! + view[7]! * entry.body.positionM[1]! + view[8]! * entry.body.positionM[2]!);
-        });
-        if (order.length !== members.length || !insertionSort()) {
+        const count = members.length;
+        if (depths.length !== count) depths = new Float64Array(count);
+        // Positions are fixed for a member list: copied once, then each depth is three multiplies over a flat array.
+        if (positions.length !== count * 3) {
+          positions = new Float64Array(count * 3);
+          members.forEach((entry, index) => positions.set(entry.body.positionM.slice(0, 3), index * 3));
+        }
+        const vx = view[6]!, vy = view[7]!, vz = view[8]!;
+        for (let index = 0, offset = 0; index < count; index++, offset += 3) {
+          depths[index] = -(vx * positions[offset]! + vy * positions[offset + 1]! + vz * positions[offset + 2]!);
+        }
+        if (order.length !== count || !insertionSort()) {
           order = members.map((_, index) => index).sort((a, b) => before(a, b) ? -1 : before(b, a) ? 1 : 0);
         }
-        ranks.clear();
-        order.forEach((member, index) => ranks.set(members[member]!, index * 4));
+        // Only members whose place changed get a new rank.
+        for (let index = 0; index < count; index++) if (ranked[index] !== order[index]) ranks.set(members[order[index]!]!, index * 4);
+        ranked = order.slice();
         selection = null; ranksChanged = true;
       }
       const changed = ranksChanged || selection !== selected;

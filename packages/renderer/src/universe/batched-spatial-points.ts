@@ -112,26 +112,28 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
     let nearestUnits = Infinity;
     let visible = 0, candidates = 0;
     pathPaint.begin(viewport);
-    points.slice(0, count).forEach((point,index)=>{
+    // An index loop over the first `count`: slice copied the points every frame.
+    for (let index = 0, end = Math.min(count, points.length); index < end; index++) {
+      const point = points[index]!;
       const x=point.positionUnits[0]-local.positionUnits[0], y=point.positionUnits[1]-local.positionUnits[1], z=point.positionUnits[2]-local.positionUnits[2];
       const distance=Math.hypot(x,y,z);
       if(distance<nearestUnits)nearestUnits=distance;
       const depth=-(r[2]!*x+r[5]!*y+r[8]!*z);
-      if(depth<=0)return;
+      if(depth<=0)continue;
       const sx=viewport.focalPixels*(r[0]!*x+r[3]!*y+r[6]!*z)/depth+viewport.principalOffsetPixels[0];
       const sy=viewport.focalPixels*(r[1]!*x+r[4]!*y+r[7]!*z)/depth+viewport.principalOffsetPixels[1];
       const style=stylePoint(point,distance);
-      if(!style || !(style.opacity>0) || !(style.radiusPx>0))return;
+      if(!style || !(style.opacity>0) || !(style.radiusPx>0))continue;
       const margin=Math.max(2,style.radiusPx), halfWidth=(viewport.widthPixels??Infinity)/2, halfHeight=(viewport.heightPixels??Infinity)/2;
-      if(Math.abs(sx)>halfWidth*(1+2*OVERSCAN)+margin || Math.abs(sy)>halfHeight*(1+2*OVERSCAN)+margin)return;
+      if(Math.abs(sx)>halfWidth*(1+2*OVERSCAN)+margin || Math.abs(sy)>halfHeight*(1+2*OVERSCAN)+margin)continue;
       // The share and the counts are of the view; the overscan only paints ahead of a turn.
       const inView = Math.abs(sx)<=halfWidth+margin && Math.abs(sy)<=halfHeight+margin;
       if(inView)candidates++;
       // A fixed low-discrepancy rank per point: the kept share is spread evenly and stable from frame to frame.
-      if(keep<1 && (index*0.6180339887498949)%1>=keep)return;
+      if(keep<1 && (index*0.6180339887498949)%1>=keep)continue;
       pathPaint.point(sx, sy, Math.max(.5, style.radiusPx), pointPaint(style));
       if(inView)visible++;
-    });
+    }
     pathPaint.commit();
     setWarp('');
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).

@@ -18,6 +18,8 @@ export function mountPointPaths(host: HTMLElement, palette: readonly string[]) {
   }));
   host.append(svg);
   let origin = '';
+  // Most points of a layer share one radius: its two formatted lengths are kept for the next point.
+  let lastRadius = Number.NaN, r = '', diameter = '';
   return {
     /** The paths' svg: a camera turn can move what it painted as one warp (batched-spatial-points.ts). */
     svg,
@@ -30,7 +32,7 @@ export function mountPointPaths(host: HTMLElement, palette: readonly string[]) {
     point(x: number, y: number, radius: number, color: string) {
       const entry = paths.get(color);
       if (!entry) throw new TypeError(`Point colour ${color} is absent from the prepared paint palette.`);
-      const r = radius.toFixed(3), diameter = (radius * 2).toFixed(3);
+      if (radius !== lastRadius) { lastRadius = radius; r = radius.toFixed(3); diameter = (radius * 2).toFixed(3); }
       entry.circles.push(`M${(x-radius).toFixed(3)} ${y.toFixed(3)}a${r} ${r} 0 1 0 ${diameter} 0a${r} ${r} 0 1 0 -${diameter} 0Z`);
     },
     commit() {
