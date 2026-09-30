@@ -121,7 +121,6 @@ export async function promoteVolumeDatasets(root: string, input: VolumeDatasetPr
       stars: { frame: stars.frame, points } });
     await output(`source/lenses/${dataset.imageId}/result.json`, bytes(result));
     await output(`source/lenses/${dataset.imageId}/provenance.json`, await readFile(resolve(directory, 'source/provenance.json')));
-    await output(`source/lenses/${dataset.imageId}/catalogue-stars.json`, bytes(stars));
     await output(`source/lenses/${dataset.imageId}/selection.json`, bytes({ settings: dataset, sourceParts: catalogue, densityFilter: filtered.stats }));
   }
   const data = { schema: 'cssearth-volume-datasets@1', id: recipe.id, defaultDataset: recipe.defaultDataset,

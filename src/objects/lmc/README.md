@@ -44,7 +44,6 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 - A violet-blue patch can remain on the western footprint edge where the envelope's chromaticity is extrapolated from few covered pixels, and a small detached knot group appears above the body at oblique and side poses.
 - Faint concentric ripples remain where alpha is still quantized. Detail is bounded by the 384-pixel fit and 128 slabs on the longest axis.
 - Star removal leaves crowded and saturated stars and can remove compact nebular light.
-- The three per-dataset `catalogue-stars.json` records the promotion writes are byte-identical copies of one star layer; the replay inputs reference a single copy.
 
 <details>
 <summary>Retired density-repaint delivery</summary>

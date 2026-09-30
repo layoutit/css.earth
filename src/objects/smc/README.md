@@ -44,7 +44,6 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 - Photometric red-clump distances include intrinsic luminosity scatter, photometric error, reddening uncertainty and contamination, and have not been deconvolved into geometric depth. Large-scale extensions outside the survey footprint remain model-dependent.
 - Faint concentric ripples remain in the outer halo where alpha is still quantized. Detail resolution is bounded by the 384-pixel fit and 128 slabs.
 - Star removal leaves crowded and saturated stars and can remove compact nebular light. A bright foreground cluster is masked by an authored exclusion rather than classified.
-- The five per-dataset `catalogue-stars.json` records the promotion writes are byte-identical copies of one star layer, so `source/lenses/` carries about 3.8 MB of duplication. That is the shape the shared promotion tool produces; the replay inputs reference a single copy.
 - The four survey-band FITS composites are not shipped: the AllWISE W2 background gradient toward the south-east, W3 Galactic cirrus and scattered light, SPIRE covering only about 26% of the rectified field and uncorrected DSS2 plate-to-plate steps are all still present in them.
 
 <details>
