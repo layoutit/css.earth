@@ -29,7 +29,8 @@
     "faceSize": 1536,
     "exposure": 4.5,
     "transfer": "linear-to-srgb",
-    "webpQuality": 40,
+    "webpQuality": 90,
+    "displayGain": 0.12,
     "shadowFloor": {
       "blackPoint": 0.04,
       "fullSignal": 0.12
