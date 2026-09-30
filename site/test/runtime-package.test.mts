@@ -1,12 +1,12 @@
-// One runner for the prepared runtime contract, run once per runtime structure (runtimeRepresentatives): objects of one
-// structure take the same paths, and each object's own data is checked when it is prepared.
-// CSSEARTH_TEST_OBJECTS=<id>[,<id>] limits a run to those bodies (see anchor-table.mts).
+// The prepared runtime contract and the shared selection owner, on the bodies with the most kinds of control. The code is
+// the same for every body, and each body's own data is checked when it is prepared. CSSEARTH_TEST_OBJECTS=<id>[,<id>] runs
+// those bodies instead (see anchor-table.mts).
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
 import { objectRuntimePackageTests, preparedSelectionFixture } from '../../packages/renderer/test/node/fixtures/object-runtime-package.mts';
-import { required, runtimeRepresentatives } from '@cssearth/objects/node/contract';
+import { loadObjectTestDefinition, required } from '@cssearth/objects/node/contract';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { selectedObjectIds } from './fixtures/anchor-table.mts';
 import { projectRoot } from './fixtures/objects.mts';
@@ -24,7 +24,9 @@ function datasetIds(definition: unknown): string[] {
   return datasets.map((dataset, index) => requireString(requireRecord(dataset, `dataset ${index}`).id, `dataset ${index} id`));
 }
 
-for (const { id, definition } of await runtimeRepresentatives(selectedObjectIds(SCENE_OBJECTS.map(object => object.id)), projectRoot)) {
+const ids = process.env.CSSEARTH_TEST_OBJECTS ? selectedObjectIds(SCENE_OBJECTS.map(object => object.id)) : ['earth', 'moon', 'saturn'];
+for (const id of ids) {
+  const definition = await loadObjectTestDefinition(id, projectRoot);
   objectRuntimePackageTests(definition);
 
   test(`${id}: every declared toggle commits through the shared selection owner without touching the retained tree`, async () => {
