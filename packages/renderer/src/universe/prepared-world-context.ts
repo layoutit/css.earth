@@ -551,11 +551,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const candidates = !policyChanged ? delta.changed : frame.projectedBodies;
       const projectedBodies = candidates.map(projected => {
         const entry = bodies[projected.index];
-        entry.labelShown = projected.labelShown;
-        entry.labelPlacement = projected.labelPlacement;
-        entry.indicatorShown = projected.indicatorShown;
+        // These fields write through to the body's columns (bindWorldBodyColumns); an unchanged one skips its setter.
+        if (entry.labelShown !== projected.labelShown) entry.labelShown = projected.labelShown;
+        if (entry.labelPlacement !== projected.labelPlacement) entry.labelPlacement = projected.labelPlacement;
+        if (entry.indicatorShown !== projected.indicatorShown) entry.indicatorShown = projected.indicatorShown;
         entry.indicatorCutout = projected.indicatorCutout;
-        entry.orbitAppearance = projected.orbitAppearance;
+        const orbit = entry.orbitAppearance, next = projected.orbitAppearance;
+        if (orbit.width !== next.width || orbit.opacity !== next.opacity) entry.orbitAppearance = next;
         const changed = delta.changes.get(projected.index) ?? 0;
         const mask = policyChanged ? ContextChange.all : changed;
         return { projected, entry, mask };
