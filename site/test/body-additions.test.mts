@@ -17,16 +17,20 @@ const write = async (path: string, value: unknown) => {
   await writeFile(path, typeof value === 'string' ? value : JSON.stringify(value, null, 2) + '\n');
 };
 
-test('context prepared resources stay external until their bank is selected', () => {
-  const source = contextObjectModule([
-    { id: 'nebula', type: 'volume-lens-bank' },
-    { id: 'stars', type: 'point-field' },
-  ]);
-  assert.match(source, /query: '\?url&no-inline'/u);
-  assert.match(source, /\.\.\/src\/objects\/nebula\/prepared\/\*\*\/\*\.\{json,png,webp,bin\}/u);
-  assert.match(source, /!\.\.\/src\/objects\/stars\/prepared\/\*\.bin/u,
-    'The source-only point bank stays excluded while its published resources remain external.');
-  assert.doesNotMatch(source, /prepared\/\*\.json|CONTEXT_OBJECT_PREPARED_JSON/u, 'No prepared JSON enters the runtime module graph.');
+test('dev context resources are their inventory files on the dev server, never a module per file', async t => {
+  const root = await mkdtemp(resolve(tmpdir(), 'cssearth-context-assets-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await write(resolve(root, 'src/objects/nebula/inventory.json'), {
+    schema: 'cssearth-inventory@1', assets: [
+      { location: 'prepared', filename: 'atlases/x.webp', sha256: 'a'.repeat(64), bytes: 10 },
+      { filename: 'nebula-arrival.webp', sha256: 'b'.repeat(64), bytes: 20, location: 'public' },
+    ],
+  });
+  const assets = await contextObjectAssetUrls([{ id: 'nebula' }], root, null);
+  assert.deepEqual(assets, { '../src/objects/nebula/prepared/atlases/x.webp': '/src/objects/nebula/prepared/atlases/x.webp' });
+  const source = contextObjectModule([{ id: 'nebula' }], assets);
+  assert.match(source, /"\.\.\/src\/objects\/nebula\/prepared\/atlases\/x\.webp":"\/src\/objects\/nebula\/prepared\/atlases\/x\.webp"/u);
+  assert.doesNotMatch(source, /\?url|prepared\/\*\*/u, 'No prepared file enters the runtime module graph.');
 });
 
 test('the build reads three named prepared files and the source manifest per context object, never a catalogue bank', () => {
