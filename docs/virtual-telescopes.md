@@ -1255,7 +1255,7 @@ mobile hardware are not qualified. Unsupported prepared camera bindings are
 refused instead of producing an incomplete view.
 
 The following browser check is historical. Its helper remains in git history
-and is absent from this checkout:
+and is absent from this checkout. [Original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-scroll/sphere-browser.mts) (now retired; surviving code is in `labs/experiments/native-scroll/`):
 
 ```sh
 node tests/experiments/native-scroll/sphere-browser.mts europa-sphere/sphere.html mercury-sphere/sphere.html

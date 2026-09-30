@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "integration/eclipse-map/transit-fit.test.mts",
+    "site/env.d.ts",
+    "site/cesium-module-types.d.ts",
+    "packages/bake/src/delivery/fixtures/external-modules.d.mts"
+  ],
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "vitest": [
+        "./packages/engine/node_modules/vitest"
+      ],
+      "/site/*": [
+        "./site/*"
+      ],
+      "/src/*": [
+        "./src/*"
+      ]
+    },
+    "tsBuildInfoFile": "output/tsbuildinfo/integration-tests.tsbuildinfo"
+  }
+}

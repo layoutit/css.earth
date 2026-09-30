@@ -74,7 +74,7 @@ test('a Gaia XP sampled spectrum gives the colour of the star\'s own light: HD 1
   const { readXpSampledSpectrum, xpSampledColor, XP_SAMPLED_WAVELENGTHS_NM } = await import('@cssearth/bake/objects/stellar');
   assert.deepEqual([XP_SAMPLED_WAVELENGTHS_NM[0], XP_SAMPLED_WAVELENGTHS_NM.at(-1), XP_SAMPLED_WAVELENGTHS_NM.length], [336, 1020, 343]);
   for (const [id, sourceId, srgb] of [['hd-189733', '1827242816201846144', [255, 226, 207]], ['hd-189733-companion', '1827242816176111360', [255, 201, 123]]] as const) {
-    const system = new URL(`tests/src/objects/${id}/source/`, pathToFileURL(findProjectRoot(import.meta.url) + '/'));
+    const system = new URL(`src/objects/${id}/source/`, pathToFileURL(findProjectRoot(import.meta.url) + '/'));
     const load = async () => loadStellarPhotometricColor(async path => readFile(new URL(path, system)), {}, 'photometry/stellar-color.json');
     const { color, range, temperature } = await load();
     assert.equal(temperature, null);

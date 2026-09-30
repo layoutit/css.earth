@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Regenerate Python oracle fixtures through the pinned environment: every fixture
- * oracle (a script under tests/oracles/<group>/ that writes through
+ * oracle (a script beside its owning code that writes through
  * fixture.py), or only the ones named, such as `spice/dart-draco`. Older
  * standalone audits in the same tree, such as the Borrelly registration, are
  * not fixture oracles and are never run here.
@@ -11,7 +11,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { projectRoot } from '../project-root.ts';
 
-const root = projectRoot(import.meta.url), oracles = resolve(root, 'tests/oracles'), python = resolve(root, '.local/oracles/venv/bin/python');
+const root = projectRoot(import.meta.url), oracles = resolve(root, 'packages/core/src/node/oracle'), python = resolve(root, '.local/oracles/venv/bin/python');
 const relocated: Readonly<Record<string, string>> = {
   "astronomy/hosted-eccentric": "packages/bake/src/astronomy/fixtures/hosted-eccentric.py",
   "fits/core": "packages/bake/src/objects/cameras/fixtures/fits/core.py",

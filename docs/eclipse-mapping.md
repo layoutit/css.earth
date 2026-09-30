@@ -87,8 +87,8 @@ WASP-43b's offset moved with two choices the data barely constrain: the detector
   - The temperature inversion returns the star's temperature for a planet as bright per area as the star.
 - [`eigenmap-fit.oracle.test.mts`](../packages/bake/src/objects/raster/eclipse-map/eigenmap-fit.oracle.test.mts): the production eigencurve decomposition matches NumPy's independent LAPACK SVD under the signed-harmonic convention in pinned ThERESA source. Sign-invariant eigenmap and eigencurve projectors cover full-rank, rank-deficient and uniformly rescaled inputs.
 - [`numerics.oracle.test.mts`](../packages/bake/src/objects/raster/eclipse-map/numerics.oracle.test.mts): independent NumPy and Astropy results cover spherical harmonics, the weighted linear fit, posterior covariance, Planck radiance and brightness-temperature inversion. Phase-curve tests separately enforce uniform-sphere normalization and mirror/time-reversal symmetry through eclipse.
-- [`transit-fit.test.mts`](../tests/objects/eclipse-map/transit-fit.test.mts): an eccentric transit made with the shared orbit geometry and an independent 2,500-ring stellar-disc integration is recovered by the batman/SciPy boundary. The real WASP-43b check below independently holds its timing to Hammond et al.'s propagated ephemeris.
-- `tests/objects/unit/wasp-43b/eigenmap-fit.test.mts`: on the deposited JWST NIRSpec white-light curve of WASP-43b, the fit must reproduce ThERESA run with the corrected axis.
+- [`transit-fit.test.mts`](../integration/eclipse-map/transit-fit.test.mts): an eccentric transit made with the shared orbit geometry and an independent 2,500-ring stellar-disc integration is recovered by the batman/SciPy boundary. The real WASP-43b check below independently holds its timing to Hammond et al.'s propagated ephemeris.
+- `packages/bake/src/objects/raster/eclipse-map/eigenmap-fit.test.mts`: on the deposited JWST NIRSpec white-light curve of WASP-43b, the fit must reproduce ThERESA run with the corrected axis.
 
 | Degree 3, 6 eigencurves, positive | This fit | ThERESA, axis corrected |
 | --- | --- | --- |

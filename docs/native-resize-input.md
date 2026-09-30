@@ -1,7 +1,7 @@
 # Native resize as a camera input
 
 This document records a historical input experiment. The browser helpers under
-`tests/experiments/native-scroll/` and `tests/experiments/native-resize/`, and
+[`tests/experiments/native-scroll/`](https://github.com/layoutit/cssEarth/tree/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-scroll/) (now retired; surviving code is in `labs/experiments/native-scroll/`) and [`tests/experiments/native-resize/`](https://github.com/layoutit/cssEarth/tree/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-resize/) (now retired; surviving code is in `labs/experiments/native-resize/`), and
 the `perf:trace` package command, last existed in git history.
 Commands below that name those helpers or `perf:trace` describe the original
 runs; they cannot be run from this checkout. The previews and their launchers
@@ -63,7 +63,7 @@ rounding of small registered numbers. Perspective covariance calculations also
 avoid a tiny intermediate factor. A discarded 1e36 storage scale overflowed in
 Chromium; its captures are explicitly invalid. The current scale is 1e6.
 
-The historical browser checks under `tests/experiments/native-scroll/` covered:
+The historical browser checks under [`tests/experiments/native-scroll/`](https://github.com/layoutit/cssEarth/tree/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-scroll/) (now retired; surviving code is in `labs/experiments/native-scroll/`) covered:
 
 - `resize-browser.mts`: repeated drags, one-pixel movement, release, independent
   wheel zoom, wheel over a marker, and native Neptune navigation.

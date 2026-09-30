@@ -265,7 +265,7 @@ its validators accept); the renderer never imports the bake.
     `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Body pipeline tests stay in `packages/bake/authoring/<body>/`; domain tests also live under
-  `tests/objects/<topic>/` pending later moves. The moved terrestrial Node suites live in
+  `packages/bake/src/objects/<topic>/`. The moved terrestrial Node suites live in
   `packages/bake/src/objects/{cameras,geometry,raster,layers/terrestrial}/`. The source-surface
   test and independent Python verifier are in `packages/bake/src/objects/geometry/`, with the
   source-surface fixture in its `fixtures/` directory. Tests read body sources, kernel banks and

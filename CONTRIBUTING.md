@@ -235,7 +235,7 @@ script a workflow job runs before it installs dependencies imports, with everyth
 built-ins and files that job's sparse checkout keeps (`pre-install-imports.mts`). Not yet enforced:
 unused files in library folders (untangle item K).
 
-Reference implementations live under `tests/oracles/` and their owning `packages/bake/src/` topics with a pinned
+Reference implementations live beside their owning package code; the shared harness lives in `packages/core/src/node/oracle/` with a pinned
 Python environment (`node packages/core/src/node/oracle/setup.mts`); the fixtures beside them
 are committed evidence, and the comparing tests run without Python. See
 [packages/core/src/node/oracle/README.md](packages/core/src/node/oracle/README.md) before adding or regenerating

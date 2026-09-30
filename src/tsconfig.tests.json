@@ -1,0 +1,34 @@
+{
+  "extends": "../tsconfig.base.json",
+  "include": [
+    "**/*.test.ts",
+    "**/*.test.mts",
+    "**/*.spec.ts",
+    "**/*.spec.mts",
+    "**/test/**/*.ts",
+    "**/test/**/*.mts",
+    "**/*-test-fixture.mts",
+    "**/*-browser.mts",
+    "../site/env.d.ts",
+    "../site/cesium-module-types.d.ts",
+    "../packages/bake/src/delivery/fixtures/external-modules.d.mts"
+  ],
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**"
+  ],
+  "compilerOptions": {
+    "paths": {
+      "vitest": [
+        "../packages/engine/node_modules/vitest"
+      ],
+      "/site/*": [
+        "../site/*"
+      ],
+      "/src/*": [
+        "./*"
+      ]
+    },
+    "tsBuildInfoFile": "../output/tsbuildinfo/src-tests.tsbuildinfo"
+  }
+}

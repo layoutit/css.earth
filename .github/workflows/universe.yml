@@ -149,7 +149,7 @@ jobs:
         # report the contract names, so an empty ledger, a check without its commit or a relative evidence path fails here.
         run: pnpm check:investigations
       - name: Test the shared object libraries
-        # The node tests of @cssearth/bake/objects/<topic> sit beside the authoring scripts in packages/*/authoring/, under tests/objects/ or beside
+        # The node tests of @cssearth/bake/objects/<topic> sit beside the authoring scripts in packages/*/authoring/, or beside
         # their module in packages/bake/src/objects/, which no other PR step runs; .github/scripts/checks/test-bake-objects.mts selects
         # every test that imports an object entry, and unrestored downloads skip.
         # They read the generated solar geometry built above and five tracked geology shapefiles (5.4 MB) the sparse tree leaves out.
@@ -161,7 +161,7 @@ jobs:
         # location rather than by what it imports; a test whose toolchain or restored input is absent skips and names it.
         run: pnpm test:telescope-cli
       - name: Check independent body additions
-        run: node --test site/test/body-additions.test.mts
+        run: node --test site/test/body-additions.test.mts integration/eclipse-map/transit-fit.test.mts
       - name: Test the object generator and every lit body's presentation
         # new-object's decisions offline (ids, duplicates, refresh, colour, orbits) and the static check that every lit body's
         # lighting frame is sized to its sphere and every shape planet takes its star's light. About two seconds; the heavy
@@ -295,8 +295,8 @@ jobs:
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Typecheck test, fixture and capture files
-        # Native tsc checks the whole tests/tsconfig.json closure in one program; a 6 GB heap
-        # covers the 3.9 GB the audit measured, well inside the runner's 16 GB.
+        # Native tsc builds the per-owner test programs through tsconfig.tests.json; keep a 6 GB heap
+        # until per-owner peak measurements justify reducing it; the old whole-program audit measured 3.9 GB.
         env:
           NODE_OPTIONS: --max-old-space-size=6144
         run: pnpm typecheck:tests --extendedDiagnostics
