@@ -4,7 +4,8 @@ import { ContextChange, createWorldContextFrameReceiver } from './world-context/
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
 import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
-import type { PlannedWorldContext, WorldContextView } from './world-context/world-context-planner.js';
+import type { PlannedWorldContext } from './world-context/world-context-planner.js';
+import { bindWorldBodyColumns, createWorldBodyColumns, type PackedWorldContextView } from './world-context/world-context-view-transport.js';
 import { createSystemFade, indicatorDotDiameter, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
 import type { OrientationXyzw } from '@cssearth/engine';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -49,8 +50,11 @@ function createDepthOrder<Entry extends { readonly body: { readonly positionM: r
       if (!orientation || (!rotating && orientation.some((value, axis) => value !== orientationXyzw[axis]))) {
         orientation = [...orientationXyzw];
         const view = cssViewFromOrientation(orientationXyzw);
-        const depth = (entry: Entry) => -(view[6]! * entry.body.positionM[0] + view[7]! * entry.body.positionM[1] + view[8]! * entry.body.positionM[2]);
-        ranks = new Map([...members].sort((a, b) => depth(b) - depth(a)).map((entry, index) => [entry, index * 4]));
+        // Each depth is taken once, not once per comparison; the stable sort keeps equal depths in member order.
+        const depths = Float64Array.from(members, ({ body: { positionM } }) => -(view[6]! * positionM[0]! + view[7]! * positionM[1]! + view[8]! * positionM[2]!));
+        const order = Array.from(members, (_, index) => index).sort((a, b) => depths[b]! - depths[a]!);
+        ranks = new Map();
+        for (let index = 0; index < order.length; index++) ranks.set(members[order[index]!]!, index * 4);
         selection = null; ranksChanged = true;
       }
       const changed = ranksChanged || selection !== selected;
@@ -220,6 +224,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       hovered: false, groupHovered: false,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorCutout: false, previousCount: 0 };
   });
+  // Each body's presentation lives in its row of these columns (bindWorldBodyColumns): a frame sends a copy of them.
+  const bodyColumns = createWorldBodyColumns(bodies.length);
+  bodies.forEach((entry, index) => bindWorldBodyColumns(entry, bodyColumns, index));
   const entriesById = new Map(bodies.map(entry => [entry.body.id, entry]));
   for (const entry of bodies) if (entry.orbit) entry.parentPaint = entriesById.get(entry.orbit.centerBodyId)?.paint;
   const flightAnnotations = mountFlightAnnotations(root, plan.camera.presentation.levelOfDetail, depthBase);
@@ -284,7 +291,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const refresh = () => { requestPublication?.(); };
   // Any change to what the planner decides also invalidates frames already captured.
   const invalidatePolicy = () => { presentationRevision++; policyDirty = true; };
-  const invalidateLabelSizes = () => { invalidatePolicy(); for (const entry of bodies) entry.labelSize.width = 0; };
+  const invalidateLabelSizes = () => { invalidatePolicy(); for (const entry of bodies) entry.labelSize = { ...entry.labelSize, width: 0 }; };
   const fonts = host.ownerDocument.fonts;
   fonts?.addEventListener('loadingdone', invalidateLabelSizes);
   let annotationFrame: number | null = null;
@@ -301,7 +308,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (!destroyed) refresh();
     });
   };
-  const readView = (world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []): WorldContextView => {
+  const readView = (world: WorldCameraPose, viewport: WorldCameraViewport, frameBlockers: readonly LabelScreenRect[] = []): PackedWorldContextView => {
       if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt) {
         throw new TypeError('Context and camera reference frames differ.');
       }
@@ -331,9 +338,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         preserveCommittedAnnotations: rotationPhase === 'released',
         labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
-        bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize, labelShown, labelPlacement,
-          indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
-          labelShown, labelPlacement, indicatorShown, indicatorRadius, orbitAppearance })) };
+        // Each body's presentation as it stands, copied for the planner's worker (the copy is transferred).
+        bodyColumns: bodyColumns.slice() };
   };
   const layer = Object.freeze({ root,
     /** `frameBlockers` hold only for this camera, such as the selected body's caption, which moves with it. */
@@ -346,6 +352,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     },
     labelExclusionRects: interactions.labelExclusionRects,
     backgroundExclusionRects: interactions.backgroundExclusionRects,
+    bodyLabelRects: interactions.bodyLabelRects,
     setNavigationInFlight(active: boolean) {
       if (destroyed || active === navigationInFlight) return;
       invalidatePolicy();

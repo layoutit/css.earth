@@ -397,7 +397,10 @@ export function encodeWorldOrbits(prepared: PreparedWorldContext, include: (body
 }
 /** One orbit bank per path, named by its body: the planner worker reads a path when a frame would draw it, so a page
  * downloads only the paths its views draw. A bank per orbit centre carried every path around that centre: the Sun view
- * drew 36 of the Sun's 124 paths and Jupiter's 7 of its moons' 28 (the Sun view read 194 KB brotli, 91 KB per path). */
+ * drew 36 of the Sun's 124 paths and Jupiter's 7 of its moons' 28 (the Sun view read 194 KB brotli, 91 KB per path).
+ * The asset host serves `.bin` uncompressed, so those brotli sizes were never sent: preparation packs each bank
+ * (site/build/prepare/prepare-spatial-context.ts, `@cssearth/objects` prepared-binary.ts), which took the 1,463 published
+ * banks from 6,225,752 to 3,026,744 bytes (2026-09-30). */
 export function worldOrbitBanks(prepared: PreparedWorldContext): { readonly id: string; readonly bytes: Uint8Array }[] {
   return prepared.bodies.filter(body => body.orbit).map(body => body.id).sort()
     .map(id => ({ id, bytes: encodeWorldOrbits(prepared, body => body.id === id) }));

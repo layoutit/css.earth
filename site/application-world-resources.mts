@@ -16,6 +16,7 @@ import { loadFocusCatalogs } from './focus-catalog.mts';
 import { worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
 import { readPageDatasets, selectedPageDataset } from './page-datasets.mts';
+import { KNOWN_OVERVIEWS } from './object-directory.mts';
 import { navigationHref } from './navigation/navigation-history.mts';
 
 /** The view the page `page` shows its image mesh in: its selected dataset's (page-datasets.mts), read from the address. The
@@ -33,16 +34,6 @@ import { isOverviewPage, withOverviewScope } from './navigation/navigation-scope
 const ASTEROID_MINIMUM_PIXELS = 2, PLAIN_DOT_MINIMUM_PIXELS = 1.5;
 const { annotationOpacities, annotationPriorities, asteroidIds, ordinaryAsteroidIds, plainDotIds, compact: phone } = worldVisibilityPolicy;
 const ASTRONOMICAL_UNIT_M = 149_597_870_700, PARSEC_M = 3.085677581491367e16;
-// Published catalogues placed on a galaxy's disc plane, drawn over its image layers (src/objects/m31/README.md,
-// src/objects/m33/README.md).
-const IMAGE_LAYER_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
-  m31: ['stars', 'dots'],
-  m33: ['stars', 'dots'],
-  m81: ['dots'],
-  m83: ['dots'],
-  'ngc-253': ['dots'],
-  'ngc-300': ['dots'],
-};
 
 // Published catalogues drawn through a volume bank, with its opacity (src/objects/m87/README.md).
 const VOLUME_CATALOGUE_POINTS: Readonly<Record<string, readonly string[]>> = {
@@ -106,13 +97,19 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const imageLayerDescriptors = parsedDescriptors.filter(descriptor => descriptor.type === 'image-layer-bank')
       .map(parseImageLayerBankDescriptor);
     const imageLayerIds = new Set(imageLayerDescriptors.map(descriptor => descriptor.id));
+    const imageLayerCataloguePoints = new Map(imageLayerDescriptors.map(descriptor => [descriptor.id, descriptor.cataloguePoints]));
     const imageLayerBanks = imageLayerDescriptors.map(descriptor => ({ id: descriptor.id, frame: descriptor.frame }));
     const loadImageLayer = createInFlightLoader(async (id: string) => {
       if (!imageLayerIds.has(id)) throw new TypeError(`Unknown prepared image-layer bank: ${id}.`);
       const set = resourceSet(id);
       return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
         resolveResource: (path: string) => set.resolve(`prepared/${path}`),
-        cataloguePointUrls: (IMAGE_LAYER_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.json`)) };
+        cataloguePointUrls: imageLayerCataloguePoints.get(id)!.map(bank => set.resolve(`prepared/${bank}.bin`)) };
+    });
+    // Packages that are only catalogue dots (a galaxy cluster's members): drawn while their catalogue row is selected.
+    const pointBanks = parsedDescriptors.filter(descriptor => descriptor.type === 'catalogue-point-bank').map(descriptor => {
+      if (!descriptor.prepared) throw new TypeError(`src/objects/${descriptor.id}/object.json: a catalogue point bank names its prepared dots.`);
+      return { id: descriptor.id, url: resourceSet(descriptor.id).resolve(descriptor.prepared.url) };
     });
     const plainDots = new Set(plainDotIds), asteroids = new Set(asteroidIds);
     const sprites = preparedBodyBillboards([applicationContext.focus, ...applicationContext.bodies], plainDots,
@@ -129,7 +126,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
       const set = resourceSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
       return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`),
-        cataloguePointUrls: (VOLUME_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.json`)) };
+        cataloguePointUrls: (VOLUME_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.bin`)) };
     });
     // The worker receives the validated summary and reads orbit paths on demand.
     // The bounded spatial-star sample is already inside pointAppearance;
@@ -146,17 +143,17 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
       // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).
-      galaxyCataloguePoints: ['globular-clusters', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.json`)),
+      galaxyCataloguePoints: ['globular-clusters', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: applicationContext, volume, pointAppearance, sprites,
-      imageLayerBanks, loadImageLayer, volumeDatasetBanks, loadVolumeDataset,
+      imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset,
       backgroundCataloguePoints,
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
-      // open unless its page's dataset shows it whole.
+      // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the overview it bounds.
       imageMeshes: parsedDescriptors.filter(descriptor => descriptor.prepared?.format === 'cssearth-image-mesh@1').map(descriptor => {
         const set = resourceSet(descriptor.id);
         return { url: set.resolve(descriptor.prepared!.url), resolveResource: (path: string) => set.resolve(`prepared/${path}`),
-          cutaway: () => meshView(descriptor.id) === 'cutaway' };
+          cutaway: () => meshView(descriptor.id) === 'cutaway', hidden: () => meshView(descriptor.id) === 'hidden', hiddenCaption: KNOWN_OVERVIEWS.find(overview => overview.id === descriptor.id)?.name };
       }),
       annotationPriorities, annotationLandmarks: PREPARED_WORLD_PRESENTATION.moons.major, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
@@ -178,3 +175,4 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   })().catch(error => { universePromise = null; throw error; });
   return universePromise;
 }
+

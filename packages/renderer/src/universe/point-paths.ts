@@ -1,9 +1,21 @@
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
+/** Dot centres are written as whole numbers of this fraction of a pixel, and the paths' group scales them back: an
+ * integer is the cheapest number to turn into text, and an eighth of a pixel is still below what shows. */
+const SUBPIXELS = 8;
+/** Every dot's text is two pieces looked up instead of formatted: `M<x> ` and `<y>h0` for whole eighths of a pixel up to
+ * this far from the view's centre (2,048 px, past the view and its turn margin on screens up to about 2,900 CSS px wide);
+ * farther, the text is formatted. Joining two looked-up strings built 20,000 dots' text in 0.55 ms where formatting took
+ * 1.49 ms (Node 24, 2026-09-30), with the same text. The tables are built once, on first use (about 1.5 MB). */
+const TABLE_REACH = 2048 * SUBPIXELS;
+let moveText: readonly string[] | null = null, lineText: readonly string[] | null = null;
+const moveTable = () => moveText ??= Array.from({ length: 2 * TABLE_REACH + 1 }, (_, index) => `M${index - TABLE_REACH} `);
+const lineTable = () => lineText ??= Array.from({ length: 2 * TABLE_REACH + 1 }, (_, index) => `${index - TABLE_REACH}h0`);
 
 /** A fixed palette of retained paths. Each projected point remains a circular
- * disc; no per-point elements or native drop-shadow commands are needed. */
+ * disc; no per-point elements or native drop-shadow commands are needed. A dot is a zero-length line with round caps,
+ * `M x y h0`, stroked as wide as the dot: a fifth of the text of two arcs, and no curve to rasterise. */
 export function mountPointPaths(host: HTMLElement, palette: readonly string[]) {
   const document = host.ownerDocument;
   const svg = document.createElementNS(SVG_NS, 'svg');
@@ -12,30 +24,42 @@ export function mountPointPaths(host: HTMLElement, palette: readonly string[]) {
   const group = document.createElementNS(SVG_NS, 'g'); svg.append(group);
   const paths = new Map([...new Set(palette)].map(color => {
     const path = document.createElementNS(SVG_NS, 'path');
-    path.setAttribute('fill', color); group.append(path);
-    const entry = { path, circles: [] as string[], published: '' };
+    path.setAttribute('fill', 'none'); path.setAttribute('stroke', color); path.setAttribute('stroke-linecap', 'round'); group.append(path);
+    const entry = { path, text: '', published: '', width: 0 };
     return [color, entry] as const;
   }));
+  const entries = [...paths.values()], indexOf = new Map([...paths.keys()].map((color, index) => [color, index]));
   host.append(svg);
-  let origin = '';
+  let origin = '', move: readonly string[] = [], line: readonly string[] = [];
   return {
     /** The paths' svg: a camera turn can move what it painted as one warp (batched-spatial-points.ts). */
     svg,
     residentElements: paths.size + 2,
-    begin(viewport: WorldCameraViewport) {
-      const next = `translate(${(viewport.widthPixels ?? 0) / 2} ${(viewport.heightPixels ?? 0) / 2})`;
-      if (origin !== next) { group.setAttribute('transform', next); origin = next; }
-      for (const entry of paths.values()) entry.circles.length = 0;
+    /** A dot colour's path, stroked as wide as its dots: resolved once for each point before any frame, so a frame only
+     * adds positions. One path strokes all its dots at one width, so the dots of a colour share their size. */
+    entry(color: string, radius: number) {
+      const index = indexOf.get(color);
+      if (index === undefined) throw new TypeError(`Point colour ${color} is absent from the prepared paint palette.`);
+      const entry = entries[index]!, width = radius * 2 * SUBPIXELS;
+      if (entry.width && entry.width !== width) throw new TypeError(`Point colour ${color} is drawn ${entry.width / SUBPIXELS} px wide; a dot of it asks for ${width / SUBPIXELS} px.`);
+      if (!entry.width) { entry.width = width; entry.path.setAttribute('stroke-width', String(width)); }
+      return index;
     },
-    point(x: number, y: number, radius: number, color: string) {
-      const entry = paths.get(color);
-      if (!entry) throw new TypeError(`Point colour ${color} is absent from the prepared paint palette.`);
-      const r = radius.toFixed(3), diameter = (radius * 2).toFixed(3);
-      entry.circles.push(`M${(x-radius).toFixed(3)} ${y.toFixed(3)}a${r} ${r} 0 1 0 ${diameter} 0a${r} ${r} 0 1 0 -${diameter} 0Z`);
+    begin(viewport: WorldCameraViewport) {
+      const next = `translate(${(viewport.widthPixels ?? 0) / 2} ${(viewport.heightPixels ?? 0) / 2}) scale(${1 / SUBPIXELS})`;
+      if (origin !== next) { group.setAttribute('transform', next); origin = next; }
+      for (const entry of paths.values()) entry.text = '';
+      move = moveTable(); line = lineTable();
+    },
+    /** A dot of the path `entry` returned, at x, y pixels from the view's centre. */
+    add(index: number, x: number, y: number) {
+      const ix = Math.round(x * SUBPIXELS), iy = Math.round(y * SUBPIXELS);
+      entries[index]!.text += ix >= -TABLE_REACH && ix <= TABLE_REACH && iy >= -TABLE_REACH && iy <= TABLE_REACH
+        ? move[ix + TABLE_REACH]! + line[iy + TABLE_REACH]! : `M${ix} ${iy}h0`;
     },
     commit() {
       for (const entry of paths.values()) {
-        const next = entry.circles.join('');
+        const next = entry.text;
         if (entry.published !== next) { entry.path.setAttribute('d', next); entry.published = next; }
       }
     },

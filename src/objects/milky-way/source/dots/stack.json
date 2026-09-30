@@ -30,7 +30,8 @@
       "appearUnits": [
         0.3,
         0.06
-      ]
+      ],
+      "screenBudget": 6000
     },
     {
       "bank": "local-20pc",
@@ -47,5 +48,5 @@
       ]
     }
   ],
-  "basis": "Presentation choice: each level starts to appear when the view's half-width at the Sun shrinks to three times the level's radius, so its tapered ball of stars fills in as the camera approaches rather than only once the camera is inside it, and is whole at three times the next level's radius; the 20 pc census is whole at 15 pc. The galaxy level is drawn whole within 10 kpc, as before. The sky level appears as the view narrows from 15 pc to 0.05 pc (10,000 AU), where the view from just outside the Solar System is a sky of stars. The galaxy-wide and 3 kpc levels dim to half as the sky level fills the view: from beside the Sun those distant stars would look faint, and the NASA band behind them is the Milky Way there; half keeps the disc's shape. Presentation choice, chosen by eye on 2026-09-30. At most 4,000 of its dots show at once (screenBudget): past that an even, stable share of the visible dots is drawn, so the count on screen stays near 4,000 from the galaxy down to the Sun's neighbourhood, where the catalogues hold fewer in view; chosen by eye on 2026-09-30 against the earlier 2,900 to 5,200 along one zoom path."
+  "basis": "Presentation choice: each level starts to appear when the view's half-width at the Sun shrinks to three times the level's radius, so its tapered ball of stars fills in as the camera approaches rather than only once the camera is inside it, and is whole at three times the next level's radius; the 20 pc census is whole at 15 pc. The galaxy level is drawn whole within 10 kpc, as before. The sky level appears as the view narrows from 15 pc to 0.05 pc (10,000 AU), where the view from just outside the Solar System is a sky of stars. The galaxy-wide and 3 kpc levels dim to half as the sky level fills the view: from beside the Sun those distant stars would look faint, and the NASA band behind them is the Milky Way there; half keeps the disc's shape. Presentation choice, chosen by eye on 2026-09-30. At most 4,000 of its dots show at once (screenBudget): past that an even, stable share of the visible dots is drawn, so the count on screen stays near 4,000 from the galaxy down to the Sun's neighbourhood, where the catalogues hold fewer in view; chosen by eye on 2026-09-30 against the earlier 2,900 to 5,200 along one zoom path. Inside the galaxy the budget rises to 6,000 as the 100 pc level appears, evenly in the logarithm of the view's half-width: measured along a zoom path from 1 ly to 1,000 ly with no budget, 2,800 to 5,810 of the unthinned census's dots were on screen, so none is thinned there, and the view from outside keeps 4,000."
 }

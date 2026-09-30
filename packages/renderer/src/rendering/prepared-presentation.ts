@@ -94,16 +94,37 @@ export function selectedPreparedVariant(definition: PreparedPresentationDefiniti
   if (!variant) throw new TypeError("The selected presentation was not prepared.");
   return variant;
 }
+// A presentation resolves every frame the camera moves; these depend only on the definition and the level, so they are
+// built once and shared (nothing writes to a resolved map).
+const NO_FALLBACKS: Readonly<Record<string, string>> = Object.freeze({});
+const pageFallbacks = new WeakMap<object, Readonly<Record<string, string>>>();
+const fallbacksFor = (fallbacks: Parameters<typeof activeResourceFallbacks>[0]) => {
+  if (!fallbacks) return NO_FALLBACKS;
+  let map = pageFallbacks.get(fallbacks);
+  if (!map) pageFallbacks.set(fallbacks, map = activeResourceFallbacks(fallbacks));
+  return map;
+};
+const resolvedLevels = new WeakMap<object, WeakMap<object, Readonly<Record<string, string>>>>();
+/** A level's texture resources with this browser's fallbacks applied: one map per level and fallback set. */
+function textureResourcesFor(levelResources: Readonly<Record<string, string>> | undefined, fallback: Readonly<Record<string, string>>) {
+  if (levelResources === undefined && !Object.keys(fallback).length) return undefined;
+  const key = levelResources ?? NO_FALLBACKS;
+  let byFallback = resolvedLevels.get(key);
+  if (!byFallback) resolvedLevels.set(key, byFallback = new WeakMap());
+  let resolved = byFallback.get(fallback);
+  if (!resolved) byFallback.set(fallback, resolved = { ...fallback, ...Object.fromEntries(Object.entries(levelResources ?? {}).map(([name, level]) => [name, fallback[level] ?? level])) });
+  return resolved;
+}
+
 export function resolvePreparedPresentation(definition: PreparedPresentationDefinition, { selection, view, previousPlan }: { selection: ObjectSelection; view: import('./prepared-material.js').PreparedMaterialView | null; previousPlan?: PreparedPresentationPlan | null }): PreparedPresentationPlan {
   const variant = selectedPreparedVariant(definition, selection);
   const textureLevel = definition.textureLevels ? selectPreparedTextureLevel(definition.textureLevels,
     view?.levelOfDetail?.silhouetteDiameter, previousPlan?.textureLevel) : undefined;
   // A level names the resource each texture reads; a capability fallback then replaces it where this browser needs one.
-  const fallback = activeResourceFallbacks(definition.assets?.fallbacks);
+  const fallback = fallbacksFor(definition.assets?.fallbacks);
   const levelChoice = textureLevel === undefined ? undefined : textureLevelFor(definition.textureLevels!, textureLevel, variant, view);
   const levelResources = levelChoice?.resources, textureTiles = levelChoice?.tiles;
-  const textureResources = levelResources === undefined && !Object.keys(fallback).length ? undefined
-    : { ...fallback, ...Object.fromEntries(Object.entries(levelResources ?? {}).map(([key, level]) => [key, fallback[level] ?? level])) };
+  const textureResources = textureResourcesFor(levelResources, fallback);
   const content = variant.required.map(key => textureResources?.[key] ?? key);
   // An opaque proxy stands for a marker- or billboard-stage body, so its mesh is not drawn
   // (see perspective-dolly.ts). Mounting one there decoded a full surface set
@@ -129,6 +150,9 @@ export function resolvePreparedPresentation(definition: PreparedPresentationDefi
     ...(textureTiles && Object.keys(textureTiles).length ? { textureTiles } : {}),
     ...(variant.navigation ? { navigation: variant.navigation } : {}) };
 }
+// One choice per level and set of kept-back textures: a turn that hides the same faces again reuses it, so the texture map
+// it resolves to is reused too (textureResourcesFor).
+const levelChoices = new WeakMap<PreparedTextureLevels, Map<string, { resources: Record<string, string>; tiles: Record<string, PreparedTextureTile> }>>();
 /** The selected level's resources and sheet tiles, except that a texture whose faces the camera cannot see keeps the first level. */
 function textureLevelFor(levels: PreparedTextureLevels, level: number, variant: PreparedVariant, view: import('./prepared-material.js').PreparedMaterialView | null) {
   const { resources, tiles = {} } = levels.levels[level]!;
@@ -138,12 +162,20 @@ function textureLevelFor(levels: PreparedTextureLevels, level: number, variant: 
   const seen = new Set<string>(), hidden = new Set<string>();
   for (const write of variant.writes) if (write.kind === 'texture' && write.resource !== null && write.resource in resources)
     (unseen.has(write.name) ? hidden : seen).add(write.resource);
+  const kept = [...hidden].filter(key => !seen.has(key)).sort();
+  if (!kept.length) return { resources, tiles };
+  let choices = levelChoices.get(levels);
+  if (!choices) levelChoices.set(levels, choices = new Map());
+  const choiceKey = `${level}:${kept.join('\n')}`, known = choices.get(choiceKey);
+  if (known) return known;
   const first = levels.levels[0]!, chosen = { ...resources }, chosenTiles: Record<string, PreparedTextureTile> = { ...tiles };
-  for (const key of hidden) if (!seen.has(key)) {
+  for (const key of kept) {
     chosen[key] = first.resources[key]!;
     if (first.tiles?.[key]) chosenTiles[key] = first.tiles[key]; else delete chosenTiles[key];
   }
-  return { resources: chosen, tiles: chosenTiles };
+  const choice = { resources: chosen, tiles: chosenTiles };
+  choices.set(choiceKey, choice);
+  return choice;
 }
 const datasetKey = (name: string) => name.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 function readAttribute(element: HTMLElement, name: string) {

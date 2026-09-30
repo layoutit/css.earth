@@ -89,6 +89,18 @@ export function pointFieldBankHeader(counts: PointFieldBankCounts): Uint8Array {
   return header;
 }
 
+/** A bank's typed columns, as the packed file shuffles them (@cssearth/objects prepared-binary.ts), read from the counts
+ * in its own header: each column is its storage type's width. */
+export function pointFieldBankRegions(bytes: Uint8Array, at = 'point-field bank'): { offset: number; bytes: number; elementBytes: number }[] {
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const magic = String.fromCharCode(...bytes.subarray(0, POINT_FIELD_BANK_MAGIC.length));
+  if (bytes.byteLength < POINT_FIELD_BANK_HEADER_BYTES || magic !== POINT_FIELD_BANK_MAGIC) throw new TypeError(`${at}: not a ${POINT_FIELD_BANK_MAGIC} point-field bank.`);
+  const layout = pointFieldBankLayout({ starCount: view.getUint32(12, true), nodeCount: view.getUint32(16, true),
+    childLinkCount: view.getUint32(20, true), anchorCount: view.getUint32(24, true) });
+  if (layout.bytes !== bytes.byteLength) throw new TypeError(`${at}: its header counts lay out ${layout.bytes} bytes; the bank holds ${bytes.byteLength}.`);
+  return layout.columns.map(column => ({ offset: column.offset, bytes: column.bytes, elementBytes: STORAGE_BYTES[column.storage] }));
+}
+
 export interface DecodedPointFieldBank {
   readonly stars: readonly PreparedPointFieldStar[];
   readonly nodes: readonly PreparedPointFieldNode[];

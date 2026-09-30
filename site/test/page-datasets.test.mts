@@ -36,10 +36,13 @@ test('the card marks the chosen dataset on its host scene and hides its datasets
 test("the prepared cards of the Observable Universe resolve to its published pictures, and a bad one names the package", async () => {
   const raw: unknown = JSON.parse(await readFile(new URL('../../src/objects/observable-universe/prepared/datasets.json', import.meta.url), 'utf8'));
   const cards = parsePageDatasets('observable-universe', raw, path => `https://assets.example/${path}`);
-  assert.equal(cards.defaultDataset, 'cutaway');
-  assert.deepEqual(cards.views, { cutaway: 'cutaway', full: 'full' });
-  assert.deepEqual(cards.controls.map(dataset => dataset.thumbnailUrl), ['https://assets.example/cmb/cmb-cutaway.webp', 'https://assets.example/cmb/cmb-full.webp']);
-  assert.equal(cards.controls[0]!.legend?.labels?.join(' '), '−300 µK 0 µK +300 µK');
-  assert.throws(() => parsePageDatasets('observable-universe', raw, () => undefined), /observable-universe prepared\/datasets\.json: cmb\/cmb-cutaway\.webp is not a published file/);
+  // It opens with the sphere off: the galaxies and quasars alone, with no legend for a map it does not show.
+  assert.equal(cards.defaultDataset, 'off');
+  assert.deepEqual(cards.views, { off: 'hidden', cutaway: 'cutaway', full: 'full' });
+  assert.deepEqual(cards.controls.map(dataset => dataset.thumbnailUrl),
+    ['https://assets.example/cmb/cmb-hidden.webp', 'https://assets.example/cmb/cmb-cutaway.webp', 'https://assets.example/cmb/cmb-full.webp']);
+  assert.equal(cards.controls[0]!.legend, undefined);
+  assert.equal(cards.controls[1]!.legend?.labels?.join(' '), '−300 µK 0 µK +300 µK');
+  assert.throws(() => parsePageDatasets('observable-universe', raw, () => undefined), /observable-universe prepared\/datasets\.json: cmb\/cmb-hidden\.webp is not a published file/);
   assert.throws(() => parsePageDatasets('nearby-universe', raw, path => path), /nearby-universe prepared\/datasets\.json/);
 });

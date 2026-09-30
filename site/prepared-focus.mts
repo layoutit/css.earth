@@ -10,7 +10,7 @@ export type PreparedFocusPresentation = PreparedFocusDatasets & { selectDataset(
 
 /** The catalogue names the detailed package, independently of whether its bank is resident. */
 export function preparedFocusObjectId(record: PreparedCatalogObject): string | undefined {
-  return isPreparedCluster(record) ? undefined : record.detailedObjectId;
+  return record.detailedObjectId;
 }
 
 export function resolvePreparedFocus(record: PreparedCatalogObject, bankRadiusM: number | undefined, policy: PreparedFocusPolicy): PreparedNavigationFocus {

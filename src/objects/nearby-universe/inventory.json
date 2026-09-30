@@ -3,21 +3,21 @@
   "assets": [
     {
       "location": "prepared",
-      "filename": "bright-galaxy-dots.json",
-      "bytes": 993156,
-      "sha256": "f35837ab671b1883097fced73f0afe70f48ad8af03b5e0ff7fda7a244daa3390"
+      "filename": "bright-galaxy-dots.bin",
+      "bytes": 339080,
+      "sha256": "7c4efb86168501463fdbc31356029bb809a1b55b0582f4fa38b5b0e6bea347bc"
     },
     {
       "location": "prepared",
-      "filename": "dots.json",
-      "bytes": 213768,
-      "sha256": "73964dd1c18e4b508f3f50a6abd0b44b3ba649751b98ee820afd62200a8302d3"
+      "filename": "dots.bin",
+      "bytes": 300280,
+      "sha256": "e003e16aaf50f95cd6e8dce963ad5a5acb23d4a11f3a025c448f89dc970e1df6"
     },
     {
       "location": "prepared",
-      "filename": "quasar-dots.json",
-      "bytes": 284037,
-      "sha256": "42539bc91d7a0214880855523a1c30cc1a9f54435d53bf2bbfaf9c105fcc2a20"
+      "filename": "quasar-dots.bin",
+      "bytes": 438525,
+      "sha256": "f55eb7b66ecadb3dd7dfb0e98729cf1569700d8de844adda1f49a724c411dafc"
     }
   ]
 }

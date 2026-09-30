@@ -7,7 +7,7 @@ import { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import type { PreparedPointVisibility } from '../volume/projected-volume-visibility.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { mountCataloguePoints } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
 import type { DatasetBankBillboard, DatasetBillboards } from './dataset-billboards.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 
@@ -141,11 +141,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
       if (lifetime.disposed || generation !== bank.generation) { mounted.destroy(); return; }
       bank.mounted = mounted;
       const host = mounted.root;
-      bank.points = (options.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host, url, fetchJson: async (target: string) => {
-        const response = await host.ownerDocument.defaultView!.fetch(target);
-        if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
-        return response.json() as Promise<unknown>;
-      } }));
+      bank.points = (options.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host, url, loadBank: target => fetchPreparedCatalogueBank(target) }));
       bank.textures = createVolumeTextureReadiness(() => { requestPublication?.(); });
       const pointVisibility = prepared.payload.pointVisibility!;
       bank.framing = { frame: loadedFrame, radiusUnits: prepared.payload.framingRadiusUnits, visibility: {

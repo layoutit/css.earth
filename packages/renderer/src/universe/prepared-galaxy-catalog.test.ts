@@ -97,7 +97,7 @@ test('nebula label and its single-click target sit below the prepared cloud', ()
   runtime.destroy();
 });
 
-test('one retained catalogue combines both classes; cluster fades, source-aware focus and aperture follow the same observer', () => {
+test('one retained catalogue combines both classes; cluster fades and source-aware focus follow the same observer, and a cluster is named without a marker or outline', () => {
   const payload = read('local-group/prepared/catalogue.json'), clusters = read('galaxy-clusters/prepared/catalogue.json');
   // Local Group members and every galaxy with an object of its own (M81, NGC 253, M87 are not members).
   const galaxyCount = payload.objects.filter((row: { membership: { group: string }; detailedObjectId?: string }) => row.membership.group === 'local-group' || row.detailedObjectId).length;
@@ -114,7 +114,7 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
       orientationXyzw: [0,0,0,1] as const } };
   const viewport = { focalPixels: 600, principalOffsetPixels: [0,0] as const, widthPixels: 800, heightPixels: 600 };
   const label = runtime.inspect().labels[object.id]!, root = runtime.root as unknown as Element;
-  const aperture = root.children.find(node => node.dataset.clusterAperture === object.id)!;
+  expect(root.children.some(node => node.dataset.clusterAperture !== undefined || node.dataset.galaxyMarker === object.id), 'no outline or marker').toBe(false);
   runtime.select(object.id);
   runtime.publish(pose, viewport, 1, [], 0); document.defaultView.advance(250);
   expect(Number(label.style.opacity)).toBe(0); expect(label.style.pointerEvents).toBe('none');
@@ -122,11 +122,11 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   runtime.publish(pose, viewport, 1, [], 1); document.defaultView.advance(350);
   expect(picking.pick(0, 15)).toBe(label);
   expect(screenPicking(host as unknown as HTMLElement).pick(0, 15)).toBeNull();
-  expect(Number(label.style.opacity)).toBeCloseTo(.325); expect(Number(aperture.style.opacity)).toBeCloseTo(.1);
-  const firstTransform = aperture.style.transform;
+  expect(Number(label.style.opacity)).toBeCloseTo(.325);
+  const firstTransform = label.style.transform;
   const shifted = { ...pose, pose: { ...pose.pose, positionM: [pose.pose.positionM[0] + object.aperture.comovingRadiusM, ...pose.pose.positionM.slice(1)] as [number,number,number] } };
   const blockers = runtime.publish(shifted, viewport, 1, [], 1);
-  expect(aperture.style.transform).not.toBe(firstTransform); expect(blockers.length).toBeGreaterThan(0);
+  expect(label.style.transform).not.toBe(firstTransform); expect(blockers.length).toBeGreaterThan(0);
   runtime.publish(shifted, viewport, 1, [{ left: -400, right: 400, top: -300, bottom: 300 }], 1);
   expect(label.style.pointerEvents).toBe('none');
   expect(picking.pick(-150, 15)).not.toBe(label);
@@ -137,7 +137,7 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   expect(onSelect).toHaveBeenCalledWith(object); expect(runtime.resolve(object.id)).toMatchObject({kind: 'galaxy-cluster'});
   expect(document.count).toBe(nodes);
   runtime.publish({ ...pose, pose: { ...pose.pose, positionM: [object.positionM[0], object.positionM[1], object.positionM[2] - object.aperture.comovingRadiusM * 4] } }, viewport, 1, [], 1);
-  document.defaultView.advance(800); expect(Number(label.style.opacity)).toBe(0); expect(Number(aperture.style.opacity)).toBe(0);
+  document.defaultView.advance(800); expect(Number(label.style.opacity)).toBe(0);
   expect(picking.pick(0, 15)).not.toBe(label);
   runtime.publish(pose, viewport, 1, [], 1);
   expect(picking.pick(0, 15)).toBe(label);
@@ -158,7 +158,10 @@ test('only labels that show or are still fading out follow the camera', () => {
   runtime.publish(observer(0), viewport, 1); document.defaultView.advance(300);
   const shown = labels.filter(label => Number(label.style.opacity) > 0);
   expect(shown.length).toBe(Number(root.dataset.visibleLabels));
-  expect(root.children.filter(node => node.dataset.galaxyMarker && node.style.transform).length).toBeGreaterThanOrEqual(shown.length);
+  // A cluster is named without a marker; every other shown label has one.
+  const clusterIds = new Set(clusters.objects.map((object: { id: string }) => object.id));
+  expect(root.children.filter(node => node.dataset.galaxyMarker && node.style.transform).length)
+    .toBeGreaterThanOrEqual(shown.filter(label => !clusterIds.has(label.dataset.galaxyLabel)).length);
   expect(ids(labels.filter(label => label.style.transform))).toEqual(ids(shown));
   // Covering the screen hides every label. Labels still fading out keep following their galaxies.
   const cover = [{ left: -400, right: 400, top: -300, bottom: 300 }], previous = transforms();

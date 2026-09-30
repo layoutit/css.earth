@@ -118,7 +118,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     const associationLabel = find('[data-focus-fact-label=association]')[0] ?? null;
     if (associationLabel) associationLabel.textContent = cluster ? 'Redshift' : 'Association';
     const distanceLabel = find('[data-focus-fact-label=distance]')[0] ?? null;
-    if (distanceLabel) distanceLabel.textContent = cluster ? 'Comoving distance' : 'Observer distance';
+    if (distanceLabel) distanceLabel.textContent = cluster ? 'Group distance' : 'Observer distance';
     const { minusPc, plusPc, uncertainty } = record.distance;
     write('uncertainty', uncertainty ? `${number.format(uncertainty.statisticalPc)} pc statistical; ${number.format(uncertainty.systematicPc)} pc systematic`
       : minusPc !== undefined && plusPc !== undefined ? `−${number.format(minusPc)} / +${number.format(plusPc)} pc` : 'Not supplied');

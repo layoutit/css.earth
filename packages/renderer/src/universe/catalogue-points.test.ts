@@ -2,26 +2,35 @@ import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints, parseCataloguePoints } from './catalogue-points.js';
-import { cataloguePointSpread } from '@cssearth/objects';
+import { catalogueCells, cataloguePointSpread } from '@cssearth/objects';
+import { decodeCatalogueBankBinary } from '../prepared-data/catalogue-bank-binary.js';
+import { unpackPreparedBinary } from '@cssearth/objects/node';
+
+/** What the bake adds to a published bank (catalogue-banks.ts): its spread and its cells, per level. */
+const baked = (points: readonly (readonly number[])[], levels?: readonly number[]) => ({ spread: cataloguePointSpread(points), cells: catalogueCells(points, levels) });
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20], max: [20, 20, 20] } };
 const bank = { schema: 'cssearth-catalogue-points@1', id: 'test-stars', frame,
   appearance: { colorCss: '#ffe2a8', radiusPx: .75, opacity: .7 }, points: [[1, 0, -10], [-1, 0, -10]],
-  spread: cataloguePointSpread([[1, 0, -10], [-1, 0, -10]]) };
+  ...baked([[1, 0, -10], [-1, 0, -10]]) };
 
 test('the prepared catalogues the app draws are valid banks of every selected row with a distance', () => {
   // The published banks: what each recipe marks `published: true` and the app fetches. Their inputs (a survey's stars,
   // one catalogue's masers) are bake inputs in output/catalogue-points/, so they are not read here.
   for (const [object, id] of [['milky-way', 'globular-clusters'], ['milky-way', 'dots'], ['nearby-universe', 'dots'], ['nearby-universe', 'bright-galaxy-dots'],
     ['nearby-universe', 'quasar-dots'], ['m31', 'stars'], ['m31', 'dots'], ['m33', 'stars'], ['m33', 'dots'], ['m81', 'dots'], ['ngc-253', 'dots']]) {
-    const prepared = JSON.parse(readFileSync(new URL(`../../../../src/objects/${object}/prepared/${id}.json`, import.meta.url), 'utf8'));
+    const path = new URL(`../../../../src/objects/${object}/prepared/${id}.bin`, import.meta.url);
+    const prepared = decodeCatalogueBankBinary(unpackPreparedBinary(readFileSync(path), path.pathname), path.pathname) as {
+      points: number[][]; counts: { points: number; missingDistance?: number; selected?: number }; source?: string; appearance: { levels?: { points: number }[] } };
     const parsed = parseCataloguePoints(prepared);
     expect(parsed.id).toBe(id);
     expect(parsed.points).toHaveLength(prepared.counts.points);
     expect(parsed.spread, `${object}/${id}: the bake's spread is the one its points trace`).toEqual(cataloguePointSpread(prepared.points));
+    const cells = catalogueCells(prepared.points, prepared.appearance.levels?.map(level => level.points));
+    expect([...parsed.cells.of], `${object}/${id}: the bake's cells are the ones its points and levels give`).toEqual(cells.of);
     // A merged or stacked bank (packages/bake/cli/merge-catalogue-points.mts, stack.mts) counts only its points; a prepared one also its rows.
-    if (prepared.source !== 'merge' && prepared.source !== 'stack') expect(prepared.counts.points + prepared.counts.missingDistance).toBe(prepared.counts.selected);
+    if (prepared.source !== 'merge' && prepared.source !== 'stack') expect(prepared.counts.points + prepared.counts.missingDistance!).toBe(prepared.counts.selected);
   }
 });
 
@@ -70,6 +79,8 @@ test('catalogue point banks refuse malformed points and appearances, naming the 
   expect(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, colorCss: 'gold' } })).toThrow(/test-stars: catalogue point appearance/);
   expect(() => parseCataloguePoints({ ...bank, points: [] })).toThrow(/test-stars: a catalogue point bank holds/);
   const { spread: _spread, ...unspread } = bank;
+  const { cells: _cells, ...uncelled } = bank;
+  expect(() => parseCataloguePoints(uncelled)).toThrow(/test-stars \(catalogue points\): catalogue point bank field cells must be/);
   expect(() => parseCataloguePoints(unspread)).toThrow(/test-stars \(catalogue points\): catalogue point bank field spread must be .* got undefined/);
   expect(() => parseCataloguePoints({ ...bank, spread: { normal: [1, 1, 0], across: 1, along: 0 } })).toThrow(/test-stars \(catalogue points\): catalogue point bank field spread/);
   expect(() => parseCataloguePoints({ ...bank, spread: { ...bank.spread, across: -1 } })).toThrow(/test-stars \(catalogue points\): catalogue point bank field spread/);
@@ -78,7 +89,7 @@ test('catalogue point banks refuse malformed points and appearances, naming the 
 test('a catalogue loads on its first publication and draws every point as the same small dot', async () => {
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   let fetched = 0;
-  const points = mountCataloguePoints({ host, url: '/cepheids.json', fetchJson: async () => { fetched++; return {...bank, appearance: {...bank.appearance, opacity: 1}}; } });
+  const points = mountCataloguePoints({ host, url: '/cepheids.json', loadBank: async () => { fetched++; return {...bank, appearance: {...bank.appearance, opacity: 1}}; } });
   expect(fetched).toBe(0);
   const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
   const world = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } };
@@ -88,9 +99,10 @@ test('a catalogue loads on its first publication and draws every point as the sa
   expect(points.root.dataset.cataloguePoints).toBe('test-stars');
   const paths = [...points.root.querySelectorAll('path')];
   expect(paths).toHaveLength(1);
-  expect(paths[0]!.getAttribute('fill')).toBe('#ffe2a8ff');
+  expect(paths[0]!.getAttribute('stroke')).toBe('#ffe2a8ff');
+  expect(paths[0]!.getAttribute('stroke-width'), 'as wide as the dot, 1.5 px in eighths of a pixel').toBe('12');
   expect(paths[0]!.getAttribute('d')!.match(/M/g)).toHaveLength(2);
-  expect(paths[0]!.getAttribute('d')).toContain('a0.750 0.750');
+  expect(paths[0]!.getAttribute('d')).toMatch(/^(M-?[\d.]+ -?[\d.]+h0){2}$/);
   const retainedPath = paths[0];
   points.publish({ world: {...world, pose: {...world.pose, positionM: [1,0,0]}}, viewport });
   expect(points.root.querySelector('path')).toBe(retainedPath);
@@ -102,22 +114,22 @@ test('a catalogue loads on its first publication and draws every point as the sa
 test('a level with a near opacity draws as its own part and dims to it as the innermost level fills the view', async () => {
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
-  const stacked = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, levels: [
+  const stacked = { ...bank, points, ...baked(points, [1, 1, 1]), appearance: { ...bank.appearance, opacity: 1, levels: [
     { points: 1, fullDetailUnits: 100, nearOpacity: .5 }, { points: 1, appearUnits: [10, 1] }, { points: 1, appearUnits: [1, .01] }] } };
-  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => stacked });
+  const field = mountCataloguePoints({ host, url: '/dots.json', loadBank: async () => stacked });
   // The view's half-width at the origin is the camera's distance times hypot(1000, 800) / 2 / 100.
   const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
   const at = (distance: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
     pose: { positionM: [0, 0, distance] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
   field.publish(at(1)); await new Promise(resolve => setTimeout(resolve, 0)); field.publish(at(1));
   const parts = [...field.root.children] as HTMLElement[];
-  expect(parts, 'the dimmed level and the two that share full opacity').toHaveLength(2);
+  expect(parts, 'one part per level').toHaveLength(3);
   expect(parts[0]!.style.opacity, 'before the innermost level appears').toBe('1');
   const halfWidthPerDistance = Math.hypot(1000, 800) / 200;
   field.publish(at(Math.sqrt(.01) / halfWidthPerDistance));
   expect(Number(parts[0]!.style.opacity), 'halfway through its window in the logarithm').toBeCloseTo(.75, 12);
   field.publish(at(.001));
-  expect(parts[0]!.style.opacity).toBe('0.5'); expect(parts[1]!.style.opacity).toBe('1');
+  expect(parts.map(part => part.style.opacity)).toEqual(['0.5', '1', '1']);
   field.destroy();
   for (const nearOpacity of [0, 1.5]) {
     expect(() => parseCataloguePoints({ ...stacked, appearance: { ...stacked.appearance, levels: [{ ...stacked.appearance.levels[0], nearOpacity }, ...stacked.appearance.levels.slice(1)] } }))
@@ -129,8 +141,8 @@ test('a screen budget draws an even, stable share of the visible dots and refuse
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   // 1,000 dots spread in front of the camera, all on screen; the budget keeps about 250 of them.
   const points = Array.from({ length: 1000 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
-  const budgeted = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250 } };
-  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => budgeted });
+  const budgeted = { ...bank, points, ...baked(points), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250 } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', loadBank: async () => budgeted });
   const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
   const at = (x: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
     pose: { positionM: [x, 0, 0] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
@@ -162,13 +174,13 @@ test('zooming out draws a shrinking prefix of the catalogue', async () => {
 
 test('a translucent catalogue draws its dots as paths with their alpha', async () => {
   const {document} = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
-  const points = mountCataloguePoints({host, url:'/translucent.json', fetchJson:async()=>bank});
+  const points = mountCataloguePoints({host, url:'/translucent.json', loadBank:async()=>bank});
   points.publish({world:{referenceFrame:'sun-icrf',epochJdTt:2451545,
     pose:{positionM:[0,0,0],orientationXyzw:[0,0,0,1]}},
     viewport:{focalPixels:100,principalOffsetPixels:[0,0],widthPixels:1000,heightPixels:800}});
   await new Promise(resolve=>setTimeout(resolve,0));
   expect(points.root.querySelector('i')).toBeNull();
-  expect([...points.root.querySelectorAll('path')].some(path=>path.getAttribute('fill')==='#ffe2a8b3'&&path.getAttribute('d'))).toBe(true);
+  expect([...points.root.querySelectorAll('path')].some(path=>path.getAttribute('stroke')==='#ffe2a8b3'&&path.getAttribute('d'))).toBe(true);
   points.destroy();
 });
 
@@ -177,19 +189,67 @@ test('dot layers switching on show one a frame, so their first paints never shar
   const frames: FrameRequestCallback[] = [];
   Object.assign(window, { requestAnimationFrame: (callback: FrameRequestCallback) => frames.push(callback), cancelAnimationFrame() {}, performance: { now: () => 0 } });
   const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
-  const stacked = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, levels: [
+  const stacked = { ...bank, points, ...baked(points, [1, 1, 1]), appearance: { ...bank.appearance, opacity: 1, levels: [
     { points: 1, fullDetailUnits: 100, nearOpacity: .5 }, { points: 1, appearUnits: [10, 1] }, { points: 1, appearUnits: [1, .01] }] } };
-  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => stacked });
+  const field = mountCataloguePoints({ host, url: '/dots.json', loadBank: async () => stacked });
   const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
   field.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 1] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
   await new Promise(resolve => setTimeout(resolve, 0));
   const layers = [...field.root.children] as HTMLElement[];
-  expect(layers).toHaveLength(2);
+  expect(layers).toHaveLength(3);
   const hidden = () => layers.filter(layer => layer.style.visibility === 'hidden').length;
-  expect(hidden()).toBe(2);
+  expect(hidden()).toBe(3);
   frames.shift()!(0);
-  expect(hidden()).toBe(1);
+  expect(hidden()).toBe(2);
   frames.shift()!(16);
+  expect(hidden()).toBe(1);
+  frames.shift()!(32);
   expect(hidden()).toBe(0);
+  field.destroy();
+});
+
+test('an inner level with its own screen budget moves the bank\'s to it as the level appears', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  // 1,000 dots in the outer level and one in the inner level, all on screen; 250 at most from far, 750 once inside.
+  const points = Array.from({ length: 1001 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
+  const levels = [{ points: 1000, fullDetailUnits: 100 }, { points: 1, appearUnits: [0.64, 0.064], screenBudget: 750 }];
+  const budgeted = { ...bank, points, ...baked(points, levels.map(level => level.points)), appearance: { ...bank.appearance, opacity: 1, screenBudget: 250, levels } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', loadBank: async () => budgeted });
+  // The view's half-width at the origin is 0.64 times the camera's distance.
+  const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
+    pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const drawn = () => [...field.root.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
+  const settle = async (z: number) => { field.publish(at(z)); field.publish(at(z * 1.0001)); await new Promise(resolve => setTimeout(resolve, 200)); return drawn(); };
+  field.publish(at(5)); await new Promise(resolve => setTimeout(resolve, 0));
+  const far = await settle(5), inside = await settle(0.05);
+  expect(far, 'the bank\'s budget before the level appears').toBeGreaterThan(200);
+  expect(far).toBeLessThan(300);
+  expect(inside, 'the level\'s once it is whole').toBeGreaterThan(650);
+  expect(inside).toBeLessThan(850);
+  field.destroy();
+  expect(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, screenBudget: undefined } }))
+    .toThrow('test-stars: a level\'s screenBudget moves the bank\'s, so the bank needs a screenBudget too.');
+  expect(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, levels: [{ ...levels[0], screenBudget: 10 }, levels[1]] } }))
+    .toThrow('test-stars: level 0 screenBudget must be a positive whole number on an inner level, got 10.');
+});
+
+test('an arriving level spends what the budget leaves, never thinning the levels already on screen', async () => {
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  // 200 outer dots and 1,000 inner ones, all on screen; a budget of 500 keeps every outer dot and 300 inner ones.
+  const points = Array.from({ length: 1200 }, (_, i) => [((i * 37) % 200 - 100) / 100, ((i * 91) % 160 - 80) / 100, -10]);
+  const levels = [{ points: 200, fullDetailUnits: 100 }, { points: 1000, appearUnits: [0.64, 0.064] }];
+  const budgeted = { ...bank, points, ...baked(points, levels.map(level => level.points)), appearance: { ...bank.appearance, opacity: 1, screenBudget: 500, levels } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', loadBank: async () => budgeted });
+  const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545,
+    pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const drawn = (part: Element) => [...part.querySelectorAll('path')].map(path => path.getAttribute('d')!).join('').match(/M/g)?.length ?? 0;
+  field.publish(at(0.05)); await new Promise(resolve => setTimeout(resolve, 0));
+  field.publish(at(0.05)); field.publish(at(0.050005)); await new Promise(resolve => setTimeout(resolve, 200));
+  const [outer, inner] = [...field.root.children];
+  expect(drawn(outer!), 'every outer dot').toBe(200);
+  expect(drawn(inner!)).toBeGreaterThan(240);
+  expect(drawn(inner!)).toBeLessThan(360);
   field.destroy();
 });

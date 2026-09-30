@@ -4,7 +4,7 @@ import type { PreparedNebulaRecord } from './nebulae.js';
 
 /** A catalogue centre and overdensity aperture, never a member-galaxy or density model. */
 export interface PreparedClusterRecord extends Pick<PreparedGalaxyRecord,
-  'id' | 'name' | 'aliases' | 'positionM' | 'skyPosition' | 'distance' | 'status' | 'presentation'> {
+  'id' | 'name' | 'aliases' | 'positionM' | 'skyPosition' | 'distance' | 'status' | 'presentation' | 'detailedObjectId'> {
   readonly kind: 'galaxy-cluster';
   readonly classification: { readonly name: string; readonly basis: string; readonly sourceRef: string };
   readonly redshift: { readonly value: number; readonly type: string; readonly sourceRef: string };
@@ -50,7 +50,7 @@ export function parsePreparedClusterCatalog(input: unknown): PreparedClusterCata
       if (!/^https:\/\//.test(text(ref.url))) throw new TypeError('Invalid cluster bibliographic URL.');
     }
   }
-  const ids = new Set<string>(), objects = array(data.objects);
+  const ids = new Set<string>(), detailIds = new Set<string>(), objects = array(data.objects);
   if (objects.length > 10000) throw new TypeError('Cluster catalogue exceeds its bounded annotation bank.');
   for (const value of objects) {
     const row = record(value), id = text(row.id); unique(ids, id);
@@ -68,6 +68,11 @@ export function parsePreparedClusterCatalog(input: unknown): PreparedClusterCata
     positive(aperture.properRadiusM); positive(aperture.comovingRadiusM); reference(aperture.sourceRef, sourceIds);
     const classification = record(row.classification); text(classification.name); text(classification.basis); reference(classification.sourceRef, sourceIds);
     if (row.presentation !== undefined) positive(record(row.presentation).focusRadiusM);
+    if (row.detailedObjectId !== undefined) {
+      const detail = text(row.detailedObjectId);
+      if (!/^[a-z0-9][a-z0-9-]*$/.test(detail)) throw new TypeError(`Cluster ${id}: invalid detailed object id ${detail}.`);
+      unique(detailIds, detail);
+    }
   }
   const selection = record(data.selection); text(selection.description); text(selection.distanceCaveat);
   const validated = input as PreparedClusterCatalog;
