@@ -35,7 +35,8 @@ export function createSettingsController(
   };
   documentTarget.addEventListener('click', opening, { capture: true, signal: events.signal });
   panel.addEventListener('toggle', event => { if ((event as ToggleEvent).newState === 'closed') showSection(panel, false); }, { signal: events.signal });
-  if (!panel.matches(':popover-open')) showSection(panel, false);
+  // The shell starts before anyone can open the panel.
+  showSection(panel, false);
   lifetime.onDispose(() => showSection(panel, true));
   const inputs = { motionEnabled: motion, lightCurvesEnabled: lightCurves, heliosphereEnabled: heliosphere,
     illustrationModelsEnabled: illustrationModels, surfaceLabelsEnabled: surfaceLabels };

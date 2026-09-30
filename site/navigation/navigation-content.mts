@@ -98,14 +98,14 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
                   }
                 }
               }
-              const footer = documentTarget.querySelector<HTMLElement>('.object-attribution-footer'), incomingFooter = incomingSource.querySelector('.object-attribution-footer');
+              const footer = sectionElement(documentTarget, '.object-attribution-footer'), incomingFooter = incomingSource.querySelector('.object-attribution-footer');
               if (footer) {
                 if (footer.hidden !== !incomingFooter) footer.hidden = !incomingFooter;
                 if (incomingFooter) {
                   updateShellElement(footer, incomingFooter);
                 }
               } else if (incomingFooter) {
-                const readout = documentTarget.querySelector('.object-view-readout') ?? documentTarget.body;
+                const readout = sectionElement(documentTarget, '.object-view-readout') ?? documentTarget.body;
                 readout.prepend(documentTarget.importNode(incomingFooter, true));
               }
               documentTarget.title = incomingSource.title;

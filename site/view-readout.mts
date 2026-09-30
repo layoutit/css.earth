@@ -24,7 +24,8 @@ export function measurePreparedFocusView(world: WorldCameraPose, focus: Prepared
 }
 
 export function createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; surfaceReader?: SurfaceMapReader }): ViewReadout {
-  const root = documentTarget.querySelector<HTMLElement>('.object-view-readout');
+  // The footer holding the readout waits off the page on narrow layouts (layout-sections.mts); the readout keeps it current.
+  const root = sectionElements(documentTarget, '.object-view-readout')[0];
   if (!root) return { bindObject() {}, setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, setNavigationInFlight() {}, destroy() {} };
   const dateGroup = requiredElement(root, '.object-view-date'), date = requiredElement(root, '[data-view-date]');
   const coordinates = requiredElement(root, '.object-view-coordinates');

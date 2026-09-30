@@ -78,12 +78,12 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     throw new TypeError("Object controls require the mounted document and shared selection endpoint.");
   }
   const document = stage.ownerDocument;
-  // The body card and settings may wait off the page (detached-sections.ts) while an overview is shown.
-  const information = sectionElements(document, ".object-information-panel")[0];
+  // The body card and settings may wait off the page (detached-sections.ts): mounted first, then where they wait.
+  const information = document.querySelector(".object-information-panel") ?? sectionElements(document, ".object-information-panel")[0];
   // Form ownership survives moving a dataset from the body card to its system card.
   const datasetForm = information?.querySelector<HTMLFormElement>('form[data-dataset-form]');
   const datasetRoot = datasetForm?.closest(".object-datasets");
-  const settingsRoot = sectionElements(document, ".object-settings")[0];
+  const settingsRoot = document.querySelector(".object-settings") ?? sectionElements(document, ".object-settings")[0];
   // A form owns only its connected controls (a `form` attribute associates nothing off the page), and its card or rows may
   // wait off the page (detached-sections.ts), so its buttons are read where they are: in its card, or wherever a `form`
   // attribute names it from.

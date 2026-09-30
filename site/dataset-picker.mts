@@ -2,9 +2,7 @@ import type { SceneLifetime } from '@cssearth/engine';
 import { sectionElements, showSection } from '@cssearth/renderer';
 import type { BrowserWindow } from './browser/browser-types.mts';
 
-/** Phones and portrait tablets pick a dataset from a native select; wider screens from its rows. The same media query
- * switches them in object-shell.css, which serves a page without JavaScript. */
-const NARROW_PICKER = '(max-width: 820px), (orientation: portrait)';
+import { NARROW_LAYOUT } from './narrow-layout.mts';
 
 /** The mobile native select forwards a choice to the same retained dataset button as desktop. */
 export function bindDatasetPicker(documentTarget: Document, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
@@ -23,7 +21,8 @@ export function bindDatasetPicker(documentTarget: Document, windowTarget: Browse
 
 /** Mount only the picker layout the screen shows: the rows, or the select with its preview. The server renders both. */
 export function mountDatasetPickerLayout(root: ParentNode, windowTarget: BrowserWindow) {
-  const query = windowTarget.matchMedia(NARROW_PICKER);
+  // Phones and portrait tablets pick from a native select; wider screens from its rows.
+  const query = windowTarget.matchMedia(NARROW_LAYOUT);
   const apply = (narrow: boolean) => {
     for (const picker of sectionElements(root, '[data-dataset-picker]')) {
       for (const display of sectionElements(picker, '.object-dataset-picker-display')) showSection(display, narrow);

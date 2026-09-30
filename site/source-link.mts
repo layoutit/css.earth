@@ -13,7 +13,8 @@ export function sourceDocuments(document: Document): Map<string, SourceDocumentR
 export function renderSourceLink(document: Document, subject: string,
   documents: ReadonlyMap<string, SourceDocumentReference> = sourceDocuments(document)) {
   // Wide layouts show the footer's link; phones and portrait tablets show the sheet's. Both name the same subject.
-  for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-source-link]')) {
+  // The link the layout does not show waits off the page (layout-sections.mts) and stays current for when it returns.
+  for (const link of sectionElements<HTMLAnchorElement>(document, '[data-source-link]')) {
     const source = documents.get(subject) ?? link;
     const href = source.dataset.sourceDocument, label = source.dataset.sourceLabel;
     if (!href || !label) continue;

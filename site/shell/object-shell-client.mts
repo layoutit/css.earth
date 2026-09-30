@@ -22,6 +22,7 @@ import { mountDiagnosticRecorder } from '../diagnostic-recorder.mts';
 import { bindNavigationIntent, navigationFragments } from '../navigation/navigation-fragments.mts';
 import { createSheetController } from './shell-sheet.mts';
 import { bindDatasetPicker } from '../dataset-picker.mts';
+import { mountLayoutSections } from '../layout-sections.mts';
 import { createSettingsController } from './shell-settings.mts';
 import { mountInformationCard, createTabsController } from '../information-card.mts';
 import type { ObjectShell, ShellOptions, ShellNavigationTarget, ShellNavigationTransition } from './object-shell-types.mts';
@@ -41,10 +42,13 @@ export function mountObjectShell({
   const navigationProgress = documentTarget.querySelector<HTMLElement>('.explorer-navigation-progress');
   lifetime.onDispose(() => { if (navigationProgress) navigationProgress.ariaHidden = 'true'; });
   bindDatasetPicker(documentTarget, windowTarget, lifetime);
+  const layoutSections = new AbortController();
+  lifetime.onDispose(() => layoutSections.abort());
+  mountLayoutSections(documentTarget, windowTarget, layoutSections.signal);
   // Closed tabs' panels are not mounted (tab-panels.mts).
   const tabPanels = new AbortController();
   lifetime.onDispose(() => tabPanels.abort());
-  bindTabPanels(documentTarget, tabPanels.signal);
+  const tabs = bindTabPanels(documentTarget, tabPanels.signal);
   const fragments = navigationFragments(windowTarget);
   let informationCard: ReturnType<typeof mountInformationCard>;
   let sheet: ReturnType<typeof createSheetController>;
@@ -294,6 +298,7 @@ export function mountObjectShell({
   function mountContent(id: string) {
     const owner = contentLifetime = createSceneLifetime();
     informationCard = mountInformationCard(drawer, id, windowTarget, owner);
+    tabs.sync();
     settingsController.bindObject();
     bindCardMaps();
     const subject = readSelection();
