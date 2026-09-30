@@ -32,8 +32,8 @@ export function navigationHref(windowTarget: Window) {
 }
 
 // On the iPad every URL change through the History API costs 20–35 ms of main-thread time: Safari dispatches a navigate
-// event and re-runs Reader detection over the page (2026-09-30). A write made while the camera moves (a handoff in a
-// pinch, a view change in a drag) is held and applied once, after the camera has rested for this long.
+// event and re-runs Reader detection over the page (2026-09-30). Every write is held and applied once, after the camera
+// has rested for this long: a handoff in a pinch, a view change in a drag and the writes of one arrival become one.
 const REST_WRITE_MS = 150;
 
 /** Standalone scenes replace the current URL without creating application history entries. */
@@ -56,9 +56,12 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     pending = null;
     windowTarget.history[push ? 'pushState' : 'replaceState']({ ...state(), cssEarthView: path }, '', path);
   };
+  // Every push and replace waits for the camera to rest this long, so no handoff or camera frame pays for the write.
   const write = (push: boolean, path: string) => {
-    if (moving || restTimer !== null) { pending = { push: push || (pending?.push ?? false), path }; return; }
-    apply(push, path);
+    pending = { push: push || (pending?.push ?? false), path };
+    if (moving) return;
+    if (restTimer !== null) windowTarget.clearTimeout(restTimer);
+    restTimer = windowTarget.setTimeout(applyPending, REST_WRITE_MS);
   };
   const applyPending = () => { restTimer = null; if (pending && !disposed) apply(pending.push, pending.path); };
   const onMotion = (event: Event) => {
@@ -113,7 +116,8 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     if (!id) return;
     Promise.resolve(navigate(id, { kind: 'history', url: location.href, history: { history: 'pop', entry: targetEntry } })).catch(onError);
   };
-  checkpoint();
+  // The page's own entry gets its identity at once: Back reads it before any rest.
+  { const url = remember(); if (url && !isCurrentView(url)) apply(false, url); }
   windowTarget.addEventListener('popstate', onPopState);
   windowTarget.document?.addEventListener('objectmotionchange', onMotion, { capture: true });
   const owner = Object.freeze({

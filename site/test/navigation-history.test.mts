@@ -13,11 +13,14 @@ test('Back to the front page returns to the body it shows, not nowhere', () => {
       pushState(value: unknown, _: string, url: string) { state = value; href = new URL(url, href).href; } },
     addEventListener(type: string, listener: (event: PopStateEvent) => void) { listeners.set(type, listener); },
     removeEventListener() {},
+    // History writes wait for rest (REST_WRITE_MS); the test runs them when it needs them.
+    setTimeout(callback: () => void) { queued.push(callback); return queued.length; }, clearTimeout() {},
   } as unknown as Window;
+  const queued: (() => void)[] = [], rest = () => { for (const callback of queued.splice(0)) callback(); };
   const history = createNavigationHistory({ windowTarget, capture: () => href.replace('https://css.earth', ''),
     navigate: (id, intent) => { calls.push([id, intent]); return Promise.resolve(true); } });
   const front = state;
-  history.commit('/mars/');
+  history.commit('/mars/'); rest();
   href = 'https://css.earth/'; state = front;
   listeners.get('popstate')!({ state: front } as PopStateEvent);
   assert.equal(calls.length, 1);
@@ -63,24 +66,26 @@ test('settled view checkpoints skip native history writes without losing real en
       pushState(value: Record<string, unknown>, _: string, url: string) { write('push', value, url); } },
     addEventListener(type: string, listener: (event: PopStateEvent) => void) { listeners.set(type, listener); },
     removeEventListener() {},
+    setTimeout(callback: () => void) { queued.push(callback); return queued.length; }, clearTimeout() {},
   } as unknown as Window;
+  const queued: (() => void)[] = [], rest = () => { for (const callback of queued.splice(0)) callback(); };
   const history = createNavigationHistory({ windowTarget, capture: () => captured,
     navigate: (id, intent) => { navigations.push([id, intent]); } });
   assert.equal(writes.length, 1); // The initial entry still needs its identity.
-  history.checkpoint();
+  history.checkpoint(); rest();
   captured = href; // Absolute and relative views identify the same saved entry.
-  history.checkpoint();
-  history.commit(captured, { history: 'replace' });
+  history.checkpoint(); rest();
+  history.commit(captured, { history: 'replace' }); rest();
   assert.equal(writes.length, 1);
   captured = '/earth/?v=dragged';
-  history.commit(captured, { history: 'replace' });
+  history.commit(captured, { history: 'replace' }); rest();
   const departed = state;
-  history.checkpoint();
+  history.checkpoint(); rest();
   assert.equal(writes.length, 2);
   assert.equal(state.unrelated, 'kept');
-  history.commit('/mars/');
+  history.commit('/mars/'); rest();
   const mars = state.cssEarthEntry;
-  history.commit('/mars/'); // Explicit pushes remain distinct, even at one URL.
+  history.commit('/mars/'); rest(); // Explicit pushes remain distinct, even at one URL.
   assert.notEqual(state.cssEarthEntry, mars);
   assert.deepEqual(writes.map(w => w.kind), ['replace', 'replace', 'push', 'push']);
   captured = '/mars/';
@@ -92,7 +97,7 @@ test('settled view checkpoints skip native history writes without losing real en
   assert.equal(writes.length, 4);
   state = { ...state, cssEarthView: '/earth/?v=stale' };
   captured = '/earth/?v=dragged';
-  history.checkpoint(); // The same URL with stale saved state still needs repair.
+  history.checkpoint(); rest(); // The same URL with stale saved state still needs repair.
   assert.equal(writes.length, 5);
   assert.equal(state.cssEarthView, captured);
   history.destroy();
@@ -128,8 +133,10 @@ test('history written while the camera moves is held and applied once at rest; t
   advance(1);
   assert.deepEqual(writes, [{ kind: 'push', url: '/solar-system/?v=b' }], 'one push for the handoff, with the final view');
   assert.equal(navigationHref(windowTarget), href);
-  // At rest a write goes straight through.
+  // At rest a write still waits the quiet period, in its own task.
   history.commit('/solar-system/?v=c', { history: 'replace' });
+  assert.equal(writes.length, 1);
+  advance(150);
   assert.deepEqual(writes.at(-1), { kind: 'replace', url: '/solar-system/?v=c' });
   history.destroy();
 });
