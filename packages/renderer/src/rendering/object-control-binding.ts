@@ -126,7 +126,9 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   if (datasets.size !== datasetInputs.length || datasets.size !== datasetPlans.length ||
       datasetPlans.some(dataset => !datasets.has(dataset.id)) || settings.size !== settingsInputs.length || settings.size !== settingPlans.length ||
       settingPlans.some(control => !settings.has(control.name))) {
-    throw new Error("Rendered object controls do not match their actual package content.");
+    const rendered = [...datasets.keys()].join(", "), planned = datasetPlans.map(dataset => dataset.id).join(", ");
+    throw new Error(`Rendered object controls do not match their actual package content: datasets rendered [${rendered}] (${datasetInputs.length} buttons), `
+      + `planned [${planned}]; settings rendered [${[...settings.keys()].join(", ")}], planned [${settingPlans.map(control => control.name).join(", ")}].`);
   }
   for (const control of settingPlans) {
     const input = settingInput(control.name);
