@@ -1,17 +1,22 @@
 import type { ObjectSharedView } from '@cssearth/renderer/runtime/object-scene.ts';
 import { formatSharedView } from "@cssearth/renderer/navigation";
 
-// One URL owner in the shared shell. Camera publication only schedules a
-// bounded history write; native motion is sampled once per second while on.
+// One URL owner in the shared shell. The URL is written once per interaction, when the camera has come to rest and stayed
+// there for a quiet period: a drag after its release and any throw, a run of wheel notches or a pinch after its glide, a
+// flight on arrival. While the camera moves nothing is
+// written and no timer runs; the renderer announces start and rest as `objectmotionchange` (camera-motion-signal.ts).
+// A change at rest that no motion announces (a dataset, a playback toggle, a restore) is written once, after a short quiet
+// period. Playback rotation is not written: the URL keeps that motion is on, not the spin angle. Each iPad Safari
+// `replaceState` dispatches a navigate event and can re-run Reader detection over the page (up to 24 ms, 2026-09-30).
+const QUIET_MS = 150;
+
 export function bindViewUrl({ windowTarget, view, getMotion, replace, onError = () => {} }: {
   windowTarget: Window; view: ObjectSharedView; getMotion(): boolean;
   replace(url: string): void; onError?(error: unknown): void;
 }) {
-  let timer: number | null = null, dueAt = Infinity, lastChange = -Infinity, destroyed = false, started = false;
+  let timer: number | null = null, destroyed = false, started = false, moving = false, changed = false;
   let restored: { incoming: string; captured: string | null } | null = null;
-  const now = () => windowTarget.performance.now();
-  const clear = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; dueAt = Infinity; };
-  const arm = (delay: number, callback: () => void) => { clear(); dueAt = now() + delay; timer = windowTarget.setTimeout(callback, delay); };
+  const clear = () => { if (timer !== null) windowTarget.clearTimeout(timer); timer = null; };
   function writeToken(token: string) {
     const url = new URL(windowTarget.location.href);
     if (url.searchParams.get("v") === token) return;
@@ -30,28 +35,40 @@ export function bindViewUrl({ windowTarget, view, getMotion, replace, onError = 
     restored = null;
     return token;
   }
+  /** Write the current view now, if it differs from the URL's. */
   function flush() {
-    clear();
+    clear(); changed = false;
     if (destroyed || !started) return;
     try {
       const token = capture();
       if (token !== null) writeToken(token);
     } catch (error) { onError(error); }
-    if (getMotion() && !destroyed) arm(1000, flush);
   }
-  // Camera publication moves a trailing deadline. The pending timer re-arms
-  // for the remaining quiet period instead of being replaced on every frame.
-  function settle() {
-    timer = null; dueAt = Infinity;
-    const wait = lastChange + 150 - now();
-    if (wait > 0) arm(wait, settle); else flush();
-  }
+  /** A change at rest that no motion announces: one write after a quiet period. */
   function schedule() {
     if (destroyed || !started) return;
-    lastChange = now();
-    if (timer !== null && dueAt <= lastChange + 150) return;
-    arm(150, settle);
+    changed = true;
+    if (moving) return;
+    clear();
+    timer = windowTarget.setTimeout(flush, QUIET_MS);
   }
+  // Camera changes while it moves only mark the view changed; the write waits for rest. Playback rotation at rest is
+  // not an interaction and is not written.
+  function viewChanged() {
+    if (destroyed || !started) return;
+    if (moving) { changed = true; return; }
+    if (!getMotion()) schedule();
+  }
+  const motionChanged = (event: Event) => {
+    const detail = (event as CustomEvent<{ active?: unknown }>).detail;
+    const active = detail?.active === true;
+    if (active === moving) return;
+    moving = active;
+    if (moving) clear();
+    // Rest waits a quiet period before writing: wheel notches, or a drag right after a zoom, each come to rest in
+    // between, and the run of them writes once at its end.
+    else if (changed) { clear(); timer = windowTarget.setTimeout(flush, QUIET_MS); }
+  };
   // Arrival enables publication only after camera, focus and playback agree.
   // Pin an incoming token to the resulting camera without round-tripping its bytes.
   function start(incoming: string | null = null) {
@@ -62,15 +79,16 @@ export function bindViewUrl({ windowTarget, view, getMotion, replace, onError = 
       }
     } catch (error) { onError(error); }
     started = true;
-    if (getMotion()) arm(1000, flush);
-    else if (!new URL(windowTarget.location.href).searchParams.has('v')) schedule();
+    if (!new URL(windowTarget.location.href).searchParams.has('v')) schedule();
   }
-  const unsubscribe = view.subscribe(schedule);
+  const unsubscribe = view.subscribe(viewChanged);
+  windowTarget.document.addEventListener('objectmotionchange', motionChanged, { capture: true });
   return Object.freeze({
     start, capture, schedule, flush,
     destroy() {
       if (destroyed) return;
       destroyed = true; clear(); unsubscribe();
+      windowTarget.document.removeEventListener('objectmotionchange', motionChanged, { capture: true });
     },
   });
 }
