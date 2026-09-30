@@ -22,16 +22,19 @@ const MAX_PARALLAX_PIXELS = .25;
  * drag shows no hole at its leading edge (content is resident a margin before it enters the view,
  * motion-freezes-membership.md). The root clips them, so a settled frame is unchanged. */
 const OVERSCAN = .2;
+/** A warp holds while it changes no dot's size by more than this factor: a turn's projective map stretches the painted discs
+ * with its centres, and a larger turn grows the dots on one side of the view past their size. */
+const MAX_WARP_STRETCH = 1.1;
 /** Painted dots per unit of the document's pacer (settle-pacer.ts, where a unit is about 0.6 ms of iPhone-class work):
  * on the four-times-slowed zoom of 2026-09-30, each 1,000 painted dots cost about 5 ms more a frame. */
 const DOTS_PER_PACER_UNIT = 125;
 /** The exact paint follows the last warp once publications have paused this long. */
 const SETTLE_MS = 120;
-/** While the camera moves, a full repaint waits this long after the last one: every other frame at 60 Hz, every third at
- * 120 Hz. A camera that travels moves every drawn dot every frame (2026-09-30: 99.8% of the dots a nearby-universe zoom
- * drew moved more than MAX_PARALLAX_PIXELS a frame), so each repaint projects and rewrites them all; the frames between
- * warp the last paint instead, exact for the camera's turn and lens but a frame behind its travel. A pause repaints
- * exactly (SETTLE_MS), so a still view is unchanged. */
+/** While the camera travels without turning (a zoom, a pinch), a full repaint waits this long after the last one: every
+ * other frame at 60 Hz, every third at 120 Hz. Such a camera moves every drawn dot every frame (2026-09-30: 99.8% of the
+ * dots a nearby-universe zoom drew moved more than MAX_PARALLAX_PIXELS a frame), so each repaint projects and rewrites them
+ * all; the frames between keep the last paint, a frame behind the travel. A pause repaints exactly (SETTLE_MS), so a
+ * still view is unchanged. */
 const MOTION_REPAINT_MS = 25;
 
 type Matrix3 = [number, number, number, number, number, number, number, number, number];
@@ -146,8 +149,10 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
       // A turn or a zoom of the lens moves every far point by the same projective map of the screen. Warp the paint while
       // what it painted still covers the view. Dots a zoom adds (a longer prefix, a larger share) arrive at once, by a
       // repaint; dots it takes away wait for the pause, so a zoom warps while it only thins the view.
-      // A moving camera repainted less than MOTION_REPAINT_MS ago warps too, a frame behind its travel.
-      const paced = !exact && !still && now() - painted.at < MOTION_REPAINT_MS;
+      // A camera that only travels (a zoom, a pinch) and repainted less than MOTION_REPAINT_MS ago keeps its paint, a frame
+      // behind its travel. One that also turns repaints: the turn's warp is projective and would stretch the painted discs
+      // wherever it magnifies, which a turn of a travelling camera in 25 ms can make large.
+      const paced = !exact && !still && !turned && now() - painted.at < MOTION_REPAINT_MS;
       if ((still || paced) && !exact && (turned || shift > 0) && painted.width === width && painted.height === height && width > 0 && height > 0) {
         // Dots the zoom adds come through the pacer while the warp holds: a repaint as soon as the frame budget allows. A
         // paced frame needs none: its next repaint, within MOTION_REPAINT_MS, draws them.
@@ -155,10 +160,16 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
         const next = axesMatrix(r), turn = multiply(next, transpose(painted.axes));
         const forward = multiply(project(viewport.focalPixels, cx, cy), multiply(turn, unproject(painted.focal, painted.cx, painted.cy)));
         const back = multiply(project(painted.focal, painted.cx, painted.cy), multiply(transpose(turn), unproject(viewport.focalPixels, cx, cy)));
+        const source = (x: number, y: number) => { const w = back[6] * x + back[7] * y + back[8];
+          return [(back[0] * x + back[1] * y + back[2]) / w, (back[3] * x + back[4] * y + back[5]) / w, w] as const; };
+        // The warp moves discs as well as centres: where it magnifies, a painted dot grows. It holds only while every dot
+        // in the view keeps its size within MAX_WARP_STRETCH; a projective map's stretch is largest at the view's corners.
         const covered = [[0, 0], [width, 0], [0, height], [width, height]].every(([x, y]) => {
-          const w = back[6] * x! + back[7] * y! + back[8];
+          const [px, py, w] = source(x!, y!);
           if (!(w > 0)) return false;
-          const px = (back[0] * x! + back[1] * y! + back[2]) / w, py = (back[3] * x! + back[4] * y! + back[5]) / w;
+          const [ax, ay] = source(x! + 1, y!), [bx, by] = source(x!, y! + 1);
+          const stretch = [Math.hypot(ax - px, ay - py), Math.hypot(bx - px, by - py)];
+          if (stretch.some(value => !(value >= 1 / MAX_WARP_STRETCH && value <= MAX_WARP_STRETCH))) return false;
           return px >= -OVERSCAN * width && px <= (1 + OVERSCAN) * width && py >= -OVERSCAN * height && py <= (1 + OVERSCAN) * height;
         });
         if (covered) {

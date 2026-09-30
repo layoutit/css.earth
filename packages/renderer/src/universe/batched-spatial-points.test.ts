@@ -196,6 +196,36 @@ test('a travelling camera repaints at most every 25 ms, warps the frames between
   const exact = mount(); exact.publish(at(-4));
   expect(path.getAttribute('d'), 'a pause repaints exactly').toBe(exact.root.querySelector('path')!.getAttribute('d'));
   expect(settled, 'and tells its owner once, so a screen budget settles on the stopped view').toBe(1);
+  // A travelling camera that also turns repaints on every frame: a turn's projective warp would stretch the painted dots.
+  const turning = (z: number, degrees: number) => { const half = degrees * Math.PI / 360;
+    return { ...at(z), world: { ...at(z).world, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } } }; };
+  clock = 1000; field.publish(turning(-4, 0));
+  const before = path.getAttribute('d');
+  clock = 1010; field.publish(turning(-5, 6));
+  expect(path.getAttribute('d'), 'a turn while travelling repaints within 25 ms').not.toBe(before);
+  expect(svg.style.transform).toBe('');
   expect(svg.style.transform).toBe('');
   field.destroy(); exact.destroy();
+});
+
+test('a turn warps the paint only while no dot grows or shrinks by more than a tenth; a larger turn repaints', () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-2e6, -2e6, -2e6] as const, max: [2e6, 2e6, 2e6] as const } };
+  const points = Array.from({ length: 40 }, (_, index) => ({ positionUnits: [((index % 8) - 3.5) * 1e5, (Math.floor(index / 8) - 2) * 1e5, -1e6] as const }));
+  const viewport = { focalPixels: 500, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const turned = (degrees: number) => { const half = degrees * Math.PI / 360;
+    return { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } }, viewport }; };
+  const { document } = parseHTML('<div id="host"></div>');
+  const field = mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
+    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff'], now: () => 0 });
+  const path = field.root.querySelector('path')!, svg = field.root.querySelector('svg')!;
+  field.publish(turned(0));
+  const first = path.getAttribute('d');
+  field.publish(turned(2));
+  expect(path.getAttribute('d'), 'a small turn keeps the paint').toBe(first);
+  expect(svg.style.transform).toMatch(/^matrix3d/);
+  field.publish(turned(12));
+  expect(path.getAttribute('d'), 'a turn that would stretch the edge dots past a tenth repaints').not.toBe(first);
+  expect(svg.style.transform).toBe('');
+  field.destroy();
 });
