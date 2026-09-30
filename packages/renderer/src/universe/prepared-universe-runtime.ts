@@ -55,8 +55,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
     throw new TypeError('Context, volume and point appearance must share their prepared identities and epoch.');
   }
   const pool = `volume:${payload.id}`, pointPool = `focus-point:${pointAppearance.id}`;
-  // The baked-star cube is the sole sky background until the volume takes over.
-  const skyPaths = new Set([...payload.sky?.faces ?? [], ...payload.sky?.nearFaces ?? []].map(face => face.texturePath));
+  // The Milky Way cube is the sole sky background until the volume takes over.
+  const skyPaths = new Set((payload.sky?.faces ?? []).map(face => face.texturePath));
   const entries = payload.resources.map(resource => ({ key: `${pool}:${resource.path}`, url: resolveResource(resource.path), pool }));
   const pointEntries = pointAppearance.resources.filter(resource => resource.path === pointAppearance.atlas.path).map(resource => ({
     key: `${pointPool}:${resource.path}`, url: resolvePointResource(resource.path), pool: pointPool }));

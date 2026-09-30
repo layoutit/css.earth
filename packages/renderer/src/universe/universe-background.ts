@@ -112,7 +112,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, p
       }
       const skyAlpha = alpha < 1 ? (1 - completedContribution) / (1 - alpha) : 0;
       if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
-      skyLayer?.publish(world, viewport, completedContribution < 1, 1 - starsHandoff);
+      skyLayer?.publish(world, viewport, completedContribution < 1);
       stellarPublication = { world, viewport };
       stellarOpacity = stellarPointsOpacity(starsHandoff, completedContribution) * detailContextOpacity;
       stellarPoints?.publish(stellarPublication, stellarEnabled ? stellarOpacity : 0);

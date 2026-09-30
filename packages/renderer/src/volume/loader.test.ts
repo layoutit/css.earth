@@ -18,9 +18,8 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   const read = vi.fn(async () => bytes);
   const payload = await loadPreparedCssVolume(descriptor, { read });
   expect(read).toHaveBeenCalledExactlyOnceWith(descriptor.prepared.url);
-  // A sky with baked stars ships both cubes: the plain faces and the near ones.
   const slices = payload.stacks.flatMap(stack => stack.leaves);
-  const sky = [...payload.sky?.faces ?? [], ...payload.sky?.nearFaces ?? []];
+  const sky = payload.sky?.faces ?? [];
   expect(Boolean(payload.sky)).toBe(Boolean(recipe.sky));
   // The published bank owns cropped bulge slices only: no flat disc plane and no whole-galaxy impostor views.
   // The full-galaxy bake is intermediate data, retired after the hybrid compile.

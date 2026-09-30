@@ -118,8 +118,7 @@ function rewrittenVolume(source: PreparedCssVolume, bankId: string, lensId: stri
     frame,
     stacks: source.stacks.map(stack => ({ ...stack, leaves: stack.leaves.map(leaf => ({ ...leaf, texturePath: path(leaf.texturePath) })) })),
     resources: source.resources.map(resource => ({ ...resource, path: path(resource.path) })),
-    ...(source.sky === undefined ? {} : { sky: { ...source.sky, faces: faces(source.sky.faces),
-      ...(source.sky.nearFaces === undefined ? {} : { nearFaces: faces(source.sky.nearFaces) }) } }),
+    ...(source.sky === undefined ? {} : { sky: { ...source.sky, faces: faces(source.sky.faces) } }),
     ...(source.impostors === undefined ? {} : { impostors: { ...source.impostors,
       views: source.impostors.views.map(view => ({ ...view, texturePath: path(view.texturePath) })) } }),
   };

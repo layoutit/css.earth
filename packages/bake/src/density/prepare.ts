@@ -8,7 +8,7 @@ import { compileCssVolume } from '../volume-leaves/index.ts';
 import { acquireVolumeSource } from './acquisition.ts';
 import { prepareFixedDiscVolume } from './fixed-disc.ts';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.ts';
-import { parseSkyRecipe, acquireSkySource, loadSkyStarSprites, prepareSkyFaces, compileCssSky } from '../sky/index.ts';
+import { parseSkyRecipe, acquireSkySource, prepareSkyFaces, compileCssSky } from '../sky/index.ts';
 
 export async function prepareDensityVolumeObject(options: { objectDirectory: string; outputDirectory?: string; acquisitionCache?: string;
   inventory?: (object: { objectId: string; objectDirectory: string; preparedRoot: string }) => Promise<unknown> }) {
@@ -38,9 +38,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
     const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(sourceDirectory, recipe.sky)).toString('utf8')));
     const skyDirectory = dirname(containedPath(sourceDirectory, recipe.sky.path));
     if (options.acquisitionCache) await acquireSkySource(skyDirectory, skyRecipe, resolve(options.acquisitionCache));
-    // The point field is a sibling object; its pinned descriptor makes the bake reproducible.
-    const stars = skyRecipe.stars ? await loadSkyStarSprites(resolve(objectDirectory, '..', skyRecipe.stars.object), skyRecipe.stars) : undefined;
-    const compiled = compileCssSky(await prepareSkyFaces({ sourceDirectory: skyDirectory, outputDirectory, recipe: skyRecipe, ...(stars ? { stars } : {}) }), descriptor.volume);
+    const compiled = compileCssSky(await prepareSkyFaces({ sourceDirectory: skyDirectory, outputDirectory, recipe: skyRecipe }), descriptor.volume);
     data = { ...data, sky: compiled.sky, resources: [...data.resources, ...compiled.resources] };
   }
   const envelope = { schema: 'cssearth-prepared-object@1' as const, id: descriptor.id, type: 'density-volume' as const,

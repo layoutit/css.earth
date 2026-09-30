@@ -17,8 +17,7 @@ milky-way/
     ├── volume.json             Prepared object envelope with PolyCSS leaves
     ├── volume-slices.json      Physical quad and texture intermediates
     ├── core/slices/{x,y,z}/*.png  Generated, ignored 88 / 87 / 26 bulge textures
-    ├── sky/{px,nx,py,ny,pz,nz}.webp  Generated, ignored six celestial cube faces
-    └── sky-near/{px,nx,py,ny,pz,nz}.webp  Committed: the same faces with the neighbourhood stars baked in
+    └── sky/{px,nx,py,ny,pz,nz}.webp  Generated, ignored six celestial cube faces
 ```
 
 App startup restores missing images from the pinned sources via `pnpm prepare:environment-images`, preserving the accepted metadata. See the [shared bake commands](../../../labs/nebula/docs/baking.md).
@@ -136,8 +135,8 @@ matches their palette, not their exact morphology or physical photometry.
 Ordinary-alpha slices approximate RGB extinction and emitted energy. They
 retain finite-slice/axis-handoff artifacts and do not reproduce OpenSpace's
 additive HDR raymarching, stochastic sampling or camera-dependent fade.
-The renderer transports the prepared images and geometry. Background stars are
-baked into the sky cube from the independently prepared star catalogue.
+The renderer transports the prepared images and geometry. The sky cube holds no
+stars of its own: the stars around the Sun are the catalogue dots described below.
 
 The NASA map is an angular observation from the Sun, not a texture that remains
 correct after interstellar travel. It stays opaque nearby, starts retiring at
@@ -166,8 +165,7 @@ original 130.95 MiB EXR stays in the acquisition cache. Source acquisition,
 original and decoded byte counts, exact Node/Zstd versions, NASA/Gaia credits and
 usage notice live together under `source/sky/`.
 
-Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**,
-and the near set below adds **0.44 MiB download and 54 MiB decoded**. The complete
+Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**. The complete
 sky contribution is unchanged by the exterior billboard. The exterior bank
 figures above exclude these sky faces. Sky faces use quality 90. Original source chunks are offline
 inputs and are never sent to the browser.
@@ -179,36 +177,17 @@ and the standard sRGB display curve. Before final attenuation, the transfer at
 three sRGB channels before quantization without changing source white balance.
 A shared smooth shadow factor suppresses faint image grain: zero below
 transferred display luminance 0.04 and full contribution above 0.12. This
-intentionally removes faint background detail while retaining the separately
-baked catalogue stars. Alpha stays opaque and source HDR pixels stay unchanged. This is a display fit, not calibrated photometry.
-The NASA Milky Way-only image omits bright Hipparcos/Tycho stars, so the
-prepared bright stars are composited into the baked faces.
-Faint Gaia stars remain in the image; it is not literally star-free.
+intentionally removes faint background detail. Alpha stays opaque and source HDR pixels stay unchanged. This is a display fit, not calibrated photometry.
+The NASA Milky Way-only image omits bright Hipparcos/Tycho stars, and none are
+added to it. Faint Gaia stars remain in the image; it is not literally star-free.
 
-## Neighbourhood stars in the near faces
-
-`source/sky/recipe.json` pins the sibling `stellar-neighbourhood` object by its
-descriptor digest and one authored screen scale, 43.6 CSS pixels per degree. The
-baker composites that prepared point field, seen from its own origin, onto a copy
-of each face: about 17,500 sprites in total, drawn with the same atlas tile,
-photometry table and source-over blend the browser uses, supersampled three times
-per axis. The result is `prepared/sky-near/`, a second complete cube.
-
-The runtime mounts the two six-face cubes. The baked-star cube gives way to the
-plain NASA cube while the complete Solar sky fades from 100 AU to 0.1 pc. There
-is no handoff to individual DOM stars, star-slot pool, catalogue-selection
-worker, or per-star frame transport. The catalogue stays as a preparation input;
-the application reads only its small appearance manifest and atlas for the Sun's
-single navigation marker, without fetching or decoding the binary star bank.
-
-Individual stellar parallax is not rendered when travelling through the
-neighbourhood. Instead of retaining a misplaced Solar panorama, the complete
-cube retires before the observer reaches another stellar location.
-
-The baked faces are 1536 px across, so a star's disc is about three times softer
-than the browser's own sprite at device pixel ratio 2, and the sprite radius is
-fixed at the authored screen scale instead of following the viewport. This is a
-deliberate visual difference, not a reproduction of the DOM starfield.
+Until 2026-09-29 a second cube copied these faces with about 17,500 stars from
+the sibling `stellar-neighbourhood` catalogue painted in. It was removed because
+the catalogue dots already draw those stars, and the painted copy put a second,
+fixed set of them over the dots ([one face before and
+after](evidence/2026-09-29/sky-stars-removed.jpg), cropped from the prepared `ny`
+face). The runtime now mounts one six-face cube: the diffuse band. The `stellar-neighbourhood` catalogue stays a preparation input for
+the Sun's navigation marker only.
 
 The cube's authored bases are ICRF directions, independent of the volume's
 Galactic local frame. Its six prepared PolyCSS planes form one closed shell

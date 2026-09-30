@@ -38,9 +38,9 @@ deterministic 2,048-row direct display sample: all 96 prepared sky-coverage
 anchors, then the brightest remaining HYG rows by apparent magnitude at the
 Sun. Positions and magnitudes include the explicit astrometry reconciliation
 above; palette indices remain from the pinned catalogue. The browser projects the sample through
-eight retained CSS `box-shadow` nodes. It fades in as the baked near-star cube
-fades out, over the plain Milky Way image, and fades out when the completed
-Milky Way volume contribution takes over.
+eight retained CSS `box-shadow` nodes. It fades in from 100 to 200 AU,
+over the Milky Way image, and fades out when the completed Milky Way volume
+contribution takes over.
 
 The HYG Stellar Database by David Nash / Astronexus and its prepared derivatives
 are licensed CC-BY-SA-4.0. This is a local stellar neighbourhood (all rows within

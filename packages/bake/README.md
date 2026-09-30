@@ -32,7 +32,7 @@ world context, which emptied `src/preparation/`, and the nebula delivery bake of
 | `@cssearth/bake/volume-leaves` | the CSS volume compilers: slice stacks as retained PolyCSS leaves, leaf bounds, depth order, volume impostors | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/stars` | point-field recipes, catalogue sources, palette, magnitude hierarchy and precision, point atlas and photometry, diffuse sky, the encoded point bank | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/shell` | surface-shell recipes, meshes and atlas, and the CSS shell compiler | Node only (`node:*`, PolyCSS) |
-| `@cssearth/bake/sky` | cubic sky recipes, the EXR source and its acquisition, baked faces with near-star sprites, the CSS sky compiler | Node only (`node:*`, `sharp`) |
+| `@cssearth/bake/sky` | cubic sky recipes, the EXR source and its acquisition, baked faces, the CSS sky compiler | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/density` | density-volume acquisition and KTX2 encoding, column-depth spreading, fixed discs, slice atlases and their retirement, the density-volume preparation, lens-bank promotion | Node only (`node:*`, `sharp`) |
 | `@cssearth/bake/image-layers` | image-layer recipes, the diffuse Lanczos3 resampler, retained image layers as PolyCSS volume leaves | Node only (`node:*`, PolyCSS) |
 | `@cssearth/bake/galaxy-catalog` | galaxy catalogue recipes, CSV and archive sources, bibliography, galaxy positions and memberships, the display sample, the object preparation | Node only (`node:*`, `yaml`) |

@@ -151,7 +151,7 @@ test('retains exactly six prepared images and changes only shared camera present
   }) }, resolveResource = vi.fn((path: string) => `/prepared/${path}`);
   const viewport = { focalPixels: 600, principalOffsetPixels: [17, -11], widthPixels: 1280, heightPixels: 800 } as const;
   const runtime = mountPreparedCssSky({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resources, resolveResource });
-  const root = runtime.root as unknown as FakeElement, camera = root.children[0]!.children[0]!, scene = camera.children[0]!, leaves = [...scene.children];
+  const root = runtime.root as unknown as FakeElement, camera = root.children[0]!, scene = camera.children[0]!, leaves = [...scene.children];
   const count = document.count;
   expect(leaves.map(leaf => leaf.dataset.skyFace)).toEqual(bases.map(([id]) => id));
   // A face fetches nothing until it enters the view; the camera sees at most three of the six.
@@ -412,7 +412,7 @@ test('shared universe draws only resolved nebulae and never prefetches their len
     mounted.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1],
         context.focus.positionM[2] + context.volume.fullDistanceM * 2], orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
-    const skyPaths = new Set([...volume.sky?.faces ?? [], ...volume.sky?.nearFaces ?? []].map(face => face.texturePath));
+    const skyPaths = new Set((volume.sky?.faces ?? []).map(face => face.texturePath));
     const expected = volume.resources.filter(resource => !skyPaths.has(resource.path)).map(resource => `/volume/${resource.path}`);
     await vi.waitFor(() => expect(fetchResource).toHaveBeenCalledTimes(expected.length));
     expect(fetchResource.mock.calls.map(([url]) => url)).toEqual(expected);
@@ -599,42 +599,6 @@ function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement 
   const underlay = sky?.style.visibility === 'visible' ? skyValue * Number(sky.style.opacity || '1') : 0;
   return t * g * volumeValue + (1 - foregroundAlpha) * underlay;
 }
-
-test("baked stars hand the background to the plain Milky Way beyond the Sun's neighbourhood", () => {
-  const document = new FakeDocument(), host = document.createElement(), before = document.createElement(); host.appendChild(before);
-  const nearFaces = fixture().faces.map(face => ({ ...face, texturePath: `sky-near/${face.id}.webp` }));
-  const payload: PreparedCssSky = { ...fixture(), nearFaces, stars: { objectId: 'stellar-neighbourhood', cssPixelsPerDegree: 21.8 } };
-  const nearResources = [...resources, ...nearFaces.map(face => ({ path: face.texturePath, width: face.widthPx, height: face.heightPx, bytes: 100 }))];
-  const { stars: _stars, ...withoutStars } = payload;
-  expect(() => validatePreparedCssSky(withoutStars, nearResources)).toThrow('come together');
-  const runtime = mountPreparedCssSky({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resources: nearResources, resolveResource: path => `/prepared/${path}` });
-  const root = runtime.root as unknown as FakeElement;
-  const [plain, stars] = root.children as [FakeElement, FakeElement];
-  const leaves = (cube: FakeElement) => [...cube.children[0]!.children[0]!.children];
-  // No face of either cube carries an image before it enters the view.
-  expect([...leaves(plain), ...leaves(stars)].map(leaf => leaf.style.backgroundImage ?? '')).toEqual(Array(12).fill(''));
-  const count = document.count;
-  // Inside the Sun's neighbourhood the plain cube never enters layout, so its images never load.
-  for (const distance of [1, 100 * 149597870700, 140.3 * 149597870700, 3.085677581491367e15]) {
-    runtime.publish(world([0, 0, distance]), viewport, true, 1);
-    expect(plain.style.display).toBe('none');
-    expect(stars.style.display ?? '').toBe('');
-    expect(stars.style.opacity ?? '').toBe('');
-    expect(root.style.visibility).toBe('visible');
-    // A star-cube face in view carries its image.
-    leaves(stars).forEach((leaf, index) => { if (leaf.style.visibility !== 'hidden') expect(leaf.style.backgroundImage).toBe(`url("/prepared/sky-near/${bases[index]![0]}.webp")`); });
-  }
-  runtime.publish(world([0, 0, 1e16]), viewport, true, .25);
-  expect([plain.style.display, stars.style.display ?? '', stars.style.opacity]).toEqual(['', '', '0.25']);
-  // From another star the Sun's neighbour stars would be misplaced; the diffuse Milky Way remains.
-  runtime.publish(world([0, 0, 2.7e18]), viewport, true, 0);
-  expect([plain.style.display, stars.style.display]).toEqual(['', 'none']);
-  runtime.publish(world([0, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]), viewport, true, 1);
-  expect([plain.style.display, stars.style.display, stars.style.opacity]).toEqual(['none', '', '']);
-  expect(leaves(stars)[0]!.parentNode!.style.transform).toBe(preparedSkyCameraTransform(world([0,0,0], [0,Math.SQRT1_2,0,Math.SQRT1_2]), viewport));
-  expect(document.count).toBe(count);
-});
-
 
 test('authoritative detailed close-up gates background fetch, painting and publication without changing the NASA sky weight', async () => {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
