@@ -144,7 +144,7 @@
         "referenceRadiusMeters": 2410300
       },
       "acquisition": "Checked-in derived RGBA GeoTIFF. Reproduce with python3 src/objects/callisto/source/preparation/prepare-galileo-color.py from the pinned original and fixed camera; no controlled-map texture is sampled.",
-      "generator": "source/preparation/prepare-galileo-color.py",
+      "generator": "src/objects/callisto/source/preparation/prepare-galileo-color.py",
       "recipe": "preparation/galileo-color-conversion.json",
       "derivedFrom": [
         "galileo-pia03456-original"

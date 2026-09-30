@@ -15,6 +15,13 @@ test('every declared file is committed, restored by an acquisition step for its 
     ['inputs declares observations/lost.img']);
 });
 
+test('a generator starts with a script the repository tracks, optionally followed by its arguments', () => {
+  const manifest = { inputs: [{ path: 'a.png', generator: 'packages/x/make.mts a --b', recipe: { generator: 'tools/gone.mjs' } }],
+    generatedIntermediates: [{ path: 'b.json', generator: 'node packages/x/make.mts' }] };
+  assert.deepEqual(problems(bodySourceFindings('x', manifest, null, new Set(['a.png']), new Set(['packages/x/make.mts']))),
+    ['inputs a.png names generator "tools/gone.mjs"', 'generatedIntermediates b.json names generator "node packages/x/make.mts"']);
+});
+
 test('an acquisition step must restore a declared file', () => {
   const findings = bodySourceFindings('x', { inputs: [] }, { operations: [{ kind: 'download', path: 'reference/sbdb.json', url: 'https://example.org' }] }, new Set());
   assert.deepEqual(problems(findings), ['restores reference/sbdb.json']);

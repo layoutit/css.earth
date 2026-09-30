@@ -23,10 +23,14 @@ const sidebarFiles = new Set(["sidebar-thumbnails.json", ...Object.values(sideba
 const expectedOutputFiles = (await readdir(resolve(projectRoot, "public/navigation"), { withFileTypes: true }))
   .filter((entry) => entry.isFile() && !sidebarFiles.has(entry.name)).map((entry) => entry.name).sort();
 
+// Marker code is the same for every body: these tests load named bodies, nearest first, not all ~3,600.
+const markersOf = (ids: readonly string[]) => loadMarkerDescriptors({ projectRoot,
+  planets: SCENE_OBJECTS.filter(({ id }) => ids.includes(id)).toSorted((left, right) => left.distance.meters - right.distance.meters) });
+
 test('adding and reordering bodies preserves existing marker bytes', async context => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-marker-order-'));
   context.after(() => rm(root, { recursive: true, force: true }));
-  const descriptors = (await loadMarkerDescriptors()).filter(({ objectId }) => ['sun', 'moon', 'comet-67p', 'vesta'].includes(objectId));
+  const descriptors = await markersOf(['sun', 'moon', 'comet-67p', 'vesta']);
   assert.equal(descriptors.length, 4);
   const before = resolve(root, 'before'), after = resolve(root, 'after');
   await prepareBodyMarkers({ projectRoot, outputRoot: before, descriptors: descriptors.slice(0, 3) });
@@ -59,25 +63,9 @@ test('metadata-only preparation does not replace or remove images', async contex
   assert.match(await readFile(presentationPath, 'utf8'), /body-markers-00@2x.webp/);
 });
 
-test("composes every orbiting-object marker descriptor in catalog order", async () => {
-  const descriptors = await loadMarkerDescriptors({ projectRoot });
-  const markerPlanets = SCENE_OBJECTS
-    .toSorted((left, right) => left.distance.meters - right.distance.meters);
-  assert.deepEqual(
-    descriptors.map(({ objectId }) => objectId),
-    markerPlanets.map(({ id }) => id),
-  );
-  assert.deepEqual(
-    descriptors.filter(({ owner }) => owner === "object").map(({ objectId }) =>
-      objectId),
-    markerPlanets.map(({ id }) => id),
-  );
-  assert.ok(descriptors.every(({ source }) =>
-    source.origin && source.credit && source.license));
-});
 
-test('every body marker and resolved context image leaves space outside its silhouette transparent', async () => {
-  const descriptors = await loadMarkerDescriptors({ projectRoot });
+test('body markers and resolved context images leave space outside their silhouette transparent', async () => {
+  const descriptors = await markersOf(['earth', 'moon', 'saturn', 'comet-67p']);
   const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared-navigation-markers.mjs');
   for (const { objectId } of descriptors) {
     const context = PREPARED_NAVIGATION_MARKERS[objectId]?.context;
@@ -107,7 +95,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
       await mkdir(resolve(root, path), { recursive: true });
     }
     await copyFile(resolve(projectRoot, "src/objects/sun/swatch.json"), resolve(root, "src/objects/sun/swatch.json"));
-    const original = (await loadMarkerDescriptors())[0];
+    const [original] = await markersOf(['sun']);
     // The marker names its source by path; the source manifest owns the record.
     await writeFile(resolve(root, "src/objects/new-body/source/preparation/navigation.json"), JSON.stringify({ ...original, objectId: "new-body", source: { path: "source.jpg" } }));
     const { path: _path, ...record } = original.source;

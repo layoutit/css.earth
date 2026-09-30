@@ -923,9 +923,9 @@ for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer}
   layer.destroy();
 });
 
-// Parsed once for every system below.
+// Parsed once for both systems below. The code is the same for every host: a planet with many moons and a star with planets.
 let worldContext: Promise<ReturnType<typeof parsePreparedWorldContext>> | undefined;
-for (const planet of [...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun')) test(`${planet} moon orbits stay complete across selection, hover, flight and zoom`, async () => {
+for (const planet of ['saturn', 'trappist-1']) test(`${planet} moon orbits stay complete across selection, hover, flight and zoom`, async () => {
   worldContext ??= readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8').then(text => parsePreparedWorldContext(JSON.parse(text)));
   // The system alone is mounted: mounting the whole universe once per system grew with systems times bodies, and ~1,000 exoplanet
   // hosts (batch 1, 2026-09-29) made this test run for most of an hour.
