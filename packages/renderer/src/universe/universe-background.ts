@@ -7,6 +7,7 @@ import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
 import { mountGalaxyBacking, parseGalaxyBacking, type BackingNearFade } from './galaxy-backing.js';
+import { revealLayer } from './layer-reveal.js';
 import { galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 
@@ -53,7 +54,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
   let volumeLayer: ReturnType<typeof mountPreparedVolumeLod> | null = null;
   const cataloguePoints: ReturnType<typeof mountCataloguePoints>[] = [];
   // The whole image and its sections over it, each with the opacity it keeps close up.
-  let backing: { plane: ReturnType<typeof mountGalaxyBacking>; fade: BackingNearFade | undefined; opacity: number }[] | null = null;
+  let backing: { plane: ReturnType<typeof mountGalaxyBacking>; fade: BackingNearFade | undefined; opacity: number; image: string }[] | null = null;
   let backingLoading = false;
   // The last frame the backing was published for: a layer that loads while the camera rests is placed from it at once.
   let backingFrame: { world: WorldCameraPose; viewport: WorldCameraViewport; distanceM: number; shown: number } | null = null;
@@ -65,7 +66,10 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       // The camera first, then the layer shows: a plane never paints before it is placed.
       if (opacity > 0) layer.plane.publish({ world, viewport });
       if (opacity !== layer.opacity) {
-        layer.plane.root.style.opacity = String(opacity); layer.plane.root.style.display = opacity > 0 ? '' : 'none'; layer.opacity = opacity;
+        const display = opacity > 0 ? '' : 'none';
+        // A plane switching on waits for its decoded image and its own frame (layer-reveal.ts).
+        if (display === '' && layer.plane.root.style.display === 'none') revealLayer(layer.plane.root, layer.image);
+        layer.plane.root.style.opacity = String(opacity); layer.plane.root.style.display = display; layer.opacity = opacity;
       }
     }
   };
@@ -147,7 +151,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
           for (const layer of layers) resolveResource(layer.texturePath);
           backing = layers.map(layer => ({
             plane: mountGalaxyBacking({ host: backingHost, before: backingEnd, payload: { ...payload, leaf: { ...payload.leaf, texturePath: layer.texturePath } }, resolveResource }),
-            fade: layer.fade, opacity: NaN }));
+            fade: layer.fade, opacity: NaN, image: resolveResource(layer.texturePath) }));
           for (const layer of backing) layer.plane.root.style.display = 'none';
           lifetime.onDispose(() => { for (const layer of backing ?? []) layer.plane.destroy(); });
           if (backingFrame) publishBacking(backingFrame);

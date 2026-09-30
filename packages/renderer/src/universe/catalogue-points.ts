@@ -2,6 +2,10 @@ import { MAX_CATALOGUE_POINTS, parseCataloguePointSpread, parseDensityVolumeFram
 import type { CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
+import { revealLayer } from './layer-reveal.js';
+
+/** Dot layers switching on show one a frame (layer-reveal.ts). */
+const revealLayers = (layers: readonly HTMLElement[]) => { for (const layer of layers) revealLayer(layer); };
 
 // MAX_CATALOGUE_POINTS bounds every published bank. The batched projection walks the drawn prefix each frame, and a
 // stacked bank draws its innermost levels only from near its origin, so the whole bank is walked only near the Sun.
@@ -153,7 +157,7 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
   root.dataset.cataloguePoints = 'loading';
   Object.assign(root.style, { position: 'absolute', inset: '0', pointerEvents: 'none' });
   if (before) host.insertBefore(root, before); else host.append(root);
-  let runtime: { publish(publication: VolumeCameraPublication): void; destroy(): void } | null = null, loading = false, destroyed = false;
+  let runtime: { readonly layers: readonly HTMLElement[]; publish(publication: VolumeCameraPublication): void; destroy(): void } | null = null, loading = false, destroyed = false;
   let latest: VolumeCameraPublication | null = null, extent: { originM: readonly number[]; radiusM: number } | null = null;
   // The view's half-width at the bank's origin per unit of camera distance: a stacked bank's inner levels fill in by it.
   let halfWidthPerDistance = 1;
@@ -170,7 +174,10 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
       }
       const display = alpha > 0 ? '' : 'none';
       if (root.style.opacity !== String(alpha)) root.style.opacity = String(alpha);
-      if (root.style.display !== display) root.style.display = display;
+      if (root.style.display !== display) {
+        root.style.display = display;
+        if (display === '' && runtime) revealLayers(runtime.layers);
+      }
       if (!(alpha > 0)) return;
       latest = publication;
       const { widthPixels, heightPixels, focalPixels } = publication.viewport;
@@ -213,12 +220,12 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
         const rebudget = (candidates: number) => { if (budget !== undefined) share = candidates > budget ? budget / candidates : 1; };
         if (parts.length < 2) {
           const single = mount(bank.points, total => total);
-          runtime = { publish(publication) { single.publish(publication); rebudget(single.stats().candidates); }, destroy: single.destroy };
+          runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget(single.stats().candidates); }, destroy: single.destroy };
         } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
           const mounted = parts.map(part => ({ ...part, runtime: mount(bank.points.slice(part.start, part.start + part.points),
             total => Math.max(0, Math.min(part.points, total - part.start))) }));
-          runtime = { publish(publication) {
+          runtime = { layers: mounted.map(part => part.runtime.root), publish(publication) {
             const distanceUnits = Math.hypot(...publication.world.pose.positionM.map((value, axis) => value - bank.frame.originM[axis]!)) / bank.frame.metersPerUnit;
             const [from, to] = innermost.appearUnits ?? [1, 1];
             const filled = from > to ? Math.max(0, Math.min(1, Math.log(from / (distanceUnits * halfWidthPerDistance)) / Math.log(from / to))) : 0;
@@ -231,6 +238,7 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
           }, destroy() { for (const part of mounted) part.runtime.destroy(); } };
         }
         root.dataset.cataloguePoints = bank.id;
+        if (root.style.display !== 'none') revealLayers(runtime.layers);
         if (latest) runtime.publish(latest);
       }).catch(error => { root.dataset.cataloguePoints = 'failed'; console.error(`Catalogue points ${url} failed`, error); });
     },

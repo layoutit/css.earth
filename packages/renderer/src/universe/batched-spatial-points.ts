@@ -52,8 +52,10 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
   const root = host.ownerDocument.createElement('div'); root.className = className; root.ariaHidden = 'true';
   Object.assign(root.style,{position:'absolute',inset:'0',overflow:'hidden',pointerEvents:'none'});
   const pathPaint = mountPointPaths(root, paintPalette);
-  // The overscan paints past the svg's own box; the root clips it to the view.
-  Object.assign(pathPaint.svg.style, { overflow: 'visible', transformOrigin: '0 0' });
+  // The overscan paints past the svg's own box; the root clips it to the view. The dots are their own layer: a rewrite
+  // repaints them alone, not the viewport layer they would otherwise paint into (on M31 the viewport repainted about twice
+  // a frame, 2026-09-30), and a turn's warp moves that layer on the compositor.
+  Object.assign(pathPaint.svg.style, { overflow: 'visible', transformOrigin: '0 0', willChange: 'transform' });
   if (before) host.insertBefore(root, before); else host.append(root);
   // The last full paint: the camera's position and everything else it depended on, how many points it drew and the
   // nearest of them. A camera that only moved (a zoom, a pan around a planet) moves no point by a visible amount while

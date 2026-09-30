@@ -171,3 +171,25 @@ test('a translucent catalogue draws its dots as paths with their alpha', async (
   expect([...points.root.querySelectorAll('path')].some(path=>path.getAttribute('fill')==='#ffe2a8b3'&&path.getAttribute('d'))).toBe(true);
   points.destroy();
 });
+
+test('dot layers switching on show one a frame, so their first paints never share a frame', async () => {
+  const { document, window } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const frames: FrameRequestCallback[] = [];
+  Object.assign(window, { requestAnimationFrame: (callback: FrameRequestCallback) => frames.push(callback), cancelAnimationFrame() {}, performance: { now: () => 0 } });
+  const points = [[0, 0, -10], [0, 1, -10], [1, 0, -10]];
+  const stacked = { ...bank, points, spread: cataloguePointSpread(points), appearance: { ...bank.appearance, opacity: 1, levels: [
+    { points: 1, fullDetailUnits: 100, nearOpacity: .5 }, { points: 1, appearUnits: [10, 1] }, { points: 1, appearUnits: [1, .01] }] } };
+  const field = mountCataloguePoints({ host, url: '/dots.json', fetchJson: async () => stacked });
+  const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  field.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 1] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  await new Promise(resolve => setTimeout(resolve, 0));
+  const layers = [...field.root.children] as HTMLElement[];
+  expect(layers).toHaveLength(2);
+  const hidden = () => layers.filter(layer => layer.style.visibility === 'hidden').length;
+  expect(hidden()).toBe(2);
+  frames.shift()!(0);
+  expect(hidden()).toBe(1);
+  frames.shift()!(16);
+  expect(hidden()).toBe(0);
+  field.destroy();
+});
