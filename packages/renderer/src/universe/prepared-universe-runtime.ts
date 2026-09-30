@@ -1,7 +1,7 @@
 import { createSceneLifetime } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
-import { fetchPreparedJson } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank, fetchPreparedJson } from './catalogue-points.js';
 import { mountImageMesh } from './image-mesh.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
@@ -159,7 +159,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           billboards: datasetBillboards, load: loadVolumeDataset, warmDomNodeBudget: warmVolumeDatasetDomNodeBudget, requestPublication, prepareBillboardAtlas });
         // A cut-open mesh draws the inside of its far wall here, behind the points it holds; its outer shell stays over them.
         const meshInterior = document.createElement('span'); meshInterior.hidden = true; root.insertBefore(meshInterior, end);
-        const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, fetchPreparedJson));
+        const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, target => fetchPreparedCatalogueBank(target)));
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
         const meshes = imageMeshes.map(mesh => ({ cutaway: () => mesh.cutaway?.() ?? true, hidden: () => mesh.hidden?.() ?? false,
           runtime: own(mountImageMesh({ host: root, before: end, interiorBefore: meshInterior, labelHost: frontRoot, url: mesh.url,

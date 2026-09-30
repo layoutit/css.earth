@@ -14,7 +14,7 @@ test('a bake input goes to output/, a published bank to prepared/ with its inven
   expect(await writeCatalogueBank({ objectDirectory, id: 'raw', bank: bank(3), published: false, repositoryRoot: root, inventory }))
     .toBe(resolve(root, 'output/catalogue-points/galaxy/raw.json'));
   expect(await writeCatalogueBank({ objectDirectory, id: 'dots', bank: bank(2), published: true, repositoryRoot: root, inventory }))
-    .toBe(resolve(objectDirectory, 'prepared/dots.json'));
+    .toBe(resolve(objectDirectory, 'prepared/dots.bin'));
   expect(inventoried).toEqual(['galaxy']);
   const raw = await readCatalogueBank(objectDirectory, 'raw', root) as { points: unknown[]; spread?: unknown; cells?: unknown };
   const dots = await readCatalogueBank(objectDirectory, 'dots', root) as { points: number[][]; spread?: unknown; cells?: unknown };

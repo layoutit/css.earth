@@ -1,30 +1,33 @@
 // Where a catalogue point bank lives. A recipe's `published: true` says the app fetches the bank: it goes to the object's
-// `prepared/` and its inventory, and must fit what the app draws. Every other bank is a bake input for a later merge or
+// `prepared/` as a packed binary (`<id>.bin`, @cssearth/renderer prepared-data/catalogue-bank-binary.ts) and its inventory, and must fit
+// what the app draws. Every other bank is a bake input for a later merge or
 // stack and stays in the repository's ignored `output/`, out of the inventory, R2 and the site's module graph.
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, catalogueCells, cataloguePointSpread } from '@cssearth/objects';
-import { inventoryPreparedAssets } from '@cssearth/objects/node';
+import { decodeCatalogueBankBinary, encodeCatalogueBankBinary } from '@cssearth/renderer/prepared-data/catalogue-bank-binary.ts';
+import { inventoryPreparedAssets, packPreparedBinary, unpackPreparedBinary } from '@cssearth/objects/node';
 
 /** A bake input: `output/catalogue-points/<object>/<id>.json` under the repository root. */
 export function catalogueBankInputPath(objectDirectory: string, id: string, repositoryRoot = resolve(objectDirectory, '../../..')): string {
   return resolve(repositoryRoot, 'output/catalogue-points', basename(objectDirectory), `${id}.json`);
 }
 
-/** A published bank: `prepared/<id>.json` beside the object. */
+/** A published bank: `prepared/<id>.bin` beside the object. */
 export function publishedCatalogueBankPath(objectDirectory: string, id: string): string {
-  return resolve(objectDirectory, 'prepared', `${id}.json`);
+  return resolve(objectDirectory, 'prepared', `${id}.bin`);
 }
 
 /** A bank an earlier recipe wrote: the bake input first, else the published bank (a published bank can feed a merge). */
 export async function readCatalogueBank(objectDirectory: string, id: string, repositoryRoot?: string): Promise<unknown> {
   const paths = [catalogueBankInputPath(objectDirectory, id, repositoryRoot), publishedCatalogueBankPath(objectDirectory, id)];
   for (const path of paths) {
-    const text = await readFile(path, 'utf8').catch((error: unknown) => {
+    const bytes = await readFile(path).catch((error: unknown) => {
       if ((error as { code?: unknown }).code === 'ENOENT') return null;
       throw error;
     });
-    if (text !== null) return JSON.parse(text) as unknown;
+    if (bytes === null) continue;
+    return path.endsWith('.bin') ? decodeCatalogueBankBinary(unpackPreparedBinary(bytes, path), path) : JSON.parse(bytes.toString('utf8')) as unknown;
   }
   throw new Error(`${basename(objectDirectory)}: catalogue bank ${id} has not been prepared (looked for ${paths.join(' and ')}); run its recipe first.`);
 }
@@ -47,7 +50,10 @@ export async function writeCatalogueBank({ objectDirectory, id, bank, published,
   await mkdir(dirname(path), { recursive: true });
   const rows = published ? pointRows(objectId, id, bank.points) : [];
   const levels = published ? levelPoints(objectId, id, bank.appearance) : undefined;
-  await writeFile(path, JSON.stringify(published ? { ...bank, spread: cataloguePointSpread(rows), cells: catalogueCells(rows, levels) } : bank) + '\n');
+  if (published) {
+    const { bytes, regions } = encodeCatalogueBankBinary({ ...bank, spread: cataloguePointSpread(rows), cells: catalogueCells(rows, levels) }, `${objectId}: bank ${id}`);
+    await writeFile(path, packPreparedBinary(bytes, regions, `${objectId}: bank ${id}`));
+  } else await writeFile(path, JSON.stringify(bank) + '\n');
   if (published) await inventory({ objectId, objectDirectory });
   return path;
 }

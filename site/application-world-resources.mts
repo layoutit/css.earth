@@ -108,7 +108,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       const set = resourceSet(id);
       return { payload: await loadPreparedCssImageLayers(set.descriptor, set.transport),
         resolveResource: (path: string) => set.resolve(`prepared/${path}`),
-        cataloguePointUrls: (IMAGE_LAYER_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.json`)) };
+        cataloguePointUrls: (IMAGE_LAYER_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.bin`)) };
     });
     const plainDots = new Set(plainDotIds), asteroids = new Set(asteroidIds);
     const sprites = preparedBodyBillboards([applicationContext.focus, ...applicationContext.bodies], plainDots,
@@ -141,7 +141,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
       // Cepheids), star-forming regions on both sides of the centre (Anderson et al. 2014 WISE HII regions, Reid et al.
       // 2019 maser parallaxes), the local arms (Hunt & Reffert 2023 open clusters) and the halo (Baumgardt & Vasiliev 2021).
-      galaxyCataloguePoints: ['globular-clusters', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.json`)),
+      galaxyCataloguePoints: ['globular-clusters', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: applicationContext, volume, pointAppearance, sprites,
       imageLayerBanks, loadImageLayer, volumeDatasetBanks, loadVolumeDataset,

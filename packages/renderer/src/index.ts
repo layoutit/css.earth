@@ -52,6 +52,9 @@ export { worldCameraOf } from './universe/world-camera.js';
 export { mountWorldContextPointSource, worldContextPointAppearance, worldContextPointSourceFade, worldContextPointSourceGain } from './universe/world-context/world-context-point-source.js';
 export type { PointSourcePublication, WorldContextPointAppearance, WorldContextPointSourceGain } from './universe/world-context/world-context-point-source.js';
 export { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parsePreparedSystemView, parsePreparedWorldContext, parsePreparedWorldContextSummary } from './prepared-data/world-context.js';
+export { worldOrbitBankRegions } from './prepared-data/world-orbit-bank-regions.js';
+export { readPreparedBinary } from './prepared-data/prepared-binary.js';
+export { decodeCatalogueBankBinary, encodeCatalogueBankBinary } from './prepared-data/catalogue-bank-binary.js';
 // Named so declaration builds of site modules that return world-context handles can reference them.
 export type { WorldBodyPresentation } from './universe/world-context/world-context-planner.js';
 export type { QueuedRequest } from './navigation/world-frame-queue.js';

@@ -286,8 +286,9 @@ its validators accept); the renderer never imports the bake.
 - `src/volume/` is published as `@cssearth/bake/volume`: the volume contracts, coordinates, fields, materials and
   sampling. It stays host-neutral, because the nebula lab's browser viewer imports it: no Node built-ins, `Buffer`,
   DOM, React, Vite, `sharp`, PolyCSS, renderer imports or file paths, and it never imports `node/`.
-- `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices and the
-  compiler bake. It may import `node:*`, `sharp` and the main volume entry. The main entry never imports it; the Node-only
+- `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices, the
+  compiler bake and the published catalogue point banks. It may import `node:*`, `sharp`, the main volume entry and the
+  renderer's catalogue bank codec (`@cssearth/renderer/prepared-data/catalogue-bank-binary.ts`), which packs a bank as the page decodes it. The main entry never imports it; the Node-only
   topics above may, as a lower layer.
 
 ## Behaviour is part of the contract

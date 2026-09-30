@@ -58,16 +58,14 @@ function uniqueCiInputs(assets: readonly RuntimeAssetLocation[]): RuntimeAssetLo
 export async function ciUniverseInputs(root = projectRoot): Promise<RuntimeAssetLocation[]> {
   const assets = await inventoryAssets(root, inventoriedObjectIds([], root));
   return uniqueCiInputs(assets.filter(asset => {
-    if (asset.filename.endsWith('.json')) return true;
+    // Prepared banks travel as `.bin` beside the JSON (orbit, point-field and catalogue point banks); tests decode them.
+    if (asset.filename.endsWith('.json') || asset.filename.endsWith('.bin')) return true;
     if (asset.filename.endsWith('-photometric-phase-curve.svg')) return true;
     const preparedDirectory = resolve(root, 'src/objects', asset.id, 'prepared') + '/';
     if (!asset.file.startsWith(preparedDirectory)) return false;
-    // The shared context must arrive from one publish: the full context, its summary and the orbit banks they
-    // describe. Restoring the JSON halves alone pairs a context with whatever banks a runner happens to hold, which
-    // decode into orbits that belong to another run.
-    if (asset.id === 'sun' && asset.filename.startsWith('world-orbits/')) return true;
-    return asset.id === 'milky-way' || asset.id === 'heliosphere' ||
-      asset.id === 'stellar-neighbourhood' && asset.filename.endsWith('.bin');
+    // The shared context arrives from one publish with the orbit banks it describes (above): restoring the JSON halves
+    // alone would pair a context with whatever banks a runner happens to hold.
+    return asset.id === 'milky-way' || asset.id === 'heliosphere';
   }));
 }
 

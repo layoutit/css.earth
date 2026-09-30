@@ -141,7 +141,7 @@
           "local-group-galaxies-sample"
         ],
         "outputs": [
-          "prepared/dots.json"
+          "prepared/dots.bin"
         ],
         "interpretation": {
           "kind": "catalogue-count-visualization",
@@ -263,7 +263,7 @@
           "desi-bright-galaxies-sample"
         ],
         "outputs": [
-          "prepared/bright-galaxy-dots.json"
+          "prepared/bright-galaxy-dots.bin"
         ],
         "selector": "",
         "interpretation": {
@@ -284,7 +284,7 @@
           "quaia-quasars-sample"
         ],
         "outputs": [
-          "prepared/quasar-dots.json"
+          "prepared/quasar-dots.bin"
         ],
         "selector": "",
         "interpretation": {

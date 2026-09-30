@@ -1,4 +1,6 @@
 import { MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
+import { decodeCatalogueBankBinary } from '../prepared-data/catalogue-bank-binary.js';
+import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
 import type { CatalogueCells, CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
@@ -20,6 +22,13 @@ export async function fetchPreparedJson(target: string): Promise<unknown> {
   const response = await fetch(target);
   if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
   return response.json() as Promise<unknown>;
+}
+/** A published catalogue point bank (`<id>.bin`): packed, gunzipped by the platform and decoded to the object its JSON
+ * was (prepared-data/catalogue-bank-binary.ts), refusing an unsuccessful answer. */
+export async function fetchPreparedCatalogueBank(target: string, fetcher: typeof fetch = fetch): Promise<unknown> {
+  const response = await fetcher(target);
+  if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
+  return decodeCatalogueBankBinary(await readPreparedBinary(await response.arrayBuffer(), target), target);
 }
 /** A sparse catalogue (the globular clusters) is never thinned below this many points. */
 const MIN_DRAWN_POINTS = 300;
@@ -163,8 +172,8 @@ function parseLevels(value: unknown, total: number, id: string): readonly Catalo
  * A published catalogue drawn as fixed dust: every point the same small dot, whatever the distance, so a population's
  * shape shows without any star claiming a size. Fetched on the first publication that shows it.
  */
-export function mountCataloguePoints({ host, before, url, fetchJson }: {
-  host: HTMLElement; before?: Node; url: string; fetchJson(url: string): Promise<unknown>;
+export function mountCataloguePoints({ host, before, url, loadBank }: {
+  host: HTMLElement; before?: Node; url: string; loadBank(url: string): Promise<unknown>;
 }) {
   const root = host.ownerDocument.createElement('div');
   root.dataset.cataloguePoints = 'loading';
@@ -198,7 +207,7 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
       if (runtime) { runtime.publish(publication); return; }
       if (loading) return;
       loading = true;
-      void fetchJson(url).then(value => {
+      void loadBank(url).then(value => {
         if (destroyed) return;
         const bank = parseCataloguePoints(value, url);
         extent = { originM: bank.frame.originM, radiusM: Math.max(...bank.points.map(point => Math.hypot(...point.positionUnits))) * bank.frame.metersPerUnit };

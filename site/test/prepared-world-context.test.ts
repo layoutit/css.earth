@@ -19,6 +19,7 @@ import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } 
 import { SCENE_OBJECTS } from '../objects.mts';
 import { labelImportance } from '../../packages/renderer/src/labels/universe-label-policy.js';
 import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../system-framing.mts';
+import { unpackPreparedBinary } from '@cssearth/objects/node';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
 
@@ -2657,7 +2658,7 @@ test('the orbit banks decode to the orbits of the full prepared file, each verte
   const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
   const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-  const bankOf = async (id: string) => { const bytes = await readFile(new URL(`world-orbits/${id}.bin`, prepared)); return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength); };
+  const bankOf = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
   const banks = new Map(await Promise.all(Object.keys(summary.orbitBanks!).map(async id => [id, await bankOf(id)] as const)));
   const decoded = decodeWorldOrbits(summary, banks);
   expect(decoded.bodies.map(body => body.id)).toEqual(full.bodies.map(body => body.id));

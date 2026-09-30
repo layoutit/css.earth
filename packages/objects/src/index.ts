@@ -14,3 +14,5 @@ export * from './geometry/index.js';
 export { prepareObject, readPreparedObject } from './preparation.js';
 export type { ObjectPreparation } from './preparation.js';
 export * from './registry/index.js';
+export { PREPARED_BINARY_MAGIC, shufflePreparedBinary, unshufflePreparedBinary } from './prepared-binary.js';
+export type { PreparedBinaryRegion } from './prepared-binary.js';
