@@ -15,60 +15,6 @@
     },
     {
       "location": "public",
-      "filename": "europa-dataset-carbon-dioxide.webp",
-      "bytes": 2934,
-      "sha256": "7e421200e4f541cc4478dd6a1a47692420e9b6c31bc158c333dcbbaf742aca88"
-    },
-    {
-      "location": "public",
-      "filename": "europa-dataset-elevation.webp",
-      "bytes": 238,
-      "sha256": "51f5a744a54bce33c9756b274770e54eff9b00f5c3b369f4b2e0489027a71909"
-    },
-    {
-      "location": "public",
-      "filename": "europa-dataset-enhanced.webp",
-      "bytes": 602,
-      "sha256": "8e1b86010f4cf2dabb806a74e1a7951d08cf5334e157413a8bb9df0ddff3dd24"
-    },
-    {
-      "location": "public",
-      "filename": "europa-dataset-geology.webp",
-      "bytes": 470,
-      "sha256": "697a5fbba5af0d0a2ea39cd3e0bc2ce3d82c4fd5176e7990a810713767d1558e"
-    },
-    {
-      "location": "public",
-      "filename": "europa-dataset-hydrogen-peroxide.webp",
-      "bytes": 2594,
-      "sha256": "7a164236b925375227da17ee0f24fc40b9a5b9a962a7ddefb9ffcabdf161981e"
-    },
-    {
-      "location": "public",
-      "filename": "europa-dataset-infrared.webp",
-      "bytes": 582,
-      "sha256": "619ae3f9e04fc20ffa27b4860479f4fca7a6e66f65367cdd04651573dafe9a5d"
-    },
-    {
-      "location": "public",
-      "filename": "europa-dataset-junocam.webp",
-      "bytes": 112,
-      "sha256": "c9db4918ac7bdf66bc9b24b421dc29181120de07c90905653320b5bf00cd8acc"
-    },
-    {
-      "location": "public",
-      "filename": "europa-dataset-normal.webp",
-      "bytes": 600,
-      "sha256": "4d22315d90a935d7ae1a060b234eab810796d7b007aaaff052d87fe126bf71ba"
-    },
-    {
-      "location": "public",
-      "filename": "europa-dataset-sodium-chloride.webp",
-      "bytes": 2938,
-      "sha256": "26a2020d89e71d444f0e010587e3372880a5e6a67561b9447939853501f05840"
-    },
-    {
-      "location": "public",
       "filename": "europa-elevation@2x.webp",
       "bytes": 46540,
       "sha256": "6b1a48692cdfb54ff8fac2b2def291ca7fdc0974998067eb84958e15652cfdfa"
@@ -108,6 +54,60 @@
       "filename": "europa-junocam@2x.webp",
       "bytes": 531808,
       "sha256": "7ce71151197a3749c446e269951e2b4bc0455a468d551cff2b0db62983e349a4"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-carbon-dioxide.webp",
+      "bytes": 2934,
+      "sha256": "7e421200e4f541cc4478dd6a1a47692420e9b6c31bc158c333dcbbaf742aca88"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-elevation.webp",
+      "bytes": 238,
+      "sha256": "51f5a744a54bce33c9756b274770e54eff9b00f5c3b369f4b2e0489027a71909"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-enhanced.webp",
+      "bytes": 602,
+      "sha256": "8e1b86010f4cf2dabb806a74e1a7951d08cf5334e157413a8bb9df0ddff3dd24"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-geology.webp",
+      "bytes": 470,
+      "sha256": "697a5fbba5af0d0a2ea39cd3e0bc2ce3d82c4fd5176e7990a810713767d1558e"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-hydrogen-peroxide.webp",
+      "bytes": 2594,
+      "sha256": "7a164236b925375227da17ee0f24fc40b9a5b9a962a7ddefb9ffcabdf161981e"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-infrared.webp",
+      "bytes": 582,
+      "sha256": "619ae3f9e04fc20ffa27b4860479f4fca7a6e66f65367cdd04651573dafe9a5d"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-junocam.webp",
+      "bytes": 112,
+      "sha256": "c9db4918ac7bdf66bc9b24b421dc29181120de07c90905653320b5bf00cd8acc"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-normal.webp",
+      "bytes": 600,
+      "sha256": "4d22315d90a935d7ae1a060b234eab810796d7b007aaaff052d87fe126bf71ba"
+    },
+    {
+      "location": "public",
+      "filename": "europa-lens-sodium-chloride.webp",
+      "bytes": 2938,
+      "sha256": "26a2020d89e71d444f0e010587e3372880a5e6a67561b9447939853501f05840"
     },
     {
       "location": "public",
@@ -388,14 +388,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 303,
-      "sha256": "cee3108fcc173da76727cac9be04e2110f5b27850d118db2d95463b318b81918"
+      "bytes": 300,
+      "sha256": "05a94fc5c4be109d786deb832767e98b7a18c0bcab7fd2ead00bd67ca7b94894"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 412564,
-      "sha256": "656b6491efb23bbeabc3c279443e4e673d9791120faabefe9ffad7914633c92c"
+      "bytes": 412537,
+      "sha256": "eeee81ced62f71341cb7b2ac4955841ab1fc5c61ff45afd4ed2ac66cc321518a"
     },
     {
       "location": "prepared",
@@ -407,19 +407,13 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2708,
-      "sha256": "02b52a48650c1d29d09a61196b7649557dc3e0fd8b542dd6beeeae7cb854d2ad"
+      "sha256": "7a951eaaa24f2d9249f07912d17c9f409a636654dd58adb30bd41dea88b7e3c1"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 8027,
-      "sha256": "b535b8a58e84c83517e4b73c22166e94aad6542b1d8e6fed1f525fc0a36a715d"
-    },
-    {
-      "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 11658,
-      "sha256": "fb4406349640d9e4955eb5ccebfd039ef305d030a2956186f0f9d7cafcb3a62f"
+      "bytes": 7989,
+      "sha256": "c04d7d7f50680d4153dbc55a316ad2bd594843d9ea8cf73f18ede05368872966"
     },
     {
       "location": "prepared",
@@ -430,8 +424,14 @@
     {
       "location": "prepared",
       "filename": "image-quality.json",
-      "bytes": 7122,
-      "sha256": "b20d7fbce42d685cfe055d9f3b34c46668aaae200d1d8ff88cd249263277cafa"
+      "bytes": 7113,
+      "sha256": "ab0213f69396979ff34ecc00b43b8bb6fdc5624479c301caa475b9a4b7a00325"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 11620,
+      "sha256": "47dca31a4b4ddcfad4fb7e4b4f065edbe7141016101829d5be361db6be735079"
     },
     {
       "location": "prepared",
@@ -502,8 +502,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 595915,
-      "sha256": "bd45d57ecd4ab6b7c287bc22a9ec1a97e6f981694a623358c0656cb31873bea9"
+      "bytes": 355680,
+      "sha256": "967df7b9d02a91a57b1f6ee41b3c3712ae9bf7b279b514cc8c4769cc7ddc397a"
     },
     {
       "location": "prepared",

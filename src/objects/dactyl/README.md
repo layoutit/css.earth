@@ -112,7 +112,7 @@ the label's frame-start clock from shutter-center SCET. For `i2278`, shutter
 center is `1993-08-28T16:47:49.956Z`, 1.149546 seconds after frame start. The
 shared TypeScript readers evaluate the original CK there with zero tolerance;
 their B1950 C-matrix agrees with the independent
-[CSPICE N0067 calculation](../../../tests/objects/fixtures/dactyl/galileo-pointing.json)
+[CSPICE N0067 calculation](../../../src/objects/dactyl/fixtures/galileo-pointing.json)
 to a maximum element difference of `5.7e-11`. Neither `i1578` nor `i2700` has
 zero-tolerance coverage at its own shutter center in this particular kernel.
 No gap is filled or extrapolated.

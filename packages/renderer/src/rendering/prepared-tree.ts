@@ -5,17 +5,35 @@ import { rewritePreparedStyleUrls, type PreparedAssetOrigin } from './prepared-a
 type Own = (cleanup: () => void) => unknown;
 interface BuiltTree { nodes: HTMLElement[]; roots: HTMLElement[]; }
 
+interface ResolvedTreeStyles { readonly styles: readonly string[]; readonly values: readonly string[]; }
+const resolvedStyles = new WeakMap<PreparedTree, WeakMap<PreparedAssetOrigin, ResolvedTreeStyles>>();
+
+/** A definition's tree and its asset origin are both fixed once decoded, so its `url(/scenes/...)` references are
+ * resolved once per pair and every later mount reads the cached strings. Shared property records resolve once, not once
+ * per node that names them. Without an origin (local dev, CI) the prepared strings are used as they are. */
+function treeStyles(tree: PreparedTree, assetOrigin: PreparedAssetOrigin | null | undefined): ResolvedTreeStyles | null {
+  if (!assetOrigin) return null;
+  let byOrigin = resolvedStyles.get(tree);
+  if (!byOrigin) resolvedStyles.set(tree, byOrigin = new WeakMap());
+  let resolved = byOrigin.get(assetOrigin);
+  if (!resolved) byOrigin.set(assetOrigin, resolved = Object.freeze({
+    styles: tree.nodes.map(node => rewritePreparedStyleUrls(node.style, assetOrigin)),
+    values: tree.properties.map(property => rewritePreparedStyleUrls(property.value, assetOrigin)),
+  }));
+  return resolved;
+}
+
 /** A detached transport of prepared DOM records. No scene, layout read,
  * animation, resource bank or camera exists until the mounted owner claims it. */
-function createPreparedNode(tree: PreparedTree, index: number, document: Document, assetOrigin?: PreparedAssetOrigin | null) {
+function createPreparedNode(tree: PreparedTree, index: number, document: Document, resolved: ResolvedTreeStyles | null) {
   const record = tree.nodes[index];
   const node = document.createElement(record.tag);
   if (record.className !== null) node.className = record.className;
-  if (record.style) node.style.cssText = rewritePreparedStyleUrls(record.style, assetOrigin);
+  if (record.style) node.style.cssText = resolved ? resolved.styles[index] : record.style;
   // Preserve the prepared CSSOM assignment order and numeric precision.
   for (const propertyId of record.properties) {
     const property = tree.properties[propertyId];
-    const value = rewritePreparedStyleUrls(property.value, assetOrigin);
+    const value = resolved ? resolved.values[propertyId] : property.value;
     if (property.custom) node.style.setProperty(property.name, value);
     else writePreparedStyle(node.style, property.name, value);
   }
@@ -24,12 +42,12 @@ function createPreparedNode(tree: PreparedTree, index: number, document: Documen
 }
 
 function builder(tree: PreparedTree, document: Document, own: Own, assetOrigin?: PreparedAssetOrigin | null) {
-  const nodes: HTMLElement[] = [], roots: HTMLElement[] = [];
+  const nodes: HTMLElement[] = [], roots: HTMLElement[] = [], resolved = treeStyles(tree, assetOrigin);
   return {
     get complete() { return nodes.length === tree.nodes.length; },
     append() {
       const record = tree.nodes[nodes.length];
-      const node = createPreparedNode(tree, nodes.length, document, assetOrigin);
+      const node = createPreparedNode(tree, nodes.length, document, resolved);
       nodes.push(node);
       if (record.parent === -1) { roots.push(node); own(() => node.remove()); }
       if (record.parent !== -1) nodes[record.parent].appendChild(node);
@@ -52,9 +70,10 @@ export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: O
   // A hidden subtree arrives whole or not at all: its root is present with no server children.
   const emptyHidden = new Set([...hiddenSubtrees].filter(root => nodes[root] && !tree.nodes.some((child, at) => child.parent === root && nodes[at])));
   const built = new Set<number>();
+  const resolved = nodes.includes(undefined) ? treeStyles(tree, assetOrigin) : null;
   for (const [index, record] of tree.nodes.entries()) if (!nodes[index]) {
     if (!emptyHidden.has(record.parent) && !built.has(record.parent)) throw new TypeError('Initial prepared tree has invalid node identities.');
-    nodes[index] = createPreparedNode(tree, index, stage.ownerDocument, assetOrigin);
+    nodes[index] = createPreparedNode(tree, index, stage.ownerDocument, resolved);
     built.add(index);
   }
   if (indexed.size !== existing.length || existing.length + built.size !== tree.nodes.length) throw new TypeError('Initial prepared tree has a different node count.');

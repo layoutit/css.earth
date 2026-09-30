@@ -7,7 +7,7 @@ const test = sourceTest();
 import { createPreparedMaterialPublisher, preparedMaterialFrame } from '@cssearth/renderer/testing';
 import { selectedPreparedVariant } from '@cssearth/renderer/testing';
 import { initialObjectSelection } from '@cssearth/renderer/testing';
-import { retainedPresentationFixture } from "../../tests/platform/object-runtime-package.mts";
+import { retainedPresentationFixture } from "./fixtures/object-runtime-package.mts";
 import definitionJson from "../../src/objects/venus/prepared/runtime.json" with {type: "json"};
 
 import { parsePreparedObjectRuntime } from '@cssearth/renderer';

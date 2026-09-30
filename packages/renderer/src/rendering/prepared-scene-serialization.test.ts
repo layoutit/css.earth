@@ -46,7 +46,7 @@ test('every Saturn dataset keeps the same topology and applies its prepared pres
 
 test('HTML escaping and ordered CSS writes preserve quoted semicolons and the initial selection', () => {
   const scene = serializePreparedScene({ ...definition, controls: { datasets: null, settings: null },
-    materials: [], motion: [], animations: [], textureLevels: undefined,
+    materials: [], motion: [], animations: [], textureLevels: undefined, viewBindings: [],
     tree: { camera: 0, scene: 1, stageClasses: ['prepared'], properties: [{ name: 'color', value: 'green', custom: false }], nodes: [
       { tag: 'div', parent: -1, className: 'polycss-camera', style: '', properties: [], attributes: {} },
       { tag: 'div', parent: 0, className: 'polycss-scene', style: 'color:red;--label:"a;b";background-image:url("/a;b.png")', properties: [0], attributes: { title: '<a & "b">' } },

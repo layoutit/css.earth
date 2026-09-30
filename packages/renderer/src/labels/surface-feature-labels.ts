@@ -68,9 +68,10 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   if (root.dataset.surfaceFeatures && root.dataset.surfaceFeatures !== objectId) throw new TypeError('Prepared feature caption belongs to another object.');
   root.className = 'prepared-surface-features';
   root.dataset.surfaceFeatures = objectId;
-  // A zero-size root at the stage centre, children placed from it: the root composites above the globe, and a full-screen
-  // box made that layer the whole stage (9 MB at 3x) for a few captions.
-  root.style.cssText = 'position:absolute;left:50%;top:50%;width:0;height:0;z-index:1;pointer-events:none';
+  // A zero-size root at the stage centre, children placed from it (site/object-shell.css): the root composites above the
+  // globe, and a full-screen box made that layer the whole stage (9 MB at 3x) for a few captions. A server-rendered
+  // selected caption's full-stage root (dataset-response.mts) becomes this one.
+  delete root.dataset.featureCaptionOnly;
   // The outline chords paint beneath the labels; both are screen-space children of one root.
   const outline: HTMLElement[] = [];
   const entries: Entry[] = [];
@@ -116,7 +117,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const element = document.createElement('span');
     element.dataset.featureLabel = '';
     element.dataset.surfacePick = 'true';
-    element.style.cssText = 'position:absolute;left:0;top:0;white-space:nowrap;visibility:hidden;opacity:0;pointer-events:none';
+    element.style.cssText = 'visibility:hidden;opacity:0';
     element.ariaHidden = 'true';
     root.appendChild(element);
     const entry: Entry = { element, feature: null, width: 0, height: 0, measured: false, targetOpacity: 0, hideTimer: null, x: 0, y: 0 };
@@ -137,7 +138,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     for (let index = 0; index < plan.outline.pieces; index++) {
       const piece = document.createElement('s');
       piece.dataset.featureOutlinePiece = '';
-      piece.style.cssText = 'position:absolute;left:0;top:0;width:1px;transform-origin:0 50%;visibility:hidden;pointer-events:none';
+      piece.style.visibility = 'hidden';
       root.insertBefore(piece, tooltip);
       outline.push(piece);
     }

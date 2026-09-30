@@ -561,7 +561,7 @@ HR 8799 System* ([arXiv:2609.10507](https://arxiv.org/abs/2609.10507)) measures 
 source with JWST on 2023 August 3, and prints the whereistheplanet prediction it judged them against. `candidates` returns
 that prediction to within 0.1 mas, `associate` puts every measured planet on itself and every other body beyond R 25, and
 the candidate fifth source is beyond R 6 from all four known planets, which is the paper's claim. See the
-[fixture](../tests/fixtures/telescope-families/sky-association-hr-8799/README.md) for the one cell of its table that does not
+[fixture](../packages/telescope-cli/src/families/fixtures/telescope-families/sky-association-hr-8799/README.md) for the one cell of its table that does not
 follow from its own numbers.
 
 What it does not do: it compares offsets from a host star, and converts no absolute sky position into one. whereistheplanet
@@ -1353,9 +1353,9 @@ Europa HTML was inspected through a local HTTP preview: initial rendering, drag
 rotation and wheel zoom remained visible with no browser errors. There is no
 startup flight; the first drag preserves camera distance. Screenshot
 comparison has not been performed; the draft does not claim pixel parity.
-The [navigation recipe](../tests/fixtures/telescope-projection/europa-navigation.json),
-[registration evidence](../tests/fixtures/telescope-projection/europa-registration.json) and
-[numerical report](../tests/fixtures/telescope-projection/europa-oracle.json) pin this example.
+The [navigation recipe](../docs/fixtures/telescope-projection/europa-navigation.json),
+[registration evidence](../docs/fixtures/telescope-projection/europa-registration.json) and
+[numerical report](../docs/fixtures/telescope-projection/europa-oracle.json) pin this example.
 Place each downloaded kernel under the recipe's `kernels/` directory; changed archive bytes
 are refused. The executable oracle is:
 

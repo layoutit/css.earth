@@ -7,8 +7,9 @@ import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterial
 import type { PreparedAssets, PreparedResources, PreparedResourceDemand } from "./prepared-residency.js";
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./style-access.js";
-import { selectPreparedTextureLevel, textureTileStyles, tiledTextureKeys, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
+import { createTextureTileWriter, selectPreparedTextureLevel, unseenTextureWrites, type PreparedTextureLevels, type PreparedTexturePlacements, type PreparedTextureTile } from './prepared-texture-levels.js';
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
+import { createLeafBoxWriter } from './prepared-leaf-box-direct.js';
 import { createSettlePacer } from './settle-pacer.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { selectPreparedSilhouetteStep, type PreparedSilhouetteSteps } from './prepared-silhouette-steps.js';
@@ -53,7 +54,11 @@ export type PreparedViewBinding = { target: number } & (
   ({ kind: "interior-disc" } & PreparedInteriorDisc) |
   ({ kind: "silhouette-step-property"; property: string; placements?: PreparedTexturePlacements;
     /** Leaf boxes (prepared-leaf-box-blocks.ts): the leaves that share each published step, by block or `property`. */
-    groups?: Readonly<Record<string, readonly number[]>>; groupSizes?: Readonly<Record<string, readonly number[]>> } & PreparedSilhouetteSteps) |
+    groups?: Readonly<Record<string, readonly number[]>>; groupSizes?: Readonly<Record<string, readonly number[]>>;
+    /** The step or outset in force before the camera publishes one. */
+    initial?: string;
+    /** Leaf boxes as prepared records (prepared-leaf-box-direct.ts). */
+    boxes?: readonly import('./prepared-leaf-box-direct.js').PreparedLeafBox[] } & PreparedSilhouetteSteps) |
   { kind: "counter-rotation"; systemTransform: string | null }
 );
 export interface PreparedPresentationDefinition {
@@ -200,9 +205,13 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     [sceneElement, ...(definition.depthPartitions?.groups ?? []).map(group => nodes[group.scene])]);
   // The same prepared groups let the camera bring a resolving mesh back in stages.
   const revealGroups = Object.freeze((definition.tree.activationGroups ?? []).map(group => Object.freeze(group.map(index => nodes[index]))));
-  // Disable CSS-owned motion before attachment. Prepared handles below own its
-  // clock, pause state and disposal without forcing live style discovery.
-  for (const plan of [...definition.motion ?? [], ...definition.animations]) nodes[plan.target].style.animation = 'none';
+  // Prepared handles below own motion: its clock, pause state and disposal, without forcing live style discovery.
+  // Delivered scene CSS carries no motion (site/build/prepared-motion-css.mts); only a server-rendered saved view poses
+  // a target with a paused CSS animation of its own (prepared-native-view.ts), which the handles replace.
+  for (const plan of [...definition.motion ?? [], ...definition.animations]) {
+    const style = nodes[plan.target].style;
+    if (style.animation) style.removeProperty('animation');
+  }
   const motion = (definition.motion ?? []).map(plan => {
     const animation = nodes[plan.target].animate(plan.keyframes, { duration: plan.duration, iterations: Infinity, easing: 'linear', fill: 'both' });
     animation.id = plan.id;
@@ -227,7 +236,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       Math.max(0, Math.min(plan.duration, (controlPitch - plan.sourceMinimum) * plan.millisecondsPerDegree)));
   }, initialProjection, owned);
   let selectionPublications = 0, styleWrites = 0;
-  const tiledKeys = tiledTextureKeys(definition.textureLevels);
+  // Tiled page leaves take their final background placement with every image write (prepared-texture-levels.ts).
+  const textureTiles = createTextureTileWriter(definition.textureLevels, nodes, writeStyle);
   let selectedTextures = new Map<string, { target: number; name: string }>();
   const styleKey = (binding: { target: number; name: string }) => `${binding.target}:${binding.name.startsWith("--") ? binding.name : binding.name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
   const target = (index: number) => index === -1 ? stage : nodes[index];
@@ -246,16 +256,17 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     commitSelection({ selection, resources, plan }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null }) {
       const variant = selectedPreparedVariant(definition, selection);
       // Resolve the complete texture group before publishing any part of it.
-      const writes = variant.writes.flatMap(binding => {
+      type CommittedWrite = Exclude<PreparedWrite, { kind: "texture" }> | { kind: "tile"; target: number; name: string; tile: PreparedTextureTile | undefined };
+      const writes = variant.writes.flatMap((binding): CommittedWrite[] => {
         if (binding.kind !== "texture") return [binding];
         const url = binding.resource === null ? null : resources.url(plan?.textureResources?.[binding.resource] ?? binding.resource);
         // A deferred (undrawn) mesh publishes no texture at all; the resolving
         // camera re-plans and commits the complete group before it is shown.
         if (binding.resource !== null && !url && !plan?.deferredTextures) throw new Error(`Prepared selection texture is not ready: ${binding.resource}`);
         const image = { kind: "style" as const, target: binding.target, name: binding.name, value: url === null ? "none" : binding.quoted ? `url(${JSON.stringify(url)})` : `url(${url})` };
-        // A page some level draws from a shared sheet carries its tile (or its own placement) with every image.
-        if (binding.resource === null || !tiledKeys.has(binding.resource)) return [image];
-        return [image, ...textureTileStyles(binding.name, plan?.textureTiles?.[binding.resource]).map(([name, value]) => ({ kind: "style" as const, target: binding.target, name, value }))];
+        // A page some level draws from a shared sheet places its leaves on its tile (or on the page itself) with every image.
+        if (binding.resource === null || !textureTiles.has(binding.target, binding.name)) return [image];
+        return [image, { kind: "tile" as const, target: binding.target, name: binding.name, tile: plan?.textureTiles?.[binding.resource] }];
       });
       // Texture references belong to the committed dataset. Retire references
       // absent from its successor in the same publication, without embedding
@@ -270,6 +281,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         const element = target(binding.target);
         if (binding.kind === "attribute") { if (readAttribute(element, binding.name) !== binding.value) writeAttribute(element, binding.name, binding.value); }
         else if (binding.kind === "class") { if (element.classList.contains(binding.name) !== binding.value) element.classList.toggle(binding.name, binding.value); }
+        else if (binding.kind === "tile") styleWrites += textureTiles.publish(binding.target, binding.name, binding.tile);
         else publishStyle(binding.target, binding.name, binding.value);
       };
       // Alternative radial meshes address different atlas layouts. Hide the
@@ -321,10 +333,18 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
   // Hysteresis needs the step each silhouette binding last published.
   const silhouetteSteps = new Map<PreparedViewBinding, number>();
   // A leaf box group's step is written on its own leaves; until then they inherit the binding target's initial step.
+  // Leaf boxes receive final values, never their prepared variables (prepared-leaf-box-direct.ts); other step
+  // properties keep their plain write.
+  const leafBoxes = createLeafBoxWriter(definition.viewBindings, nodes, writeStyle);
+  const readStep = (index: number, property: string) => leafBoxes.owns(index, property) ? leafBoxes.read(index, property) : styleValue(target(index), property);
+  const writeStep = (index: number, property: string, value: string) => {
+    if (leafBoxes.owns(index, property)) styleWrites += leafBoxes.set(index, property, value);
+    else { writeStyle(target(index), property, value); styleWrites++; }
+  };
   const leafBoxBlocks = new Map(definition.viewBindings.flatMap(binding => binding.kind === "silhouette-step-property" && binding.groups
     ? [[binding as PreparedViewBinding, createLeafBoxBlocks({ ...binding, groups: binding.groups },
-      name => styleValue(nodes[binding.groups![name]![0]!]!, binding.property) || styleValue(target(binding.target), binding.property),
-      (name, value) => { for (const leaf of binding.groups![name]!) { writeStyle(nodes[leaf]!, binding.property, value); styleWrites++; } })] as const] : []));
+      name => readStep(binding.groups![name]![0]!, binding.property) || readStep(binding.target, binding.property),
+      (name, value) => { for (const leaf of binding.groups![name]!) writeStep(leaf, binding.property, value); })] as const] : []));
   // A body-wide step property (the surface seam outset) sits on an ancestor of every leaf, so a change restyles the whole
   // mesh: like the leaf-box steps it switches only once the camera has stopped (motion-freezes-membership.md). The first
   // value is written at once.
@@ -332,19 +352,17 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
     ? [[binding as PreparedViewBinding, (() => {
       let wanted: string | null = null;
       const pacer = createSettlePacer((_budget, moving) => {
-        const element = target(binding.target);
-        if (moving || wanted === null || styleValue(element, binding.property) === wanted) return 0;
-        writeStyle(element, binding.property, wanted); styleWrites++; return 1;
+        if (moving || wanted === null || readStep(binding.target, binding.property) === wanted) return 0;
+        writeStep(binding.target, binding.property, wanted); return 1;
       }, { frame: globalThis.requestAnimationFrame?.bind(globalThis) ?? null });
       return (value: string, detached: boolean) => {
         if (detached) {
           wanted = value;
-          const element = target(binding.target);
-          if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
+          if (readStep(binding.target, binding.property) !== value) writeStep(binding.target, binding.property, value);
           return;
         }
         pacer.published();
-        const first = wanted === null && !styleValue(target(binding.target), binding.property);
+        const first = wanted === null && !readStep(binding.target, binding.property);
         wanted = value;
         pacer.request(first);
       };

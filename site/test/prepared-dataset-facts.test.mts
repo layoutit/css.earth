@@ -1,4 +1,4 @@
-import {parseObjectContentFixture} from '../../tests/objects/content/object-content-fixture.mts';
+import {parseObjectContentFixture} from './fixtures/object-content-fixture.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();

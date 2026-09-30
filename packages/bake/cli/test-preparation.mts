@@ -32,6 +32,7 @@ const universeEntries = [
 // Relocated contracts and oracles retain their original Node/audit lanes. Moving them beside an object module
 // must not also admit them to preparation discovery, which previously only reached tests/objects/.
 const NON_PREPARATION_TESTS: readonly string[] = [
+  'packages/bake/src/objects/lineage/body-lineage.test.mts',
   'packages/bake/src/objects/cameras/core.oracle.test.mts',
   'packages/bake/src/objects/cameras/pallas.test.mts',
   'packages/bake/src/objects/cameras/sky-orientation.oracle.test.mts',
@@ -59,7 +60,7 @@ async function discover(directory: string, suffix: string): Promise<string[]> {
   return files.sort();
 }
 const entries = universeOnly ? universeEntries : [...new Set([
-  'packages/bake/src/scene/scene.test.ts', ...universeEntries,
+  'packages/bake/src/scene/scene.test.ts', 'site/test/charts.test.ts', ...universeEntries,
   ...await discover('tests/objects', '.test.ts'), ...await discover('packages/bake/src/objects', '.test.ts'),
   'packages/bake/src/delivery/operations-assemble.test.ts', 'packages/bake/src/delivery/public-runtime-assets.test.ts',
   'packages/bake/src/scene/leaf-raster-scale.test.ts',
@@ -87,6 +88,7 @@ function run(args: string[]) {
 }
 // `.mts` entries load natively; esbuild refuses to mark an entry point itself external.
 const native = ['site/test/prepare-spatial-context.test.mts',
+  ...(universeOnly ? [] : ['site/test/folded-transit.test.mts', 'src/platform/equirectangular-illustration.test.mts', 'src/platform/interpret-source-verification.test.mts', 'src/objects/earth/paged-ellipsoid-scene.test.mts', 'src/platform/astrometric-sky-registration.test.mts', 'src/platform/default-camera.test.mts', 'src/platform/dataset-facing.test.mts', 'src/platform/solar-presentation-frame.test.mts', 'src/platform/solar-view-direction.test.mts', 'site/test/lonlat-slice-table.test.mts', 'src/objects/europa/scientific-focus.test.mts']),
   ...(universeOnly ? [] : ['packages/bake/src/astronomy/hosted-eccentric.oracle.test.mts',
     'packages/bake/src/astronomy/hosted-orbit-source.test.mts', 'packages/bake/src/photometry/picaso-limb.test.mts']),
   ...(universeOnly ? [] : ['packages/bake/src/presentation/emissive-plates.test.mts', 'packages/bake/src/raster/raster-pages.test.mts',

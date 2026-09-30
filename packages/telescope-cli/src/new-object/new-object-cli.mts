@@ -23,7 +23,7 @@
  * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
  * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape dataset and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
- * tests/contract/object-package-consistency.test.mts refuses. Then run: node packages/bake/cli/prepare-object.mts <id> */
+ * src/objects/object-package-consistency.test.mts refuses. Then run: node packages/bake/cli/prepare-object.mts <id> */
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { scaffoldStar, TODO } from './scaffold.mts';

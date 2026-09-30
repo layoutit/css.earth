@@ -43,8 +43,11 @@ missing hosts, duplicate identities and cycles, including self-hosting.
 
 A planetary system is a star and every prepared body whose orbit chain leads
 back to it. The Solar System is the Sun's; WASP-43 and its planet WASP-43b form
-another. [`object-systems.mts`](../site/object-systems.mts) derives systems from
-the prepared world context and the registry, so no list names them. Every
+another. [`planetary-system-members.mts`](../site/planetary-system-members.mts)
+reads each system's members from the prepared world context's orbit graph once,
+when `pnpm prepare:world-context` writes `site/prepared-world-presentation.json`;
+[`object-systems.mts`](../site/object-systems.mts) joins that table with the
+registry, so no list names the systems. Every
 member shares its star's `systemName`, and the derivation fails otherwise. A
 star without orbiting bodies, such as Betelgeuse, belongs to no system.
 

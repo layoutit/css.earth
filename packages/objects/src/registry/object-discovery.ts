@@ -33,18 +33,40 @@ export function isDiscoveryAnchor(object: { classification: string }): boolean {
   return object.classification === 'star' || object.classification === 'black-hole' || object.classification === 'planet';
 }
 
-/** Explicit searches still navigate every registered object. This controls the default world. */
-export function discoveryVisibility(objects: readonly { id: string; classification: string; discovery: ObjectDiscovery }[],
-  options: { illustrations: boolean; highlighted?: string | null;
-    /** Objects the default view features (prepared: dwarf planets, featured discoveries, JPL mission-target asteroids). */
-    defaultFeatures: ReadonlySet<string>;
-    /** Phones: an asteroid that is not a mission target draws nothing unless its category is highlighted. */
-    compact?: boolean;
-    /** Bodies of a system: each body that orbits another, and each body something orbits. */
-    systemMembers?: ReadonlySet<string>;
-    /** Bodies the map shows as named dots, placed by their measured orbit, even when their page is only an illustration (extreme
-     * trans-Neptunian objects). */
-    orbitFeatures?: ReadonlySet<string> }) {
+type DiscoveryObjects = readonly { id: string; classification: string; discovery: ObjectDiscovery }[];
+export interface DiscoveryVisibilityOptions {
+  illustrations: boolean; highlighted?: string | null;
+  /** Objects the default view features (prepared: dwarf planets, featured discoveries, JPL mission-target asteroids). */
+  defaultFeatures: ReadonlySet<string>;
+  /** Phones: an asteroid that is not a mission target draws nothing unless its category is highlighted. */
+  compact?: boolean;
+  /** Bodies of a system: each body that orbits another, and each body something orbits. */
+  systemMembers?: ReadonlySet<string>;
+  /** Bodies the map shows as named dots, placed by their measured orbit, even when their page is only an illustration (extreme
+   * trans-Neptunian objects). */
+  orbitFeatures?: ReadonlySet<string>;
+}
+export interface DiscoveryVisibility { readonly hiddenBodies: readonly string[]; readonly hiddenLabels: readonly string[]; readonly highlightedBodies: readonly string[] }
+
+// A page's objects and sets are fixed once it loads, and its settings take a handful of values (illustrations, compact and one
+// highlighted classification), so each combination is computed once over the page's ~3,600 bodies and then reused.
+const visibilityCache = new WeakMap<DiscoveryObjects, { defaultFeatures: ReadonlySet<string>; systemMembers?: ReadonlySet<string>;
+  orbitFeatures?: ReadonlySet<string>; results: Map<string, DiscoveryVisibility> }[]>();
+
+/** Explicit searches still navigate every registered object. This controls the default world. The objects and sets are read as
+ * fixed: a caller passes the same instances for the same page, and the result for each setting combination is cached (frozen). */
+export function discoveryVisibility(objects: DiscoveryObjects, options: DiscoveryVisibilityOptions): DiscoveryVisibility {
+  let inputs = visibilityCache.get(objects);
+  if (!inputs) visibilityCache.set(objects, inputs = []);
+  let entry = inputs.find(item => item.defaultFeatures === options.defaultFeatures && item.systemMembers === options.systemMembers && item.orbitFeatures === options.orbitFeatures);
+  if (!entry) inputs.push(entry = { defaultFeatures: options.defaultFeatures, systemMembers: options.systemMembers, orbitFeatures: options.orbitFeatures, results: new Map() });
+  const key = JSON.stringify([options.illustrations, options.compact === true, options.highlighted ?? null]);
+  let result = entry.results.get(key);
+  if (!result) entry.results.set(key, result = computeDiscoveryVisibility(objects, options));
+  return result;
+}
+
+function computeDiscoveryVisibility(objects: DiscoveryObjects, options: DiscoveryVisibilityOptions): DiscoveryVisibility {
   const hiddenBodies: string[] = [], hiddenLabels: string[] = [], highlightedBodies: string[] = [];
   for (const object of objects) {
     const illustration = object.discovery.illustration && options.orbitFeatures?.has(object.id) !== true;
@@ -64,5 +86,5 @@ export function discoveryVisibility(objects: readonly { id: string; classificati
     if (!featured && object.classification !== 'satellite' && !highlighted &&
         !(illustration && options.illustrations)) hiddenLabels.push(object.id);
   }
-  return { hiddenBodies, hiddenLabels, highlightedBodies };
+  return Object.freeze({ hiddenBodies: Object.freeze(hiddenBodies), hiddenLabels: Object.freeze(hiddenLabels), highlightedBodies: Object.freeze(highlightedBodies) });
 }

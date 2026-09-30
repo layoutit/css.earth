@@ -27,10 +27,10 @@
   inset: auto;
   left: 50%;
   top: 50%;
-  width: calc(1528px * var(--sgr-a-star-camera-zoom, 1));
-  height: calc(1528px * var(--sgr-a-star-camera-zoom, 1));
-  margin-left: calc(1528px * var(--sgr-a-star-camera-zoom, 1) / -2);
-  margin-top: calc(1528px * var(--sgr-a-star-camera-zoom, 1) / -2);
+  width: 1528px;
+  height: 1528px;
+  margin-left: -764px;
+  margin-top: -764px;
 }
 
 /* Paint order: off-limb context behind the sphere, limb plate above it. */
@@ -73,8 +73,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(1528px * var(--sgr-a-star-camera-zoom, 1))
-    calc(1528px * var(--sgr-a-star-camera-zoom, 1));
+    1528px
+    1528px;
 }
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
@@ -83,8 +83,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--sgr-a-star-camera-zoom, 1))
-    calc(496px * var(--sgr-a-star-camera-zoom, 1));
+    496px
+    496px;
 }
 
 .object-stage[data-object-id="sgr-a-star"] .polycss-camera {

@@ -104,14 +104,10 @@ const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.i
           {dataset.texture && <div
               class="object-surface-minimap"
               data-surface-minimap={dataset.texture.minimap ? JSON.stringify(dataset.texture.minimap) : undefined}
-              role={dataset.texture.minimap ? "group" : undefined}
-              tabindex={dataset.texture.minimap ? 0 : undefined}
-              aria-label={dataset.texture.minimap ? `${dataset.label} surface map. Drag or use arrow keys to look around; scroll or use plus and minus to zoom.` : undefined}
             >
               <img
                 class="object-dataset-texture"
                 src={dataset.texture.url}
-                data-surface-preview-src={dataset.texture.url}
                 width={dataset.texture.width}
                 height={dataset.texture.height}
                 alt={dataset.title}
@@ -119,13 +115,6 @@ const defaultListedId = defaultControl?.step ? stepMembers(defaultControl)[0]?.i
                 decoding="async"
                 draggable="false"
               />
-              {dataset.texture.minimap && <>
-                {[-1, 0, 1].map(() => <span
-                  class="object-minimap-viewport"
-                  aria-hidden="true"
-                  hidden
-                ></span>)}
-              </>}
               {dataset.step && <SequencePlayer {objectId} {dataset} members={stepMembers(dataset)} {focus} />}
             </div>}
           {dataset.step && !dataset.texture && <SequencePlayer {objectId} {dataset} members={stepMembers(dataset)} {focus} />}

@@ -129,91 +129,91 @@
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-methane.webp",
+      "filename": "uranus-lens-methane.webp",
       "bytes": 326,
       "sha256": "8c453b227a428f36ed0993a6517b76316d9acb6d00666d640c608f648747b0be"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-near-infrared.webp",
+      "filename": "uranus-lens-near-infrared.webp",
       "bytes": 210,
       "sha256": "42fc7f50196d89871a9abbcf0986bac68604c19657acf099dc7946ec24544df2"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-normal.webp",
+      "filename": "uranus-lens-normal.webp",
       "bytes": 170,
       "sha256": "c1076d759d598a7ad34ead3b478df0166701fe644c17488d8c4a30e2957455a8"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2014a.webp",
+      "filename": "uranus-lens-visible-2014a.webp",
       "bytes": 1158,
       "sha256": "0fbb0bc0e2b0627efd4ef4888a7904a39c324e63aa7012bc8b3ff8e7862fbf61"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2015a.webp",
+      "filename": "uranus-lens-visible-2015a.webp",
       "bytes": 1044,
       "sha256": "5dca43135ba8ef79dfb976f18358575ca80f70af31ea8905244a0291285053c8"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2016a.webp",
+      "filename": "uranus-lens-visible-2016a.webp",
       "bytes": 1064,
       "sha256": "2eda610e04b2ec3a315785960a1cc2a291b530c2ef0429a86d53245dbbeda34c"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2017a.webp",
+      "filename": "uranus-lens-visible-2017a.webp",
       "bytes": 1038,
       "sha256": "4f18fe3364b95e12bf1d8c47e3b4ff1e0800c882a28b7ed2ee30e4d0ed0e2b33"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2018a.webp",
+      "filename": "uranus-lens-visible-2018a.webp",
       "bytes": 1048,
       "sha256": "8a303b02ceba3ec6fabeec73bea6ec26854ba0d57f4670c15bbb5ca3bb475013"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2019a.webp",
+      "filename": "uranus-lens-visible-2019a.webp",
       "bytes": 1084,
       "sha256": "99c27714af7c8261994e396f132317887e692b2a09e2039eca4fea34c2ca4e31"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2020a.webp",
+      "filename": "uranus-lens-visible-2020a.webp",
       "bytes": 1094,
       "sha256": "db565b945637f437b6542ba608d994ccf0b0c30a42b823669b62322020df630a"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2021a.webp",
+      "filename": "uranus-lens-visible-2021a.webp",
       "bytes": 1058,
       "sha256": "0e35360986a5c34195ff26ad52cac6247ad8725c0f92c82ac53b8659cb53db7e"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2022a.webp",
+      "filename": "uranus-lens-visible-2022a.webp",
       "bytes": 966,
       "sha256": "c81bd72e0ffed86b44094799be9269e45efd8c6cc9b0aa1a723ccc5626d9ee4c"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2023a.webp",
+      "filename": "uranus-lens-visible-2023a.webp",
       "bytes": 932,
       "sha256": "61bbe643991e911c2820b631999ec3d7d797dfcb2e40157d7621f036b3a225a3"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2024a.webp",
+      "filename": "uranus-lens-visible-2024a.webp",
       "bytes": 948,
       "sha256": "54b171e743b71630853c831ed773ea2d1da132899916d0f7902e4c2b86d03ec5"
     },
     {
       "location": "public",
-      "filename": "uranus-dataset-visible-2025a.webp",
+      "filename": "uranus-lens-visible-2025a.webp",
       "bytes": 976,
       "sha256": "bd4890320f8a20b75fa493a2d0821a078a9cf5faf644e98694ef78c0114a7b9b"
     },
@@ -598,8 +598,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 304,
-      "sha256": "56b1dc1aa016118da30e4a3ed5845d04123aaa0aa885405e377a8f6343f24031"
+      "bytes": 301,
+      "sha256": "40a46765784b3a6b4bb66f02b4a91801693e4de7585e7b5f8943ddd1136a1672"
     },
     {
       "location": "prepared",
@@ -616,20 +616,20 @@
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 4760,
-      "sha256": "534d907b9e1751c33365dc3ccd6afbc01caf16d4557702a5c68d764685778045"
+      "bytes": 4758,
+      "sha256": "5744f4ef6eff58204ead8acf51c3da45caf0d06798a80ba13781b562898c6ecd"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 5503,
-      "sha256": "2cd2f3efbbdbcac86e045675dd4473ce5b683b542908b949c697cd251d50eb89"
+      "bytes": 5447,
+      "sha256": "8961446a1cf0bda1d6fca4873cff61adb0b2bf379defd895dd1a4c7ff9dfabe3"
     },
     {
       "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 13201,
-      "sha256": "c017463bc9b4cbb8a70d149aabf84643437efafcf446a709f79dd5d02809885a"
+      "filename": "lenses.json",
+      "bytes": 13145,
+      "sha256": "7112310020d349a45e3e133ef72459964a37d2a39e3093e7ac9c647c1f05a6a0"
     },
     {
       "location": "prepared",
@@ -730,8 +730,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1232868,
-      "sha256": "ea047e55e7310b99ca2382bcc8dcbf9a619aa5e25cf7027eb6d7fedf72b22455"
+      "bytes": 816321,
+      "sha256": "494864f23a14c7365420a9ac7ff08ad0bd1034fd499a09272958ebd1c36e52a2"
     },
     {
       "location": "prepared",

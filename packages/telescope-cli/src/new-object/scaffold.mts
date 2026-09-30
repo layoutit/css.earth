@@ -81,8 +81,8 @@ ${s} .${id}-corona-layer {
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(${offLimbSize}px * var(--${id}-camera-zoom, 1))
-    calc(${offLimbSize}px * var(--${id}-camera-zoom, 1));
+    ${offLimbSize}px
+    ${offLimbSize}px;
 }
 
 /* Limb plate: ${BODY_DIAMETER_PX} px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
@@ -91,8 +91,8 @@ ${s} .${id}-limb-layer {
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(${BODY_DIAMETER_PX}px * var(--${id}-camera-zoom, 1))
-    calc(${BODY_DIAMETER_PX}px * var(--${id}-camera-zoom, 1));
+    ${BODY_DIAMETER_PX}px
+    ${BODY_DIAMETER_PX}px;
 }
 
 ${s} .polycss-camera {

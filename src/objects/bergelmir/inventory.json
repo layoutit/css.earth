@@ -40,8 +40,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 305,
-      "sha256": "3c982fa1355b7277bc5eb9323164362d4380ee8db2a2f1d4c376304b53e8c882"
+      "bytes": 302,
+      "sha256": "8a6c81bed701dc7d90090ad67c98e80570729dcff9db0c3c010fcdd96b05b9fc"
     },
     {
       "location": "prepared",
@@ -53,19 +53,19 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 1501,
-      "sha256": "66ce5931ea50625b0bc29c87b5e171e536cbc12b7efb40bcedd0a3dbe69ae91a"
+      "sha256": "4639394abd8236a1410456e927d4b2c74a0c3f1bd13e038fafc93ea50b238c35"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 458,
-      "sha256": "84b05916d75df37f426d0fda614e276c0c9fbf6005c48db222d8266e728c6c26"
+      "bytes": 447,
+      "sha256": "e7155587b5d8af42cc180f8b445189273201147f8b9fe95d7943f631c036bde0"
     },
     {
       "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 762,
-      "sha256": "5b8d83bb01207ded0d8a6e542edb379404e971e6fd3fc48c6d47be3e5e22fca3"
+      "filename": "lenses.json",
+      "bytes": 751,
+      "sha256": "03b856864e40ddf69f2a8a624463257ead8f6d44fa52e0d640c6abbfd9cca40b"
     },
     {
       "location": "prepared",
@@ -88,8 +88,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 380202,
-      "sha256": "160578e74090d867787d66f0b889d085ba1ecbdb5624aca5a5823477d44a8ce8"
+      "bytes": 306253,
+      "sha256": "0e40a929aa590c6acf78580d1d980b02716bed6a177c46c7b1d653504f1e57be"
     },
     {
       "location": "prepared",

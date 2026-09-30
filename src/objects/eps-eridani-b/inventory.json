@@ -3,7 +3,7 @@
   "assets": [
     {
       "location": "public",
-      "filename": "eps-eridani-b-dataset-shape.webp",
+      "filename": "eps-eridani-b-lens-shape.webp",
       "bytes": 44,
       "sha256": "e829f1a746501aed7de9dc0b3ba44b32f644b6bb1edbd74a616a123d3dff3aa4"
     },
@@ -232,8 +232,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 87121,
-      "sha256": "e5c2402438bbb80b4fbce43087fdb312825177c7e7cab34e38f72574261fe81c"
+      "bytes": 87118,
+      "sha256": "4220a6b32b7f2d96f98c51bad254923cd66715fe780e30e2f0e86c5e7b99c623"
     },
     {
       "location": "prepared",
@@ -245,19 +245,19 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2696,
-      "sha256": "50b708fb47a885926f7168a047e0fc04286544cd1f19a8bedfe91f14191cf128"
+      "sha256": "57884212d36e23aa2df5748d8ea6c5b9a17bf34378b620ea805ad5cac860fb7d"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 444,
-      "sha256": "4bda59773c5b2e09073e19ebbdd2c3ee7e05d24830fb2437a070eef84b70ca3d"
+      "bytes": 430,
+      "sha256": "3577201db842ec652ca87e0658af4c37d77cde808379476e5abdf2953d1bcf97"
     },
     {
       "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 940,
-      "sha256": "91ee98aea3e72c3ca55c632fa64d15640b8972fcdddda471a324636a4d4fe8eb"
+      "filename": "lenses.json",
+      "bytes": 926,
+      "sha256": "5364e9f4c06d18f3953891483b60710655a5605490ed19004099d0faa03b5851"
     },
     {
       "location": "prepared",
@@ -274,8 +274,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 594611,
-      "sha256": "93b91bce37d779748135adbf9b248b89a484e3fb49033fe030a80e5259e4d48f"
+      "bytes": 361728,
+      "sha256": "1bea93f1ab960f2202224eeefd77c390eb425b332396a132e41b48655f1b1222"
     },
     {
       "location": "prepared",

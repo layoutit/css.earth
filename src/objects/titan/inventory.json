@@ -225,60 +225,6 @@
     },
     {
       "location": "public",
-      "filename": "titan-dataset-coverage-distance.webp",
-      "bytes": 3018,
-      "sha256": "ca54f602a8d014f75ea358c9f9d8f8730b52121dffba4b8c57e853f6808e1548"
-    },
-    {
-      "location": "public",
-      "filename": "titan-dataset-geology.webp",
-      "bytes": 658,
-      "sha256": "3778e00814ea5d17fd8a7a9d20efdf5d3061c291dc7494cfde40086a564a1a6e"
-    },
-    {
-      "location": "public",
-      "filename": "titan-dataset-interpolated.webp",
-      "bytes": 2436,
-      "sha256": "cba33358120e914db7b3066683189382b9ca72ed65364c54abc14602e12eb103"
-    },
-    {
-      "location": "public",
-      "filename": "titan-dataset-normal.webp",
-      "bytes": 730,
-      "sha256": "5e7dd9060cfddc0548de8753539a3d66604f94da30111251b7b30dac9abf41f3"
-    },
-    {
-      "location": "public",
-      "filename": "titan-dataset-radar.webp",
-      "bytes": 1176,
-      "sha256": "b64d0911409b307a8d9540f92c04b8f9b1b2effb079a4c5cd97c0c55824e6075"
-    },
-    {
-      "location": "public",
-      "filename": "titan-dataset-topography.webp",
-      "bytes": 754,
-      "sha256": "c16e0eed9666f847d878de0fdfb9baac4d973c01cc0d7e5686036b5950bcc839"
-    },
-    {
-      "location": "public",
-      "filename": "titan-dataset-vims-2um.webp",
-      "bytes": 738,
-      "sha256": "c1a91dbec8db96d9ada10c70a1d2eff26bcf6312828b54e5feeaa36c459d96e7"
-    },
-    {
-      "location": "public",
-      "filename": "titan-dataset-vims-5um.webp",
-      "bytes": 440,
-      "sha256": "39b8e03ea9c6cb1540cfd86f824a2f2765e60cc114545f316150aa0ff69eb84e"
-    },
-    {
-      "location": "public",
-      "filename": "titan-dataset-vims-color-ratio.webp",
-      "bytes": 972,
-      "sha256": "a0f123a2004ddf73f2902138d51a7d33e7f7b1f2afda249fce128f73f3658846"
-    },
-    {
-      "location": "public",
       "filename": "titan-features.json",
       "bytes": 2077925,
       "sha256": "8b6fd87fb0d9875f89ae74605c78fbd79ba45a7ef44733cb9a34fc738fad5b91"
@@ -294,6 +240,60 @@
       "filename": "titan-interpolated@2x.webp",
       "bytes": 1187066,
       "sha256": "a6b57ff7fd76d4ccff29e90b725c5710554d84177e7b704f9baaad0221dc8928"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-coverage-distance.webp",
+      "bytes": 3018,
+      "sha256": "ca54f602a8d014f75ea358c9f9d8f8730b52121dffba4b8c57e853f6808e1548"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-geology.webp",
+      "bytes": 658,
+      "sha256": "3778e00814ea5d17fd8a7a9d20efdf5d3061c291dc7494cfde40086a564a1a6e"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-interpolated.webp",
+      "bytes": 2436,
+      "sha256": "cba33358120e914db7b3066683189382b9ca72ed65364c54abc14602e12eb103"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-normal.webp",
+      "bytes": 730,
+      "sha256": "5e7dd9060cfddc0548de8753539a3d66604f94da30111251b7b30dac9abf41f3"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-radar.webp",
+      "bytes": 1176,
+      "sha256": "b64d0911409b307a8d9540f92c04b8f9b1b2effb079a4c5cd97c0c55824e6075"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-topography.webp",
+      "bytes": 754,
+      "sha256": "c16e0eed9666f847d878de0fdfb9baac4d973c01cc0d7e5686036b5950bcc839"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-vims-2um.webp",
+      "bytes": 738,
+      "sha256": "c1a91dbec8db96d9ada10c70a1d2eff26bcf6312828b54e5feeaa36c459d96e7"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-vims-5um.webp",
+      "bytes": 440,
+      "sha256": "39b8e03ea9c6cb1540cfd86f824a2f2765e60cc114545f316150aa0ff69eb84e"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-vims-color-ratio.webp",
+      "bytes": 972,
+      "sha256": "a0f123a2004ddf73f2902138d51a7d33e7f7b1f2afda249fce128f73f3658846"
     },
     {
       "location": "public",
@@ -388,14 +388,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 299,
-      "sha256": "9a8673d3aee8283e9260d8065d64b50b6512e667bbd7668296ba6798e67afd6d"
+      "bytes": 296,
+      "sha256": "f6b9eafffb9721fa7423ee19e1fb5b986180f526e639a1a4563c5da78cc96cf9"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 84825,
-      "sha256": "81a75317d54f5132c598f221a6038162252ddf5db23ba1e00e6707cd033d870f"
+      "bytes": 84798,
+      "sha256": "b6cff69e2a5374c31d095fc3e9fa91e883e24456fbe6f0530e29dbc568db8df8"
     },
     {
       "location": "prepared",
@@ -407,25 +407,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2844,
-      "sha256": "4d76c142a14a7217f3502d2b6acfc750186ae50e2324577fb7cecf0fed008a8f"
+      "sha256": "8233b3543b39db14572d036568fad3e1c8cf043eab0a658e75cbeb158b7f408f"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 6231,
-      "sha256": "0ed8e5b13371d17535e88ca1800cfda9b0309596c4f99e6c8462510a7270fab9"
-    },
-    {
-      "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 9303,
-      "sha256": "8e3cfe0db5bc807f91e07ae6492b2b1c005f6fb8a009564e9f9b2b4d3bc0c8d6"
+      "bytes": 6193,
+      "sha256": "8d04bf767c98c07be09cce1aab921880054a8e71773210551558bbe722a14a36"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 723,
       "sha256": "0a770d142e5f0760d9478a4128644b8225de6777ce8aeef4a388cd14c94d93e4"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 9265,
+      "sha256": "fa055a6a0c6f45dd901f15c8d258caa51bdb432754df3f9bba6cdffbae001c88"
     },
     {
       "location": "prepared",
@@ -496,8 +496,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 594001,
-      "sha256": "f1f464d1926d0174b523c8b3c39dcca049e43d30238693485ac865dbfa9580c0"
+      "bytes": 353252,
+      "sha256": "31e206ff363ffe5616877ca83a054f2f8a5abe047c2cd2d67891e930e6aa2461"
     },
     {
       "location": "prepared",

@@ -42,18 +42,27 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
     const point = byId.get(id);
     return point && 'orbit' in point ? point.orbit?.centerBodyId : plan.orbitCenters?.[id]?.centerBodyId;
   };
+  // Every chain is walked once: a body's root is its parent's, remembered as the walk returns.
+  const maximumSteps = points.length + Object.keys(plan.orbitCenters ?? {}).length;
+  const rootsById = new Map<string, string>();
   const rootOf = (id: string) => {
-    for (let current = id, steps = 0; steps <= points.length + Object.keys(plan.orbitCenters ?? {}).length; steps++) {
+    const chain: string[] = [];
+    let current = id, root = rootsById.get(current);
+    for (let steps = 0; root === undefined; steps++) {
+      if (steps > maximumSteps) throw new TypeError(`${id} has a cyclic orbit chain.`);
+      chain.push(current);
       const parent = parentOf(current);
-      if (parent === undefined) return current;
-      current = parent;
+      if (parent === undefined) root = current;
+      else { current = parent; root = rootsById.get(current); }
     }
-    throw new TypeError(`${id} has a cyclic orbit chain.`);
+    for (const link of chain) rootsById.set(link, root);
+    return root;
   };
   const rootIds = points.map(point => rootOf(point.id));
   const roots = [...new Set([plan.focus.id, ...rootIds.filter((id, index) => id !== points[index]!.id)])], rootSet = new Set(roots);
   const positions = roots.map(id => byId.get(id)!.positionM);
-  const rootIndex = rootIds.map(id => roots.indexOf(id));
+  const rootIndexById = new Map(roots.map((id, index) => [id, index]));
+  const rootIndex = rootIds.map(id => rootIndexById.get(id) ?? -1);
   const values = new Float64Array(roots.length);
   // Every system fades over the plan's distances, or its host's authored orbit range (systemFadeDistances).
   const ranges = roots.map(id => { const point = byId.get(id); return point && 'orbitsWithinM' in point ? point.orbitsWithinM : undefined; });

@@ -9,55 +9,55 @@
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-dataset-azimuthal-field-2013.webp",
+      "filename": "v1358-orionis-lens-azimuthal-field-2013.webp",
       "bytes": 348,
       "sha256": "44cfc165a3dc420b17abd030c433c311557f5c56c2d1f97cb059bd35ff7da9e9"
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-dataset-azimuthal-field-2017.webp",
+      "filename": "v1358-orionis-lens-azimuthal-field-2017.webp",
       "bytes": 344,
       "sha256": "45adff6cd7f491542c9e8ab9b24b6e22d8991675f10f3d39a26004fd6bc7e22b"
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-dataset-brightness-2013.webp",
+      "filename": "v1358-orionis-lens-brightness-2013.webp",
       "bytes": 462,
       "sha256": "a3e26b1b0b1a8731a37f6f7d9fb556f45d91e7d814ead5063b322af1acecc7cf"
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-dataset-brightness-2017.webp",
+      "filename": "v1358-orionis-lens-brightness-2017.webp",
       "bytes": 412,
       "sha256": "96ea11d963d9281ccb387aec8afe4c192b16c9ac272d9db552fde5fdb1e43b3e"
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-dataset-color.webp",
+      "filename": "v1358-orionis-lens-color.webp",
       "bytes": 44,
       "sha256": "257ea6a221b4cf47966a81c297bf7bd2a1d25a86ed71bc20ebbe19fdd8c891cc"
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-dataset-meridional-field-2013.webp",
+      "filename": "v1358-orionis-lens-meridional-field-2013.webp",
       "bytes": 288,
       "sha256": "82f130b0d1506b25c7e21dd8a0f9a2d64d98060e86b008fcda307714482fe935"
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-dataset-meridional-field-2017.webp",
+      "filename": "v1358-orionis-lens-meridional-field-2017.webp",
       "bytes": 236,
       "sha256": "b7c3c9916fb7c2672f9386f7755b0830f5993ec377f59318cc98d904464701ea"
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-dataset-radial-field-2013.webp",
+      "filename": "v1358-orionis-lens-radial-field-2013.webp",
       "bytes": 374,
       "sha256": "999a7e0974447cf462fd5d256cbfcadd6609171f692b494e1d0ccc00dd5111c1"
     },
     {
       "location": "public",
-      "filename": "v1358-orionis-dataset-radial-field-2017.webp",
+      "filename": "v1358-orionis-lens-radial-field-2017.webp",
       "bytes": 302,
       "sha256": "17864bd160736a722b105fd2a1d26342188dc37f2d11f0760070ca0f68210741"
     },
@@ -178,14 +178,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 378,
-      "sha256": "b1fd63b3efdfbf34607c4c8e8772ec07b50321d1439222598386bfb923046831"
+      "bytes": 375,
+      "sha256": "d1a1ce2c6f97578dac38fd9411e34709aacf9e721fb06111a87fd37c84f115f4"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 5331,
-      "sha256": "53aebee3f2d7c3ac25bd6cc5c3bbba720cdce4070bfa8bf658c0fdb38fdeb77e"
+      "bytes": 5304,
+      "sha256": "3818b42c1f35acce6bb5c2edb1432421f86468df48593856fef9c561c0630217"
     },
     {
       "location": "prepared",
@@ -197,19 +197,19 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 1497,
-      "sha256": "a7460abeca9a5f097ae8610f08be364f33653827de3f6b38ee440d63d80731a2"
+      "sha256": "e06a28fc74c4c232fe6997e628c8f88bc3dfd979766ee302abd4482e9301db0e"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 13646,
-      "sha256": "040b769ebe8172661c61348d8c139053db962e30e96f4edd0bff181b4a1860fb"
+      "bytes": 13608,
+      "sha256": "667c977e7ce18bea531e55e4f8ac9df0a134d7efbf122606ee4e81851429d4c2"
     },
     {
       "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 19219,
-      "sha256": "232c49e84cc43a9f6de030d3bb29b65673f664ada5a954ec3348a23edbf36a99"
+      "filename": "lenses.json",
+      "bytes": 19181,
+      "sha256": "d7c39fad52067e7ffbb320b8ff65180d39dfb77a9d4ae6d334589eda090901db"
     },
     {
       "location": "prepared",
@@ -274,14 +274,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 528593,
-      "sha256": "84d481fa471f80a5dc92653cf25c8c8093001a01ff71cf01e461e1807d8bddb9"
+      "bytes": 295635,
+      "sha256": "2cb9e5df2bec3f3d7d381e68d628a527e3e5bda84ed5634595b0bbfc3e47aac6"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 395621,
-      "sha256": "b4f6eed6a7b26db9c1304ddff06c198a592ce51c1e8a9bc9d3e692f2825edf86"
+      "bytes": 395618,
+      "sha256": "7097b61cd6eab59e1b7bcc2be206ab7a799d473cfc636b847f385f01e3aa73a4"
     },
     {
       "location": "prepared",

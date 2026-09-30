@@ -44,9 +44,9 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   // Off-limb context (stationary observed plate behind the sphere) and limb plate (rim over the leaves):
   // two silhouette-fitted roots, the retired static layout with scale 1 (projected camera).
   const corona = b.element('div', `${ns}-corona-layer object-render-root`, '', { 'aria-hidden': 'true' });
-  corona.style.setProperty(`--${ns}-camera-zoom`, '1'); corona.style.scale = '1';
+  corona.style.scale = '1';
   const limb = b.element('div', `${ns}-limb-layer object-render-root`, '', { 'aria-hidden': 'true' });
-  limb.style.setProperty(`--${ns}-camera-zoom`, '1'); limb.style.scale = '1';
+  limb.style.scale = '1';
   b.append(null, corona, limb);
   // A pulsating star dims under a black veil on the limb plate, the body's own silhouette at the plate's logical size:
   // it covers the sphere and the rim without letting the sky behind show through, and animates opacity only.

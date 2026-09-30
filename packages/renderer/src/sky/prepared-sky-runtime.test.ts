@@ -249,9 +249,11 @@ test.each([
   const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
   const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, stellarRoot = root.children.find(node => node.className === 'stellar-direct-points')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
   const volumeImage = volumeRoot.children.find(node => node.className === 'prepared-volume-image')!;
-  expect(volumeRoot.style.background).toBe('#000');
-  expect(volumeRoot.style.transformStyle).toBe('flat');
-  expect(volumeImage.style.transformStyle).toBe('flat');
+  // The opaque backdrop and its image layer fill the root by stylesheet (volume.css): only the host's display is inline,
+  // and neither declares the transform style they have by default (flat).
+  expect(volumeRoot.style).toEqual({ display: 'none' });
+  expect(readFileSync(new URL('../styles/volume.css', import.meta.url), 'utf8')).toContain('.prepared-volume-context { background: #000; }');
+  expect(volumeImage.style.transformStyle).toBeUndefined();
   // The galaxy is its bulge slices, mounted directly: it has no impostor views to hand off to.
   expect(volumeImage.children.some(node => node.className === 'css-volume-impostors')).toBe(false);
   const projections = volumeImage.children.filter(node => node.className === 'css-volume-projection');

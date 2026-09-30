@@ -184,8 +184,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 300,
-      "sha256": "9a2b7ab901a360c466c4fb7ea857fdbf7f1a7f00446f2f3df9e22b6b296c78ce"
+      "bytes": 297,
+      "sha256": "db451c83991fee5221cc1fd253aa85c70ad38acfe2db11fcc8e5863f4f534dec"
     },
     {
       "location": "prepared",
@@ -197,19 +197,13 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2121,
-      "sha256": "36260eab12183d82e2d764504e6369a6d88eca1e6a248fc5ad1196dc3082e5cb"
+      "sha256": "540b9a19467031dc45d2608a2724469fac3c864453c109f2e3809a48c3fe25ea"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 2027,
-      "sha256": "a1e0e5ddcedcf5977fa7934ffe2bc64057d326003f49e659b9ada3f49fbdcc06"
-    },
-    {
-      "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 3857,
-      "sha256": "e8a062506a8ae120b38811609090d7f4c8c35750664d0aaefe4c692cdc712ce4"
+      "bytes": 2016,
+      "sha256": "cafd447052584848c17b0e6d6d2eaac9bc13da3766dc1ffc19924513154b7370"
     },
     {
       "location": "prepared",
@@ -222,6 +216,12 @@
       "filename": "image-quality.json",
       "bytes": 1359,
       "sha256": "ab8bc39863ad159de2d3bb346fcafaf5e7590f6e3494888ce935ec2049ed01ac"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 3846,
+      "sha256": "1c9cd9080cbc485f1627dd8eeb02aa4a1cca41842e0651f09a4e96821d5eacf1"
     },
     {
       "location": "prepared",
@@ -268,8 +268,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1235808,
-      "sha256": "ded698c60e1cec73da2f13187f54793521404f4af9bc247d5cfef42c6b5c7c21"
+      "bytes": 989280,
+      "sha256": "cf6b57b21456156fba68eec43b46612158860f83968cbd1bf52820ae359f0490"
     },
     {
       "location": "prepared",

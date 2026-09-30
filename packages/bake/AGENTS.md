@@ -102,7 +102,7 @@ its validators accept); the renderer never imports the bake.
 - `src/astronomy/` is published as `@cssearth/bake/astronomy` (Node only): preparation's access to the built astronomy
   package (`loadAstronomyPackage`), which finds the build through this package's own name so the path holds from `dist/`.
   It imports no topic. `packages/bake/cli/prepare-solar-geometry.mts` generates `src/platform/solar-geometry.mts` from it;
-  its test is `tests/preparation/solar-geometry.test.mts`.
+  its test is `src/platform/solar-geometry.test.mts`.
 - `src/navigation/` is published as `@cssearth/bake/navigation` (Node only): the prepared focus objects and scene distances
   the catalogue and search destinations are built from, and the marker recipes whose source bytes are checked and drawn
   into navigation marker sprites, and the navigation preparation (`prepare-navigation.ts`, with the Sun, black-hole,
@@ -119,12 +119,8 @@ its validators accept); the renderer never imports the bake.
   them to the artwork refresh. It imports no topic; it depends on `three` and `esbuild`. Its test is `src/facility-renders/`.
 - `src/site-assets/` is published as `@cssearth/bake/site-assets` (Node only): the application's prepared assets that are
   not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the planets'
-  photometric phase charts, and the Cesium minimap excerpts vendored into `site/vendor/` (it depends on `@cesium/engine`
-  for them and checks the pinned version when the excerpts are made). It imports `raster`, `runtime-source`,
-  `objects/raster` and `objects/charts`. Its commands are `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,
-  scientific-charts,cesium-minimap}.mts`; its tests are in `src/site-assets/` and `site/test/`. The vendored files keep
-  the generator path they were written with (`tools/prepare/prepare-cesium-minimap.mts`, now `packages/bake/cli/prepare-cesium-minimap.mts`), which the ownership inventory
-  anchors on.
+  photometric phase charts. It imports `raster`, `runtime-source`, `objects/raster` and `objects/charts`. Its commands are
+  `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,scientific-charts}.mts`; its tests are in `src/site-assets/` and `site/test/`.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
   minimap or preview raster is drawn from, read and checked; the sidebar minimaps and preview rasters themselves, with the
   coverage direction of each dataset's map, which the world-navigation stage turns a partial dataset toward. It imports the topics
@@ -234,7 +230,7 @@ its validators accept); the renderer never imports the bake.
     Akatsuki UVI Level 3b grid), with the solar geometry the host passes in. It imports `raster`, `objects/color`,
     `objects/geometry`, `objects/raster`, `objects/scene`, `objects/sources`, `objects/stellar` and the observation,
     shape-model and terrestrial layers. It is a topic of its own, outside `objects/layers/observation`, whose code the nebula
-    lab's compiler identity reaches. Its moved tests are in `src/objects/interpretation/`; deferred suites remain in `tests/objects/interpretation/`.
+    lab's compiler identity reaches. Its moved tests are in `src/objects/interpretation/`; the solar-geometry adapter suites are in `../../src/platform/{equirectangular-illustration,interpret-source-verification}.test.mts`.
   - `objects/host-adapters`: what the authored preparation passes the scene and presentation compilers
     (`loadGeometryAdapters`, `presentationHostAdapters`), each bound to the solar geometry the host passes in. It imports
     `presentation`, `scene`, `objects/scene` and `objects/layers/terrestrial`.

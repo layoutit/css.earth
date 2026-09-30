@@ -212,7 +212,7 @@ spectrum keeps the star field's temperature fit at a cited effective temperature
 ([star-catalogue-color.ts](../packages/bake/src/objects/color/star-catalogue-color.ts)).
 
 **Cross-checks.** A colour record may name a second spectrum from a different instrument. Preparation records its colour
-beside the dataset colour, and [object-package-consistency.test.mts](../tests/contract/object-package-consistency.test.mts) fails when
+beside the dataset colour, and [object-package-consistency.test.mts](../src/objects/object-package-consistency.test.mts) fails when
 the two differ by more than 12 levels in any channel unless the record states the disagreement.
 
 **Limb darkening**, in this order of preference:

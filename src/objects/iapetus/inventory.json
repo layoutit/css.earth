@@ -9,36 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "iapetus-dataset-enhanced.webp",
-      "bytes": 628,
-      "sha256": "b216f182830303e7c335bb92eb0c2f71ba37e2727a9363e3c460e181c3f7b48a"
-    },
-    {
-      "location": "public",
-      "filename": "iapetus-dataset-ice-absorption.webp",
-      "bytes": 1334,
-      "sha256": "b0d8b66f07eef46f87af128de933eb97061f55cb3f21bee42aa8e8b38e15ce74"
-    },
-    {
-      "location": "public",
-      "filename": "iapetus-dataset-infrared.webp",
-      "bytes": 496,
-      "sha256": "098e87344ebc341203b7ea0fd10b1d380d9af76e2995428d1d1e9e930304148b"
-    },
-    {
-      "location": "public",
-      "filename": "iapetus-dataset-normal.webp",
-      "bytes": 956,
-      "sha256": "19f2744dca7bd9b430f699d84a134f232e5a2d2c947c2fafd1b22299b9448044"
-    },
-    {
-      "location": "public",
-      "filename": "iapetus-dataset-temperature.webp",
-      "bytes": 314,
-      "sha256": "7116a025a90e53b21f4d1267d4a6ee4c647505c661ddb2b5c87320d6ab736eab"
-    },
-    {
-      "location": "public",
       "filename": "iapetus-enhanced@2x.webp",
       "bytes": 3059264,
       "sha256": "431a96291a8a5d2e563248327868e436d639e377e05e1111c3f2d63720f1289e"
@@ -60,6 +30,36 @@
       "filename": "iapetus-infrared@2x.webp",
       "bytes": 256236,
       "sha256": "baefa2a55abfafb943dabfa660f4eae3b787d072e45b6967f41504b98b2d9dd6"
+    },
+    {
+      "location": "public",
+      "filename": "iapetus-lens-enhanced.webp",
+      "bytes": 628,
+      "sha256": "b216f182830303e7c335bb92eb0c2f71ba37e2727a9363e3c460e181c3f7b48a"
+    },
+    {
+      "location": "public",
+      "filename": "iapetus-lens-ice-absorption.webp",
+      "bytes": 1334,
+      "sha256": "b0d8b66f07eef46f87af128de933eb97061f55cb3f21bee42aa8e8b38e15ce74"
+    },
+    {
+      "location": "public",
+      "filename": "iapetus-lens-infrared.webp",
+      "bytes": 496,
+      "sha256": "098e87344ebc341203b7ea0fd10b1d380d9af76e2995428d1d1e9e930304148b"
+    },
+    {
+      "location": "public",
+      "filename": "iapetus-lens-normal.webp",
+      "bytes": 956,
+      "sha256": "19f2744dca7bd9b430f699d84a134f232e5a2d2c947c2fafd1b22299b9448044"
+    },
+    {
+      "location": "public",
+      "filename": "iapetus-lens-temperature.webp",
+      "bytes": 314,
+      "sha256": "7116a025a90e53b21f4d1267d4a6ee4c647505c661ddb2b5c87320d6ab736eab"
     },
     {
       "location": "public",
@@ -316,14 +316,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 304,
-      "sha256": "954ab1cc0024406820acde8f6d2ad9719c4badad3bec8013f7abbd63b7147baf"
+      "bytes": 301,
+      "sha256": "e38f4b1c5848eb76ab16912eb3c08e94f8f37ce7f12f005a8d255230688f6b2a"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 84827,
-      "sha256": "2f162fc131836e2318177247e5b4cda88d395e0156fda9c1255993da31c22e21"
+      "bytes": 84812,
+      "sha256": "ac5fe3b9712d0f518ae667fb681dc663308776579e432c3d7856fc16d52aa3a2"
     },
     {
       "location": "prepared",
@@ -335,25 +335,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2824,
-      "sha256": "536f0d20035b2bd7a7299e9c5d5556517b8ad12a864917efe3e5e81fc76ccd59"
+      "sha256": "64a6523912952bd7d00ed506942b6dd84d32052069d85f4fe687edb0c9f2ad49"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3501,
-      "sha256": "55080ab136ccc1b89b5c64cc551a08af4e1d96ea9b23b62336c2d98799101865"
-    },
-    {
-      "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 5311,
-      "sha256": "bcb8e52df126d997f82457e3c4d893c643f500791f4aac6ff0fb15fbb04de4f8"
+      "bytes": 3475,
+      "sha256": "64b0db50d05d567619d384eb747c77a5ddf9a983995e77c67bc6b6427f8178cb"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 595,
       "sha256": "a46f0150d76fc4c60c6ed8cdd89a14545e6a9cb6f33ec62eb684d149d152e569"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 5285,
+      "sha256": "22496508544b481039f945ac44fc01165ab893f6e785fb5aafefad663d357076"
     },
     {
       "location": "prepared",
@@ -400,8 +400,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 583264,
-      "sha256": "bab95a4e81ac4f3f8112c23c8dd1bc538a7e7d83a81f51215c28cd83b61e5980"
+      "bytes": 342575,
+      "sha256": "7cb642259aa75415d62d8c34fe64bafc62dc53b17e1dd7e945554f9b4c893591"
     },
     {
       "location": "prepared",

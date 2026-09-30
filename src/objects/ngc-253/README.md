@@ -54,7 +54,7 @@ centre are bulge members. Colours are the Milky Way's and M31's for each kind; e
 - Dots from the photograph: the default view (left) and tilted (right), in the app with each dot's tone and colour taken from the photograph. Captured on this branch on 2026-09-29.
 - The prepared bank's `approximation.limitations` records the foreground, colour-tie and saturation counts quoted above.
 - Bytes: 166 layer images, 1.63 MB.
-- Tests: `tests/image-layers/bulge.test.mts` pins the bulge model and its fade (`extentKpc.fadeFrom`), on M81's fit.
+- Tests: `packages/bake/src/image-layers/bulge.test.mts` pins the bulge model and its fade (`extentKpc.fadeFrom`), on M81's fit.
 
 ## Known problems
 

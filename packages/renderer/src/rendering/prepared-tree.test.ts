@@ -27,6 +27,19 @@ test('a baked custom or plain property url is rewritten against the asset origin
   expect(style.backgroundImage).toBe(`url(https://earth-assets.lowpoly.cc/runtime-assets/${sha}/neptune-rings-wedges@2x.webp)`);
 });
 
+test('a tree resolves its urls once per asset origin, and another origin or none reads its own', () => {
+  const f = propertyFixture();
+  const assets = { 'earth-surface-page-0-level-512.webp': sha, 'neptune-rings-wedges@2x.webp': sha };
+  const first = { origin: 'https://earth-assets.lowpoly.cc', assets }, second = { origin: 'https://other.example', assets };
+  const image = (origin?: typeof first) => (buildPreparedTree(f.tree, f.document, () => {}, undefined, origin).nodes[0].style as unknown as { backgroundImage: string }).backgroundImage;
+  expect(image(first)).toBe(`url(https://earth-assets.lowpoly.cc/runtime-assets/${sha}/neptune-rings-wedges@2x.webp)`);
+  expect(image(second)).toBe(`url(https://other.example/runtime-assets/${sha}/neptune-rings-wedges@2x.webp)`);
+  expect(image(first), 'a remount reads the same resolved value').toBe(`url(https://earth-assets.lowpoly.cc/runtime-assets/${sha}/neptune-rings-wedges@2x.webp)`);
+  expect(image()).toBe('url(/scenes/neptune/neptune-rings-wedges@2x.webp)');
+  expect(() => buildPreparedTree(f.tree, f.document, () => {}, undefined, { origin: 'https://earth-assets.lowpoly.cc', assets: {} }))
+    .toThrow(/No published asset hash/);
+});
+
 test('a baked property url is left unresolved without an asset origin', () => {
   const f = propertyFixture();
   const { nodes } = buildPreparedTree(f.tree, f.document, () => {});

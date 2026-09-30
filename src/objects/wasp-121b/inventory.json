@@ -9,13 +9,13 @@
     },
     {
       "location": "public",
-      "filename": "wasp-121b-dataset-temperature-nrs1.webp",
+      "filename": "wasp-121b-lens-temperature-nrs1.webp",
       "bytes": 210,
       "sha256": "71ad808d861646703ec252cdca2595f0c59503864f113082c58732bdc5f0081d"
     },
     {
       "location": "public",
-      "filename": "wasp-121b-dataset-temperature-nrs2.webp",
+      "filename": "wasp-121b-lens-temperature-nrs2.webp",
       "bytes": 208,
       "sha256": "977a213ce71217988564e2772dbd7945918d43eabf4ef4752dbe678b86da749b"
     },
@@ -46,14 +46,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 320,
-      "sha256": "4e51d60ca7599fd6140f9154780990b47be0280fc3bec4f86ac1a5f7ce20b1b8"
+      "bytes": 317,
+      "sha256": "a713983adabcbbd079237e93fa4006142610731582da53919cf9110f6379e630"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1627,
-      "sha256": "31071a0748ca9c5e3776e954a3bcdca27f7c4deb56b7a0b40f546757c6e90b51"
+      "bytes": 1621,
+      "sha256": "4af878c2a606e0d337e07d2bf6b371f1fc723797b3365712528cdd589c107d5e"
     },
     {
       "location": "prepared",
@@ -65,19 +65,19 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 1497,
-      "sha256": "823be71905bf76013299328bda826e90c6c27ad60788ef0fe6878413b47cb762"
+      "sha256": "4a7063fb91901ecb7b010b959e4a2355d2eff13ba3d98a1964cb82db1f72dcdb"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3348,
-      "sha256": "fa9a3b1b6a4075d6497823b6112030d520dbb6ec9cb45095cad249b6116702cf"
+      "bytes": 3331,
+      "sha256": "496c499a130e631f64257b6b0116165b4553ac782c1dac3a4c053c8687950155"
     },
     {
       "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 4372,
-      "sha256": "9e2bf064097a0afb7ac744b41a0f271652af6c294c3bd13d4107cfbe1cd6efcf"
+      "filename": "lenses.json",
+      "bytes": 4355,
+      "sha256": "1cbdd4afa9fdf7176f31406211b9d2b536155a3b194fcc6b86d17a615aa6288a"
     },
     {
       "location": "prepared",
@@ -100,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 508343,
-      "sha256": "cbc06379dc151fb43c6f4d80e317f1071942ee6887e5d24ad1c0aeccbc11653f"
+      "bytes": 275448,
+      "sha256": "ea06adf1f5233e86fc55dd4e917c4f7ad64a0b71aef720ec99f5b6f35b806e55"
     },
     {
       "location": "prepared",

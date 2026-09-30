@@ -108,9 +108,9 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         resolveResource: (path: string) => set.resolve(`prepared/${path}`),
         cataloguePointUrls: (IMAGE_LAYER_CATALOGUE_POINTS[id] ?? []).map(bank => set.resolve(`prepared/${bank}.json`)) };
     });
-    const plainDots = new Set(plainDotIds);
+    const plainDots = new Set(plainDotIds), asteroids = new Set(asteroidIds);
     const sprites = preparedBodyBillboards([applicationContext.focus, ...applicationContext.bodies], plainDots,
-      id => asteroidIds.includes(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
+      id => asteroids.has(id) ? ASTEROID_MINIMUM_PIXELS : 2.4);
     // Bank declarations do not fetch payloads. Deduplicate pending loads only; the
     // mounted layer owns residency and can release banks after they leave view.
     const volumeDatasetDescriptors = parsedDescriptors

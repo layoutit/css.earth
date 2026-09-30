@@ -161,22 +161,22 @@ jobs:
         # location rather than by what it imports; a test whose toolchain or restored input is absent skips and names it.
         run: pnpm test:telescope-cli
       - name: Check independent body additions
-        run: node --test tests/contract/body-additions.test.mts
+        run: node --test site/test/body-additions.test.mts
       - name: Test the object generator and every lit body's presentation
         # new-object's decisions offline (ids, duplicates, refresh, colour, orbits) and the static check that every lit body's
         # lighting frame is sized to its sphere and every shape planet takes its star's light. About two seconds; the heavy
         # preparation lane also runs them, but only when preparation paths change.
-        run: node --test packages/telescope-cli/src/new-object/new-object.test.mts tests/objects/unit/lighting-frame.test.mts
+        run: node --test packages/telescope-cli/src/new-object/new-object.test.mts site/test/lighting-frame.test.mts
       - name: Test asset inventory, publish verification, closure and local CI tooling
         # Self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no network, no
         # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
         # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the deploy allow-missing
-        # path (tests/asset-publication/setup-assets.test.mts — the only place it ran before was the non-CI test:platform), the prune
+        # path (site/test/setup-assets.test.mts — the only place it ran before was the non-CI test:platform), the prune
         # dry-run report, the runner behind `pnpm check:pr`, and the test helper that decides which absent inputs skip (untracked
         # downloads and files this sparse checkout leaves out). Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: |
-          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" ".github/scripts/architecture/*.test.mts" "tests/asset-publication/*.test.mts" "packages/bake/src/asset-publication/*.test.mts" \
+          node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" ".github/scripts/architecture/*.test.mts" site/test/restore-inputs.test.mts site/test/setup-assets.test.mts "packages/bake/src/asset-publication/*.test.mts" \
             packages/bake/src/delivery/publish-verification.test.mts packages/bake/src/delivery/source-acquisition.test.mts packages/bake/src/delivery/asset-origin-scenes.test.mts packages/bake/src/preparation/stale-builds.test.mts \
             packages/objects/src/node/runtime-asset-closure.test.mts \
             packages/bake/authoring/juno/jiram-mosaic.test.mts site/test/recovery-commands.test.mts

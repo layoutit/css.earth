@@ -219,30 +219,6 @@
     },
     {
       "location": "public",
-      "filename": "triton-dataset-enhanced.webp",
-      "bytes": 492,
-      "sha256": "0d6c2360546b5445d88488de79f100ed7eb387fe99bb2c2851e6d7445c670c63"
-    },
-    {
-      "location": "public",
-      "filename": "triton-dataset-normal.webp",
-      "bytes": 114,
-      "sha256": "3bb0bcd6cc22dd0b057fa60a92110beec34ca3a39c3585d9ebaf08205bedb28f"
-    },
-    {
-      "location": "public",
-      "filename": "triton-dataset-ultraviolet.webp",
-      "bytes": 526,
-      "sha256": "e492143afc1e66e5a37aacf0feb7d333911a62cc3134ea64070046eee1a00b7f"
-    },
-    {
-      "location": "public",
-      "filename": "triton-dataset-voyager-color.webp",
-      "bytes": 308,
-      "sha256": "db4d1fd1804b0c7d886c9be37974b3eb46c6dbab4172a80d0eedc43ccf667054"
-    },
-    {
-      "location": "public",
       "filename": "triton-enhanced-page-0-level-1820.webp",
       "bytes": 1320,
       "sha256": "3d6b81b86ae06422890cf799403c394ee6260fa039a73f5924f8d98887b900b1"
@@ -636,6 +612,30 @@
       "filename": "triton-features.json",
       "bytes": 46985,
       "sha256": "b145dab3326d8d573eee7c71721a08017634d4e5c133c8059aa6b94083c1b0d6"
+    },
+    {
+      "location": "public",
+      "filename": "triton-lens-enhanced.webp",
+      "bytes": 492,
+      "sha256": "0d6c2360546b5445d88488de79f100ed7eb387fe99bb2c2851e6d7445c670c63"
+    },
+    {
+      "location": "public",
+      "filename": "triton-lens-normal.webp",
+      "bytes": 114,
+      "sha256": "3bb0bcd6cc22dd0b057fa60a92110beec34ca3a39c3585d9ebaf08205bedb28f"
+    },
+    {
+      "location": "public",
+      "filename": "triton-lens-ultraviolet.webp",
+      "bytes": 526,
+      "sha256": "e492143afc1e66e5a37aacf0feb7d333911a62cc3134ea64070046eee1a00b7f"
+    },
+    {
+      "location": "public",
+      "filename": "triton-lens-voyager-color.webp",
+      "bytes": 308,
+      "sha256": "db4d1fd1804b0c7d886c9be37974b3eb46c6dbab4172a80d0eedc43ccf667054"
     },
     {
       "location": "public",
@@ -1834,14 +1834,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 376,
-      "sha256": "6dc6d5f45deb10d9a372ef480397acbbdb14aecf8e1bb2d42ffb7188339e0e50"
+      "bytes": 373,
+      "sha256": "d900d93a9bb34a08fba6cd56353bc7ea12c501986878b64c829df0ae6a1b2c53"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 89218,
-      "sha256": "e86b22ed4265bd1ca5705ae035afa18c47d01bd17b1d3069dd4b857ef7298d57"
+      "bytes": 89206,
+      "sha256": "02bc4fcd86015f3c5d07d70b002c772527be700428c0ccd43e06d36c5b9b8b50"
     },
     {
       "location": "prepared",
@@ -1853,25 +1853,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2938,
-      "sha256": "54df38b33bf33828e3170b7d8743064e5fd958d04b616e8ec0b0e7719602f920"
+      "sha256": "951a4fa9743bc23f664a24303fa9fcd707c676a76ac63c3a0e3e7f72dfdd7a28"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 768,
-      "sha256": "3021fa2078f86e4301b2721b05eef6c037bdf80ff721606c004893a6d9652f08"
-    },
-    {
-      "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 2225,
-      "sha256": "4222de0720b7706b56e62e934639d418e8abf20051650eb5f7975db2a951f8ae"
+      "bytes": 745,
+      "sha256": "b9677a2def8f2030dfdef6f1e7c7622c3a0f6885a570b97a3acbd834edaf4871"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 668,
       "sha256": "f7b3bcd745c3d9575d9575e6381bf8371826d4aa82e10dcba5473ae022b44a8e"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 2202,
+      "sha256": "093fa8f9b673a2b32a0e84e2ce6c3e88ee3bf7a379a79ad0123ba3d226ae92c9"
     },
     {
       "location": "prepared",
@@ -1912,8 +1912,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 593945,
-      "sha256": "785af36a7d9e198d1125caf10e22ac07a7a4781f5ba8f4dec872d8b12d721f63"
+      "bytes": 409268,
+      "sha256": "96c9d33c11ccc61a20f461ca56cd60a2baf37421fbb26d099f61f2d051352e5e"
     },
     {
       "location": "prepared",

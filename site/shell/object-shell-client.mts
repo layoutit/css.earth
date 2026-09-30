@@ -13,7 +13,6 @@ import { errorMessage, requiredElement } from '../browser/browser-types.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
 import { createSceneLifetime } from "@cssearth/engine";
-import { createSurfaceMinimap } from "../minimap/surface-minimap.mts";
 import { createViewReadout } from "../view-readout.mts";
 import { createSurfaceMapReader } from "../minimap/surface-map-context.mts";
 import { mountDiagnosticRecorder } from '../diagnostic-recorder.mts';
@@ -46,7 +45,6 @@ export function mountObjectShell({
   let settingsController: ReturnType<typeof createSettingsController>;
   let objectBrowser: ReturnType<typeof createObjectBrowserController>;
   let contentLifetime: SceneLifetime | null = null;
-  let minimapController: ReturnType<typeof createSurfaceMinimap>;
   let viewReadout: ReturnType<typeof createViewReadout>;
   let boundCardMaps: HTMLElement[] = [];
   let surfaceReader: ReturnType<typeof createSurfaceMapReader>;
@@ -162,8 +160,6 @@ export function mountObjectShell({
       () => `${objectId}:${selectionKey(objectBrowser.readSubject())}`));
     settingsController = own(createSettingsController(documentTarget, windowTarget, preferences, lifetime));
     surfaceReader = own(createSurfaceMapReader({ documentTarget, windowTarget }));
-    minimapController = own(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
-      onInteraction() { preferences.set('motionEnabled', false); } }));
     viewReadout = own(createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => navigationTransition?.dispose());
@@ -190,7 +186,7 @@ export function mountObjectShell({
     setCamera(provider: ShellCamera | null) {
       if (!lifetime.disposed) {
         unsubscribeCamera?.(); camera = provider;
-        minimapController.setCamera(provider); viewReadout.setCamera(provider);
+        viewReadout.setCamera(provider);
         unsubscribeCamera = provider?.navigation?.subscribe(world => updateBodyCard(world)) ?? null;
         updateBodyCard();
       }
@@ -198,7 +194,6 @@ export function mountObjectShell({
     setPlaybackState(state: PlaybackState) {
       if (!lifetime.disposed) {
         settingsController.setPlaybackState(state);
-        minimapController.setPlaybackState(state);
         viewReadout.setPlaybackState(state);
       }
     },
@@ -289,7 +284,6 @@ export function mountObjectShell({
     if (next.length === boundCardMaps.length && next.every((map, index) => map === boundCardMaps[index])) return;
     boundCardMaps = next;
     surfaceReader.reset();
-    minimapController.bindObject();
     viewReadout.bindObject();
   }
   function disposeContent() {

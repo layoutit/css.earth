@@ -57,8 +57,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(600px * var(--kepler-7-camera-zoom, 1))
-    calc(600px * var(--kepler-7-camera-zoom, 1));
+    600px
+    600px;
 }
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
@@ -67,8 +67,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--kepler-7-camera-zoom, 1))
-    calc(496px * var(--kepler-7-camera-zoom, 1));
+    496px
+    496px;
 }
 
 .object-stage[data-object-id="kepler-7"] .polycss-camera {

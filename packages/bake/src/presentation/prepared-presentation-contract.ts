@@ -439,7 +439,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     if (variants.filter(variant => Object.entries(variant.when).every(([key, value]) => state[key] === value)).length !== 1) fail(`selection table must cover ${JSON.stringify(state)} exactly once`);
   }
   for (const binding of array(plan.viewBindings, "view bindings")) {
-    record(binding, "view binding", ["kind", "target", "property", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels", "placements", "groups", "groupSizes", "sceneFromBody", "radii", "inset", "slices"]);
+    record(binding, "view binding", ["kind", "target", "property", "systemTransform", "source", "precision", "minimumRadius", "unitScale", "hysteresis", "levels", "placements", "groups", "groupSizes", "initial", "boxes", "sceneFromBody", "radii", "inset", "slices"]);
     choice(binding.kind, new Set(["counter-rotation", "view-attribute", "view-property", "silhouette-fit", "silhouette-step-property", "interior-disc"]), "view binding");
     // The stage itself may carry a published level-of-detail attribute or
     // property; every other binding names a retained node.
@@ -481,6 +481,13 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
           const [area, density] = array(size as readonly number[], `leaf box group size ${name}`);
           if (!(name in groups) || !(typeof area === "number" && area > 0 && Number.isFinite(area)) || !(typeof density === "number" && density > 0 && Number.isFinite(density))) fail(`leaf box group size ${name} is invalid`);
         }
+      }
+      // The step or outset before the camera publishes one, and each leaf's box record (leaf-box-records.ts). The
+      // renderer validates the record fields; the contract checks they name retained nodes at a known initial value.
+      if (binding.initial !== undefined && !(typeof binding.initial === "string" && Number.isFinite(Number(binding.initial)))) fail("silhouette step initial value must be a number");
+      if (binding.boxes !== undefined) {
+        if (binding.initial === undefined) fail("leaf box records need the initial step");
+        for (const box of array(binding.boxes, "leaf box records")) node((box as { node: number }).node);
       }
       finite(binding.hysteresis, "silhouette step hysteresis");
       if (binding.hysteresis < 0 || binding.hysteresis >= 1) fail("silhouette step hysteresis must be in [0, 1)");

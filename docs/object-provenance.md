@@ -127,8 +127,8 @@ For source bindings or product-lineage changes, run:
 pnpm test:node
 ```
 This is the broad native suite. For a focused change, select the relevant tests
-under `packages/objects/src/provenance/`, `tests/contract/` (`body-lineage.test.mts`,
-`context-lineage.test.mts`), `tests/sources/` and the affected preparer.
+under `packages/objects/src/provenance/`, `packages/bake/src/objects/lineage/body-lineage.test.mts`,
+`src/platform/context-lineage.test.mts`, `src/sources/factsheet-sources.test.mts` and the affected preparer.
 Report source-dependent skips separately. A pass does not replace independent
 scientific qualification.
 

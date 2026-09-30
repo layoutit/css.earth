@@ -4,36 +4,38 @@ import type { PreparedAssets } from '../rendering/prepared-residency.js';
 import type { PreparedTree, PreparedWrite } from '../rendering/prepared-presentation.js';
 
 export function requireAssets(value: unknown): asserts value is PreparedAssets {
-  const assets = record(value, 'resources'), poolIds: string[] = [], resourceIds: string[] = [];
+  const assets = record(value, 'resources'), resourceIds: string[] = [];
+  // Each entry names its pool: one index answers it, not a scan of the pools per entry.
+  const pools = new Map<string, { readonly maximumDecodedBytes?: number }>();
   for (const input of array(assets.pools, 'resource pools')) {
-    const pool = record(input, 'resource pool');
-    poolIds.push(text(pool.id, 'pool id'));
+    const pool = record(input, 'resource pool'), id = text(pool.id, 'pool id');
+    if (pools.has(id)) fail('resource pools has duplicate identities');
     const capacity = integer(pool.capacity, 'pool capacity', 1), concurrency = integer(pool.concurrency, 'pool concurrency', 1);
     if (concurrency > capacity) fail('resource concurrency exceeds capacity');
     choice(pool.retention, ['selection', 'mount', 'warm'], 'pool retention'); boolean(pool.reuse, 'pool reuse');
     if (pool.decoding !== undefined) choice(pool.decoding, ['auto', 'sync', 'async'], 'pool decoding');
     if (pool.eviction !== undefined) choice(pool.eviction, ['unused', 'capacity'], 'pool eviction');
     if (pool.stabilityMilliseconds !== undefined && finite(pool.stabilityMilliseconds, 'resource stability') < 0) fail('resource stability must be nonnegative');
-    if (pool.maximumDecodedBytes !== undefined) integer(pool.maximumDecodedBytes, 'decoded byte budget', 1);
+    pools.set(id, pool.maximumDecodedBytes === undefined ? {} : { maximumDecodedBytes: integer(pool.maximumDecodedBytes, 'decoded byte budget', 1) });
   }
-  unique(poolIds, 'resource pools');
   for (const input of array(assets.entries, 'resource entries')) {
     const entry = record(input, 'resource entry'); resourceIds.push(text(entry.key, 'resource key'));
-    if (!text(entry.url, 'resource URL').startsWith('/scenes/') || !poolIds.includes(text(entry.pool, 'resource pool'))) fail('resource identity is invalid');
-    const pool = (assets.pools as PreparedAssets['pools']).find(pool => pool.id === entry.pool)!;
+    const pool = pools.get(text(entry.pool, 'resource pool'));
+    if (!text(entry.url, 'resource URL').startsWith('/scenes/') || !pool) fail('resource identity is invalid');
     if (entry.decodedBytes !== undefined || pool.maximumDecodedBytes !== undefined) {
       const bytes = integer(entry.decodedBytes, 'decoded image bytes', 1);
       if (pool.maximumDecodedBytes !== undefined && bytes > pool.maximumDecodedBytes) fail('image exceeds decoded byte budget');
     }
   }
   unique(resourceIds, 'resource identities');
-  resourceList(assets.startup, new Set(resourceIds), 'startup resources');
+  const declared = new Set(resourceIds);
+  resourceList(assets.startup, declared, 'startup resources');
   if (assets.fallbacks !== undefined) for (const input of array(assets.fallbacks, 'resource fallbacks')) {
     const fallback = record(input, 'resource fallback', ['unsupported', 'resources']);
     choice(fallback.unsupported, ['corner-shape'], 'fallback capability');
     const pairs = Object.entries(record(fallback.resources, 'fallback resources'));
     if (!pairs.length) fail('a resource fallback replaces nothing');
-    for (const [key, replacement] of pairs) { resource(key, new Set(resourceIds)); resource(replacement, new Set(resourceIds)); }
+    for (const [key, replacement] of pairs) { resource(key, declared); resource(replacement, declared); }
   }
 }
 export function resource(value: unknown, resources: ReadonlySet<string>, nullable = false): void {
@@ -51,7 +53,11 @@ export function ancestor(child: number, parent: number, tree: PreparedTree): boo
   for (let id = tree.nodes[child]?.parent; id >= 0; id = tree.nodes[id].parent) if (id === parent) return true;
   return false;
 }
+// Compiled once for the module; requireTree tests every property and node against them.
 const unsupportedStyle = /\b(?:clip-path|mask(?:-\w+)?|filter|mix-blend-mode|background-blend-mode)\s*:|(?:linear|radial|conic)-gradient\s*\(/i;
+const unsupportedPropertyName = /^(?:clipPath|mask.*|filter|mixBlendMode|backgroundBlendMode)$/;
+const gradientValue = /(?:linear|radial|conic)-gradient\s*\(/i;
+const cameraClass = /(?:^|\s)polycss-camera(?:\s|$)/, sceneClass = /(?:^|\s)polycss-scene(?:\s|$)/;
 export function requireTree(value: unknown): asserts value is PreparedTree {
   const tree = record(value, 'tree', ['nodes', 'properties', 'camera', 'scene', 'stageClasses', 'activationGroups', 'textureBindings']);
   const properties = array(tree.properties, 'prepared style properties');
@@ -59,7 +65,7 @@ export function requireTree(value: unknown): asserts value is PreparedTree {
     const property = record(input, 'prepared property', ['name', 'value', 'custom']);
     const name = text(property.name, 'property name'), content = text(property.value, 'property value', true);
     boolean(property.custom, 'custom property');
-    if (/^(?:clipPath|mask.*|filter|mixBlendMode|backgroundBlendMode)$/.test(name) || /(?:linear|radial|conic)-gradient\s*\(/i.test(content)) fail('unsupported scene property');
+    if (unsupportedPropertyName.test(name) || gradientValue.test(content)) fail('unsupported scene property');
   }
   const nodes = array(tree.nodes, 'nodes');
   if (!nodes.length) fail('retained tree is empty');
@@ -72,8 +78,8 @@ export function requireTree(value: unknown): asserts value is PreparedTree {
     choice(entry.tag, ['div', 'span', 's', 'b', 'u'], 'retained tag');
     const className = entry.className === null ? '' : text(entry.className, 'node class', true);
     classes.push(className);
-    cameraCount += Number(/(?:^|\s)polycss-camera(?:\s|$)/.test(className));
-    sceneCount += Number(/(?:^|\s)polycss-scene(?:\s|$)/.test(className));
+    cameraCount += Number(cameraClass.test(className));
+    sceneCount += Number(sceneClass.test(className));
     const style = text(entry.style, 'node style', true), references = array(entry.properties, 'node property references');
     if (unsupportedStyle.test(style)) fail('unsupported scene style');
     for (const property of references) if (integer(property, 'property reference') >= properties.length) fail('undeclared prepared property');
@@ -87,8 +93,8 @@ export function requireTree(value: unknown): asserts value is PreparedTree {
   if (camera >= nodes.length || scene >= nodes.length || parents[camera] !== -1) fail('camera/scene reference is invalid');
   let owned = false;
   for (let id = parents[scene]; id >= 0; id = parents[id]) if (id === camera) owned = true;
-  if (!owned || cameraCount !== 1 || sceneCount !== 1 || !/(?:^|\s)polycss-camera(?:\s|$)/.test(classes[camera]) ||
-      !/(?:^|\s)polycss-scene(?:\s|$)/.test(classes[scene])) fail('one camera root must own the unique scene');
+  if (!owned || cameraCount !== 1 || sceneCount !== 1 || !cameraClass.test(classes[camera]) ||
+      !sceneClass.test(classes[scene])) fail('one camera root must own the unique scene');
   array(tree.stageClasses, 'stage classes').forEach(item => text(item, 'stage class'));
   if (tree.activationGroups !== undefined) {
     const containers = new Set(parents), activated = new Set<number>();

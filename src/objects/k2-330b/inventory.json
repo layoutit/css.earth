@@ -9,7 +9,7 @@
     },
     {
       "location": "public",
-      "filename": "k2-330b-dataset-shape.webp",
+      "filename": "k2-330b-lens-shape.webp",
       "bytes": 44,
       "sha256": "7eeda6a2b0411086e6207f03b081e046bcd2306f3d0357bc89c86201fb5e8f34"
     },
@@ -250,14 +250,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 309,
-      "sha256": "788a88ccde25aa962c992d771791cfe0c76438671aa1a3b9ee505c9429056019"
+      "bytes": 306,
+      "sha256": "3ce8c3af7d6a3ec13333d1c914e4d5303c1307cb427fa7a5d8a60e8e0d4e87a6"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 83773,
-      "sha256": "9447a26d62f4a430fb9f15679ddcdd9c546106c58b49a1c5462218260de4e51a"
+      "bytes": 83770,
+      "sha256": "83d0faf21fda4c1ada8596ff81254e971a24fdfb5b2e862ed5811feccbfd9059"
     },
     {
       "location": "prepared",
@@ -269,19 +269,19 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 3352,
-      "sha256": "bb55b0d5e27407e3f00bb1f335463e1701858529525e8a9ce006e82ce0347011"
+      "sha256": "2a4815d41be6610a80320915a3cbda08c6eec1ba066679a5346480f19b8d8e76"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 432,
-      "sha256": "59c8f0c1a4455da64dc8308e653aa47c8b6e1c0337c6a0448e9a188cab317aec"
+      "bytes": 418,
+      "sha256": "655c6431c02181b0e7df1acec7fc564be61260a61cd6ebd4c6b5cb58473a3d65"
     },
     {
       "location": "prepared",
-      "filename": "datasets.json",
-      "bytes": 864,
-      "sha256": "91c03d6535dd3f621ce51f2d6add6b9bc42910f5c97712f86c8d4532928ea190"
+      "filename": "lenses.json",
+      "bytes": 850,
+      "sha256": "60c1531e936be7a1400827f7f66792abab5f6bf71b6d4e0ae0938656877a98fa"
     },
     {
       "location": "prepared",
@@ -298,8 +298,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 591547,
-      "sha256": "0e8792aff933e2d80d7ba5ccff97726808248f8ddbd4ec0dfb2977379f722b9f"
+      "bytes": 358664,
+      "sha256": "e3961b2d283c02c9b0435b531e3b9689d22d586bb97eb0b87231f919f7208440"
     },
     {
       "location": "prepared",
