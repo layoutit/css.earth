@@ -4,6 +4,7 @@
     "./**/*.mts",
     "../navigation/**/*.mts",
     "../../packages/renderer/src/**/*.test.mts",
+    "../../packages/renderer/test/node/**/*.test.mts",
     "../../site/env.d.ts",
     "../../packages/bake/src/delivery/fixtures/external-modules.d.mts"
   ],

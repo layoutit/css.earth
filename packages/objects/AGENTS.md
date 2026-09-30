@@ -3,7 +3,7 @@
 Own the shared object JSON parser, validation, reusable object types, and preparation contracts.
 Own the source catalogue (`src/sources/`, browser-safe), the provenance, exploration and source-usage records the
 application reads and preparation writes (`src/provenance/`, the browser-safe `@cssearth/objects/provenance` entry; the
-application's dataset routes come in as `DatasetRoutes`, never named here), the
+canonical dataset destinations live here; compilers accept `DatasetRoutes` for host-supplied routing), the
 source-manifest format, preparation's read of the registry and the runtime asset closure that owns each object's
 inventory (`src/node/`, the Node-only `@cssearth/objects/node` entry); the main, `sources` and `provenance` entries never
 import `node/`.

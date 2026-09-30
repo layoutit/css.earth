@@ -6,7 +6,7 @@ import {
   SURFACE_FLY_TO,
   planSurfaceFlyTo,
   sampleSurfaceFlyTo,
-} from "./surface-fly-to.mts";
+} from "@cssearth/renderer/platform/surface-fly-to";
 
 const TRACKBALL = Object.freeze({
   viewportWidth: 1000,

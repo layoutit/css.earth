@@ -1,7 +1,6 @@
-import { sourceTest } from '@cssearth/objects/node/source-test';
-const test = sourceTest();
+import { test } from 'vitest';
 import assert from "node:assert/strict";
-import { rotationAxisAngle, sampleDestinationFlight } from "./destination-flight.mts";
+import { rotationAxisAngle, sampleDestinationFlight } from "./destination-flight.js";
 
 
 const plan = { startZoom: 512, targetZoom: 256, overviewZoom: 1.1, angularDistance: 160 };

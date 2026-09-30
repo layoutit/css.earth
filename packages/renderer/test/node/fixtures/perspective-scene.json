@@ -1,0 +1,101 @@
+{
+  "camera": {
+    "state": {
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "rotX": 143.76923076923077,
+      "rotY": 0,
+      "zoom": 1.1,
+      "distance": 0
+    },
+    "minimumControlPitchDegrees": 0,
+    "maximumControlPitchDegrees": 89,
+    "defaultControlPitchDegrees": 143.76923076923077,
+    "defaultControlYawDegrees": 0,
+    "initialScenePitchDegrees": -40,
+    "maximumScenePitchDegrees": 65,
+    "minimumZoom": 0.42,
+    "maximumZoom": 4,
+    "defaultZoom": 1.1,
+    "logicalBodyDiameter": 460,
+    "responsiveFit": {
+      "model": "continuous-aspect-smoothstep",
+      "portraitBaseWidthShare": 0.34,
+      "narrowPortraitWidthShareGain": 0.08,
+      "landscapeWidthShareGain": 0.02,
+      "narrowPortraitAspectRatio": 0.46,
+      "portraitAspectRatio": 0.75,
+      "squareAspectRatio": 1,
+      "maximumHeightShare": 0.61,
+      "maximumMobilePreviewShare": 0.925,
+      "minimumZoom": 0.42,
+      "maximumZoom": 2
+    },
+    "sceneScale": 0.02,
+    "horizontalOrbit": true,
+    "pitchBounded": false,
+    "yawBounded": false,
+    "cameraModel": "accumulated-matrix3d",
+    "defaultTransform": "scale(0.02) rotateX(-40deg) rotate(0deg) translate3d(0px, 0px, 0px)",
+    "projection": {
+      "model": "css-perspective-shared-with-sky",
+      "horizontalFovDegrees": 60,
+      "focalLengthOverViewportWidth": 0.8660254037844386,
+      "cssPerspective": "86.60254037844386cqw",
+      "eyeOnCameraRootAxis": true,
+      "nearPlaneClipping": "javascript-before-publication"
+    },
+    "dolly": {
+      "model": "multiplicative-wheel-distance",
+      "wheelStepPerDelta": 0.006,
+      "minimumDistanceRadii": 1.2,
+      "maximumDistanceOverOrbitExtent": 4,
+      "zoomIsSilhouetteFraming": true
+    },
+    "orbitLineFade": {
+      "visibleBelowDiscHeightShare": 0.12,
+      "hiddenAboveDiscHeightShare": 0.3
+    },
+    "levelOfDetail": {
+      "model": "silhouette-diameter-crossfade",
+      "billboardFadeStartDiscPixels": 20,
+      "billboardFullDiscPixels": 14,
+      "markerFadeStartDiscPixels": 8,
+      "markerFullDiscPixels": 4.5
+    },
+    "drag": {
+      "model": "screen-axis-tumble"
+    },
+    "runtimeGeometryDerivation": false
+  },
+  "worldFrame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "originM": [
+      -58080327415.47636,
+      -3532357846.7383633,
+      4132293602.585261
+    ],
+    "presentationToReference": [
+      -0.9996221205651232,
+      -1.3877787807814457e-17,
+      -0.027488471708813297,
+      -0.025220179706532363,
+      0.3977771559319137,
+      0.9171353644660577,
+      -0.010934286097246615,
+      -0.9174820620691818,
+      0.3976268441250233
+    ],
+    "orbitUpReference": [
+      1.3877787807814457e-17,
+      -0.39777715593191376,
+      0.9174820620691818
+    ],
+    "metersPerUnit": 10607.391304347826,
+    "bodyRadiusM": 2439700
+  }
+}

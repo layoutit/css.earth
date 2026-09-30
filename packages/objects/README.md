@@ -43,9 +43,9 @@ browser-safe entry: the in-memory object lineage (which manifest sources each pr
 product reads) and its product-input evidence, the exploration catalogue with its contribution graph and prepared
 form, source usage and prepared sources, and context availability. Preparation writes these
 records and the application reads them, so both import the same validators; its tests are in
-the repository's `packages/objects/src/provenance/`. Which URL selects a dataset is the application's route,
-so the compilers and parsers take it as `DatasetRoutes` (the application passes
-`DATASET_ROUTES` from `src/platform/dataset-destination.mts`) and name no route themselves. `@cssearth/objects/node`
+the repository's `packages/objects/src/provenance/`. The entry also exports the canonical dataset destinations
+and `DATASET_ROUTES`, shared by the application and preparation. Compilers and parsers take
+`DatasetRoutes`, so a host can supply another routing policy. `@cssearth/objects/node`
 is the Node-only entry for source manifests (their validation, coverage and byte-range
 checks and the portable relative-path rule their entries follow), for preparation's read of
 the registry and for the runtime asset closure: each object's `inventory.json` of baked

@@ -1,5 +1,5 @@
 import { createCameraMotion } from '@cssearth/renderer/navigation';
-import * as runtimePolicy from "../../site/runtime-policy.mts";
+import { runtimePolicy } from '../runtime-policy-fixture.mts';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();

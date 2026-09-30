@@ -1,4 +1,4 @@
-import * as applicationPolicy from "../../site/runtime-policy.mts";
+import { runtimePolicy as applicationPolicy } from '../runtime-policy-fixture.mts';
 // These timing cases isolate the bounded wheel response; renderer
 // wheel tests separately exercise the application policy with release inertia.
 const runtimePolicy = { ...applicationPolicy, WHEEL_ZOOM_INERTIA: null };
