@@ -203,6 +203,7 @@ export function createSceneRouter({
         if (loaded.cancelled || !scenes.isCurrent(session)) return;
         ready = loaded.value;
         attachShell(session, ready, replacement);
+        request?.timing.mark('shell-attached');
         if (!scenes.isCurrent(session)) return;
         if (replacement) {
           // The prepared sidebar swap and the detail mount each restyle and lay out
@@ -210,8 +211,10 @@ export function createSceneRouter({
           // arriving flight does not drop a frame for both at once.
           const rendered = await session.wait(afterSceneFrame(windowTarget, session.signal));
           if (rendered.cancelled || !scenes.isCurrent(session)) return;
+          request?.timing.mark('shell-rendered');
         }
         publication.publish();
+        request?.timing.mark('world-published');
         // The body comes first: on a cold page the world's layers (sky, stars, volume, markers) load after the
         // detail mounts and connect to it. Only an arrival the world owns, a focus or overview, waits for them.
         if (replacement || worldOwnsArrival()) {
@@ -240,6 +243,7 @@ export function createSceneRouter({
       const framePresenter = world.createFramePresenter();
       session.framePresenter = framePresenter;
       session.own(() => framePresenter.destroy());
+      request?.timing.mark('activating');
       if (!await session.activate(factory, stage, {
         viewport,
         framePresenter,
