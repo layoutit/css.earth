@@ -1,25 +1,25 @@
 {
-  "id": "publication-graczyk2020apj-904-13g",
+  "id": "publication-charlot2020a-a-644a-159c",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b",
+  "title": "Charlot et al. (2020), A&A 644, A159: ICRF3, the position SIMBAD adopts for M 87.",
   "identifiers": [
     {
       "type": "bibliography-key",
-      "value": "Graczyk2020ApJ...904...13G"
+      "value": "Charlot2020A&A...644A.159C"
     }
   ],
   "links": [
     {
       "role": "landing",
-      "url": "https://arxiv.org/abs/2010.08754",
+      "url": "https://doi.org/10.1051/0004-6361/202038368",
       "label": "Published reference"
     }
   ],
   "evidence": [
     {
       "path": "src/objects/local-group/prepared/catalogue.json",
-      "locator": "/sources/7/references/0"
+      "locator": "/sources/9/references/0"
     }
   ],
   "relations": [],
@@ -28,7 +28,7 @@
       "kind": "limitation",
       "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
       "scope": "citation",
-      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/7/references/0"
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/9/references/0"
     }
   ]
 }

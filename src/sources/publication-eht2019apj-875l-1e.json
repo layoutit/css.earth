@@ -1,25 +1,25 @@
 {
-  "id": "publication-graczyk2020apj-904-13g",
+  "id": "publication-eht2019apj-875l-1e",
   "kind": "publication",
   "identityLevel": "work",
-  "title": "Graczyk et al. (2020), ApJ904,13; DOI 10.3847/1538-4357/abbb2b",
+  "title": "Event Horizon Telescope Collaboration (2019), ApJL 875, L1 (M87 Paper I), Table 1: D = 16.8 +/- 0.8 Mpc, rederived from likelihood distributions in Paper VI.",
   "identifiers": [
     {
       "type": "bibliography-key",
-      "value": "Graczyk2020ApJ...904...13G"
+      "value": "EHT2019ApJ...875L...1E"
     }
   ],
   "links": [
     {
       "role": "landing",
-      "url": "https://arxiv.org/abs/2010.08754",
+      "url": "https://arxiv.org/abs/1906.11238",
       "label": "Published reference"
     }
   ],
   "evidence": [
     {
       "path": "src/objects/local-group/prepared/catalogue.json",
-      "locator": "/sources/7/references/0"
+      "locator": "/sources/9/references/1"
     }
   ],
   "relations": [],
@@ -28,7 +28,7 @@
       "kind": "limitation",
       "text": "Bibliographic identity transcribed from the pinned catalogue; this record does not claim independent review of the paper.",
       "scope": "citation",
-      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/7/references/0"
+      "evidence": "src/objects/local-group/prepared/catalogue.json#/sources/9/references/1"
     }
   ]
 }
