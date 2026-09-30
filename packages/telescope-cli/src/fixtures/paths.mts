@@ -31,10 +31,3 @@ export function fixturePath(path: string): string {
   }
   return resolve(WORKSPACE, path);
 }
-
-export function fixtureMemberPath(descriptor: string, member: string): string {
-  const current = relative(WORKSPACE, descriptor);
-  const pair = moved.find(([, path]) => current.startsWith(`${path}/`));
-  const recorded = pair ? pair[0] + current.slice(pair[1].length) : current;
-  return fixturePath(resolve(WORKSPACE, recorded, '..', member));
-}

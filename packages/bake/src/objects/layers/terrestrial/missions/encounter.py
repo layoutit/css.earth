@@ -14,7 +14,7 @@ import numpy as np
 import astropy
 from astropy.io import fits
 sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
-from fixture import ROOT, samples, write
+from fixture import input_record, ROOT, samples, write
 warnings.simplefilter('ignore')
 
 QUALITY_PLANE = {'ITSVIS': 'FLAGS', 'MRIVIS': 'FLAGS', 'NAVCAM': 'QUALITY_MAP'}
@@ -32,7 +32,7 @@ for k, body in enumerate(['comet-9p', 'comet-81p', 'comet-103p']):
     inside = (cols >= border) & (cols < width - border) & (rows >= border) & (rows < height - border)
     good, finite = quality == 0, np.isfinite(primary)
     products[body] = {
-        'path': str(path.relative_to(ROOT)), 'detectorBorderPixels': border,
+        'path': input_record(path)['path'], 'detectorBorderPixels': border,
         'identity': {'instrument': str(header['INSTRUME']), 'units': str(header['BUNIT']), 'date': str(header.get('OBSDATE', header.get('DATE-OBS'))),
                      'filter': str(header.get('FILTER', header.get('FILTNAME'))), 'target': str(header['OBJECT'])},
         'hdus': [{'name': hdu.name, 'shape': list(hdu.data.shape), 'dtype': str(hdu.data.dtype)} for hdu in hdus],

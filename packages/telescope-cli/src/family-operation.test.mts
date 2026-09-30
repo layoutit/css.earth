@@ -1,9 +1,9 @@
-import { fixtureMemberPath } from './fixtures/paths.mts';
 import assert from'node:assert/strict';
+import { test as nodeTest } from 'node:test';
 import{sourceTest}from'@cssearth/objects/node/source-test';const test=sourceTest();
-import{copyFile,mkdtemp,readFile,rm,writeFile}from'node:fs/promises';
+import{copyFile,mkdtemp,readFile,readdir,rm,stat,writeFile}from'node:fs/promises';
 import{tmpdir}from'node:os';
-import{resolve}from'node:path';
+import{dirname,relative,resolve}from'node:path';
 import { readProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import{member}from'./families/common.mts';
 import{describeFitsTable}from'./families/f08-table.mts';
@@ -18,9 +18,11 @@ import{describeDelayDoppler}from'./families/f15-radar.mts';
 import{describeOifits}from'./families/f12-oifits.mts';
 import{describeSpatialPhysicalObject}from'./families/f16/f16-spatial-physical.mts';
 import{describeUvfitsVisibility}from'./families/f11-measurement-set.mts';
-import{executeFamilyOperation,executableFamilyOperations}from'./family-operation.mts';
+import{executeFamilyOperation,executableFamilyOperations,verifiedExecutableFamilyOperations}from'./family-operation.mts';
 import{listArtifactOutputs}from'./artifact-outputs.mts';
 import{binaryTableHdu,primaryHdu}from'@cssearth/bake/objects/raster';
+import { parseProductDescriptor } from './product-descriptor.mts';
+import { requireArray, requireRecord, requireString } from '@cssearth/core';
 const root=WORKSPACE;
 const temporary=async()=>mkdtemp(resolve(tmpdir(),'family-operation-'));
 async function save(root:string,value:unknown){const path=resolve(root,'descriptor.json');await writeFile(path,`${JSON.stringify(value,null,2)}\n`);return path;}
@@ -63,7 +65,7 @@ test('F07 public selection runs the pinned cdflib owner and writes native coordi
 test('F11 public dispatcher delegates bounded real UVFITS work to pyuvdata and attaches its package-owned preview',async()=>{const work=await temporary();try{const source=resolve(root,'packages/telescope-cli/src/families/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits'),bytes=await readFile(source),descriptor=describeUvfitsVisibility({id:'vla-day2-tdem0003',producingRecord:'RASG datasets v0.0.5 BSD-2-Clause',member:member('uvfits',source,'science',bytes,'application/fits'),inspection:{telescope:'EVLA',target:'J1008+0730',rows:1360,channels:64,polarizations:[-1,-2,-3,-4],samples:348160,frequencyHz:{first:36304541952.42,increment:125000}}}),path=await save(work,descriptor),selection={field:'J1008+0730',timeStartJulianDate:2455312.64022,timeEndJulianDate:2455312.64024,antenna1:4,antenna2:8,rowOffset:0,rowCount:1,channelStart:0,channelCount:2,polarization:-1},result=await executeFamilyOperation(path,{operationId:'uvfits-amplitude-phase-diagnostics',selection},resolve(work,'diagnostic')),value=JSON.parse(await readFile(result.product,'utf8')),record=await readProductRecord(result.record);assert.equal(value.pyuvdata,'3.2.4');assert.equal(value.amplitudePhase.unflaggedSamples,2);assert.equal(record?.software.some(item=>item.name==='pyuvdata'&&item.version==='3.2.4'),true);const exported=await executeFamilyOperation(path,{operationId:'uvfits-visibility-export',selection},resolve(work,'export')),exportRecord=await readProductRecord(exported.record);assert.deepEqual(exportRecord?.outputs.map(item=>item.path),['visibilities.json','preview.png','preview.svg']);assert.equal((await readFile(resolve(exported.directory,'preview.png'))).subarray(1,4).toString(),'PNG');}finally{await rm(work,{recursive:true,force:true});}});
 
 test('remaining family baseline operations execute through the public dispatcher on pinned examples',async()=>{const work=await temporary();try{
-  const descriptor=(family:string)=>resolve(root,'packages/telescope-cli/src/families/fixtures/telescope-family-examples/descriptors',`${family}.json`),run=async(family:string,parameters:any,name:string)=>{const recorded=descriptor(family),value=JSON.parse(await readFile(recorded,'utf8'));for(const member of value.members)member.path=fixtureMemberPath(recorded,member.path);if(value.dataset.acquisition.identity.startsWith('../'))value.dataset.acquisition.identity=fixtureMemberPath(recorded,value.dataset.acquisition.identity);const path=resolve(work,`${family}.json`);await writeFile(path,JSON.stringify(value));const matches=executableFamilyOperations(value).filter(operation=>operation.id===parameters.operationId&&operation.available);return executeFamilyOperation(path,{...parameters,...(matches.length>1?{componentId:matches[0]!.componentId}:{})},resolve(work,name));};
+  const descriptor=(family:string)=>resolve(root,'packages/telescope-cli/src/families/fixtures/telescope-family-examples/descriptors',`${family}.json`),run=async(family:string,parameters:any,name:string)=>{const recorded=descriptor(family),value=JSON.parse(await readFile(recorded,'utf8'));const path=recorded;const matches=executableFamilyOperations(value).filter(operation=>operation.id===parameters.operationId&&operation.available);return executeFamilyOperation(path,{...parameters,...(matches.length>1?{componentId:matches[0]!.componentId}:{})},resolve(work,name));};
   const range=await readFile((await run('F03',{operationId:'spectrum-select-range',range:[350,355]},'spectrum-range')).product,'utf8');assert.match(range,/350/u);const chart=JSON.parse(await readFile((await run('F03',{operationId:'spectrum-chart-data'},'spectrum-chart')).product,'utf8'));assert.ok(chart.length>1);const preview=await run('F03',{operationId:'spectrum-preview'},'spectrum-preview');assert.equal((await readFile(preview.product)).subarray(1,4).toString(),'PNG');
   const profile=JSON.parse(await readFile((await run('F04',{operationId:'slit-profile-table'},'slit-profile')).product,'utf8'));assert.equal(profile.length,4);const slit=JSON.parse(await readFile((await run('F04',{operationId:'slit-region-spectrum',directory:resolve(root,'packages/fits/src/node/fixtures/telescope-families/f04-europa-stis'),frame:'od9l12010_x2d.fits',row:125},'slit-spectrum')).product,'utf8'));assert.equal(slit.row,125);assert.equal(slit.wavelengthAngstrom.length,slit.flux.length);
   const sed=JSON.parse(await readFile((await run('F05',{operationId:'sed-plot-data'},'sed')).product,'utf8'));assert.equal(sed[0].band,'V');
@@ -75,3 +77,43 @@ test('remaining family baseline operations execute through the public dispatcher
   const radar=JSON.parse(await readFile((await run('F15',{operationId:'radar-coordinate-view'},'radar-coordinates')).product,'utf8'));assert.deepEqual(radar.shape,[127,64]);const spatial=JSON.parse(await readFile((await run('F16',{operationId:'spatial-select-components',components:['points']},'spatial-components')).product,'utf8'));assert.equal(spatial[0].id,'points');
   const calibration=JSON.parse(await readFile((await run('F17',{operationId:'near-msi-inspect'},'near-msi')).product,'utf8'));assert.equal(calibration.unit,'I/F');assert.ok(calibration.acceptedPixels>100000);const bundle=await run('F17',{operationId:'export-bundle'},'near-msi-bundle'),bundleRecord=await readProductRecord(bundle.record);assert.equal(bundleRecord?.outputs.length,4);
 }finally{await rm(work,{recursive:true,force:true});}});
+
+
+nodeTest('every checked-in family example resolves through the production descriptor loader', async context => {
+  const examples = resolve(root, 'packages/telescope-cli/src/families/fixtures/telescope-family-examples');
+  const descriptors = resolve(examples, 'descriptors');
+  const names = (await readdir(descriptors)).filter(name => name.endsWith('.json')).sort();
+  assert.equal(names.length, 17);
+  for (const name of names) {
+    const path = resolve(descriptors, name);
+    await context.test(name, async child => {
+      try {
+        // Load the actual data at its own location: no rewritten members or temporary descriptor.
+        const operations = await verifiedExecutableFamilyOperations(path);
+        assert.ok(operations.length > 0, name);
+        const descriptor = parseProductDescriptor(JSON.parse(await readFile(path, 'utf8')));
+        const identity = descriptor.dataset.acquisition.identity;
+        if (identity.startsWith('../')) await stat(resolve(dirname(path), identity));
+      } catch (error) {
+        // Only a declared body download may be absent in sparse CI. A broken descriptor path fails.
+        if (!(error instanceof Error) || !('code' in error) || error.code !== 'ENOENT' ||
+            !('path' in error) || typeof error.path !== 'string') throw error;
+        const match = /^src\/objects\/([^/]+)\/source\/(.+)$/u.exec(relative(root, error.path));
+        if (!match) throw error;
+        const manifest = requireRecord(JSON.parse(await readFile(resolve(root, 'src/objects', match[1]!, 'source/manifest.json'), 'utf8')));
+        const declared = requireArray(manifest.inputs).map(input => requireRecord(input)).some(input => input.path === match[2] && typeof input.origin === 'string');
+        if (!declared) throw error;
+        child.skip(`Declared source download is not restored: ${error.path}`);
+      }
+    });
+  }
+  const manifest = requireRecord(JSON.parse(await readFile(resolve(examples, 'manifest.json'), 'utf8')));
+  for (const raw of requireArray(manifest.examples)) {
+    const command = requireString(requireRecord(raw).command);
+    const words = command.split(' ');
+    if (words[1] !== 'family-run') continue;
+    await stat(resolve(root, words[2]!));
+    const index = words.indexOf('--params');
+    if (index !== -1) await stat(resolve(root, words[index + 1]!));
+  }
+});

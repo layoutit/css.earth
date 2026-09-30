@@ -28,6 +28,8 @@ import { mountPreparedPresentation } from "../rendering/prepared-presentation.js
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import { requireObjectRuntimeDefinition, selectedDatasetVolume } from "./object-contract.js";
 import { formatSharedView, parseSharedView } from "../navigation/view-url.js";
+/** A User Timing mark per mount step, so a trace splits a scene handoff (`cssEarth:mount:<step>`). */
+const mountMark = (step: string) => { globalThis.performance?.mark?.(`cssEarth:mount:${step}`); };
 import { createWorldNavigationPublicationHub } from './world-navigation-publication.js';
 
 const nativeServices = Object.freeze({ createLifetime: createSceneLifetime, createResources: createPreparedResidency,
@@ -341,7 +343,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Resolve any new projection before attaching the detailed scene. The
       // application-owned snapshot normally survives the handoff unchanged.
       viewport.read(cameraPlan.projection.cssPerspective);
+      mountMark('tree');
       mounted = mountPreparedPresentation(stage, context, definition, preparedTree, initialProjection, progressiveActivation, true);
+      mountMark('tree-built');
       if (lifetime.disposed) return;
       syncPagePlayback();
       if (inputSurface?.nodeType !== 1) throw new Error("Shared object input surface is missing.");
@@ -356,6 +360,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         onChange: state => publishSelection(state),
         onMaterialError: error => console.error(error) });
       context.own(() => selection?.destroy());
+      mountMark('selection-created');
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
         ...(mounted.revealGroups ? { revealGroups: mounted.revealGroups } : {}),
         // An undrawn mesh commits no textures; it stays hidden until it has them.
@@ -367,6 +372,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         cameraPlan, viewport, cameraMotion, framePresenter, objectId: definition.id, preparedSurfaceHitTest: mounted.surfaceHitTest,
         onPublish: (publication, departing) => guarded(() => publish(publication, departing)), onError: fatal });
       context.own(() => orbit?.destroy());
+      mountMark('orbit-created');
       if (latestWorldPublication !== null) publishWorldSnapshot(latestWorldPublication);
       if (lifetime.disposed) return;
       // The selected presentation owns every decode. Its plan requires the
@@ -383,6 +389,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       const initialized = await lifetime.wait(selection.start());
       if (lifetime.disposed || initialized.cancelled) return;
       if (!initialized.value) throw new Error("Initial object selection did not commit.");
+      mountMark('selection-started');
       // Preflight readiness can be seconds old; direct mounts just decoded in
       // selection.start(). Refresh the claimed bank before its first CSS paint.
       if (preparedResources) {
@@ -392,6 +399,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       // Initial selection, material and camera writes land on detached prepared roots.
       // The existing paced leaf activation starts only after this single connection.
       mounted.connect();
+      mountMark('connected');
       if (definition.features) {
         if (!capabilities.mountSurfaceFeatures || !mounted.featureTarget) throw new TypeError("Prepared surface features require an injected runtime capability.");
         const featureOrigin = definition.assetOrigin, featurePlan = definition.features;

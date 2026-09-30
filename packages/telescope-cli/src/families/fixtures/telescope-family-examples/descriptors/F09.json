@@ -5,7 +5,7 @@
     "target": "m1",
     "acquisition": {
       "kind": "repository",
-      "identity": "../../../../src/objects/m1/source/stellar-field.json"
+      "identity": "../../../../../../../src/objects/m1/source/stellar-field.json"
     },
     "producingRecord": "src/objects/m1/source/stellar-field.json",
     "sourceClassifications": [
@@ -29,7 +29,7 @@
   "members": [
     {
       "id": "gaia-field",
-      "path": "../../../../src/objects/m1/source/stellar-field.json",
+      "path": "../../../../../../../src/objects/m1/source/stellar-field.json",
       "role": "science",
       "mediaType": "application/json"
     }
