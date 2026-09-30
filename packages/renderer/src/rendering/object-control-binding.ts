@@ -3,7 +3,8 @@ import type { ObjectSelectionState } from "./object-selection-runtime.js";
 import { SHELL_SETTING_NAMES } from '../runtime/shell-settings.js';
 export interface ObjectControlBindingOptions {
   stage: HTMLElement; controls: ObjectControls; initialSelection: ObjectSelection; getState(): Readonly<ObjectSelectionState>;
-  onAction(action: ObjectAction): unknown; onError(error: unknown): void;
+  /** `frameCamera` false keeps the reader's camera: a step within the sequence already on screen. */
+  onAction(action: ObjectAction, options?: { frameCamera: boolean }): unknown; onError(error: unknown): void;
 }
 type SettingInput = HTMLInputElement | HTMLButtonElement;
 const isInput = (element: SettingInput): element is HTMLInputElement => element.tagName === "INPUT";
@@ -224,6 +225,8 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       } else { const disabled = input.hasAttribute('form') ? false : !ready; if (input.disabled !== disabled) input.disabled = disabled; }
     }
   }
+  // A dataset frames its data when a reader enters it; stepping through the sequence on screen keeps the reader's camera.
+  const stepGroup = (id: string | null | undefined) => id ? datasets.get(id)?.closest<HTMLElement>('[data-step-group]')?.dataset.stepGroup ?? null : null;
   function act(action: ObjectAction) {
     if (destroyed) return;
     if (!ready) {
@@ -235,7 +238,9 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     try {
       const validated = requireObjectAction(controls, action);
       actions++;
-      Promise.resolve(onAction(validated)).catch(error => {
+      const group = validated.kind === 'dataset' ? stepGroup(validated.id) : null;
+      const frameCamera = !(group && group === stepGroup(getState().committed?.datasetId));
+      Promise.resolve(onAction(validated, { frameCamera })).catch(error => {
         if (destroyed) return;
         stopPlayback();
         publish();

@@ -323,9 +323,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       controls = environment.createControls({ stage, controls: definition.controls, initialSelection,
         getState: () => selection?.state() ?? { desired: initialSelection, committed: null, committedBy: null, pending: true, plan: null, loadingMaterial: false, ready: false, error: null, viewRevision: null },
-        onAction: async action => {
+        onAction: async (action, options) => {
           const before = selection?.state().committed?.datasetId;
-          const committed = await (selection?.dispatch(action) ?? false);
+          const committed = await (selection?.dispatch(action, options) ?? false);
           // Re-selecting the committed dataset is still an explicit valid choice,
           // including when it replaces an invalid dataset URL.
           if (committed && action.kind === 'dataset' && action.id === before && !lifetime.disposed) {

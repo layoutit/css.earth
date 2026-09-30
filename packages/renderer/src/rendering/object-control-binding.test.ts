@@ -46,19 +46,19 @@ function sequence(autoplay = true) {
   Object.defineProperty(form, 'elements', { value: [...form.querySelectorAll('button')] });
   let state: ObjectSelectionState = { desired: { datasetId: 'last' }, committed: { datasetId: 'last' }, committedBy: null,
     plan: null, pending: false, loadingMaterial: false, ready: true, error: null, viewRevision: null };
-  const actions: string[] = [];
+  const actions: string[] = [], framed: boolean[] = [];
   const binding = createObjectControlBinding({ stage: document.querySelector('main')!,
     controls: { datasets: { defaultDataset: 'last', controls: ids.map(id => ({ id, label: id })) }, settings: null },
     initialSelection: state.desired, getState: () => state,
-    onAction(action) {
+    onAction(action, options) {
       if (action.kind !== 'dataset') throw new Error('Expected a dataset action');
-      actions.push(action.id);
+      actions.push(action.id); framed.push(options?.frameCamera ?? true);
       state = { ...state, desired: { datasetId: action.id }, pending: true };
       binding.publish();
     }, onError: error => { throw error; } });
   binding.setReady();
   const click = (selector: string) => document.querySelector(selector)!.dispatchEvent(new Event('click', { cancelable: true }));
-  return { binding, document, actions, click,
+  return { binding, document, actions, framed, click,
     commit() { state = { ...state, committed: state.desired, pending: false }; binding.publish(); },
     hide() { Object.defineProperty(document, 'hidden', { value: true }); document.dispatchEvent(new Event('visibilitychange')); } };
 }
@@ -125,5 +125,18 @@ test.each(['manual', 'hidden', 'unready', 'destroy'] as const)('playback stops o
   vi.advanceTimersByTime(10000);
   expect(h.actions).toEqual(actions);
   expect(vi.getTimerCount()).toBe(0);
+  h.binding.destroy();
+});
+
+test('stepping within the sequence on screen keeps the reader\'s camera; entering or leaving it frames the data', () => {
+  vi.useFakeTimers();
+  const h = sequence();
+  h.click('#details-last [data-dataset-play]');
+  vi.advanceTimersByTime(1500); h.commit();
+  h.click('#details-first [data-dataset-play]');
+  h.click('[value="other"]'); h.commit();
+  h.click('[value="last"]'); h.commit();
+  expect(h.actions).toEqual(['first', 'other', 'last']);
+  expect(h.framed).toEqual([false, true, true]);
   h.binding.destroy();
 });
