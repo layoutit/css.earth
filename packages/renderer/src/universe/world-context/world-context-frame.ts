@@ -178,9 +178,8 @@ export function createWorldContextFrameReceiver() {
         });
         const retained = new Set(members);
         for (const index of bodies.keys()) if (!retained.has(index)) bodies.delete(index);
-      } else {
-        for (let i = 0; i < members.length; i++) projectedBodies[i] = bodies.get(members[i])!;
       }
+      // Unchanged members keep their projected bodies: updates mutate each retained body in place.
       const { id, baseId, members: _members, updates, ...header } = packet;
       committedId = id;
       // Changed bodies are keyed by prepared body index, which is not their position

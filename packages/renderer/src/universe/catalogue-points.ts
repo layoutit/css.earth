@@ -1,5 +1,7 @@
-import { MAX_CATALOGUE_POINTS, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
-import type { CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
+import { MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread, parseDensityVolumeFrame } from '@cssearth/objects';
+import { decodeCatalogueBankBinary } from '../prepared-data/catalogue-bank-binary.js';
+import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
+import type { CatalogueCells, CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 import { revealLayer } from '../rendering/layer-reveal.js';
@@ -20,6 +22,13 @@ export async function fetchPreparedJson(target: string): Promise<unknown> {
   const response = await fetch(target);
   if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
   return response.json() as Promise<unknown>;
+}
+/** A published catalogue point bank (`<id>.bin`): packed, gunzipped by the platform and decoded to the object its JSON
+ * was (prepared-data/catalogue-bank-binary.ts), refusing an unsuccessful answer. */
+export async function fetchPreparedCatalogueBank(target: string, fetcher: typeof fetch = fetch): Promise<unknown> {
+  const response = await fetcher(target);
+  if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
+  return decodeCatalogueBankBinary(await readPreparedBinary(await response.arrayBuffer(), target), target);
 }
 /** A sparse catalogue (the globular clusters) is never thinned below this many points. */
 const MIN_DRAWN_POINTS = 300;
@@ -52,7 +61,10 @@ export function drawnPointCount(total: number, cameraDistanceM: number, fullDeta
  */
 export type CataloguePointLevel = ({ readonly points: number; readonly fullDetailUnits: number } | { readonly points: number; readonly appearUnits: readonly [number, number] })
   /** The level's opacity once the innermost level has filled the view, reached as it fills (1 when absent). */
-  & { readonly nearOpacity?: number };
+  & { readonly nearOpacity?: number;
+    /** The bank's screen budget once this inner level is whole, reached evenly in the logarithm of the view's half-width
+     * as it appears. */
+    readonly screenBudget?: number };
 export function stackedPointCount(levels: readonly CataloguePointLevel[], cameraDistanceUnits: number, viewHalfWidthUnits: number, metersPerUnit: number): number {
   const [outer, ...inner] = levels;
   const drawn = drawnPointCount(outer!.points, cameraDistanceUnits * metersPerUnit, (outer as { fullDetailUnits: number }).fullDetailUnits * metersPerUnit);
@@ -78,6 +90,8 @@ export interface PreparedCataloguePoints {
   readonly points: readonly { readonly positionUnits: VolumeVector; readonly colorCss: string }[];
   /** The bank's prepared shape around its origin, written by the bake that published it. */
   readonly spread: CataloguePointSpread;
+  /** Its points' prepared cells: boxes the projection skips whole when they are out of view. */
+  readonly cells: CatalogueCells;
 }
 
 /** A prepared `cssearth-catalogue-points@1` bank: fixed 3D positions of a published catalogue and how to draw them. */
@@ -102,6 +116,9 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
     throw new TypeError(`${data.id}: a catalogue point bank holds 1 to ${MAX_CATALOGUE_POINTS} points, got ${Array.isArray(data.points) ? data.points.length : 'none'}.`);
   }
   const parsedLevels = levels === undefined ? undefined : parseLevels(levels, data.points.length, data.id);
+  if (parsedLevels?.some(level => level.screenBudget !== undefined) && screenBudget === undefined) {
+    throw new TypeError(`${data.id}: a level's screenBudget moves the bank's, so the bank needs a screenBudget too.`);
+  }
   const spread = parseCataloguePointSpread(data.spread, `${data.id} (${at})`);
   const width = palette ? 4 : 3;
   const points = data.points.map((point: unknown, index: number) => {
@@ -112,10 +129,11 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
     if (!entry(colour)) throw new TypeError(`${data.id}: point ${index} names palette colour ${point[3]}, which the palette of ${palette!.length} lacks.`);
     return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: colour });
   });
+  const cells = parseCatalogueCells(data.cells, data.points as number[][], parsedLevels?.map(level => level.points) ?? [points.length], `${data.id} (${at})`);
   return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
     ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
     ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }) }),
-    points: Object.freeze(points), spread });
+    points: Object.freeze(points), spread, cells });
 }
 
 function parseLevels(value: unknown, total: number, id: string): readonly CataloguePointLevel[] {
@@ -123,13 +141,17 @@ function parseLevels(value: unknown, total: number, id: string): readonly Catalo
   if (!Array.isArray(value) || value.length < 1) throw new TypeError(`${id}: a stacked bank has one or more levels.`);
   let before = Infinity, sum = 0;
   const parsed = value.map((raw: unknown, index: number): CataloguePointLevel => {
-    const level = raw as { points?: unknown; fullDetailUnits?: unknown; appearUnits?: unknown; nearOpacity?: unknown };
+    const level = raw as { points?: unknown; fullDetailUnits?: unknown; appearUnits?: unknown; nearOpacity?: unknown; screenBudget?: unknown };
     if (!Number.isInteger(level?.points) || !((level.points as number) > 0)) throw new TypeError(`${id}: level ${index} needs its point count.`);
     sum += level.points as number;
     if (level.nearOpacity !== undefined && !(positive(level.nearOpacity) && level.nearOpacity <= 1)) {
       throw new TypeError(`${id}: level ${index} nearOpacity must be in (0, 1], got ${JSON.stringify(level.nearOpacity)}.`);
     }
-    const near = level.nearOpacity === undefined ? {} : { nearOpacity: level.nearOpacity as number };
+    if (level.screenBudget !== undefined && (index === 0 || !(Number.isSafeInteger(level.screenBudget) && (level.screenBudget as number) > 0))) {
+      throw new TypeError(`${id}: level ${index} screenBudget must be a positive whole number on an inner level, got ${JSON.stringify(level.screenBudget)}.`);
+    }
+    const near = { ...(level.nearOpacity === undefined ? {} : { nearOpacity: level.nearOpacity as number }),
+      ...(level.screenBudget === undefined ? {} : { screenBudget: level.screenBudget as number }) };
     if (index === 0) {
       if (!positive(level.fullDetailUnits)) throw new TypeError(`${id}: the outermost level needs fullDetailUnits.`);
       before = level.fullDetailUnits;
@@ -150,8 +172,8 @@ function parseLevels(value: unknown, total: number, id: string): readonly Catalo
  * A published catalogue drawn as fixed dust: every point the same small dot, whatever the distance, so a population's
  * shape shows without any star claiming a size. Fetched on the first publication that shows it.
  */
-export function mountCataloguePoints({ host, before, url, fetchJson }: {
-  host: HTMLElement; before?: Node; url: string; fetchJson(url: string): Promise<unknown>;
+export function mountCataloguePoints({ host, before, url, loadBank }: {
+  host: HTMLElement; before?: Node; url: string; loadBank(url: string): Promise<unknown>;
 }) {
   const root = host.ownerDocument.createElement('div');
   root.dataset.cataloguePoints = 'loading';
@@ -185,7 +207,7 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
       if (runtime) { runtime.publish(publication); return; }
       if (loading) return;
       loading = true;
-      void fetchJson(url).then(value => {
+      void loadBank(url).then(value => {
         if (destroyed) return;
         const bank = parseCataloguePoints(value, url);
         extent = { originM: bank.frame.originM, radiusM: Math.max(...bank.points.map(point => Math.hypot(...point.positionUnits))) * bank.frame.metersPerUnit };
@@ -201,32 +223,57 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
           ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
           : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit),
           screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0));
-        // Past its screen budget a bank draws an even share of its visible dots, set from the last frame's count.
-        let share = 1;
+        // Past its screen budget a bank draws an even share of its visible dots, set from the last frame's count. An inner
+        // level with its own budget moves the bank's to it as the level appears, evenly in the logarithm of the half-width.
+        // The levels spend it in order, outermost first: an arriving level takes what the ones already on screen leave, so
+        // zooming in never thins the dots the view is already steered by.
         const budget = bank.appearance.screenBudget;
-        const mount = (points: typeof bank.points, count: (total: number) => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
+        const budgetAt = (distanceUnits: number) => {
+          let value = budget!;
+          const halfWidth = distanceUnits * halfWidthPerDistance;
+          for (const level of bank.appearance.levels ?? []) {
+            const window = (level as { appearUnits?: readonly [number, number] }).appearUnits;
+            if (level.screenBudget === undefined || !window) continue;
+            const t = Math.max(0, Math.min(1, Math.log(window[0] / halfWidth) / Math.log(window[0] / window[1])));
+            value = value * (level.screenBudget / value) ** t;
+          }
+          return value;
+        };
+        const distanceOf = (publication: VolumeCameraPublication) =>
+          Math.hypot(...publication.world.pose.positionM.map((value, axis) => value - bank.frame.originM[axis]!)) / bank.frame.metersPerUnit;
+        // A level's exact repaint after a pause measures the view the camera stopped at: the shares are recomputed from it and
+        // published once more, so a still view keeps the same dots however the frames before it were paced.
+        const settled = () => { if (latest && runtime) { runtime.publish(latest); runtime.publish(latest); } };
+        const mount = (points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number) => mountBatchedSpatialPoints({ host: root, frame: bank.frame, points,
+          cells: { boxes: bank.cells.boxes, of: cellOf }, onSettle: settled,
           drawnCount: (distanceUnits, cameraUnits) => count(drawn(distanceUnits, cameraUnits)),
-          ...(budget === undefined ? {} : { keepFraction: () => share }),
-          // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up.
-          paintPalette: [...styles.values()].map(pointPaint),
+          ...(budget === undefined ? {} : { keepFraction: share }),
+          // One path per colour unions its dots, so two translucent dots of one colour that overlap do not add up; a part
+          // keeps a path only for the colours its own dots use.
+          paintPalette: [...new Set(points.map(point => point.colorCss))].map(colour => pointPaint(styles.get(colour)!)),
           className: `catalogue-points-${bank.id}`, stylePoint: point => styles.get(point.colorCss)! });
-        // Consecutive levels that share a near opacity draw as one part, so a part can dim as the innermost level fills.
-        const levels = bank.appearance.levels ?? [], parts: { start: number; points: number; nearOpacity: number }[] = [];
-        for (const level of levels) {
-          const nearOpacity = level.nearOpacity ?? 1, last = parts[parts.length - 1];
-          if (last && last.nearOpacity === nearOpacity) last.points += level.points;
-          else parts.push({ start: last ? last.start + last.points : 0, points: level.points, nearOpacity });
-        }
-        const rebudget = (candidates: number) => { if (budget !== undefined) share = candidates > budget ? budget / candidates : 1; };
+        // Each level draws as its own part: it dims to its near opacity as the innermost level fills, and takes its share
+        // of the budget after the levels outside it.
+        const levels = bank.appearance.levels ?? [];
+        let start = 0;
+        const parts = levels.map(level => { const part = { start, points: level.points, nearOpacity: level.nearOpacity ?? 1, share: 1 }; start += level.points; return part; });
+        const rebudget = (candidates: readonly number[], distanceUnits: number, shares: { share: number }[]) => {
+          if (budget === undefined) return;
+          let left = budgetAt(distanceUnits);
+          candidates.forEach((count, index) => {
+            shares[index]!.share = count > left ? Math.max(0, left) / count : 1;
+            left -= count * shares[index]!.share;
+          });
+        };
         if (parts.length < 2) {
-          const single = mount(bank.points, total => total);
-          runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget(single.stats().candidates); }, destroy: single.destroy };
+          const whole = { share: 1 }, single = mount(bank.points, bank.cells.of, total => total, () => whole.share);
+          runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget([single.stats().candidates], distanceOf(publication), [whole]); }, destroy: single.destroy };
         } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
-          const mounted = parts.map(part => ({ ...part, runtime: mount(bank.points.slice(part.start, part.start + part.points),
-            total => Math.max(0, Math.min(part.points, total - part.start))) }));
+          const mounted = parts.map(part => ({ ...part, runtime: mount(bank.points.slice(part.start, part.start + part.points), bank.cells.of.subarray(part.start, part.start + part.points),
+            total => Math.max(0, Math.min(part.points, total - part.start)), () => part.share) }));
           runtime = { layers: mounted.map(part => part.runtime.root), publish(publication) {
-            const distanceUnits = Math.hypot(...publication.world.pose.positionM.map((value, axis) => value - bank.frame.originM[axis]!)) / bank.frame.metersPerUnit;
+            const distanceUnits = distanceOf(publication);
             const [from, to] = innermost.appearUnits ?? [1, 1];
             const filled = from > to ? Math.max(0, Math.min(1, Math.log(from / (distanceUnits * halfWidthPerDistance)) / Math.log(from / to))) : 0;
             for (const part of mounted) {
@@ -234,7 +281,7 @@ export function mountCataloguePoints({ host, before, url, fetchJson }: {
               if (part.runtime.root.style.opacity !== opacity) part.runtime.root.style.opacity = opacity;
               part.runtime.publish(publication);
             }
-            rebudget(mounted.reduce((sum, part) => sum + part.runtime.stats().candidates, 0));
+            rebudget(mounted.map(part => part.runtime.stats().candidates), distanceUnits, parts);
           }, destroy() { for (const part of mounted) part.runtime.destroy(); } };
         }
         root.dataset.cataloguePoints = bank.id;

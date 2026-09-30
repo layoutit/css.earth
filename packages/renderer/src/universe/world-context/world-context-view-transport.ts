@@ -1,4 +1,8 @@
-import type { WorldBodyPresentation } from './world-context-planner.js';
+import type { WorldBodyPresentation, WorldContextView } from './world-context-planner.js';
+
+/** A view whose bodies are already columns (packWorldBodies): the retained world context packs its bodies straight from
+ * their own state, so a frame builds no object per body. */
+export type PackedWorldContextView = Omit<WorldContextView, 'bodies'> & { readonly bodyColumns: Float64Array };
 
 /** Per-body presentation crosses the worker boundary as one transferred column
  * block instead of hundreds of structured-cloned objects every frame. Optional
@@ -19,6 +23,30 @@ export function packWorldBodies(bodies: readonly WorldBodyPresentation[]): Float
     values[offset + 14] = flag(body.highlighted);
   }
   return values;
+}
+
+/** A block of columns for `count` bodies, in `packWorldBodies`'s layout. */
+export const createWorldBodyColumns = (count: number) => new Float64Array(count * FIELDS);
+
+/** Back an entry's presentation fields with its row of `columns`, in `packWorldBodies`'s layout: a write to any of them
+ * lands in the row at once, so a frame sends the columns as they stand (one copy) instead of reading every body. A field
+ * object (`labelSize`, `orbitAppearance`) is replaced, never changed in place. */
+export function bindWorldBodyColumns<T extends WorldBodyPresentation>(entry: T, columns: Float64Array, index: number): T {
+  const offset = index * FIELDS, target = entry as unknown as Record<string, unknown>;
+  const bind = (key: keyof WorldBodyPresentation, write: (value: unknown) => void) => {
+    let value = target[key];
+    write(value);
+    Object.defineProperty(target, key, { enumerable: true, configurable: true, get: () => value, set(next: unknown) { value = next; write(next); } });
+  };
+  const flagAt = (slot: number) => (value: unknown) => { columns[offset + slot] = flag(value as boolean | undefined); };
+  const numberAt = (slot: number) => (value: unknown) => { columns[offset + slot] = value as number; };
+  bind('hovered', flagAt(0)); bind('bodyHidden', flagAt(1)); bind('orbitHidden', flagAt(2)); bind('labelHidden', flagAt(3));
+  bind('labelSuppressed', flagAt(4)); bind('indicatorHidden', flagAt(5));
+  bind('labelSize', value => { const size = value as WorldBodyPresentation['labelSize']; columns[offset + 6] = size.width; columns[offset + 7] = size.height; });
+  bind('labelShown', flagAt(8)); bind('labelPlacement', numberAt(9)); bind('indicatorShown', flagAt(10)); bind('indicatorRadius', numberAt(11));
+  bind('orbitAppearance', value => { const line = value as WorldBodyPresentation['orbitAppearance']; columns[offset + 12] = line.width; columns[offset + 13] = line.opacity; });
+  bind('highlighted', flagAt(14));
+  return entry;
 }
 
 export function unpackWorldBodies(values: Float64Array): WorldBodyPresentation[] {

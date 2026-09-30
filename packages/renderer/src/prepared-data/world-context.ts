@@ -418,7 +418,7 @@ export function orbitVertices(orbit: Pick<PreparedContextOrbitGeometry, 'vertice
   return Array.from({ length: orbit.verticesM.length / 3 }, (_, index) =>
     [orbit.verticesM[index * 3]!, orbit.verticesM[index * 3 + 1]!, orbit.verticesM[index * 3 + 2]!] as PositionM);
 }
-const WORLD_ORBITS_MAGIC = 0x4f575343, WORLD_ORBITS_VERSION = 2;
+export const WORLD_ORBITS_MAGIC = 0x4f575343, WORLD_ORBITS_VERSION = 2;
 /** One bank's paths from its pinned binary file: index and weight sections become typed-array views over the transferred
  * bytes, Int32 vertex steps are decoded to metres, and each orbit passes the same checks as the JSON file. The bank must
  * hold exactly the path of the body it is named for. */

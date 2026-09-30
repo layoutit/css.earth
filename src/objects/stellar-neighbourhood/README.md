@@ -60,9 +60,12 @@ computed from the float32 source magnitudes, before transport quantization.
 
 ## Prepared transport
 
-`object.json` pins the manifest. The manifest pins `stars.bin` by byte length;
-the loader checks it before it decodes a byte, then checks the
-bank header, column directory, counts, indices and value ranges.
+`object.json` pins the manifest. `stars.bin` is published packed: each column
+byte-shuffled, then gzip (`@cssearth/objects` prepared-binary.ts), because the
+asset host serves `.bin` uncompressed. The loader unpacks it with the browser's
+`DecompressionStream`; the manifest pins the unpacked bank by byte length, which
+the loader checks before it decodes a byte, then checks the bank header, column
+directory, counts, indices and value ranges.
 
 | Field | Storage | Error against the prepared value |
 | --- | --- | --- |
@@ -102,6 +105,13 @@ single JSON document `b1a7107c…`.
 | Previous `stars.json` | 23,559,279 | 4,851,789 | 3,355,993 |
 | Manifest `stars.json` | 55,778 | 8,584 | 6,550 |
 | Bank `stars.bin` | 2,799,000 | 2,330,683 | 2,146,773 |
+
+On 2026-09-30 the same bank was packed (column shuffle, then gzip -9): 1,930,653
+bytes, unpacking to the identical 2,799,000. The asset host serves `.bin` raw
+(`application/octet-stream`, no content encoding), so the gzip and brotli columns
+above were never what a download cost. The page itself reads only the manifest's
+optics (`loadPreparedPointAppearance`); the bank is decoded by the loader's tests
+and preparation checks, and CI restores it.
 
 | Complete loader (verify, parse, decode) | Previous | Bank |
 | --- | ---: | ---: |

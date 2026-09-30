@@ -1,0 +1,55 @@
+{
+  "id": "quaia-2024",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Quaia, the Gaia-unWISE Quasar Catalog",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/ad1328"
+    },
+    {
+      "type": "arxiv",
+      "value": "2306.17749"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ad1328",
+      "label": "Storey-Fisher et al. (2024), ApJ 964, 69"
+    },
+    {
+      "role": "archive",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/ApJ/964/69",
+      "label": "CDS/VizieR J/ApJ/964/69"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/ApJ/964/69",
+      "checkedOn": "2026-09-30",
+      "locator": "quaiag200 (G < 20.0, 755,850 rows): GaiaDR3, RA_ICRS, DE_ICRS, zQuaia"
+    }
+  ],
+  "creators": [
+    "Kate Storey-Fisher",
+    "David W. Hogg",
+    "Hans-Walter Rix",
+    "Anna-Christina Eilers",
+    "Giulio Fabbian",
+    "Michael R. Blanton",
+    "David Alonso"
+  ],
+  "publisher": "American Astronomical Society",
+  "publicationDate": "2024",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Storey-Fisher et al. (2024), Quaia, the Gaia-unWISE Quasar Catalog: An All-sky Spectroscopic Quasar Sample, ApJ 964, 69, distributed by CDS/VizieR.",
+      "scope": "Quasar positions and redshifts outside DESI's footprint",
+      "evidence": "https://doi.org/10.3847/1538-4357/ad1328"
+    }
+  ]
+}

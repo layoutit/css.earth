@@ -4,8 +4,8 @@
     {
       "location": "prepared",
       "filename": "cmb.json",
-      "bytes": 174795,
-      "sha256": "0378215ec386966d0a43154ccf3e143f07b836d9d017ef897c895e508cec843f"
+      "bytes": 175111,
+      "sha256": "362b271949e4a904551f2e5d5a4975de1a826a0f11df7860f29bba3b8927e533"
     },
     {
       "location": "prepared",
@@ -18,6 +18,12 @@
       "filename": "cmb/cmb-full.webp",
       "bytes": 32170,
       "sha256": "40d11ee18c70b69035486d380ba50cef7e59160a95f36c0b846823103697c7ef"
+    },
+    {
+      "location": "prepared",
+      "filename": "cmb/cmb-hidden.webp",
+      "bytes": 222,
+      "sha256": "b8ae5a524e9c3504469d244ca8c849e500a3414b3e8283909391f47a9f332e8b"
     },
     {
       "location": "prepared",
@@ -34,8 +40,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 3401,
-      "sha256": "017443ea3e5861f5aee26542f7cfe85587e625f9f27c03a76612d88d8cc1e0ce"
+      "bytes": 4296,
+      "sha256": "03f83e7f75599c192b574bd37e3474a6c3b5fb840277d141f8dcf29c0a347908"
     }
   ]
 }

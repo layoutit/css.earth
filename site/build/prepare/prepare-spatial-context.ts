@@ -5,7 +5,8 @@ import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFF
 import type { StarId } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
-import { readCatalog, readPreparedObjects } from '@cssearth/objects/node';
+import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
+import { worldOrbitBankRegions } from '@cssearth/renderer';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { parseWorldContextSource, prepareWorldContext, summarizeWorldContext, worldOrbitBanks, worldSystemViews } from '@cssearth/bake/world-context';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '@cssearth/bake/world-context';
@@ -205,7 +206,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // The browser reads the summary; the planner worker adds each orbit centre's binary bank, which the summary pins by
   // byte length, when that centre's orbits come into view. The full JSON above remains for build-time tools.
   const banks = worldOrbitBanks(prepared), bankDirectory = worldOrbitsDirectory(options.outputPath), keptBanks = new Set<string>();
-  for (const bank of banks) { keptBanks.add(`${bank.id}.bin`); await writeIfChanged(resolve(bankDirectory, `${bank.id}.bin`), bank.bytes); }
+  // Each bank is packed for delivery (@cssearth/objects prepared-binary.ts); the summary pins its unpacked bytes.
+  for (const bank of banks) {
+    keptBanks.add(`${bank.id}.bin`);
+    await writeIfChanged(resolve(bankDirectory, `${bank.id}.bin`), packPreparedBinary(bank.bytes, worldOrbitBankRegions(bank.bytes, `world-orbits/${bank.id}.bin`), `world-orbits/${bank.id}.bin`));
+  }
   for (const name of await readdir(bankDirectory).catch(() => [] as string[])) if (!keptBanks.has(name)) await rm(resolve(bankDirectory, name));
   await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
   await writeIfChanged(worldContextSummaryPath(options.outputPath), `${JSON.stringify(summarizeWorldContext(prepared,
