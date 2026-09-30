@@ -32,13 +32,10 @@
       "evidence": [
         "https://observations.lam.fr/astero/Data/2Pallas/",
         "https://observations.lam.fr/astero/",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallas/evidence/photographic-projection.json",
         "https://doi.org/10.1038/s41550-019-1007-5",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/4395",
         "https://damit.cuni.cz/pages/documentation",
         "https://github.com/matvii/ADAM/blob/25810f767b9de349a356df520109f4705f87f7a7/rotate.c",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallas/evidence/projected-controls.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallas/evidence/photographic-controls.json",
         "https://arxiv.org/pdf/1902.01287",
         "https://github.com/layoutit/css.earth/pull/204",
         "https://doi.org/10.1051/0004-6361/201833620",
@@ -56,7 +53,6 @@
         "https://observations.lam.fr/astero/3Dshape/2_Pallas_adam.obj",
         "https://observations.lam.fr/astero/3Dshape/",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/pallas/source/reference/model-properties.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallas/evidence/photographic-projection.json",
         "https://damit.cuni.cz/projects/damit/asteroid_models/view/4395",
         "https://damit.cuni.cz/projects/damit/stored_files/open/51211/shape.txt",
         "https://damit.cuni.cz/projects/damit/stored_files/open/51209/IAUspin"
@@ -70,8 +66,7 @@
       "revisitWhen": "A separately released photographic raster, with map coordinates and reuse terms, would reopen the map-as-texture route.",
       "evidence": [
         "https://doi.org/10.1038/s41550-019-1007-5",
-        "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41550-019-1007-5/MediaObjects/41550_2019_1007_MOESM1_ESM.pdf",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallas/evidence/photographic-projection.json"
+        "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41550-019-1007-5/MediaObjects/41550_2019_1007_MOESM1_ESM.pdf"
       ]
     },
     {
@@ -83,9 +78,6 @@
       "evidence": [
         "https://doi.org/10.1038/s41550-019-1007-5",
         "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41550-019-1007-5/MediaObjects/41550_2019_1007_MOESM1_ESM.pdf",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallas/evidence/photographic-projection.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallas/evidence/projected-controls.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/pallas/evidence/photographic-controls.json",
         "https://arxiv.org/pdf/1902.01287",
         "https://github.com/layoutit/css.earth/pull/204"
       ]

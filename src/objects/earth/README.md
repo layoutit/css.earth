@@ -32,7 +32,7 @@ The linked reports identify their tested sources, prepared files and limitations
   frames from 2023 (one every two months, at staggered hours) by `packages/bake/cli/fit-epic-limb.mts`: Minnaert
   k 0.394 at 680 nm, 0.428 at 551 nm and 0.410 at 443 nm, with frame-to-frame spreads of 0.07, 0.04 and 0.03. Below
   0.5 the edge is brighter than the centre under full light, from the atmosphere and clouds seen at a slant.
-  [Per-frame fits](evidence/epic-limb-fit.json).
+  Per-frame fits.
 
 - **Surface:** source restoration, 179-file image installation and browser checks.
   The report records an ownership-test failure and excludes full-suite success.
@@ -72,7 +72,7 @@ Default map labels ([features recipe](source/preparation/features.json)): only o
 
 The public feature transport keeps those default map labels in the first-interaction catalogue. Search-only names are deterministically sharded by feature id; selecting one verifies and loads only its bank, while the global search index retains the original prepared order.
 
-Named features run of 2026-09-15 (this version): [`node tools/objects/dist/prepare-authored.js earth --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) (707 s, every pinned Earth source present and verified) prepared 5,467 names: 258 countries, 3,000 populated places, 48 landmarks and the geographic regions, seas and river centrelines. 456 label the map by default (171 countries, 88 capitals, 129 cities, 48 landmarks, 7 continents, 5 oceans and 8 highlights); the rest are search-only. Of the 301 delivered Earth files only `earth-features.json` changed; the provenance basis stays `prepared`. `tests/objects/unit/earth/features.test.mts` checks the default classes, country label points, the city zoom floor and search-only names against the delivered catalogue. The three captures in [`evidence/default-labels/`](evidence/default-labels/) show the default view, one wheel step closer and the closest view at 1400 × 900 CSS px on the local dev server.
+Named features run of 2026-09-15 (this version): [`node tools/objects/dist/prepare-authored.js earth --write`](https://github.com/layoutit/css.earth/blob/0f0384e90c/tools/objects/prepare-authored.ts) (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)) (707 s, every pinned Earth source present and verified) prepared 5,467 names: 258 countries, 3,000 populated places, 48 landmarks and the geographic regions, seas and river centrelines. 456 label the map by default (171 countries, 88 capitals, 129 cities, 48 landmarks, 7 continents, 5 oceans and 8 highlights); the rest are search-only. Of the 301 delivered Earth files only `earth-features.json` changed; the provenance basis stays `prepared`. `tests/objects/unit/earth/features.test.mts` checks the default classes, country label points, the city zoom floor and search-only names against the delivered catalogue. The three captures in `evidence/default-labels/` show the default view, one wheel step closer and the closest view at 1400 × 900 CSS px on the local dev server.
 
 - Night-light coverage stops at 75° N and 65° S. The mirror lacks quality bands;
   aurora and transient lights cannot be filtered further.

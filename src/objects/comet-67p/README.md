@@ -21,8 +21,8 @@ The shared camera and scene select one prepared mesh at a time.
 
 ## Evidence
 
-The September 2026 upgrade is measured in [dataset-upgrade.json](evidence/dataset-upgrade.json).
-The [independent shape comparison](evidence/source-shape-comparison.json) uses the
+The September 2026 upgrade is measured in dataset-upgrade.json.
+The independent shape comparison uses the
 original GEO coordinates, before display tessellation. Across eleven frames,
 median distance to the old RMOC source is 3.17–8.80 m; to the released SHAP7
 source it is 0.31–0.34 m. Each SHAP7 95th percentile is below 1.38 m. These are
@@ -44,7 +44,7 @@ verified by byte count. The six new original image products were
 also restored without local reuse. Against the integrated main revision, the
 runtime inventory grows from 28,163,769 to 52,416,035 bytes (28.16 to 52.42 MB).
 This is the complete install, including optional lighting assets, not a measured
-cold page download. The [integration record](evidence/integration.json) verifies
+cold page download. The integration record verifies
 that main added only its two existing arrival files to the earlier 69-file
 audit; all 69 audited files remain byte-identical. The 53 affected tests and five
 bake boundary tests, package builds and typechecking passed again after integration.
@@ -60,17 +60,17 @@ bank is displayed for every dataset. Decoded atlas figures are width × height �
 4, not measured GPU residency. OSIRIS mean surface area per interior texel
 corresponds to 2.61 m, compared with 5.06 m before; it is not uniform resolution.
 
-The [browser record](evidence/dataset-upgrade.json) covers all eight dataset
+The browser record covers all eight dataset
 buttons, rotation and zoom, Shadows through Settings, and the Hapi feature card.
 The inspected images come from the restored package in the Codex in-app browser,
 1280 × 720. They prove those flows and reveal remaining visual defects; Chrome
 DPR 1/2 captures and a matched drag-cadence comparison remain unmeasured. The PR
 stays draft pending that visual and performance qualification.
 
-[Whole-body view](evidence/upgrade-osiris.png) ·
-[Close-up defects](evidence/upgrade-close.png) ·
-[Prepared shadows](evidence/upgrade-shadows.png) ·
-[Hapi on SHAP7](evidence/upgrade-hapi.png)
+Whole-body view ·
+Close-up defects ·
+Prepared shadows ·
+Hapi on SHAP7
 
 Source, preparation and independent decoder checks passed 40 tests; retained
 runtime, URL, text and source-record checks passed 13; bake boundary checks
@@ -101,7 +101,7 @@ Recorded results for the southern coverage update:
   places (26 regions and two existing Philae sites). Three focused unit tests
   passed. With this addition, browser checks covered searching
   for Hapi, clicking Seth on the surface, and the Regions dataset.
-  [Captured Hapi card](evidence/surface-places.png). The published catalog was
+  Captured Hapi card. The published catalog was
   downloaded and its byte count verified; surface assets are unchanged.
 
 The wider recorded runs include two missing Europa originals, three Earth fixture
@@ -184,7 +184,7 @@ source separately: 1,000 RMOC triangles, 1,992 SHAP7 triangles and 1,498 SHAP5
 triangles. Each remains closed and consistently wound, preserving both lobes,
 the neck and recessed surfaces without a radial resample.
 The upgrade evidence records each mesh’s topology and simplifier error;
-[`evidence/terrain.json`](evidence/terrain.json) preserves the earlier RMOC preparation; that estimate is
+`evidence/terrain.json` preserves the earlier RMOC preparation; that estimate is
 not a Hausdorff bound or the source measurement uncertainty.
 
 #### Shape model material
@@ -213,7 +213,7 @@ and its [L4 quality collection](https://pds-smallbodies.astro.umd.edu/holdings/r
 [Feller et al. (2019)](https://doi.org/10.1051/0004-6361/201833807), Table 6,
 identifies this observing sequence. Actual acquisition times, filters and
 backplane versions come from each selected product’s attached label.
-The [ten-header candidate survey](evidence/osiris-april-candidates.json) separates
+The ten-header candidate survey separates
 the three complete image trials from phase-incompatible and deferred products.
 The GEO inputs are level 5 DDR, with level 4 RDR companions. Each exposure
 retains its original attached label. The companion L4 image must match every GEO
@@ -256,7 +256,7 @@ These residual adjustments follow the disk and phase corrections below.
 
 Preparation emits a lossless source-index raster binding atlas texels to their
 selected exposure, with zero for no accepted observation. It is an inspection
-output, not a browser asset. [`evidence/osiris-source-index.json`](evidence/osiris-source-index.json)
+output, not a browser asset. `evidence/osiris-source-index.json`
 preserves the earlier mosaic; current per-image selection areas and rejection
 counts are in the upgrade evidence.
 
@@ -382,7 +382,7 @@ A measured alternative confirms that later does not mean better coverage:
 the MTP006 albedo table has 166,159 valid cells (64.10%); MTP009 has 45,878
 (17.70%), adding only 662 cells while losing 120,943. These are grid-cell counts,
 not surface areas or a valid seasonal-change analysis. The current four maps
-remain selected. [Original-table comparison](evidence/virtis-albedo-comparison.json). The VIRTIS report contains the decoding and
+remain selected. Original-table comparison. The VIRTIS report contains the decoding and
 registration method.
 
 </details>

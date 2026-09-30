@@ -14,11 +14,11 @@
 
 ## Evidence
 
-The [package check](evidence/cassini-coverage/package-check.json) verifies source/output pins and exact retention of scene and sky geometry (main including #187). The [cold installation](evidence/cassini-coverage/delivery.json) downloaded all 38 files for this body from immutable URLs into an empty destination; no source preparation was needed. Nine source-manifest and photographic-recipe tests passed. Shared ownership diagnostics are unchanged from main; this is not a full-suite pass.
+The package check verifies source/output pins and exact retention of scene and sky geometry (main including #187). The cold installation downloaded all 38 files for this body from immutable URLs into an empty destination; no source preparation was needed. Nine source-manifest and photographic-recipe tests passed. Shared ownership diagnostics are unchanged from main; this is not a full-suite pass.
 
-[Browser previews](evidence/cassini-coverage/browser.json) show the expanded Monochrome surface and oblique boundaries at DPR 1 on the earlier application with the same moon assets. They expose the coarse coverage and brightness seams described below. They are preliminary: the local preview used a different cached M2-9 bank, explicitly recorded in the capture metadata. Current-main application review still requires the six new nebula banks introduced by #187; DPR 2 and responsive checks remain pending.
+Browser previews show the expanded Monochrome surface and oblique boundaries at DPR 1 on the earlier application with the same moon assets. They expose the coarse coverage and brightness seams described below. They are preliminary: the local preview used a different cached M2-9 bank, explicitly recorded in the capture metadata. Current-main application review still requires the six new nebula banks introduced by #187; DPR 2 and responsive checks remain pending.
 
-Monochrome coverage rises from **65.4% to 74.4%** of the fixed display mesh in the shared equal-area measurement. The [display measurement](evidence/cassini-coverage/display-measurement.json) records the sampled brightness range. The [preparation record](evidence/cassini-coverage/refresh.json) pins the recipe, source observations and retained scene. Coverage uses 64 deterministic area samples per display triangle; it is not an image-grid pixel percentage.
+Monochrome coverage rises from **65.4% to 74.4%** of the fixed display mesh in the shared equal-area measurement. The display measurement records the sampled brightness range. The preparation record pins the recipe, source observations and retained scene. Coverage uses 64 deterministic area samples per display triangle; it is not an image-grid pixel percentage.
 
 <details>
 <summary>Earlier evidence, at its recorded revisions</summary>
@@ -27,11 +27,11 @@ The following records describe the earlier surfaces. They are retained as histor
 
 - The exact observations, source URLs and restoration pins are in [source/manifest.json](source/manifest.json) and [source/preparation/acquisition.json](source/preparation/acquisition.json). The simplified surface remains closed and outward wound.
 
-- [Source/package qualification](evidence/close-encounters/qualification.json) verifies every delivered asset and source input and preserves the geometry recipe and retained scene geometry from main. The fixed 2,048 × 1,024 preparation grid accepts 1,066,236 → 1,067,659 Monochrome cells and 241,046 False color cells. These are preparation-grid counts, not physical surface-area percentages.
+- Source/package qualification verifies every delivered asset and source input and preserves the geometry recipe and retained scene geometry from main. The fixed 2,048 × 1,024 preparation grid accepts 1,066,236 → 1,067,659 Monochrome cells and 241,046 False color cells. These are preparation-grid counts, not physical surface-area percentages.
 
-- [Delivery](evidence/close-encounters/delivery.json) verifies the changed immutable HTTPS assets by length. [Elevation reproduction](evidence/close-encounters/elevation-reproduction.json) confirms that the current unchanged main preparer reproduces the existing elevation dataset; the refreshed shadow bank is unrelated to the added photographs.
+- Delivery verifies the changed immutable HTTPS assets by length. Elevation reproduction confirms that the current unchanged main preparer reproduces the existing elevation dataset; the refreshed shadow bank is unrelated to the added photographs.
 
-- [Browser capture](evidence/close-encounters/capture.json): Chrome 152, DPR 1/2, Shadows off/on, drag with retained DOM, and a 390-pixel mobile selector passed. Inspect the [False color product view](evidence/close-encounters/product.png), [rotated lighting](evidence/close-encounters/oblique-shadows-dpr1.png), [mobile view](evidence/close-encounters/mobile.png) and [Monochrome close-up](evidence/close-encounters/monochrome.png). The captured source, recipe and runtime hashes identify the uncommitted moon changes; the later main merge changes Ryugu and its scientific-raster preparation, leaving these moon inputs and the shared browser code unchanged. The [Monochrome capture](evidence/close-encounters/monochrome.json) also mounts successfully after that merge.
+- Browser capture: Chrome 152, DPR 1/2, Shadows off/on, drag with retained DOM, and a 390-pixel mobile selector passed. Inspect the False color product view, rotated lighting, mobile view and Monochrome close-up. The captured source, recipe and runtime hashes identify the uncommitted moon changes; the later main merge changes Ryugu and its scientific-raster preparation, leaving these moon inputs and the shared browser code unchanged. The Monochrome capture also mounts successfully after that merge.
 
 </details>
 

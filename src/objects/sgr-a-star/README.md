@@ -57,7 +57,7 @@ The angular orbits are placed at 8277 pc. Gillessen et al. (2017) fitted at 8320
 
 ## Evidence
 
-[The page before and after the stage-selector fix](evidence/eht-plate-before-after.png) (PR #611, 2026-09-23): the EHT image
+The page before and after the stage-selector fix (PR #611, 2026-09-23): the EHT image
 sat in a zero-height layer because this object's stylesheet was scoped to a stage class the shell no longer renders; it
 now shows around the shadow, with the caption over the shadow's middle.
 

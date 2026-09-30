@@ -21,7 +21,7 @@ The [navigation marker](source/preparation/navigation.json) adds a prepared curv
 Run of 2026-09-23 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places the planet, at this star's Gaia distance, 11 mas from where JWST measured it and moving as HiRISE measured (see [51 Eridani b](../hd-29391-b/README.md)).
-- The system view and the star in its Gaia colour, captured headless at 1440 × 900 from the dev server of this version, with no console errors ([system](evidence/hd-29391-system.png), [star](evidence/hd-29391-star.png)).
+- The system view and the star in its Gaia colour, captured headless at 1440 × 900 from the dev server of this version, with no console errors (system, star).
 
 ## Known problems
 

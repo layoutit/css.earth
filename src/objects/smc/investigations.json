@@ -240,11 +240,7 @@
       "subject": "Application acceptance of the regenerated atlas delivery",
       "status": "included",
       "finding": "Re-inspected in the running application after the delivery became regenerable and atlas-packed. Each dataset now decodes one texture at the Earth framing instead of 128, the world camera is unchanged across all five dataset switches, all 1,803 stars mount and the shared toggle removes and restores them, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views are unchanged from the slice delivery. The earlier inspection of the pre-relocation slice delivery is preserved beside it. Re-inspected again after merging origin/main (177 commits): unchanged verdict on the merged revision, with the same one-texture-per-dataset Earth framing, retained camera, star toggle and clean console.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc/evidence/merged-2026-09-17/inspection.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc/evidence/atlas-delivery-2026-09-17/inspection.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/smc/evidence/promotion-2026-09-17/inspection.json"
-      ]
+      "evidence": []
     }
   ]
 }

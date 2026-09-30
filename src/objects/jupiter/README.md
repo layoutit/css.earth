@@ -15,7 +15,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [visible 2025a](evidence/showcase/visible-2025a.png) · [magnetic](evidence/showcase/magnetic.png) · [mobile dates](evidence/showcase/mobile-dates.png).
+The 26 September 2026 browser and delivery record identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. visible 2025a · magnetic · mobile dates.
 
 ### Dated Hubble maps and magnetic field (26 September 2026)
 

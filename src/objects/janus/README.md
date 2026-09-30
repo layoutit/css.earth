@@ -12,11 +12,11 @@
 
 ## Evidence
 
-The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+The 2026-09-13 color-encoding capture checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. Image delivery verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
-**False color:** A dark, regional color footprint covers part of the cratered hemisphere; it does not extend the Monochrome footprint. The [browser record](evidence/filter-color/capture.json) pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The existing Monochrome images, body leaves and picking triangles are unchanged; the selected false-color assets use the revised display encoding. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
+**False color:** A dark, regional color footprint covers part of the cratered hemisphere; it does not extend the Monochrome footprint. The browser record pins the loaded image responses, camera, settings and inspected views at DPR 1 and 2. The existing Monochrome images, body leaves and picking triangles are unchanged; the selected false-color assets use the revised display encoding. Dragging, Shadows and the mobile selector passed without page errors or replaced scene DOM. Scientific qualification comes from the original camera/shape release and the registration evidence described here; these screenshots document the mounted result.
 
-[False color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). These captures were refreshed on 2026-09-13 after integrating main. The record pins the tested recipe, runtime, display transfer and loaded image bytes, and compares retained geometry.
+False color · DPR 2 · Oblique with Shadows · Mobile. These captures were refreshed on 2026-09-13 after integrating main. The record pins the tested recipe, runtime, display transfer and loaded image bytes, and compares retained geometry.
 
 - The exact frames, archive URLs and byte pins are in [source/manifest.json](source/manifest.json). [source/preparation/terrestrial.json](source/preparation/terrestrial.json) retains each measured camera solution from the shape release's [source/shape/janus_document.pdf](https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/janus_document.pdf).
 
@@ -36,7 +36,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ## Known problems
 
-The existing Monochrome and Elevation shadow atlases changed slightly when rebuilt. A separate preparation of the unchanged main-branch recipe produces these new files byte for byte: this is prior prepared-output drift, not a color-dataset effect. [Pinned comparison and reproduction](evidence/filter-color/shadow-reproduction.json). Unshaded maps and textures retain their previous bytes.
+The existing Monochrome and Elevation shadow atlases changed slightly when rebuilt. A separate preparation of the unchanged main-branch recipe produces these new files byte for byte: this is prior prepared-output drift, not a color-dataset effect. Pinned comparison and reproduction. Unshaded maps and textures retain their previous bytes.
 
 **False color:** Three filters were acquired sequentially, and are not a simultaneous true-color photograph or a composition map. Source shadows and phase-dependent brightness remain. The common footprint is smaller than Monochrome coverage; gray grid marks gaps. Small color fringes can remain at sharp relief because the shape and camera solutions have finite accuracy.
 

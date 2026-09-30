@@ -49,7 +49,7 @@ photometric phase coefficients in `source/photometry/phase.json`.
   the 16 ring wedges match the single ring image they replace to a mean alpha
   error of 1.20/255 inside a wedge and 2.52/255 within 2 px of a wedge
   boundary. The package tests left from the earlier lane are retired and the
-  rest pass. [Before and after](evidence/shared-lane-before-after.webp).
+  rest pass. Before and after.
 
 ## Known problems
 
@@ -152,7 +152,7 @@ Source inspection compared the TIFF rows with the component FITS rows; all selec
 
 Checked on 27 September 2026; subsequent changes add documentation and retained evidence only. Chrome exercised all 12 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
 
-[Source inspection](evidence/opal-source-inspection.json) retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
+Source inspection retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
 
 The three packages restored 479 files (160.17 MB) into an empty directory, with every file matching its inventory entry. This body adds 2.35 MB including metadata. The existing public textures match the base revision byte for byte; their default arrival previews remain unchanged. The source-cache upload contains all 116 new RGB/FITS inputs. These totals describe whole packages, not one page’s initial download.
 

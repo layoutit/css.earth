@@ -1,6 +1,6 @@
 # Pluto
 
-**Surface ices.** The dataset selector groups Methane, Nitrogen, Water under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+**Surface ices.** The dataset selector groups Methane, Nitrogen, Water under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
 
 ## Sources
 
@@ -29,7 +29,7 @@ identify the exact source files and oracle versions. These checks establish
 decoding, source sampling and the declared mask; they do not validate the
 authors' spectral inversion.
 
-The [LEISA validation record](evidence/leisa/validation.json) identifies the
+The LEISA validation record identifies the
 tested inputs and code. All six views passed dataset interaction checks at
 DPR 1 and 2. A the shared browser conformance harness
 verifies the actual latitude and pole texture bindings on desktop and mobile,

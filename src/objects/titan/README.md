@@ -34,7 +34,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 - **Measured height:** Independent source-cell decoding gives measured spherical area coverage 6.0000%. Source extrema and coordinate anchors are in [source/validation/b2-scalar-anchors.json](source/validation/b2-scalar-anchors.json).
 
-- **VIMS registration:** The Trek GeoTIFF georeference cannot be used (see methods). Read as a normal map whose left edge is 180° E, the 2 µm mosaic correlates with the ISS mosaic at r = 0.85 (0.20 as georeferenced). Around Selk, Sinlap, Menrva and the Xanadu margin the three VIMS maps sit within about 6–17 km of the ISS features (a few 1.98 km texels). The unobserved south region then falls at 83–170° E, 75–80° S, where the paper places it (around 80° S, 120° E). Numbers and the comparison image are in [evidence/vims-and-hisar](evidence/vims-and-hisar/checks.json).
+- **VIMS registration:** The Trek GeoTIFF georeference cannot be used (see methods). Read as a normal map whose left edge is 180° E, the 2 µm mosaic correlates with the ISS mosaic at r = 0.85 (0.20 as georeferenced). Around Selk, Sinlap, Menrva and the Xanadu margin the three VIMS maps sit within about 6–17 km of the ISS features (a few 1.98 km texels). The unobserved south region then falls at 83–170° E, 75–80° S, where the paper places it (around 80° S, 120° E). Numbers and the comparison image are in evidence/vims-and-hisar.
 
 - **HiSAR T104 (not added):** the USGS 351 m mosaic lines up with the T126 Radar mosaic (no measurable shift), but its levels are an unpublished logarithmic stretch and it covers 61% of Titan against 75%. See the [ledger](investigations.json).
 
@@ -114,4 +114,4 @@ The recipe declares a sphere of 2574.76 km. The retained mesh keeps its spin ori
 
 The default photographic normal surface uses quarter dimensions through the existing raster resolutionScale contract. Pole textures and the other datasets retain their existing resolutions.
 
-This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. Device evidence records the published bytes, decoded size estimates, trace results and remaining stalls.

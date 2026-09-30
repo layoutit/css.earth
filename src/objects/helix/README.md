@@ -19,7 +19,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 ## Evidence
 
-- [Final app inspection](../../../site/test/evidence/nebulae/2026-09-14/final-helix-m8.json) records front/oblique views across all three datasets after restoring the wider-image cores. [Report context](../../../site/test/evidence/nebulae/2026-09-14/README.md) documents incomplete historical capture metadata.
+- Final app inspection records front/oblique views across all three datasets after restoring the wider-image cores. Report context documents incomplete historical capture metadata.
 - The final app report identifies cloud result `2794e4cc5c3a…`, and the [object descriptor](object.json) pins its installed bank; the field’s image-anchor receipt separates compact-source evidence, image-component offsets and Gaia angular associations.
 - [Historical registration](../../../labs/nebula/models/helix/README.md#aligned-observations-and-native-star-removal) records held-out RMS of 0.34″ for VISTA and 1.10″ for the wider ESO field relative to WFI. This verifies overlap registration, not absolute astrometry or stellar membership. No new cold replay or material acceptance is claimed.
 

@@ -12,9 +12,9 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-The 2026-09-13 [color-encoding capture](evidence/filter-color/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. [Image delivery](evidence/filter-color/delivery.json) verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+The 2026-09-13 color-encoding capture checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. Image delivery verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
-[Displayed surface](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). This display repair does not promote the existing coarse registration to feature-controlled photographic terrain.
+Displayed surface · DPR 2 · Shadows · Mobile. This display repair does not promote the existing coarse registration to feature-controlled photographic terrain.
 
 - **Color registration:** Nominal held-out RMS errors are violet 1.18, blue 1.34 and green 1.64 corrected pixels.
 

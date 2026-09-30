@@ -26,7 +26,7 @@ The author refuses a ring more than 5° or a tenth of the radius from the publis
 
 Run of 2026-09-23 (this version):
 
-- The ring rendered in the application around the planets' orbits, captured headless at 1440 × 900 once the application reported ready, with no console errors ([pds-70-disc-rendered.png](evidence/pds-70-disc-rendered.png)); the author's preview of the image as read, north up ([previews/dust.png](source/previews/dust.png)).
+- The ring rendered in the application around the planets' orbits, captured headless at 1440 × 900 once the application reported ready, with no console errors (pds-70-disc-rendered.png); the author's preview of the image as read, north up ([previews/dust.png](source/previews/dust.png)).
 - [`sky-projection.oracle.test.mts`](../../../tests/oracles/fits/sky-projection.oracle.test.mts): this image's SIN header and a rotated wide SIN header against Astropy.
 - `node packages/telescope-cli/authoring/circumstellar/author.mts pds-70-disc --check` reproduces every authored file.
 

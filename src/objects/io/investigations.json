@@ -70,7 +70,6 @@
       "finding": "Our reduction of 59 JIRAM frames, following Mura et al. (2024), supplies the Volcanic heat dataset. 34 frames register to the sunlit limb; integrated hot-spot output matches the paper's Table 3 (median ratio 1.06 per orbit, 0.83 in the merged map) and 22 of 24 bright peaks lie within 3 degrees of a Davies et al. (2024) source. Coverage is 22% of Io, north and night side only. Revisit when: orbits 51 to 60 are reduced, or Mura et al. or the JIRAM team publish radiance maps as data.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/io/source/science/jiram/receipt.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/io/evidence/volcanic-heat/figure-2.png",
         "https://doi.org/10.3389/fspas.2024.1369472"
       ]
     },
@@ -92,8 +91,6 @@
       "evidence": [
         "https://doi.org/10.3389/fspas.2024.1369472",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/io/source/science/jiram/recipe.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/io/evidence/jiram-close-passes/orbit57-receipt.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/io/evidence/jiram-close-passes/orbit58-receipt.json",
         "https://atmos.nmsu.edu/PDS/data/",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/io/source/science/jiram/perry-receipt.json"
       ],
@@ -128,7 +125,6 @@
       "finding": "18 orbit-51 and 13 orbit-53 frames add roughly 7.6–15.5 km near-nadir sampling. A 0.25-degree map combines six visits, masks new detector samples at or above 10000 DN, and subtracts each qualified detector column's cold-night median before projection. Coverage is 24.12% of spherical surface area, reaching 11.125S. Of 41 peaks above 0.03 W/(m2 sr), 35 are within 3 degrees of catalogue hot spots; absolute radiometry, individual peak identities and resolved lava boundaries remain unqualified.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/io/source/science/jiram/recipe.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/io/evidence/jiram-close-passes/final-map-check.json",
         "https://doi.org/10.3847/PSJ/adbae3"
       ]
     },
@@ -138,7 +134,6 @@
       "status": "included",
       "finding": "All 2374 published M-band FITS frames in 27 orbit directories were screened. Published planetographic geometry and detector masks support 378 accepted frames on 17 contributing visits, covering 58.42% of spherical area on a 0.25-degree grid. Three native PDS comparisons match all radiance samples exactly after horizontal flipping. Cold-column medians and three-frame per-visit medians preserve the existing display scale; 60 of 72 bright local maxima match independent catalogue positions within 3 degrees. Mixed dates, smear, residual tracks, withheld saturation and southern gaps remain; absolute radiometry and total heat flow are not qualified.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/io/evidence/jiram-perry/qualification.json",
         "https://doi.org/10.3847/PSJ/adbae3",
         "https://rgcps.asu.edu/juno/"
       ]

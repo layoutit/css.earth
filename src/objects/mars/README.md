@@ -1,6 +1,6 @@
 # Mars sources
 
-**Surface elements.** The dataset selector groups Chlorine, Iron, Silicon, Potassium, Thorium under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/usgs-numeric/browser.json).
+**Surface elements.** The dataset selector groups Chlorine, Iron, Silicon, Potassium, Thorium under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
 
 Mars shows Viking visible imagery, MOLA relief and THEMIS infrared observations on the shared raster lane used by Mercury and Venus, with modeled atmosphere charts and IAU nomenclature labels.
 
@@ -26,7 +26,7 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 
 ## Evidence
 
-The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. [geology](evidence/showcase/geology.png).
+The 26 September 2026 browser and delivery record identifies the tested revision and inventory. Every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. Existing image assets remain byte-identical. geology.
 
 ### Additional surface datasets (26 September 2026)
 
@@ -106,7 +106,7 @@ The dimmed photograph is a presentation choice: the Viking mosaic as grey at 35%
 
 Byte cost: the photograph now travels in the lossless categorical lane. Each composed dataset measures about 7.6 MB as lossless WebP at 4,096 × 2,048 (valley networks 7.8 MB), against 1.9 MB for the lossy Visible colour texture.
 
-Checks, with the byte identity of every grid and response, are in [the catalogue checks](evidence/catalogues/checks.json):
+Checks, with the byte identity of every grid and response, are in the catalogue checks:
 
 - The USGS dune shapefile matches the Trek layer vertex for vertex. Its projection file names the flattened ellipsoid although its metadata calls the latitudes aerocentric, which is why the Trek response is the input. Dune area is 70,230 km² on the grid against the database's 69,750 km².
 - Every catalogue point, read back through the shared scientific reader, lands in a cell of its own class or the shared class. All but 3 of 1,172,096 valley vertices lie in a marked cell; those 3 sit on a cell edge.
@@ -320,23 +320,23 @@ No new terrain displacement is introduced.
 
 ## Numeric-map qualification
 
-The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+The retained numeric checks bind
 the compact input digests and tested processing files, count coverage, and
 compare native byte samples at hemispheres, seams, extrema and gaps. Their
 calibration check runs before the display coverage masks; it does not validate
 the original instrument or scientific model.
 
-The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+The fresh-install receipt verifies 1,500
 runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
 Sun world metadata, with no reused files. All 15 compact source grids restored
 from the source cache with native fallback disabled and matched byte for byte.
 
-The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+The browser evidence records the earlier
 map descriptions, legends and retained scene. It includes screenshots; the
-[validation record](evidence/usgs-numeric/validation.json) names the checks
+validation record names the checks
 and the local full-build limitation. These checks do not measure instrument
 accuracy or establish how well readers understand the explanations.
 
-The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
+The current-main integration check records the
 build, all 11 grouped selectors, source labels and phone playback. It explains
 which earlier scientific and browser evidence still applies to this version.

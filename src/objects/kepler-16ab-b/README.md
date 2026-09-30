@@ -22,7 +22,7 @@ Not measured and not shown: colour, albedo, surface, atmosphere, rotation. The d
 
 - The seven transits across star A in the Kepler long-cadence light curves (BJD 2454973.43 to 2456328.74) are reproduced within 0.13 days. Single transits alternate about 2.3 days early and late as A swings around the centre of mass; without the centre of mass the model misses them by that much.
 - The orbit of star B puts it in front of A at all 36 primary eclipses of the Kepler mission and behind it at every secondary, at the catalogue's eclipse times.
-- [System view](evidence/system-view.png) at the scene epoch, 2026-09-03, rendered headless in Chrome with GPU compositing from this package: the planet's orbit drawn around the centre of mass of A and B, and B's 41-day orbit around A.
+- System view at the scene epoch, 2026-09-03, rendered headless in Chrome with GPU compositing from this package: the planet's orbit drawn around the centre of mass of A and B, and B's 41-day orbit around A.
 
 ## Known problems
 

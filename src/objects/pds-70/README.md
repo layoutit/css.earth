@@ -19,7 +19,7 @@ PDS 70 is a young K7 star 112 parsecs away in Centaurus, still surrounded by the
 Run of 2026-09-23 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places both planets, at this star's Gaia distance and mass, where VLTI/GRAVITY measured them (see [PDS 70 b](../pds-70-b/README.md)); the astronomy package's 857 tests pass.
-- The system view and the star in its colour, captured headless from the dev server of this version ([system](evidence/pds-70-system.png), [star](evidence/pds-70-star.png)).
+- The system view and the star in its colour, captured headless from the dev server of this version (system, star).
 
 ## Known problems
 

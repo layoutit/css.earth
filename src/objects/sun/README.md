@@ -36,7 +36,7 @@ display path, not the source positions or orbital model. Seen from its centre,
 a chord of an N-vertex circle strays (π/N)²/2 of the radius. On a 1,440 px
 view with the 60° field, that is 1.7 px at 60 vertices and 0.8 px at 90, so a
 moon's orbit seen from its planet no longer shows corners
-([60 against 90](evidence/orbit-points-20260928/moon-and-ganymede.png): the
+(60 against 90: the
 Moon's orbit from 1.1 million km and Ganymede's from 1.9 million km). A host detail view
 defers its satellites' paths until the satellite system is opened or a
 satellite is targeted.
@@ -44,9 +44,9 @@ satellite is targeted.
 ## Evidence
 
 Checked on 27 September 2026.
-The [check record](evidence/aia-cr2311-20260927/checks.json) records the native-source restoration,
+The check record records the native-source restoration,
 FITS and preparation tests, and desktop/mobile arrow checks. Both arrows retain the mounted
-scene and camera. The [mobile capture](evidence/aia-cr2311-20260927/corona-193-mobile.png)
+scene and camera. The mobile capture
 shows the same dataset at 390 × 844, DPR 2. These are display checks, not a new scientific review.
 
 ![The 193 Å corona view, with its source map and wavelength arrows](evidence/aia-cr2311-20260927/corona-193-desktop.png)

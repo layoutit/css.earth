@@ -31,8 +31,7 @@
       "finding": "Calibrated IRAC 8.0/4.5/3.6 micrometre maps from CDS hips2fits, composed on the 1757 by 1417 pixel, 35.73 by 28.81 arcmin TAN grid with one measured background and range per band and one asinh display. Registered against ESO optical with 214 matched stars and 0.118 px held-out RMS. MIPS 24 micrometres is left out because its HiPS has no data over the Hourglass core; hue shows band-relative brightness, not physical ratios.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m8/source/sky-bands/spitzer-irac.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8/evidence/spitzer-fits/preview-comparison.jpg"
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json"
       ]
     },
     {

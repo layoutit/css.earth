@@ -32,19 +32,19 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
 
 ## Evidence
 
-- **Photometric trials, 2026-09-13:** trials with the published Hapke parameters reduced accepted photographic area from 32.58% to 24.48% for Deep Impact and from 56.43% to 34.28% for NExT. Overlap differences improved in only 11 of 28 and four of 15 pairs, respectively. Both original photograph mosaics remain in use. [Parameters, measurements and limitations](evidence/photometry/trial.json) record these diagnostic trials, including the unverified original H-function approximation and the filter mismatch.
+- **Photometric trials, 2026-09-13:** trials with the published Hapke parameters reduced accepted photographic area from 32.58% to 24.48% for Deep Impact and from 56.43% to 34.28% for NExT. Overlap differences improved in only 11 of 28 and four of 15 pairs, respectively. Both original photograph mosaics remain in use. Parameters, measurements and limitations record these diagnostic trials, including the unverified original H-function approximation and the filter mismatch.
 
 - **Recipe update, 2026-09-13:** a full preparation after merging main's observation recipes ( plus this infrared change) preserves all 49 delivered images byte-for-byte. Runtime values are unchanged, so the earlier browser captures still apply to the comet views. The photographic display fields, source pins and navigation receipts use the new shared recipe; source/package and numerical-frame checks pass.
 
-- **Infrared browser checks, 2026-09-13:** [temperature](evidence/infrared/temperature.png) and [continuum slope](evidence/infrared/spectral-slope.png) in the running application, plus this infrared addition. Both datasets render with correct legends, grid gaps, and Shadows off. Selecting either dataset turns to its measured region. Dataset switching, rotation and zoom were exercised; the shared mobile information sheet was checked at 390 × 844. The desktop captures are 1280 × 720 and show new views, not a before/after pixel comparison.
+- **Infrared browser checks, 2026-09-13:** temperature and continuum slope in the running application, plus this infrared addition. Both datasets render with correct legends, grid gaps, and Shadows off. Selecting either dataset turns to its measured region. Dataset switching, rotation and zoom were exercised; the shared mobile information sheet was checked at 390 × 844. The desktop captures are 1280 × 720 and show new views, not a before/after pixel comparison.
 - **Reproduction and closure:** both declared field tables and preparation records reproduce byte-for-byte through the acquisition operator from isolated native input copies. All 36 focused acquisition, spectrum, camera and facet tests, six affected body source/package checks, and four mesh/landmark checks passed. Preparation build and typecheck passed. This is focused validation, not an all-body suite result.
 
 - **Infrared numerical checks, 2026-09-13:** [six native-row fixtures](../../../packages/bake/src/objects/layers/terrestrial/missions/fixtures/comets/hrii-native-reference.json), calculated independently with Astropy BlackBody and SciPy optimization, agree with the TypeScript fitter within 0.05 K and 0.01 percentage points per 100 nm. Synthetic spectra also verify units, reflected-light subtraction, masking, and free thermal amplitude. These check decoding/fitting, not absolute temperature accuracy or global coverage.
 - The [scan recipe](source/science/hrii/scan.json) pins the original exposures, solar spectrum, source mesh, context image and terrain controls. Its [reproduced preparation record](source/science/hrii/preparation.json) gives coverage, fit residuals and withheld-pixel counts. The native facet table is paired with this exact source shape before bounded transfer to the existing 1000-triangle display.
 
-- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. The 68 catalog and terrain checks passed, after merging main's photographic updates. The [browser capture](evidence/terrain-places/whole-body-2c24ca749.jpg), taken in the in-app browser at 1280 × 720, shows S2 and the Deep Impact site without a selected place at whole-body framing on the NExT dataset. Rotating at the same distance also revealed S1. The label change preserves coordinates, captions, mesh, imagery and screen-size admission.
+- **Label discovery, 2026-09-12:** the [whole-body discovery check](../../../tests/objects/unit/surface-feature-discovery.test.mts) verifies earlier eligibility for the broad surface places. The 68 catalog and terrain checks passed, after merging main's photographic updates. The browser capture, taken in the in-app browser at 1280 × 720, shows S2 and the Deep Impact site without a selected place at whole-body framing on the NExT dataset. Rotating at the same distance also revealed S1. The label change preserves coordinates, captions, mesh, imagery and screen-size admission.
 
-- The [close-up comparison and browser record](evidence/closeups/README.md) show the eight-image result at the same camera and at DPR 1 and 2.
+- The close-up comparison and browser record show the eight-image result at the same camera and at DPR 1 and 2.
 
 - The constraint-grid qualification records checks and captured views.
 
@@ -53,7 +53,7 @@ The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 
 - **Surface place, 2026-09-12:** preparation and the runtime parser accepted the
   Deep Impact site; three focused unit tests passed. With this
   addition, searching for the site and switching to the 2005 photographs showed
-  its qualified caption. [Browser capture](evidence/surface-places.png).
+  its qualified caption. Browser capture.
   The published catalog passed a fresh byte-count check.
 
 - **S1–S4 terrain places, 2026-09-12:** three focused checks reproduce the map
@@ -82,7 +82,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ## Known problems
 
-- **Close-up replay, 2026-09-13:** regenerating the first cropped ITS camera fails its existing registration budget with both main's matcher and the radiance-unit fix. The regenerated control records are identical. The [replay comparison](evidence/registration/closeup-replay.json) preserves input identities and the failure; earlier successful reproduction reports do not establish a current pass. The shipped camera records and photographs remain unchanged.
+- **Close-up replay, 2026-09-13:** regenerating the first cropped ITS camera fails its existing registration budget with both main's matcher and the radiance-unit fix. The regenerated control records are identical. The replay comparison preserves input identities and the failure; earlier successful reproduction reports do not establish a current pass. The shipped camera records and photographs remain unchanged.
 - Infrared placement is coarse. Terrain residuals test alignment relative to the existing photographic/body frame; they do not establish an independent absolute position. That frame inherits source shape and earlier photographic-anchor uncertainty. Temperature and slope pixels must not be used to locate small surface features.
 - These are new fits to PDS version 3 spectra, not a reproduction of the 2013 paper’s published maps. That paper used earlier calibration and different meshes. Its quoted temperature errors cannot simply be assigned to these views. Calibration, unresolved temperature mixtures, scattered light and geometric uncertainty remain.
 

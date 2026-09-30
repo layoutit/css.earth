@@ -58,10 +58,7 @@
       "subject": "Four MapCam wavelength maps",
       "status": "included",
       "finding": "The USGS v2 ZIP supplies four original float32 GeoTIFFs at 473, 550, 698 and 847 nm with a common cartographic grid. All four are included as one Reflected light group on the existing OLA v20 display shape. A fixed 0–0.08 I/F grayscale range preserves inter-band brightness differences. Independent native-byte probes pass; gaps remain missing and source extremes clip only for display. Physical map-to-shape registration and the existing display-lighting model are not newly qualified.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/bennu/evidence/spectral-bands/native-values.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/bennu/evidence/spectral-bands/delivery-and-browser.json"
-      ]
+      "evidence": []
     },
     {
       "id": "selected-rswg-gravity-anomaly",

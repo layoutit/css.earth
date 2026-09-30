@@ -12,7 +12,7 @@ The [ESO ESPRESSO product](https://dataportal.eso.org/dataPortal/file/ADP.2024-0
 
 ## Evidence
 
-The focused hosted-orbit, source, package and rendered-scene checks passed; see the [evidence and browser captures](evidence/README.md). The [independent Astropy/NumPy colour calculation](evidence/color-reference.json) agrees at sRGB [255, 218, 212]. Every visible 1 nm bin contains measured samples. This checks integration of the same spectrum, not its calibration. No N-body dynamics are claimed.
+The focused hosted-orbit, source, package and rendered-scene checks passed; see the evidence and browser captures. The independent Astropy/NumPy colour calculation agrees at sRGB [255, 218, 212]. Every visible 1 nm bin contains measured samples. This checks integration of the same spectrum, not its calibration. No N-body dynamics are claimed.
 
 ## Known problems
 

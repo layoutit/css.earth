@@ -22,7 +22,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 ## Evidence
 
-- [Recorded app checks](../../../site/test/evidence/nebulae/2026-09-14/field-defaults.json) cover the catalogue field, projection and star toggle; [evidence context](../../../site/test/evidence/nebulae/2026-09-14/README.md) states their version and limits.
+- Recorded app checks cover the catalogue field, projection and star toggle; evidence context states their version and limits.
 - The [object descriptor](object.json) pins the installed bank whose provenance identifies compiler result `3fac3e884fb5…`. The [delivery request](source/delivery.json) pins preparation inputs and retains the older accepted-lab reference separately. This documentation review did not perform a cold replay.
 - [Historical processing evidence](../../../labs/nebula/models/m1/processing-evidence.json) separates stellar registration, native pixel accounting and projected-signal checks. These establish their recorded processing behavior, not physical depth or current material acceptance.
 

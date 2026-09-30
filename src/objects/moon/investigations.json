@@ -96,7 +96,6 @@
       "status": "included",
       "finding": "Eight 2016 Kaguya MI views plus a shared companion-fit coverage gate; FeO outside 0–100 weight percent is masked. Native samples and all compact-cell calibration and masks are checked. The evidence records the tested file hashes.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/evidence/usgs-numeric/numeric-checks.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md"
       ]
     },
@@ -107,7 +106,6 @@
       "finding": "Two numeric views, Gravity (free-air anomaly) and Bouguer gravity (2,500 kg/m3 Bouguer disturbance), in mGal from the PDS RSDMAP products read through their EXTRAS GeoTIFF copies, which match the IMG values cell for cell. Degree 660 is the archived sum just above the label's degree-600 prior limit; its 8.3 km half-wavelength spans about three texels of the 4,096-pixel texture. The evidence records the tested file hashes.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/README.md",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/moon/evidence/grail-gravity/checks.json",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_anom_l660.lbl",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/rsdmap/gggrx_1200a_boug_l660.lbl",
         "https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/extras/extrinfo.txt"

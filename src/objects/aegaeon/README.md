@@ -6,7 +6,7 @@
 
 ## Evidence
 
-The [14 September native-frame review](evidence/registration/review.json)
+The 14 September native-frame review
 examines two consecutive calibrated clear-filter images, N1643264914 and
 N1643265020. Hedman et al. identify the latter in Figure 18. The same detector
 window contains a diffuse disc candidate in both frames. This locates a useful
@@ -14,7 +14,7 @@ source candidate; it does not establish a registered surface.
 
 ![Two native Cassini crops, I/F multiplied by 20 and enlarged six times](evidence/registration/native-pair.png)
 
-The [historical-kernel comparison](evidence/registration/native-geometry.json)
+The historical-kernel comparison
 gives N1643265020 a viewing longitude of 158.04–158.09° west, near the paper's
 158.3°. OPUS reports 291.756° in its own current geometry. These values must not
 be used interchangeably. The earlier 135° disagreement is therefore not evidence

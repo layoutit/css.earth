@@ -221,7 +221,7 @@ failed startup cases verify that settings, choices and scene elements survive.
 
 ![A native Titan search in the existing Saturn scene with JavaScript disabled](images/native-search.png)
 
-The earlier [continuous Saturn capture](../site/test/evidence/progressive-enhancement.mp4)
+The earlier continuous Saturn capture
 was recorded, before native dataset submits were added.
 At 1280×900, application scripts are held for the first ten seconds,
 while the existing information tabs work by click and keyboard. Script startup

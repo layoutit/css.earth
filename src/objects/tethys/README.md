@@ -141,18 +141,18 @@ A texel keeps the photograph only when four conditions hold. Its four image cont
 
 Preparing Tethys again on 14 September 2026 refined the same frame differently. The limb fit used 152 fit and 147 holdout edges instead of 89 and 93, and its rotation fell from 0.012° to 0.0061°. The limb refinement module had not changed since before the previous images were committed, and two preparation runs on 14 September produced identical images. Why the fit found a different edge set is not identified.
 
-A [Pixelmatch comparison](evidence/iss-re-preparation/comparison.webp) renders both image sets in one page with Chrome 153.0.8010.37, 1440 × 1000, DPR 2 and an unchanged 1480 × 1560 crop. The previous capture swaps in the three earlier ISS images; every other file is unchanged. [Capture settings and byte pins](evidence/iss-re-preparation/capture.json) identify both image sets. Pixelmatch 7.2.0 uses threshold **0.1**, including anti-aliasing, without masks. Differences follow the limb and the edge of the photograph.
+A Pixelmatch comparison renders both image sets in one page with Chrome 153.0.8010.37, 1440 × 1000, DPR 2 and an unchanged 1480 × 1560 crop. The previous capture swaps in the three earlier ISS images; every other file is unchanged. Capture settings and byte pins identify both image sets. Pixelmatch 7.2.0 uses threshold **0.1**, including anti-aliasing, without masks. Differences follow the limb and the edge of the photograph.
 
 | Comparison | Mismatched pixels / 2,308,800 |
 | --- | ---: |
 | Repeat capture of the re-prepared dataset, both views | 0; identical bytes |
-| [Previous → re-prepared, facing the photograph](evidence/iss-re-preparation/pose-1-change.json) | 141,030 |
-| [Previous → re-prepared, photograph edge at the limb](evidence/iss-re-preparation/pose-2-change.json) | 215,631 |
+| Previous → re-prepared, facing the photograph | 141,030 |
+| Previous → re-prepared, photograph edge at the limb | 215,631 |
 
-[In the images themselves](evidence/iss-re-preparation/assets.json), 8.0% of the surface texture's 32,768,000 pixels differ, as do 0.12% of the shadow texture, 2 of the thumbnail's 4,608 pixels and 3.4% of the [minimap](evidence/iss-re-preparation/minimap.webp).
+In the images themselves, 8.0% of the surface texture's 32,768,000 pixels differ, as do 0.12% of the shadow texture, 2 of the thumbnail's 4,608 pixels and 3.4% of the minimap.
 
 ## iPad atlas footprint
 
 Photographic normal/enhanced and elevation/albedo display atlases use quarter dimensions. Infrared and ice-absorption scales retain their existing values. The closed mesh culls its back faces.
 
-This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. Device evidence records the published bytes, decoded size estimates, trace results and remaining stalls.

@@ -126,9 +126,9 @@ thumbnails were unavailable in the local checkout; this was not a full catalogue
 delivery or browser-conformance pass. [Earth's close-zoom limitation](../src/objects/earth/README.md#known-problems)
 occurred with both the previous and new photographic bytes.
 
-The [Enceladus comparison](../src/objects/enceladus/evidence/native-source-sampling.png)
+The Enceladus comparison
 separates source sampling from WebP quality at an identical camera position.
-[Dione's enhanced-color capture](../src/objects/dione/evidence/native-source-enhanced.png)
+Dione's enhanced-color capture
 shows a complete product view. These examples demonstrate the prepared result;
 they do not establish new observational resolution or remove the sources' seams.
 The [Enceladus Pixelmatch evidence](../src/objects/enceladus/README.md#evidence)
@@ -353,7 +353,7 @@ lane. Their surface maps now declare 0° E, and each README records the correcti
 Headless Chromium on the dev server, each capture after `window.__cssEarth.ready`, "fly to" one named feature per body.
 Before, Umbriel's Wunda and Triton's Xuuch land on the no-data grid and Oberon's Hamlet and Titania's Gertrude on smeared
 edges; after, each lands on its feature. The before row's Iapetus tile already has its fix; its own before and after are in
-its [evidence note](../src/objects/iapetus/evidence/map-edge-2026-09-28.md).
+its evidence note.
 
 ![Gaspra detector image beside a reprojected mosaic, with four matching patches marked](images/gaspra-registration.png)
 

@@ -18,7 +18,7 @@ to 4 bytes. Preparation retains the original atlas coordinate domain: the scene
 geometry and complete runtime definition are unchanged. The pole coverage, limb
 plate and arrival billboard remain byte-identical.
 
-[Matched native iPad evidence](../../../packages/bake/evidence/constant-surface-raster.json)
+Matched native iPad evidence
 records identical scene crops at Pixelmatch threshold 0.1. This saves decoded image
 storage; the paired timing runs do not establish a reduction in remaining stalls.
 

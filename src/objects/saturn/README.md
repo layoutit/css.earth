@@ -23,7 +23,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 On 2026-09-20, Saturn was regenerated from its checked source closure and
 inspected in Chromium at a 1,440 x 1,100 CSS-pixel viewport. The retained DOM
 contained no `saturn-weather` asset or style reference. The matched-camera
-[before/after crop](evidence/weather-overlay-removal.webp) shows the former
+before/after crop shows the former
 project-authored storm ovals on the left and the source-backed visible mosaic
 on the right. This image is review evidence, not an input to the runtime view.
 
@@ -176,7 +176,7 @@ solar tint. The earlier hand-authored gap clearings, alpha caps and F-ring
 core are gone; the Encke and Keeler gaps, the Cassini division and the F
 ring come from the occultation.
 
-[`evidence/opal-surface-uvis-rings.webp`](evidence/opal-surface-uvis-rings.webp) shows
+`evidence/opal-surface-uvis-rings.webp` shows
 the prepared solar-tinted body surface and the prepared ring texture from this
 source pair, as inspected before acceptance.
 
@@ -569,10 +569,10 @@ Source inspection compared the TIFF rows with the component FITS rows; all selec
 
 Checked on 27 September 2026; subsequent changes add documentation and retained evidence only. Chrome exercised all 8 dates at 1100 × 760, checked the selected surface and pole URLs, wrapped the last date to the first, and paused without advancing. The same scene node stayed mounted and the runtime reported no error. The shared playback also passed on Jupiter.
 
-[Source inspection](evidence/opal-source-inspection.json) retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
+Source inspection retains the source dimensions, header dates, unobserved-row ranges and stored/reversed-row correlations. The component-coverage tests passed (13); shared playback tests passed (6), including slow loading, manual selection, hidden tabs and destruction. Source-lineage checks passed (19), including Saturn’s existing materials and the RGB map plus all three FITS masks.
 
 The three packages restored 479 files (160.17 MB) into an empty directory, with every file matching its inventory entry. This body adds 1.59 MB including metadata. The existing public textures match the base revision byte for byte; their default arrival previews remain unchanged. The source-cache upload contains all 116 new RGB/FITS inputs. These totals describe whole packages, not one page’s initial download.
 
 ![Dated OPAL map with the shared sequence controls](evidence/opal-dates-desktop.webp)
 
-Saturn was also inspected with Shadows enabled and flood lighting. At 390 × 844, Play advanced the sequence, Pause held it, and the page had no horizontal overflow. Selecting Visible color stopped the loop. [Mobile controls](evidence/opal-dates-mobile.webp).
+Saturn was also inspected with Shadows enabled and flood lighting. At 390 × 844, Play advanced the sequence, Pause held it, and the page had no horizontal overflow. Selecting Visible color stopped the loop. Mobile controls.

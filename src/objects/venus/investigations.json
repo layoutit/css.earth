@@ -122,7 +122,6 @@
       "status": "included",
       "finding": "Numeric Magellan GTDR, reflectivity and roughness; emissivity keeps the identity, palette and calibration introduced by #828. Roughness uses the PDS formula because the detached ISIS multiplier conflicts. The evidence records the tested file hashes.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/venus/evidence/usgs-numeric/numeric-checks.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/venus/README.md"
       ]
     },

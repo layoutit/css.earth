@@ -69,7 +69,7 @@ No new geometry, texture or device-specific level policy is introduced.
 
 The connection-order regression uses Neptune's real prepared groups in `src/platform/object-selection-runtime.test.mts`.
 The leaf-box unit test checks initial selection, unchanged repeated preparation and the subsequent motion freeze.
-[Matched iPad captures](evidence/initial-leaf-backing.json) record the reduced layer allocation, remaining first-paint
+Matched iPad captures record the reduced layer allocation, remaining first-paint
 stalls and measurement limits.
 
 ## Evidence

@@ -17,7 +17,7 @@ The retained source checks cover closed 800-face geometry, independent facet/cen
 
 ![Didymos DRACO mosaic, with the unphotographed area retaining the grid](evidence/draco-mosaic-overview.webp)
 
-The [12 September 2026 browser and installation evidence](evidence/draco-mosaic-browser.json) records desktop, DPR 2 and mobile runs: dataset switching, retained drag, close zoom, both lighting states and a click on Carillon Saxum. The check used separately downloaded, hash-verified runtime files. Shadows start off. The [close-up](evidence/draco-mosaic-close.webp) and [mobile view](evidence/draco-mosaic-mobile.webp) expose the partial coverage and coarse source detail; they are product captures, not native mission photographs. Didymos's runtime inventory grows from 8.126 to 8.964 MB, entirely from the DRACO surface, shadow and thumbnail; its 40 previous assets are unchanged. These totals exclude the shared app and scene JSON.
+The 12 September 2026 browser and installation evidence records desktop, DPR 2 and mobile runs: dataset switching, retained drag, close zoom, both lighting states and a click on Carillon Saxum. The check used separately downloaded, hash-verified runtime files. Shadows start off. The close-up and mobile view expose the partial coverage and coarse source detail; they are product captures, not native mission photographs. Didymos's runtime inventory grows from 8.126 to 8.964 MB, entirely from the DRACO surface, shadow and thumbnail; its 40 previous assets are unchanged. These totals exclude the shared app and scene JSON.
 
 Source test definitions.
 
@@ -32,7 +32,7 @@ also require the unfiltered, mixed-body camera fit to fail.
 The preparation trial uses 64 deterministic samples per triangle on the unchanged
 800-face mesh: 13.96% area-weighted coverage, with 3.72% of total mesh area supplied
 by the closer frame. The remaining photographic area comes from the wider frame.
-The [sampling record](evidence/draco-mosaic-sampling.json) retains these results and the recipe hash. An overlap fit raises the wider frame's display brightness by 7.06%, within the
+The sampling record retains these results and the recipe hash. An overlap fit raises the wider frame's display brightness by 7.06%, within the
 20% authored limit. This follows approximate Lommel–Seeliger disk normalization
 at nearly identical phase angles; it is a display adjustment, not recovered albedo.
 

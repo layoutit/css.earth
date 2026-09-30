@@ -11,8 +11,7 @@
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/vista-infrared/provenance.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json"
       ]
     },
     {
@@ -24,8 +23,7 @@
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/horalek-widefield/provenance.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json"
       ]
     },
     {
@@ -37,8 +35,7 @@
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/lenses/wise-wide-infrared/provenance.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json"
       ]
     },
     {
@@ -197,8 +194,7 @@
       "finding": "The repaint banks whose handoff failed are retired. The finite-emission bank paints all three axes from one fitted neutral alpha and fades faint texels to neutral below alpha 11, and the app inspection shows no bank banding at Earth, oblique or either 90° side view, but the dedicated XYZ handoff comparison has not been run on this bank. Earlier finding (2026-09-14): Current source-colored density uses shared geometry and alpha, but six historical dedicated handoff comparisons remained failed. Those numerical measurements belong to their recorded banks; successful later interaction checks do not establish rotation stability.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/docs/slice-stability.md",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/RESEARCH.md",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
+        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/RESEARCH.md"
       ],
       "revisitWhen": "Run the unchanged same-camera bank-isolation gate on the actual candidate and fix the common material/compositing cause while preserving stars and local texture continuity."
     },
@@ -241,9 +237,7 @@
       "subject": "Application acceptance of the finite-emission bank",
       "status": "included",
       "finding": "In the running application, reached by label fly-to: each dataset decodes one texture at the Earth framing, a dataset switch leaves the world camera unchanged, all 1,042 stars mount, render visible and toggle off, and the route raises no page error and no failing request. Earth, oblique and both exact 90-degree side views were inspected; the side views show line-of-sight extent rather than a sheet.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc/evidence/promotion-2026-09-19/inspection.json"
-      ]
+      "evidence": []
     },
     {
       "id": "per-dataset-opacity",

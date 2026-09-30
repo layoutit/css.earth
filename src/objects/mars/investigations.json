@@ -299,7 +299,6 @@
       "status": "included",
       "finding": "Numeric MOLA MEGDR replaces colored topography while preserving the GRS, geology, magnetic and crust views from #828. Heights are meters above the GMM-2B areoid. The evidence records the tested file hashes.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/evidence/usgs-numeric/numeric-checks.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mars/README.md"
       ]
     },

@@ -14,7 +14,7 @@ Gaia DR3 publishes only the continuous BP/RP coefficients for this star. They ar
 
 ## Evidence
 
-See the [system evidence](evidence/README.md).
+See the system evidence.
 
 ## Known problems
 

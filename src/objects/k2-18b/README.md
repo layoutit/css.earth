@@ -14,7 +14,7 @@ Not measured and not shown: colour, albedo, surface or clouds, rotation. The rot
 
 ## Evidence
 
-[2026-09-22 exoplanet radius and route check](../../../site/test/evidence/exoplanets/2026-09-22/README.md): the 16,646.9 km source radius agrees with the scene and world frame and with Benneke et al.'s 2.610 Earth-radii result. The prepared runtime contract passed, and a fresh install fetched the published inventory. Chrome showed the neutral sphere and the 2.610 Earth-radii fact without console errors after the view settled; an inspected screenshot is retained in the report.
+2026-09-22 exoplanet radius and route check: the 16,646.9 km source radius agrees with the scene and world frame and with Benneke et al.'s 2.610 Earth-radii result. The prepared runtime contract passed, and a fresh install fetched the published inventory. Chrome showed the neutral sphere and the 2.610 Earth-radii fact without console errors after the view settled; an inspected screenshot is retained in the report.
 
 ## Known problems
 

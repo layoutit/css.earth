@@ -20,7 +20,7 @@ VHS 1256-1257 A is one of two young, nearly identical dwarfs 21 parsecs away in 
 
 Run of 2026-09-23 (this version):
 
-- The four systems added with this one (VHS 1256-1257, GQ Lup, DH Tau, ROXs 42B), each captured headless at 1440 × 900 from the dev server of this version with its system overview open and no console errors ([young-imaged-systems.png](evidence/young-imaged-systems.png)).
+- The four systems added with this one (VHS 1256-1257, GQ Lup, DH Tau, ROXs 42B), each captured headless at 1440 × 900 from the dev server of this version with its system overview open and no console errors (young-imaged-systems.png).
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) puts B, on Dupuy et al.'s orbit around this star, within 2.1 of its own error bars of all eight Keck/NIRC2 positions in their Table 1.
 
 ## Known problems

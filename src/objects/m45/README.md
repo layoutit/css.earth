@@ -20,7 +20,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 ## Evidence
 
-- [Recorded app checks](../../../site/test/evidence/nebulae/2026-09-14/field-defaults.json) cover the delivered composite and catalogue field; [report context](../../../site/test/evidence/nebulae/2026-09-14/README.md) limits their claims.
+- Recorded app checks cover the delivered composite and catalogue field; report context limits their claims.
 - [Delivery](source/delivery.json) pins the compiler and composite recipes. The app composite uses a freshly supplied compiler result; the historical standalone composite remains a separate comparison. This is not a new cold-replay or material acceptance claim.
 - [Historical registration evidence](../../../labs/nebula/models/m45/registration-evidence.json) records relative stellar alignment. Niittee’s 99 held-out stars give 0.450″ RMS only within the central NOIRLab overlap; absolute and outer-field distortion remain unqualified.
 

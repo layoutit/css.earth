@@ -30,7 +30,7 @@ installs the pinned packages in `datasette/requirements.txt` into the ignored
 archives; every table and view can be filtered, sorted and exported, and the
 `global_maps` view shows each map's preview grouped by body, with whether the app
 uses it. The settings, dark theme and map gallery live in `datasette/`.
-The [dashboard](evidence/datasette-dashboard.jpg) and [map gallery](evidence/datasette-global-maps.jpg)
+The dashboard and map gallery
 captures were taken from this ledger on 28 September 2026.
 
 `bodies` and `dataset_bodies` file each record under the bodies it names. PDS4 and
@@ -196,7 +196,7 @@ retained evidence hashes, OPUS partition reconciliation, label byte counts,
 proposal writeups/joins, filters and exports. These checks establish ledger
 consistency, not scientific acceptance of the proposed datasets.
 
-The [browser capture](evidence/ledger-slice.jpg) records the SQLite migration viewer,
+The browser capture records the SQLite migration viewer,
 before its heading was renamed to Astronomy data ledger.
 The `validation:sqlite-migration` evidence entry records the compared revision,
 migration extent, commands and browser cases. Browser version and DPR were not

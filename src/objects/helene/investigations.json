@@ -19,8 +19,7 @@
       "finding": "N1675163339_1 and N1519536732_1 expand sampled Monochrome physical-area coverage from 65.4% to 74.4%. Overlap-derived gains fit the measured 2.5 budget. The existing disconnected bright pair remains and now supplies about 35% of accepted area; this expansion does not repair its brightness discontinuity. Current-main browser qualification remains pending.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/helene_document.pdf",
-        "https://pds-rings.seti.org/cassini/iss/",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/helene/evidence/cassini-coverage/refresh.json"
+        "https://pds-rings.seti.org/cassini/iss/"
       ]
     },
     {
@@ -54,9 +53,7 @@
       "subject": "Four additional June2011 Cassini clear views",
       "status": "included",
       "finding": "N1687119135_1 adds roughly 44 m/pixel source sampling versus the earlier best58 m/pixel. N1687121164_1, N1687121224_1 and N1687121524_1 add nearby views. The recorded benefit is primarily detail/overlap, not large new coverage.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/helene/evidence/close-encounters/qualification.json"
-      ]
+      "evidence": []
     },
     {
       "id": "isolated-bright-pair",
@@ -64,9 +61,7 @@
       "status": "unresolved",
       "finding": "These25–27-degree phase views overlap no other accepted frame. They remain selected but supply about 35% of displayed area at roughly 1.65 times the brightness; the later coverage expansion did not establish a level connecting them.",
       "revisitWhen": "An overlapping controlled observation or source-backed photometric solution connects the pair to the other selected observations.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/helene/evidence/cassini-coverage/refresh.json"
-      ]
+      "evidence": []
     }
   ]
 }

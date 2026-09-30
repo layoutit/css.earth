@@ -195,9 +195,7 @@
       "status": "excluded",
       "finding": "The earlier default presentation pasted a checked 290 by 34 static snapshot, prepared from OpenSpace surface texels and three authored storm kernels, over nine visible-color body faces. It was an artistic presentation rather than scientific storm data and has been removed from the selected dataset and runtime asset closure.",
       "revisitWhen": "A distinct, explicitly labeled artistic-storm dataset is requested; it must remain off by default and separate from observation products.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/evidence/weather-overlay-removal.webp"
-      ]
+      "evidence": []
     },
     {
       "id": "psg-charts",

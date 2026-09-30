@@ -83,7 +83,7 @@ Voyager's own. The ordering agrees with independent measurements: Karkoschka (20
 (2026, *Planet. Sci. J.*, [doi:10.3847/PSJ/ae4a1b](https://doi.org/10.3847/PSJ/ae4a1b)) measure
 V/B of 1.03–1.05 with Oberon and Titania the reddest. The whole dataset then takes one brightness gain
 against the monochrome base (the median over every footprint boundary); the brightest 0.1 % of texels
-may clip. The prepared map is in [evidence](evidence/voyager-color/map.png).
+may clip. The prepared map is in evidence.
 
 Tests. `node --test tools/objects/voyager-iss/*.test.mts packages/bake/src/objects/raster/photometric-observations.test.mts` (then [`tests/objects/terrestrial/photometric-observations.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/photometric-observations.test.mts); now [`packages/bake/src/objects/raster/photometric-observations.test.mts`](../../../packages/bake/src/objects/raster/photometric-observations.test.mts)) (the voyager-iss tests, [then](https://github.com/layoutit/css.earth/tree/40d2789252/tools/objects/voyager-iss), now `packages/bake/authoring/voyager-iss`)
 covers the limb fit, the tile writer's ground floor, and the composer's withheld, band-level,

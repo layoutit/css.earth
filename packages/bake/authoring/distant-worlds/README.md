@@ -51,7 +51,7 @@ body's source account, independently of this display simplification.
 
 ## Checks
 
-[Validation helpers](../../../../evidence/distant-worlds/README.md) check package
+Validation helpers check package
 closure, fresh source and runtime installation, radial surface deviation and
 browser behavior. New reports go into ignored `output/`; the body README links
 the evidence for its current sources and interpretation.

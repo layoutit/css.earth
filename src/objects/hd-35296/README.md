@@ -1,6 +1,6 @@
 # HD 35296
 
-**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+**Magnetic field.** The dataset selector groups Outward / inward, North / south, Around the star under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
 
 ## Sources
 

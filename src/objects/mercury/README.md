@@ -69,7 +69,7 @@ still the interior illustration's outer surface.
 
 ## Evidence
 
-The [native-byte checks](evidence/native-maps) compare representative compact
+The native-byte checks compare representative compact
 pixels with independently read original bytes, using the publisher's detached
 PDS3 labels for offsets and coordinates. The checker performs explicit pixel
 area sums without the production GeoTIFF decoder. Conversion receipts identify
@@ -78,17 +78,17 @@ footprints. These are checks of data handling, not instrument accuracy.
 
 The Color map (27 September 2026, on `ccbf483de8`) went through the same reducer
 and an independent check: 25 of 25 footprints match the original bytes, 15 of them
-observed and 10 in the polar gray grid ([check](evidence/native-maps/md3-check.json),
-[conversion receipt](evidence/native-maps/md3-conversion.json)). The original file
+observed and 10 in the polar gray grid (check,
+conversion receipt). The original file
 is 796,539,539 bytes; the reducer read it in row windows of at most 0.55 MB. Its
 256,870 missing and 17,555 partial display pixels are the same count as the
-enhanced map's. The [comparison](evidence/native-maps/md3-vs-enhanced.json) shows
+enhanced map's. The comparison shows
 the two are different products: 26.5% of pixels differ at pixelmatch threshold 0.1,
 and the Color map's blue mean is 97 against the enhanced map's 134
-([both maps](evidence/native-maps/md3-vs-enhanced.webp)). The Color dataset has not
+(both maps). The Color dataset has not
 been baked or inspected in a browser yet.
 
-The [qualification record](evidence/native-maps/qualification.json) records the
+The qualification record records the
 tested inputs, unchanged geometry, inspected browser views, delivery and focused
 checks: 75 independent native footprints agree, and all 76 runtime files installed from the published asset host into an empty directory. The normal and enhanced surface maps are 2.48 MB and 3.55 MB; the new LOI map adds 2.93 MB. No cold-load timing was measured. Earlier JPEG timings and resampling comparisons apply only to the
 [previous Trek-based preparation](README.md#evidence),
@@ -182,7 +182,7 @@ about 105–125 km across are resolved near the north pole but only about
 that reason, not because the crust is smooth there. The map is used as a stated
 limit, not as its own dataset.
 
-The [gravity checks](evidence/gravity/checks.json) record ranges, coverage,
+The gravity checks record ranges, coverage,
 spot values at Gazetteer centres, the coefficient comparison and the
 degree-strength bands. They check decoding, units and placement, not the
 gravity solution or the crustal model. No browser view has been inspected yet.
@@ -212,23 +212,23 @@ No new terrain displacement is introduced.
 
 ## Numeric-map qualification
 
-The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+The retained numeric checks bind
 the compact input digests and tested processing files, count coverage, and
 compare native byte samples at hemispheres, seams, extrema and gaps. Their
 calibration check runs before the display coverage masks; it does not validate
 the original instrument or scientific model.
 
-The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+The fresh-install receipt verifies 1,500
 runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
 Sun world metadata, with no reused files. All 15 compact source grids restored
 from the source cache with native fallback disabled and matched byte for byte.
 
-The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+The browser evidence records the earlier
 map descriptions, legends and retained scene. It includes screenshots; the
-[validation record](evidence/usgs-numeric/validation.json) names the checks
+validation record names the checks
 and the local full-build limitation. These checks do not measure instrument
 accuracy or establish how well readers understand the explanations.
 
-The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
+The current-main integration check records the
 build, all 11 grouped selectors, source labels and phone playback. It explains
 which earlier scientific and browser evidence still applies to this version.

@@ -39,7 +39,7 @@ clear the catalogue without measuring its viewport, and cancel any queued scroll
 render. Keyboard focus measures before scrolling and passes those measurements
 to the row renderer. Reading `offsetTop` after replacing shell content forced a
 35.5 ms style recalculation inside the final flight callback on the traced iPad.
-The [native capture receipt](../evidence/ui/arrival-handoff-2026-09-27/receipt.json)
+The native capture receipt
 records the callback dropping from 50.2 to 12.6 ms after removing that read.
 Safari still recalculates styles afterward; the incoming mesh's first paint and
 the total handoff stall remain. This change removes forced synchronous layout,
@@ -60,7 +60,7 @@ Readiness stays on the existing root attributes; the startup spinner is removed.
 Unused body lifecycle classes are not published, and synchronous scene replacement skips publication of the
 intermediate disposed session. Repeated link selection and settings publication
 write only changed values.
-The [retention receipt](../evidence/ui/arrival-handoff-2026-09-27/retained-styles-receipt.json)
+The retention receipt
 records three runs per stylesheet variant: the median largest handoff restyle
 falls from 35.9 to 6.9 ms. Lutetia's navigation response sends 2,152 bytes of
 inline CSS instead of 39,026 (uncompressed). The final round trip adds one

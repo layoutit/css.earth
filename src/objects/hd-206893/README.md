@@ -18,7 +18,7 @@ HD 206893 is a young star 41 parsecs away. VLTI/GRAVITY found its inner planet c
 
 ## Evidence
 
-Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. [The four stars in the app](evidence/imaged-companions-3.png), headless Chromium at 800 × 600 on this version: each is drawn in its measured colour.
+Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. The four stars in the app, headless Chromium at 800 × 600 on this version: each is drawn in its measured colour.
 
 ## Known problems
 

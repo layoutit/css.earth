@@ -49,8 +49,7 @@
       "finding": "N1643263159_1, N1643263046_1 and N1643263237_1 expand sampled False color physical-area coverage from 30.3% to 38.1%. The new filters pass independent feature checks against green. The two encounters have no accepted overlap, so their relative brightness is left unmatched. Current-main browser qualification remains pending.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/prometheus_document.pdf",
-        "https://pds-rings.seti.org/cassini/iss/",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/prometheus/evidence/cassini-coverage/refresh.json"
+        "https://pds-rings.seti.org/cassini/iss/"
       ]
     },
     {
@@ -69,9 +68,7 @@
       "status": "unresolved",
       "finding": "No accepted same-surface overlap connects the two color sequences, so their gains remain1. The observed brightness discontinuity is not corrected by per-band equalization or a natural-color assumption.",
       "revisitWhen": "An independently registered bridge observation or applicable sourced photometry establishes the inter-encounter level.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/prometheus/evidence/cassini-coverage/refresh.json"
-      ]
+      "evidence": []
     }
   ]
 }

@@ -64,13 +64,13 @@ Single-exposure products `2532629277` and `2516129281` were inspected as raw
 previews only; their calibration remains unqualified. No detector correction or
 brightness-bound relaxation was introduced to include them.
 
-[Matched comparison](evidence/close-up-priority/comparison.webp) ·
-[Before](evidence/close-up-priority/before.webp) ·
-[After](evidence/close-up-priority/after.webp) ·
-[Pixelmatch diff](evidence/close-up-priority/diff.webp) ·
-[Capture settings](evidence/close-up-priority/browser.json) ·
-[Source-transfer checks](evidence/close-up-priority/source-transfer.json) ·
-[Preparation and restoration measurements](evidence/close-up-priority/preparation.json), recorded with
+Matched comparison ·
+Before ·
+After ·
+Pixelmatch diff ·
+Capture settings ·
+Source-transfer checks ·
+Preparation and restoration measurements, recorded with
 [`node tools/objects/refresh-surface-observations.mts itokawa amica`](https://github.com/layoutit/css.earth/blob/a3137c9e10/tools/objects/refresh-surface-observations.mts)
 (now [`packages/bake/cli/refresh-surface-observations.mts`](../../../packages/bake/cli/refresh-surface-observations.mts)).
 
@@ -83,9 +83,9 @@ The inspected views show additional small terrain detail while preserving the
 silhouette. Three orientations, real mouse dragging, AMICA/Elevation switching
 and optional lighting were checked. Dragging retains all 794 triangle nodes.
 Shadows defaults off and returns off after the lighting check. Inspected
-[DPR 2](evidence/close-up-priority/dpr2.webp),
-[390×844 mobile layout](evidence/close-up-priority/mobile.webp) and
-[lighting](evidence/close-up-priority/shadows.webp) captures accompany the record.
+DPR 2,
+390×844 mobile layout and
+lighting captures accompany the record.
 DPR 1 and 2 request the same body assets; the mobile check is viewport emulation,
 not physical-device performance evidence.
 
@@ -107,9 +107,9 @@ their current coverage is reported above.
 
 The new southern view `2473604354` fills additional coverage while retaining the same 794 triangles, camera and hit mesh. At the same 64 stratified samples per triangle, area-weighted coverage is **61.88% → 73.41%** across this PR (72.66% before the final southern addition). The eighth frame contributes 5.60% of displayed area, mostly replacing more foreshortened views.
 
-Its controlled camera has 375,607 withheld pixels, maximum residual 0.00002713 px. Every thirteenth valid archive XYZ pixel gives 29,053 source-mesh comparisons, maximum separation 2.218 m, below the unchanged 5 m contributor limit. [Source-transfer evidence](evidence/photographic-expansion/source-transfer.json) records the sampled checks. The final overlap gains span 0.759–1.030; these are relative display adjustments, not recovered albedo.
+Its controlled camera has 375,607 withheld pixels, maximum residual 0.00002713 px. Every thirteenth valid archive XYZ pixel gives 29,053 source-mesh comparisons, maximum separation 2.218 m, below the unchanged 5 m contributor limit. Source-transfer evidence records the sampled checks. The final overlap gains span 0.759–1.030; these are relative display adjustments, not recovered albedo.
 
-[Before](evidence/photographic-expansion/before.webp) · [After](evidence/photographic-expansion/after.webp) · [Diff and validation](evidence/photographic-expansion/evidence.json).
+Before · After · Diff and validation.
 The eight-image refresh took 412.6 s and peaked at 2,283 MiB RSS, compared with 683 s for the earlier seven-image full preparation. It replaces three runtime assets and retains 33. Geometry and other datasets are retained; source and output hashes identify the run. See the [observation refresh guide](../../../docs/surface-preparation.md).
 
 Four additional southern frames were decoded in the same batch; the selected frame gave the largest extra supported area. A subsequent header survey examined all 31 controlled v-band products dated 26 October onward: 24 have headers compatible with the existing paired-exposure reader, while the later single-exposure/subwindow formats remain withheld. Header compatibility does not qualify their imagery. No new detector calibration was inferred for them.
@@ -118,11 +118,11 @@ Four additional southern frames were decoded in the same batch; the selected fra
 
 The following record describes the earlier seven-image outputs. Its photographs and source checks remain relevant because those native inputs and camera fitting are unchanged; the new capture and eight-frame measurements above supersede its displayed-area and pixel-difference results.
 
-[Before](evidence/photographic-coverage/before.webp) ·
-[After](evidence/photographic-coverage/after.webp) ·
-[Pixelmatch diff](evidence/photographic-coverage/diff.webp) ·
-[Measured evidence](evidence/photographic-coverage/evidence.json) ·
-[Native XYZ/source-mesh checks](evidence/photographic-coverage/source-transfer.json)
+Before ·
+After ·
+Pixelmatch diff ·
+Measured evidence ·
+Native XYZ/source-mesh checks
 
 The matched Chrome 152 captures use 1440×1000, DPR 1, the AMICA view, motion
 paused and Shadows off. Before is the base; after is the base plus this
@@ -139,9 +139,9 @@ an empty directory with exact byte/hash agreement. Headless checks cover four
 poses, DPR 1/2, mobile, lighting and retained-DOM dragging. Shadows defaults
 off. The changed capture/test roots pass strict TypeScript checking; full
 repository suites were not run. The additional inspected screenshots are
-[DPR 2](evidence/photographic-coverage/dpr2.webp),
-[mobile](evidence/photographic-coverage/mobile.webp) and
-[directional lighting](evidence/photographic-coverage/shadows.webp).
+DPR 2,
+mobile and
+directional lighting.
 
 The September 2026 expansion keeps the same 794 display triangles and transfer
 limits. Sampling the same 64 stratified points per triangle, weighted by its

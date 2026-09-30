@@ -19,19 +19,19 @@ Charon combines New Horizons photographs, elevation, modeled Bond albedo and two
 
 ## Evidence
 
-The [LEISA capture record](evidence/leisa-ice/capture.json) binds the tested inputs, prepared assets and browser views.
+The LEISA capture record binds the tested inputs, prepared assets and browser views.
 Its `completeBodyPreparation` check recorded [`node tools/objects/dist/prepare-authored.js charon --write`](https://github.com/layoutit/css.earth/blob/a3137c9e10/tools/objects/prepare-authored.ts)
 (now [`site/build/prepare/prepare-authored.ts`](../../../site/build/prepare/prepare-authored.ts)). It checks both datasets at DPR 1 and 2, the mobile selector, dragging, Shadows off/on/off, and the Organa search result. The browser verifies the downloaded texture hashes and keeps the same 450 surface leaves while switching datasets.
 
-[Water ice](evidence/leisa-ice/water-ice.png) · [Ammonia](evidence/leisa-ice/ammonia.png) · [Organa](evidence/leisa-ice/organa.png) · [DPR 2](evidence/leisa-ice/ammonia-dpr2.png) · [Mobile](evidence/leisa-ice/mobile.png)
+Water ice · Ammonia · Organa · DPR 2 · Mobile
 
 The current raster textures start at 0° east. Features and minimaps now use that same frame; the retired 180° feature offset put labels on the opposite hemisphere. The Organa regression checks its published coordinate against the sphere axes, and the browser checks the minimap centre after flying there. Original photographs, elevation, albedo, geometry and lighting assets are byte-identical to the main baseline.
 
-The [source restoration check](evidence/leisa-ice/restoration.json) downloaded the original observations into an empty source directory and reproduced the two numeric maps and processing record. The only bootstrap was the checked-in band recipe. Node could not verify the SwRI PDF certificate chain in this environment, so that exact method PDF was retrieved with system curl and normal certificate validation. The [delivery check](evidence/leisa-ice/delivery.json) independently installed and hashed every Charon runtime asset from its immutable URL.
+The source restoration check downloaded the original observations into an empty source directory and reproduced the two numeric maps and processing record. The only bootstrap was the checked-in band recipe. Node could not verify the SwRI PDF certificate chain in this environment, so that exact method PDF was retrieved with system curl and normal certificate validation. The delivery check independently installed and hashed every Charon runtime asset from its immutable URL.
 
 Browser scope: installed Chrome on application, with the final Charon runtime and texture bytes. The subsequent main merges changed other bodies and preparation, not the application runtime used in these captures. Two preview-only filters omit unavailable Helix/Cat’s Eye volume banks; their local restoration requires a missing NOX model. This is Charon interaction evidence, not an unmodified whole-application build pass. The capture record lists the exact preview differences and the unrelated baseline test failures.
 
-Earlier [color-encoding evidence](evidence/color-encoding/capture.json) still applies to the unchanged photographic bytes. Its [delivery record](evidence/color-encoding/delivery.json), [color method](../../../docs/color-preparation.md) and [independent source inspection](source/validation/color-source-inspection.json) retain the earlier decoding and display qualifications. The older captures do not verify the corrected feature frame.
+Earlier color-encoding evidence still applies to the unchanged photographic bytes. Its delivery record, [color method](../../../docs/color-preparation.md) and [independent source inspection](source/validation/color-source-inspection.json) retain the earlier decoding and display qualifications. The older captures do not verify the corrected feature frame.
 
 ## Lighting law
 

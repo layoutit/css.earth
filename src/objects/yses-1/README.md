@@ -20,7 +20,7 @@ YSES 1 is a 17-million-year-old analogue of the young Sun. Two giant planets orb
 
 ## Evidence
 
-Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. [The four stars in the app](../hip-65426/evidence/imaged-companions-2.png), headless Chromium at 800 × 600 on this version: each is drawn in its Gaia spectrum's colour, with its planet's orbit crossing the view.
+Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. The four stars in the app, headless Chromium at 800 × 600 on this version: each is drawn in its Gaia spectrum's colour, with its planet's orbit crossing the view.
 
 ## Known problems
 

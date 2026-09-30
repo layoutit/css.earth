@@ -61,17 +61,17 @@ Source and output are each one closed component with Euler characteristic 2. Mes
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
 
-Photographic placement remains unqualified. The [initial native-frame trial](evidence/photographic-projection.json)
-checked four SPHERE views and their source models; the [crater-control replay](evidence/projected-controls.json)
+Photographic placement remains unqualified. The initial native-frame trial
+checked four SPHERE views and their source models; the crater-control replay
 retains discrepancies against tentative identifications, not verified ground truth.
-The [full-sequence investigation](evidence/sequence-orientation.json) inspected all
+The full-sequence investigation inspected all
 ten October 11 images and identified 05:08:49 Camera 2 as the closest match to
 Vernazza et al. (2021), Figure B.2 (withheld image correlation 0.9986).
 That identifies the published photograph; it does not establish 3D placement.
 The earlier tentative crater picks and 1.44–2.41° raster pole-marker differences
 remain unresolved. The image panels and full measurements remain in those records.
 
-The [camera-transfer investigation](evidence/camera-transfer.json) tests native
+The camera-transfer investigation tests native
 photographs directly, including simultaneous exposures and a later view after
 43° of rotation. The selected MPCD results are:
 
@@ -123,7 +123,7 @@ The new image received only the existing limb adjustment, with no interior fit.
 Its eight held-out matches differed by **5.29 pixels RMS, maximum 8.18 pixels**.
 All fourteen accepted matches in that image were evaluation data; the six in the
 matcher's usual fit partition were not fitted either. The
-[retained joint-fit result](evidence/camera-transfer.json) includes the frozen
+retained joint-fit result includes the frozen
 cameras, objective, input pins, matched pixels and numerical replay checks.
 
 ![Unused Pallas photograph, frozen prediction and measured feature discrepancies](evidence/joint-fit.png)
@@ -195,7 +195,7 @@ Source pins live in [source/manifest.json](source/manifest.json); source/prepara
 <details>
 <summary>Reproduce the native crater comparison</summary>
 
-The [diagnostic recipe](evidence/photographic-controls.json) pins the exact FITS
+The diagnostic recipe pins the exact FITS
 image, ADAM and MPCD meshes, frozen cameras, published coordinates and tentative
 native picks. It uses the shared preparation tool
 [check-projected-controls.mts](../../../packages/bake/cli/check-projected-controls.mts).

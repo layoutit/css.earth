@@ -37,9 +37,7 @@
       "status": "excluded",
       "finding": "Retired the modeled polar completion. Native enhanced-color observations are reduced directly; missing source footprints are gray grid.",
       "revisitWhen": "Do not synthesize missing observations. A future observed product may replace the gaps.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/enhanced-check.json"
-      ]
+      "evidence": []
     },
     {
       "id": "usgs-shaded-relief-topography",
@@ -169,20 +167,14 @@
       "subject": "Native numeric USGS products and compact display grids",
       "status": "included",
       "finding": "MESSENGER DEM v2 replaces the colored topography input. Native DN uses 0.5 m per unit; central-meridian 180 placement checked against independent native bytes.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/usgs-numeric/numeric-checks.json"
-      ]
+      "evidence": []
     },
     {
       "id": "native-mdis-bdr-loi-enhanced",
       "subject": "Native USGS BDR, LOI and enhanced-color GeoTIFFs, edition 1 (2016)",
       "status": "included",
       "finding": "BDR and LOI share the Monochrome arrow selector. All three maps use native area means at the existing 4K display size. Publisher display stretches are retained and qualified separately. Enhanced-color polar gaps remain missing; no terrain or neighboring hue is used to reconstruct them.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/bdr-check.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/loi-check.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/mercury/evidence/native-maps/enhanced-check.json"
-      ]
+      "evidence": []
     },
     {
       "id": "hgm008-gravity-anomaly",

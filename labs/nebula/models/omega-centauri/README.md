@@ -73,7 +73,7 @@ wording. Neither historical receipt qualifies the corrected native inputs.
 ## Actual results and current blocker
 
 The current inspection uses **459 retained slabs**, with one neutral bank and two
-optical datasets. [Front, oblique and both side views](evidence/2026-09-20/README.md)
+optical datasets. Front, oblique and both side views
 show the actual retained-DOM compiler renderer. The inspection wrapper is not the
 main application or a promoted Lab delivery. The object remains a research subject;
 no unfinished application package or new runtime bank is shipped here.
@@ -81,17 +81,17 @@ no unfinished application package or new runtime bank is shipped here.
 - **Bake 1:** `41d62d…c3e962` completed but was visually rejected for large bright
   clumps from the finite supports.
 - **Bake 2:** `412d07…1fa7bdca` stopped at 66% during VST painting; the
-  [original receipt](evidence/2026-09-20/bake2-compile.json) records the failure.
+  original receipt records the failure.
   A valid convex color mixture produced `255.00000000000003`. The correction
   rejects nonfinite values before bounding finite roundoff; its regression and
   32,173,980 retained samples per dataset pass. This does not qualify the renderer.
 - **Bake 3:** `omega-centauri-bake3`
   completed both datasets in 271.59 seconds for local inspection. The
-  [compile receipt](evidence/2026-09-20/bake3-compile.json) and
-  [Lab browser report](evidence/2026-09-20/bake3-browser.json) identify that state.
+  compile receipt and
+  Lab browser report identify that state.
   All 1,040 neutral PNGs and geometry match bake 2, as recorded by the
-  [complete identity comparison](evidence/2026-09-20/bake3-identity.json).
-  Its failed [handoff measurements](evidence/2026-09-20/legacy-handoffs.json)
+  complete identity comparison.
+  Its failed handoff measurements
   therefore remain applicable. Historical screenshot paths inside that report
   are local archival paths; the four current images are retained beside it.
 
@@ -104,7 +104,7 @@ no unfinished application package or new runtime bank is shipped here.
 These checks ran on the working tree based on main plus the registration, photometric
 compiler, compact replay, coordinate transport and adaptive-layer changes now
 published in this branch. That base commit alone is not the tested version.
-The [validation record](evidence/2026-09-20/validation.json) pins the tested sources
+The validation record pins the tested sources
 and records reused checks, local failures and omitted application qualification.
 
 ## Adaptive-layer experiment — unaccepted
@@ -113,12 +113,12 @@ New compiler bakes plan at most **500 total XYZ slabs** while integrating every
 reference depth sample. This experiment reused bake 3's pinned field and both
 materials without source acquisition or refitting. Its inspection identity is
 `omega-centauri-adaptive`.
-The [bake receipt](evidence/2026-09-20/layer-bake.json) records 461 planned slabs
+The bake receipt records 461 planned slabs
 (147/143/171), 459 retained slabs (146/142/171), and 230.94 seconds for the bake.
 That is **41.1% fewer retained planes**, with approximately 5–7% fewer texture bytes.
 It is not a corresponding bake-speed claim: depth sampling work is preserved.
 
-The [browser comparison](evidence/2026-09-20/layer-handoffs.json) uses the same
+The browser comparison uses the same
 renderer, camera and interpolation for original and optimized banks. Front-view
 normalized L1 stays below 0.0065 and luminance changes by about 1.2%. Both optical
 datasets and neutral still fail the unchanged 0.04 X/Z and Y/Z image-handoff limit.
@@ -126,17 +126,17 @@ The additional X/Y diagnostic is recorded too; its old neutral outlier is not us
 as a stable comparison. The planner's displacement estimate is not rendered-quality
 acceptance.
 
-The [numerical alignment probe](evidence/2026-09-20/numerical-alignment.json)
+The numerical alignment probe
 fits translation, scale and rotation. It reduces L1 by only 2.6–5%; all twelve
 old/new X/Z and Y/Z pairs remain failed. Native relative registration separately
 passes at 0.097175 arcsec held-out RMS. These results do not support a simple global
 2D misregistration as the explanation; they do not exclude sampling or compositing
-defects. [Luminosity-weighted shape moments](evidence/2026-09-20/shape-moments.json)
+defects. Luminosity-weighted shape moments
 in the retained envelope domain give approximate principal-axis ratios
 1 : 0.98 : 0.83; this is not an observed isophotal shape measurement or side-view
 rendering acceptance.
 
-The independent [Crab replay comparison](evidence/2026-09-20/crab-comparison.json)
+The independent Crab replay comparison
 reduces 542 retained slabs to 391 and verifies all 2,737 texture pins and decoded
 alpha/geometry. Twelve of fourteen handoffs pass before and after. The two Spitzer
 failures persist and worsen, so this experiment does not promote Crab either.

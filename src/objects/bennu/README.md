@@ -50,19 +50,19 @@ The photographic atlas samples each original grid directly with a 2 × 2 texel f
 | normal | 25134 × 12568 |
 | surface | 31417 × 15709 |
 
-Current atlases are 3513 × 3728 pixels, with 800 retained faces. The [delivery record](evidence/spectral-bands/delivery-and-browser.json) records each encoded file size and decoded RGBA estimate. Existing mesh leaves and full-size surface atlases match the main revision named there. Sampling details are in `prepared/surfaces.json`; source resolution, gaps and registration limits still apply.
+Current atlases are 3513 × 3728 pixels, with 800 retained faces. The delivery record records each encoded file size and decoded RGBA estimate. Existing mesh leaves and full-size surface atlases match the main revision named there. Sampling details are in `prepared/surfaces.json`; source resolution, gaps and registration limits still apply.
 
 An independent check used trimesh 4.8.3 closest_point_naive to measure 3,200 equal-area radial samples from the full source against every simplified triangle. Mean / 95th percentile / sampled maximum nearest-surface distances were 1.468 / 3.965 / 10.120 m. This is a one-direction sample, not an exhaustive Hausdorff bound. Radial distance alone is misleading near undercuts because the nearest ray intersection can switch surfaces.
 
 The earlier source notes report Headless Chrome 152 checks of the then-selected datasets with Shadows off and on at DPR 1 and 2, plus opposite/polar poses and close zoom.
 
-The [native-value check](evidence/spectral-bands/native-values.json) compares the production sampler with independent float32 byte reads and coordinates from the original ISIS labels. It checks native pixels, fractional footprints, extrema, negative values and gaps for all four bands. This verifies decoding and display transfer, not the instrument calibration or boulder-level registration.
+The native-value check compares the production sampler with independent float32 byte reads and coordinates from the original ISIS labels. It checks native pixels, fractional footprints, extrema, negative values and gaps for all four bands. This verifies decoding and display transfer, not the instrument calibration or boulder-level registration.
 
-The native check passed 1,047 source probes. At most 0.007% of valid native samples in any band lie outside the common display range. The [restoration check](evidence/spectral-bands/source-restoration.json) extracted every added input and label through the production acquisition recipe into an empty directory and matched the preparation inputs byte for byte; it reused the cached publisher ZIP.
+The native check passed 1,047 source probes. At most 0.007% of valid native samples in any band lie outside the common display range. The restoration check extracted every added input and label through the production acquisition recipe into an empty directory and matched the preparation inputs byte for byte; it reused the cached publisher ZIP.
 
-The [delivery and browser record](evidence/spectral-bands/delivery-and-browser.json) identifies the tested inventories and the 27 September 2026 run. All four wavelength controls, keyboard stepping and mobile layout passed in Headless Chrome; each switch kept one mounted scene. Eros’s existing default and infrared links were also checked. Every body asset installed from R2 into an empty destination with matching size and hash. The body install is 53.78 MB; this is not measured cold page transfer. Existing full-size atlases and mesh leaves are unchanged.
+The delivery and browser record identifies the tested inventories and the 27 September 2026 run. All four wavelength controls, keyboard stepping and mobile layout passed in Headless Chrome; each switch kept one mounted scene. Eros’s existing default and infrared links were also checked. Every body asset installed from R2 into an empty destination with matching size and hash. The body install is 53.78 MB; this is not measured cold page transfer. Existing full-size atlases and mesh leaves are unchanged.
 
-Inspected evidence: [native map](evidence/spectral-bands/green-native-map.webp), [overview](evidence/spectral-bands/overview.webp), [lighting](evidence/spectral-bands/lighting.webp), [close view](evidence/spectral-bands/close.webp), [phone controls](evidence/spectral-bands/phone.webp). The flat native map and rendered body are different projections, so no pixel-parity claim is made.
+Inspected evidence: native map, overview, lighting, close view, phone controls. The flat native map and rendered body are different projections, so no pixel-parity claim is made.
 
 ## Known problems
 

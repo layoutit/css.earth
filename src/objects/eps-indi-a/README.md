@@ -18,7 +18,7 @@ Epsilon Indi A is one of the nearest Sun-like stars, 3.6 parsecs away. JWST has 
 
 ## Evidence
 
-Run of 2026-09-23 (this version): [the four bodies in the app](evidence/epsilon-indi.png), headless Chromium at 800 × 600 on this version, all in the one Epsilon Indi system. see the planet's README for its placement against the measured positions.
+Run of 2026-09-23 (this version): the four bodies in the app, headless Chromium at 800 × 600 on this version, all in the one Epsilon Indi system. see the planet's README for its placement against the measured positions.
 
 ## Known problems
 

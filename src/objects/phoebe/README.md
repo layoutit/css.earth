@@ -13,7 +13,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-The [2023 geometry check](source/validation/2023-geometry-qualification.json) records the historical 3,500-face display. The [2,000-face comparison](evidence/mesh-budget-2026-09-29.json) records the current reduction and its larger sampled deviation. Both separate solver estimates from independent barycentric samples; scientific uncertainty remains spatially variable.
+The [2023 geometry check](source/validation/2023-geometry-qualification.json) records the historical 3,500-face display. The 2,000-face comparison records the current reduction and its larger sampled deviation. Both separate solver estimates from independent barycentric samples; scientific uncertainty remains spatially variable.
 
 The B9 qualification report records exact source-map replay and selected package and interaction checks.
 
@@ -113,7 +113,7 @@ The [body registration record](source/cassini-ice/evidence/registration.md), [pr
 
 Normal albedo, elevation, maplet-resolution and image-count display atlases use half dimensions. Infrared and ice absorption retain their existing half-size setting. The half-size grid keeps integral atlas cells; quarter dimensions would not.
 
-This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. Device evidence records the published bytes, decoded size estimates, trace results and remaining stalls.
 
 ## Prepared triangle coverage
 
@@ -121,7 +121,7 @@ The shared raster preparation checks that each CSS triangle encloses its source
 face before sampling the atlas. This rebake repairs inward seam padding without
 changing source geometry. The initial 3,500-face rebake produced six
 groups; the largest still contained 3,213 faces. The
-[iPad comparison](evidence/ipad-triangle-coverage-guard.json) records a completed
+iPad comparison records a completed
 drag and zoom, reduced frame spans, and the remaining compositor stalls. It does
 not establish smooth interaction.
 
@@ -138,5 +138,5 @@ of 1,423.5 m, p95 603.6 m and RMS 308.6 m to the full source mesh. The former
 3,500-face display measured 1,178.3 m maximum, p95 468.9 m and RMS 240.8 m.
 This coarser display does **not** satisfy the historical 1,195 m sampled criterion.
 These are one-way sampled approximation measurements, not a Hausdorff bound or
-scientific source uncertainty. The [comparison receipt](evidence/mesh-budget-2026-09-29.json)
+scientific source uncertainty. The comparison receipt
 also records the audit of other installed triangle surfaces.

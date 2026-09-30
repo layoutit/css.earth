@@ -36,8 +36,6 @@
       "status": "included",
       "finding": "The retained four-frame mosaic spans about 11 to 1.8 seconds before impact, including the last complete image. Native intercepts on the 0.243 m DSK are checked against the retained 0.972 m OBJ; closer frames add detail and approximately 18.08% sampled mesh coverage, not the far side.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dimorphos/evidence/draco-mosaic-sampling.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/dimorphos/evidence/draco-mosaic-browser.json",
         "https://doi.org/10.26007/QAAN-F992"
       ]
     },

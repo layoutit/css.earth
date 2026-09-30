@@ -12,15 +12,15 @@
 
 ## Evidence
 
-The [additional color-sequence trial](evidence/cassini-coverage/calypso-color-trial.json) records the native products, camera rows and roughly 0.5-percentage-point marginal coverage gain. It is an unqualified preparation diagnostic, not a released surface or independent registration proof. See the [investigation ledger](investigations.json) for the decision and reopening condition.
+The additional color-sequence trial records the native products, camera rows and roughly 0.5-percentage-point marginal coverage gain. It is an unqualified preparation diagnostic, not a released surface or independent registration proof. See the [investigation ledger](investigations.json) for the decision and reopening condition.
 
 - The exact observations, source URLs and restoration pins are in [source/manifest.json](source/manifest.json) and [source/preparation/acquisition.json](source/preparation/acquisition.json). The simplified surface remains closed and outward wound.
 
-- [Source/package qualification](evidence/close-encounters/qualification.json) verifies every delivered asset and source input and preserves the geometry recipe and retained scene geometry from main. The fixed 2,048 × 1,024 preparation grid accepts 739,595 → 740,795 Monochrome cells and 347,888 False color cells. These are preparation-grid counts, not physical surface-area percentages.
+- Source/package qualification verifies every delivered asset and source input and preserves the geometry recipe and retained scene geometry from main. The fixed 2,048 × 1,024 preparation grid accepts 739,595 → 740,795 Monochrome cells and 347,888 False color cells. These are preparation-grid counts, not physical surface-area percentages.
 
-- [Delivery](evidence/close-encounters/delivery.json) verifies the changed immutable HTTPS assets by length. [Elevation reproduction](evidence/close-encounters/elevation-reproduction.json) confirms that the current unchanged main preparer reproduces the existing elevation dataset; the refreshed shadow bank is unrelated to the added photographs.
+- Delivery verifies the changed immutable HTTPS assets by length. Elevation reproduction confirms that the current unchanged main preparer reproduces the existing elevation dataset; the refreshed shadow bank is unrelated to the added photographs.
 
-- [Browser capture](evidence/close-encounters/capture.json): Chrome 152, DPR 1/2, Shadows off/on, drag with retained DOM, and a 390-pixel mobile selector passed. Inspect the [False color product view](evidence/close-encounters/product.png), [rotated lighting](evidence/close-encounters/oblique-shadows-dpr1.png), [mobile view](evidence/close-encounters/mobile.png) and [Monochrome close-up](evidence/close-encounters/monochrome.png). These captures identify the uncommitted moon changes by recipe, runtime and served-image hashes. The later main merge leaves these inputs and the shared browser code unchanged; the [Monochrome capture](evidence/close-encounters/monochrome.json) also mounts successfully after that merge.
+- Browser capture: Chrome 152, DPR 1/2, Shadows off/on, drag with retained DOM, and a 390-pixel mobile selector passed. Inspect the False color product view, rotated lighting, mobile view and Monochrome close-up. These captures identify the uncommitted moon changes by recipe, runtime and served-image hashes. The later main merge leaves these inputs and the shared browser code unchanged; the Monochrome capture also mounts successfully after that merge.
 
 ### Registration
 

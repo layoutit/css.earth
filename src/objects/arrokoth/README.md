@@ -26,9 +26,9 @@ units. This fixes screen encoding; it does not reconstruct natural color.
 
 ## Evidence
 
-The 2026-09-13 [color-encoding capture](evidence/color-encoding/capture.json) checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. [Image delivery](evidence/color-encoding/delivery.json) verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
+The 2026-09-13 color-encoding capture checks the revised surface at DPR 1 and 2, dragging, Shadows, and the mobile selector. Its source/asset hashes identify the tested uncommitted changes above; retained geometry is identical to that baseline. Image delivery verifies the current immutable URLs by byte count. The [shared color method](../../../docs/color-preparation.md) explains the scientific display and its limits.
 
-[Displayed surface](evidence/color-encoding/color-dpr1.png) · [DPR 2](evidence/color-encoding/color-dpr2.png) · [Shadows](evidence/color-encoding/oblique-shadows-dpr1.png) · [Mobile](evidence/color-encoding/mobile.png). The native MVIC label and independent Astropy sample/camera checks still apply: the cube, camera and shape are unchanged; the final display encoding changed.
+Displayed surface · DPR 2 · Shadows · Mobile. The native MVIC label and independent Astropy sample/camera checks still apply: the cube, camera and shape are unchanged; the final display encoding changed.
 
 The [registration audit](evidence/photography/registration.json) binds its source
 images, control file and source mesh by hash. It evaluates frozen cameras: it does
@@ -43,7 +43,7 @@ The reader tests compare native pixels, quality decisions and 50 TAN-SIP camera
 projections across the detectors. Both million-pixel detector quality masks also
 match Astropy's accepted-pixel counts.
 
-The [browser capture record](evidence/photography/capture.json) binds the tested
+The browser capture record binds the tested
 package and preparation code to the inspected views. LORRI and MVIC switch
 successfully at DPR 1 and 2; each retains 1,000 triangles with Shadows and Orbit
 off. The reverse view shows the unmapped grid. The 390 px mobile view switches
@@ -65,8 +65,8 @@ do not establish full-site or all-body readiness. No renderer changes were made.
 <summary>Earlier albedo and shape evidence</summary>
 
 2026-09-10: the previous default changed to Modeled albedo and faced the imaged southern
-hemisphere. The [current view checks](evidence/spacecraft-default/validation.json)
-bind the tested code and assets to the [opening view](evidence/spacecraft-default/default-dpr1.png).
+hemisphere. The current view checks
+bind the tested code and assets to the opening view.
 All 35 runtime image hashes, the source UV attribution, and the 1,000-face
 prepared terrain match the previous revision. No imagery upload is required.
 The source and minimap tests pass, as does the tooling TypeScript check.

@@ -12,12 +12,12 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 ## Evidence
 
-The final expansion is also qualified through main's shared surface-observation pipeline. [Current browser comparison and evidence](evidence/photographic-expansion/evidence.json) preserve the same camera, tree and hit mesh. The observation-only refresh took 228.4 s, compared with 417 s for the previous full preparation; it replaced three runtime files and retained 36. Photographic coverage remains 29.66% at the same 64 area-weighted samples per triangle. The older capture record below describes the initial bake; its source-camera checks remain applicable because those inputs and solutions are unchanged.
+The final expansion is also qualified through main's shared surface-observation pipeline. Current browser comparison and evidence preserve the same camera, tree and hit mesh. The observation-only refresh took 228.4 s, compared with 417 s for the previous full preparation; it replaced three runtime files and retained 36. Photographic coverage remains 29.66% at the same 64 area-weighted samples per triangle. The older capture record below describes the initial bake; its source-camera checks remain applicable because those inputs and solutions are unchanged.
 
-[Before](evidence/photographic-coverage/before.webp) ·
-[After](evidence/photographic-coverage/after.webp) ·
-[Pixelmatch diff](evidence/photographic-coverage/diff.webp) ·
-[Measured evidence](evidence/photographic-coverage/evidence.json)
+Before ·
+After ·
+Pixelmatch diff ·
+Measured evidence
 
 The matched Chrome 152 captures use 1440×1000, DPR 1, OSIRIS, motion paused
 and Shadows off. Before is the base; after is the base plus this change,
@@ -35,9 +35,9 @@ also reproduces its original hash after the helper-path repair. Headless checks
 cover four poses, DPR 1/2, mobile, lighting and retained-DOM dragging; Shadows
 defaults off. Strict TypeScript checking of the changed capture/test roots
 passes. Full repository suites were not run. Inspected screenshots include
-[DPR 2](evidence/photographic-coverage/dpr2.webp),
-[mobile](evidence/photographic-coverage/mobile.webp) and
-[directional lighting](evidence/photographic-coverage/shadows.webp).
+DPR 2,
+mobile and
+directional lighting.
 
 The September 2026 expansion adds `N20100710T154241240ID4DF22`. It supplies
 the selected photograph over **8.19% of the display mesh**, mainly replacing

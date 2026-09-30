@@ -18,8 +18,7 @@
       "status": "included",
       "finding": "The three calibrated GEOMED frames supply a separate coarse filter-color dataset after per-frame geometry, limb and held-out-sector checks. The roughly 60-pixel discs, long exposures and common-interior mask prohibit clear-frame detail transfer, white balance or pan-sharpening.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/proteus/source/geometry/color-registration.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/proteus/evidence/filter-color/capture.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/proteus/source/geometry/color-registration.json"
       ]
     },
     {

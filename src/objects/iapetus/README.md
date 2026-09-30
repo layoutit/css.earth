@@ -37,7 +37,7 @@ Map edge correction (2026-09-28): that edge check was run on the retired terrest
 - The largest Gazetteer craters drawn on the prepared minimap at a 0° E edge land on their basins: Engelier (95.3° E, 40.5° S), Gerin (127° E, 45.6° S), Turgis (331.6° E, 16.9° N) and Malprimis (241.8° E, 15.2° S). At 180° E none of them does.
 - Read through its georeferenced source, the prepared Monochrome map correlates 0.82 from 0° E and 0.21 from 180° E; Enhanced color 0.96 and −0.58.
 
-The fix sets the left edge to 0° E. The texture, the rotation model and the status-bar formatting are unchanged. The body’s frame, feature anchors and arrival billboard now follow the atlas. The same source measurement found seven more bodies half a turn off (Ganymede and the Voyager moons of Uranus and Neptune); the preparation now refuses a declared edge the source contradicts ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)). [Before and after at the same saved camera](evidence/map-edge-2026-09-28.md).
+The fix sets the left edge to 0° E. The texture, the rotation model and the status-bar formatting are unchanged. The body’s frame, feature anchors and arrival billboard now follow the atlas. The same source measurement found seven more bodies half a turn off (Ganymede and the Voyager moons of Uranus and Neptune); the preparation now refuses a declared edge the source contradicts ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)). Before and after at the same saved camera.
 
 The B9 qualification report records exact source-map replay and selected package and interaction checks.
 
@@ -135,4 +135,4 @@ The recipe declares a sphere of 734.3 km. The retained mesh keeps its spin origi
 
 The default photographic normal surface uses quarter dimensions through the existing raster resolutionScale contract. Pole textures and the other datasets retain their existing resolutions.
 
-This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. [Device evidence](evidence/ipad-atlas-footprint.json) records the published bytes, decoded size estimates, trace results and remaining stalls.
+This reduces display detail, not the resolution of the preserved source observations or quantitative grids. Numeric and categorical textures retain their established encoding and sampling rules. The full asset set is published coherently; arrival billboard pose and application handoff logic are unchanged. Device evidence records the published bytes, decoded size estimates, trace results and remaining stalls.

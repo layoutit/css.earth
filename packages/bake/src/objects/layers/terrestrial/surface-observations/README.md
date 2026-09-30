@@ -14,7 +14,7 @@ decode → camera → pixel geometry → photometry → footprint → surface tr
 The stages below are the modules beside this README, part of the terrestrial layer's shared libraries
 (`@cssearth/bake/objects/layers/terrestrial`). Their tests are in
 [`tests/objects/surface-observations/`](./), the pipeline evidence in
-[`evidence/photograph-pipeline/`](../../../../../../../evidence/photograph-pipeline/), and the OSIRIS shape comparison is
+`evidence/photograph-pipeline/`, and the OSIRIS shape comparison is
 [`packages/bake/cli/osiris-shape-comparison.mts`](../../../../../cli/osiris-shape-comparison.mts).
 
 A body owner names a format and its pins in `raster.surfaceObservations`. A
@@ -277,17 +277,17 @@ the atlas transfer counts.
 
 ## Evidence
 
-[`evidence/photograph-pipeline`](../../../../../../../evidence/photograph-pipeline/) compares the
+`evidence/photograph-pipeline` compares the
 prepared images that moving every photograph dataset onto this contract changed
 with `main`:
 
-- [Six minimap sheets](../../../../../../../evidence/photograph-pipeline/minimaps-01.webp) show each
+- Six minimap sheets show each
   changed 640 × 320 minimap on `main`, on the branch and as a Pixelmatch diff.
   51 minimaps changed, one of them (Epimetheus false colour) only in its
   encoding; 55 are byte-identical.
-- [The context sheet](../../../../../../../evidence/photograph-pipeline/contexts.webp) does the same
+- The context sheet does the same
   for the 23 changed context images.
-- [`evidence.json`](../../../../../../../evidence/photograph-pipeline/evidence.json) names both inputs
+- `evidence.json` names both inputs
   and each diff by path and size and records the compared and mismatched
   pixels. `diffs/` keeps every diff at full size.
 - The browser views of ten datasets at 1440 × 1000 and DPR 2 were never

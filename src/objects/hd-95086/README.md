@@ -18,7 +18,7 @@ HD 95086 is a young star often compared with the early Solar System. Its giant p
 
 ## Evidence
 
-Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. [The four stars in the app](../hd-206893/evidence/imaged-companions-3.png), headless Chromium at 800 × 600 on this version: each is drawn in its measured colour.
+Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. The four stars in the app, headless Chromium at 800 × 600 on this version: each is drawn in its measured colour.
 
 ## Known problems
 

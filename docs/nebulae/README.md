@@ -117,7 +117,7 @@ The main site's prepared-resource glob includes the generated proxy PNGs automat
 Every object README links its own investigation ledger and original
 processing assessments.
 
-The [retained integration reports](../../site/test/evidence/nebulae/2026-09-14/)
+The retained integration reports
 preserve earlier catalogue-field and final Helix/Lagoon visual checks without
 rewriting their results. The capture map locates the original images and their
 hashes; routine navigation screenshots remain scratch. The final historical

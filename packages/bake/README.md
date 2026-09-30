@@ -137,7 +137,7 @@ The runtime uses those bindings to keep the mesh connected, publish images direc
 
 Ring wedges and full ring planes carry the same projective leaf metadata as body surfaces. Their compiler scales each leaf box and texture address together with the inverse transform, preserving the prepared world geometry. The shared silhouette groups choose backing sizes before connection and retain them during coasting. A ring must not bypass this contract by emitting only a fixed CSS box.
 
-The Neptune and Uranus deliveries retain all 16 wedges and the same image bytes. [iPad evidence](evidence/ring-leaf-backings.json) records the resulting layer-memory reduction and the remaining timing limits.
+The Neptune and Uranus deliveries retain all 16 wedges and the same image bytes. iPad evidence records the resulting layer-memory reduction and the remaining timing limits.
 
 ## Catalogue point banks
 

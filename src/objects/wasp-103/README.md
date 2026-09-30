@@ -14,7 +14,7 @@ WASP-103 hosts the ultra-hot giant WASP-103 b. Its uniform disc uses the colour 
 
 Generated 2026-09-27 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-The package source-coverage and inventory checks passed. Chromium 154 mounted this star as one shared object scene and the inspected disc showed its model limb darkening. The companion's [evidence record](../wasp-103b/evidence/climate-preview/browser.json) identifies the tested integration revision.
+The package source-coverage and inventory checks passed. Chromium 154 mounted this star as one shared object scene and the inspected disc showed its model limb darkening. The companion's evidence record identifies the tested integration revision.
 
 
 ## Known problems

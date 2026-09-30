@@ -27,9 +27,9 @@ hashes, masking, overlap gains and area sampling. Decoder tests check native FIT
 signed storage, raw/calibrated identity and rejection of missing, saturated or
 invalid samples while retaining finite negative radiance.
 
-[Source projection](evidence/near-msi/registration.webp) ·
-[Mounted view](evidence/near-msi/view.webp) ·
-[Capture identity and interaction results](evidence/near-msi/capture.json).
+Source projection ·
+Mounted view ·
+Capture identity and interaction results.
 Headless Chrome on the existing server verified drag, lighting, mobile framing
 and DPR 2 with retained triangle identity and Shadows off by default. The three
 datasets and both closed 800-face model banks pass the focused package checks;

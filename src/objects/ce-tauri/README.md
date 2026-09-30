@@ -1,6 +1,6 @@
 # CE Tauri
 
-**Surface images.** The dataset selector groups November 2016, December 2016 under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+**Surface images.** The dataset selector groups November 2016, December 2016 under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
 
 The [navigation marker](source/preparation/navigation.json) is a photosphere crop of the existing reconstruction, with an offline circular alpha edge. Its centre and radius come from the matching frame in [the raster recipe](source/preparation/raster.json): `(center + 0.5) × 512 / imageSize` and `radiusKm / (rangeKm × pixelAngleMicroradians × 10⁻⁶) × 512 / imageSize`. For `observations/dec_avg.fit`, the 512-pixel marker centre is (263.616, 248.016) and its radius is 162.880 pixels. The enclosing integer crop is (100, 85, 327, 326); the alpha ellipse retains the fractional centre and radius. This navigation proxy omits off-limb emission and reconstruction background. The scientific images, their thresholds and their off-limb views are unchanged.
 

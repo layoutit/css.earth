@@ -1,6 +1,6 @@
 # Ceres
 
-**Mineral signatures.** The dataset selector groups Clay · 2.7 µm, Ammonium · 3.1 µm under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+**Mineral signatures.** The dataset selector groups Clay · 2.7 µm, Ammonium · 3.1 µm under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
 
 The navigation marker uses its existing source map as a stylized identifier. The [marker recipe](source/preparation/navigation.json) crops and resizes it, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). It is not an observer projection or a view at the scene epoch.
 
@@ -43,7 +43,7 @@ Three datasets, grouped with Vesta's as **Surface elements**, show the archived 
 
 ### Finest detail at maximum zoom (28 September 2026)
 
-The camera stops 1.2 radii from Ceres' centre (94 km above the surface) or at maximum zoom, whichever is farther. One CSS pixel below the camera then covers at least 155 to 169 m of surface, on viewports about 640 to 710 CSS px wide; at two texels per CSS pixel the finest texel ever drawn is 77 to 85 m. On a 390 px phone it is 139 m, on a 1440 px desktop 129 to 150 m ([measurement](evidence/max-zoom/texels.json)).
+The camera stops 1.2 radii from Ceres' centre (94 km above the surface) or at maximum zoom, whichever is farther. One CSS pixel below the camera then covers at least 155 to 169 m of surface, on viewports about 640 to 710 CSS px wide; at two texels per CSS pixel the finest texel ever drawn is 77 to 85 m. On a 390 px phone it is 139 m, on a 1440 px desktop 129 to 150 m (measurement).
 
 - The Dawn FC LAMO clear-filter mosaic (35 m) is therefore not used: its texels are never drawn. The regional Urvara (5 m) and Occator (about 3 m) mosaics are excluded for the same reason; no route brings the camera closer over one region.
 - The Monochrome atlas is 4096 texels around the equator, 720 m each, so at maximum zoom it is magnified 5 to 9 times. Raising it toward the 140 m mosaic's own detail is an open decision in the [ledger](investigations.json).
@@ -60,7 +60,7 @@ Four datasets, grouped as **Gravity**, show the gridded maps JPL archived for CE
 | Geoid | `GEOID_0018`: metres above an ellipsoid of a = 482.0 km, flattening 0.074896 | −1066.6 to 1454.1 m | ±1500 m |
 
 - **Decoding.** Each map is 181 lines of 360 little-endian 64-bit values. The shared `pds3-grid` reader reads them unchanged, one colour per cell, with the producer's PDS3 labels from volume `DWNCGRS_2` (version 4): cell centres at whole degrees from 0° E, first line at 90° N. The image bytes in the PDS4 bundle and the PDS3 volume are the same file (their MD5 values agree). All 360 cells of each pole row are equal, which confirms that the first and last lines sit on the poles. The PDS4 labels' added corner coordinates put the first column's edge, not its centre, at 0° E; that half-cell disagreement is recorded and the PDS3 placement is used.
-- **Placement and values against the papers** ([values](evidence/gravity/feature-values.json)). The deepest gravity low (−272 mGal) and the highest Bouguer value (406 mGal) both fall on Urvara. Kerwan reads +348 mGal Bouguer, the highest percentile, the mass excess [Bland et al. (2018)](https://doi.org/10.1002/2017GL075526) infer beneath it; Yalode reads +180, the second of the two basin mascons of [Ermakov et al. (2017)](https://doi.org/10.1002/2017JE005302). The high plateau Hanami Planum reads −225 mGal: high ground has low Bouguer gravity, the compensation [Park et al. (2016)](https://doi.org/10.1038/nature18955) report. Ahuna Mons reads +153 mGal free-air; [Ruesch et al. (2019)](https://doi.org/10.1038/s41561-019-0378-7) find about 100 mGal there with only degrees 5 to 14.
+- **Placement and values against the papers** (values). The deepest gravity low (−272 mGal) and the highest Bouguer value (406 mGal) both fall on Urvara. Kerwan reads +348 mGal Bouguer, the highest percentile, the mass excess [Bland et al. (2018)](https://doi.org/10.1002/2017GL075526) infer beneath it; Yalode reads +180, the second of the two basin mascons of [Ermakov et al. (2017)](https://doi.org/10.1002/2017JE005302). The high plateau Hanami Planum reads −225 mGal: high ground has low Bouguer gravity, the compensation [Park et al. (2016)](https://doi.org/10.1038/nature18955) report. Ahuna Mons reads +153 mGal free-air; [Ruesch et al. (2019)](https://doi.org/10.1038/s41561-019-0378-7) find about 100 mGal there with only degrees 5 to 14.
 - **Resolution.** Degree 18 corresponds to about 82 km at the equator; the field is accurate globally only to degree 14, about 105 km (Ruesch et al. 2019, Methods; [Park et al. 2017](https://meetingorganizer.copernicus.org/EGU2017/EGU2017-3380.pdf)). The 1° cells, 8.2 km at the equator, are sampling, not detail. No degree-strength map is archived.
 - **Uncertainty.** The error map grows from 17.6 mGal near the equator to 79 mGal at the south pole. Ruesch et al. quote about 10 mGal at the equator for CERES18C; the archived CERES18D error is 17.6 mGal there. We do not know why they differ.
 - **Reader text.** The dataset text gives Ceres's mean surface gravity as about 28,400 mGal: CERES18D's GM, 62.629 km³/s², over the 469.7 km mean radius squared.
@@ -77,8 +77,8 @@ registration. Pixelmatch at threshold 0.1 flags 7.2% of the map, 7.8% after the
 WebP lane on both and 1.4% at half resolution. Between 34° N and 11° S only
 0.1–0.4% of pixels change; toward the south pole 16–19% change, where the server
 render shows resampling jaggies that the area mean does not
-([crops](evidence/native-mosaic/wms-vs-native.webp),
-[measurements](evidence/native-mosaic/measurements.json)). No resolution is gained,
+(crops,
+measurements). No resolution is gained,
 so the dataset keeps the WMS render. Switching would need a reader for tiled ISIS3
 byte cubes, and the cube stores the south-polar gap as 1, the same value as
 clipped shadow. See the [investigation ledger](investigations.json).
@@ -99,7 +99,7 @@ nearly constant band positions, not changing clay composition. Band centre
 does not measure abundance. The archive preserves stripes and checkerboard
 artifacts that must not be interpreted as deposits.
 
-The [numeric inspection](evidence/band-centres/measurements.json) validates both
+The numeric inspection validates both
 4102 × 1367 big-endian float rasters against their native labels and records
 coordinate samples, missing values and clipping counts. Median positions are
 2.7320 and 3.0614 µm; 98.84% and 98.88% of cells inside the roughly ±60° source
@@ -110,8 +110,8 @@ of the 2016 figure.
 The archive's record-count and acquisition-date inconsistencies described below
 also occur in the centre labels.
 
-The [clay](evidence/band-centres/clay-centre.png) and
-[ammonium](evidence/band-centres/ammonium-centre.png) browser views were inspected
+The clay and
+ammonium browser views were inspected
 on 27 September in Chromium at 1440 × 900, DPR 2, saved at 1440 pixels wide,
 with Shadows off. Switching datasets loaded each map's own title, units and image
 without page errors or failed requests; a 390 × 844, DPR 2 phone view also passed.
@@ -156,7 +156,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
   | LAMO averaged into every cell | 0.83 (0.72), dropped |
   | gaps filled by LAMO, Approach and levelled cubes only | 0.89 (0.65) |
 
-  The Clay band keeps the archived map, which scores higher at 2.7 µm. Rejecting outliers and despiking do not change these 2° scores; they remove straight-edged blocks and single-pixel streaks, [as around Occator](evidence/band-depth/occator-outliers.png); noseam softens the remaining cube edges ([before and after](evidence/band-depth/noseam.png)). Filling closed the gaps from 9.3% to 1.3% of the map ([before and after](evidence/band-depth/gap-fill.png)); Approach cells are coarser than their neighbours, and a few levelled cubes show banding.
+  The Clay band keeps the archived map, which scores higher at 2.7 µm. Rejecting outliers and despiking do not change these 2° scores; they remove straight-edged blocks and single-pixel streaks, as around Occator; noseam softens the remaining cube edges (before and after). Filling closed the gaps from 9.3% to 1.3% of the map (before and after); Approach cells are coarser than their neighbours, and a few levelled cubes show banding.
 - **Why ours is used for 3.1 µm only.** Frigeri et al. applied the Carrozzo et al. (2016) artifact and response correction, which was never released and acts on the 2.5–3.5 µm response. The 3.1 µm band is anchored at 2.9–3.24 µm, the 2.7 µm band at 2.63 µm, where that correction matters most.
 - **Phase angle.** Each cube's offset against its overlapping neighbours correlates with its phase angle (r = 0.51 for 3.1 µm): band depth grows by 0.00041 per degree, about 0.02 over the 13° to 84° range of the cubes. The correction removes that slope only, so regional differences stay; a flat per-cube offset removed them too and lowered the score.
 - **Geometry.** For the first HAMO cube (`VIR_IR_1B_1_493158996`) the computed footprint spans 9 to 27°N and 42 to 84°E, around the label's centre of 21.3°N, 60.4°E; the median incidence is 31.6° against the label's 30.8°.
@@ -168,7 +168,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 - **Handedness and registration.** Frigeri et al. (2019) note that Haulani crater has a low 2.7 µm band depth; the archived map also dips at Cerealia Facula in Occator. Within 3° of their [IAU Gazetteer](https://planetarynames.wr.usgs.gov/Page/CERES/target) centres (10.77°E 5.80°N; 239.6°E 19.7°N) the median 2.7 µm band depth is 0.232 and 0.235, against 0.259 and 0.255 at the mirrored longitudes. The lowest 1% of pixels near Cerealia sit at 240.5°E 19.4°N, 0.9° from the Gazetteer centre. Dantu, high in the 3.1 µm band in the paper's figure, has its highest 1% at 138.3°E 26.1°N (Gazetteer 138.2°E 24.3°N).
 - **Values against the paper.** The archived 2.7 µm map has median 0.255 (1st to 99th percentile 0.2245 to 0.2859); the paper's histogram peaks near 0.20. The archived 3.1 µm map has median 0.064 (0.0432 to 0.0925); the paper peaks near 0.087. On the paper's scales most of Ceres was red in the Clay band dataset and blue in the Ammonium band dataset, so each scale now spans its map's own 2nd to 98th percentile.
 - **Why the values differ from the paper.** The archive's catalog says it follows Ammannito et al. (2016): Survey spectra only, a continuum between the two local maxima in 2.58–3.00 µm (OH) and 2.85–3.30 µm (NH4), and no artifact removal. Frigeri et al. (2019, Section 3.1) used Survey and HAMO spectra, other continuum points, and the artifact correction of Carrozzo et al. (2016), which includes "a new instrument response function" tied to ground-based telescope spectra of Ceres. That correction was never released: the PDS calibrated cubes still carry the 2016 V2 response. We reduced one HAMO cube (`VIR_IR_1B_1_493158996`, 18 August 2015) ourselves with Frigeri's continuum and the public calibration: after a three-channel boxcar for the odd/even detector pattern, its 2.7 µm band depth has median 0.272, near the archive's 0.255 and above the paper's 0.20. Thermal emission cannot close the gap: at 235 K it adds about 1.5% of the signal at 3.0 µm.
-- **In the browser.** [Clay band](evidence/band-depth/clay-band.png) and [Ammonium band](evidence/band-depth/ammonium-band.png) at the default camera, headless Chromium, 1440 × 900 at DPR 2, saved at 1440 pixels wide, Shadows off; the page loaded each dataset's own surface and pole images with no console errors. Surface rules for both datasets are in `src/renderers/css/styles/body-surfaces.css`.
+- **In the browser.** Clay band and Ammonium band at the default camera, headless Chromium, 1440 × 900 at DPR 2, saved at 1440 pixels wide, Shadows off; the page loaded each dataset's own surface and pole images with no console errors. Surface rules for both datasets are in `src/renderers/css/styles/body-surfaces.css`.
 
 ## Registration and coverage
 

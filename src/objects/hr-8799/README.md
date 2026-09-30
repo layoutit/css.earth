@@ -28,7 +28,7 @@ Run of 2026-09-23 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places the four planets, at this star's Gaia distance, 4.8 to 14.4 mas from where JWST measured them on 5 November 2023 (Balmer et al. 2025, Table 2), astrometry that postdates the fit their orbits come from.
 - The astronomy package's 855 tests pass with the corrected radius and rescaled orbits.
-- The system card, captured headless from the dev server of this version: the JWST picture beside the prepared orbits, whose planets it shows in the same places ([hr-8799-system-card.png](evidence/hr-8799-system-card.png)).
+- The system card, captured headless from the dev server of this version: the JWST picture beside the prepared orbits, whose planets it shows in the same places (hr-8799-system-card.png).
 
 ## Known problems
 

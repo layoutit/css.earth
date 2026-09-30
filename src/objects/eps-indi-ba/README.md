@@ -14,7 +14,7 @@ Epsilon Indi Ba is a brown dwarf 1,460 au from Epsilon Indi A. With Bb, a second
 
 ## Evidence
 
-Run of 2026-09-23 (this version): [the four bodies in the app](../eps-indi-a/evidence/epsilon-indi.png), headless Chromium at 800 × 600 on this version, all in the one Epsilon Indi system. [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places Bb around Ba against Chen et al.'s NACO positions, and [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places both in the Epsilon Indi system.
+Run of 2026-09-23 (this version): the four bodies in the app, headless Chromium at 800 × 600 on this version, all in the one Epsilon Indi system. [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places Bb around Ba against Chen et al.'s NACO positions, and [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places both in the Epsilon Indi system.
 
 ## Known problems
 

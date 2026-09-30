@@ -360,7 +360,7 @@ limits: 1.0% of the Moon's area lies beyond the Gravity stretch and
   Crisium basin. The free-air extremes, −1,330 and +1,782 mGal, lie in the farside
   highlands between 201° and 210° E near the equator; that map keeps the pull
   of topography.
-- [All check results](evidence/grail-gravity/checks.json), with the tested
+- All check results, with the tested
   file sizes and hashes. Flat previews painted with the dataset palette were
   inspected; they are not in the repository.
 
@@ -421,7 +421,7 @@ the maximum view and 0.94% in the noon view; almost none is above 400 K.
 
 - For three strips, including the one with the faulty label, a separate reading
   of every row rebuilds both rules and matches the grids at all 43,200 cells
-  ([checks](evidence/diviner-gcp/checks.json)).
+  (checks).
 - Within 5° of the equator the maximum's 5th to 95th percentile is 388 to 396 K;
   Williams et al. (2017) report daytime maxima of about 387 to 397 K there.
 - Their abstract says dark surfaces reach higher maxima and bright ones lower.
@@ -499,7 +499,7 @@ precision of about 0.5% TiO₂ or 230 ppm K. They are shown as zero, as archived
 - [Lawrence et al. (2022)](https://doi.org/10.1029/2022JE007197) report Th above
   12 ppm at Timocharis and the Apennine Bench in a sharper 0.5° reconstruction.
   This table's coarser pixels there hold less, as the 150 km footprint predicts.
-- [All check results](evidence/lp-grs/checks.json), with pixel values at nine
+- All check results, with pixel values at nine
   landing and sample sites and the tested file sizes and hashes. Flat previews
   painted with the dataset palette were inspected; they are not in the repository.
 
@@ -544,7 +544,7 @@ Viridis, as on the Mars thermal-inertia view. The median is 0.92 m.
 
 - 331,175 lattice probes, including the seam and both poles, return the value of
   an independent decode of the image, and are missing exactly where it holds
-  −32768 ([checks](evidence/lola-roughness/checks.json)).
+  −32768 (checks).
 - Registration and pattern: Tycho, the roughest large feature, lands at its IAU
   position (median 3.0 m within 0.3° of 43.3°S, 348.7°E); the maria read smooth
   (Tranquillitatis 0.73 m, Serenitatis 0.81 m, Imbrium 0.91 m) and the farside
@@ -608,32 +608,32 @@ preparation. The existing mesh and lighting controls are retained.
 
 ## Numeric-map qualification
 
-The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+The retained numeric checks bind
 the compact input digests and tested processing files, count coverage, and
 compare native byte samples at hemispheres, seams, extrema and gaps. Their
 calibration check runs before the display coverage masks; it does not validate
 the original instrument or scientific model.
-The [all-cell quality audit](evidence/usgs-numeric/quality.json) checks all
+The all-cell quality audit checks all
 eight views, including the shared fit mask and FeO physical domain. All
 16,777,216 comparisons pass. The four mineral fractions sum to one within
 4.48 × 10⁻⁸ at every cell with a valid companion fit.
 
-The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+The fresh-install receipt verifies 1,500
 runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
 Sun world metadata, with no reused files. All 15 compact source grids restored
 from the source cache with native fallback disabled and matched byte for byte.
 
-The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+The browser evidence records the earlier
 map descriptions, legends and retained scene. It includes screenshots; the
-[validation record](evidence/usgs-numeric/validation.json) names the checks
+validation record names the checks
 and the local full-build limitation. These checks do not measure instrument
 accuracy or establish how well readers understand the explanations.
 
-The [current-main integration check](evidence/usgs-numeric/integration.json) records the
+The current-main integration check records the
 build, all 11 grouped selectors, source labels and phone playback. It explains
 which earlier scientific and browser evidence still applies to this version.
 
-The [final dataset UI check](evidence/usgs-numeric/dataset-ui-removal.json) confirms that Dataset details
+The final dataset UI check confirms that Dataset details
 and Surface photographs are absent from all 1,453 generated pages. Browser
 checks cover the Moon, Venus and WASP-12b; the final screenshots show the
 short description, legend and source link.

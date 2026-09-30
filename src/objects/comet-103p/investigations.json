@@ -9,7 +9,6 @@
       "finding": "The diagnostic trial reduces accepted photographed area from 57.98% to 32.00%; 8 of 10 common-point overlap pairs improve. The source-sampler view replaces much photographed terrain with grid. Retain the observed photographs. The original H-function approximation is unverified and normalization does not remove foreground coma.",
       "revisitWhen": "A verified model formulation and treatment of illumination or coma can improve overlaps while retaining the photographed terrain.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/comet-103p/evidence/photometry/trial.json",
         "https://arxiv.org/abs/1310.4165",
         "https://doi.org/10.1016/j.icarus.2012.11.001",
         "https://www.lpi.usra.edu/meetings/acm2012/pdf/6385.pdf"

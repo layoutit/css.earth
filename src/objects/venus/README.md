@@ -18,7 +18,7 @@ The [navigation marker recipe](source/preparation/navigation.json) retains the e
 
 ## Evidence
 
-The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. For PR #828, every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. That record applies to the #828 versions; the later numeric upgrade below rebakes emissivity and elevation. [emissivity](evidence/showcase/emissivity.png).
+The 26 September 2026 browser and delivery record identifies the tested revision and inventory. For PR #828, every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. That record applies to the #828 versions; the later numeric upgrade below rebakes emissivity and elevation. emissivity.
 
 ### Magellan microwave emissivity (26 September 2026)
 
@@ -30,7 +30,7 @@ same native product into the compact grid before the existing science reader. It
 The output now starts at −180° east longitude, matching the body's surface-map
 frame (180° is the same meridian). The previous recipe omitted this setting and
 used the science painter's 0° default, placing the data half a turn from that
-frame. The [comparison record](evidence/usgs-numeric/emissivity-upgrade.json)
+frame. The comparison record
 identifies both recipes and assets. Both display 2,048 × 1,024 cells; the lossless
 packed asset grows from 182,456 to 1,142,498 bytes.
 
@@ -427,34 +427,34 @@ See the [contributor guide](../README.md) for acquisition and preparation comman
 
 ## Numeric-map qualification
 
-The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
+The retained numeric checks bind
 the compact input digests and tested processing files, count coverage, and
 compare native byte samples at hemispheres, seams, extrema and gaps. Their
 calibration check runs before the display coverage masks; it does not validate
 the original instrument or scientific model.
-The [failed label-only roughness comparison](evidence/usgs-numeric/roughness-label-conflict.json)
+The failed label-only roughness comparison
 is retained alongside the passing comparison using the cited PDS calibration.
 
-The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
+The fresh-install receipt verifies 1,500
 runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
 Sun world metadata, with no reused files. All 15 compact source grids restored
 from the source cache with native fallback disabled and matched byte for byte.
 
-The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
+The browser evidence records the earlier
 map descriptions, legends and retained scene. It includes screenshots; the
-[validation record](evidence/usgs-numeric/validation.json) names the checks
+validation record names the checks
 and the local full-build limitation. These checks do not measure instrument
 accuracy or establish how well readers understand the explanations.
 
-The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
+The current-main integration check records the
 build, all 11 grouped selectors, source labels and phone playback. It explains
 which earlier scientific and browser evidence still applies to this version.
 
-The later [gallery removal check](evidence/usgs-numeric/gallery-removal.json)
+The later gallery removal check
 confirms that Surface photographs is absent on desktop, mobile and the built
 page. The four panorama files are absent from the delivery inventory.
 
-The [final dataset UI check](../moon/evidence/usgs-numeric/dataset-ui-removal.json) confirms that Dataset details
+The final dataset UI check confirms that Dataset details
 and Surface photographs are absent from all 1,453 generated pages. Browser
 checks cover the Moon, Venus and WASP-12b; the final screenshots show the
 short description, legend and source link.

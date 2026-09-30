@@ -1,6 +1,6 @@
 # WASP-12 b
 
-**Temperature maps.** The dataset selector groups 2010, 2013 under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+**Temperature maps.** The dataset selector groups 2010, 2013 under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
 
 ## Sources
 
