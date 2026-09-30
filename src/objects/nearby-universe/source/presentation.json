@@ -29,13 +29,35 @@
         ]
       },
       {
+        "id": "local-group-galaxies",
+        "label": "Local Group galaxies",
+        "process": "Place each LVDB galaxy at its adopted distance; tone it by its absolute V magnitude.",
+        "recipe": "source/local-group-galaxies/points.json",
+        "selector": "",
+        "inputs": [
+          "local-group-galaxies-sample"
+        ],
+        "outputs": [
+          "prepared/local-group-galaxies.json"
+        ],
+        "interpretation": {
+          "kind": "catalogue-count-visualization",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "The templates are spectra of galaxy centres, not whole-galaxy light; types later than Sc take the Sc template.",
+          "A galaxy with no HyperLEDA type is drawn white."
+        ]
+      },
+      {
         "id": "galaxies-200mpc",
         "label": "Galaxy dots, 200 Mpc level",
-        "process": "Keep galaxies, in a fixed shuffle, while the ones within the kernel stay under the level's even density; nested levels add only galaxies the enclosing levels do not draw.",
+        "process": "Every Cosmicflows-4 galaxy and every LVDB galaxy inside its inner edge.",
         "recipe": "source/galaxies-200mpc/merge.json",
         "selector": "",
         "inputs": [
-          "galaxies-table"
+          "galaxies-table",
+          "local-group-galaxies-sample"
         ],
         "outputs": [
           "prepared/galaxies-200mpc.json"
@@ -111,11 +133,12 @@
       {
         "id": "dots",
         "label": "Galaxy dots at every zoom",
-        "process": "Join the four levels, outermost first, into one bank the app draws as a growing prefix: the field whole within 100 Mpc, each inner level's galaxies one at a time as the view narrows past its radius.",
+        "process": "One level, every galaxy, drawn whole within 100 Mpc; at most 25,000 at once.",
         "recipe": "source/dots/stack.json",
         "selector": "",
         "inputs": [
-          "galaxies-table"
+          "galaxies-table",
+          "local-group-galaxies-sample"
         ],
         "outputs": [
           "prepared/dots.json"

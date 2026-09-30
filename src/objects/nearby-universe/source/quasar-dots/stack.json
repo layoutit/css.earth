@@ -9,5 +9,6 @@
       "fullDetailUnits": 6600
     }
   ],
-  "basis": "Presentation choice: every dot is drawn within 6,600 Mpc of the Milky Way, the sample's reach; farther out a share that falls with distance."
+  "screenBudget": 25000,
+  "basis": "Presentation choice: every dot is drawn within 6,600 Mpc of the Milky Way, the sample's reach; farther out a share that falls with distance. At most 25,000 of its dots are drawn at once (screenBudget): past that, a fixed share is kept, so zooming never swaps one dot for another; below it, every dot is drawn."
 }

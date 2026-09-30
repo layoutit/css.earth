@@ -2,12 +2,13 @@
   "schema": "cssearth-catalogue-points-stack@1",
   "id": "dots",
   "published": true,
-  "meaning": "The galaxies of Cosmicflows-4 at every zoom: the whole field, then the nested levels around the Milky Way, each adding galaxies as its region fills the view.",
+  "meaning": "Every Cosmicflows-4 galaxy between 3 and 200 Mpc, drawn whole while the camera is within 100 Mpc.",
   "levels": [
     {
       "bank": "galaxies-200mpc",
       "fullDetailUnits": 100
     }
   ],
-  "basis": "Presentation choice: the field is drawn whole within 100 Mpc, half its radius; each level starts to appear when the view's half-width at the Milky Way shrinks to the level's radius, so its edge is off screen, and is whole when it reaches the next level's radius; the 10 Mpc level is whole at 3 Mpc, where the Local Group catalogue takes over."
+  "screenBudget": 25000,
+  "basis": "Presentation choice: all 27,277 galaxies in one level, unthinned, so clusters and filaments keep the contrast the catalogue measured; it is flux-limited, so it is denser near the Milky Way. Drawn whole within 100 Mpc, half its radius; farther out a share that falls with distance. At most 25,000 of its dots are drawn at once (screenBudget): past that, a fixed share is kept, so zooming never swaps one dot for another; below it, every dot is drawn."
 }

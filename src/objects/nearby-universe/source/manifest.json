@@ -29,6 +29,30 @@
       "license": "Original catalogue terms apply; cite Tully et al. (2023), CDS/VizieR and HyperLEDA."
     },
     {
+      "id": "local-group-galaxies-sample",
+      "path": "src/objects/nearby-universe/source/local-group-galaxies/lvdb-sample.csv.gz",
+      "origin": "src/objects/local-group/prepared/catalogue.json",
+      "sourceUrl": "https://doi.org/10.33232/001c.144859",
+      "title": "LVDB v1.1.1 galaxies nearer than the Cosmicflows-4 field",
+      "credit": "Pace (2025), Local Volume Database v1.1.1 (CC0)",
+      "acquisition": "The generator keeps the prepared Local Group catalogue's galaxies nearer than the field's nearest Cosmicflows-4 galaxy, without a detailed object of their own, with LVDB's apparent V magnitude joined by key. Written 2026-09-30.",
+      "generator": "packages/bake/authoring/nearby-universe/local-group-sample.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lvdb-v1-1-1",
+            "role": "material",
+            "evidence": "src/objects/nearby-universe/source/local-group-galaxies/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [
+        "galaxies-table"
+      ],
+      "license": "LVDB is CC0; cite Pace (2025) and its input papers."
+    },
+    {
       "id": "kc96-elliptical",
       "path": "src/objects/nearby-universe/source/galaxies/kc96/elliptical_template.fits",
       "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/grid/kc96/elliptical_template.fits",
