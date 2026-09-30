@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "comet-19p",
   "displayName": "Borrelly",
@@ -20,9 +20,9 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "micas",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "micas",
     "labels": {
       "micas": "MICAS",
       "usgs": "USGS",

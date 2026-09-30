@@ -1,10 +1,10 @@
 # Crab Nebula (M1)
 
-Six spectral lenses share expansion-inferred ejecta and an authored pulsar-wind model. **Hubble optical is the default.** Display color and opacity do not measure gas or dust density.
+Six spectral datasets share expansion-inferred ejecta and an authored pulsar-wind model. **Hubble optical is the default.** Display color and opacity do not measure gas or dust density.
 
 ## Sources
 
-| Source / lens | Selected observation and scope |
+| Source / dataset | Selected observation and scope |
 | --- | --- |
 | [Hubble optical](https://esahubble.org/images/heic0515a/) | WFPC2 optical-line mosaic, 1999–2002; 3864² pixels, 6.41′ square. |
 | [Webb infrared](https://esawebb.org/images/weic2326a/) | NIRCam/MIRI, 2022–2023; 4000 × 3483 pixels, 5.47′ × 4.76′. |
@@ -22,7 +22,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 ## Evidence
 
-- [Recorded app checks](../../../site/test/evidence/nebulae/2026-09-14/field-defaults.json) cover the catalogue field, projection and star toggle; [evidence context](../../../site/test/evidence/nebulae/2026-09-14/README.md) states their version and limits.
+- Recorded app checks cover the catalogue field, projection and star toggle; evidence context states their version and limits.
 - The [object descriptor](object.json) pins the installed bank whose provenance identifies compiler result `3fac3e884fb5…`. The [delivery request](source/delivery.json) pins preparation inputs and retains the older accepted-lab reference separately. This documentation review did not perform a cold replay.
 - [Historical processing evidence](../../../labs/nebula/models/m1/processing-evidence.json) separates stellar registration, native pixel accounting and projected-signal checks. These establish their recorded processing behavior, not physical depth or current material acceptance.
 

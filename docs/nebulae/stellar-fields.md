@@ -40,8 +40,8 @@ committed so a clean bake does not depend on a live archive query.
 Explicit retained sources preserve the bright Pleiades catalogue stars, Crab
 pulsar and 34 bright Helix image cores from the registered optical/infrared union. These keep their previous model-conditioned depths; they are not relabelled
 as Bailer-Jones distances. Nearby Gaia directions are excluded within the declared
-angular matching radius to avoid doubled lights. All spectral lenses share the
-same surrounding optical starfield; changing a nebula's false-color lens does not
+angular matching radius to avoid doubled lights. All spectral datasets share the
+same surrounding optical starfield; changing a nebula's false-color dataset does not
 change stellar positions or claim optical photometry in radio/X-rays.
 
 ## Delivered selection · 14 September 2026
@@ -69,7 +69,7 @@ residual halos were already baked into the conditional cloud. The cores keep
 those illustrative depths to stay attached to the halos, rather than falsely
 claiming the catalogue distances are the same. Matches, aperture evidence and distance intervals
 remain in the source provenance. Anchor-source photometry stays visible across
-lens changes, even where the selected image has no coverage. Infrared source
+dataset changes, even where the selected image has no coverage. Infrared source
 colors are display choices, not optical stellar photometry. A 10″ authored match radius avoids double lights
 near broad or saturated image peaks. This is an explicit display limitation;
 removing stellar halos from the cloud is a separate material-cleanup task.
@@ -88,7 +88,7 @@ limit unless an explicit override is supplied.
 
 Inspect both the reference direction and an orbit around each object. Points must
 continue outside the source raster and span foreground/background distances.
-Lens switches and the Catalogue stars toggle must retain the same positions.
+Dataset switches and the Catalogue stars toggle must retain the same positions.
 The geometric tests check known independent ICRS positions, proper motion, distance
 ordering and soft boundaries; they do not establish cluster membership or exact
 physical depth.
@@ -96,10 +96,10 @@ physical depth.
 ![Retained bright Helix cores and its surrounding field in the shared app](../images/nebulae/helix-cores.png)
 
 The 14 September app inspection shows the added upper-halo cores in the WFI
-lens, including cores detected beyond that image’s coverage. Front and oblique
-views of all three lenses retain their geometry and source appearance. Their
+dataset, including cores detected beyond that image’s coverage. Front and oblique
+views of all three datasets retain their geometry and source appearance. Their
 roughly one-pixel cores are intentionally subtle; existing coarse halos remain.
 
-No repository test switches stellar lenses or inspects their attribution. The merged-visibility regression was fixed in
+No repository test switches stellar datasets or inspects their attribution. The merged-visibility regression was fixed in
 `prepared-sky-runtime`;
 the HTML check does not test that interaction.

@@ -5,7 +5,7 @@
  * --refresh <id>...` reads those specs back and generates again from the archives as they are today, then writes the result over the
  * package under these rules:
  *
- * - **Refused:** a package with no stored spec (made by hand), or one a person extended with lenses the tool does not make (a
+ * - **Refused:** a package with no stored spec (made by hand), or one a person extended with datasets the tool does not make (a
  *   Doppler map, a resolved image): regenerating would drop them.
  * - **Kept:** the reader card or introduction when a person rewrote it (it differs from what the stored spec drafted and carries no
  *   TODO); the README once a person has written it (it no longer carries the draft's line or a TODO), whole; every entry of the
@@ -18,7 +18,7 @@
 import { readFile, rm, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { HostedSpec, StarSpec } from './spec.mts';
-import type { PackageFiles } from './lens.mts';
+import type { PackageFiles } from './dataset.mts';
 
 export const STORED_SPEC = 'source/preparation/new-object.json';
 const TODO = 'TODO(new-object)';
@@ -59,11 +59,11 @@ export async function mergeRefresh(files: PackageFiles, id: string, root: string
   const stored = JSON.parse(storedText) as { text?: { card?: string; introduction?: string }; planets?: { text?: { card?: string; introduction?: string } }[]; companions?: { text?: { card?: string; introduction?: string } }[] };
   const previousText = stored.text ?? stored.planets?.[0]?.text ?? stored.companions?.[0]?.text;
   const read = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as Record<string, any>;
-  // A person's lenses are the tool's to keep, not to drop.
-  const oldLenses = ((await read(`${rel}/source/content/object.json`)).lenses?.controls ?? []).map((control: { id: string }) => control.id) as string[];
-  const newLenses = (JSON.parse(String(files.get(`${rel}/source/content/object.json`))).lenses?.controls ?? []).map((control: { id: string }) => control.id) as string[];
-  const extra = oldLenses.filter(lens => !newLenses.includes(lens) && !['shape', 'color', 'thermal', 'infrared'].includes(lens));
-  if (extra.length) throw new Error(`${id}: it has lenses the tool does not make (${extra.join(', ')}); a refresh would drop them. Update it by hand.`);
+  // A person's datasets are the tool's to keep, not to drop.
+  const oldDatasets = ((await read(`${rel}/source/content/object.json`)).datasets?.controls ?? []).map((control: { id: string }) => control.id) as string[];
+  const newDatasets = (JSON.parse(String(files.get(`${rel}/source/content/object.json`))).datasets?.controls ?? []).map((control: { id: string }) => control.id) as string[];
+  const extra = oldDatasets.filter(dataset => !newDatasets.includes(dataset) && !['shape', 'color', 'thermal', 'infrared'].includes(dataset));
+  if (extra.length) throw new Error(`${id}: it has datasets the tool does not make (${extra.join(', ')}); a refresh would drop them. Update it by hand.`);
   const kept: string[] = [];
   // Reader text: a person's card or introduction stays.
   const oldText = await read(`${rel}/text.json`), newText = JSON.parse(String(files.get(`${rel}/text.json`)));
@@ -75,7 +75,7 @@ export async function mergeRefresh(files: PackageFiles, id: string, root: string
   // README: regenerated while it is still the tool's draft; once a person has written it, kept whole, and the numbers in it are theirs
   // to check against the regenerated package.
   const readme = await readFile(resolve(o, 'README.md'), 'utf8').catch(() => null);
-  if (readme !== null && !readme.includes('This account was drafted from') && !readme.includes(TODO)) { files.delete(`${rel}/README.md`); kept.push('README.md (a person wrote it; check its numbers)'); }
+  if (readme !== null && !readme.includes('The introduction is generated from') && !readme.includes(TODO)) { files.delete(`${rel}/README.md`); kept.push('README.md (a person wrote it; check its numbers)'); }
   // The ledger is a person's record: every entry already there stays as written; a decision the regeneration made that it lacks
   // (a new route, such as the surface gravity) is added after them.
   if (await exists(resolve(o, 'investigations.json'))) {

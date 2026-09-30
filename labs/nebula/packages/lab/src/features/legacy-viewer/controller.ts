@@ -10,7 +10,7 @@ import { cloudCompositeOpacity, createCloudInspection, nativeCloudBrightness, pa
 import type { CloudBrightness, CloudStarOptions, CloudStarContext } from '@cssearth/volume-viewer/scene/cloud-types';
 import { mountPreparedLmcStars, parsePreparedLmcStars } from '../../adapters/viewer/catalogue-stars';
 import { loadRegisteredOverlay, mountReconstructionOverlay } from '../../adapters/viewer/reconstruction-overlay';
-import { createDifferencePlane, lensResultOf, type DifferenceOverlayState } from './difference-plane';
+import { createDifferencePlane, datasetResultOf, type DifferenceOverlayState } from './difference-plane';
 import { loadPreparedCssImageLayers, loadPreparedCssVolume, type PreparedCssImageLayers, type PreparedCssVolume, type VolumeCameraPublication } from '../../adapters/viewer/prepared-loaders';
 
 import { createInspectionCamera, type InspectionPose as CameraPose } from '@cssearth/volume-viewer/camera/inspection-camera';
@@ -53,7 +53,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   let originalOverlay: ReturnType<typeof mountReconstructionOverlay> | null = null;
   const difference = createDifferencePlane();
   const slots = createMaterialSlots();
-  // Tone bindings stay keyed by the mounted bank; a swapped lens maps its own texture paths onto those keys.
+  // Tone bindings stay keyed by the mounted bank; a swapped dataset maps its own texture paths onto those keys.
   let bankDirectory = '', boundPaths = new Map<string, string>();
   let originalPending: Promise<void> | null = null, originalEnabled = false, originalOpacity = .5;
   let overlayCatalogue: DensityOverlayCatalogue | null = null, overlayBasePath = '';
@@ -76,7 +76,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     material: { available: currentMode === 'photo' && Boolean(subject.reconstructionNeutral), mode: slots.mode, loading: slots.loading },
     originalOverlay: { available: currentMode === 'photo' && Boolean(subject.reconstructionOverlay),
       enabled: currentMode === 'photo' && originalEnabled && Boolean(subject.reconstructionOverlay), opacity: originalOpacity, loading: Boolean(originalPending) },
-    differenceOverlay: { available: currentMode === 'photo' && Boolean(subject.reconstructionOverlay && lensResultOf(subject.id)),
+    differenceOverlay: { available: currentMode === 'photo' && Boolean(subject.reconstructionOverlay && datasetResultOf(subject.id)),
       enabled: difference.enabled, earthFacing: view.pose === 'front', opacity: difference.opacity, loading: difference.loading } });
   const view = createInspectionCamera({ host, backend: inspectionCameraRenderer,
     configuration: () => ({ frame: payload?.frame ?? null, projectionScale: subject.referenceProjectionScale ?? 1,
@@ -318,19 +318,19 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
     } else if (originalPending) await originalPending;
     if (current()) { originalOverlay?.setVisible(originalEnabled, originalOpacity); publish(); report(); }
   }
-  /** The render-minus-source map for the displayed image lens, on the original image's registered quad. */
+  /** The render-minus-source map for the displayed image dataset, on the original image's registered quad. */
   async function setDifferenceOverlay(enabled: boolean, opacity = difference.opacity) {
     if (enabled && (currentMode !== 'photo' || !payload)) throw new Error('The difference map is shown on the reconstruction’s Earth view.');
     const version = loadVersion, expectedSubject = subject.id;
     const current = () => !disposed && version === loadVersion && expectedSubject === subject.id && currentMode === 'photo';
-    const loading = difference.set(enabled, opacity, payload ? { host, before: starLayer?.root ?? end, resultId: lensResultOf(subject.id),
+    const loading = difference.set(enabled, opacity, payload ? { host, before: starLayer?.root ?? end, resultId: datasetResultOf(subject.id),
       manifestPath: subject.reconstructionOverlay, frame: payload.frame, distanceUnits: subject.referenceDistanceUnits, url: localFile, current } : undefined);
     report();
     try { await loading; } finally { if (current()) { publish(); report(); } }
   }
   const followDifference = (current: () => boolean) => {
-    // The switch survives a subject without a lens (the unpainted density) and remounts on the next lens.
-    if (difference.enabled && subject.reconstructionOverlay && lensResultOf(subject.id)) void setDifferenceOverlay(true).catch(failure => { if (current()) { status = 'Difference map could not load'; error = String(failure); report(); } });
+    // The switch survives a subject without a dataset (the unpainted density) and remounts on the next dataset.
+    if (difference.enabled && subject.reconstructionOverlay && datasetResultOf(subject.id)) void setDifferenceOverlay(true).catch(failure => { if (current()) { status = 'Difference map could not load'; error = String(failure); report(); } });
   };
   function rememberDensityCamera() {
     if (payload && host.dataset.mode === 'density' && subject.density) {

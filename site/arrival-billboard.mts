@@ -21,8 +21,8 @@ export function frameArrivalBillboard(arrival: PreparedArrivalView, target: Worl
 
 /** An opaque cover requires the same final distance and orientation as its bake. */
 export function canUseArrivalBillboard(arrival: PreparedArrivalView | undefined, target: WorldCameraPose,
-  frame: PreparedWorldCameraFrame, viewport: WorldCameraViewport, lens?: string | null): boolean {
-  if (!arrival?.billboard || (lens ?? arrival.defaultLens) !== arrival.defaultLens) return false;
+  frame: PreparedWorldCameraFrame, viewport: WorldCameraViewport, dataset?: string | null): boolean {
+  if (!arrival?.billboard || (dataset ?? arrival.defaultDataset) !== arrival.defaultDataset) return false;
   const projection = presentWorldCamera(target, frame, viewport);
   if (Math.abs(projection.distanceM / arrival.billboard.distanceM - 1) > 1e-5 ||
       projection.rotation.some((value, index) => Math.abs(value - arrival.rotation[index]!) >= 1e-8) ||

@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its mean radius, 165 solar radii, comes from comparing how fast its surface moves with how its size changes, 45,392 parsecs away. It is also HD 269075. This account was drafted from Groenewegen (2013), A&A 550, A70's values; the sections below are the data's own.
+Its mean radius, 165 solar radii, comes from comparing how fast its surface moves with how its size changes, 45,392 parsecs away. It is also HD 269075. The introduction is generated from Groenewegen (2013), A&A 550, A70's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4655176243131693696, distance 45,392 pc from Groenewegen (2013), A&A 550, A70, table10, HV 900: Baade-Wesselink distance (pc) 45391.7 +/- 1358.3 (Monte-Carlo); Gaia DR3's parallax, 0.050 ± 0.018 mas (2.8 standard errors), is not used. Radius 165 +/- 4.7 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 900: Baade-Wesselink mean radius (solar radii) 165 +/- 4.7 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5,000 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0966, columns Teffp, e_Teffp: Teff 5000 +/- 204 K from a fit to the spectral energy distribution at mean light (not spectroscopic). log g 0 from 2022A&A...658A..29R ("The iron and oxygen content of LMC Classical Cepheids and its implications for the extragalactic distance scale and Hubble constant. Equivalent width analysis with Kurucz stellar atmosphere models.").
 
@@ -12,8 +12,7 @@ Its mean radius, 165 solar radii, comes from comparing how fast its surface move
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
@@ -23,6 +22,5 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
 - **Not shown.** No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.
 - **Not shown.** Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

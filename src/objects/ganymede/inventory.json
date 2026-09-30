@@ -9,6 +9,36 @@
     },
     {
       "location": "public",
+      "filename": "ganymede-dataset-dlr-juno.webp",
+      "bytes": 850,
+      "sha256": "6462193301f5fdfb97b42e8a5af31e7932ac6cb092d6b7f2cb600fd0d49a22e4"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-dataset-enhanced.webp",
+      "bytes": 626,
+      "sha256": "e71761e263f628b5cb2d75e040d9a772499424cebb8493c65356d89ea24f9c78"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-dataset-geology.webp",
+      "bytes": 1402,
+      "sha256": "7d0dd26e1fa14603aa25d1785c8b5847380149fbd7c91a3be2689648262a8450"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-dataset-normal.webp",
+      "bytes": 512,
+      "sha256": "ad1e91da92426033e1e632c1bec72a32f03fb982de8209fccf93e2d6a4cff4db"
+    },
+    {
+      "location": "public",
+      "filename": "ganymede-dataset-oxygen-signature.webp",
+      "bytes": 1910,
+      "sha256": "c8f2de39b131ca89266bbadb609da3a002682a37e08393498afa3f946e563b57"
+    },
+    {
+      "location": "public",
       "filename": "ganymede-dlr-juno@2x.webp",
       "bytes": 5797280,
       "sha256": "e6bff0a410a1be22545ef90b4ce2348c96557ba05d63d6cb0a2bc96afdc341f0"
@@ -30,36 +60,6 @@
       "filename": "ganymede-geology@2x.webp",
       "bytes": 522226,
       "sha256": "c6c31c1b2c317b9465e53184374a075c5a936454e8eece68112abace97af19cd"
-    },
-    {
-      "location": "public",
-      "filename": "ganymede-lens-dlr-juno.webp",
-      "bytes": 850,
-      "sha256": "6462193301f5fdfb97b42e8a5af31e7932ac6cb092d6b7f2cb600fd0d49a22e4"
-    },
-    {
-      "location": "public",
-      "filename": "ganymede-lens-enhanced.webp",
-      "bytes": 626,
-      "sha256": "e71761e263f628b5cb2d75e040d9a772499424cebb8493c65356d89ea24f9c78"
-    },
-    {
-      "location": "public",
-      "filename": "ganymede-lens-geology.webp",
-      "bytes": 1402,
-      "sha256": "7d0dd26e1fa14603aa25d1785c8b5847380149fbd7c91a3be2689648262a8450"
-    },
-    {
-      "location": "public",
-      "filename": "ganymede-lens-normal.webp",
-      "bytes": 512,
-      "sha256": "ad1e91da92426033e1e632c1bec72a32f03fb982de8209fccf93e2d6a4cff4db"
-    },
-    {
-      "location": "public",
-      "filename": "ganymede-lens-oxygen-signature.webp",
-      "bytes": 1910,
-      "sha256": "c8f2de39b131ca89266bbadb609da3a002682a37e08393498afa3f946e563b57"
     },
     {
       "location": "public",
@@ -316,14 +316,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 304,
-      "sha256": "f2b57f7e70571aa2bba9b6c0de2ff4a477ea40dbff0b8931292b9de7a9a650e3"
+      "bytes": 307,
+      "sha256": "c2eb520ecc181f2e44411083be71cf0ef8940642e004769a11993074baa5bac3"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 85347,
-      "sha256": "83f1459c12119d7c1810fc6abda8a59e226b49e7fd9d736539fb7f898ed3f789"
+      "bytes": 85362,
+      "sha256": "422da98316654411edaa7347b2850bf48377b5bcbf8f22b71c649d28b63023e2"
     },
     {
       "location": "prepared",
@@ -335,25 +335,25 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 2615,
-      "sha256": "17a33204d7e81f2ebecb2873dee026f3779dc25ccf8081814c6dc30e9d2db4d7"
+      "sha256": "a84ede2b6354ef184f9f751f393d54b4e17a031e7693c721fc56000a4aa2c112"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 4919,
-      "sha256": "e93897a59465f505e4f69fdb1af3c7021e6e7234aca48475e542b1b44745afaf"
+      "bytes": 4945,
+      "sha256": "0e76be674ccb23f200b19491e8b41e72226f69bd582ee14a850641b21a5e521b"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 6692,
+      "sha256": "d19c4a46c581adcf08c51d0ce97172fbf4410fbae6368c1357f51a0f5e0a32c8"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 594,
       "sha256": "fa51760e69ca84b00d95abe08c30eb5f1337fa33275dcc0570c38ee8bad78062"
-    },
-    {
-      "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 6666,
-      "sha256": "3097fd7af6efce29c10d3d5e8a2658cfc5ac5463f4a32bfc45e00be5931bdfa1"
     },
     {
       "location": "prepared",
@@ -400,8 +400,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 343956,
-      "sha256": "2dfbfaeee525207f959cbd86747459ffaf17edcecc25784d2da8cb3ea49f8d63"
+      "bytes": 344045,
+      "sha256": "364aa69234826063c80bf85ac6956114c6e0b7e5c8ec7502ddfb89d32bad5fd8"
     },
     {
       "location": "prepared",

@@ -1,7 +1,7 @@
 import type {MaterialSourceTrack} from '../../../presentation/index.ts';
 import {parse} from '@cssearth/core/schema';
 import { layeredPresentationRecipe } from './presentation-recipe.ts';
-import { parseLayeredLenses, parseLayeredAtlas } from './presentation-source.ts';
+import { parseLayeredDatasets, parseLayeredAtlas } from './presentation-source.ts';
 import { prepareAtlasRows, prepareAtlasStill } from './atlas-rows.ts';
 import { requireString, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '@cssearth/core';
 import type {createLayeredOblatePreparation} from './layered-oblate.ts';
@@ -28,20 +28,20 @@ function prepareTransform(value:string|null|undefined) {
   return matrix;
 }
 
-export async function prepareLayeredOblatePresentation({publicDirectory,config:input,plan,layouts,lenses:lensInput,views,sky,sun}: {publicDirectory:string;config:unknown;plan:LayeredScene;layouts:ReturnType<typeof prepareLayeredLeafLayouts>;lenses:unknown;views:Awaited<ReturnType<typeof prepareCutawayMaterials>>;sky:Awaited<ReturnType<typeof prepareCubicSky>>;sun:Awaited<ReturnType<typeof prepareDirectionalSun>>}) {
-  const config=parse(input,layeredPresentationRecipe,'layered presentation recipe'),lenses=parseLayeredLenses(lensInput);
+export async function prepareLayeredOblatePresentation({publicDirectory,config:input,plan,layouts,datasets:datasetInput,views,sky,sun}: {publicDirectory:string;config:unknown;plan:LayeredScene;layouts:ReturnType<typeof prepareLayeredLeafLayouts>;datasets:unknown;views:Awaited<ReturnType<typeof prepareCutawayMaterials>>;sky:Awaited<ReturnType<typeof prepareCubicSky>>;sun:Awaited<ReturnType<typeof prepareDirectionalSun>>}) {
+  const config=parse(input,layeredPresentationRecipe,'layered presentation recipe'),datasets=parseLayeredDatasets(datasetInput);
   const {namespace,camera}=config;
   const exteriorAtlas = parseLayeredAtlas(plan.preparedLighting.orbitAtlas.runtimeShards), interiorAtlas = parseLayeredAtlas(plan.interior.atmosphere.runtimeShards);
-  const exteriorLenses = lenses.controls.filter(lens => lens.view !== "interior"), normal = exteriorLenses.find(lens => lens.id === lenses.defaultLens);
-  if (!normal) throw new Error('Layered presentation has no default exterior lens.');
-  const lensAssets = (lens:ReturnType<typeof parseLayeredLenses>['controls'][number]) => [
-    { key: `surface:${lens.id}`, url: canonicalPreparedAsset(requireString(lens.surfaceUrl), lens.surface2xUrl) },
-    { key: `poles:${lens.id}`, url: requireString(lens.polesUrl) },
-    { key: `rings:${lens.id}`, url: canonicalPreparedAsset(requireString(lens.ringUrl), lens.ring2xUrl) },
-    ...(lens.id !== lenses.defaultLens && views.assets.outerPoles[lens.id]
-      ? [{ key: `outer-poles:${lens.id}`, url: canonicalPreparedAsset(views.assets.outerPoles[lens.id]) }] : []),
+  const exteriorDatasets = datasets.controls.filter(dataset => dataset.view !== "interior"), normal = exteriorDatasets.find(dataset => dataset.id === datasets.defaultDataset);
+  if (!normal) throw new Error('Layered presentation has no default exterior dataset.');
+  const datasetAssets = (dataset:ReturnType<typeof parseLayeredDatasets>['controls'][number]) => [
+    { key: `surface:${dataset.id}`, url: canonicalPreparedAsset(requireString(dataset.surfaceUrl), dataset.surface2xUrl) },
+    { key: `poles:${dataset.id}`, url: requireString(dataset.polesUrl) },
+    { key: `rings:${dataset.id}`, url: canonicalPreparedAsset(requireString(dataset.ringUrl), dataset.ring2xUrl) },
+    ...(dataset.id !== datasets.defaultDataset && views.assets.outerPoles[dataset.id]
+      ? [{ key: `outer-poles:${dataset.id}`, url: canonicalPreparedAsset(views.assets.outerPoles[dataset.id]) }] : []),
   ];
-  const interior = [...Object.entries(views.interiorLenses.normal.assets).map(([name, asset]) => ({ key: `interior:${name}`, url: canonicalPreparedAsset(asset), pool: "interior" })),
+  const interior = [...Object.entries(views.interiorDatasets.normal.assets).map(([name, asset]) => ({ key: `interior:${name}`, url: canonicalPreparedAsset(asset), pool: "interior" })),
     { key: "interior:outer-poles", url: canonicalPreparedAsset(views.assets.outerPoles.normal), pool: "interior" }];
   const rowBanks = new Map<string,Awaited<ReturnType<typeof prepareAtlasRows>> & {pool:string}>();
   const stills = new Map<string,Awaited<ReturnType<typeof prepareAtlasStill>> & {pool:string}>();
@@ -73,7 +73,7 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     { key: "ring-shadow", url: `/scenes/${namespace}/${namespace}-ring-shadow.webp`, pool: "warm" },
     ...plan.ringMotionPlates.map((plate, index) => ({ key: `ring-motion:${index}`, url: canonicalPreparedAsset(plate.textureUrl, plate.texture2xUrl), pool: "warm" })),
     ...interior,
-    ...exteriorLenses.flatMap(lens => lensAssets(lens).map(entry => ({ ...entry, pool: lens.id === lenses.defaultLens ? "warm" : "lenses" }))),
+    ...exteriorDatasets.flatMap(dataset => datasetAssets(dataset).map(entry => ({ ...entry, pool: dataset.id === datasets.defaultDataset ? "warm" : "datasets" }))),
     ...[...rowBanks.values()].flatMap(({ entries, pool }) => entries.map(entry => ({ ...entry, pool }))),
     ...[...stills.values()].map(({ entry, pool }) => ({ ...entry, pool })),
   ];
@@ -180,21 +180,21 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
     rotation: { kind: "ellipsoid", source: "view-sun", reference: "initial", baseDegrees: 0, zeroAtPole: false, polePolicy: "azimuth",
       width: tileBox.get(target)!, height: tileBox.get(target)!, projection: projectionFor(target, tileBox.get(target)!), systemTransform: materialSystem.style.transform, onlyWhenEnabled: true },
     frameAttribute: null, modeAttribute: null, quoted: true });
-  const variants = lenses.controls.flatMap(lens => [false, true].flatMap(rings => [false, true].map(shadows => {
-    const interiorView = lens.view === "interior", content = interiorView ? normal : lens;
+  const variants = datasets.controls.flatMap(dataset => [false, true].flatMap(rings => [false, true].map(shadows => {
+    const interiorView = dataset.view === "interior", content = interiorView ? normal : dataset;
     const mode = !rings ? shadows ? "ringless" : "ringless-no-shadows" : shadows ? "full" : "no-shadows";
-    const material = mode === "full" ? lens.materialLens : `${lens.materialLens}-${mode}`;
-    return { when: { lensId: lens.id, rings, shadows }, required: [...lensAssets(content).map(entry => entry.key), ...(interiorView ? interior.map(entry => entry.key) : [])],
+    const material = mode === "full" ? dataset.materialDataset : `${dataset.materialDataset}-${mode}`;
+    return { when: { datasetId: dataset.id, rings, shadows }, required: [...datasetAssets(content).map(entry => entry.key), ...(interiorView ? interior.map(entry => entry.key) : [])],
       writes: [{ kind: "style", target: index(cutaway), name: "display", value: interiorView ? "block" : "none" },
         { kind: "attribute", target: -1, name: "data-view", value: interiorView ? "interior" : null },
-        { kind: "attribute", target: -1, name: "data-lens", value: interiorView || lens.id === lenses.defaultLens ? null : lens.id },
+        { kind: "attribute", target: -1, name: "data-dataset", value: interiorView || dataset.id === datasets.defaultDataset ? null : dataset.id },
         { kind: "class", target: -1, name: `${namespace}-hide-rings`, value: !rings },
         { kind: "class", target: -1, name: `${namespace}-hide-shadows`, value: !shadows }],
       materials: [{ track: "exterior", bank: material, mode: shadows ? "frames" : "fixed", enabled: true, rotationEnabled: true, frameOverride: null, clearWhenHidden: false, fixedMode: "fixed" },
         { track: "interior", bank: interiorView ? material : "normal", mode: interiorView && !shadows ? "fixed" : "frames", enabled: interiorView, rotationEnabled: true, frameOverride: null, clearWhenHidden: true, fixedMode: "fixed" }] };
   })));
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera, sky, sun, assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
-      preparedResourcePool("lenses", entries, { retention: "selection", decoding: "sync", capacity: 8, concurrency: 8 }),
+      preparedResourcePool("datasets", entries, { retention: "selection", decoding: "sync", capacity: 8, concurrency: 8 }),
       preparedResourcePool("interior", entries, { retention: "selection", decoding: "sync" }),
       ...["exterior-material", "interior-material"].map(id => preparedResourcePool(id, entries, { retention: "selection", decoding: "sync", capacity: 2, concurrency: 2 }))],
       startup: [...entries.filter(entry => entry.pool === "warm").map(entry => entry.key)] },

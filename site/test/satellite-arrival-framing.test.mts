@@ -36,7 +36,7 @@ for (const [width, height, mobile] of [[390, 844, true], [820, 1080, true], [144
     for (const { hostId } of allSatelliteSystems()) {
       const object = required(SCENE_OBJECTS.find(object => object.id === hostId));
       await loadSystemView(hostId, id => read(`../../src/objects/sun/prepared/system-views/${id}.json`));
-      const { data } = await read(`../../src/objects/${hostId}/prepared/object.json`);
+      const data = await read(`../../src/objects/${hostId}/prepared/runtime.json`);
       const definition = parsePreparedObjectRuntime(data), { camera } = definition;
       const fit = selectPreparedResponsiveZoom({ plan: camera, viewport: cameraViewport, mobile });
       const framingRadiusPixels = fit.zoom / camera.defaultZoom * camera.logicalBodyDiameter / 2;

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-18b",
   "displayName": "WASP-18b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "temperature-0-89um",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature-0-89um",
     "controls": [
       {
         "id": "temperature-0-89um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 0.89 µm",
-        "thumbnail": "wasp-18b-lens-temperature-0-89um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-0-89um.webp",
         "surface": "wasp-18b-surface-temperature-0-89um@2x.webp",
         "poles": "wasp-18b-poles-temperature-0-89um@2x.webp",
         "source": {
@@ -121,7 +121,7 @@
         "id": "temperature-0-97um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 0.97 µm",
-        "thumbnail": "wasp-18b-lens-temperature-0-97um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-0-97um.webp",
         "surface": "wasp-18b-surface-temperature-0-97um@2x.webp",
         "poles": "wasp-18b-poles-temperature-0-97um@2x.webp",
         "source": {
@@ -187,7 +187,7 @@
         "id": "temperature-1-05um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.05 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-05um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-05um.webp",
         "surface": "wasp-18b-surface-temperature-1-05um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-05um@2x.webp",
         "source": {
@@ -253,7 +253,7 @@
         "id": "temperature-1-13um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.13 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-13um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-13um.webp",
         "surface": "wasp-18b-surface-temperature-1-13um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-13um@2x.webp",
         "source": {
@@ -319,7 +319,7 @@
         "id": "temperature-1-21um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.21 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-21um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-21um.webp",
         "surface": "wasp-18b-surface-temperature-1-21um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-21um@2x.webp",
         "source": {
@@ -385,7 +385,7 @@
         "id": "temperature-1-29um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.29 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-29um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-29um.webp",
         "surface": "wasp-18b-surface-temperature-1-29um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-29um@2x.webp",
         "source": {
@@ -451,7 +451,7 @@
         "id": "temperature-1-37um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.37 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-37um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-37um.webp",
         "surface": "wasp-18b-surface-temperature-1-37um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-37um@2x.webp",
         "source": {
@@ -517,7 +517,7 @@
         "id": "temperature-1-45um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.45 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-45um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-45um.webp",
         "surface": "wasp-18b-surface-temperature-1-45um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-45um@2x.webp",
         "source": {
@@ -583,7 +583,7 @@
         "id": "temperature-1-53um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.53 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-53um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-53um.webp",
         "surface": "wasp-18b-surface-temperature-1-53um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-53um@2x.webp",
         "source": {
@@ -649,7 +649,7 @@
         "id": "temperature-1-60um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.60 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-60um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-60um.webp",
         "surface": "wasp-18b-surface-temperature-1-60um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-60um@2x.webp",
         "source": {
@@ -715,7 +715,7 @@
         "id": "temperature-1-68um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.68 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-68um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-68um.webp",
         "surface": "wasp-18b-surface-temperature-1-68um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-68um@2x.webp",
         "source": {
@@ -781,7 +781,7 @@
         "id": "temperature-1-76um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.76 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-76um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-76um.webp",
         "surface": "wasp-18b-surface-temperature-1-76um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-76um@2x.webp",
         "source": {
@@ -847,7 +847,7 @@
         "id": "temperature-1-84um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.84 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-84um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-84um.webp",
         "surface": "wasp-18b-surface-temperature-1-84um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-84um@2x.webp",
         "source": {
@@ -913,7 +913,7 @@
         "id": "temperature-1-92um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 1.92 µm",
-        "thumbnail": "wasp-18b-lens-temperature-1-92um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-1-92um.webp",
         "surface": "wasp-18b-surface-temperature-1-92um@2x.webp",
         "poles": "wasp-18b-poles-temperature-1-92um@2x.webp",
         "source": {
@@ -979,7 +979,7 @@
         "id": "temperature-2-00um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.00 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-00um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-00um.webp",
         "surface": "wasp-18b-surface-temperature-2-00um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-00um@2x.webp",
         "source": {
@@ -1045,7 +1045,7 @@
         "id": "temperature-2-08um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.08 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-08um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-08um.webp",
         "surface": "wasp-18b-surface-temperature-2-08um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-08um@2x.webp",
         "source": {
@@ -1111,7 +1111,7 @@
         "id": "temperature-2-16um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.16 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-16um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-16um.webp",
         "surface": "wasp-18b-surface-temperature-2-16um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-16um@2x.webp",
         "source": {
@@ -1177,7 +1177,7 @@
         "id": "temperature-2-24um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.24 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-24um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-24um.webp",
         "surface": "wasp-18b-surface-temperature-2-24um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-24um@2x.webp",
         "source": {
@@ -1243,7 +1243,7 @@
         "id": "temperature-2-31um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.31 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-31um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-31um.webp",
         "surface": "wasp-18b-surface-temperature-2-31um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-31um@2x.webp",
         "source": {
@@ -1309,7 +1309,7 @@
         "id": "temperature-2-39um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.39 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-39um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-39um.webp",
         "surface": "wasp-18b-surface-temperature-2-39um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-39um@2x.webp",
         "source": {
@@ -1375,7 +1375,7 @@
         "id": "temperature-2-47um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.47 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-47um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-47um.webp",
         "surface": "wasp-18b-surface-temperature-2-47um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-47um@2x.webp",
         "source": {
@@ -1441,7 +1441,7 @@
         "id": "temperature-2-55um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.55 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-55um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-55um.webp",
         "surface": "wasp-18b-surface-temperature-2-55um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-55um@2x.webp",
         "source": {
@@ -1507,7 +1507,7 @@
         "id": "temperature-2-63um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.63 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-63um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-63um.webp",
         "surface": "wasp-18b-surface-temperature-2-63um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-63um@2x.webp",
         "source": {
@@ -1573,7 +1573,7 @@
         "id": "temperature-2-71um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.71 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-71um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-71um.webp",
         "surface": "wasp-18b-surface-temperature-2-71um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-71um@2x.webp",
         "source": {
@@ -1639,7 +1639,7 @@
         "id": "temperature-2-79um",
         "label": "Temperature",
         "qualification": "Published map · Challener, Weiner Mansfield et al. 2025 · JWST NIRISS 2.79 µm",
-        "thumbnail": "wasp-18b-lens-temperature-2-79um.webp",
+        "thumbnail": "wasp-18b-dataset-temperature-2-79um.webp",
         "surface": "wasp-18b-surface-temperature-2-79um@2x.webp",
         "poles": "wasp-18b-poles-temperature-2-79um@2x.webp",
         "source": {

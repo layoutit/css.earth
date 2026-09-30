@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-surface-features@1",
+  "schema": "cssearth-surface-features@2",
   "directory": "features",
   "archive": "IO_nomenclature_center_pts.zip",
   "members": {
@@ -13,7 +13,7 @@
   "target": {
     "className": "io-body"
   },
-  "lensIds": [
+  "datasetIds": [
     "normal",
     "enhanced",
     "geology",

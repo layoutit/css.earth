@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Alsubai et al. 2018. This account was drafted from Alsubai et al. 2018's values; the sections below are the data's own.
+Its radius and temperature follow Alsubai et al. 2018. The introduction is generated from Alsubai et al. 2018's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 1265513389372846848, parallax 9.905 ± 0.023 mas (100.96 pc). Radius 0.722 +/- 0.02 solar radii from Alsubai et al. 2018, the stellar radius of the default parameter set of Qatar-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract). Mass 0.822 +/- 0.021 solar masses from Alsubai et al. 2018, the stellar mass of the default parameter set of Qatar-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract). Temperature 5,052 K from Alsubai et al. 2018, the stellar temperature of the default parameter set of Qatar-6 b in the NASA Exoplanet Archive. log g 4.64 from the mass and radius.
 
@@ -12,13 +12,11 @@ Its radius and temperature follow Alsubai et al. 2018. This account was drafted 
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

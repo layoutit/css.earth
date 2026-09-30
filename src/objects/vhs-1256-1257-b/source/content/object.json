@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "vhs-1256-1257-b",
   "displayName": "VHS 1256-1257 b",
@@ -61,15 +61,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "vhs-1256-1257-b-lens-shape.webp",
+        "thumbnail": "vhs-1256-1257-b-dataset-shape.webp",
         "surface": "vhs-1256-1257-b-surface-shape@2x.webp",
         "poles": "vhs-1256-1257-b-poles-shape@2x.webp",
         "source": {

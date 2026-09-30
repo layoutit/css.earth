@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/europa/",
   "sourceWidth": 4096,
   "sourceHeight": 2048,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "europa-{id}{suffix}.webp",
-      "thumbnail": "europa-lens-{id}.webp",
+      "thumbnail": "europa-dataset-{id}.webp",
       "source": "europa-global-500m.tif",
       "falseColor": false,
       "science": {
@@ -60,7 +60,7 @@
     {
       "id": "enhanced",
       "output": "europa-{id}{suffix}.webp",
-      "thumbnail": "europa-lens-{id}.webp",
+      "thumbnail": "europa-dataset-{id}.webp",
       "source": "color/s0349875152.equi.photr.tif",
       "falseColor": true,
       "science": {
@@ -135,7 +135,7 @@
     {
       "id": "elevation",
       "output": "europa-{id}{suffix}.webp",
-      "thumbnail": "europa-lens-{id}.webp",
+      "thumbnail": "europa-dataset-{id}.webp",
       "source": "science/controlled-dtms/Agenor/Agenor.tif",
       "falseColor": true,
       "science": {
@@ -197,7 +197,7 @@
     {
       "id": "geology",
       "output": "europa-{id}{suffix}.webp",
-      "thumbnail": "europa-lens-{id}.webp",
+      "thumbnail": "europa-dataset-{id}.webp",
       "source": "geology/europa-geologic-units.tif",
       "falseColor": true,
       "science": {
@@ -300,7 +300,7 @@
     {
       "id": "infrared",
       "output": "europa-{id}{suffix}.webp",
-      "thumbnail": "europa-lens-{id}.webp",
+      "thumbnail": "europa-dataset-{id}.webp",
       "source": "nims/europa-nims-composite.tif",
       "falseColor": true,
       "science": {
@@ -322,7 +322,7 @@
     {
       "id": "carbon-dioxide",
       "output": "europa-{id}{suffix}.webp",
-      "thumbnail": "europa-lens-{id}.webp",
+      "thumbnail": "europa-dataset-{id}.webp",
       "source": "jwst/carbon-dioxide.fits",
       "falseColor": true,
       "resolutionScale": 0.125,
@@ -371,7 +371,7 @@
     {
       "id": "hydrogen-peroxide",
       "output": "europa-{id}{suffix}.webp",
-      "thumbnail": "europa-lens-{id}.webp",
+      "thumbnail": "europa-dataset-{id}.webp",
       "source": "jwst/hydrogen-peroxide.fits",
       "falseColor": true,
       "resolutionScale": 0.125,
@@ -419,7 +419,7 @@
     {
       "id": "sodium-chloride",
       "output": "europa-{id}{suffix}.webp",
-      "thumbnail": "europa-lens-{id}.webp",
+      "thumbnail": "europa-dataset-{id}.webp",
       "source": "hst/nacl-450nm.fits",
       "falseColor": true,
       "resolutionScale": 0.125,
@@ -468,7 +468,7 @@
     {
       "id": "junocam",
       "output": "europa-{id}{suffix}.webp",
-      "thumbnail": "europa-lens-{id}.webp",
+      "thumbnail": "europa-dataset-{id}.webp",
       "source": "observations/junocam/JNCR_2022272_45C00001_V01.IMG",
       "falseColor": true,
       "science": {
@@ -488,7 +488,7 @@
           "columns": 180,
           "flatFaceErrorMeters": 480
         },
-        "lens": {
+        "dataset": {
           "format": "junocam-camera",
           "consumer": "junocam-observation",
           "metadata": {

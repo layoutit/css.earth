@@ -27,13 +27,13 @@ declare const __CSSEARTH_VERSION__: string;
 
 const {
   objectId,
-  lenses,
+  datasets,
   settings,
   destinations,
   features,
   navigation = false,
 } = Astro.props;
-requireObjectControls({ lenses, settings }, objectId);
+requireObjectControls({ datasets, settings }, objectId);
 // The page: its scene's, or a catalogue subject or overview the scene draws. Its forms and links return to that page.
 const pageId = Astro.params.id ?? objectId;
 const pageRoute = pageId !== objectId ? `/${pageId}/` : undefined;
@@ -244,6 +244,7 @@ const searchCategories = [
             <div class="object-title-tags"><span class="object-classification-tag object-title-tag" data-focus-status></span></div>
           </div>
           <p class="object-introduction" data-focus-introduction hidden></p>
+          <a class="object-learn-more-link" data-focus-learn-more target="_blank" rel="noopener noreferrer" hidden>Learn more ↗</a>
           <p class="object-introduction" data-focus-unavailable role="status" hidden
             data-unavailable-objects={Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id).join(' ')}></p>
         </section>
@@ -251,7 +252,7 @@ const searchCategories = [
         <div class="object-card-tabpanel" id="prepared-focus-dataset-content" data-information-panel="dataset"
           data-information-group="prepared-focus" role="region" aria-label="Datasets">
           {/* The dataset banks are the same on every page; the first focus selection fetches them (`site/focus-fragment.mts`). */}
-          <div data-focus-banks-slot="lenses" hidden></div>
+          <div data-focus-banks-slot="datasets" hidden></div>
           {/* The one shell-level 3D-stars setting owns every 3D point layer, including catalogue points inside prepared volumes. */}
           <style is:inline>
             .object-ui-layer:has(.object-three-d-stars-setting:not(:checked)) ~ .object-viewport .prepared-catalogue-points { display: none !important; }
@@ -275,9 +276,9 @@ const searchCategories = [
         <span data-system-headers-slot hidden></span>
         {/* A dataset authored for the whole system, like a debris disc, belongs to the system, not to its star:
             the shell moves those options here while the system is the selection, and back to the body card when it is not. */}
-        <div class="object-lenses object-system-datasets" data-system-datasets hidden>
+        <div class="object-datasets object-system-datasets" data-system-datasets hidden>
           <nav class="object-observation-controls" aria-label="Datasets" data-system-dataset-options></nav>
-          <div class="object-lens-details" data-system-dataset-details></div>
+          <div class="object-dataset-details" data-system-dataset-details></div>
         </div>
         {/* A telescope's picture of the whole system, kept in its star's gallery, is shown here while the system is the selection. */}
         <div class="object-system-galleries" data-system-galleries hidden></div>

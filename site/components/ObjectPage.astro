@@ -5,6 +5,7 @@ import PreparedObjectHead from './PreparedObjectHead.astro';
 import PreparedObjectPanel from './PreparedObjectPanel.astro';
 import { loadObjectPageData } from '../object-page-data.mts';
 import { objectPageStyles } from '../object-page-contract.mts';
+import { objectPageCss } from '@cssearth/objects';
 import shellCss from '../object-shell.css?inline';
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 import { rewriteSceneCss, resolveSceneAddressesDeep, withPreparedAssetOrigin } from '../asset-origin.mts';
@@ -21,7 +22,7 @@ const cssFiles = import.meta.glob<string>('../../src/**/*.css', { query: '?inlin
 const descriptor = scene?.descriptor ?? await withPreparedAssetOrigin(preparedPage.descriptor);
 const preparedContent = await resolveSceneAddressesDeep(await contentFiles[`../../src/objects/${objectId}/prepared/content.json`]());
 const styles = await Promise.all(objectPageStyles(descriptor, { navigation })
-  .map(async path => ({ path, css: await rewriteSceneCss(path === 'site/object-shell.css' ? shellCss : await cssFiles[`../../${path}`]()) })));
+  .map(async path => ({ path, css: await rewriteSceneCss(path === 'site/object-shell.css' ? shellCss : objectPageCss(await cssFiles[`../../${path}`](), objectId)) })));
 ---
 
 <ObjectLayout objectId={objectId} pageId={pageId} navigation={navigation} scene={scene} descriptor={descriptor} home={home}>

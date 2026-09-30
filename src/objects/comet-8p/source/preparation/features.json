@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-surface-features@1",
+  "schema": "cssearth-surface-features@2",
   "directory": "features",
   "archive": null,
   "members": null,
@@ -9,7 +9,7 @@
   "target": {
     "className": "comet-8p-body"
   },
-  "lensIds": [
+  "datasetIds": [
     "model"
   ],
   "kinds": {

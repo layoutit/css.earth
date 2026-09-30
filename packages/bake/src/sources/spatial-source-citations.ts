@@ -42,7 +42,7 @@ export async function spatialSourceCitations(root: string, sources: SourceResolv
         edges.push({ catalogueId: reference.catalogueId, kind: 'citation', consumerKind: 'spatial-measurement',
           consumerId: `${row.id}/${field}`, consumerLabel: `${row.name} · ${quantityLabels[field] ?? field}`, objectId: row.id,
           ownerPath: path, locator: `/objects/${index}/${field}`, evidence: `Published reference ${claim.sourceRef} retained by the pinned catalogue.`,
-          citationUrl: reference.url, lensIds: [], limitations: ['Citation attribution; no independent verification of the published measurement.'] });
+          citationUrl: reference.url, datasetIds: [], limitations: ['Citation attribution; no independent verification of the published measurement.'] });
       }
     }
   }

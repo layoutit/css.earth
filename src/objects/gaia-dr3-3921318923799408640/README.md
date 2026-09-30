@@ -2,7 +2,7 @@
 
 ## Sources
 
-Gaia's parallax, brightness and spectrum give it 17.8 solar radii and 3.30 solar masses (FLAME) and 4,953 K at its surface (GSP-Phot). This account was drafted from Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)'s values; the sections below are the data's own.
+Gaia's parallax, brightness and spectrum give it 17.8 solar radii and 3.30 solar masses (FLAME) and 4,953 K at its surface (GSP-Phot). The introduction is generated from Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)'s published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3921318923799408640, parallax 0.117 ± 0.015 mas (8523.07 pc). Radius 17.841 (16.429 to 19.799) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Mass 3.300 (3.260 to 3.408) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source). Temperature 4,953 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3921318923799408640: teff_gspphot 4952.8013 K (16th-84th percentiles 4896.49-4967.757), the temperature FLAME used. log g 2.45 from the mass and radius.
 
@@ -12,13 +12,11 @@ Gaia's parallax, brightness and spectrum give it 17.8 solar radii and 3.30 solar
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

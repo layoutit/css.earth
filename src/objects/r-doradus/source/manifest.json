@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "r-doradus-alma-338ghz",
@@ -24,7 +24,7 @@
       "coverage": "ALMA band 7 continuum, 200 x 200 pixels of 0.625 milliarcseconds over a 125 milliarcsecond field, restoring beam 20.7 x 16.8 milliarcseconds at position angle -17.3 degrees, peak 5.71e-2 Jy/beam at a signal-to-noise ratio of 199. The half-power disc is 60 milliarcseconds across, against the 59.8 +/- 0.4 published from the same visibilities.",
       "width": 200,
       "height": 200,
-      "lensId": "alma",
+      "datasetId": "alma",
       "label": "ALMA continuum",
       "sourceBinding": {
         "kind": "local",
@@ -47,9 +47,9 @@
       },
       "license": "Public ALMA archive data under CC BY 4.0; the observatory asks for its standard acknowledgement, which NOTICE.md carries.",
       "acquisition": "Restored through source/preparation/acquisition.json from the ALMA Science Archive data portal. The 77 GB product tarball is never needed: the archive's nested datalink service serves this file on its own.",
-      "redistribution": "Not redistributed; only the cut window and the lens are derived.",
+      "redistribution": "Not redistributed; only the cut window and the dataset are derived.",
       "consumers": [
-        "lens-frame-input"
+        "dataset-frame-input"
       ],
       "coverage": "2880 x 2880 pixels of 5 milliarcseconds over a 14.4 arcsecond field, in Jy/beam, with the star near the middle. Four spectral windows combined by the pipeline.",
       "sourceBinding": {
@@ -124,7 +124,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -142,22 +142,6 @@
       "consumers": [
         "scene",
         "presentation"
-      ]
-    },
-    {
-      "id": "r-doradus-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "starfield"
       ]
     },
     {
@@ -205,7 +189,7 @@
       "redistribution": "One archived spectrum, unchanged, with acknowledgement",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -228,7 +212,7 @@
       "redistribution": "Method record only",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -256,7 +240,7 @@
       "redistribution": "Factual parameter transcription only; no paper figures",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -269,7 +253,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1038/s41586-024-07836-9",
-      "credit": "The ALMA continuum image on the lens palette; marker written by packages/bake/authoring/r-doradus/author.mts",
+      "credit": "The ALMA continuum image on the dataset palette; marker written by packages/bake/authoring/r-doradus/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "neptune",
   "displayName": "Neptune",
@@ -113,14 +113,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Visible color",
-        "thumbnail": "/scenes/neptune/neptune-lens-normal.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-normal.webp",
         "surface": "/scenes/neptune/neptune-surface-normal.webp",
         "poles": "/scenes/neptune/neptune-poles-normal.webp",
         "falseColor": false,
@@ -133,7 +133,7 @@
       {
         "id": "methane",
         "label": "Methane",
-        "thumbnail": "/scenes/neptune/neptune-lens-methane.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-methane.webp",
         "surface": "/scenes/neptune/neptune-surface-methane.webp",
         "poles": "/scenes/neptune/neptune-poles-methane.webp",
         "falseColor": true,
@@ -175,7 +175,7 @@
       {
         "id": "near-infrared",
         "label": "Near infrared",
-        "thumbnail": "/scenes/neptune/neptune-lens-near-infrared.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-near-infrared.webp",
         "surface": "/scenes/neptune/neptune-surface-near-infrared.webp",
         "poles": "/scenes/neptune/neptune-poles-near-infrared.webp",
         "falseColor": true,
@@ -222,7 +222,7 @@
           "group": "opal-visible",
           "label": "2017-10-06"
         },
-        "thumbnail": "/scenes/neptune/neptune-lens-visible-2017a.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-visible-2017a.webp",
         "surface": "/scenes/neptune/neptune-surface-visible-2017a@2x.webp",
         "poles": "/scenes/neptune/neptune-poles-visible-2017a@2x.webp",
         "falseColor": false,
@@ -243,7 +243,7 @@
           "group": "opal-visible",
           "label": "2018-09-09"
         },
-        "thumbnail": "/scenes/neptune/neptune-lens-visible-2018a.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-visible-2018a.webp",
         "surface": "/scenes/neptune/neptune-surface-visible-2018a@2x.webp",
         "poles": "/scenes/neptune/neptune-poles-visible-2018a@2x.webp",
         "falseColor": false,
@@ -264,7 +264,7 @@
           "group": "opal-visible",
           "label": "2019-09-28"
         },
-        "thumbnail": "/scenes/neptune/neptune-lens-visible-2019a.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-visible-2019a.webp",
         "surface": "/scenes/neptune/neptune-surface-visible-2019a@2x.webp",
         "poles": "/scenes/neptune/neptune-poles-visible-2019a@2x.webp",
         "falseColor": false,
@@ -285,7 +285,7 @@
           "group": "opal-visible",
           "label": "2020-08-19"
         },
-        "thumbnail": "/scenes/neptune/neptune-lens-visible-2020a.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-visible-2020a.webp",
         "surface": "/scenes/neptune/neptune-surface-visible-2020a@2x.webp",
         "poles": "/scenes/neptune/neptune-poles-visible-2020a@2x.webp",
         "falseColor": false,
@@ -306,7 +306,7 @@
           "group": "opal-visible",
           "label": "2021-09-06"
         },
-        "thumbnail": "/scenes/neptune/neptune-lens-visible-2021a.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-visible-2021a.webp",
         "surface": "/scenes/neptune/neptune-surface-visible-2021a@2x.webp",
         "poles": "/scenes/neptune/neptune-poles-visible-2021a@2x.webp",
         "falseColor": false,
@@ -327,7 +327,7 @@
           "group": "opal-visible",
           "label": "2022-09-18"
         },
-        "thumbnail": "/scenes/neptune/neptune-lens-visible-2022a.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-visible-2022a.webp",
         "surface": "/scenes/neptune/neptune-surface-visible-2022a@2x.webp",
         "poles": "/scenes/neptune/neptune-poles-visible-2022a@2x.webp",
         "falseColor": false,
@@ -348,7 +348,7 @@
           "group": "opal-visible",
           "label": "2023-09-22"
         },
-        "thumbnail": "/scenes/neptune/neptune-lens-visible-2023a.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-visible-2023a.webp",
         "surface": "/scenes/neptune/neptune-surface-visible-2023a@2x.webp",
         "poles": "/scenes/neptune/neptune-poles-visible-2023a@2x.webp",
         "falseColor": false,
@@ -369,7 +369,7 @@
           "group": "opal-visible",
           "label": "2025-06-28"
         },
-        "thumbnail": "/scenes/neptune/neptune-lens-visible-2025a.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-visible-2025a.webp",
         "surface": "/scenes/neptune/neptune-surface-visible-2025a@2x.webp",
         "poles": "/scenes/neptune/neptune-poles-visible-2025a@2x.webp",
         "falseColor": false,
@@ -390,7 +390,7 @@
           "group": "opal-visible",
           "label": "2025-08-24"
         },
-        "thumbnail": "/scenes/neptune/neptune-lens-visible-2025b.webp",
+        "thumbnail": "/scenes/neptune/neptune-dataset-visible-2025b.webp",
         "surface": "/scenes/neptune/neptune-surface-visible-2025b@2x.webp",
         "poles": "/scenes/neptune/neptune-poles-visible-2025b@2x.webp",
         "falseColor": false,
@@ -482,7 +482,7 @@
     {
       "label": "Hubble OPAL",
       "role": "imagery",
-      "description": "Texture & lenses",
+      "description": "Texture & datasets",
       "href": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
     },
     {

@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Ellis et al. 2021. It is also HD 97658, HIP 54906. This account was drafted from Ellis et al. 2021's values; the sections below are the data's own.
+Its radius and temperature follow Ellis et al. 2021. It is also HD 97658, HIP 54906. The introduction is generated from Ellis et al. 2021's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3997075206232885888, parallax 46.376 ± 0.022 mas (21.56 pc). Radius 0.728 +/- 0.008 solar radii from Ellis et al. 2021, the stellar radius of the default parameter set of HD 97658 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract). Mass 0.85 +/- 0.08 solar masses from Ellis et al. 2021, the stellar mass of the default parameter set of HD 97658 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract). Temperature 5,212 K from Ellis et al. 2021, the stellar temperature of the default parameter set of HD 97658 b in the NASA Exoplanet Archive. log g 4.64 from the mass and radius.
 
@@ -12,13 +12,11 @@ Its radius and temperature follow Ellis et al. 2021. It is also HD 97658, HIP 54
 
 ## Evidence
 
-Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

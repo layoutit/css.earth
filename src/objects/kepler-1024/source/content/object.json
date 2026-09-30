@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kepler-1024",
   "displayName": "Kepler-1024",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "kepler-1024-lens-color.webp",
+        "thumbnail": "kepler-1024-dataset-color.webp",
         "surface": "kepler-1024-surface-color@2x.webp",
         "poles": "kepler-1024-poles-color@2x.webp",
         "source": {

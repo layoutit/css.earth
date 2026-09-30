@@ -2,23 +2,23 @@
 import type { ObservationFrame, SurfaceObservationFormat } from '../contract.ts';
 import { decodeProfile, dimensions, parseSurfaceGeometry, checkKeys } from '../../../../raster/index.ts';
 import { array, number, shape, text, requireArray, requireRecord } from '@cssearth/core';
-import { OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, validateEnvelope } from '../recipe.ts';
+import { OPTIONAL_DATASET_KEYS, displayBasis, parseDisplay, validateEnvelope } from '../recipe.ts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeIsis2Qube } from '../../missions/isis2-qube.ts';
 
 const CONTEXT = 'orthographic observation';
-const parseOrthographicLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),
+const parseOrthographicDataset = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),
   frames: array(shape({ id: text, path: text, coordinatePaths: array(text) })), grid: shape({ ...dimensions, pixelToSource: array(number) }),
   maximumCoordinateErrorMeters: number, display: parseDisplay });
-const lensPaths = (recipe: ReturnType<typeof parseOrthographicLens>) => recipe.frames.flatMap(frame => [frame.path, ...frame.coordinatePaths]);
+const datasetPaths = (recipe: ReturnType<typeof parseOrthographicDataset>) => recipe.frames.flatMap(frame => [frame.path, ...frame.coordinatePaths]);
 
 function validateOrthographicRecipe(value: unknown, sourceGeometry: unknown) {
-  checkKeys(value, ['id', 'format', 'consumer', 'metadata', 'frames', 'grid', 'maximumCoordinateErrorMeters', 'display'], [...OPTIONAL_LENS_KEYS], CONTEXT);
+  checkKeys(value, ['id', 'format', 'consumer', 'metadata', 'frames', 'grid', 'maximumCoordinateErrorMeters', 'display'], [...OPTIONAL_DATASET_KEYS], CONTEXT);
   for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'coordinatePaths'], [], `${CONTEXT} frame`);
-  const recipe = decodeProfile(parseOrthographicLens, value, 'Invalid source-registered orthographic observation.'), geometry = parseSurfaceGeometry(sourceGeometry);
+  const recipe = decodeProfile(parseOrthographicDataset, value, 'Invalid source-registered orthographic observation.'), geometry = parseSurfaceGeometry(sourceGeometry);
   // An orthophoto is one registered image with its three coordinate cubes; it has no mosaic selection.
-  validateEnvelope(recipe, lensPaths(recipe), { selections: [], displays: ['percentiles'], maximumFrames: 1, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
+  validateEnvelope(recipe, datasetPaths(recipe), { selections: [], displays: ['percentiles'], maximumFrames: 1, maximumLevelGain: 1, samplesPerTriangle: 'optional' }, CONTEXT);
   if (recipe.format !== 'isis2-orthographic' || recipe.frames[0].coordinatePaths.length !== 3 ||
       geometry?.format !== 'image-plane-dem' || geometry.sourceTopology !== 'open' ||
       !Number.isFinite(recipe.maximumCoordinateErrorMeters) || recipe.maximumCoordinateErrorMeters <= 0 ||
@@ -30,9 +30,9 @@ function validateOrthographicRecipe(value: unknown, sourceGeometry: unknown) {
 
 export const orthographicFormat: SurfaceObservationFormat = {
   validate: validateOrthographicRecipe,
-  paths: value => lensPaths(parseOrthographicLens(value)),
+  paths: value => datasetPaths(parseOrthographicDataset(value)),
   async load(value, { sourceDirectory, radial }) {
-    const recipe = parseOrthographicLens(value), frameRecipe = recipe.frames[0], mesh = radial.grid;
+    const recipe = parseOrthographicDataset(value), frameRecipe = recipe.frames[0], mesh = radial.grid;
     const rasters = await Promise.all([frameRecipe.path, ...frameRecipe.coordinatePaths].map(async path => decodeIsis2Qube(await readFile(resolve(sourceDirectory, path)), recipe.grid)));
     const [photo, x, y, z] = rasters;
     if (!mesh.imageGrid) throw new Error('Orthographic source mesh lacks its image grid.');

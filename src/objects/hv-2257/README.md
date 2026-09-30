@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its mean radius, 156.6 solar radii, comes from comparing how fast its surface moves with how its size changes, 46,154 parsecs away. It is also HD 268878. This account was drafted from Groenewegen (2013), A&A 550, A70's values; the sections below are the data's own.
+Its mean radius, 156.6 solar radii, comes from comparing how fast its surface moves with how its size changes, 46,154 parsecs away. It is also HD 268878. The introduction is generated from Groenewegen (2013), A&A 550, A70's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 4655144146795764224, distance 46,154 pc from Groenewegen (2013), A&A 550, A70, table10, HV 2257: Baade-Wesselink distance (pc) 46153.9 +/- 2119.3 (Monte-Carlo); Gaia DR3's parallax, 0.044 ± 0.014 mas (3.1 standard errors), is not used. Radius 156.6 +/- 6.5 solar radii from Groenewegen (2013), A&A 550, A70, table10, HV 2257: Baade-Wesselink mean radius (solar radii) 156.6 +/- 6.5 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5,125 K from Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC0512, columns Teffp, e_Teffp: Teff 5125 +/- 88 K from a fit to the spectral energy distribution at mean light (not spectroscopic). log g 0 from 2022A&A...658A..29R ("The iron and oxygen content of LMC Classical Cepheids and its implications for the extragalactic distance scale and Hubble constant. Equivalent width analysis with Kurucz stellar atmosphere models.").
 
@@ -14,7 +14,7 @@ Its mean radius, 156.6 solar radii, comes from comparing how fast its surface mo
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 - The bake reads Gaia's harmonics as published and holds them to the same row's peak-to-peak amplitude, epoch of maximum, R21 and phi21 ([light-curve.ts](../../../packages/bake/src/photometry/light-curve.ts)); on 2026-09-28 the model's maximum fell 0.0158 d from epoch_g (stated error 0.0325 d; 0.00040 of a period).
 
@@ -26,7 +26,6 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
 - **Not shown.** No surface gravity averaged over the pulsation is published, only single-phase values, so no limb darkening is drawn.
 - **Not shown.** Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 - **Brightness.** The model is Gaia's 2014-2017 fit carried 113 cycles to the scene date; with the period's error the phase shown is known to 0.07 of a cycle, and period changes after 2017 are not included. The G band stands for all colours: the star's temperature and colour change through the cycle, and the page does not show that.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

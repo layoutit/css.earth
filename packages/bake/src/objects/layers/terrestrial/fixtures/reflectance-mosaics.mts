@@ -1,5 +1,5 @@
 /** Compare the native monochrome sampler with independent ISIS-label byte reads.
- * node tests/oracles/reflectance-mosaics.mts <body-id> <report.json>
+ * node packages/bake/src/objects/layers/terrestrial/fixtures/reflectance-mosaics.mts <body-id> <report.json>
  * The labels define coordinates and float32 byte offsets; no GeoTIFF decoder is
  * used by the reference. This checks decoding, display transfer and source gaps,
  * not the mission's calibration or the map's physical registration to a shape.
@@ -19,7 +19,7 @@ const recipes = requireArray(requireRecord(requireRecord(JSON.parse(recipeText))
 const results = [];
 for (const recipe of recipes) {
   const id = requireString(recipe.id), policy = requireRecord(recipe.validity);
-  const entry = entries.find(entry => entry.lensId === id);
+  const entry = entries.find(entry => entry.datasetId === id);
   if (!entry) throw new Error(`Missing source for ${id}.`);
   const path = requireString(entry.path), labelPath = `reference/${basename(path,'.tif')}.lbl`;
   const bytes = await readFile(resolve(root,path)), label = await readFile(resolve(root,labelPath),'utf8');

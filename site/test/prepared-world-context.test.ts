@@ -30,7 +30,7 @@ function mountTestContext({ annotationPriorities, annotationLandmarks, ...option
   const encode = createWorldContextFrameEncoder();
   const layer = mountPreparedWorldContext({ ...options, requestPublication() {
     if (options.requestPublication?.()) return true;
-    if (latest && options.plan.schema === 'cssearth-world-context@1') publish(...latest);
+    if (latest && options.plan.schema === 'cssearth-world-context@2') publish(...latest);
     return true;
   } });
   function publish(world: WorldCameraPose, viewport: Parameters<typeof layer.publish>[1], frame?: WorldContextFrame | PlannedWorldContext) {
@@ -232,7 +232,7 @@ function plan(scale: number) {
   const focus = point('sun', 'Sun', '#f5a623', [0, 0, 0], 10);
   const front = point('mercury', 'Mercury', '#9d9388', [100, 0, 0], 1);
   const hidden = point('venus', 'Venus', '#d6aa69', [0, 0, -20], 1);
-  return parsePreparedWorldContext({ schema: 'cssearth-world-context@1',
+  return parsePreparedWorldContext({ schema: 'cssearth-world-context@2',
     frame: { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: scale, bodyRadiusM: 10 * scale },
     focus, bodies: [{ ...front, orbit: orbit([100, 0, 0], scale) }, { ...hidden, orbit: orbit([0, 0, -20], scale) }],
     camera: { minimumDistanceM: 12 * scale, maximumDistanceM: 10_000 * scale, framingReferenceZoom: 1, presentation },
@@ -851,7 +851,7 @@ test('prepared planetary systems retain identified moon paths and retire offscre
   layer.destroy();
 });
 
-test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full emphasis and dims unrelated bodies and paths', orbitRenderer => {
+test.each(['bars', 'strokes'] as const)('%s keeps body markers and orbit opacity independent of selection', orbitRenderer => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const base = plan(1), parent = base.bodies[0]!;
@@ -877,14 +877,14 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
   for (const id of [parent.id, 'moon-a', 'moon-b']) {
     layer.previewSelection(id); document.defaultView.advance(200);
     for (const body of context.bodies) {
-      const expected = body.id === unrelated.id ? .25 : 1;
+      const expected = 1;
       const actual = opacity(body.id), normal = baseline.get(body.id)!;
       expect(normal.marker).toBeGreaterThan(0); expect(normal.line).toBeGreaterThan(0);
       expect(actual.marker / normal.marker, `${id} -> ${body.id} marker`).toBeCloseTo(expected, 1);
-      expect(actual.line / normal.line, `${id} -> ${body.id} orbit`).toBeCloseTo(body.id === parent.id ? .25 : expected, 1);
+      expect(actual.line / normal.line, `${id} -> ${body.id} orbit`).toBeCloseTo(1, 1);
     }
   }
-  // Finishing the preview keeps orbit emphasis in the selected system overview.
+  // Finishing the preview preserves the same orbit appearance in the system overview.
   layer.previewSelection(parent.id); document.defaultView.advance(200);
   const arrival = new Map(context.bodies.map(body => [body.id, opacity(body.id).line]));
   layer.previewSelection(undefined); document.defaultView.advance(200);
@@ -899,8 +899,7 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
   document.defaultView.advance(200); document.defaultView.advance(200);
   layer.previewSelection(null); document.defaultView.advance(200);
   for (const body of context.bodies) expect(opacity(body.id)).toEqual(baseline.get(body.id));
-  // Pulling back restores context without clearing the selected body. Both
-  // paint owners must update their multipliers again when zooming back in.
+  // Selection stays independent of opacity when zooming out and back in.
   layer.previewSelection(parent.id);
   const publishDistance = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [100, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
@@ -911,8 +910,8 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
   expect(opacity(unrelated.id)).toEqual(farSelected);
   layer.previewSelection(parent.id);
   publishDistance(40);
-  expect(opacity(unrelated.id).marker / baseline.get(unrelated.id)!.marker).toBeCloseTo(.25, 1);
-  expect(opacity(unrelated.id).line / baseline.get(unrelated.id)!.line).toBeCloseTo(.25, 1);
+  expect(opacity(unrelated.id).marker / baseline.get(unrelated.id)!.marker).toBeCloseTo(1, 1);
+  expect(opacity(unrelated.id).line / baseline.get(unrelated.id)!.line).toBeCloseTo(1, 1);
   layer.destroy();
 });
 

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { PreparedCssVolume, PreparedVolumeLeaf } from '../../../adapters/renderer/volume-types.ts';
 import type { CompilerBakeResult } from '@cssearth/bake/volume';
-import { assertCompilerBankIdentity, assertCompilerLensGeometry } from './bank-validation.ts';
+import { assertCompilerBankIdentity, assertCompilerDatasetGeometry } from './bank-validation.ts';
 
 const result: Pick<CompilerBakeResult, 'id' | 'frame' | 'fieldIdentity'> = {
   id: 'test-volume', fieldIdentity: 'test-compiler',
@@ -22,7 +22,7 @@ function changeLeaf(payload: PreparedCssVolume, edit: Partial<PreparedVolumeLeaf
 
 test('neutral and RGB banks belong to their result, frame and fitted field', () => {
   assert.doesNotThrow(() => assertCompilerBankIdentity(volume(), result));
-  assert.doesNotThrow(() => assertCompilerLensGeometry(volume(), volume(), result));
+  assert.doesNotThrow(() => assertCompilerDatasetGeometry(volume(), volume(), result));
   assert.throws(() => assertCompilerBankIdentity(volume('another-field'), result), /different result or field/);
 });
 
@@ -34,22 +34,22 @@ test('a stellar-only result retains the explicitly named cloud volume and reject
   assert.throws(() => assertCompilerBankIdentity(volume(), unqualified), /different result/);
 });
 
-test('a lens never relaxes result, frame or field identity', () => {
+test('a dataset never relaxes result, frame or field identity', () => {
   const original = volume();
   for (const changed of [
     { ...original, id: 'compiler-another-result' },
     { ...original, frame: { ...original.frame, metersPerUnit: 2 } },
     { ...original, provenance: { fieldIdentity: 'another-field' } },
-  ]) assert.throws(() => assertCompilerLensGeometry(volume(), changed, result), /different result/);
+  ]) assert.throws(() => assertCompilerDatasetGeometry(volume(), changed, result), /different result/);
 });
 
-test('a lens never relaxes shared slab count, position, dimensions or style', () => {
+test('a dataset never relaxes shared slab count, position, dimensions or style', () => {
   const original = volume();
-  assert.throws(() => assertCompilerLensGeometry(volume(), { ...original, stacks: original.stacks.map(stack =>
+  assert.throws(() => assertCompilerDatasetGeometry(volume(), { ...original, stacks: original.stacks.map(stack =>
     stack.axis === 'y' ? { ...stack, leaves: [] } : stack) }, result), /slice counts/);
   for (const changed of [
     changeLeaf(original, { centerUnits: [0, 0, 1] }), changeLeaf(original, { id: 'other-slice' }),
     changeLeaf(original, { widthPx: 256 }), changeLeaf(original, { heightPx: 256 }),
     changeLeaf(original, { style: { ...original.stacks[0]!.leaves[0]!.style, transform: 'translateZ(2px)' } }),
-  ]) assert.throws(() => assertCompilerLensGeometry(volume(), changed, result), /share prepared geometry/);
+  ]) assert.throws(() => assertCompilerDatasetGeometry(volume(), changed, result), /share prepared geometry/);
 });

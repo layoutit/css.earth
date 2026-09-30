@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "trappist-1d",
   "displayName": "TRAPPIST-1d",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "trappist-1d-lens-shape.webp",
+        "thumbnail": "trappist-1d-dataset-shape.webp",
         "surface": "trappist-1d-surface-shape@2x.webp",
         "poles": "trappist-1d-poles-shape@2x.webp",
         "source": {
@@ -77,13 +77,13 @@
           "url": "https://doi.org/10.3847/PSJ/abd022"
         },
         "falseColor": false,
-        "notes": "No image or colour of TRAPPIST-1d exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit. The gray takes the colour of trappist-1's light, as its colour lens measures it."
+        "notes": "No image or colour of TRAPPIST-1d exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit. The gray takes the colour of trappist-1's light, as its colour dataset measures it."
       },
       {
         "id": "illustration",
         "label": "Illustration",
         "qualification": "NASA's artist's concept of TRAPPIST-1d, from Eyes on Exoplanets; not an observation.",
-        "thumbnail": "trappist-1d-lens-illustration.webp",
+        "thumbnail": "trappist-1d-dataset-illustration.webp",
         "surface": "trappist-1d-surface-illustration@2x.webp",
         "poles": "trappist-1d-poles-illustration@2x.webp",
         "source": {

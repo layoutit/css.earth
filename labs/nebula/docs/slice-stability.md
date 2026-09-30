@@ -5,7 +5,7 @@ Alignment and Reconstruction must use the same prepared density object and the s
 ## Invariants
 
 - Repaint Alignment’s exact 144 prepared LMC quads, preserving all vertices, crops, bounds and every decoded alpha byte. Images supply chromaticity only; missing coverage retains neutral density color.
-- Preserve the whole saved Alignment image transform, including authored scale/rotation and pivot. Earth view uses the same physical observer, orientation and lens framing in both tabs, including legacy routes to the same density object.
+- Preserve the whole saved Alignment image transform, including authored scale/rotation and pivot. Earth view uses the same physical observer, orientation and dataset framing in both tabs, including legacy routes to the same density object.
 - Preserve observed stellar IDs, astrometry and photometry. One configured SMASH sky-to-density fit and deterministic density-conditioned depth realization place the same 943 stars for every image. Candidate images cannot move or select them.
 - Actual source density must be positive at every star. One faint star falls below the common projection’s eight-bit quantization; it keeps zero cutoff signal and stays visible when cutoff is zero. Do not invent a positive floor or remove it from the catalogue.
 
@@ -17,7 +17,7 @@ The current browser gate compares the same nine source-image landmarks in **both
 
 ## Current evidence
 
-The cross-tab browser gate passed all six comparisons (three sources × two routes). Maximum image-point discrepancies were 0.00839 px for Horálek, 0.00241 px for VISTA and 0.01210 px for WISE. The camera lens and distance matched; there were no browser errors or processing writes. Neutral original-image metadata reads returned existing prepared assets.
+The cross-tab browser gate passed all six comparisons (three sources × two routes). Maximum image-point discrepancies were 0.00839 px for Horálek, 0.00241 px for VISTA and 0.01210 px for WISE. The camera dataset and distance matched; there were no browser errors or processing writes. Neutral original-image metadata reads returned existing prepared assets.
 
 The VISTA, Horálek and WISE jobs are verified against Alignment’s prepared bank: exact geometry, every alpha byte, frame and resource hashes. All three catalogue outputs have identical model positions and preserved measured records. Repainting existing native NOX outputs takes a few seconds per image. No star-removal job is repeated.
 

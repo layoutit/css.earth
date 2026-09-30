@@ -3,13 +3,13 @@ import { parseAuthoredObjectDescriptor, parseAuthoredRecipe, parseObjectDescript
 import type { JsonRecord, ObjectPreparation } from './index.js';
 
 const descriptor = (id = 'example') => ({
-  schema: 'cssearth-object@1', id, type: 'layered-body', properties: { radiusKm: 2, layers: ['surface'] },
+  schema: 'cssearth-object@2', id, type: 'layered-body', properties: { radiusKm: 2, layers: ['surface'] },
   prepared: { format: 'example-artifact@1', url: '/prepared/example.json' },
 });
 
 const hash = (letter: string) => letter.repeat(64);
 const recipe = () => ({
-  schema: 'cssearth-authored-object@1',
+  schema: 'cssearth-authored-object@2',
   sources: [
     { id: 'raster', path: 'source/preparation/raster.json' },
     { id: 'material', path: 'source/preparation/material.json' },
@@ -20,8 +20,8 @@ const recipe = () => ({
   shape: { kind: 'ellipsoid', radiusKm: 6051.8, polarRadiusKm: 6051.8 },
   frameBanks: [{ id: 'lighting', source: 'frames', frames: 128, rows: 32, residentRows: 3 }],
   materials: [{ id: 'surface-lit', source: 'material', model: 'lit', frameBank: 'lighting' }],
-  surfaces: [{ id: 'body', source: 'raster', projection: 'equirectangular', lenses: [{ id: 'normal', source: 'raster', material: 'surface-lit' }] }],
-  cutaway: { source: 'layers', surface: 'body', lens: 'normal' },
+  surfaces: [{ id: 'body', source: 'raster', projection: 'equirectangular', datasets: [{ id: 'normal', source: 'raster', material: 'surface-lit' }] }],
+  cutaway: { source: 'layers', surface: 'body', dataset: 'normal' },
   atmosphere: { source: 'layers', frameBank: 'lighting' }, rings: { source: 'layers' }, emission: { source: 'layers' },
   motion: [{ id: 'spin', source: 'layers', target: 'body', durationMs: 89000 }, { id: 'ring-drift', source: 'layers', target: 'rings', durationMs: 42000 }],
   destinations: { source: 'world', maxEntries: 34135 },
@@ -31,7 +31,7 @@ const recipe = () => ({
 describe('object descriptor boundary', () => {
   it('parses a composed authored recipe with source-pinned capabilities', () => {
     const parsed = parseAuthoredRecipe(recipe());
-    expect(parsed.surfaces[0]?.lenses[0]?.material).toBe('surface-lit');
+    expect(parsed.surfaces[0]?.datasets[0]?.material).toBe('surface-lit');
     expect(parsed.frameBanks?.[0]).toMatchObject({ frames: 128, rows: 32, residentRows: 3 });
     expect(parsed.destinations?.maxEntries).toBe(34135);
     const object = parseAuthoredObjectDescriptor({ ...descriptor(), properties: { recipe: recipe() } });
@@ -49,13 +49,13 @@ describe('object descriptor boundary', () => {
     expect(() => parseAuthoredRecipe(value)).toThrow();
   });
 
-  it('accepts a triaxial surface without lenses and rejects inverted or zero axes', () => {
-    const source = { schema: 'cssearth-authored-object@1', sources: recipe().sources,
-      surfaces: [{ id: 'body', source: 'raster', projection: 'equirectangular', lenses: [] }] };
+  it('accepts a triaxial surface without datasets and rejects inverted or zero axes', () => {
+    const source = { schema: 'cssearth-authored-object@2', sources: recipe().sources,
+      surfaces: [{ id: 'body', source: 'raster', projection: 'equirectangular', datasets: [] }] };
     const shape = { kind: 'ellipsoid', radiusKm: 1161, secondaryRadiusKm: 852, polarRadiusKm: 513 };
     const parsed = parseAuthoredRecipe({ ...source, shape });
     expect(parsed.shape).toEqual(shape);
-    expect(parsed.surfaces[0]!.lenses).toEqual([]);
+    expect(parsed.surfaces[0]!.datasets).toEqual([]);
     for (const secondaryRadiusKm of [0, 500, 1200]) {
       expect(() => parseAuthoredRecipe({ ...source, shape: { ...shape, secondaryRadiusKm } })).toThrow();
     }
@@ -110,7 +110,7 @@ describe('object descriptor boundary', () => {
     const cyclic: { child?: unknown } = {};
     cyclic.child = cyclic;
     expect(() => parseObjectDescriptor({ ...descriptor(), properties: cyclic })).toThrow(/cycle/);
-    expect(() => parseObjectDescriptor('{"schema":"cssearth-object@1","id":"example","type":"layered-body","properties":{"__proto__":{}}}')).toThrow(/data field/);
+    expect(() => parseObjectDescriptor('{"schema":"cssearth-object@2","id":"example","type":"layered-body","properties":{"__proto__":{}}}')).toThrow(/data field/);
   });
 
   it('allows additional layers as data without changing the parser or preparation dispatcher', () => {

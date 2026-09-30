@@ -17,8 +17,8 @@ const isPanel = (tool: WorkspaceTool): tool is WorkspacePanelTool => 'panel' in 
 /**
  * A column of tool buttons anchored to the right sidebar's left edge, above the image credit; the open panel
  * fills the same column from below the section navigation to just above the buttons.
- * At most one panel is open; the button toggles it and Escape closes it. A tool that is briefly absent (a lens
- * switching, or no source image) hides with its panel and reopens it when it returns, so the panel follows the lens.
+ * At most one panel is open; the button toggles it and Escape closes it. A tool that is briefly absent (a dataset
+ * switching, or no source image) hides with its panel and reopens it when it returns, so the panel follows the dataset.
  */
 export function WorkspaceTools({ tools }: { tools: readonly WorkspaceTool[] }) {
   const [host, setHost] = useState<Element | null>(null), [openId, setOpenId] = useState<string | null>(null);

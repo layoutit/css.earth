@@ -6,13 +6,13 @@ import { readSampledRecipe } from '../../../features/sampled-prior/model.ts';
 
 const points = new Float32Array([-1.2, 0, -5, 1, 1.2, 0, 5, 1, -15, -15, -15, 1e-10, 15, 15, 15, 1e-10]);
 function recipe() {
-  return readSampledRecipe({ schema: 'cssearth-sampled-nebula@1', id: 'material-example', centerIcrsDegrees: [80, 22],
+  return readSampledRecipe({ schema: 'cssearth-sampled-nebula@2', id: 'material-example', centerIcrsDegrees: [80, 22],
     evidence: { path: 'labs/nebula/models/example/physical-evidence.json' },
     source: { path: '.local/nebula-lab/physical/example/points.fits',
       url: 'https://example.org/points.fits', width: 4, height: 4, columns: [0, 1, 2, 3] },
     rawToArcsec: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
     grid: { longestAxis: 32, blurSigmaCells: .9, weightExponent: .5, peakOpticalDepth: 1 },
-    terms: [], lensComponents: { optical: { ejecta: 1, pwn: 0 } } });
+    terms: [], datasetComponents: { optical: { ejecta: 1, pwn: 0 } } });
 }
 const redBlue = { id: 'optical', sampleRgb(x: number, _y: number, out: EmissionVector3) {
   out[0] = x < 0 ? 255 : 0; out[1] = 0; out[2] = x < 0 ? 0 : 255; return true;

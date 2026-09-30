@@ -1,8 +1,8 @@
 import { validateObjUvFits, validateFacetScalarProfile, validateVtkCategories, validateCircleCatalogue, validateImageDemScience, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, validateScalarMapProfile, validateFitsObservationPolicy } from '../../raster/index.ts';
 import { validateTerrestrialRings } from './rings.ts';
 import { parseSolidPreparationSource } from './records/profile-source.ts';
-import { scientificPreviewGrid, lensTextureGrid } from './raster-grid.ts';
-import { radialTerrainForLens } from './alternative-lenses.ts';
+import { scientificPreviewGrid, datasetTextureGrid } from './raster-grid.ts';
+import { radialTerrainForDataset } from './alternative-datasets.ts';
 import { isArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import type { parseSolidScience } from './records/solid-source.ts';
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
@@ -25,23 +25,23 @@ type TerrestrialContext=Directories & {config:SolidConfig;source:Awaited<ReturnT
 
 /** A categorical grid is discrete units in a nearest-sampled GeoTIFF with its missing value kept apart from the unit codes;
  * both the radial-terrain lane and the generic-lane interpreter apply the same rule. */
-export function validateCategoricalGrid(lens: ReturnType<typeof parseSolidScience>) {
-  if (lens.categories && (lens.format !== 'geotiff' || lens.sampling !== 'nearest' ||
+export function validateCategoricalGrid(dataset: ReturnType<typeof parseSolidScience>) {
+  if (dataset.categories && (dataset.format !== 'geotiff' || dataset.sampling !== 'nearest' ||
     // A presence catalogue drawn over an underlay has one class: its empty cells show the underlay, not a second unit.
-    lens.relief || lens.valueTransform || !isArray(lens.categories) || lens.categories.length < (lens.underlay ? 1 : 2) ||
-    lens.minimum !== 0 || lens.maximum !== lens.categories.length - 1 ||
-    lens.categories.some(category => typeof category.value !== 'string' || !category.value ||
+    dataset.relief || dataset.valueTransform || !isArray(dataset.categories) || dataset.categories.length < (dataset.underlay ? 1 : 2) ||
+    dataset.minimum !== 0 || dataset.maximum !== dataset.categories.length - 1 ||
+    dataset.categories.some(category => typeof category.value !== 'string' || !category.value ||
       typeof category.label !== 'string' || !category.label || !/^#[0-9a-f]{6}$/i.test(category.color)) ||
-    new Set(lens.categories.map(category => category.value)).size !== lens.categories.length ||
-    !lens.grid || typeof lens.grid.noData !== 'number' || !Number.isFinite(lens.grid.noData) || lens.grid.noData >= 0 && lens.grid.noData < lens.categories.length)) {
-    throw new TypeError(`${lens.id}: categorical scientific grids require discrete units (${lens.underlay ? 'one or more' : 'two or more'} categories, minimum 0, maximum categories - 1), nearest sampling and a missing value apart from the unit codes; got ${isArray(lens.categories) ? lens.categories.length : 0} categories, minimum ${String(lens.minimum)}, maximum ${String(lens.maximum)}, sampling ${String(lens.sampling)}, noData ${String(lens.grid?.noData)}.`);
+    new Set(dataset.categories.map(category => category.value)).size !== dataset.categories.length ||
+    !dataset.grid || typeof dataset.grid.noData !== 'number' || !Number.isFinite(dataset.grid.noData) || dataset.grid.noData >= 0 && dataset.grid.noData < dataset.categories.length)) {
+    throw new TypeError(`${dataset.id}: categorical scientific grids require discrete units (${dataset.underlay ? 'one or more' : 'two or more'} categories, minimum 0, maximum categories - 1), nearest sampling and a missing value apart from the unit codes; got ${isArray(dataset.categories) ? dataset.categories.length : 0} categories, minimum ${String(dataset.minimum)}, maximum ${String(dataset.maximum)}, sampling ${String(dataset.sampling)}, noData ${String(dataset.grid?.noData)}.`);
   }
 }
 
 export function parseTerrestrialProfile(input:unknown) {
   const header=requireRecord(input);
   const value=parseSolidPreparationSource(input);
-  if (!value || value.schema !== 'cssearth-terrestrial-preparation@1' || value.kind !== 'solid-observation-body' ||
+  if (!value || value.schema !== 'cssearth-terrestrial-preparation@2' || value.kind !== 'solid-observation-body' ||
       !/^[a-z][a-z0-9-]*$/.test(value.namespace) || value.publicBase !== `/scenes/${value.namespace}/` ||
       typeof value.displayName !== 'string' ||
       value.raster?.width !== value.raster?.height * 2 || !Number.isSafeInteger(value.raster?.width) || value.raster.width <= 0 ||
@@ -53,11 +53,11 @@ export function parseTerrestrialProfile(input:unknown) {
       !Number.isSafeInteger(value.lighting?.frameSize) || value.lighting.frameSize <= 0 ||
       !Number.isSafeInteger(value.lighting.frameCount) || value.lighting.frameCount < 2 ||
       !Number.isSafeInteger(value.lighting.columns) || value.lighting.columns <= 0 || value.lighting.frameCount % value.lighting.columns ||
-      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? []), ...(value.raster.surfaceObservations ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
+      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? []), ...(value.raster.surfaceObservations ?? [])].some(dataset => dataset.id === value.presentation?.defaultDataset)) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
   validateTerrestrialRings(value.rings, value.geometry.radiusKm);
-  for (const recipe of value.raster.surfaceObservations ?? []) validateSurfaceObservation(recipe, radialTerrainForLens(value, recipe.id));
+  for (const recipe of value.raster.surfaceObservations ?? []) validateSurfaceObservation(recipe, radialTerrainForDataset(value, recipe.id));
   if ('surfaceQuality' in value.raster)
     throw new TypeError(`${value.namespace}: raster.surfaceQuality is no longer read; lossy files are encoded in the lossy lane (packages/bake/src/raster/lossy-lane.ts). Remove it from terrestrial.json.`);
   if (value.celestial.sunQualification !== undefined &&
@@ -69,21 +69,21 @@ export function parseTerrestrialProfile(input:unknown) {
         !/^[a-z][a-z0-9-]*$/.test(view.consumer) ||
         !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and a source consumer.');
   }
-  for (const lens of value.raster.scientific ?? []) {
-    const terrain = radialTerrainForLens(value, lens.id);
+  for (const dataset of value.raster.scientific ?? []) {
+    const terrain = radialTerrainForDataset(value, dataset.id);
     const terrainRecord = terrain === undefined ? undefined : requireRecord(terrain);
     const terrainSimplification = terrainRecord?.simplification === undefined ? undefined : requireRecord(terrainRecord.simplification);
-    validateScienceQualityMasks(lens);
-    scientificPreviewGrid(lens, value.raster);
-    if (![undefined, 'nearest'].includes(lens.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
-    if (lens.format === 'geologic-shapefile') {validateGeologyProfile(lens); continue;}
-    if (lens.format === 'vtk-cell-categories') {validateVtkCategories(lens, terrain); continue;}
-    if (lens.format === 'circle-catalogue') {validateCircleCatalogue(lens, terrain); continue;}
-    validateCategoricalGrid(lens);
-    const facetTable = lens.format === 'facet-scalars';
-    const meshGrid = ['image-plane-dem', 'stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
-    const tableGrid = lens.format === 'pds-radial-table';
-    for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
+    validateScienceQualityMasks(dataset);
+    scientificPreviewGrid(dataset, value.raster);
+    if (![undefined, 'nearest'].includes(dataset.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
+    if (dataset.format === 'geologic-shapefile') {validateGeologyProfile(dataset); continue;}
+    if (dataset.format === 'vtk-cell-categories') {validateVtkCategories(dataset, terrain); continue;}
+    if (dataset.format === 'circle-catalogue') {validateCircleCatalogue(dataset, terrain); continue;}
+    validateCategoricalGrid(dataset);
+    const facetTable = dataset.format === 'facet-scalars';
+    const meshGrid = ['image-plane-dem', 'stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(dataset.format);
+    const tableGrid = dataset.format === 'pds-radial-table';
+    for (const {path, grid} of [dataset, ...(dataset.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
           !grid || (!meshGrid && !tableGrid && !facetTable && (typeof grid.width !== 'number' || !Number.isSafeInteger(grid.width) || grid.width <= 0 || typeof grid.height !== 'number' || !Number.isSafeInteger(grid.height) || grid.height <= 0)) ||
           ![undefined, 'equirectangular', 'polar-stereographic'].includes(grid.projection) ||
@@ -93,44 +93,44 @@ export function parseTerrestrialProfile(input:unknown) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['obj-uv-fits', 'image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'npy-lonlat-grid', 'pds3-grid', 'vicar-grid', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
-        (!meshGrid && !tableGrid && !facetTable && (typeof lens.grid.width !== 'number' || !Number.isSafeInteger(lens.grid.width) || typeof lens.grid.height !== 'number' || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
+    if (!['obj-uv-fits', 'image-plane-dem', 'facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'npy-lonlat-grid', 'pds3-grid', 'vicar-grid', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(dataset.format) || !dataset.grid ||
+        (!meshGrid && !tableGrid && !facetTable && (typeof dataset.grid.width !== 'number' || !Number.isSafeInteger(dataset.grid.width) || typeof dataset.grid.height !== 'number' || !Number.isSafeInteger(dataset.grid.height) || dataset.grid.width <= 0 || dataset.grid.height <= 0)) ||
         // A continuous ramp spans two or more colours over minimum < maximum; a categorical grid (checked above) spans its
         // category indices 0..n-1 with one colour per category, which allows a one-class presence catalogue.
-        !(typeof lens.minimum === 'number' && typeof lens.maximum === 'number' && (lens.categories ? lens.minimum === 0 && lens.maximum === lens.categories.length - 1 : lens.minimum < lens.maximum)) ||
-        !isArray(lens.colors) || lens.colors.length < (lens.categories ? lens.categories.length : 2) ||
-        lens.colors.some(color => typeof color !== "string" || !/^#[0-9a-f]{6}$/i.test(color)) ||
-        (lens.sampling !== undefined && !['nearest', 'bilinear'].includes(lens.sampling)) ||
-        (lens.valueTransform && (!Number.isFinite(lens.valueTransform.scale) || lens.valueTransform.scale <= 0 ||
-          !Number.isFinite(lens.valueTransform.offset))) ||
-        (lens.relief && (!(lens.relief.referenceRadiusMeters > 0) || !isArray(lens.relief.lightDirection) ||
-          lens.relief.lightDirection.length !== 3 || lens.relief.lightDirection.some(value => !Number.isFinite(value)) ||
-          Math.abs(Math.hypot(...lens.relief.lightDirection) - 1) > 1e-12 || lens.relief.ambient < 0 || lens.relief.ambient >= 1 ||
-          (lens.relief.heightToMeters !== undefined && (!Number.isFinite(lens.relief.heightToMeters) || lens.relief.heightToMeters <= 0))))) {
+        !(typeof dataset.minimum === 'number' && typeof dataset.maximum === 'number' && (dataset.categories ? dataset.minimum === 0 && dataset.maximum === dataset.categories.length - 1 : dataset.minimum < dataset.maximum)) ||
+        !isArray(dataset.colors) || dataset.colors.length < (dataset.categories ? dataset.categories.length : 2) ||
+        dataset.colors.some(color => typeof color !== "string" || !/^#[0-9a-f]{6}$/i.test(color)) ||
+        (dataset.sampling !== undefined && !['nearest', 'bilinear'].includes(dataset.sampling)) ||
+        (dataset.valueTransform && (!Number.isFinite(dataset.valueTransform.scale) || dataset.valueTransform.scale <= 0 ||
+          !Number.isFinite(dataset.valueTransform.offset))) ||
+        (dataset.relief && (!(dataset.relief.referenceRadiusMeters > 0) || !isArray(dataset.relief.lightDirection) ||
+          dataset.relief.lightDirection.length !== 3 || dataset.relief.lightDirection.some(value => !Number.isFinite(value)) ||
+          Math.abs(Math.hypot(...dataset.relief.lightDirection) - 1) > 1e-12 || dataset.relief.ambient < 0 || dataset.relief.ambient >= 1 ||
+          (dataset.relief.heightToMeters !== undefined && (!Number.isFinite(dataset.relief.heightToMeters) || dataset.relief.heightToMeters <= 0))))) {
       throw new TypeError('Invalid scientific surface grid or relief profile.');
     }
-    if (tableGrid) validateRadialTableProfile(lens.grid);
-    if (lens.format === 'image-plane-dem') validateImageDemScience(lens);
-    if (meshGrid && ((lens.format === 'wavefront-obj-zip' && (typeof lens.grid.member !== 'string' || lens.grid.member.includes('..') || lens.grid.member.startsWith('/'))) ||
-        !(typeof lens.grid.metersPerUnit === 'number' && lens.grid.metersPerUnit > 0) || typeof lens.grid.expectedVertices !== 'number' || !Number.isSafeInteger(lens.grid.expectedVertices) || lens.grid.expectedVertices < 4 ||
-        typeof lens.grid.expectedFaces !== 'number' || !Number.isSafeInteger(lens.grid.expectedFaces) || lens.grid.expectedFaces < 4 ||
-        (lens.coverage && [lens.coverage.path,lens.coverage.member].some(p => typeof p !== 'string' || p.startsWith('/') || p.split('/').includes('..'))))) {
+    if (tableGrid) validateRadialTableProfile(dataset.grid);
+    if (dataset.format === 'image-plane-dem') validateImageDemScience(dataset);
+    if (meshGrid && ((dataset.format === 'wavefront-obj-zip' && (typeof dataset.grid.member !== 'string' || dataset.grid.member.includes('..') || dataset.grid.member.startsWith('/'))) ||
+        !(typeof dataset.grid.metersPerUnit === 'number' && dataset.grid.metersPerUnit > 0) || typeof dataset.grid.expectedVertices !== 'number' || !Number.isSafeInteger(dataset.grid.expectedVertices) || dataset.grid.expectedVertices < 4 ||
+        typeof dataset.grid.expectedFaces !== 'number' || !Number.isSafeInteger(dataset.grid.expectedFaces) || dataset.grid.expectedFaces < 4 ||
+        (dataset.coverage && [dataset.coverage.path,dataset.coverage.member].some(p => typeof p !== 'string' || p.startsWith('/') || p.split('/').includes('..'))))) {
       throw new TypeError('Invalid sourced mesh grid.');
     }
-    if (lens.facetField !== undefined) {
-      validateFacetFieldRecipe(lens.facetField);
-      if (!meshGrid || !lens.surfaceSampling) throw new TypeError('Facet fields require source-surface sampling.');
+    if (dataset.facetField !== undefined) {
+      validateFacetFieldRecipe(dataset.facetField);
+      if (!meshGrid || !dataset.surfaceSampling) throw new TypeError('Facet fields require source-surface sampling.');
     }
-    if (facetTable) validateFacetScalarProfile(lens, terrain);
-    else if (lens.format === 'pds3-scalar-map') validateScalarMapProfile(lens, terrain);
-    else if (lens.format === 'obj-uv-fits') validateObjUvFits(lens, terrain);
-    else if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
-        !Number.isFinite(lens.surfaceSampling.maximumDistanceMeters) || !(lens.surfaceSampling.maximumDistanceMeters > 0) ||
-        lens.path !== terrainRecord?.path ||
-        lens.format !== terrainRecord?.format ||
-        JSON.stringify(lens.grid) !== JSON.stringify(terrainRecord?.grid) ||
+    if (facetTable) validateFacetScalarProfile(dataset, terrain);
+    else if (dataset.format === 'pds3-scalar-map') validateScalarMapProfile(dataset, terrain);
+    else if (dataset.format === 'obj-uv-fits') validateObjUvFits(dataset, terrain);
+    else if (dataset.surfaceSampling !== undefined && (!meshGrid || dataset.surfaceSampling?.method !== 'closest-source-point' ||
+        !Number.isFinite(dataset.surfaceSampling.maximumDistanceMeters) || !(dataset.surfaceSampling.maximumDistanceMeters > 0) ||
+        dataset.path !== terrainRecord?.path ||
+        dataset.format !== terrainRecord?.format ||
+        JSON.stringify(dataset.grid) !== JSON.stringify(terrainRecord?.grid) ||
         terrainSimplification?.method !== 'source-meshoptimizer' ||
-        lens.surfaceSampling.maximumDistanceMeters > requireFiniteNumber(terrainSimplification.maximumErrorMeters))) {
+        dataset.surfaceSampling.maximumDistanceMeters > requireFiniteNumber(terrainSimplification.maximumErrorMeters))) {
       throw new TypeError('Source surface sampling must match the retained mesh and its simplification-distance bound.');
     }
   }
@@ -205,18 +205,18 @@ export function parseTerrestrialProfile(input:unknown) {
     }
     observationIds.add(observation.id);
   }
-  // Photograph lenses moved to raster.surfaceObservations. A recipe may keep the retired group only while it stays empty.
+  // Photograph datasets moved to raster.surfaceObservations. A recipe may keep the retired group only while it stays empty.
   const retired = requireRecord(header.raster).mosaics;
-  if (retired !== undefined && (!isArray(retired) || retired.length)) throw new TypeError('raster.mosaics is retired; a photograph lens belongs in raster.surfaceObservations.');
-  for (const lens of value.raster.observedColors ?? []) {
-    const p = lens.profile;
+  if (retired !== undefined && (!isArray(retired) || retired.length)) throw new TypeError('raster.mosaics is retired; a photograph dataset belongs in raster.surfaceObservations.');
+  for (const dataset of value.raster.observedColors ?? []) {
+    const p = dataset.profile;
     if (!p || !(p.referenceRadiusMeters > 0) || !isArray(p.filters) || p.filters.length !== 3 ||
         new Set(p.filters).size !== 3 || !Number.isFinite(p.noData) || !(p.specialValueMagnitude > 0)) {
       throw new TypeError('Invalid observed-color preparation profile.');
     }
-    if (!observationIds.has(lens.monochromeBase)) throw new TypeError('Observed color requires a prepared observation base.');
-    if (lens.photometry) {
-      const { profile: photometry, levels, vectors } = lens.photometry;
+    if (!observationIds.has(dataset.monochromeBase)) throw new TypeError('Observed color requires a prepared observation base.');
+    if (dataset.photometry) {
+      const { profile: photometry, levels, vectors } = dataset.photometry;
       if (!photometry || photometry.model !== 'Lunar-Lambert' || !(photometry.radiusKm > 0) ||
           photometry.phaseNormalization !== false || !photometry.observationWeights ||
           !Object.keys(photometry.observationWeights).length || Object.values(photometry.observationWeights).some(weight =>
@@ -234,9 +234,9 @@ export function parseTerrestrialProfile(input:unknown) {
       }
     }
   }
-  for (const lens of [...value.raster.observations, ...(value.raster.scientific ?? [])]) {
-    if (lens.textureScale !== undefined) {
-      lensTextureGrid(lens, value.raster);
+  for (const dataset of [...value.raster.observations, ...(value.raster.scientific ?? [])]) {
+    if (dataset.textureScale !== undefined) {
+      datasetTextureGrid(dataset, value.raster);
       if (value.geometry.radialModels) throw new TypeError('Texture scaling for radial model families is not supported.');
     }
   }
@@ -282,10 +282,10 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
     for (const model of models) {
       const terrain=requireRecord(model.config.geometry.radialTerrain);
       await prepareRadialMaterials({ ...context, config: {...model.config,geometry:{...model.config.geometry,radialTerrain:{...terrain,sourceLighting:terrain.sourceLighting,thumbnail:terrain.thumbnail}}}, radial: model.radial,
-      surfaces: surfaces.filter(surface => model.lensIds.includes(surface.id)),
+      surfaces: surfaces.filter(surface => model.datasetIds.includes(surface.id)),
       artifactId: model === models[0] ? null : model.id,
       snapshotEntries: models.length === 1 ? source.manifest.generatedIntermediates
-        : source.manifest.generatedIntermediates.filter(entry => model.lensIds.includes(requireString(requireRecord(requireRecord(entry).recipe).lensId))),
+        : source.manifest.generatedIntermediates.filter(entry => model.datasetIds.includes(requireString(requireRecord(requireRecord(entry).recipe).datasetId))),
       sunDirection: solarGeometry.requireBodyFixedSunDirection(config.namespace), replaceReviewedImages });
     }
     const unpainted = surfaces.filter(surface => requireRecord(surface.layout).kind !== 'triangle-atlas').map(surface => surface.id);

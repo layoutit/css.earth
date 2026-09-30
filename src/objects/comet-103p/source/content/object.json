@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "comet-103p",
   "displayName": "Hartley 2",
@@ -20,7 +20,7 @@
       },
       {
         "id": "source-epoch",
-        "label": "Encounter photographs",
+        "label": "Encounter",
         "value": "4 November 2010",
         "source": {
           "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110413_6000001_001_r.lbl",
@@ -34,9 +34,9 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "constraints",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "constraints",
     "labels": {
       "model": "Shape model",
       "constraints": "Source constraints",

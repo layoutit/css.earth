@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-209458",
   "displayName": "HD 209458",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved; its darker edge is measured from transits of its planet.",
-        "thumbnail": "hd-209458-lens-color.webp",
+        "thumbnail": "hd-209458-dataset-color.webp",
         "surface": "hd-209458-surface-color@2x.webp",
         "poles": "hd-209458-poles-color@2x.webp",
         "source": {

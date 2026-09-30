@@ -2,7 +2,7 @@
 
 ## Sources
 
-CD-59 7727B shares its motion through space with WASP-145 A, 471 AU away, so the two are a bound pair. Both are placed where Gaia measures them. This account was drafted from El-Badry, Rix & Heintz (2021), MNRAS 506, 2269's values; the sections below are the data's own.
+CD-59 7727B shares its motion through space with WASP-145 A, 471 AU away, so the two are a bound pair. Both are placed where Gaia measures them. The introduction is generated from El-Badry, Rix & Heintz (2021), MNRAS 506, 2269's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 6458529931463278976, parallax 10.928 ± 0.029 mas (91.51 pc); its RUWE is 2.5, so the single-star astrometry fits poorly, and the parallax is used as published. Radius 0.553 +/- 0.017 solar radii from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 381856446 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Mass 0.548 +/- 0.021 solar masses from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 381856446 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467). Temperature 3,689 K from Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 381856446 (VizieR IV/39/tic82). log g 4.69 from the mass and radius.
 
@@ -12,14 +12,12 @@ CD-59 7727B shares its motion through space with WASP-145 A, 471 AU away, so the
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** CD-59 7727B's orbit around WASP-145 A is not measured; both stars are placed at their Gaia DR3 positions, which is where they are.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

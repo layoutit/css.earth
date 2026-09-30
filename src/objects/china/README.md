@@ -1,76 +1,36 @@
 # 1125 China
 
-Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
+The asteroid 1125 China as a published convex lightcurve-inversion shape, scaled by a separate thermal diameter. There
+is no photographed surface or independently measured topography. Shape-only views use the shared neutral gray (#808080
+sRGB), a display convention, not a measured colour; gaps keep the missing-data grid.
 
 ## Sources
-
-<a id="shape-selection"></a>
 
 | Input | Selected source |
 | --- | --- |
 | Shape and spin | [DAMIT 1119](https://damit.cuni.cz/projects/damit/asteroid_models/view/1119) |
 | Physical scale | [Calibration and uncertainty](source/reference/calibration.json) |
 
-Selected [DAMIT model 1119](https://damit.cuni.cz/projects/damit/asteroid_models/view/1119), version 2016-01-04, from Hanuš et al.
+- **Shape.** DAMIT model 1119, version 2016-01-04, from
+  [Hanuš et al. (2016)](https://damit.cuni.cz/projects/damit/references/view/161). The
+  [original vertex/facet table](https://damit.cuni.cz/projects/damit/stored_files/open/4104/shape.txt) has 1021 vertices
+  and 2038 facets. [Model fields and mesh measurements](source/reference/damit-model.json).
+- **Spin.** [Original spin.txt](https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/1119/spin.txt):
+  J2000 ecliptic pole λ = 305°, β = -49°, sidereal period 5.36863 hours. The frame follows
+  [DAMIT's documentation](https://damit.cuni.cz/pages/documentation).
+- **Diameter.** 26.084 km from [Masiero et al. (2011), ApJ 741, 68](https://doi.org/10.1088/0004-637X/741/2/68)
+  ([original measurement data](https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1125)),
+  a NEATM effective spherical diameter at the observing geometry. It is the four-band fit the JPL SBDB physical field
+  selects.
+- **Licences.** DAMIT model material is [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), unless the original
+  release states otherwise. Attribute the model authors and Astronomical Institute, Charles University, Josef Ďurech and
+  Vojtěch Sidorin. NEOWISE values are distributed by NASA/IPAC IRSA and the NASA PDS Small Bodies Node; keep the
+  thermal-fit authors and survey attribution.
 
-The adopted diameter is **26.084 km** from [Masiero et al. (2011), ApJ 741, 68](https://doi.org/10.1088/0004-637X/741/2/68); [original measurement data](https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1125). Its quantity is **NEATM effective spherical diameter at the observing geometry**.
+## Processing
 
-[Model fields and mesh measurements](source/reference/damit-model.json).
-
-## Evidence
-
-The china validation record contains source, scale, atlas, installation and browser results for its recorded files and revision.
-
-## Known problems
-
-The archived record leaves its quality flag blank; no quality grade is invented. A convex reconstruction describes broad shape and cannot recover small craters or concavities.
-
-The selected lower-id pole is one admissible published solution. The alternative remains unresolved; selection is not evidence that one pole is physically preferred.
-
-The original China mesh contains a tiny sliver at zero-based face 1723 with area 3.07596e-09 source units squared and a negative local origin-facing normal dot product (-3.79292e-09). Its published six-decimal coordinates are retained. This is consistent with rounding sensitivity at a nearly degenerate face; no source vertex repair is invented.
-
-The mesh remains closed and consistently wound by its edge indices. Prepared simplification/transfer must be checked separately.
-
-- Diameter uncertainty: ±0.199 km. Published statistical/Monte Carlo fit error; excludes the additional systematic term below.
-- Additional limitation: Original publication reports approximately 10% additional systematic uncertainty in diameter. This is a population-level floor, not a shape-specific accuracy guarantee.
-- Selection: Retained the published four-band fit selected by the JPL SBDB physical field; separate apparition fits are retained as alternatives, without averaging.
-
-The thermal measurement is an effective spherical diameter at its observing geometry, not an independent measurement of the convex model's enclosed volume. Applying it to a unit-volume mesh is an explicitly approximate display normalization. It is not a thermophysical refit using this mesh, a stellar-occultation size, or an exact volume-equivalent calibration.
-
-A scale uncertainty changes every linear model dimension by the same proportion.
-
-The Shape lens uses cssEarth's existing shared grid to identify unavailable imagery. Any Elevation lens is **source-shape radius minus the chosen reference sphere**, a model-derived geometric quantity whose absolute scale inherits the thermal-size uncertainty. It is not independent terrain surveying or gravitational elevation.
-
-Optional directional Shadows are illustrative lighting on that mesh, separate from the grid; Shadows default to off.
-
-The archived epoch and phase are retained for provenance, not claimed as the current attitude.
-
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
-
-## Methods and source notes
-
-<details>
-<summary>Shape selection</summary>
-
-Checked 2026-09-08. This package uses an original published convex lightcurve-inversion mesh, with an approximate physical scale derived from separate thermal observations. It does not contain a photographed surface or independently measured topography.
-
-The [original vertex/facet table](https://damit.cuni.cz/projects/damit/stored_files/open/4104/shape.txt) contains 1021 vertices and 2038 triangular facets. All current DAMIT matches for this number were inspected; none supplies a calibrated diameter. The selected file's numerical volume is 0.999999694505 source units cubed, consistent with the unit-volume normalization documented by DAMIT.
-
-Source coordinates and face connectivity remain unchanged in the pinned input.
-
-| Model | Ecliptic pole λ, β | Sidereal period |
-| --- | --- | --- |
-| 1119 (selected) | 305°, -49° | 5.36863 h |
-| [1120](https://damit.cuni.cz/projects/damit/asteroid_models/view/1120) | 132°, -46° | 5.36863 h |
-
-</details>
-
-<a id="physical-scale-and-uncertainty"></a>
-
-<details>
-<summary>Physical scale and uncertainty</summary>
-
-Preparation uses the existing metre-per-source-unit parameter:
+The DAMIT mesh has unit volume. Preparation computes its volume from the closed triangle mesh and scales it to the
+thermal diameter:
 
 ```text
 V = Σ dot(a, cross(b, c)) / 6
@@ -80,9 +40,14 @@ metresPerSourceUnit = 1000 * 26.084 / D_source
 referenceRadiusKm = 26.084 / 2 = 13.042
 ```
 
-The signed volume above is independently computed from the original closed triangle mesh, not assumed to be exactly one. No density, mass or gravitational parameter is inferred from this normalization.
+No density, mass or gravitational parameter is inferred. The published pole is converted to J2000 equatorial with the
+shared obliquity transform. The display uses an arbitrary rotational phase, and accelerated rotation is illustrative.
+Shadows default to off.
 
-Other published epochs are retained separately, not averaged:
+## Evidence
+
+The mesh is closed and consistently wound, and its computed volume is 0.999999694505 source units cubed, consistent with
+DAMIT's unit-volume normalization. Other published diameters are kept separately, not averaged:
 
 | Reference code | Mean JD | Diameter (km) | Quoted fit error (km) |
 | --- | --- | --- | --- |
@@ -91,44 +56,17 @@ Other published epochs are retained separately, not averaged:
 | Nug16 | 2457190.4980879 | 21.724 | 5.891 |
 | Nug15 | 2456704.8563375 | 23.946 | 6.028 |
 
-These quoted errors have their original statistical/fit meaning and do not establish agreement with the selected scale or include all systematic effects.
+## Known problems
 
-</details>
+- A convex reconstruction describes broad shape and cannot recover small craters or concavities. The archived record
+  leaves its quality flag blank.
+- Two poles fit. Model 1119 (305°, -49°) is shown;
+  [1120](https://damit.cuni.cz/projects/damit/asteroid_models/view/1120) (132°, -46°) remains unresolved. The selection
+  is not evidence that one pole is physically preferred.
+- The diameter uncertainty is ±0.199 km, a statistical fit error. The original publication reports about 10% additional
+  systematic uncertainty. Applying a thermal effective diameter to the convex mesh is an approximate display
+  normalization, not a volume-equivalent calibration. Any Elevation dataset inherits that scale uncertainty.
+- Face 1723 is a tiny sliver (area 3.07596e-09 source units squared) with a slightly negative normal, consistent with
+  rounding of the published six-decimal coordinates. It is kept as published.
 
-<a id="coordinates-spin-and-display-phase"></a>
-
-<details>
-<summary>Coordinates, spin and display phase</summary>
-
-[Original spin.txt](https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/1119/spin.txt) specifies the J2000 ecliptic pole λ = 305°, β = -49°, a sidereal period of 5.36863 hours, reference epoch JD 2450873, and reference angle φ₀ = 0°. The original DAMIT co-rotating Cartesian frame is preserved: +Z is its north pole and +X defines the model meridian. [DAMIT's frame and file documentation](https://damit.cuni.cz/pages/documentation) defines the body-to-ecliptic transform.
-
-The display uses an **arbitrary phase** (`displayMeridianDegrees: 0`, `phase: arbitrary-display-phase`). It does not propagate the source JD₀ and φ₀ as an absolute rotational ephemeris. The published pole is converted to the existing J2000 equatorial convention using the shared obliquity transform.
-
-Accelerated viewer rotation is illustrative. Orbital position remains owned by the separately pinned JPL source and the shared preparation recipe; a fitted model's spin epoch is not its orbital epoch.
-
-</details>
-
-<a id="available-views-and-candidate-survey"></a>
-
-The [investigation ledger](investigations.json) records the source survey and alternative models.
-
-<a id="intake-evidence-and-remaining-qualification"></a>
-
-<details>
-<summary>Intake evidence and remaining qualification</summary>
-
-Intake verified original-file hashes, spin/model-field agreement, finite coordinates, valid indices, a closed two-manifold with consistently oriented shared edges, nonzero-area facets and positive signed volume. These checks qualify source intake only. The later validation record linked above covers preparation and application checks separately.
-
-</details>
-
-<a id="publications-and-reuse"></a>
-
-<details>
-<summary>Publications and reuse</summary>
-
-- [Hanuš et al. (2016) — New and updated convex shape models of asteroids based on optical data from a large collaboration network](https://damit.cuni.cz/projects/damit/references/view/161).
-- [Masiero et al. (2011), ApJ 741, 68](https://doi.org/10.1088/0004-637X/741/2/68) and its linked catalog field definitions.
-- DAMIT website/model material: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), unless the original release explicitly states otherwise. Attribute the model authors and Astronomical Institute, Charles University, Josef Ďurech and Vojtěch Sidorin.
-- NEOWISE measurement values are distributed by NASA/IPAC IRSA and the NASA PDS Small Bodies Node; retain the cited original thermal-fit authors and survey attribution. Research PDFs are not runtime assets.
-
-</details>
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Investigation ledger](investigations.json) · [Credits](NOTICE.md)

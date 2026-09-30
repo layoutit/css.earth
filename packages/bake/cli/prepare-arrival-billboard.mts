@@ -41,8 +41,8 @@ try {
     const runtimeBytes = await readFile(resolve(prepared, 'runtime.json'));
     const runtime = requireRecord(JSON.parse(runtimeBytes.toString('utf8')));
     const rotation = preparedDefaultViewRotation(runtime.camera);
-    const controls = requireRecord(requireRecord(runtime.controls).lenses);
-    const lens = requireString(controls.defaultLens);
+    const controls = requireRecord(requireRecord(runtime.controls).datasets);
+    const dataset = requireString(controls.defaultDataset);
     let distanceM = object.worldFrame.bodyRadiusM * distanceRadii;
     const filename = `${object.id}-arrival.webp`, receiptPath = resolve(output, `${object.id}.json`);
     const identity = { size, distanceRadii, version: 4 };
@@ -174,7 +174,7 @@ try {
         image = await sharp(shot).extract({ left: captureSize / 2 - half, top: captureSize / 2 - half, width: side, height: side })
           .resize(size, size).png().toBuffer();
         const billboard = parseArrivalBillboard({ url: `/scenes/${object.id}/${filename}`, size, distanceM,
-          focalPixels: focal * resize, lens, rotation });
+          focalPixels: focal * resize, dataset, rotation });
         if (errors.length) throw new Error(errors.join('\n'));
         const bytes = await writeLossyWebp(sharp(image), resolve(root, 'public/scenes', object.id, filename));
         const metadata = Buffer.from(JSON.stringify(billboard, null, 2) + '\n');

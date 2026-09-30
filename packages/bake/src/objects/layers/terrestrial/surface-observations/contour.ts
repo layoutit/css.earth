@@ -1,5 +1,5 @@
 /**
- * How deep inside a photograph's usable disc each pixel lies: the Euclidean distance, in pixels, to the nearest pixel the lens
+ * How deep inside a photograph's usable disc each pixel lies: the Euclidean distance, in pixels, to the nearest pixel the dataset
  * cannot use (off the body, past the limb or terminator limits, or disqualified), with everything beyond the detector unusable.
  * The distance is exact (Felzenszwalb and Huttenlocher, "Distance Transforms of Sampled Functions", Theory of Computing 8, 2012)
  * and changes by at most one pixel per pixel, so a weight built on it fades a frame out continuously at its disc edge.

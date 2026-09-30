@@ -28,7 +28,7 @@ export interface ReconstructionCandidate {
 }
 export interface ReconstructionCatalogue {
   subjectId: string; overlayCatalogue: string; candidates: ReconstructionCandidate[];
-  /** The newest finite model whose baked lenses replace per-image density repaints. */
+  /** The newest finite model whose baked datasets replace per-image density repaints. */
   finiteModel?: { modelResultId: string; bundle: string; skipped?: { modelResultId: string; reason: string }[] };
 }
 export interface ReconstructionWork {

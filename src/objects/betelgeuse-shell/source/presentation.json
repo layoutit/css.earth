@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "betelgeuse-shell",
   "name": "Betelgeuse dust shell",
-  "defaultLens": "zimpol-v",
+  "defaultDataset": "zimpol-v",
   "bank": {
-    "path": "src/objects/betelgeuse-shell/prepared/lenses.json"
+    "path": "src/objects/betelgeuse-shell/prepared/datasets.json"
   },
   "recipes": [
     {
@@ -26,7 +26,7 @@
   ],
   "sharedInputs": [],
   "inputEvidence": [],
-  "lenses": [
+  "datasets": [
     {
       "id": "zimpol-v",
       "label": "SPHERE/ZIMPOL · polarised dust, 2024",

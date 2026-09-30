@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "cd-38-1467-b",
   "displayName": "CD-38 1467B",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "cd-38-1467-b-lens-color.webp",
+        "thumbnail": "cd-38-1467-b-dataset-color.webp",
         "surface": "cd-38-1467-b-surface-color@2x.webp",
         "poles": "cd-38-1467-b-poles-color@2x.webp",
         "source": {

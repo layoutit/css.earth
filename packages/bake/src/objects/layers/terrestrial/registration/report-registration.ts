@@ -18,7 +18,7 @@ const degrees = (value: unknown, digits = 2) => typeof value === 'number' && Num
 const ratio = (value: unknown) => typeof value === 'number' && Number.isFinite(value) ? value.toFixed(2) : '—';
 
 /**
- * Whether a lens registers: every measurement that reached a verdict (the outline over three or more scored frames, a
+ * Whether a dataset registers: every measurement that reached a verdict (the outline over three or more scored frames, a
  * reference or the relief over their decisive minimum, and only when those decisive offsets agree with each other to
  * within the same gate) places it within three degrees, and at least one did.
  */
@@ -38,18 +38,18 @@ export function registrationVerdict(registration: Record<string, unknown>): 'reg
   return !offsets.length ? 'no verdict' : offsets.every(value => Math.abs(value) <= VERDICT_DEGREES) ? 'registered' : 'conflict';
 }
 
-/** A lens that ships on its paper's comparison figure, as the block states it: the figure and the paper's DOI. */
-export interface ShippedComparison { lensId: string; figure: string; source: string }
+/** A dataset that ships on its paper's comparison figure, as the block states it: the figure and the paper's DOI. */
+export interface ShippedComparison { datasetId: string; figure: string; source: string }
 
-/** The block for one object's prepared surfaces, or null when no lens carries a registration stage. */
+/** The block for one object's prepared surfaces, or null when no dataset carries a registration stage. */
 export function registrationBlock(surfaces: unknown, comparisons: readonly ShippedComparison[] = []): string | null {
-  const lenses = requireArray(requireRecord(surfaces).surfaces).map(value => requireRecord(value));
+  const datasets = requireArray(requireRecord(surfaces).surfaces).map(value => requireRecord(value));
   const rows: string[] = [];
-  for (const lens of lenses) {
-    const observation = lens.observation === undefined ? undefined : requireRecord(lens.observation);
+  for (const dataset of datasets) {
+    const observation = dataset.observation === undefined ? undefined : requireRecord(dataset.observation);
     const registration = observation?.registration === undefined ? undefined : requireRecord(observation.registration);
     if (!registration || registration.stage === undefined) continue;
-    const silhouette = requireRecord(registration.silhouette), reference = requireRecord(registration.reference), id = requireString(lens.id);
+    const silhouette = requireRecord(registration.silhouette), reference = requireRecord(registration.reference), id = requireString(dataset.id);
     const frames = requireArray(silhouette.frames).length, scored = Number(silhouette.scored);
     const referenceKind = reference.kind === 'observation' ? `the \`${String(reference.observation)}\` map` : reference.kind === 'frames' ? `its other ${String(reference.referenceFrames)} frames` : `none (${String(reference.reason)})`;
     // One or two decisive frames are not a verdict; the median is stated only over at least the rule's count.
@@ -73,13 +73,13 @@ export function registrationBlock(surfaces: unknown, comparisons: readonly Shipp
   return [
     'Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.',
     '',
-    '| Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |',
+    '| Dataset | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |',
     '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
     ...rows,
-    ...comparisons.filter(comparison => rows.some(row => row.startsWith(`| \`${comparison.lensId}\` |`))).flatMap(comparison => ['',
-      `\`${comparison.lensId}\` ships on its paper\u2019s comparison, [${comparison.figure}](${comparison.source}), measured in [\`evidence/published-comparison.json\`](evidence/published-comparison.json); its verdict is reported, not a gate.`]),
+    ...comparisons.filter(comparison => rows.some(row => row.startsWith(`| \`${comparison.datasetId}\` |`))).flatMap(comparison => ['',
+      `\`${comparison.datasetId}\` ships on its paper\u2019s comparison, [${comparison.figure}](${comparison.source}), measured in [\`evidence/published-comparison.json\`](evidence/published-comparison.json); its verdict is reported, not a gate.`]),
     '',
-    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the lens, or why it declined; the other columns then measure the turned lens. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the lens ships on its paper’s comparison figure, which its observer-cameras record names.',
+    'Limb columns: the position-angle residual between the projected limb and the photographed contour over the frames whose outline is elongated enough to define one, the floor set by exposures minutes apart, and what remains after removing that floor in quadrature. Reference columns: each frame turned about the pole against the named reference, the frames whose peak clears both mirrors (by the strong rule, or by standing four times above them), and their median offset from the stated camera, stated only over three or more decisive frames. Relief: the same sweep against the mesh\'s own shading with no map and no other frame, decisive frames and their median offset. Refined: the turn a named reference applied to every camera of the dataset, or why it declined; the other columns then measure the turned dataset. Seams: the largest brightness ratio left between overlapping frames after level matching, and the frame groups no accepted overlap joins, whose relative brightness is unmeasured. Verdict: registered when every measurement that reached one (the outline over three scored frames, the reference or the relief over three decisive frames whose offsets agree with each other to within three degrees) is within three degrees; a sweep whose decisive offsets disagree by more reaches no verdict, because its median is a location rather than a measurement. A conflict ships only when named in the known conflicts of `report-registration.test.mts`, or when the dataset ships on its paper’s comparison figure, which its observer-cameras record names.',
   ].join('\n');
 }
 
@@ -91,13 +91,13 @@ export function withRegistrationBlock(readme: string, block: string | null) {
   return { readme: readme.slice(0, begin + REGISTRATION_BLOCK_BEGIN.length) + inside + readme.slice(end), replaced: true };
 }
 
-/** The comparison a body's ground-based lens ships on, from its observer-cameras record and comparison spec, or none. */
+/** The comparison a body's ground-based dataset ships on, from its observer-cameras record and comparison spec, or none. */
 export async function shippedComparisons(objectDirectory: string): Promise<ShippedComparison[]> {
   let record;
   try { record = parseObserverCameras(JSON.parse(await readFile(resolve(objectDirectory, 'source', OBSERVER_CAMERAS_FILE), 'utf8'))); } catch (error) { if (hasErrorCode(error, 'ENOENT')) return []; throw error; }
   if (!record.publishedComparison) return [];
   const spec = parseComparisonSpec(JSON.parse(await readFile(resolve(objectDirectory, 'source', COMPARISON_SPEC_FILE), 'utf8')));
-  return [{ lensId: spec.lensId, figure: spec.figure, source: spec.source }];
+  return [{ datasetId: spec.datasetId, figure: spec.figure, source: spec.source }];
 }
 
 export async function registrationBlockFor(objectDirectory: string) {

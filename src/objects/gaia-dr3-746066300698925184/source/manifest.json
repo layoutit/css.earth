@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "gaia-dr3-746066300698925184-observational-measurements",
@@ -31,7 +31,7 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ]
     },
     {
@@ -49,22 +49,6 @@
       "consumers": [
         "scene",
         "presentation"
-      ]
-    },
-    {
-      "id": "gaia-dr3-746066300698925184-preparation-celestial",
-      "path": "preparation/celestial.json",
-      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
-      },
-      "credit": "cssEarth and the institutional sources identified in this record",
-      "license": "Project-authored preparation record; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
-      "redistribution": "checked authored source with embedded provenance",
-      "consumers": [
-        "starfield"
       ]
     },
     {
@@ -109,7 +93,7 @@
       "redistribution": "Method record only",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -129,7 +113,7 @@
       "redistribution": "Catalogue rows retained unchanged with their citation.",
       "consumers": [
         "assets",
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -173,7 +157,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://doi.org/10.1051/0004-6361/202243462",
-      "credit": "The colour lens as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The colour dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -189,7 +173,7 @@
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The colour lens rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+        "reason": "The colour dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

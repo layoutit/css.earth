@@ -4,7 +4,7 @@ Application, preparation, source-authoring, tests, executable fixture helpers an
 
 The [ownership inventory](../../.github/scripts/checks/typescript-ownership.json) has no remaining authored JavaScript backlog entries. Its guard inspects tracked and untracked nonignored code, rejects new implementation JavaScript, and rejects production imports from excluded test or evidence locations. It also inspects Astro frontmatter, client scripts and literal script sources. A file's name cannot hide an implementation inside a test directory.
 Evidence tooling lives under `.github/scripts/audits/` or in files named
-`capture`, `captures` or `evidence`, and the oracles under `tests/oracles/` are tests; both may import test harnesses,
+`capture`, `captures` or `evidence`; the FITS and SBMT oracle gates are explicitly named evidence runners in the guard. The oracles beside their owning code are tests; both may import test harnesses,
 while runtime owners may import neither test nor evidence modules.
 
 ## Where JavaScript belongs
@@ -53,7 +53,7 @@ surfaces. An `.mts` extension alone does not establish strict ownership. Missing
 local prepared assets or failures in that broader gate must be reported separately,
 not hidden by the focused oracle check.
 
-`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../tests/tsconfig.json) with the configured TypeScript compiler; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
+`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../tsconfig.tests.json) with the configured TypeScript compiler; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
 
 Node must satisfy `^22.18.0 || >=24.0.0`. Node strips types for native `.mts` execution; the TypeScript gates perform checking. Shell and native-tool configurations reject syntax requiring runtime transformation.
 
@@ -61,11 +61,11 @@ Node must satisfy `^22.18.0 || >=24.0.0`. Node strips types for native `.mts` ex
 
 The migration preserves the generic object registry, shared shell and camera, retained DOM and prepared runtime data. Preparation owns geometry, textures, charts and source interpretation. Runtime transports and decodes those products.
 
-The [presentation comparison](../../evidence/typescript-ownership/presentation-typescript-parity.json) records complete raw presentation equality for identical pinned inputs. The record identifies the compared owners and source hashes; this result does not claim reproduction of historical assets made from different recipes.
+The presentation comparison records complete raw presentation equality for identical pinned inputs. The record identifies the compared owners and source hashes; this result does not claim reproduction of historical assets made from different recipes.
 
-Full navigation preparation previously recompressed existing markers at Q75, while incremental publication retained decoded pixels. The owner now renders the pinned recipes, copies decoded tile rows and writes lossless atlases. Against the 406-body lossless baseline, both densities preserve exact alpha with at most one channel level of compositor rounding. The [navigation comparison](../../evidence/typescript-ownership/navigation-lossless-atlases.json) records both this baseline and the later lossy publication, for the 461-body inventory. Its subsequent-merge record extends the atlas to 464 bodies by preserving all existing tiles and adding the three incoming tiles, with zero changed visible pixels. Navigation preparation tests cover full reproduction and publication rollback. This is a preparation correction, separate from the JavaScript/TypeScript parity comparisons.
+Full navigation preparation previously recompressed existing markers at Q75, while incremental publication retained decoded pixels. The owner now renders the pinned recipes, copies decoded tile rows and writes lossless atlases. Against the 406-body lossless baseline, both densities preserve exact alpha with at most one channel level of compositor rounding. The navigation comparison records both this baseline and the later lossy publication, for the 461-body inventory. Its subsequent-merge record extends the atlas to 464 bodies by preserving all existing tiles and adding the three incoming tiles, with zero changed visible pixels. Navigation preparation tests cover full reproduction and publication rollback. This is a preparation correction, separate from the JavaScript/TypeScript parity comparisons.
 
-The [source-authoring comparison](../../evidence/typescript-ownership/source-authoring-typescript-parity.json) covers the twenty comet meshes, the catalogue and astronomy records, 48 open-orbit cases, and nine distant-world source finalizations. Offline CLI replay supplies the original Horizons responses and native mesh bytes to both implementations; it does not claim a fresh native C++ build.
+The source-authoring comparison covers the twenty comet meshes, the catalogue and astronomy records, 48 open-orbit cases, and nine distant-world source finalizations. Offline CLI replay supplies the original Horizons responses and native mesh bytes to both implementations; it does not claim a fresh native C++ build.
 
 During that migration an Earth texture-level recipe and its manifest had mismatched hashes. That historical correction changed no scientific input or texture-level parameter. Current manifests and descriptors no longer carry those pins; runtime inventories own published asset identity.
 
@@ -85,7 +85,7 @@ pnpm test:preparation
 ```
 
 `typecheck:tests` invokes the strict test compiler directly. The native suite uses
-`tests/register-vite-suffix.mts` for site imports; its source-dependent skips do not
+`packages/core/src/node/register-vite-suffix.mts` for site imports; its source-dependent skips do not
 establish qualification. Use a build and inspected browser output when behavior
 or rendering changes.
 

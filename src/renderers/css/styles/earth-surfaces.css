@@ -84,8 +84,8 @@
   visibility: visible;
 }
 
-/* City lights are emitted, not reflected sunlight, so their lens takes no atmospheric lighting. */
-.object-stage:where([data-object-id="earth"])[data-lens="night-lights"] .earth-atmosphere-material {
+/* City lights are emitted, not reflected sunlight, so their dataset takes no atmospheric lighting. */
+.object-stage:where([data-object-id="earth"])[data-dataset="night-lights"] .earth-atmosphere-material {
   visibility: hidden;
 }
 

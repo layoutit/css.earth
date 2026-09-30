@@ -4,20 +4,20 @@ import { createObjectControlBinding, publishDatasetSelection } from './object-co
 import type { ObjectSelectionState } from './object-selection-runtime.js';
 
 test('a collapsed dataset preview follows the listed member of a selected sequence', () => {
-  const document = parseHTML(`<section class="object-lenses">
-    <span data-lens-selected="first"></span><span data-lens-selected="other" hidden></span>
-    <select data-lens-native-select><option value="first" selected>First</option><option value="other">Other</option></select>
-    <div data-lens-option data-step-group="sequence" data-step-listed="true"><button value="first" aria-pressed="true"></button></div>
-    <div data-lens-option data-step-group="sequence" data-step-listed="false" hidden><button value="second" aria-pressed="false"></button></div>
-    <div data-lens-option><button value="other" aria-pressed="false"></button></div>
-    <div data-lens-details="first"></div><div data-lens-details="second" hidden></div><div data-lens-details="other" hidden></div>
+  const document = parseHTML(`<section class="object-datasets">
+    <span data-dataset-selected="first"></span><span data-dataset-selected="other" hidden></span>
+    <select data-dataset-native-select><option value="first" selected>First</option><option value="other">Other</option></select>
+    <div data-dataset-option data-step-group="sequence" data-step-listed="true"><button value="first" aria-pressed="true"></button></div>
+    <div data-dataset-option data-step-group="sequence" data-step-listed="false" hidden><button value="second" aria-pressed="false"></button></div>
+    <div data-dataset-option><button value="other" aria-pressed="false"></button></div>
+    <div data-dataset-details="first"></div><div data-dataset-details="second" hidden></div><div data-dataset-details="other" hidden></div>
   </section>`).document;
-  const root = document.querySelector<HTMLElement>('.object-lenses')!;
+  const root = document.querySelector<HTMLElement>('.object-datasets')!;
   const buttons = [...root.querySelectorAll<HTMLButtonElement>('button')];
-  const details = [...root.querySelectorAll<HTMLElement>('[data-lens-details]')]
-    .map(panel => ({ id: panel.dataset.lensDetails!, panel }));
-  const selected = () => [...root.querySelectorAll<HTMLElement>('[data-lens-selected]')]
-    .filter(preview => !preview.hidden).map(preview => preview.dataset.lensSelected);
+  const details = [...root.querySelectorAll<HTMLElement>('[data-dataset-details]')]
+    .map(panel => ({ id: panel.dataset.datasetDetails!, panel }));
+  const selected = () => [...root.querySelectorAll<HTMLElement>('[data-dataset-selected]')]
+    .filter(preview => !preview.hidden).map(preview => preview.dataset.datasetSelected);
 
   publishDatasetSelection(buttons, details, [], new Set(['second']), root);
   expect(selected()).toEqual(['first']);
@@ -34,26 +34,26 @@ afterEach(() => vi.useRealTimers());
 
 function sequence(autoplay = true) {
   const ids = ['first', 'last', 'other'];
-  const { document, Event } = parseHTML(`<main></main><section class="object-information-panel"><div class="object-lenses">
-    <form data-dataset-form>${ids.map(id => `<div data-lens-option ${id !== 'other' ? `data-step-group="dates" data-step-autoplay="${autoplay}"` : ''}>
+  const { document, Event } = parseHTML(`<main></main><section class="object-information-panel"><div class="object-datasets">
+    <form data-dataset-form>${ids.map(id => `<div data-dataset-option ${id !== 'other' ? `data-step-group="dates" data-step-autoplay="${autoplay}"` : ''}>
       <button type="submit" name="dataset" value="${id}" aria-controls="details-${id}">${id}</button></div>`).join('')}</form></div>
-    ${ids.map(id => `<div id="details-${id}" data-lens-details="${id}">${id !== 'other' ?
+    ${ids.map(id => `<div id="details-${id}" data-dataset-details="${id}">${id !== 'other' ?
       '<div data-sequence-player><button type="button" data-dataset-play="dates" disabled></button></div>' : ''}</div>`).join('')}
     </section>`);
   const form = document.querySelector('form')!;
   // Linkedom does not implement form.elements or button.value.
   for (const button of form.querySelectorAll('button')) button.value = button.getAttribute('value')!;
   Object.defineProperty(form, 'elements', { value: [...form.querySelectorAll('button')] });
-  let state: ObjectSelectionState = { desired: { lensId: 'last' }, committed: { lensId: 'last' }, committedBy: null,
+  let state: ObjectSelectionState = { desired: { datasetId: 'last' }, committed: { datasetId: 'last' }, committedBy: null,
     plan: null, pending: false, loadingMaterial: false, ready: true, error: null, viewRevision: null };
   const actions: string[] = [];
   const binding = createObjectControlBinding({ stage: document.querySelector('main')!,
-    controls: { lenses: { defaultLens: 'last', controls: ids.map(id => ({ id, label: id })) }, settings: null },
+    controls: { datasets: { defaultDataset: 'last', controls: ids.map(id => ({ id, label: id })) }, settings: null },
     initialSelection: state.desired, getState: () => state,
     onAction(action) {
-      if (action.kind !== 'lens') throw new Error('Expected a dataset action');
+      if (action.kind !== 'dataset') throw new Error('Expected a dataset action');
       actions.push(action.id);
-      state = { ...state, desired: { lensId: action.id }, pending: true };
+      state = { ...state, desired: { datasetId: action.id }, pending: true };
       binding.publish();
     }, onError: error => { throw error; } });
   binding.setReady();

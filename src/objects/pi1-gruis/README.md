@@ -1,47 +1,67 @@
 # π¹ Gruis
 
-The [navigation marker](source/preparation/navigation.json) is a photosphere crop of the existing reconstruction, with an offline circular alpha edge. Its centre and radius come from the matching frame in [the raster recipe](source/preparation/raster.json): `(center + 0.5) × 512 / imageSize` and `radiusKm / (rangeKm × pixelAngleMicroradians × 10⁻⁶) × 512 / imageSize`. For `observations/pi1-gruis-pionier-2014-09-2.1mas.fits`, the 512-pixel marker centre is (258.008, 254.004) and its radius is 90.850 pixels. The enclosing integer crop is (167, 163, 182, 182); the alpha ellipse retains the fractional centre and radius. This navigation proxy omits off-limb emission and reconstruction background. The scientific images, their thresholds and their off-limb views are unchanged.
+π¹ Gruis is placed at its catalogue position, 162 parsecs from the Sun, and
+shown as a sphere of the fitted radius carrying one image reconstructed from the
+public VLTI/PIONIER visibilities of September 2014, the data behind the first
+resolved granulation on a star other than the Sun. A colour dataset shows the
+colour of its Gaia spectrum.
 
 ## Sources
 
-π¹ Gruis is the second star here outside the Solar System and the first without a measured rotation axis. It is placed at its catalogue position, 162 parsecs from the Sun, and shown as a sphere of the fitted radius carrying one image reconstructed from the public VLTI/PIONIER visibilities of September 2014, the data behind the first resolved granulation on a star other than the Sun.
+- **Placement:** the ICRS position, proper motion and parallax are SIMBAD's, from Gaia DR3 (Gaia Collaboration 2020): parallax 6.19 ± 0.45 mas, 161.7 pc, with RUWE 2.9 because the star is a wide binary. No catalogue lists a radial velocity for the star; the record assumes zero. The mass behind the display GM is the 1.5 solar masses of Mayer et al. (2014, A&A 570, A113).
+- **PIONIER photograph:** Paladini et al. (2018, [Nature 553, 310](https://doi.org/10.1038/nature25001); ESO release [eso1741](https://www.eso.org/public/news/eso1741/)) imaged π¹ Gruis in the H band over four nights in September 2014. Their image-ready calibrated file is public in the [JMMC OiDB](https://oidb.jmmc.fr/) (`PI_GRU_forImage.fits`, data PI C. Paladini) and is read as is.
+- **Reconstruction code:** the public [SQUEEZE](https://github.com/fabienbaron/squeeze) code; `source/reference/squeeze-command.txt` records the build and the command.
+- **Colour dataset:** Gaia DR3's measured spectrum of π¹ Gruis; the file and the full citation are in [stellar-color.json](source/photometry/stellar-color.json).
 
-**Placement.** The ICRS position, proper motion and parallax are SIMBAD's, from Gaia DR3 (Gaia Collaboration 2020): parallax 6.19 ± 0.45 mas, 161.7 pc, with RUWE 2.9 because the star is a wide binary. Hipparcos (van Leeuwen 2007) gives 6.13 ± 0.76 mas, the 163 pc Paladini et al. (2018) adopt. No catalogue lists a radial velocity for the star (SIMBAD, Pulkovo, GCRV and Kharchenko were checked); the record assumes zero, which over the 26 years since J2000 moves the scene position by one part in a million of the distance. The mass behind the display GM is the 1.5 solar masses of Mayer et al. (2014, A&A 570, A113).
+## Processing
 
-**Radius.** The uniform-disc diameter fitted in this package to the pinned visibilities is 18.17 milliarcseconds, which at 161.7 pc is 219,710,723 km, 316 solar radii. A uniform disc fits these visibilities at reduced chi-squared 51: the data demand structure on the disc, which is what the image shows. Mayer et al. (2014) list 370 solar radii from the bolometric luminosity. The reference surface is a sphere at the fitted radius, written by `packages/bake/authoring/pi1-gruis/author.mts` as a 5-degree radius table, and the body is drawn by the planet route exactly as Betelgeuse is: the surface-observation route casts the image onto the sphere and hands the raster lane an equirectangular map. An asymptotic giant branch photosphere has no sharp limb; the sphere is the surface the image is cast onto, not a measured shape.
+The uniform-disc diameter fitted to the pinned visibilities is 18.17
+milliarcseconds, which at 161.7 pc is 219,710,723 km, 316 solar radii.
+`packages/bake/authoring/pi1-gruis/author.mts` writes the reference sphere at
+that radius, and the surface-observation route casts the image onto it, as for
+Betelgeuse. An asymptotic giant branch photosphere has no sharp limb; the sphere
+is the surface the image is cast onto, not a measured shape.
 
-**Rotation: none measured.** No publication measures the rotation axis, period or prime meridian of π¹ Gruis. The rotation record is the repository's `cssearth-display-orientation@1` convention, the same record the outer Saturnian moons without a solved pole use: the display axis is celestial north at the star, placed in the plane of the sky (right ascension of the star, declination 90 degrees plus the star's), the display meridian faces the Sun and Earth at the scene epoch, and no spin is propagated. The lens notes, the panel and this README label the axis as a convention. The star record also sets `presentationUp: display-axis`, so the presentation frame puts that axis up instead of the ecliptic pole; the camera orbit then lies in the star's equator, where the sub-Earth point is. From 36 degrees south of the ecliptic the ecliptic frame's orbit would never come closer than 34 degrees to the photographed hemisphere.
+SQUEEZE reconstructs the image with the prior used for Betelgeuse (maximum
+entropy, µ = 10, uniform-disc start, 128 pixels of 0.4 mas). `author.mts`
+convolves it to the 2.1 mas interferometric beam, and that is what the dataset
+casts. The palette is the Betelgeuse heat scale over the 1st to 99.5th
+percentile; the legend reads relative intensity at 1.65 µm.
 
-**PIONIER photograph.** Paladini et al. (2018, [Nature 553, 310](https://doi.org/10.1038/nature25001); ESO release [eso1741](https://www.eso.org/public/news/eso1741/)) imaged π¹ Gruis with VLTI/PIONIER in the H band over the nights of 25, 26, 29 and 30 September 2014. Their image-ready calibrated file is public in the [JMMC OiDB](https://oidb.jmmc.fr/) at calibration level 3 (`PI_GRU_forImage.fits`, data PI C. Paladini): 303 squared-visibility and 201 closure-phase rows in three spectral channels per instrument setting, 909 and 603 channel rows, none flagged, longest projected baseline 82.3 m. It is pinned in `source/manifest.json` and restored by the acquisition plan, and read as is: no merge, averaging or error floor was applied. The image was reconstructed from it with the public [SQUEEZE](https://github.com/fabienbaron/squeeze) code at the commit pinned for Betelgeuse, with the same prior and hyperparameter (maximum entropy, µ = 10, uniform-disc start, 128 pixels of 0.4 mas); `source/reference/squeeze-command.txt` records the build and the command, and the raw posterior mean is committed because no archive serves it. The interferometric beam, half the mean wavelength over the longest baseline, is 2.1 mas; `author.mts` convolves the raw image to it and that is what the lens casts. The lens palette is the heat scale used for Betelgeuse over the 1st to 99.5th percentile of the cast points; the legend reads relative intensity at 1.65 µm, not colour or temperature.
+No rotation is measured. The record uses the `cssearth-display-orientation@1`
+convention: the display axis is celestial north at the star, the display
+meridian faces Earth at the scene epoch, and no spin is propagated.
+`presentationUp: display-axis` puts that axis up, so the camera orbit lies in
+the star's equator, where the sub-Earth point is.
 
-**Colour lens.** The colour of Gaia DR3's measured spectrum of π¹ Gruis. At G = 3.6 the star is brighter than the G of about 5 below which Gaia XP photometry can saturate, blue first (Montegriffo et al. 2023, A&A 674, A33), and its RUWE of 2.9 is high, so the blue end of this colour is uncertain. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ff9a41**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). No model limb darkening is added: the giant's gravity is below the Claret & Bloemen (2011) grid, and the PIONIER lens shows its measured disc. The catalogue swatch and the minimap use the same colour; the navigation marker stays the image. [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them. No usable second spectrum was found: the only other scan (Willstrop, VizieR III/126) covers 400-650 nm, too little for a colour.
+The spectrum's samples from 380 to 780 nm are weighted by the CIE 1931 2°
+observer and converted to sRGB with the D65 white
+([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)):
+**#ff9a41**. [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts)
+writes it, and `--check` recomputes it. The disc is dimmed toward the limb by
+the power law I(mu) = mu^1.29 fitted to the PIONIER visibilities inside the
+first lobe.
 
-**Limb.** The disc is dimmed toward the limb by the power law I(mu) = mu^1.29 fitted in this package to the calibrated PIONIER visibilities of π¹ Gruis, inside the first lobe (VLTI/PIONIER H band (1.5-1.8 um); not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/pi1-gruis.json: -0.385.
+The [navigation marker](source/preparation/navigation.json) is a photosphere
+crop of the reconstruction, centred and sized from the matching frame in
+[the raster recipe](source/preparation/raster.json). It omits off-limb emission.
 
 ## Evidence
 
-- `tests/objects/unit/pi1-gruis/reconstruction.test.mts` recomputes the fit of the pinned image to the pinned file with an independent discrete Fourier transform, channel by channel at each channel's wavelength, without SQUEEZE: reduced chi-squared below 3 on squared visibilities and below 1.5 on closure phases (SQUEEZE reported 2.45 and 1.06), a uniform disc of the fitted diameter fits at least five times worse, the beam image is the raw image's convolution byte for byte and still fits the closure phases (1.3) though not the squared visibilities (55: the beam is the data's own resolution, so the display image is smoother than the data), and `author.mts --check` reproduces every authored output.
-- `tests/objects/unit/pi1-gruis/camera.test.mts` recomputes every camera field of the lens from the astrometry, the display axis and the image header through the observer-camera transform the asteroid photographs use, and checks that the axis has position angle zero and that the disc centre is the image's flux centroid.
-- `tests/objects/unit/pi1-gruis/source.test.mts` verifies every pin, that each input is downloaded or produced by a named tool, that the sphere is the fitted radius on its grid and that the radius is the fitted diameter at the stated distance, and refits the uniform disc to the pinned file.
-- `tests/objects/unit/pi1-gruis/default-view.test.mts` derives what the default camera shows from the runtime's own camera math: the sub-camera point one degree from the sub-Earth point, the display axis and celestial north straight up, the Earth direction toward the viewer. Preparation refuses a default view more than 25 degrees from a photograph lens's sub-observer point.
-- [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/pi1-gruis/` with the default camera: the photographed hemisphere faces the camera with the display axis up, the halo plate behind it and the legend in the panel.
+- An independent discrete Fourier transform, without SQUEEZE, fits the image to the pinned file at reduced chi-squared below 3 on squared visibilities and below 1.5 on closure phases (SQUEEZE reported 2.45 and 1.06). A uniform disc fits the visibilities at reduced chi-squared 51.
+- The beam-convolved image still fits the closure phases (1.3) but not the squared visibilities (55), so the display image is smoother than the data.
 - Preparation accepted 1,433 pixels with geometry; 12.8 percent of the beam-convolved flux lies outside the fitted disc and is drawn on the off-limb plate.
-- Run of 2026-09-21 (this version): [`object-package-consistency.test.mts`](https://github.com/layoutit/css.earth/blob/7e95c2e220c7d8dfb141e4cd387ac71080f3f95f/tools/contract/object-package-consistency.test.mts) (now [`src/objects/object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts)) checks that the catalogue colour #ff9a41 is the colour lens's prepared colour; `node` [`tools/objects/source-authoring/stellar-spectra/author.mts`](https://github.com/layoutit/css.earth/blob/e5f368263b/tools/objects/source-authoring/stellar-spectra/author.mts) `--check` (now [`packages/telescope-cli/authoring/stellar-spectra/author.mts`](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts)) recomputes the colour from the pinned spectrum.
+- [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) shows the default camera: the photographed hemisphere faces the camera with the display axis up.
 
 ## Known problems
 
-**The image is a reconstruction.** An interferometer records no picture. The image is the maximum-entropy solution SQUEEZE prefers among those that fit the data; a different regulariser changes the fine structure. The beam is 2.1 milliarcseconds, five pixels, so the displayed image is convolved to it and nothing finer is shown. The published image was made from the same file with a different code and is not redistributed here; this reconstruction shows the same few large bright cells.
-
-**The axis is a convention.** Where the pole really points is unknown. Celestial north up puts the image on the sphere as it appears on the sky, with the sub-Earth point on the equator; any other axis would place the same hemisphere differently. Longitudes on this sphere mean nothing beyond the image.
-
-**The default camera shows the sky as seen.** It faces Earth with celestial north up and east on the left; the sphere, the display axis and the halo plate agree with the sky view. Measured with `packages/bake/src/objects/default-view/default-view.ts` and pinned by the default-view test.
-
-**One hemisphere, one band, one week.** The far hemisphere and the poles were not observed and carry the no-data grid. The colours are a legend for relative intensity at 1.65 µm on the heat scale, not colour, temperature or albedo. The granulation pattern changes on a timescale of months.
-
-**The sky is the Sun's.** The star field behind π¹ Gruis is the shared cube baked from the Sun's position, not the sky from 162 parsecs away.
-
-**Self-luminous, so no lighting.** The star is drawn by the emissive material, the same as the Sun and Betelgeuse: the leaves carry the reconstruction's own brightness and no light direction or shadow is applied.
-- **Measured limb, other band.** The law was measured or fixed outside the visible band the colour is drawn in; the visible limb is not measured.
-- **The limb law depends on the baselines.** Inside the first lobe, where the whole disc dominates, the power law is 1.29 ± 0.11; fitted to every baseline, where the convection cells dominate, it is 0.42. The first-lobe law is drawn ([record](source/photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json), refit by `image-star.test.mts`).
+- **The image is a reconstruction.** An interferometer records no picture. The image is the maximum-entropy solution SQUEEZE prefers; a different regulariser changes the fine structure. The published image was made from the same file with a different code and is not redistributed here.
+- **The axis is a convention.** Where the pole really points is unknown. Longitudes on this sphere mean nothing beyond the image.
+- **One hemisphere, one band, one week.** The far hemisphere and the poles carry the no-data grid. The heat scale is not colour, temperature or albedo. The granulation pattern changes on a timescale of months.
+- **The colour's blue end is uncertain.** At G = 3.6 the star is bright enough for Gaia XP photometry to saturate, blue first (Montegriffo et al. 2023, A&A 674, A33), and its RUWE is high. No usable second spectrum was found.
+- **The radius is a fit.** Mayer et al. (2014) list 370 solar radii from the bolometric luminosity.
+- **The limb law depends on the baselines.** Inside the first lobe it is 1.29 ± 0.11; fitted to every baseline it is 0.42 ([record](source/photometry/pi1-gruis-pionier-2014-09-first-lobe-limb-darkening.json)). It is measured in the H band, not the visible band.
+- **The sky is the Sun's.** The star field behind π¹ Gruis is the shared cube baked from the Sun's position.
+- **Self-luminous, so no lighting.** The star is drawn by the emissive material; no light direction or shadow is applied.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

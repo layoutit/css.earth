@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "g-9-40b",
   "displayName": "G 9-40 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, lit by G 9-40; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "g-9-40b-lens-shape.webp",
+        "thumbnail": "g-9-40b-dataset-shape.webp",
         "surface": "g-9-40b-surface-shape@2x.webp",
         "poles": "g-9-40b-poles-shape@2x.webp",
         "source": {
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract"
         },
         "falseColor": false,
-        "notes": "No image or colour of G 9-40 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of g-9-40's light, as its colour lens measures it."
+        "notes": "No image or colour of G 9-40 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the colour of g-9-40's light, as its colour dataset measures it."
       }
     ]
   },

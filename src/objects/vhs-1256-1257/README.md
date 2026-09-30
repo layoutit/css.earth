@@ -12,7 +12,7 @@ VHS 1256-1257 A is one of two young, nearly identical dwarfs 21 parsecs away in 
 
 **Mass and temperature.** Dupuy et al. ([2023](https://arxiv.org/abs/2208.08448), MNRAS 519, 1688) measure the pair's dynamical total mass, 0.141 ± 0.008 solar masses, from its orbit. Their fitted mass ratio is poorly constrained (0.45 ± 0.08), but the two stars are nearly equal in brightness, so each is given half, 74 ± 4 Jupiter masses in their words. The best-fitting BT-Settl model to the pair's combined spectrum is 2,700 K.
 
-**Colour lens.** A Planck spectrum at 2,700 K through the CIE 1931 2° observer into sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). Gaia's own BP/RP spectrum of the pair exists, but it is the light of both stars and faint in the blue (BP 18.0 mag), so it is not used ([ledger](investigations.json)). Its limb is darkened by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 2,700 K (the record) and log g 5.13 (from the record's mass and radius (packages/astronomy/data/bodies/vhs-1256-1257.json)): a model, since no fit of this star's limb exists.
+**Colour dataset.** A Planck spectrum at 2,700 K through the CIE 1931 2° observer into sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). Gaia's own BP/RP spectrum of the pair exists, but it is the light of both stars and faint in the blue (BP 18.0 mag), so it is not used ([ledger](investigations.json)). Its limb is darkened by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 2,700 K (the record) and log g 5.13 (from the record's mass and radius (packages/astronomy/data/bodies/vhs-1256-1257.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** None is measured on the sky. The display axis is celestial north at the star ([rotation.json](source/preparation/rotation.json)).
 
@@ -20,7 +20,7 @@ VHS 1256-1257 A is one of two young, nearly identical dwarfs 21 parsecs away in 
 
 Run of 2026-09-23 (this version):
 
-- The four systems added with this one (VHS 1256-1257, GQ Lup, DH Tau, ROXs 42B), each captured headless at 1440 × 900 from the dev server of this version with its system overview open and no console errors ([young-imaged-systems.png](evidence/young-imaged-systems.png)).
+- The four systems added with this one (VHS 1256-1257, GQ Lup, DH Tau, ROXs 42B), each captured headless at 1440 × 900 from the dev server of this version with its system overview open and no console errors (young-imaged-systems.png).
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) puts B, on Dupuy et al.'s orbit around this star, within 2.1 of its own error bars of all eight Keck/NIRC2 positions in their Table 1.
 
 ## Known problems

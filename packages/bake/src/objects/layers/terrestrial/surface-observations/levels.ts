@@ -21,7 +21,7 @@ export function sampleTrianglePoints(faces: Pick<PreparedTriangle, "vertices">[]
   }));
 }
 
-/** The most frames one fit compares, and so the most a controlled-camera lens may cast. The fit compares every pair, so
+/** The most frames one fit compares, and so the most a controlled-camera dataset may cast. The fit compares every pair, so
  * its cost grows with the square of the count; the SPHERE survey's largest release is 85 camera-1 frames (Bamberga). */
 export const MAXIMUM_LEVEL_FRAMES = 96;
 

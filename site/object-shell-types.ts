@@ -53,9 +53,9 @@ export interface DatasetReaderText {
 }
 
 /** Volume presentations retain a longer provenance description; the shared UI publishes the same summary field as bodies. */
-export type Lens = LensControl & DatasetReaderText & { description?: string };
+export type Dataset = DatasetControl & DatasetReaderText & { description?: string };
 
-export interface LensControl {
+export interface DatasetControl {
   id: string;
   label: string;
   thumbnailUrl: string;
@@ -66,7 +66,7 @@ export interface LensControl {
   /** The surface marks missing observations with the shared no-data grid. */
   noData?: boolean;
   /** A dataset that draws a companion cloud and keeps the named dataset's prepared surface for the body itself. */
-  volume?: { objectId: string; lensId: string; surface: string };
+  volume?: { objectId: string; datasetId: string; surface: string };
   /** One step of a dataset shown as a sequence: the panel lists the group once and steps through its members. */
   step?: { group: string; label: string; autoplay?: boolean };
   facts?: Fact[];
@@ -107,10 +107,10 @@ export interface Props {
   moreFacts?: Fact[];
   galleries?: Gallery[];
   charts?: Chart[];
-  lenses?: {
+  datasets?: {
     title: PreparedTitle;
-    controls: Lens[];
-    defaultLens: string;
+    controls: Dataset[];
+    defaultDataset: string;
   };
   settings?: {
     title: PreparedTitle;

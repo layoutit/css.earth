@@ -15,7 +15,7 @@ export const FIND_PATH = '/.netlify/functions/find';
 export const FIND_QUERY_LIMIT = 200;
 /** Object rows per response: a phone sheet shows about 8, a pill such as Stars lists 1,499. */
 export const FIND_PAGE_ROWS = 40;
-export interface FindResult { readonly objectId: string; readonly id: string; readonly name: string; readonly context: string; readonly label: string; readonly href: string; readonly lensIds?: readonly string[]; }
+export interface FindResult { readonly objectId: string; readonly id: string; readonly name: string; readonly context: string; readonly label: string; readonly href: string; readonly datasetIds?: readonly string[]; }
 export interface FindObjects { readonly total: number; readonly offset: number; readonly rows: readonly CatalogueRow[]; }
 export interface FindResponse {
   readonly objects: FindObjects;
@@ -29,7 +29,7 @@ export function parseFindResults(value: unknown): FindResult[] {
   if (!Array.isArray(value)) throw new TypeError('Find results are invalid.');
   return value.map(result => {
     if (!isRecord(result) || ['objectId', 'id', 'name', 'context', 'label', 'href'].some(key => typeof result[key] !== 'string') ||
-        (result.lensIds !== undefined && (!Array.isArray(result.lensIds) || !result.lensIds.every(id => typeof id === 'string')))) throw new TypeError('Find result is invalid.');
+        (result.datasetIds !== undefined && (!Array.isArray(result.datasetIds) || !result.datasetIds.every(id => typeof id === 'string')))) throw new TypeError('Find result is invalid.');
     return result as unknown as FindResult;
   });
 }

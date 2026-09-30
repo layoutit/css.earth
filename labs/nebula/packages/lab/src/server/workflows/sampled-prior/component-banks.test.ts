@@ -29,10 +29,10 @@ async function fixture(t: { after(fn: () => Promise<void>): void }) {
   const bytes = Buffer.from(JSON.stringify(volume));
   await writeFile(join(root, 'neutral/volume.json'), bytes);
   const neutral: CompilerPin = { path: 'neutral/volume.json' };
-  const scene = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: 'empty-layers', fieldIdentity, frame, boundsArcsec,
+  const scene = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@2', id: 'empty-layers', fieldIdentity, frame, boundsArcsec,
     skyBoundsArcsec: { min: [-2, -2], max: [2, 2] }, spanArcsec: 4, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' }, neutral,
-    stars: [], lenses: [{ id: 'optical', label: 'Optical', volume: neutral, coverage: { positiveAlphaTexels: 12, recoloredTexels: 12, outsideImageTexels: 0 } }],
+    stars: [], datasets: [{ id: 'optical', label: 'Optical', volume: neutral, coverage: { positiveAlphaTexels: 12, recoloredTexels: 12, outsideImageTexels: 0 } }],
     sampling: { sliceCounts: { x: 3, y: 3, z: 3 }, imageWidth: 512, samplesPerSlab: 4, layerPlan } });
   const readPinned = (pin: CompilerPin) => sourceBytes(root, pin);
   return { root, scene, slices, readPinned };
@@ -42,7 +42,7 @@ test('registration preserves the full planned partition until compilation prunes
   const { root, scene, slices, readPinned } = await fixture(t), empty = slices.quads.filter(q => q.alphaCoverage === 0);
   assert.equal(empty.length, 6);
   let compiled = 0;
-  const result = await registerComponentBanks(root, 'registered', scene, scene.lenses, new AbortController().signal, readPinned, {
+  const result = await registerComponentBanks(root, 'registered', scene, scene.datasets, new AbortController().signal, readPinned, {
     compileVolume(input) {
       compiled++;
       assert.equal(input.slices.quads.length, 9);
@@ -52,7 +52,7 @@ test('registration preserves the full planned partition until compilation prunes
     }, validateVolume: validatePreparedCssVolume,
   });
   assert.equal(compiled, 1);
-  for (const pin of [result.neutral, result.lenses[0]!.volume]) {
+  for (const pin of [result.neutral, result.datasets[0]!.volume]) {
     const volume = validatePreparedCssVolume(JSON.parse((await readPinned(pin)).toString()));
     assert.equal(volume.resources.length, 3, 'Empty preparation-only quads must never create runtime resources.');
     assert.deepEqual(volume.stacks.flatMap(s => s.leaves.map(q => q.id)).sort(), ['x-1', 'y-1', 'z-1']);
@@ -64,7 +64,7 @@ test('component registration rejects catalogue intervals that disagree with the 
   const { root, scene, slices, readPinned } = await fixture(t);
   slices.quads[0]!.slab!.end += .125;
   await writeFile(join(root, 'neutral/volume-slices.json'), JSON.stringify(slices));
-  await assert.rejects(registerComponentBanks(root, 'registered', scene, scene.lenses, new AbortController().signal, readPinned, {
+  await assert.rejects(registerComponentBanks(root, 'registered', scene, scene.datasets, new AbortController().signal, readPinned, {
     compileVolume() { throw new Error('Invalid catalogue must fail before compile'); }, validateVolume: validatePreparedCssVolume,
   }), /Physical slab interval/);
 });
@@ -75,7 +75,7 @@ test('an allegedly pruned slab with real opacity cannot be reintroduced as trans
   const bytes = await sharp(pixels, { raw: { width: q.widthPx, height: q.heightPx, channels: 4 } }).png().toBuffer();
   await writeFile(join(root, 'neutral', q.texturePath), bytes); q.bytes = bytes.length;
   await writeFile(join(root, 'neutral/volume-slices.json'), JSON.stringify(slices));
-  await assert.rejects(registerComponentBanks(root, 'registered', scene, scene.lenses, new AbortController().signal, readPinned, {
+  await assert.rejects(registerComponentBanks(root, 'registered', scene, scene.datasets, new AbortController().signal, readPinned, {
     compileVolume() { throw new Error('Nontransparent omitted slab must fail before compile'); }, validateVolume: validatePreparedCssVolume,
   }), /omitted.*opacity/i);
 });

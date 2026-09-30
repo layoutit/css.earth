@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-149026b",
   "displayName": "HD 149026 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "thermal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
     "controls": [
       {
         "id": "thermal",
         "label": "Thermal glow",
         "qualification": "Black-body colour at its measured dayside temperature, 2,300 K. The disc itself is unresolved.",
-        "thumbnail": "hd-149026b-lens-thermal.webp",
+        "thumbnail": "hd-149026b-dataset-thermal.webp",
         "surface": "hd-149026b-surface-thermal@2x.webp",
         "poles": "hd-149026b-poles-thermal@2x.webp",
         "source": {

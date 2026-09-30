@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its oscillations give 0.82 solar masses and 9.7 solar radii; APOGEE spectra give 5,312 K at its surface. This account was drafted from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3)'s values; the sections below are the data's own.
+Its oscillations give 0.82 solar masses and 9.7 solar radii; APOGEE spectra give 5,312 K at its surface. The introduction is generated from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3)'s published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2101179335007299328, parallax 0.243 ± 0.011 mas (4120.15 pc). Radius 9.6825 +/- 0.1788 solar radii from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5270662 (Gold): Radius (Mosser scale, solar radii) 9.6825 +/- 0.1788 (https://arxiv.org/abs/2410.00102). Mass 0.8156 +/- 0.0332 solar masses from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5270662 (Gold): Mass (Mosser scale, solar masses) 0.8156 +/- 0.0332 (https://arxiv.org/abs/2410.00102). Temperature 5,312 K from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5270662 (Gold): APOGEE effective temperature (K) 5311.763 +/- 66.9539. log g 2.3803 from Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5270662 (Gold): Asteroseismic log g 2.3803 +/- 0.0048.
 
@@ -12,13 +12,11 @@ Its oscillations give 0.82 solar masses and 9.7 solar radii; APOGEE spectra give
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

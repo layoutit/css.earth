@@ -9,7 +9,7 @@
     },
     {
       "location": "public",
-      "filename": "kic-2715920-lens-color.webp",
+      "filename": "kic-2715920-dataset-color.webp",
       "bytes": 44,
       "sha256": "bfc51e12eeada2f03b180d5dfe234fc31380896d20f4c51cf8566ad081807de7"
     },
@@ -34,14 +34,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 379,
-      "sha256": "ae1c9175db240534a4c18424fc0996d05d4e3ce33c00e299e3d32a7fccb94ae7"
+      "bytes": 382,
+      "sha256": "ae8af947e1586f55519502b4f0868c8c33222600581e25eef6a4ba4ef4e7ed4c"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2181,
-      "sha256": "1ca317ae2df9315675724e50275a93e335fcb4fc31c02425010d37c86374a3fd"
+      "bytes": 2184,
+      "sha256": "b7a6ce88711fbefadb8b6c6117790384e44d61fb8eb62434f38c02a2951405c2"
     },
     {
       "location": "prepared",
@@ -53,19 +53,19 @@
       "location": "prepared",
       "filename": "content.json",
       "bytes": 1290,
-      "sha256": "32923bf60fd64711d0bc9dc2f51493b0c78bcbdad9e9d376084ef29c1fa10851"
+      "sha256": "07d28335c5525b902c3e2fb4dc06eaa0405a1feb686e4f2778d93abee1f0ced1"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 358,
-      "sha256": "fcfd20f99ad5fefc88c139442ceabfa867b4aa08ea0ef17bd5f10668e35ce942"
+      "bytes": 372,
+      "sha256": "46c874e09247f50a73e1f2cfa7c3c342fe6741902ca382c5457155ca80b49a48"
     },
     {
       "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 1000,
-      "sha256": "b7621cae659be61f35af7480813cb0267ae231903c9b455c84b64fd7ff15f6bd"
+      "filename": "datasets.json",
+      "bytes": 1014,
+      "sha256": "829495fcf98f51caabecdfe07d1043a0331e1bbcc2f8f03e3d29737e0738600a"
     },
     {
       "location": "prepared",
@@ -82,14 +82,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 272374,
-      "sha256": "befc5f31e51cb9ca5c74397f73d7db6a003cdb4a7dd95aa24b136d9dd68b4aef"
+      "bytes": 272394,
+      "sha256": "1eb0f3147f60dd33b01021ff936a22f288ca9fde4aa2ff06a8f21d451ccdfb47"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 394724,
-      "sha256": "64dade2b9efd50c523611c13e7915a37b7495fdf4f47e3bc7cca8ee593201805"
+      "bytes": 394727,
+      "sha256": "378297dcd6cadeb467192a2c93105d06d59d8cb170e1540d31aa143972bfce4e"
     },
     {
       "location": "prepared",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "mani",
   "displayName": "Máni",
@@ -35,9 +35,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "model",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "model",
     "labels": {
       "model": "Shape model"
     },

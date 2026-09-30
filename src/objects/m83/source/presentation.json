@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "m83",
   "name": "Southern Pinwheel (M83)",
-  "defaultLens": "optical",
+  "defaultDataset": "optical",
   "bank": {
     "path": "src/objects/m83/prepared/image-layers.json"
   },
@@ -17,7 +17,7 @@
     }
   ],
   "sharedInputs": [],
-  "lenses": [
+  "datasets": [
     {
       "id": "optical",
       "label": "ESO · optical",

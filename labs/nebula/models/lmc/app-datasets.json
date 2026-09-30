@@ -1,0 +1,83 @@
+{
+  "schema": "cssearth-volume-dataset-promotion@1",
+  "id": "lmc",
+  "defaultDataset": "vista-infrared",
+  "framingRadiusUnits": 5,
+  "datasets": [
+    {
+      "imageId": "vista-infrared",
+      "resultId": "lmc-clouds-vista-infrared",
+      "label": "ESO VISTA",
+      "description": "Near-infrared colors from ESO’s VISTA survey, painted onto the shared simulated LMC density cloud.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 0.95
+      }
+    },
+    {
+      "imageId": "horalek-widefield",
+      "resultId": "lmc-clouds-horalek-widefield",
+      "label": "Horálek optical",
+      "description": "Visible-light colors from Petr Horálek’s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 0.95
+      }
+    },
+    {
+      "imageId": "wise-wide-infrared",
+      "resultId": "lmc-clouds-wise-wide-infrared",
+      "label": "NASA WISE",
+      "description": "Infrared colors from NASA/IPAC WISE survey data, painted onto the shared simulated LMC density cloud.",
+      "enabledIds": [
+        "all-light"
+      ],
+      "brightness": {
+        "overall": 1,
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "density": {
+        "cutoff": 0,
+        "softness": 0.25,
+        "showRemoved": false
+      },
+      "stars": {
+        "enabled": true,
+        "brightness": 1,
+        "size": 0.95
+      }
+    }
+  ]
+}

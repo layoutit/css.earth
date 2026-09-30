@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hat-p-3b",
   "displayName": "HAT-P-3 b",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "thermal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
     "controls": [
       {
         "id": "thermal",
         "label": "Thermal glow",
         "qualification": "Black-body colour at its measured dayside temperature, 1,268 K. The disc itself is unresolved.",
-        "thumbnail": "hat-p-3b-lens-thermal.webp",
+        "thumbnail": "hat-p-3b-dataset-thermal.webp",
         "surface": "hat-p-3b-surface-thermal@2x.webp",
         "poles": "hat-p-3b-poles-thermal@2x.webp",
         "source": {

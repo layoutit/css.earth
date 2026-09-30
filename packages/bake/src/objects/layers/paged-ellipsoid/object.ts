@@ -49,7 +49,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const canonical = (value: unknown): string => JSON.stringify(value, (_key, item: unknown) => item && typeof item === 'object' && !Array.isArray(item)
     ? Object.fromEntries(Object.entries(item).sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0)) : item);
   // Read the published plan before any stage below rewrites a file in this output directory.
-  const publishedPlan = reuseImages ? { scene: await published('scene'), 'surface-raster-plan': await published('surface-raster-plan'), lenses: await published('lenses') } : null;
+  const publishedPlan = reuseImages ? { scene: await published('scene'), 'surface-raster-plan': await published('surface-raster-plan'), datasets: await published('datasets') } : null;
   if (reuseImages) {
     const previous = await published('authored-preparation');
     const publishedSources = new Map(requireArray(previous.sources, 'published sources').map(source => requireRecord(source, 'published source'))
@@ -85,8 +85,8 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   // It reads only the scene geometry, so a reuse-images run rebuilds it as well.
   const catalog = destinations ? await preparePlaces(context) : undefined;
   if (catalog && destinations && catalog.count > destinations.maxEntries) throw new TypeError('Prepared places exceed the authored destination capability.');
-  const lenses = { ...bindingSource, controls: bindingSource.controls.map(({ surfacePagePrefix, focus, ...lens }) => {
-    return { ...lens,
+  const datasets = { ...bindingSource, controls: bindingSource.controls.map(({ surfacePagePrefix, focus, ...dataset }) => {
+    return { ...dataset,
     ...(surfacePagePrefix ? { surfaceUrls: raster.surfacePageUrls(surfacePagePrefix, surfaceRasterPlan.pages.length) } : {}),
     ...(focus ? { camera: { ...prepareLocationCamera(scene, prepareLocationPoint(scene, focus.longitude, focus.latitude), focus.zoom, { body: parseBodyAttitude(scene[config.sceneBodyKey]), camera: config.camera, northUp: focus.northUp }), ...(focus.transition ? { transition: focus.transition } : {}) } } : {}),
   }; }) };
@@ -94,13 +94,13 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const content = { ...preparedContent.content, ...(catalog ? { destinations: { searchLabel: config.destinations.searchLabel, description: `${catalog.count.toLocaleString('en')}${config.destinations.descriptionSuffix}` } } : {}) };
   const textureLevels = reuseImages ? await json(resolve(outputDirectory, 'texture-levels.json')).then(value => value === null ? null : requireRecord(value, 'published texture-levels') as unknown as Awaited<ReturnType<typeof prepareTextureLevels>>,
       error => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error; })
-    : await prepareTextureLevels({ config, plan: scene, lenses, publicDirectory });
+    : await prepareTextureLevels({ config, plan: scene, datasets, publicDirectory });
   if (textureLevels) await write(outputDirectory, 'texture-levels', textureLevels);
-  if (publishedPlan && canonical(publishedPlan.lenses) !== canonical(lenses)) throw new Error(`${descriptor.id}: lenses differ from the published preparation; run the full preparation.`);
+  if (publishedPlan && canonical(publishedPlan.datasets) !== canonical(datasets)) throw new Error(`${descriptor.id}: datasets differ from the published preparation; run the full preparation.`);
   const controls = requireObjectControls(preparedContent.controls, descriptor.id);
-  const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, lenses, sky, sun, catalog, textureLevels, controls });
+  const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, datasets, sky, sun, catalog, textureLevels, controls });
   const definition = withFocusedCamera(rawDefinition, sky);
-  for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(catalog ? { places: catalog } : {}), lenses, content, runtime: definition })) await write(outputDirectory, name, value);
+  for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(catalog ? { places: catalog } : {}), datasets, content, runtime: definition })) await write(outputDirectory, name, value);
   await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true} });
   return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content, recomputedImages };
 }

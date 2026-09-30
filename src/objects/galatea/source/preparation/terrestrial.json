@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "galatea",
   "displayName": "Galatea",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Neptune-system ephemeris and IAU/WGCCRE rotation; Karkoschka (2003) measured ellipsoid axes with assumed synchronous alignment."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

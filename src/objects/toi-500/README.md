@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Serrano et al. 2022. It is also HIP 34269. This account was drafted from Serrano et al. 2022's values; the sections below are the data's own.
+Its radius and temperature follow Serrano et al. 2022. It is also HIP 34269. The introduction is generated from Serrano et al. 2022's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 5509620021956148736, parallax 21.093 ± 0.010 mas (47.41 pc). Radius 0.678 +/- 0.016 solar radii from Serrano et al. 2022, the stellar radius of the default parameter set of TOI-500 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract). Mass 0.74 +/- 0.017 solar masses from Serrano et al. 2022, the stellar mass of the default parameter set of TOI-500 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract). Temperature 4,440 K from Serrano et al. 2022, the stellar temperature of the default parameter set of TOI-500 b in the NASA Exoplanet Archive. log g 4.64 from the mass and radius.
 
@@ -12,8 +12,7 @@ Its radius and temperature follow Serrano et al. 2022. It is also HIP 34269. Thi
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
@@ -22,6 +21,5 @@ Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** TOI-500 d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity).
 - **Not shown.** TOI-500 e: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity).
 - **Not shown.** TOI-500 c: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity).
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

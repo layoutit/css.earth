@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/vhs-1256-1257-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "shape",
       "output": "vhs-1256-1257-b-surface-{id}{suffix}.webp",
-      "thumbnail": "vhs-1256-1257-b-lens-{id}.webp",
+      "thumbnail": "vhs-1256-1257-b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {

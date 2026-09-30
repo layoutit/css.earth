@@ -1,13 +1,13 @@
 /**
- * The difference-map tool in the real Reconstruction tab, for two saved image lenses.
+ * The difference-map tool in the real Reconstruction tab, for two saved image datasets.
  *
- * Read-only. Per lens: the round button sits directly under Levels; toggling it mounts the server's map on the
+ * Read-only. Per dataset: the round button sits directly under Levels; toggling it mounts the server's map on the
  * original image's registered quad (same plane transform, same camera, same on-screen box); the legend labels
  * the scale; orbiting hides the map and says why; the Earth view shows it again; and the unpainted density has
- * no tool. Args: [base-url] [output-directory] [lensResultId…].
+ * no tool. Args: [base-url] [output-directory] [datasetResultId…].
  *
- * A lens outside the lab's current finite-lens bundle (an older model's lens) is shown by rewriting, in this
- * test browser only, the catalogue response so that lens is its image's saved result. Nothing is written.
+ * A dataset outside the lab's current finite-dataset bundle (an older model's dataset) is shown by rewriting, in this
+ * test browser only, the catalogue response so that dataset is its image's saved result. Nothing is written.
  */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -18,8 +18,8 @@ import { isResultName } from '../src/features/result-name.ts';
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4331';
 const output = resolve(process.argv[3] ?? '.local/nebula-lab/difference-map');
-const lenses = process.argv.slice(4).filter(isResultName);
-if (!lenses.length) throw new TypeError('Usage: browser-difference-map [base-url] [output-directory] <lensResultId…>');
+const datasets = process.argv.slice(4).filter(isResultName);
+if (!datasets.length) throw new TypeError('Usage: browser-difference-map [base-url] [output-directory] <datasetResultId…>');
 await mkdir(output, { recursive: true });
 
 const differenceRoot = '#viewer .reconstruction-difference-projection', originalRoot = '#viewer .reconstruction-original-projection';
@@ -57,7 +57,7 @@ try {
     }
     await route.fulfill({ response, json: catalogue });
   });
-  for (const [index, id] of lenses.entries()) {
+  for (const [index, id] of datasets.entries()) {
     const prepared = await (await fetch(`${base}/__nebula/reconstruction/result/${id}`)).json();
     pinned = { resultId: id, imageId: prepared.imageId, prepared };
     stage = `load ${id.slice(0, 8)}`;
@@ -82,7 +82,7 @@ try {
     const legend = await page.locator(`[data-difference-legend="${id}"]`).innerText();
     assert.match(legend, /-64[\s\S]*±6[\s\S]*\+64/, legend);
     const mapFor = await page.locator(differenceRoot).evaluate(node => (node as HTMLElement).dataset.differenceResult);
-    assert.equal(mapFor, id, 'the map belongs to another lens');
+    assert.equal(mapFor, id, 'the map belongs to another dataset');
     await page.screenshot({ path: `${output}/earth-${index}-${id.slice(0, 8)}.png` });
 
     // Aligned: the difference plane is the original's registered plane, under the same camera, on the same box.
@@ -126,5 +126,5 @@ try {
   }
   assert.deepEqual(errors, [], `Console errors: ${errors.join(' | ')}`);
 } finally { await browser.close(); }
-await writeFile(`${output}/report.json`, JSON.stringify({ base, lenses, errors, report }, null, 2) + '\n');
-console.log('DIFFERENCE_MAP_BROWSER_OK', output, lenses.length);
+await writeFile(`${output}/report.json`, JSON.stringify({ base, datasets, errors, report }, null, 2) + '\n');
+console.log('DIFFERENCE_MAP_BROWSER_OK', output, datasets.length);

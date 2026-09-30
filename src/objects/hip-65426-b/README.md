@@ -12,7 +12,7 @@ HIP 65426 b is a young giant planet about 90 au from its star. JWST imaged it fr
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape lens.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
 
 **Rotation.** No rotation period or spin axis of HIP 65426 b is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

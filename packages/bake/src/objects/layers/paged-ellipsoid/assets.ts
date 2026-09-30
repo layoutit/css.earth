@@ -59,8 +59,8 @@ if (mode !== 'materials') {
   const inputs = new Map<string, string | Buffer>();
   const focusByMap = new Map<string, {longitude?: number} | undefined>();
   if (mode !== 'maps') {
-    const bindings = parseMapFocusBindings(await readJsonSource(source('content/lens-bindings.json')));
-    for (const lens of bindings.controls) if(lens.surfacePagePrefix) focusByMap.set(lens.surfacePagePrefix,lens.focus);
+    const bindings = parseMapFocusBindings(await readJsonSource(source('content/dataset-bindings.json')));
+    for (const dataset of bindings.controls) if(dataset.surfacePagePrefix) focusByMap.set(dataset.surfacePagePrefix,dataset.focus);
   }
   for (const map of surfaceMaps) {
     let input: string | Buffer = source(map.path);
@@ -93,7 +93,7 @@ if (mode !== 'materials') {
       const preview = await preparePagedSurfaceMap({ config: { ...config, surface: { ...config.surface, width: 2048, height: 1024 } }, sourceDirectory, map: { ...map, nativePhotographicSampling: false } });
       input = await sharp(preview.data, { raw: preview.info }).png().toBuffer();
     }
-    await prepareLensThumbnail(input,map.thumbnail,focusByMap.get(map.name)?.longitude ?? null,map.thumbnailRegion);
+    await prepareDatasetThumbnail(input,map.thumbnail,focusByMap.get(map.name)?.longitude ?? null,map.thumbnailRegion);
   }
 }
 if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps' && mode !== 'extras') await prepareMaterialBanks();
@@ -648,7 +648,7 @@ function hexRgb(value: string) {
   ));
 }
 
-async function prepareLensThumbnail(input: string | Buffer, filename: string, longitude: number | null = null, region: {longitude?: number; latitude?: number; spanDegrees?: number} = {}) {
+async function prepareDatasetThumbnail(input: string | Buffer, filename: string, longitude: number | null = null, region: {longitude?: number; latitude?: number; spanDegrees?: number} = {}) {
   const metadata = await sharp(input).metadata();
   if (metadata.width === undefined || metadata.height === undefined) throw new Error("Map thumbnail dimensions are missing.");
   const centerLongitude = region.longitude ?? longitude ?? 0;

@@ -1,0 +1,41 @@
+{
+  "capturedAt": "2026-09-09T23:12:20.083Z",
+  "datasets": [
+    {
+      "imageId": "vista-infrared",
+      "resultId": "lmc-clouds-vista-infrared",
+      "appearance": {
+        "saturation": 1.3,
+        "detailStrength": 1,
+        "detailScale": 24,
+        "brightness": 0.85,
+        "gamma": 0.9
+      },
+      "identityEvidence": "active.displayedResultId"
+    },
+    {
+      "imageId": "horalek-widefield",
+      "resultId": "lmc-clouds-horalek-widefield",
+      "appearance": {
+        "saturation": 2.5,
+        "detailStrength": 1.95,
+        "detailScale": 96,
+        "brightness": 1.3,
+        "gamma": 1.3
+      },
+      "identityEvidence": "saved completed per-image job"
+    },
+    {
+      "imageId": "wise-wide-infrared",
+      "resultId": "lmc-clouds-wise-wide-infrared",
+      "appearance": {
+        "saturation": 1,
+        "detailStrength": 0,
+        "detailScale": 24,
+        "brightness": 1,
+        "gamma": 1
+      },
+      "identityEvidence": "saved per-result applied density controls; no newer personal appearance or job stored"
+    }
+  ]
+}

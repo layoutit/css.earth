@@ -18,7 +18,7 @@ export function parseAuthoringManifest(value:unknown) {
 const fact=shape({id:text,label:text,value:text});
 const resource=shape({label:text,role:text,description:text,href:text});
 export const parseAuthoringContent=shape({panel:shape({facts:array(fact),moreFacts:array(fact)}),
-  lenses:shape({controls:array(shape({id:text,label:text,source:shape({url:text})}))}),
+  datasets:shape({controls:array(shape({id:text,label:text,source:shape({url:text})}))}),
   settings:shape({controls:array(shape({name:text,checked:optional(boolean)}))}),resources:array(resource),provenance:requireRecord});
 export const parseAuthoringNavigation=shape({source:value=>Object.assign({},requireRecord(value),shape({path:text})(value))});
 export function parseAuthoringSolid(value:unknown) {

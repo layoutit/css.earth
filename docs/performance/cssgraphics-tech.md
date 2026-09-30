@@ -369,9 +369,8 @@ Sources for the static-variable and cadence distinctions:
 
 ### Local historical publication experiments
 
-The untracked local file
-`/Users/ekrof/fed/polycss/notes/software-renderer-bible.md`
-records a specific Mario CodePen experiment on PolyCSS 0.2.11. Its SR-01 table
+PolyCSS's software-renderer notes (outside this repository)
+record a specific Mario CodePen experiment on PolyCSS 0.2.11. Its SR-01 table
 reports 180 animation ticks:
 
 | Publication | Attempts | Writes | Overwrites coalesced | Tick p50 / p95 |
@@ -388,8 +387,7 @@ mutations per due tick, 63.23% lower catch-up callback p95, and pixel-identical
 unchanged. These are historical ledger results, not benchmarks rerun here or
 measurements of cssEarth. The current ledger explicitly leaves SR-10 unexecuted.
 
-The local Morph target implementation was also inspected at
-`/Users/ekrof/fed/polycss/packages/morph/src/render/preparedDomTarget.ts`.
+PolyCSS's Morph prepared-DOM target (`packages/morph/src/render/preparedDomTarget.ts` in the PolyCSS repository) was also inspected.
 It binds stable elements and guards individual transform, visibility, opacity and
 image-position writes. It does not implement a generic batch queue. This source
 file is untracked locally; the pinned Cityflow import demonstrates the consumer

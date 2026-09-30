@@ -56,7 +56,7 @@
       "id": "recorded-survey-4",
       "subject": "Additional mapped surface fields",
       "status": "unresolved",
-      "finding": "The radar images are delay-Doppler measurements, not an optical texture. Disk-integrated spectra, thermal modeling and unregistered alternate convex shapes do not qualify additional surface lenses. No resolved optical map or independently registered composition, temperature, gravity or slope grid was identified in this bounded source survey. No resolved optical surface map is supplied.",
+      "finding": "The radar images are delay-Doppler measurements, not an optical texture. Disk-integrated spectra, thermal modeling and unregistered alternate convex shapes do not qualify additional surface datasets. No resolved optical map or independently registered composition, temperature, gravity or slope grid was identified in this bounded source survey. No resolved optical surface map is supplied.",
       "revisitWhen": "An acquired field with defined units, coverage and registration to the selected radar mesh; a bulk quantity or unregistered alternative shape does not qualify it.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ra-shalom/README.md"

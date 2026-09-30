@@ -9,8 +9,8 @@ test('arrival fits every viewport at the exact prepared perspective', () => {
   const frame = { referenceFrame: 'world', epochJdTt: 1, originM: [0, 0, 0] as const,
     presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1] as const, metersPerUnit: 1, bodyRadiusM: 1000 };
   const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
-  const arrival: PreparedArrivalView = { defaultLens: 'photo', lensIds: ['photo'], rotation,
-    billboard: { url: '/scenes/body/arrival.webp', size: 1024, focalPixels: 1000, distanceM: 8000, lens: 'photo', rotation } };
+  const arrival: PreparedArrivalView = { defaultDataset: 'photo', datasetIds: ['photo'], rotation,
+    billboard: { url: '/scenes/body/arrival.webp', size: 1024, focalPixels: 1000, distanceM: 8000, dataset: 'photo', rotation } };
   for (const focalPixels of [338, 710, 1247]) for (const distanceUnits of [2200, 4000, 8000]) {
     const optics = { focalPixels, principalOffsetPixels: [0, 0] as const };
     const target = worldCameraFromCenteredPresentation({ rotation, distanceUnits }, frame, optics);
@@ -46,8 +46,8 @@ test('arrival image shares the detail root position when shell chrome offsets th
   const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
   const optics = { focalPixels: 1000, principalOffsetPixels: [0, 0] as const,
     visibleRect: { left: -410, right: 410, top: -400, bottom: 456 } };
-  const arrival: PreparedArrivalView = { defaultLens: 'photo', lensIds: ['photo'], rotation,
-    billboard: { url: '/scenes/body/arrival.webp', size: 1024, focalPixels: 1000, distanceM: 10000, lens: 'photo', rotation } };
+  const arrival: PreparedArrivalView = { defaultDataset: 'photo', datasetIds: ['photo'], rotation,
+    billboard: { url: '/scenes/body/arrival.webp', size: 1024, focalPixels: 1000, distanceM: 10000, dataset: 'photo', rotation } };
   const camera = worldCameraFromCenteredPresentation({ rotation, distanceUnits: 10000 }, frame, optics);
   const controller = new AbortController();
   const billboard = await prepareArrivalBillboard(stage, arrival, frame, controller.signal);

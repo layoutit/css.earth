@@ -11,7 +11,7 @@ npm install @cssearth/catalog
 ```ts
 import { readCatalog } from '@cssearth/catalog'
 
-const buffer = await fetch('/data/catalogs/stars/v1/stars.gxct').then((r) => r.arrayBuffer())
+const buffer = await fetch(catalogUrl).then((r) => r.arrayBuffer())
 const stars = readCatalog(buffer)
 
 stars.count                 // 117955

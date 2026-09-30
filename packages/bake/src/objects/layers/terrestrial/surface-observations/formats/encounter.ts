@@ -14,18 +14,18 @@ import { castSourceRays } from '../geometry.ts';
 import { cameraFrame } from '../footprint.ts';
 import { retainedPhotometry, publishedPhotometry } from '../photometry.ts';
 import { deriveLimits } from '../limits.ts';
-import { LENS_KEYS, MOSAIC_KEYS, OPTIONAL_LENS_KEYS, displayBasis, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.ts';
+import { DATASET_KEYS, MOSAIC_KEYS, OPTIONAL_DATASET_KEYS, displayBasis, parseDisplay, validateEnvelope, validateTransfer } from '../recipe.ts';
 
 const CONTEXT = 'encounter photography recipe';
 
-export const parseEncounterLens = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),
+export const parseEncounterDataset = shape({ id: text, format: text, consumer: text, metadata: shape({ label: text, coverage: text }),
   frames: array(shape({ id: text, path: text, labelPath: text, controlPath: text })), transfer: surfaceTransfer,
   photometry: publishedOr(shape({ model: text, maximumGain: number })), selection: optional(text), levelMatching: optional(parseLevelMatching), display: parseDisplay });
 
 export function validateEncounterRecipe(value: unknown, sourceGeometry: unknown) {
-  checkKeys(value, [...LENS_KEYS], [...MOSAIC_KEYS, ...OPTIONAL_LENS_KEYS], CONTEXT);
+  checkKeys(value, [...DATASET_KEYS], [...MOSAIC_KEYS, ...OPTIONAL_DATASET_KEYS], CONTEXT);
   for (const frame of requireArray(requireRecord(value).frames)) checkKeys(frame, ['id', 'path', 'labelPath', 'controlPath'], [], `${CONTEXT} frame`);
-  const recipe = decodeProfile(parseEncounterLens, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
+  const recipe = decodeProfile(parseEncounterDataset, value, `Invalid source-bound ${CONTEXT}.`), geometry = parseSurfaceGeometry(sourceGeometry);
   validateEnvelope(recipe, recipe.frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
     { selections: ['lowest-emission', 'finest-resolution'], displays: ['percentiles'], maximumFrames: 8, maximumLevelGain: 3, samplesPerTriangle: 'optional' }, CONTEXT);
   validateTransfer(recipe.transfer, geometry, CONTEXT);
@@ -51,9 +51,9 @@ export function validateEncounterImageReference(control: { registration: { metho
 
 export const encounterFormat: SurfaceObservationFormat = {
   validate: validateEncounterRecipe,
-  paths: value => parseEncounterLens(value).frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
+  paths: value => parseEncounterDataset(value).frames.flatMap(f => [f.path, f.labelPath, f.controlPath]),
   async load(value, { sourceDirectory, source, radial, config }) {
-    const recipe = parseEncounterLens(value), shape = await source.validatePath(config.geometry.radialTerrain.path);
+    const recipe = parseEncounterDataset(value), shape = await source.validatePath(config.geometry.radialTerrain.path);
     const photometry = 'referenceDegrees' in recipe.photometry ? await publishedPhotometry(sourceDirectory, source.manifest, recipe.photometry) : retainedPhotometry(recipe.photometry);
     const frames: ObservationFrame[] = [], references = new Map<string, EncounterReference>();
     let units = '';

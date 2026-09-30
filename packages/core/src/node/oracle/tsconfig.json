@@ -1,0 +1,15 @@
+{
+  "extends": "../../../../../tsconfig.json",
+  "include": [
+    "../../../../bake/src/objects/layers/terrestrial/fixtures/sbmt/**/*.mts",
+    "../../../../../.github/scripts/checks/test-fits.mts",
+    "../../../../bake/cli/test-sbmt.mts",
+    "../../../../bake/src/delivery/fixtures/external-modules.d.mts",
+    "../../../../bake/src/objects/raster/fixtures/isis-geotiff-grid.mts",
+    "../../../../bake/src/objects/raster/fixtures/geotiff-image.mts",
+    "../../../../bake/src/objects/raster/fixtures/lunar-mi-quality.mts",
+    "../../../../bake/src/objects/layers/terrestrial/fixtures/reflectance-mosaics.mts",
+    "../../../../bake/src/objects/layers/observation/fixtures/fits/archive-inputs.mts"
+  ],
+  "exclude": []
+}

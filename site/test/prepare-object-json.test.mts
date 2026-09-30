@@ -1,4 +1,6 @@
 import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
+import { fileURLToPath } from 'node:url';
+import { preparedObjectText } from '@cssearth/objects/node';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '@cssearth/objects/node/source-test';
@@ -26,8 +28,8 @@ for (const object of SCENE_OBJECTS) {
   test(`${object.id}: generic JSON transport preserves the complete prepared definition`, async () => {
     const descriptor = parseObjectDescriptor(await readFile(new URL(`../../src/objects/${object.id}/object.json`, import.meta.url), 'utf8'));
     assert.ok(descriptor.prepared);
-    const raw = await readFile(new URL(`../../src/objects/${descriptor.id}/${descriptor.prepared.url}`, import.meta.url));
-    const envelope = readPreparedObject(JSON.parse(raw.toString('utf8')), descriptor, data => data);
+    const raw = await preparedObjectText(fileURLToPath(new URL(`../../src/objects/${descriptor.id}/`, import.meta.url)), descriptor);
+    const envelope = readPreparedObject(JSON.parse(raw), descriptor, data => data);
     const runtimeDefinition = await loadObjectTestDefinition(object.id);
     assert.deepEqual(envelope.data, JSON.parse(JSON.stringify(runtimeDefinition)));
     assert.equal(envelope.id, object.id);

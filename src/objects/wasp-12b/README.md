@@ -1,10 +1,10 @@
 # WASP-12 b
 
-**Temperature maps.** The dataset selector groups 2010, 2013 under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the [browser check](evidence/dataset-groups/browser.json).
+**Temperature maps.** The dataset selector groups 2010, 2013 under one entry. The existing arrows select each map with its own description, source and legend. Dataset IDs and direct links are unchanged. See [dataset groups](../../../docs/reader-text.md#dataset-groups) and the browser check.
 
 ## Sources
 
-It is the only planet known around WASP-12. Its orbit and size follow Leonardi et al. 2024's fit, the archive's default. This account was drafted from Leonardi et al. 2024's values; the sections below are the data's own.
+It is the only planet known around WASP-12. Its orbit and size follow Leonardi et al. 2024's fit, the archive's default. The introduction is generated from Leonardi et al. 2024's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.965 Jupiter radii from Leonardi et al. 2024 (2024A&A...686A..84L), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract): 140,481.8 km at 71,492 km per Jupiter radius. GM from the mass 1.47 Jupiter masses (Collins et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153...78C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -12,7 +12,7 @@ It is the only planet known around WASP-12. Its orbit and size follow Leonardi e
 
 **Colour.** A black body at the 3,028 K dayside brightness temperature measured in secondary eclipse at 0.9 µm (López-Morales et al. 2010, dayside brightness temperature at 0.9 µm (NASA Exoplanet Archive emission table)): #ffb96f. Chosen from the archive's emission rows by rule: 1 measured of 42 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.
 
-**Two maps that disagree.** Bell et al. (2019, [MNRAS 489, 1995](https://doi.org/10.1093/mnras/stz2018); [arXiv:1906.04742](https://arxiv.org/abs/1906.04742)) fitted two Spitzer phase curves of WASP-12 b, taken in 2010 (program 70060) and 2013 (program 90186). Two lenses show their 3.6 µm fits, one per visit, as [phase-curve-2010.json](source/science/bell-2019/phase-curve-2010.json) and [phase-curve-2013.json](source/science/bell-2019/phase-curve-2013.json). Each is the paper's fiducial first-order sinusoid, F_p = F_day [1 + C1 (cos ψ − 1) + D1 sin ψ] with ψ counted from mid-eclipse (section 3.1), transcribed from Table A2. The Cowan & Agol (2008, [ApJ 678, L129](https://doi.org/10.1086/589232)) inversion turns each into its one map of longitude, through the [`published-phase-curve-map`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) format. The 2010 map is hottest 33° east of noon; the 2013 map is hottest 14° west. The paper finds this change at 6.4σ with its fiducial pipeline and counts it as evidence that the hot spot moves. Each legend says the other visit disagrees. The palette runs from 1,000 to 3,100 K on both lenses, in false colour. Every latitude is drawn alike. The maps are drawn under the star's light like the colour lens; with shadows on, the night half is dark.
+**Two maps that disagree.** Bell et al. (2019, [MNRAS 489, 1995](https://doi.org/10.1093/mnras/stz2018); [arXiv:1906.04742](https://arxiv.org/abs/1906.04742)) fitted two Spitzer phase curves of WASP-12 b, taken in 2010 (program 70060) and 2013 (program 90186). Two datasets show their 3.6 µm fits, one per visit, as [phase-curve-2010.json](source/science/bell-2019/phase-curve-2010.json) and [phase-curve-2013.json](source/science/bell-2019/phase-curve-2013.json). Each is the paper's fiducial first-order sinusoid, F_p = F_day [1 + C1 (cos ψ − 1) + D1 sin ψ] with ψ counted from mid-eclipse (section 3.1), transcribed from Table A2. The Cowan & Agol (2008, [ApJ 678, L129](https://doi.org/10.1086/589232)) inversion turns each into its one map of longitude, through the [`published-phase-curve-map`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.ts) format. The 2010 map is hottest 33° east of noon; the 2013 map is hottest 14° west. The paper finds this change at 6.4σ with its fiducial pipeline and counts it as evidence that the hot spot moves. Each legend says the other visit disagrees. The palette runs from 1,000 to 3,100 K on both datasets, in false colour. Every latitude is drawn alike. The maps are drawn under the star's light like the colour dataset; with shadows on, the night half is dark.
 
 | Quantity | 2010 map | Bell et al. 2010 | 2013 map | Bell et al. 2013 |
 | --- | --- | --- | --- | --- |
@@ -34,17 +34,16 @@ It is the only planet known around WASP-12. Its orbit and size follow Leonardi e
 
 ## Evidence
 
-Run of 2026-09-25 (this version): [`published-phase-curve-map.test.mts`](https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/published-phase-curve-map.test.mts) (now [`packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts)) holds both maps to Table A2: the day side exactly, the night sides and peak offsets within their uncertainties, the peak equal to SPCA's −atan2(D1, C1), and the 2010 map warmer east of noon, the 2013 map west of it.
+Run of 2026-09-25 (this version): [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts) holds both maps to Table A2: the day side exactly, the night sides and peak offsets within their uncertainties, the peak equal to SPCA's −atan2(D1, C1), and the 2010 map warmer east of noon, the 2013 map west of it.
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-12b.json).
 
-
 ## Known problems
 
-- **The two visits disagree.** Both maps are the same paper's fits to the same camera, three years apart. Nothing here decides which is right; each lens names the other.
+- **The two visits disagree.** Both maps are the same paper's fits to the same camera, three years apart. Nothing here decides which is right; each dataset names the other.
 - **Longitude only, largest pattern only.** A first-order phase curve cannot see north and south, and nothing finer than a hemisphere is measured.
 - **Brightness temperature, not temperature.** Each value is a black body with the observed 3.6 µm brightness, against a star temperature the paper's own row implies.
 - **Shape.** The paper expects the planet to be stretched by its star; the maps are drawn on the package's sphere.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "WASP-12b" (revision 1374242282), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "WASP-12b" (revision 1374242282) verbatim, CC BY-SA 4.0.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

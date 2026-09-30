@@ -1,7 +1,6 @@
 import { createContextLocator } from './context-locator.js';
 import type { PreparedWorldContext, PreparedContextBody } from '../prepared-data/world-context.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
-import { createContextSelectionPolicy } from './context-presentation-policy.js';
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
 import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
@@ -148,8 +147,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let presentationRevision = 0, policyDirty = true;
   let distantNavigationActive = false;
   const contextFrames = createWorldContextFrameReceiver();
-  let previousHeader: { emphasizedId: string | null; selectionStrength: number; otherSystemOpacity: number; width: number; height: number } | null = null;
-  const selectionPolicy = createContextSelectionPolicy(plan);
+  let previousHeader: { emphasizedId: string | null; otherSystemOpacity: number; width: number; height: number } | null = null;
   let publishCount = 0;
   const createMarker = createWorldContextMarkerFactory(host.ownerDocument);
   // Orbit roots clone one template too. Bars draw inside the root, which places and orders them (.context-orbit-bars in
@@ -237,7 +235,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   const depthOrder = createDepthOrder(bodies, depthBase);
   // Hidden bodies leave the paint order, except the selected one.
   const refreshDepthBodies = () => depthOrder.setMembers(bodies.filter(entry => !entry.bodyHidden || entry === selectedEntry));
-  let overview = false;
+  let overview = false, overviewSelection = false;
   let highlighting = false;
   let selectionPreview: string | null | undefined;
   let navigationInFlight = false;
@@ -321,7 +319,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       return { world, viewport: { ...viewport,
         widthPixels: viewport.widthPixels ?? host.clientWidth, heightPixels: viewport.heightPixels ?? host.clientHeight },
         contextCommittedId: contextFrames.committedId,
-        selectedId: selectedEntry.body.id, overview, selectionPreview, navigationInFlight, rotationActive: rotationPhase === 'dragging',
+        selectedId: selectedEntry.body.id, overview, overviewSelection, selectionPreview, navigationInFlight, rotationActive: rotationPhase === 'dragging',
         preserveCommittedAnnotations: rotationPhase === 'released',
         labelBlockers: frameBlockers.length ? [...labelBlockers, ...frameBlockers] : labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
@@ -359,11 +357,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       selectionPreview = id;
       refresh();
     },
-    setOverview(enabled: boolean) {
-      if (overview === enabled || destroyed) return;
+    setOverview(enabled: boolean, preserveSelection = false) {
+      const selected = enabled && preserveSelection;
+      if ((overview === enabled && overviewSelection === selected) || destroyed) return;
       settleHover();
       invalidatePolicy();
       overview = enabled;
+      overviewSelection = selected;
       refresh();
     },
     setBodyVisibility(next: BodyVisibility) {
@@ -467,7 +467,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       presentationRevision++;
       const { ranksChanged, changed: depthChanged } = depthOrder.update(world.pose.orientationXyzw, rotating, selectedEntry);
       const { emphasizedId, width, height } = frame;
-      const selectionStrength = selectionPolicy.strengthAt(emphasizedId, world.pose.positionM);
       // Inside the focus star's system, other systems' bodies stay clickable but read as not belonging to it.
       const starField = starFieldFade(Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]!)), plan.system);
       const otherSystemOpacity = systemFade.of(0) > .5
@@ -477,9 +476,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;
       const policyChanged = resized || distantNavigationChanged || policyDirty || previousHeader?.emphasizedId !== emphasizedId ||
-        previousHeader?.selectionStrength !== selectionStrength || previousHeader?.otherSystemOpacity !== otherSystemOpacity;
+        previousHeader?.otherSystemOpacity !== otherSystemOpacity;
       policyDirty = false;
-      previousHeader = { emphasizedId, selectionStrength, otherSystemOpacity, width, height };
+      previousHeader = { emphasizedId, otherSystemOpacity, width, height };
       if (!cameraChanged && !policyChanged && !depthChanged && !interactiveHover && delta.changes.size === 0) {
         skippedPublications++;
         return;
@@ -519,8 +518,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         if (mask === 0) continue;
         const contextEmphasis = (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1) *
           (!entry.hovered && !systemFade.inFocusSystem(entry.index) ? otherSystemOpacity : 1);
-        const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) * contextEmphasis;
-        // All three visual parts share this one zoom/selection alpha and
+        const emphasis = contextEmphasis;
+        // All three visual parts share this one zoom/context alpha and
         // movement transform. The pseudos only own annotation visibility.
         const plannedShown = (visible || (annotationVisible && (entry.indicatorShown || entry.labelShown))) && markerOpacity > 0;
         // Coasting holds membership: a shown body stays shown and fades out if the plan drops it; a hidden one waits.

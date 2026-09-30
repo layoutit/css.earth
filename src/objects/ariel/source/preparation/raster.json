@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/ariel/",
   "sourceWidth": 5760,
   "sourceHeight": 2880,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "ariel-{id}{suffix}.webp",
-      "thumbnail": "ariel-lens-{id}.webp",
+      "thumbnail": "ariel-dataset-{id}.webp",
       "source": "observations/aumap-cyl-180180.cub.gz",
       "falseColor": false,
       "science": {
@@ -60,7 +60,7 @@
     {
       "id": "elevation",
       "output": "ariel-{id}{suffix}.webp",
-      "thumbnail": "ariel-lens-{id}.webp",
+      "thumbnail": "ariel-dataset-{id}.webp",
       "source": "science/audem-ZTL-cyl-180180.cub.gz",
       "falseColor": true,
       "science": {
@@ -120,7 +120,7 @@
     {
       "id": "voyager-color",
       "output": "ariel-{id}{suffix}.webp",
-      "thumbnail": "ariel-lens-{id}.webp",
+      "thumbnail": "ariel-dataset-{id}.webp",
       "source": "observations/voyager-color/c2684340.equi.tif",
       "falseColor": true,
       "science": {

@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { readRgba, paintMissingCoverage } from '../../raster/index.ts';
 import type { ObservationInterpretation, InterpretedSurface, RasterRecipe } from '../../raster/index.ts';
-import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, observationRaster, parseObservationLens, loadNativeObservationPoleSampler, preparePdsFloatMap, parsePdsFloatProfile, loadDiscBandColor, prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from '../layers/observation/index.ts';
+import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, observationRaster, parseObservationDataset, loadNativeObservationPoleSampler, preparePdsFloatMap, parsePdsFloatProfile, loadDiscBandColor, prepareControlledMapMosaic, loadControlledMapPoles, matchControlledMapLevels } from '../layers/observation/index.ts';
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
@@ -62,15 +62,15 @@ type Surface = Parameters<ObservationInterpretation>[0];
 interface Rgb { rgb: Uint8Array; missing: Uint8Array; report?: Record<string, unknown>; }
 interface SurfaceObservationScience {
   shape: { path: string; format: string; grid: Record<string, unknown>; radiusKm: number; rows: number; columns: number; flatFaceErrorMeters: number };
-  lens: Record<string, unknown> & { frames: readonly unknown[] };
+  dataset: Record<string, unknown> & { frames: readonly unknown[] };
   /** The frame's light outside the silhouette becomes the emission off-limb plate; its turn is derived from the default camera. */
   offLimb?: Record<string, never>;
 }
-/** `science.shape` is the reference sphere table and its sampling; `science.lens` is one surface-observation lens without its id. */
+/** `science.shape` is the reference sphere table and its sampling; `science.dataset` is one surface-observation dataset without its id. */
 function parseSurfaceObservationScience(value: Record<string, unknown>): SurfaceObservationScience {
-  const unknown = Object.keys(value).filter(key => !['kind', 'shape', 'lens', 'offLimb'].includes(key));
-  if (unknown.length) throw new TypeError(`A surface-observation science block declares only shape, lens and offLimb, not ${unknown.join(', ')}.`);
-  const shape = requireRecord(value.shape, 'surface-observation shape'), lens = requireRecord(value.lens, 'surface-observation lens');
+  const unknown = Object.keys(value).filter(key => !['kind', 'shape', 'dataset', 'offLimb'].includes(key));
+  if (unknown.length) throw new TypeError(`A surface-observation science block declares only shape, dataset and offLimb, not ${unknown.join(', ')}.`);
+  const shape = requireRecord(value.shape, 'surface-observation shape'), dataset = requireRecord(value.dataset, 'surface-observation dataset');
   const parsed = { path: requireString(shape.path), format: requireString(shape.format), grid: requireRecord(shape.grid, 'shape grid'), radiusKm: requireFiniteNumber(shape.radiusKm),
     rows: requireFiniteNumber(shape.rows), columns: requireFiniteNumber(shape.columns), flatFaceErrorMeters: requireFiniteNumber(shape.flatFaceErrorMeters) };
   if (parsed.format !== 'pds-radius-table' || !Number.isInteger(parsed.rows) || !Number.isInteger(parsed.columns) || parsed.rows < 4 || parsed.columns < 4 || !(parsed.radiusKm > 0)) {
@@ -79,10 +79,10 @@ function parseSurfaceObservationScience(value: Record<string, unknown>): Surface
   // Flat faces sit inside the sphere by the sagitta of their diagonal; the declared error must cover it.
   const sagitta = parsed.radiusKm * 1000 * (1 - Math.cos(Math.hypot(180 / parsed.rows, 360 / parsed.columns) / 2 * Math.PI / 180));
   if (!(parsed.flatFaceErrorMeters >= sagitta)) throw new TypeError(`A surface-observation shape must declare at least its flat-face error of ${sagitta.toExponential(3)} m.`);
-  if (lens.id !== undefined || !Array.isArray(lens.frames)) throw new TypeError('A surface-observation lens takes its id from the surface and lists its frames.');
+  if (dataset.id !== undefined || !Array.isArray(dataset.frames)) throw new TypeError('A surface-observation dataset takes its id from the surface and lists its frames.');
   const offLimb = value.offLimb === undefined ? undefined : requireRecord(value.offLimb, 'surface-observation offLimb') as Record<string, never>;
   if (offLimb && Object.keys(offLimb).length) throw new TypeError('A surface-observation offLimb block is empty: its turn is derived from the default camera, not authored.');
-  return { shape: parsed, lens: lens as SurfaceObservationScience['lens'], ...(offLimb ? { offLimb } : {}) };
+  return { shape: parsed, dataset: dataset as SurfaceObservationScience['dataset'], ...(offLimb ? { offLimb } : {}) };
 }
 /** An opaque black disc filling a square plate, its edge antialiased over one pixel. */
 function blackDisc(size: number): Uint8Array {
@@ -163,7 +163,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
   const science = new Map<string, ReturnType<typeof loadScienceSurface>>();
   const nativePhotographs = new Map<string, Promise<NativePhotograph>>();
   const surfaceObservations = new Map<string, Promise<SurfaceObservation>>();
-  /** A photograph lens cast onto its reference sphere by the shared surface-observation route (the same validators, footprints,
+  /** A photograph dataset cast onto its reference sphere by the shared surface-observation route (the same validators, footprints,
    * photometry and report as the triangle-atlas lane), delivered as the equirectangular map the band-projected sphere consumes. */
   const surfaceObservation = (surface: Surface, plan: SurfaceObservationScience, height: number): Promise<SurfaceObservation> => {
     let pending = surfaceObservations.get(surface.id);
@@ -176,7 +176,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const scale = 1 / (plan.shape.radiusKm * 1000);
         const faces = sampleRadialTriangles(grid.sample, plan.shape.rows, plan.shape.columns, scale).map(face => ({ ...face, vertexNormals: [face.normal, face.normal, face.normal] }));
         const radialTerrain = { path: plan.shape.path, format: plan.shape.format, simplification: { method: 'source-mesh', maximumErrorMeters: plan.shape.flatFaceErrorMeters } };
-        return loadSurfaceObservation({ sourceDirectory, source, recipe: { id: surface.id, ...plan.lens }, radial: { grid, faces },
+        return loadSurfaceObservation({ sourceDirectory, source, recipe: { id: surface.id, ...plan.dataset }, radial: { grid, faces },
           config: { geometry: { radius: 1, radiusKm: plan.shape.radiusKm, radialTerrain }, raster: { height, missingCoverage: recipe.missingCoverage } } });
       })();
       surfaceObservations.set(surface.id, pending);
@@ -193,7 +193,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const plan = parseSolidObservation({ id: surface.id, ...surface.science });
         const source = await manifest;
         const input = source.manifest.inputs.find(entry => entry.id === surface.science.input);
-        if (!input || (input as { lensId?: unknown }).lensId !== surface.id || input.path !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.input must be the pinned observation for this lens.`);
+        if (!input || (input as { datasetId?: unknown }).datasetId !== surface.id || input.path !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.input must be the pinned observation for this dataset.`);
         if (plan.validity.kind === 'pds4-float-rgb') validatePds4ObservationPolicy(plan.validity);
         const entry = parseSurfaceSource(input);
         const decoded = await readObservation(sourceDirectory, entry, plan.validity, width, height);
@@ -210,14 +210,14 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
     return pending;
   };
   /** Direct pole sampling is an explicit photographic opt-in. It shares the pinned source and validity record
-   * with the delivered bands, but never substitutes an approximate map or another lens. */
+   * with the delivered bands, but never substitutes an approximate map or another dataset. */
   const nativePhotograph = (surface: Surface, plan: ReturnType<typeof parseSolidObservation>): Promise<NativePhotograph> => {
     const cached = nativePhotographs.get(surface.id);
     if (cached) return cached;
     const pending = (async (): Promise<NativePhotograph> => {
         const source = await manifest;
         const input = source.manifest.inputs.find(entry => entry.id === surface.science.input);
-        if (!input || (input as { lensId?: unknown }).lensId !== surface.id || input.path !== surface.source) {
+        if (!input || (input as { datasetId?: unknown }).datasetId !== surface.id || input.path !== surface.source) {
           throw new TypeError(`${objectId}/${surface.id}: native photographic sampling needs its pinned observation.`);
         }
         const primary = await loadNativePhotograph(sourceDirectory, input, plan.validity);
@@ -236,7 +236,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
     return pending;
   };
 
-  /** A controlled mosaic at one density, cached, so a colour lens can use it as its monochrome base. */
+  /** A controlled mosaic at one density, cached, so a colour dataset can use it as its monochrome base. */
   const mosaics = new Map<string, Promise<{ rgb: Uint8Array; missing: Uint8Array }>>();
   const mosaic = (surface: Surface, width: number, height: number) => {
     const key = `${surface.id}@${width}x${height}`;
@@ -282,7 +282,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       case 'static-observation': {
         // Unchanged: the Moon/Pluto path (coverage grid, signed DEM, tonal presentation, GHRM science).
         const { kind: _kind, ...fields } = surface.science;
-        const plan = parseObservationLens({ id: surface.id, input: surface.source, ...fields, ...(surface.nativeSourcePoles ? { nativeSourcePoles: true } : {}) });
+        const plan = parseObservationDataset({ id: surface.id, input: surface.source, ...fields, ...(surface.nativeSourcePoles ? { nativeSourcePoles: true } : {}) });
         const { data, info, missing } = await observationRaster({ input: resolve(sourceDirectory, surface.source), plan, width, height });
         if (![1, 2, 3, 4].includes(info.channels)) throw new TypeError(`Interpreted surface ${surface.id} has ${info.channels} channels.`);
         const scientific = plan.scientific;
@@ -313,8 +313,8 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           : interpreted;
       }
       case 'terrestrial-scientific': {
-        const { kind: _kind, ...lens } = surface.science;
-        const parsed = parseSolidScience({ id: surface.id, ...lens });
+        const { kind: _kind, ...dataset } = surface.science;
+        const parsed = parseSolidScience({ id: surface.id, ...dataset });
         if (parsed.path !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.path must equal the surface source.`);
         validateScienceQualityMasks(parsed);
         if (parsed.format === 'geologic-shapefile') validateGeologyProfile(parsed);
@@ -354,24 +354,24 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       }
       case 'surface-observation': {
         const plan = parseSurfaceObservationScience(surface.science);
-        if (!plan.lens.frames.some(frame => requireRecord(frame).path === surface.source)) throw new TypeError(`${objectId}/${surface.id}: the surface source must be one of the lens frames.`);
+        if (!plan.dataset.frames.some(frame => requireRecord(frame).path === surface.source)) throw new TypeError(`${objectId}/${surface.id}: the surface source must be one of the dataset frames.`);
         const observation = await surfaceObservation(surface, plan, height);
         // East longitude grows with the column from 0 at the left edge, as the mesh places a planet atlas.
         const { rgb, missing } = observation.preview(width, height);
         if (!recipe.emission) return { ...rgb3(rgb, missing, width, height, false, recipe.missingCoverage), report: observation.report };
         const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
         if (!plan.offLimb) return { ...rgb3(rgb, missing, width, height, false, recipe.missingCoverage), report: observation.report, plates };
-        // The off-limb plate is the same frame's light beyond the silhouette, on the lens's stretch and palette; the sphere hides its disc.
-        if (plan.lens.frames.length !== 1) throw new TypeError(`${objectId}/${surface.id}: an off-limb plate needs a single-frame lens.`);
-        const frame = requireRecord(plan.lens.frames[0]);
+        // The off-limb plate is the same frame's light beyond the silhouette, on the dataset's stretch and palette; the sphere hides its disc.
+        if (plan.dataset.frames.length !== 1) throw new TypeError(`${objectId}/${surface.id}: an off-limb plate needs a single-frame dataset.`);
+        const frame = requireRecord(plan.dataset.frames[0]);
         if (frame.encoding !== 'fits-oi-reconstruction') throw new TypeError(`${objectId}/${surface.id}: the off-limb plate reads fits-oi-reconstruction frames only.`);
         const image = readReconstruction(await readFile(resolve(sourceDirectory, requireString(frame.path))));
         // The camera route and the frame's centre use the sky as seen: north on the first row, east on the first column.
         const topDown = skyDisplayRaster(image.values, image.width, image.height, image.axes);
         const center = requireRecord(frame).center as readonly [number, number];
         const discRadiusPx = plan.shape.radiusKm / requireFiniteNumber(frame.rangeKm) / (requireFiniteNumber(frame.pixelAngleMicroradians) * 1e-6);
-        const displayRange = requireRecord(observation.report.display), palette = requireRecord(plan.lens.display).palette;
-        if (!Array.isArray(palette)) throw new TypeError(`${objectId}/${surface.id}: the off-limb plate needs the lens palette.`);
+        const displayRange = requireRecord(observation.report.display), palette = requireRecord(plan.dataset.display).palette;
+        if (!Array.isArray(palette)) throw new TypeError(`${objectId}/${surface.id}: the off-limb plate needs the dataset palette.`);
         const plateSize = recipe.emission.offLimbSize * density;
         // Image-up is celestial north; turn it to where the default view (a self-luminous body faces Earth) shows north.
         const rotationDegrees = prepareSkyNorthScreenAngleDegrees(solarGeometry, objectId, prepareDefaultCameraAngles(solarGeometry, objectId, { light: 'self' })) - 90;
@@ -383,11 +383,11 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         for (let i = 0; i < topDown.length; i++) { const v = topDown[i]!; total += v; if (Math.hypot(i % image.width - center[0], Math.floor(i / image.width) - center[1]) > discRadiusPx) outside += v; }
         return { ...rgb3(rgb, missing, width, height, false, recipe.missingCoverage), plates: { ...plates, offLimb: { data: offLimb, size: plateSize, lossless: false } },
           report: { ...observation.report, offLimb: { source: requireString(frame.path), discRadiusPx, rotationDegrees, fluxFractionOutsideDisc: outside / total,
-            meaning: 'The frame\'s light outside the silhouette on the lens display stretch; alpha fades from the stretch low to the background maximum. Inside the disc the plate is hidden by the sphere.' } } };
+            meaning: 'The frame\'s light outside the silhouette on the dataset display stretch; alpha fades from the stretch low to the background maximum. Inside the disc the plate is hidden by the sphere.' } } };
       }
       case 'glb-base-color': {
         // An illustration: the published model's base-color texture, carried through its own UVs onto the displayed shape.
-        // Nothing here is observed; the lens is listed in the object's illustration lenses and never counts as imagery.
+        // Nothing here is observed; the dataset is listed in the object's illustration datasets and never counts as imagery.
         const model = requireString(surface.science.model);
         if (model !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.model must equal the surface source.`);
         const { pixels } = await prepareGlbSurface(resolve(sourceDirectory, model), width, height);
@@ -395,7 +395,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       }
       case 'equirectangular-illustration': {
         // An illustration: a published artist's global map, resized unchanged onto the sphere. Its left edge is the map's own 0°
-        // column, so longitudes are arbitrary. Nothing here is observed; the lens is listed in the object's illustration lenses.
+        // column, so longitudes are arbitrary. Nothing here is observed; the dataset is listed in the object's illustration datasets.
         await (await manifest).validatePath(surface.source);
         const path = resolve(sourceDirectory, surface.source), { width: sourceWidth = 0, height: sourceHeight = 0 } = await sharp(path).metadata();
         if (sourceWidth !== sourceHeight * 2) throw new RangeError(`${objectId}/${surface.id}: ${surface.source} is ${sourceWidth} × ${sourceHeight}, not a 2:1 equirectangular map.`);
@@ -405,9 +405,9 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       }
       case 'neutral-shape': {
         // Shape-only display: the shared neutral gray (#808080 sRGB), a display convention rather than a measured colour.
-        // The surface source names the authored record that states this, so the manifest still binds the lens.
+        // The surface source names the authored record that states this, so the manifest still binds the dataset.
         // Under `hostLight`, the gray keeps its brightness and takes the chromaticity of the host star's measured colour: a
-        // neutral reflector under its own star's light instead of under a white lamp. The host's colour lens is the source.
+        // neutral reflector under its own star's light instead of under a white lamp. The host's colour dataset is the source.
         const gray = surface.science.hostLight === undefined ? [128, 128, 128] as const : hostLitGray(requireString(requireRecord(surface.science.hostLight, 'science.hostLight').srgb, 'science.hostLight.srgb'));
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) { data[offset] = gray[0]; data[offset + 1] = gray[1]; data[offset + 2] = gray[2]; data[offset + 3] = 255; }
@@ -417,7 +417,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       }
       case 'black-shadow': {
         // A black hole's measured shadow, drawn as a black disc that always faces the viewer: the limb plate, which the runtime fits to
-        // the silhouette. The sphere itself is not drawn; its texture is plain black for the lens thumbnail. Not a surface.
+        // the silhouette. The sphere itself is not drawn; its texture is plain black for the dataset thumbnail. Not a surface.
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) data[offset + 3] = 255;
         if (!recipe.emission) return { data, channels: 4, nearest: true };
@@ -426,7 +426,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         if (surface.science.offLimb === undefined) return { data, channels: 4, nearest: true, plates };
         // The light around the shadow, as an interferometric image of it shows: the image's own pixels on the off-limb plate,
         // registered by the image's pixel scale to the measured shadow diameter, on the palette and stretch the interferometric
-        // star lenses use. The sphere hides the plate inside the silhouette.
+        // star datasets use. The sphere hides the plate inside the silhouette.
         const offLimbRecord = requireRecord(surface.science.offLimb, `${objectId}/${surface.id} black-shadow offLimb`);
         const unknownKeys = Object.keys(offLimbRecord).filter(key => !['path', 'encoding', 'percentiles', 'palette'].includes(key));
         if (unknownKeys.length || offLimbRecord.encoding !== 'fits-oi-reconstruction') throw new TypeError(`${objectId}/${surface.id}: a shadow's offLimb names a fits-oi-reconstruction path, percentiles and palette, not ${unknownKeys.join(', ') || String(offLimbRecord.encoding)}.`);
@@ -510,7 +510,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         for (let offset = 0; offset < data.length; offset += 4) data.set([...(gravity ? gravity.rows[Math.floor(offset / 4 / width)]! : color.srgb), 255], offset);
         if (!recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a stellar colour belongs to an emissive body.`);
         if (surface.science.spotOccultation !== undefined && surface.science.spotFigure !== undefined)
-          throw new TypeError(`${objectId}/${surface.id}: choose one spot interpretation per lens.`);
+          throw new TypeError(`${objectId}/${surface.id}: choose one spot interpretation per dataset.`);
         const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
         // A fitted or explicitly modeled limb-darkening law darkens the disc through the limb plate, fitted edge to edge.
         if (limbDarkening) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, limbDarkening.coefficients, color);

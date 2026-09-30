@@ -237,7 +237,7 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.equal(isBroken(found), true);
   assert.doesNotMatch(formatFindings(clean), /broken/u);
   assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
-  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
 });
 
 test('a script or Astro module inside an object package is a finding; its data is not', () => {
@@ -331,4 +331,46 @@ test('outside tests, a tsup-built package must ship a workspace package it impor
     ['packages/telescope-cli/src/run.mts', text],
   ])), ['packages/renderer/src/universe/a.ts: imports @x/catalog, which packages/renderer/package.json lists only in devDependencies although tsup builds this package'],
   'type-only imports count, since dist/*.d.ts keeps them; tests and the source-run package are exempt');
+});
+
+test('retired root tests and dependent integration owners fail without a baseline', () => {
+  const root = mkdtempSync(join(tmpdir(), 'integration-owners-'));
+  const write = (path: string, text: string) => { mkdirSync(dirname(join(root, path)), { recursive: true }); writeFileSync(join(root, path), text); };
+  const rules = REPOSITORY_RULES.filter(rule => ['retired-folders', 'integration-owners'].includes(rule.id));
+  assert.equal(rules.length, 2, 'both rules must be wired into CI');
+  const broken = () => isBroken(repositoryFindings(root, repositoryFiles(root), rules));
+  try {
+    execFileSync('git', ['init', '-q'], { cwd: root });
+    write('packages/a/package.json', '{"name":"@x/a"}');
+    write('packages/b/package.json', '{"name":"@x/b"}');
+    write('packages/c/package.json', '{"name":"@x/c","dependencies":{"@x/a":"workspace:*"}}');
+    write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
+    assert.equal(broken(), false, 'independent owners are green');
+    write('tests/new.mts', 'export {};');
+    assert.equal(broken(), true, 'an untracked root tests file is red');
+    execFileSync('git', ['add', 'tests/new.mts'], { cwd: root });
+    assert.equal(broken(), true, 'a tracked root tests file is red');
+    assert.equal(isBroken(repositoryFindings(root, repositoryFiles(root), rules.filter(rule => rule.id !== 'retired-folders'))), false, 'disabling retirement makes the mutation green');
+    rmSync(join(root, 'tests'), { recursive: true });
+    assert.equal(broken(), true, 'a tracked tests file missing from disk is still red');
+    execFileSync('git', ['rm', '-f', 'tests/new.mts'], { cwd: root });
+    mkdirSync(join(root, 'tests'));
+    assert.equal(broken(), true, 'an empty root tests directory is red too');
+    rmSync(join(root, 'tests'), { recursive: true });
+    write('integration/example.test.mts', "import '@x/a';\n");
+    assert.equal(broken(), true, 'one owner is red');
+    assert.equal(isBroken(repositoryFindings(root, repositoryFiles(root), rules.filter(rule => rule.id !== 'integration-owners'))), false, 'disabling integration makes the mutation green');
+    write('packages/b/package.json', '{"name":"@x/b","dependencies":{"@x/c":"workspace:*"}}');
+    write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
+    assert.equal(broken(), true, 'a transitive dependency is red');
+    write('packages/b/package.json', '{"name":"@x/b"}');
+    assert.equal(broken(), false, 'restoring independence clears the finding');
+    write('labs/nebula/packages/lab/package.json', '{"name":"@x/lab","dependencies":{"@x/a":"workspace:*"}}');
+    write('integration/example.test.mts', "import '@x/a'; import '@x/lab';\n");
+    assert.equal(broken(), true, 'a lab package maps to its labs owner and dependency graph');
+    write('site/a.mts', 'export {};');
+    write('src/a.mts', 'export {};');
+    write('integration/example.test.mts', "import '../site/a.mts'; import '../src/a.mts';\n");
+    assert.equal(broken(), false, 'relative application imports count as owners');
+  } finally { rmSync(root, { recursive: true, force: true }); }
 });

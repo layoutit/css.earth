@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-source-manifest@1",
+  "schema": "cssearth-volume-source-manifest@2",
   "pathBase": "repository",
   "inputs": [
     {
@@ -22,7 +22,7 @@
         ]
       },
       "dependencies": [],
-      "lensId": "optical",
+      "datasetId": "optical",
       "license": "CC-BY-4.0; provider terms: https://www.eso.org/public/outreach/copyright/. Retain the complete recorded credit.",
       "capture": {
         "attributions": [

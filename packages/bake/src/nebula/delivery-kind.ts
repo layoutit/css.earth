@@ -7,5 +7,5 @@ export function applicationDeliveryKind(filename: 'compact-delivery.json' | 'del
     if (schema !== 'cssearth-compact-density-delivery@1') throw new TypeError('Unsupported compact density delivery schema.');
     return 'compact-density';
   }
-  return schema === 'cssearth-nebula-delivery@1' ? 'nebula' : null;
+  return schema === 'cssearth-nebula-delivery@2' ? 'nebula' : null;
 }

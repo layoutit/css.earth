@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "skathi",
   "displayName": "Skathi",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Saturn-system ephemeris; Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

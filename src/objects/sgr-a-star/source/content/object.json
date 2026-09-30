@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "sgr-a-star",
   "displayName": "Sagittarius A*",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shadow",
         "qualification": "A black disc the size of the measured shadow, with the EHT's 1.3 mm image of 2017 April 7 around it.",
-        "thumbnail": "sgr-a-star-lens-shape.webp",
+        "thumbnail": "sgr-a-star-dataset-shape.webp",
         "surface": "sgr-a-star-surface-shape@2x.webp",
         "poles": "sgr-a-star-poles-shape@2x.webp",
         "source": {

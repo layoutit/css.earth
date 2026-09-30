@@ -1,4 +1,4 @@
-import type { CompilerBakeResult, CompilerLensVolume, DensityVolumeFrame } from '@cssearth/bake/volume';
+import type { CompilerBakeResult, CompilerDatasetVolume, DensityVolumeFrame } from '@cssearth/bake/volume';
 import type { ViewFraming } from '../camera/framing.ts';
 
 export interface BankResource { readonly path: string; readonly bytes: number; readonly width: number; readonly height: number }
@@ -31,6 +31,6 @@ export interface VolumeViewerBackend<Bank, Publication> extends BankAssetsBacken
 /** Per-instance host integration. Payloads and camera publications stay owned by the renderer. */
 export interface CompilerViewerBackend<Bank, Publication> extends VolumeViewerBackend<Bank, Publication> {
   assertIdentity(bank: Bank, result: CompilerBakeResult): void;
-  assertLensGeometry(neutral: Bank, textured: Bank, result: CompilerBakeResult, lens: CompilerLensVolume): void;
+  assertDatasetGeometry(neutral: Bank, textured: Bank, result: CompilerBakeResult, dataset: CompilerDatasetVolume): void;
   starProjection(publication: Publication, frame: DensityVolumeFrame, viewport: SceneViewport): StarProjection;
 }

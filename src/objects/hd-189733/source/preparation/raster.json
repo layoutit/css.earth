@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/hd-189733/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "hd-189733-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-189733-lens-{id}.webp",
+      "thumbnail": "hd-189733-dataset-{id}.webp",
       "thumbnailFromLimbPlate": true,
       "source": "photometry/stellar-color.json",
       "falseColor": false,
@@ -44,7 +44,7 @@
     {
       "id": "spot-2021",
       "output": "hd-189733-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-189733-lens-{id}.webp",
+      "thumbnail": "hd-189733-dataset-{id}.webp",
       "thumbnailFromLimbPlate": true,
       "source": "photometry/stellar-color.json",
       "falseColor": false,
@@ -68,7 +68,7 @@
     {
       "id": "activity-model",
       "output": "hd-189733-surface-{id}{suffix}.webp",
-      "thumbnail": "hd-189733-lens-{id}.webp",
+      "thumbnail": "hd-189733-dataset-{id}.webp",
       "thumbnailFromLimbPlate": true,
       "source": "photometry/stellar-color.json",
       "falseColor": false,
@@ -108,7 +108,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "black alpha darkens the photosphere by the quadratic limb law; selected lenses add either one transit-chord dark-region reconstruction or a published hypothetical dense-spot-band pattern; transparent outside the silhouette",
+        "composition": "black alpha darkens the photosphere by the quadratic limb law; selected datasets add either one transit-chord dark-region reconstruction or a published hypothetical dense-spot-band pattern; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

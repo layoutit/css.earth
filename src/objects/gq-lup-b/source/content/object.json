@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gq-lup-b",
   "displayName": "GQ Lup b",
@@ -61,15 +61,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "gq-lup-b-lens-shape.webp",
+        "thumbnail": "gq-lup-b-dataset-shape.webp",
         "surface": "gq-lup-b-surface-shape@2x.webp",
         "poles": "gq-lup-b-poles-shape@2x.webp",
         "source": {

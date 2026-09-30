@@ -7,8 +7,8 @@
  *    mass and radius in its astronomy record, else a published spectroscopic value (gravity.mts).
  * 3. the star's own calibrated interferometry, fitted inside the first lobe, when an observation season records it
  *    (interferometric-limb.mts); the record is written beside the star and read as in 1.
- * A star that already has a colour lens gains the law on it; a placeholder that has none gains the colour lens with it
- * (color.mts, lens.mts). A star no source covers is reported and left unchanged. */
+ * A star that already has a colour dataset gains the law on it; a placeholder that has none gains the colour dataset with it
+ * (color.mts, dataset.mts). A star no source covers is reported and left unchanged. */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { parseCieTable } from '@cssearth/bake/objects/color';
@@ -17,7 +17,7 @@ import { fetchGaiaRow, liveArchive, readIdentifiers, telescopeResolver, type Arc
 import { chooseColor } from './color.mts';
 import { chooseGravity, type GravityChoice } from './gravity.mts';
 import { fitInterferometricLimb } from './interferometric-limb.mts';
-import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
+import { bindInputs, installColorDataset, json, type PackageFiles } from './dataset.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
 import type { StarSpec } from './spec.mts';
 
@@ -47,7 +47,7 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
       : `the quadratic law (u1 ${record.u1?.value}, u2 ${record.u2?.value}) ${credit} ${record.basis === 'model-prior' ? 'fixed from model atmospheres for this star' : 'fit to this star'} (${record.band})`;
     return { limbDarkening: { law: record.law === 'power' ? 'power' : 'quadratic', published: true, path }, sentence: `dimmed toward the limb by ${law}`, credit: `Limb darkening: ${credit}.`,
       inputs: [{ id: `${id}-${name.replace(/\.json$/u, '')}`, path, origin: url, credit, license: 'Factual numerical measurements; source attribution retained',
-        acquisition: fit ? `Fitted by ${fit.tool} to ${fit.input}` : 'Transcribed from the paper, each value with its quoted cell', redistribution: fit ? 'A fitted parameter with its method; no paper figures' : 'Factual parameter transcription only; no paper figures', consumers: ['assets', 'lenses'],
+        acquisition: fit ? `Fitted by ${fit.tool} to ${fit.input}` : 'Transcribed from the paper, each value with its quoted cell', redistribution: fit ? 'A fitted parameter with its method; no paper figures' : 'Factual parameter transcription only; no paper figures', consumers: ['assets', 'datasets'],
         sourceBinding: { kind: 'local', reason: fit ? 'Limb-darkening law fitted in this package, with the refit that checks it; repinned when edited.' : 'Published limb-darkening law transcribed with its cells; repinned when edited.' } }] };
   }
   return null;
@@ -63,7 +63,7 @@ function readmeWithLimb(readme: string, paragraph: string, problem: string) {
   return lines.join('\n').replace(/\n{3,}/gu, '\n\n');
 }
 
-/** The law on an existing colour lens: recipe, plate, lens text, manifest, acquisition and credits. */
+/** The law on an existing colour dataset: recipe, plate, dataset text, manifest, acquisition and credits. */
 function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice, progress: (line: string) => void) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   const raster = read(`${s}/preparation/raster.json`), surface = raster.surfaces.find((entry: { science?: { kind?: string } }) => entry.science?.kind === 'stellar-photometric-color');
@@ -73,7 +73,7 @@ function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice, prog
   if (limbMaterial) limbMaterial.composition = 'black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette';
   files.set(`${s}/preparation/raster.json`, json(raster));
   for (const file of limb.files ?? []) files.set(`${s}/${file.path}`, file.text);
-  const content = read(`${s}/content/object.json`), control = content.lenses.controls.find((entry: { id: string }) => entry.id === surface.id);
+  const content = read(`${s}/content/object.json`), control = content.datasets.controls.find((entry: { id: string }) => entry.id === surface.id);
   if (control) {
     control.qualification = `${String(control.qualification ?? '').replace(STALE, '').replace(/\.\s*$/u, '')}; darkening toward the edge from ${limb.limbDarkening && 'published' in limb.limbDarkening ? 'a published law' : 'a model atmosphere'}.`;
     control.notes = `${String(control.notes ?? '').replace(STALE, '').trim()} The darkening toward the edge is ${limb.sentence.replace(/^dimmed toward the limb by /u, '')}.`.trim();
@@ -86,7 +86,7 @@ function installLimbOnly(files: PackageFiles, id: string, limb: LimbChoice, prog
   const manifest = read(`${s}/manifest.json`), inputs = limb.inputs ?? [];
   manifest.inputs = [...manifest.inputs.filter((entry: { path: string }) => !inputs.some(input => input.path === entry.path)), ...inputs];
   manifest.generatedIntermediates = (manifest.generatedIntermediates ?? []).map((entry: Record<string, any>) => entry.path !== 'presentation/context.png' ? entry
-    : { ...entry, id: 'limb-darkened-disc-context-marker', credit: String(entry.credit).replace('The colour lens as a disc;', 'The colour lens as a disc, dimmed toward the limb by its law;'),
+    : { ...entry, id: 'limb-darkened-disc-context-marker', credit: String(entry.credit).replace('The colour dataset as a disc;', 'The colour dataset as a disc, dimmed toward the limb by its law;'),
       ...(entry.recipe ? { recipe: { ...entry.recipe, inputs: [...new Set([...entry.recipe.inputs ?? [], ...inputs.map(input => String(input.id))])] } } : {}) });
   files.set(`${s}/manifest.json`, json(manifest));
   const plan = read(`${s}/preparation/acquisition.json`), acquisitions = limb.acquisitions ?? [];
@@ -135,10 +135,10 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
       const row: GaiaRow = gaia ? (await fetchGaiaRow(archive, gaia)).row : { sourceId: '', ra: host.star.rightAscensionDegrees, dec: host.star.declinationDegrees, g: Number.NaN, hasXpSampled: false };
       const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
       const color = await chooseColor(spec, row, { ...ids2, ...(gaia ? { gaia } : {}) }, archive, cmf);
-      const installed = await installColorLens(files, id, color, limb);
+      const installed = await installColorDataset(files, id, color, limb);
       colour = `${installed.hex} from ${color.route}`;
       files.set(`${o}/NOTICE.md`, `${String(files.get(`${o}/NOTICE.md`) ?? '').trimEnd()}\n\n${color.credits.join('\n\n')}\n`);
-      files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Colour lens.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${installed.hex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, ''));
+      files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Colour dataset.** ${color.summary.charAt(0).toUpperCase()}${color.summary.slice(1)}, through the CIE 1931 2° observer: ${installed.hex}. Routes tried in order: ${[...color.tried, `${color.route}: used`].join('; ')}.`, ''));
     }
     bindInputs(files, id);
     const measured = limb.limbDarkening && 'published' in limb.limbDarkening;

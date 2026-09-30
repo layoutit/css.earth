@@ -10,7 +10,7 @@
  *
  * astropy-healpix, in the pinned astronomy toolchain, owns the pixel geometry and the interpolation; cssEarth passes it the
  * longitudes and latitudes of a fine sampling grid once and reads the grid back. HEALPix colatitude theta and azimuth phi are
- * latitude 90 - theta and longitude phi; the lens record says why phi is east longitude for its map. */
+ * latitude 90 - theta and longitude phi; the dataset record says why phi is east longitude for its map. */
 import { spawnSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -57,9 +57,9 @@ export function healpixGrid(values: readonly number[], nside: number, ordering: 
 }
 
 export async function loadHealpixNpyMap(root: string, value: unknown) {
-  const lens = requireRecord(value, 'HEALPix map lens'), path = requireString(lens.path, 'path');
+  const dataset = requireRecord(value, 'HEALPix map dataset'), path = requireString(dataset.path, 'path');
   if (path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new TypeError(`${path}: a HEALPix map must be inside the source directory.`);
-  const ordering = requireString(lens.ordering, 'ordering'), transform = requireString(lens.transform, 'transform'), interpolation = requireString(lens.interpolation, 'interpolation');
+  const ordering = requireString(dataset.ordering, 'ordering'), transform = requireString(dataset.transform, 'transform'), interpolation = requireString(dataset.interpolation, 'interpolation');
   if (interpolation !== 'pixel' && interpolation !== 'bilinear') throw new TypeError(`${path}: HEALPix interpolation is pixel or bilinear, not ${interpolation}.`);
   if (ordering !== 'ring' && ordering !== 'nested') throw new TypeError(`${path}: HEALPix ordering is ring or nested, not ${ordering}.`);
   if (transform !== 'value' && transform !== 'sqrt') throw new TypeError(`${path}: a HEALPix map is drawn as its value or its sqrt, not ${transform}.`);

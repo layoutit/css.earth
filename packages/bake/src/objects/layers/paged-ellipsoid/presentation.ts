@@ -1,5 +1,5 @@
 import type { prepareTextureLevels, TextureLevelConfiguration } from './texture-levels.ts';
-import type { SurfaceBankLenses } from './contracts.ts';
+import type { SurfaceBankDatasets } from './contracts.ts';
 import type { PreparedNode } from '../../../presentation/index.ts';
 import type { MaterialSourceTrack } from '../../../presentation/index.ts';
 import type { PreparedCubicSkyPlan } from '../../../presentation/index.ts';
@@ -10,11 +10,11 @@ import type { preparePlaces } from './geographic/places.ts';
 import type { CameraPlan } from '@cssearth/renderer/navigation/types.ts';
 import { requireRecord, requireString } from '@cssearth/core';
 type PagedPlan = ReturnType<typeof preparePagedEllipsoidScene>['scene'];
-export type PagedLens = SurfaceBankLenses['controls'][number] & { maximumZoom: number; polesUrl?: string;
+export type PagedDataset = SurfaceBankDatasets['controls'][number] & { maximumZoom: number; polesUrl?: string;
   interiorTextures?: Readonly<Record<string, string>>; camera?: {controlPitch: number; controlYaw: number; controlRoll?: number; zoom: number; transition?: {durationMilliseconds: number; preserveZoom: boolean}} };
 interface PresentationConfiguration { textureLevels?: TextureLevelConfiguration; camera: CameraPlan; namespace: string; publicBase: string; sceneBodyKey: string;
   destinations: {statuses: {detail: string; overview: string}}; }
-export interface PagedPresentationInput { config: PresentationConfiguration; plan: PagedPlan; lenses: {defaultLens: string; controls: readonly PagedLens[]};
+export interface PagedPresentationInput { config: PresentationConfiguration; plan: PagedPlan; datasets: {defaultDataset: string; controls: readonly PagedDataset[]};
   textureLevels?: Awaited<ReturnType<typeof prepareTextureLevels>>; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan; controls: ShellObjectControls;
   catalog?: Awaited<ReturnType<typeof preparePlaces>>; }
 const materialIds = ['atmosphere'] as const;
@@ -27,7 +27,7 @@ import { textureTileVariables } from "../../../presentation/index.ts";
 import { prepareMaterialTracks } from "../../../presentation/index.ts";
 import { surfaceBankInventory } from "./surface-banks.ts";
 
-export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, textureLevels, controls }: PagedPresentationInput) {
+export async function preparePagedEllipsoidPresentation({ config, plan, datasets, sky, sun, catalog, textureLevels, controls }: PagedPresentationInput) {
   if (Boolean(config.textureLevels) !== Boolean(textureLevels)) throw new TypeError('Prepared texture levels must match the authored recipe.');
   const fixedTextureLevel = config.textureLevels?.fixedWidth === undefined ? undefined : config.textureLevels.widths.indexOf(config.textureLevels.fixedWidth);
   if (fixedTextureLevel === -1) throw new TypeError('Fixed texture width must be a prepared level.');
@@ -35,32 +35,32 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   const bodyFrame=requireRecord(plan[config.sceneBodyKey], 'paged body frame');
   const systemTransform=requireString(bodyFrame.systemTransform, 'paged system transform');
   const meshTransform=requireString(bodyFrame.meshTransform, 'paged mesh transform');
-  const defaultLens=lenses.controls.find(lens=>lens.id===lenses.defaultLens);
-  if (!defaultLens) throw new TypeError('Paged presentation requires its declared default lens.');
-  const banks=surfaceBankInventory(plan,lenses,config.publicBase);
-  const bankId=(lens: PagedLens,shadows=false)=>lens.view==="interior"&&shadows?`${lens.id}-lit`:lens.surfaceBankId??lens.id;
-  const pageKeys=(lens: PagedLens,shadows=false)=>{
-    const bank=banks.find(bank=>bank.id===bankId(lens,shadows));
-    if (!bank) throw new TypeError(`Missing prepared surface bank: ${bankId(lens,shadows)}`);
-    return bank.urls.map((_,i)=>`page:${bankId(lens,shadows)}:${i}`);
+  const defaultDataset=datasets.controls.find(dataset=>dataset.id===datasets.defaultDataset);
+  if (!defaultDataset) throw new TypeError('Paged presentation requires its declared default dataset.');
+  const banks=surfaceBankInventory(plan,datasets,config.publicBase);
+  const bankId=(dataset: PagedDataset,shadows=false)=>dataset.view==="interior"&&shadows?`${dataset.id}-lit`:dataset.surfaceBankId??dataset.id;
+  const pageKeys=(dataset: PagedDataset,shadows=false)=>{
+    const bank=banks.find(bank=>bank.id===bankId(dataset,shadows));
+    if (!bank) throw new TypeError(`Missing prepared surface bank: ${bankId(dataset,shadows)}`);
+    return bank.urls.map((_,i)=>`page:${bankId(dataset,shadows)}:${i}`);
   };
   const interiorUrls=[...new Set([
     ...plan.interior.shells.flatMap(shell=>shell.leaves.map(leaf=>leaf.asset)),
     ...plan.interior.sectionLeaves.map(leaf=>leaf.asset)].map(pair=>canonicalPreparedAsset(pair)))];
-  const interiorBanks=new Map(lenses.controls.filter(lens=>lens.view==='interior').map(lens=>{
-    const overrides=lens.interiorTextures??{};
+  const interiorBanks=new Map(datasets.controls.filter(dataset=>dataset.view==='interior').map(dataset=>{
+    const overrides=dataset.interiorTextures??{};
     for(const [original,url] of Object.entries(overrides)) {
       if(!interiorUrls.includes(original)||typeof url!=='string'||!url.startsWith(config.publicBase))
-        throw new TypeError(`Invalid prepared interior texture override for ${lens.id}: ${original}`);
+        throw new TypeError(`Invalid prepared interior texture override for ${dataset.id}: ${original}`);
     }
-    return [lens.id,interiorUrls.map((url,i)=>({key:`interior:${lens.id}:${i}`,url:overrides[url]??url,pool:'mounted'}))];
+    return [dataset.id,interiorUrls.map((url,i)=>({key:`interior:${dataset.id}:${i}`,url:overrides[url]??url,pool:'mounted'}))];
   }));
   const levelled=new Set(textureLevels?.entries.map(entry=>entry.key));
   const entries=[...(textureLevels?.entries??banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"})))),
-    ...lenses.controls.filter(lens=>!levelled.has(`poles:${lens.id}`)).flatMap(lens=>lens.view==="interior"?
-      [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
-        {key:`poles:${lens.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
-      [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(requireString(lens.polesUrl, `Pole texture for ${lens.id}`)),pool:"mounted"}]),
+    ...datasets.controls.filter(dataset=>!levelled.has(`poles:${dataset.id}`)).flatMap(dataset=>dataset.view==="interior"?
+      [{key:`poles:${dataset.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
+        {key:`poles:${dataset.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
+      [{key:`poles:${dataset.id}`,url:canonicalPreparedAsset(requireString(dataset.polesUrl, `Pole texture for ${dataset.id}`)),pool:"mounted"}]),
     ...[...interiorBanks.values()].flat(),
     ...materialIds.flatMap(id=>[
       {key:`default:${id}`,url:canonicalPreparedAsset(plan.material[id].defaultAssets),pool:"default-materials"},
@@ -82,7 +82,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   // bindings' last step turns it into records (presentation/texture-tile-records.ts).
   const tiledKeys=tiledTextureKeys(textureLevels?.textureLevels),initialTiles=textureLevels?.textureLevels.levels[0]?.tiles??{};
   const writePages=(node: PreparedNode,urls: readonly string[])=>{for(let i=0;i<pages;i++){
-    const name=`--${config.namespace}-surface-page-${i}`,key=pageKeys(defaultLens)[i]!;
+    const name=`--${config.namespace}-surface-page-${i}`,key=pageKeys(defaultDataset)[i]!;
     node.style.setProperty(name,urls.length?`url("${urls[i]}")`:"none");
     if(urls.length&&tiledKeys.has(key))for(const [property,value] of textureTileVariables(name,initialTiles[key]))node.style.setProperty(property,value);
   }};
@@ -102,7 +102,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     return {surface,polar};
   }
   const initialResource = (key: string) => textureLevels?.textureLevels.levels[0].resources[key] ?? key;
-  const initialUrls = pageKeys(defaultLens).map(key=>{
+  const initialUrls = pageKeys(defaultDataset).map(key=>{
     const resource=entries.find(entry=>entry.key===initialResource(key));
     if(!resource)throw new TypeError(`Missing initial prepared page resource: ${key}`);
     return resource.url;
@@ -146,27 +146,27 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
         zeroAtPole:!!illumination,publishWithAddress:true,...(!illumination?{polePolicy:"azimuth"}:{}),width:material.presentationTileSize,height:material.presentationTileSize},
       frameAttribute:null,modeAttribute:null,quoted:true};
   });
-  const variants=lenses.controls.flatMap(lens=>[false,true].map(shadows=>{
-    const isInterior=lens.view==="interior",keys=pageKeys(lens,shadows),texture=(node: PreparedNode,name: string,resource: string | null)=>({kind:"texture",target:index(node),name,resource,quoted:true});
-    const interiorBank=interiorBanks.get(lens.id);
-    if (isInterior && !interiorBank) throw new TypeError(`Missing prepared interior bank: ${lens.id}`);
+  const variants=datasets.controls.flatMap(dataset=>[false,true].map(shadows=>{
+    const isInterior=dataset.view==="interior",keys=pageKeys(dataset,shadows),texture=(node: PreparedNode,name: string,resource: string | null)=>({kind:"texture",target:index(node),name,resource,quoted:true});
+    const interiorBank=interiorBanks.get(dataset.id);
+    if (isInterior && !interiorBank) throw new TypeError(`Missing prepared interior bank: ${dataset.id}`);
     const pageWrites=(carriers: readonly PreparedNode[],active: boolean)=>carriers.flatMap(node=>Array.from({length:pages},(_,i)=>texture(node,`--${config.namespace}-surface-page-${i}`,active?keys[i]:null)));
     // Outside the interior view the cutaway is not shown (earth-surfaces.css), so page markup leaves its 500-odd nodes out.
-    return {when:{lensId:lens.id,shadows},...(isInterior?{}:{hiddenSubtrees:[index(cutaway)]}),navigation:{maximumZoom:lens.maximumZoom,camera:lens.camera??null},required:[...keys,`poles:${bankId(lens,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
+    return {when:{datasetId:dataset.id,shadows},...(isInterior?{}:{hiddenSubtrees:[index(cutaway)]}),navigation:{maximumZoom:dataset.maximumZoom,camera:dataset.camera??null},required:[...keys,`poles:${bankId(dataset,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
       writes:[...pageWrites(isInterior?interior.surface:body.surface,true),
         ...(isInterior?interiorTextureNodes.map(({node,url})=>texture(node,'background-image',requireInteriorResource(interiorBank, interiorUrls.indexOf(url)))):[]),
-        ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(lens,shadows)}`)),
+        ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(dataset,shadows)}`)),
         ...pageWrites(isInterior?body.surface:interior.surface,false),
         {kind:"attribute",target:-1,name:"data-view",value:isInterior?"interior":null},
-        {kind:"attribute",target:-1,name:"data-lens",value:lens.id}],
+        {kind:"attribute",target:-1,name:"data-dataset",value:dataset.id}],
       materials:tracks.map(track=>({track:track.id,bank:track.id,mode:"frames" as const,
-        enabled:!isInterior&&lens.id!=="night-lights",rotationEnabled:true,
+        enabled:!isInterior&&dataset.id!=="night-lights",rotationEnabled:true,
         frameOverride:!shadows?plan.material[track.id].frameCount-1:null,clearWhenHidden:false,fixedMode:"flood",publishWhenHidden:"static" as const,
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
   }));
   const prepared = {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,
     ...(textureLevels?{textureLevels:{...textureLevels.textureLevels,...(fixedTextureLevel===undefined?{}:{fixedLevel:fixedTextureLevel})}}:{}),
-    ...(catalog?{destinations:{catalog,defaultLens:"normal",statuses:config.destinations.statuses}}:{}),
+    ...(catalog?{destinations:{catalog,defaultDataset:"normal",statuses:config.destinations.statuses}}:{}),
     assets:{entries,pools:[preparedResourcePool("mounted",entries,{concurrency:2}),preparedResourcePool("default-materials",entries,{retention:"warm"}),
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2*(textureLevels?.textureLevels.levels.length??1),eviction:"capacity",
         ...(textureLevels?{maximumDecodedBytes:textureLevels.maximumDecodedBytes}: {})}),
@@ -174,11 +174,11 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       // What the default view shows (shadows off): its pages and poles at the first level and
       // the atmosphere's flood frame. The default-pose material is only a base style every variant overwrites.
       // A sheet level maps every page to one resource, which the first view loads once.
-      startup:[...new Set([...pageKeys(defaultLens).map(initialResource),initialResource(`poles:${defaultLens.id}`),
+      startup:[...new Set([...pageKeys(defaultDataset).map(initialResource),initialResource(`poles:${defaultDataset.id}`),
         ...(plan.material.atmosphere.floodAssets?["atmosphere:flood"]:plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`))])]},
     tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null},...(seamOutset?[seamOutsetBinding(seamOutset,index(system))]:[])],animations:[],
     motionFrame:[index(system),index(body.surface[0])]};
- return {...prepared, schema:'cssearth-object-runtime@4', id:config.namespace, controls,
+ return {...prepared, schema:'cssearth-object-runtime@5', id:config.namespace, controls,
  materials:prepareMaterialTracks(prepared)};
 }
 

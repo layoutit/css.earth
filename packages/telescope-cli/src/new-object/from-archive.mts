@@ -14,7 +14,7 @@ import { TIC, ticRow, wideCompanions } from './companions.mts';
 import { wikipediaQuotes } from './prose.mts';
 import { hasArchiveSpectrum, orbitFold, timingSigma } from './planet-charts.mts';
 import { detectTransit, type TessArchive } from './transit-chart.mts';
-import { thermalFromArchive } from './planet-lenses.mts';
+import { thermalFromArchive } from './planet-datasets.mts';
 
 const STAR_COLUMNS = 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum,disc_facility,sy_pnum';
 const short = (value: number, digits = 2) => Number(value.toPrecision(digits));
@@ -41,7 +41,7 @@ export interface ArchiveSpecResult { readonly spec: Record<string, unknown>; rea
 /** The spec entry for one host: its transiting planets on their default rows. A body the universe already holds (by id or by name,
  * identity.mts) is not generated again; a host it holds becomes a host addition. */
 /** Why an archive planet has nothing measured to show, or undefined when it has one. A draft adds a planet for a measurement: a
- * dayside temperature (its thermal lens), an archive spectrum, or its transit in TESS at DETECTION_SIGMA (transit-chart.mts);
+ * dayside temperature (its thermal dataset), an archive spectrum, or its transit in TESS at DETECTION_SIGMA (transit-chart.mts);
  * the orbit is the one the draft assembled. */
 export type PlanetEvidence = (planet: string, orbit: { readonly periodDays: number; readonly transitTimeBmjdTdb: number }) => Promise<string | undefined>;
 export const measuredEvidence = (archive: Archive, tess: TessArchive): PlanetEvidence => async (planet, orbit) => {
@@ -99,7 +99,7 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     const period = assembled.orbit.periodDays, year = row.year ? `, found in ${row.year}` : '', radius = assembled.radius.value, mass = assembled.mass.value;
     const modelSize = assembled.radius.row.reference === 'CALCULATED_VALUE';
     const defaultRow = assembled.row ?? planetRows.find(entry => entry.isDefault)!;
-    // A measured dayside temperature in the archive's emission table gives the planet its thermal colour (planet-lenses.mts).
+    // A measured dayside temperature in the archive's emission table gives the planet its thermal colour (planet-datasets.mts).
     if (!thermal) note.push(`${name}: ${why}; its gray takes the host's light`);
     const quotes = await wikipediaQuotes(archive, [name, hostname], [name, row.planet]);
     if (!quotes) note.push(`${name}: no Wikipedia lead to quote`);

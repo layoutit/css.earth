@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "gaspra",
   "displayName": "Gaspra",
@@ -215,6 +215,6 @@
     "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

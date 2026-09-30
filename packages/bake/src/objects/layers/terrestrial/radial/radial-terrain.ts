@@ -102,11 +102,11 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     ...(simplified || faces.simplification ? { simplification: simplified?.report ?? faces.simplification } : {}) };
 }
 
-/** The atlas pixel step every lens can scale to: a lens prepared at an eighth of the atlas needs rectangles in multiples of eight. */
+/** The atlas pixel step every dataset can scale to: a dataset prepared at an eighth of the atlas needs rectangles in multiples of eight. */
 function textureQuantum(config: {raster?: unknown}) {
   const raster = config.raster === undefined ? {} : requireRecord(config.raster);
   const scales = [...requireArray(raster.observations ?? []), ...requireArray(raster.scientific ?? [])]
-    .flatMap(lens => requireRecord(lens).textureScale === undefined ? [] : [requireFiniteNumber(requireRecord(lens).textureScale)]);
+    .flatMap(dataset => requireRecord(dataset).textureScale === undefined ? [] : [requireFiniteNumber(requireRecord(dataset).textureScale)]);
   const quantum = Math.max(1, ...scales.map(scale => 1 / scale));
   if (!Number.isSafeInteger(quantum)) throw new TypeError('Texture scales must divide the atlas into whole pixels.');
   return quantum;

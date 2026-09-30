@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "shape-model",
@@ -122,7 +122,7 @@
         "latitudeDegrees": -37.4,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "tempest-shape"
+        "datasetId": "tempest-shape"
       }
     }
   ],

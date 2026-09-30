@@ -14,7 +14,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 **Rotation.** No period is adopted. Kraus et al. (2020) measure the spin axis in projection with GRAVITY, aligned with the disc and planet b's orbit to 3° ± 4°, and Zwintz et al. (2019) fit a near equator-on inclination from the pulsations; neither is a period. The display axis is celestial north at the star, a convention.
 
-**Colour lens.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#c2d4ff**, the hue Fomalhaut's ground-based spectrum gives. The disc is darkened toward its edge by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres, read at 8090 K (Zwintz et al. 2019) and log g 4.30 (from the mass and radius): a model, not a measurement of this star.
+**Colour dataset.** The colour of Gaia DR3's externally calibrated BP/RP sampled spectrum of the star, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#c2d4ff**, the hue Fomalhaut's ground-based spectrum gives. The disc is darkened toward its edge by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres, read at 8090 K (Zwintz et al. 2019) and log g 4.30 (from the mass and radius): a model, not a measurement of this star.
 
 **Debris disc.** Two datasets draw the attached volume [beta-pictoris-disc](../beta-pictoris-disc/README.md): Hubble's visible-light image from 16 to 82 au, where planet d orbits, and JWST's 2.1 and 4.1 µm images from 49 to 126 au.
 
@@ -24,8 +24,8 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 Run of 2026-09-22 (this version):
 
-- [`node tools/prepare/prepare-object.mts beta-pictoris`](https://github.com/layoutit/css.earth/blob/653c8db08e/tools/prepare/prepare-object.mts) (now [`packages/bake/cli/prepare-object.mts`](../../../packages/bake/cli/prepare-object.mts)) prepared the package through its world step; its shared provenance step stops on the Large Magellanic Cloud's recipe pin, which is inconsistent on main itself (see the PR).
-- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue colour #c2d4ff is the colour lens's prepared colour and that the limb-darkening law is read at the recorded temperature and gravity.
+- [`node tools/prepare/prepare-object.mts beta-pictoris`](../../../packages/bake/cli/prepare-object.mts) prepared the package through its world step; its shared provenance step stops on the Large Magellanic Cloud's recipe pin, which is inconsistent on main itself (see the PR).
+- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue colour #c2d4ff is the colour dataset's prepared colour and that the limb-darkening law is read at the recorded temperature and gravity.
 - Dev server `/beta-pictoris/` renders the star in its Gaia colour with no console errors.
 
 ## Known problems

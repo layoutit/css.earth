@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its mean radius, 114 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,126 parsecs away. It is also HD 44990, HR 2310, HIP 30541. This account was drafted from Groenewegen (2013), A&A 550, A70's values; the sections below are the data's own.
+Its mean radius, 114 solar radii, comes from comparing how fast its surface moves with how its size changes, 1,126 parsecs away. It is also HD 44990, HR 2310, HIP 30541. The introduction is generated from Groenewegen (2013), A&A 550, A70's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3324535073449061504, distance 1,126 pc from Groenewegen (2013), A&A 550, A70, table10, T Mon: Baade-Wesselink distance (pc) 1125.9 +/- 33 (Monte-Carlo); Gaia DR3's parallax, 0.714 ± 0.052 mas (13.8 standard errors), is not used. Radius 114 +/- 3.4 solar radii from Groenewegen (2013), A&A 550, A70, table10, T Mon: Baade-Wesselink mean radius (solar radii) 114 +/- 3.4 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 4,875 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 175, Name='T Mon', columns Teff, e_Teff (K): Teff 4875 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic). log g 0.49 from 2024A&A...690A.246T ("Cepheid Metallicity in the Leavitt Law (C-MetaLL) survey VI. Radial abundance gradients of 29 chemical species in the Milky Way disc.").
 
@@ -12,8 +12,7 @@ Its mean radius, 114 solar radii, comes from comparing how fast its surface move
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
@@ -21,6 +20,5 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** The star pulsates; it is drawn at its mean radius.
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

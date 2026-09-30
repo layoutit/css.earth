@@ -6,6 +6,7 @@ import type { PreparedFocusPresentation } from './prepared-focus.mts';
 import { requiredElement } from './browser/browser-types.mts';
 import { overviewHolding } from '@cssearth/objects';
 import { KNOWN_OVERVIEWS } from './object-directory.mts';
+import { wikipediaLearnMoreUrl } from './learn-more.mts';
 
 interface PreparedFocusCard {
   set(record: PreparedCatalogObject | null, sources?: readonly SpatialCitation[], presentation?: PreparedFocusPresentation | null): void;
@@ -24,6 +25,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
   const aliasesRow = root.querySelector<HTMLElement>('[data-focus-aliases-row]');
+  const learnMore = root.querySelector<HTMLAnchorElement>('[data-focus-learn-more]');
   const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
   const sourceRows = [...root.querySelectorAll<HTMLElement>('[data-focus-source-row]')];
   const breadcrumbs = [...root.querySelectorAll<HTMLElement>('[data-focus-breadcrumb-scope]')];
@@ -36,16 +38,16 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   type Bank = { root: HTMLElement; buttons: HTMLButtonElement[]; details: HTMLElement[]; contexts: HTMLElement[] };
   const banks: Bank[] = [];
   const adopt = () => {
-    for (const element of root.querySelectorAll<HTMLElement>('[data-focus-lens-bank], [data-focus-facts-bank]')) {
+    for (const element of root.querySelectorAll<HTMLElement>('[data-focus-dataset-bank], [data-focus-facts-bank]')) {
       if (banks.some(bank => bank.root === element)) continue;
       const bank = { root: element,
-        buttons: [...element.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
-        details: [...element.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
+        buttons: [...element.querySelectorAll<HTMLButtonElement>('[data-focus-dataset]')],
+        details: [...element.querySelectorAll<HTMLElement>('[data-focus-dataset-details]')],
         contexts: [...element.querySelectorAll<HTMLElement>('[data-dataset-context]')],
       };
       for (const button of bank.buttons) button.addEventListener('click', event => {
-        if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) {
-          event.preventDefault(); currentPresentation.selectLens(button.getAttribute('value') ?? '');
+        if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusDatasetBank) {
+          event.preventDefault(); currentPresentation.selectDataset(button.getAttribute('value') ?? '');
         }
       }, { signal: events.signal });
       banks.push(bank);
@@ -61,20 +63,20 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       showTab(currentPresentation ? 'dataset' : 'factsheet');
     currentRecordId = record?.id;
     for (const bank of banks) {
-      const active = currentPresentation?.objectId === (bank.root.dataset.focusLensBank ?? bank.root.dataset.focusFactsBank);
+      const active = currentPresentation?.objectId === (bank.root.dataset.focusDatasetBank ?? bank.root.dataset.focusFactsBank);
       bank.root.hidden = !active;
       if (!active || !currentPresentation) continue;
-      const available = new Set(currentPresentation.lenses.map(lens => lens.id));
+      const available = new Set(currentPresentation.datasets.map(dataset => dataset.id));
       for (const button of bank.buttons) {
         // Read the prepared attribute in both the server DOM and the live browser.
-        const lens = button.getAttribute('value') ?? '';
-        button.disabled = !available.has(lens);
-        const pressed = String(lens === currentPresentation.selectedLens);
+        const dataset = button.getAttribute('value') ?? '';
+        button.disabled = !available.has(dataset);
+        const pressed = String(dataset === currentPresentation.selectedDataset);
         if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
       }
       publishDatasetPreview(bank.root, bank.buttons);
-      for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
-      for (const context of bank.contexts) context.hidden = context.dataset.datasetContext !== currentPresentation.selectedLens;
+      for (const detail of bank.details) detail.hidden = detail.dataset.focusDatasetDetails !== currentPresentation.selectedDataset;
+      for (const context of bank.contexts) context.hidden = context.dataset.datasetContext !== currentPresentation.selectedDataset;
     }
   };
   const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
@@ -88,6 +90,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
       const message = missing ? `The 3D view of ${record.name} is unavailable in this installation. Catalogue facts remain available.` : '';
       if (unavailable.textContent !== message) unavailable.textContent = message;
     }
+    if (learnMore && !record) learnMore.hidden = true;
     if (!record) return;
     root.dataset.preparedFocusId = record.id;
     for (const bank of root.querySelectorAll<HTMLElement>('[data-focus-record-bank]')) bank.hidden = bank.dataset.focusRecordBank !== record.id;
@@ -97,6 +100,11 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     write('aliases', aliases);
     write('introduction', nebula ? record.introduction.text : aliases ? `Also known as ${aliases}` : '');
     fields.introduction.hidden = !nebula && !aliases;
+    if (learnMore) {
+      const href = wikipediaLearnMoreUrl(record.name);
+      if (learnMore.getAttribute('href') !== href) learnMore.setAttribute('href', href);
+      learnMore.hidden = fields.introduction.hidden;
+    }
     if (aliasesRow) aliasesRow.hidden = !nebula || !aliases;
     // The trail leads to the level that holds the focus's classification (its overview's `holds`).
     const parent = overviewHolding(KNOWN_OVERVIEWS, catalogueClassification(record));

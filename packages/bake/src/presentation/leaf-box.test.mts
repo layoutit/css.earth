@@ -4,7 +4,7 @@ const test = sourceTest();
 
 import { leafBoxBlocks, leafBoxDensity, leafBoxLengths, leafBoxPlacements, prepareLeafBoxBindings, prepareLeafBoxSteps, withLeafBoxes,
   LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY, LEAF_BOX_SCREEN_PIXELS, LEAF_BOX_UNSCALE, type MeasuredLeafBox } from '@cssearth/bake/presentation';
-import { createPreparedNodeTree } from '@cssearth/bake/presentation';
+import { createPreparedNodeTree, withLeafBoxRecords } from '@cssearth/bake/presentation';
 import { unseenTextureWrites } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
 
 const identity = (scale: number, x = 0, y = 0, z = 0) => [scale, 0, 0, 0, 0, scale, 0, 0, 0, 0, 1, 0, x, y, z, 1];
@@ -161,3 +161,13 @@ test('a leaf between two blocks joins the same one whatever float noise its meas
   assert.deepEqual(new Set(blocks.slice(0, 4)).size, 1);
 });
 
+
+test('a constant atlas size set after the static style becomes the leaf\'s own length, not an unread variable', () => {
+  const definition = { id: 'saturn', viewBindings: [], tree: {
+    nodes: [{ parent: -1, style: '--polycss-atlas-width:1024px;--polycss-atlas-height:1024px;backface-visibility:visible', properties: [0, 1, 2] }],
+    properties: [{ name: '--polycss-atlas-width', value: '256px', custom: true }, { name: '--polycss-atlas-height', value: '256px', custom: true },
+      { name: 'transform', value: 'matrix3d(4,0,0,0,0,4,0,0,0,0,1,0,0,0,0,1)', custom: false }] } };
+  const { tree } = withLeafBoxRecords(definition);
+  assert.equal(tree.nodes[0]!.style, 'backface-visibility:visible;width:256px;height:256px;');
+  assert.deepEqual(tree.nodes[0]!.properties.map(id => tree.properties[id]!.name), ['transform']);
+});

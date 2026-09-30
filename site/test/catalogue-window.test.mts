@@ -91,7 +91,7 @@ test('a filter change reads the layout before writing rows, and rows keep their 
   assert.deepEqual(heightsAtRead, ['5592px'], 'the one layout read happens before the list is resized');
 
   const subtitle = () => list.querySelector('[data-catalogue-index="0"] .object-kind');
-  const marker = () => list.querySelector('[data-catalogue-index="0"] .object-lens-icon')?.firstElementChild;
+  const marker = () => list.querySelector('[data-catalogue-index="0"] .object-dataset-icon')?.firstElementChild;
   const [kind, icon] = [subtitle(), marker()];
   catalogue.setSelection({ kind: 'scene', id: 'earth-0' });
   catalogue.setRows(entries.length, 0, entries);

@@ -75,7 +75,7 @@ test('TAN astrometry matches a known off-axis projection and rejects the linear 
   assert.ok(wrapped.stars[0]!.positionArcsec[0] < 0);
 });
 
-test('dust support never erases a measured star; all image lenses preserve the optical overlay', () => {
+test('dust support never erases a measured star; all image datasets preserve the optical overlay', () => {
   const source = catalogue([star('supported', 6), star('no-dust', 7, 1.1, 58.75, 24.12), star('outside-frame', 2, null, 80, 24)]);
   const before = structuredClone(source), field = model();
   const a = prepareCatalogueStars(source, field, center, 100, ['optical', 'infrared']);
@@ -102,6 +102,6 @@ test('malformed catalogue fields, epoch, duplicate identities and invalid limits
   assert.throws(() => prepareCatalogueStars({ ...valid, coordinateEpochJulianYear: 2016 }, model(), center, 10, ['optical']), /epoch 2000/);
   assert.throws(() => prepare([row, row]), /Duplicate/);
   assert.throws(() => prepareCatalogueStars(valid, model(), center, 5001, ['optical']), /maximum/);
-  assert.throws(() => prepareCatalogueStars(valid, model(), center, 10, ['optical', 'optical']), /lens/);
+  assert.throws(() => prepareCatalogueStars(valid, model(), center, 10, ['optical', 'optical']), /dataset/);
   assert.equal(prepare([row], 0).stars.length, 0);
 });

@@ -9,6 +9,7 @@ import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { presentOverviewResults, createSearchPresentation } from './search/search-results-presentation.mts';
 import { WORLD_OBJECTS } from './world-objects.mts';
+import { SEARCH_SUGGESTION_MIN_CHARACTERS } from './runtime-policy.mts';
 
 export interface ObjectBrowserOptions {
   readSelection(): SceneSubject;
@@ -214,8 +215,8 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
     }, { signal: events.signal });
   }
   search.addEventListener("input", () => {
-    if (!open || !search.value.trim()) showResults();
-    else filter();
+    if (search.value.trim().length < SEARCH_SUGGESTION_MIN_CHARACTERS) setOpen(false);
+    else showResults();
   }, { signal: events.signal });
   // Source result rows have explicit visibility. Reading every row's geometry
   // here would synchronously lay out all skipped groups on each arrow key.

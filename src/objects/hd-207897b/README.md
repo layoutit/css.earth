@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around HD 207897. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default. This account was drafted from MacDougall et al. 2023's values; the sections below are the data's own.
+It is the only planet known around HD 207897. Its orbit and size follow MacDougall et al. 2023's fit, the archive's default. The introduction is generated from MacDougall et al. 2023's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.20903072 Jupiter radii from Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract): 14,944 km at 71,492 km per Jupiter radius. GM from the mass 0.04656601 Jupiter masses (Polanski et al. 2024 (2024ApJS..272...32P), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -13,10 +13,5 @@ It is the only planet known around HD 207897. Its orbit and size follow MacDouga
 ## Evidence
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hd-207897b.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

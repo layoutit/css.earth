@@ -17,7 +17,7 @@
       "id": "cassini-iss-photometry",
       "subject": "Albiorix Cassini ISS photometry",
       "status": "included",
-      "finding": "Cassini ISS and the Albiorix observation record supply the disk-integrated brightness and elongation evidence used by the bounded shape model. They are not a registered photographic surface or spatial colour lens.",
+      "finding": "Cassini ISS and the Albiorix observation record supply the disk-integrated brightness and elongation evidence used by the bounded shape model. They are not a registered photographic surface or spatial colour dataset.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
         "https://tilmanndenk.de/outersaturnianmoons/albiorix/"
@@ -39,7 +39,7 @@
       "subject": "Albiorix registered imagery, terrain and composition routes",
       "status": "excluded",
       "finding": "The reviewed Cassini and author sources qualify no registered image map, DEM, geology layer or spatial composition product for Albiorix. Integrated observations remain separate from the explicit missing-data grid.",
-      "revisitWhen": "A body-specific registered image, terrain, geology or spatial-composition release can support a separately qualified lens.",
+      "revisitWhen": "A body-specific registered image, terrain, geology or spatial-composition release can support a separately qualified dataset.",
       "evidence": [
         "https://pds-rings.seti.org/cassini/iss/",
         "https://tilmanndenk.de/outersaturnianmoons/albiorix/"
@@ -50,7 +50,7 @@
       "subject": "Albiorix JWST NIRSpec spectrum",
       "status": "excluded",
       "finding": "Belyakov and Brown (2025) provides unresolved 0.7–5.3 micrometre spectra. It is not a spatial composition map or texture for Albiorix.",
-      "revisitWhen": "A spatially resolved and registered Albiorix composition product can support a surface lens.",
+      "revisitWhen": "A spatially resolved and registered Albiorix composition product can support a surface dataset.",
       "evidence": [
         "https://arxiv.org/abs/2503.20046"
       ]

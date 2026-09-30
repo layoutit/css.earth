@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/wasp-18b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "temperature-0-89um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_0.89.npz",
       "falseColor": true,
       "science": {
@@ -59,7 +59,7 @@
     {
       "id": "temperature-0-97um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_0.97.npz",
       "falseColor": true,
       "science": {
@@ -97,7 +97,7 @@
     {
       "id": "temperature-1-05um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.05.npz",
       "falseColor": true,
       "science": {
@@ -135,7 +135,7 @@
     {
       "id": "temperature-1-13um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.13.npz",
       "falseColor": true,
       "science": {
@@ -173,7 +173,7 @@
     {
       "id": "temperature-1-21um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.21.npz",
       "falseColor": true,
       "science": {
@@ -211,7 +211,7 @@
     {
       "id": "temperature-1-29um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.29.npz",
       "falseColor": true,
       "science": {
@@ -249,7 +249,7 @@
     {
       "id": "temperature-1-37um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.37.npz",
       "falseColor": true,
       "science": {
@@ -287,7 +287,7 @@
     {
       "id": "temperature-1-45um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.45.npz",
       "falseColor": true,
       "science": {
@@ -325,7 +325,7 @@
     {
       "id": "temperature-1-53um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.53.npz",
       "falseColor": true,
       "science": {
@@ -363,7 +363,7 @@
     {
       "id": "temperature-1-60um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.60.npz",
       "falseColor": true,
       "science": {
@@ -401,7 +401,7 @@
     {
       "id": "temperature-1-68um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.68.npz",
       "falseColor": true,
       "science": {
@@ -439,7 +439,7 @@
     {
       "id": "temperature-1-76um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.76.npz",
       "falseColor": true,
       "science": {
@@ -477,7 +477,7 @@
     {
       "id": "temperature-1-84um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.84.npz",
       "falseColor": true,
       "science": {
@@ -515,7 +515,7 @@
     {
       "id": "temperature-1-92um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_1.92.npz",
       "falseColor": true,
       "science": {
@@ -553,7 +553,7 @@
     {
       "id": "temperature-2-00um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.00.npz",
       "falseColor": true,
       "science": {
@@ -591,7 +591,7 @@
     {
       "id": "temperature-2-08um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.08.npz",
       "falseColor": true,
       "science": {
@@ -629,7 +629,7 @@
     {
       "id": "temperature-2-16um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.16.npz",
       "falseColor": true,
       "science": {
@@ -667,7 +667,7 @@
     {
       "id": "temperature-2-24um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.24.npz",
       "falseColor": true,
       "science": {
@@ -705,7 +705,7 @@
     {
       "id": "temperature-2-31um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.31.npz",
       "falseColor": true,
       "science": {
@@ -743,7 +743,7 @@
     {
       "id": "temperature-2-39um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.39.npz",
       "falseColor": true,
       "science": {
@@ -781,7 +781,7 @@
     {
       "id": "temperature-2-47um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.47.npz",
       "falseColor": true,
       "science": {
@@ -819,7 +819,7 @@
     {
       "id": "temperature-2-55um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.55.npz",
       "falseColor": true,
       "science": {
@@ -857,7 +857,7 @@
     {
       "id": "temperature-2-63um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.63.npz",
       "falseColor": true,
       "science": {
@@ -895,7 +895,7 @@
     {
       "id": "temperature-2-71um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.71.npz",
       "falseColor": true,
       "science": {
@@ -933,7 +933,7 @@
     {
       "id": "temperature-2-79um",
       "output": "wasp-18b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-18b-lens-{id}.webp",
+      "thumbnail": "wasp-18b-dataset-{id}.webp",
       "source": "science/challener-2025/temp_wave_2.79.npz",
       "falseColor": true,
       "science": {

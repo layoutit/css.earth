@@ -1,12 +1,12 @@
 /**
- * Write a survey photograph lens into a body's package, from a fresh setup run.
+ * Write a survey photograph dataset into a body's package, from a fresh setup run.
  *
  *   node packages/bake/cli/sphere-survey-install.mts <object-id>
  *
  * The run is rebuilt first, so the package receives exactly what was just measured: the frames, the ADAM mesh, both
  * Horizons tables and the spin record where they are new, the recipe, the observer-cameras and comparison records and
- * the manifest. Around them it writes what a shipped lens needs: download operations and the Horizons tables' refresh
- * steps, the lens control, reader text, the ledger's decision and the entries it closes, the README's source rows and
+ * the manifest. Around them it writes what a shipped dataset needs: download operations and the Horizons tables' refresh
+ * steps, the dataset control, reader text, the ledger's decision and the entries it closes, the README's source rows and
  * generated evidence blocks, credits and the evidence itself, then re-pins the package's documents. Preparation, the
  * registration block, source records and publishing follow with their own commands, which it prints.
  */
@@ -20,14 +20,14 @@ import { OBSERVER_CAMERAS_FILE } from '../layers/terrestrial/index.ts';
 import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.ts';
 import { INVESTIGATION_SURVEY_DIRECTORY } from '../../sources/index.ts';
 import { writeHorizonsOperations } from '../layers/terrestrial/index.ts';
-import { LENS_ID, SURVEY_LENS_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './survey-setup.ts';
+import { DATASET_ID, SURVEY_DATASET_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './survey-setup.ts';
 
-export const COMPARISON_ENTRY = `${LENS_ID}-published-comparison`;
+export const COMPARISON_ENTRY = `${DATASET_ID}-published-comparison`;
 const readJson = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const writeJson = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 
 /** The ledger's account of a published comparison, from its evidence and the spin record's reading; nothing in it is typed. */
-/** The ledger entries a SPHERE photograph lens answers when it is installed. */
+/** The ledger entries a SPHERE photograph dataset answers when it is installed. */
 const DAMIT = 'https://damit.cuni.cz/';
 const ANSWERED = ['surface-imagery', 'lam-adam-alternative', 'sphere-cross-frame-registration'];
 
@@ -50,11 +50,11 @@ export function nightsText(nights: readonly string[]) {
   return `${nights.length} nights from ${nights[0]} to ${nights.at(-1)}`;
 }
 const years = (nights: readonly string[]) => { const all = [...new Set(nights.map(night => night.slice(0, 4)))]; return all.length === 1 ? all[0] : `${all[0]}–${all.at(-1)}`; };
-/** How the lens's levels are matched, as its notes and README say it. */
+/** How the dataset's levels are matched, as its notes and README say it. */
 export const levelWords = (apparitions: number) => apparitions > 1
   ? 'matched relative frame brightness, each apparition placed through the surface it shares with another' : 'matched relative frame brightness';
 
-/** Why released frames other than those left out by name stay out of a lens: apparitions the level fit cannot reach, and frames beyond the bound. */
+/** Why released frames other than those left out by name stay out of a dataset: apparitions the level fit cannot reach, and frames beyond the bound. */
 export function unusedWords(apparitions: readonly { from: string; to: string; frames: number; cast: number; sharedSamples: number | null }[], minimumPairs: number) {
   const unreached = apparitions.filter(entry => entry.cast === 0).map(entry => `${entry.frames} from the ${entry.from} to ${entry.to} apparition, which shares at most ${entry.sharedSamples} display samples with a cast frame within the level fit's angle limit, fewer than the ${minimumPairs} it needs to place their level`);
   const thinned = apparitions.reduce((sum, entry) => sum + (entry.cast > 0 ? entry.frames - entry.cast : 0), 0);
@@ -67,9 +67,9 @@ export async function installSetup(objectId: string, options: { root: string; le
   const { root } = options;
   const objectDirectory = resolve(root, 'src/objects', objectId), packageSource = resolve(objectDirectory, 'source');
   const recipe = await readJson(resolve(packageSource, 'preparation/terrestrial.json'));
-  const lenses = requireRecord(recipe.raster).surfaceObservations;
-  const earlier = Array.isArray(lenses) ? lenses.map(lens => requireRecord(lens)).find(lens => lens.id === LENS_ID) : undefined;
-  if (earlier && !options.replace) throw new Error(`${objectId} already has a ${LENS_ID} lens; the setup run compares with it and installs nothing. --replace rebuilds it from the setup.`);
+  const datasets = requireRecord(recipe.raster).surfaceObservations;
+  const earlier = Array.isArray(datasets) ? datasets.map(dataset => requireRecord(dataset)).find(dataset => dataset.id === DATASET_ID) : undefined;
+  if (earlier && !options.replace) throw new Error(`${objectId} already has a ${DATASET_ID} dataset; the setup run compares with it and installs nothing. --replace rebuilds it from the setup.`);
   const earlierFrames = earlier ? requireArray(earlier.frames).map(frame => requireString(requireRecord(frame).path)) : [];
   const leaveOut = options.leaveOut ?? [], leaveOutApparitions = options.leaveOutApparitions ?? [];
   if (leaveOut.length + leaveOutApparitions.length > 0 && !options.because?.trim()) throw new Error('A frame or apparition left out needs its reason: --because=<why>.');
@@ -80,8 +80,8 @@ export async function installSetup(objectId: string, options: { root: string; le
   const disagreeing = evidence.columns.filter(column => phaseAgreement(column) === 'elsewhere');
   if (disagreeing.length > 0) throw new Error(`${objectId}'s rotation and the paper's model disagree in ${disagreeing.map(column => `${column.label} (best at ${column.bestTurnDegrees}°)`).join(', ')}; nothing installed.`);
   const today = new Date().toISOString().slice(0, 10);
-  const lensFrames = setup.cast.frames, nights = setup.cast.nights, onAdam = setup.lensMesh === 'adam', castApparitions = setup.apparitions.filter(entry => entry.cast > 0).length;
-  // The mesh the lens rides, named as the Shape view's source when the release has no ADAM mesh for the body.
+  const datasetFrames = setup.cast.frames, nights = setup.cast.nights, onAdam = setup.datasetMesh === 'adam', castApparitions = setup.apparitions.filter(entry => entry.cast > 0).length;
+  // The mesh the dataset rides, named as the Shape view's source when the release has no ADAM mesh for the body.
   const primaryPath = requireString(requireRecord(requireRecord(recipe.geometry).radialTerrain).path);
   const primaryInput = requireArray((await readJson(resolve(packageSource, 'manifest.json'))).inputs).map(value => requireRecord(value)).find(input => input.path === primaryPath);
   const meshSource = onAdam ? `${objectId}-adam-shape` : requireString(primaryInput?.id, 'primary shape input');
@@ -98,7 +98,7 @@ export async function installSetup(objectId: string, options: { root: string; le
     await mkdir(dirname(resolve(packageSource, path)), { recursive: true });
     await copyFile(resolve(scratch, path), resolve(packageSource, path));
   }
-  // A replaced lens's frames that the setup no longer selects leave the package: file, pin and source record.
+  // A replaced dataset's frames that the setup no longer selects leave the package: file, pin and source record.
   const dropped = earlierFrames.filter(path => !setup.written.includes(path));
   if (dropped.length > 0) {
     const manifest = await readJson(resolve(packageSource, 'manifest.json')), inputs = requireArray(manifest.inputs).map(value => requireRecord(value));
@@ -131,26 +131,26 @@ export async function installSetup(objectId: string, options: { root: string; le
   // The Horizons tables are asked for again by their own refresh steps, holding the exact batched queries.
   await writeHorizonsOperations(objectId, packageSource);
 
-  // The lens control and its reader text.
-  const content = await readJson(resolve(packageSource, 'content/object.json')), controls = requireArray(requireRecord(content.lenses).controls);
-  const controlAt = controls.findIndex(entry => requireRecord(entry).id === LENS_ID);
+  // The dataset control and its reader text.
+  const content = await readJson(resolve(packageSource, 'content/object.json')), controls = requireArray(requireRecord(content.datasets).controls);
+  const controlAt = controls.findIndex(entry => requireRecord(entry).id === DATASET_ID);
   if (controlAt >= 0) controls.splice(controlAt, 1);
-  controls.splice(controlAt >= 0 ? controlAt : controls.length, 0, { id: LENS_ID, label: 'SPHERE photograph', thumbnail: `/scenes/${objectId}/${objectId}-${LENS_ID}-thumbnail.webp`,
-    surface: `${objectId}-${LENS_ID}-surface@2x.webp`, poles: `${objectId}-${LENS_ID}-surface@2x.webp`, source: { id: meshSource, path: '../manifest.json' },
+  controls.splice(controlAt >= 0 ? controlAt : controls.length, 0, { id: DATASET_ID, label: 'SPHERE photograph', thumbnail: `/scenes/${objectId}/${objectId}-${DATASET_ID}-thumbnail.webp`,
+    surface: `${objectId}-${DATASET_ID}-surface@2x.webp`, poles: `${objectId}-${DATASET_ID}-surface@2x.webp`, source: { id: meshSource, path: '../manifest.json' },
     falseColor: false, noData: true,
-    notes: `${lensFrames} deconvolved VLT/SPHERE/ZIMPOL frames, ${nightsText(nights)}, cast onto ${meshWords} Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure ${figure}. Grayscale is photographed illumination and ${levelWords(castApparitions)}. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected.` });
+    notes: `${datasetFrames} deconvolved VLT/SPHERE/ZIMPOL frames, ${nightsText(nights)}, cast onto ${meshWords} Pointing and orientation are computed from that record, JPL Horizons geometry and each frame’s header, at the midpoint of its exposure; the disc centre is fitted to the limb of the mesh. With these cameras the mesh reproduces Vernazza et al. (2021) Figure ${figure}. Grayscale is photographed illumination and ${levelWords(castApparitions)}. The deconvolution carries no radiometric calibration, so this is not measured albedo or colour. The grid marks surface that was unphotographed, too grazing, or rejected.` });
   await writeJson(resolve(packageSource, 'content/object.json'), content);
   const text = await readJson(resolve(objectDirectory, 'text.json'));
-  requireRecord(text.datasets)[LENS_ID] = { title: 'ZIMPOL deconvolved imaging', detail: `${lensFrames} frames, ${years(nights)}`,
+  requireRecord(text.datasets)[DATASET_ID] = { title: 'ZIMPOL deconvolved imaging', detail: `${datasetFrames} frames, ${years(nights)}`,
     summary: 'Telescope images of the lit surface, placed by the asteroid’s own measured spin. Grey is photographed light, not colour.' };
   await writeJson(resolve(objectDirectory, 'text.json'), text);
 
   // The ledger: the decision, and the entries it answers.
   const ledger = await readJson(resolve(objectDirectory, 'investigations.json')), entries = requireArray(ledger.entries).map(value => requireRecord(value));
   const listing = framesUrl(number, name), adam = setup.sources.mesh?.url ?? shapeUrl(number, name, 'adam');
-  const unused = setup.cast.released - lensFrames - leaveOut.length - setup.leftOutApparitions.reduce((sum, entry) => sum + entry.frames, 0);
+  const unused = setup.cast.released - datasetFrames - leaveOut.length - setup.leftOutApparitions.reduce((sum, entry) => sum + entry.frames, 0);
   const decision = {
-    id: COMPARISON_ENTRY, subject: `Vernazza et al. (2021) Figure ${figure} as the registration of the SPHERE photograph lens`, status: 'included',
+    id: COMPARISON_ENTRY, subject: `Vernazza et al. (2021) Figure ${figure} as the registration of the SPHERE photograph dataset`, status: 'included',
     finding: [decisionFinding(figure, evidence, setup.columnOrder), leftOutText].filter(Boolean).join(' '),
     evidence: [setup.evidence.source, listing, ...(onAdam ? [adam] : [])] };
   const at = entries.findIndex(entry => entry.id === COMPARISON_ENTRY);
@@ -166,7 +166,7 @@ export async function installSetup(objectId: string, options: { root: string; le
   }
   // An install run again the same day finds its own words at the front or back of an entry; it replaces them.
   const earlierWords = (text: string) => {
-    for (const [start, kept] of [[`Included ${today} as the SPHERE photograph lens:`, ' Earlier finding, kept: '], [`Decided ${today} by the published comparison instead:`, ' Earlier result, kept: ']] as const)
+    for (const [start, kept] of [[`Included ${today} as the SPHERE photograph dataset:`, ' Earlier finding, kept: '], [`Decided ${today} by the published comparison instead:`, ' Earlier result, kept: ']] as const)
       if (text.startsWith(start) && text.includes(kept)) return text.slice(text.indexOf(kept) + kept.length);
     const reopened = text.indexOf(` Reopened ${today} because its condition was met:`);
     return reopened >= 0 ? text.slice(0, reopened) : text;
@@ -179,54 +179,54 @@ export async function installSetup(objectId: string, options: { root: string; le
     if (link && !links.includes(link)) links.push(link);
     entry.evidence = links;
   };
-  close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph lens: ${lensFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam || setup.primaryIsAdam ? 'ADAM' : 'primary'} mesh with cameras computed from ${recordWords}, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: ${unusedWords(setup.apparitions, SURVEY_LENS_SETTINGS.levelMatching.minimumPairs)}.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
-  // A lens that casts more than one apparition answers the entry that kept the other apparition's frames out on levels.
-  if (castApparitions > 1) close('second-apparition-levels', earlier => `Included ${today} as the SPHERE photograph lens: it casts ${lensFrames} frames from ${castApparitions} apparitions, ${setup.apparitions.filter(entry => entry.cast > 0).map(entry => `${entry.from} to ${entry.to}`).join(' and ')}. The deconvolved frames carry no calibrated level and their scale differs between apparitions, so the level fit places each apparition through the surface it shares with another, from accepted overlaps within its angle limit; the budget still bounds each frame against its own apparition's first frame. The prepared lens report states every pair's samples, level error and residual. Earlier finding, kept: ${earlier}`, listing);
-  close('lam-adam-alternative', earlier => `${earlier} Reopened ${today} because its condition was met: the SPHERE photograph lens rides this ADAM mesh, the model the survey’s rotation record and Figure ${figure} describe; the Shape and Elevation views keep MPCD.`);
-  close('sphere-cross-frame-registration', earlier => `Decided ${today} by the published comparison instead: the lens is prepared from ${lensFrames} camera-1 frames on the ${onAdam || setup.primaryIsAdam ? 'ADAM' : 'primary'} mesh with the rotation record read ${setup.columnOrder.order}, and ships on ${COMPARISON_ENTRY}; the registration stage’s numbers are in the README. Earlier result, kept: ${earlier}`);
+  close('surface-imagery', earlier => `Included ${today} as the SPHERE photograph dataset: ${datasetFrames} camera-1 deconvolved frames, ${nightsText(nights)}, cast onto the ${onAdam || setup.primaryIsAdam ? 'ADAM' : 'primary'} mesh with cameras computed from ${recordWords}, JPL Horizons and each frame’s header. Its registration is the published comparison recorded in ${COMPARISON_ENTRY}.${unused ? ` The other ${unused} released camera-1 frames are not used: ${unusedWords(setup.apparitions, SURVEY_DATASET_SETTINGS.levelMatching.minimumPairs)}.` : ''}${leftOutText ? ` ${leftOutText}` : ''} Earlier finding, kept: ${earlier}`, listing);
+  // A dataset that casts more than one apparition answers the entry that kept the other apparition's frames out on levels.
+  if (castApparitions > 1) close('second-apparition-levels', earlier => `Included ${today} as the SPHERE photograph dataset: it casts ${datasetFrames} frames from ${castApparitions} apparitions, ${setup.apparitions.filter(entry => entry.cast > 0).map(entry => `${entry.from} to ${entry.to}`).join(' and ')}. The deconvolved frames carry no calibrated level and their scale differs between apparitions, so the level fit places each apparition through the surface it shares with another, from accepted overlaps within its angle limit; the budget still bounds each frame against its own apparition's first frame. The prepared dataset report states every pair's samples, level error and residual. Earlier finding, kept: ${earlier}`, listing);
+  close('lam-adam-alternative', earlier => `${earlier} Reopened ${today} because its condition was met: the SPHERE photograph dataset rides this ADAM mesh, the model the survey’s rotation record and Figure ${figure} describe; the Shape and Elevation views keep MPCD.`);
+  close('sphere-cross-frame-registration', earlier => `Decided ${today} by the published comparison instead: the dataset is prepared from ${datasetFrames} camera-1 frames on the ${onAdam || setup.primaryIsAdam ? 'ADAM' : 'primary'} mesh with the rotation record read ${setup.columnOrder.order}, and ships on ${COMPARISON_ENTRY}; the registration stage’s numbers are in the README. Earlier result, kept: ${earlier}`);
   ledger.entries = entries;
   await writeJson(resolve(objectDirectory, 'investigations.json'), ledger);
 
   // Evidence, README and credits.
   await mkdir(resolve(objectDirectory, 'evidence'), { recursive: true });
   for (const file of ['published-comparison.json', 'published-comparison.webp']) await copyFile(resolve(work, 'evidence', file), resolve(objectDirectory, 'evidence', file));
-  const lens = requireArray(requireRecord((await readJson(resolve(packageSource, 'preparation/terrestrial.json'))).raster).surfaceObservations).map(value => requireRecord(value)).find(entry => entry.id === LENS_ID);
-  const latitudes = requireArray(requireRecord(lens).frames).map(frame => Number(requireRecord(frame).observerLatitude));
-  const words: LensWords = { number, name, figure, lensFrames, nights, order: setup.columnOrder.order, source: setup.evidence.source, spinRecordUrl: setup.spinRecordUrl,
+  const dataset = requireArray(requireRecord((await readJson(resolve(packageSource, 'preparation/terrestrial.json'))).raster).surfaceObservations).map(value => requireRecord(value)).find(entry => entry.id === DATASET_ID);
+  const latitudes = requireArray(requireRecord(dataset).frames).map(frame => Number(requireRecord(frame).observerLatitude));
+  const words: DatasetWords = { number, name, figure, datasetFrames, nights, order: setup.columnOrder.order, source: setup.evidence.source, spinRecordUrl: setup.spinRecordUrl,
     rotationLabel: setup.sources.rotation.label, mesh: setup.sources.mesh ?? undefined, bodyName: name, latitudes: [Math.min(...latitudes), Math.max(...latitudes)], apparitions: castApparitions, leftOut: leftOutText };
   if (earlier) {
-    // A replaced lens keeps its package's own words, except the rows and limits the install wrote; the comparison block
+    // A replaced dataset keeps its package's own words, except the rows and limits the install wrote; the comparison block
     // is refreshed where the README carries one.
     let readme = await readFile(resolve(objectDirectory, 'README.md'), 'utf8');
     if (readme.includes(COMPARISON_BLOCK_BEGIN)) readme = withComparisonBlock(readme, comparisonBlock(evidence)).readme;
-    else console.log(`${objectId}: the README has no comparison block; describe the rebuilt lens there and in NOTICE.md by hand.`);
-    const refreshed = withRefreshedLens(readme, words);
-    if (refreshed.replaced.length) console.log(`${objectId}: README ${refreshed.replaced.join(', ')} written from the rebuilt lens.`);
+    else console.log(`${objectId}: the README has no comparison block; describe the rebuilt dataset there and in NOTICE.md by hand.`);
+    const refreshed = withRefreshedDataset(readme, words);
+    if (refreshed.replaced.length) console.log(`${objectId}: README ${refreshed.replaced.join(', ')} written from the rebuilt dataset.`);
     await writeFile(resolve(objectDirectory, 'README.md'), refreshed.readme);
   } else {
-    await writeFile(resolve(objectDirectory, 'README.md'), readmeWithLens(await readFile(resolve(objectDirectory, 'README.md'), 'utf8'), { ...words, block: comparisonBlock(evidence) }));
-    await writeFile(resolve(objectDirectory, 'NOTICE.md'), noticeWithLens(await readFile(resolve(objectDirectory, 'NOTICE.md'), 'utf8'), figure));
+    await writeFile(resolve(objectDirectory, 'README.md'), readmeWithDataset(await readFile(resolve(objectDirectory, 'README.md'), 'utf8'), { ...words, block: comparisonBlock(evidence) }));
+    await writeFile(resolve(objectDirectory, 'NOTICE.md'), noticeWithDataset(await readFile(resolve(objectDirectory, 'NOTICE.md'), 'utf8'), figure));
   }
 
   const { restored, missing } = await restorePinnedInputs(objectId, root), moved = await moveUnownedSceneFiles(objectId, root);
   if (restored.length) console.log(`Copied ${restored.length} declared input(s) from sibling checkouts by path: ${restored.join(', ')}.`);
   if (missing.length) console.log(`Still missing, restore them before preparing (node packages/bake/cli/object-operations.mts acquire ${objectId}): ${missing.join(', ')}.`);
   if (moved.length) console.log(`Moved ${moved.length} scene file(s) no inventory owns to output/stale-public/${objectId}/; preparation refuses unowned assets.`);
-  console.log([`Installed ${objectId}'s ${LENS_ID} lens and bound ${bound.bindings.length} new inputs to ${bound.records.length} new source records. Next:`,
+  console.log([`Installed ${objectId}'s ${DATASET_ID} dataset and bound ${bound.bindings.length} new inputs to ${bound.records.length} new source records. Next:`,
     `  node packages/bake/cli/prepare-object.mts ${objectId}`, `  node packages/bake/cli/report-registration.mts ${objectId} --write`,
     `  commit, then pnpm publish:runtime-assets --object=${objectId}`].join('\n'));
 }
 
-/** An anchor table with a lens appended to one body's `lenses`, as text; a body without a row, or already listing it, is unchanged. */
-export function withAnchoredLens(text: string, objectId: string, lensId: string) {
+/** An anchor table with a dataset appended to one body's `datasets`, as text; a body without a row, or already listing it, is unchanged. */
+export function withAnchoredDataset(text: string, objectId: string, datasetId: string) {
   const row = text.indexOf(`"${objectId}": {`);
   if (row < 0) return text;
-  const open = text.indexOf('"lenses": [', row), close = text.indexOf(']', open);
-  if (open < 0 || close < 0 || text.slice(row, open).includes('}')) throw new Error(`The anchor row for ${objectId} states no lenses.`);
-  const list = JSON.parse(text.slice(open + '"lenses": '.length, close + 1)) as unknown[];
-  if (list.includes(lensId)) return text;
+  const open = text.indexOf('"datasets": [', row), close = text.indexOf(']', open);
+  if (open < 0 || close < 0 || text.slice(row, open).includes('}')) throw new Error(`The anchor row for ${objectId} states no datasets.`);
+  const list = JSON.parse(text.slice(open + '"datasets": '.length, close + 1)) as unknown[];
+  if (list.includes(datasetId)) return text;
   const lastQuote = text.lastIndexOf('"', close), lineStart = text.lastIndexOf('\n', lastQuote) + 1, indent = text.slice(lineStart, text.indexOf('"', lineStart));
-  return `${text.slice(0, lastQuote + 1)},\n${indent}"${lensId}"${text.slice(lastQuote + 1)}`;
+  return `${text.slice(0, lastQuote + 1)},\n${indent}"${datasetId}"${text.slice(lastQuote + 1)}`;
 }
 
 /** Every declared input and document preparation will read, copied from the same path in a sibling checkout when it is missing here. */
@@ -259,46 +259,46 @@ export async function moveUnownedSceneFiles(objectId: string, root: string) {
   return moved;
 }
 
-interface LensWords { number: number; name: string; figure: string; lensFrames: number; nights: readonly string[]; order: string; source: string; spinRecordUrl: string; bodyName: string; latitudes: readonly [number, number]; apparitions?: number; leftOut?: string; rotationLabel?: string; mesh?: { label: string; url: string } }
+interface DatasetWords { number: number; name: string; figure: string; datasetFrames: number; nights: readonly string[]; order: string; source: string; spinRecordUrl: string; bodyName: string; latitudes: readonly [number, number]; apparitions?: number; leftOut?: string; rotationLabel?: string; mesh?: { label: string; url: string } }
 
-/** The lens's three rows in the Sources table. */
-function lensRows(lens: LensWords) {
-  return [`| SPHERE photograph | [${lens.lensFrames} deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, ${nightsText(lens.nights)}](${framesUrl(lens.number, lens.name)}) on the [${lens.mesh?.label ?? 'ADAM reconstruction'}](${lens.mesh?.url ?? shapeUrl(lens.number, lens.name, 'adam')}) |`,
-    `| Photograph cameras | [${lens.rotationLabel ?? 'Release rotation record'}](${lens.spinRecordUrl}), read ${lens.order}, and JPL Horizons geometry from Paranal |`,
-    `| Photograph registration | [Vernazza et al. (2021), Figure ${lens.figure}](${lens.source}) |`];
+/** The dataset's three rows in the Sources table. */
+function datasetRows(dataset: DatasetWords) {
+  return [`| SPHERE photograph | [${dataset.datasetFrames} deconvolved VLT/SPHERE/ZIMPOL frames, camera 1, ${nightsText(dataset.nights)}](${framesUrl(dataset.number, dataset.name)}) on the [${dataset.mesh?.label ?? 'ADAM reconstruction'}](${dataset.mesh?.url ?? shapeUrl(dataset.number, dataset.name, 'adam')}) |`,
+    `| Photograph cameras | [${dataset.rotationLabel ?? 'Release rotation record'}](${dataset.spinRecordUrl}), read ${dataset.order}, and JPL Horizons geometry from Paranal |`,
+    `| Photograph registration | [Vernazza et al. (2021), Figure ${dataset.figure}](${dataset.source}) |`];
 }
 /** The photograph's limits, as the Known problems section states them. */
-function lensProblem(lens: LensWords) {
-  const levels = (lens.apparitions ?? 1) > 1 ? 'with matched relative frame levels, each apparition placed through the surface it shares with another' : 'with matched relative frame levels';
-  return `The SPHERE photograph is photographed illumination from the survey's deconvolved frames, ${levels}, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see ${lens.bodyName} from ${latitudeSpan(lens.latitudes)}, so surface the survey did not see keeps the missing-imagery grid.${lens.leftOut ? ` ${lens.leftOut}` : ''}`;
+function datasetProblem(dataset: DatasetWords) {
+  const levels = (dataset.apparitions ?? 1) > 1 ? 'with matched relative frame levels, each apparition placed through the surface it shares with another' : 'with matched relative frame levels';
+  return `The SPHERE photograph is photographed illumination from the survey's deconvolved frames, ${levels}, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see ${dataset.bodyName} from ${latitudeSpan(dataset.latitudes)}, so surface the survey did not see keeps the missing-imagery grid.${dataset.leftOut ? ` ${dataset.leftOut}` : ''}`;
 }
 
-/** The README with the lens's source rows, a generated comparison section and the registration markers. */
-export function readmeWithLens(readme: string, lens: LensWords & { block: string }) {
-  if (readme.includes(COMPARISON_BLOCK_BEGIN) || readme.includes(REGISTRATION_BLOCK_BEGIN)) throw new Error('The README already carries lens evidence blocks.');
+/** The README with the dataset's source rows, a generated comparison section and the registration markers. */
+export function readmeWithDataset(readme: string, dataset: DatasetWords & { block: string }) {
+  if (readme.includes(COMPARISON_BLOCK_BEGIN) || readme.includes(REGISTRATION_BLOCK_BEGIN)) throw new Error('The README already carries dataset evidence blocks.');
   const lines = readme.split('\n'), evidenceAt = lines.indexOf('## Evidence');
   let lastRow = -1;
   for (let index = 0; index < evidenceAt; index++) if (lines[index].startsWith('| ')) lastRow = index;
   if (evidenceAt < 0 || lastRow < 0) throw new Error('The README has no Sources table and Evidence section to extend.');
-  lines.splice(lastRow + 1, 0, ...lensRows(lens));
+  lines.splice(lastRow + 1, 0, ...datasetRows(dataset));
   const at = lines.indexOf('## Evidence');
   lines.splice(at + 1, 0, '', '### SPHERE photograph', '', COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, '', '### Registration', '', REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END, '', '### Shape');
   // The photograph's limits go with the other known problems, before the package links that close the section.
   const problems = lines.indexOf('## Known problems'), footer = lines.findIndex((line, index) => index > problems && (line.startsWith('[Investigation ledger]') || line.startsWith('[Inputs]')));
   if (problems < 0 || footer < 0) throw new Error('The README has no Known problems section ending in the package links.');
-  lines.splice(footer, 0, lensProblem(lens), '');
-  return withComparisonBlock(lines.join('\n'), lens.block).readme;
+  lines.splice(footer, 0, datasetProblem(dataset), '');
+  return withComparisonBlock(lines.join('\n'), dataset.block).readme;
 }
 
 /**
- * A rebuilt lens's README: the rows and the limits sentence the install wrote are written again from the new setup, so
- * frame counts, nights and latitudes follow the lens; every other word stays the package's. Returns the lines replaced.
+ * A rebuilt dataset's README: the rows and the limits sentence the install wrote are written again from the new setup, so
+ * frame counts, nights and latitudes follow the dataset; every other word stays the package's. Returns the lines replaced.
  */
-export function withRefreshedLens(readme: string, lens: LensWords) {
-  const lines = readme.split('\n'), rows = lensRows(lens), replaced: string[] = [];
+export function withRefreshedDataset(readme: string, dataset: DatasetWords) {
+  const lines = readme.split('\n'), rows = datasetRows(dataset), replaced: string[] = [];
   const swap = (prefix: string, line: string) => { const at = lines.findIndex(candidate => candidate.startsWith(prefix)); if (at >= 0 && lines[at] !== line) { lines[at] = line; replaced.push(prefix.trim()); } };
   swap('| SPHERE photograph | [', rows[0]); swap('| Photograph cameras | [', rows[1]); swap('| Photograph registration | [', rows[2]);
-  swap('The SPHERE photograph is photographed illumination from the survey', lensProblem(lens));
+  swap('The SPHERE photograph is photographed illumination from the survey', datasetProblem(dataset));
   return { readme: lines.join('\n'), replaced };
 }
 
@@ -312,7 +312,7 @@ export function latitudeSpan([low, high]: readonly [number, number]) {
 }
 
 /** The credits with the photograph's source and the reproduced figure panels. */
-export function noticeWithLens(notice: string, figure: string) {
+export function noticeWithDataset(notice: string, figure: string) {
   const credit = `\`evidence/published-comparison.webp\` reproduces the photograph panels of the article’s Figure ${figure} with outlines drawn over them, under the article’s CC-BY-4.0 licence. The photographic surface is the survey’s own deconvolved VLT/SPHERE/ZIMPOL frames, credited to its authors and to ESO programme 199.C-0074; it carries their photographed illumination and no radiometric calibration, so it is not measured albedo or colour. Its placement reproduces the article’s Figure ${figure}. No photographic texture is attributed to NASA.`;
   const shapeOnly = 'This package does not attribute a photographic surface texture to NASA or ESO.';
   if (notice.includes(shapeOnly)) return notice.replace(shapeOnly, credit);

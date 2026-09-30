@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "epic-214606859",
   "displayName": "EPIC 214606859",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "epic-214606859-lens-color.webp",
+        "thumbnail": "epic-214606859-dataset-color.webp",
         "surface": "epic-214606859-surface-color@2x.webp",
         "poles": "epic-214606859-poles-color@2x.webp",
         "source": {

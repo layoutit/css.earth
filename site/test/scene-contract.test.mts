@@ -38,18 +38,18 @@ test("publishes one off-by-default Shadows control for every planet", async () =
 });
 
 test("control content permits empty capabilities but rejects malformed or conflicting declarations", () => {
-  for (const content of [{ lenses: null, settings: null }, { lenses: undefined, settings: undefined },
-    { lenses: { controls: [] }, settings: { controls: [] } }]) {
+  for (const content of [{ datasets: null, settings: null }, { datasets: undefined, settings: undefined },
+    { datasets: { controls: [] }, settings: { controls: [] } }]) {
     assert.equal(requireObjectControls(content, "future"), content);
   }
-  for (const content of [{}, { lenses: null }, { lenses: { controls: [{ id: "a" }, { id: "a" }] }, settings: null },
-    { lenses: { default: "missing", controls: [{ id: "a" }] }, settings: null },
-    { lenses: null, settings: { controls: [{ name: "motion", kind: "toggle", label: "Motion", checked: false }] } },
-    { lenses: null, settings: { controls: [{ name: "rings", kind: "invented", label: "Rings" }] } },
-    { lenses: { controls: [null] }, settings: null },
-    { lenses: null, settings: { controls: [null] } },
-    { lenses: 1, settings: null },
-    { lenses: null, settings: { controls: [{ name: "rings", kind: "toggle", label: "Rings", checked: "false" }] } }]) {
+  for (const content of [{}, { datasets: null }, { datasets: { controls: [{ id: "a" }, { id: "a" }] }, settings: null },
+    { datasets: { default: "missing", controls: [{ id: "a" }] }, settings: null },
+    { datasets: null, settings: { controls: [{ name: "motion", kind: "toggle", label: "Motion", checked: false }] } },
+    { datasets: null, settings: { controls: [{ name: "rings", kind: "invented", label: "Rings" }] } },
+    { datasets: { controls: [null] }, settings: null },
+    { datasets: null, settings: { controls: [null] } },
+    { datasets: 1, settings: null },
+    { datasets: null, settings: { controls: [{ name: "rings", kind: "toggle", label: "Rings", checked: "false" }] } }]) {
     assert.throws(() => requireObjectControls(content, "future"));
   }
 });

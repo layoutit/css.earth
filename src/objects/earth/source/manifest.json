@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "geonames-cities15000-zip",
@@ -115,7 +115,7 @@
       "consumers": [
         "navigation",
         "scene",
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -152,7 +152,7 @@
       "consumers": [
         "navigation",
         "scene",
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -188,7 +188,7 @@
       "redistribution": "NASA image with credit and no endorsement claim",
       "consumers": [
         "scene",
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -248,7 +248,7 @@
       "acquisition": "checked Black Marble 2016 global 3 km image at 13500 by 6750 pixels",
       "redistribution": "NASA image with credit and no endorsement claim",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "capture": {
         "attributions": [
@@ -1107,7 +1107,7 @@
       "acquisition": "2025 VJ146A4.002 AllAngle_Composite_Snow_Free, public Float32 EPSG:4326 mosaic. Archive checked 2026-09-09; HTTP Last-Modified 2026-03-29. Native 15 arc-second cells, 75 N to 65 S. QA/count bands are not included by the mirror; -999.9 is missing and zero is valid thresholded background.",
       "redistribution": "NASA factual radiance with NASA Black Marble and Jurij Stare / lightpollutionmap.info attribution; no map screenshots or sky-brightness model reused.",
       "consumers": [
-        "lenses"
+        "datasets"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -1423,7 +1423,7 @@
           {
             "catalogueId": "source-dscovr-epic-l1b-v03",
             "role": "material",
-            "evidence": "Fitted by tools/photometry/fit-epic-limb.mts to the 680 nm Image and per-pixel Sun and view angles of six 2023 Level 1B v03 frames (epic_1b_20230201020554_03, epic_1b_20230401061002_03, epic_1b_20230601000831_03, epic_1b_20230801144729_03, epic_1b_20231002185542_03, epic_1b_20231201220341_03), read from https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/2023/. Mean k 0.394, frame-to-frame spread 0.066; per-frame fits and bin residuals are in src/objects/earth/evidence/epic-limb-fit.json. Bins with cosines below 0.1 are left out, so the law is held at 84.3 degrees.",
+            "evidence": "Fitted by tools/photometry/fit-epic-limb.mts to the 680 nm Image and per-pixel Sun and view angles of six 2023 Level 1B v03 frames (epic_1b_20230201020554_03, epic_1b_20230401061002_03, epic_1b_20230601000831_03, epic_1b_20230801144729_03, epic_1b_20231002185542_03, epic_1b_20231201220341_03), read from https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/2023/. Mean k 0.394, frame-to-frame spread 0.066. Bins with cosines below 0.1 are left out, so the law is held at 84.3 degrees.",
             "locator": "Band680nm/Image; Band680nm/Geolocation/Earth"
           }
         ]
@@ -1441,7 +1441,7 @@
           {
             "catalogueId": "source-dscovr-epic-l1b-v03",
             "role": "material",
-            "evidence": "Fitted by tools/photometry/fit-epic-limb.mts to the 551 nm Image and per-pixel Sun and view angles of six 2023 Level 1B v03 frames (epic_1b_20230201020554_03, epic_1b_20230401061002_03, epic_1b_20230601000831_03, epic_1b_20230801144729_03, epic_1b_20231002185542_03, epic_1b_20231201220341_03), read from https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/2023/. Mean k 0.428, frame-to-frame spread 0.044; per-frame fits and bin residuals are in src/objects/earth/evidence/epic-limb-fit.json. Bins with cosines below 0.1 are left out, so the law is held at 84.3 degrees.",
+            "evidence": "Fitted by tools/photometry/fit-epic-limb.mts to the 551 nm Image and per-pixel Sun and view angles of six 2023 Level 1B v03 frames (epic_1b_20230201020554_03, epic_1b_20230401061002_03, epic_1b_20230601000831_03, epic_1b_20230801144729_03, epic_1b_20231002185542_03, epic_1b_20231201220341_03), read from https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/2023/. Mean k 0.428, frame-to-frame spread 0.044. Bins with cosines below 0.1 are left out, so the law is held at 84.3 degrees.",
             "locator": "Band551nm/Image; Band551nm/Geolocation/Earth"
           }
         ]
@@ -1459,7 +1459,7 @@
           {
             "catalogueId": "source-dscovr-epic-l1b-v03",
             "role": "material",
-            "evidence": "Fitted by tools/photometry/fit-epic-limb.mts to the 443 nm Image and per-pixel Sun and view angles of six 2023 Level 1B v03 frames (epic_1b_20230201020554_03, epic_1b_20230401061002_03, epic_1b_20230601000831_03, epic_1b_20230801144729_03, epic_1b_20231002185542_03, epic_1b_20231201220341_03), read from https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/2023/. Mean k 0.41, frame-to-frame spread 0.034; per-frame fits and bin residuals are in src/objects/earth/evidence/epic-limb-fit.json. Bins with cosines below 0.1 are left out, so the law is held at 84.3 degrees.",
+            "evidence": "Fitted by tools/photometry/fit-epic-limb.mts to the 443 nm Image and per-pixel Sun and view angles of six 2023 Level 1B v03 frames (epic_1b_20230201020554_03, epic_1b_20230401061002_03, epic_1b_20230601000831_03, epic_1b_20230801144729_03, epic_1b_20231002185542_03, epic_1b_20231201220341_03), read from https://avdc.gsfc.nasa.gov/pub/DSCOVR/Level1b_v03/2023/. Mean k 0.41, frame-to-frame spread 0.034. Bins with cosines below 0.1 are left out, so the law is held at 84.3 degrees.",
             "locator": "Band443nm/Image; Band443nm/Geolocation/Earth"
           }
         ]

@@ -4,7 +4,7 @@
   "entries": [
     {
       "id": "galileo-c0368591600",
-      "subject": "Galileo SSI frame C0368591600 in the Monochrome lens",
+      "subject": "Galileo SSI frame C0368591600 in the Monochrome dataset",
       "status": "excluded",
       "finding": "Thebe is a 77-pixel lit crescent, and no level reconciles it with the other frames: without it their fitted levels span 1 to 0.59 instead of 1 to 0.20.",
       "revisitWhen": "An overlapping frame can set its level, or a closer view of the same longitudes is released.",
@@ -16,7 +16,7 @@
       "id": "galileo-selected-frames",
       "subject": "Selected Galileo SSI clear frames",
       "status": "included",
-      "finding": "C0401759200, C0401787200, C0420691700 and C0532888400 supply the retained coarse Monochrome lens. Repeated exposures/cutouts and lower-resolution duplicates add no useful coverage. The selection does not qualify independent surface-feature registration.",
+      "finding": "C0401759200, C0401787200, C0420691700 and C0532888400 supply the retained coarse Monochrome dataset. Repeated exposures/cutouts and lower-resolution duplicates add no useful coverage. The selection does not qualify independent surface-feature registration.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/thebe/source/manifest.json",
         "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/j14thebe.tab"

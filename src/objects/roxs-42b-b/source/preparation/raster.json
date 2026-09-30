@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/roxs-42b-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "infrared",
       "output": "roxs-42b-b-surface-{id}{suffix}.webp",
-      "thumbnail": "roxs-42b-b-lens-{id}.webp",
+      "thumbnail": "roxs-42b-b-dataset-{id}.webp",
       "source": "photometry/band-color.json",
       "falseColor": true,
       "science": {

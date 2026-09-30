@@ -42,7 +42,7 @@ The García-Díaz author-hosted atlas endpoint was inaccessible during this inta
 1. Overlay the spectroscopic footprints and line maps on the existing aligned images. Verify astrometry and identify valid signal before fitting.
 2. Fit a shallow, spatially varying ionization-front surface in the covered core, with a separately parameterized thickness and photoevaporative flow. Add distinct foreground shell/cavity hypotheses using the literature. Leave uncovered depths explicitly unconstrained.
 3. Forward-project each hypothesis into the actual measurements: line brightness, line-of-sight velocity and extinction where available. Withhold spatial regions or complete slit positions; compare against the current centered-depth baseline without loosening gates.
-4. Condition small-scale emission on those surfaces and components. Texture/color remains an independent lens. Include an absorption/scattering model before interpreting dark lanes or reflection-dominated outskirts as recovered density.
+4. Condition small-scale emission on those surfaces and components. Texture/color remains an independent dataset. Include an absorption/scattering model before interpreting dark lanes or reflection-dominated outskirts as recovered density.
 5. Inspect the same observer projection, sides and intermediate rotations with shared stars, stable light and explicit missing coverage. Better front-image agreement alone cannot qualify the 3D model.
 
 Success means improved agreement with independent physical observations and a coherent rotating volume. It does not mean a uniquely recovered Orion gas distribution. Do not replace the current model with an arbitrary thinner extrusion and call the geometry solved.

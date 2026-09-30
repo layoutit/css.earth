@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/iapetus/",
   "sourceWidth": 8192,
   "sourceHeight": 4096,
@@ -21,7 +21,7 @@
       "id": "normal",
       "resolutionScale": 0.25,
       "output": "iapetus-{id}{suffix}.webp",
-      "thumbnail": "iapetus-lens-{id}.webp",
+      "thumbnail": "iapetus-dataset-{id}.webp",
       "source": "observations/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
       "falseColor": false,
       "science": {
@@ -44,7 +44,7 @@
     {
       "id": "enhanced",
       "output": "iapetus-{id}{suffix}.webp",
-      "thumbnail": "iapetus-lens-{id}.webp",
+      "thumbnail": "iapetus-dataset-{id}.webp",
       "source": "observations/PIA18436.jpg",
       "falseColor": false,
       "science": {
@@ -64,7 +64,7 @@
     {
       "id": "infrared",
       "output": "iapetus-{id}{suffix}.webp",
-      "thumbnail": "iapetus-lens-{id}.webp",
+      "thumbnail": "iapetus-dataset-{id}.webp",
       "source": "cassini-ice/iapetus-infrared-display.tif",
       "falseColor": true,
       "science": {
@@ -99,7 +99,7 @@
     {
       "id": "ice-absorption",
       "output": "iapetus-{id}{suffix}.webp",
-      "thumbnail": "iapetus-lens-{id}.webp",
+      "thumbnail": "iapetus-dataset-{id}.webp",
       "source": "cassini-ice/iapetus-ice-absorption.tif",
       "falseColor": true,
       "science": {
@@ -150,7 +150,7 @@
     {
       "id": "temperature",
       "output": "iapetus-{id}{suffix}.webp",
-      "thumbnail": "iapetus-lens-{id}.webp",
+      "thumbnail": "iapetus-dataset-{id}.webp",
       "source": "figures/pia07005-map.png",
       "falseColor": true,
       "science": {

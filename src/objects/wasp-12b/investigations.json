@@ -4,7 +4,7 @@
   "entries": [
     {
       "id": "nasa-vtad-illustration",
-      "subject": "NASA VTAD WASP-12b 3D model texture as an illustration lens",
+      "subject": "NASA VTAD WASP-12b 3D model texture as an illustration dataset",
       "status": "excluded",
       "finding": "Not shown. NASA's WASP-12b 3D Model (WASP-12b_1_249888.glb) is egg-shaped, as the planet is stretched by its star: semi-axes 640, 449 and 480 units, centred 62 units off its origin, 6.5% from the best-fitting centred ellipsoid where the illustration route allows 1%. Its texture coordinates are not the mesh's own longitude and latitude (median 5 degrees, up to 19 degrees apart), so no placement on the published sphere keeps NASA's texels where the model puts them. The base-colour texture is named JupiterColor_orange_w_hotspot.jpg: a recoloured Jupiter with a hot spot.",
       "revisitWhen": "NASA publishes a WASP-12b illustration drawn on this planet, whose texture coordinates are the mesh's own longitude and latitude.",
@@ -17,7 +17,7 @@
       "id": "bell-2019-3-6um-maps",
       "subject": "Bell et al. (2019) Spitzer 3.6 um first-order fits of 2010 and 2013, as two maps of longitude",
       "status": "included",
-      "finding": "Shown as two temperature lenses through the Cowan & Agol (2008) inversion, one per visit, each legend naming the other. Table A2 fiducial (PLD, first order) rows: 2010 C1 0.371, D1 -0.239, F_day 3870 ppm, R_p/R_* 0.11642; 2013 C1 0.320, D1 0.079, F_day 3840 ppm, R_p/R_* 0.11327. With the star at the value each row's day side implies (6,033 and 6,031 K), the night sides come out 1,525 and 1,757 K against 1,510 +/- 210 and 1,760 +/- 97 K, and the peaks 32.8 degrees before and 13.9 degrees after eclipse against 32.6 +/- 6.2 and -13.6 +/- 3.8. Appendix B prints 5,800 K at 3.6 um, which would give a 2,668 K day side for 2010, not the table's 2,744 K; the 3.6 and 4.5 um values appear swapped in the text.",
+      "finding": "Shown as two temperature datasets through the Cowan & Agol (2008) inversion, one per visit, each legend naming the other. Table A2 fiducial (PLD, first order) rows: 2010 C1 0.371, D1 -0.239, F_day 3870 ppm, R_p/R_* 0.11642; 2013 C1 0.320, D1 0.079, F_day 3840 ppm, R_p/R_* 0.11327. With the star at the value each row's day side implies (6,033 and 6,031 K), the night sides come out 1,525 and 1,757 K against 1,510 +/- 210 and 1,760 +/- 97 K, and the peaks 32.8 degrees before and 13.9 degrees after eclipse against 32.6 +/- 6.2 and -13.6 +/- 3.8. Appendix B prints 5,800 K at 3.6 um, which would give a 2,668 K day side for 2010, not the table's 2,744 K; the 3.6 and 4.5 um values appear swapped in the text.",
       "evidence": [
         "https://arxiv.org/abs/1906.04742",
         "https://arxiv.org/abs/0803.3622"

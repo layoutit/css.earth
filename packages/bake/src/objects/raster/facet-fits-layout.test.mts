@@ -60,14 +60,14 @@ test('short TFORM is the same column; declared disagreements are required, not i
 
 const root = resolve(import.meta.dirname, '../../../../../src/objects/bennu/source');
 const recipe = JSON.parse(readFileSync(resolve(root, 'preparation/terrestrial.json'), 'utf8'));
-const alternatives: {lensId: string; additionalLensIds?: string[]; path: string; grid: {metersPerUnit: number; expectedVertices: number; expectedFaces: number}}[] = recipe.geometry.radialTerrainAlternatives ?? [];
-for (const lens of (recipe.raster.scientific as {id: string; format: string; path: string; meshPath: string; table: {labelPath: string}}[]).filter(l => l.format === 'facet-scalars')) {
-  test('Bennu ' + lens.id + ' decodes on its own archived mesh', async () => {
-    const terrain = alternatives.find(a => [a.lensId, ...(a.additionalLensIds ?? [])].includes(lens.id));
-    assert.ok(terrain && terrain.path === lens.meshPath, 'lens mesh is its alternative terrain');
+const alternatives: {datasetId: string; additionalDatasetIds?: string[]; path: string; grid: {metersPerUnit: number; expectedVertices: number; expectedFaces: number}}[] = recipe.geometry.radialTerrainAlternatives ?? [];
+for (const dataset of (recipe.raster.scientific as {id: string; format: string; path: string; meshPath: string; table: {labelPath: string}}[]).filter(l => l.format === 'facet-scalars')) {
+  test('Bennu ' + dataset.id + ' decodes on its own archived mesh', async () => {
+    const terrain = alternatives.find(a => [a.datasetId, ...(a.additionalDatasetIds ?? [])].includes(dataset.id));
+    assert.ok(terrain && terrain.path === dataset.meshPath, 'dataset mesh is its alternative terrain');
     const mesh = await loadObjShape(resolve(root, terrain.path), terrain.grid);
-    const table = parseFacetFits(readFileSync(resolve(root, lens.path)), readFileSync(resolve(root, lens.table.labelPath), 'utf8'), lens.table, mesh);
-    console.log(lens.id, JSON.stringify(table.report));
+    const table = parseFacetFits(readFileSync(resolve(root, dataset.path)), readFileSync(resolve(root, dataset.table.labelPath), 'utf8'), dataset.table, mesh);
+    console.log(dataset.id, JSON.stringify(table.report));
     assert.ok(table.report.validRows > 0.99 * table.report.rows);
     assert.ok(table.report.maximumCentroidErrorMeters < 0.001);
   });

@@ -1,5 +1,6 @@
 export type { JsonValue, JsonRecord, ObjectDescriptor, PreparedAssetReference, PreparedObject } from './descriptor.js';
 export { parseObjectDescriptor } from './parse.js';
+export { objectPageCss } from './page-style.js';
 export { parseImageLayerBankDescriptor } from './image-layer-bank.js';
 export type { ImageLayerBankDescriptor } from './image-layer-bank.js';
 export { parseDensityVolumeFrame, parseDensityVolumeObjectDescriptor } from './density-volume.js';
@@ -7,7 +8,7 @@ export { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, cataloguePointSpread, pa
 export type { CataloguePointSpread } from './catalogue-points.js';
 export type { DensityVolumeFrame, DensityVolumeObjectDescriptor, DensityVolumePreparationReference, VolumeQuaternion, VolumeVector } from './density-volume.js';
 export { parseAuthoredObjectDescriptor, parseAuthoredRecipe } from './authored.js';
-export type { AuthoredObjectDescriptor, AuthoredRecipe, CutawayRecipe, DestinationsRecipe, FeaturesRecipe, FrameBankRecipe, LayerRecipe, LensRecipe, MaterialRecipe, MotionRecipe, ShapeKind, ShapeRecipe, SourceReference, SurfaceRecipe, WorldFrameRecipe } from './authored.js';
+export type { AuthoredObjectDescriptor, AuthoredRecipe, CutawayRecipe, DestinationsRecipe, FeaturesRecipe, FrameBankRecipe, LayerRecipe, DatasetRecipe, MaterialRecipe, MotionRecipe, ShapeKind, ShapeRecipe, SourceReference, SurfaceRecipe, WorldFrameRecipe } from './authored.js';
 export * from './baking/index.js';
 export * from './geometry/index.js';
 export { prepareObject, readPreparedObject } from './preparation.js';

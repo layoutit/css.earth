@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** R Doradus authored inputs: the uniform-disc reference sphere from the retained measurements, the lens frame cut from the
+/** R Doradus authored inputs: the uniform-disc reference sphere from the retained measurements, the dataset frame cut from the
  * pinned ALMA continuum image, and the navigation marker rendered from it.
  *
  *   node packages/bake/authoring/r-doradus/author.mts [--check]
@@ -21,7 +21,7 @@ import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/r-doradus/source');
 
-/** The ALMA pipeline's band 7 continuum image of R Doradus, and the lens frame cut from it. */
+/** The ALMA pipeline's band 7 continuum image of R Doradus, and the dataset frame cut from it. */
 export const ARCHIVE_PATH = 'observations/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits';
 export const FRAME_PATH = 'observations/r-doradus-alma-338ghz-0p625mas.fits';
 export const SPHERE_PATH = 'shape/uniform-disc.tab';
@@ -98,7 +98,7 @@ export async function authorRDoradus({ check = false } = {}) {
     centre: [(star.centreX - originX) * UPSAMPLE + (UPSAMPLE - 1) / 2, (star.centreY - originY) * UPSAMPLE + (UPSAMPLE - 1) / 2] as [number, number] };
 }
 
-/** The lens display, repeated here because the marker is rendered before the recipe reads it. */
+/** The dataset display, repeated here because the marker is rendered before the recipe reads it. */
 const PALETTE = ['#3b0500', '#9a1e00', '#e0641a', '#ffb340', '#ffe9a0', '#fffbf0'];
 const PERCENTILES: [number, number] = [1, 99.5];
 // Five per cent of the peak, about ten times the image noise: a stated level, not a measured one. The archive image is a CLEAN
@@ -108,5 +108,5 @@ const BACKGROUND_MAXIMUM = 2.9e-3;
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const result = await authorRDoradus({ check: process.argv.includes('--check') });
-  console.log(`R Doradus: ${result.size}x${result.size} frame of ${result.pixelMas.toFixed(3)} mas pixels, peak ${result.peak.toExponential(3)} Jy/beam, beam ${result.beamMas.toFixed(1)}x${result.minorMas.toFixed(1)} mas, disc centre at (${result.centre[0].toFixed(3)}, ${result.centre[1].toFixed(3)}); sphere table, lens frame and navigation marker written.`);
+  console.log(`R Doradus: ${result.size}x${result.size} frame of ${result.pixelMas.toFixed(3)} mas pixels, peak ${result.peak.toExponential(3)} Jy/beam, beam ${result.beamMas.toFixed(1)}x${result.minorMas.toFixed(1)} mas, disc centre at (${result.centre[0].toFixed(3)}, ${result.centre[1].toFixed(3)}); sphere table, dataset frame and navigation marker written.`);
 }

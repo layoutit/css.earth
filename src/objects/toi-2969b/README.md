@@ -2,13 +2,13 @@
 
 ## Sources
 
-It is the only planet known around TOI-2969. Its orbit and size follow Frensch et al. 2025's fit, the archive's default. This account was drafted from Frensch et al. 2025's values; the sections below are the data's own.
+It is the only planet known around TOI-2969. Its orbit and size follow Frensch et al. 2025's fit, the archive's default. The introduction is generated from Frensch et al. 2025's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.1 Jupiter radii from Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract): 78,641.2 km at 71,492 km per Jupiter radius. GM from the mass 1.16 Jupiter masses (Frensch et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025A&A...700A.118F), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
 **Orbit.** Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): P 1.8237146 d Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): a/R* derived from its semi-major axis 0.0261 au and stellar radius 0.7 solar radii; Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): inclination 84.9 degrees Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): e 0 Frensch et al. 2025 (2025A&A...700A.118F), via the NASA Exoplanet Archive ps table (pl_refname FRENSCH_ET_AL_2025): transit mid-time 2459303.30015 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2969's measured colour (#ffcfb0, the colour lens of toi-2969 (src/objects/toi-2969/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by toi-2969's measured colour (#ffcfb0, the colour dataset of toi-2969 (src/objects/toi-2969/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of TOI-2969's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (89, 90, 99), folded onto its orbit. Upper limits and rows without an error are left out.
 
@@ -16,9 +16,4 @@ It is the only planet known around TOI-2969. Its orbit and size follow Frensch e
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/toi-2969b.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

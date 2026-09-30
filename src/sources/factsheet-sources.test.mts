@@ -34,7 +34,7 @@ test('facts sharing one evidence file retain separate claim citations and create
   assert.deepEqual(usage.datasets, []);
   assert.equal(edges.length, 2);
   assert.throws(() => parseFactsheet({ facts: [...panel.facts, { id: 'discovery', label: 'Discovery', value: 'Uncited fixture fact' }] }), /a published fact names its source/);
-  for (const mutation of [{ kind: 'product-input' }, { lensIds: ['surface'] }, { productId: 'surface' }, { objectId: undefined }, { citationUrl: undefined }]) {
+  for (const mutation of [{ kind: 'product-input' }, { datasetIds: ['surface'] }, { productId: 'surface' }, { objectId: undefined }, { citationUrl: undefined }]) {
     const invalid = structuredClone(edges);
     Object.assign(invalid[0], mutation);
     assert.throws(() => parseSourceUsage({ edges: invalid, datasets: [], ...sourceUsageIndexes(invalid) }, sources, DATASET_ROUTES), /factsheet citation/);
@@ -91,7 +91,7 @@ async function restorationFixture(t: TestContext, url: string, path = 'review.js
   const input = (path: string, bytes: Uint8Array) => ({ ...pin(path, bytes), id: path.replaceAll(/[^a-z]/gu, '-'),
     origin: url, credit: 'Fixture paper', license: 'CC0', acquisition: 'Pinned download', redistribution: 'Allowed',
     consumers: ['physical'], sourceBinding: { kind: 'local', reason: 'Authored fixture' } });
-  const manifest = { schema: 'cssearth-authoritative-sources@2', inputs: [input(path, bytes), input('uncited-large-image.tif', Buffer.from('unused'))],
+  const manifest = { schema: 'cssearth-authoritative-sources@3', inputs: [input(path, bytes), input('uncited-large-image.tif', Buffer.from('unused'))],
     documents: [pin(planPath, planBytes)], generatedIntermediates: [] };
   const facts = { facts: panel.facts.map(fact => ({ ...fact, source: { ...citation, path: `source/${path}` } })),
     moreFacts: [{ ...panel.facts[0], id: 'rotation-period', source: { ...citation, path: `source/${path}` } }] };

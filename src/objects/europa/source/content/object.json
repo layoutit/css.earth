@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "europa",
   "displayName": "Europa",
@@ -74,14 +74,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "europa-lens-normal.webp",
+        "thumbnail": "europa-dataset-normal.webp",
         "surface": "europa-normal@2x.webp",
         "poles": "europa-poles-normal@2x.webp",
         "source": {
@@ -94,7 +94,7 @@
       {
         "id": "enhanced",
         "label": "False color",
-        "thumbnail": "europa-lens-enhanced.webp",
+        "thumbnail": "europa-dataset-enhanced.webp",
         "surface": "europa-enhanced@2x.webp",
         "poles": "europa-poles-enhanced@2x.webp",
         "source": {
@@ -108,7 +108,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "thumbnail": "europa-lens-elevation.webp",
+        "thumbnail": "europa-dataset-elevation.webp",
         "surface": "europa-elevation@2x.webp",
         "poles": "europa-poles-elevation@2x.webp",
         "falseColor": true,
@@ -190,7 +190,7 @@
       {
         "id": "geology",
         "label": "Geology",
-        "thumbnail": "europa-lens-geology.webp",
+        "thumbnail": "europa-dataset-geology.webp",
         "surface": "europa-geology@2x.webp",
         "poles": "europa-poles-geology@2x.webp",
         "source": {
@@ -262,7 +262,7 @@
       {
         "id": "infrared",
         "label": "Infrared",
-        "thumbnail": "europa-lens-infrared.webp",
+        "thumbnail": "europa-dataset-infrared.webp",
         "surface": "europa-infrared@2x.webp",
         "poles": "europa-poles-infrared@2x.webp",
         "source": {
@@ -277,7 +277,7 @@
       {
         "id": "carbon-dioxide",
         "label": "Carbon dioxide",
-        "thumbnail": "europa-lens-carbon-dioxide.webp",
+        "thumbnail": "europa-dataset-carbon-dioxide.webp",
         "surface": "europa-carbon-dioxide@2x.webp",
         "poles": "europa-poles-carbon-dioxide@2x.webp",
         "source": {
@@ -338,7 +338,7 @@
       {
         "id": "hydrogen-peroxide",
         "label": "Peroxide signature",
-        "thumbnail": "europa-lens-hydrogen-peroxide.webp",
+        "thumbnail": "europa-dataset-hydrogen-peroxide.webp",
         "surface": "europa-hydrogen-peroxide@2x.webp",
         "poles": "europa-poles-hydrogen-peroxide@2x.webp",
         "source": {
@@ -399,7 +399,7 @@
       {
         "id": "sodium-chloride",
         "label": "Salt signature",
-        "thumbnail": "europa-lens-sodium-chloride.webp",
+        "thumbnail": "europa-dataset-sodium-chloride.webp",
         "surface": "europa-sodium-chloride@2x.webp",
         "poles": "europa-poles-sodium-chloride@2x.webp",
         "source": {
@@ -461,7 +461,7 @@
       {
         "id": "junocam",
         "label": "JunoCam",
-        "thumbnail": "europa-lens-junocam.webp",
+        "thumbnail": "europa-dataset-junocam.webp",
         "surface": "europa-junocam@2x.webp",
         "poles": "europa-poles-junocam@2x.webp",
         "source": {

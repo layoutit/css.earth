@@ -1,275 +1,45 @@
 # Venus sources
 
-Venus shows a cloud map, Magellan radar and elevation displays, and modeled atmosphere charts.
-
-The [navigation marker recipe](source/preparation/navigation.json) retains the existing credited image and crop, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). This stylized identifier does not represent the scene epoch or its illumination.
+Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, elevation, microwave and gravity displays, and modeled atmosphere charts. The cloud illustration is the default view. Rotation is accelerated, and the camera is illustrative rather than an observer ephemeris. The [navigation marker](source/preparation/navigation.json) is a stylized identifier, not the scene's illumination.
 
 ## Sources
 
 | View or quantity | Source |
 | --- | --- |
-| Clouds | Pinned cloud texture described below |
+| Clouds | Venus cloud texture from the OpenSpace project, pinned at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516` |
+| Ultraviolet | Akatsuki UVI Level 3b, [vco_uvi_l3 v1.1](https://doi.org/10.17597/isas.darts/vco-00016), CC BY 4.0 under the [ISAS/JAXA data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/) |
 | Cloud-top limb | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), Minnaert fit to MESSENGER MASCS spectra |
 | Radar | [USGS Magellan SAR FMAP left-look global mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m), read through NASA Trek zoom-4 tiles |
 | Elevation, emissivity, reflectivity, roughness | [USGS numeric Magellan products](source/science/usgs/), at about 4.64 km grid spacing |
-| Atmosphere charts | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model |
-| Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
-| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/VENUS/target) Venus centre-point export, snapshot 2026-09-11, public domain. IAU-adopted names with centre, diameter, extent and name origin; labels appear at the closest zoom only, and a selected feature stays labelled. |
+| Gravity, Bouguer anomaly, geoid | PDS Geosciences volume [MGN-V-RSS-5-GRAVITY-L2-V1.0](https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/) |
+| Atmosphere charts and limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model, the halo run locally ([profile](source/atmosphere/psg-limb.json)) |
+| Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/VENUS/target), snapshot 2026-09-11, public domain |
+| Feature notes | English Wikipedia lead summaries (CC BY-SA 4.0, retrieved 2026-09-12), in `source/features/notes.json` |
+| Landing sites | 13 sites in `source/features/sites.json`, each quoting the NASA NSSDCA, PDS, LROC, agency or paper page it came from |
+| Planet facts | NASA Science snapshot in `data/object-information/venus.json` |
 
-## Evidence
-
-The [26 September 2026 browser and delivery record](evidence/showcase/browser.json) identifies the tested revision and inventory. For PR #828, every added dataset was selected and visually inspected; the four-body fresh installation restored 354 files (72,243,602 bytes) and verified every inventory digest. That record applies to the #828 versions; the later numeric upgrade below rebakes emissivity and elevation. [emissivity](evidence/showcase/emissivity.png).
-
-### Magellan microwave emissivity (26 September 2026)
-
-[USGS Magellan Global Microwave Emissivity, 4,641 m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m) was introduced in PR #828 and retains its single `emissivity` lens and
-`magellan-global-emissivity` source identity. The numeric upgrade samples the
-same native product into the compact grid before the existing science reader. Its signed 16-bit DN converts to dimensionless emissivity as `(DN − 1) / 10,000`; −32,768 is missing. The original 8,193 × 4,097 grid has 1,334,015 missing samples, and valid values range from 0.2926 to 0.9986. The displayed scale remains 0.29–1.00 with the original palette. The new numeric display uses lossless WebP; the #828 asset used lossy WebP. The compact grid contains 2,015,139 valid cells, spanning
-0.2926–0.9984, and 82,013 missing cells. No gap filling is applied.
-
-The output now starts at −180° east longitude, matching the body's surface-map
-frame (180° is the same meridian). The previous recipe omitted this setting and
-used the science painter's 0° default, placing the data half a turn from that
-frame. The [comparison record](evidence/usgs-numeric/emissivity-upgrade.json)
-identifies both recipes and assets. Both display 2,048 × 1,024 cells; the lossless
-packed asset grows from 182,456 to 1,142,498 bytes.
-
-The product corrects antenna sidelobes and atmospheric effects; it does not correct emission angle, roughness or surface tilt. It is microwave emissivity, not visible colour, temperature or evidence of present volcanism. The source's simple cylindrical projection and 6,051 km reference sphere are read from its own GeoTIFF tags. [The label](source/emissivity/magellan.lbl) and [raster recipe](source/preparation/raster.json) retain the scale, missing value and georeferencing choices. The original cloud view remains the default.
-
-
-Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
-
-| View | Both prepared levels, before → current |
-| --- | --- |
-| clouds | 110.0 → 117.6 kB |
-
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches the previous main version; [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
-
-The sky section records camera-fit comparisons. No dated test or browser-run report is cited.
-
-## Known problems
-
-Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Venus (retrieved 2026-09-11, public domain per its FGDC metadata) is pinned under `source/features/`. Preparation verifies the archive, reads the attribute table and datum, drops the albedo-feature type code, folds repeated rows, converts each positive-east centre through `presentation/surface-map.json` with the map’s left edge at 180° E, and anchors it on the mesh; craters and faculae trace a rim circle, other types their published extent box. Outlines are not published nomenclature boundaries, and the readout longitude counts from the map’s left edge, 180° from the Gazetteer origin. The map edge was fixed by cropping the source raster at a landmark’s Gazetteer centre under both hypotheses (see the pull request that added the feature).
-
-Landing sites: 13 spacecraft landing, touchdown or impact sites are labelled beside the IAU names (`source/features/sites.json`). Each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from, with the stated latitude kind and longitude convention; sites are unsized points ranked like a 20 km feature and the caption shows the quoted source sentence with its publisher.
-
-Feature notes: 112 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
-
-- Radar brightness is not visible colour. About 7.7% of the area between 80° S and 84° N is missing from the left-looking mosaic and shows the gray grid; the poles beyond it are missing too.
-- The halo is a PSG model, not a measurement. PSG computes it with single scattering only and with the Sun one degree above the tangent point's horizon, so the real halo, especially the low haze just above the cloud top, may be brighter (see the `limb-halo` and `measured-limb-halo` ledger entries). Rotation is accelerated.
-- The limb overlay has one colour and alpha per pixel: exact for the cloud map's mean colour, approximate for colours far from it and for the radar and elevation lenses, which share it.
-- The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
-- The camera and background sky do not represent an observer at a stated epoch.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
-
-<details>
-<summary>Planet facts, clouds and atmosphere display</summary>
-
-## Planet facts and presentation
-
-The user-facing facts come from the checked NASA Science snapshot in
-`data/object-information/venus.json`. The snapshot records its source URL, source ID,
-publication modification time, retrieval date, and NASA credit. It supplies the
-planet's 108 million km average distance, 12,104 km diameter, 225-Earth-day
-year, 243-Earth-day retrograde rotation, approximately 3-degree tilt, 467 °C
-surface temperature, 93-Earth-atmosphere surface pressure, and absence of moons
-and rings.
-
-The retained body uses the 6,051.84 km spherical radius stated in
-`source/presentation/solar-system.json`. The body
-is represented by 448 prepared
-projective texture leaves and two prepared polar leaves. The latitude rows,
-polar projections, atlas addressing, source color, seam ownership, and @2x
-rasters are all generated before runtime. The browser transports those values;
-it does not construct geometry or sample source maps.
-
-The 36-second cloud rotation and 96-second radar/elevation rotation are
-explicit accelerated presentation choices. They are not physical-period
-claims. Camera orientation is illustrative rather than an observer ephemeris.
-The prepared default view uses the accepted Saturn camera contract: a 40-degree
-rendered pitch, controlled from the shared 34.230769-degree input state over the
-same 0-through-89-degree vertical orbit. Its prepared -105-degree default yaw
-selects frame 28 of the 32-frame phase bank, placing just over 90% of the visible
-disc on the illuminated side while retaining a narrow modeled shadow at the
-right limb.
-
-Viewport composition uses one continuous prepared aspect-ratio fit rather than
-viewport buckets. The width share is 34% at a 0.75 portrait aspect ratio. A
-cubic smoothstep raises it continuously to 42% for very narrow portrait screens
-at or below 0.46, and a second smoothstep raises it to 36% by a square aspect
-ratio. Landscape screens retain the 36% share. The body never exceeds 61% of
-viewport height, and the resulting zoom is clamped from 1.4 through 2. The
-shared shell uses its mobile bottom-sheet, navigation, and touch policy through
-820 px. At 821 px it returns to the side-panel composition; through 960 px the
-Venus camera keeps the same 175 px horizontal offset used beside the full
-desktop information panel. The size curve itself has no viewport breakpoint:
-adjacent 819, 820, and 821 px viewports remain continuous. The fit is evaluated
-at mount and on viewport resize from the retained camera root's actual CSS
-scale. A resize preserves the user's zoom ratio relative to the responsive base
-instead of resetting the camera.
-The full 0.42-through-4 interaction range remains available. Venus publishes
-the camera mapping through the generic PolyCSS camera and orbit controls; it
-does not copy Saturn's ring-and-moon-specific prepared matrix transport.
-
-## Cloud view
-
-Two lenses show the cloud deck: an **Ultraviolet** photograph taken by a
-spacecraft, and the default **Clouds** illustration.
-
-### Ultraviolet: one Akatsuki UVI exposure
-
-The Ultraviolet lens is a single 365 nm exposure from the Ultraviolet Imager on
-JAXA's Akatsuki (Venus Climate Orbiter), product `uvi_20230830_100446_365_l3b_v21`
-from orbit 257, exposed for 0.046 s with its middle at 2023-08-30T10:04:46.033 UTC.
-It comes from the Level 3b collection of volume `vcouvi_7011` in
-[vco_uvi_l3 v1.1](https://doi.org/10.17597/isas.darts/vco-00016), released under
-CC BY 4.0 by the [ISAS/JAXA data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/).
-The archive asks that the data set be cited as:
+The archive asks that the ultraviolet data set be cited as:
 
 > Murakami, S., K. Ogohara, M. Takagi, H. Kashimura, M. Yamada, T. Kouyama,
 > T. Horinouchi, T. Imamura, Venus Climate Orbiter Akatsuki UVI
 > Longitude-Latitude Map Data v1.1, JAXA Data Archives and Transmission System,
 > <https://doi.org/10.17597/isas.darts/vco-00016>, 2025.
 
-Level 3b is not a raw frame. JAXA's own `al3map` converter detects and fits the
-planet's limb to correct the camera pointing, then projects the calibrated Level
-2b radiance onto an equally spaced longitude-latitude grid, assuming a cloud top
-at 70 km. The volume's `00readme.txt` describes the pipeline and cites
-Ogohara et al. (2017, [doi:10.1186/s40623-017-0749-5](https://doi.org/10.1186/s40623-017-0749-5)),
-Ogohara et al. (2012, [doi:10.1016/j.icarus.2011.05.017](https://doi.org/10.1016/j.icarus.2011.05.017))
-and Kouyama et al. (2013, [doi:10.1016/j.pss.2013.06.027](https://doi.org/10.1016/j.pss.2013.06.027)),
-the three papers the file names in its own `references` attribute.
+The Venera surface photographs from the [NASA PDS Geosciences Node](https://pds-geosciences.wustl.edu/missions/venera/) are no longer shown; their files and `source/venera/RIGHTS.md` remain.
 
-**Why this exposure.** One exposure sees one hemisphere, so the lens is chosen
-for how much of the globe it lights. Thirty-four 365 nm exposures were measured:
-nineteen spread across orbits 10 to 276, then fifteen more across orbits 256 to
-260 once that neighbourhood looked best. For each, preparation measured the
-area-weighted fraction of the globe carrying radiance at an incidence angle below
-90°. This exposure won at **48.54 %**, at a phase angle of 3.65° from a range of
-374,422 km. A single viewpoint can never exceed 50 %, and at this range the
-visible cap is 49.18 %, so the exposure is within 0.7 points of everything one
-look can show. The runner-up at 47.94 % was another near-full-phase frame in the
-same orbit; the worst measured frame, at a phase angle of 143.6°, lit 9.62 %.
+## Processing
 
-**Orientation, measured.** The product grid runs 0 to 360° east in 0.125° cells
-with row 0 at the south pole, while the prepared atlas runs north to south from
-180° E at its left edge. Rather than trust either convention, preparation solved
-for the Sun direction from the file's own incidence grid by least squares over
-2,019,934 cells, which puts the sub-solar point at **206.1913° E, 2.4897° N**.
-JPL Horizons gives the apparent sub-solar point of Venus at the same UTC, in
-IAU_VENUS with east longitude positive, as **206.179102° E, 2.490460° N** — a
-difference of **0.012° in longitude and 0.001° in latitude**. That fixes the
-longitude direction, the prime meridian and the row order together, from an
-oracle with no connection to the archive. The same fit was reproduced
-independently with NumPy and h5py. As a standing guard, the reader also checks
-the grid's least-incidence cell against the product's own header and refuses any
-exposure that disagrees by more than 0.15°.
+**Clouds.** The OpenSpace texture is an illustration with unresolved camera, wavelength and colour processing. It stays the default because one Akatsuki exposure leaves most of the globe empty. It is projected without a colour transform onto 448 prepared leaves and two polar leaves.
 
-**Processing.** `packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts` reads the NetCDF-4 file with
-h5wasm, the HDF5 reader this repository already uses for NOAA's CoralTemp grid;
-its decode was checked bitwise identical against h5py 3.16.0 on HDF5 2.0.0 for
-the radiance, incidence and both axis arrays, with a maximum absolute difference
-of 0. The reader rolls the grid to the atlas left edge, flips it north to south
-and box-integrates 2880 × 1440 down to 2048 × 1024. Every source sample under an
-output cell must carry a radiance, so the observed edge erodes by at most one
-cell rather than bleeding outward. Brightness is then the single stated
-transform `(radiance × 5 × 10⁻⁹) ^ (1 / 2.2)`, the same gain-and-gamma form the
-mapped LROC photograph uses. White sits at 2.0 × 10⁸ W m⁻² sr⁻¹ m⁻¹, above this
-exposure's measured maximum of 1.8116 × 10⁸, so no pixel clips at either end; the
-measured minimum is 1.1371 × 10⁷. There is no photometric normalisation, no
-contrast enhancement and no sharpening: the dayside looks as flat as it does
-because Venus's clouds really are far brighter near the limb than a Lambert
-surface would be, and the fall-off near the terminator is the observation.
+**Lighting.** The disc uses the Minnaert law Pérez-Hoyos et al. (2018) fitted to the equatorial cloud tops: k 1.35 at 657 nm, 1.36 at 547 nm and 1.32 at 467 nm, read from their published figure because the data file no longer resolves. Relative to the flood-lit disc centre, brightness falls to a third where the clouds are seen at 60° ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
 
-**Coverage.** 1,019,608 of the atlas's 2,097,152 cells carry an observation,
-48.62 %. The rest is the side Akatsuki could not see, and it is drawn with the
-shared cartographic gap fill: grey with a 10° and 30° graticule, the same
-treatment every mapped body in this repository gives a data gap. Nothing is
-interpolated, extrapolated, mirrored or filled from another exposure.
+**Limb halo.** [acquire-psg-limb-table.mts](../../../packages/bake/cli/acquire-psg-limb-table.mts) runs PSG's Venus template (VIRA-45 with Vandaele et al. 2020, Bierson et al. 2019 and Ehrenreich et al. 2012, and its sulfuric acid haze). Each value is the radiance along a line of sight grazing the planet, divided by the disc-centre radiance, in red, green and blue bands. The halo starts at the 75 km cloud top, where it is 0.039, 0.068 and 0.110 of the disc centre, and falls below one ten-thousandth above 100 km.
 
-**Limits.** This is one instant, not a global map: Venus's ultraviolet markings
-move with a four-day super-rotation, so the two hemispheres of this lens are not
-the same scene at different longitudes, they are one scene and one absence. The
-lens is mounted on the shared lit cloud material, so the app's own limb and
-terminator fall across an image that already carries the Sun where it was: the
-illumination is counted twice near the limb. The 365 nm band is monochrome and
-shown as grey; the companion 283 nm filter is not prepared. Level 3b pointing
-comes from automated limb fitting, which the archive reports as `FIT_STAT = 1`
-(a good fit) for this exposure but does not quantify further.
+**Ultraviolet.** Product `uvi_20230830_100446_365_l3b_v21` is one 365 nm exposure from orbit 257 at 2023-08-30T10:04:46.033 UTC. JAXA's Level 3b fits the limb to correct pointing and projects radiance onto a longitude-latitude grid for a 70 km cloud top ([Ogohara et al. 2017](https://doi.org/10.1186/s40623-017-0749-5)). Of 34 exposures measured it lights the most of the globe: 48.54 %, at 3.65° phase, where one look can show at most 49.18 %. `packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts` reads it with h5wasm and box-integrates it to 2048 × 1024. Brightness is `(radiance × 5 × 10⁻⁹) ^ (1 / 2.2)`, with nothing clipped and no contrast enhancement or sharpening. 48.62 % of cells carry an observation; the rest use the shared grey graticule, and nothing is filled.
 
-### Clouds: the pinned illustration
+**Radar.** The FMAP mosaic combines Magellan's 75 m strips from mapping cycles 1 and 3 ([label](source/radar/fmap-left-look-75m-pds3.lbl)). The 117 GB native file has no reduced copies, so preparation reads NASA Trek's layer ([capabilities](https://trek.nasa.gov/tiles/Venus/EQ/Venus_Magellan_LeftLook_mosaic_global_75m/1.0.0/WMTSCapabilities.xml)) at zoom 4: 8192 × 4096 pixels at 4.64 km. Gray is the product's DN, `DN = 5 × (RV + 20) + 1`, with RV the cross-section relative to the Muhleman law in dB; the legend runs from −20 to +30 dB. There is no exposure curve, sharpening or colour. USGS's colourised C3-MDIR mosaic is not kept: its colour follows brightness alone.
 
-The default visible cloud deck is still the Venus cloud texture pinned from the
-OpenSpace project at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516`; it is
-an illustrative texture with unresolved camera, wavelength and colour processing,
-kept as the default because a single Akatsuki exposure leaves most of the globe
-without data (see the investigation ledger). The checked source JPEG is resized
-without a color transform, projected into supersampled orthographic polar
-tiles, and oriented for the retained projective latitude grid at preparation
-time. Each reversed latitude strip has source-derived guard rows so projective
-leaf interpolation cannot sample a non-adjacent strip. Polar texels use wrapped
-bilinear sampling, exact spherical latitude projection, center averaging, and
-antialiased coverage. The source is listed with its exact hash in `source/manifest.json`.
-
-The fixed Venus material is a 32-frame prepared camera-pitch bank. Every frame
-holds the cloud-top law on the disc in one retained alpha material; the false-colour lenses use a copy of it, and a lighting-only bank
-keeps the disc law when the user turns the atmosphere off. Runtime selects the nearest prepared frame and changes the
-retained material address; it performs no lighting, scattering, geometry or
-raster math.
-
-The disc is lit by the Minnaert law Pérez-Hoyos et al. (2018) fitted to MESSENGER
-MASCS spectra of the equatorial cloud tops: k 1.35 at 657 nm, 1.36 at 547 nm and
-1.32 at 467 nm, in `source/photometry/perez-hoyos-2018-minnaert-*.json`. The
-authors' data file for their Fig. 2 no longer resolves, so the values are the
-marker centres of the published vector figure, interpolated to each band.
-Relative to the flood-lit disc centre the cloud deck keeps the map's brightness
-at the centre and falls to a third of it where the clouds are seen at 60°
-([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). The authored 0.30 flood shadow release, 0.78 sunward release and
-terminator ramp are gone.
-
-Outside the disc, the halo comes from a NASA PSG limb profile of PSG's own Venus
-template (VIRA-45 with Vandaele et al. 2020, Bierson et al. 2019 and Ehrenreich et
-al. 2012, and its sulfuric acid haze), computed with a local nasapsg/psg container
-by
-[acquire-psg-limb-table.mts](../../../packages/bake/cli/acquire-psg-limb-table.mts)
-into `source/atmosphere/psg-limb.json`. It is the radiance of a 1 km beam along a
-line of sight grazing the planet at each tangent altitude, with the Sun behind the
-viewer, divided by PSG's own disc-centre radiance under an overhead Sun, in the
-red (640-670 nm), green (530-560 nm) and blue (440-490 nm) bands. The halo starts
-at the visible edge, the cloud top at 75 km (Pérez-Hoyos et al. 2018 find a mean
-cloud top of 75 ± 2 km), and each frame lights it where the tangent point faces
-the Sun. Relative to the disc centre (red, green, blue) it is 0.039, 0.068 and
-0.110 at the cloud top, 0.016, 0.030 and 0.051 at 80 km, 0.0017, 0.0032 and 0.0057
-at 90 km, and below one ten-thousandth above 100 km.
-
-Two PSG limits shape it. PSG computes limb lines of sight with single scattering
-only ([PSG handbook](https://psg.gsfc.nasa.gov/images/help/handbook.pdf), p. 96),
-so light scattered more than once is missing and the real halo, most of all the
-low haze just above the cloud top, may be brighter. And its single-scattering limb
-receives no sunlight with the Sun exactly on the tangent point's horizon (the
-answer is only thermal emission, near 1e-49), so the Sun sits one degree above it,
-at a solar zenith of 89 degrees; in a spot check at 90 km, moving it one more
-degree changed the radiance by 0.1%. Each band is the mean of 5 nm windows. The
-nadir uses PSG's multiple-scattering solver at NMAX 6 and LMAX 41, and the limb
-NMAX 0 and LMAX 41, what PSG asks for these aerosols. In wider windows PSG quietly
-switches to a two-stream solver that ignores the tangent altitude, and the tool
-refuses every answer that did not run the requested method. The OpenSpace
-RenderableAtmosphere tuning is removed with its record.
-
-</details>
-
-<details>
-<summary>Magellan radar and elevation processing</summary>
-
-## Magellan radar and elevation views
-
-The Radar view is described in the next section. Elevation
-now uses the numeric GTDR v2, with meters above a 6,051 km sphere. Its new scale
-runs from −3,000 to 12,000 m, generated from the same palette as the map.
-Radar brightness and the former wrapping color legend no longer enter Elevation.
-
-The three additional numeric maps use the Magellan microwave products:
+**Elevation and microwave maps.** Elevation is the numeric GTDR v2 in metres above a 6,051 km sphere, on a −3,000 to 12,000 m scale.
 
 | View | Native DN conversion | Meaning |
 | --- | --- | --- |
@@ -277,91 +47,9 @@ The three additional numeric maps use the Magellan microwave products:
 | Reflectivity | (DN − 1) / 200 | Fresnel reflectivity inferred from radar echoes |
 | Roughness | (DN − 1) / 10 | Meter-scale RMS slope, in degrees, fitted to radar echoes |
 
-Zero DN is missing for reflectivity and roughness; emissivity uses −32,768.
-Their grids have about 4.64 km
-spacing, while footprints and effective resolution are coarser. Emissivity
-retains changing observation angles (about 48° to 15°) and surface-roughness
-effects. Roughness is not a derivative of the elevation map. All four are
-archival scientific maps, not visible-color photographs or current conditions.
+The roughness label's 0.005 multiplier conflicts with the [PDS GSDR specification](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=MGN-V-RDRS-5-GDR-SLOPE-V1.0), so we use its factor 0.1 ([calibration record](source/science/usgs/roughness-calibration.json)). [Emissivity](https://astrogeology.usgs.gov/search/map/venus_magellan_global_microwave_emissivity_4641m) spans 0.2926 to 0.9984, shown on a 0.29–1.00 scale with no gap filling ([label](source/emissivity/magellan.lbl), [recipe](source/preparation/raster.json)). See the [numeric acquisition method](../../../docs/usgs-numeric-surfaces.md).
 
-The roughness ISIS label gives a 0.005 multiplier, conflicting with both the
-[original PDS GSDR specification](https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=MGN-V-RDRS-5-GDR-SLOPE-V1.0)
-and USGS's equation. We use the PDS factor 0.1. The
-[calibration record](source/science/usgs/roughness-calibration.json) preserves
-that decision; the original label is retained unchanged.
-
-The scientific views use the same prepared observation material as Radar,
-without an opaque cloud texture over the surface. Their geometry, lighting
-controls and exterior atmospheric limb remain shared with the existing body.
-See the [numeric acquisition method](../../../docs/usgs-numeric-surfaces.md).
-
-### Radar: the FMAP left-look mosaic (27 September 2026)
-
-The Radar lens shows the USGS
-[Magellan SAR FMAP left-look global mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m):
-Magellan's full-resolution radar strips (F-BIDRs, about 75 m per pixel) from
-mapping cycles 1 and 3, when the radar looked left, mosaicked by USGS. The native
-file is 506,928 × 230,948 bytes (117 GB) on a 6,051.0 km sphere from 83.9996° N to
-80.0106° S; its [detached label](source/radar/fmap-left-look-75m-pds3.lbl) is kept.
-
-**Route.** The native file has no reduced copies, so preparation reads the same
-product from NASA Trek's WMTS layer `Venus_Magellan_LeftLook_mosaic_global_75m`
-([capabilities](https://trek.nasa.gov/tiles/Venus/EQ/Venus_Magellan_LeftLook_mosaic_global_75m/1.0.0/WMTSCapabilities.xml)).
-Zoom 4 is 32 × 16 tiles of 256 pixels: one 8192 × 4096 map, 0.0439° or 4.64 km
-per pixel, the same spacing as the numeric Magellan maps. Trek does not document
-how it reduces the mosaic; each zoom-4 pixel differs from the mean of its four
-zoom-5 pixels by 1.2 DN on average, and from any single one by 1.5 to 2.6 DN, so
-it averages.
-
-**Values.** Gray is the product's DN. The USGS page gives
-`DN = 5 × (RV + 20) + 1`, with RV the radar cross-section divided by the Muhleman
-law in decibels, clipped at −20 and +30 dB; so 0.2 × DN − 20.2 dB. The legend runs
-from −20 to +30 dB. The observed median is DN 103, +0.4 dB: the average surface
-matches the Muhleman law, as it should. Observed values run from DN 15 to 203.
-Trek averages DN values, so a pixel is the mean of decibels, not of power. There is
-no exposure curve, sharpening or colour; the previous lens applied all three.
-
-**Gaps.** Trek marks no-data as transparent. A partly transparent pixel carries the
-DN averaged with zeros: its gray falls in proportion to its alpha. Preparation
-divides by alpha where at least half the footprint was observed (8-bit rounding
-then stays within 1 DN) and marks the rest missing. 7.75% of the area between
-80° S and 84° N is missing, 8.71% of the globe; nothing is filled.
-
-**Placement.** Maxwell Montes, Atla Regio and Beta Regio sit where the Magellan
-gravity maps put them, and on the same 2048-wide grid the mosaic's brightness
-correlates with the old C3-MDIR map at r = 0.81 at zero offset.
-
-**Bytes.** The lens uses `resolutionScale` 4, so the 8192-wide map reaches the
-atlas without another resize: 8320 × 6144 pixels, 2,629,358 bytes in the lossy
-lane (quality 80), plus 98,866 bytes of lossless poles. The previous 2048-wide
-synthetic-colour atlas was 1,012,746 bytes with 445,994 bytes of poles. At scale 2
-the atlas would be 705,862 bytes. Radar is not the default lens, so the cost is
-paid only when a reader picks it. The atlas stays under the raster lane's
-64-megapixel single-image limit, so it needs no pages or texture levels.
-
-**Synthetic colour removed.** USGS made the colourised C3-MDIR mosaic to simulate
-the surface. Colour predicted from brightness alone leaves a 5.2 DN RMS residual
-against a 31.2 DN brightness spread: it is one colour ramp over the same radar
-brightness. It is not kept as a separate lens (ledger entry
-`magellan-c3-mdir-synthetic-colour`). What is lost is coverage: C3-MDIR fills the
-poles and left-look gaps from other cycles.
-
-### Gravity, its uncertainty, Bouguer anomaly and geoid
-
-Four views come from the Magellan gravity maps in the PDS Geosciences volume
-[MGN-V-RSS-5-GRAVITY-L2-V1.0](https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/):
-the free-air anomaly (`freeair.dat`, band 1) and its one-sigma uncertainty (band 2),
-the Bouguer anomaly (`bouguer.dat`) and the geoid (`geoid.dat`). All come from JPL's
-degree-120 model SHGJ120P, which the archive labels preliminary. The later degree-180
-model MGNP180U ([Konopliv et al. 1999](https://doi.org/10.1006/icar.1999.6086)) is
-archived only as coefficients, so it is not shown.
-
-The shared `pds3-grid` reader reads each 360 by 180 grid of big-endian 64-bit values
-without resampling. Cell centres sit at whole degrees from 120° W and at 89.5° N to
-89.5° S, as the PDS3 labels state; the reader checks those extents against the recipe.
-The ledger entry `magellan-gravity-maps` records that a sum of the model's coefficients
-reproduces the free-air grid to 0.004 mGal with this placement, and that the 2023 PDS4
-labels, which put cell edges there, would leave 5.4 mGal of error.
+**Gravity.** All four views come from JPL's degree-120 model SHGJ120P, read without resampling from 360 by 180 grids.
 
 | View | Values | Display range | Beyond the range |
 | --- | --- | --- | --- |
@@ -370,91 +58,22 @@ labels, which put cell edges there, would leave 5.4 mGal of error.
 | Bouguer gravity | −975.8 to 198.1 mGal | −600 to 600 mGal | 0.06%, under Maxwell Montes |
 | Geoid | −66.1 to 154.5 m | −100 to 100 m | 0.38%, Atla Regio and Beta Regio |
 
-The Bouguer map is the free-air anomaly minus the gravity the topography would produce
-with no compensation; the archive catalogue does not state the density it used.
-Degree 120 resolves features about 160 km across at best, and less where Magellan
-flew high, near the poles and in the south; the uncertainty view shows where.
+**Charts and labels.** The reflectance chart holds all 253 PSG samples from 0.35 to 1.0 micrometers; the temperature-pressure chart holds all 100 layers. Gazetteer names appear at the closest zoom, and 112 carry a Wikipedia note.
 
-</details>
+## Evidence
 
-<details>
-<summary>Modeled atmosphere charts</summary>
+- The Sun direction fitted from the ultraviolet file's incidence grid puts the sub-solar point at 206.1913° E, 2.4897° N; JPL Horizons gives 206.179102° E, 2.490460° N.
+- Radar: the median is +0.4 dB, so the average surface matches the Muhleman law, and brightness correlates with the old C3-MDIR map at r = 0.81.
+- Gravity: a sum of the model's coefficients reproduces the free-air grid to 0.004 mGal with this cell placement (ledger entry `magellan-gravity-maps`).
 
-## Atmosphere charts
+## Known problems
 
-The two charts are generated from checked NASA GSFC Planetary Spectrum
-Generator files. The reflectance chart contains all 253 response samples from
-0.35 to 1.0 micrometers at resolving power 240. The temperature-pressure chart
-contains all 100 ordered layers from the expanded configuration. The SVG files
-carry machine-readable source, model date, units, ranges, and sample counts.
-They are prepared files; the browser does not call PSG or derive chart geometry.
+- Radar brightness is not visible colour. About 7.7% of the area between 80° S and 84° N and both poles are missing. A pixel is a mean of decibels, not of power.
+- The ultraviolet image is one instant of clouds that move with a four-day super-rotation. It already carries the Sun, so illumination is counted twice near the limb.
+- The halo is a PSG single-scattering model ([handbook](https://psg.gsfc.nasa.gov/images/help/handbook.pdf), p. 96) with the Sun one degree above the horizon, so the real halo may be brighter. Its one colour per pixel is approximate for the radar and elevation datasets.
+- The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
+- Emissivity is not corrected for emission angle, roughness or tilt, and is not temperature or evidence of volcanism.
+- Gravity degree 120 resolves features about 160 km across at best, less near the poles and in the south. The archive does not state the Bouguer density.
+- Feature outlines are not published nomenclature boundaries, and the readout longitude counts from the map's left edge, 180° from the Gazetteer origin.
 
-</details>
-
-<details>
-<summary>Archived Venera photographs and rights</summary>
-
-## Venera surface photographs
-
-The Surface photographs section has been removed from the application. Venus
-preparation no longer builds the gallery, and the runtime inventory no longer
-ships its four panorama images. The original source files and credits remain
-for the historical record: Venera 9 and 10 GIFs from 1975, and Venera 13 and 14
-JPEGs from 1982, distributed by the NASA PDS Geosciences Node.
-
-The committed `source/venera/RIGHTS.md` records the automatic-camera
-public-domain basis and its limits. That qualification does not extend to later
-colorization, geometrical correction, gap filling, AI enhancement, or other
-creative restoration; no such derivative is included.
-
-Source references:
-
-- <https://pds-geosciences.wustl.edu/missions/venera/>
-- <https://science.nasa.gov/resource/first-look-venus/>
-
-</details>
-
-<details>
-<summary>Input verification and shared commands</summary>
-
-## Reproduction
-
-Every checked input and generated runtime asset is byte-bound by a committed
-manifest. Runtime closure verification rejects undeclared or changed assets.
-See the [contributor guide](../README.md) for acquisition and preparation commands.
-
-</details>
-
-## Numeric-map qualification
-
-The [retained numeric checks](evidence/usgs-numeric/numeric-checks.json) bind
-the compact input digests and tested processing files, count coverage, and
-compare native byte samples at hemispheres, seams, extrema and gaps. Their
-calibration check runs before the display coverage masks; it does not validate
-the original instrument or scientific model.
-The [failed label-only roughness comparison](evidence/usgs-numeric/roughness-label-conflict.json)
-is retained alongside the passing comparison using the cited PDS calibration.
-
-The [fresh-install receipt](evidence/usgs-numeric/delivery.json) verifies 1,500
-runtime files (210,933,400 bytes) across the 13 changed bodies and the shared
-Sun world metadata, with no reused files. All 15 compact source grids restored
-from the source cache with native fallback disabled and matched byte for byte.
-
-The [browser evidence](evidence/usgs-numeric/browser.json) records the earlier
-map descriptions, legends and retained scene. It includes screenshots; the
-[validation record](evidence/usgs-numeric/validation.json) names the checks
-and the local full-build limitation. These checks do not measure instrument
-accuracy or establish how well readers understand the explanations.
-
-The [current-main integration check](../moon/evidence/usgs-numeric/integration.json) records the
-build, all 11 grouped selectors, source labels and phone playback. It explains
-which earlier scientific and browser evidence still applies to this version.
-
-The later [gallery removal check](evidence/usgs-numeric/gallery-removal.json)
-confirms that Surface photographs is absent on desktop, mobile and the built
-page. The four panorama files are absent from the delivery inventory.
-
-The [final dataset UI check](../moon/evidence/usgs-numeric/dataset-ui-removal.json) confirms that Dataset details
-and Surface photographs are absent from all 1,453 generated pages. Browser
-checks cover the Moon, Venus and WASP-12b; the final screenshots show the
-short description, legend and source link.
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)

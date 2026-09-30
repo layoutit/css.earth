@@ -6,7 +6,7 @@
       "id": "spiderman-dipole-map",
       "subject": "May et al. (2021) SPIDERMAN spherical-harmonic fit to the Spitzer 4.5 um phase curve",
       "status": "included",
-      "finding": "Shown as the temperature lens, evaluated by SPIDERMAN 1.0.3. With the paper's dilution correction it gives a 3,704 ppm day side (paper 3,729 +/- 52) and 2,688 K (paper 2,699 +/- 32); its night side is 1,185 K against the paper's 1,259 +/- 44 K. About 3.4 percent of the surface, around midnight, has a negative fitted brightness and shows no data.",
+      "finding": "Shown as the temperature dataset, evaluated by SPIDERMAN 1.0.3. With the paper's dilution correction it gives a 3,704 ppm day side (paper 3,729 +/- 52) and 2,688 K (paper 2,699 +/- 32); its night side is 1,185 K against the paper's 1,259 +/- 44 K. About 3.4 percent of the surface, around midnight, has a negative fitted brightness and shows no data.",
       "evidence": [
         "https://arxiv.org/abs/2107.03349"
       ]
@@ -26,8 +26,8 @@
       "id": "spitzer-3-6um",
       "subject": "May et al. (2021) joint fit of the two 3.6 um phase curves",
       "status": "deferred",
-      "finding": "Same model (sph0 0.00048, sph3 0.00022, lo0 0.68) in another band. One lens is shown so that both planets of this route share 4.5 um.",
-      "revisitWhen": "A second lens per planet is wanted.",
+      "finding": "Same model (sph0 0.00048, sph3 0.00022, lo0 0.68) in another band. One dataset is shown so that both planets of this route share 4.5 um.",
+      "revisitWhen": "A second dataset per planet is wanted.",
       "evidence": [
         "https://arxiv.org/abs/2107.03349"
       ]

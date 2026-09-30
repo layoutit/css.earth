@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-source-manifest@1",
+  "schema": "cssearth-volume-source-manifest@2",
   "pathBase": "repository",
   "inputs": [
     {
@@ -22,7 +22,7 @@
         ]
       },
       "dependencies": [],
-      "lensId": "eso1119b",
+      "datasetId": "eso1119b",
       "license": "ESO image-use terms: https://www.eso.org/public/outreach/copyright/; retain the complete credit.",
       "capture": {
         "attributions": [
@@ -62,7 +62,7 @@
         ]
       },
       "dependencies": [],
-      "lensId": "eso0844a",
+      "datasetId": "eso0844a",
       "license": "ESO image-use terms: https://www.eso.org/public/outreach/copyright/; retain the complete credit.",
       "capture": {
         "attributions": [

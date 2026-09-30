@@ -46,12 +46,12 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | `source/manifest.json` | Local input paths, canonical bindings, acquisition and per-input credits; tracked source records carry no hashes |
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
 | Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `node site/build/prepare/prepare-text.mts` publishes `prepared/text.json` |
-| `prepared/object.json`, `prepared/page.json` | Transport and page metadata regenerated from the installed runtime; not inventoried or committed |
+| `prepared/object.json`, `prepared/page.json` | Transport and page metadata built from the installed runtime when read; never files, inventoried or committed |
 | Other delivery files under `prepared/` | Baked output. Published to R2 through `inventory.json`, restored by `setup:assets`, never committed; audit-only terrain reports and source-index rasters are excluded |
 | `inventory.json` at the body root | Generated inventory of every baked file (public textures and `prepared/*`) used by installation and publication |
 | `site/prepared-sources.json`, `site/prepared-source-credits.json` and `site/prepared-facilities.json` | Ignored source usage, page credit and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
-| Test fixtures and shared harnesses under `tests/`; preparation code under `packages/bake/` (`src/`, `cli/`, `authoring/`), telescope code under `packages/telescope-cli/`, site build steps under `site/build/`, CI checks under `.github/scripts/` | Inputs and implementation used by executable checks and preparation |
+| Unit tests, their fixtures and helpers beside the code they test; integration tests that span several owners in `integration/`; do not add a `tools/` or `tests/` directory; preparation code under `packages/bake/` (`src/`, `cli/`, `authoring/`), telescope code under `packages/telescope-cli/`, site build steps under `site/build/`, CI checks under `.github/scripts/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/objects/README.md) | Shared installation, controls, commands and contribution workflow |
 
 Every file under `source/` needs a manifest entry. Body packages contain data,
@@ -77,7 +77,7 @@ SOURCE summary, EVIDENCE index or body USAGE guide.
 ### Investigation ledger
 
 `investigations.json`, beside the README, is the object's notebook: every source,
-route, lens or frame examined, including trials that failed. Each entry has an
+route, dataset or frame examined, including trials that failed. Each entry has an
 `id`, a `status` (`included`, `excluded`, `unresolved` or `deferred`) and a
 `finding`; `subject`, `evidence` and `revisitWhen` (what would reopen it) are
 optional notes. Git holds its history; entries carry no commits or check dates.
@@ -179,11 +179,11 @@ license alone does not establish an input's terms.
 
 ## Save enough evidence to check the result
 
-Keep evidence beside the body or shared test/tool that owns the claim, and link
-it from the maintained README or guide. Keep an artifact in the current tree
-while an explanation or executable check needs it. Git history keeps removed
-reports; never link them by commit. Scratch captures and
-repetitive logs belong in ignored `output/`.
+State the result in the maintained README or guide: what was checked, on which
+version, and what it found. Commit only the images a document displays and the
+inputs a script reads, beside the body or tool that owns them. Reports,
+receipts, captures and logs stay in ignored `output/` or on the PR; git history
+keeps older ones, and nothing links them by commit.
 
 Record:
 
@@ -193,8 +193,8 @@ Record:
 - **Method and result:** command, cases, outcomes, failures and omitted checks.
   Include environment details that affect the result. Browser evidence needs
   browser version, viewport, DPR, camera, dataset and settings.
-- **Inspectable evidence:** original reports and relevant images at retrievable
-  locations. External files need stable download links, mirrored to R2 when they
+- **Inspectable evidence:** the images a reader needs, displayed in the document
+  or attached to the PR. External files need stable download links, mirrored to R2 when they
   matter. A local port or ignored path alone cannot identify or preserve a result.
 
 Use existing report formats; there is no required extra JSON format or file set.
@@ -221,7 +221,7 @@ lighting before making comparison claims.
 what visual content should agree, and what defect a difference could reveal.
 Pixelmatch is conditional on that comparison; it is not a required deliverable
 for every visual PR. For example, checking that an existing Monochrome view is
-unchanged after adding a lens is meaningful. Comparing Monochrome with false
+unchanged after adding a dataset is meaningful. Comparing Monochrome with false
 color, two different filters, or a photograph with an elevation map is not a
 fidelity check: those datasets are supposed to look different. Do not run such
 comparisons merely to produce a mismatch count.
@@ -235,9 +235,9 @@ standalone delivery gate.
 
 **When using Pixelmatch for matched visual evidence, use threshold `0.1`.** This
 cssEarth requirement makes pixel changes inspectable and reproducible. Compare equal-sized, unscaled
-captures or identical documented crops. Retain the input images, generated diff,
-input paths, Pixelmatch version, threshold, anti-aliasing setting, mismatch count
-and compared pixel count beside the owning evidence. Choose settings before
+captures or identical documented crops. State the input paths, Pixelmatch version,
+threshold, anti-aliasing setting, mismatch count and compared pixel count with
+the result, and show the diff image where the result is reported. Choose settings before
 comparing and disclose masks or exclusions. Keep camera, viewport, DPR, dataset,
 lighting and browser fixed. If capture instability could affect the conclusion,
 compare independent unchanged A/A captures first and report their differences;

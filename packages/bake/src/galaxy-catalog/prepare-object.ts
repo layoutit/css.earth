@@ -72,7 +72,7 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     const existing = await readFile(resolve(objectDirectory, 'object.json'), 'utf8').then(text => record(JSON.parse(text), 'object.json'), (error: unknown) => {
       if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error; });
     const authored = existing?.properties === undefined ? {} : record(existing.properties, 'object.json properties');
-    const descriptor = { schema: 'cssearth-object@1', id: basename(objectDirectory), type: 'galaxy-catalog',
+    const descriptor = { schema: 'cssearth-object@2', id: basename(objectDirectory), type: 'galaxy-catalog',
       properties: { ...authored, preparation: { source: 'source/catalogue.json' } },
       prepared: { format: data.schema, url: 'prepared/catalogue.json' } };
     await writeFile(resolve(objectDirectory, 'object.json'), JSON.stringify(descriptor, null, 2) + '\n');

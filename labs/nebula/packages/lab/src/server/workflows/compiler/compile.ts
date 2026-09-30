@@ -59,7 +59,7 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   }
   const observedStarsBytes = recipe.observedStars ? await readFile(resolve(root, recipe.observedStars.path)) : undefined;
   const sourceData = await loadCompilerImages(root, recipe.observationCatalogue, request, center);
-  const source = sourceData.images.find(s => s.id === recipe.defaultSourceId); if (!source) throw new TypeError('Default compiler lens is unavailable.');
+  const source = sourceData.images.find(s => s.id === recipe.defaultSourceId); if (!source) throw new TypeError('Default compiler dataset is unavailable.');
   const windowSource = recipe.emissionWindow && sourceData.images.find(image => image.id === recipe.emissionWindow!.sourceId);
   const emissionWindow = windowSource ? readEmissionWindow({ ...recipe.emissionWindow,
     polygonArcsec: [[0, 0], [windowSource.nativeWidth, 0], [windowSource.nativeWidth, windowSource.nativeHeight], [0, windowSource.nativeHeight]]
@@ -115,9 +115,9 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   const scene = await bakeCompiler({ root, outputDirectory: `${directory}/scene`, id, fieldIdentity: fitted.field.identity,
     boundsArcsec: field.bounds, skyBoundsArcsec: skyBounds, sampleEmission: field.sampleEmission, stars,
     minimumFeatureScaleArcsec: depthModel || photometricModel ? Math.min(...fitted.field.components.flatMap(component => component.sigma)) : undefined,
-    lenses: materials.map(material => ({ id: material.image.id, label: material.image.label, sampleMaterial: material.sampleMaterial })), signal,
+    datasets: materials.map(material => ({ id: material.image.id, label: material.image.label, sampleMaterial: material.sampleMaterial })), signal,
     progress: value => progress(value.message, value.phase === 'volume' ? .45 + .2 * value.completed / value.total : value.phase === 'texture' ? .65 + .25 * value.completed / value.total : .92) });
-  pipeline.push({ id: 'bake', label: 'Bake shared geometry + image lenses', state: 'complete', seconds: (performance.now() - started) / 1000 });
+  pipeline.push({ id: 'bake', label: 'Bake shared geometry + image datasets', state: 'complete', seconds: (performance.now() - started) / 1000 });
   const sources: CompilerResult['sources'] = [];
   for (const image of sourceData.images) {
     const original = await compilerImagePanel(image, skyBounds, true, 512), starless = await compilerImagePanel(image, skyBounds, false, 512);
@@ -144,7 +144,7 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
   const method = await save('method.json', Buffer.from(JSON.stringify({ version: COMPILER_VERSION, recipe, recipePath: request.recipePath, request,
     physicalDepth, photometricPrior, ...(catalogue ? { observedStars: { source: recipe.observedStars, ...catalogue.receipt } } : {}), ...(union ? { starCatalogue: union.selection } : {}),
     inputIdentity: inputs.identity, target: { ...target, target: undefined, coverage: undefined }, scaffoldFit, fieldMetrics: fitted.metrics,
-    assumptions: fitted.field.assumptions, stars: catalogue ? 'Measured optical catalogue overlay, apparent V ranked, independent of image lens. See observedStars receipt for color and authored depth limits.' : union ? union.selection.interpretation : 'Compact points detected once from the reference stellar residual. Each lens preserves its own local background-subtracted residual aperture display energy and angular footprint at the same registered xy; absent coverage or residual emits zero light. Only columns with fitted emission are included. Depth is a deterministic conditional field sample, unchanged across lenses, not a measured stellar distance or confirmed membership. Encoded RGB display accounting is not calibrated stellar flux, and stars visible only outside the reference catalogue are not added.',
+    assumptions: fitted.field.assumptions, stars: catalogue ? 'Measured optical catalogue overlay, apparent V ranked, independent of image dataset. See observedStars receipt for color and authored depth limits.' : union ? union.selection.interpretation : 'Compact points detected once from the reference stellar residual. Each dataset preserves its own local background-subtracted residual aperture display energy and angular footprint at the same registered xy; absent coverage or residual emits zero light. Only columns with fitted emission are included. Depth is a deterministic conditional field sample, unchanged across datasets, not a measured stellar distance or confirmed membership. Encoded RGB display accounting is not calibrated stellar flux, and stars visible only outside the reference catalogue are not added.',
     materials: materials.map(material => material.receipt),
     pipeline }, null, 2)));
   const m = fitted.metrics;

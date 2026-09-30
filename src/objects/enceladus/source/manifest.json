@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "cassini-schenk-2024-normal",
@@ -16,7 +16,7 @@
         "surfaces",
         "navigation"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 16098,
@@ -70,7 +70,7 @@
       "consumers": [
         "scientific-surfaces"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "label": "Elevation",
       "falseColor": true,
       "width": 8049,
@@ -506,7 +506,7 @@
       "consumers": [
         "ice-absorption"
       ],
-      "lensId": "ice-absorption",
+      "datasetId": "ice-absorption",
       "label": "Ice absorption",
       "falseColor": true,
       "width": 1024,
@@ -553,7 +553,7 @@
       "consumers": [
         "infrared-ratio"
       ],
-      "lensId": "infrared-ratio",
+      "datasetId": "infrared-ratio",
       "label": "Infrared ratio",
       "falseColor": true,
       "width": 1024,
@@ -670,7 +670,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "infrared",
+      "datasetId": "infrared",
       "label": "Infrared color",
       "falseColor": true,
       "width": 8192,
@@ -720,7 +720,7 @@
       "consumers": [
         "geology"
       ],
-      "lensId": "geology",
+      "datasetId": "geology",
       "label": "Geology",
       "falseColor": true,
       "width": 2048,

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/oberon/",
   "sourceWidth": 5760,
   "sourceHeight": 2880,
@@ -20,7 +20,7 @@
     {
       "id": "normal",
       "output": "oberon-{id}{suffix}.webp",
-      "thumbnail": "oberon-lens-{id}.webp",
+      "thumbnail": "oberon-dataset-{id}.webp",
       "source": "observations/oumap-cyl-180180.cub.gz",
       "falseColor": false,
       "science": {
@@ -60,7 +60,7 @@
     {
       "id": "voyager-color",
       "output": "oberon-{id}{suffix}.webp",
-      "thumbnail": "oberon-lens-{id}.webp",
+      "thumbnail": "oberon-dataset-{id}.webp",
       "source": "observations/voyager-color/c2678717.equi.tif",
       "falseColor": true,
       "science": {

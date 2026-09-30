@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "comet-8p",
   "displayName": "Tuttle",
@@ -174,7 +174,7 @@
           "ambient": 0.45,
           "diffuse": 0.55
         },
-        "lensId": "arecibo"
+        "datasetId": "arecibo"
       }
     ]
   },
@@ -183,6 +183,6 @@
     "qualification": "Two touching lobes inferred from Hubble brightness changes and sized using Spitzer infrared measurements. The smooth gray surface represents the model. Its rotation phase is illustrative."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

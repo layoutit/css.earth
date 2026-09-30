@@ -15,6 +15,78 @@
     },
     {
       "location": "public",
+      "filename": "saturn-dataset-methane.webp",
+      "bytes": 628,
+      "sha256": "19732f43234baa306b8e1ab322d92120565f7cebfc5f963b2460db1991857729"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-normal.webp",
+      "bytes": 370,
+      "sha256": "2dc20a4f4a0609d0ed2ad2f2d8511b8b1e3607e1ff0c1ae2049a0ade0075fa91"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-thermal.webp",
+      "bytes": 338,
+      "sha256": "13e94fca0e655d116f00bb8b5fa8a2627db591b8a5023fdd43221c353ab5d670"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-ultraviolet.webp",
+      "bytes": 422,
+      "sha256": "051d9f0a23df2f38bb6913512f49b00be908e3ab9d8d4adaf722724736713ff3"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-visible-2018a.webp",
+      "bytes": 458,
+      "sha256": "a3b47bc74ddbd0a87ba4f4f5556f33731720b0736e1976d970593b99b846283f"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-visible-2019a.webp",
+      "bytes": 474,
+      "sha256": "57204c33be4edd78e5a6f6dc32fd51aeec0747d5239957f78432ce4c8db046dd"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-visible-2020a.webp",
+      "bytes": 1040,
+      "sha256": "83e752a0709790cd96894a78d08c674a7b264d263051763ea1483be3c8e23e23"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-visible-2021a.webp",
+      "bytes": 950,
+      "sha256": "332499879c044952721f95c8f37b9343ac65a8bb8914a4c86b5a9ecae58015c2"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-visible-2022a.webp",
+      "bytes": 966,
+      "sha256": "2e772a66b2ecfbb9e78cf87677e0197bf79e186033672b72865cf91a03d46cac"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-visible-2023a.webp",
+      "bytes": 876,
+      "sha256": "b1f6ddccb0f2af1a1edd308c7d6825fcb83ba17f7f80cc5024f8e656e1664882"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-visible-2024a.webp",
+      "bytes": 880,
+      "sha256": "46b82707910aea49a5f864ac782c45bc053469a19747497a2888eb07cecb2bc5"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-dataset-visible-2025a.webp",
+      "bytes": 1192,
+      "sha256": "f9f86af10a4c5f58c4bdc3ba153e52f9733980286803e4d1481771cd4d205cbe"
+    },
+    {
+      "location": "public",
       "filename": "saturn-interior-atmosphere-normal-no-shadows-shadowless.webp",
       "bytes": 14730,
       "sha256": "dbc1680384e9fc18b4eb554ad46a4ddd89f1965fd63a94c3780a508f96b4a2fb"
@@ -180,78 +252,6 @@
       "filename": "saturn-interior-section@2x.webp",
       "bytes": 133390,
       "sha256": "7e8e225bc39e5d55ea84f00906f6b526657fc889eae330f16ae0eda8fe81891e"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-methane.webp",
-      "bytes": 628,
-      "sha256": "19732f43234baa306b8e1ab322d92120565f7cebfc5f963b2460db1991857729"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-normal.webp",
-      "bytes": 370,
-      "sha256": "2dc20a4f4a0609d0ed2ad2f2d8511b8b1e3607e1ff0c1ae2049a0ade0075fa91"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-thermal.webp",
-      "bytes": 338,
-      "sha256": "13e94fca0e655d116f00bb8b5fa8a2627db591b8a5023fdd43221c353ab5d670"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-ultraviolet.webp",
-      "bytes": 422,
-      "sha256": "051d9f0a23df2f38bb6913512f49b00be908e3ab9d8d4adaf722724736713ff3"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-visible-2018a.webp",
-      "bytes": 458,
-      "sha256": "a3b47bc74ddbd0a87ba4f4f5556f33731720b0736e1976d970593b99b846283f"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-visible-2019a.webp",
-      "bytes": 474,
-      "sha256": "57204c33be4edd78e5a6f6dc32fd51aeec0747d5239957f78432ce4c8db046dd"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-visible-2020a.webp",
-      "bytes": 1040,
-      "sha256": "83e752a0709790cd96894a78d08c674a7b264d263051763ea1483be3c8e23e23"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-visible-2021a.webp",
-      "bytes": 950,
-      "sha256": "332499879c044952721f95c8f37b9343ac65a8bb8914a4c86b5a9ecae58015c2"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-visible-2022a.webp",
-      "bytes": 966,
-      "sha256": "2e772a66b2ecfbb9e78cf87677e0197bf79e186033672b72865cf91a03d46cac"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-visible-2023a.webp",
-      "bytes": 876,
-      "sha256": "b1f6ddccb0f2af1a1edd308c7d6825fcb83ba17f7f80cc5024f8e656e1664882"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-visible-2024a.webp",
-      "bytes": 880,
-      "sha256": "46b82707910aea49a5f864ac782c45bc053469a19747497a2888eb07cecb2bc5"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-lens-visible-2025a.webp",
-      "bytes": 1192,
-      "sha256": "f9f86af10a4c5f58c4bdc3ba153e52f9733980286803e4d1481771cd4d205cbe"
     },
     {
       "location": "public",
@@ -1294,8 +1294,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 301,
-      "sha256": "5f6b9c744078ea17369e2450564e14e6ed6585a5959f4589cdc6eae4f12196b8"
+      "bytes": 304,
+      "sha256": "705aff6e4b4d76883a27592bf01094de87191f0b27adbe461120fb4972461f13"
     },
     {
       "location": "prepared",
@@ -1306,20 +1306,26 @@
     {
       "location": "prepared",
       "filename": "content.json",
-      "bytes": 4941,
-      "sha256": "08f4ba89a436f8a2ea81a94d1fc61cfa58fbf16129ae69bd5cfdfbc8ab392025"
+      "bytes": 4948,
+      "sha256": "405a2e4f45e2f51a99f7f8c7f348fee569b0fd297c565c3ce66f18b18284fed2"
     },
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 6638,
-      "sha256": "5d15f92e24afcedfbfb8d6df5b87841945d2865a470476f7027dc5bfd6d4916c"
+      "bytes": 6685,
+      "sha256": "3ce3e7ffd9853fc1425cdbc709bfc044f7711631697d63450559eb881dc37a1f"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 12710,
+      "sha256": "f4e359c548e761942b7f66d0eacc5746b9a623bd502b85b0cd1d94d367150f8c"
     },
     {
       "location": "prepared",
       "filename": "image-quality.json",
-      "bytes": 4391,
-      "sha256": "d4f71b148f5345b912afbbc700062b4edbac6920dfe2dc069c82685d41bb2c3f"
+      "bytes": 4403,
+      "sha256": "f2cdea57443feee06769b208c61f4099a196ab472725f4da656d1885cf3285e6"
     },
     {
       "location": "prepared",
@@ -1329,15 +1335,9 @@
     },
     {
       "location": "prepared",
-      "filename": "lenses.json",
-      "bytes": 12663,
-      "sha256": "8b58652c8aae7281b0b0a243ace0f0f3857ef35033d5021923140a5ea8c3981f"
-    },
-    {
-      "location": "prepared",
-      "filename": "material-lenses.json",
-      "bytes": 11207,
-      "sha256": "cb8240aaa6eca921ec0a2a74a036e5d9b06af0d1b37fb8307efcc0b81048089d"
+      "filename": "material-datasets.json",
+      "bytes": 11287,
+      "sha256": "dd064d4b5b5d631fccdcd8218efe1db55db4480b354bd556f7822c5ba8e2ac60"
     },
     {
       "location": "prepared",
@@ -1420,8 +1420,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1002171,
-      "sha256": "f927b2dc122c0870d2783836eac3ca990abc69a796b92aae07bf52d496467685"
+      "bytes": 1002456,
+      "sha256": "4a8a28d7d1a58993afe5c330768e11e8f6067b085c1e6f1a357cc72bb5d54067"
     },
     {
       "location": "prepared",
@@ -1450,8 +1450,8 @@
     {
       "location": "prepared",
       "filename": "views.json",
-      "bytes": 8861,
-      "sha256": "34b0caf95508c1dce56a330e8601aa0ac2d978958c3201e78a187b4f93f52923"
+      "bytes": 8866,
+      "sha256": "4fc75ffed14dc116d45b92b25a083ab9635ae04c6d81370af419d36001e496b6"
     },
     {
       "location": "prepared",

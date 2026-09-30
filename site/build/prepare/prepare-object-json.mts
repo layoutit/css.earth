@@ -45,13 +45,13 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   projectRoot: string; objectDirectory: string; preparedDirectory: string; descriptorPath: string;
 }, options?: BindingOptions) {
   let definition:RecompiledPresentation<CheckedObjectRuntimeDefinition>=requireObjectRuntimeDefinition(definitionValue);
-  if (!SCENE_OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@4') {
+  if (!SCENE_OBJECTS.some(object => object.id === id) || definition.id !== id || definition.schema !== 'cssearth-object-runtime@5') {
     throw new TypeError('Prepared object identity does not match the application registry.');
   }
   const { projectRoot, objectDirectory, preparedDirectory } = target;
   const originalDescriptor = requireRecord(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
   let descriptor = parseObjectDescriptor(originalDescriptor);
-  if (descriptor.schema !== 'cssearth-object@1' || descriptor.id !== id || typeof descriptor.type !== 'string') {
+  if (descriptor.schema !== 'cssearth-object@2' || descriptor.id !== id || typeof descriptor.type !== 'string') {
     throw new TypeError('Prepared object descriptor identity is invalid.');
   }
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.ts');
@@ -74,7 +74,7 @@ export async function updateObjectJsonForPresentation(target:string|URL, present
   const id = match[1];
   try { await access(resolve(root, 'src/objects', id, 'object.json')); }
   catch (error) { if (hasErrorCode(error,'ENOENT')) return null; throw error; }
-  return writeObjectJson(id, { ...requireRecord(presentation), schema: 'cssearth-object-runtime@4', id, controls });
+  return writeObjectJson(id, { ...requireRecord(presentation), schema: 'cssearth-object-runtime@5', id, controls });
 }
 
 export async function prepareObjectJson(ids?:readonly string[]|null, options?:BindingOptions) {

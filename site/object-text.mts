@@ -61,7 +61,7 @@ function citation(raw: unknown): TextCitation {
   });
 }
 
-function cited(raw: unknown, label: string): CitedText {
+export function parseCitedText(raw: unknown, label: string): CitedText {
   const value = sourceObject(raw, ['text', 'sources']);
   const sources = sourceArray(value.sources, citation);
   if (!sources.length) throw new TypeError(`${label} needs at least one source.`);
@@ -79,9 +79,9 @@ function dataset(raw: unknown): ObjectTextDataset {
 }
 
 function blocks(value: Record<string, unknown>, objectId: string) {
-  const datasets = Object.entries(sourceObject(value.datasets)).map(([lensId, raw]) => [sourceId(lensId), dataset(raw)] as const);
+  const datasets = Object.entries(sourceObject(value.datasets)).map(([datasetId, raw]) => [sourceId(datasetId), dataset(raw)] as const);
   return {
-    objectId, card: cited(value.card, `${objectId} card`), introduction: cited(value.introduction, `${objectId} introduction`),
+    objectId, card: parseCitedText(value.card, `${objectId} card`), introduction: parseCitedText(value.introduction, `${objectId} introduction`),
     datasets: Object.freeze(Object.fromEntries(datasets)),
   };
 }
@@ -113,7 +113,7 @@ export interface TextContext {
   /** Registry name, used to recognise copies that only swap the object name. */
   readonly name: string;
   /** Dataset identities and chooser labels, in order. */
-  readonly lenses: readonly { readonly id: string; readonly label: string }[];
+  readonly datasets: readonly { readonly id: string; readonly label: string }[];
   /** Source catalogue record ids a citation may name. */
   readonly catalogue: ReadonlySet<string>;
   /** Datasets whose prepared product names its inputs; their summaries may rely on those sources. */
@@ -131,6 +131,13 @@ function budget(add: AddFinding, slot: string, kind: TextSlot, value: string) {
   const count = sentences(value).length;
   if (count > limit.sentences) add(slot, 'sentences', `${count} sentences; the ${kind} budget is ${limit.sentences}`);
   if (!/[.!?]$/u.test(value)) add(slot, 'punctuation', 'ends without a full stop');
+}
+
+/** Shared wording limits for a body or system introduction. */
+export function textBlockBudgetErrors(objectId: string, slot: TextSlot, value: string): TextFinding[] {
+  const errors: TextFinding[] = [];
+  budget((name, rule, detail) => errors.push({ objectId, slot: name, rule, detail }), slot, slot, value);
+  return errors;
 }
 
 /** The checks that need nothing but the authored text: every block within its characters, sentences and punctuation.
@@ -159,17 +166,17 @@ export function readerTextErrors(text: ObjectText, context: TextContext): TextFi
   cite('card', text.card.sources);
   budget(add, 'introduction', 'introduction', text.introduction.text);
   cite('introduction', text.introduction.sources);
-  const lensIds = context.lenses.map(lens => lens.id);
-  for (const id of lensIds.filter(id => !text.datasets[id])) add(`datasets.${id}`, 'coverage', 'the dataset has no reader text');
-  for (const [id, dataset] of Object.entries(text.datasets)) {
-    if (!lensIds.includes(id)) add(`datasets.${id}`, 'coverage', 'no dataset has this id');
-    budget(add, `datasets.${id}.title`, 'title', dataset.title);
-    // The page refuses a dataset whose title repeats its lens label or its summary (dataset-content.mts); refuse it here first.
-    const lens = context.lenses.find(entry => entry.id === id);
-    try { validateDatasetText({ id, title: dataset.title, label: lens?.label, summary: dataset.summary }); } catch (error) { add(`datasets.${id}.title`, 'identity', (error as Error).message.replace(`${id}: `, '')); }
-    if (dataset.detail !== undefined) budget(add, `datasets.${id}.detail`, 'detail', dataset.detail);
-    budget(add, `datasets.${id}.summary`, 'summary', dataset.summary);
-    if (dataset.sources?.length) cite(`datasets.${id}`, dataset.sources);
+  const datasetIds = context.datasets.map(dataset => dataset.id);
+  for (const id of datasetIds.filter(id => !text.datasets[id])) add(`datasets.${id}`, 'coverage', 'the dataset has no reader text');
+  for (const [id, readerText] of Object.entries(text.datasets)) {
+    if (!datasetIds.includes(id)) add(`datasets.${id}`, 'coverage', 'no dataset has this id');
+    budget(add, `datasets.${id}.title`, 'title', readerText.title);
+    // The page refuses a dataset whose title repeats its dataset label or its summary (dataset-content.mts); refuse it here first.
+    const dataset = context.datasets.find(entry => entry.id === id);
+    try { validateDatasetText({ id, title: readerText.title, label: dataset?.label, summary: readerText.summary }); } catch (error) { add(`datasets.${id}.title`, 'identity', (error as Error).message.replace(`${id}: `, '')); }
+    if (readerText.detail !== undefined) budget(add, `datasets.${id}.detail`, 'detail', readerText.detail);
+    budget(add, `datasets.${id}.summary`, 'summary', readerText.summary);
+    if (readerText.sources?.length) cite(`datasets.${id}`, readerText.sources);
     else if (!context.evidencedDatasets.has(id)) add(`datasets.${id}`, 'citation', 'cite the sources this summary describes; its prepared product names none');
   }
   return errors;
@@ -184,7 +191,7 @@ const PROCESS_WORDS: readonly RegExp[] = [
 /** Invitations and self-reference that fill space without saying anything. */
 const EMPTY_WORDS: readonly RegExp[] = [
   /\bexplore\b/iu, /\binspect\b/iu, /\bdiscover\b/iu, /\bdelve\b/iu, /\bdive into\b/iu, /\bjourney\b/iu, /\bembark\b/iu,
-  /\bunveil/iu, /\bin 3D\b/iu, /\bcssEarth\b/iu, /\bthis (?:view|lens|card|page)\b/iu,
+  /\bunveil/iu, /\bin 3D\b/iu, /\bcssEarth\b/iu, /\bthis (?:view|dataset|card|page)\b/iu,
 ];
 const HYPE_WORDS: readonly RegExp[] = [
   /\bremarkabl[ey]\b/iu, /\bstriking(?:ly)?\b/iu, /\bstunning\b/iu, /\bfascinating\b/iu, /\bcaptivating\b/iu,
@@ -237,9 +244,9 @@ export function readerTextWarnings(text: ObjectText, context: TextContext): Text
       if (match) add(slot, 'about-the-object', `“${match[0]}” describes the display; say it in a dataset summary`);
     }
   }
-  for (const lens of context.lenses) {
-    const dataset = text.datasets[lens.id];
-    if (dataset && dataset.title.toLocaleLowerCase('en') === lens.label.toLocaleLowerCase('en')) add(`datasets.${lens.id}.title`, 'specific-title', 'the title repeats the chooser label');
+  for (const dataset of context.datasets) {
+    const readerText = text.datasets[dataset.id];
+    if (readerText && readerText.title.toLocaleLowerCase('en') === dataset.label.toLocaleLowerCase('en')) add(`datasets.${dataset.id}.title`, 'specific-title', 'the title repeats the chooser label');
   }
   const seen = new Map<string, string>();
   const prose: [string, string][] = [['card', text.card.text], ['introduction', text.introduction.text],

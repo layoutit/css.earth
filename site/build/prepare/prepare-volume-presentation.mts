@@ -6,7 +6,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import type { Lens } from '../../object-shell-types.ts';
+import type { Dataset } from '../../object-shell-types.ts';
 import { validateDatasetText } from '../../dataset-content.mts';
 import { parsePreparedVolumePresentation } from '../../volume-presentation.mts';
 import { checkLineage, lineageSource } from '@cssearth/objects/provenance';
@@ -60,77 +60,77 @@ function preview(raw: unknown): Preview {
   }
   return result;
 }
-interface LensRecord {
+interface DatasetRecord {
   id: string; label: string; title: string; description: string; summary: string; detail: string;
   facts: { id: string; label: string; value: string }[]; input: string; preview: Preview;
-  /** Further inputs this one lens was built from, each with its role, beyond its own image and the shared inputs. */
+  /** Further inputs this one dataset was built from, each with its role, beyond its own image and the shared inputs. */
   inputEvidence: ProductInputEvidence[];
 }
 interface Presentation {
-  objectId: string; name: string; defaultLens: string; bank: { path: string };
-  sharedInputs: string[]; inputEvidence: ProductInputEvidence[]; lenses: LensRecord[];
+  objectId: string; name: string; defaultDataset: string; bank: { path: string };
+  sharedInputs: string[]; inputEvidence: ProductInputEvidence[]; datasets: DatasetRecord[];
 }
 function presentation(raw: unknown): Presentation {
-  const value = sourceObject(raw, ['schema', 'objectId', 'name', 'defaultLens', 'bank', 'recipes', 'sharedInputs', 'inputEvidence', 'lenses']);
-  if (value.schema !== 'cssearth-volume-presentation-source@1') throw new TypeError('Invalid volume presentation source.');
-  const lenses = sourceArray(value.lenses, raw => {
-    const lens = sourceObject(raw, ['id', 'label', 'title', 'description', 'summary', 'detail', 'facts', 'input', 'preview', 'inputEvidence']);
-    const result = { id: sourceId(lens.id), label: sourceText(lens.label), title: sourceText(lens.title), description: sourceText(lens.description),
-      summary: sourceText(lens.summary), detail: sourceText(lens.detail), input: sourceId(lens.input), preview: preview(lens.preview),
-      inputEvidence: [...sourceArray(lens.inputEvidence ?? [], parseProductInputEvidence)],
-      facts: [...sourceArray(lens.facts, raw => { const fact = sourceObject(raw, ['id', 'label', 'value']); return { id: sourceId(fact.id), label: sourceText(fact.label), value: sourceText(fact.value) }; })] };
+  const value = sourceObject(raw, ['schema', 'objectId', 'name', 'defaultDataset', 'bank', 'recipes', 'sharedInputs', 'inputEvidence', 'datasets']);
+  if (value.schema !== 'cssearth-volume-presentation-source@2') throw new TypeError('Invalid volume presentation source.');
+  const datasets = sourceArray(value.datasets, raw => {
+    const dataset = sourceObject(raw, ['id', 'label', 'title', 'description', 'summary', 'detail', 'facts', 'input', 'preview', 'inputEvidence']);
+    const result = { id: sourceId(dataset.id), label: sourceText(dataset.label), title: sourceText(dataset.title), description: sourceText(dataset.description),
+      summary: sourceText(dataset.summary), detail: sourceText(dataset.detail), input: sourceId(dataset.input), preview: preview(dataset.preview),
+      inputEvidence: [...sourceArray(dataset.inputEvidence ?? [], parseProductInputEvidence)],
+      facts: [...sourceArray(dataset.facts, raw => { const fact = sourceObject(raw, ['id', 'label', 'value']); return { id: sourceId(fact.id), label: sourceText(fact.label), value: sourceText(fact.value) }; })] };
     validateDatasetText(result);
     return result;
   });
-  sourceUnique(lenses.map(lens => lens.id), 'volume lens');
-  const defaultLens = sourceId(value.defaultLens);
-  if (!lenses.length || !lenses.some(lens => lens.id === defaultLens)) throw new TypeError('Invalid volume default lens.');
-  return { objectId: sourceId(value.objectId), name: sourceText(value.name), defaultLens, bank: { path: sourcePath(sourceObject(value.bank, ['path']).path) }, lenses: [...lenses],
+  sourceUnique(datasets.map(dataset => dataset.id), 'volume dataset');
+  const defaultDataset = sourceId(value.defaultDataset);
+  if (!datasets.length || !datasets.some(dataset => dataset.id === defaultDataset)) throw new TypeError('Invalid volume default dataset.');
+  return { objectId: sourceId(value.objectId), name: sourceText(value.name), defaultDataset, bank: { path: sourcePath(sourceObject(value.bank, ['path']).path) }, datasets: [...datasets],
     sharedInputs: [...sourceArray(value.sharedInputs, sourceId)], inputEvidence: [...sourceArray(value.inputEvidence ?? [], parseProductInputEvidence)] };
 }
-/** Which manifest sources each lens reads: its own image, its further inputs and the shared inputs. */
+/** Which manifest sources each dataset reads: its own image, its further inputs and the shared inputs. */
 function volumeLineage(record: Presentation, manifest: Record<string, unknown>, imageLayer: boolean): ObjectLineage {
   const sources = imageLayer ? manifestSources(manifest) : sourceArray(manifest.inputs, raw => lineageSource(raw));
   const bySource = new Map(sources.map(source => [source.id, source]));
-  const products = record.lenses.map((lens, index) => {
-    if (bySource.get(lens.input)?.lensId !== lens.id) throw new TypeError(`Unbound volume lens image: ${record.objectId}/${lens.id}`);
-    for (const evidence of lens.inputEvidence) if (!bySource.has(evidence.sourceId) || evidence.sourceId === lens.input)
-      throw new TypeError(`Unknown or repeated lens input: ${record.objectId}/${lens.id}/${evidence.sourceId}`);
-    return { id: lens.id, label: lens.label, lensIds: [lens.id], parents: [], observationAttribution: 'source-lineage' as const,
-      inputs: [...new Set([lens.input, ...lens.inputEvidence.map(evidence => evidence.sourceId), ...record.sharedInputs])],
-      inputEvidence: [{ sourceId: lens.input, role: 'appearance' as const, evidence: `Selected image at source/presentation.json#/lenses/${index}/input.` }, ...lens.inputEvidence, ...record.inputEvidence],
-      interpretation: { kind: 'observation-conditioned-volume', sourceKind: 'published-display-image' }, limitations: [lens.description, lens.detail] };
+  const products = record.datasets.map((dataset, index) => {
+    if (bySource.get(dataset.input)?.datasetId !== dataset.id) throw new TypeError(`Unbound volume dataset image: ${record.objectId}/${dataset.id}`);
+    for (const evidence of dataset.inputEvidence) if (!bySource.has(evidence.sourceId) || evidence.sourceId === dataset.input)
+      throw new TypeError(`Unknown or repeated dataset input: ${record.objectId}/${dataset.id}/${evidence.sourceId}`);
+    return { id: dataset.id, label: dataset.label, datasetIds: [dataset.id], parents: [], observationAttribution: 'source-lineage' as const,
+      inputs: [...new Set([dataset.input, ...dataset.inputEvidence.map(evidence => evidence.sourceId), ...record.sharedInputs])],
+      inputEvidence: [{ sourceId: dataset.input, role: 'appearance' as const, evidence: `Selected image at source/presentation.json#/datasets/${index}/input.` }, ...dataset.inputEvidence, ...record.inputEvidence],
+      interpretation: { kind: 'observation-conditioned-volume', sourceKind: 'published-display-image' }, limitations: [dataset.description, dataset.detail] };
   });
   return checkLineage({ objectId: record.objectId, manifestPath: 'source/manifest.json', sources, products });
 }
 
 export interface PreparedVolume {
-  id: string; name: string; route: string; base: string; controls: Lens[]; defaultLens: string; lineage: ObjectLineage;
+  id: string; name: string; route: string; base: string; controls: Dataset[]; defaultDataset: string; lineage: ObjectLineage;
   outputs: { path: string; text: string | Uint8Array }[];
-  /** A volume attached to a body is no place of its own: each of its lenses is reached through the body's dataset that shows it. */
+  /** A volume attached to a body is no place of its own: each of its datasets is reached through the body's dataset that shows it. */
   hostedBy?: HostedDatasets;
 }
 export interface HostedDatasets {
-  objectId: string; name: string; route: string; datasets: Record<string, { lensId: string; label: string }>;
+  objectId: string; name: string; route: string; datasets: Record<string, { datasetId: string; label: string }>;
 }
-/** The body an attached volume's delivery names, and which of the body's own datasets shows each of the volume's lenses. */
-async function hostedDatasets(root: string, base: string, objectId: string, lensIds: readonly string[], input: (path: string) => Promise<Buffer>): Promise<HostedDatasets | undefined> {
+/** The body an attached volume's delivery names, and which of the body's own datasets shows each of the volume's datasets. */
+async function hostedDatasets(root: string, base: string, objectId: string, datasetIds: readonly string[], input: (path: string) => Promise<Buffer>): Promise<HostedDatasets | undefined> {
   const deliveryPath = `${base}/source/delivery.json`;
   const exists = await readFile(resolve(root, deliveryPath)).then(() => true, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; });
   if (!exists) return undefined;
   const host = sourceObject(json(await input(deliveryPath))).attachedTo;
   if (host === undefined) return undefined;
   const hostId = sourceId(host), content = sourceObject(json(await input(`src/objects/${hostId}/source/content/object.json`)));
-  const datasets: Record<string, { lensId: string; label: string }> = {};
-  for (const raw of sourceArray(sourceObject(content.lenses).controls, sourceObject)) {
+  const datasets: Record<string, { datasetId: string; label: string }> = {};
+  for (const raw of sourceArray(sourceObject(content.datasets).controls, sourceObject)) {
     if (raw.volume === undefined) continue;
     const volume = sourceObject(raw.volume);
     if (volume.objectId !== objectId) continue;
-    const lensId = sourceId(volume.lensId);
-    if (datasets[lensId]) throw new TypeError(`Two datasets of ${hostId} show ${objectId}/${lensId}.`);
-    datasets[lensId] = { lensId: sourceId(raw.id), label: sourceText(raw.label) };
+    const datasetId = sourceId(volume.datasetId);
+    if (datasets[datasetId]) throw new TypeError(`Two datasets of ${hostId} show ${objectId}/${datasetId}.`);
+    datasets[datasetId] = { datasetId: sourceId(raw.id), label: sourceText(raw.label) };
   }
-  for (const lensId of lensIds) if (!datasets[lensId]) throw new TypeError(`No dataset of ${hostId} shows ${objectId}/${lensId}.`);
+  for (const datasetId of datasetIds) if (!datasets[datasetId]) throw new TypeError(`No dataset of ${hostId} shows ${objectId}/${datasetId}.`);
   return { objectId: hostId, name: sourceText(content.displayName), route: `/${hostId}/`, datasets };
 }
 
@@ -143,10 +143,10 @@ export async function readPreparedVolumes({ root = process.cwd(), input = path =
   for (const { base, record, manifest, descriptor } of await volumeSources(root, input)) {
     const lineage = volumeLineage(record, manifest, descriptor.type === 'image-layer-bank');
     const prepared = parsePreparedVolumePresentation(json(await input(`${base}/prepared/presentation.json`)),
-      { id: record.objectId, defaultLens: record.defaultLens, lenses: record.lenses }, lineage.sources);
+      { id: record.objectId, defaultDataset: record.defaultDataset, datasets: record.datasets }, lineage.sources);
     const hostedBy = await hostedDatasets(root, base, record.objectId, prepared.controls.map(control => control.id), input);
     results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/${record.objectId}/`, base,
-      controls: prepared.controls, defaultLens: prepared.defaultLens, lineage, outputs: [], ...(hostedBy ? { hostedBy } : {}) });
+      controls: prepared.controls, defaultDataset: prepared.defaultDataset, lineage, outputs: [], ...(hostedBy ? { hostedBy } : {}) });
   }
   return results;
 }
@@ -157,16 +157,16 @@ async function volumeSources(root: string, input: (path: string) => Promise<Buff
   for (const folder of folders.filter(folder => folder.isDirectory() && (objectId === undefined || folder.name === objectId)).sort((a, b) => a.name.localeCompare(b.name))) {
     const base = `src/objects/${folder.name}`, presentationPath = `${base}/source/presentation.json`;
     const presentationBytes = await readFile(resolve(root, presentationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-    // The source-only catalogue contexts use source/presentation.json too, but are not prepared lens packages.
-    if (presentationBytes === null || sourceObject(json(presentationBytes)).schema !== 'cssearth-volume-presentation-source@1') continue;
+    // The source-only catalogue contexts use source/presentation.json too, but are not prepared dataset packages.
+    if (presentationBytes === null || sourceObject(json(presentationBytes)).schema !== 'cssearth-volume-presentation-source@2') continue;
     const record = presentation(json(await input(presentationPath)));
     if (record.objectId !== folder.name) throw new TypeError(`Mismatched volume presentation object: ${folder.name}.`);
     const manifest = sourceObject(json(await input(`${base}/source/manifest.json`)), ['schema', 'pathBase', 'inputs', 'documents', 'generatedIntermediates']);
-    if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid volume source manifest: ${record.objectId}.`);
+    if (manifest.schema !== 'cssearth-volume-source-manifest@2' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid volume source manifest: ${record.objectId}.`);
     const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
     const format = descriptor.prepared?.format;
-    if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-lens-bank' && format === 'cssearth-volume-lenses@1') ||
-      (descriptor.type === 'image-layer-bank' && format === 'cssearth-image-layer-bank@1' && record.lenses.length === 1 && record.defaultLens === 'optical')))
+    if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === 'cssearth-volume-datasets@1') ||
+      (descriptor.type === 'image-layer-bank' && format === 'cssearth-image-layer-bank@1' && record.datasets.length === 1 && record.defaultDataset === 'optical')))
       throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
     results.push({ base, record, manifest, descriptor });
   }
@@ -217,7 +217,7 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
   return { bytes: result.data, width, height };
 }
 
-/** Prepare each volume's presentation (its lens previews and controls) and inventory from its source records. */
+/** Prepare each volume's presentation (its dataset previews and controls) and inventory from its source records. */
 export async function prepareVolumePresentations({ root = process.cwd(), objectId, input = path => readFile(resolve(root, path)), mirrorOrigin = null }: Options = {}): Promise<PreparedVolume[]> {
   if (objectId !== undefined) sourceId(objectId);
   const results: PreparedVolume[] = [];
@@ -241,25 +241,25 @@ export async function prepareVolumePresentations({ root = process.cwd(), objectI
       }
     }
     const outputs: { path: string; text: string | Uint8Array }[] = [];
-    const controls: Lens[] = [];
+    const controls: Dataset[] = [];
     const inputs = new Map(sourceArray(manifest.inputs, sourceObject).map(raw => [sourceId(raw.id), raw]));
-    for (const lens of record.lenses) {
-      const own = inputs.get(lens.input)!;
-      const image = await preparePreview(root, lens.preview, input, { mirrorOrigin });
-      const previewUrl = `/scenes/${record.objectId}/datasets/${lens.id}.webp`;
+    for (const dataset of record.datasets) {
+      const own = inputs.get(dataset.input)!;
+      const image = await preparePreview(root, dataset.preview, input, { mirrorOrigin });
+      const previewUrl = `/scenes/${record.objectId}/datasets/${dataset.id}.webp`;
       outputs.push({ path: resolve(root, `public${previewUrl}`), text: image.bytes });
-      controls.push({ id: lens.id, label: lens.label, title: lens.title, thumbnailUrl: previewUrl,
+      controls.push({ id: dataset.id, label: dataset.label, title: dataset.title, thumbnailUrl: previewUrl,
         texture: { url: previewUrl, width: image.width, height: image.height, attribution: { label: sourceText(own.displayCredit ?? own.credit), url: sourceUrl(own.sourceUrl) } },
-        description: lens.description, summary: lens.summary, detail: lens.detail, facts: lens.facts });
+        description: dataset.description, summary: dataset.summary, detail: dataset.detail, facts: dataset.facts });
     }
-    outputs.push({ path: resolve(root, `${base}/prepared/presentation.json`), text: stringify({ schema: 'cssearth-volume-presentation@1', objectId: record.objectId, controls, defaultLens: record.defaultLens }) });
+    outputs.push({ path: resolve(root, `${base}/prepared/presentation.json`), text: stringify({ schema: 'cssearth-volume-presentation@2', objectId: record.objectId, controls, defaultDataset: record.defaultDataset }) });
     const publicPrefix = resolve(root, `public/scenes/${record.objectId}`) + '/';
     const publicAssets = outputs.filter(output => output.path.startsWith(publicPrefix)).map(output => {
       const bytes = Buffer.from(output.text);
       return { filename: output.path.slice(publicPrefix.length), location: 'public' as const, bytes: bytes.length, sha256: sha256(bytes) };
     });
-    // The lens previews are the object's public entries. An image-layer bank's prepared entries are its bank, layers
-    // and presentation; a volume-lens bank's prepared entries were written by its own bake and are kept.
+    // The dataset previews are the object's public entries. An image-layer bank's prepared entries are its bank, layers
+    // and presentation; a volume-dataset bank's prepared entries were written by its own bake and are kept.
     const current = await readInventory(record.objectId, resolve(root, base));
     const prefix = `${base}/prepared/`;
     const preparedOutputs = outputs.filter(output => output.path.startsWith(resolve(root, prefix) + '/')).map(output => {
@@ -276,8 +276,8 @@ export async function prepareVolumePresentations({ root = process.cwd(), objectI
       : [...(current?.assets.filter(asset => asset.location === 'prepared' && !preparedOutputs.some(output => output.filename === asset.filename)) ?? []), ...preparedOutputs];
     const next = mergeInventory(mergeInventory(current, 'public', publicAssets), 'prepared', preparedAssets);
     outputs.push({ path: resolve(root, `${base}/inventory.json`), text: inventoryText(next) });
-    const hostedBy = await hostedDatasets(root, base, record.objectId, record.lenses.map(lens => lens.id), input);
-    results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/${record.objectId}/`, base, controls, defaultLens: record.defaultLens, lineage, outputs,
+    const hostedBy = await hostedDatasets(root, base, record.objectId, record.datasets.map(dataset => dataset.id), input);
+    results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/${record.objectId}/`, base, controls, defaultDataset: record.defaultDataset, lineage, outputs,
       ...(hostedBy === undefined ? {} : { hostedBy }) });
   }
   if (objectId !== undefined && results.length !== 1) throw new TypeError(`No volume presentation for ${objectId}.`);
@@ -301,5 +301,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   // The real CLI entry point: opts into the mirror explicitly (the library defaults it off).
   const results = await writeVolumePresentations({ mirrorOrigin: RUNTIME_ASSET_ORIGIN,
     ...(args[0] === undefined ? {} : { objectId: args[0].slice(9) }) });
-  console.log(`Prepared volume presentations: ${results.length} objects, ${results.reduce((sum, result) => sum + result.controls.length, 0)} lenses.`);
+  console.log(`Prepared volume presentations: ${results.length} objects, ${results.reduce((sum, result) => sum + result.controls.length, 0)} datasets.`);
 }

@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its oscillations, recorded in K2 campaign 1, give 0.92 solar masses and 16.5 solar radii; APOGEE spectra give 4,476 K at its surface. This account was drafted from Khan et al. (2023), A&A 677, A21's values; the sections below are the data's own.
+Its oscillations, recorded in K2 campaign 1, give 0.92 solar masses and 16.5 solar radii; APOGEE spectra give 4,476 K at its surface. The introduction is generated from Khan et al. (2023), A&A 677, A21's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3798739182781495168, distance 5,568 pc from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201583545 (K2 campaign 1): PARAM asteroseismic distance (pc) 5567.578125 (16th-84th percentiles 5379.0625-5799.296875), MA09 pipeline with APOGEE DR17; Gaia DR3's parallax, 0.133 ± 0.019 mas (7.2 standard errors), is not used. Radius 16.5023 +/- 0.7922 solar radii from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201583545 (K2 campaign 1): PARAM radius (solar radii) 16.502307 (16th-84th percentiles 15.826289-17.4106), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). Mass 0.9213 +/- 0.112 solar masses from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201583545 (K2 campaign 1): PARAM mass (solar masses) 0.921284 (16th-84th percentiles 0.829779-1.053715), MA09 pipeline with APOGEE DR17 (https://doi.org/10.1051/0004-6361/202346196). Temperature 4,476 K from Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201583545: APOGEE DR17 effective temperature 4475.6226 +/- 50 K (the catalogue's final uncertainty). log g 1.97 from the mass and radius.
 
@@ -12,13 +12,11 @@ Its oscillations, recorded in K2 campaign 1, give 0.92 solar masses and 16.5 sol
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

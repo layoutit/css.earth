@@ -1,4 +1,6 @@
 import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { preparedObjectText } from '@cssearth/objects/node';
 import { expect, test, vi } from 'vitest';
 import { loadNavigableObject } from './navigable-object-mount.js';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
@@ -10,7 +12,7 @@ import type { ObjectMountOptions, ObjectRuntimeDefinition } from './object-runti
 
 async function preparedFixture() {
   const descriptor = requirePreparedCssDescriptor(JSON.parse(await readFile(new URL('../../../../src/objects/venus/object.json', import.meta.url), 'utf8')));
-  const envelope = record(JSON.parse(await readFile(new URL('../../../../src/objects/venus/prepared/object.json', import.meta.url), 'utf8')), 'prepared Venus fixture');
+  const envelope = record(JSON.parse(await preparedObjectText(fileURLToPath(new URL('../../../../src/objects/venus/', import.meta.url)), descriptor)), 'prepared Venus fixture');
   const source = requireObjectRuntimeDefinition(envelope.data);
   // Retain the real tree and selections while keeping image decoding in its browser gate.
   const data = { ...source, assets: { ...source.assets, startup: [] }, materials: [],

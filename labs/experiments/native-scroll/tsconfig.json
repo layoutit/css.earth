@@ -4,7 +4,7 @@
     "*.mts",
     "../../../site/test/native-scroll-browser.mts",
     "../../../site/test/native-scroll-touch-browser.mts",
-    "../../../tests/experiments/native-scroll/*.mts"
+    "./*.mts"
   ],
   "exclude": []
 }

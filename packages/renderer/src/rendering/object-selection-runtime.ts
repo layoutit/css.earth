@@ -21,7 +21,7 @@ export interface ObjectSelectionRuntimeOptions {
   onFatalError: (error: unknown) => void; onMaterialError?: (error: unknown) => void;
   /** The input surface's camera-motion signal: view-driven levels commit only while it is still. */
   motion?: CameraMotionSignal | null;
-  initialLens?: string;
+  initialDataset?: string;
   initialSettings?: unknown;
 }
 interface SelectionRequest { selection: ObjectSelection; intent: SelectionIntent; controller: AbortController; ticket: PreparedResidencyTicket | null; plan: PreparedPresentationPlan | null; previous: SelectionRequest | null; }
@@ -34,7 +34,7 @@ const sameKeys = (a: readonly string[], b: readonly string[]) => a.length === b.
 const sameDemand = (a: PreparedPresentationPlan, b: PreparedPresentationPlan) => sameKeys(a.required, b.required) && sameKeys(a.prewarm, b.prewarm);
 
 export function createObjectSelectionRuntime({
-  definition, presentation, residency, lifetime, initialLens, initialSettings,
+  definition, presentation, residency, lifetime, initialDataset, initialSettings,
   onChange = () => {}, prepareSelection, onCommit = () => {}, onFatalError, onMaterialError = () => {},
   motion = null,
 }: ObjectSelectionRuntimeOptions) {
@@ -47,7 +47,7 @@ export function createObjectSelectionRuntime({
     if (!motion?.active) { done(); return; }
     const unsubscribe = motion.subscribe(state => { if (!state.active) { unsubscribe(); done(); } });
   });
-  const initialSelection = initialObjectSelection(definition.controls, initialLens, initialSettings);
+  const initialSelection = initialObjectSelection(definition.controls, initialDataset, initialSettings);
   let desired = initialSelection, committed: ObjectSelection | null = null, committedPlan: PreparedPresentationPlan | null = null, view: PreparedView | null = null;
   let committedBy: SelectionIntent | null = null;
   /** The one request in flight; a newer request supersedes it. */

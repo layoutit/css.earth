@@ -1,4 +1,4 @@
-/** Offline transport for one fitted neutral field and source-dependent RGB lenses. */
+/** Offline transport for one fitted neutral field and source-dependent RGB datasets. */
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative } from 'node:path';
 import sharp from 'sharp';
@@ -18,11 +18,11 @@ import { bakeMasterVolumeSlices } from '../slices/emission.ts';
 
 export { compilerFrame, compilerSliceCounts } from '../../coordinates/compiler-frame.ts';
 
-export type { CompilerBakeResult, CompilerLensVolume, CompilerPin, PreparedCompilerStar } from '../../contracts/compiler-bake.ts';
+export type { CompilerBakeResult, CompilerDatasetVolume, CompilerPin, PreparedCompilerStar } from '../../contracts/compiler-bake.ts';
 export { readCompilerBakeResult } from '../../contracts/compiler-bake.ts';
 export interface CompilerBakeProgress { phase: 'volume' | 'texture' | 'compile'; completed: number; total: number; message: string }
 export type { CompilerStarInput } from '../../contracts/compiler-star-input.ts';
-export interface CompilerLensInput {
+export interface CompilerDatasetInput {
   id: string; label: string;
   /** Component-bound 3D chromaticity in 0..255; false means no observed material. No projected-image fallback. */
   sampleMaterial(xWestArcsec: number, yNorthArcsec: number, zAwayArcsec: number, outRgb: Vector3): boolean;
@@ -54,7 +54,7 @@ export interface BakeCompilerOptions {
   preparedPhysical?: boolean;
   /** Smallest supported kernel scale; reduces slab spacing for thin, tilted structures. */
   minimumFeatureScaleArcsec?: number;
-  lenses: CompilerLensInput[]; stars?: CompilerStarInput[]; signal?: AbortSignal;
+  datasets: CompilerDatasetInput[]; stars?: CompilerStarInput[]; signal?: AbortSignal;
   progress?(progress: CompilerBakeProgress): void;
 }
 
@@ -144,11 +144,11 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   const { root, outputDirectory, boundsArcsec, skyBoundsArcsec, signal } = options;
   if (!isAbsolute(root) || isAbsolute(outputDirectory) || !outputDirectory || !validCompilerName(options.id) ||
       !validCompilerName(options.fieldIdentity) || !validCompilerBounds(boundsArcsec) || !validSkyBounds(skyBoundsArcsec) ||
-      typeof options.sampleEmission !== 'function' || !Array.isArray(options.lenses) || options.lenses.length < 1 || options.lenses.length > 8)
+      typeof options.sampleEmission !== 'function' || !Array.isArray(options.datasets) || options.datasets.length < 1 || options.datasets.length > 8)
     throw new TypeError('Invalid compiler bake input.');
-  const lensIds = new Set<string>();
-  for (const lens of options.lenses) if (!/^[a-z0-9][a-z0-9-]{0,95}$/.test(lens.id) || lensIds.has(lens.id) || !lens.label.trim() || typeof lens.sampleMaterial !== 'function')
-    throw new TypeError('Compiler lenses require unique safe identities and a 3D material sampler.'); else lensIds.add(lens.id);
+  const datasetIds = new Set<string>();
+  for (const dataset of options.datasets) if (!/^[a-z0-9][a-z0-9-]{0,95}$/.test(dataset.id) || datasetIds.has(dataset.id) || !dataset.label.trim() || typeof dataset.sampleMaterial !== 'function')
+    throw new TypeError('Compiler datasets require unique safe identities and a 3D material sampler.'); else datasetIds.add(dataset.id);
   const preparedPhysical = options.preparedPhysical ?? true;
   if (typeof preparedPhysical !== 'boolean') throw new TypeError('Invalid compiler frame convention.');
   const { origin, localBounds, frame } = compilerFrame(boundsArcsec, preparedPhysical);
@@ -156,7 +156,7 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   for (const star of options.stars ?? []) {
     if (!star.id || star.id.length > 128 || starIds.has(star.id) || !Array.isArray(star.positionArcsec) || star.positionArcsec.length !== 3 || !star.positionArcsec.every(Number.isFinite) ||
         !Array.isArray(star.rgb) || star.rgb.length !== 3 || !star.rgb.every(n => Number.isInteger(n) && n >= 0 && n <= 255) ||
-        !validCompilerStarSize(star) || !Number.isFinite(star.alpha) || star.alpha < 0 || star.alpha > 1 || !validCompilerStarMaterials(star.materials, lensIds))
+        !validCompilerStarSize(star) || !Number.isFinite(star.alpha) || star.alpha < 0 || star.alpha > 1 || !validCompilerStarMaterials(star.materials, datasetIds))
       throw new TypeError('Invalid compiler star input.');
     const localPosition = star.positionArcsec.map((n, i) => n - origin[i]!) as EmissionVector3;
     starIds.add(star.id); stars.push({ id: star.id, positionUnits: preparedPhysical ? compilerPreparedPoint(localPosition) : localPosition,
@@ -170,7 +170,7 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   const output = containedPath(root, outputDirectory), masterDirectory = containedPath(output, 'masters');
   const neutralDirectory = containedPath(output, 'neutral');
   await mkdir(output, { recursive: true }); cancel(signal);
-  const provenance = { schema: 'cssearth-compiler-volume-provenance@1', fieldIdentity: options.fieldIdentity,
+  const provenance = { schema: 'cssearth-compiler-volume-provenance@2', fieldIdentity: options.fieldIdentity,
     coordinates: { axes: ['west', 'north', 'away'], units: 'arcsec', localOriginArcsec: origin,
       ...(preparedPhysical ? { mapping: 'sourceArcsec = [preparedWest, preparedNorth, -preparedToward] + localOriginArcsec',
         preparedAxes: ['west', 'north', 'toward'], earthView: 'source-observer-at-negative-z; prepared-observer-at-positive-z' }
@@ -204,25 +204,25 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   const neutralAlpha = await compilerAlpha(neutralDirectory, neutralSlices, signal);
   neutralSlices.provenance = { ...provenance };
   await writeFile(containedPath(neutralDirectory, 'volume-slices.json'), json(neutralSlices));
-  const painted: { input: CompilerLensInput; slices: VolumeSlices; coverage: { positiveAlphaTexels: number; recoloredTexels: number; outsideImageTexels: number } }[] = [];
-  for (let lensIndex = 0; lensIndex < options.lenses.length; lensIndex++) {
-    const lens = options.lenses[lensIndex]!, directory = containedPath(output, `lenses/${lens.id}`);
-    const slabMaterial = compilerSlabMaterial(options.sampleEmission, lens.sampleMaterial);
-    options.progress?.({ phase: 'texture', completed: lensIndex * totalSlices, total: options.lenses.length * totalSlices,
-      message: `Painting ${lens.label}; preserving shared opacity` });
+  const painted: { input: CompilerDatasetInput; slices: VolumeSlices; coverage: { positiveAlphaTexels: number; recoloredTexels: number; outsideImageTexels: number } }[] = [];
+  for (let datasetIndex = 0; datasetIndex < options.datasets.length; datasetIndex++) {
+    const dataset = options.datasets[datasetIndex]!, directory = containedPath(output, `datasets/${dataset.id}`);
+    const slabMaterial = compilerSlabMaterial(options.sampleEmission, dataset.sampleMaterial);
+    options.progress?.({ phase: 'texture', completed: datasetIndex * totalSlices, total: options.datasets.length * totalSlices,
+      message: `Painting ${dataset.label}; preserving shared opacity` });
     const result = await recolorCloudSlices({ slices: neutralSlices, loadResource: path => readFile(containedPath(neutralDirectory, path)),
       outputDirectory: directory, encoding: { format: 'png' }, preserveMaterialIntensity: true, sampleImageRgb(x, y, z, out, slab) {
         return slabMaterial(x + origin[0], y + origin[1], z + origin[2], out, slab);
-      }, onProgress(progress) { cancel(signal); options.progress?.({ phase: 'texture', completed: lensIndex * totalSlices + progress.completed,
-        total: options.lenses.length * totalSlices, message: `Painting ${lens.label}; preserving shared opacity` }); } });
+      }, onProgress(progress) { cancel(signal); options.progress?.({ phase: 'texture', completed: datasetIndex * totalSlices + progress.completed,
+        total: options.datasets.length * totalSlices, message: `Painting ${dataset.label}; preserving shared opacity` }); } });
     await verifyCompilerSharedAlpha(neutralAlpha, directory, result.slices, signal);
-    result.slices.provenance = { ...provenance, materialLensId: lens.id, coverage: result.coverage };
+    result.slices.provenance = { ...provenance, materialDatasetId: dataset.id, coverage: result.coverage };
     await writeFile(containedPath(directory, 'volume-slices.json'), json(result.slices));
-    painted.push({ input: lens, slices: result.slices, coverage: { positiveAlphaTexels: result.coverage.positiveAlphaTexels,
+    painted.push({ input: dataset, slices: result.slices, coverage: { positiveAlphaTexels: result.coverage.positiveAlphaTexels,
       recoloredTexels: result.coverage.recoloredTexels, outsideImageTexels: result.coverage.outsideImageTexels } });
   }
   const banks = [{ id: 'neutral', directory: neutralDirectory, slices: neutralSlices }, ...painted.map(item => ({ id: item.input.id,
-    directory: containedPath(output, `lenses/${item.input.id}`), slices: item.slices }))];
+    directory: containedPath(output, `datasets/${item.input.id}`), slices: item.slices }))];
   const pins = new Map<string, CompilerPin>();
   for (let index = 0; index < banks.length; index++) {
     cancel(signal); const bank = banks[index]!;
@@ -234,11 +234,11 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   }
   options.progress?.({ phase: 'compile', completed: banks.length, total: banks.length, message: 'Prepared final cloud and materials' });
   const starSprites = await backend.prepareStarSprites(root, outputDirectory, stars);
-  return readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: options.id, fieldIdentity: options.fieldIdentity, frame,
+  return readCompilerBakeResult({ schema: 'cssearth-compiler-bake@2', id: options.id, fieldIdentity: options.fieldIdentity, frame,
     boundsArcsec: structuredClone(boundsArcsec), skyBoundsArcsec: structuredClone(skyBoundsArcsec),
     spanArcsec: Math.max(skyBoundsArcsec.max[0] - skyBoundsArcsec.min[0], skyBoundsArcsec.max[1] - skyBoundsArcsec.min[1]),
     sourceImage: { width: 512, height: 512 }, coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin,
       earthView: 'observer-at-negative-z-looking-away' }, neutral: pins.get('neutral'),
-    lenses: painted.map(item => ({ id: item.input.id, label: item.input.label, volume: pins.get(item.input.id), coverage: item.coverage })),
+    datasets: painted.map(item => ({ id: item.input.id, label: item.input.label, volume: pins.get(item.input.id), coverage: item.coverage })),
     stars, ...starSprites, sampling });
 }

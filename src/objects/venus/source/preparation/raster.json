@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/venus/",
   "sourceWidth": 2048,
   "sourceHeight": 1024,
@@ -22,7 +22,7 @@
       "source": "surface/venus-clouds.jpg",
       "falseColor": false,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "exposure": [
         1.4,
         2.2,
@@ -35,7 +35,7 @@
       "source": "surface/venus-magellan-fmap-left-look-z4.png",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "resolutionScale": 4
     },
     {
@@ -43,7 +43,7 @@
       "source": "science/usgs/elevation.tif",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "geotiff",
@@ -90,7 +90,7 @@
       "source": "akatsuki/uvi_20230830_100446_365_l3b_v21.nc",
       "falseColor": false,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "science": {
         "kind": "akatsuki-uvi-l3b",
         "productId": "uvi_20230830_100446_365_l3b_v21",
@@ -109,7 +109,7 @@
       "source": "science/usgs/emissivity.tif",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "geotiff",
@@ -156,7 +156,7 @@
       "source": "science/usgs/reflectivity.tif",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "geotiff",
@@ -203,7 +203,7 @@
       "source": "science/usgs/roughness.tif",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "geotiff",
@@ -250,7 +250,7 @@
       "source": "science/mgn-gravity/freeair.dat",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "pds3-grid",
@@ -290,7 +290,7 @@
       "source": "science/mgn-gravity/freeair.dat",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "pds3-grid",
@@ -328,7 +328,7 @@
       "source": "science/mgn-gravity/bouguer.dat",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "pds3-grid",
@@ -368,7 +368,7 @@
       "source": "science/mgn-gravity/geoid.dat",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
-      "thumbnail": "venus-lens-{id}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
       "science": {
         "scientific": {
           "format": "pds3-grid",

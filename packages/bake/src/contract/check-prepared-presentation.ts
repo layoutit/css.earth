@@ -1,6 +1,5 @@
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
-import { isDeepStrictEqual } from "node:util";
 import { createRequire } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -124,7 +123,7 @@ export function requirePreparedControlSource(source: string): string[] {
 async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {root: string; objectId: string; descriptor: Record<string, unknown>; readText: RuntimeSourceReader}) {
   const recipe = requireRecord(requireRecord(descriptor.properties).recipe, 'Authored recipe');
   const reference = requireRecord(descriptor.prepared, 'Prepared reference');
-  if (!recipe || typeof recipe !== 'object' || recipe.schema !== 'cssearth-authored-object@1' || !isArray(recipe.sources) ||
+  if (!recipe || typeof recipe !== 'object' || recipe.schema !== 'cssearth-authored-object@2' || !isArray(recipe.sources) ||
       !reference || reference.format !== PREPARED_CSS_OBJECT_FORMAT || typeof reference.url !== 'string') {
     throw new TypeError('Authored descriptor identity or source references are invalid.');
   }
@@ -140,16 +139,11 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
     if (!record) throw new TypeError(`Authored source is not declared in the manifest: ${source.path}.`);
   }
   const preparedDirectory = resolve(directory, 'prepared');
-  const payloadPath = resolve(directory, reference.url);
-  if (reference.url !== 'prepared/object.json' || payloadPath !== resolve(preparedDirectory, 'object.json')) {
-    throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
-  }
-  const payloadBytes = await readText(payloadPath);
-  const payload = requireRecord(JSON.parse(payloadBytes), 'Prepared JSON payload');
-  const runtimePath = resolve(preparedDirectory, 'runtime.json');
+  // The transport is the runtime in its envelope, built when served (prepared-transport.ts): the runtime is what is checked.
+  if (reference.url !== 'prepared/object.json') throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
+  const runtimePath = resolve(preparedDirectory, 'runtime.json'), payloadPath = runtimePath;
   const runtime = requireObjectRuntimeDefinition(JSON.parse(await readText(runtimePath)), { objectId });
   const scene: unknown = JSON.parse(await readText(resolve(preparedDirectory, 'scene.json')));
-  if (payload.id !== objectId || !isDeepStrictEqual(payload.data, runtime)) throw new TypeError('Prepared JSON bytes differ from the checked authored runtime.');
   await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText });
   requireObjectRuntimeDefinition(runtime, { objectId });
   return { runtime, payloadPath, runtimePath };
@@ -175,7 +169,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
       let descriptor = null;
       try { descriptor = requireRecord(JSON.parse(await readText(descriptorPath)), 'Object descriptor'); }
       catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
-      if (descriptor && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && descriptor.properties.recipe.schema === 'cssearth-authored-object@1') {
+      if (descriptor && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && descriptor.properties.recipe.schema === 'cssearth-authored-object@2') {
         const prepared = await readAuthoredRuntime({ root, objectId: object.id, descriptor, readText });
         const definition = prepared.runtime;
         requireObjectRuntimeDefinition(definition, { objectId: object.id });
@@ -183,7 +177,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           source: { runtime: relative(root, prepared.payloadPath), authoredRuntime: relative(root, prepared.runtimePath) },
           nodes: definition.tree.nodes.length, roots: definition.tree.nodes.filter(node => node.parent === -1).length,
           variants: definition.variants.length,
-          controls: { lenses: definition.controls.lenses?.controls.map(lens => lens.id) ?? [],
+          controls: { datasets: definition.controls.datasets?.controls.map(dataset => dataset.id) ?? [],
             settings: definition.controls.settings?.controls.map(({ name, kind }) => ({ name, kind })) ?? [] },
           materialTracks: definition.materials.map(track => ({ id: track.id, frame: track.frame,
             phaseFrames: track.frame.indices.length, rotation: track.rotation?.kind ?? null, banks: track.banks.length })),
@@ -192,8 +186,8 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           sceneNodes: definition.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className ?? "")).length,
           camera: definition.camera,
           viewBindings: reportedBindings(definition.viewBindings), animations: definition.animations.map(({ id, mode, target }) => ({ id, mode, target })),
-          destinations: definition.destinations ? { defaultLens: definition.destinations.defaultLens, catalog: definition.destinations.catalog } : null,
-          features: definition.features ? { target: definition.features.target, lensIds: definition.features.lensIds, catalog: definition.features.catalog } : null });
+          destinations: definition.destinations ? { defaultDataset: definition.destinations.defaultDataset, catalog: definition.destinations.catalog } : null,
+          features: definition.features ? { target: definition.features.target, datasetIds: definition.features.datasetIds, catalog: definition.features.catalog } : null });
         continue;
       }
       const definitionSource = await readText(`${prefix}/runtime/definition.mjs`);
@@ -212,7 +206,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           controls: relative(root, `${prefix}/site/control-content.mjs`) },
         nodes: plan.tree.nodes.length, roots: plan.tree.nodes.filter(node => node.parent === -1).length,
         variants: plan.variants.length,
-        controls: { lenses: objectControls.lenses?.controls.map(lens => lens.id) ?? [],
+        controls: { datasets: objectControls.datasets?.controls.map(dataset => dataset.id) ?? [],
           settings: objectControls.settings?.controls.map(({ name, kind }) => ({ name, kind })) ?? [] },
         materialTracks: plan.materials.map(track => ({ id: track.id, frame: track.frame,
           phaseFrames: track.frame.indices.length, rotation: track.rotation?.kind ?? null, banks: track.banks.length })),
@@ -221,7 +215,7 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
         sceneNodes: plan.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className ?? "")).length,
         camera: plan.camera,
         viewBindings: reportedBindings(plan.viewBindings), animations: plan.animations.map(({ id, mode, target }) => ({ id, mode, target })),
-        destinations: plan.destinations ? { defaultLens: plan.destinations.defaultLens, catalog: plan.destinations.catalog } : null });
+        destinations: plan.destinations ? { defaultDataset: plan.destinations.defaultDataset, catalog: plan.destinations.catalog } : null });
     } catch (error) { entries.push({ id: object.id, complete: false, error: error instanceof Error ? error.message : String(error) }); }
   }
   const report = { schema: "cssearth-prepared-presentation-audit@1", complete: entries.every(entry => entry.complete), entries };

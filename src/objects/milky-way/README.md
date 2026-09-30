@@ -1,221 +1,14 @@
 # Milky Way preparation
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Nobody has seen the Milky Way from outside. cssEarth draws its bulge as a simulated volume and the rest as catalogued objects, each a sharp dot at its published position, over a faint backing that shows the galaxy's overall shape. From inside the Solar System the sky is NASA's Milky Way map. Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-```text
-milky-way/
-├── object.json                 Physical frame, source pin, prepared digest
-├── source/
-│   ├── density.ktx2            Lossless 1024 × 1024 × 128 OpenSpace RGBA grid
-│   ├── acquisition.json        Original raw URL/hash and exact reduction recipe
-│   ├── volume.json             Channels, material, sampling and crop recipe
-│   ├── provenance.json         Authors, transfer equations, frame and source pins
-│   ├── color-calibration.json  NASA palette fit, held-out metrics and limitations
-│   ├── openspace/              Original MIT notice, asset, shader and sync listing
-│   └── sky/                    NASA source, lossless HDR row chunks and cube recipe
-└── prepared/
-    ├── volume.json             Prepared object envelope with PolyCSS leaves
-    ├── volume-slices.json      Physical quad and texture intermediates
-    ├── core/slices/{x,y,z}/*.png  Generated, ignored 88 / 87 / 26 bulge textures
-    └── sky/{px,nx,py,ny,pz,nz}.webp  Generated, ignored six celestial cube faces
-```
+## Sources
 
-App startup restores missing images from the pinned sources via `pnpm prepare:environment-images`, preserving the accepted metadata. See the [shared bake commands](../../../labs/nebula/docs/baking.md).
-
-From the repository root, with Node 24 (or 22.18+) and pnpm 10.33.0:
-
-```sh
-pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:tools
-pnpm prepare:volume src/objects/milky-way
-node packages/bake/cli/prepare-stars.mts src/objects/stellar-neighbourhood
-node packages/bake/cli/prepare-shell.mts src/objects/heliosphere
-pnpm prepare:world-context
-pnpm test:preparation --universe
-```
-
-This builds preparation tools, reproduces the Milky Way assets and the Sun's
-world context, and checks the available preparation cases for prepared resource closure, physical
-orbit alignment, and PolyCSS pixel-to-world mapping. The normal
-`pnpm test:preparation` also includes these tests. To prepare another compatible
-volume after building tools, use `pnpm prepare:volume <object-directory>`.
-Preparation reads the local pinned inputs; no sibling checkout or network
-source is required. The checked volume source is 41.77 MiB. Preparation first integrates the original 256 / 256 / 32 slabs at 1024px,
-then keeps only the bulge: optical depth fades from 1.5 to 2.2 volume units
-(2.9 to 4.3 kpc) from Sagittarius A*, so the simulation's own disc and arms are
-not drawn. The bank is 7.32 MiB compressed and 9.76 MiB decoded: 138 bulge slabs
-and nothing else. Bulge textures keep the original
-slice pitch and decoded RGB; lossless PNG avoids another lossy encoding pass.
-Four samples per original Z slab integrate all 128 source Z layers.
-
-The [OpenSpace Milky Way volume](https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html)
-adapts a NAOJ simulation prepared by Jon Parker for AMNH's *Dark Universe*,
-with Emil Axelsson, Carter Emmart and the OpenSpace Team. Its official asset
-and documentation declare MIT; the original notice is preserved here.
-It is a scientific simulation adapted for visualization, not a measured map
-of the exact shape of our galaxy.
-
-RGB channels emit independently after squaring filtered UNORM values; alpha
-is dust, decoded with exponent 1.4. The recipe preserves emission 250,
-absorption 200, extinction tint [0.3, 0.54, 0.85], cylindrical support and the
-source's channel transfer. The source already contains its bulge. The full
-physical extent and the asset's Euler rotation about the Galactic x and z axes
-are converted to the shared Sun-centred ICRF frame, with two corrections:
-
-- **Centre.** The asset puts the Galactic centre 8.00 kpc from the Sun. The
-  volume is centred on the [Sgr A* package](../sgr-a-star/README.md) instead, at
-  the GRAVITY (2022) distance of 8277 pc in the same frame and epoch, so the
-  bulge surrounds the black hole it is drawn around. OpenSpace's centre lay
-  277 pc short of it.
-- **Tilt.** The asset's rotation about y is 3.1248 rad, not π: it tilts the
-  model 0.96° out of the Galactic plane, which put the Sun 134 pc below the
-  disc instead of about 20 pc above it. The volume uses π, so the model plane
-  is the Galactic plane; Sgr A* then sits 6.7 pc below the Sun's plane
-  (Reid et al. 2019 measure the Sun 5.5 ± 5.8 pc above the plane).
-
-[`volume.test.ts`](../../../packages/bake/src/density/volume.test.ts) checks
-both against the asset and the Sgr A* package.
-
-The galaxy's [stellar extent](source/stellar-extent.json) is 26 kpc from the
-centre: López-Corredoira et al. (2018, A&A 612, L8;
-[arXiv:1804.03064](https://arxiv.org/abs/1804.03064)) detect disc stars beyond
-that radius at 99.7% confidence, and every Milky Way star the app places lies
-inside it (the farthest is 20.9 kpc from Sgr A*). While the camera is inside
-that radius the galaxy's caption hides; outside it the caption hangs just under
-the drawn bulge.
-
-Only the bulge and inner disc are drawn. The display keeps full volumetric
-support inside 1.5 model units (2.9 kpc) and smoothly reduces it to zero at
-3.5 units (6.8 kpc). These radii are presentation choices, not measured bulge
-boundaries: the simulation's outer disc and arms are not a map of the real
-ones, so they fade out before the Sun's neighbourhood. Each original slab's
-alpha is divided through that support; the decoded RGB stays unchanged. There
-is no flat disc image and no whole-galaxy impostor view: the same slices draw
-the galaxy at every distance. No source emission, dust model or colour grade
-is changed.
-
-The 512 MiB unmodified upstream raw file stays outside Git. To reacquire it
-and verify/recreate the checked derivative from a clean checkout:
-
-```sh
-pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:tools
-pnpm prepare:volume src/objects/milky-way --acquire-source .local/volume-source-cache
-```
-
-This reacquires both original sources and needs about 1.3 GiB temporary space. The pinned HTTPS source,
-X-fastest RGBA order, factor-one lossless import and Zstd level are
-recorded in `source/acquisition.json`; the exact Node/Zstd versions are in
-`source/provenance.json`. The import rejects any raw or derivative mismatch.
-Normal preparation uses the checked derivative without downloading.
-
-The working CSS display convention integrates a common physical path
-metric on every axis. The display gain is calibrated to 16 after slab
-integration: three stops below the previous 128 baseline, which was too bright
-with the OpenSpace emission model. These are renderer approximation choices, separate from OpenSpace's authored
-emission/absorption coefficients. OpenSpace integrates normalized texture
-distance and uses an additive raymarch display; baking that direction-dependent
-coefficient into separate CSS stacks causes brightness changes at handoffs.
-
-A single offline display-RGB matrix, `diag(1, 0.951277424, 0.709752511)`,
-grades every slab toward the original NASA interior palette. It follows the
-exponential display transfer and preserves the original emission/dust alpha,
-so it changes colour without changing geometry, opacity or optical correction.
-The same matrix applies from every viewing direction. Source emission and
-absorption coefficients remain unchanged.
-
-The calibration compares matching ICRF directions at the Sun, using paired
-patches within 15° of the Galactic plane and held-out longitude blocks. The
-selected grade reduces held-out chromaticity error by 53.8% while retaining
-colour variation. The checked calibration receipt records its baseline inputs,
-method and limitations; the matrix in the recipe reproduces the final bake.
-The NASA image and simulated volume have different dust structures, so this
-matches their palette, not their exact morphology or physical photometry.
-
-Ordinary-alpha slices approximate RGB extinction and emitted energy. They
-retain finite-slice/axis-handoff artifacts and do not reproduce OpenSpace's
-additive HDR raymarching, stochastic sampling or camera-dependent fade.
-The renderer transports the prepared images and geometry. The sky cube holds no
-stars of its own: the stars around the Sun are the catalogue dots described below.
-
-One rule chooses between the two pictures: inside the galaxy the NASA map is
-the sky; outside it the galaxy is its slices and face-on image, and the galaxies
-beyond it appear. "Inside" is by zoom: the camera is inside while it is nearer the
-body it looks at than the thin disc's scale height, 300 pc (Bland-Hawthorn &
-Gerhard 2016, [ARA&A 54, 529](https://arxiv.org/abs/1602.07702)), and outside
-from twice that; between, the two share one weight (`galaxyOutsideFade` in the
-renderer, `discHalfHeightM` in the Sun's `source/navigation/universe.json`).
-Orbiting at one distance never switches between them.
-The NASA map is an angular observation from the Sun, so it shifts slightly as
-the camera leaves the Sun. This is display presentation, not photometric calibration.
-
-Each retained slab has three coincident CSS image elements sharing one texture.
-Their optical contribution compensates for oblique viewing before isolated axis
-images are mixed. Integer optical gains are exact; fractional gains approximate
-the continuous transfer without extra image resources. The 138 bulge slabs
-use 414 image elements, compared with the original
-1,632-element full volume. This is an element count, not a measured frame-rate
-result. Keeping the axis scenes separate avoids
-browser cracks and expensive sorting at intersections between planes.
-
-The near-Solar-System sky uses NASA's [Deep Star Maps 2020 Milky Way-only
-celestial map](https://svs.gsfc.nasa.gov/4851/). Its linear RGB HALF source is
-8192 × 4096 in ICRF/J2000: RA increases left, the image centre is RA 0h and
-north is at the top. The full HDR source is preserved bit for bit in two
-Zstd row chunks, 117.15 MiB total; neither Git blob exceeds 100 MiB. The
-original 130.95 MiB EXR stays in the acquisition cache. Source acquisition,
-original and decoded byte counts, exact Node/Zstd versions, NASA/Gaia credits and
-usage notice live together under `source/sky/`.
-
-Six opaque 1536 × 1536 WebP faces add **0.30 MiB download and 54 MiB decoded**. The complete
-sky contribution is unchanged by the exterior billboard. The exterior bank
-figures above exclude these sky faces. Sky faces use quality 90. Original source chunks are offline
-inputs and are never sent to the browser.
-
-The offline baker samples linear RGB before applying a fixed exposure of 4.5
-and the standard sRGB display curve. Before final attenuation, the transfer at
-1024 × 512 matches NASA's preview mean RGB within 0.001 and has RGB RMSE
-0.01387 on the [0,1] scale. A final uniform display gain of 0.12 darkens all
-three sRGB channels before quantization without changing source white balance.
-A shared smooth shadow factor suppresses faint image grain: zero below
-transferred display luminance 0.04 and full contribution above 0.12. This
-intentionally removes faint background detail. Alpha stays opaque and source HDR pixels stay unchanged. This is a display fit, not calibrated photometry.
-The NASA Milky Way-only image omits bright Hipparcos/Tycho stars, and none are
-added to it. Faint Gaia stars remain in the image; it is not literally star-free.
-
-Until 2026-09-29 a second cube copied these faces with about 17,500 stars from
-the sibling `stellar-neighbourhood` catalogue painted in. It was removed because
-the catalogue dots already draw those stars, and the painted copy put a second,
-fixed set of them over the dots ([one face before and
-after](evidence/2026-09-29/sky-stars-removed.jpg), cropped from the prepared `ny`
-face). The runtime now mounts one six-face cube: the diffuse band. The `stellar-neighbourhood` catalogue stays a preparation input for
-the Sun's navigation marker only.
-
-The cube's authored bases are ICRF directions, independent of the volume's
-Galactic local frame. Its six prepared PolyCSS planes form one closed shell
-with a 20 kpc half-extent, centered on the Sun. At the Sun it reproduces the
-original angular projection. Shared camera translation produces a small prepared
-motion during the nearby fade; there is no separate camera or screen-fixed
-background. The fade completes at 0.1 pc, long before the observer can approach
-a cube face. The images, geometry and decoded bank remain unchanged.
-
-The shell depth is an authored visual approximation: NASA supplies angular
-radiance, not measured cloud depths. It does not align the two sources' different
-dust structures or reproduce physical disocclusion. It avoids copying cloud
-features across independent depth layers. Neither geometry nor imagery is
-generated in the browser. The NASA source epoch stays in provenance; shared
-camera metadata uses the volume's Sun-centered ICRF frame and epoch.
-
-## The galaxy as star dots from published catalogues
-
-Nobody has seen the Milky Way from outside, so it is drawn as the objects
-astronomers have catalogued, each a sharp dot at its published position, over a
-faint backing that shows the galaxy's overall shape. Each catalogue keeps its
-table in `source/<id>/` beside a `points.json` recipe naming the columns, the
-authors' own selection and the citation.
-[`prepare-catalogue-points.mts`](../../../packages/bake/cli/prepare-catalogue-points.mts) has Astropy
-convert each row to Sun-centred ICRS coordinates; rows without a distance are
-left out.
+- **Bulge volume.** The [OpenSpace Milky Way volume](https://docs.openspaceproject.com/latest/content/milky-way/galaxy/milky-way-volume/index.html) adapts a NAOJ simulation prepared by Jon Parker for AMNH's *Dark Universe*, with Emil Axelsson, Carter Emmart and the OpenSpace Team. Its asset and documentation declare MIT; the original notice is preserved in `source/openspace/`. It is a scientific simulation adapted for visualization, not a measured map of our galaxy.
+- **Sky.** NASA's [Deep Star Maps 2020 Milky Way-only celestial map](https://svs.gsfc.nasa.gov/4851/), a linear RGB HALF image of 8192 × 4096 in ICRF/J2000. The NASA/Gaia credits and usage notice live under `source/sky/`.
+- **Backing.** An ESA artist's impression of the Milky Way seen from above ([recipe](source/backing/recipe.json)). It is artwork, not a measurement.
+- **Stellar extent.** 26 kpc from the centre, from López-Corredoira et al. (2018, A&A 612, L8; [arXiv:1804.03064](https://arxiv.org/abs/1804.03064)), recorded in [the extent file](source/stellar-extent.json).
+- **Catalogue dots.** Each catalogue keeps its table in `source/<id>/` beside a `points.json` recipe naming the columns, selection and citation.
 
 | Layer | Source | Selection |
 | --- | --- | --- |
@@ -228,89 +21,36 @@ left out.
 | [Stars within 100 pc](source/nearby-stars/points.json), [the sky sample](source/nearby-stars-sky/points.json), [within 20 pc](source/nearby-stars-20pc/points.json) | Gaia Catalogue of Nearby Stars (2021) | One row in 64; one in 16; every row within 20 pc |
 | [Globular clusters](source/globular-clusters/points.json) | Baumgardt & Vasiliev (2021) | All 165, drawn as their own bank |
 
-**Which layers follow the arms.** An arm-tracer layer is kept when its dots sit
-on the arms the backing draws: its arm score (the backing's luminance minus its
-mean at that radius, over its spread, at the layer's positions outside 3.5 kpc)
-is 0.5 or more. Random points score 0. The scores are in the
-[merge recipe](source/tracers/merge.json): young open clusters 1.02, maser
-parallaxes 1.01, Hou & Han's clouds 0.79, masers 0.55 and HII regions 0.53,
-young Cepheids 0.52. The WISE HII regions (0.38) and the molecular-cloud catalogue
-of Miville-Deschênes et al. (0.45) were left out.
+## Processing
 
-**Kinematic distances.** A kinematic distance whose uncertainty is over 1 kpc is
-left out: its ±7 km/s velocity uncertainty through a flat rotation curve (R0 =
-8.3 kpc, Θ0 = 239 km/s, as Hou & Han 2014, Sect. 2.4) cannot place it. Those are
-the sources toward tangent points, the centre and the anticentre, which pile
-onto a circle through the Sun and the centre; the cut drops 532 of them.
+From the repository root, with Node 24 (or 22.18+) and pnpm 10.33.0:
 
-**Colour and tone.** Each layer keeps its catalogue colour, mixed halfway to
-white so it reads as a tint of starlight, then raised to the power 1.6 so the
-coloured dots sit in the backing and the whitest keep their sparkle. A dot's
-tone then darkens that colour; no dot is transparent. Where the catalogue
-measures brightness the tone follows it, linear in absolute magnitude: hot
-stars by 2MASS Ks (full at M_Ks −2.5, 45% at 0) and the census stars by Gaia G
-(full at M_G 4, about the Sun's, 25% at 16, so most of these red dwarfs are
-dim). Other layers take their recipe's fixed tone. These are presentation
-choices, recorded in each recipe.
+```sh
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm build:tools
+pnpm prepare:volume src/objects/milky-way
+pnpm test:preparation --universe
+```
 
-**Near the Sun.** The galaxy-wide and 3 kpc levels dim to half as the sky level
-fills the view (`nearOpacity` in [`source/dots/stack.json`](source/dots/stack.json)):
-from beside the Sun those distant stars would look faint, and the NASA band behind
-them is the Milky Way there. Half keeps the disc's shape; chosen by eye.
+Add `--acquire-source .local/volume-source-cache` to `prepare:volume` to reacquire the 512 MiB upstream raw file (about 1.3 GiB temporary space). App startup restores missing images with `pnpm prepare:environment-images`. See the [shared bake commands](../../../labs/nebula/docs/baking.md).
 
-**An even density at every zoom.** Every catalogue is complete only out to some
-distance from the Sun, so together they pile up around it. [`merge-catalogue-points.mts`](../../../packages/bake/cli/merge-catalogue-points.mts)
-keeps a dot, in a fixed shuffle, while the dots within a small face-on kernel
-stay under the thin disc's own density law: exponential in Galactocentric radius
-with a 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016). The galaxy level
-holds 15 dots per kpc² at the Sun, the highest that stays even out to 4 kpc
-along the solar circle (6,586 dots). Nested levels around the Sun add dots up
-to 150 per kpc² out to 3 kpc, 1,500 out to 800 pc, 50,000 out to 100 pc and
-1,000,000 out to 20 pc; each adds only dots the levels around it do not draw,
-and its density falls to nothing over its outer half. A last level, one in 16
-of the census stars (19,409 more), makes the view from just outside the Solar
-System a sky of stars.
-[`stack-catalogue-points.mts`](../../../packages/bake/cli/stack-catalogue-points.mts) joins them into
-[one bank](source/dots/stack.json) of 32,829 dots. The app draws a growing
-share of it as you zoom in: the galaxy level whole within 10 kpc, then each
-level's dots one at a time as the view narrows from three times the level's
-radius, so a level's tapered ball of stars fills in as you approach it rather
-than only once you are inside. At most 4,000 of the bank's dots show at once
-(`screenBudget`): past that an even share of the visible dots is drawn, the same
-dots every frame. Along one zoom path from 26,000 ly to 0.7 ly the count on
-screen stayed between 3,100 and 3,800 (a 3,800 budget), where it had swung from
-2,900 to 5,200; closer than about 2,000 ly it stays under the budget, because
-that is all the catalogues hold in view.
+**Volume.** Preparation integrates the original slabs and keeps only the bulge: support fades from 1.5 to 3.5 model units (2.9 to 6.8 kpc) from Sagittarius A*, so the simulation's own disc and arms are not drawn. These radii are presentation choices. The bank is 138 bulge slabs, 7.32 MiB compressed. The volume is centred on the [Sgr A* package](../sgr-a-star/README.md) at the GRAVITY (2022) distance of 8277 pc, not the asset's 8.00 kpc. Its tilt uses π instead of the asset's 3.1248 rad, so the model plane is the Galactic plane. [`volume.test.ts`](../../../packages/bake/src/density/volume.test.ts) checks both. One offline matrix, `diag(1, 0.951277424, 0.709752511)`, grades every slab toward the NASA interior palette; it reduces held-out chromaticity error by 53.8%.
 
-**The backing.** An ESA artist's impression of the Milky Way seen from above
-([recipe](source/backing/recipe.json)) is drawn under the dots as one image
-plane in the galaxy's frame, anchored so its Sun and centre land on the app's.
-It is artwork, not a measurement, and the levels (black 20, gamma 1, white 150
-of 255) keep it under the dots. It is 184 KB at 2048 px.
+**Sky.** Six 1536 × 1536 WebP cube faces sample the NASA map with a fixed exposure of 4.5, the sRGB curve and a final gain of 0.12. A shadow factor removes faint grain below display luminance 0.04. The NASA image omits bright Hipparcos/Tycho stars and none are added: the stars are the catalogue dots. One rule picks the picture by zoom: nearer the viewed body than the thin disc's 300 pc scale height (Bland-Hawthorn & Gerhard 2016; `discHalfHeightM` in the Sun's `source/navigation/universe.json`) the NASA map is the sky; from twice that the volume, the backing and the galaxies beyond show instead, so orbiting at one distance never switches them.
 
-**Past the Solar System.** The dots fade in from about Neptune's orbit (a
-twentieth of the distance where the Solar System starts to retire) and are whole
-by 670 AU; over the same range the other systems' stars, dimmed while the camera
-is among the planets, come up to full. Once the planets have faded, from 1 to 10
-light-years, the dots take over from the app's stars: only featured stars
-keep their markers, as landmarks. The overview reads Solar System until the
-planets fade, Milky Way while inside the galaxy, and Local Group once the
-galaxy's nebulae have faded, about 19 kpc out.
+**Dots.** [`prepare-catalogue-points.mts`](../../../packages/bake/cli/prepare-catalogue-points.mts) has Astropy convert each row to Sun-centred ICRS; rows without a distance are left out. An arm-tracer layer is kept when its arm score in the [merge recipe](source/tracers/merge.json) is 0.5 or more. Kinematic distances with uncertainty over 1 kpc are dropped (532 sources). Each layer keeps its catalogue colour, mixed halfway to white; tone follows absolute magnitude where the catalogue measures it. [`merge-catalogue-points.mts`](../../../packages/bake/cli/merge-catalogue-points.mts) thins dots to the thin disc's density law, exponential with a 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016), with nested levels denser near the Sun. [`stack-catalogue-points.mts`](../../../packages/bake/cli/stack-catalogue-points.mts) joins them into [one bank](source/dots/stack.json) of 32,829 dots, revealed level by level as you zoom in: each level fills in as the view narrows from three times its radius, so its tapered ball of stars arrives as you approach it. At most 4,000 of the bank's dots show at once (`screenBudget`); past that an even share, the same dots every frame, is drawn. Near the Sun the galaxy-wide and 3 kpc levels dim to half (`nearOpacity`), since from there those distant stars would look faint.
 
-**What the dots cannot show.** Dust hides the far side of the disc: past 4 to
-6 kpc from the Sun the catalogues thin out, so the Sun's side of the galaxy is
-fuller. Distances carry their catalogues' errors. The disc has no warp and the
-bulge is one in 16 of its RR Lyrae stars.
+The dots fade in from about Neptune's orbit and are whole by 670 AU. The overview reads Solar System until the planets fade, Milky Way while inside the galaxy, and Local Group about 19 kpc out.
 
 ## Evidence
 
-Four [browser captures](evidence/2026-09-29/capture.json) of this version zoom
-out from the Sun along one line of sight. [Near the Sun](evidence/2026-09-29/near-sun.jpg)
-the census dots are mostly dim red dwarfs; in the
-[Sun's neighbourhood](evidence/2026-09-29/sun-neighbourhood.jpg) and
-[2,100 light-years out](evidence/2026-09-29/disc-2100ly.jpg) the disc's hot
-stars gather toward its far side, as the Milky Way does in our sky; from
-[39,500 light-years](evidence/2026-09-29/galaxy-39500ly.jpg) the tracers and
-the RR Lyrae bulge sit on the backing around Sgr A*. No level's edge is on
-screen in any of them. They check the displayed composition, not frame rate.
+Along one zoom path from 26,000 ly to 0.7 ly the Milky Way's dots on screen stayed between 3,100 and 3,800 with a 3,800 budget, where they had swung from 2,900 to 5,200; closer than about 2,000 ly the count stays under the budget, because that is all the catalogues hold in view.
 
+Four browser captures of this version zoom out from the Sun along one line of sight. Near the Sun the census dots are mostly dim red dwarfs. From 2,100 light-years the disc's hot stars gather toward its far side, as the Milky Way does in our sky. From 39,500 light-years the tracers and the RR Lyrae bulge sit on the backing around Sgr A*. No level's edge is on screen. They check the displayed composition, not frame rate.
+
+## Known problems
+
+- Dust hides the far side of the disc: past 4 to 6 kpc from the Sun the catalogues thin out, so the Sun's side is fuller. Distances carry their catalogues' errors. The disc has no warp.
+- The volume slices keep finite-slice and axis-handoff artifacts and do not reproduce OpenSpace's additive HDR raymarching.
+- The colour grade matches the NASA palette, not its morphology or photometry.
+- The sky is a display fit, not calibrated photometry. Faint Gaia stars remain in it.

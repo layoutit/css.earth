@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "mtp019",
@@ -48,7 +48,7 @@
       },
       "width": 64,
       "height": 32,
-      "lensId": "model",
+      "datasetId": "model",
       "label": "Shape model",
       "falseColor": false,
       "sourceBinding": {
@@ -390,7 +390,7 @@
       "consumers": [
         "virtis-science"
       ],
-      "lensId": "albedo",
+      "datasetId": "albedo",
       "label": "Albedo",
       "falseColor": true,
       "width": 720,
@@ -463,7 +463,7 @@
       "consumers": [
         "virtis-science"
       ],
-      "lensId": "slope",
+      "datasetId": "slope",
       "label": "Spectral slope",
       "falseColor": true,
       "width": 720,
@@ -536,7 +536,7 @@
       "consumers": [
         "virtis-science"
       ],
-      "lensId": "absorption",
+      "datasetId": "absorption",
       "label": "3.2 µm absorption",
       "falseColor": true,
       "width": 720,
@@ -609,7 +609,7 @@
       "consumers": [
         "virtis-science"
       ],
-      "lensId": "ice",
+      "datasetId": "ice",
       "label": "Modeled ice",
       "falseColor": true,
       "width": 720,
@@ -1438,7 +1438,7 @@
         "latitudeDegrees": 25,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "model"
+        "datasetId": "model"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

@@ -151,7 +151,7 @@ export function assertPinnedReferences(references: readonly { url: string; bytes
   }
 }
 
-async function fitsArchiveInputs() {
+export async function fitsArchiveInputs() {
   const record = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'packages/fits/src/node/fixtures/fits/archive-inputs.json'), 'utf8')));
   if (record.schema !== 'cssearth-fits-reference-inputs@1') throw new Error('Invalid FITS reference input record.');
   const inputs = requireArray(record.inputs).map(raw => {

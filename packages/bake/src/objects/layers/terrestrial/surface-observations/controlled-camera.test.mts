@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireRecord } from '@cssearth/core';
 import type { PixelGeometry } from '@cssearth/bake/objects/layers/terrestrial';
-import { MAXIMUM_LIT_SHAPE_ON_SKY, litShapeOnSky, parseControlledCameraLens } from '@cssearth/bake/objects/layers/terrestrial';
+import { MAXIMUM_LIT_SHAPE_ON_SKY, litShapeOnSky, parseControlledCameraDataset } from '@cssearth/bake/objects/layers/terrestrial';
 import { publishedPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
 
 const root = findProjectRoot(import.meta.url);
@@ -30,9 +30,9 @@ test('lit shape on sky counts only lit shape pixels, and the archive quality mas
 test("Ida's published camera photometry resolves against its model record and the publication it cites", async () => {
   const sourceRoot = resolve(root, 'src/objects/ida/source');
   const profile = requireRecord(JSON.parse(await readFile(resolve(sourceRoot, 'preparation/terrestrial.json'), 'utf8')));
-  const lens = requireArray(requireRecord(profile.raster).surfaceObservations).map(value => requireRecord(value)).find(value => value.id === 'calibrated');
-  const block = parseControlledCameraLens(lens).photometry;
-  if (!('referenceDegrees' in block)) throw new Error("Ida's calibrated lens does not name a published photometric model.");
+  const dataset = requireArray(requireRecord(profile.raster).surfaceObservations).map(value => requireRecord(value)).find(value => value.id === 'calibrated');
+  const block = parseControlledCameraDataset(dataset).photometry;
+  if (!('referenceDegrees' in block)) throw new Error("Ida's calibrated dataset does not name a published photometric model.");
   const source = await createSourceManifest({ objectId: 'ida', objectName: 'Ida', sourceRoot });
   const photometry = await publishedPhotometry(sourceRoot, source.manifest, block);
   assert.equal(photometry.report.model, 'helfenstein-1996-hapke');

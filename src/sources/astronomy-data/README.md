@@ -1,19 +1,12 @@
 # Astronomy data ledger
 
-`ledger.sqlite` owns the audit data and work status. [PROPOSALS.md](PROPOSALS.md)
-contains the 131 proposed work scopes and their acceptance conditions. IDs are
-permanent. There is one database, no database service and no ORM.
+`ledger.sqlite` owns the audit data and work status. [PROPOSALS.md](PROPOSALS.md) contains the 131 proposed work scopes and their acceptance conditions. IDs are permanent. There is one database, no database service and no ORM.
 
-The ledger covers PSI PDS4, USGS, Photojournal, OPUS, the University of Maryland
-Small Bodies Node, JAXA DARTS and NASA Solar System Treks. It changes no application or prepared assets.
-This directory holds the data and this document; the browser, slicer, verifier and collectors are
-`@cssearth/bake/sources` and its `packages/bake/cli/astronomy-data-*.mts` commands.
+The ledger covers PSI PDS4, USGS, Photojournal, OPUS, the University of Maryland Small Bodies Node, JAXA DARTS and NASA Solar System Treks. It changes no application or prepared assets. This directory holds the data and this document; the browser, slicer, verifier and collectors are `@cssearth/bake/sources` and its `packages/bake/cli/astronomy-data-*.mts` commands.
 
 ## Query the ledger
 
-With the project's supported Node version, from the repository root (the script paths below are relative to it; once
-running, a command resolves its own `@cssearth/bake` install, the ledger and its default output directories from the
-checkout that install belongs to, not the working directory):
+From the repository root, with the project's supported Node version:
 
 ```sh
 node packages/bake/cli/astronomy-data-browse.mts
@@ -23,49 +16,29 @@ sqlite3 -header -column src/sources/astronomy-data/ledger.sqlite \
   'SELECT id,title,status,next_step,blocker,pr_url FROM proposals ORDER BY priority,CAST(id AS INTEGER);'
 ```
 
-`astronomy-data-browse.mts` opens the ledger in [Datasette](https://datasette.io/), read-only, at
-`http://127.0.0.1:8001/-/dashboards/overview`; `PORT` changes the port. The first run
-installs the pinned packages in `datasette/requirements.txt` into the ignored
-`output/ledger-venv`. The overview dashboard counts dataset families, bodies and
-archives; every table and view can be filtered, sorted and exported, and the
-`global_maps` view shows each map's preview grouped by body, with whether the app
-uses it. The settings, dark theme and map gallery live in `datasette/`.
-The [dashboard](evidence/datasette-dashboard.jpg) and [map gallery](evidence/datasette-global-maps.jpg)
-captures were taken from this ledger on 28 September 2026.
+`astronomy-data-browse.mts` opens the ledger read-only in [Datasette](https://datasette.io/) at `http://127.0.0.1:8001/-/dashboards/overview`; `PORT` changes the port. The first run installs the pinned packages in `datasette/requirements.txt` into the ignored `output/ledger-venv`. Every table and view can be filtered, sorted and exported, and the `global_maps` view shows each map's preview by body, with whether the app uses it. `AUDIT_DB` selects another file for comparisons.
 
-`bodies` and `dataset_bodies` file each record under the bodies it names. PDS4 and
-Maryland rows are read from their full `targets` lists, not their shortened target
-text. A Photojournal record that names a moon and its planet counts for the moon,
-and the Sun counts only when no other body is tagged. Kind and parent come from
-`packages/astronomy/data/bodies`. `astronomy-data-slice.mts` keeps the filtered JSON and TSV
-exports. `AUDIT_DB` selects another file for comparisons.
-Open `ledger.sqlite` in a SQLite browser for direct editing.
+`bodies` and `dataset_bodies` file each record under the bodies it names. A Photojournal record that names a moon and its planet counts for the moon, and the Sun counts only when no other body is tagged. Kind and parent come from `packages/astronomy/data/bodies`.
 
 | Table                 | Owns |
 | --------------------- | ---- |
-| `datasets`            | One row per dataset (9,214): stable source/id, title, target text, instrument, count, decision, reason, source URL, family; native metadata in `details_json`. Maryland archives Rosetta per tracking pass and mission phase, so `family` groups those rows by title (6,509 families in all) |
-| `inventory`           | Listings that repeat datasets (6,369): OPUS volumes and geometry, Maryland holdings, DARTS collections and indexes; same columns |
+| `datasets`            | One row per dataset: stable source/id, title, target text, instrument, count, decision, reason, source URL, family; native metadata in `details_json` |
+| `inventory`           | Listings that repeat datasets: OPUS volumes and geometry, Maryland holdings, DARTS collections and indexes; same columns |
 | `bodies`              | Every body a dataset names: cssEarth id when cssEarth catalogues it, name, kind, parent, cssEarth package |
 | `dataset_bodies`      | Dataset-to-body links with the name the source used; `role` is `parent` for a Photojournal tag of a tagged body's parent |
-| `missions`            | Every spacecraft, telescope or programme an instrument belongs to (117): id, name, kind, other names (DARTS "KAGUYA" is also "SELENE") |
-| `instruments`         | Every instrument (389), keyed by mission (`rosetta/osinac`, `mro/hirise`): name and abbreviation, one row even when archives spell it differently |
+| `missions`            | Every spacecraft, telescope or programme an instrument belongs to, with other names (DARTS "KAGUYA" is also "SELENE") |
+| `instruments`         | Every instrument, keyed by mission (`rosetta/osinac`, `mro/hirise`): one row even when archives spell it differently |
 | `dataset_instruments` | Dataset-to-instrument links with the name the source used; USGS and PSI PDS4 state no instrument |
 | `ledger_log`          | Each cleanup run: date, operation and the rules it applied |
 | `proposals`           | Stable ID, title, priority, status, next step, blocker, implementation PR URL and update date |
 | `dataset_proposals`   | Links between datasets and proposed work (`inventory_proposals` for inventory rows) |
-| `evidence`            | Collection receipts, repository comparison, historical review, and 23 original OPUS labels as bytes |
+| `evidence`            | Collection receipts, repository comparison, historical review and original OPUS labels as bytes |
 
-Use `proposed`, `qualifying`, `blocked`, `in-progress`, `shipped`, `rejected` or
-`deferred` for proposal status. A source row's `decision` describes that source;
-it is separate from the implementation status of a proposal. Blank PR links mean
-no implementation PR is recorded. The audit PR itself is not an implementation.
+Proposal status is one of `proposed`, `qualifying`, `blocked`, `in-progress`, `shipped`, `rejected` or `deferred`. A source row's `decision` describes that source; it is separate from a proposal's implementation status. A blank PR link means no implementation PR is recorded.
 
 ## Maintain it
 
-Edit a proposal's status and next action in the database, and edit its scope in
-PROPOSALS.md. Preserve IDs and cite the implementation PR when work ships. Keep
-negative source decisions and their reopen conditions. For SQLite edits enable
-foreign keys and use a transaction:
+Edit a proposal's status and next action in the database, and its scope in PROPOSALS.md. Preserve IDs and cite the implementation PR when work ships. Keep negative source decisions and their reopen conditions. For SQLite edits enable foreign keys and use a transaction:
 
 ```sql
 PRAGMA foreign_keys=ON;
@@ -75,18 +48,14 @@ BEGIN;
 COMMIT;
 ```
 
-Git stores the database as a binary file. Review changes through a text export:
+Git stores the database as a binary file. Review changes through a text export and run the verifier:
 
 ```sh
 sqlite3 src/sources/astronomy-data/ledger.sqlite .dump > /tmp/astronomy-data.sql
 node packages/bake/cli/astronomy-data-verify.mts
 ```
 
-For a revision comparison, extract the old database with `git show` to `/tmp`,
-export both with `.dump`, and diff the exports. Do not commit a second JSON/SQL
-copy. Resolve concurrent edits by applying the intended row changes to one
-chosen database, then run the verifier; do not choose an entire binary version
-without accounting for the other edits.
+To compare revisions, extract the old database with `git show` to `/tmp`, export both with `.dump` and diff them. Do not commit a second JSON or SQL copy. Resolve concurrent edits by applying the intended row changes to one database, then run the verifier. The verifier checks integrity, foreign keys, snapshot coverage, evidence, OPUS partition reconciliation, proposal joins, filters and exports. It establishes ledger consistency, not scientific acceptance.
 
 Public collectors write to ignored scratch output and never replace the ledger:
 
@@ -104,102 +73,18 @@ node packages/bake/cli/astronomy-data-build-instruments.mts --dry-run   # rebuil
 node packages/bake/cli/astronomy-data-mark-map-usage.mts --dry-run      # marks maps a body's manifest downloads
 ```
 
-- **Photojournal.** The site has no map category, so an entry is chosen by what it says about itself: a title naming a
-  map, mosaic, globe, hemisphere, projection or atlas (plurals included), or a caption stating a map projection or a
-  global map or mosaic. Each row keeps its downloadable files with their pixel sizes and the caption phrases that chose
-  it. New rows get a decision and a reason built from their own evidence (`photojournal-review.ts` in
-  `@cssearth/bake/sources`).
-- **USGS.** Each product's files are read from its own Astropedia page. A row's reason says what that page offers.
-- **Targets.** Rows collected without a target get the one their archive label states: PDS4 `<Target_Identification>`,
-  or PDS3 `TARGET_NAME` in `catalog/dataset.cat`, kept as stated (for example `CHECKOUT`). Rows whose source states
-  none keep an empty target and a `targetNote` saying so.
+Photojournal has no map category, so an entry is chosen by a title naming a map, mosaic, globe, hemisphere, projection or atlas, or a caption stating a map projection or global map. USGS files are read from each product's Astropedia page. Rows collected without a target get the one their archive label states; rows whose source states none keep an empty target and a `targetNote`.
 
-Use a new output directory for fresh retrievals. Review additions, removals,
-versions and changed source metadata before a database transaction. Preserve
-our decisions, proposal joins and work status; do not replace tables with a new
-scrape. Family rules in `collect/archive-review.ts` (`@cssearth/bake/sources`) suggest review scopes, not
-scientific acceptance. Update the retained coverage receipt and verifier's
-snapshot counts when accepting a new collection. Scratch HTML is never committed.
+Use a new output directory for fresh retrievals. Review additions, removals, versions and changed metadata before a database transaction. Preserve decisions, proposal joins and work status; do not replace tables with a new scrape. Family rules in `collect/archive-review.ts` suggest review scopes, not scientific acceptance. Update the verifier's snapshot counts when accepting a new collection. Scratch HTML is never committed.
 
 ## Coverage and limits
 
-The 27 September 2026 snapshot keeps different inventory populations separate. Rows without a target carry a `targetNote` saying why:
+The inventory populations are kept separate. Do not add them into a unique-dataset or observation count: an entry may be a version, mirror, bundle, collection, channel, session or container.
 
-| Source population               |  Rows | What was checked                                                                                                                     |
-| ------------------------------- | ----: | ------------------------------------------------------------------------------------------------------------------------------------ |
-| OPUS instrument/target slices   |   549 | Exact queries, metadata samples and explicit screening decisions                                                                     |
-| OPUS instrument/volume entries  |   990 | Catalogue inventory; 985 distinct volumes/bundles                                                                                    |
-| OPUS geometry-index memberships |   221 | Overlapping geometry entries, not detections                                                                                         |
-| Photojournal                    | 2,593 | 717 earlier individual reviews retained; 1,876 added by title or caption, each with its own evidence; files and pixel sizes recorded |
-| PSI PDS4                        |   189 | Earlier bundle review and proposal links retained; 186 targets read from the bundle labels                                           |
-| USGS                            | 1,643 | Earlier catalogue review retained; every product page's files recorded; one missed ISIS cube reopened                                |
-| Maryland indexed descriptions   | 3,880 | Every linked description requested; 3,878 parsed, two HTTP 404s; 466 targets read from PDS3/PDS4 labels                              |
-| Maryland root holdings          | 5,110 | Directory inventory; 1,239 have no description in the audited indexes                                                                |
-| DARTS dataset directory         |   360 | Every published science metadata entry parsed, including one typed Observation                                                       |
-| DARTS collection directory      |    46 | Mission/collection metadata, separate from dataset entries                                                                           |
-| DARTS catalogue documents       |     2 | DataCatalog and ItemList containers                                                                                                  |
-
-Do not add these into a unique-dataset or observation count. An entry may be a
-version, mirror, bundle, collection, channel, session or container. The database
-retains each provider's identifiers and links so a work slice can reconcile them.
-
-OPUS's target and volume partitions each sum to 1,627,081 records across 40
-instruments. VIMS VIS/IR entries can share the same QUBE. Geometry matches do
-not prove detection or useful coverage. There were 23 focused native-label
-inspections; this is not manual review of every OPUS observation. Native image,
-cube and time-series arrays were not decoded in that pass.
-
-Maryland collection starts with the mission, target and datatype indexes and
-follows their internal catalogue pages. It also inventories the holdings root.
-It does not claim a recursive audit of every science file. The failed description
-URLs remain searchable, as do unindexed holdings. Abstracts, status, citations,
-identifiers, source links and retrieval times are retained as data. Family rules
-screen each record; native-product qualification remains proposed work.
-
-DARTS collection reads every JSON-LD file in the published dataset and collection
-metadata directories. Five products are marked in preparation, eight as old or
-obsolete, and four provisional. SLIM has mission metadata but no individual
-product in this dataset catalogue. That is a release lead, not calibrated imagery.
+- OPUS's target and volume partitions each sum to 1,627,081 records across 40 instruments. Geometry matches do not prove detection or useful coverage. Native arrays were not decoded.
+- Maryland collection follows the mission, target and datatype indexes and inventories the holdings root. It does not claim a recursive audit of every science file.
+- DARTS collection reads every JSON-LD file in the published dataset and collection metadata directories. SLIM has mission metadata but no individual product.
 
 ## Opportunities and existing work
 
-The added Maryland/DARTS scopes include [lunar magnetic maps](PROPOSALS.md#p111),
-[elemental measurements](PROPOSALS.md#p112), [radar profiles](PROPOSALS.md#p113),
-[Apollo seismology](PROPOSALS.md#p114), [Venus winds](PROPOSALS.md#p115),
-[Rosetta thermal observations](PROPOSALS.md#p117), [gas and dust](PROPOSALS.md#p118),
-[Lucy encounters](PROPOSALS.md#p129), [DART measurements](PROPOSALS.md#p130), and
-[EPOCh transit curves](PROPOSALS.md#p131). Related sources extend existing proposals
-through database joins. These are work scopes, not 131 ready datasets.
-
-The Maryland/DARTS comparison also read the Moon, Venus, Sun and 67P READMEs.
-67P already uses VIRTIS derived maps, Venus already uses an Akatsuki UVI exposure,
-and the Sun has prepared magnetic and solar-band maps. Those archives alone are
-not new opportunities. The new scopes require additional measurements with
-explicit dates, calibration and coverage. Mars stays deferred.
-
-The earlier 95 proposals retain their earlier comparison.
-Their older Enceladus “owned elsewhere” note is historical: its infrared mosaic
-subsequently merged. The preserved repository comparison records that change.
-Nix/Hydra registration, Nix color resolution and earlier photometric blockers
-remain unresolved unless new evidence meets the owning investigation's condition.
-
-## Evidence and validation
-
-The original audit was consolidated without dropping its 4,309 exported records
-or proposal joins. Native-label bytes retain their original hashes and URLs.
-The database's size comes from retained per-record metadata and scientific labels;
-it contains no science image payloads or downloaded webpages. Historical reviews
-and collection receipts remain queryable in `evidence` instead of separate files.
-
-`astronomy-data-verify.mts` (`packages/bake/cli`) checks SQLite integrity and foreign keys, snapshot coverage, all
-retained evidence hashes, OPUS partition reconciliation, label byte counts,
-proposal writeups/joins, filters and exports. These checks establish ledger
-consistency, not scientific acceptance of the proposed datasets.
-
-The [browser capture](evidence/ledger-slice.jpg) records the SQLite migration viewer,
-before its heading was renamed to Astronomy data ledger.
-The `validation:sqlite-migration` evidence entry records the compared revision,
-migration extent, commands and browser cases. Browser version and DPR were not
-recorded; this is no claim of pixel parity.
-It is a UI check; scientific decoding and rendered-body qualification belong to
-subsequent implementation PRs.
+The added Maryland/DARTS scopes include [lunar magnetic maps](PROPOSALS.md#p111), [elemental measurements](PROPOSALS.md#p112), [radar profiles](PROPOSALS.md#p113), [Apollo seismology](PROPOSALS.md#p114), [Venus winds](PROPOSALS.md#p115), [Rosetta thermal observations](PROPOSALS.md#p117), [gas and dust](PROPOSALS.md#p118), [Lucy encounters](PROPOSALS.md#p129), [DART measurements](PROPOSALS.md#p130) and [EPOCh transit curves](PROPOSALS.md#p131). These are work scopes, not 131 ready datasets. Nix/Hydra registration, Nix color resolution and earlier photometric blockers remain unresolved unless new evidence meets the owning investigation's condition.

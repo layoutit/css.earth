@@ -3,7 +3,7 @@
   "objectId": "eps-eridani-disc",
   "entries": [
     {
-      "id": "lens-dust",
+      "id": "dataset-dust",
       "subject": "ALMA band 6 continuum of project 2019.1.00696.S, December 2019: the ALMA pipeline image at the beam and in the colour map of Booth et al. (2023) Figure 1",
       "status": "included",
       "finding": "Booth et al. (2023) deposited no image. The archive holds the pipeline's continuum image of the same observations (CASA 5.6.1-8, beam 1.288 x 0.955 arcsec, 0.19 arcsec pixels) and its primary beam. With the star and two background sources of their Table 2 removed, multiplied by the primary beam as their figure is shown, and smoothed to their 1.6 x 1.2 arcsec beam, its noise is 16.4 microJy per beam in a 4 to 12 arcsec annulus against their 14. The ring's median is 24 microJy per beam and its brightest spots reach about 60. The figure's colour bar, decoded from the PDF in the paper's arXiv source, is matplotlib's inferno map to 0 of 255 in every channel, linear from -50.66 to 90.00 microJy per beam.",

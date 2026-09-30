@@ -1,4 +1,4 @@
-/** Inspect one staged optical lens without changing the operator's publication or browser state. */
+/** Inspect one staged optical dataset without changing the operator's publication or browser state. */
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -19,19 +19,19 @@ async function ready() {
     document.querySelector('.compiler-stage')?.getAttribute('data-compiler-ready') === 'true', null, { timeout: 60000 });
   assert.deepEqual(await page.locator('.compiler-stage [role="alert"], .compiler-progress [role="alert"]').allTextContents(), []);
 }
-async function lens(value: string) {
-  await page.locator('#compiler-lens').selectOption(value);
-  await page.waitForFunction(value => document.querySelector('[data-compiler-root]')?.getAttribute('data-lens') === value, value);
+async function dataset(value: string) {
+  await page.locator('#compiler-dataset').selectOption(value);
+  await page.waitForFunction(value => document.querySelector('[data-compiler-root]')?.getAttribute('data-dataset') === value, value);
 }
 try {
   await page.goto(`${base}/reconstruction?subject=${subject}`); await ready();
   const resultId = await page.locator('.compiler-controls').getAttribute('data-result-id'); assert.ok(resultId);
-  const sourceLens = await page.locator('#compiler-lens').inputValue();
+  const sourceDataset = await page.locator('#compiler-dataset').inputValue();
   const stars = () => page.locator('[data-compiler-stars] s').evaluateAll(nodes => nodes.map(node => {
     const el = node as HTMLElement; return { id: el.dataset.starId, position: el.style.transform, width: el.style.width, alpha: el.style.opacity, tile: el.style.backgroundPosition };
   }));
   const initialStars = await stars(); assert.ok(initialStars.length > 0);
-  await snapshot('reference-front'); await lens('optical-composite');
+  await snapshot('reference-front'); await dataset('optical-composite');
   assert.deepEqual(await stars(), initialStars, 'Optical composition changed the catalogue stars.');
   await snapshot('composite-front');
   await page.getByRole('checkbox', { name: 'Original', exact: true }).check();
@@ -48,14 +48,14 @@ try {
     await snapshot(`composite-${name}`);
   }
   const pose = await page.locator('.compiler-stage').getAttribute('data-compiler-pose');
-  await lens(sourceLens); await lens('optical-composite');
+  await dataset(sourceDataset); await dataset('optical-composite');
   assert.equal(await page.locator('.compiler-stage').getAttribute('data-compiler-pose'), pose);
   await page.reload(); await ready();
   assert.equal(await page.locator('.compiler-controls').getAttribute('data-result-id'), resultId);
-  assert.equal(await page.locator('#compiler-lens').inputValue(), 'optical-composite');
+  assert.equal(await page.locator('#compiler-dataset').inputValue(), 'optical-composite');
   assert.deepEqual(errors, []); assert.deepEqual(posts, []);
   await writeFile(`${output}/result.json`, JSON.stringify({ status: 'passed', resultId, retainedStellarElements: initialStars.length,
-    originalLens: sourceLens, stagedPublication: publicationPath, front: true, oblique: true, bothSides: true,
+    originalDataset: sourceDataset, stagedPublication: publicationPath, front: true, oblique: true, bothSides: true,
     unchangedStars: true, sourceSwitch: true, refresh: true, errors, posts, browser: browser.version() }, null, 2));
-  console.log('PASS staged optical lens: source comparison, unchanged stars, front/oblique/both sides, source switch and refresh; no processing.');
+  console.log('PASS staged optical dataset: source comparison, unchanged stars, front/oblique/both sides, source switch and refresh; no processing.');
 } catch (error) { await snapshot('failure'); throw error; } finally { await browser.close(); }

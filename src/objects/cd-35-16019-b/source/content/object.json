@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "cd-35-16019-b",
   "displayName": "CD-35 16019B",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "cd-35-16019-b-lens-color.webp",
+        "thumbnail": "cd-35-16019-b-dataset-color.webp",
         "surface": "cd-35-16019-b-surface-color@2x.webp",
         "poles": "cd-35-16019-b-poles-color@2x.webp",
         "source": {

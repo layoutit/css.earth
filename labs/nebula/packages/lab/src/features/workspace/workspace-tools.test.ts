@@ -19,13 +19,13 @@ test('floating tools toggle one panel above the buttons, close on Escape and hid
     import { WorkspaceTools } from './labs/nebula/packages/lab/src/features/workspace/workspace-tools';
     import { ImageCredit } from './labs/nebula/packages/lab/src/features/workspace/image-credit';
     function App() {
-      const [lens, setLens] = useState('first');
-      const tools = lens === 'density' ? [] : [{ id: 'levels', label: 'Levels', tooltip: 'Levels · render against this image',
-        icon: <svg viewBox="0 0 18 18"><path d="M2 15h14"/></svg>, panel: <p id="levels-body">Levels for {lens}</p> }];
+      const [dataset, setDataset] = useState('first');
+      const tools = dataset === 'density' ? [] : [{ id: 'levels', label: 'Levels', tooltip: 'Levels · render against this image',
+        icon: <svg viewBox="0 0 18 18"><path d="M2 15h14"/></svg>, panel: <p id="levels-body">Levels for {dataset}</p> }];
       return <div className="workspace-content" style={{ position: 'fixed', inset: 0 }}>
         <div id="scene">Prepared scene</div>
         <aside id="sidebar" style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 'var(--workspace-right-width)' }}>
-          {['first', 'second', 'density'].map(value => <button key={value} id={'lens-' + value} onClick={() => setLens(value)}>{value}</button>)}
+          {['first', 'second', 'density'].map(value => <button key={value} id={'dataset-' + value} onClick={() => setDataset(value)}>{value}</button>)}
         </aside>
         <WorkspaceTools tools={tools} />
         <ImageCredit credit="Image credit label" />
@@ -66,8 +66,8 @@ test('floating tools toggle one panel above the buttons, close on Escape and hid
     assert.ok(buttons.y + buttons.height < credit.y, 'The buttons sit above the credit label.');
     assert.ok(panel.y >= 0 && panel.height > 400, 'The panel fills the column height.');
 
-    await page.locator('#lens-second').click();
-    assert.equal(await page.locator('#levels-body').textContent(), 'Levels for second', 'The open panel follows the lens.');
+    await page.locator('#dataset-second').click();
+    assert.equal(await page.locator('#levels-body').textContent(), 'Levels for second', 'The open panel follows the dataset.');
     await button.click();
     assert.equal(await page.getByRole('dialog').count(), 0);
     assert.equal(await button.getAttribute('aria-pressed'), 'false');
@@ -81,11 +81,11 @@ test('floating tools toggle one panel above the buttons, close on Escape and hid
     assert.equal(await button.evaluate(element => element === document.activeElement), true, 'Focus returns to the tool button.');
 
     await button.click(); await dialog.waitFor();
-    await page.locator('#lens-density').click();
+    await page.locator('#dataset-density').click();
     assert.equal(await page.locator('.workspace-tools').count(), 0, 'Unpainted density has no Levels tool.');
     assert.equal(await page.getByRole('dialog').count(), 0);
-    await page.locator('#lens-first').click();
-    assert.equal(await button.getAttribute('aria-pressed'), 'true', 'A lens switch passing through no tool keeps the panel open.');
+    await page.locator('#dataset-first').click();
+    assert.equal(await button.getAttribute('aria-pressed'), 'true', 'A dataset switch passing through no tool keeps the panel open.');
     assert.equal(await page.locator('#levels-body').textContent(), 'Levels for first');
     assert.equal(await page.locator('.workspace-image-credit').isVisible(), true);
     assert.equal(await scene.evaluate(element => element === document.getElementById('scene')), true);

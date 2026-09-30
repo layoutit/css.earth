@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Carleo et al. 2026. This account was drafted from Carleo et al. 2026's values; the sections below are the data's own.
+Its radius and temperature follow Carleo et al. 2026. The introduction is generated from Carleo et al. 2026's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 540977282990133888, parallax 14.335 ± 0.013 mas (69.76 pc). Radius 0.81 +/- 0.02 solar radii from Carleo et al. 2026, the stellar radius of the default parameter set of TOI-1648 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract). Mass 0.83 +/- 0.06 solar masses from Carleo et al. 2026, the stellar mass of the default parameter set of TOI-1648 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract). Temperature 4,850 K from Carleo et al. 2026, the stellar temperature of the default parameter set of TOI-1648 b in the NASA Exoplanet Archive. log g 4.54 from the mass and radius.
 
@@ -12,13 +12,11 @@ Its radius and temperature follow Carleo et al. 2026. This account was drafted f
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

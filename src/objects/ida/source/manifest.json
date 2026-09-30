@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@2",
+  "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
       "id": "ida-shape",
@@ -13,7 +13,7 @@
         "terrain",
         "elevation"
       ],
-      "lensId": "elevation",
+      "datasetId": "elevation",
       "width": 181,
       "height": 91,
       "projection": {
@@ -56,7 +56,7 @@
       "consumers": [
         "surfaces"
       ],
-      "lensId": "normal",
+      "datasetId": "normal",
       "label": "Monochrome",
       "falseColor": false,
       "width": 2520,
@@ -139,7 +139,7 @@
       ],
       "width": 800,
       "height": 800,
-      "lensId": "calibrated",
+      "datasetId": "calibrated",
       "label": "Calibrated image",
       "sourceBinding": {
         "kind": "catalogued",
@@ -698,7 +698,7 @@
         "latitudeDegrees": 20,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "lensId": "normal"
+        "datasetId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }

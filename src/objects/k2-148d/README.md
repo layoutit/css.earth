@@ -2,13 +2,13 @@
 
 ## Sources
 
-It is one of 3 planets known around K2-148. Its orbit and size follow Hirano et al. 2018's fit, the archive's default. This account was drafted from Hirano et al. 2018's values; the sections below are the data's own.
+It is one of 3 planets known around K2-148. Its orbit and size follow Hirano et al. 2018's fit, the archive's default. The introduction is generated from Hirano et al. 2018's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.146311 Jupiter radii from Hirano et al. 2018 (2018AJ....155..127H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract): 10,460.1 km at 71,492 km per Jupiter radius. GM from the mass 0.0105 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
 **Orbit.** Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): P 9.75833 d Hirano et al. 2018 (2018AJ....155..127H), via the NASA Exoplanet Archive ps table (pl_refname HIRANO_ET_AL__2018): a/R* 36.3; Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): inclination derived from its transit duration 1.8 h and Rp/R* 0.0217 with its a/R* 35.9 (Winn 2010, eqs. 14 and 16) No archive row states an eccentricity; the orbit is taken as circular Kruse et al. 2019 (2019ApJS..244...11K), via the NASA Exoplanet Archive ps table (pl_refname KRUSE_ET_AL__2019): transit mid-time 2457396.0988 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 452 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Colour.** No image or measured colour exists. The neutral gray is lit by k2-148's measured colour (#ffc095, the colour lens of k2-148 (src/objects/k2-148/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Colour.** No image or measured colour exists. The neutral gray is lit by k2-148's measured colour (#ffc095, the colour dataset of k2-148 (src/objects/k2-148/source/photometry/stellar-color.json)) at the gray's own brightness.
 
 **Charts.** The orbits of K2-148's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (42, 43), folded onto its orbit. Upper limits and rows without an error are left out.
 
@@ -16,9 +16,4 @@ It is one of 3 planets known around K2-148. Its orbit and size follow Hirano et 
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/k2-148d.json).
 
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
-
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

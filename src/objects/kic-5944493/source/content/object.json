@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kic-5944493",
   "displayName": "KIC 5944493",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "kic-5944493-lens-color.webp",
+        "thumbnail": "kic-5944493-dataset-color.webp",
         "surface": "kic-5944493-surface-color@2x.webp",
         "poles": "kic-5944493-poles-color@2x.webp",
         "source": {

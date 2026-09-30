@@ -45,12 +45,12 @@ export const epochPaths = (id: string) => ({ merged: `observations/betelgeuse-ma
   beam: (beamMas: number) => `observations/betelgeuse-matisse-${id}-continuum-${beamMas.toFixed(1).replace(/\.0$/u, '')}mas.fits` });
 export const MERGED_PATH = 'observations/betelgeuse-matisse-2020-02-continuum.oifits';
 /** SQUEEZE's posterior mean at 0.78 mas pixels, and the same image convolved to the 4 mas beam of the February 2020 baselines
- * (Drevon et al. 2024), which is what the lens casts: structure below the beam is the regulariser's, not the star's. */
+ * (Drevon et al. 2024), which is what the dataset casts: structure below the beam is the regulariser's, not the star's. */
 export const RAW_IMAGE_PATH = 'observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits';
 export const BEAM_IMAGE_PATH = 'observations/betelgeuse-matisse-2020-02-continuum-4mas.fits';
 export const BEAM_FWHM_MAS = 4;
 export const SPHERE_PATH = 'shape/uniform-disc.tab';
-/** The navigation marker: the beam-convolved reconstruction as observed (north up, east left) through the lens's palette. */
+/** The navigation marker: the beam-convolved reconstruction as observed (north up, east left) through the dataset's palette. */
 export const CONTEXT_PATH = 'presentation/context.png';
 export const CONTEXT_SIZE = 512;
 
@@ -63,7 +63,7 @@ export function uniformDiscTable(radiusKm: number, stepDegrees: number): string 
   return `${lines.join('\n')}\n`;
 }
 
-/** The sky-plane image through the lens's own palette and percentile stretch, transparent off the disc. */
+/** The sky-plane image through the dataset's own palette and percentile stretch, transparent off the disc. */
 export async function contextMarker(image: ReturnType<typeof readReconstruction>, palette: readonly string[], percentiles: readonly [number, number], backgroundMaximum: number) {
   const { width, height } = image, values = skyDisplayRaster(image.values, width, height, image.axes);
   const disc = values.filter(value => value > backgroundMaximum).sort((a, b) => a - b);
@@ -100,8 +100,8 @@ export async function authorBetelgeuse({ check = false } = {}) {
   await authorUniformDiscSphere(root, 'Betelgeuse', { check });
   const oifitsDirectory = resolve(root, 'observations/oifits'), names = await readdir(oifitsDirectory);
   const raster = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/raster.json'), 'utf8')), 'raster');
-  const lens = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').lens, 'lens');
-  const display = requireRecord(lens.display, 'display'), frame = requireRecord(requireArray(lens.frames)[0], 'frame');
+  const dataset = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').dataset, 'dataset');
+  const display = requireRecord(dataset.display, 'display'), frame = requireRecord(requireArray(dataset.frames)[0], 'frame');
   const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
   const outputs: [string, Buffer][] = [], counts: Record<string, { vis2: number; t3: number; files: number }> = {};
   for (const epoch of MATISSE_EPOCHS) {

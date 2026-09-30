@@ -19,7 +19,7 @@
       "id": "limb-darkening",
       "subject": "Limb darkening",
       "status": "excluded",
-      "finding": "The limb is drawn on the colour lens, which this dwarf does not have. PICASO 4.1 on the Sonora Bobcat atmospheres gives a V-band law at its temperature and gravity (node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb), but from the same cloud-free models whose visible spectrum fails the Luhman 16 A test above, and there is no colour to draw it on. No law is published for this dwarf.",
+      "finding": "The limb is drawn on the colour dataset, which this dwarf does not have. PICASO 4.1 on the Sonora Bobcat atmospheres gives a V-band law at its temperature and gravity (node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb), but from the same cloud-free models whose visible spectrum fails the Luhman 16 A test above, and there is no colour to draw it on. No law is published for this dwarf.",
       "revisitWhen": "The colour entry is resolved, or a limb law is published for this dwarf.",
       "evidence": [
         "https://doi.org/10.5281/zenodo.5063476",

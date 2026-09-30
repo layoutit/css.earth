@@ -1,8 +1,8 @@
 /**
- * The surface-observation recipe: one lens shape for every format.
+ * The surface-observation recipe: one dataset shape for every format.
  *
- * Every lens declares its id, format, consumer group, metadata, frames, transfer limits, photometry and display. A mosaic
- * adds its selection and level matching. A format adds only its own frame inputs and lens blocks. A key the format does not
+ * Every dataset declares its id, format, consumer group, metadata, frames, transfer limits, photometry and display. A mosaic
+ * adds its selection and level matching. A format adds only its own frame inputs and dataset blocks. A key the format does not
  * declare is refused, so a misspelt field fails validation instead of being silently ignored.
  */
 import { array, number, optional, shape, text } from '@cssearth/core';
@@ -10,12 +10,12 @@ import { MAXIMUM_OVERLAP_SAMPLES } from './levels.ts';
 import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.ts';
 import { checkKeys } from '../../../raster/index.ts';
 
-/** Keys every lens has, and the two a mosaic adds. */
-export const LENS_KEYS = ['id', 'format', 'consumer', 'metadata', 'frames', 'transfer', 'photometry', 'display'] as const;
+/** Keys every dataset has, and the two a mosaic adds. */
+export const DATASET_KEYS = ['id', 'format', 'consumer', 'metadata', 'frames', 'transfer', 'photometry', 'display'] as const;
 export const MOSAIC_KEYS = ['selection', 'levelMatching'] as const;
-/** A lens may name where the camera looks when the lens opens. */
-/** `reference` names the observation of the same body the registration stage measures the lens against; without it the lens's own frames are the reference. `refinement` names which of the stage's references may turn the cameras, and by how many degrees the others must agree. */
-export const OPTIONAL_LENS_KEYS = ['focus', 'reference', 'refinement'] as const;
+/** A dataset may name where the camera looks when the dataset opens. */
+/** `reference` names the observation of the same body the registration stage measures the dataset against; without it the dataset's own frames are the reference. `refinement` names which of the stage's references may turn the cameras, and by how many degrees the others must agree. */
+export const OPTIONAL_DATASET_KEYS = ['focus', 'reference', 'refinement'] as const;
 
 export const safePath = (path: unknown): path is string => typeof path === 'string' && path.length > 0 && !path.startsWith('/') && !path.includes('\\') && !path.split('/').includes('..');
 export const positive = (value: number | undefined): value is number => value !== undefined && Number.isFinite(value) && value > 0;
@@ -25,21 +25,21 @@ const frameIdentifier = /^[a-z0-9][a-z0-9_-]*$/;
 
 
 /** A display maps either a percentile range of the qualified values or one stated display range to display levels; a colour product's bands share that range.
- * A monochrome lens may present those levels through a palette of at least two hex colours instead of grey. `basis` says where the stretch comes from:
- * `authored` when a contributor chose it, `source` when a pinned input the lens consumes states it, named by `sourceId`. */
+ * A monochrome dataset may present those levels through a palette of at least two hex colours instead of grey. `basis` says where the stretch comes from:
+ * `authored` when a contributor chose it, `source` when a pinned input the dataset consumes states it, named by `sourceId`. */
 export const parseDisplay = shape({ percentiles: optional(array(number)), displayRange: optional(array(number)), palette: optional(array(text)), basis: text, sourceId: optional(text) });
 /** The stretch's basis as the policy and report carry it. */
-export function displayBasis(display: LensDisplay): { basis: 'authored' | 'source'; sourceId?: string } {
+export function displayBasis(display: DatasetDisplay): { basis: 'authored' | 'source'; sourceId?: string } {
   if (display.basis !== 'authored' && display.basis !== 'source') throw new TypeError('A display states its basis, authored or source.');
   return { basis: display.basis, ...(display.sourceId === undefined ? {} : { sourceId: display.sourceId }) };
 }
 const hexColor = /^#[0-9a-f]{6}$/;
-export type LensDisplay = ReturnType<typeof parseDisplay>;
+export type DatasetDisplay = ReturnType<typeof parseDisplay>;
 
-export interface LensEnvelope {
+export interface DatasetEnvelope {
   id: string; consumer: string; metadata: { label?: string; coverage?: string }; frames: readonly { id: string }[]; selection?: string;
   levelMatching?: { maximumAngleDegrees?: number; minimumPairs: number; maximumGain: number; samplesPerTriangle?: number };
-  display: LensDisplay;
+  display: DatasetDisplay;
 }
 
 /** What a format decides within the shared envelope. */
@@ -53,15 +53,15 @@ export interface EnvelopeRules {
   samplesPerTriangle: 'required' | 'optional';
 }
 
-/** The rules every format shares: identifiers, frames, a selection and level matching exactly when a lens has several frames,
+/** The rules every format shares: identifiers, frames, a selection and level matching exactly when a dataset has several frames,
  * distinct safe input paths and one valid display. */
-export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[], rules: EnvelopeRules, context: string) {
+export function validateEnvelope(recipe: DatasetEnvelope, paths: readonly string[], rules: EnvelopeRules, context: string) {
   const { frames, levelMatching: levels, display } = recipe, mosaic = frames.length > 1;
   checkKeys(display, ['basis'], ['percentiles', 'displayRange', 'palette', 'sourceId'], `${context} display`);
   if (!(display.basis === 'authored' ? display.sourceId === undefined : display.basis === 'source' && typeof display.sourceId === 'string' && identifier.test(display.sourceId)))
     throw new TypeError(`Invalid source-bound ${context}: a display states its basis, authored or source, and only a source basis names its sourceId.`);
   if (display.palette !== undefined && (!rules.palette || !Array.isArray(display.palette) || display.palette.length < 2 || display.palette.some(color => !hexColor.test(color))))
-    throw new TypeError(`Invalid source-bound ${context}: a display palette needs at least two #rrggbb colours on a monochrome lens.`);
+    throw new TypeError(`Invalid source-bound ${context}: a display palette needs at least two #rrggbb colours on a monochrome dataset.`);
   if (levels) checkKeys(levels, ['minimumPairs', 'maximumGain'], ['maximumAngleDegrees', 'samplesPerTriangle'], `${context} level matching`);
   const range = display.percentiles ?? display.displayRange, kind = display.percentiles ? 'percentiles' : 'displayRange';
   if (!identifier.test(recipe.id) || !identifier.test(recipe.consumer) || !recipe.metadata?.label || !recipe.metadata?.coverage ||
@@ -78,7 +78,7 @@ export function validateEnvelope(recipe: LensEnvelope, paths: readonly string[],
       (kind === 'percentiles' && (range[0] < 0 || range[1] > 100))) throw new TypeError(`Invalid source-bound ${context}.`);
 }
 
-/** Transfer limits for a camera lens on source-preserving terrain: one form of contributor separation, visibility within a metre and
+/** Transfer limits for a camera dataset on source-preserving terrain: one form of contributor separation, visibility within a metre and
  * emission below the horizon. */
 export function validateTransfer(transfer: { maximumSeparationMeters?: number; maximumSeparationFootprints?: number; visibilityToleranceMeters: number; maximumEmissionDegrees: number },
   geometry: { simplification?: { method?: string; maximumErrorMeters: number } } | undefined, context: string) {

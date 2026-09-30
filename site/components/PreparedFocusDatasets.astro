@@ -1,0 +1,58 @@
+---
+import DatasetList from './DatasetList.astro';
+import DatasetContextPanels from './DatasetContextPanels.astro';
+import ObjectFactsheet from './ObjectFactsheet.astro';
+import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
+import { imageFocusDatasets } from '@cssearth/renderer/universe';
+import { lineageSource } from '@cssearth/objects/provenance';
+import { sourceArray, sourceObject } from '@cssearth/objects/sources';
+import type { PreparedVolumeDatasetBank } from '@cssearth/renderer/volume/prepared-volume-datasets.ts';
+import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_ASSET_URLS } from '../prepared-context-objects.mts';
+import { CONTEXT_OBJECT_PREPARED_JSON, CONTEXT_OBJECT_SOURCE_MANIFESTS } from '../prepared-context-json.mts';
+import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
+import { resolveSceneAddressesDeep } from '../asset-origin.mts';
+import { datasetSourceDetail } from '../dataset-context.mts';
+import { EXPLORATION } from '../exploration-catalog.mts';
+// Page-neutral: the banks render once into the shared focus fragment, so dataset forms submit to the current page.
+interface Props { factsOnly?: boolean }
+const { factsOnly = false } = Astro.props;
+
+type Descriptor = { id: string; type: string; prepared?: { url: string } };
+// Bodies share src/objects; only the generated context objects' prepared JSON is read here.
+const descriptors = CONTEXT_OBJECT_DESCRIPTORS as Record<string, Descriptor>;
+const prepared = CONTEXT_OBJECT_PREPARED_JSON as Record<string, { data: PreparedVolumeDatasetBank } | undefined>;
+const presentations = CONTEXT_OBJECT_PREPARED_JSON;
+const banks = await Promise.all(Object.entries(descriptors).filter(([, descriptor]) => (descriptor.type === 'volume-dataset-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available) || descriptor.type === 'image-layer-bank').map(async ([path, descriptor]) => {
+  const bank = descriptor.type === 'image-layer-bank'
+    ? { ...imageFocusDatasets(descriptor.id), id: descriptor.id }
+    : prepared[path.replace(/object\.json$/u, descriptor.prepared?.url ?? '')]?.data;
+  if (!bank || bank.id !== descriptor.id) throw new TypeError(`Prepared focus datasets unavailable: ${descriptor.id}.`);
+  // The dataset rows credit each dataset's own source: the manifest input that names the dataset.
+  const sources = sourceArray(sourceObject(CONTEXT_OBJECT_SOURCE_MANIFESTS[path.replace(/object\.json$/u, 'source/manifest.json')]).inputs, raw => lineageSource(raw));
+  // presentation.json (a context object's own prepared JSON, not a Vite asset import) can carry
+  // bare `/scenes/<id>/datasets/<dataset id>.webp` dataset-preview addresses that Vite never rewrites.
+  const parsedPresentation = await resolveSceneAddressesDeep(parsePreparedVolumePresentation(presentations[path.replace(/object\.json$/u, 'prepared/presentation.json')], bank, sources));
+  const presentation = { ...parsedPresentation, controls: parsedPresentation.controls.map(dataset => {
+    const { detail: _preparedDetail, ...control } = dataset;
+    const detail = datasetSourceDetail(dataset.id, sources, EXPLORATION.catalog);
+    return { ...control, ...(detail ? { detail } : {}) };
+  }) };
+  const directSourceIdsByDataset = Object.fromEntries(presentation.controls.map(dataset => [dataset.id,
+    sources.filter(source => source.datasetId === dataset.id).map(source => source.id)]));
+  const prefix = path.replace(/object\.json$/u, '');
+  const resources = Object.fromEntries(Object.entries(CONTEXT_OBJECT_ASSET_URLS).filter(([path]) => path.startsWith(prefix)).map(([path, url]) => [path.slice(prefix.length), url]));
+  return { bank, presentation, directSourceIdsByDataset, descriptor, resources };
+}));
+---
+{banks.map(({ bank, presentation, directSourceIdsByDataset, descriptor, resources }) => factsOnly ? <div data-focus-facts-bank={bank.id} hidden>
+  {presentation.controls.map(dataset => <div data-focus-dataset-details={dataset.id} hidden={dataset.id !== presentation.defaultDataset}>
+    <ObjectFactsheet id={`focus-${bank.id}-${dataset.id}`} facts={[
+      { id: 'dataset', label: 'Dataset', value: dataset.label },
+      ...(dataset.facts ?? []),
+    ]} embedded />
+  </div>)}
+</div> : <div class="object-dataset-content" data-focus-dataset-bank={bank.id} hidden>
+  <script is:inline type="application/json" data-focus-resources set:html={JSON.stringify({ descriptor, resources }).replace(/</g, '\\u003c')}></script>
+  <DatasetList objectId={`focus-${bank.id}`} thumbnailObjectId={bank.id} route={null} datasets={presentation} focus />
+  <DatasetContextPanels objectId={bank.id} datasets={presentation} {directSourceIdsByDataset} />
+</div>)}

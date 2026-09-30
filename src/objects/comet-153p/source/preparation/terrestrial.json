@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "comet-153p",
   "displayName": "Ikeya–Zhang",
@@ -105,6 +105,6 @@
     "qualification": "JPL position at the shared epoch. The nucleus is an ellipsoid at the published effective radius; the attitude is arbitrary and no photographic surface is claimed."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

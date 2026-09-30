@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-css-presentation-profile@1",
+  "schema": "cssearth-css-presentation-profile@2",
   "namespace": "ganymede",
   "mode": "composite",
-  "lensFocus": {
+  "datasetFocus": {
     "oxygen-signature": {
       "longitudeDegrees": 156,
       "latitudeDegrees": 0,

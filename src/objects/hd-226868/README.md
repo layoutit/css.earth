@@ -2,7 +2,7 @@
 
 ## Sources
 
-HD 226868 is the blue supergiant of Cygnus X-1, the first X-ray source widely accepted to be a black hole. The star is 22 times as wide as the Sun and 31,000 K at its surface. Its black hole orbits 0.24 au away, closer than Mercury is to the Sun, every 5.6 days. It is also HIP 98298. This account was drafted from Miller-Jones et al. (2021), Science 371, 1046's values; the sections below are the data's own.
+HD 226868 is the blue supergiant of Cygnus X-1, the first X-ray source widely accepted to be a black hole. The star is 22 times as wide as the Sun and 31,000 K at its surface. Its black hole orbits 0.24 au away, closer than Mercury is to the Sun, every 5.6 days. It is also HIP 98298. The introduction is generated from Miller-Jones et al. (2021), Science 371, 1046's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2059383668236814720, parallax 0.444 ± 0.015 mas (2252.75 pc). Radius 22.3 solar radii from Miller-Jones et al. (2021), Science 371, 1046, Table 1: R1 = 22.3 solar radii (median; 5th-95th percentile 20.6-24.1), derived from their dynamical model at 2.22 kpc (https://arxiv.org/abs/2102.09091). Mass 40.6 solar masses from Miller-Jones et al. (2021), Science 371, 1046, Table 1: M1 = 40.6 solar masses (median; 5th-95th percentile 33.5-48.3), fitted (https://arxiv.org/abs/2102.09091). Temperature 31,138 K from Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted. log g 3.348 from Miller-Jones et al. (2021), Science 371, 1046, Table 1: log g1 = 3.348 (median; 5th-95th percentile 3.335-3.360), derived.
 
@@ -26,10 +26,9 @@ HD 226868 is the blue supergiant of Cygnus X-1, the first X-ray source widely ac
 
 ## Evidence
 
-[The rendered page](evidence/rendered-page.png) (dev server, 900 × 900 headless Chromium, 2026-09-27): the blue-white disc at its Planck colour, dimmed toward the edge by the TLUSTY limb law.
+The rendered page (dev server, 900 × 900 headless Chromium, 2026-09-27): the blue-white disc at its Planck colour, dimmed toward the edge by the TLUSTY limb law.
 
-Generated 2026-09-27 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-27 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 

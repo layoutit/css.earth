@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around GJ 436. Its orbit and size follow Maciejewski et al. 2014's fit, the archive's default. This account was drafted from Maciejewski et al. 2014's values; the sections below are the data's own.
+It is the only planet known around GJ 436. Its orbit and size follow Maciejewski et al. 2014's fit, the archive's default. The introduction is generated from Maciejewski et al. 2014's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.372 Jupiter radii from Maciejewski et al. 2014 (2014AcA....64..323M), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract): 26,595 km at 71,492 km per Jupiter radius. GM from the mass 0.07 Jupiter masses (Maciejewski et al. 2014, the mass the NASA Exoplanet Archive's composite table adopts (2014AcA....64..323M), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -16,10 +16,9 @@ It is the only planet known around GJ 436. Its orbit and size follow Maciejewski
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-436b.json).
 
-
 ## Known problems
 
 - **Orbit convention.** omega 351 degrees is taken as Maciejewski et al. 2014 gives it through the archive (pl_orblper); papers differ on whether that is the star's or the planet's argument of periastron. The epoch is the transit, so a swapped convention would only mirror the ellipse (e 0.13827) about the line of sight.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "Gliese 436 b" (revision 1374939322), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "Gliese 436 b" (revision 1374939322) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

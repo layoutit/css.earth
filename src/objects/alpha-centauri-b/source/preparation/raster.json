@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/alpha-centauri-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "alpha-centauri-b-surface-{id}{suffix}.webp",
-      "thumbnail": "alpha-centauri-b-lens-{id}.webp",
+      "thumbnail": "alpha-centauri-b-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "ceres",
   "displayName": "Ceres",
@@ -87,14 +87,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "ceres-lens-normal.webp",
+        "thumbnail": "ceres-dataset-normal.webp",
         "surface": "ceres-normal@2x.webp",
         "poles": "ceres-poles-normal@2x.webp",
         "source": {
@@ -107,7 +107,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "thumbnail": "ceres-lens-enhanced.webp",
+        "thumbnail": "ceres-dataset-enhanced.webp",
         "surface": "ceres-enhanced@2x.webp",
         "poles": "ceres-poles-enhanced@2x.webp",
         "source": {
@@ -120,7 +120,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "thumbnail": "ceres-lens-elevation.webp",
+        "thumbnail": "ceres-dataset-elevation.webp",
         "surface": "ceres-elevation@2x.webp",
         "poles": "ceres-poles-elevation@2x.webp",
         "legend": {
@@ -178,7 +178,7 @@
       {
         "id": "clay-band",
         "label": "Mineral signatures",
-        "thumbnail": "ceres-lens-clay-band.webp",
+        "thumbnail": "ceres-dataset-clay-band.webp",
         "surface": "ceres-clay-band@2x.webp",
         "poles": "ceres-poles-clay-band@2x.webp",
         "falseColor": true,
@@ -294,7 +294,7 @@
       {
         "id": "ammonium-band",
         "label": "Mineral signatures",
-        "thumbnail": "ceres-lens-ammonium-band.webp",
+        "thumbnail": "ceres-dataset-ammonium-band.webp",
         "surface": "ceres-ammonium-band@2x.webp",
         "poles": "ceres-poles-ammonium-band@2x.webp",
         "falseColor": true,
@@ -450,7 +450,7 @@
       {
         "id": "clay-centre",
         "label": "Clay band centre",
-        "thumbnail": "ceres-lens-clay-centre.webp",
+        "thumbnail": "ceres-dataset-clay-centre.webp",
         "surface": "ceres-clay-centre@2x.webp",
         "poles": "ceres-poles-clay-centre@2x.webp",
         "falseColor": true,
@@ -532,7 +532,7 @@
       {
         "id": "ammonium-centre",
         "label": "Ammonium band centre",
-        "thumbnail": "ceres-lens-ammonium-centre.webp",
+        "thumbnail": "ceres-dataset-ammonium-centre.webp",
         "surface": "ceres-ammonium-centre@2x.webp",
         "poles": "ceres-poles-ammonium-centre@2x.webp",
         "falseColor": true,
@@ -614,7 +614,7 @@
       {
         "id": "gravity",
         "label": "Gravity",
-        "thumbnail": "ceres-lens-gravity.webp",
+        "thumbnail": "ceres-dataset-gravity.webp",
         "surface": "ceres-gravity@2x.webp",
         "poles": "ceres-poles-gravity@2x.webp",
         "falseColor": true,
@@ -710,7 +710,7 @@
       {
         "id": "gravity-uncertainty",
         "label": "Gravity",
-        "thumbnail": "ceres-lens-gravity-uncertainty.webp",
+        "thumbnail": "ceres-dataset-gravity-uncertainty.webp",
         "surface": "ceres-gravity-uncertainty@2x.webp",
         "poles": "ceres-poles-gravity-uncertainty@2x.webp",
         "falseColor": true,
@@ -796,7 +796,7 @@
       {
         "id": "bouguer",
         "label": "Gravity",
-        "thumbnail": "ceres-lens-bouguer.webp",
+        "thumbnail": "ceres-dataset-bouguer.webp",
         "surface": "ceres-bouguer@2x.webp",
         "poles": "ceres-poles-bouguer@2x.webp",
         "falseColor": true,
@@ -892,7 +892,7 @@
       {
         "id": "geoid",
         "label": "Gravity",
-        "thumbnail": "ceres-lens-geoid.webp",
+        "thumbnail": "ceres-dataset-geoid.webp",
         "surface": "ceres-geoid@2x.webp",
         "poles": "ceres-poles-geoid@2x.webp",
         "falseColor": true,
@@ -988,7 +988,7 @@
       {
         "id": "hydrogen",
         "label": "Surface elements",
-        "thumbnail": "ceres-lens-hydrogen.webp",
+        "thumbnail": "ceres-dataset-hydrogen.webp",
         "surface": "ceres-hydrogen@2x.webp",
         "poles": "ceres-poles-hydrogen@2x.webp",
         "falseColor": true,
@@ -1074,7 +1074,7 @@
       {
         "id": "iron",
         "label": "Surface elements",
-        "thumbnail": "ceres-lens-iron.webp",
+        "thumbnail": "ceres-dataset-iron.webp",
         "surface": "ceres-iron@2x.webp",
         "poles": "ceres-poles-iron@2x.webp",
         "falseColor": true,
@@ -1160,7 +1160,7 @@
       {
         "id": "neutron-counts",
         "label": "Surface elements",
-        "thumbnail": "ceres-lens-neutron-counts.webp",
+        "thumbnail": "ceres-dataset-neutron-counts.webp",
         "surface": "ceres-neutron-counts@2x.webp",
         "poles": "ceres-poles-neutron-counts@2x.webp",
         "falseColor": true,

@@ -1,5 +1,6 @@
-// Pinning a prepared object to its transport: the `prepared/object.json` payload, the page metadata beside it, the descriptor's
-// `prepared` pin and the body's inventory. It prepares nothing; the world-navigation and spatial-context finalization that runs
+// Pinning a prepared object to its transport: the descriptor's `prepared` pin and page reference, and the body's inventory.
+// The `prepared/object.json` transport and the page data are built from the runtime when read (@cssearth/objects/node
+// prepared-transport), so no copy is written here. It prepares nothing; the world-navigation and spatial-context finalization that runs
 // before it on a fresh bake stays with `site/build/prepare/prepare-object-json.mts`.
 import { mkdir, readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
@@ -17,8 +18,8 @@ const format = PREPARED_CSS_OBJECT_FORMAT;
 
 export function serializeObjectJson(descriptorValue:unknown, definitionValue:unknown) {
   const descriptor=requireRecord(descriptorValue),definition=requireRecord(definitionValue);
-  if (descriptor.schema !== 'cssearth-object@1' || typeof descriptor.type !== 'string' ||
-      definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@4') {
+  if (descriptor.schema !== 'cssearth-object@2' || typeof descriptor.type !== 'string' ||
+      definition.id !== descriptor.id || definition.schema !== 'cssearth-object-runtime@5') {
     throw new TypeError('Prepared object identity does not match its descriptor.');
   }
   return JSON.stringify({ schema: 'cssearth-prepared-object@1', id: descriptor.id,
@@ -35,17 +36,14 @@ export async function pinPreparedObject(id: string, originalDescriptor: Record<s
   const originalProperties = requireRecord(originalDescriptor.properties);
   const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
   const payload = serializeObjectJson(descriptor, runtime);
-  await writePreparedText(resolve(preparedDirectory, 'object.json'), payload);
   const prepared = { format, url: 'prepared/object.json' };
   const page = preparePageMetadata(id, definition);
-  await writePreparedText(resolve(preparedDirectory, 'page.json'), page.text);
   // Validation may normalize key order. Retain the authored document's order
   // so an unchanged prepared object does not rewrite its descriptor.
   await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
     properties: { ...originalProperties, ...properties,
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
-  // Nothing under prepared/ is tracked. Every baked file moves to R2 through this inventory; object.json and page.json
-  // are regenerated on each checkout and stay out of it.
+  // Nothing under prepared/ is tracked. Every baked file moves to R2 through this inventory.
   await inventoryPreparedAssets({ objectId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory });
   return { bytes: Buffer.byteLength(payload), ...prepared };
 }

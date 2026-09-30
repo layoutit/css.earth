@@ -255,12 +255,12 @@ export async function preparedSelectionFixture(value: unknown, { silhouetteDiame
     residency.finishStartup();
     const inputs = new Map<string, FixtureElement>(), buttons: FixtureElement[] = [];
     const input = (fields: Partial<FixtureElement>): FixtureElement => Object.assign(new FixtureElement(f.document, fields.tagName ?? "input"), fields);
-    for (const lens of definition.controls.lenses?.controls ?? [])
-        buttons.push(input({ name: "dataset", value: lens.id, tagName: "BUTTON", type: "button" }));
+    for (const dataset of definition.controls.datasets?.controls ?? [])
+        buttons.push(input({ name: "dataset", value: dataset.id, tagName: "BUTTON", type: "button" }));
     for (const control of definition.controls.settings?.controls ?? [])
         inputs.set(control.name, input({ name: control.name, type: control.kind === "toggle" ? "checkbox" : "range", min: "0", max: "4", step: "1" }));
-    const lensRoot = f.document.createElement("div"), settingsRoot = f.document.createElement("div");
-    const form = Object.assign(f.document.createElement("form"), { elements: buttons, closest: () => lensRoot });
+    const datasetRoot = f.document.createElement("div"), settingsRoot = f.document.createElement("div");
+    const form = Object.assign(f.document.createElement("form"), { elements: buttons, closest: () => datasetRoot });
     const details = new Map(buttons.map(button => {
         button.setAttribute('name', 'dataset'); button.setAttribute('value', button.value); button.setAttribute('aria-controls', button.value);
         return [button.value, f.document.createElement('div')];
@@ -269,7 +269,7 @@ export async function preparedSelectionFixture(value: unknown, { silhouetteDiame
     const information = Object.assign(f.document.createElement("section"), {
         querySelector: (selector: string): FixtureElement | null => selector === 'form[data-dataset-form]' ? form : null,
     });
-    lensRoot.querySelectorAll = selector => selector === 'button[name="dataset"]' ? buttons : [];
+    datasetRoot.querySelectorAll = selector => selector === 'button[name="dataset"]' ? buttons : [];
     settingsRoot.querySelectorAll = selector => selector === 'input[name], button[name]' ? [...inputs.values()] : [];
     f.document.querySelector = selector => selector === ".object-information-panel" ? information
         : selector === ".object-settings" ? settingsRoot : null;

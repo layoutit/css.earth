@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-volume-provenance@1",
+  "schema": "cssearth-volume-provenance@2",
   "title": "HD 181327 debris ring: JWST coronagraph imaging given the depth of the fitted ring",
   "kind": "observed-sky-image-on-fitted-envelope",
   "authors": [],
@@ -57,7 +57,7 @@
   ],
   "paper": [
     {
-      "lens": "reflectance",
+      "dataset": "reflectance",
       "citation": "Gáspár et al. (2026), arXiv:2608.27437",
       "url": "https://arxiv.org/abs/2608.27437"
     }
@@ -74,7 +74,7 @@
       "halfUnits": 300,
       "slabs": 105
     },
-    "lenses": {
+    "datasets": {
       "reflectance": {
         "bands": [
           {

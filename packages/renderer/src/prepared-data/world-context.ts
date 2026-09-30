@@ -109,7 +109,7 @@ export interface PreparedVolumeOpacityProfile {
 /** The world context the main thread holds: every body, placement and camera
  * fact, with each orbit reduced to `PreparedContextOrbit`. */
 export interface PreparedWorldContext {
-  readonly schema: 'cssearth-world-context@1' | 'cssearth-world-context-summary@1';
+  readonly schema: 'cssearth-world-context@2' | 'cssearth-world-context-summary@1';
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
@@ -129,7 +129,7 @@ export interface PreparedWorldContext {
 }
 /** The full prepared file: orbit paths and detail levels for the planner worker and build tools. */
 export interface PreparedWorldContextGeometry extends PreparedWorldContext {
-  readonly schema: 'cssearth-world-context@1';
+  readonly schema: 'cssearth-world-context@2';
   readonly bodies: readonly PreparedContextGeometryBody[];
   /** Each classification framed by its members' prepared positions. */
   readonly classificationViews?: Readonly<Record<string, NonNullable<PreparedContextBody['systemView']>>>;
@@ -288,11 +288,11 @@ export function parsePreparedWorldContextSummary(value: unknown): PreparedWorldC
 /** Either file, by its schema: runtimes that hold the plan accept the summary or the full context. */
 export function parsePreparedWorldContextPlan(value: unknown): PreparedWorldContext {
   const schema = value && typeof value === 'object' ? (value as { schema?: unknown }).schema : undefined;
-  return parseContext(value, schema === 'cssearth-world-context@1');
+  return parseContext(value, schema === 'cssearth-world-context@2');
 }
 /** A plan whose orbits carry their paths, for the synchronous planner. */
 export function worldContextGeometry(plan: PreparedWorldContext): PreparedWorldContextGeometry {
-  if (plan.schema !== 'cssearth-world-context@1') throw new TypeError('Planning orbits requires the full prepared world context.');
+  if (plan.schema !== 'cssearth-world-context@2') throw new TypeError('Planning orbits requires the full prepared world context.');
   return plan as PreparedWorldContextGeometry;
 }
 type OrbitGeometryCandidate = Omit<PreparedContextOrbitGeometry, 'vertexCount' | 'fullTrail' | 'trailModel'> & { readonly trailModel?: unknown };
@@ -476,7 +476,7 @@ export function decodeWorldOrbits(plan: PreparedWorldContext, banks: ReadonlyMap
     return Object.freeze({ ...body, orbit });
   });
   const { orbitBanks: _pins, ...rest } = plan;
-  return Object.freeze({ ...rest, schema: 'cssearth-world-context@1', bodies: Object.freeze(bodies) });
+  return Object.freeze({ ...rest, schema: 'cssearth-world-context@2', bodies: Object.freeze(bodies) });
 }
 function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
   const orbit = record(value, 'body orbit', ['centerBodyId', 'centerPositionM', 'vertexCount', 'fullTrail', 'bounds', 'lod', 'closed', 'displayExtentAu']);
@@ -494,9 +494,9 @@ function parseSummaryOrbit(value: unknown): PreparedContextOrbit {
 }
 function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
   if (value && typeof value === 'object' && validatedContexts.has(value) &&
-      (!geometry || (value as PreparedWorldContext).schema === 'cssearth-world-context@1')) return value as PreparedWorldContext;
+      (!geometry || (value as PreparedWorldContext).schema === 'cssearth-world-context@2')) return value as PreparedWorldContext;
   const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'classificationViews', 'orbitBanks', 'camera', 'volume', 'stars', 'system', 'sky']);
-  const schema = geometry ? 'cssearth-world-context@1' : 'cssearth-world-context-summary@1';
+  const schema = geometry ? 'cssearth-world-context@2' : 'cssearth-world-context-summary@1';
   if (input.schema !== schema) throw new TypeError('Unsupported prepared world context.');
   if (!geometry && input.classificationViews !== undefined) throw new TypeError('The world context summary carries no classification views.');
   if (geometry && input.orbitBanks !== undefined) throw new TypeError('The full world context carries its orbit paths, not bank pins.');

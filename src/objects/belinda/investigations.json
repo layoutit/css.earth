@@ -30,7 +30,7 @@
       "subject": "Keck spectral photometry",
       "status": "deferred",
       "finding": "The 2023 study adopts the published axes. Integrated spectra do not create a spatial color or composition map.",
-      "revisitWhen": "A spatially resolved Belinda measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "revisitWhen": "A spatially resolved Belinda measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/belinda/source/manifest.json",
         "https://www.sciencedirect.com/science/article/pii/S0019103522004237"
@@ -41,7 +41,7 @@
       "subject": "JWST/NIRCam",
       "status": "excluded",
       "finding": "The official Uranus image identifies inner moons as unresolved points. It does not provide a body texture.",
-      "revisitWhen": "A spatially resolved Belinda measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "revisitWhen": "A spatially resolved Belinda measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/belinda/source/manifest.json",
         "https://science.nasa.gov/asset/webb/uranus-close-up-nircam-image/"

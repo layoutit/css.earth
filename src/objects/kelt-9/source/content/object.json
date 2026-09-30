@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "kelt-9",
   "displayName": "KELT-9",
@@ -60,15 +60,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star, brighter and bluer at the poles from a fit to TESS transits; darkening toward the edge from a model atmosphere.",
-        "thumbnail": "kelt-9-lens-color.webp",
+        "thumbnail": "kelt-9-dataset-color.webp",
         "surface": "kelt-9-surface-color@2x.webp",
         "poles": "kelt-9-poles-color@2x.webp",
         "source": {

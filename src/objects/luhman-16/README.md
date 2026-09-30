@@ -10,7 +10,7 @@ Luhman 16 A is a brown dwarf of 35.4 Jupiter masses (spectral type L7.5), 2 pars
 - **Colour:** The colour of Faherty et al. (2014, ApJ 790, 90)'s resolved Magellan/MagE optical spectrum of Luhman 16 A (2013-04-26), from the SIMPLE archive (BSD-3-Clause), through the CIE 1931 2° observer: sRGB (255, 47, 150), #ff2f96. Sodium and potassium absorb most of the yellow and green light, which leaves red with a little violet. The spectrum starts at 400 nm (380–400 nm is held at its first value, where the observer adds little). Below 650 nm the dwarf is so faint that single pixels have a signal-to-noise ratio near 1. Moving the whole spectrum one standard error down or up gives #ff005e to #ff52c6, from red-pink to lilac.
 - **Rotation:** unmeasured here. The display axis is celestial north in the plane of the sky (`source/preparation/rotation.json`).
 
-Catalogue colour: #ff2f96, the colour lens's prepared colour.
+Catalogue colour: #ff2f96, the colour dataset's prepared colour.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law (u1 0.46, u2 0) de Regt et al. (2025), The ESO SupJup Survey VII, A&A 696, A225 fit to this star (VLT/CRIRES+ J1226 setting (1.1-1.4 um); not a visible band). Gravity: log g from the mass and radius in packages/astronomy/data/bodies/luhman-16.json: 4.935.
 

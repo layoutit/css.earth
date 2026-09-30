@@ -3,7 +3,7 @@
  * Phase one writes each body's astronomy record, with its orbit from the spec's route (orbit.mts); the astronomy package is then
  * rebuilt, because the hosted-planet scaffold places the body with the package's own orbit code. Phase two writes the package:
  * the scaffold's shape-only planet (lit by its star, or glowing with its own heat when a temperature is cited), or, for a
- * companion star, the same colour lens a placed star has (lens.mts), from a Planck spectrum at its cited temperature. */
+ * companion star, the same colour dataset a placed star has (dataset.mts), from a Planck spectrum at its cited temperature. */
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -12,11 +12,11 @@ import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { citedName, isCollaboration, type Archive, type Publication } from './archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
-import { bindInputs, installColorLens, json, type PackageFiles } from './lens.mts';
+import { bindInputs, installColorDataset, json, type PackageFiles } from './dataset.mts';
 import { quoteSource } from './prose.mts';
 import { writeLedger } from './ledger.mts';
-import { hostLightOf, installBandColorLens, installHostLight, installThermalLens, lensMarkerEntry, thermalFromArchive } from './planet-lenses.mts';
-import { installPhaseCurveLens } from './phase-curve-lens.mts';
+import { hostLightOf, installBandColorDataset, installHostLight, installThermalDataset, datasetMarkerEntry, thermalFromArchive } from './planet-datasets.mts';
+import { installPhaseCurveDataset } from './phase-curve-dataset.mts';
 import { installPlanetCharts } from './planet-charts.mts';
 import { chooseLimb } from './limb.mts';
 import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
@@ -137,21 +137,21 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     const logg = fixed(Math.log10(record.mass.value * GM_SUN * 1e15 / (radius.value * SOLAR_RADIUS_KM * 1e5) ** 2), 2);
     const limb = await chooseLimb(id, t!.value, logg, archive);
     const color = planckChoice(id, t!, spec.colorReason ?? 'The archives do not resolve this companion from its star', [], cmf);
-    const installed = await installColorLens(files, id, color, limb);
+    const installed = await installColorDataset(files, id, color, limb);
     colorHex = installed.hex; limbSentence = limb.sentence;
     const measurements = read(`${s}/measurements.json`);
     Object.assign(measurements, { surfaceGravityLogg: logg, surfaceGravitySource: `log g from the mass and radius in packages/astronomy/data/bodies/${id}.json, log10(GM/R^2) in cgs, rounded to two decimals` });
     files.set(`${s}/measurements.json`, json(measurements));
   }
-  // A planet's colour from what is measured (planet-lenses.mts): its dayside temperature in eclipse, else its star's light on the gray.
+  // A planet's colour from what is measured (planet-datasets.mts): its dayside temperature in eclipse, else its star's light on the gray.
   let colorLine: string | undefined, colorCredit: string | undefined;
   if (!star && spec.photometry) {
-    const installed = await installBandColorLens(files, id, spec.name, spec.photometry);
+    const installed = await installBandColorDataset(files, id, spec.name, spec.photometry);
     colorHex = installed.hex; colorCredit = installed.credit;
     colorLine = `**Colour.** Infrared false colour from the flux densities ${spec.photometry.source.citation} publishes (${spec.photometry.source.locator}): ${colorHex}. ${spec.photometry.displayRangeSource}`;
   } else if (!star && spec.thermal) {
     const { csv } = await thermalFromArchive(archive, 'archive' in spec.orbit ? spec.orbit.planetName ?? spec.name : spec.name);
-    const installed = await installThermalLens(files, id, spec.name, spec.thermal, csv);
+    const installed = await installThermalDataset(files, id, spec.name, spec.thermal, csv);
     colorHex = installed.hex; colorCredit = installed.credit;
     colorLine = `**Colour.** A black body at the ${spec.thermal.temperatureK.toLocaleString('en-US')} K dayside brightness temperature measured in secondary eclipse at ${spec.thermal.wavelengthMicrometres} µm (${spec.thermal.source}): ${colorHex}. Chosen from the archive's emission rows by rule: ${spec.thermal.chosen}. Reflected starlight is not included.`;
   } else if (!star && !t) {
@@ -171,11 +171,11 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     { id: 'radius', label: 'Radius', value: `${radiusValue}${model(radius)}`, source: fact(radius.url, radius.source, 'source/measurements.json', 'radiusKm; radiusSource') },
     { id: 'period', label: 'Year', value: periodValue, source: fact(record.orbitCitation.url, record.orbitCitation.label, 'source/measurements.json', 'orbitalPeriodDays; orbitalPeriodSource') },
     { id: 'mass', label: 'Mass', value: record.mass.unmeasured ? 'Not measured' : `${record.mass.limit ? 'Under ' : ''}${massValue}${model(record.mass)}`, source: fact(record.mass.url, record.mass.source, 'source/measurements.json', 'massSource') }];
-  // A planet still on the shape lens: its notes say so; a thermal, band-colour or host-lit lens wrote its own.
+  // A planet still on the shape dataset: its notes say so; a thermal, band-colour or host-lit dataset wrote its own.
   if (!star && !spec.photometry && !spec.thermal) {
-    const control = content.lenses.controls[0];
+    const control = content.datasets.controls[0];
     // The base note replaces the scaffold's TODO; host light, when installed, adds its sentence after it.
-    const hostLit = String(control.notes).match(/ The gray takes the colour of [^.]*'s light, as its colour lens measures it\./u)?.[0] ?? '';
+    const hostLit = String(control.notes).match(/ The gray takes the colour of [^.]*'s light, as its colour dataset measures it\./u)?.[0] ?? '';
     control.notes = `No image or colour of ${spec.name} is published: the sphere has its measured size, and the gray marks an unresolved surface. ${t ? 'It glows with its own heat, so no starlight falls on it.' : "The lighting is its own star's, at the measured orbit."}${hostLit}`;
   }
   content.provenance.physical.credit = `Radius from ${radius.source}; mass from ${record.mass.source}; orbit from ${record.orbitCitation.text}`;
@@ -191,10 +191,10 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     text[key].sources = [{ catalogueId: paper.id, url: spec.paper.url, label: label(spec.paper.url, spec.paper.credit), checked: CHECKED, ...(spec.text ? { locator: spec.text.locator } : { locator: TODO, quote: TODO }) }, ...quoteSource(spec.text?.quotes, key, publications)];
   }
   files.set(`${o}/text.json`, json(text));
-  // Heat maps from published phase-curve fits join the colour lens, which stays the default (phase-curve-lens.mts).
+  // Heat maps from published phase-curve fits join the colour dataset, which stays the default (phase-curve-dataset.mts).
   const heat: { readonly line: string; readonly entry: NonNullable<HostedSpec['phaseCurves']>[number] }[] = [];
   for (const entry of star ? [] : spec.phaseCurves ?? []) {
-    const { minimum, maximum, hottest } = await installPhaseCurveLens(files, id, spec.name, entry);
+    const { minimum, maximum, hottest } = await installPhaseCurveDataset(files, id, spec.name, entry);
     heat.push({ entry, line: `**${entry.label} heat map.** ${entry.credit}'s published fit to ${entry.observed} ([record](source/${entry.path})), drawn as a map of longitude without refitting: ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} K, hottest ${hottest === 0 ? 'at noon' : `${Math.abs(hottest)}° ${hottest > 0 ? 'east' : 'west'} of noon`}. It has no north-south information.` });
   }
   const manifest = read(`${s}/manifest.json`);
@@ -210,13 +210,15 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
   files.set(`${o}/NOTICE.md`, [`# ${spec.name} credits`, `Radius: ${radius.source}. Mass: ${record.mass.source}.${t ? ` Temperature: ${t.source}.` : ''}`,
     `Orbit: ${record.orbitCitation.text}${'whereistheplanet' in spec.orbit ? '; the posterior distributed by whereistheplanet (Wang et al. 2021)' : ''}.`,
     ...star ? ['Colour: a Planck spectrum at the cited temperature through the CIE 1931 2° colour-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).'] : colorCredit ? [colorCredit] : []].join('\n\n') + '\n');
-  files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '', spec.text ? `${spec.text.introduction} This account was drafted from ${spec.paper.credit}'s values; the sections below are the data's own.` : `${spec.name} is a ${hosted} of ${record.hostId}. ${TODO}: what it is and why it is here, from ${spec.paper.credit}.`, '',
+  const knownProblems = [...record.todo.map(item => `- **Orbit convention.** ${item}.`),
+    ...spec.text ? spec.text.quotes ? [`- **Quoted text.** The introduction quotes sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}) verbatim, CC BY-SA 4.0.`] : [] : [`- ${TODO}: anything else not shown and why.`]];
+  files.set(`${o}/README.md`, [`# ${spec.name}`, '', '## Sources', '', spec.text ? `${spec.text.introduction} The introduction is generated from ${spec.paper.credit}'s published values; the sections below are the data's own.` : `${spec.name} is a ${hosted} of ${record.hostId}. ${TODO}: what it is and why it is here, from ${spec.paper.credit}.`, '',
     `**Size and mass.** ${String(record.body.physicalNotes)}`, '', `**Orbit.** ${Object.values(record.orbit.sources).join(' ')}`, '',
     ...star ? [`**Colour.** A Planck spectrum at ${t!.value.toLocaleString('en-US')} K: ${colorHex}, because ${(spec.colorReason ?? 'The archives do not resolve this companion from its star').replace(/^[A-Z](?=[a-z])/u, c => c.toLowerCase())}. ${limbSentence ? `The disc is ${limbSentence}.` : ''}`, ''] : colorLine ? [colorLine, ''] : [],
     ...heat.flatMap(({ line }) => [line, '']),
     '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/${id}.json).`, '',
-    ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '', '## Known problems', '',
-    ...record.todo.map(item => `- **Orbit convention.** ${item}.`), ...spec.text ? [`- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person${spec.text.quotes ? `; their quotes are sentences of the Wikipedia article "${spec.text.quotes.title}" (revision ${spec.text.quotes.revision}), verbatim, CC BY-SA 4.0` : ''}.`] : [`- ${TODO}: anything else not shown and why.`], '',
+    ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the package.`], '',
+    ...knownProblems.length ? ['## Known problems', '', ...knownProblems, ''] : [],
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
   // The Charts tab: the system's orbits and any archive spectra (planet-charts.mts), with their README paragraph.
   if (!star) await installPlanetCharts(files, id, spec.name, { id: record.hostId, name: String((hostBody as { physical?: { name?: unknown } } | undefined)?.physical?.name ?? record.system.replace(/ system$/u, '')) }, archive, undefined, 'archive' in spec.orbit ? spec.orbit.planetName : undefined);
@@ -229,10 +231,10 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     ...star && t ? [{ id: 'colour', subject: 'Colour', evidence: [t.url], finding: `A Planck spectrum at ${t.value} K from ${t.source}: ${colorHex}, because ${(spec.colorReason ?? 'The archives do not resolve this companion from its star').replace(/^[A-Z](?=[a-z])/u, c => c.toLowerCase())}.${limbSentence ? ` The disc is ${limbSentence}.` : ''}` }]
       : spec.photometry ? [{ id: 'colour', subject: 'Colour', evidence: [spec.photometry.source.url], finding: String(colorLine).replace('**Colour.** ', '') }]
       : spec.thermal ? [{ id: 'colour', subject: 'Colour', evidence: [spec.thermal.url], finding: String(colorLine).replace('**Colour.** ', '') }] : [],
-    ...heat.map(({ entry, line }) => ({ id: entry.lens, subject: `${entry.label} heat map`, evidence: [entry.url], finding: line.replace(/^\*\*[^*]+\*\* /u, '') })),
+    ...heat.map(({ entry, line }) => ({ id: entry.dataset, subject: `${entry.label} heat map`, evidence: [entry.url], finding: line.replace(/^\*\*[^*]+\*\* /u, '') })),
   ]);
-  // A planet's marker is its lens drawn as a disc (the companion star's comes from its colour lens, lens.mts).
-  if (!star) lensMarkerEntry(files, id);
+  // A planet's marker is its dataset drawn as a disc (the companion star's comes from its colour dataset, dataset.mts).
+  if (!star) datasetMarkerEntry(files, id);
   bindInputs(files, id);
   // One marker for everything a person still writes.
   for (const [path, value] of files) if (typeof value === 'string' && value.includes(HOSTED_TODO)) files.set(path, value.replaceAll(HOSTED_TODO, TODO));

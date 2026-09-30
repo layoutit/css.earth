@@ -1,8 +1,8 @@
 {
-  "schema": "cssearth-spectral-material-variants@1",
+  "schema": "cssearth-spectral-material-variants@2",
   "namespace": "saturn",
   "publicPrefix": "/scenes/saturn/",
-  "sourceSubdirectory": "lenses",
+  "sourceSubdirectory": "datasets",
   "parameters": {
     "bodyWidth": 2880,
     "bodyHeight": 1440,
@@ -27,7 +27,7 @@
       "ringless-no-shadows"
     ]
   },
-  "lenses": [
+  "datasets": [
     {
       "id": "ultraviolet",
       "label": "Ultraviolet",
@@ -201,17 +201,17 @@
     }
   ],
   "descriptor": {
-    "schema": "csssaturn-prepared-lenses@1",
-    "defaultLens": "normal",
+    "schema": "csssaturn-prepared-datasets@1",
+    "defaultDataset": "normal",
     "runtimeFilters": false,
     "runtimeRasterization": false,
     "controls": [
       {
         "id": "normal",
-        "materialLens": "normal",
+        "materialDataset": "normal",
         "label": "Normal",
         "shortLabel": "RGB",
-        "thumbnailUrl": "/scenes/saturn/saturn-lens-normal.webp",
+        "thumbnailUrl": "/scenes/saturn/saturn-dataset-normal.webp",
         "surfaceUrl": "/scenes/saturn/saturn-surface-body.jpg",
         "polesUrl": "/scenes/saturn/saturn-poles.webp",
         "ringUrl": "/scenes/saturn/saturn-rings.webp",
@@ -225,7 +225,7 @@
         "shortLabel": "CUT",
         "thumbnailUrl": "/scenes/saturn/saturn-view-interior.webp",
         "view": "interior",
-        "materialLens": "normal",
+        "materialDataset": "normal",
         "interiorMaterialUrl": "/scenes/saturn/saturn-interior-atmosphere.webp",
         "qualification": "schematic source-backed interior using the normal visible-color material"
       }
@@ -260,7 +260,7 @@
     "rings2x": "saturn-rings@2x.webp",
     "orbitMaterial": "saturn-orbit-material.webp",
     "interiorAtmosphere": "saturn-interior-atmosphere.webp",
-    "normalThumbnail": "saturn-lens-normal.webp"
+    "normalThumbnail": "saturn-dataset-normal.webp"
   },
   "detailCarrierUrl": "/scenes/saturn/saturn-surface.jpg",
   "scalar": {

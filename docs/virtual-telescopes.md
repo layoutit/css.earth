@@ -235,7 +235,7 @@ The public chain has four supported transitions:
 | Qualified native delivery | Supported image, spectrum, band, aperture or feature export | The selectors listed by `outputs` |
 | Exported 2D measurement | Projected body map | Explicit pinned navigation |
 | Projected body map | Standalone interactive sphere | An embeddable standard body package |
-| Existing prepared point field, density volume or volume lens bank | Renderer handoff | None |
+| Existing prepared point field, density volume or volume dataset bank | Renderer handoff | None |
 
 The command coordinates the existing archive, qualification, Astropy, PlanetMapper and renderer
 owners. It does not imply that every observation can traverse every transition. Discovery is
@@ -1141,7 +1141,7 @@ Output ownership and remaining adapters:
 | Feature map | Qualified bins plus feature and bracketing continuum windows | Executable continuum-subtracted wavelength integral; signed residual, no detection claim |
 | Surface map | Verified 2D measurement and explicit navigation; achieved resolution may remain unknown | PlanetMapper-backed `telescope export --output body-map`; scientific publication remains `body-map-publication.mts` |
 | Body sphere | Structurally verified body-map bundle and an embeddable standard sphere | Standalone HTML from `telescope export --output sphere`, using the existing PolyCSS renderer |
-| 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing point-field, density-volume and volume-lens-bank owners; `--output points`, `volume` or `volume-lens-bank` packages a physical `object.json` |
+| 3D scatter/volume | Explicit coordinate frame, units and measured or explicitly modeled depth | Existing point-field, density-volume and volume-dataset-bank owners; `--output points`, `volume` or `volume-dataset-bank` packages a physical `object.json` |
 
 `telescope outputs ARTIFACT.json` validates current telescope artifact pins and exposes this table as an
 executable transition: delivery to scientific output, image output to registered body map,
@@ -1224,7 +1224,7 @@ its projection dependency is pyproj/PROJ. Astropy owns the numerical FITS
 output and Matplotlib the figure. The sphere is one standalone HTML file,
 using the target's existing standard sphere—the same lane as Mercury. The
 prepared mesh, camera, facing/depth bindings and physical frame are reused;
-the shared raster lane packs the measurement into a surface lens. The exporter
+the shared raster lane packs the measurement into a surface dataset. The exporter
 serializes the scene and compiles the existing native CSS camera ahead of time.
 CSS and base64 images are embedded; the document contains no script elements
 and prohibits both scripts and network
@@ -1255,7 +1255,7 @@ mobile hardware are not qualified. Unsupported prepared camera bindings are
 refused instead of producing an incomplete view.
 
 The following browser check is historical. Its helper remains in git history
-and is absent from this checkout:
+and is absent from this checkout. [Original helper](https://github.com/layoutit/cssEarth/blob/b64711a636ec365c5433378944965750a6df08bc/tests/experiments/native-scroll/sphere-browser.mts) (now retired; surviving code is in `labs/experiments/native-scroll/`):
 
 ```sh
 node tests/experiments/native-scroll/sphere-browser.mts europa-sphere/sphere.html mercury-sphere/sphere.html

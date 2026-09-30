@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/luhman-16b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "luhman-16b-surface-{id}{suffix}.webp",
-      "thumbnail": "luhman-16b-lens-{id}.webp",
+      "thumbnail": "luhman-16b-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
@@ -37,7 +37,7 @@
     {
       "id": "brightness",
       "output": "luhman-16b-surface-{id}{suffix}.webp",
-      "thumbnail": "luhman-16b-lens-{id}.webp",
+      "thumbnail": "luhman-16b-dataset-{id}.webp",
       "source": "science/ureshino-2026/posterior_mean_chip1.npy",
       "falseColor": true,
       "science": {
@@ -76,7 +76,7 @@
     {
       "id": "uncertainty",
       "output": "luhman-16b-surface-{id}{suffix}.webp",
-      "thumbnail": "luhman-16b-lens-{id}.webp",
+      "thumbnail": "luhman-16b-dataset-{id}.webp",
       "source": "science/ureshino-2026/posterior_var_chip1.npy",
       "falseColor": true,
       "science": {

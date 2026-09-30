@@ -4,7 +4,8 @@
     "incremental": false
   },
   "include": [
-    "cli/**/*.mts"
+    "cli/**/*.mts",
+    "src/delivery/cwebp-bin.d.ts"
   ],
   "exclude": []
 }

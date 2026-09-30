@@ -54,9 +54,7 @@
       "subject": "Cassini clear frames N1644754629_1 and N1644754942_1",
       "status": "included",
       "finding": "The retained close-encounter extension adds the two published-camera views westward of the earlier selection. N1506184171_1 still supplies the coarse far side; emission beyond 70 degrees is withheld to prevent single pixels stretching into long strips.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/calypso/evidence/close-encounters/qualification.json"
-      ]
+      "evidence": []
     },
     {
       "id": "filter-feature-refinement",

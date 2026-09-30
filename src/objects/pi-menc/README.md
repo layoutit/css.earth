@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is one of 3 planets known around HD 39091. Its orbit and size follow Kunovac Hod&#x17E;ić et al. 2021's fit, the archive's default. This account was drafted from Kunovac Hod&#x17E;i&#x107; et al. 2021's values; the sections below are the data's own.
+It is one of 3 planets known around HD 39091. Its orbit and size follow Kunovac Hod&#x17E;ić et al. 2021's fit, the archive's default. The introduction is generated from Kunovac Hod&#x17E;i&#x107; et al. 2021's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.1801145 Jupiter radii from Kunovac Hod&#x17E;ić et al. 2021 (2021MNRAS.502.2893K), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract): 12,876.7 km at 71,492 km per Jupiter radius. GM from the mass 0.01321468 Jupiter masses (Harada et al. 2025 (2025AJ....170..343H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170..343H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -13,10 +13,5 @@ It is one of 3 planets known around HD 39091. Its orbit and size follow Kunovac 
 ## Evidence
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/pi-menc.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

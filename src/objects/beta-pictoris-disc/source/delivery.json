@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-nebula-delivery@1",
+  "schema": "cssearth-nebula-delivery@2",
   "id": "beta-pictoris-disc",
   "method": "density-grid",
   "request": {
@@ -30,7 +30,7 @@
   },
   "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
   "description": "The edge-on debris disc around Beta Pictoris in two views: in visible light from Hubble's STIS coronagraph, 16 to 82 au from the star, and at 2.1 and 4.1 micrometres from JWST/NIRCam behind its MASK335R coronagraph on 21 March 2025 (programme 4758), 49 to 126 au. One unit is one astronomical unit; the disc's depth is reconstructed from each image by assuming it is symmetric about its own axis, not measured.",
-  "defaultLens": "visible",
+  "defaultDataset": "visible",
   "framingRadiusUnits": 135,
   "attachedTo": "beta-pictoris",
   "acceptedLabResult": "beta-pictoris-disc-density-grids",

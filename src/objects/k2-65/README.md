@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Crossfield et al. 2016. It is also HIP 109656. This account was drafted from Crossfield et al. 2016's values; the sections below are the data's own.
+Its radius and temperature follow Crossfield et al. 2016. It is also HIP 109656. The introduction is generated from Crossfield et al. 2016's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2613211076737129856, parallax 15.847 ± 0.021 mas (63.10 pc). Radius 0.84 +/- 0.12 solar radii from Crossfield et al. 2016, the stellar radius of the default parameter set of K2-65 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract). Mass 0.87 +/- 0.1 solar masses from Crossfield et al. 2016, the stellar mass of the default parameter set of K2-65 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract). Temperature 5,213 K from Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-65 b in the NASA Exoplanet Archive. log g 4.53 from the mass and radius.
 
@@ -12,13 +12,11 @@ Its radius and temperature follow Crossfield et al. 2016. It is also HIP 109656.
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

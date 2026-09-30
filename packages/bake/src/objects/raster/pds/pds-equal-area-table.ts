@@ -132,24 +132,24 @@ export function equalAreaPixel(bands: readonly Band[], longitude: number, latitu
   return band.first + a;
 }
 
-/** Parse the lens and decode its table, for preparation and for tests. */
+/** Parse the dataset and decode its table, for preparation and for tests. */
 export async function loadPdsEqualAreaTable(root: string, value: unknown) {
-  const lens = requireRecord(value, 'pds-equal-area-table lens');
-  const path = requireString(lens.path, 'pds-equal-area-table lens path');
-  const labelPath = requireString(lens.labelPath, `${path} labelPath`);
-  const structurePath = lens.structurePath === undefined ? null : requireString(lens.structurePath, `${path} structurePath`);
+  const dataset = requireRecord(value, 'pds-equal-area-table dataset');
+  const path = requireString(dataset.path, 'pds-equal-area-table dataset path');
+  const labelPath = requireString(dataset.labelPath, `${path} labelPath`);
+  const structurePath = dataset.structurePath === undefined ? null : requireString(dataset.structurePath, `${path} structurePath`);
   for (const file of [path, labelPath, ...(structurePath === null ? [] : [structurePath])]) if (file.startsWith('/') || file.includes('\\') || file.split('/').includes('..')) throw new Error(`${path}: ${file} escapes the source directory.`);
-  if (lens.sampling !== undefined && lens.sampling !== 'nearest') throw new TypeError(`${path}: equal-area pixels require nearest sampling.`);
+  if (dataset.sampling !== undefined && dataset.sampling !== 'nearest') throw new TypeError(`${path}: equal-area pixels require nearest sampling.`);
   const policy: EqualAreaTablePolicy = {
-    datasetId: requireString(lens.datasetId, `${path} datasetId`), productId: requireString(lens.productId, `${path} productId`),
-    column: requireString(lens.column, `${path} column`), columnDescription: requireString(lens.columnDescription, `${path} columnDescription`),
-    ...(lens.errorColumn === undefined ? {} : { errorColumn: requireString(lens.errorColumn, `${path} errorColumn`) }),
-    ...(lens.noData === undefined ? {} : { noData: requireFiniteNumber(lens.noData, `${path} noData`), noDataEvidence: requireString(lens.noDataEvidence, `${path} noDataEvidence`) }),
+    datasetId: requireString(dataset.datasetId, `${path} datasetId`), productId: requireString(dataset.productId, `${path} productId`),
+    column: requireString(dataset.column, `${path} column`), columnDescription: requireString(dataset.columnDescription, `${path} columnDescription`),
+    ...(dataset.errorColumn === undefined ? {} : { errorColumn: requireString(dataset.errorColumn, `${path} errorColumn`) }),
+    ...(dataset.noData === undefined ? {} : { noData: requireFiniteNumber(dataset.noData, `${path} noData`), noDataEvidence: requireString(dataset.noDataEvidence, `${path} noDataEvidence`) }),
   };
   const where = `${path} ${policy.column}`;
   const [label, structure, text] = await Promise.all([labelPath, structurePath ?? labelPath, path].map(file => readFile(resolve(root, file), 'latin1')));
   const table = parsePdsEqualAreaTable(label!, structure!, structurePath === null ? null : basename(structurePath), text!, policy, where);
-  const transform = lens.valueTransform === undefined ? null : requireRecord(lens.valueTransform, `${where} valueTransform`);
+  const transform = dataset.valueTransform === undefined ? null : requireRecord(dataset.valueTransform, `${where} valueTransform`);
   const scale = transform ? requireFiniteNumber(transform.scale, `${where} valueTransform.scale`) : 1;
   const offset = transform ? requireFiniteNumber(transform.offset, `${where} valueTransform.offset`) : 0;
   let mapped = 0, lowest = Infinity, highest = -Infinity;
@@ -167,8 +167,8 @@ export async function loadPdsEqualAreaTable(root: string, value: unknown) {
   };
 }
 
-/** Files the lens reads besides its table, so preparation can require each to be declared in the manifest. */
+/** Files the dataset reads besides its table, so preparation can require each to be declared in the manifest. */
 export function pdsEqualAreaTableDependencies(value: unknown) {
-  const lens = requireRecord(value);
-  return [lens.labelPath, lens.structurePath].filter((path): path is string => typeof path === 'string');
+  const dataset = requireRecord(value);
+  return [dataset.labelPath, dataset.structurePath].filter((path): path is string => typeof path === 'string');
 }

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/chi1-orionis/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "chi1-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "chi1-orionis-lens-{id}.webp",
+      "thumbnail": "chi1-orionis-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
@@ -51,7 +51,7 @@
     {
       "id": "radial-field",
       "output": "chi1-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "chi1-orionis-lens-{id}.webp",
+      "thumbnail": "chi1-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/chi1ori.dat",
       "falseColor": true,
       "science": {
@@ -94,7 +94,7 @@
     {
       "id": "meridional-field",
       "output": "chi1-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "chi1-orionis-lens-{id}.webp",
+      "thumbnail": "chi1-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/chi1ori.dat",
       "falseColor": true,
       "science": {
@@ -137,7 +137,7 @@
     {
       "id": "azimuthal-field",
       "output": "chi1-orionis-surface-{id}{suffix}.webp",
-      "thumbnail": "chi1-orionis-lens-{id}.webp",
+      "thumbnail": "chi1-orionis-dataset-{id}.webp",
       "source": "science/willamo-2022/chi1ori.dat",
       "falseColor": true,
       "science": {

@@ -34,7 +34,7 @@ export function packedRasterSize(recipe: Pick<RasterPageRecipe, 'width' | 'heigh
 }
 
 /** Pages for a recipe whose largest surface would not decode as one image, or null. Every surface of the body shares
- * the plan, so one leaf reads the same page of whichever lens is shown. */
+ * the plan, so one leaf reads the same page of whichever dataset is shown. */
 export function rasterPagePlan(recipe: RasterPageRecipe, density: number): RasterPagePlan | null {
   const scales = recipe.surfaces.map(surface => surface.resolutionScale ?? 1);
   if (!scales.length) return null;

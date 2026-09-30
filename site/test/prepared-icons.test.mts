@@ -32,7 +32,7 @@ test("prepares one source-bound 20px SVG family for sidebar sections", async (co
     "reflectance",
     "temperaturePressure",
     "photometricPhase",
-    "lenses",
+    "datasets",
     "resources",
   ]);
   for (const descriptor of SHELL_ICON_SOURCES.icons) {

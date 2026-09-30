@@ -1,18 +1,18 @@
 ---
 import type { Props as ShellProps } from '../object-shell-types';
 import MaterialSymbol from './MaterialSymbol.astro';
-type Control = NonNullable<ShellProps['lenses']>['controls'][number];
+type Control = NonNullable<ShellProps['datasets']>['controls'][number];
 interface Props {
   objectId: string;
-  lens: Control;
+  dataset: Control;
   members: Control[];
   focus: boolean;
 }
-const { objectId, lens, members, focus } = Astro.props;
-const index = members.findIndex(member => member.id === lens.id);
+const { objectId, dataset, members, focus } = Astro.props;
+const index = members.findIndex(member => member.id === dataset.id);
 ---
 <!-- A sequence plays like a short video over its own map: one segment per step, filled up to the step on screen. -->
-<div class="object-sequence-player" data-sequence-player role="group" aria-label={`${lens.label} steps`}>
+<div class="object-sequence-player" data-sequence-player role="group" aria-label={`${dataset.label} steps`}>
   <div class="object-sequence-track">
     {members.map((member, position) => <button
       class:list={['object-sequence-segment', { 'is-past': position < index }]}
@@ -21,19 +21,19 @@ const index = members.findIndex(member => member.id === lens.id);
       name="dataset"
       value={member.id}
       data-dataset-step={member.id}
-      data-focus-lens={focus ? true : undefined}
+      data-focus-dataset={focus ? true : undefined}
       aria-current={position === index ? 'step' : undefined}
       aria-label={member.step!.label}
       title={member.step!.label}
     ><span class="object-sequence-segment-bar" aria-hidden="true"><span class="object-sequence-segment-fill"></span></span></button>)}
   </div>
   <div class="object-sequence-row">
-    {!focus && <button class="object-lens-play" type="button" data-dataset-play={lens.step!.group} disabled
+    {!focus && <button class="object-dataset-play" type="button" data-dataset-play={dataset.step!.group} disabled
       aria-label="Play sequence" aria-pressed="false" title="Loop through this sequence">
-      <span class="object-lens-play-icon is-play"><MaterialSymbol name="play_arrow" /></span>
-      <span class="object-lens-play-icon is-pause"><MaterialSymbol name="pause" /></span>
+      <span class="object-dataset-play-icon is-play"><MaterialSymbol name="play_arrow" /></span>
+      <span class="object-dataset-play-icon is-pause"><MaterialSymbol name="pause" /></span>
     </button>}
-    <span class="object-sequence-label">{lens.step!.label}</span>
+    <span class="object-sequence-label">{dataset.step!.label}</span>
     <span class="object-sequence-count">{index + 1}/{members.length}</span>
   </div>
 </div>

@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Bonfanti et al. 2024. This account was drafted from Bonfanti et al. 2024's values; the sections below are the data's own.
+Its radius and temperature follow Bonfanti et al. 2024. The introduction is generated from Bonfanti et al. 2024's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 3767281845873242112, parallax 45.397 ± 0.030 mas (22.03 pc). Radius 0.38 +/- 0.012 solar radii from Bonfanti et al. 2024, the stellar radius of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract). Mass 0.381 +/- 0.024 solar masses from Bonfanti et al. 2024, the stellar mass of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract). Temperature 3,358 K from Bonfanti et al. 2024, the stellar temperature of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive. log g 4.86 from the mass and radius.
 
@@ -12,13 +12,12 @@ Its radius and temperature follow Bonfanti et al. 2024. This account was drafted
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person; their quotes are sentences of the Wikipedia article "LTT 3780" (revision 1370781541), verbatim, CC BY-SA 4.0.
+- **Quoted text.** The introduction quotes sentences of the Wikipedia article "LTT 3780" (revision 1370781541) verbatim, CC BY-SA 4.0.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

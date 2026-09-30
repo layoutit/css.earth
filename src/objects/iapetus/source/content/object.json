@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "iapetus",
   "displayName": "Iapetus",
@@ -74,9 +74,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "labels": {
       "normal": "Monochrome",
       "enhanced": "Enhanced color",
@@ -88,7 +88,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "iapetus-lens-normal.webp",
+        "thumbnail": "iapetus-dataset-normal.webp",
         "surface": "iapetus-normal@2x.webp",
         "poles": "iapetus-poles-normal@2x.webp",
         "source": {
@@ -101,7 +101,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "thumbnail": "iapetus-lens-enhanced.webp",
+        "thumbnail": "iapetus-dataset-enhanced.webp",
         "surface": "iapetus-enhanced@2x.webp",
         "poles": "iapetus-poles-enhanced@2x.webp",
         "source": {
@@ -113,7 +113,7 @@
       {
         "id": "infrared",
         "label": "Infrared",
-        "thumbnail": "iapetus-lens-infrared.webp",
+        "thumbnail": "iapetus-dataset-infrared.webp",
         "surface": "iapetus-infrared@2x.webp",
         "poles": "iapetus-poles-infrared@2x.webp",
         "source": {
@@ -128,7 +128,7 @@
       {
         "id": "ice-absorption",
         "label": "Ice absorption",
-        "thumbnail": "iapetus-lens-ice-absorption.webp",
+        "thumbnail": "iapetus-dataset-ice-absorption.webp",
         "surface": "iapetus-ice-absorption@2x.webp",
         "poles": "iapetus-poles-ice-absorption@2x.webp",
         "source": {
@@ -183,7 +183,7 @@
       {
         "id": "temperature",
         "label": "Temperature",
-        "thumbnail": "iapetus-lens-temperature.webp",
+        "thumbnail": "iapetus-dataset-temperature.webp",
         "surface": "iapetus-temperature@2x.webp",
         "poles": "iapetus-poles-temperature@2x.webp",
         "source": {

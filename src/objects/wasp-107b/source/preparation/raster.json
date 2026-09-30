@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/wasp-107b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "wasp-107b-surface-{id}{suffix}.webp",
-      "thumbnail": "wasp-107b-lens-{id}.webp",
+      "thumbnail": "wasp-107b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc49e, the colour lens of wasp-107 (src/objects/wasp-107/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc49e, the colour dataset of wasp-107 (src/objects/wasp-107/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "wasp-107",
           "srgb": "#ffc49e",
-          "source": "the colour lens of wasp-107 (src/objects/wasp-107/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of wasp-107 (src/objects/wasp-107/source/photometry/stellar-color.json)"
         }
       }
     }

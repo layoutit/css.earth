@@ -113,8 +113,15 @@ export function withLeafBoxRecords<D extends Definition>(definition: D): D {
   let properties = tree.properties;
   const constant = (node: TreeNode, index: number): TreeNode => {
     // A leaf the bindings never measured (a hidden cutaway) reads the factor's fallback, 1, and no step or outset ever
-    // reaches it: its values are constants, written as such.
-    const style = staticSizes(node.style);
+    // reaches it: its values are constants, written as such. A constant atlas size set after the style overrides the
+    // style's (Saturn's material leaves shrink their frame box to their tile), so it folds in as the leaf's own length.
+    const sizes = node.properties.filter(id => /^--polycss-atlas-(?:width|height)$/.test(tree.properties[id]!.name) && !tree.properties[id]!.value.includes('var('));
+    let style = staticSizes(node.style);
+    for (const id of sizes) {
+      const { name, value } = tree.properties[id]!, length = name === '--polycss-atlas-width' ? 'width' : 'height';
+      style = `${withoutDeclarations(style, [length])}${value ? `${length}:${value};` : ''}`;
+    }
+    if (sizes.length) node = { ...node, properties: node.properties.filter(id => !sizes.includes(id)) };
     if (!node.properties.some(id => /var\(--(?:leaf-box|surface-seam-outset)\b/.test(tree.properties[id]!.value))) return style === node.style ? node : { ...node, style };
     // A leaf the seam outset reaches but no step does (a body without measured leaf boxes): its record, box factor 1.
     if (seam && node.properties.some(id => tree.properties[id]!.value.includes(`var(${SURFACE_SEAM_OUTSET_PROPERTY}`))) return leafRecord(node, index, undefined, seamBoxes);

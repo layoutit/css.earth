@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "smc",
   "name": "Small Magellanic Cloud",
-  "defaultLens": "smc-horalek-wide",
+  "defaultDataset": "smc-horalek-wide",
   "bank": {
-    "path": "src/objects/smc/prepared/lenses.json"
+    "path": "src/objects/smc/prepared/datasets.json"
   },
   "recipes": [
     {
@@ -39,7 +39,7 @@
     "sky-registration"
   ],
   "inputEvidence": [],
-  "lenses": [
+  "datasets": [
     {
       "id": "smc-horalek-wide",
       "label": "Horálek optical",

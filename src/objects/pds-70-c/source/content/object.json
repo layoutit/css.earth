@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "pds-70-c",
   "displayName": "PDS 70 c",
@@ -74,15 +74,15 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "shape",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
     "controls": [
       {
         "id": "shape",
         "label": "Shape",
         "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
-        "thumbnail": "pds-70-c-lens-shape.webp",
+        "thumbnail": "pds-70-c-dataset-shape.webp",
         "surface": "pds-70-c-surface-shape@2x.webp",
         "poles": "pds-70-c-poles-shape@2x.webp",
         "source": {

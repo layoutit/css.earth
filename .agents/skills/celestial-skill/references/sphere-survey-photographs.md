@@ -1,9 +1,9 @@
 # SPHERE survey photographs
 
 This recipe photographs a main-belt asteroid from the VLT/SPHERE imaging survey
-of Vernazza et al. (2021), using the survey's deconvolved ZIMPOL frames. The lens
+of Vernazza et al. (2021), using the survey's deconvolved ZIMPOL frames. The dataset
 ships on the survey's own comparison figure, as the
-[rule for ground-based lenses](../../../../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md#observer-computed-cameras)
+[rule for ground-based datasets](../../../../packages/bake/src/objects/layers/terrestrial/surface-observations/README.md#observer-computed-cameras)
 explains. Two commands do the work; Iris and Hebe are the worked examples.
 
 ## Before you start
@@ -15,7 +15,7 @@ explains. Two commands do the work; Iris and Hebe are the worked examples.
   this route.
 - Work in a dedicated worktree.
 
-## Which apparitions a lens can cast
+## Which apparitions a dataset can cast
 
 The deconvolved frames state no unit, and their scale changes between
 apparitions: Kleopatra's 2017 frames total about 3 million, its 2018 frames
@@ -31,15 +31,15 @@ apparitions, so their second apparitions stay out.
 node packages/bake/cli/sphere-survey-apparitions.mts [<id> …]
 ```
 
-This prints, for every shipped survey lens or the ones named, each apparition's
+This prints, for every shipped survey dataset or the ones named, each apparition's
 frames, sub-observer latitudes and distance, the share of the surface it would
 add, and the display samples it shares with a cast frame. Beside them it prints
-the surface the lens's own frames cover, from geometry, next to the prepared
-lens's measured coverage: that pair shows how far the geometry can be trusted.
+the surface the dataset's own frames cover, from geometry, next to the prepared
+dataset's measured coverage: that pair shows how far the geometry can be trusted.
 
-![Lens maps of the twelve bodies with a linked apparition, one apparition above, all linked apparitions below](sphere-survey-apparitions.webp)
+![Dataset maps of the twelve bodies with a linked apparition, one apparition above, all linked apparitions below](sphere-survey-apparitions.webp)
 
-Above, each body's lens map with one apparition (top) and with every linked one
+Above, each body's dataset map with one apparition (top) and with every linked one
 (bottom), and the measured share of the surface photographed. The geometry
 decides only which apparitions to try. Daphne's 2017 frames were predicted to
 share 193 samples with its 2018 frames, but the fit found at most 59 in the
@@ -54,7 +54,7 @@ node packages/bake/cli/sphere-survey-setup.mts <id>
 ```
 
 This writes nothing in the package. In `output/sphere-survey/<id>/` it builds a
-copy of the package's `source/` with the lens added, measures it, and writes
+copy of the package's `source/` with the dataset added, measures it, and writes
 `setup.json`, `evidence/published-comparison.json` and the evidence image. Along
 the way it:
 
@@ -62,9 +62,9 @@ the way it:
   by its Horizons number, and reads the frame time printed over each column
   from the figure's pixels;
 - lists the release's frames, and marks a column the release lacks as having no
-  lens frame;
+  dataset frame;
 - casts every apparition whose level the level fit can place. The apparition
-  the figure shows most anchors the lens. Another joins when one of its frames
+  the figure shows most anchors the dataset. Another joins when one of its frames
   shares at least the fit's 128 display samples with a frame already cast,
   within 60° of both the camera and the Sun. The setup decides this from
   geometry before it fetches a frame, and preparation decides again from the
@@ -74,7 +74,7 @@ the way it:
   from LAM with its public cookie;
 - reads the spin record in the column order the survey's Table A.1 pole
   supports. A body whose own published pole belongs to another solution, such
-  as a DAMIT model, gets the survey's pole in its lens record;
+  as a DAMIT model, gets the survey's pole in its dataset record;
 - gives the ADAM mesh, an OBJ in kilometres, the body's own mesh settings,
   raising the simplification error bound to the next 100 m above what the ADAM
   mesh reaches at the face target when the body's bound falls short;
@@ -98,15 +98,15 @@ frames out of the selection; a frame the figure shows cannot be left out.
 
 Look at `evidence/published-comparison.webp`. It shows each figure column's
 photograph with the outline of the paper's model in amber and ours in cyan. The
-lens ships when our outline follows the paper's at the same phase. The install
+dataset ships when our outline follows the paper's at the same phase. The install
 checks this for every column: over a full turn in 10° steps, the best match to
 the paper's model must be at our phase, one step from it, or better by less
 than the same-shape loss, which happens on nearly round outlines. Otherwise it
 refuses and names the column.
 
-![The weakest figure column of every survey lens](sphere-survey-photographs.webp)
+![The weakest figure column of every survey dataset](sphere-survey-photographs.webp)
 
-Above, every survey lens appears once, at the column where our outline
+Above, every survey dataset appears once, at the column where our outline
 overlaps the paper's model least, with that column's overlap and its
 same-shape ceiling below it. Read each overlap against its same-shape score. The numbers are
 reported, not a gate, and the registration stage's verdict is reported beside
@@ -120,7 +120,7 @@ node packages/bake/cli/sphere-survey-install.mts <id>
 
 It reruns the setup and writes it into the package: the frames, mesh, tables
 and records, the source bindings, download
-operations, the lens control and reader text, the ledger decision and the
+operations, the dataset control and reader text, the ledger decision and the
 entries it closes, the README's source rows and generated evidence blocks, and
 the credits. It copies missing pinned inputs from sibling checkouts by hash and
 moves scene files no inventory owns into `output/stale-public/<id>/`. Then:
@@ -154,7 +154,7 @@ node packages/bake/cli/sphere-survey-install.mts <id> --leave-out=<frame-id>,…
 The reason goes into the ledger decision, the `surface-imagery` entry and the
 README's known problems.
 
-Survey lenses average their frames where they overlap (`edge-weighted-average`):
+Survey datasets average their frames where they overlap (`edge-weighted-average`):
 each frame fades out toward its disc edge, where deconvolution rings, instead
 of one frame per point switching abruptly. The rule, its source and its
 measurements are in the

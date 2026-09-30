@@ -2,7 +2,7 @@
 
 ## Sources
 
-It has 0.7278 solar masses and 0.8074 solar radii; its partner has 0.7665 and 0.8655, measured from the eclipses and the stars' motions. This account was drafted from Kaluzny et al. (2013AJ....145...43K)'s values; the sections below are the data's own.
+It has 0.7278 solar masses and 0.8074 solar radii; its partner has 0.7665 and 0.8655, measured from the eclipses and the stars' motions. The introduction is generated from Kaluzny et al. (2013AJ....145...43K)'s published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.8074 +/- 0.008 solar radii from Secondary radius (solar radii) 0.8074 +/- 0.008, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K) (https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K): 561,708.2 km at 695,700 km per solar radius. GM from the mass 0.7278 +/- 0.0048 solar masses (Secondary mass (solar masses) 0.7278 +/- 0.0048, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K), https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K) times the JPL solar GM. Temperature 5916 +/- 136 K from Secondary log Teff 3.772 +/- 0.01, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K): 5916 K (https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K). A sphere: no oblateness is measured.
 
@@ -13,10 +13,5 @@ It has 0.7278 solar masses and 0.8074 solar radii; its partner has 0.7665 and 0.
 ## Evidence
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/m4-v69-b.json).
-
-
-## Known problems
-
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

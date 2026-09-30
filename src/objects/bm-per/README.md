@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its mean radius, 91.9 solar radii, comes from comparing how fast its surface moves with how its size changes, 2,253 parsecs away. This account was drafted from Groenewegen (2013), A&A 550, A70's values; the sections below are the data's own.
+Its mean radius, 91.9 solar radii, comes from comparing how fast its surface moves with how its size changes, 2,253 parsecs away. The introduction is generated from Groenewegen (2013), A&A 550, A70's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 258412862056729472, distance 2,253 pc from Groenewegen (2013), A&A 550, A70, table10, BM Per: Baade-Wesselink distance (pc) 2253.4 +/- 740.1 (Monte-Carlo); Gaia DR3's parallax, 0.288 ± 0.021 mas (13.4 standard errors), is not used. Radius 91.9 +/- 30.9 solar radii from Groenewegen (2013), A&A 550, A70, table10, BM Per: Baade-Wesselink mean radius (solar radii) 91.9 +/- 30.9 (Monte-Carlo) (https://arxiv.org/abs/1212.5478). No mass is measured, so GM is 0, the records' unpublished value. Temperature 4,750 K from Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 42, Name='BM Per', columns Teff, e_Teff (K): Teff 4750 +/- 237 K from a fit to the spectral energy distribution at mean light (not spectroscopic). log g 0.54 from 2013MNRAS.428.3252A ("Barium abundances in Cepheids.").
 
@@ -14,7 +14,7 @@ Its mean radius, 91.9 solar radii, comes from comparing how fast its surface mov
 
 ## Evidence
 
-Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
+Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 - The bake reads Gaia's harmonics as published and holds them to the same row's peak-to-peak amplitude, epoch of maximum, R21 and phi21 ([light-curve.ts](../../../packages/bake/src/photometry/light-curve.ts)); on 2026-09-28 the model's maximum fell 0.0110 d from epoch_g (stated error 0.0127 d; 0.00048 of a period).
 
@@ -24,7 +24,6 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Not shown.** The star pulsates; it is drawn at its mean radius.
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 - **Brightness.** The model is Gaia's 2014-2017 fit carried 194 cycles to the scene date; with the period's error the phase shown is known to 0.08 of a cycle, and period changes after 2017 are not included. The G band stands for all colours: the star's temperature and colour change through the cycle, and the page does not show that.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

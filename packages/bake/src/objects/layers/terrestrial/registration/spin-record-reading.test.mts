@@ -27,15 +27,15 @@ test('a record the published pole cannot place is refused', () => {
 
 // Bodies whose released record describes a different solution from every published pole; each keeps the finding in its
 // ledger. Eleonora's and Thisbe's records disagree with Table A.1 but not with the survey's released model, which their
-// lens records state and their figures confirm.
+// dataset records state and their figures confirm.
 const RECORD_DISAGREES = new Map([['nemesis', 'release-record-solution']]);
 
 test('every released spin record reads one way against its published pole, apart from the recorded disagreement', async () => {
   const unreadable: string[] = [];
   let read = 0;
   for (const id of readdirSync(OBJECTS)) {
-    const source = resolve(OBJECTS, id, 'source'), record = resolve(source, 'reference/release-parameters.txt'), lens = resolve(source, OBSERVER_CAMERAS_FILE);
-    const stated = existsSync(lens) ? parseObserverCameras(JSON.parse(readFileSync(lens, 'utf8'))).rotation.publishedPole : undefined;
+    const source = resolve(OBJECTS, id, 'source'), record = resolve(source, 'reference/release-parameters.txt'), dataset = resolve(source, OBSERVER_CAMERAS_FILE);
+    const stated = existsSync(dataset) ? parseObserverCameras(JSON.parse(readFileSync(dataset, 'utf8'))).rotation.publishedPole : undefined;
     const pole = existsSync(record) ? await readingPole(source, stated) : null;
     if (!pole) continue;
     try { spinRecordReading(readFileSync(record, 'utf8'), pole); read++; } catch { unreadable.push(id); }
@@ -48,7 +48,7 @@ test('every released spin record reads one way against its published pole, apart
   }
 });
 
-test('every ground-based lens states the column order its published pole supports', async () => {
+test('every ground-based dataset states the column order its published pole supports', async () => {
   for (const id of readdirSync(OBJECTS)) {
     const source = resolve(OBJECTS, id, 'source'), path = resolve(source, OBSERVER_CAMERAS_FILE);
     if (!existsSync(path)) continue;

@@ -27,18 +27,12 @@
       "id": "radial-elevation",
       "subject": "Source-surface Elevation after the failed radial trial",
       "status": "included",
-      "finding": "The earlier radial trial found multiple intersections in 7 of 8,192 sampled directions. One neck ray crosses radii 1,285.61, 1,363.00 and 1,734.56 m, so its first intersection cannot color every connected patch. The 13 September audit identified an existing closest-source-point sampler but had not prepared this body. The 14 September qualification now includes Elevation: the outer patch retains its 510.557 m height above the 1,224 m reference sphere instead of the incorrect first-ray 61.607 m. Independent full-source checks verify both overlapping patches and an offset point. All 5,775,099 triangle-interior texels pass the 50 m transfer limit; this is an atlas count, not observed area. Geometry stays at 800 faces, existing images are byte-identical, and headless DPR 1/2, mobile, rotation and lighting checks pass. Flat previews withhold ambiguous rays. The lens describes the radar model, including its differences from later photographs; fine triangle boundaries remain visible at close zoom.",
+      "finding": "The earlier radial trial found multiple intersections in 7 of 8,192 sampled directions. One neck ray crosses radii 1,285.61, 1,363.00 and 1,734.56 m, so its first intersection cannot color every connected patch. The 13 September audit identified an existing closest-source-point sampler but had not prepared this body. The 14 September qualification now includes Elevation: the outer patch retains its 510.557 m height above the 1,224 m reference sphere instead of the incorrect first-ray 61.607 m. Independent full-source checks verify both overlapping patches and an offset point. All 5,775,099 triangle-interior texels pass the 50 m transfer limit; this is an atlas count, not observed area. Geometry stays at 800 faces, existing images are byte-identical, and headless DPR 1/2, mobile, rotation and lighting checks pass. Flat previews withhold ambiguous rays. The dataset describes the radar model, including its differences from later photographs; fine triangle boundaries remain visible at close zoom.",
       "evidence": [
         "https://github.com/layoutit/css.earth/pull/192",
         "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/4179toutatis2.xml",
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/geometry/obj-shape.ts#L272",
-        "https://github.com/layoutit/css.earth/blob/2bbc72b7445bbd7754f3bd5a0d144d5b1924bc67/tests/objects/terrestrial/source-surface.test.mts",
-        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/geometry/source-surface.test.mts",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/independent.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/preparation.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/conformance.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/browser.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/toutatis/evidence/source-surface/delivery.json"
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/geometry/source-surface.test.mts"
       ]
     },
     {
@@ -63,8 +57,8 @@
       ]
     },
     {
-      "id": "change-2-figure-lens",
-      "subject": "Chang’e-2 figure placed by hand as a photographic lens",
+      "id": "change-2-figure-dataset",
+      "subject": "Chang’e-2 figure placed by hand as a photographic dataset",
       "status": "deferred",
       "finding": "A camera direction from rotation angles quoted by Bu et al. (2015) and a scale and position matched by hand to Zou et al. (2014)'s radar rendering agreed within 1.0–2.2 figure pixels in three photo-to-photo check windows. Those windows compare two photographs, not photograph pixels with surface points, so the placement does not register the photograph to this mesh.",
       "revisitWhen": "Measured cameras or surface control points for this mesh, with disjoint holdouts, become available.",

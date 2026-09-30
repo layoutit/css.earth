@@ -38,8 +38,8 @@
       "id": "keck-nirc2-near-infrared-photometry-2024",
       "subject": "Keck NIRC2 near-infrared photometry, 2024",
       "status": "excluded",
-      "finding": "Distinct measured H-band photometry, derived by aperture integration of shifted and stacked moon images. Useful for integrated reflectivity, not a spatially resolved color or composition surface. Excluded as a surface lens.",
-      "revisitWhen": "A spatially resolved Galatea measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped lens.",
+      "finding": "Distinct measured H-band photometry, derived by aperture integration of shifted and stacked moon images. Useful for integrated reflectivity, not a spatially resolved color or composition surface. Excluded as a surface dataset.",
+      "revisitWhen": "A spatially resolved Galatea measurement supplies original spectral or image samples with body-fixed coordinates and enough coverage to qualify a mapped dataset.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/galatea/source/manifest.json",
         "https://doi.org/10.1016/j.icarus.2024.116004"

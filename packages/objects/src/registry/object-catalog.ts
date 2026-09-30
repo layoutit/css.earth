@@ -39,18 +39,18 @@ function aliases(value: unknown, id: string): readonly string[] {
 
 /** Decode package metadata at both the build and application boundaries. */
 export function catalogEntry<Scene, Signal>(input: unknown, loadScene: ObjectDefinitionInput<Scene, Signal>['loadScene'], distance: NavigationDistance, discovery?: ObjectDiscovery): CatalogEntry<Scene, Signal> {
-  if (!isRecord(input) || input.schema !== 'cssearth-object@1' || typeof input.id !== 'string' || !isRecord(input.properties)) {
+  if (!isRecord(input) || input.schema !== 'cssearth-object@2' || typeof input.id !== 'string' || !isRecord(input.properties)) {
     throw new TypeError('Invalid catalogue descriptor.');
   }
   const catalog = input.properties.catalog;
   if (!isRecord(catalog)) throw new TypeError(`Missing catalogue entry: ${input.id}.`);
   const { name, systemName, color, distanceAu, description } = catalog;
-  const keys = ['name', 'systemName', 'classification', 'classificationLabel', 'color', 'distanceAu', 'description', 'aliases', 'order', 'context', 'featured', 'illustrationLenses', 'orientationReference'];
+  const keys = ['name', 'systemName', 'classification', 'classificationLabel', 'color', 'distanceAu', 'description', 'aliases', 'order', 'context', 'featured', 'illustrationDatasets', 'orientationReference'];
   if (Object.keys(catalog).some(key => !keys.includes(key)) || typeof name !== 'string' || typeof systemName !== 'string' ||
       typeof color !== 'string' || typeof distanceAu !== 'number' || typeof description !== 'string') throw new TypeError(`Invalid catalogue metadata: ${input.id}.`);
   if (catalog.orientationReference !== undefined && (!Number.isInteger(catalog.orientationReference) || Number(catalog.orientationReference) < 1)) throw new TypeError(`Invalid orientation reference: ${input.id}.`);
-  if (catalog.featured !== undefined && typeof catalog.featured !== 'boolean' || catalog.illustrationLenses !== undefined &&
-      (!Array.isArray(catalog.illustrationLenses) || !catalog.illustrationLenses.every(id => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id)))) throw new TypeError(`Invalid discovery metadata: ${input.id}.`);
+  if (catalog.featured !== undefined && typeof catalog.featured !== 'boolean' || catalog.illustrationDatasets !== undefined &&
+      (!Array.isArray(catalog.illustrationDatasets) || !catalog.illustrationDatasets.every(id => typeof id === 'string' && /^[a-z][a-z0-9-]*$/u.test(id)))) throw new TypeError(`Invalid discovery metadata: ${input.id}.`);
   let context: CatalogContext | undefined;
   if (catalog.context !== undefined) {
     const value = catalog.context;

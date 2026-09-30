@@ -64,10 +64,10 @@ export function createCompilerStarPhotometer(image: CompilerImage, nativePoints:
   } };
 }
 /** Project fixed observed positions into another registered source; no redetection or point movement. */
-export function compilerStarLensPoints(reference: CompilerImage, lens: CompilerImage, nativePoints: readonly Point[]): Point[] {
-  const p0 = lens.pixelToSky(0, 0), px = lens.pixelToSky(1, 0), py = lens.pixelToSky(0, 1);
+export function compilerStarDatasetPoints(reference: CompilerImage, dataset: CompilerImage, nativePoints: readonly Point[]): Point[] {
+  const p0 = dataset.pixelToSky(0, 0), px = dataset.pixelToSky(1, 0), py = dataset.pixelToSky(0, 1);
   const a = px[0] - p0[0], b = px[1] - p0[1], c = py[0] - p0[0], d = py[1] - p0[1], determinant = a * d - b * c;
-  if (!Number.isFinite(determinant) || Math.abs(determinant) < 1e-15) throw new TypeError('Compiler star lens registration is not invertible.');
+  if (!Number.isFinite(determinant) || Math.abs(determinant) < 1e-15) throw new TypeError('Compiler star dataset registration is not invertible.');
   return nativePoints.map(point => {
     const sky = reference.pixelToSky(...point), x = sky[0] - p0[0], y = sky[1] - p0[1];
     return [(x * d - y * c) / determinant, (y * a - x * b) / determinant];
@@ -97,14 +97,14 @@ export function createCompilerStarDepthSampler(model: EmissionFieldModel) {
   };
 }
 /** Observed xy/relative light; conditional z follows the fitted emission column, never image-layer index. */
-export async function compilerStars(image: CompilerImage, model: EmissionFieldModel, maximum: number, lenses: readonly CompilerImage[] = [image]): Promise<CompilerStarInput[]> {
+export async function compilerStars(image: CompilerImage, model: EmissionFieldModel, maximum: number, datasets: readonly CompilerImage[] = [image]): Promise<CompilerStarInput[]> {
   if (!maximum) return [];
   const detected = await detectCompilerStarCandidates(image), depth = createCompilerStarDepthSampler(model), output: CompilerStarInput[] = [];
   const nativePoints = detected.map(star => star.point), photometer = createCompilerStarPhotometer(image, nativePoints);
-  if (lenses.length < 1 || lenses.length > 8 || new Set(lenses.map(lens => lens.id)).size !== lenses.length)
-    throw new TypeError('Compiler star lenses must have unique configured identities.');
-  const lensPhotometers = lenses.map(lens => ({ id: lens.id, photometer: lens.id === image.id ? photometer :
-    createCompilerStarPhotometer(lens, compilerStarLensPoints(image, lens, nativePoints)) }));
+  if (datasets.length < 1 || datasets.length > 8 || new Set(datasets.map(dataset => dataset.id)).size !== datasets.length)
+    throw new TypeError('Compiler star datasets must have unique configured identities.');
+  const datasetPhotometers = datasets.map(dataset => ({ id: dataset.id, photometer: dataset.id === image.id ? photometer :
+    createCompilerStarPhotometer(dataset, compilerStarDatasetPoints(image, dataset, nativePoints)) }));
   // Detection peak measures compactness, not total displayed light: broad bright
   // sources must compete for the budget using their measured residual apertures.
   const ranked = detected.flatMap((star, index) => {
@@ -118,9 +118,9 @@ export async function compilerStars(image: CompilerImage, model: EmissionFieldMo
     const [x, y] = image.pixelToSky(...star.point), id = `${image.id}-${index}`, z = depth(id, x, y);
     if (z === null) continue;
     const materials: Record<string, CompilerStarMaterial> = {};
-    for (const lens of lensPhotometers) {
-      const light = lens.id === image.id ? measured : lens.photometer.measure(index);
-      materials[lens.id] = light ? { rgb: light.rgb, diameterUnits: light.diameterUnits, alpha: light.alpha } :
+    for (const dataset of datasetPhotometers) {
+      const light = dataset.id === image.id ? measured : dataset.photometer.measure(index);
+      materials[dataset.id] = light ? { rgb: light.rgb, diameterUnits: light.diameterUnits, alpha: light.alpha } :
         { rgb: [0, 0, 0], diameterUnits: measured.diameterUnits, alpha: 0 };
     }
     output.push({ id, positionArcsec: [x, y, z], rgb: measured.rgb, diameterUnits: measured.diameterUnits, alpha: measured.alpha, materials });

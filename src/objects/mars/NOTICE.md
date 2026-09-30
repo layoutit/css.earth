@@ -41,7 +41,7 @@ Numeric MOLA global DEM: NASA Mars Global Surveyor MOLA team and USGS Astrogeolo
 - TES albedo: Philip R. Christensen and colleagues (2001), NASA/JPL/ASU Mars Global Surveyor TES team, product GLOBAL_ALBEDO_8PPD distributed by USGS Astrogeology. cssEarth samples native cells and applies its own numeric palette and matching legend.
 - TES thermal inertia: Nathaniel E. Putzig and Michael T. Mellon (2007), NASA/PDS Geosciences Node, MGS-M-TES-5-TIMAP-V1.0 product GLOBAL_TI_NIGHT_2007 and its interpolation mask. cssEarth withholds interpolated cells and applies its own numeric palette and matching legend.
 - TES dust cover index: Steven W. Ruff and Philip R. Christensen (2002), Arizona State University; the author's VICAR release. cssEarth withholds the polar fill and applies its own numeric palette and matching legend.
-- Landform and mineral catalogues, all served as GIS layers by NASA Solar System Treks (JPL); colours are each layer's published symbol or fill attribute unless the lens says a colour is ours:
+- Landform and mineral catalogues, all served as GIS layers by NASA Solar System Treks (JPL); colours are each layer's published symbol or fill attribute unless the dataset says a colour is ours:
   - Dune fields: Rosalyn K. Hayward and colleagues, Mars Global Digital Dune Database MC2–MC29, USGS Open-File Report 2007-1158 (public domain).
   - Valley networks: Brian M. Hynek, Michael Beach and Monica R. T. Hoke (2010), JGR 115, E09008.
   - Alluvial fans: Jeffrey M. Moore and Alan D. Howard (2005), JGR 110, E04005; Erin R. Kraal and colleagues (2008), Icarus 194, 101–110.
@@ -53,4 +53,4 @@ Numeric MOLA global DEM: NASA Mars Global Surveyor MOLA team and USGS Astrogeolo
   - Hydrous minerals: J. Carter, F. Poulet, J.-P. Bibring, N. Mangold and S. Murchie (2013), JGR Planets 118, 831–858.
   - Aqueous mineral classes: Bethany L. Ehlmann and Christopher S. Edwards (2014), Annual Review of Earth and Planetary Sciences 42, 291–315.
   - Chloride deposits: Mikki M. Osterloo, F. Scott Anderson, Victoria E. Hamilton and Brian M. Hynek (2010), JGR 115, E10012.
-  - Unmarked ground in these lenses shows the Viking MDIM 2.1 colour mosaic (credited above) at 40% brightness.
+  - Unmarked ground in these datasets shows the Viking MDIM 2.1 colour mosaic (credited above) at 40% brightness.

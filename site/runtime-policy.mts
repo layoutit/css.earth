@@ -2,6 +2,9 @@ import { isSharedInputSurface } from '@cssearth/renderer';
 import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
 import type { AutomaticPlaybackInput, AutomaticPlaybackPolicy } from "./browser/shell-contract-types.mts";
 
+/** Typed suggestions wait for enough text to avoid broad one-character catalogue requests. */
+export const SEARCH_SUGGESTION_MIN_CHARACTERS = 2;
+
 export const MOBILE_VIEWPORT_MAX = 820;
 export const DESKTOP_VIEWPORT_MIN = MOBILE_VIEWPORT_MAX + 1;
 export const MOBILE_VIEWPORT_QUERY =
@@ -231,7 +234,7 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-/** Any lens bank (nebula, cluster, galaxy, or a cloud around a body) is fetched and drawn only once its framing
+/** Any dataset bank (nebula, cluster, galaxy, or a cloud around a body) is fetched and drawn only once its framing
  * sphere is this large on screen (radius, CSS px): hidden below 64 and full from 128, where impostors hand over to
- * the volume. Smaller, it is a few pixels of decoration and not worth megabytes of lenses on a phone. */
-export const LENS_VISIBILITY = Object.freeze({ hiddenBelowRadiusPixels: 64, fullAboveRadiusPixels: 128 });
+ * the volume. Smaller, it is a few pixels of decoration and not worth megabytes of datasets on a phone. */
+export const DATASET_VISIBILITY = Object.freeze({ hiddenBelowRadiusPixels: 64, fullAboveRadiusPixels: 128 });

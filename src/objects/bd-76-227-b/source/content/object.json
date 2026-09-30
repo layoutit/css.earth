@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "bd-76-227-b",
   "displayName": "BD+76 227B",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "bd-76-227-b-lens-color.webp",
+        "thumbnail": "bd-76-227-b-dataset-color.webp",
         "surface": "bd-76-227-b-surface-color@2x.webp",
         "poles": "bd-76-227-b-poles-color@2x.webp",
         "source": {

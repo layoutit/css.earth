@@ -62,15 +62,15 @@ export function observationCentroid(bodyId: string, directions: readonly Vector3
   return sum;
 }
 
-/** The body-fixed directions toward the observer of a terrestrial recipe's default photograph lens: the frames' own
+/** The body-fixed directions toward the observer of a terrestrial recipe's default photograph dataset: the frames' own
  * sub-observer points when every frame states one, otherwise the observer positions its prepared surface report solved for each
- * frame. None when the default lens has no photograph frames. */
-export function photographDirections(bodyId: string, recipe: { raster?: { surfaceObservations?: readonly { id: string }[] }; presentation?: { defaultLens?: string } }, surfacesReport: unknown): Vector3[] | undefined {
-  const defaultLens = recipe.presentation?.defaultLens;
-  const lens = (recipe.raster?.surfaceObservations ?? []).find(entry => entry.id === defaultLens) as { frames?: readonly Record<string, unknown>[] } | undefined;
-  if (!lens?.frames?.length) return undefined;
-  if (lens.frames.every(frame => Number.isFinite(frame.observerWestLongitude) && Number.isFinite(frame.observerLatitude))) {
-    return lens.frames.map(frame => observerPointDirection(bodyId, { observerWestLongitude: Number(frame.observerWestLongitude), observerLatitude: Number(frame.observerLatitude) }));
+ * frame. None when the default dataset has no photograph frames. */
+export function photographDirections(bodyId: string, recipe: { raster?: { surfaceObservations?: readonly { id: string }[] }; presentation?: { defaultDataset?: string } }, surfacesReport: unknown): Vector3[] | undefined {
+  const defaultDataset = recipe.presentation?.defaultDataset;
+  const dataset = (recipe.raster?.surfaceObservations ?? []).find(entry => entry.id === defaultDataset) as { frames?: readonly Record<string, unknown>[] } | undefined;
+  if (!dataset?.frames?.length) return undefined;
+  if (dataset.frames.every(frame => Number.isFinite(frame.observerWestLongitude) && Number.isFinite(frame.observerLatitude))) {
+    return dataset.frames.map(frame => observerPointDirection(bodyId, { observerWestLongitude: Number(frame.observerWestLongitude), observerLatitude: Number(frame.observerLatitude) }));
   }
   const record = (value: unknown, label: string) => {
     if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${bodyId}: ${label} is not a record.`);
@@ -78,19 +78,19 @@ export function photographDirections(bodyId: string, recipe: { raster?: { surfac
   };
   const surfaces = record(surfacesReport, 'the prepared surface report').surfaces;
   if (!Array.isArray(surfaces)) throw new TypeError(`${bodyId}: the prepared surface report lists no surfaces.`);
-  const observation = surfaces.map(value => record(value, 'a prepared surface')).find(entry => entry.id === defaultLens)?.observation as Record<string, unknown> | undefined;
+  const observation = surfaces.map(value => record(value, 'a prepared surface')).find(entry => entry.id === defaultDataset)?.observation as Record<string, unknown> | undefined;
   const cameras = (Array.isArray(observation?.frames) ? observation.frames.map(frame => record(frame, 'a report frame').camera) : [observation?.camera]).filter(camera => camera !== undefined);
   const directions = cameras.map(camera => {
     const position = Array.isArray(camera) ? camera : record(camera, 'a report camera').positionKm;
     if (!Array.isArray(position) || position.length !== 3 || !position.every(Number.isFinite)) throw new TypeError(`${bodyId}: a surface report camera position has three finite components.`);
     return position;
   });
-  if (!directions.length) throw new TypeError(`${bodyId}: the default photograph lens states no observer, in its frames or its prepared report.`);
+  if (!directions.length) throw new TypeError(`${bodyId}: the default photograph dataset states no observer, in its frames or its prepared report.`);
   return directions;
 }
 
 /** The default camera of one object:
- * - an observation lens: its frames' common direction toward the observer;
+ * - an observation dataset: its frames' common direction toward the observer;
  * - a planet of another star: its substellar point, where its synchronous rotation record puts longitude 0 facing the host
  *   star that lights the map;
  * - a placed star: the direction of the Sun, where Earth observes it from;

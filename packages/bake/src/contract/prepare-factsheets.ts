@@ -54,9 +54,13 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
 export async function prepareFactsheets({ ids = [] as readonly string[], check = false, root = process.cwd() } = {}) {
   const SCENE_OBJECTS = readPreparedObjects(root).sceneObjects;
   assert.ok(ids.every(id => SCENE_OBJECTS.some(object => object.id === id)), 'Unregistered factsheet target');
-  const results = [];
-  for (const object of SCENE_OBJECTS) if (!ids.length || ids.includes(object.id)) {
-    results.push(await prepareFactsheet(resolve(root, 'src/objects', object.id), { check }));
-  }
+  // Each body reads and writes only its own package, so 16 are prepared at once; results stay in registry order.
+  // One at a time, the 3,587 bodies' serial reads cost every dev start about 7 s.
+  const targets = SCENE_OBJECTS.filter(object => !ids.length || ids.includes(object.id));
+  const results: Awaited<ReturnType<typeof prepareFactsheet>>[] = [];
+  let next = 0;
+  await Promise.all(Array.from({ length: 16 }, async () => {
+    while (next < targets.length) { const index = next++; results[index] = await prepareFactsheet(resolve(root, 'src/objects', targets[index]!.id), { check }); }
+  }));
   return results;
 }

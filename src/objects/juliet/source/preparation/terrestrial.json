@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "juliet",
   "displayName": "Juliet",
@@ -71,6 +71,6 @@
     "sunSource": "JPL Uranus-system ephemeris; IAU Juliet BODY711 orientation from PCK00011 with the small periodic correction frozen at the prepared epoch."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

@@ -1,4 +1,4 @@
-import {parseFloatMapGrid,parseFloatMapLens} from '../source-records.ts';
+import {parseFloatMapGrid,parseFloatMapDataset} from '../source-records.ts';
 import {readFile} from 'node:fs/promises';
 import {basename,resolve} from 'node:path';
 import {gunzipSync} from 'node:zlib';
@@ -95,16 +95,16 @@ export function decodePdsFloatImage(input: Buffer, value: unknown, detachedLabel
 }
 
 export async function loadPdsFloatMap(root: string,value: unknown) {
-  const lens=parseFloatMapLens(value);
-  const detached = lens.labelPath === undefined ? undefined
-    : {text: await readFile(resolve(root,lens.labelPath),'ascii'), imageName: basename(lens.path)};
-  const source=decodePdsFloatImage(await readFile(resolve(root,lens.path)),lens.grid,detached);
-  if (lens.sampling!==undefined && lens.sampling!=='nearest') throw new TypeError('PDS float source cells require nearest sampling.');
+  const dataset=parseFloatMapDataset(value);
+  const detached = dataset.labelPath === undefined ? undefined
+    : {text: await readFile(resolve(root,dataset.labelPath),'ascii'), imageName: basename(dataset.path)};
+  const source=decodePdsFloatImage(await readFile(resolve(root,dataset.path)),dataset.grid,detached);
+  if (dataset.sampling!==undefined && dataset.sampling!=='nearest') throw new TypeError('PDS float source cells require nearest sampling.');
   return {sample(longitude: number,latitude: number) {
     if (!Number.isFinite(longitude)||!Number.isFinite(latitude)||latitude < -90||latitude > 90) return null;
     const at=source.pixel(longitude,latitude);
     if(!at)return null;
     const value=source.data[Math.floor(at[1])*source.width+Math.floor(at[0])];
-    return Number.isFinite(value) ? value*(lens.valueTransform?.scale??1)+(lens.valueTransform?.offset??0) : null;
+    return Number.isFinite(value) ? value*(dataset.valueTransform?.scale??1)+(dataset.valueTransform?.offset??0) : null;
   }};
 }

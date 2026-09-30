@@ -1,6 +1,6 @@
 /**
  * Place a Voyager ISS narrow-angle GEOMED frame on a spherical body and write it as a per-frame equirectangular GeoTIFF,
- * the same product shape as USGS's controlled observations, so the existing observed-colour lens consumes it unchanged.
+ * the same product shape as USGS's controlled observations, so the existing observed-colour dataset consumes it unchanged.
  *
  *   recorded (SEDR) pointing → limb fit on the sunlit side → corrected camera → datum shift → equirectangular I/F
  *
@@ -86,7 +86,7 @@ export function placeFrame(id: string, bytes: Buffer, labelText: string, set: Ke
 
 /**
  * The placed frame on an equirectangular grid of `cellDegrees`, clipped to its footprint: raw calibrated I/F (no photometric
- * correction; the lens applies its own), NaN where the frame has no usable sample.
+ * correction; the dataset applies its own), NaN where the frame has no usable sample.
  */
 /**
  * Write the placed frame onto an equirectangular grid. Only pixels brighter than `minimumValue` are ground: a GEOMED frame's

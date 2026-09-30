@@ -1,7 +1,7 @@
 /**
- * Derive the controlled-camera fields of a body's ground-based photograph lens from its pinned inputs, and write them
+ * Derive the controlled-camera fields of a body's ground-based photograph dataset from its pinned inputs, and write them
  * into the recipe. The body's `source/preparation/observer-cameras.json` names the rotation model, the Horizons tables
- * and the centre rule; the frames' own headers state their exposures; the lens mesh places the limb.
+ * and the centre rule; the frames' own headers state their exposures; the dataset mesh places the limb.
  *
  *   node packages/bake/cli/observer-cameras.mts <object-id>          report the derived fields beside the stated ones
  *   node packages/bake/cli/observer-cameras.mts <object-id> --write  state the derived fields in the recipe and re-pin it
@@ -9,7 +9,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { deriveObserverCameras, loadObserverCameraInputs, recipeFields, radialTerrainForLens } from '@cssearth/bake/objects/layers/terrestrial';
+import { deriveObserverCameras, loadObserverCameraInputs, recipeFields, radialTerrainForDataset } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadCameraShape } from '@cssearth/bake/objects/geometry';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
@@ -17,8 +17,8 @@ const [objectId, flag] = process.argv.slice(2);
 if (!objectId || (flag !== undefined && flag !== '--write')) { console.error('usage: node packages/bake/cli/observer-cameras.mts <object-id> [--write]'); process.exit(2); }
 
 const sourceDirectory = resolve(ROOT, 'src/objects', objectId, 'source');
-const { record, recipe, lens, frames } = await loadObserverCameraInputs(sourceDirectory);
-const mesh = await loadCameraShape(sourceDirectory, radialTerrainForLens(recipe as unknown as Parameters<typeof radialTerrainForLens>[0], record.lensId));
+const { record, recipe, dataset, frames } = await loadObserverCameraInputs(sourceDirectory);
+const mesh = await loadCameraShape(sourceDirectory, radialTerrainForDataset(recipe as unknown as Parameters<typeof radialTerrainForDataset>[0], record.datasetId));
 const derived = await deriveObserverCameras(sourceDirectory, record, frames, mesh, ROOT);
 
 const KEYS = ['observerLatitude', 'observerWestLongitude', 'sunLatitude', 'sunWestLongitude', 'rangeKm', 'northAzimuthDegrees', 'pixelAngleMicroradians', 'center'] as const;
@@ -36,8 +36,8 @@ if (flag === '--write') {
   const recipePath = resolve(sourceDirectory, 'preparation/terrestrial.json');
   if (differences) {
     const document = requireRecord(JSON.parse(await readFile(recipePath, 'utf8')));
-    const lenses = requireArray(requireRecord(document.raster).surfaceObservations).map(value => requireRecord(value));
-    const target = lenses.find(entry => entry.id === lens.id);
+    const datasets = requireArray(requireRecord(document.raster).surfaceObservations).map(value => requireRecord(value));
+    const target = datasets.find(entry => entry.id === dataset.id);
     if (!target) throw new Error('The recipe changed while it was being derived.');
     for (const [index, frame] of requireArray(target.frames).map(value => requireRecord(value)).entries()) Object.assign(frame, recipeFields(derived[index]));
     await writeFile(recipePath, JSON.stringify(document, null, 2) + '\n');

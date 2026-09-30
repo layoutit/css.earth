@@ -1,7 +1,7 @@
 import { readFitsHdu, assertUnscaledFitsTable } from '@cssearth/fits';
 import type { SourceMesh } from '../geometry/index.ts';
-import { parseFacetLens, parseFacetProfile, parseFacetSampler, parseTransferTerrain, parseFacetTable, parseFacetFitsTable } from './source-records.ts';
-import { parseSurfaceLens } from '../geometry/index.ts';
+import { parseFacetDataset, parseFacetProfile, parseFacetSampler, parseTransferTerrain, parseFacetTable, parseFacetFitsTable } from './source-records.ts';
+import { parseSurfaceDataset } from '../geometry/index.ts';
 import {text} from '@cssearth/core';
 import {readFile} from 'node:fs/promises';
 import {resolve, basename} from 'node:path';
@@ -12,9 +12,9 @@ const exec = promisify(execFile);
 const safePath = (p: unknown): p is string => typeof p === 'string' && p.length > 0 && !p.startsWith('/') && !p.includes('\\') && !p.split('/').includes('..');
 
 export function validateFacetScalarProfile(value: unknown, terrainValue: unknown) {
-  const lens=parseFacetProfile(value),terrain=parseTransferTerrain(terrainValue);
-  const t = lens.table, s = lens.surfaceSampling;
-  if (!safePath(lens.meshPath) || lens.meshPath !== terrain?.path ||
+  const dataset=parseFacetProfile(value),terrain=parseTransferTerrain(terrainValue);
+  const t = dataset.table, s = dataset.surfaceSampling;
+  if (!safePath(dataset.meshPath) || dataset.meshPath !== terrain?.path ||
       !['sbmt-csv-zip', 'facet-csv-gzip', 'pds4-fits'].includes(t.format ?? '') || !t.field || typeof t.units !== 'string' ||
       !Number.isSafeInteger(t.expectedRows) || t.expectedRows !== terrain.grid?.expectedFaces ||
       !Number.isFinite(t.maximumCentroidErrorMeters) || !(t.maximumCentroidErrorMeters > 0) ||
@@ -23,7 +23,7 @@ export function validateFacetScalarProfile(value: unknown, terrainValue: unknown
       s?.method !== 'closest-source-point' || !Number.isFinite(s.maximumDistanceMeters) ||
       !(s.maximumDistanceMeters > 0) || terrain.simplification?.method !== 'source-meshoptimizer' ||
       s.maximumDistanceMeters > terrain.simplification.maximumErrorMeters ||
-      lens.sampling !== 'nearest' || lens.additionalGrids?.length ||
+      dataset.sampling !== 'nearest' || dataset.additionalGrids?.length ||
       (t.validityField !== undefined && typeof t.validityField !== 'string') ||
       ![undefined, 'source-face-order', 'centroid-bijection'].includes(t.registration) ||
       (t.registration === 'centroid-bijection' && t.format !== 'pds4-fits')) {
@@ -196,8 +196,8 @@ export function parseFacetFits(bytes: Buffer, xml: string, value: unknown, mesh:
 }
 
 export function createFacetScalarSampler(mesh: SourceMesh, table: Pick<ReturnType<typeof tableResult>,"values"|"sigmas"|"sourceRows">, value: unknown) {
-  const lens=parseFacetSampler(value);
-  const transform = (raw: number) => raw * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0);
+  const dataset=parseFacetSampler(value);
+  const transform = (raw: number) => raw * (dataset.valueTransform?.scale ?? 1) + (dataset.valueTransform?.offset ?? 0);
   const valueAt = (id: number) => Number.isFinite(table.values[id]) ? transform(table.values[id]) : null;
   return {
     sample(longitude: number, latitude: number) {
@@ -205,35 +205,35 @@ export function createFacetScalarSampler(mesh: SourceMesh, table: Pick<ReturnTyp
       return hit ? valueAt(hit.faceId) : null;
     },
     samplePoint(point: readonly number[]) {
-      const hit = mesh.closestPoint(point, lens.surfaceSampling.maximumDistanceMeters);
+      const hit = mesh.closestPoint(point, dataset.surfaceSampling.maximumDistanceMeters);
       if (!hit) return null;
       const value = valueAt(hit.faceId);
       if (value === null) return null;
       return {...hit, value, sourceCell: table.sourceRows[hit.faceId],
-        sigma: Number.isFinite(table.sigmas[hit.faceId]) ? table.sigmas[hit.faceId] * (lens.valueTransform?.scale ?? 1) : null};
+        sigma: Number.isFinite(table.sigmas[hit.faceId]) ? table.sigmas[hit.faceId] * (dataset.valueTransform?.scale ?? 1) : null};
     },
   };
 }
 
 export async function loadFacetScalarSurface(root: string, value: unknown, mesh?: SourceMesh | null) {
-  const lens=parseFacetLens(value);
+  const dataset=parseFacetDataset(value);
   if (!mesh?.closestPoint || !mesh?.hit) throw new Error('Facet science needs the complete rendered source mesh.');
   let table;
-  if (lens.table.format === 'sbmt-csv-zip') {
-    const {stdout} = await exec('unzip', ['-p', resolve(root, lens.path), text(lens.table.member)], {maxBuffer: 192 * 1024 * 1024});
-    table = parseFacetCsv(stdout, lens.table, mesh);
-  } else if (lens.table.format === 'facet-csv-gzip') {
-    table = parseFacetCsv(gunzipSync(await readFile(resolve(root, lens.path))).toString('utf8'), lens.table, mesh);
+  if (dataset.table.format === 'sbmt-csv-zip') {
+    const {stdout} = await exec('unzip', ['-p', resolve(root, dataset.path), text(dataset.table.member)], {maxBuffer: 192 * 1024 * 1024});
+    table = parseFacetCsv(stdout, dataset.table, mesh);
+  } else if (dataset.table.format === 'facet-csv-gzip') {
+    table = parseFacetCsv(gunzipSync(await readFile(resolve(root, dataset.path))).toString('utf8'), dataset.table, mesh);
   } else {
-    const [bytes, xml] = await Promise.all([readFile(resolve(root, lens.path)), readFile(resolve(root, text(lens.table.labelPath)), 'utf8')]);
-    table = parseFacetFits(bytes, xml, lens.table, mesh);
+    const [bytes, xml] = await Promise.all([readFile(resolve(root, dataset.path)), readFile(resolve(root, text(dataset.table.labelPath)), 'utf8')]);
+    table = parseFacetFits(bytes, xml, dataset.table, mesh);
   }
   if (!table.report.validRows) throw new Error('Facet table contains no valid source values.');
-  return {...createFacetScalarSampler(mesh, table, lens), report: {...table.report, sourceFormat: 'facet-scalars',
-    sourceTable: basename(lens.path), sourceMesh: lens.meshPath, field: lens.table.field, units: lens.table.units,
-    validity: lens.table.validityField ? 'Finite ' + lens.table.validityField + ' support in the original table.' : lens.table.format === 'facet-csv-gzip' ? 'Finite prepared values; NaN preserves rejected or missing source coverage.' : 'Finite released values; this does not establish photographed coverage.',
+  return {...createFacetScalarSampler(mesh, table, dataset), report: {...table.report, sourceFormat: 'facet-scalars',
+    sourceTable: basename(dataset.path), sourceMesh: dataset.meshPath, field: dataset.table.field, units: dataset.table.units,
+    validity: dataset.table.validityField ? 'Finite ' + dataset.table.validityField + ' support in the original table.' : dataset.table.format === 'facet-csv-gzip' ? 'Finite prepared values; NaN preserves rejected or missing source coverage.' : 'Finite released values; this does not establish photographed coverage.',
     uncertainty: 'Released sigma retained where supplied; zero sigma is not a coverage or certainty claim.',
-    registration: 'Every original table centroid verified against its exact source face; ' + (lens.table.registration === 'centroid-bijection' ? 'explicit complete centroid bijection reconciles exporter face ordering; ' : '') + 'closest full-source triangle transfer bounded in metres. No cross-facet interpolation.',
+    registration: 'Every original table centroid verified against its exact source face; ' + (dataset.table.registration === 'centroid-bijection' ? 'explicit complete centroid bijection reconciles exporter face ordering; ' : '') + 'closest full-source triangle transfer bounded in metres. No cross-facet interpolation.',
     previewPolicy: 'Exact unique source ray and facet value; ambiguous radial surfaces withheld.',
-    scale: [lens.minimum, lens.maximum]}};
+    scale: [dataset.minimum, dataset.maximum]}};
 }

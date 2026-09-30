@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "pallene",
   "displayName": "Pallene",
@@ -107,6 +107,6 @@
     "sunSource": "JPL Saturn-system geometry; source photograph uses its Cassini 2005 observer/Sun frame. Runtime spin orientation is explicitly approximate outside the mission-era attitude solution."
   },
   "presentation": {
-    "defaultLens": "normal"
+    "defaultDataset": "normal"
   }
 }

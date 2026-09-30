@@ -35,11 +35,11 @@
       ]
     },
     {
-      "id": "mapped-lenses",
+      "id": "mapped-datasets",
       "subject": "Anthe terrain, colour and composition routes",
       "status": "excluded",
       "finding": "No qualified DEM, geology or mapped composition product was identified; integrated photometry is not spatial data.",
-      "revisitWhen": "A body-specific spatial product can support a lens.",
+      "revisitWhen": "A body-specific spatial product can support a dataset.",
       "evidence": [
         "https://arxiv.org/abs/1912.09192"
       ]

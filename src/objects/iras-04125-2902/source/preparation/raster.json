@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/iras-04125-2902/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "iras-04125-2902-surface-{id}{suffix}.webp",
-      "thumbnail": "iras-04125-2902-lens-{id}.webp",
+      "thumbnail": "iras-04125-2902-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

@@ -145,7 +145,7 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
   if(typeof ra!=='number' || typeof dec!=='number' || ra<0 || ra>=360 || Math.abs(dec)>90) throw new Error('Invalid ICRS source direction.');
   let previousRadius:number|null=null,previousMagnitude:number|null=null;
   let previousRetainIds:string[]|null=null,previousRetainedMatch:number|undefined;
-  let previousRetainedAppearance:'anchor'|'lens'|undefined;
+  let previousRetainedAppearance:'anchor'|'dataset'|undefined;
   let previousRetainedSources:string|null|undefined,previousImageAnchors:object|undefined;
   try {
     const previous:unknown=JSON.parse(await readFile(`src/objects/${id}/source/stellar-field.json`,'utf8'));
@@ -164,7 +164,7 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
       previousRetainedMatch=selection.retainedMatchArcsec;
     }
     if('retainedAppearance' in selection) {
-      if(selection.retainedAppearance!=='anchor' && selection.retainedAppearance!=='lens') throw new Error('Invalid existing retained-star appearance.');
+      if(selection.retainedAppearance!=='anchor' && selection.retainedAppearance!=='dataset') throw new Error('Invalid existing retained-star appearance.');
       previousRetainedAppearance=selection.retainedAppearance;
     }
     if('provenance' in previous) {

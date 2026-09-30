@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { selectFeatureMeshRange } from '@cssearth/bake/objects/surface-features';
 const test = sourceTest();
-const ranges = [{ lensId: 'shape', start: 0, count: 100 }, { lensId: 'photo', start: 100, count: 200 },
-  { lensId: 'regions', start: 100, count: 200 }, { lensId: 'science', start: 300, count: 150 }];
+const ranges = [{ datasetId: 'shape', start: 0, count: 100 }, { datasetId: 'photo', start: 100, count: 200 },
+  { datasetId: 'regions', start: 100, count: 200 }, { datasetId: 'science', start: 300, count: 150 }];
 test('places share a picking mesh across datasets only when every declared range is identical', () => {
   assert.deepEqual(selectFeatureMeshRange(['photo', 'regions'], ranges, 450), ranges[1]);
   assert.deepEqual(selectFeatureMeshRange(['shape'], ranges, 450), ranges[0]);

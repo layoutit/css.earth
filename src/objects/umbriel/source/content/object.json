@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "umbriel",
   "displayName": "Umbriel",
@@ -74,9 +74,9 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "labels": {
       "normal": "Monochrome"
     },
@@ -84,7 +84,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "umbriel-lens-normal.webp",
+        "thumbnail": "umbriel-dataset-normal.webp",
         "surface": "umbriel-normal@2x.webp",
         "poles": "umbriel-poles-normal@2x.webp",
         "source": {
@@ -98,7 +98,7 @@
       {
         "id": "voyager-color",
         "label": "Voyager color",
-        "thumbnail": "umbriel-lens-voyager-color.webp",
+        "thumbnail": "umbriel-dataset-voyager-color.webp",
         "surface": "umbriel-voyager-color@2x.webp",
         "poles": "umbriel-poles-voyager-color@2x.webp",
         "source": {

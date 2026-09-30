@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "chi1-orionis",
   "displayName": "χ¹ Orionis",
@@ -47,15 +47,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "chi1-orionis-lens-color.webp",
+        "thumbnail": "chi1-orionis-dataset-color.webp",
         "surface": "chi1-orionis-surface-color@2x.webp",
         "poles": "chi1-orionis-poles-color@2x.webp",
         "source": {
@@ -70,7 +70,7 @@
         "id": "radial-field",
         "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "chi1-orionis-lens-radial-field.webp",
+        "thumbnail": "chi1-orionis-dataset-radial-field.webp",
         "surface": "chi1-orionis-surface-radial-field@2x.webp",
         "poles": "chi1-orionis-poles-radial-field@2x.webp",
         "source": {
@@ -125,7 +125,7 @@
         "id": "meridional-field",
         "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "chi1-orionis-lens-meridional-field.webp",
+        "thumbnail": "chi1-orionis-dataset-meridional-field.webp",
         "surface": "chi1-orionis-surface-meridional-field@2x.webp",
         "poles": "chi1-orionis-poles-meridional-field@2x.webp",
         "source": {
@@ -180,7 +180,7 @@
         "id": "azimuthal-field",
         "label": "Magnetic field",
         "qualification": "Published map · Willamo et al. 2022 · HARPSpol ZDI, Dec 2017",
-        "thumbnail": "chi1-orionis-lens-azimuthal-field.webp",
+        "thumbnail": "chi1-orionis-dataset-azimuthal-field.webp",
         "surface": "chi1-orionis-surface-azimuthal-field@2x.webp",
         "poles": "chi1-orionis-poles-azimuthal-field@2x.webp",
         "source": {

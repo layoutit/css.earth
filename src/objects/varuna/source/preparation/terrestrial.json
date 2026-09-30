@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "varuna",
   "displayName": "Varuna",
@@ -74,6 +74,6 @@
     "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Uses one published pole interpretation, ecliptic longitude 53° ±10° and latitude −64° ±6°, converted with the J2000 mean obliquity for display. The antipodal pole is also allowed; equinox and meridian are display conventions, not a qualified absolute attitude."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

@@ -13,7 +13,7 @@ const entry = { id: '80000000', name: 'Test region', kind: 'region', type: 'Miss
   reference: { title: 'Mission map', url: 'https://example.org/mission-map', credit: 'Mission science team' } };
 const document = (position: unknown) => ({ schema: 'cssearth-surface-landmarks@1', source: 'Mission map', frame: 'Body-fixed metres', entries: [{ ...entry, position }] });
 const context = (sourceDirectory: string): SurfaceFeaturePreparationContext => ({ objectId: 'test', sourceDirectory, publicDirectory: sourceDirectory, outputDirectory: sourceDirectory,
-  config: {}, maxEntries: 10, radiusKm: 1, meshRadiusUnits: 1000, tree: { scene: 0, nodes: [{ className: 'body', parent: -1 }] }, declaredLensIds: ['model'],
+  config: {}, maxEntries: 10, radiusKm: 1, meshRadiusUnits: 1000, tree: { scene: 0, nodes: [{ className: 'body', parent: -1 }] }, declaredDatasetIds: ['model'],
   hitMesh: { target: 0, triangles: [[[-10, -10, 10], [10, -10, 10], [0, 10, 10]]] } });
 
 test('published coordinates can anchor on an explicitly authored sphere; a missing irregular mesh still fails', async () => {

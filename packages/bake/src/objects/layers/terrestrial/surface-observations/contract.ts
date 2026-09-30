@@ -1,5 +1,5 @@
 /**
- * The surface-observation contract. Every photograph lens is prepared in the same stages:
+ * The surface-observation contract. Every photograph dataset is prepared in the same stages:
  *
  *   decode → camera → pixel geometry → photometry → footprint → surface transfer → report
  *
@@ -66,7 +66,7 @@ export interface ObservationPhotometry {
   gain(incidence: number, emission: number, phase: number | undefined): number | null;
   report: Record<string, unknown>;
   units?: string;
-  /** Whether displayed brightness keeps the acquisition illumination. A normalizing model cannot invert a cast shadow, so its lens withholds shadowed pixels. */
+  /** Whether displayed brightness keeps the acquisition illumination. A normalizing model cannot invert a cast shadow, so its dataset withholds shadowed pixels. */
   retainsIllumination: boolean;
 }
 
@@ -91,7 +91,7 @@ export interface ObservationFrame {
   sample(point: readonly number[]): FootprintSample;
   /** Whether the frame's camera sees a source-surface point without obstruction. */
   visible(point: readonly number[]): boolean;
-  /** How deep inside the frame's usable disc a source-surface point projects: its distance from the nearest pixel the lens cannot use
+  /** How deep inside the frame's usable disc a source-surface point projects: its distance from the nearest pixel the dataset cannot use
    * (off the body, past the emission or incidence limit, or disqualified), as a fraction of the deepest pixel's; zero at the edge. */
   contourDepth?(point: readonly number[]): number;
   /** Measured footprint: nadir-equivalent ground size of one pixel, from the camera's pixel angle and each pixel's range. */
@@ -116,16 +116,16 @@ export interface SurfacePolicy {
   /** Each frame's observing season, for frames that carry no calibrated level: the level fit then places every season by overlaps alone. */
   levelSeasons?: readonly number[];
   samplesPerTriangle: number;
-  /** An authored palette replaces the linear grey of a monochrome lens; the display levels are unchanged. */
+  /** An authored palette replaces the linear grey of a monochrome dataset; the display levels are unchanged. */
   display: ({ range: 'surface-samples'; percentiles: readonly number[]; units: string } | { range: 'stated-range'; low: number; high: number; units: string; colorDisplay?: BandColorDisplay }) & { palette?: readonly string[] } & { basis: 'authored' | 'source'; sourceId?: string };
   photometry: Record<string, unknown>;
-  /** Whether the displayed brightness keeps the acquisition illumination; such a lens is never lit again. */
+  /** Whether the displayed brightness keeps the acquisition illumination; such a dataset is never lit again. */
   retainsIllumination: boolean;
   limits: Record<string, unknown>;
   limitations?: string;
-  /** The filter bands' camera alignment a colour format measured once for the whole lens. */
+  /** The filter bands' camera alignment a colour format measured once for the whole dataset. */
   bandAlignment?: Record<string, unknown>;
-  /** The registration stage's measurement of the lens, attached after loading. */
+  /** The registration stage's measurement of the dataset, attached after loading. */
   registration?: Record<string, unknown>;
 }
 

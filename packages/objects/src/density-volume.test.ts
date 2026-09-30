@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { parseDensityVolumeObjectDescriptor } from './density-volume.js';
 
 const volume = () => ({
-  schema: 'cssearth-object@1', id: 'example-volume', type: 'density-volume',
+  schema: 'cssearth-object@2', id: 'example-volume', type: 'density-volume',
   properties: {
     volume: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [8.2e20, -1.1e20, 3.4e19],
       localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 8.269676e19,

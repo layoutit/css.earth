@@ -39,7 +39,7 @@ export async function assertCompilerSceneRetained(page: Page, saved: RetainedSce
 export async function compilerPresentation(page: Page) {
   const root = page.locator('[data-compiler-root]');
   return {
-    lens: await page.locator('#compiler-lens').inputValue(),
+    dataset: await page.locator('#compiler-dataset').inputValue(),
     material: await root.getAttribute('data-material'),
     pose: await root.getAttribute('data-pose'),
     framing: await root.getAttribute('data-framing'),

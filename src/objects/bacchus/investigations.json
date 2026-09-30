@@ -51,9 +51,9 @@
     },
     {
       "id": "recorded-survey-4",
-      "subject": "Spitzer thermal-infrared observations in 2006, 2015, 2017: excluded from surface lens",
+      "subject": "Spitzer thermal-infrared observations in 2006, 2015, 2017: excluded from surface dataset",
       "status": "excluded",
-      "finding": "- [Spitzer thermal-infrared observations in 2006, 2015, 2017](https://pds-smallbodies.astro.umd.edu/data_other/sptz_02_INNER/a2063.shtml): **excluded from surface lens**. Disk-integrated observations do not provide registered resolved terrain, photographic texture, or a spatial temperature map.",
+      "finding": "- [Spitzer thermal-infrared observations in 2006, 2015, 2017](https://pds-smallbodies.astro.umd.edu/data_other/sptz_02_INNER/a2063.shtml): **excluded from surface dataset**. Disk-integrated observations do not provide registered resolved terrain, photographic texture, or a spatial temperature map.",
       "revisitWhen": "Published model-specific definitions, an independently constrained pole/scale, or a released replacement mesh that resolves the recorded ambiguity.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/bacchus/README.md"

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-volume-presentation-source@1",
+  "schema": "cssearth-volume-presentation-source@2",
   "objectId": "pds-70-disc",
   "name": "PDS 70 dust ring",
-  "defaultLens": "dust",
+  "defaultDataset": "dust",
   "bank": {
-    "path": "src/objects/pds-70-disc/prepared/lenses.json"
+    "path": "src/objects/pds-70-disc/prepared/datasets.json"
   },
   "recipes": [
     {
@@ -14,7 +14,7 @@
   ],
   "sharedInputs": [],
   "inputEvidence": [],
-  "lenses": [
+  "datasets": [
     {
       "id": "dust",
       "label": "ALMA · dust ring, 0.87 mm",

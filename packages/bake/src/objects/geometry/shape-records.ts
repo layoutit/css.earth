@@ -1,5 +1,5 @@
 // Decoders for the shape and camera records the geometry loaders read: mesh, plate, radius and radial-table profiles, shape
-// and surface lenses, facet fields, and controlled-camera frames. Layer pipelines keep their own records beside them.
+// and surface datasets, facet fields, and controlled-camera frames. Layer pipelines keep their own records beside them.
 import { array, boolean, number, optional, requireRecord, shape, text } from '@cssearth/core';
 export const parseTransform = shape({scale:number,offset:number});
 export const parseRadialTableProfile = shape({latitudeStepDegrees:number,longitudeStepDegrees:number,metersPerUnit:number,
@@ -10,8 +10,8 @@ export const parseMeshProfile = shape(meshProfileFields);
 export const parsePlateProfile = shape({...meshProfileFields,indexBase:number,provenanceFlags:optional(text)});
 export const parseRadiusProfile = shape({...meshProfileFields,stepDegrees:number,longitudeDirection:text});
 export const parseSurfaceSampling = shape({method:text,maximumDistanceMeters:number});
-export const parseSurfaceLens = shape({surfaceSampling:parseSurfaceSampling,valueTransform:optional(parseTransform)});
-export const parseShapeLens = shape({format:text,path:text,grid:parseMeshProfile,facetField:optional(requireRecord),
+export const parseSurfaceDataset = shape({surfaceSampling:parseSurfaceSampling,valueTransform:optional(parseTransform)});
+export const parseShapeDataset = shape({format:text,path:text,grid:parseMeshProfile,facetField:optional(requireRecord),
   sampleGrid:optional(shape({width:optional(number),height:optional(number)})),coverage:optional(shape({path:text,member:text,field:text})),
   surfaceSampling:optional(parseSurfaceSampling),valueTransform:optional(parseTransform)});
 export const parseFacetField = shape({format:text,path:text,labelPath:text,field:text,target:text,sourceVersion:text,mapVersion:text,

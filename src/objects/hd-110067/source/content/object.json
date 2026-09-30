@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hd-110067",
   "displayName": "HD 110067",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Measured ESPRESSO colour with a modeled darker edge. The star is unresolved; no surface map or absolute brightness.",
-        "thumbnail": "hd-110067-lens-color.webp",
+        "thumbnail": "hd-110067-dataset-color.webp",
         "surface": "hd-110067-surface-color@2x.webp",
         "poles": "hd-110067-poles-color@2x.webp",
         "source": {

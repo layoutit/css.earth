@@ -69,10 +69,10 @@ the page draws it from the same map, limb law and opacities
 
 ## Tests and evidence
 
-- [Captures](evidence/2026-09-29/capture.json) of this version show [the default, cut-open view](evidence/2026-09-29/cmb-cut-open.jpg)
-  with its dataset card, and [the full sphere](evidence/2026-09-29/cmb-full-sphere.jpg) after choosing it in place, at the
+- Captures of this version show the default, cut-open view
+  with its dataset card, and the full sphere after choosing it in place, at the
   same camera. An earlier capture, from before the cutaway, shows
-  [the whole sphere from outside](evidence/2026-09-29/cmb-from-outside.jpg) seamless across its 450 patches.
+  the whole sphere from outside seamless across its 450 patches.
 - The registry tests check that the four overviews are `OBJECTS` entries and that zooming out from the Sun walks them in
   their order (`site/test/navigation-ontology.test.mts`, `site/test/overview-context.test.mts`).
 - The [context lineage test](../../../src/platform/context-lineage.test.mts) checks that its products read only its source records.

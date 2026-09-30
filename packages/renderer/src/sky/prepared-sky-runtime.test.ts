@@ -5,7 +5,7 @@ import { validatePreparedCssSky } from './validation.js';
 import type { PreparedCssSky } from './types.js';
 import type { PreparedCssVolume } from '../volume/types.js';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
-import type { PreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
+import type { PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
 import { worldRotationCss } from '../navigation/world-camera-math.js';
@@ -15,7 +15,7 @@ import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js
 import { logarithmicFade } from '../universe/world-context/context-scale.js';
 import { STELLAR_POINTS_MAX_OPACITY } from '../universe/stellar-points.js';
 import { readCanonicalPointField } from '../../test/canonical-point-field-fixture.js';
-import { parseLensBillboards } from '../universe/lens-billboards.js';
+import { parseDatasetBillboards } from '../universe/dataset-billboards.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 
 // linkedom has no layout delivery; caption geometry has explicit observer tests.
@@ -29,11 +29,11 @@ beforeEach(() => vi.stubGlobal('Image', class {
   removeAttribute() { this.src = ''; }
 }));
 
-/** Declared lens banks with the prepared facts the universe reads before fetching any of them. These fixtures
- * carry no billboard images, so a small bank draws nothing until its lenses load. */
-const lensBanks = (banks: readonly { id: string; frame: DensityVolumeFrame; contextVisibility?: string; attachedTo?: string }[]) => ({
-  volumeLensBanks: banks.map(bank => ({ id: bank.id, frame: bank.frame })),
-  lensBillboards: { atlasUrl: '/atlas.webp', plan: parseLensBillboards({ schema: 'cssearth-lens-billboards@1',
+/** Declared dataset banks with the prepared facts the universe reads before fetching any of them. These fixtures
+ * carry no billboard images, so a small bank draws nothing until its datasets load. */
+const datasetBanks = (banks: readonly { id: string; frame: DensityVolumeFrame; contextVisibility?: string; attachedTo?: string }[]) => ({
+  volumeDatasetBanks: banks.map(bank => ({ id: bank.id, frame: bank.frame })),
+  datasetBillboards: { atlasUrl: '/atlas.webp', plan: parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@1',
     atlas: { columns: 1, rows: 1, cellPx: 256 },
     banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility ?? 'galactic', attached: bank.attachedTo !== undefined })) }) },
 });
@@ -289,7 +289,7 @@ test.each([{ withSky: true }, { withSky: false }])('inside the galaxy box the NA
   mounted.destroy(); expect(stage.children).toEqual([detail]); expect(document.defaultView.pending.size).toBe(0);
 });
 
-test('shared universe draws only resolved nebulae and never prefetches their lenses with the galaxy', async () => {
+test('shared universe draws only resolved nebulae and never prefetches their datasets with the galaxy', async () => {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
@@ -305,8 +305,8 @@ test('shared universe draws only resolved nebulae and never prefetches their len
         backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
     resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, bytes: 1, width: 1, height: 1 })),
     provenance: {}, approximation: {} };
-  const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'nearby-nebula', defaultLens: 'optical',
-    framingRadiusUnits: 1, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
+  const bank: PreparedVolumeDatasets = { schema: 'cssearth-volume-datasets@1', id: 'nearby-nebula', defaultDataset: 'optical',
+    framingRadiusUnits: 1, contextVisibility: 'independent', datasets: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
       description: 'Prepared nearby nebula', sourceUrl: 'https://example.org/nebula', volume: nebula,
       brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] };
   const { contextVisibility: _independent, ...galacticBank } = bank;
@@ -315,27 +315,27 @@ test('shared universe draws only resolved nebulae and never prefetches their len
   const document = new FakeDocument(), stage = document.createElement();
   const fetchResource = vi.fn<typeof fetch>(async () => new Response(new Uint8Array([1])));
   Object.assign(document.defaultView, { fetch: fetchResource });
-  // Loading a bank's prepared payload (all its lenses and catalogue points) is deferred, one bank at
+  // Loading a bank's prepared payload (all its datasets and catalogue points) is deferred, one bank at
   // a time, exactly like loadShells defers a surface shell: nothing here is fetched until a bank is
   // either selected or first comes close enough to draw.
-  const loadVolumeLens = vi.fn((id: string) => Promise.resolve({ payload: banksById.get(id)!,
+  const loadVolumeDataset = vi.fn((id: string) => Promise.resolve({ payload: banksById.get(id)!,
     resolveResource: (path: string) => `/nebula/${id}/${path}` }));
   const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    ...lensBanks(banks.map(payload => ({ id: payload.id, frame: payload.lenses[0]!.volume.frame, contextVisibility: payload.contextVisibility, attachedTo: payload.attachedTo }))), loadVolumeLens });
+    ...datasetBanks(banks.map(payload => ({ id: payload.id, frame: payload.datasets[0]!.volume.frame, contextVisibility: payload.contextVisibility, attachedTo: payload.attachedTo }))), loadVolumeDataset });
   // Declaring a bank must not fetch it: the whole point of deferring it is that the first frame never pays for it.
-  expect(loadVolumeLens).not.toHaveBeenCalled();
+  expect(loadVolumeDataset).not.toHaveBeenCalled();
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
     const root = mounted.root as unknown as FakeElement;
     const milkyWay = root.children.find(node => node.className === 'prepared-volume-context')!;
-    const findBank = (id: string) => root.children.find(node => node.dataset.volumeLensObject === id);
+    const findBank = (id: string) => root.children.find(node => node.dataset.volumeDatasetObject === id);
     const images = (node: FakeElement): string[] => [node.style.backgroundImage, ...node.children.flatMap(images)].filter(Boolean);
     // Mounting the universe and publishing while far from every bank must not fetch any of them either.
     mounted.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 1e6 * parsecM],
         orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
-    expect(loadVolumeLens).not.toHaveBeenCalled();
+    expect(loadVolumeDataset).not.toHaveBeenCalled();
     expect(findBank(bank.id)).toBeUndefined();
     expect(findBank('galactic-default')).toBeUndefined();
     // A 0.1 pc radius spans 30 px at 2 pc and 1.25 px at 48 pc, using the default visibility thresholds.
@@ -362,11 +362,11 @@ test('shared universe draws only resolved nebulae and never prefetches their len
       });
       expect(independent!.style.opacity).toBe(visible ? '1' : '0');
       expect(independent!.style.display).toBe(visible ? 'block' : 'none');
-      // The galactic bank has the same silhouette but fades with the galaxy, which is zero here: its lenses are
+      // The galactic bank has the same silhouette but fades with the galaxy, which is zero here: its datasets are
       // neither drawn nor fetched.
       expect(galactic).toBeUndefined();
       if (visible) {
-        const cloud = independent!.children.find(node => node.className === 'prepared-volume-lens-cloud')!;
+        const cloud = independent!.children.find(node => node.className === 'prepared-volume-dataset-cloud')!;
         const axes = cloud.children.filter(node => node.className === 'css-volume-projection');
         expect(axes).toHaveLength(3);
         expect(Number(independent!.dataset.cloudOpacity)).toBeGreaterThan(0);
@@ -374,7 +374,7 @@ test('shared universe draws only resolved nebulae and never prefetches their len
         expect([...new Set(images(independent!))]).toEqual(['url("/nebula/nearby-nebula/z.webp")']);
       }
     }
-    expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
+    expect(loadVolumeDataset).toHaveBeenCalledExactlyOnceWith(bank.id);
     // Trigger the actual universe warm-up: it must finish without any nebula
     // URL, even for legacy banks with no distant-image payload or leaf bounds.
     mounted.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
@@ -384,9 +384,9 @@ test('shared universe draws only resolved nebulae and never prefetches their len
     const expected = volume.resources.filter(resource => !skyPaths.has(resource.path)).map(resource => `/volume/${resource.path}`);
     await vi.waitFor(() => expect(fetchResource).toHaveBeenCalledTimes(expected.length));
     expect(fetchResource.mock.calls.map(([url]) => url)).toEqual(expected);
-    // The galaxy warm-up prefetches the Milky Way's own resources only; it must never load a lens bank
+    // The galaxy warm-up prefetches the Milky Way's own resources only; it must never load a dataset bank
     // beyond the one already fetched by proximity above.
-    expect(loadVolumeLens).toHaveBeenCalledTimes(1);
+    expect(loadVolumeDataset).toHaveBeenCalledTimes(1);
   } finally { mounted.destroy(); }
   expect(stage.children).toEqual([]);
   expect(document.defaultView.pending.size).toBe(0);
@@ -409,15 +409,15 @@ test('an unloaded independent bank is fetched by proximity while the galactic fa
     provenance: {}, approximation: {} };
   // Default contextVisibility ('galactic'): this bank's eventual render still waits on the general
   // fade, but its fetch must not, or a future bank baked this way would never load by proximity at all.
-  const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'proximity-nebula', defaultLens: 'optical', contextVisibility: 'independent',
-    framingRadiusUnits: 1, lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
+  const bank: PreparedVolumeDatasets = { schema: 'cssearth-volume-datasets@1', id: 'proximity-nebula', defaultDataset: 'optical', contextVisibility: 'independent',
+    framingRadiusUnits: 1, datasets: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
       description: 'Prepared proximity nebula', sourceUrl: 'https://example.org/nebula', volume: nebula,
       brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] };
   const document = new FakeDocument(), stage = document.createElement();
-  const loadVolumeLens = vi.fn((id: string) => Promise.resolve({ payload: bank, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
+  const loadVolumeDataset = vi.fn((id: string) => Promise.resolve({ payload: bank, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
   const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    ...lensBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeLens });
+    ...datasetBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeDataset });
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
     const root = mounted.root as unknown as FakeElement;
@@ -428,13 +428,13 @@ test('an unloaded independent bank is fetched by proximity while the galactic fa
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 52 * parsecM], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(near, viewport, spatialFrame);
     expect(milkyWay.dataset.volumeOpacity).toBe('0');
-    expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
+    expect(loadVolumeDataset).toHaveBeenCalledExactlyOnceWith(bank.id);
   } finally { mounted.destroy(); }
   // The same bank, prepared as fading with the galaxy, is not fetched while the galaxy is faded out.
-  const galacticLoad = vi.fn(loadVolumeLens);
+  const galacticLoad = vi.fn(loadVolumeDataset);
   const galactic = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    ...lensBanks([{ id: bank.id, frame, contextVisibility: 'galactic' }]), loadVolumeLens: galacticLoad }).mount(document.createElement() as unknown as HTMLElement);
+    ...datasetBanks([{ id: bank.id, frame, contextVisibility: 'galactic' }]), loadVolumeDataset: galacticLoad }).mount(document.createElement() as unknown as HTMLElement);
   try {
     galactic.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 52 * parsecM], orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
@@ -457,35 +457,35 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
         backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
     resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, bytes: 1, width: 1, height: 1 })),
     provenance: {}, approximation: {} };
-  const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'far-nebula', defaultLens: 'optical',
-    framingRadiusUnits: .25, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
+  const bank: PreparedVolumeDatasets = { schema: 'cssearth-volume-datasets@1', id: 'far-nebula', defaultDataset: 'optical',
+    framingRadiusUnits: .25, contextVisibility: 'independent', datasets: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
       description: 'Prepared far nebula', sourceUrl: 'https://example.org/nebula', volume: nebula,
       brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] };
   const document = new FakeDocument(), stage = document.createElement();
-  const loadVolumeLens = vi.fn((id: string) => Promise.resolve({ payload: bank, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
+  const loadVolumeDataset = vi.fn((id: string) => Promise.resolve({ payload: bank, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
   const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    ...lensBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeLens });
+    ...datasetBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeDataset });
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
     const far: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2]], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(far, viewport, spatialFrame);
-    expect(loadVolumeLens).not.toHaveBeenCalled();
+    expect(loadVolumeDataset).not.toHaveBeenCalled();
     expect(mounted.focusBank(bank.id)!.state()).toBeNull();
     expect(mounted.focusBank(bank.id)!.framingRadiusM()).toBe(Math.hypot(1, 1, 1) * frame.metersPerUnit);
     // Focus readiness and dataset selection share the same real loader work.
     const readiness = mounted.focusBank(bank.id)!.load();
-    mounted.selectVolumeLens(bank.id, 'optical');
-    expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
+    mounted.selectVolumeDataset(bank.id, 'optical');
+    expect(loadVolumeDataset).toHaveBeenCalledExactlyOnceWith(bank.id);
     await readiness;
     expect(mounted.focusBank(bank.id)!.state()).not.toBeNull();
     expect(mounted.focusBank(bank.id)!.framingRadiusM()).toBe(.25 * frame.metersPerUnit);
-    expect(mounted.focusBank(bank.id)!.state()!.selectedLens).toBe('optical');
+    expect(mounted.focusBank(bank.id)!.state()!.selectedDataset).toBe('optical');
     const failure = new Error('Bank download failed');
     const failed = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
       resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-      ...lensBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeLens: () => Promise.reject(failure) }).mount(document.createElement() as unknown as HTMLElement);
+      ...datasetBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeDataset: () => Promise.reject(failure) }).mount(document.createElement() as unknown as HTMLElement);
     try {
       await expect(failed.focusBank(bank.id)!.load()).rejects.toBe(failure);
       expect(failed.focusBank(bank.id)!.state()).toBeNull();
@@ -494,38 +494,38 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
   } finally { mounted.destroy(); }
 });
 
-test('hidden lens banks are bounded, active subscriptions pin them, and eviction reloads saved presentation', async () => {
+test('hidden dataset banks are bounded, active subscriptions pin them, and eviction reloads saved presentation', async () => {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
   const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
-  const makeBank = (id: string, distancePc: number): PreparedVolumeLenses => {
+  const makeBank = (id: string, distancePc: number): PreparedVolumeDatasets => {
     const frame: PreparedCssVolume['frame'] = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
       originM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
       localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: .1 * parsecM,
       boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
-    const prepared = (lensId: string): PreparedCssVolume => ({ schema: 'cssearth-css-volume@1', id: `${id}-${lensId}`, frame, anchors: [],
+    const prepared = (datasetId: string): PreparedCssVolume => ({ schema: 'cssearth-css-volume@1', id: `${id}-${datasetId}`, frame, anchors: [],
       stacks: (['x', 'y', 'z'] as const).map(axis => ({ axis, leaves: [{ id: `${axis}-0`, centerUnits: [0, 0, 0],
-        texturePath: `${lensId}/${axis}.webp`, widthPx: 1, heightPx: 1,
+        texturePath: `${datasetId}/${axis}.webp`, widthPx: 1, heightPx: 1,
         style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
           backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
-      resources: ['x', 'y', 'z'].map(axis => ({ path: `${lensId}/${axis}.webp`, bytes: 1, width: 1, height: 1 })),
+      resources: ['x', 'y', 'z'].map(axis => ({ path: `${datasetId}/${axis}.webp`, bytes: 1, width: 1, height: 1 })),
       provenance: {}, approximation: {} });
-    return { schema: 'cssearth-volume-lenses@1', id, defaultLens: 'optical', framingRadiusUnits: 1, contextVisibility: 'independent',
-      lenses: ['optical', 'infrared'].map(lensId => ({ id: lensId, label: lensId, title: `${lensId} emission`,
-        description: `${id} prepared observation`, sourceUrl: 'https://example.org/nebula', volume: prepared(lensId),
+    return { schema: 'cssearth-volume-datasets@1', id, defaultDataset: 'optical', framingRadiusUnits: 1, contextVisibility: 'independent',
+      datasets: ['optical', 'infrared'].map(datasetId => ({ id: datasetId, label: datasetId, title: `${datasetId} emission`,
+        description: `${id} prepared observation`, sourceUrl: 'https://example.org/nebula', volume: prepared(datasetId),
         brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } })) };
   };
   const banks = [makeBank('near-bank', 50), makeBank('far-bank', 100)], byId = new Map(banks.map(bank => [bank.id, bank]));
-  const loadVolumeLens = vi.fn(async (id: string) => ({ payload: byId.get(id)!, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
+  const loadVolumeDataset = vi.fn(async (id: string) => ({ payload: byId.get(id)!, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
   const document = new FakeDocument(), stage = document.createElement();
   const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    ...lensBanks(banks.map(bank => ({ id: bank.id, frame: bank.lenses[0]!.volume.frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }))), loadVolumeLens,
-    warmVolumeLensDomNodeBudget: 0 });
+    ...datasetBanks(banks.map(bank => ({ id: bank.id, frame: bank.datasets[0]!.volume.frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }))), loadVolumeDataset,
+    warmVolumeDatasetDomNodeBudget: 0 });
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
-    mounted.selectVolumeLens('near-bank', 'infrared');
+    mounted.selectVolumeDataset('near-bank', 'infrared');
     mounted.setStellarPointsEnabled(false);
     const releaseNear = mounted.focusBank('near-bank')!.subscribe(() => {});
     await vi.waitFor(() => expect(mounted.focusBank('near-bank')!.state()).not.toBeNull());
@@ -537,26 +537,26 @@ test('hidden lens banks are bounded, active subscriptions pin them, and eviction
     await vi.waitFor(() => expect(mounted.focusBank('far-bank')!.state()).not.toBeNull());
     mounted.publish(camera(102), viewport, spatialFrame);
     expect(mounted.focusBank('near-bank')!.state()).not.toBeNull();
-    expect((mounted.root as unknown as FakeElement).dataset).toMatchObject({ volumeLensPinnedBankCount: '1', volumeLensWarmDomNodeBudget: '0' });
+    expect((mounted.root as unknown as FakeElement).dataset).toMatchObject({ volumeDatasetPinnedBankCount: '1', volumeDatasetWarmDomNodeBudget: '0' });
 
     releaseNear();
     expect(mounted.focusBank('near-bank')!.state()).toBeNull();
-    expect((mounted.root as unknown as FakeElement).dataset.volumeLensWarmDomNodes).toBe('0');
+    expect((mounted.root as unknown as FakeElement).dataset.volumeDatasetWarmDomNodes).toBe('0');
 
     const releaseReloaded = mounted.focusBank('near-bank')!.subscribe(() => {});
     await vi.waitFor(() => expect(mounted.focusBank('near-bank')!.state()).not.toBeNull());
-    expect(mounted.focusBank('near-bank')!.state()).toMatchObject({ selectedLens: 'infrared', starsVisible: false });
-    expect(loadVolumeLens.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(2);
+    expect(mounted.focusBank('near-bank')!.state()).toMatchObject({ selectedDataset: 'infrared', starsVisible: false });
+    expect(loadVolumeDataset.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(2);
     releaseReloaded();
     expect(mounted.focusBank('near-bank')!.state()).toBeNull();
 
     // A hidden, unpinned explicit load is trimmed when it settles; eviction does
     // not need another camera publication to enforce the warm budget.
-    mounted.selectVolumeLens('near-bank', 'optical');
-    await vi.waitFor(() => expect(loadVolumeLens.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(3));
-    await loadVolumeLens.mock.results.at(-1)!.value; await Promise.resolve(); await Promise.resolve();
+    mounted.selectVolumeDataset('near-bank', 'optical');
+    await vi.waitFor(() => expect(loadVolumeDataset.mock.calls.filter(([id]) => id === 'near-bank')).toHaveLength(3));
+    await loadVolumeDataset.mock.results.at(-1)!.value; await Promise.resolve(); await Promise.resolve();
     expect(mounted.focusBank('near-bank')!.state()).toBeNull();
-    expect((mounted.root as unknown as FakeElement).dataset.volumeLensWarmDomNodes).toBe('0');
+    expect((mounted.root as unknown as FakeElement).dataset.volumeDatasetWarmDomNodes).toBe('0');
   } finally { mounted.destroy(); }
 });
 
@@ -583,14 +583,14 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)',
         backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })),
     resources: ['x', 'y', 'z'].map(axis => ({ path: `${axis}.webp`, bytes: 1, width: 1, height: 1 })), provenance: {}, approximation: {} };
-  const bank = (id: string): PreparedVolumeLenses => ({ schema: 'cssearth-volume-lenses@1', id, defaultLens: 'optical',
-    framingRadiusUnits: 1, contextVisibility: 'independent', lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
+  const bank = (id: string): PreparedVolumeDatasets => ({ schema: 'cssearth-volume-datasets@1', id, defaultDataset: 'optical',
+    framingRadiusUnits: 1, contextVisibility: 'independent', datasets: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
       description: 'Prepared fixture', sourceUrl: 'https://example.org/nebula', volume: { ...small, id },
       brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] });
   const banks = ['focus-bank', 'warm-bank', 'cold-bank'].map(bank);
   const image: PreparedCssImageLayers = { ...small, id: 'image-bank', bankViews: small.stacks.map(stack => ({ axis: stack.axis,
     normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
-  const loadVolumeLens = vi.fn(async (id: string) => ({ payload: banks.find(bank => bank.id === id)!, resolveResource: (path: string) => `/bank/${id}/${path}` }));
+  const loadVolumeDataset = vi.fn(async (id: string) => ({ payload: banks.find(bank => bank.id === id)!, resolveResource: (path: string) => `/bank/${id}/${path}` }));
   const loadImageLayer = vi.fn(async () => ({ payload: image, resolveResource: (path: string) => `/image/${path}` }));
   catalogMount.mockReturnValue({ destroy() {}, select() {}, resolve: (id: string) => ({ id, detailedObjectId: id === 'catalogue-only' ? undefined : id.replace('catalogue:', '') }), publish() {}, inspect() {} });
   const document = new FakeDocument(), stage = document.createElement();
@@ -598,11 +598,11 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   Object.assign(document.defaultView, { fetch: fetchResource });
   const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    ...lensBanks(banks.map(bank => ({ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }))), loadVolumeLens,
+    ...datasetBanks(banks.map(bank => ({ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }))), loadVolumeDataset,
     imageLayerBanks: [{ id: image.id, frame }], loadImageLayer, catalog: { payload: {}, fadeStartDistanceM: 10, fullDistanceM: 20 },
   }).mount(stage as unknown as HTMLElement);
   const root = mounted.root as unknown as FakeElement;
-  const findBank = (id: string) => root.children.find(node => node.dataset.volumeLensObject === id)!;
+  const findBank = (id: string) => root.children.find(node => node.dataset.volumeDatasetObject === id)!;
   const mw = root.children.find(node => node.className === 'prepared-volume-context')!;
   const sky = root.children.find(node => node.className === 'prepared-celestial-sky')!;
   const stellar = root.children.find(node => node.className === 'stellar-direct-points')!;
@@ -615,7 +615,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     mounted.selectGalaxy('catalogue:focus-bank', focus());
     const near = camera(6.1), savedPose = structuredClone(near);
     mounted.publish(near, viewport, spatialFrame);
-    expect(loadVolumeLens.mock.calls.map(([id]) => id)).toEqual(['focus-bank', 'warm-bank']);
+    expect(loadVolumeDataset.mock.calls.map(([id]) => id)).toEqual(['focus-bank', 'warm-bank']);
     expect(loadImageLayer).not.toHaveBeenCalled(); expect(fetchResource).not.toHaveBeenCalled();
     expect(findBank('focus-bank').style.display).toBe('none');
     await vi.waitFor(() => {

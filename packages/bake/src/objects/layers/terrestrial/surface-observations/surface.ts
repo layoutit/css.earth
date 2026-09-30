@@ -51,7 +51,7 @@ export function namedLevelRefusal(error: unknown, ids: readonly string[], maximu
 }
 
 export function createSurfaceObservation({ frames, policy, radial, config, entries }: { frames: readonly ObservationFrame[]; policy: SurfacePolicy; radial: RadialSurface; config: SurfaceConfig; entries: readonly SourceInput[] }): SurfaceObservation {
-  if (policy.display.basis === 'source' && !entries.some(entry => entry.id === policy.display.sourceId)) throw new Error(`A source-based display names ${policy.display.sourceId}, which the lens does not consume.`);
+  if (policy.display.basis === 'source' && !entries.some(entry => entry.id === policy.display.sourceId)) throw new Error(`A source-based display names ${policy.display.sourceId}, which the dataset does not consume.`);
   if (!frames.length || (policy.selection === 'single') !== (frames.length === 1)) throw new Error('A surface observation selects among its frames only when it has several.');
   const mesh = radial.grid, metersPerUnit = config.geometry.radiusKm * 1000 / config.geometry.radius;
   const missing = (point: readonly number[], reason: string): Missing => ({ reason, color: missingCoverageColor(Math.atan2(point[1], point[0]) * 180 / Math.PI,

@@ -2,7 +2,7 @@
 
 ## Sources
 
-Its radius and temperature follow Thygesen et al. 2023. It is also HD 212657, HIP 110758. This account was drafted from Thygesen et al. 2023's values; the sections below are the data's own.
+Its radius and temperature follow Thygesen et al. 2023. It is also HD 212657, HIP 110758. The introduction is generated from Thygesen et al. 2023's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2594479109451475456, parallax 12.422 ± 0.029 mas (80.50 pc). Radius 1.499 +/- 0.077 solar radii from Thygesen et al. 2023, the stellar radius of the default parameter set of K2-167 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract). Mass 1.084 +/- 0.1 solar masses from Thygesen et al. 2023, the stellar mass of the default parameter set of K2-167 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract). Temperature 6,310 K from Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-167 b in the NASA Exoplanet Archive. log g 4.12 from the mass and radius.
 
@@ -12,13 +12,11 @@ Its radius and temperature follow Thygesen et al. 2023. It is also HD 212657, HI
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the lens's own reader.
-
+Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
-- **Drafted text.** The card and introduction were written by the generator from the cited values, not by a person.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

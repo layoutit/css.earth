@@ -21,7 +21,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   // (`inventoryPreparedAssets` in packages/objects/src/node/runtime-asset-closure.ts); a scratch bake records nothing.
   if (outputDirectory === resolve(objectDirectory, 'prepared') && !options.inventory) throw new TypeError('A bake into the object\'s prepared directory needs the host inventory.');
   const descriptorPath = resolve(objectDirectory,'object.json'), descriptor = record(JSON.parse(await readFile(descriptorPath,'utf8')) as unknown,'Point-field descriptor');
-  if (descriptor.schema !== 'cssearth-object@1' || descriptor.type !== 'point-field') throw new TypeError('Unsupported point-field descriptor.');
+  if (descriptor.schema !== 'cssearth-object@2' || descriptor.type !== 'point-field') throw new TypeError('Unsupported point-field descriptor.');
   const id = text(descriptor.id,'Point-field id'), properties = record(descriptor.properties,'Point-field properties'), preparation = record(properties.preparation,'Point-field preparation');
   const sourcePath = text(preparation.source,'Point-field source');
   const recipe = parseStarsRecipe(JSON.parse((await readFile(containedPath(objectDirectory,sourcePath))).toString('utf8')) as unknown);

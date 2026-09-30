@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/cd-35-16019-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "color",
       "output": "cd-35-16019-b-surface-{id}{suffix}.webp",
-      "thumbnail": "cd-35-16019-b-lens-{id}.webp",
+      "thumbnail": "cd-35-16019-b-dataset-{id}.webp",
       "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {

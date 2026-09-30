@@ -4,7 +4,7 @@ import type { PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedWorldC
 import type { WorldCameraPose, WorldCameraViewport } from '../../navigation/world-camera.js';
 import { cssViewFromOrientation } from '../../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
-import { createContextSelectionPolicy, contextOrbitOpacity, focusOwnOrbitOpacity, selectedOrbitDepthFade } from '../context-presentation-policy.js';
+import { contextOrbitOpacity, focusOwnOrbitOpacity, selectedOrbitDepthFade } from '../context-presentation-policy.js';
 import { rayHitsSphereBefore } from '../../solar-system/heliocentric-geometry.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter, orbitProjectionCapacity } from '../../solar-system/prepared-ring-projection.js';
 import type { OrbitSegment } from '../../solar-system/types.js';
@@ -42,6 +42,8 @@ export interface WorldContextView {
   viewport: WorldCameraViewport;
   selectedId: string;
   overview: boolean;
+  /** A selected system retains its host locator while using overview orbit framing. */
+  overviewSelection?: boolean;
   selectionPreview?: string | null;
   navigationInFlight: boolean;
   /** Keep established system landmarks through camera motion. Other labels use ordinary admission. */
@@ -96,7 +98,6 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
   const byId = new Map(points.map(point => [point.id, point]));
   const indexById = new Map(points.map((point, index) => [point.id, index] as const).reverse()); // Each id's first slot, looked up per frame.
   const systemFade = createSystemFade(plan);
-  const selectionPolicy = createContextSelectionPolicy(plan);
   const prepared = points.map(body => {
     const orbit: PlannerOrbit | null = 'orbit' in body ? body.orbit ?? null : null;
     const levels = orbit && hasPath(orbit) ? pathLevels(orbit) : [];
@@ -141,9 +142,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         return [r0 * x + r1 * y + r2 * z, r3 * x + r4 * y + r5 * z, r6 * x + r7 * y + r8 * z];
       };
       const toEye = (position: readonly number[]): PositionM => toEyeAt(position[0]!, position[1]!, position[2]!);
-      const orbitEmphasisId = selectionPreview === undefined ? selectedId : selectionPreview;
-      const orbitStrength = selectionPolicy.strengthAt(orbitEmphasisId, world.pose.positionM);
-      const emphasizedId = selectionPreview === undefined ? (overview ? null : selectedId) : selectionPreview;
+      const emphasizedId = selectionPreview === undefined ? (overview && !view.overviewSelection ? null : selectedId) : selectionPreview;
       const [ox, oy] = viewport.principalOffsetPixels;
       const focal = viewport.focalPixels;
       // Publication shares the camera owner's resize snapshot. Reading layout
@@ -346,8 +345,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
           (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));
-        const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity *
-          selectionPolicy.orbitOpacity(body.id, orbitEmphasisId, entry.hovered, orbitStrength);
+        const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
         const circle = (flightDestination ? systemOpacity * bodyLod.proxyOpacity > (entry.indicatorShown ? 0 : ANNOTATION_ENTRY_MARGIN) :

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/gj-1132b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "gj-1132b-surface-{id}{suffix}.webp",
-      "thumbnail": "gj-1132b-lens-{id}.webp",
+      "thumbnail": "gj-1132b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc778, the colour lens of gj-1132 (src/objects/gj-1132/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffc778, the colour dataset of gj-1132 (src/objects/gj-1132/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "gj-1132",
           "srgb": "#ffc778",
-          "source": "the colour lens of gj-1132 (src/objects/gj-1132/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of gj-1132 (src/objects/gj-1132/source/photometry/stellar-color.json)"
         }
       }
     }

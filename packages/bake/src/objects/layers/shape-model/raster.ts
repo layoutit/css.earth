@@ -15,20 +15,20 @@ function uniformSurface(width:number, height:number, [red, green, blue]:readonly
   return data;
 }
 
-/** One base-color map per lens; view-dependent lighting is a separate prepared layer. A lens is a measured uniform
+/** One base-color map per dataset; view-dependent lighting is a separate prepared layer. A dataset is a measured uniform
  * colour, the neutral gray display convention, or an illustration carried through a published model's own UVs. */
-export async function prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensIds, readSource }:OutputDirectories & {config:ShapeModelConfig;axes:readonly number[];sourceDirectory:string;lensIds:readonly string[];readSource:(path:string)=>Promise<Buffer>}) {
+export async function prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, datasetIds, readSource }:OutputDirectories & {config:ShapeModelConfig;axes:readonly number[];sourceDirectory:string;datasetIds:readonly string[];readSource:(path:string)=>Promise<Buffer>}) {
   const { width, height, latitudeSegments, longitudeSegments, poleSize } = config.mesh;
   const surfaces = config.surfaces ?? [];
-  if (surfaces.length ? surfaces.map(surface => surface.lens).join() !== lensIds.join() : lensIds.length !== 1)
-    throw new TypeError(`${config.displayName}: shape surfaces must name the authored lenses in order.`);
+  if (surfaces.length ? surfaces.map(surface => surface.dataset).join() !== datasetIds.join() : datasetIds.length !== 1)
+    throw new TypeError(`${config.displayName}: shape surfaces must name the authored datasets in order.`);
   const emit = async (name:string, data:Buffer, w:number, h:number) => {
     const bytes = await sharp(data, { raw: { width: w, height: h, channels: 4 } }).webp({ lossless: true, effort: 4 }).toBuffer();
     await writeFile(resolve(publicDirectory, name), bytes);
     return publicBase + name;
   };
-  const lenses = [];
-  for (const [index, lensId] of lensIds.entries()) {
+  const datasets = [];
+  for (const [index, datasetId] of datasetIds.entries()) {
     const surface = surfaces[index];
     let pixels:Buffer, source;
     if (!surface) {
@@ -41,7 +41,7 @@ export async function prepareModelRasters({ config, axes, publicDirectory, publi
       source = { discIntegratedColor: { source: surface.source, srgb: color.srgb, linearSrgb: color.linear, filterReflectance: color.reflectance } };
     } else if (surface.science.kind === 'glb-base-color') {
       // An illustration: the model's base-color texture through its own UVs. Not an observation; display coordinates are arbitrary.
-      if (surface.science.model !== surface.source) throw new TypeError(`${config.displayName}/${lensId}: science.model must equal the surface source.`);
+      if (surface.science.model !== surface.source) throw new TypeError(`${config.displayName}/${datasetId}: science.model must equal the surface source.`);
       await readSource(surface.source);
       const { pixels: model, ...modelSource } = await prepareGlbSurface(resolve(sourceDirectory, surface.source), width, height);
       pixels = model; source = { illustrativeModel: { source: surface.source, ...modelSource } };
@@ -53,16 +53,16 @@ export async function prepareModelRasters({ config, axes, publicDirectory, publi
     // Sidebar images use the interpreted flat map, before face projection and gutters.
     const flat = sharp(pixels, { raw: { width, height, channels: 4 } });
     await flat.clone().resize({ width: 640, withoutEnlargement: true }).webp({ lossless: true })
-      .toFile(resolve(publicDirectory, `${lensId}-map.webp`));
+      .toFile(resolve(publicDirectory, `${datasetId}-map.webp`));
     await flat.clone().resize(48, 48).webp({ lossless: true })
-      .toFile(resolve(publicDirectory, `${lensId}-thumbnail.webp`));
-    const map = { url: publicBase + `${lensId}-map.webp`, width: Math.min(width, 640), height: Math.round(height * Math.min(width, 640) / width) };
-    lenses.push({ id: lensId, source, map, textures: {
-      surface: await emit(`surface-${lensId}.webp`, packed.data, packed.packedWidth, packed.packedHeight),
-      poles: await emit(`poles-${lensId}.webp`, poles, poleSize * 2, poleSize),
+      .toFile(resolve(publicDirectory, `${datasetId}-thumbnail.webp`));
+    const map = { url: publicBase + `${datasetId}-map.webp`, width: Math.min(width, 640), height: Math.round(height * Math.min(width, 640) / width) };
+    datasets.push({ id: datasetId, source, map, textures: {
+      surface: await emit(`surface-${datasetId}.webp`, packed.data, packed.packedWidth, packed.packedHeight),
+      poles: await emit(`poles-${datasetId}.webp`, poles, poleSize * 2, poleSize),
     } });
   }
-  return lenses;
+  return datasets;
 }
 
 export async function prepareRingRaster({ config, publicDirectory, publicBase }:OutputDirectories & {config:ShapeModelConfig}) {

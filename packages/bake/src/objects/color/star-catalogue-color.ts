@@ -1,5 +1,5 @@
 // A placed star's catalogue colour (its search, catalogue and minimap swatch, and the world context's point colour) is derived,
-// never typed. A star whose package measures its colour (a stellar-photometric-color lens) takes that lens's prepared colour.
+// never typed. A star whose package measures its colour (a stellar-photometric-color dataset) takes that dataset's prepared colour.
 // Every other star takes the shared star field's display fit (temperatureColor in packages/engine/src/solar-system/star-color.ts,
 // the mapping the HYG field draws its stars with) at the effective temperature its measurement record cites.
 import { temperatureColor } from '@cssearth/engine';

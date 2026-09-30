@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "tic-393818343",
   "displayName": "TIC 393818343",
@@ -34,15 +34,15 @@
     ],
     "moreFacts": []
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "color",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
     "controls": [
       {
         "id": "color",
         "label": "Color",
         "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
-        "thumbnail": "tic-393818343-lens-color.webp",
+        "thumbnail": "tic-393818343-dataset-color.webp",
         "surface": "tic-393818343-surface-color@2x.webp",
         "poles": "tic-393818343-poles-color@2x.webp",
         "source": {

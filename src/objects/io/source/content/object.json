@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "io",
   "displayName": "Io",
@@ -74,14 +74,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "io-lens-normal.webp",
+        "thumbnail": "io-dataset-normal.webp",
         "surface": "io-normal@2x.webp",
         "poles": "io-poles-normal@2x.webp",
         "source": {
@@ -94,7 +94,7 @@
       {
         "id": "enhanced",
         "label": "False color",
-        "thumbnail": "io-lens-enhanced.webp",
+        "thumbnail": "io-dataset-enhanced.webp",
         "surface": "io-enhanced@2x.webp",
         "poles": "io-poles-enhanced@2x.webp",
         "source": {
@@ -108,7 +108,7 @@
       {
         "id": "geology",
         "label": "Geology",
-        "thumbnail": "io-lens-geology.webp",
+        "thumbnail": "io-dataset-geology.webp",
         "surface": "io-geology@2x.webp",
         "poles": "io-poles-geology@2x.webp",
         "falseColor": true,
@@ -223,7 +223,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "thumbnail": "io-lens-elevation.webp",
+        "thumbnail": "io-dataset-elevation.webp",
         "surface": "io-elevation@2x.webp",
         "poles": "io-poles-elevation@2x.webp",
         "falseColor": true,
@@ -304,7 +304,7 @@
       {
         "id": "spectral-slope",
         "label": "Spectral slope",
-        "thumbnail": "io-lens-spectral-slope.webp",
+        "thumbnail": "io-dataset-spectral-slope.webp",
         "surface": "io-spectral-slope@2x.webp",
         "poles": "io-poles-spectral-slope@2x.webp",
         "source": {
@@ -359,7 +359,7 @@
       {
         "id": "visible-absorption",
         "label": "Visible absorption",
-        "thumbnail": "io-lens-visible-absorption.webp",
+        "thumbnail": "io-dataset-visible-absorption.webp",
         "surface": "io-visible-absorption@2x.webp",
         "poles": "io-poles-visible-absorption@2x.webp",
         "source": {
@@ -414,7 +414,7 @@
       {
         "id": "volcanic-heat",
         "label": "Volcanic heat",
-        "thumbnail": "io-lens-volcanic-heat.webp",
+        "thumbnail": "io-dataset-volcanic-heat.webp",
         "surface": "io-volcanic-heat@2x.webp",
         "poles": "io-poles-volcanic-heat@2x.webp",
         "falseColor": true,

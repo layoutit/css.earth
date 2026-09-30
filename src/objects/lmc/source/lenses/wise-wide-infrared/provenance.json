@@ -6,7 +6,7 @@
     "id": "reconstruction-lmc-clouds-emission-envelope-wise-wide-infrared",
     "imageId": "wise-wide-infrared",
     "name": "Horálek · optical wide field",
-    "outputDirectory": "/Users/apresmoi/Documents/cssEarth/.local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-wise-wide-infrared",
+    "outputDirectory": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-wise-wide-infrared",
     "appearance": {
       "saturation": 2.5,
       "detailStrength": 1.95,
@@ -5610,7 +5610,7 @@
   "finiteMaterial": {
     "channelGain": null,
     "toneCurve": {
-      "schema": "cssearth-lens-tone-curve@1",
+      "schema": "cssearth-dataset-tone-curve@1",
       "knots": [
         0,
         8,
@@ -5754,8 +5754,8 @@
         ]
       ]
     },
-    "toneCurveMeaning": "Per-channel monotone curve fitted from paired pixels against this lens's own image, on the analytic render level (front-projection byte × chromaticity). Its channel ratios act as white balance inside the alpha chroma limit and its common factor after it. It can only dim or recolour inside the shared opacity; a display correction against a processed image, not photometry.",
-    "channelGainMeaning": "This lens is displayed at the shared model exposure with its own hue only."
+    "toneCurveMeaning": "Per-channel monotone curve fitted from paired pixels against this dataset's own image, on the analytic render level (front-projection byte × chromaticity). Its channel ratios act as white balance inside the alpha chroma limit and its common factor after it. It can only dim or recolour inside the shared opacity; a display correction against a processed image, not photometry.",
+    "channelGainMeaning": "This dataset is displayed at the shared model exposure with its own hue only."
   },
   "identity": {
     "method": "simulation-guided-finite-material@1",
@@ -5767,7 +5767,7 @@
       "gamma": 1
     },
     "toneCurve": {
-      "schema": "cssearth-lens-tone-curve@1",
+      "schema": "cssearth-dataset-tone-curve@1",
       "knots": [
         0,
         8,

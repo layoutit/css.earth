@@ -3,8 +3,8 @@
   "namespace": "saturn",
   "publicPrefix": "/scenes/saturn/",
   "source": "interior/manifest.json",
-  "sourceSchema": "csssaturn-interior-sources@1",
-  "outputSchema": "csssaturn-prepared-views@1",
+  "sourceSchema": "csssaturn-interior-sources@2",
+  "outputSchema": "csssaturn-prepared-views@2",
   "provenanceSource": "source/interior/manifest.json",
   "outerPoleSources": {
     "normal": "/scenes/saturn/saturn-poles.webp",

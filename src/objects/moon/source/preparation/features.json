@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-surface-features@1",
+  "schema": "cssearth-surface-features@2",
   "directory": "features",
   "archive": "MOON_nomenclature_center_pts.zip",
   "members": {
@@ -13,7 +13,7 @@
   "target": {
     "className": "moon-body"
   },
-  "lensIds": [
+  "datasetIds": [
     "surface",
     "midnight-temperature",
     "heat-anomalies",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/gj-504-b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,7 +21,7 @@
     {
       "id": "infrared",
       "output": "gj-504-b-surface-{id}{suffix}.webp",
-      "thumbnail": "gj-504-b-lens-{id}.webp",
+      "thumbnail": "gj-504-b-dataset-{id}.webp",
       "source": "photometry/band-color.json",
       "falseColor": true,
       "science": {
@@ -32,7 +32,7 @@
     {
       "id": "illustration",
       "output": "gj-504-b-surface-{id}{suffix}.webp",
-      "thumbnail": "gj-504-b-lens-{id}.webp",
+      "thumbnail": "gj-504-b-dataset-{id}.webp",
       "source": "illustration/GJ_504_b.jpg",
       "falseColor": false,
       "science": {

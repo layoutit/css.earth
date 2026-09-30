@@ -24,7 +24,7 @@
       "id": "jpl-usgs-voyager-display-map-1440-720",
       "subject": "JPL/USGS Voyager display map, 1440 × 720",
       "status": "excluded",
-      "finding": "Superseded by the registered numeric LPI mosaic; not a duplicate lens.",
+      "finding": "Superseded by the registered numeric LPI mosaic; not a duplicate dataset.",
       "revisitWhen": "A Titania observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/titania/source/manifest.json",
@@ -56,7 +56,7 @@
       "id": "nasa-color-composite",
       "subject": "NASA color composite",
       "status": "excluded",
-      "finding": "Useful visual reference, excluded as a map lens: a published disc composite does not establish registered global color coverage.",
+      "finding": "Useful visual reference, excluded as a map dataset: a published disc composite does not establish registered global color coverage.",
       "revisitWhen": "A Titania observation or controlled reconstruction demonstrates useful native surface detail, body-fixed geometry and independent registration beyond the cited sampling or coverage limits.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/titania/source/manifest.json",
@@ -67,7 +67,7 @@
       "id": "usgs-gazetteer",
       "subject": "USGS Gazetteer",
       "status": "included",
-      "finding": "Coordinate and nomenclature reference, not a separate observation lens. Named sample locations also appear in Nathan et al. Table A1.",
+      "finding": "Coordinate and nomenclature reference, not a separate observation dataset. Named sample locations also appear in Nathan et al. Table A1.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/titania/source/manifest.json",
         "https://planetarynames.wr.usgs.gov/Page/TITANIA/target"
@@ -88,7 +88,7 @@
       "id": "voyager-iss-color-2026",
       "subject": "Voyager 2 ISS green/violet/ultraviolet colour frames",
       "status": "included",
-      "finding": "17 GEOMED frames in 6 complete sets (7.4 to 24.4 km per pixel) placed by limb fit and mosaic registration supply the Voyager color lens. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (0.96, 0.92); the archive calibration gives 0.830 and 0.912. No phase normalisation; the north stays unavailable.",
+      "finding": "17 GEOMED frames in 6 complete sets (7.4 to 24.4 km per pixel) placed by limb fit and mosaic registration supply the Voyager color dataset. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (0.96, 0.92); the archive calibration gives 0.830 and 0.912. No phase normalisation; the north stays unavailable.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/titania/source/reference/voyager-color-placement.json",
         "https://ui.adsabs.harvard.edu/abs/1991LPSC...21..473B"

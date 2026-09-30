@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-content@1",
+  "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "ganymede",
   "displayName": "Ganymede",
@@ -61,14 +61,14 @@
       }
     ]
   },
-  "lenses": {
-    "titleKey": "lenses",
-    "defaultLens": "normal",
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "normal",
     "controls": [
       {
         "id": "normal",
         "label": "Monochrome",
-        "thumbnail": "ganymede-lens-normal.webp",
+        "thumbnail": "ganymede-dataset-normal.webp",
         "surface": "ganymede-normal@2x.webp",
         "poles": "ganymede-poles-normal@2x.webp",
         "source": {
@@ -81,7 +81,7 @@
       {
         "id": "dlr-juno",
         "label": "DLR mosaic",
-        "thumbnail": "ganymede-lens-dlr-juno.webp",
+        "thumbnail": "ganymede-dataset-dlr-juno.webp",
         "surface": "ganymede-dlr-juno@2x.webp",
         "poles": "ganymede-poles-dlr-juno@2x.webp",
         "source": {
@@ -94,7 +94,7 @@
       {
         "id": "enhanced",
         "label": "False color",
-        "thumbnail": "ganymede-lens-enhanced.webp",
+        "thumbnail": "ganymede-dataset-enhanced.webp",
         "surface": "ganymede-enhanced@2x.webp",
         "poles": "ganymede-poles-enhanced@2x.webp",
         "source": {
@@ -107,7 +107,7 @@
       {
         "id": "geology",
         "label": "Geology",
-        "thumbnail": "ganymede-lens-geology.webp",
+        "thumbnail": "ganymede-dataset-geology.webp",
         "surface": "ganymede-geology@2x.webp",
         "poles": "ganymede-poles-geology@2x.webp",
         "falseColor": true,
@@ -277,7 +277,7 @@
       {
         "id": "oxygen-signature",
         "label": "Oxygen signature",
-        "thumbnail": "ganymede-lens-oxygen-signature.webp",
+        "thumbnail": "ganymede-dataset-oxygen-signature.webp",
         "surface": "ganymede-oxygen-signature@2x.webp",
         "poles": "ganymede-poles-oxygen-signature@2x.webp",
         "source": {

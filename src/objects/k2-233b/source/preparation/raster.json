@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-raster-recipe@1",
+  "schema": "cssearth-raster-recipe@2",
   "publicBase": "/scenes/k2-233b/",
   "sourceWidth": 1024,
   "sourceHeight": 512,
@@ -21,16 +21,16 @@
     {
       "id": "shape",
       "output": "k2-233b-surface-{id}{suffix}.webp",
-      "thumbnail": "k2-233b-lens-{id}.webp",
+      "thumbnail": "k2-233b-dataset-{id}.webp",
       "source": "measurements.json",
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffe3c8, the colour lens of k2-233 (src/objects/k2-233/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
+        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star, whose measured colour (#ffe3c8, the colour dataset of k2-233 (src/objects/k2-233/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
         "hostLight": {
           "host": "k2-233",
           "srgb": "#ffe3c8",
-          "source": "the colour lens of k2-233 (src/objects/k2-233/source/photometry/stellar-color.json)"
+          "source": "the colour dataset of k2-233 (src/objects/k2-233/source/photometry/stellar-color.json)"
         }
       }
     }

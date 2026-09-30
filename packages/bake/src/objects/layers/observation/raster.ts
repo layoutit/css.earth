@@ -16,7 +16,7 @@ import type { ElevationRecipe } from './elevation.ts';
 export interface RasterInfo {width: number; height: number; channels: 1 | 2 | 3 | 4;}
 export interface RasterImage {data: Buffer; info: RasterInfo;}
 export interface TonalPresentation {saturation: number; linearGain: number; linearOffset: number; sharpenSigma: number;}
-export interface ObservationLens {
+export interface ObservationDataset {
   id: string; input: string; output?: string; rasterScale?: number;
   nativeSourcePoles?: boolean;
   scientific?: SciencePalette & {displaySampling?: string};
@@ -24,7 +24,7 @@ export interface ObservationLens {
   coverage?: {kind: string; southConnected: boolean};
   presentation?: TonalPresentation;
 }
-interface ObservationRasterInput {input: string; plan: Omit<ObservationLens, 'output'>; width: number; height: number;
+interface ObservationRasterInput {input: string; plan: Omit<ObservationDataset, 'output'>; width: number; height: number;
   elevation?: ReturnType<typeof decodeElevationGrid> | null; scientific?: SourceScalar | null;
   source?: RasterImage | null; sourceMissing?: Uint8Array | null;}
 
@@ -32,17 +32,17 @@ const relief = object({referenceRadiusMeters: number, lightDirection: array(numb
 const scientific = union(
   object({categories: array(object({color: string})), minimum: optional(number), maximum: optional(number), colors: optional(array(string)), relief: optional(relief), outputLongitudeOrigin: optional(number), displaySampling: optional(string)}),
   object({categories: (value): value is undefined => value === undefined, minimum: number, maximum: number, colors: array(string), relief: optional(relief), outputLongitudeOrigin: optional(number), displaySampling: optional(string)}));
-const observationLens = object({id: string, input: string, output: optional(string), rasterScale: optional(number), scientific: optional(scientific),
+const observationDataset = object({id: string, input: string, output: optional(string), rasterScale: optional(number), scientific: optional(scientific),
   nativeSourcePoles: optional(boolean),
   elevation: optional(object({noData: number, palette: array(array(number)), rangeMetres: number, relief: optional(relief)})),
   coverage: optional(object({kind: string, southConnected: boolean})),
   presentation: optional(object({saturation: number, linearGain: number, linearOffset: number, sharpenSigma: number}))});
-/** Validate one surface's observation fields (the retired lane's `observation lens` record without a required output). */
-export const parseObservationLens = (value: unknown) => parse(value, observationLens, 'observation lens');
+/** Validate one surface's observation fields (the retired lane's `observation dataset` record without a required output). */
+export const parseObservationDataset = (value: unknown) => parse(value, observationDataset, 'observation dataset');
 
 /** Direct source sampler for a static photograph with the same normalized map domain as its established `fit: fill`
  * decode. Coverage is evaluated against every native bilinear contributor before the polar output paints its grid. */
-export async function loadNativeObservationPoleSampler(input: string, plan: ObservationLens) {
+export async function loadNativeObservationPoleSampler(input: string, plan: ObservationDataset) {
   if (plan.scientific || plan.elevation) throw new TypeError('Native observation poles require a photographic source, not a numeric grid.');
   if (plan.presentation) throw new TypeError('Native observation poles cannot reproduce the resized-map Sharp tonal presentation.');
   if (plan.coverage && plan.coverage.kind !== 'black-fill') throw new TypeError('Unsupported native observation coverage source.');
@@ -89,7 +89,7 @@ export async function observationRaster({ input, plan, width, height, elevation,
   }
   const { info } = raster;
   const missing = raster.missing ?? (sourceMissing && source && sampleCoverage(sourceMissing, source.info, width, height));
-  // The mask travels with the painted grid so a lens drawn over another surface can replace exactly those cells.
+  // The mask travels with the painted grid so a dataset drawn over another surface can replace exactly those cells.
   return { info, data: missing ? paintMissingCoverage(raster.data, info, missing) : raster.data, ...(missing ? { missing } : {}) };
 }
 

@@ -214,7 +214,7 @@ NIFS 55 and NIRI 53, neither proven.
 - **DRAGONS runs under Rosetta 2 on this machine**, because no `osx-arm64` build exists. Results have not been compared
   against a native `linux-64` run.
 - The re-run trusts the archive's raw frames as it stores them. Nothing upstream of them is reproduced.
-- Nothing is drawn. No Gemini observation has been turned into a lens or an object dataset.
+- Nothing is drawn. No Gemini observation has been turned into a dataset or an object dataset.
 
 ## Re-running
 

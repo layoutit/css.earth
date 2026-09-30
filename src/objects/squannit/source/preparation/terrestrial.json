@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-terrestrial-preparation@1",
+  "schema": "cssearth-terrestrial-preparation@2",
   "kind": "solid-observation-body",
   "namespace": "squannit",
   "displayName": "Squannit",
@@ -73,6 +73,6 @@
     "sunSource": "Scheirich et al. (2021) phase-bearing secular mutual-orbit model, extrapolated from 2000–2019 observations to the retained scene epoch. Current orbital phase is approximate; source/validation/epoch-state.json records limitations. Display attitude remains illustrative."
   },
   "presentation": {
-    "defaultLens": "model"
+    "defaultDataset": "model"
   }
 }

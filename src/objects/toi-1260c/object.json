@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object@1",
+  "schema": "cssearth-object@2",
   "id": "toi-1260c",
   "type": "layered-body",
   "properties": {
@@ -10,7 +10,7 @@
         "verify-sources",
         "assets",
         "panel-content",
-        "lenses",
+        "datasets",
         "starfield",
         "sky-sun",
         "system-markers",
@@ -21,13 +21,13 @@
       ]
     },
     "recipe": {
-      "schema": "cssearth-authored-object@1",
+      "schema": "cssearth-authored-object@2",
       "surfaces": [
         {
           "id": "body",
           "source": "geometry",
           "projection": "equirectangular",
-          "lenses": [
+          "datasets": [
             {
               "id": "shape",
               "source": "content",
@@ -55,10 +55,6 @@
         {
           "id": "geometry",
           "path": "source/preparation/geometry.json"
-        },
-        {
-          "id": "celestial",
-          "path": "source/preparation/celestial.json"
         },
         {
           "id": "presentation",
@@ -89,7 +85,7 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/body-surfaces.css",
-        "src/renderers/css/styles/toi-1260c-surfaces.css"
+        "src/renderers/css/styles/templates/composite-planet.css"
       ],
       "metadata": {
         "url": "prepared/page.json"

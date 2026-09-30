@@ -52,7 +52,7 @@ Preparation reads these products from their public archives, such as NASA's PDS,
 
 ## Toolkits
 
-Preparation reads archive formats directly with in-house TypeScript readers. The FITS, PDS, SPICE and photometry readers are checked against independent reference implementations in [`tests/oracles/`](packages/core/src/node/oracle/README.md).
+Preparation reads archive formats directly with in-house TypeScript readers. The FITS, PDS, SPICE and photometry readers are checked against independent reference implementations in [the owner-local oracles](packages/core/src/node/oracle/README.md).
 
 - **FITS and PDS:** FITS images and tables, including Rice-compressed ones, with their sky orientation, and PDS3 and PDS4 labels ([`@cssearth/fits`](packages/fits/README.md), [PDS labels](docs/pds-labels.md)).
 - **SPICE:** kernels, clocks, frames and pointing, used to place a spacecraft's camera for each photograph ([`@cssearth/spice`](packages/spice/README.md)).
@@ -80,7 +80,7 @@ pnpm setup:assets
 pnpm dev
 ```
 
-`pnpm install` builds the shared packages, the renderer and the preparation tools. `pnpm setup:assets` downloads the prepared browser images and each object's baked scene files, which Git does not track. `pnpm dev` serves the site on port 4210.
+`pnpm install` builds the shared packages whose sources changed, the renderer and the preparation tools. `pnpm setup:assets` downloads the prepared browser images and each object's baked scene files, which Git does not track. `pnpm dev` serves the site on port 4210.
 
 To work on one object, use `pnpm setup:assets --object=mars` and open `/mars/`. For a production build, run `pnpm build`, then `pnpm preview`.
 

@@ -80,7 +80,8 @@ test('with the engine and the bake both stale, --run rebuilds the engine first',
     for (const name of ['engine', 'bake']) await utimes(join(root, `packages/${name}/src/index.ts`), 3000, 3000);
     const ran: string[] = [];
     await rebuildStale(root, BUILD_RULES, async command => { ran.push(command); });
-    assert.deepEqual(ran, ['pnpm --filter @cssearth/engine build', 'pnpm build:bake']);
+    // The volume viewer and the telescope CLI read the bake's sources, so they rebuild after it.
+    assert.deepEqual(ran, ['pnpm --filter @cssearth/engine build', 'pnpm build:bake', 'pnpm --filter @cssearth/volume-viewer build', 'pnpm --filter @cssearth/telescope-cli build']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

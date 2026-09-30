@@ -17,12 +17,12 @@ const setAttribute = (element: Element, name: string, value: string) => { if (el
 /** Keep the collapsed dataset's image and text aligned with the committed option, including sequence steps. */
 export function publishDatasetPreview(root: ParentNode | null, buttons: readonly HTMLButtonElement[]) {
   if (!root) return;
-  const previews = root.querySelectorAll<HTMLElement>('[data-lens-selected]');
-  const select = root.querySelector<HTMLSelectElement>('[data-lens-native-select]');
+  const previews = root.querySelectorAll<HTMLElement>('[data-dataset-selected]');
+  const select = root.querySelector<HTMLSelectElement>('[data-dataset-native-select]');
   if (previews.length === 0 && !select) return;
   const pressed = buttons.find(button => button.getAttribute('aria-pressed') === 'true');
   const visible = buttons.find(button => button.getAttribute('aria-pressed') === 'true' &&
-    button.closest<HTMLElement>('[data-lens-option]')?.hidden !== true);
+    button.closest<HTMLElement>('[data-dataset-option]')?.hidden !== true);
   const group = pressed?.closest<HTMLElement>('[data-step-group]')?.dataset.stepGroup;
   const listed = group ? buttons.find(button => {
     const option = button.closest<HTMLElement>('[data-step-group]');
@@ -30,7 +30,7 @@ export function publishDatasetPreview(root: ParentNode | null, buttons: readonly
   }) : undefined;
   const selected = visible?.getAttribute('value') ?? listed?.getAttribute('value') ?? pressed?.getAttribute('value');
   for (const preview of previews) {
-    const hidden = preview.dataset.lensSelected !== selected;
+    const hidden = preview.dataset.datasetSelected !== selected;
     if (preview.hidden !== hidden) preview.hidden = hidden;
   }
   if (select && selected) {
@@ -79,22 +79,22 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const document = stage.ownerDocument;
   const information = document.querySelector(".object-information-panel");
   // Form ownership survives moving a dataset from the body card to its system card.
-  const lensForm = information?.querySelector<HTMLFormElement>('form[data-dataset-form]');
-  const lensRoot = lensForm?.closest(".object-lenses");
+  const datasetForm = information?.querySelector<HTMLFormElement>('form[data-dataset-form]');
+  const datasetRoot = datasetForm?.closest(".object-datasets");
   const settingsRoot = document.querySelector(".object-settings");
-  const formButtons = [...(lensForm?.elements ?? [])]
+  const formButtons = [...(datasetForm?.elements ?? [])]
     .filter((input): input is HTMLButtonElement => input.tagName === 'BUTTON' && input.getAttribute('name') === 'dataset');
   // Step buttons submit a neighbouring dataset of a sequence; they are not the dataset's own control.
-  const lensInputs = formButtons.filter(input => !input.hasAttribute('data-dataset-step'));
+  const datasetInputs = formButtons.filter(input => !input.hasAttribute('data-dataset-step'));
   const stepInputs = formButtons.filter(input => input.hasAttribute('data-dataset-step'));
   const sequences = new Map<string, string[]>();
-  for (const input of lensInputs) {
+  for (const input of datasetInputs) {
     const group = input.closest<HTMLElement>('[data-step-group]')?.dataset.stepGroup;
     if (group) sequences.set(group, [...(sequences.get(group) ?? []), input.value]);
   }
   const settingsInputs = [...(settingsRoot?.querySelectorAll<SettingInput>("input[name], button[name]") ?? [])]
     .filter(input => !SHELL_SETTING_NAMES.has(input.name));
-  const details = lensInputs.map(input => {
+  const details = datasetInputs.map(input => {
     const id = input.getAttribute('aria-controls');
     const panel = id ? document.getElementById(id) : null;
     if (!panel) throw new Error(`Rendered dataset details are missing: ${input.value}.`);
@@ -104,8 +104,8 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   const playInputs = details.flatMap(({ panel }) => [...panel.querySelectorAll<HTMLButtonElement>('[data-dataset-play]')]);
   for (const input of playInputs) input.closest<HTMLElement>('[data-sequence-player]')?.style.setProperty('--sequence-hold', `${SEQUENCE_HOLD_MS}ms`);
   const contexts = [...(information?.querySelectorAll<HTMLElement>('[data-dataset-context]') ?? [])];
-  const busyRoots = new Set([lensRoot, settingsRoot].filter((root): root is Element => !!root));
-  const lenses = new Map(lensInputs.map(input => [input.value, input]));
+  const busyRoots = new Set([datasetRoot, settingsRoot].filter((root): root is Element => !!root));
+  const datasets = new Map(datasetInputs.map(input => [input.value, input]));
   const settings = new Map(settingsInputs.map(input => [input.name, input]));
   function settingInput(name: string): SettingInput {
     const input = settings.get(name);
@@ -113,9 +113,9 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     return input;
   }
   function invalidCycle(): never { throw new Error("A cycle requires prepared cycle content."); }
-  const lensPlans = controls.lenses?.controls ?? [], settingPlans = controls.settings?.controls ?? [];
-  if (lenses.size !== lensInputs.length || lenses.size !== lensPlans.length ||
-      lensPlans.some(lens => !lenses.has(lens.id)) || settings.size !== settingsInputs.length || settings.size !== settingPlans.length ||
+  const datasetPlans = controls.datasets?.controls ?? [], settingPlans = controls.settings?.controls ?? [];
+  if (datasets.size !== datasetInputs.length || datasets.size !== datasetPlans.length ||
+      datasetPlans.some(dataset => !datasets.has(dataset.id)) || settings.size !== settingsInputs.length || settings.size !== settingPlans.length ||
       settingPlans.some(control => !settings.has(control.name))) {
     throw new Error("Rendered object controls do not match their actual package content.");
   }
@@ -144,13 +144,13 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   function stopPlayback() { playing = null; clearPlayTimer(); }
   function publishPlayback(next: Readonly<ObjectSelectionState>) {
-    const step = lensInputs.find(input => input.value === next.desired.lensId)
+    const step = datasetInputs.find(input => input.value === next.desired.datasetId)
       ?.closest<HTMLElement>('[data-step-group]');
     const group = step?.dataset.stepGroup ?? null;
     // Entering a sequence never starts playback; only its Play button does.
     if (ready && group !== currentGroup) { stopPlayback(); currentGroup = group; }
     const members = playing ? sequences.get(playing) : undefined;
-    if (!ready || document.hidden || next.error || !members?.includes(next.desired.lensId ?? '')) stopPlayback();
+    if (!ready || document.hidden || next.error || !members?.includes(next.desired.datasetId ?? '')) stopPlayback();
     if (next.pending) clearPlayTimer();
     // Keep each committed map on screen for SEQUENCE_HOLD_MS. Loading the next one never skips a date.
     if (playing && members && members.length > 1 && !next.pending && playTimer === null) {
@@ -158,9 +158,9 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
         playTimer = null;
         const state = getState();
         if (!ready || destroyed || document.hidden || state.pending || state.error || !playing) { publish(); return; }
-        const index = members.indexOf(state.committed?.lensId ?? '');
+        const index = members.indexOf(state.committed?.datasetId ?? '');
         if (index < 0) { stopPlayback(); publish(); return; }
-        act({ kind: 'lens', id: members[(index + 1) % members.length] });
+        act({ kind: 'dataset', id: members[(index + 1) % members.length] });
       }, SEQUENCE_HOLD_MS);
     }
     for (const input of playInputs) {
@@ -184,26 +184,26 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     lastState = next;
     const committed = next.committed ?? initialSelection;
     const shown = next.pending ? next.desired : committed;
-    const pressed = new Set(next.plan?.pressedLenses ?? [committed.lensId]);
-    for (const input of lensInputs) {
-      const root = input.closest('.object-lenses');
+    const pressed = new Set(next.plan?.pressedDatasets ?? [committed.datasetId]);
+    for (const input of datasetInputs) {
+      const root = input.closest('.object-datasets');
       if (root) busyRoots.add(root);
     }
     for (const root of busyRoots) {
       const busy = !ready || next.pending === true;
       setAttribute(root, "aria-busy", String(busy));
     }
-    for (const input of lensInputs) {
+    for (const input of datasetInputs) {
       const disabled = input.type === 'submit' ? false : !ready;
       if (input.disabled !== disabled) input.disabled = disabled;
     }
     const focusedPlay = playInputs.find(input => input === document.activeElement);
-    publishDatasetSelection(lensInputs, details, contexts, pressed, lensRoot);
+    publishDatasetSelection(datasetInputs, details, contexts, pressed, datasetRoot);
     publishPlayback(next);
     // Each date owns its details panel; carry keyboard focus to its matching Pause button when it changes.
-    if (focusedPlay?.closest<HTMLElement>('[data-lens-details]')?.hidden) {
+    if (focusedPlay?.closest<HTMLElement>('[data-dataset-details]')?.hidden) {
       playInputs.find(input => input.dataset.datasetPlay === focusedPlay.dataset.datasetPlay &&
-        !input.closest<HTMLElement>('[data-lens-details]')?.hidden)?.focus();
+        !input.closest<HTMLElement>('[data-dataset-details]')?.hidden)?.focus();
     }
     for (const control of settingPlans) {
       const input = settingInput(control.name);
@@ -227,7 +227,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   function act(action: ObjectAction) {
     if (destroyed) return;
     if (!ready) {
-      if (action.kind !== 'lens' && settings.get(action.name)?.hasAttribute('form')) {
+      if (action.kind !== 'dataset' && settings.get(action.name)?.hasAttribute('form')) {
         nativeChanges.set(action.name, requireObjectAction(controls, action));
       } else publish();
       return;
@@ -245,21 +245,21 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
   }
   try {
     publish();
-    for (const [id, input] of lenses) listen(input, "click", event => {
+    for (const [id, input] of datasets) listen(input, "click", event => {
       if (!ready) return;
       event.preventDefault();
       stopPlayback();
-      act({ kind: "lens", id });
+      act({ kind: "dataset", id });
     });
     for (const input of stepInputs) {
       // The first and last steps render a disabled button with nothing to step to.
       if (input.disabled && !input.dataset.datasetStep) continue;
-      if (!lenses.has(input.value)) throw new Error(`A dataset step names an unknown dataset: ${input.value}.`);
+      if (!datasets.has(input.value)) throw new Error(`A dataset step names an unknown dataset: ${input.value}.`);
       listen(input, "click", event => {
         if (!ready) return;
         event.preventDefault();
         stopPlayback();
-        act({ kind: "lens", id: input.value });
+        act({ kind: "dataset", id: input.value });
       });
     }
     for (const input of playInputs) {
@@ -302,7 +302,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
     const errors = [];
     for (const remove of listeners.splice(0)) { try { remove(); } catch (error) { errors.push(error); } }
     if (preserveControls) return errors;
-    for (const input of [...lensInputs, ...settingsInputs]) {
+    for (const input of [...datasetInputs, ...settingsInputs]) {
       try {
         const disabled = input.name === 'speed' || input.type !== 'submit' && !input.hasAttribute('form');
         if (input.disabled !== disabled) input.disabled = disabled;
@@ -328,7 +328,7 @@ export function createObjectControlBinding({ stage, controls, initialSelection, 
       publish();
     },
     stats: () => Object.freeze({ ready, destroyed, actions, listenerCount: listeners.length,
-      lensIds: Object.freeze([...lenses.keys()]), settings: Object.freeze([...settings.keys()]), state: lastState }),
+      datasetIds: Object.freeze([...datasets.keys()]), settings: Object.freeze([...settings.keys()]), state: lastState }),
     destroy({ preserveControls = false }: { preserveControls?: boolean } = {}) {
       if (destroyed) return;
       const errors = cleanup(preserveControls);
