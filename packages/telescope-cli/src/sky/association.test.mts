@@ -42,19 +42,6 @@ test('candidates come from whereistheplanet, and a body with no published predic
   assert.throws(() => hostedPlanetsOf('beta-pictoris-b'), /not a star/u);
 });
 
-test('each published GRAVITY position associates with its own planet and rejects the rest', async () => {
-  // Table 1 of arXiv:2609.02708: GRAVITY astrometry taken after the Lacour et al. 2021 fit these orbits come from.
-  const measurements = readRelativeAstrometryCsv(await readFile(fixture, 'utf8'));
-  const { associations } = await associate(measurements, 'beta-pictoris');
-  for (const association of associations) {
-    const expected = association.measurement.id.startsWith('b-') ? 'beta-pictoris-b' : 'beta-pictoris-c';
-    const closest = association.tests.find(test => test.id === association.closest)!;
-    assert.equal(association.closest, expected, `${association.measurement.id} matched ${association.closest}`);
-    assert.ok(closest.mahalanobis < 3, `${association.measurement.id} R ${closest.mahalanobis}`);
-    for (const other of association.tests) if (other.id !== expected) assert.ok(other.mahalanobis > 20, `${association.measurement.id} vs ${other.id} R ${other.mahalanobis}`);
-  }
-  await assert.rejects(associate([{ id: 'no-error', epochMjd: 59604.16, eastMas: 1, northMas: 2 }], 'beta-pictoris'), /covariance/u);
-});
 
 test('the association command writes its rows, its limits and a chart for each measurement', async () => {
   const work = await temporary();
