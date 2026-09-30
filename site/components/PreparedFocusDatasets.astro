@@ -43,14 +43,15 @@ const banks = await Promise.all(Object.entries(descriptors).filter(([, descripto
   const resources = Object.fromEntries(Object.entries(CONTEXT_OBJECT_ASSET_URLS).filter(([path]) => path.startsWith(prefix)).map(([path, url]) => [path.slice(prefix.length), url]));
   return { bank, presentation, directSourceIdsByDataset, descriptor, resources };
 }));
+import Detached from './Detached.astro';
 ---
 {banks.map(({ bank, presentation, directSourceIdsByDataset, descriptor, resources }) => factsOnly ? <div data-focus-facts-bank={bank.id} hidden>
-  {presentation.controls.map(dataset => <div data-focus-dataset-details={dataset.id} hidden={dataset.id !== presentation.defaultDataset}>
+  {presentation.controls.map(dataset => <Detached detached={dataset.id !== presentation.defaultDataset}><div data-focus-dataset-details={dataset.id} hidden={dataset.id !== presentation.defaultDataset}>
     <ObjectFactsheet id={`focus-${bank.id}-${dataset.id}`} facts={[
       { id: 'dataset', label: 'Dataset', value: dataset.label },
       ...(dataset.facts ?? []),
     ]} embedded />
-  </div>)}
+  </div></Detached>)}
 </div> : <div class="object-dataset-content" data-focus-dataset-bank={bank.id} hidden>
   <script is:inline type="application/json" data-focus-resources set:html={JSON.stringify({ descriptor, resources }).replace(/</g, '\\u003c')}></script>
   <DatasetList objectId={`focus-${bank.id}`} thumbnailObjectId={bank.id} route={null} datasets={presentation} focus />

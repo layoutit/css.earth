@@ -49,6 +49,25 @@ export function packTextureSheet(sides: readonly number[]): { side: number; posi
 
 /** Downsample the canonical prepared atlas offline. Padding before reduction
  * keeps both axes at exactly the same scale; CSS atlas addresses never change. */
+type PreparedTextureLevels = NonNullable<Awaited<ReturnType<typeof prepareTextureLevels>>>;
+
+/** Published texture levels less the banks and pole atlases a run no longer declares (a removed dataset): a reuse run keeps
+ * every other level, sheet and tile as published. */
+export function keepTextureLevelBanks(levels: PreparedTextureLevels, bankIds: ReadonlySet<string>, datasetIds: ReadonlySet<string>): PreparedTextureLevels {
+  const kept = (key: string) => {
+    const match = /^(page|sheet|poles):([^:]+)/u.exec(key);
+    if (!match) throw new TypeError(`Unknown texture level resource: ${key}.`);
+    return match[1] === 'poles' ? datasetIds.has(match[2]!) : bankIds.has(match[2]!);
+  };
+  const entries = levels.entries.filter(entry => kept(entry.key)), urls = new Set(entries.map(entry => entry.url));
+  const pick = <T>(record: Record<string, T>) => Object.fromEntries(Object.entries(record).filter(([key]) => kept(key)));
+  return { ...levels, entries,
+    textureLevels: { ...levels.textureLevels, levels: levels.textureLevels.levels.map(level => ({ ...level, resources: pick(level.resources),
+      ...(level.tiles ? { tiles: pick(level.tiles) } : {}) })) },
+    provenance: { ...levels.provenance, receipts: levels.provenance.receipts.filter(receipt => urls.has(receipt.url)),
+      sheets: levels.provenance.sheets.filter(sheet => urls.has(sheet.url)) } };
+}
+
 export async function prepareTextureLevels({ config, plan, datasets, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string;surface?:{maps:readonly {name:string;maximumTextureWidth?:number}[]}};plan?:SurfaceBankPlan;datasets?:SurfaceBankDatasets;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
   if (!config.textureLevels) return null;
   const { widths, fixedWidth, maximumWidth, hysteresis, texelsPerCssPixel } = config.textureLevels;
@@ -114,6 +133,10 @@ export async function prepareTextureLevels({ config, plan, datasets, publicDirec
   const sheets: { url: string; side: number; pages: { source: string; x: number; y: number }[] }[] = [];
   const sheetUrls = new Map<string, { key: string; url: string; tiles: { x: number; y: number; scale: number }[] }>();
   const replaced = new Set<string>();
+  // Every bank's pages cover the same CSS pages; a bank prepared at lower density (Earth's cutaway shell) has smaller
+  // page images. A tile offset is in CSS px of a page, so a packed position scales by the densest page's width over
+  // its own before the atlas density converts it.
+  const fullPageWidth = Math.max(...banks.flatMap(bank => bank.urls.map(url => pageDimensions.get(url)!.width)));
   for (const bank of banks) {
     const dimensions = bank.urls.map(url => pageDimensions.get(url)!);
     if (dimensions.some(page => page.width !== page.height)) continue;
@@ -139,7 +162,10 @@ export async function prepareTextureLevels({ config, plan, datasets, publicDirec
         sheets.push({ url, side, pages: bank.urls.map((source, p) => ({ source, ...packed.positions[p]! })) });
         const key = `sheet:${bank.id}:level:${levelWidth}`;
         entries.push({ key, url, decodedBytes: side * side * 4, pool: 'pages' });
-        sheet = { key, url, tiles: dimensions.map((page, p) => ({ x: packed.positions[p]!.x / config.atlas.density, y: packed.positions[p]!.y / config.atlas.density, scale: packed.side / page.width })) };
+        sheet = { key, url, tiles: dimensions.map((page, p) => {
+          const toCss = fullPageWidth / page.width / config.atlas.density;
+          return { x: packed.positions[p]!.x * toCss, y: packed.positions[p]!.y * toCss, scale: packed.side / page.width };
+        }) };
         sheetUrls.set(cacheKey, sheet);
       }
       const level = levels[i]!;

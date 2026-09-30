@@ -114,7 +114,8 @@ response `source/atmosphere/psg-earth-r120-rif.txt`, drawn as static SVG.
 <details>
 <summary>Interior and mantle tomography</summary>
 
-The schematic layers follow NASA's [Earth facts](https://science.nasa.gov/earth/facts/), with the outer core and
+The cross-section and tomography views are parked: their sources and preparation stay, but the page no longer
+offers them. The schematic layers follow NASA's [Earth facts](https://science.nasa.gov/earth/facts/), with the outer core and
 mantle fitted to a 6,378 km radius.
 
 The tomography view samples

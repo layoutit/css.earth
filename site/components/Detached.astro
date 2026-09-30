@@ -1,0 +1,7 @@
+---
+/** A section only a selection shows ships inert, inside a template, and is mounted when selected
+ * (`sectionElements` and `showSection` in @cssearth/renderer). The section a page opens on is mounted as is. */
+interface Props { detached: boolean }
+const { detached } = Astro.props;
+---
+{detached ? <template data-detached-section><slot /></template> : <slot />}

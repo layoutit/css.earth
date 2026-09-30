@@ -1,4 +1,4 @@
-import { publishDatasetPreview } from '@cssearth/renderer';
+import { publishDatasetPreview, sectionElements, showSection } from '@cssearth/renderer';
 import { objectIdAtPath } from './root-object.mts';
 import { knownObject } from './object-directory.mts';
 
@@ -9,7 +9,8 @@ import { knownObject } from './object-directory.mts';
 export interface PageDatasets { readonly page: string; readonly root: HTMLElement; readonly defaultDataset: string; readonly views: ReadonlyMap<string, string> }
 
 export function readPageDatasets(document: ParentNode): PageDatasets[] {
-  return [...document.querySelectorAll<HTMLElement>('[data-page-datasets]')].map(root => {
+  // An overview card waits in a template until shown (detached-sections.ts); its datasets are read there too.
+  return sectionElements(document, '[data-page-datasets]').map(root => {
     const page = root.dataset.pageDatasets ?? '', defaultDataset = root.dataset.defaultDataset ?? '';
     const views = new Map(Object.entries(JSON.parse(root.dataset.datasetViews ?? '{}') as Record<string, unknown>)
       .filter((entry): entry is [string, string] => typeof entry[1] === 'string'));
@@ -39,9 +40,6 @@ export function presentPageDatasets(document: ParentNode, url: string | URL, sce
       if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
     }
     publishDatasetPreview(datasets.root, buttons);
-    for (const detail of datasets.root.querySelectorAll<HTMLElement>('[data-focus-dataset-details]')) {
-      const hidden = detail.dataset.focusDatasetDetails !== dataset;
-      if (detail.hidden !== hidden) detail.hidden = hidden;
-    }
+    for (const detail of sectionElements(datasets.root, '[data-focus-dataset-details]')) showSection(detail, detail.dataset.focusDatasetDetails === dataset);
   }
 }

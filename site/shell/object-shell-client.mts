@@ -1,3 +1,5 @@
+import { bindTabPanels } from '../tab-panels.mts';
+import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 import { createObjectBrowserController } from '../object-browser.mts';
 import { applySeoHead, focusSeo, objectSeo } from '../seo.mts';
 import { knownObject } from '../object-directory.mts';
@@ -39,6 +41,10 @@ export function mountObjectShell({
   const navigationProgress = documentTarget.querySelector<HTMLElement>('.explorer-navigation-progress');
   lifetime.onDispose(() => { if (navigationProgress) navigationProgress.ariaHidden = 'true'; });
   bindDatasetPicker(documentTarget, windowTarget, lifetime);
+  // Closed tabs' panels are not mounted (tab-panels.mts).
+  const tabPanels = new AbortController();
+  lifetime.onDispose(() => tabPanels.abort());
+  bindTabPanels(documentTarget, tabPanels.signal);
   const fragments = navigationFragments(windowTarget);
   let informationCard: ReturnType<typeof mountInformationCard>;
   let sheet: ReturnType<typeof createSheetController>;
@@ -51,7 +57,7 @@ export function mountObjectShell({
   let releaseArrivalControls = () => {};
   let navigationTransition: (ShellNavigationTransition & { cardSubject: 'body' | 'satellite-system' | null; retainsSourceCard: boolean }) | null = null;
   let camera: ShellCamera | null = null;
-  const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
+  const focusRoot = sectionElements(drawer, '[data-prepared-focus-card]')[0] ?? null;
   const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
   const focusCard = createPreparedFocusCard(focusRoot, id => focusTabs.show(id));
   lifetime.onDispose(() => focusCard.destroy());
@@ -92,6 +98,9 @@ export function mountObjectShell({
     const view = subject === 'satellite-system' ? 'overview' : 'detail';
     if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
     if (information && information.dataset.cardSubject !== subject) information.dataset.cardSubject = subject;
+    // The satellite system's header, tabs and bodies are mounted only while the system is the subject (detached-sections.ts).
+    if (information) for (const part of sectionElements(information, '[data-satellite-system]'))
+      if (sectionPlaceholder(part).parentElement === information) showSection(part, subject === 'satellite-system');
   }
   /** The page the shell shows changed in place: its head, and the forms and links that return to it. */
   function presentPage(route: string, seo: Parameters<typeof applySeoHead>[1]) {

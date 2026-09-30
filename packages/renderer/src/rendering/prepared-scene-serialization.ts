@@ -2,6 +2,7 @@ import { initialObjectSelection } from '../runtime/object-contract.js';
 import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
 import { textureTileGroups, textureTileLeafStyles } from './prepared-texture-levels.js';
 import { leafBoxBindings, leafBoxStyles } from './prepared-leaf-box-direct.js';
+import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
 
 export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; }
@@ -108,14 +109,15 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, data
   }
   // The exact prepared orientation holds while the application clock is absent: delivered scene CSS carries no motion
   // (site/build/prepared-motion-css.mts), so a motion target needs no declaration of its own.
-  // A subtree this selection hides stays out of the markup; the runtime builds it when it adopts the tree.
-  const hidden = new Set(variant.hiddenSubtrees ?? []);
+  // What this selection hides stays out of the markup (a hidden subtree's descendants, an unused mesh's leaves); the
+  // runtime builds those nodes when it adopts the tree (prepared-omitted-nodes.ts).
+  const omitted = omittedPreparedNodes(definition.tree, variant);
   const serialize = (index: number): string => {
     const node = elements[index];
     const attributes = { ...node.attributes, 'data-prepared-node': String(index),
       ...(node.classes.size ? { class: [...node.classes].join(' ') } : {}),
       ...(node.style.size ? { style: styleText(node.style) } : {}) };
-    return `<${node.tag}${Object.entries(attributes).map(([key, value]) => ` ${key}="${escape(value)}"`).join('')}>${hidden.has(index) ? '' : node.children.map(serialize).join('')}</${node.tag}>`;
+    return `<${node.tag}${Object.entries(attributes).map(([key, value]) => ` ${key}="${escape(value)}"`).join('')}>${node.children.filter(child => !omitted.has(child)).map(serialize).join('')}</${node.tag}>`;
   };
   return { html: roots.map(serialize).join(''), classes: [...stage.classes], attributes: stage.attributes,
     style: styleText(stage.style), nodes: elements.length, textures: [...textures].map(([key, address]) => ({ key, address })) };

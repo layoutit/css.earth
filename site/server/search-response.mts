@@ -1,3 +1,4 @@
+import { sectionElements } from '@cssearth/renderer';
 import { parseHTML } from 'linkedom';
 import { requiredElement } from '../browser/browser-types.mts';
 import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
@@ -24,7 +25,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
   const objectId = form.dataset.searchObject;
   if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new Error('Prepared search object is invalid.');
   const search = requiredElement<HTMLInputElement>(form, '.object-sidebar-search');
-  const focusCard = document.querySelector<HTMLElement>('[data-prepared-focus-card][data-prepared-focus-id]');
+  const focusCard = sectionElements(document, '[data-prepared-focus-card][data-prepared-focus-id]')[0] ?? null;
   const value = (url.searchParams.get('browse') ?? url.searchParams.get('q') ?? (focusCard ? search.getAttribute('value') : '') ?? '').slice(0, SEARCH_QUERY_LIMIT).trim();
   const searching = url.searchParams.has('q');
   search.setAttribute('value', value);

@@ -43,8 +43,10 @@
         }
       ],
       "shape": {
-        "kind": "radial-terrain",
-        "radiusKm": 561.4
+        "kind": "ellipsoid",
+        "radiusKm": 563.4,
+        "secondaryRadiusKm": 561.3,
+        "polarRadiusKm": 559.6
       },
       "surfaces": [
         {
@@ -126,8 +128,8 @@
         -0.3977771559319138,
         0.9174820620691819
       ],
-      "metersPerUnit": 2440.8695652173915,
-      "bodyRadiusM": 561400
+      "metersPerUnit": 2449.5652173913045,
+      "bodyRadiusM": 563400
     },
     "page": {
       "stylesheets": [

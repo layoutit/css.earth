@@ -150,7 +150,7 @@
     },
     {
       "id": "hubble-opal-2025a-f225w",
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
+      "path": "datasets/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
@@ -182,7 +182,7 @@
     },
     {
       "id": "hubble-opal-2025b-f225w",
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
+      "path": "datasets/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
@@ -214,7 +214,7 @@
     },
     {
       "id": "hubble-opal-2025a-fq889n",
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
+      "path": "datasets/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
@@ -246,7 +246,7 @@
     },
     {
       "id": "hubble-opal-2025b-fq889n",
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
+      "path": "datasets/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
@@ -1680,7 +1680,7 @@
   ],
   "generatedIntermediates": [
     {
-      "path": "lenses/manifest.json",
+      "path": "datasets/manifest.json",
       "generator": "tools/objects/operations-acquisition.ts json-document operation in preparation/acquisition.json"
     }
   ],

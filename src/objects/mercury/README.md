@@ -1,6 +1,7 @@
 # Mercury
 
-Mercury offers two monochrome maps taken under different sunlight, a three-filter color map, an enhanced-color map, numeric elevation, a gravity map, a crustal-thickness model and an illustrated cross section.
+Mercury offers two monochrome maps taken under different sunlight, a three-filter color map, an enhanced-color map, numeric elevation, a gravity map, and a crustal-thickness model. The illustrated cross section is parked: its
+sources stay, but the page no longer offers it.
 
 ## Sources
 

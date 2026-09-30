@@ -38,6 +38,17 @@ export interface SolidSceneConfig {
   presentation:{defaultDataset:string};
 }
 type SolidCelestial={sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan};
+/** The object recipe's shape: a triaxial ellipsoid names its axes, a sphere only its radius. */
+export type SolidShape={kind:string;radiusKm:number;secondaryRadiusKm?:number;polarRadiusKm?:number};
+
+/** A body without a mesh is drawn as its recipe's ellipsoid: the longest axis takes the display radius and the others
+ * keep their published ratios, as in the shape-model lane (`shape-model.ts`), so the world frame's body radius
+ * (`recipe.shape.radiusKm`) is the drawn one. */
+export function solidEllipsoidRadii(geometry:{radius:number}, shape:SolidShape|null) {
+  const radius = geometry.radius;
+  if (!shape || shape.kind !== 'ellipsoid') return { radius, secondaryRadius: radius, polarRadius: radius };
+  return { radius, secondaryRadius: radius * (shape.secondaryRadiusKm ?? shape.radiusKm) / shape.radiusKm, polarRadius: radius * (shape.polarRadiusKm ?? shape.radiusKm) / shape.radiusKm };
+}
 type SolidScene=ReturnType<typeof import('./solid/prepared-replay-source.ts').parseSolidReplayScene>;
 
 /** The terrestrial lane's default camera: the shared rule over the default dataset's photograph frames. */
@@ -88,11 +99,11 @@ async function publishedDatasetImageWidths({ config, outputDirectory, publicDire
   return { mapPixelWidth: await widest(['url', 'url2x']), polesPixelWidth: await widest(['polesUrl', 'polesUrl2x']) };
 }
 
-export async function prepareSolidScene({ config, celestial, outputDirectory, publicDirectory, radial = null, solarGeometry }:{config:SolidSceneConfig;celestial:SolidCelestial;outputDirectory:string;publicDirectory:string;radial?:ReturnType<typeof combineRadialModels>;solarGeometry:SolidSceneSolarGeometry}) {
+export async function prepareSolidScene({ config, celestial, outputDirectory, publicDirectory, radial = null, shape = null, solarGeometry }:{config:SolidSceneConfig;celestial:SolidCelestial;outputDirectory:string;publicDirectory:string;radial?:ReturnType<typeof combineRadialModels>;shape?:SolidShape|null;solarGeometry:SolidSceneSolarGeometry}) {
   const { namespace: id, geometry } = config;
   const framingScale = meshFramingScale(geometry.radius, (radial?.faces ?? []).flatMap(face => face.vertices), geometry.camera?.framingScale);
   const epoch = await prepareSolidEpochFrame({ config, celestial, framingScale, surfacesReport: JSON.parse(await readFile(resolve(outputDirectory, 'surfaces.json'), 'utf8')), solarGeometry });
-  const bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[]=radial?.leaves ?? prepareSolidBodySurface({ id, radius: geometry.radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
+  const bodyLeaves:readonly (PreparedProjectiveTextureLeaf & {attributes?:Readonly<Record<string,string>>})[]=radial?.leaves ?? prepareSolidBodySurface({ id, ...solidEllipsoidRadii(geometry, shape), mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
       sourceWidth: config.raster.width, sourceHeight: config.raster.height,
       latitudeSegments: config.raster.bandCount, gutter: config.raster.gutter,
       poleTileSize: config.raster.poleSize, ...await publishedDatasetImageWidths({ config, outputDirectory, publicDirectory }) });

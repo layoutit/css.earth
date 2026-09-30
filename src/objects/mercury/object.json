@@ -135,11 +135,6 @@
               "id": "crust",
               "source": "content",
               "material": "lighting"
-            },
-            {
-              "id": "interior",
-              "source": "content",
-              "material": "lighting"
             }
           ]
         }
@@ -151,12 +146,6 @@
           "model": "lit"
         }
       ],
-      "cutaway": {
-        "source": "geometry",
-        "surface": "body",
-        "dataset": "interior",
-        "material": "lighting"
-      },
       "features": {
         "source": "features",
         "maxEntries": 1000

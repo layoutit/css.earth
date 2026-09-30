@@ -31,7 +31,7 @@ import { applyDisplayGamma } from "./display-tone.ts";
 
 /** `mode` 'extras' prepares the interior, legends and thumbnails without surface maps or materials. `materialSlice` runs
  * every `count`th material image from `index`, so parallel workers each write a disjoint share (preparePagedEllipsoidAssetsInParallel). */
-export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all', surfaceMapNames, attitude, materialSlice = { index: 0, count: 1 } }: {attitude?: EllipsoidAttitude; config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: PagedSurfaceRasterPlan; atmosphere?: AtmospherePreparation; atmosphereModel?: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string; surfaceMapNames?: readonly string[]; materialSlice?: {index: number; count: number}}) {
+export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all', surfaceMapNames, attitude, materialSlice = { index: 0, count: 1 }, cutaway }: {cutaway: boolean; attitude?: EllipsoidAttitude; config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: PagedSurfaceRasterPlan; atmosphere?: AtmospherePreparation; atmosphereModel?: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string; surfaceMapNames?: readonly string[]; materialSlice?: {index: number; count: number}}) {
 const { bakeSurfaceRaster, surfacePageUrls } = raster;
 const requireMaterialPreparation=()=>{
   if(!atmosphere||!atmosphereModel||!attitude)throw new Error('Paged ellipsoid material preparation requires an atmosphere model and the body attitude.');
@@ -51,7 +51,7 @@ const produced = new Set<string>();
 const output = (path: string) => { produced.add(`${config.publicBase}${path}`); return resolve(publicDirectory,path); };
 await mkdir(publicDirectory,{recursive:true});
 if (mode === 'interior') {
-  await prepareInteriorAssets({ exterior: false });
+  if (cutaway) await prepareInteriorAssets({ exterior: false });
   return { assets: [...produced].sort() };
 }
 if (mode !== 'materials') {
@@ -80,8 +80,9 @@ if (mode !== 'materials') {
     inputs.set(map.name, input);
     if (mode !== 'thumbnails' && mode !== 'extras') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,nativePhotographicSampling:map.nativePhotographicSampling,deepOceanFill:map.deepOceanFill,kernel:map.scientific?"nearest":undefined,webp:map.webp});
   }
-  if (mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
-  else if (mode !== 'maps') await prepareInteriorAssets();
+  // A body without a cutaway (the recipe's `cutaway`) prepares no interior.
+  if (cutaway && mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
+  else if (cutaway && mode !== 'maps') await prepareInteriorAssets();
   if (mode !== 'maps') for (const map of surfaceMaps) {
     let input = inputs.get(map.name);
     if (!input) throw new Error(`Prepared map input is missing: ${map.name}`);
