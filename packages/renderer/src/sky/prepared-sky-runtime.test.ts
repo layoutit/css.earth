@@ -13,7 +13,6 @@ import type { PreparedNavigationFocus } from '../navigation/prepared-focus.js';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
 import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js';
 import { logarithmicFade } from '../universe/world-context/context-scale.js';
-import { STELLAR_POINTS_MAX_OPACITY } from '../universe/stellar-points.js';
 import { readCanonicalPointField } from '../../test/canonical-point-field-fixture.js';
 import { parseDatasetBillboards } from '../universe/dataset-billboards.js';
 import type { DensityVolumeFrame } from '@cssearth/objects';
@@ -220,11 +219,7 @@ test('near star cube is fully handed off before solar-system parallax produces d
   expect(logarithmicFade(591.27 * astronomicalUnitM, source.stars.fadeStartDistanceM, source.stars.fullDistanceM)).toBe(1);
 });
 
-test('direct stars peak at half opacity', () => {
-  expect(STELLAR_POINTS_MAX_OPACITY).toBe(.5);
-});
-
-test.each([{ withSky: true }, { withSky: false }])('inside the galaxy box the NASA band is the sky; outside it the galaxy volume is (sky=$withSky)', ({ withSky }) => {
+test.each([{ withSky: true }, { withSky: false }])('nearer than the disc\'s half-height the NASA band is the sky; from twice that the galaxy volume is (sky=$withSky)', ({ withSky }) => {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
   const base = new URL('../../../../src/', import.meta.url);
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
@@ -241,7 +236,7 @@ test.each([{ withSky: true }, { withSky: false }])('inside the galaxy box the NA
   // No sky face decodes at startup: each loads when it first enters the view.
   expect(universe.assets.startup).toEqual([]);
   const mounted = universe.mount(stage as unknown as HTMLElement), root = mounted.root as unknown as FakeElement;
-  const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, stellarRoot = root.children.find(node => node.className === 'stellar-direct-points')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
+  const skyRoot = root.children.find(node => node.className === 'prepared-celestial-sky')!, volumeRoot = root.children.find(node => node.className === 'prepared-volume-context')!;
   const volumeImage = volumeRoot.children.find(node => node.className === 'prepared-volume-image')!;
   // The opaque backdrop and its image layer fill the root by stylesheet (volume.css): only the host's display is inline,
   // and neither declares the transform style they have by default (flat).
@@ -252,9 +247,9 @@ test.each([{ withSky: true }, { withSky: false }])('inside the galaxy box the NA
   expect(volumeImage.children.some(node => node.className === 'css-volume-impostors')).toBe(false);
   expect(volumeImage.children.filter(node => node.className === 'css-volume-projection')).toHaveLength(3);
   const count = document.count, originalNodes = [...root.children];
-  if (withSky) expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(stellarRoot));
+  if (withSky) expect(root.children.indexOf(skyRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
   else expect(skyRoot).toBeUndefined();
-  expect(root.children.indexOf(stellarRoot)).toBeLessThan(root.children.indexOf(volumeRoot));
+  expect(root.children.some(node => node.className === 'stellar-direct-points'), 'the Sun draws no star layer of its own').toBe(false);
   // The camera `reach` disc half-heights from the body it looks at, in any direction: orbiting never changes the answer.
   const at = (reach: number, axis = 2): WorldCameraPose => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
     pose: { positionM: context.focus.positionM.map((n: number, index: number) => n + (index === axis ? reach * context.volume.discHalfHeightM : 0)) as [number, number, number], orientationXyzw: [0, 0, 0, 1] } });
@@ -267,9 +262,6 @@ test.each([{ withSky: true }, { withSky: false }])('inside the galaxy box the NA
     mounted.publish(camera, viewport, spatialFrame);
     expect(Number(volumeRoot.dataset.volumeOpacity)).toBeCloseTo(outside, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(outside, 12);
-    const distance = Math.hypot(...camera.pose.positionM.map((n, axis) => n - context.focus.positionM[axis]));
-    const starHandoff = logarithmicFade(distance, context.stars.fadeStartDistanceM, context.stars.fullDistanceM);
-    expect(Number(stellarRoot.style.opacity)).toBeCloseTo(STELLAR_POINTS_MAX_OPACITY * starHandoff * (1 - outside), 12);
     if (withSky) {
       expect(skyRoot.style.visibility).toBe(outside < 1 ? 'visible' : 'hidden');
       expect(Number(skyRoot.dataset.skyContribution)).toBeCloseTo(1 - outside, 12);
@@ -279,14 +271,54 @@ test.each([{ withSky: true }, { withSky: false }])('inside the galaxy box the NA
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport, spatialFrame);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(outside, 12);
   }
-  mounted.publish(at(.01), viewport, spatialFrame);
-  expect(stellarRoot.style.display).toBe('block');
-  mounted.setStellarPointsEnabled(false);
-  expect(stellarRoot.style.display).toBe('none');
-  mounted.setStellarPointsEnabled(true);
-  expect(stellarRoot.style.display).toBe('block');
   expect(document.count).toBe(count); expect(root.children).toEqual(originalNodes);
   mounted.destroy(); expect(stage.children).toEqual([detail]); expect(document.defaultView.pending.size).toBe(0);
+});
+
+test('a galaxy backing that loads while the camera rests is placed before any layer shows', async () => {
+  vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
+  const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const backing = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/backing.json', base), 'utf8'));
+  vi.stubGlobal('fetch', async () => new Response(JSON.stringify(backing)));
+  const document = new FakeDocument(), stage = document.createElement();
+  const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {}, galaxyBacking: '/backing.json',
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}` }).mount(stage as unknown as HTMLElement);
+  const all = (node: FakeElement): FakeElement[] => [node, ...node.children.flatMap(all)];
+  try {
+    // One frame from 20 kpc out, then the camera rests: no further publication after the backing arrives.
+    const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 20000 * parsecM], orientationXyzw: [0, 0, 0, 1] } };
+    mounted.publish(camera, viewport, spatialFrame);
+    await vi.waitFor(() => expect(all(mounted.root as unknown as FakeElement).filter(node => node.dataset.galaxyBacking)).toHaveLength(1 + backing.sections.length));
+    for (const layer of all(mounted.root as unknown as FakeElement).filter(node => node.dataset.galaxyBacking)) {
+      const scene = all(layer).find(node => node.className === 'css-volume-scene')!;
+      expect(scene.style.transform, 'placed from the latest frame').toMatch(/^translate3d/);
+      expect(layer.style.display).toBe('');
+    }
+  } finally { mounted.destroy(); vi.unstubAllGlobals(); }
+});
+
+test('a galaxy backing whose ring image cannot resolve mounts no layer at all', async () => {
+  vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
+  const base = new URL('../../../../src/', import.meta.url), parsecM = 3.085677581491367e16;
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const backing = JSON.parse(readFileSync(new URL('objects/milky-way/prepared/backing.json', base), 'utf8'));
+  vi.stubGlobal('fetch', async () => new Response(JSON.stringify(backing)));
+  const failed = vi.spyOn(console, 'error').mockImplementation(() => {});
+  const document = new FakeDocument(), stage = document.createElement();
+  const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {}, galaxyBacking: '/backing.json',
+    resolveResource: path => { if (path === 'backing/middle.webp') throw new Error(`Prepared context resource unavailable: ${path}.`); return `/volume/${path}`; },
+    resolvePointResource: path => `/stars/${path}` }).mount(stage as unknown as HTMLElement);
+  const all = (node: FakeElement): FakeElement[] => [node, ...node.children.flatMap(all)];
+  try {
+    mounted.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 20000 * parsecM], orientationXyzw: [0, 0, 0, 1] } }, viewport, spatialFrame);
+    await vi.waitFor(() => expect(failed).toHaveBeenCalled());
+    expect(all(mounted.root as unknown as FakeElement).filter(node => node.dataset.galaxyBacking), 'no stranded, unplaced plane').toHaveLength(0);
+  } finally { mounted.destroy(); failed.mockRestore(); vi.unstubAllGlobals(); }
 });
 
 test('shared universe draws only resolved nebulae and never prefetches their datasets with the galaxy', async () => {
@@ -526,7 +558,6 @@ test('hidden dataset banks are bounded, active subscriptions pin them, and evict
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
     mounted.selectVolumeDataset('near-bank', 'infrared');
-    mounted.setStellarPointsEnabled(false);
     const releaseNear = mounted.focusBank('near-bank')!.subscribe(() => {});
     await vi.waitFor(() => expect(mounted.focusBank('near-bank')!.state()).not.toBeNull());
     const camera = (distancePc: number): WorldCameraPose => ({ referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
@@ -605,7 +636,6 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const findBank = (id: string) => root.children.find(node => node.dataset.volumeDatasetObject === id)!;
   const mw = root.children.find(node => node.className === 'prepared-volume-context')!;
   const sky = root.children.find(node => node.className === 'prepared-celestial-sky')!;
-  const stellar = root.children.find(node => node.className === 'stellar-direct-points')!;
   const focus = (id = 'catalogue:focus-bank'): PreparedNavigationFocus => ({ id, positionM: frame.originM, framingRadiusM: frame.metersPerUnit,
     limits: { minimumDistanceM: .01 * frame.metersPerUnit, maximumDistanceM: 1e25 } });
   const camera = (radii: number): WorldCameraPose => ({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
@@ -635,10 +665,6 @@ test('authoritative detailed close-up gates background fetch, painting and publi
       expect(alpha).toBeCloseTo(completedContribution * multiplier, 12);
       expect((1 - alpha) * Number(sky.style.opacity)).toBeCloseTo(1 - completedContribution, 12);
       expect(Number(sky.dataset.skyContribution)).toBeCloseTo(1 - completedContribution, 12);
-      expect(Number(stellar.style.opacity)).toBeCloseTo(STELLAR_POINTS_MAX_OPACITY * (1 - completedContribution) * multiplier, 12);
-      expect(stellar.style.display).toBe(multiplier > 0 ? 'block' : 'none');
-      mounted.setStellarPointsEnabled(false); mounted.setStellarPointsEnabled(true);
-      expect(stellar.style.display).toBe(multiplier > 0 ? 'block' : 'none');
       if (multiplier > 0) await vi.waitFor(() => {
         mounted.publish(camera(radii), viewport, spatialFrame);
         expect(Number(findBank('warm-bank').style.opacity)).toBeGreaterThan(0);
