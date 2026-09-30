@@ -3,6 +3,17 @@
   --maps-panel-width: 340px;
 }
 
+/* Sidebar copy shares the introduction's reading size; secondary copy is 14px. */
+.object-sidebar,
+.object-sidebar-search-card,
+.explorer-brand-version {
+  --shell-font-content: 400 16px/20px var(--shell-ui-font);
+  --shell-font-metadata: 400 14px/18px var(--shell-ui-font);
+  --shell-font-caption: 400 14px/16px var(--shell-ui-font);
+  --shell-font-value: 400 14px/20px var(--shell-ui-font);
+  --shell-font-section-heading: 500 16px/20px var(--shell-ui-font);
+}
+
 .maps-explorer-sidebar {
   position: fixed;
   z-index: 160;
@@ -118,7 +129,7 @@
 .object-sidebar .maps-object-results .object-navigation-marker { justify-self: center; }
 .object-sidebar .maps-object-results .object-name { overflow: hidden; font: var(--shell-font-content); text-overflow: ellipsis; white-space: nowrap; }
 .object-sidebar .maps-object-results .object-distance:not(.object-dataset-detail) { color: var(--shell-text-muted); font: var(--shell-font-value); white-space: nowrap; }
-.object-sidebar .maps-object-results .object-distance-unit { font-size: 13px; }
+.object-sidebar .maps-object-results .object-distance-unit { font-size: 14px; }
 .object-sidebar .maps-object-results .object-link[aria-disabled="true"] {
   opacity: 0.5;
   cursor: default;
@@ -219,7 +230,7 @@
   color: var(--shell-text);
   background: transparent;
   text-align: left;
-  font: 400 15px/1.35 var(--shell-ui-font);
+  font: 400 16px/1.35 var(--shell-ui-font);
   cursor: pointer;
 }
 .object-destination-result:hover,
@@ -297,7 +308,7 @@
   color: var(--shell-text);
   background: var(--explorer-panel-background);
   box-shadow: none;
-  font: 400 15px/24px var(--shell-ui-font);
+  font: 400 16px/24px var(--shell-ui-font);
   letter-spacing: 0.1px;
   outline: 0;
   pointer-events: auto;
@@ -354,6 +365,7 @@
   row-gap: 2px;
   padding: 0 var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
 }
+.object-card-tabs[data-satellite-system] { padding-top: 8px; }
 .object-tabs {
   min-width: 0;
   overflow-x: auto;
@@ -370,11 +382,13 @@
   border-radius: 0;
   color: var(--shell-text-muted);
   background: transparent;
-  font: var(--shell-font-content);
+  font: var(--shell-font-introduction);
+  font-size: 14px;
+  text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
 }
-.object-tab-count { display: none; font-size: 13px; font-variant-numeric: tabular-nums; }
+.object-tab-count { display: none; font-size: 14px; font-variant-numeric: tabular-nums; }
 :is(.object-tabs, .object-card-tabs) > [aria-selected="true"] .object-tab-count,
 .object-native-tab:checked + .object-native-tab-label .object-tab-count { display: inline; }
 :is(.object-tabs, .object-card-tabs) > :is([role="tab"], .object-native-tab-label):hover { color: var(--shell-text); }
@@ -420,12 +434,12 @@
 }
 [data-system-results] > [data-system-header]:not([data-system-current]) { display: none; }
 #object-category-results { max-height: min(420px, 55dvh); }
-[data-search-results] #object-category-results .object-link:not([aria-disabled="true"]) { color: var(--shell-text); }
-[data-search-results] #object-category-results .object-distance { color: var(--shell-text-secondary); }
-/* Search results are big rows: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window
+.object-results-scroll .object-result-row:not([aria-disabled="true"]) { color: var(--shell-text); }
+.object-result-row > .object-distance { color: var(--shell-text-secondary); }
+/* Object results share one row component in search and system cards: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window
    positions rows on a 56 px pitch (48 px row, 8 px gap; `site/search/catalogue-window.mts`). */
-#object-category-results .object-observation-control.object-thumbnail-leading,
-#object-category-results .object-observation-control.object-thumbnail-leading:has(.object-dataset-detail) {
+.object-result-row.object-thumbnail-leading,
+.object-result-row.object-thumbnail-leading:has(.object-dataset-detail) {
   grid-template-columns: 40px minmax(0, 1fr);
   grid-template-rows: auto auto;
   align-content: center;
@@ -433,7 +447,7 @@
   row-gap: 2px;
   height: 48px;
 }
-#object-category-results .object-observation-control.object-thumbnail-leading::after { display: none; }
+.object-result-row.object-thumbnail-leading::after { display: none; }
 /* A flat result list: no tree connector running down beside the previews. */
 #object-category-results .object-list::before { content: none; }
 /* The results fill the drawer's width with the card's inline padding; a phone's column drawer otherwise shrinks them to
@@ -442,9 +456,10 @@
   align-self: stretch;
   box-sizing: border-box;
   width: 100%;
+  min-height: min(224px, 55dvh);
   padding-inline: var(--explorer-card-padding-inline-start, 16px) var(--explorer-card-padding-inline-end, 16px);
 }
-#object-category-results .object-thumbnail-leading > .object-dataset-icon {
+.object-result-row.object-thumbnail-leading > .object-dataset-icon {
   grid-column: 1;
   grid-row: 1 / span 2;
   display: grid;
@@ -452,15 +467,15 @@
   width: 40px;
   height: 40px;
 }
-#object-category-results .object-thumbnail-leading > .object-dataset-label {
+.object-result-row.object-thumbnail-leading > .object-dataset-label {
   grid-column: 2;
   grid-row: 1;
   overflow: hidden;
-  font-size: 15px;
+  font-size: 16px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#object-category-results .object-thumbnail-leading > .object-dataset-detail {
+.object-result-row.object-thumbnail-leading > .object-dataset-detail {
   grid-column: 2;
   grid-row: 2;
   justify-self: start;
@@ -469,8 +484,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#object-category-results .object-search-preview,
-#object-category-results .context-navigation-thumbnail > img {
+.object-result-row .object-search-preview,
+.object-result-row .context-navigation-thumbnail > img {
   display: block;
   width: 40px;
   height: 40px;
@@ -511,29 +526,7 @@
 .object-information-panel [data-information-panel="moons"] .object-list {
   width: 100%;
 }
-.object-information-panel [data-satellite-system].object-results-scroll .object-list {
-  width: 100%;
-  gap: 4px;
-}
-.object-information-panel [data-satellite-system] .object-observation-control.object-thumbnail-leading {
-  grid-template-columns: 24px minmax(0, 1fr);
-  gap: 10px;
-  min-height: 30px;
-}
-.object-information-panel [data-satellite-system] .object-dataset-icon {
-  grid-column: 1;
-  width: 24px;
-  height: 24px;
-}
-.object-information-panel [data-satellite-system] .object-dataset-icon > .object-search-preview {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.object-information-panel [data-satellite-system] .object-dataset-label { grid-column: 2; }
-.object-information-panel [data-satellite-system] .object-dataset-detail,
-.object-information-panel [data-satellite-system] .object-observation-control::after { display: none; }
+.object-information-panel [data-satellite-system].object-results-scroll .object-list { width: 100%; }
 .object-results-scroll .object-link[aria-disabled="true"] {
   color: var(--shell-text-muted);
   cursor: default;
@@ -569,21 +562,10 @@
   text-underline-offset: 3px;
 }
 
-/* Keep both body cards retained; zoom only changes which view is visible. */
+/* The selected subject chooses either the system card or the body detail card. */
 .object-information-panel:not([data-card-subject="satellite-system"]) > [data-satellite-system],
-.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system]),
-.object-information-panel:not([data-card-subject="satellite-system"]):not([data-card-view="overview"]) > [data-body-overview],
-.object-information-panel:not([data-card-subject="satellite-system"])[data-card-view="overview"] > :not([data-body-overview]) {
+.object-information-panel[data-card-subject="satellite-system"] > :not([data-satellite-system]) {
   display: none !important;
-}
-.object-body-overview-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin-top: 12px;
-}
-.object-card > .object-selected-panel > .object-body-overview-image + .object-introduction {
-  margin-top: 12px;
 }
 .object-results-scroll .object-empty {
   margin: 0;
@@ -606,7 +588,7 @@
 .object-information-panel > .object-factsheet-content {
   box-sizing: border-box;
   width: 100%;
-  padding: 0 var(--explorer-card-padding-inline-end) 12px var(--explorer-card-padding-inline-start);
+  padding: 0 var(--explorer-card-padding-inline-end) 20px var(--explorer-card-padding-inline-start);
 }
 .object-information-panel > .object-factsheet-content > .object-factsheet-section { margin: 0; padding: 0; border: 0; }
 .object-chart-list { display: grid; }

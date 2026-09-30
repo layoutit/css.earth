@@ -1,7 +1,7 @@
 import type { WorldCameraPose } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectEntry } from './objects.mts';
-import { bodyCardViewAtCamera } from './overview-context.mts';
+import { bodyViewAtCamera } from './overview-context.mts';
 import { OVERVIEW_SELECTION_POLICY } from './runtime-policy.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from './satellite-systems.mts';
 import type { SceneContext } from './scene/scene-selection.mts';
@@ -15,7 +15,7 @@ export function satelliteSelectionAtCamera(world: WorldCameraPose, optics: Retur
   if (!family) return null;
   const frame = objects.find(object => object.id === id)?.worldFrame;
   if (!frame) return null;
-  const card = bodyCardViewAtCamera(world, frame, optics, id,
+  const card = bodyViewAtCamera(world, frame, optics, id,
     selection.kind === 'satellite-system' ? 'overview' : 'detail');
   if (selection.kind === 'satellite-system' && card === 'detail') return { kind: 'object', objectId: id };
   if (selection.kind === 'object' && card === 'overview') return { kind: 'satellite-system', hostId: family.hostId };

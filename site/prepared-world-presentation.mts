@@ -1,7 +1,7 @@
 // Written by site/build/prepare/prepare-world-presentation.mts from the moon groups, the JPL mission targets, the galaxy and
 // cluster presentation recipes and the world context's orbit graph; the browser only validates it.
 import prepared from './prepared-world-presentation.json' with { type: 'json' };
-import { isRecord } from '@cssearth/core';
+import { requireRecord, requireString, isRecord } from '@cssearth/core';
 
 const ids = (value: unknown, name: string): readonly string[] => {
   if (!Array.isArray(value) || !value.every(id => typeof id === 'string' && id.length > 0)) throw new TypeError(`Prepared world presentation ${name} must list object ids.`);
@@ -37,6 +37,7 @@ function parseWorldPresentation(value: unknown) {
     throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@2; run pnpm prepare:world-context.`);
   }
   return Object.freeze({
+    satelliteSystemIntroductions: Object.freeze(Object.fromEntries(Object.entries(requireRecord(value.satelliteSystemIntroductions)).map(([id, text]) => [id, requireString(text)]))),
     moons: Object.freeze({ major: ids(value.moons.major, 'moons.major'), minor: ids(value.moons.minor, 'moons.minor') }),
     defaultFeatureIds: ids(value.defaultFeatureIds, 'defaultFeatureIds'),
     orbitFeatureIds: ids(value.orbitFeatureIds, 'orbitFeatureIds'),

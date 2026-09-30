@@ -553,7 +553,7 @@ export function createSceneRouter({
     const subject = selection?.current;
     // The system has its own shell selection, but its world paths use the shared overview policy.
     world.current?.setOverview?.(overview || selection?.context.kind === 'satellite-system',
-      subject?.kind === 'overview' ? subject.overview.scope : undefined);
+      subject?.kind === 'overview' ? subject.overview.scope : undefined, subject?.kind === 'satellite-system');
     if (stage.dataset) {
       const current = subject ?? { kind: 'object' as const, objectId };
       const value = current.kind === 'overview' ? current.overview.scope

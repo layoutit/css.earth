@@ -1,10 +1,10 @@
+import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
+import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { WorldCameraPose, PreparedWorldCameraFrame } from '@cssearth/renderer/navigation/world-camera.ts';
-import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 /** `system` is the planetary system of the mounted star, and every other scope is an overview's id (its registry entry,
  * KNOWN_OVERVIEWS); every scope is measured from that star (overviewScopeAtCamera). */
 export type OverviewScope = 'system' | OverviewObject['id'];
-import { SYSTEM_FRAMING_RADII, systemOverviewDistance } from './system-framing.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 import { systemFadeDistances } from '@cssearth/renderer/universe/world-context/context-scale.ts';
@@ -15,8 +15,8 @@ const PARSEC_M = 3.085677581491367e16;
 
 const distance = (position: readonly number[], origin: readonly number[]) => Math.hypot(...position.map((value, axis) => value - origin[axis]));
 
-/** Match the camera's detail handoff at the body's centered apparent size. */
-export function bodyCardViewAtCamera(world: WorldCameraPose | null | undefined, frame: PreparedWorldCameraFrame | null | undefined, optics: ReturnType<ObjectWorldNavigation['optics']> | null | undefined, objectId: string, previous?: 'detail' | 'overview') {
+/** Navigation switches between a body and its system at the shared camera detail threshold. */
+export function bodyViewAtCamera(world: WorldCameraPose | null | undefined, frame: PreparedWorldCameraFrame | null | undefined, optics: ReturnType<ObjectWorldNavigation['optics']> | null | undefined, objectId: string, previous?: 'detail' | 'overview') {
   if (!world || !frame || !optics) return 'detail';
   const range = distance(world.pose.positionM, frame.originM);
   if (range <= frame.bodyRadiusM) return 'detail';

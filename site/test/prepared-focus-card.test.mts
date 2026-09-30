@@ -34,6 +34,7 @@ function fixture(unavailableObjects = '', { banksLater = false } = {}) {
     root.selectors.set(`[data-focus-${name}]`, new Element());
   }
   root.selectors.set('[data-focus-aliases-row]', new Element());
+  root.selectors.set('[data-focus-learn-more]', new Element());
   const record: PreparedGalaxyRecord = { id: 'catalogue:galaxy', detailedObjectId: 'prepared-galaxy', name: 'Prepared galaxy', aliases: [], status: 'confirmed',
     positionM: [0, 0, 0], skyPosition: { raDeg: 0, decDeg: 0, sourceRef: 'observations' },
     distance: { valuePc: 50000, sourceRef: 'observations', method: 'Published distance' }, membership: { group: 'local-group', subgroup: 'milky-way', basis: 'Published membership' } };
@@ -168,5 +169,22 @@ test('banks spliced after a focus is presented are adopted and show the current 
   f.card.adoptBanks();
   f.buttons[2].dispatchEvent(new Event('click'));
   assert.deepEqual(requested, ['third'], 'Adopting twice binds each control once');
+  f.card.destroy();
+});
+
+
+test('Wikipedia follows the selected focus without replacing the retained link', () => {
+  const f = fixture();
+  const link = f.root.querySelector('[data-focus-learn-more]')!;
+  f.card.set({ ...f.record, aliases: ['Example'] });
+  assert.equal(link.hidden, false);
+  assert.equal(new URL(link.getAttribute('href')!).searchParams.get('search'), 'Prepared galaxy');
+  f.card.set({ ...f.record, name: 'Another galaxy', aliases: ['Other'] });
+  assert.equal(f.root.querySelector('[data-focus-learn-more]'), link);
+  assert.equal(new URL(link.getAttribute('href')!).searchParams.get('search'), 'Another galaxy');
+  f.card.set(f.record);
+  assert.equal(link.hidden, true, 'No introduction leaves no orphaned Learn more link');
+  f.card.set(null);
+  assert.equal(link.hidden, true);
   f.card.destroy();
 });

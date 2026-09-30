@@ -38,6 +38,15 @@ model, use the author or archive. Keep explanations of the quantity in the
 summary. Members of a group from the same source share
 that source label; dates and other differences belong in the arrow selector.
 
+## Satellite-system introductions
+
+Satellite families keep their short introductions in `src/navigation/system-text.json`,
+using the same cited text format and introduction limits as bodies. The world
+presentation preparer checks every available satellite host and citation, then
+publishes the text in `site/prepared-world-presentation.json`. `pnpm prepare:world-context`
+refreshes it during development and builds. The shared card header renders it with
+the body's introduction typography.
+
 ## Dataset groups
 
 Use the existing arrow selector for related maps that readers will compare:

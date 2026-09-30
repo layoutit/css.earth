@@ -1,0 +1,446 @@
+{
+  "schema": "cssearth-system-text@1",
+  "satellites": {
+    "earth": {
+      "text": "Earth has one natural satellite, the Moon. The Moon always turns the same face toward Earth.",
+      "sources": [
+        {
+          "catalogueId": "nasa-moon-facts",
+          "url": "https://science.nasa.gov/moon/facts/",
+          "label": "NASA Science · Moon facts",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        }
+      ]
+    },
+    "jupiter": {
+      "text": "Jupiter and its moons form a miniature solar system. Its four largest moons are Io, Europa, Ganymede and Callisto.",
+      "sources": [
+        {
+          "catalogueId": "nasa-jupiter-facts",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "label": "NASA Science · Jupiter facts",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        }
+      ]
+    },
+    "mars": {
+      "text": "Mars has two small moons, Phobos and Deimos. Phobos is the larger, inner moon; Deimos is the smaller, outer moon.",
+      "sources": [
+        {
+          "catalogueId": "nasa-mars-moons",
+          "url": "https://science.nasa.gov/mars/moons/phobos/",
+          "label": "NASA Science · Mars moons",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "nasa-mars-moons",
+          "url": "https://science.nasa.gov/mars/moons/deimos/",
+          "label": "NASA Science · Mars moons",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        }
+      ]
+    },
+    "saturn": {
+      "text": "Saturn's rings and moons form a broad family. Icy spray from Enceladus feeds the E ring, while Titan has a thick atmosphere.",
+      "sources": [
+        {
+          "catalogueId": "nasa-saturn-facts",
+          "url": "https://science.nasa.gov/saturn/facts/",
+          "label": "NASA Science · Saturn facts",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "nasa-saturn-moons",
+          "url": "https://science.nasa.gov/saturn/moons/enceladus/",
+          "label": "NASA Science · Saturn’s moons",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "nasa-saturn-moons",
+          "url": "https://science.nasa.gov/saturn/moons/titan/facts/",
+          "label": "NASA Science · Saturn’s moons",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        }
+      ]
+    },
+    "uranus": {
+      "text": "Miranda, Ariel, Umbriel, Titania and Oberon are Uranus's five large moons. Smaller moons orbit the planet alongside its rings.",
+      "sources": [
+        {
+          "catalogueId": "nasa-uranus-facts",
+          "url": "https://science.nasa.gov/uranus/facts/",
+          "label": "NASA Science · Uranus facts",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "nasa-uranus-moons",
+          "url": "https://science.nasa.gov/uranus/moons/ariel/",
+          "label": "NASA Science · Uranus’s moons",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        }
+      ]
+    },
+    "neptune": {
+      "text": "Neptune's largest moon, Triton, travels backward around the planet. Its smaller moons include Proteus and Nereid.",
+      "sources": [
+        {
+          "catalogueId": "nasa-neptune-moons",
+          "url": "https://science.nasa.gov/neptune/moons/triton/",
+          "label": "NASA Science · Neptune’s moons",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "nasa-neptune-moons",
+          "url": "https://science.nasa.gov/neptune/moons/proteus/",
+          "label": "NASA Science · Neptune’s moons",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "jpl-satellite-discovery",
+          "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
+          "label": "Planetary Satellite Discovery Circumstances",
+          "checked": "2026-09-13",
+          "locator": "Satellites of Neptune: Nereid",
+          "quote": "II Nereid 1949 G.P. Kuiper IAU WGPSN"
+        },
+        {
+          "catalogueId": "nasa-neptune-moons",
+          "url": "https://science.nasa.gov/neptune/moons/nereid/",
+          "label": "NASA Science · Nereid",
+          "checked": "2026-09-13",
+          "locator": "Nereid overview"
+        }
+      ]
+    },
+    "pluto": {
+      "text": "Pluto has five moons: Charon, Styx, Nix, Kerberos and Hydra. Pluto and Charon always keep the same faces turned toward each other.",
+      "sources": [
+        {
+          "catalogueId": "source-pluto-editorial-nasa-pluto-json",
+          "url": "https://science.nasa.gov/wp-json/wp/v2/topic/107487",
+          "label": "Pluto · editorial nasa pluto json",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "nasa-pluto-moons",
+          "url": "https://science.nasa.gov/dwarf-planets/pluto/moons/charon/",
+          "label": "NASA Science · Pluto moons",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        }
+      ]
+    },
+    "eris": {
+      "text": "Eris and its only known moon, Dysnomia, form a distant pair beyond Neptune. Dysnomia's orbit made it possible to measure Eris's mass.",
+      "sources": [
+        {
+          "catalogueId": "nasa-eris",
+          "url": "https://science.nasa.gov/dwarf-planets/eris/",
+          "label": "NASA Science · Eris",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "jpl-horizons",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons",
+          "checked": "2026-09-21",
+          "locator": "Satellite solution tnosat_v001_20136199_jpl",
+          "quote": "(136199) Eris I Dysnomia # obs: 19 (2005-2018); Position uncertainty wrt primary on 2025-Jan-1: 110 km"
+        },
+        {
+          "catalogueId": "doi-10-3847-psj-ace52a",
+          "url": "https://doi.org/10.3847/PSJ/ace52a",
+          "label": "Brown and Butler (2023), The Planetary Science Journal 4, 193; ALMA Band 6 and Band 7 thermal detection of Dysnomia",
+          "checked": "2026-09-21"
+        }
+      ]
+    },
+    "haumea": {
+      "text": "Haumea has two moons, Hiʻiaka and Namaka, and a ring. Hiʻiaka is the larger moon.",
+      "sources": [
+        {
+          "catalogueId": "nasa-haumea",
+          "url": "https://science.nasa.gov/dwarf-planets/haumea/",
+          "label": "NASA Science · Haumea",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "source-hiiaka-model-surface",
+          "url": "https://www.nature.com/articles/s41467-025-65749-1",
+          "label": "Shape model",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        }
+      ]
+    },
+    "orcus": {
+      "text": "Orcus and its moon Vanth form a pair in the Kuiper Belt. Vanth circles Orcus about every 9.5 days.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Orcus",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-13",
+          "locator": "Object, discovery circumstances and orbit",
+          "quote": "90482 Orcus (2004 DW); Discovered 2004 Feb. 17 by M. Brown, C. Trujillo and D. Rabinowitz; orbit class: TransNeptunian Object; q: 30.7 au"
+        },
+        {
+          "catalogueId": "arxiv-1801-07221",
+          "url": "https://arxiv.org/abs/1801.07221",
+          "label": "Research publication · arXiv 1801.07221",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        },
+        {
+          "catalogueId": "jpl-horizons",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons",
+          "checked": "2026-09-21",
+          "locator": "Satellite solution tnosat_v001_20090482_jpl043_20220908: header and observation span"
+        },
+        {
+          "catalogueId": "jpl-horizons",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons TNO satellite solution tnosat_v001_20090482_jpl043_20220908: header radius RAD~ 221.5 km for Vanth",
+          "checked": "2026-09-21"
+        }
+      ]
+    },
+    "quaoar": {
+      "text": "Quaoar has a small moon, Weywot, and two narrow rings. Stellar occultations revealed the rings.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Quaoar",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-13",
+          "locator": "Object, discovery circumstances and orbit",
+          "quote": "50000 Quaoar (2002 LM60); Discovered 2002 June 4 by C. A. Trujillo and M. E. Brown at Palomar.; orbit class: TransNeptunian Object; q: 41.6 au"
+        },
+        {
+          "catalogueId": "arxiv-2607-06450",
+          "url": "https://arxiv.org/abs/2607.06450",
+          "label": "Research publication · arXiv 2607.06450",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        },
+        {
+          "catalogueId": "jpl-horizons",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons",
+          "checked": "2026-09-21",
+          "locator": "Satellite solution tnosat_v001_20050000_jpl043_20220908: header and observation span"
+        },
+        {
+          "catalogueId": "jpl-horizons",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons TNO satellite solution tnosat_v001_20050000_jpl043_20220908: header radius RAD~ 85 km for Weywot",
+          "checked": "2026-09-21"
+        }
+      ]
+    },
+    "asteroid-2001-sn263": {
+      "text": "2001 SN263 is a triple asteroid system. Two smaller moons, Beta and Gamma, orbit the primary body, Alpha.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2001%20SN263",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-13",
+          "locator": "Object, discovery circumstances and orbit",
+          "quote": "153591 (2001 SN263); Discovered 2001-09-20 by LINEAR at Socorro; orbit class: Amor; q: 1.03 au"
+        },
+        {
+          "catalogueId": "source-asteroid-2001-sn263-radar-shape",
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab",
+          "label": "Asteroid 2001 Sn263 · radar shape",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        },
+        {
+          "catalogueId": "source-sn263-beta-radar-shape",
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591beta.tab",
+          "label": "Sn263 Beta · radar shape",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        },
+        {
+          "catalogueId": "source-sn263-gamma-radar-shape",
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab",
+          "label": "Sn263 Gamma · radar shape",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        }
+      ]
+    },
+    "didymos": {
+      "text": "Didymos and its moon Dimorphos form a binary asteroid system. NASA's DART impact changed Dimorphos's orbit in 2022.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Didymos",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-13",
+          "locator": "Object, discovery circumstances and orbit",
+          "quote": "65803 Didymos (1996 GT); Discovered 1996 Apr. 11 by Spacewatch at Kitt Peak.; orbit class: Apollo; q: 1.01 au"
+        },
+        {
+          "catalogueId": "source-didymos-didymos-shape",
+          "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_obj_0000n00000_v003.obj",
+          "label": "Didymos · didymos shape",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        },
+        {
+          "catalogueId": "nasa-dart-orbit-change",
+          "url": "https://www.nasa.gov/news-release/nasa-confirms-dart-mission-impact-changed-asteroids-motion-in-space/",
+          "label": "NASA · DART impact changed asteroid’s motion in space",
+          "locator": "News release text",
+          "quote": "the investigation team has confirmed the spacecraft's impact altered Dimorphos' orbit around Didymos by 32 minutes, shortening the 11 hour and 55-minute orbit to 11 hours and 23 minutes.",
+          "checked": "2026-09-13"
+        },
+        {
+          "catalogueId": "source-dimorphos-dimorphos-shape",
+          "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+          "label": "Dimorphos · dimorphos shape",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        }
+      ]
+    },
+    "dinkinesh": {
+      "text": "Dinkinesh has a moon, Selam, made of two touching lobes. NASA's Lucy spacecraft revealed the pair during its first asteroid flyby.",
+      "sources": [
+        {
+          "catalogueId": "source-dinkinesh-shape-model",
+          "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/dinkinesh.cmod",
+          "label": "Dinkinesh · shape model",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        },
+        {
+          "catalogueId": "doi-10-1038-s41586-024-07378-0",
+          "url": "https://doi.org/10.1038/s41586-024-07378-0",
+          "label": "Research publication · DOI 10.1038/s41586-024-07378-0",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        }
+      ]
+    },
+    "ida": {
+      "text": "Ida and its tiny moon Dactyl form an asteroid pair. Dactyl was the first asteroid moon discovered, in images from Galileo.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Ida",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-13",
+          "locator": "Object, discovery circumstances and orbit",
+          "quote": "243 Ida (A884 SB); Discovered 1884-09-29 by Palisa, J. at Vienna; orbit class: Main-belt Asteroid; q: 2.73 au"
+        },
+        {
+          "catalogueId": "nasa-science-asteroids",
+          "url": "https://science.nasa.gov/solar-system/asteroids/243-ida/",
+          "label": "NASA Science · Asteroids",
+          "checked": "2026-09-13",
+          "locator": "Page text"
+        },
+        {
+          "catalogueId": "doi-10-1006-icar-1996-0045",
+          "url": "https://doi.org/10.1006/icar.1996.0045",
+          "label": "Research publication · DOI 10.1006/icar.1996.0045",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        }
+      ]
+    },
+    "moshup": {
+      "text": "Moshup and its small moon Squannit form a near-Earth asteroid pair. Radar echoes revealed Squannit.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Moshup",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-13",
+          "locator": "Object, discovery circumstances and orbit",
+          "quote": "66391 Moshup (1999 KW4); Discovered 1999 May 20 by LINEAR at Socorro.; orbit class: Aten; q: 0.2 au"
+        },
+        {
+          "catalogueId": "source-moshup-moshup-shape",
+          "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj",
+          "label": "Moshup · moshup shape",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        },
+        {
+          "catalogueId": "jpl-squannit-kw4b",
+          "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+          "label": "JPL radar shape model of Squannit: kw4b.obj",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        }
+      ]
+    },
+    "patroclus": {
+      "text": "Patroclus and Menoetius are a binary pair of Jupiter Trojans. They orbit each other about every 4.3 days.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Patroclus",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-13",
+          "locator": "Object, discovery circumstances and orbit",
+          "quote": "617 Patroclus (A906 UL); Discovered 1906-10-17 by Kopff, A. at Heidelberg; orbit class: Jupiter Trojan; q: 4.48 au"
+        },
+        {
+          "catalogueId": "source-patroclus-model-surface",
+          "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+          "label": "Shape model",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        },
+        {
+          "catalogueId": "source-menoetius-model-surface",
+          "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+          "label": "Shape model",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        }
+      ]
+    },
+    "sylvia": {
+      "text": "Sylvia has two small moons, Romulus and Remus. Romulus is the outer moon.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Sylvia",
+          "label": "JPL Small-Body Database",
+          "checked": "2026-09-13",
+          "locator": "Discovery circumstances, orbit class and physical parameters",
+          "quote": "Discovered 1866-05-16 by Pogson, N. R. at Madras; albedo: 0.046; orbit class: Outer Main-belt Asteroid; spec_B: X; spec_T: P; satellite Romulus (2001); satellite Remus (2004)"
+        },
+        {
+          "catalogueId": "source-romulus-model-surface",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
+          "label": "Shape model",
+          "checked": "2026-09-13",
+          "locator": "Dataset source"
+        }
+      ]
+    }
+  }
+}

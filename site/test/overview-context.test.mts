@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import preparedContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { bodyCardViewAtCamera, overviewFrameDistanceM, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
+import { bodyViewAtCamera, overviewFrameDistanceM, overviewScopeAtCamera, viewDistance } from '../overview-context.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation';
 import { parsePreparedWorldContext } from '@cssearth/renderer';
@@ -26,7 +26,7 @@ const frameAt = (originM: PreparedWorldCameraFrame['originM'], bodyRadiusM: numb
   presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], metersPerUnit: 1,
 });
 
-test('body cards retain overview through small boundary reversals for bodies with and without moons', () => {
+test('body navigation retains overview through small boundary reversals for bodies with and without moons', () => {
   const frame = frameAt([0, 0, 0], 1000);
   const optics: ReturnType<ObjectWorldNavigation['optics']> = { framingRadiusPixels: 400, visibleRect: null,
     focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 1200, heightPixels: 800, detailHandoffDiameterPixels: 14 };
@@ -35,14 +35,14 @@ test('body cards retain overview through small boundary reversals for bodies wit
     const threshold = radius ? systemOverviewDistance(1000, radius, optics) : 1000 * Math.sqrt(1 + (2000 / 14) ** 2);
     let previous: 'detail' | 'overview' = 'detail';
     for (const factor of [1.01, .99, 1.005, .98]) {
-      previous = bodyCardViewAtCamera(camera(threshold * factor, { focus: { ...context.focus, positionM: [0, 0, 0] } }), frame, optics, id, previous);
+      previous = bodyViewAtCamera(camera(threshold * factor, { focus: { ...context.focus, positionM: [0, 0, 0] } }), frame, optics, id, previous);
       assert.equal(previous, 'overview');
     }
-    assert.equal(bodyCardViewAtCamera(camera(threshold * .85, { focus: { ...context.focus, positionM: [0, 0, 0] } }), frame, optics, id, previous), 'detail');
+    assert.equal(bodyViewAtCamera(camera(threshold * .85, { focus: { ...context.focus, positionM: [0, 0, 0] } }), frame, optics, id, previous), 'detail');
   }
 });
 
-test('body cards switch at the shared camera detail threshold, independent of camera aim', () => {
+test('body navigation switches at the shared camera detail threshold, independent of camera aim', () => {
   const frame = frameAt([100, 200, 300], 1000);
   const optics: ReturnType<ObjectWorldNavigation["optics"]> = { framingRadiusPixels: 1, visibleRect: null, focalPixels: 1000, principalOffsetPixels: [0,0], widthPixels: 2000,
     heightPixels: 2000, detailHandoffDiameterPixels: 14 };
@@ -56,12 +56,12 @@ test('body cards switch at the shared camera detail threshold, independent of ca
     assert.ok(silhouette);
     const diameter = 2 * silhouette.tangentialSemiAxis;
     assert.equal(diameter <= optics.detailHandoffDiameterPixels ? 'overview' : 'detail', expected);
-    assert.equal(bodyCardViewAtCamera(world, frame, optics, "fixture"), expected);
+    assert.equal(bodyViewAtCamera(world, frame, optics, "fixture"), expected);
     const turned: WorldCameraPose = { ...world, pose: { ...world.pose, orientationXyzw: [0,1,0,0] } };
-    assert.equal(bodyCardViewAtCamera(turned, frame, optics, "fixture"), expected, 'Looking away does not change zoom mode');
+    assert.equal(bodyViewAtCamera(turned, frame, optics, "fixture"), expected, 'Looking away does not change zoom mode');
   }
-  assert.equal(bodyCardViewAtCamera(camera(0, { ...context, focus: { ...context.focus, positionM: [...frame.originM] } }), frame, optics, "fixture"), 'detail');
-  assert.equal(bodyCardViewAtCamera(null, frame, optics, "fixture"), 'detail');
+  assert.equal(bodyViewAtCamera(camera(0, { ...context, focus: { ...context.focus, positionM: [...frame.originM] } }), frame, optics, "fixture"), 'detail');
+  assert.equal(bodyViewAtCamera(null, frame, optics, "fixture"), 'detail');
 });
 
 test('overview leaves the Solar System when its bodies fade and restores correctly at maximum zoom', () => {

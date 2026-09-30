@@ -1127,7 +1127,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
     display: block;
     padding: 12px 16px 16px;
     color: var(--shell-text-muted, rgb(255 255 255 / 60%));
-    font-size: 13px;
+    font-size: 14px;
     line-height: 18px;
   }
   .object-sheet-sources .object-source-link [data-source-link-label] { display: inline; }
@@ -1304,7 +1304,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
 .object-dataset-empty {
   margin: 2px 0 4px;
   color: var(--shell-text-muted);
-  font: 400 0.8125rem/28px var(--shell-ui-font);
+  font: 400 14px/28px var(--shell-ui-font);
 }
 
 .object-dataset-empty[hidden] {
@@ -2070,20 +2070,6 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     width: auto;
   }
 
-  /* The distant (overview) view of a body: its portrait and charts on the left, its facts on the
-     right. A grid, because these panels come moons-first in the markup. */
-  .object-sidebar .object-information-panel[data-card-view="overview"]:not([hidden]) {
-    display: grid;
-    max-height: none;
-    grid-template-columns: var(--tablet-left-column) minmax(0, 1fr);
-    grid-template-areas: "head facts" "charts facts" "moons moons";
-    align-items: start;
-  }
-  .object-information-panel[data-card-view="overview"] > * { width: auto; }
-  .object-information-panel[data-card-view="overview"] > .object-selected-panel { grid-area: head; }
-  .object-information-panel[data-card-view="overview"] > [data-information-panel="factsheet"] { grid-area: facts; margin-top: 0; }
-  .object-information-panel[data-card-view="overview"] > [data-information-panel="charts"] { grid-area: charts; }
-  .object-information-panel[data-card-view="overview"] > [data-information-panel="moons"] { grid-area: moons; }
   .object-sidebar .object-information-panel[data-card-subject="satellite-system"]:not([hidden]) { display: block; }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel { max-height: none; overflow: visible; }
 

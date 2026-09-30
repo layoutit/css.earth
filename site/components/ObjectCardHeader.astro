@@ -3,6 +3,7 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import { discoveryDescription, isDiscoveryAnchor } from '@cssearth/objects';
 import type { HTMLAttributes } from 'astro/types';
 import type { ObjectTitle } from '../object-shell-types';
+import { wikipediaLearnMoreUrl } from '../learn-more.mts';
 /** `heading` is the page heading by default; overview cards pass false so a
  * document keeps exactly one h1, the object's own title. */
 interface Props extends Omit<HTMLAttributes<'section'>, 'title'> { title: ObjectTitle; introduction?: string; articleUrl?: string; heading?: boolean; objectId?: string }
@@ -19,5 +20,5 @@ const TitleTag = heading ? 'h1' : 'p';
   </div>
   <slot name="image" />
   {introduction && <p class="object-introduction">{introduction}</p>}
-  {introduction && articleUrl && <a class="object-learn-more-link" href={articleUrl} target="_blank" rel="noopener noreferrer">Learn more ↗</a>}
+  {introduction && <a class="object-learn-more-link" href={wikipediaLearnMoreUrl(title.label, articleUrl)} target="_blank" rel="noopener noreferrer">Learn more ↗</a>}
 </section>

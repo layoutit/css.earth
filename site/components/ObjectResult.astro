@@ -1,21 +1,22 @@
 ---
 import { distanceDescription } from '@cssearth/objects';
 import type { ObjectEntry } from '../objects.mts';
-interface Props { object: ObjectEntry; }
-import { objectTypeLabel } from "../search/search-objects.mts";
-import ObjectNavigationMarker from "./ObjectNavigationMarker.astro";
-import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
+import { objectTypeLabel } from '../object-classification-label.mts';
 import { sourceDocumentation } from '../source-documentation.mts';
-import { searchPreviewUrl } from '../search/catalogue-window.mts';
-
+import { objectResultMarkup } from '../server/object-result-markup.mts';
+interface Props { object: ObjectEntry; }
 const { object } = Astro.props;
 const source = sourceDocumentation(object.id, object.name);
-// Fit the disks together so relative sizes survive without rings shrinking them.
-const thumbnailScale = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(
-  ({ presentation }) => presentation.size,
-));
-const preview = searchPreviewUrl(object.id);
-const classification = objectTypeLabel(object);
+const value = String(Number(object.distance.value.toFixed(3)));
+const description = distanceDescription(object.distance);
+const markup = objectResultMarkup({
+  kind: 'scene', id: object.id, name: object.name, route: object.route,
+  classificationName: objectTypeLabel(object),
+  detail: { text: `${value} ${object.distance.unit}`, value, unit: object.distance.unit,
+    title: description, ariaLabel: `${value} ${object.distance.unit}. ${description}` },
+  source: { subject: `object:${object.id}`, document: source.href, label: source.label },
+  marker: { kind: 'scene', id: object.id, color: object.color },
+});
 ---
 
 <li class="object-item" role="listitem" data-navigation-object-id={object.id} data-object-name={object.name.toLocaleLowerCase("en")}
@@ -24,18 +25,5 @@ const classification = objectTypeLabel(object);
   data-object-system-name={object.systemName.toLocaleLowerCase("en")}
   data-object-classification={object.classification}
   data-object-classification-name={objectTypeLabel(object).toLocaleLowerCase("en")}>
-    <a class="object-link object-observation-control object-thumbnail-leading"
-      href={object.route} data-object-id={object.id}
-      data-source-subject={`object:${object.id}`} data-source-document={source.href} data-source-label={source.label}>
-      <span class="object-dataset-icon">
-        {preview ? <img class="object-search-preview" src={preview} width="40" height="40" alt="" loading="lazy" decoding="async" />
-          : <ObjectNavigationMarker objectId={object.id} color={object.color} scale={thumbnailScale} />}
-      </span>
-      <span class="object-name object-dataset-label">{object.name}</span>
-      <span class="object-distance object-dataset-detail" title={distanceDescription(object.distance)} aria-label={`${Number(object.distance.value.toFixed(3))} ${object.distance.unit}. ${distanceDescription(object.distance)}`}>
-        <span class="object-kind">{classification.charAt(0).toLocaleUpperCase('en') + classification.slice(1)} · </span>
-        <span class="object-distance-value">{Number(object.distance.value.toFixed(3))}</span>{" "}
-        <span class="object-distance-unit">{object.distance.unit}</span>
-      </span>
-    </a>
+    <Fragment set:html={markup} />
 </li>

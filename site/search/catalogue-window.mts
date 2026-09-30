@@ -1,137 +1,23 @@
-import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { CatalogueRow } from './catalogue-index.mts';
-import { markerStyle } from '@cssearth/renderer/navigation/marker-presentation.ts';
+import { createObjectResultView as createRow, bindObjectResultView, type ObjectResultView as RowView, type ObjectResultSelection } from './object-result.mts';
+export { searchPreviewUrl } from './object-result.mts';
+export type CatalogueSelection = ObjectResultSelection;
 
 /** A search result row is 48 px (a 40 px preview beside a name and a subtitle) with an 8 px gap. */
 const ROW_PITCH = 56;
-const PREVIEW_PIXELS = 40;
 const OVERSCAN_ROWS = 6;
 const MAX_WINDOW_ROWS = 28;
-const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS)
-  .map(({ presentation }) => presentation.size));
-
-/** A pooled row. Its subtitle spans are retained; `entry` is what they show, so a row keeps its nodes until it shows another entry. */
-interface RowView {
-  readonly item: HTMLLIElement; readonly anchor: HTMLAnchorElement; index: number; entry: CatalogueRow | null;
-  readonly kind: HTMLSpanElement; readonly value: HTMLSpanElement; readonly unit: HTMLSpanElement;
-}
-export type CatalogueSelection = Readonly<{ kind: CatalogueRow['kind']; id: string }> | null;
-
-/** The prepared search thumbnail of a scene object with a context sprite (`packages/bake/src/site-assets/prepare-search-thumbnails.ts`). */
-export function searchPreviewUrl(objectId: string): string | null {
-  return PREPARED_NAVIGATION_MARKERS[objectId]?.context ? `/navigation/search/${objectId}@2x.webp` : null;
-}
-
-function renderMarker(documentTarget: Document, entry: CatalogueRow) {
-  const preview = entry.marker.kind === 'scene' ? searchPreviewUrl(entry.marker.id) : null;
-  if (preview) {
-    const image = documentTarget.createElement('img');
-    image.className = 'object-search-preview';
-    image.src = preview;
-    image.width = PREVIEW_PIXELS;
-    image.height = PREVIEW_PIXELS;
-    image.alt = '';
-    image.loading = 'lazy';
-    image.decoding = 'async';
-    return image;
-  }
-  const marker = documentTarget.createElement('span');
-  if (entry.marker.kind === 'focus') {
-    marker.className = `object-navigation-marker ${entry.marker.thumbnail ? 'context-navigation-thumbnail' : 'catalog-navigation-marker'}`;
-    marker.ariaHidden = 'true';
-    if (entry.marker.thumbnail) {
-      const image = documentTarget.createElement('img');
-      image.src = entry.marker.thumbnail;
-      image.width = PREVIEW_PIXELS;
-      image.height = PREVIEW_PIXELS;
-      image.alt = '';
-      image.loading = 'lazy';
-      image.decoding = 'async';
-      marker.append(image);
-    }
-    return marker;
-  }
-  const prepared = PREPARED_NAVIGATION_MARKERS[entry.marker.id];
-  if (!prepared) throw new Error(`Prepared catalogue marker is missing: ${entry.marker.id}.`);
-  const presentation = markerStyle(prepared, { color: entry.marker.color, scale: THUMBNAIL_SCALE });
-  marker.className = `object-navigation-marker ${entry.marker.id}${presentation.ringed ? ' ringed' : ''}`;
-  marker.style.cssText = presentation.style;
-  marker.ariaHidden = 'true';
-  const disk = documentTarget.createElement('i');
-  disk.style.cssText = presentation.innerStyle;
-  marker.append(disk);
-  if (presentation.ringed) {
-    const ring = documentTarget.createElement('b');
-    ring.className = 'object-navigation-ring';
-    ring.style.cssText = presentation.ringStyle;
-    marker.append(ring);
-  }
-  return marker;
-}
-
-function createRow(documentTarget: Document): RowView {
-  const item = documentTarget.createElement('li');
-  item.className = 'object-item';
-  item.role = 'listitem';
-  const anchor = documentTarget.createElement('a');
-  anchor.className = 'object-link object-observation-control object-thumbnail-leading';
-  const icon = documentTarget.createElement('span');
-  icon.className = 'object-dataset-icon';
-  const name = documentTarget.createElement('span');
-  name.className = 'object-name object-dataset-label';
-  const detail = documentTarget.createElement('span');
-  detail.className = 'object-distance object-dataset-detail';
-  anchor.append(icon, name, detail);
-  item.append(anchor);
-  const kind = documentTarget.createElement('span');
-  kind.className = 'object-kind';
-  const value = documentTarget.createElement('span');
-  value.className = 'object-distance-value';
-  const unit = documentTarget.createElement('span');
-  unit.className = 'object-distance-unit';
-  return { item, anchor, index: -1, entry: null, kind, value, unit };
-}
 
 function bindRow(documentTarget: Document, view: RowView, entry: CatalogueRow, index: number, selection: CatalogueSelection) {
-  const { item, anchor } = view;
+  const { item } = view;
   view.index = index;
   item.style.position = 'absolute';
   item.style.insetInline = '0';
   item.style.top = `${index * ROW_PITCH}px`;
   item.dataset.catalogueIndex = String(index);
   item.setAttribute('aria-posinset', String(index + 1));
-
-  anchor.href = entry.route;
-  anchor.dataset.sourceSubject = entry.source.subject;
-  anchor.dataset.sourceDocument = entry.source.document;
-  anchor.dataset.sourceLabel = entry.source.label;
-  // A system row is a plain link to the system's overview, as the object list's overview rows are.
-  if (entry.kind === 'scene') anchor.dataset.objectId = entry.id; else delete anchor.dataset.objectId;
-  if (entry.kind === 'prepared-focus') anchor.dataset.preparedFocusId = entry.id; else delete anchor.dataset.preparedFocusId;
-  const selected = selection?.kind === entry.kind && selection.id === entry.id;
-  anchor.classList.toggle('is-active', selected);
-  if (selected) anchor.setAttribute('aria-current', 'page');
-  else anchor.removeAttribute('aria-current');
-
-  if (view.entry === entry) return;
-  view.entry = entry;
-  const icon = anchor.children[0] as HTMLElement;
-  icon.replaceChildren(renderMarker(documentTarget, entry));
-  (anchor.children[1] as HTMLElement).textContent = entry.name;
-  const detail = anchor.children[2] as HTMLElement;
-  detail.title = entry.detail.title;
-  detail.ariaLabel = entry.detail.ariaLabel;
-  // The subtitle: what the object is, then how far it is.
-  const { kind, value, unit } = view;
-  kind.textContent = `${entry.classificationName.charAt(0).toLocaleUpperCase('en')}${entry.classificationName.slice(1)} · `;
-  if (entry.detail.value && entry.detail.unit) {
-    value.textContent = entry.detail.value;
-    unit.textContent = entry.detail.unit;
-    detail.replaceChildren(kind, value, ' ', unit);
-  } else {
-    detail.replaceChildren(kind, entry.detail.text);
-  }
+  bindObjectResultView(documentTarget, view, entry, selection);
 }
 
 /** A search's rows rendered once, with no window: the no-JavaScript search page lists every match. */

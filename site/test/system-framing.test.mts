@@ -4,7 +4,7 @@ const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
 import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
-import { bodyCardViewAtCamera } from '../overview-context.mts';
+import { bodyViewAtCamera } from '../overview-context.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/renderer/navigation';
 import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
@@ -88,8 +88,8 @@ test('selecting the system root pulls back from a planet to all major planets, w
   const target = required(navigation.systemTarget({ objectId: context.focus.id, fromId: 'uranus', mount }));
   const range = (pose: WorldCameraPose["pose"]) => Math.hypot(...pose.positionM.map((value, axis) => value - sun.originM[axis]));
   assert.ok(range(target.pose) > range(close.pose), 'the first click moves outward from Uranus');
-  assert.equal(bodyCardViewAtCamera(target, sun, optics, context.focus.id), 'overview');
-  assert.equal(bodyCardViewAtCamera(createWorldSelectionTarget(target, sun, optics), sun, optics, context.focus.id), 'detail');
+  assert.equal(bodyViewAtCamera(target, sun, optics, context.focus.id), 'overview');
+  assert.equal(bodyViewAtCamera(createWorldSelectionTarget(target, sun, optics), sun, optics, context.focus.id), 'detail');
 });
 
 test('system fit leaves clearance for the visible sidebar, header and footer', () => {
@@ -179,7 +179,7 @@ test('a Solar System breadcrumb always restores the system framing from a Sun cl
   assert.equal(navigation.systemTarget({ objectId: 'sun', fromId: 'sun', mount: camera }), null);
   const target = required(navigation.overviewTarget({ scope: 'system', objectId: 'sun', fromId: 'sun', mount: camera }));
   assert.ok(target.world);
-  assert.equal(bodyCardViewAtCamera(target.world, sun, optics, 'sun'), 'overview');
+  assert.equal(bodyViewAtCamera(target.world, sun, optics, 'sun'), 'overview');
 });
 
 test('the Local Group overview frames the Milky Way and every drawn member galaxy from any angle', async () => {

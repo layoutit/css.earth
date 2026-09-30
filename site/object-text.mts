@@ -61,7 +61,7 @@ function citation(raw: unknown): TextCitation {
   });
 }
 
-function cited(raw: unknown, label: string): CitedText {
+export function parseCitedText(raw: unknown, label: string): CitedText {
   const value = sourceObject(raw, ['text', 'sources']);
   const sources = sourceArray(value.sources, citation);
   if (!sources.length) throw new TypeError(`${label} needs at least one source.`);
@@ -81,7 +81,7 @@ function dataset(raw: unknown): ObjectTextDataset {
 function blocks(value: Record<string, unknown>, objectId: string) {
   const datasets = Object.entries(sourceObject(value.datasets)).map(([datasetId, raw]) => [sourceId(datasetId), dataset(raw)] as const);
   return {
-    objectId, card: cited(value.card, `${objectId} card`), introduction: cited(value.introduction, `${objectId} introduction`),
+    objectId, card: parseCitedText(value.card, `${objectId} card`), introduction: parseCitedText(value.introduction, `${objectId} introduction`),
     datasets: Object.freeze(Object.fromEntries(datasets)),
   };
 }
@@ -131,6 +131,13 @@ function budget(add: AddFinding, slot: string, kind: TextSlot, value: string) {
   const count = sentences(value).length;
   if (count > limit.sentences) add(slot, 'sentences', `${count} sentences; the ${kind} budget is ${limit.sentences}`);
   if (!/[.!?]$/u.test(value)) add(slot, 'punctuation', 'ends without a full stop');
+}
+
+/** Shared wording limits for a body or system introduction. */
+export function textBlockBudgetErrors(objectId: string, slot: TextSlot, value: string): TextFinding[] {
+  const errors: TextFinding[] = [];
+  budget((name, rule, detail) => errors.push({ objectId, slot: name, rule, detail }), slot, slot, value);
+  return errors;
 }
 
 /** The checks that need nothing but the authored text: every block within its characters, sentences and punctuation.

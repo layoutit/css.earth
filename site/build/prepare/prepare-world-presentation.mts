@@ -13,6 +13,10 @@ import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
 import { planetarySystemMembers } from '../../planetary-system-members.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
+import systemText from '../../../src/navigation/system-text.json' with { type: 'json' };
+import { allSatelliteSystems } from '../../satellite-systems.mts';
+import { readSourceCatalog } from '@cssearth/bake/sources';
+import { prepareSystemIntroductions } from './system-text.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { isExtremeTransNeptunian } from '@cssearth/astronomy';
 
@@ -39,8 +43,9 @@ export function minorMoonOrbitIds(bodies: readonly { id: string; orbit?: { cente
   }).map(body => body.id);
 }
 
-/** The default context suppresses distant orbit classes and limits asteroid orbits to JPL spacecraft targets. */
-export function showsDefaultContextOrbit(object: { id: string; classification: string }): boolean {
+/** The default context suppresses distant orbit classes, admits only featured comets, and limits asteroid orbits to JPL spacecraft targets. */
+export function showsDefaultContextOrbit(object: { id: string; classification: string; discovery: Pick<ObjectDiscovery, 'featured'> }): boolean {
+  if (object.classification === 'comet') return object.discovery.featured;
   if (['trans-neptunian', 'interstellar'].includes(object.classification)) return false;
   return object.classification !== 'asteroid' || isJplMissionTarget(object);
 }
@@ -57,10 +62,11 @@ export function orbitFeature(object: { id: string; classification: string }): bo
   return object.classification === 'trans-neptunian' && isExtremeTransNeptunian(object.id);
 }
 
-export function prepareWorldPresentation() {
+export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<Record<string, string>>) {
   const minor = minorMoonOrbitIds(APPLICATION_WORLD_CONTEXT.bodies);
   return {
     schema: 'cssearth-world-presentation@2',
+    satelliteSystemIntroductions,
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds: SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id),
     orbitFeatureIds: SCENE_OBJECTS.filter(orbitFeature).map(object => object.id),
@@ -74,7 +80,9 @@ export function prepareWorldPresentation() {
 
 /** Write site/prepared-world-presentation.json, leaving an unchanged file untouched. */
 export async function writeWorldPresentation() {
-  const text = `${JSON.stringify(prepareWorldPresentation())}\n`;
+  const catalogue = await readSourceCatalog(resolve(import.meta.dirname, '../../..'));
+  const introductions = prepareSystemIntroductions(systemText, allSatelliteSystems().map(system => system.hostId), new Set(catalogue.records.map(record => record.id)));
+  const text = `${JSON.stringify(prepareWorldPresentation(introductions))}\n`;
   await mkdir(dirname(output), { recursive: true });
   if (await readFile(output, 'utf8').catch(() => null) !== text) await writeFile(output, text);
 }

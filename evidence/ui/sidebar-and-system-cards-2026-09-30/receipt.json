@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-ui-browser-evidence@1",
+  "testedSource": {
+    "branch": "ui/sidebar-tabs",
+    "trackedChanges": true,
+    "date": "2026-09-30"
+  },
+  "browser": "Chrome via Playwright CLI",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "artifacts": [
+    {
+      "file": "jupiter-system.png",
+      "claims": [
+        "Shared search-style rows and cited system introduction",
+        "Selected Jupiter square marker",
+        "Unrelated labels and circles retain opacity 1 with Jupiter selected",
+        "MOONS tab and separator"
+      ],
+      "measurements": {
+        "sunMarkerOpacity": 1,
+        "earthMarkerOpacity": 1,
+        "saturnMarkerOpacity": 1,
+        "jupiterMarkerOpacity": 1,
+        "labelsAndCirclesVisible": true,
+        "headerDividerWidthPx": 2,
+        "tabBorderWidthPx": 0
+      }
+    },
+    {
+      "file": "mercury-detail.png",
+      "claims": [
+        "Body detail card replaces obsolete portrait overview",
+        "Datasets first; uppercase 14px tabs",
+        "Wikipedia Learn more link"
+      ]
+    },
+    {
+      "file": "saturn-system.png",
+      "claims": [
+        "MOONS (293) tab at 14px",
+        "Separator between intro and moon list",
+        "No obsolete portrait overview"
+      ]
+    }
+  ],
+  "limits": [
+    "Desktop captures; not a native iPad report",
+    "No matched pixel-difference comparison"
+  ]
+}
