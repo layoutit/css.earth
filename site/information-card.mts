@@ -56,7 +56,8 @@ export function createTabsController(card: HTMLElement | null, lifetime: SceneLi
     const tab = tabs.find(tab => tab.dataset.informationTab === id);
     if (tab) {
       tab.checked = true;
-      tab.dispatchEvent(new tab.ownerDocument.defaultView!.Event('change', { bubbles: true }));
+      // A tab in a detached section (detached-sections.ts) belongs to its template's inert document, which has no window.
+      tab.dispatchEvent(new (tab.ownerDocument.defaultView ?? globalThis).Event('change', { bubbles: true }));
     }
     const section = sections.find(panel => panel.dataset.informationPanel === id);
     if (section && !section.open) section.open = true;

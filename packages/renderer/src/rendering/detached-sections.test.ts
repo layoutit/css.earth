@@ -25,6 +25,19 @@ test('a section waits in its template until shown, and goes back into one when h
   expect(a.parentElement).toBe(other);
 });
 
+test('a section in a template nested inside another is found in its content', () => {
+  // A browser parses a template inside another's content into that inert document: its section is in its content, and
+  // the content shares the template's document, as a server DOM's does.
+  const { document } = parseHTML('<main><template data-detached-section><div class="card"></div></template></main>');
+  const inner = document.createElement('template') as Element & { content: DocumentFragment };
+  inner.setAttribute('data-detached-section', '');
+  sectionElements(document.querySelector('main')!, '.card')[0]!.append(inner);
+  const row = document.createElement('p'); row.className = 'row';
+  inner.content.append(row);
+  expect(inner.children.length).toBe(0);
+  expect(sectionElements(document.querySelector('main')!, '.row')).toEqual([row]);
+});
+
 test('a server DOM keeps a detached section in its markup', () => {
   const { document } = parseHTML('<main><div class="card" data-id="a">a</div><div class="card" data-id="b">b</div></main>');
   const main = document.querySelector('main')!;
