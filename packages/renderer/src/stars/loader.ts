@@ -17,11 +17,12 @@ export async function loadPreparedCssPointField(input: unknown, transport: Prepa
   return decodePreparedCssPointField(manifest, bank);
 }
 
-/** The application needs the prepared optics, not the complete individual-star bank. */
+/** The application needs the prepared optics and bounded direct display sample,
+ * not the complete individual-star bank. */
 export async function loadPreparedPointAppearance(input: unknown, transport: PreparedCssTransport): Promise<PreparedPointAppearance> {
   const { manifest } = await loadManifest(input, transport);
-  const { id, frame, atlas, photometry, resources } = manifest;
-  return { id, frame, atlas, photometry, resources };
+  const { id, frame, atlas, photometry, directPoints, resources } = manifest;
+  return { id, frame, atlas, photometry, ...(directPoints === undefined ? {} : { directPoints }), resources };
 }
 
 async function loadManifest(input: unknown, transport: PreparedCssTransport) {

@@ -14,6 +14,7 @@ export function createSettingsController(
   const heliosphere = documentTarget.querySelector(".object-heliosphere-setting");
   const illustrationModels = documentTarget.querySelector(".object-illustration-models-setting");
   const surfaceLabels = documentTarget.querySelector(".object-surface-labels-setting");
+  const threeDStars = documentTarget.querySelector(".object-three-d-stars-setting");
   let speed = documentTarget.querySelector<HTMLInputElement>(
     '.object-speed-setting[type="range"][name="speed"]',
   );
@@ -21,13 +22,15 @@ export function createSettingsController(
       !(heliosphere instanceof windowTarget.HTMLInputElement) ||
       !(illustrationModels instanceof windowTarget.HTMLInputElement) ||
       !(surfaceLabels instanceof windowTarget.HTMLInputElement) ||
+      !(threeDStars instanceof windowTarget.HTMLInputElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement))) {
     throw new Error("Object shell settings controls are incomplete.");
   }
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   const inputs = { motionEnabled: motion, lightCurvesEnabled: lightCurves, heliosphereEnabled: heliosphere,
-    illustrationModelsEnabled: illustrationModels, surfaceLabelsEnabled: surfaceLabels };
+    illustrationModelsEnabled: illustrationModels, surfaceLabelsEnabled: surfaceLabels,
+    threeDStarsEnabled: threeDStars };
   type Toggle = keyof typeof inputs;
   const render = () => {
     for (const key of Object.keys(inputs) as Toggle[]) {
@@ -74,7 +77,7 @@ export function createSettingsController(
     },
     destroy() {
       events.abort();
-      for (const input of [motion, lightCurves, heliosphere, illustrationModels, surfaceLabels]) input.disabled = true;
+      for (const input of [motion, lightCurves, heliosphere, illustrationModels, surfaceLabels, threeDStars]) input.disabled = true;
       delete documentTarget.body.dataset.surfaceLabels;
     },
   });

@@ -25,10 +25,7 @@ test('loads the inventoried density artifact with its complete hybrid asset bank
   // The full-galaxy bake is intermediate data, retired after the hybrid compile.
   // The galaxy's backing image is its own bank (prepared/backing.json, drawn by universe/galaxy-backing.ts), not the volume's.
   const directory = new URL(descriptor.prepared.url.replace(/[^/]+$/u, ''), base);
-  const backing = await readFile(new URL('backing.json', directory), 'utf8').then(text => {
-    const bank = JSON.parse(text) as { leaf: { texturePath: string }; sections?: { texturePath: string }[] };
-    return [bank.leaf.texturePath, ...(bank.sections ?? []).map(section => section.texturePath)];
-  }, () => [] as string[]);
+  const backing = await readFile(new URL('backing.json', directory), 'utf8').then(text => [JSON.parse(text).leaf.texturePath as string], () => [] as string[]);
   const images = inventory.assets.filter(asset => asset.location === 'prepared' && /\.(?:png|webp)$/iu.test(asset.filename) && !backing.includes(asset.filename));
   expect(slices.map(leaf => leaf.texturePath).sort()).toEqual(images.map(asset => asset.filename).filter(path => path.startsWith('core/slices/')).sort());
   expect(payload.impostors).toBeUndefined();

@@ -100,6 +100,9 @@ export function createApplicationWorldContext() {
           },
           setIllustrationModelsEnabled: visibility.setIllustrationModelsEnabled,
           setHighlightedClassification: visibility.setHighlightedClassification,
+          setThreeDStarsEnabled(enabled: boolean) {
+            if (!lifetime.disposed) layer.setStellarPointsEnabled(enabled);
+          },
           setHeliosphereEnabled(enabled: boolean) {
             if (lifetime.disposed || heliosphereEnabled === (enabled === true)) return;
             heliosphereEnabled = enabled === true;

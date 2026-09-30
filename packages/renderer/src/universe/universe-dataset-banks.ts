@@ -48,8 +48,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   const banks: DatasetBank[] = declarations.map((declared, index) => ({
     id: declared.id, facts: facts[index]!, billboardIndex: facts[index]!.billboard ? billboardCount++ : -1,
     mounted: null, textures: null, loading: null, generation: 0, explicitEnabled: undefined,
-    // A bank's own star points stay hidden unless a caller shows them.
-    pendingSelection: undefined, pendingStarsVisible: false,
+    pendingSelection: undefined, pendingStarsVisible: undefined,
     framing: { frame: declared.frame, radiusUnits: volumeFramingRadiusUnits(declared.frame), visibility },
     residentNodes: 0, visible: false, lastUsed: 0, subscribers: 0,
     enabled: !facts[index]!.attached,

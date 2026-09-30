@@ -26,6 +26,7 @@ const settingsMarkup = (speed: boolean) => `<section><h2>Settings</h2><div class
   <label><input class="object-heliosphere-setting" name="heliosphere" type="checkbox" disabled></label>
   <label><input class="object-illustration-models-setting" name="illustrationModels" type="checkbox" disabled></label>
   <label><input class="object-surface-labels-setting" name="surfaceLabels" type="checkbox" disabled></label>
+  <label><input class="object-three-d-stars-setting" name="threeDStars" type="checkbox" disabled></label>
 </div></section>`;
 
 test('shared settings retain user state and listeners while object Speed comes and goes', () => {
