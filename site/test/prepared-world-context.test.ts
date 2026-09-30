@@ -2788,6 +2788,18 @@ test('a coast around Earth writes only transform and opacity, and the orbit stro
   layer.destroy();
 });
 
+test('names turn dark over the galaxy only from outside it, and a coast holds the change', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  expect(root.dataset.galaxyView).toBeUndefined();
+  layer.setOutsideGalaxy(true);
+  expect(root.dataset.galaxyView).toBe('outside');
+  layer.setCoasting(true); layer.setOutsideGalaxy(false);
+  expect(root.dataset.galaxyView).toBe('outside');
+  layer.setCoasting(false);
+  expect(root.dataset.galaxyView).toBeUndefined();
+  layer.destroy();
+});
+
 test('a driven drag around Earth keeps revealing and retiring bodies', async () => {
   const { layer, writes } = await orbitEarth({ coast: false });
   expect(writes.filter(write => / style\.visibility$/u.test(write)).length).toBeGreaterThan(0);

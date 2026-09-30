@@ -287,8 +287,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
-              additionalPoints.publish({world, viewport}, distanceM, galaxyOutsideFade(
-                Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.volume.discHalfHeightM));
+              const outsideGalaxy = galaxyOutsideFade(
+                Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis]!)), plan.volume.discHalfHeightM);
+              additionalPoints.publish({world, viewport}, distanceM, outsideGalaxy);
+              // Past halfway out the galaxy is seen whole, as the universe background draws it (universe-background.ts).
+              spatial.setOutsideGalaxy(outsideGalaxy > .5);
               // Loaded and drawn only far outside the galaxies' own scale.
               // A catalogue focus, selected or previewed, owns the caption; the mesh then names nothing.
               const meshCaptioned = detailedFocus === null && (selectionPreview === undefined || selectionPreview === null);

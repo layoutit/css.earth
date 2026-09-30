@@ -244,6 +244,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The inertia gate (docs/performance/motion-freezes-membership.md): while the camera coasts, shown bodies only move and
   // fade; nothing is revealed, retired, restyled, restacked or re-announced until the coast stops.
   let coasting = false;
+  // The camera sees the galaxy from outside (setOutsideGalaxy): names over its bright bulge turn dark (world-context.css).
+  // A restyle, so like any other it waits for a coast to stop.
+  let outsideGalaxy = false, publishedOutsideGalaxy = false;
+  const publishOutsideGalaxy = () => {
+    if (coasting || outsideGalaxy === publishedOutsideGalaxy) return;
+    publishedOutsideGalaxy = outsideGalaxy;
+    if (outsideGalaxy) root.dataset.galaxyView = 'outside'; else delete root.dataset.galaxyView;
+  };
   let labelBlockers: readonly LabelScreenRect[] = [];
   let hoverIntent = false;
   const animatedAnnotations = new Set<(typeof bodies)[number]>();
@@ -389,11 +397,18 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (depthChanged) refreshDepthBodies();
       if (changed) { invalidatePolicy(); refresh(); }
     },
+    /** Whether the camera is outside the galaxy, looking at it as a whole rather than from among its stars. */
+    setOutsideGalaxy(outside: boolean) {
+      if (destroyed) return;
+      outsideGalaxy = outside;
+      publishOutsideGalaxy();
+    },
     /** The camera coasts on inertia (camera-motion-signal.ts). Held membership lands on the first frame after. */
     setCoasting(active: boolean) {
       if (destroyed || active === coasting) return;
       coasting = active;
       if (active) { hoverIntent = false; settleHover(); return; }
+      publishOutsideGalaxy();
       invalidatePolicy();
       refresh();
     },
