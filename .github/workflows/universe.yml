@@ -178,7 +178,7 @@ jobs:
         run: |
           node --test ".github/scripts/ci/*.test.mts" ".github/scripts/checks/*.test.mts" ".github/scripts/architecture/*.test.mts" "tests/asset-publication/*.test.mts" "packages/bake/src/asset-publication/*.test.mts" \
             packages/bake/src/delivery/publish-verification.test.mts packages/bake/src/delivery/source-acquisition.test.mts packages/bake/src/delivery/asset-origin-scenes.test.mts packages/bake/src/preparation/stale-builds.test.mts \
-            "tests/inventory/runtime-asset-*.test.mts" \
+            packages/objects/src/node/runtime-asset-closure.test.mts \
             packages/bake/authoring/juno/jiram-mosaic.test.mts site/test/recovery-commands.test.mts
 
   typecheck:

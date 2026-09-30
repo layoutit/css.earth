@@ -10,6 +10,7 @@
     "src/node"
   ],
   "exclude": [
-    "src/**/*.test.ts"
+    "src/**/*.test.ts",
+    "src/**/*.test.mts"
   ]
 }

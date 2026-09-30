@@ -1,3 +1,4 @@
+import { projectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { resolve } from 'node:path';
@@ -6,7 +7,7 @@ import { readFitsFileHdus, readFitsFileRegion } from '@cssearth/fits/node';
 // Astropy 8.0.1, fits.open(path, memmap=True)[1].section[40:160, 250:762]. The archived STIS FITS file is tracked.
 // The values below are Astropy's: the reader matched its whole region as big-endian float64 bytes when they were
 // recorded, and they are the extrema and a spread of samples across the region's rows and columns.
-const path = resolve('tests/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits');
+const path = resolve(projectRoot(import.meta.url), 'packages/fits/src/node/fixtures/telescope-families/f04-europa-stis/od9l12010_x2d.fits');
 const samples: readonly (readonly [number, number])[] = [
   [0, 0], [511, 0], [12345, 0], [30976, 5.078860797230094e-15], [40000, 2.037976856500076e-13],
   [60928, -3.68545288959108e-14], [61439, 6.594913400510783e-15],

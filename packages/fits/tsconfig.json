@@ -18,7 +18,8 @@
   ],
   "exclude": [
     "src/**/*.test.ts",
-    "src/test-support",
-    "src/node"
+    "src/node",
+    "src/**/*.test.mts",
+    "src/**/fixtures/**"
   ]
 }

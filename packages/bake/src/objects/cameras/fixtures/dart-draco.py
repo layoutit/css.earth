@@ -6,14 +6,14 @@ dart-draco.oracle.test.mts beside this script compares against. The intercepts a
 cube with NASA's pds4_tools, not with the pipeline's own decoder, so no pipeline
 code stands between the archive and the oracle.
 Usage: node packages/bake/cli/restore-source-inputs.mts --object=dimorphos
-       .local/oracles/venv/bin/python tests/oracles/spice/dart-draco.py
+       .local/oracles/venv/bin/python packages/bake/src/objects/cameras/fixtures/dart-draco.py
 """
 import json, platform, sys
 from pathlib import Path
 import numpy as np
 import spiceypy as spice
 
-root = Path(__file__).resolve().parents[3]
+root = next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file())
 source = root / 'src/objects/dimorphos/source'
 manifest = json.loads((source / 'manifest.json').read_text())
 kernels = [entry['path'] for entry in manifest['inputs'] if entry['path'].startswith('spice/')]
@@ -83,7 +83,7 @@ for point in cube_points:
     direction = np.array(state[:3]); direction /= np.linalg.norm(direction)
     surface.append({'pixel': point['pixel'], 'xyz': point['xyz'], 'directionInDraco': vec(direction), 'rangeKm': float(np.linalg.norm(state[:3])), 'lightTime': float(lt)})
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import write
 write('spice/dart-draco.json', 'spiceypy', 'tests/oracles/spice/dart-draco.py',
       {'spiceypy': spice.__version__, 'cspice': spice.tkvrsn('TOOLKIT'), 'pds4_tools': pds4_tools.__version__},

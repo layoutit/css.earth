@@ -48,7 +48,7 @@ packages/spice/
 ## Evidence
 
 The package's tests are self-contained: they build DAF files and text kernels in memory. The comparisons with SpiceyPy
-are [`dart-draco.oracle.test.mts`](../../tests/oracles/spice/dart-draco.oracle.test.mts)
+are [`dart-draco.oracle.test.mts`](../../packages/bake/src/objects/cameras/dart-draco.oracle.test.mts)
 (the fifteen declared DART kernels: time, clock, states with every aberration correction,
 every frame class and the DRACO camera),
 [`small-kernel.oracle.test.mts`](../bake/src/astronomy/fixtures/small-kernel.oracle.test.mts) (one LSK and one PCK) and

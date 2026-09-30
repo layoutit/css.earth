@@ -5,10 +5,10 @@ from pathlib import Path
 import astropy
 from astropy.io import fits
 import numpy as np
-sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "packages/core/src/node/oracle"))
+sys.path.insert(0, str(next(parent for parent in Path(__file__).resolve().parents if (parent / "pnpm-workspace.yaml").is_file()) / "packages/core/src/node/oracle"))
 from fixture import ROOT, write
 
-record = json.loads((ROOT / 'tests/fixtures/fits/archive-inputs.json').read_text())
+record = json.loads((ROOT / 'packages/fits/src/node/fixtures/fits/archive-inputs.json').read_text())
 inputs, cases = [], {}
 for pin in record['inputs']:
     path = ROOT / pin['path']

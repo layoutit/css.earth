@@ -1,5 +1,5 @@
 /** Authored malformed and edge-case FITS bytes for this package's tests; independent valid files come from Astropy and
- * are compared in tests/oracles/fits/. Test-only: excluded from the build and the browser-safe entry checks. */
+ * are compared in packages/bake/src/objects/cameras/. Test-only: excluded from the build and the browser-safe entry checks. */
 export const card = (key: string, literal: string) => `${key.padEnd(8)}= ${literal}`.padEnd(80);
 
 export function imageFixture(bitpix = 16, values: readonly number[] = [-2, 0, 1, 3], extra: readonly string[] = []) {

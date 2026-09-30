@@ -24,8 +24,8 @@ const run = (args: string[], command = process.execPath) => {
 };
 // The reader's own behaviour tests, including the float32 transport image, are the package's.
 run(['--filter', '@cssearth/fits', 'test'], 'pnpm');
-const unit = ['tests/oracles/fits/core.oracle.test.mts', 'tests/oracles/fits/sky-orientation.oracle.test.mts', 'tests/oracles/fits/sky-projection.oracle.test.mts',
-  'tests/oracles/fits/file-region.oracle.test.mts', 'packages/bake/src/objects/layers/observation/fixtures/fits/rice.oracle.test.mts',
+const unit = ['packages/bake/src/objects/cameras/core.oracle.test.mts', 'packages/bake/src/objects/cameras/sky-orientation.oracle.test.mts', 'packages/bake/src/objects/cameras/sky-projection.oracle.test.mts',
+  'packages/fits/src/node/file-region.oracle.test.mts', 'packages/bake/src/objects/layers/observation/fixtures/fits/rice.oracle.test.mts',
   'packages/telescope-cli/src/archives/interferometry/fits-table.oracle.test.mts', 'packages/bake/src/objects/color/color-transfer.oracle.test.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.oracle.test.mts',
   'packages/bake/src/objects/raster/wise-atlas-mosaic.test.mts', 'packages/telescope-cli/src/sky/sky-band-composite.test.mts', 'packages/telescope-cli/src/archives/jwst/imaging/imaging.test.mts',
   "packages/bake/src/objects/raster/observed/observed-fits.test.mts",
@@ -106,8 +106,8 @@ if (missing.length) {
   }
 }
 run(['--test', '--test-concurrency=1',
-  'tests/oracles/fits/synoptic.test.mts',
-  'tests/oracles/fits/pallas.test.mts',
+  'packages/bake/src/objects/cameras/synoptic.test.mts',
+  'packages/bake/src/objects/cameras/pallas.test.mts',
   'packages/bake/src/objects/layers/terrestrial/missions/encounter-fits.oracle.test.mts',
   'packages/bake/src/objects/layers/terrestrial/missions/llorri-geo.oracle.test.mts',
   'packages/bake/src/objects/layers/terrestrial/missions/pds4-geometry-cube.oracle.test.mts',

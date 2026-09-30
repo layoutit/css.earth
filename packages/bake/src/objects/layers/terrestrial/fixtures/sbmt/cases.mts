@@ -52,4 +52,4 @@ export type Case = ReturnType<typeof parseCase>;
 /** Resolve preserved evidence identities without rewriting the recorded inputs. */
 export const sourceFile = (path: string) => path.startsWith('tests/fixtures/sbmt/')
   ? resolve(import.meta.dirname, 'inputs', path.slice('tests/fixtures/sbmt/'.length))
-  : resolve(ORACLE_ROOT, path);
+  : resolve(ORACLE_ROOT, path === 'tests/fixtures/fits/byte.fits' ? 'packages/fits/src/node/fixtures/fits/byte.fits' : path);

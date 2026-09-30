@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { expect, it } from 'vitest';
+import { requireRecord, requireString } from '../../index.js';
 import { projectRoot } from '../project-root.js';
 import { assertPinnedInputs, pinnedOracleVersions, readOracleFixture } from './fixture.mts';
 
@@ -42,5 +43,42 @@ it('the Python writer finds the module-relative root in both source and distribu
       fileURLToPath(new URL(path, `file://${root}/`))], { cwd: tmpdir(), encoding: 'utf8' });
     expect(result.status, result.stderr).toBe(0);
     expect(result.stdout.trim()).toBe(root);
+  }
+});
+
+it('Python records preserve historical input identities for relocated FITS and hosted-orbit inputs', async () => {
+  const reader = await readFile(new URL('fixture.mts', import.meta.url), 'utf8');
+  const table = /const relocatedPaths:[^=]+ = (\{[\s\S]*?\n\});/u.exec(reader);
+  if (!table) throw new Error('Expected the reader relocation table.');
+  const entries = [...table[1]!.matchAll(/"([^"]+)":\s*"([^"]+)"/gu)]
+    .map(match => [match[1]!, match[2]!] as const)
+    .filter(([historical, current]) => historical.startsWith('tests/fixtures/') &&
+      (current.startsWith('packages/fits/') || current.startsWith('packages/bake/src/astronomy/')));
+  entries.push(['tests/fixtures/fits/float32.fits', 'packages/fits/src/node/fixtures/fits/float32.fits']);
+  for (const [historical, current] of entries.sort(([a], [b]) => a.localeCompare(b))) {
+    const result = spawnSync('python3', ['-c',
+      'import json, runpy, sys, types; sys.modules["numpy"] = types.ModuleType("numpy"); m = runpy.run_path(sys.argv[1]); print(json.dumps(m["input_record"](m["ROOT"] / sys.argv[2])))',
+      resolve(root, 'packages/core/src/node/oracle/fixture.py'), current], { cwd: tmpdir(), encoding: 'utf8' });
+    expect(result.status, result.stderr).toBe(0);
+    expect(requireString(requireRecord(JSON.parse(result.stdout)).path), current).toBe(historical);
+  }
+});
+
+it('Python and TypeScript resolve relocated oracle fixtures to the same current files', async () => {
+  const result = spawnSync('python3', ['-c',
+    'import json, runpy, sys, types; sys.modules["numpy"] = types.ModuleType("numpy"); m = runpy.run_path(sys.argv[1]); print(json.dumps({k: str(m["fixture_path"](k)) for k in sorted(m["relocated"])}))',
+    resolve(root, 'packages/core/src/node/oracle/fixture.py')], { cwd: tmpdir(), encoding: 'utf8' });
+  expect(result.status, result.stderr).toBe(0);
+  const paths: unknown = JSON.parse(result.stdout);
+  expect(typeof paths).toBe('object');
+  if (!paths || typeof paths !== 'object') throw new TypeError('Expected oracle fixture paths.');
+  for (const name of Object.keys(paths).sort()) {
+    const path: unknown = Reflect.get(paths, name);
+    if (typeof path !== 'string') throw new TypeError('Expected an oracle fixture path.');
+    const { name: logicalName, ...logical } = await readOracleFixture(name);
+    const { name: absoluteName, ...absolute } = await readOracleFixture(path);
+    expect(logicalName).toBe(name);
+    expect(absoluteName).toBe(path);
+    expect(logical, name).toEqual(absolute);
   }
 });
