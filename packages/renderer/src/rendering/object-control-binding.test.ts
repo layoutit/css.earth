@@ -23,12 +23,12 @@ test('a collapsed dataset preview follows the listed member of a selected sequen
   expect(selected()).toEqual(['first']);
   expect(root.querySelector<HTMLSelectElement>('select')?.value).toBe('first');
   // Only the active dataset's details are mounted; the others wait in templates (detached-sections.ts).
-  expect(details.map(({ panel }) => panel.isConnected)).toEqual([false, true, false]);
+  expect(details.map(({ panel }) => panel.isConnected && !panel.closest('template'))).toEqual([false, true, false]);
 
   publishDatasetSelection(buttons, details, [], new Set(['other']), root);
   expect(selected()).toEqual(['other']);
   expect(root.querySelector<HTMLSelectElement>('select')?.value).toBe('other');
-  expect(details.map(({ panel }) => panel.isConnected)).toEqual([false, false, true]);
+  expect(details.map(({ panel }) => panel.isConnected && !panel.closest('template'))).toEqual([false, false, true]);
 });
 
 afterEach(() => vi.useRealTimers());
