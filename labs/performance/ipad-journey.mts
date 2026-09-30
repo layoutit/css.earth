@@ -155,12 +155,24 @@ function typeScript(text: string): string {
   return { source, action: 'type', text: ${JSON.stringify(text)} };`);
 }
 
+const READY_SCRIPT = `(async () => {
+  const deadline = Date.now() + 60000;
+  while (document.documentElement.dataset.ready !== 'true') {
+    if (document.documentElement.dataset.ready === 'error') throw new Error('Journey start scene failed.');
+    if (Date.now() >= deadline) throw new Error('Journey start scene was not ready within 60 s.');
+    await new Promise(resolve => setTimeout(resolve, 100));
+  }
+  return { action: 'ready', at: location.pathname };
+})()`;
+
 /** Compile a validated semantic journey into ios-capture's existing step language. */
 export function compileJourney(journey: Journey, flightSource: FlightSource = 'scene-router'): Step[] {
   const normalized = parseJourney(journey);
   // start selects the URL before capture.  A fly is an in-capture UI action and
   // the route step waits after the Safari page has swapped contexts.
-  const steps: Step[] = [];
+  // The first action waits for the app to report its start scene ready: a dev-served page is still loading when the
+  // capture begins, and a drag then lands on the loading page (2026-09-30: Mars never turned on the dev server).
+  const steps: Step[] = [{ script: READY_SCRIPT }];
   for (const action of normalized.actions) {
     if ('fly' in action) steps.push({ script: flightScript(action.fly, flightSource) }, { route: resolveObject(action.fly, 'flight').route });
     else if ('zoom' in action) steps.push({ script: zoomScript(action.zoom) });
