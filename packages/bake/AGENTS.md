@@ -33,8 +33,8 @@ its validators accept); the renderer never imports the bake.
   sources, palette, hierarchy, point atlas and photometry, diffuse sky, encoded bank). It imports `raster` and `volume`.
 - `src/shell/` is published as `@cssearth/bake/shell` (Node only): the surface-shell bake and its CSS compiler. It
   imports `scene` and `volume`.
-- `src/sky/` is published as `@cssearth/bake/sky` (Node only): the cubic sky bake (recipes, EXR source, baked faces,
-  near-star sprites) and its CSS compiler. It imports `volume-leaves` and `volume`.
+- `src/sky/` is published as `@cssearth/bake/sky` (Node only): the cubic sky bake (recipes, EXR source, baked faces)
+  and its CSS compiler. It imports `volume-leaves` and `volume`.
 - `src/density/` is published as `@cssearth/bake/density` (Node only): the density-volume object bake (acquisition,
   column depth, fixed discs, slice atlases and retirement, dataset-bank promotion). It imports `sky`, `volume-leaves` and
   `volume`.

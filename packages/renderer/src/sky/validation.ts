@@ -7,19 +7,12 @@ import { dot3 as dot } from '@cssearth/core';
 const FACE_IDS = ['px', 'nx', 'py', 'ny', 'pz', 'nz'];
 
 export function validatePreparedCssSky(input: unknown, resources: PreparedCssVolume['resources']): PreparedCssSky {
-  const sky = record(input, ['schema', 'referenceFrame', 'epochJdTt', 'radiusUnits', 'faces', 'provenance', 'approximation'], 'sky', ['parallax', 'nearFaces', 'stars']);
+  const sky = record(input, ['schema', 'referenceFrame', 'epochJdTt', 'radiusUnits', 'faces', 'provenance', 'approximation'], 'sky', ['parallax']);
   if (sky.schema !== 'cssearth-css-sky@1' || typeof sky.referenceFrame !== 'string' || !sky.referenceFrame || !finite(sky.epochJdTt) || !positive(sky.radiusUnits)) {
     throw new TypeError('Prepared sky identity or frame is invalid.');
   }
   if ('parallax' in sky) validatePreparedSkyParallax(sky.parallax);
-  // Baked stars come as a second complete cube beside the plain one, never instead of it.
-  if (('nearFaces' in sky) !== ('stars' in sky)) throw new TypeError('Prepared sky stars and their near faces come together.');
-  if ('stars' in sky) {
-    const stars = record(sky.stars, ['objectId', 'cssPixelsPerDegree'], 'sky stars');
-    if (typeof stars.objectId !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(stars.objectId) || !positive(stars.cssPixelsPerDegree)) throw new TypeError('Prepared sky stars metadata is invalid.');
-  }
   validateSkyFaces(sky.faces, resources);
-  if ('nearFaces' in sky) validateSkyFaces(sky.nearFaces, resources);
   return sky as unknown as PreparedCssSky;
 }
 
