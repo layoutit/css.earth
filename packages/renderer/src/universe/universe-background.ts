@@ -7,7 +7,7 @@ import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { fetchPreparedJson, mountCataloguePoints } from './catalogue-points.js';
 import { mountGalaxyBacking, parseGalaxyBacking, type BackingNearFade } from './galaxy-backing.js';
-import { revealLayer } from './layer-reveal.js';
+import { revealLayer } from '../rendering/layer-reveal.js';
 import { galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
 import type { PreparedWorldContext } from '../prepared-data/world-context.js';
 

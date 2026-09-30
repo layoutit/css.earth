@@ -2,7 +2,7 @@ import { MAX_CATALOGUE_POINTS, parseCataloguePointSpread, parseDensityVolumeFram
 import type { CataloguePointSpread, DensityVolumeFrame } from '@cssearth/objects';
 import type { VolumeCameraPublication, VolumeVector } from '../volume/types.js';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
-import { revealLayer } from './layer-reveal.js';
+import { revealLayer } from '../rendering/layer-reveal.js';
 
 /** Dot layers switching on show one a frame (layer-reveal.ts). */
 const revealLayers = (layers: readonly HTMLElement[]) => { for (const layer of layers) revealLayer(layer); };

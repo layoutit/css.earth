@@ -3,6 +3,8 @@ import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime
 import { worldRotationCss, worldRotationFromQuaternion } from '../navigation/world-camera-math.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from './loader.js';
+import { revealLayer } from '../rendering/layer-reveal.js';
+import { LARGE_IMAGE_PIXELS } from '../volume/prepared-volume-runtime.js';
 
 /** Transparent prepared layer banks. No opaque viewport matte is allowed here. */
 export function mountPreparedCssImageLayers({ host, before, payload, resolveResource }: {
@@ -19,12 +21,12 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     projection.style.opacity = '0'; projection.style.visibility = 'hidden';
     camera.className = 'css-volume-camera'; scene.className = 'css-volume-scene'; mesh.className = 'css-volume-mesh';
     // Same camera-driven scene as a volume: its will-change keeps slice raster scales through rotation.
-    const textures: { element: HTMLElement; path: string }[] = [];
+    const textures: { element: HTMLElement; path: string; large: boolean }[] = [];
     for (const leaf of stack.leaves) {
       const element = document.createElement('s');
       element.dataset.imageLayerLeaf = leaf.id;
       Object.assign(element.style, leaf.style);
-      textures.push({ element, path: leaf.texturePath });
+      textures.push({ element, path: leaf.texturePath, large: leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS });
       mesh.appendChild(element);
     }
     scene.appendChild(mesh); camera.appendChild(scene); projection.appendChild(camera); root.appendChild(projection);
@@ -32,7 +34,15 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   });
   host.insertBefore(root, before);
   let destroyed = false;
+  const url = (path: string) => resolveResource(path).replace(/["\\\n\r]/g, char => `\\${char}`);
+  // A large leaf coming back decodes off the main thread first: M31's 7,085 px detail layer decoded inside one 168 ms
+  // paint each time its bank or the whole bank came back on the iPad (2026-09-30).
+  const revealLarge = (bank: (typeof banks)[number]) => {
+    if (bank.loaded) for (const texture of bank.textures) if (texture.large) revealLayer(texture.element, resolveResource(texture.path));
+  };
   return Object.freeze({ root,
+    /** The bank root is shown again: its large leaves wait for their decode (layer-reveal.ts). */
+    revealLarge() { for (const bank of banks) if (bank.projection.style.display !== 'none') revealLarge(bank); },
     publish(publication: VolumeCameraPublication) {
       if (destroyed) return;
       const transform = preparedVolumeCameraTransform(publication, payload.frame);
@@ -49,13 +59,12 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
         set(bank.camera, 'perspectiveOrigin', `calc(50% + ${ox}px) calc(50% + ${oy}px)`);
         set(bank.scene, 'transform', cssTransform);
         const weight = weights[bank.axis];
+        const returning = weight > 0 && bank.projection.style.display === 'none';
         if (weight > 0 && !bank.loaded) {
-          for (const { element, path } of bank.textures) {
-            const url = resolveResource(path).replace(/["\\\n\r]/g, char => `\\${char}`);
-            element.style.backgroundImage = `url("${url}")`;
-          }
+          for (const { element, path } of bank.textures) element.style.backgroundImage = `url("${url(path)}")`;
           bank.loaded = true;
         }
+        if (returning) revealLarge(bank);
         set(bank.projection, 'opacity', String(weight));
         set(bank.projection, 'visibility', weight > 0 ? 'visible' : 'hidden');
         // A zero-weight axis contributes nothing; its 3D leaves leave compositing.

@@ -1,4 +1,4 @@
-import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
+import { createSettlePacer, framePacerFor } from './settle-pacer.js';
 import type { OpacityWindow } from '../stars/opacity-clock.js';
 
 // A layer shown for the first time paints everything it holds. On a zoom out the galaxy's backing image and its two ring
@@ -8,11 +8,13 @@ import type { OpacityWindow } from '../stars/opacity-clock.js';
 interface Waiting { readonly layer: HTMLElement; ready: boolean }
 const reveals = new WeakMap<OpacityWindow, { readonly waiting: Waiting[]; readonly pacer: ReturnType<typeof createSettlePacer> }>();
 
-/** Show `layer` on a later frame of its own, once `image` (a url it paints) is decoded. Without animation frames (a test
+/** Show `layer` on a later frame of its own, once `images` (urls it paints) are decoded. Without animation frames (a test
  * document) the layer shows at once. */
-export function revealLayer(layer: HTMLElement, image?: string) {
+export function revealLayer(layer: HTMLElement, images: string | readonly string[] = [],
+  /** Decodes one url; the window's Image by default. */ decode?: (url: string) => Promise<unknown>) {
+  const urls = typeof images === 'string' ? [images] : images;
   const view = layer.ownerDocument.defaultView as (OpacityWindow & { Image?: typeof Image }) | null;
-  if (!view || typeof view.requestAnimationFrame !== 'function') return;
+  if (!view || typeof view.requestAnimationFrame !== 'function') { if (layer.style.visibility !== '') layer.style.visibility = ''; return; }
   let reveal = reveals.get(view);
   if (!reveal) {
     const waiting: Waiting[] = [];
@@ -26,14 +28,15 @@ export function revealLayer(layer: HTMLElement, image?: string) {
     reveals.set(view, reveal = { waiting, pacer });
   }
   if (reveal.waiting.some(entry => entry.layer === layer)) return;
-  const entry: Waiting = { layer, ready: !image };
+  const entry: Waiting = { layer, ready: urls.length === 0 };
   layer.style.visibility = 'hidden';
   reveal.waiting.push(entry);
-  if (image && view.Image) {
-    const decoder = new view.Image();
-    decoder.src = image;
+  const Decoder = view.Image;
+  const decoding = decode ?? (Decoder && typeof Decoder.prototype.decode === 'function'
+    ? (url: string) => { const decoder = new Decoder(); decoder.src = url; return decoder.decode(); } : null);
+  if (urls.length && decoding) {
     // A failed decode still shows the layer: it then decodes as it paints, as before.
-    void decoder.decode().catch(() => {}).then(() => { entry.ready = true; reveal!.pacer.request(); });
+    void Promise.all(urls.map(url => decoding(url).catch(() => {}))).then(() => { entry.ready = true; reveal!.pacer.request(); });
   } else entry.ready = true;
   reveal.pacer.request();
 }
