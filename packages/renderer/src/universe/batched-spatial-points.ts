@@ -83,9 +83,12 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
   }, { holdWhile: 'never' });
   // Everything about a point but where the camera sees it, resolved once: its position in one flat array, its path (-1:
   // not drawn) and its margin past the view's edge.
+  // Its kept-share rank too: a fixed low-discrepancy value per point spreads the kept share evenly and stably.
   const positions = new Float64Array(points.length * 3), paths = new Int32Array(points.length), margins = new Float64Array(points.length);
+  const ranks = new Float64Array(points.length);
   points.forEach((point, index) => {
     positions.set(point.positionUnits, index * 3);
+    ranks[index] = (index * 0.6180339887498949) % 1;
     const style = stylePoint(point);
     if (!style || !(style.opacity > 0) || !(style.radiusPx > 0)) { paths[index] = -1; return; }
     paths[index] = pathPaint.entry(pointPaint(style), Math.max(.5, style.radiusPx));
@@ -155,8 +158,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>({ host,
       // The share and the counts are of the view; the overscan only paints ahead of a turn.
       const inView = Math.abs(sx) <= halfWidth + margin && Math.abs(sy) <= halfHeight + margin;
       if (inView) candidates++;
-      // A fixed low-discrepancy rank per point: the kept share is spread evenly and stable from frame to frame.
-      if (keep < 1 && (index * 0.6180339887498949) % 1 >= keep) continue;
+      if (keep < 1 && ranks[index]! >= keep) continue;
       pathPaint.add(path, sx, sy);
       if (inView) visible++;
     }
